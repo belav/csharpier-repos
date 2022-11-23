@@ -1,6 +1,8 @@
 using System;
 
-public class GenExc<S, T> : Exception { }
+public class GenExc<S, T> : Exception
+{
+}
 
 public delegate void ThrowDelegate();
 
@@ -12,7 +14,9 @@ public class Gen<T>
         {
             thrower();
         }
-        catch (GenExc<S, T>) { }
+        catch (GenExc<S, T>)
+        {
+        }
     }
 
     public static void staticCatcher<S>(ThrowDelegate thrower)
@@ -21,7 +25,9 @@ public class Gen<T>
         {
             thrower();
         }
-        catch (GenExc<S, T>) { }
+        catch (GenExc<S, T>)
+        {
+        }
     }
 }
 
@@ -58,26 +64,34 @@ public class main
             go.catcher<object>(new ThrowDelegate(main.throwStringObject));
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
         try
         {
             Gen<object>.staticCatcher<object>(new ThrowDelegate(main.throwStringObject));
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
 
         try
         {
             go.catcher<string>(new ThrowDelegate(main.throwObjectObject));
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
         try
         {
             Gen<object>.staticCatcher<string>(new ThrowDelegate(main.throwObjectObject));
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
 
         return 0;
     }

@@ -25,7 +25,9 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator
     public SqlServerCSharpRuntimeAnnotationCodeGenerator(
         CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies,
         RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    ) : base(dependencies, relationalDependencies)
+    {
+    }
 
     /// <inheritdoc />
     public override void Generate(

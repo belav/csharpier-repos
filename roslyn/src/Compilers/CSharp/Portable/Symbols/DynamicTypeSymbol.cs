@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal static readonly DynamicTypeSymbol Instance = new DynamicTypeSymbol();
 
-        private DynamicTypeSymbol() { }
+        private DynamicTypeSymbol()
+        {
+        }
 
         public override string Name
         {
@@ -181,7 +183,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms) { }
+        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms)
+        {
+        }
 
         internal override bool ApplyNullableTransforms(
             byte defaultTransformFlag,

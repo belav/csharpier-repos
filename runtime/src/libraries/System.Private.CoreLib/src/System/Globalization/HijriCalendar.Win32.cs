@@ -82,9 +82,15 @@ namespace System.Globalization
                         }
                         // If we got garbage from registry just ignore it.
                         // hijriAdvance = 0 because of declaraction assignment up above.
-                        catch (ArgumentException) { }
-                        catch (FormatException) { }
-                        catch (OverflowException) { }
+                        catch (ArgumentException)
+                        {
+                        }
+                        catch (FormatException)
+                        {
+                        }
+                        catch (OverflowException)
+                        {
+                        }
                     }
                 }
                 return hijriAdvance;

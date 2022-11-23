@@ -132,7 +132,9 @@ namespace System.Xml.XmlWriterApiTests
         {
             using (XmlReader xr = CreateReaderIgnoreWS("XmlReader.xml"))
             {
-                while (xr.Read()) { }
+                while (xr.Read())
+                {
+                }
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -149,7 +151,9 @@ namespace System.Xml.XmlWriterApiTests
         public void writeNode_XmlReader7(XmlWriterUtils utils)
         {
             XmlReader xr = CreateReaderIgnoreWS("XmlReader.xml");
-            while (xr.Read()) { }
+            while (xr.Read())
+            {
+            }
             xr.Dispose();
 
             using (XmlWriter w = utils.CreateWriter())

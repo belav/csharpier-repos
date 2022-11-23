@@ -215,7 +215,9 @@ namespace System.Security.Cryptography.EcDsa.OpenSsl.Tests
             {
                 SafeEvpPKeyHandle pkey = ecdsa.DuplicateKeyHandle();
 
-                using (pkey) { }
+                using (pkey)
+                {
+                }
 
                 AssertExtensions.Throws<ArgumentException>(
                     "pkeyHandle",

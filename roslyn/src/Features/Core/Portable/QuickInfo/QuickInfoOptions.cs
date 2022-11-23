@@ -15,7 +15,9 @@ internal readonly record struct QuickInfoOptions
     [DataMember]
     public bool IncludeNavigationHintsInQuickInfo { get; init; } = true;
 
-    public QuickInfoOptions() { }
+    public QuickInfoOptions()
+    {
+    }
 
     public static readonly QuickInfoOptions Default = new();
 }

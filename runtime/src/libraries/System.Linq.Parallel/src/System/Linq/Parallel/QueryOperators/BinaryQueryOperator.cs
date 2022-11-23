@@ -39,7 +39,9 @@ namespace System.Linq.Parallel
             : this(
                 QueryOperator<TLeftInput>.AsQueryOperator(leftChild),
                 QueryOperator<TRightInput>.AsQueryOperator(rightChild)
-            ) { }
+            )
+        {
+        }
 
         internal BinaryQueryOperator(
             QueryOperator<TLeftInput> leftChild,

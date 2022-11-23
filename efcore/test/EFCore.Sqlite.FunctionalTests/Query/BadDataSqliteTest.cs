@@ -173,7 +173,9 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
     private class BadDataCommandBuilderFactory : RelationalCommandBuilderFactory
     {
         public BadDataCommandBuilderFactory(RelationalCommandBuilderDependencies dependencies)
-            : base(dependencies) { }
+            : base(dependencies)
+        {
+        }
 
         public object[] Values { private get; set; }
 
@@ -232,7 +234,9 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                     _values = ((BadDataRelationalCommand)commandTemplate)._values;
                 }
 
-                private class BadDataRelationalDataReader : RelationalDataReader { }
+                private class BadDataRelationalDataReader : RelationalDataReader
+                {
+                }
 
                 private class BadDataDataReader : DbDataReader
                 {
@@ -353,7 +357,9 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
 
     private class FakeConnection : IRelationalConnection
     {
-        public void ResetState() { }
+        public void ResetState()
+        {
+        }
 
         public Task ResetStateAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;
@@ -364,12 +370,16 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
             CancellationToken cancellationToken = default
         ) => throw new NotImplementedException();
 
-        public void CommitTransaction() { }
+        public void CommitTransaction()
+        {
+        }
 
         public Task CommitTransactionAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;
 
-        public void RollbackTransaction() { }
+        public void RollbackTransaction()
+        {
+        }
 
         public Task RollbackTransactionAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;
@@ -429,7 +439,9 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
         public void ReturnCommand(IRelationalCommand command) =>
             throw new NotImplementedException();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public ValueTask DisposeAsync() => default;
     }

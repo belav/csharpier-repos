@@ -11,7 +11,9 @@ class Test
         return a;
     }
 
-    static void Callback(IAsyncResult ar) { }
+    static void Callback(IAsyncResult ar)
+    {
+    }
 
     static int Main()
     {

@@ -19,6 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             : base(
                 ImmutableArray<CodeAction>.CastUp(nestedActions),
                 string.Format(FeaturesResources.Suppress_0, diagnostic.Id)
-            ) { }
+            )
+        {
+        }
     }
 }

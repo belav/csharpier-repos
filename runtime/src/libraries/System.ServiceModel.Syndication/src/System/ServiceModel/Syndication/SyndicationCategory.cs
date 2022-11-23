@@ -11,9 +11,13 @@ namespace System.ServiceModel.Syndication
     {
         private ExtensibleSyndicationObject _extensions;
 
-        public SyndicationCategory() : this((string)null) { }
+        public SyndicationCategory() : this((string)null)
+        {
+        }
 
-        public SyndicationCategory(string name) : this(name, null, null) { }
+        public SyndicationCategory(string name) : this(name, null, null)
+        {
+        }
 
         public SyndicationCategory(string name, string scheme, string label)
         {

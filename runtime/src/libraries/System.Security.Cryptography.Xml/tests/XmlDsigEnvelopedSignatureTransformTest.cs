@@ -18,10 +18,14 @@ namespace System.Security.Cryptography.Xml.Tests
     // difficult to test properly. This class "open it up" :-)
     public class UnprotectedXmlDsigEnvelopedSignatureTransform : XmlDsigEnvelopedSignatureTransform
     {
-        public UnprotectedXmlDsigEnvelopedSignatureTransform() { }
+        public UnprotectedXmlDsigEnvelopedSignatureTransform()
+        {
+        }
 
         public UnprotectedXmlDsigEnvelopedSignatureTransform(bool includeComments)
-            : base(includeComments) { }
+            : base(includeComments)
+        {
+        }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {

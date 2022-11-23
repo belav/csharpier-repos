@@ -13,5 +13,7 @@ public class StartupWithBuiltConfigureServices
         return null;
     }
 
-    public void Configure(IApplicationBuilder app) { }
+    public void Configure(IApplicationBuilder app)
+    {
+    }
 }

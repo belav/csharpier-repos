@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.ChainedExpression
         : AbstractChainedExpressionWrapper<NameSyntax, BaseArgumentListSyntax>
     {
         public CSharpChainedExpressionWrapper()
-            : base(CSharpIndentationService.Instance, CSharpSyntaxFacts.Instance) { }
+            : base(CSharpIndentationService.Instance, CSharpSyntaxFacts.Instance)
+        {
+        }
 
         protected override SyntaxTriviaList GetNewLineBeforeOperatorTrivia(
             SyntaxTriviaList newLine

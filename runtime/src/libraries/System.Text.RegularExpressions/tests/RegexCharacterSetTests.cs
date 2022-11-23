@@ -1241,7 +1241,9 @@ namespace System.Text.RegularExpressions.Tests
 
         private sealed class DerivedRunner : RegexRunner
         {
-            public DerivedRunner() { }
+            public DerivedRunner()
+            {
+            }
 
             public DerivedRunner(string text)
             {

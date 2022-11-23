@@ -18,7 +18,9 @@ public class TestWebViewManager : WebViewManager
             fileProvider,
             new(),
             hostPageRelativePath: "index.html"
-        ) { }
+        )
+    {
+    }
 
     public IReadOnlyList<string> SentIpcMessages => _sentIpcMessages;
 

@@ -26,7 +26,9 @@ namespace System.Web.Mvc.Test
 
         [HandleError(View = "foo")]
         [HandleError(View = "bar")]
-        private class ClassWithMultipleHandleErrorAttributes { }
+        private class ClassWithMultipleHandleErrorAttributes
+        {
+        }
 
         [Fact]
         public void CanRetrieveMultipleAuthorizeAttributesFromOneClass()

@@ -71,7 +71,9 @@ namespace System.Data.SqlTypes
             byte i,
             byte j,
             byte k
-        ) : this(new Guid(a, b, c, d, e, f, g, h, i, j, k)) { }
+        ) : this(new Guid(a, b, c, d, e, f, g, h, i, j, k))
+        {
+        }
 
         // INullable
         public bool IsNull

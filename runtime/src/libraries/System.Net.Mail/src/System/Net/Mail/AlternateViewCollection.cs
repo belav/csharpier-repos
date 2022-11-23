@@ -9,7 +9,9 @@ namespace System.Net.Mail
     {
         private bool _disposed;
 
-        internal AlternateViewCollection() { }
+        internal AlternateViewCollection()
+        {
+        }
 
         public void Dispose()
         {

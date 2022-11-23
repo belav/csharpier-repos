@@ -20,8 +20,12 @@ public class Tests
         for (int i = 0; i < 10; ++i)
             ;
 
-        try { }
-        catch { }
+        try
+        {
+        }
+        catch
+        {
+        }
     }
 
     public static int Main(String[] args)
@@ -30,13 +34,17 @@ public class Tests
         {
             foo();
         }
-        catch (NullReferenceException ex) { }
+        catch (NullReferenceException ex)
+        {
+        }
 
         try
         {
             bar();
         }
-        catch (NullReferenceException ex) { }
+        catch (NullReferenceException ex)
+        {
+        }
 
         return 0;
     }

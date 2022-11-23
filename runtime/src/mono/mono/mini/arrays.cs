@@ -35,6 +35,7 @@ class Tests
         return TestDriver.RunTests(typeof(Tests), args);
     }
 #endif
+
     public static int test_10_create()
     {
         int[] a = new int[10];
@@ -198,9 +199,13 @@ class Tests
         return 0;
     }
 
-    interface IFace { }
+    interface IFace
+    {
+    }
 
-    class Face : IFace { }
+    class Face : IFace
+    {
+    }
 
     public static int test_0_stelemref_3()
     {
@@ -476,7 +481,9 @@ class Tests
             a13[0, 0] = new Object();
             return 13;
         }
-        catch (NullReferenceException) { }
+        catch (NullReferenceException)
+        {
+        }
 
         return 0;
     }
@@ -546,7 +553,9 @@ class Tests
         return y;
     }
 
-    class RefClass { }
+    class RefClass
+    {
+    }
 
     public static int test_0_stelem_ref_null_opt()
     {
@@ -567,7 +576,9 @@ class Tests
         {
             res = new float[size];
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return 1;
@@ -580,7 +591,9 @@ class Tests
         {
             res = new float[size];
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return 3;
@@ -612,28 +625,36 @@ class Tests
             x.SetValue(10, new int[] { -3, -3 });
             return 3;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         try
         {
             x.SetValue(10, new int[] { -2, -4 });
             return 4;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         try
         {
             x.SetValue(10, new int[] { 0, -3 });
             return 5;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         try
         {
             x.SetValue(10, new int[] { -1, -1 });
             return 6;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         if ((int)x.GetValue(new int[] { -2, -3 }) != 10)
             return 7;
@@ -649,28 +670,36 @@ class Tests
             x.GetValue(new int[] { -3, -3 });
             return 11;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         try
         {
             x.GetValue(new int[] { -2, -4 });
             return 12;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         try
         {
             x.GetValue(new int[] { 0, -3 });
             return 13;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         try
         {
             x.GetValue(new int[] { -1, -1 });
             return 14;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -684,7 +713,9 @@ class Tests
         {
             res = new float[dym_size, size];
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return 1;
@@ -697,7 +728,9 @@ class Tests
         {
             res = new float[size, dym_size];
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return 3;
@@ -859,7 +892,9 @@ class Tests
         return 0;
     }
 
-    public struct TestStruct { }
+    public struct TestStruct
+    {
+    }
 
     // #11603
     public static int test_0_ldelema()

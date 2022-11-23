@@ -207,7 +207,9 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 _outputThread.Join(1500); // with timeout in-case Console is locked by user input
             }
-            catch (ThreadStateException) { }
+            catch (ThreadStateException)
+            {
+            }
         }
 
         private void CompleteAdding()

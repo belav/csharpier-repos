@@ -34,7 +34,9 @@ namespace System.Collections.Specialized
         /// a Dictionary&lt;String, Object&gt; and use
         /// StringComparer.OrdinalIgnoreCase.</para>
         /// </devdoc>
-        public StringDictionary() { }
+        public StringDictionary()
+        {
+        }
 
         /// <devdoc>
         /// <para>Gets the number of key-and-value pairs in the StringDictionary.</para>

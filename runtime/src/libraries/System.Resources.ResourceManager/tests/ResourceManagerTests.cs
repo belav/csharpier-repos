@@ -19,7 +19,9 @@ namespace System.Resources.Tests
 {
     namespace Resources
     {
-        internal class TestClassWithoutNeutralResources { }
+        internal class TestClassWithoutNeutralResources
+        {
+        }
     }
 
     public class ResourceManagerTests
@@ -548,6 +550,8 @@ namespace System.Resources.Tests
             Assert.Throws<ObjectDisposedException>(() => set.GetString("Any"));
         }
 
-        private class MockAssembly : Assembly { }
+        private class MockAssembly : Assembly
+        {
+        }
     }
 }

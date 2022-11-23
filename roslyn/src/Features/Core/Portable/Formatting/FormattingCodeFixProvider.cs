@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.Formatting
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public FormattingCodeFixProvider() { }
+        public FormattingCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.FormattingDiagnosticId);
@@ -101,7 +103,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                     FeaturesResources.Fix_formatting,
                     createChangedDocument,
                     FeaturesResources.Fix_formatting
-                ) { }
+                )
+            {
+            }
         }
     }
 }

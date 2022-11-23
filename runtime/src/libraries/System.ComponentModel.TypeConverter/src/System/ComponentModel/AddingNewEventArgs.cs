@@ -15,7 +15,9 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.AddingNewEventArgs'/> class,
         /// with no new object defined.
         /// </summary>
-        public AddingNewEventArgs() { }
+        public AddingNewEventArgs()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.AddingNewEventArgs'/> class,

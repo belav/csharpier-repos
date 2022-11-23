@@ -22,7 +22,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         private GenerateTypeDialog_OutOfProc GenerateTypeDialog => VisualStudio.GenerateTypeDialog;
 
         public BasicGenerateTypeDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGenerateTypeDialog)) { }
+            : base(instanceFactory, nameof(BasicGenerateTypeDialog))
+        {
+        }
 
         [WpfFact]
         public void BasicToCSharp()

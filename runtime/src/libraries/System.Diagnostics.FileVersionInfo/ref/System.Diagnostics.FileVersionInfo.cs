@@ -8,7 +8,9 @@ namespace System.Diagnostics
 {
     public sealed partial class FileVersionInfo
     {
-        internal FileVersionInfo() { }
+        internal FileVersionInfo()
+        {
+        }
 
         public string? Comments
         {

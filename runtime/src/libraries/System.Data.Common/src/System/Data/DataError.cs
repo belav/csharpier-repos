@@ -18,7 +18,9 @@ namespace System.Data
         private ColumnError[]? _errorList;
         internal const int initialCapacity = 1;
 
-        internal DataError() { }
+        internal DataError()
+        {
+        }
 
         internal DataError(string rowError)
         {

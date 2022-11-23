@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
 {
     public class MakeTypeAbstractTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeTypeAbstractTests(ITestOutputHelper logger) : base(logger) { }
+        public MakeTypeAbstractTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

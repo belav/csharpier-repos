@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class GlobalCatalogCollection : ReadOnlyCollectionBase
     {
-        internal GlobalCatalogCollection() { }
+        internal GlobalCatalogCollection()
+        {
+        }
 
         internal GlobalCatalogCollection(ArrayList values)
         {

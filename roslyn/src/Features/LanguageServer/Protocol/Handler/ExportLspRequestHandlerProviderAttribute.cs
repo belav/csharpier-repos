@@ -36,6 +36,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         : ExportLspRequestHandlerProviderAttribute
     {
         public ExportRoslynLanguagesLspRequestHandlerProviderAttribute()
-            : base(ProtocolConstants.RoslynLspLanguages.ToArray()) { }
+            : base(ProtocolConstants.RoslynLspLanguages.ToArray())
+        {
+        }
     }
 }

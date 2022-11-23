@@ -279,7 +279,9 @@ namespace System.Xml
         {
             if (_state != State.None)
             {
-                while (MoveToNextContentNode(true)) { }
+                while (MoveToNextContentNode(true))
+                {
+                }
                 if (_state == State.InReadElementContent)
                 {
                     if (_reader.NodeType != XmlNodeType.EndElement)

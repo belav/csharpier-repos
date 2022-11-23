@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestBase<TFixture>
     where TFixture : BuiltInDataTypesTestBase<TFixture>.BuiltInDataTypesFixtureBase, new()
 {
-    protected CustomConvertersTestBase(TFixture fixture) : base(fixture) { }
+    protected CustomConvertersTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public virtual void Can_query_and_update_with_nullable_converter_on_unique_index()
@@ -768,7 +770,9 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         Seller
     }
 
-    public override void Object_to_string_conversion() { }
+    public override void Object_to_string_conversion()
+    {
+    }
 
     [ConditionalFact]
     public virtual void Optional_owned_with_converter_reading_non_nullable_column()
@@ -1605,19 +1609,25 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
 
         private class OrderIdEntityFrameworkValueConverter : ValueConverter<OrderId, string>
         {
-            public OrderIdEntityFrameworkValueConverter() : this(null) { }
+            public OrderIdEntityFrameworkValueConverter() : this(null)
+            {
+            }
 
             public OrderIdEntityFrameworkValueConverter(ConverterMappingHints mappingHints)
                 : base(
                     orderId => orderId.StringValue,
                     stringValue => OrderId.Parse(stringValue),
                     mappingHints
-                ) { }
+                )
+            {
+            }
         }
 
         private class UrlSchemeRemover : ValueConverter<string, string>
         {
-            public UrlSchemeRemover() : base(x => x.Remove(0, 7), x => "http://" + x) { }
+            public UrlSchemeRemover() : base(x => x.Remove(0, 7), x => "http://" + x)
+            {
+            }
         }
 
         private class RolesToStringConveter : ValueConverter<ICollection<Roles>, string>
@@ -1631,7 +1641,9 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                                 .Select(f => (Roles)Enum.Parse(typeof(Roles), f))
                                 .ToList()
                             : new List<Roles>()
-                ) { }
+                )
+            {
+            }
         }
     }
 }

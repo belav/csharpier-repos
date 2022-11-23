@@ -19,7 +19,9 @@ public class App
         {
             Assembly.ReflectionOnlyLoad("SomeAssembly");
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         if (expected_results[i] != handler_fired)
             return 1;
 
@@ -29,7 +31,9 @@ public class App
         {
             Assembly.ReflectionOnlyLoadFrom("SomeAssembly");
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         if (expected_results[i] != handler_fired)
             return 2;
 

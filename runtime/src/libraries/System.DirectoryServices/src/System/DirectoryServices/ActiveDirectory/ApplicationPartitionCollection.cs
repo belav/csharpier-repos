@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ApplicationPartitionCollection : ReadOnlyCollectionBase
     {
-        internal ApplicationPartitionCollection() { }
+        internal ApplicationPartitionCollection()
+        {
+        }
 
         internal ApplicationPartitionCollection(ArrayList values)
         {

@@ -215,7 +215,9 @@ public class NativeLibraryTests : IDisposable
         EXPECT(FreeLibrary(IntPtr.Zero));
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     static TestResult LoadLibrary_NameOnly(string libPath)
     {

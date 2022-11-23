@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : ManyToManyQueryFixtureBase, new()
 {
-    protected ManyToManyQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected ManyToManyQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1781,5 +1783,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
 
     protected ManyToManyContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 }

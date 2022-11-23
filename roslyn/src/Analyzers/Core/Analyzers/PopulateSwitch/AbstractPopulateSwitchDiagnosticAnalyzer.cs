@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 option: null,
                 s_localizableTitle,
                 s_localizableMessage
-            ) { }
+            )
+        {
+        }
 
         #region Interface methods
 

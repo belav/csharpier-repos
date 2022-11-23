@@ -475,7 +475,9 @@ namespace System.IO.Ports.Tests
                 {
                     _com.Write(buffer, 0, buffer.Length);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
             }
         }
         #endregion

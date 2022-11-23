@@ -69,7 +69,9 @@ namespace System.Data.Odbc
             );
 
             // must call SQLSetConnectAttrW and set _handleState
-            try { }
+            try
+            {
+            }
             finally
             {
                 retcode = Interop.Odbc.SQLSetConnectAttrW(
@@ -181,7 +183,9 @@ namespace System.Data.Odbc
 
             ODBC32.SQLRETURN retcode = ODBC32.SQLRETURN.SUCCESS;
 
-            try { }
+            try
+            {
+            }
             finally
             {
                 if (HandleState.TransactionInProgress == _handleState)
@@ -222,7 +226,9 @@ namespace System.Data.Odbc
 
             ODBC32.SQLRETURN retcode;
 
-            try { }
+            try
+            {
+            }
             finally
             {
                 retcode = Interop.Odbc.SQLDriverConnectW(

@@ -23,7 +23,9 @@ namespace System.Net.Http.Formatting
     public abstract class MediaTypeFormatterTestBase<TFormatter>
         where TFormatter : MediaTypeFormatter
     {
-        protected MediaTypeFormatterTestBase() { }
+        protected MediaTypeFormatterTestBase()
+        {
+        }
 
         // Test data variations of interest in round-trip tests.
         public const TestDataVariations RoundTripDataVariations =

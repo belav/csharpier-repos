@@ -1631,7 +1631,9 @@ namespace System.Tests
             Type exceptionType
         )
         {
-            if (2 == 2E10) { }
+            if (2 == 2E10)
+            {
+            }
             nint result;
 
             // Default style and provider

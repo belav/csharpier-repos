@@ -15,31 +15,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         public static readonly DefaultOperationProvider Instance = new();
 
-        private DefaultOperationProvider() { }
+        private DefaultOperationProvider()
+        {
+        }
 
         public override void AddSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node,
             in NextSuppressOperationAction nextOperation
-        ) { }
+        )
+        {
+        }
 
         public override void AddAnchorIndentationOperations(
             List<AnchorIndentationOperation> list,
             SyntaxNode node,
             in NextAnchorIndentationOperationAction nextOperation
-        ) { }
+        )
+        {
+        }
 
         public override void AddIndentBlockOperations(
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) { }
+        )
+        {
+        }
 
         public override void AddAlignTokensOperations(
             List<AlignTokensOperation> list,
             SyntaxNode node,
             in NextAlignTokensOperationAction nextOperation
-        ) { }
+        )
+        {
+        }
 
         public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
             in SyntaxToken previousToken,

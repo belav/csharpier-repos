@@ -59,6 +59,8 @@ namespace GitHub_20269
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void DoNothing(ref int i) { }
+        public static void DoNothing(ref int i)
+        {
+        }
     }
 }

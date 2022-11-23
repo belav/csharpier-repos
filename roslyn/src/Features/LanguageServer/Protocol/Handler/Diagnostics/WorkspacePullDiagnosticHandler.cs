@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             IDiagnosticAnalyzerService analyzerService,
             EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
             IGlobalOptionService globalOptions
-        ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
+        ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
+        {
+        }
 
         protected override VSInternalWorkspaceDiagnosticReport CreateReport(
             TextDocumentIdentifier identifier,

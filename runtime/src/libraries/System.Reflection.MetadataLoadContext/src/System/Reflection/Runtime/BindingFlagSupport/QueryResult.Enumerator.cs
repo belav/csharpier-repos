@@ -21,7 +21,9 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             {
                 while (
                     ++_index < _unfilteredCount && !_queriedMembers!.Matches(_index, _bindingAttr)
-                ) { }
+                )
+                {
+                }
 
                 if (_index < _unfilteredCount)
                     return true;

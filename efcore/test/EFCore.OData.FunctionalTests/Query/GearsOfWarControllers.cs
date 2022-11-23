@@ -36,7 +36,9 @@ public class GearsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class SquadsController : TestODataController, IDisposable
@@ -61,7 +63,9 @@ public class SquadsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class TagsController : TestODataController, IDisposable
@@ -86,7 +90,9 @@ public class TagsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class WeaponsController : TestODataController, IDisposable
@@ -111,7 +117,9 @@ public class WeaponsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class CitiesController : TestODataController, IDisposable
@@ -136,7 +144,9 @@ public class CitiesController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class MissionsController : TestODataController, IDisposable
@@ -161,7 +171,9 @@ public class MissionsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class SquadMissionsController : TestODataController, IDisposable
@@ -188,7 +200,9 @@ public class SquadMissionsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class FactionsController : TestODataController, IDisposable
@@ -217,7 +231,9 @@ public class FactionsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class LocustLeadersController : TestODataController, IDisposable
@@ -247,7 +263,9 @@ public class LocustLeadersController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class LocustHighCommandsController : TestODataController, IDisposable
@@ -272,5 +290,7 @@ public class LocustHighCommandsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

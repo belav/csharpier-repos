@@ -14,7 +14,9 @@ public sealed class ForeignKeyConstraintComparer
     : IEqualityComparer<IForeignKeyConstraint>,
         IComparer<IForeignKeyConstraint>
 {
-    private ForeignKeyConstraintComparer() { }
+    private ForeignKeyConstraintComparer()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

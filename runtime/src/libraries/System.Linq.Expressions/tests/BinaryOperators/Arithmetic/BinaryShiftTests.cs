@@ -1057,7 +1057,9 @@ namespace System.Linq.Expressions.Tests
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

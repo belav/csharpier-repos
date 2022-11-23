@@ -248,7 +248,9 @@ namespace System.IO.Ports.Tests
                         s_DEFAULT_WRITE_BYTE_ARRAY_SIZE
                     );
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 asyncEnableRts.Stop();
 
@@ -315,7 +317,9 @@ namespace System.IO.Ports.Tests
                 {
                     stream.WriteByte(DEFAULT_WRITE_BYTE);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 asyncEnableRts.Stop();
 
@@ -493,7 +497,9 @@ namespace System.IO.Ports.Tests
             {
                 writeMethod(stream);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             timer.Stop();
             actualTime = (int)timer.ElapsedMilliseconds;
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
@@ -522,7 +528,9 @@ namespace System.IO.Ports.Tests
                 {
                     writeMethod(stream);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
                 timer.Stop();
 
                 actualTime += (int)timer.ElapsedMilliseconds;
@@ -575,7 +583,9 @@ namespace System.IO.Ports.Tests
             {
                 writeMethod(stream);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             timer.Stop();
             actualTime = (int)timer.ElapsedMilliseconds;
 
@@ -602,7 +612,9 @@ namespace System.IO.Ports.Tests
                 {
                     writeMethod(stream);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
                 timer.Stop();
 
                 actualTime += (int)timer.ElapsedMilliseconds;

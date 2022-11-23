@@ -19,7 +19,9 @@ public sealed class BadRequest : IResult, IEndpointMetadataProvider, IStatusCode
     /// Initializes a new instance of the <see cref="BadRequest"/> class with the values
     /// provided.
     /// </summary>
-    internal BadRequest() { }
+    internal BadRequest()
+    {
+    }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status400BadRequest"/>

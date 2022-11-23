@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
         : AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer<SyntaxKind>
     {
         public CSharpUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer()
-            : base(CSharpAnalyzersResources.Use_is_null_check) { }
+            : base(CSharpAnalyzersResources.Use_is_null_check)
+        {
+        }
 
         protected override bool IsLanguageVersionSupported(Compilation compilation) =>
             compilation.LanguageVersion() >= LanguageVersion.CSharp7;

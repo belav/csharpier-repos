@@ -32,7 +32,9 @@ public class Driver
                 poles,
                 fastestLaps,
                 teamId
-            ) { }
+            )
+        {
+        }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
@@ -42,7 +44,9 @@ public class Driver
     private readonly ILazyLoader _loader;
     private Team _team;
 
-    public Driver() { }
+    public Driver()
+    {
+    }
 
     protected Driver(
         ILazyLoader loader,

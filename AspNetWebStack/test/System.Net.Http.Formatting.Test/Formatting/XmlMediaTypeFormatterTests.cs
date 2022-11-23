@@ -1028,15 +1028,20 @@ namespace System.Net.Http.Formatting
         public class InvalidDataContract
         {
             // removing the default ctor makes this invalid
-            public InvalidDataContract(string s) { }
+            public InvalidDataContract(string s)
+            {
+            }
         }
 
         public class TestXmlMediaTypeFormatter : XmlMediaTypeFormatter
         {
-            public TestXmlMediaTypeFormatter() { }
+            public TestXmlMediaTypeFormatter()
+            {
+            }
 
             public TestXmlMediaTypeFormatter(TestXmlMediaTypeFormatter formatter) : base(formatter)
-            { }
+            {
+            }
 
             public bool ThrowAnExceptionOnCreate { get; set; }
             public bool ReturnNullOnCreate { get; set; }

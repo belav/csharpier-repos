@@ -12,7 +12,9 @@ namespace DebuggerTests
 {
     public class SteppingTests : DebuggerTests
     {
-        public SteppingTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public SteppingTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         [Fact]
         public async Task TrivalStepping()

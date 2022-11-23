@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ReadOnlySiteLinkBridgeCollection : ReadOnlyCollectionBase
     {
-        internal ReadOnlySiteLinkBridgeCollection() { }
+        internal ReadOnlySiteLinkBridgeCollection()
+        {
+        }
 
         public ActiveDirectorySiteLinkBridge this[int index]
         {

@@ -175,7 +175,9 @@ public class RedisHubLifetimeManagerBenchmark
         await _manager1.SendUsersAsync(_users, "Test", _args);
     }
 
-    public class TestHub : Hub { }
+    public class TestHub : Hub
+    {
+    }
 
     private sealed class WrappedHubProtocol : IHubProtocol
     {

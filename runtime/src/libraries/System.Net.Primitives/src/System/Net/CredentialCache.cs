@@ -17,7 +17,9 @@ namespace System.Net
         private Dictionary<CredentialHostKey, NetworkCredential>? _cacheForHosts;
         private int _version;
 
-        public CredentialCache() { }
+        public CredentialCache()
+        {
+        }
 
         public void Add(Uri uriPrefix, string authType, NetworkCredential cred)
         {
@@ -447,7 +449,9 @@ namespace System.Net
                     {
                         enumerator.Reset();
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
             }
         }
@@ -468,7 +472,9 @@ namespace System.Net
             new SystemNetworkCredential();
 
         // We want reference equality to work. Making this private is a good way to guarantee that.
-        private SystemNetworkCredential() : base(string.Empty, string.Empty, string.Empty) { }
+        private SystemNetworkCredential() : base(string.Empty, string.Empty, string.Empty)
+        {
+        }
     }
 
     internal readonly struct CredentialHostKey : IEquatable<CredentialHostKey>

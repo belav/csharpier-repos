@@ -239,7 +239,9 @@ namespace System.Configuration
 
                 return (t1 != null) && (t1 == t2);
             }
-            catch { }
+            catch
+            {
+            }
 
             return false;
         }

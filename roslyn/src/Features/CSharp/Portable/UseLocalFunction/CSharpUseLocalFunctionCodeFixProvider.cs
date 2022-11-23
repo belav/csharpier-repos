@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseLocalFunctionCodeFixProvider() { }
+        public CSharpUseLocalFunctionCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseLocalFunctionDiagnosticId);

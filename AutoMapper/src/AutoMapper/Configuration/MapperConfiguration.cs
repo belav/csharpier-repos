@@ -160,7 +160,9 @@ public class MapperConfiguration : IGlobalConfiguration
     }
 
     public MapperConfiguration(Action<IMapperConfigurationExpression> configure)
-        : this(Build(configure)) { }
+        : this(Build(configure))
+    {
+    }
 
     static MapperConfigurationExpression Build(Action<IMapperConfigurationExpression> configure)
     {

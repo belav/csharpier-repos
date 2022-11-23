@@ -2113,7 +2113,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        protected virtual void AfterMembersCompletedChecks(BindingDiagnosticBag diagnostics) { }
+        protected virtual void AfterMembersCompletedChecks(BindingDiagnosticBag diagnostics)
+        {
+        }
 
         private void CheckMemberNamesDistinctFromType(BindingDiagnosticBag diagnostics)
         {
@@ -3433,7 +3435,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public static readonly DeclaredMembersAndInitializers UninitializedSentinel =
                 new DeclaredMembersAndInitializers();
 
-            private DeclaredMembersAndInitializers() { }
+            private DeclaredMembersAndInitializers()
+            {
+            }
 
             public DeclaredMembersAndInitializers(
                 ImmutableArray<Symbol> nonTypeMembers,

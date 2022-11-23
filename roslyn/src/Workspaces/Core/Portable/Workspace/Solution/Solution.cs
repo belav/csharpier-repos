@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis
                     options,
                     analyzerReferences
                 )
-            ) { }
+            )
+        {
+        }
 
         internal SolutionState State => _state;
 

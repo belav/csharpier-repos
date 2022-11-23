@@ -20,7 +20,9 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     )]
     public class ExpectedWarningAttribute : EnableLoggerAttribute
     {
-        public ExpectedWarningAttribute(string warningCode, params string[] messageContains) { }
+        public ExpectedWarningAttribute(string warningCode, params string[] messageContains)
+        {
+        }
 
         public string FileName { get; set; }
         public int SourceLine { get; set; }

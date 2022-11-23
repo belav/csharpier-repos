@@ -1,8 +1,12 @@
 ﻿using System;
 
-public class Control { }
+public class Control
+{
+}
 
-public class UserControl : Control { }
+public class UserControl : Control
+{
+}
 
 namespace test
 {

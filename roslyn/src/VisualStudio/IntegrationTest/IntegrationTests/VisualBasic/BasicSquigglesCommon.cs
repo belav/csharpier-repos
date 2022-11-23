@@ -12,7 +12,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected BasicSquigglesCommon(
             VisualStudioInstanceFactory instanceFactory,
             string projectTemplate
-        ) : base(instanceFactory, nameof(BasicSquigglesCommon), projectTemplate) { }
+        ) : base(instanceFactory, nameof(BasicSquigglesCommon), projectTemplate)
+        {
+        }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

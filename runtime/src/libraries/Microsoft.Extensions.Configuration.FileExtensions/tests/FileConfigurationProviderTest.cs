@@ -164,15 +164,21 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
 
         public class FileConfigurationProviderImpl : FileConfigurationProvider
         {
-            public FileConfigurationProviderImpl(FileConfigurationSource source) : base(source) { }
+            public FileConfigurationProviderImpl(FileConfigurationSource source) : base(source)
+            {
+            }
 
-            public override void Load(Stream stream) { }
+            public override void Load(Stream stream)
+            {
+            }
         }
 
         public class ThrowOnLoadFileConfigurationProviderImpl : FileConfigurationProvider
         {
             public ThrowOnLoadFileConfigurationProviderImpl(FileConfigurationSource source)
-                : base(source) { }
+                : base(source)
+            {
+            }
 
             public override void Load(Stream stream) =>
                 throw new Exception("This is a test exception.");

@@ -90,7 +90,9 @@ namespace Newtonsoft.Json.Tests.Issues
             public MyByRefLikeType RefLike
             {
                 get { return default(MyByRefLikeType); }
-                set { }
+                set
+                {
+                }
             }
 
             private static void DoNothing(Span<int> param)
@@ -111,7 +113,9 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public ref struct MyByRefLikeType
         {
-            public MyByRefLikeType(int i) { }
+            public MyByRefLikeType(int i)
+            {
+            }
 
             public static int Index;
         }

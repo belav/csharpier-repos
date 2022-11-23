@@ -252,7 +252,9 @@ namespace System.Threading.Channels.Tests
                             }
                         }
                     }
-                    catch (ChannelClosedException) { }
+                    catch (ChannelClosedException)
+                    {
+                    }
                 });
             }
 
@@ -883,16 +885,26 @@ namespace System.Threading.Channels.Tests
                 case null:
                     if (onCompleted)
                     {
-                        read.GetAwaiter().OnCompleted(() => { });
+                        read.GetAwaiter()
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().OnCompleted(() => { })
+                            () =>
+                                read.GetAwaiter()
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
                     {
-                        read.GetAwaiter().UnsafeOnCompleted(() => { });
+                        read.GetAwaiter()
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().UnsafeOnCompleted(() => { })
+                            () =>
+                                read.GetAwaiter()
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -902,24 +914,28 @@ namespace System.Threading.Channels.Tests
                     {
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .OnCompleted(() => { });
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 read.ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .OnCompleted(() => { })
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
                     {
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .UnsafeOnCompleted(() => { });
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 read.ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -946,16 +962,26 @@ namespace System.Threading.Channels.Tests
                 case null:
                     if (onCompleted)
                     {
-                        read.GetAwaiter().OnCompleted(() => { });
+                        read.GetAwaiter()
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().OnCompleted(() => { })
+                            () =>
+                                read.GetAwaiter()
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
                     {
-                        read.GetAwaiter().UnsafeOnCompleted(() => { });
+                        read.GetAwaiter()
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().UnsafeOnCompleted(() => { })
+                            () =>
+                                read.GetAwaiter()
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -965,24 +991,28 @@ namespace System.Threading.Channels.Tests
                     {
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .OnCompleted(() => { });
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 read.ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .OnCompleted(() => { })
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
                     {
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .UnsafeOnCompleted(() => { });
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 read.ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -1003,7 +1033,10 @@ namespace System.Threading.Channels.Tests
             Assert.True(await read);
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().IsCompleted);
             Assert.Throws<InvalidOperationException>(
-                () => read.GetAwaiter().OnCompleted(() => { })
+                () =>
+                    read.GetAwaiter()
+                        .OnCompleted(() => {
+                        })
             );
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().GetResult());
         }
@@ -1022,7 +1055,10 @@ namespace System.Threading.Channels.Tests
             Assert.Equal(42, await read);
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().IsCompleted);
             Assert.Throws<InvalidOperationException>(
-                () => read.GetAwaiter().OnCompleted(() => { })
+                () =>
+                    read.GetAwaiter()
+                        .OnCompleted(() => {
+                        })
             );
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().GetResult());
         }
@@ -1041,7 +1077,11 @@ namespace System.Threading.Channels.Tests
             Assert.True(await write);
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().IsCompleted);
             Assert.Throws<InvalidOperationException>(
-                () => write.GetAwaiter().OnCompleted(() => { })
+                () =>
+                    write
+                        .GetAwaiter()
+                        .OnCompleted(() => {
+                        })
             );
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().GetResult());
         }
@@ -1060,7 +1100,11 @@ namespace System.Threading.Channels.Tests
             await write;
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().IsCompleted);
             Assert.Throws<InvalidOperationException>(
-                () => write.GetAwaiter().OnCompleted(() => { })
+                () =>
+                    write
+                        .GetAwaiter()
+                        .OnCompleted(() => {
+                        })
             );
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().GetResult());
         }
@@ -1089,16 +1133,30 @@ namespace System.Threading.Channels.Tests
                 case null:
                     if (onCompleted)
                     {
-                        write.GetAwaiter().OnCompleted(() => { });
+                        write
+                            .GetAwaiter()
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().OnCompleted(() => { })
+                            () =>
+                                write
+                                    .GetAwaiter()
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
                     {
-                        write.GetAwaiter().UnsafeOnCompleted(() => { });
+                        write
+                            .GetAwaiter()
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().UnsafeOnCompleted(() => { })
+                            () =>
+                                write
+                                    .GetAwaiter()
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -1109,13 +1167,15 @@ namespace System.Threading.Channels.Tests
                         write
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .OnCompleted(() => { });
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 write
                                     .ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .OnCompleted(() => { })
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
@@ -1123,13 +1183,15 @@ namespace System.Threading.Channels.Tests
                         write
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .UnsafeOnCompleted(() => { });
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 write
                                     .ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -1160,16 +1222,30 @@ namespace System.Threading.Channels.Tests
                 case null:
                     if (onCompleted)
                     {
-                        write.GetAwaiter().OnCompleted(() => { });
+                        write
+                            .GetAwaiter()
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().OnCompleted(() => { })
+                            () =>
+                                write
+                                    .GetAwaiter()
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
                     {
-                        write.GetAwaiter().UnsafeOnCompleted(() => { });
+                        write
+                            .GetAwaiter()
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().UnsafeOnCompleted(() => { })
+                            () =>
+                                write
+                                    .GetAwaiter()
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -1180,13 +1256,15 @@ namespace System.Threading.Channels.Tests
                         write
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .OnCompleted(() => { });
+                            .OnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 write
                                     .ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .OnCompleted(() => { })
+                                    .OnCompleted(() => {
+                                    })
                         );
                     }
                     else
@@ -1194,13 +1272,15 @@ namespace System.Threading.Channels.Tests
                         write
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
-                            .UnsafeOnCompleted(() => { });
+                            .UnsafeOnCompleted(() => {
+                            });
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 write
                                     .ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
+                                    .UnsafeOnCompleted(() => {
+                                    })
                         );
                     }
                     break;
@@ -1479,26 +1559,46 @@ namespace System.Threading.Channels.Tests
         public void ValueTask_MultipleContinuations_Throws()
         {
             ValueTaskAwaiter<int> readVt = CreateChannel().Reader.ReadAsync().GetAwaiter();
-            readVt.OnCompleted(() => { });
-            Assert.Throws<InvalidOperationException>(() => readVt.OnCompleted(() => { }));
+            readVt.OnCompleted(() => {
+            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    readVt.OnCompleted(() => {
+                    })
+            );
 
             ValueTaskAwaiter<bool> waitReadVt = CreateChannel().Reader
                 .WaitToReadAsync()
                 .GetAwaiter();
-            waitReadVt.OnCompleted(() => { });
-            Assert.Throws<InvalidOperationException>(() => waitReadVt.OnCompleted(() => { }));
+            waitReadVt.OnCompleted(() => {
+            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    waitReadVt.OnCompleted(() => {
+                    })
+            );
 
             if (CreateFullChannel() != null)
             {
                 ValueTaskAwaiter writeVt = CreateFullChannel().Writer.WriteAsync(42).GetAwaiter();
-                writeVt.OnCompleted(() => { });
-                Assert.Throws<InvalidOperationException>(() => writeVt.OnCompleted(() => { }));
+                writeVt.OnCompleted(() => {
+                });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        writeVt.OnCompleted(() => {
+                        })
+                );
 
                 ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel().Writer
                     .WaitToWriteAsync()
                     .GetAwaiter();
-                waitWriteVt.OnCompleted(() => { });
-                Assert.Throws<InvalidOperationException>(() => waitWriteVt.OnCompleted(() => { }));
+                waitWriteVt.OnCompleted(() => {
+                });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        waitWriteVt.OnCompleted(() => {
+                        })
+                );
             }
         }
 

@@ -222,7 +222,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int version,
                     ImmutableArray<TaskListTableItem> items,
                     ImmutableArray<ITrackingPoint> trackingPoints
-                ) : base(threadingContext, version, items, trackingPoints) { }
+                ) : base(threadingContext, version, items, trackingPoints)
+                {
+                }
 
                 public override bool TryGetValue(
                     int index,

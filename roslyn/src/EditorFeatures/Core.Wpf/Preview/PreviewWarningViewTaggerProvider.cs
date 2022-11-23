@@ -26,6 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PreviewWarningTaggerProvider()
-            : base(PredefinedPreviewTaggerKeys.WarningSpansKey, PreviewWarningTag.Instance) { }
+            : base(PredefinedPreviewTaggerKeys.WarningSpansKey, PreviewWarningTag.Instance)
+        {
+        }
     }
 }

@@ -103,7 +103,9 @@ namespace System.Security.AccessControl
 
         #region Constructors
 
-        internal GenericSecurityDescriptor() { }
+        internal GenericSecurityDescriptor()
+        {
+        }
 
         #endregion
 
@@ -481,7 +483,8 @@ namespace System.Security.AccessControl
         //
 
         public RawSecurityDescriptor(string sddlForm) : this(BinaryFormFromSddlForm(sddlForm), 0)
-        { }
+        {
+        }
 
         //
         // Creates a security descriptor from its binary representation
@@ -962,13 +965,17 @@ namespace System.Security.AccessControl
                 discretionaryAcl == null
                     ? null
                     : new DiscretionaryAcl(isContainer, isDS, discretionaryAcl)
-            ) { }
+            )
+        {
+        }
 
         public CommonSecurityDescriptor(
             bool isContainer,
             bool isDS,
             RawSecurityDescriptor rawSecurityDescriptor
-        ) : this(isContainer, isDS, rawSecurityDescriptor, false) { }
+        ) : this(isContainer, isDS, rawSecurityDescriptor, false)
+        {
+        }
 
         internal CommonSecurityDescriptor(
             bool isContainer,
@@ -1004,14 +1011,18 @@ namespace System.Security.AccessControl
         //
 
         public CommonSecurityDescriptor(bool isContainer, bool isDS, string sddlForm)
-            : this(isContainer, isDS, new RawSecurityDescriptor(sddlForm), true) { }
+            : this(isContainer, isDS, new RawSecurityDescriptor(sddlForm), true)
+        {
+        }
 
         //
         // Create a security descriptor from its binary representation
         //
 
         public CommonSecurityDescriptor(bool isContainer, bool isDS, byte[] binaryForm, int offset)
-            : this(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset), true) { }
+            : this(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset), true)
+        {
+        }
 
         #endregion
 

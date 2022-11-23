@@ -19,7 +19,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpQuickInfo(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpQuickInfo)) { }
+            : base(instanceFactory, nameof(CSharpQuickInfo))
+        {
+        }
 
         [
             WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/38301"),

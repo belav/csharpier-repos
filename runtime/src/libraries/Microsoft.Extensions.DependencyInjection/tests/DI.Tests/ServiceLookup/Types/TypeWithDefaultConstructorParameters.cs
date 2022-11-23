@@ -10,13 +10,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         public TypeWithDefaultConstructorParameters(
             IFakeMultipleService multipleService,
             IFakeService fakeService = null
-        ) { }
+        )
+        {
+        }
 
-        public TypeWithDefaultConstructorParameters(IFactoryService factoryService) { }
+        public TypeWithDefaultConstructorParameters(IFactoryService factoryService)
+        {
+        }
 
         public TypeWithDefaultConstructorParameters(
             IFactoryService factoryService,
             IFakeScopedService singletonService = null
-        ) { }
+        )
+        {
+        }
     }
 }

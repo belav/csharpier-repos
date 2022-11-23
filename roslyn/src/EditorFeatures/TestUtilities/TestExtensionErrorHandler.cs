@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExtensionErrorHandler() { }
+        public TestExtensionErrorHandler()
+        {
+        }
 
         public void HandleError(object sender, Exception exception)
         {

@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class IISExpressShutdownTests : IISFunctionalTestBase
 {
-    public IISExpressShutdownTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public IISExpressShutdownTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task ServerShutsDownWhenMainExits()

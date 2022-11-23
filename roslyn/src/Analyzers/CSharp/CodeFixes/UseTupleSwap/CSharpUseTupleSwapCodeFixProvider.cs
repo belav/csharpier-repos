@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpUseTupleSwapCodeFixProvider() { }
+        public CSharpUseTupleSwapCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseTupleSwapDiagnosticId);

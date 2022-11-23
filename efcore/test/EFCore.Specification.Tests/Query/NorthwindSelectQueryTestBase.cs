@@ -11,11 +11,15 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindSelectQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindSelectQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     protected NorthwindContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3119,7 +3123,9 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             }
         );
 
-    private class OrderDto { }
+    private class OrderDto
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

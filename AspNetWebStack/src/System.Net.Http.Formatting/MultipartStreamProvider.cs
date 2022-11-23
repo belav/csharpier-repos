@@ -21,7 +21,9 @@ namespace System.Net.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="MultipartStreamProvider"/> class.
         /// </summary>
-        protected MultipartStreamProvider() { }
+        protected MultipartStreamProvider()
+        {
+        }
 
         /// <summary>
         /// Gets the collection of <see cref="HttpContent"/> instances where each instance represents a MIME body part.

@@ -491,9 +491,13 @@ namespace System.Reflection.Tests
                 Assert.Throws<ArgumentException>(() => type.GetArrayRank());
             }
 
-            if (!type.IsByRef) { }
+            if (!type.IsByRef)
+            {
+            }
 
-            if (!type.IsPointer) { }
+            if (!type.IsPointer)
+            {
+            }
 
             if (!type.IsConstructedGenericType)
             {

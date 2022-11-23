@@ -36,7 +36,9 @@ unsafe class ManagedSequential
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    class EmptySequentialClassObjectBase { }
+    class EmptySequentialClassObjectBase
+    {
+    }
 
     class AutoClassDerived : EmptySequentialClassObjectBase
     {

@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class FieldMappingInMemoryTest
     : FieldMappingTestBase<FieldMappingInMemoryTest.FieldMappingInMemoryFixture>
 {
-    public FieldMappingInMemoryTest(FieldMappingInMemoryFixture fixture) : base(fixture) { }
+    public FieldMappingInMemoryTest(FieldMappingInMemoryFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void Update<TBlog>(string navigation)
     {

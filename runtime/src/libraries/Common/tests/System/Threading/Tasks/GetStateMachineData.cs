@@ -124,7 +124,9 @@ namespace System.Threading.Tasks
                         : value.ToString();
         }
 
-        private GetStateMachineData() { }
+        private GetStateMachineData()
+        {
+        }
 
         public GetStateMachineData GetAwaiter() => this;
 

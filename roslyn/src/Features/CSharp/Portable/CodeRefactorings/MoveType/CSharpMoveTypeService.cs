@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.MoveType
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMoveTypeService() { }
+        public CSharpMoveTypeService()
+        {
+        }
 
         protected override async Task<BaseTypeDeclarationSyntax> GetRelevantNodeAsync(
             Document document,

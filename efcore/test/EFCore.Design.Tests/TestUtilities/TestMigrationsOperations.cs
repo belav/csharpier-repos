@@ -26,5 +26,7 @@ public class TestMigrationsOperations : MigrationsOperations
             language,
             nullable,
             args
-        ) { }
+        )
+    {
+    }
 }

@@ -162,7 +162,9 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             Clear();
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

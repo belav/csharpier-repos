@@ -3,7 +3,9 @@ using System.Threading;
 using System.Runtime.Remoting;
 using System.Reflection;
 
-public class JustSomeClass { }
+public class JustSomeClass
+{
+}
 
 public class Test2 : ContextBoundObject
 {

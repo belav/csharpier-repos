@@ -101,14 +101,18 @@ namespace System.Security.Cryptography.Hashing.Tests
 
         private class TestKeyedHashAlgorithm : KeyedHashAlgorithm
         {
-            protected override void HashCore(byte[] array, int ibStart, int cbSize) { }
+            protected override void HashCore(byte[] array, int ibStart, int cbSize)
+            {
+            }
 
             protected override byte[] HashFinal()
             {
                 return Array.Empty<byte>();
             }
 
-            public override void Initialize() { }
+            public override void Initialize()
+            {
+            }
         }
     }
 }

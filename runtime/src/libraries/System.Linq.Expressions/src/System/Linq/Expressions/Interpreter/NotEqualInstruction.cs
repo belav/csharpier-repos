@@ -38,7 +38,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "NotEqual";
 
-        private NotEqualInstruction() { }
+        private NotEqualInstruction()
+        {
+        }
 
         private sealed class NotEqualBoolean : NotEqualInstruction
         {

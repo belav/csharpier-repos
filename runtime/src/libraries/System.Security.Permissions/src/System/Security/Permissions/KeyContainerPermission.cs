@@ -12,14 +12,20 @@ namespace System.Security.Permissions
 #endif
     public sealed class KeyContainerPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public KeyContainerPermission(PermissionState state) { }
+        public KeyContainerPermission(PermissionState state)
+        {
+        }
 
-        public KeyContainerPermission(KeyContainerPermissionFlags flags) { }
+        public KeyContainerPermission(KeyContainerPermissionFlags flags)
+        {
+        }
 
         public KeyContainerPermission(
             KeyContainerPermissionFlags flags,
             KeyContainerPermissionAccessEntry[] accessList
-        ) { }
+        )
+        {
+        }
 
         public KeyContainerPermissionFlags Flags { get; }
         public KeyContainerPermissionAccessEntryCollection AccessEntries { get; }
@@ -54,6 +60,8 @@ namespace System.Security.Permissions
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
     }
 }

@@ -17,7 +17,9 @@ namespace Wasm.Build.NativeRebuild.Tests
         public ReferenceNewAssemblyRebuildTest(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]

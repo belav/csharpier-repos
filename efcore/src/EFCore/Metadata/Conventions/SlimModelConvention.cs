@@ -484,7 +484,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IKey key,
             SlimKey slimKey,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         private SlimIndex Create(IIndex index, SlimEntityType slimEntityType) =>
             slimEntityType.AddIndex(
@@ -505,7 +507,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IIndex index,
             SlimIndex slimIndex,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         private SlimForeignKey Create(IForeignKey foreignKey, SlimEntityType slimEntityType)
         {
@@ -536,7 +540,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IForeignKey foreignKey,
             SlimForeignKey slimForeignKey,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         private SlimNavigation Create(INavigation navigation, SlimForeignKey slimForeigKey) =>
             (

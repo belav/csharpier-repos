@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InterpolationBraceCompletionService() { }
+        public InterpolationBraceCompletionService()
+        {
+        }
 
         protected override char OpeningBrace => CurlyBrace.OpenCharacter;
         protected override char ClosingBrace => CurlyBrace.CloseCharacter;

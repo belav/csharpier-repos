@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis
             return bytesRead;
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override bool CanRead
         {

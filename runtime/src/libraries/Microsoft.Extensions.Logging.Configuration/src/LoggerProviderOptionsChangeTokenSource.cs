@@ -11,6 +11,8 @@ namespace Microsoft.Extensions.Logging.Configuration
     {
         public LoggerProviderOptionsChangeTokenSource(
             ILoggerProviderConfiguration<TProvider> providerConfiguration
-        ) : base(providerConfiguration.Configuration) { }
+        ) : base(providerConfiguration.Configuration)
+        {
+        }
     }
 }

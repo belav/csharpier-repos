@@ -347,7 +347,9 @@ namespace Microsoft.Extensions.Hosting
                 _disposable?.Dispose();
             }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(DiagnosticListener value)
             {
@@ -407,7 +409,9 @@ namespace Microsoft.Extensions.Hosting
                 }
             }
 
-            private sealed class HostAbortedException : Exception { }
+            private sealed class HostAbortedException : Exception
+            {
+            }
         }
     }
 }

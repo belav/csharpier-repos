@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                 diagnosticService,
                 globalOptions,
                 listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles)
-            ) { }
+            )
+        {
+        }
 
         protected internal sealed override bool IsEnabled => true;
 

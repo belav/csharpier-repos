@@ -89,7 +89,9 @@ namespace System.Text.Json
         /// </summary>
         public int CurrentDepth => _currentDepth & JsonConstants.RemoveFlagsBitMask;
 
-        private Utf8JsonWriter() { }
+        private Utf8JsonWriter()
+        {
+        }
 
         /// <summary>
         /// Constructs a new <see cref="Utf8JsonWriter"/> instance with a specified <paramref name="bufferWriter"/>.

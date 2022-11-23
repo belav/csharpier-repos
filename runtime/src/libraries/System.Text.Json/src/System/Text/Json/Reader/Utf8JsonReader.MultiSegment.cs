@@ -125,7 +125,9 @@ namespace System.Text.Json
         ///   </para>
         /// </remarks>
         public Utf8JsonReader(ReadOnlySequence<byte> jsonData, JsonReaderOptions options = default)
-            : this(jsonData, isFinalBlock: true, new JsonReaderState(options)) { }
+            : this(jsonData, isFinalBlock: true, new JsonReaderState(options))
+        {
+        }
 
         private bool ReadMultiSegment()
         {

@@ -18,7 +18,9 @@ class OpenSemaphoreNeg
         Semaphore sem;
         try
         {
-            using (sem = Semaphore.OpenExisting("")) { }
+            using (sem = Semaphore.OpenExisting(""))
+            {
+            }
         }
         catch (ArgumentException)
         {

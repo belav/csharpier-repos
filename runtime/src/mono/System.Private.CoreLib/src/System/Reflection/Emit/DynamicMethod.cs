@@ -73,11 +73,15 @@ namespace System.Reflection.Emit
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Module m)
-            : this(name, returnType, parameterTypes, m, false) { }
+            : this(name, returnType, parameterTypes, m, false)
+        {
+        }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Type owner)
-            : this(name, returnType, parameterTypes, owner, false) { }
+            : this(name, returnType, parameterTypes, owner, false)
+        {
+        }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         public DynamicMethod(
@@ -95,7 +99,9 @@ namespace System.Reflection.Emit
                 parameterTypes,
                 m,
                 skipVisibility
-            ) { }
+            )
+        {
+        }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         public DynamicMethod(
@@ -113,7 +119,9 @@ namespace System.Reflection.Emit
                 parameterTypes,
                 owner,
                 skipVisibility
-            ) { }
+            )
+        {
+        }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         public DynamicMethod(
@@ -136,7 +144,9 @@ namespace System.Reflection.Emit
                 skipVisibility,
                 false,
                 true
-            ) { }
+            )
+        {
+        }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         public DynamicMethod(
@@ -159,11 +169,15 @@ namespace System.Reflection.Emit
                 skipVisibility,
                 false,
                 false
-            ) { }
+            )
+        {
+        }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes)
-            : this(name, returnType, parameterTypes, false) { }
+            : this(name, returnType, parameterTypes, false)
+        {
+        }
 
         // FIXME: "Visibility is not restricted"
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
@@ -184,7 +198,9 @@ namespace System.Reflection.Emit
                 restrictedSkipVisibility,
                 true,
                 false
-            ) { }
+            )
+        {
+        }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
         [DynamicDependency(nameof(owner))] // Automatically keeps all previous fields too due to StructLayout

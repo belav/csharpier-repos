@@ -140,7 +140,9 @@ namespace System.Reflection.Emit
 
         public void AddInterfaceImplementation(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
-        ) { }
+        )
+        {
+        }
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         public Type? CreateType()
@@ -218,7 +220,9 @@ namespace System.Reflection.Emit
         public void DefineMethodOverride(
             MethodInfo methodInfoBody,
             MethodInfo methodInfoDeclaration
-        ) { }
+        )
+        {
+        }
 
         public TypeBuilder DefineNestedType(
             string name,
@@ -632,13 +636,19 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
 
         public void SetParent(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parent
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {

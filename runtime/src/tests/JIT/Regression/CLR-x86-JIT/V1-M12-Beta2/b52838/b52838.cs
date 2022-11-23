@@ -10,7 +10,9 @@ namespace Test
     {
         static sbyte m_sb;
 
-        static void Finally() { }
+        static void Finally()
+        {
+        }
 
         static void Main1()
         {

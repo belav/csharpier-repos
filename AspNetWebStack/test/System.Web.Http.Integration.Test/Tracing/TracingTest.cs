@@ -24,7 +24,9 @@ namespace System.Web.Http.ModelBinding
     {
         private readonly string _baseAddress = "http://localhost";
 
-        public TracingTest() { }
+        public TracingTest()
+        {
+        }
 
         // The test trace writers used when testing that the controller
         // is unaffected by presence or behavior of trace writers

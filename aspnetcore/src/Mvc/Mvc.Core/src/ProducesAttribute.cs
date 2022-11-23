@@ -101,7 +101,9 @@ public class ProducesAttribute
     }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuted(ResultExecutedContext context) { }
+    public virtual void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 
     /// <inheritdoc />
     public void SetContentTypes(MediaTypeCollection contentTypes)

@@ -17,7 +17,9 @@ namespace System.Security.Cryptography.X509Certificates
         private bool _useMachineContext;
         private readonly object _syncRoot = new object();
 
-        public X509Chain() { }
+        public X509Chain()
+        {
+        }
 
         public X509Chain(bool useMachineContext)
         {

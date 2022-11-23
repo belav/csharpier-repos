@@ -24,7 +24,9 @@ namespace System.Diagnostics.CodeAnalysis
         /// <summary>
         /// Initializes a new instance of the <see cref="RequiresAssemblyFilesAttribute"/> class.
         /// </summary>
-        public RequiresAssemblyFilesAttribute() { }
+        public RequiresAssemblyFilesAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RequiresAssemblyFilesAttribute"/> class.

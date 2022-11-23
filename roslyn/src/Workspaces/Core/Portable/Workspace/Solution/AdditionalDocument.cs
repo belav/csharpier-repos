@@ -10,6 +10,8 @@ namespace Microsoft.CodeAnalysis
     public sealed class AdditionalDocument : TextDocument
     {
         internal AdditionalDocument(Project project, TextDocumentState state)
-            : base(project, state, TextDocumentKind.AdditionalDocument) { }
+            : base(project, state, TextDocumentKind.AdditionalDocument)
+        {
+        }
     }
 }

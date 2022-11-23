@@ -24,7 +24,9 @@ namespace Microsoft.Web.Mvc.Resources
         /// <summary>
         /// Wraps the ModelBinders.Binders.DefaultBinder
         /// </summary>
-        public ResourceModelBinder() : this(ModelBinders.Binders.DefaultBinder) { }
+        public ResourceModelBinder() : this(ModelBinders.Binders.DefaultBinder)
+        {
+        }
 
         public ResourceModelBinder(IModelBinder inner)
         {

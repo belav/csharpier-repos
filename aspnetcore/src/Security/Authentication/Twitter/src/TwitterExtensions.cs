@@ -23,7 +23,12 @@ public static class TwitterExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddTwitter(this AuthenticationBuilder builder) =>
-        builder.AddTwitter(TwitterDefaults.AuthenticationScheme, _ => { });
+        builder.AddTwitter(
+            TwitterDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.

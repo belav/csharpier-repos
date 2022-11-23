@@ -48,7 +48,9 @@ public class ResponseCacheFilterApplicationModelProviderTest
     [Authorize]
     public class ModelWithoutResponseCache : PageModel
     {
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -69,7 +71,9 @@ public class ResponseCacheFilterApplicationModelProviderTest
         // Assert
         Assert.Collection(
             context.PageApplicationModel.Filters,
-            f => { },
+            f =>
+            {
+            },
             f => Assert.IsType<PageHandlerPageFilter>(f),
             f => Assert.IsType<HandleOptionsRequestsPageFilter>(f),
             f =>
@@ -92,7 +96,9 @@ public class ResponseCacheFilterApplicationModelProviderTest
     [ResponseCache(Duration = 12, NoStore = true, VaryByHeader = "Abc")]
     private class ModelWithResponseCache : PageModel
     {
-        public virtual void OnGet() { }
+        public virtual void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -117,7 +123,9 @@ public class ResponseCacheFilterApplicationModelProviderTest
         // Assert
         Assert.Collection(
             context.PageApplicationModel.Filters,
-            f => { },
+            f =>
+            {
+            },
             f => Assert.IsType<PageHandlerPageFilter>(f),
             f => Assert.IsType<HandleOptionsRequestsPageFilter>(f),
             f =>
@@ -139,7 +147,9 @@ public class ResponseCacheFilterApplicationModelProviderTest
     [ResponseCache(CacheProfileName = "TestCacheProfile")]
     private class ModelWithResponseCacheProfile : PageModel
     {
-        public virtual void OnGet() { }
+        public virtual void OnGet()
+        {
+        }
     }
 
     private static PageApplicationModelProviderContext GetApplicationProviderContext(

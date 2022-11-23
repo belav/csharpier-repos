@@ -16,7 +16,9 @@ namespace Microsoft.Extensions.Caching.Distributed
         private readonly MemoryCache _memCache;
 
         public MemoryDistributedCache(IOptions<MemoryDistributedCacheOptions> optionsAccessor)
-            : this(optionsAccessor, NullLoggerFactory.Instance) { }
+            : this(optionsAccessor, NullLoggerFactory.Instance)
+        {
+        }
 
         public MemoryDistributedCache(
             IOptions<MemoryDistributedCacheOptions> optionsAccessor,

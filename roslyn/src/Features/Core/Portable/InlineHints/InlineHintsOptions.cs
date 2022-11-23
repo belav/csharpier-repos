@@ -21,7 +21,9 @@ internal readonly record struct InlineHintsOptions
     public SymbolDescriptionOptions DisplayOptions { get; init; } =
         SymbolDescriptionOptions.Default;
 
-    public InlineHintsOptions() { }
+    public InlineHintsOptions()
+    {
+    }
 
     public static readonly InlineHintsOptions Default = new();
 }

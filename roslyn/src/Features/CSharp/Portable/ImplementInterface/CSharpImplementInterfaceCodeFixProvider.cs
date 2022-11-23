@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpImplementInterfaceCodeFixProvider() { }
+        public CSharpImplementInterfaceCodeFixProvider()
+        {
+        }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS0535, CS0737, CS0738);

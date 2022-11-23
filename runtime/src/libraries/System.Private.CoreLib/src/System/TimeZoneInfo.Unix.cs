@@ -401,15 +401,23 @@ namespace System
                 {
                     return new TimeZoneInfo(rawData, id, dstDisabled: false); // create a TimeZoneInfo instance from the TZif data w/ DST support
                 }
-                catch (ArgumentException) { }
-                catch (InvalidTimeZoneException) { }
+                catch (ArgumentException)
+                {
+                }
+                catch (InvalidTimeZoneException)
+                {
+                }
 
                 try
                 {
                     return new TimeZoneInfo(rawData, id, dstDisabled: true); // create a TimeZoneInfo instance from the TZif data w/o DST support
                 }
-                catch (ArgumentException) { }
-                catch (InvalidTimeZoneException) { }
+                catch (ArgumentException)
+                {
+                }
+                catch (InvalidTimeZoneException)
+                {
+                }
             }
             return null;
         }

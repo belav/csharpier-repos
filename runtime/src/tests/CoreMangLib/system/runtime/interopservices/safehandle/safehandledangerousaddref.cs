@@ -8,7 +8,9 @@ using System.Runtime.InteropServices; // For SafeHandle
 public class MySafeValidHandle : SafeHandle
 {
     [SecurityCritical]
-    public MySafeValidHandle() : base(IntPtr.Zero, true) { }
+    public MySafeValidHandle() : base(IntPtr.Zero, true)
+    {
+    }
 
     public override bool IsInvalid
     {
@@ -27,7 +29,9 @@ public class MySafeValidHandle : SafeHandle
 public class MySafeInValidHandle : SafeHandle
 {
     [SecurityCritical]
-    public MySafeInValidHandle() : base(IntPtr.Zero, true) { }
+    public MySafeInValidHandle() : base(IntPtr.Zero, true)
+    {
+    }
 
     public override bool IsInvalid
     {

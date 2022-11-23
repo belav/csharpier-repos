@@ -12,7 +12,9 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
     {
         public uint FunctionLength { get; set; }
 
-        public UnwindInfo() { }
+        public UnwindInfo()
+        {
+        }
 
         public UnwindInfo(byte[] image, int offset)
         {

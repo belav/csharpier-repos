@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Remote.Storage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteWorkspacePersistentStorageLocationService() { }
+        public RemoteWorkspacePersistentStorageLocationService()
+        {
+        }
 
         public override bool IsSupported(Workspace workspace) => true;
     }
@@ -41,7 +43,9 @@ namespace Microsoft.CodeAnalysis.Remote.Storage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteTemporaryWorkspacePersistentStorageLocationService() { }
+        public RemoteTemporaryWorkspacePersistentStorageLocationService()
+        {
+        }
 
         public override bool IsSupported(Workspace workspace) => true;
     }

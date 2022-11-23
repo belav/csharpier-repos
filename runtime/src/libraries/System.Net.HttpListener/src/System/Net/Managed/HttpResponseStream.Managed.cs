@@ -145,7 +145,9 @@ namespace System.Net
                 {
                     _stream.Write(buffer, offset, count);
                 }
-                catch { }
+                catch
+                {
+                }
             }
             else
             {
@@ -171,7 +173,9 @@ namespace System.Net
             {
                 await _stream.WriteAsync(buffer.AsMemory(offset, count)).ConfigureAwait(false);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void WriteCore(byte[] buffer, int offset, int size)
@@ -286,7 +290,9 @@ namespace System.Net
                     if (_response.SendChunked)
                         _stream.Write(s_crlf, 0, 2);
                 }
-                catch { }
+                catch
+                {
+                }
             }
             else
             {

@@ -51,7 +51,9 @@ namespace System.Xml.Serialization
                 string? arrayName,
                 int i,
                 MemberMapping mapping
-            ) : this(outerClass, source, null, arrayName, i, mapping, false, null) { }
+            ) : this(outerClass, source, null, arrayName, i, mapping, false, null)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderILGen outerClass,
@@ -60,7 +62,9 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping,
                 string? choiceSource
-            ) : this(outerClass, source, null, arrayName, i, mapping, false, choiceSource) { }
+            ) : this(outerClass, source, null, arrayName, i, mapping, false, choiceSource)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderILGen outerClass,
@@ -69,7 +73,9 @@ namespace System.Xml.Serialization
                 string? arrayName,
                 int i,
                 MemberMapping mapping
-            ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, null) { }
+            ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, null)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderILGen outerClass,
@@ -80,7 +86,8 @@ namespace System.Xml.Serialization
                 MemberMapping mapping,
                 string? choiceSource
             ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, choiceSource)
-            { }
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderILGen outerClass,
@@ -89,7 +96,9 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping,
                 bool multiRef
-            ) : this(outerClass, source, null, arrayName, i, mapping, multiRef, null) { }
+            ) : this(outerClass, source, null, arrayName, i, mapping, multiRef, null)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderILGen outerClass,
@@ -229,7 +238,9 @@ namespace System.Xml.Serialization
 
         [RequiresUnreferencedCode("Creates XmlSerializationILGen")]
         internal XmlSerializationReaderILGen(TypeScope[] scopes, string access, string className)
-            : base(scopes, access, className) { }
+            : base(scopes, access, className)
+        {
+        }
 
         [RequiresUnreferencedCode("calls WriteReflectionInit")]
         internal void GenerateBegin()
@@ -2736,7 +2747,9 @@ namespace System.Xml.Serialization
                     {
                         ilg.Ldarg(0); // for calling CollapseWhitespace
                     }
-                    else { }
+                    else
+                    {
+                    }
                     MethodInfo XmlSerializationReader_get_Reader =
                         typeof(XmlSerializationReader).GetMethod(
                             "get_Reader",
@@ -3361,7 +3374,9 @@ namespace System.Xml.Serialization
                 ilg.Load(null);
                 ilg.Beq(labelTrue);
             }
-            else { }
+            else
+            {
+            }
             MethodInfo XmlSerializationReader_get_Reader = typeof(XmlSerializationReader).GetMethod(
                 "get_Reader",
                 CodeGenerator.InstanceBindingFlags,
@@ -3557,7 +3572,9 @@ namespace System.Xml.Serialization
                     ilg.Else();
                     doEndIf = true;
                 }
-                else { }
+                else
+                {
+                }
 
                 if (
                     (element.Mapping.TypeDesc!.Type == typeof(TimeSpan))

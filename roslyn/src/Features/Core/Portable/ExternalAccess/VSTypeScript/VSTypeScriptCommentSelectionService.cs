@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptCommentSelectionService() { }
+        public VSTypeScriptCommentSelectionService()
+        {
+        }
 
         public CommentSelectionInfo GetInfo() =>
             new(

@@ -28,16 +28,24 @@ public class TestSqlServerRetryingExecutionStrategy : SqlServerRetryingExecution
             DefaultMaxRetryCount,
             DefaultMaxDelay,
             _additionalErrorNumbers
-        ) { }
+        )
+    {
+    }
 
     public TestSqlServerRetryingExecutionStrategy(DbContext context)
-        : base(context, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers) { }
+        : base(context, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers)
+    {
+    }
 
     public TestSqlServerRetryingExecutionStrategy(DbContext context, TimeSpan maxDelay)
-        : base(context, DefaultMaxRetryCount, maxDelay, _additionalErrorNumbers) { }
+        : base(context, DefaultMaxRetryCount, maxDelay, _additionalErrorNumbers)
+    {
+    }
 
     public TestSqlServerRetryingExecutionStrategy(ExecutionStrategyDependencies dependencies)
-        : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers) { }
+        : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers)
+    {
+    }
 
     protected override bool ShouldRetryOn(Exception exception)
     {

@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class AdamInstanceCollection : ReadOnlyCollectionBase
     {
-        internal AdamInstanceCollection() { }
+        internal AdamInstanceCollection()
+        {
+        }
 
         internal AdamInstanceCollection(ArrayList values)
         {

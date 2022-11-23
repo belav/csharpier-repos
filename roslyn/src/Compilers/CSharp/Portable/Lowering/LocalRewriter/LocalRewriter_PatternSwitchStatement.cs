@@ -77,7 +77,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.SwitchSections.SelectAsArray(section => section.Syntax),
                     // Only add instrumentation (such as sequence points) if the node is not compiler-generated.
                     generateInstrumentation: localRewriter.Instrument && !node.WasCompilerGenerated
-                ) { }
+                )
+            {
+            }
 
             private BoundStatement LowerSwitchStatement(BoundSwitchStatement node)
             {

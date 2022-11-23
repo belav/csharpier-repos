@@ -57,7 +57,9 @@ namespace Internal.Runtime.TypeLoader
         {
             internal uint OtherDictionarySlot;
 
-            internal override void Prepare(TypeBuilder builder) { }
+            internal override void Prepare(TypeBuilder builder)
+            {
+            }
 
             internal override IntPtr Create(TypeBuilder builder)
             {
@@ -675,7 +677,9 @@ namespace Internal.Runtime.TypeLoader
         {
             internal IntPtr Value;
 
-            internal override unsafe void Prepare(TypeBuilder builder) { }
+            internal override unsafe void Prepare(TypeBuilder builder)
+            {
+            }
 
             internal override unsafe IntPtr Create(TypeBuilder builder)
             {

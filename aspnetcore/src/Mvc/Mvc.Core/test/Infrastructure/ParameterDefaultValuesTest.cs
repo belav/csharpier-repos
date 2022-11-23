@@ -55,21 +55,29 @@ public class ParameterDefaultValuesTest
             [DefaultValue("hello")] string input1,
             [DefaultValue(true)] bool input2,
             [DefaultValue(10)] int input3
-        ) { }
+        )
+        {
+        }
 
-        public void DefaultValues(string input1 = "hello", bool input2 = true, int input3 = 20) { }
+        public void DefaultValues(string input1 = "hello", bool input2 = true, int input3 = 20)
+        {
+        }
 
         public void DefaultValuesAndAttributes(
             [DefaultValue("Hi")] string input1 = "hello",
             [DefaultValue(10)] int input3 = 20
-        ) { }
+        )
+        {
+        }
 
         public void NoDefaultAttributesAndValues(
             string input1,
             int input2,
             bool input3,
             TestObject input4
-        ) { }
+        )
+        {
+        }
 
         // Note that default value for DateTime currently throws a FormatException
         // https://github.com/dotnet/corefx/issues/12338
@@ -78,6 +86,8 @@ public class ParameterDefaultValuesTest
             TimeSpan timeSpan = default(TimeSpan),
             DateTime dateTime = default(DateTime),
             DateTimeOffset dateTimeOffset = default(DateTimeOffset)
-        ) { }
+        )
+        {
+        }
     }
 }

@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             string name,
             string[] languages,
             params string[] identifiers
-        ) : this(contractType, name, languages, supportsUnannotatedAPIs: false, identifiers) { }
+        ) : this(contractType, name, languages, supportsUnannotatedAPIs: false, identifiers)
+        {
+        }
 
         internal ExportEmbeddedLanguageFeatureServiceAttribute(
             Type contractType,

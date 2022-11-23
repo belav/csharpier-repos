@@ -30,7 +30,9 @@ public class TableValuedFunctionExpression : TableExpressionBase, ITableBasedExp
             storeFunction,
             arguments,
             annotations: null
-        ) { }
+        )
+    {
+    }
 
     private TableValuedFunctionExpression(
         string alias,

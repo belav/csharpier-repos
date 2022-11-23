@@ -52,7 +52,9 @@ namespace System.Resources
         protected MissingSatelliteAssemblyException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
 
         public string? CultureName => _cultureName;
     }

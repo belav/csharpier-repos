@@ -18,17 +18,23 @@ namespace System.Diagnostics.Tracing
     [System.AttributeUsageAttribute(System.AttributeTargets.Method)]
     public sealed partial class EventAttribute : System.Attribute
     {
-        public EventAttribute(int eventId) { }
+        public EventAttribute(int eventId)
+        {
+        }
 
         public System.Diagnostics.Tracing.EventActivityOptions ActivityOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventChannel Channel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int EventId
         {
@@ -37,37 +43,51 @@ namespace System.Diagnostics.Tracing
         public System.Diagnostics.Tracing.EventKeywords Keywords
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Message
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventOpcode Opcode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventTags Tags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventTask Task
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -90,7 +110,9 @@ namespace System.Diagnostics.Tracing
 
     public partial class EventCommandEventArgs : System.EventArgs
     {
-        internal EventCommandEventArgs() { }
+        internal EventCommandEventArgs()
+        {
+        }
 
         public System.Collections.Generic.IDictionary<string, string?>? Arguments
         {
@@ -118,29 +140,39 @@ namespace System.Diagnostics.Tracing
     )]
     public partial class EventDataAttribute : System.Attribute
     {
-        public EventDataAttribute() { }
+        public EventDataAttribute()
+        {
+        }
 
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
     public partial class EventFieldAttribute : System.Attribute
     {
-        public EventFieldAttribute() { }
+        public EventFieldAttribute()
+        {
+        }
 
         public System.Diagnostics.Tracing.EventFieldFormat Format
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventFieldTags Tags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -164,7 +196,9 @@ namespace System.Diagnostics.Tracing
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
     public partial class EventIgnoreAttribute : System.Attribute
     {
-        public EventIgnoreAttribute() { }
+        public EventIgnoreAttribute()
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -194,40 +228,60 @@ namespace System.Diagnostics.Tracing
 
     public abstract partial class EventListener : System.IDisposable
     {
-        protected EventListener() { }
+        protected EventListener()
+        {
+        }
 
         public event System.EventHandler<System.Diagnostics.Tracing.EventSourceCreatedEventArgs>? EventSourceCreated
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler<System.Diagnostics.Tracing.EventWrittenEventArgs>? EventWritten
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void DisableEvents(System.Diagnostics.Tracing.EventSource eventSource) { }
+        public void DisableEvents(System.Diagnostics.Tracing.EventSource eventSource)
+        {
+        }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
 
         public void EnableEvents(
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Diagnostics.Tracing.EventLevel level
-        ) { }
+        )
+        {
+        }
 
         public void EnableEvents(
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Diagnostics.Tracing.EventLevel level,
             System.Diagnostics.Tracing.EventKeywords matchAnyKeyword
-        ) { }
+        )
+        {
+        }
 
         public void EnableEvents(
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Diagnostics.Tracing.EventLevel level,
             System.Diagnostics.Tracing.EventKeywords matchAnyKeyword,
             System.Collections.Generic.IDictionary<string, string?>? arguments
-        ) { }
+        )
+        {
+        }
 
         protected static int EventSourceIndex(System.Diagnostics.Tracing.EventSource eventSource)
         {
@@ -236,11 +290,15 @@ namespace System.Diagnostics.Tracing
 
         protected internal virtual void OnEventSourceCreated(
             System.Diagnostics.Tracing.EventSource eventSource
-        ) { }
+        )
+        {
+        }
 
         protected internal virtual void OnEventWritten(
             System.Diagnostics.Tracing.EventWrittenEventArgs eventData
-        ) { }
+        )
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -273,29 +331,43 @@ namespace System.Diagnostics.Tracing
     )]
     public partial class EventSource : System.IDisposable
     {
-        protected EventSource() { }
+        protected EventSource()
+        {
+        }
 
-        protected EventSource(bool throwOnEventWriteErrors) { }
+        protected EventSource(bool throwOnEventWriteErrors)
+        {
+        }
 
-        protected EventSource(System.Diagnostics.Tracing.EventSourceSettings settings) { }
+        protected EventSource(System.Diagnostics.Tracing.EventSourceSettings settings)
+        {
+        }
 
         protected EventSource(
             System.Diagnostics.Tracing.EventSourceSettings settings,
             params string[]? traits
-        ) { }
+        )
+        {
+        }
 
-        public EventSource(string eventSourceName) { }
+        public EventSource(string eventSourceName)
+        {
+        }
 
         public EventSource(
             string eventSourceName,
             System.Diagnostics.Tracing.EventSourceSettings config
-        ) { }
+        )
+        {
+        }
 
         public EventSource(
             string eventSourceName,
             System.Diagnostics.Tracing.EventSourceSettings config,
             params string[]? traits
-        ) { }
+        )
+        {
+        }
 
         public System.Exception? ConstructionException
         {
@@ -319,15 +391,25 @@ namespace System.Diagnostics.Tracing
         }
         public event System.EventHandler<System.Diagnostics.Tracing.EventCommandEventArgs>? EventCommandExecuted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~EventSource() { }
+        ~EventSource()
+        {
+        }
 
         public static string? GenerateManifest(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -396,15 +478,21 @@ namespace System.Diagnostics.Tracing
 
         protected virtual void OnEventCommand(
             System.Diagnostics.Tracing.EventCommandEventArgs command
-        ) { }
+        )
+        {
+        }
 
         public static void SendCommand(
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Diagnostics.Tracing.EventCommand command,
             System.Collections.Generic.IDictionary<string, string?>? commandArguments
-        ) { }
+        )
+        {
+        }
 
-        public static void SetCurrentThreadActivityId(System.Guid activityId) { }
+        public static void SetCurrentThreadActivityId(System.Guid activityId)
+        {
+        }
 
         public static void SetCurrentThreadActivityId(
             System.Guid activityId,
@@ -419,51 +507,88 @@ namespace System.Diagnostics.Tracing
             throw null;
         }
 
-        public void Write(string? eventName) { }
+        public void Write(string? eventName)
+        {
+        }
 
-        public void Write(
-            string? eventName,
-            System.Diagnostics.Tracing.EventSourceOptions options
-        ) { }
+        public void Write(string? eventName, System.Diagnostics.Tracing.EventSourceOptions options)
+        {
+        }
 
-        protected void WriteEvent(int eventId) { }
+        protected void WriteEvent(int eventId)
+        {
+        }
 
-        protected void WriteEvent(int eventId, byte[]? arg1) { }
+        protected void WriteEvent(int eventId, byte[]? arg1)
+        {
+        }
 
-        protected void WriteEvent(int eventId, int arg1) { }
+        protected void WriteEvent(int eventId, int arg1)
+        {
+        }
 
-        protected void WriteEvent(int eventId, int arg1, int arg2) { }
+        protected void WriteEvent(int eventId, int arg1, int arg2)
+        {
+        }
 
-        protected void WriteEvent(int eventId, int arg1, int arg2, int arg3) { }
+        protected void WriteEvent(int eventId, int arg1, int arg2, int arg3)
+        {
+        }
 
-        protected void WriteEvent(int eventId, int arg1, string? arg2) { }
+        protected void WriteEvent(int eventId, int arg1, string? arg2)
+        {
+        }
 
-        protected void WriteEvent(int eventId, long arg1) { }
+        protected void WriteEvent(int eventId, long arg1)
+        {
+        }
 
-        protected void WriteEvent(int eventId, long arg1, byte[]? arg2) { }
+        protected void WriteEvent(int eventId, long arg1, byte[]? arg2)
+        {
+        }
 
-        protected void WriteEvent(int eventId, long arg1, long arg2) { }
+        protected void WriteEvent(int eventId, long arg1, long arg2)
+        {
+        }
 
-        protected void WriteEvent(int eventId, long arg1, long arg2, long arg3) { }
+        protected void WriteEvent(int eventId, long arg1, long arg2, long arg3)
+        {
+        }
 
-        protected void WriteEvent(int eventId, long arg1, string? arg2) { }
+        protected void WriteEvent(int eventId, long arg1, string? arg2)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
         )]
-        protected void WriteEvent(int eventId, params object?[] args) { }
+        protected void WriteEvent(int eventId, params object?[] args)
+        {
+        }
 
-        protected void WriteEvent(int eventId, string? arg1) { }
+        protected void WriteEvent(int eventId, string? arg1)
+        {
+        }
 
-        protected void WriteEvent(int eventId, string? arg1, int arg2) { }
+        protected void WriteEvent(int eventId, string? arg1, int arg2)
+        {
+        }
 
-        protected void WriteEvent(int eventId, string? arg1, int arg2, int arg3) { }
+        protected void WriteEvent(int eventId, string? arg1, int arg2, int arg3)
+        {
+        }
 
-        protected void WriteEvent(int eventId, string? arg1, long arg2) { }
+        protected void WriteEvent(int eventId, string? arg1, long arg2)
+        {
+        }
 
-        protected void WriteEvent(int eventId, string? arg1, string? arg2) { }
+        protected void WriteEvent(int eventId, string? arg1, string? arg2)
+        {
+        }
 
-        protected void WriteEvent(int eventId, string? arg1, string? arg2, string? arg3) { }
+        protected void WriteEvent(int eventId, string? arg1, string? arg2, string? arg3)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -473,7 +598,9 @@ namespace System.Diagnostics.Tracing
             int eventId,
             int eventDataCount,
             System.Diagnostics.Tracing.EventSource.EventData* data
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -482,7 +609,9 @@ namespace System.Diagnostics.Tracing
             int eventId,
             System.Guid relatedActivityId,
             params object?[] args
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -493,7 +622,9 @@ namespace System.Diagnostics.Tracing
             System.Guid* relatedActivityId,
             int eventDataCount,
             System.Diagnostics.Tracing.EventSource.EventData* data
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -503,7 +634,9 @@ namespace System.Diagnostics.Tracing
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 T
-        >(string? eventName, System.Diagnostics.Tracing.EventSourceOptions options, T data) { }
+        >(string? eventName, System.Diagnostics.Tracing.EventSourceOptions options, T data)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -519,7 +652,9 @@ namespace System.Diagnostics.Tracing
             ref System.Guid activityId,
             ref System.Guid relatedActivityId,
             ref T data
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -529,11 +664,9 @@ namespace System.Diagnostics.Tracing
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 T
-        >(
-            string? eventName,
-            ref System.Diagnostics.Tracing.EventSourceOptions options,
-            ref T data
-        ) { }
+        >(string? eventName, ref System.Diagnostics.Tracing.EventSourceOptions options, ref T data)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -543,7 +676,9 @@ namespace System.Diagnostics.Tracing
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 T
-        >(string? eventName, T data) { }
+        >(string? eventName, T data)
+        {
+        }
 
         [System.Runtime.InteropServices.StructLayoutAttribute(
             System.Runtime.InteropServices.LayoutKind.Sequential
@@ -554,12 +689,16 @@ namespace System.Diagnostics.Tracing
             public System.IntPtr DataPointer
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public int Size
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
         }
     }
@@ -567,28 +706,38 @@ namespace System.Diagnostics.Tracing
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
     public sealed partial class EventSourceAttribute : System.Attribute
     {
-        public EventSourceAttribute() { }
+        public EventSourceAttribute()
+        {
+        }
 
         public string? Guid
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? LocalizationResources
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class EventSourceCreatedEventArgs : System.EventArgs
     {
-        public EventSourceCreatedEventArgs() { }
+        public EventSourceCreatedEventArgs()
+        {
+        }
 
         public System.Diagnostics.Tracing.EventSource? EventSource
         {
@@ -598,16 +747,24 @@ namespace System.Diagnostics.Tracing
 
     public partial class EventSourceException : System.Exception
     {
-        public EventSourceException() { }
+        public EventSourceException()
+        {
+        }
 
         protected EventSourceException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public EventSourceException(string? message) { }
+        public EventSourceException(string? message)
+        {
+        }
 
-        public EventSourceException(string? message, System.Exception? innerException) { }
+        public EventSourceException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     [System.Runtime.InteropServices.StructLayoutAttribute(
@@ -619,27 +776,37 @@ namespace System.Diagnostics.Tracing
         public System.Diagnostics.Tracing.EventActivityOptions ActivityOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventKeywords Keywords
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventOpcode Opcode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventTags Tags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -665,7 +832,9 @@ namespace System.Diagnostics.Tracing
 
     public partial class EventWrittenEventArgs : System.EventArgs
     {
-        internal EventWrittenEventArgs() { }
+        internal EventWrittenEventArgs()
+        {
+        }
 
         public System.Guid ActivityId
         {
@@ -740,6 +909,8 @@ namespace System.Diagnostics.Tracing
     [System.AttributeUsageAttribute(System.AttributeTargets.Method)]
     public sealed partial class NonEventAttribute : System.Attribute
     {
-        public NonEventAttribute() { }
+        public NonEventAttribute()
+        {
+        }
     }
 }

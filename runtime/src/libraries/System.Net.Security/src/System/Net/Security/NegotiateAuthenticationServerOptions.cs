@@ -19,7 +19,9 @@ namespace System.Net.Security
         /// <summary>
         /// Initializes a new instance of the <see cref="NegotiateAuthenticationServerOptions" /> class.
         /// </summary>
-        public NegotiateAuthenticationServerOptions() { }
+        public NegotiateAuthenticationServerOptions()
+        {
+        }
 
         /// <summary>
         /// Specifies the GSSAPI authentication package used for the authentication.

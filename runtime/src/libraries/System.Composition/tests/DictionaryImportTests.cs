@@ -18,19 +18,29 @@ using Xunit;
 
 namespace System.Composition.UnitTests
 {
-    public interface IValued { }
+    public interface IValued
+    {
+    }
 
     [Export(typeof(IValued)), ExportMetadata("Value", "A")]
-    public class ValueA : IValued { }
+    public class ValueA : IValued
+    {
+    }
 
     [Export(typeof(IValued)), ExportMetadata("Value", "B")]
-    public class ValueB : IValued { }
+    public class ValueB : IValued
+    {
+    }
 
     [Export(typeof(IValued))]
-    public class ValueMissing : IValued { }
+    public class ValueMissing : IValued
+    {
+    }
 
     [Export(typeof(IValued)), ExportMetadata("Value", 1)]
-    public class NonStringValue : IValued { }
+    public class NonStringValue : IValued
+    {
+    }
 
     [Export]
     public class Consumer

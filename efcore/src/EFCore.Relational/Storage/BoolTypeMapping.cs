@@ -26,13 +26,17 @@ public class BoolTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public BoolTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Boolean)
-        : base(storeType, typeof(bool), dbType) { }
+        : base(storeType, typeof(bool), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="BoolTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected BoolTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected BoolTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

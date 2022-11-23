@@ -95,7 +95,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                     )
                 );
             }
-            set { }
+            set
+            {
+            }
         }
 
         private string _requiredPrefix;

@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RenameTracking
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRenameTrackingLanguageHeuristicsService() { }
+        public CSharpRenameTrackingLanguageHeuristicsService()
+        {
+        }
 
         public bool IsIdentifierValidForRenameTracking(string name) =>
             name is not "var" and not "dynamic" and not "_";

@@ -713,7 +713,9 @@ namespace System.Management
                 {
                     msg = (string)errObj["Description"];
                 }
-                catch { }
+                catch
+                {
+                }
 
             throw new ManagementException(errorCode, msg, errObj);
         }
@@ -735,7 +737,9 @@ namespace System.Management
                 {
                     msg = (string)errObj["Description"];
                 }
-                catch { }
+                catch
+                {
+                }
 
             throw new ManagementException(e, msg, errObj);
         }
@@ -772,7 +776,9 @@ namespace System.Management
                 else
                     errorCode = (ManagementStatus)this.HResult;
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -789,7 +795,9 @@ namespace System.Management
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementException'/> class</para>
         /// </summary>
-        public ManagementException() : this(ManagementStatus.Failed, "", null) { }
+        public ManagementException() : this(ManagementStatus.Failed, "", null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementException'/>
@@ -797,7 +805,8 @@ namespace System.Management
         /// <param name='message'>The message that describes the error.</param>
         /// </summary>
         public ManagementException(string message) : this(ManagementStatus.Failed, message, null)
-        { }
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a empty new instance of the <see cref='System.Management.ManagementException'/> class </para>
@@ -866,7 +875,9 @@ namespace System.Management
                     if (hr != 0)
                         hr = statusCode.GetErrorCodeText_((int)errorCode, 0, 0, out msg);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return msg;

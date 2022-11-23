@@ -32,7 +32,9 @@ namespace System.Security.Cryptography
                     s_useMachineKeyStore
                 ),
                 true
-            ) { }
+            )
+        {
+        }
 
         public RSACryptoServiceProvider(int dwKeySize)
             : this(
@@ -44,14 +46,20 @@ namespace System.Security.Cryptography
                     s_useMachineKeyStore
                 ),
                 false
-            ) { }
+            )
+        {
+        }
 
         [SupportedOSPlatform("windows")]
         public RSACryptoServiceProvider(int dwKeySize, CspParameters? parameters)
-            : this(dwKeySize, parameters, false) { }
+            : this(dwKeySize, parameters, false)
+        {
+        }
 
         [SupportedOSPlatform("windows")]
-        public RSACryptoServiceProvider(CspParameters? parameters) : this(0, parameters, true) { }
+        public RSACryptoServiceProvider(CspParameters? parameters) : this(0, parameters, true)
+        {
+        }
 
         private RSACryptoServiceProvider(
             int keySize,

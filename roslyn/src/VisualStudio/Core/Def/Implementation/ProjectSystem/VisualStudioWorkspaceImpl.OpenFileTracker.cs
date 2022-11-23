@@ -132,7 +132,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 string newMoniker,
                 string oldMoniker,
                 ITextBuffer buffer
-            ) { }
+            )
+            {
+            }
 
             public static async Task<OpenFileTracker> CreateAsync(
                 VisualStudioWorkspaceImpl workspace,

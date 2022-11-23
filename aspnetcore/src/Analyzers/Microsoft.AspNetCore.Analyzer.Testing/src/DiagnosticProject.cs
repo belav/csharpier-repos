@@ -114,7 +114,9 @@ public class DiagnosticProject
     {
         public static AssemblyLoader Instance = new AssemblyLoader();
 
-        public void AddDependencyLocation(string fullPath) { }
+        public void AddDependencyLocation(string fullPath)
+        {
+        }
 
         public Assembly LoadFromPath(string fullPath)
         {

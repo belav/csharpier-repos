@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertToTopLevelStatementsCodeFixProvider() { }
+        public ConvertToTopLevelStatementsCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseTopLevelStatementsId);

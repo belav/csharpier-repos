@@ -975,7 +975,9 @@ namespace System.Data.Common
 
     internal sealed class LoadAdapter : DataAdapter
     {
-        internal LoadAdapter() { }
+        internal LoadAdapter()
+        {
+        }
 
         internal int FillFromReader(
             DataTable[] dataTables,

@@ -192,7 +192,9 @@ namespace Microsoft.CodeAnalysis.Scripting
                 allowUnsafe: other.AllowUnsafe,
                 warningLevel: other.WarningLevel,
                 parseOptions: other.ParseOptions
-            ) { }
+            )
+        {
+        }
 
         // a reference to an assembly should by default be equivalent to #r, which applies recursive global alias:
         private static readonly MetadataReferenceProperties s_assemblyReferenceProperties =

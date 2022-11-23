@@ -34,7 +34,9 @@ namespace ObjectFormatterFixtures
             {
                 public class D<Q, R>
                 {
-                    public class E { }
+                    public class E
+                    {
+                    }
                 }
             }
         }
@@ -60,7 +62,9 @@ namespace ObjectFormatterFixtures
             nameof(ArrayParameters)
         );
 
-        public void ArrayParameters(int[] arrayOne, int[,] arrayTwo, int[,,] arrayThree) { }
+        public void ArrayParameters(int[] arrayOne, int[,] arrayTwo, int[,,] arrayThree)
+        {
+        }
     }
 
     internal class RecursiveRootHidden
@@ -76,7 +80,9 @@ namespace ObjectFormatterFixtures
     {
         private class Proxy
         {
-            public Proxy() { }
+            public Proxy()
+            {
+            }
 
             public Proxy(Node node)
             {
@@ -109,9 +115,13 @@ namespace ObjectFormatterFixtures
     {
         private class Proxy
         {
-            public Proxy() { }
+            public Proxy()
+            {
+            }
 
-            public Proxy(Node c) { }
+            public Proxy(Node c)
+            {
+            }
 
             public readonly int x;
             public readonly Node p = new Node();
@@ -136,9 +146,13 @@ namespace ObjectFormatterFixtures
 
     internal class ComplexProxy : ComplexProxyBase
     {
-        public ComplexProxy() { }
+        public ComplexProxy()
+        {
+        }
 
-        public ComplexProxy(object b) { }
+        public ComplexProxy(object b)
+        {
+        }
 
         [DebuggerDisplay("*1")]
         public int _02_public_property_dd
@@ -242,7 +256,9 @@ namespace ObjectFormatterFixtures
         [DebuggerDisplay("{ReturnVoid()}")]
         public readonly int _26_3;
 
-        private void ReturnVoid() { }
+        private void ReturnVoid()
+        {
+        }
 
         [DebuggerDisplay("{F1(1)}")]
         public readonly int _26_4;
@@ -306,21 +322,29 @@ namespace ObjectFormatterFixtures
         public int _38_private_get_public_set
         {
             private get { return 1; }
-            set { }
+            set
+            {
+            }
         }
         public int _39_public_get_private_set
         {
             get { return 1; }
-            private set { }
+            private set
+            {
+            }
         }
         private int _40_private_get_private_set
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
         private int _41_set_only_property
         {
-            set { }
+            set
+            {
+            }
         }
 
         public override string ToString()
@@ -350,7 +374,9 @@ namespace ObjectFormatterFixtures
         [DebuggerDisplay("pxy")]
         private class Proxy
         {
-            public Proxy(object x) { }
+            public Proxy(object x)
+            {
+            }
 
             public readonly int A;
             public readonly int B;
@@ -369,9 +395,13 @@ namespace ObjectFormatterFixtures
     }
 
     [DebuggerDisplay("DebuggerDisplayValue")]
-    internal class BaseClassWithDebuggerDisplay { }
+    internal class BaseClassWithDebuggerDisplay
+    {
+    }
 
-    internal class InheritedDebuggerDisplay : BaseClassWithDebuggerDisplay { }
+    internal class InheritedDebuggerDisplay : BaseClassWithDebuggerDisplay
+    {
+    }
 
     internal class ToStringException
     {
@@ -433,7 +463,9 @@ namespace ObjectFormatterFixtures
             get { return new[] { 1, 2 }; }
         }
 
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
         public ICollection Values
         {
@@ -443,10 +475,14 @@ namespace ObjectFormatterFixtures
         public object this[object key]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void CopyTo(Array array, int index) { }
+        public void CopyTo(Array array, int index)
+        {
+        }
 
         public int Count
         {
@@ -494,7 +530,9 @@ namespace ObjectFormatterFixtures
                 return _i < 5;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
             public DictionaryEntry Entry
             {

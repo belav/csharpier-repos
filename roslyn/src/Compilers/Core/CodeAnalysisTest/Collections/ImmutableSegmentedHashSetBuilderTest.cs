@@ -366,7 +366,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         private class CustomEqualityComparer : IEqualityComparer<int>
         {
-            private CustomEqualityComparer() { }
+            private CustomEqualityComparer()
+            {
+            }
 
             public static CustomEqualityComparer Instance { get; } = new CustomEqualityComparer();
 

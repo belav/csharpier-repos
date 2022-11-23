@@ -15,8 +15,12 @@ namespace System.Net.Security
 {
     internal class SafeDeleteSslContext : SafeDeleteContext
     {
-        public SafeDeleteSslContext(IntPtr handle) : base(handle, true) { }
+        public SafeDeleteSslContext(IntPtr handle) : base(handle, true)
+        {
+        }
 
-        public SafeDeleteSslContext(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
+        public SafeDeleteSslContext(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        {
+        }
     }
 }

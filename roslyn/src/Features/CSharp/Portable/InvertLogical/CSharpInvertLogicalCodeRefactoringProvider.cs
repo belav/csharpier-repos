@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertLogical
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpInvertLogicalCodeRefactoringProvider() { }
+        public CSharpInvertLogicalCodeRefactoringProvider()
+        {
+        }
 
         protected override string GetOperatorText(SyntaxKind binaryExprKind) =>
             binaryExprKind == SyntaxKind.LogicalAndExpression

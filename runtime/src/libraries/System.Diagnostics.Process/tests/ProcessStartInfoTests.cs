@@ -771,7 +771,9 @@ namespace System.Diagnostics.Tests
                         userNames.Add(userName);
                     }
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
 
             return userNames;

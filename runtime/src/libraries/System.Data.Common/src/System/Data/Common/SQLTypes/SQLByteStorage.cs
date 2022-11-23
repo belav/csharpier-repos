@@ -16,7 +16,9 @@ namespace System.Data.Common
         private SqlByte[] _values = default!; // Late-initialized
 
         public SqlByteStorage(DataColumn column)
-            : base(column, typeof(SqlByte), SqlByte.Null, SqlByte.Null, StorageType.SqlByte) { }
+            : base(column, typeof(SqlByte), SqlByte.Null, SqlByte.Null, StorageType.SqlByte)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

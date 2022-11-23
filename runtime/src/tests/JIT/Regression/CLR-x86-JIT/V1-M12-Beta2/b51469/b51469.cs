@@ -8,7 +8,9 @@ namespace Test
 
     struct AA
     {
-        void Method1() { }
+        void Method1()
+        {
+        }
 
         static void Main1()
         {

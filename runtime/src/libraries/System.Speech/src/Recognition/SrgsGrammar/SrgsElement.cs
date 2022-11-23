@@ -15,7 +15,9 @@ namespace System.Speech.Recognition.SrgsGrammar
     [DebuggerTypeProxy(typeof(SrgsElementDebugDisplay))]
     public abstract class SrgsElement : MarshalByRefObject, IElement
     {
-        protected SrgsElement() { }
+        protected SrgsElement()
+        {
+        }
 
         #region Internal methods
 
@@ -41,7 +43,9 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
         }
 
-        void IElement.PostParse(IElement parent) { }
+        void IElement.PostParse(IElement parent)
+        {
+        }
 
         #endregion
 

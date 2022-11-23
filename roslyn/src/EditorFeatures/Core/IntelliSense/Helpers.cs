@@ -307,8 +307,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                         .ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
+            {
+            }
         }
 
         private static ClassifiedTextRunStyle GetClassifiedTextRunStyle(TaggedTextStyle style)

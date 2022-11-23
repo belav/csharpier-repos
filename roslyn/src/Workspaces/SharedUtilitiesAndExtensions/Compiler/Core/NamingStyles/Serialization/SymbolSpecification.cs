@@ -439,13 +439,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             }
 
             public SymbolKindOrTypeKind(SymbolKind symbolKind)
-                : this(SymbolCategory.Other, checked((byte)symbolKind)) { }
+                : this(SymbolCategory.Other, checked((byte)symbolKind))
+            {
+            }
 
             public SymbolKindOrTypeKind(TypeKind typeKind)
-                : this(SymbolCategory.Type, checked((byte)typeKind)) { }
+                : this(SymbolCategory.Type, checked((byte)typeKind))
+            {
+            }
 
             public SymbolKindOrTypeKind(MethodKind methodKind)
-                : this(SymbolCategory.Method, checked((byte)methodKind)) { }
+                : this(SymbolCategory.Method, checked((byte)methodKind))
+            {
+            }
 
             public SymbolKind? SymbolKind =>
                 (_category == SymbolCategory.Other) ? (SymbolKind)_kind : null;

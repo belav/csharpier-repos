@@ -365,7 +365,9 @@ class Tests
             this.t = t;
         }
 
-        public GenericClass() { }
+        public GenericClass()
+        {
+        }
 
         public T ldobj_stobj(ref T t1, ref T t2)
         {
@@ -542,7 +544,9 @@ class Tests
         return 0;
     }
 
-    struct S<T> { }
+    struct S<T>
+    {
+    }
 
     public static int test_0_inline_infinite_polymorphic_recursion()
     {
@@ -697,7 +701,9 @@ class Tests
 
     public class Gamma<T> : Beta<T>
     {
-        static Gamma() { }
+        static Gamma()
+        {
+        }
     }
 
     // #519336
@@ -718,7 +724,9 @@ class Tests
             cctor_count2++;
         }
 
-        public ServiceController() { }
+        public ServiceController()
+        {
+        }
     }
 
     static ServiceController<T> Create<T>()
@@ -800,7 +808,9 @@ class Tests
 
     struct RecStruct<T>
     {
-        public void foo(RecStruct<RecStruct<T>> baz) { }
+        public void foo(RecStruct<RecStruct<T>> baz)
+        {
+        }
     }
 
     public static int test_0_infinite_generic_recursion()
@@ -812,7 +822,9 @@ class Tests
         return 0;
     }
 
-    struct FooStruct { }
+    struct FooStruct
+    {
+    }
 
     bool IsNull2<T>(object value) where T : struct
     {
@@ -898,7 +910,9 @@ class Tests
 
     public class Class2<T> : MarshalByRefObject, IFace1<T>
     {
-        public void Foo() { }
+        public void Foo()
+        {
+        }
     }
 
     public static void VirtualInterfaceCallFromGenericMethod<T>(IFoo f)
@@ -959,7 +973,9 @@ class Tests
             {
                 new SomeClass().ThrowAnException();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public T1 get_default()
@@ -1017,7 +1033,9 @@ class Tests
             this.o = o;
         }
 
-        public void NonGeneric() { }
+        public void NonGeneric()
+        {
+        }
 
         public object Bar<T>()
         {
@@ -1088,7 +1106,9 @@ class Tests
         return 0;
     }
 
-    class Response { }
+    class Response
+    {
+    }
 
     public static int test_0_687865_isinst_with_cache_wrapper()
     {
@@ -1144,7 +1164,9 @@ class Tests
         return 0;
     }
 
-    class A { }
+    class A
+    {
+    }
 
     static List<A> sources = new List<A>();
 
@@ -1165,9 +1187,13 @@ class Tests
         return 0;
     }
 
-    class AClass { }
+    class AClass
+    {
+    }
 
-    class BClass : AClass { }
+    class BClass : AClass
+    {
+    }
 
     public static int test_0_fullaot_variant_iface()
     {
@@ -1234,7 +1260,9 @@ class Tests
 
     public struct Foo2 : IFoo2
     {
-        public void MoveNext() { }
+        public void MoveNext()
+        {
+        }
     }
 
     public static Action Dingus(ref Foo2 f)
@@ -1304,14 +1332,22 @@ class Tests
         return s == "A" ? 0 : 1;
     }
 
-    public interface ICovariant<out R> { }
+    public interface ICovariant<out R>
+    {
+    }
 
     // Deleting the `out` modifier from this line stop the problem
-    public interface IExtCovariant<out R> : ICovariant<R> { }
+    public interface IExtCovariant<out R> : ICovariant<R>
+    {
+    }
 
-    public class Sample<R> : ICovariant<R> { }
+    public class Sample<R> : ICovariant<R>
+    {
+    }
 
-    public interface IMyInterface { }
+    public interface IMyInterface
+    {
+    }
 
     public static int test_0_variant_cast_cache()
     {
@@ -1340,7 +1376,9 @@ class Tests
     class MyClass<T> where T : struct
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public MyClass(int a1, int a2, int a3, int a4, int a5, int a6, Nullable<T> a) { }
+        public MyClass(int a1, int a2, int a3, int a4, int a5, int a6, Nullable<T> a)
+        {
+        }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static MyClass<T> foo()
@@ -1468,7 +1506,9 @@ class Tests
         {
             throw new NotSupportedException();
         }
-        catch (T) { }
+        catch (T)
+        {
+        }
     }
 
     public static int test_0_gshared_catch_open_type()
@@ -1485,7 +1525,9 @@ class Tests
             {
                 throw new NotSupportedException();
             }
-            catch (T) { }
+            catch (T)
+            {
+            }
         }
     }
 
@@ -1528,7 +1570,9 @@ class Tests
         T t;
     }
 
-    struct NoRefGenStruct<T> { }
+    struct NoRefGenStruct<T>
+    {
+    }
 
     struct RefStruct
     {
@@ -1680,5 +1724,7 @@ class Tests
 }
 
 #if !__MOBILE__
-class GenericsTests : Tests { }
+class GenericsTests : Tests
+{
+}
 #endif

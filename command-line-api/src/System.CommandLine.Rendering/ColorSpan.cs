@@ -6,7 +6,9 @@ namespace System.CommandLine.Rendering
     public abstract class ColorSpan : ControlSpan
     {
         protected ColorSpan(string name, AnsiControlCode ansiControlCode)
-            : base(name, ansiControlCode) { }
+            : base(name, ansiControlCode)
+        {
+        }
 
         protected ColorSpan(RgbColor rgbColor, AnsiControlCode ansiControlCode)
             : base(

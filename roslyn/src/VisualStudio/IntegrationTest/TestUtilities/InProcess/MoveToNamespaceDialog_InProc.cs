@@ -15,7 +15,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             MoveToNamespaceDialog.TestAccessor
         >
     {
-        private MoveToNamespaceDialog_InProc() { }
+        private MoveToNamespaceDialog_InProc()
+        {
+        }
 
         public static MoveToNamespaceDialog_InProc Create() => new MoveToNamespaceDialog_InProc();
 

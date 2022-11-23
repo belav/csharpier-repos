@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
         where TSimpleNameSyntax : TExpressionSyntax
         where TExpressionSyntax : SyntaxNode
     {
-        protected AbstractGenerateEnumMemberService() { }
+        protected AbstractGenerateEnumMemberService()
+        {
+        }
 
         protected abstract bool IsIdentifierNameGeneration(SyntaxNode node);
         protected abstract bool TryInitializeIdentifierNameState(

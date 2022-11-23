@@ -23,7 +23,9 @@ namespace System.Data
 
         [RequiresUnreferencedCode("Members of types used in the expression might be trimmed")]
         internal DataExpression(DataTable? table, string? expression)
-            : this(table, expression, null) { }
+            : this(table, expression, null)
+        {
+        }
 
         [RequiresUnreferencedCode("Members of types used in the expression might be trimmed")]
         internal DataExpression(DataTable? table, string? expression, Type? type)

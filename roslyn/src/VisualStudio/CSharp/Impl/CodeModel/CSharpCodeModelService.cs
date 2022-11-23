@@ -50,7 +50,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 BlankLineInGeneratedMethodFormattingRule.Instance,
                 EndRegionFormattingRule.Instance,
                 threadingContext
-            ) { }
+            )
+        {
+        }
 
         private static readonly SymbolDisplayFormat s_codeTypeRefAsFullNameFormat =
             new(

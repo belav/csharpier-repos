@@ -33,7 +33,9 @@ namespace Test
                 while (flag)
                 {
                     SomeAlloc(ref param1);
-                    while (new BB().m_nField2 != 5 && Static4(null)) { }
+                    while (new BB().m_nField2 != 5 && Static4(null))
+                    {
+                    }
                     SomeAlloc(ref local5);
                 }
             }

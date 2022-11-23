@@ -7,7 +7,9 @@ namespace System.CommandLine.Binding
     {
         public static readonly IValueSource Instance = new TypeDefaultValueSource();
 
-        private TypeDefaultValueSource() { }
+        private TypeDefaultValueSource()
+        {
+        }
 
         public bool TryGetValue(
             IValueDescriptor valueDescriptor,

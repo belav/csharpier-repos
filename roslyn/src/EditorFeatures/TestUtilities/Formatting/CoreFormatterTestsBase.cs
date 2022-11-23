@@ -389,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 var commandArgs = new PasteCommandArgs(view, view.TextBuffer);
                 commandHandler.ExecuteCommand(
                     commandArgs,
-                    () => { },
+                    () => {
+                    },
                     TestCommandExecutionContext.Create()
                 );
             }
@@ -400,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 var commandArgs = new ReturnKeyCommandArgs(view, view.TextBuffer);
                 commandHandler.ExecuteCommand(
                     commandArgs,
-                    () => { },
+                    () => {
+                    },
                     TestCommandExecutionContext.Create()
                 );
             }

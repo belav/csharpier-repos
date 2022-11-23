@@ -22,7 +22,9 @@ namespace System.Web.Http.WebHost.Routing
                 exceptionInfo,
                 ExceptionServices.GetLogger(GlobalConfiguration.Configuration),
                 ExceptionServices.GetHandler(GlobalConfiguration.Configuration)
-            ) { }
+            )
+        {
+        }
 
         internal HttpRouteExceptionHandler(
             ExceptionDispatchInfo exceptionInfo,

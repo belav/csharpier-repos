@@ -14,15 +14,21 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         private readonly string[] _nugetPackageDirectories;
 
         public PackageCompilationAssemblyResolver()
-            : this(EnvironmentWrapper.Default, FileSystemWrapper.Default) { }
+            : this(EnvironmentWrapper.Default, FileSystemWrapper.Default)
+        {
+        }
 
         public PackageCompilationAssemblyResolver(string nugetPackageDirectory)
-            : this(FileSystemWrapper.Default, new string[] { nugetPackageDirectory }) { }
+            : this(FileSystemWrapper.Default, new string[] { nugetPackageDirectory })
+        {
+        }
 
         internal PackageCompilationAssemblyResolver(
             IEnvironment environment,
             IFileSystem fileSystem
-        ) : this(fileSystem, GetDefaultProbeDirectories(environment)) { }
+        ) : this(fileSystem, GetDefaultProbeDirectories(environment))
+        {
+        }
 
         internal PackageCompilationAssemblyResolver(
             IFileSystem fileSystem,

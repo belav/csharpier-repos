@@ -96,7 +96,9 @@ namespace System.Security.Cryptography.Cose
             >,
             System.Collections.IEnumerable
     {
-        public CoseHeaderMap() { }
+        public CoseHeaderMap()
+        {
+        }
 
         public int Count
         {
@@ -109,7 +111,9 @@ namespace System.Security.Cryptography.Cose
         public System.Security.Cryptography.Cose.CoseHeaderValue this[System.Security.Cryptography.Cose.CoseHeaderLabel key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.ICollection<System.Security.Cryptography.Cose.CoseHeaderLabel> Keys
         {
@@ -139,25 +143,39 @@ namespace System.Security.Cryptography.Cose
                 System.Security.Cryptography.Cose.CoseHeaderLabel,
                 System.Security.Cryptography.Cose.CoseHeaderValue
             > item
-        ) { }
+        )
+        {
+        }
 
-        public void Add(System.Security.Cryptography.Cose.CoseHeaderLabel label, byte[] value) { }
+        public void Add(System.Security.Cryptography.Cose.CoseHeaderLabel label, byte[] value)
+        {
+        }
 
-        public void Add(System.Security.Cryptography.Cose.CoseHeaderLabel label, int value) { }
+        public void Add(System.Security.Cryptography.Cose.CoseHeaderLabel label, int value)
+        {
+        }
 
         public void Add(
             System.Security.Cryptography.Cose.CoseHeaderLabel label,
             System.ReadOnlySpan<byte> value
-        ) { }
+        )
+        {
+        }
 
         public void Add(
             System.Security.Cryptography.Cose.CoseHeaderLabel key,
             System.Security.Cryptography.Cose.CoseHeaderValue value
-        ) { }
+        )
+        {
+        }
 
-        public void Add(System.Security.Cryptography.Cose.CoseHeaderLabel label, string value) { }
+        public void Add(System.Security.Cryptography.Cose.CoseHeaderLabel label, string value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(
             System.Collections.Generic.KeyValuePair<
@@ -180,7 +198,9 @@ namespace System.Security.Cryptography.Cose
                 System.Security.Cryptography.Cose.CoseHeaderValue
             >[] array,
             int arrayIndex
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
             System.Security.Cryptography.Cose.CoseHeaderLabel,
@@ -344,7 +364,9 @@ namespace System.Security.Cryptography.Cose
 
     public abstract partial class CoseMessage
     {
-        internal CoseMessage() { }
+        internal CoseMessage()
+        {
+        }
 
         public System.ReadOnlyMemory<byte>? Content
         {
@@ -407,7 +429,9 @@ namespace System.Security.Cryptography.Cose
 
     public sealed partial class CoseMultiSignMessage : System.Security.Cryptography.Cose.CoseMessage
     {
-        internal CoseMultiSignMessage() { }
+        internal CoseMultiSignMessage()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Security.Cryptography.Cose.CoseSignature> Signatures
         {
@@ -418,19 +442,25 @@ namespace System.Security.Cryptography.Cose
             byte[] detachedContent,
             System.Security.Cryptography.Cose.CoseSigner signer,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void AddSignatureForDetached(
             System.IO.Stream detachedContent,
             System.Security.Cryptography.Cose.CoseSigner signer,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
 
         public void AddSignatureForDetached(
             System.ReadOnlySpan<byte> detachedContent,
             System.Security.Cryptography.Cose.CoseSigner signer,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task AddSignatureForDetachedAsync(
             System.IO.Stream detachedContent,
@@ -446,21 +476,29 @@ namespace System.Security.Cryptography.Cose
         public void AddSignatureForEmbedded(
             System.Security.Cryptography.Cose.CoseSigner signer,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void AddSignatureForEmbedded(
             System.Security.Cryptography.Cose.CoseSigner signer,
             System.ReadOnlySpan<byte> associatedData
-        ) { }
+        )
+        {
+        }
 
         public override int GetEncodedLength()
         {
             throw null;
         }
 
-        public void RemoveSignature(int index) { }
+        public void RemoveSignature(int index)
+        {
+        }
 
-        public void RemoveSignature(System.Security.Cryptography.Cose.CoseSignature signature) { }
+        public void RemoveSignature(System.Security.Cryptography.Cose.CoseSignature signature)
+        {
+        }
 
         public static byte[] SignDetached(
             byte[] detachedContent,
@@ -564,7 +602,9 @@ namespace System.Security.Cryptography.Cose
 
     public sealed partial class CoseSign1Message : System.Security.Cryptography.Cose.CoseMessage
     {
-        internal CoseSign1Message() { }
+        internal CoseSign1Message()
+        {
+        }
 
         public System.ReadOnlyMemory<byte> Signature
         {
@@ -716,7 +756,9 @@ namespace System.Security.Cryptography.Cose
 
     public sealed partial class CoseSignature
     {
-        internal CoseSignature() { }
+        internal CoseSignature()
+        {
+        }
 
         public System.Security.Cryptography.Cose.CoseHeaderMap ProtectedHeaders
         {
@@ -797,7 +839,9 @@ namespace System.Security.Cryptography.Cose
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.Cose.CoseHeaderMap? protectedHeaders = null,
             System.Security.Cryptography.Cose.CoseHeaderMap? unprotectedHeaders = null
-        ) { }
+        )
+        {
+        }
 
         public CoseSigner(
             System.Security.Cryptography.RSA key,
@@ -805,7 +849,9 @@ namespace System.Security.Cryptography.Cose
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.Cose.CoseHeaderMap? protectedHeaders = null,
             System.Security.Cryptography.Cose.CoseHeaderMap? unprotectedHeaders = null
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.HashAlgorithmName HashAlgorithm
         {

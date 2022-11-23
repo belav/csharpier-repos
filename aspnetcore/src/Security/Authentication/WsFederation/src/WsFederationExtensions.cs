@@ -19,7 +19,12 @@ public static class WsFederationExtensions
     /// <param name="builder"></param>
     /// <returns></returns>
     public static AuthenticationBuilder AddWsFederation(this AuthenticationBuilder builder) =>
-        builder.AddWsFederation(WsFederationDefaults.AuthenticationScheme, _ => { });
+        builder.AddWsFederation(
+            WsFederationDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Registers the <see cref="WsFederationHandler"/> using the default authentication scheme, display name, and the given options configuration.

@@ -11,5 +11,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed class KeyAttribute : Attribute { }
+    public sealed class KeyAttribute : Attribute
+    {
+    }
 }

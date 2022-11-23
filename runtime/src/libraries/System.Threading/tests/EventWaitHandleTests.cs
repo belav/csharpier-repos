@@ -195,7 +195,9 @@ namespace System.Threading.Tests
             Assert.False(EventWaitHandle.TryOpenExisting(name, out e));
             Assert.Null(e);
 
-            using (e = new EventWaitHandle(false, EventResetMode.AutoReset, name)) { }
+            using (e = new EventWaitHandle(false, EventResetMode.AutoReset, name))
+            {
+            }
             Assert.Throws<WaitHandleCannotBeOpenedException>(
                 () => EventWaitHandle.OpenExisting(name)
             );

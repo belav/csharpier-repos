@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         protected VisualStudioBaseDiagnosticListTable(
             Workspace workspace,
             ITableManagerProvider provider
-        ) : base(workspace, provider, StandardTables.ErrorsTable) { }
+        ) : base(workspace, provider, StandardTables.ErrorsTable)
+        {
+        }
 
         internal override ImmutableArray<string> Columns { get; } =
             ImmutableArray.Create(

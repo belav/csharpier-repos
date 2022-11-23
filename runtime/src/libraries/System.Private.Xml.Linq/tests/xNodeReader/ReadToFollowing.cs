@@ -461,13 +461,17 @@ namespace CoreXml.Test.XLinq
                     {
                         DataReader.ReadToFollowing(null);
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
 
                     try
                     {
                         DataReader.ReadToFollowing("b", null);
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
 
                     while (DataReader.Read())
                         ;

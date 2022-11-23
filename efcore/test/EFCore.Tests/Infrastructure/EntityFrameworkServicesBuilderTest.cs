@@ -391,7 +391,9 @@ public class EntityFrameworkServicesBuilderTest
 
     private class FakeDbSetInitializer : IDbSetInitializer
     {
-        public void InitializeSets(DbContext context) { }
+        public void InitializeSets(DbContext context)
+        {
+        }
 
         public DbSet<TEntity> CreateSet<TEntity>(DbContext context) where TEntity : class =>
             throw new NotImplementedException();
@@ -402,7 +404,9 @@ public class EntityFrameworkServicesBuilderTest
 
     private class FakeResetableService : IResettableService
     {
-        public void ResetState() { }
+        public void ResetState()
+        {
+        }
 
         public Task ResetStateAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;

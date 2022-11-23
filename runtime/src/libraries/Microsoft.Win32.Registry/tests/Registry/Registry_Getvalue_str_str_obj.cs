@@ -120,8 +120,12 @@ namespace Microsoft.Win32.RegistryTests
                     key.DeleteValue(valueName);
                 }
             }
-            catch (UnauthorizedAccessException) { }
-            catch (IOException) { }
+            catch (UnauthorizedAccessException)
+            {
+            }
+            catch (IOException)
+            {
+            }
         }
 
         [Theory]
@@ -150,7 +154,9 @@ namespace Microsoft.Win32.RegistryTests
                     );
                 }
             }
-            catch (IOException) { }
+            catch (IOException)
+            {
+            }
         }
 
         private static string MixUpperAndLowerCase(string str)

@@ -68,7 +68,9 @@ namespace IntelHardwareIntrinsicTest
                     Console.WriteLine("Environment.Is64BitProcess " + Environment.Is64BitProcess);
                     testResult = Fail;
                 }
-                catch (PlatformNotSupportedException) { }
+                catch (PlatformNotSupportedException)
+                {
+                }
 
                 try
                 {
@@ -85,7 +87,9 @@ namespace IntelHardwareIntrinsicTest
                     testResult = Fail;
                 }
                 catch (TargetInvocationException e)
-                    when (e.InnerException is PlatformNotSupportedException) { }
+                    when (e.InnerException is PlatformNotSupportedException)
+                {
+                }
             }
 
             return testResult;

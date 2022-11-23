@@ -37,7 +37,9 @@ namespace System.Data.Common
             ref s_objectTypeCount
         );
 
-        public DbConnectionStringBuilder() { }
+        public DbConnectionStringBuilder()
+        {
+        }
 
         public DbConnectionStringBuilder(bool useOdbcRules)
         {

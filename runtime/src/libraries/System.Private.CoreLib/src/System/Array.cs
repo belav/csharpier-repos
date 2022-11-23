@@ -29,7 +29,9 @@ namespace System
         internal const int IntrosortSizeThreshold = 16;
 
         // This ctor exists solely to prevent C# from generating a protected .ctor that violates the surface area.
-        private protected Array() { }
+        private protected Array()
+        {
+        }
 
         public static ReadOnlyCollection<T> AsReadOnly<T>(T[] array)
         {

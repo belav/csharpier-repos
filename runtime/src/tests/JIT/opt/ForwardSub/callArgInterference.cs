@@ -10,7 +10,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public interface I1 { }
+public interface I1
+{
+}
 
 public struct S0 : I1
 {

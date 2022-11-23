@@ -41,11 +41,17 @@ namespace System.Collections.Generic
         private ValueCollection? _values;
         private const int StartOfFreeList = -3;
 
-        public Dictionary() : this(0, null) { }
+        public Dictionary() : this(0, null)
+        {
+        }
 
-        public Dictionary(int capacity) : this(capacity, null) { }
+        public Dictionary(int capacity) : this(capacity, null)
+        {
+        }
 
-        public Dictionary(IEqualityComparer<TKey>? comparer) : this(0, comparer) { }
+        public Dictionary(IEqualityComparer<TKey>? comparer) : this(0, comparer)
+        {
+        }
 
         public Dictionary(int capacity, IEqualityComparer<TKey>? comparer)
         {
@@ -92,7 +98,9 @@ namespace System.Collections.Generic
             }
         }
 
-        public Dictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
+        public Dictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null)
+        {
+        }
 
         public Dictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey>? comparer)
             : this(dictionary != null ? dictionary.Count : 0, comparer)
@@ -106,7 +114,9 @@ namespace System.Collections.Generic
         }
 
         public Dictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
-            : this(collection, null) { }
+            : this(collection, null)
+        {
+        }
 
         public Dictionary(
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
@@ -1513,7 +1523,9 @@ namespace System.Collections.Generic
 
             public KeyValuePair<TKey, TValue> Current => _current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             object? IEnumerator.Current
             {
@@ -1736,7 +1748,9 @@ namespace System.Collections.Generic
                     _currentKey = default;
                 }
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 public bool MoveNext()
                 {
@@ -1941,7 +1955,9 @@ namespace System.Collections.Generic
                     _currentValue = default;
                 }
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 public bool MoveNext()
                 {

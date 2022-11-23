@@ -362,9 +362,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -520,9 +524,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -547,7 +555,9 @@ namespace System.Reflection.Metadata
 
     public partial class BlobBuilder
     {
-        public BlobBuilder(int capacity = 256) { }
+        public BlobBuilder(int capacity = 256)
+        {
+        }
 
         protected internal int ChunkCapacity
         {
@@ -562,34 +572,48 @@ namespace System.Reflection.Metadata
             get { throw null; }
         }
 
-        public void Align(int alignment) { }
+        public void Align(int alignment)
+        {
+        }
 
         protected virtual System.Reflection.Metadata.BlobBuilder AllocateChunk(int minimalSize)
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool ContentEquals(System.Reflection.Metadata.BlobBuilder other)
         {
             throw null;
         }
 
-        protected void Free() { }
+        protected void Free()
+        {
+        }
 
-        protected virtual void FreeChunk() { }
+        protected virtual void FreeChunk()
+        {
+        }
 
         public System.Reflection.Metadata.BlobBuilder.Blobs GetBlobs()
         {
             throw null;
         }
 
-        public void LinkPrefix(System.Reflection.Metadata.BlobBuilder prefix) { }
+        public void LinkPrefix(System.Reflection.Metadata.BlobBuilder prefix)
+        {
+        }
 
-        public void LinkSuffix(System.Reflection.Metadata.BlobBuilder suffix) { }
+        public void LinkSuffix(System.Reflection.Metadata.BlobBuilder suffix)
+        {
+        }
 
-        public void PadTo(int position) { }
+        public void PadTo(int position)
+        {
+        }
 
         public System.Reflection.Metadata.Blob ReserveBytes(int byteCount)
         {
@@ -624,81 +648,153 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public void WriteBoolean(bool value) { }
+        public void WriteBoolean(bool value)
+        {
+        }
 
-        public void WriteByte(byte value) { }
+        public void WriteByte(byte value)
+        {
+        }
 
-        public unsafe void WriteBytes(byte* buffer, int byteCount) { }
+        public unsafe void WriteBytes(byte* buffer, int byteCount)
+        {
+        }
 
-        public void WriteBytes(byte value, int byteCount) { }
+        public void WriteBytes(byte value, int byteCount)
+        {
+        }
 
-        public void WriteBytes(byte[] buffer) { }
+        public void WriteBytes(byte[] buffer)
+        {
+        }
 
-        public void WriteBytes(byte[] buffer, int start, int byteCount) { }
+        public void WriteBytes(byte[] buffer, int start, int byteCount)
+        {
+        }
 
-        public void WriteBytes(System.Collections.Immutable.ImmutableArray<byte> buffer) { }
+        public void WriteBytes(System.Collections.Immutable.ImmutableArray<byte> buffer)
+        {
+        }
 
         public void WriteBytes(
             System.Collections.Immutable.ImmutableArray<byte> buffer,
             int start,
             int byteCount
-        ) { }
+        )
+        {
+        }
 
-        public void WriteCompressedInteger(int value) { }
+        public void WriteCompressedInteger(int value)
+        {
+        }
 
-        public void WriteCompressedSignedInteger(int value) { }
+        public void WriteCompressedSignedInteger(int value)
+        {
+        }
 
-        public void WriteConstant(object? value) { }
+        public void WriteConstant(object? value)
+        {
+        }
 
-        public void WriteContentTo(System.IO.Stream destination) { }
+        public void WriteContentTo(System.IO.Stream destination)
+        {
+        }
 
-        public void WriteContentTo(System.Reflection.Metadata.BlobBuilder destination) { }
+        public void WriteContentTo(System.Reflection.Metadata.BlobBuilder destination)
+        {
+        }
 
-        public void WriteContentTo(ref System.Reflection.Metadata.BlobWriter destination) { }
+        public void WriteContentTo(ref System.Reflection.Metadata.BlobWriter destination)
+        {
+        }
 
-        public void WriteDateTime(System.DateTime value) { }
+        public void WriteDateTime(System.DateTime value)
+        {
+        }
 
-        public void WriteDecimal(decimal value) { }
+        public void WriteDecimal(decimal value)
+        {
+        }
 
-        public void WriteDouble(double value) { }
+        public void WriteDouble(double value)
+        {
+        }
 
-        public void WriteGuid(System.Guid value) { }
+        public void WriteGuid(System.Guid value)
+        {
+        }
 
-        public void WriteInt16(short value) { }
+        public void WriteInt16(short value)
+        {
+        }
 
-        public void WriteInt16BE(short value) { }
+        public void WriteInt16BE(short value)
+        {
+        }
 
-        public void WriteInt32(int value) { }
+        public void WriteInt32(int value)
+        {
+        }
 
-        public void WriteInt32BE(int value) { }
+        public void WriteInt32BE(int value)
+        {
+        }
 
-        public void WriteInt64(long value) { }
+        public void WriteInt64(long value)
+        {
+        }
 
-        public void WriteReference(int reference, bool isSmall) { }
+        public void WriteReference(int reference, bool isSmall)
+        {
+        }
 
-        public void WriteSByte(sbyte value) { }
+        public void WriteSByte(sbyte value)
+        {
+        }
 
-        public void WriteSerializedString(string? value) { }
+        public void WriteSerializedString(string? value)
+        {
+        }
 
-        public void WriteSingle(float value) { }
+        public void WriteSingle(float value)
+        {
+        }
 
-        public void WriteUInt16(ushort value) { }
+        public void WriteUInt16(ushort value)
+        {
+        }
 
-        public void WriteUInt16BE(ushort value) { }
+        public void WriteUInt16BE(ushort value)
+        {
+        }
 
-        public void WriteUInt32(uint value) { }
+        public void WriteUInt32(uint value)
+        {
+        }
 
-        public void WriteUInt32BE(uint value) { }
+        public void WriteUInt32BE(uint value)
+        {
+        }
 
-        public void WriteUInt64(ulong value) { }
+        public void WriteUInt64(ulong value)
+        {
+        }
 
-        public void WriteUserString(string value) { }
+        public void WriteUserString(string value)
+        {
+        }
 
-        public void WriteUTF16(char[] value) { }
+        public void WriteUTF16(char[] value)
+        {
+        }
 
-        public void WriteUTF16(string value) { }
+        public void WriteUTF16(string value)
+        {
+        }
 
-        public void WriteUTF8(string value, bool allowUnpairedSurrogates = true) { }
+        public void WriteUTF8(string value, bool allowUnpairedSurrogates = true)
+        {
+        }
 
         public partial struct Blobs
             : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
@@ -728,7 +824,9 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
             System.Collections.Generic.IEnumerator<System.Reflection.Metadata.Blob> System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>.GetEnumerator()
             {
@@ -740,7 +838,9 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -908,7 +1008,9 @@ namespace System.Reflection.Metadata
         public int Offset
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int RemainingBytes
         {
@@ -919,7 +1021,9 @@ namespace System.Reflection.Metadata
             get { throw null; }
         }
 
-        public void Align(byte alignment) { }
+        public void Align(byte alignment)
+        {
+        }
 
         public int IndexOf(byte value)
         {
@@ -946,7 +1050,9 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public void ReadBytes(int byteCount, byte[] buffer, int bufferOffset) { }
+        public void ReadBytes(int byteCount, byte[] buffer, int bufferOffset)
+        {
+        }
 
         public char ReadChar()
         {
@@ -1063,7 +1169,9 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         public bool TryReadCompressedInteger(out int value)
         {
@@ -1112,23 +1220,31 @@ namespace System.Reflection.Metadata
         public int Offset
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int RemainingBytes
         {
             get { throw null; }
         }
 
-        public void Align(int alignment) { }
+        public void Align(int alignment)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool ContentEquals(System.Reflection.Metadata.BlobWriter other)
         {
             throw null;
         }
 
-        public void PadTo(int offset) { }
+        public void PadTo(int offset)
+        {
+        }
 
         public byte[] ToArray()
         {
@@ -1153,82 +1269,150 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public void WriteBoolean(bool value) { }
+        public void WriteBoolean(bool value)
+        {
+        }
 
-        public void WriteByte(byte value) { }
+        public void WriteByte(byte value)
+        {
+        }
 
-        public unsafe void WriteBytes(byte* buffer, int byteCount) { }
+        public unsafe void WriteBytes(byte* buffer, int byteCount)
+        {
+        }
 
-        public void WriteBytes(byte value, int byteCount) { }
+        public void WriteBytes(byte value, int byteCount)
+        {
+        }
 
-        public void WriteBytes(byte[] buffer) { }
+        public void WriteBytes(byte[] buffer)
+        {
+        }
 
-        public void WriteBytes(byte[] buffer, int start, int byteCount) { }
+        public void WriteBytes(byte[] buffer, int start, int byteCount)
+        {
+        }
 
-        public void WriteBytes(System.Collections.Immutable.ImmutableArray<byte> buffer) { }
+        public void WriteBytes(System.Collections.Immutable.ImmutableArray<byte> buffer)
+        {
+        }
 
         public void WriteBytes(
             System.Collections.Immutable.ImmutableArray<byte> buffer,
             int start,
             int byteCount
-        ) { }
+        )
+        {
+        }
 
         public int WriteBytes(System.IO.Stream source, int byteCount)
         {
             throw null;
         }
 
-        public void WriteBytes(System.Reflection.Metadata.BlobBuilder source) { }
+        public void WriteBytes(System.Reflection.Metadata.BlobBuilder source)
+        {
+        }
 
-        public void WriteCompressedInteger(int value) { }
+        public void WriteCompressedInteger(int value)
+        {
+        }
 
-        public void WriteCompressedSignedInteger(int value) { }
+        public void WriteCompressedSignedInteger(int value)
+        {
+        }
 
-        public void WriteConstant(object? value) { }
+        public void WriteConstant(object? value)
+        {
+        }
 
-        public void WriteDateTime(System.DateTime value) { }
+        public void WriteDateTime(System.DateTime value)
+        {
+        }
 
-        public void WriteDecimal(decimal value) { }
+        public void WriteDecimal(decimal value)
+        {
+        }
 
-        public void WriteDouble(double value) { }
+        public void WriteDouble(double value)
+        {
+        }
 
-        public void WriteGuid(System.Guid value) { }
+        public void WriteGuid(System.Guid value)
+        {
+        }
 
-        public void WriteInt16(short value) { }
+        public void WriteInt16(short value)
+        {
+        }
 
-        public void WriteInt16BE(short value) { }
+        public void WriteInt16BE(short value)
+        {
+        }
 
-        public void WriteInt32(int value) { }
+        public void WriteInt32(int value)
+        {
+        }
 
-        public void WriteInt32BE(int value) { }
+        public void WriteInt32BE(int value)
+        {
+        }
 
-        public void WriteInt64(long value) { }
+        public void WriteInt64(long value)
+        {
+        }
 
-        public void WriteReference(int reference, bool isSmall) { }
+        public void WriteReference(int reference, bool isSmall)
+        {
+        }
 
-        public void WriteSByte(sbyte value) { }
+        public void WriteSByte(sbyte value)
+        {
+        }
 
-        public void WriteSerializedString(string? str) { }
+        public void WriteSerializedString(string? str)
+        {
+        }
 
-        public void WriteSingle(float value) { }
+        public void WriteSingle(float value)
+        {
+        }
 
-        public void WriteUInt16(ushort value) { }
+        public void WriteUInt16(ushort value)
+        {
+        }
 
-        public void WriteUInt16BE(ushort value) { }
+        public void WriteUInt16BE(ushort value)
+        {
+        }
 
-        public void WriteUInt32(uint value) { }
+        public void WriteUInt32(uint value)
+        {
+        }
 
-        public void WriteUInt32BE(uint value) { }
+        public void WriteUInt32BE(uint value)
+        {
+        }
 
-        public void WriteUInt64(ulong value) { }
+        public void WriteUInt64(ulong value)
+        {
+        }
 
-        public void WriteUserString(string value) { }
+        public void WriteUserString(string value)
+        {
+        }
 
-        public void WriteUTF16(char[] value) { }
+        public void WriteUTF16(char[] value)
+        {
+        }
 
-        public void WriteUTF16(string value) { }
+        public void WriteUTF16(string value)
+        {
+        }
 
-        public void WriteUTF8(string value, bool allowUnpairedSurrogates) { }
+        public void WriteUTF8(string value, bool allowUnpairedSurrogates)
+        {
+        }
     }
 
     public readonly partial struct Constant
@@ -1479,9 +1663,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1706,15 +1894,21 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
     public sealed partial class DebugMetadataHeader
     {
-        internal DebugMetadataHeader() { }
+        internal DebugMetadataHeader()
+        {
+        }
 
         public System.Reflection.Metadata.MethodDefinitionHandle EntryPoint
         {
@@ -1865,9 +2059,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -2010,9 +2208,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -2303,9 +2505,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -2500,9 +2706,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -2679,9 +2889,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -2856,9 +3070,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -2982,9 +3200,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -3099,7 +3321,9 @@ namespace System.Reflection.Metadata
             System.Collections.Generic.IEqualityComparer<System.Reflection.Metadata.EntityHandle>,
             System.Collections.Generic.IEqualityComparer<System.Reflection.Metadata.Handle>
     {
-        internal HandleComparer() { }
+        internal HandleComparer()
+        {
+        }
 
         public static System.Reflection.Metadata.HandleComparer Default
         {
@@ -3457,11 +3681,17 @@ namespace System.Reflection.Metadata
 
     public partial class ImageFormatLimitationException : System.Exception
     {
-        public ImageFormatLimitationException() { }
+        public ImageFormatLimitationException()
+        {
+        }
 
-        public ImageFormatLimitationException(string? message) { }
+        public ImageFormatLimitationException(string? message)
+        {
+        }
 
-        public ImageFormatLimitationException(string? message, System.Exception? innerException) { }
+        public ImageFormatLimitationException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public readonly partial struct ImportDefinition
@@ -3530,9 +3760,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -3616,9 +3850,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -3825,9 +4063,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -4002,9 +4244,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -4166,9 +4412,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
 
         public partial struct Enumerator
@@ -4192,9 +4442,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -4340,9 +4594,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -4488,9 +4746,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -4656,9 +4918,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -4677,20 +4943,26 @@ namespace System.Reflection.Metadata
 
     public sealed partial class MetadataReader
     {
-        public unsafe MetadataReader(byte* metadata, int length) { }
+        public unsafe MetadataReader(byte* metadata, int length)
+        {
+        }
 
         public unsafe MetadataReader(
             byte* metadata,
             int length,
             System.Reflection.Metadata.MetadataReaderOptions options
-        ) { }
+        )
+        {
+        }
 
         public unsafe MetadataReader(
             byte* metadata,
             int length,
             System.Reflection.Metadata.MetadataReaderOptions options,
             System.Reflection.Metadata.MetadataStringDecoder? utf8Decoder
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.AssemblyFileHandleCollection AssemblyFiles
         {
@@ -5143,9 +5415,13 @@ namespace System.Reflection.Metadata
 
     public sealed partial class MetadataReaderProvider : System.IDisposable
     {
-        internal MetadataReaderProvider() { }
+        internal MetadataReaderProvider()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public unsafe static System.Reflection.Metadata.MetadataReaderProvider FromMetadataImage(
             byte* start,
@@ -5282,7 +5558,9 @@ namespace System.Reflection.Metadata
 
     public partial class MetadataStringDecoder
     {
-        public MetadataStringDecoder(System.Text.Encoding encoding) { }
+        public MetadataStringDecoder(System.Text.Encoding encoding)
+        {
+        }
 
         public static System.Reflection.Metadata.MetadataStringDecoder DefaultUTF8
         {
@@ -5301,7 +5579,9 @@ namespace System.Reflection.Metadata
 
     public sealed partial class MethodBodyBlock
     {
-        internal MethodBodyBlock() { }
+        internal MethodBodyBlock()
+        {
+        }
 
         public System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.ExceptionRegion> ExceptionRegions
         {
@@ -5497,9 +5777,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -5692,9 +5976,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -5836,9 +6124,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -6414,9 +6706,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -6676,9 +6972,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -6795,9 +7095,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -7360,9 +7664,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -7522,9 +7830,13 @@ namespace System.Reflection.Metadata
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
 
-            void System.IDisposable.Dispose() { }
+            void System.IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -7697,7 +8009,9 @@ namespace System.Reflection.Metadata.Ecma335
             int rank,
             System.Collections.Immutable.ImmutableArray<int> sizes,
             System.Collections.Immutable.ImmutableArray<int> lowerBounds
-        ) { }
+        )
+        {
+        }
     }
 
     public readonly partial struct BlobEncoder
@@ -7718,7 +8032,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void CustomAttributeSignature(
             System.Action<System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder> fixedArguments,
             System.Action<System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder> namedArguments
-        ) { }
+        )
+        {
+        }
 
         public void CustomAttributeSignature(
             out System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder fixedArguments,
@@ -7869,7 +8185,9 @@ namespace System.Reflection.Metadata.Ecma335
 
     public sealed partial class ControlFlowBuilder
     {
-        public ControlFlowBuilder() { }
+        public ControlFlowBuilder()
+        {
+        }
 
         public void AddCatchRegion(
             System.Reflection.Metadata.Ecma335.LabelHandle tryStart,
@@ -7877,14 +8195,18 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.Ecma335.LabelHandle handlerStart,
             System.Reflection.Metadata.Ecma335.LabelHandle handlerEnd,
             System.Reflection.Metadata.EntityHandle catchType
-        ) { }
+        )
+        {
+        }
 
         public void AddFaultRegion(
             System.Reflection.Metadata.Ecma335.LabelHandle tryStart,
             System.Reflection.Metadata.Ecma335.LabelHandle tryEnd,
             System.Reflection.Metadata.Ecma335.LabelHandle handlerStart,
             System.Reflection.Metadata.Ecma335.LabelHandle handlerEnd
-        ) { }
+        )
+        {
+        }
 
         public void AddFilterRegion(
             System.Reflection.Metadata.Ecma335.LabelHandle tryStart,
@@ -7892,16 +8214,22 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.Ecma335.LabelHandle handlerStart,
             System.Reflection.Metadata.Ecma335.LabelHandle handlerEnd,
             System.Reflection.Metadata.Ecma335.LabelHandle filterStart
-        ) { }
+        )
+        {
+        }
 
         public void AddFinallyRegion(
             System.Reflection.Metadata.Ecma335.LabelHandle tryStart,
             System.Reflection.Metadata.Ecma335.LabelHandle tryEnd,
             System.Reflection.Metadata.Ecma335.LabelHandle handlerStart,
             System.Reflection.Metadata.Ecma335.LabelHandle handlerEnd
-        ) { }
+        )
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
     }
 
     public readonly partial struct CustomAttributeArrayTypeEncoder
@@ -7924,7 +8252,9 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public void ObjectArray() { }
+        public void ObjectArray()
+        {
+        }
     }
 
     public readonly partial struct CustomAttributeElementTypeEncoder
@@ -7942,39 +8272,69 @@ namespace System.Reflection.Metadata.Ecma335
             get { throw null; }
         }
 
-        public void Boolean() { }
+        public void Boolean()
+        {
+        }
 
-        public void Byte() { }
+        public void Byte()
+        {
+        }
 
-        public void Char() { }
+        public void Char()
+        {
+        }
 
-        public void Double() { }
+        public void Double()
+        {
+        }
 
-        public void Enum(string enumTypeName) { }
+        public void Enum(string enumTypeName)
+        {
+        }
 
-        public void Int16() { }
+        public void Int16()
+        {
+        }
 
-        public void Int32() { }
+        public void Int32()
+        {
+        }
 
-        public void Int64() { }
+        public void Int64()
+        {
+        }
 
-        public void PrimitiveType(
-            System.Reflection.Metadata.PrimitiveSerializationTypeCode type
-        ) { }
+        public void PrimitiveType(System.Reflection.Metadata.PrimitiveSerializationTypeCode type)
+        {
+        }
 
-        public void SByte() { }
+        public void SByte()
+        {
+        }
 
-        public void Single() { }
+        public void Single()
+        {
+        }
 
-        public void String() { }
+        public void String()
+        {
+        }
 
-        public void SystemType() { }
+        public void SystemType()
+        {
+        }
 
-        public void UInt16() { }
+        public void UInt16()
+        {
+        }
 
-        public void UInt32() { }
+        public void UInt32()
+        {
+        }
 
-        public void UInt64() { }
+        public void UInt64()
+        {
+        }
     }
 
     public readonly partial struct CustomAttributeNamedArgumentsEncoder
@@ -8279,52 +8639,94 @@ namespace System.Reflection.Metadata.Ecma335
         public void Branch(
             System.Reflection.Metadata.ILOpCode code,
             System.Reflection.Metadata.Ecma335.LabelHandle label
-        ) { }
+        )
+        {
+        }
 
-        public void Call(System.Reflection.Metadata.EntityHandle methodHandle) { }
+        public void Call(System.Reflection.Metadata.EntityHandle methodHandle)
+        {
+        }
 
-        public void Call(System.Reflection.Metadata.MemberReferenceHandle methodHandle) { }
+        public void Call(System.Reflection.Metadata.MemberReferenceHandle methodHandle)
+        {
+        }
 
-        public void Call(System.Reflection.Metadata.MethodDefinitionHandle methodHandle) { }
+        public void Call(System.Reflection.Metadata.MethodDefinitionHandle methodHandle)
+        {
+        }
 
-        public void Call(System.Reflection.Metadata.MethodSpecificationHandle methodHandle) { }
+        public void Call(System.Reflection.Metadata.MethodSpecificationHandle methodHandle)
+        {
+        }
 
-        public void CallIndirect(System.Reflection.Metadata.StandaloneSignatureHandle signature) { }
+        public void CallIndirect(System.Reflection.Metadata.StandaloneSignatureHandle signature)
+        {
+        }
 
         public System.Reflection.Metadata.Ecma335.LabelHandle DefineLabel()
         {
             throw null;
         }
 
-        public void LoadArgument(int argumentIndex) { }
+        public void LoadArgument(int argumentIndex)
+        {
+        }
 
-        public void LoadArgumentAddress(int argumentIndex) { }
+        public void LoadArgumentAddress(int argumentIndex)
+        {
+        }
 
-        public void LoadConstantI4(int value) { }
+        public void LoadConstantI4(int value)
+        {
+        }
 
-        public void LoadConstantI8(long value) { }
+        public void LoadConstantI8(long value)
+        {
+        }
 
-        public void LoadConstantR4(float value) { }
+        public void LoadConstantR4(float value)
+        {
+        }
 
-        public void LoadConstantR8(double value) { }
+        public void LoadConstantR8(double value)
+        {
+        }
 
-        public void LoadLocal(int slotIndex) { }
+        public void LoadLocal(int slotIndex)
+        {
+        }
 
-        public void LoadLocalAddress(int slotIndex) { }
+        public void LoadLocalAddress(int slotIndex)
+        {
+        }
 
-        public void LoadString(System.Reflection.Metadata.UserStringHandle handle) { }
+        public void LoadString(System.Reflection.Metadata.UserStringHandle handle)
+        {
+        }
 
-        public void MarkLabel(System.Reflection.Metadata.Ecma335.LabelHandle label) { }
+        public void MarkLabel(System.Reflection.Metadata.Ecma335.LabelHandle label)
+        {
+        }
 
-        public void OpCode(System.Reflection.Metadata.ILOpCode code) { }
+        public void OpCode(System.Reflection.Metadata.ILOpCode code)
+        {
+        }
 
-        public void StoreArgument(int argumentIndex) { }
+        public void StoreArgument(int argumentIndex)
+        {
+        }
 
-        public void StoreLocal(int slotIndex) { }
+        public void StoreLocal(int slotIndex)
+        {
+        }
 
-        public void Token(int token) { }
+        public void Token(int token)
+        {
+        }
 
-        public void Token(System.Reflection.Metadata.EntityHandle handle) { }
+        public void Token(System.Reflection.Metadata.EntityHandle handle)
+        {
+        }
     }
 
     public readonly partial struct LabelHandle
@@ -8397,7 +8799,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedScalar(
             System.Action<System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder> type,
             System.Action<System.Reflection.Metadata.Ecma335.ScalarEncoder> scalar
-        ) { }
+        )
+        {
+        }
 
         public void TaggedScalar(
             out System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder type,
@@ -8410,7 +8814,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void TaggedVector(
             System.Action<System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder> arrayType,
             System.Action<System.Reflection.Metadata.Ecma335.VectorEncoder> vector
-        ) { }
+        )
+        {
+        }
 
         public void TaggedVector(
             out System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder arrayType,
@@ -8496,7 +8902,9 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public void TypedReference() { }
+        public void TypedReference()
+        {
+        }
     }
 
     public sealed partial class MetadataAggregator
@@ -8505,12 +8913,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Collections.Generic.IReadOnlyList<int>? baseTableRowCounts,
             System.Collections.Generic.IReadOnlyList<int>? baseHeapSizes,
             System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.MetadataReader>? deltaReaders
-        ) { }
+        )
+        {
+        }
 
         public MetadataAggregator(
             System.Reflection.Metadata.MetadataReader baseReader,
             System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.MetadataReader> deltaReaders
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.Handle GetGenerationHandle(
             System.Reflection.Metadata.Handle handle,
@@ -8528,7 +8940,9 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapStartOffset = 0,
             int blobHeapStartOffset = 0,
             int guidHeapStartOffset = 0
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.AssemblyDefinitionHandle AddAssembly(
             System.Reflection.Metadata.StringHandle name,
@@ -8611,9 +9025,13 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddEncLogEntry(
             System.Reflection.Metadata.EntityHandle entity,
             System.Reflection.Metadata.Ecma335.EditAndContinueOperation code
-        ) { }
+        )
+        {
+        }
 
-        public void AddEncMapEntry(System.Reflection.Metadata.EntityHandle entity) { }
+        public void AddEncMapEntry(System.Reflection.Metadata.EntityHandle entity)
+        {
+        }
 
         public System.Reflection.Metadata.EventDefinitionHandle AddEvent(
             System.Reflection.EventAttributes attributes,
@@ -8627,7 +9045,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddEventMap(
             System.Reflection.Metadata.TypeDefinitionHandle declaringType,
             System.Reflection.Metadata.EventDefinitionHandle eventList
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.ExportedTypeHandle AddExportedType(
             System.Reflection.TypeAttributes attributes,
@@ -8652,12 +9072,16 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddFieldLayout(
             System.Reflection.Metadata.FieldDefinitionHandle field,
             int offset
-        ) { }
+        )
+        {
+        }
 
         public void AddFieldRelativeVirtualAddress(
             System.Reflection.Metadata.FieldDefinitionHandle field,
             int offset
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.GenericParameterHandle AddGenericParameter(
             System.Reflection.Metadata.EntityHandle parent,
@@ -8735,7 +9159,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddMarshallingDescriptor(
             System.Reflection.Metadata.EntityHandle parent,
             System.Reflection.Metadata.BlobHandle descriptor
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.MemberReferenceHandle AddMemberReference(
             System.Reflection.Metadata.EntityHandle parent,
@@ -8780,13 +9206,17 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.MethodImportAttributes attributes,
             System.Reflection.Metadata.StringHandle name,
             System.Reflection.Metadata.ModuleReferenceHandle module
-        ) { }
+        )
+        {
+        }
 
         public void AddMethodSemantics(
             System.Reflection.Metadata.EntityHandle association,
             System.Reflection.MethodSemanticsAttributes semantics,
             System.Reflection.Metadata.MethodDefinitionHandle methodDefinition
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.MethodSpecificationHandle AddMethodSpecification(
             System.Reflection.Metadata.EntityHandle method,
@@ -8817,7 +9247,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddNestedType(
             System.Reflection.Metadata.TypeDefinitionHandle type,
             System.Reflection.Metadata.TypeDefinitionHandle enclosingType
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.ParameterHandle AddParameter(
             System.Reflection.ParameterAttributes attributes,
@@ -8840,7 +9272,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddPropertyMap(
             System.Reflection.Metadata.TypeDefinitionHandle declaringType,
             System.Reflection.Metadata.PropertyDefinitionHandle propertyList
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.StandaloneSignatureHandle AddStandaloneSignature(
             System.Reflection.Metadata.BlobHandle signature
@@ -8852,7 +9286,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddStateMachineMethod(
             System.Reflection.Metadata.MethodDefinitionHandle moveNextMethod,
             System.Reflection.Metadata.MethodDefinitionHandle kickoffMethod
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.TypeDefinitionHandle AddTypeDefinition(
             System.Reflection.TypeAttributes attributes,
@@ -8870,7 +9306,9 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.TypeDefinitionHandle type,
             ushort packingSize,
             uint size
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Metadata.TypeReferenceHandle AddTypeReference(
             System.Reflection.Metadata.EntityHandle resolutionScope,
@@ -8967,15 +9405,13 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public void SetCapacity(
-            System.Reflection.Metadata.Ecma335.HeapIndex heap,
-            int byteCount
-        ) { }
+        public void SetCapacity(System.Reflection.Metadata.Ecma335.HeapIndex heap, int byteCount)
+        {
+        }
 
-        public void SetCapacity(
-            System.Reflection.Metadata.Ecma335.TableIndex table,
-            int rowCount
-        ) { }
+        public void SetCapacity(System.Reflection.Metadata.Ecma335.TableIndex table, int rowCount)
+        {
+        }
     }
 
     public static partial class MetadataReaderExtensions
@@ -9088,7 +9524,9 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.Ecma335.MetadataBuilder tablesAndHeaps,
             string? metadataVersion = null,
             bool suppressValidation = false
-        ) { }
+        )
+        {
+        }
 
         public string MetadataVersion
         {
@@ -9107,12 +9545,16 @@ namespace System.Reflection.Metadata.Ecma335
             System.Reflection.Metadata.BlobBuilder builder,
             int methodBodyStreamRva,
             int mappedFieldDataStreamRva
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class MetadataSizes
     {
-        internal MetadataSizes() { }
+        internal MetadataSizes()
+        {
+        }
 
         public System.Collections.Immutable.ImmutableArray<int> ExternalRowCounts
         {
@@ -9597,7 +10039,9 @@ namespace System.Reflection.Metadata.Ecma335
             int parameterCount,
             System.Action<System.Reflection.Metadata.Ecma335.ReturnTypeEncoder> returnType,
             System.Action<System.Reflection.Metadata.Ecma335.ParametersEncoder> parameters
-        ) { }
+        )
+        {
+        }
 
         public void Parameters(
             int parameterCount,
@@ -9629,7 +10073,9 @@ namespace System.Reflection.Metadata.Ecma335
             System.Action<System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder> type,
             System.Action<System.Reflection.Metadata.Ecma335.NameEncoder> name,
             System.Action<System.Reflection.Metadata.Ecma335.LiteralEncoder> literal
-        ) { }
+        )
+        {
+        }
 
         public void AddArgument(
             bool isField,
@@ -9657,7 +10103,9 @@ namespace System.Reflection.Metadata.Ecma335
             get { throw null; }
         }
 
-        public void Object() { }
+        public void Object()
+        {
+        }
 
         public System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder ScalarType()
         {
@@ -9685,7 +10133,9 @@ namespace System.Reflection.Metadata.Ecma335
             get { throw null; }
         }
 
-        public void Name(string name) { }
+        public void Name(string name)
+        {
+        }
     }
 
     public readonly partial struct ParametersEncoder
@@ -9746,7 +10196,9 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public void TypedReference() { }
+        public void TypedReference()
+        {
+        }
     }
 
     public readonly partial struct PermissionSetEncoder
@@ -9791,7 +10243,9 @@ namespace System.Reflection.Metadata.Ecma335
                 System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
                 System.Reflection.Metadata.BlobContentId
             >? idProvider = null
-        ) { }
+        )
+        {
+        }
 
         public ushort FormatVersion
         {
@@ -9842,9 +10296,13 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public void TypedReference() { }
+        public void TypedReference()
+        {
+        }
 
-        public void Void() { }
+        public void Void()
+        {
+        }
     }
 
     public readonly partial struct ScalarEncoder
@@ -9862,11 +10320,17 @@ namespace System.Reflection.Metadata.Ecma335
             get { throw null; }
         }
 
-        public void Constant(object? value) { }
+        public void Constant(object? value)
+        {
+        }
 
-        public void NullArray() { }
+        public void NullArray()
+        {
+        }
 
-        public void SystemType(string? serializedTypeName) { }
+        public void SystemType(string? serializedTypeName)
+        {
+        }
     }
 
     public readonly partial struct SignatureDecoder<TType, TGenericContext>
@@ -9937,7 +10401,9 @@ namespace System.Reflection.Metadata.Ecma335
         public void Array(
             System.Action<System.Reflection.Metadata.Ecma335.SignatureTypeEncoder> elementType,
             System.Action<System.Reflection.Metadata.Ecma335.ArrayShapeEncoder> arrayShape
-        ) { }
+        )
+        {
+        }
 
         public void Array(
             out System.Reflection.Metadata.Ecma335.SignatureTypeEncoder elementType,
@@ -9947,18 +10413,26 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public void Boolean() { }
+        public void Boolean()
+        {
+        }
 
-        public void Byte() { }
+        public void Byte()
+        {
+        }
 
-        public void Char() { }
+        public void Char()
+        {
+        }
 
         public System.Reflection.Metadata.Ecma335.CustomModifiersEncoder CustomModifiers()
         {
             throw null;
         }
 
-        public void Double() { }
+        public void Double()
+        {
+        }
 
         public System.Reflection.Metadata.Ecma335.MethodSignatureEncoder FunctionPointer(
             System.Reflection.Metadata.SignatureCallingConvention convention =
@@ -9980,49 +10454,83 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public void GenericMethodTypeParameter(int parameterIndex) { }
+        public void GenericMethodTypeParameter(int parameterIndex)
+        {
+        }
 
-        public void GenericTypeParameter(int parameterIndex) { }
+        public void GenericTypeParameter(int parameterIndex)
+        {
+        }
 
-        public void Int16() { }
+        public void Int16()
+        {
+        }
 
-        public void Int32() { }
+        public void Int32()
+        {
+        }
 
-        public void Int64() { }
+        public void Int64()
+        {
+        }
 
-        public void IntPtr() { }
+        public void IntPtr()
+        {
+        }
 
-        public void Object() { }
+        public void Object()
+        {
+        }
 
         public System.Reflection.Metadata.Ecma335.SignatureTypeEncoder Pointer()
         {
             throw null;
         }
 
-        public void PrimitiveType(System.Reflection.Metadata.PrimitiveTypeCode type) { }
+        public void PrimitiveType(System.Reflection.Metadata.PrimitiveTypeCode type)
+        {
+        }
 
-        public void SByte() { }
+        public void SByte()
+        {
+        }
 
-        public void Single() { }
+        public void Single()
+        {
+        }
 
-        public void String() { }
+        public void String()
+        {
+        }
 
         public System.Reflection.Metadata.Ecma335.SignatureTypeEncoder SZArray()
         {
             throw null;
         }
 
-        public void Type(System.Reflection.Metadata.EntityHandle type, bool isValueType) { }
+        public void Type(System.Reflection.Metadata.EntityHandle type, bool isValueType)
+        {
+        }
 
-        public void UInt16() { }
+        public void UInt16()
+        {
+        }
 
-        public void UInt32() { }
+        public void UInt32()
+        {
+        }
 
-        public void UInt64() { }
+        public void UInt64()
+        {
+        }
 
-        public void UIntPtr() { }
+        public void UIntPtr()
+        {
+        }
 
-        public void VoidPointer() { }
+        public void VoidPointer()
+        {
+        }
     }
 
     public enum TableIndex : byte
@@ -10146,7 +10654,9 @@ namespace System.Reflection.PortableExecutable
 
     public sealed partial class CoffHeader
     {
-        internal CoffHeader() { }
+        internal CoffHeader()
+        {
+        }
 
         public System.Reflection.PortableExecutable.Characteristics Characteristics
         {
@@ -10192,7 +10702,9 @@ namespace System.Reflection.PortableExecutable
 
     public sealed partial class CorHeader
     {
-        internal CorHeader() { }
+        internal CorHeader()
+        {
+        }
 
         public System.Reflection.PortableExecutable.DirectoryEntry CodeManagerTableDirectory
         {
@@ -10242,31 +10754,41 @@ namespace System.Reflection.PortableExecutable
 
     public sealed partial class DebugDirectoryBuilder
     {
-        public DebugDirectoryBuilder() { }
+        public DebugDirectoryBuilder()
+        {
+        }
 
         public void AddCodeViewEntry(
             string pdbPath,
             System.Reflection.Metadata.BlobContentId pdbContentId,
             ushort portablePdbVersion
-        ) { }
+        )
+        {
+        }
 
         public void AddCodeViewEntry(
             string pdbPath,
             System.Reflection.Metadata.BlobContentId pdbContentId,
             ushort portablePdbVersion,
             int age
-        ) { }
+        )
+        {
+        }
 
         public void AddEmbeddedPortablePdbEntry(
             System.Reflection.Metadata.BlobBuilder debugMetadata,
             ushort portablePdbVersion
-        ) { }
+        )
+        {
+        }
 
         public void AddEntry(
             System.Reflection.PortableExecutable.DebugDirectoryEntryType type,
             uint version,
             uint stamp
-        ) { }
+        )
+        {
+        }
 
         public void AddEntry<TData>(
             System.Reflection.PortableExecutable.DebugDirectoryEntryType type,
@@ -10274,14 +10796,20 @@ namespace System.Reflection.PortableExecutable
             uint stamp,
             TData data,
             System.Action<System.Reflection.Metadata.BlobBuilder, TData> dataSerializer
-        ) { }
+        )
+        {
+        }
 
         public void AddPdbChecksumEntry(
             string algorithmName,
             System.Collections.Immutable.ImmutableArray<byte> checksum
-        ) { }
+        )
+        {
+        }
 
-        public void AddReproducibleEntry() { }
+        public void AddReproducibleEntry()
+        {
+        }
     }
 
     public readonly partial struct DebugDirectoryEntry
@@ -10435,7 +10963,9 @@ namespace System.Reflection.PortableExecutable
                     System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
                     System.Reflection.Metadata.BlobContentId
                 >)
-            ) { }
+            )
+        {
+        }
 
         protected override System.Collections.Immutable.ImmutableArray<System.Reflection.PortableExecutable.PEBuilder.Section> CreateSections()
         {
@@ -10461,7 +10991,9 @@ namespace System.Reflection.PortableExecutable
                 System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
                 byte[]
             > signatureProvider
-        ) { }
+        )
+        {
+        }
     }
 
     public readonly partial struct PdbChecksumDebugDirectoryData
@@ -10486,7 +11018,9 @@ namespace System.Reflection.PortableExecutable
                 System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
                 System.Reflection.Metadata.BlobContentId
             >? deterministicIdProvider
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.PortableExecutable.PEHeaderBuilder Header
         {
@@ -10540,88 +11074,122 @@ namespace System.Reflection.PortableExecutable
 
     public sealed partial class PEDirectoriesBuilder
     {
-        public PEDirectoriesBuilder() { }
+        public PEDirectoriesBuilder()
+        {
+        }
 
         public int AddressOfEntryPoint
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry BaseRelocationTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry BoundImportTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry CopyrightTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry CorHeaderTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry DebugTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry DelayImportTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry ExceptionTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry ExportTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry GlobalPointerTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry ImportAddressTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry ImportTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry LoadConfigTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry ResourceTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Reflection.PortableExecutable.DirectoryEntry ThreadLocalStorageTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed partial class PEHeader
     {
-        internal PEHeader() { }
+        internal PEHeader()
+        {
+        }
 
         public int AddressOfEntryPoint
         {
@@ -10826,7 +11394,9 @@ namespace System.Reflection.PortableExecutable
             ulong sizeOfStackCommit = (ulong)4096,
             ulong sizeOfHeapReserve = (ulong)1048576,
             ulong sizeOfHeapCommit = (ulong)4096
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.PortableExecutable.DllCharacteristics DllCharacteristics
         {
@@ -10918,11 +11488,17 @@ namespace System.Reflection.PortableExecutable
 
     public sealed partial class PEHeaders
     {
-        public PEHeaders(System.IO.Stream peStream) { }
+        public PEHeaders(System.IO.Stream peStream)
+        {
+        }
 
-        public PEHeaders(System.IO.Stream peStream, int size) { }
+        public PEHeaders(System.IO.Stream peStream, int size)
+        {
+        }
 
-        public PEHeaders(System.IO.Stream peStream, int size, bool isLoadedImage) { }
+        public PEHeaders(System.IO.Stream peStream, int size, bool isLoadedImage)
+        {
+        }
 
         public System.Reflection.PortableExecutable.CoffHeader CoffHeader
         {
@@ -11033,24 +11609,36 @@ namespace System.Reflection.PortableExecutable
 
     public sealed partial class PEReader : System.IDisposable
     {
-        public unsafe PEReader(byte* peImage, int size) { }
+        public unsafe PEReader(byte* peImage, int size)
+        {
+        }
 
-        public unsafe PEReader(byte* peImage, int size, bool isLoadedImage) { }
+        public unsafe PEReader(byte* peImage, int size, bool isLoadedImage)
+        {
+        }
 
-        public PEReader(System.Collections.Immutable.ImmutableArray<byte> peImage) { }
+        public PEReader(System.Collections.Immutable.ImmutableArray<byte> peImage)
+        {
+        }
 
-        public PEReader(System.IO.Stream peStream) { }
+        public PEReader(System.IO.Stream peStream)
+        {
+        }
 
         public PEReader(
             System.IO.Stream peStream,
             System.Reflection.PortableExecutable.PEStreamOptions options
-        ) { }
+        )
+        {
+        }
 
         public PEReader(
             System.IO.Stream peStream,
             System.Reflection.PortableExecutable.PEStreamOptions options,
             int size
-        ) { }
+        )
+        {
+        }
 
         public bool HasMetadata
         {
@@ -11069,7 +11657,9 @@ namespace System.Reflection.PortableExecutable
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Reflection.PortableExecutable.PEMemoryBlock GetEntireImage()
         {
@@ -11142,7 +11732,9 @@ namespace System.Reflection.PortableExecutable
 
     public abstract partial class ResourceSectionBuilder
     {
-        protected ResourceSectionBuilder() { }
+        protected ResourceSectionBuilder()
+        {
+        }
 
         protected internal abstract void Serialize(
             System.Reflection.Metadata.BlobBuilder builder,

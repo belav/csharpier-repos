@@ -13,5 +13,7 @@ namespace System.Runtime.CompilerServices
         Inherited = false,
         AllowMultiple = false
     )]
-    public class ReflectionBlockedAttribute : Attribute { }
+    public class ReflectionBlockedAttribute : Attribute
+    {
+    }
 }

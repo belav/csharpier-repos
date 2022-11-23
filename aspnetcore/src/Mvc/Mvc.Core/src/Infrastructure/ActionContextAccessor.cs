@@ -29,7 +29,9 @@ public class ActionContextAccessor : IActionContextAccessor
         public ActionContext? ActionContext
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
     }
 }

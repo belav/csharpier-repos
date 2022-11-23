@@ -3,5 +3,7 @@
 
 namespace System.CodeDom
 {
-    public class CodeDirective : CodeObject { }
+    public class CodeDirective : CodeObject
+    {
+    }
 }

@@ -35,9 +35,13 @@ namespace Castle.DynamicProxy
             return SkippedTypes.Contains(methodInfo.DeclaringType) == false;
         }
 
-        public virtual void NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
+        public virtual void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+        {
+        }
 
-        public virtual void MethodsInspected() { }
+        public virtual void MethodsInspected()
+        {
+        }
 
         public override bool Equals(object obj)
         {

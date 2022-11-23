@@ -86,7 +86,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             private int _offset;
 
-            public AttributedPointConverter() { }
+            public AttributedPointConverter()
+            {
+            }
 
             public AttributedPointConverter(int offset)
             {

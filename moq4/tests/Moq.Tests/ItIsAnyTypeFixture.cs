@@ -213,7 +213,12 @@ namespace Moq.Tests
             var mock = new Mock<IY>();
             var setup = mock.Setup(m => m.Method(It.IsAny<It.IsAnyType>()));
 
-            Assert.Throws<ArgumentException>(() => setup.Callback<It.IsAnyType>(arg => { }));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    setup.Callback<It.IsAnyType>(arg =>
+                    {
+                    })
+            );
             //                                                                  ^^^
             // Similar to the above test, no actual argument will ever have type `It.IsAnyType`;
             // Moq should mark this as illegal use, and one should be using `object` instead.

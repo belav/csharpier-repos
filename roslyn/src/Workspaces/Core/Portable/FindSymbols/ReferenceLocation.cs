@@ -108,7 +108,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 additionalProperties,
                 candidateReason,
                 containingStringLocation: Location.None
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a reference location within a string literal.
@@ -128,7 +130,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 additionalProperties: ImmutableDictionary<string, string>.Empty,
                 CandidateReason.None,
                 containingStringLocation
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Indicates if this was not an exact reference to a location, but was instead a possible

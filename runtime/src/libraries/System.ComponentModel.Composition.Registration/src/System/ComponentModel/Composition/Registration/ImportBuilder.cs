@@ -18,7 +18,9 @@ namespace System.ComponentModel.Composition.Registration
         private CreationPolicy _requiredCreationPolicy;
         private ImportSource _source;
 
-        public ImportBuilder() { }
+        public ImportBuilder()
+        {
+        }
 
         public ImportBuilder AsContractType<T>()
         {

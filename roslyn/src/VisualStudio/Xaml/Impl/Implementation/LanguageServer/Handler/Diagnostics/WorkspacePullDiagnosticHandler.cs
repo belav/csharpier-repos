@@ -30,7 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public WorkspacePullDiagnosticHandler(IXamlPullDiagnosticService xamlPullDiagnosticService)
-            : base(xamlPullDiagnosticService) { }
+            : base(xamlPullDiagnosticService)
+        {
+        }
 
         protected override VSInternalWorkspaceDiagnosticReport CreateReport(
             TextDocumentIdentifier? identifier,

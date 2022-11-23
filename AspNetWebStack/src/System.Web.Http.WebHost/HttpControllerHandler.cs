@@ -52,7 +52,9 @@ namespace System.Web.Http.WebHost
             // If the behavior is explicitly disabled, do nothing
             if (!SuppressFormsAuthRedirectHelper.GetEnabled(WebConfigurationManager.AppSettings))
             {
-                return httpContext => { };
+                return httpContext =>
+                {
+                };
             }
 
             return httpContext => httpContext.Response.SuppressFormsAuthenticationRedirect = true;
@@ -87,7 +89,9 @@ namespace System.Web.Http.WebHost
         /// </summary>
         /// <param name="routeData">The route data.</param>
         public HttpControllerHandler(RouteData routeData)
-            : this(routeData, GlobalConfiguration.DefaultServer) { }
+            : this(routeData, GlobalConfiguration.DefaultServer)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpControllerHandler"/> class.
@@ -944,7 +948,9 @@ namespace System.Web.Http.WebHost
 
         private class DelegatingStreamContent : StreamContent
         {
-            public DelegatingStreamContent(Stream stream) : base(stream) { }
+            public DelegatingStreamContent(Stream stream) : base(stream)
+            {
+            }
 
             public Task WriteToStreamAsync(Stream stream, TransportContext context)
             {

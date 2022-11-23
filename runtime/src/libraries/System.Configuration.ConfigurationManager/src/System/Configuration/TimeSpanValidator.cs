@@ -11,10 +11,14 @@ namespace System.Configuration
         private readonly long _resolution;
 
         public TimeSpanValidator(TimeSpan minValue, TimeSpan maxValue)
-            : this(minValue, maxValue, false, 0) { }
+            : this(minValue, maxValue, false, 0)
+        {
+        }
 
         public TimeSpanValidator(TimeSpan minValue, TimeSpan maxValue, bool rangeIsExclusive)
-            : this(minValue, maxValue, rangeIsExclusive, 0) { }
+            : this(minValue, maxValue, rangeIsExclusive, 0)
+        {
+        }
 
         public TimeSpanValidator(
             TimeSpan minValue,

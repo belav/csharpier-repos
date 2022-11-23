@@ -63,7 +63,9 @@ namespace Microsoft.CodeAnalysis.Structure
                 bannerText,
                 autoCollapse,
                 isDefaultCollapsed
-            ) { }
+            )
+        {
+        }
 
         public BlockSpan(
             string type,

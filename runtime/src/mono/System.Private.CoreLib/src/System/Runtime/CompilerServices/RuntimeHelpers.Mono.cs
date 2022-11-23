@@ -88,7 +88,9 @@ namespace System.Runtime.CompilerServices
             return SufficientExecutionStack();
         }
 
-        public static void PrepareDelegate(Delegate d) { }
+        public static void PrepareDelegate(Delegate d)
+        {
+        }
 
         public static void PrepareMethod(RuntimeMethodHandle method)
         {
@@ -158,17 +160,17 @@ namespace System.Runtime.CompilerServices
         // Mono uses a conservative GC so there is no need for this API to be full implemented.
         internal unsafe ref struct GCFrameRegistration
         {
-            public GCFrameRegistration(void* allocation, uint elemCount, bool areByRefs = true) { }
+            public GCFrameRegistration(void* allocation, uint elemCount, bool areByRefs = true)
+            {
+            }
         }
 
-        internal static unsafe void RegisterForGCReporting(
-            GCFrameRegistration* pRegistration
-        ) { /* nop */
+        internal static unsafe void RegisterForGCReporting(GCFrameRegistration* pRegistration)
+        { /* nop */
         }
 
-        internal static unsafe void UnregisterForGCReporting(
-            GCFrameRegistration* pRegistration
-        ) { /* nop */
+        internal static unsafe void UnregisterForGCReporting(GCFrameRegistration* pRegistration)
+        { /* nop */
         }
 
         public static object GetUninitializedObject(

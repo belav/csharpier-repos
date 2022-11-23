@@ -8,7 +8,9 @@ namespace System.CodeDom
         private readonly CodeExpressionCollection _initializers = new CodeExpressionCollection();
         private CodeTypeReference _createType;
 
-        public CodeArrayCreateExpression() { }
+        public CodeArrayCreateExpression()
+        {
+        }
 
         public CodeArrayCreateExpression(
             CodeTypeReference createType,

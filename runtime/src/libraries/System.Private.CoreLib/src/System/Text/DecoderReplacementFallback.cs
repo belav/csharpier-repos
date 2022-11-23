@@ -15,7 +15,9 @@ namespace System.Text
         private readonly string _strDefault;
 
         // Construction.  Default replacement fallback uses no best fit and ? replacement string
-        public DecoderReplacementFallback() : this("?") { }
+        public DecoderReplacementFallback() : this("?")
+        {
+        }
 
         public DecoderReplacementFallback(string replacement)
         {

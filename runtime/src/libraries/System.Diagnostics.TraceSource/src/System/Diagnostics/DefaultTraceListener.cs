@@ -24,7 +24,9 @@ namespace System.Diagnostics
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.DefaultTraceListener'/> class with
         ///    Default as its <see cref='System.Diagnostics.TraceListener.Name'/>.</para>
         /// </devdoc>
-        public DefaultTraceListener() : base("Default") { }
+        public DefaultTraceListener() : base("Default")
+        {
+        }
 
         public bool AssertUiEnabled
         {

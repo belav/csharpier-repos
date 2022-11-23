@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
 
         // Used by F#
         internal SourceReferenceItem(DefinitionItem definition, DocumentSpan sourceSpan)
-            : this(definition, sourceSpan, SymbolUsageInfo.None) { }
+            : this(definition, sourceSpan, SymbolUsageInfo.None)
+        {
+        }
 
         // Used by TypeScript
         internal SourceReferenceItem(
@@ -73,7 +75,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 sourceSpan,
                 symbolUsageInfo,
                 additionalProperties: ImmutableDictionary<string, string>.Empty
-            ) { }
+            )
+        {
+        }
 
         internal SourceReferenceItem(
             DefinitionItem definition,
@@ -87,6 +91,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 symbolUsageInfo,
                 additionalProperties,
                 isWrittenTo: symbolUsageInfo.IsWrittenTo()
-            ) { }
+            )
+        {
+        }
     }
 }

@@ -58,7 +58,9 @@ namespace ILCompiler.Reflection.ReadyToRun
     {
         public int CodeOffset { get; set; }
 
-        public BaseGcTransition() { }
+        public BaseGcTransition()
+        {
+        }
 
         public BaseGcTransition(int codeOffset)
         {

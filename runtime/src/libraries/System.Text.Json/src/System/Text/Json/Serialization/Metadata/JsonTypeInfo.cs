@@ -625,7 +625,9 @@ namespace System.Text.Json.Serialization.Metadata
         }
 #endif
 
-        internal virtual void LateAddProperties() { }
+        internal virtual void LateAddProperties()
+        {
+        }
 
         /// <summary>
         /// Creates a blank <see cref="JsonTypeInfo{T}"/> instance.

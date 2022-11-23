@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpAddYieldCodeFixProvider() { }
+        public CSharpAddYieldCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {
@@ -302,7 +304,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                     CSharpFeaturesResources.Replace_return_with_yield_return,
                     c => Task.FromResult(newDocument),
                     nameof(CSharpFeaturesResources.Replace_return_with_yield_return)
-                ) { }
+                )
+            {
+            }
         }
     }
 }

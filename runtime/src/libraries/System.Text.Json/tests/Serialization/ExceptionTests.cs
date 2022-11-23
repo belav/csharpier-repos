@@ -726,13 +726,17 @@ namespace System.Text.Json.Serialization.Tests
 
         public class ClassWithBadCtor
         {
-            public ClassWithBadCtor(SerializationInfo info, StreamingContext ctx) { }
+            public ClassWithBadCtor(SerializationInfo info, StreamingContext ctx)
+            {
+            }
         }
 
         public struct StructWithBadCtor
         {
             [JsonConstructor]
-            public StructWithBadCtor(SerializationInfo info, StreamingContext ctx) { }
+            public StructWithBadCtor(SerializationInfo info, StreamingContext ctx)
+            {
+            }
         }
 
         public class ClassWithBadCtor_WithProps

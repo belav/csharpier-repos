@@ -8,41 +8,57 @@ namespace System.Memory.Tests.SequenceReader
 {
     public class ArrayByte : SingleSegment<byte>
     {
-        public ArrayByte() : base(ReadOnlySequenceFactory<byte>.ArrayFactory, s_byteInputData) { }
+        public ArrayByte() : base(ReadOnlySequenceFactory<byte>.ArrayFactory, s_byteInputData)
+        {
+        }
     }
 
     public class ArrayChar : SingleSegment<char>
     {
-        public ArrayChar() : base(ReadOnlySequenceFactory<char>.ArrayFactory, s_charInputData) { }
+        public ArrayChar() : base(ReadOnlySequenceFactory<char>.ArrayFactory, s_charInputData)
+        {
+        }
     }
 
     public class MemoryByte : SingleSegment<byte>
     {
-        public MemoryByte() : base(ReadOnlySequenceFactory<byte>.MemoryFactory, s_byteInputData) { }
+        public MemoryByte() : base(ReadOnlySequenceFactory<byte>.MemoryFactory, s_byteInputData)
+        {
+        }
     }
 
     public class MemoryChar : SingleSegment<char>
     {
-        public MemoryChar() : base(ReadOnlySequenceFactory<char>.MemoryFactory, s_charInputData) { }
+        public MemoryChar() : base(ReadOnlySequenceFactory<char>.MemoryFactory, s_charInputData)
+        {
+        }
     }
 
     public class SingleSegmentByte : SingleSegment<byte>
     {
-        public SingleSegmentByte() : base(s_byteInputData) { }
+        public SingleSegmentByte() : base(s_byteInputData)
+        {
+        }
     }
 
     public class SingleSegmentChar : SingleSegment<char>
     {
-        public SingleSegmentChar() : base(s_charInputData) { }
+        public SingleSegmentChar() : base(s_charInputData)
+        {
+        }
     }
 
     public abstract class SingleSegment<T> : ReaderBasicTests<T> where T : unmanaged, IEquatable<T>
     {
         public SingleSegment(T[] inputData)
-            : base(ReadOnlySequenceFactory<T>.SingleSegmentFactory, inputData) { }
+            : base(ReadOnlySequenceFactory<T>.SingleSegmentFactory, inputData)
+        {
+        }
 
         internal SingleSegment(ReadOnlySequenceFactory<T> factory, T[] inputData)
-            : base(factory, inputData) { }
+            : base(factory, inputData)
+        {
+        }
 
         [Fact]
         public void AdvanceSingleBufferSkipsValues()
@@ -158,13 +174,17 @@ namespace System.Memory.Tests.SequenceReader
     public class SegmentPerByte : ReaderBasicTests<byte>
     {
         public SegmentPerByte()
-            : base(ReadOnlySequenceFactory<byte>.SegmentPerItemFactory, s_byteInputData) { }
+            : base(ReadOnlySequenceFactory<byte>.SegmentPerItemFactory, s_byteInputData)
+        {
+        }
     }
 
     public class SegmentPerChar : ReaderBasicTests<char>
     {
         public SegmentPerChar()
-            : base(ReadOnlySequenceFactory<char>.SegmentPerItemFactory, s_charInputData) { }
+            : base(ReadOnlySequenceFactory<char>.SegmentPerItemFactory, s_charInputData)
+        {
+        }
     }
 
     public abstract class ReaderBasicTests<T> where T : unmanaged, IEquatable<T>

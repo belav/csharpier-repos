@@ -121,10 +121,14 @@ namespace System.Data.SqlTypes
             this = FromDateTime(value);
         }
 
-        public SqlDateTime(int year, int month, int day) : this(year, month, day, 0, 0, 0, 0.0) { }
+        public SqlDateTime(int year, int month, int day) : this(year, month, day, 0, 0, 0, 0.0)
+        {
+        }
 
         public SqlDateTime(int year, int month, int day, int hour, int minute, int second)
-            : this(year, month, day, hour, minute, second, 0.0) { }
+            : this(year, month, day, hour, minute, second, 0.0)
+        {
+        }
 
         public SqlDateTime(
             int year,
@@ -196,7 +200,9 @@ namespace System.Data.SqlTypes
             int minute,
             int second,
             int bilisecond
-        ) : this(year, month, day, hour, minute, second, bilisecond / 1000.0) { }
+        ) : this(year, month, day, hour, minute, second, bilisecond / 1000.0)
+        {
+        }
 
         public SqlDateTime(int dayTicks, int timeTicks)
         {

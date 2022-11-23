@@ -52,7 +52,9 @@ namespace System.Linq.Expressions
             return Expression.MemberBind(Member, bindings!);
         }
 
-        internal override void ValidateAsDefinedHere(int index) { }
+        internal override void ValidateAsDefinedHere(int index)
+        {
+        }
     }
 
     public partial class Expression

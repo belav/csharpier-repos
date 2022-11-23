@@ -1,4 +1,6 @@
-public struct GenStruct<T> { }
+public struct GenStruct<T>
+{
+}
 
 public class Gen<T>
 {

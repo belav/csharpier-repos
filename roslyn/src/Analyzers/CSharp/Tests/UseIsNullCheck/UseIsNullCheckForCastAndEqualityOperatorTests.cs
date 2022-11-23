@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseIsNullCheckForCastAndEqualityOperatorTests(ITestOutputHelper logger)
-            : base(logger) { }
+            : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

@@ -85,7 +85,8 @@ namespace Newtonsoft.Json
                 int depth = Depth;
 
                 while (await ReadAsync(cancellationToken).ConfigureAwait(false) && depth < Depth)
-                { }
+                {
+                }
             }
         }
 

@@ -36,7 +36,9 @@ public class BoolToStringConverter : BoolToTwoValuesConverter<string>
             new ConverterMappingHints(size: Math.Max(falseValue.Length, trueValue.Length)).With(
                 mappingHints
             )
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

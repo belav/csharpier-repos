@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             EmbeddedLanguageInfo info,
             ISyntaxKinds syntaxKinds,
             IEnumerable<Lazy<IEmbeddedLanguageBraceMatcher, EmbeddedLanguageMetadata>> allServices
-        ) : base(languageName, info, syntaxKinds, allServices) { }
+        ) : base(languageName, info, syntaxKinds, allServices)
+        {
+        }
 
         public async Task<BraceMatchingResult?> FindBracesAsync(
             Document document,

@@ -685,7 +685,9 @@ namespace System.Web.Mvc.Test
         // [DisplayColumn] tests
 
         [DisplayColumn("NoPropertyWithThisName")]
-        class UnknownDisplayColumnModel { }
+        class UnknownDisplayColumnModel
+        {
+        }
 
         [Fact]
         public void SimpleDisplayNameWithUnknownDisplayColumnThrows()
@@ -712,7 +714,9 @@ namespace System.Web.Mvc.Test
         {
             public int WriteOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

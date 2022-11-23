@@ -32,7 +32,9 @@ namespace System.Linq
     /// Provides functionality to evaluate queries against a specific data source wherein the type of the data is known.
     /// </summary>
     /// <typeparam name="T">The type of the data in the data source.</typeparam>
-    public interface IQueryable<out T> : IEnumerable<T>, IQueryable { }
+    public interface IQueryable<out T> : IEnumerable<T>, IQueryable
+    {
+    }
 
     /// <summary>
     /// Defines methods to create and execute queries that are described by an <see cref="IQueryable"/> object.
@@ -90,11 +92,15 @@ namespace System.Linq
     /// <summary>
     /// Represents the result of a sorting operation.
     /// </summary>
-    public interface IOrderedQueryable : IQueryable { }
+    public interface IOrderedQueryable : IQueryable
+    {
+    }
 
     /// <summary>
     /// Represents the result of a sorting operation.
     /// </summary>
     /// <typeparam name="T">The type of the content of the data source.</typeparam>
-    public interface IOrderedQueryable<out T> : IQueryable<T>, IOrderedQueryable { }
+    public interface IOrderedQueryable<out T> : IQueryable<T>, IOrderedQueryable
+    {
+    }
 }

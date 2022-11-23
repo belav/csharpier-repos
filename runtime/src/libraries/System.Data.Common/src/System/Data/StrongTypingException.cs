@@ -15,7 +15,9 @@ namespace System.Data
     public class StrongTypingException : DataException
     {
         protected StrongTypingException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public StrongTypingException() : base()
         {

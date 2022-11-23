@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using UnboxTest;
 using BoxTest;
 
-public class ClassA { }
+public class ClassA
+{
+}
 
 public struct GenStruct<T>
 {

@@ -9,7 +9,9 @@ public class ManyToManyFieldsLoadSqlServerTest
     : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadSqlServerTest.ManyToManyFieldsLoadSqlServerFixture>
 {
     public ManyToManyFieldsLoadSqlServerTest(ManyToManyFieldsLoadSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override async Task Load_collection(
         EntityState state,

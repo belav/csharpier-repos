@@ -65,14 +65,22 @@ namespace MonoBug
 
         public bool MoveNext() => true;
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
-    class ValueBase { }
+    class ValueBase
+    {
+    }
 
-    class Value : ValueBase { }
+    class Value : ValueBase
+    {
+    }
 
     class Program
     {

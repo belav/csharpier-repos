@@ -52,7 +52,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
         public GenericStringTestModelBuilder(
             TestHelpers testHelpers,
             Action<ModelConfigurationBuilder>? configure
-        ) : base(testHelpers, configure) { }
+        ) : base(testHelpers, configure)
+        {
+        }
 
         public override TestEntityTypeBuilder<TEntity> Entity<TEntity>() =>
             new GenericStringTestEntityTypeBuilder<TEntity>(ModelBuilder.Entity<TEntity>());
@@ -102,7 +104,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
         : GenericTestEntityTypeBuilder<TEntity> where TEntity : class
     {
         public GenericStringTestEntityTypeBuilder(EntityTypeBuilder<TEntity> entityTypeBuilder)
-            : base(entityTypeBuilder) { }
+            : base(entityTypeBuilder)
+        {
+        }
 
         protected override TestEntityTypeBuilder<TEntity> Wrap(
             EntityTypeBuilder<TEntity> entityTypeBuilder
@@ -189,7 +193,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
     {
         public GenericStringTestReferenceNavigationBuilder(
             ReferenceNavigationBuilder<TEntity, TRelatedEntity> referenceNavigationBuilder
-        ) : base(referenceNavigationBuilder) { }
+        ) : base(referenceNavigationBuilder)
+        {
+        }
 
         public override TestReferenceCollectionBuilder<TRelatedEntity, TEntity> WithMany(
             Expression<Func<TRelatedEntity, IEnumerable<TEntity>?>>? navigationExpression = null
@@ -217,7 +223,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
     {
         public GenericStringTestCollectionNavigationBuilder(
             CollectionNavigationBuilder<TEntity, TRelatedEntity> collectionNavigationBuilder
-        ) : base(collectionNavigationBuilder) { }
+        ) : base(collectionNavigationBuilder)
+        {
+        }
 
         public override TestReferenceCollectionBuilder<TEntity, TRelatedEntity> WithOne(
             Expression<Func<TRelatedEntity, TEntity?>>? navigationExpression = null
@@ -245,7 +253,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
     {
         public GenericStringTestReferenceCollectionBuilder(
             ReferenceCollectionBuilder<TEntity, TRelatedEntity> referenceCollectionBuilder
-        ) : base(referenceCollectionBuilder) { }
+        ) : base(referenceCollectionBuilder)
+        {
+        }
 
         protected override GenericTestReferenceCollectionBuilder<TEntity, TRelatedEntity> Wrap(
             ReferenceCollectionBuilder<TEntity, TRelatedEntity> referenceCollectionBuilder
@@ -286,7 +296,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
     {
         public GenericStringTestReferenceReferenceBuilder(
             ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder
-        ) : base(referenceReferenceBuilder) { }
+        ) : base(referenceReferenceBuilder)
+        {
+        }
 
         protected override GenericTestReferenceReferenceBuilder<TEntity, TRelatedEntity> Wrap(
             ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder
@@ -357,7 +369,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
     {
         public GenericStringTestCollectionCollectionBuilder(
             CollectionCollectionBuilder<TLeftEntity, TRightEntity> collectionCollectionBuilder
-        ) : base(collectionCollectionBuilder) { }
+        ) : base(collectionCollectionBuilder)
+        {
+        }
     }
 
     private class GenericStringTestOwnedNavigationBuilder<TEntity, TDependentEntity>
@@ -367,7 +381,9 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
     {
         public GenericStringTestOwnedNavigationBuilder(
             OwnedNavigationBuilder<TEntity, TDependentEntity> ownedNavigationBuilder
-        ) : base(ownedNavigationBuilder) { }
+        ) : base(ownedNavigationBuilder)
+        {
+        }
 
         protected override GenericTestOwnedNavigationBuilder<TNewEntity, TNewRelatedEntity> Wrap<
             TNewEntity,

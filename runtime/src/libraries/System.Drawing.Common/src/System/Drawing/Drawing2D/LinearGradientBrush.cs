@@ -112,7 +112,9 @@ namespace System.Drawing.Drawing2D
         }
 
         public LinearGradientBrush(RectangleF rect, Color color1, Color color2, float angle)
-            : this(rect, color1, color2, angle, false) { }
+            : this(rect, color1, color2, angle, false)
+        {
+        }
 
         public LinearGradientBrush(
             RectangleF rect,
@@ -141,7 +143,9 @@ namespace System.Drawing.Drawing2D
         }
 
         public LinearGradientBrush(Rectangle rect, Color color1, Color color2, float angle)
-            : this(rect, color1, color2, angle, false) { }
+            : this(rect, color1, color2, angle, false)
+        {
+        }
 
         public LinearGradientBrush(
             Rectangle rect,

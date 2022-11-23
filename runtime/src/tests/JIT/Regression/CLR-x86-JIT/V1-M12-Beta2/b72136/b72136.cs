@@ -10,12 +10,16 @@ namespace Test
     {
         public static object m_xStatic1 = null;
 
-        public void Method1(ref byte param1) { }
+        public void Method1(ref byte param1)
+        {
+        }
     }
 
     public struct BB
     {
-        public void Method1(float[] param5) { }
+        public void Method1(float[] param5)
+        {
+        }
     }
 
     class App
@@ -26,12 +30,16 @@ namespace Test
             {
                 new AA().Method1(ref new byte[] { 73 }[(new byte[16])[0] & 1]);
             }
-            catch (Exception X) { }
+            catch (Exception X)
+            {
+            }
             try
             {
                 new BB().Method1(new float[] { ((float[])AA.m_xStatic1)[0] });
             }
-            catch (Exception X) { }
+            catch (Exception X)
+            {
+            }
             return 100;
         }
     }

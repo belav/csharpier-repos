@@ -24,6 +24,8 @@ class A
                 continue;
             } while (new object[] { }[0] != null);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 }

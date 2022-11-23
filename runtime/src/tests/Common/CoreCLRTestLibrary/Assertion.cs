@@ -874,9 +874,13 @@ namespace TestLibrary
     /// </summary>
     public class AssertTestException : Exception
     {
-        public AssertTestException(string message) : base(message) { }
+        public AssertTestException(string message) : base(message)
+        {
+        }
 
-        public AssertTestException() : base() { }
+        public AssertTestException() : base()
+        {
+        }
     }
 
     public static class ExceptionAssert

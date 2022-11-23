@@ -18,7 +18,9 @@ namespace System.DirectoryServices.AccountManagement
         private readonly PropertyCollection _pc;
         private readonly ResultPropertyCollection _rp;
 
-        private dSPropertyCollection() { }
+        private dSPropertyCollection()
+        {
+        }
 
         internal dSPropertyCollection(PropertyCollection pc)
         {
@@ -54,7 +56,9 @@ namespace System.DirectoryServices.AccountManagement
         private readonly PropertyValueCollection _pc;
         private readonly ResultPropertyValueCollection _rc;
 
-        private dSPropertyValueCollection() { }
+        private dSPropertyValueCollection()
+        {
+        }
 
         internal dSPropertyValueCollection(PropertyValueCollection pc)
         {

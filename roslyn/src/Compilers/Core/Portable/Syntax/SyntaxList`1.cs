@@ -31,13 +31,17 @@ namespace Microsoft.CodeAnalysis
         /// Creates a singleton list of syntax nodes.
         /// </summary>
         /// <param name="node">The single element node.</param>
-        public SyntaxList(TNode? node) : this((SyntaxNode?)node) { }
+        public SyntaxList(TNode? node) : this((SyntaxNode?)node)
+        {
+        }
 
         /// <summary>
         /// Creates a list of syntax nodes.
         /// </summary>
         /// <param name="nodes">A sequence of element nodes.</param>
-        public SyntaxList(IEnumerable<TNode>? nodes) : this(CreateNode(nodes)) { }
+        public SyntaxList(IEnumerable<TNode>? nodes) : this(CreateNode(nodes))
+        {
+        }
 
         private static SyntaxNode? CreateNode(IEnumerable<TNode>? nodes)
         {

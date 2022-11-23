@@ -57,7 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpFullyQualifyCodeFixProvider() { }
+        public CSharpFullyQualifyCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {

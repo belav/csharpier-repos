@@ -13,7 +13,9 @@ namespace System.Net.Sockets.Tests
 {
     public abstract class Connect<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
     {
-        public Connect(ITestOutputHelper output) : base(output) { }
+        public Connect(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [OuterLoop]
         [Theory]
@@ -306,22 +308,30 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ConnectSync : Connect<SocketHelperArraySync>
     {
-        public ConnectSync(ITestOutputHelper output) : base(output) { }
+        public ConnectSync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectSyncForceNonBlocking : Connect<SocketHelperSyncForceNonBlocking>
     {
-        public ConnectSyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public ConnectSyncForceNonBlocking(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectApm : Connect<SocketHelperApm>
     {
-        public ConnectApm(ITestOutputHelper output) : base(output) { }
+        public ConnectApm(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectTask : Connect<SocketHelperTask>
     {
-        public ConnectTask(ITestOutputHelper output) : base(output) { }
+        public ConnectTask(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [OuterLoop]
         [Fact]
@@ -354,12 +364,16 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ConnectEap : Connect<SocketHelperEap>
     {
-        public ConnectEap(ITestOutputHelper output) : base(output) { }
+        public ConnectEap(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectCancellableTask : Connect<SocketHelperCancellableTask>
     {
-        public ConnectCancellableTask(ITestOutputHelper output) : base(output) { }
+        public ConnectCancellableTask(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public async Task ConnectEndPoint_Precanceled_Throws()
@@ -600,7 +614,9 @@ namespace System.Net.Sockets.Tests
     public abstract class Connect_NonParallel<T> : SocketTestHelperBase<T>
         where T : SocketHelperBase, new()
     {
-        protected Connect_NonParallel(ITestOutputHelper output) : base(output) { }
+        protected Connect_NonParallel(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public async Task Connect_DualMode_MultiAddressFamilyConnect_RetrievedEndPoints_Success()
@@ -675,27 +691,37 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ConnectSync_NonParallel : Connect_NonParallel<SocketHelperArraySync>
     {
-        public ConnectSync_NonParallel(ITestOutputHelper output) : base(output) { }
+        public ConnectSync_NonParallel(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectSyncForceNonBlocking_NonParallel
         : Connect_NonParallel<SocketHelperSyncForceNonBlocking>
     {
-        public ConnectSyncForceNonBlocking_NonParallel(ITestOutputHelper output) : base(output) { }
+        public ConnectSyncForceNonBlocking_NonParallel(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectApm_NonParallel : Connect_NonParallel<SocketHelperApm>
     {
-        public ConnectApm_NonParallel(ITestOutputHelper output) : base(output) { }
+        public ConnectApm_NonParallel(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectTask_NonParallel : Connect_NonParallel<SocketHelperTask>
     {
-        public ConnectTask_NonParallel(ITestOutputHelper output) : base(output) { }
+        public ConnectTask_NonParallel(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ConnectEap_NonParallel : Connect_NonParallel<SocketHelperEap>
     {
-        public ConnectEap_NonParallel(ITestOutputHelper output) : base(output) { }
+        public ConnectEap_NonParallel(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 }

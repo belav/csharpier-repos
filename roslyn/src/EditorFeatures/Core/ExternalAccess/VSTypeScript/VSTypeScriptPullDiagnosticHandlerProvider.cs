@@ -32,7 +32,9 @@ internal class VSTypeScriptDocumentPullDiagnosticHandlerFactory
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
         IGlobalOptionService globalOptions
-    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
+    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
+    {
+    }
 }
 
 [
@@ -50,5 +52,7 @@ internal class VSTypeScriptWorkspacePullDiagnosticHandler : WorkspacePullDiagnos
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
         IGlobalOptionService globalOptions
-    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
+    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
+    {
+    }
 }

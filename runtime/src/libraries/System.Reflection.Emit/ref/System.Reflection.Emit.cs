@@ -8,7 +8,9 @@ namespace System.Reflection.Emit
 {
     public sealed partial class AssemblyBuilder : System.Reflection.Assembly
     {
-        internal AssemblyBuilder() { }
+        internal AssemblyBuilder()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location instead.",
@@ -218,11 +220,13 @@ namespace System.Reflection.Emit
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -234,7 +238,9 @@ namespace System.Reflection.Emit
 
     public sealed partial class ConstructorBuilder : System.Reflection.ConstructorInfo
     {
-        internal ConstructorBuilder() { }
+        internal ConstructorBuilder()
+        {
+        }
 
         public override System.Reflection.MethodAttributes Attributes
         {
@@ -251,7 +257,9 @@ namespace System.Reflection.Emit
         public bool InitLocals
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int MetadataToken
         {
@@ -342,13 +350,17 @@ namespace System.Reflection.Emit
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetImplementationFlags(System.Reflection.MethodImplAttributes attributes) { }
+        public void SetImplementationFlags(System.Reflection.MethodImplAttributes attributes)
+        {
+        }
 
         public override string ToString()
         {
@@ -358,7 +370,9 @@ namespace System.Reflection.Emit
 
     public sealed partial class EnumBuilder : System.Reflection.TypeInfo
     {
-        internal EnumBuilder() { }
+        internal EnumBuilder()
+        {
+        }
 
         public override System.Reflection.Assembly Assembly
         {
@@ -809,38 +823,54 @@ namespace System.Reflection.Emit
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
     }
 
     public sealed partial class EventBuilder
     {
-        internal EventBuilder() { }
+        internal EventBuilder()
+        {
+        }
 
-        public void AddOtherMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
+        public void AddOtherMethod(System.Reflection.Emit.MethodBuilder mdBuilder)
+        {
+        }
 
-        public void SetAddOnMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
+        public void SetAddOnMethod(System.Reflection.Emit.MethodBuilder mdBuilder)
+        {
+        }
 
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetRaiseMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
+        public void SetRaiseMethod(System.Reflection.Emit.MethodBuilder mdBuilder)
+        {
+        }
 
-        public void SetRemoveOnMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
+        public void SetRemoveOnMethod(System.Reflection.Emit.MethodBuilder mdBuilder)
+        {
+        }
     }
 
     public sealed partial class FieldBuilder : System.Reflection.FieldInfo
     {
-        internal FieldBuilder() { }
+        internal FieldBuilder()
+        {
+        }
 
         public override System.Reflection.FieldAttributes Attributes
         {
@@ -895,18 +925,24 @@ namespace System.Reflection.Emit
             throw null;
         }
 
-        public void SetConstant(object? defaultValue) { }
+        public void SetConstant(object? defaultValue)
+        {
+        }
 
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetOffset(int iOffset) { }
+        public void SetOffset(int iOffset)
+        {
+        }
 
         public override void SetValue(
             object? obj,
@@ -914,12 +950,16 @@ namespace System.Reflection.Emit
             System.Reflection.BindingFlags invokeAttr,
             System.Reflection.Binder? binder,
             System.Globalization.CultureInfo? culture
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class GenericTypeParameterBuilder : System.Reflection.TypeInfo
     {
-        internal GenericTypeParameterBuilder() { }
+        internal GenericTypeParameterBuilder()
+        {
+        }
 
         public override System.Reflection.Assembly Assembly
         {
@@ -1414,22 +1454,30 @@ namespace System.Reflection.Emit
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type? baseTypeConstraint
-        ) { }
+        )
+        {
+        }
 
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
 
         public void SetGenericParameterAttributes(
             System.Reflection.GenericParameterAttributes genericParameterAttributes
-        ) { }
+        )
+        {
+        }
 
-        public void SetInterfaceConstraints(params System.Type[]? interfaceConstraints) { }
+        public void SetInterfaceConstraints(params System.Type[]? interfaceConstraints)
+        {
+        }
 
         public override string ToString()
         {
@@ -1439,7 +1487,9 @@ namespace System.Reflection.Emit
 
     public sealed partial class MethodBuilder : System.Reflection.MethodInfo
     {
-        internal MethodBuilder() { }
+        internal MethodBuilder()
+        {
+        }
 
         public override System.Reflection.MethodAttributes Attributes
         {
@@ -1460,7 +1510,9 @@ namespace System.Reflection.Emit
         public bool InitLocals
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool IsGenericMethod
         {
@@ -1618,17 +1670,25 @@ namespace System.Reflection.Emit
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetImplementationFlags(System.Reflection.MethodImplAttributes attributes) { }
+        public void SetImplementationFlags(System.Reflection.MethodImplAttributes attributes)
+        {
+        }
 
-        public void SetParameters(params System.Type[] parameterTypes) { }
+        public void SetParameters(params System.Type[] parameterTypes)
+        {
+        }
 
-        public void SetReturnType(System.Type? returnType) { }
+        public void SetReturnType(System.Type? returnType)
+        {
+        }
 
         public void SetSignature(
             System.Type? returnType,
@@ -1637,7 +1697,9 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type[][]? parameterTypeRequiredCustomModifiers,
             System.Type[][]? parameterTypeOptionalCustomModifiers
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -1647,7 +1709,9 @@ namespace System.Reflection.Emit
 
     public partial class ModuleBuilder : System.Reflection.Module
     {
-        internal ModuleBuilder() { }
+        internal ModuleBuilder()
+        {
+        }
 
         public override System.Reflection.Assembly Assembly
         {
@@ -1686,7 +1750,9 @@ namespace System.Reflection.Emit
             get { throw null; }
         }
 
-        public void CreateGlobalFunctions() { }
+        public void CreateGlobalFunctions()
+        {
+        }
 
         public System.Reflection.Emit.EnumBuilder DefineEnum(
             string name,
@@ -2063,16 +2129,20 @@ namespace System.Reflection.Emit
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
     }
 
     public sealed partial class PropertyBuilder : System.Reflection.PropertyInfo
     {
-        internal PropertyBuilder() { }
+        internal PropertyBuilder()
+        {
+        }
 
         public override System.Reflection.PropertyAttributes Attributes
         {
@@ -2107,7 +2177,9 @@ namespace System.Reflection.Emit
             get { throw null; }
         }
 
-        public void AddOtherMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
+        public void AddOtherMethod(System.Reflection.Emit.MethodBuilder mdBuilder)
+        {
+        }
 
         public override System.Reflection.MethodInfo[] GetAccessors(bool nonPublic)
         {
@@ -2160,22 +2232,32 @@ namespace System.Reflection.Emit
             throw null;
         }
 
-        public void SetConstant(object? defaultValue) { }
+        public void SetConstant(object? defaultValue)
+        {
+        }
 
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetGetMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
+        public void SetGetMethod(System.Reflection.Emit.MethodBuilder mdBuilder)
+        {
+        }
 
-        public void SetSetMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
+        public void SetSetMethod(System.Reflection.Emit.MethodBuilder mdBuilder)
+        {
+        }
 
-        public override void SetValue(object? obj, object? value, object?[]? index) { }
+        public override void SetValue(object? obj, object? value, object?[]? index)
+        {
+        }
 
         public override void SetValue(
             object? obj,
@@ -2184,12 +2266,16 @@ namespace System.Reflection.Emit
             System.Reflection.Binder? binder,
             object?[]? index,
             System.Globalization.CultureInfo? culture
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class TypeBuilder : System.Reflection.TypeInfo
     {
-        internal TypeBuilder() { }
+        internal TypeBuilder()
+        {
+        }
 
         public const int UnspecifiedTypeSize = 0;
         public override System.Reflection.Assembly Assembly
@@ -2310,7 +2396,9 @@ namespace System.Reflection.Emit
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type interfaceType
-        ) { }
+        )
+        {
+        }
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -2456,7 +2544,9 @@ namespace System.Reflection.Emit
         public void DefineMethodOverride(
             System.Reflection.MethodInfo methodInfoBody,
             System.Reflection.MethodInfo methodInfoDeclaration
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Emit.TypeBuilder DefineNestedType(string name)
         {
@@ -3065,18 +3155,22 @@ namespace System.Reflection.Emit
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
 
         public void SetParent(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type? parent
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {

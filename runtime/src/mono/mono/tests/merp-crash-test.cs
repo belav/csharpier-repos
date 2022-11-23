@@ -28,11 +28,17 @@ class C
 
         public class ValidationException : Exception
         {
-            public ValidationException() : base() { }
+            public ValidationException() : base()
+            {
+            }
 
-            public ValidationException(string msg) : base(msg) { }
+            public ValidationException(string msg) : base(msg)
+            {
+            }
 
-            public ValidationException(string msg, Exception inner) : base(msg, inner) { }
+            public ValidationException(string msg, Exception inner) : base(msg, inner)
+            {
+            }
         }
 
         public static List<Crasher> Crashers;

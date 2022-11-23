@@ -24,7 +24,9 @@ internal readonly record struct AutoFormattingOptions
     [DataMember]
     public bool FormatOnCloseBrace { get; init; } = true;
 
-    public AutoFormattingOptions() { }
+    public AutoFormattingOptions()
+    {
+    }
 
     public static readonly AutoFormattingOptions Default = new();
 }

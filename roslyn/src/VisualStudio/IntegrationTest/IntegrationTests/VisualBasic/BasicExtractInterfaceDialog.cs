@@ -23,7 +23,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
             VisualStudio.ExtractInterfaceDialog;
 
         public BasicExtractInterfaceDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicExtractInterfaceDialog)) { }
+            : base(instanceFactory, nameof(BasicExtractInterfaceDialog))
+        {
+        }
 
         [WpfFact]
         public void CoreScenario()

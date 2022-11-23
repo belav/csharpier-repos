@@ -12,17 +12,23 @@ namespace System.Net
 
     public sealed partial class HttpListener : System.IDisposable
     {
-        public HttpListener() { }
+        public HttpListener()
+        {
+        }
 
         public System.Net.AuthenticationSchemes AuthenticationSchemes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.AuthenticationSchemeSelector? AuthenticationSchemeSelectorDelegate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Authentication.ExtendedProtection.ServiceNameCollection DefaultServiceNames
         {
@@ -31,19 +37,25 @@ namespace System.Net
         public System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy ExtendedProtectionPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.Net.HttpListener.ExtendedProtectionSelector? ExtendedProtectionSelectorDelegate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IgnoreWriteExceptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsListening
         {
@@ -60,7 +72,9 @@ namespace System.Net
         public string? Realm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.HttpListenerTimeoutManager TimeoutManager
         {
@@ -69,17 +83,23 @@ namespace System.Net
         public bool UnsafeConnectionNtlmAuthentication
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Abort() { }
+        public void Abort()
+        {
+        }
 
         public System.IAsyncResult BeginGetContext(System.AsyncCallback? callback, object? state)
         {
             throw null;
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
         public System.Net.HttpListenerContext EndGetContext(System.IAsyncResult asyncResult)
         {
@@ -96,11 +116,17 @@ namespace System.Net
             throw null;
         }
 
-        public void Start() { }
+        public void Start()
+        {
+        }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
 
         public delegate System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy ExtendedProtectionSelector(
             System.Net.HttpListenerRequest request
@@ -110,7 +136,9 @@ namespace System.Net
     public partial class HttpListenerBasicIdentity : System.Security.Principal.GenericIdentity
     {
         public HttpListenerBasicIdentity(string username, string password)
-            : base(default(System.Security.Principal.GenericIdentity)) { }
+            : base(default(System.Security.Principal.GenericIdentity))
+        {
+        }
 
         public virtual string Password
         {
@@ -120,7 +148,9 @@ namespace System.Net
 
     public sealed partial class HttpListenerContext
     {
-        internal HttpListenerContext() { }
+        internal HttpListenerContext()
+        {
+        }
 
         public System.Net.HttpListenerRequest Request
         {
@@ -172,16 +202,24 @@ namespace System.Net
 
     public partial class HttpListenerException : System.ComponentModel.Win32Exception
     {
-        public HttpListenerException() { }
+        public HttpListenerException()
+        {
+        }
 
-        public HttpListenerException(int errorCode) { }
+        public HttpListenerException(int errorCode)
+        {
+        }
 
-        public HttpListenerException(int errorCode, string message) { }
+        public HttpListenerException(int errorCode, string message)
+        {
+        }
 
         protected HttpListenerException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override int ErrorCode
         {
@@ -194,7 +232,9 @@ namespace System.Net
             System.Collections.Generic.IEnumerable<string>,
             System.Collections.IEnumerable
     {
-        internal HttpListenerPrefixCollection() { }
+        internal HttpListenerPrefixCollection()
+        {
+        }
 
         public int Count
         {
@@ -209,18 +249,26 @@ namespace System.Net
             get { throw null; }
         }
 
-        public void Add(string uriPrefix) { }
+        public void Add(string uriPrefix)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(string uriPrefix)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int offset) { }
+        public void CopyTo(System.Array array, int offset)
+        {
+        }
 
-        public void CopyTo(string[] array, int offset) { }
+        public void CopyTo(string[] array, int offset)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<string> GetEnumerator()
         {
@@ -240,7 +288,9 @@ namespace System.Net
 
     public sealed partial class HttpListenerRequest
     {
-        internal HttpListenerRequest() { }
+        internal HttpListenerRequest()
+        {
+        }
 
         public string[]? AcceptTypes
         {
@@ -387,37 +437,51 @@ namespace System.Net
 
     public sealed partial class HttpListenerResponse : System.IDisposable
     {
-        internal HttpListenerResponse() { }
+        internal HttpListenerResponse()
+        {
+        }
 
         public System.Text.Encoding? ContentEncoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long ContentLength64
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? ContentType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.CookieCollection Cookies
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.WebHeaderCollection Headers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool KeepAlive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.Stream OutputStream
         {
@@ -426,89 +490,133 @@ namespace System.Net
         public System.Version ProtocolVersion
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? RedirectLocation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SendChunked
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int StatusCode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string StatusDescription
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Abort() { }
+        public void Abort()
+        {
+        }
 
-        public void AddHeader(string name, string value) { }
+        public void AddHeader(string name, string value)
+        {
+        }
 
-        public void AppendCookie(System.Net.Cookie cookie) { }
+        public void AppendCookie(System.Net.Cookie cookie)
+        {
+        }
 
-        public void AppendHeader(string name, string value) { }
+        public void AppendHeader(string name, string value)
+        {
+        }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Close(byte[] responseEntity, bool willBlock) { }
+        public void Close(byte[] responseEntity, bool willBlock)
+        {
+        }
 
-        public void CopyFrom(System.Net.HttpListenerResponse templateResponse) { }
+        public void CopyFrom(System.Net.HttpListenerResponse templateResponse)
+        {
+        }
 
         public void Redirect(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("Uri")] string url
-        ) { }
+        )
+        {
+        }
 
-        public void SetCookie(System.Net.Cookie cookie) { }
+        public void SetCookie(System.Net.Cookie cookie)
+        {
+        }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 
     public partial class HttpListenerTimeoutManager
     {
-        internal HttpListenerTimeoutManager() { }
+        internal HttpListenerTimeoutManager()
+        {
+        }
 
         public System.TimeSpan DrainEntityBody
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan EntityBody
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan HeaderWait
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan IdleConnection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long MinSendBytesPerSecond
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan RequestQueue
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
     }
 }
@@ -517,7 +625,9 @@ namespace System.Net.WebSockets
 {
     public partial class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
     {
-        internal HttpListenerWebSocketContext() { }
+        internal HttpListenerWebSocketContext()
+        {
+        }
 
         public override System.Net.CookieCollection CookieCollection
         {

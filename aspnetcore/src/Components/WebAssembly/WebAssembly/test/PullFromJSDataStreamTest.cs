@@ -172,7 +172,9 @@ public class PullFromJSDataStreamTest
 
     class TestJSRuntime_ProvidesInsufficientData : TestJSRuntime
     {
-        public TestJSRuntime_ProvidesInsufficientData(byte[] data) : base(data) { }
+        public TestJSRuntime_ProvidesInsufficientData(byte[] data) : base(data)
+        {
+        }
 
         public override ValueTask<TValue> InvokeAsync<
             [DynamicallyAccessedMembers(
@@ -193,7 +195,9 @@ public class PullFromJSDataStreamTest
 
     class TestJSRuntime_ProvidesExcessData : TestJSRuntime
     {
-        public TestJSRuntime_ProvidesExcessData(byte[] data) : base(data) { }
+        public TestJSRuntime_ProvidesExcessData(byte[] data) : base(data)
+        {
+        }
 
         public override ValueTask<TValue> InvokeAsync<
             [DynamicallyAccessedMembers(

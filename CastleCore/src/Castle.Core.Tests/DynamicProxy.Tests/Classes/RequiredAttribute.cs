@@ -22,7 +22,9 @@ namespace Castle.DynamicProxy.Tests.Classes
         private readonly bool hasDefault;
         public object BadValue;
 
-        public RequiredAttribute() { }
+        public RequiredAttribute()
+        {
+        }
 
         public RequiredAttribute(object defaultValue)
         {

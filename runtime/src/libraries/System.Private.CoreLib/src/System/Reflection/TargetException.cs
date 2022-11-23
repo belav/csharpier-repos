@@ -11,9 +11,13 @@ namespace System.Reflection
     )]
     public class TargetException : ApplicationException
     {
-        public TargetException() : this(null) { }
+        public TargetException() : this(null)
+        {
+        }
 
-        public TargetException(string? message) : this(message, null) { }
+        public TargetException(string? message) : this(message, null)
+        {
+        }
 
         public TargetException(string? message, Exception? inner) : base(message, inner)
         {
@@ -21,6 +25,8 @@ namespace System.Reflection
         }
 
         protected TargetException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

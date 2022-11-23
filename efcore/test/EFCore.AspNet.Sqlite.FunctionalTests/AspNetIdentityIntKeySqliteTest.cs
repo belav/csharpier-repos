@@ -7,7 +7,8 @@ public class AspNetIdentityIntKeySqliteTest
     : AspNetIdentityIntKeyTestBase<AspNetIdentityIntKeySqliteTest.AspNetIdentityIntKeySqliteFixture>
 {
     public AspNetIdentityIntKeySqliteTest(AspNetIdentityIntKeySqliteFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     public class AspNetIdentityIntKeySqliteFixture : AspNetIdentityFixtureBase
     {

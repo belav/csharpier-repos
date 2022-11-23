@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AssignOutParametersAboveReturnCodeFixProvider() { }
+        public AssignOutParametersAboveReturnCodeFixProvider()
+        {
+        }
 
         protected override void TryRegisterFix(
             CodeFixContext context,

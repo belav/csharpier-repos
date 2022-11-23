@@ -199,8 +199,12 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public void VariantDelegateArgument(bool useInterpreter)
         {
-            Action<object> ao = x => { };
-            Action<string> a = x => { };
+            Action<object> ao = x =>
+            {
+            };
+            Action<string> a = x =>
+            {
+            };
             Action<string> b = ao;
 
             ParameterExpression param = Expression.Parameter(typeof(Action<string>));

@@ -11,7 +11,9 @@ namespace System.Reflection
     /// </summary>
     public abstract class DispatchProxy
     {
-        protected DispatchProxy() { }
+        protected DispatchProxy()
+        {
+        }
 
         /// <summary>
         /// Whenever any method on the generated proxy type is called, this method

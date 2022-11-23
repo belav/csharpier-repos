@@ -9,7 +9,9 @@ public class TpcManyToManyTrackingSqlServerTest
     : ManyToManyTrackingSqlServerTestBase<TpcManyToManyTrackingSqlServerTest.TpcManyToManyTrackingSqlServerFixture>
 {
     public TpcManyToManyTrackingSqlServerTest(TpcManyToManyTrackingSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class TpcManyToManyTrackingSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
     {

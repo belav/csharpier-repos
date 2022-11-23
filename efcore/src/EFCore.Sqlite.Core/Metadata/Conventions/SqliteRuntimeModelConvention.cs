@@ -24,7 +24,9 @@ public class SqliteRuntimeModelConvention : RelationalRuntimeModelConvention
     public SqliteRuntimeModelConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    ) : base(dependencies, relationalDependencies)
+    {
+    }
 
     /// <summary>
     ///     Updates the property annotations that will be set on the read-only object.

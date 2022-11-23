@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Simplification
 #if !CODE_STYLE
         : OptionsProvider<SimplifierOptions>
 #endif
-    { }
+    {
+    }
 
     internal static partial class SimplifierOptionsProviders
     {

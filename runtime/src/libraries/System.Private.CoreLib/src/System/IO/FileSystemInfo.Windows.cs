@@ -19,7 +19,9 @@ namespace System.IO
         // throw an appropriate error when attempting to access the cached info.
         private int _dataInitialized = -1;
 
-        protected FileSystemInfo() { }
+        protected FileSystemInfo()
+        {
+        }
 
         internal static unsafe FileSystemInfo Create(string fullPath, ref FileSystemEntry findData)
         {

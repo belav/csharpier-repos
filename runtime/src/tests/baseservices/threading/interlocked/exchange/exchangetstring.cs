@@ -49,7 +49,9 @@ public class ThreadSafe
     private string newValueB = "world";
     private bool success;
 
-    public ThreadSafe() : this(10000) { }
+    public ThreadSafe() : this(10000)
+    {
+    }
 
     public ThreadSafe(int loops)
     {

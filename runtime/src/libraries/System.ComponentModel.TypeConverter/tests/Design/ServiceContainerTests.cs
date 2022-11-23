@@ -886,9 +886,13 @@ namespace System.ComponentModel.Design.Tests
 
         private class SubServiceContainer : ServiceContainer
         {
-            public SubServiceContainer() : base() { }
+            public SubServiceContainer() : base()
+            {
+            }
 
-            public SubServiceContainer(IServiceProvider parentProvider) : base(parentProvider) { }
+            public SubServiceContainer(IServiceProvider parentProvider) : base(parentProvider)
+            {
+            }
 
             public new Type[] DefaultServices => base.DefaultServices;
 

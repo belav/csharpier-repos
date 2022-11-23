@@ -38,7 +38,9 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LoadFieldInstruction : FieldInstruction
     {
-        public LoadFieldInstruction(FieldInfo field) : base(field) { }
+        public LoadFieldInstruction(FieldInfo field) : base(field)
+        {
+        }
 
         public override string InstructionName => "LoadField";
         public override int ConsumedStack => 1;

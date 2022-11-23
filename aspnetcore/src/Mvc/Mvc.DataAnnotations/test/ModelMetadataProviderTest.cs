@@ -986,9 +986,13 @@ public class ModelMetadataProviderTest
         [NonTypeBasedBinder(Name = "GrandParentProperty")]
         public Person GrandParent { get; set; }
 
-        public void Update(Person person) { }
+        public void Update(Person person)
+        {
+        }
 
-        public void Save([NonTypeBasedBinder(Name = "PersonParameter")] Person person) { }
+        public void Save([NonTypeBasedBinder(Name = "PersonParameter")] Person person)
+        {
+        }
     }
 
     private class ScaffoldColumnModel

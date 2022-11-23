@@ -2142,9 +2142,13 @@ namespace System.Reflection.Emit.Tests
         public int Field;
     }
 
-    class PrivateAttribute : Attribute { }
+    class PrivateAttribute : Attribute
+    {
+    }
 
-    public class NotAnAttribute { }
+    public class NotAnAttribute
+    {
+    }
 
     public class Primitives : Attribute
     {
@@ -2291,28 +2295,48 @@ namespace System.Reflection.Emit.Tests
 
     public class IndexerAttribute : Attribute
     {
-        public IndexerAttribute() { }
+        public IndexerAttribute()
+        {
+        }
 
         public string this[string s]
         {
             get { return s; }
-            set { }
+            set
+            {
+            }
         }
     }
 
-    public enum SByteEnum : sbyte { }
+    public enum SByteEnum : sbyte
+    {
+    }
 
-    public enum ByteEnum : byte { }
+    public enum ByteEnum : byte
+    {
+    }
 
-    public enum ShortEnum : short { }
+    public enum ShortEnum : short
+    {
+    }
 
-    public enum UShortEnum : ushort { }
+    public enum UShortEnum : ushort
+    {
+    }
 
-    public enum IntEnum : int { }
+    public enum IntEnum : int
+    {
+    }
 
-    public enum UIntEnum : uint { }
+    public enum UIntEnum : uint
+    {
+    }
 
-    public enum LongEnum : long { }
+    public enum LongEnum : long
+    {
+    }
 
-    public enum ULongEnum : ulong { }
+    public enum ULongEnum : ulong
+    {
+    }
 }

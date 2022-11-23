@@ -275,7 +275,9 @@ namespace Moq.Tests
 
         public sealed class PickyIntOrString : Picky
         {
-            public PickyIntOrString() : base(typeof(int), typeof(string)) { }
+            public PickyIntOrString() : base(typeof(int), typeof(string))
+            {
+            }
         }
 
         [TypeMatcher]
@@ -304,7 +306,9 @@ namespace Moq.Tests
         }
 
         [TypeMatcher(typeof(It.IsAnyType))]
-        public enum AnyEnum { }
+        public enum AnyEnum
+        {
+        }
 
         [TypeMatcher(typeof(It.IsAnyType))]
         public delegate void AnyDelegate();

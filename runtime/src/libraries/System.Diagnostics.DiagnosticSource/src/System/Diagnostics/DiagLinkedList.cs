@@ -20,7 +20,9 @@ namespace System.Diagnostics
         private DiagNode<T>? _first;
         private DiagNode<T>? _last;
 
-        public DiagLinkedList() { }
+        public DiagLinkedList()
+        {
+        }
 
         public DiagLinkedList(T firstValue) => _last = _first = new DiagNode<T>(firstValue);
 
@@ -186,6 +188,8 @@ namespace System.Diagnostics
 
         public void Reset() => throw new NotSupportedException();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

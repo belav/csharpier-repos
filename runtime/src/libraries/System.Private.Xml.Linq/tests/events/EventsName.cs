@@ -80,9 +80,13 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
 
     public class EventsSpecialCases
     {
-        private static void ChangingDelegate(object sender, XObjectChangeEventArgs e) { }
+        private static void ChangingDelegate(object sender, XObjectChangeEventArgs e)
+        {
+        }
 
-        private static void ChangedDelegate(object sender, XObjectChangeEventArgs e) { }
+        private static void ChangedDelegate(object sender, XObjectChangeEventArgs e)
+        {
+        }
 
         [Fact]
         public void AddingRemovingNullListenersXElementRemoveNullEventListener()

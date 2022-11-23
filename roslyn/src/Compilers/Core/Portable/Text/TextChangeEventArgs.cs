@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.Text
             SourceText oldText,
             SourceText newText,
             params TextChangeRange[] changes
-        ) : this(oldText, newText, (IEnumerable<TextChangeRange>)changes) { }
+        ) : this(oldText, newText, (IEnumerable<TextChangeRange>)changes)
+        {
+        }
 
         /// <summary>
         /// Gets the text before the change.

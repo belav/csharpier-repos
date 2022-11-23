@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockDiagnosticService(IGlobalOptionService globalOptions) { }
+        public MockDiagnosticService(IGlobalOptionService globalOptions)
+        {
+        }
 
         public ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(
             Workspace workspace,

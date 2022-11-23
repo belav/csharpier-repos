@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousTypeToTuple
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpConvertAnonymousTypeToTupleCodeFixProvider() { }
+        public CSharpConvertAnonymousTypeToTupleCodeFixProvider()
+        {
+        }
 
         protected override TupleExpressionSyntax ConvertToTuple(
             AnonymousObjectCreationExpressionSyntax anonCreation

@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
     internal sealed class ScriptingOleCommandTarget : AbstractOleCommandTarget
     {
         internal ScriptingOleCommandTarget(IWpfTextView wpfTextView, IComponentModel componentModel)
-            : base(wpfTextView, componentModel) { }
+            : base(wpfTextView, componentModel)
+        {
+        }
 
         protected override ITextBuffer? GetSubjectBufferContainingCaret()
         {

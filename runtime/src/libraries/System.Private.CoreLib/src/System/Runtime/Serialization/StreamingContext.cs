@@ -12,7 +12,9 @@ namespace System.Runtime.Serialization
         private readonly object? _additionalContext;
         private readonly StreamingContextStates _state;
 
-        public StreamingContext(StreamingContextStates state) : this(state, null) { }
+        public StreamingContext(StreamingContextStates state) : this(state, null)
+        {
+        }
 
         public StreamingContext(StreamingContextStates state, object? additional)
         {

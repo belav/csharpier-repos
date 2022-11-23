@@ -8,12 +8,16 @@ namespace Test
 
     class BB
     {
-        static void Method1() { }
+        static void Method1()
+        {
+        }
 
         static int Main()
         {
             bool local1 = false;
-            for (; local1; Method1()) { }
+            for (; local1; Method1())
+            {
+            }
             return 100;
         }
     }

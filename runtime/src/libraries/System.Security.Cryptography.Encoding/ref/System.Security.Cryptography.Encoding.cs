@@ -8,37 +8,59 @@ namespace System.Security.Cryptography
 {
     public partial class AsnEncodedData
     {
-        protected AsnEncodedData() { }
+        protected AsnEncodedData()
+        {
+        }
 
-        public AsnEncodedData(byte[] rawData) { }
+        public AsnEncodedData(byte[] rawData)
+        {
+        }
 
-        public AsnEncodedData(System.ReadOnlySpan<byte> rawData) { }
+        public AsnEncodedData(System.ReadOnlySpan<byte> rawData)
+        {
+        }
 
-        public AsnEncodedData(System.Security.Cryptography.AsnEncodedData asnEncodedData) { }
+        public AsnEncodedData(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
 
-        public AsnEncodedData(System.Security.Cryptography.Oid? oid, byte[] rawData) { }
+        public AsnEncodedData(System.Security.Cryptography.Oid? oid, byte[] rawData)
+        {
+        }
 
         public AsnEncodedData(
             System.Security.Cryptography.Oid? oid,
             System.ReadOnlySpan<byte> rawData
-        ) { }
+        )
+        {
+        }
 
-        public AsnEncodedData(string oid, byte[] rawData) { }
+        public AsnEncodedData(string oid, byte[] rawData)
+        {
+        }
 
-        public AsnEncodedData(string oid, System.ReadOnlySpan<byte> rawData) { }
+        public AsnEncodedData(string oid, System.ReadOnlySpan<byte> rawData)
+        {
+        }
 
         public System.Security.Cryptography.Oid? Oid
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] RawData
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public virtual void CopyFrom(System.Security.Cryptography.AsnEncodedData asnEncodedData) { }
+        public virtual void CopyFrom(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
 
         public virtual string Format(bool multiLine)
         {
@@ -50,10 +72,13 @@ namespace System.Security.Cryptography
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        public AsnEncodedDataCollection() { }
+        public AsnEncodedDataCollection()
+        {
+        }
 
         public AsnEncodedDataCollection(System.Security.Cryptography.AsnEncodedData asnEncodedData)
-        { }
+        {
+        }
 
         public int Count
         {
@@ -77,16 +102,22 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void CopyTo(System.Security.Cryptography.AsnEncodedData[] array, int index) { }
+        public void CopyTo(System.Security.Cryptography.AsnEncodedData[] array, int index)
+        {
+        }
 
         public System.Security.Cryptography.AsnEncodedDataEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public void Remove(System.Security.Cryptography.AsnEncodedData asnEncodedData) { }
+        public void Remove(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -96,7 +127,9 @@ namespace System.Security.Cryptography
 
     public sealed partial class AsnEncodedDataEnumerator : System.Collections.IEnumerator
     {
-        internal AsnEncodedDataEnumerator() { }
+        internal AsnEncodedDataEnumerator()
+        {
+        }
 
         public System.Security.Cryptography.AsnEncodedData Current
         {
@@ -112,17 +145,22 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     public partial class FromBase64Transform
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {
-        public FromBase64Transform() { }
+        public FromBase64Transform()
+        {
+        }
 
         public FromBase64Transform(System.Security.Cryptography.FromBase64TransformMode whitespaces)
-        { }
+        {
+        }
 
         public virtual bool CanReuseTransform
         {
@@ -141,13 +179,21 @@ namespace System.Security.Cryptography
             get { throw null; }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~FromBase64Transform() { }
+        ~FromBase64Transform()
+        {
+        }
 
         public int TransformBlock(
             byte[] inputBuffer,
@@ -174,23 +220,35 @@ namespace System.Security.Cryptography
 
     public sealed partial class Oid
     {
-        public Oid() { }
+        public Oid()
+        {
+        }
 
-        public Oid(System.Security.Cryptography.Oid oid) { }
+        public Oid(System.Security.Cryptography.Oid oid)
+        {
+        }
 
-        public Oid(string oid) { }
+        public Oid(string oid)
+        {
+        }
 
-        public Oid(string? value, string? friendlyName) { }
+        public Oid(string? value, string? friendlyName)
+        {
+        }
 
         public string? FriendlyName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Security.Cryptography.Oid FromFriendlyName(
@@ -214,7 +272,9 @@ namespace System.Security.Cryptography
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        public OidCollection() { }
+        public OidCollection()
+        {
+        }
 
         public int Count
         {
@@ -242,14 +302,18 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void CopyTo(System.Security.Cryptography.Oid[] array, int index) { }
+        public void CopyTo(System.Security.Cryptography.Oid[] array, int index)
+        {
+        }
 
         public System.Security.Cryptography.OidEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -259,7 +323,9 @@ namespace System.Security.Cryptography
 
     public sealed partial class OidEnumerator : System.Collections.IEnumerator
     {
-        internal OidEnumerator() { }
+        internal OidEnumerator()
+        {
+        }
 
         public System.Security.Cryptography.Oid Current
         {
@@ -275,7 +341,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     public enum OidGroup
@@ -355,7 +423,9 @@ namespace System.Security.Cryptography
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {
-        public ToBase64Transform() { }
+        public ToBase64Transform()
+        {
+        }
 
         public virtual bool CanReuseTransform
         {
@@ -374,13 +444,21 @@ namespace System.Security.Cryptography
             get { throw null; }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~ToBase64Transform() { }
+        ~ToBase64Transform()
+        {
+        }
 
         public int TransformBlock(
             byte[] inputBuffer,

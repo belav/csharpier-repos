@@ -14,7 +14,9 @@ internal sealed class AutoValidateAntiforgeryTokenAuthorizationFilter
     public AutoValidateAntiforgeryTokenAuthorizationFilter(
         IAntiforgery antiforgery,
         ILoggerFactory loggerFactory
-    ) : base(antiforgery, loggerFactory) { }
+    ) : base(antiforgery, loggerFactory)
+    {
+    }
 
     protected override bool ShouldValidate(AuthorizationFilterContext context)
     {

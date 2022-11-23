@@ -65,7 +65,9 @@ namespace Microsoft.CodeAnalysis
             /// and will have no extra information beyond the project itself.
             /// </summary>
             public CompilationTracker(ProjectState project)
-                : this(project, CompilationTrackerState.Empty, cachedSkeletonReferences: new()) { }
+                : this(project, CompilationTrackerState.Empty, cachedSkeletonReferences: new())
+            {
+            }
 
             private CompilationTrackerState ReadState() =>
                 Volatile.Read(ref _stateDoNotAccessDirectly);

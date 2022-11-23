@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertToProgramMainCodeFixProvider() { }
+        public ConvertToProgramMainCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseProgramMainId);

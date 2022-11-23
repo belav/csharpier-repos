@@ -58,7 +58,9 @@ public static class FileSystemDebugInfo
                     return true;
             }
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return false;
     }
 }
@@ -212,7 +214,9 @@ public class ManageFileSystem : IDisposable
     }
 
     public ManageFileSystem(string startDirName)
-        : this(startDirName, DefaultDirectoryDepth, DefaultNumberofFiles) { }
+        : this(startDirName, DefaultDirectoryDepth, DefaultNumberofFiles)
+    {
+    }
 
     public ManageFileSystem(string startDirName, int dirDepth, int numFiles)
     {

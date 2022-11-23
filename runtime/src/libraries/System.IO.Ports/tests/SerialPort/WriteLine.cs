@@ -72,7 +72,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.WriteLine(null);
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
         }
 

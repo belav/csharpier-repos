@@ -9,9 +9,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 internal interface ILspServiceNotificationHandler
     : ILspService,
         INotificationHandler<RequestContext>,
-        ISolutionRequiredHandler { }
+        ISolutionRequiredHandler
+{
+}
 
 internal interface ILspServiceNotificationHandler<TRequest>
     : ILspService,
         INotificationHandler<TRequest, RequestContext>,
-        ISolutionRequiredHandler { }
+        ISolutionRequiredHandler
+{
+}

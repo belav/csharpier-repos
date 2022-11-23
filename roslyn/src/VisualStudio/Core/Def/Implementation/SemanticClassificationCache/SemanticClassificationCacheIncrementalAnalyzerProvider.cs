@@ -29,7 +29,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SemanticClassificationCacheIncrementalAnalyzerProvider() { }
+        public SemanticClassificationCacheIncrementalAnalyzerProvider()
+        {
+        }
 
         public IIncrementalAnalyzer? CreateIncrementalAnalyzer(Workspace workspace)
         {

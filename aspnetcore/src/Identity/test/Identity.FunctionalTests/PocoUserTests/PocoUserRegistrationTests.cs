@@ -10,5 +10,7 @@ public class PocoUserRegistrationTests : RegistrationTests<PocoUserStartup, Iden
 {
     public PocoUserRegistrationTests(
         ServerFactory<PocoUserStartup, IdentityDbContext> serverFactory
-    ) : base(serverFactory) { }
+    ) : base(serverFactory)
+    {
+    }
 }

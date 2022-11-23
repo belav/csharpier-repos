@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

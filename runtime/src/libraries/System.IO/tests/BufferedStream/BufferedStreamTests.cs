@@ -615,7 +615,9 @@ namespace System.IO.Tests
     {
         private long _pos;
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

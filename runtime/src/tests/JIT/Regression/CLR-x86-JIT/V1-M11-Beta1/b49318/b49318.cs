@@ -21,7 +21,9 @@ namespace Test
             {
                 return;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         static int Main()
@@ -30,7 +32,9 @@ namespace Test
             {
                 Main1();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

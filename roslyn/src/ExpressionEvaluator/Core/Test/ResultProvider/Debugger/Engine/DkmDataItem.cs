@@ -12,6 +12,8 @@ namespace Microsoft.VisualStudio.Debugger
 {
     public class DkmDataItem
     {
-        protected virtual void OnClose() { }
+        protected virtual void OnClose()
+        {
+        }
     }
 }

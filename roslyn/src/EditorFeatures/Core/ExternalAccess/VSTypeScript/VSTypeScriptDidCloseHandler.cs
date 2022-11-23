@@ -22,5 +22,7 @@ internal class VSTypeScriptDidCloseHandler : DidCloseHandler
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptDidCloseHandler() { }
+    public VSTypeScriptDidCloseHandler()
+    {
+    }
 }

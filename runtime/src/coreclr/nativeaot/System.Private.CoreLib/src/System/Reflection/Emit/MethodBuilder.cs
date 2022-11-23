@@ -35,7 +35,9 @@ namespace System.Reflection.Emit
         public bool InitLocals
         {
             get { return default; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool IsGenericMethod
@@ -184,15 +186,25 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetImplementationFlags(MethodImplAttributes attributes) { }
+        public void SetImplementationFlags(MethodImplAttributes attributes)
+        {
+        }
 
-        public void SetParameters(params Type[] parameterTypes) { }
+        public void SetParameters(params Type[] parameterTypes)
+        {
+        }
 
-        public void SetReturnType(Type returnType) { }
+        public void SetReturnType(Type returnType)
+        {
+        }
 
         public void SetSignature(
             Type returnType,
@@ -201,7 +213,9 @@ namespace System.Reflection.Emit
             Type[] parameterTypes,
             Type[][] parameterTypeRequiredCustomModifiers,
             Type[][] parameterTypeOptionalCustomModifiers
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {

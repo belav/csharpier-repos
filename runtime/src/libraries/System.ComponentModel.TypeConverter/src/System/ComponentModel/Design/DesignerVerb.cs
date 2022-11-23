@@ -15,7 +15,9 @@ namespace System.ComponentModel.Design
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.DesignerVerb'/> class.
         /// </summary>
         public DesignerVerb(string text, EventHandler handler)
-            : this(text, handler, StandardCommands.VerbFirst) { }
+            : this(text, handler, StandardCommands.VerbFirst)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.DesignerVerb'/>

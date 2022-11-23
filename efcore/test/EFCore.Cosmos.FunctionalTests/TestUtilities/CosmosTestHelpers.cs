@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class CosmosTestHelpers : TestHelpers
 {
-    protected CosmosTestHelpers() { }
+    protected CosmosTestHelpers()
+    {
+    }
 
     public static CosmosTestHelpers Instance { get; } = new();
 

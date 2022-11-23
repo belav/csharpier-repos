@@ -156,7 +156,9 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             public CodeRefactoringFixAllProviderInfo(
                 IFixAllProvider fixAllProvider,
                 ImmutableArray<FixAllScope> supportedScopes
-            ) : base(fixAllProvider, supportedScopes) { }
+            ) : base(fixAllProvider, supportedScopes)
+            {
+            }
 
             public override bool CanBeFixed(Diagnostic diagnostic) =>
                 throw ExceptionUtilities.Unreachable();

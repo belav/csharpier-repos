@@ -72,9 +72,13 @@ namespace Microsoft.Extensions.Hosting.Systemd
             Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime,
             Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier systemdNotifier,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
-        ) { }
+        )
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
@@ -94,13 +98,17 @@ namespace Microsoft.Extensions.Hosting.Systemd
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class SystemdNotifier : Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier
     {
-        public SystemdNotifier() { }
+        public SystemdNotifier()
+        {
+        }
 
         public bool IsEnabled
         {
             get { throw null; }
         }
 
-        public void Notify(Microsoft.Extensions.Hosting.Systemd.ServiceState state) { }
+        public void Notify(Microsoft.Extensions.Hosting.Systemd.ServiceState state)
+        {
+        }
     }
 }

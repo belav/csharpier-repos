@@ -40,7 +40,9 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<T> : IArraySortHelper<T> { }
+    internal sealed partial class GenericArraySortHelper<T> : IArraySortHelper<T>
+    {
+    }
 
     internal interface IArraySortHelper<TKey, TValue>
     {
@@ -77,5 +79,7 @@ namespace System.Collections.Generic
     }
 
     internal sealed partial class GenericArraySortHelper<TKey, TValue>
-        : IArraySortHelper<TKey, TValue> { }
+        : IArraySortHelper<TKey, TValue>
+    {
+    }
 }

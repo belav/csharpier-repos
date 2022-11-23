@@ -12,4 +12,6 @@ namespace Microsoft.Extensions.Internal;
 // Do not take a dependency on this class unless you are explicitly trying to avoid taking a
 // dependency on Microsoft.AspNetCore.DependencyInjection.Abstractions.
 [AttributeUsage(AttributeTargets.All)]
-internal sealed class ActivatorUtilitiesConstructorAttribute : Attribute { }
+internal sealed class ActivatorUtilitiesConstructorAttribute : Attribute
+{
+}

@@ -52,7 +52,9 @@ namespace System.DirectoryServices.AccountManagement
         private readonly Dictionary<string, ExtensionCacheValue> _cache =
             new Dictionary<string, ExtensionCacheValue>();
 
-        internal ExtensionCache() { }
+        internal ExtensionCache()
+        {
+        }
 
         internal bool TryGetValue(string attr, out ExtensionCacheValue o)
         {

@@ -171,8 +171,12 @@ namespace Microsoft.CodeAnalysis.FindReferences
                     }
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
     }
 }

@@ -315,21 +315,29 @@ namespace PartialUniversalGen
         }
     }
 
-    public interface DummyInterface1 { }
+    public interface DummyInterface1
+    {
+    }
 
-    public interface DummyInterface2 { }
+    public interface DummyInterface2
+    {
+    }
 
     public interface ITest<T>
     {
         object TestMethod(T t);
     }
 
-    public interface IFace<T, U> { }
+    public interface IFace<T, U>
+    {
+    }
 
     // DummyInterface is used to ensure that we don't generate a __Canon instantiation of this type automatically.
     // This type is used to test that a dependency on a normal canonical generic from a universal generic works correctly.
     public class UniversalGenericImplementsInterfaceInstantiatedOverTArray<T> : IFace<int, T[]>
-        where T : DummyInterface1, DummyInterface2 { }
+        where T : DummyInterface1, DummyInterface2
+    {
+    }
 
     // DummyInterface is used to ensure that we don't generate a __Canon instantiation of this type automatically.
     // This type is used to test that a dependency on a normal canonical generic from a universal generic works correctly.

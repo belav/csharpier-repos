@@ -68,7 +68,9 @@ namespace System.Reflection
                 ctorInfo,
                 Array.Empty<CustomAttributeTypedArgument>(),
                 Array.Empty<CustomAttributeNamedArgument>()
-            ) { }
+            )
+        {
+        }
 
         internal RuntimeCustomAttributeData(
             ConstructorInfo ctorInfo,

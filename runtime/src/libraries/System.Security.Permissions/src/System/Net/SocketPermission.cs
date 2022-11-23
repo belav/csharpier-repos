@@ -22,9 +22,13 @@ namespace System.Net
             TransportType transport,
             string hostName,
             int portNumber
-        ) { }
+        )
+        {
+        }
 
-        public SocketPermission(PermissionState state) { }
+        public SocketPermission(PermissionState state)
+        {
+        }
 
         public System.Collections.IEnumerator AcceptList
         {
@@ -40,14 +44,18 @@ namespace System.Net
             TransportType transport,
             string hostName,
             int portNumber
-        ) { }
+        )
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

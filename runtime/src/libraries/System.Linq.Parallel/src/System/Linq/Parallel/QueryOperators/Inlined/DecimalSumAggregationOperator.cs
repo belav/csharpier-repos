@@ -23,7 +23,9 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal DecimalSumAggregationOperator(IEnumerable<decimal> child) : base(child) { }
+        internal DecimalSumAggregationOperator(IEnumerable<decimal> child) : base(child)
+        {
+        }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the

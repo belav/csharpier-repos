@@ -45,6 +45,8 @@ namespace Crasher
                 threads[i].Join();
         }
 
-        private static void Crasher() { }
+        private static void Crasher()
+        {
+        }
     }
 }

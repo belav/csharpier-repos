@@ -1186,7 +1186,9 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A1NotInlinedStatic() { }
+        public static void VerifyA0A0A1NotInlinedStatic()
+        {
+        }
 
         public static void VerifyA0A0A1GenericStatic<T>() where T : new()
         {
@@ -1194,7 +1196,9 @@ namespace Chaos
             T t1 = new T();
         }
 
-        public static void VerifyA0A0A1Static() { }
+        public static void VerifyA0A0A1Static()
+        {
+        }
 
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
@@ -1917,7 +1921,9 @@ namespace Chaos
         void VerifyInterfaceGenericIA1<K>() where K : new();
     }
 
-    public interface IA1A2<T0> : IA2 where T0 : new() { }
+    public interface IA1A2<T0> : IA2 where T0 : new()
+    {
+    }
 
     public class Program
     {
@@ -1999,9 +2005,13 @@ namespace Chaos
         }
     }
 
-    public interface IA2A6<T0> where T0 : new() { }
+    public interface IA2A6<T0> where T0 : new()
+    {
+    }
 
-    public interface IA1A5<T0> : IA2 where T0 : new() { }
+    public interface IA1A5<T0> : IA2 where T0 : new()
+    {
+    }
 
     public class A0A4<T0> : A0 where T0 : new()
     {
@@ -3272,7 +3282,9 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A3NotInlinedStatic() { }
+        public static void VerifyA0A3NotInlinedStatic()
+        {
+        }
 
         public static void VerifyA0A3GenericStatic<T>() where T : new()
         {
@@ -3280,7 +3292,9 @@ namespace Chaos
             T t1 = new T();
         }
 
-        public static void VerifyA0A3Static() { }
+        public static void VerifyA0A3Static()
+        {
+        }
 
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining

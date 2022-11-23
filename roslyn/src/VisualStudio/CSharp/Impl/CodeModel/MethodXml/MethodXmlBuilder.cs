@@ -15,7 +15,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
     internal class MethodXmlBuilder : AbstractMethodXmlBuilder
     {
         private MethodXmlBuilder(IMethodSymbol symbol, SemanticModel semanticModel)
-            : base(symbol, semanticModel) { }
+            : base(symbol, semanticModel)
+        {
+        }
 
         private void GenerateBlock(BlockSyntax block)
         {

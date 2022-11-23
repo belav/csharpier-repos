@@ -3043,7 +3043,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                     if (mapToTables)
                     {
-                        cb.ToTable(_ => { });
+                        cb.ToTable(_ =>
+                        {
+                        });
                     }
 
                     if (mapToSprocs)
@@ -4526,7 +4528,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             public DateTime BirthDay { get; set; }
         }
 
-        private class ExtraSpecialCustomer : SpecialCustomer { }
+        private class ExtraSpecialCustomer : SpecialCustomer
+        {
+        }
 
         private class Order
         {

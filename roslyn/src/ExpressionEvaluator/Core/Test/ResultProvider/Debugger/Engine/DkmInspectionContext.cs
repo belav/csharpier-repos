@@ -85,13 +85,23 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         }
     }
 
-    public enum DkmFuncEvalFlags { }
+    public enum DkmFuncEvalFlags
+    {
+    }
 
-    public class DkmRawReturnValue { }
+    public class DkmRawReturnValue
+    {
+    }
 
-    public class DkmCompiledVisualizationData { }
+    public class DkmCompiledVisualizationData
+    {
+    }
 
-    public class DkmCompiledVisualizationDataPriority { }
+    public class DkmCompiledVisualizationDataPriority
+    {
+    }
 
-    public class DkmRawReturnValueContainer { }
+    public class DkmRawReturnValueContainer
+    {
+    }
 }

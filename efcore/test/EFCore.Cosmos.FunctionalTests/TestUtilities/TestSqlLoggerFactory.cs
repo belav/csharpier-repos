@@ -11,7 +11,9 @@ public class TestSqlLoggerFactory : ListLoggerFactory
 
     private static readonly string _eol = Environment.NewLine;
 
-    public TestSqlLoggerFactory() : this(_ => true) { }
+    public TestSqlLoggerFactory() : this(_ => true)
+    {
+    }
 
     public TestSqlLoggerFactory(Func<string, bool> shouldLogCategory)
         : base(c => shouldLogCategory(c) || c == DbLoggerCategory.Database.Command.Name)

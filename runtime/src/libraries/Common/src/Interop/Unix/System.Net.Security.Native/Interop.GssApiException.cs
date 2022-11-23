@@ -24,7 +24,9 @@ internal static partial class Interop
                 get { return _minorStatus; }
             }
 
-            public GssApiException(string message) : base(message) { }
+            public GssApiException(string message) : base(message)
+            {
+            }
 
             public GssApiException(Status majorStatus, Status minorStatus)
                 : base(GetGssApiDisplayStatus(majorStatus, minorStatus, null))

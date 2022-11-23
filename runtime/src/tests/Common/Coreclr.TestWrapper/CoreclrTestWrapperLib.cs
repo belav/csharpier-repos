@@ -122,7 +122,9 @@ namespace CoreclrTestLib
                             {
                                 children.Add(Process.GetProcessById(processEntry.ProcessID));
                             }
-                            catch { }
+                            catch
+                            {
+                            }
                         }
 
                         success = Kernel32.Process32NextW(snapshot, ref processEntry);
@@ -393,7 +395,9 @@ namespace CoreclrTestLib
                         {
                             cts.Cancel();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
 
                         outputWriter.WriteLine(
                             "\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}{2}{3}, start: {4}, end: {5})",

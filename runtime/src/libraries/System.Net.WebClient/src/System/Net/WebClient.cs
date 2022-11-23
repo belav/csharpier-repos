@@ -774,7 +774,9 @@ namespace System.Net
             {
                 request?.Abort();
             }
-            catch (Exception exception) when (!(exception is OutOfMemoryException)) { }
+            catch (Exception exception) when (!(exception is OutOfMemoryException))
+            {
+            }
         }
 
         private void CopyHeadersTo(WebRequest request)
@@ -2346,8 +2348,12 @@ namespace System.Net
         [EditorBrowsable(EditorBrowsableState.Never)]
         public event WriteStreamClosedEventHandler? WriteStreamClosed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [Obsolete(
@@ -2355,7 +2361,9 @@ namespace System.Net
             true
         )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected virtual void OnWriteStreamClosed(WriteStreamClosedEventArgs e) { }
+        protected virtual void OnWriteStreamClosed(WriteStreamClosedEventArgs e)
+        {
+        }
         #endregion
     }
 
@@ -2641,7 +2649,9 @@ namespace System.Net
             true
         )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public WriteStreamClosedEventArgs() { }
+        public WriteStreamClosedEventArgs()
+        {
+        }
 
         [Obsolete(
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",

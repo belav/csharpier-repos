@@ -35,7 +35,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SuggestionServi
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public VisualStudioTextBufferSupportsFeatureService() { }
+            public VisualStudioTextBufferSupportsFeatureService()
+            {
+            }
 
             public bool SupportsCodeFixes(ITextBuffer textBuffer)
             {
@@ -97,7 +99,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SuggestionServi
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public VisualStudioDocumentSupportsFeatureService() { }
+            public VisualStudioDocumentSupportsFeatureService()
+            {
+            }
 
             public bool SupportsCodeFixes(Document document) =>
                 SupportsCodeFixesWorker(document.Id);

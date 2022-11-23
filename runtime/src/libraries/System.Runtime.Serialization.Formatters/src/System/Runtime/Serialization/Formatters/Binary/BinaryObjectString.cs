@@ -8,7 +8,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int _objectId;
         internal string? _value;
 
-        internal BinaryObjectString() { }
+        internal BinaryObjectString()
+        {
+        }
 
         internal void Set(int objectId, string? value)
         {

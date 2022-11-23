@@ -57,7 +57,9 @@ class Tests
     class Gen<T>
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void Run() { }
+        public static void Run()
+        {
+        }
     }
 
     public delegate int Delegate1();

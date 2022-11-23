@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;

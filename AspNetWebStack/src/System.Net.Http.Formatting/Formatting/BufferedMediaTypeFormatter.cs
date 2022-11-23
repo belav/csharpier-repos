@@ -27,7 +27,9 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Initializes a new instance of the <see cref="BufferedMediaTypeFormatter"/> class.
         /// </summary>
-        protected BufferedMediaTypeFormatter() { }
+        protected BufferedMediaTypeFormatter()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BufferedMediaTypeFormatter"/> class.

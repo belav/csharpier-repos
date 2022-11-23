@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.UnsafeKeyword
         };
 
-        public InterfaceKeywordRecommender() : base(SyntaxKind.InterfaceKeyword) { }
+        public InterfaceKeywordRecommender() : base(SyntaxKind.InterfaceKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

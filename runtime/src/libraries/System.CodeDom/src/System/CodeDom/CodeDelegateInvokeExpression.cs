@@ -5,7 +5,9 @@ namespace System.CodeDom
 {
     public class CodeDelegateInvokeExpression : CodeExpression
     {
-        public CodeDelegateInvokeExpression() { }
+        public CodeDelegateInvokeExpression()
+        {
+        }
 
         public CodeDelegateInvokeExpression(CodeExpression targetObject)
         {

@@ -1742,7 +1742,9 @@ d
 
         #region Host Object Binding and Conversions
 
-        public class C<T> { }
+        public class C<T>
+        {
+        }
 
         [Fact]
         public void Submission_HostConversions()

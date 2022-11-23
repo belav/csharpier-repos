@@ -1294,8 +1294,15 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             for (int i = 0; i < 50; i++)
             {
                 using (var handler = new WinHttpHandler())
-                using (HttpResponseMessage response = SendRequestHelper.Send(handler, () => { }))
-                { }
+                using (
+                    HttpResponseMessage response = SendRequestHelper.Send(
+                        handler,
+                        () => {
+                        }
+                    )
+                )
+                {
+                }
             }
         }
 
@@ -1393,7 +1400,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             ICredentials IWebProxy.Credentials
             {
                 get { return this.networkCredential; }
-                set { }
+                set
+                {
+                }
             }
 
             Uri IWebProxy.GetProxy(Uri destination)
@@ -1411,7 +1420,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             private ICredentials _credentials = null;
 
-            public FakeDefaultWebProxy() { }
+            public FakeDefaultWebProxy()
+            {
+            }
 
             public ICredentials Credentials
             {

@@ -26,7 +26,9 @@ public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
     /// </summary>
     /// <param name="dependencies">The core dependencies for this service.</param>
     public InMemoryConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     public override ConventionSet CreateConventionSet()

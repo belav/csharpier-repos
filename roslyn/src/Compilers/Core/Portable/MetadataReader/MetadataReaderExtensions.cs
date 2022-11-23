@@ -225,7 +225,9 @@ namespace Microsoft.CodeAnalysis
                         return true;
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
             }
 
             return false;

@@ -15,5 +15,7 @@ namespace System.Runtime.CompilerServices
 #else
     internal
 #endif
-    static class IsExternalInit { }
+    static class IsExternalInit
+    {
+    }
 }

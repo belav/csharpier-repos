@@ -32,7 +32,9 @@ namespace System.Web.Mvc
         private DynamicViewDataDictionary _dynamicViewDataDictionary;
 
         public HtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-            : this(viewContext, viewDataContainer, RouteTable.Routes) { }
+            : this(viewContext, viewDataContainer, RouteTable.Routes)
+        {
+        }
 
         public HtmlHelper(
             ViewContext viewContext,

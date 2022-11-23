@@ -531,10 +531,14 @@ namespace Mono.Options
         private bool hidden;
 
         protected Option(string prototype, string description)
-            : this(prototype, description, 1, false) { }
+            : this(prototype, description, 1, false)
+        {
+        }
 
         protected Option(string prototype, string description, int maxValueCount)
-            : this(prototype, description, maxValueCount, false) { }
+            : this(prototype, description, maxValueCount, false)
+        {
+        }
 
         protected Option(string prototype, string description, int maxValueCount, bool hidden)
         {
@@ -805,7 +809,9 @@ namespace Mono.Options
 
     public abstract class ArgumentSource
     {
-        protected ArgumentSource() { }
+        protected ArgumentSource()
+        {
+        }
 
         public abstract string[] GetNames();
         public abstract string Description { get; }
@@ -908,7 +914,9 @@ namespace Mono.Options
     {
         private string option;
 
-        public OptionException() { }
+        public OptionException()
+        {
+        }
 
         public OptionException(string message, string optionName) : base(message)
         {
@@ -931,11 +939,17 @@ namespace Mono.Options
 
     public class OptionSet : KeyedCollection<string, Option>
     {
-        public OptionSet() : this(null, null) { }
+        public OptionSet() : this(null, null)
+        {
+        }
 
-        public OptionSet(MessageLocalizerConverter localizer) : this(localizer, null) { }
+        public OptionSet(MessageLocalizerConverter localizer) : this(localizer, null)
+        {
+        }
 
-        public OptionSet(StringComparer comparer) : this(null, comparer) { }
+        public OptionSet(StringComparer comparer) : this(null, comparer)
+        {
+        }
 
         public OptionSet(MessageLocalizerConverter localizer, StringComparer comparer)
             : base(comparer)
@@ -1050,7 +1064,8 @@ namespace Mono.Options
             // (see Option.ParsePrototype(), and thus it'll prevent Category
             // instances from being accidentally used as normal options.
             public Category(string description) : base("=:Category:= " + description, description)
-            { }
+            {
+            }
 
             protected override void OnParseComplete(OptionContext c)
             {
@@ -1073,7 +1088,9 @@ namespace Mono.Options
                 string description,
                 int count,
                 Action<OptionValueCollection> action
-            ) : this(prototype, description, count, action, false) { }
+            ) : this(prototype, description, count, action, false)
+            {
+            }
 
             public ActionOption(
                 string prototype,
@@ -1982,7 +1999,9 @@ namespace Mono.Options
 
 #if !PCL || NETSTANDARD1_3
         public CommandSet(string suite, MessageLocalizerConverter localizer = null)
-            : this(suite, Console.Out, Console.Error, localizer) { }
+            : this(suite, Console.Out, Console.Error, localizer)
+        {
+        }
 #endif
 
         public CommandSet(
@@ -2340,7 +2359,9 @@ namespace Mono.Options
 
     public class HelpCommand : Command
     {
-        public HelpCommand() : base("help", help: "Show this message and exit") { }
+        public HelpCommand() : base("help", help: "Show this message and exit")
+        {
+        }
 
         public override int Invoke(IEnumerable<string> arguments)
         {

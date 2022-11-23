@@ -29,7 +29,9 @@ class Foo<T1, T2>
     }
 }
 
-class Bar<T> : Foo<object, T> { }
+class Bar<T> : Foo<object, T>
+{
+}
 
 public class main
 {

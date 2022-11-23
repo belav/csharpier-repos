@@ -22,7 +22,9 @@ public class ReplaceCultureAttribute : BeforeAfterTestAttribute
     /// <summary>
     /// Replaces the current culture and UI culture to en-GB and en-US respectively.
     /// </summary>
-    public ReplaceCultureAttribute() : this(_defaultCultureName, _defaultUICultureName) { }
+    public ReplaceCultureAttribute() : this(_defaultCultureName, _defaultUICultureName)
+    {
+    }
 
     /// <summary>
     /// Replaces the current culture and UI culture based on specified values.

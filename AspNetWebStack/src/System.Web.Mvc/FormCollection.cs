@@ -21,7 +21,9 @@ namespace System.Web.Mvc
     [FormCollectionBinder]
     public sealed class FormCollection : NameValueCollection, IValueProvider
     {
-        public FormCollection() { }
+        public FormCollection()
+        {
+        }
 
         public FormCollection(NameValueCollection collection)
         {

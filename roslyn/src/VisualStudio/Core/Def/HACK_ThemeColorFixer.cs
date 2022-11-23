@@ -484,6 +484,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             IWpfTextView textView,
             ConnectionReason reason,
             Collection<ITextBuffer> subjectBuffers
-        ) { }
+        )
+        {
+        }
     }
 }

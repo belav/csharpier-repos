@@ -1124,7 +1124,8 @@ namespace System.Net.Http
             private int _length;
 
             public LimitArrayPoolWriteStream(int maxBufferSize) : this(maxBufferSize, InitialLength)
-            { }
+            {
+            }
 
             public LimitArrayPoolWriteStream(int maxBufferSize, long capacity)
             {
@@ -1260,7 +1261,9 @@ namespace System.Net.Http
                 _length = newLength;
             }
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override Task FlushAsync(CancellationToken cancellationToken) =>
                 Task.CompletedTask;

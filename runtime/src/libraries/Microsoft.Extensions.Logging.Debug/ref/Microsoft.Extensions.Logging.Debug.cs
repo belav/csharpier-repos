@@ -24,13 +24,17 @@ namespace Microsoft.Extensions.Logging.Debug
         : Microsoft.Extensions.Logging.ILoggerProvider,
             System.IDisposable
     {
-        public DebugLoggerProvider() { }
+        public DebugLoggerProvider()
+        {
+        }
 
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string name)
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

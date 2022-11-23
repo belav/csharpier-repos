@@ -15,7 +15,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
             public SettingsEntriesSnapshot(
                 ImmutableArray<NamingStyleSetting> data,
                 int currentVersionNumber
-            ) : base(data, currentVersionNumber) { }
+            ) : base(data, currentVersionNumber)
+            {
+            }
 
             protected override bool TryGetValue(
                 NamingStyleSetting result,

@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxReference syntaxReferenceOpt,
             Location location,
             bool isIterator
-        ) : base(containingType, syntaxReferenceOpt, location, isIterator) { }
+        ) : base(containingType, syntaxReferenceOpt, location, isIterator)
+        {
+        }
 
         protected abstract Location ReturnTypeLocation { get; }
 

@@ -8,19 +8,31 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of the JavaScript Core Uint8Array class.
         /// </summary>
-        public Uint8Array() { }
+        public Uint8Array()
+        {
+        }
 
-        public Uint8Array(int length) : base(nameof(Uint8Array), length) { }
+        public Uint8Array(int length) : base(nameof(Uint8Array), length)
+        {
+        }
 
-        public Uint8Array(ArrayBuffer buffer) : base(nameof(Uint8Array), buffer) { }
+        public Uint8Array(ArrayBuffer buffer) : base(nameof(Uint8Array), buffer)
+        {
+        }
 
         public Uint8Array(ArrayBuffer buffer, int byteOffset)
-            : base(nameof(Uint8Array), buffer, byteOffset) { }
+            : base(nameof(Uint8Array), buffer, byteOffset)
+        {
+        }
 
         public Uint8Array(ArrayBuffer buffer, int byteOffset, int length)
-            : base(nameof(Uint8Array), buffer, byteOffset, length) { }
+            : base(nameof(Uint8Array), buffer, byteOffset, length)
+        {
+        }
 
-        internal Uint8Array(IntPtr jsHandle) : base(jsHandle) { }
+        internal Uint8Array(IntPtr jsHandle) : base(jsHandle)
+        {
+        }
 
         public int Length
         {

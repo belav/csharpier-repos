@@ -87,7 +87,9 @@ namespace PrimitiveVT
         int f10(params VT1B[] args)
         {
             int sum = 0;
-            for (int i = 0; i < args.Length; sum += args[i], i++) { }
+            for (int i = 0; i < args.Length; sum += args[i], i++)
+            {
+            }
             ;
             return sum;
         }
@@ -144,7 +146,9 @@ namespace PrimitiveVT
                 return 1;
             }
 
-            for (VT1B z = 3; z <= 10; z++, t.f2((VT1A)y, 1)) { }
+            for (VT1B z = 3; z <= 10; z++, t.f2((VT1A)y, 1))
+            {
+            }
 
             if (f3(ref y, Int32.MinValue) != 0)
             {

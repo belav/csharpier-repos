@@ -3,9 +3,13 @@
 
 using System;
 
-public class C { }
+public class C
+{
+}
 
-public struct S { }
+public struct S
+{
+}
 
 public class GenType<T> : IComparable<GenType<T>>
 #if ADD_STRUCT_CONSTRAINT

@@ -14,7 +14,9 @@ namespace System.Text.Json.Serialization.Tests
     public partial class DefaultJsonTypeInfoResolverMultiContextTests : SerializerTests
     {
         public DefaultJsonTypeInfoResolverMultiContextTests()
-            : base(JsonSerializerWrapper.StringSerializer) { }
+            : base(JsonSerializerWrapper.StringSerializer)
+        {
+        }
 
         [Fact]
         public async Task TypeInfoWithNullCreateObjectFailsDeserialization()
@@ -42,7 +44,12 @@ namespace System.Text.Json.Serialization.Tests
                 expectedExceptionType: typeof(NotSupportedException)
             );
 
-            Assert.Throws<InvalidOperationException>(() => resolver.Modifiers.Add(ti => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    resolver.Modifiers.Add(ti =>
+                    {
+                    })
+            );
         }
 
         [Theory]

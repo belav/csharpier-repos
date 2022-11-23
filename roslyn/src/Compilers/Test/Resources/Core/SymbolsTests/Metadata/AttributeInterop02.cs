@@ -46,11 +46,17 @@ namespace EventNS
     [ComSourceInterfaces(typeof(IEvents))]
     public class NetImpl : IEvents
     {
-        void IEvents.OnEvent01() { }
+        void IEvents.OnEvent01()
+        {
+        }
 
-        void IEvents.OnEvent02(object i1) { }
+        void IEvents.OnEvent02(object i1)
+        {
+        }
 
-        void IEvents.OnEvent03(object i1, object i2, bool b) { }
+        void IEvents.OnEvent03(object i1, object i2, bool b)
+        {
+        }
     }
 
     /// <summary>

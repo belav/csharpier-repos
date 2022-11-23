@@ -77,7 +77,9 @@ namespace System.Net.Security.Tests
                 new CipherSuitesPolicy(Array.Empty<TlsCipherSuite>());
                 return true;
             }
-            catch (PlatformNotSupportedException) { }
+            catch (PlatformNotSupportedException)
+            {
+            }
 
             return false;
         });
@@ -691,9 +693,15 @@ namespace System.Net.Security.Tests
                         // since we broke connection the server should finish
                         await serverTask;
                     }
-                    catch (AuthenticationException) { }
-                    catch (Win32Exception) { }
-                    catch (IOException) { }
+                    catch (AuthenticationException)
+                    {
+                    }
+                    catch (Win32Exception)
+                    {
+                    }
+                    catch (IOException)
+                    {
+                    }
                 }
 
                 return e;

@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService,
             ITextStructureNavigatorSelectorService navigatorSelectorService
-        ) : base(undoHistoryRegistry, editorOperationsFactoryService, navigatorSelectorService) { }
+        ) : base(undoHistoryRegistry, editorOperationsFactoryService, navigatorSelectorService)
+        {
+        }
 
         /// <summary>
         /// Gets block comments by parsing the text for comment markers.

@@ -35,7 +35,9 @@ namespace System.Linq.Parallel
         // Instantiates a new queue.
         //
 
-        internal SynchronousChannel() { }
+        internal SynchronousChannel()
+        {
+        }
 
         //-----------------------------------------------------------------------------------
         // Initializes the queue for this channel.

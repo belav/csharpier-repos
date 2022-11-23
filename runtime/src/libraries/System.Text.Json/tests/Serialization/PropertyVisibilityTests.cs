@@ -793,7 +793,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public class ClassTwiceInheritedWithPropertyNamingConflictWhichThrowsDummy
-            : ClassWithPublicProperty { }
+            : ClassWithPublicProperty
+        {
+        }
 
         public class ClassTwiceInheritedWithPropertyNamingConflictWhichThrows
             : ClassTwiceInheritedWithPropertyNamingConflictWhichThrowsDummy
@@ -845,7 +847,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public class ClassInheritedWithPropertyPolicyConflictWhichThrowsDummy
-            : ClassWithPublicProperty { }
+            : ClassWithPublicProperty
+        {
+        }
 
         public class ClassTwiceInheritedWithPropertyPolicyConflictWhichThrows
             : ClassInheritedWithPropertyPolicyConflictWhichThrowsDummy
@@ -1178,7 +1182,9 @@ namespace System.Text.Json.Serialization.Tests
             public NestedClass Class { get; private set; }
         }
 
-        private class NestedClass { }
+        private class NestedClass
+        {
+        }
 
         [Fact]
         public static void JsonIgnoreAttribute()
@@ -1385,7 +1391,9 @@ namespace System.Text.Json.Serialization.Tests
             );
         }
 
-        public class ObjectDictWrapper : Dictionary<int, string> { }
+        public class ObjectDictWrapper : Dictionary<int, string>
+        {
+        }
 
         public class ClassWithUnsupportedDictionary
         {
@@ -2464,7 +2472,9 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        public class PointClass { }
+        public class PointClass
+        {
+        }
 
         [Fact]
         public static void Ignore_WhenWritingNull_Globally()
@@ -2659,7 +2669,9 @@ namespace System.Text.Json.Serialization.Tests
             public Point_2D_Struct MyBadMember { get; set; }
         }
 
-        private interface IUseCustomConverter { }
+        private interface IUseCustomConverter
+        {
+        }
 
         [JsonConverter(typeof(MyCustomConverter))]
         private struct MyValueTypeWithProperties : IUseCustomConverter
@@ -2695,7 +2707,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private class MyClassWithValueType
         {
-            public MyClassWithValueType() { }
+            public MyClassWithValueType()
+            {
+            }
 
             public MyValueTypeWithProperties Value { get; set; }
         }
@@ -2848,9 +2862,13 @@ namespace System.Text.Json.Serialization.Tests
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public IInterface MyProp { get; set; }
 
-            public interface IInterface { }
+            public interface IInterface
+            {
+            }
 
-            public struct MyStruct : IInterface { }
+            public struct MyStruct : IInterface
+            {
+            }
         }
 
         [Fact]

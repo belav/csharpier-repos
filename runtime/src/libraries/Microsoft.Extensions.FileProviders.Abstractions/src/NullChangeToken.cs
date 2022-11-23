@@ -16,7 +16,9 @@ namespace Microsoft.Extensions.FileProviders
         /// </summary>
         public static NullChangeToken Singleton { get; } = new NullChangeToken();
 
-        private NullChangeToken() { }
+        private NullChangeToken()
+        {
+        }
 
         /// <summary>
         /// Always false.

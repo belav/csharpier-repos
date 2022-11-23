@@ -12,12 +12,18 @@ namespace System.Net.Http
 {
     public class MockMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
     {
-        public MockMultipartFormDataStreamProvider() : base(Path.GetTempPath()) { }
+        public MockMultipartFormDataStreamProvider() : base(Path.GetTempPath())
+        {
+        }
 
-        public MockMultipartFormDataStreamProvider(string rootPath) : base(rootPath) { }
+        public MockMultipartFormDataStreamProvider(string rootPath) : base(rootPath)
+        {
+        }
 
         public MockMultipartFormDataStreamProvider(string rootPath, int bufferSize)
-            : base(rootPath, bufferSize) { }
+            : base(rootPath, bufferSize)
+        {
+        }
     }
 
     public class MultipartFormDataStreamProviderTests
@@ -169,7 +175,9 @@ namespace System.Net.Http
             foreach (HttpContent content in multipartContent)
             {
                 provider.Contents.Add(content);
-                using (provider.GetStream(multipartContent, content.Headers)) { }
+                using (provider.GetStream(multipartContent, content.Headers))
+                {
+                }
             }
 
             // Act
@@ -215,10 +223,14 @@ namespace System.Net.Http
 
         private class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
         {
-            public CustomMultipartFormDataStreamProvider(string rootPath) : base(rootPath) { }
+            public CustomMultipartFormDataStreamProvider(string rootPath) : base(rootPath)
+            {
+            }
 
             public CustomMultipartFormDataStreamProvider(string rootPath, int bufferSize)
-                : base(rootPath, bufferSize) { }
+                : base(rootPath, bufferSize)
+            {
+            }
 
             public override Stream GetStream(HttpContent parent, HttpContentHeaders headers)
             {

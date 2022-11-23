@@ -847,9 +847,13 @@ namespace System.Security.Cryptography.Xml
                         }
                     }
                     // Store doesn't exist, no read permissions, other system error
-                    catch (CryptographicException) { }
+                    catch (CryptographicException)
+                    {
+                    }
                     // Opening LocalMachine stores (other than Root or CertificateAuthority) on Linux
-                    catch (PlatformNotSupportedException) { }
+                    catch (PlatformNotSupportedException)
+                    {
+                    }
 
                     if (filters != null)
                         collection.AddRange(filters);

@@ -10,7 +10,9 @@ internal sealed class ItemsDictionary : IDictionary<object, object?>
 {
     private IDictionary<object, object?>? _items;
 
-    public ItemsDictionary() { }
+    public ItemsDictionary()
+    {
+    }
 
     public ItemsDictionary(IDictionary<object, object?> items)
     {
@@ -147,11 +149,15 @@ internal sealed class ItemsDictionary : IDictionary<object, object?>
 
         object? IEnumerator.Current => null;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool MoveNext() => false;
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     private static class EmptyDictionary

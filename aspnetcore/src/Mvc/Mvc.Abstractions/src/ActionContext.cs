@@ -34,7 +34,9 @@ public class ActionContext
             actionContext.RouteData,
             actionContext.ActionDescriptor,
             actionContext.ModelState
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="ActionContext"/>.
@@ -46,7 +48,9 @@ public class ActionContext
         HttpContext httpContext,
         RouteData routeData,
         ActionDescriptor actionDescriptor
-    ) : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary()) { }
+    ) : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary())
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="ActionContext"/>.

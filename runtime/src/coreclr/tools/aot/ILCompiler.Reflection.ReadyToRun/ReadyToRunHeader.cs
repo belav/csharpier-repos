@@ -51,7 +51,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// </summary>
         public IDictionary<ReadyToRunSectionType, ReadyToRunSection> Sections { get; private set; }
 
-        public ReadyToRunCoreHeader() { }
+        public ReadyToRunCoreHeader()
+        {
+        }
 
         public ReadyToRunCoreHeader(byte[] image, ref int curOffset)
         {
@@ -120,7 +122,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         public ushort MajorVersion { get; set; }
         public ushort MinorVersion { get; set; }
 
-        public ReadyToRunHeader() { }
+        public ReadyToRunHeader()
+        {
+        }
 
         /// <summary>
         /// Initializes the fields of the R2RHeader

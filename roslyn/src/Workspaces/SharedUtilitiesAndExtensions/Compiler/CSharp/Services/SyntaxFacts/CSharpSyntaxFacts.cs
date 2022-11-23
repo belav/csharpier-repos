@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         internal static readonly CSharpSyntaxFacts Instance = new();
 
-        protected CSharpSyntaxFacts() { }
+        protected CSharpSyntaxFacts()
+        {
+        }
 
         public bool IsCaseSensitive => true;
 

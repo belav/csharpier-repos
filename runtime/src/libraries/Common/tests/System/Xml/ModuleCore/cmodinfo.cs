@@ -35,7 +35,9 @@ namespace OLEDB.Test.ModuleCore
         private static object _includenotimplemented;
 
         //Constructor
-        public CModInfo() { }
+        public CModInfo()
+        {
+        }
 
         //Helpers
         internal static void Dispose()

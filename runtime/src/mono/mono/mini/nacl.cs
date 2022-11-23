@@ -162,7 +162,9 @@ class Tests
         return 0;
     }
 
-    public class BaseClass { }
+    public class BaseClass
+    {
+    }
 
     public class LongClass : BaseClass
     {

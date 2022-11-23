@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Operations;
 
 public class Operation<TModel> : Operation where TModel : class
 {
-    public Operation() { }
+    public Operation()
+    {
+    }
 
     public Operation(string op, string path, string from, object value) : base(op, path, from)
     {

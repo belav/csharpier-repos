@@ -35,11 +35,15 @@ public class Class2
     public int this[string key]
     {
         get { return 0; }
-        set { }
+        set
+        {
+        }
     }
 }
 
 public class Class
 {
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

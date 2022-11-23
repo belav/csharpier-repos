@@ -69,7 +69,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NavigateToSearchServiceServerCallbackDispatcher() { }
+        public NavigateToSearchServiceServerCallbackDispatcher()
+        {
+        }
 
         private new NavigateToSearchServiceCallback GetCallback(
             RemoteServiceCallbackId callbackId
@@ -96,7 +98,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             {
                 await _onResultFound(result).ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex)) { }
+            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex))
+            {
+            }
         }
     }
 }

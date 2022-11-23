@@ -12,32 +12,44 @@ namespace System.Memory.Tests
     {
         public class Array : ReadOnlySequenceTestsChar
         {
-            public Array() : base(ReadOnlySequenceFactory<char>.ArrayFactory) { }
+            public Array() : base(ReadOnlySequenceFactory<char>.ArrayFactory)
+            {
+            }
         }
 
         public class String : ReadOnlySequenceTestsChar
         {
-            public String() : base(ReadOnlySequenceFactoryChar.StringFactory) { }
+            public String() : base(ReadOnlySequenceFactoryChar.StringFactory)
+            {
+            }
         }
 
         public class Memory : ReadOnlySequenceTestsChar
         {
-            public Memory() : base(ReadOnlySequenceFactory<char>.MemoryFactory) { }
+            public Memory() : base(ReadOnlySequenceFactory<char>.MemoryFactory)
+            {
+            }
         }
 
         public class SingleSegment : ReadOnlySequenceTestsChar
         {
-            public SingleSegment() : base(ReadOnlySequenceFactory<char>.SingleSegmentFactory) { }
+            public SingleSegment() : base(ReadOnlySequenceFactory<char>.SingleSegmentFactory)
+            {
+            }
         }
 
         public class SegmentPerChar : ReadOnlySequenceTestsChar
         {
-            public SegmentPerChar() : base(ReadOnlySequenceFactory<char>.SegmentPerItemFactory) { }
+            public SegmentPerChar() : base(ReadOnlySequenceFactory<char>.SegmentPerItemFactory)
+            {
+            }
         }
 
         public class SplitInThreeSegments : ReadOnlySequenceTestsChar
         {
-            public SplitInThreeSegments() : base(ReadOnlySequenceFactory<char>.SplitInThree) { }
+            public SplitInThreeSegments() : base(ReadOnlySequenceFactory<char>.SplitInThree)
+            {
+            }
         }
 
         internal ReadOnlySequenceFactory<char> Factory { get; }

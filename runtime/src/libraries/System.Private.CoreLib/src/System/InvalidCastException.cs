@@ -39,6 +39,8 @@ namespace System
         }
 
         protected InvalidCastException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

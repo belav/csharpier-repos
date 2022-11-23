@@ -9,7 +9,9 @@ namespace WebMatrix.Data
     internal class ConnectionConfiguration : IConnectionConfiguration
     {
         internal ConnectionConfiguration(string providerName, string connectionString)
-            : this(new DbProviderFactoryWrapper(providerName), connectionString) { }
+            : this(new DbProviderFactoryWrapper(providerName), connectionString)
+        {
+        }
 
         internal ConnectionConfiguration(
             IDbProviderFactory providerFactory,

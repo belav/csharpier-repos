@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService,
             EditorOptionsService editorOptionsService
-        ) : base(undoHistoryRegistry, editorOperationsFactoryService, editorOptionsService) { }
+        ) : base(undoHistoryRegistry, editorOperationsFactoryService, editorOptionsService)
+        {
+        }
 
         public CommandState GetCommandState(CommentSelectionCommandArgs args) =>
             GetCommandState(args.SubjectBuffer);

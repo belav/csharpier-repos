@@ -111,7 +111,9 @@ public class RecursiveCollection : AutoMapperSpecBase
         public MyJObject Value { get; set; }
     }
 
-    class MyJObject : List<MyJObject> { }
+    class MyJObject : List<MyJObject>
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(
@@ -183,11 +185,16 @@ public class Enumerator_disposable_at_runtime_class : AutoMapperSpecBase
         public class CustomEnumerator : EnumeratorBase, IDisposable
         {
             public CustomEnumerator(IEnumerator<T> enumerator, CustomList<T> list)
-                : base(enumerator, list) { }
+                : base(enumerator, list)
+            {
+            }
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_call_dispose()
@@ -236,7 +243,10 @@ public class Enumerator_non_disposable_struct : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_not_call_dispose()
@@ -282,7 +292,10 @@ public class Enumerator_dispose : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_call_dispose()
@@ -328,7 +341,10 @@ public class Enumerator_dispose_exception : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_call_dispose()
@@ -338,7 +354,9 @@ public class Enumerator_dispose_exception : AutoMapperSpecBase
         {
             Mapper.Map<List<int>>(source);
         }
-        catch { }
+        catch
+        {
+        }
         source.Disposed.ShouldBeTrue();
     }
 }
@@ -382,7 +400,10 @@ public class Enumerator_dispose_struct : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_call_dispose()
@@ -432,7 +453,10 @@ public class Enumerator_dispose_exception_struct : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_call_dispose()
@@ -442,7 +466,9 @@ public class Enumerator_dispose_exception_struct : AutoMapperSpecBase
         {
             Mapper.Map<List<int>>(source);
         }
-        catch { }
+        catch
+        {
+        }
         source.Disposed.ShouldBeTrue();
     }
 }
@@ -489,9 +515,13 @@ public class When_mapping_to_existing_observable_collection : AutoMapperSpecBase
 
 public class When_mapping_to_member_typed_as_IEnumerable : AutoMapperSpecBase
 {
-    public class SourceItem { }
+    public class SourceItem
+    {
+    }
 
-    public class DestItem { }
+    public class DestItem
+    {
+    }
 
     public class SourceA
     {
@@ -532,7 +562,10 @@ public class When_mapping_to_member_typed_as_IEnumerable : AutoMapperSpecBase
 
 public class When_mapping_to_existing_collection_typed_as_IEnumerable : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_map_ok()
@@ -729,7 +762,9 @@ public class When_mapping_from_struct_collection : AutoMapperSpecBase
 
 public class When_mapping_to_custom_collection_type : AutoMapperSpecBase
 {
-    public class MyCollection : CollectionBase { }
+    public class MyCollection : CollectionBase
+    {
+    }
 
     public class SourceItem
     {
@@ -760,7 +795,9 @@ public class When_mapping_to_custom_collection_type : AutoMapperSpecBase
 
 public class When_mapping_to_unknown_collection_type : NonValidatingSpecBase
 {
-    public class MyCollection { }
+    public class MyCollection
+    {
+    }
 
     public class SourceItem
     {
@@ -815,7 +852,9 @@ public class When_mapping_collections_with_inheritance : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    public class SpecificDestinationItem : DestinationItemBase { }
+    public class SpecificDestinationItem : DestinationItemBase
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
@@ -838,7 +877,9 @@ public class When_passing_a_not_empty_collection : AutoMapperSpecBase
         public List<SourceItem> Items { get; }
     }
 
-    class SourceItem { }
+    class SourceItem
+    {
+    }
 
     class Destination
     {
@@ -846,7 +887,9 @@ public class When_passing_a_not_empty_collection : AutoMapperSpecBase
             new List<DestinationItem> { new DestinationItem() };
     }
 
-    class DestinationItem { }
+    class DestinationItem
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
@@ -871,14 +914,18 @@ public class When_mapping_collections_with_structs : AutoMapperSpecBase
 {
     BarDTO _destination;
 
-    public struct Foo { }
+    public struct Foo
+    {
+    }
 
     public struct Bar
     {
         public IEnumerable<Foo> Foos { get; set; }
     }
 
-    public struct FooDTO { }
+    public struct FooDTO
+    {
+    }
 
     public struct BarDTO
     {
@@ -1173,7 +1220,9 @@ public class CollectionMapping
     public void Should_map_to_NameValueCollection()
     {
         var c = new NameValueCollection();
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         var mappedCollection = config
             .CreateMapper()
             .Map<NameValueCollection, NameValueCollection>(c);

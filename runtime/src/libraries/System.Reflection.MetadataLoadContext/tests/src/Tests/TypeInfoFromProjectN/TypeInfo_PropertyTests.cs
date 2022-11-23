@@ -539,48 +539,84 @@ namespace System.Reflection.Tests
         public int PublicField;
         public static int PublicStaticField;
 
-        public PublicClass() { }
+        public PublicClass()
+        {
+        }
 
-        public void PublicMethod() { }
+        public void PublicMethod()
+        {
+        }
 
-        public void overRiddenMethod() { }
+        public void overRiddenMethod()
+        {
+        }
 
-        public void overRiddenMethod(int i) { }
+        public void overRiddenMethod(int i)
+        {
+        }
 
-        public void overRiddenMethod(string s) { }
+        public void overRiddenMethod(string s)
+        {
+        }
 
-        public void overRiddenMethod(object o) { }
+        public void overRiddenMethod(object o)
+        {
+        }
 
-        public static void PublicStaticMethod() { }
+        public static void PublicStaticMethod()
+        {
+        }
 
-        public class PublicNestedType { }
+        public class PublicNestedType
+        {
+        }
 
         public int PublicProperty
         {
             get { return default(int); }
-            set { }
+            set
+            {
+            }
         }
 
-        public class publicNestedClass { }
+        public class publicNestedClass
+        {
+        }
     }
 
-    public sealed class sealedClass { }
+    public sealed class sealedClass
+    {
+    }
 
-    public abstract class abstractClass { }
+    public abstract class abstractClass
+    {
+    }
 
-    public interface ITest { }
+    public interface ITest
+    {
+    }
 
-    public class TypeInfoPropertyBase { }
+    public class TypeInfoPropertyBase
+    {
+    }
 
-    public class TypeInfoPropertyDerived : TypeInfoPropertyBase { }
+    public class TypeInfoPropertyDerived : TypeInfoPropertyBase
+    {
+    }
 
-    public class ImplClass : ITest { }
+    public class ImplClass : ITest
+    {
+    }
 
-    public class TypeInfoPropertyGenericClass<T> { }
+    public class TypeInfoPropertyGenericClass<T>
+    {
+    }
 
     public class ClassWithConstraints<T, U>
         where T : TypeInfoPropertyBase, ITest
-        where U : class, new() { }
+        where U : class, new()
+    {
+    }
 
     public enum MYENUM
     {

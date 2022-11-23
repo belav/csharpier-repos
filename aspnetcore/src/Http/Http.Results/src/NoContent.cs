@@ -18,7 +18,9 @@ public class NoContent : IResult, IEndpointMetadataProvider, IStatusCodeHttpResu
     /// <summary>
     /// Initializes a new instance of the <see cref="NoContent"/> class.
     /// </summary>
-    internal NoContent() { }
+    internal NoContent()
+    {
+    }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status204NoContent"/>

@@ -30,7 +30,12 @@ namespace System.CommandLine.Benchmarks.CommandLine
 
             RootCommand command = new() { boolOption, stringOption };
 
-            command.SetHandler(static (bool _, string _) => { }, boolOption, stringOption);
+            command.SetHandler(
+                static (bool _, string _) => {
+                },
+                boolOption,
+                stringOption
+            );
 
             return command;
         }

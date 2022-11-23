@@ -6,13 +6,18 @@ namespace System.CommandLine.Rendering
     public class ForegroundColorSpan : ColorSpan
     {
         public ForegroundColorSpan(string name, AnsiControlCode ansiControlCode)
-            : base(name, ansiControlCode) { }
+            : base(name, ansiControlCode)
+        {
+        }
 
         public ForegroundColorSpan(RgbColor rgbColor)
             : base(rgbColor, Ansi.Color.Foreground.Rgb(rgbColor.Red, rgbColor.Green, rgbColor.Blue))
-        { }
+        {
+        }
 
-        public ForegroundColorSpan(byte r, byte g, byte b) : this(new RgbColor(r, g, b)) { }
+        public ForegroundColorSpan(byte r, byte g, byte b) : this(new RgbColor(r, g, b))
+        {
+        }
 
         public static ForegroundColorSpan Reset() =>
             new(nameof(Reset), Ansi.Color.Foreground.Default);

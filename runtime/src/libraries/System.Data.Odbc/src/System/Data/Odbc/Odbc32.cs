@@ -140,7 +140,9 @@ namespace System.Data.Odbc
 
         internal const string Pwd = "pwd";
 
-        internal static void TraceODBC(int level, string method, ODBC32.SQLRETURN retcode) { }
+        internal static void TraceODBC(int level, string method, ODBC32.SQLRETURN retcode)
+        {
+        }
 
         internal static short ShortStringLength(string? inputString)
         {

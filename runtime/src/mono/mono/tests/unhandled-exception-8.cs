@@ -1,7 +1,9 @@
 using System;
 using System.Threading;
 
-class CustomException : Exception { }
+class CustomException : Exception
+{
+}
 
 class Driver
 {
@@ -9,7 +11,8 @@ class Driver
     public static void Main()
     {
         if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
-            AppDomain.CurrentDomain.UnhandledException += (s, e) => { };
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => {
+            };
 
         ManualResetEvent mre = new ManualResetEvent(false);
 

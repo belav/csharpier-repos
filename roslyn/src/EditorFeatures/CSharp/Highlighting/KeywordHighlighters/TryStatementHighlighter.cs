@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TryStatementHighlighter() { }
+        public TryStatementHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             TryStatementSyntax tryStatement,

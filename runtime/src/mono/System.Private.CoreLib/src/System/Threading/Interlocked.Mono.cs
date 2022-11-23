@@ -180,7 +180,9 @@ namespace System.Threading
         public static extern long Add(ref long location1, long value);
 
         [Intrinsic]
-        public static void MemoryBarrier() { }
+        public static void MemoryBarrier()
+        {
+        }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void MemoryBarrierProcessWide();

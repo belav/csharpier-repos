@@ -44,7 +44,9 @@ namespace System.IO.IsolatedStorage
         public void MoveFile_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
+            {
+            }
 
             Assert.Throws<ObjectDisposedException>(() => isf.MoveFile("foo", "bar"));
         }

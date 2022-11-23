@@ -16,7 +16,9 @@ namespace System.Xml
         private XmlReader? _reader;
         private bool _preserveWhitespace;
 
-        public XmlLoader() { }
+        public XmlLoader()
+        {
+        }
 
         internal void Load(XmlDocument doc, XmlReader reader, bool preserveWhitespace)
         {

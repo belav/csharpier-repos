@@ -8,9 +8,13 @@ namespace System
 {
     public sealed partial class LocalDataStoreSlot
     {
-        internal LocalDataStoreSlot() { }
+        internal LocalDataStoreSlot()
+        {
+        }
 
-        ~LocalDataStoreSlot() { }
+        ~LocalDataStoreSlot()
+        {
+        }
     }
 }
 
@@ -25,7 +29,9 @@ namespace System.Threading
 
     public sealed partial class CompressedStack : System.Runtime.Serialization.ISerializable
     {
-        internal CompressedStack() { }
+        internal CompressedStack()
+        {
+        }
 
         public static System.Threading.CompressedStack Capture()
         {
@@ -45,26 +51,38 @@ namespace System.Threading
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public static void Run(
             System.Threading.CompressedStack compressedStack,
             System.Threading.ContextCallback callback,
             object? state
-        ) { }
+        )
+        {
+        }
     }
 
     public delegate void ParameterizedThreadStart(object? obj);
 
     public sealed partial class Thread : System.Runtime.ConstrainedExecution.CriticalFinalizerObject
     {
-        public Thread(System.Threading.ParameterizedThreadStart start) { }
+        public Thread(System.Threading.ParameterizedThreadStart start)
+        {
+        }
 
-        public Thread(System.Threading.ParameterizedThreadStart start, int maxStackSize) { }
+        public Thread(System.Threading.ParameterizedThreadStart start, int maxStackSize)
+        {
+        }
 
-        public Thread(System.Threading.ThreadStart start) { }
+        public Thread(System.Threading.ThreadStart start)
+        {
+        }
 
-        public Thread(System.Threading.ThreadStart start, int maxStackSize) { }
+        public Thread(System.Threading.ThreadStart start, int maxStackSize)
+        {
+        }
 
         [System.ObsoleteAttribute(
             "The ApartmentState property has been deprecated. Use GetApartmentState, SetApartmentState or TrySetApartmentState instead."
@@ -72,17 +90,23 @@ namespace System.Threading
         public System.Threading.ApartmentState ApartmentState
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Globalization.CultureInfo CurrentCulture
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Security.Principal.IPrincipal? CurrentPrincipal
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Threading.Thread CurrentThread
         {
@@ -91,7 +115,9 @@ namespace System.Threading
         public System.Globalization.CultureInfo CurrentUICulture
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.ExecutionContext? ExecutionContext
         {
@@ -104,7 +130,9 @@ namespace System.Threading
         public bool IsBackground
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsThreadPoolThread
         {
@@ -117,12 +145,16 @@ namespace System.Threading
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.ThreadPriority Priority
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.ThreadState ThreadState
         {
@@ -134,14 +166,18 @@ namespace System.Threading
             DiagnosticId = "SYSLIB0006",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public void Abort() { }
+        public void Abort()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Thread.Abort is not supported and throws PlatformNotSupportedException.",
             DiagnosticId = "SYSLIB0006",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public void Abort(object? stateInfo) { }
+        public void Abort(object? stateInfo)
+        {
+        }
 
         public static System.LocalDataStoreSlot AllocateDataSlot()
         {
@@ -153,19 +189,33 @@ namespace System.Threading
             throw null;
         }
 
-        public static void BeginCriticalRegion() { }
+        public static void BeginCriticalRegion()
+        {
+        }
 
-        public static void BeginThreadAffinity() { }
+        public static void BeginThreadAffinity()
+        {
+        }
 
-        public void DisableComObjectEagerCleanup() { }
+        public void DisableComObjectEagerCleanup()
+        {
+        }
 
-        public static void EndCriticalRegion() { }
+        public static void EndCriticalRegion()
+        {
+        }
 
-        public static void EndThreadAffinity() { }
+        public static void EndThreadAffinity()
+        {
+        }
 
-        ~Thread() { }
+        ~Thread()
+        {
+        }
 
-        public static void FreeNamedDataSlot(string name) { }
+        public static void FreeNamedDataSlot(string name)
+        {
+        }
 
         public System.Threading.ApartmentState GetApartmentState()
         {
@@ -212,9 +262,13 @@ namespace System.Threading
             throw null;
         }
 
-        public void Interrupt() { }
+        public void Interrupt()
+        {
+        }
 
-        public void Join() { }
+        public void Join()
+        {
+        }
 
         public bool Join(int millisecondsTimeout)
         {
@@ -226,52 +280,76 @@ namespace System.Threading
             throw null;
         }
 
-        public static void MemoryBarrier() { }
+        public static void MemoryBarrier()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Thread.ResetAbort is not supported and throws PlatformNotSupportedException.",
             DiagnosticId = "SYSLIB0006",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public static void ResetAbort() { }
+        public static void ResetAbort()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Thread.Resume has been deprecated. Use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources."
         )]
-        public void Resume() { }
+        public void Resume()
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public void SetApartmentState(System.Threading.ApartmentState state) { }
+        public void SetApartmentState(System.Threading.ApartmentState state)
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
             DiagnosticId = "SYSLIB0003",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public void SetCompressedStack(System.Threading.CompressedStack stack) { }
+        public void SetCompressedStack(System.Threading.CompressedStack stack)
+        {
+        }
 
-        public static void SetData(System.LocalDataStoreSlot slot, object? data) { }
+        public static void SetData(System.LocalDataStoreSlot slot, object? data)
+        {
+        }
 
-        public static void Sleep(int millisecondsTimeout) { }
+        public static void Sleep(int millisecondsTimeout)
+        {
+        }
 
-        public static void Sleep(System.TimeSpan timeout) { }
+        public static void Sleep(System.TimeSpan timeout)
+        {
+        }
 
-        public static void SpinWait(int iterations) { }
+        public static void SpinWait(int iterations)
+        {
+        }
 
 #if !FEATURE_WASM_THREADS
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
 #endif
-        public void Start() { }
+        public void Start()
+        {
+        }
 
 #if !FEATURE_WASM_THREADS
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
 #endif
-        public void Start(object? parameter) { }
+        public void Start(object? parameter)
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Thread.Suspend has been deprecated. Use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources."
         )]
-        public void Suspend() { }
+        public void Suspend()
+        {
+        }
 
         public bool TrySetApartmentState(System.Threading.ApartmentState state)
         {
@@ -281,12 +359,16 @@ namespace System.Threading
 #if !FEATURE_WASM_THREADS
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
 #endif
-        public void UnsafeStart() { }
+        public void UnsafeStart()
+        {
+        }
 
 #if !FEATURE_WASM_THREADS
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
 #endif
-        public void UnsafeStart(object? parameter) { }
+        public void UnsafeStart(object? parameter)
+        {
+        }
 
         public static byte VolatileRead(ref byte address)
         {
@@ -362,40 +444,66 @@ namespace System.Threading
             throw null;
         }
 
-        public static void VolatileWrite(ref byte address, byte value) { }
+        public static void VolatileWrite(ref byte address, byte value)
+        {
+        }
 
-        public static void VolatileWrite(ref double address, double value) { }
+        public static void VolatileWrite(ref double address, double value)
+        {
+        }
 
-        public static void VolatileWrite(ref short address, short value) { }
+        public static void VolatileWrite(ref short address, short value)
+        {
+        }
 
-        public static void VolatileWrite(ref int address, int value) { }
+        public static void VolatileWrite(ref int address, int value)
+        {
+        }
 
-        public static void VolatileWrite(ref long address, long value) { }
+        public static void VolatileWrite(ref long address, long value)
+        {
+        }
 
-        public static void VolatileWrite(ref System.IntPtr address, System.IntPtr value) { }
+        public static void VolatileWrite(ref System.IntPtr address, System.IntPtr value)
+        {
+        }
 
         public static void VolatileWrite(
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")]
                 ref object? address,
             object? value
-        ) { }
+        )
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void VolatileWrite(ref sbyte address, sbyte value) { }
+        public static void VolatileWrite(ref sbyte address, sbyte value)
+        {
+        }
 
-        public static void VolatileWrite(ref float address, float value) { }
-
-        [System.CLSCompliantAttribute(false)]
-        public static void VolatileWrite(ref ushort address, ushort value) { }
-
-        [System.CLSCompliantAttribute(false)]
-        public static void VolatileWrite(ref uint address, uint value) { }
+        public static void VolatileWrite(ref float address, float value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void VolatileWrite(ref ulong address, ulong value) { }
+        public static void VolatileWrite(ref ushort address, ushort value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void VolatileWrite(ref System.UIntPtr address, System.UIntPtr value) { }
+        public static void VolatileWrite(ref uint address, uint value)
+        {
+        }
+
+        [System.CLSCompliantAttribute(false)]
+        public static void VolatileWrite(ref ulong address, ulong value)
+        {
+        }
+
+        [System.CLSCompliantAttribute(false)]
+        public static void VolatileWrite(ref System.UIntPtr address, System.UIntPtr value)
+        {
+        }
 
         public static bool Yield()
         {
@@ -405,7 +513,9 @@ namespace System.Threading
 
     public sealed partial class ThreadAbortException : System.SystemException
     {
-        internal ThreadAbortException() { }
+        internal ThreadAbortException()
+        {
+        }
 
         public object? ExceptionState
         {
@@ -415,7 +525,9 @@ namespace System.Threading
 
     public partial class ThreadExceptionEventArgs : System.EventArgs
     {
-        public ThreadExceptionEventArgs(System.Exception t) { }
+        public ThreadExceptionEventArgs(System.Exception t)
+        {
+        }
 
         public System.Exception Exception
         {
@@ -430,16 +542,24 @@ namespace System.Threading
 
     public partial class ThreadInterruptedException : System.SystemException
     {
-        public ThreadInterruptedException() { }
+        public ThreadInterruptedException()
+        {
+        }
 
         protected ThreadInterruptedException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public ThreadInterruptedException(string? message) { }
+        public ThreadInterruptedException(string? message)
+        {
+        }
 
-        public ThreadInterruptedException(string? message, System.Exception? innerException) { }
+        public ThreadInterruptedException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public enum ThreadPriority
@@ -455,7 +575,9 @@ namespace System.Threading
 
     public sealed partial class ThreadStartException : System.SystemException
     {
-        internal ThreadStartException() { }
+        internal ThreadStartException()
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -475,15 +597,23 @@ namespace System.Threading
 
     public partial class ThreadStateException : System.SystemException
     {
-        public ThreadStateException() { }
+        public ThreadStateException()
+        {
+        }
 
         protected ThreadStateException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public ThreadStateException(string? message) { }
+        public ThreadStateException(string? message)
+        {
+        }
 
-        public ThreadStateException(string? message, System.Exception? innerException) { }
+        public ThreadStateException(string? message, System.Exception? innerException)
+        {
+        }
     }
 }

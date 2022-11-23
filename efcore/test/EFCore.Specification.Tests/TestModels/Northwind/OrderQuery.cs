@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 public class OrderQuery
 {
-    public OrderQuery() { }
+    public OrderQuery()
+    {
+    }
 
     public OrderQuery(string customerID)
     {

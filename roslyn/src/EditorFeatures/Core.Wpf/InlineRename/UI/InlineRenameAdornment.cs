@@ -17,6 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     /// </summary>
     internal class InlineRenameAdornment : UserControl, IDisposable
     {
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
     }
 }

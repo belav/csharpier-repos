@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public StubVsEditorAdaptersFactoryService() { }
+        public StubVsEditorAdaptersFactoryService()
+        {
+        }
 
         public IVsCodeWindow CreateVsCodeWindowAdapter(IServiceProvider serviceProvider) =>
             throw new NotImplementedException();

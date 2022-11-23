@@ -7,6 +7,8 @@ namespace Internal.Cryptography.Pal
     {
         public static IX509Pal Instance = new OpenSslX509Encoder();
 
-        private X509Pal() { }
+        private X509Pal()
+        {
+        }
     }
 }

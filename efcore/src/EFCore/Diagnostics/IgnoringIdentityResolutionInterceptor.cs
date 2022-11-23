@@ -21,5 +21,7 @@ public class IgnoringIdentityResolutionInterceptor : IIdentityResolutionIntercep
         IdentityResolutionInterceptionData interceptionData,
         EntityEntry existingEntry,
         object newEntity
-    ) { }
+    )
+    {
+    }
 }

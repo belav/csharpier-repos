@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSourceTextUndoService() { }
+        public DefaultSourceTextUndoService()
+        {
+        }
 
         public ISourceTextUndoTransaction RegisterUndoTransaction(
             SourceText sourceText,

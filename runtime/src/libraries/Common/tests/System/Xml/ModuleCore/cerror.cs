@@ -20,7 +20,9 @@ namespace OLEDB.Test.ModuleCore
         private static CLTMConsole s_rLTMConsole;
 
         //Constructor
-        public CError() { }
+        public CError()
+        {
+        }
 
         public static IError Error
         {
@@ -65,7 +67,9 @@ namespace OLEDB.Test.ModuleCore
             s_rLTMConsole = null;
         }
 
-        internal static void DisableAsserts() { }
+        internal static void DisableAsserts()
+        {
+        }
 
         //Helpers
         public static void Increment()

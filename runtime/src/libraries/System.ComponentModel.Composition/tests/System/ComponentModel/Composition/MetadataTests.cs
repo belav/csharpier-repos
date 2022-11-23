@@ -29,7 +29,9 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("Enum", SimpleEnum.First)]
         [ExportMetadata("Type", typeof(string))]
         [ExportMetadata("Object", 42)]
-        public class SimpleMetadataExporter { }
+        public class SimpleMetadataExporter
+        {
+        }
 
         [PartNotDiscoverable]
         [Export]
@@ -39,7 +41,9 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("Enum", SimpleEnum.First)]
         [ExportMetadata("Type", typeof(string))]
         [ExportMetadata("Object", 42)]
-        public class SimpleMetadataExporterWithNullReferenceValue { }
+        public class SimpleMetadataExporterWithNullReferenceValue
+        {
+        }
 
         [PartNotDiscoverable]
         [Export]
@@ -49,7 +53,9 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("Enum", SimpleEnum.First)]
         [ExportMetadata("Type", typeof(string))]
         [ExportMetadata("Object", 42)]
-        public class SimpleMetadataExporterWithNullNonReferenceValue { }
+        public class SimpleMetadataExporterWithNullNonReferenceValue
+        {
+        }
 
         [PartNotDiscoverable]
         [Export]
@@ -59,7 +65,9 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("Enum", SimpleEnum.First)]
         [ExportMetadata("Type", typeof(string))]
         [ExportMetadata("Object", 42)]
-        public class SimpleMetadataExporterWithTypeMismatch { }
+        public class SimpleMetadataExporterWithTypeMismatch
+        {
+        }
 
         public interface ISimpleMetadataView
         {
@@ -308,7 +316,9 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("DuplicateMetadataName", "My Name")]
         [ExportMetadata("DuplicateMetadataName", "Your Name")]
         [PartNotDiscoverable]
-        public class ClassWithInvalidDuplicateMetadataOnType { }
+        public class ClassWithInvalidDuplicateMetadataOnType
+        {
+        }
 
         [Fact]
         public void InvalidDuplicateMetadataOnType_ShouldThrow()
@@ -359,7 +369,9 @@ namespace System.ComponentModel.Composition
         [Export]
         [ExportMetadata("DuplicateMetadataName", "My Name", IsMultiple = true)]
         [ExportMetadata("DuplicateMetadataName", "Your Name", IsMultiple = true)]
-        public class ClassWithValidDuplicateMetadataOnType { }
+        public class ClassWithValidDuplicateMetadataOnType
+        {
+        }
 
         [Fact]
         public void ValidDuplicateMetadataOnType_ShouldDiscoverAllMetadata()
@@ -410,7 +422,9 @@ namespace System.ComponentModel.Composition
         [Export]
         [ExportMetadata(CompositionConstants.PartCreationPolicyMetadataName, "My Policy")]
         [PartNotDiscoverable]
-        public class ClassWithReservedMetadataValue { }
+        public class ClassWithReservedMetadataValue
+        {
+        }
 
         [Fact]
         public void InvalidMetadata_UseOfReservedName_ShouldThrow()
@@ -623,10 +637,14 @@ namespace System.ComponentModel.Composition
         #endregion
 
         [ExportMetadata("Name", "FromBaseType")]
-        public abstract class BaseClassWithMetadataButNoExport { }
+        public abstract class BaseClassWithMetadataButNoExport
+        {
+        }
 
         [Export(typeof(BaseClassWithMetadataButNoExport))]
-        public class DerivedClassWithExportButNoMetadata : BaseClassWithMetadataButNoExport { }
+        public class DerivedClassWithExportButNoMetadata : BaseClassWithMetadataButNoExport
+        {
+        }
 
         [Fact]
         public void Metadata_BaseClassWithMetadataButNoExport()
@@ -648,10 +666,14 @@ namespace System.ComponentModel.Composition
         }
 
         [InheritedExport(typeof(BaseClassWithExportButNoMetadata))]
-        public abstract class BaseClassWithExportButNoMetadata { }
+        public abstract class BaseClassWithExportButNoMetadata
+        {
+        }
 
         [ExportMetadata("Name", "FromDerivedType")]
-        public class DerivedClassMetadataButNoExport : BaseClassWithExportButNoMetadata { }
+        public class DerivedClassMetadataButNoExport : BaseClassWithExportButNoMetadata
+        {
+        }
 
         [Fact]
         public void Metadata_BaseClassWithExportButNoMetadata()
@@ -674,11 +696,15 @@ namespace System.ComponentModel.Composition
 
         [Export(typeof(BaseClassWithExportAndMetadata))]
         [ExportMetadata("Name", "FromBaseType")]
-        public class BaseClassWithExportAndMetadata { }
+        public class BaseClassWithExportAndMetadata
+        {
+        }
 
         [Export(typeof(DerivedClassWithExportAndMetadata))]
         [ExportMetadata("Name", "FromDerivedType")]
-        public class DerivedClassWithExportAndMetadata : BaseClassWithExportAndMetadata { }
+        public class DerivedClassWithExportAndMetadata : BaseClassWithExportAndMetadata
+        {
+        }
 
         [Fact]
         public void Metadata_BaseAndDerivedWithExportAndMetadata()
@@ -715,7 +741,9 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("Data", typeof(ClassWithLotsOfDifferentMetadataTypes), IsMultiple = true)]
         [ExportMetadata("Data", CreationPolicy.NonShared, IsMultiple = true)]
         [ExportMetadata("Data", new object[] { 1, 2, null }, IsMultiple = true)]
-        public class ClassWithLotsOfDifferentMetadataTypes { }
+        public class ClassWithLotsOfDifferentMetadataTypes
+        {
+        }
 
         [Fact]
         public void ExportWithValidCollectionOfMetadata_ShouldDiscoverAllMetadata()
@@ -736,7 +764,9 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("Data", 1, IsMultiple = true)]
         [ExportMetadata("Data", 2, IsMultiple = true)]
         [ExportMetadata("Data", 3, IsMultiple = true)]
-        public class ClassWithIntCollectionWithNullValue { }
+        public class ClassWithIntCollectionWithNullValue
+        {
+        }
 
         [Fact]
         public void ExportWithIntCollectionPlusNullValueOfMetadata_ShouldDiscoverAllMetadata()
@@ -764,24 +794,32 @@ namespace System.ComponentModel.Composition
         [Export]
         [Data(Object = "42")]
         [Data(Object = "10")]
-        public class ExportWithMultipleMetadata_ExportStringsAsObjects { }
+        public class ExportWithMultipleMetadata_ExportStringsAsObjects
+        {
+        }
 
         [Export]
         [Data(Object = "42")]
         [Data(Object = "10")]
         [Data(Object = null)]
-        public class ExportWithMultipleMetadata_ExportStringsAsObjects_WithNull { }
+        public class ExportWithMultipleMetadata_ExportStringsAsObjects_WithNull
+        {
+        }
 
         [Export]
         [Data(Object = 42)]
         [Data(Object = 10)]
-        public class ExportWithMultipleMetadata_ExportIntsAsObjects { }
+        public class ExportWithMultipleMetadata_ExportIntsAsObjects
+        {
+        }
 
         [Export]
         [Data(Object = null)]
         [Data(Object = 42)]
         [Data(Object = 10)]
-        public class ExportWithMultipleMetadata_ExportIntsAsObjects_WithNull { }
+        public class ExportWithMultipleMetadata_ExportIntsAsObjects_WithNull
+        {
+        }
 
         public interface IObjectView_AsStrings
         {
@@ -890,7 +928,9 @@ namespace System.ComponentModel.Composition
         [Export]
         [Order(Before = "Step3")]
         [Order(Before = "Step2")]
-        public class OrderedItemBeforesOnly { }
+        public class OrderedItemBeforesOnly
+        {
+        }
 
         [Fact]
         public void ExportWithMultipleMetadata_ExportStringsAndNulls_ThroughMetadataAttributes()
@@ -931,19 +971,25 @@ namespace System.ComponentModel.Composition
         [Export]
         [DataType(Type = typeof(int))]
         [DataType(Type = typeof(string))]
-        public class ItemWithTypeExports { }
+        public class ItemWithTypeExports
+        {
+        }
 
         [Export]
         [DataType(Type = typeof(int))]
         [DataType(Type = typeof(string))]
         [DataType(Type = null)]
-        public class ItemWithTypeExports_WithNulls { }
+        public class ItemWithTypeExports_WithNulls
+        {
+        }
 
         [Export]
         [DataType(Type = null)]
         [DataType(Type = null)]
         [DataType(Type = null)]
-        public class ItemWithTypeExports_WithAllNulls { }
+        public class ItemWithTypeExports_WithAllNulls
+        {
+        }
 
         [Fact]
         public void ExportWithMultipleMetadata_ExportTypes()
@@ -993,7 +1039,9 @@ namespace System.ComponentModel.Composition
 
         [Export]
         [ExportMetadata(null, "ValueOfNullKey")]
-        public class ClassWithNullMetadataKey { }
+        public class ClassWithNullMetadataKey
+        {
+        }
 
         [Fact]
         public void ExportMetadataWithNullKey_ShouldUseEmptyString()
@@ -1051,16 +1099,22 @@ namespace System.ComponentModel.Composition
 
     // Tests for metadata as part of contract
 
-    public interface IMyExporter { }
+    public interface IMyExporter
+    {
+    }
 
     [Export]
     [Export(typeof(IMyExporter))]
-    public class MyExporterWithNoMetadata : IMyExporter { }
+    public class MyExporterWithNoMetadata : IMyExporter
+    {
+    }
 
     [Export]
     [Export(typeof(IMyExporter))]
     [ExportMetadata("Foo", "Bar")]
-    public class MyExporterWithMetadata : IMyExporter { }
+    public class MyExporterWithMetadata : IMyExporter
+    {
+    }
 
     public interface IMetadataFoo
     {
@@ -1132,7 +1186,9 @@ namespace System.ComponentModel.Composition
     [Export]
     [ExportMetadata("Foo", "fooValue3")]
     [ExportMetadata("OptionalFoo", 42)]
-    public class OptionalFooIsInt { }
+    public class OptionalFooIsInt
+    {
+    }
 
     [Export]
     public class MyImporterWithExportStronglyTypedMetadata
@@ -1216,7 +1272,9 @@ namespace System.ComponentModel.Composition
     [MyOption("name2", "value2")]
     [ExportMetadata("OptionNames", "name3", IsMultiple = true)]
     [ExportMetadata("OptionValues", "value3", IsMultiple = true)]
-    public class ExportMultiple { }
+    public class ExportMultiple
+    {
+    }
 
     public interface IMyOption2
     {

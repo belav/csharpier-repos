@@ -174,7 +174,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSymbolSearchService() { }
+        public DefaultSymbolSearchService()
+        {
+        }
 
         public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(
             string source,

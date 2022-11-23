@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpUseNullCheckOverTypeCheckCodeFixProvider() { }
+        public CSharpUseNullCheckOverTypeCheckCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseNullCheckOverTypeCheckDiagnosticId);

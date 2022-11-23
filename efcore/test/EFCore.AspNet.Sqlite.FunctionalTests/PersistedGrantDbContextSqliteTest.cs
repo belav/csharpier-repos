@@ -7,7 +7,9 @@ public class PersistedGrantDbContextSqliteTest
     : PersistedGrantDbContextTestBase<PersistedGrantDbContextSqliteTest.PersistedGrantDbContextSqliteFixture>
 {
     public PersistedGrantDbContextSqliteTest(PersistedGrantDbContextSqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class PersistedGrantDbContextSqliteFixture : PersistedGrantDbContextFixtureBase
     {

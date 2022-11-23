@@ -194,7 +194,8 @@ namespace System.IO.Pipelines.Tests
             ValueTaskAwaiter<FlushResult> awaitable = writableBuffer.FlushAsync().GetAwaiter();
 
             Assert.False(awaitable.IsCompleted);
-            awaitable.OnCompleted(() => { });
+            awaitable.OnCompleted(() => {
+            });
 
             Pipe.Writer.CancelPendingFlush();
             Pipe.Reader.AdvanceTo(Pipe.Reader.ReadAsync().GetAwaiter().GetResult().Buffer.End);
@@ -212,7 +213,8 @@ namespace System.IO.Pipelines.Tests
             ValueTaskAwaiter<FlushResult> awaitable = writableBuffer.FlushAsync().GetAwaiter();
 
             Assert.False(awaitable.IsCompleted);
-            awaitable.OnCompleted(() => { });
+            awaitable.OnCompleted(() => {
+            });
 
             Pipe.Reader.AdvanceTo(Pipe.Reader.ReadAsync().GetAwaiter().GetResult().Buffer.End);
             Pipe.Writer.CancelPendingFlush();

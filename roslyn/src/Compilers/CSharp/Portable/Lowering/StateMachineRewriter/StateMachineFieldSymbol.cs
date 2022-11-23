@@ -63,7 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 new LocalSlotDebugInfo(synthesizedKind, LocalDebugId.None),
                 slotIndex,
                 isPublic: isPublic
-            ) { }
+            )
+        {
+        }
 
         public StateMachineFieldSymbol(
             NamedTypeSymbol stateMachineType,
@@ -80,7 +82,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 slotDebugInfo,
                 slotIndex,
                 isPublic
-            ) { }
+            )
+        {
+        }
 
         public StateMachineFieldSymbol(
             NamedTypeSymbol stateMachineType,

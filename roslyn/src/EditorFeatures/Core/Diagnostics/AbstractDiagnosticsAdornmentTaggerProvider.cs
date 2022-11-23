@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 globalOptions,
                 visibilityTracker,
                 listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles)
-            ) { }
+            )
+        {
+        }
 
         protected internal sealed override bool IsEnabled => true;
 

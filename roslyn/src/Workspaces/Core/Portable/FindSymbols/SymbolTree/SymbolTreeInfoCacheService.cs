@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolTreeInfoCacheService() { }
+        public SymbolTreeInfoCacheService()
+        {
+        }
 
         /// <summary>
         /// Gets the latest computed <see cref="SymbolTreeInfo"/> for the requested <paramref name="reference"/>.  This

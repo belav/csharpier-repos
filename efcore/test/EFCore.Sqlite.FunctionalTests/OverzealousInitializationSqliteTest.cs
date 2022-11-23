@@ -7,7 +7,9 @@ public class OverzealousInitializationSqliteTest
     : OverzealousInitializationTestBase<OverzealousInitializationSqliteTest.OverzealousInitializationSqliteFixture>
 {
     public OverzealousInitializationSqliteTest(OverzealousInitializationSqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class OverzealousInitializationSqliteFixture : OverzealousInitializationFixtureBase
     {

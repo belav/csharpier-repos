@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         public static readonly CSharpMetadataAsSourceService Instance =
             new CSharpMetadataAsSourceService();
 
-        private CSharpMetadataAsSourceService() { }
+        private CSharpMetadataAsSourceService()
+        {
+        }
 
         protected override async Task<Document> AddAssemblyInfoRegionAsync(
             Document document,

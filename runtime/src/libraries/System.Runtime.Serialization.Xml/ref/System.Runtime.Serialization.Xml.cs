@@ -8,7 +8,9 @@ namespace System.Runtime.Serialization
 {
     public abstract partial class DataContractResolver
     {
-        protected DataContractResolver() { }
+        protected DataContractResolver()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -41,39 +43,53 @@ namespace System.Runtime.Serialization
     public sealed partial class DataContractSerializer
         : System.Runtime.Serialization.XmlObjectSerializer
     {
-        public DataContractSerializer(System.Type type) { }
+        public DataContractSerializer(System.Type type)
+        {
+        }
 
         public DataContractSerializer(
             System.Type type,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
-        ) { }
+        )
+        {
+        }
 
         public DataContractSerializer(
             System.Type type,
             System.Runtime.Serialization.DataContractSerializerSettings? settings
-        ) { }
+        )
+        {
+        }
 
-        public DataContractSerializer(System.Type type, string rootName, string rootNamespace) { }
+        public DataContractSerializer(System.Type type, string rootName, string rootNamespace)
+        {
+        }
 
         public DataContractSerializer(
             System.Type type,
             string rootName,
             string rootNamespace,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
-        ) { }
+        )
+        {
+        }
 
         public DataContractSerializer(
             System.Type type,
             System.Xml.XmlDictionaryString rootName,
             System.Xml.XmlDictionaryString rootNamespace
-        ) { }
+        )
+        {
+        }
 
         public DataContractSerializer(
             System.Type type,
             System.Xml.XmlDictionaryString rootName,
             System.Xml.XmlDictionaryString rootNamespace,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
-        ) { }
+        )
+        {
+        }
 
         public System.Runtime.Serialization.DataContractResolver? DataContractResolver
         {
@@ -179,7 +195,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteEndObject(System.Xml.XmlDictionaryWriter writer) { }
+        public override void WriteEndObject(System.Xml.XmlDictionaryWriter writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -187,7 +205,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteEndObject(System.Xml.XmlWriter writer) { }
+        public override void WriteEndObject(System.Xml.XmlWriter writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -199,7 +219,9 @@ namespace System.Runtime.Serialization
             System.Xml.XmlDictionaryWriter writer,
             object? graph,
             System.Runtime.Serialization.DataContractResolver? dataContractResolver
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -207,7 +229,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteObject(System.Xml.XmlWriter writer, object? graph) { }
+        public override void WriteObject(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -218,7 +242,9 @@ namespace System.Runtime.Serialization
         public override void WriteObjectContent(
             System.Xml.XmlDictionaryWriter writer,
             object? graph
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -226,7 +252,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteObjectContent(System.Xml.XmlWriter writer, object? graph) { }
+        public override void WriteObjectContent(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -234,10 +262,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteStartObject(
-            System.Xml.XmlDictionaryWriter writer,
-            object? graph
-        ) { }
+        public override void WriteStartObject(System.Xml.XmlDictionaryWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -245,7 +272,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
+        public override void WriteStartObject(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
     }
 
     public static partial class DataContractSerializerExtensions
@@ -260,58 +289,80 @@ namespace System.Runtime.Serialization
         public static void SetSerializationSurrogateProvider(
             this System.Runtime.Serialization.DataContractSerializer serializer,
             System.Runtime.Serialization.ISerializationSurrogateProvider? provider
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class DataContractSerializerSettings
     {
-        public DataContractSerializerSettings() { }
+        public DataContractSerializerSettings()
+        {
+        }
 
         public System.Runtime.Serialization.DataContractResolver? DataContractResolver
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IgnoreExtensionDataObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IEnumerable<System.Type>? KnownTypes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxItemsInObjectGraph
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PreserveObjectReferences
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.XmlDictionaryString? RootName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.XmlDictionaryString? RootNamespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SerializeReadOnlyTypes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class ExportOptions
     {
-        public ExportOptions() { }
+        public ExportOptions()
+        {
+        }
 
         public System.Collections.ObjectModel.Collection<System.Type> KnownTypes
         {
@@ -326,7 +377,9 @@ namespace System.Runtime.Serialization
 
     public sealed partial class ExtensionDataObject
     {
-        internal ExtensionDataObject() { }
+        internal ExtensionDataObject()
+        {
+        }
     }
 
     public partial interface IExtensibleDataObject
@@ -336,7 +389,9 @@ namespace System.Runtime.Serialization
 
     public abstract partial class XmlObjectSerializer
     {
-        protected XmlObjectSerializer() { }
+        protected XmlObjectSerializer()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -426,7 +481,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public virtual void WriteEndObject(System.Xml.XmlWriter writer) { }
+        public virtual void WriteEndObject(System.Xml.XmlWriter writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -434,7 +491,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public virtual void WriteObject(System.IO.Stream stream, object? graph) { }
+        public virtual void WriteObject(System.IO.Stream stream, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -442,7 +501,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public virtual void WriteObject(System.Xml.XmlDictionaryWriter writer, object? graph) { }
+        public virtual void WriteObject(System.Xml.XmlDictionaryWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -450,7 +511,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public virtual void WriteObject(System.Xml.XmlWriter writer, object? graph) { }
+        public virtual void WriteObject(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -469,7 +532,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public virtual void WriteObjectContent(System.Xml.XmlWriter writer, object? graph) { }
+        public virtual void WriteObjectContent(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -485,7 +550,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public virtual void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
+        public virtual void WriteStartObject(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
     }
 
     public static partial class XmlSerializableServices
@@ -493,17 +560,18 @@ namespace System.Runtime.Serialization
         public static void AddDefaultSchema(
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.XmlQualifiedName typeQName
-        ) { }
+        )
+        {
+        }
 
         public static System.Xml.XmlNode[] ReadNodes(System.Xml.XmlReader xmlReader)
         {
             throw null;
         }
 
-        public static void WriteNodes(
-            System.Xml.XmlWriter xmlWriter,
-            System.Xml.XmlNode?[]? nodes
-        ) { }
+        public static void WriteNodes(System.Xml.XmlWriter xmlWriter, System.Xml.XmlNode?[]? nodes)
+        {
+        }
     }
 
     public static partial class XPathQueryGenerator
@@ -542,14 +610,20 @@ namespace System.Runtime.Serialization
 
     public partial class XsdDataContractExporter
     {
-        public XsdDataContractExporter() { }
+        public XsdDataContractExporter()
+        {
+        }
 
-        public XsdDataContractExporter(System.Xml.Schema.XmlSchemaSet? schemas) { }
+        public XsdDataContractExporter(System.Xml.Schema.XmlSchemaSet? schemas)
+        {
+        }
 
         public System.Runtime.Serialization.ExportOptions? Options
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Schema.XmlSchemaSet Schemas
         {
@@ -599,7 +673,9 @@ namespace System.Runtime.Serialization
         )]
         public void Export(
             System.Collections.Generic.ICollection<System.Reflection.Assembly> assemblies
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -607,7 +683,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public void Export(System.Collections.Generic.ICollection<System.Type> types) { }
+        public void Export(System.Collections.Generic.ICollection<System.Type> types)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -615,7 +693,9 @@ namespace System.Runtime.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public void Export(System.Type type) { }
+        public void Export(System.Type type)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -744,17 +824,29 @@ namespace System.Xml
 
     public partial class UniqueId
     {
-        public UniqueId() { }
+        public UniqueId()
+        {
+        }
 
-        public UniqueId(byte[] guid) { }
+        public UniqueId(byte[] guid)
+        {
+        }
 
-        public UniqueId(byte[] guid, int offset) { }
+        public UniqueId(byte[] guid, int offset)
+        {
+        }
 
-        public UniqueId(char[] chars, int offset, int count) { }
+        public UniqueId(char[] chars, int offset, int count)
+        {
+        }
 
-        public UniqueId(System.Guid guid) { }
+        public UniqueId(System.Guid guid)
+        {
+        }
 
-        public UniqueId(string value) { }
+        public UniqueId(string value)
+        {
+        }
 
         public int CharArrayLength
         {
@@ -810,14 +902,18 @@ namespace System.Xml
 
     public partial class XmlBinaryReaderSession : System.Xml.IXmlDictionary
     {
-        public XmlBinaryReaderSession() { }
+        public XmlBinaryReaderSession()
+        {
+        }
 
         public System.Xml.XmlDictionaryString Add(int id, string value)
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool TryLookup(
             int key,
@@ -849,9 +945,13 @@ namespace System.Xml
 
     public partial class XmlBinaryWriterSession
     {
-        public XmlBinaryWriterSession() { }
+        public XmlBinaryWriterSession()
+        {
+        }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         public virtual bool TryAdd(System.Xml.XmlDictionaryString value, out int key)
         {
@@ -861,9 +961,13 @@ namespace System.Xml
 
     public partial class XmlDictionary : System.Xml.IXmlDictionary
     {
-        public XmlDictionary() { }
+        public XmlDictionary()
+        {
+        }
 
-        public XmlDictionary(int capacity) { }
+        public XmlDictionary(int capacity)
+        {
+        }
 
         public static System.Xml.IXmlDictionary Empty
         {
@@ -905,7 +1009,9 @@ namespace System.Xml
 
     public abstract partial class XmlDictionaryReader : System.Xml.XmlReader
     {
-        protected XmlDictionaryReader() { }
+        protected XmlDictionaryReader()
+        {
+        }
 
         public virtual bool CanCanonicalize
         {
@@ -1151,7 +1257,9 @@ namespace System.Xml
             throw null;
         }
 
-        public virtual void EndCanonicalization() { }
+        public virtual void EndCanonicalization()
+        {
+        }
 
         public virtual string? GetAttribute(
             System.Xml.XmlDictionaryString localName,
@@ -1219,16 +1327,24 @@ namespace System.Xml
             throw null;
         }
 
-        public virtual void MoveToStartElement() { }
+        public virtual void MoveToStartElement()
+        {
+        }
 
-        public virtual void MoveToStartElement(string name) { }
+        public virtual void MoveToStartElement(string name)
+        {
+        }
 
-        public virtual void MoveToStartElement(string localName, string namespaceUri) { }
+        public virtual void MoveToStartElement(string localName, string namespaceUri)
+        {
+        }
 
         public virtual void MoveToStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) { }
+        )
+        {
+        }
 
         public virtual int ReadArray(
             string localName,
@@ -1651,16 +1767,24 @@ namespace System.Xml
             throw null;
         }
 
-        public virtual void ReadFullStartElement() { }
+        public virtual void ReadFullStartElement()
+        {
+        }
 
-        public virtual void ReadFullStartElement(string name) { }
+        public virtual void ReadFullStartElement(string name)
+        {
+        }
 
-        public virtual void ReadFullStartElement(string localName, string namespaceUri) { }
+        public virtual void ReadFullStartElement(string localName, string namespaceUri)
+        {
+        }
 
         public virtual void ReadFullStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
@@ -1730,7 +1854,9 @@ namespace System.Xml
         public virtual void ReadStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) { }
+        )
+        {
+        }
 
         public override string ReadString()
         {
@@ -1764,7 +1890,9 @@ namespace System.Xml
             System.IO.Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) { }
+        )
+        {
+        }
 
         public virtual bool TryGetArrayLength(out int count)
         {
@@ -1803,7 +1931,9 @@ namespace System.Xml
 
     public sealed partial class XmlDictionaryReaderQuotas
     {
-        public XmlDictionaryReaderQuotas() { }
+        public XmlDictionaryReaderQuotas()
+        {
+        }
 
         public static System.Xml.XmlDictionaryReaderQuotas Max
         {
@@ -1814,42 +1944,54 @@ namespace System.Xml
         public int MaxArrayLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(4096)]
         public int MaxBytesPerRead
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(32)]
         public int MaxDepth
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(16384)]
         public int MaxNameTableCharCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(8192)]
         public int MaxStringContentLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.XmlDictionaryReaderQuotaTypes ModifiedQuotas
         {
             get { throw null; }
         }
 
-        public void CopyTo(System.Xml.XmlDictionaryReaderQuotas quotas) { }
+        public void CopyTo(System.Xml.XmlDictionaryReaderQuotas quotas)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -1864,7 +2006,9 @@ namespace System.Xml
 
     public partial class XmlDictionaryString
     {
-        public XmlDictionaryString(System.Xml.IXmlDictionary dictionary, string value, int key) { }
+        public XmlDictionaryString(System.Xml.IXmlDictionary dictionary, string value, int key)
+        {
+        }
 
         public System.Xml.IXmlDictionary Dictionary
         {
@@ -1891,7 +2035,9 @@ namespace System.Xml
 
     public abstract partial class XmlDictionaryWriter : System.Xml.XmlWriter
     {
-        protected XmlDictionaryWriter() { }
+        protected XmlDictionaryWriter()
+        {
+        }
 
         public virtual bool CanCanonicalize
         {
@@ -1983,13 +2129,17 @@ namespace System.Xml
             throw null;
         }
 
-        public virtual void EndCanonicalization() { }
+        public virtual void EndCanonicalization()
+        {
+        }
 
         public virtual void StartCanonicalization(
             System.IO.Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -1998,7 +2148,9 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2007,7 +2159,9 @@ namespace System.Xml
             System.DateTime[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2016,7 +2170,9 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2025,7 +2181,9 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2034,7 +2192,9 @@ namespace System.Xml
             System.Guid[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2043,7 +2203,9 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2052,7 +2214,9 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2061,7 +2225,9 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2070,7 +2236,9 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2079,7 +2247,9 @@ namespace System.Xml
             System.TimeSpan[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2088,7 +2258,9 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2097,7 +2269,9 @@ namespace System.Xml
             System.DateTime[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2106,7 +2280,9 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2115,7 +2291,9 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2124,7 +2302,9 @@ namespace System.Xml
             System.Guid[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2133,7 +2313,9 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2142,7 +2324,9 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2151,7 +2335,9 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2160,7 +2346,9 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteArray(
             string? prefix,
@@ -2169,20 +2357,26 @@ namespace System.Xml
             System.TimeSpan[] array,
             int offset,
             int count
-        ) { }
+        )
+        {
+        }
 
         public void WriteAttributeString(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
-        ) { }
+        )
+        {
+        }
 
         public void WriteAttributeString(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
-        ) { }
+        )
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteBase64Async(
             byte[] buffer,
@@ -2198,80 +2392,120 @@ namespace System.Xml
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
-        ) { }
+        )
+        {
+        }
 
         public void WriteElementString(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
-        ) { }
+        )
+        {
+        }
 
-        public virtual void WriteNode(System.Xml.XmlDictionaryReader reader, bool defattr) { }
+        public virtual void WriteNode(System.Xml.XmlDictionaryReader reader, bool defattr)
+        {
+        }
 
-        public override void WriteNode(System.Xml.XmlReader reader, bool defattr) { }
+        public override void WriteNode(System.Xml.XmlReader reader, bool defattr)
+        {
+        }
 
         public virtual void WriteQualifiedName(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteStartAttribute(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
-        ) { }
+        )
+        {
+        }
 
         public void WriteStartAttribute(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
-        ) { }
+        )
+        {
+        }
 
         public virtual void WriteStartElement(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
-        ) { }
+        )
+        {
+        }
 
         public void WriteStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
-        ) { }
+        )
+        {
+        }
 
-        public virtual void WriteString(System.Xml.XmlDictionaryString? value) { }
+        public virtual void WriteString(System.Xml.XmlDictionaryString? value)
+        {
+        }
 
         protected virtual void WriteTextNode(
             System.Xml.XmlDictionaryReader reader,
             bool isAttribute
-        ) { }
+        )
+        {
+        }
 
-        public virtual void WriteValue(System.Guid value) { }
+        public virtual void WriteValue(System.Guid value)
+        {
+        }
 
-        public virtual void WriteValue(System.TimeSpan value) { }
+        public virtual void WriteValue(System.TimeSpan value)
+        {
+        }
 
-        public virtual void WriteValue(System.Xml.IStreamProvider value) { }
+        public virtual void WriteValue(System.Xml.IStreamProvider value)
+        {
+        }
 
-        public virtual void WriteValue(System.Xml.UniqueId value) { }
+        public virtual void WriteValue(System.Xml.UniqueId value)
+        {
+        }
 
-        public virtual void WriteValue(System.Xml.XmlDictionaryString? value) { }
+        public virtual void WriteValue(System.Xml.XmlDictionaryString? value)
+        {
+        }
 
         public virtual System.Threading.Tasks.Task WriteValueAsync(System.Xml.IStreamProvider value)
         {
             throw null;
         }
 
-        public virtual void WriteXmlAttribute(string localName, string? value) { }
+        public virtual void WriteXmlAttribute(string localName, string? value)
+        {
+        }
 
         public virtual void WriteXmlAttribute(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? value
-        ) { }
+        )
+        {
+        }
 
-        public virtual void WriteXmlnsAttribute(string? prefix, string namespaceUri) { }
+        public virtual void WriteXmlnsAttribute(string? prefix, string namespaceUri)
+        {
+        }
 
         public virtual void WriteXmlnsAttribute(
             string? prefix,
             System.Xml.XmlDictionaryString namespaceUri
-        ) { }
+        )
+        {
+        }
     }
 }
 
@@ -2287,7 +2521,9 @@ namespace System.Runtime.Serialization.DataContracts
             | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
             | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties;
 
-        internal DataContract(DataContractCriticalHelper helper) { }
+        internal DataContract(DataContractCriticalHelper helper)
+        {
+        }
 
         public virtual DataContract? BaseContract
         {
@@ -2404,7 +2640,9 @@ namespace System.Runtime.Serialization.DataContracts
         }
     }
 
-    internal abstract partial class DataContractCriticalHelper { }
+    internal abstract partial class DataContractCriticalHelper
+    {
+    }
 
     public sealed partial class DataContractSet
     {
@@ -2523,7 +2761,9 @@ namespace System.Runtime.Serialization.DataContracts
 
     public sealed partial class DataMember
     {
-        internal DataMember() { }
+        internal DataMember()
+        {
+        }
 
         public bool EmitDefaultValue
         {
@@ -2559,7 +2799,9 @@ namespace System.Runtime.Serialization.DataContracts
 
     public sealed partial class XmlDataContract : DataContract
     {
-        internal XmlDataContract(Type type) : base(default) { }
+        internal XmlDataContract(Type type) : base(default)
+        {
+        }
 
         public bool HasRoot
         {

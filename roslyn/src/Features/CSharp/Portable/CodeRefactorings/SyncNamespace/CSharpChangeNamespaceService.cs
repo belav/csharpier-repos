@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpChangeNamespaceService() { }
+        public CSharpChangeNamespaceService()
+        {
+        }
 
         protected override async Task<
             ImmutableArray<(DocumentId, SyntaxNode)>

@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis
         public static CompilerAnalyzerConfigOptions Empty { get; } =
             new CompilerAnalyzerConfigOptions();
 
-        private CompilerAnalyzerConfigOptions() { }
+        private CompilerAnalyzerConfigOptions()
+        {
+        }
 
         public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
         {

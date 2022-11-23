@@ -28,7 +28,9 @@ namespace Internal.Cryptography.Pal
                     return true;
                 }
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             return false;
         }

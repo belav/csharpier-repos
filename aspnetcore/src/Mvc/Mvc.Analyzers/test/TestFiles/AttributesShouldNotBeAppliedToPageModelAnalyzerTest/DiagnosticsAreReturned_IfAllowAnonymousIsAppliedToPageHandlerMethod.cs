@@ -7,8 +7,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
     {
         [ /*MM*/
         AllowAnonymous]
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
 
-        public void OnPost() { }
+        public void OnPost()
+        {
+        }
     }
 }

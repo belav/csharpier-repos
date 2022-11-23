@@ -20,7 +20,9 @@ namespace Tracing.Tests.EventSourceError
     // that error over EventPipe.
     class IllegalTypesEventSource : EventSource
     {
-        public IllegalTypesEventSource() { }
+        public IllegalTypesEventSource()
+        {
+        }
 
         [Event(1, Level = EventLevel.LogAlways)]
         public void SimpleArrayEvent(int[] simpleArray)

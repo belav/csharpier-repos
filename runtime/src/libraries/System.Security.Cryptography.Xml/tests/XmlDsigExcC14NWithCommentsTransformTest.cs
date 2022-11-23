@@ -24,10 +24,14 @@ namespace System.Security.Cryptography.Xml.Tests
     public class UnprotectedXmlDsigExcC14NWithCommentsTransform
         : XmlDsigExcC14NWithCommentsTransform
     {
-        public UnprotectedXmlDsigExcC14NWithCommentsTransform() { }
+        public UnprotectedXmlDsigExcC14NWithCommentsTransform()
+        {
+        }
 
         public UnprotectedXmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList)
-            : base(inclusiveNamespacesPrefixList) { }
+            : base(inclusiveNamespacesPrefixList)
+        {
+        }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {

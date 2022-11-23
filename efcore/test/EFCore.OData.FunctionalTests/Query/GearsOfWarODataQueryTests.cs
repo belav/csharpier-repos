@@ -11,7 +11,9 @@ public class GearsOfWarODataQueryTests
     : ODataQueryTestBase,
         IClassFixture<GearsOfWarODataQueryTestFixture>
 {
-    public GearsOfWarODataQueryTests(GearsOfWarODataQueryTestFixture fixture) : base(fixture) { }
+    public GearsOfWarODataQueryTests(GearsOfWarODataQueryTestFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task Basic_query_gears()

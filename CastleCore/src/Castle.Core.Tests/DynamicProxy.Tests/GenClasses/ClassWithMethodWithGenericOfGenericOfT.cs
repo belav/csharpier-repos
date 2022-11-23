@@ -20,6 +20,8 @@ namespace Castle.DynamicProxy.Tests.GenClasses
     {
         public virtual void GenericMethodWithGenericOfGenericArgument<T>(
             IEnumerable<IComparer<T>> compararers
-        ) { }
+        )
+        {
+        }
     }
 }

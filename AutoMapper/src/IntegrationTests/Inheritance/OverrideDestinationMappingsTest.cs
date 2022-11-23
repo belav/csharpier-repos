@@ -77,5 +77,7 @@ public class OverrideDestinationMappingsTest
         public string SomeValue { get; set; }
     }
 
-    public class ChildModel : ChildModelBase { }
+    public class ChildModel : ChildModelBase
+    {
+    }
 }

@@ -473,7 +473,9 @@ public class ProcedurallyGeneratedQueryExecutor
 
         try
         {
-            foreach (var r in newQuery) { }
+            foreach (var r in newQuery)
+            {
+            }
         }
         catch (Exception exception)
         {
@@ -485,28 +487,37 @@ public class ProcedurallyGeneratedQueryExecutor
                 || exception.Message.Contains(
                     "Object reference not set to an instance of an object."
                 )
-            ) { }
+            )
+            {
+            }
             else if (exception.Message == @"Invalid column name 'Key'.") // 12564
-            { }
+            {
+            }
             else if (
                 exception.Message.StartsWith(
                     @"Error generated for warning 'Microsoft.EntityFrameworkCore.Query.IncludeIgnoredWarning",
                     StringComparison.Ordinal
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 exception.Message
                 == @"The binary operator NotEqual is not defined for the types 'Microsoft.EntityFrameworkCore.Storage.ValueBuffer' and 'Microsoft.EntityFrameworkCore.Storage.ValueBuffer'."
             ) // 12788
-            { }
+            {
+            }
             else if (exception.Message.Contains(@"Incorrect syntax near the keyword 'AS'.")) // 12826
-            { }
+            {
+            }
             else
             {
                 if (
                     _knownFailingTests.ContainsKey(testMethodName)
                     && _knownFailingTests[testMethodName].Any(e => exception.Message.Contains(e))
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     Console.WriteLine("SEED: " + seed + " TEST: " + testMethodName);

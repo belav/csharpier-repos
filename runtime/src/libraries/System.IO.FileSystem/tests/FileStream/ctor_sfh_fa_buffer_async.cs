@@ -41,7 +41,9 @@ namespace System.IO.Tests
                 )
             )
             {
-                using (CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, true)) { }
+                using (CreateFileStream(fs.SafeFileHandle, FileAccess.ReadWrite, 4096, true))
+                {
+                }
             }
         }
 

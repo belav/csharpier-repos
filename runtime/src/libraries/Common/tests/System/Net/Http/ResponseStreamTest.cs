@@ -17,7 +17,9 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class ResponseStreamTest : HttpClientHandlerTestBase
     {
-        public ResponseStreamTest(ITestOutputHelper output) : base(output) { }
+        public ResponseStreamTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         public static IEnumerable<object[]> RemoteServersAndReadModes()
         {

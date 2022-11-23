@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class NullableKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public NullableKeywordRecommender()
-            : base(SyntaxKind.NullableKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.NullableKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

@@ -94,7 +94,9 @@ namespace Microsoft.CodeAnalysis
                 >.Empty,
                 default,
                 default
-            ) { }
+            )
+        {
+        }
 
         // This constructor is private to prevent other Roslyn code from producing this type with inconsistent inputs.
         private ProjectDependencyGraph(

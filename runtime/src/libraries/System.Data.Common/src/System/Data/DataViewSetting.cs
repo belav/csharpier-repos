@@ -16,7 +16,9 @@ namespace System.Data
         private DataViewRowState _rowStateFilter = DataViewRowState.CurrentRows;
         private bool _applyDefaultSort;
 
-        internal DataViewSetting() { }
+        internal DataViewSetting()
+        {
+        }
 
         public bool ApplyDefaultSort
         {

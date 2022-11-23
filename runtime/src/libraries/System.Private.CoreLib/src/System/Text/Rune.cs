@@ -202,7 +202,9 @@ namespace System.Text
         /// or <paramref name="lowSurrogate"/> does not represent a UTF-16 low surrogate code point.
         /// </exception>
         public Rune(char highSurrogate, char lowSurrogate)
-            : this((uint)char.ConvertToUtf32(highSurrogate, lowSurrogate), false) { }
+            : this((uint)char.ConvertToUtf32(highSurrogate, lowSurrogate), false)
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="Rune"/> from the provided Unicode scalar value.
@@ -210,7 +212,9 @@ namespace System.Text
         /// <exception cref="ArgumentOutOfRangeException">
         /// If <paramref name="value"/> does not represent a value Unicode scalar value.
         /// </exception>
-        public Rune(int value) : this((uint)value) { }
+        public Rune(int value) : this((uint)value)
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="Rune"/> from the provided Unicode scalar value.

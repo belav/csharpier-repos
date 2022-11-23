@@ -54,7 +54,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         public EventWaitHandleAccessRule(
             string identity,
@@ -68,7 +70,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         //
         // Internal constructor to be called by public constructors
@@ -81,7 +85,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
+        {
+        }
 
         public EventWaitHandleRights EventWaitHandleRights
         {
@@ -103,7 +109,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 flags
-            ) { }
+            )
+        {
+        }
 
         /* // Not in the spec
         public EventWaitHandleAuditRule(string identity, EventWaitHandleRights eventRights, AuditFlags flags)
@@ -119,7 +127,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
+        {
+        }
 
         public EventWaitHandleRights EventWaitHandleRights
         {
@@ -129,7 +139,9 @@ namespace System.Security.AccessControl
 
     public sealed class EventWaitHandleSecurity : NativeObjectSecurity
     {
-        public EventWaitHandleSecurity() : base(true, ResourceType.KernelObject) { }
+        public EventWaitHandleSecurity() : base(true, ResourceType.KernelObject)
+        {
+        }
 
         internal EventWaitHandleSecurity(string name, AccessControlSections includeSections)
             : base(true, ResourceType.KernelObject, name, includeSections, HandleErrorCode, null)

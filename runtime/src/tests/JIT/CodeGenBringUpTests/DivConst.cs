@@ -201,7 +201,9 @@ static class DivProgram
             DivConst.I4_Div_0(42);
             return Fail;
         }
-        catch (DivideByZeroException) { }
+        catch (DivideByZeroException)
+        {
+        }
         catch (Exception)
         {
             return Fail;
@@ -222,7 +224,9 @@ static class DivProgram
             DivConst.I4_Div_Minus1(int.MinValue);
             return Fail;
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return Fail;
@@ -337,7 +341,9 @@ static class DivProgram
             DivConst.I8_Div_0(42);
             return Fail;
         }
-        catch (DivideByZeroException) { }
+        catch (DivideByZeroException)
+        {
+        }
         catch (Exception)
         {
             return Pass;
@@ -358,7 +364,9 @@ static class DivProgram
             DivConst.I8_Div_Minus1(long.MinValue);
             return Fail;
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return Fail;

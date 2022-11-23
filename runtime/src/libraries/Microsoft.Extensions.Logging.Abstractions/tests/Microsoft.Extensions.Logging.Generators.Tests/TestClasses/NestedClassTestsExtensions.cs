@@ -65,5 +65,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 
 namespace NamespaceForABC
 {
-    public class ABC { }
+    public class ABC
+    {
+    }
 }

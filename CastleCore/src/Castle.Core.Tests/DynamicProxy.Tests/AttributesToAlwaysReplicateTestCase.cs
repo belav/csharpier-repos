@@ -61,15 +61,16 @@ namespace Castle.DynamicProxy.Tests
 
         public class Base
         {
-            public virtual void Method(params object[] args) { }
+            public virtual void Method(params object[] args)
+            {
+            }
         }
 
         public class ManuallyDerived : Base
         {
-            public override void Method(
-                object[] args
-            ) // note the omitted `params`
-            { }
+            public override void Method(object[] args) // note the omitted `params`
+            {
+            }
         }
     }
 }

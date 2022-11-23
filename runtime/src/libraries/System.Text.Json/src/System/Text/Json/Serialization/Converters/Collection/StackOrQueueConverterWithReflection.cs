@@ -13,7 +13,9 @@ namespace System.Text.Json.Serialization.Converters
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        public StackOrQueueConverterWithReflection() { }
+        public StackOrQueueConverterWithReflection()
+        {
+        }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]

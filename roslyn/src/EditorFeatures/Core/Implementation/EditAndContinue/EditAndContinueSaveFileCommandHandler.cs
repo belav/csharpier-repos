@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditAndContinueSaveFileCommandHandler() { }
+        public EditAndContinueSaveFileCommandHandler()
+        {
+        }
 
         public string DisplayName => PredefinedCommandHandlerNames.EditAndContinueFileSave;
 

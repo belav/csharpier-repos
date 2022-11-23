@@ -73,9 +73,13 @@ namespace System.Xml.Schema
         }
     }
 
-    public class XmlSchemaUnique : XmlSchemaIdentityConstraint { }
+    public class XmlSchemaUnique : XmlSchemaIdentityConstraint
+    {
+    }
 
-    public class XmlSchemaKey : XmlSchemaIdentityConstraint { }
+    public class XmlSchemaKey : XmlSchemaIdentityConstraint
+    {
+    }
 
     public class XmlSchemaKeyref : XmlSchemaIdentityConstraint
     {

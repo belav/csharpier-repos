@@ -72,7 +72,9 @@ namespace System.Timers
         /// <param name="interval">
         /// The time between events. The value in milliseconds must be greater than zero and less than or equal to <see cref="int.MaxValue"/>.
         /// </param>
-        public Timer(TimeSpan interval) : this(interval.TotalMilliseconds) { }
+        public Timer(TimeSpan interval) : this(interval.TotalMilliseconds)
+        {
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the Timer raises the Tick event each time the specified
@@ -322,7 +324,9 @@ namespace System.Timers
                         intervalElapsed(this, elapsedEventArgs);
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 }

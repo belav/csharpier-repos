@@ -127,7 +127,9 @@ namespace Microsoft.Data.Sqlite
                 connection1.Open();
                 db = connection1.Handle!;
 
-                using (connection1.BeginTransaction(IsolationLevel.ReadUncommitted)) { }
+                using (connection1.BeginTransaction(IsolationLevel.ReadUncommitted))
+                {
+                }
             }
 
             using var connection2 = new SqliteConnection(ConnectionString);

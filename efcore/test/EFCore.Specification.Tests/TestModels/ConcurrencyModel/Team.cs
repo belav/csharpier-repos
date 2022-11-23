@@ -38,7 +38,9 @@ public class Team
                 poles,
                 fastestLaps,
                 gearboxId
-            ) { }
+            )
+        {
+        }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
@@ -53,7 +55,9 @@ public class Team
     private Chassis _chassis;
     private Gearbox _gearbox;
 
-    public Team() { }
+    public Team()
+    {
+    }
 
     private Team(
         ILazyLoader loader,

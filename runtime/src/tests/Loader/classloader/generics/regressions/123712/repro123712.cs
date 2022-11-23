@@ -7,11 +7,17 @@
 
 using System;
 
-public class Base<T> { }
+public class Base<T>
+{
+}
 
-public class Foo : Base<Bar> { }
+public class Foo : Base<Bar>
+{
+}
 
-public class Bar : Foo { }
+public class Bar : Foo
+{
+}
 
 public class CMain
 {

@@ -307,7 +307,9 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                     {
                         taskInfo.Task.GetAwaiter().GetResult();
                     }
-                    catch (OperationCanceledException) { }
+                    catch (OperationCanceledException)
+                    {
+                    }
                 }
             }
         }

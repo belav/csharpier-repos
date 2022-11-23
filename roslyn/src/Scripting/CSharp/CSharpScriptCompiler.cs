@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             languageVersion: LanguageVersion.Latest
         );
 
-        private CSharpScriptCompiler() { }
+        private CSharpScriptCompiler()
+        {
+        }
 
         public override DiagnosticFormatter DiagnosticFormatter =>
             CSharpDiagnosticFormatter.Instance;

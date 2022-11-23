@@ -557,7 +557,9 @@ namespace Internal.Cryptography.Pal
                         }
                     }
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             Debug.Fail("RSA key did not open with KeyNumber 0 or AT_SIGNATURE");
@@ -586,7 +588,9 @@ namespace Internal.Cryptography.Pal
                         }
                     }
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             Debug.Fail("DSA key did not open with KeyNumber 0 or AT_SIGNATURE");

@@ -19,12 +19,18 @@ namespace System.Net.Mail
         internal bool fatal;
 #pragma warning restore CS0649
 
-        public SmtpFailedRecipientException() : base() { }
+        public SmtpFailedRecipientException() : base()
+        {
+        }
 
-        public SmtpFailedRecipientException(string? message) : base(message) { }
+        public SmtpFailedRecipientException(string? message) : base(message)
+        {
+        }
 
         public SmtpFailedRecipientException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected SmtpFailedRecipientException(SerializationInfo info, StreamingContext context)
             : base(info, context)

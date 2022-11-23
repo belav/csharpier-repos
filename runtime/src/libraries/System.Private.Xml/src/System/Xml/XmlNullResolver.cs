@@ -10,7 +10,9 @@ namespace System.Xml
         public static readonly XmlNullResolver Singleton = new XmlNullResolver();
 
         // Private constructor ensures existing only one instance of XmlNullResolver
-        private XmlNullResolver() { }
+        private XmlNullResolver()
+        {
+        }
 
         public override object GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn)
         {

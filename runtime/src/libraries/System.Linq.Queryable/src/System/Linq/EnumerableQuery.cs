@@ -13,7 +13,9 @@ namespace System.Linq
         internal abstract Expression Expression { get; }
         internal abstract IEnumerable? Enumerable { get; }
 
-        internal EnumerableQuery() { }
+        internal EnumerableQuery()
+        {
+        }
 
         [RequiresUnreferencedCode(
             Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode

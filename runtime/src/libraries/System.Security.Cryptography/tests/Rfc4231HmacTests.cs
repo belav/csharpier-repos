@@ -35,6 +35,8 @@ namespace System.Security.Cryptography.Tests
         };
 
         protected Rfc4231HmacTests(byte[][] testMacs)
-            : base(s_testKeys4231, s_testData4231, testMacs) { }
+            : base(s_testKeys4231, s_testData4231, testMacs)
+        {
+        }
     }
 }

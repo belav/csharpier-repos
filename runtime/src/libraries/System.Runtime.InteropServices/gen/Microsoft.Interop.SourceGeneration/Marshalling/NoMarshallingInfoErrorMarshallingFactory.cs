@@ -32,7 +32,9 @@ namespace Microsoft.Interop
         }
 
         public NoMarshallingInfoErrorMarshallingFactory(IMarshallingGeneratorFactory inner)
-            : this(inner, DefaultTypeToErrorMessageMap) { }
+            : this(inner, DefaultTypeToErrorMessageMap)
+        {
+        }
 
         private NoMarshallingInfoErrorMarshallingFactory(
             IMarshallingGeneratorFactory inner,

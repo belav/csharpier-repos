@@ -34,7 +34,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected class Context23981 : DbContext
         {
-            public Context23981(DbContextOptions options) : base(options) { }
+            public Context23981(DbContextOptions options) : base(options)
+            {
+            }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -77,7 +79,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected class Context27954 : DbContext
         {
-            public Context27954(DbContextOptions options) : base(options) { }
+            public Context27954(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<MyEntity> MyEntities { get; set; }
 

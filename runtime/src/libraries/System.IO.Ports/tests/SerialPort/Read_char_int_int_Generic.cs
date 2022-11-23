@@ -167,7 +167,9 @@ namespace System.IO.Ports.Tests
                 {
                     com1.Read(new char[defaultCharArraySize], 0, defaultCharArraySize);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 TCSupport.WaitForTaskCompletion(t);
 

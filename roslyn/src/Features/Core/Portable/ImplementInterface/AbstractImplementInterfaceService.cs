@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
     {
         protected const string DisposingName = "disposing";
 
-        protected AbstractImplementInterfaceService() { }
+        protected AbstractImplementInterfaceService()
+        {
+        }
 
         protected abstract string ToDisplayString(
             IMethodSymbol disposeImplMethod,

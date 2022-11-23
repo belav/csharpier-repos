@@ -15,13 +15,17 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the
         /// specified name and attribute array.
         /// </summary>
-        protected EventDescriptor(string name, Attribute[]? attrs) : base(name, attrs) { }
+        protected EventDescriptor(string name, Attribute[]? attrs) : base(name, attrs)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the name and attributes in
         /// the specified <see cref='System.ComponentModel.MemberDescriptor'/>.
         /// </summary>
-        protected EventDescriptor(MemberDescriptor descr) : base(descr) { }
+        protected EventDescriptor(MemberDescriptor descr) : base(descr)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with
@@ -29,7 +33,8 @@ namespace System.ComponentModel
         /// attributes in both the <see cref='System.ComponentModel.MemberDescriptor'/> and the <see cref='System.Attribute'/> array.
         /// </summary>
         protected EventDescriptor(MemberDescriptor descr, Attribute[]? attrs) : base(descr, attrs)
-        { }
+        {
+        }
 
         /// <summary>
         /// When overridden in a derived class, gets the type of the component this event is bound to.

@@ -21,7 +21,9 @@ namespace System.IO.Hashing.Tests
             0x99
         };
 
-        public XxHash64Tests() : base(s_emptyHashValue) { }
+        public XxHash64Tests() : base(s_emptyHashValue)
+        {
+        }
 
         public static IEnumerable<object[]> TestCases
         {

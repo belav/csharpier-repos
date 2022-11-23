@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return s_comparer; }
         }
 
-        private ConversionSignatureComparer() { }
+        private ConversionSignatureComparer()
+        {
+        }
 
         public bool Equals(
             SourceUserDefinedConversionSymbol member1,

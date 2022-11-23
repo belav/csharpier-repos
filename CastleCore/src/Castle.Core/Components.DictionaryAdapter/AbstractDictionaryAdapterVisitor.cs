@@ -110,7 +110,9 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             PropertyDescriptor property,
             object state
-        ) { }
+        )
+        {
+        }
 
         void IDictionaryAdapterVisitor.VisitInterface(
             IDictionaryAdapter dictionaryAdapter,

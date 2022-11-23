@@ -11,7 +11,8 @@ namespace Microsoft.Web.FxCop
         private readonly Dictionary<string, string> _problematicMethods = GetProblematicMethods();
 
         public DoNotCallProblematicMethodsOnTaskRule() : base("DoNotCallProblematicMethodsOnTask")
-        { }
+        {
+        }
 
         public override ProblemCollection Check(Member member)
         {

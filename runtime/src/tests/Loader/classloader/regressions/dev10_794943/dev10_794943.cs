@@ -3,9 +3,13 @@
 
 using System;
 
-struct A<T> { }
+struct A<T>
+{
+}
 
-struct B<T> { }
+struct B<T>
+{
+}
 
 interface Interface<T>
 {

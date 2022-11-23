@@ -14,7 +14,9 @@ namespace System.Security.Permissions
     public sealed partial class PublisherIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public PublisherIdentityPermissionAttribute(SecurityAction action)
-            : base(default(SecurityAction)) { }
+            : base(default(SecurityAction))
+        {
+        }
 
         public string CertFile { get; set; }
         public string SignedFile { get; set; }

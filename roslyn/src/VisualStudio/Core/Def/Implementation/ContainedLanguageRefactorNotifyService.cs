@@ -30,7 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ContainedLanguageRefactorNotifyService() { }
+        public ContainedLanguageRefactorNotifyService()
+        {
+        }
 
         public bool TryOnBeforeGlobalSymbolRenamed(
             Workspace workspace,

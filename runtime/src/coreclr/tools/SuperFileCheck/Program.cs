@@ -24,7 +24,9 @@ namespace SuperFileCheck
 
     internal class SuperFileCheckException : Exception
     {
-        public SuperFileCheckException(string message) : base(message) { }
+        public SuperFileCheckException(string message) : base(message)
+        {
+        }
     }
 
     internal class Program
@@ -465,7 +467,9 @@ namespace SuperFileCheck
                 {
                     File.Delete(tmpFilePath);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

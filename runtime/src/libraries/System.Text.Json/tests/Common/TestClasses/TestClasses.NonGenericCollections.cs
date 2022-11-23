@@ -145,19 +145,25 @@ namespace System.Text.Json.Serialization.Tests
 
     public class WrapperForIEnumerablePrivateConstructor : WrapperForIEnumerable
     {
-        private WrapperForIEnumerablePrivateConstructor() { }
+        private WrapperForIEnumerablePrivateConstructor()
+        {
+        }
     }
 
     public class WrapperForIEnumerableInternalConstructor : WrapperForIEnumerable
     {
-        internal WrapperForIEnumerableInternalConstructor() { }
+        internal WrapperForIEnumerableInternalConstructor()
+        {
+        }
     }
 
     public class WrapperForICollection : ICollection
     {
         private readonly List<object> _list = new List<object>();
 
-        public WrapperForICollection() { }
+        public WrapperForICollection()
+        {
+        }
 
         public WrapperForICollection(List<object> items)
         {
@@ -186,12 +192,16 @@ namespace System.Text.Json.Serialization.Tests
 
     public class WrapperForICollectionPrivateConstructor : WrapperForICollection
     {
-        private WrapperForICollectionPrivateConstructor() { }
+        private WrapperForICollectionPrivateConstructor()
+        {
+        }
     }
 
     public class WrapperForICollectionInternalConstructor : WrapperForICollection
     {
-        internal WrapperForICollectionInternalConstructor() { }
+        internal WrapperForICollectionInternalConstructor()
+        {
+        }
     }
 
     public class ReadOnlyWrapperForIList : WrapperForIList
@@ -287,12 +297,16 @@ namespace System.Text.Json.Serialization.Tests
 
     public class WrapperForIListPrivateConstructor : WrapperForIList
     {
-        private WrapperForIListPrivateConstructor() { }
+        private WrapperForIListPrivateConstructor()
+        {
+        }
     }
 
     public class WrapperForIListInternalConstructor : WrapperForIList
     {
-        internal WrapperForIListInternalConstructor() { }
+        internal WrapperForIListInternalConstructor()
+        {
+        }
     }
 
     public class ReadOnlyWrapperForIDictionary : WrapperForIDictionary
@@ -362,17 +376,23 @@ namespace System.Text.Json.Serialization.Tests
 
     public class WrapperForIDictionaryPrivateConstructor : WrapperForIDictionary
     {
-        private WrapperForIDictionaryPrivateConstructor() { }
+        private WrapperForIDictionaryPrivateConstructor()
+        {
+        }
     }
 
     public class WrapperForIDictionaryInternalConstructor : WrapperForIDictionary
     {
-        internal WrapperForIDictionaryInternalConstructor() { }
+        internal WrapperForIDictionaryInternalConstructor()
+        {
+        }
     }
 
     public class StackWrapper : Stack
     {
-        public StackWrapper() { }
+        public StackWrapper()
+        {
+        }
 
         public StackWrapper(List<object> items)
         {
@@ -385,7 +405,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class QueueWrapper : Queue
     {
-        public QueueWrapper() { }
+        public QueueWrapper()
+        {
+        }
 
         public QueueWrapper(List<object> items)
         {
@@ -398,7 +420,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class HashtableWrapper : Hashtable
     {
-        public HashtableWrapper() { }
+        public HashtableWrapper()
+        {
+        }
 
         public HashtableWrapper(List<KeyValuePair<string, object>> items)
         {
@@ -411,7 +435,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class ArrayListWrapper : ArrayList
     {
-        public ArrayListWrapper() { }
+        public ArrayListWrapper()
+        {
+        }
 
         public ArrayListWrapper(List<object> items)
         {
@@ -424,7 +450,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class SortedListWrapper : SortedList
     {
-        public SortedListWrapper() { }
+        public SortedListWrapper()
+        {
+        }
 
         public SortedListWrapper(List<KeyValuePair<string, object>> items)
         {
@@ -435,7 +463,9 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public interface IDerivedIList : IList { }
+    public interface IDerivedIList : IList
+    {
+    }
 
     public struct StructWrapperForIList : IList
     {

@@ -19,7 +19,9 @@ namespace System.Runtime.CompilerServices
             Value = (MethodImplOptions)value;
         }
 
-        public MethodImplAttribute() { }
+        public MethodImplAttribute()
+        {
+        }
 
         public MethodImplOptions Value { get; }
     }

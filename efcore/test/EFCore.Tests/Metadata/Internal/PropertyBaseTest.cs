@@ -2206,7 +2206,9 @@ public class PropertyBaseTest
 
         public int Id { get; set; }
 
-        public ReadOnlyProp() { }
+        public ReadOnlyProp()
+        {
+        }
 
         public ReadOnlyProp(int id, ReadOnlyProp reference, IEnumerable<ReadOnlyProp> collection)
         {
@@ -2224,7 +2226,9 @@ public class PropertyBaseTest
 
     private class ReadOnlyAutoProp
     {
-        public ReadOnlyAutoProp() { }
+        public ReadOnlyAutoProp()
+        {
+        }
 
         public ReadOnlyAutoProp(
             int id,
@@ -2249,7 +2253,9 @@ public class PropertyBaseTest
         private readonly ReadOnlyFieldProp _reference;
         private readonly IEnumerable<ReadOnlyFieldProp> _collection;
 
-        public ReadOnlyFieldProp() { }
+        public ReadOnlyFieldProp()
+        {
+        }
 
         public ReadOnlyFieldProp(
             int id,
@@ -2352,7 +2358,9 @@ public class PropertyBaseTest
         private readonly ReadOnlyPropNoField _notFoundRef;
         private readonly IEnumerable<ReadOnlyPropNoField> _notFoundColl;
 
-        public ReadOnlyPropNoField() { }
+        public ReadOnlyPropNoField()
+        {
+        }
 
         public ReadOnlyPropNoField(
             int id,

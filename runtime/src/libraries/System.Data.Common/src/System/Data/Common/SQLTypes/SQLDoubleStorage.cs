@@ -17,7 +17,8 @@ namespace System.Data.Common
 
         public SqlDoubleStorage(DataColumn column)
             : base(column, typeof(SqlDouble), SqlDouble.Null, SqlDouble.Null, StorageType.SqlDouble)
-        { }
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

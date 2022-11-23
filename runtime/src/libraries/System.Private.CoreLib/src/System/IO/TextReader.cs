@@ -22,7 +22,9 @@ namespace System.IO
         // Create our own instance to avoid static field initialization order problems on Mono.
         public static readonly TextReader Null = new StreamReader.NullStreamReader();
 
-        protected TextReader() { }
+        protected TextReader()
+        {
+        }
 
         public virtual void Close()
         {
@@ -36,7 +38,9 @@ namespace System.IO
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         // Returns the next available character without actually reading it from
         // the input stream. The current position of the TextReader is not changed by

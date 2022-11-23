@@ -9,37 +9,49 @@ namespace CoreFXTestLibrary
     /// A method to be called before any tests in the assembly are executed.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class AssemblyInitializeAttribute : Attribute { }
+    public class AssemblyInitializeAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// A method to be called after all tests in the assembly are executed.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class AssemblyCleanupAttribute : Attribute { }
+    public class AssemblyCleanupAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// A test class. A test class using this attribute must use instance methods for Tests.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class TestClassAttribute : Attribute { }
+    public class TestClassAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// A test method in a test class.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class TestMethodAttribute : Attribute { }
+    public class TestMethodAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// A method to be called before each test is executed.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class TestInitializeAttribute : Attribute { }
+    public class TestInitializeAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// A method to be called after each test is executed.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class TestCleanupAttribute : Attribute { }
+    public class TestCleanupAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that a test should be ignored.
@@ -49,7 +61,9 @@ namespace CoreFXTestLibrary
     {
         public readonly string Description;
 
-        public IgnoreAttribute() { }
+        public IgnoreAttribute()
+        {
+        }
 
         public IgnoreAttribute(string description)
         {
@@ -66,9 +80,13 @@ namespace CoreFXTestLibrary
         public readonly string Description;
         public readonly Type ExceptionType;
 
-        private ExpectedExceptionAttribute() { }
+        private ExpectedExceptionAttribute()
+        {
+        }
 
-        public ExpectedExceptionAttribute(Type type) : this(type, null) { }
+        public ExpectedExceptionAttribute(Type type) : this(type, null)
+        {
+        }
 
         public ExpectedExceptionAttribute(Type type, string description)
         {

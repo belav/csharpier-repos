@@ -36,18 +36,30 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(expected, Marshal.IsTypeVisibleFromCom(value));
         }
 
-        private class PrivateType { }
+        private class PrivateType
+        {
+        }
 
-        protected class ProtectedType { }
+        protected class ProtectedType
+        {
+        }
 
-        internal class InternalType { }
+        internal class InternalType
+        {
+        }
 
-        interface InnerManagedInterface { }
+        interface InnerManagedInterface
+        {
+        }
     }
 
     [ComVisibleAttribute(false)]
-    public class ManagedClassWithComVisibleFalse { }
+    public class ManagedClassWithComVisibleFalse
+    {
+    }
 
     [ComVisibleAttribute(true)]
-    public class ManagedClassWithComVisibleTrue { }
+    public class ManagedClassWithComVisibleTrue
+    {
+    }
 }

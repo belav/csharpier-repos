@@ -21,7 +21,9 @@ public class DefaultFilesMiddlewareTests
             await StaticFilesTestServer.Create(
                 app => app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = null })
             )
-        ) { }
+        )
+        {
+        }
 
         // PathString(null) is OK.
         using var host = await StaticFilesTestServer.Create(
@@ -145,7 +147,9 @@ public class DefaultFilesMiddlewareTests
                         }
                     );
 
-                    app.UseEndpoints(endpoints => { });
+                    app.UseEndpoints(endpoints =>
+                    {
+                    });
 
                     // Echo back the current request path value
                     app.Run(context => context.Response.WriteAsync(context.Request.Path.Value));
@@ -201,7 +205,9 @@ public class DefaultFilesMiddlewareTests
                         }
                     );
 
-                    app.UseEndpoints(endpoints => { });
+                    app.UseEndpoints(endpoints =>
+                    {
+                    });
 
                     // Echo back the current request path value
                     app.Run(context => context.Response.WriteAsync(context.Request.Path.Value));

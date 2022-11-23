@@ -8,19 +8,31 @@ namespace System.Security.Cryptography
 {
     public sealed class DSAOpenSsl : System.Security.Cryptography.DSA
     {
-        public DSAOpenSsl() { }
+        public DSAOpenSsl()
+        {
+        }
 
-        public DSAOpenSsl(int keySize) { }
+        public DSAOpenSsl(int keySize)
+        {
+        }
 
-        public DSAOpenSsl(System.IntPtr handle) { }
+        public DSAOpenSsl(System.IntPtr handle)
+        {
+        }
 
-        public DSAOpenSsl(System.Security.Cryptography.DSAParameters parameters) { }
+        public DSAOpenSsl(System.Security.Cryptography.DSAParameters parameters)
+        {
+        }
 
-        public DSAOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle) { }
+        public DSAOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle)
+        {
+        }
 
         public override int KeySize
         {
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.KeySizes[] LegalKeySizes
         {
@@ -32,7 +44,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public System.Security.Cryptography.SafeEvpPKeyHandle DuplicateKeyHandle()
         {
@@ -64,9 +78,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void ImportParameters(
-            System.Security.Cryptography.DSAParameters parameters
-        ) { }
+        public override void ImportParameters(System.Security.Cryptography.DSAParameters parameters)
+        {
+        }
 
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
         {
@@ -76,15 +90,25 @@ namespace System.Security.Cryptography
 
     public sealed class ECDiffieHellmanOpenSsl : System.Security.Cryptography.ECDiffieHellman
     {
-        public ECDiffieHellmanOpenSsl() { }
+        public ECDiffieHellmanOpenSsl()
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(int keySize) { }
+        public ECDiffieHellmanOpenSsl(int keySize)
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(System.IntPtr handle) { }
+        public ECDiffieHellmanOpenSsl(System.IntPtr handle)
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.ECCurve curve) { }
+        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle) { }
+        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle)
+        {
+        }
 
         public override System.Security.Cryptography.ECDiffieHellmanPublicKey PublicKey
         {
@@ -147,36 +171,52 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+        public override void GenerateKey(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
-        public override void ImportParameters(
-            System.Security.Cryptography.ECParameters parameters
-        ) { }
+        public override void ImportParameters(System.Security.Cryptography.ECParameters parameters)
+        {
+        }
     }
 
     public sealed class ECDsaOpenSsl : System.Security.Cryptography.ECDsa
     {
-        public ECDsaOpenSsl() { }
+        public ECDsaOpenSsl()
+        {
+        }
 
-        public ECDsaOpenSsl(int keySize) { }
+        public ECDsaOpenSsl(int keySize)
+        {
+        }
 
-        public ECDsaOpenSsl(System.IntPtr handle) { }
+        public ECDsaOpenSsl(System.IntPtr handle)
+        {
+        }
 
-        public ECDsaOpenSsl(System.Security.Cryptography.ECCurve curve) { }
+        public ECDsaOpenSsl(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
-        public ECDsaOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle) { }
+        public ECDsaOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle)
+        {
+        }
 
         public override int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.KeySizes[] LegalKeySizes
         {
             get { throw null; }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public System.Security.Cryptography.SafeEvpPKeyHandle DuplicateKeyHandle()
         {
@@ -197,7 +237,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+        public override void GenerateKey(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
         protected override byte[] HashData(
             byte[] data,
@@ -217,9 +259,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void ImportParameters(
-            System.Security.Cryptography.ECParameters parameters
-        ) { }
+        public override void ImportParameters(System.Security.Cryptography.ECParameters parameters)
+        {
+        }
 
         public override byte[] SignHash(byte[] hash)
         {
@@ -234,19 +276,31 @@ namespace System.Security.Cryptography
 
     public sealed class RSAOpenSsl : System.Security.Cryptography.RSA
     {
-        public RSAOpenSsl() { }
+        public RSAOpenSsl()
+        {
+        }
 
-        public RSAOpenSsl(int keySize) { }
+        public RSAOpenSsl(int keySize)
+        {
+        }
 
-        public RSAOpenSsl(System.IntPtr handle) { }
+        public RSAOpenSsl(System.IntPtr handle)
+        {
+        }
 
-        public RSAOpenSsl(System.Security.Cryptography.RSAParameters parameters) { }
+        public RSAOpenSsl(System.Security.Cryptography.RSAParameters parameters)
+        {
+        }
 
-        public RSAOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle) { }
+        public RSAOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle)
+        {
+        }
 
         public override int KeySize
         {
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.KeySizes[] LegalKeySizes
         {
@@ -261,7 +315,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public System.Security.Cryptography.SafeEvpPKeyHandle DuplicateKeyHandle()
         {
@@ -301,9 +357,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void ImportParameters(
-            System.Security.Cryptography.RSAParameters parameters
-        ) { }
+        public override void ImportParameters(System.Security.Cryptography.RSAParameters parameters)
+        {
+        }
 
         public override byte[] SignHash(
             byte[] hash,
@@ -327,10 +383,14 @@ namespace System.Security.Cryptography
 
     public sealed class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
     {
-        public SafeEvpPKeyHandle() : base(default(System.IntPtr), default(bool)) { }
+        public SafeEvpPKeyHandle() : base(default(System.IntPtr), default(bool))
+        {
+        }
 
         public SafeEvpPKeyHandle(System.IntPtr handle, bool ownsHandle)
-            : base(default(System.IntPtr), default(bool)) { }
+            : base(default(System.IntPtr), default(bool))
+        {
+        }
 
         public static long OpenSslVersion
         {

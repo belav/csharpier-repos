@@ -6,29 +6,51 @@ using Xunit;
 
 namespace System.Reflection.Emit.Tests
 {
-    public class EmptyNonGenericClass { }
+    public class EmptyNonGenericClass
+    {
+    }
 
-    public class EmptyGenericClass<T> { }
+    public class EmptyGenericClass<T>
+    {
+    }
 
-    public sealed class SealedClass { }
+    public sealed class SealedClass
+    {
+    }
 
-    public static class StaticClass { }
+    public static class StaticClass
+    {
+    }
 
-    public struct EmptyNonGenericStruct { }
+    public struct EmptyNonGenericStruct
+    {
+    }
 
-    public struct EmptyGenericStruct<T> { }
+    public struct EmptyGenericStruct<T>
+    {
+    }
 
-    public enum EmptyEnum { }
+    public enum EmptyEnum
+    {
+    }
 
     public delegate EventHandler BasicDelegate();
 
-    public interface EmptyNonGenericInterface1 { }
+    public interface EmptyNonGenericInterface1
+    {
+    }
 
-    public interface EmptyNonGenericInterface2 { }
+    public interface EmptyNonGenericInterface2
+    {
+    }
 
-    public interface EmptyGenericInterface<T> { }
+    public interface EmptyGenericInterface<T>
+    {
+    }
 
-    public class EmptyAttribute : Attribute { }
+    public class EmptyAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class IntAllAttribute : Attribute

@@ -87,7 +87,9 @@ public unsafe class Runtime_65937
         int e,
         int f,
         StructWithNineBytes stkArg
-    ) { }
+    )
+    {
+    }
 
     [DllImport("libc")]
     private static extern void* mmap(

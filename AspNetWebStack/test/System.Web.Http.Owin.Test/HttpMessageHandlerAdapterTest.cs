@@ -2750,7 +2750,9 @@ namespace System.Web.Http.Owin
                 get { return true; }
             }
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override long Length
             {
@@ -2760,7 +2762,9 @@ namespace System.Web.Http.Owin
             public override long Position
             {
                 get { return 0; }
-                set { }
+                set
+                {
+                }
             }
 
             public override int Read(byte[] buffer, int offset, int count)
@@ -2773,9 +2777,13 @@ namespace System.Web.Http.Owin
                 throw new NotSupportedException();
             }
 
-            public override void SetLength(long value) { }
+            public override void SetLength(long value)
+            {
+            }
 
-            public override void Write(byte[] buffer, int offset, int count) { }
+            public override void Write(byte[] buffer, int offset, int count)
+            {
+            }
 
             protected override void Dispose(bool disposing)
             {

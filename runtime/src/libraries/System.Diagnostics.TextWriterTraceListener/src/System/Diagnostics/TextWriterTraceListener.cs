@@ -21,13 +21,17 @@ namespace System.Diagnostics
         /// <see cref='System.IO.TextWriter'/>
         /// as the output recipient.</para>
         /// </devdoc>
-        public TextWriterTraceListener() { }
+        public TextWriterTraceListener()
+        {
+        }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class, using the
         ///    stream as the recipient of the debugging and tracing output.</para>
         /// </devdoc>
-        public TextWriterTraceListener(Stream stream) : this(stream, string.Empty) { }
+        public TextWriterTraceListener(Stream stream) : this(stream, string.Empty)
+        {
+        }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with the
@@ -44,7 +48,9 @@ namespace System.Diagnostics
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class using the
         ///    specified writer as recipient of the tracing or debugging output.</para>
         /// </devdoc>
-        public TextWriterTraceListener(TextWriter writer) : this(writer, string.Empty) { }
+        public TextWriterTraceListener(TextWriter writer) : this(writer, string.Empty)
+        {
+        }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with the
@@ -103,7 +109,9 @@ namespace System.Diagnostics
                 {
                     _writer.Close();
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
                 _writer = null;
             }
 
@@ -140,7 +148,9 @@ namespace System.Diagnostics
             {
                 _writer?.Flush();
             }
-            catch (ObjectDisposedException) { }
+            catch (ObjectDisposedException)
+            {
+            }
         }
 
         /// <devdoc>
@@ -158,7 +168,9 @@ namespace System.Diagnostics
                 {
                     _writer.Write(message);
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
             }
         }
 
@@ -179,7 +191,9 @@ namespace System.Diagnostics
                     _writer.WriteLine(message);
                     NeedIndent = true;
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
             }
         }
 

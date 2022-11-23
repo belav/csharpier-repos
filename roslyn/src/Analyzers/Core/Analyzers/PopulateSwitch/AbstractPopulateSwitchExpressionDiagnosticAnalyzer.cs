@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             : base(
                 IDEDiagnosticIds.PopulateSwitchExpressionDiagnosticId,
                 EnforceOnBuildValues.PopulateSwitchExpression
-            ) { }
+            )
+        {
+        }
 
         protected sealed override OperationKind OperationKind => OperationKind.SwitchExpression;
 

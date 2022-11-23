@@ -19,7 +19,9 @@ public sealed class UnprocessableEntity : IResult, IEndpointMetadataProvider, IS
     /// Initializes a new instance of the <see cref="UnprocessableEntity"/> class with the values
     /// provided.
     /// </summary>
-    internal UnprocessableEntity() { }
+    internal UnprocessableEntity()
+    {
+    }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status422UnprocessableEntity"/>

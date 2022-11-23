@@ -36,7 +36,9 @@ namespace System.Threading.Tasks.Sources.Tests
             Assert.Throws<InvalidOperationException>(
                 () =>
                     mrvts.OnCompleted(
-                        _ => { },
+                        _ =>
+                        {
+                        },
                         new object(),
                         0,
                         ValueTaskSourceOnCompletedFlags.None
@@ -48,7 +50,9 @@ namespace System.Threading.Tasks.Sources.Tests
             Assert.Throws<InvalidOperationException>(
                 () =>
                     mrvts.OnCompleted(
-                        _ => { },
+                        _ =>
+                        {
+                        },
                         new object(),
                         2,
                         ValueTaskSourceOnCompletedFlags.None
@@ -285,9 +289,24 @@ namespace System.Threading.Tasks.Sources.Tests
         public void OnCompleted_UsedTwiceBeforeCompletion_Throws()
         {
             var mrvts = new ManualResetValueTaskSource<int>();
-            mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None);
+            mrvts.OnCompleted(
+                _ =>
+                {
+                },
+                null,
+                0,
+                ValueTaskSourceOnCompletedFlags.None
+            );
             Assert.Throws<InvalidOperationException>(
-                () => mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None)
+                () =>
+                    mrvts.OnCompleted(
+                        _ =>
+                        {
+                        },
+                        null,
+                        0,
+                        ValueTaskSourceOnCompletedFlags.None
+                    )
             );
         }
 
@@ -296,7 +315,9 @@ namespace System.Threading.Tasks.Sources.Tests
         {
             var mrvts = new ManualResetValueTaskSource<int>();
             mrvts.OnCompleted(
-                _ => { },
+                _ =>
+                {
+                },
                 new object(),
                 0,
                 (ValueTaskSourceOnCompletedFlags)int.MaxValue
@@ -695,7 +716,9 @@ namespace System.Threading.Tasks.Sources.Tests
                 }
             }
 
-            void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine) { }
+            void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine)
+            {
+            }
 
             bool IValueTaskSource<bool>.GetResult(short token) => _vts.GetResult(token);
 

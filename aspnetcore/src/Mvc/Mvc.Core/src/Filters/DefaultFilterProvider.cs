@@ -31,7 +31,9 @@ internal sealed class DefaultFilterProvider : IFilterProvider
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(FilterProviderContext context) { }
+    public void OnProvidersExecuted(FilterProviderContext context)
+    {
+    }
 
     public static void ProvideFilter(FilterProviderContext context, FilterItem filterItem)
     {

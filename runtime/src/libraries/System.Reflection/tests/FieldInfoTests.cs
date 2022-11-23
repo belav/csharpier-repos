@@ -878,11 +878,17 @@ namespace System.Reflection.Tests
         public int intField = 101;
         public string stringField = "non static";
 
-        public enum ShortEnum : short { }
+        public enum ShortEnum : short
+        {
+        }
 
-        public enum IntEnum { }
+        public enum IntEnum
+        {
+        }
 
-        public enum LongEnum : long { }
+        public enum LongEnum : long
+        {
+        }
 
         public ShortEnum shortEnumField;
         public IntEnum intEnumField;
@@ -957,15 +963,25 @@ namespace System.Reflection.Tests
             g_g_object
         };
 
-        public class FI_BaseClass { }
+        public class FI_BaseClass
+        {
+        }
 
-        public class FI_SubClass : FI_BaseClass { }
+        public class FI_SubClass : FI_BaseClass
+        {
+        }
 
-        public interface FI_Interface { }
+        public interface FI_Interface
+        {
+        }
 
-        public class FI_ClassWithInterface1 : FI_Interface { }
+        public class FI_ClassWithInterface1 : FI_Interface
+        {
+        }
 
-        public class FI_ClassWithInterface2 : FI_Interface { }
+        public class FI_ClassWithInterface2 : FI_Interface
+        {
+        }
 
         public class FI_FieldArray
         {
@@ -980,7 +996,9 @@ namespace System.Reflection.Tests
 
         public class FI_GenericClass<T>
         {
-            public FI_GenericClass() { }
+            public FI_GenericClass()
+            {
+            }
         }
 
         public class FI_GenericClassField<T>

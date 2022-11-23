@@ -18,7 +18,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -52,7 +54,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -102,7 +106,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {

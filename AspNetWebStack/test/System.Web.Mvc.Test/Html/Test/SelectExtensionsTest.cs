@@ -4913,7 +4913,9 @@ namespace System.Web.Mvc.Html.Test
             Fourth,
         }
 
-        private enum EnumWithoutAnything : byte { }
+        private enum EnumWithoutAnything : byte
+        {
+        }
 
         [Flags]
         private enum EnumWithFlags : byte

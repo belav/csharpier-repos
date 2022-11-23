@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectInfoServ
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultProjectInfoServiceFactory() { }
+        public DefaultProjectInfoServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             _singleton.Value;

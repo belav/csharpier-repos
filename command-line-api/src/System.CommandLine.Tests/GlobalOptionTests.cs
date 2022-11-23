@@ -29,7 +29,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("child");
             var rootCommand = new RootCommand { command };
-            command.SetHandler(() => { });
+            command.SetHandler(() => {
+            });
             var requiredOption = new Option<bool>("--i-must-be-set") { IsRequired = true };
             rootCommand.AddGlobalOption(requiredOption);
 
@@ -66,7 +67,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("child");
             var rootCommand = new RootCommand { command };
-            command.SetHandler(() => { });
+            command.SetHandler(() => {
+            });
             var requiredOption = new Option<bool>("--i-must-be-set") { IsRequired = true };
             rootCommand.AddGlobalOption(requiredOption);
 

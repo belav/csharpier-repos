@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicOrganizing(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicOrganizing)) { }
+            : base(instanceFactory, nameof(BasicOrganizing))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Organizing)]
         public void RemoveAndSort()

@@ -52,7 +52,9 @@ namespace System.Xml.Xsl
         // Executable command for the compiled stylesheet
         private XmlILCommand? _command;
 
-        public XslCompiledTransform() { }
+        public XslCompiledTransform()
+        {
+        }
 
         public XslCompiledTransform(bool enableDebug)
         {

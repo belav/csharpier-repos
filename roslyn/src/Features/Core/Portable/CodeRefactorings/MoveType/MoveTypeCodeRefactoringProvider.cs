@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public MoveTypeCodeRefactoringProvider() { }
+        public MoveTypeCodeRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

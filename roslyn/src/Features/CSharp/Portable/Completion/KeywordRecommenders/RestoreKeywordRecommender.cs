@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class RestoreKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public RestoreKeywordRecommender()
-            : base(SyntaxKind.RestoreKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.RestoreKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

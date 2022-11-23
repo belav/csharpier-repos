@@ -22,8 +22,12 @@ public class _74373
         return y;
     }
 
-    public static unsafe void Use(long* arg) { }
+    public static unsafe void Use(long* arg)
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void JitUse<T>(T arg) { }
+    public static void JitUse<T>(T arg)
+    {
+    }
 }

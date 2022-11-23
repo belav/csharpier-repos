@@ -23,7 +23,9 @@ public class CosmosInversePropertyAttributeConvention : InversePropertyAttribute
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public CosmosInversePropertyAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    ) : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Finds or tries to create an entity type target for the given navigation member.

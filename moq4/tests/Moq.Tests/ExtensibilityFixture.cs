@@ -23,7 +23,9 @@ namespace Moq.Tests
 
                 Assert.True(false, "Should have failed for big order");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         [Fact]
@@ -51,7 +53,9 @@ namespace Moq.Tests
 
                 Assert.True(false, "Should have failed for small order");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         [Fact]

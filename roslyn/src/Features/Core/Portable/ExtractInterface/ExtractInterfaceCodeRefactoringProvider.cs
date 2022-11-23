@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExtractInterfaceCodeRefactoringProvider() { }
+        public ExtractInterfaceCodeRefactoringProvider()
+        {
+        }
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

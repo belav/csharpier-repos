@@ -33,7 +33,9 @@ namespace Castle.Core.Logging
         /// <summary>
         ///   Creates a new <c>LevelFilteredLogger</c>.
         /// </summary>
-        protected LevelFilteredLogger() { }
+        protected LevelFilteredLogger()
+        {
+        }
 
         protected LevelFilteredLogger(string name)
         {

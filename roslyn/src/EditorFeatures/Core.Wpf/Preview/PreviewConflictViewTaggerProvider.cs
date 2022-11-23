@@ -25,6 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PreviewConflictTaggerProvider()
-            : base(PredefinedPreviewTaggerKeys.ConflictSpansKey, ConflictTag.Instance) { }
+            : base(PredefinedPreviewTaggerKeys.ConflictSpansKey, ConflictTag.Instance)
+        {
+        }
     }
 }

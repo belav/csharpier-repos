@@ -32,7 +32,9 @@ namespace Roslyn.Compilers.Extension
             error: true
         )]
         public SetGlobalGlobalPropertiesForCPS(IProjectService projectService)
-            : base(projectService.Services) { }
+            : base(projectService.Services)
+        {
+        }
 
         public override Task<IImmutableDictionary<string, string>> GetGlobalPropertiesAsync(
             CancellationToken cancellationToken

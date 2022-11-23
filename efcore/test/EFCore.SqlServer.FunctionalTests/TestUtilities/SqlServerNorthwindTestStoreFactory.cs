@@ -10,7 +10,9 @@ public class SqlServerNorthwindTestStoreFactory : SqlServerTestStoreFactory
         SqlServerTestStore.CreateConnectionString(Name);
     public static new SqlServerNorthwindTestStoreFactory Instance { get; } = new();
 
-    protected SqlServerNorthwindTestStoreFactory() { }
+    protected SqlServerNorthwindTestStoreFactory()
+    {
+    }
 
     public override TestStore GetOrCreate(string storeName) =>
         SqlServerTestStore.GetOrCreateWithScriptPath(storeName, "Northwind.sql");

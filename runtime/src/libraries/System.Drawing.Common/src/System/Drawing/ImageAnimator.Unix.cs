@@ -71,7 +71,9 @@ namespace System.Drawing
     {
         private static Hashtable ht = Hashtable.Synchronized(new Hashtable());
 
-        private ImageAnimator() { }
+        private ImageAnimator()
+        {
+        }
 
         public static void Animate(Image image, EventHandler onFrameChangedHandler)
         {

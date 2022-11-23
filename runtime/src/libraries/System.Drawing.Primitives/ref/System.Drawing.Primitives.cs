@@ -954,12 +954,16 @@ namespace System.Drawing
         public int X
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Y
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Drawing.Point Add(System.Drawing.Point pt, System.Drawing.Size sz)
@@ -989,9 +993,13 @@ namespace System.Drawing
             throw null;
         }
 
-        public void Offset(System.Drawing.Point p) { }
+        public void Offset(System.Drawing.Point p)
+        {
+        }
 
-        public void Offset(int dx, int dy) { }
+        public void Offset(int dx, int dy)
+        {
+        }
 
         public static System.Drawing.Point operator +(
             System.Drawing.Point pt,
@@ -1073,12 +1081,16 @@ namespace System.Drawing
         public float X
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public float Y
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Drawing.PointF Add(System.Drawing.PointF pt, System.Drawing.Size sz)
@@ -1213,7 +1225,9 @@ namespace System.Drawing
         public int Height
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1232,7 +1246,9 @@ namespace System.Drawing
         public System.Drawing.Point Location
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1245,7 +1261,9 @@ namespace System.Drawing
         public System.Drawing.Size Size
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1256,17 +1274,23 @@ namespace System.Drawing
         public int Width
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int X
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Y
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Drawing.Rectangle Ceiling(System.Drawing.RectangleF value)
@@ -1316,11 +1340,17 @@ namespace System.Drawing
             throw null;
         }
 
-        public void Inflate(System.Drawing.Size size) { }
+        public void Inflate(System.Drawing.Size size)
+        {
+        }
 
-        public void Inflate(int width, int height) { }
+        public void Inflate(int width, int height)
+        {
+        }
 
-        public void Intersect(System.Drawing.Rectangle rect) { }
+        public void Intersect(System.Drawing.Rectangle rect)
+        {
+        }
 
         public static System.Drawing.Rectangle Intersect(
             System.Drawing.Rectangle a,
@@ -1335,9 +1365,13 @@ namespace System.Drawing
             throw null;
         }
 
-        public void Offset(System.Drawing.Point pos) { }
+        public void Offset(System.Drawing.Point pos)
+        {
+        }
 
-        public void Offset(int x, int y) { }
+        public void Offset(int x, int y)
+        {
+        }
 
         public static bool operator ==(
             System.Drawing.Rectangle left,
@@ -1407,7 +1441,9 @@ namespace System.Drawing
         public float Height
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1426,7 +1462,9 @@ namespace System.Drawing
         public System.Drawing.PointF Location
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1439,7 +1477,9 @@ namespace System.Drawing
         public System.Drawing.SizeF Size
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1450,17 +1490,23 @@ namespace System.Drawing
         public float Width
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public float X
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public float Y
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public readonly bool Contains(System.Drawing.PointF pt)
@@ -1514,11 +1560,17 @@ namespace System.Drawing
             throw null;
         }
 
-        public void Inflate(System.Drawing.SizeF size) { }
+        public void Inflate(System.Drawing.SizeF size)
+        {
+        }
 
-        public void Inflate(float x, float y) { }
+        public void Inflate(float x, float y)
+        {
+        }
 
-        public void Intersect(System.Drawing.RectangleF rect) { }
+        public void Intersect(System.Drawing.RectangleF rect)
+        {
+        }
 
         public static System.Drawing.RectangleF Intersect(
             System.Drawing.RectangleF a,
@@ -1533,9 +1585,13 @@ namespace System.Drawing
             throw null;
         }
 
-        public void Offset(System.Drawing.PointF pos) { }
+        public void Offset(System.Drawing.PointF pos)
+        {
+        }
 
-        public void Offset(float x, float y) { }
+        public void Offset(float x, float y)
+        {
+        }
 
         public static explicit operator System.Numerics.Vector4(System.Drawing.RectangleF rectangle)
         {
@@ -1608,7 +1664,9 @@ namespace System.Drawing
         public int Height
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1619,7 +1677,9 @@ namespace System.Drawing
         public int Width
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Drawing.Size Add(System.Drawing.Size sz1, System.Drawing.Size sz2)
@@ -1767,7 +1827,9 @@ namespace System.Drawing
         public float Height
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1778,7 +1840,9 @@ namespace System.Drawing
         public float Width
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Drawing.SizeF Add(System.Drawing.SizeF sz1, System.Drawing.SizeF sz2)

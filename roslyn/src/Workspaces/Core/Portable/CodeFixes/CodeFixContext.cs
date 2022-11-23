@@ -96,7 +96,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 CodeActionOptions.DefaultProvider,
                 isBlocking: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a code fix context to be passed into <see cref="CodeFixProvider.RegisterCodeFixesAsync(CodeFixContext)"/> method.
@@ -125,7 +127,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 CodeActionOptions.DefaultProvider,
                 isBlocking: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal CodeFixContext(
             Document document,

@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteUnusedReferenceAnalysisService(ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         public ValueTask<ImmutableArray<ReferenceInfo>> GetUnusedReferencesAsync(
             Checksum solutionChecksum,

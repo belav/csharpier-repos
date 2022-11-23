@@ -8,7 +8,9 @@ namespace System
 {
     public sealed partial class ApplicationIdentity : System.Runtime.Serialization.ISerializable
     {
-        public ApplicationIdentity(string applicationIdentityFullName) { }
+        public ApplicationIdentity(string applicationIdentityFullName)
+        {
+        }
 
         public string CodeBase
         {
@@ -22,7 +24,9 @@ namespace System
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -44,14 +48,18 @@ namespace System.Configuration
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public ConfigurationPermission(System.Security.Permissions.PermissionState state) { }
+        public ConfigurationPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -95,7 +103,9 @@ namespace System.Configuration
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public ConfigurationPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -117,33 +127,48 @@ namespace System.Data.Common
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        protected DBDataPermission() { }
+        protected DBDataPermission()
+        {
+        }
 
-        protected DBDataPermission(System.Data.Common.DBDataPermission permission) { }
+        protected DBDataPermission(System.Data.Common.DBDataPermission permission)
+        {
+        }
 
         protected DBDataPermission(System.Data.Common.DBDataPermissionAttribute permissionAttribute)
-        { }
+        {
+        }
 
-        protected DBDataPermission(System.Security.Permissions.PermissionState state) { }
+        protected DBDataPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         protected DBDataPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
-        ) { }
+        )
+        {
+        }
 
         public bool AllowBlankPassword
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
-        ) { }
+        )
+        {
+        }
 
-        protected void Clear() { }
+        protected void Clear()
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
@@ -155,7 +180,9 @@ namespace System.Data.Common
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -203,27 +230,37 @@ namespace System.Data.Common
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         protected DBDataPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public bool AllowBlankPassword
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ConnectionString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.KeyRestrictionBehavior KeyRestrictionBehavior
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string KeyRestrictions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -255,20 +292,28 @@ namespace System.Data.Odbc
 #endif
     public sealed partial class OdbcPermission : System.Data.Common.DBDataPermission
     {
-        public OdbcPermission() { }
+        public OdbcPermission()
+        {
+        }
 
-        public OdbcPermission(System.Security.Permissions.PermissionState state) { }
+        public OdbcPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public OdbcPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
-        ) { }
+        )
+        {
+        }
 
         public override void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
@@ -296,7 +341,9 @@ namespace System.Data.Odbc
         : System.Data.Common.DBDataPermissionAttribute
     {
         public OdbcPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -316,14 +363,20 @@ namespace System.Data.OleDb
 #endif
     public sealed partial class OleDbPermission : System.Data.Common.DBDataPermission
     {
-        public OleDbPermission() { }
+        public OleDbPermission()
+        {
+        }
 
-        public OleDbPermission(System.Security.Permissions.PermissionState state) { }
+        public OleDbPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public OleDbPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -332,7 +385,9 @@ namespace System.Data.OleDb
         public string Provider
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -361,7 +416,9 @@ namespace System.Data.OleDb
         : System.Data.Common.DBDataPermissionAttribute
     {
         public OleDbPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -370,7 +427,9 @@ namespace System.Data.OleDb
         public string Provider
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -393,26 +452,34 @@ namespace System.Data.OracleClient
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public OraclePermission(System.Security.Permissions.PermissionState state) { }
+        public OraclePermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public bool AllowBlankPassword
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -460,27 +527,37 @@ namespace System.Data.OracleClient
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public OraclePermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public bool AllowBlankPassword
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ConnectionString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.KeyRestrictionBehavior KeyRestrictionBehavior
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string KeyRestrictions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -517,20 +594,28 @@ namespace System.Data.SqlClient
 #endif
     public sealed partial class SqlClientPermission : System.Data.Common.DBDataPermission
     {
-        public SqlClientPermission() { }
+        public SqlClientPermission()
+        {
+        }
 
-        public SqlClientPermission(System.Security.Permissions.PermissionState state) { }
+        public SqlClientPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public SqlClientPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
-        ) { }
+        )
+        {
+        }
 
         public override void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
@@ -558,7 +643,9 @@ namespace System.Data.SqlClient
         : System.Data.Common.DBDataPermissionAttribute
     {
         public SqlClientPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -579,18 +666,26 @@ namespace System.Diagnostics
     public sealed partial class EventLogPermission
         : System.Security.Permissions.ResourcePermissionBase
     {
-        public EventLogPermission() { }
+        public EventLogPermission()
+        {
+        }
 
         public EventLogPermission(
             System.Diagnostics.EventLogPermissionAccess permissionAccess,
             string machineName
-        ) { }
+        )
+        {
+        }
 
         public EventLogPermission(
             System.Diagnostics.EventLogPermissionEntry[] permissionAccessEntries
-        ) { }
+        )
+        {
+        }
 
-        public EventLogPermission(System.Security.Permissions.PermissionState state) { }
+        public EventLogPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Diagnostics.EventLogPermissionEntryCollection PermissionEntries
         {
@@ -630,17 +725,23 @@ namespace System.Diagnostics
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public EventLogPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string MachineName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.EventLogPermissionAccess PermissionAccess
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -654,7 +755,9 @@ namespace System.Diagnostics
         public EventLogPermissionEntry(
             System.Diagnostics.EventLogPermissionAccess permissionAccess,
             string machineName
-        ) { }
+        )
+        {
+        }
 
         public string MachineName
         {
@@ -668,12 +771,16 @@ namespace System.Diagnostics
 
     public partial class EventLogPermissionEntryCollection : System.Collections.CollectionBase
     {
-        internal EventLogPermissionEntryCollection() { }
+        internal EventLogPermissionEntryCollection()
+        {
+        }
 
         public System.Diagnostics.EventLogPermissionEntry this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Diagnostics.EventLogPermissionEntry value)
@@ -681,33 +788,51 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void AddRange(System.Diagnostics.EventLogPermissionEntryCollection value) { }
+        public void AddRange(System.Diagnostics.EventLogPermissionEntryCollection value)
+        {
+        }
 
-        public void AddRange(System.Diagnostics.EventLogPermissionEntry[] value) { }
+        public void AddRange(System.Diagnostics.EventLogPermissionEntry[] value)
+        {
+        }
 
         public bool Contains(System.Diagnostics.EventLogPermissionEntry value)
         {
             throw null;
         }
 
-        public void CopyTo(System.Diagnostics.EventLogPermissionEntry[] array, int index) { }
+        public void CopyTo(System.Diagnostics.EventLogPermissionEntry[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Diagnostics.EventLogPermissionEntry value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.Diagnostics.EventLogPermissionEntry value) { }
+        public void Insert(int index, System.Diagnostics.EventLogPermissionEntry value)
+        {
+        }
 
-        protected override void OnClear() { }
+        protected override void OnClear()
+        {
+        }
 
-        protected override void OnInsert(int index, object value) { }
+        protected override void OnInsert(int index, object value)
+        {
+        }
 
-        protected override void OnRemove(int index, object value) { }
+        protected override void OnRemove(int index, object value)
+        {
+        }
 
-        protected override void OnSet(int index, object oldValue, object newValue) { }
+        protected override void OnSet(int index, object oldValue, object newValue)
+        {
+        }
 
-        public void Remove(System.Diagnostics.EventLogPermissionEntry value) { }
+        public void Remove(System.Diagnostics.EventLogPermissionEntry value)
+        {
+        }
     }
 
 #if NETCOREAPP
@@ -720,19 +845,27 @@ namespace System.Diagnostics
     public sealed partial class PerformanceCounterPermission
         : System.Security.Permissions.ResourcePermissionBase
     {
-        public PerformanceCounterPermission() { }
+        public PerformanceCounterPermission()
+        {
+        }
 
         public PerformanceCounterPermission(
             System.Diagnostics.PerformanceCounterPermissionAccess permissionAccess,
             string machineName,
             string categoryName
-        ) { }
+        )
+        {
+        }
 
         public PerformanceCounterPermission(
             System.Diagnostics.PerformanceCounterPermissionEntry[] permissionAccessEntries
-        ) { }
+        )
+        {
+        }
 
-        public PerformanceCounterPermission(System.Security.Permissions.PermissionState state) { }
+        public PerformanceCounterPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Diagnostics.PerformanceCounterPermissionEntryCollection PermissionEntries
         {
@@ -773,22 +906,30 @@ namespace System.Diagnostics
     {
         public PerformanceCounterPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string CategoryName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string MachineName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.PerformanceCounterPermissionAccess PermissionAccess
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -803,7 +944,9 @@ namespace System.Diagnostics
             System.Diagnostics.PerformanceCounterPermissionAccess permissionAccess,
             string machineName,
             string categoryName
-        ) { }
+        )
+        {
+        }
 
         public string CategoryName
         {
@@ -822,12 +965,16 @@ namespace System.Diagnostics
     public partial class PerformanceCounterPermissionEntryCollection
         : System.Collections.CollectionBase
     {
-        internal PerformanceCounterPermissionEntryCollection() { }
+        internal PerformanceCounterPermissionEntryCollection()
+        {
+        }
 
         public System.Diagnostics.PerformanceCounterPermissionEntry this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Diagnostics.PerformanceCounterPermissionEntry value)
@@ -835,41 +982,51 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void AddRange(
-            System.Diagnostics.PerformanceCounterPermissionEntryCollection value
-        ) { }
+        public void AddRange(System.Diagnostics.PerformanceCounterPermissionEntryCollection value)
+        {
+        }
 
-        public void AddRange(System.Diagnostics.PerformanceCounterPermissionEntry[] value) { }
+        public void AddRange(System.Diagnostics.PerformanceCounterPermissionEntry[] value)
+        {
+        }
 
         public bool Contains(System.Diagnostics.PerformanceCounterPermissionEntry value)
         {
             throw null;
         }
 
-        public void CopyTo(
-            System.Diagnostics.PerformanceCounterPermissionEntry[] array,
-            int index
-        ) { }
+        public void CopyTo(System.Diagnostics.PerformanceCounterPermissionEntry[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Diagnostics.PerformanceCounterPermissionEntry value)
         {
             throw null;
         }
 
-        public void Insert(
-            int index,
-            System.Diagnostics.PerformanceCounterPermissionEntry value
-        ) { }
+        public void Insert(int index, System.Diagnostics.PerformanceCounterPermissionEntry value)
+        {
+        }
 
-        protected override void OnClear() { }
+        protected override void OnClear()
+        {
+        }
 
-        protected override void OnInsert(int index, object value) { }
+        protected override void OnInsert(int index, object value)
+        {
+        }
 
-        protected override void OnRemove(int index, object value) { }
+        protected override void OnRemove(int index, object value)
+        {
+        }
 
-        protected override void OnSet(int index, object oldValue, object newValue) { }
+        protected override void OnSet(int index, object oldValue, object newValue)
+        {
+        }
 
-        public void Remove(System.Diagnostics.PerformanceCounterPermissionEntry value) { }
+        public void Remove(System.Diagnostics.PerformanceCounterPermissionEntry value)
+        {
+        }
     }
 }
 
@@ -886,14 +1043,20 @@ namespace System.Drawing.Printing
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public PrintingPermission(System.Drawing.Printing.PrintingPermissionLevel printingLevel) { }
+        public PrintingPermission(System.Drawing.Printing.PrintingPermissionLevel printingLevel)
+        {
+        }
 
-        public PrintingPermission(System.Security.Permissions.PermissionState state) { }
+        public PrintingPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Drawing.Printing.PrintingPermissionLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -901,7 +1064,9 @@ namespace System.Drawing.Printing
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement element) { }
+        public override void FromXml(System.Security.SecurityElement element)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -941,12 +1106,16 @@ namespace System.Drawing.Printing
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public PrintingPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Drawing.Printing.PrintingPermissionLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -977,14 +1146,18 @@ namespace System.Net
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public DnsPermission(System.Security.Permissions.PermissionState state) { }
+        public DnsPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -1032,7 +1205,9 @@ namespace System.Net
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public DnsPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -1042,7 +1217,9 @@ namespace System.Net
 
     public partial class EndpointPermission
     {
-        internal EndpointPermission() { }
+        internal EndpointPermission()
+        {
+        }
 
         public string Hostname
         {
@@ -1093,9 +1270,13 @@ namespace System.Net
             System.Net.TransportType transport,
             string hostName,
             int portNumber
-        ) { }
+        )
+        {
+        }
 
-        public SocketPermission(System.Security.Permissions.PermissionState state) { }
+        public SocketPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Collections.IEnumerator AcceptList
         {
@@ -1111,14 +1292,18 @@ namespace System.Net
             System.Net.TransportType transport,
             string hostName,
             int portNumber
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -1166,27 +1351,37 @@ namespace System.Net
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public SocketPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string Access
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Host
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Port
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Transport
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -1215,16 +1410,24 @@ namespace System.Net
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public WebPermission() { }
+        public WebPermission()
+        {
+        }
 
-        public WebPermission(System.Net.NetworkAccess access, string uriString) { }
+        public WebPermission(System.Net.NetworkAccess access, string uriString)
+        {
+        }
 
         public WebPermission(
             System.Net.NetworkAccess access,
             System.Text.RegularExpressions.Regex uriRegex
-        ) { }
+        )
+        {
+        }
 
-        public WebPermission(System.Security.Permissions.PermissionState state) { }
+        public WebPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Collections.IEnumerator AcceptList
         {
@@ -1235,19 +1438,25 @@ namespace System.Net
             get { throw null; }
         }
 
-        public void AddPermission(System.Net.NetworkAccess access, string uriString) { }
+        public void AddPermission(System.Net.NetworkAccess access, string uriString)
+        {
+        }
 
         public void AddPermission(
             System.Net.NetworkAccess access,
             System.Text.RegularExpressions.Regex uriRegex
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -1295,27 +1504,37 @@ namespace System.Net
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public WebPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string Accept
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string AcceptPattern
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Connect
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ConnectPattern
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -1345,25 +1564,35 @@ namespace System.Net.Mail
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public SmtpPermission(bool unrestricted) { }
+        public SmtpPermission(bool unrestricted)
+        {
+        }
 
-        public SmtpPermission(System.Net.Mail.SmtpAccess access) { }
+        public SmtpPermission(System.Net.Mail.SmtpAccess access)
+        {
+        }
 
-        public SmtpPermission(System.Security.Permissions.PermissionState state) { }
+        public SmtpPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Net.Mail.SmtpAccess Access
         {
             get { throw null; }
         }
 
-        public void AddPermission(System.Net.Mail.SmtpAccess access) { }
+        public void AddPermission(System.Net.Mail.SmtpAccess access)
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -1411,12 +1640,16 @@ namespace System.Net.Mail
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public SmtpPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string Access
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -1449,23 +1682,31 @@ namespace System.Net.NetworkInformation
     {
         public NetworkInformationPermission(
             System.Net.NetworkInformation.NetworkInformationAccess access
-        ) { }
+        )
+        {
+        }
 
-        public NetworkInformationPermission(System.Security.Permissions.PermissionState state) { }
+        public NetworkInformationPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Net.NetworkInformation.NetworkInformationAccess Access
         {
             get { throw null; }
         }
 
-        public void AddPermission(System.Net.NetworkInformation.NetworkInformationAccess access) { }
+        public void AddPermission(System.Net.NetworkInformation.NetworkInformationAccess access)
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -1514,12 +1755,16 @@ namespace System.Net.NetworkInformation
     {
         public NetworkInformationPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string Access
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -1542,14 +1787,18 @@ namespace System.Net.PeerToPeer
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public PnrpPermission(System.Security.Permissions.PermissionState state) { }
+        public PnrpPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement e) { }
+        public override void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -1597,7 +1846,9 @@ namespace System.Net.PeerToPeer
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public PnrpPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -1627,14 +1878,18 @@ namespace System.Net.PeerToPeer.Collaboration
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public PeerCollaborationPermission(System.Security.Permissions.PermissionState state) { }
+        public PeerCollaborationPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement e) { }
+        public override void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -1683,7 +1938,9 @@ namespace System.Net.PeerToPeer.Collaboration
     {
         public PeerCollaborationPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -1706,16 +1963,24 @@ namespace System.Security
             System.Security.ISecurityEncodable,
             System.Security.IStackWalk
     {
-        protected CodeAccessPermission() { }
+        protected CodeAccessPermission()
+        {
+        }
 
-        public void Assert() { }
+        public void Assert()
+        {
+        }
 
         public abstract System.Security.IPermission Copy();
 
-        public void Demand() { }
+        public void Demand()
+        {
+        }
 
         [System.ObsoleteAttribute]
-        public void Deny() { }
+        public void Deny()
+        {
+        }
 
         public override bool Equals(object obj)
         {
@@ -1732,16 +1997,26 @@ namespace System.Security
         public abstract System.Security.IPermission Intersect(System.Security.IPermission target);
         public abstract bool IsSubsetOf(System.Security.IPermission target);
 
-        public void PermitOnly() { }
+        public void PermitOnly()
+        {
+        }
 
-        public static void RevertAll() { }
+        public static void RevertAll()
+        {
+        }
 
-        public static void RevertAssert() { }
+        public static void RevertAssert()
+        {
+        }
 
         [System.ObsoleteAttribute]
-        public static void RevertDeny() { }
+        public static void RevertDeny()
+        {
+        }
 
-        public static void RevertPermitOnly() { }
+        public static void RevertPermitOnly()
+        {
+        }
 
         public override string ToString()
         {
@@ -1765,22 +2040,32 @@ namespace System.Security
 #endif
     public partial class HostProtectionException : System.SystemException
     {
-        public HostProtectionException() { }
+        public HostProtectionException()
+        {
+        }
 
         protected HostProtectionException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public HostProtectionException(string message) { }
+        public HostProtectionException(string message)
+        {
+        }
 
-        public HostProtectionException(string message, System.Exception e) { }
+        public HostProtectionException(string message, System.Exception e)
+        {
+        }
 
         public HostProtectionException(
             string message,
             System.Security.Permissions.HostProtectionResource protectedResources,
             System.Security.Permissions.HostProtectionResource demandedResources
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Permissions.HostProtectionResource DemandedResources
         {
@@ -1799,7 +2084,9 @@ namespace System.Security
 
     public partial class HostSecurityManager
     {
-        public HostSecurityManager() { }
+        public HostSecurityManager()
+        {
+        }
 
         public virtual System.Security.Policy.PolicyLevel DomainPolicy
         {
@@ -1912,26 +2199,38 @@ namespace System.Security
     public sealed partial class NamedPermissionSet : System.Security.PermissionSet
     {
         public NamedPermissionSet(System.Security.NamedPermissionSet permSet)
-            : base(default(System.Security.Permissions.PermissionState)) { }
+            : base(default(System.Security.Permissions.PermissionState))
+        {
+        }
 
         public NamedPermissionSet(string name)
-            : base(default(System.Security.Permissions.PermissionState)) { }
+            : base(default(System.Security.Permissions.PermissionState))
+        {
+        }
 
         public NamedPermissionSet(string name, System.Security.Permissions.PermissionState state)
-            : base(default(System.Security.Permissions.PermissionState)) { }
+            : base(default(System.Security.Permissions.PermissionState))
+        {
+        }
 
         public NamedPermissionSet(string name, System.Security.PermissionSet permSet)
-            : base(default(System.Security.Permissions.PermissionState)) { }
+            : base(default(System.Security.Permissions.PermissionState))
+        {
+        }
 
         public string Description
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.PermissionSet Copy()
@@ -1949,7 +2248,9 @@ namespace System.Security
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement et) { }
+        public override void FromXml(System.Security.SecurityElement et)
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -1970,9 +2271,13 @@ namespace System.Security
             System.Security.ISecurityEncodable,
             System.Security.IStackWalk
     {
-        public PermissionSet(System.Security.Permissions.PermissionState state) { }
+        public PermissionSet(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public PermissionSet(System.Security.PermissionSet permSet) { }
+        public PermissionSet(System.Security.PermissionSet permSet)
+        {
+        }
 
         public virtual int Count
         {
@@ -2003,7 +2308,9 @@ namespace System.Security
             throw null;
         }
 
-        public void Assert() { }
+        public void Assert()
+        {
+        }
 
         public bool ContainsNonCodeAccessPermissions()
         {
@@ -2021,19 +2328,27 @@ namespace System.Security
             throw null;
         }
 
-        public virtual void CopyTo(System.Array array, int index) { }
+        public virtual void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void Demand() { }
+        public void Demand()
+        {
+        }
 
         [System.ObsoleteAttribute]
-        public void Deny() { }
+        public void Deny()
+        {
+        }
 
         public override bool Equals(object o)
         {
             throw null;
         }
 
-        public virtual void FromXml(System.Security.SecurityElement et) { }
+        public virtual void FromXml(System.Security.SecurityElement et)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -2080,7 +2395,9 @@ namespace System.Security
             throw null;
         }
 
-        public void PermitOnly() { }
+        public void PermitOnly()
+        {
+        }
 
         public System.Security.IPermission RemovePermission(System.Type permClass)
         {
@@ -2092,7 +2409,9 @@ namespace System.Security
             throw null;
         }
 
-        public static void RevertAssert() { }
+        public static void RevertAssert()
+        {
+        }
 
         public System.Security.IPermission SetPermission(System.Security.IPermission perm)
         {
@@ -2106,9 +2425,9 @@ namespace System.Security
             throw null;
         }
 
-        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
-            object sender
-        ) { }
+        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object sender)
+        {
+        }
 
         public override string ToString()
         {
@@ -2144,7 +2463,9 @@ namespace System.Security
 #endif
     public sealed partial class SecurityContext : System.IDisposable
     {
-        internal SecurityContext() { }
+        internal SecurityContext()
+        {
+        }
 
         public static System.Security.SecurityContext Capture()
         {
@@ -2156,7 +2477,9 @@ namespace System.Security
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public static bool IsFlowSuppressed()
         {
@@ -2168,13 +2491,17 @@ namespace System.Security
             throw null;
         }
 
-        public static void RestoreFlow() { }
+        public static void RestoreFlow()
+        {
+        }
 
         public static void Run(
             System.Security.SecurityContext securityContext,
             System.Threading.ContextCallback callback,
             object state
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.AsyncFlowControl SuppressFlow()
         {
@@ -2206,14 +2533,18 @@ namespace System.Security
         public static bool CheckExecutionRights
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute]
         public static bool SecurityEnabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static bool CurrentThreadRequiresSecurityContextCapture()
@@ -2311,15 +2642,21 @@ namespace System.Security
         }
 
         [System.ObsoleteAttribute]
-        public static void SavePolicy() { }
+        public static void SavePolicy()
+        {
+        }
 
         [System.ObsoleteAttribute]
-        public static void SavePolicyLevel(System.Security.Policy.PolicyLevel level) { }
+        public static void SavePolicyLevel(System.Security.Policy.PolicyLevel level)
+        {
+        }
     }
 
     public abstract partial class SecurityState
     {
-        protected SecurityState() { }
+        protected SecurityState()
+        {
+        }
 
         public abstract void EnsureState();
 
@@ -2341,15 +2678,25 @@ namespace System.Security
 
     public sealed partial class XmlSyntaxException : System.SystemException
     {
-        public XmlSyntaxException() { }
+        public XmlSyntaxException()
+        {
+        }
 
-        public XmlSyntaxException(int lineNumber) { }
+        public XmlSyntaxException(int lineNumber)
+        {
+        }
 
-        public XmlSyntaxException(int lineNumber, string message) { }
+        public XmlSyntaxException(int lineNumber, string message)
+        {
+        }
 
-        public XmlSyntaxException(string message) { }
+        public XmlSyntaxException(string message)
+        {
+        }
 
-        public XmlSyntaxException(string message, System.Exception inner) { }
+        public XmlSyntaxException(string message, System.Exception inner)
+        {
+        }
     }
 }
 
@@ -2368,14 +2715,20 @@ namespace System.Security.Permissions
     {
         public DataProtectionPermission(
             System.Security.Permissions.DataProtectionPermissionFlags flag
-        ) { }
+        )
+        {
+        }
 
-        public DataProtectionPermission(System.Security.Permissions.PermissionState state) { }
+        public DataProtectionPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Security.Permissions.DataProtectionPermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -2383,7 +2736,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -2431,32 +2786,44 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public DataProtectionPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.DataProtectionPermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ProtectData
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ProtectMemory
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UnprotectData
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UnprotectMemory
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -2497,21 +2864,29 @@ namespace System.Security.Permissions
         public EnvironmentPermission(
             System.Security.Permissions.EnvironmentPermissionAccess flag,
             string pathList
-        ) { }
+        )
+        {
+        }
 
-        public EnvironmentPermission(System.Security.Permissions.PermissionState state) { }
+        public EnvironmentPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public void AddPathList(
             System.Security.Permissions.EnvironmentPermissionAccess flag,
             string pathList
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public string GetPathList(System.Security.Permissions.EnvironmentPermissionAccess flag)
         {
@@ -2536,7 +2911,9 @@ namespace System.Security.Permissions
         public void SetPathList(
             System.Security.Permissions.EnvironmentPermissionAccess flag,
             string pathList
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.SecurityElement ToXml()
         {
@@ -2585,22 +2962,30 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public EnvironmentPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string All
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Read
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Write
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -2621,14 +3006,19 @@ namespace System.Security.Permissions
             System.Security.Permissions.IUnrestrictedPermission
     {
         public FileDialogPermission(System.Security.Permissions.FileDialogPermissionAccess access)
-        { }
+        {
+        }
 
-        public FileDialogPermission(System.Security.Permissions.PermissionState state) { }
+        public FileDialogPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Security.Permissions.FileDialogPermissionAccess Access
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -2636,7 +3026,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -2700,17 +3092,23 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public FileDialogPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public bool Open
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Save
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -2734,46 +3132,64 @@ namespace System.Security.Permissions
             System.Security.Permissions.FileIOPermissionAccess access,
             System.Security.AccessControl.AccessControlActions actions,
             string path
-        ) { }
+        )
+        {
+        }
 
         public FileIOPermission(
             System.Security.Permissions.FileIOPermissionAccess access,
             System.Security.AccessControl.AccessControlActions actions,
             string[] pathList
-        ) { }
+        )
+        {
+        }
 
         public FileIOPermission(
             System.Security.Permissions.FileIOPermissionAccess access,
             string path
-        ) { }
+        )
+        {
+        }
 
         public FileIOPermission(
             System.Security.Permissions.FileIOPermissionAccess access,
             string[] pathList
-        ) { }
+        )
+        {
+        }
 
-        public FileIOPermission(System.Security.Permissions.PermissionState state) { }
+        public FileIOPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Security.Permissions.FileIOPermissionAccess AllFiles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.FileIOPermissionAccess AllLocalFiles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public void AddPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string path
-        ) { }
+        )
+        {
+        }
 
         public void AddPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string[] pathList
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
@@ -2785,7 +3201,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -2815,12 +3233,16 @@ namespace System.Security.Permissions
         public void SetPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string path
-        ) { }
+        )
+        {
+        }
 
         public void SetPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string[] pathList
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.SecurityElement ToXml()
         {
@@ -2871,58 +3293,80 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public FileIOPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         [System.ObsoleteAttribute]
         public string All
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.FileIOPermissionAccess AllFiles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.FileIOPermissionAccess AllLocalFiles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Append
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ChangeAccessControl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string PathDiscovery
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Read
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ViewAccessControl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ViewAndModify
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Write
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -2940,16 +3384,22 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class GacIdentityPermission : System.Security.CodeAccessPermission
     {
-        public GacIdentityPermission() { }
+        public GacIdentityPermission()
+        {
+        }
 
-        public GacIdentityPermission(System.Security.Permissions.PermissionState state) { }
+        public GacIdentityPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -2992,7 +3442,9 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public GacIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -3021,60 +3473,83 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public HostProtectionAttribute() : base(default(System.Security.Permissions.SecurityAction))
-        { }
+        {
+        }
 
         public HostProtectionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public bool ExternalProcessMgmt
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ExternalThreading
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool MayLeakOnAbort
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.HostProtectionResource Resources
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SecurityInfrastructure
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SelfAffectingProcessMgmt
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SelfAffectingThreading
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SharedState
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Synchronization
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UI
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -3140,7 +3615,9 @@ namespace System.Security.Permissions
         : System.Security.Permissions.IsolatedStoragePermission
     {
         public IsolatedStorageFilePermission(System.Security.Permissions.PermissionState state)
-            : base(default(System.Security.Permissions.PermissionState)) { }
+            : base(default(System.Security.Permissions.PermissionState))
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
@@ -3189,7 +3666,9 @@ namespace System.Security.Permissions
     {
         public IsolatedStorageFilePermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -3208,20 +3687,28 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        protected IsolatedStoragePermission(System.Security.Permissions.PermissionState state) { }
+        protected IsolatedStoragePermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Security.Permissions.IsolatedStorageContainment UsageAllowed
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long UserQuota
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public bool IsUnrestricted()
         {
@@ -3246,17 +3733,23 @@ namespace System.Security.Permissions
     {
         protected IsolatedStoragePermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.IsolatedStorageContainment UsageAllowed
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long UserQuota
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -3284,14 +3777,19 @@ namespace System.Security.Permissions
             System.Security.Permissions.IUnrestrictedPermission
     {
         public KeyContainerPermission(System.Security.Permissions.KeyContainerPermissionFlags flags)
-        { }
+        {
+        }
 
         public KeyContainerPermission(
             System.Security.Permissions.KeyContainerPermissionFlags flags,
             System.Security.Permissions.KeyContainerPermissionAccessEntry[] accessList
-        ) { }
+        )
+        {
+        }
 
-        public KeyContainerPermission(System.Security.Permissions.PermissionState state) { }
+        public KeyContainerPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Security.Permissions.KeyContainerPermissionAccessEntryCollection AccessEntries
         {
@@ -3307,7 +3805,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -3347,12 +3847,16 @@ namespace System.Security.Permissions
         public KeyContainerPermissionAccessEntry(
             System.Security.Cryptography.CspParameters parameters,
             System.Security.Permissions.KeyContainerPermissionFlags flags
-        ) { }
+        )
+        {
+        }
 
         public KeyContainerPermissionAccessEntry(
             string keyContainerName,
             System.Security.Permissions.KeyContainerPermissionFlags flags
-        ) { }
+        )
+        {
+        }
 
         public KeyContainerPermissionAccessEntry(
             string keyStore,
@@ -3361,37 +3865,51 @@ namespace System.Security.Permissions
             string keyContainerName,
             int keySpec,
             System.Security.Permissions.KeyContainerPermissionFlags flags
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Permissions.KeyContainerPermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string KeyContainerName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int KeySpec
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string KeyStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ProviderName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ProviderType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals(object o)
@@ -3416,7 +3934,9 @@ namespace System.Security.Permissions
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        public KeyContainerPermissionAccessEntryCollection() { }
+        public KeyContainerPermissionAccessEntryCollection()
+        {
+        }
 
         public int Count
         {
@@ -3440,14 +3960,20 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public void CopyTo(
             System.Security.Permissions.KeyContainerPermissionAccessEntry[] array,
             int index
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator GetEnumerator()
         {
@@ -3463,7 +3989,9 @@ namespace System.Security.Permissions
 
         public void Remove(
             System.Security.Permissions.KeyContainerPermissionAccessEntry accessEntry
-        ) { }
+        )
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -3481,7 +4009,9 @@ namespace System.Security.Permissions
     public sealed partial class KeyContainerPermissionAccessEntryEnumerator
         : System.Collections.IEnumerator
     {
-        public KeyContainerPermissionAccessEntryEnumerator() { }
+        public KeyContainerPermissionAccessEntryEnumerator()
+        {
+        }
 
         public System.Security.Permissions.KeyContainerPermissionAccessEntry Current
         {
@@ -3497,7 +4027,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
 #if NETCOREAPP
@@ -3520,37 +4052,51 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public KeyContainerPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.KeyContainerPermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string KeyContainerName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int KeySpec
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string KeyStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ProviderName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ProviderType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -3592,21 +4138,33 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public MediaPermission() { }
+        public MediaPermission()
+        {
+        }
 
-        public MediaPermission(System.Security.Permissions.MediaPermissionAudio permissionAudio) { }
+        public MediaPermission(System.Security.Permissions.MediaPermissionAudio permissionAudio)
+        {
+        }
 
         public MediaPermission(
             System.Security.Permissions.MediaPermissionAudio permissionAudio,
             System.Security.Permissions.MediaPermissionVideo permissionVideo,
             System.Security.Permissions.MediaPermissionImage permissionImage
-        ) { }
+        )
+        {
+        }
 
-        public MediaPermission(System.Security.Permissions.MediaPermissionImage permissionImage) { }
+        public MediaPermission(System.Security.Permissions.MediaPermissionImage permissionImage)
+        {
+        }
 
-        public MediaPermission(System.Security.Permissions.MediaPermissionVideo permissionVideo) { }
+        public MediaPermission(System.Security.Permissions.MediaPermissionVideo permissionVideo)
+        {
+        }
 
-        public MediaPermission(System.Security.Permissions.PermissionState state) { }
+        public MediaPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Security.Permissions.MediaPermissionAudio Audio
         {
@@ -3626,7 +4184,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -3674,22 +4234,30 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public MediaPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.MediaPermissionAudio Audio
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.MediaPermissionImage Image
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.MediaPermissionVideo Video
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -3763,32 +4331,44 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public PermissionSetAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string File
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Hex
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UnicodeEncoded
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string XML
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -3821,25 +4401,35 @@ namespace System.Security.Permissions
             System.Security.ISecurityEncodable,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public PrincipalPermission(System.Security.Permissions.PermissionState state) { }
+        public PrincipalPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public PrincipalPermission(string name, string role) { }
+        public PrincipalPermission(string name, string role)
+        {
+        }
 
-        public PrincipalPermission(string name, string role, bool isAuthenticated) { }
+        public PrincipalPermission(string name, string role, bool isAuthenticated)
+        {
+        }
 
         public System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public void Demand() { }
+        public void Demand()
+        {
+        }
 
         public override bool Equals(object obj)
         {
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement elem) { }
+        public void FromXml(System.Security.SecurityElement elem)
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -3901,22 +4491,30 @@ namespace System.Security.Permissions
         )]
 #endif
         public PrincipalPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public bool Authenticated
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Role
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -3936,14 +4534,20 @@ namespace System.Security.Permissions
     {
         public PublisherIdentityPermission(
             System.Security.Cryptography.X509Certificates.X509Certificate certificate
-        ) { }
+        )
+        {
+        }
 
-        public PublisherIdentityPermission(System.Security.Permissions.PermissionState state) { }
+        public PublisherIdentityPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Certificate Certificate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -3951,7 +4555,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -3995,22 +4601,30 @@ namespace System.Security.Permissions
     {
         public PublisherIdentityPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string CertFile
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SignedFile
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string X509Certificate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -4030,14 +4644,20 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public ReflectionPermission(System.Security.Permissions.PermissionState state) { }
+        public ReflectionPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public ReflectionPermission(System.Security.Permissions.ReflectionPermissionFlag flag) { }
+        public ReflectionPermission(System.Security.Permissions.ReflectionPermissionFlag flag)
+        {
+        }
 
         public System.Security.Permissions.ReflectionPermissionFlag Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -4045,7 +4665,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -4093,17 +4715,23 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public ReflectionPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.ReflectionPermissionFlag Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool MemberAccess
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -4112,12 +4740,16 @@ namespace System.Security.Permissions
         public bool ReflectionEmit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RestrictedMemberAccess
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -4126,7 +4758,9 @@ namespace System.Security.Permissions
         public bool TypeInformation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -4176,36 +4810,48 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public RegistryPermission(System.Security.Permissions.PermissionState state) { }
+        public RegistryPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public RegistryPermission(
             System.Security.Permissions.RegistryPermissionAccess access,
             System.Security.AccessControl.AccessControlActions control,
             string pathList
-        ) { }
+        )
+        {
+        }
 
         public RegistryPermission(
             System.Security.Permissions.RegistryPermissionAccess access,
             string pathList
-        ) { }
+        )
+        {
+        }
 
         public void AddPathList(
             System.Security.Permissions.RegistryPermissionAccess access,
             System.Security.AccessControl.AccessControlActions actions,
             string pathList
-        ) { }
+        )
+        {
+        }
 
         public void AddPathList(
             System.Security.Permissions.RegistryPermissionAccess access,
             string pathList
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement elem) { }
+        public override void FromXml(System.Security.SecurityElement elem)
+        {
+        }
 
         public string GetPathList(System.Security.Permissions.RegistryPermissionAccess access)
         {
@@ -4230,7 +4876,9 @@ namespace System.Security.Permissions
         public void SetPathList(
             System.Security.Permissions.RegistryPermissionAccess access,
             string pathList
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.SecurityElement ToXml()
         {
@@ -4280,7 +4928,9 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public RegistryPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         [System.ObsoleteAttribute(
             "RegistryPermissionAttribute.Add has been deprecated. Use ViewAndModify instead."
@@ -4288,37 +4938,51 @@ namespace System.Security.Permissions
         public string All
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ChangeAccessControl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Create
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Read
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ViewAccessControl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ViewAndModify
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Write
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -4341,33 +5005,47 @@ namespace System.Security.Permissions
         public const string Any = "*";
         public const string Local = ".";
 
-        protected ResourcePermissionBase() { }
+        protected ResourcePermissionBase()
+        {
+        }
 
-        protected ResourcePermissionBase(System.Security.Permissions.PermissionState state) { }
+        protected ResourcePermissionBase(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         protected System.Type PermissionAccessType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected string[] TagNames
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         protected void AddPermissionAccess(
             System.Security.Permissions.ResourcePermissionBaseEntry entry
-        ) { }
+        )
+        {
+        }
 
-        protected void Clear() { }
+        protected void Clear()
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         protected System.Security.Permissions.ResourcePermissionBaseEntry[] GetPermissionEntries()
         {
@@ -4391,7 +5069,9 @@ namespace System.Security.Permissions
 
         protected void RemovePermissionAccess(
             System.Security.Permissions.ResourcePermissionBaseEntry entry
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.SecurityElement ToXml()
         {
@@ -4413,9 +5093,13 @@ namespace System.Security.Permissions
 #endif
     public partial class ResourcePermissionBaseEntry
     {
-        public ResourcePermissionBaseEntry() { }
+        public ResourcePermissionBaseEntry()
+        {
+        }
 
-        public ResourcePermissionBaseEntry(int permissionAccess, string[] permissionAccessPath) { }
+        public ResourcePermissionBaseEntry(int permissionAccess, string[] permissionAccessPath)
+        {
+        }
 
         public int PermissionAccess
         {
@@ -4438,14 +5122,20 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public SecurityPermission(System.Security.Permissions.PermissionState state) { }
+        public SecurityPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public SecurityPermission(System.Security.Permissions.SecurityPermissionFlag flag) { }
+        public SecurityPermission(System.Security.Permissions.SecurityPermissionFlag flag)
+        {
+        }
 
         public System.Security.Permissions.SecurityPermissionFlag Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -4453,7 +5143,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -4490,14 +5182,20 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class SiteIdentityPermission : System.Security.CodeAccessPermission
     {
-        public SiteIdentityPermission(System.Security.Permissions.PermissionState state) { }
+        public SiteIdentityPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public SiteIdentityPermission(string site) { }
+        public SiteIdentityPermission(string site)
+        {
+        }
 
         public string Site
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -4505,7 +5203,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -4548,12 +5248,16 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public SiteIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string Site
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -4573,14 +5277,20 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public StorePermission(System.Security.Permissions.PermissionState state) { }
+        public StorePermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public StorePermission(System.Security.Permissions.StorePermissionFlags flag) { }
+        public StorePermission(System.Security.Permissions.StorePermissionFlags flag)
+        {
+        }
 
         public System.Security.Permissions.StorePermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -4588,7 +5298,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -4636,47 +5348,65 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public StorePermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public bool AddToStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool CreateStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool DeleteStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnumerateCertificates
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnumerateStores
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.StorePermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool OpenStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RemoveFromStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -4715,28 +5445,38 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class StrongNameIdentityPermission : System.Security.CodeAccessPermission
     {
-        public StrongNameIdentityPermission(System.Security.Permissions.PermissionState state) { }
+        public StrongNameIdentityPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public StrongNameIdentityPermission(
             System.Security.Permissions.StrongNamePublicKeyBlob blob,
             string name,
             System.Version version
-        ) { }
+        )
+        {
+        }
 
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.StrongNamePublicKeyBlob PublicKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Version Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -4744,7 +5484,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement e) { }
+        public override void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -4788,22 +5530,30 @@ namespace System.Security.Permissions
     {
         public StrongNameIdentityPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string PublicKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -4821,7 +5571,9 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class StrongNamePublicKeyBlob
     {
-        public StrongNamePublicKeyBlob(byte[] publicKey) { }
+        public StrongNamePublicKeyBlob(byte[] publicKey)
+        {
+        }
 
         public override bool Equals(object o)
         {
@@ -4850,16 +5602,22 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public TypeDescriptorPermission(System.Security.Permissions.PermissionState state) { }
+        public TypeDescriptorPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public TypeDescriptorPermission(
             System.Security.Permissions.TypeDescriptorPermissionFlags flag
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Permissions.TypeDescriptorPermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -4867,7 +5625,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -4915,17 +5675,23 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public TypeDescriptorPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.TypeDescriptorPermissionFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RestrictedRegistrationAccess
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -4959,26 +5725,38 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public UIPermission(System.Security.Permissions.PermissionState state) { }
+        public UIPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public UIPermission(System.Security.Permissions.UIPermissionClipboard clipboardFlag) { }
+        public UIPermission(System.Security.Permissions.UIPermissionClipboard clipboardFlag)
+        {
+        }
 
-        public UIPermission(System.Security.Permissions.UIPermissionWindow windowFlag) { }
+        public UIPermission(System.Security.Permissions.UIPermissionWindow windowFlag)
+        {
+        }
 
         public UIPermission(
             System.Security.Permissions.UIPermissionWindow windowFlag,
             System.Security.Permissions.UIPermissionClipboard clipboardFlag
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Permissions.UIPermissionClipboard Clipboard
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.UIPermissionWindow Window
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -4986,7 +5764,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -5034,17 +5814,23 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public UIPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.UIPermissionClipboard Clipboard
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.UIPermissionWindow Window
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -5091,14 +5877,20 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class UrlIdentityPermission : System.Security.CodeAccessPermission
     {
-        public UrlIdentityPermission(System.Security.Permissions.PermissionState state) { }
+        public UrlIdentityPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public UrlIdentityPermission(string site) { }
+        public UrlIdentityPermission(string site)
+        {
+        }
 
         public string Url
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -5106,7 +5898,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -5149,12 +5943,16 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public UrlIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string Url
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -5174,18 +5972,26 @@ namespace System.Security.Permissions
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public WebBrowserPermission() { }
+        public WebBrowserPermission()
+        {
+        }
 
-        public WebBrowserPermission(System.Security.Permissions.PermissionState state) { }
+        public WebBrowserPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public WebBrowserPermission(
             System.Security.Permissions.WebBrowserPermissionLevel webBrowserPermissionLevel
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Permissions.WebBrowserPermissionLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -5193,7 +5999,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -5241,12 +6049,16 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public WebBrowserPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.Permissions.WebBrowserPermissionLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -5278,14 +6090,20 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class ZoneIdentityPermission : System.Security.CodeAccessPermission
     {
-        public ZoneIdentityPermission(System.Security.Permissions.PermissionState state) { }
+        public ZoneIdentityPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public ZoneIdentityPermission(System.Security.SecurityZone zone) { }
+        public ZoneIdentityPermission(System.Security.SecurityZone zone)
+        {
+        }
 
         public System.Security.SecurityZone SecurityZone
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -5293,7 +6111,9 @@ namespace System.Security.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement esd) { }
+        public override void FromXml(System.Security.SecurityElement esd)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -5336,12 +6156,16 @@ namespace System.Security.Permissions
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public ZoneIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Security.SecurityZone Zone
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -5358,7 +6182,9 @@ namespace System.Security.Policy
             System.Security.ISecurityPolicyEncodable,
             System.Security.Policy.IMembershipCondition
     {
-        public AllMembershipCondition() { }
+        public AllMembershipCondition()
+        {
+        }
 
         public bool Check(System.Security.Policy.Evidence evidence)
         {
@@ -5375,12 +6201,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -5405,7 +6235,9 @@ namespace System.Security.Policy
 
     public sealed partial class ApplicationDirectory : System.Security.Policy.EvidenceBase
     {
-        public ApplicationDirectory(string name) { }
+        public ApplicationDirectory(string name)
+        {
+        }
 
         public string Directory
         {
@@ -5438,7 +6270,9 @@ namespace System.Security.Policy
             System.Security.ISecurityPolicyEncodable,
             System.Security.Policy.IMembershipCondition
     {
-        public ApplicationDirectoryMembershipCondition() { }
+        public ApplicationDirectoryMembershipCondition()
+        {
+        }
 
         public bool Check(System.Security.Policy.Evidence evidence)
         {
@@ -5455,12 +6289,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -5487,9 +6325,13 @@ namespace System.Security.Policy
         : System.Security.Policy.EvidenceBase,
             System.Security.ISecurityEncodable
     {
-        public ApplicationTrust() { }
+        public ApplicationTrust()
+        {
+        }
 
-        public ApplicationTrust(System.ApplicationIdentity identity) { }
+        public ApplicationTrust(System.ApplicationIdentity identity)
+        {
+        }
 
 #if NETCOREAPP
         [System.ObsoleteAttribute(
@@ -5501,22 +6343,30 @@ namespace System.Security.Policy
         public ApplicationTrust(
             System.Security.PermissionSet defaultGrantSet,
             System.Collections.Generic.IEnumerable<System.Security.Policy.StrongName> fullTrustAssemblies
-        ) { }
+        )
+        {
+        }
 
         public System.ApplicationIdentity ApplicationIdentity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Policy.PolicyStatement DefaultGrantSet
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object ExtraInfo
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
 #if NETCOREAPP
@@ -5533,15 +6383,21 @@ namespace System.Security.Policy
         public bool IsApplicationTrustedToRun
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Persist
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void FromXml(System.Security.SecurityElement element) { }
+        public void FromXml(System.Security.SecurityElement element)
+        {
+        }
 
         public System.Security.SecurityElement ToXml()
         {
@@ -5553,7 +6409,9 @@ namespace System.Security.Policy
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal ApplicationTrustCollection() { }
+        internal ApplicationTrustCollection()
+        {
+        }
 
         public int Count
         {
@@ -5581,13 +6439,21 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void AddRange(System.Security.Policy.ApplicationTrustCollection trusts) { }
+        public void AddRange(System.Security.Policy.ApplicationTrustCollection trusts)
+        {
+        }
 
-        public void AddRange(System.Security.Policy.ApplicationTrust[] trusts) { }
+        public void AddRange(System.Security.Policy.ApplicationTrust[] trusts)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
-        public void CopyTo(System.Security.Policy.ApplicationTrust[] array, int index) { }
+        public void CopyTo(System.Security.Policy.ApplicationTrust[] array, int index)
+        {
+        }
 
         public System.Security.Policy.ApplicationTrustCollection Find(
             System.ApplicationIdentity applicationIdentity,
@@ -5605,15 +6471,25 @@ namespace System.Security.Policy
         public void Remove(
             System.ApplicationIdentity applicationIdentity,
             System.Security.Policy.ApplicationVersionMatch versionMatch
-        ) { }
+        )
+        {
+        }
 
-        public void Remove(System.Security.Policy.ApplicationTrust trust) { }
+        public void Remove(System.Security.Policy.ApplicationTrust trust)
+        {
+        }
 
-        public void RemoveRange(System.Security.Policy.ApplicationTrustCollection trusts) { }
+        public void RemoveRange(System.Security.Policy.ApplicationTrustCollection trusts)
+        {
+        }
 
-        public void RemoveRange(System.Security.Policy.ApplicationTrust[] trusts) { }
+        public void RemoveRange(System.Security.Policy.ApplicationTrust[] trusts)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -5623,7 +6499,9 @@ namespace System.Security.Policy
 
     public sealed partial class ApplicationTrustEnumerator : System.Collections.IEnumerator
     {
-        internal ApplicationTrustEnumerator() { }
+        internal ApplicationTrustEnumerator()
+        {
+        }
 
         public System.Security.Policy.ApplicationTrust Current
         {
@@ -5639,7 +6517,9 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     public enum ApplicationVersionMatch
@@ -5655,7 +6535,9 @@ namespace System.Security.Policy
         public static readonly int OriginPort;
         public static readonly string OriginScheme;
 
-        public CodeConnectAccess(string allowScheme, int allowPort) { }
+        public CodeConnectAccess(string allowScheme, int allowPort)
+        {
+        }
 
         public int Port
         {
@@ -5694,7 +6576,9 @@ namespace System.Security.Policy
         protected CodeGroup(
             System.Security.Policy.IMembershipCondition membershipCondition,
             System.Security.Policy.PolicyStatement policy
-        ) { }
+        )
+        {
+        }
 
         public virtual string AttributeString
         {
@@ -5703,23 +6587,31 @@ namespace System.Security.Policy
         public System.Collections.IList Children
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Description
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Policy.IMembershipCondition MembershipCondition
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract string MergeLogic { get; }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string PermissionSetName
         {
@@ -5728,17 +6620,23 @@ namespace System.Security.Policy
         public System.Security.Policy.PolicyStatement PolicyStatement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddChild(System.Security.Policy.CodeGroup group) { }
+        public void AddChild(System.Security.Policy.CodeGroup group)
+        {
+        }
 
         public abstract System.Security.Policy.CodeGroup Copy();
 
         protected virtual void CreateXml(
             System.Security.SecurityElement element,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override bool Equals(object o)
         {
@@ -5750,12 +6648,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -5765,9 +6667,13 @@ namespace System.Security.Policy
         protected virtual void ParseXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
-        public void RemoveChild(System.Security.Policy.CodeGroup group) { }
+        public void RemoveChild(System.Security.Policy.CodeGroup group)
+        {
+        }
 
         public abstract System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
@@ -5803,7 +6709,9 @@ namespace System.Security.Policy
             : base(
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
-            ) { }
+            )
+        {
+        }
 
         public override string AttributeString
         {
@@ -5826,7 +6734,9 @@ namespace System.Security.Policy
         protected override void CreateXml(
             System.Security.SecurityElement element,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override bool Equals(object o)
         {
@@ -5841,7 +6751,9 @@ namespace System.Security.Policy
         protected override void ParseXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
@@ -5870,7 +6782,9 @@ namespace System.Security.Policy
             : base(
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
-            ) { }
+            )
+        {
+        }
 
         public override string MergeLogic
         {
@@ -5908,7 +6822,9 @@ namespace System.Security.Policy
         : System.Security.Policy.EvidenceBase,
             System.Security.Policy.IIdentityPermissionFactory
     {
-        public GacInstalled() { }
+        public GacInstalled()
+        {
+        }
 
         public object Copy()
         {
@@ -5943,7 +6859,9 @@ namespace System.Security.Policy
             System.Security.ISecurityPolicyEncodable,
             System.Security.Policy.IMembershipCondition
     {
-        public GacMembershipCondition() { }
+        public GacMembershipCondition()
+        {
+        }
 
         public bool Check(System.Security.Policy.Evidence evidence)
         {
@@ -5960,12 +6878,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -5992,7 +6914,9 @@ namespace System.Security.Policy
         : System.Security.Policy.EvidenceBase,
             System.Runtime.Serialization.ISerializable
     {
-        public Hash(System.Reflection.Assembly assembly) { }
+        public Hash(System.Reflection.Assembly assembly)
+        {
+        }
 
         public byte[] MD5
         {
@@ -6030,7 +6954,9 @@ namespace System.Security.Policy
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -6048,17 +6974,23 @@ namespace System.Security.Policy
         public HashMembershipCondition(
             System.Security.Cryptography.HashAlgorithm hashAlg,
             byte[] value
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.HashAlgorithm HashAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] HashValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool Check(System.Security.Policy.Evidence evidence)
@@ -6076,26 +7008,32 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
             throw null;
         }
 
-        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
-            object sender
-        ) { }
+        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object sender)
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -6146,7 +7084,9 @@ namespace System.Security.Policy
             : base(
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
-            ) { }
+            )
+        {
+        }
 
         public override string AttributeString
         {
@@ -6164,7 +7104,9 @@ namespace System.Security.Policy
         public void AddConnectAccess(
             string originScheme,
             System.Security.Policy.CodeConnectAccess connectAccess
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.Policy.CodeGroup Copy()
         {
@@ -6174,7 +7116,9 @@ namespace System.Security.Policy
         protected override void CreateXml(
             System.Security.SecurityElement element,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override bool Equals(object o)
         {
@@ -6194,9 +7138,13 @@ namespace System.Security.Policy
         protected override void ParseXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
-        public void ResetConnectAccess() { }
+        public void ResetConnectAccess()
+        {
+        }
 
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
@@ -6222,7 +7170,9 @@ namespace System.Security.Policy
             System.Security.PermissionSet request,
             System.Security.PermissionSet optional,
             System.Security.PermissionSet denied
-        ) { }
+        )
+        {
+        }
 
         public System.Security.PermissionSet DeniedPermissions
         {
@@ -6250,21 +7200,31 @@ namespace System.Security.Policy
 
     public partial class PolicyException : System.SystemException
     {
-        public PolicyException() { }
+        public PolicyException()
+        {
+        }
 
         protected PolicyException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public PolicyException(string message) { }
+        public PolicyException(string message)
+        {
+        }
 
-        public PolicyException(string message, System.Exception exception) { }
+        public PolicyException(string message, System.Exception exception)
+        {
+        }
     }
 
     public sealed partial class PolicyLevel
     {
-        internal PolicyLevel() { }
+        internal PolicyLevel()
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
@@ -6284,7 +7244,9 @@ namespace System.Security.Policy
         public System.Security.Policy.CodeGroup RootCodeGroup
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string StoreLocation
         {
@@ -6298,14 +7260,16 @@ namespace System.Security.Policy
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
-        public void AddFullTrustAssembly(System.Security.Policy.StrongName sn) { }
+        public void AddFullTrustAssembly(System.Security.Policy.StrongName sn)
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
-        public void AddFullTrustAssembly(
-            System.Security.Policy.StrongNameMembershipCondition snMC
-        ) { }
+        public void AddFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition snMC)
+        {
+        }
 
 #if NETCOREAPP
         [System.ObsoleteAttribute(
@@ -6314,7 +7278,9 @@ namespace System.Security.Policy
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
 #endif
-        public void AddNamedPermissionSet(System.Security.NamedPermissionSet permSet) { }
+        public void AddNamedPermissionSet(System.Security.NamedPermissionSet permSet)
+        {
+        }
 
 #if NETCOREAPP
         [System.ObsoleteAttribute(
@@ -6339,7 +7305,9 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
 #if NETCOREAPP
         [System.ObsoleteAttribute(
@@ -6353,19 +7321,25 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void Recover() { }
+        public void Recover()
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
-        public void RemoveFullTrustAssembly(System.Security.Policy.StrongName sn) { }
+        public void RemoveFullTrustAssembly(System.Security.Policy.StrongName sn)
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
         public void RemoveFullTrustAssembly(
             System.Security.Policy.StrongNameMembershipCondition snMC
-        ) { }
+        )
+        {
+        }
 
 #if NETCOREAPP
         [System.ObsoleteAttribute(
@@ -6393,7 +7367,9 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         public System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
@@ -6426,7 +7402,9 @@ namespace System.Security.Policy
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
 #endif
-        public PolicyStatement(System.Security.PermissionSet permSet) { }
+        public PolicyStatement(System.Security.PermissionSet permSet)
+        {
+        }
 
 #if NETCOREAPP
         [System.ObsoleteAttribute(
@@ -6438,12 +7416,16 @@ namespace System.Security.Policy
         public PolicyStatement(
             System.Security.PermissionSet permSet,
             System.Security.Policy.PolicyStatementAttribute attributes
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Policy.PolicyStatementAttribute Attributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string AttributeString
         {
@@ -6460,7 +7442,9 @@ namespace System.Security.Policy
         public System.Security.PermissionSet PermissionSet
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Security.Policy.PolicyStatement Copy()
@@ -6473,12 +7457,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement et) { }
+        public void FromXml(System.Security.SecurityElement et)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement et,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -6516,7 +7504,9 @@ namespace System.Security.Policy
         : System.Security.Policy.EvidenceBase,
             System.Security.Policy.IIdentityPermissionFactory
     {
-        public Publisher(System.Security.Cryptography.X509Certificates.X509Certificate cert) { }
+        public Publisher(System.Security.Cryptography.X509Certificates.X509Certificate cert)
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Certificate Certificate
         {
@@ -6558,12 +7548,16 @@ namespace System.Security.Policy
     {
         public PublisherMembershipCondition(
             System.Security.Cryptography.X509Certificates.X509Certificate certificate
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Certificate Certificate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool Check(System.Security.Policy.Evidence evidence)
@@ -6581,12 +7575,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -6620,7 +7618,9 @@ namespace System.Security.Policy
         : System.Security.Policy.EvidenceBase,
             System.Security.Policy.IIdentityPermissionFactory
     {
-        public Site(string name) { }
+        public Site(string name)
+        {
+        }
 
         public string Name
         {
@@ -6665,12 +7665,16 @@ namespace System.Security.Policy
             System.Security.ISecurityPolicyEncodable,
             System.Security.Policy.IMembershipCondition
     {
-        public SiteMembershipCondition(string site) { }
+        public SiteMembershipCondition(string site)
+        {
+        }
 
         public string Site
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool Check(System.Security.Policy.Evidence evidence)
@@ -6688,12 +7692,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -6731,7 +7739,9 @@ namespace System.Security.Policy
             System.Security.Permissions.StrongNamePublicKeyBlob blob,
             string name,
             System.Version version
-        ) { }
+        )
+        {
+        }
 
         public string Name
         {
@@ -6790,22 +7800,30 @@ namespace System.Security.Policy
             System.Security.Permissions.StrongNamePublicKeyBlob blob,
             string name,
             System.Version version
-        ) { }
+        )
+        {
+        }
 
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Permissions.StrongNamePublicKeyBlob PublicKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Version Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool Check(System.Security.Policy.Evidence evidence)
@@ -6823,12 +7841,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -6853,39 +7875,55 @@ namespace System.Security.Policy
 
     public partial class TrustManagerContext
     {
-        public TrustManagerContext() { }
+        public TrustManagerContext()
+        {
+        }
 
-        public TrustManagerContext(System.Security.Policy.TrustManagerUIContext uiContext) { }
+        public TrustManagerContext(System.Security.Policy.TrustManagerUIContext uiContext)
+        {
+        }
 
         public virtual bool IgnorePersistedDecision
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool KeepAlive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool NoPrompt
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool Persist
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.ApplicationIdentity PreviousApplicationIdentity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Policy.TrustManagerUIContext UIContext
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -6908,7 +7946,9 @@ namespace System.Security.Policy
             : base(
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
-            ) { }
+            )
+        {
+        }
 
         public override string MergeLogic
         {
@@ -6946,7 +7986,9 @@ namespace System.Security.Policy
         : System.Security.Policy.EvidenceBase,
             System.Security.Policy.IIdentityPermissionFactory
     {
-        public Url(string name) { }
+        public Url(string name)
+        {
+        }
 
         public string Value
         {
@@ -6986,12 +8028,16 @@ namespace System.Security.Policy
             System.Security.ISecurityPolicyEncodable,
             System.Security.Policy.IMembershipCondition
     {
-        public UrlMembershipCondition(string url) { }
+        public UrlMembershipCondition(string url)
+        {
+        }
 
         public string Url
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool Check(System.Security.Policy.Evidence evidence)
@@ -7009,12 +8055,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -7048,7 +8098,9 @@ namespace System.Security.Policy
         : System.Security.Policy.EvidenceBase,
             System.Security.Policy.IIdentityPermissionFactory
     {
-        public Zone(System.Security.SecurityZone zone) { }
+        public Zone(System.Security.SecurityZone zone)
+        {
+        }
 
         public System.Security.SecurityZone SecurityZone
         {
@@ -7093,12 +8145,16 @@ namespace System.Security.Policy
             System.Security.ISecurityPolicyEncodable,
             System.Security.Policy.IMembershipCondition
     {
-        public ZoneMembershipCondition(System.Security.SecurityZone zone) { }
+        public ZoneMembershipCondition(System.Security.SecurityZone zone)
+        {
+        }
 
         public System.Security.SecurityZone SecurityZone
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool Check(System.Security.Policy.Evidence evidence)
@@ -7116,12 +8172,16 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void FromXml(System.Security.SecurityElement e) { }
+        public void FromXml(System.Security.SecurityElement e)
+        {
+        }
 
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
-        ) { }
+        )
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -7157,19 +8217,27 @@ namespace System.ServiceProcess
     public sealed partial class ServiceControllerPermission
         : System.Security.Permissions.ResourcePermissionBase
     {
-        public ServiceControllerPermission() { }
+        public ServiceControllerPermission()
+        {
+        }
 
-        public ServiceControllerPermission(System.Security.Permissions.PermissionState state) { }
+        public ServiceControllerPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
         public ServiceControllerPermission(
             System.ServiceProcess.ServiceControllerPermissionAccess permissionAccess,
             string machineName,
             string serviceName
-        ) { }
+        )
+        {
+        }
 
         public ServiceControllerPermission(
             System.ServiceProcess.ServiceControllerPermissionEntry[] permissionAccessEntries
-        ) { }
+        )
+        {
+        }
 
         public System.ServiceProcess.ServiceControllerPermissionEntryCollection PermissionEntries
         {
@@ -7207,22 +8275,30 @@ namespace System.ServiceProcess
     {
         public ServiceControllerPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public string MachineName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.ServiceProcess.ServiceControllerPermissionAccess PermissionAccess
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ServiceName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -7233,13 +8309,17 @@ namespace System.ServiceProcess
 
     public partial class ServiceControllerPermissionEntry
     {
-        public ServiceControllerPermissionEntry() { }
+        public ServiceControllerPermissionEntry()
+        {
+        }
 
         public ServiceControllerPermissionEntry(
             System.ServiceProcess.ServiceControllerPermissionAccess permissionAccess,
             string machineName,
             string serviceName
-        ) { }
+        )
+        {
+        }
 
         public string MachineName
         {
@@ -7258,12 +8338,16 @@ namespace System.ServiceProcess
     public sealed partial class ServiceControllerPermissionEntryCollection
         : System.Collections.CollectionBase
     {
-        internal ServiceControllerPermissionEntryCollection() { }
+        internal ServiceControllerPermissionEntryCollection()
+        {
+        }
 
         public System.ServiceProcess.ServiceControllerPermissionEntry this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.ServiceProcess.ServiceControllerPermissionEntry value)
@@ -7271,11 +8355,13 @@ namespace System.ServiceProcess
             throw null;
         }
 
-        public void AddRange(
-            System.ServiceProcess.ServiceControllerPermissionEntryCollection value
-        ) { }
+        public void AddRange(System.ServiceProcess.ServiceControllerPermissionEntryCollection value)
+        {
+        }
 
-        public void AddRange(System.ServiceProcess.ServiceControllerPermissionEntry[] value) { }
+        public void AddRange(System.ServiceProcess.ServiceControllerPermissionEntry[] value)
+        {
+        }
 
         public bool Contains(System.ServiceProcess.ServiceControllerPermissionEntry value)
         {
@@ -7285,27 +8371,38 @@ namespace System.ServiceProcess
         public void CopyTo(
             System.ServiceProcess.ServiceControllerPermissionEntry[] array,
             int index
-        ) { }
+        )
+        {
+        }
 
         public int IndexOf(System.ServiceProcess.ServiceControllerPermissionEntry value)
         {
             throw null;
         }
 
-        public void Insert(
-            int index,
-            System.ServiceProcess.ServiceControllerPermissionEntry value
-        ) { }
+        public void Insert(int index, System.ServiceProcess.ServiceControllerPermissionEntry value)
+        {
+        }
 
-        protected override void OnClear() { }
+        protected override void OnClear()
+        {
+        }
 
-        protected override void OnInsert(int index, object value) { }
+        protected override void OnInsert(int index, object value)
+        {
+        }
 
-        protected override void OnRemove(int index, object value) { }
+        protected override void OnRemove(int index, object value)
+        {
+        }
 
-        protected override void OnSet(int index, object oldValue, object newValue) { }
+        protected override void OnSet(int index, object oldValue, object newValue)
+        {
+        }
 
-        public void Remove(System.ServiceProcess.ServiceControllerPermissionEntry value) { }
+        public void Remove(System.ServiceProcess.ServiceControllerPermissionEntry value)
+        {
+        }
     }
 }
 
@@ -7323,14 +8420,17 @@ namespace System.Transactions
             System.Security.Permissions.IUnrestrictedPermission
     {
         public DistributedTransactionPermission(System.Security.Permissions.PermissionState state)
-        { }
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -7371,12 +8471,16 @@ namespace System.Transactions
     {
         public DistributedTransactionPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        ) : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public new bool Unrestricted
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()
@@ -7399,14 +8503,20 @@ namespace System.Web
         : System.Security.CodeAccessPermission,
             System.Security.Permissions.IUnrestrictedPermission
     {
-        public AspNetHostingPermission(System.Security.Permissions.PermissionState state) { }
+        public AspNetHostingPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public AspNetHostingPermission(System.Web.AspNetHostingPermissionLevel level) { }
+        public AspNetHostingPermission(System.Web.AspNetHostingPermissionLevel level)
+        {
+        }
 
         public System.Web.AspNetHostingPermissionLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission Copy()
@@ -7414,7 +8524,9 @@ namespace System.Web
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement securityElement) { }
+        public override void FromXml(System.Security.SecurityElement securityElement)
+        {
+        }
 
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
@@ -7458,12 +8570,16 @@ namespace System.Web
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public AspNetHostingPermissionAttribute(System.Security.Permissions.SecurityAction action)
-            : base(default(System.Security.Permissions.SecurityAction)) { }
+            : base(default(System.Security.Permissions.SecurityAction))
+        {
+        }
 
         public System.Web.AspNetHostingPermissionLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.IPermission CreatePermission()

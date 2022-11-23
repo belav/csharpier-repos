@@ -299,7 +299,9 @@ namespace System.Text.RegularExpressions
 
             void IEnumerator.Reset() => _index = -1;
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 }

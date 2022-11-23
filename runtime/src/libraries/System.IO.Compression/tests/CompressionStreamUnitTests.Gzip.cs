@@ -62,7 +62,9 @@ namespace System.IO.Compression
         /// A derived MemoryStream that avoids MemoryStream's fast path in CopyTo
         /// that bypasses buffering.
         /// </summary>
-        private class DerivedMemoryStream : MemoryStream { }
+        private class DerivedMemoryStream : MemoryStream
+        {
+        }
 
         [Fact]
         public async Task ConcatenatedEmptyGzipStreams()
@@ -420,10 +422,14 @@ namespace System.IO.Compression
             public bool ReadArrayInvoked = false,
                 WriteArrayInvoked = false;
 
-            internal DerivedGZipStream(Stream stream, CompressionMode mode) : base(stream, mode) { }
+            internal DerivedGZipStream(Stream stream, CompressionMode mode) : base(stream, mode)
+            {
+            }
 
             internal DerivedGZipStream(Stream stream, CompressionMode mode, bool leaveOpen)
-                : base(stream, mode, leaveOpen) { }
+                : base(stream, mode, leaveOpen)
+            {
+            }
 
             public override int Read(byte[] buffer, int offset, int count)
             {

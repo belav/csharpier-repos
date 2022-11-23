@@ -941,25 +941,35 @@ public class StateManagerTest
 
         public bool BeginDelayedFixup() => false;
 
-        public void CompleteDelayedFixup() { }
+        public void CompleteDelayedFixup()
+        {
+        }
 
-        public void AbortDelayedFixup() { }
+        public void AbortDelayedFixup()
+        {
+        }
 
         public void NavigationReferenceChanged(
             InternalEntityEntry entry,
             INavigationBase navigationBase,
             object oldValue,
             object newValue
-        ) { }
+        )
+        {
+        }
 
         public void NavigationCollectionChanged(
             InternalEntityEntry entry,
             INavigationBase navigationBase,
             IEnumerable<object> added,
             IEnumerable<object> removed
-        ) { }
+        )
+        {
+        }
 
-        public void TrackedFromQuery(InternalEntityEntry entry) { }
+        public void TrackedFromQuery(InternalEntityEntry entry)
+        {
+        }
 
         public void KeyPropertyChanged(
             InternalEntityEntry entry,
@@ -968,7 +978,9 @@ public class StateManagerTest
             IEnumerable<IForeignKey> containingForeignKeys,
             object oldValue,
             object newValue
-        ) { }
+        )
+        {
+        }
 
         public void StateChanging(InternalEntityEntry entry, EntityState newState)
         {
@@ -984,7 +996,9 @@ public class StateManagerTest
             Assert.False(fromQuery);
         }
 
-        public void FixupResolved(InternalEntityEntry entry, InternalEntityEntry duplicateEntry) { }
+        public void FixupResolved(InternalEntityEntry entry, InternalEntityEntry duplicateEntry)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -1162,7 +1176,9 @@ public class StateManagerTest
         public decimal Price { get; set; }
     }
 
-    private class SpecialProduct : Product { }
+    private class SpecialProduct : Product
+    {
+    }
 
     private class Dogegory
     {

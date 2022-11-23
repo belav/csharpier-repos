@@ -33,13 +33,19 @@ namespace TestLibrary
     [Export(typeof(IDependency))]
     public class TestDependency : IDependency
     {
-        public TestDependency() { }
+        public TestDependency()
+        {
+        }
     }
 
     public class NotRealDependency : IDependency
     {
-        public NotRealDependency() { }
+        public NotRealDependency()
+        {
+        }
     }
 
-    public interface IDependency { }
+    public interface IDependency
+    {
+    }
 }

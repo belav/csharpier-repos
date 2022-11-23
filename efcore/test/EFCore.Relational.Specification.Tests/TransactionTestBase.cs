@@ -1296,7 +1296,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.OpenConnection();
         }
 
-        using (context.Database.BeginTransaction()) { }
+        using (context.Database.BeginTransaction())
+        {
+        }
 
         context.Database.CloseConnection();
     }
@@ -1317,7 +1319,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.EnlistTransaction(transaction);
         }
 
-        using (context.Database.BeginTransaction()) { }
+        using (context.Database.BeginTransaction())
+        {
+        }
 
         context.Database.CloseConnection();
     }
@@ -1329,7 +1333,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (context.Database.BeginTransaction())
         {
             context.Database.CloseConnection();
-            using (context.Database.BeginTransaction()) { }
+            using (context.Database.BeginTransaction())
+            {
+            }
         }
     }
 
@@ -1349,7 +1355,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
         context.Database.CloseConnection();
 
-        using (context.Database.BeginTransaction()) { }
+        using (context.Database.BeginTransaction())
+        {
+        }
     }
 
     [ConditionalFact]
@@ -1737,7 +1745,11 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         public override int GetHashCode() => HashCode.Combine(Id, Name);
     }
 
-    protected class TransactionCustomer : TransactionEntity { }
+    protected class TransactionCustomer : TransactionEntity
+    {
+    }
 
-    protected class TransactionOrder : TransactionEntity { }
+    protected class TransactionOrder : TransactionEntity
+    {
+    }
 }

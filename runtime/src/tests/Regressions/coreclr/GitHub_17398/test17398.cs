@@ -21,7 +21,9 @@ class X
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void F() { }
+    static void F()
+    {
+    }
 
     public static void T0(object o, int x)
     {

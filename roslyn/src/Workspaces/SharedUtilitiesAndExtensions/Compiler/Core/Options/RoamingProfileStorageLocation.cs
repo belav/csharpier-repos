@@ -13,12 +13,16 @@ internal sealed class RoamingProfileStorageLocation : ClientSettingsStorageLocat
 {
     public override bool IsMachineLocal => false;
 
-    public RoamingProfileStorageLocation(string keyName) : base(keyName) { }
+    public RoamingProfileStorageLocation(string keyName) : base(keyName)
+    {
+    }
 
     /// <summary>
     /// Creates a <see cref="RoamingProfileStorageLocation"/> that has different key names for different languages.
     /// </summary>
     /// <param name="keyNameFromLanguageName">A function that maps from a <see cref="LanguageNames"/> value to the key name.</param>
     public RoamingProfileStorageLocation(Func<string?, string> keyNameFromLanguageName)
-        : base(keyNameFromLanguageName) { }
+        : base(keyNameFromLanguageName)
+    {
+    }
 }

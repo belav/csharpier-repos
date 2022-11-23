@@ -549,6 +549,8 @@ namespace System.Web.Http.Results
             return new Dictionary<string, object>();
         }
 
-        private class FakeController : ApiController { }
+        private class FakeController : ApiController
+        {
+        }
     }
 }

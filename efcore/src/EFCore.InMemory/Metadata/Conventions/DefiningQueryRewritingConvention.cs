@@ -20,7 +20,9 @@ public class DefiningQueryRewritingConvention : QueryFilterRewritingConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public DefiningQueryRewritingConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     public override void ProcessModelFinalizing(

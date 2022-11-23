@@ -20,7 +20,12 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
         public static IServiceCollection AddLogging(this IServiceCollection services)
         {
-            return AddLogging(services, builder => { });
+            return AddLogging(
+                services,
+                builder =>
+                {
+                }
+            );
         }
 
         /// <summary>

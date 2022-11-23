@@ -22,5 +22,7 @@ internal abstract class WasmDebuggerConnection : IDisposable
     public abstract Task SendAsync(byte[] bytes, CancellationToken token);
     public abstract Task ShutdownAsync(CancellationToken cancellationToken);
 
-    public virtual void Dispose() { }
+    public virtual void Dispose()
+    {
+    }
 }

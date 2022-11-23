@@ -8,7 +8,9 @@ namespace System.Runtime.Caching
 {
     public abstract partial class CacheEntryChangeMonitor : System.Runtime.Caching.ChangeMonitor
     {
-        protected CacheEntryChangeMonitor() { }
+        protected CacheEntryChangeMonitor()
+        {
+        }
 
         public abstract System.Collections.ObjectModel.ReadOnlyCollection<string> CacheKeys { get; }
         public abstract System.DateTimeOffset LastModified { get; }
@@ -21,7 +23,9 @@ namespace System.Runtime.Caching
             System.Runtime.Caching.ObjectCache source,
             System.Runtime.Caching.CacheEntryRemovedReason reason,
             System.Runtime.Caching.CacheItem cacheItem
-        ) { }
+        )
+        {
+        }
 
         public System.Runtime.Caching.CacheItem CacheItem
         {
@@ -57,7 +61,9 @@ namespace System.Runtime.Caching
             System.Runtime.Caching.CacheEntryRemovedReason reason,
             string key,
             string regionName
-        ) { }
+        )
+        {
+        }
 
         public string Key
         {
@@ -78,12 +84,16 @@ namespace System.Runtime.Caching
         public System.Runtime.Caching.CacheItem UpdatedCacheItem
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Caching.CacheItemPolicy UpdatedCacheItemPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -93,37 +103,53 @@ namespace System.Runtime.Caching
 
     public partial class CacheItem
     {
-        public CacheItem(string key) { }
+        public CacheItem(string key)
+        {
+        }
 
-        public CacheItem(string key, object value) { }
+        public CacheItem(string key, object value)
+        {
+        }
 
-        public CacheItem(string key, object value, string regionName) { }
+        public CacheItem(string key, object value, string regionName)
+        {
+        }
 
         public string Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RegionName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CacheItemPolicy
     {
-        public CacheItemPolicy() { }
+        public CacheItemPolicy()
+        {
+        }
 
         public System.DateTimeOffset AbsoluteExpiration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ObjectModel.Collection<System.Runtime.Caching.ChangeMonitor> ChangeMonitors
         {
@@ -132,22 +158,30 @@ namespace System.Runtime.Caching
         public System.Runtime.Caching.CacheItemPriority Priority
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Caching.CacheEntryRemovedCallback RemovedCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan SlidingExpiration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Caching.CacheEntryUpdateCallback UpdateCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -159,7 +193,9 @@ namespace System.Runtime.Caching
 
     public abstract partial class ChangeMonitor : System.IDisposable
     {
-        protected ChangeMonitor() { }
+        protected ChangeMonitor()
+        {
+        }
 
         public bool HasChanged
         {
@@ -171,15 +207,23 @@ namespace System.Runtime.Caching
         }
         public abstract string UniqueId { get; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         protected abstract void Dispose(bool disposing);
 
-        protected void InitializationComplete() { }
+        protected void InitializationComplete()
+        {
+        }
 
-        public void NotifyOnChanged(System.Runtime.Caching.OnChangedCallback onChangedCallback) { }
+        public void NotifyOnChanged(System.Runtime.Caching.OnChangedCallback onChangedCallback)
+        {
+        }
 
-        protected void OnChanged(object state) { }
+        protected void OnChanged(object state)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -198,7 +242,9 @@ namespace System.Runtime.Caching
 
     public abstract partial class FileChangeMonitor : System.Runtime.Caching.ChangeMonitor
     {
-        protected FileChangeMonitor() { }
+        protected FileChangeMonitor()
+        {
+        }
 
         public abstract System.Collections.ObjectModel.ReadOnlyCollection<string> FilePaths { get; }
         public abstract System.DateTimeOffset LastModified { get; }
@@ -206,7 +252,9 @@ namespace System.Runtime.Caching
 
     public sealed partial class HostFileChangeMonitor : System.Runtime.Caching.FileChangeMonitor
     {
-        public HostFileChangeMonitor(System.Collections.Generic.IList<string> filePaths) { }
+        public HostFileChangeMonitor(System.Collections.Generic.IList<string> filePaths)
+        {
+        }
 
         public override System.Collections.ObjectModel.ReadOnlyCollection<string> FilePaths
         {
@@ -221,7 +269,9 @@ namespace System.Runtime.Caching
             get { throw null; }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
     }
 
     public partial class MemoryCache
@@ -232,13 +282,17 @@ namespace System.Runtime.Caching
         public MemoryCache(
             string name,
             System.Collections.Specialized.NameValueCollection config = null
-        ) { }
+        )
+        {
+        }
 
         public MemoryCache(
             string name,
             System.Collections.Specialized.NameValueCollection config,
             bool ignoreConfigSection
-        ) { }
+        )
+        {
+        }
 
         public long CacheMemoryLimit
         {
@@ -255,7 +309,9 @@ namespace System.Runtime.Caching
         public override object this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string Name
         {
@@ -319,7 +375,9 @@ namespace System.Runtime.Caching
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public override object Get(string key, string regionName = null)
         {
@@ -377,21 +435,27 @@ namespace System.Runtime.Caching
         public override void Set(
             System.Runtime.Caching.CacheItem item,
             System.Runtime.Caching.CacheItemPolicy policy
-        ) { }
+        )
+        {
+        }
 
         public override void Set(
             string key,
             object value,
             System.DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) { }
+        )
+        {
+        }
 
         public override void Set(
             string key,
             object value,
             System.Runtime.Caching.CacheItemPolicy policy,
             string regionName = null
-        ) { }
+        )
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -414,13 +478,17 @@ namespace System.Runtime.Caching
         public static readonly System.DateTimeOffset InfiniteAbsoluteExpiration;
         public static readonly System.TimeSpan NoSlidingExpiration;
 
-        protected ObjectCache() { }
+        protected ObjectCache()
+        {
+        }
 
         public abstract System.Runtime.Caching.DefaultCacheCapabilities DefaultCacheCapabilities { get; }
         public static System.IServiceProvider Host
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract object this[string key] { get; set; }
         public abstract string Name { get; }

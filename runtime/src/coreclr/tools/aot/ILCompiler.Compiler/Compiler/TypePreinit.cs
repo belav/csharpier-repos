@@ -2274,7 +2274,9 @@ namespace ILCompiler
         /// Represents a special value that is used internally to model known constructs, but cannot
         /// be represented externally and that's why we don't allow field stores with it.
         /// </summary>
-        private interface IInternalModelingOnlyValue { }
+        private interface IInternalModelingOnlyValue
+        {
+        }
 
         /// <summary>
         /// Represents a value that can be assigned into.

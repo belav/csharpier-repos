@@ -539,7 +539,9 @@ namespace System.Threading.Channels
             bool runContinuationsAsynchronously,
             CancellationToken cancellationToken = default,
             bool pooled = false
-        ) : base(runContinuationsAsynchronously, cancellationToken, pooled) { }
+        ) : base(runContinuationsAsynchronously, cancellationToken, pooled)
+        {
+        }
 
         /// <summary>The item being written.</summary>
         public TData? Item { get; set; }

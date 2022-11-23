@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract TLanguageKindEnum GetSyntaxKind();
         protected abstract ISyntaxFacts GetSyntaxFacts();

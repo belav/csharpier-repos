@@ -71,7 +71,9 @@ namespace System.Xml.Schema
             info.AddValue("version", "2.0");
         }
 
-        public XmlSchemaException() : this(null) { }
+        public XmlSchemaException() : this(null)
+        {
+        }
 
         public XmlSchemaException(string? message) : this(message, ((Exception?)null), 0, 0)
         {
@@ -84,7 +86,9 @@ namespace System.Xml.Schema
         }
 
         public XmlSchemaException(string? message, Exception? innerException)
-            : this(message, innerException, 0, 0) { }
+            : this(message, innerException, 0, 0)
+        {
+        }
 
         public XmlSchemaException(
             string? message,
@@ -100,13 +104,19 @@ namespace System.Xml.Schema
                 lineNumber,
                 linePosition,
                 null
-            ) { }
+            )
+        {
+        }
 
         internal XmlSchemaException(string? res, string?[]? args)
-            : this(res, args, null, null, 0, 0, null) { }
+            : this(res, args, null, null, 0, 0, null)
+        {
+        }
 
         internal XmlSchemaException(string? res, string? arg)
-            : this(res, new string?[] { arg }, null, null, 0, 0, null) { }
+            : this(res, new string?[] { arg }, null, null, 0, 0, null)
+        {
+        }
 
         internal XmlSchemaException(
             string? res,
@@ -114,14 +124,18 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : this(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null) { }
+        ) : this(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null)
+        {
+        }
 
         internal XmlSchemaException(
             string? res,
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : this(res, (string?[]?)null, null, sourceUri, lineNumber, linePosition, null) { }
+        ) : this(res, (string?[]?)null, null, sourceUri, lineNumber, linePosition, null)
+        {
+        }
 
         internal XmlSchemaException(
             string? res,
@@ -129,13 +143,19 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : this(res, args, null, sourceUri, lineNumber, linePosition, null) { }
+        ) : this(res, args, null, sourceUri, lineNumber, linePosition, null)
+        {
+        }
 
         internal XmlSchemaException(string? res, XmlSchemaObject source)
-            : this(res, (string?[]?)null, source) { }
+            : this(res, (string?[]?)null, source)
+        {
+        }
 
         internal XmlSchemaException(string? res, string? arg, XmlSchemaObject source)
-            : this(res, new string?[] { arg }, source) { }
+            : this(res, new string?[] { arg }, source)
+        {
+        }
 
         internal XmlSchemaException(string? res, string?[]? args, XmlSchemaObject source)
             : this(
@@ -146,7 +166,9 @@ namespace System.Xml.Schema
                 source.LineNumber,
                 source.LinePosition,
                 source
-            ) { }
+            )
+        {
+        }
 
         internal XmlSchemaException(
             string? res,

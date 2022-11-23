@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class WarningKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public WarningKeywordRecommender()
-            : base(SyntaxKind.WarningKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.WarningKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

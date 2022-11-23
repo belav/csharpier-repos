@@ -8,7 +8,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeLocalAllocHandle : SafeBuffer
     {
-        public SafeLocalAllocHandle() : base(true) { }
+        public SafeLocalAllocHandle() : base(true)
+        {
+        }
 
         internal static readonly SafeLocalAllocHandle Zero = new SafeLocalAllocHandle();
 

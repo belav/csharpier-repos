@@ -480,7 +480,9 @@ namespace System.Collections.Immutable.Tests
 
         private class CustomComparer : IComparer<int>
         {
-            private CustomComparer() { }
+            private CustomComparer()
+            {
+            }
 
             public static CustomComparer Instance { get; } = new CustomComparer();
 

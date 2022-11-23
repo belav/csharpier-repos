@@ -32,9 +32,15 @@ public struct AA
                         new int[] { 6 },
                         new int[] { 103, 28, 52, 112, 31 }
                     }[85][(new int[76u, 48u, 105u])[86, 24, 7]]
-            ) { }
-            try { }
-            catch (IndexOutOfRangeException) { }
+            )
+            {
+            }
+            try
+            {
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
         return ((new byte[40u, 107u, 4u][,,][])[107, 69, 93] = new byte[][,,][] { }[70]);
     }

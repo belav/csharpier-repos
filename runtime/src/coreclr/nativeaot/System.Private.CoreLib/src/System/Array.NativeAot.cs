@@ -1490,7 +1490,9 @@ namespace System
         }
 
 #pragma warning disable CA1822 // https://github.com/dotnet/roslyn-analyzers/issues/5911
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 #pragma warning restore CA1822
     }
 
@@ -1501,7 +1503,9 @@ namespace System
     public class Array<T> : Array, IEnumerable<T>, ICollection<T>, IList<T>, IReadOnlyList<T>
     {
         // Prevent the C# compiler from generating a public default constructor
-        private Array() { }
+        private Array()
+        {
+        }
 
         public new IEnumerator<T> GetEnumerator()
         {

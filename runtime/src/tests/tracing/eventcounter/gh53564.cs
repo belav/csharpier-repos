@@ -16,7 +16,9 @@ namespace gh53564Tests
 {
     public class RuntimeCounterListener : EventListener
     {
-        public RuntimeCounterListener() { }
+        public RuntimeCounterListener()
+        {
+        }
 
         private DateTime? setToZeroTimestamp = null;
         private DateTime? mostRecentTimestamp = null;

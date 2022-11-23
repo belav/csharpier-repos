@@ -26,7 +26,9 @@ namespace System.Net.Http
         /// <param name="value">The value of the object this instance will contain.</param>
         /// <param name="formatter">The formatter to use when serializing the value.</param>
         public ObjectContent(Type type, object value, MediaTypeFormatter formatter)
-            : this(type, value, formatter, (MediaTypeHeaderValue)null) { }
+            : this(type, value, formatter, (MediaTypeHeaderValue)null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectContent"/> class.
@@ -41,7 +43,9 @@ namespace System.Net.Http
             object value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) : this(type, value, formatter, BuildHeaderValue(mediaType)) { }
+        ) : this(type, value, formatter, BuildHeaderValue(mediaType))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectContent"/> class.

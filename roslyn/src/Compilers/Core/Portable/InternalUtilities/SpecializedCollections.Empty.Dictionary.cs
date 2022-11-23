@@ -24,7 +24,9 @@ namespace Roslyn.Utilities
             {
                 public static new readonly Dictionary<TKey, TValue> Instance = new();
 
-                private Dictionary() { }
+                private Dictionary()
+                {
+                }
 
                 public void Add(TKey key, TValue value)
                 {

@@ -15,7 +15,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common
 
         public string? Documentation { get; set; }
 
-        public Parameter() { }
+        public Parameter()
+        {
+        }
 
         public Parameter(IParameter actual)
         {

@@ -4,7 +4,9 @@ class PinList
 {
     class Pinned
     {
-        public Pinned() { }
+        public Pinned()
+        {
+        }
     }
 
     Pinned reference;

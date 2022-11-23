@@ -5,11 +5,17 @@ namespace System.CommandLine.Suggest
 {
     public class SuggestionShellScriptException : Exception
     {
-        public SuggestionShellScriptException() { }
+        public SuggestionShellScriptException()
+        {
+        }
 
-        public SuggestionShellScriptException(string message) : base(message) { }
+        public SuggestionShellScriptException(string message) : base(message)
+        {
+        }
 
         public SuggestionShellScriptException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
     }
 }

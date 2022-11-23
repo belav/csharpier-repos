@@ -12,7 +12,9 @@ internal unsafe class Test
         {
             i = 100 / (uint)(v + 1);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         finally
         {
             i = UInt32.MaxValue / 2 + 1U + (uint)v;

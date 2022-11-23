@@ -34,6 +34,8 @@ namespace System
         }
 
         protected MethodAccessException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

@@ -506,9 +506,13 @@ namespace System.Reflection.Tests
 
         class TestType : TestTypeBase
         {
-            public TestType() { }
+            public TestType()
+            {
+            }
 
-            public class Nested { }
+            public class Nested
+            {
+            }
 
 #pragma warning disable 0067 // event never used
             public event Action<int> StuffHappened;

@@ -13,7 +13,8 @@ namespace System.ComponentModel.Design
             "This constructor has been deprecated. Use DesignerTransactionCloseEventArgs(bool, bool) instead."
         )]
         public DesignerTransactionCloseEventArgs(bool commit) : this(commit, lastTransaction: true)
-        { }
+        {
+        }
 
         /// <summary>
         /// Creates a new event args. Commit is true if the transaction is committed, and

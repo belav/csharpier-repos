@@ -183,9 +183,13 @@ namespace Castle.DynamicProxy.Tests
     {
 		#region IFooExtended Members
 
-        public void FooExtended() { }
+        public void FooExtended()
+        {
+        }
 
-        public void Foo() { }
+        public void Foo()
+        {
+        }
 
 		#endregion
     }

@@ -221,7 +221,9 @@ namespace XLinqTests
                             }
                             throw new TestException(TestResult.Failed, "");
                         }
-                        catch (InvalidOperationException) { }
+                        catch (InvalidOperationException)
+                        {
+                        }
                     }
                     finally
                     {
@@ -248,7 +250,9 @@ namespace XLinqTests
                     doc.Save((TextWriter)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
             try
             {
@@ -262,7 +266,9 @@ namespace XLinqTests
                     doc.Save((TextWriter)null, SaveOptions.DisableFormatting);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
             try
             {
@@ -276,7 +282,9 @@ namespace XLinqTests
                     doc.Save((TextWriter)null, SaveOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
             //save with XmlWriter
             try
@@ -291,7 +299,9 @@ namespace XLinqTests
                     doc.Save((XmlWriter)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
         }
 
@@ -305,20 +315,26 @@ namespace XLinqTests
                 doc.Save((TextWriter)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
             try
             {
                 doc.Save((TextWriter)null, SaveOptions.DisableFormatting);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 doc.Save((TextWriter)null, SaveOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             //save with XmlWriter
             try
@@ -326,7 +342,9 @@ namespace XLinqTests
                 doc.Save((XmlWriter)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument: Null parameters for WriteTo")]
@@ -338,7 +356,9 @@ namespace XLinqTests
                 doc.WriteTo(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "XElement: Null parameters for WriteTo")]
@@ -350,7 +370,9 @@ namespace XLinqTests
                 doc.WriteTo(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
         }
 
         //[Variation(Priority = 0, Desc = "Write and valIdate XDocumentType")]

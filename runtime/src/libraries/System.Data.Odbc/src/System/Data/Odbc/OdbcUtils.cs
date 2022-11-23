@@ -10,7 +10,9 @@ namespace System.Data.Odbc
 {
     internal sealed class CNativeBuffer : System.Data.ProviderBase.DbBuffer
     {
-        internal CNativeBuffer(int initialSize) : base(initialSize) { }
+        internal CNativeBuffer(int initialSize) : base(initialSize)
+        {
+        }
 
         internal short ShortLength
         {

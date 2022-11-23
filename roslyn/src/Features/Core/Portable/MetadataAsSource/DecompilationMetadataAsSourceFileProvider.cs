@@ -210,8 +210,12 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     {
                         Directory.CreateDirectory(directoryToCreate);
                     }
-                    catch (DirectoryNotFoundException) { }
-                    catch (UnauthorizedAccessException) { }
+                    catch (DirectoryNotFoundException)
+                    {
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
                 }
 
                 using (
@@ -307,7 +311,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     // If we get an IO exception we can safely ignore it, and the system will show the metadata view of the reference assembly.
                 }
                 catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Diagnostic))
-                { }
+                {
+                }
             }
 
             return (metadataReference, assemblyLocation, isReferenceAssembly);

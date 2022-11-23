@@ -9,14 +9,20 @@ namespace System.Collections.ObjectModel
     public abstract partial class KeyedCollection<TKey, TItem>
         : System.Collections.ObjectModel.Collection<TItem> where TKey : notnull
     {
-        protected KeyedCollection() { }
+        protected KeyedCollection()
+        {
+        }
 
-        protected KeyedCollection(System.Collections.Generic.IEqualityComparer<TKey>? comparer) { }
+        protected KeyedCollection(System.Collections.Generic.IEqualityComparer<TKey>? comparer)
+        {
+        }
 
         protected KeyedCollection(
             System.Collections.Generic.IEqualityComparer<TKey>? comparer,
             int dictionaryCreationThreshold
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IEqualityComparer<TKey> Comparer
         {
@@ -31,9 +37,13 @@ namespace System.Collections.ObjectModel
             get { throw null; }
         }
 
-        protected void ChangeItemKey(TItem item, TKey newKey) { }
+        protected void ChangeItemKey(TItem item, TKey newKey)
+        {
+        }
 
-        protected override void ClearItems() { }
+        protected override void ClearItems()
+        {
+        }
 
         public bool Contains(TKey key)
         {
@@ -42,16 +52,22 @@ namespace System.Collections.ObjectModel
 
         protected abstract TKey GetKeyForItem(TItem item);
 
-        protected override void InsertItem(int index, TItem item) { }
+        protected override void InsertItem(int index, TItem item)
+        {
+        }
 
         public bool Remove(TKey key)
         {
             throw null;
         }
 
-        protected override void RemoveItem(int index) { }
+        protected override void RemoveItem(int index)
+        {
+        }
 
-        protected override void SetItem(int index, TItem item) { }
+        protected override void SetItem(int index, TItem item)
+        {
+        }
 
         public bool TryGetValue(
             TKey key,
@@ -67,26 +83,44 @@ namespace System.Collections.ObjectModel
             System.Collections.Specialized.INotifyCollectionChanged,
             System.ComponentModel.INotifyPropertyChanged
     {
-        public ObservableCollection() { }
+        public ObservableCollection()
+        {
+        }
 
-        public ObservableCollection(System.Collections.Generic.IEnumerable<T> collection) { }
+        public ObservableCollection(System.Collections.Generic.IEnumerable<T> collection)
+        {
+        }
 
-        public ObservableCollection(System.Collections.Generic.List<T> list) { }
+        public ObservableCollection(System.Collections.Generic.List<T> list)
+        {
+        }
 
         public virtual event System.Collections.Specialized.NotifyCollectionChangedEventHandler? CollectionChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         protected virtual event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         event System.ComponentModel.PropertyChangedEventHandler? System.ComponentModel.INotifyPropertyChanged.PropertyChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         protected System.IDisposable BlockReentrancy()
@@ -94,27 +128,43 @@ namespace System.Collections.ObjectModel
             throw null;
         }
 
-        protected void CheckReentrancy() { }
+        protected void CheckReentrancy()
+        {
+        }
 
-        protected override void ClearItems() { }
+        protected override void ClearItems()
+        {
+        }
 
-        protected override void InsertItem(int index, T item) { }
+        protected override void InsertItem(int index, T item)
+        {
+        }
 
-        public void Move(int oldIndex, int newIndex) { }
+        public void Move(int oldIndex, int newIndex)
+        {
+        }
 
-        protected virtual void MoveItem(int oldIndex, int newIndex) { }
+        protected virtual void MoveItem(int oldIndex, int newIndex)
+        {
+        }
 
         protected virtual void OnCollectionChanged(
             System.Collections.Specialized.NotifyCollectionChangedEventArgs e
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OnPropertyChanged(
-            System.ComponentModel.PropertyChangedEventArgs e
-        ) { }
+        protected virtual void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+        {
+        }
 
-        protected override void RemoveItem(int index) { }
+        protected override void RemoveItem(int index)
+        {
+        }
 
-        protected override void SetItem(int index, T item) { }
+        protected override void SetItem(int index, T item)
+        {
+        }
     }
 
     public partial class ReadOnlyObservableCollection<T>
@@ -124,36 +174,58 @@ namespace System.Collections.ObjectModel
     {
         public ReadOnlyObservableCollection(
             System.Collections.ObjectModel.ObservableCollection<T> list
-        ) : base(default(System.Collections.Generic.IList<T>)) { }
+        ) : base(default(System.Collections.Generic.IList<T>))
+        {
+        }
 
         protected virtual event System.Collections.Specialized.NotifyCollectionChangedEventHandler? CollectionChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         protected virtual event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         event System.Collections.Specialized.NotifyCollectionChangedEventHandler? System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         event System.ComponentModel.PropertyChangedEventHandler? System.ComponentModel.INotifyPropertyChanged.PropertyChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         protected virtual void OnCollectionChanged(
             System.Collections.Specialized.NotifyCollectionChangedEventArgs args
-        ) { }
+        )
+        {
+        }
 
         protected virtual void OnPropertyChanged(
             System.ComponentModel.PropertyChangedEventArgs args
-        ) { }
+        )
+        {
+        }
     }
 }
 
@@ -177,69 +249,91 @@ namespace System.Collections.Specialized
     {
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             System.Collections.IList? changedItems
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             System.Collections.IList newItems,
             System.Collections.IList oldItems
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             System.Collections.IList newItems,
             System.Collections.IList oldItems,
             int startingIndex
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             System.Collections.IList? changedItems,
             int startingIndex
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             System.Collections.IList? changedItems,
             int index,
             int oldIndex
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             object? changedItem
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             object? changedItem,
             int index
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             object? changedItem,
             int index,
             int oldIndex
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             object? newItem,
             object? oldItem
-        ) { }
+        )
+        {
+        }
 
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action,
             object? newItem,
             object? oldItem,
             int index
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Specialized.NotifyCollectionChangedAction Action
         {
@@ -273,7 +367,9 @@ namespace System.ComponentModel
 {
     public partial class DataErrorsChangedEventArgs : System.EventArgs
     {
-        public DataErrorsChangedEventArgs(string? propertyName) { }
+        public DataErrorsChangedEventArgs(string? propertyName)
+        {
+        }
 
         public virtual string? PropertyName
         {
@@ -300,7 +396,9 @@ namespace System.ComponentModel
 
     public partial class PropertyChangedEventArgs : System.EventArgs
     {
-        public PropertyChangedEventArgs(string? propertyName) { }
+        public PropertyChangedEventArgs(string? propertyName)
+        {
+        }
 
         public virtual string? PropertyName
         {
@@ -315,7 +413,9 @@ namespace System.ComponentModel
 
     public partial class PropertyChangingEventArgs : System.EventArgs
     {
-        public PropertyChangingEventArgs(string? propertyName) { }
+        public PropertyChangingEventArgs(string? propertyName)
+        {
+        }
 
         public virtual string? PropertyName
         {
@@ -333,21 +433,27 @@ namespace System.ComponentModel
     {
         public static readonly System.ComponentModel.TypeConverterAttribute Default;
 
-        public TypeConverterAttribute() { }
+        public TypeConverterAttribute()
+        {
+        }
 
         public TypeConverterAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 string typeName
-        ) { }
+        )
+        {
+        }
 
         public TypeConverterAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type type
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -380,7 +486,9 @@ namespace System.ComponentModel
                     .PublicParameterlessConstructor
             )]
                 string typeName
-        ) { }
+        )
+        {
+        }
 
         public TypeDescriptionProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -391,7 +499,9 @@ namespace System.ComponentModel
                     .PublicParameterlessConstructor
             )]
                 System.Type type
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System
@@ -450,14 +560,18 @@ namespace System.Windows.Markup
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 string valueSerializerTypeName
-        ) { }
+        )
+        {
+        }
 
         public ValueSerializerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type valueSerializerType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors

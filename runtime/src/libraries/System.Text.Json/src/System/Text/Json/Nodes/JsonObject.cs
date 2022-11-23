@@ -25,7 +25,9 @@ namespace System.Text.Json.Nodes
         ///   Initializes a new instance of the <see cref="JsonObject"/> class that is empty.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonObject(JsonNodeOptions? options = null) : base(options) { }
+        public JsonObject(JsonNodeOptions? options = null) : base(options)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonObject"/> class that contains the specified <paramref name="properties"/>.

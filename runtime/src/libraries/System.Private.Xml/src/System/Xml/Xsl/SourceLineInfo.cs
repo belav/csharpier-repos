@@ -43,7 +43,9 @@ namespace System.Xml.Xsl
             int startPos,
             int endLine,
             int endPos
-        ) : this(uriString, new Location(startLine, startPos), new Location(endLine, endPos)) { }
+        ) : this(uriString, new Location(startLine, startPos), new Location(endLine, endPos))
+        {
+        }
 
         public SourceLineInfo(string? uriString, Location start, Location end)
         {

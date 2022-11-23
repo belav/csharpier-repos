@@ -10,7 +10,9 @@ public class ManyToManyTrackingGeneratedKeysSqlServerTest
 {
     public ManyToManyTrackingGeneratedKeysSqlServerTest(
         ManyToManyTrackingGeneratedKeysSqlServerFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public class ManyToManyTrackingGeneratedKeysSqlServerFixture
         : ManyToManyTrackingSqlServerFixtureBase

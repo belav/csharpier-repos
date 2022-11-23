@@ -727,7 +727,9 @@ public abstract class ComplexNavigationsQueryFixtureBase
     {
         public static readonly ComplexNavigationsDefaultData Instance = new();
 
-        private ComplexNavigationsDefaultData() { }
+        private ComplexNavigationsDefaultData()
+        {
+        }
 
         public override IQueryable<TEntity> Set<TEntity>()
         {

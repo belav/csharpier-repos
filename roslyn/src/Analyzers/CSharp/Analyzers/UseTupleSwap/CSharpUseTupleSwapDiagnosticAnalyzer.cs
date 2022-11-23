@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

@@ -247,7 +247,9 @@ namespace System
                         Array.CreateInstance(typeof(int), new int[] { 5 }, new int[] { 5 });
                         nonZeroLowerBoundArraysSupported = true;
                     }
-                    catch (PlatformNotSupportedException) { }
+                    catch (PlatformNotSupportedException)
+                    {
+                    }
                     s_lazyNonZeroLowerBoundArraySupported = Tuple.Create<bool>(
                         nonZeroLowerBoundArraysSupported
                     );
@@ -269,7 +271,9 @@ namespace System
                         _ = typeof(PlatformDetection).MetadataToken;
                         metadataTokensSupported = true;
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                     s_lazyMetadataTokensSupported = Tuple.Create<bool>(metadataTokensSupported);
                 }
                 return s_lazyMetadataTokensSupported.Item1;
@@ -419,7 +423,9 @@ namespace System
                         return File.Exists(Path.Combine(system32, "subst.exe"));
                     }
                 }
-                catch { }
+                catch
+                {
+                }
                 return false;
             }
         }
@@ -444,7 +450,9 @@ namespace System
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return new Version(
                 version >> 24,
@@ -534,7 +542,9 @@ namespace System
                 // Insufficient permission, assume that we don't have protocol support (since we aren't exactly sure)
                 return false;
             }
-            catch { }
+            catch
+            {
+            }
 
             return defaultProtocolSupport;
         }

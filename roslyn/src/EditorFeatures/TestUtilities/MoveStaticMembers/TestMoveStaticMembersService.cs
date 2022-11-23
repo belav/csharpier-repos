@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestMoveStaticMembersService() { }
+        public TestMoveStaticMembersService()
+        {
+        }
 
         public string? DestinationName { get; set; }
 

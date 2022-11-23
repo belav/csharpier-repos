@@ -32,7 +32,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [JsonIgnore] // Ignore circular reference
         public GameObject GameObject { get; set; }
 
-        public Component() { }
+        public Component()
+        {
+        }
     }
 #endif
 }

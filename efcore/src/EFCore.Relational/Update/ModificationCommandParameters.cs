@@ -73,7 +73,9 @@ public readonly record struct ModificationCommandParameters
             comparer,
             generateParameterName,
             logger
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     The name of the table containing the data to be modified.

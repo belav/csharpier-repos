@@ -630,7 +630,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal virtual void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) { }
+        )
+        {
+        }
 
         // Note: This is no public "IsNew". This is intentional, because new has no syntactic meaning.
         // It serves only to remove a warning. Furthermore, it can not be inferred from
@@ -747,7 +749,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         );
 
         // Prevent anyone else from deriving from this class.
-        internal Symbol() { }
+        internal Symbol()
+        {
+        }
 
         /// <summary>
         /// Build and add synthesized attributes for this symbol.
@@ -755,7 +759,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal virtual void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// Convenience helper called by subclasses to add a synthesized attribute to a collection of attributes.
@@ -1611,7 +1617,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments,
                     AttributeDescription.IsReadOnlyAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 (reserved & ReservedAttributes.IsUnmanagedAttribute) != 0
                 && reportExplicitUseOfReservedAttribute(
@@ -1619,7 +1627,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments,
                     AttributeDescription.IsUnmanagedAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 (reserved & ReservedAttributes.IsByRefLikeAttribute) != 0
                 && reportExplicitUseOfReservedAttribute(
@@ -1627,7 +1637,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments,
                     AttributeDescription.IsByRefLikeAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 (reserved & ReservedAttributes.TupleElementNamesAttribute) != 0
                 && attribute.IsTargetAttribute(
@@ -1659,7 +1671,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments,
                     AttributeDescription.NullableContextAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 (reserved & ReservedAttributes.NullablePublicOnlyAttribute) != 0
                 && reportExplicitUseOfReservedAttribute(
@@ -1667,7 +1681,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments,
                     AttributeDescription.NullablePublicOnlyAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 (reserved & ReservedAttributes.NativeIntegerAttribute) != 0
                 && reportExplicitUseOfReservedAttribute(
@@ -1675,7 +1691,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments,
                     AttributeDescription.NativeIntegerAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 (reserved & ReservedAttributes.CaseSensitiveExtensionAttribute) != 0
                 && attribute.IsTargetAttribute(
@@ -1719,7 +1737,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments,
                     AttributeDescription.RefSafetyRulesAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else
             {
                 return false;

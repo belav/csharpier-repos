@@ -310,14 +310,18 @@ public class IncludedMappingShouldInheritBaseMappings : NonValidatingSpecBase
 
 public class OverrideDifferentMapFrom : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {
         public int Value { get; set; }
     }
 
-    class DestinationDerived : Destination { }
+    class DestinationDerived : Destination
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

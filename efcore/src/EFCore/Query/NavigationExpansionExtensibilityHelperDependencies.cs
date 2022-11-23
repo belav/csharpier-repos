@@ -44,5 +44,7 @@ public sealed record NavigationExpansionExtensibilityHelperDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public NavigationExpansionExtensibilityHelperDependencies() { }
+    public NavigationExpansionExtensibilityHelperDependencies()
+    {
+    }
 }

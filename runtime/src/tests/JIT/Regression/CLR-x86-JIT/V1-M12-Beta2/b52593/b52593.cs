@@ -7,7 +7,9 @@ namespace Test
 
     internal class App
     {
-        private static void Method1(TypedReference param1, object obj) { }
+        private static void Method1(TypedReference param1, object obj)
+        {
+        }
 
         private static int Main()
         {

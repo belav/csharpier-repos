@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private class TypeInferrer : AbstractTypeInferrer
         {
             internal TypeInferrer(SemanticModel semanticModel, CancellationToken cancellationToken)
-                : base(semanticModel, cancellationToken) { }
+                : base(semanticModel, cancellationToken)
+            {
+            }
 
             protected override bool IsUnusableType(ITypeSymbol otherSideType)
             {

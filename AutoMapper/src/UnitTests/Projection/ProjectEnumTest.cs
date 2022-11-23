@@ -63,7 +63,9 @@ public class ProjectEnumTest
 
 public class ProjectionOverrides : AutoMapperSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {

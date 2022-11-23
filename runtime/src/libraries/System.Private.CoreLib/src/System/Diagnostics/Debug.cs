@@ -29,7 +29,9 @@ namespace System.Diagnostics
         public static bool AutoFlush
         {
             get => true;
-            set { }
+            set
+            {
+            }
         }
 
         [ThreadStatic]
@@ -56,10 +58,14 @@ namespace System.Diagnostics
         }
 
         [Conditional("DEBUG")]
-        public static void Close() { }
+        public static void Close()
+        {
+        }
 
         [Conditional("DEBUG")]
-        public static void Flush() { }
+        public static void Flush()
+        {
+        }
 
         [Conditional("DEBUG")]
         public static void Indent() => IndentLevel++;

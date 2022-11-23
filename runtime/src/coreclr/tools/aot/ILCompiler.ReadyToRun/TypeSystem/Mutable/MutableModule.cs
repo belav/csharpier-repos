@@ -148,7 +148,9 @@ namespace Internal.TypeSystem.Ecma
                             }
                         }
                     }
-                    catch (TypeSystemException) { }
+                    catch (TypeSystemException)
+                    {
+                    }
                 }
                 return result;
             }
@@ -388,7 +390,9 @@ namespace Internal.TypeSystem.Ecma
             TryGetAssemblyRefHandle = _cache.CreateCacheFunc<AssemblyName>(GetAssemblyRefHandle);
         }
 
-        class DisableNewTokensException : Exception { }
+        class DisableNewTokensException : Exception
+        {
+        }
 
         public bool DisableNewTokens;
         public ModuleDesc ModuleThatIsCurrentlyTheSourceOfNewReferences;

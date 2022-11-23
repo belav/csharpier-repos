@@ -364,7 +364,9 @@ namespace System.IO.Ports.Tests
                         null,
                         null
                     );
-                    while (0 == (bytesToRead = com2.BytesToRead)) { }
+                    while (0 == (bytesToRead = com2.BytesToRead))
+                    {
+                    }
 
                     sw.Start();
                     while (numBytesToSend > com2.BytesToRead)

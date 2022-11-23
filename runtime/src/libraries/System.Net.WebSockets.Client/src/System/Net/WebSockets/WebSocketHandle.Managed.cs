@@ -190,7 +190,9 @@ namespace System.Net.WebSockets
                                 || options.HttpVersionPolicy
                                     == HttpVersionPolicy.RequestVersionOrLower
                             )
-                        ) { }
+                        )
+                    {
+                    }
                 }
 
                 // The SecWebSocketProtocol header is optional.  We should only get it with a non-empty value if we requested subprotocols,

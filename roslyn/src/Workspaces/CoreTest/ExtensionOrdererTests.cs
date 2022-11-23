@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     public class ExtensionOrdererTests
     {
-        private class Extension { }
+        private class Extension
+        {
+        }
 
         [Fact]
         public void TestNoCycle1()

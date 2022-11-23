@@ -77,7 +77,9 @@ public class TestClass_65690
             ulong ulong_152 = 5;
             S1.S1_D1_F1 s1_s1_d1_f1_153 = new S1.S1_D1_F1();
             S2 s2_155 = new S2();
-            if (15 - 4 != LeafMethod1()) { }
+            if (15 - 4 != LeafMethod1())
+            {
+            }
             else
             {
                 try
@@ -115,7 +117,9 @@ public class TestClass_65690
                     {
                         ushort_34 *= 15 % 4;
                     }
-                    if ((byte_24 = s_byte_7 ^= 15 | 4) >= (15 | 4)) { }
+                    if ((byte_24 = s_byte_7 ^= 15 | 4) >= (15 | 4))
+                    {
+                    }
                 }
             }
             return;

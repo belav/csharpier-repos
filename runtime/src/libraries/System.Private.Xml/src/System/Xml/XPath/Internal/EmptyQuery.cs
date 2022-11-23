@@ -45,7 +45,9 @@ namespace MS.Internal.Xml.XPath
             get { return XPathResultType.NodeSet; }
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
 
         public override XPathNavigator? Current
         {

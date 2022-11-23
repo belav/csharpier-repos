@@ -42,14 +42,17 @@ public class ByteArrayTypeMapping : RelationalTypeMapping
                 unicode: false,
                 size
             )
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ByteArrayTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected ByteArrayTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
-    { }
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

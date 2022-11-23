@@ -30,7 +30,9 @@ namespace System.IO.IsolatedStorage
         public void GetCreationTime_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
+            {
+            }
 
             Assert.Throws<ObjectDisposedException>(() => isf.GetCreationTime("foo"));
         }

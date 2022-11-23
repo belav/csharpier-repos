@@ -283,7 +283,9 @@ namespace System.Web.Mvc
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         protected override void ExecuteCore()
         {
@@ -509,23 +511,39 @@ namespace System.Web.Mvc
             Url = new UrlHelper(requestContext);
         }
 
-        protected virtual void OnActionExecuting(ActionExecutingContext filterContext) { }
+        protected virtual void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+        }
 
-        protected virtual void OnActionExecuted(ActionExecutedContext filterContext) { }
+        protected virtual void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+        }
 
-        protected virtual void OnAuthentication(AuthenticationContext filterContext) { }
+        protected virtual void OnAuthentication(AuthenticationContext filterContext)
+        {
+        }
 
         protected virtual void OnAuthenticationChallenge(
             AuthenticationChallengeContext filterContext
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OnAuthorization(AuthorizationContext filterContext) { }
+        protected virtual void OnAuthorization(AuthorizationContext filterContext)
+        {
+        }
 
-        protected virtual void OnException(ExceptionContext filterContext) { }
+        protected virtual void OnException(ExceptionContext filterContext)
+        {
+        }
 
-        protected virtual void OnResultExecuted(ResultExecutedContext filterContext) { }
+        protected virtual void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+        }
 
-        protected virtual void OnResultExecuting(ResultExecutingContext filterContext) { }
+        protected virtual void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+        }
 
         protected internal PartialViewResult PartialView()
         {

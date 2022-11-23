@@ -20,7 +20,9 @@ namespace System.Composition
         /// <summary>
         /// Mark a part as globally shared.
         /// </summary>
-        public SharedAttribute() : base(SharingBoundaryPartMetadataName, null) { }
+        public SharedAttribute() : base(SharingBoundaryPartMetadataName, null)
+        {
+        }
 
         /// <summary>
         /// Construct a <see cref="SharedAttribute"/> for the specified
@@ -28,7 +30,9 @@ namespace System.Composition
         /// </summary>
         /// <param name="sharingBoundaryName">The boundary outside of which this part is inaccessible.</param>
         public SharedAttribute(string sharingBoundaryName)
-            : base(SharingBoundaryPartMetadataName, sharingBoundaryName) { }
+            : base(SharingBoundaryPartMetadataName, sharingBoundaryName)
+        {
+        }
 
         /// <summary>
         /// The boundary outside of which this part is inaccessible.

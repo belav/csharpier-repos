@@ -19,9 +19,13 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandlerTest_Headers : HttpClientHandlerTestBase
     {
-        public HttpClientHandlerTest_Headers(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Headers(ITestOutputHelper output) : base(output)
+        {
+        }
 
-        private sealed class DerivedHttpHeaders : HttpHeaders { }
+        private sealed class DerivedHttpHeaders : HttpHeaders
+        {
+        }
 
         [Fact]
         public async Task SendAsync_RequestWithSimpleHeader_ResponseReferencesUnmodifiedRequestHeaders()
@@ -210,7 +214,9 @@ namespace System.Net.Http.Functional.Tests
                             .HandleRequestAsync(HttpStatusCode.OK)
                             .ConfigureAwait(false);
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                     ;
                 }
             );
@@ -569,7 +575,9 @@ namespace System.Net.Http.Functional.Tests
                             headers: new[] { new HttpHeaderData("", "foo") }
                         );
                     }
-                    catch (IOException) { }
+                    catch (IOException)
+                    {
+                    }
                 }
             );
         }

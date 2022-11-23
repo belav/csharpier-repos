@@ -35,9 +35,13 @@ namespace System.Data
             return dataRowView.CreateChildView(Relation);
         }
 
-        public override void ResetValue(object component) { }
+        public override void ResetValue(object component)
+        {
+        }
 
-        public override void SetValue(object? component, object? value) { }
+        public override void SetValue(object? component, object? value)
+        {
+        }
 
         public override bool ShouldSerializeValue(object component) => false;
     }

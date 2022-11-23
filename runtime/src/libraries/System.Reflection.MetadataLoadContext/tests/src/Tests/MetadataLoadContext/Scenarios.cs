@@ -129,6 +129,8 @@ namespace System.Reflection.Tests
 
     internal static class FakeConsole
     {
-        public static void WriteLine(string s) { }
+        public static void WriteLine(string s)
+        {
+        }
     }
 }

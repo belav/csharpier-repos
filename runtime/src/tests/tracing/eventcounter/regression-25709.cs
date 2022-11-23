@@ -20,7 +20,9 @@ namespace EventCounterRegressionTests
 
         public double MaxIncrement { get; private set; } = 0;
 
-        public SimpleEventListener() { }
+        public SimpleEventListener()
+        {
+        }
 
         protected override void OnEventSourceCreated(EventSource source)
         {
@@ -82,7 +84,9 @@ namespace EventCounterRegressionTests
                     );
                     throw new Exception("an exception");
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

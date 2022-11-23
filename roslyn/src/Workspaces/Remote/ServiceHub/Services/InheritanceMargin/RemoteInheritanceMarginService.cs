@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteInheritanceMarginService(in ServiceConstructionArguments arguments)
-            : base(in arguments) { }
+            : base(in arguments)
+        {
+        }
 
         public ValueTask<ImmutableArray<InheritanceMarginItem>> GetInheritanceMarginItemsAsync(
             Checksum solutionChecksum,

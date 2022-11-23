@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpInteractiveCommands : AbstractInteractiveWindowTest
     {
         public CSharpInteractiveCommands(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         [WpfFact]
         public void VerifyPreviousAndNextHistory()

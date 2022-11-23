@@ -32,7 +32,9 @@ namespace Test
             _gcref = s;
         }
 
-        private void DoMethod() { }
+        private void DoMethod()
+        {
+        }
 
         [Fact]
         public static int TestEntryPoint()

@@ -1015,7 +1015,9 @@ namespace System.Xml.Tests
                             buffer = new char[1];
                             DataReader.ReadValueChunk(buffer, 0, 1);
                         }
-                        catch (NotSupportedException) { }
+                        catch (NotSupportedException)
+                        {
+                        }
                     }
                     else
                     {
@@ -1024,7 +1026,9 @@ namespace System.Xml.Tests
                             buffer = new char[1];
                             DataReader.ReadValueChunk(buffer, 0, 1);
                         }
-                        catch (InvalidOperationException) { }
+                        catch (InvalidOperationException)
+                        {
+                        }
                     }
                 }
             }

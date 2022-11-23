@@ -218,7 +218,9 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Deserialize(ref reader, typeof(int[]));
                 Assert.True(false, "Expected ReadValue to throw JsonException for invalid JSON.");
             }
-            catch (JsonException) { }
+            catch (JsonException)
+            {
+            }
 
             Assert.Equal(previous, reader.BytesConsumed);
             Assert.Equal(JsonTokenType.StartArray, reader.TokenType);
@@ -259,7 +261,9 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Deserialize<SimpleTypeWithArray>(ref reader);
                 Assert.True(false, "Expected ReadValue to throw JsonException for type mismatch.");
             }
-            catch (JsonException) { }
+            catch (JsonException)
+            {
+            }
 
             Assert.Equal(JsonTokenType.PropertyName, reader.TokenType);
 
@@ -322,7 +326,9 @@ namespace System.Text.Json.Serialization.Tests
                         "Expected ReadValue to throw JsonException for not enough data."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
 
                 Assert.Equal(0, reader.BytesConsumed);
                 Assert.Equal(JsonTokenType.None, reader.TokenType);
@@ -345,7 +351,9 @@ namespace System.Text.Json.Serialization.Tests
                         "Expected ReadValue to throw JsonException for not enough data."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
 
                 Assert.Equal(1, reader.BytesConsumed);
                 Assert.Equal(JsonTokenType.StartObject, reader.TokenType);
@@ -764,7 +772,9 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Deserialize<int[]>(ref reader);
                 Assert.True(false, "Expected exception.");
             }
-            catch (JsonException) { }
+            catch (JsonException)
+            {
+            }
 
             Assert.Equal(0, reader.BytesConsumed);
         }
@@ -883,7 +893,9 @@ namespace System.Text.Json.Serialization.Tests
     }
 
     // From https://github.com/dotnet/runtime/issues/882
-    public interface IContent { }
+    public interface IContent
+    {
+    }
 
     public class DeepArray : IContent
     {

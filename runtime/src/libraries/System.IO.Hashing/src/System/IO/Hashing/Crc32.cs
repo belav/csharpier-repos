@@ -33,7 +33,9 @@ namespace System.IO.Hashing
         /// <summary>
         ///   Initializes a new instance of the <see cref="Crc32"/> class.
         /// </summary>
-        public Crc32() : base(Size) { }
+        public Crc32() : base(Size)
+        {
+        }
 
         /// <summary>
         ///   Appends the contents of <paramref name="source"/> to the data already

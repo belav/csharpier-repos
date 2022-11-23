@@ -10,7 +10,9 @@ public abstract class T<TR>
 }
 
 // This abstract causes the error - not overriding the base method cause the runtime to crash
-public abstract class TA : T<A> { }
+public abstract class TA : T<A>
+{
+}
 
 // This works
 // public abstract class TA : T<A>
@@ -25,9 +27,13 @@ public class TB : TA
     public override B GetA() => new();
 }
 
-public class A { }
+public class A
+{
+}
 
-public class B : A { }
+public class B : A
+{
+}
 
 class Program
 {

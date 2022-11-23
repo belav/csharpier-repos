@@ -22,7 +22,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStylesSeverityColumnDefinition() { }
+        public NamingStylesSeverityColumnDefinition()
+        {
+        }
 
         public override string Name => Severity;
         public override string DisplayName => ServicesVSResources.Severity;

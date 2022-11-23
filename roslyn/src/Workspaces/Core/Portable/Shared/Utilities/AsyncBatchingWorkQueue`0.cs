@@ -26,7 +26,9 @@ namespace Roslyn.Utilities
                 EqualityComparer<VoidResult>.Default,
                 asyncListener,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         private static Func<
             ImmutableSegmentedList<VoidResult>,

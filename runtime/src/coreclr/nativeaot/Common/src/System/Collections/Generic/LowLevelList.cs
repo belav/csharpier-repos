@@ -462,11 +462,17 @@ namespace System.Collections.Generic
     // LowLevelList<T> with full IList<T> implementation
     internal sealed class LowLevelListWithIList<T> : LowLevelList<T>, IList<T>
     {
-        public LowLevelListWithIList() { }
+        public LowLevelListWithIList()
+        {
+        }
 
-        public LowLevelListWithIList(int capacity) : base(capacity) { }
+        public LowLevelListWithIList(int capacity) : base(capacity)
+        {
+        }
 
-        public LowLevelListWithIList(IEnumerable<T> collection) : base(collection) { }
+        public LowLevelListWithIList(IEnumerable<T> collection) : base(collection)
+        {
+        }
 
         // Is this List read-only?
         bool ICollection<T>.IsReadOnly
@@ -500,7 +506,9 @@ namespace System.Collections.Generic
                 _current = default(T);
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

@@ -22,7 +22,9 @@ namespace DefaultNamespace
                     throw new Exception();
                 }
                 catch (Exception /*e2*/
-                ) { }
+                )
+                {
+                }
                 finally
                 {
                     try
@@ -30,7 +32,9 @@ namespace DefaultNamespace
                         throw new Exception();
                     }
                     catch (Exception /*e3*/
-                    ) { }
+                    )
+                    {
+                    }
                 }
                 return 100;
             }

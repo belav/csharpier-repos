@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateEnumMember
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public GenerateEnumMemberCodeFixProvider() { }
+        public GenerateEnumMemberCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {

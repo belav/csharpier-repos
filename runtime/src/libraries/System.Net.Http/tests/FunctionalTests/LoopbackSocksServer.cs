@@ -288,13 +288,17 @@ namespace System.Net.Http.Functional.Tests
                 {
                     clientSocket.Close();
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
 
                 try
                 {
                     serverSocket.Close();
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
 
                 // Eat reset/abort.
                 if (

@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     internal sealed class LsaLogonProcessSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public LsaLogonProcessSafeHandle() : base(true) { }
+        public LsaLogonProcessSafeHandle() : base(true)
+        {
+        }
 
         internal LsaLogonProcessSafeHandle(IntPtr value) : base(true)
         {

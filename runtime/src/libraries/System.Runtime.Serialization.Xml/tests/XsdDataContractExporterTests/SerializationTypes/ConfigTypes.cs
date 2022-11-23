@@ -13,7 +13,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [Serializable]
-    public class ConfigDerived1 : ConfigBase1 { }
+    public class ConfigDerived1 : ConfigBase1
+    {
+    }
 
     [Serializable]
     public class ConfigBase2
@@ -22,7 +24,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [Serializable]
-    public class ConfigDerived2 : ConfigBase2 { }
+    public class ConfigDerived2 : ConfigBase2
+    {
+    }
 
     [Serializable]
     public class ConfigBase3
@@ -31,7 +35,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [Serializable]
-    public class ConfigDerived3 : ConfigBase3 { }
+    public class ConfigDerived3 : ConfigBase3
+    {
+    }
 
     [Serializable]
     public class ConfigBase4
@@ -40,5 +46,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [Serializable]
-    public class ConfigDerived4 : ConfigBase4 { }
+    public class ConfigDerived4 : ConfigBase4
+    {
+    }
 }

@@ -17,7 +17,9 @@ internal class TypeForwardingActivator : SimpleActivator
     private readonly ILogger _logger;
 
     public TypeForwardingActivator(IServiceProvider services)
-        : this(services, NullLoggerFactory.Instance) { }
+        : this(services, NullLoggerFactory.Instance)
+    {
+    }
 
     public TypeForwardingActivator(IServiceProvider services, ILoggerFactory loggerFactory)
         : base(services)

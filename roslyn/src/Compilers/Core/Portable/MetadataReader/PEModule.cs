@@ -853,7 +853,9 @@ namespace Microsoft.CodeAnalysis
             public static readonly NamespaceHandleEqualityComparer Singleton =
                 new NamespaceHandleEqualityComparer();
 
-            private NamespaceHandleEqualityComparer() { }
+            private NamespaceHandleEqualityComparer()
+            {
+            }
 
             public bool Equals(NamespaceDefinitionHandle x, NamespaceDefinitionHandle y)
             {
@@ -1417,7 +1419,9 @@ namespace Microsoft.CodeAnalysis
                         }
                     }
                     catch (Exception e)
-                        when (e is UnsupportedSignatureContent or BadImageFormatException) { }
+                        when (e is UnsupportedSignatureContent or BadImageFormatException)
+                    {
+                    }
                 }
 
                 if (!isOptional && (allowedFeatures & getFeatureKind(featureName)) == 0)
@@ -1500,7 +1504,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
                 catch (Exception ex)
-                    when (ex is BadImageFormatException or UnsupportedSignatureContent) { }
+                    when (ex is BadImageFormatException or UnsupportedSignatureContent)
+                {
+                }
             }
 
             return UnmanagedCallersOnlyAttributeData.Create(unmanagedConventionTypes);
@@ -1962,7 +1968,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             blobReader = default;
             return false;
@@ -2238,7 +2246,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             value = default(T);
             return false;
@@ -2423,8 +2433,12 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
-            catch (UnsupportedSignatureContent) { }
+            catch (BadImageFormatException)
+            {
+            }
+            catch (UnsupportedSignatureContent)
+            {
+            }
 
             return (diagnosticId, urlFormat);
         }
@@ -2790,7 +2804,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return result;
         }
@@ -2827,7 +2843,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return default(AttributeInfo);
         }
@@ -2854,7 +2872,9 @@ namespace Microsoft.CodeAnalysis
                 }
                 return attrInfo;
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return default(AttributeInfo);
         }
@@ -2916,7 +2936,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             RecordNoPiaLocalTypeCheck(typeDef);
             attributeInfo = default(AttributeInfo);
@@ -3123,7 +3145,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             // Not found
             return default(AssemblyReferenceHandle);
@@ -3177,7 +3201,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             // Not found
             return default(TypeReferenceHandle);
@@ -3383,7 +3409,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return No;
         }
@@ -3596,7 +3624,9 @@ namespace Microsoft.CodeAnalysis
                         }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 _lazyContainsNoPiaLocalTypes = ThreeState.False;
             }
@@ -4334,7 +4364,9 @@ namespace Microsoft.CodeAnalysis
                         }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 _lazyForwardedTypesToAssemblyIndexMap = typesToAssemblyIndexMap;
             }
@@ -4434,7 +4466,9 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly StringTableDecoder Instance = new StringTableDecoder();
 
-            private StringTableDecoder() : base(System.Text.Encoding.UTF8) { }
+            private StringTableDecoder() : base(System.Text.Encoding.UTF8)
+            {
+            }
 
             public override unsafe string GetString(byte* bytes, int byteCount)
             {

@@ -110,36 +110,52 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class ClassPassedToMethodTakingTypeByRef
         {
             [Kept]
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            internal static void RemovedMethod() { }
+            internal static void RemovedMethod()
+            {
+            }
         }
 
         [Kept]
         class ClassReturnedAsRefFromMethodTakingTypeByRef
         {
             [Kept]
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            internal static void RemovedMethod() { }
+            internal static void RemovedMethod()
+            {
+            }
         }
 
         [Kept]
         class ClassMaybePassedToMethodTakingTypeByRef
         {
             [Kept]
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            internal static void RemovedMethod() { }
+            internal static void RemovedMethod()
+            {
+            }
         }
 
         [Kept]
         class OtherClassMaybePassedToMethodTakingTypeByRef
         {
             [Kept]
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            internal static void RemovedMethod() { }
+            internal static void RemovedMethod()
+            {
+            }
         }
 
         [Kept]

@@ -22380,11 +22380,17 @@ namespace System.Linq.Expressions.Tests
             act();
         }
 
-        interface IInterface { }
+        interface IInterface
+        {
+        }
 
-        class NonSealed { }
+        class NonSealed
+        {
+        }
 
-        class Derived : NonSealed, IInterface { }
+        class Derived : NonSealed, IInterface
+        {
+        }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void NonSealedArrayToIfaceArray(bool useInterpreter)

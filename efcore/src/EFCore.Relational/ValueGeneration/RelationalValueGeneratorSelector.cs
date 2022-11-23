@@ -36,7 +36,9 @@ public class RelationalValueGeneratorSelector : ValueGeneratorSelector
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
     public RelationalValueGeneratorSelector(ValueGeneratorSelectorDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     protected override ValueGenerator? FindForType(

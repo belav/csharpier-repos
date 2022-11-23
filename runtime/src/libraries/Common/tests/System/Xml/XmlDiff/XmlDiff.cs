@@ -44,7 +44,9 @@ namespace System.Xml.XmlDiff
         private bool _IgnoreDTD = true;
         private bool _IgnoreChildOrder = true;
 
-        public XmlDiff() { }
+        public XmlDiff()
+        {
+        }
 
         public XmlDiffOption Option
         {

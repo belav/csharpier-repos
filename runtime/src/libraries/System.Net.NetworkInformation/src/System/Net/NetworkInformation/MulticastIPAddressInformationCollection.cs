@@ -11,7 +11,9 @@ namespace System.Net.NetworkInformation
         private readonly List<MulticastIPAddressInformation> _addresses =
             new List<MulticastIPAddressInformation>();
 
-        protected internal MulticastIPAddressInformationCollection() { }
+        protected internal MulticastIPAddressInformationCollection()
+        {
+        }
 
         public virtual void CopyTo(MulticastIPAddressInformation[] array, int offset)
         {

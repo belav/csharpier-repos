@@ -22,7 +22,9 @@ namespace System.Net.Http.Headers
         }
 
         public ProductInfoHeaderValue(string productName, string? productVersion)
-            : this(new ProductHeaderValue(productName, productVersion)) { }
+            : this(new ProductHeaderValue(productName, productVersion))
+        {
+        }
 
         public ProductInfoHeaderValue(ProductHeaderValue product)
         {

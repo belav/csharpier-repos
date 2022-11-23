@@ -27,8 +27,12 @@ namespace Castle.DynamicProxy.Tests
             return false;
         }
 
-        public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
+        public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+        {
+        }
 
-        public void MethodsInspected() { }
+        public void MethodsInspected()
+        {
+        }
     }
 }

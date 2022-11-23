@@ -8,7 +8,9 @@ namespace System.Data.OleDb
 {
     public sealed class OleDbEnumerator
     {
-        public OleDbEnumerator() { }
+        public OleDbEnumerator()
+        {
+        }
 
         public DataTable GetElements()
         {

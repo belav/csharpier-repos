@@ -98,8 +98,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         // (once created the CurrentParameter property cannot change)
         public event EventHandler<CurrentParameterChangedEventArgs> CurrentParameterChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         private IList<TaggedText> _prettyPrintedDisplayParts;

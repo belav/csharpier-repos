@@ -8,7 +8,9 @@ namespace System.Data.Common
 {
     public abstract class DbTransaction : MarshalByRefObject, IDbTransaction, IAsyncDisposable
     {
-        protected DbTransaction() : base() { }
+        protected DbTransaction() : base()
+        {
+        }
 
         public DbConnection? Connection => DbConnection;
 
@@ -40,7 +42,9 @@ namespace System.Data.Common
 
         public void Dispose() => Dispose(true);
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public virtual ValueTask DisposeAsync()
         {
@@ -189,7 +193,9 @@ namespace System.Data.Common
         /// reclaim some resources before the transaction ends.
         /// </summary>
         /// <param name="savepointName">The name of the savepoint to release.</param>
-        public virtual void Release(string savepointName) { }
+        public virtual void Release(string savepointName)
+        {
+        }
 
         #endregion
     }

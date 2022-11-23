@@ -73,6 +73,8 @@ namespace System.Web.Mvc.Test
             return mockAuthContext.Object;
         }
 
-        private class EmptyController : Controller { }
+        private class EmptyController : Controller
+        {
+        }
     }
 }

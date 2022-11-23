@@ -6205,7 +6205,9 @@ namespace System.Text.Json.Tests
             ulongs[0] = ulong.MaxValue;
             ulongs[1] = ulong.MinValue;
             ulongs[2] = 10446744073709551615;
-            for (int i = 3; i < numberOfItems; i++) { }
+            for (int i = 3; i < numberOfItems; i++)
+            {
+            }
 
             var doubles = new double[numberOfItems * 2];
             doubles[0] = 0.00;

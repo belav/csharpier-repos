@@ -35,7 +35,9 @@ namespace System.Xml.Xsl
         private List<TheQuery>? _QueryStore;
         private RootAction? _RootAction;
 
-        public XslTransform() { }
+        public XslTransform()
+        {
+        }
 
         public XmlResolver? XmlResolver
         {

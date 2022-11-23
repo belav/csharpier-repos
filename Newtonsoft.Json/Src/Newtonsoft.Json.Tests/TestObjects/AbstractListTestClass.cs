@@ -27,5 +27,7 @@ using System.Collections.Generic;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public abstract class AbstractListTestClass<T> : List<T> { }
+    public abstract class AbstractListTestClass<T> : List<T>
+    {
+    }
 }

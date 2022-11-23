@@ -23,6 +23,8 @@ namespace Internal.Cryptography.Pal
     {
         public static IX509Pal Instance = new X509Pal();
 
-        private X509Pal() { }
+        private X509Pal()
+        {
+        }
     }
 }

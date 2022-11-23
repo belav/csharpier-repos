@@ -20,5 +20,7 @@ internal class CSharpVisualBasicLspServiceProvider : AbstractLspServiceProvider
             IEnumerable<Lazy<ILspService, LspServiceMetadataView>> lspServices,
         [ImportMany(ProtocolConstants.RoslynLspLanguagesContract)]
             IEnumerable<Lazy<ILspServiceFactory, LspServiceMetadataView>> lspServiceFactories
-    ) : base(lspServices, lspServiceFactories) { }
+    ) : base(lspServices, lspServiceFactories)
+    {
+    }
 }

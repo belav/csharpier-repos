@@ -58,7 +58,9 @@ namespace Test.IO.Streams
             _remaining = -1;
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override long Seek(long offset, SeekOrigin origin)
         {

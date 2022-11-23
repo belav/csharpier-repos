@@ -271,7 +271,9 @@ namespace Moq.Tests.Linq
 
     public class Foo
     {
-        protected Foo() { }
+        protected Foo()
+        {
+        }
 
         public virtual string Value { get; private set; }
     }

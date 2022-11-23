@@ -347,7 +347,9 @@ namespace System.CommandLine.Generator.Tests
                 Age = age;
             }
 
-            public Character() { }
+            public Character()
+            {
+            }
 
             public string? FullName { get; set; }
             public int Age { get; set; }

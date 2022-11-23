@@ -21,7 +21,9 @@ namespace Castle.DynamicProxy.Tests.Classes
     public class HasNonInheritableAttribute
     {
         [NonInheritable]
-        public virtual void OnMethod() { }
+        public virtual void OnMethod()
+        {
+        }
 
         [NonInheritable]
         public virtual string OnProperty { get; set; }
@@ -32,19 +34,27 @@ namespace Castle.DynamicProxy.Tests.Classes
             return 1;
         }
 
-        public virtual void OnParameter([NonInheritable] int arg) { }
+        public virtual void OnParameter([NonInheritable] int arg)
+        {
+        }
 
-        public virtual void OnGenericArgument<[NonInheritable] T>() { }
+        public virtual void OnGenericArgument<[NonInheritable] T>()
+        {
+        }
     }
 
     [ComplexNonInheritableAttribute(1, 2, true, "class", FileAccess.Write)]
     public class AttributedClass2
     {
         [ComplexNonInheritableAttribute(2, 3, "Do1", Access = FileAccess.ReadWrite)]
-        public virtual void Do1() { }
+        public virtual void Do1()
+        {
+        }
 
         [ComplexNonInheritableAttribute(3, 4, "Do2", IsSomething = true)]
-        public virtual void Do2() { }
+        public virtual void Do2()
+        {
+        }
     }
 
 #if FEATURE_SERIALIZATION

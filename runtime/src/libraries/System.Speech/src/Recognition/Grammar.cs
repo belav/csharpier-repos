@@ -36,9 +36,13 @@ namespace System.Speech.Recognition
             InitialGrammarLoad(ruleName, parameters, false);
         }
 
-        public Grammar(string path) : this(path, (string)null, null) { }
+        public Grammar(string path) : this(path, (string)null, null)
+        {
+        }
 
-        public Grammar(string path, string ruleName) : this(path, ruleName, null) { }
+        public Grammar(string path, string ruleName) : this(path, ruleName, null)
+        {
+        }
 
         public Grammar(string path, string ruleName, object[] parameters)
         {
@@ -58,17 +62,25 @@ namespace System.Speech.Recognition
             InitialGrammarLoad(ruleName, parameters, false);
         }
 
-        public Grammar(SrgsDocument srgsDocument) : this(srgsDocument, null, null, null) { }
+        public Grammar(SrgsDocument srgsDocument) : this(srgsDocument, null, null, null)
+        {
+        }
 
         public Grammar(SrgsDocument srgsDocument, string ruleName)
-            : this(srgsDocument, ruleName, null, null) { }
+            : this(srgsDocument, ruleName, null, null)
+        {
+        }
 
         public Grammar(SrgsDocument srgsDocument, string ruleName, object[] parameters)
-            : this(srgsDocument, ruleName, null, parameters) { }
+            : this(srgsDocument, ruleName, null, parameters)
+        {
+        }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Grammar(SrgsDocument srgsDocument, string ruleName, Uri baseUri)
-            : this(srgsDocument, ruleName, baseUri, null) { }
+            : this(srgsDocument, ruleName, baseUri, null)
+        {
+        }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Grammar(SrgsDocument srgsDocument, string ruleName, Uri baseUri, object[] parameters)
@@ -81,16 +93,24 @@ namespace System.Speech.Recognition
             InitialGrammarLoad(ruleName, parameters, false);
         }
 
-        public Grammar(Stream stream) : this(stream, null, null, null) { }
+        public Grammar(Stream stream) : this(stream, null, null, null)
+        {
+        }
 
-        public Grammar(Stream stream, string ruleName) : this(stream, ruleName, null, null) { }
+        public Grammar(Stream stream, string ruleName) : this(stream, ruleName, null, null)
+        {
+        }
 
         public Grammar(Stream stream, string ruleName, object[] parameters)
-            : this(stream, ruleName, null, parameters) { }
+            : this(stream, ruleName, null, parameters)
+        {
+        }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Grammar(Stream stream, string ruleName, Uri baseUri)
-            : this(stream, ruleName, baseUri, null) { }
+            : this(stream, ruleName, baseUri, null)
+        {
+        }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Grammar(Stream stream, string ruleName, Uri baseUri, object[] parameters)
@@ -121,7 +141,9 @@ namespace System.Speech.Recognition
             InitialGrammarLoad(ruleName, null, true);
         }
 
-        protected Grammar() { }
+        protected Grammar()
+        {
+        }
 
         protected void StgInit(object[] parameters)
         {

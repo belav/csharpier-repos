@@ -568,7 +568,9 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private class MyClassWithoutConverter { }
+        private class MyClassWithoutConverter
+        {
+        }
 
         private enum MyEnum
         {

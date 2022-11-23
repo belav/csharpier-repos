@@ -14,7 +14,9 @@ namespace System.Composition.UnitTests
     public class MetadataConstraintTests : ContainerTests
     {
         [Export, ExportMetadata("SettingName", "TheName")]
-        public class SomeSetting { }
+        public class SomeSetting
+        {
+        }
 
         [Export]
         public class SomeSettingUser
@@ -56,7 +58,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export, ExportMetadata("SettingName", "TheName")]
-        public class SomeSetting<T> { }
+        public class SomeSetting<T>
+        {
+        }
 
         [Fact]
         public void ConstraintsCanBeAppliedToGenerics()
@@ -73,7 +77,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export, ExportMetadata("Items", new[] { 1, 2, 3 })]
-        public class Presenter { }
+        public class Presenter
+        {
+        }
 
         [Export]
         public class Controller

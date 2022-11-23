@@ -4,5 +4,7 @@
 namespace System
 {
     /// <summary>An empty struct, used to represent void in generic types.</summary>
-    internal struct VoidResult { }
+    internal struct VoidResult
+    {
+    }
 }

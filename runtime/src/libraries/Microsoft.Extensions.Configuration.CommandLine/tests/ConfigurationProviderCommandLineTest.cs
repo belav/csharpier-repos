@@ -21,7 +21,11 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
 
             var provider = new CommandLineConfigurationProvider(args);
 
-            return (provider, () => { });
+            return (
+                provider,
+                () => {
+                }
+            );
         }
 
         private void SectionToArgs(List<string> args, string sectionName, TestSection section)

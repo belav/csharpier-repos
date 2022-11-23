@@ -17,7 +17,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerTitleColumnDefinition() { }
+        public AnalyzerTitleColumnDefinition()
+        {
+        }
 
         public override string Name => Title;
         public override string DisplayName => ServicesVSResources.Title;

@@ -7,13 +7,21 @@ public class PropertyOnMappingShouldResolveMostSpecificType
         public string SomeBaseProperty { get; set; }
     }
 
-    public class GenericItem : ItemBase { }
+    public class GenericItem : ItemBase
+    {
+    }
 
-    public class SpecificItem : ItemBase { }
+    public class SpecificItem : ItemBase
+    {
+    }
 
-    public class DifferentItem : GenericItem { }
+    public class DifferentItem : GenericItem
+    {
+    }
 
-    public class DifferentItem2 : GenericItem { }
+    public class DifferentItem2 : GenericItem
+    {
+    }
 
     public class ItemDto
     {
@@ -21,17 +29,29 @@ public class PropertyOnMappingShouldResolveMostSpecificType
         public string SomeProperty { get; set; }
     }
 
-    public class SpecificItemDto : ItemDto { }
+    public class SpecificItemDto : ItemDto
+    {
+    }
 
-    public class DescriptionBaseDto { }
+    public class DescriptionBaseDto
+    {
+    }
 
-    public class GenericDescriptionDto : DescriptionBaseDto { }
+    public class GenericDescriptionDto : DescriptionBaseDto
+    {
+    }
 
-    public class SpecificDescriptionDto : DescriptionBaseDto { }
+    public class SpecificDescriptionDto : DescriptionBaseDto
+    {
+    }
 
-    public class DifferentDescriptionDto : GenericDescriptionDto { }
+    public class DifferentDescriptionDto : GenericDescriptionDto
+    {
+    }
 
-    public class DifferentDescriptionDto2 : GenericDescriptionDto { }
+    public class DifferentDescriptionDto2 : GenericDescriptionDto
+    {
+    }
 
     public class Container
     {

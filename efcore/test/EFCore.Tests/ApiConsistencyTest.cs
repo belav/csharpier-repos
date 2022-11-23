@@ -10,7 +10,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiConsistencyFixture>
 {
-    public ApiConsistencyTest(ApiConsistencyFixture fixture) : base(fixture) { }
+    public ApiConsistencyTest(ApiConsistencyFixture fixture) : base(fixture)
+    {
+    }
 
     protected override Assembly TargetAssembly => typeof(EntityType).Assembly;
 

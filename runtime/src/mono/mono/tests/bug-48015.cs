@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Runtime.Remoting;
 
-public class Foo : System.ContextBoundObject { }
+public class Foo : System.ContextBoundObject
+{
+}
 
 public class Bar : System.ContextBoundObject
 {

@@ -21,7 +21,9 @@ internal readonly record struct ClassificationOptions
     [DataMember]
     public bool ForceFrozenPartialSemanticsForCrossProcessOperations { get; init; } = false;
 
-    public ClassificationOptions() { }
+    public ClassificationOptions()
+    {
+    }
 
     public static readonly ClassificationOptions Default = new();
 }

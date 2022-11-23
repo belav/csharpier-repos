@@ -456,22 +456,51 @@ namespace System.Linq.Expressions.Tests
 
             foreach (var factory in factories)
             {
-                yield return factory(Expression.Constant((Action)(() => { })), typeof(Action));
+                yield return factory(
+                    Expression.Constant(
+                        (Action)(
+                            () => {
+                            }
+                        )
+                    ),
+                    typeof(Action)
+                );
 
                 yield return factory(
-                    Expression.Constant((Action<int>)(x => { })),
+                    Expression.Constant(
+                        (Action<int>)(
+                            x =>
+                            {
+                            }
+                        )
+                    ),
                     typeof(Action<int>)
                 );
                 yield return factory(
-                    Expression.Constant((Action<int, object>)((x, o) => { })),
+                    Expression.Constant(
+                        (Action<int, object>)(
+                            (x, o) => {
+                            }
+                        )
+                    ),
                     typeof(Action<int, object>)
                 );
                 yield return factory(
-                    Expression.Constant((Action<int, object>)((x, o) => { })),
+                    Expression.Constant(
+                        (Action<int, object>)(
+                            (x, o) => {
+                            }
+                        )
+                    ),
                     typeof(Action<int, string>)
                 ); // contravariant
                 yield return factory(
-                    Expression.Constant((Action<object, int>)((o, x) => { })),
+                    Expression.Constant(
+                        (Action<object, int>)(
+                            (o, x) => {
+                            }
+                        )
+                    ),
                     typeof(Action<string, int>)
                 ); // contravariant
 

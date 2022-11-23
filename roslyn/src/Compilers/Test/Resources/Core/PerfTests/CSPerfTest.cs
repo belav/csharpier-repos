@@ -357,7 +357,9 @@ namespace ns1
             {
                 return;
             }
-            else { }
+            else
+            {
+            }
 
             // Read, Write Params
             x = null;
@@ -1531,7 +1533,12 @@ namespace ns1
         {
             get { return enumerator.Current; }
             // Additional Accessor
-            set { if (enumerator.Current.Equals(value)) { } }
+            set
+            {
+                if (enumerator.Current.Equals(value))
+                {
+                }
+            }
         }
 
         // Implement Interface Explicitly

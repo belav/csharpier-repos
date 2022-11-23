@@ -9,7 +9,9 @@ namespace System.Data.OleDb
     {
         // V1 shipped with default ctor which is public
         // so we can NOT remove the now explicit public ctor
-        public OleDbSchemaGuid() { }
+        public OleDbSchemaGuid()
+        {
+        }
 
         // MDAC 2.0
 

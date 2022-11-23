@@ -90,10 +90,14 @@ namespace Microsoft.Cci
     /// A unit of metadata stored as a single artifact and potentially produced and revised independently from other units.
     /// Examples of units include .NET assemblies and modules, as well C++ object files and compiled headers.
     /// </summary>
-    internal interface IUnit : IUnitReference, IDefinition { }
+    internal interface IUnit : IUnitReference, IDefinition
+    {
+    }
 
     /// <summary>
     /// A reference to a instance of <see cref="IUnit"/>.
     /// </summary>
-    internal interface IUnitReference : IReference, INamedEntity { }
+    internal interface IUnitReference : IReference, INamedEntity
+    {
+    }
 }

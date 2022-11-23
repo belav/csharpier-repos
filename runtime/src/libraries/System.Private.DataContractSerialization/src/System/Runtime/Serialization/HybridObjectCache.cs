@@ -12,7 +12,9 @@ namespace System.Runtime.Serialization
         private Dictionary<string, object?>? _objectDictionary;
         private Dictionary<string, object?>? _referencedObjectDictionary;
 
-        internal HybridObjectCache() { }
+        internal HybridObjectCache()
+        {
+        }
 
         internal void Add(string id, object? obj)
         {

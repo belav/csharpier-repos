@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             : AbstractWorkspaceTrackingTaggerEventSource
         {
             public WorkspaceRegistrationChangedEventSource(ITextBuffer subjectBuffer)
-                : base(subjectBuffer) { }
+                : base(subjectBuffer)
+            {
+            }
 
             protected override void ConnectToWorkspace(Workspace workspace) => this.RaiseChanged();
 

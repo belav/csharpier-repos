@@ -10,16 +10,24 @@ namespace System.Web.Http.ApiExplorer
 {
     public class ParameterSourceController : ApiController
     {
-        public void GetCompleTypeFromUri([FromUri] ComplexType value, string name) { }
+        public void GetCompleTypeFromUri([FromUri] ComplexType value, string name)
+        {
+        }
 
-        public void PostSimpleTypeFromBody([FromBody] string name) { }
+        public void PostSimpleTypeFromBody([FromBody] string name)
+        {
+        }
 
         public void GetCustomFromUriAttribute(
             [MyFromUriAttribute] ComplexType value,
             ComplexType bodyValue
-        ) { }
+        )
+        {
+        }
 
-        public void GetFromHeaderAttribute([FromHeaderAttribute] string value) { }
+        public void GetFromHeaderAttribute([FromHeaderAttribute] string value)
+        {
+        }
 
         public class ComplexType
         {

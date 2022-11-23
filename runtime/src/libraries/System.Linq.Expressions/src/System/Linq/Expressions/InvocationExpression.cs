@@ -156,7 +156,8 @@ namespace System.Linq.Expressions
     internal sealed class InvocationExpression0 : InvocationExpression
     {
         public InvocationExpression0(Expression lambda, Type returnType) : base(lambda, returnType)
-        { }
+        {
+        }
 
         internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
         {

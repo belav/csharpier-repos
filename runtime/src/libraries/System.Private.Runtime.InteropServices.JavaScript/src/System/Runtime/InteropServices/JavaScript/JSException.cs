@@ -8,6 +8,8 @@ namespace System.Runtime.InteropServices.JavaScript
     /// </summary>
     public class JSException : Exception
     {
-        public JSException(string msg) : base(msg) { }
+        public JSException(string msg) : base(msg)
+        {
+        }
     }
 }

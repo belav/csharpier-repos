@@ -947,7 +947,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
         public int this[int x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
     }
     // </Code>
@@ -2104,7 +2106,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
 
         public static int MainMethod(string[] args)
         {
-            Foo f = delegate(dynamic d) { };
+            Foo f = delegate(dynamic d)
+            {
+            };
             f(3);
             return 0;
         }
@@ -2126,7 +2130,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
 
         public static int MainMethod(string[] args)
         {
-            Foo f = delegate(object d) { };
+            Foo f = delegate(object d)
+            {
+            };
             f(2);
             return 0;
         }
@@ -2306,7 +2312,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
 {
     public class Test
     {
-        public void M1(ref int p1) { }
+        public void M1(ref int p1)
+        {
+        }
 
         public static void DynamicCSharpRunTest()
         {
@@ -2599,7 +2607,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     {
         public event EventHandler E;
 
-        public static void EventH(object sender, EventArgs e) { }
+        public static void EventH(object sender, EventArgs e)
+        {
+        }
 
         public static void DynamicCSharpRunTest()
         {
@@ -3507,7 +3517,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
         private bool RunTest(dynamic d1, dynamic d2)
         {
             bool ret = 11 == M((p1, p2) => p1 * 100);
-            ret &= 22 == M((p1, p2, p3) => { });
+            ret &=
+                22
+                == M(
+                    (p1, p2, p3) => {
+                    }
+                );
             ret &= 33 == M((string p1, dynamic p2) => p1 + p2.ToString());
             ret &= 44 == M1((long p1, dynamic p2) => p1 * 100);
             ret &= 66 == M1((string p1, dynamic p2) => p1);
@@ -3671,9 +3686,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
 
     public class LMD : IDisposable
     {
-        public LMD(Func<object, dynamic> p) { }
+        public LMD(Func<object, dynamic> p)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public class Test
@@ -4013,7 +4032,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
             public int Field;
         }
 
-        public class Derived : Base { }
+        public class Derived : Base
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -4051,7 +4072,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
             public int Field;
         }
 
-        public class Derived : Base { }
+        public class Derived : Base
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -8033,7 +8056,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         First,
     }
 
-    public struct MyStruct { }
+    public struct MyStruct
+    {
+    }
 
     public struct MyStruct2
     {
@@ -9616,7 +9641,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 isHit = true;
                 return true;
             }
-            set { }
+            set
+            {
+            }
         }
 
         public static string StringValue
@@ -9626,7 +9653,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 isHit = true;
                 return string.Empty;
             }
-            set { }
+            set
+            {
+            }
         }
 
         public static int IntValue
@@ -9636,7 +9665,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 isHit = true;
                 return 10;
             }
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>

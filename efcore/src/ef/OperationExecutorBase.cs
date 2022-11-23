@@ -69,7 +69,9 @@ internal abstract class OperationExecutorBase : IOperationExecutor
         );
     }
 
-    public virtual void Dispose() { }
+    public virtual void Dispose()
+    {
+    }
 
     protected abstract dynamic CreateResultHandler();
     protected abstract void Execute(

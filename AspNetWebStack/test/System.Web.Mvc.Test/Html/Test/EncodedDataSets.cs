@@ -277,7 +277,9 @@ namespace System.Web.Mvc.Html.Test
                     htmlEncodedText,
                     idEncodedText,
                     Uri.EscapeUriString(text)
-                ) { }
+                )
+            {
+            }
 
             public StringSet(
                 string text,

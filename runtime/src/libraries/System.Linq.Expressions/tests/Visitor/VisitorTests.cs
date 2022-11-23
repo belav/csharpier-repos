@@ -127,7 +127,9 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private class DefaultVisitor : ExpressionVisitor { }
+        private class DefaultVisitor : ExpressionVisitor
+        {
+        }
 
         private class ConstantRefreshingVisitor : ExpressionVisitor
         {
@@ -135,7 +137,9 @@ namespace System.Linq.Expressions.Tests
                 Expression.Constant(node.Value, node.Type);
         }
 
-        private class ResultExpression : Expression { }
+        private class ResultExpression : Expression
+        {
+        }
 
         private class SourceExpression : Expression
         {

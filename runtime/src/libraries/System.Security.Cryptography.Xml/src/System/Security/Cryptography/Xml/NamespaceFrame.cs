@@ -14,7 +14,9 @@ namespace System.Security.Cryptography.Xml
         private readonly Hashtable _rendered = new Hashtable();
         private readonly Hashtable _unrendered = new Hashtable();
 
-        internal NamespaceFrame() { }
+        internal NamespaceFrame()
+        {
+        }
 
         internal void AddRendered(XmlAttribute attr)
         {

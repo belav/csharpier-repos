@@ -9,7 +9,9 @@ using System.Runtime.CompilerServices;
 
 public class TestClass
 {
-    public struct S1 { }
+    public struct S1
+    {
+    }
 
     public struct S2
     {
@@ -82,17 +84,25 @@ public class TestClass
                                     if (
                                         bool_40 = s_bool_2 =
                                             (int_24 %= 15 + 4) > (int_24 &= LeafMethod6())
-                                    ) { }
-                                    else { }
+                                    )
+                                    {
+                                    }
+                                    else
+                                    {
+                                    }
                                     try
                                     {
                                         int __loopvar8 = s_loopInvariant,
                                             __loopSecondaryVar8_0 = 15 + 4;
                                     }
-                                    catch (System.TimeZoneNotFoundException) { }
+                                    catch (System.TimeZoneNotFoundException)
+                                    {
+                                    }
                                 }
                             }
-                            else { }
+                            else
+                            {
+                            }
                             break;
                         }
                         case 'A':
@@ -117,7 +127,9 @@ public class TestClass
                         }
                     }
                 }
-                else { }
+                else
+                {
+                }
             }
             return 15 | 4;
         }

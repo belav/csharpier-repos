@@ -69,7 +69,9 @@ End Class
 ";
 
         public BasicSignatureHelp(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicSignatureHelp)) { }
+            : base(instanceFactory, nameof(BasicSignatureHelp))
+        {
+        }
 
         [WpfFact]
         public void MethodSignatureHelp()

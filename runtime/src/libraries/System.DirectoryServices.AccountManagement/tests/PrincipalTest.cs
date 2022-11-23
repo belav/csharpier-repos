@@ -33,7 +33,9 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     password
                 );
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void Dispose() => DomainContext?.Dispose();

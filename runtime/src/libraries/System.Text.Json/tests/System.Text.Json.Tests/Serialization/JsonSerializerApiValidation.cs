@@ -13,48 +13,62 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class JsonSerializerApiValidation_Span : JsonSerializerApiValidation
     {
-        public JsonSerializerApiValidation_Span() : base(JsonSerializerWrapper.SpanSerializer) { }
+        public JsonSerializerApiValidation_Span() : base(JsonSerializerWrapper.SpanSerializer)
+        {
+        }
     }
 
     public class JsonSerializerApiValidation_String : JsonSerializerApiValidation
     {
         public JsonSerializerApiValidation_String() : base(JsonSerializerWrapper.StringSerializer)
-        { }
+        {
+        }
     }
 
     public class JsonSerializerApiValidation_AsyncStream : JsonSerializerApiValidation
     {
         public JsonSerializerApiValidation_AsyncStream()
-            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+            : base(JsonSerializerWrapper.AsyncStreamSerializer)
+        {
+        }
     }
 
     public class JsonSerializerApiValidation_SyncStream : JsonSerializerApiValidation
     {
         public JsonSerializerApiValidation_SyncStream()
-            : base(JsonSerializerWrapper.SyncStreamSerializer) { }
+            : base(JsonSerializerWrapper.SyncStreamSerializer)
+        {
+        }
     }
 
     public class JsonSerializerApiValidation_Writer : JsonSerializerApiValidation
     {
         public JsonSerializerApiValidation_Writer()
-            : base(JsonSerializerWrapper.ReaderWriterSerializer) { }
+            : base(JsonSerializerWrapper.ReaderWriterSerializer)
+        {
+        }
     }
 
     public class JsonSerializerApiValidation_Document : JsonSerializerApiValidation
     {
         public JsonSerializerApiValidation_Document()
-            : base(JsonSerializerWrapper.DocumentSerializer) { }
+            : base(JsonSerializerWrapper.DocumentSerializer)
+        {
+        }
     }
 
     public class JsonSerializerApiValidation_Element : JsonSerializerApiValidation
     {
         public JsonSerializerApiValidation_Element() : base(JsonSerializerWrapper.ElementSerializer)
-        { }
+        {
+        }
     }
 
     public class JsonSerializerApiValidation_Node : JsonSerializerApiValidation
     {
-        public JsonSerializerApiValidation_Node() : base(JsonSerializerWrapper.NodeSerializer) { }
+        public JsonSerializerApiValidation_Node() : base(JsonSerializerWrapper.NodeSerializer)
+        {
+        }
     }
 }
 
@@ -63,13 +77,19 @@ namespace System.Text.Json.Serialization.Tests
 /// </summary>
 public abstract class JsonSerializerApiValidation
 {
-    private class MyPoco { }
+    private class MyPoco
+    {
+    }
 
     internal partial class MyDummyContext : JsonSerializerContext
     {
-        public MyDummyContext() : base(new JsonSerializerOptions()) { }
+        public MyDummyContext() : base(new JsonSerializerOptions())
+        {
+        }
 
-        public MyDummyContext(JsonSerializerOptions options) : base(options) { }
+        public MyDummyContext(JsonSerializerOptions options) : base(options)
+        {
+        }
 
         public override JsonTypeInfo? GetTypeInfo(Type type) => throw new NotImplementedException();
 

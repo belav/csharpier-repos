@@ -28,13 +28,18 @@ namespace System.Net.Sockets
 
         // Creates a new instance of the System.Net.Sockets.NetworkStream class for the specified System.Net.Sockets.Socket.
         public NetworkStream(Socket socket) : this(socket, FileAccess.ReadWrite, ownsSocket: false)
-        { }
+        {
+        }
 
         public NetworkStream(Socket socket, bool ownsSocket)
-            : this(socket, FileAccess.ReadWrite, ownsSocket) { }
+            : this(socket, FileAccess.ReadWrite, ownsSocket)
+        {
+        }
 
         public NetworkStream(Socket socket, FileAccess access)
-            : this(socket, access, ownsSocket: false) { }
+            : this(socket, access, ownsSocket: false)
+        {
+        }
 
         public NetworkStream(Socket socket, FileAccess access, bool ownsSocket)
         {
@@ -681,7 +686,9 @@ namespace System.Net.Sockets
         }
 
         // Flushes data from the stream.  This is meaningless for us, so it does nothing.
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {

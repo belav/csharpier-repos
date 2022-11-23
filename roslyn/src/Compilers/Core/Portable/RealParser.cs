@@ -251,7 +251,9 @@ namespace Microsoft.CodeAnalysis
         {
             public static FloatFloatingPointType Instance = new FloatFloatingPointType();
 
-            private FloatFloatingPointType() { }
+            private FloatFloatingPointType()
+            {
+            }
 
             public override ushort DenormalMantissaBits => 23;
             public override ushort ExponentBits => 8;
@@ -268,7 +270,9 @@ namespace Microsoft.CodeAnalysis
         {
             public static DoubleFloatingPointType Instance = new DoubleFloatingPointType();
 
-            private DoubleFloatingPointType() { }
+            private DoubleFloatingPointType()
+            {
+            }
 
             public override ushort DenormalMantissaBits => 52;
             public override ushort ExponentBits => 11;

@@ -28,13 +28,17 @@ public class DateTimeTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public DateTimeTypeMapping(string storeType, DbType? dbType = System.Data.DbType.DateTime)
-        : base(storeType, typeof(DateTime), dbType) { }
+        : base(storeType, typeof(DateTime), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DateTimeTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected DateTimeTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected DateTimeTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

@@ -10,7 +10,9 @@ namespace System.Reflection.Tests
         public static int Members = 3;
         public static int MembersEverything = 9;
 
-        static ConstructorTestStaticClass() { }
+        static ConstructorTestStaticClass()
+        {
+        }
     }
 
     public class ConstructorTestClassWithMultipleConstructors
@@ -18,19 +20,33 @@ namespace System.Reflection.Tests
         public static int Members = 9;
         public static int MembersEverything = 15;
 
-        static ConstructorTestClassWithMultipleConstructors() { }
+        static ConstructorTestClassWithMultipleConstructors()
+        {
+        }
 
-        private ConstructorTestClassWithMultipleConstructors(string s) { }
+        private ConstructorTestClassWithMultipleConstructors(string s)
+        {
+        }
 
-        protected ConstructorTestClassWithMultipleConstructors(int i) { }
+        protected ConstructorTestClassWithMultipleConstructors(int i)
+        {
+        }
 
-        public ConstructorTestClassWithMultipleConstructors() { }
+        public ConstructorTestClassWithMultipleConstructors()
+        {
+        }
 
-        public ConstructorTestClassWithMultipleConstructors(TimeSpan ts) { }
+        public ConstructorTestClassWithMultipleConstructors(TimeSpan ts)
+        {
+        }
 
-        public ConstructorTestClassWithMultipleConstructors(object o1, object o2) { }
+        public ConstructorTestClassWithMultipleConstructors(object o1, object o2)
+        {
+        }
 
-        public ConstructorTestClassWithMultipleConstructors(object obj0, int i4) { }
+        public ConstructorTestClassWithMultipleConstructors(object obj0, int i4)
+        {
+        }
     }
 
     public class ConstructorTestBaseClass
@@ -38,11 +54,17 @@ namespace System.Reflection.Tests
         public static int Members = 5;
         public static int MembersEverything = 11;
 
-        static ConstructorTestBaseClass() { }
+        static ConstructorTestBaseClass()
+        {
+        }
 
-        public ConstructorTestBaseClass() { }
+        public ConstructorTestBaseClass()
+        {
+        }
 
-        public ConstructorTestBaseClass(short i2) { }
+        public ConstructorTestBaseClass(short i2)
+        {
+        }
     }
 
     public class ConstructorTestSubClass : ConstructorTestBaseClass
@@ -50,8 +72,12 @@ namespace System.Reflection.Tests
         public static new int Members = 5; //.cctor is added
         public static new int MembersEverything = 11;
 
-        public ConstructorTestSubClass(string s) { }
+        public ConstructorTestSubClass(string s)
+        {
+        }
 
-        public ConstructorTestSubClass(short i2) { }
+        public ConstructorTestSubClass(short i2)
+        {
+        }
     }
 }

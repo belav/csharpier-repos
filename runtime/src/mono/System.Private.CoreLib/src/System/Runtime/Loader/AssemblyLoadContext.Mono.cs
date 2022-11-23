@@ -112,9 +112,13 @@ namespace System.Runtime.Loader
             return loadContextForAssembly;
         }
 
-        public void SetProfileOptimizationRoot(string directoryPath) { }
+        public void SetProfileOptimizationRoot(string directoryPath)
+        {
+        }
 
-        public void StartProfileOptimization(string? profile) { }
+        public void StartProfileOptimization(string? profile)
+        {
+        }
 
         [RequiresUnreferencedCode(
             "Types and members the loaded assembly depends on might be removed"

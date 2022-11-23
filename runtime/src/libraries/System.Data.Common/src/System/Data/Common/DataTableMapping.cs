@@ -18,7 +18,9 @@ namespace System.Data.Common
         private string? _dataSetTableName;
         private string? _sourceTableName;
 
-        public DataTableMapping() { }
+        public DataTableMapping()
+        {
+        }
 
         public DataTableMapping(string? sourceTable, string? dataSetTable)
         {
@@ -189,7 +191,9 @@ namespace System.Data.Common
             : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public DataTableMappingConverter() { }
+            public DataTableMappingConverter()
+            {
+            }
 
             public override bool CanConvertTo(
                 ITypeDescriptorContext? context,

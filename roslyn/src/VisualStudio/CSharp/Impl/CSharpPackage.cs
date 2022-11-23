@@ -146,7 +146,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 });
             }
             catch (Exception e)
-                when (FatalError.ReportAndPropagateUnlessCanceled(e, ErrorSeverity.General)) { }
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, ErrorSeverity.General))
+            {
+            }
         }
 
         protected override async Task RegisterObjectBrowserLibraryManagerAsync(

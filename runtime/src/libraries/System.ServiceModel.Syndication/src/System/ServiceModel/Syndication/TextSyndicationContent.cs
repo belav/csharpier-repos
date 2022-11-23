@@ -12,7 +12,9 @@ namespace System.ServiceModel.Syndication
         private readonly TextSyndicationContentKind _textKind;
 
         public TextSyndicationContent(string text)
-            : this(text, TextSyndicationContentKind.Plaintext) { }
+            : this(text, TextSyndicationContentKind.Plaintext)
+        {
+        }
 
         public TextSyndicationContent(string text, TextSyndicationContentKind textKind)
         {

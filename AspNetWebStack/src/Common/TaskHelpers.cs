@@ -67,7 +67,9 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Used as the T in a "conversion" of a Task into a Task{T}
         /// </summary>
-        private struct AsyncVoid { }
+        private struct AsyncVoid
+        {
+        }
 
         /// <summary>
         /// This class is a convenient cache for per-type cancelled tasks

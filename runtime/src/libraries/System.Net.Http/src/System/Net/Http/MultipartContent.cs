@@ -30,9 +30,13 @@ namespace System.Net.Http
 
         #region Construction
 
-        public MultipartContent() : this("mixed", GetDefaultBoundary()) { }
+        public MultipartContent() : this("mixed", GetDefaultBoundary())
+        {
+        }
 
-        public MultipartContent(string subtype) : this(subtype, GetDefaultBoundary()) { }
+        public MultipartContent(string subtype) : this(subtype, GetDefaultBoundary())
+        {
+        }
 
         public MultipartContent(string subtype, string boundary)
         {
@@ -740,7 +744,9 @@ namespace System.Net.Http
 
             public override long Length => _length;
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override Task FlushAsync(CancellationToken cancellationToken) =>
                 Task.CompletedTask;

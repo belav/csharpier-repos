@@ -122,7 +122,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public StatefulLspServiceFactory() { }
+            public StatefulLspServiceFactory()
+            {
+            }
 
             public ILspService CreateILspService(
                 LspServices lspServices,
@@ -145,7 +147,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public StatelessLspService() { }
+            public StatelessLspService()
+            {
+            }
 
             public bool IsDisposed { get; private set; } = false;
 

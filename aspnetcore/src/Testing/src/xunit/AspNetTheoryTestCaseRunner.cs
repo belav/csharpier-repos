@@ -31,7 +31,9 @@ internal sealed class AspNetTheoryTestCaseRunner : XunitTheoryTestCaseRunner
             messageBus,
             aggregator,
             cancellationTokenSource
-        ) { }
+        )
+    {
+    }
 
     protected override XunitTestRunner CreateTestRunner(
         ITest test,

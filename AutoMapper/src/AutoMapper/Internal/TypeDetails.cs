@@ -288,7 +288,9 @@ public readonly record struct ConstructorParameters(
 )
 {
     public ConstructorParameters(ConstructorInfo constructor)
-        : this(constructor, constructor.GetParameters()) { }
+        : this(constructor, constructor.GetParameters())
+    {
+    }
 
     public int ParametersCount => Parameters.Length;
 

@@ -24,7 +24,9 @@ namespace System.Xml.Linq
     {
         internal object? content;
 
-        internal XContainer() { }
+        internal XContainer()
+        {
+        }
 
         internal XContainer(XContainer other)
         {
@@ -466,9 +468,13 @@ namespace System.Xml.Linq
             ReplaceNodes((object)content);
         }
 
-        internal virtual void AddAttribute(XAttribute a) { }
+        internal virtual void AddAttribute(XAttribute a)
+        {
+        }
 
-        internal virtual void AddAttributeSkipNotify(XAttribute a) { }
+        internal virtual void AddAttributeSkipNotify(XAttribute a)
+        {
+        }
 
         internal void AddContentSkipNotify(object? content)
         {
@@ -1436,9 +1442,13 @@ namespace System.Xml.Linq
 
         // Validate insertion of the given node. previous is the node after which insertion
         // will occur. previous == null means at beginning, previous == this means at end.
-        internal virtual void ValidateNode(XNode node, XNode? previous) { }
+        internal virtual void ValidateNode(XNode node, XNode? previous)
+        {
+        }
 
-        internal virtual void ValidateString(string s) { }
+        internal virtual void ValidateString(string s)
+        {
+        }
 
         internal void WriteContentTo(XmlWriter writer)
         {

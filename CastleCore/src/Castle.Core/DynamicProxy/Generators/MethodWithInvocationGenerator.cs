@@ -53,7 +53,9 @@ namespace Castle.DynamicProxy.Generators
                 null,
                 createMethod,
                 contributor
-            ) { }
+            )
+        {
+        }
 
         public MethodWithInvocationGenerator(
             MetaMethod method,

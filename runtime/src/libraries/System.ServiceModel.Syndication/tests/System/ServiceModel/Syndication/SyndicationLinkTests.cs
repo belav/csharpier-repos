@@ -469,9 +469,13 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class SyndicationLinkSubclass : SyndicationLink
         {
-            public SyndicationLinkSubclass() : base() { }
+            public SyndicationLinkSubclass() : base()
+            {
+            }
 
-            public SyndicationLinkSubclass(SyndicationLink source) : base(source) { }
+            public SyndicationLinkSubclass(SyndicationLink source) : base(source)
+            {
+            }
 
             public bool TryParseAttributeEntryPoint(
                 string name,

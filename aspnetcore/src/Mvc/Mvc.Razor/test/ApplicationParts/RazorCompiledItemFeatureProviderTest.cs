@@ -203,12 +203,18 @@ public class RazorCompiledItemFeatureProviderTest
         }
     }
 
-    private class TestView { }
+    private class TestView
+    {
+    }
 
-    private class TestPage { }
+    private class TestPage
+    {
+    }
 
     [Route("some-route")]
     [RazorCompiledItemMetadata("RouteTemplate", "new-route")]
     [RazorCompiledItemMetadata("Identifier", "Item2")]
-    private class TestReloadedPage { }
+    private class TestReloadedPage
+    {
+    }
 }

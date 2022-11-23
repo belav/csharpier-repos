@@ -1421,68 +1421,122 @@ namespace System.Linq.Expressions.Tests
 
         public class GenericClass<T>
         {
-            public static void NonGenericMethod() { }
+            public static void NonGenericMethod()
+            {
+            }
         }
 
         public static class Unreadable<T>
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
         public class NonGenericClass
         {
-            public static void GenericMethod<T>() { }
+            public static void GenericMethod<T>()
+            {
+            }
 
-            public void InstanceMethod() { }
+            public void InstanceMethod()
+            {
+            }
 
-            public static void StaticMethod() { }
+            public static void StaticMethod()
+            {
+            }
 
-            public static void Method0() { }
+            public static void Method0()
+            {
+            }
 
-            public static void Method1(int i1) { }
+            public static void Method1(int i1)
+            {
+            }
 
-            public static void Method2(int i1, int i2) { }
+            public static void Method2(int i1, int i2)
+            {
+            }
 
-            public static void Method3(int i1, int i2, int i3) { }
+            public static void Method3(int i1, int i2, int i3)
+            {
+            }
 
-            public static void Method4(int i1, int i2, int i3, int i4) { }
+            public static void Method4(int i1, int i2, int i3, int i4)
+            {
+            }
 
-            public static void Method5(int i1, int i2, int i3, int i4, int i5) { }
+            public static void Method5(int i1, int i2, int i3, int i4, int i5)
+            {
+            }
 
-            public static void Method6(int i1, int i2, int i3, int i4, int i5, int i6) { }
+            public static void Method6(int i1, int i2, int i3, int i4, int i5, int i6)
+            {
+            }
 
-            public static void Method7(int i1, int i2, int i3, int i4, int i5, int i6, int i7) { }
+            public static void Method7(int i1, int i2, int i3, int i4, int i5, int i6, int i7)
+            {
+            }
 
-            public void staticSameName(uint i1) { }
+            public void staticSameName(uint i1)
+            {
+            }
 
-            public void instanceSameName(int i1) { }
+            public void instanceSameName(int i1)
+            {
+            }
 
-            public static void StaticSameName(uint i1) { }
+            public static void StaticSameName(uint i1)
+            {
+            }
 
-            public static void staticSameName(int i1) { }
+            public static void staticSameName(int i1)
+            {
+            }
 
-            public void GenericInstanceMethod<T>(T t1) { }
+            public void GenericInstanceMethod<T>(T t1)
+            {
+            }
 
-            public static void GenericStaticMethod<T>(T t1) { }
+            public static void GenericStaticMethod<T>(T t1)
+            {
+            }
 
-            public void ConstrainedInstanceMethod<T>(T t1) where T : struct { }
+            public void ConstrainedInstanceMethod<T>(T t1) where T : struct
+            {
+            }
 
-            public static void ConstrainedStaticMethod<T>(T t1) where T : struct { }
+            public static void ConstrainedStaticMethod<T>(T t1) where T : struct
+            {
+            }
 
-            public void InstanceMethod0() { }
+            public void InstanceMethod0()
+            {
+            }
 
-            public void InstanceMethod1(int i1) { }
+            public void InstanceMethod1(int i1)
+            {
+            }
 
-            public void InstanceMethod2(int i1, int i2) { }
+            public void InstanceMethod2(int i1, int i2)
+            {
+            }
 
-            public void InstanceMethod3(int i1, int i2, int i3) { }
+            public void InstanceMethod3(int i1, int i2, int i3)
+            {
+            }
 
-            public void InstanceMethod4(int i1, int i2, int i3, int i4) { }
+            public void InstanceMethod4(int i1, int i2, int i3, int i4)
+            {
+            }
 
-            public static void StaticMethod1(int i1) { }
+            public static void StaticMethod1(int i1)
+            {
+            }
 
             public enum E1 : byte
             {
@@ -1512,7 +1566,9 @@ namespace System.Linq.Expressions.Tests
             int InterfaceMethod();
         }
 
-        public interface CompoundInterface : Interface1 { }
+        public interface CompoundInterface : Interface1
+        {
+        }
 
         public class ClassWithInterface1 : Interface1
         {
@@ -1551,25 +1607,43 @@ namespace System.Linq.Expressions.Tests
 
     class SomeMethods
     {
-        public static void S0() { }
+        public static void S0()
+        {
+        }
 
-        public static void S1(int x) { }
+        public static void S1(int x)
+        {
+        }
 
-        public static void S2(int x, int y) { }
+        public static void S2(int x, int y)
+        {
+        }
 
-        public void I0() { }
+        public void I0()
+        {
+        }
 
-        public void I1(int x) { }
+        public void I1(int x)
+        {
+        }
 
-        public void I2(int x, int y) { }
+        public void I2(int x, int y)
+        {
+        }
     }
 
     static class ExtensionMethods
     {
-        public static void E0(this int x) { }
+        public static void E0(this int x)
+        {
+        }
 
-        public static void E1(this int x, int y) { }
+        public static void E1(this int x, int y)
+        {
+        }
 
-        public static void E2(this int x, int y, int z) { }
+        public static void E2(this int x, int y, int z)
+        {
+        }
     }
 }

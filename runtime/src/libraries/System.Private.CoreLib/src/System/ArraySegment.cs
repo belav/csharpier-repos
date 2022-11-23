@@ -332,7 +332,9 @@ namespace System
                 _current = _start - 1;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

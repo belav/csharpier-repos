@@ -27,7 +27,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class TestObject
     {
-        public TestObject() { }
+        public TestObject()
+        {
+        }
 
         public TestObject(string name, byte[] data)
         {

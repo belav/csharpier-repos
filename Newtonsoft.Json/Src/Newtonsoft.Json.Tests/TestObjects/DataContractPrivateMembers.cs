@@ -31,7 +31,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [DataContract]
     public class DataContractPrivateMembers
     {
-        public DataContractPrivateMembers() { }
+        public DataContractPrivateMembers()
+        {
+        }
 
         public DataContractPrivateMembers(string name, int age, int rank, string title)
         {

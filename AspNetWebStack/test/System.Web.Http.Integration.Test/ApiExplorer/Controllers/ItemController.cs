@@ -18,7 +18,9 @@ namespace System.Web.Http.ApiExplorer
         }
 
         [HttpDelete]
-        public void RemoveItem(int id) { }
+        public void RemoveItem(int id)
+        {
+        }
 
         public class Item
         {

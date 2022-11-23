@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <summary>
         /// Initializes an instance of MemoryCacheStatistics.
         /// </summary>
-        public MemoryCacheStatistics() { }
+        public MemoryCacheStatistics()
+        {
+        }
 
         /// <summary>
         /// Gets the number of <see cref="ICacheEntry" /> instances currently in the memory cache.

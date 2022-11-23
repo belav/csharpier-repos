@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
     public class WorkspacesDesktop : WorkspaceBase
     {
         public WorkspacesDesktop(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary) { }
+            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary)
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Workspace)]
         public override void OpenCSharpThenVBSolution()

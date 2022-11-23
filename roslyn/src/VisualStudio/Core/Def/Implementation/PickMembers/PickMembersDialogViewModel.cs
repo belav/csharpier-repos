@@ -194,7 +194,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
         internal class MemberSymbolViewModel : SymbolViewModel<ISymbol>
         {
             public MemberSymbolViewModel(ISymbol symbol, IGlyphService glyphService)
-                : base(symbol, glyphService) { }
+                : base(symbol, glyphService)
+            {
+            }
         }
 
         internal class OptionViewModel : AbstractNotifyPropertyChanged

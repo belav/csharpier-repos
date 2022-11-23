@@ -333,12 +333,16 @@ namespace System.Reflection.Tests
     // Metadata for Reflection
     public abstract class ConstructorInfoAbstractBase
     {
-        public ConstructorInfoAbstractBase() { }
+        public ConstructorInfoAbstractBase()
+        {
+        }
     }
 
     public class ConstructorInfoDerived : ConstructorInfoAbstractBase
     {
-        public ConstructorInfoDerived() { }
+        public ConstructorInfoDerived()
+        {
+        }
     }
 
     public class ClassWith3Constructors
@@ -346,7 +350,9 @@ namespace System.Reflection.Tests
         public int intValue = 0;
         public string stringValue = "";
 
-        public ClassWith3Constructors() { }
+        public ClassWith3Constructors()
+        {
+        }
 
         public ClassWith3Constructors(int intValue)
         {
@@ -362,7 +368,9 @@ namespace System.Reflection.Tests
 
     public static class ClassWithStaticConstructor
     {
-        static ClassWithStaticConstructor() { }
+        static ClassWithStaticConstructor()
+        {
+        }
     }
 
     // Use this class only from the Invoke_StaticConstructorMultipleTimes method

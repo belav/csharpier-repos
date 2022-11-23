@@ -28,7 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             }
 
             public ProjectState(ImmutableDictionary<string, string> installedPackageToVersion)
-                : this(isEnabled: true, installedPackageToVersion) { }
+                : this(isEnabled: true, installedPackageToVersion)
+            {
+            }
 
             public bool IsInstalled(string package) =>
                 IsEnabled && InstalledPackageToVersion.ContainsKey(package);

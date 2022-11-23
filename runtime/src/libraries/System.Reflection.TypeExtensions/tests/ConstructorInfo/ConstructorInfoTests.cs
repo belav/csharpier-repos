@@ -10,13 +10,21 @@ namespace System.Reflection.Tests
     {
         public class ConstructorInfoInvoke
         {
-            public ConstructorInfoInvoke() { }
+            public ConstructorInfoInvoke()
+            {
+            }
 
-            public ConstructorInfoInvoke(int i) { }
+            public ConstructorInfoInvoke(int i)
+            {
+            }
 
-            public ConstructorInfoInvoke(int i, string s) { }
+            public ConstructorInfoInvoke(int i, string s)
+            {
+            }
 
-            public ConstructorInfoInvoke(string s, int i) { }
+            public ConstructorInfoInvoke(string s, int i)
+            {
+            }
 
             public ConstructorInfoInvoke(int i, int j, int k)
             {
@@ -26,7 +34,9 @@ namespace System.Reflection.Tests
 
         public abstract class TestAbstractClass
         {
-            public TestAbstractClass() { }
+            public TestAbstractClass()
+            {
+            }
 
             public abstract void TestAbstractMethod();
         }

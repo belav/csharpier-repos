@@ -31,7 +31,9 @@ namespace Microsoft.VisualBasic
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        public Collection() { }
+        public Collection()
+        {
+        }
 
         public int Count
         {
@@ -76,7 +78,9 @@ namespace Microsoft.VisualBasic
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public void Add(
@@ -84,9 +88,13 @@ namespace Microsoft.VisualBasic
             string? Key = null,
             object? Before = null,
             object? After = null
-        ) { }
+        )
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(string Key)
         {
@@ -98,11 +106,17 @@ namespace Microsoft.VisualBasic
             throw null;
         }
 
-        public void Remove(int Index) { }
+        public void Remove(int Index)
+        {
+        }
 
-        public void Remove(string Key) { }
+        public void Remove(string Key)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -114,7 +128,9 @@ namespace Microsoft.VisualBasic
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object? value)
         {
@@ -126,11 +142,17 @@ namespace Microsoft.VisualBasic
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -140,13 +162,21 @@ namespace Microsoft.VisualBasic
     )]
     public sealed partial class ComClassAttribute : System.Attribute
     {
-        public ComClassAttribute() { }
+        public ComClassAttribute()
+        {
+        }
 
-        public ComClassAttribute(string? _ClassID) { }
+        public ComClassAttribute(string? _ClassID)
+        {
+        }
 
-        public ComClassAttribute(string? _ClassID, string? _InterfaceID) { }
+        public ComClassAttribute(string? _ClassID, string? _InterfaceID)
+        {
+        }
 
-        public ComClassAttribute(string? _ClassID, string? _InterfaceID, string? _EventId) { }
+        public ComClassAttribute(string? _ClassID, string? _InterfaceID, string? _EventId)
+        {
+        }
 
         public string? ClassID
         {
@@ -163,7 +193,9 @@ namespace Microsoft.VisualBasic
         public bool InterfaceShadows
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -176,7 +208,9 @@ namespace Microsoft.VisualBasic
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Constants
     {
-        internal Constants() { }
+        internal Constants()
+        {
+        }
 
         public const Microsoft.VisualBasic.MsgBoxResult vbAbort = Microsoft
             .VisualBasic
@@ -554,13 +588,17 @@ namespace Microsoft.VisualBasic
         public const char Tab = '\t';
         public const char VerticalTab = '\v';
 
-        public ControlChars() { }
+        public ControlChars()
+        {
+        }
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Conversion
     {
-        internal Conversion() { }
+        internal Conversion()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Expression's underlying type cannot be statically analyzed and its members may be trimmed"
@@ -790,13 +828,17 @@ namespace Microsoft.VisualBasic
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class DateAndTime
     {
-        internal DateAndTime() { }
+        internal DateAndTime()
+        {
+        }
 
         public static string DateString
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public static System.DateTime Now
         {
@@ -806,7 +848,9 @@ namespace Microsoft.VisualBasic
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public static double Timer
         {
@@ -816,13 +860,17 @@ namespace Microsoft.VisualBasic
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public static System.DateTime Today
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
 
         public static System.DateTime DateAdd(
@@ -995,12 +1043,16 @@ namespace Microsoft.VisualBasic
 
     public sealed partial class ErrObject
     {
-        internal ErrObject() { }
+        internal ErrObject()
+        {
+        }
 
         public string Description
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Erl
         {
@@ -1009,12 +1061,16 @@ namespace Microsoft.VisualBasic
         public int HelpContext
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string HelpFile
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int LastDllError
         {
@@ -1023,15 +1079,21 @@ namespace Microsoft.VisualBasic
         public int Number
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Source
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public System.Exception? GetException()
         {
@@ -1044,7 +1106,9 @@ namespace Microsoft.VisualBasic
             object? Description = null,
             object? HelpFile = null,
             object? HelpContext = null
-        ) { }
+        )
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -1062,15 +1126,23 @@ namespace Microsoft.VisualBasic
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class FileSystem
     {
-        internal FileSystem() { }
+        internal FileSystem()
+        {
+        }
 
-        public static void ChDir(string Path) { }
+        public static void ChDir(string Path)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void ChDrive(char Drive) { }
+        public static void ChDrive(char Drive)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void ChDrive(string? Drive) { }
+        public static void ChDrive(string? Drive)
+        {
+        }
 
         public static string CurDir()
         {
@@ -1108,9 +1180,13 @@ namespace Microsoft.VisualBasic
             throw null;
         }
 
-        public static void FileClose(params int[] FileNumbers) { }
+        public static void FileClose(params int[] FileNumbers)
+        {
+        }
 
-        public static void FileCopy(string Source, string Destination) { }
+        public static void FileCopy(string Source, string Destination)
+        {
+        }
 
         public static System.DateTime FileDateTime(string PathName)
         {
@@ -1126,54 +1202,62 @@ namespace Microsoft.VisualBasic
             long RecordNumber = (long)-1,
             bool ArrayIsDynamic = false,
             bool StringIsFixedLength = false
-        ) { }
+        )
+        {
+        }
 
-        public static void FileGet(int FileNumber, ref bool Value, long RecordNumber = (long)-1) { }
+        public static void FileGet(int FileNumber, ref bool Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileGet(int FileNumber, ref byte Value, long RecordNumber = (long)-1) { }
+        public static void FileGet(int FileNumber, ref byte Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileGet(int FileNumber, ref char Value, long RecordNumber = (long)-1) { }
+        public static void FileGet(int FileNumber, ref char Value, long RecordNumber = (long)-1)
+        {
+        }
 
         public static void FileGet(
             int FileNumber,
             ref System.DateTime Value,
             long RecordNumber = (long)-1
-        ) { }
+        )
+        {
+        }
 
-        public static void FileGet(
-            int FileNumber,
-            ref decimal Value,
-            long RecordNumber = (long)-1
-        ) { }
+        public static void FileGet(int FileNumber, ref decimal Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileGet(
-            int FileNumber,
-            ref double Value,
-            long RecordNumber = (long)-1
-        ) { }
+        public static void FileGet(int FileNumber, ref double Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileGet(
-            int FileNumber,
-            ref short Value,
-            long RecordNumber = (long)-1
-        ) { }
+        public static void FileGet(int FileNumber, ref short Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileGet(int FileNumber, ref int Value, long RecordNumber = (long)-1) { }
+        public static void FileGet(int FileNumber, ref int Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileGet(int FileNumber, ref long Value, long RecordNumber = (long)-1) { }
+        public static void FileGet(int FileNumber, ref long Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileGet(
-            int FileNumber,
-            ref float Value,
-            long RecordNumber = (long)-1
-        ) { }
+        public static void FileGet(int FileNumber, ref float Value, long RecordNumber = (long)-1)
+        {
+        }
 
         public static void FileGet(
             int FileNumber,
             ref string Value,
             long RecordNumber = (long)-1,
             bool StringIsFixedLength = false
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The target object type could not be statically analyzed and may be trimmed"
@@ -1182,7 +1266,9 @@ namespace Microsoft.VisualBasic
             int FileNumber,
             ref System.ValueType Value,
             long RecordNumber = (long)-1
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The target object type could not be statically analyzed and may be trimmed"
@@ -1191,7 +1277,9 @@ namespace Microsoft.VisualBasic
             int FileNumber,
             ref object Value,
             long RecordNumber = (long)-1
-        ) { }
+        )
+        {
+        }
 
         public static long FileLen(string PathName)
         {
@@ -1205,7 +1293,9 @@ namespace Microsoft.VisualBasic
             Microsoft.VisualBasic.OpenAccess Access = Microsoft.VisualBasic.OpenAccess.Default,
             Microsoft.VisualBasic.OpenShare Share = Microsoft.VisualBasic.OpenShare.Default,
             int RecordLength = -1
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The origin object type could not be statically analyzed and may be trimmed"
@@ -1216,38 +1306,62 @@ namespace Microsoft.VisualBasic
             long RecordNumber = (long)-1,
             bool ArrayIsDynamic = false,
             bool StringIsFixedLength = false
-        ) { }
+        )
+        {
+        }
 
-        public static void FilePut(int FileNumber, bool Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, bool Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FilePut(int FileNumber, byte Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, byte Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FilePut(int FileNumber, char Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, char Value, long RecordNumber = (long)-1)
+        {
+        }
 
         public static void FilePut(
             int FileNumber,
             System.DateTime Value,
             long RecordNumber = (long)-1
-        ) { }
+        )
+        {
+        }
 
-        public static void FilePut(int FileNumber, decimal Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, decimal Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FilePut(int FileNumber, double Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, double Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FilePut(int FileNumber, short Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, short Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FilePut(int FileNumber, int Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, int Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FilePut(int FileNumber, long Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, long Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FilePut(int FileNumber, float Value, long RecordNumber = (long)-1) { }
+        public static void FilePut(int FileNumber, float Value, long RecordNumber = (long)-1)
+        {
+        }
 
         public static void FilePut(
             int FileNumber,
             string Value,
             long RecordNumber = (long)-1,
             bool StringIsFixedLength = false
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The origin object type could not be statically analyzed and may be trimmed"
@@ -1256,23 +1370,27 @@ namespace Microsoft.VisualBasic
             int FileNumber,
             System.ValueType Value,
             long RecordNumber = (long)-1
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "FileSystem.FilePut has been deprecated. Use FilePutObject to write Object types, or coerce FileNumber and RecordNumber to Integer for writing non-Object types."
         )]
-        public static void FilePut(object FileNumber, object Value, object RecordNumber) { }
+        public static void FilePut(object FileNumber, object Value, object RecordNumber)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The origin object type could not be statically analyzed and may be trimmed"
         )]
-        public static void FilePutObject(
-            int FileNumber,
-            object Value,
-            long RecordNumber = (long)-1
-        ) { }
+        public static void FilePutObject(int FileNumber, object Value, long RecordNumber = (long)-1)
+        {
+        }
 
-        public static void FileWidth(int FileNumber, int RecordWidth) { }
+        public static void FileWidth(int FileNumber, int RecordWidth)
+        {
+        }
 
         public static int FreeFile()
         {
@@ -1284,32 +1402,56 @@ namespace Microsoft.VisualBasic
             throw null;
         }
 
-        public static void Input(int FileNumber, ref bool Value) { }
+        public static void Input(int FileNumber, ref bool Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref byte Value) { }
+        public static void Input(int FileNumber, ref byte Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref char Value) { }
+        public static void Input(int FileNumber, ref char Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref System.DateTime Value) { }
+        public static void Input(int FileNumber, ref System.DateTime Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref decimal Value) { }
+        public static void Input(int FileNumber, ref decimal Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref double Value) { }
+        public static void Input(int FileNumber, ref double Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref short Value) { }
+        public static void Input(int FileNumber, ref short Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref int Value) { }
+        public static void Input(int FileNumber, ref int Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref long Value) { }
+        public static void Input(int FileNumber, ref long Value)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The target object type could not be statically analyzed and may be trimmed"
         )]
-        public static void Input(int FileNumber, ref object Value) { }
+        public static void Input(int FileNumber, ref object Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref float Value) { }
+        public static void Input(int FileNumber, ref float Value)
+        {
+        }
 
-        public static void Input(int FileNumber, ref string Value) { }
+        public static void Input(int FileNumber, ref string Value)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
@@ -1319,7 +1461,9 @@ namespace Microsoft.VisualBasic
             throw null;
         }
 
-        public static void Kill(string PathName) { }
+        public static void Kill(string PathName)
+        {
+        }
 
         public static string LineInput(int FileNumber)
         {
@@ -1334,47 +1478,66 @@ namespace Microsoft.VisualBasic
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-        public static void Lock(int FileNumber) { }
+        public static void Lock(int FileNumber)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-        public static void Lock(int FileNumber, long Record) { }
+        public static void Lock(int FileNumber, long Record)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-        public static void Lock(int FileNumber, long FromRecord, long ToRecord) { }
+        public static void Lock(int FileNumber, long FromRecord, long ToRecord)
+        {
+        }
 
         public static long LOF(int FileNumber)
         {
             throw null;
         }
 
-        public static void MkDir(string Path) { }
+        public static void MkDir(string Path)
+        {
+        }
 
-        public static void Print(int FileNumber, params object[] Output) { }
+        public static void Print(int FileNumber, params object[] Output)
+        {
+        }
 
-        public static void PrintLine(int FileNumber, params object[] Output) { }
+        public static void PrintLine(int FileNumber, params object[] Output)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void Rename(string OldPath, string NewPath) { }
+        public static void Rename(string OldPath, string NewPath)
+        {
+        }
 
-        public static void Reset() { }
+        public static void Reset()
+        {
+        }
 
-        public static void RmDir(string Path) { }
+        public static void RmDir(string Path)
+        {
+        }
 
         public static long Seek(int FileNumber)
         {
             throw null;
         }
 
-        public static void Seek(int FileNumber, long Position) { }
+        public static void Seek(int FileNumber, long Position)
+        {
+        }
 
-        public static void SetAttr(
-            string PathName,
-            Microsoft.VisualBasic.FileAttribute Attributes
-        ) { }
+        public static void SetAttr(string PathName, Microsoft.VisualBasic.FileAttribute Attributes)
+        {
+        }
 
         public static Microsoft.VisualBasic.SpcInfo SPC(short Count)
         {
@@ -1394,27 +1557,39 @@ namespace Microsoft.VisualBasic
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-        public static void Unlock(int FileNumber) { }
+        public static void Unlock(int FileNumber)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-        public static void Unlock(int FileNumber, long Record) { }
+        public static void Unlock(int FileNumber, long Record)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-        public static void Unlock(int FileNumber, long FromRecord, long ToRecord) { }
+        public static void Unlock(int FileNumber, long FromRecord, long ToRecord)
+        {
+        }
 
-        public static void Write(int FileNumber, params object[] Output) { }
+        public static void Write(int FileNumber, params object[] Output)
+        {
+        }
 
-        public static void WriteLine(int FileNumber, params object[] Output) { }
+        public static void WriteLine(int FileNumber, params object[] Output)
+        {
+        }
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Financial
     {
-        internal Financial() { }
+        internal Financial()
+        {
+        }
 
         public static double DDB(
             double Cost,
@@ -1563,13 +1738,17 @@ namespace Microsoft.VisualBasic
     )]
     public sealed partial class HideModuleNameAttribute : System.Attribute
     {
-        public HideModuleNameAttribute() { }
+        public HideModuleNameAttribute()
+        {
+        }
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Information
     {
-        internal Information() { }
+        internal Information()
+        {
+        }
 
         public static int Erl()
         {
@@ -1660,14 +1839,22 @@ namespace Microsoft.VisualBasic
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Interaction
     {
-        internal Interaction() { }
+        internal Interaction()
+        {
+        }
 
-        public static void AppActivate(int ProcessId) { }
+        public static void AppActivate(int ProcessId)
+        {
+        }
 
-        public static void AppActivate(string Title) { }
+        public static void AppActivate(string Title)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void Beep() { }
+        public static void Beep()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The type of ObjectRef cannot be statically analyzed and its members may be trimmed."
@@ -1702,11 +1889,9 @@ namespace Microsoft.VisualBasic
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void DeleteSetting(
-            string AppName,
-            string? Section = null,
-            string? Key = null
-        ) { }
+        public static void DeleteSetting(string AppName, string? Section = null, string? Key = null)
+        {
+        }
 
         public static string Environ(string? Expression)
         {
@@ -1775,12 +1960,9 @@ namespace Microsoft.VisualBasic
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void SaveSetting(
-            string AppName,
-            string Section,
-            string Key,
-            string Setting
-        ) { }
+        public static void SaveSetting(string AppName, string Section, string Key, string Setting)
+        {
+        }
 
         public static int Shell(
             string PathName,
@@ -1848,7 +2030,9 @@ namespace Microsoft.VisualBasic
             string createInstanceMethodName,
             string disposeInstanceMethodName,
             string defaultInstanceAlias
-        ) { }
+        )
+        {
+        }
 
         public string CreateMethod
         {
@@ -1905,7 +2089,9 @@ namespace Microsoft.VisualBasic
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Strings
     {
-        internal Strings() { }
+        internal Strings()
+        {
+        }
 
         public static int Asc(char String)
         {
@@ -2336,9 +2522,13 @@ namespace Microsoft.VisualBasic
     )]
     public sealed partial class VBFixedArrayAttribute : System.Attribute
     {
-        public VBFixedArrayAttribute(int UpperBound1) { }
+        public VBFixedArrayAttribute(int UpperBound1)
+        {
+        }
 
-        public VBFixedArrayAttribute(int UpperBound1, int UpperBound2) { }
+        public VBFixedArrayAttribute(int UpperBound1, int UpperBound2)
+        {
+        }
 
         public int[] Bounds
         {
@@ -2357,7 +2547,9 @@ namespace Microsoft.VisualBasic
     )]
     public sealed partial class VBFixedStringAttribute : System.Attribute
     {
-        public VBFixedStringAttribute(int Length) { }
+        public VBFixedStringAttribute(int Length)
+        {
+        }
 
         public int Length
         {
@@ -2368,11 +2560,17 @@ namespace Microsoft.VisualBasic
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class VBMath
     {
-        internal VBMath() { }
+        internal VBMath()
+        {
+        }
 
-        public static void Randomize() { }
+        public static void Randomize()
+        {
+        }
 
-        public static void Randomize(double Number) { }
+        public static void Randomize(double Number)
+        {
+        }
 
         public static float Rnd()
         {
@@ -2409,7 +2607,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class BooleanType
     {
-        internal BooleanType() { }
+        internal BooleanType()
+        {
+        }
 
         public static bool FromObject(object? Value)
         {
@@ -2427,7 +2627,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class ByteType
     {
-        internal ByteType() { }
+        internal ByteType()
+        {
+        }
 
         public static byte FromObject(object? Value)
         {
@@ -2445,7 +2647,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class CharArrayType
     {
-        internal CharArrayType() { }
+        internal CharArrayType()
+        {
+        }
 
         public static char[] FromObject(object? Value)
         {
@@ -2463,7 +2667,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class CharType
     {
-        internal CharType() { }
+        internal CharType()
+        {
+        }
 
         public static char FromObject(object? Value)
         {
@@ -2481,7 +2687,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class Conversions
     {
-        internal Conversions() { }
+        internal Conversions()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Expression origin object cannot be statically analyzed and may be trimmed"
@@ -2804,7 +3012,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class DateType
     {
-        internal DateType() { }
+        internal DateType()
+        {
+        }
 
         public static System.DateTime FromObject(object? Value)
         {
@@ -2830,7 +3040,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class DecimalType
     {
-        internal DecimalType() { }
+        internal DecimalType()
+        {
+        }
 
         public static decimal FromBoolean(bool Value)
         {
@@ -2882,7 +3094,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class DesignerGeneratedAttribute : System.Attribute
     {
-        public DesignerGeneratedAttribute() { }
+        public DesignerGeneratedAttribute()
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -2890,7 +3104,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class DoubleType
     {
-        internal DoubleType() { }
+        internal DoubleType()
+        {
+        }
 
         public static double FromObject(object? Value)
         {
@@ -2937,7 +3153,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class IncompleteInitialization : System.Exception
     {
-        public IncompleteInitialization() { }
+        public IncompleteInitialization()
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -2945,7 +3163,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class IntegerType
     {
-        internal IntegerType() { }
+        internal IntegerType()
+        {
+        }
 
         public static int FromObject(object? Value)
         {
@@ -2963,7 +3183,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class LateBinding
     {
-        internal LateBinding() { }
+        internal LateBinding()
+        {
+        }
 
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -2980,7 +3202,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             object?[]? args,
             string?[]? paramnames,
             bool[]? CopyBack
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -3017,7 +3241,9 @@ namespace Microsoft.VisualBasic.CompilerServices
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
-        public static void LateIndexSet(object o, object?[] args, string?[]? paramnames) { }
+        public static void LateIndexSet(object o, object?[] args, string?[]? paramnames)
+        {
+        }
 
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -3030,7 +3256,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             string?[]? paramnames,
             bool OptimisticSet,
             bool RValueBase
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -3046,7 +3274,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             string name,
             object?[]? args,
             string?[]? paramnames
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -3064,7 +3294,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             string?[]? paramnames,
             bool OptimisticSet,
             bool RValueBase
-        ) { }
+        )
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -3072,7 +3304,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class LikeOperator
     {
-        internal LikeOperator() { }
+        internal LikeOperator()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The types of source and pattern cannot be statically analyzed so the like operator may be trimmed"
@@ -3101,7 +3335,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class LongType
     {
-        internal LongType() { }
+        internal LongType()
+        {
+        }
 
         public static long FromObject(object? Value)
         {
@@ -3119,7 +3355,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class NewLateBinding
     {
-        internal NewLateBinding() { }
+        internal NewLateBinding()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -3170,7 +3408,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             object Instance,
             object[] Arguments,
             string[] ArgumentNames
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -3188,7 +3428,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             string[] ArgumentNames,
             bool OptimisticSet,
             bool RValueBase
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -3237,7 +3479,9 @@ namespace Microsoft.VisualBasic.CompilerServices
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
-        public static void FallbackSet(object Instance, string MemberName, object[] Arguments) { }
+        public static void FallbackSet(object Instance, string MemberName, object[] Arguments)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -3255,7 +3499,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             object[] Arguments,
             bool OptimisticSet,
             bool RValueBase
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
@@ -3341,7 +3587,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             object Instance,
             object?[]? Arguments,
             string?[]? ArgumentNames
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
@@ -3352,7 +3600,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             string?[]? ArgumentNames,
             bool OptimisticSet,
             bool RValueBase
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
@@ -3364,7 +3614,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             object?[]? Arguments,
             string?[]? ArgumentNames,
             System.Type[]? TypeArguments
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
@@ -3379,7 +3631,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool OptimisticSet,
             bool RValueBase,
             Microsoft.VisualBasic.CallType CallType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
@@ -3393,7 +3647,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             System.Type[]? TypeArguments,
             bool OptimisticSet,
             bool RValueBase
-        ) { }
+        )
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -3401,16 +3657,22 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class ObjectFlowControl
     {
-        internal ObjectFlowControl() { }
+        internal ObjectFlowControl()
+        {
+        }
 
-        public static void CheckForSyncLockOnValueType(object? Expression) { }
+        public static void CheckForSyncLockOnValueType(object? Expression)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public sealed partial class ForLoopControl
         {
-            internal ForLoopControl() { }
+            internal ForLoopControl()
+            {
+            }
 
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "The types of the parameters cannot be statically analyzed and may be trimmed"
@@ -3461,7 +3723,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class ObjectType
     {
-        public ObjectType() { }
+        public ObjectType()
+        {
+        }
 
         public static object AddObj(object? o1, object? o2)
         {
@@ -3573,7 +3837,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class Operators
     {
-        internal Operators() { }
+        internal Operators()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
@@ -3855,7 +4121,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class OptionCompareAttribute : System.Attribute
     {
-        public OptionCompareAttribute() { }
+        public OptionCompareAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -3868,7 +4136,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class OptionTextAttribute : System.Attribute
     {
-        public OptionTextAttribute() { }
+        public OptionTextAttribute()
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -3876,20 +4146,30 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class ProjectData
     {
-        internal ProjectData() { }
+        internal ProjectData()
+        {
+        }
 
-        public static void ClearProjectError() { }
+        public static void ClearProjectError()
+        {
+        }
 
         public static System.Exception CreateProjectError(int hr)
         {
             throw null;
         }
 
-        public static void EndApp() { }
+        public static void EndApp()
+        {
+        }
 
-        public static void SetProjectError(System.Exception? ex) { }
+        public static void SetProjectError(System.Exception? ex)
+        {
+        }
 
-        public static void SetProjectError(System.Exception? ex, int lErl) { }
+        public static void SetProjectError(System.Exception? ex, int lErl)
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -3897,7 +4177,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class ShortType
     {
-        internal ShortType() { }
+        internal ShortType()
+        {
+        }
 
         public static short FromObject(object? Value)
         {
@@ -3915,7 +4197,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class SingleType
     {
-        internal SingleType() { }
+        internal SingleType()
+        {
+        }
 
         public static float FromObject(object? Value)
         {
@@ -3954,7 +4238,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class StandardModuleAttribute : System.Attribute
     {
-        public StandardModuleAttribute() { }
+        public StandardModuleAttribute()
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -3964,7 +4250,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     {
         public short State;
 
-        public StaticLocalInitFlag() { }
+        public StaticLocalInitFlag()
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -3972,7 +4260,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class StringType
     {
-        internal StringType() { }
+        internal StringType()
+        {
+        }
 
         public static string FromBoolean(bool Value)
         {
@@ -4059,7 +4349,9 @@ namespace Microsoft.VisualBasic.CompilerServices
             int StartPosition,
             int MaxInsertLength,
             string sInsert
-        ) { }
+        )
+        {
+        }
 
         public static int StrCmp(string? sLeft, string? sRight, bool TextCompare)
         {
@@ -4091,7 +4383,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class Utils
     {
-        internal Utils() { }
+        internal Utils()
+        {
+        }
 
         public static System.Array CopyArray(System.Array arySrc, System.Array aryDest)
         {
@@ -4109,7 +4403,9 @@ namespace Microsoft.VisualBasic.CompilerServices
     )]
     public sealed partial class Versioned
     {
-        internal Versioned() { }
+        internal Versioned()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The method name cannot and type cannot be statically analyzed so it may be trimmed"
@@ -4162,12 +4458,16 @@ namespace Microsoft.VisualBasic.FileIO
 
     public partial class FileSystem
     {
-        public FileSystem() { }
+        public FileSystem()
+        {
+        }
 
         public static string CurrentDirectory
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Collections.ObjectModel.ReadOnlyCollection<System.IO.DriveInfo> Drives
         {
@@ -4182,82 +4482,112 @@ namespace Microsoft.VisualBasic.FileIO
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName
-        ) { }
+        )
+        {
+        }
 
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
-        ) { }
+        )
+        {
+        }
 
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
-        ) { }
+        )
+        {
+        }
 
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             bool overwrite
-        ) { }
+        )
+        {
+        }
 
-        public static void CopyFile(string sourceFileName, string destinationFileName) { }
+        public static void CopyFile(string sourceFileName, string destinationFileName)
+        {
+        }
 
         public static void CopyFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
-        ) { }
+        )
+        {
+        }
 
         public static void CopyFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
-        ) { }
+        )
+        {
+        }
 
         public static void CopyFile(
             string sourceFileName,
             string destinationFileName,
             bool overwrite
-        ) { }
+        )
+        {
+        }
 
-        public static void CreateDirectory(string directory) { }
+        public static void CreateDirectory(string directory)
+        {
+        }
 
         public static void DeleteDirectory(
             string directory,
             Microsoft.VisualBasic.FileIO.DeleteDirectoryOption onDirectoryNotEmpty
-        ) { }
+        )
+        {
+        }
 
         public static void DeleteDirectory(
             string directory,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle
-        ) { }
+        )
+        {
+        }
 
         public static void DeleteDirectory(
             string directory,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
-        ) { }
+        )
+        {
+        }
 
-        public static void DeleteFile(string file) { }
+        public static void DeleteFile(string file)
+        {
+        }
 
         public static void DeleteFile(
             string file,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle
-        ) { }
+        )
+        {
+        }
 
         public static void DeleteFile(
             string file,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
-        ) { }
+        )
+        {
+        }
 
         public static bool DirectoryExists(string directory)
         {
@@ -4355,47 +4685,63 @@ namespace Microsoft.VisualBasic.FileIO
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName
-        ) { }
+        )
+        {
+        }
 
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
-        ) { }
+        )
+        {
+        }
 
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
-        ) { }
+        )
+        {
+        }
 
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             bool overwrite
-        ) { }
+        )
+        {
+        }
 
-        public static void MoveFile(string sourceFileName, string destinationFileName) { }
+        public static void MoveFile(string sourceFileName, string destinationFileName)
+        {
+        }
 
         public static void MoveFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
-        ) { }
+        )
+        {
+        }
 
         public static void MoveFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
-        ) { }
+        )
+        {
+        }
 
         public static void MoveFile(
             string sourceFileName,
             string destinationFileName,
             bool overwrite
-        ) { }
+        )
+        {
+        }
 
         public static Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file)
         {
@@ -4460,25 +4806,37 @@ namespace Microsoft.VisualBasic.FileIO
             throw null;
         }
 
-        public static void RenameDirectory(string directory, string newName) { }
+        public static void RenameDirectory(string directory, string newName)
+        {
+        }
 
-        public static void RenameFile(string file, string newName) { }
+        public static void RenameFile(string file, string newName)
+        {
+        }
 
-        public static void WriteAllBytes(string file, byte[] data, bool append) { }
+        public static void WriteAllBytes(string file, byte[] data, bool append)
+        {
+        }
 
-        public static void WriteAllText(string file, string text, bool append) { }
+        public static void WriteAllText(string file, string text, bool append)
+        {
+        }
 
         public static void WriteAllText(
             string file,
             string text,
             bool append,
             System.Text.Encoding encoding
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class MalformedLineException : System.Exception
     {
-        public MalformedLineException() { }
+        public MalformedLineException()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
@@ -4486,19 +4844,29 @@ namespace Microsoft.VisualBasic.FileIO
         protected MalformedLineException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public MalformedLineException(string? message) { }
+        public MalformedLineException(string? message)
+        {
+        }
 
-        public MalformedLineException(string? message, System.Exception? innerException) { }
+        public MalformedLineException(string? message, System.Exception? innerException)
+        {
+        }
 
-        public MalformedLineException(string? message, long lineNumber) { }
+        public MalformedLineException(string? message, long lineNumber)
+        {
+        }
 
         public MalformedLineException(
             string? message,
             long lineNumber,
             System.Exception? innerException
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Always
@@ -4506,7 +4874,9 @@ namespace Microsoft.VisualBasic.FileIO
         public long LineNumber
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4515,7 +4885,9 @@ namespace Microsoft.VisualBasic.FileIO
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -4537,7 +4909,9 @@ namespace Microsoft.VisualBasic.FileIO
 
     public partial class SpecialDirectories
     {
-        public SpecialDirectories() { }
+        public SpecialDirectories()
+        {
+        }
 
         public static string AllUsersApplicationData
         {
@@ -4579,34 +4953,50 @@ namespace Microsoft.VisualBasic.FileIO
 
     public partial class TextFieldParser : System.IDisposable
     {
-        public TextFieldParser(System.IO.Stream stream) { }
+        public TextFieldParser(System.IO.Stream stream)
+        {
+        }
 
-        public TextFieldParser(System.IO.Stream stream, System.Text.Encoding defaultEncoding) { }
+        public TextFieldParser(System.IO.Stream stream, System.Text.Encoding defaultEncoding)
+        {
+        }
 
         public TextFieldParser(
             System.IO.Stream stream,
             System.Text.Encoding defaultEncoding,
             bool detectEncoding
-        ) { }
+        )
+        {
+        }
 
         public TextFieldParser(
             System.IO.Stream stream,
             System.Text.Encoding defaultEncoding,
             bool detectEncoding,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
-        public TextFieldParser(System.IO.TextReader reader) { }
+        public TextFieldParser(System.IO.TextReader reader)
+        {
+        }
 
-        public TextFieldParser(string path) { }
+        public TextFieldParser(string path)
+        {
+        }
 
-        public TextFieldParser(string path, System.Text.Encoding defaultEncoding) { }
+        public TextFieldParser(string path, System.Text.Encoding defaultEncoding)
+        {
+        }
 
         public TextFieldParser(
             string path,
             System.Text.Encoding defaultEncoding,
             bool detectEncoding
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
@@ -4614,12 +5004,16 @@ namespace Microsoft.VisualBasic.FileIO
         public string[]? CommentTokens
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string[]? Delimiters
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EndOfData
         {
@@ -4636,7 +5030,9 @@ namespace Microsoft.VisualBasic.FileIO
         public int[]? FieldWidths
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4645,7 +5041,9 @@ namespace Microsoft.VisualBasic.FileIO
         public bool HasFieldsEnclosedInQuotes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4658,22 +5056,32 @@ namespace Microsoft.VisualBasic.FileIO
         public Microsoft.VisualBasic.FileIO.FieldType TextFieldType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TrimWhiteSpace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~TextFieldParser() { }
+        ~TextFieldParser()
+        {
+        }
 
         public string? PeekChars(int numberOfChars)
         {
@@ -4701,11 +5109,17 @@ namespace Microsoft.VisualBasic.FileIO
             throw null;
         }
 
-        public void SetDelimiters(params string[]? delimiters) { }
+        public void SetDelimiters(params string[]? delimiters)
+        {
+        }
 
-        public void SetFieldWidths(params int[]? fieldWidths) { }
+        public void SetFieldWidths(params int[]? fieldWidths)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public enum UICancelOption

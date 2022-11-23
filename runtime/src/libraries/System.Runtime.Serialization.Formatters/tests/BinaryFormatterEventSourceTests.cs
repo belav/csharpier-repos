@@ -200,7 +200,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Serializable]
         public class ClassWithNestedDeserialization : ISerializable
         {
-            public ClassWithNestedDeserialization() { }
+            public ClassWithNestedDeserialization()
+            {
+            }
 
             protected ClassWithNestedDeserialization(
                 SerializationInfo info,

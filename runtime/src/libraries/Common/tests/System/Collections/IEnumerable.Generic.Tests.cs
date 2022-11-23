@@ -561,7 +561,9 @@ namespace System.Collections.Tests
             RepeatTest(
                 (enumerator, items) =>
                 {
-                    while (enumerator.MoveNext()) { }
+                    while (enumerator.MoveNext())
+                    {
+                    }
 
                     Assert.False(enumerator.MoveNext());
                 }

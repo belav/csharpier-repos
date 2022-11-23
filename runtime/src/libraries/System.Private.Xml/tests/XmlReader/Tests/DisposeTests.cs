@@ -125,7 +125,9 @@ namespace System.Xml.XmlReaderTests
             get { return default(ReadState); }
         }
 
-        public override void ResolveEntity() { }
+        public override void ResolveEntity()
+        {
+        }
 
         public override string Value
         {

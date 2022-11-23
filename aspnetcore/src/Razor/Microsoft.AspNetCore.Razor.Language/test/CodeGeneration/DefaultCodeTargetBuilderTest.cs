@@ -31,7 +31,11 @@ public class DefaultCodeTargetBuilderTest
         Assert.Equal(extensions, target.Extensions);
     }
 
-    private class MyExtension1 : ICodeTargetExtension { }
+    private class MyExtension1 : ICodeTargetExtension
+    {
+    }
 
-    private class MyExtension2 : ICodeTargetExtension { }
+    private class MyExtension2 : ICodeTargetExtension
+    {
+    }
 }

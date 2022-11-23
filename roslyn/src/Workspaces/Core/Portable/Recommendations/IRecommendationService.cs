@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
         public ImmutableArray<ISymbol> UnnamedSymbols => _unnamedSymbols.NullToEmpty();
 
         public RecommendedSymbols(ImmutableArray<ISymbol> namedSymbols)
-            : this(namedSymbols, default) { }
+            : this(namedSymbols, default)
+        {
+        }
 
         public RecommendedSymbols(
             ImmutableArray<ISymbol> namedSymbols,

@@ -220,7 +220,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
                     exceptionEvent.SetStringProperty("StackTrace", e.StackTrace);
                     TelemetryHelper.DefaultTelemetrySession.PostEvent(exceptionEvent);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

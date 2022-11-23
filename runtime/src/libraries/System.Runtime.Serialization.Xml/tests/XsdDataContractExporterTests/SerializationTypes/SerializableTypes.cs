@@ -22,10 +22,14 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public string Apartment
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public Address() { }
+        public Address()
+        {
+        }
     }
 
     [Serializable]
@@ -45,7 +49,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     {
         ArrayTypes.Company company;
 
-        Employee(StreamingContext context) { }
+        Employee(StreamingContext context)
+        {
+        }
     }
 
     [Serializable]

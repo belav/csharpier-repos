@@ -130,7 +130,9 @@ namespace GCVariant
     {
         internal DLinkNode[] Mv_DLink;
 
-        public DoubLink(int Num) : this(Num, false) { }
+        public DoubLink(int Num) : this(Num, false)
+        {
+        }
 
         public DoubLink(int Num, bool large)
         {

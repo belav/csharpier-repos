@@ -12,7 +12,9 @@ namespace System.Runtime.InteropServices.Tests
 
         [ComImport]
         [Guid(GuidStr)]
-        private class DummyObject { }
+        private class DummyObject
+        {
+        }
 
         [Fact]
         public void GenerateGuidForType_ComObject_ReturnsComGuid()

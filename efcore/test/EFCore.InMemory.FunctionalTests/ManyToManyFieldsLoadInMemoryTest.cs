@@ -7,7 +7,9 @@ public class ManyToManyFieldsLoadInMemoryTest
     : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadInMemoryTest.ManyToManyFieldsLoadInMemoryFixture>
 {
     public ManyToManyFieldsLoadInMemoryTest(ManyToManyFieldsLoadInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class ManyToManyFieldsLoadInMemoryFixture : ManyToManyFieldsLoadFixtureBase
     {

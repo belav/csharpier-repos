@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SyntaxTreeInfoIncrementalAnalyzerProvider() { }
+        public SyntaxTreeInfoIncrementalAnalyzerProvider()
+        {
+        }
 
         public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
             new IncrementalAnalyzer();

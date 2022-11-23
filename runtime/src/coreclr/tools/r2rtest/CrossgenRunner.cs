@@ -34,7 +34,9 @@ namespace R2RTest
             BuildOptions options,
             IEnumerable<string> referencePaths,
             string overrideOutputPath = null
-        ) : base(options, referencePaths, overrideOutputPath) { }
+        ) : base(options, referencePaths, overrideOutputPath)
+        {
+        }
 
         protected override ProcessParameters ExecutionProcess(
             IEnumerable<string> modules,

@@ -14,7 +14,9 @@ namespace System.Net.Sockets
             Socket socket,
             object? asyncState,
             AsyncCallback? asyncCallback
-        ) : base(socket, asyncState, asyncCallback) { }
+        ) : base(socket, asyncState, asyncCallback)
+        {
+        }
 
         internal void SetUnmanagedStructures(
             FileStream? fileStream,

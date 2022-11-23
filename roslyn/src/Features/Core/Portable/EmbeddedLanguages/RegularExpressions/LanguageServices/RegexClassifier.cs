@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegexClassifier() { }
+        public RegexClassifier()
+        {
+        }
 
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {

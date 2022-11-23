@@ -35,7 +35,9 @@ namespace Microsoft.Extensions.Logging
         /// Initializes a new instance of the <see cref="LoggerMessageAttribute"/> class
         /// which is used to guide the production of a strongly-typed logging method.
         /// </summary>
-        public LoggerMessageAttribute() { }
+        public LoggerMessageAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoggerMessageAttribute"/> class

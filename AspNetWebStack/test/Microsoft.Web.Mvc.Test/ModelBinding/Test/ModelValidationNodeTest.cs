@@ -472,7 +472,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             return provider.GetMetadataForType(() => o, o.GetType());
         }
 
-        private sealed class EmptyController : Controller { }
+        private sealed class EmptyController : Controller
+        {
+        }
 
         private sealed class LoggingDataErrorInfoModel : IDataErrorInfo
         {

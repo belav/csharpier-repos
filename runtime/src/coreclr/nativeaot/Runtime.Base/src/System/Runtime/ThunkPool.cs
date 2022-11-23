@@ -136,7 +136,9 @@ namespace System.Runtime
                 if (newHeap._nextAvailableThunkPtr != IntPtr.Zero)
                     return newHeap;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             return null;
         }

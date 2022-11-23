@@ -405,7 +405,9 @@ internal class Http3InMemory
         }
     }
 
-    protected void ConnectionClosed() { }
+    protected void ConnectionClosed()
+    {
+    }
 
     public static PipeOptions GetInputPipeOptions(
         ServiceContext serviceContext,
@@ -903,7 +905,9 @@ internal class Http3RequestStream : Http3StreamBase, IHttpStreamHeadersHandler
             value.GetAsciiOrUTF8StringNonNullCharacters();
     }
 
-    public void OnHeadersComplete(bool endHeaders) { }
+    public void OnHeadersComplete(bool endHeaders)
+    {
+    }
 
     public void OnStaticIndexedHeader(int index)
     {
@@ -940,7 +944,9 @@ internal class Http3RequestStream : Http3StreamBase, IHttpStreamHeadersHandler
 
 internal class Http3FrameWithPayload : Http3RawFrame
 {
-    public Http3FrameWithPayload() : base() { }
+    public Http3FrameWithPayload() : base()
+    {
+    }
 
     // This does not contain extended headers
     public Memory<byte> Payload { get; set; }
@@ -1229,7 +1235,9 @@ internal class TestMultiplexedConnectionContext
         return new ValueTask<ConnectionContext>(stream.StreamContext);
     }
 
-    public void OnHeartbeat(Action<object> action, object state) { }
+    public void OnHeartbeat(Action<object> action, object state)
+    {
+    }
 
     public void RequestClose()
     {

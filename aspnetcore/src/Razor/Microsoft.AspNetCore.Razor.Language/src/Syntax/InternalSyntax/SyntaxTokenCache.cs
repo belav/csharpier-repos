@@ -16,7 +16,9 @@ internal sealed class SyntaxTokenCache
     public static readonly SyntaxTokenCache Instance = new();
     private static readonly Entry[] s_cache = new Entry[CacheSize];
 
-    internal SyntaxTokenCache() { }
+    internal SyntaxTokenCache()
+    {
+    }
 
     private readonly struct Entry
     {

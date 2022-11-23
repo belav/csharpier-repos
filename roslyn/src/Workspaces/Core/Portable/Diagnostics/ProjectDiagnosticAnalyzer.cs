@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public sealed override void Initialize(AnalysisContext context)
 #pragma warning restore RS1025 // Configure generated code analysis
 #pragma warning restore RS1026 // Enable concurrent execution
-        { }
+        {
+        }
 
         /// <summary>
         /// This lets vsix installed <see cref="DocumentDiagnosticAnalyzer"/> or <see cref="ProjectDiagnosticAnalyzer"/> to

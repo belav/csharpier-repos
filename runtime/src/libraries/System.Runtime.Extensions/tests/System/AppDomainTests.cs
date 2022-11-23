@@ -94,7 +94,9 @@ namespace System.Tests
                     {
                         throw new Exception();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     AppDomain.CurrentDomain.UnhandledException -=
                         new UnhandledExceptionEventHandler(NotExpectedToBeCalledHandler);
                 })
@@ -190,7 +192,8 @@ namespace System.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    EventHandler<FirstChanceExceptionEventArgs> handler = (sender, e) => { };
+                    EventHandler<FirstChanceExceptionEventArgs> handler = (sender, e) => {
+                    };
                     AppDomain.CurrentDomain.FirstChanceException += handler;
                     AppDomain.CurrentDomain.FirstChanceException -= handler;
                 })
@@ -217,7 +220,9 @@ namespace System.Tests
                     {
                         throw new FirstChanceTestException("testing");
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     AppDomain.CurrentDomain.FirstChanceException -= handler;
                     Assert.True(flag, "FirstChanceHandler not called");
                 })
@@ -226,7 +231,9 @@ namespace System.Tests
 
         class FirstChanceTestException : Exception
         {
-            public FirstChanceTestException(string message) : base(message) { }
+            public FirstChanceTestException(string message) : base(message)
+            {
+            }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -235,7 +242,8 @@ namespace System.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    EventHandler handler = (sender, e) => { };
+                    EventHandler handler = (sender, e) => {
+                    };
                     AppDomain.CurrentDomain.ProcessExit += handler;
                     AppDomain.CurrentDomain.ProcessExit -= handler;
                 })
@@ -880,7 +888,9 @@ namespace System.Tests
 
         class CorrectlyPropagatesException : Exception
         {
-            public CorrectlyPropagatesException(string message) : base(message) { }
+            public CorrectlyPropagatesException(string message) : base(message)
+            {
+            }
         }
 
         [ConditionalTheory(
@@ -1738,10 +1748,14 @@ namespace System.Tests
         }
     }
 
-    class AGenericClass<T> { }
+    class AGenericClass<T>
+    {
+    }
 }
 
 namespace FxResources.TestApp
 {
-    class SR { }
+    class SR
+    {
+    }
 }

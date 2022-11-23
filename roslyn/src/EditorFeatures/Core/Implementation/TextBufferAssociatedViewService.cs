@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TextBufferAssociatedViewService() { }
+        public TextBufferAssociatedViewService()
+        {
+        }
 
         public event EventHandler<SubjectBuffersConnectedEventArgs> SubjectBuffersConnected;
 

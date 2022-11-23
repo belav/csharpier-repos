@@ -44,6 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 namedArguments: original.CommonNamedArguments,
                 hasErrors: original.HasErrors,
                 isConditionallyOmitted: original.IsConditionallyOmitted
-            ) { }
+            )
+        {
+        }
     }
 }

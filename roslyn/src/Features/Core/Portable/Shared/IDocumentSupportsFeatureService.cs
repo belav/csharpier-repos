@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Shared
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDocumentSupportsFeatureService() { }
+        public DefaultDocumentSupportsFeatureService()
+        {
+        }
 
         public bool SupportsCodeFixes(Document document) => true;
 

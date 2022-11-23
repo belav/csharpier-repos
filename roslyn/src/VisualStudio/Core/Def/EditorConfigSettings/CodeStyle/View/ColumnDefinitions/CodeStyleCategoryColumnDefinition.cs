@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeStyleCategoryGroupingSet() { }
+        public CodeStyleCategoryGroupingSet()
+        {
+        }
     }
 
     [Export(typeof(ITableColumnDefinition))]
@@ -28,7 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeStyleCategoryColumnDefinition() { }
+        public CodeStyleCategoryColumnDefinition()
+        {
+        }
 
         public override string Name => Category;
         public override string DisplayName => ServicesVSResources.Category;

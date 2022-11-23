@@ -7,7 +7,9 @@ namespace System.Threading.Tests
 {
     public class TimerChangeTests
     {
-        private void EmptyTimerTarget(object o) { }
+        private void EmptyTimerTarget(object o)
+        {
+        }
 
         [Fact]
         public void Timer_Change_DueTime_OutOfRange_Throws()

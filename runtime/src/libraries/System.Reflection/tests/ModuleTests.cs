@@ -219,10 +219,14 @@ namespace System.Reflection.Tests
 
 public class OutsideModuleTest
 {
-    public class InsideModuleTest { }
+    public class InsideModuleTest
+    {
+    }
 }
 
 public class OutsideModuleTest<T>
 {
-    public class InsideModuleTest<U> { }
+    public class InsideModuleTest<U>
+    {
+    }
 }

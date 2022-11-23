@@ -27,7 +27,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class PersonWithPrivateConstructor
     {
-        private PersonWithPrivateConstructor() { }
+        private PersonWithPrivateConstructor()
+        {
+        }
 
         public static PersonWithPrivateConstructor CreatePerson()
         {

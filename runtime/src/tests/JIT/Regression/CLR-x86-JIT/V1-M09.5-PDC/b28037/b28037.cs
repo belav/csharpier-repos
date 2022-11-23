@@ -37,7 +37,9 @@ namespace Test
             {
                 Method1(null);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

@@ -23,7 +23,9 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
     /// </param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public ArrayModelBinder(IModelBinder elementBinder, ILoggerFactory loggerFactory)
-        : base(elementBinder, loggerFactory) { }
+        : base(elementBinder, loggerFactory)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="ArrayModelBinder{TElement}"/>.
@@ -46,7 +48,9 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
         IModelBinder elementBinder,
         ILoggerFactory loggerFactory,
         bool allowValidatingTopLevelNodes
-    ) : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true) { }
+    ) : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="ArrayModelBinder{TElement}"/>.
@@ -74,7 +78,9 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
         ILoggerFactory loggerFactory,
         bool allowValidatingTopLevelNodes,
         MvcOptions mvcOptions
-    ) : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true, mvcOptions) { }
+    ) : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true, mvcOptions)
+    {
+    }
 
     /// <inheritdoc />
     public override bool CanCreateInstance(Type targetType)

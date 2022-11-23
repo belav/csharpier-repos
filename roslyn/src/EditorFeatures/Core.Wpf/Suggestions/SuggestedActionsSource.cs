@@ -44,8 +44,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             public event EventHandler<EventArgs>? SuggestedActionsChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             public readonly IGlobalOptionService GlobalOptions;

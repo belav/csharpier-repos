@@ -22,5 +22,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._INPUT_
         }
     }
 
-    public class CodeFixAddsResponseTypeWhenDifferentErrorModel { }
+    public class CodeFixAddsResponseTypeWhenDifferentErrorModel
+    {
+    }
 }

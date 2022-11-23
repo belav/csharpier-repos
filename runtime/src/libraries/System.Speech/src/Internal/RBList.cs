@@ -15,7 +15,9 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        internal RBList() { }
+        internal RBList()
+        {
+        }
 
         #endregion
 

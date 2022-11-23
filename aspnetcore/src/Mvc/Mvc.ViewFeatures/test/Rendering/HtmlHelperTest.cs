@@ -347,9 +347,13 @@ public class HtmlHelperTest
         public string Name { get; set; }
     }
 
-    private class DerivedModel : BaseModel { }
+    private class DerivedModel : BaseModel
+    {
+    }
 
-    private class NonDerivedModel { }
+    private class NonDerivedModel
+    {
+    }
 
     [Theory]
     [InlineData("SomeName", "SomeName")]

@@ -236,8 +236,12 @@ namespace System.Net.NetworkInformation
                     }
                 }
             }
-            catch (ObjectDisposedException) { } // Socket disposed.
-            catch (SocketException se) when (se.SocketErrorCode == SocketError.OperationAborted) { } // ReceiveAsync aborted by disposing Socket.
+            catch (ObjectDisposedException)
+            {
+            } // Socket disposed.
+            catch (SocketException se) when (se.SocketErrorCode == SocketError.OperationAborted)
+            {
+            } // ReceiveAsync aborted by disposing Socket.
             catch (Exception ex)
             {
                 // Unexpected error.

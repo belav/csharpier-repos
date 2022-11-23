@@ -22,7 +22,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// <typeparam name="TSource">The type of source element on which ExecuteUpdate operation is being applied.</typeparam>
 public sealed class SetPropertyCalls<TSource>
 {
-    private SetPropertyCalls() { }
+    private SetPropertyCalls()
+    {
+    }
 
     /// <summary>
     ///     Specifies a property and corresponding value it should be updated to in ExecuteUpdate method.

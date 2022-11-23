@@ -74,8 +74,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public virtual event EventHandler Realized
         {
             // Default nodes never realize
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 }

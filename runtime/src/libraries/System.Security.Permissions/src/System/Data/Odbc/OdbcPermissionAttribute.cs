@@ -25,7 +25,9 @@ namespace System.Data.Odbc
     )]
     public sealed class OdbcPermissionAttribute : DBDataPermissionAttribute
     {
-        public OdbcPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public OdbcPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
+        {
+        }
 
         public override IPermission CreatePermission()
         {

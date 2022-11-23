@@ -27,7 +27,9 @@ namespace System.Collections.Generic
     {
         private const int DefaultSize = 17;
 
-        public LowLevelDictionary() : this(DefaultSize) { }
+        public LowLevelDictionary() : this(DefaultSize)
+        {
+        }
 
         public LowLevelDictionary(int capacity)
         {
@@ -189,7 +191,9 @@ namespace System.Collections.Generic
                 }
                 _buckets = newBuckets;
             }
-            catch (OutOfMemoryException) { }
+            catch (OutOfMemoryException)
+            {
+            }
         }
 
         private int GetBucket(TKey key, int numBuckets = 0)
@@ -250,7 +254,9 @@ namespace System.Collections.Generic
                 }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

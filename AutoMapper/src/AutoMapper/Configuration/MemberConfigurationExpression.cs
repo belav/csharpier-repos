@@ -317,7 +317,9 @@ public class MemberConfigurationExpression
         IMemberConfigurationExpression
 {
     public MemberConfigurationExpression(MemberInfo destinationMember, Type sourceType)
-        : base(destinationMember, sourceType) { }
+        : base(destinationMember, sourceType)
+    {
+    }
 
     public void MapFrom(Type valueResolverType) =>
         MapFromCore(

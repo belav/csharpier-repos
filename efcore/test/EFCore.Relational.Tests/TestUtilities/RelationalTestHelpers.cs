@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class RelationalTestHelpers : TestHelpers
 {
-    protected RelationalTestHelpers() { }
+    protected RelationalTestHelpers()
+    {
+    }
 
     public static RelationalTestHelpers Instance { get; } = new();
 

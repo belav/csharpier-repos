@@ -36,7 +36,9 @@ namespace System.Web.Http.Dispatcher
             Justification = "HttpControllerDispatcher does not require disposal"
         )]
         public HttpRoutingDispatcher(HttpConfiguration configuration)
-            : this(configuration, new HttpControllerDispatcher(configuration)) { }
+            : this(configuration, new HttpControllerDispatcher(configuration))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRoutingDispatcher"/> class,

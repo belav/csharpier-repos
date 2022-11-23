@@ -159,7 +159,8 @@ namespace System.Web.Http
                 {
                     initialized = true;
                 };
-                Action<HttpConfiguration> callback = (ignore) => { };
+                Action<HttpConfiguration> callback = (ignore) => {
+                };
 
                 // Act
                 GlobalConfiguration.Configure(callback);

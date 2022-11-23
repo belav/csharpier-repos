@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private readonly TempRoot _root;
 
         protected TempDirectory(TempRoot root) : this(CreateUniqueDirectory(TempRoot.Root), root)
-        { }
+        {
+        }
 
         private TempDirectory(string path, TempRoot root)
         {

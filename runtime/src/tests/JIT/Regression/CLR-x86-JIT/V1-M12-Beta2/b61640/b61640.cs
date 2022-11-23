@@ -44,7 +44,9 @@ namespace Test
                     }
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             return true;
         }

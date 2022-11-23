@@ -122,67 +122,109 @@ namespace Castle.Core.Internal.Tests
         [SingletonInherited(Id = "Original")]
         [AdditivePrivate(Id = "Original")]
         [AdditiveInherited(Id = "Original")]
-        public interface IDeclaresAll { }
+        public interface IDeclaresAll
+        {
+        }
 
         [SingletonPrivate(Id = "Original")]
-        public interface IDeclareSingletonPrivate { }
+        public interface IDeclareSingletonPrivate
+        {
+        }
 
         [SingletonInherited(Id = "Original")]
-        public interface IDeclareSingletonInherited { }
+        public interface IDeclareSingletonInherited
+        {
+        }
 
         [AdditivePrivate(Id = "Original")]
-        public interface IDeclareAdditivePrivate { }
+        public interface IDeclareAdditivePrivate
+        {
+        }
 
         [AdditiveInherited(Id = "Original")]
-        public interface IDeclareAdditiveInherited { }
+        public interface IDeclareAdditiveInherited
+        {
+        }
 
-        public interface IInheritSingletonPrivate : IDeclareSingletonPrivate { }
+        public interface IInheritSingletonPrivate : IDeclareSingletonPrivate
+        {
+        }
 
-        public interface IInheritSingletonInherited : IDeclareSingletonInherited { }
+        public interface IInheritSingletonInherited : IDeclareSingletonInherited
+        {
+        }
 
-        public interface IInheritAdditivePrivate : IDeclareAdditivePrivate { }
+        public interface IInheritAdditivePrivate : IDeclareAdditivePrivate
+        {
+        }
 
-        public interface IInheritAdditiveInherited : IDeclareAdditiveInherited { }
+        public interface IInheritAdditiveInherited : IDeclareAdditiveInherited
+        {
+        }
 
         [SingletonInherited(Id = "Override1")]
-        public interface IOverrideSingletonInherited1 : IInheritSingletonInherited { }
+        public interface IOverrideSingletonInherited1 : IInheritSingletonInherited
+        {
+        }
 
         [SingletonInherited(Id = "Override2")]
-        public interface IOverrideSingletonInherited2 : IInheritSingletonInherited { }
+        public interface IOverrideSingletonInherited2 : IInheritSingletonInherited
+        {
+        }
 
         [AdditiveInherited(Id = "Override1")]
-        public interface IOverrideAdditiveInherited1 : IInheritAdditiveInherited { }
+        public interface IOverrideAdditiveInherited1 : IInheritAdditiveInherited
+        {
+        }
 
         [AdditiveInherited(Id = "Override2")]
-        public interface IOverrideAdditiveInherited2 : IInheritAdditiveInherited { }
+        public interface IOverrideAdditiveInherited2 : IInheritAdditiveInherited
+        {
+        }
 
         public interface ISymmetricSingletonInherited
             : IOverrideSingletonInherited1,
-                IOverrideSingletonInherited2 { }
+                IOverrideSingletonInherited2
+        {
+        }
 
         public interface ISymmetricAdditiveInherited
             : IOverrideAdditiveInherited1,
-                IOverrideAdditiveInherited2 { }
+                IOverrideAdditiveInherited2
+        {
+        }
 
         public interface IAsymmetricSingletonInherited
             : IDeclareSingletonInherited,
-                IOverrideSingletonInherited1 { }
+                IOverrideSingletonInherited1
+        {
+        }
 
         public interface IAsymmetricAdditiveInherited
             : IDeclareAdditiveInherited,
-                IOverrideAdditiveInherited1 { }
+                IOverrideAdditiveInherited1
+        {
+        }
 
         [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
-        public sealed class SingletonPrivateAttribute : MockAttribute { }
+        public sealed class SingletonPrivateAttribute : MockAttribute
+        {
+        }
 
         [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = true)]
-        public sealed class SingletonInheritedAttribute : MockAttribute { }
+        public sealed class SingletonInheritedAttribute : MockAttribute
+        {
+        }
 
         [AttributeUsage(AttributeTargets.Interface, AllowMultiple = true, Inherited = false)]
-        public sealed class AdditivePrivateAttribute : MockAttribute { }
+        public sealed class AdditivePrivateAttribute : MockAttribute
+        {
+        }
 
         [AttributeUsage(AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
-        public sealed class AdditiveInheritedAttribute : MockAttribute { }
+        public sealed class AdditiveInheritedAttribute : MockAttribute
+        {
+        }
 
         public abstract class MockAttribute : Attribute, IEquatable<MockAttribute>
         {

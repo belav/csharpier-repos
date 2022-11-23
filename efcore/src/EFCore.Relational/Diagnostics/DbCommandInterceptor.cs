@@ -117,7 +117,9 @@ public abstract class DbCommandInterceptor : IDbCommandInterceptor
     ) => new(result);
 
     /// <inheritdoc />
-    public virtual void CommandCanceled(DbCommand command, CommandEndEventData eventData) { }
+    public virtual void CommandCanceled(DbCommand command, CommandEndEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task CommandCanceledAsync(
@@ -127,7 +129,9 @@ public abstract class DbCommandInterceptor : IDbCommandInterceptor
     ) => Task.CompletedTask;
 
     /// <inheritdoc />
-    public virtual void CommandFailed(DbCommand command, CommandErrorEventData eventData) { }
+    public virtual void CommandFailed(DbCommand command, CommandErrorEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task CommandFailedAsync(

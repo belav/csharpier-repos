@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests
 {
     public class InfrastructureTests : AbstractEditorTest
     {
-        public InfrastructureTests() : base(nameof(InfrastructureTests)) { }
+        public InfrastructureTests() : base(nameof(InfrastructureTests))
+        {
+        }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

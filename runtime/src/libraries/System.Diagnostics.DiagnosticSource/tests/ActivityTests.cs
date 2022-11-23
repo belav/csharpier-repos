@@ -2431,9 +2431,13 @@ namespace System.Diagnostics.Tests
                 Activity = null;
             }
 
-            public void OnCompleted() { }
+            public void OnCompleted()
+            {
+            }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
         }
 
         private const int MaxClockErrorMSec = 20;

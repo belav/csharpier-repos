@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RenameHandler() { }
+        public RenameHandler()
+        {
+        }
 
         public override string Method => LSP.Methods.TextDocumentRenameName;
 

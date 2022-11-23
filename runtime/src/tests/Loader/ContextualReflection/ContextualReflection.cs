@@ -14,11 +14,15 @@ using Xunit;
 
 namespace ContextualReflectionTest
 {
-    class AGenericClass<T> { }
+    class AGenericClass<T>
+    {
+    }
 
     class MockAssembly : Assembly
     {
-        public MockAssembly() { }
+        public MockAssembly()
+        {
+        }
     }
 
     class Program : IProgram
@@ -265,7 +269,9 @@ namespace ContextualReflectionTest
 
                     throw new InvalidOperationException();
                 }
-                catch { }
+                catch
+                {
+                }
                 Assert.Equal(alc, AssemblyLoadContext.CurrentContextualReflectionContext);
             }
 
@@ -353,7 +359,9 @@ namespace ContextualReflectionTest
 
                     throw new InvalidOperationException();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             Assert.Null(AssemblyLoadContext.CurrentContextualReflectionContext);

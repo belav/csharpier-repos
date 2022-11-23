@@ -89,19 +89,25 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="JObject"/> class.
         /// </summary>
-        public JObject() { }
+        public JObject()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JObject"/> class from another <see cref="JObject"/> object.
         /// </summary>
         /// <param name="other">A <see cref="JObject"/> object to copy from.</param>
-        public JObject(JObject other) : base(other) { }
+        public JObject(JObject other) : base(other)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JObject"/> class with the specified content.
         /// </summary>
         /// <param name="content">The contents of the object.</param>
-        public JObject(params object[] content) : this((object)content) { }
+        public JObject(params object[] content) : this((object)content)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JObject"/> class with the specified content.

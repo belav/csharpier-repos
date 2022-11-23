@@ -183,7 +183,8 @@ namespace System.Diagnostics
                             .Length;
                     }
                     catch (DirectoryNotFoundException) // Occurs when the process is deleted between the Exists check and the GetFiles call.
-                    { }
+                    {
+                    }
                 }
             }
         }

@@ -77,9 +77,13 @@ namespace System.Diagnostics
             Write(message + Environment.NewLineConst);
         }
 
-        public virtual void OnIndentLevelChanged(int indentLevel) { }
+        public virtual void OnIndentLevelChanged(int indentLevel)
+        {
+        }
 
-        public virtual void OnIndentSizeChanged(int indentSize) { }
+        public virtual void OnIndentSizeChanged(int indentSize)
+        {
+        }
 
         private static readonly object s_lock = new object();
 
@@ -89,7 +93,9 @@ namespace System.Diagnostics
                 string? message,
                 string? detailMessage,
                 string? stackTrace
-            ) : base(Terminate(message) + Terminate(detailMessage) + stackTrace) { }
+            ) : base(Terminate(message) + Terminate(detailMessage) + stackTrace)
+            {
+            }
 
             private static string? Terminate(string? s)
             {

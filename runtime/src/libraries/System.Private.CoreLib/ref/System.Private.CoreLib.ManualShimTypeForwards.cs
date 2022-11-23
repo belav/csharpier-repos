@@ -10,7 +10,9 @@ namespace System
         : System.StringComparer,
             System.Runtime.Serialization.ISerializable
     {
-        internal CultureAwareComparer() { }
+        internal CultureAwareComparer()
+        {
+        }
 
         public override int Compare(string? x, string? y)
         {
@@ -42,12 +44,16 @@ namespace System
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class OrdinalComparer : System.StringComparer
     {
-        internal OrdinalComparer() { }
+        internal OrdinalComparer()
+        {
+        }
 
         public override int Compare(string? x, string? y)
         {
@@ -84,12 +90,16 @@ namespace System
         public UnitySerializationHolder(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public object GetRealObject(System.Runtime.Serialization.StreamingContext context)
         {
@@ -105,7 +115,9 @@ namespace System.Collections
             System.Collections.IDictionary,
             System.Collections.IEnumerable
     {
-        public ListDictionaryInternal() { }
+        public ListDictionaryInternal()
+        {
+        }
 
         public int Count
         {
@@ -126,7 +138,9 @@ namespace System.Collections
         public object? this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ICollection Keys
         {
@@ -141,23 +155,31 @@ namespace System.Collections
             get { throw null; }
         }
 
-        public void Add(object key, object? value) { }
+        public void Add(object key, object? value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object key)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public System.Collections.IDictionaryEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -171,7 +193,9 @@ namespace System.Collections.Generic
     public sealed partial class ByteEqualityComparer
         : System.Collections.Generic.EqualityComparer<byte>
     {
-        public ByteEqualityComparer() { }
+        public ByteEqualityComparer()
+        {
+        }
 
         public override bool Equals(byte x, byte y)
         {
@@ -200,7 +224,9 @@ namespace System.Collections.Generic
         : System.Collections.Generic.EqualityComparer<T>,
             System.Runtime.Serialization.ISerializable where T : struct
     {
-        public EnumEqualityComparer() { }
+        public EnumEqualityComparer()
+        {
+        }
 
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
@@ -227,13 +253,17 @@ namespace System.Collections.Generic
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class GenericComparer<T> : System.Collections.Generic.Comparer<T>
         where T : System.IComparable<T>
     {
-        public GenericComparer() { }
+        public GenericComparer()
+        {
+        }
 
         public override int Compare(T? x, T? y)
         {
@@ -256,7 +286,9 @@ namespace System.Collections.Generic
     public sealed partial class GenericEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T> where T : System.IEquatable<T>
     {
-        public GenericEqualityComparer() { }
+        public GenericEqualityComparer()
+        {
+        }
 
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
@@ -290,7 +322,9 @@ namespace System.Collections.Generic
         protected NonRandomizedStringEqualityComparer(
             System.Runtime.Serialization.SerializationInfo information,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public virtual bool Equals(string? x, string? y)
         {
@@ -317,14 +351,18 @@ namespace System.Collections.Generic
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class NullableComparer<T>
         : System.Collections.Generic.Comparer<T?>,
             System.Runtime.Serialization.ISerializable where T : struct
     {
-        public NullableComparer() { }
+        public NullableComparer()
+        {
+        }
 
         public override int Compare(T? x, T? y)
         {
@@ -346,14 +384,18 @@ namespace System.Collections.Generic
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class NullableEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T?>,
             System.Runtime.Serialization.ISerializable where T : struct
     {
-        public NullableEqualityComparer() { }
+        public NullableEqualityComparer()
+        {
+        }
 
         public override bool Equals(T? x, T? y)
         {
@@ -380,12 +422,16 @@ namespace System.Collections.Generic
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class ObjectComparer<T> : System.Collections.Generic.Comparer<T>
     {
-        public ObjectComparer() { }
+        public ObjectComparer()
+        {
+        }
 
         public override int Compare(T? x, T? y)
         {
@@ -408,7 +454,9 @@ namespace System.Collections.Generic
     public sealed partial class ObjectEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T>
     {
-        public ObjectEqualityComparer() { }
+        public ObjectEqualityComparer()
+        {
+        }
 
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
@@ -446,7 +494,9 @@ namespace System.Diagnostics.Contracts
             string? userMessage,
             string? condition,
             System.Exception? innerException
-        ) { }
+        )
+        {
+        }
 
         public string? Condition
         {
@@ -468,7 +518,9 @@ namespace System.Diagnostics.Contracts
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 }
 

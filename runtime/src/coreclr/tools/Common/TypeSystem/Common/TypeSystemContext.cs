@@ -15,7 +15,9 @@ namespace Internal.TypeSystem
         public TypeSystemContext()
             : this(
                 new TargetDetails(TargetArchitecture.Unknown, TargetOS.Unknown, TargetAbi.Unknown)
-            ) { }
+            )
+        {
+        }
 
         public TypeSystemContext(TargetDetails target)
         {

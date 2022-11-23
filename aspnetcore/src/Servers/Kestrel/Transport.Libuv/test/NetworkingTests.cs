@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                     called = true;
                     trigger.Dispose();
                 },
-                (a, b) => { }
+                (a, b) => {
+                }
             );
             trigger.Send();
             loop.Run();
@@ -59,7 +60,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var loop = new UvLoopHandle(_logger);
             loop.Init(_uv);
             var tcp = new UvTcpHandle(_logger);
-            tcp.Init(loop, (a, b) => { });
+            tcp.Init(
+                loop,
+                (a, b) => {
+                }
+            );
             var endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             tcp.Bind(endPoint);
             tcp.Dispose();
@@ -73,7 +78,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var loop = new UvLoopHandle(_logger);
             loop.Init(_uv);
             var tcp = new UvTcpHandle(_logger);
-            tcp.Init(loop, (a, b) => { });
+            tcp.Init(
+                loop,
+                (a, b) => {
+                }
+            );
             var endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             tcp.Bind(endPoint);
             var port = tcp.GetSockIPEndPoint().Port;
@@ -82,7 +91,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 (stream, status, error, state) =>
                 {
                     var tcp2 = new UvTcpHandle(_logger);
-                    tcp2.Init(loop, (a, b) => { });
+                    tcp2.Init(
+                        loop,
+                        (a, b) => {
+                        }
+                    );
                     stream.Accept(tcp2);
                     tcp2.Dispose();
                     stream.Dispose();
@@ -105,7 +118,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var loop = new UvLoopHandle(_logger);
             loop.Init(_uv);
             var tcp = new UvTcpHandle(_logger);
-            tcp.Init(loop, (a, b) => { });
+            tcp.Init(
+                loop,
+                (a, b) => {
+                }
+            );
             var endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             tcp.Bind(endPoint);
             var port = tcp.GetSockIPEndPoint().Port;
@@ -114,7 +131,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 (_, status, error, state) =>
                 {
                     var tcp2 = new UvTcpHandle(_logger);
-                    tcp2.Init(loop, (a, b) => { });
+                    tcp2.Init(
+                        loop,
+                        (a, b) => {
+                        }
+                    );
                     tcp.Accept(tcp2);
                     var data = Marshal.AllocCoTaskMem(500);
                     tcp2.ReadStart(
@@ -152,7 +173,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var loop = new UvLoopHandle(_logger);
             loop.Init(_uv);
             var tcp = new UvTcpHandle(_logger);
-            tcp.Init(loop, (a, b) => { });
+            tcp.Init(
+                loop,
+                (a, b) => {
+                }
+            );
             var endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             tcp.Bind(endPoint);
             var port = tcp.GetSockIPEndPoint().Port;
@@ -161,7 +186,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 (_, status, error, state) =>
                 {
                     var tcp2 = new UvTcpHandle(_logger);
-                    tcp2.Init(loop, (a, b) => { });
+                    tcp2.Init(
+                        loop,
+                        (a, b) => {
+                        }
+                    );
                     tcp.Accept(tcp2);
                     var data = Marshal.AllocCoTaskMem(500);
                     tcp2.ReadStart(

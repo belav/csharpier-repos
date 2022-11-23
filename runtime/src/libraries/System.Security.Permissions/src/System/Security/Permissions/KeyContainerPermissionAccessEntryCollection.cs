@@ -25,21 +25,27 @@ namespace System.Security.Permissions
             return 0;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public int IndexOf(KeyContainerPermissionAccessEntry accessEntry)
         {
             return 0;
         }
 
-        public void Remove(KeyContainerPermissionAccessEntry accessEntry) { }
+        public void Remove(KeyContainerPermissionAccessEntry accessEntry)
+        {
+        }
 
         public KeyContainerPermissionAccessEntryEnumerator GetEnumerator()
         {
             return null;
         }
 
-        public void CopyTo(KeyContainerPermissionAccessEntry[] array, int index) { }
+        public void CopyTo(KeyContainerPermissionAccessEntry[] array, int index)
+        {
+        }
 
         public void CopyTo(Array array, int index)
         {

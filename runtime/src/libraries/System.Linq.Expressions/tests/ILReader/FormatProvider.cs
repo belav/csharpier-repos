@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Tests
 
     public class DefaultFormatProvider : IFormatProvider
     {
-        private DefaultFormatProvider() { }
+        private DefaultFormatProvider()
+        {
+        }
 
         public static readonly DefaultFormatProvider Instance = new DefaultFormatProvider();
 

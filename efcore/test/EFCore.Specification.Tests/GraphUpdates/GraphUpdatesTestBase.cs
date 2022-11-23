@@ -3088,7 +3088,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         }
     }
 
-    protected class HiddenAreaTask : TaskWithChoices { }
+    protected class HiddenAreaTask : TaskWithChoices
+    {
+    }
 
     protected abstract class QuestTask : NotifyingEntity
     {
@@ -3101,7 +3103,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         }
     }
 
-    protected class QuizTask : TaskWithChoices { }
+    protected class QuizTask : TaskWithChoices
+    {
+    }
 
     protected class TaskChoice : NotifyingEntity
     {
@@ -3913,8 +3917,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
             nestedTestOperation3
         );
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 }

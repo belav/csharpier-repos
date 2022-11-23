@@ -4,5 +4,7 @@
 namespace Internal.TypeSystem.Interop
 {
     // Implements INonEmittableType
-    public partial class NativeStructType : INonEmittableType { }
+    public partial class NativeStructType : INonEmittableType
+    {
+    }
 }

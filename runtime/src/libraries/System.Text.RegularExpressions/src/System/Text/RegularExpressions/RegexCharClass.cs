@@ -356,7 +356,9 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Creates an empty character class.
         /// </summary>
-        public RegexCharClass() { }
+        public RegexCharClass()
+        {
+        }
 
         private RegexCharClass(
             bool negate,

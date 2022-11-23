@@ -24,7 +24,9 @@ namespace System.ComponentModel.Tests
             return true;
         }
 
-        public void OnComponentChanged() { }
+        public void OnComponentChanged()
+        {
+        }
 
         public object GetService(Type serviceType)
         {
@@ -78,7 +80,9 @@ namespace System.ComponentModel.Tests
 
     public class MyTypeListConverter : TypeListConverter
     {
-        public MyTypeListConverter(Type[] types) : base(types) { }
+        public MyTypeListConverter(Type[] types) : base(types)
+        {
+        }
     }
 
 #if FUNCTIONAL_TESTS
@@ -130,7 +134,9 @@ namespace System.ComponentModel.Tests
             );
         }
 
-        public BaseClassConverter() { }
+        public BaseClassConverter()
+        {
+        }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -224,7 +230,9 @@ namespace System.ComponentModel.Tests
 
     internal class DerivedClassConverter : TypeConverter
     {
-        public DerivedClassConverter() { }
+        public DerivedClassConverter()
+        {
+        }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -351,7 +359,9 @@ namespace System.ComponentModel.Tests
     }
 
     [TypeConverter("System.ComponentModel.Tests.InvalidConverter")]
-    internal class ClassWithInvalidConverter : BaseClass { }
+    internal class ClassWithInvalidConverter : BaseClass
+    {
+    }
 
     public class InvalidConverter : TypeConverter
     {
@@ -366,5 +376,7 @@ namespace System.ComponentModel.Tests
     }
 
     // TypeDescriptor should default to the TypeConverter in this case.
-    public class ClassWithNoConverter { }
+    public class ClassWithNoConverter
+    {
+    }
 }

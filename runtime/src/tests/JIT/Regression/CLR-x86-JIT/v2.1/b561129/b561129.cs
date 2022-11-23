@@ -5,7 +5,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public class WipOrderRow { }
+public class WipOrderRow
+{
+}
 
 public class WIPOrder
 {
@@ -24,7 +26,9 @@ public class WIPOrder
 
 public class ProductionContext
 {
-    public ProductionContext() { }
+    public ProductionContext()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public WipOrderRow SelectWipOrderByPK(string wipOrderNo, short wipOrderType)

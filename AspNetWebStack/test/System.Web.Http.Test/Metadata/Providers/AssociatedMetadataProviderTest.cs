@@ -312,7 +312,9 @@ namespace System.Web.Http.Metadata.Providers
         }
 
         [ReadOnly(true)]
-        private class TypeModel { }
+        private class TypeModel
+        {
+        }
 
         class TestableAssociatedMetadataProvider : AssociatedMetadataProvider<ModelMetadata>
         {

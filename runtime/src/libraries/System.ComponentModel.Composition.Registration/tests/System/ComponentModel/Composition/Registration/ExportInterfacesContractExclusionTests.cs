@@ -9,9 +9,13 @@ using Xunit;
 
 namespace System.ComponentModel.Composition.Registration.Tests
 {
-    public interface IContract1 { }
+    public interface IContract1
+    {
+    }
 
-    public interface IContract2 { }
+    public interface IContract2
+    {
+    }
 
     public class ClassWithLifetimeConcerns
         : IContract1,
@@ -19,9 +23,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
             IDisposable,
             IPartImportsSatisfiedNotification
     {
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void OnImportsSatisfied() { }
+        public void OnImportsSatisfied()
+        {
+        }
     }
 
     static class DELETE_ME_TESTER

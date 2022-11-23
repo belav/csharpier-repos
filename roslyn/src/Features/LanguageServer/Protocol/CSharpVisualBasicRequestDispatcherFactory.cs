@@ -22,6 +22,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 IEnumerable<
                 Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>
             > requestHandlerProviders
-        ) : base(requestHandlerProviders) { }
+        ) : base(requestHandlerProviders)
+        {
+        }
     }
 }

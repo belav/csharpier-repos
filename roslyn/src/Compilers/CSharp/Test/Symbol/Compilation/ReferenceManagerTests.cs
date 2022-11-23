@@ -1672,11 +1672,15 @@ public class A
             Assert.True(resolver.resolved2);
         }
 
-        private class TestException : Exception { }
+        private class TestException : Exception
+        {
+        }
 
         private class ErroneousReferenceResolver : TestMetadataReferenceResolver
         {
-            public ErroneousReferenceResolver() { }
+            public ErroneousReferenceResolver()
+            {
+            }
 
             public override ImmutableArray<PortableExecutableReference> ResolveReference(
                 string reference,

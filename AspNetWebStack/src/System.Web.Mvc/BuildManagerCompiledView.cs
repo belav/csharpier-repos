@@ -14,13 +14,17 @@ namespace System.Web.Mvc
         private ControllerContext _controllerContext;
 
         protected BuildManagerCompiledView(ControllerContext controllerContext, string viewPath)
-            : this(controllerContext, viewPath, null) { }
+            : this(controllerContext, viewPath, null)
+        {
+        }
 
         protected BuildManagerCompiledView(
             ControllerContext controllerContext,
             string viewPath,
             IViewPageActivator viewPageActivator
-        ) : this(controllerContext, viewPath, viewPageActivator, null) { }
+        ) : this(controllerContext, viewPath, viewPageActivator, null)
+        {
+        }
 
         internal BuildManagerCompiledView(
             ControllerContext controllerContext,

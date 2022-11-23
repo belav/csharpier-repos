@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PersistentStorageServiceFactory() { }
+        public PersistentStorageServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             NoOpPersistentStorageService.Instance;

@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
                 new InteractiveCommandCompletionService(
@@ -31,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Interactive
                 );
         }
 
-        private InteractiveCommandCompletionService(SolutionServices services) : base(services) { }
+        private InteractiveCommandCompletionService(SolutionServices services) : base(services)
+        {
+        }
 
         public override string Language => InteractiveLanguageNames.InteractiveCommand;
 

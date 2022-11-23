@@ -16,7 +16,9 @@ namespace System.Runtime.Serialization.Json
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonByteArrayDataContract(ByteArrayDataContract traditionalByteArrayDataContract)
-            : base(traditionalByteArrayDataContract) { }
+            : base(traditionalByteArrayDataContract)
+        {
+        }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

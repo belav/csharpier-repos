@@ -176,7 +176,9 @@ namespace Castle.DynamicProxy.Contributors
             ClassEmitter emitter
         );
 
-        public virtual void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model) { }
+        public virtual void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model)
+        {
+        }
     }
 }
 

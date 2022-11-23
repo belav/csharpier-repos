@@ -207,10 +207,14 @@ namespace System.Web.Mvc.Test
 
         private sealed class TestableWebFormViewEngine : WebFormViewEngine
         {
-            public TestableWebFormViewEngine() : base() { }
+            public TestableWebFormViewEngine() : base()
+            {
+            }
 
             public TestableWebFormViewEngine(IViewPageActivator viewPageActivator)
-                : base(viewPageActivator) { }
+                : base(viewPageActivator)
+            {
+            }
 
             public new IViewPageActivator ViewPageActivator
             {

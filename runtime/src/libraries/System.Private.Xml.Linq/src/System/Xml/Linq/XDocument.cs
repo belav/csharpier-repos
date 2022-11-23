@@ -39,7 +39,9 @@ namespace System.Xml.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="XDocument"/> class.
         /// </summary>
-        public XDocument() { }
+        public XDocument()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XDocument"/> class with the specified content.
@@ -606,7 +608,9 @@ namespace System.Xml.Linq
                 {
                     ws.Encoding = Encoding.GetEncoding(_declaration.Encoding);
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
             }
             using (XmlWriter w = XmlWriter.Create(stream, ws))
             {
@@ -641,7 +645,9 @@ namespace System.Xml.Linq
                 {
                     ws.Encoding = Encoding.GetEncoding(_declaration.Encoding);
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
             }
 
             XmlWriter w = XmlWriter.Create(stream, ws);
@@ -787,7 +793,9 @@ namespace System.Xml.Linq
                 {
                     ws.Encoding = Encoding.GetEncoding(_declaration.Encoding);
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
             }
 
             using (XmlWriter w = XmlWriter.Create(fileName, ws))

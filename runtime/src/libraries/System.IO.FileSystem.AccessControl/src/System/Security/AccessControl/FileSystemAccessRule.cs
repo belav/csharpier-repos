@@ -23,7 +23,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAccessRule(
             string identity,
@@ -37,7 +39,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         //
         // Constructor for creating access rules for folder objects
@@ -57,7 +61,9 @@ namespace System.Security.AccessControl
                 inheritanceFlags,
                 propagationFlags,
                 type
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAccessRule(
             string identity,
@@ -73,7 +79,9 @@ namespace System.Security.AccessControl
                 inheritanceFlags,
                 propagationFlags,
                 type
-            ) { }
+            )
+        {
+        }
 
         //
         // Internal constructor to be called by public constructors
@@ -87,7 +95,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
+        {
+        }
 
         public FileSystemRights FileSystemRights
         {

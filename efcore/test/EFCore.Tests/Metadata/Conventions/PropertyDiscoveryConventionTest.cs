@@ -34,7 +34,9 @@ public class PropertyDiscoveryConventionTest
         }
     }
 
-    private class DerivedWithoutPrivates : BaseWithPrivates { }
+    private class DerivedWithoutPrivates : BaseWithPrivates
+    {
+    }
 
     private class WithPrivatesContext : DbContext
     {
@@ -120,7 +122,9 @@ public class PropertyDiscoveryConventionTest
         public int WriteOnly
         {
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
 
         public int ReadOnly { get; }
@@ -131,7 +135,9 @@ public class PropertyDiscoveryConventionTest
         {
             get => 0;
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
     }
 

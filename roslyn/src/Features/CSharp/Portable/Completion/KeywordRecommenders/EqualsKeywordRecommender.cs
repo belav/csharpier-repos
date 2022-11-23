@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class EqualsKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public EqualsKeywordRecommender() : base(SyntaxKind.EqualsKeyword) { }
+        public EqualsKeywordRecommender() : base(SyntaxKind.EqualsKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

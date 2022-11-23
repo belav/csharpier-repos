@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
 {
     internal abstract class AbstractSyntaxClassifier : ISyntaxClassifier
     {
-        protected AbstractSyntaxClassifier() { }
+        protected AbstractSyntaxClassifier()
+        {
+        }
 
         protected static string? GetClassificationForType(ITypeSymbol type) =>
             type.GetClassification();
@@ -22,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
             ClassificationOptions options,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         public virtual void AddClassifications(
             SyntaxToken syntax,
@@ -30,7 +34,9 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
             ClassificationOptions options,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         public virtual ImmutableArray<Type> SyntaxNodeTypes => ImmutableArray<Type>.Empty;
 

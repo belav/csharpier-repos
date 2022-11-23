@@ -43,10 +43,14 @@ namespace System.Management
         }
 
         //default constructor
-        internal ManagementQuery() : this(DEFAULTQUERYLANGUAGE, null) { }
+        internal ManagementQuery() : this(DEFAULTQUERYLANGUAGE, null)
+        {
+        }
 
         //parameterized constructors
-        internal ManagementQuery(string query) : this(DEFAULTQUERYLANGUAGE, query) { }
+        internal ManagementQuery(string query) : this(DEFAULTQUERYLANGUAGE, query)
+        {
+        }
 
         internal ManagementQuery(string language, string query)
         {
@@ -58,7 +62,9 @@ namespace System.Management
         ///  Parses the query string and sets the property values accordingly.
         /// </summary>
         /// <param name="query">The query string to be parsed.</param>
-        protected internal virtual void ParseQuery(string query) { }
+        protected internal virtual void ParseQuery(string query)
+        {
+        }
 
         //
         //properties
@@ -223,7 +229,9 @@ namespace System.Management
         /// class with no initialized values. This
         /// is the default constructor.</para>
         /// </summary>
-        public ObjectQuery() : base() { }
+        public ObjectQuery() : base()
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ObjectQuery'/>
@@ -231,7 +239,9 @@ namespace System.Management
         /// for a specific query string.</para>
         /// </summary>
         /// <param name='query'>The string representation of the query.</param>
-        public ObjectQuery(string query) : base(query) { }
+        public ObjectQuery(string query) : base(query)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ObjectQuery'/>
@@ -240,7 +250,9 @@ namespace System.Management
         /// </summary>
         /// <param name='language'>The query language in which this query is specified.</param>
         /// <param name=' query'>The string representation of the query.</param>
-        public ObjectQuery(string language, string query) : base(language, query) { }
+        public ObjectQuery(string language, string query) : base(language, query)
+        {
+        }
 
         //ICloneable
         /// <summary>
@@ -436,14 +448,18 @@ namespace System.Management
         /// class. This is the
         /// default constructor.</para>
         /// </summary>
-        public EventQuery() : base() { }
+        public EventQuery() : base()
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventQuery'/>
         /// class for the specified query.</para>
         /// </summary>
         /// <param name='query'>A textual representation of the event query.</param>
-        public EventQuery(string query) : base(query) { }
+        public EventQuery(string query) : base(query)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventQuery'/>
@@ -452,7 +468,9 @@ namespace System.Management
         /// </summary>
         /// <param name='language'>The language in which the query string is specified. </param>
         /// <param name=' query'>The string representation of the query.</param>
-        public EventQuery(string language, string query) : base(language, query) { }
+        public EventQuery(string language, string query) : base(language, query)
+        {
+        }
 
         //ICloneable
         /// <summary>
@@ -526,14 +544,18 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.WqlObjectQuery'/> class. This is the
         ///    default constructor.</para>
         /// </summary>
-        public WqlObjectQuery() : base(null) { }
+        public WqlObjectQuery() : base(null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlObjectQuery'/> class initialized to the
         ///    specified query.</para>
         /// </summary>
         /// <param name='query'><para> The representation of the data query.</para></param>
-        public WqlObjectQuery(string query) : base(query) { }
+        public WqlObjectQuery(string query) : base(query)
+        {
+        }
 
         //QueryLanguage property is read-only in this class (does this work ??)
         /// <summary>
@@ -623,7 +645,9 @@ namespace System.Management
         /// class. This is the
         /// default constructor.</para>
         /// </summary>
-        public SelectQuery() : this(null) { }
+        public SelectQuery() : this(null)
+        {
+        }
 
         //parameterized constructors
         //ISSUE : We have 2 possible constructors that take a single string :
@@ -698,7 +722,8 @@ namespace System.Management
         ///    </code>
         /// </example>
         public SelectQuery(string className, string condition) : this(className, condition, null)
-        { }
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.SelectQuery'/>
@@ -1321,7 +1346,9 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.RelatedObjectQuery'/> class. This is the
         ///    default constructor.</para>
         /// </summary>
-        public RelatedObjectQuery() : this(null) { }
+        public RelatedObjectQuery() : this(null)
+        {
+        }
 
         //parameterized constructor
         //ISSUE : We have 2 possible constructors that take a single string :
@@ -1402,7 +1429,9 @@ namespace System.Management
         /// <param name='sourceObject'>The path of the source object for this query.</param>
         /// <param name='relatedClass'>The related objects class.</param>
         public RelatedObjectQuery(string sourceObject, string relatedClass)
-            : this(sourceObject, relatedClass, null, null, null, null, null, false) { }
+            : this(sourceObject, relatedClass, null, null, null, null, null, false)
+        {
+        }
 
         //Do we need additional variants of constructors here ??
         /// <summary>
@@ -2187,7 +2216,9 @@ namespace System.Management
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.RelationshipQuery'/> class. This is the default constructor.</para>
         /// </summary>
-        public RelationshipQuery() : this(null) { }
+        public RelationshipQuery() : this(null)
+        {
+        }
 
         //parameterized constructor
         //ISSUE : We have 2 possible constructors that take a single string :
@@ -2258,7 +2289,9 @@ namespace System.Management
         /// <param name='sourceObject'> The path of the source object for this query.</param>
         /// <param name='relationshipClass'> The type of relationship for which to query.</param>
         public RelationshipQuery(string sourceObject, string relationshipClass)
-            : this(sourceObject, relationshipClass, null, null, false) { }
+            : this(sourceObject, relationshipClass, null, null, false)
+        {
+        }
 
         //Do we need additional variants of constructors here ??
         /// <summary>
@@ -2929,7 +2962,9 @@ namespace System.Management
         /// class. This is the default
         /// constructor.</para>
         /// </summary>
-        public WqlEventQuery() : this(null, TimeSpan.Zero, null, TimeSpan.Zero, null, null) { }
+        public WqlEventQuery() : this(null, TimeSpan.Zero, null, TimeSpan.Zero, null, null)
+        {
+        }
 
         //parameterized constructors
         //ISSUE : We have 2 possible constructors that take a single string :
@@ -3009,7 +3044,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public WqlEventQuery(string eventClassName, string condition)
-            : this(eventClassName, TimeSpan.Zero, condition, TimeSpan.Zero, null, null) { }
+            : this(eventClassName, TimeSpan.Zero, condition, TimeSpan.Zero, null, null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
@@ -3034,7 +3071,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public WqlEventQuery(string eventClassName, TimeSpan withinInterval)
-            : this(eventClassName, withinInterval, null, TimeSpan.Zero, null, null) { }
+            : this(eventClassName, withinInterval, null, TimeSpan.Zero, null, null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
@@ -3066,7 +3105,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public WqlEventQuery(string eventClassName, TimeSpan withinInterval, string condition)
-            : this(eventClassName, withinInterval, condition, TimeSpan.Zero, null, null) { }
+            : this(eventClassName, withinInterval, condition, TimeSpan.Zero, null, null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
@@ -3097,7 +3138,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public WqlEventQuery(string eventClassName, string condition, TimeSpan groupWithinInterval)
-            : this(eventClassName, TimeSpan.Zero, condition, groupWithinInterval, null, null) { }
+            : this(eventClassName, TimeSpan.Zero, condition, groupWithinInterval, null, null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
@@ -3147,7 +3190,9 @@ namespace System.Management
                 groupWithinInterval,
                 groupByPropertyList,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>

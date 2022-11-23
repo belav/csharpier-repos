@@ -3,5 +3,7 @@
 
 namespace A
 {
-    public interface IPlugin { }
+    public interface IPlugin
+    {
+    }
 }

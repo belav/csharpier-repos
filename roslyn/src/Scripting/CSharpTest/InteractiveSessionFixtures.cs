@@ -15,16 +15,22 @@ namespace InteractiveFixtures
 {
     namespace A
     {
-        public class X { }
+        public class X
+        {
+        }
     }
 
     namespace B
     {
-        public class X { }
+        public class X
+        {
+        }
     }
 
     namespace C
     {
-        public interface System { }
+        public interface System
+        {
+        }
     }
 }

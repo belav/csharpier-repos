@@ -461,7 +461,9 @@ namespace System.IO.Ports.Tests
                     s_DEFAULT_WRITE_BYTE_ARRAY_SIZE
                 );
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void Write_char_int_int(SerialPort com)
@@ -474,7 +476,9 @@ namespace System.IO.Ports.Tests
                     s_DEFAULT_WRITE_CHAR_ARRAY_SIZE
                 );
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void Write_str(SerialPort com)
@@ -483,7 +487,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(s_DEFAULT_STRING_TO_WRITE);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void WriteLine(SerialPort com)
@@ -492,7 +498,9 @@ namespace System.IO.Ports.Tests
             {
                 com.WriteLine(s_DEFAULT_STRING_TO_WRITE);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         #endregion

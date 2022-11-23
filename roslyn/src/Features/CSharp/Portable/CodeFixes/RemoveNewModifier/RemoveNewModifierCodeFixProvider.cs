@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveNewModifier
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public RemoveNewModifierCodeFixProvider() { }
+        public RemoveNewModifierCodeFixProvider()
+        {
+        }
 
         public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 

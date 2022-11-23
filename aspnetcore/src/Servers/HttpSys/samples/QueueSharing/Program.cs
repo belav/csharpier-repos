@@ -53,7 +53,9 @@ public static class Program
                         options.RequestQueueMode = mode;
                         options.MaxAccepts = 1; // Better load rotation between instances.
                     })
-                    .ConfigureServices(services => { })
+                    .ConfigureServices(services =>
+                    {
+                    })
                     .Configure(app =>
                     {
                         app.Run(async context =>

@@ -201,7 +201,9 @@ namespace System.Xml
         };
 
         public XmlUTF8NodeWriter()
-            : this(s_defaultIsEscapedAttributeChar, s_defaultIsEscapedElementChar) { }
+            : this(s_defaultIsEscapedAttributeChar, s_defaultIsEscapedElementChar)
+        {
+        }
 
         public XmlUTF8NodeWriter(bool[] isEscapedAttributeChar, bool[] isEscapedElementChar)
         {
@@ -943,14 +945,18 @@ namespace System.Xml
             WriteText(XmlConvert.ToString(value));
         }
 
-        public override void WriteStartListText() { }
+        public override void WriteStartListText()
+        {
+        }
 
         public override void WriteListSeparator()
         {
             WriteByte(' ');
         }
 
-        public override void WriteEndListText() { }
+        public override void WriteEndListText()
+        {
+        }
 
         public override void WriteQualifiedName(string prefix, XmlDictionaryString localName)
         {

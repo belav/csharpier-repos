@@ -148,9 +148,13 @@ namespace Castle.Components.DictionaryAdapter.Tests
         private static readonly Member MemberA = new Member(),
             MemberB = new Member();
 
-        private sealed class Node { }
+        private sealed class Node
+        {
+        }
 
-        private sealed class Member { }
+        private sealed class Member
+        {
+        }
 
         private sealed class MockVirtual : VirtualObject<Node>
         {
@@ -170,9 +174,13 @@ namespace Castle.Components.DictionaryAdapter.Tests
                 return new MockVirtual(site) { PendingNode = node };
             }
 
-            private MockVirtual() : base() { }
+            private MockVirtual() : base()
+            {
+            }
 
-            private MockVirtual(IVirtualSite<Node> site) : base(site) { }
+            private MockVirtual(IVirtualSite<Node> site) : base(site)
+            {
+            }
 
             private Node PendingNode;
             private Node RealNode;

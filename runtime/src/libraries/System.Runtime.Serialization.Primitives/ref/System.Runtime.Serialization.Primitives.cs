@@ -13,7 +13,9 @@ namespace System.Runtime.Serialization
     )]
     public sealed partial class CollectionDataContractAttribute : System.Attribute
     {
-        public CollectionDataContractAttribute() { }
+        public CollectionDataContractAttribute()
+        {
+        }
 
         public bool IsItemNameSetExplicitly
         {
@@ -34,7 +36,9 @@ namespace System.Runtime.Serialization
         public bool IsReference
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsReferenceSetExplicitly
         {
@@ -47,27 +51,37 @@ namespace System.Runtime.Serialization
         public string? ItemName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? KeyName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? ValueName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -78,12 +92,16 @@ namespace System.Runtime.Serialization
     )]
     public sealed partial class ContractNamespaceAttribute : System.Attribute
     {
-        public ContractNamespaceAttribute(string contractNamespace) { }
+        public ContractNamespaceAttribute(string contractNamespace)
+        {
+        }
 
         public string? ClrNamespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ContractNamespace
         {
@@ -100,7 +118,9 @@ namespace System.Runtime.Serialization
     )]
     public sealed partial class DataContractAttribute : System.Attribute
     {
-        public DataContractAttribute() { }
+        public DataContractAttribute()
+        {
+        }
 
         public bool IsNameSetExplicitly
         {
@@ -113,7 +133,9 @@ namespace System.Runtime.Serialization
         public bool IsReference
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsReferenceSetExplicitly
         {
@@ -122,12 +144,16 @@ namespace System.Runtime.Serialization
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -138,12 +164,16 @@ namespace System.Runtime.Serialization
     )]
     public sealed partial class DataMemberAttribute : System.Attribute
     {
-        public DataMemberAttribute() { }
+        public DataMemberAttribute()
+        {
+        }
 
         public bool EmitDefaultValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsNameSetExplicitly
         {
@@ -152,17 +182,23 @@ namespace System.Runtime.Serialization
         public bool IsRequired
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Order
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -173,7 +209,9 @@ namespace System.Runtime.Serialization
     )]
     public sealed partial class EnumMemberAttribute : System.Attribute
     {
-        public EnumMemberAttribute() { }
+        public EnumMemberAttribute()
+        {
+        }
 
         public bool IsValueSetExplicitly
         {
@@ -182,7 +220,9 @@ namespace System.Runtime.Serialization
         public string? Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -193,21 +233,31 @@ namespace System.Runtime.Serialization
     )]
     public sealed partial class IgnoreDataMemberAttribute : System.Attribute
     {
-        public IgnoreDataMemberAttribute() { }
+        public IgnoreDataMemberAttribute()
+        {
+        }
     }
 
     public partial class InvalidDataContractException : System.Exception
     {
-        public InvalidDataContractException() { }
+        public InvalidDataContractException()
+        {
+        }
 
         protected InvalidDataContractException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InvalidDataContractException(string? message) { }
+        public InvalidDataContractException(string? message)
+        {
+        }
 
-        public InvalidDataContractException(string? message, System.Exception? innerException) { }
+        public InvalidDataContractException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial interface ISerializationSurrogateProvider
@@ -232,9 +282,13 @@ namespace System.Runtime.Serialization
     )]
     public sealed partial class KnownTypeAttribute : System.Attribute
     {
-        public KnownTypeAttribute(string methodName) { }
+        public KnownTypeAttribute(string methodName)
+        {
+        }
 
-        public KnownTypeAttribute(System.Type type) { }
+        public KnownTypeAttribute(System.Type type)
+        {
+        }
 
         public string? MethodName
         {

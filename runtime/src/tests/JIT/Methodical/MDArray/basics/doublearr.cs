@@ -210,7 +210,9 @@ namespace Test_doublearr_basics
                     ima2d[-1, -1] = 5;
                     pass = false;
                 }
-                catch (IndexOutOfRangeException) { }
+                catch (IndexOutOfRangeException)
+                {
+                }
             }
 
             Console.WriteLine();
@@ -271,7 +273,9 @@ namespace Test_doublearr_basics
                     ima3d[Int32.MaxValue, 0, 0] = 5;
                     pass = false;
                 }
-                catch (IndexOutOfRangeException) { }
+                catch (IndexOutOfRangeException)
+                {
+                }
             }
 
             Console.WriteLine();

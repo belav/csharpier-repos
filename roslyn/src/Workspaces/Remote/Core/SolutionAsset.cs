@@ -47,6 +47,8 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public SolutionAsset(Checksum checksum, object value)
-            : this(value, checksum, value.GetWellKnownSynchronizationKind()) { }
+            : this(value, checksum, value.GetWellKnownSynchronizationKind())
+        {
+        }
     }
 }

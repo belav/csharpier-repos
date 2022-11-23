@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 ),
                 CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
                 ImmutableArray.Create(SyntaxKind.IndexerDeclaration)
-            ) { }
+            )
+        {
+        }
 
         public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
             CSharpCodeGenerationOptions options

@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 
 internal sealed class DocumentDiagnosticSource : AbstractDocumentDiagnosticSource<Document>
 {
-    public DocumentDiagnosticSource(Document document) : base(document) { }
+    public DocumentDiagnosticSource(Document document) : base(document)
+    {
+    }
 
     // The normal diagnostic source includes both todo comments and diagnostics for this open file.
 

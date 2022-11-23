@@ -7,4 +7,6 @@ namespace Microsoft.AspNetCore.Http.Metadata;
 /// Defines a contract used to specify metadata for skipping the StatusCodePage
 /// middleware in <see cref="Endpoint.Metadata"/>.
 /// </summary>
-public interface ISkipStatusCodePagesMetadata { }
+public interface ISkipStatusCodePagesMetadata
+{
+}

@@ -188,7 +188,9 @@ namespace Microsoft.CodeAnalysis
                         declarationOnlyCompilation,
                         generatedDocuments,
                         generatedDocumentsAreFinal
-                    ) { }
+                    )
+                {
+                }
             }
 
             /// <summary>
@@ -207,7 +209,9 @@ namespace Microsoft.CodeAnalysis
                         declarationCompilation.Clone().RemoveAllReferences(),
                         generatedDocuments,
                         generatedDocumentsAreFinal
-                    ) { }
+                    )
+                {
+                }
             }
 
             /// <summary>

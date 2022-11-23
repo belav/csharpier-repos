@@ -11,12 +11,18 @@ namespace System.ComponentModel.Composition.Registration.Tests
 {
     public class PartBuilderTests
     {
-        private class MyDoNotIncludeAttribute : Attribute { }
+        private class MyDoNotIncludeAttribute : Attribute
+        {
+        }
 
         [MyDoNotIncludeAttribute]
-        public class MyNotToBeIncludedClass { }
+        public class MyNotToBeIncludedClass
+        {
+        }
 
-        public class MyToBeIncludedClass { }
+        public class MyToBeIncludedClass
+        {
+        }
 
         public class ImporterOfMyNotTobeIncludedClass
         {
@@ -27,9 +33,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
             public MyToBeIncludedClass MyToBeIncludedClass;
         }
 
-        public interface IFirst { }
+        public interface IFirst
+        {
+        }
 
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         private class FooImpl
         {
@@ -40,18 +50,28 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private class FooImplWithConstructors
         {
-            public FooImplWithConstructors() { }
+            public FooImplWithConstructors()
+            {
+            }
 
-            public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+            public FooImplWithConstructors(IEnumerable<IFoo> ids)
+            {
+            }
 
-            public FooImplWithConstructors(int id, string name) { }
+            public FooImplWithConstructors(int id, string name)
+            {
+            }
         }
 
         private class FooImplWithConstructorsAmbiguous
         {
-            public FooImplWithConstructorsAmbiguous(string name, int id) { }
+            public FooImplWithConstructorsAmbiguous(string name, int id)
+            {
+            }
 
-            public FooImplWithConstructorsAmbiguous(int id, string name) { }
+            public FooImplWithConstructorsAmbiguous(int id, string name)
+            {
+            }
         }
 
         [Fact]

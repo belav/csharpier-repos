@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EnableNullableCodeRefactoringProvider() { }
+        public EnableNullableCodeRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

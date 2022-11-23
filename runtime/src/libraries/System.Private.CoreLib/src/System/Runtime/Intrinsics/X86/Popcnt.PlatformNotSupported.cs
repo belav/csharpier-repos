@@ -12,7 +12,9 @@ namespace System.Runtime.Intrinsics.X86
     [CLSCompliant(false)]
     public abstract class Popcnt : Sse42
     {
-        internal Popcnt() { }
+        internal Popcnt()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -22,7 +24,9 @@ namespace System.Runtime.Intrinsics.X86
 
         public new abstract class X64 : Sse42.X64
         {
-            internal X64() { }
+            internal X64()
+            {
+            }
 
             public static new bool IsSupported
             {

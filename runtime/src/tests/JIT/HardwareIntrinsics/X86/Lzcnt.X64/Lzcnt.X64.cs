@@ -70,7 +70,9 @@ namespace IntelHardwareIntrinsicTest
                     Console.WriteLine("Lzcnt.X64.IsSupported " + Lzcnt.X64.IsSupported);
                     testResult = Fail;
                 }
-                catch (PlatformNotSupportedException) { }
+                catch (PlatformNotSupportedException)
+                {
+                }
 
                 try
                 {
@@ -89,7 +91,9 @@ namespace IntelHardwareIntrinsicTest
                     testResult = Fail;
                 }
                 catch (TargetInvocationException e)
-                    when (e.InnerException is PlatformNotSupportedException) { }
+                    when (e.InnerException is PlatformNotSupportedException)
+                {
+                }
             }
 
             return testResult;

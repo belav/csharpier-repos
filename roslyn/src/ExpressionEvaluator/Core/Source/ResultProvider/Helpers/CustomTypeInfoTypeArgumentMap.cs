@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private readonly ReadOnlyCollection<string> _tupleElementNames;
         private readonly int[] _tupleElementNameStartIndices;
 
-        private CustomTypeInfoTypeArgumentMap() { }
+        private CustomTypeInfoTypeArgumentMap()
+        {
+        }
 
         private CustomTypeInfoTypeArgumentMap(
             Type typeDefinition,

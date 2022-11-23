@@ -29,7 +29,9 @@ namespace Roslyn.Test.Utilities
     {
         private TempRoot _temp;
 
-        protected TestBase() { }
+        protected TestBase()
+        {
+        }
 
         public static string GetUniqueName()
         {

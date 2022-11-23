@@ -309,7 +309,9 @@ namespace ILCompiler
                 }
             }
 
-            public struct Unit { }
+            public struct Unit
+            {
+            }
         }
 
         private enum FormatOptions

@@ -57,7 +57,9 @@ namespace System.Xml.XmlSchemaTests
                 XmlSchemaSet sc = new XmlSchemaSet();
                 XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
 
-                while (Reader.Read()) { }
+                while (Reader.Read())
+                {
+                }
 
                 sc.Add("xsdauthor", Reader);
             });

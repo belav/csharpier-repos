@@ -27,7 +27,9 @@ public sealed class UpdateExpression : Expression, IPrintableExpression
         TableExpression table,
         SelectExpression selectExpression,
         IReadOnlyList<ColumnValueSetter> columnValueSetters
-    ) : this(table, selectExpression, columnValueSetters, new HashSet<string>()) { }
+    ) : this(table, selectExpression, columnValueSetters, new HashSet<string>())
+    {
+    }
 
     private UpdateExpression(
         TableExpression table,

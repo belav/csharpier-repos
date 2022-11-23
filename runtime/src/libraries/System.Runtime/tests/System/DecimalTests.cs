@@ -2603,7 +2603,9 @@ namespace System.Tests
                                     d1 + " + " + d2
                                 );
                             }
-                            catch (OverflowException) { }
+                            catch (OverflowException)
+                            {
+                            }
                         }
                         else
                             unsafe
@@ -2653,7 +2655,9 @@ namespace System.Tests
                                     d1 + " * " + d2
                                 );
                             }
-                            catch (OverflowException) { }
+                            catch (OverflowException)
+                            {
+                            }
                         }
                         else
                             unsafe
@@ -2705,7 +2709,9 @@ namespace System.Tests
                                     d1 + " / " + d2
                                 );
                             }
-                            catch (OverflowException) { }
+                            catch (OverflowException)
+                            {
+                            }
                         }
                         else
                             unsafe
@@ -2864,7 +2870,9 @@ namespace System.Tests
                             d1 + " ToInt32"
                         );
                     }
-                    catch (OverflowException) { }
+                    catch (OverflowException)
+                    {
+                    }
                 }
                 else
                 {
@@ -2898,7 +2906,9 @@ namespace System.Tests
                             d1 + " ToOACurrency"
                         );
                     }
-                    catch (OverflowException) { }
+                    catch (OverflowException)
+                    {
+                    }
                 }
                 else
                 {

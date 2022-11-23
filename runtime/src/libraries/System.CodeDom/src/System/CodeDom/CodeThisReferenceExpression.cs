@@ -3,5 +3,7 @@
 
 namespace System.CodeDom
 {
-    public class CodeThisReferenceExpression : CodeExpression { }
+    public class CodeThisReferenceExpression : CodeExpression
+    {
+    }
 }

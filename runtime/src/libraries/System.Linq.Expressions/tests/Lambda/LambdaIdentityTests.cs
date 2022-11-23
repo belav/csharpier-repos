@@ -89,7 +89,10 @@ namespace System.Linq.Expressions.Tests
                         {
                             return i + 1;
                         },
-                    (Action<object>)delegate { }
+                    (Action<object>)
+                        delegate
+                        {
+                        }
                 }
             )
             {

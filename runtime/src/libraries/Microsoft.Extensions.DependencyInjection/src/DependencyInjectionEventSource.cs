@@ -28,7 +28,9 @@ namespace Microsoft.Extensions.DependencyInjection
         private readonly List<WeakReference<ServiceProvider>> _providers = new();
 
         private DependencyInjectionEventSource()
-            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat)
+        {
+        }
 
         // NOTE
         // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in EventSource. They

@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 span,
                 (ushort)(node != null ? node.RawKind : 0),
                 arguments ?? Array.Empty<string>()
-            ) { }
+            )
+        {
+        }
 
         internal Diagnostic ToDiagnostic(SyntaxTree tree)
         {

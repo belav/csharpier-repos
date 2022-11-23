@@ -2,9 +2,13 @@
 
 public class RecordConstructorValidation : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
-    record Destination(int Value, int Other) { }
+    record Destination(int Value, int Other)
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(
@@ -24,11 +28,15 @@ public class RecordConstructorValidation : AutoMapperSpecBase
 
 public class ConstructorValidation : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {
-        public Destination(int otherValue, int value = 2) { }
+        public Destination(int otherValue, int value = 2)
+        {
+        }
 
         public int Value { get; set; }
         public int OtherValue { get; set; }
@@ -84,7 +92,9 @@ public class Nullable_enum_default_value : AutoMapperSpecBase
 
 public class Nullable_enum_default_value_null : AutoMapperSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
     public enum TargetEnum
     {
@@ -111,7 +121,9 @@ public class Nullable_enum_default_value_null : AutoMapperSpecBase
 
 public class Nullable_enum_default_value_not_null : AutoMapperSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
     public enum TargetEnum
     {
@@ -630,7 +642,9 @@ public class When_constructor_matches_but_is_overriden_by_ConstructUsing : AutoM
 
     public class PersonDto
     {
-        public PersonDto() { }
+        public PersonDto()
+        {
+        }
 
         public PersonDto(string name)
         {
@@ -755,7 +769,9 @@ public class When_constructor_is_partial_match : AutoMapperSpecBase
 
     public class GeoCoordinate
     {
-        public GeoCoordinate() { }
+        public GeoCoordinate()
+        {
+        }
 
         public GeoCoordinate(double longitude, double latitude, double x)
         {
@@ -813,13 +829,17 @@ public class When_constructor_matches_but_the_destination_is_passed : AutoMapper
         public int MyTypeId { get; set; }
     }
 
-    public class MyType { }
+    public class MyType
+    {
+    }
 
     public class Destination
     {
         private MyType _myType;
 
-        public Destination() { }
+        public Destination()
+        {
+        }
 
         public Destination(MyType myType)
         {
@@ -860,7 +880,9 @@ public class When_mapping_through_constructor_and_destination_has_setter : AutoM
         public int MyTypeId { get; set; }
     }
 
-    public class MyType { }
+    public class MyType
+    {
+    }
 
     Destination _destination;
 
@@ -868,7 +890,9 @@ public class When_mapping_through_constructor_and_destination_has_setter : AutoM
     {
         private MyType _myType;
 
-        private Destination() { }
+        private Destination()
+        {
+        }
 
         public Destination(MyType myType)
         {
@@ -1047,7 +1071,9 @@ public class When_mapping_constructor_argument_fails : NonValidatingSpecBase
 
         public int Bar { get; set; }
 
-        public Dest(Dest foo) { }
+        public Dest(Dest foo)
+        {
+        }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
@@ -1189,7 +1215,9 @@ public class When_mapping_to_an_object_using_service_location : AutoMapperSpecBa
             _addend = addend;
         }
 
-        public Dest() : this(0) { }
+        public Dest() : this(0)
+        {
+        }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
@@ -1236,7 +1264,9 @@ public class When_mapping_to_an_object_using_contextual_service_location : AutoM
             _addend = addend;
         }
 
-        public Dest() : this(0) { }
+        public Dest() : this(0)
+        {
+        }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
@@ -1283,7 +1313,9 @@ public class When_mapping_to_an_object_with_multiple_constructors_and_constructo
             throw new NotImplementedException();
         }
 
-        public Dest() { }
+        public Dest()
+        {
+        }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>

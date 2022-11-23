@@ -15,7 +15,9 @@ namespace System.Configuration
 #endif
     public sealed class ConfigurationPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public ConfigurationPermission(PermissionState state) { }
+        public ConfigurationPermission(PermissionState state)
+        {
+        }
 
         public bool IsUnrestricted() => false;
 
@@ -36,7 +38,9 @@ namespace System.Configuration
 
         public override bool IsSubsetOf(IPermission target) => false;
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override SecurityElement ToXml()
         {

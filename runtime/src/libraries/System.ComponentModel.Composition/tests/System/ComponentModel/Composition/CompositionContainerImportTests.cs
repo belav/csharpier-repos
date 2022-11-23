@@ -626,7 +626,9 @@ namespace System.ComponentModel.Composition
 
         public class Importer
         {
-            public Importer() { }
+            public Importer()
+            {
+            }
 
             [Import("Value")]
             public int ValueReadWrite { get; set; }
@@ -643,7 +645,9 @@ namespace System.ComponentModel.Composition
 
         public class ImporterNameless
         {
-            public ImporterNameless() { }
+            public ImporterNameless()
+            {
+            }
 
             [Import]
             public int ValueReadWrite { get; set; }

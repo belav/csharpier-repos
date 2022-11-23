@@ -57,7 +57,9 @@ internal partial class WpfBackgroundWorkIndicatorFactory
         bool IUIThreadOperationScope.AllowCancellation
         {
             get => true;
-            set { }
+            set
+            {
+            }
         }
 
         string IUIThreadOperationScope.Description

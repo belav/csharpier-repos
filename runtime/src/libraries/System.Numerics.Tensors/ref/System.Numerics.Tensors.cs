@@ -107,18 +107,24 @@ namespace System.Numerics.Tensors
             int nonZeroCount,
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        ) : base(default(System.Array), default(bool))
+        {
+        }
 
         public CompressedSparseTensor(
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        ) : base(default(System.Array), default(bool))
+        {
+        }
 
         public CompressedSparseTensor(
             System.ReadOnlySpan<int> dimensions,
             int capacity,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        ) : base(default(System.Array), default(bool))
+        {
+        }
 
         public int Capacity
         {
@@ -135,7 +141,9 @@ namespace System.Numerics.Tensors
         public override T this[System.ReadOnlySpan<int> indices]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int NonZeroCount
         {
@@ -170,7 +178,9 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        public override void SetValue(int index, T value) { }
+        public override void SetValue(int index, T value)
+        {
+        }
 
         public override System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor()
         {
@@ -190,16 +200,22 @@ namespace System.Numerics.Tensors
 
     public partial class DenseTensor<T> : System.Numerics.Tensors.Tensor<T>
     {
-        public DenseTensor(int length) : base(default(System.Array), default(bool)) { }
+        public DenseTensor(int length) : base(default(System.Array), default(bool))
+        {
+        }
 
         public DenseTensor(
             System.Memory<T> memory,
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        ) : base(default(System.Array), default(bool))
+        {
+        }
 
         public DenseTensor(System.ReadOnlySpan<int> dimensions, bool reverseStride = false)
-            : base(default(System.Array), default(bool)) { }
+            : base(default(System.Array), default(bool))
+        {
+        }
 
         public System.Memory<T> Buffer
         {
@@ -218,7 +234,9 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        protected override void CopyTo(T[] array, int arrayIndex) { }
+        protected override void CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         public override T GetValue(int index)
         {
@@ -237,7 +255,9 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        public override void SetValue(int index, T value) { }
+        public override void SetValue(int index, T value)
+        {
+        }
     }
 
     public partial class SparseTensor<T> : System.Numerics.Tensors.Tensor<T>
@@ -246,7 +266,9 @@ namespace System.Numerics.Tensors
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false,
             int capacity = 0
-        ) : base(default(System.Array), default(bool)) { }
+        ) : base(default(System.Array), default(bool))
+        {
+        }
 
         public int NonZeroCount
         {
@@ -277,7 +299,9 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        public override void SetValue(int index, T value) { }
+        public override void SetValue(int index, T value)
+        {
+        }
 
         public override System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor()
         {
@@ -344,11 +368,17 @@ namespace System.Numerics.Tensors
             System.Collections.IStructuralComparable,
             System.Collections.IStructuralEquatable
     {
-        protected Tensor(System.Array fromArray, bool reverseStride) { }
+        protected Tensor(System.Array fromArray, bool reverseStride)
+        {
+        }
 
-        protected Tensor(int length) { }
+        protected Tensor(int length)
+        {
+        }
 
-        protected Tensor(System.ReadOnlySpan<int> dimensions, bool reverseStride) { }
+        protected Tensor(System.ReadOnlySpan<int> dimensions, bool reverseStride)
+        {
+        }
 
         public System.ReadOnlySpan<int> Dimensions
         {
@@ -369,12 +399,16 @@ namespace System.Numerics.Tensors
         public virtual T this[params int[] indices]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual T this[System.ReadOnlySpan<int> indices]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long Length
         {
@@ -395,7 +429,9 @@ namespace System.Numerics.Tensors
         T System.Collections.Generic.IList<T>.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         int System.Collections.Generic.IReadOnlyCollection<T>.Count
         {
@@ -420,7 +456,9 @@ namespace System.Numerics.Tensors
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract System.Numerics.Tensors.Tensor<T> Clone();
 
@@ -458,7 +496,9 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        protected virtual void CopyTo(T[] array, int arrayIndex) { }
+        protected virtual void CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         public static bool Equals(
             System.Numerics.Tensors.Tensor<T> left,
@@ -468,7 +508,9 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        public virtual void Fill(T value) { }
+        public virtual void Fill(T value)
+        {
+        }
 
         public string GetArrayString(bool includeWhitespace = true)
         {
@@ -524,23 +566,33 @@ namespace System.Numerics.Tensors
 
             public bool MoveNext() => throw null;
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         public Enumerator GetEnumerator() => throw null;
 
-        void System.Collections.Generic.ICollection<T>.Add(T item) { }
+        void System.Collections.Generic.ICollection<T>.Add(T item)
+        {
+        }
 
-        void System.Collections.Generic.ICollection<T>.Clear() { }
+        void System.Collections.Generic.ICollection<T>.Clear()
+        {
+        }
 
         bool System.Collections.Generic.ICollection<T>.Contains(T item)
         {
             throw null;
         }
 
-        void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex) { }
+        void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         bool System.Collections.Generic.ICollection<T>.Remove(T item)
         {
@@ -557,11 +609,17 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        void System.Collections.Generic.IList<T>.Insert(int index, T item) { }
+        void System.Collections.Generic.IList<T>.Insert(int index, T item)
+        {
+        }
 
-        void System.Collections.Generic.IList<T>.RemoveAt(int index) { }
+        void System.Collections.Generic.IList<T>.RemoveAt(int index)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -573,7 +631,9 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object? value)
         {
@@ -585,11 +645,17 @@ namespace System.Numerics.Tensors
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
 
         int System.Collections.IStructuralComparable.CompareTo(
             object? other,

@@ -49,7 +49,9 @@ namespace Test_methodthrowsinfinally_cs
                     test();
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             // stop recoding
             testLog.StopRecording();

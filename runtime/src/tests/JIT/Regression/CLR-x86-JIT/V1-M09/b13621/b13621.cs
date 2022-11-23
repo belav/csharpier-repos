@@ -43,6 +43,8 @@ namespace DefaultNamespace
             }
         }
 
-        ~RootMem() { }
+        ~RootMem()
+        {
+        }
     }
 }

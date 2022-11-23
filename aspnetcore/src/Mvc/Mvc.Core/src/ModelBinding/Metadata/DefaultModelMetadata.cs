@@ -44,7 +44,9 @@ public class DefaultModelMetadata : ModelMetadata
         IModelMetadataProvider provider,
         ICompositeMetadataDetailsProvider detailsProvider,
         DefaultMetadataDetails details
-    ) : this(provider, detailsProvider, details, new DefaultModelBindingMessageProvider()) { }
+    ) : this(provider, detailsProvider, details, new DefaultModelBindingMessageProvider())
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="DefaultModelMetadata"/>.

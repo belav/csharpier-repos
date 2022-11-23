@@ -350,7 +350,9 @@ namespace Moq.Tests
             {
                 public IY NonVirtualProperty { get; set; }
 
-                public void NonVirtual() { }
+                public void NonVirtual()
+                {
+                }
             }
 
             public interface IY
@@ -360,7 +362,9 @@ namespace Moq.Tests
 
             public sealed class SealedY
             {
-                public void Method() { }
+                public void Method()
+                {
+                }
             }
         }
 

@@ -40,7 +40,9 @@ namespace System.Web.Http.Controllers
         )]
         protected abstract List<object> GetServiceInstances(Type serviceType);
 
-        protected virtual void ResetCache(Type serviceType) { }
+        protected virtual void ResetCache(Type serviceType)
+        {
+        }
 
         /// <summary>
         /// Determine whether the service type should be fetched with GetService or GetServices.
@@ -345,7 +347,9 @@ namespace System.Web.Http.Controllers
             "CA1816:CallGCSuppressFinalizeCorrectly",
             Justification = "Although this class is not sealed, end users cannot set instances of it so in practice it is sealed."
         )]
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
 
         private IExceptionLogger CreateExceptionServicesLogger()
         {

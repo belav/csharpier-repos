@@ -22,7 +22,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         private XPathExpression path;
 
-        internal CompiledXPathStep() { }
+        internal CompiledXPathStep()
+        {
+        }
 
         public XPathExpression Path
         {

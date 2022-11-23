@@ -18,7 +18,9 @@ namespace System.Runtime.Serialization
     {
         private IDictionary? _userData;
 
-        public CodeObject() { }
+        public CodeObject()
+        {
+        }
 
         public IDictionary UserData => _userData ??= new ListDictionary();
     }

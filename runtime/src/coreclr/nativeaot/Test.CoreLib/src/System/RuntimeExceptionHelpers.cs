@@ -119,9 +119,13 @@ namespace System
         }
 
         [RuntimeExport("OnFirstChanceException")]
-        internal static void OnFirstChanceException(object e) { }
+        internal static void OnFirstChanceException(object e)
+        {
+        }
 
         [RuntimeExport("OnUnhandledException")]
-        internal static void OnUnhandledException(object e) { }
+        internal static void OnUnhandledException(object e)
+        {
+        }
     }
 }

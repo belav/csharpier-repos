@@ -471,7 +471,9 @@ namespace System.Threading.Tasks.Test
         /// </summary>
         /// <param name="i"></param>
         /// <param name="state"></param>
-        private void DummyAction(long i, ParallelLoopState state) { }
+        private void DummyAction(long i, ParallelLoopState state)
+        {
+        }
 
         /// <summary>
         /// This actions calls Stop on the current iteration. Note that this is called by only one iteration in the loop
@@ -541,7 +543,9 @@ namespace System.Threading.Tasks.Test
                 );
             }
             // If Stop is called after a Break was called then an InvalidOperationException is expected
-            catch (InvalidOperationException) when (catchException) { }
+            catch (InvalidOperationException) when (catchException)
+            {
+            }
         }
 
         /// <summary>
@@ -675,7 +679,9 @@ namespace System.Threading.Tasks.Test
                 }
                 // If the test is checking the scenario where break is called after stop then
                 // we expect an InvalidOperationException
-                catch (InvalidOperationException) when (catchException) { }
+                catch (InvalidOperationException) when (catchException)
+                {
+                }
             }
         }
 

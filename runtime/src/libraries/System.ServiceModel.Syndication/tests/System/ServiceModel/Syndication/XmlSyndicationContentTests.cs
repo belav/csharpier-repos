@@ -436,10 +436,14 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class XmlSyndicationContentSubclass : XmlSyndicationContent
         {
-            public XmlSyndicationContentSubclass(XmlSyndicationContent source) : base(source) { }
+            public XmlSyndicationContentSubclass(XmlSyndicationContent source) : base(source)
+            {
+            }
 
             public XmlSyndicationContentSubclass(string type, SyndicationElementExtension extension)
-                : base(type, extension) { }
+                : base(type, extension)
+            {
+            }
 
             public void WriteContentsToEntryPoint(XmlWriter writer) => WriteContentsTo(writer);
         }

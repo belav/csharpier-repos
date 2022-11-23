@@ -8,4 +8,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     services. This means a single instance is used by many <see cref="DbContext" /> instances.
 ///     The implementation must be thread-safe.
 /// </summary>
-public interface ISingletonInterceptor : IInterceptor { }
+public interface ISingletonInterceptor : IInterceptor
+{
+}

@@ -17,7 +17,9 @@ public class HeadModificationPrerenderingTest
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<DeferredComponentContentStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     [Fact]
     public void CanModifyHeadDuringAndAfterPrerendering()

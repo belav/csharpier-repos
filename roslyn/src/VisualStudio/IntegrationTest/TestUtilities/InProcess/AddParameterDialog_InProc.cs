@@ -11,7 +11,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     internal class AddParameterDialog_InProc
         : AbstractCodeRefactorDialog_InProc<AddParameterDialog, AddParameterDialog.TestAccessor>
     {
-        private AddParameterDialog_InProc() { }
+        private AddParameterDialog_InProc()
+        {
+        }
 
         public static AddParameterDialog_InProc Create() => new AddParameterDialog_InProc();
 

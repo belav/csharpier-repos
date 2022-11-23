@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure;
 [SqlServerCondition(SqlServerCondition.IsSqlAzure)]
 public class SqlAzureConnectionTest : IClassFixture<SqlAzureFixture>
 {
-    public SqlAzureConnectionTest(SqlAzureFixture fixture) { }
+    public SqlAzureConnectionTest(SqlAzureFixture fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(true)]

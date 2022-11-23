@@ -11,7 +11,9 @@ namespace System.Threading.RateLimiting
         /// <summary>
         /// Initializes an instance of <see cref="RateLimiterStatistics"/>.
         /// </summary>
-        public RateLimiterStatistics() { }
+        public RateLimiterStatistics()
+        {
+        }
 
         /// <summary>
         /// Gets the number of permits currently available for the <see cref="RateLimiter"/>.

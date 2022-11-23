@@ -37,7 +37,9 @@ namespace System
         }
 
         protected AccessViolationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
 #pragma warning disable CA1823, 169 // Field is not used from managed.
         private IntPtr _ip; // Address of faulting instruction.

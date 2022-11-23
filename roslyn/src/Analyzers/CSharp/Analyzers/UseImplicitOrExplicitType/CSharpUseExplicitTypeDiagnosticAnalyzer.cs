@@ -31,6 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
                 enforceOnBuild: EnforceOnBuildValues.UseExplicitType,
                 title: s_Title,
                 message: s_Message
-            ) { }
+            )
+        {
+        }
     }
 }

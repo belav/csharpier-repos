@@ -14,7 +14,9 @@ namespace System.Data.Common
         private int[] _values = default!; // Late-initialized
 
         internal Int32Storage(DataColumn column)
-            : base(column, typeof(int), defaultValue, StorageType.Int32) { }
+            : base(column, typeof(int), defaultValue, StorageType.Int32)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

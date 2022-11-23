@@ -289,7 +289,9 @@ namespace System.Web.Http.ContentNegotiation
         public string OrderId { get; set; }
         public double OrderValue { get; set; }
 
-        public Order() { }
+        public Order()
+        {
+        }
 
         public Order(string value)
         {

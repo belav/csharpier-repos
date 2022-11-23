@@ -33,13 +33,17 @@ namespace System.Numerics
         /// <summary>Creates a new <see cref="System.Numerics.Vector3" /> object whose three elements have the same value.</summary>
         /// <param name="value">The value to assign to all three elements.</param>
         [Intrinsic]
-        public Vector3(float value) : this(value, value, value) { }
+        public Vector3(float value) : this(value, value, value)
+        {
+        }
 
         /// <summary>Creates a   new <see cref="System.Numerics.Vector3" /> object from the specified <see cref="System.Numerics.Vector2" /> object and the specified value.</summary>
         /// <param name="value">The vector with two elements.</param>
         /// <param name="z">The additional value to assign to the <see cref="System.Numerics.Vector3.Z" /> field.</param>
         [Intrinsic]
-        public Vector3(Vector2 value, float z) : this(value.X, value.Y, z) { }
+        public Vector3(Vector2 value, float z) : this(value.X, value.Y, z)
+        {
+        }
 
         /// <summary>Creates a vector whose elements have the specified values.</summary>
         /// <param name="x">The value to assign to the <see cref="System.Numerics.Vector3.X" /> field.</param>

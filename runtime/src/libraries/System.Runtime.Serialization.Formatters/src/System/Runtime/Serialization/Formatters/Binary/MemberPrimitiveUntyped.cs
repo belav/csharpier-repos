@@ -9,7 +9,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal InternalPrimitiveTypeE _typeInformation;
         internal object? _value;
 
-        internal MemberPrimitiveUnTyped() { }
+        internal MemberPrimitiveUnTyped()
+        {
+        }
 
         internal void Set(InternalPrimitiveTypeE typeInformation, object? value)
         {

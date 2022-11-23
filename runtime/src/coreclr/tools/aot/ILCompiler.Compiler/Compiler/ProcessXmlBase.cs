@@ -217,7 +217,9 @@ namespace ILCompiler
             }
         }
 
-        protected virtual void ProcessMethod(MethodDesc method) { }
+        protected virtual void ProcessMethod(MethodDesc method)
+        {
+        }
 
         private void ProcessField(TypeDesc type)
         {
@@ -240,11 +242,17 @@ namespace ILCompiler
             }
         }
 
-        protected virtual void ProcessField(FieldDesc field) { }
+        protected virtual void ProcessField(FieldDesc field)
+        {
+        }
 
-        protected virtual void ProcessAttribute(TypeDesc type) { }
+        protected virtual void ProcessAttribute(TypeDesc type)
+        {
+        }
 
-        protected virtual void ProcessResource(ModuleDesc module) { }
+        protected virtual void ProcessResource(ModuleDesc module)
+        {
+        }
 
         protected static MethodDesc GetMethod(TypeDesc type, string signature)
         {
@@ -366,9 +374,13 @@ namespace ILCompiler
                 sb.Append(type.Name);
             }
 
-            public override void AppendName(StringBuilder sb, SignatureMethodVariable type) { }
+            public override void AppendName(StringBuilder sb, SignatureMethodVariable type)
+            {
+            }
 
-            public override void AppendName(StringBuilder sb, SignatureTypeVariable type) { }
+            public override void AppendName(StringBuilder sb, SignatureTypeVariable type)
+            {
+            }
 
             protected override void AppendNameForInstantiatedType(StringBuilder sb, DefType type)
             {

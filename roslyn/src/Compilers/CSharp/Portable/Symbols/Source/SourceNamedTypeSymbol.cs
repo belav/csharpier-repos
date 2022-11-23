@@ -1574,7 +1574,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | ReservedAttributes.CaseSensitiveExtensionAttribute
                         | ReservedAttributes.RequiredMemberAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SecurityCriticalAttribute)
                 || attribute.IsTargetAttribute(

@@ -174,7 +174,9 @@ namespace Castle.DynamicProxy.Tests
 
         public sealed class FooTarget : Foo
         {
-            public override void Method() { }
+            public override void Method()
+            {
+            }
         }
 
 #if FEATURE_SERIALIZATION

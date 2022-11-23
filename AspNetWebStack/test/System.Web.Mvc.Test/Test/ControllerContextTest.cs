@@ -333,7 +333,9 @@ namespace System.Web.Mvc.Test
         private class SubclassedControllerContext : ControllerContext
         {
             public SubclassedControllerContext(ControllerContext controllerContext)
-                : base(controllerContext) { }
+                : base(controllerContext)
+            {
+            }
         }
     }
 }

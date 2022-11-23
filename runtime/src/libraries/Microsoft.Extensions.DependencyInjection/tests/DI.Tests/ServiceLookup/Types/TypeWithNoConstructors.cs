@@ -3,5 +3,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
-    public class TypeWithNoConstructors { }
+    public class TypeWithNoConstructors
+    {
+    }
 }

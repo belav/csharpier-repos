@@ -121,7 +121,9 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// No-op.
         /// </summary>
-        public override void WriteEndAttribute() { }
+        public override void WriteEndAttribute()
+        {
+        }
 
         /// <summary>
         /// Pass through namespaces to underlying writer.  If any attributes have been cached, flush them.

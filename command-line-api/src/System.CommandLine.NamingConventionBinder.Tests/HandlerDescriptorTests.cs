@@ -89,5 +89,7 @@ public class HandlerDescriptorTests
         }
     }
 
-    public void Handler<T>(T value) { }
+    public void Handler<T>(T value)
+    {
+    }
 }

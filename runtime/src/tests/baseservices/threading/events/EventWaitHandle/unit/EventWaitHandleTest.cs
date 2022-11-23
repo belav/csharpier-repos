@@ -29,7 +29,9 @@ public class EventWaitHandleTest
         {
             ewh = EventWaitHandle.OpenExisting(name);
         }
-        catch (Expected) { }
+        catch (Expected)
+        {
+        }
         catch (Exception ne)
         {
             Console.WriteLine("Caught unexpected exception: {0}", ne);
@@ -38,7 +40,9 @@ public class EventWaitHandleTest
         return true;
     }
 
-    public class NoException : Exception { }
+    public class NoException : Exception
+    {
+    }
 }
 
 public static class EventWaitHandleExtensions

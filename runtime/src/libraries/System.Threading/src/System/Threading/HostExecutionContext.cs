@@ -5,7 +5,9 @@ namespace System.Threading
 {
     public class HostExecutionContext : IDisposable
     {
-        public HostExecutionContext() { }
+        public HostExecutionContext()
+        {
+        }
 
         public HostExecutionContext(object? state)
         {
@@ -24,6 +26,8 @@ namespace System.Threading
             Dispose(true);
         }
 
-        public virtual void Dispose(bool disposing) { }
+        public virtual void Dispose(bool disposing)
+        {
+        }
     }
 }

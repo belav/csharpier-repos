@@ -20,7 +20,11 @@ public abstract class FixtureBase
                         .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
             );
 
-    protected virtual void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) { }
+    protected virtual void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+    }
 
-    protected virtual void OnModelCreating(ModelBuilder modelBuilder, DbContext context) { }
+    protected virtual void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
+    {
+    }
 }

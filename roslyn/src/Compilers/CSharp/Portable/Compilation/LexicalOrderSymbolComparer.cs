@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static readonly LexicalOrderSymbolComparer Instance =
             new LexicalOrderSymbolComparer();
 
-        private LexicalOrderSymbolComparer() { }
+        private LexicalOrderSymbolComparer()
+        {
+        }
 
         public int Compare(Symbol x, Symbol y)
         {

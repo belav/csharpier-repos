@@ -120,7 +120,9 @@ namespace Newtonsoft.Json.Tests.Issues
 
             public IList<Foo> FooList => _myData.Values.ToList();
 
-            public FooBar() { }
+            public FooBar()
+            {
+            }
 
             public FooBar(SerializationInfo info, StreamingContext context)
             {

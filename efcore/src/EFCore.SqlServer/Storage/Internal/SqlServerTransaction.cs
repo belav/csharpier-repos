@@ -27,7 +27,8 @@ public class SqlServerTransaction : RelationalTransaction
         bool transactionOwned,
         ISqlGenerationHelper sqlGenerationHelper
     ) : base(connection, transaction, transactionId, logger, transactionOwned, sqlGenerationHelper)
-    { }
+    {
+    }
 
     /// <inheritdoc />
     public override bool SupportsSavepoints
@@ -51,7 +52,9 @@ public class SqlServerTransaction : RelationalTransaction
     // SQL Server doesn't support releasing savepoints. Override to do nothing.
 
     /// <inheritdoc />
-    public override void ReleaseSavepoint(string name) { }
+    public override void ReleaseSavepoint(string name)
+    {
+    }
 
     /// <inheritdoc />
     public override Task ReleaseSavepointAsync(

@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseAutoPropertyCodeFixProvider() { }
+        public CSharpUseAutoPropertyCodeFixProvider()
+        {
+        }
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(SyntaxNode node) =>
             (PropertyDeclarationSyntax)node;

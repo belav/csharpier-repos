@@ -852,13 +852,17 @@ public class VectorTests
             int r = v[-1];
             return 3;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         try
         {
             int r = v[16];
             return 4;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -880,13 +884,17 @@ public class VectorTests
             int r = v[-1];
             return 3;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         try
         {
             int r = v[Vector<int>.Count];
             return 4;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -906,13 +914,17 @@ public class VectorTests
             var r = v[-1];
             return 3;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         try
         {
             var r = v[Vector<long>.Count];
             return 4;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -932,13 +944,17 @@ public class VectorTests
             var r = v[-1];
             return 3;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         try
         {
             var r = v[Vector<double>.Count];
             return 4;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -1049,7 +1065,9 @@ public class VectorTests
             var v2 = new Vector<byte>(elems, 16 + 4);
             return 2;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -1066,7 +1084,9 @@ public class VectorTests
             var v2 = new Vector<byte>(elems2);
             return 2;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -1800,7 +1820,9 @@ public class VectorTests
             vector_copyto(v1, arr, 241);
             return 1;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
         return 0;
     }
 }

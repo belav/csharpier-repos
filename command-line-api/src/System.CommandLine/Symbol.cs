@@ -14,7 +14,9 @@ namespace System.CommandLine
         private string? _name;
         private ParentNode? _firstParent;
 
-        private protected Symbol() { }
+        private protected Symbol()
+        {
+        }
 
         /// <summary>
         /// Gets or sets the description of the symbol.

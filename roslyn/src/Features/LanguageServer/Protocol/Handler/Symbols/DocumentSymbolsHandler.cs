@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentSymbolsHandler() { }
+        public DocumentSymbolsHandler()
+        {
+        }
 
         public override TextDocumentIdentifier GetTextDocumentIdentifier(
             DocumentSymbolParams request

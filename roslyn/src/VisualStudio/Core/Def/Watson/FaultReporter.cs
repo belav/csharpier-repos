@@ -196,7 +196,9 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             // If we couldn't get a stack, do this
             return exception.Message;

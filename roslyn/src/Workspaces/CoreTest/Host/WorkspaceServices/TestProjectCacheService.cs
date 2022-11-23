@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestProjectCacheService() { }
+        public TestProjectCacheService()
+        {
+        }
 
         public int MinimumLengthForRecoverableTree => 0;
 

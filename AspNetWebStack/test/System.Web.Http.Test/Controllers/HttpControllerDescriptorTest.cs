@@ -296,11 +296,15 @@ namespace System.Web.Http
             public void Initialize(
                 HttpControllerSettings controllerSettings,
                 HttpControllerDescriptor controllerDescriptor
-            ) { }
+            )
+            {
+            }
         }
 
         [NoopControllerConfig]
-        class NoopControllerConfigController : ApiController { }
+        class NoopControllerConfigController : ApiController
+        {
+        }
 
         class VerifyControllerDescriptorAttribute : Attribute, IControllerConfiguration
         {
@@ -316,10 +320,13 @@ namespace System.Web.Http
         }
 
         [VerifyControllerDescriptor]
-        class VerifyControllerDescriptorBaseController : ApiController { }
+        class VerifyControllerDescriptorBaseController : ApiController
+        {
+        }
 
-        class VerifyControllerDescriptorDerivedController
-            : VerifyControllerDescriptorBaseController { }
+        class VerifyControllerDescriptorDerivedController : VerifyControllerDescriptorBaseController
+        {
+        }
 
         class MyConfigBaseAttribute : Attribute, IControllerConfiguration
         {
@@ -396,7 +403,9 @@ namespace System.Web.Http
                 new Mock<IActionValueBinder>().Object;
         }
 
-        class MyDerived2Controller : MyDerived1Controller { }
+        class MyDerived2Controller : MyDerived1Controller
+        {
+        }
 
         [MyConfigDerived3]
         class MyDerived3Controller : MyDerived1Controller

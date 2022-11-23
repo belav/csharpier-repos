@@ -9,7 +9,8 @@ namespace System.Threading.RateLimiting
     public sealed partial class ConcurrencyLimiter : System.Threading.RateLimiting.RateLimiter
     {
         public ConcurrencyLimiter(System.Threading.RateLimiting.ConcurrencyLimiterOptions options)
-        { }
+        {
+        }
 
         public override System.TimeSpan? IdleDuration
         {
@@ -32,7 +33,9 @@ namespace System.Threading.RateLimiting
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override System.Threading.Tasks.ValueTask DisposeAsyncCore()
         {
@@ -47,22 +50,30 @@ namespace System.Threading.RateLimiting
 
     public sealed partial class ConcurrencyLimiterOptions
     {
-        public ConcurrencyLimiterOptions() { }
+        public ConcurrencyLimiterOptions()
+        {
+        }
 
         public int PermitLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int QueueLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.RateLimiting.QueueProcessingOrder QueueProcessingOrder
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -71,7 +82,9 @@ namespace System.Threading.RateLimiting
     {
         public FixedWindowRateLimiter(
             System.Threading.RateLimiting.FixedWindowRateLimiterOptions options
-        ) { }
+        )
+        {
+        }
 
         public override System.TimeSpan? IdleDuration
         {
@@ -102,7 +115,9 @@ namespace System.Threading.RateLimiting
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override System.Threading.Tasks.ValueTask DisposeAsyncCore()
         {
@@ -122,32 +137,44 @@ namespace System.Threading.RateLimiting
 
     public sealed partial class FixedWindowRateLimiterOptions
     {
-        public FixedWindowRateLimiterOptions() { }
+        public FixedWindowRateLimiterOptions()
+        {
+        }
 
         public bool AutoReplenishment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int PermitLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int QueueLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.RateLimiting.QueueProcessingOrder QueueProcessingOrder
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan Window
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -171,7 +198,9 @@ namespace System.Threading.RateLimiting
     public sealed partial class MetadataName<T>
         : System.IEquatable<System.Threading.RateLimiting.MetadataName<T>>
     {
-        public MetadataName(string name) { }
+        public MetadataName(string name)
+        {
+        }
 
         public string Name
         {
@@ -245,7 +274,9 @@ namespace System.Threading.RateLimiting
         : System.IAsyncDisposable,
             System.IDisposable
     {
-        protected PartitionedRateLimiter() { }
+        protected PartitionedRateLimiter()
+        {
+        }
 
         public System.Threading.Tasks.ValueTask<System.Threading.RateLimiting.RateLimitLease> AcquireAsync(
             TResource resource,
@@ -276,9 +307,13 @@ namespace System.Threading.RateLimiting
             int permitCount
         );
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -311,7 +346,9 @@ namespace System.Threading.RateLimiting
 
     public abstract partial class RateLimiter : System.IAsyncDisposable, System.IDisposable
     {
-        protected RateLimiter() { }
+        protected RateLimiter()
+        {
+        }
 
         public abstract System.TimeSpan? IdleDuration { get; }
 
@@ -338,9 +375,13 @@ namespace System.Threading.RateLimiting
             int permitCount
         );
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -357,40 +398,56 @@ namespace System.Threading.RateLimiting
 
     public partial class RateLimiterStatistics
     {
-        public RateLimiterStatistics() { }
+        public RateLimiterStatistics()
+        {
+        }
 
         public long CurrentAvailablePermits
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
         public long CurrentQueuedCount
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
         public long TotalFailedLeases
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
         public long TotalSuccessfulLeases
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
     }
 
     public abstract partial class RateLimitLease : System.IDisposable
     {
-        protected RateLimitLease() { }
+        protected RateLimitLease()
+        {
+        }
 
         public abstract bool IsAcquired { get; }
         public abstract System.Collections.Generic.IEnumerable<string> MetadataNames { get; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
             string,
@@ -488,7 +545,9 @@ namespace System.Threading.RateLimiting
     public abstract partial class ReplenishingRateLimiter
         : System.Threading.RateLimiting.RateLimiter
     {
-        protected ReplenishingRateLimiter() { }
+        protected ReplenishingRateLimiter()
+        {
+        }
 
         public abstract bool IsAutoReplenishing { get; }
         public abstract System.TimeSpan ReplenishmentPeriod { get; }
@@ -500,7 +559,9 @@ namespace System.Threading.RateLimiting
     {
         public SlidingWindowRateLimiter(
             System.Threading.RateLimiting.SlidingWindowRateLimiterOptions options
-        ) { }
+        )
+        {
+        }
 
         public override System.TimeSpan? IdleDuration
         {
@@ -531,7 +592,9 @@ namespace System.Threading.RateLimiting
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override System.Threading.Tasks.ValueTask DisposeAsyncCore()
         {
@@ -551,37 +614,51 @@ namespace System.Threading.RateLimiting
 
     public sealed partial class SlidingWindowRateLimiterOptions
     {
-        public SlidingWindowRateLimiterOptions() { }
+        public SlidingWindowRateLimiterOptions()
+        {
+        }
 
         public bool AutoReplenishment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int PermitLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int QueueLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.RateLimiting.QueueProcessingOrder QueueProcessingOrder
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int SegmentsPerWindow
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan Window
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -590,7 +667,9 @@ namespace System.Threading.RateLimiting
     {
         public TokenBucketRateLimiter(
             System.Threading.RateLimiting.TokenBucketRateLimiterOptions options
-        ) { }
+        )
+        {
+        }
 
         public override System.TimeSpan? IdleDuration
         {
@@ -621,7 +700,9 @@ namespace System.Threading.RateLimiting
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override System.Threading.Tasks.ValueTask DisposeAsyncCore()
         {
@@ -641,37 +722,51 @@ namespace System.Threading.RateLimiting
 
     public sealed partial class TokenBucketRateLimiterOptions
     {
-        public TokenBucketRateLimiterOptions() { }
+        public TokenBucketRateLimiterOptions()
+        {
+        }
 
         public bool AutoReplenishment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int QueueLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.RateLimiting.QueueProcessingOrder QueueProcessingOrder
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan ReplenishmentPeriod
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int TokenLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int TokensPerPeriod
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

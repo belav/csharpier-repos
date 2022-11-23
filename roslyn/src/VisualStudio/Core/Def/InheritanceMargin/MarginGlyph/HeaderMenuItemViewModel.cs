@@ -15,6 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
     internal class HeaderMenuItemViewModel : MenuItemViewModel
     {
         public HeaderMenuItemViewModel(string displayContent, ImageMoniker imageMoniker)
-            : base(displayContent, imageMoniker) { }
+            : base(displayContent, imageMoniker)
+        {
+        }
     }
 }

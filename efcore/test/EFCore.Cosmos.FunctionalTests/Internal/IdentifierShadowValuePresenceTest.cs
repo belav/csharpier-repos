@@ -68,7 +68,9 @@ public class IdentifierShadowValuePresenceTestContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
         optionsBuilder.UseCosmos(_connectionUri, _authToken, _name, b => b.ApplyConfiguration());
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+    }
 
     public DbSet<GItem> GItems { get; set; }
 

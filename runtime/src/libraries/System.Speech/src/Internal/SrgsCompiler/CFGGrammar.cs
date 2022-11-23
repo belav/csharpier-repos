@@ -11,7 +11,9 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal CfgGrammar() { }
+        internal CfgGrammar()
+        {
+        }
 
         #endregion
 
@@ -56,7 +58,9 @@ namespace System.Speech.Internal.SrgsCompiler
         [StructLayout(LayoutKind.Sequential)]
         internal class CfgSerializedHeader
         {
-            internal CfgSerializedHeader() { }
+            internal CfgSerializedHeader()
+            {
+            }
 
 #pragma warning disable 56518 // The Binary reader cannot be disposed or it would close the underlying stream
 

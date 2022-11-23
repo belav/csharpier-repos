@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpBreakpointResolutionService() { }
+        public CSharpBreakpointResolutionService()
+        {
+        }
 
         /// <summary>
         /// Returns null if a breakpoint can't be placed at the specified position.

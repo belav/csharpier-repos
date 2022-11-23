@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ReturnKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public ReturnKeywordRecommender() : base(SyntaxKind.ReturnKeyword) { }
+        public ReturnKeywordRecommender() : base(SyntaxKind.ReturnKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

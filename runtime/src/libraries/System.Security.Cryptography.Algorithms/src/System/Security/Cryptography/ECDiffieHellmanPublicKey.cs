@@ -30,7 +30,9 @@ namespace System.Security.Cryptography
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public virtual byte[] ToByteArray()
         {

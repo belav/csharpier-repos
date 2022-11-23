@@ -21,6 +21,8 @@ namespace System
             "CA1821",
             Justification = "Finalizer preserved for compat, it is suppressed by the constructor."
         )]
-        ~LocalDataStoreSlot() { }
+        ~LocalDataStoreSlot()
+        {
+        }
     }
 }

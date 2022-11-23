@@ -11,7 +11,9 @@ namespace System.Security.Cryptography.Pkcs
     public sealed class KeyTransRecipientInfo : RecipientInfo
     {
         internal KeyTransRecipientInfo(KeyTransRecipientInfoPal pal)
-            : base(RecipientInfoType.KeyTransport, pal) { }
+            : base(RecipientInfoType.KeyTransport, pal)
+        {
+        }
 
         public override int Version
         {

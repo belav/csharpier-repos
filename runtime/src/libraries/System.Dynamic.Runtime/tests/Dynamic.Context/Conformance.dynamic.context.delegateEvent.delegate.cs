@@ -19,14 +19,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
     namespace DynNamespace01
     {
-        public interface DynInterface01 { }
+        public interface DynInterface01
+        {
+        }
 
         public class DynClass01
         {
             public int n = 0;
         }
 
-        public struct DynStruct01 { }
+        public struct DynStruct01
+        {
+        }
 
         public delegate dynamic D101(dynamic d, DynInterface01 i);
         public delegate void D102(ref DynClass01 c, dynamic d1, ref object d2);
@@ -994,9 +998,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
             }
         }
 
-        public class DynClass01 { }
+        public class DynClass01
+        {
+        }
 
-        public struct DynStruct01 { }
+        public struct DynStruct01
+        {
+        }
     }
     // </Code>
 }
@@ -1287,16 +1295,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
         public struct Foo
         {
-            public void MinStruct(dynamic v1) { }
+            public void MinStruct(dynamic v1)
+            {
+            }
 
-            public static void SMinStruct(dynamic v1) { }
+            public static void SMinStruct(dynamic v1)
+            {
+            }
         }
 
         public class Bar
         {
-            public void MinClass(dynamic v1) { }
+            public void MinClass(dynamic v1)
+            {
+            }
 
-            public static void SMinClass(dynamic v1) { }
+            public static void SMinClass(dynamic v1)
+            {
+            }
         }
 
         public class Start
@@ -1357,9 +1373,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
         public class Foo
         {
-            public void M01(params dynamic[] d) { }
+            public void M01(params dynamic[] d)
+            {
+            }
 
-            public void M02(params object[] d) { }
+            public void M02(params object[] d)
+            {
+            }
         }
 
         public class TestClass
@@ -1535,7 +1555,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
     public delegate T GenDlg<T>(int t);
 
-    public class C<T> { }
+    public class C<T>
+    {
+    }
 
     public class SubGenericClass<T>
     {

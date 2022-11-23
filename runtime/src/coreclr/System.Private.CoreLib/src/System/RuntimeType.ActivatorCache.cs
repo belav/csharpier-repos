@@ -103,7 +103,9 @@ namespace System
 
                 if (_pfnCtor == null)
                 {
-                    static void CtorNoopStub(object? uninitializedObject) { }
+                    static void CtorNoopStub(object? uninitializedObject)
+                    {
+                    }
                     _pfnCtor = &CtorNoopStub; // we use null singleton pattern if no ctor call is necessary
 
                     Debug.Assert(_ctorIsPublic); // implicit parameterless ctor is always considered public

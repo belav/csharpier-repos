@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public ConfigureCodeStyleOptionCodeFixProvider() { }
+        public ConfigureCodeStyleOptionCodeFixProvider()
+        {
+        }
 
         public bool IsFixableDiagnostic(Diagnostic diagnostic)
         {

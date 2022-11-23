@@ -12,7 +12,9 @@ namespace System.ServiceModel.Syndication
         private ExtensibleSyndicationObject _extensions;
         private Collection<Workspace> _workspaces;
 
-        public ServiceDocument() : this(null) { }
+        public ServiceDocument() : this(null)
+        {
+        }
 
         public ServiceDocument(IEnumerable<Workspace> workspaces)
         {

@@ -23,10 +23,14 @@ public abstract class ResultFilterAttribute
     public int Order { get; set; }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuting(ResultExecutingContext context) { }
+    public virtual void OnResultExecuting(ResultExecutingContext context)
+    {
+    }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuted(ResultExecutedContext context) { }
+    public virtual void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 
     /// <inheritdoc />
     public virtual async Task OnResultExecutionAsync(

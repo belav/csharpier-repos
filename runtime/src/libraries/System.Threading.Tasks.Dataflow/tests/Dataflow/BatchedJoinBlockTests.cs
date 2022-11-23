@@ -370,7 +370,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Tuple<IList<int>, IList<int>> ignoredValue;
             IList<Tuple<IList<int>, IList<int>>> ignoredValues;
 
-            Assert.NotNull(b.LinkTo(new ActionBlock<Tuple<IList<int>, IList<int>>>(delegate { })));
+            Assert.NotNull(
+                b.LinkTo(
+                    new ActionBlock<Tuple<IList<int>, IList<int>>>(
+                        delegate
+                        {
+                        }
+                    )
+                )
+            );
             Assert.False(b.Target1.Post(42));
             Assert.False(b.Target2.Post(42));
 
@@ -407,7 +415,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             IList<Tuple<IList<int>, IList<int>, IList<int>>> ignoredValues;
 
             Assert.NotNull(
-                b.LinkTo(new ActionBlock<Tuple<IList<int>, IList<int>, IList<int>>>(delegate { }))
+                b.LinkTo(
+                    new ActionBlock<Tuple<IList<int>, IList<int>, IList<int>>>(
+                        delegate
+                        {
+                        }
+                    )
+                )
             );
             Assert.False(b.Target1.Post(42));
             Assert.False(b.Target2.Post(42));

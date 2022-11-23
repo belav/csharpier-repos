@@ -12,9 +12,13 @@ namespace Microsoft.Extensions.Logging
     {
         public static NullScope Instance { get; } = new NullScope();
 
-        private NullScope() { }
+        private NullScope()
+        {
+        }
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

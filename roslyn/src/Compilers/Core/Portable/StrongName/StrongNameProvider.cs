@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public abstract class StrongNameProvider
     {
-        protected StrongNameProvider() { }
+        protected StrongNameProvider()
+        {
+        }
 
         public abstract override int GetHashCode();
         public abstract override bool Equals(object? other);

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockDiagnosticUpdateSourceRegistrationService() { }
+        public MockDiagnosticUpdateSourceRegistrationService()
+        {
+        }
 
         public void Register(IDiagnosticUpdateSource source)
         {

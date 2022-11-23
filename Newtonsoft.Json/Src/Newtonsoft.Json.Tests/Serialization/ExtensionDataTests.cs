@@ -1010,7 +1010,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             private readonly JObject _content;
 
-            public DocNoSetter() { }
+            public DocNoSetter()
+            {
+            }
 
             public DocNoSetter(JObject content)
             {
@@ -1085,7 +1087,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             [JsonExtensionData]
             public JObject Content
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -1141,7 +1145,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             [JsonExtensionData]
             public IDictionary<string, JToken> ExtensionData;
 
-            public ItemWithConstructor(string temp) { }
+            public ItemWithConstructor(string temp)
+            {
+            }
 
             public IEnumerable<string> Foo
             {

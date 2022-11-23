@@ -14,56 +14,74 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class RequiredKeywordTests_Span : RequiredKeywordTests
     {
-        public RequiredKeywordTests_Span() : base(JsonSerializerWrapper.SpanSerializer) { }
+        public RequiredKeywordTests_Span() : base(JsonSerializerWrapper.SpanSerializer)
+        {
+        }
     }
 
     public class RequiredKeywordTests_String : RequiredKeywordTests
     {
-        public RequiredKeywordTests_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public RequiredKeywordTests_String() : base(JsonSerializerWrapper.StringSerializer)
+        {
+        }
     }
 
     public class RequiredKeywordTests_AsyncStream : RequiredKeywordTests
     {
         public RequiredKeywordTests_AsyncStream()
-            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+            : base(JsonSerializerWrapper.AsyncStreamSerializer)
+        {
+        }
     }
 
     public class RequiredKeywordTests_AsyncStreamWithSmallBuffer : RequiredKeywordTests
     {
         public RequiredKeywordTests_AsyncStreamWithSmallBuffer()
-            : base(JsonSerializerWrapper.AsyncStreamSerializerWithSmallBuffer) { }
+            : base(JsonSerializerWrapper.AsyncStreamSerializerWithSmallBuffer)
+        {
+        }
     }
 
     public class RequiredKeywordTests_SyncStream : RequiredKeywordTests
     {
         public RequiredKeywordTests_SyncStream() : base(JsonSerializerWrapper.SyncStreamSerializer)
-        { }
+        {
+        }
     }
 
     public class RequiredKeywordTests_Writer : RequiredKeywordTests
     {
         public RequiredKeywordTests_Writer() : base(JsonSerializerWrapper.ReaderWriterSerializer)
-        { }
+        {
+        }
     }
 
     public class RequiredKeywordTests_Document : RequiredKeywordTests
     {
-        public RequiredKeywordTests_Document() : base(JsonSerializerWrapper.DocumentSerializer) { }
+        public RequiredKeywordTests_Document() : base(JsonSerializerWrapper.DocumentSerializer)
+        {
+        }
     }
 
     public class RequiredKeywordTests_Element : RequiredKeywordTests
     {
-        public RequiredKeywordTests_Element() : base(JsonSerializerWrapper.ElementSerializer) { }
+        public RequiredKeywordTests_Element() : base(JsonSerializerWrapper.ElementSerializer)
+        {
+        }
     }
 
     public class RequiredKeywordTests_Node : RequiredKeywordTests
     {
-        public RequiredKeywordTests_Node() : base(JsonSerializerWrapper.NodeSerializer) { }
+        public RequiredKeywordTests_Node() : base(JsonSerializerWrapper.NodeSerializer)
+        {
+        }
     }
 
     public abstract partial class RequiredKeywordTests : SerializerTests
     {
-        public RequiredKeywordTests(JsonSerializerWrapper serializer) : base(serializer) { }
+        public RequiredKeywordTests(JsonSerializerWrapper serializer) : base(serializer)
+        {
+        }
 
         [Theory]
         [InlineData(true)]
@@ -601,7 +619,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonSerializable(
             typeof(PersonWithRequiredMembersAndLargeParametrizedCtorAndSetsRequiredMembers)
         )]
-        private partial class SetsRequiredMembersTestsContext : JsonSerializerContext { }
+        private partial class SetsRequiredMembersTestsContext : JsonSerializerContext
+        {
+        }
 
         [Fact]
         public async void RemovingPropertiesWithRequiredKeywordAllowsDeserialization()

@@ -45,7 +45,9 @@ namespace System.Xml.Tests
 
         protected XmlReader MainReader = null;
 
-        public virtual void PostReloadSource() { }
+        public virtual void PostReloadSource()
+        {
+        }
 
         public virtual void CloseReader()
         {
@@ -113,9 +115,13 @@ namespace System.Xml.Tests
 
         public override void PostExecuteVariation(int index, object param)
         {
-            if (DataReader.Internal != null && !IsSubtreeReader()) { }
+            if (DataReader.Internal != null && !IsSubtreeReader())
+            {
+            }
 
-            if (MainReader != null) { }
+            if (MainReader != null)
+            {
+            }
         }
 
         //////////////////////////////////////////

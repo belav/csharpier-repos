@@ -10,6 +10,8 @@ namespace System.Net.Http.Formatting
     public class TransferModeHelperTest : EnumHelperTestBase<TransferMode>
     {
         public TransferModeHelperTest()
-            : base(TransferModeHelper.IsDefined, TransferModeHelper.Validate, (TransferMode)999) { }
+            : base(TransferModeHelper.IsDefined, TransferModeHelper.Validate, (TransferMode)999)
+        {
+        }
     }
 }

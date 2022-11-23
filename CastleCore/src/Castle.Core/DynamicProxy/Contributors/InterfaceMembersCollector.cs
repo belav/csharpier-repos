@@ -21,7 +21,9 @@ namespace Castle.DynamicProxy.Contributors
 
     internal class InterfaceMembersCollector : MembersCollector
     {
-        public InterfaceMembersCollector(Type @interface) : base(@interface) { }
+        public InterfaceMembersCollector(Type @interface) : base(@interface)
+        {
+        }
 
         protected override MetaMethod GetMethodToGenerate(
             MethodInfo method,

@@ -81,7 +81,9 @@ namespace System.Net
         private StateFlags _flags;
 
         internal ContextAwareResult(object myObject, object? myState, AsyncCallback? myCallBack)
-            : this(false, false, myObject, myState, myCallBack) { }
+            : this(false, false, myObject, myState, myCallBack)
+        {
+        }
 
         // Setting captureIdentity enables the Identity property.  This will be available even if ContextCopy isn't, either because
         // flow is suppressed or it wasn't needed.  (If ContextCopy isn't available, Identity may or may not be.  But if it is, it
@@ -95,7 +97,9 @@ namespace System.Net
             object? myObject,
             object? myState,
             AsyncCallback? myCallBack
-        ) : this(captureIdentity, forceCaptureContext, false, myObject, myState, myCallBack) { }
+        ) : this(captureIdentity, forceCaptureContext, false, myObject, myState, myCallBack)
+        {
+        }
 
         internal ContextAwareResult(
             bool captureIdentity,
@@ -159,7 +163,9 @@ namespace System.Net
                         _lock != null,
                         "Must lock (StartPostingAsyncOp()) { ... FinishPostingAsyncOp(); } when calling ContextCopy (unless it's only called after FinishPostingAsyncOp)."
                     );
-                    lock (_lock) { }
+                    lock (_lock)
+                    {
+                    }
                 }
 
                 if (InternalPeekCompleted)

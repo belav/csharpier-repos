@@ -63,7 +63,9 @@ namespace System.Threading.Tasks.Dataflow
         /// This may be null to indicate that no cloning need be performed.
         /// </param>
         public WriteOnceBlock(Func<T, T>? cloningFunction)
-            : this(cloningFunction, DataflowBlockOptions.Default) { }
+            : this(cloningFunction, DataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="WriteOnceBlock{T}"/> with the specified <see cref="DataflowBlockOptions"/>.</summary>
         /// <param name="cloningFunction">

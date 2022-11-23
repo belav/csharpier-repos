@@ -11,7 +11,9 @@ namespace System.Data.OleDb
         private string? _quotePrefix,
             _quoteSuffix;
 
-        internal OleDbConnectionPoolGroupProviderInfo() { }
+        internal OleDbConnectionPoolGroupProviderInfo()
+        {
+        }
 
         internal bool HasQuoteFix
         {

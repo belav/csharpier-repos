@@ -18,7 +18,9 @@ namespace Sandbox3
         }
     }
 
-    public class Dummy { }
+    public class Dummy
+    {
+    }
 
     internal class Program
     {

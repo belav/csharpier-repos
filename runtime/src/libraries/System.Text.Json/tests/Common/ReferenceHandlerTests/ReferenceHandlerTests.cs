@@ -14,7 +14,9 @@ namespace System.Text.Json.Serialization.Tests
     public abstract partial class ReferenceHandlerTests : SerializerTests
     {
         public ReferenceHandlerTests(JsonSerializerWrapper stringSerializer)
-            : base(stringSerializer) { }
+            : base(stringSerializer)
+        {
+        }
 
         [Fact]
         public virtual async Task ThrowByDefaultOnLoop()
@@ -330,7 +332,9 @@ namespace System.Text.Json.Serialization.Tests
         #endregion Root Object
 
         #region Root Dictionary
-        public class DictionaryWithGenericCycle : Dictionary<string, DictionaryWithGenericCycle> { }
+        public class DictionaryWithGenericCycle : Dictionary<string, DictionaryWithGenericCycle>
+        {
+        }
 
         [Fact]
         public async Task DictionaryLoop()
@@ -400,7 +404,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public class DictionaryWithGenericCycleWithinList
-            : Dictionary<string, List<DictionaryWithGenericCycleWithinList>> { }
+            : Dictionary<string, List<DictionaryWithGenericCycleWithinList>>
+        {
+        }
 
         [Fact]
         public async Task DictionaryArrayLoop()
@@ -604,7 +610,9 @@ namespace System.Text.Json.Serialization.Tests
         #endregion
 
         #region Root Array
-        public class ListWithGenericCycle : List<ListWithGenericCycle> { }
+        public class ListWithGenericCycle : List<ListWithGenericCycle>
+        {
+        }
 
         [Fact]
         public async Task ArrayLoop()
@@ -690,7 +698,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public class ListWithGenericCycleWithinDictionary
-            : List<Dictionary<string, ListWithGenericCycleWithinDictionary>> { }
+            : List<Dictionary<string, ListWithGenericCycleWithinDictionary>>
+        {
+        }
 
         [Fact]
         public async Task ArrayDictionaryLoop()

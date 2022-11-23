@@ -54,7 +54,9 @@ namespace System.Xml.Schema
         public SchemaType Parse(XmlReader reader, string? targetNamespace)
         {
             StartParsing(reader, targetNamespace);
-            while (ParseReaderNode() && reader.Read()) { }
+            while (ParseReaderNode() && reader.Read())
+            {
+            }
             return FinishParsing();
         }
 
@@ -72,7 +74,9 @@ namespace System.Xml.Schema
             {
                 _isProcessNamespaces = false;
             }
-            while (reader.NodeType != XmlNodeType.Element && reader.Read()) { }
+            while (reader.NodeType != XmlNodeType.Element && reader.Read())
+            {
+            }
 
             _markupDepth = int.MaxValue;
             _schemaXmlDepth = reader.Depth;

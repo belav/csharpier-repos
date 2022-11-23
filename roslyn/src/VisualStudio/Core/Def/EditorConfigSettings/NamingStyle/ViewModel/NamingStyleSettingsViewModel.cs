@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
             ISettingsProvider<NamingStyleSetting> data,
             IWpfTableControlProvider controlProvider,
             ITableManagerProvider tableMangerProvider
-        ) : base(data, controlProvider, tableMangerProvider) { }
+        ) : base(data, controlProvider, tableMangerProvider)
+        {
+        }
 
         public override string Identifier => "NamingStyleSettings";
 

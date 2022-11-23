@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VsMetadataServiceFactory() { }
+        public VsMetadataServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new Service(workspaceServices);

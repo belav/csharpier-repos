@@ -46,7 +46,9 @@ namespace System.Web.Http.Results
                     request,
                     formatters
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedNegotiatedContentResult{T}"/> class with the values
@@ -60,7 +62,9 @@ namespace System.Web.Http.Results
                 location,
                 content,
                 new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller)
-            ) { }
+            )
+        {
+        }
 
         private CreatedNegotiatedContentResult(
             Uri location,

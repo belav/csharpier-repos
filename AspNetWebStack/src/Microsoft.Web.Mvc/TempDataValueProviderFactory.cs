@@ -25,7 +25,9 @@ namespace Microsoft.Web.Mvc
         /// <summary>
         /// dummy struct that resembles Void but can be used in a generic context
         /// </summary>
-        private struct TempDataVoid { }
+        private struct TempDataVoid
+        {
+        }
 
         private sealed class TempDataValueProvider : DictionaryValueProvider<TempDataVoid>
         {

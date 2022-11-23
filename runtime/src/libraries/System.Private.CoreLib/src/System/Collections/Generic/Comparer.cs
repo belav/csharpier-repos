@@ -91,9 +91,13 @@ namespace System.Collections.Generic
     // Needs to be public to support binary serialization compatibility
     public sealed class NullableComparer<T> : Comparer<T?>, ISerializable where T : struct
     {
-        public NullableComparer() { }
+        public NullableComparer()
+        {
+        }
 
-        private NullableComparer(SerializationInfo info, StreamingContext context) { }
+        private NullableComparer(SerializationInfo info, StreamingContext context)
+        {
+        }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -147,10 +151,14 @@ namespace System.Collections.Generic
     internal sealed partial class EnumComparer<T> : Comparer<T>, ISerializable
         where T : struct, Enum
     {
-        public EnumComparer() { }
+        public EnumComparer()
+        {
+        }
 
         // Used by the serialization engine.
-        private EnumComparer(SerializationInfo info, StreamingContext context) { }
+        private EnumComparer(SerializationInfo info, StreamingContext context)
+        {
+        }
 
         // public override int Compare(T x, T y) is runtime-specific
 

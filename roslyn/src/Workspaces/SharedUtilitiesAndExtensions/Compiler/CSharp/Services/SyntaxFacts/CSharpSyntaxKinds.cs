@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         public static readonly CSharpSyntaxKinds Instance = new();
 
-        protected CSharpSyntaxKinds() { }
+        protected CSharpSyntaxKinds()
+        {
+        }
 
         // Boxing/Unboxing casts from Object to TSyntaxKind will be erased by jit.
         public TSyntaxKind Convert<TSyntaxKind>(int kind) where TSyntaxKind : struct =>

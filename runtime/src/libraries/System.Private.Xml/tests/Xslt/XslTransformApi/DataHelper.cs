@@ -294,5 +294,7 @@ public class MyObject
         return this;
     }
 
-    public void DoNothing() { }
+    public void DoNothing()
+    {
+    }
 }

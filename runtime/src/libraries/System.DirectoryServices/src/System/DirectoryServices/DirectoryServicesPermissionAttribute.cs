@@ -24,7 +24,9 @@ namespace System.DirectoryServices
     public class DirectoryServicesPermissionAttribute : CodeAccessSecurityAttribute
     {
         public DirectoryServicesPermissionAttribute(SecurityAction action)
-            : base(default(SecurityAction)) { }
+            : base(default(SecurityAction))
+        {
+        }
 
         public DirectoryServicesPermissionAccess PermissionAccess { get; set; }
         public string? Path { get; set; }

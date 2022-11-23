@@ -17,7 +17,9 @@ namespace System.Xml.Xsl.Runtime
         public int length; // Length of separator token, or minimum length of decimal numbers for format token
 
         // Instances of this internal class must be created via CreateFormat and CreateSeparator
-        private TokenInfo() { }
+        private TokenInfo()
+        {
+        }
 
         [Conditional("DEBUG")]
         public void AssertSeparator(bool isSeparator)

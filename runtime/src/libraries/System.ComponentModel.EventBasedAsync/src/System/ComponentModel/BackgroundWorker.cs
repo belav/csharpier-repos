@@ -177,6 +177,8 @@ namespace System.ComponentModel
             _asyncOperation.PostOperationCompleted(_operationCompleted, e);
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
     }
 }

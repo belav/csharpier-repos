@@ -619,7 +619,9 @@ namespace PInvokeTests
             {
                 pass = true;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 _ = InvalidReturn();
@@ -628,7 +630,9 @@ namespace PInvokeTests
             {
                 pass &= true;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return pass;
         }
 

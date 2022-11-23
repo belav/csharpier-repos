@@ -69,7 +69,9 @@ namespace SslStress
 
     public class DataMismatchException : Exception
     {
-        public DataMismatchException(string message) : base(message) { }
+        public DataMismatchException(string message) : base(message)
+        {
+        }
     }
 
     // Serializes data segment using the following format: <length>,<checksum>,<data>
@@ -199,7 +201,9 @@ namespace SslStress
     // Applies backpressure if the difference between sent and received segments is too large.
     public sealed class StressClient : SslClientBase
     {
-        public StressClient(Configuration config) : base(config) { }
+        public StressClient(Configuration config) : base(config)
+        {
+        }
 
         protected override async Task HandleConnection(
             int workerId,
@@ -352,7 +356,9 @@ namespace SslStress
     // Sets up a pipeline reader which validates checksums and echoes back data.
     public sealed class StressServer : SslServerBase
     {
-        public StressServer(Configuration config) : base(config) { }
+        public StressServer(Configuration config) : base(config)
+        {
+        }
 
         protected override async Task HandleConnection(
             SslStream sslStream,

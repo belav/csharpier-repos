@@ -170,7 +170,9 @@ public class GenerateHeaders
 
         // Parse the file.
 
-        while (reader.Read()) { }
+        while (reader.Read())
+        {
+        }
     }
 
     // Display any validation errors.

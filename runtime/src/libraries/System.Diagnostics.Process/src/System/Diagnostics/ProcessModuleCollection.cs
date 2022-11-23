@@ -7,7 +7,9 @@ namespace System.Diagnostics
 {
     public class ProcessModuleCollection : ReadOnlyCollectionBase
     {
-        protected ProcessModuleCollection() { }
+        protected ProcessModuleCollection()
+        {
+        }
 
         public ProcessModuleCollection(ProcessModule[] processModules)
         {

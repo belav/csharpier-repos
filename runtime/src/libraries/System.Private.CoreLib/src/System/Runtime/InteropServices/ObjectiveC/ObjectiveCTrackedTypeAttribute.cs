@@ -15,6 +15,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// <summary>
         /// Instantiate a <see cref="ObjectiveCTrackedTypeAttribute"/> instance.
         /// </summary>
-        public ObjectiveCTrackedTypeAttribute() { }
+        public ObjectiveCTrackedTypeAttribute()
+        {
+        }
     }
 }

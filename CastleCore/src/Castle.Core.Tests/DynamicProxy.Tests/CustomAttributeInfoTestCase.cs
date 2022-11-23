@@ -28,9 +28,13 @@ namespace Castle.DynamicProxy.Tests
     {
         class MyAttribute1 : Attribute
         {
-            public MyAttribute1() { }
+            public MyAttribute1()
+            {
+            }
 
-            public MyAttribute1(int intArgument, string stringArgument, int[] arrayArgument) { }
+            public MyAttribute1(int intArgument, string stringArgument, int[] arrayArgument)
+            {
+            }
 
             public int IntProperty { get; set; }
             public string StringProperty { get; set; }
@@ -45,7 +49,9 @@ namespace Castle.DynamicProxy.Tests
 
         class MyAttribute2 : Attribute
         {
-            public MyAttribute2(int intArgument, string stringArgument, int[] arrayArgument) { }
+            public MyAttribute2(int intArgument, string stringArgument, int[] arrayArgument)
+            {
+            }
         }
 
         [Test]

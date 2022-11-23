@@ -12,10 +12,14 @@ namespace Microsoft.Interop.JavaScript
     internal class PrimitiveJSGenerator : BaseJSGenerator
     {
         public PrimitiveJSGenerator(MarshalerType marshalerType, IMarshallingGenerator inner)
-            : base(marshalerType, inner) { }
+            : base(marshalerType, inner)
+        {
+        }
 
         public PrimitiveJSGenerator(MarshalerType marshalerType)
-            : base(marshalerType, new Forwarder()) { }
+            : base(marshalerType, new Forwarder())
+        {
+        }
 
         public override IEnumerable<StatementSyntax> Generate(
             TypePositionInfo info,

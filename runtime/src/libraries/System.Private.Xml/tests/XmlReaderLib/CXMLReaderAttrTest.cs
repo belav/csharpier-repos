@@ -2644,7 +2644,9 @@ namespace System.Xml.Tests
                 DataReader.MoveToAttribute(-1);
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
 
             return TEST_PASS;
         }
@@ -2726,14 +2728,18 @@ namespace System.Xml.Tests
                 DataReader.GetAttribute(-1);
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
 
             try
             {
                 DataReader.GetAttribute(s_attrCount);
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
 
             // Invalid name
             CError.Compare(DataReader.GetAttribute("s"), null, "GA");
@@ -2819,13 +2825,17 @@ namespace System.Xml.Tests
                 string s = DataReader[-1];
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
             try
             {
                 string s = DataReader[s_attrCount];
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
 
             // Invalid name
             CError.Compare(DataReader["s"], null, "[]");

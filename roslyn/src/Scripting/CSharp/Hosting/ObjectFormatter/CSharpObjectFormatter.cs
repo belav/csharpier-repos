@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
 
         private static readonly ObjectFormatter s_impl = new CSharpObjectFormatterImpl();
 
-        private CSharpObjectFormatter() { }
+        private CSharpObjectFormatter()
+        {
+        }
 
         public override string FormatObject(object obj, PrintOptions options) =>
             s_impl.FormatObject(obj, options);

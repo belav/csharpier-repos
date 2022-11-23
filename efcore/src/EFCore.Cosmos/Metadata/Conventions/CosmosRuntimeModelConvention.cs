@@ -22,7 +22,9 @@ public class CosmosRuntimeModelConvention : RuntimeModelConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public CosmosRuntimeModelConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Updates the model annotations that will be set on the read-only object.

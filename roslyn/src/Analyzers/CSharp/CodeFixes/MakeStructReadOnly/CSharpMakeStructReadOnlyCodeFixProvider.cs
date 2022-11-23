@@ -28,7 +28,9 @@ internal sealed class CSharpMakeStructReadOnlyCodeFixProvider : SyntaxEditorBase
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpMakeStructReadOnlyCodeFixProvider() { }
+    public CSharpMakeStructReadOnlyCodeFixProvider()
+    {
+    }
 
     public override ImmutableArray<string> FixableDiagnosticIds { get; } =
         ImmutableArray.Create(IDEDiagnosticIds.MakeStructReadOnlyDiagnosticId);

@@ -7,7 +7,9 @@ public abstract class TPTFiltersInheritanceBulkUpdatesTestBase<TFixture>
     : FiltersInheritanceBulkUpdatesTestBase<TFixture>
     where TFixture : TPTInheritanceBulkUpdatesFixture, new()
 {
-    protected TPTFiltersInheritanceBulkUpdatesTestBase(TFixture fixture) : base(fixture) { }
+    protected TPTFiltersInheritanceBulkUpdatesTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     // Keyless entities are mapped as TPH only
     public override Task Delete_where_keyless_entity_mapped_to_sql_query(bool async) =>

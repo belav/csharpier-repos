@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SyntaxNode
         > s_simplifyExtensionMethod = SimplifyExtensionMethod;
 
-        public CSharpExtensionMethodReducer() : base(s_pool) { }
+        public CSharpExtensionMethodReducer() : base(s_pool)
+        {
+        }
 
         protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 

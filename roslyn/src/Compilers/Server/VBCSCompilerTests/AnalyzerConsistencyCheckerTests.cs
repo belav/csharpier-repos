@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
 
-        private AssemblyLoadTestFixtureCollection() { }
+        private AssemblyLoadTestFixtureCollection()
+        {
+        }
     }
 
     [Collection(AssemblyLoadTestFixtureCollection.Name)]
@@ -171,7 +173,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 Assembly
             >(StringComparer.OrdinalIgnoreCase);
 
-            public void AddDependencyLocation(string fullPath) { }
+            public void AddDependencyLocation(string fullPath)
+            {
+            }
 
             public Assembly LoadFromPath(string fullPath)
             {

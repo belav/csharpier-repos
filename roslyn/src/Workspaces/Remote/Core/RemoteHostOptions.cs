@@ -86,7 +86,9 @@ namespace Microsoft.CodeAnalysis.Remote
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteHostOptions() { }
+        public RemoteHostOptions()
+        {
+        }
 
         public static bool IsServiceHubProcessServerGC(IGlobalOptionService globalOptions) =>
             globalOptions.GetOption(OOPServerGC) || globalOptions.GetOption(OOPServerGCFeatureFlag);

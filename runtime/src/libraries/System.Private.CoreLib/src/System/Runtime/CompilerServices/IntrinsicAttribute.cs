@@ -14,5 +14,7 @@ namespace System.Runtime.CompilerServices
             | AttributeTargets.Field,
         Inherited = false
     )]
-    internal sealed class IntrinsicAttribute : Attribute { }
+    internal sealed class IntrinsicAttribute : Attribute
+    {
+    }
 }

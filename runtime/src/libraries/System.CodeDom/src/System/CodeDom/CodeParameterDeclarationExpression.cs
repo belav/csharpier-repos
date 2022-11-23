@@ -9,7 +9,9 @@ namespace System.CodeDom
         private string _name;
         private CodeAttributeDeclarationCollection _customAttributes;
 
-        public CodeParameterDeclarationExpression() { }
+        public CodeParameterDeclarationExpression()
+        {
+        }
 
         public CodeParameterDeclarationExpression(CodeTypeReference type, string name)
         {

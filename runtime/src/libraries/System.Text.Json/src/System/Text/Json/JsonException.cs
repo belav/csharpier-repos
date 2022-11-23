@@ -86,7 +86,9 @@ namespace System.Text.Json
         /// <summary>
         /// Creates a new exception object to relay error information to the user.
         /// </summary>
-        public JsonException() : base() { }
+        public JsonException() : base()
+        {
+        }
 
         /// <summary>
         /// Creates a new exception object with serialized data.

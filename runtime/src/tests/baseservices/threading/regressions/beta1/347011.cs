@@ -6,7 +6,9 @@ using System.Threading;
 
 public class TimerTest
 {
-    public static void Target(Object foo) { }
+    public static void Target(Object foo)
+    {
+    }
 
     public static int Main()
     {

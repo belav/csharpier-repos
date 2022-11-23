@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
         }
 
-        public PatternParsingTests2(ITestOutputHelper output) : base(output) { }
+        public PatternParsingTests2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void ExtendedPropertySubpattern_01()

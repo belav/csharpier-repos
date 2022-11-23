@@ -26,9 +26,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 get { return true; }
             }
 
-            public void Do() { }
+            public void Do()
+            {
+            }
 
-            public void Undo() { }
+            public void Undo()
+            {
+            }
 
             public bool CanMerge(ITextUndoPrimitive older) => true;
 

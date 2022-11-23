@@ -6,5 +6,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
     /// <summary>
     /// Represents a file
     /// </summary>
-    public abstract class FileInfoBase : FileSystemInfoBase { }
+    public abstract class FileInfoBase : FileSystemInfoBase
+    {
+    }
 }

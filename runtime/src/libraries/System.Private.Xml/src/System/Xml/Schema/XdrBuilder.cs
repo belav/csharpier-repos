@@ -865,7 +865,9 @@ namespace System.Xml.Schema
             builder._XdrPrefix = prefix;
         }
 
-        private static void XDR_BuildRoot_ID(XdrBuilder builder, object obj, string prefix) { }
+        private static void XDR_BuildRoot_ID(XdrBuilder builder, object obj, string prefix)
+        {
+        }
 
         private static void XDR_BeginRoot(XdrBuilder builder)
         {

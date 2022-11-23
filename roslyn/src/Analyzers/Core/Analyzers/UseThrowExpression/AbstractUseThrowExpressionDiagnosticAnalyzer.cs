@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract CodeStyleOption2<bool> PreferThrowExpressionStyle(
             OperationAnalysisContext context

@@ -7,9 +7,13 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed class Utf8MemoryStream : MemoryStream
     {
-        public Utf8MemoryStream() : base() { }
+        public Utf8MemoryStream() : base()
+        {
+        }
 
-        public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text)) { }
+        public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text))
+        {
+        }
 
         public string AsString() => Encoding.UTF8.GetString(ToArray());
     }

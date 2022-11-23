@@ -9,7 +9,9 @@
 
 class MdBinaryReaderGen : CsWriter
 {
-    public MdBinaryReaderGen(string fileName) : base(fileName) { }
+    public MdBinaryReaderGen(string fileName) : base(fileName)
+    {
+    }
 
     public void EmitSource()
     {

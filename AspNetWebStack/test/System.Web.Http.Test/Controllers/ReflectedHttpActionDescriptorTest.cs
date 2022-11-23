@@ -79,7 +79,8 @@ namespace System.Web.Http
         public void MethodInfo_Property()
         {
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor();
-            Action action = new Action(() => { });
+            Action action = new Action(() => {
+            });
 
             Assert.Reflection.Property<ReflectedHttpActionDescriptor, MethodInfo>(
                 instance: actionDescriptor,

@@ -42,8 +42,12 @@ namespace ILCompiler
             ReadyToRunHeaderNode header,
             NodeFactory nodeFactory,
             ExternalReferencesTableNode commonFixupsTableNode
-        ) { }
+        )
+        {
+        }
 
-        public virtual void AddCompilationRoots(IRootingServiceProvider rootProvider) { }
+        public virtual void AddCompilationRoots(IRootingServiceProvider rootProvider)
+        {
+        }
     }
 }

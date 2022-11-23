@@ -46,7 +46,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 componentModel
                     .GetService<IContentTypeRegistryService>()
                     .GetContentType(ContentTypeNames.CSharpContentType)
-            ) { }
+            )
+        {
+        }
 
         // Test constructor
         internal CSharpDebuggerIntelliSenseContext(
@@ -65,7 +67,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                     .GetService<IContentTypeRegistryService>()
                     .GetContentType(ContentTypeNames.CSharpContentType),
                 immediateWindow
-            ) { }
+            )
+        {
+        }
 
         protected override int GetAdjustedContextPoint(int contextPoint, Document document)
         {

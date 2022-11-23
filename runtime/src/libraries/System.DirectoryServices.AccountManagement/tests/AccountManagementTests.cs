@@ -853,14 +853,18 @@ namespace System.DirectoryServices.AccountManagement.Tests
     {
         private CustomFilter _customFilter;
 
-        public CustomUserPrincipal(PrincipalContext context) : base(context) { }
+        public CustomUserPrincipal(PrincipalContext context) : base(context)
+        {
+        }
 
         public CustomUserPrincipal(
             PrincipalContext context,
             string samAccountName,
             string password,
             bool enabled
-        ) : base(context, samAccountName, password, enabled) { }
+        ) : base(context, samAccountName, password, enabled)
+        {
+        }
 
         public void SetUserNameFilter(string name)
         {
@@ -907,7 +911,9 @@ namespace System.DirectoryServices.AccountManagement.Tests
 
     public class CustomFilter : AdvancedFilters
     {
-        public CustomFilter(Principal p) : base(p) { }
+        public CustomFilter(Principal p) : base(p)
+        {
+        }
 
         public void SetFilter(string userName)
         {

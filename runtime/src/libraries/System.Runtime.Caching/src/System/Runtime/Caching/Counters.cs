@@ -142,15 +142,25 @@ namespace System.Runtime.Caching
         }
 #else
 #pragma warning disable CA1822
-        internal Counters(string cacheName) { }
+        internal Counters(string cacheName)
+        {
+        }
 
-        public new void Dispose() { }
+        public new void Dispose()
+        {
+        }
 
-        internal void Increment(CounterName name) { }
+        internal void Increment(CounterName name)
+        {
+        }
 
-        internal void IncrementBy(CounterName name, long value) { }
+        internal void IncrementBy(CounterName name, long value)
+        {
+        }
 
-        internal void Decrement(CounterName name) { }
+        internal void Decrement(CounterName name)
+        {
+        }
 #pragma warning restore CA1822
 #endif
     }

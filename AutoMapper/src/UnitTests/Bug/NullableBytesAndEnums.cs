@@ -92,7 +92,9 @@ public class NullableShortWithCustomMapFrom : AutoMapperSpecBase
                 );
         });
 
-    protected override void Because_of() { }
+    protected override void Because_of()
+    {
+    }
 
     [Fact]
     public void Should_map_the_value()

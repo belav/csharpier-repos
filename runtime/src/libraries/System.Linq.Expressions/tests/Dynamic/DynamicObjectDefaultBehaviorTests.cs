@@ -8,9 +8,13 @@ namespace System.Dynamic.Tests
 {
     public class DynamicObjectDefaultBehaviorTests
     {
-        private class TypeOnlyKnownHere { }
+        private class TypeOnlyKnownHere
+        {
+        }
 
-        private struct ValueTypeOnlyKnownHere { }
+        private struct ValueTypeOnlyKnownHere
+        {
+        }
 
         private class NopDynamicObject : DynamicObject
         {

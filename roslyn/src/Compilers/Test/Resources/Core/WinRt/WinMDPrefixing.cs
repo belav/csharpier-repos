@@ -4,9 +4,13 @@
 //    winmdexp [/r: references to mscorlib, System.Runtime.dll, and windows.winmd] WinMDPrefixing.winmdobj
 namespace WinMDPrefixing
 {
-    public sealed class TestClass : TestInterface { }
+    public sealed class TestClass : TestInterface
+    {
+    }
 
-    public interface TestInterface { }
+    public interface TestInterface
+    {
+    }
 
     public delegate void TestDelegate();
 

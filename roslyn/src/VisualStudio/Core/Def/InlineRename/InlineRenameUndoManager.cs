@@ -71,7 +71,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
 
                 public RenameUndoPrimitive(string description) => _description = description;
 
-                public virtual void Do(IOleUndoManager pUndoManager) { }
+                public virtual void Do(IOleUndoManager pUndoManager)
+                {
+                }
 
                 public void GetDescription(out string pBstr) => pBstr = _description;
 
@@ -80,7 +82,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                     [ComAliasName("Microsoft.VisualStudio.OLE.Interop.LONG")] out int plID
                 ) => throw new NotImplementedException();
 
-                public void OnNextAdd() { }
+                public void OnNextAdd()
+                {
+                }
             }
 
             private class RedoPrimitive : RenameUndoPrimitive

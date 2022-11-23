@@ -6,9 +6,13 @@ using Xunit;
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclassgenmeth.genclassgenmeth
 {
-    public class C { }
+    public class C
+    {
+    }
 
-    public interface I { }
+    public interface I
+    {
+    }
 
     public class MemberClass<T>
     {
@@ -106,7 +110,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public void Method_WithConstraints<U, V, W>(T t, U u, V v, W w)
             where U : struct
             where V : class
-            where W : V { }
+            where W : V
+        {
+        }
 
         public dynamic Method_ReturnsDynamicConstraint<U>(T t, U u, dynamic d) where U : new()
         {
@@ -938,7 +944,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         internal int Field;
 
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         public static void DynamicCSharpRunTest()
         {
@@ -976,7 +984,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         internal int Field;
 
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1061,7 +1071,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         internal int Field;
 
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         public static void DynamicCSharpRunTest()
         {
@@ -1340,7 +1352,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         private static int s_field = 0;
 
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1382,7 +1396,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1460,7 +1476,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1492,9 +1510,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
-        public class InnerTest2 : Test { }
+        public class InnerTest2 : Test
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -2119,9 +2141,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
-        public class InnerTest2 : Test { }
+        public class InnerTest2 : Test
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()

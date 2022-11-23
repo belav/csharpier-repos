@@ -45,6 +45,8 @@ namespace Microsoft.AspNet.Facebook
             };
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

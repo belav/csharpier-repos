@@ -9,7 +9,9 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        internal StringBlob() { }
+        internal StringBlob()
+        {
+        }
 
         internal StringBlob(char[] pszStringArray)
         {

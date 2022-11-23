@@ -35,7 +35,9 @@ public class LoggingSqlServerTest
     {
         public StoredProcedureConcurrencyTokenNotMappedContext(
             DbContextOptionsBuilder optionsBuilder
-        ) : base(optionsBuilder.Options) { }
+        ) : base(optionsBuilder.Options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Animal>(b =>

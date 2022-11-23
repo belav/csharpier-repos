@@ -9,6 +9,7 @@ namespace Mono.Linker.Tests.Cases.Expectations.Metadata
     public class SetupLinkAttributesFile : BaseMetadataAttribute
     {
         public SetupLinkAttributesFile(string relativePathToFile, string destinationFileName = null)
-        { }
+        {
+        }
     }
 }

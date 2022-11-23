@@ -25,7 +25,9 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Initializes a new instance of the <see cref="CallSiteBinder"/> class.
         /// </summary>
-        protected CallSiteBinder() { }
+        protected CallSiteBinder()
+        {
+        }
 
         /// <summary>
         /// Gets a label that can be used to cause the binding to be updated. It

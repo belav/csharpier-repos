@@ -12,7 +12,9 @@ namespace System.Runtime.Intrinsics.Arm
     [CLSCompliant(false)]
     public abstract class ArmBase
     {
-        internal ArmBase() { }
+        internal ArmBase()
+        {
+        }
 
         public static bool IsSupported
         {
@@ -22,7 +24,9 @@ namespace System.Runtime.Intrinsics.Arm
         [Intrinsic]
         public abstract class Arm64
         {
-            internal Arm64() { }
+            internal Arm64()
+            {
+            }
 
             public static bool IsSupported
             {

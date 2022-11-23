@@ -192,7 +192,9 @@ namespace System.ComponentModel.Tests
 
         public class SubMarshalByValueComponent : MarshalByValueComponent
         {
-            public SubMarshalByValueComponent() : base() { }
+            public SubMarshalByValueComponent() : base()
+            {
+            }
 
             public EventHandlerList EventsEntryPoint => Events;
 

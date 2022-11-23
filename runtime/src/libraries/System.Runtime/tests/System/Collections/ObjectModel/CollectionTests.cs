@@ -397,16 +397,22 @@ namespace System.Collections.ObjectModel.Tests
 
         private class TestCollection<T> : Collection<T>
         {
-            public TestCollection() { }
+            public TestCollection()
+            {
+            }
 
-            public TestCollection(IList<T> items) : base(items) { }
+            public TestCollection(IList<T> items) : base(items)
+            {
+            }
 
             public IList<T> GetItems() => Items;
         }
 
         private class ModifiableCollection<T> : Collection<T>
         {
-            public ModifiableCollection() { }
+            public ModifiableCollection()
+            {
+            }
 
             public ModifiableCollection(IList<T> items)
             {

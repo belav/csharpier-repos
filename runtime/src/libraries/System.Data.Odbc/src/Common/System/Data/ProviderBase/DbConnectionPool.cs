@@ -469,7 +469,9 @@ namespace System.Data.ProviderBase
                     Timeout.Infinite
                 );
                 bool timerIsNotDisposed;
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     _waitHandles.ErrorEvent.Set();
@@ -616,7 +618,9 @@ namespace System.Data.ProviderBase
 
                 try
                 {
-                    try { }
+                    try
+                    {
+                    }
                     finally
                     {
                         started = Interlocked.CompareExchange(ref _pendingOpensWaiting, 1, 0) == 0;
@@ -788,7 +792,9 @@ namespace System.Data.ProviderBase
                     int waitResult = BOGUS_HANDLE;
                     try
                     {
-                        try { }
+                        try
+                        {
+                        }
                         finally
                         {
                             waitResult = WaitHandle.WaitAny(
@@ -1041,7 +1047,9 @@ namespace System.Data.ProviderBase
                         int waitResult = BOGUS_HANDLE;
                         try
                         {
-                            try { }
+                            try
+                            {
+                            }
                             finally
                             {
                                 waitResult = WaitHandle.WaitAny(

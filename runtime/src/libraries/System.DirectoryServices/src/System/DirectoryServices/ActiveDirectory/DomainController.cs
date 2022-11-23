@@ -70,10 +70,14 @@ namespace System.DirectoryServices.ActiveDirectory
         #region constructors
 
         // Internal constructors
-        protected DomainController() { }
+        protected DomainController()
+        {
+        }
 
         internal DomainController(DirectoryContext context, string domainControllerName)
-            : this(context, domainControllerName, new DirectoryEntryManager(context)) { }
+            : this(context, domainControllerName, new DirectoryEntryManager(context))
+        {
+        }
 
         internal DomainController(
             DirectoryContext context,

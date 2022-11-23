@@ -877,9 +877,13 @@ namespace System.Xml.Xsl.Xslt
         // Ignores all errors and warnings
         internal readonly struct NullErrorHelper : IErrorHelper
         {
-            public void ReportError(string res, params string?[]? args) { }
+            public void ReportError(string res, params string?[]? args)
+            {
+            }
 
-            public void ReportWarning(string res, params string?[]? args) { }
+            public void ReportWarning(string res, params string?[]? args)
+            {
+            }
         }
 
         internal sealed class XPathAnalyzer : IXPathBuilder<XslFlags>
@@ -1000,7 +1004,9 @@ namespace System.Xml.Xsl.Xslt
                 }
             }
 
-            public void StartBuild() { }
+            public void StartBuild()
+            {
+            }
 
             public XslFlags EndBuild(XslFlags result)
             {

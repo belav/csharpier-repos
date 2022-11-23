@@ -41,7 +41,9 @@ namespace System.Net.Http
         /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         public ByteRangeStreamContent(Stream content, RangeHeaderValue range, string mediaType)
-            : this(content, range, new MediaTypeHeaderValue(mediaType), DefaultBufferSize) { }
+            : this(content, range, new MediaTypeHeaderValue(mediaType), DefaultBufferSize)
+        {
+        }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
@@ -58,7 +60,9 @@ namespace System.Net.Http
             RangeHeaderValue range,
             string mediaType,
             int bufferSize
-        ) : this(content, range, new MediaTypeHeaderValue(mediaType), bufferSize) { }
+        ) : this(content, range, new MediaTypeHeaderValue(mediaType), bufferSize)
+        {
+        }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
@@ -73,7 +77,9 @@ namespace System.Net.Http
             Stream content,
             RangeHeaderValue range,
             MediaTypeHeaderValue mediaType
-        ) : this(content, range, mediaType, DefaultBufferSize) { }
+        ) : this(content, range, mediaType, DefaultBufferSize)
+        {
+        }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP

@@ -9,8 +9,12 @@ namespace Microsoft.Extensions.FileProviders
     {
         public static EmptyDisposable Instance { get; } = new EmptyDisposable();
 
-        private EmptyDisposable() { }
+        private EmptyDisposable()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

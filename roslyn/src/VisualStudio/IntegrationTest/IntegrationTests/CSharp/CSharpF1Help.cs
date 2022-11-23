@@ -19,7 +19,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpF1Help(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpF1Help)) { }
+            : base(instanceFactory, nameof(CSharpF1Help))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.F1Help)]
         private void F1Help()

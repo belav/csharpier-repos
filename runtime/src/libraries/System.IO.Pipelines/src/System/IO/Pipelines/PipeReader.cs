@@ -157,10 +157,9 @@ namespace System.IO.Pipelines
         [Obsolete(
             "OnWriterCompleted has been deprecated and may not be invoked on all implementations of PipeReader."
         )]
-        public virtual void OnWriterCompleted(
-            Action<Exception?, object?> callback,
-            object? state
-        ) { }
+        public virtual void OnWriterCompleted(Action<Exception?, object?> callback, object? state)
+        {
+        }
 
         /// <summary>Creates a <see cref="System.IO.Pipelines.PipeReader" /> wrapping the specified <see cref="System.IO.Stream" />.</summary>
         /// <param name="stream">The stream that the pipe reader will wrap.</param>

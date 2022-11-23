@@ -263,7 +263,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         private static Func<Tuple<CodeMarkerId, CodeMarkerId>, CodeMarkerId> s_endGetter =>
             t => t.Item2;
 
-        private CodeMarkerLogger() { }
+        private CodeMarkerLogger()
+        {
+        }
 
         public bool IsEnabled(FunctionId functionId) =>
             Microsoft.Internal.Performance.CodeMarkers.Instance.IsEnabled && CanHandle(functionId);

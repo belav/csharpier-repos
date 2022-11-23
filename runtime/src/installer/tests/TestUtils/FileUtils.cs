@@ -34,7 +34,9 @@ namespace Microsoft.DotNet.CoreSetup.Test
             {
                 File.Delete(filePath);
             }
-            catch (System.IO.IOException) { }
+            catch (System.IO.IOException)
+            {
+            }
         }
 
         /// <summary>

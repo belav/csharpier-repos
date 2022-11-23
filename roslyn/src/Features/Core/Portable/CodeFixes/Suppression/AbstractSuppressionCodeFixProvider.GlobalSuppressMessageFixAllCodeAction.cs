@@ -95,7 +95,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     string title,
                     Func<CancellationToken, Task<Solution>> createChangedSolution,
                     string equivalenceKey
-                ) : base(title, createChangedSolution, equivalenceKey) { }
+                ) : base(title, createChangedSolution, equivalenceKey)
+                {
+                }
 
                 protected override Task<Document> PostProcessChangesAsync(
                     Document document,

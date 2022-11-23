@@ -19,7 +19,9 @@ class OpenSemaphoreNeg
         //  open a closed semaphore
         try
         {
-            using (Semaphore sem1 = new Semaphore(10, 10, sName)) { }
+            using (Semaphore sem1 = new Semaphore(10, 10, sName))
+            {
+            }
             Semaphore sem2 = Semaphore.OpenExisting(sName);
         }
         catch (WaitHandleCannotBeOpenedException)

@@ -376,7 +376,9 @@ namespace System.Security.AccessControl
     {
         #region Constructors
 
-        public AuthorizationRuleCollection() : base() { }
+        public AuthorizationRuleCollection() : base()
+        {
+        }
 
         #endregion
 

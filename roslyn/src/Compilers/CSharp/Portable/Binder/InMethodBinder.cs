@@ -101,7 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void ValidateYield(
             YieldStatementSyntax node,
             BindingDiagnosticBag diagnostics
-        ) { }
+        )
+        {
+        }
 
         internal override TypeWithAnnotations GetIteratorElementType()
         {

@@ -14,10 +14,14 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Constructors
 
         internal GrammarBuilderPhrase(string phrase)
-            : this(phrase, false, SubsetMatchingMode.OrderedSubset) { }
+            : this(phrase, false, SubsetMatchingMode.OrderedSubset)
+        {
+        }
 
         internal GrammarBuilderPhrase(string phrase, SubsetMatchingMode subsetMatchingCriteria)
-            : this(phrase, true, subsetMatchingCriteria) { }
+            : this(phrase, true, subsetMatchingCriteria)
+        {
+        }
 
         private GrammarBuilderPhrase(
             string phrase,

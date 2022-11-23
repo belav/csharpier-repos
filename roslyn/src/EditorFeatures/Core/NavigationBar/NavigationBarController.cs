@@ -285,8 +285,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 await ProcessItemSelectionAsync(item, waitContext.UserCancellationToken)
                     .ConfigureAwait(false);
             }
-            catch (OperationCanceledException) { }
-            catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Critical)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Critical))
+            {
+            }
         }
 
         private async Task ProcessItemSelectionAsync(

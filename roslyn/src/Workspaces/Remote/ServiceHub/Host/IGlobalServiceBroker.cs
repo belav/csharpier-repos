@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Remote.Host
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GlobalServiceBroker() { }
+        public GlobalServiceBroker()
+        {
+        }
 
         public static void RegisterServiceBroker(IServiceBroker serviceBroker)
         {

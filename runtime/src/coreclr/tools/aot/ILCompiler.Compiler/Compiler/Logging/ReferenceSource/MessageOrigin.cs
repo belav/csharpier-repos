@@ -35,12 +35,18 @@ namespace Mono.Linker
         const int HiddenLineNumber = 0xfeefee;
 
         public MessageOrigin(IMemberDefinition? memberDefinition, int? ilOffset = null)
-            : this(memberDefinition as ICustomAttributeProvider, ilOffset) { }
+            : this(memberDefinition as ICustomAttributeProvider, ilOffset)
+        {
+        }
 
-        public MessageOrigin(ICustomAttributeProvider? provider) : this(provider, null) { }
+        public MessageOrigin(ICustomAttributeProvider? provider) : this(provider, null)
+        {
+        }
 
         public MessageOrigin(string fileName, int sourceLine = 0, int sourceColumn = 0)
-            : this(fileName, sourceLine, sourceColumn, null) { }
+            : this(fileName, sourceLine, sourceColumn, null)
+        {
+        }
 
         // The assembly attribute should be specified if available as it allows assigning the diagnostic
         // to a an assembly (we group based on assembly).
@@ -60,7 +66,9 @@ namespace Mono.Linker
         }
 
         public MessageOrigin(ICustomAttributeProvider? provider, int? ilOffset)
-            : this(provider, ilOffset, null) { }
+            : this(provider, ilOffset, null)
+        {
+        }
 
         public MessageOrigin(
             ICustomAttributeProvider? provider,

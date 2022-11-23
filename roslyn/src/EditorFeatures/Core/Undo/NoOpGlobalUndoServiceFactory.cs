@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoOpGlobalUndoServiceFactory() { }
+        public NoOpGlobalUndoServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             _singleton;
@@ -54,11 +56,17 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
         /// </summary>
         private class NoOpUndoTransaction : IWorkspaceGlobalUndoTransaction
         {
-            public void Commit() { }
+            public void Commit()
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
-            public void AddDocument(DocumentId id) { }
+            public void AddDocument(DocumentId id)
+            {
+            }
         }
     }
 }

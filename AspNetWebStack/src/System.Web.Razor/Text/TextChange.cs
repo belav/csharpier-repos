@@ -23,7 +23,9 @@ namespace System.Web.Razor.Text
             ITextBuffer oldBuffer,
             int newLength,
             ITextBuffer newBuffer
-        ) : this(position, oldLength, oldBuffer, position, newLength, newBuffer) { }
+        ) : this(position, oldLength, oldBuffer, position, newLength, newBuffer)
+        {
+        }
 
         public TextChange(
             int oldPosition,

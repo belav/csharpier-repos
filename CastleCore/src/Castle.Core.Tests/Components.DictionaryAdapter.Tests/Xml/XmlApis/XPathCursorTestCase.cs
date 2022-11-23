@@ -334,8 +334,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         protected static XmlContextBase Context;
 
-        private class _TypeA { }
+        private class _TypeA
+        {
+        }
 
-        private class _TypeB : _TypeA { }
+        private class _TypeB : _TypeA
+        {
+        }
     }
 }

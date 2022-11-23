@@ -291,7 +291,9 @@ namespace System.Net.Tests
                     response.ContentType = null;
                     Assert.False(willBlock);
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
 
                 string clientResponse = GetClientResponse(106);
                 Assert.Contains("\r\nContent-Length: 0\r\n", clientResponse);
@@ -449,7 +451,9 @@ namespace System.Net.Tests
                     {
                         response.Close();
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
             }
         }

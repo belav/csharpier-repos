@@ -9,7 +9,9 @@ public abstract class InheritanceRelationshipsQueryRelationalTestBase<TFixture>
     : InheritanceRelationshipsQueryTestBase<TFixture>
     where TFixture : InheritanceRelationshipsQueryRelationalFixture, new()
 {
-    public InheritanceRelationshipsQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    public InheritanceRelationshipsQueryRelationalTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

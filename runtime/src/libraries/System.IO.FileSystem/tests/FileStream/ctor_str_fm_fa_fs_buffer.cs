@@ -57,7 +57,9 @@ namespace System.IO.Tests
                     FileShare.Read,
                     0
                 )
-            ) { }
+            )
+            {
+            }
         }
 
         [Fact]
@@ -71,7 +73,9 @@ namespace System.IO.Tests
                     FileShare.ReadWrite,
                     64 * 1024
                 )
-            ) { }
+            )
+            {
+            }
         }
     }
 }

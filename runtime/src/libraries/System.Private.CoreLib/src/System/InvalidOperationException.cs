@@ -38,6 +38,8 @@ namespace System
         }
 
         protected InvalidOperationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

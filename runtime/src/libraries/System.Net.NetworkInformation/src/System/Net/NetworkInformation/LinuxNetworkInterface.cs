@@ -35,7 +35,9 @@ namespace System.Net.NetworkInformation
                     {
                         IPv4Routes = File.ReadAllLines(NetworkFiles.Ipv4RouteFile);
                     }
-                    catch (UnauthorizedAccessException) { }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
                 }
 
                 if (File.Exists(NetworkFiles.Ipv6RouteFile))
@@ -44,7 +46,9 @@ namespace System.Net.NetworkInformation
                     {
                         IPv6Routes = File.ReadAllLines(NetworkFiles.Ipv6RouteFile);
                     }
-                    catch (UnauthorizedAccessException) { }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
                 }
 
                 try
@@ -58,7 +62,9 @@ namespace System.Net.NetworkInformation
                     );
                 }
                 catch (Exception e)
-                    when (e is FileNotFoundException || e is UnauthorizedAccessException) { }
+                    when (e is FileNotFoundException || e is UnauthorizedAccessException)
+                {
+                }
             }
         }
 

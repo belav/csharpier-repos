@@ -2,7 +2,9 @@ using System;
 
 class MainClass
 {
-    class Foo { }
+    class Foo
+    {
+    }
 
     public static void Main(string[] args)
     {

@@ -22,7 +22,9 @@ namespace System.Xml.Xsl.Qil
         /// Construct a new node
         /// </summary>
         public QilSortKey(QilNodeType nodeType, QilNode key, QilNode collation)
-            : base(nodeType, key, collation) { }
+            : base(nodeType, key, collation)
+        {
+        }
 
         //-----------------------------------------------
         // QilSortKey methods

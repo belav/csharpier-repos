@@ -59,14 +59,18 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="trivias">An array of trivia.</param>
         public SyntaxTriviaList(params SyntaxTrivia[] trivias)
-            : this(default, CreateNode(trivias), 0, 0) { }
+            : this(default, CreateNode(trivias), 0, 0)
+        {
+        }
 
         /// <summary>
         /// Creates a list of trivia.
         /// </summary>
         /// <param name="trivias">A sequence of trivia.</param>
         public SyntaxTriviaList(IEnumerable<SyntaxTrivia>? trivias)
-            : this(default, SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0) { }
+            : this(default, SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0)
+        {
+        }
 
         private static GreenNode? CreateNode(SyntaxTrivia[]? trivias)
         {

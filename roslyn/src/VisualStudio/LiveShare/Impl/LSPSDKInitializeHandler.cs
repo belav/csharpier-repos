@@ -28,7 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LSPSDKInitializeHandler() { }
+        public LSPSDKInitializeHandler()
+        {
+        }
 
         public Task<LSP.InitializeResult> HandleAsync(
             LSP.InitializeParams request,

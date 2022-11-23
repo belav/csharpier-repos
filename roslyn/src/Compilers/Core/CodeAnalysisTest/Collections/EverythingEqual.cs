@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     {
         private static readonly EverythingEqual<T> s_singleton = new();
 
-        private EverythingEqual() { }
+        private EverythingEqual()
+        {
+        }
 
         internal static EverythingEqual<T> Default
         {

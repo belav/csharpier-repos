@@ -20,10 +20,14 @@ namespace Test_zeroInitStackSlot_cs
     internal class WarehouseResultDatabase : IDisposable
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public WarehouseResultDatabase() { }
+        public WarehouseResultDatabase()
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
     }
 
     internal delegate bool WarehouseRowVersionQueryDelegate(

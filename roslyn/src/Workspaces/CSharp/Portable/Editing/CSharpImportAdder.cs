@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpImportAdder() { }
+        public CSharpImportAdder()
+        {
+        }
 
         protected override INamespaceSymbol? GetExplicitNamespaceSymbol(
             SyntaxNode node,

@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UpdateProjectToAllowUnsafe
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUpdateProjectToAllowUnsafeCodeFixProvider() { }
+        public CSharpUpdateProjectToAllowUnsafeCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS0227);

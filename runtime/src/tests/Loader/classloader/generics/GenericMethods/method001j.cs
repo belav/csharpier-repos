@@ -3,9 +3,13 @@
 
 using System;
 
-public class A<T> { }
+public class A<T>
+{
+}
 
-public struct S<T> { }
+public struct S<T>
+{
+}
 
 public abstract class Base<U>
 {

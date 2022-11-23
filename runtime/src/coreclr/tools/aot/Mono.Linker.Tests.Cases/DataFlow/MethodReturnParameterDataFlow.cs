@@ -150,7 +150,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             MakeArrayValuesUnknown(array);
             return (Type)array[0];
 
-            static void MakeArrayValuesUnknown(object[] array) { }
+            static void MakeArrayValuesUnknown(object[] array)
+            {
+            }
         }
 
         [ExpectedWarning(
@@ -259,7 +261,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         class TestType
         {
-            public TestType() { }
+            public TestType()
+            {
+            }
         }
     }
 }

@@ -21,7 +21,9 @@ public class AuthenticationFailedContext : RemoteAuthenticationContext<WsFederat
         HttpContext context,
         AuthenticationScheme scheme,
         WsFederationOptions options
-    ) : base(context, scheme, options, new AuthenticationProperties()) { }
+    ) : base(context, scheme, options, new AuthenticationProperties())
+    {
+    }
 
     /// <summary>
     /// The <see cref="WsFederationMessage"/> from the request, if any.

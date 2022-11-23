@@ -6584,7 +6584,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private IEnumerable<ChildCompositeKey> _childrenCompositeKey;
         private SingleCompositeKey _singleCompositeKey;
 
-        public Parent() { }
+        public Parent()
+        {
+        }
 
         public Parent(Action<object, string> lazyLoader)
         {
@@ -6662,7 +6664,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public Child() { }
+        public Child()
+        {
+        }
 
         public Child(Action<object, string> lazyLoader)
         {
@@ -6686,7 +6690,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public SinglePkToPk() { }
+        public SinglePkToPk()
+        {
+        }
 
         protected SinglePkToPk(Action<object, string> lazyLoader)
         {
@@ -6708,7 +6714,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public Single() { }
+        public Single()
+        {
+        }
 
         public Single(Action<object, string> lazyLoader)
         {
@@ -6732,7 +6740,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public RequiredSingle() { }
+        public RequiredSingle()
+        {
+        }
 
         public RequiredSingle(Action<object, string> lazyLoader)
         {
@@ -6756,7 +6766,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public ChildAk() { }
+        public ChildAk()
+        {
+        }
 
         public ChildAk(Action<object, string> lazyLoader)
         {
@@ -6780,7 +6792,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public SingleAk() { }
+        public SingleAk()
+        {
+        }
 
         public SingleAk(Action<object, string> lazyLoader)
         {
@@ -6804,7 +6818,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public ChildShadowFk() { }
+        public ChildShadowFk()
+        {
+        }
 
         public ChildShadowFk(Action<object, string> lazyLoader)
         {
@@ -6826,7 +6842,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public SingleShadowFk() { }
+        public SingleShadowFk()
+        {
+        }
 
         public SingleShadowFk(Action<object, string> lazyLoader)
         {
@@ -6848,7 +6866,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public ChildCompositeKey() { }
+        public ChildCompositeKey()
+        {
+        }
 
         public ChildCompositeKey(Action<object, string> lazyLoader)
         {
@@ -6873,7 +6893,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private Parent _parent;
 
-        public SingleCompositeKey() { }
+        public SingleCompositeKey()
+        {
+        }
 
         public SingleCompositeKey(Action<object, string> lazyLoader)
         {
@@ -6900,7 +6922,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
             LazyLoader = lazyLoader;
         }
 
-        protected RootClass() { }
+        protected RootClass()
+        {
+        }
 
         public int Id { get; set; }
 
@@ -6909,16 +6933,24 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
     protected class Deposit : RootClass
     {
-        private Deposit(Action<object, string> lazyLoader) : base(lazyLoader) { }
+        private Deposit(Action<object, string> lazyLoader) : base(lazyLoader)
+        {
+        }
 
-        public Deposit() { }
+        public Deposit()
+        {
+        }
     }
 
     protected abstract class Product : RootClass
     {
-        protected Product(Action<object, string> lazyLoader) : base(lazyLoader) { }
+        protected Product(Action<object, string> lazyLoader) : base(lazyLoader)
+        {
+        }
 
-        protected Product() { }
+        protected Product()
+        {
+        }
 
         public int? DepositID { get; set; }
 
@@ -6933,9 +6965,13 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
     protected class SimpleProduct : Product
     {
-        private SimpleProduct(Action<object, string> lazyLoader) : base(lazyLoader) { }
+        private SimpleProduct(Action<object, string> lazyLoader) : base(lazyLoader)
+        {
+        }
 
-        public SimpleProduct() { }
+        public SimpleProduct()
+        {
+        }
     }
 
     protected class OptionalChildView
@@ -6943,7 +6979,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private RootClass _root;
 
-        public OptionalChildView() { }
+        public OptionalChildView()
+        {
+        }
 
         public OptionalChildView(Action<object, string> lazyLoader)
         {
@@ -6964,7 +7002,9 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private RootClass _root;
 
-        public RequiredChildView() { }
+        public RequiredChildView()
+        {
+        }
 
         public RequiredChildView(Action<object, string> lazyLoader)
         {
@@ -6992,16 +7032,22 @@ public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
         return context;
     }
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
-    protected virtual void RecordLog() { }
+    protected virtual void RecordLog()
+    {
+    }
 
     protected class ChangeDetectorProxy : ChangeDetector
     {
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        ) : base(logger, loggingOptions)
+        {
+        }
 
         public bool DetectChangesCalled { get; set; }
 

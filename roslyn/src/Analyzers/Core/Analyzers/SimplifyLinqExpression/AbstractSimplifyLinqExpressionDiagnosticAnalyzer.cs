@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract IInvocationOperation? TryGetNextInvocationInChain(
             IInvocationOperation invocation

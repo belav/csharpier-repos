@@ -108,9 +108,13 @@ public abstract class ModelCodeGeneratorTestBase
         return services;
     }
 
-    protected virtual void AddModelServices(IServiceCollection services) { }
+    protected virtual void AddModelServices(IServiceCollection services)
+    {
+    }
 
-    protected virtual void AddScaffoldingServices(IServiceCollection services) { }
+    protected virtual void AddScaffoldingServices(IServiceCollection services)
+    {
+    }
 
     protected static void AssertFileContents(string expectedCode, ScaffoldedFile file) =>
         Assert.Equal(expectedCode, file.Code, ignoreLineEndingDifferences: true);

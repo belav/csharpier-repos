@@ -30,7 +30,9 @@ public sealed class AcceptedAtRoute<TValue>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
     internal AcceptedAtRoute(object? routeValues, TValue? value)
-        : this(routeName: null, routeValues: routeValues, value: value) { }
+        : this(routeName: null, routeValues: routeValues, value: value)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedAtRoute"/> class with the values

@@ -12,7 +12,9 @@ namespace System.Threading
 
         [CLSCompliant(false)]
         public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData)
-            : this(callback, state, pinData, flowExecutionContext: true) { }
+            : this(callback, state, pinData, flowExecutionContext: true)
+        {
+        }
 
         [CLSCompliant(false)]
         public static PreAllocatedOverlapped UnsafeCreate(

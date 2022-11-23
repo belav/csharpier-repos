@@ -516,7 +516,9 @@ namespace System.Text.Json.Tests
         /// </summary>
         public sealed class CustomEncoderAllowingPlusSign : JavaScriptEncoder
         {
-            public CustomEncoderAllowingPlusSign() { }
+            public CustomEncoderAllowingPlusSign()
+            {
+            }
 
             public override bool WillEncode(int unicodeScalar)
             {

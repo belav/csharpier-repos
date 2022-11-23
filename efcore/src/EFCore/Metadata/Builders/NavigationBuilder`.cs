@@ -30,7 +30,9 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// </summary>
     [EntityFrameworkInternal]
     public NavigationBuilder(IMutableNavigationBase navigationOrSkipNavigation)
-        : base(navigationOrSkipNavigation) { }
+        : base(navigationOrSkipNavigation)
+    {
+    }
 
     /// <summary>
     ///     Adds or updates an annotation on the navigation property. If an annotation

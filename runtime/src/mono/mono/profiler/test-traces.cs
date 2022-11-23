@@ -50,7 +50,9 @@ class T
             {
                 level3(1);
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 }

@@ -15,7 +15,9 @@ namespace System.Configuration
             StreamName = streamName;
         }
 
-        private StreamInfo() { }
+        private StreamInfo()
+        {
+        }
 
         internal string SectionName { get; private set; }
 

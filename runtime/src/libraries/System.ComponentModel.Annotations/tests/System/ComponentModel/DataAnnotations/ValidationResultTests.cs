@@ -78,7 +78,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public class ValidationResultSubClass : ValidationResult
         {
             public ValidationResultSubClass(ValidationResult validationResult)
-                : base(validationResult) { }
+                : base(validationResult)
+            {
+            }
         }
     }
 }

@@ -209,18 +209,24 @@ namespace System.ComponentModel.Design.Tests
             );
         }
 
-        private static void EventHandler(object sender, EventArgs e) { }
+        private static void EventHandler(object sender, EventArgs e)
+        {
+        }
 
         private class NullPropertiesDesignerVerb : DesignerVerb
         {
             public NullPropertiesDesignerVerb(string text, EventHandler handler)
-                : base(text, handler) { }
+                : base(text, handler)
+            {
+            }
 
             public NullPropertiesDesignerVerb(
                 string text,
                 EventHandler handler,
                 CommandID startCommandID
-            ) : base(text, handler, startCommandID) { }
+            ) : base(text, handler, startCommandID)
+            {
+            }
 
             public override IDictionary Properties => null;
         }
@@ -228,13 +234,17 @@ namespace System.ComponentModel.Design.Tests
         private class NullPropertiesAfterConstructionDesignerVerb : DesignerVerb
         {
             public NullPropertiesAfterConstructionDesignerVerb(string text, EventHandler handler)
-                : base(text, handler) { }
+                : base(text, handler)
+            {
+            }
 
             public NullPropertiesAfterConstructionDesignerVerb(
                 string text,
                 EventHandler handler,
                 CommandID startCommandID
-            ) : base(text, handler, startCommandID) { }
+            ) : base(text, handler, startCommandID)
+            {
+            }
 
             private bool Constructed { get; set; }
 

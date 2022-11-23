@@ -9,9 +9,13 @@ namespace System.Composition.Convention.Tests
 {
     public class ExportBuilderTests
     {
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
-        private class FooImpl : IFoo { }
+        private class FooImpl : IFoo
+        {
+        }
 
         [Fact]
         public void ExportInterfaceWithTypeOf1()

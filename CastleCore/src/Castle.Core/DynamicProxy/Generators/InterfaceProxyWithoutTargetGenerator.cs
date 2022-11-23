@@ -29,7 +29,9 @@ namespace Castle.DynamicProxy.Generators
             Type[] interfaces,
             Type proxyTargetType,
             ProxyGenerationOptions options
-        ) : base(scope, targetType, interfaces, proxyTargetType, options) { }
+        ) : base(scope, targetType, interfaces, proxyTargetType, options)
+        {
+        }
 
         protected override bool AllowChangeTarget => false;
 
@@ -62,7 +64,9 @@ namespace Castle.DynamicProxy.Generators
             Type[] proxiedInterfaces,
             IDictionary<Type, ITypeContributor> typeImplementerMapping,
             ICollection<Type> targetInterfaces
-        ) { }
+        )
+        {
+        }
 
         protected override IEnumerable<Type> GetTypeImplementerMapping(
             Type _,

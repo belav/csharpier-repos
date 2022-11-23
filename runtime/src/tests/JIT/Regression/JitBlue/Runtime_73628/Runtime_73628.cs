@@ -36,7 +36,9 @@ public unsafe class Runtime_73628
     private static bool IsNotZero(int a) => a != 0;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void JitUse<T>(T arg) { }
+    private static void JitUse<T>(T arg)
+    {
+    }
 
     struct StructWithInt
     {

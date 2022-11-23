@@ -585,9 +585,13 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private sealed class MockViewUserControl : ViewUserControl { }
+        private sealed class MockViewUserControl : ViewUserControl
+        {
+        }
 
-        private sealed class MockViewUserControl<TViewData> : ViewUserControl<TViewData> { }
+        private sealed class MockViewUserControl<TViewData> : ViewUserControl<TViewData>
+        {
+        }
 
         private sealed class MyViewData
         {
@@ -595,6 +599,8 @@ namespace System.Web.Mvc.Test
             public string StringProp { get; set; }
         }
 
-        private sealed class FooModel { }
+        private sealed class FooModel
+        {
+        }
     }
 }

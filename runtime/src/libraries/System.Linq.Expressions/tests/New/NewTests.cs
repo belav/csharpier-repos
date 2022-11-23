@@ -310,7 +310,9 @@ namespace System.Linq.Expressions.Tests
 
         class TestPrivateDefaultConstructor
         {
-            private TestPrivateDefaultConstructor() { }
+            private TestPrivateDefaultConstructor()
+            {
+            }
 
             public static Func<TestPrivateDefaultConstructor> GetInstanceFunc(bool useInterpreter)
             {
@@ -906,30 +908,42 @@ namespace System.Linq.Expressions.Tests
 
         static class StaticCtor
         {
-            static StaticCtor() { }
+            static StaticCtor()
+            {
+            }
         }
 
         abstract class AbstractCtor
         {
-            public AbstractCtor() { }
+            public AbstractCtor()
+            {
+            }
         }
 
         class GenericClass<T>
         {
-            public GenericClass() { }
+            public GenericClass()
+            {
+            }
         }
 
         class ClassWithCtors
         {
-            public ClassWithCtors() { }
+            public ClassWithCtors()
+            {
+            }
 
-            public ClassWithCtors(string obj) { }
+            public ClassWithCtors(string obj)
+            {
+            }
 
             public string StringProperty { get; set; }
             public int IntProperty { get; set; }
             public int WriteOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
 
 #pragma warning disable 0649
@@ -939,31 +953,45 @@ namespace System.Linq.Expressions.Tests
 
             public static string StaticProperty { get; set; }
 
-            public static void StaticMethod() { }
+            public static void StaticMethod()
+            {
+            }
 
-            public void InstanceMethod() { }
+            public void InstanceMethod()
+            {
+            }
         }
 
         class ClassWithNoDefaultCtor
         {
-            public ClassWithNoDefaultCtor(string s) { }
+            public ClassWithNoDefaultCtor(string s)
+            {
+            }
         }
 
         static class Unreachable<T>
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
         class Bar
         {
-            public Bar() { }
+            public Bar()
+            {
+            }
 
-            public Bar(int foo) { }
+            public Bar(int foo)
+            {
+            }
 
-            public Bar(int foo, int qux) { }
+            public Bar(int foo, int qux)
+            {
+            }
 
             public int Foo { get; set; }
             public int Qux { get; set; }

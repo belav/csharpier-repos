@@ -29,7 +29,9 @@ namespace System.Security.Cryptography.X509Certificates
                     }
                 }
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             return false;
         }
@@ -65,7 +67,9 @@ namespace System.Security.Cryptography.X509Certificates
                     }
                 }
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             return false;
         }

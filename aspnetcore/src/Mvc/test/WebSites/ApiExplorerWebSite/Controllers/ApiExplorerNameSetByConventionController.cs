@@ -9,5 +9,7 @@ namespace ApiExplorerWebSite;
 public class ApiExplorerNameSetByConventionController : Controller
 {
     [HttpGet]
-    public void Get() { }
+    public void Get()
+    {
+    }
 }

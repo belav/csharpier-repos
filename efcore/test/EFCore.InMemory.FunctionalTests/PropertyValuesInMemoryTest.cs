@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class PropertyValuesInMemoryTest
     : PropertyValuesTestBase<PropertyValuesInMemoryTest.PropertyValuesInMemoryFixture>
 {
-    public PropertyValuesInMemoryTest(PropertyValuesInMemoryFixture fixture) : base(fixture) { }
+    public PropertyValuesInMemoryTest(PropertyValuesInMemoryFixture fixture) : base(fixture)
+    {
+    }
 
     public class PropertyValuesInMemoryFixture : PropertyValuesFixtureBase
     {

@@ -83,7 +83,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                     return analyzerAssembly;
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return null;

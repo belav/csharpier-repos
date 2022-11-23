@@ -101,7 +101,9 @@ namespace System.Web.Http.Validation
 
             public int NoGet
             {
-                set { }
+                set
+                {
+                }
             }
 
             internal int Internal { get; set; }

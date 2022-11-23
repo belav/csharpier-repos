@@ -3,32 +3,50 @@
 
 using System;
 
-public class Base { }
+public class Base
+{
+}
 
-public class Sub : Base { }
+public class Sub : Base
+{
+}
 
-public class GBase<T> { }
+public class GBase<T>
+{
+}
 
-public class GSubT<T> : GBase<T> { }
+public class GSubT<T> : GBase<T>
+{
+}
 
-public struct GTU<T, U> : IPlusT<T>, IMinusT<U>, IPlusTMinusU<T, U> { }
+public struct GTU<T, U> : IPlusT<T>, IMinusT<U>, IPlusTMinusU<T, U>
+{
+}
 
-public struct GTArrUArr<T, U> : IPlusT<T[]>, IMinusT<U[]>, IPlusTMinusU<T[], U[]> { }
+public struct GTArrUArr<T, U> : IPlusT<T[]>, IMinusT<U[]>, IPlusTMinusU<T[], U[]>
+{
+}
 
 public struct GRefTRefU<T, U>
     : IPlusT<IPlusT<T>>,
         IPlusT<IMinusT<U>>,
-        IPlusTMinusU<IPlusT<T>, IPlusT<U>> { }
+        IPlusTMinusU<IPlusT<T>, IPlusT<U>>
+{
+}
 
 public struct GRefTArrRefUArr<T, U>
     : IPlusT<IPlusT<T[]>>,
         IPlusT<IMinusT<U[]>>,
-        IPlusTMinusU<IPlusT<T[]>, IPlusT<U[]>> { }
+        IPlusTMinusU<IPlusT<T[]>, IPlusT<U[]>>
+{
+}
 
 public struct GArrRefTArrRefU<T, U>
     : IPlusT<IPlusT<T>[]>,
         IPlusT<IMinusT<U>[]>,
-        IPlusTMinusU<IPlusT<T>[], IPlusT<U>[]> { }
+        IPlusTMinusU<IPlusT<T>[], IPlusT<U>[]>
+{
+}
 
 public class TestClass
 {

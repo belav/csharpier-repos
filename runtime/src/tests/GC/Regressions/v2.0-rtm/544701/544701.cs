@@ -7,7 +7,9 @@ internal class AllocBug
 {
     public int ret = 0;
 
-    public AllocBug() { }
+    public AllocBug()
+    {
+    }
 
     private static int Main(string[] args)
     {

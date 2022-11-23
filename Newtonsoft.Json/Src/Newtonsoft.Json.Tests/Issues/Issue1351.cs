@@ -51,7 +51,9 @@ namespace Newtonsoft.Json.Tests.Issues
     {
         public class Color
         {
-            public Color() { }
+            public Color()
+            {
+            }
 
             public Color(uint colorCode)
             {

@@ -16,7 +16,9 @@ namespace Microsoft.Interop
                 options.GenerateForwarders(),
                 options.UseMarshalType(),
                 options.UseInternalUnsafeType()
-            ) { }
+            )
+        {
+        }
     }
 
     public static class OptionsHelper

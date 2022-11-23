@@ -67,7 +67,9 @@ namespace System.ServiceModel.Syndication.Tests
     }
 
     //nametable could be added for next "release"
-    public class XmlDiffNameTable { }
+    public class XmlDiffNameTable
+    {
+    }
 
     public class XmlDiffDocument : XmlDiffNode, IXPathNavigable
     {
@@ -1239,7 +1241,9 @@ namespace System.ServiceModel.Syndication.Tests
         public bool IsOnRoot() => CurrentNode == null ? true : false;
     }
 
-    public class PropertyCollection : Hashtable { }
+    public class PropertyCollection : Hashtable
+    {
+    }
 
     public abstract class XmlDiffNode
     {
@@ -1592,7 +1596,9 @@ namespace System.ServiceModel.Syndication.Tests
     public class XmlDiffEmptyElement : XmlDiffElement
     {
         public XmlDiffEmptyElement(string localName, string prefix, string ns)
-            : base(localName, prefix, ns) { }
+            : base(localName, prefix, ns)
+        {
+        }
     }
 
     public class XmlDiffAttribute : XmlDiffNode
@@ -1740,7 +1746,9 @@ namespace System.ServiceModel.Syndication.Tests
             }
         }
 
-        public override void WriteContentTo(XmlWriter w) { }
+        public override void WriteContentTo(XmlWriter w)
+        {
+        }
     }
 
     public class XmlDiffProcessingInstruction : XmlDiffCharacterData
@@ -1755,6 +1763,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         public override void WriteTo(XmlWriter w) => w.WriteProcessingInstruction(Name, Value);
 
-        public override void WriteContentTo(XmlWriter w) { }
+        public override void WriteContentTo(XmlWriter w)
+        {
+        }
     }
 }

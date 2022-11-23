@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public StackTraceExplorerService() { }
+        public StackTraceExplorerService()
+        {
+        }
 
         public (Document? document, int line) GetDocumentAndLine(
             Solution solution,

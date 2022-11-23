@@ -10,5 +10,7 @@ namespace System.Runtime.CompilerServices
         Inherited = false,
         AllowMultiple = false
     )]
-    public class EagerStaticClassConstructionAttribute : Attribute { }
+    public class EagerStaticClassConstructionAttribute : Attribute
+    {
+    }
 }

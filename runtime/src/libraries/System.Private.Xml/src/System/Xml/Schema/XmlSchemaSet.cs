@@ -76,7 +76,9 @@ namespace System.Xml.Schema
         /// <summary>
         /// Construct a new empty schema schemas.
         /// </summary>
-        public XmlSchemaSet() : this(new NameTable()) { }
+        public XmlSchemaSet() : this(new NameTable())
+        {
+        }
 
         /// <summary>
         /// Construct a new empty schema schemas with associated XmlNameTable.

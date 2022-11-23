@@ -51,7 +51,9 @@ namespace System.Diagnostics.Tracing
                 variableCount ? Statics.InTypeVariableCountFlag : (byte)0,
                 0,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Fixed-length array.
@@ -61,7 +63,9 @@ namespace System.Diagnostics.Tracing
             TraceLoggingDataType type,
             EventFieldTags tags,
             ushort fixedCount
-        ) : this(name, type, tags, Statics.InTypeFixedCountFlag, fixedCount, null) { }
+        ) : this(name, type, tags, Statics.InTypeFixedCountFlag, fixedCount, null)
+        {
+        }
 
         /// <summary>
         /// Custom serializer
@@ -79,7 +83,9 @@ namespace System.Diagnostics.Tracing
                 Statics.InTypeCustomCountFlag,
                 checked((ushort)(custom == null ? 0 : custom.Length)),
                 custom
-            ) { }
+            )
+        {
+        }
 
         private FieldMetadata(
             string name,

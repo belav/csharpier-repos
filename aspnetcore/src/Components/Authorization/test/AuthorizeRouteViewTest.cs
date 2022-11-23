@@ -508,7 +508,9 @@ public class AuthorizeRouteViewTest
         AssertFrame.Text(referenceFrame, text);
     }
 
-    class TestPageWithNoAuthorization : ComponentBase { }
+    class TestPageWithNoAuthorization : ComponentBase
+    {
+    }
 
     [Authorize]
     class TestPageRequiringAuthorization : ComponentBase
@@ -566,5 +568,7 @@ public class AuthorizeRouteViewTest
         }
     }
 
-    class TestNavigationManager : NavigationManager { }
+    class TestNavigationManager : NavigationManager
+    {
+    }
 }

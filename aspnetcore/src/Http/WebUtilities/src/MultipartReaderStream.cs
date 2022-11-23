@@ -23,7 +23,9 @@ internal sealed class MultipartReaderStream : Stream
     /// <param name="stream">The <see cref="BufferedReadStream"/>.</param>
     /// <param name="boundary">The boundary pattern to use.</param>
     public MultipartReaderStream(BufferedReadStream stream, MultipartBoundary boundary)
-        : this(stream, boundary, ArrayPool<byte>.Shared) { }
+        : this(stream, boundary, ArrayPool<byte>.Shared)
+    {
+    }
 
     /// <summary>
     /// Creates a stream that reads until it reaches the given boundary pattern.

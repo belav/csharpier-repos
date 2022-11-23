@@ -5,8 +5,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     public class TypeWithNoPublicConstructors
     {
-        private TypeWithNoPublicConstructors() { }
+        private TypeWithNoPublicConstructors()
+        {
+        }
 
-        protected TypeWithNoPublicConstructors(string name) { }
+        protected TypeWithNoPublicConstructors(string name)
+        {
+        }
     }
 }

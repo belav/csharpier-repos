@@ -119,5 +119,7 @@ public class EndpointMetadataComparerTest
         Assert.Collection(list, e => Assert.Same(endpoint1, e), e => Assert.Same(endpoint2, e));
     }
 
-    private class TestMetadata { }
+    private class TestMetadata
+    {
+    }
 }

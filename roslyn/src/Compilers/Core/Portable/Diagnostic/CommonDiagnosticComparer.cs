@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis
     {
         internal static readonly CommonDiagnosticComparer Instance = new CommonDiagnosticComparer();
 
-        private CommonDiagnosticComparer() { }
+        private CommonDiagnosticComparer()
+        {
+        }
 
         public bool Equals(Diagnostic? x, Diagnostic? y)
         {

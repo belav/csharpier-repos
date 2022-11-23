@@ -62,7 +62,9 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             ),
         };
 
-        public HmacSha512Tests() : base(s_testMacs4231) { }
+        public HmacSha512Tests() : base(s_testMacs4231)
+        {
+        }
 
         [Fact]
         public void ProduceLegacyHmacValues()

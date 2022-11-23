@@ -1635,9 +1635,13 @@ namespace System.Reflection.Tests
         }
 
         //Methods for Reflection Metadata
-        private void DummyMethod1(string str, int iValue, long lValue) { }
+        private void DummyMethod1(string str, int iValue, long lValue)
+        {
+        }
 
-        private void DummyMethod2() { }
+        private void DummyMethod2()
+        {
+        }
 
         private static MethodInfo GetMethod(Type type, string name)
         {
@@ -1695,13 +1699,17 @@ namespace System.Reflection.Tests
 
         public static int StaticIntIntMethodReturningInt(int i1, int i2) => i1 + i2;
 
-        public static void StaticGenericMethod<T>(T t) { }
+        public static void StaticGenericMethod<T>(T t)
+        {
+        }
 
         public new int IMethodNew() => 200;
 
         public override int VirtualMethod() => 1;
 
-        public void ReturnVoidMethod(DateTime dt) { }
+        public void ReturnVoidMethod(DateTime dt)
+        {
+        }
 
         public virtual string[] VirtualReturnStringArrayMethod() => new string[0];
 
@@ -1713,11 +1721,17 @@ namespace System.Reflection.Tests
 
         public int[] ReturnArrayMethod() => new int[] { 2, 3, 5, 7, 11 };
 
-        public void GenericMethod1<T>(T t) { }
+        public void GenericMethod1<T>(T t)
+        {
+        }
 
-        public void GenericMethod2<T, U>(T t, U u) { }
+        public void GenericMethod2<T, U>(T t, U u)
+        {
+        }
 
-        public void StringArrayMethod(string[] strArray) { }
+        public void StringArrayMethod(string[] strArray)
+        {
+        }
 
         [
             Attr(77, name = "AttrSimple"),
@@ -1727,7 +1741,9 @@ namespace System.Reflection.Tests
             EnumAttr(PublicEnum.Case1, name = "EnumAttrSimple"),
             TypeAttr(typeof(object), name = "TypeAttrSimple")
         ]
-        public void MethodWithAttributes() { }
+        public void MethodWithAttributes()
+        {
+        }
     }
 
     public class MethodInfoDummySubClass : MI_BaseClass
@@ -1775,13 +1791,21 @@ namespace System.Reflection.Tests
 
     public class MethodInfoBaseDefinitionBaseClass : MethodInfoBaseDefinitionInterface
     {
-        public void InterfaceMethod1() { }
+        public void InterfaceMethod1()
+        {
+        }
 
-        void MethodInfoBaseDefinitionInterface.InterfaceMethod2() { }
+        void MethodInfoBaseDefinitionInterface.InterfaceMethod2()
+        {
+        }
 
-        public virtual void BaseClassVirtualMethod() { }
+        public virtual void BaseClassVirtualMethod()
+        {
+        }
 
-        public virtual void BaseClassMethod() { }
+        public virtual void BaseClassMethod()
+        {
+        }
 
         public override string ToString() => base.ToString();
     }
@@ -1790,25 +1814,35 @@ namespace System.Reflection.Tests
     {
         public override void BaseClassVirtualMethod() => base.BaseClassVirtualMethod();
 
-        public new void BaseClassMethod() { }
+        public new void BaseClassMethod()
+        {
+        }
 
         public override string ToString() => base.ToString();
 
-        public void DerivedClassMethod() { }
+        public void DerivedClassMethod()
+        {
+        }
     }
 
     public abstract class MI_AbstractBaseClass
     {
         public abstract void AbstractMethod();
 
-        public virtual void VirtualMethod() { }
+        public virtual void VirtualMethod()
+        {
+        }
     }
 
     public class MI_AbstractSubClass : MI_AbstractBaseClass
     {
-        public sealed override void VirtualMethod() { }
+        public sealed override void VirtualMethod()
+        {
+        }
 
-        public override void AbstractMethod() { }
+        public override void AbstractMethod()
+        {
+        }
     }
 
     public interface MethodInfoDefaultParametersInterface
@@ -1903,7 +1937,9 @@ namespace System.Reflection.Tests
     public delegate T Delegate_T_T<T>(T x);
     public delegate T Delegate_Void_T<T>();
 
-    public class DummyClass { }
+    public class DummyClass
+    {
+    }
 
     public class Sample
     {

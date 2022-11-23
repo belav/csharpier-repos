@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ContainingTypeColumnDefinition() { }
+        public ContainingTypeColumnDefinition()
+        {
+        }
 
         public override bool IsFilterable => true;
         public override string Name => ColumnName;

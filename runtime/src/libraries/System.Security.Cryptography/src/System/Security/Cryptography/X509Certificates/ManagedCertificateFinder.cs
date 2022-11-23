@@ -362,7 +362,9 @@ namespace System.Security.Cryptography.X509Certificates
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         private static X509Extension? FindExtension(X509Certificate2 cert, string extensionOid)
         {

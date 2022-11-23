@@ -9,11 +9,15 @@ public class DerivedComplexTypes : IntegrationTest<DerivedComplexTypes.DatabaseI
     }
 
     [ComplexType]
-    public class DerivedLocalizedString : LocalizedString { }
+    public class DerivedLocalizedString : LocalizedString
+    {
+    }
 
     public class Customer
     {
-        public Customer() { }
+        public Customer()
+        {
+        }
 
         [Key]
         public int Id { get; set; }

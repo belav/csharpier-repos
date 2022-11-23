@@ -233,7 +233,11 @@ namespace Castle.DynamicProxy.Tests
         void GenericMethod<T>(GenericClass2<T> arg);
     }
 
-    public class GenericClass1<T> { }
+    public class GenericClass1<T>
+    {
+    }
 
-    public class GenericClass2<T> { }
+    public class GenericClass2<T>
+    {
+    }
 }

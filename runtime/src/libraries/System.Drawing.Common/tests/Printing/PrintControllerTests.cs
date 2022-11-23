@@ -125,6 +125,8 @@ namespace System.Drawing.Printing.Tests
             }
         }
 
-        private class SubPrintController : PrintController { }
+        private class SubPrintController : PrintController
+        {
+        }
     }
 }

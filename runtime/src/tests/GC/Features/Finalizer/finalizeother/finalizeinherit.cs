@@ -8,7 +8,9 @@ using System.Runtime.CompilerServices;
 
 namespace One
 {
-    abstract class A { }
+    abstract class A
+    {
+    }
 
     class B : A
     {
@@ -34,7 +36,9 @@ namespace Two
 {
     using One;
 
-    class D : C { }
+    class D : C
+    {
+    }
 }
 
 namespace Three

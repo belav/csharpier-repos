@@ -60,7 +60,9 @@ namespace Roslyn.Test.Utilities
         private readonly string _display;
 
         public TestImageReference(byte[] metadataBytes, string display)
-            : this(ImmutableArray.Create(metadataBytes), display) { }
+            : this(ImmutableArray.Create(metadataBytes), display)
+        {
+        }
 
         public TestImageReference(ImmutableArray<byte> metadataBytes, string display)
             : base(MetadataReferenceProperties.Assembly)

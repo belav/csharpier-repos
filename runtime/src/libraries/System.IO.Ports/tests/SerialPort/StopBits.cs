@@ -382,7 +382,9 @@ namespace System.IO.Ports.Tests
                         null,
                         null
                     );
-                    while (0 == (initialNumBytes = com2.BytesToRead)) { }
+                    while (0 == (initialNumBytes = com2.BytesToRead))
+                    {
+                    }
 
                     sw.Start();
                     TCSupport.WaitForReadBufferToLoad(com2, numBytesToSend);

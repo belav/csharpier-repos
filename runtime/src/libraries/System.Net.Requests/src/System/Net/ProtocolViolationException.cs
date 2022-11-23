@@ -22,7 +22,9 @@ namespace System.Net
         ///       Creates a new instance of the <see cref='System.Net.ProtocolViolationException'/>class.
         ///    </para>
         /// </devdoc>
-        public ProtocolViolationException() : base() { }
+        public ProtocolViolationException() : base()
+        {
+        }
 
         /// <devdoc>
         ///    <para>
@@ -30,12 +32,16 @@ namespace System.Net
         ///       class with the specified message.
         ///    </para>
         /// </devdoc>
-        public ProtocolViolationException(string? message) : base(message) { }
+        public ProtocolViolationException(string? message) : base(message)
+        {
+        }
 
         protected ProtocolViolationException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
 
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,

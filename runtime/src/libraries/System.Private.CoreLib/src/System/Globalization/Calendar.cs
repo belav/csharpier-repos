@@ -67,7 +67,9 @@ namespace System.Globalization
 
         public virtual CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.Unknown;
 
-        protected Calendar() { }
+        protected Calendar()
+        {
+        }
 
         internal virtual CalendarId ID => CalendarId.UNINITIALIZED_VALUE;
 

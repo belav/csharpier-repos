@@ -24,7 +24,9 @@ namespace BasicEventSourceTests
                 "#01 02 03 04", // New binary trait
                 "ETW_3",
                 "@Hello" // New string trait
-            ) { }
+            )
+        {
+        }
     }
 
     public class TestsTraits

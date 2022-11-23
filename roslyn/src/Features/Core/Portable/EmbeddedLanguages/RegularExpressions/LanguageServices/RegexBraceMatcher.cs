@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegexBraceMatcher() { }
+        public RegexBraceMatcher()
+        {
+        }
 
         public BraceMatchingResult? FindBraces(
             Project project,

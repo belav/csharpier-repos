@@ -23,7 +23,9 @@ namespace System.Collections.Generic.Tests
             }
         }
 
-        public class HashData<T> : TheoryData<T, int> { }
+        public class HashData<T> : TheoryData<T, int>
+        {
+        }
 
         [Theory]
         [MemberData(nameof(ByteData))]

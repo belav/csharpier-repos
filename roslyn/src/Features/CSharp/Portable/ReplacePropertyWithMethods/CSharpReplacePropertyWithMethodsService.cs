@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpReplacePropertyWithMethodsService() { }
+        public CSharpReplacePropertyWithMethodsService()
+        {
+        }
 
         public override async Task<ImmutableArray<SyntaxNode>> GetReplacementMembersAsync(
             Document document,

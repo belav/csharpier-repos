@@ -16,7 +16,9 @@ namespace Test
             {
                 try
                 {
-                    while (0.0f > m_af[0]) { }
+                    while (0.0f > m_af[0])
+                    {
+                    }
                 }
                 catch (DivideByZeroException)
                 {

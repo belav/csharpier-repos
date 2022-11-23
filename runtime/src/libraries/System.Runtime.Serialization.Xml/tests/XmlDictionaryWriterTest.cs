@@ -333,7 +333,10 @@ public static class XmlDictionaryWriterTest
             null,
             XmlDictionaryReaderQuotas.Max,
             null,
-            new OnXmlDictionaryReaderClose((XmlDictionaryReader reader) => { })
+            new OnXmlDictionaryReaderClose(
+                (XmlDictionaryReader reader) => {
+                }
+            )
         );
         IXmlBinaryReaderInitializer readerInitializer = (IXmlBinaryReaderInitializer)binaryReader;
         readerInitializer.SetInput(
@@ -343,7 +346,10 @@ public static class XmlDictionaryWriterTest
             null,
             XmlDictionaryReaderQuotas.Max,
             null,
-            new OnXmlDictionaryReaderClose((XmlDictionaryReader reader) => { })
+            new OnXmlDictionaryReaderClose(
+                (XmlDictionaryReader reader) => {
+                }
+            )
         );
         binaryReader.ReadContentAsObject();
         binaryReader.Close();

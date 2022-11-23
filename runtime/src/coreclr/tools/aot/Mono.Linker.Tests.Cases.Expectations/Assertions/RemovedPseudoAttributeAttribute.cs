@@ -20,6 +20,8 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     )]
     public class RemovedPseudoAttributeAttribute : BaseExpectedLinkedBehaviorAttribute
     {
-        public RemovedPseudoAttributeAttribute(uint value) { }
+        public RemovedPseudoAttributeAttribute(uint value)
+        {
+        }
     }
 }

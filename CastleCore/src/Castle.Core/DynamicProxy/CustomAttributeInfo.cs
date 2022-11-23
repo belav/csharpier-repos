@@ -84,7 +84,9 @@ namespace Castle.DynamicProxy
                 propertyValues,
                 EmptyFields,
                 EmptyValues
-            ) { }
+            )
+        {
+        }
 
         public CustomAttributeInfo(
             ConstructorInfo constructor,
@@ -99,7 +101,9 @@ namespace Castle.DynamicProxy
                 EmptyValues,
                 namedFields,
                 fieldValues
-            ) { }
+            )
+        {
+        }
 
         public CustomAttributeInfo(ConstructorInfo constructor, object[] constructorArgs)
             : this(
@@ -109,7 +113,9 @@ namespace Castle.DynamicProxy
                 EmptyValues,
                 EmptyFields,
                 EmptyValues
-            ) { }
+            )
+        {
+        }
 
         public static CustomAttributeInfo FromExpression(Expression<Func<Attribute>> expression)
         {

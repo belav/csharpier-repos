@@ -12,7 +12,9 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        public Choices() { }
+        public Choices()
+        {
+        }
 
         public Choices(params string[] phrases)
         {

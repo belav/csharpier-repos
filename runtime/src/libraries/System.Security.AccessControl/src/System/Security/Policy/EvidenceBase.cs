@@ -5,7 +5,9 @@ namespace System.Security.Policy
 {
     public abstract partial class EvidenceBase
     {
-        protected EvidenceBase() { }
+        protected EvidenceBase()
+        {
+        }
 
         public virtual EvidenceBase? Clone()
         {

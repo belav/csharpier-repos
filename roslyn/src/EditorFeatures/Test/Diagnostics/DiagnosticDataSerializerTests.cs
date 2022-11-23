@@ -413,7 +413,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestPersistentStorageServiceFactory() { }
+            public TestPersistentStorageServiceFactory()
+            {
+            }
 
             public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
                 new Service();
@@ -507,7 +509,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         return SpecializedTasks.True;
                     }
 
-                    public void Dispose() { }
+                    public void Dispose()
+                    {
+                    }
 
                     public ValueTask DisposeAsync()
                     {

@@ -537,7 +537,9 @@ namespace System.Xml.XmlSchemaTests
                 )
                 using (var r2 = CreateReader(r1, xss, true))
                 {
-                    while (r2.Read()) { }
+                    while (r2.Read())
+                    {
+                    }
                 }
             }
             catch (XmlException)

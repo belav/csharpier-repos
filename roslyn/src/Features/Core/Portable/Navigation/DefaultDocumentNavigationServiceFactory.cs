@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Navigation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDocumentNavigationServiceFactory() { }
+        public DefaultDocumentNavigationServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {

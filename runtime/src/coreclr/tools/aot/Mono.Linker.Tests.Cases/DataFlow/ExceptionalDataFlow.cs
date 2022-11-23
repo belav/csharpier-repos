@@ -421,7 +421,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void CatchFlowsToFinally()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch
             {
                 t = GetWithPublicFields();
@@ -448,7 +450,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void CatchFlowsToAfterTry()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch
             {
                 t = GetWithPublicFields();
@@ -472,13 +476,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void CatchFlowsToAfterFinally()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch
             {
                 t = GetWithPublicFields();
                 t = GetWithPublicProperties();
             }
-            finally { }
+            finally
+            {
+            }
             // methods/properties, not fields
             RequireAll(t);
         }
@@ -491,7 +499,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void FinallyFlowsToAfterFinally()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             finally
             {
                 t = GetWithPublicFields();
@@ -501,9 +511,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             RequireAll(t);
         }
 
-        public class Exception1 : Exception { }
+        public class Exception1 : Exception
+        {
+        }
 
-        public class Exception2 : Exception { }
+        public class Exception2 : Exception
+        {
+        }
 
         [ExpectedWarning(
             "IL2072",
@@ -912,14 +926,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             try
             {
                 Type t = GetWithPublicMethods();
-                try { }
+                try
+                {
+                }
                 catch
                 {
                     t = GetWithPublicFields();
                     RequireAll(t);
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         // This tests a case where the catch state was being merged with the containing try state incorrectly.
@@ -977,7 +995,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     RequireAll2(t);
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         [ExpectedWarning(
@@ -995,7 +1015,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void TestCatchesHaveSeparateState()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch (Exception1)
             {
                 t = GetWithPublicFields();
@@ -1005,7 +1027,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 // methods only!
                 RequireAll(t);
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         [ExpectedWarning(
@@ -1022,7 +1046,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void FinallyWithBranchToFirstBlock()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             finally
             {
                 FinallyStart:
@@ -1049,7 +1075,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 Type t = GetWithPublicProperties();
                 t = GetWithPublicMethods();
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     FinallyStart:
@@ -1081,7 +1109,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void CatchWithBranchToFirstBlock()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch
             {
                 CatchStart:
@@ -1105,7 +1135,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void CatchWithBranchToFirstBlockAndReassignment()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch
             {
                 CatchStart:
@@ -1442,7 +1474,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void ExceptionFilterStateChange()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch (Exception) when (RequireAllTrue(t = GetWithPublicFields()))
             {
                 RequireAll(t);
@@ -1570,7 +1604,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void ExceptionMultipleFilters()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch (Exception) when (RequireAllFalse(t = GetWithPublicFields()))
             {
                 RequireAll(t);
@@ -1616,7 +1652,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void ExceptionFilterWithBranch()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch (Exception)
                 when (string.Empty.Length == 0
                         ? (t = GetWithPublicFields()) == null
@@ -1625,7 +1663,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 RequireAll(t);
             }
-            catch (Exception) when (RequireAllTrue(t)) { }
+            catch (Exception) when (RequireAllTrue(t))
+            {
+            }
             catch
             {
                 RequireAll2(t);
@@ -1648,12 +1688,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public static void ExceptionFilterWithException()
         {
             Type t = GetWithPublicMethods();
-            try { }
+            try
+            {
+            }
             catch (Exception)
                 when ((t = GetWithPublicFields()) != null
                         ? (t = GetWithPublicProperties()) == null
                         : (t = GetWithPublicProperties()) == null
-                ) { }
+                )
+            {
+            }
             catch (Exception1)
             {
                 // An exception thrown from the above filter could result in methods, fields, or properties here,
@@ -1720,34 +1764,50 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         public static void RequireAll(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
 
         public static void RequireAll1(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
 
         public static void RequireAll2(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
 
         public static void RequireAll3(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
 
         public static void RequireAll4(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
 
         public static void RequireAll5(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
 
         public static void RequireAll6(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
 
         public static void RequireAll7(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
     }
 }

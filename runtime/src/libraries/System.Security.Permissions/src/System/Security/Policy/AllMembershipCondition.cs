@@ -8,7 +8,9 @@ namespace System.Security.Policy
             ISecurityPolicyEncodable,
             IMembershipCondition
     {
-        public AllMembershipCondition() { }
+        public AllMembershipCondition()
+        {
+        }
 
         public bool Check(Evidence evidence)
         {
@@ -22,9 +24,13 @@ namespace System.Security.Policy
 
         public override bool Equals(object o) => base.Equals(o);
 
-        public void FromXml(SecurityElement e) { }
+        public void FromXml(SecurityElement e)
+        {
+        }
 
-        public void FromXml(SecurityElement e, PolicyLevel level) { }
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 

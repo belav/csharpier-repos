@@ -60,6 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             this.DefaultVisit(trivia);
         }
 
-        public virtual void DefaultVisit(CSharpSyntaxNode node) { }
+        public virtual void DefaultVisit(CSharpSyntaxNode node)
+        {
+        }
     }
 }

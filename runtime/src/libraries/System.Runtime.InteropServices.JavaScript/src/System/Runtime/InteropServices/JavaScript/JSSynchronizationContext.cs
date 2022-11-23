@@ -52,7 +52,9 @@ namespace System.Runtime.InteropServices.JavaScript
                         AllowSynchronousContinuations = true
                     }
                 )
-            ) { }
+            )
+        {
+        }
 
         private JSSynchronizationContext(Thread mainThread, QueueType queue)
         {

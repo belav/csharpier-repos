@@ -8,7 +8,9 @@ namespace System.Reflection.Emit
 {
     public sealed partial class DynamicILInfo
     {
-        internal DynamicILInfo() { }
+        internal DynamicILInfo()
+        {
+        }
 
         public System.Reflection.Emit.DynamicMethod DynamicMethod
         {
@@ -62,19 +64,31 @@ namespace System.Reflection.Emit
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe void SetCode(byte* code, int codeSize, int maxStackSize) { }
+        public unsafe void SetCode(byte* code, int codeSize, int maxStackSize)
+        {
+        }
 
-        public void SetCode(byte[]? code, int maxStackSize) { }
+        public void SetCode(byte[]? code, int maxStackSize)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe void SetExceptions(byte* exceptions, int exceptionsSize) { }
+        public unsafe void SetExceptions(byte* exceptions, int exceptionsSize)
+        {
+        }
 
-        public void SetExceptions(byte[]? exceptions) { }
+        public void SetExceptions(byte[]? exceptions)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe void SetLocalSignature(byte* localSignature, int signatureSize) { }
+        public unsafe void SetLocalSignature(byte* localSignature, int signatureSize)
+        {
+        }
 
-        public void SetLocalSignature(byte[]? localSignature) { }
+        public void SetLocalSignature(byte[]? localSignature)
+        {
+        }
     }
 
     public sealed partial class DynamicMethod : System.Reflection.MethodInfo
@@ -90,7 +104,9 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Reflection.Module m,
             bool skipVisibility
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."
@@ -103,13 +119,16 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type owner,
             bool skipVisibility
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."
         )]
         public DynamicMethod(string name, System.Type? returnType, System.Type[]? parameterTypes)
-        { }
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."
@@ -119,7 +138,9 @@ namespace System.Reflection.Emit
             System.Type? returnType,
             System.Type[]? parameterTypes,
             bool restrictedSkipVisibility
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."
@@ -129,7 +150,9 @@ namespace System.Reflection.Emit
             System.Type? returnType,
             System.Type[]? parameterTypes,
             System.Reflection.Module m
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."
@@ -140,7 +163,9 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Reflection.Module m,
             bool skipVisibility
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."
@@ -150,7 +175,9 @@ namespace System.Reflection.Emit
             System.Type? returnType,
             System.Type[]? parameterTypes,
             System.Type owner
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."
@@ -161,7 +188,9 @@ namespace System.Reflection.Emit
             System.Type[]? parameterTypes,
             System.Type owner,
             bool skipVisibility
-        ) { }
+        )
+        {
+        }
 
         public override System.Reflection.MethodAttributes Attributes
         {
@@ -178,7 +207,9 @@ namespace System.Reflection.Emit
         public bool InitLocals
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool IsSecurityCritical
         {

@@ -54,7 +54,9 @@ namespace System.Reflection.CustomAttributesTests.Data
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public class Attr : Attribute
     {
-        public Attr() { }
+        public Attr()
+        {
+        }
 
         public Attr(int i)
         {
@@ -399,9 +401,13 @@ namespace System.Reflection.CustomAttributesTests.Data
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public class NullAttr : Attribute
     {
-        public NullAttr(string s, Type t, int[] a) { }
+        public NullAttr(string s, Type t, int[] a)
+        {
+        }
 
-        public NullAttr(string s) { }
+        public NullAttr(string s)
+        {
+        }
 
         public string name;
 
@@ -411,17 +417,23 @@ namespace System.Reflection.CustomAttributesTests.Data
         public string stringProperty
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public Type typeProperty
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public int[] arrayProperty
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

@@ -2219,7 +2219,9 @@ namespace System.Data
                 _current = default(K);
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

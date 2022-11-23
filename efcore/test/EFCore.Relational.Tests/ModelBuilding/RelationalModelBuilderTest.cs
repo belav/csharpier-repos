@@ -636,9 +636,25 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
             modelBuilder
                 .Entity<BookLabel>()
-                .InsertUsingStoredProcedure("Insert", s => { })
-                .UpdateUsingStoredProcedure("Update", "dbo", s => { })
-                .DeleteUsingStoredProcedure("BookLabel_Delete", s => { });
+                .InsertUsingStoredProcedure(
+                    "Insert",
+                    s =>
+                    {
+                    }
+                )
+                .UpdateUsingStoredProcedure(
+                    "Update",
+                    "dbo",
+                    s =>
+                    {
+                    }
+                )
+                .DeleteUsingStoredProcedure(
+                    "BookLabel_Delete",
+                    s =>
+                    {
+                    }
+                );
 
             var model = modelBuilder.FinalizeModel();
 
@@ -795,13 +811,21 @@ public class RelationalModelBuilderTest : ModelBuilderTest
         }
     }
 
-    public abstract class RelationalOneToManyTestBase : OneToManyTestBase { }
+    public abstract class RelationalOneToManyTestBase : OneToManyTestBase
+    {
+    }
 
-    public abstract class RelationalManyToOneTestBase : ManyToOneTestBase { }
+    public abstract class RelationalManyToOneTestBase : ManyToOneTestBase
+    {
+    }
 
-    public abstract class RelationalOneToOneTestBase : OneToOneTestBase { }
+    public abstract class RelationalOneToOneTestBase : OneToOneTestBase
+    {
+    }
 
-    public abstract class RelationalManyToManyTestBase : ManyToManyTestBase { }
+    public abstract class RelationalManyToManyTestBase : ManyToManyTestBase
+    {
+    }
 
     public abstract class RelationalOwnedTypesTestBase : OwnedTypesTestBase
     {
@@ -1060,9 +1084,25 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                     b => b.Label,
                     lb =>
                     {
-                        lb.InsertUsingStoredProcedure("Insert", s => { });
-                        lb.UpdateUsingStoredProcedure("Update", "dbo", s => { });
-                        lb.DeleteUsingStoredProcedure("BookLabel_Delete", s => { });
+                        lb.InsertUsingStoredProcedure(
+                            "Insert",
+                            s =>
+                            {
+                            }
+                        );
+                        lb.UpdateUsingStoredProcedure(
+                            "Update",
+                            "dbo",
+                            s =>
+                            {
+                            }
+                        );
+                        lb.DeleteUsingStoredProcedure(
+                            "BookLabel_Delete",
+                            s =>
+                            {
+                            }
+                        );
                     }
                 );
 
@@ -3252,7 +3292,9 @@ public class RelationalModelBuilderTest : ModelBuilderTest
     public abstract class TestTableValuedFunctionBuilder<TEntity> : DbFunctionBuilderBase
         where TEntity : class
     {
-        protected TestTableValuedFunctionBuilder(IMutableDbFunction function) : base(function) { }
+        protected TestTableValuedFunctionBuilder(IMutableDbFunction function) : base(function)
+        {
+        }
 
         public new abstract TestTableValuedFunctionBuilder<TEntity> HasName(string name);
 

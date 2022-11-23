@@ -19,7 +19,9 @@ internal class ForwardingLoggerProvider : ILoggerProvider
         return new ForwardingLogger(categoryName, _logAction);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     internal class ForwardingLogger : ILogger
     {

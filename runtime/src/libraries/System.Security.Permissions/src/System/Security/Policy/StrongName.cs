@@ -14,7 +14,9 @@ namespace System.Security.Policy
 #endif
     public sealed partial class StrongName : EvidenceBase, IIdentityPermissionFactory
     {
-        public StrongName(StrongNamePublicKeyBlob blob, string name, Version version) { }
+        public StrongName(StrongNamePublicKeyBlob blob, string name, Version version)
+        {
+        }
 
         public string Name
         {

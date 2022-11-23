@@ -392,10 +392,12 @@ public class RefStat
     }
 }
 
-public struct ValInst { //Instance methods on a value class
+public struct ValInst
+{ //Instance methods on a value class
 }
 
-public struct ValStat { //Static methods on a value class
+public struct ValStat
+{ //Static methods on a value class
 }
 
 //Some reusable helper methods

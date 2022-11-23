@@ -14,15 +14,23 @@ namespace System.Globalization
         private readonly string? _invalidCultureName; // unrecognized culture name
         private readonly int? _invalidCultureId; // unrecognized culture Lcid
 
-        public CultureNotFoundException() : base(DefaultMessage) { }
+        public CultureNotFoundException() : base(DefaultMessage)
+        {
+        }
 
-        public CultureNotFoundException(string? message) : base(message) { }
+        public CultureNotFoundException(string? message) : base(message)
+        {
+        }
 
         public CultureNotFoundException(string? paramName, string? message)
-            : base(message, paramName) { }
+            : base(message, paramName)
+        {
+        }
 
         public CultureNotFoundException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         public CultureNotFoundException(
             string? paramName,

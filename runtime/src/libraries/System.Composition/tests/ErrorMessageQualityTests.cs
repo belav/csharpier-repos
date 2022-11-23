@@ -16,7 +16,9 @@ namespace System.Composition.UnitTests
 {
     public class ErrorMessageQualityTests : ContainerTests
     {
-        public class Unregistered { }
+        public class Unregistered
+        {
+        }
 
         [Export]
         public class UserOfUnregistered
@@ -47,7 +49,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export]
-        public class ShouldBeOne { }
+        public class ShouldBeOne
+        {
+        }
 
         public class ButThereIsAnother
         {

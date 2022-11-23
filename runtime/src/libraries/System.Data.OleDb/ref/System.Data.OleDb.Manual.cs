@@ -14,7 +14,9 @@ namespace System.Data.OleDb
             System.ICloneable
     {
         internal sealed class OleDbParameterConverter
-            : System.ComponentModel.ExpandableObjectConverter { }
+            : System.ComponentModel.ExpandableObjectConverter
+        {
+        }
     }
 
     [System.ComponentModel.TypeConverterAttribute(
@@ -31,7 +33,9 @@ namespace System.Data.OleDb
         public int OleDbServices
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DisplayNameAttribute("Provider")]
@@ -42,14 +46,22 @@ namespace System.Data.OleDb
         public string Provider
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        internal sealed class OleDbConnectionStringBuilderConverter { }
+        internal sealed class OleDbConnectionStringBuilderConverter
+        {
+        }
 
-        internal sealed class OleDbServicesConverter { }
+        internal sealed class OleDbServicesConverter
+        {
+        }
 
-        internal sealed class OleDbProviderConverter { }
+        internal sealed class OleDbProviderConverter
+        {
+        }
     }
 
     public sealed partial class OleDbException
@@ -60,6 +72,8 @@ namespace System.Data.OleDb
             get { throw null; }
         }
 
-        internal sealed class ErrorCodeConverter { }
+        internal sealed class ErrorCodeConverter
+        {
+        }
     }
 }

@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
     }

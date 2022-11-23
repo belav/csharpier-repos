@@ -49,7 +49,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy) { }
+        public static void Foo(T dummy)
+        {
+        }
     }
 
     internal static partial class ConstraintsTestExtensions1<T> where T : struct
@@ -57,7 +59,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy) { }
+        public static void Foo(T dummy)
+        {
+        }
     }
 
     internal static partial class ConstraintsTestExtensions2<T> where T : unmanaged
@@ -65,7 +69,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy) { }
+        public static void Foo(T dummy)
+        {
+        }
     }
 
     internal static partial class ConstraintsTestExtensions3<T> where T : new()
@@ -73,7 +79,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy) { }
+        public static void Foo(T dummy)
+        {
+        }
     }
 
     internal static partial class ConstraintsTestExtensions4<T> where T : System.Attribute
@@ -81,7 +89,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy) { }
+        public static void Foo(T dummy)
+        {
+        }
     }
 
     internal static partial class ConstraintsTestExtensions5<T> where T : notnull
@@ -89,7 +99,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
         public static partial void M0(ILogger logger, int p0);
 
-        public static void Foo(T dummy) { }
+        public static void Foo(T dummy)
+        {
+        }
     }
 }
 

@@ -125,7 +125,9 @@ internal class TestUtils
     {
         if (configureDelegate == null)
         {
-            configureDelegate = app => { };
+            configureDelegate = app =>
+            {
+            };
         }
         if (requestDelegates == null)
         {

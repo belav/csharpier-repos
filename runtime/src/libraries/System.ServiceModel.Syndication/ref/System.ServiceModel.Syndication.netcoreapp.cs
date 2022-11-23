@@ -11,7 +11,9 @@ namespace System.ServiceModel.Syndication
         public System.ServiceModel.Syndication.SyndicationLink Documentation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ObjectModel.Collection<string> SkipDays
         {
@@ -24,12 +26,16 @@ namespace System.ServiceModel.Syndication
         public System.ServiceModel.Syndication.SyndicationTextInput TextInput
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? TimeToLive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -38,38 +44,52 @@ namespace System.ServiceModel.Syndication
         public System.ServiceModel.Syndication.TryParseDateTimeCallback DateTimeParser
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.ServiceModel.Syndication.TryParseUriCallback UriParser
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class SyndicationTextInput
     {
-        public SyndicationTextInput() { }
+        public SyndicationTextInput()
+        {
+        }
 
         public string Description
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.ServiceModel.Syndication.SyndicationLink Link
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Title
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 

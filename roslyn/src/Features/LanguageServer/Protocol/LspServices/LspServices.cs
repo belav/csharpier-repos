@@ -177,7 +177,9 @@ internal class LspServices : ILspServices
             {
                 disposableService.Dispose();
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+            {
+            }
         }
     }
 }

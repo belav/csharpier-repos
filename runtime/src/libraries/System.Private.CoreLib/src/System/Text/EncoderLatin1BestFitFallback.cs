@@ -16,7 +16,9 @@ namespace System.Text
         internal static readonly EncoderLatin1BestFitFallback SingletonInstance =
             new EncoderLatin1BestFitFallback();
 
-        private EncoderLatin1BestFitFallback() { }
+        private EncoderLatin1BestFitFallback()
+        {
+        }
 
         public override EncoderFallbackBuffer CreateFallbackBuffer() =>
             new EncoderLatin1BestFitFallbackBuffer();

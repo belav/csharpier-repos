@@ -6,9 +6,13 @@ namespace System.Runtime.Serialization
     // This type exists for public surface compatibility only.
     public sealed class SafeSerializationEventArgs : EventArgs
     {
-        private SafeSerializationEventArgs() { }
+        private SafeSerializationEventArgs()
+        {
+        }
 
-        public void AddSerializedState(ISafeSerializationData serializedState) { }
+        public void AddSerializedState(ISafeSerializationData serializedState)
+        {
+        }
 
         public StreamingContext StreamingContext { get; }
     }

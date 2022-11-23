@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
         public CSharpOrderModifiersCodeFixProvider()
-            : base(CSharpSyntaxFacts.Instance, CSharpOrderModifiersHelper.Instance) { }
+            : base(CSharpSyntaxFacts.Instance, CSharpOrderModifiersHelper.Instance)
+        {
+        }
 
         protected override CodeStyleOption2<string> GetCodeStyleOption(
             AnalyzerOptionsProvider options

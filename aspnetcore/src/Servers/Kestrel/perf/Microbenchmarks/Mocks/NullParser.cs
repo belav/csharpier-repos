@@ -51,5 +51,7 @@ internal sealed class NullParser<TRequestHandler> : IHttpParser<TRequestHandler>
         return true;
     }
 
-    public void Reset() { }
+    public void Reset()
+    {
+    }
 }

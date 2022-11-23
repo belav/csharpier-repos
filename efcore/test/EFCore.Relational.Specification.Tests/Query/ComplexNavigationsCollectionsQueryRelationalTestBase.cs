@@ -8,5 +8,6 @@ public abstract class ComplexNavigationsCollectionsQueryRelationalTestBase<TFixt
     where TFixture : ComplexNavigationsQueryFixtureBase, new()
 {
     protected ComplexNavigationsCollectionsQueryRelationalTestBase(TFixture fixture) : base(fixture)
-    { }
+    {
+    }
 }

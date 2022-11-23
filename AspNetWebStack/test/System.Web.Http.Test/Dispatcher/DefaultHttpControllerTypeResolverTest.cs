@@ -255,56 +255,102 @@ namespace System.Web.Http.Dispatcher
             return typeof(InvalidProtectedNestedController);
         }
 
-        public class ValidNestedController : ApiController { }
+        public class ValidNestedController : ApiController
+        {
+        }
 
-        public abstract class InvalidAbstractNestedController : ApiController { }
+        public abstract class InvalidAbstractNestedController : ApiController
+        {
+        }
 
-        public class ValidInheritedNestedController : InvalidAbstractNestedController { }
+        public class ValidInheritedNestedController : InvalidAbstractNestedController
+        {
+        }
 
-        protected class InvalidProtectedNestedController : ApiController { }
+        protected class InvalidProtectedNestedController : ApiController
+        {
+        }
 
-        private class InvalidPrivateNestedController : ApiController { }
+        private class InvalidPrivateNestedController : ApiController
+        {
+        }
 
-        internal class InvalidInternalNestedController : ApiController { }
+        internal class InvalidInternalNestedController : ApiController
+        {
+        }
 
         public class ControllerNestedWrapper
         {
-            public class ValidNestedNestedController : ApiController { }
+            public class ValidNestedNestedController : ApiController
+            {
+            }
         }
     }
 
-    public abstract class InvalidAbstractController : ApiController { }
+    public abstract class InvalidAbstractController : ApiController
+    {
+    }
 
-    public struct InvalidControllerStruct { }
+    public struct InvalidControllerStruct
+    {
+    }
 
-    public class ControllerPrefix { }
+    public class ControllerPrefix
+    {
+    }
 
-    public class InvalidControllerWithInconsistentName : ApiController { }
+    public class InvalidControllerWithInconsistentName : ApiController
+    {
+    }
 
-    public class InvalidControllerWithNoBaseType { }
+    public class InvalidControllerWithNoBaseType
+    {
+    }
 
-    public sealed class ValidSealedController : ApiController { }
+    public sealed class ValidSealedController : ApiController
+    {
+    }
 
-    public partial class ValidPartialController : ApiController { }
+    public partial class ValidPartialController : ApiController
+    {
+    }
 
-    public partial class ValidPartialController { }
+    public partial class ValidPartialController
+    {
+    }
 
-    public class ValidInheritedController : InvalidAbstractController { }
+    public class ValidInheritedController : InvalidAbstractController
+    {
+    }
 
-    public class Controller : ApiController { }
+    public class Controller : ApiController
+    {
+    }
 
-    public class Ctrl : ApiController { }
+    public class Ctrl : ApiController
+    {
+    }
 
-    public class validcontroller : ApiController { }
+    public class validcontroller : ApiController
+    {
+    }
 
-    public class ValidController : ApiController { }
+    public class ValidController : ApiController
+    {
+    }
 
-    public class VALIDController : ApiController { }
+    public class VALIDController : ApiController
+    {
+    }
 
-    public class VALIDCONTROLLER : ApiController { }
+    public class VALIDCONTROLLER : ApiController
+    {
+    }
 
     public class InheritedControllerHidingWrapper : ControllerWrapper
     {
-        public new class ValidNestedController : ControllerWrapper.ValidNestedController { }
+        public new class ValidNestedController : ControllerWrapper.ValidNestedController
+        {
+        }
     }
 }

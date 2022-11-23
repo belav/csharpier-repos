@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Formatting
     {
         private static readonly Func<TextSpan, bool> s_notEmpty = s => !s.IsEmpty;
 
-        protected AbstractSyntaxFormatting() { }
+        protected AbstractSyntaxFormatting()
+        {
+        }
 
         public abstract SyntaxFormattingOptions DefaultOptions { get; }
         public abstract SyntaxFormattingOptions GetFormattingOptions(

@@ -10,7 +10,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
     public class PreviewChangesDialog_OutOfProc : OutOfProcComponent
     {
         public PreviewChangesDialog_OutOfProc(VisualStudioInstance visualStudioInstance)
-            : base(visualStudioInstance) { }
+            : base(visualStudioInstance)
+        {
+        }
 
         /// <summary>
         /// Verifies that the Preview Changes dialog is showing with the

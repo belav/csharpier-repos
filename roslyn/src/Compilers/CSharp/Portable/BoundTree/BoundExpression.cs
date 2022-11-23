@@ -270,7 +270,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 false,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundLocal Update(
             LocalSymbol localSymbol,

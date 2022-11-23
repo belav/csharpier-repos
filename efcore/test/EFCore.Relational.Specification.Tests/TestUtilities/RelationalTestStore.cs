@@ -21,7 +21,9 @@ public abstract class RelationalTestStore : TestStore
 
     protected virtual DbConnection Connection { get; set; }
 
-    protected RelationalTestStore(string name, bool shared) : base(name, shared) { }
+    protected RelationalTestStore(string name, bool shared) : base(name, shared)
+    {
+    }
 
     public override TestStore Initialize(
         IServiceProvider serviceProvider,

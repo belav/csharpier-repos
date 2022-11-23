@@ -13,7 +13,9 @@ namespace MS.Internal.Xml.XPath
     {
         private IXsltContextVariable? _variable;
 
-        public VariableQuery(string name, string prefix) : base(prefix, name) { }
+        public VariableQuery(string name, string prefix) : base(prefix, name)
+        {
+        }
 
         private VariableQuery(VariableQuery other) : base(other)
         {

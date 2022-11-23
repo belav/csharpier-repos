@@ -23,19 +23,25 @@ namespace System.Data.OracleClient
     )]
     public sealed class OraclePermissionAttribute : CodeAccessSecurityAttribute
     {
-        public OraclePermissionAttribute(SecurityAction action) : base(action) { }
+        public OraclePermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public bool AllowBlankPassword { get; set; }
         public string ConnectionString
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public KeyRestrictionBehavior KeyRestrictionBehavior { get; set; }
         public string KeyRestrictions
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override Security.IPermission CreatePermission()

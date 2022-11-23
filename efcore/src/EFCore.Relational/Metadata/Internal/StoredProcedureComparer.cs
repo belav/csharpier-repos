@@ -14,7 +14,9 @@ public sealed class StoredProcedureComparer
     : IEqualityComparer<IStoredProcedure>,
         IComparer<IStoredProcedure>
 {
-    private StoredProcedureComparer() { }
+    private StoredProcedureComparer()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public interface IRazorTagHelperBinderPhase : IRazorEnginePhase { }
+public interface IRazorTagHelperBinderPhase : IRazorEnginePhase
+{
+}

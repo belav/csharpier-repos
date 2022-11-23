@@ -344,7 +344,9 @@ namespace Microsoft.Extensions.Caching.Memory
 
         internal class TestDisposable : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

@@ -8,44 +8,61 @@ namespace System.Diagnostics
 {
     public partial class CounterCreationData
     {
-        public CounterCreationData() { }
+        public CounterCreationData()
+        {
+        }
 
         public CounterCreationData(
             string counterName,
             string counterHelp,
             System.Diagnostics.PerformanceCounterType counterType
-        ) { }
+        )
+        {
+        }
 
         public string CounterHelp
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string CounterName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.PerformanceCounterType CounterType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CounterCreationDataCollection : System.Collections.CollectionBase
     {
-        public CounterCreationDataCollection() { }
+        public CounterCreationDataCollection()
+        {
+        }
 
         public CounterCreationDataCollection(System.Diagnostics.CounterCreationDataCollection value)
-        { }
+        {
+        }
 
-        public CounterCreationDataCollection(System.Diagnostics.CounterCreationData[] value) { }
+        public CounterCreationDataCollection(System.Diagnostics.CounterCreationData[] value)
+        {
+        }
 
         public System.Diagnostics.CounterCreationData this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Diagnostics.CounterCreationData value)
@@ -53,27 +70,39 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void AddRange(System.Diagnostics.CounterCreationDataCollection value) { }
+        public void AddRange(System.Diagnostics.CounterCreationDataCollection value)
+        {
+        }
 
-        public void AddRange(System.Diagnostics.CounterCreationData[] value) { }
+        public void AddRange(System.Diagnostics.CounterCreationData[] value)
+        {
+        }
 
         public bool Contains(System.Diagnostics.CounterCreationData value)
         {
             throw null;
         }
 
-        public void CopyTo(System.Diagnostics.CounterCreationData[] array, int index) { }
+        public void CopyTo(System.Diagnostics.CounterCreationData[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Diagnostics.CounterCreationData value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.Diagnostics.CounterCreationData value) { }
+        public void Insert(int index, System.Diagnostics.CounterCreationData value)
+        {
+        }
 
-        protected override void OnValidate(object value) { }
+        protected override void OnValidate(object value)
+        {
+        }
 
-        public virtual void Remove(System.Diagnostics.CounterCreationData value) { }
+        public virtual void Remove(System.Diagnostics.CounterCreationData value)
+        {
+        }
     }
 
     public readonly partial struct CounterSample
@@ -219,7 +248,9 @@ namespace System.Diagnostics
 
     public partial class InstanceData
     {
-        public InstanceData(string instanceName, System.Diagnostics.CounterSample sample) { }
+        public InstanceData(string instanceName, System.Diagnostics.CounterSample sample)
+        {
+        }
 
         public string InstanceName
         {
@@ -240,7 +271,9 @@ namespace System.Diagnostics
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use System.Diagnostics.InstanceDataCollectionCollection.get_Item to get an instance of this collection instead."
         )]
-        public InstanceDataCollection(string counterName) { }
+        public InstanceDataCollection(string counterName)
+        {
+        }
 
         public string CounterName
         {
@@ -264,7 +297,9 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void CopyTo(System.Diagnostics.InstanceData[] instances, int index) { }
+        public void CopyTo(System.Diagnostics.InstanceData[] instances, int index)
+        {
+        }
     }
 
     public partial class InstanceDataCollectionCollection : System.Collections.DictionaryBase
@@ -272,7 +307,9 @@ namespace System.Diagnostics
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use System.Diagnostics.PerformanceCounterCategory.ReadCategory() to get an instance of this collection instead."
         )]
-        public InstanceDataCollectionCollection() { }
+        public InstanceDataCollectionCollection()
+        {
+        }
 
         public System.Diagnostics.InstanceDataCollection this[string counterName]
         {
@@ -292,7 +329,9 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void CopyTo(System.Diagnostics.InstanceDataCollection[] counters, int index) { }
+        public void CopyTo(System.Diagnostics.InstanceDataCollection[] counters, int index)
+        {
+        }
     }
 
     public sealed partial class PerformanceCounter
@@ -304,32 +343,46 @@ namespace System.Diagnostics
         )]
         public static int DefaultFileMappingSize;
 
-        public PerformanceCounter() { }
+        public PerformanceCounter()
+        {
+        }
 
-        public PerformanceCounter(string categoryName, string counterName) { }
+        public PerformanceCounter(string categoryName, string counterName)
+        {
+        }
 
-        public PerformanceCounter(string categoryName, string counterName, bool readOnly) { }
+        public PerformanceCounter(string categoryName, string counterName, bool readOnly)
+        {
+        }
 
-        public PerformanceCounter(string categoryName, string counterName, string instanceName) { }
+        public PerformanceCounter(string categoryName, string counterName, string instanceName)
+        {
+        }
 
         public PerformanceCounter(
             string categoryName,
             string counterName,
             string instanceName,
             bool readOnly
-        ) { }
+        )
+        {
+        }
 
         public PerformanceCounter(
             string categoryName,
             string counterName,
             string instanceName,
             string machineName
-        ) { }
+        )
+        {
+        }
 
         public string CategoryName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string CounterHelp
         {
@@ -338,7 +391,9 @@ namespace System.Diagnostics
         public string CounterName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.PerformanceCounterType CounterType
         {
@@ -347,43 +402,63 @@ namespace System.Diagnostics
         public System.Diagnostics.PerformanceCounterInstanceLifetime InstanceLifetime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string InstanceName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string MachineName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long RawValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ReadOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void BeginInit() { }
+        public void BeginInit()
+        {
+        }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public static void CloseSharedResources() { }
+        public static void CloseSharedResources()
+        {
+        }
 
         public long Decrement()
         {
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public void EndInit() { }
+        public void EndInit()
+        {
+        }
 
         public long Increment()
         {
@@ -405,16 +480,24 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void RemoveInstance() { }
+        public void RemoveInstance()
+        {
+        }
     }
 
     public sealed partial class PerformanceCounterCategory
     {
-        public PerformanceCounterCategory() { }
+        public PerformanceCounterCategory()
+        {
+        }
 
-        public PerformanceCounterCategory(string categoryName) { }
+        public PerformanceCounterCategory(string categoryName)
+        {
+        }
 
-        public PerformanceCounterCategory(string categoryName, string machineName) { }
+        public PerformanceCounterCategory(string categoryName, string machineName)
+        {
+        }
 
         public string CategoryHelp
         {
@@ -423,7 +506,9 @@ namespace System.Diagnostics
         public string CategoryName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.PerformanceCounterCategoryType CategoryType
         {
@@ -432,7 +517,9 @@ namespace System.Diagnostics
         public string MachineName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool CounterExists(string counterName)
@@ -500,7 +587,9 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public static void Delete(string categoryName) { }
+        public static void Delete(string categoryName)
+        {
+        }
 
         public static bool Exists(string categoryName)
         {
@@ -582,12 +671,16 @@ namespace System.Diagnostics
         [System.ObsoleteAttribute(
             "PerformanceCounterManager has been deprecated. Use the PerformanceCounters through the System.Diagnostics.PerformanceCounter class instead."
         )]
-        public PerformanceCounterManager() { }
+        public PerformanceCounterManager()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "PerformanceCounterManager has been deprecated. Use the PerformanceCounters through the System.Diagnostics.PerformanceCounter class instead."
         )]
-        void System.Diagnostics.ICollectData.CloseData() { }
+        void System.Diagnostics.ICollectData.CloseData()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "PerformanceCounterManager has been deprecated. Use the PerformanceCounters through the System.Diagnostics.PerformanceCounter class instead."
@@ -641,24 +734,36 @@ namespace System.Diagnostics.PerformanceData
 {
     public sealed partial class CounterData
     {
-        internal CounterData() { }
+        internal CounterData()
+        {
+        }
 
         public long RawValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Decrement() { }
+        public void Decrement()
+        {
+        }
 
-        public void Increment() { }
+        public void Increment()
+        {
+        }
 
-        public void IncrementBy(long value) { }
+        public void IncrementBy(long value)
+        {
+        }
     }
 
     public partial class CounterSet : System.IDisposable
@@ -667,18 +772,24 @@ namespace System.Diagnostics.PerformanceData
             System.Guid providerGuid,
             System.Guid counterSetGuid,
             System.Diagnostics.PerformanceData.CounterSetInstanceType instanceType
-        ) { }
+        )
+        {
+        }
 
         public void AddCounter(
             int counterId,
             System.Diagnostics.PerformanceData.CounterType counterType
-        ) { }
+        )
+        {
+        }
 
         public void AddCounter(
             int counterId,
             System.Diagnostics.PerformanceData.CounterType counterType,
             string counterName
-        ) { }
+        )
+        {
+        }
 
         public System.Diagnostics.PerformanceData.CounterSetInstance CreateCounterSetInstance(
             string instanceName
@@ -687,30 +798,44 @@ namespace System.Diagnostics.PerformanceData
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~CounterSet() { }
+        ~CounterSet()
+        {
+        }
     }
 
     public sealed partial class CounterSetInstance : System.IDisposable
     {
-        internal CounterSetInstance() { }
+        internal CounterSetInstance()
+        {
+        }
 
         public System.Diagnostics.PerformanceData.CounterSetInstanceCounterDataSet Counters
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        ~CounterSetInstance() { }
+        ~CounterSetInstance()
+        {
+        }
     }
 
     public sealed partial class CounterSetInstanceCounterDataSet : System.IDisposable
     {
-        internal CounterSetInstanceCounterDataSet() { }
+        internal CounterSetInstanceCounterDataSet()
+        {
+        }
 
         public System.Diagnostics.PerformanceData.CounterData this[int counterId]
         {
@@ -721,9 +846,13 @@ namespace System.Diagnostics.PerformanceData
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        ~CounterSetInstanceCounterDataSet() { }
+        ~CounterSetInstanceCounterDataSet()
+        {
+        }
     }
 
     public enum CounterSetInstanceType

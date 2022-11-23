@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         public CompilationStartedEvent(Compilation compilation)
-            : this(compilation, ImmutableArray<AdditionalText>.Empty) { }
+            : this(compilation, ImmutableArray<AdditionalText>.Empty)
+        {
+        }
 
         public override string ToString()
         {

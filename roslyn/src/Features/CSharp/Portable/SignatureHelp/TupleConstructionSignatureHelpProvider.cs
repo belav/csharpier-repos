@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TupleConstructionSignatureHelpProvider() { }
+        public TupleConstructionSignatureHelpProvider()
+        {
+        }
 
         private SignatureHelpState? GetCurrentArgumentState(
             SyntaxNode root,

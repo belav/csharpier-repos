@@ -25,7 +25,9 @@ namespace System.Net.Http.Functional.Tests
         private const string UserName = "user1";
         private const string Password = "PLACEHOLDER";
 
-        public PostScenarioTest(ITestOutputHelper output) : base(output) { }
+        public PostScenarioTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
 #if !NETFRAMEWORK
         [OuterLoop(

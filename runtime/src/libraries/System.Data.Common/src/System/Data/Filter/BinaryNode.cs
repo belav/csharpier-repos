@@ -2173,7 +2173,9 @@ namespace System.Data
         private string? _pattern;
 
         internal LikeNode(DataTable? table, int op, ExpressionNode left, ExpressionNode right)
-            : base(table, op, left, right) { }
+            : base(table, op, left, right)
+        {
+        }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal override object Eval(DataRow? row, DataRowVersion version)

@@ -180,44 +180,60 @@ namespace System.Web.Mvc.Routing.Test
         [RouteArea("Administration", AreaPrefix = "Admin")]
         private class AreaWithPrefixWithControllerRouteController : Controller
         {
-            public void A1() { }
+            public void A1()
+            {
+            }
 
             [Route]
-            public void A2() { }
+            public void A2()
+            {
+            }
         }
 
         [Route("c1/{action}")]
         private class Controller1Controller : Controller
         {
-            public void A1() { }
+            public void A1()
+            {
+            }
         }
 
         [Route("c2/{action}")]
         private class Controller2Controller : Controller
         {
-            public void A1() { }
+            public void A1()
+            {
+            }
         }
 
         [Route("mixedrouting/{action}")]
         private class MixedRoutingController : Controller
         {
-            public void A1() { }
+            public void A1()
+            {
+            }
 
             // The catch-all parameter is here to make sure this route has a worse precedence
             // than the controller-level route.
             [Route("A2/{*params}")]
-            public void A2() { }
+            public void A2()
+            {
+            }
         }
 
         [Route("mixedroutingwithorder/{action}")]
         private class MixedRoutingWithOrderController : Controller
         {
-            public void A1() { }
+            public void A1()
+            {
+            }
 
             // The order makes this 'worse' than the controller level route - if a user does this it's likely
             // because they have two actions with the same name.
             [Route("A2/{*params}", Order = 55)]
-            public void A2() { }
+            public void A2()
+            {
+            }
         }
     }
 }

@@ -9,7 +9,9 @@ public class TPCManyToManyNoTrackingQuerySqliteTest
     : TPCManyToManyNoTrackingQueryRelationalTestBase<TPCManyToManyQuerySqliteFixture>
 {
     public TPCManyToManyNoTrackingQuerySqliteTest(TPCManyToManyQuerySqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override async Task Skip_navigation_order_by_single_or_default(bool async) =>
         Assert.Equal(

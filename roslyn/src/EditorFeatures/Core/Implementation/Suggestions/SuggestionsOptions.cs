@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SuggestionsOptions() { }
+        public SuggestionsOptions()
+        {
+        }
 
         ImmutableArray<IOption> IOptionProvider.Options { get; } =
             ImmutableArray.Create<IOption>(AsynchronousQuickActionsDisableFeatureFlag);

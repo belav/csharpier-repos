@@ -9,7 +9,9 @@ class test
 {
     public static int Main()
     {
-        try { }
+        try
+        {
+        }
         finally
         {
             System.Console.WriteLine("just before call");

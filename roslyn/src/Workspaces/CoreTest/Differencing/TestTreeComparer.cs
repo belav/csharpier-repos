@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
     {
         public static readonly TestTreeComparer Instance = new TestTreeComparer();
 
-        private TestTreeComparer() { }
+        private TestTreeComparer()
+        {
+        }
 
         protected internal override int LabelCount
         {

@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract IVirtualCharService GetVirtualCharService();
 

@@ -450,13 +450,17 @@ public class ChangeDetectionProxyTests
 
     private class DefaultContext : TestContext<ChangeValueEntity>
     {
-        public DefaultContext() : base(nameof(DefaultContext), false, true) { }
+        public DefaultContext() : base(nameof(DefaultContext), false, true)
+        {
+        }
     }
 
     private class SnapshotContext : TestContext<ChangeValueEntity>
     {
         public SnapshotContext()
-            : base(nameof(SnapshotContext), false, true, true, ChangeTrackingStrategy.Snapshot) { }
+            : base(nameof(SnapshotContext), false, true, true, ChangeTrackingStrategy.Snapshot)
+        {
+        }
     }
 
     private class ChangedNotificationsContext : TestContext<ChangeValueEntity>
@@ -468,7 +472,9 @@ public class ChangeDetectionProxyTests
                 true,
                 true,
                 ChangeTrackingStrategy.ChangedNotifications
-            ) { }
+            )
+        {
+        }
     }
 
     private class ChangingAndChangedNotificationsContext : TestContext<ChangeValueEntity>
@@ -480,7 +486,9 @@ public class ChangeDetectionProxyTests
                 true,
                 true,
                 ChangeTrackingStrategy.ChangingAndChangedNotifications
-            ) { }
+            )
+        {
+        }
     }
 
     private class ChangingAndChangedNotificationsWithOriginalValuesContext
@@ -493,6 +501,8 @@ public class ChangeDetectionProxyTests
                 true,
                 true,
                 ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-            ) { }
+            )
+        {
+        }
     }
 }

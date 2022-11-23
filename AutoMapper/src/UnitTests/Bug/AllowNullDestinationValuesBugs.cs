@@ -46,9 +46,13 @@ public class When_mapping_to_an_assignable_object_with_nullable_off : AutoMapper
 
 public class When_AllowNullDestinationValues_is_false : AutoMapperSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Destination { }
+    public class Destination
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(config =>

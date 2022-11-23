@@ -5,7 +5,9 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.Dataflow
 {
-    internal abstract class Origin { }
+    internal abstract class Origin
+    {
+    }
 
     internal sealed class MethodReturnOrigin : Origin
     {

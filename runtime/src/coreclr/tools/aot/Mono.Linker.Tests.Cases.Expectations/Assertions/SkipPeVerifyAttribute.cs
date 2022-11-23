@@ -13,10 +13,16 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class SkipPeVerifyAttribute : BaseExpectedLinkedBehaviorAttribute
     {
-        public SkipPeVerifyAttribute() { }
+        public SkipPeVerifyAttribute()
+        {
+        }
 
-        public SkipPeVerifyAttribute(SkipPeVerifyForToolchian toolchain) { }
+        public SkipPeVerifyAttribute(SkipPeVerifyForToolchian toolchain)
+        {
+        }
 
-        public SkipPeVerifyAttribute(string assemblyName) { }
+        public SkipPeVerifyAttribute(string assemblyName)
+        {
+        }
     }
 }

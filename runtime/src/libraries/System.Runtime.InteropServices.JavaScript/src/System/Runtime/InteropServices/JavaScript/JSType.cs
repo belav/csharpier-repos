@@ -11,14 +11,18 @@ namespace System.Runtime.InteropServices.JavaScript
     [SupportedOSPlatform("browser")]
     public abstract class JSType
     {
-        internal JSType() { }
+        internal JSType()
+        {
+        }
 
         /// <summary>
         /// Asserts that a JavaScript function should have no return value.
         /// </summary>
         public sealed class Void : JSType
         {
-            internal Void() { }
+            internal Void()
+            {
+            }
         }
 
         /// <summary>
@@ -26,7 +30,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Discard : JSType
         {
-            internal Discard() { }
+            internal Discard()
+            {
+            }
         }
 
         /// <summary>
@@ -34,7 +40,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Boolean : JSType
         {
-            internal Boolean() { }
+            internal Boolean()
+            {
+            }
         }
 
         /// <summary>
@@ -42,7 +50,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Number : JSType
         {
-            internal Number() { }
+            internal Number()
+            {
+            }
         }
 
         /// <summary>
@@ -50,7 +60,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class BigInt : JSType
         {
-            internal BigInt() { }
+            internal BigInt()
+            {
+            }
         }
 
         /// <summary>
@@ -58,7 +70,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Date : JSType
         {
-            internal Date() { }
+            internal Date()
+            {
+            }
         }
 
         /// <summary>
@@ -66,7 +80,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class String : JSType
         {
-            internal String() { }
+            internal String()
+            {
+            }
         }
 
         /// <summary>
@@ -74,7 +90,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Object : JSType
         {
-            internal Object() { }
+            internal Object()
+            {
+            }
         }
 
         /// <summary>
@@ -82,7 +100,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Error : JSType
         {
-            internal Error() { }
+            internal Error()
+            {
+            }
         }
 
         /// <summary>
@@ -90,7 +110,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class MemoryView : JSType
         {
-            internal MemoryView() { }
+            internal MemoryView()
+            {
+            }
         }
 
         /// <summary>
@@ -99,7 +121,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">The type of array element.</typeparam>
         public sealed class Array<T> : JSType where T : JSType
         {
-            internal Array() { }
+            internal Array()
+            {
+            }
         }
 
         /// <summary>
@@ -108,7 +132,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">The type of marshalled result value.</typeparam>
         public sealed class Promise<T> : JSType where T : JSType
         {
-            internal Promise() { }
+            internal Promise()
+            {
+            }
         }
 
         /// <summary>
@@ -116,7 +142,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Function : JSType
         {
-            internal Function() { }
+            internal Function()
+            {
+            }
         }
 
         /// <summary>
@@ -125,7 +153,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">The type of marshaled parameter or result.</typeparam>
         public sealed class Function<T> : JSType where T : JSType
         {
-            internal Function() { }
+            internal Function()
+            {
+            }
         }
 
         /// <summary>
@@ -137,7 +167,9 @@ namespace System.Runtime.InteropServices.JavaScript
             where T1 : JSType
             where T2 : JSType
         {
-            internal Function() { }
+            internal Function()
+            {
+            }
         }
 
         /// <summary>
@@ -151,7 +183,9 @@ namespace System.Runtime.InteropServices.JavaScript
             where T2 : JSType
             where T3 : JSType
         {
-            internal Function() { }
+            internal Function()
+            {
+            }
         }
 
         /// <summary>
@@ -167,7 +201,9 @@ namespace System.Runtime.InteropServices.JavaScript
             where T3 : JSType
             where T4 : JSType
         {
-            internal Function() { }
+            internal Function()
+            {
+            }
         }
 
         /// <summary>
@@ -175,7 +211,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public sealed class Any : JSType
         {
-            internal Any() { }
+            internal Any()
+            {
+            }
         }
     }
 }

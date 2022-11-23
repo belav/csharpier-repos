@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis
     {
         public static readonly Location Singleton = new NoLocation();
 
-        private NoLocation() { }
+        private NoLocation()
+        {
+        }
 
         public override LocationKind Kind
         {

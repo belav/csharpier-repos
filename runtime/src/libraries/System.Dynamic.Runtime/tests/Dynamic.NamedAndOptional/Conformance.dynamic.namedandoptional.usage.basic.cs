@@ -529,7 +529,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 dynamic d2 = 2;
                 return Foo<int>(x: d1, y: d2) == 1 ? 0 : 1;
             }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -3579,7 +3581,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: "") == 2)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
+            }
 
             return tests == success ? 0 : 1;
         }
@@ -3628,7 +3632,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: "") == 2)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
+            }
 
             return tests == success ? 0 : 1;
         }
@@ -3677,7 +3683,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: "") == 1)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
+            }
 
             return tests == success ? 0 : 1;
         }
@@ -3726,7 +3734,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: null) == 2)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
+            }
 
             return tests == success ? 0 : 1;
         }

@@ -22,7 +22,9 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal LongSumAggregationOperator(IEnumerable<long> child) : base(child) { }
+        internal LongSumAggregationOperator(IEnumerable<long> child) : base(child)
+        {
+        }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the

@@ -26,7 +26,9 @@ public struct S1
     public ushort F2;
     public S0 F4;
 
-    public S1(ulong f5) : this() { }
+    public S1(ulong f5) : this()
+    {
+    }
 
     public long M82(ref short[] arg0)
     {

@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestFormattingRuleFactoryServiceFactory() { }
+        public TestFormattingRuleFactoryServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {

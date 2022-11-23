@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CheckedStatementHighlighter() { }
+        public CheckedStatementHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             CheckedStatementSyntax checkedStatement,

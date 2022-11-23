@@ -328,7 +328,9 @@ namespace System.Tests
             );
         }
 
-        public class SubMarshalByRefObject : MarshalByRefObject { }
+        public class SubMarshalByRefObject : MarshalByRefObject
+        {
+        }
 
         [Fact]
         public void CreateInstance_ConstructorThrows_ThrowsTargetInvocationException()
@@ -390,17 +392,23 @@ namespace System.Tests
 
         private class PrivateType
         {
-            public PrivateType() { }
+            public PrivateType()
+            {
+            }
         }
 
         class PrivateTypeWithDefaultCtor
         {
-            private PrivateTypeWithDefaultCtor() { }
+            private PrivateTypeWithDefaultCtor()
+            {
+            }
         }
 
         class PrivateTypeWithoutDefaultCtor
         {
-            private PrivateTypeWithoutDefaultCtor(int x) { }
+            private PrivateTypeWithoutDefaultCtor(int x)
+            {
+            }
         }
 
         class PrivateTypeWithDefaultCtorThatThrows
@@ -494,13 +502,21 @@ namespace System.Tests
             public int I;
         }
 
-        public class VarArgs { }
+        public class VarArgs
+        {
+        }
 
-        public class VarStringArgs { }
+        public class VarStringArgs
+        {
+        }
 
-        public class VarIntArgs { }
+        public class VarIntArgs
+        {
+        }
 
-        public struct ValueTypeWithDefaultConstructor { }
+        public struct ValueTypeWithDefaultConstructor
+        {
+        }
 
         public class TypeWithPrivateDefaultConstructor
         {
@@ -516,7 +532,9 @@ namespace System.Tests
         {
             public static bool WasCreated { get; private set; }
 
-            private TypeWithPrivateDefaultCtorAndFinalizer() { }
+            private TypeWithPrivateDefaultCtorAndFinalizer()
+            {
+            }
 
             ~TypeWithPrivateDefaultCtorAndFinalizer()
             {
@@ -524,18 +542,26 @@ namespace System.Tests
             }
         }
 
-        private interface IInterfaceType { }
+        private interface IInterfaceType
+        {
+        }
 
         public abstract class AbstractTypeWithDefaultCtor
         {
-            public AbstractTypeWithDefaultCtor() { }
+            public AbstractTypeWithDefaultCtor()
+            {
+            }
         }
 
-        public struct StructTypeWithoutReflectionMetadata { }
+        public struct StructTypeWithoutReflectionMetadata
+        {
+        }
 
         public class TypeWithoutDefaultCtor
         {
-            private TypeWithoutDefaultCtor(int x) { }
+            private TypeWithoutDefaultCtor(int x)
+            {
+            }
         }
 
         public class TypeWithDefaultCtorThatThrows
@@ -640,13 +666,19 @@ namespace System.Tests
         }
 
         [IsTestedAttribute(false)]
-        class ClassWithIsTestedAttribute { }
+        class ClassWithIsTestedAttribute
+        {
+        }
 
         [Serializable]
-        class ClassWithSerializableAttribute { }
+        class ClassWithSerializableAttribute
+        {
+        }
 
         [IsTestedAttribute(false)]
-        class MBRWithIsTestedAttribute : MarshalByRefObject { }
+        class MBRWithIsTestedAttribute : MarshalByRefObject
+        {
+        }
 
         class Flag
         {
@@ -1645,7 +1677,9 @@ namespace System.Tests
 
         public class PublicType
         {
-            public PublicType() { }
+            public PublicType()
+            {
+            }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

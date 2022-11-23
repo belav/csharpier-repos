@@ -20,7 +20,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static readonly XmlSetSerializer Instance = new XmlSetSerializer();
 
-        protected XmlSetSerializer() { }
+        protected XmlSetSerializer()
+        {
+        }
 
         public override Type ListTypeConstructor
         {

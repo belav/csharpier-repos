@@ -249,7 +249,9 @@ namespace System.Web.Helpers.Test
                 {
                     File.Delete(fileToAttach);
                 }
-                catch (IOException) { } // Try our best to clean up after ourselves
+                catch (IOException)
+                {
+                } // Try our best to clean up after ourselves
             }
         }
 

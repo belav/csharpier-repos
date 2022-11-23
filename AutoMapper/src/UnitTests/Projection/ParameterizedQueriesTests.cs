@@ -5,7 +5,9 @@ public class ParameterizedQueriesTests_with_anonymous_object_and_factory : AutoM
     private Dest[] _dests;
     private IQueryable<Source> _sources;
 
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {
@@ -49,7 +51,9 @@ public class ParameterizedQueriesTests_with_anonymous_object : AutoMapperSpecBas
     private Dest[] _dests;
     private IQueryable<Source> _sources;
 
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {
@@ -93,7 +97,9 @@ public class ParameterizedQueriesTests_with_dictionary_object : AutoMapperSpecBa
     private Dest[] _dests;
     private IQueryable<Source> _sources;
 
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {

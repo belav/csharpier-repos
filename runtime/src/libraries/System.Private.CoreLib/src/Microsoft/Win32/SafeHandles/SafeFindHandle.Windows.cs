@@ -5,7 +5,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeFindHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeFindHandle() : base(true) { }
+        public SafeFindHandle() : base(true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

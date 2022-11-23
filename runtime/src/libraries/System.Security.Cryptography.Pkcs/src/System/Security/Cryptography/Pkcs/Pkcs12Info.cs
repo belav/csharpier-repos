@@ -20,7 +20,9 @@ namespace System.Security.Cryptography.Pkcs
             null!; // Initialized using object initializer
         public Pkcs12IntegrityMode IntegrityMode { get; private set; }
 
-        private Pkcs12Info() { }
+        private Pkcs12Info()
+        {
+        }
 
         public bool VerifyMac(string? password)
         {

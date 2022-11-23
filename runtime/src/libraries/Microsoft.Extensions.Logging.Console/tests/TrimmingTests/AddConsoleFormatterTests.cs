@@ -54,5 +54,7 @@ class Program
         }
     }
 
-    private class CustomOptions : ConsoleFormatterOptions { }
+    private class CustomOptions : ConsoleFormatterOptions
+    {
+    }
 }

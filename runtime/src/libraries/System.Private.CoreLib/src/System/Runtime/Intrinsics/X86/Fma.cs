@@ -12,7 +12,9 @@ namespace System.Runtime.Intrinsics.X86
     [CLSCompliant(false)]
     public abstract class Fma : Avx
     {
-        internal Fma() { }
+        internal Fma()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -22,7 +24,9 @@ namespace System.Runtime.Intrinsics.X86
         [Intrinsic]
         public new abstract class X64 : Avx.X64
         {
-            internal X64() { }
+            internal X64()
+            {
+            }
 
             public static new bool IsSupported
             {

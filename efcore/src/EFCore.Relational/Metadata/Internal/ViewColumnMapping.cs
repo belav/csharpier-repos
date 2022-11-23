@@ -18,7 +18,9 @@ public class ViewColumnMapping : ColumnMappingBase, IViewColumnMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public ViewColumnMapping(IProperty property, ViewColumn column, ViewMapping viewMapping)
-        : base(property, column, viewMapping) { }
+        : base(property, column, viewMapping)
+    {
+    }
 
     /// <inheritdoc />
     public virtual IViewMapping ViewMapping => (IViewMapping)TableMapping;

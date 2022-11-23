@@ -8,7 +8,9 @@ namespace System.DirectoryServices.Protocols
 {
     public abstract class DirectoryRequest : DirectoryOperation
     {
-        internal DirectoryRequest() { }
+        internal DirectoryRequest()
+        {
+        }
 
         public string RequestId
         {
@@ -21,7 +23,9 @@ namespace System.DirectoryServices.Protocols
 
     public class DeleteRequest : DirectoryRequest
     {
-        public DeleteRequest() { }
+        public DeleteRequest()
+        {
+        }
 
         public DeleteRequest(string distinguishedName)
         {
@@ -33,7 +37,9 @@ namespace System.DirectoryServices.Protocols
 
     public class AddRequest : DirectoryRequest
     {
-        public AddRequest() { }
+        public AddRequest()
+        {
+        }
 
         public AddRequest(string distinguishedName, params DirectoryAttribute[] attributes) : this()
         {
@@ -67,7 +73,9 @@ namespace System.DirectoryServices.Protocols
 
     public class ModifyRequest : DirectoryRequest
     {
-        public ModifyRequest() { }
+        public ModifyRequest()
+        {
+        }
 
         public ModifyRequest(
             string distinguishedName,
@@ -112,7 +120,9 @@ namespace System.DirectoryServices.Protocols
 
     public class CompareRequest : DirectoryRequest
     {
-        public CompareRequest() { }
+        public CompareRequest()
+        {
+        }
 
         public CompareRequest(string distinguishedName, string attributeName, string value)
         {
@@ -162,7 +172,9 @@ namespace System.DirectoryServices.Protocols
 
     public class ModifyDNRequest : DirectoryRequest
     {
-        public ModifyDNRequest() { }
+        public ModifyDNRequest()
+        {
+        }
 
         public ModifyDNRequest(
             string distinguishedName,
@@ -188,7 +200,9 @@ namespace System.DirectoryServices.Protocols
     {
         private byte[] _requestValue;
 
-        public ExtendedRequest() { }
+        public ExtendedRequest()
+        {
+        }
 
         public ExtendedRequest(string requestName)
         {
@@ -224,7 +238,9 @@ namespace System.DirectoryServices.Protocols
 
     public class SearchRequest : DirectoryRequest
     {
-        public SearchRequest() { }
+        public SearchRequest()
+        {
+        }
 
         public SearchRequest(
             string distinguishedName,

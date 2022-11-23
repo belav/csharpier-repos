@@ -57,7 +57,9 @@ namespace System.Reflection.Internal
             }
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

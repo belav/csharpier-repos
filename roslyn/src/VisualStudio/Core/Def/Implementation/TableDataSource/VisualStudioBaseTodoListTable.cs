@@ -229,7 +229,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int version,
                     ImmutableArray<TodoTableItem> items,
                     ImmutableArray<ITrackingPoint> trackingPoints
-                ) : base(version, items, trackingPoints) { }
+                ) : base(version, items, trackingPoints)
+                {
+                }
 
                 public override bool TryGetValue(int index, string columnName, out object content)
                 {

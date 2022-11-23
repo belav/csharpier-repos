@@ -17,7 +17,9 @@ namespace System.IO.Compression
         /// <param name="stream">The stream to which compressed data is written or from which data to decompress is read.</param>
         /// <param name="mode">One of the enumeration values that indicates whether to compress data to the stream or decompress data from the stream.</param>
         public ZLibStream(Stream stream, CompressionMode mode)
-            : this(stream, mode, leaveOpen: false) { }
+            : this(stream, mode, leaveOpen: false)
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="ZLibStream"/> class by using the specified stream, compression mode, and whether to leave the <paramref name="stream"/> open.</summary>
         /// <param name="stream">The stream to which compressed data is written or from which data to decompress is read.</param>
@@ -37,7 +39,9 @@ namespace System.IO.Compression
         /// <param name="stream">The stream to which compressed data is written.</param>
         /// <param name="compressionLevel">One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing data to the stream.</param>
         public ZLibStream(Stream stream, CompressionLevel compressionLevel)
-            : this(stream, compressionLevel, leaveOpen: false) { }
+            : this(stream, compressionLevel, leaveOpen: false)
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="ZLibStream"/> class by using the specified stream, compression level, and whether to leave the <paramref name="stream"/> open.</summary>
         /// <param name="stream">The stream to which compressed data is written.</param>

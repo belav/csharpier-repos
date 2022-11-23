@@ -59,7 +59,9 @@ namespace System.Text.Json.Serialization.Tests
                 int c = d.MyInt;
                 Assert.True(false, "Should have thrown Exception!");
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
+            }
 
             Assert.IsType<JsonElement>(d);
             JsonElement elem = (JsonElement)d;

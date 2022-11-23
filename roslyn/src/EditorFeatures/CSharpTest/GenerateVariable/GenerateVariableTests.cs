@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         private const int Parameter = 4;
         private const int ParameterAndOverrides = 5;
 
-        public GenerateVariableTests(ITestOutputHelper logger) : base(logger) { }
+        public GenerateVariableTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

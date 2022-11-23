@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
     [Trait(Traits.Feature, Traits.Features.NamingStyle)]
     public class NamingStylesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public NamingStylesTests(ITestOutputHelper logger) : base(logger) { }
+        public NamingStylesTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         private static readonly NamingStylesTestOptionSets s_options =
             new NamingStylesTestOptionSets(LanguageNames.CSharp);

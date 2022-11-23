@@ -164,24 +164,32 @@ namespace ILLink.Shared.DataFlow
         }
 
         [Conditional("DEBUG")]
-        public virtual void TraceStart(TControlFlowGraph cfg) { }
+        public virtual void TraceStart(TControlFlowGraph cfg)
+        {
+        }
 
         [Conditional("DEBUG")]
-        public virtual void TraceVisitBlock(TBlock block) { }
+        public virtual void TraceVisitBlock(TBlock block)
+        {
+        }
 
         [Conditional("DEBUG")]
         public virtual void TraceBlockInput(
             TValue normalState,
             TValue? exceptionState,
             TValue? exceptionFinallyState
-        ) { }
+        )
+        {
+        }
 
         [Conditional("DEBUG")]
         public virtual void TraceBlockOutput(
             TValue normalState,
             TValue? exceptionState,
             TValue? exceptionFinallyState
-        ) { }
+        )
+        {
+        }
 
         // This just runs a dataflow algorithm until convergence. It doesn't cache any results,
         // allowing each particular kind of analysis to decide what is worth saving.

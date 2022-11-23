@@ -12,7 +12,9 @@ public class NullableToInvalid : NonValidatingSpecBase
         public SomeObject Value { get; set; }
     }
 
-    public class SomeObject { }
+    public class SomeObject
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

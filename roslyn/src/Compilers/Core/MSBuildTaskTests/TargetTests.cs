@@ -1216,7 +1216,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
         private TaskPropertyInfo[]? _props;
 
-        public void CleanupTask(ITask task) { }
+        public void CleanupTask(ITask task)
+        {
+        }
 
         public ITask CreateTask(IBuildEngine taskFactoryLoggingHost) => new DummyTask();
 
@@ -1243,7 +1245,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
             public object GetPropertyValue(TaskPropertyInfo property) => null!;
 
-            public void SetPropertyValue(TaskPropertyInfo property, object value) { }
+            public void SetPropertyValue(TaskPropertyInfo property, object value)
+            {
+            }
         }
     }
 }

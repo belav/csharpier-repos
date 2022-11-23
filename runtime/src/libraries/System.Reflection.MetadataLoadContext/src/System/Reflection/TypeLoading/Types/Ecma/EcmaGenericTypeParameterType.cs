@@ -11,7 +11,9 @@ namespace System.Reflection.TypeLoading.Ecma
     internal sealed class EcmaGenericTypeParameterType : EcmaGenericParameterType
     {
         internal EcmaGenericTypeParameterType(GenericParameterHandle handle, EcmaModule module)
-            : base(handle, module) { }
+            : base(handle, module)
+        {
+        }
 
         public sealed override bool IsGenericTypeParameter => true;
         public sealed override bool IsGenericMethodParameter => false;

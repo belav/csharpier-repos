@@ -66,7 +66,9 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
                 assembly = LoadFromAssemblyPath(Path.Combine(path, assemblyName.Name + ".dll"));
                 break;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         if (assembly == null)
@@ -77,7 +79,9 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
                     Path.Combine(_applicationBase, assemblyName.Name + ".dll")
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         return assembly;

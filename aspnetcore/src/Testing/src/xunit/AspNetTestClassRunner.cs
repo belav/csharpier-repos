@@ -33,7 +33,9 @@ internal sealed class AspNetTestClassRunner : XunitTestClassRunner
             aggregator,
             cancellationTokenSource,
             collectionFixtureMappings
-        ) { }
+        )
+    {
+    }
 
     protected override Task<RunSummary> RunTestMethodAsync(
         ITestMethod testMethod,

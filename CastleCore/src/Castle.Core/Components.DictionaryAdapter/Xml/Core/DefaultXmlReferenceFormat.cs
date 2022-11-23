@@ -21,7 +21,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static readonly DefaultXmlReferenceFormat Instance = new DefaultXmlReferenceFormat();
 
-        private DefaultXmlReferenceFormat() { }
+        private DefaultXmlReferenceFormat()
+        {
+        }
 
         public bool TryGetIdentity(IXmlNode node, out int id)
         {

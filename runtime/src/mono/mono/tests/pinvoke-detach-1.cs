@@ -9,7 +9,9 @@ using System.Runtime.InteropServices;
 
 public class MonoPInvokeCallbackAttribute : Attribute
 {
-    public MonoPInvokeCallbackAttribute(Type delegateType) { }
+    public MonoPInvokeCallbackAttribute(Type delegateType)
+    {
+    }
 }
 
 public class Tests
@@ -70,7 +72,9 @@ public class Tests
     }
 
     [MonoPInvokeCallback(typeof(VoidVoidDelegate))]
-    private static void MethodInvokedFromNative2() { }
+    private static void MethodInvokedFromNative2()
+    {
+    }
 
     [DllImport("libtest", EntryPoint = "mono_test_attach_invoke_block_foreign_thread")]
     public static extern bool mono_test_attach_invoke_block_foreign_thread(

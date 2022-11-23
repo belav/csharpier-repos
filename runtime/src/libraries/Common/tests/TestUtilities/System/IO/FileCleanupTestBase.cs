@@ -99,7 +99,9 @@ namespace System.IO
                     Directory.Delete(TestDirectory, recursive: true);
                 }
             }
-            catch { } // avoid exceptions escaping Dispose
+            catch
+            {
+            } // avoid exceptions escaping Dispose
         }
 
         /// <summary>
@@ -267,7 +269,9 @@ namespace System.IO
                     return new string(buffer, skip, (int)result - skip);
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return TestDirectory;
         }

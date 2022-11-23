@@ -24,7 +24,9 @@ namespace Test
                     if (local3)
                         m_auForward5 = Method2();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             return 100;
         }
     }

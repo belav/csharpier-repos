@@ -173,7 +173,9 @@ namespace System.IO.Tests
         private sealed class DerivedFileStream : FileStream
         {
             public DerivedFileStream(SafeFileHandle handle, FileAccess access)
-                : base(handle, access) { }
+                : base(handle, access)
+            {
+            }
 
             public bool CanReadCalled { get; set; }
             public bool CanWriteCalled { get; set; }

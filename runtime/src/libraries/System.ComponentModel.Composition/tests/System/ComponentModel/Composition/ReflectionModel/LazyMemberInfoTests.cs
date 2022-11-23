@@ -293,12 +293,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public class LazyMemberTestClass
         {
-            public LazyMemberTestClass() { }
+            public LazyMemberTestClass()
+            {
+            }
 
             public string Property { get; set; }
             public string SetProperty
             {
-                set { }
+                set
+                {
+                }
             }
             public string GetProperty
             {

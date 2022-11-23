@@ -180,12 +180,16 @@ namespace Microsoft.Extensions.Options.Tests
 
         public class FakeOptionsSetupA : ConfigureOptions<FakeOptions>
         {
-            public FakeOptionsSetupA() : base(o => o.Message += "A") { }
+            public FakeOptionsSetupA() : base(o => o.Message += "A")
+            {
+            }
         }
 
         public class FakeOptionsSetupB : ConfigureOptions<FakeOptions>
         {
-            public FakeOptionsSetupB() : base(o => o.Message += "B") { }
+            public FakeOptionsSetupB() : base(o => o.Message += "B")
+            {
+            }
         }
 
         [Fact]

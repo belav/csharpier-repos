@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class DefaultKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public DefaultKeywordRecommender()
-            : base(SyntaxKind.DefaultKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.DefaultKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

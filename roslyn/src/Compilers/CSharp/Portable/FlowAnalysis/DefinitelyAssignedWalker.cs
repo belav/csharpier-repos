@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
+        ) : base(compilation, member, node, firstInRegion, lastInRegion)
+        {
+        }
 
         internal static (HashSet<Symbol> entry, HashSet<Symbol> exit) Analyze(
             CSharpCompilation compilation,

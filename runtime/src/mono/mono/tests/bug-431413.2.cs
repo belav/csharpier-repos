@@ -2,7 +2,9 @@ using System;
 
 class Test
 {
-    public Test() { }
+    public Test()
+    {
+    }
 
     static int Main()
     {

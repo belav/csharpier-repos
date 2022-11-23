@@ -67,7 +67,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 componentModel,
                 null,
                 showCheckBoxes
-            ) { }
+            )
+        {
+        }
 
         public PreviewEngine(
             IThreadingContext threadingContext,
@@ -388,7 +390,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         private class NoChange : AbstractChange
         {
-            public NoChange(PreviewEngine engine) : base(engine) { }
+            public NoChange(PreviewEngine engine) : base(engine)
+            {
+            }
 
             public override int GetText(out VSTREETEXTOPTIONS tto, out string ppszText)
             {
@@ -413,7 +417,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             public override int OnRequestSource(object pIUnknownTextView) => VSConstants.S_OK;
 
-            public override void UpdatePreview() { }
+            public override void UpdatePreview()
+            {
+            }
         }
     }
 }

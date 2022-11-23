@@ -798,7 +798,9 @@ public class OpenIdConnectTests
                         nonceTime += nonceLifetime;
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

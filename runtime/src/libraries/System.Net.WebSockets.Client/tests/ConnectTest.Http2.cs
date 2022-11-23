@@ -14,21 +14,27 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerConnectTest_Http2 : ConnectTest_Http2
     {
-        public InvokerConnectTest_Http2(ITestOutputHelper output) : base(output) { }
+        public InvokerConnectTest_Http2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public sealed class HttpClientConnectTest_Http2 : ConnectTest_Http2
     {
-        public HttpClientConnectTest_Http2(ITestOutputHelper output) : base(output) { }
+        public HttpClientConnectTest_Http2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseHttpClient => true;
     }
 
     public sealed class HttpClientConnectTest_Http2_NoInvoker : ClientWebSocketTestBase
     {
-        public HttpClientConnectTest_Http2_NoInvoker(ITestOutputHelper output) : base(output) { }
+        public HttpClientConnectTest_Http2_NoInvoker(ITestOutputHelper output) : base(output)
+        {
+        }
 
         public static IEnumerable<object[]> ConnectAsync_Http2WithNoInvoker_ThrowsArgumentException_MemberData()
         {
@@ -62,7 +68,9 @@ namespace System.Net.WebSockets.Client.Tests
 
     public abstract class ConnectTest_Http2 : ClientWebSocketTestBase
     {
-        public ConnectTest_Http2(ITestOutputHelper output) : base(output) { }
+        public ConnectTest_Http2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         [SkipOnPlatform(

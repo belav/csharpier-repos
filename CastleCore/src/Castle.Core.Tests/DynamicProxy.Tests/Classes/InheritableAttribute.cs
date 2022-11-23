@@ -20,5 +20,7 @@ namespace Castle.DynamicProxy.Tests.Classes
     [Serializable]
 #endif
     [AttributeUsage(AttributeTargets.All, Inherited = true)]
-    public class InheritableAttribute : Attribute { }
+    public class InheritableAttribute : Attribute
+    {
+    }
 }

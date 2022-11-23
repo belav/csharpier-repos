@@ -84,7 +84,9 @@ public sealed class GeneratedTestRunner : TestRunner
         }
     }
 
-    public override void SkipCategories(IEnumerable<string> categories) { }
+    public override void SkipCategories(IEnumerable<string> categories)
+    {
+    }
 
     public override void SkipMethod(string method, bool isExcluded)
     {

@@ -217,7 +217,9 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
 
     protected class BronieContext : PoolableDbContext
     {
-        public BronieContext(DbContextOptions options) : base(options) { }
+        public BronieContext(DbContextOptions options) : base(options)
+        {
+        }
 
         // ReSharper disable UnusedAutoPropertyAccessor.Local
         public DbSet<Pegasus> Pegasuses { get; set; }

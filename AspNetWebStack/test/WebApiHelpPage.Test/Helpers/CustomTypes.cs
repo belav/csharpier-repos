@@ -65,12 +65,18 @@ namespace WebApiHelpPageWebHost.UnitTest
 
     public class TypeWithNoDefaultConstructor
     {
-        public TypeWithNoDefaultConstructor(int id, string name) { }
+        public TypeWithNoDefaultConstructor(int id, string name)
+        {
+        }
     }
 
-    internal class NonPublicType { }
+    internal class NonPublicType
+    {
+    }
 
-    public enum EmptyEnum { }
+    public enum EmptyEnum
+    {
+    }
 
     [ModelName("CustomUser")]
     public class User

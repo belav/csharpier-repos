@@ -8,7 +8,9 @@ namespace Microsoft.Extensions.Logging.Console
     /// </summary>
     public class SimpleConsoleFormatterOptions : ConsoleFormatterOptions
     {
-        public SimpleConsoleFormatterOptions() { }
+        public SimpleConsoleFormatterOptions()
+        {
+        }
 
         /// <summary>
         /// Determines when to use color when logging messages.

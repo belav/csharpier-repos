@@ -204,27 +204,37 @@ namespace Microsoft.Extensions.Logging
         : Microsoft.Extensions.Logging.ILoggerFactory,
             System.IDisposable
     {
-        public LoggerFactory() { }
+        public LoggerFactory()
+        {
+        }
 
         public LoggerFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Logging.ILoggerProvider> providers
-        ) { }
+        )
+        {
+        }
 
         public LoggerFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Logging.ILoggerProvider> providers,
             Microsoft.Extensions.Logging.LoggerFilterOptions filterOptions
-        ) { }
+        )
+        {
+        }
 
         public LoggerFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Logging.ILoggerProvider> providers,
             Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Logging.LoggerFilterOptions> filterOption
-        ) { }
+        )
+        {
+        }
 
         public LoggerFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Logging.ILoggerProvider> providers,
             Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Logging.LoggerFilterOptions> filterOption,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Logging.LoggerFactoryOptions>? options
-        ) { }
+        )
+        {
+        }
 
         public LoggerFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Logging.ILoggerProvider> providers,
@@ -232,9 +242,13 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Logging.LoggerFactoryOptions>? options =
                 null,
             Microsoft.Extensions.Logging.IExternalScopeProvider? scopeProvider = null
-        ) { }
+        )
+        {
+        }
 
-        public void AddProvider(Microsoft.Extensions.Logging.ILoggerProvider provider) { }
+        public void AddProvider(Microsoft.Extensions.Logging.ILoggerProvider provider)
+        {
+        }
 
         protected virtual bool CheckDisposed()
         {
@@ -256,33 +270,45 @@ namespace Microsoft.Extensions.Logging
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public partial class LoggerFactoryOptions
     {
-        public LoggerFactoryOptions() { }
+        public LoggerFactoryOptions()
+        {
+        }
 
         public Microsoft.Extensions.Logging.ActivityTrackingOptions ActivityTrackingOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class LoggerFilterOptions
     {
-        public LoggerFilterOptions() { }
+        public LoggerFilterOptions()
+        {
+        }
 
         public bool CaptureScopes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Extensions.Logging.LogLevel MinLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IList<Microsoft.Extensions.Logging.LoggerFilterRule> Rules
         {
@@ -297,7 +323,9 @@ namespace Microsoft.Extensions.Logging
             string? categoryName,
             Microsoft.Extensions.Logging.LogLevel? logLevel,
             System.Func<string?, string?, Microsoft.Extensions.Logging.LogLevel, bool>? filter
-        ) { }
+        )
+        {
+        }
 
         public string? CategoryName
         {
@@ -363,7 +391,9 @@ namespace Microsoft.Extensions.Logging
     )]
     public partial class ProviderAliasAttribute : System.Attribute
     {
-        public ProviderAliasAttribute(string alias) { }
+        public ProviderAliasAttribute(string alias)
+        {
+        }
 
         public string Alias
         {

@@ -245,7 +245,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CacheServiceFactory() { }
+            public CacheServiceFactory()
+            {
+            }
         }
     }
 }

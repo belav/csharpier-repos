@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedVariable
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpRemoveUnusedVariableCodeFixProvider() { }
+        public CSharpRemoveUnusedVariableCodeFixProvider()
+        {
+        }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS0168, CS0219);

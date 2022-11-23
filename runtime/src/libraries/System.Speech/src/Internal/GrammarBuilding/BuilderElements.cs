@@ -15,7 +15,9 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal BuilderElements() { }
+        internal BuilderElements()
+        {
+        }
 
         #endregion
 

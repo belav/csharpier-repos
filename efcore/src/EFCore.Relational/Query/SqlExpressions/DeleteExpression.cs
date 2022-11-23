@@ -19,7 +19,9 @@ public sealed class DeleteExpression : Expression, IPrintableExpression
     /// <param name="table">A table on which the delete operation is being applied.</param>
     /// <param name="selectExpression">A select expression which is used to determine which rows to delete.</param>
     public DeleteExpression(TableExpression table, SelectExpression selectExpression)
-        : this(table, selectExpression, new HashSet<string>()) { }
+        : this(table, selectExpression, new HashSet<string>())
+    {
+    }
 
     private DeleteExpression(
         TableExpression table,

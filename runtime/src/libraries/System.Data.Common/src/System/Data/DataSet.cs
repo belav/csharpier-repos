@@ -283,7 +283,9 @@ namespace System.Data
             Justification = "CreateInstanceOfThisType's use of GetType uses only the parameterless constructor, but the annotations preserve all non-public constructors causing a warning for the serialization constructors. Those constructors won't be used here."
         )]
         protected DataSet(SerializationInfo info, StreamingContext context)
-            : this(info, context, true) { }
+            : this(info, context, true)
+        {
+        }
 
         [RequiresDynamicCode(RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
@@ -349,7 +351,9 @@ namespace System.Data
         }
 
         // Deserialize all the tables data of the dataset from binary/xml stream.
-        protected virtual void InitializeDerivedDataSet() { }
+        protected virtual void InitializeDerivedDataSet()
+        {
+        }
 
         // Serialize all the tables.
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
@@ -3639,7 +3643,9 @@ namespace System.Data
         /// <summary>
         /// This method should be overridden by subclasses to restrict tables being removed.
         /// </summary>
-        protected internal virtual void OnRemoveTable(DataTable table) { }
+        protected internal virtual void OnRemoveTable(DataTable table)
+        {
+        }
 
         internal void OnRemovedTable(DataTable table)
         {
@@ -3649,7 +3655,9 @@ namespace System.Data
         /// <summary>
         /// This method should be overridden by subclasses to restrict tables being removed.
         /// </summary>
-        protected virtual void OnRemoveRelation(DataRelation relation) { }
+        protected virtual void OnRemoveRelation(DataRelation relation)
+        {
+        }
 
         internal void OnRemoveRelationHack(DataRelation relation) => OnRemoveRelation(relation);
 

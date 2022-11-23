@@ -43,7 +43,9 @@ namespace System.Net.Security.Tests
             _listener.AcceptTcpClientAsync().ContinueWith(t => OnAccept(t), TaskScheduler.Default);
         }
 
-        public DummyTcpServer(IPEndPoint endPoint) : this(endPoint, null) { }
+        public DummyTcpServer(IPEndPoint endPoint) : this(endPoint, null)
+        {
+        }
 
         public DummyTcpServer(IPEndPoint endPoint, EncryptionPolicy? sslEncryptionPolicy)
         {
@@ -89,7 +91,9 @@ namespace System.Net.Security.Tests
             }
         }
 
-        protected virtual void OnClientAccepted(TcpClient client) { }
+        protected virtual void OnClientAccepted(TcpClient client)
+        {
+        }
 
         private void OnAuthenticate(Task result, ClientState state)
         {
@@ -140,7 +144,9 @@ namespace System.Net.Security.Tests
             {
                 client = result.Result;
             }
-            catch { }
+            catch
+            {
+            }
 
             // If we have a connection, then process it
             if (client != null)
@@ -197,7 +203,9 @@ namespace System.Net.Security.Tests
                             state
                         );
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
 
@@ -208,7 +216,9 @@ namespace System.Net.Security.Tests
                     .AcceptTcpClientAsync()
                     .ContinueWith(t => OnAccept(t), TaskScheduler.Default);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void OnReceive(IAsyncResult result)

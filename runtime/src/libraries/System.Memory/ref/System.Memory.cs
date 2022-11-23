@@ -62,9 +62,13 @@ namespace System.Buffers
 {
     public sealed partial class ArrayBufferWriter<T> : System.Buffers.IBufferWriter<T>
     {
-        public ArrayBufferWriter() { }
+        public ArrayBufferWriter()
+        {
+        }
 
-        public ArrayBufferWriter(int initialCapacity) { }
+        public ArrayBufferWriter(int initialCapacity)
+        {
+        }
 
         public int Capacity
         {
@@ -87,9 +91,13 @@ namespace System.Buffers
             get { throw null; }
         }
 
-        public void Advance(int count) { }
+        public void Advance(int count)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public System.Memory<T> GetMemory(int sizeHint = 0)
         {
@@ -107,7 +115,9 @@ namespace System.Buffers
         public static void CopyTo<T>(
             this in System.Buffers.ReadOnlySequence<T> source,
             System.Span<T> destination
-        ) { }
+        )
+        {
+        }
 
         public static System.SequencePosition? PositionOf<T>(
             this in System.Buffers.ReadOnlySequence<T> source,
@@ -125,7 +135,9 @@ namespace System.Buffers
         public static void Write<T>(
             this System.Buffers.IBufferWriter<T> writer,
             System.ReadOnlySpan<T> value
-        ) { }
+        )
+        {
+        }
     }
 
     public partial interface IBufferWriter<T>
@@ -137,7 +149,9 @@ namespace System.Buffers
 
     public abstract partial class MemoryPool<T> : System.IDisposable
     {
-        protected MemoryPool() { }
+        protected MemoryPool()
+        {
+        }
 
         public abstract int MaxBufferSize { get; }
         public static System.Buffers.MemoryPool<T> Shared
@@ -145,7 +159,9 @@ namespace System.Buffers
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         protected abstract void Dispose(bool disposing);
         public abstract System.Buffers.IMemoryOwner<T> Rent(int minBufferSize = -1);
@@ -153,22 +169,30 @@ namespace System.Buffers
 
     public abstract partial class ReadOnlySequenceSegment<T>
     {
-        protected ReadOnlySequenceSegment() { }
+        protected ReadOnlySequenceSegment()
+        {
+        }
 
         public System.ReadOnlyMemory<T> Memory
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public System.Buffers.ReadOnlySequenceSegment<T>? Next
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public long RunningIndex
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
     }
 
@@ -438,7 +462,9 @@ namespace System.Buffers
             get { throw null; }
         }
 
-        public void Advance(long count) { }
+        public void Advance(long count)
+        {
+        }
 
         public long AdvancePast(T value)
         {
@@ -480,7 +506,9 @@ namespace System.Buffers
             throw null;
         }
 
-        public void Rewind(long count) { }
+        public void Rewind(long count)
+        {
+        }
 
         public bool TryAdvanceTo(T delimiter, bool advancePastDelimiter = true)
         {
@@ -1027,9 +1055,13 @@ namespace System
             throw null;
         }
 
-        public static void CopyTo<T>(this T[]? source, System.Memory<T> destination) { }
+        public static void CopyTo<T>(this T[]? source, System.Memory<T> destination)
+        {
+        }
 
-        public static void CopyTo<T>(this T[]? source, System.Span<T> destination) { }
+        public static void CopyTo<T>(this T[]? source, System.Span<T> destination)
+        {
+        }
 
         public static bool EndsWith(
             this System.ReadOnlySpan<char> span,
@@ -1398,7 +1430,9 @@ namespace System
             throw null;
         }
 
-        public static void Reverse<T>(this System.Span<T> span) { }
+        public static void Reverse<T>(this System.Span<T> span)
+        {
+        }
 
         public static int SequenceCompareTo<T>(
             this System.ReadOnlySpan<T> span,
@@ -1448,29 +1482,41 @@ namespace System
             throw null;
         }
 
-        public static void Sort<T>(this System.Span<T> span) { }
+        public static void Sort<T>(this System.Span<T> span)
+        {
+        }
 
-        public static void Sort<T>(this System.Span<T> span, System.Comparison<T> comparison) { }
+        public static void Sort<T>(this System.Span<T> span, System.Comparison<T> comparison)
+        {
+        }
 
         public static void Sort<TKey, TValue>(
             this System.Span<TKey> keys,
             System.Span<TValue> items
-        ) { }
+        )
+        {
+        }
 
         public static void Sort<TKey, TValue>(
             this System.Span<TKey> keys,
             System.Span<TValue> items,
             System.Comparison<TKey> comparison
-        ) { }
+        )
+        {
+        }
 
         public static void Sort<T, TComparer>(this System.Span<T> span, TComparer comparer)
-            where TComparer : System.Collections.Generic.IComparer<T>? { }
+            where TComparer : System.Collections.Generic.IComparer<T>?
+        {
+        }
 
         public static void Sort<TKey, TValue, TComparer>(
             this System.Span<TKey> keys,
             System.Span<TValue> items,
             TComparer comparer
-        ) where TComparer : System.Collections.Generic.IComparer<TKey>? { }
+        ) where TComparer : System.Collections.Generic.IComparer<TKey>?
+        {
+        }
 
         public static bool StartsWith(
             this System.ReadOnlySpan<char> span,
@@ -2399,50 +2445,83 @@ namespace System.Buffers.Binary
             throw null;
         }
 
-        public static void WriteDoubleBigEndian(System.Span<byte> destination, double value) { }
+        public static void WriteDoubleBigEndian(System.Span<byte> destination, double value)
+        {
+        }
 
-        public static void WriteDoubleLittleEndian(System.Span<byte> destination, double value) { }
+        public static void WriteDoubleLittleEndian(System.Span<byte> destination, double value)
+        {
+        }
 
-        public static void WriteHalfBigEndian(System.Span<byte> destination, System.Half value) { }
+        public static void WriteHalfBigEndian(System.Span<byte> destination, System.Half value)
+        {
+        }
 
-        public static void WriteHalfLittleEndian(
-            System.Span<byte> destination,
-            System.Half value
-        ) { }
+        public static void WriteHalfLittleEndian(System.Span<byte> destination, System.Half value)
+        {
+        }
 
-        public static void WriteInt16BigEndian(System.Span<byte> destination, short value) { }
+        public static void WriteInt16BigEndian(System.Span<byte> destination, short value)
+        {
+        }
 
-        public static void WriteInt16LittleEndian(System.Span<byte> destination, short value) { }
+        public static void WriteInt16LittleEndian(System.Span<byte> destination, short value)
+        {
+        }
 
-        public static void WriteInt32BigEndian(System.Span<byte> destination, int value) { }
+        public static void WriteInt32BigEndian(System.Span<byte> destination, int value)
+        {
+        }
 
-        public static void WriteInt32LittleEndian(System.Span<byte> destination, int value) { }
+        public static void WriteInt32LittleEndian(System.Span<byte> destination, int value)
+        {
+        }
 
-        public static void WriteInt64BigEndian(System.Span<byte> destination, long value) { }
+        public static void WriteInt64BigEndian(System.Span<byte> destination, long value)
+        {
+        }
 
-        public static void WriteInt64LittleEndian(System.Span<byte> destination, long value) { }
+        public static void WriteInt64LittleEndian(System.Span<byte> destination, long value)
+        {
+        }
 
-        public static void WriteSingleBigEndian(System.Span<byte> destination, float value) { }
+        public static void WriteSingleBigEndian(System.Span<byte> destination, float value)
+        {
+        }
 
-        public static void WriteSingleLittleEndian(System.Span<byte> destination, float value) { }
+        public static void WriteSingleLittleEndian(System.Span<byte> destination, float value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void WriteUInt16BigEndian(System.Span<byte> destination, ushort value) { }
+        public static void WriteUInt16BigEndian(System.Span<byte> destination, ushort value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void WriteUInt16LittleEndian(System.Span<byte> destination, ushort value) { }
+        public static void WriteUInt16LittleEndian(System.Span<byte> destination, ushort value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void WriteUInt32BigEndian(System.Span<byte> destination, uint value) { }
+        public static void WriteUInt32BigEndian(System.Span<byte> destination, uint value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void WriteUInt32LittleEndian(System.Span<byte> destination, uint value) { }
+        public static void WriteUInt32LittleEndian(System.Span<byte> destination, uint value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void WriteUInt64BigEndian(System.Span<byte> destination, ulong value) { }
+        public static void WriteUInt64BigEndian(System.Span<byte> destination, ulong value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void WriteUInt64LittleEndian(System.Span<byte> destination, ulong value) { }
+        public static void WriteUInt64LittleEndian(System.Span<byte> destination, ulong value)
+        {
+        }
     }
 }
 
@@ -2936,7 +3015,9 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static void Write<T>(System.Span<byte> destination, ref T value) where T : struct { }
+        public static void Write<T>(System.Span<byte> destination, ref T value) where T : struct
+        {
+        }
     }
 }
 

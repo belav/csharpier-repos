@@ -16,7 +16,9 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed class X509ExtensionCollection : ICollection, IEnumerable<X509Extension>
     {
-        public X509ExtensionCollection() { }
+        public X509ExtensionCollection()
+        {
+        }
 
         public int Count
         {

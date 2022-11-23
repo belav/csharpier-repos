@@ -12,13 +12,19 @@ namespace System.Security
 #endif
     public abstract partial class CodeAccessPermission : IPermission, ISecurityEncodable, IStackWalk
     {
-        protected CodeAccessPermission() { }
+        protected CodeAccessPermission()
+        {
+        }
 
-        public void Assert() { }
+        public void Assert()
+        {
+        }
 
         public abstract IPermission Copy();
 
-        public void Demand() { }
+        public void Demand()
+        {
+        }
 
         [Obsolete]
         public void Deny()
@@ -40,14 +46,22 @@ namespace System.Security
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS);
         }
 
-        public static void RevertAll() { }
+        public static void RevertAll()
+        {
+        }
 
-        public static void RevertAssert() { }
+        public static void RevertAssert()
+        {
+        }
 
         [Obsolete]
-        public static void RevertDeny() { }
+        public static void RevertDeny()
+        {
+        }
 
-        public static void RevertPermitOnly() { }
+        public static void RevertPermitOnly()
+        {
+        }
 
         public override string ToString() => base.ToString();
 

@@ -40,7 +40,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             {
                 private const string _lspClientName = "TypeScript";
 
-                private VirtualDocumentPropertiesService() { }
+                private VirtualDocumentPropertiesService()
+                {
+                }
 
                 public static VirtualDocumentPropertiesService Instance =
                     new VirtualDocumentPropertiesService();

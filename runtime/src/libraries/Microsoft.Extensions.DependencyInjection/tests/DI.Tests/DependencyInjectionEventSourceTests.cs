@@ -14,7 +14,9 @@ using Xunit;
 namespace Microsoft.Extensions.DependencyInjection.Tests
 {
     [CollectionDefinition(nameof(EventSourceTests), DisableParallelization = true)]
-    public class EventSourceTests : ICollectionFixture<EventSourceTests> { }
+    public class EventSourceTests : ICollectionFixture<EventSourceTests>
+    {
+    }
 
     [Collection(nameof(EventSourceTests))]
     public class DependencyInjectionEventSourceTests : IDisposable

@@ -50,7 +50,9 @@ namespace Newtonsoft.Json.Tests.Serialization
     [TestFixture]
     public class ShouldSerializeTests : TestFixtureBase
     {
-        public class A { }
+        public class A
+        {
+        }
 
         public class B
         {

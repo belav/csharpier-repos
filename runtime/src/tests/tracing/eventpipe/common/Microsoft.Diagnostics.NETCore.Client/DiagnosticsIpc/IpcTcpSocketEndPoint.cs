@@ -93,7 +93,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     port = uri.IsDefaultPort ? 0 : uri.Port;
                 }
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             if (string.IsNullOrEmpty(host) || port == -1)
             {
@@ -159,7 +161,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                         ipAddress = hostEntry.AddressList[0];
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             if (ipAddress == null)
                 throw new ArgumentException(

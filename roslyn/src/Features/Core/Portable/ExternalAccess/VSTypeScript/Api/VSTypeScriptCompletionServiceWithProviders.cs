@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     internal abstract class VSTypeScriptCompletionServiceWithProviders : CompletionService
     {
         internal VSTypeScriptCompletionServiceWithProviders(Workspace workspace)
-            : base(workspace.Services.SolutionServices) { }
+            : base(workspace.Services.SolutionServices)
+        {
+        }
 
         internal sealed override CompletionRules GetRules(CompletionOptions options) =>
             GetRulesImpl();

@@ -15,14 +15,18 @@ namespace System.Net.PeerToPeer.Collaboration
 #endif
     public sealed class PeerCollaborationPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public PeerCollaborationPermission(PermissionState state) { }
+        public PeerCollaborationPermission(PermissionState state)
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement e) { }
+        public override void FromXml(SecurityElement e)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

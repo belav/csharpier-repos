@@ -14,10 +14,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
 {
     internal class PreviewWorkspace : Workspace
     {
-        public PreviewWorkspace() : base(MefHostServices.DefaultHost, WorkspaceKind.Preview) { }
+        public PreviewWorkspace() : base(MefHostServices.DefaultHost, WorkspaceKind.Preview)
+        {
+        }
 
         public PreviewWorkspace(HostServices hostServices)
-            : base(hostServices, WorkspaceKind.Preview) { }
+            : base(hostServices, WorkspaceKind.Preview)
+        {
+        }
 
         public PreviewWorkspace(Solution solution)
             : base(solution.Workspace.Services.HostServices, WorkspaceKind.Preview)
@@ -50,7 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             "Do not call the base OpenDocument method; instead call the overload that takes a container.",
             error: true
         )]
-        public new void OpenDocument(DocumentId documentId, bool activate = true) { }
+        public new void OpenDocument(DocumentId documentId, bool activate = true)
+        {
+        }
 
         public void OpenDocument(DocumentId documentId, SourceTextContainer textContainer)
         {

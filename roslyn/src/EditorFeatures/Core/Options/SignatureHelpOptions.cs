@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SignatureHelpOptionsProvider() { }
+        public SignatureHelpOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(SignatureHelpOptions.ShowSignatureHelp);

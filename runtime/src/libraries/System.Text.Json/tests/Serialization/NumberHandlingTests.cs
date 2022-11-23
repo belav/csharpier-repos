@@ -1819,7 +1819,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonNumberHandling(
             JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
         )]
-        public class MyCustomList : List<int> { }
+        public class MyCustomList : List<int>
+        {
+        }
 
         [Fact]
         public static void TypeAttributeAppliesTo_CustomCollectionElements_HonoredWhenProperty()
@@ -1845,7 +1847,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonNumberHandling(
             JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
         )]
-        public class MyCustomDictionary : Dictionary<string, int> { }
+        public class MyCustomDictionary : Dictionary<string, int>
+        {
+        }
 
         [Fact]
         public static void TypeAttributeAppliesTo_CustomDictionaryElements_HonoredWhenProperty()
@@ -2027,7 +2031,9 @@ namespace System.Text.Json.Serialization.Tests
 
         [JsonNumberHandling(JsonNumberHandling.Strict)]
         [JsonConverter(typeof(ConverterForMyType))]
-        public class ClassWith_NumberHandlingOn_Type_WithCustomConverter { }
+        public class ClassWith_NumberHandlingOn_Type_WithCustomConverter
+        {
+        }
 
         private class ConverterForMyType
             : JsonConverter<ClassWith_NumberHandlingOn_Type_WithCustomConverter>
@@ -2133,13 +2139,16 @@ namespace System.Text.Json.Serialization.Tests
     public class NumberHandlingTests_StreamOverload : NumberHandlingTests_OverloadSpecific
     {
         public NumberHandlingTests_StreamOverload()
-            : base(DeserializationWrapper.StreamDeserializer) { }
+            : base(DeserializationWrapper.StreamDeserializer)
+        {
+        }
     }
 
     public class NumberHandlingTests_SyncOverload : NumberHandlingTests_OverloadSpecific
     {
         public NumberHandlingTests_SyncOverload() : base(DeserializationWrapper.StringDeserializer)
-        { }
+        {
+        }
     }
 
     public abstract class NumberHandlingTests_OverloadSpecific

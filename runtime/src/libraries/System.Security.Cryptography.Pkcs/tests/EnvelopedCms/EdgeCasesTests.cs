@@ -446,7 +446,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 ignore =
                     Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) { }
+            )
+            {
+            }
 
             byte[] encodedMessage = (
                 "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
@@ -479,7 +481,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 ignore =
                     Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) { }
+            )
+            {
+            }
 
             byte[] encodedMessage = (
                 "3081f206092a864886f70d010703a081e43081e10201023181ae3081ab0201028014f2008aa9fa3742e8370cb1674ce1d158"

@@ -28,7 +28,9 @@ namespace System.Linq.Expressions.Compiler
             return binder._tree;
         }
 
-        private VariableBinder() { }
+        private VariableBinder()
+        {
+        }
 
         [return: NotNullIfNotNull(nameof(node))]
         public override Expression? Visit(Expression? node)

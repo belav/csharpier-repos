@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class MaterializationInterceptionTestBase : SingletonInterceptorsTestBase
 {
     protected MaterializationInterceptionTestBase(SingletonInterceptorsFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(false)]

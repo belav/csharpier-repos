@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 CSharpCodeStyleOptions.PreferPatternMatching,
                 s_safePatternTitle,
                 s_safePatternTitle
-            ) { }
+            )
+        {
+        }
 
         public static bool IsSafe(Diagnostic diagnostic) =>
             diagnostic.Properties.ContainsKey(SafeKey);

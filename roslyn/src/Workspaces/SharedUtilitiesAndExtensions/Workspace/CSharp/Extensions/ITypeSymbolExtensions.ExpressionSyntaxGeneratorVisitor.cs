@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             public static readonly ExpressionSyntaxGeneratorVisitor Instance = new();
 
-            private ExpressionSyntaxGeneratorVisitor() { }
+            private ExpressionSyntaxGeneratorVisitor()
+            {
+            }
 
             public override ExpressionSyntax DefaultVisit(ISymbol symbol) =>
                 symbol.Accept(TypeSyntaxGeneratorVisitor.Create())!;

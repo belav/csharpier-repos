@@ -20,7 +20,9 @@ class MyTypeClass
         {
             c = cc / zero;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 }
 

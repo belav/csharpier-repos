@@ -25,7 +25,9 @@ public class OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>
     public OwnedNavigationViewBuilder(
         in StoreObjectIdentifier storeObject,
         OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder
-    ) : base(storeObject, ownedNavigationBuilder) { }
+    ) : base(storeObject, ownedNavigationBuilder)
+    {
+    }
 
     private OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> OwnedNavigationBuilder =>
         (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)

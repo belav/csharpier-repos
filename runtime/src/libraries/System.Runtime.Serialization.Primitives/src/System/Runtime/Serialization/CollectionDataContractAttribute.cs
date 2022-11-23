@@ -23,7 +23,9 @@ namespace System.Runtime.Serialization
         private bool _isKeyNameSetExplicitly;
         private bool _isValueNameSetExplicitly;
 
-        public CollectionDataContractAttribute() { }
+        public CollectionDataContractAttribute()
+        {
+        }
 
         public string? Namespace
         {

@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpImplementInterfaceService() { }
+        public CSharpImplementInterfaceService()
+        {
+        }
 
         protected override string ToDisplayString(
             IMethodSymbol disposeImplMethod,

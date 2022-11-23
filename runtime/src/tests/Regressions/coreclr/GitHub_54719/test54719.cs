@@ -3,9 +3,13 @@
 
 using System;
 
-public class IA { }
+public class IA
+{
+}
 
-public class IB { }
+public class IB
+{
+}
 
 public abstract class Base
 {
@@ -15,7 +19,9 @@ public abstract class Base
 
 public sealed class Derived : Base<IB>
 {
-    public class A : IA { }
+    public class A : IA
+    {
+    }
 
     public sealed override A Key => default;
 }

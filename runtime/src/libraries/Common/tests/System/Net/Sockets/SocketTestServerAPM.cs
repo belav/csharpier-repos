@@ -92,7 +92,9 @@ namespace System.Net.Sockets.Tests
                     state
                 );
             }
-            catch (SocketException) { }
+            catch (SocketException)
+            {
+            }
 
             try
             {
@@ -111,7 +113,9 @@ namespace System.Net.Sockets.Tests
 
                 throw;
             }
-            catch (ObjectDisposedException) { }
+            catch (ObjectDisposedException)
+            {
+            }
         }
 
         private void OnReceive(IAsyncResult result)

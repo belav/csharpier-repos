@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal AnonymousDelegatePublicSymbol(
                 AnonymousTypeManager manager,
                 AnonymousTypeDescriptor typeDescr
-            ) : base(manager, typeDescr) { }
+            ) : base(manager, typeDescr)
+            {
+            }
 
             internal override NamedTypeSymbol MapToImplementationSymbol()
             {

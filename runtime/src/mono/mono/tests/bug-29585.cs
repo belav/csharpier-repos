@@ -12,7 +12,9 @@ namespace TestCase
         }
     }
 
-    interface Param { }
+    interface Param
+    {
+    }
 
     class GenericDerived<T> : Abstract<GenericDerived<T>>
     {

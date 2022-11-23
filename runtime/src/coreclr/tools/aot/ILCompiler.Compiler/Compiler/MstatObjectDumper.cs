@@ -43,7 +43,9 @@ namespace ILCompiler
             _emitter.AllowUseOfAddGlobalMethod();
         }
 
-        internal override void Begin() { }
+        internal override void Begin()
+        {
+        }
 
         protected override void DumpObjectNode(
             NameMangler mangler,

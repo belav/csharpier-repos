@@ -17,7 +17,9 @@ namespace System.IO.Tests.Enumeration
             )>
         {
             public AllEntries(string directory, EnumerationOptions options)
-                : base(directory, options) { }
+                : base(directory, options)
+            {
+            }
 
             protected override (
                 DateTimeOffset CreationTimeUtc,

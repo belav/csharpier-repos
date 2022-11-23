@@ -160,7 +160,12 @@ public class WindowsIdentityTests
             {
                 handle = new SafeAccessTokenHandle(mutex.SafeWaitHandle.DangerousGetHandle());
                 Assert.Throws<ArgumentException>(
-                    () => WindowsIdentity.RunImpersonated(handle, () => { })
+                    () =>
+                        WindowsIdentity.RunImpersonated(
+                            handle,
+                            () => {
+                            }
+                        )
                 );
             }
             finally
@@ -233,7 +238,9 @@ public class WindowsIdentityTests
         {
             identity.Dispose();
         }
-        catch { }
+        catch
+        {
+        }
         Assert.True(identity.AccessToken.IsClosed);
         if (!anonymous)
         {

@@ -104,7 +104,9 @@ namespace System.Net
         private int m_count; // Do not rename (binary serialization)
         private readonly string m_fqdnMyDomain = s_fqdnMyDomain; // Do not rename (binary serialization)
 
-        public CookieContainer() { }
+        public CookieContainer()
+        {
+        }
 
         public CookieContainer(int capacity)
         {

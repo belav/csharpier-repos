@@ -47,7 +47,12 @@ namespace System.IO
             _canSeekFunc = canSeekFunc ?? (() => false);
             _canWriteFunc = canWriteFunc ?? (() => false);
 
-            _flushFunc = flushFunc ?? (() => { });
+            _flushFunc =
+                flushFunc
+                ?? (
+                    () => {
+                    }
+                );
             _flushAsyncFunc = flushAsyncFunc ?? (token => base.FlushAsync(token));
 
             _lengthFunc =

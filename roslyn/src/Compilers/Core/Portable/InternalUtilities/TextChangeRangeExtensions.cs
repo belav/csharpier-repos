@@ -507,7 +507,9 @@ namespace Roslyn.Utilities
             }
 
             public UnadjustedNewChange(TextChangeRange range)
-                : this(range.Span.Start, range.Span.Length, range.NewLength) { }
+                : this(range.Span.Start, range.Span.Length, range.NewLength)
+            {
+            }
         }
 
         private static int NewEnd(this TextChangeRange range) => range.Span.Start + range.NewLength;

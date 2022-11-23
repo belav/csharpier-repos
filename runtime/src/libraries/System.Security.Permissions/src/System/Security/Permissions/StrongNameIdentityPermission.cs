@@ -12,13 +12,17 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class StrongNameIdentityPermission : CodeAccessPermission
     {
-        public StrongNameIdentityPermission(PermissionState state) { }
+        public StrongNameIdentityPermission(PermissionState state)
+        {
+        }
 
         public StrongNameIdentityPermission(
             StrongNamePublicKeyBlob blob,
             string name,
             Version version
-        ) { }
+        )
+        {
+        }
 
         public string Name { get; set; }
         public StrongNamePublicKeyBlob PublicKey { get; set; }
@@ -29,7 +33,9 @@ namespace System.Security.Permissions
             return this;
         }
 
-        public override void FromXml(SecurityElement e) { }
+        public override void FromXml(SecurityElement e)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

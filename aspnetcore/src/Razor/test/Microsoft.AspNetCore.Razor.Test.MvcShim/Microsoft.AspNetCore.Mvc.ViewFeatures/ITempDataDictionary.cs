@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-public interface ITempDataDictionary { }
+public interface ITempDataDictionary
+{
+}

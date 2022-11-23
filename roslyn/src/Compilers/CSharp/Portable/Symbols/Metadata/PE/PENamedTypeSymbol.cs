@@ -906,10 +906,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         {
                             names.Add(module.GetMethodDefNameOrThrow(methodDef));
                         }
-                        catch (BadImageFormatException) { }
+                        catch (BadImageFormatException)
+                        {
+                        }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 try
                 {
@@ -919,10 +923,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         {
                             names.Add(module.GetPropertyDefNameOrThrow(propertyDef));
                         }
-                        catch (BadImageFormatException) { }
+                        catch (BadImageFormatException)
+                        {
+                        }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 try
                 {
@@ -932,10 +940,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         {
                             names.Add(module.GetEventDefNameOrThrow(eventDef));
                         }
-                        catch (BadImageFormatException) { }
+                        catch (BadImageFormatException)
+                        {
+                        }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 try
                 {
@@ -945,10 +957,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         {
                             names.Add(module.GetFieldDefNameOrThrow(fieldDef));
                         }
-                        catch (BadImageFormatException) { }
+                        catch (BadImageFormatException)
+                        {
+                        }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 // From C#'s perspective, structs always have a public constructor
                 // (even if it's not in metadata).  Add it unconditionally and let
@@ -1045,7 +1061,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     fieldDefs.Add(fieldDef);
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             if (uncommon.lazyInstanceEnumFields.IsDefault)
             {
@@ -1067,7 +1085,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             builder.Add(new PEFieldSymbol(moduleSymbol, this, fieldDef));
                         }
                     }
-                    catch (BadImageFormatException) { }
+                    catch (BadImageFormatException)
+                    {
+                    }
                 }
 
                 ImmutableInterlocked.InterlockedInitialize(
@@ -1191,7 +1211,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 Debug.Assert(result.Count == count);
 
@@ -1246,7 +1268,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         methodDefs.Add(methodDef);
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
 
                 foreach (var methodDef in methodDefs)
                 {
@@ -1319,7 +1343,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             public static readonly DeclarationOrderTypeSymbolComparer Instance =
                 new DeclarationOrderTypeSymbolComparer();
 
-            private DeclarationOrderTypeSymbolComparer() { }
+            private DeclarationOrderTypeSymbolComparer()
+            {
+            }
 
             public int Compare(Symbol x, Symbol y)
             {
@@ -1472,7 +1498,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             }
                         }
                     }
-                    catch (BadImageFormatException) { }
+                    catch (BadImageFormatException)
+                    {
+                    }
 
                     var syntheticCtor = new SynthesizedInstanceConstructor(this);
                     members.Add(syntheticCtor);
@@ -2102,7 +2130,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             continue;
                         }
                     }
-                    catch (BadImageFormatException) { }
+                    catch (BadImageFormatException)
+                    {
+                    }
 
                     var symbol = new PEFieldSymbol(moduleSymbol, this, fieldRid);
                     fieldMembers.Add(symbol);
@@ -2118,7 +2148,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return privateFieldNameToSymbols;
         }
@@ -2156,7 +2188,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return map;
         }
@@ -2203,10 +2237,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             );
                         }
                     }
-                    catch (BadImageFormatException) { }
+                    catch (BadImageFormatException)
+                    {
+                    }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
         }
 
         private void CreateEvents(
@@ -2256,10 +2294,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             );
                         }
                     }
-                    catch (BadImageFormatException) { }
+                    catch (BadImageFormatException)
+                    {
+                    }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
         }
 
         private PEMethodSymbol GetAccessorMethod(
@@ -2772,7 +2814,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 NamespaceOrTypeSymbol container,
                 TypeDefinitionHandle handle,
                 string emittedNamespaceName
-            ) : base(moduleSymbol, container, handle, emittedNamespaceName, 0, out _) { }
+            ) : base(moduleSymbol, container, handle, emittedNamespaceName, 0, out _)
+            {
+            }
 
             protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
                 throw ExceptionUtilities.Unreachable();

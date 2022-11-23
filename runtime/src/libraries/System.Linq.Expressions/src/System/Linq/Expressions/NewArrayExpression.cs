@@ -83,7 +83,9 @@ namespace System.Linq.Expressions
     internal sealed class NewArrayInitExpression : NewArrayExpression
     {
         internal NewArrayInitExpression(Type type, ReadOnlyCollection<Expression> expressions)
-            : base(type, expressions) { }
+            : base(type, expressions)
+        {
+        }
 
         /// <summary>
         /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
@@ -95,7 +97,9 @@ namespace System.Linq.Expressions
     internal sealed class NewArrayBoundsExpression : NewArrayExpression
     {
         internal NewArrayBoundsExpression(Type type, ReadOnlyCollection<Expression> expressions)
-            : base(type, expressions) { }
+            : base(type, expressions)
+        {
+        }
 
         /// <summary>
         /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)

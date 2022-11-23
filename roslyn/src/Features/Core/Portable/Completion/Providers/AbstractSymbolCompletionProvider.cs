@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     internal abstract partial class AbstractSymbolCompletionProvider<TSyntaxContext>
         : LSPCompletionProvider where TSyntaxContext : SyntaxContext
     {
-        protected AbstractSymbolCompletionProvider() { }
+        protected AbstractSymbolCompletionProvider()
+        {
+        }
 
         protected abstract (
             string displayText,

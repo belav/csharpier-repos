@@ -422,7 +422,9 @@ public class MutexWaitOne2
             retVal = false;
             //}
         }
-        catch (AbandonedMutexException) { }
+        catch (AbandonedMutexException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("102", "Unexpected exception: " + e);
@@ -469,7 +471,9 @@ public class MutexWaitOne2
             );
             retVal = false;
         }
-        catch (ObjectDisposedException) { }
+        catch (ObjectDisposedException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("104", "Unexpected exception: " + e);
@@ -520,7 +524,9 @@ public class MutexWaitOne2
             TestLibrary.TestFramework.LogInformation("[LOCAL VARIABLES] testInt = " + testInt);
             retVal = false;
         }
-        catch (ArgumentOutOfRangeException) { }
+        catch (ArgumentOutOfRangeException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("106", "Unexpected exception: " + e);

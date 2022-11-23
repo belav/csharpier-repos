@@ -33,16 +33,24 @@ namespace System.Composition.UnitTests
         }
 
         [ExportWithNameFoo]
-        public class SingleNamedExport { }
+        public class SingleNamedExport
+        {
+        }
 
         [Export, NameFoo]
-        public class NamedWithCustomMetadata { }
+        public class NamedWithCustomMetadata
+        {
+        }
 
         [ExportWithNameFoo, ExportMetadata("Priority", 10)]
-        public class NamedAndPrioritized { }
+        public class NamedAndPrioritized
+        {
+        }
 
         [ExportWithNameFoo, Export, ExportMetadata("Priority", 10)]
-        public class MultipleExportsOneNamedAndBothPrioritized { }
+        public class MultipleExportsOneNamedAndBothPrioritized
+        {
+        }
 
         public class Named
         {
@@ -67,7 +75,9 @@ namespace System.Composition.UnitTests
             ExportMetadata("Name", "B"),
             ExportMetadata("Name", "B")
         ]
-        public class MultipleNames { }
+        public class MultipleNames
+        {
+        }
 
         [Fact]
         public void DiscoversMetadataSpecifiedUsingMetadataAttributeOnExportAttribute()
@@ -122,13 +132,17 @@ namespace System.Composition.UnitTests
         }
 
         [Export]
-        public class ConstructorImported { }
+        public class ConstructorImported
+        {
+        }
 
         [Export("A"), Export("B")]
         public class MultipleExportsNonDefaultConstructor
         {
             [ImportingConstructor]
-            public MultipleExportsNonDefaultConstructor(ConstructorImported c) { }
+            public MultipleExportsNonDefaultConstructor(ConstructorImported c)
+            {
+            }
         }
 
         [Fact]

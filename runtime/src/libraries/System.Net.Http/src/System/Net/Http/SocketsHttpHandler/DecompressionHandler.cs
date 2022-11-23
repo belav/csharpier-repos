@@ -257,7 +257,9 @@ namespace System.Net.Http
 
         private sealed class GZipDecompressedContent : DecompressedContent
         {
-            public GZipDecompressedContent(HttpContent originalContent) : base(originalContent) { }
+            public GZipDecompressedContent(HttpContent originalContent) : base(originalContent)
+            {
+            }
 
             protected override Stream GetDecompressedStream(Stream originalStream) =>
                 new GZipStream(originalStream, CompressionMode.Decompress);
@@ -266,7 +268,8 @@ namespace System.Net.Http
         private sealed class DeflateDecompressedContent : DecompressedContent
         {
             public DeflateDecompressedContent(HttpContent originalContent) : base(originalContent)
-            { }
+            {
+            }
 
             protected override Stream GetDecompressedStream(Stream originalStream) =>
                 new ZLibOrDeflateStream(originalStream);
@@ -521,7 +524,8 @@ namespace System.Net.Http
         private sealed class BrotliDecompressedContent : DecompressedContent
         {
             public BrotliDecompressedContent(HttpContent originalContent) : base(originalContent)
-            { }
+            {
+            }
 
             protected override Stream GetDecompressedStream(Stream originalStream) =>
                 new BrotliStream(originalStream, CompressionMode.Decompress);

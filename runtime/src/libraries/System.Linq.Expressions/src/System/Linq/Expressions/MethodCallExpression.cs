@@ -241,7 +241,9 @@ namespace System.Linq.Expressions
 
     internal sealed class MethodCallExpression0 : MethodCallExpression, IArgumentProvider
     {
-        public MethodCallExpression0(MethodInfo method) : base(method) { }
+        public MethodCallExpression0(MethodInfo method) : base(method)
+        {
+        }
 
         public override Expression GetArgument(int index)
         {
@@ -677,7 +679,9 @@ namespace System.Linq.Expressions
             IArgumentProvider
     {
         public InstanceMethodCallExpression0(MethodInfo method, Expression instance)
-            : base(method, instance) { }
+            : base(method, instance)
+        {
+        }
 
         public override Expression GetArgument(int index)
         {

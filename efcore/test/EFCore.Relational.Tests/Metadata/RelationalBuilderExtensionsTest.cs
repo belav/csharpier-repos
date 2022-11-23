@@ -1458,13 +1458,21 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Splow", relationshipBuilder.Metadata.GetConstraintName());
     }
 
-    private void AssertIsGeneric(EntityTypeBuilder<Customer> _) { }
+    private void AssertIsGeneric(EntityTypeBuilder<Customer> _)
+    {
+    }
 
-    private void AssertIsGeneric(PropertyBuilder<string> _) { }
+    private void AssertIsGeneric(PropertyBuilder<string> _)
+    {
+    }
 
-    private void AssertIsGeneric(ReferenceCollectionBuilder<Customer, Order> _) { }
+    private void AssertIsGeneric(ReferenceCollectionBuilder<Customer, Order> _)
+    {
+    }
 
-    private void AssertIsGeneric(ReferenceReferenceBuilder<Order, OrderDetails> _) { }
+    private void AssertIsGeneric(ReferenceReferenceBuilder<Order, OrderDetails> _)
+    {
+    }
 
     protected virtual ModelBuilder CreateConventionModelBuilder() =>
         FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
@@ -1500,7 +1508,9 @@ public class RelationalBuilderExtensionsTest
         public IEnumerable<Order> Orders { get; set; }
     }
 
-    private class SpecialCustomer : Customer { }
+    private class SpecialCustomer : Customer
+    {
+    }
 
     private class Order
     {
@@ -1527,7 +1537,11 @@ public class RelationalBuilderExtensionsTest
         public int? Splowed { get; set; }
     }
 
-    private class Splow : Splot { }
+    private class Splow : Splot
+    {
+    }
 
-    private class Splod : Splow { }
+    private class Splod : Splow
+    {
+    }
 }

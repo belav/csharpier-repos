@@ -8,22 +8,34 @@ public class MultipleMappingsOfSameTypeFails
         public InformationClass CurrentInformation { get; set; }
     }
 
-    public class MySpecificClass : MyClass { }
+    public class MySpecificClass : MyClass
+    {
+    }
 
     public class MyDto
     {
         public InformationDto Information { get; set; }
     }
 
-    public class MySpecificDto : MyDto { }
+    public class MySpecificDto : MyDto
+    {
+    }
 
-    public class InformationDto { }
+    public class InformationDto
+    {
+    }
 
-    public class ActivityBase { }
+    public class ActivityBase
+    {
+    }
 
-    public class InformationBase { }
+    public class InformationBase
+    {
+    }
 
-    public class InformationClass { }
+    public class InformationClass
+    {
+    }
 
     [Fact]
     public void multiple_inherited_base_mappings_of_same_type_fails()

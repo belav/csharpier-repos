@@ -174,7 +174,9 @@ namespace System.Globalization
             );
         }
 
-        internal EastAsianLunisolarCalendar() { }
+        internal EastAsianLunisolarCalendar()
+        {
+        }
 
         internal void CheckTicksRange(long ticks)
         {

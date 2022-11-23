@@ -61,7 +61,9 @@ namespace Internal.Reflection.Core.NonPortable
         //
         private sealed class RuntimeTypeHandleToTypeCache : ConcurrentUnifierW<IntPtr, Type>
         {
-            private RuntimeTypeHandleToTypeCache() { }
+            private RuntimeTypeHandleToTypeCache()
+            {
+            }
 
             protected sealed override Type Factory(IntPtr rawRuntimeTypeHandleKey)
             {

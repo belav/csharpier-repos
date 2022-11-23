@@ -14,6 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 
         public bool CanPreview(Document document) => true;
 
-        public void PreviewItem(INavigateToItemDisplay itemDisplay) { }
+        public void PreviewItem(INavigateToItemDisplay itemDisplay)
+        {
+        }
     }
 }

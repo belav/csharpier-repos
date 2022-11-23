@@ -10,7 +10,9 @@ namespace System.Formats.Tar
     {
         // Constructor called when reading a TarEntry from a TarReader.
         internal UstarTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.Ustar) { }
+            : base(header, readerOfOrigin, TarEntryFormat.Ustar)
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="UstarTarEntry"/> instance with the specified entry type and entry name.

@@ -382,7 +382,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
         }
 
-        private class FullyPopulateRaceHelper { }
+        private class FullyPopulateRaceHelper
+        {
+        }
 
         [Fact]
         [WorkItem(60259, "https://github.com/dotnet/roslyn/issues/60259")]

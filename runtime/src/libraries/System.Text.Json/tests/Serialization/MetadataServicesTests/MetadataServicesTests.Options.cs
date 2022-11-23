@@ -101,9 +101,13 @@ namespace System.Text.Json.Tests.Serialization
 
         private class MyJsonContext : JsonSerializerContext
         {
-            public MyJsonContext() : base(null) { }
+            public MyJsonContext() : base(null)
+            {
+            }
 
-            public MyJsonContext(JsonSerializerOptions options) : base(options) { }
+            public MyJsonContext(JsonSerializerOptions options) : base(options)
+            {
+            }
 
             public override JsonTypeInfo? GetTypeInfo(Type type) =>
                 throw new NotImplementedException();
@@ -112,7 +116,9 @@ namespace System.Text.Json.Tests.Serialization
         private class MyJsonContextThatSetsOptionsInParameterlessCtor : JsonSerializerContext
         {
             public MyJsonContextThatSetsOptionsInParameterlessCtor()
-                : base(new JsonSerializerOptions()) { }
+                : base(new JsonSerializerOptions())
+            {
+            }
 
             public override JsonTypeInfo? GetTypeInfo(Type type) =>
                 throw new NotImplementedException();

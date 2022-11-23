@@ -18,7 +18,9 @@ internal class CSharpSnippetFunctionService : SnippetFunctionService
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpSnippetFunctionService() { }
+    public CSharpSnippetFunctionService()
+    {
+    }
 
     public override async Task<string?> GetContainingClassNameAsync(
         Document document,

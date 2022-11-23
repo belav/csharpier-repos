@@ -296,7 +296,9 @@ namespace System.Web.Http.Tracing.Tracers
         // Assembly implements ISerializable but lacks the constructor.
         public abstract class MockableAssembly : Assembly
         {
-            public MockableAssembly() { }
+            public MockableAssembly()
+            {
+            }
 
             public MockableAssembly(SerializationInfo info, StreamingContext context)
             {

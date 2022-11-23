@@ -19,7 +19,9 @@ internal class RequiredAttributeDescriptorComparer : IEqualityComparer<RequiredA
     public static readonly RequiredAttributeDescriptorComparer Default =
         new RequiredAttributeDescriptorComparer();
 
-    private RequiredAttributeDescriptorComparer() { }
+    private RequiredAttributeDescriptorComparer()
+    {
+    }
 
     /// <inheritdoc />
     public virtual bool Equals(

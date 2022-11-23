@@ -138,7 +138,9 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class. For further
         ///    initialization, set the properties on the object. This is the default constructor.</para>
         /// </summary>
-        public ManagementEventWatcher() : this((ManagementScope)null, null, null) { }
+        public ManagementEventWatcher() : this((ManagementScope)null, null, null)
+        {
+        }
 
         //parameterized constructors
         /// <summary>
@@ -149,7 +151,9 @@ namespace System.Management
         ///    <para>The namespace in which the watcher will be listening for
         ///       events is the default namespace that is currently set.</para>
         /// </remarks>
-        public ManagementEventWatcher(EventQuery query) : this(null, query, null) { }
+        public ManagementEventWatcher(EventQuery query) : this(null, query, null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class when given a WMI event query in the
@@ -160,7 +164,9 @@ namespace System.Management
         ///    <para>The namespace in which the watcher will be listening for
         ///       events is the default namespace that is currently set.</para>
         /// </remarks>
-        public ManagementEventWatcher(string query) : this(null, new EventQuery(query), null) { }
+        public ManagementEventWatcher(string query) : this(null, new EventQuery(query), null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
@@ -169,7 +175,9 @@ namespace System.Management
         /// <param name='scope'>A <see cref='System.Management.ManagementScope'/> object representing the scope (namespace) in which the watcher will listen for events.</param>
         /// <param name=' query'>An <see cref='System.Management.EventQuery'/> object representing a WMI event query, which determines the events for which the watcher will listen.</param>
         public ManagementEventWatcher(ManagementScope scope, EventQuery query)
-            : this(scope, query, null) { }
+            : this(scope, query, null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
@@ -179,7 +187,9 @@ namespace System.Management
         /// <param name='scope'> The management scope (namespace) in which the watcher will listen for events.</param>
         /// <param name=' query'> The query that defines the events for which the watcher will listen.</param>
         public ManagementEventWatcher(string scope, string query)
-            : this(new ManagementScope(scope), new EventQuery(query), null) { }
+            : this(new ManagementScope(scope), new EventQuery(query), null)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class that listens for
@@ -191,7 +201,9 @@ namespace System.Management
         /// <param name=' query'>The query that defines the events for which the watcher will listen.</param>
         /// <param name='options'>An <see cref='System.Management.EventWatcherOptions'/> object representing additional options used to watch for events. </param>
         public ManagementEventWatcher(string scope, string query, EventWatcherOptions options)
-            : this(new ManagementScope(scope), new EventQuery(query), options) { }
+            : this(new ManagementScope(scope), new EventQuery(query), options)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class
@@ -611,7 +623,9 @@ namespace System.Management
             {
                 delegateInvoker.FireEventToDelegates(Stopped, args);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void FireEventArrived(EventArrivedEventArgs args)
@@ -620,7 +634,9 @@ namespace System.Management
             {
                 delegateInvoker.FireEventToDelegates(EventArrived, args);
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -713,7 +729,9 @@ namespace System.Management
 
                 eventWatcher.FireEventArrived(args);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void SetStatus(int flags, int hResult, string message, IntPtr pErrObj)
@@ -732,7 +750,9 @@ namespace System.Management
                 )
                     ThreadPool.QueueUserWorkItem(new WaitCallback(Cancel2));
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         // On Win2k, we get a deadlock if we do a Cancel within a SetStatus
@@ -748,7 +768,9 @@ namespace System.Management
             {
                 Cancel();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void Cancel()
@@ -797,7 +819,9 @@ namespace System.Management
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(stub);
                             stub = null;
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
             }

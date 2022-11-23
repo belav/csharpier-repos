@@ -178,7 +178,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly List<string> _list = new List<string>();
 
-        public StringIEnumerableWrapper() { }
+        public StringIEnumerableWrapper()
+        {
+        }
 
         public StringIEnumerableWrapper(List<string> items)
         {
@@ -200,7 +202,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly List<T> _list = new List<T>();
 
-        public GenericIEnumerableWrapper() { }
+        public GenericIEnumerableWrapper()
+        {
+        }
 
         public GenericIEnumerableWrapper(List<T> items)
         {
@@ -220,12 +224,16 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericIEnumerableWrapperPrivateConstructor<T> : GenericIEnumerableWrapper<T>
     {
-        private GenericIEnumerableWrapperPrivateConstructor() { }
+        private GenericIEnumerableWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericIEnumerableWrapperInternalConstructor<T> : GenericIEnumerableWrapper<T>
     {
-        internal GenericIEnumerableWrapperInternalConstructor() { }
+        internal GenericIEnumerableWrapperInternalConstructor()
+        {
+        }
     }
 
     public class ReadOnlyStringICollectionWrapper : GenericICollectionWrapper<string>
@@ -370,12 +378,16 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericIListWrapperPrivateConstructor<T> : GenericIListWrapper<T>
     {
-        private GenericIListWrapperPrivateConstructor() { }
+        private GenericIListWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericIListWrapperInternalConstructor<T> : GenericIListWrapper<T>
     {
-        internal GenericIListWrapperInternalConstructor() { }
+        internal GenericIListWrapperInternalConstructor()
+        {
+        }
     }
 
     public class GenericICollectionWrapper<T> : ICollection<T>
@@ -434,12 +446,16 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericICollectionWrapperPrivateConstructor<T> : GenericICollectionWrapper<T>
     {
-        private GenericICollectionWrapperPrivateConstructor() { }
+        private GenericICollectionWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericICollectionWrapperInternalConstructor<T> : GenericICollectionWrapper<T>
     {
-        internal GenericICollectionWrapperInternalConstructor() { }
+        internal GenericICollectionWrapperInternalConstructor()
+        {
+        }
     }
 
     public class WrapperForIReadOnlyCollectionOfT<T> : IReadOnlyCollection<T>
@@ -473,7 +489,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly List<T> _list = new List<T>();
 
-        public GenericIReadOnlyCollectionWrapper() { }
+        public GenericIReadOnlyCollectionWrapper()
+        {
+        }
 
         public GenericIReadOnlyCollectionWrapper(List<T> list)
         {
@@ -497,7 +515,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly List<string> _list = new List<string>();
 
-        public StringIReadOnlyListWrapper() { }
+        public StringIReadOnlyListWrapper()
+        {
+        }
 
         public StringIReadOnlyListWrapper(List<string> list)
         {
@@ -523,7 +543,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly List<T> _list = new List<T>();
 
-        public GenericIReadOnlyListWrapper() { }
+        public GenericIReadOnlyListWrapper()
+        {
+        }
 
         public GenericIReadOnlyListWrapper(List<T> list)
         {
@@ -750,12 +772,16 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericISetWrapperPrivateConstructor<T> : GenericISetWrapper<T>
     {
-        private GenericISetWrapperPrivateConstructor() { }
+        private GenericISetWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericISetWrapperInternalConstructor<T> : GenericISetWrapper<T>
     {
-        internal GenericISetWrapperInternalConstructor() { }
+        internal GenericISetWrapperInternalConstructor()
+        {
+        }
     }
 
     public class GenericIDictionaryWrapper<TKey, TValue> : IDictionary<TKey, TValue>
@@ -845,17 +871,23 @@ namespace System.Text.Json.Serialization.Tests
     public class GenericIDictionaryWrapperPrivateConstructor<TKey, TValue>
         : GenericIDictionaryWrapper<TKey, TValue>
     {
-        private GenericIDictionaryWrapperPrivateConstructor() { }
+        private GenericIDictionaryWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericIDictionaryWrapperInternalConstructor<TKey, TValue>
         : GenericIDictionaryWrapper<TKey, TValue>
     {
-        internal GenericIDictionaryWrapperInternalConstructor() { }
+        internal GenericIDictionaryWrapperInternalConstructor()
+        {
+        }
     }
 
     public class GenericIDictonaryWrapperThreeGenericParameters<TKey, TValue, TUnused>
-        : GenericIDictionaryWrapper<TKey, TValue> { }
+        : GenericIDictionaryWrapper<TKey, TValue>
+    {
+    }
 
     public class ReadOnlyStringToStringIDictionaryWrapper
         : GenericIDictionaryWrapper<string, string>
@@ -863,10 +895,14 @@ namespace System.Text.Json.Serialization.Tests
         public override bool IsReadOnly => true;
     }
 
-    public class StringToObjectIDictionaryWrapper : GenericIDictionaryWrapper<string, object> { }
+    public class StringToObjectIDictionaryWrapper : GenericIDictionaryWrapper<string, object>
+    {
+    }
 
     public class StringToGenericIDictionaryWrapper<TValue>
-        : GenericIDictionaryWrapper<string, TValue> { }
+        : GenericIDictionaryWrapper<string, TValue>
+    {
+    }
 
     public class GenericIReadOnlyDictionaryWrapper<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>
     {
@@ -915,36 +951,54 @@ namespace System.Text.Json.Serialization.Tests
     public class StringToStringIReadOnlyDictionaryWrapperPrivateConstructor
         : GenericIReadOnlyDictionaryWrapper<string, string>
     {
-        private StringToStringIReadOnlyDictionaryWrapperPrivateConstructor() { }
+        private StringToStringIReadOnlyDictionaryWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class StringToStringIReadOnlyDictionaryWrapperInternalConstructor
         : GenericIReadOnlyDictionaryWrapper<string, string>
     {
-        internal StringToStringIReadOnlyDictionaryWrapperInternalConstructor() { }
+        internal StringToStringIReadOnlyDictionaryWrapperInternalConstructor()
+        {
+        }
     }
 
-    public class StringListWrapper : List<string> { }
+    public class StringListWrapper : List<string>
+    {
+    }
 
-    class MyMyList<T> : GenericListWrapper<T> { }
+    class MyMyList<T> : GenericListWrapper<T>
+    {
+    }
 
-    class MyListString : GenericListWrapper<string> { }
+    class MyListString : GenericListWrapper<string>
+    {
+    }
 
-    public class GenericListWrapper<T> : List<T> { }
+    public class GenericListWrapper<T> : List<T>
+    {
+    }
 
     public class GenericListWrapperPrivateConstructor<T> : GenericListWrapper<T>
     {
-        private GenericListWrapperPrivateConstructor() { }
+        private GenericListWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericListWrapperInternalConstructor<T> : GenericListWrapper<T>
     {
-        internal GenericListWrapperInternalConstructor() { }
+        internal GenericListWrapperInternalConstructor()
+        {
+        }
     }
 
     public class StringStackWrapper : Stack<string>
     {
-        public StringStackWrapper() { }
+        public StringStackWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringStackWrapper(IList<string> items)
@@ -958,7 +1012,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericStackWrapper<T> : Stack<T>
     {
-        public GenericStackWrapper() { }
+        public GenericStackWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public GenericStackWrapper(IList<T> items)
@@ -972,17 +1028,23 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericStackWrapperPrivateConstructor<T> : GenericStackWrapper<T>
     {
-        private GenericStackWrapperPrivateConstructor() { }
+        private GenericStackWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericStackWrapperInternalConstructor<T> : GenericStackWrapper<T>
     {
-        internal GenericStackWrapperInternalConstructor() { }
+        internal GenericStackWrapperInternalConstructor()
+        {
+        }
     }
 
     public class StringQueueWrapper : Queue<string>
     {
-        public StringQueueWrapper() { }
+        public StringQueueWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringQueueWrapper(IList<string> items)
@@ -996,7 +1058,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericQueueWrapper<T> : Queue<T>
     {
-        public GenericQueueWrapper() { }
+        public GenericQueueWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public GenericQueueWrapper(IList<T> items)
@@ -1010,17 +1074,23 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericQueueWrapperPrivateConstructor<T> : GenericQueueWrapper<T>
     {
-        private GenericQueueWrapperPrivateConstructor() { }
+        private GenericQueueWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class GenericQueueWrapperInternalConstructor<T> : GenericQueueWrapper<T>
     {
-        internal GenericQueueWrapperInternalConstructor() { }
+        internal GenericQueueWrapperInternalConstructor()
+        {
+        }
     }
 
     public class StringHashSetWrapper : HashSet<string>
     {
-        public StringHashSetWrapper() { }
+        public StringHashSetWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringHashSetWrapper(IList<string> items)
@@ -1034,7 +1104,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericHashSetWrapper<T> : HashSet<T>
     {
-        public GenericHashSetWrapper() { }
+        public GenericHashSetWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public GenericHashSetWrapper(IList<T> items)
@@ -1048,7 +1120,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class StringLinkedListWrapper : LinkedList<string>
     {
-        public StringLinkedListWrapper() { }
+        public StringLinkedListWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringLinkedListWrapper(IList<string> items)
@@ -1062,7 +1136,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericLinkedListWrapper<T> : LinkedList<T>
     {
-        public GenericLinkedListWrapper() { }
+        public GenericLinkedListWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public GenericLinkedListWrapper(IList<T> items)
@@ -1076,7 +1152,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class StringSortedSetWrapper : SortedSet<string>
     {
-        public StringSortedSetWrapper() { }
+        public StringSortedSetWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringSortedSetWrapper(IList<string> items)
@@ -1090,7 +1168,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class GenericSortedSetWrapper<T> : SortedSet<T>
     {
-        public GenericSortedSetWrapper() { }
+        public GenericSortedSetWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public GenericSortedSetWrapper(IList<T> items)
@@ -1104,7 +1184,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class StringToStringDictionaryWrapper : Dictionary<string, string>
     {
-        public StringToStringDictionaryWrapper() { }
+        public StringToStringDictionaryWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringToStringDictionaryWrapper(IList<KeyValuePair<string, string>> items)
@@ -1118,7 +1200,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class StringToGenericDictionaryWrapper<T> : Dictionary<string, T>
     {
-        public StringToGenericDictionaryWrapper() { }
+        public StringToGenericDictionaryWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringToGenericDictionaryWrapper(IList<KeyValuePair<string, T>> items)
@@ -1133,18 +1217,24 @@ namespace System.Text.Json.Serialization.Tests
     public class StringToGenericDictionaryWrapperPrivateConstructor<T>
         : StringToGenericDictionaryWrapper<T>
     {
-        private StringToGenericDictionaryWrapperPrivateConstructor() { }
+        private StringToGenericDictionaryWrapperPrivateConstructor()
+        {
+        }
     }
 
     public class StringToGenericDictionaryWrapperInternalConstructor<T>
         : StringToGenericDictionaryWrapper<T>
     {
-        internal StringToGenericDictionaryWrapperInternalConstructor() { }
+        internal StringToGenericDictionaryWrapperInternalConstructor()
+        {
+        }
     }
 
     public class StringToStringSortedDictionaryWrapper : SortedDictionary<string, string>
     {
-        public StringToStringSortedDictionaryWrapper() { }
+        public StringToStringSortedDictionaryWrapper()
+        {
+        }
 
         // For populating test data only. We cannot assume actual input will have this method.
         public StringToStringSortedDictionaryWrapper(IList<KeyValuePair<string, string>> items)
@@ -1210,11 +1300,17 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public interface IDerivedICollectionOfT<T> : ICollection<T> { }
+    public interface IDerivedICollectionOfT<T> : ICollection<T>
+    {
+    }
 
-    public interface IDerivedIDictionaryOfTKeyTValue<TKey, TValue> : IDictionary<TKey, TValue> { }
+    public interface IDerivedIDictionaryOfTKeyTValue<TKey, TValue> : IDictionary<TKey, TValue>
+    {
+    }
 
-    public interface IDerivedISetOfT<T> : ISet<T> { }
+    public interface IDerivedISetOfT<T> : ISet<T>
+    {
+    }
 
     public struct GenericStructIListWrapper<T> : IList<T>
     {

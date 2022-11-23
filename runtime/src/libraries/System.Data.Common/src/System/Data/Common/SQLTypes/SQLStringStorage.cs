@@ -17,7 +17,8 @@ namespace System.Data.Common
 
         public SqlStringStorage(DataColumn column)
             : base(column, typeof(SqlString), SqlString.Null, SqlString.Null, StorageType.SqlString)
-        { }
+        {
+        }
 
         public override object Aggregate(int[] recordNos, AggregateType kind)
         {

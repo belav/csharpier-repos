@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
     {
         public static readonly IVirtualCharService Instance = new CSharpVirtualCharService();
 
-        protected CSharpVirtualCharService() { }
+        protected CSharpVirtualCharService()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

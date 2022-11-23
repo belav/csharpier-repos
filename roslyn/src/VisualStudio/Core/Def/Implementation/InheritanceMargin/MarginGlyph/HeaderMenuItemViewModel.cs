@@ -18,6 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             string displayContent,
             ImageMoniker imageMoniker,
             string automationName
-        ) : base(displayContent, imageMoniker, automationName) { }
+        ) : base(displayContent, imageMoniker, automationName)
+        {
+        }
     }
 }

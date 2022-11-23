@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.Features.Intents
                         s_serializerOptions.Value
                     );
                 }
-                catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.General)) { }
+                catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.General))
+                {
+                }
             }
 
             return null;

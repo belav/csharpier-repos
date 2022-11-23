@@ -4,7 +4,9 @@ namespace System.CommandLine.Generator.Parameters
 {
     internal class HelpBuilderParameter : Parameter, IEquatable<HelpBuilderParameter>
     {
-        public HelpBuilderParameter(ITypeSymbol helpBuilderType) : base(helpBuilderType) { }
+        public HelpBuilderParameter(ITypeSymbol helpBuilderType) : base(helpBuilderType)
+        {
+        }
 
         public override string GetValueFromContext() => "context.HelpBuilder";
 

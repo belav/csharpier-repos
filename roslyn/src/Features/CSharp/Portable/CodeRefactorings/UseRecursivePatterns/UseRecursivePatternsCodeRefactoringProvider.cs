@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public UseRecursivePatternsCodeRefactoringProvider() { }
+        public UseRecursivePatternsCodeRefactoringProvider()
+        {
+        }
 
         protected override ImmutableArray<FixAllScope> SupportedFixAllScopes => AllFixAllScopes;
 

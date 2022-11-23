@@ -9,9 +9,13 @@
 
 using System;
 
-class Foo3 : Foo2, IFoo { }
+class Foo3 : Foo2, IFoo
+{
+}
 
-class Bar3<T> : Bar2<T>, IBar<T> { }
+class Bar3<T> : Bar2<T>, IBar<T>
+{
+}
 
 class MainClass
 {

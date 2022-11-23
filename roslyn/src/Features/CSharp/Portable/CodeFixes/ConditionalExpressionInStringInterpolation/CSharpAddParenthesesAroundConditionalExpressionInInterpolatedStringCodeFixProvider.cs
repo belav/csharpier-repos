@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
         public CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider()
-        { }
+        {
+        }
 
         // CS8361 is a syntax error and it is unlikely that there is more than one CS8361 at a time.
         public override FixAllProvider? GetFixAllProvider() => null;

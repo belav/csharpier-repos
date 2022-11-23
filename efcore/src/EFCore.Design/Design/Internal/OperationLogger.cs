@@ -118,8 +118,12 @@ public class OperationLogger : ILogger
     {
         public static NullScope Instance { get; } = new();
 
-        private NullScope() { }
+        private NullScope()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

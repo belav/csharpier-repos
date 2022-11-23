@@ -34,7 +34,9 @@ namespace XLinqTests
 
         #region Public Methods and Operators
 
-        public override void AddChildren() { }
+        public override void AddChildren()
+        {
+        }
 
         public void AddingMultipleNodesIntoElement(
             TestedFunction testedFunction,

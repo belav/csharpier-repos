@@ -26,13 +26,21 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public class TestAssemblyOne { }
+    public class TestAssemblyOne
+    {
+    }
 
-    public class TestAssemblyTwo { }
+    public class TestAssemblyTwo
+    {
+    }
 
-    public class TestAssemblyThree { }
+    public class TestAssemblyThree
+    {
+    }
 
-    public class TestAssemblyFour { }
+    public class TestAssemblyFour
+    {
+    }
 
     public class AssemblyCatalogTestsHelper
     {
@@ -60,7 +68,9 @@ namespace System.ComponentModel.Composition
 
         protected class DerivedAssemblyCatalog : AssemblyCatalog
         {
-            public DerivedAssemblyCatalog(Assembly assembly) : base(assembly) { }
+            public DerivedAssemblyCatalog(Assembly assembly) : base(assembly)
+            {
+            }
         }
     }
 
@@ -1049,7 +1059,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_ShouldNotThrow()
         {
-            using (var catalog = CreateAssemblyCatalog()) { }
+            using (var catalog = CreateAssemblyCatalog())
+            {
+            }
         }
 
         [Fact]

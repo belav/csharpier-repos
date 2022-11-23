@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UpdateProje
     public class UpdateProjectToAllowUnsafeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UpdateProjectToAllowUnsafeTests(ITestOutputHelper logger) : base(logger) { }
+        public UpdateProjectToAllowUnsafeTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

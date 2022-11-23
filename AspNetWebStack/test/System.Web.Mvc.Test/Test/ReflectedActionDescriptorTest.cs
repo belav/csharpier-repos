@@ -541,7 +541,9 @@ namespace System.Web.Mvc.Test
         private class OverriddenAttributeController : Controller
         {
             [OutputCache(VaryByParam = "Method")]
-            public void SomeMethod() { }
+            public void SomeMethod()
+            {
+            }
         }
 
         [KeyedActionFilter(Key = "BaseClass", Order = 0)]
@@ -551,17 +553,23 @@ namespace System.Web.Mvc.Test
         {
             [KeyedActionFilter(Key = "BaseMethod", Order = 0)]
             [KeyedAuthorizationFilter(Key = "BaseMethod", Order = 0)]
-            public virtual void SomeVirtual() { }
+            public virtual void SomeVirtual()
+            {
+            }
         }
 
         [KeyedActionFilter(Key = "DerivedClass", Order = 1)]
-        private class GetMemberChainDerivedController : GetMemberChainController { }
+        private class GetMemberChainDerivedController : GetMemberChainController
+        {
+        }
 
         [KeyedActionFilter(Key = "SubderivedClass", Order = 2)]
         private class GetMemberChainSubderivedController : GetMemberChainDerivedController
         {
             [KeyedActionFilter(Key = "SubderivedMethod", Order = 2)]
-            public override void SomeVirtual() { }
+            public override void SomeVirtual()
+            {
+            }
         }
 
         private abstract class KeyedFilterAttribute : FilterAttribute
@@ -628,18 +636,26 @@ namespace System.Web.Mvc.Test
 
         private class MyController : Controller
         {
-            public void GoodActionMethod() { }
+            public void GoodActionMethod()
+            {
+            }
 
-            public static void StaticMethod() { }
+            public static void StaticMethod()
+            {
+            }
 
-            public void OpenGenericMethod<T>() { }
+            public void OpenGenericMethod<T>()
+            {
+            }
 
             public void MethodHasOutParameter(out int i)
             {
                 i = 0;
             }
 
-            public void MethodHasRefParameter(ref int i) { }
+            public void MethodHasRefParameter(ref int i)
+            {
+            }
         }
     }
 }

@@ -43,7 +43,9 @@ namespace System.Net.Http.Functional.Tests
 
         private VerboseTestLogging _log = VerboseTestLogging.GetInstance();
 
-        public HttpClientEKUTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientEKUTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [ConditionalFact(nameof(CanTestCertificates))]
         public async Task HttpClient_NoEKUServerAuth_Ok()

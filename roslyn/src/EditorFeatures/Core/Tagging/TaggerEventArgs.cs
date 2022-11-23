@@ -14,6 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
     {
         public static new readonly TaggerEventArgs Empty = new();
 
-        private TaggerEventArgs() { }
+        private TaggerEventArgs()
+        {
+        }
     }
 }

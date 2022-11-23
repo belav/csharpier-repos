@@ -21,7 +21,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static readonly XmlCustomSerializer Instance = new XmlCustomSerializer();
 
-        private XmlCustomSerializer() { }
+        private XmlCustomSerializer()
+        {
+        }
 
         public override XmlTypeKind Kind
         {

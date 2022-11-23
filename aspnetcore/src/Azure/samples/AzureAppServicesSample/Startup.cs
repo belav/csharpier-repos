@@ -8,8 +8,12 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // These two middleware are registered via an IStartupFilter in UseIISIntegration but you can configure them here.
-        services.Configure<IISOptions>(options => { });
-        services.Configure<ForwardedHeadersOptions>(options => { });
+        services.Configure<IISOptions>(options =>
+        {
+        });
+        services.Configure<ForwardedHeadersOptions>(options =>
+        {
+        });
     }
 
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)

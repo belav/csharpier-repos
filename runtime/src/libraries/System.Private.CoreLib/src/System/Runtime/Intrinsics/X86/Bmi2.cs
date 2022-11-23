@@ -12,7 +12,9 @@ namespace System.Runtime.Intrinsics.X86
     [CLSCompliant(false)]
     public abstract class Bmi2 : X86Base
     {
-        internal Bmi2() { }
+        internal Bmi2()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -22,7 +24,9 @@ namespace System.Runtime.Intrinsics.X86
         [Intrinsic]
         public new abstract class X64 : X86Base.X64
         {
-            internal X64() { }
+            internal X64()
+            {
+            }
 
             public static new bool IsSupported
             {

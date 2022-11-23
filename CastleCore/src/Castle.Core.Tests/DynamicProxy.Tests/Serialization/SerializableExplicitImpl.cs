@@ -22,7 +22,9 @@ namespace Castle.DynamicProxy.Tests.Serialization
     [Serializable]
     public class SerializableExplicitImpl : ISerializable
     {
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) { }
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 }
 

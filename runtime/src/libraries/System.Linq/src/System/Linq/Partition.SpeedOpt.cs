@@ -24,7 +24,9 @@ namespace System.Linq
         /// </summary>
         public static readonly IPartition<TElement> Instance = new EmptyPartition<TElement>();
 
-        private EmptyPartition() { }
+        private EmptyPartition()
+        {
+        }
 
         public IEnumerator<TElement> GetEnumerator() => this;
 

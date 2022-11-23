@@ -18,7 +18,9 @@ namespace System.Drawing.Internal
         private string AllocationSite = DbgUtil.StackTrace;
 #endif
 
-        private WindowsRegion() { }
+        private WindowsRegion()
+        {
+        }
 
         public WindowsRegion(Rectangle rect)
         {

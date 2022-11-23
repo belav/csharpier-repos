@@ -63,9 +63,13 @@ public class ValidRegistrationStringCallbacks : IValidateRegistrationCallbacks
     }
 }
 
-public class InheritedRegistrationTypeCallbacks : RegistrationTypeCallbacksFromB { }
+public class InheritedRegistrationTypeCallbacks : RegistrationTypeCallbacksFromB
+{
+}
 
-public class InheritedRegistrationStringCallbacks : RegistrationStringCallbacksFromB { }
+public class InheritedRegistrationStringCallbacks : RegistrationStringCallbacksFromB
+{
+}
 
 public class NoRegistrationCallbacks : IValidateRegistrationCallbacks
 {
@@ -122,16 +126,24 @@ public class InvalidInstanceRegistrationCallbacks : IValidateRegistrationCallbac
 public class MultipleRegistrationCallbacks : IValidateRegistrationCallbacks
 {
     [ComRegisterFunctionAttribute]
-    public static void RegisterFunction(string t) { }
+    public static void RegisterFunction(string t)
+    {
+    }
 
     [ComUnregisterFunctionAttribute]
-    public static void UnregisterFunction(string t) { }
+    public static void UnregisterFunction(string t)
+    {
+    }
 
     [ComRegisterFunctionAttribute]
-    public static void RegisterFunction2(string t) { }
+    public static void RegisterFunction2(string t)
+    {
+    }
 
     [ComUnregisterFunctionAttribute]
-    public static void UnregisterFunction2(string t) { }
+    public static void UnregisterFunction2(string t)
+    {
+    }
 
     bool IValidateRegistrationCallbacks.DidRegister() => throw new NotImplementedException();
 

@@ -104,7 +104,9 @@ namespace Moq.Tests
 
         public interface IX
         {
-            void Inert() { }
+            void Inert()
+            {
+            }
 
             int ReturnsFortyTwo() => 42;
             string ReturnsHello() => "Hello";

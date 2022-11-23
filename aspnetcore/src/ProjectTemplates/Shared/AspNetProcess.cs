@@ -257,7 +257,9 @@ public class AspNetProcess : IDisposable
                 }
             }
         }
-        catch (OperationCanceledException) { }
+        catch (OperationCanceledException)
+        {
+        }
 
         throw new InvalidOperationException(
             @$"Couldn't find listening url:

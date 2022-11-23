@@ -24,7 +24,9 @@ namespace System.Net.Http.Functional.Tests
 
         public static bool SupportsAlpn => PlatformDetection.SupportsAlpn;
 
-        public HttpClientHandlerTest_Http2(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Http2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         private async Task AssertProtocolErrorAsync(Task task, ProtocolErrors errorCode)
         {
@@ -2512,7 +2514,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         frame = await connection.ReadFrameAsync(TimeSpan.FromMilliseconds(1000));
                     }
-                    catch (System.OperationCanceledException) { }
+                    catch (System.OperationCanceledException)
+                    {
+                    }
                     ;
                     Assert.Null(frame); // Make sure we do not get any frames after getting Rst.
                     await connection.SendResponseBodyAsync(
@@ -2570,7 +2574,9 @@ namespace System.Net.Http.Functional.Tests
                                         _ = await stream.ReadAsync(buffer, cts.Token);
                                     }
                                 }
-                                catch (OperationCanceledException) { }
+                                catch (OperationCanceledException)
+                                {
+                                }
                                 ;
                             }
                         }
@@ -2678,7 +2684,9 @@ namespace System.Net.Http.Functional.Tests
             );
         }
 
-        private class CustomException : Exception { }
+        private class CustomException : Exception
+        {
+        }
 
         [Theory]
         [InlineData(true)]

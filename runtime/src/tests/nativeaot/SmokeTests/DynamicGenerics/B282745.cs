@@ -147,7 +147,9 @@ public static class B282745
 #endif
     }
 
-    public class MDArrayTestType { }
+    public class MDArrayTestType
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     [TestMethod]

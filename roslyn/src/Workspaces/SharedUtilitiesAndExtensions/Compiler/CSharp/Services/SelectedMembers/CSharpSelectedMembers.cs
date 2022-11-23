@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         public static readonly CSharpSelectedMembers Instance = new();
 
-        private CSharpSelectedMembers() { }
+        private CSharpSelectedMembers()
+        {
+        }
 
         protected override ImmutableArray<(
             SyntaxNode declarator,

@@ -8,6 +8,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
     {
         public static EmptyTreeViewItem Instance { get; } = new();
 
-        private EmptyTreeViewItem() { }
+        private EmptyTreeViewItem()
+        {
+        }
     }
 }

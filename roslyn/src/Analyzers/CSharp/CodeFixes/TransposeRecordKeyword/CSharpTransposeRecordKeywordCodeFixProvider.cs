@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.TransposeRecordKeyword
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpTransposeRecordKeywordCodeFixProvider() { }
+        public CSharpTransposeRecordKeywordCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS9012);

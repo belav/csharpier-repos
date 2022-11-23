@@ -9,7 +9,9 @@ namespace System
     [System.Text.Json.Serialization.JsonConverter(typeof(BinaryDataConverter))]
     public partial class BinaryData
     {
-        public BinaryData(byte[] data) { }
+        public BinaryData(byte[] data)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed."
@@ -18,17 +20,25 @@ namespace System
             object? jsonSerializable,
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Type? type = null
-        ) { }
+        )
+        {
+        }
 
         public BinaryData(
             object? jsonSerializable,
             System.Text.Json.Serialization.JsonSerializerContext context,
             Type? type = null
-        ) { }
+        )
+        {
+        }
 
-        public BinaryData(System.ReadOnlyMemory<byte> data) { }
+        public BinaryData(System.ReadOnlyMemory<byte> data)
+        {
+        }
 
-        public BinaryData(string data) { }
+        public BinaryData(string data)
+        {
+        }
 
         public static System.BinaryData Empty
         {
@@ -163,6 +173,8 @@ namespace System
             System.Text.Json.Utf8JsonWriter writer,
             BinaryData value,
             System.Text.Json.JsonSerializerOptions options
-        ) { }
+        )
+        {
+        }
     }
 }

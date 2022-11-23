@@ -123,7 +123,9 @@ namespace System.Linq.Expressions
     /// </summary>
     internal sealed class ByRefParameterExpression : TypedParameterExpression
     {
-        internal ByRefParameterExpression(Type type, string? name) : base(type, name) { }
+        internal ByRefParameterExpression(Type type, string? name) : base(type, name)
+        {
+        }
 
         internal override bool GetIsByRef() => true;
     }
@@ -148,7 +150,9 @@ namespace System.Linq.Expressions
     /// </summary>
     internal sealed class PrimitiveParameterExpression<T> : ParameterExpression
     {
-        internal PrimitiveParameterExpression(string? name) : base(name) { }
+        internal PrimitiveParameterExpression(string? name) : base(name)
+        {
+        }
 
         public sealed override Type Type => typeof(T);
     }

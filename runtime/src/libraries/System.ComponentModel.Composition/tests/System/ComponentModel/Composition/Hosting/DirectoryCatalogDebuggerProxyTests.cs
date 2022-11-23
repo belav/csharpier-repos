@@ -146,7 +146,9 @@ namespace System.ComponentModel.Composition.Primitives
         {
             string directoryPath = TemporaryFileCopier.GetNewTemporaryDirectory();
             // Add one text file
-            using (File.CreateText(Path.Combine(directoryPath, "Test.txt"))) { }
+            using (File.CreateText(Path.Combine(directoryPath, "Test.txt")))
+            {
+            }
 
             // Add two dll's
             string dll1 = Path.Combine(directoryPath, "Test1.dll");

@@ -9,16 +9,22 @@ public class EFCollections : AutoMapperSpecBase
         public ICollection<Child> Children { get; set; }
     }
 
-    public class OtherSource : Source { }
+    public class OtherSource : Source
+    {
+    }
 
-    public class OtherChild : Child { }
+    public class OtherChild : Child
+    {
+    }
 
     public class Dest
     {
         public ICollection<DestChild> Children { get; set; }
     }
 
-    public class DestChild { }
+    public class DestChild
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

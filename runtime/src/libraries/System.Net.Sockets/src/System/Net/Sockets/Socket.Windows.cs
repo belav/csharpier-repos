@@ -20,7 +20,8 @@ namespace System.Net.Sockets
         private DynamicWinsockMethods? _dynamicWinsockMethods;
 
 #pragma warning disable CA1822
-        internal void ReplaceHandleIfNecessaryAfterFailedConnect() { /* nop on Windows */
+        internal void ReplaceHandleIfNecessaryAfterFailedConnect()
+        { /* nop on Windows */
         }
 #pragma warning restore CA1822
 

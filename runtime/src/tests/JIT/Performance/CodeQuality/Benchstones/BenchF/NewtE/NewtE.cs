@@ -81,7 +81,9 @@ namespace Benchstone.BenchF
                     System.Console.WriteLine("FAILED TO CONVERGE IN 20 ITERATIONS\n");
                 }
 
-                L11: { }
+                L11:
+                {
+                }
             }
 
             return true;

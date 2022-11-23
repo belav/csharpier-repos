@@ -7,18 +7,26 @@ public abstract class TypeMapIncludeBaseTypes
         public int? A { get; set; }
     }
 
-    public class SourceA : Source { }
+    public class SourceA : Source
+    {
+    }
 
-    public class SourceB : Source { }
+    public class SourceB : Source
+    {
+    }
 
     public abstract class Target
     {
         public int? A { get; set; }
     }
 
-    public class TargetA : Target { }
+    public class TargetA : Target
+    {
+    }
 
-    public class TargetB : Target { }
+    public class TargetB : Target
+    {
+    }
 
     public class IncludeFromBase : TypeMapIncludeBaseTypes
     {

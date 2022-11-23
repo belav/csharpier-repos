@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStructuralTypeDisplayService() { }
+        public CSharpStructuralTypeDisplayService()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFactsService => CSharpSyntaxFacts.Instance;
 

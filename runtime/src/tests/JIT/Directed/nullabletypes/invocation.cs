@@ -63,7 +63,9 @@ struct CloseGenImplGenAndImplStruct<T> : BaseInter, GenInter<int>
     }
 }
 
-class Foo { }
+class Foo
+{
+}
 
 class NullableTests
 {

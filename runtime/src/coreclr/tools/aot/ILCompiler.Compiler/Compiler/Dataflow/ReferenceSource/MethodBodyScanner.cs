@@ -57,7 +57,9 @@ namespace Mono.Linker.Dataflow
 
         internal MultiValue ReturnValue { private set; get; }
 
-        protected virtual void WarnAboutInvalidILInMethod(MethodBody method, int ilOffset) { }
+        protected virtual void WarnAboutInvalidILInMethod(MethodBody method, int ilOffset)
+        {
+        }
 
         private void CheckForInvalidStack(
             Stack<StackSlot> stack,
@@ -1224,28 +1226,36 @@ namespace Mono.Linker.Dataflow
             FieldValue field,
             Instruction operation,
             MultiValue valueToStore
-        ) { }
+        )
+        {
+        }
 
         protected virtual void HandleStoreParameter(
             MethodDefinition method,
             MethodParameterValue parameter,
             Instruction operation,
             MultiValue valueToStore
-        ) { }
+        )
+        {
+        }
 
         protected virtual void HandleStoreMethodThisParameter(
             MethodDefinition method,
             MethodThisParameterValue thisParameter,
             Instruction operation,
             MultiValue sourceValue
-        ) { }
+        )
+        {
+        }
 
         protected virtual void HandleStoreMethodReturnValue(
             MethodDefinition method,
             MethodReturnValue thisParameter,
             Instruction operation,
             MultiValue sourceValue
-        ) { }
+        )
+        {
+        }
 
         private void ScanStfld(
             Instruction operation,

@@ -43,7 +43,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 CreateDefaultSymbolSpecification(),
                 canBeDeleted,
                 notificationService
-            ) { }
+            )
+        {
+        }
 
         public SymbolSpecificationViewModel(
             string languageName,

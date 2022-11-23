@@ -25,7 +25,9 @@ namespace System.Web.Http.Controllers
 
         private ModelMetadataProvider _metadataProvider;
 
-        public HttpActionBinding() { }
+        public HttpActionBinding()
+        {
+        }
 
         public HttpActionBinding(
             HttpActionDescriptor actionDescriptor,

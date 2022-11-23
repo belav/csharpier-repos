@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                 menuCommandService,
                 monitorSelection,
                 componentModel
-            ) { }
+            )
+        {
+        }
 
         protected override string ProjectKind => VSLangProj.PrjKind.prjKindCSharpProject;
 

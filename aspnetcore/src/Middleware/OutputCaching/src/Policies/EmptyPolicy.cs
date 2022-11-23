@@ -10,7 +10,9 @@ internal sealed class EmptyPolicy : IOutputCachePolicy
 {
     public static IOutputCachePolicy Instance = new EmptyPolicy();
 
-    private EmptyPolicy() { }
+    private EmptyPolicy()
+    {
+    }
 
     /// <inheritdoc/>
     ValueTask IOutputCachePolicy.CacheRequestAsync(

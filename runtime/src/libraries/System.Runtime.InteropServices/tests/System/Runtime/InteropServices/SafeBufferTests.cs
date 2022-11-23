@@ -250,7 +250,9 @@ namespace System.Runtime.InteropServices.Tests
 
         public class SubBuffer : SafeBuffer
         {
-            public SubBuffer(bool ownsHandle) : base(ownsHandle) { }
+            public SubBuffer(bool ownsHandle) : base(ownsHandle)
+            {
+            }
 
             protected override bool ReleaseHandle()
             {

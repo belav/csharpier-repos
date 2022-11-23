@@ -4,13 +4,21 @@
 
 using System;
 
-public interface IFoo { }
+public interface IFoo
+{
+}
 
-public class Transition<T> where T : IFoo { }
+public class Transition<T> where T : IFoo
+{
+}
 
-public class FooClass : IFoo { }
+public class FooClass : IFoo
+{
+}
 
-public struct FooStruct : IFoo { }
+public struct FooStruct : IFoo
+{
+}
 
 public class GenClass<T> where T : IFoo
 {

@@ -40,7 +40,9 @@ namespace System.ComponentModel.Composition.Primitives
         ///         and <see cref="RequiredCreationPolicy"/> properties.
         ///     </note>
         /// </remarks>
-        protected ContractBasedImportDefinition() { }
+        protected ContractBasedImportDefinition()
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContractBasedImportDefinition"/> class
@@ -115,7 +117,9 @@ namespace System.ComponentModel.Composition.Primitives
                 isPrerequisite,
                 requiredCreationPolicy,
                 MetadataServices.EmptyMetadata
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContractBasedImportDefinition"/> class

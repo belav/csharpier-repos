@@ -12,7 +12,9 @@ namespace Microsoft.TestCommon
         private static readonly MediaTypeHeaderValueComparer mediaTypeComparer =
             new MediaTypeHeaderValueComparer();
 
-        public MediaTypeHeaderValueComparer() { }
+        public MediaTypeHeaderValueComparer()
+        {
+        }
 
         public static MediaTypeHeaderValueComparer Comparer
         {

@@ -101,7 +101,12 @@ namespace Microsoft.Extensions.Caching.Distributed
         {
             var services = new ServiceCollection();
 
-            Assert.Same(services, services.AddMemoryCache(_ => { }));
+            Assert.Same(
+                services,
+                services.AddMemoryCache(_ =>
+                {
+                })
+            );
         }
 
         [Fact]

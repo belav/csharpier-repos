@@ -14,7 +14,9 @@ namespace System.Formats.Tar
     {
         // Constructor called when reading a TarEntry from a TarReader.
         internal PosixTarEntry(TarHeader header, TarReader readerOfOrigin, TarEntryFormat format)
-            : base(header, readerOfOrigin, format) { }
+            : base(header, readerOfOrigin, format)
+        {
+        }
 
         // Constructor called when the user creates a TarEntry instance from scratch.
         internal PosixTarEntry(

@@ -42,7 +42,9 @@ namespace System.Net.NetworkInformation
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
             true
         )]
-        public NetworkChange() { }
+        public NetworkChange()
+        {
+        }
 
         // Introduced for supporting design-time loading of System.Windows.dll
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -50,7 +52,9 @@ namespace System.Net.NetworkInformation
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
             true
         )]
-        public static void RegisterNetworkChange(NetworkChange nc) { }
+        public static void RegisterNetworkChange(NetworkChange nc)
+        {
+        }
 
         private static void RunAddressChangedHandler(object state)
         {

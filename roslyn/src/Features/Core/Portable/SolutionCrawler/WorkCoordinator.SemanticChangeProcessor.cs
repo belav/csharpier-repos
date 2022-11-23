@@ -74,7 +74,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     );
                 }
 
-                protected override void OnPaused() { }
+                protected override void OnPaused()
+                {
+                }
 
                 public override Task AsyncProcessorTask =>
                     Task.WhenAll(base.AsyncProcessorTask, _processor.AsyncProcessorTask);
@@ -467,7 +469,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         );
                     }
 
-                    protected override void OnPaused() { }
+                    protected override void OnPaused()
+                    {
+                    }
 
                     public void Enqueue(ProjectId projectId, bool needDependencyTracking = false)
                     {

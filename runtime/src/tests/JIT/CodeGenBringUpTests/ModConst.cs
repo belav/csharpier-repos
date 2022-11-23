@@ -187,7 +187,9 @@ static class ModProgram
             ModConst.I4_Mod_0(42);
             return Fail;
         }
-        catch (DivideByZeroException) { }
+        catch (DivideByZeroException)
+        {
+        }
         catch (Exception)
         {
             return Fail;
@@ -213,7 +215,9 @@ static class ModProgram
             ModConst.I4_Mod_Minus1(int.MinValue);
             return Fail;
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return Fail;
@@ -331,7 +335,9 @@ static class ModProgram
             ModConst.I8_Mod_0(42);
             return Fail;
         }
-        catch (DivideByZeroException) { }
+        catch (DivideByZeroException)
+        {
+        }
         catch (Exception)
         {
             return Pass;
@@ -352,7 +358,9 @@ static class ModProgram
             ModConst.I8_Mod_Minus1(long.MinValue);
             return Fail;
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception)
         {
             return Fail;

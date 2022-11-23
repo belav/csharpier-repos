@@ -13,11 +13,14 @@ namespace System.Web.Mvc
     )]
     public class SelectList : MultiSelectList
     {
-        public SelectList(IEnumerable items) : this(items, selectedValue: null) { }
+        public SelectList(IEnumerable items) : this(items, selectedValue: null)
+        {
+        }
 
         public SelectList(IEnumerable items, object selectedValue)
             : this(items, dataValueField: null, dataTextField: null, selectedValue: selectedValue)
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the SelectList class by using the specified items for the list,
@@ -35,10 +38,14 @@ namespace System.Web.Mvc
                 dataTextField: null,
                 selectedValue: selectedValue,
                 disabledValues: disabledValues
-            ) { }
+            )
+        {
+        }
 
         public SelectList(IEnumerable items, string dataValueField, string dataTextField)
-            : this(items, dataValueField, dataTextField, selectedValue: null) { }
+            : this(items, dataValueField, dataTextField, selectedValue: null)
+        {
+        }
 
         public SelectList(
             IEnumerable items,

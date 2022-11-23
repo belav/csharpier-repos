@@ -22,5 +22,7 @@ public class TestLoggerFactory : ILoggerFactory
 
     public void AddProvider(ILoggerProvider provider) => throw new NotSupportedException();
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

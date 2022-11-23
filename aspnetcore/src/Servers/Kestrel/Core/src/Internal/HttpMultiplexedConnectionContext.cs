@@ -32,5 +32,7 @@ internal sealed class HttpMultiplexedConnectionContext : BaseHttpConnectionConte
             memoryPool,
             localEndPoint,
             remoteEndPoint
-        ) { }
+        )
+    {
+    }
 }

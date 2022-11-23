@@ -266,7 +266,9 @@ namespace System.Threading.Tasks.Tests
     /// </summary>
     public sealed class LongTask<T> : LongTask
     {
-        public LongTask(int milliseconds) : base(milliseconds) { }
+        public LongTask(int milliseconds) : base(milliseconds)
+        {
+        }
 
         // Synchronous version of time-consuming method
         public T DoTask(T input)

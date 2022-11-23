@@ -38,7 +38,9 @@ namespace System.Data.ProviderBase
         private int _activateCount; // debug only counter to verify activate/deactivates are in sync.
 #endif //DEBUG
 
-        protected DbConnectionInternal() : this(ConnectionState.Open, true, false) { }
+        protected DbConnectionInternal() : this(ConnectionState.Open, true, false)
+        {
+        }
 
         // Constructor for internal connections
         internal DbConnectionInternal(

@@ -103,7 +103,9 @@ namespace Tests.Collections
             RepeatTest(
                 (enumerator, items) =>
                 {
-                    while (enumerator.MoveNext()) { }
+                    while (enumerator.MoveNext())
+                    {
+                    }
                     Assert.Throws<InvalidOperationException>(() => enumerator.Current);
                 }
             );
@@ -115,7 +117,9 @@ namespace Tests.Collections
             RepeatTest(
                 (enumerator, items) =>
                 {
-                    while (enumerator.MoveNext()) { }
+                    while (enumerator.MoveNext())
+                    {
+                    }
 
                     Assert.False(enumerator.MoveNext());
                 }

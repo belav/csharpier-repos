@@ -24,7 +24,9 @@ namespace ILCompiler.Reflection.ReadyToRun
             public ReadyToRunSignature Signature { get; set; }
             public GCRefMap GCRefMap { get; set; }
 
-            public ImportSectionEntry() { }
+            public ImportSectionEntry()
+            {
+            }
 
             public ImportSectionEntry(
                 int index,

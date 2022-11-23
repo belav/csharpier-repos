@@ -16,7 +16,9 @@ using System.Text;
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.All)]
-    internal class __BlockAllReflectionAttribute : Attribute { }
+    internal class __BlockAllReflectionAttribute : Attribute
+    {
+    }
 }
 
 // Name of namespace matches the name of the assembly on purpose to
@@ -1516,7 +1518,9 @@ namespace PInvokeTests
                 ValidateSuccessCall(E_NOTIMPL);
                 throw new Exception("Exception should be thrown for E_NOTIMPL error code");
             }
-            catch (NotImplementedException) { }
+            catch (NotImplementedException)
+            {
+            }
 
             var intResult = ValidateIntResult(0);
             ThrowIfNotEquals(intResult, 42, "Int32 marshalling failed.");
@@ -1527,7 +1531,9 @@ namespace PInvokeTests
                 intResult = ValidateIntResult(E_NOTIMPL);
                 throw new Exception("Exception should be thrown for E_NOTIMPL error code");
             }
-            catch (NotImplementedException) { }
+            catch (NotImplementedException)
+            {
+            }
 
             var enumResult = ValidateEnumResult(0);
             ThrowIfNotEquals(enumResult, MagicEnum.MagicResult, "Enum marshalling failed.");
@@ -1591,7 +1597,9 @@ namespace PInvokeTests
         [DllImport("PInvokeNative", CallingConvention = CallingConvention.StdCall)]
         public static extern bool ReleaseMemory(IntPtr handle);
 
-        public SafeMemoryHandle() : base(IntPtr.Zero, true) { }
+        public SafeMemoryHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         private static readonly IntPtr _invalidHandleValue = new IntPtr(-1);
 

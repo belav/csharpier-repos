@@ -16,7 +16,9 @@ namespace System.Data.Common
         private SqlGuid[] _values = default!; // Late-initialized
 
         public SqlGuidStorage(DataColumn column)
-            : base(column, typeof(SqlGuid), SqlGuid.Null, SqlGuid.Null, StorageType.SqlGuid) { }
+            : base(column, typeof(SqlGuid), SqlGuid.Null, SqlGuid.Null, StorageType.SqlGuid)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

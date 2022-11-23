@@ -420,7 +420,9 @@ namespace System.Xml.Xsl.Runtime
     /// </summary>
     internal sealed class XmlQueryDataReader : BinaryReader
     {
-        public XmlQueryDataReader(Stream input) : base(input) { }
+        public XmlQueryDataReader(Stream input) : base(input)
+        {
+        }
 
         /// <summary>
         /// Read a string value from the stream. Value can be null.
@@ -450,7 +452,9 @@ namespace System.Xml.Xsl.Runtime
     /// </summary>
     internal sealed class XmlQueryDataWriter : BinaryWriter
     {
-        public XmlQueryDataWriter(Stream output) : base(output) { }
+        public XmlQueryDataWriter(Stream output) : base(output)
+        {
+        }
 
         /// <summary>
         /// Write a string value to the stream. Value can be null.

@@ -28,7 +28,9 @@ namespace System.Web.Http.Controllers
         /// Initializes a new instance of the <see cref="ReflectedHttpParameterDescriptor"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public ReflectedHttpParameterDescriptor() { }
+        public ReflectedHttpParameterDescriptor()
+        {
+        }
 
         public override object DefaultValue
         {

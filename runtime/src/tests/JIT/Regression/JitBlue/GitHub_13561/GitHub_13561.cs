@@ -6,9 +6,13 @@ using System.Collections.Generic;
 
 internal static class Program
 {
-    class MemberInfo { }
+    class MemberInfo
+    {
+    }
 
-    class PropertyInfo : MemberInfo { }
+    class PropertyInfo : MemberInfo
+    {
+    }
 
     class CustomAttributeData
     {

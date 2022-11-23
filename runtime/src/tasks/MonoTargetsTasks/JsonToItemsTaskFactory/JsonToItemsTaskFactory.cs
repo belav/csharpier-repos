@@ -60,7 +60,9 @@ namespace JsonToItemsTaskFactory
 
         private bool _logDebugTask;
 
-        public JsonToItemsTaskFactory() { }
+        public JsonToItemsTaskFactory()
+        {
+        }
 
         public string FactoryName => "JsonToItemsTaskFactory";
 
@@ -103,7 +105,9 @@ namespace JsonToItemsTaskFactory
             return new JsonToItemsTask(_taskName!, _logDebugTask);
         }
 
-        public void CleanupTask(ITask task) { }
+        public void CleanupTask(ITask task)
+        {
+        }
 
         internal bool ValidateParameterGroup(
             IDictionary<string, TaskPropertyInfo> parameterGroup,
@@ -401,7 +405,9 @@ namespace JsonToItemsTaskFactory
             public Dictionary<string, string>? Properties { get; set; }
             public Dictionary<string, JsonModelItem[]>? Items { get; set; }
 
-            public JsonModelRoot() { }
+            public JsonModelRoot()
+            {
+            }
         }
 
         [JsonConverter(typeof(JsonModelItemConverter))]
@@ -445,7 +451,9 @@ namespace JsonToItemsTaskFactory
 
         public class JsonModelItemConverter : JsonConverter<JsonModelItem>
         {
-            public JsonModelItemConverter() { }
+            public JsonModelItemConverter()
+            {
+            }
 
             public override JsonModelItem Read(
                 ref Utf8JsonReader reader,

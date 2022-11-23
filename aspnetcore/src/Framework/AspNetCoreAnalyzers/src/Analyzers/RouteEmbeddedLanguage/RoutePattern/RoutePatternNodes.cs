@@ -391,15 +391,21 @@ internal sealed class RoutePatternPolicyFragment : RoutePatternNode
 
 internal abstract class RoutePatternRootPartNode : RoutePatternNode
 {
-    protected RoutePatternRootPartNode(RoutePatternKind kind) : base(kind) { }
+    protected RoutePatternRootPartNode(RoutePatternKind kind) : base(kind)
+    {
+    }
 }
 
 internal abstract class RoutePatternSegmentPartNode : RoutePatternNode
 {
-    protected RoutePatternSegmentPartNode(RoutePatternKind kind) : base(kind) { }
+    protected RoutePatternSegmentPartNode(RoutePatternKind kind) : base(kind)
+    {
+    }
 }
 
 internal abstract class RoutePatternParameterPartNode : RoutePatternNode
 {
-    protected RoutePatternParameterPartNode(RoutePatternKind kind) : base(kind) { }
+    protected RoutePatternParameterPartNode(RoutePatternKind kind) : base(kind)
+    {
+    }
 }

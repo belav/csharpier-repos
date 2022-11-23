@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InternalDiagnosticsOptionsProvider() { }
+        public InternalDiagnosticsOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(

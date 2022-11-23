@@ -21,7 +21,9 @@ namespace System.Web.Mvc
                 new UnvalidatedRequestValuesWrapper(
                     controllerContext.HttpContext.Request.Unvalidated
                 )
-            ) { }
+            )
+        {
+        }
 
         // For unit testing
         internal JQueryFormValueProvider(
@@ -33,6 +35,8 @@ namespace System.Web.Mvc
                 unvalidatedValues.Form,
                 CultureInfo.CurrentCulture,
                 jQueryToMvcRequestNormalizationRequired: true
-            ) { }
+            )
+        {
+        }
     }
 }

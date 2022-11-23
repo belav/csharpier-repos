@@ -48,7 +48,9 @@ namespace System.Threading
 
         public bool IsCompleted => false;
 
-        public void GetResult() { }
+        public void GetResult()
+        {
+        }
 
         public void OnCompleted(Action continuation) => throw new NotSupportedException();
 

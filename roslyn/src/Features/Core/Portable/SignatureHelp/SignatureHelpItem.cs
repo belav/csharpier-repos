@@ -86,7 +86,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 suffixParts.ToTaggedText(),
                 parameters,
                 descriptionParts.ToTaggedText()
-            ) { }
+            )
+        {
+        }
 
         internal IEnumerable<TaggedText> GetAllParts()
         {

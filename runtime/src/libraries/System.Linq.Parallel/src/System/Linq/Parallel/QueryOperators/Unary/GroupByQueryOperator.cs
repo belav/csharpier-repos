@@ -372,7 +372,9 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
             IEqualityComparer<TGroupKey>? keyComparer,
             CancellationToken cancellationToken
-        ) : base(source, keyComparer, cancellationToken) { }
+        ) : base(source, keyComparer, cancellationToken)
+        {
+        }
 
         //-----------------------------------------------------------------------------------
         // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
@@ -631,7 +633,9 @@ namespace System.Linq.Parallel
             IEqualityComparer<TGroupKey>? keyComparer,
             IComparer<TOrderKey> orderComparer,
             CancellationToken cancellationToken
-        ) : base(source, keySelector, keyComparer, orderComparer, cancellationToken) { }
+        ) : base(source, keySelector, keyComparer, orderComparer, cancellationToken)
+        {
+        }
 
         //-----------------------------------------------------------------------------------
         // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.

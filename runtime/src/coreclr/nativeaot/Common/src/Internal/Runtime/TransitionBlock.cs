@@ -212,7 +212,9 @@ namespace Internal.Runtime
     }
 
     // This struct isn't used by x86, but exists for compatibility with the definition of the CallDescrData struct
-    struct FloatArgumentRegisters { }
+    struct FloatArgumentRegisters
+    {
+    }
 #pragma warning restore 0169, 0649
 
     struct ArchitectureConstants

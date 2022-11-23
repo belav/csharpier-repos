@@ -108,7 +108,9 @@ namespace System.Collections.Concurrent
         /// uses the default comparer for the key type.
         /// </summary>
         public ConcurrentDictionary()
-            : this(DefaultConcurrencyLevel, DefaultCapacity, growLockArray: true, null) { }
+            : this(DefaultConcurrencyLevel, DefaultCapacity, growLockArray: true, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentDictionary{TKey,TValue}"/>
@@ -121,7 +123,9 @@ namespace System.Collections.Concurrent
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="concurrencyLevel"/> is less than 1.</exception>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="capacity"/> is less than 0.</exception>
         public ConcurrentDictionary(int concurrencyLevel, int capacity)
-            : this(concurrencyLevel, capacity, growLockArray: false, null) { }
+            : this(concurrencyLevel, capacity, growLockArray: false, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentDictionary{TKey,TValue}"/>
@@ -133,7 +137,9 @@ namespace System.Collections.Concurrent
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentException"><paramref name="collection"/> contains one or more duplicate keys.</exception>
         public ConcurrentDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
-            : this(collection, null) { }
+            : this(collection, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentDictionary{TKey,TValue}"/>
@@ -142,7 +148,9 @@ namespace System.Collections.Concurrent
         /// </summary>
         /// <param name="comparer">The <see cref="IEqualityComparer{TKey}"/> implementation to use when comparing keys.</param>
         public ConcurrentDictionary(IEqualityComparer<TKey>? comparer)
-            : this(DefaultConcurrencyLevel, DefaultCapacity, growLockArray: true, comparer) { }
+            : this(DefaultConcurrencyLevel, DefaultCapacity, growLockArray: true, comparer)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentDictionary{TKey,TValue}"/>
@@ -234,7 +242,9 @@ namespace System.Collections.Concurrent
             int concurrencyLevel,
             int capacity,
             IEqualityComparer<TKey>? comparer
-        ) : this(concurrencyLevel, capacity, growLockArray: false, comparer) { }
+        ) : this(concurrencyLevel, capacity, growLockArray: false, comparer)
+        {
+        }
 
         internal ConcurrentDictionary(
             int concurrencyLevel,
@@ -972,7 +982,9 @@ namespace System.Collections.Concurrent
                 _state = StateUninitialized;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

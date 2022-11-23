@@ -11,14 +11,22 @@ namespace System.Threading
     )]
     public class SemaphoreFullException : SystemException
     {
-        public SemaphoreFullException() : base(SR.Threading_SemaphoreFullException) { }
+        public SemaphoreFullException() : base(SR.Threading_SemaphoreFullException)
+        {
+        }
 
-        public SemaphoreFullException(string? message) : base(message) { }
+        public SemaphoreFullException(string? message) : base(message)
+        {
+        }
 
         public SemaphoreFullException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected SemaphoreFullException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

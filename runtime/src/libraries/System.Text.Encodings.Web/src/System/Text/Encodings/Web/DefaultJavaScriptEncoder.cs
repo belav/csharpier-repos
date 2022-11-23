@@ -19,7 +19,9 @@ namespace System.Text.Encodings.Web
         private readonly OptimizedInboxTextEncoder _innerEncoder;
 
         internal DefaultJavaScriptEncoder(TextEncoderSettings settings)
-            : this(settings, allowMinimalJsonEscaping: false) { }
+            : this(settings, allowMinimalJsonEscaping: false)
+        {
+        }
 
         private DefaultJavaScriptEncoder(
             TextEncoderSettings settings,

@@ -28,7 +28,9 @@ namespace System.Runtime.Versioning
         /// <summary>
         /// Initializes a new instance of the <see cref="RequiresPreviewFeaturesAttribute"/> class.
         /// </summary>
-        public RequiresPreviewFeaturesAttribute() { }
+        public RequiresPreviewFeaturesAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RequiresPreviewFeaturesAttribute"/> class with the specified message.

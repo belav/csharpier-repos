@@ -231,7 +231,9 @@ namespace ILCompiler
     public class ReadyToRunTableManager : MetadataManager
     {
         public ReadyToRunTableManager(CompilerTypeSystemContext typeSystemContext)
-            : base(typeSystemContext) { }
+            : base(typeSystemContext)
+        {
+        }
 
         public IEnumerable<TypeInfo<TypeDefinitionHandle>> GetDefinedTypes(EcmaModule module)
         {

@@ -145,20 +145,28 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-    public sealed class Sealed { }
+    public sealed class Sealed
+    {
+    }
 
     public class NoDefaultCtor
     {
-        public NoDefaultCtor(string someParam) { }
+        public NoDefaultCtor(string someParam)
+        {
+        }
     }
 
     public class DefaultProtectedCtor
     {
-        protected DefaultProtectedCtor() { }
+        protected DefaultProtectedCtor()
+        {
+        }
     }
 
     public class DefaultPrivateCtor
     {
-        private DefaultPrivateCtor() { }
+        private DefaultPrivateCtor()
+        {
+        }
     }
 }

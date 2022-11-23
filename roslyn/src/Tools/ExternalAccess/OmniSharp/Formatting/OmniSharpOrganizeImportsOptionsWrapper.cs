@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Formatting
                     SeparateImportDirectiveGroups = separateImportDirectiveGroups,
                     NewLine = newLine
                 }
-            ) { }
+            )
+        {
+        }
 
         public static async ValueTask<OmniSharpOrganizeImportsOptionsWrapper> FromDocumentAsync(
             Document document,

@@ -65,7 +65,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxKind.AsyncKeyword
             };
 
-        public UnsafeKeywordRecommender() : base(SyntaxKind.UnsafeKeyword) { }
+        public UnsafeKeywordRecommender() : base(SyntaxKind.UnsafeKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

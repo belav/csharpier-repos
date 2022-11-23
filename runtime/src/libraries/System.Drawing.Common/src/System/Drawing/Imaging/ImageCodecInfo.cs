@@ -21,7 +21,9 @@ namespace System.Drawing.Imaging
         private byte[][]? _signaturePatterns;
         private byte[][]? _signatureMasks;
 
-        internal ImageCodecInfo() { }
+        internal ImageCodecInfo()
+        {
+        }
 
         public Guid Clsid
         {

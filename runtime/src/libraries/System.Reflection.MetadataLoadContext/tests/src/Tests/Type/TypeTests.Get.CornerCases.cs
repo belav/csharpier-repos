@@ -139,14 +139,22 @@ namespace System.Reflection.Tests
         {
             public event Action MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public int MyField;
 
-            public void MyMethod() { }
+            public void MyMethod()
+            {
+            }
 
-            public class MyNestedType { }
+            public class MyNestedType
+            {
+            }
 
             public int MyProperty { get; }
         }
@@ -178,23 +186,39 @@ namespace System.Reflection.Tests
         {
             public event Action MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public static event Action MyStaticEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public event Action MyEventInstanceStatic
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public static event Action MyEventStaticInstance
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
 
@@ -202,23 +226,39 @@ namespace System.Reflection.Tests
         {
             public new event Action<int> MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public static new event Action<double> MyStaticEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public static new event Action<float> MyEventInstanceStatic
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public new event Action<long> MyEventStaticInstance
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
     }
@@ -422,8 +462,12 @@ namespace System.Reflection.Tests
         {
             public event Action MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public int MyProp { get; }
         }
@@ -432,20 +476,30 @@ namespace System.Reflection.Tests
         {
             private new event Action MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             private new int MyProp { get; }
         }
 
-        private abstract class Derived2 : Derived { }
+        private abstract class Derived2 : Derived
+        {
+        }
 
         private class StaticBase
         {
             public event Action MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
 
@@ -453,12 +507,18 @@ namespace System.Reflection.Tests
         {
             public static new event Action MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
 
-        private class StaticDerived2 : StaticDerived { }
+        private class StaticDerived2 : StaticDerived
+        {
+        }
     }
 
     public static class TypeTests_AmbiguityResolution_NoParameterBinding
@@ -555,20 +615,30 @@ namespace System.Reflection.Tests
 
             public int myfield;
 
-            public void mymethod1(int x) { }
+            public void mymethod1(int x)
+            {
+            }
 
-            public static void mymethod2(int x, int y) { }
+            public static void mymethod2(int x, int y)
+            {
+            }
 
-            public void mymethod4(int x) { }
+            public void mymethod4(int x)
+            {
+            }
         }
 
         private class Derived : Base
         {
             public event Action MyEvent;
 
-            public class @myinner { }
+            public class @myinner
+            {
+            }
 
-            public class MyInner { }
+            public class MyInner
+            {
+            }
 
             public int MyProp { get; }
 
@@ -577,15 +647,25 @@ namespace System.Reflection.Tests
             public int MyField2;
             public int myfield2;
 
-            public void MyMethod1(int x) { }
+            public void MyMethod1(int x)
+            {
+            }
 
-            public void MyMethod2(int x, int y) { }
+            public void MyMethod2(int x, int y)
+            {
+            }
 
-            public static void mymethod3(int x, int y, double z) { }
+            public static void mymethod3(int x, int y, double z)
+            {
+            }
 
-            public void MyMethod3(int x, int y, double z) { }
+            public void MyMethod3(int x, int y, double z)
+            {
+            }
 
-            public void mymethod4(string x) { }
+            public void mymethod4(string x)
+            {
+            }
         }
     }
 }

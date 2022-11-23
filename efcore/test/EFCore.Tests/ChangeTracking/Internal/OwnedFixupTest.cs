@@ -5644,7 +5644,9 @@ public class OwnedFixupTest
         public static readonly TestCurrency EUR = new(49, "EUR", 978, "Euro");
         public static readonly TestCurrency USD = new(148, "USD", 840, "United States dollar");
 
-        private TestCurrency() { }
+        private TestCurrency()
+        {
+        }
 
         public TestCurrency(int id, string code, int numericCode, string name)
         {

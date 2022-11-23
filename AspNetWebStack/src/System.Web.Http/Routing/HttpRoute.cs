@@ -40,7 +40,9 @@ namespace System.Web.Http.Routing
                 dataTokens: null,
                 handler: null,
                 parsedRoute: null
-            ) { }
+            )
+        {
+        }
 
         public HttpRoute(string routeTemplate)
             : this(
@@ -50,7 +52,9 @@ namespace System.Web.Http.Routing
                 dataTokens: null,
                 handler: null,
                 parsedRoute: null
-            ) { }
+            )
+        {
+        }
 
         public HttpRoute(string routeTemplate, HttpRouteValueDictionary defaults)
             : this(
@@ -60,7 +64,9 @@ namespace System.Web.Http.Routing
                 dataTokens: null,
                 handler: null,
                 parsedRoute: null
-            ) { }
+            )
+        {
+        }
 
         public HttpRoute(
             string routeTemplate,
@@ -74,7 +80,9 @@ namespace System.Web.Http.Routing
                 dataTokens: null,
                 handler: null,
                 parsedRoute: null
-            ) { }
+            )
+        {
+        }
 
         public HttpRoute(
             string routeTemplate,
@@ -82,7 +90,8 @@ namespace System.Web.Http.Routing
             HttpRouteValueDictionary constraints,
             HttpRouteValueDictionary dataTokens
         ) : this(routeTemplate, defaults, constraints, dataTokens, handler: null, parsedRoute: null)
-        { }
+        {
+        }
 
         public HttpRoute(
             string routeTemplate,
@@ -90,7 +99,9 @@ namespace System.Web.Http.Routing
             HttpRouteValueDictionary constraints,
             HttpRouteValueDictionary dataTokens,
             HttpMessageHandler handler
-        ) : this(routeTemplate, defaults, constraints, dataTokens, handler, parsedRoute: null) { }
+        ) : this(routeTemplate, defaults, constraints, dataTokens, handler, parsedRoute: null)
+        {
+        }
 
         internal HttpRoute(
             string routeTemplate,

@@ -12,7 +12,9 @@ namespace Wasm.Build.Tests;
 public class ConfigSrcTests : BuildTestBase
 {
     public ConfigSrcTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext) { }
+        : base(output, buildContext)
+    {
+    }
 
     // NOTE: port number determinizes dynamically, so could not generate absolute URI
     [Theory]

@@ -321,7 +321,9 @@ namespace System.Reflection.Tests
         {
             public TestClass() => throw new MyException2();
 
-            public TestClass(int _) { }
+            public TestClass(int _)
+            {
+            }
 
             public TestClass(string s) => throw new MyException5();
 
@@ -336,7 +338,9 @@ namespace System.Reflection.Tests
 
         public sealed class TestClassBadCCtor
         {
-            public TestClassBadCCtor() { }
+            public TestClassBadCCtor()
+            {
+            }
 
             static TestClassBadCCtor()
             {
@@ -355,16 +359,28 @@ namespace System.Reflection.Tests
             public static bool ThrowInConstructor;
         }
 
-        private sealed class MyException1 : Exception { }
+        private sealed class MyException1 : Exception
+        {
+        }
 
-        private sealed class MyException2 : Exception { }
+        private sealed class MyException2 : Exception
+        {
+        }
 
-        private sealed class MyException3 : Exception { }
+        private sealed class MyException3 : Exception
+        {
+        }
 
-        private sealed class MyException4 : Exception { }
+        private sealed class MyException4 : Exception
+        {
+        }
 
-        private sealed class MyException5 : Exception { }
+        private sealed class MyException5 : Exception
+        {
+        }
 
-        private sealed class MyException6 : Exception { }
+        private sealed class MyException6 : Exception
+        {
+        }
     }
 }

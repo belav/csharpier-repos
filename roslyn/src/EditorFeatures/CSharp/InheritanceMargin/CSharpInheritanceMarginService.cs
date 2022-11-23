@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InheritanceMargin
     {
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         [ImportingConstructor]
-        public CSharpInheritanceMarginService() { }
+        public CSharpInheritanceMarginService()
+        {
+        }
 
         protected override ImmutableArray<SyntaxNode> GetMembers(
             IEnumerable<SyntaxNode> nodesToSearch

@@ -68,7 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 cancellationToken,
                 skipVerificationForReplacedNode,
                 failOnOverloadResolutionFailuresInOriginalCode
-            ) { }
+            )
+        {
+        }
 
         protected override CodeAnalysis.LanguageService.ISyntaxFacts SyntaxFactsService { get; } =
             CSharpSyntaxFacts.Instance;

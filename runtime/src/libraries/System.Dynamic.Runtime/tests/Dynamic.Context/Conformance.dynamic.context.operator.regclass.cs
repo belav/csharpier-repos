@@ -3646,9 +3646,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return result;
         }
 
-        public static void Foo(string x) { }
+        public static void Foo(string x)
+        {
+        }
 
-        public void Foo2() { }
+        public void Foo2()
+        {
+        }
     }
     // </Code>
 }

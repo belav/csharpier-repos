@@ -19,7 +19,9 @@ namespace System.Web.Http.Tracing.Tracers
         private const string ExecuteExceptionFilterAsyncMethodName = "ExecuteExceptionFilterAsync";
 
         public ExceptionFilterTracer(IExceptionFilter innerFilter, ITraceWriter traceWriter)
-            : base(innerFilter, traceWriter) { }
+            : base(innerFilter, traceWriter)
+        {
+        }
 
         public new IExceptionFilter Inner
         {

@@ -6,9 +6,13 @@ using Xunit;
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclassregmeth.genclassregmeth
 {
-    public class C { }
+    public class C
+    {
+    }
 
-    public interface I { }
+    public interface I
+    {
+    }
 
     public class MyClass
     {

@@ -34,7 +34,9 @@ namespace System
         }
 
         protected MissingFieldException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public override string Message
         {

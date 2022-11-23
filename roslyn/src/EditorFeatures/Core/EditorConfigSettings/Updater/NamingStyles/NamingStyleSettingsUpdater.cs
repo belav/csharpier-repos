@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         >
     {
         public NamingStyleSettingsUpdater(Workspace workspace, string editorconfigPath)
-            : base(workspace, editorconfigPath) { }
+            : base(workspace, editorconfigPath)
+        {
+        }
 
         protected override SourceText? GetNewText(
             SourceText analyzerConfigDocument,

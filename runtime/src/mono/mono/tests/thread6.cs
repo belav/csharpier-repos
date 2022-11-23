@@ -108,7 +108,9 @@ public class Tests
         {
             return "Got exception: " + e.Message;
         }
-        finally { }
+        finally
+        {
+        }
         return "";
     }
 
@@ -175,7 +177,9 @@ public class Tests
             {
                 Run();
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
 
             return 2;
         }
@@ -361,7 +365,9 @@ public class Tests
             {
                 a.EndInvoke(ar);
             }
-            catch (ThreadAbortException) { }
+            catch (ThreadAbortException)
+            {
+            }
         }
         catch (ThreadAbortException)
         {

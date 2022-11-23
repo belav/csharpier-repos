@@ -15,7 +15,9 @@ namespace System.Security.Policy
         public FileCodeGroup(
             IMembershipCondition membershipCondition,
             Permissions.FileIOPermissionAccess access
-        ) : base(default(IMembershipCondition), default(PolicyStatement)) { }
+        ) : base(default(IMembershipCondition), default(PolicyStatement))
+        {
+        }
 
         public override string AttributeString
         {
@@ -35,13 +37,17 @@ namespace System.Security.Policy
             return default(CodeGroup);
         }
 
-        protected override void CreateXml(SecurityElement element, PolicyLevel level) { }
+        protected override void CreateXml(SecurityElement element, PolicyLevel level)
+        {
+        }
 
         public override bool Equals(object o) => base.Equals(o);
 
         public override int GetHashCode() => base.GetHashCode();
 
-        protected override void ParseXml(SecurityElement e, PolicyLevel level) { }
+        protected override void ParseXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
         public override PolicyStatement Resolve(Evidence evidence)
         {

@@ -14,14 +14,22 @@ namespace System.Data
     public class InvalidExpressionException : DataException
     {
         protected InvalidExpressionException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
-        public InvalidExpressionException() : base() { }
+        public InvalidExpressionException() : base()
+        {
+        }
 
-        public InvalidExpressionException(string? s) : base(s) { }
+        public InvalidExpressionException(string? s) : base(s)
+        {
+        }
 
         public InvalidExpressionException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
     }
 
     [Serializable]
@@ -31,14 +39,22 @@ namespace System.Data
     public class EvaluateException : InvalidExpressionException
     {
         protected EvaluateException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
-        public EvaluateException() : base() { }
+        public EvaluateException() : base()
+        {
+        }
 
-        public EvaluateException(string? s) : base(s) { }
+        public EvaluateException(string? s) : base(s)
+        {
+        }
 
         public EvaluateException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
     }
 
     [Serializable]
@@ -48,14 +64,22 @@ namespace System.Data
     public class SyntaxErrorException : InvalidExpressionException
     {
         protected SyntaxErrorException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
-        public SyntaxErrorException() : base() { }
+        public SyntaxErrorException() : base()
+        {
+        }
 
-        public SyntaxErrorException(string? s) : base(s) { }
+        public SyntaxErrorException(string? s) : base(s)
+        {
+        }
 
         public SyntaxErrorException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
     }
 
     internal static class ExprException

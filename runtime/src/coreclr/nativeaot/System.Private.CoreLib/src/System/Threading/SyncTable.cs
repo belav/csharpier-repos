@@ -269,7 +269,9 @@ namespace System.Threading
         {
             private int _index;
 
-            public DeadEntryCollector() { }
+            public DeadEntryCollector()
+            {
+            }
 
             public void Activate(int index) => _index = index;
 

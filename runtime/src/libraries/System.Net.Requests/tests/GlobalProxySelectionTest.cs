@@ -10,7 +10,9 @@ namespace System.Net.Tests
     {
         private class MyWebProxy : IWebProxy
         {
-            public MyWebProxy() { }
+            public MyWebProxy()
+            {
+            }
 
             public ICredentials Credentials
             {

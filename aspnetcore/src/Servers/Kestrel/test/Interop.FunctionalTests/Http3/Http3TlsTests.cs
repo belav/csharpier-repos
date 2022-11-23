@@ -326,7 +326,8 @@ public class Http3TlsTests : LoggedTest
                                 listenOptions.Protocols = protocols;
                                 listenOptions.UseHttps(httpsOptions =>
                                 {
-                                    httpsOptions.OnAuthenticate = (_, _) => { };
+                                    httpsOptions.OnAuthenticate = (_, _) => {
+                                    };
                                 });
                             }
                         );

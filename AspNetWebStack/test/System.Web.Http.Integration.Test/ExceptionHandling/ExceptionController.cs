@@ -72,22 +72,34 @@ namespace System.Web.Http
         }
 
         [AuthenticationFilterAuthenticateThrows]
-        public void AuthenticationFilterAuthenticate() { }
+        public void AuthenticationFilterAuthenticate()
+        {
+        }
 
         [AuthenticationFilterAuthenticateResultThrows]
-        public void AuthenticationFilterAuthenticateResult() { }
+        public void AuthenticationFilterAuthenticateResult()
+        {
+        }
 
         [AuthenticationFilterChallengeThrows]
-        public void AuthenticationFilterChallenge() { }
+        public void AuthenticationFilterChallenge()
+        {
+        }
 
         [AuthenticationFilterChallengeResultThrows]
-        public void AuthenticationFilterChallengeResult() { }
+        public void AuthenticationFilterChallengeResult()
+        {
+        }
 
         [AuthorizationFilterThrows]
-        public void AuthorizationFilter() { }
+        public void AuthorizationFilter()
+        {
+        }
 
         [ActionFilterThrows]
-        public void ActionFilter() { }
+        public void ActionFilter()
+        {
+        }
 
         [ExceptionFilterThrows]
         public void ExceptionFilter()

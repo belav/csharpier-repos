@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddImportFeatureService() { }
+        public CSharpAddImportFeatureService()
+        {
+        }
 
         protected override bool CanAddImport(
             SyntaxNode node,

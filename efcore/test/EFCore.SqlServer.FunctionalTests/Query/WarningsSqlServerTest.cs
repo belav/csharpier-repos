@@ -7,5 +7,7 @@ public class WarningsSqlServerTest
     : WarningsTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
     public WarningsSqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 }

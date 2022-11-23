@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxContextService() { }
+        public CSharpSyntaxContextService()
+        {
+        }
 
         public SyntaxContext CreateContext(
             Document document,

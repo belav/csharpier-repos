@@ -71,6 +71,8 @@ namespace Castle.DynamicProxy.Tests.InterClasses
             get { return false; }
         }
 
-        public void DoSomething() { }
+        public void DoSomething()
+        {
+        }
     }
 }

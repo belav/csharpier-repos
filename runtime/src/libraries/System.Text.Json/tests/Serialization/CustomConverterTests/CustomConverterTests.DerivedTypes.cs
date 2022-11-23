@@ -148,11 +148,17 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class ListWrapper : List<int> { }
+    public class ListWrapper : List<int>
+    {
+    }
 
-    public class DictionaryWrapper : Dictionary<string, int> { }
+    public class DictionaryWrapper : Dictionary<string, int>
+    {
+    }
 
-    public class UnsupportedDictionaryWrapper : Dictionary<int[,], int> { }
+    public class UnsupportedDictionaryWrapper : Dictionary<int[,], int>
+    {
+    }
 
     public class DerivedTypesWrapper
     {

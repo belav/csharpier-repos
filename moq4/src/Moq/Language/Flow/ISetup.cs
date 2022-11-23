@@ -14,7 +14,9 @@ namespace Moq.Language.Flow
             ICallbackResult,
             IRaise<TMock>,
             IVerifies,
-            IFluentInterface where TMock : class { }
+            IFluentInterface where TMock : class
+    {
+    }
 
     /// <summary>
     /// Implements the fluent API.
@@ -24,7 +26,9 @@ namespace Moq.Language.Flow
         : ICallback<TMock, TResult>,
             IReturnsThrows<TMock, TResult>,
             IVerifies,
-            IFluentInterface where TMock : class { }
+            IFluentInterface where TMock : class
+    {
+    }
 
     /// <summary>
     /// Implements the fluent API.
@@ -34,7 +38,9 @@ namespace Moq.Language.Flow
         : ICallbackGetter<TMock, TProperty>,
             IReturnsThrowsGetter<TMock, TProperty>,
             IVerifies,
-            IFluentInterface where TMock : class { }
+            IFluentInterface where TMock : class
+    {
+    }
 
     /// <summary>
     /// Implements the fluent API.
@@ -45,5 +51,7 @@ namespace Moq.Language.Flow
             ICallbackResult,
             IRaise<TMock>,
             IVerifies,
-            IFluentInterface where TMock : class { }
+            IFluentInterface where TMock : class
+    {
+    }
 }

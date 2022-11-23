@@ -21,7 +21,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </remarks>
 public sealed class KeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IReadOnlyKey>
 {
-    private KeyComparer() { }
+    private KeyComparer()
+    {
+    }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.

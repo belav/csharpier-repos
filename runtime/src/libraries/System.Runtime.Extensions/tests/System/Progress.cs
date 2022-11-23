@@ -13,7 +13,9 @@ namespace System.Tests
         public void Ctor()
         {
             new Progress<int>();
-            new Progress<int>(i => { });
+            new Progress<int>(i =>
+            {
+            });
             Assert.Throws<ArgumentNullException>(() => new Progress<int>(null));
         }
 
@@ -39,7 +41,9 @@ namespace System.Tests
             {
                 var tsc = new TrackingSynchronizationContext();
                 SynchronizationContext.SetSynchronizationContext(tsc);
-                Progress<int> p = new Progress<int>(i => { });
+                Progress<int> p = new Progress<int>(i =>
+                {
+                });
                 for (int i = 0; i < 3; i++)
                     ((IProgress<int>)p).Report(i);
                 Assert.Equal(3, tsc.Posts);

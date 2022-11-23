@@ -139,21 +139,27 @@ namespace Tests.Integration
         public class APrerequisiteDependsOnBPrerequisite
         {
             [ImportingConstructor]
-            public APrerequisiteDependsOnBPrerequisite(BPrerequisiteDependsOnAPrerequisite b) { }
+            public APrerequisiteDependsOnBPrerequisite(BPrerequisiteDependsOnAPrerequisite b)
+            {
+            }
         }
 
         [Export]
         public class BPrerequisiteDependsOnAPrerequisite
         {
             [ImportingConstructor]
-            public BPrerequisiteDependsOnAPrerequisite(APrerequisiteDependsOnBPrerequisite a) { }
+            public BPrerequisiteDependsOnAPrerequisite(APrerequisiteDependsOnBPrerequisite a)
+            {
+            }
         }
 
         [Export]
         public class APrerequisiteDependsOnBPost
         {
             [ImportingConstructor]
-            public APrerequisiteDependsOnBPost(BPostDependsOnAPrerequisite b) { }
+            public APrerequisiteDependsOnBPost(BPostDependsOnAPrerequisite b)
+            {
+            }
         }
 
         [Export]
@@ -167,14 +173,20 @@ namespace Tests.Integration
         public class APrerequisiteDependsOnBNone
         {
             [ImportingConstructor]
-            public APrerequisiteDependsOnBNone(BNone b) { }
+            public APrerequisiteDependsOnBNone(BNone b)
+            {
+            }
         }
 
         [Export]
-        public class BNone { }
+        public class BNone
+        {
+        }
 
         [Export]
-        public class ANone { }
+        public class ANone
+        {
+        }
 
         [Export]
         public class APostDependsOnBPrerequisite
@@ -187,7 +199,9 @@ namespace Tests.Integration
         public class BPrerequisiteDependsOnAPost
         {
             [ImportingConstructor]
-            public BPrerequisiteDependsOnAPost(APostDependsOnBPrerequisite a) { }
+            public BPrerequisiteDependsOnAPost(APostDependsOnBPrerequisite a)
+            {
+            }
         }
 
         [Export]
@@ -215,7 +229,9 @@ namespace Tests.Integration
         public class BPrerequisiteDependsOnANone
         {
             [ImportingConstructor]
-            public BPrerequisiteDependsOnANone(ANone a) { }
+            public BPrerequisiteDependsOnANone(ANone a)
+            {
+            }
         }
 
         [Export]
@@ -229,7 +245,9 @@ namespace Tests.Integration
         public class PartWithHasPrerequisteImportThatIsInAPostCycle
         {
             [ImportingConstructor]
-            public PartWithHasPrerequisteImportThatIsInAPostCycle(APostDependsOnBPost a) { }
+            public PartWithHasPrerequisteImportThatIsInAPostCycle(APostDependsOnBPost a)
+            {
+            }
         }
     }
 }

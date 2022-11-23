@@ -76,7 +76,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class TestTypeWithRequires
         {
             [RequiresUnreferencedCode("Message for --TestType.Requires--")]
-            public static void Requires() { }
+            public static void Requires()
+            {
+            }
         }
 
         static void TestReadFromRefParameter()
@@ -214,7 +216,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [return: DynamicallyAccessedMembersAttribute(DynamicallyAccessedMemberTypes.PublicFields)]
         static Type GetTypeWithFields() => null;
 
-        class TestType { }
+        class TestType
+        {
+        }
 
         class InheritsFromType : Type
         {

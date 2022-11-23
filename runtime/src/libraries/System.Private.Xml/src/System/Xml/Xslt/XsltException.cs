@@ -67,12 +67,18 @@ namespace System.Xml.Xsl
             info.AddValue("version", "2.0");
         }
 
-        public XsltException() : this(string.Empty, (Exception?)null) { }
+        public XsltException() : this(string.Empty, (Exception?)null)
+        {
+        }
 
-        public XsltException(string message) : this(message, (Exception?)null) { }
+        public XsltException(string message) : this(message, (Exception?)null)
+        {
+        }
 
         public XsltException(string message, Exception? innerException)
-            : this(SR.Xml_UserException, new string?[] { message }, null, 0, 0, innerException) { }
+            : this(SR.Xml_UserException, new string?[] { message }, null, 0, 0, innerException)
+        {
+        }
 
         internal static XsltException Create(string res, params string?[] args)
         {
@@ -163,19 +169,27 @@ namespace System.Xml.Xsl
     public class XsltCompileException : XsltException
     {
         protected XsltCompileException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
         }
 
-        public XsltCompileException() : base() { }
+        public XsltCompileException() : base()
+        {
+        }
 
-        public XsltCompileException(string message) : base(message) { }
+        public XsltCompileException(string message) : base(message)
+        {
+        }
 
         public XsltCompileException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         public XsltCompileException(
             Exception inner,
@@ -195,6 +209,8 @@ namespace System.Xml.Xsl
                 lineNumber,
                 linePosition,
                 inner
-            ) { }
+            )
+        {
+        }
     }
 }

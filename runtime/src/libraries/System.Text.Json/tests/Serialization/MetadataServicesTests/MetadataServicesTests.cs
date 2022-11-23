@@ -130,9 +130,13 @@ namespace System.Text.Json.Tests.Serialization
             // Source generator tests verify that generated metadata is actually valid.
         }
 
-        private class MyClass { }
+        private class MyClass
+        {
+        }
 
-        private class MyDerivedClass : MyClass { }
+        private class MyDerivedClass : MyClass
+        {
+        }
 
         [Fact]
         public static void CreateObjectInfo()

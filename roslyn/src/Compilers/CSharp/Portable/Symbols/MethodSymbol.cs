@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // to the VB version.
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        protected MethodSymbol() { }
+        protected MethodSymbol()
+        {
+        }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another

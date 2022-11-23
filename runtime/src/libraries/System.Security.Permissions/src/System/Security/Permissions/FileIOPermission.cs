@@ -12,30 +12,44 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class FileIOPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public FileIOPermission(FileIOPermissionAccess access, string path) { }
+        public FileIOPermission(FileIOPermissionAccess access, string path)
+        {
+        }
 
-        public FileIOPermission(FileIOPermissionAccess access, string[] pathList) { }
+        public FileIOPermission(FileIOPermissionAccess access, string[] pathList)
+        {
+        }
 
         public FileIOPermission(
             FileIOPermissionAccess access,
             AccessControl.AccessControlActions actions,
             string path
-        ) { }
+        )
+        {
+        }
 
         public FileIOPermission(
             FileIOPermissionAccess access,
             AccessControl.AccessControlActions actions,
             string[] pathList
-        ) { }
+        )
+        {
+        }
 
-        public FileIOPermission(PermissionState state) { }
+        public FileIOPermission(PermissionState state)
+        {
+        }
 
         public FileIOPermissionAccess AllFiles { get; set; }
         public FileIOPermissionAccess AllLocalFiles { get; set; }
 
-        public void AddPathList(FileIOPermissionAccess access, string path) { }
+        public void AddPathList(FileIOPermissionAccess access, string path)
+        {
+        }
 
-        public void AddPathList(FileIOPermissionAccess access, string[] pathList) { }
+        public void AddPathList(FileIOPermissionAccess access, string[] pathList)
+        {
+        }
 
         public override IPermission Copy()
         {
@@ -44,7 +58,9 @@ namespace System.Security.Permissions
 
         public override bool Equals(object o) => base.Equals(o);
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 
@@ -68,9 +84,13 @@ namespace System.Security.Permissions
             return false;
         }
 
-        public void SetPathList(FileIOPermissionAccess access, string path) { }
+        public void SetPathList(FileIOPermissionAccess access, string path)
+        {
+        }
 
-        public void SetPathList(FileIOPermissionAccess access, string[] pathList) { }
+        public void SetPathList(FileIOPermissionAccess access, string[] pathList)
+        {
+        }
 
         public override SecurityElement ToXml()
         {

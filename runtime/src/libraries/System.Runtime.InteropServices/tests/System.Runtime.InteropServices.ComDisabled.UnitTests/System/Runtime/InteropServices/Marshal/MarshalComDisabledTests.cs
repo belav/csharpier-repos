@@ -106,7 +106,9 @@ namespace System.Runtime.InteropServices.Tests
             );
         }
 
-        public struct NativeVariant { }
+        public struct NativeVariant
+        {
+        }
 
         [Fact]
         [ActiveIssue(
@@ -130,7 +132,9 @@ namespace System.Runtime.InteropServices.Tests
             }
         }
 
-        public struct NativeVariant_T { }
+        public struct NativeVariant_T
+        {
+        }
 
         [Fact]
         [ActiveIssue(
@@ -206,7 +210,9 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Throws<NotSupportedException>(() => Marshal.GetIDispatchForObject(new object()));
         }
 
-        public struct StructForIUnknown { }
+        public struct StructForIUnknown
+        {
+        }
 
         [Fact]
         public void GetObjectForIUnknown_ThrowsNotSupportedException()

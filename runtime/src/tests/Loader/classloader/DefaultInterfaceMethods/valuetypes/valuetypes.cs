@@ -18,7 +18,9 @@ struct FooBarStruct_ : IValue
         return 0;
     }
 
-    public void SetValue(int val) { }
+    public void SetValue(int val)
+    {
+    }
 
     public int Add(int a)
     {

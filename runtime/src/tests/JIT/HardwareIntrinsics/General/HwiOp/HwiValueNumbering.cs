@@ -214,5 +214,7 @@ unsafe class HwiValueNumbering
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void JitUse<T>(T* arg) where T : unmanaged { }
+    public static void JitUse<T>(T* arg) where T : unmanaged
+    {
+    }
 }

@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicAutomaticBraceCompletion(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicAutomaticBraceCompletion)) { }
+            : base(instanceFactory, nameof(BasicAutomaticBraceCompletion))
+        {
+        }
 
         [WpfTheory, CombinatorialData]
         public void Braces_InsertionAndTabCompleting(bool argumentCompletion)

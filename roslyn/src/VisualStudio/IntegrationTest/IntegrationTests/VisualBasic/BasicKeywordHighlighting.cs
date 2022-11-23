@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicKeywordHighlighting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicKeywordHighlighting)) { }
+            : base(instanceFactory, nameof(BasicKeywordHighlighting))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Classification)]
         public void NavigationBetweenKeywords()

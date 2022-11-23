@@ -86,7 +86,9 @@ namespace System.Security.AccessControl
     {
         #region Constructors
 
-        protected GenericAcl() { }
+        protected GenericAcl()
+        {
+        }
 
         #endregion
 
@@ -2968,7 +2970,9 @@ namespace System.Security.AccessControl
             OnAclModificationTried();
         }
 
-        internal virtual void OnAclModificationTried() { }
+        internal virtual void OnAclModificationTried()
+        {
+        }
         #endregion
 
         #region Public Properties
@@ -3130,10 +3134,14 @@ namespace System.Security.AccessControl
         //
 
         public SystemAcl(bool isContainer, bool isDS, int capacity)
-            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity) { }
+            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity)
+        {
+        }
 
         public SystemAcl(bool isContainer, bool isDS, byte revision, int capacity)
-            : base(isContainer, isDS, revision, capacity) { }
+            : base(isContainer, isDS, revision, capacity)
+        {
+        }
 
         //
         // Creates an ACL from a given raw ACL
@@ -3141,7 +3149,9 @@ namespace System.Security.AccessControl
         //
 
         public SystemAcl(bool isContainer, bool isDS, RawAcl rawAcl)
-            : this(isContainer, isDS, rawAcl, false) { }
+            : this(isContainer, isDS, rawAcl, false)
+        {
+        }
 
         //
         // Internal version - if 'trusted' is true,
@@ -3149,7 +3159,9 @@ namespace System.Security.AccessControl
         //
 
         internal SystemAcl(bool isContainer, bool isDS, RawAcl rawAcl, bool trusted)
-            : base(isContainer, isDS, rawAcl, trusted, false) { }
+            : base(isContainer, isDS, rawAcl, trusted, false)
+        {
+        }
 
         #endregion
 
@@ -3441,10 +3453,14 @@ namespace System.Security.AccessControl
         //
 
         public DiscretionaryAcl(bool isContainer, bool isDS, int capacity)
-            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity) { }
+            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity)
+        {
+        }
 
         public DiscretionaryAcl(bool isContainer, bool isDS, byte revision, int capacity)
-            : base(isContainer, isDS, revision, capacity) { }
+            : base(isContainer, isDS, revision, capacity)
+        {
+        }
 
         //
         // Creates an ACL from a given raw ACL
@@ -3452,7 +3468,9 @@ namespace System.Security.AccessControl
         //
 
         public DiscretionaryAcl(bool isContainer, bool isDS, RawAcl? rawAcl)
-            : this(isContainer, isDS, rawAcl, false) { }
+            : this(isContainer, isDS, rawAcl, false)
+        {
+        }
 
         //
         // Internal version - if 'trusted' is true,
@@ -3466,7 +3484,9 @@ namespace System.Security.AccessControl
                 rawAcl ?? new RawAcl(isDS ? AclRevisionDS : AclRevision, 0),
                 trusted,
                 true
-            ) { }
+            )
+        {
+        }
 
         #endregion
 

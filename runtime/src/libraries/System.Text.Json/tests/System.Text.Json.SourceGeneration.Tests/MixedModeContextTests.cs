@@ -166,7 +166,9 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed class MixedModeContextTests : RealWorldContextTests
     {
         public MixedModeContextTests()
-            : base(MixedModeContext.Default, (options) => new MixedModeContext(options)) { }
+            : base(MixedModeContext.Default, (options) => new MixedModeContext(options))
+        {
+        }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()

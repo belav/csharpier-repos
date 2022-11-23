@@ -125,7 +125,9 @@ namespace System.Text.Json.Serialization.Tests
         // A custom enum converter that uses an array for containing bit flags.
         private sealed class JsonStringEnumArrayConverter : JsonConverterFactory
         {
-            public JsonStringEnumArrayConverter() { }
+            public JsonStringEnumArrayConverter()
+            {
+            }
 
             public override bool CanConvert(Type typeToConvert)
             {

@@ -105,7 +105,9 @@ namespace System.Net.Http.Headers
             _unit = HeaderUtilities.BytesUnit;
         }
 
-        private ContentRangeHeaderValue() { }
+        private ContentRangeHeaderValue()
+        {
+        }
 
         private ContentRangeHeaderValue(ContentRangeHeaderValue source)
         {

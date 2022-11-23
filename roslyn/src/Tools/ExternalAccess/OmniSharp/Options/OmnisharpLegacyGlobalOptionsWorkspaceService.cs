@@ -45,13 +45,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Options
         public bool InlineHintsOptionsDisplayAllOverride
         {
             get => false;
-            set { }
+            set
+            {
+            }
         }
 
         public bool GenerateOverrides
         {
             get => true;
-            set { }
+            set
+            {
+            }
         }
 
         public bool GetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(string language) =>
@@ -60,7 +64,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Options
         public void SetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(
             string language,
             bool value
-        ) { }
+        )
+        {
+        }
 
         public bool GetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(
             string language
@@ -69,14 +75,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Options
         public void SetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(
             string language,
             bool value
-        ) { }
+        )
+        {
+        }
 
         public bool GetGenerateConstructorFromMembersOptionsAddNullChecks(string language) => false;
 
         public void SetGenerateConstructorFromMembersOptionsAddNullChecks(
             string language,
             bool value
-        ) { }
+        )
+        {
+        }
 
         internal sealed class OmniSharpCleanCodeGenerationOptionsProvider
             : AbstractCleanCodeGenerationOptionsProvider

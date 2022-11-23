@@ -14,7 +14,9 @@ namespace System.Security.Cryptography
             private SecKeyPair? _keys;
             private bool _disposed;
 
-            public DSASecurityTransforms() : this(1024) { }
+            public DSASecurityTransforms() : this(1024)
+            {
+            }
 
             public DSASecurityTransforms(int keySize)
             {

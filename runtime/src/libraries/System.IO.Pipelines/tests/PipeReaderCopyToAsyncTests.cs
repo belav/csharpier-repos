@@ -150,7 +150,9 @@ namespace System.IO.Pipelines.Tests
                         $"CopyToAsync should have failed, wrote {stream.Writes} times."
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 Assert.Equal(2, stream.Writes);
 

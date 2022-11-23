@@ -354,7 +354,9 @@ namespace System.Net.Tests
                 {
                     uri = new Uri($"http://{Guid.NewGuid().ToString("N")}.{domain}");
                 }
-                catch (UriFormatException) { }
+                catch (UriFormatException)
+                {
+                }
 
                 if (uri != null)
                 {

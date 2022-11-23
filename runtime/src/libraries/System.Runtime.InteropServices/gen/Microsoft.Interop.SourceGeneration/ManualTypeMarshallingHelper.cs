@@ -62,7 +62,9 @@ namespace Microsoft.Interop
             public const string ConstantElementCount = nameof(ConstantElementCount);
         }
 
-        private static void IgnoreArityMismatch(INamedTypeSymbol _, INamedTypeSymbol __) { }
+        private static void IgnoreArityMismatch(INamedTypeSymbol _, INamedTypeSymbol __)
+        {
+        }
 
         public static bool IsLinearCollectionEntryPoint(INamedTypeSymbol entryPointType)
         {

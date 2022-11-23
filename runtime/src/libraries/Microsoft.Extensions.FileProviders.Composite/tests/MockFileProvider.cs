@@ -25,7 +25,9 @@ namespace Microsoft.Extensions.FileProviders.Composite
         private IEnumerable<IFileInfo> _files;
         private Dictionary<string, IChangeToken> _changeTokens;
 
-        public MockFileProvider() { }
+        public MockFileProvider()
+        {
+        }
 
         public MockFileProvider(params IFileInfo[] files)
         {

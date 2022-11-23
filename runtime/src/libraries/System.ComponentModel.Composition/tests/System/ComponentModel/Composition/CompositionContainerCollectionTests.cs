@@ -483,7 +483,9 @@ namespace System.ComponentModel.Composition
 
         public class ImportCustomCollectionThrowsDuringConstruction
         {
-            public ImportCustomCollectionThrowsDuringConstruction() { }
+            public ImportCustomCollectionThrowsDuringConstruction()
+            {
+            }
 
             [ImportMany("Value")]
             public CustomCollectionThrowsDuringConstruction Values { get; set; }
@@ -508,7 +510,9 @@ namespace System.ComponentModel.Composition
 
         public class ImportCustomCollectionThrowsDuringClear
         {
-            public ImportCustomCollectionThrowsDuringClear() { }
+            public ImportCustomCollectionThrowsDuringClear()
+            {
+            }
 
             [ImportMany("Value")]
             public CustomCollectionThrowsDuringClear Values { get; set; }
@@ -533,7 +537,9 @@ namespace System.ComponentModel.Composition
 
         public class ImportCustomCollectionThrowsDuringAdd
         {
-            public ImportCustomCollectionThrowsDuringAdd() { }
+            public ImportCustomCollectionThrowsDuringAdd()
+            {
+            }
 
             [ImportMany("Value")]
             public CustomCollectionThrowsDuringAdd Values { get; set; }
@@ -620,7 +626,9 @@ namespace System.ComponentModel.Composition
         {
             private int _count = 0;
 
-            public CollectionTypeWithNoIList() { }
+            public CollectionTypeWithNoIList()
+            {
+            }
 
             public void Add(T item)
             {
@@ -692,7 +700,9 @@ namespace System.ComponentModel.Composition
 
         public class CollectionWithMultipleInterfaces : ICollection<int>, ICollection<string>
         {
-            public CollectionWithMultipleInterfaces() { }
+            public CollectionWithMultipleInterfaces()
+            {
+            }
 
             #region ICollection<int> Members
 

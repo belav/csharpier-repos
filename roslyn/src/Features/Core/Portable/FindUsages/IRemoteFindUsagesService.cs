@@ -88,7 +88,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FindUsagesServerCallbackDispatcher() { }
+        public FindUsagesServerCallbackDispatcher()
+        {
+        }
 
         private new FindUsagesServerCallback GetCallback(RemoteServiceCallbackId callbackId) =>
             (FindUsagesServerCallback)base.GetCallback(callbackId);

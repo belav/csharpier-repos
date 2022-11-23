@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Classification
     internal abstract partial class AbstractSyntaxClassificationService
         : ISyntaxClassificationService
     {
-        protected AbstractSyntaxClassificationService() { }
+        protected AbstractSyntaxClassificationService()
+        {
+        }
 
         public abstract void AddLexicalClassifications(
             SourceText text,

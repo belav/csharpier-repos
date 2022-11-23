@@ -89,7 +89,9 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class.
         /// </summary>
-        public JsonObjectAttribute() { }
+        public JsonObjectAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class with the specified member serialization.
@@ -104,6 +106,8 @@ namespace Newtonsoft.Json
         /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class with the specified container Id.
         /// </summary>
         /// <param name="id">The container Id.</param>
-        public JsonObjectAttribute(string id) : base(id) { }
+        public JsonObjectAttribute(string id) : base(id)
+        {
+        }
     }
 }

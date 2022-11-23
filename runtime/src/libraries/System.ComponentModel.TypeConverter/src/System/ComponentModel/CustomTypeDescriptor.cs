@@ -18,7 +18,9 @@ namespace System.ComponentModel
         /// non-null, CustomTypeDescriptor calls the parent's version of
         /// the method.
         /// </summary>
-        protected CustomTypeDescriptor() { }
+        protected CustomTypeDescriptor()
+        {
+        }
 
         /// <summary>
         /// Creates a new CustomTypeDescriptor object. There are two versions

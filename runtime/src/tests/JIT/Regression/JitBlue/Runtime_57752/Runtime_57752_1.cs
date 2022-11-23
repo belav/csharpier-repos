@@ -49,7 +49,9 @@ public class Runtime_57752_1
             }
             else
             {
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     arg9[0] = arg9[0];
@@ -95,5 +97,7 @@ public interface I
 
 public class C : I
 {
-    public void Write<T>(T val) { }
+    public void Write<T>(T val)
+    {
+    }
 }

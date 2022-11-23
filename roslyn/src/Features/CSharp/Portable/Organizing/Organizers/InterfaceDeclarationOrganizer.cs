@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InterfaceDeclarationOrganizer() { }
+        public InterfaceDeclarationOrganizer()
+        {
+        }
 
         protected override InterfaceDeclarationSyntax Organize(
             InterfaceDeclarationSyntax syntax,

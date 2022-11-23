@@ -94,7 +94,9 @@ namespace System.Net.Mail
                 _port = port;
                 Initialize();
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         [MemberNotNull(nameof(_transport))]
@@ -135,7 +137,9 @@ namespace System.Net.Mail
                 {
                     clientDomainRaw = mapping.GetAscii(clientDomainRaw);
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
 
                 // For some inputs GetAscii may fail (bad Unicode, etc).  If that happens
                 // we must strip out any non-ASCII characters.
@@ -768,7 +772,9 @@ namespace System.Net.Mail
                             ctr.Dispose();
                         }
                     }
-                    catch (ObjectDisposedException) { } // SendAsyncCancel will throw if SmtpClient was disposed
+                    catch (ObjectDisposedException)
+                    {
+                    } // SendAsyncCancel will throw if SmtpClient was disposed
                     finally
                     {
                         if (e.Error != null)

@@ -1189,7 +1189,9 @@ namespace System.Collections.Generic
                 _current = default;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

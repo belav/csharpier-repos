@@ -301,7 +301,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     internal sealed partial class PlaceholderMethodSymbolAdapter : MethodSymbolAdapter
     {
         internal PlaceholderMethodSymbolAdapter(MethodSymbol underlyingMethodSymbol)
-            : base(underlyingMethodSymbol) { }
+            : base(underlyingMethodSymbol)
+        {
+        }
     }
 #endif
 

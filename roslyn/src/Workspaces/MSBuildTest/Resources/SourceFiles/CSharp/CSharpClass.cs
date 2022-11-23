@@ -12,5 +12,7 @@ namespace CSharpProject
     /// <summary>
     /// This is a C# class
     /// </summary>
-    public class CSharpClass { }
+    public class CSharpClass
+    {
+    }
 }

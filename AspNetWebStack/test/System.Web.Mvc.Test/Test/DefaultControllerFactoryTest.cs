@@ -327,7 +327,9 @@ namespace System.Web.Mvc.Test
         }
 
         [SessionState(SessionStateBehavior.ReadOnly)]
-        class MyReadOnlyController { }
+        class MyReadOnlyController
+        {
+        }
 
         [Fact]
         public void GetControllerTypeWithEmptyControllerNameThrows()
@@ -973,9 +975,13 @@ namespace System.Web.Mvc.Test
 
         class NoParameterlessCtor : IController
         {
-            public NoParameterlessCtor(int x) { }
+            public NoParameterlessCtor(int x)
+            {
+            }
 
-            public void Execute(RequestContext requestContext) { }
+            public void Execute(RequestContext requestContext)
+            {
+            }
         }
 
         private static DefaultControllerFactory GetDefaultControllerFactory(
@@ -1021,33 +1027,49 @@ namespace System.Web.Mvc.Test
             #endregion
         }
 
-        public interface IDisposableController : IController, IDisposable { }
+        public interface IDisposableController : IController, IDisposable
+        {
+        }
     }
 
     // BAD: type isn't public
-    internal class NonPublicController : Controller { }
+    internal class NonPublicController : Controller
+    {
+    }
 
     // BAD: type doesn't end with 'Controller'
-    public class MisspelledKontroller : Controller { }
+    public class MisspelledKontroller : Controller
+    {
+    }
 
     // BAD: type is abstract
-    public abstract class AbstractController : Controller { }
+    public abstract class AbstractController : Controller
+    {
+    }
 
     // BAD: type doesn't implement IController
-    public class NonIControllerController { }
+    public class NonIControllerController
+    {
+    }
 
     // GOOD: 'Controller' suffix should be case-insensitive
-    public class Goodcontroller : Controller { }
+    public class Goodcontroller : Controller
+    {
+    }
 
     public class WithRoutingAttributeController : Controller
     {
         [Route("route")]
-        public void Action() { }
+        public void Action()
+        {
+        }
     }
 
     [Route("cool/{action}")]
     public class AttributeRouteAtControllerLevelController : Controller
     {
-        public void Action() { }
+        public void Action()
+        {
+        }
     }
 }

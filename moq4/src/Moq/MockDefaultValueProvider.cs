@@ -13,7 +13,9 @@ namespace Moq
     /// </summary>
     internal sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     {
-        internal MockDefaultValueProvider() { }
+        internal MockDefaultValueProvider()
+        {
+        }
 
         internal override DefaultValue Kind => DefaultValue.Mock;
 

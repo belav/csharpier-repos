@@ -906,7 +906,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -973,9 +975,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 {
     public class Test
     {
-        public void Method(float? b) { }
+        public void Method(float? b)
+        {
+        }
 
-        public void Method(string S) { }
+        public void Method(string S)
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1046,7 +1052,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -1080,9 +1088,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 {
     public class Test
     {
-        public void Method(float? b, int x) { }
+        public void Method(float? b, int x)
+        {
+        }
 
-        public void Method(string S, int x) { }
+        public void Method(string S, int x)
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()

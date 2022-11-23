@@ -74,7 +74,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
         public class SharedTestState : ComponentSharedTestStateBase
         {
-            public SharedTestState() { }
+            public SharedTestState()
+            {
+            }
 
             protected override void CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(
                 NetCoreAppBuilder builder
@@ -119,7 +121,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         : PerAssemblyVersionResolutionBase,
             IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
     {
-        public AppPerAssemblyVersionResolution(SharedTestState sharedState) : base(sharedState) { }
+        public AppPerAssemblyVersionResolution(SharedTestState sharedState) : base(sharedState)
+        {
+        }
 
         protected override void RunTest(
             string testAssemblyName,
@@ -167,7 +171,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
     {
         public ComponentPerAssemblyVersionResolution(SharedTestState sharedState)
-            : base(sharedState) { }
+            : base(sharedState)
+        {
+        }
 
         protected override void RunTest(
             string testAssemblyName,

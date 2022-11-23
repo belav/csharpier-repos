@@ -8,7 +8,9 @@ namespace NS
 {
     public class A
     {
-        public void Test() { }
+        public void Test()
+        {
+        }
     }
 }
 
@@ -16,6 +18,8 @@ namespace N1
 {
     namespace N2
     {
-        public class A { }
+        public class A
+        {
+        }
     }
 }

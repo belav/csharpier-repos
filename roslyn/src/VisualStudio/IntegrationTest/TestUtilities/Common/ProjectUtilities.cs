@@ -42,12 +42,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils
 
     public class ProjectReference : Identity
     {
-        public ProjectReference(string name) : base(name) { }
+        public ProjectReference(string name) : base(name)
+        {
+        }
     }
 
     public class AssemblyReference : Identity
     {
-        public AssemblyReference(string name) : base(name) { }
+        public AssemblyReference(string name) : base(name)
+        {
+        }
     }
 
     public class PackageReference : Identity

@@ -218,7 +218,9 @@ public class Tests
 
     public class Foo
     {
-        public Foo(ITest test) { }
+        public Foo(ITest test)
+        {
+        }
     }
 
     public static bool CreateInstanceWithComObjectParameter()

@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public UseCoalesceExpressionForNullableCodeFixProvider() { }
+        public UseCoalesceExpressionForNullableCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseCoalesceExpressionForNullableDiagnosticId);

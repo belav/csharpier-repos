@@ -9,7 +9,9 @@ namespace System.Reflection
 {
     public abstract partial class ConstructorInfo : MethodBase
     {
-        protected ConstructorInfo() { }
+        protected ConstructorInfo()
+        {
+        }
 
         public override MemberTypes MemberType => MemberTypes.Constructor;
 

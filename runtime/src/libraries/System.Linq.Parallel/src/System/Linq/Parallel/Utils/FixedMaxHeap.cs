@@ -27,7 +27,9 @@ namespace System.Linq.Parallel
         //
 
         internal FixedMaxHeap(int maximumSize)
-            : this(maximumSize, Util.GetDefaultComparer<TElement>()) { }
+            : this(maximumSize, Util.GetDefaultComparer<TElement>())
+        {
+        }
 
         internal FixedMaxHeap(int maximumSize, IComparer<TElement> comparer)
         {

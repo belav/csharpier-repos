@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpNewDocumentFormatting : AbstractIntegrationTest
     {
         public CSharpNewDocumentFormatting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

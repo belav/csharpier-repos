@@ -220,7 +220,9 @@ namespace System.Web.Http
                     handler: handler,
                     dataTokens: null,
                     defaults: null
-                ) { }
+                )
+            {
+            }
 
             public override IHttpVirtualPathData GetVirtualPath(
                 HttpRequestMessage request,

@@ -24,7 +24,14 @@ namespace System.Threading.Tests
         public static void RunTest_SkipOnDesktopFramework()
         {
             Assert.Throws<ArgumentNullException>(
-                () => CompressedStack.Run(null, state => { }, null)
+                () =>
+                    CompressedStack.Run(
+                        null,
+                        state =>
+                        {
+                        },
+                        null
+                    )
             );
         }
 

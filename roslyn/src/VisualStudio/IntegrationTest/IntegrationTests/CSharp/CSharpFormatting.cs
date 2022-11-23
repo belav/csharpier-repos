@@ -25,7 +25,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpFormatting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpFormatting)) { }
+            : base(instanceFactory, nameof(CSharpFormatting))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public void AlignOpenBraceWithMethodDeclaration()

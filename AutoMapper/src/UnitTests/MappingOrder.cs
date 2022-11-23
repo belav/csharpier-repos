@@ -13,7 +13,9 @@ public class When_specifying_a_mapping_order_for_base_members : AutoMapperSpecBa
         public string Two { get; set; }
     }
 
-    class SourceChild : Source { }
+    class SourceChild : Source
+    {
+    }
 
     class Destination
     {

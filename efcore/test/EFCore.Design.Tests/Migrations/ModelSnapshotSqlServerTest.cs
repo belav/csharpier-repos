@@ -264,7 +264,9 @@ public class ModelSnapshotSqlServerTest
         public EntityWithOneProperty Navigation { get; set; }
     }
 
-    private class DerivedType : BaseType { }
+    private class DerivedType : BaseType
+    {
+    }
 
     private enum Days : long
     {
@@ -7175,7 +7177,9 @@ namespace RootNamespace
                 });",
                 usingSystem: true
             ),
-            o => { }
+            o =>
+            {
+            }
         );
 
     [ConditionalFact]

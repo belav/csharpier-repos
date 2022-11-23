@@ -41,7 +41,9 @@ namespace Castle.Core.Smtp
         /// <remarks>
         /// This constructor is based on the default <see cref="SmtpClient"/> configuration in the application configuration file.
         /// </remarks>
-        public DefaultSmtpSender() { }
+        public DefaultSmtpSender()
+        {
+        }
 
         /// <summary>
         /// This service implementation

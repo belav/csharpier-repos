@@ -65,7 +65,9 @@ namespace System
                             {
                                 outOfMemoryException = new OutOfMemoryException();
                             }
-                            catch { }
+                            catch
+                            {
+                            }
                             t_allocatingOutOfMemoryException = false;
                         }
 

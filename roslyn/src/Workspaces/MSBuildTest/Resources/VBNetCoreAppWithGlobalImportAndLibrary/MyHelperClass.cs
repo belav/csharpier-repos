@@ -2,5 +2,7 @@
 
 namespace Library
 {
-    public class MyHelperClass { }
+    public class MyHelperClass
+    {
+    }
 }

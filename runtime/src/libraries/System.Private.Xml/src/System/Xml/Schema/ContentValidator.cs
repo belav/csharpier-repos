@@ -949,7 +949,9 @@ namespace System.Xml.Schema
         private readonly decimal _max;
         private BitSet? _nextIteration;
 
-        public LeafRangeNode(decimal min, decimal max) : this(-1, min, max) { }
+        public LeafRangeNode(decimal min, decimal max) : this(-1, min, max)
+        {
+        }
 
         public LeafRangeNode(int pos, decimal min, decimal max) : base(pos)
         {
@@ -1168,7 +1170,8 @@ namespace System.Xml.Schema
         private readonly bool _enableUpaCheck;
 
         public ParticleContentValidator(XmlSchemaContentType contentType) : this(contentType, true)
-        { }
+        {
+        }
 
         public ParticleContentValidator(XmlSchemaContentType contentType, bool enableUpaCheck)
             : base(contentType)

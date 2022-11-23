@@ -18,14 +18,20 @@ namespace Test
             bool[] local2 = new bool[2];
             if (local2[10])
             { //generate exception
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     int n = Static2()[0];
                     while (Static2()[0] != 0)
                     {
-                        try { }
-                        finally { }
+                        try
+                        {
+                        }
+                        finally
+                        {
+                        }
                     }
                 }
             }

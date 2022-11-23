@@ -73,7 +73,9 @@ namespace System.Text.RegularExpressions
         private bool _checkTimeout;
         private long _timeoutOccursAt;
 
-        protected RegexRunner() { }
+        protected RegexRunner()
+        {
+        }
 
         /// <summary>Used by a <see cref="Regex"/> object to scan the input <paramref name="text"/> looking for the next match.</summary>
         /// <remarks>This API supports the product infrastructure and is not intended to be used directly from your code.</remarks>
@@ -383,7 +385,9 @@ namespace System.Text.RegularExpressions
         /// used to know how large the initial runtrack and runstack arrays
         /// must be.
         /// </summary>
-        protected virtual void InitTrackCount() { }
+        protected virtual void InitTrackCount()
+        {
+        }
 
         /// <summary>
         /// Called by the implementation of Go() to increase the size of storage

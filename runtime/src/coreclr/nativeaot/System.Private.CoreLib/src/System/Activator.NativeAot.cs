@@ -112,7 +112,9 @@ namespace System
         // The constructor of this struct is used when there's no constructor
         struct StructWithNoConstructor
         {
-            public StructWithNoConstructor() { }
+            public StructWithNoConstructor()
+            {
+            }
         }
 
         [DebuggerHidden]

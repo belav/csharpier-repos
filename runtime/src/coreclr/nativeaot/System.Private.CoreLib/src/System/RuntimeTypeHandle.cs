@@ -20,7 +20,9 @@ namespace System
         // you can't use the raw IntPtr value for comparisons.
         //
 
-        internal RuntimeTypeHandle(EETypePtr pEEType) : this(pEEType.RawValue) { }
+        internal RuntimeTypeHandle(EETypePtr pEEType) : this(pEEType.RawValue)
+        {
+        }
 
         private RuntimeTypeHandle(IntPtr value)
         {

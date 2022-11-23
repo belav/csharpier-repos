@@ -38,7 +38,9 @@ namespace System.Configuration
                 s_propProviderName
             };
 
-        public ConnectionStringSettings() { }
+        public ConnectionStringSettings()
+        {
+        }
 
         public ConnectionStringSettings(string name, string connectionString) : this()
         {

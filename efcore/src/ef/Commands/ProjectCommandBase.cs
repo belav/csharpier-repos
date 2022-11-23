@@ -121,7 +121,9 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                                 .GetField("s_current", BindingFlags.Static | BindingFlags.NonPublic)
                                 .SetValue(null, null);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
 #elif !NETCOREAPP2_0

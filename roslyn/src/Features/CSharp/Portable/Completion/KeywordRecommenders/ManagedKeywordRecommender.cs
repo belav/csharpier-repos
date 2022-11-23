@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ManagedKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public ManagedKeywordRecommender() : base(SyntaxKind.ManagedKeyword) { }
+        public ManagedKeywordRecommender() : base(SyntaxKind.ManagedKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

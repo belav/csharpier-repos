@@ -294,7 +294,9 @@ namespace Microsoft.Test.ModuleCore
             }
         }
 
-        protected virtual void UpdateAttributes() { }
+        protected virtual void UpdateAttributes()
+        {
+        }
 
         protected virtual void DetermineChildren()
         {
@@ -302,7 +304,9 @@ namespace Microsoft.Test.ModuleCore
             Children.Sort();
         }
 
-        public virtual void AddChildren() { }
+        public virtual void AddChildren()
+        {
+        }
 
         public void AddChild(TestItem child)
         {
@@ -483,9 +487,13 @@ namespace Microsoft.Test.ModuleCore
             return result;
         }
 
-        protected virtual void OnEnter(TestMethod method) { }
+        protected virtual void OnEnter(TestMethod method)
+        {
+        }
 
-        protected virtual void OnLeave(TestMethod method) { }
+        protected virtual void OnLeave(TestMethod method)
+        {
+        }
 
         protected virtual TestResult HandleException(Exception e)
         {
@@ -510,7 +518,9 @@ namespace Microsoft.Test.ModuleCore
         //Data
 
         //Constructor
-        public TestItems() { }
+        public TestItems()
+        {
+        }
 
         //ITestItems
         int ITestItems.Count

@@ -20,7 +20,9 @@ namespace System.Web.Razor.Editor
             Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
         )]
         public SpanEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer)
-            : this(tokenizer, AcceptedCharacters.Any) { }
+            : this(tokenizer, AcceptedCharacters.Any)
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Design",

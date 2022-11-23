@@ -434,7 +434,9 @@ public class ReliabilityFramework
                     LoggingLevels.SmartDotNet,
                     "Reporting results..."
                 );
-                try { }
+                try
+                {
+                }
                 catch (Exception e)
                 {
                     _logger.WriteToInstrumentationLog(
@@ -527,7 +529,9 @@ public class ReliabilityFramework
                             }
                             haveAtLeastOneTest = true;
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                         break;
                     case TestStartModeEnum.AppDomainLoader:
                         Console.WriteLine("Appdomain mode is NOT supported for ProjectK");

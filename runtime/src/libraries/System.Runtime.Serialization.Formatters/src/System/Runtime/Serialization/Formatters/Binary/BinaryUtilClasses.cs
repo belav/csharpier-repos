@@ -73,7 +73,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         internal int _consecutiveNullArrayEntryCount;
 
-        internal ParseRecord() { }
+        internal ParseRecord()
+        {
+        }
 
         // Initialize ParseRecord. Called when reusing.
         internal void Init()
@@ -284,7 +286,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int[] _objects = new int[16];
         internal int[] _negObjects = new int[4];
 
-        public IntSizedArray() { }
+        public IntSizedArray()
+        {
+        }
 
         private IntSizedArray(IntSizedArray sizedArray)
         {
@@ -458,7 +462,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal InternalArrayTypeE _arrayEnum;
         private bool _sealedStatusChecked;
 
-        internal NameInfo() { }
+        internal NameInfo()
+        {
+        }
 
         internal void Init()
         {

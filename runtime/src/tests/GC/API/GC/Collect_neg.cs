@@ -22,7 +22,9 @@ public class NegCollect
                 retVal = false;
                 Console.WriteLine("Invalid value for GC.Collect: {0}", invalidInputs[i]);
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
         }
 
         if (retVal)

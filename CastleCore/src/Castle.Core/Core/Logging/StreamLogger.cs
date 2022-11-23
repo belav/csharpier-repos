@@ -44,7 +44,9 @@ namespace Castle.Core.Logging
         ///  The stream that will be used for logging,
         ///  seeking while the logger is alive
         ///</param>
-        public StreamLogger(string name, Stream stream) : this(name, new StreamWriter(stream)) { }
+        public StreamLogger(string name, Stream stream) : this(name, new StreamWriter(stream))
+        {
+        }
 
         ///<summary>
         ///  Creates a new <c>StreamLogger</c> with default buffer size.
@@ -62,7 +64,9 @@ namespace Castle.Core.Logging
         ///  <see cref = "StreamWriter" />
         ///</param>
         public StreamLogger(string name, Stream stream, Encoding encoding)
-            : this(name, new StreamWriter(stream, encoding)) { }
+            : this(name, new StreamWriter(stream, encoding))
+        {
+        }
 
         ///<summary>
         ///  Creates a new <c>StreamLogger</c>.
@@ -84,7 +88,9 @@ namespace Castle.Core.Logging
         ///  <see cref = "StreamWriter" />
         ///</param>
         public StreamLogger(string name, Stream stream, Encoding encoding, int bufferSize)
-            : this(name, new StreamWriter(stream, encoding, bufferSize)) { }
+            : this(name, new StreamWriter(stream, encoding, bufferSize))
+        {
+        }
 
         ~StreamLogger()
         {

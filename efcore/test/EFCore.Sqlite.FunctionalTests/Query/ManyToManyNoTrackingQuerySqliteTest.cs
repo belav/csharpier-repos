@@ -9,7 +9,8 @@ public class ManyToManyNoTrackingQuerySqliteTest
     : ManyToManyNoTrackingQueryRelationalTestBase<ManyToManyQuerySqliteFixture>
 {
     public ManyToManyNoTrackingQuerySqliteTest(ManyToManyQuerySqliteFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     // Sqlite does not support Apply operations
 

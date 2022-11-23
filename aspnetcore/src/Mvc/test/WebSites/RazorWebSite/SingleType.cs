@@ -3,4 +3,6 @@
 
 namespace RazorWebSite;
 
-public class SingleType { }
+public class SingleType
+{
+}

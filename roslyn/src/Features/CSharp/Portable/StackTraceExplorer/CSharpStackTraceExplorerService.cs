@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.StackTraceExplorer
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStackTraceExplorerService() { }
+        public CSharpStackTraceExplorerService()
+        {
+        }
 
         public string GetTypeMetadataName(string className)
         {

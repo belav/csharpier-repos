@@ -35,7 +35,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             Type baseType,
             IEnumerable<Type> interfaces
         ) : this(modulescope, name, baseType, interfaces, DefaultAttributes, forceUnsigned: false)
-        { }
+        {
+        }
 
         public ClassEmitter(
             ModuleScope modulescope,
@@ -67,7 +68,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
             moduleScope = modulescope;
         }
 
-        public ClassEmitter(TypeBuilder typeBuilder) : base(typeBuilder) { }
+        public ClassEmitter(TypeBuilder typeBuilder) : base(typeBuilder)
+        {
+        }
 
         public ModuleScope ModuleScope
         {

@@ -12,6 +12,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                 handle,
                 ptr => MsQuicApi.Api.ApiTable->ListenerClose((QUIC_HANDLE*)ptr),
                 SafeHandleType.Listener
-            ) { }
+            )
+        {
+        }
     }
 }

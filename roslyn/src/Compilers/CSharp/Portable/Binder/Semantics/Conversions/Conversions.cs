@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 currentRecursionDepth: 0,
                 includeNullability: false,
                 otherNullabilityOpt: null
-            ) { }
+            )
+        {
+        }
 
         private Conversions(
             Binder binder,

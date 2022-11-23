@@ -40,7 +40,9 @@ namespace System.Web.Http.Cors
         /// var cors = new EnableCorsAttribute("http://localhost:1234", "*", "GET,PUT,POST,DELETE");
         /// </param>
         public EnableCorsAttribute(string origins, string headers, string methods)
-            : this(origins, headers, methods, null) { }
+            : this(origins, headers, methods, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnableCorsAttribute" /> class.

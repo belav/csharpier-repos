@@ -9,10 +9,14 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeProcessHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeProcessHandle() : base(default(bool)) { }
+        public SafeProcessHandle() : base(default(bool))
+        {
+        }
 
         public SafeProcessHandle(System.IntPtr existingHandle, bool ownsHandle)
-            : base(default(bool)) { }
+            : base(default(bool))
+        {
+        }
 
         protected override bool ReleaseHandle()
         {
@@ -25,7 +29,9 @@ namespace System.Diagnostics
 {
     public partial class DataReceivedEventArgs : System.EventArgs
     {
-        internal DataReceivedEventArgs() { }
+        internal DataReceivedEventArgs()
+        {
+        }
 
         public string? Data
         {
@@ -41,7 +47,9 @@ namespace System.Diagnostics
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
     public partial class MonitoringDescriptionAttribute : System.ComponentModel.DescriptionAttribute
     {
-        public MonitoringDescriptionAttribute(string description) { }
+        public MonitoringDescriptionAttribute(string description)
+        {
+        }
 
         public override string Description
         {
@@ -54,7 +62,9 @@ namespace System.Diagnostics
     )]
     public partial class Process : System.ComponentModel.Component, System.IDisposable
     {
-        public Process() { }
+        public Process()
+        {
+        }
 
         public int BasePriority
         {
@@ -63,7 +73,9 @@ namespace System.Diagnostics
         public bool EnableRaisingEvents
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ExitCode
         {
@@ -119,7 +131,9 @@ namespace System.Diagnostics
                 System.Runtime.Versioning.SupportedOSPlatformAttribute("maccatalyst"),
                 System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")
             ]
-            set { }
+            set
+            {
+            }
         }
         public System.IntPtr MinWorkingSet
         {
@@ -135,7 +149,9 @@ namespace System.Diagnostics
                 System.Runtime.Versioning.SupportedOSPlatformAttribute("maccatalyst"),
                 System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")
             ]
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.ProcessModuleCollection Modules
         {
@@ -216,12 +232,16 @@ namespace System.Diagnostics
         public bool PriorityBoostEnabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.ProcessPriorityClass PriorityClass
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -253,7 +273,9 @@ namespace System.Diagnostics
         public System.IntPtr ProcessorAffinity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Responding
         {
@@ -282,7 +304,9 @@ namespace System.Diagnostics
         public System.Diagnostics.ProcessStartInfo StartInfo
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -295,7 +319,9 @@ namespace System.Diagnostics
         public System.ComponentModel.ISynchronizeInvoke? SynchronizingObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.ProcessThreadCollection Threads
         {
@@ -343,38 +369,64 @@ namespace System.Diagnostics
         }
         public event System.Diagnostics.DataReceivedEventHandler? ErrorDataReceived
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler Exited
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Diagnostics.DataReceivedEventHandler? OutputDataReceived
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void BeginErrorReadLine() { }
+        public void BeginErrorReadLine()
+        {
+        }
 
-        public void BeginOutputReadLine() { }
+        public void BeginOutputReadLine()
+        {
+        }
 
-        public void CancelErrorRead() { }
+        public void CancelErrorRead()
+        {
+        }
 
-        public void CancelOutputRead() { }
+        public void CancelOutputRead()
+        {
+        }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
         public bool CloseMainWindow()
         {
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public static void EnterDebugMode() { }
+        public static void EnterDebugMode()
+        {
+        }
 
         public static System.Diagnostics.Process GetCurrentProcess()
         {
@@ -429,18 +481,28 @@ namespace System.Diagnostics
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("maccatalyst")]
-        public void Kill() { }
+        public void Kill()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("maccatalyst")]
-        public void Kill(bool entireProcessTree) { }
+        public void Kill(bool entireProcessTree)
+        {
+        }
 
-        public static void LeaveDebugMode() { }
+        public static void LeaveDebugMode()
+        {
+        }
 
-        protected void OnExited() { }
+        protected void OnExited()
+        {
+        }
 
-        public void Refresh() { }
+        public void Refresh()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
@@ -517,7 +579,9 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void WaitForExit() { }
+        public void WaitForExit()
+        {
+        }
 
         public bool WaitForExit(int milliseconds)
         {
@@ -558,7 +622,9 @@ namespace System.Diagnostics
     )]
     public partial class ProcessModule : System.ComponentModel.Component
     {
-        internal ProcessModule() { }
+        internal ProcessModule()
+        {
+        }
 
         public System.IntPtr BaseAddress
         {
@@ -593,9 +659,13 @@ namespace System.Diagnostics
 
     public partial class ProcessModuleCollection : System.Collections.ReadOnlyCollectionBase
     {
-        protected ProcessModuleCollection() { }
+        protected ProcessModuleCollection()
+        {
+        }
 
-        public ProcessModuleCollection(System.Diagnostics.ProcessModule[] processModules) { }
+        public ProcessModuleCollection(System.Diagnostics.ProcessModule[] processModules)
+        {
+        }
 
         public System.Diagnostics.ProcessModule this[int index]
         {
@@ -607,7 +677,9 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void CopyTo(System.Diagnostics.ProcessModule[] array, int index) { }
+        public void CopyTo(System.Diagnostics.ProcessModule[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Diagnostics.ProcessModule module)
         {
@@ -627,11 +699,17 @@ namespace System.Diagnostics
 
     public sealed partial class ProcessStartInfo
     {
-        public ProcessStartInfo() { }
+        public ProcessStartInfo()
+        {
+        }
 
-        public ProcessStartInfo(string fileName) { }
+        public ProcessStartInfo(string fileName)
+        {
+        }
 
-        public ProcessStartInfo(string fileName, string arguments) { }
+        public ProcessStartInfo(string fileName, string arguments)
+        {
+        }
 
         public System.Collections.ObjectModel.Collection<string> ArgumentList
         {
@@ -642,12 +720,16 @@ namespace System.Diagnostics
         public string Arguments
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool CreateNoWindow
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -655,7 +737,9 @@ namespace System.Diagnostics
         public string Domain
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IDictionary<string, string?> Environment
         {
@@ -673,12 +757,16 @@ namespace System.Diagnostics
         public bool ErrorDialog
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IntPtr ErrorDialogParentHandle
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorAttribute(
@@ -689,14 +777,18 @@ namespace System.Diagnostics
         public string FileName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public bool LoadUserProfile
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.CLSCompliantAttribute(false)]
@@ -704,56 +796,76 @@ namespace System.Diagnostics
         public System.Security.SecureString? Password
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public string? PasswordInClearText
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RedirectStandardError
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RedirectStandardInput
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RedirectStandardOutput
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Text.Encoding? StandardErrorEncoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Text.Encoding? StandardInputEncoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Text.Encoding? StandardOutputEncoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string UserName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseShellExecute
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -761,7 +873,9 @@ namespace System.Diagnostics
         public string Verb
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string[] Verbs
         {
@@ -772,7 +886,9 @@ namespace System.Diagnostics
         public System.Diagnostics.ProcessWindowStyle WindowStyle
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorAttribute(
@@ -783,7 +899,9 @@ namespace System.Diagnostics
         public string WorkingDirectory
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -792,7 +910,9 @@ namespace System.Diagnostics
     )]
     public partial class ProcessThread : System.ComponentModel.Component
     {
-        internal ProcessThread() { }
+        internal ProcessThread()
+        {
+        }
 
         public int BasePriority
         {
@@ -808,12 +928,16 @@ namespace System.Diagnostics
         }
         public int IdealProcessor
         {
-            set { }
+            set
+            {
+            }
         }
         public bool PriorityBoostEnabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.ThreadPriorityLevel PriorityLevel
         {
@@ -822,7 +946,9 @@ namespace System.Diagnostics
             [System.Runtime.Versioning.SupportedOSPlatform("freebsd")]
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -836,7 +962,9 @@ namespace System.Diagnostics
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public System.IntPtr ProcessorAffinity
         {
-            set { }
+            set
+            {
+            }
         }
         public System.IntPtr StartAddress
         {
@@ -874,14 +1002,20 @@ namespace System.Diagnostics
             get { throw null; }
         }
 
-        public void ResetIdealProcessor() { }
+        public void ResetIdealProcessor()
+        {
+        }
     }
 
     public partial class ProcessThreadCollection : System.Collections.ReadOnlyCollectionBase
     {
-        protected ProcessThreadCollection() { }
+        protected ProcessThreadCollection()
+        {
+        }
 
-        public ProcessThreadCollection(System.Diagnostics.ProcessThread[] processThreads) { }
+        public ProcessThreadCollection(System.Diagnostics.ProcessThread[] processThreads)
+        {
+        }
 
         public System.Diagnostics.ProcessThread this[int index]
         {
@@ -898,16 +1032,22 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void CopyTo(System.Diagnostics.ProcessThread[] array, int index) { }
+        public void CopyTo(System.Diagnostics.ProcessThread[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Diagnostics.ProcessThread thread)
         {
             throw null;
         }
 
-        public void Insert(int index, System.Diagnostics.ProcessThread thread) { }
+        public void Insert(int index, System.Diagnostics.ProcessThread thread)
+        {
+        }
 
-        public void Remove(System.Diagnostics.ProcessThread thread) { }
+        public void Remove(System.Diagnostics.ProcessThread thread)
+        {
+        }
     }
 
     public enum ProcessWindowStyle

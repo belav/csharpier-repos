@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.Configuration.Json
         /// </summary>
         /// <param name="source">The <see cref="JsonStreamConfigurationSource"/>.</param>
         public JsonStreamConfigurationProvider(JsonStreamConfigurationSource source) : base(source)
-        { }
+        {
+        }
 
         /// <summary>
         /// Loads json configuration key/values from a stream into a provider.

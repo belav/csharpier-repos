@@ -1208,7 +1208,9 @@ namespace System.Collections.Concurrent
                 _current = default;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

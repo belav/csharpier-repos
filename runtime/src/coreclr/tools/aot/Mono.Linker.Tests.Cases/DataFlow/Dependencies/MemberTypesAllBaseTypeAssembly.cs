@@ -11,19 +11,33 @@ namespace Mono.Linker.Tests.Cases.DataFlow.Dependencies
 {
     public class MemberTypesAllBaseType
     {
-        static MemberTypesAllBaseType() { }
+        static MemberTypesAllBaseType()
+        {
+        }
 
-        public MemberTypesAllBaseType() { }
+        public MemberTypesAllBaseType()
+        {
+        }
 
-        private MemberTypesAllBaseType(bool _) { }
+        private MemberTypesAllBaseType(bool _)
+        {
+        }
 
-        public void PublicMethod() { }
+        public void PublicMethod()
+        {
+        }
 
-        private void PrivateMethod() { }
+        private void PrivateMethod()
+        {
+        }
 
-        public static void PublicStaticMethod() { }
+        public static void PublicStaticMethod()
+        {
+        }
 
-        private static void PrivateStaticMethod() { }
+        private static void PrivateStaticMethod()
+        {
+        }
 
         public int PublicField;
         private int PrivateField;
@@ -42,12 +56,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow.Dependencies
 
         public class PublicNestedType
         {
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
         }
 
         private class PrivateNestedType
         {
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
         }
     }
 }

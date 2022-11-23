@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 wasTargetTyped: false,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundObjectCreationExpression Update(
             MethodSymbol constructor,

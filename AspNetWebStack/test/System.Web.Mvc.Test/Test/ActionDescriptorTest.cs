@@ -300,7 +300,9 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        class DerivedDescriptor : BaseDescriptor { }
+        class DerivedDescriptor : BaseDescriptor
+        {
+        }
 
         private static ActionDescriptor GetActionDescriptor()
         {
@@ -324,7 +326,9 @@ namespace System.Web.Mvc.Test
                 int intParameter,
                 string stringParameterNoDefaultValue,
                 [DefaultValue("hello")] string stringParameterWithDefaultValue
-            ) { }
+            )
+            {
+            }
         }
     }
 }

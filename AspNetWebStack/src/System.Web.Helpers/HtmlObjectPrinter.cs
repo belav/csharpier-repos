@@ -57,7 +57,9 @@ namespace System.Web.Helpers
         private Stack<HtmlElement> _elementStack = new Stack<HtmlElement>();
 
         public HtmlObjectPrinter(int recursionLimit, int enumerationLimit)
-            : base(recursionLimit, enumerationLimit) { }
+            : base(recursionLimit, enumerationLimit)
+        {
+        }
 
         private HtmlElement Current
         {

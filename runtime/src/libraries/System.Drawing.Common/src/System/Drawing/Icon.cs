@@ -45,9 +45,13 @@ namespace System.Drawing
         private IntPtr _handle = IntPtr.Zero;
         private readonly bool _ownHandle = true;
 
-        private Icon() { }
+        private Icon()
+        {
+        }
 
-        internal Icon(IntPtr handle) : this(handle, false) { }
+        internal Icon(IntPtr handle) : this(handle, false)
+        {
+        }
 
         internal Icon(IntPtr handle, bool takeOwnership)
         {
@@ -60,9 +64,13 @@ namespace System.Drawing
             _ownHandle = takeOwnership;
         }
 
-        public Icon(string fileName) : this(fileName, 0, 0) { }
+        public Icon(string fileName) : this(fileName, 0, 0)
+        {
+        }
 
-        public Icon(string fileName, Size size) : this(fileName, size.Width, size.Height) { }
+        public Icon(string fileName, Size size) : this(fileName, size.Width, size.Height)
+        {
+        }
 
         public Icon(string fileName, int width, int height) : this()
         {
@@ -86,7 +94,9 @@ namespace System.Drawing
             Initialize(width, height);
         }
 
-        public Icon(Icon original, Size size) : this(original, size.Width, size.Height) { }
+        public Icon(Icon original, Size size) : this(original, size.Width, size.Height)
+        {
+        }
 
         public Icon(Icon original, int width, int height) : this()
         {
@@ -126,9 +136,13 @@ namespace System.Drawing
             Initialize(0, 0);
         }
 
-        public Icon(Stream stream) : this(stream, 0, 0) { }
+        public Icon(Stream stream) : this(stream, 0, 0)
+        {
+        }
 
-        public Icon(Stream stream, Size size) : this(stream, size.Width, size.Height) { }
+        public Icon(Stream stream, Size size) : this(stream, size.Width, size.Height)
+        {
+        }
 
         public Icon(Stream stream, int width, int height) : this()
         {

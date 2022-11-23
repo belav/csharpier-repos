@@ -2356,7 +2356,9 @@ namespace System.Globalization
             return year;
         }
 
-        public KoreanLunisolarCalendar() { }
+        public KoreanLunisolarCalendar()
+        {
+        }
 
         public override int GetEra(DateTime time)
         {

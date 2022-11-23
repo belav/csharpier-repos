@@ -29,7 +29,9 @@ namespace System.IO.Tests.Enumeration
         private class TestEnumerator : FileSystemEnumerator<string>
         {
             public TestEnumerator(string directory, EnumerationOptions options)
-                : base(directory, options) { }
+                : base(directory, options)
+            {
+            }
 
             protected override string TransformEntry(ref FileSystemEntry entry)
             {

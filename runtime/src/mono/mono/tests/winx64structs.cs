@@ -4,7 +4,9 @@ using System.Runtime.InteropServices;
 [AttributeUsage(AttributeTargets.Method)]
 sealed class MonoPInvokeCallbackAttribute : Attribute
 {
-    public MonoPInvokeCallbackAttribute(Type t) { }
+    public MonoPInvokeCallbackAttribute(Type t)
+    {
+    }
 }
 
 [StructLayout(LayoutKind.Sequential)]

@@ -3,5 +3,7 @@
 
 namespace System.Reflection.Tests.AssemblyVersion
 {
-    public class Program_3_0_0_0 { }
+    public class Program_3_0_0_0
+    {
+    }
 }

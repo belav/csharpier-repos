@@ -304,7 +304,9 @@ namespace System.ComponentModel.Composition.AttributedModel
 
     public class NotifyImportExporter
     {
-        public NotifyImportExporter() { }
+        public NotifyImportExporter()
+        {
+        }
 
         [Export()]
         [ExportMetadata("Filter", false)]
@@ -375,7 +377,9 @@ namespace System.ComponentModel.Composition.AttributedModel
     [Export("NotifyImportExportsEager")]
     public class NotifyImportExportsEager : IPartImportsSatisfiedNotification
     {
-        public NotifyImportExportsEager() { }
+        public NotifyImportExportsEager()
+        {
+        }
 
         [ImportMany]
         public Collection<

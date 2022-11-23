@@ -1042,7 +1042,9 @@ namespace CoreXml.Test.XLinq
                                     buffer = new char[1];
                                     DataReader.ReadValueChunk(buffer, 0, 1);
                                 }
-                                catch (NotSupportedException) { }
+                                catch (NotSupportedException)
+                                {
+                                }
                             }
                             else
                             {
@@ -1051,7 +1053,9 @@ namespace CoreXml.Test.XLinq
                                     buffer = new char[1];
                                     DataReader.ReadValueChunk(buffer, 0, 1);
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -1076,7 +1080,9 @@ namespace CoreXml.Test.XLinq
                         );
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (NotSupportedException) { }
+                    catch (NotSupportedException)
+                    {
+                    }
 
                     buffer = new char[2];
                     DataReader.Read();
@@ -1089,7 +1095,9 @@ namespace CoreXml.Test.XLinq
                         );
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (NotSupportedException) { }
+                    catch (NotSupportedException)
+                    {
+                    }
 
                     while (DataReader.Read())
                         ;
@@ -1113,7 +1121,9 @@ namespace CoreXml.Test.XLinq
                         );
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (NotSupportedException) { }
+                    catch (NotSupportedException)
+                    {
+                    }
 
                     buffer = new char[2];
                     DataReader.Read();
@@ -1126,7 +1136,9 @@ namespace CoreXml.Test.XLinq
                         );
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (NotSupportedException) { }
+                    catch (NotSupportedException)
+                    {
+                    }
 
                     while (DataReader.Read())
                         ;
@@ -1153,7 +1165,9 @@ namespace CoreXml.Test.XLinq
                         reader.ReadValueChunk(new char[3], 0, 3);
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (NotSupportedException) { }
+                    catch (NotSupportedException)
+                    {
+                    }
                     reader.Skip();
                     TestLog.Compare(reader.NodeType, XmlNodeType.Text, "NT");
                     reader.Read();

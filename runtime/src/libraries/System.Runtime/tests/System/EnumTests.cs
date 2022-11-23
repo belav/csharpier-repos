@@ -2739,7 +2739,9 @@ namespace System.Tests
             AssertExtensions.Throws<ArgumentException>("enumType", () => Enum.GetValues(enumType));
         }
 
-        private class ClassWithEnumConstraint<T> where T : Enum { }
+        private class ClassWithEnumConstraint<T> where T : Enum
+        {
+        }
 
         [Fact]
         public void EnumConstraint_ThrowsArgumentException()

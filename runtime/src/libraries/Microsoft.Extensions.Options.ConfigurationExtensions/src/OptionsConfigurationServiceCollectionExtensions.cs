@@ -44,7 +44,14 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection Configure<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions
         >(this IServiceCollection services, string? name, IConfiguration config)
-            where TOptions : class => services.Configure<TOptions>(name, config, _ => { });
+            where TOptions : class =>
+            services.Configure<TOptions>(
+                name,
+                config,
+                _ =>
+                {
+                }
+            );
 
         /// <summary>
         /// Registers a configuration instance which TOptions will bind against.

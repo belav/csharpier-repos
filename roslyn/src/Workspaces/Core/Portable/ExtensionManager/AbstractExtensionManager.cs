@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Extensions
         private readonly ConcurrentSet<object> _ignoredProviders =
             new(ReferenceEqualityComparer.Instance);
 
-        protected AbstractExtensionManager() { }
+        protected AbstractExtensionManager()
+        {
+        }
 
         protected void DisableProvider(object provider) => _disabledProviders.Add(provider);
 

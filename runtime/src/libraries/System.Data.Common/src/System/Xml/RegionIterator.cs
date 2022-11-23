@@ -11,7 +11,9 @@ namespace System.Xml
 {
     internal abstract class BaseRegionIterator : BaseTreeIterator
     {
-        internal BaseRegionIterator(DataSetMapper mapper) : base(mapper) { }
+        internal BaseRegionIterator(DataSetMapper mapper) : base(mapper)
+        {
+        }
     }
 
     // Iterates over non-attribute nodes

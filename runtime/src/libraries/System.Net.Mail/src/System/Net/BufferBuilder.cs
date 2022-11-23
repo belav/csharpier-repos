@@ -11,7 +11,9 @@ namespace System.Net.Mail
         private byte[] _buffer;
         private int _offset;
 
-        internal BufferBuilder() : this(256) { }
+        internal BufferBuilder() : this(256)
+        {
+        }
 
         internal BufferBuilder(int initialSize)
         {

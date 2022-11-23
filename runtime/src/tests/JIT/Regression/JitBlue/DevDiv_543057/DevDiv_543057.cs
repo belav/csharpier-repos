@@ -25,7 +25,9 @@ public class TestClass
     public const int Pass = 100;
     public const int Fail = -1;
 
-    public TestClass() { }
+    public TestClass()
+    {
+    }
 
     // This is just here to set our lclVar to a non-constant.
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -36,7 +38,9 @@ public class TestClass
 
     // This is here to preference our lclVars to the appropriate parameter registers.
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public void Dummy2(int p1, int p2, int p3, int p4) { }
+    public void Dummy2(int p1, int p2, int p3, int p4)
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public int Check1(int i1, int i2, MyStruct s1, int i3, int i4)

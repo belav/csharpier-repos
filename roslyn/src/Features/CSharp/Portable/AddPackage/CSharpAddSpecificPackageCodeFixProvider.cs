@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddPackage
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddSpecificPackageCodeFixProvider() { }
+        public CSharpAddSpecificPackageCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS8179);

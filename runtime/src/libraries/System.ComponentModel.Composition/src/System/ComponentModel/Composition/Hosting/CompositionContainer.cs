@@ -33,7 +33,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContainer"/> class.
         /// </summary>
-        public CompositionContainer() : this((ComposablePartCatalog?)null) { }
+        public CompositionContainer() : this((ComposablePartCatalog?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContainer"/> class
@@ -49,7 +51,9 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="providers"/> contains an element that is <see langword="null"/>.
         /// </exception>
         public CompositionContainer(params ExportProvider[]? providers)
-            : this((ComposablePartCatalog?)null, providers) { }
+            : this((ComposablePartCatalog?)null, providers)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContainer"/> class
@@ -70,7 +74,9 @@ namespace System.ComponentModel.Composition.Hosting
         public CompositionContainer(
             CompositionOptions compositionOptions,
             params ExportProvider[]? providers
-        ) : this((ComposablePartCatalog?)null, compositionOptions, providers) { }
+        ) : this((ComposablePartCatalog?)null, compositionOptions, providers)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContainer"/> class
@@ -89,7 +95,9 @@ namespace System.ComponentModel.Composition.Hosting
         public CompositionContainer(
             ComposablePartCatalog? catalog,
             params ExportProvider[]? providers
-        ) : this(catalog, false, providers) { }
+        ) : this(catalog, false, providers)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContainer"/> class
@@ -117,7 +125,9 @@ namespace System.ComponentModel.Composition.Hosting
                 catalog,
                 isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default,
                 providers
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContainer"/> class

@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
-public class ViewAssemblyMarker { }
+public class ViewAssemblyMarker
+{
+}

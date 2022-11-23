@@ -614,7 +614,9 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             public static readonly TokenOrderComparer Instance = new();
 
-            private TokenOrderComparer() { }
+            private TokenOrderComparer()
+            {
+            }
 
             public int Compare(SyntaxToken x, SyntaxToken y) => x.FullSpan.CompareTo(y.FullSpan);
         }

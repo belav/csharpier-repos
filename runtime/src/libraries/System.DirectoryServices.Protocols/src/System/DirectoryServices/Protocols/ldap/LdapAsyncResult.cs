@@ -65,7 +65,9 @@ namespace System.DirectoryServices.Protocols
         internal Exception _exception;
         internal bool _abortCalled;
 
-        public LdapRequestState() { }
+        public LdapRequestState()
+        {
+        }
     }
 
     internal enum ResultsStatus

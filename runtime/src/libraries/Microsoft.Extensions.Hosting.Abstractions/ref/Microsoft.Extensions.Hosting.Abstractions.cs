@@ -35,14 +35,18 @@ namespace Microsoft.Extensions.Hosting
         : Microsoft.Extensions.Hosting.IHostedService,
             System.IDisposable
     {
-        protected BackgroundService() { }
+        protected BackgroundService()
+        {
+        }
 
         public virtual System.Threading.Tasks.Task? ExecuteTask
         {
             get { throw null; }
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
 
         protected abstract System.Threading.Tasks.Task ExecuteAsync(
             System.Threading.CancellationToken stoppingToken
@@ -82,27 +86,38 @@ namespace Microsoft.Extensions.Hosting
 
     public sealed partial class HostAbortedException : System.Exception
     {
-        public HostAbortedException() { }
+        public HostAbortedException()
+        {
+        }
 
-        public HostAbortedException(string? message) { }
+        public HostAbortedException(string? message)
+        {
+        }
 
-        public HostAbortedException(string? message, System.Exception? innerException) { }
+        public HostAbortedException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class HostBuilderContext
     {
         public HostBuilderContext(System.Collections.Generic.IDictionary<object, object> properties)
-        { }
+        {
+        }
 
         public Microsoft.Extensions.Configuration.IConfiguration Configuration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Extensions.Hosting.IHostEnvironment HostingEnvironment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IDictionary<object, object> Properties
         {
@@ -170,7 +185,9 @@ namespace Microsoft.Extensions.Hosting
 
     public static partial class HostingAbstractionsHostExtensions
     {
-        public static void Run(this Microsoft.Extensions.Hosting.IHost host) { }
+        public static void Run(this Microsoft.Extensions.Hosting.IHost host)
+        {
+        }
 
         public static System.Threading.Tasks.Task RunAsync(
             this Microsoft.Extensions.Hosting.IHost host,
@@ -180,7 +197,9 @@ namespace Microsoft.Extensions.Hosting
             throw null;
         }
 
-        public static void Start(this Microsoft.Extensions.Hosting.IHost host) { }
+        public static void Start(this Microsoft.Extensions.Hosting.IHost host)
+        {
+        }
 
         public static System.Threading.Tasks.Task StopAsync(
             this Microsoft.Extensions.Hosting.IHost host,
@@ -190,7 +209,9 @@ namespace Microsoft.Extensions.Hosting
             throw null;
         }
 
-        public static void WaitForShutdown(this Microsoft.Extensions.Hosting.IHost host) { }
+        public static void WaitForShutdown(this Microsoft.Extensions.Hosting.IHost host)
+        {
+        }
 
         public static System.Threading.Tasks.Task WaitForShutdownAsync(
             this Microsoft.Extensions.Hosting.IHost host,

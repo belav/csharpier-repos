@@ -7,7 +7,9 @@ namespace System.CodeDom
 {
     public class CodeCatchClauseCollection : CollectionBase
     {
-        public CodeCatchClauseCollection() { }
+        public CodeCatchClauseCollection()
+        {
+        }
 
         public CodeCatchClauseCollection(CodeCatchClauseCollection value)
         {

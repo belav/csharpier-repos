@@ -393,7 +393,9 @@ namespace Microsoft.Cci
 
         private sealed class FullReferenceIndexer : ReferenceIndexer
         {
-            internal FullReferenceIndexer(MetadataWriter metadataWriter) : base(metadataWriter) { }
+            internal FullReferenceIndexer(MetadataWriter metadataWriter) : base(metadataWriter)
+            {
+            }
         }
 
         protected override void PopulateEventMapTableRows()

@@ -525,6 +525,8 @@ public class MulticastDelegateEquals
             );
     }
 
-    private void TestValueParameterVoidCallback1(int val) { }
+    private void TestValueParameterVoidCallback1(int val)
+    {
+    }
     #endregion
 }

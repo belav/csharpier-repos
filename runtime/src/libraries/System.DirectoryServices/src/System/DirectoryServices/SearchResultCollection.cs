@@ -125,7 +125,9 @@ namespace System.DirectoryServices
                 {
                     SearchObject.FreeColumn((INTPTR_INTPTRCAST)pColumn);
                 }
-                catch (COMException) { }
+                catch (COMException)
+                {
+                }
             }
         }
 
@@ -151,7 +153,9 @@ namespace System.DirectoryServices
                 {
                     SearchObject.FreeColumn((INTPTR_INTPTRCAST)pColumn);
                 }
-                catch (COMException) { }
+                catch (COMException)
+                {
+                }
             }
         }
 
@@ -310,7 +314,9 @@ namespace System.DirectoryServices
                             {
                                 _results.SearchObject.FreeColumn((INTPTR_INTPTRCAST)pColumn);
                             }
-                            catch (COMException) { }
+                            catch (COMException)
+                            {
+                            }
                         }
                     }
                     finally

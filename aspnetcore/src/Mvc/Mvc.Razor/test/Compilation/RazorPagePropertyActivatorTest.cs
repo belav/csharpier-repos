@@ -216,9 +216,15 @@ public class RazorPagePropertyActivatorTest
         Assert.Same(original, viewDataDictionary);
     }
 
-    private class TestPage { }
+    private class TestPage
+    {
+    }
 
-    private class TestModel { }
+    private class TestModel
+    {
+    }
 
-    private class DerivedTestModel : TestModel { }
+    private class DerivedTestModel : TestModel
+    {
+    }
 }

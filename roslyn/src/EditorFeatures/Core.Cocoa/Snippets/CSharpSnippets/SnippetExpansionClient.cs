@@ -31,7 +31,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 subjectBuffer,
                 expansionServiceProvider,
                 editorOptionsService
-            ) { }
+            )
+        {
+        }
 
         /// <returns>The tracking span of the inserted "/**/" if there is an $end$ location, null
         /// otherwise.</returns>

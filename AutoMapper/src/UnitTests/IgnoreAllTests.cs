@@ -209,7 +209,9 @@ public class ReverseMapIgnoreAttributeTests
         destination.ShouldNotBeMapped.ShouldBe(null);
     }
 
-    public class Source2 { }
+    public class Source2
+    {
+    }
 
     public class Destination2
     {

@@ -111,7 +111,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
             public bool CanMerge(ITextUndoPrimitive older) => false;
 
-            public void Do() { }
+            public void Do()
+            {
+            }
 
             public ITextUndoPrimitive Merge(ITextUndoPrimitive older) =>
                 throw new NotSupportedException();

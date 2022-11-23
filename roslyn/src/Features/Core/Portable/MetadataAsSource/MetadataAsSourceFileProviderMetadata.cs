@@ -10,6 +10,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     internal class MetadataAsSourceFileProviderMetadata : OrderableLanguageMetadata
     {
         public MetadataAsSourceFileProviderMetadata(IDictionary<string, object> data) : base(data)
-        { }
+        {
+        }
     }
 }

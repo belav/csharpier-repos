@@ -12,7 +12,9 @@ namespace DebuggerTests
 {
     public class ArrayTests : DebuggerTests
     {
-        public ArrayTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public ArrayTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         [Theory]
         [InlineData(19, 8, "DebuggerTests.ArrayTestsClass.PrimitiveTypeLocals", false, 0, false)]

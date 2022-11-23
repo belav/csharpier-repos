@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class ParserErrorMessageTests : ParsingTests
     {
-        public ParserErrorMessageTests(ITestOutputHelper output) : base(output) { }
+        public ParserErrorMessageTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         #region "Targeted Error Tests - please arrange tests in the order of error code"
 

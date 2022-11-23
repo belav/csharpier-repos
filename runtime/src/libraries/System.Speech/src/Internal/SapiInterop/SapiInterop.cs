@@ -423,13 +423,19 @@ namespace System.Speech.Internal.SapiInterop
     }
 
     [ComImport, Guid("EF411752-3736-4CB4-9C8C-8EF4CCB58EFE")]
-    internal class SpObjectToken { }
+    internal class SpObjectToken
+    {
+    }
 
     [ComImport, Guid("A910187F-0C7A-45AC-92CC-59EDAFB77B53")]
-    internal class SpObjectTokenCategory { }
+    internal class SpObjectTokenCategory
+    {
+    }
 
     [ComImport, Guid("D9F6EE60-58C9-458B-88E1-2F908FD7F87C")]
-    internal class SpDataKey { }
+    internal class SpDataKey
+    {
+    }
 
     #endregion
 

@@ -22,7 +22,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     {
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        public BasicLineCommit() : base(nameof(BasicLineCommit)) { }
+        public BasicLineCommit() : base(nameof(BasicLineCommit))
+        {
+        }
 
         [IdeFact]
         public async Task CaseCorrection()

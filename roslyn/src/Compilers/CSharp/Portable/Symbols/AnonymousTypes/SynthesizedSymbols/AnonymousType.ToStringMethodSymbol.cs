@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private sealed partial class AnonymousTypeToStringMethodSymbol : SynthesizedMethodBase
         {
             internal AnonymousTypeToStringMethodSymbol(NamedTypeSymbol container)
-                : base(container, WellKnownMemberNames.ObjectToString) { }
+                : base(container, WellKnownMemberNames.ObjectToString)
+            {
+            }
 
             public override MethodKind MethodKind
             {

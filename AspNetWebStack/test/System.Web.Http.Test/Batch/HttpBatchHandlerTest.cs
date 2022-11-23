@@ -562,7 +562,9 @@ namespace System.Web.Http
 
         private class MockHttpBatchHandler : HttpBatchHandler
         {
-            public MockHttpBatchHandler(HttpServer server) : base(server) { }
+            public MockHttpBatchHandler(HttpServer server) : base(server)
+            {
+            }
 
             public MockHttpBatchHandler(
                 HttpServer httpServer,

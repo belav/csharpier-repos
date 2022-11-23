@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             string preview,
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore
-        ) : this(option, description, preview, preview, info, optionStore) { }
+        ) : this(option, description, preview, preview, info, optionStore)
+        {
+        }
 
         public CheckBoxOptionViewModel(
             IOption option,

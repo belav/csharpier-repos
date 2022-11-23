@@ -618,7 +618,9 @@ namespace System.Web.Razor.Test.Framework
         private class IgnoreOutputBlock : Block
         {
             public IgnoreOutputBlock()
-                : base(BlockType.Template, Enumerable.Empty<SyntaxTreeNode>(), null) { }
+                : base(BlockType.Template, Enumerable.Empty<SyntaxTreeNode>(), null)
+            {
+            }
         }
     }
 }

@@ -20,7 +20,9 @@ public class DbFunctionBuilder : DbFunctionBuilderBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public DbFunctionBuilder(IMutableDbFunction function) : base(function) { }
+    public DbFunctionBuilder(IMutableDbFunction function) : base(function)
+    {
+    }
 
     /// <summary>
     ///     Sets the name of the database function.

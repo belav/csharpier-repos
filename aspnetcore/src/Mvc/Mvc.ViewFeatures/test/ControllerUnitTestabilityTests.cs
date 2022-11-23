@@ -880,5 +880,7 @@ public class ControllerUnitTestabilityTests
         public string Property2 { get; set; }
     }
 
-    private class TagCloudViewComponent { }
+    private class TagCloudViewComponent
+    {
+    }
 }

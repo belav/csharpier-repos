@@ -443,7 +443,9 @@ namespace System.Web.WebPages.Test
         {
             // Layout page calls RenderBody more than once.
             var page = CreatePageWithLayout(
-                p => { },
+                p =>
+                {
+                },
                 p =>
                 {
                     p.Write(p.RenderBody());
@@ -462,7 +464,15 @@ namespace System.Web.WebPages.Test
         {
             // Page does not define any sections, but layout page does not call RenderBody
             var layoutPath = "~/Layout.cshtml";
-            var page = CreatePageWithLayout(p => { }, p => { }, layoutPath: layoutPath);
+            var page = CreatePageWithLayout(
+                p =>
+                {
+                },
+                p =>
+                {
+                },
+                layoutPath: layoutPath
+            );
 
             Assert.Throws<HttpException>(
                 () => Utils.RenderWebPage(page),
@@ -520,8 +530,16 @@ namespace System.Web.WebPages.Test
             var page = Utils.CreatePage(p =>
             {
                 p.Layout = "Layout.cshtml";
-                p.DefineSection(sectionName, () => { });
-                p.DefineSection(sectionName, () => { });
+                p.DefineSection(
+                    sectionName,
+                    () => {
+                    }
+                );
+                p.DefineSection(
+                    sectionName,
+                    () => {
+                    }
+                );
             });
 
             Assert.Throws<HttpException>(
@@ -544,8 +562,16 @@ namespace System.Web.WebPages.Test
             var page = Utils.CreatePage(p =>
             {
                 p.Layout = "Layout.cshtml";
-                p.DefineSection(name1, () => { });
-                p.DefineSection(name2, () => { });
+                p.DefineSection(
+                    name1,
+                    () => {
+                    }
+                );
+                p.DefineSection(
+                    name2,
+                    () => {
+                    }
+                );
             });
 
             Assert.Throws<HttpException>(
@@ -564,7 +590,9 @@ namespace System.Web.WebPages.Test
             // Layout page calls RenderSection on a name that has not been defined.
             var sectionName = "NoSuchSection";
             var page = CreatePageWithLayout(
-                p => { },
+                p =>
+                {
+                },
                 p =>
                 {
                     p.Write(p.RenderSection(sectionName));
@@ -590,7 +618,11 @@ namespace System.Web.WebPages.Test
                 p =>
                 {
                     p.Layout = "Layout.cshtml";
-                    p.DefineSection(sectionName, () => { });
+                    p.DefineSection(
+                        sectionName,
+                        () => {
+                        }
+                    );
                 },
                 p =>
                 {
@@ -621,7 +653,8 @@ namespace System.Web.WebPages.Test
             var sectionName4 = "section4";
             var sectionName5 = "section5";
             // A dummy section action that does nothing
-            SectionWriter sectionAction = () => { };
+            SectionWriter sectionAction = () => {
+            };
 
             // The page defines 5 sections.
             var page = CreatePageWithLayout(
@@ -662,7 +695,8 @@ namespace System.Web.WebPages.Test
             var sectionName1 = "section1";
             var sectionName2 = "section2";
             // A dummy section action that does nothing
-            SectionWriter sectionAction = () => { };
+            SectionWriter sectionAction = () => {
+            };
 
             var page = CreatePageWithLayout(
                 p =>
@@ -756,8 +790,16 @@ namespace System.Web.WebPages.Test
             var page = CreatePageWithLayout(
                 p =>
                 {
-                    p.DefineSection("section1", () => { });
-                    p.DefineSection("section3", () => { });
+                    p.DefineSection(
+                        "section1",
+                        () => {
+                        }
+                    );
+                    p.DefineSection(
+                        "section3",
+                        () => {
+                        }
+                    );
                 },
                 p =>
                 {

@@ -497,7 +497,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private class MockUnmanagedMemoryStream : UnmanagedMemoryStream
         {
             public unsafe MockUnmanagedMemoryStream(byte* pointer, long length)
-                : base(pointer, length) { }
+                : base(pointer, length)
+            {
+            }
 
             public Action<bool> OnDispose;
             public Action<long, SeekOrigin> OnSeek;

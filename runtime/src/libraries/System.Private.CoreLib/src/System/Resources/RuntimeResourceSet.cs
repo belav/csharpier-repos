@@ -179,7 +179,9 @@ namespace System.Resources
 
 #if !RESOURCES_EXTENSIONS
         internal RuntimeResourceSet(string fileName)
-            : this(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)) { }
+            : this(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+        {
+        }
 
         internal RuntimeResourceSet(Stream stream, bool permitDeserialization = false) : base(false)
         {

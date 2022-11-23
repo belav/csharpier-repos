@@ -71,7 +71,9 @@ namespace System.Net.Test.Common
         public override Task<GenericLoopbackConnection> EstablishGenericConnectionAsync() =>
             throw new NotImplementedException();
 
-        public override void Dispose() { }
+        public override void Dispose()
+        {
+        }
 
         class LoopbackServerHttpMessageHandler : HttpMessageHandler
         {

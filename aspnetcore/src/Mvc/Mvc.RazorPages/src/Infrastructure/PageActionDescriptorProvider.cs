@@ -75,7 +75,9 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
     }
 
     /// <inheritdoc/>
-    public void OnProvidersExecuted(ActionDescriptorProviderContext context) { }
+    public void OnProvidersExecuted(ActionDescriptorProviderContext context)
+    {
+    }
 
     private void AddActionDescriptors(IList<ActionDescriptor> actions, PageRouteModel model)
     {

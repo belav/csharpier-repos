@@ -180,27 +180,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     containingNamespace: null,
                     typeId: -1,
                     tupleData: null
-                ) { }
+                )
+            {
+            }
 
             public TopLevel(
                 ModuleSymbol module,
                 ref MetadataTypeName fullName,
                 DiagnosticInfo? errorInfo = null
-            ) : this(module, ref fullName, -1, errorInfo) { }
+            ) : this(module, ref fullName, -1, errorInfo)
+            {
+            }
 
             public TopLevel(
                 ModuleSymbol module,
                 ref MetadataTypeName fullName,
                 SpecialType specialType,
                 DiagnosticInfo? errorInfo = null
-            ) : this(module, ref fullName, (int)specialType, errorInfo) { }
+            ) : this(module, ref fullName, (int)specialType, errorInfo)
+            {
+            }
 
             public TopLevel(
                 ModuleSymbol module,
                 ref MetadataTypeName fullName,
                 WellKnownType wellKnownType,
                 DiagnosticInfo? errorInfo = null
-            ) : this(module, ref fullName, (int)wellKnownType, errorInfo) { }
+            ) : this(module, ref fullName, (int)wellKnownType, errorInfo)
+            {
+            }
 
             private TopLevel(
                 ModuleSymbol module,
@@ -214,7 +222,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     fullName.ForcedArity == -1 || fullName.ForcedArity == fullName.InferredArity,
                     errorInfo,
                     typeId
-                ) { }
+                )
+            {
+            }
 
             private TopLevel(
                 ModuleSymbol module,
@@ -234,7 +244,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     containingNamespace: null,
                     typeId,
                     tupleData: null
-                ) { }
+                )
+            {
+            }
 
             private TopLevel(
                 ModuleSymbol module,
@@ -525,7 +537,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref emittedName,
                     emittedName.ForcedArity == -1
                         || emittedName.ForcedArity == emittedName.InferredArity
-                ) { }
+                )
+            {
+            }
 
             private Nested(
                 NamedTypeSymbol containingType,
@@ -537,7 +551,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     mangleName ? emittedName.UnmangledTypeName : emittedName.TypeName,
                     mangleName ? emittedName.InferredArity : emittedName.ForcedArity,
                     mangleName
-                ) { }
+                )
+            {
+            }
 
             public override Symbol ContainingSymbol
             {

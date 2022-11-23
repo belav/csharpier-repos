@@ -26,5 +26,7 @@ public class TestDatabaseOperations : DatabaseOperations
             language,
             nullable,
             args
-        ) { }
+        )
+    {
+    }
 }

@@ -7,7 +7,9 @@ public class EngineSupplier
 {
     public class EngineSupplierProxy : EngineSupplier, IF1Proxy
     {
-        public EngineSupplierProxy(ILazyLoader loader, string name) : base(loader, name) { }
+        public EngineSupplierProxy(ILazyLoader loader, string name) : base(loader, name)
+        {
+        }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
@@ -17,7 +19,9 @@ public class EngineSupplier
     private readonly ILazyLoader _loader;
     private ICollection<Engine> _engines;
 
-    public EngineSupplier() { }
+    public EngineSupplier()
+    {
+    }
 
     private EngineSupplier(ILazyLoader loader, string name)
     {

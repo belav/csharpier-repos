@@ -13,7 +13,9 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class UIPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public UIPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public UIPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
+        {
+        }
 
         public UIPermissionClipboard Clipboard { get; set; }
         public UIPermissionWindow Window { get; set; }

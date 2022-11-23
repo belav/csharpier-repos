@@ -1168,8 +1168,12 @@ namespace System.Net.Sockets.Tests
                         );
                     }
                 }
-                catch (ObjectDisposedException) { }
-                catch (SocketException) { }
+                catch (ObjectDisposedException)
+                {
+                }
+                catch (SocketException)
+                {
+                }
 
                 if (client.Error != SocketError.Success)
                 {
@@ -3434,7 +3438,9 @@ namespace System.Net.Sockets.Tests
                 return addresses.Any(ip => ip.AddressFamily == AddressFamily.InterNetwork)
                     && addresses.Any(ip => ip.AddressFamily == AddressFamily.InterNetworkV6);
             }
-            catch { }
+            catch
+            {
+            }
             return false;
         }
 
@@ -3641,7 +3647,9 @@ namespace System.Net.Sockets.Tests
                     if (_acceptedSocket != null)
                         _acceptedSocket.Dispose();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -3787,7 +3795,9 @@ namespace System.Net.Sockets.Tests
                 {
                     _server.Dispose();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 

@@ -68,7 +68,9 @@ namespace Roslyn.Utilities
     {
         public static StandardFileSystem Instance { get; } = new StandardFileSystem();
 
-        private StandardFileSystem() { }
+        private StandardFileSystem()
+        {
+        }
 
         public bool FileExists(string filePath) => File.Exists(filePath);
 

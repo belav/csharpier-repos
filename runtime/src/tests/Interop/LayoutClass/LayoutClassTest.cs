@@ -8,10 +8,14 @@ using Xunit;
 namespace PInvokeTests
 {
     [StructLayout(LayoutKind.Sequential)]
-    public class EmptyBase { }
+    public class EmptyBase
+    {
+    }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class EmptyBase2 : EmptyBase { }
+    public class EmptyBase2 : EmptyBase
+    {
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     public class SeqDerivedClass : EmptyBase

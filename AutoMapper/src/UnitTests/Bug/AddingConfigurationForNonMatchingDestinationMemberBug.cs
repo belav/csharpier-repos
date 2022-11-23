@@ -4,7 +4,9 @@ namespace AutoMapper.UnitTests.Bug
     {
         public class AddingConfigurationForNonMatchingDestinationMemberBug : NonValidatingSpecBase
         {
-            public class Source { }
+            public class Source
+            {
+            }
 
             public class Destination
             {

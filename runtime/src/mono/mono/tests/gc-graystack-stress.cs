@@ -9,7 +9,9 @@ class Program
         Node child;
         Node sibling;
 
-        public Node(int depth) : this(depth, null) { }
+        public Node(int depth) : this(depth, null)
+        {
+        }
 
         public Node(int depth, Node sibling)
         {

@@ -714,7 +714,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         {
             public static readonly CommitCharacterArrayComparer Instance = new();
 
-            private CommitCharacterArrayComparer() { }
+            private CommitCharacterArrayComparer()
+            {
+            }
 
             public bool Equals(
                 [AllowNull] ImmutableArray<CharacterSetModificationRule> x,

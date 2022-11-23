@@ -416,7 +416,9 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         {
             public static readonly TypeComparer Instance = new TypeComparer();
 
-            private TypeComparer() { }
+            private TypeComparer()
+            {
+            }
 
             public int Compare(TEmbeddedType x, TEmbeddedType y)
             {

@@ -53,13 +53,17 @@ namespace System.Net.Security
         }
 
         public SslApplicationProtocol(byte[] protocol)
-            : this(protocol ?? throw new ArgumentNullException(nameof(protocol)), copy: true) { }
+            : this(protocol ?? throw new ArgumentNullException(nameof(protocol)), copy: true)
+        {
+        }
 
         public SslApplicationProtocol(string protocol)
             : this(
                 s_utf8.GetBytes(protocol ?? throw new ArgumentNullException(nameof(protocol))),
                 copy: false
-            ) { }
+            )
+        {
+        }
 
         public ReadOnlyMemory<byte> Protocol => _readOnlyProtocol;
 

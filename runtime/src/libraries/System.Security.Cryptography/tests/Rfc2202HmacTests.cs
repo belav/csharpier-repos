@@ -26,6 +26,8 @@ namespace System.Security.Cryptography.Tests
         // algorithm (16 bytes for MD5, 20 for SHA-1), so they need to be provided by
         // the more derived type.
         protected Rfc2202HmacTests(byte[][] testKeys, byte[][] testMacs)
-            : base(testKeys, s_testData2202, testMacs) { }
+            : base(testKeys, s_testData2202, testMacs)
+        {
+        }
     }
 }

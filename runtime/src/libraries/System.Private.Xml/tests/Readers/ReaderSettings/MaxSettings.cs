@@ -82,13 +82,17 @@ namespace System.Xml.ReaderSettingsTests
                 rs.MaxCharactersFromEntities = -1;
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
             try
             {
                 rs.MaxCharactersInDocument = -1;
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
             CError.Compare(rs.MaxCharactersFromEntities, _defaultCharsEnt, "Error");
             CError.Compare(rs.MaxCharactersInDocument, _defaultCharsDoc, "Error");
 

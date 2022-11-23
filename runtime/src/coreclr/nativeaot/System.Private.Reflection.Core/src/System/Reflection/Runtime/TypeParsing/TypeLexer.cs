@@ -221,7 +221,9 @@ namespace System.Reflection.Runtime.TypeParsing
         private readonly char[] _chars;
         private const char NUL = (char)0;
 
-        public sealed class IllegalEscapeSequenceException : Exception { }
+        public sealed class IllegalEscapeSequenceException : Exception
+        {
+        }
     }
 
     internal enum TokenType

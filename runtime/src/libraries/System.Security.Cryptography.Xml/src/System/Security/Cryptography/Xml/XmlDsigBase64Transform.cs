@@ -34,7 +34,9 @@ namespace System.Security.Cryptography.Xml
             get { return _outputTypes; }
         }
 
-        public override void LoadInnerXml(XmlNodeList nodeList) { }
+        public override void LoadInnerXml(XmlNodeList nodeList)
+        {
+        }
 
         protected override XmlNodeList? GetInnerXml()
         {

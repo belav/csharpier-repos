@@ -326,10 +326,14 @@ namespace Newtonsoft.Json.Tests.Converters
     }
 
     [JsonArray(ItemConverterType = typeof(JavaScriptDateTimeConverter))]
-    public class ConverterList<T> : List<T> { }
+    public class ConverterList<T> : List<T>
+    {
+    }
 
     [JsonDictionary(ItemConverterType = typeof(JavaScriptDateTimeConverter))]
-    public class ConverterDictionary<T> : Dictionary<string, T> { }
+    public class ConverterDictionary<T> : Dictionary<string, T>
+    {
+    }
 
     [JsonObject(ItemConverterType = typeof(JavaScriptDateTimeConverter))]
     public class ConverterObject

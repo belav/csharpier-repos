@@ -16,7 +16,9 @@ namespace System.Security.Cryptography
             set => _blockSizeValue = value;
         }
 
-        protected HMAC() { }
+        protected HMAC()
+        {
+        }
 
         [Obsolete(
             Obsoletions.DefaultCryptoAlgorithmsMessage,

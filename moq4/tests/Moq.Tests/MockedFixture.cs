@@ -43,7 +43,9 @@ namespace Moq.Tests
 
         public class FooWithCtor
         {
-            public FooWithCtor(int a) { }
+            public FooWithCtor(int a)
+            {
+            }
         }
 
         [Fact]
@@ -84,10 +86,16 @@ namespace Moq.Tests
             Assert.Throws<ArgumentException>(() => Mock.Get("foo"));
         }
 
-        public class FooBase { }
+        public class FooBase
+        {
+        }
 
-        public class Foo : FooBase { }
+        public class Foo : FooBase
+        {
+        }
 
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
     }
 }

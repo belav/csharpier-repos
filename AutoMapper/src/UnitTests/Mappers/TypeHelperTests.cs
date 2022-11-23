@@ -12,9 +12,13 @@ public class TypeHelperTests
         elementType.ShouldNotBeNull();
     }
 
-    public class Charge { }
+    public class Charge
+    {
+    }
 
-    public interface IChargeCollection : IEnumerable<object> { }
+    public interface IChargeCollection : IEnumerable<object>
+    {
+    }
 
     public class ChargeCollection : Collection<Charge>, IChargeCollection
     {

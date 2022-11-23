@@ -321,9 +321,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
             public event EventHandler? Initialized;
 
-            void ISupportInitialize.BeginInit() { }
+            void ISupportInitialize.BeginInit()
+            {
+            }
 
-            void ISupportInitialize.EndInit() { }
+            void ISupportInitialize.EndInit()
+            {
+            }
 
             public void MarkAsInitialized()
             {

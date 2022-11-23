@@ -15,7 +15,9 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
             Evt("123");
         }
 
-        public AddNestedClass() { }
+        public AddNestedClass()
+        {
+        }
 
         public string TestMethod()
         {

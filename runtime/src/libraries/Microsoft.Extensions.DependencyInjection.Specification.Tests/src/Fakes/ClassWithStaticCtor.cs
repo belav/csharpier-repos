@@ -5,6 +5,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
     public class ClassWithStaticCtor
     {
-        static ClassWithStaticCtor() { }
+        static ClassWithStaticCtor()
+        {
+        }
     }
 }

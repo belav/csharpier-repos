@@ -30,7 +30,9 @@ public class CustomersController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class OrdersController : TestODataController, IDisposable
@@ -55,7 +57,9 @@ public class OrdersController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class OrderDetailsController : TestODataController, IDisposable
@@ -82,7 +86,9 @@ public class OrderDetailsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class EmployeesController : TestODataController, IDisposable
@@ -107,7 +113,9 @@ public class EmployeesController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class ProductsController : TestODataController, IDisposable
@@ -132,5 +140,7 @@ public class ProductsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

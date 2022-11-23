@@ -9,7 +9,9 @@ public class GeometryComparer : IEqualityComparer<Geometry>
 {
     public static GeometryComparer Instance { get; } = new();
 
-    private GeometryComparer() { }
+    private GeometryComparer()
+    {
+    }
 
     public bool Equals(Geometry x, Geometry y) =>
         (x == null && y == null)

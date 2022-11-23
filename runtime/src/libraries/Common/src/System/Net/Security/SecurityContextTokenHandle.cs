@@ -16,7 +16,9 @@ namespace System.Net.Security
 #endif
         private int _disposed;
 
-        public SecurityContextTokenHandle() : base(true) { }
+        public SecurityContextTokenHandle() : base(true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

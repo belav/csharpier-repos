@@ -25,7 +25,9 @@ internal readonly record struct ImplementTypeOptions
     public ImplementTypePropertyGenerationBehavior PropertyGenerationBehavior { get; init; } =
         ImplementTypePropertyGenerationBehavior.PreferThrowingProperties;
 
-    public ImplementTypeOptions() { }
+    public ImplementTypeOptions()
+    {
+    }
 
     public static readonly ImplementTypeOptions Default = new();
 }

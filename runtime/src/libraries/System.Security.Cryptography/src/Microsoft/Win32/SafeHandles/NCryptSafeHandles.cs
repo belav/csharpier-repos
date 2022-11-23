@@ -66,7 +66,9 @@ namespace Microsoft.Win32.SafeHandles
         private SafeHandle? _parentHandle;
 
         [SupportedOSPlatform("windows")]
-        protected SafeNCryptHandle() : base(true) { }
+        protected SafeNCryptHandle() : base(true)
+        {
+        }
 
         [SupportedOSPlatform("windows")]
         protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle) : base(true)
@@ -347,11 +349,15 @@ namespace Microsoft.Win32.SafeHandles
     public sealed class SafeNCryptKeyHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
-        public SafeNCryptKeyHandle() { }
+        public SafeNCryptKeyHandle()
+        {
+        }
 
         [SupportedOSPlatform("windows")]
         public SafeNCryptKeyHandle(IntPtr handle, SafeHandle parentHandle)
-            : base(handle, parentHandle) { }
+            : base(handle, parentHandle)
+        {
+        }
 
         internal SafeNCryptKeyHandle Duplicate()
         {
@@ -370,7 +376,9 @@ namespace Microsoft.Win32.SafeHandles
     public sealed class SafeNCryptProviderHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
-        public SafeNCryptProviderHandle() { }
+        public SafeNCryptProviderHandle()
+        {
+        }
 
         internal SafeNCryptProviderHandle Duplicate()
         {
@@ -389,7 +397,9 @@ namespace Microsoft.Win32.SafeHandles
     public sealed class SafeNCryptSecretHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
-        public SafeNCryptSecretHandle() { }
+        public SafeNCryptSecretHandle()
+        {
+        }
 
         protected override bool ReleaseNativeHandle()
         {

@@ -23,7 +23,9 @@ namespace R2RTest
             : base(
                 options,
                 new string[] { options.CoreRootDirectory.FullName }.Concat(options.ReferencePaths())
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// JIT runner has no compilation process as it doesn't transform the source IL code in any manner.

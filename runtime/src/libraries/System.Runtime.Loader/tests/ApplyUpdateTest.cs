@@ -439,7 +439,9 @@ namespace System.Reflection.Metadata
             });
         }
 
-        class NonRuntimeAssembly : Assembly { }
+        class NonRuntimeAssembly : Assembly
+        {
+        }
 
         [Fact]
         public static void ApplyUpdateInvalidParameters()

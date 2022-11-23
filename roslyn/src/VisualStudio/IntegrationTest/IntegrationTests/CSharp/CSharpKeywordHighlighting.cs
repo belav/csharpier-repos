@@ -24,7 +24,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpKeywordHighlighting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpKeywordHighlighting)) { }
+            : base(instanceFactory, nameof(CSharpKeywordHighlighting))
+        {
+        }
 
         [WpfFact]
         public void Foreach()

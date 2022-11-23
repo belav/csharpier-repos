@@ -148,7 +148,9 @@ public class LoggedTestXunitTests : TestLoggedTest
     {
         BeginScopeContext context = null;
         TestSink.ScopeStarted += ctx => context = ctx;
-        using (Logger.BeginScope("Scope")) { }
+        using (Logger.BeginScope("Scope"))
+        {
+        }
         Assert.Equal(TestSink.Scopes.Single(), context);
     }
 }
@@ -194,7 +196,9 @@ public class TestLoggedTest : LoggedTest
             TestOutputHelper.WriteLine("Test");
             ITestOutputHelperIsInitialized = true;
         }
-        catch { }
+        catch
+        {
+        }
         SetupInvoked = true;
     }
 }

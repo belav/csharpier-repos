@@ -36,7 +36,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 { new Struct_MultipleWithAlignment(), 22 },
             };
 
-        public struct Struct_Empty { }
+        public struct Struct_Empty
+        {
+        }
 
         public struct Struct_T<T>
         {

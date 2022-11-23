@@ -38,7 +38,9 @@ namespace System.Net.WebSockets
             && Cookies is null
             && (Proxy is null || Proxy == WebSocketHandle.DefaultWebProxy.Instance);
 
-        internal ClientWebSocketOptions() { } // prevent external instantiation
+        internal ClientWebSocketOptions()
+        {
+        } // prevent external instantiation
         #region HTTP Settings
 
         /// <summary>Gets or sets the HTTP version to use.</summary>

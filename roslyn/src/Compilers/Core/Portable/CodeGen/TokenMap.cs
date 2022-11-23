@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private object[] _items = Array.Empty<object>();
         private int _count = 0;
 
-        internal TokenMap() { }
+        internal TokenMap()
+        {
+        }
 
         public uint GetOrAddTokenFor(IReference item, out bool referenceAdded)
         {

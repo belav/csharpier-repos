@@ -11,9 +11,13 @@ namespace System.CommandLine.DragonFruit.Tests
     {
         private class Program
         {
-            public static void Main(bool verbose = false, string flavor = null, int? count = 0) { }
+            public static void Main(bool verbose = false, string flavor = null, int? count = 0)
+            {
+            }
 
-            public static void MainWithoutParam() { }
+            public static void MainWithoutParam()
+            {
+            }
         }
 
         [Fact]

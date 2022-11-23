@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal abstract class DeterministicKeyBuilder
     {
-        protected DeterministicKeyBuilder() { }
+        protected DeterministicKeyBuilder()
+        {
+        }
 
         protected void WriteFilePath(
             JsonWriter writer,

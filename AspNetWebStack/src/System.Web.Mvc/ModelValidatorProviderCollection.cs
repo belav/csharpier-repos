@@ -12,9 +12,13 @@ namespace System.Web.Mvc
         private ModelValidatorProvider[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public ModelValidatorProviderCollection() { }
+        public ModelValidatorProviderCollection()
+        {
+        }
 
-        public ModelValidatorProviderCollection(IList<ModelValidatorProvider> list) : base(list) { }
+        public ModelValidatorProviderCollection(IList<ModelValidatorProvider> list) : base(list)
+        {
+        }
 
         internal ModelValidatorProviderCollection(
             IList<ModelValidatorProvider> list,

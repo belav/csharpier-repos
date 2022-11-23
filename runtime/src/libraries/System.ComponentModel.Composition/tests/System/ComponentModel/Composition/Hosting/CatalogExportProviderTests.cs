@@ -432,7 +432,9 @@ namespace System.ComponentModel.Composition
 
         [Export]
         [PartCreationPolicy(CreationPolicy.Any)]
-        public class CreationPolicyAny { }
+        public class CreationPolicyAny
+        {
+        }
 
         [Fact]
         public void CreationPolicyAny_MultipleCallsReturnSameInstance()
@@ -453,7 +455,9 @@ namespace System.ComponentModel.Composition
 
         [Export]
         [PartCreationPolicy(CreationPolicy.Shared)]
-        public class CreationPolicyShared { }
+        public class CreationPolicyShared
+        {
+        }
 
         [Fact]
         public void CreationPolicyShared_MultipleCallsReturnSameInstance()
@@ -474,7 +478,9 @@ namespace System.ComponentModel.Composition
 
         [Export]
         [PartCreationPolicy(CreationPolicy.NonShared)]
-        public class CreationPolicyNonShared { }
+        public class CreationPolicyNonShared
+        {
+        }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
@@ -548,7 +554,9 @@ namespace System.ComponentModel.Composition
             public IExportedInterface[] Imports { get; set; }
         }
 
-        public interface IExportedInterface { }
+        public interface IExportedInterface
+        {
+        }
 
         [Export(typeof(IExportedInterface))]
         public class Exporter1 : IExportedInterface
@@ -565,7 +573,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Export]
-        public class ExportedService { }
+        public class ExportedService
+        {
+        }
 
         private static ImportDefinition ImportFromContract(string contractName)
         {

@@ -212,11 +212,19 @@ public class DatabaseErrorPageMiddleware
         }
     }
 
-    void IObserver<DiagnosticListener>.OnCompleted() { }
+    void IObserver<DiagnosticListener>.OnCompleted()
+    {
+    }
 
-    void IObserver<DiagnosticListener>.OnError(Exception error) { }
+    void IObserver<DiagnosticListener>.OnError(Exception error)
+    {
+    }
 
-    void IObserver<KeyValuePair<string, object?>>.OnCompleted() { }
+    void IObserver<KeyValuePair<string, object?>>.OnCompleted()
+    {
+    }
 
-    void IObserver<KeyValuePair<string, object?>>.OnError(Exception error) { }
+    void IObserver<KeyValuePair<string, object?>>.OnError(Exception error)
+    {
+    }
 }

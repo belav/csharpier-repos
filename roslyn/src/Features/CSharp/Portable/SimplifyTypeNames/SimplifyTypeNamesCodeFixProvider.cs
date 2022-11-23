@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyTypeNames
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
         public SimplifyTypeNamesCodeFixProvider()
-            : base(new CSharpSimplifyTypeNamesDiagnosticAnalyzer()) { }
+            : base(new CSharpSimplifyTypeNamesDiagnosticAnalyzer())
+        {
+        }
 
         protected override string GetTitle(string diagnosticId, string nodeText)
         {

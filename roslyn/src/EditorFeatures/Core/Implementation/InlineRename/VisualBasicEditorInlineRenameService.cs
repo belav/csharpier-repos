@@ -17,6 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualBasicEditorInlineRenameService(
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices
-        ) : base(refactorNotifyServices) { }
+        ) : base(refactorNotifyServices)
+        {
+        }
     }
 }

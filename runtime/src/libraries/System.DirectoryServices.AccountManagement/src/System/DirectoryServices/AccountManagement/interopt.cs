@@ -110,7 +110,9 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         [ComImport, Guid("927971f5-0939-11d1-8be1-00c04fd8d503")]
-        public class ADsLargeInteger { }
+        public class ADsLargeInteger
+        {
+        }
 
         [
             ComImport,
@@ -310,7 +312,9 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         [ComImport, Guid("080d0d78-f421-11d0-a36e-00c04fb950dc")]
-        public class Pathname { }
+        public class Pathname
+        {
+        }
 
         [
             ComImport,

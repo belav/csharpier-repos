@@ -7,7 +7,9 @@ namespace TestMono
         int Do();
     }
 
-    public interface IDerived : IBase { }
+    public interface IDerived : IBase
+    {
+    }
 
     public class Base : IBase
     {
@@ -22,7 +24,9 @@ namespace TestMono
         }
     }
 
-    public class Derived : Base, IDerived { }
+    public class Derived : Base, IDerived
+    {
+    }
 
     class Class1
     {

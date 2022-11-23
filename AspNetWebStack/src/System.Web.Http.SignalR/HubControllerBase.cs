@@ -21,7 +21,9 @@ namespace System.Web.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="HubControllerBase" /> class.
         /// </summary>
-        protected HubControllerBase() { }
+        protected HubControllerBase()
+        {
+        }
 
         /// <summary>
         /// Gets an <see cref="IHubConnectionContext"/> that represents the clients connected to the hub.

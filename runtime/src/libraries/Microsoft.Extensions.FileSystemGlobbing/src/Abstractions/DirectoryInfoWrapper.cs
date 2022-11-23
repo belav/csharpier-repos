@@ -21,7 +21,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
         /// </summary>
         /// <param name="directoryInfo">The <see cref="DirectoryInfo" />.</param>
         public DirectoryInfoWrapper(DirectoryInfo directoryInfo)
-            : this(directoryInfo, isParentPath: false) { }
+            : this(directoryInfo, isParentPath: false)
+        {
+        }
 
         private DirectoryInfoWrapper(DirectoryInfo directoryInfo, bool isParentPath)
         {

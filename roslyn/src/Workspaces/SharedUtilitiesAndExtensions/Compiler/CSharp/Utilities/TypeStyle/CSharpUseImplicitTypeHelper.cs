@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
     {
         public static readonly CSharpUseImplicitTypeHelper Instance = new();
 
-        private CSharpUseImplicitTypeHelper() { }
+        private CSharpUseImplicitTypeHelper()
+        {
+        }
 
         public override TypeStyleResult AnalyzeTypeName(
             TypeSyntax typeName,

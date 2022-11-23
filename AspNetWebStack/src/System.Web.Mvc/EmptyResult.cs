@@ -13,6 +13,8 @@ namespace System.Web.Mvc
             get { return _singleton; }
         }
 
-        public override void ExecuteResult(ControllerContext context) { }
+        public override void ExecuteResult(ControllerContext context)
+        {
+        }
     }
 }

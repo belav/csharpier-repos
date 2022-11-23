@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Fading
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Provider() { }
+            public Provider()
+            {
+            }
 
             ImmutableArray<IOption> IOptionProvider.Options { get; } =
                 ImmutableArray.Create<IOption>(FadeOutUnusedImports, FadeOutUnreachableCode);

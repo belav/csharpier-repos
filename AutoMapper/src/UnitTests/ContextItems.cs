@@ -176,7 +176,9 @@
 
         public class When_mapping_nested_context_items : AutoMapperSpecBase
         {
-            public class Door { }
+            public class Door
+            {
+            }
 
             public class FromGarage
             {

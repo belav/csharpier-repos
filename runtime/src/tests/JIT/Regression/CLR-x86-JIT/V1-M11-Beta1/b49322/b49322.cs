@@ -24,10 +24,14 @@ namespace Test
                     {
                         GC.Collect();
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

@@ -3577,7 +3577,9 @@ public static partial class RequestDelegateFactory
     // type here.
     private sealed class EmptyHttpResult : IResult
     {
-        private EmptyHttpResult() { }
+        private EmptyHttpResult()
+        {
+        }
 
         public static EmptyHttpResult Instance { get; } = new();
 

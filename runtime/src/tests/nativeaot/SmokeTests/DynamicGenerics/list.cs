@@ -76,29 +76,53 @@ public class DynamicListTests
         }
     }
 
-    public class NonGenericElement1 : NonGenericBase { }
+    public class NonGenericElement1 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement2 : NonGenericBase { }
+    public class NonGenericElement2 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement3 : NonGenericBase { }
+    public class NonGenericElement3 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement4 : NonGenericBase { }
+    public class NonGenericElement4 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement5 : NonGenericBase { }
+    public class NonGenericElement5 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement6 : NonGenericBase { }
+    public class NonGenericElement6 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement7 : NonGenericBase { }
+    public class NonGenericElement7 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement8 : NonGenericBase { }
+    public class NonGenericElement8 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement9 : NonGenericBase { }
+    public class NonGenericElement9 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement10 : NonGenericBase { }
+    public class NonGenericElement10 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement11 : NonGenericBase { }
+    public class NonGenericElement11 : NonGenericBase
+    {
+    }
 
-    public class NonGenericElement12 : NonGenericBase { }
+    public class NonGenericElement12 : NonGenericBase
+    {
+    }
 
     public class EquatableElement1 : NonGenericBase, IEquatable<EquatableElement1>
     {

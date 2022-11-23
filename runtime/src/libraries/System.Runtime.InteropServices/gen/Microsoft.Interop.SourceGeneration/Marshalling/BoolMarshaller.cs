@@ -159,7 +159,9 @@ namespace Microsoft.Interop
                 trueValue: 1,
                 falseValue: 0,
                 compareToTrue: false
-            ) { }
+            )
+        {
+        }
     }
 
     /// <summary>
@@ -180,7 +182,9 @@ namespace Microsoft.Interop
                 trueValue: 1,
                 falseValue: 0,
                 compareToTrue: false
-            ) { }
+            )
+        {
+        }
     }
 
     /// <summary>
@@ -197,6 +201,8 @@ namespace Microsoft.Interop
                 trueValue: VARIANT_TRUE,
                 falseValue: VARIANT_FALSE,
                 compareToTrue: true
-            ) { }
+            )
+        {
+        }
     }
 }

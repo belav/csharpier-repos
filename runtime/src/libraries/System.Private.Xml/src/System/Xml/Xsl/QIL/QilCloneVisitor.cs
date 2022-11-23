@@ -20,7 +20,9 @@ namespace System.Xml.Xsl.Qil
         // Constructors
         //-----------------------------------------------
 
-        public QilCloneVisitor(QilFactory fac) : this(fac, new SubstitutionList()) { }
+        public QilCloneVisitor(QilFactory fac) : this(fac, new SubstitutionList())
+        {
+        }
 
         public QilCloneVisitor(QilFactory fac, SubstitutionList subs)
         {

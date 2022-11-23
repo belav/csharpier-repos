@@ -16,7 +16,9 @@ namespace Tests.Integration
     public class LifetimeTests
     {
         [Export]
-        public class AnyPartSimple { }
+        public class AnyPartSimple
+        {
+        }
 
         [Export]
         public class AnyPartDisposable : IDisposable
@@ -209,7 +211,9 @@ namespace Tests.Integration
 
         [Export]
         [PartCreationPolicy(CreationPolicy.Shared)]
-        public class SharedPartSimple { }
+        public class SharedPartSimple
+        {
+        }
 
         [Export]
         [PartCreationPolicy(CreationPolicy.Shared)]
@@ -372,7 +376,9 @@ namespace Tests.Integration
 
         [Export]
         [PartCreationPolicy(CreationPolicy.NonShared)]
-        public class NonSharedPartSimple { }
+        public class NonSharedPartSimple
+        {
+        }
 
         [Export]
         [PartCreationPolicy(CreationPolicy.NonShared)]

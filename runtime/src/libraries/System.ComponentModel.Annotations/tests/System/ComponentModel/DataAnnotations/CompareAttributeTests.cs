@@ -184,7 +184,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         private class DerivedCompareAttribute : CompareAttribute
         {
-            public DerivedCompareAttribute(string otherProperty) : base(otherProperty) { }
+            public DerivedCompareAttribute(string otherProperty) : base(otherProperty)
+            {
+            }
 
             protected override ValidationResult IsValid(object value, ValidationContext context) =>
                 ValidationResult.Success;
@@ -200,11 +202,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public string this[int index]
             {
                 get { return "abc"; }
-                set { }
+                set
+                {
+                }
             }
             public string SetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
             private string PrivateProperty { get; set; }
 
@@ -220,7 +226,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         private class CompareObjectSubClass : CompareObject
         {
-            public CompareObjectSubClass(string otherValue) : base(otherValue) { }
+            public CompareObjectSubClass(string otherValue) : base(otherValue)
+            {
+            }
         }
     }
 }

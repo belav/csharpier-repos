@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpIntroduceVariableService() { }
+        public CSharpIntroduceVariableService()
+        {
+        }
 
         protected override bool IsInNonFirstQueryClause(ExpressionSyntax expression)
         {

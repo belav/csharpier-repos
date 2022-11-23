@@ -14,7 +14,9 @@ internal sealed class DynamicTable
     // The encoder sends a Set Dynamic Table Capacity
     // instruction(Section 4.3.1) with a non-zero capacity to begin using
     // the dynamic table.
-    public DynamicTable(int maxSize) { }
+    public DynamicTable(int maxSize)
+    {
+    }
 
     public HeaderField this[int index]
     {
@@ -22,10 +24,14 @@ internal sealed class DynamicTable
     }
 
     // TODO
-    public static void Insert(Span<byte> name, Span<byte> value) { }
+    public static void Insert(Span<byte> name, Span<byte> value)
+    {
+    }
 
     // TODO
-    public static void Resize(int maxSize) { }
+    public static void Resize(int maxSize)
+    {
+    }
 
     // TODO
     internal void Duplicate(int index)

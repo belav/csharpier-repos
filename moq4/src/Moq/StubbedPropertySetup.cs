@@ -73,7 +73,9 @@ namespace Moq
             return base.ToString() + " (stubbed)";
         }
 
-        protected override void VerifySelf() { }
+        protected override void VerifySelf()
+        {
+        }
 
         private sealed class PropertyAccessorExpectation : Expectation
         {

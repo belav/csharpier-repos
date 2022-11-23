@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis
         // https://github.com/dotnet/roslyn/issues/40344
         public static readonly SmallDictionary<K, V> Empty = new SmallDictionary<K, V>(null!);
 
-        public SmallDictionary() : this(EqualityComparer<K>.Default) { }
+        public SmallDictionary() : this(EqualityComparer<K>.Default)
+        {
+        }
 
         public SmallDictionary(IEqualityComparer<K> comparer)
         {
@@ -167,7 +169,9 @@ namespace Microsoft.CodeAnalysis
             public AvlNode? Left;
             public AvlNode? Right;
 
-            public AvlNode(int hashCode, K key, V value) : base(hashCode, key, value) { }
+            public AvlNode(int hashCode, K key, V value) : base(hashCode, key, value)
+            {
+            }
 
 #if DEBUG
             public static int AssertBalanced(AvlNode? V)
@@ -582,7 +586,9 @@ namespace Microsoft.CodeAnalysis
 
                 K IEnumerator<K>.Current => _e.Current;
 
-                void IDisposable.Dispose() { }
+                void IDisposable.Dispose()
+                {
+                }
 
                 object IEnumerator.Current => _e.Current;
 
@@ -696,7 +702,9 @@ namespace Microsoft.CodeAnalysis
 
                 V IEnumerator<V>.Current => _e.Current;
 
-                void IDisposable.Dispose() { }
+                void IDisposable.Dispose()
+                {
+                }
 
                 object? IEnumerator.Current => _e.Current;
 
@@ -800,7 +808,9 @@ namespace Microsoft.CodeAnalysis
 
             KeyValuePair<K, V> IEnumerator<KeyValuePair<K, V>>.Current => _e.Current;
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             object IEnumerator.Current => _e.Current;
 

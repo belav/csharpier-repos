@@ -325,7 +325,9 @@ public class Program
                                 ValidateContent(contentSource, await m.Content.ReadAsStringAsync());
                             }
                         }
-                        catch (OperationCanceledException) { }
+                        catch (OperationCanceledException)
+                        {
+                        }
                     }
                 }
             ),
@@ -467,7 +469,9 @@ public class Program
                                 ValidateContent(content, await m.Content.ReadAsStringAsync());
                             }
                         }
-                        catch (OperationCanceledException) { }
+                        catch (OperationCanceledException)
+                        {
+                        }
                     }
                 }
             ),

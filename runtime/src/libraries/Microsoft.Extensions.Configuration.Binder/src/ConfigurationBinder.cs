@@ -45,7 +45,10 @@ namespace Microsoft.Extensions.Configuration
         [RequiresUnreferencedCode(TrimmingWarningMessage)]
         public static T? Get<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(
             this IConfiguration configuration
-        ) => configuration.Get<T>(_ => { });
+        ) =>
+            configuration.Get<T>(_ =>
+            {
+            });
 
         /// <summary>
         /// Attempts to bind the configuration instance to a new instance of type T.
@@ -84,7 +87,12 @@ namespace Microsoft.Extensions.Configuration
         [RequiresDynamicCode(DynamicCodeWarningMessage)]
         [RequiresUnreferencedCode(TrimmingWarningMessage)]
         public static object? Get(this IConfiguration configuration, Type type) =>
-            configuration.Get(type, _ => { });
+            configuration.Get(
+                type,
+                _ =>
+                {
+                }
+            );
 
         /// <summary>
         /// Attempts to bind the configuration instance to a new instance of type T.
@@ -131,7 +139,12 @@ namespace Microsoft.Extensions.Configuration
         [RequiresDynamicCode(DynamicCodeWarningMessage)]
         [RequiresUnreferencedCode(InstanceGetTypeTrimmingWarningMessage)]
         public static void Bind(this IConfiguration configuration, object? instance) =>
-            configuration.Bind(instance, _ => { });
+            configuration.Bind(
+                instance,
+                _ =>
+                {
+                }
+            );
 
         /// <summary>
         /// Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.
@@ -752,7 +765,9 @@ namespace Microsoft.Extensions.Configuration
                         setter.SetValue(dictionary, valueBindingPoint.Value, new object[] { key });
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -791,7 +806,9 @@ namespace Microsoft.Extensions.Configuration
                         addMethod?.Invoke(collection, new[] { itemBindingPoint.Value });
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -848,7 +865,9 @@ namespace Microsoft.Extensions.Configuration
                         list.Add(itemBindingPoint.Value);
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             Array result = Array.CreateInstance(elementType, list.Count);
@@ -913,7 +932,9 @@ namespace Microsoft.Extensions.Configuration
                         addMethod.Invoke(instance, arguments);
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return instance;

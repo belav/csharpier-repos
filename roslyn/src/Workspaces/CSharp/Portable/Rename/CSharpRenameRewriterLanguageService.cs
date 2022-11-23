@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRenameConflictLanguageService() { }
+        public CSharpRenameConflictLanguageService()
+        {
+        }
 
         #region "Annotation"
 

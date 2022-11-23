@@ -171,7 +171,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     new WithKeywordRecommender(),
                     new YieldKeywordRecommender()
                 )
-            ) { }
+            )
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

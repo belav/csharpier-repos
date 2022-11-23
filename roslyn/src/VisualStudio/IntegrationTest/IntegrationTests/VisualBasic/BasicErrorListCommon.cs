@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         public BasicErrorListCommon(
             VisualStudioInstanceFactory instanceFactory,
             string templateName
-        ) : base(instanceFactory, nameof(BasicErrorListCommon), templateName) { }
+        ) : base(instanceFactory, nameof(BasicErrorListCommon), templateName)
+        {
+        }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

@@ -11,9 +11,13 @@ namespace System.Net.Http
 {
     public partial class ByteArrayContent : System.Net.Http.HttpContent
     {
-        public ByteArrayContent(byte[] content) { }
+        public ByteArrayContent(byte[] content)
+        {
+        }
 
-        public ByteArrayContent(byte[] content, int offset, int count) { }
+        public ByteArrayContent(byte[] content, int offset, int count)
+        {
+        }
 
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
@@ -31,7 +35,9 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -64,18 +70,26 @@ namespace System.Net.Http
 
     public abstract partial class DelegatingHandler : System.Net.Http.HttpMessageHandler
     {
-        protected DelegatingHandler() { }
+        protected DelegatingHandler()
+        {
+        }
 
-        protected DelegatingHandler(System.Net.Http.HttpMessageHandler innerHandler) { }
+        protected DelegatingHandler(System.Net.Http.HttpMessageHandler innerHandler)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.Net.Http.HttpMessageHandler? InnerHandler
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected internal override System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
@@ -103,7 +117,9 @@ namespace System.Net.Http
                 string
 #nullable restore
             >> nameValueCollection
-        ) : base(default(byte[])) { }
+        ) : base(default(byte[]))
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -122,23 +138,33 @@ namespace System.Net.Http
 
     public partial class HttpClient : System.Net.Http.HttpMessageInvoker
     {
-        public HttpClient() : base(default(System.Net.Http.HttpMessageHandler)) { }
+        public HttpClient() : base(default(System.Net.Http.HttpMessageHandler))
+        {
+        }
 
         public HttpClient(System.Net.Http.HttpMessageHandler handler)
-            : base(default(System.Net.Http.HttpMessageHandler)) { }
+            : base(default(System.Net.Http.HttpMessageHandler))
+        {
+        }
 
         public HttpClient(System.Net.Http.HttpMessageHandler handler, bool disposeHandler)
-            : base(default(System.Net.Http.HttpMessageHandler)) { }
+            : base(default(System.Net.Http.HttpMessageHandler))
+        {
+        }
 
         public System.Uri? BaseAddress
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Net.IWebProxy DefaultProxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpRequestHeaders DefaultRequestHeaders
         {
@@ -147,25 +173,35 @@ namespace System.Net.Http
         public System.Version DefaultRequestVersion
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.HttpVersionPolicy DefaultVersionPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long MaxResponseContentBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void CancelPendingRequests() { }
+        public void CancelPendingRequests()
+        {
+        }
 
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> DeleteAsync(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("Uri")] string? requestUri
@@ -197,7 +233,9 @@ namespace System.Net.Http
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("Uri")] string? requestUri
@@ -518,31 +556,41 @@ namespace System.Net.Http
 
     public partial class HttpClientHandler : System.Net.Http.HttpMessageHandler
     {
-        public HttpClientHandler() { }
+        public HttpClientHandler()
+        {
+        }
 
         public bool AllowAutoRedirect
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Net.DecompressionMethods AutomaticDecompression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool CheckCertificateRevocationList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.ClientCertificateOption ClientCertificateOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -555,14 +603,18 @@ namespace System.Net.Http
         public System.Net.CookieContainer CookieContainer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -581,40 +633,52 @@ namespace System.Net.Http
         public System.Net.ICredentials? DefaultProxyCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public int MaxAutomaticRedirections
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public int MaxConnectionsPerServer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long MaxRequestContentBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public int MaxResponseHeadersLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool PreAuthenticate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IDictionary<string, object?> Properties
         {
@@ -627,7 +691,9 @@ namespace System.Net.Http
         public System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -640,14 +706,18 @@ namespace System.Net.Http
         >? ServerCertificateCustomValidationCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Security.Authentication.SslProtocols SslProtocols
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool SupportsAutomaticDecompression
         {
@@ -666,24 +736,32 @@ namespace System.Net.Http
         public bool UseCookies
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool UseProxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         //
         // Attributes are commented out due to https://github.com/dotnet/arcade/issues/7585
@@ -718,7 +796,9 @@ namespace System.Net.Http
 
     public abstract partial class HttpContent : System.IDisposable
     {
-        protected HttpContent() { }
+        protected HttpContent()
+        {
+        }
 
         public System.Net.Http.Headers.HttpContentHeaders Headers
         {
@@ -729,7 +809,9 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task CopyToAsync(System.IO.Stream stream)
         {
@@ -780,9 +862,13 @@ namespace System.Net.Http
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.Threading.Tasks.Task LoadIntoBufferAsync()
         {
@@ -844,7 +930,9 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         protected abstract System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -865,11 +953,17 @@ namespace System.Net.Http
 
     public abstract partial class HttpMessageHandler : System.IDisposable
     {
-        protected HttpMessageHandler() { }
+        protected HttpMessageHandler()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         protected internal virtual System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
@@ -887,14 +981,21 @@ namespace System.Net.Http
 
     public partial class HttpMessageInvoker : System.IDisposable
     {
-        public HttpMessageInvoker(System.Net.Http.HttpMessageHandler handler) { }
+        public HttpMessageInvoker(System.Net.Http.HttpMessageHandler handler)
+        {
+        }
 
         public HttpMessageInvoker(System.Net.Http.HttpMessageHandler handler, bool disposeHandler)
-        { }
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public virtual System.Net.Http.HttpResponseMessage Send(
@@ -916,7 +1017,9 @@ namespace System.Net.Http
 
     public partial class HttpMethod : System.IEquatable<System.Net.Http.HttpMethod>
     {
-        public HttpMethod(string method) { }
+        public HttpMethod(string method)
+        {
+        }
 
         public static System.Net.Http.HttpMethod Delete
         {
@@ -1004,7 +1107,9 @@ namespace System.Net.Http
             long errorCode,
             string? message,
             System.Exception? innerException
-        ) { }
+        )
+        {
+        }
 
         public long ErrorCode
         {
@@ -1014,17 +1119,25 @@ namespace System.Net.Http
 
     public partial class HttpRequestException : System.Exception
     {
-        public HttpRequestException() { }
+        public HttpRequestException()
+        {
+        }
 
-        public HttpRequestException(string? message) { }
+        public HttpRequestException(string? message)
+        {
+        }
 
-        public HttpRequestException(string? message, System.Exception? inner) { }
+        public HttpRequestException(string? message, System.Exception? inner)
+        {
+        }
 
         public HttpRequestException(
             string? message,
             System.Exception? inner,
             System.Net.HttpStatusCode? statusCode
-        ) { }
+        )
+        {
+        }
 
         public System.Net.HttpStatusCode? StatusCode
         {
@@ -1034,19 +1147,27 @@ namespace System.Net.Http
 
     public partial class HttpRequestMessage : System.IDisposable
     {
-        public HttpRequestMessage() { }
+        public HttpRequestMessage()
+        {
+        }
 
         public HttpRequestMessage(
             System.Net.Http.HttpMethod method,
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("Uri")] string? requestUri
-        ) { }
+        )
+        {
+        }
 
-        public HttpRequestMessage(System.Net.Http.HttpMethod method, System.Uri? requestUri) { }
+        public HttpRequestMessage(System.Net.Http.HttpMethod method, System.Uri? requestUri)
+        {
+        }
 
         public System.Net.Http.HttpContent? Content
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpRequestHeaders Headers
         {
@@ -1055,7 +1176,9 @@ namespace System.Net.Http
         public System.Net.Http.HttpMethod Method
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -1072,22 +1195,32 @@ namespace System.Net.Http
         public System.Uri? RequestUri
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Version Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.HttpVersionPolicy VersionPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public override string ToString()
         {
@@ -1097,7 +1230,9 @@ namespace System.Net.Http
 
     public readonly struct HttpRequestOptionsKey<TValue>
     {
-        public HttpRequestOptionsKey(string key) { }
+        public HttpRequestOptionsKey(string key)
+        {
+        }
 
         public string Key
         {
@@ -1151,7 +1286,9 @@ namespace System.Net.Http
         object? System.Collections.Generic.IDictionary<string, object?>.this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
@@ -1238,15 +1375,21 @@ namespace System.Net.Http
 
     public partial class HttpResponseMessage : System.IDisposable
     {
-        public HttpResponseMessage() { }
+        public HttpResponseMessage()
+        {
+        }
 
-        public HttpResponseMessage(System.Net.HttpStatusCode statusCode) { }
+        public HttpResponseMessage(System.Net.HttpStatusCode statusCode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Net.Http.HttpContent Content
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpResponseHeaders Headers
         {
@@ -1259,17 +1402,23 @@ namespace System.Net.Http
         public string? ReasonPhrase
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.HttpRequestMessage? RequestMessage
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.HttpStatusCode StatusCode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpResponseHeaders TrailingHeaders
         {
@@ -1278,12 +1427,18 @@ namespace System.Net.Http
         public System.Version Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.Net.Http.HttpResponseMessage EnsureSuccessStatusCode()
         {
@@ -1305,9 +1460,13 @@ namespace System.Net.Http
 
     public abstract partial class MessageProcessingHandler : System.Net.Http.DelegatingHandler
     {
-        protected MessageProcessingHandler() { }
+        protected MessageProcessingHandler()
+        {
+        }
 
-        protected MessageProcessingHandler(System.Net.Http.HttpMessageHandler innerHandler) { }
+        protected MessageProcessingHandler(System.Net.Http.HttpMessageHandler innerHandler)
+        {
+        }
 
         protected abstract System.Net.Http.HttpRequestMessage ProcessRequest(
             System.Net.Http.HttpRequestMessage request,
@@ -1340,19 +1499,29 @@ namespace System.Net.Http
             System.Collections.Generic.IEnumerable<System.Net.Http.HttpContent>,
             System.Collections.IEnumerable
     {
-        public MultipartContent() { }
+        public MultipartContent()
+        {
+        }
 
-        public MultipartContent(string subtype) { }
+        public MultipartContent(string subtype)
+        {
+        }
 
-        public MultipartContent(string subtype, string boundary) { }
+        public MultipartContent(string subtype, string boundary)
+        {
+        }
 
         public System.Net.Http.HeaderEncodingSelector<System.Net.Http.HttpContent>? HeaderEncodingSelector
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public virtual void Add(System.Net.Http.HttpContent content) { }
+        public virtual void Add(System.Net.Http.HttpContent content)
+        {
+        }
 
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
@@ -1373,7 +1542,9 @@ namespace System.Net.Http
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<System.Net.Http.HttpContent> GetEnumerator()
         {
@@ -1384,7 +1555,9 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -1416,15 +1589,25 @@ namespace System.Net.Http
 
     public partial class MultipartFormDataContent : System.Net.Http.MultipartContent
     {
-        public MultipartFormDataContent() { }
+        public MultipartFormDataContent()
+        {
+        }
 
-        public MultipartFormDataContent(string boundary) { }
+        public MultipartFormDataContent(string boundary)
+        {
+        }
 
-        public override void Add(System.Net.Http.HttpContent content) { }
+        public override void Add(System.Net.Http.HttpContent content)
+        {
+        }
 
-        public void Add(System.Net.Http.HttpContent content, string name) { }
+        public void Add(System.Net.Http.HttpContent content, string name)
+        {
+        }
 
-        public void Add(System.Net.Http.HttpContent content, string name, string fileName) { }
+        public void Add(System.Net.Http.HttpContent content, string name, string fileName)
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -1438,7 +1621,9 @@ namespace System.Net.Http
 
     public sealed partial class ReadOnlyMemoryContent : System.Net.Http.HttpContent
     {
-        public ReadOnlyMemoryContent(System.ReadOnlyMemory<byte> content) { }
+        public ReadOnlyMemoryContent(System.ReadOnlyMemory<byte> content)
+        {
+        }
 
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
@@ -1456,7 +1641,9 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -1484,12 +1671,16 @@ namespace System.Net.Http
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public sealed partial class SocketsHttpHandler : System.Net.Http.HttpMessageHandler
     {
-        public SocketsHttpHandler() { }
+        public SocketsHttpHandler()
+        {
+        }
 
         public int InitialHttp2StreamWindowSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute("browser")]
@@ -1500,89 +1691,123 @@ namespace System.Net.Http
         public bool AllowAutoRedirect
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.DecompressionMethods AutomaticDecompression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan ConnectTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Net.CookieContainer CookieContainer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.ICredentials? DefaultProxyCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan Expect100ContinueTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan KeepAlivePingDelay
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan KeepAlivePingTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public HttpKeepAlivePingPolicy KeepAlivePingPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxAutomaticRedirections
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxConnectionsPerServer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxResponseDrainSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxResponseHeadersLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan PooledConnectionIdleTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan PooledConnectionLifetime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PreAuthenticate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IDictionary<string, object?> Properties
         {
@@ -1591,42 +1816,58 @@ namespace System.Net.Http
         public System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.HeaderEncodingSelector<System.Net.Http.HttpRequestMessage>? RequestHeaderEncodingSelector
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan ResponseDrainTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.HeaderEncodingSelector<System.Net.Http.HttpRequestMessage>? ResponseHeaderEncodingSelector
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Net.Security.SslClientAuthenticationOptions SslOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseCookies
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseProxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected internal override System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
@@ -1647,7 +1888,9 @@ namespace System.Net.Http
         public bool EnableMultipleHttp2Connections
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Func<
             SocketsHttpConnectionContext,
@@ -1656,7 +1899,9 @@ namespace System.Net.Http
         >? ConnectCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Func<
             SocketsHttpPlaintextStreamFilterContext,
@@ -1665,20 +1910,26 @@ namespace System.Net.Http
         >? PlaintextStreamFilter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.CLSCompliantAttribute(false)]
         public System.Diagnostics.DistributedContextPropagator? ActivityHeadersPropagator
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed class SocketsHttpConnectionContext
     {
-        internal SocketsHttpConnectionContext() { }
+        internal SocketsHttpConnectionContext()
+        {
+        }
 
         public DnsEndPoint DnsEndPoint
         {
@@ -1692,7 +1943,9 @@ namespace System.Net.Http
 
     public sealed class SocketsHttpPlaintextStreamFilterContext
     {
-        internal SocketsHttpPlaintextStreamFilterContext() { }
+        internal SocketsHttpPlaintextStreamFilterContext()
+        {
+        }
 
         public System.IO.Stream PlaintextStream
         {
@@ -1716,9 +1969,13 @@ namespace System.Net.Http
 
     public partial class StreamContent : System.Net.Http.HttpContent
     {
-        public StreamContent(System.IO.Stream content) { }
+        public StreamContent(System.IO.Stream content)
+        {
+        }
 
-        public StreamContent(System.IO.Stream content, int bufferSize) { }
+        public StreamContent(System.IO.Stream content, int bufferSize)
+        {
+        }
 
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
@@ -1732,13 +1989,17 @@ namespace System.Net.Http
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override void SerializeToStream(
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -1765,22 +2026,31 @@ namespace System.Net.Http
 
     public partial class StringContent : System.Net.Http.ByteArrayContent
     {
-        public StringContent(string content) : base(default(byte[])) { }
+        public StringContent(string content) : base(default(byte[]))
+        {
+        }
 
         public StringContent(string content, System.Net.Http.Headers.MediaTypeHeaderValue mediaType)
-            : base(default(byte[])) { }
+            : base(default(byte[]))
+        {
+        }
 
         public StringContent(string content, System.Text.Encoding? encoding) : base(default(byte[]))
-        { }
+        {
+        }
 
         public StringContent(
             string content,
             System.Text.Encoding? encoding,
             System.Net.Http.Headers.MediaTypeHeaderValue mediaType
-        ) : base(default(byte[])) { }
+        ) : base(default(byte[]))
+        {
+        }
 
         public StringContent(string content, System.Text.Encoding? encoding, string mediaType)
-            : base(default(byte[])) { }
+            : base(default(byte[]))
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -1797,9 +2067,13 @@ namespace System.Net.Http.Headers
 {
     public partial class AuthenticationHeaderValue : System.ICloneable
     {
-        public AuthenticationHeaderValue(string scheme) { }
+        public AuthenticationHeaderValue(string scheme)
+        {
+        }
 
-        public AuthenticationHeaderValue(string scheme, string? parameter) { }
+        public AuthenticationHeaderValue(string scheme, string? parameter)
+        {
+        }
 
         public string? Parameter
         {
@@ -1847,7 +2121,9 @@ namespace System.Net.Http.Headers
 
     public partial class CacheControlHeaderValue : System.ICloneable
     {
-        public CacheControlHeaderValue() { }
+        public CacheControlHeaderValue()
+        {
+        }
 
         public System.Collections.Generic.ICollection<System.Net.Http.Headers.NameValueHeaderValue> Extensions
         {
@@ -1856,32 +2132,44 @@ namespace System.Net.Http.Headers
         public System.TimeSpan? MaxAge
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool MaxStale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? MaxStaleLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? MinFresh
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool MustRevalidate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool NoCache
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.ICollection<string> NoCacheHeaders
         {
@@ -1890,22 +2178,30 @@ namespace System.Net.Http.Headers
         public bool NoStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool NoTransform
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool OnlyIfCached
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Private
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.ICollection<string> PrivateHeaders
         {
@@ -1914,17 +2210,23 @@ namespace System.Net.Http.Headers
         public bool ProxyRevalidate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Public
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? SharedMaxAge
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj)
@@ -1966,39 +2268,55 @@ namespace System.Net.Http.Headers
     {
         protected ContentDispositionHeaderValue(
             System.Net.Http.Headers.ContentDispositionHeaderValue source
-        ) { }
+        )
+        {
+        }
 
-        public ContentDispositionHeaderValue(string dispositionType) { }
+        public ContentDispositionHeaderValue(string dispositionType)
+        {
+        }
 
         public System.DateTimeOffset? CreationDate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string DispositionType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? FileName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? FileNameStar
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset? ModificationDate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.ICollection<System.Net.Http.Headers.NameValueHeaderValue> Parameters
         {
@@ -2007,12 +2325,16 @@ namespace System.Net.Http.Headers
         public System.DateTimeOffset? ReadDate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long? Size
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj)
@@ -2052,11 +2374,17 @@ namespace System.Net.Http.Headers
 
     public partial class ContentRangeHeaderValue : System.ICloneable
     {
-        public ContentRangeHeaderValue(long length) { }
+        public ContentRangeHeaderValue(long length)
+        {
+        }
 
-        public ContentRangeHeaderValue(long from, long to) { }
+        public ContentRangeHeaderValue(long from, long to)
+        {
+        }
 
-        public ContentRangeHeaderValue(long from, long to, long length) { }
+        public ContentRangeHeaderValue(long from, long to, long length)
+        {
+        }
 
         public long? From
         {
@@ -2081,7 +2409,9 @@ namespace System.Net.Http.Headers
         public string Unit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj)
@@ -2121,9 +2451,13 @@ namespace System.Net.Http.Headers
 
     public partial class EntityTagHeaderValue : System.ICloneable
     {
-        public EntityTagHeaderValue(string tag) { }
+        public EntityTagHeaderValue(string tag)
+        {
+        }
 
-        public EntityTagHeaderValue(string tag, bool isWeak) { }
+        public EntityTagHeaderValue(string tag, bool isWeak)
+        {
+        }
 
         public static System.Net.Http.Headers.EntityTagHeaderValue Any
         {
@@ -2221,20 +2555,26 @@ namespace System.Net.Http.Headers
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
         }
     }
 
     public sealed partial class HttpContentHeaders : System.Net.Http.Headers.HttpHeaders
     {
-        internal HttpContentHeaders() { }
+        internal HttpContentHeaders()
+        {
+        }
 
         public System.Collections.Generic.ICollection<string> Allow
         {
@@ -2243,7 +2583,9 @@ namespace System.Net.Http.Headers
         public System.Net.Http.Headers.ContentDispositionHeaderValue? ContentDisposition
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.ICollection<string> ContentEncoding
         {
@@ -2256,37 +2598,51 @@ namespace System.Net.Http.Headers
         public long? ContentLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Uri? ContentLocation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[]? ContentMD5
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.ContentRangeHeaderValue? ContentRange
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.MediaTypeHeaderValue? ContentType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset? Expires
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset? LastModified
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -2297,18 +2653,26 @@ namespace System.Net.Http.Headers
         >>,
             System.Collections.IEnumerable
     {
-        protected HttpHeaders() { }
+        protected HttpHeaders()
+        {
+        }
 
         public System.Net.Http.Headers.HttpHeadersNonValidated NonValidated
         {
             get { throw null; }
         }
 
-        public void Add(string name, System.Collections.Generic.IEnumerable<string?> values) { }
+        public void Add(string name, System.Collections.Generic.IEnumerable<string?> values)
+        {
+        }
 
-        public void Add(string name, string? value) { }
+        public void Add(string name, string? value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(string name)
         {
@@ -2478,14 +2842,18 @@ namespace System.Net.Http.Headers
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
         }
     }
 
@@ -2494,7 +2862,9 @@ namespace System.Net.Http.Headers
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable where T : class
     {
-        internal HttpHeaderValueCollection() { }
+        internal HttpHeaderValueCollection()
+        {
+        }
 
         public int Count
         {
@@ -2505,23 +2875,31 @@ namespace System.Net.Http.Headers
             get { throw null; }
         }
 
-        public void Add(T item) { }
+        public void Add(T item)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(T item)
         {
             throw null;
         }
 
-        public void CopyTo(T[] array, int arrayIndex) { }
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
             throw null;
         }
 
-        public void ParseAdd(string? input) { }
+        public void ParseAdd(string? input)
+        {
+        }
 
         public bool Remove(T item)
         {
@@ -2546,7 +2924,9 @@ namespace System.Net.Http.Headers
 
     public sealed partial class HttpRequestHeaders : System.Net.Http.Headers.HttpHeaders
     {
-        internal HttpRequestHeaders() { }
+        internal HttpRequestHeaders()
+        {
+        }
 
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.MediaTypeWithQualityHeaderValue> Accept
         {
@@ -2567,12 +2947,16 @@ namespace System.Net.Http.Headers
         public System.Net.Http.Headers.AuthenticationHeaderValue? Authorization
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.CacheControlHeaderValue? CacheControl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<string> Connection
         {
@@ -2581,12 +2965,16 @@ namespace System.Net.Http.Headers
         public bool? ConnectionClose
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset? Date
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.NameValueWithParametersHeaderValue> Expect
         {
@@ -2595,17 +2983,23 @@ namespace System.Net.Http.Headers
         public bool? ExpectContinue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? From
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Host
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.EntityTagHeaderValue> IfMatch
         {
@@ -2614,7 +3008,9 @@ namespace System.Net.Http.Headers
         public System.DateTimeOffset? IfModifiedSince
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.EntityTagHeaderValue> IfNoneMatch
         {
@@ -2623,17 +3019,23 @@ namespace System.Net.Http.Headers
         public System.Net.Http.Headers.RangeConditionHeaderValue? IfRange
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset? IfUnmodifiedSince
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int? MaxForwards
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.NameValueHeaderValue> Pragma
         {
@@ -2642,22 +3044,30 @@ namespace System.Net.Http.Headers
         public string? Protocol
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.AuthenticationHeaderValue? ProxyAuthorization
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.RangeHeaderValue? Range
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Uri? Referrer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.TransferCodingWithQualityHeaderValue> TE
         {
@@ -2674,7 +3084,9 @@ namespace System.Net.Http.Headers
         public bool? TransferEncodingChunked
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.ProductHeaderValue> Upgrade
         {
@@ -2696,7 +3108,9 @@ namespace System.Net.Http.Headers
 
     public sealed partial class HttpResponseHeaders : System.Net.Http.Headers.HttpHeaders
     {
-        internal HttpResponseHeaders() { }
+        internal HttpResponseHeaders()
+        {
+        }
 
         public System.Net.Http.Headers.HttpHeaderValueCollection<string> AcceptRanges
         {
@@ -2705,12 +3119,16 @@ namespace System.Net.Http.Headers
         public System.TimeSpan? Age
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.CacheControlHeaderValue? CacheControl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<string> Connection
         {
@@ -2719,22 +3137,30 @@ namespace System.Net.Http.Headers
         public bool? ConnectionClose
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset? Date
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.EntityTagHeaderValue? ETag
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Uri? Location
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.NameValueHeaderValue> Pragma
         {
@@ -2747,7 +3173,9 @@ namespace System.Net.Http.Headers
         public System.Net.Http.Headers.RetryConditionHeaderValue? RetryAfter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.ProductInfoHeaderValue> Server
         {
@@ -2764,7 +3192,9 @@ namespace System.Net.Http.Headers
         public bool? TransferEncodingChunked
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.ProductHeaderValue> Upgrade
         {
@@ -2790,23 +3220,33 @@ namespace System.Net.Http.Headers
 
     public partial class MediaTypeHeaderValue : System.ICloneable
     {
-        protected MediaTypeHeaderValue(System.Net.Http.Headers.MediaTypeHeaderValue source) { }
+        protected MediaTypeHeaderValue(System.Net.Http.Headers.MediaTypeHeaderValue source)
+        {
+        }
 
-        public MediaTypeHeaderValue(string mediaType) { }
+        public MediaTypeHeaderValue(string mediaType)
+        {
+        }
 
-        public MediaTypeHeaderValue(string mediaType, string? charSet) { }
+        public MediaTypeHeaderValue(string mediaType, string? charSet)
+        {
+        }
 
         public string? CharSet
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public string? MediaType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.ICollection<System.Net.Http.Headers.NameValueHeaderValue> Parameters
         {
@@ -2853,15 +3293,21 @@ namespace System.Net.Http.Headers
             System.ICloneable
     {
         public MediaTypeWithQualityHeaderValue(string mediaType)
-            : base(default(System.Net.Http.Headers.MediaTypeHeaderValue)) { }
+            : base(default(System.Net.Http.Headers.MediaTypeHeaderValue))
+        {
+        }
 
         public MediaTypeWithQualityHeaderValue(string mediaType, double quality)
-            : base(default(System.Net.Http.Headers.MediaTypeHeaderValue)) { }
+            : base(default(System.Net.Http.Headers.MediaTypeHeaderValue))
+        {
+        }
 
         public double? Quality
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue Parse(
@@ -2888,11 +3334,17 @@ namespace System.Net.Http.Headers
 
     public partial class NameValueHeaderValue : System.ICloneable
     {
-        protected NameValueHeaderValue(System.Net.Http.Headers.NameValueHeaderValue source) { }
+        protected NameValueHeaderValue(System.Net.Http.Headers.NameValueHeaderValue source)
+        {
+        }
 
-        public NameValueHeaderValue(string name) { }
+        public NameValueHeaderValue(string name)
+        {
+        }
 
-        public NameValueHeaderValue(string name, string? value) { }
+        public NameValueHeaderValue(string name, string? value)
+        {
+        }
 
         public string Name
         {
@@ -2901,7 +3353,9 @@ namespace System.Net.Http.Headers
         public string? Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj)
@@ -2945,12 +3399,18 @@ namespace System.Net.Http.Headers
     {
         protected NameValueWithParametersHeaderValue(
             System.Net.Http.Headers.NameValueWithParametersHeaderValue source
-        ) : base(default(string)) { }
+        ) : base(default(string))
+        {
+        }
 
-        public NameValueWithParametersHeaderValue(string name) : base(default(string)) { }
+        public NameValueWithParametersHeaderValue(string name) : base(default(string))
+        {
+        }
 
         public NameValueWithParametersHeaderValue(string name, string? value)
-            : base(default(string)) { }
+            : base(default(string))
+        {
+        }
 
         public System.Collections.Generic.ICollection<System.Net.Http.Headers.NameValueHeaderValue> Parameters
         {
@@ -2996,9 +3456,13 @@ namespace System.Net.Http.Headers
 
     public partial class ProductHeaderValue : System.ICloneable
     {
-        public ProductHeaderValue(string name) { }
+        public ProductHeaderValue(string name)
+        {
+        }
 
-        public ProductHeaderValue(string name, string? version) { }
+        public ProductHeaderValue(string name, string? version)
+        {
+        }
 
         public string Name
         {
@@ -3046,11 +3510,17 @@ namespace System.Net.Http.Headers
 
     public partial class ProductInfoHeaderValue : System.ICloneable
     {
-        public ProductInfoHeaderValue(System.Net.Http.Headers.ProductHeaderValue product) { }
+        public ProductInfoHeaderValue(System.Net.Http.Headers.ProductHeaderValue product)
+        {
+        }
 
-        public ProductInfoHeaderValue(string comment) { }
+        public ProductInfoHeaderValue(string comment)
+        {
+        }
 
-        public ProductInfoHeaderValue(string productName, string? productVersion) { }
+        public ProductInfoHeaderValue(string productName, string? productVersion)
+        {
+        }
 
         public string? Comment
         {
@@ -3098,11 +3568,17 @@ namespace System.Net.Http.Headers
 
     public partial class RangeConditionHeaderValue : System.ICloneable
     {
-        public RangeConditionHeaderValue(System.DateTimeOffset date) { }
+        public RangeConditionHeaderValue(System.DateTimeOffset date)
+        {
+        }
 
-        public RangeConditionHeaderValue(System.Net.Http.Headers.EntityTagHeaderValue entityTag) { }
+        public RangeConditionHeaderValue(System.Net.Http.Headers.EntityTagHeaderValue entityTag)
+        {
+        }
 
-        public RangeConditionHeaderValue(string entityTag) { }
+        public RangeConditionHeaderValue(string entityTag)
+        {
+        }
 
         public System.DateTimeOffset? Date
         {
@@ -3150,9 +3626,13 @@ namespace System.Net.Http.Headers
 
     public partial class RangeHeaderValue : System.ICloneable
     {
-        public RangeHeaderValue() { }
+        public RangeHeaderValue()
+        {
+        }
 
-        public RangeHeaderValue(long? from, long? to) { }
+        public RangeHeaderValue(long? from, long? to)
+        {
+        }
 
         public System.Collections.Generic.ICollection<System.Net.Http.Headers.RangeItemHeaderValue> Ranges
         {
@@ -3161,7 +3641,9 @@ namespace System.Net.Http.Headers
         public string Unit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj)
@@ -3201,7 +3683,9 @@ namespace System.Net.Http.Headers
 
     public partial class RangeItemHeaderValue : System.ICloneable
     {
-        public RangeItemHeaderValue(long? from, long? to) { }
+        public RangeItemHeaderValue(long? from, long? to)
+        {
+        }
 
         public long? From
         {
@@ -3235,9 +3719,13 @@ namespace System.Net.Http.Headers
 
     public partial class RetryConditionHeaderValue : System.ICloneable
     {
-        public RetryConditionHeaderValue(System.DateTimeOffset date) { }
+        public RetryConditionHeaderValue(System.DateTimeOffset date)
+        {
+        }
 
-        public RetryConditionHeaderValue(System.TimeSpan delta) { }
+        public RetryConditionHeaderValue(System.TimeSpan delta)
+        {
+        }
 
         public System.DateTimeOffset? Date
         {
@@ -3285,9 +3773,13 @@ namespace System.Net.Http.Headers
 
     public partial class StringWithQualityHeaderValue : System.ICloneable
     {
-        public StringWithQualityHeaderValue(string value) { }
+        public StringWithQualityHeaderValue(string value)
+        {
+        }
 
-        public StringWithQualityHeaderValue(string value, double quality) { }
+        public StringWithQualityHeaderValue(string value, double quality)
+        {
+        }
 
         public double? Quality
         {
@@ -3337,9 +3829,13 @@ namespace System.Net.Http.Headers
     {
         protected TransferCodingHeaderValue(
             System.Net.Http.Headers.TransferCodingHeaderValue source
-        ) { }
+        )
+        {
+        }
 
-        public TransferCodingHeaderValue(string value) { }
+        public TransferCodingHeaderValue(string value)
+        {
+        }
 
         public System.Collections.Generic.ICollection<System.Net.Http.Headers.NameValueHeaderValue> Parameters
         {
@@ -3390,15 +3886,21 @@ namespace System.Net.Http.Headers
             System.ICloneable
     {
         public TransferCodingWithQualityHeaderValue(string value)
-            : base(default(System.Net.Http.Headers.TransferCodingHeaderValue)) { }
+            : base(default(System.Net.Http.Headers.TransferCodingHeaderValue))
+        {
+        }
 
         public TransferCodingWithQualityHeaderValue(string value, double quality)
-            : base(default(System.Net.Http.Headers.TransferCodingHeaderValue)) { }
+            : base(default(System.Net.Http.Headers.TransferCodingHeaderValue))
+        {
+        }
 
         public double? Quality
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static new System.Net.Http.Headers.TransferCodingWithQualityHeaderValue Parse(
@@ -3425,16 +3927,22 @@ namespace System.Net.Http.Headers
 
     public partial class ViaHeaderValue : System.ICloneable
     {
-        public ViaHeaderValue(string protocolVersion, string receivedBy) { }
+        public ViaHeaderValue(string protocolVersion, string receivedBy)
+        {
+        }
 
-        public ViaHeaderValue(string protocolVersion, string receivedBy, string? protocolName) { }
+        public ViaHeaderValue(string protocolVersion, string receivedBy, string? protocolName)
+        {
+        }
 
         public ViaHeaderValue(
             string protocolVersion,
             string receivedBy,
             string? protocolName,
             string? comment
-        ) { }
+        )
+        {
+        }
 
         public string? Comment
         {
@@ -3490,10 +3998,13 @@ namespace System.Net.Http.Headers
 
     public partial class WarningHeaderValue : System.ICloneable
     {
-        public WarningHeaderValue(int code, string agent, string text) { }
+        public WarningHeaderValue(int code, string agent, string text)
+        {
+        }
 
         public WarningHeaderValue(int code, string agent, string text, System.DateTimeOffset date)
-        { }
+        {
+        }
 
         public string Agent
         {

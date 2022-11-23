@@ -117,7 +117,9 @@ namespace System
                             // to provide a non-fatal notification about the corruption.
                             results.Add(key, value);
                         }
-                        catch (ArgumentException) { }
+                        catch (ArgumentException)
+                        {
+                        }
                     }
 
                     // Move to the end of this variable, after its terminator.

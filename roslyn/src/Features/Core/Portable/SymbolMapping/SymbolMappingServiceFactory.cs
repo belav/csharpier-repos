@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.SymbolMapping
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSymbolMappingService() { }
+        public DefaultSymbolMappingService()
+        {
+        }
 
         public async Task<SymbolMappingResult> MapSymbolAsync(
             Document document,

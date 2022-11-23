@@ -37,7 +37,9 @@ namespace System.Xml.Xsl.XsltOld
         internal XsltCompileContext()
             : base( /*dummy*/
                 false
-            ) { }
+            )
+        {
+        }
 
         internal void Recycle()
         {
@@ -710,7 +712,9 @@ namespace System.Xml.Xsl.XsltOld
             private XPathResultType _returnType;
             private XPathResultType[] _argTypes = null!; // Used by derived classes which initialize it
 
-            public XsltFunctionImpl() { }
+            public XsltFunctionImpl()
+            {
+            }
 
             public XsltFunctionImpl(
                 int minArgs,
@@ -873,7 +877,9 @@ namespace System.Xml.Xsl.XsltOld
         private sealed class FuncCurrent : XsltFunctionImpl
         {
             public FuncCurrent()
-                : base(0, 0, XPathResultType.NodeSet, Array.Empty<XPathResultType>()) { }
+                : base(0, 0, XPathResultType.NodeSet, Array.Empty<XPathResultType>())
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -893,7 +899,9 @@ namespace System.Xml.Xsl.XsltOld
                     1,
                     XPathResultType.String,
                     new XPathResultType[] { XPathResultType.String }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -913,7 +921,9 @@ namespace System.Xml.Xsl.XsltOld
                     1,
                     XPathResultType.String,
                     new XPathResultType[] { XPathResultType.NodeSet }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -949,7 +959,9 @@ namespace System.Xml.Xsl.XsltOld
                     1,
                     XPathResultType.String,
                     new XPathResultType[] { XPathResultType.String }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -970,7 +982,9 @@ namespace System.Xml.Xsl.XsltOld
                     1,
                     XPathResultType.Boolean,
                     new XPathResultType[] { XPathResultType.String }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -991,7 +1005,9 @@ namespace System.Xml.Xsl.XsltOld
                     1,
                     XPathResultType.Boolean,
                     new XPathResultType[] { XPathResultType.String }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -1011,7 +1027,9 @@ namespace System.Xml.Xsl.XsltOld
                     2,
                     XPathResultType.NodeSet,
                     new XPathResultType[] { XPathResultType.Any, XPathResultType.NodeSet }
-                ) { }
+                )
+            {
+            }
 
             // SxS: This method uses resource names read from source document and does not expose any resources to the caller.
             // It's OK to suppress the SxS warning.
@@ -1060,7 +1078,9 @@ namespace System.Xml.Xsl.XsltOld
                     2,
                     XPathResultType.NodeSet,
                     new XPathResultType[] { XPathResultType.String, XPathResultType.Any }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -1165,7 +1185,9 @@ namespace System.Xml.Xsl.XsltOld
                         XPathResultType.String,
                         XPathResultType.String
                     }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,
@@ -1188,7 +1210,9 @@ namespace System.Xml.Xsl.XsltOld
                     1,
                     XPathResultType.NodeSet,
                     new XPathResultType[] { XPathResultType.Navigator }
-                ) { }
+                )
+            {
+            }
 
             public override object Invoke(
                 XsltContext xsltContext,

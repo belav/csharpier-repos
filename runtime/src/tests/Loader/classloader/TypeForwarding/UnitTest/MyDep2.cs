@@ -13,16 +13,24 @@ namespace MyDep2
     {
         public class Nested1
         {
-            public class SubNested1 { }
+            public class SubNested1
+            {
+            }
 
-            public class SubNested2 { }
+            public class SubNested2
+            {
+            }
         }
 
         public class Nested2
         {
-            public class SubNested1 { }
+            public class SubNested1
+            {
+            }
 
-            public class SubNested2 { }
+            public class SubNested2
+            {
+            }
         }
     }
 
@@ -30,16 +38,24 @@ namespace MyDep2
     {
         public class Nested1
         {
-            public class SubNested1 { }
+            public class SubNested1
+            {
+            }
 
-            public class SubNested2 { }
+            public class SubNested2
+            {
+            }
         }
 
         public class Nested2
         {
-            public class SubNested1 { }
+            public class SubNested1
+            {
+            }
 
-            public class SubNested2 { }
+            public class SubNested2
+            {
+            }
         }
     }
 }

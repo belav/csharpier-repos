@@ -7,7 +7,9 @@ public class TPTRelationshipsQuerySqliteTest
     : TPTRelationshipsQueryTestBase<TPTRelationshipsQuerySqliteTest.TPTRelationshipsQuerySqliteFixture>
 {
     public TPTRelationshipsQuerySqliteTest(TPTRelationshipsQuerySqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class TPTRelationshipsQuerySqliteFixture : TPTRelationshipsQueryRelationalFixture
     {

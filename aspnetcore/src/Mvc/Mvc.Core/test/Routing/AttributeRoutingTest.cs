@@ -196,10 +196,14 @@ public class AttributeRoutingTest
             .BuildServiceProvider();
     }
 
-    private class DisplayNameActionDescriptor : ActionDescriptor { }
+    private class DisplayNameActionDescriptor : ActionDescriptor
+    {
+    }
 
     private class HomeController
     {
-        public void Index() { }
+        public void Index()
+        {
+        }
     }
 }

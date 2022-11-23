@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     {
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        public BasicNavigateTo() : base(nameof(BasicNavigateTo)) { }
+        public BasicNavigateTo() : base(nameof(BasicNavigateTo))
+        {
+        }
 
         [IdeFact]
         public async Task NavigateTo()

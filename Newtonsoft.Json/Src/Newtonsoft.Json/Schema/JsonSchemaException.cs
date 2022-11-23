@@ -67,14 +67,18 @@ namespace Newtonsoft.Json.Schema
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class.
         /// </summary>
-        public JsonSchemaException() { }
+        public JsonSchemaException()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class
         /// with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public JsonSchemaException(string message) : base(message) { }
+        public JsonSchemaException(string message) : base(message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class
@@ -83,7 +87,9 @@ namespace Newtonsoft.Json.Schema
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
         public JsonSchemaException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
         /// <summary>
@@ -94,7 +100,9 @@ namespace Newtonsoft.Json.Schema
         /// <exception cref="ArgumentNullException">The <paramref name="info"/> parameter is <c>null</c>.</exception>
         /// <exception cref="SerializationException">The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).</exception>
         public JsonSchemaException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 #endif
 
         internal JsonSchemaException(

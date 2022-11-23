@@ -35,12 +35,18 @@ namespace System.Diagnostics.Eventing.Reader
         private EventLogException asyncException;
 
         public EventLogWatcher(string path)
-            : this(new EventLogQuery(path, PathType.LogName), null, false) { }
+            : this(new EventLogQuery(path, PathType.LogName), null, false)
+        {
+        }
 
-        public EventLogWatcher(EventLogQuery eventQuery) : this(eventQuery, null, false) { }
+        public EventLogWatcher(EventLogQuery eventQuery) : this(eventQuery, null, false)
+        {
+        }
 
         public EventLogWatcher(EventLogQuery eventQuery, EventBookmark bookmark)
-            : this(eventQuery, bookmark, false) { }
+            : this(eventQuery, bookmark, false)
+        {
+        }
 
         public EventLogWatcher(
             EventLogQuery eventQuery,

@@ -63,7 +63,9 @@ namespace System.Globalization
 
         public override CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.SolarCalendar;
 
-        public PersianCalendar() { }
+        public PersianCalendar()
+        {
+        }
 
         internal override CalendarId BaseCalendarID => CalendarId.GREGORIAN;
 

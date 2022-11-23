@@ -180,7 +180,9 @@ public static class RunnerEntryPoint
         protected override IEnumerable<TestAssemblyInfo> GetTestAssemblies() =>
             Array.Empty<TestAssemblyInfo>();
 
-        protected override void TerminateWithSuccess() { }
+        protected override void TerminateWithSuccess()
+        {
+        }
 
         public override TextWriter? Logger => null;
     }

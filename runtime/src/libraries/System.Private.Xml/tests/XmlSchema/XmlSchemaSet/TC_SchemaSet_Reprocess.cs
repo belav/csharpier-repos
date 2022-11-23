@@ -585,7 +585,9 @@ namespace System.Xml.XmlSchemaTests
             settings.ValidationType = ValidationType.Schema;
             settings.Schemas = set;
             XmlReader reader = XmlReader.Create(xmlFile, settings);
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
 
             CError.Compare(bWarningCallback, false, "Warning count mismatch");
             CError.Compare(bErrorCallback, true, "Error count mismatch");
@@ -606,7 +608,9 @@ namespace System.Xml.XmlSchemaTests
             _output.WriteLine("Second validation ***************");
             settings.Schemas = set;
             reader = XmlReader.Create(xmlFile, settings);
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
 
             CError.Compare(bWarningCallback, false, "Warning count mismatch");
             CError.Compare(bErrorCallback, false, "Error count mismatch");
@@ -631,7 +635,9 @@ namespace System.Xml.XmlSchemaTests
             _output.WriteLine("Third validation, Expecting errors ***************");
             settings.Schemas = set;
             reader = XmlReader.Create(xmlFile, settings);
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
 
             CError.Compare(bWarningCallback, false, "Warning count mismatch");
             CError.Compare(bErrorCallback, true, "Error count mismatch");

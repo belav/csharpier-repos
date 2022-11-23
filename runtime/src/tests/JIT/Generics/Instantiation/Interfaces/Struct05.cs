@@ -4,37 +4,69 @@
 
 using System;
 
-public struct ValX0 { }
+public struct ValX0
+{
+}
 
-public struct ValY0 { }
+public struct ValY0
+{
+}
 
-public struct ValX1<T> { }
+public struct ValX1<T>
+{
+}
 
-public struct ValY1<T> { }
+public struct ValY1<T>
+{
+}
 
-public struct ValX2<T, U> { }
+public struct ValX2<T, U>
+{
+}
 
-public struct ValY2<T, U> { }
+public struct ValY2<T, U>
+{
+}
 
-public struct ValX3<T, U, V> { }
+public struct ValX3<T, U, V>
+{
+}
 
-public struct ValY3<T, U, V> { }
+public struct ValY3<T, U, V>
+{
+}
 
-public class RefX0 { }
+public class RefX0
+{
+}
 
-public class RefY0 { }
+public class RefY0
+{
+}
 
-public class RefX1<T> { }
+public class RefX1<T>
+{
+}
 
-public class RefY1<T> { }
+public class RefY1<T>
+{
+}
 
-public class RefX2<T, U> { }
+public class RefX2<T, U>
+{
+}
 
-public class RefY2<T, U> { }
+public class RefY2<T, U>
+{
+}
 
-public class RefX3<T, U, V> { }
+public class RefX3<T, U, V>
+{
+}
 
-public class RefY3<T, U, V> { }
+public class RefY3<T, U, V>
+{
+}
 
 public interface IGen<T>
 {
@@ -42,25 +74,45 @@ public interface IGen<T>
     bool InstVerify(System.Type t1);
 }
 
-public interface IGenSubInt : IGen<int> { }
+public interface IGenSubInt : IGen<int>
+{
+}
 
-public interface IGenSubDouble : IGen<double> { }
+public interface IGenSubDouble : IGen<double>
+{
+}
 
-public interface IGenSubString : IGen<string> { }
+public interface IGenSubString : IGen<string>
+{
+}
 
-public interface IGenSubObject : IGen<object> { }
+public interface IGenSubObject : IGen<object>
+{
+}
 
-public interface IGenSubGuid : IGen<Guid> { }
+public interface IGenSubGuid : IGen<Guid>
+{
+}
 
-public interface IGenSubConstructedReference : IGen<RefX1<int>> { }
+public interface IGenSubConstructedReference : IGen<RefX1<int>>
+{
+}
 
-public interface IGenSubConstructedValue : IGen<ValX1<string>> { }
+public interface IGenSubConstructedValue : IGen<ValX1<string>>
+{
+}
 
-public interface IGenSub1DIntArray : IGen<int[]> { }
+public interface IGenSub1DIntArray : IGen<int[]>
+{
+}
 
-public interface IGenSub2DStringArray : IGen<string[,]> { }
+public interface IGenSub2DStringArray : IGen<string[,]>
+{
+}
 
-public interface IGenSubJaggedObjectArray : IGen<object[][]> { }
+public interface IGenSubJaggedObjectArray : IGen<object[][]>
+{
+}
 
 public struct GenInt : IGenSubInt
 {

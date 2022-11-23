@@ -20,10 +20,14 @@ public class RelationalGeometryTypeMappingTest
     private class FakeRelationalGeometryTypeMapping<TGeometry>
         : RelationalGeometryTypeMapping<TGeometry, TGeometry>
     {
-        public FakeRelationalGeometryTypeMapping() : base(new NullValueConverter(), "geometry") { }
+        public FakeRelationalGeometryTypeMapping() : base(new NullValueConverter(), "geometry")
+        {
+        }
 
         private FakeRelationalGeometryTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters, new NullValueConverter()) { }
+            : base(parameters, new NullValueConverter())
+        {
+        }
 
         protected override RelationalTypeMapping Clone(
             RelationalTypeMappingParameters parameters
@@ -37,7 +41,9 @@ public class RelationalGeometryTypeMappingTest
 
         private class NullValueConverter : ValueConverter<TGeometry, TGeometry>
         {
-            public NullValueConverter() : base(t => t, t => t) { }
+            public NullValueConverter() : base(t => t, t => t)
+            {
+            }
         }
     }
 }

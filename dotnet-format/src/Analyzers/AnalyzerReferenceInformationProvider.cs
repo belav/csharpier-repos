@@ -75,7 +75,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                     return assembly;
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             // Give up.
@@ -123,7 +125,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                             return assembly;
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 // Try to load the requested assembly from the default load context.

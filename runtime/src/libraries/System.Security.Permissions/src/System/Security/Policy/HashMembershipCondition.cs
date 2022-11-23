@@ -13,7 +13,9 @@ namespace System.Security.Policy
             ISecurityPolicyEncodable,
             IMembershipCondition
     {
-        public HashMembershipCondition(HashAlgorithm hashAlg, byte[] value) { }
+        public HashMembershipCondition(HashAlgorithm hashAlg, byte[] value)
+        {
+        }
 
         public HashAlgorithm HashAlgorithm { get; set; }
         public byte[] HashValue { get; set; }
@@ -30,13 +32,19 @@ namespace System.Security.Policy
 
         public override bool Equals(object o) => base.Equals(o);
 
-        public void FromXml(SecurityElement e) { }
+        public void FromXml(SecurityElement e)
+        {
+        }
 
-        public void FromXml(SecurityElement e, PolicyLevel level) { }
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 
-        void IDeserializationCallback.OnDeserialization(object sender) { }
+        void IDeserializationCallback.OnDeserialization(object sender)
+        {
+        }
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {

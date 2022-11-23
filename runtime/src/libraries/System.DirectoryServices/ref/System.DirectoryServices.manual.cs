@@ -9,10 +9,14 @@ using System.DirectoryServices.Design;
 namespace System.DirectoryServices
 {
     [System.ComponentModel.TypeConverter(typeof(DirectoryEntryConverter))]
-    public partial class DirectoryEntry { }
+    public partial class DirectoryEntry
+    {
+    }
 }
 
 namespace System.DirectoryServices.Design
 {
-    internal sealed class DirectoryEntryConverter { }
+    internal sealed class DirectoryEntryConverter
+    {
+    }
 }

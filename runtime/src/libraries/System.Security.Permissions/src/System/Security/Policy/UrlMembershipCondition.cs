@@ -8,7 +8,9 @@ namespace System.Security.Policy
             IMembershipCondition,
             ISecurityPolicyEncodable
     {
-        public UrlMembershipCondition(string url) { }
+        public UrlMembershipCondition(string url)
+        {
+        }
 
         public string Url { get; set; }
 
@@ -24,9 +26,13 @@ namespace System.Security.Policy
 
         public override bool Equals(object obj) => base.Equals(obj);
 
-        public void FromXml(SecurityElement e) { }
+        public void FromXml(SecurityElement e)
+        {
+        }
 
-        public void FromXml(SecurityElement e, PolicyLevel level) { }
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 

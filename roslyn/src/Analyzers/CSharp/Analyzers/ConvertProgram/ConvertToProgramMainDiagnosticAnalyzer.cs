@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;

@@ -42,12 +42,16 @@ namespace Application
 
     class Remote : MarshalByRefObject, IMyInterface
     {
-        public void Run() { }
+        public void Run()
+        {
+        }
     }
 
     class RemoteProxy : RealProxy
     {
-        public RemoteProxy(Type t) : base(t) { }
+        public RemoteProxy(Type t) : base(t)
+        {
+        }
 
         public override IMessage Invoke(IMessage request)
         {

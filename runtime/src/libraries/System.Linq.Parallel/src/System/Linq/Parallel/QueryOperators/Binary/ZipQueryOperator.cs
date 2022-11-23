@@ -51,7 +51,9 @@ namespace System.Linq.Parallel
                 QueryOperator<TLeftInput>.AsQueryOperator(leftChildSource),
                 QueryOperator<TRightInput>.AsQueryOperator(rightChildSource),
                 resultSelector
-            ) { }
+            )
+        {
+        }
 
         private ZipQueryOperator(
             QueryOperator<TLeftInput> left,

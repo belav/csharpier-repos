@@ -9,7 +9,9 @@ class TestException : Exception
     int x;
     string y;
 
-    public TestException() { }
+    public TestException()
+    {
+    }
 
     public TestException(int _x)
     {

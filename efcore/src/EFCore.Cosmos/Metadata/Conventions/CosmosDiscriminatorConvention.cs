@@ -25,7 +25,9 @@ public class CosmosDiscriminatorConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public CosmosDiscriminatorConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Called after an entity type is added to the model.
@@ -178,5 +180,7 @@ public class CosmosDiscriminatorConvention
         IConventionModelBuilder modelBuilder,
         IConventionEntityType entityType,
         IConventionContext<IConventionEntityType> context
-    ) { }
+    )
+    {
+    }
 }

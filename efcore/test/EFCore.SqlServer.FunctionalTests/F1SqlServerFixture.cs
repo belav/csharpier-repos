@@ -40,7 +40,9 @@ public class F1ULongSqlServerFixture : F1SqlServerFixtureBase<ulong>
     }
 }
 
-public class F1SqlServerFixture : F1SqlServerFixtureBase<byte[]> { }
+public class F1SqlServerFixture : F1SqlServerFixtureBase<byte[]>
+{
+}
 
 public abstract class F1SqlServerFixtureBase<TRowVersion> : F1RelationalFixture<TRowVersion>
 {

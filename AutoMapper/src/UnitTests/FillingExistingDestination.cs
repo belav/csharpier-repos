@@ -207,7 +207,10 @@ public class When_the_destination_object_is_specified_and_you_are_converting_an_
         Three
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {

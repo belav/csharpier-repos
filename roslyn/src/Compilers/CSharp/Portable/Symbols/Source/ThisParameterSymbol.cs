@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly TypeSymbol _containingType;
 
         internal ThisParameterSymbol(MethodSymbol forMethod)
-            : this(forMethod, forMethod.ContainingType) { }
+            : this(forMethod, forMethod.ContainingType)
+        {
+        }
 
         internal ThisParameterSymbol(MethodSymbol? forMethod, TypeSymbol containingType)
         {

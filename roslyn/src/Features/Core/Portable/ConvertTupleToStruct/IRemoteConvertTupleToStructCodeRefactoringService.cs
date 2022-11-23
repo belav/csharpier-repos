@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteConvertTupleToStructCodeRefactoringServiceCallbackDispatcher() { }
+        public RemoteConvertTupleToStructCodeRefactoringServiceCallbackDispatcher()
+        {
+        }
 
         public ValueTask<CleanCodeGenerationOptions> GetOptionsAsync(
             RemoteServiceCallbackId callbackId,

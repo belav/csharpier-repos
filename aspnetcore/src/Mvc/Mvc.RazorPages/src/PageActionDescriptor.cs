@@ -15,7 +15,9 @@ public class PageActionDescriptor : ActionDescriptor
     /// <summary>
     /// Initializes a new instance of <see cref="PageActionDescriptor"/>.
     /// </summary>
-    public PageActionDescriptor() { }
+    public PageActionDescriptor()
+    {
+    }
 
     /// <summary>
     /// A copy constructor for <see cref="PageActionDescriptor"/>.

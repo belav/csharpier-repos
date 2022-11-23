@@ -169,7 +169,9 @@ namespace Roslyn.Test.Utilities
                     additionalReferenceDirectories: null,
                     new DefaultAnalyzerAssemblyLoader(),
                     fileSystem: fileSystem
-                ) { }
+                )
+            {
+            }
         }
 
         internal static TestableCompiler CreateBasic(
@@ -268,7 +270,9 @@ namespace Roslyn.Test.Utilities
                     additionalReferenceDirectories: null,
                     new DefaultAnalyzerAssemblyLoader(),
                     fileSystem: fileSystem
-                ) { }
+                )
+            {
+            }
         }
 
         private static void AppendNetCoreApp(

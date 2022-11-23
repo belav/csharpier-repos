@@ -145,7 +145,9 @@ public class Driver
             Console.WriteLine("must not return, got {0}", ar2());
             return 2;
         }
-        catch (NullReferenceException) { }
+        catch (NullReferenceException)
+        {
+        }
 
         ar1 = (ActionRef)
             Delegate.CreateDelegate(typeof(ActionRef), typeof(EmptyStruct).GetMethod("test2"));
@@ -173,7 +175,9 @@ public class Driver
             Console.WriteLine("must fail/2");
             return 5;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
 
         try
         {
@@ -181,7 +185,9 @@ public class Driver
             Console.WriteLine("must fail/2");
             return 6;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
 
         return 0;
     }

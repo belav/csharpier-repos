@@ -153,8 +153,12 @@ namespace Microsoft.AspNetCore.Builder
             }
         }
 
-        private class Attribute1 : Attribute { }
+        private class Attribute1 : Attribute
+        {
+        }
 
-        private class Attribute2 : Attribute { }
+        private class Attribute2 : Attribute
+        {
+        }
     }
 }

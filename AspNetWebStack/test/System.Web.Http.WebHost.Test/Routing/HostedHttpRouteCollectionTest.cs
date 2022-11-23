@@ -644,7 +644,9 @@ namespace System.Web.Http.WebHost.Routing
                     new RouteValueDictionary(constraints),
                     new RouteValueDictionary(),
                     HttpControllerRouteHandler.Instance
-                ) { }
+                )
+            {
+            }
 
             public override RouteData GetRouteData(HttpContextBase context)
             {
@@ -734,7 +736,9 @@ namespace System.Web.Http.WebHost.Routing
 
         private class MockHostedHttpRouteCollection : HostedHttpRouteCollection
         {
-            public MockHostedHttpRouteCollection(RouteCollection routes) : base(routes) { }
+            public MockHostedHttpRouteCollection(RouteCollection routes) : base(routes)
+            {
+            }
 
             public int TimesValidateConstraintCalled { get; private set; }
 

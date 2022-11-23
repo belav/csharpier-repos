@@ -84,9 +84,13 @@ public class Child : Parent
     public int ChildProperty { get; set; }
 }
 
-public class GrandChild : Child { }
+public class GrandChild : Child
+{
+}
 
-public class GrandGrandChild : GrandChild { }
+public class GrandGrandChild : GrandChild
+{
+}
 
 public class ParentPrivate
 {
@@ -98,6 +102,10 @@ public class ChildPrivate : ParentPrivate
     public int ChildProperty { get; private set; }
 }
 
-public class GrandChildPrivate : ChildPrivate { }
+public class GrandChildPrivate : ChildPrivate
+{
+}
 
-public class GrandGrandChildPrivate : GrandChildPrivate { }
+public class GrandGrandChildPrivate : GrandChildPrivate
+{
+}

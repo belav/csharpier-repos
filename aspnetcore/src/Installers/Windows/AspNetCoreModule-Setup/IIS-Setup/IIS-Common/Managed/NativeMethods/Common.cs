@@ -38,7 +38,9 @@ namespace Microsoft.Web.Management.PInvoke
 
     internal class SafeHandleZeroIsInvalid : SafeHandle
     {
-        public SafeHandleZeroIsInvalid() : base(IntPtr.Zero, true) { }
+        public SafeHandleZeroIsInvalid() : base(IntPtr.Zero, true)
+        {
+        }
 
         public SafeHandleZeroIsInvalid(IntPtr newHandle) : base(IntPtr.Zero, true)
         {

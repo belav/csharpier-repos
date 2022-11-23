@@ -55,7 +55,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 }
                 else
                 {
-                    disposeAction = () => { };
+                    disposeAction = () => {
+                    };
                 }
 
                 return new Tuple<T, Action>(exportedValue, disposeAction);

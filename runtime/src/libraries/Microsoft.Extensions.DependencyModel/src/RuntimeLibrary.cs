@@ -32,7 +32,9 @@ namespace Microsoft.Extensions.DependencyModel
                 serviceable,
                 path: null,
                 hashPath: null
-            ) { }
+            )
+        {
+        }
 
         public RuntimeLibrary(
             string type,
@@ -60,7 +62,9 @@ namespace Microsoft.Extensions.DependencyModel
                 path,
                 hashPath,
                 runtimeStoreManifestName: null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="RuntimeLibrary"/>.

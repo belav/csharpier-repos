@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CommentSelection
                 editorOperationsFactoryService,
                 navigatorSelectorService,
                 editorOptionsService
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Retrieves block comments near the selection in the document.

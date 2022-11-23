@@ -73,7 +73,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TaskList
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoCompilationTaskListService() { }
+        public NoCompilationTaskListService()
+        {
+        }
 
         public Task<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(
             Document document,

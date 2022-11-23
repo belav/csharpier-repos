@@ -142,11 +142,17 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             }
         }
 
-        public class UnsupportedTypeInHashSet { }
+        public class UnsupportedTypeInHashSet
+        {
+        }
 
-        public interface ICustomCollectionDerivedFromIEnumerableT<out T> : IEnumerable<T> { }
+        public interface ICustomCollectionDerivedFromIEnumerableT<out T> : IEnumerable<T>
+        {
+        }
 
-        public interface ICustomCollectionDerivedFromICollectionT<T> : ICollection<T> { }
+        public interface ICustomCollectionDerivedFromICollectionT<T> : ICollection<T>
+        {
+        }
 
         public class MyClassWithCustomCollections
         {
@@ -176,7 +182,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             public bool IsReadOnly => false;
         }
 
-        public interface ICustomSet<T> : ISet<T> { }
+        public interface ICustomSet<T> : ISet<T>
+        {
+        }
 
         public class MyClassWithCustomSet
         {
@@ -209,7 +217,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             public Dictionary<string, int> Dictionary { get; set; } = _existingDictionary;
         }
 
-        public interface ICustomDictionary<T, T1> : IDictionary<T, T1> { }
+        public interface ICustomDictionary<T, T1> : IDictionary<T, T1>
+        {
+        }
 
         public class NullableOptions
         {
@@ -2734,11 +2744,15 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal("a", test.ExposePrivatePropertyValue());
         }
 
-        private interface ISomeInterface { }
+        private interface ISomeInterface
+        {
+        }
 
         private class ClassWithoutPublicConstructor
         {
-            private ClassWithoutPublicConstructor() { }
+            private ClassWithoutPublicConstructor()
+            {
+            }
         }
 
         private class ThrowsWhenActivated

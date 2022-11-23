@@ -28,7 +28,9 @@ namespace System.Net.Http.Headers
         /// <summary>Number of elements stored in the collection.</summary>
         internal int _size;
 
-        public ObjectCollection() { }
+        public ObjectCollection()
+        {
+        }
 
         public int Count => _size;
 
@@ -165,7 +167,9 @@ namespace System.Net.Http.Headers
                 _current = default!;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

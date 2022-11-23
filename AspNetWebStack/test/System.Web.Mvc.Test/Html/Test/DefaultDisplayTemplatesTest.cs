@@ -711,7 +711,9 @@ namespace System.Web.Mvc.Html.Test
             Assert.Equal(String.Empty, result);
         }
 
-        private class MyEntityObject : EntityObject { }
+        private class MyEntityObject : EntityObject
+        {
+        }
 
         // StringTemplate
 

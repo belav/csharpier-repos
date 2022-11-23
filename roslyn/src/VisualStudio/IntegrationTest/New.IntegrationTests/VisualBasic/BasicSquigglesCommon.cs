@@ -13,7 +13,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     public abstract class BasicSquigglesCommon : AbstractEditorTest
     {
         protected BasicSquigglesCommon(string projectTemplate)
-            : base(nameof(BasicSquigglesCommon), projectTemplate) { }
+            : base(nameof(BasicSquigglesCommon), projectTemplate)
+        {
+        }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

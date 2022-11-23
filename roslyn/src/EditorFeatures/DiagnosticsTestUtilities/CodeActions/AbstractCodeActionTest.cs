@@ -297,7 +297,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestPickMembersService() { }
+        public TestPickMembersService()
+        {
+        }
 
 #pragma warning disable RS0034 // Exported parts should be marked with 'ImportingConstructorAttribute'
         public TestPickMembersService(

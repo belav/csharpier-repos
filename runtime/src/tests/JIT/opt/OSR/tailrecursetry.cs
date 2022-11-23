@@ -18,7 +18,9 @@ class TailRecursionWithOsrEntryInTry
                 result += i;
             }
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         if (n <= 0)
             return result;

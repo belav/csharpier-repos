@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.TodoComments
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpTodoCommentServiceFactory() { }
+        public CSharpTodoCommentServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
             new CSharpTodoCommentService();

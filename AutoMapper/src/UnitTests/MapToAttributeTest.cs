@@ -65,7 +65,9 @@ public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinatio
             .Member;
     }
 
-    public void Merge(ISourceToDestinationNameMapper otherNamedMapper) { }
+    public void Merge(ISourceToDestinationNameMapper otherNamedMapper)
+    {
+    }
 
     readonly struct SourceMember
     {

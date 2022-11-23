@@ -53,7 +53,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpProgressionLanguageService() { }
+        public CSharpProgressionLanguageService()
+        {
+        }
 
         public IEnumerable<SyntaxNode> GetTopLevelNodesFromDocument(
             SyntaxNode root,

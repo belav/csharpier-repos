@@ -219,7 +219,9 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 }
             }
 
-            public void PostBackspace() { }
+            public void PostBackspace()
+            {
+            }
 
             public void PreOverType(out bool handledCommand)
             {
@@ -293,7 +295,9 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 }
             }
 
-            public void PostOverType() { }
+            public void PostOverType()
+            {
+            }
 
             public void PreTab(out bool handledCommand)
             {
@@ -363,17 +367,23 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 }
             }
 
-            public void Finish() { }
+            public void Finish()
+            {
+            }
 
             #endregion
 
             #region Unused IBraceCompletionSession Methods
 
-            public void PostTab() { }
+            public void PostTab()
+            {
+            }
 
             public void PreDelete(out bool handledCommand) => handledCommand = false;
 
-            public void PostDelete() { }
+            public void PostDelete()
+            {
+            }
 
             #endregion
 

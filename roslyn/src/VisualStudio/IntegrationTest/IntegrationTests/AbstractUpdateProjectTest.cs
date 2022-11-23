@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.IntegrationTests
     public abstract class AbstractUpdateProjectTest : AbstractIntegrationTest
     {
         protected AbstractUpdateProjectTest(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         protected XElement GetProjectFileElement(ProjectUtils.Project project)
         {

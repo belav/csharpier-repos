@@ -40,9 +40,13 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeCFArrayHandle : SafeHandle
     {
-        public SafeCFArrayHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeCFArrayHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
-        internal SafeCFArrayHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
+        internal SafeCFArrayHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

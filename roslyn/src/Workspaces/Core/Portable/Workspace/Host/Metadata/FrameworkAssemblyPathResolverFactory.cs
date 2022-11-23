@@ -16,14 +16,18 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FrameworkAssemblyPathResolverFactory() { }
+        public FrameworkAssemblyPathResolverFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new Service();
 
         private sealed class Service : IFrameworkAssemblyPathResolver
         {
-            public Service() { }
+            public Service()
+            {
+            }
 
             //public bool CanResolveType(ProjectId projectId, string assemblyName, string fullyQualifiedTypeName)
             //{

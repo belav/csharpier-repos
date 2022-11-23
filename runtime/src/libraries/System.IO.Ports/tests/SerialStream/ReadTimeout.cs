@@ -174,7 +174,9 @@ namespace System.IO.Ports.Tests
                         "Err_1707ahbap!!!: Read did not throw TimeouException when it timed out"
                     );
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 VerifyTimeout(Read_byte_int_int, stream);
             }
@@ -211,7 +213,9 @@ namespace System.IO.Ports.Tests
                         DEFAULT_READ_BYTE_ARRAY_SIZE
                     );
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 TCSupport.WaitForTaskCompletion(t);
 
@@ -273,7 +277,9 @@ namespace System.IO.Ports.Tests
                 {
                     stream.ReadByte();
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 TCSupport.WaitForTaskCompletion(t);
 
@@ -507,7 +513,9 @@ namespace System.IO.Ports.Tests
             {
                 readMethod(stream);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             timer.Stop();
             actualTime = (int)timer.ElapsedMilliseconds;
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
@@ -536,7 +544,9 @@ namespace System.IO.Ports.Tests
                 {
                     readMethod(stream);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
                 timer.Stop();
 
                 actualTime += (int)timer.ElapsedMilliseconds;
@@ -595,7 +605,9 @@ namespace System.IO.Ports.Tests
             {
                 readMethod(stream);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             timer.Stop();
             actualTime = (int)timer.ElapsedMilliseconds;
 
@@ -622,7 +634,9 @@ namespace System.IO.Ports.Tests
                 {
                     readMethod(stream);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
                 timer.Stop();
 
                 actualTime += (int)timer.ElapsedMilliseconds;

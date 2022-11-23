@@ -12,7 +12,9 @@ internal class Test_lifetime2
     public static int aExists;
     public static int bExists;
 
-    private abstract class A { }
+    private abstract class A
+    {
+    }
 
     private class B : A
     {

@@ -533,7 +533,9 @@ public class MiddlewareFilterTest
         }
     }
 
-    private sealed class TestController { }
+    private sealed class TestController
+    {
+    }
 
     private enum TestResourceFilterAction
     {

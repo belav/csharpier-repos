@@ -51,7 +51,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
                     {
                         proc.Kill();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 });
             });
 

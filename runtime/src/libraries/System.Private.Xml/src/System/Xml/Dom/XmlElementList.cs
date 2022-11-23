@@ -350,14 +350,18 @@ namespace System.Xml
 
     internal sealed class XmlEmptyElementListEnumerator : IEnumerator
     {
-        public XmlEmptyElementListEnumerator(XmlElementList list) { }
+        public XmlEmptyElementListEnumerator(XmlElementList list)
+        {
+        }
 
         public bool MoveNext()
         {
             return false;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         public object? Current
         {

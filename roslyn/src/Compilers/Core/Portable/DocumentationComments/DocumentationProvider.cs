@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis
     {
         public static DocumentationProvider Default { get; } = new NullDocumentationProvider();
 
-        protected DocumentationProvider() { }
+        protected DocumentationProvider()
+        {
+        }
 
         /// <summary>
         /// Fetches a documentation comment for the given member ID.

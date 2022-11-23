@@ -3464,7 +3464,9 @@ namespace System.Security.Cryptography.Xml.Tests
                 {
                     listener.Stop();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             static async Task ProcessRequests(

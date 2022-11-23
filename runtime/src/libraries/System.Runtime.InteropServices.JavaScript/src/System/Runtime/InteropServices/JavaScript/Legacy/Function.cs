@@ -21,7 +21,9 @@ namespace System.Runtime.InteropServices.JavaScript
             JSHostImplementation.RegisterCSOwnedObject(this);
         }
 
-        internal Function(IntPtr jsHandle) : base(jsHandle) { }
+        internal Function(IntPtr jsHandle) : base(jsHandle)
+        {
+        }
 
         /// <summary>
         /// The Apply() method calls a function with a given this value, and arguments provided as an array (or an array-like object).

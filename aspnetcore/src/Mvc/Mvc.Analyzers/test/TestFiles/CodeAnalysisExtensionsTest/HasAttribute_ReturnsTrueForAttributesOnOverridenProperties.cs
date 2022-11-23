@@ -2,8 +2,9 @@
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers
 {
-    public class HasAttribute_ReturnsTrueForAttributesOnOverriddenPropertiesAttribute
-        : Attribute { }
+    public class HasAttribute_ReturnsTrueForAttributesOnOverriddenPropertiesAttribute : Attribute
+    {
+    }
 
     public class HasAttribute_ReturnsTrueForAttributesOnOverriddenPropertiesBase
     {

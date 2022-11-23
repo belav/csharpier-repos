@@ -17,7 +17,9 @@ public class C1<T> : I1<T>
         return default(T);
     }
 
-    public void consume(T t) { }
+    public void consume(T t)
+    {
+    }
 }
 
 public class C2<T> : I2<T>
@@ -27,7 +29,9 @@ public class C2<T> : I2<T>
         return default(T);
     }
 
-    public void consume(T t) { }
+    public void consume(T t)
+    {
+    }
 }
 
 public class Test_InterfaceInheritanceTest2

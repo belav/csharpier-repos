@@ -15,7 +15,9 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Initializes a new instance of the <see cref='PrintEventArgs'/> class.
         /// </summary>
-        public PrintEventArgs() { }
+        public PrintEventArgs()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='PrintEventArgs'/> class.

@@ -2,7 +2,9 @@ using System;
 
 public class SerializerItemProxy<TBaseClass, TActualClass> : SerializerProxy<TActualClass>
     where TBaseClass : class
-    where TActualClass : class, TBaseClass { }
+    where TActualClass : class, TBaseClass
+{
+}
 
 public class SerializerProxy<T>
 {
@@ -14,5 +16,7 @@ public class SerializerProxy<T>
 
 class Driver
 {
-    static void Main(string[] args) { }
+    static void Main(string[] args)
+    {
+    }
 }

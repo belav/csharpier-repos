@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     ImmutableArray.Create<MethodSymbol>(
                         context.CreateMethod(t, methodName, syntax, generateMethodBody)
                     )
-            ) { }
+            )
+        {
+        }
 
         internal EENamedTypeSymbol(
             NamespaceSymbol container,

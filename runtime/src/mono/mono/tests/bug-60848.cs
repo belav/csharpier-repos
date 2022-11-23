@@ -58,13 +58,21 @@ public static class Program
 }
 
 [Obsolete(Program.UnicodeHighSurrogate)]
-public class A { }
+public class A
+{
+}
 
 [Obsolete(Program.UnicodeLowSurrogate)]
-public class B { }
+public class B
+{
+}
 
 [Obsolete(Program.UnicodeLowSurrogate + Program.UnicodeHighSurrogate)]
-public class C { }
+public class C
+{
+}
 
 [Obsolete(Program.UnicodeHighSurrogate + Program.UnicodeLowSurrogate)]
-public class D { }
+public class D
+{
+}

@@ -23,12 +23,16 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the last Win32 error
         /// that occurred.
         /// </summary>
-        public Win32Exception() : this(Marshal.GetLastPInvokeError()) { }
+        public Win32Exception() : this(Marshal.GetLastPInvokeError())
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error.
         /// </summary>
-        public Win32Exception(int error) : this(error, Marshal.GetPInvokeErrorMessage(error)) { }
+        public Win32Exception(int error) : this(error, Marshal.GetPInvokeErrorMessage(error))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error and the
@@ -42,7 +46,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message.
         /// </summary>
-        public Win32Exception(string? message) : this(Marshal.GetLastPInvokeError(), message) { }
+        public Win32Exception(string? message) : this(Marshal.GetLastPInvokeError(), message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message and a

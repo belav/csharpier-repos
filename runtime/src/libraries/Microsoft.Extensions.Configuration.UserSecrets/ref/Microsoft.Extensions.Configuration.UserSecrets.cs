@@ -82,7 +82,9 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
 {
     public partial class PathHelper
     {
-        public PathHelper() { }
+        public PathHelper()
+        {
+        }
 
         public static string GetSecretsPathFromSecretsId(string userSecretsId)
         {
@@ -97,7 +99,9 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
     )]
     public partial class UserSecretsIdAttribute : System.Attribute
     {
-        public UserSecretsIdAttribute(string userSecretId) { }
+        public UserSecretsIdAttribute(string userSecretId)
+        {
+        }
 
         public string UserSecretsId
         {

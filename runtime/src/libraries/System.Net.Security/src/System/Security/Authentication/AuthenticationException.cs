@@ -16,17 +16,25 @@ namespace System.Security.Authentication
     )]
     public class AuthenticationException : SystemException
     {
-        public AuthenticationException() { }
+        public AuthenticationException()
+        {
+        }
 
-        public AuthenticationException(string? message) : base(message) { }
+        public AuthenticationException(string? message) : base(message)
+        {
+        }
 
         public AuthenticationException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected AuthenticationException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
     }
 
     /// <summary>
@@ -42,16 +50,24 @@ namespace System.Security.Authentication
     )]
     public class InvalidCredentialException : AuthenticationException
     {
-        public InvalidCredentialException() { }
+        public InvalidCredentialException()
+        {
+        }
 
-        public InvalidCredentialException(string? message) : base(message) { }
+        public InvalidCredentialException(string? message) : base(message)
+        {
+        }
 
         public InvalidCredentialException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected InvalidCredentialException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
     }
 }

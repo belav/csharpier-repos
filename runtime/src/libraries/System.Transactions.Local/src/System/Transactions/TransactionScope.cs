@@ -36,13 +36,19 @@ namespace System.Transactions
     [UnsupportedOSPlatform("browser")]
     public sealed class TransactionScope : IDisposable
     {
-        public TransactionScope() : this(TransactionScopeOption.Required) { }
+        public TransactionScope() : this(TransactionScopeOption.Required)
+        {
+        }
 
         public TransactionScope(TransactionScopeOption scopeOption)
-            : this(scopeOption, TransactionScopeAsyncFlowOption.Suppress) { }
+            : this(scopeOption, TransactionScopeAsyncFlowOption.Suppress)
+        {
+        }
 
         public TransactionScope(TransactionScopeAsyncFlowOption asyncFlowOption)
-            : this(TransactionScopeOption.Required, asyncFlowOption) { }
+            : this(TransactionScopeOption.Required, asyncFlowOption)
+        {
+        }
 
         public TransactionScope(
             TransactionScopeOption scopeOption,
@@ -104,7 +110,9 @@ namespace System.Transactions
         }
 
         public TransactionScope(TransactionScopeOption scopeOption, TimeSpan scopeTimeout)
-            : this(scopeOption, scopeTimeout, TransactionScopeAsyncFlowOption.Suppress) { }
+            : this(scopeOption, scopeTimeout, TransactionScopeAsyncFlowOption.Suppress)
+        {
+        }
 
         public TransactionScope(
             TransactionScopeOption scopeOption,
@@ -182,7 +190,9 @@ namespace System.Transactions
         public TransactionScope(
             TransactionScopeOption scopeOption,
             TransactionOptions transactionOptions
-        ) : this(scopeOption, transactionOptions, TransactionScopeAsyncFlowOption.Suppress) { }
+        ) : this(scopeOption, transactionOptions, TransactionScopeAsyncFlowOption.Suppress)
+        {
+        }
 
         public TransactionScope(
             TransactionScopeOption scopeOption,
@@ -377,7 +387,9 @@ namespace System.Transactions
         }
 
         public TransactionScope(Transaction transactionToUse)
-            : this(transactionToUse, TransactionScopeAsyncFlowOption.Suppress) { }
+            : this(transactionToUse, TransactionScopeAsyncFlowOption.Suppress)
+        {
+        }
 
         public TransactionScope(
             Transaction transactionToUse,
@@ -401,7 +413,9 @@ namespace System.Transactions
         }
 
         public TransactionScope(Transaction transactionToUse, TimeSpan scopeTimeout)
-            : this(transactionToUse, scopeTimeout, TransactionScopeAsyncFlowOption.Suppress) { }
+            : this(transactionToUse, scopeTimeout, TransactionScopeAsyncFlowOption.Suppress)
+        {
+        }
 
         public TransactionScope(
             Transaction transactionToUse,

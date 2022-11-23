@@ -19,7 +19,9 @@ namespace System.Security.Cryptography
         private const int HmacSizeBits = 256;
         private const int HmacSizeBytes = HmacSizeBits / 8;
 
-        public HMACSHA256() : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
+        public HMACSHA256() : this(RandomNumberGenerator.GetBytes(BlockSize))
+        {
+        }
 
         public HMACSHA256(byte[] key)
         {

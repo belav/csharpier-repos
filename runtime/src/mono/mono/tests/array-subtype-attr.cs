@@ -21,12 +21,16 @@ namespace MonoBug
         }
 
         [My("blah", new string[] { "crash" }, "additional parameter")]
-        public void Foo() { }
+        public void Foo()
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.Method)]
     class MyAttribute : Attribute
     {
-        public MyAttribute(params object[] arguments) { }
+        public MyAttribute(params object[] arguments)
+        {
+        }
     }
 }

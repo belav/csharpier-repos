@@ -147,7 +147,9 @@ namespace System.Configuration
                             );
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 if (throwBinaryFormatterDeprecationException)
@@ -215,7 +217,9 @@ namespace System.Configuration
                     {
                         value = TypeUtil.CreateInstance(Property.PropertyType);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
 

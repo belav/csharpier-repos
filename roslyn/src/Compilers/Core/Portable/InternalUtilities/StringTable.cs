@@ -73,7 +73,9 @@ namespace Roslyn.Utilities
         // same as above but for users that go directly with unbuffered shared cache.
         private static int s_sharedRandom = Environment.TickCount;
 
-        internal StringTable() : this(null) { }
+        internal StringTable() : this(null)
+        {
+        }
 
         // implement Poolable object pattern
         #region "Poolable"

@@ -19,7 +19,9 @@ public abstract class LinkParserTestBase
         return services;
     }
 
-    protected virtual void AddAdditionalServices(IServiceCollection services) { }
+    protected virtual void AddAdditionalServices(IServiceCollection services)
+    {
+    }
 
     private protected DefaultLinkParser CreateLinkParser(params Endpoint[] endpoints)
     {

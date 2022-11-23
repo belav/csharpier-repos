@@ -2400,7 +2400,8 @@ namespace Internal.JitInterface
 #pragma warning disable CA1822 // Mark members as static
         private void classMustBeLoadedBeforeCodeIsRun(CORINFO_CLASS_STRUCT_* cls)
 #pragma warning restore CA1822 // Mark members as static
-        { }
+        {
+        }
 
         private void setEHcount(uint cEH)
         {
@@ -2418,7 +2419,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* inlineeHnd
         )
 #pragma warning restore CA1822 // Mark members as static
-        { }
+        {
+        }
 
 #pragma warning disable CA1822 // Mark members as static
         private void reportInliningDecision(
@@ -2428,12 +2430,14 @@ namespace Internal.JitInterface
             byte* reason
         )
 #pragma warning restore CA1822 // Mark members as static
-        { }
+        {
+        }
 
 #pragma warning disable CA1822 // Mark members as static
         private void updateEntryPointForTailCall(ref CORINFO_CONST_LOOKUP entryPoint)
 #pragma warning restore CA1822 // Mark members as static
-        { }
+        {
+        }
 
         private int* getAddrOfCaptureThreadGlobal(ref void* ppIndirection)
         {

@@ -7,5 +7,7 @@ public abstract class TPTManyToManyNoTrackingQueryRelationalTestBase<TFixture>
     : ManyToManyNoTrackingQueryRelationalTestBase<TFixture>
     where TFixture : TPTManyToManyQueryRelationalFixture, new()
 {
-    protected TPTManyToManyNoTrackingQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected TPTManyToManyNoTrackingQueryRelationalTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 }

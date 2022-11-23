@@ -573,7 +573,9 @@ public class RemoteRendererTest
                 logger,
                 CreateJSRuntime(options),
                 new CircuitJSComponentInterop(options)
-            ) { }
+            )
+        {
+        }
 
         public async Task RenderComponentAsync<TComponent>(ParameterView initialParameters)
         {
@@ -600,7 +602,9 @@ public class RemoteRendererTest
             builder.CloseElement();
         };
 
-        public TestComponent() { }
+        public TestComponent()
+        {
+        }
 
         public TestComponent(RenderFragment renderFragment)
         {

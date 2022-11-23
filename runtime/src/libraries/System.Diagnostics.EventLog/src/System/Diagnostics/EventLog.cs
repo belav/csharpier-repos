@@ -30,12 +30,18 @@ namespace System.Diagnostics
 
         private EventLogInternal _underlyingEventLog;
 
-        public EventLog() : this(string.Empty, ".", string.Empty) { }
+        public EventLog() : this(string.Empty, ".", string.Empty)
+        {
+        }
 
-        public EventLog(string logName) : this(logName, ".", string.Empty) { }
+        public EventLog(string logName) : this(logName, ".", string.Empty)
+        {
+        }
 
         public EventLog(string logName, string machineName)
-            : this(logName, machineName, string.Empty) { }
+            : this(logName, machineName, string.Empty)
+        {
+        }
 
         public EventLog(string logName, string machineName, string source)
         {
@@ -458,14 +464,18 @@ namespace System.Diagnostics
                             //most of the time, the "File" key does not exist, but we'll still give it a whirl
                             filename = (string)logKey.GetValue("File");
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                         if (filename != null)
                         {
                             try
                             {
                                 File.Delete(filename);
                             }
-                            catch { }
+                            catch
+                            {
+                            }
                         }
                     }
                     // now delete the registry entry

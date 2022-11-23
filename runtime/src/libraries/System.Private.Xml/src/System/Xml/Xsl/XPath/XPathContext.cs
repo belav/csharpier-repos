@@ -115,7 +115,9 @@ namespace System.Xml.Xsl.XPath
             QilIterator from,
                 to;
 
-            public Replacer(QilFactory f) : base(f) { }
+            public Replacer(QilFactory f) : base(f)
+            {
+            }
 
             public QilNode Replace(QilNode inExpr, QilIterator from, QilIterator to)
             {

@@ -10,7 +10,9 @@ namespace Microsoft.Web.Mvc
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     public sealed class DeserializeAttribute : CustomModelBinderAttribute
     {
-        public DeserializeAttribute() { }
+        public DeserializeAttribute()
+        {
+        }
 
         internal MvcSerializer Serializer { get; set; }
 

@@ -19,7 +19,9 @@ namespace Internal.Runtime
             internal uint _value;
         }
 
-        internal EETypeOptionalFieldsBuilder() { }
+        internal EETypeOptionalFieldsBuilder()
+        {
+        }
 
         internal uint GetFieldValue(EETypeOptionalFieldTag eTag, uint defaultValueIfNotFound)
         {

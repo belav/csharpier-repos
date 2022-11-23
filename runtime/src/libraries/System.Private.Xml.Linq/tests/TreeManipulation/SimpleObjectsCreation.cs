@@ -1563,7 +1563,9 @@ namespace XLinqTests
                 var pi = new XProcessingInstruction(name, "");
                 TestLog.Compare(false, "Should fail; name = " + name);
             }
-            catch (XmlException) { }
+            catch (XmlException)
+            {
+            }
         }
 
         //[Variation(Priority = 2, Desc = "XProcessingInstruction - invalid name (empty string)", Param = "")]
@@ -1583,7 +1585,9 @@ namespace XLinqTests
                 var pi = new XProcessingInstruction(name, "");
                 TestLog.Compare(false, "Should fail; name = " + name);
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "XProcessingInstruction - from reader - target & data", Param = 2)]

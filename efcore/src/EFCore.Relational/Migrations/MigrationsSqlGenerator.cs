@@ -408,7 +408,9 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         AlterDatabaseOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Can be overridden by database providers to build commands for the given <see cref="RenameIndexOperation" />
@@ -472,7 +474,9 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         AlterTableOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Can be overridden by database providers to build commands for the given <see cref="RenameTableOperation" />
@@ -1971,7 +1975,9 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         MigrationOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Returns a SQL fragment for the column list of an index from a <see cref="CreateIndexOperation" />.

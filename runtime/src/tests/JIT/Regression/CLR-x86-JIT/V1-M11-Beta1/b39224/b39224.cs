@@ -10,7 +10,9 @@ namespace Test
     {
         static uint[] m_au = new uint[10];
 
-        static void Method1(uint param1) { }
+        static void Method1(uint param1)
+        {
+        }
 
         static int Main()
         {
@@ -25,11 +27,15 @@ namespace Test
                     {
                         GC.Collect();
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
                 Method1(m_au[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

@@ -34,7 +34,9 @@ public class SqlServerJsonTypeMapping : JsonTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqlServerJsonTypeMapping(string storeType)
-        : base(storeType, typeof(JsonElement), System.Data.DbType.String) { }
+        : base(storeType, typeof(JsonElement), System.Data.DbType.String)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,7 +69,9 @@ public class SqlServerJsonTypeMapping : JsonTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerJsonTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters) { }
+        : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

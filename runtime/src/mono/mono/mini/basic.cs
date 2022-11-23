@@ -35,6 +35,7 @@ class Tests
         return TestDriver.RunTests(typeof(Tests), args);
     }
 #endif
+
     public static int test_0_return()
     {
         return 0;
@@ -839,7 +840,9 @@ class Tests
     public static int test_15_for_loop()
     {
         int i;
-        for (i = 0; i < 15; ++i) { }
+        for (i = 0; i < 15; ++i)
+        {
+        }
         return i;
     }
 
@@ -1142,7 +1145,9 @@ class Tests
         switch (E.A)
         {
             case E.A:
-                if (E.A == E.B) { }
+                if (E.A == E.B)
+                {
+                }
                 break;
         }
         return 2;

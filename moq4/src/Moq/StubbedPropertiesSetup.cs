@@ -74,7 +74,9 @@ namespace Moq
             }
         }
 
-        protected override void VerifySelf() { }
+        protected override void VerifySelf()
+        {
+        }
 
         private sealed class PropertyAccessorExpectation : Expectation
         {

@@ -12,21 +12,27 @@ public abstract class FindSqlServerTest : FindTestBase<FindSqlServerTest.FindSql
 
     public class FindSqlServerTestSet : FindSqlServerTest
     {
-        public FindSqlServerTestSet(FindSqlServerFixture fixture) : base(fixture) { }
+        public FindSqlServerTestSet(FindSqlServerFixture fixture) : base(fixture)
+        {
+        }
 
         protected override TestFinder Finder { get; } = new FindViaSetFinder();
     }
 
     public class FindSqlServerTestContext : FindSqlServerTest
     {
-        public FindSqlServerTestContext(FindSqlServerFixture fixture) : base(fixture) { }
+        public FindSqlServerTestContext(FindSqlServerFixture fixture) : base(fixture)
+        {
+        }
 
         protected override TestFinder Finder { get; } = new FindViaContextFinder();
     }
 
     public class FindSqlServerTestNonGeneric : FindSqlServerTest
     {
-        public FindSqlServerTestNonGeneric(FindSqlServerFixture fixture) : base(fixture) { }
+        public FindSqlServerTestNonGeneric(FindSqlServerFixture fixture) : base(fixture)
+        {
+        }
 
         protected override TestFinder Finder { get; } = new FindViaNonGenericContextFinder();
     }

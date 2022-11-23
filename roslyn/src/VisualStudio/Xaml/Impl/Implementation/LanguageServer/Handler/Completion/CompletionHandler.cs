@@ -42,7 +42,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionHandler() { }
+        public CompletionHandler()
+        {
+        }
 
         public TextDocumentIdentifier GetTextDocumentIdentifier(CompletionParams request) =>
             request.TextDocument;

@@ -26,7 +26,9 @@ namespace System.ComponentModel.Composition
         ///     Initializes a new instance of the <see cref="CompositionException"/> class.
         /// </summary>
         public CompositionException()
-            : this((string?)null, (Exception?)null, (IEnumerable<CompositionError>?)null) { }
+            : this((string?)null, (Exception?)null, (IEnumerable<CompositionError>?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionException"/> class
@@ -38,7 +40,9 @@ namespace System.ComponentModel.Composition
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         public CompositionException(string? message)
-            : this(message, (Exception?)null, (IEnumerable<CompositionError>?)null) { }
+            : this(message, (Exception?)null, (IEnumerable<CompositionError>?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionException"/> class
@@ -56,10 +60,14 @@ namespace System.ComponentModel.Composition
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
         public CompositionException(string? message, Exception? innerException)
-            : this(message, innerException, (IEnumerable<CompositionError>?)null) { }
+            : this(message, innerException, (IEnumerable<CompositionError>?)null)
+        {
+        }
 
         internal CompositionException(CompositionError error)
-            : this(new CompositionError[] { error }) { }
+            : this(new CompositionError[] { error })
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionException"/> class
@@ -75,7 +83,9 @@ namespace System.ComponentModel.Composition
         ///     <paramref name="errors"/> contains an element that is <see langword="null"/>.
         /// </exception>
         public CompositionException(IEnumerable<CompositionError>? errors)
-            : this((string?)null, (Exception?)null, errors) { }
+            : this((string?)null, (Exception?)null, errors)
+        {
+        }
 
         internal CompositionException(
             string? message,

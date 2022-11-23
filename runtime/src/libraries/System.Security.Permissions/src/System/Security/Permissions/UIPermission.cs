@@ -12,13 +12,21 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class UIPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public UIPermission(PermissionState state) { }
+        public UIPermission(PermissionState state)
+        {
+        }
 
-        public UIPermission(UIPermissionClipboard clipboardFlag) { }
+        public UIPermission(UIPermissionClipboard clipboardFlag)
+        {
+        }
 
-        public UIPermission(UIPermissionWindow windowFlag) { }
+        public UIPermission(UIPermissionWindow windowFlag)
+        {
+        }
 
-        public UIPermission(UIPermissionWindow windowFlag, UIPermissionClipboard clipboardFlag) { }
+        public UIPermission(UIPermissionWindow windowFlag, UIPermissionClipboard clipboardFlag)
+        {
+        }
 
         public UIPermissionClipboard Clipboard { get; set; }
         public UIPermissionWindow Window { get; set; }
@@ -28,7 +36,9 @@ namespace System.Security.Permissions
             return this;
         }
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

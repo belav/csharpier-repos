@@ -27,7 +27,9 @@ namespace System.Collections
         private int version; // Do not rename (binary serialization)
         private int count; // Do not rename (binary serialization)
 
-        public ListDictionaryInternal() { }
+        public ListDictionaryInternal()
+        {
+        }
 
         public object? this[object key]
         {

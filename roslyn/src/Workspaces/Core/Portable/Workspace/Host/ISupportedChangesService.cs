@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSupportedChangesServiceFactory() { }
+        public DefaultSupportedChangesServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new DefaultSupportedChangesService(workspaceServices.Workspace);

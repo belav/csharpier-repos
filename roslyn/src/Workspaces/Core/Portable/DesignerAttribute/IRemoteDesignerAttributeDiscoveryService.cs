@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteDesignerAttributeDiscoveryCallbackDispatcher() { }
+        public RemoteDesignerAttributeDiscoveryCallbackDispatcher()
+        {
+        }
 
         private IDesignerAttributeListener GetLogService(RemoteServiceCallbackId callbackId) =>
             (IDesignerAttributeListener)GetCallback(callbackId);

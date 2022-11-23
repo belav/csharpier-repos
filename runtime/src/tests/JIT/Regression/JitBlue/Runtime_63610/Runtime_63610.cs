@@ -12,7 +12,9 @@ public class Runtime_63610
         {
             Callee1(x);
         }
-        catch { }
+        catch
+        {
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -28,7 +30,9 @@ public class Runtime_63610
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Callee3() { }
+    private static void Callee3()
+    {
+    }
 
     public static int Main()
     {

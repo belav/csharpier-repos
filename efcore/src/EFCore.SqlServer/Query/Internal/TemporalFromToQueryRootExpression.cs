@@ -18,7 +18,9 @@ public class TemporalFromToQueryRootExpression : TemporalRangeQueryRootExpressio
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public TemporalFromToQueryRootExpression(IEntityType entityType, DateTime from, DateTime to)
-        : base(entityType, from, to) { }
+        : base(entityType, from, to)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,7 +33,9 @@ public class TemporalFromToQueryRootExpression : TemporalRangeQueryRootExpressio
         IEntityType entityType,
         DateTime from,
         DateTime to
-    ) : base(queryProvider, entityType, from, to) { }
+    ) : base(queryProvider, entityType, from, to)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

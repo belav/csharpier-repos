@@ -707,7 +707,9 @@ namespace System.Net.WebSockets
                 thisPtr._outputStream.SetClosedFlag();
                 thisPtr._context.Abort();
             }
-            catch { }
+            catch
+            {
+            }
 
             thisPtr._readTaskCompletionSource?.TrySetCanceled();
             thisPtr._writeTaskCompletionSource?.TrySetCanceled();

@@ -10,10 +10,14 @@ namespace System.Net.Test.Common
     {
         private const string Description = "Likely external issue with remote server";
 
-        public RemoteServerException() : this(null, null) { }
+        public RemoteServerException() : this(null, null)
+        {
+        }
 
         public RemoteServerException(string server, Exception inner)
-            : base(GetMessage(server), inner) { }
+            : base(GetMessage(server), inner)
+        {
+        }
 
         private static string GetMessage(string server)
         {

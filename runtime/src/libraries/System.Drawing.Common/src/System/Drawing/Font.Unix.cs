@@ -278,7 +278,9 @@ namespace System.Drawing
         }
 
         public Font(FontFamily family, float emSize, GraphicsUnit unit)
-            : this(family, emSize, FontStyle.Regular, unit, DefaultCharSet, false) { }
+            : this(family, emSize, FontStyle.Regular, unit, DefaultCharSet, false)
+        {
+        }
 
         public Font(string familyName, float emSize, GraphicsUnit unit)
             : this(
@@ -288,16 +290,24 @@ namespace System.Drawing
                 unit,
                 DefaultCharSet,
                 false
-            ) { }
+            )
+        {
+        }
 
         public Font(FontFamily family, float emSize)
-            : this(family, emSize, FontStyle.Regular, GraphicsUnit.Point, DefaultCharSet, false) { }
+            : this(family, emSize, FontStyle.Regular, GraphicsUnit.Point, DefaultCharSet, false)
+        {
+        }
 
         public Font(FontFamily family, float emSize, FontStyle style)
-            : this(family, emSize, style, GraphicsUnit.Point, DefaultCharSet, false) { }
+            : this(family, emSize, style, GraphicsUnit.Point, DefaultCharSet, false)
+        {
+        }
 
         public Font(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit)
-            : this(family, emSize, style, unit, DefaultCharSet, false) { }
+            : this(family, emSize, style, unit, DefaultCharSet, false)
+        {
+        }
 
         public Font(
             FontFamily family,
@@ -305,7 +315,9 @@ namespace System.Drawing
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) : this(family, emSize, style, unit, gdiCharSet, false) { }
+        ) : this(family, emSize, style, unit, gdiCharSet, false)
+        {
+        }
 
         public Font(
             FontFamily family,
@@ -333,13 +345,18 @@ namespace System.Drawing
 
         public Font(string familyName, float emSize)
             : this(familyName, emSize, FontStyle.Regular, GraphicsUnit.Point, DefaultCharSet, false)
-        { }
+        {
+        }
 
         public Font(string familyName, float emSize, FontStyle style)
-            : this(familyName, emSize, style, GraphicsUnit.Point, DefaultCharSet, false) { }
+            : this(familyName, emSize, style, GraphicsUnit.Point, DefaultCharSet, false)
+        {
+        }
 
         public Font(string familyName, float emSize, FontStyle style, GraphicsUnit unit)
-            : this(familyName, emSize, style, unit, DefaultCharSet, false) { }
+            : this(familyName, emSize, style, unit, DefaultCharSet, false)
+        {
+        }
 
         public Font(
             string familyName,
@@ -347,7 +364,9 @@ namespace System.Drawing
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) : this(familyName, emSize, style, unit, gdiCharSet, false) { }
+        ) : this(familyName, emSize, style, unit, gdiCharSet, false)
+        {
+        }
 
         public Font(
             string familyName,

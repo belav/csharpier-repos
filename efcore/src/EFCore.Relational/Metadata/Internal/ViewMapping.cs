@@ -18,7 +18,9 @@ public class ViewMapping : TableMappingBase<ViewColumnMapping>, IViewMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public ViewMapping(IEntityType entityType, View view, bool includesDerivedTypes)
-        : base(entityType, view, includesDerivedTypes) { }
+        : base(entityType, view, includesDerivedTypes)
+    {
+    }
 
     /// <inheritdoc />
     public virtual IView View => (IView)base.Table;

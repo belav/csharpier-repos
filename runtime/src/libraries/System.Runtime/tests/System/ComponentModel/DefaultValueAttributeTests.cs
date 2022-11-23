@@ -174,7 +174,9 @@ namespace System.ComponentModel.Tests
 
     public sealed class CustomDefaultValueAttribute : DefaultValueAttribute
     {
-        public CustomDefaultValueAttribute(object value) : base(value) { }
+        public CustomDefaultValueAttribute(object value) : base(value)
+        {
+        }
 
         public new void SetValue(object value) => base.SetValue(value);
     }

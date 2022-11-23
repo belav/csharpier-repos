@@ -57,7 +57,9 @@ namespace System.Linq.Expressions.Interpreter
             public override string InstructionName => "UncheckedConvert";
 
             public Unchecked(TypeCode from, TypeCode to, bool isLiftedToNull)
-                : base(from, to, isLiftedToNull) { }
+                : base(from, to, isLiftedToNull)
+            {
+            }
 
             protected override object Convert(object obj)
             {
@@ -178,7 +180,9 @@ namespace System.Linq.Expressions.Interpreter
             public override string InstructionName => "CheckedConvert";
 
             public Checked(TypeCode from, TypeCode to, bool isLiftedToNull)
-                : base(from, to, isLiftedToNull) { }
+                : base(from, to, isLiftedToNull)
+            {
+            }
 
             protected override object Convert(object obj)
             {
@@ -298,7 +302,9 @@ namespace System.Linq.Expressions.Interpreter
         {
             public override string InstructionName => "ConvertToUnderlying";
 
-            public ToUnderlying(TypeCode to, bool isLiftedToNull) : base(to, to, isLiftedToNull) { }
+            public ToUnderlying(TypeCode to, bool isLiftedToNull) : base(to, to, isLiftedToNull)
+            {
+            }
 
             protected override object Convert(object obj)
             {

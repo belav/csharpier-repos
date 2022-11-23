@@ -18,7 +18,9 @@ namespace System.Xml.Serialization
         private string? _typeName;
         private bool _includeInSchema = true;
 
-        public SoapTypeAttribute() { }
+        public SoapTypeAttribute()
+        {
+        }
 
         public SoapTypeAttribute(string? typeName)
         {

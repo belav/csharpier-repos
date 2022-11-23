@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis
         /// <param name="end">The end line position.</param>
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is null.</exception>
         public FileLinePositionSpan(string path, LinePosition start, LinePosition end)
-            : this(path, new LinePositionSpan(start, end)) { }
+            : this(path, new LinePositionSpan(start, end))
+        {
+        }
 
         /// <summary>
         /// Initializes the <see cref="FileLinePositionSpan"/> instance.

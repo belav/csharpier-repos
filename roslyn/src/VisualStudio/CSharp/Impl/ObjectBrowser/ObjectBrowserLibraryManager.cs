@@ -25,7 +25,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                 serviceProvider,
                 componentModel,
                 workspace
-            ) { }
+            )
+        {
+        }
 
         internal override AbstractDescriptionBuilder CreateDescriptionBuilder(
             IVsObjectBrowserDescription3 description,

@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public StringLiteralBraceMatcher() { }
+        public StringLiteralBraceMatcher()
+        {
+        }
 
         public async Task<BraceMatchingResult?> FindBracesAsync(
             Document document,

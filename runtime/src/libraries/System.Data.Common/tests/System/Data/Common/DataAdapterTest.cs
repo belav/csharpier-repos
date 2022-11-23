@@ -185,5 +185,7 @@ namespace System.Data.Tests.Common
         }
     }
 
-    internal class MyAdapter : DataAdapter { }
+    internal class MyAdapter : DataAdapter
+    {
+    }
 }

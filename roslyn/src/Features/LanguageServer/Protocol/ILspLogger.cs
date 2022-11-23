@@ -20,18 +20,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     {
         public static readonly ILspLogger Instance = new NoOpLspLogger();
 
-        private NoOpLspLogger() { }
+        private NoOpLspLogger()
+        {
+        }
 
-        public void TraceException(Exception exception) { }
+        public void TraceException(Exception exception)
+        {
+        }
 
-        public void TraceInformation(string message) { }
+        public void TraceInformation(string message)
+        {
+        }
 
-        public void TraceWarning(string message) { }
+        public void TraceWarning(string message)
+        {
+        }
 
-        public void TraceError(string message) { }
+        public void TraceError(string message)
+        {
+        }
 
-        public void TraceStart(string message) { }
+        public void TraceStart(string message)
+        {
+        }
 
-        public void TraceStop(string message) { }
+        public void TraceStop(string message)
+        {
+        }
     }
 }

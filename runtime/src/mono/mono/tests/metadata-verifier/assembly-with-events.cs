@@ -19,7 +19,9 @@ public class Class1
     public event Del Evt3;
 }
 
-public class Class2 { }
+public class Class2
+{
+}
 
 public class Class3
 {
@@ -30,5 +32,7 @@ public class Class3
 
 public class Class
 {
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

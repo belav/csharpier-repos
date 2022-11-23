@@ -66,7 +66,9 @@ public class CommandConfigurationTests
 
         public class TimeoutContext : DbContext
         {
-            public TimeoutContext() { }
+            public TimeoutContext()
+            {
+            }
 
             public TimeoutContext(int? commandTimeout)
             {

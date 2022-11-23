@@ -24,7 +24,9 @@ namespace Roslyn.Test.Utilities
 
         public readonly SemaphoreSlim TestSerializationGate = new SemaphoreSlim(1, 1);
 
-        private WpfTestSharedData() { }
+        private WpfTestSharedData()
+        {
+        }
 
         public void ExecutingTest(ITestMethod testMethod)
         {

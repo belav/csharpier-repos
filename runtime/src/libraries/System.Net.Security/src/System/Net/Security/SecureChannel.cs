@@ -249,7 +249,9 @@ namespace System.Net.Security
                     }
                 }
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Log.NotFoundCertInStore(instance);
@@ -273,8 +275,12 @@ namespace System.Net.Security
                     certificateEx = new X509Certificate2(certificate);
                 }
             }
-            catch (SecurityException) { }
-            catch (CryptographicException) { }
+            catch (SecurityException)
+            {
+            }
+            catch (CryptographicException)
+            {
+            }
 
             return certificateEx;
         }

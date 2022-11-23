@@ -54,7 +54,9 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
                 dbType
             ),
             sqlDbType
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

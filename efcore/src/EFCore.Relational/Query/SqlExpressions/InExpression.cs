@@ -28,7 +28,9 @@ public class InExpression : SqlExpression
         SelectExpression subquery,
         bool negated,
         RelationalTypeMapping typeMapping
-    ) : this(item, null, subquery, negated, typeMapping) { }
+    ) : this(item, null, subquery, negated, typeMapping)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN values expression.
@@ -42,7 +44,9 @@ public class InExpression : SqlExpression
         SqlExpression values,
         bool negated,
         RelationalTypeMapping typeMapping
-    ) : this(item, values, null, negated, typeMapping) { }
+    ) : this(item, values, null, negated, typeMapping)
+    {
+    }
 
     private InExpression(
         SqlExpression item,

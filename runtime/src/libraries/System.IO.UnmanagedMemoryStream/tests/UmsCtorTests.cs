@@ -163,17 +163,23 @@ namespace System.IO.Tests
     // Derived class used to exercise protected members and to test behaviors before and after initialization
     internal sealed unsafe class DerivedUnmanagedMemoryStream : UnmanagedMemoryStream
     {
-        internal DerivedUnmanagedMemoryStream() { }
+        internal DerivedUnmanagedMemoryStream()
+        {
+        }
 
         internal DerivedUnmanagedMemoryStream(SafeBuffer buffer, long length, FileAccess access)
-            : base(buffer, 0, length, access) { }
+            : base(buffer, 0, length, access)
+        {
+        }
 
         internal DerivedUnmanagedMemoryStream(
             byte* pointer,
             long length,
             long capacity,
             FileAccess access
-        ) : base(pointer, length, capacity, access) { }
+        ) : base(pointer, length, capacity, access)
+        {
+        }
 
         internal new void Initialize(
             byte* pointer,

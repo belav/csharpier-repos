@@ -15,12 +15,16 @@ namespace Test
 
         public static int Main1()
         {
-            while (TRUE()) { }
+            while (TRUE())
+            {
+            }
             try
             {
                 return 109;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 103;
         }
 

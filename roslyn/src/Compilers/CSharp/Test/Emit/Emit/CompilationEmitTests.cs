@@ -719,7 +719,9 @@ public class C
 
         private class TestResourceSectionBuilder : ResourceSectionBuilder
         {
-            public TestResourceSectionBuilder() { }
+            public TestResourceSectionBuilder()
+            {
+            }
 
             protected override void Serialize(BlobBuilder builder, SectionLocation location)
             {
@@ -738,7 +740,9 @@ public class C
                 MetadataRootBuilder metadataRootBuilder,
                 BlobBuilder ilStream,
                 ResourceSectionBuilder nativeResources
-            ) : base(header, metadataRootBuilder, ilStream, nativeResources: nativeResources) { }
+            ) : base(header, metadataRootBuilder, ilStream, nativeResources: nativeResources)
+            {
+            }
 
             protected override ImmutableArray<Section> CreateSections()
             {

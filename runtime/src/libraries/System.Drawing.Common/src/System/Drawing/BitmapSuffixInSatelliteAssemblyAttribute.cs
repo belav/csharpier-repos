@@ -8,5 +8,7 @@ namespace System.Drawing
     /// i.e. System.Web.dll -> System.Web.VisualStudio.11.0.dll
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
-    public class BitmapSuffixInSatelliteAssemblyAttribute : Attribute { }
+    public class BitmapSuffixInSatelliteAssemblyAttribute : Attribute
+    {
+    }
 }

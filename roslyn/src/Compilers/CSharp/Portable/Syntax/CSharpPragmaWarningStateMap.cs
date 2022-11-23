@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
     internal class CSharpPragmaWarningStateMap : AbstractWarningStateMap<PragmaWarningState>
     {
-        public CSharpPragmaWarningStateMap(SyntaxTree syntaxTree) : base(syntaxTree) { }
+        public CSharpPragmaWarningStateMap(SyntaxTree syntaxTree) : base(syntaxTree)
+        {
+        }
 
         protected override WarningStateMapEntry[] CreateWarningStateMapEntries(
             SyntaxTree syntaxTree

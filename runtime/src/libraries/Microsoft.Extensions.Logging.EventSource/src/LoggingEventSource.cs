@@ -123,7 +123,9 @@ namespace Microsoft.Extensions.Logging.EventSource
         private const string WriteEventDynamicDependencySuppressionJustification =
             "DynamicDependency attribute will ensure that the required properties are not trimmed.";
 
-        private LoggingEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+        private LoggingEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat)
+        {
+        }
 
         /// <summary>
         /// FormattedMessage() is called when ILogger.Log() is called. and the FormattedMessage keyword is active

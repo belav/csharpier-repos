@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         private readonly EmbeddedLanguageDetector _detector =
             new(CSharpEmbeddedLanguagesProvider.Info, ImmutableArray.Create("Route"));
 
-        private AspNetCoreCSharpRouteSyntaxDetector() { }
+        private AspNetCoreCSharpRouteSyntaxDetector()
+        {
+        }
 
         public bool IsEmbeddedLanguageToken(
             SyntaxToken token,

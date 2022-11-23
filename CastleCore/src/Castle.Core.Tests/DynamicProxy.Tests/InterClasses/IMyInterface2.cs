@@ -61,7 +61,9 @@ namespace Castle.DynamicProxy.Tests.InterClasses
         }
     }
 
-    public class MyInterfaceImplX : MyInterfaceImpl { }
+    public class MyInterfaceImplX : MyInterfaceImpl
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Method)]
     public class MyAttribute : Attribute

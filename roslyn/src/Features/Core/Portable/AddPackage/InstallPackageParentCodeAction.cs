@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.AddPackage
                     document
                 ),
                 isInlinable: false
-            ) { }
+            )
+        {
+        }
 
         private static ImmutableArray<CodeAction> CreateNestedActions(
             IPackageInstallerService installerService,

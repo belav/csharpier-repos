@@ -14,7 +14,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             public RemoveAnalyzerConfigDocumentUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 DocumentId documentId
-            ) : base(workspace, documentId) { }
+            ) : base(workspace, documentId)
+            {
+            }
 
             protected override IReadOnlyList<DocumentId> GetDocumentIds(Project fromProject) =>
                 fromProject.State.AnalyzerConfigDocumentStates.Ids;

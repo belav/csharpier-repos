@@ -424,7 +424,9 @@ namespace System.Net
             return System.Text.Encoding.ASCII.GetBytes(tempString);
         }
 
-        public WebHeaderCollection() { }
+        public WebHeaderCollection()
+        {
+        }
 
         public override int Count
         {

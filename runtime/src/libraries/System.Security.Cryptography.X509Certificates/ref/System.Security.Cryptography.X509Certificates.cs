@@ -9,9 +9,13 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeX509ChainHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeX509ChainHandle() : base(default(bool)) { }
+        public SafeX509ChainHandle() : base(default(bool))
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {
@@ -28,33 +32,43 @@ namespace System.Security.Cryptography.X509Certificates
             System.Security.Cryptography.X509Certificates.X500DistinguishedName subjectName,
             System.Security.Cryptography.ECDsa key,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
         public CertificateRequest(
             System.Security.Cryptography.X509Certificates.X500DistinguishedName subjectName,
             System.Security.Cryptography.RSA key,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) { }
+        )
+        {
+        }
 
         public CertificateRequest(
             System.Security.Cryptography.X509Certificates.X500DistinguishedName subjectName,
             System.Security.Cryptography.X509Certificates.PublicKey publicKey,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
         public CertificateRequest(
             string subjectName,
             System.Security.Cryptography.ECDsa key,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
         public CertificateRequest(
             string subjectName,
             System.Security.Cryptography.RSA key,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.ObjectModel.Collection<System.Security.Cryptography.X509Certificates.X509Extension> CertificateExtensions
         {
@@ -200,13 +214,17 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class PublicKey
     {
-        public PublicKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public PublicKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
 
         public PublicKey(
             System.Security.Cryptography.Oid oid,
             System.Security.Cryptography.AsnEncodedData parameters,
             System.Security.Cryptography.AsnEncodedData keyValue
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.AsnEncodedData EncodedKeyValue
         {
@@ -320,17 +338,29 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class SubjectAlternativeNameBuilder
     {
-        public SubjectAlternativeNameBuilder() { }
+        public SubjectAlternativeNameBuilder()
+        {
+        }
 
-        public void AddDnsName(string dnsName) { }
+        public void AddDnsName(string dnsName)
+        {
+        }
 
-        public void AddEmailAddress(string emailAddress) { }
+        public void AddEmailAddress(string emailAddress)
+        {
+        }
 
-        public void AddIpAddress(System.Net.IPAddress ipAddress) { }
+        public void AddIpAddress(System.Net.IPAddress ipAddress)
+        {
+        }
 
-        public void AddUri(System.Uri uri) { }
+        public void AddUri(System.Uri uri)
+        {
+        }
 
-        public void AddUserPrincipalName(string upn) { }
+        public void AddUserPrincipalName(string upn)
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Extension Build(
             bool critical = false
@@ -342,24 +372,36 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class X500DistinguishedName : System.Security.Cryptography.AsnEncodedData
     {
-        public X500DistinguishedName(byte[] encodedDistinguishedName) { }
+        public X500DistinguishedName(byte[] encodedDistinguishedName)
+        {
+        }
 
-        public X500DistinguishedName(System.ReadOnlySpan<byte> encodedDistinguishedName) { }
+        public X500DistinguishedName(System.ReadOnlySpan<byte> encodedDistinguishedName)
+        {
+        }
 
         public X500DistinguishedName(
             System.Security.Cryptography.AsnEncodedData encodedDistinguishedName
-        ) { }
+        )
+        {
+        }
 
         public X500DistinguishedName(
             System.Security.Cryptography.X509Certificates.X500DistinguishedName distinguishedName
-        ) { }
+        )
+        {
+        }
 
-        public X500DistinguishedName(string distinguishedName) { }
+        public X500DistinguishedName(string distinguishedName)
+        {
+        }
 
         public X500DistinguishedName(
             string distinguishedName,
             System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags flag
-        ) { }
+        )
+        {
+        }
 
         public string Name
         {
@@ -397,19 +439,25 @@ namespace System.Security.Cryptography.X509Certificates
     public sealed partial class X509BasicConstraintsExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
-        public X509BasicConstraintsExtension() { }
+        public X509BasicConstraintsExtension()
+        {
+        }
 
         public X509BasicConstraintsExtension(
             bool certificateAuthority,
             bool hasPathLengthConstraint,
             int pathLengthConstraint,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public X509BasicConstraintsExtension(
             System.Security.Cryptography.AsnEncodedData encodedBasicConstraints,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public bool CertificateAuthority
         {
@@ -424,9 +472,9 @@ namespace System.Security.Cryptography.X509Certificates
             get { throw null; }
         }
 
-        public override void CopyFrom(
-            System.Security.Cryptography.AsnEncodedData asnEncodedData
-        ) { }
+        public override void CopyFrom(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
     }
 
     public partial class X509Certificate
@@ -439,57 +487,84 @@ namespace System.Security.Cryptography.X509Certificates
             DiagnosticId = "SYSLIB0026",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public X509Certificate() { }
+        public X509Certificate()
+        {
+        }
 
-        public X509Certificate(byte[] data) { }
+        public X509Certificate(byte[] data)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public X509Certificate(byte[] rawData, System.Security.SecureString? password) { }
+        public X509Certificate(byte[] rawData, System.Security.SecureString? password)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate(
             byte[] rawData,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public X509Certificate(byte[] rawData, string? password) { }
+        public X509Certificate(byte[] rawData, string? password)
+        {
+        }
 
         public X509Certificate(
             byte[] rawData,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public X509Certificate(System.IntPtr handle) { }
+        public X509Certificate(System.IntPtr handle)
+        {
+        }
 
         public X509Certificate(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public X509Certificate(System.Security.Cryptography.X509Certificates.X509Certificate cert)
-        { }
+        {
+        }
 
-        public X509Certificate(string fileName) { }
+        public X509Certificate(string fileName)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public X509Certificate(string fileName, System.Security.SecureString? password) { }
+        public X509Certificate(string fileName, System.Security.SecureString? password)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate(
             string fileName,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public X509Certificate(string fileName, string? password) { }
+        public X509Certificate(string fileName, string? password)
+        {
+        }
 
         public X509Certificate(
             string fileName,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         public System.IntPtr Handle
         {
@@ -518,9 +593,13 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
@@ -676,7 +755,9 @@ namespace System.Security.Cryptography.X509Certificates
             DiagnosticId = "SYSLIB0026",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public virtual void Import(byte[] rawData) { }
+        public virtual void Import(byte[] rawData)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
@@ -688,7 +769,9 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "X509Certificate and X509Certificate2 are immutable. Use the appropriate constructor to create a new certificate.",
@@ -699,14 +782,18 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "X509Certificate and X509Certificate2 are immutable. Use the appropriate constructor to create a new certificate.",
             DiagnosticId = "SYSLIB0026",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public virtual void Import(string fileName) { }
+        public virtual void Import(string fileName)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
@@ -718,7 +805,9 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "X509Certificate and X509Certificate2 are immutable. Use the appropriate constructor to create a new certificate.",
@@ -729,18 +818,24 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public virtual void Reset() { }
+        public virtual void Reset()
+        {
+        }
 
-        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
-            object? sender
-        ) { }
+        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object? sender)
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -770,80 +865,116 @@ namespace System.Security.Cryptography.X509Certificates
             DiagnosticId = "SYSLIB0026",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public X509Certificate2() { }
+        public X509Certificate2()
+        {
+        }
 
-        public X509Certificate2(byte[] rawData) { }
+        public X509Certificate2(byte[] rawData)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public X509Certificate2(byte[] rawData, System.Security.SecureString? password) { }
+        public X509Certificate2(byte[] rawData, System.Security.SecureString? password)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate2(
             byte[] rawData,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public X509Certificate2(byte[] rawData, string? password) { }
+        public X509Certificate2(byte[] rawData, string? password)
+        {
+        }
 
         public X509Certificate2(
             byte[] rawData,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public X509Certificate2(System.IntPtr handle) { }
+        public X509Certificate2(System.IntPtr handle)
+        {
+        }
 
-        public X509Certificate2(System.ReadOnlySpan<byte> rawData) { }
+        public X509Certificate2(System.ReadOnlySpan<byte> rawData)
+        {
+        }
 
         public X509Certificate2(
             System.ReadOnlySpan<byte> rawData,
             System.ReadOnlySpan<char> password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags =
                 System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.DefaultKeySet
-        ) { }
+        )
+        {
+        }
 
         protected X509Certificate2(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public X509Certificate2(
             System.Security.Cryptography.X509Certificates.X509Certificate certificate
-        ) { }
+        )
+        {
+        }
 
-        public X509Certificate2(string fileName) { }
+        public X509Certificate2(string fileName)
+        {
+        }
 
         public X509Certificate2(
             string fileName,
             System.ReadOnlySpan<char> password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags =
                 System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.DefaultKeySet
-        ) { }
+        )
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public X509Certificate2(string fileName, System.Security.SecureString? password) { }
+        public X509Certificate2(string fileName, System.Security.SecureString? password)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate2(
             string fileName,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public X509Certificate2(string fileName, string? password) { }
+        public X509Certificate2(string fileName, string? password)
+        {
+        }
 
         public X509Certificate2(
             string fileName,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         public bool Archived
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509ExtensionCollection Extensions
         {
@@ -853,7 +984,9 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
         public bool HasPrivateKey
         {
@@ -880,7 +1013,9 @@ namespace System.Security.Cryptography.X509Certificates
         public System.Security.Cryptography.AsymmetricAlgorithm? PrivateKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.PublicKey PublicKey
         {
@@ -1012,7 +1147,9 @@ namespace System.Security.Cryptography.X509Certificates
             DiagnosticId = "SYSLIB0026",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public override void Import(byte[] rawData) { }
+        public override void Import(byte[] rawData)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
@@ -1024,7 +1161,9 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "X509Certificate and X509Certificate2 are immutable. Use the appropriate constructor to create a new certificate.",
@@ -1035,14 +1174,18 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "X509Certificate and X509Certificate2 are immutable. Use the appropriate constructor to create a new certificate.",
             DiagnosticId = "SYSLIB0026",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public override void Import(string fileName) { }
+        public override void Import(string fileName)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
@@ -1054,7 +1197,9 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             System.Security.SecureString? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "X509Certificate and X509Certificate2 are immutable. Use the appropriate constructor to create a new certificate.",
@@ -1065,9 +1210,13 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags
-        ) { }
+        )
+        {
+        }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
 
         public override string ToString()
         {
@@ -1095,24 +1244,34 @@ namespace System.Security.Cryptography.X509Certificates
             System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Certificate2>,
             System.Collections.IEnumerable
     {
-        public X509Certificate2Collection() { }
+        public X509Certificate2Collection()
+        {
+        }
 
         public X509Certificate2Collection(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        )
+        {
+        }
 
         public X509Certificate2Collection(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates
-        ) { }
+        )
+        {
+        }
 
         public X509Certificate2Collection(
             System.Security.Cryptography.X509Certificates.X509Certificate2[] certificates
-        ) { }
+        )
+        {
+        }
 
         public new System.Security.Cryptography.X509Certificates.X509Certificate2 this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Security.Cryptography.X509Certificates.X509Certificate2 certificate)
@@ -1122,11 +1281,15 @@ namespace System.Security.Cryptography.X509Certificates
 
         public void AddRange(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates
-        ) { }
+        )
+        {
+        }
 
         public void AddRange(
             System.Security.Cryptography.X509Certificates.X509Certificate2[] certificates
-        ) { }
+        )
+        {
+        }
 
         public bool Contains(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
@@ -1176,67 +1339,95 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        public void Import(byte[] rawData) { }
+        public void Import(byte[] rawData)
+        {
+        }
 
         public void Import(
             byte[] rawData,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags =
                 System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.DefaultKeySet
-        ) { }
+        )
+        {
+        }
 
-        public void Import(System.ReadOnlySpan<byte> rawData) { }
+        public void Import(System.ReadOnlySpan<byte> rawData)
+        {
+        }
 
         public void Import(
             System.ReadOnlySpan<byte> rawData,
             System.ReadOnlySpan<char> password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags =
                 System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.DefaultKeySet
-        ) { }
+        )
+        {
+        }
 
         public void Import(
             System.ReadOnlySpan<byte> rawData,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags =
                 System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.DefaultKeySet
-        ) { }
+        )
+        {
+        }
 
-        public void Import(string fileName) { }
+        public void Import(string fileName)
+        {
+        }
 
         public void Import(
             string fileName,
             System.ReadOnlySpan<char> password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags =
                 System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.DefaultKeySet
-        ) { }
+        )
+        {
+        }
 
         public void Import(
             string fileName,
             string? password,
             System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags =
                 System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.DefaultKeySet
-        ) { }
+        )
+        {
+        }
 
-        public void ImportFromPem(System.ReadOnlySpan<char> certPem) { }
+        public void ImportFromPem(System.ReadOnlySpan<char> certPem)
+        {
+        }
 
-        public void ImportFromPemFile(string certPemFilePath) { }
+        public void ImportFromPemFile(string certPemFilePath)
+        {
+        }
 
         public void Insert(
             int index,
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        )
+        {
+        }
 
         public void Remove(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        )
+        {
+        }
 
         public void RemoveRange(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates
-        ) { }
+        )
+        {
+        }
 
         public void RemoveRange(
             System.Security.Cryptography.X509Certificates.X509Certificate2[] certificates
-        ) { }
+        )
+        {
+        }
 
         System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509Certificate2> System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Certificate2>.GetEnumerator()
         {
@@ -1261,7 +1452,9 @@ namespace System.Security.Cryptography.X509Certificates
             System.Collections.IEnumerator,
             System.IDisposable
     {
-        internal X509Certificate2Enumerator() { }
+        internal X509Certificate2Enumerator()
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Certificate2 Current
         {
@@ -1277,34 +1470,48 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         bool System.Collections.IEnumerator.MoveNext()
         {
             throw null;
         }
 
-        void System.Collections.IEnumerator.Reset() { }
+        void System.Collections.IEnumerator.Reset()
+        {
+        }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 
     public partial class X509CertificateCollection : System.Collections.CollectionBase
     {
-        public X509CertificateCollection() { }
+        public X509CertificateCollection()
+        {
+        }
 
         public X509CertificateCollection(
             System.Security.Cryptography.X509Certificates.X509CertificateCollection value
-        ) { }
+        )
+        {
+        }
 
         public X509CertificateCollection(
             System.Security.Cryptography.X509Certificates.X509Certificate[] value
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Certificate this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Security.Cryptography.X509Certificates.X509Certificate value)
@@ -1314,11 +1521,13 @@ namespace System.Security.Cryptography.X509Certificates
 
         public void AddRange(
             System.Security.Cryptography.X509Certificates.X509CertificateCollection value
-        ) { }
+        )
+        {
+        }
 
-        public void AddRange(
-            System.Security.Cryptography.X509Certificates.X509Certificate[] value
-        ) { }
+        public void AddRange(System.Security.Cryptography.X509Certificates.X509Certificate[] value)
+        {
+        }
 
         public bool Contains(System.Security.Cryptography.X509Certificates.X509Certificate value)
         {
@@ -1328,7 +1537,9 @@ namespace System.Security.Cryptography.X509Certificates
         public void CopyTo(
             System.Security.Cryptography.X509Certificates.X509Certificate[] array,
             int index
-        ) { }
+        )
+        {
+        }
 
         public new System.Security.Cryptography.X509Certificates.X509CertificateCollection.X509CertificateEnumerator GetEnumerator()
         {
@@ -1348,17 +1559,25 @@ namespace System.Security.Cryptography.X509Certificates
         public void Insert(
             int index,
             System.Security.Cryptography.X509Certificates.X509Certificate value
-        ) { }
+        )
+        {
+        }
 
-        protected override void OnValidate(object value) { }
+        protected override void OnValidate(object value)
+        {
+        }
 
-        public void Remove(System.Security.Cryptography.X509Certificates.X509Certificate value) { }
+        public void Remove(System.Security.Cryptography.X509Certificates.X509Certificate value)
+        {
+        }
 
         public partial class X509CertificateEnumerator : System.Collections.IEnumerator
         {
             public X509CertificateEnumerator(
                 System.Security.Cryptography.X509Certificates.X509CertificateCollection mappings
-            ) { }
+            )
+            {
+            }
 
             public System.Security.Cryptography.X509Certificates.X509Certificate Current
             {
@@ -1374,25 +1593,35 @@ namespace System.Security.Cryptography.X509Certificates
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
             bool System.Collections.IEnumerator.MoveNext()
             {
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
         }
     }
 
     public partial class X509Chain : System.IDisposable
     {
-        public X509Chain() { }
+        public X509Chain()
+        {
+        }
 
-        public X509Chain(bool useMachineContext) { }
+        public X509Chain(bool useMachineContext)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public X509Chain(System.IntPtr chainContext) { }
+        public X509Chain(System.IntPtr chainContext)
+        {
+        }
 
         public System.IntPtr ChainContext
         {
@@ -1405,7 +1634,9 @@ namespace System.Security.Cryptography.X509Certificates
         public System.Security.Cryptography.X509Certificates.X509ChainPolicy ChainPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509ChainStatus[] ChainStatus
         {
@@ -1428,16 +1659,24 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     public partial class X509ChainElement
     {
-        internal X509ChainElement() { }
+        internal X509ChainElement()
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Certificate2 Certificate
         {
@@ -1458,7 +1697,9 @@ namespace System.Security.Cryptography.X509Certificates
             System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal X509ChainElementCollection() { }
+        internal X509ChainElementCollection()
+        {
+        }
 
         public int Count
         {
@@ -1480,7 +1721,9 @@ namespace System.Security.Cryptography.X509Certificates
         public void CopyTo(
             System.Security.Cryptography.X509Certificates.X509ChainElement[] array,
             int index
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator GetEnumerator()
         {
@@ -1492,7 +1735,9 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1505,7 +1750,9 @@ namespace System.Security.Cryptography.X509Certificates
             System.Collections.IEnumerator,
             System.IDisposable
     {
-        internal X509ChainElementEnumerator() { }
+        internal X509ChainElementEnumerator()
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509ChainElement Current
         {
@@ -1521,14 +1768,20 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 
     public sealed partial class X509ChainPolicy
     {
-        public X509ChainPolicy() { }
+        public X509ChainPolicy()
+        {
+        }
 
         public System.Security.Cryptography.OidCollection ApplicationPolicy
         {
@@ -1545,7 +1798,9 @@ namespace System.Security.Cryptography.X509Certificates
         public bool DisableCertificateDownloads
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2Collection ExtraStore
         {
@@ -1554,35 +1809,49 @@ namespace System.Security.Cryptography.X509Certificates
         public System.Security.Cryptography.X509Certificates.X509RevocationFlag RevocationFlag
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509RevocationMode RevocationMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509ChainTrustMode TrustMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan UrlRetrievalTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509VerificationFlags VerificationFlags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime VerificationTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     public partial struct X509ChainStatus
@@ -1592,14 +1861,18 @@ namespace System.Security.Cryptography.X509Certificates
         public System.Security.Cryptography.X509Certificates.X509ChainStatusFlags Status
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string StatusInformation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1655,59 +1928,78 @@ namespace System.Security.Cryptography.X509Certificates
     public sealed partial class X509EnhancedKeyUsageExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
-        public X509EnhancedKeyUsageExtension() { }
+        public X509EnhancedKeyUsageExtension()
+        {
+        }
 
         public X509EnhancedKeyUsageExtension(
             System.Security.Cryptography.AsnEncodedData encodedEnhancedKeyUsages,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public X509EnhancedKeyUsageExtension(
             System.Security.Cryptography.OidCollection enhancedKeyUsages,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.OidCollection EnhancedKeyUsages
         {
             get { throw null; }
         }
 
-        public override void CopyFrom(
-            System.Security.Cryptography.AsnEncodedData asnEncodedData
-        ) { }
+        public override void CopyFrom(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
     }
 
     public partial class X509Extension : System.Security.Cryptography.AsnEncodedData
     {
-        protected X509Extension() { }
+        protected X509Extension()
+        {
+        }
 
         public X509Extension(
             System.Security.Cryptography.AsnEncodedData encodedExtension,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public X509Extension(System.Security.Cryptography.Oid oid, byte[] rawData, bool critical)
-        { }
+        {
+        }
 
         public X509Extension(
             System.Security.Cryptography.Oid oid,
             System.ReadOnlySpan<byte> rawData,
             bool critical
-        ) { }
+        )
+        {
+        }
 
-        public X509Extension(string oid, byte[] rawData, bool critical) { }
+        public X509Extension(string oid, byte[] rawData, bool critical)
+        {
+        }
 
-        public X509Extension(string oid, System.ReadOnlySpan<byte> rawData, bool critical) { }
+        public X509Extension(string oid, System.ReadOnlySpan<byte> rawData, bool critical)
+        {
+        }
 
         public bool Critical
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void CopyFrom(
-            System.Security.Cryptography.AsnEncodedData asnEncodedData
-        ) { }
+        public override void CopyFrom(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
     }
 
     public sealed partial class X509ExtensionCollection
@@ -1715,7 +2007,9 @@ namespace System.Security.Cryptography.X509Certificates
             System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        public X509ExtensionCollection() { }
+        public X509ExtensionCollection()
+        {
+        }
 
         public int Count
         {
@@ -1746,7 +2040,9 @@ namespace System.Security.Cryptography.X509Certificates
         public void CopyTo(
             System.Security.Cryptography.X509Certificates.X509Extension[] array,
             int index
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator GetEnumerator()
         {
@@ -1758,7 +2054,9 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1771,7 +2069,9 @@ namespace System.Security.Cryptography.X509Certificates
             System.Collections.IEnumerator,
             System.IDisposable
     {
-        internal X509ExtensionEnumerator() { }
+        internal X509ExtensionEnumerator()
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Extension Current
         {
@@ -1787,9 +2087,13 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 
     public enum X509FindType
@@ -1834,26 +2138,32 @@ namespace System.Security.Cryptography.X509Certificates
     public sealed partial class X509KeyUsageExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
-        public X509KeyUsageExtension() { }
+        public X509KeyUsageExtension()
+        {
+        }
 
         public X509KeyUsageExtension(
             System.Security.Cryptography.AsnEncodedData encodedKeyUsage,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public X509KeyUsageExtension(
             System.Security.Cryptography.X509Certificates.X509KeyUsageFlags keyUsages,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509KeyUsageFlags KeyUsages
         {
             get { throw null; }
         }
 
-        public override void CopyFrom(
-            System.Security.Cryptography.AsnEncodedData asnEncodedData
-        ) { }
+        public override void CopyFrom(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -1897,7 +2207,9 @@ namespace System.Security.Cryptography.X509Certificates
 
     public abstract partial class X509SignatureGenerator
     {
-        protected X509SignatureGenerator() { }
+        protected X509SignatureGenerator()
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.PublicKey PublicKey
         {
@@ -1931,38 +2243,55 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class X509Store : System.IDisposable
     {
-        public X509Store() { }
+        public X509Store()
+        {
+        }
 
-        public X509Store(System.IntPtr storeHandle) { }
+        public X509Store(System.IntPtr storeHandle)
+        {
+        }
 
         public X509Store(System.Security.Cryptography.X509Certificates.StoreLocation storeLocation)
-        { }
+        {
+        }
 
-        public X509Store(System.Security.Cryptography.X509Certificates.StoreName storeName) { }
+        public X509Store(System.Security.Cryptography.X509Certificates.StoreName storeName)
+        {
+        }
 
         public X509Store(
             System.Security.Cryptography.X509Certificates.StoreName storeName,
             System.Security.Cryptography.X509Certificates.StoreLocation storeLocation
-        ) { }
+        )
+        {
+        }
 
         public X509Store(
             System.Security.Cryptography.X509Certificates.StoreName storeName,
             System.Security.Cryptography.X509Certificates.StoreLocation storeLocation,
             System.Security.Cryptography.X509Certificates.OpenFlags flags
-        ) { }
+        )
+        {
+        }
 
-        public X509Store(string storeName) { }
+        public X509Store(string storeName)
+        {
+        }
 
         public X509Store(
             string storeName,
             System.Security.Cryptography.X509Certificates.StoreLocation storeLocation
-        ) { }
+        )
+        {
+        }
 
         public X509Store(
             string storeName,
             System.Security.Cryptography.X509Certificates.StoreLocation storeLocation,
             System.Security.Cryptography.X509Certificates.OpenFlags flags
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509Certificate2Collection Certificates
         {
@@ -1985,67 +2314,93 @@ namespace System.Security.Cryptography.X509Certificates
             get { throw null; }
         }
 
-        public void Add(
-            System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        public void Add(System.Security.Cryptography.X509Certificates.X509Certificate2 certificate)
+        {
+        }
 
         public void AddRange(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates
-        ) { }
+        )
+        {
+        }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void Open(System.Security.Cryptography.X509Certificates.OpenFlags flags) { }
+        public void Open(System.Security.Cryptography.X509Certificates.OpenFlags flags)
+        {
+        }
 
         public void Remove(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        )
+        {
+        }
 
         public void RemoveRange(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class X509SubjectKeyIdentifierExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
-        public X509SubjectKeyIdentifierExtension() { }
+        public X509SubjectKeyIdentifierExtension()
+        {
+        }
 
-        public X509SubjectKeyIdentifierExtension(byte[] subjectKeyIdentifier, bool critical) { }
+        public X509SubjectKeyIdentifierExtension(byte[] subjectKeyIdentifier, bool critical)
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(
             System.ReadOnlySpan<byte> subjectKeyIdentifier,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(
             System.Security.Cryptography.AsnEncodedData encodedSubjectKeyIdentifier,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(
             System.Security.Cryptography.X509Certificates.PublicKey key,
             bool critical
-        ) { }
+        )
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(
             System.Security.Cryptography.X509Certificates.PublicKey key,
             System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm algorithm,
             bool critical
-        ) { }
+        )
+        {
+        }
 
-        public X509SubjectKeyIdentifierExtension(string subjectKeyIdentifier, bool critical) { }
+        public X509SubjectKeyIdentifierExtension(string subjectKeyIdentifier, bool critical)
+        {
+        }
 
         public string? SubjectKeyIdentifier
         {
             get { throw null; }
         }
 
-        public override void CopyFrom(
-            System.Security.Cryptography.AsnEncodedData asnEncodedData
-        ) { }
+        public override void CopyFrom(System.Security.Cryptography.AsnEncodedData asnEncodedData)
+        {
+        }
     }
 
     public enum X509SubjectKeyIdentifierHashAlgorithm

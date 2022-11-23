@@ -13,7 +13,9 @@ namespace DebuggerTests
 {
     public class ExceptionTests : DebuggerTests
     {
-        public ExceptionTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public ExceptionTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task ExceptionTestAll()

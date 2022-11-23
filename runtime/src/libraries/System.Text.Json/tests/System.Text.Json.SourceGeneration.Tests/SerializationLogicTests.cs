@@ -288,7 +288,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             public bool FastPathCalled { get; private set; }
 
-            public NullablePersonContext() : base(s_options) { }
+            public NullablePersonContext() : base(s_options)
+            {
+            }
 
             protected override JsonSerializerOptions? GeneratedSerializerOptions => s_options;
 

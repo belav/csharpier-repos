@@ -9,27 +9,47 @@ using TypeOfRepo;
 
 public class ConstraintsTests
 {
-    public interface IFoo { }
+    public interface IFoo
+    {
+    }
 
-    public interface IFooer : IFoo { }
+    public interface IFooer : IFoo
+    {
+    }
 
-    public class Base : IFoo { }
+    public class Base : IFoo
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
-    public class GenericBase<T> { }
+    public class GenericBase<T>
+    {
+    }
 
-    public class GenericDerived<T> : GenericBase<T> { }
+    public class GenericDerived<T> : GenericBase<T>
+    {
+    }
 
-    public struct Struct : IFoo { }
+    public struct Struct : IFoo
+    {
+    }
 
-    public class OtherBase : IFooer { }
+    public class OtherBase : IFooer
+    {
+    }
 
-    public class TypeRequiringIFoo<T> where T : IFoo { }
+    public class TypeRequiringIFoo<T> where T : IFoo
+    {
+    }
 
     public class TypeWithPrivateCtor
     {
-        private TypeWithPrivateCtor() { }
+        private TypeWithPrivateCtor()
+        {
+        }
 
         static TypeWithPrivateCtor()
         {
@@ -37,32 +57,58 @@ public class ConstraintsTests
         }
     }
 
-    public class TypeWithPublicCtor { }
+    public class TypeWithPublicCtor
+    {
+    }
 
-    public class TypeWithClassConstraint<T> where T : class { }
+    public class TypeWithClassConstraint<T> where T : class
+    {
+    }
 
-    public class TypeWithNewConstraint<T> where T : new() { }
+    public class TypeWithNewConstraint<T> where T : new()
+    {
+    }
 
-    public class TypeWithStructConstraint<T> where T : struct { }
+    public class TypeWithStructConstraint<T> where T : struct
+    {
+    }
 
-    public class TypeWithNoConstraint<T> { }
+    public class TypeWithNoConstraint<T>
+    {
+    }
 
-    public class TypeWithSelfReferenceConstraint<T, U> where T : U { }
+    public class TypeWithSelfReferenceConstraint<T, U> where T : U
+    {
+    }
 
-    public class TypeWithSelfReferenceIEnumerableConstraint<T, U> where T : IEnumerable<U> { }
+    public class TypeWithSelfReferenceIEnumerableConstraint<T, U> where T : IEnumerable<U>
+    {
+    }
 
-    public interface IBar<in T> { }
+    public interface IBar<in T>
+    {
+    }
 
-    public class TypeImplementingIBarBase : IBar<Base> { }
+    public class TypeImplementingIBarBase : IBar<Base>
+    {
+    }
 
-    public class TypeImplementingIBarDerived : IBar<Derived> { }
+    public class TypeImplementingIBarDerived : IBar<Derived>
+    {
+    }
 
-    public class TypeImplementingIBar<T> : IBar<T> { }
+    public class TypeImplementingIBar<T> : IBar<T>
+    {
+    }
 
-    public class TypeWithVariance<T, U> where T : IBar<U> { }
+    public class TypeWithVariance<T, U> where T : IBar<U>
+    {
+    }
 
     public class TypeWithRecursiveConstraints<T, S> : TypeWithClassConstraint<T>
-        where T : TypeWithNoConstraint<S> { }
+        where T : TypeWithNoConstraint<S>
+    {
+    }
 
     [TestMethod]
     public static unsafe void TestInvalidInstantiations()

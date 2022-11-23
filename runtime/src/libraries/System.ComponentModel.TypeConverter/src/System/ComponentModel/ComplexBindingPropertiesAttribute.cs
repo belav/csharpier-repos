@@ -14,7 +14,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
         /// </summary>
-        public ComplexBindingPropertiesAttribute() { }
+        public ComplexBindingPropertiesAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.

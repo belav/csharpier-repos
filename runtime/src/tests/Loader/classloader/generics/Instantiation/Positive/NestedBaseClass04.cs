@@ -3,37 +3,69 @@
 
 using System;
 
-public struct ValX0 { }
+public struct ValX0
+{
+}
 
-public struct ValY0 { }
+public struct ValY0
+{
+}
 
-public struct ValX1<T> { }
+public struct ValX1<T>
+{
+}
 
-public struct ValY1<T> { }
+public struct ValY1<T>
+{
+}
 
-public struct ValX2<T, U> { }
+public struct ValX2<T, U>
+{
+}
 
-public struct ValY2<T, U> { }
+public struct ValY2<T, U>
+{
+}
 
-public struct ValX3<T, U, V> { }
+public struct ValX3<T, U, V>
+{
+}
 
-public struct ValY3<T, U, V> { }
+public struct ValY3<T, U, V>
+{
+}
 
-public class RefX0 { }
+public class RefX0
+{
+}
 
-public class RefY0 { }
+public class RefY0
+{
+}
 
-public class RefX1<T> { }
+public class RefX1<T>
+{
+}
 
-public class RefY1<T> { }
+public class RefY1<T>
+{
+}
 
-public class RefX2<T, U> { }
+public class RefX2<T, U>
+{
+}
 
-public class RefY2<T, U> { }
+public class RefY2<T, U>
+{
+}
 
-public class RefX3<T, U, V> { }
+public class RefX3<T, U, V>
+{
+}
 
-public class RefY3<T, U, V> { }
+public class RefY3<T, U, V>
+{
+}
 
 public struct GenOuter<U>
 {
@@ -63,7 +95,9 @@ public struct GenOuter<U>
 
 public class GenInt : GenOuter<int>.GenBase<int>
 {
-    public GenInt() : base(1) { }
+    public GenInt() : base(1)
+    {
+    }
 
     public bool InstVerify()
     {
@@ -73,7 +107,9 @@ public class GenInt : GenOuter<int>.GenBase<int>
 
 public class GenDouble : GenOuter<int>.GenBase<double>
 {
-    public GenDouble() : base(1) { }
+    public GenDouble() : base(1)
+    {
+    }
 
     public bool InstVerify()
     {
@@ -83,7 +119,9 @@ public class GenDouble : GenOuter<int>.GenBase<double>
 
 public class GenString : GenOuter<string>.GenBase<String>
 {
-    public GenString() : base("string") { }
+    public GenString() : base("string")
+    {
+    }
 
     public bool InstVerify()
     {
@@ -93,7 +131,9 @@ public class GenString : GenOuter<string>.GenBase<String>
 
 public class GenObject : GenOuter<string>.GenBase<object>
 {
-    public GenObject() : base(new object()) { }
+    public GenObject() : base(new object())
+    {
+    }
 
     public bool InstVerify()
     {
@@ -103,7 +143,9 @@ public class GenObject : GenOuter<string>.GenBase<object>
 
 public class GenGuid : GenOuter<object>.GenBase<Guid>
 {
-    public GenGuid() : base(new Guid()) { }
+    public GenGuid() : base(new Guid())
+    {
+    }
 
     public bool InstVerify()
     {
@@ -113,7 +155,9 @@ public class GenGuid : GenOuter<object>.GenBase<Guid>
 
 public class GenConstructedReference : GenOuter<object>.GenBase<RefX1<int>>
 {
-    public GenConstructedReference() : base(new RefX1<int>()) { }
+    public GenConstructedReference() : base(new RefX1<int>())
+    {
+    }
 
     public bool InstVerify()
     {
@@ -123,7 +167,9 @@ public class GenConstructedReference : GenOuter<object>.GenBase<RefX1<int>>
 
 public class GenConstructedValue : GenOuter<double>.GenBase<ValX1<string>>
 {
-    public GenConstructedValue() : base(new ValX1<string>()) { }
+    public GenConstructedValue() : base(new ValX1<string>())
+    {
+    }
 
     public bool InstVerify()
     {
@@ -133,7 +179,9 @@ public class GenConstructedValue : GenOuter<double>.GenBase<ValX1<string>>
 
 public class GenInt1DArray : GenOuter<double>.GenBase<int[]>
 {
-    public GenInt1DArray() : base(new int[1]) { }
+    public GenInt1DArray() : base(new int[1])
+    {
+    }
 
     public bool InstVerify()
     {
@@ -143,7 +191,9 @@ public class GenInt1DArray : GenOuter<double>.GenBase<int[]>
 
 public class GenString2DArray : GenOuter<Guid>.GenBase<string[,]>
 {
-    public GenString2DArray() : base(new string[1, 1]) { }
+    public GenString2DArray() : base(new string[1, 1])
+    {
+    }
 
     public bool InstVerify()
     {
@@ -153,7 +203,9 @@ public class GenString2DArray : GenOuter<Guid>.GenBase<string[,]>
 
 public class GenIntJaggedArray : GenOuter<Guid>.GenBase<int[][]>
 {
-    public GenIntJaggedArray() : base(new int[1][]) { }
+    public GenIntJaggedArray() : base(new int[1][])
+    {
+    }
 
     public bool InstVerify()
     {

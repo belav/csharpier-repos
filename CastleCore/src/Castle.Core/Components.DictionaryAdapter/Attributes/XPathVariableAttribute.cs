@@ -21,7 +21,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
     public abstract class XPathVariableAttribute : Attribute, IXsltContextVariable
     {
-        protected XPathVariableAttribute() { }
+        protected XPathVariableAttribute()
+        {
+        }
 
         public abstract XmlName Name { get; }
         public abstract XPathResultType VariableType { get; }

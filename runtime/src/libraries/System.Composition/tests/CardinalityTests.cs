@@ -15,19 +15,27 @@ namespace System.Composition.UnitTests
 {
     public class CardinalityTests : ContainerTests
     {
-        public interface ILog { }
+        public interface ILog
+        {
+        }
 
         [Export(typeof(ILog))]
-        public class LogA : ILog { }
+        public class LogA : ILog
+        {
+        }
 
         [Export(typeof(ILog))]
-        public class LogB : ILog { }
+        public class LogB : ILog
+        {
+        }
 
         [Export]
         public class UsesLog
         {
             [ImportingConstructor]
-            public UsesLog(ILog log) { }
+            public UsesLog(ILog log)
+            {
+            }
         }
 
         [Fact]

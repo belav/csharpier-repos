@@ -665,7 +665,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 isSupportedDiagnostic,
                 null,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal CompilationAnalysisContext(
             Compilation compilation,
@@ -821,7 +823,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 filterSpan: null,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal SemanticModelAnalysisContext(
             SemanticModel semanticModel,
@@ -929,7 +933,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 isSupportedDiagnostic,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal SymbolAnalysisContext(
             ISymbol symbol,
@@ -1005,7 +1011,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) : this(symbol, compilation, options, isGeneratedCode: false, cancellationToken) { }
+        ) : this(symbol, compilation, options, isGeneratedCode: false, cancellationToken)
+        {
+        }
 
         internal SymbolStartAnalysisContext(
             ISymbol symbol,
@@ -1205,7 +1213,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 options,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         private protected CodeBlockStartAnalysisContext(
             SyntaxNode codeBlock,
@@ -1337,7 +1347,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 isSupportedDiagnostic,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal CodeBlockAnalysisContext(
             SyntaxNode codeBlock,
@@ -1449,7 +1461,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 getControlFlowGraph: null,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal OperationBlockStartAnalysisContext(
             ImmutableArray<IOperation> operationBlocks,
@@ -1601,7 +1615,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 getControlFlowGraph: null,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal OperationBlockAnalysisContext(
             ImmutableArray<IOperation> operationBlocks,
@@ -1721,7 +1737,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 compilation: null,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal SyntaxTreeAnalysisContext(
             SyntaxTree tree,
@@ -1894,7 +1912,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 isSupportedDiagnostic,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         // TODO: Mark obsolete, tracked with https://github.com/dotnet/roslyn/issues/63440
         public SyntaxNodeAnalysisContext(
@@ -1914,7 +1934,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 isSupportedDiagnostic,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal SyntaxNodeAnalysisContext(
             SyntaxNode node,
@@ -2020,7 +2042,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 getControlFlowGraph: null,
                 isGeneratedCode: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         internal OperationAnalysisContext(
             IOperation operation,

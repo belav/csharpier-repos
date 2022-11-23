@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     {
         private BitVector _visited = BitVector.Empty;
 
-        private BasicBlockReachabilityDataFlowAnalyzer() { }
+        private BasicBlockReachabilityDataFlowAnalyzer()
+        {
+        }
 
         public static BitVector Run(ControlFlowGraph controlFlowGraph)
         {

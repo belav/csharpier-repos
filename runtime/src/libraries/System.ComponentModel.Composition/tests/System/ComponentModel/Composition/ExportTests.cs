@@ -440,7 +440,9 @@ namespace System.ComponentModel.Composition
             );
         }
 
-        private class NoOverridesExport : Export { }
+        private class NoOverridesExport : Export
+        {
+        }
 
         private class DerivedExport : Export
         {

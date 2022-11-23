@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolTreeInfoIncrementalAnalyzerProvider() { }
+        public SymbolTreeInfoIncrementalAnalyzerProvider()
+        {
+        }
 
         public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
             new SymbolTreeInfoIncrementalAnalyzer(workspace);

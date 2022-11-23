@@ -171,6 +171,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
         /// <summary>
         /// Create telemetry info for a specific analyzer, such as count of registered actions, the total execution time, etc.
         /// </summary>
-        public AnalyzerTelemetryInfo() { }
+        public AnalyzerTelemetryInfo()
+        {
+        }
     }
 }

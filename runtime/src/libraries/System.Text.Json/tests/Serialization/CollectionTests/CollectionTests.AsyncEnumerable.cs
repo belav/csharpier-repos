@@ -415,9 +415,13 @@ namespace System.Text.Json.Tests.Serialization
 
         private class Utf8MemoryStream : MemoryStream
         {
-            public Utf8MemoryStream() : base() { }
+            public Utf8MemoryStream() : base()
+            {
+            }
 
-            public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text)) { }
+            public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text))
+            {
+            }
 
             public override string ToString() => Encoding.UTF8.GetString(ToArray());
         }

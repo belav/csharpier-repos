@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoveUnnecessaryAttributeSuppressionsCodeFixProvider() { }
+        public RemoveUnnecessaryAttributeSuppressionsCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.InvalidSuppressMessageAttributeDiagnosticId);

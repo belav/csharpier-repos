@@ -22,7 +22,9 @@ public class SharedTypeQueryInMemoryTest : SharedTypeQueryTestBase
 
     private class MyContextInMemory24601 : MyContext24601
     {
-        public MyContextInMemory24601(DbContextOptions options) : base(options) { }
+        public MyContextInMemory24601(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

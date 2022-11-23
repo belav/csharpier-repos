@@ -43,7 +43,9 @@ public class CosmosOptionsExtension : IDbContextOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CosmosOptionsExtension() { }
+    public CosmosOptionsExtension()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -556,14 +558,18 @@ public class CosmosOptionsExtension : IDbContextOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Validate(IDbContextOptions options) { }
+    public virtual void Validate(IDbContextOptions options)
+    {
+    }
 
     private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
     {
         private string? _logFragment;
         private int? _serviceProviderHash;
 
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
+        {
+        }
 
         private new CosmosOptionsExtension Extension => (CosmosOptionsExtension)base.Extension;
 

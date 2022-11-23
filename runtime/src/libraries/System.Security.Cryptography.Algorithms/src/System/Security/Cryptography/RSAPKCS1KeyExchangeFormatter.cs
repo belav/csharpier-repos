@@ -11,7 +11,9 @@ namespace System.Security.Cryptography
         private RSA? _rsaKey;
         private RandomNumberGenerator? RngValue;
 
-        public RSAPKCS1KeyExchangeFormatter() { }
+        public RSAPKCS1KeyExchangeFormatter()
+        {
+        }
 
         public RSAPKCS1KeyExchangeFormatter(AsymmetricAlgorithm key)
         {

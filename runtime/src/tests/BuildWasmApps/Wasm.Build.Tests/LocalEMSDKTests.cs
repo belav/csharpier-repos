@@ -15,7 +15,9 @@ namespace Wasm.Build.Tests
         public LocalEMSDKTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         [ConditionalTheory(typeof(BuildTestBase), nameof(IsNotUsingWorkloads))]
         [BuildAndRun(

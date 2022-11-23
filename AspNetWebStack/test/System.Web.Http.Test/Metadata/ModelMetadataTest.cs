@@ -85,7 +85,9 @@ namespace System.Web.Http.Metadata
 
         // IsComplexType
 
-        struct IsComplexTypeModel { }
+        struct IsComplexTypeModel
+        {
+        }
 
         [Fact]
         public void IsComplexTypeTests()

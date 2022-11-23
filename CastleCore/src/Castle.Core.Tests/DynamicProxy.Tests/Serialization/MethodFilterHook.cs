@@ -30,9 +30,13 @@ namespace Castle.DynamicProxy.Tests.Serialization
             this.nameFilter = nameFilter;
         }
 
-        public void MethodsInspected() { }
+        public void MethodsInspected()
+        {
+        }
 
-        public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
+        public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+        {
+        }
 
         public bool ShouldInterceptMethod(Type type, MethodInfo memberInfo)
         {

@@ -139,7 +139,9 @@ namespace N1
 {
     public class Test
     {
-        public static void Method() { }
+        public static void Method()
+        {
+        }
     }
 }
 
@@ -147,10 +149,16 @@ namespace N2
 {
     public class Test
     {
-        public static void Method(int n) { }
+        public static void Method(int n)
+        {
+        }
 
-        public static void Method() { }
+        public static void Method()
+        {
+        }
 
-        public static void Method(int n, string[] args) { }
+        public static void Method(int n, string[] args)
+        {
+        }
     }
 }

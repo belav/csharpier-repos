@@ -20,7 +20,9 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
     public SqlServerAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

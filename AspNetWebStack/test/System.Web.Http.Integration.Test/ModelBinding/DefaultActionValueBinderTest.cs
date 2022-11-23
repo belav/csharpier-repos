@@ -1404,15 +1404,23 @@ namespace System.Web.Http.ModelBinding
 
     public class ActionValueController : ApiController
     {
-        public void GetData(Data data) { }
+        public void GetData(Data data)
+        {
+        }
 
-        public void PostItem(ActionValueItem item) { }
+        public void PostItem(ActionValueItem item)
+        {
+        }
 
         // Demonstrates the use of ModelBinderAttribute with empty name
-        public void Options([FromUri(Name = "")] Point data) { }
+        public void Options([FromUri(Name = "")] Point data)
+        {
+        }
 
         // Demonstrates complex parameter that has FromUri declared on the type
-        public void Patch(Point point) { }
+        public void Patch(Point point)
+        {
+        }
 
         // Demonstrates parameter that can come from route, query string, or defaults
         public ActionValueItem Get(
@@ -1471,7 +1479,9 @@ namespace System.Web.Http.ModelBinding
             };
         }
 
-        public void GetTestEmptyString([FromUri] ConvertEmptyStringContainer x) { }
+        public void GetTestEmptyString([FromUri] ConvertEmptyStringContainer x)
+        {
+        }
 
         // Demonstrates use of custom ValueProvider via attribute
         public ActionValueItem GetFromCustom(

@@ -62,7 +62,9 @@ namespace Microsoft.CodeAnalysis.Text
                 default(ImmutableArray<byte>),
                 checksumAlgorithm,
                 default(ImmutableArray<byte>)
-            ) { }
+            )
+        {
+        }
 
         internal static SourceText Decode(
             Stream stream,

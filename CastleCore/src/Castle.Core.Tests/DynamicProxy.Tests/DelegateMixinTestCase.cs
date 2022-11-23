@@ -54,7 +54,10 @@ namespace Castle.DynamicProxy.Tests
         public void ProxyGenerationOptions_AddDelegateMixin_when_given_delegate_succeeds()
         {
             var options = new ProxyGenerationOptions();
-            options.AddDelegateMixin(new Action(() => { }));
+            options.AddDelegateMixin(
+                new Action(() => {
+                })
+            );
         }
 
         [Test]

@@ -57,7 +57,9 @@ public class When_using_a_type_converter : AutoMapperSpecBase
         public C Foo { get; set; }
     }
 
-    public class C { }
+    public class C
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg => cfg.CreateMap<A, B>().ConvertUsing(x => new B { Foo = new C() }));
@@ -78,7 +80,9 @@ public class When_using_a_type_converter_class : AutoMapperSpecBase
         public C Foo { get; set; }
     }
 
-    public class C { }
+    public class C
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg => cfg.CreateMap<A, B>().ConvertUsing<Converter>());
@@ -145,7 +149,9 @@ public class When_constructor_does_not_match : NonValidatingSpecBase
 
 public class When_constructor_does_not_match_ForCtorParam : AutoMapperSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {
@@ -588,9 +594,13 @@ public class When_testing_a_dto_with_array_types_with_mismatched_element_types
         public DestinationItem[] Items;
     }
 
-    public class SourceItem { }
+    public class SourceItem
+    {
+    }
 
-    public class DestinationItem { }
+    public class DestinationItem
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
@@ -618,9 +628,13 @@ public class When_testing_a_dto_with_list_types_with_mismatched_element_types
         public List<DestinationItem> Items;
     }
 
-    public class SourceItem { }
+    public class SourceItem
+    {
+    }
 
-    public class DestinationItem { }
+    public class DestinationItem
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
@@ -724,9 +738,13 @@ public class When_testing_a_dto_in_a_specfic_profile : NonValidatingSpecBase
 
 public class When_testing_a_dto_with_mismatched_custom_member_mapping : NonValidatingSpecBase
 {
-    public class SubBarr { }
+    public class SubBarr
+    {
+    }
 
-    public class SubBar { }
+    public class SubBar
+    {
+    }
 
     public class ModelObject
     {
@@ -756,7 +774,9 @@ public class When_testing_a_dto_with_mismatched_custom_member_mapping : NonValid
 
 public class When_testing_a_dto_with_value_specified_members : NonValidatingSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Destination
     {
@@ -784,7 +804,9 @@ public class When_testing_a_dto_with_setter_only_peroperty_member : NonValidatin
     {
         public string Value
         {
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -810,7 +832,9 @@ public class When_testing_a_dto_with_matching_void_method_member : NonValidating
 {
     public class Source
     {
-        public void Method() { }
+        public void Method()
+        {
+        }
     }
 
     public class Destination

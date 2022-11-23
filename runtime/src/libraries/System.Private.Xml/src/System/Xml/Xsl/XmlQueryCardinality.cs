@@ -355,7 +355,9 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Deserialize the object from BinaryReader.
         /// </summary>
-        public XmlQueryCardinality(BinaryReader reader) : this(reader.ReadByte()) { }
+        public XmlQueryCardinality(BinaryReader reader) : this(reader.ReadByte())
+        {
+        }
         #endregion
     }
 }

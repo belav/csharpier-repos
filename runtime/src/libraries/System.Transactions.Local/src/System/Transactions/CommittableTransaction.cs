@@ -14,15 +14,21 @@ namespace System.Transactions
     {
         // Create a transaction with defaults
         public CommittableTransaction()
-            : this(TransactionManager.DefaultIsolationLevel, TransactionManager.DefaultTimeout) { }
+            : this(TransactionManager.DefaultIsolationLevel, TransactionManager.DefaultTimeout)
+        {
+        }
 
         // Create a transaction with the given info
         public CommittableTransaction(TimeSpan timeout)
-            : this(TransactionManager.DefaultIsolationLevel, timeout) { }
+            : this(TransactionManager.DefaultIsolationLevel, timeout)
+        {
+        }
 
         // Create a transaction with the given options
         public CommittableTransaction(TransactionOptions options)
-            : this(options.IsolationLevel, options.Timeout) { }
+            : this(options.IsolationLevel, options.Timeout)
+        {
+        }
 
         internal CommittableTransaction(IsolationLevel isoLevel, TimeSpan timeout)
             : base(isoLevel, (InternalTransaction?)null)

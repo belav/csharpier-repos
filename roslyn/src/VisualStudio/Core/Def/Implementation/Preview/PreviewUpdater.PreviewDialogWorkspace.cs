@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         // internal for testing
         internal class PreviewDialogWorkspace : PreviewWorkspace
         {
-            public PreviewDialogWorkspace(Solution solution) : base(solution) { }
+            public PreviewDialogWorkspace(Solution solution) : base(solution)
+            {
+            }
 
             public void CloseDocument(TextDocument document, SourceText text)
             {

@@ -231,10 +231,16 @@ class Program
             && retrievedConverter.CanConvertTo(typeof(string));
     }
 
-    private struct SomeValueType { }
+    private struct SomeValueType
+    {
+    }
 
     // TypeDescriptor should default to the TypeConverter in this case.
-    private class ClassWithNoConverter { }
+    private class ClassWithNoConverter
+    {
+    }
 
-    private interface IFooComponent { }
+    private interface IFooComponent
+    {
+    }
 }

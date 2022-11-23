@@ -95,7 +95,8 @@ public class TagHelperComponentTagHelperTest
             {
                 new CallbackTagHelperComponent(
                     order: 2,
-                    initCallback: () => { },
+                    initCallback: () => {
+                    },
                     processAsyncCallback: () =>
                     {
                         Assert.Equal(1, incrementer);
@@ -104,7 +105,8 @@ public class TagHelperComponentTagHelperTest
                 ),
                 new CallbackTagHelperComponent(
                     order: 3,
-                    initCallback: () => { },
+                    initCallback: () => {
+                    },
                     processAsyncCallback: () =>
                     {
                         Assert.Equal(2, incrementer);
@@ -113,7 +115,8 @@ public class TagHelperComponentTagHelperTest
                 ),
                 new CallbackTagHelperComponent(
                     order: 1,
-                    initCallback: () => { },
+                    initCallback: () => {
+                    },
                     processAsyncCallback: () =>
                     {
                         Assert.Equal(0, incrementer);
@@ -416,7 +419,9 @@ public class TagHelperComponentTagHelperTest
 
         public int Order => _order;
 
-        public void Init(TagHelperContext context) { }
+        public void Init(TagHelperContext context)
+        {
+        }
 
         public Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {

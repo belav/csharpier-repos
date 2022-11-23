@@ -171,7 +171,9 @@ namespace MonoTests.System.Configuration
                 writer.WriteEndElement();
             }
 
-            protected override void WriteValues(XmlWriter writer) { }
+            protected override void WriteValues(XmlWriter writer)
+            {
+            }
         }
 
         abstract class ParentProvider : ConfigProvider

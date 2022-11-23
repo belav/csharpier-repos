@@ -1669,7 +1669,9 @@ public class When_destination_type_has_private_members : AutoMapperSpecBase
             Value = value;
         }
 
-        private Destination() { }
+        private Destination()
+        {
+        }
 
         public int Value { get; private set; }
     }

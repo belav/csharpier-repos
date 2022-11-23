@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeImportCompletionServiceFactory() { }
+        public TypeImportCompletionServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
             new CSharpTypeImportCompletionService(
@@ -28,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         private class CSharpTypeImportCompletionService : AbstractTypeImportCompletionService
         {
-            public CSharpTypeImportCompletionService(SolutionServices services) : base(services) { }
+            public CSharpTypeImportCompletionService(SolutionServices services) : base(services)
+            {
+            }
 
             protected override string GenericTypeSuffix => "<>";
 

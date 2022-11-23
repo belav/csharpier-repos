@@ -11,5 +11,7 @@ namespace System.Net
         Name = "Private.InternalDiagnostics.System.Net.Mail",
         LocalizationResources = "FxResources.System.Net.Mail.SR"
     )]
-    internal sealed partial class NetEventSource { }
+    internal sealed partial class NetEventSource
+    {
+    }
 }

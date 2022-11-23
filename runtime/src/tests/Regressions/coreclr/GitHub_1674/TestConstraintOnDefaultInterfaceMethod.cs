@@ -32,13 +32,21 @@ namespace TestConstraint
                 Console.WriteLine($"Works for type: {typeof(T1)}");
         }
 
-        public class Worky : IBuggy<int> { }
+        public class Worky : IBuggy<int>
+        {
+        }
 
-        public class Worky2 : IBuggy<object> { }
+        public class Worky2 : IBuggy<object>
+        {
+        }
 
-        public class Buggy : IBuggy<Open> { }
+        public class Buggy : IBuggy<Open>
+        {
+        }
 
-        public class Open { }
+        public class Open
+        {
+        }
 
         private interface ILogEntry
         {
@@ -60,7 +68,9 @@ namespace TestConstraint
             long Term { get; }
         }
 
-        private sealed class AuditTrail : IAuditTrail<IRaftLogEntry> { }
+        private sealed class AuditTrail : IAuditTrail<IRaftLogEntry>
+        {
+        }
 
         private readonly struct EmptyLogEntry : IRaftLogEntry
         {

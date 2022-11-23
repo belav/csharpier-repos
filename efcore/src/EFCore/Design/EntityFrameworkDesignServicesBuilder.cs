@@ -54,7 +54,9 @@ public class EntityFrameworkDesignServicesBuilder : EntityFrameworkServicesBuild
     /// </summary>
     /// <param name="serviceCollection">The collection to which services will be registered.</param>
     public EntityFrameworkDesignServicesBuilder(IServiceCollection serviceCollection)
-        : base(serviceCollection) { }
+        : base(serviceCollection)
+    {
+    }
 
     /// <summary>
     ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.

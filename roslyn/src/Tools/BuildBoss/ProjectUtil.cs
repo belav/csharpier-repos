@@ -33,7 +33,9 @@ namespace BuildBoss
             Path.GetFileNameWithoutExtension(Key.FilePath).EndsWith(".IntegrationTests");
 
         internal ProjectUtil(string filePath)
-            : this(new ProjectKey(filePath), XDocument.Load(filePath)) { }
+            : this(new ProjectKey(filePath), XDocument.Load(filePath))
+        {
+        }
 
         internal ProjectUtil(ProjectKey key, XDocument document)
         {

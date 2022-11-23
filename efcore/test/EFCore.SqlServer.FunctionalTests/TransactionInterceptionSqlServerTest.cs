@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class TransactionInterceptionSqlServerTestBase : TransactionInterceptionTestBase
 {
     protected TransactionInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public abstract class InterceptionSqlServerFixtureBase : InterceptionFixtureBase
     {
@@ -29,7 +31,9 @@ public abstract class TransactionInterceptionSqlServerTestBase : TransactionInte
             IClassFixture<TransactionInterceptionSqlServerTest.InterceptionSqlServerFixture>
     {
         public TransactionInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         // ReleaseSavepoint is unsupported by SQL Server and is ignored
         public override Task Intercept_ReleaseSavepoint(bool async) => Task.CompletedTask;
@@ -46,7 +50,9 @@ public abstract class TransactionInterceptionSqlServerTestBase : TransactionInte
     {
         public TransactionInterceptionWithDiagnosticsSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        ) : base(fixture)
+        {
+        }
 
         // ReleaseSavepoint is unsupported by SQL Server and is ignored
         public override Task Intercept_ReleaseSavepoint(bool async) => Task.CompletedTask;

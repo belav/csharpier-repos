@@ -44,7 +44,9 @@ namespace CoreXml.Test.XLinq
         private const string EQ = "=";
         private const string LF = "\n";
 
-        public ManagedNodeWriter() { }
+        public ManagedNodeWriter()
+        {
+        }
 
         public ManagedNodeWriter(Stream myStream, Encoding enc)
         {

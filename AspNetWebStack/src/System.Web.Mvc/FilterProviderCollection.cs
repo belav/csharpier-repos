@@ -13,9 +13,13 @@ namespace System.Web.Mvc
         private IFilterProvider[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public FilterProviderCollection() { }
+        public FilterProviderCollection()
+        {
+        }
 
-        public FilterProviderCollection(IList<IFilterProvider> providers) : base(providers) { }
+        public FilterProviderCollection(IList<IFilterProvider> providers) : base(providers)
+        {
+        }
 
         internal FilterProviderCollection(
             IList<IFilterProvider> list,

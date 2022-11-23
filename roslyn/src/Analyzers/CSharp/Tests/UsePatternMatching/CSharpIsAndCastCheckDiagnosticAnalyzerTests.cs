@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public CSharpIsAndCastCheckDiagnosticAnalyzerTests(ITestOutputHelper logger) : base(logger)
-        { }
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

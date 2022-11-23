@@ -5,5 +5,7 @@ namespace System.Threading.Channels
 {
     /// <summary>Provides a base class for channels that support reading and writing elements of type <typeparamref name="T"/>.</summary>
     /// <typeparam name="T">Specifies the type of data readable and writable in the channel.</typeparam>
-    public abstract class Channel<T> : Channel<T, T> { }
+    public abstract class Channel<T> : Channel<T, T>
+    {
+    }
 }

@@ -98,7 +98,9 @@ namespace System.Net.Http
         private SafeWinHttpHandle? _sessionHandle;
         private readonly WinHttpAuthHelper _authHelper = new WinHttpAuthHelper();
 
-        public WinHttpHandler() { }
+        public WinHttpHandler()
+        {
+        }
 
         #region Properties
         public bool AutomaticRedirection

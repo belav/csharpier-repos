@@ -38,7 +38,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// </remarks>
     /// <param name="context">The context on which the operations will be invoked.</param>
     public SqlServerRetryingExecutionStrategy(DbContext context)
-        : this(context, DefaultMaxRetryCount) { }
+        : this(context, DefaultMaxRetryCount)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -48,7 +50,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// </remarks>
     /// <param name="dependencies">Parameter object containing service dependencies.</param>
     public SqlServerRetryingExecutionStrategy(ExecutionStrategyDependencies dependencies)
-        : this(dependencies, DefaultMaxRetryCount) { }
+        : this(dependencies, DefaultMaxRetryCount)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -59,7 +63,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// <param name="context">The context on which the operations will be invoked.</param>
     /// <param name="maxRetryCount">The maximum number of retry attempts.</param>
     public SqlServerRetryingExecutionStrategy(DbContext context, int maxRetryCount)
-        : this(context, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
+        : this(context, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -72,7 +78,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     public SqlServerRetryingExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
         int maxRetryCount
-    ) : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
+    ) : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -85,7 +93,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     public SqlServerRetryingExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
         IEnumerable<int> errorNumbersToAdd
-    ) : this(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, errorNumbersToAdd) { }
+    ) : this(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, errorNumbersToAdd)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.

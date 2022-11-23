@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected override void InitializeWorker(AnalysisContext context)
         {

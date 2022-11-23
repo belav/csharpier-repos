@@ -33,7 +33,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         ) => new XmlElementBehaviorAccessor(name, type, context);
 
         public XmlElementBehaviorAccessor(string name, Type type, IXmlContext context)
-            : base(name, type, context) { }
+            : base(name, type, context)
+        {
+        }
 
         public void Configure(XmlElementAttribute attribute)
         {

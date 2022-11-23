@@ -8,7 +8,9 @@ namespace System.Reflection
 {
     public abstract partial class MemberInfo : ICustomAttributeProvider
     {
-        protected MemberInfo() { }
+        protected MemberInfo()
+        {
+        }
 
         public abstract MemberTypes MemberType { get; }
         public abstract string Name { get; }

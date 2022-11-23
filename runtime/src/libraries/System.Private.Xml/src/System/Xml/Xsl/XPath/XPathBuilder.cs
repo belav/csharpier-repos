@@ -513,7 +513,9 @@ namespace System.Xml.Xsl.XPath
             {
                 return _f.Sequence();
             }
-            else if (required == original) { }
+            else if (required == original)
+            {
+            }
             else
             {
                 qilAxis = _f.Filter(itr = _f.For(qilAxis), _f.IsType(itr, T.NodeChoice(required)));

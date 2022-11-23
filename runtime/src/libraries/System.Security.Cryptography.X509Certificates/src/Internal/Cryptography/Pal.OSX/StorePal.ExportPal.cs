@@ -55,9 +55,13 @@ namespace Internal.Cryptography.Pal
                     0x00,
                 };
 
-            public AppleCertificateExporter(ICertificatePalCore cert) : base(cert) { }
+            public AppleCertificateExporter(ICertificatePalCore cert) : base(cert)
+            {
+            }
 
-            public AppleCertificateExporter(X509Certificate2Collection certs) : base(certs) { }
+            public AppleCertificateExporter(X509Certificate2Collection certs) : base(certs)
+            {
+            }
 
             protected override byte[] ExportPkcs7()
             {

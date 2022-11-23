@@ -392,12 +392,16 @@ namespace System.Threading.Tasks
             throw null;
         }
 
-        public static void Invoke(params System.Action[] actions) { }
+        public static void Invoke(params System.Action[] actions)
+        {
+        }
 
         public static void Invoke(
             System.Threading.Tasks.ParallelOptions parallelOptions,
             params System.Action[] actions
-        ) { }
+        )
+        {
+        }
     }
 
     public partial struct ParallelLoopResult
@@ -415,7 +419,9 @@ namespace System.Threading.Tasks
 
     public partial class ParallelLoopState
     {
-        internal ParallelLoopState() { }
+        internal ParallelLoopState()
+        {
+        }
 
         public bool IsExceptional
         {
@@ -434,29 +440,41 @@ namespace System.Threading.Tasks
             get { throw null; }
         }
 
-        public void Break() { }
+        public void Break()
+        {
+        }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
     }
 
     public partial class ParallelOptions
     {
-        public ParallelOptions() { }
+        public ParallelOptions()
+        {
+        }
 
         public System.Threading.CancellationToken CancellationToken
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxDegreeOfParallelism
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.Tasks.TaskScheduler? TaskScheduler
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

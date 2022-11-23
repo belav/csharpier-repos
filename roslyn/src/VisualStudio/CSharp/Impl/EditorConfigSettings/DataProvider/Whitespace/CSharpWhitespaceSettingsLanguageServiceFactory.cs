@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpWhitespaceSettingsLanguageServiceFactory() { }
+        public CSharpWhitespaceSettingsLanguageServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
         {

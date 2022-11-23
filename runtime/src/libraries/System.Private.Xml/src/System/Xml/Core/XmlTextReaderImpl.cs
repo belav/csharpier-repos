@@ -456,12 +456,17 @@ namespace System.Xml
 
         // Initializes a new instance of the XmlTextReaderImpl class with the specified stream, baseUri and nametable
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
-        internal XmlTextReaderImpl(Stream input) : this(string.Empty, input, new NameTable()) { }
+        internal XmlTextReaderImpl(Stream input) : this(string.Empty, input, new NameTable())
+        {
+        }
 
         internal XmlTextReaderImpl(Stream input, XmlNameTable nt) : this(string.Empty, input, nt)
-        { }
+        {
+        }
 
-        internal XmlTextReaderImpl(string url, Stream input) : this(url, input, new NameTable()) { }
+        internal XmlTextReaderImpl(string url, Stream input) : this(url, input, new NameTable())
+        {
+        }
 
         internal XmlTextReaderImpl(string? url, Stream input, XmlNameTable nt) : this(nt)
         {
@@ -484,13 +489,17 @@ namespace System.Xml
         // Initializes a new instance of the XmlTextReaderImpl class with the specified TextReader, baseUri and XmlNameTable.
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
         internal XmlTextReaderImpl(TextReader input) : this(string.Empty, input, new NameTable())
-        { }
+        {
+        }
 
         internal XmlTextReaderImpl(TextReader input, XmlNameTable nt)
-            : this(string.Empty, input, nt) { }
+            : this(string.Empty, input, nt)
+        {
+        }
 
         internal XmlTextReaderImpl(string url, TextReader input) : this(url, input, new NameTable())
-        { }
+        {
+        }
 
         internal XmlTextReaderImpl(string? url, TextReader input, XmlNameTable nt) : this(nt)
         {
@@ -579,7 +588,9 @@ namespace System.Xml
 
         // Initializes a new instance of the XmlTextReaderImpl class with the specified url and XmlNameTable.
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
-        public XmlTextReaderImpl(string url) : this(url, new NameTable()) { }
+        public XmlTextReaderImpl(string url) : this(url, new NameTable())
+        {
+        }
 
         public XmlTextReaderImpl(string url, XmlNameTable nt) : this(nt)
         {
@@ -3717,7 +3728,9 @@ namespace System.Xml
 
                 Debug.Fail("We should get an exception again.");
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
 
             if (charsDecoded == 0)
             {

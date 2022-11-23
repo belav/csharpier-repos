@@ -60,7 +60,9 @@ namespace System.Runtime.Serialization
                 streamingContext,
                 ignoreExtensionDataObject,
                 null
-            ) { }
+            )
+        {
+        }
 
         internal XmlObjectSerializerContext(
             DataContractSerializer serializer,
@@ -82,7 +84,9 @@ namespace System.Runtime.Serialization
         internal virtual bool IsGetOnlyCollection
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
 
         internal StreamingContext GetStreamingContext()

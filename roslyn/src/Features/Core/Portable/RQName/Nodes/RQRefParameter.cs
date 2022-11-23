@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
 {
     internal class RQRefParameter : RQParameter
     {
-        public RQRefParameter(RQType type) : base(type) { }
+        public RQRefParameter(RQType type) : base(type)
+        {
+        }
 
         public override SimpleTreeNode CreateSimpleTreeForType() =>
             new SimpleGroupNode(

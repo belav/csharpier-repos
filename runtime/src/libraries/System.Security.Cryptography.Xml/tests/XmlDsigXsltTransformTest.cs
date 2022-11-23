@@ -22,9 +22,13 @@ namespace System.Security.Cryptography.Xml.Tests
     // difficult to test properly. This class "open it up" :-)
     public class UnprotectedXmlDsigXsltTransform : XmlDsigXsltTransform
     {
-        public UnprotectedXmlDsigXsltTransform() { }
+        public UnprotectedXmlDsigXsltTransform()
+        {
+        }
 
-        public UnprotectedXmlDsigXsltTransform(bool includeComments) : base(includeComments) { }
+        public UnprotectedXmlDsigXsltTransform(bool includeComments) : base(includeComments)
+        {
+        }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {

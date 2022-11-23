@@ -15,7 +15,9 @@ namespace System.Web.Http.Filters
     )]
     public abstract class AuthorizationFilterAttribute : FilterAttribute, IAuthorizationFilter
     {
-        public virtual void OnAuthorization(HttpActionContext actionContext) { }
+        public virtual void OnAuthorization(HttpActionContext actionContext)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Design",

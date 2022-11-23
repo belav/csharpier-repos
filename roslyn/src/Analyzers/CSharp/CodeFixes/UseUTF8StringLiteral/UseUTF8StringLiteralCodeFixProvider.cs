@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UseUtf8StringLiteralCodeFixProvider() { }
+        public UseUtf8StringLiteralCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseUtf8StringLiteralDiagnosticId);

@@ -20,7 +20,9 @@ namespace System.Threading.Tests
                     int totalTimerCount = processorCount * TimersPerThread;
 
                     var timers = new List<Timer>(totalTimerCount);
-                    TimerCallback timerCallback = _ => { };
+                    TimerCallback timerCallback = _ =>
+                    {
+                    };
                     var startCreateTimerThreads = new ManualResetEvent(false);
                     Action createTimerThreadStart = () =>
                     {

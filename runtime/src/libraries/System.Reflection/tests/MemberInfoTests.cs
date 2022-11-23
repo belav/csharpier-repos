@@ -445,24 +445,32 @@ namespace System.Reflection.Tests
 
         private class Twin1
         {
-            public Twin1() { }
+            public Twin1()
+            {
+            }
 
             public int Field1;
             public Action Event1;
 
-            public void Method1() { }
+            public void Method1()
+            {
+            }
 
             public int Property1 { get; set; }
         }
 
         private class Twin2
         {
-            public Twin2() { }
+            public Twin2()
+            {
+            }
 
             public int Field1;
             public Action Event1;
 
-            public void Method1() { }
+            public void Method1()
+            {
+            }
 
             public int Property1 { get; set; }
         }
@@ -660,61 +668,99 @@ namespace System.Reflection.Tests
 
         private class TestClassWithGenericMethod<T>
         {
-            public void Moo(T t) { }
+            public void Moo(T t)
+            {
+            }
 
-            public void Moo<M>(M m) { }
+            public void Moo<M>(M m)
+            {
+            }
         }
 
         private class TestClass
         {
-            public void Foo() { }
+            public void Foo()
+            {
+            }
 
-            public void Foo(object o) { }
+            public void Foo(object o)
+            {
+            }
 
-            public void Foo(string s) { }
+            public void Foo(string s)
+            {
+            }
 
-            public void Bar() { }
+            public void Bar()
+            {
+            }
         }
 
-        private class TestClass2 { }
+        private class TestClass2
+        {
+        }
 
         private class GenericTestClass<T>
         {
             [Marker(1)]
-            public void Foo(object o) { }
+            public void Foo(object o)
+            {
+            }
 
             [Marker(2)]
-            public void Foo(int i) { }
+            public void Foo(int i)
+            {
+            }
 
             [Marker(3)]
-            public void Foo(T t) { }
+            public void Foo(T t)
+            {
+            }
 
             [Marker(4)]
-            public void Foo(double d) { }
+            public void Foo(double d)
+            {
+            }
 
             [Marker(5)]
-            public void Foo(string s) { }
+            public void Foo(string s)
+            {
+            }
 
             [Marker(6)]
-            public void Foo(int[] s) { }
+            public void Foo(int[] s)
+            {
+            }
 
             [Marker(7)]
-            public void Foo<U>(U t) { }
+            public void Foo<U>(U t)
+            {
+            }
 
             [Marker(8)]
-            public void Foo<U>(T t) { }
+            public void Foo<U>(T t)
+            {
+            }
 
             [Marker(9)]
-            public void Foo<U, V>(T t) { }
+            public void Foo<U, V>(T t)
+            {
+            }
 
             [Marker(101)]
-            public GenericTestClass() { }
+            public GenericTestClass()
+            {
+            }
 
             [Marker(102)]
-            public GenericTestClass(T t) { }
+            public GenericTestClass(T t)
+            {
+            }
 
             [Marker(103)]
-            public GenericTestClass(int t) { }
+            public GenericTestClass(int t)
+            {
+            }
 
             [Marker(201)]
             public int Field1;
@@ -749,26 +795,40 @@ namespace System.Reflection.Tests
             [Marker(401)]
             public event Action Event1
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             [Marker(402)]
             public event Action<int> Event2
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             [Marker(403)]
             public event Action<T> Event3
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
 
-        private class DerivedFromGenericTestClass<T> : GenericTestClass<T> { }
+        private class DerivedFromGenericTestClass<T> : GenericTestClass<T>
+        {
+        }
 
         private MemberInfo[] GetMembers(Type type)
         {
@@ -791,8 +851,12 @@ namespace System.Reflection.Tests
         {
             public event Action MyEvent
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 #pragma warning disable 0649
             public int MyField;
@@ -802,17 +866,25 @@ namespace System.Reflection.Tests
             public int MyProperty1 { get; private set; }
             public int MyProperty2 { private get; set; }
 
-            public void Moo<M>() { }
+            public void Moo<M>()
+            {
+            }
         }
 
-        private class Derived : Base { }
+        private class Derived : Base
+        {
+        }
 
         private class GBase<T>
         {
-            public void Moo<M>() { }
+            public void Moo<M>()
+            {
+            }
         }
 
-        private class GDerived<T> : GBase<T> { }
+        private class GDerived<T> : GBase<T>
+        {
+        }
 
 #pragma warning disable 0067, 0169
         [ComVisible(false)]
@@ -821,13 +893,21 @@ namespace System.Reflection.Tests
             public int PublicField;
             private int PrivateField;
 
-            public SampleClass(bool y) { }
+            public SampleClass(bool y)
+            {
+            }
 
-            private SampleClass(int x) { }
+            private SampleClass(int x)
+            {
+            }
 
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
 
             public int PublicProp { get; set; }
             private int PrivateProp { get; set; }

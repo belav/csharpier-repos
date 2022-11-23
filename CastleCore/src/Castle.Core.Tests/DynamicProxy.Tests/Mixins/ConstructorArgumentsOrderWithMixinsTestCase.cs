@@ -35,24 +35,36 @@ namespace Castle.DynamicProxy.Tests.Mixins
         }
     }
 
-    public interface IFoo1 { }
+    public interface IFoo1
+    {
+    }
 
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif
-    public class Foo : IFoo1 { }
+    public class Foo : IFoo1
+    {
+    }
 
-    public interface IFoo2 { }
-
-#if FEATURE_SERIALIZATION
-    [Serializable]
-#endif
-    public class Bar : IFoo2 { }
-
-    public interface IFoo3 { }
+    public interface IFoo2
+    {
+    }
 
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif
-    public class Baz : IFoo3 { }
+    public class Bar : IFoo2
+    {
+    }
+
+    public interface IFoo3
+    {
+    }
+
+#if FEATURE_SERIALIZATION
+    [Serializable]
+#endif
+    public class Baz : IFoo3
+    {
+    }
 }

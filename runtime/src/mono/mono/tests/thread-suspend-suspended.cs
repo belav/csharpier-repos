@@ -12,7 +12,9 @@ class Driver
 
         Thread t1 = new Thread(() =>
         {
-            while (!Volatile.Read(ref finished)) { }
+            while (!Volatile.Read(ref finished))
+            {
+            }
         });
 
         Thread t2 = new Thread(() =>

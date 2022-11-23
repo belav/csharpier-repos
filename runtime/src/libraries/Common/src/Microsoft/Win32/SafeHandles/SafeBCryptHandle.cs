@@ -10,7 +10,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal abstract class SafeBCryptHandle : SafeHandle, IDisposable
     {
-        protected SafeBCryptHandle() : base(IntPtr.Zero, true) { }
+        protected SafeBCryptHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         public sealed override bool IsInvalid
         {

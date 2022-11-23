@@ -189,7 +189,9 @@ namespace System.Xml
 
     internal sealed class SafeAsciiDecoder : Decoder
     {
-        public SafeAsciiDecoder() { }
+        public SafeAsciiDecoder()
+        {
+        }
 
         public override int GetCharCount(byte[] bytes, int index, int count)
         {

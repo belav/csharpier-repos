@@ -125,7 +125,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
 
             private class FakeEntry : ICacheEntry
             {
-                public virtual void Dispose() { }
+                public virtual void Dispose()
+                {
+                }
 
                 public object Key { get; }
                 public object Value { get; set; }
@@ -138,9 +140,13 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                 public long? Size { get; set; }
             }
 
-            public virtual void Remove(object key) { }
+            public virtual void Remove(object key)
+            {
+            }
 
-            public virtual void Dispose() { }
+            public virtual void Dispose()
+            {
+            }
         }
     }
 }

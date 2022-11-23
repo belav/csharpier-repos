@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
         private static Encoding DefaultEncoding =>
             new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
-        private FolderWorkspace(HostServices hostServices) : base(hostServices, "Folder") { }
+        private FolderWorkspace(HostServices hostServices) : base(hostServices, "Folder")
+        {
+        }
 
         public static FolderWorkspace Create()
         {

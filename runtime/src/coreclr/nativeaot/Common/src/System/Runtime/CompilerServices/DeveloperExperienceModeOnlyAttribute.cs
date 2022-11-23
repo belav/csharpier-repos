@@ -40,5 +40,7 @@ namespace System.Runtime.CompilerServices
     //
     //
     [AttributeUsage(AttributeTargets.Class)]
-    internal sealed class DeveloperExperienceModeOnlyAttribute : Attribute { }
+    internal sealed class DeveloperExperienceModeOnlyAttribute : Attribute
+    {
+    }
 }

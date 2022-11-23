@@ -17,10 +17,13 @@ namespace System
     internal sealed class AttributeUsageAttribute : Attribute
     {
         //Constructors
-        public AttributeUsageAttribute(AttributeTargets validOn) { }
+        public AttributeUsageAttribute(AttributeTargets validOn)
+        {
+        }
 
         public AttributeUsageAttribute(AttributeTargets validOn, bool allowMultiple, bool inherited)
-        { }
+        {
+        }
 
         //Properties.
         // Allowing the set properties as it allows a more readable syntax in the specifiers (and are commonly used)
@@ -30,13 +33,17 @@ namespace System
         public bool AllowMultiple
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool Inherited
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
 #pragma warning restore CA1822
     }

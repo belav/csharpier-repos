@@ -8,7 +8,9 @@ namespace System.CodeDom
         private string _methodName;
         private CodeTypeReferenceCollection _typeArguments;
 
-        public CodeMethodReferenceExpression() { }
+        public CodeMethodReferenceExpression()
+        {
+        }
 
         public CodeMethodReferenceExpression(CodeExpression targetObject, string methodName)
         {

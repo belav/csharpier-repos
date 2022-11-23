@@ -64,7 +64,9 @@ namespace System.Collections.Concurrent
         /// Initializes a new instance of the <see cref="ConcurrentStack{T}"/>
         /// class.
         /// </summary>
-        public ConcurrentStack() { }
+        public ConcurrentStack()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentStack{T}"/>

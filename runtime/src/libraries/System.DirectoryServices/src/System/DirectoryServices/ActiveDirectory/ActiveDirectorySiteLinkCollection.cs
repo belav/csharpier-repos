@@ -12,7 +12,9 @@ namespace System.DirectoryServices.ActiveDirectory
         internal bool initialized;
         internal DirectoryContext? context;
 
-        internal ActiveDirectorySiteLinkCollection() { }
+        internal ActiveDirectorySiteLinkCollection()
+        {
+        }
 
         public ActiveDirectorySiteLink this[int index]
         {

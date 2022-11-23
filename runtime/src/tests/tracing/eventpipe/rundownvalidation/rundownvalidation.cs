@@ -46,7 +46,8 @@ namespace Tracing.Tests.RundownValidation
         };
 
         // We only care about rundown so skip generating any events.
-        private static Action _eventGeneratingAction = () => { };
+        private static Action _eventGeneratingAction = () => {
+        };
 
         private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (
             source

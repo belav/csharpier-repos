@@ -1706,7 +1706,9 @@ namespace System.Net.Http.Tests
 
             // Invalid value
             headers.TryAddWithoutValidation("Date", "not a date");
-            foreach (KeyValuePair<string, IEnumerable<string>> _ in headers) { }
+            foreach (KeyValuePair<string, IEnumerable<string>> _ in headers)
+            {
+            }
 
             // Raw value
             headers.TryAddWithoutValidation("Date", "another not a date");
@@ -2897,7 +2899,9 @@ namespace System.Net.Http.Tests
                 _descriptor = (new KnownHeader("known", HttpHeaderType.General, parser)).Descriptor;
             }
 
-            public MockHeaders() : this(new MockHeaderParser()) { }
+            public MockHeaders() : this(new MockHeaderParser())
+            {
+            }
         }
 
         private class MockHeaderParser : HttpHeaderParser
@@ -2906,7 +2910,9 @@ namespace System.Net.Http.Tests
             public int EmptyValueCount { get; private set; }
             public MockComparer MockComparer { get; private set; }
 
-            public MockHeaderParser() : this(true) { }
+            public MockHeaderParser() : this(true)
+            {
+            }
 
             public MockHeaderParser(bool supportsMultipleValues) : base(supportsMultipleValues)
             {
@@ -3025,7 +3031,9 @@ namespace System.Net.Http.Tests
 
         private class CustomTypeHeaders : HttpHeaders
         {
-            public CustomTypeHeaders() { }
+            public CustomTypeHeaders()
+            {
+            }
         }
 
         private class CustomTypeHeaderParser : HttpHeaderParser
@@ -3037,7 +3045,9 @@ namespace System.Net.Http.Tests
                 get { return comparer; }
             }
 
-            public CustomTypeHeaderParser() : base(true) { }
+            public CustomTypeHeaderParser() : base(true)
+            {
+            }
 
             public override bool TryParseValue(
                 string value,
@@ -3071,7 +3081,9 @@ namespace System.Net.Http.Tests
 
         private class NoComparerHeaderParser : HttpHeaderParser
         {
-            public NoComparerHeaderParser() : base(true) { }
+            public NoComparerHeaderParser() : base(true)
+            {
+            }
 
             public override bool TryParseValue(
                 string value,

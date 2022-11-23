@@ -187,16 +187,32 @@ public class RenderBatchReaderTest
                         ),
                         RenderTreeFrame.Attribute(124, "Attribute with nonstring value", 1),
                         RenderTreeFrame
-                            .Attribute(125, "Attribute with delegate value", new Action(() => { }))
+                            .Attribute(
+                                125,
+                                "Attribute with delegate value",
+                                new Action(() => {
+                                })
+                            )
                             .WithAttributeEventHandlerId((ulong)uint.MaxValue + 1),
                         RenderTreeFrame
                             .ChildComponent(126, typeof(object))
                             .WithComponentSubtreeLength(5678)
                             .WithComponent(new ComponentState(2000)),
-                        RenderTreeFrame.ComponentReferenceCapture(127, value => { }, 1001),
+                        RenderTreeFrame.ComponentReferenceCapture(
+                            127,
+                            value =>
+                            {
+                            },
+                            1001
+                        ),
                         RenderTreeFrame.Element(128, "Some element").WithElementSubtreeLength(1234),
                         RenderTreeFrame
-                            .ElementReferenceCapture(129, value => { })
+                            .ElementReferenceCapture(
+                                129,
+                                value =>
+                                {
+                                }
+                            )
                             .WithElementReferenceCaptureId("my unique ID"),
                         RenderTreeFrame.Region(130).WithRegionSubtreeLength(1234),
                         RenderTreeFrame.Text(131, "Some text"),

@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PythiaOptionsProvider() { }
+        public PythiaOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(

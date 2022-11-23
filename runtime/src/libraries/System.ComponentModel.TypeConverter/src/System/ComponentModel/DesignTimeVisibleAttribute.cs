@@ -27,7 +27,9 @@ namespace System.ComponentModel
         /// Creates a new DesignTimeVisibleAttribute set to the default
         /// value of true.
         /// </summary>
-        public DesignTimeVisibleAttribute() { }
+        public DesignTimeVisibleAttribute()
+        {
+        }
 
         /// <summary>
         /// True if this component should be shown at design time, or false

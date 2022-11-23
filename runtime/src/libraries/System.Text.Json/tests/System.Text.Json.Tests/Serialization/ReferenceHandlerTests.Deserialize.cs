@@ -1957,8 +1957,12 @@ namespace System.Text.Json.Serialization.Tests
             public Derived Derived { get; set; }
         }
 
-        private class Derived : Base { }
+        private class Derived : Base
+        {
+        }
 
-        private class Base { }
+        private class Base
+        {
+        }
     }
 }

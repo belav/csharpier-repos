@@ -14,9 +14,13 @@ namespace System.Security.Permissions
         : CodeAccessPermission,
             IUnrestrictedPermission
     {
-        public TypeDescriptorPermission(PermissionState state) { }
+        public TypeDescriptorPermission(PermissionState state)
+        {
+        }
 
-        public TypeDescriptorPermission(TypeDescriptorPermissionFlags flag) { }
+        public TypeDescriptorPermission(TypeDescriptorPermissionFlags flag)
+        {
+        }
 
         public TypeDescriptorPermissionFlags Flags { get; set; }
 
@@ -25,7 +29,9 @@ namespace System.Security.Permissions
             return this;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

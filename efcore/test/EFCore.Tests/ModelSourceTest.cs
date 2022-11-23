@@ -82,7 +82,9 @@ public class ModelSourceTest
         public void Validate(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-        ) { }
+        )
+        {
+        }
     }
 
     private class FakeSetFinder : IDbSetFinder
@@ -291,11 +293,15 @@ public class ModelSourceTest
 
     private class Context1 : DbContext
     {
-        public Context1(DbContextOptions options) : base(options) { }
+        public Context1(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     private class Context2 : DbContext
     {
-        public Context2(DbContextOptions options) : base(options) { }
+        public Context2(DbContextOptions options) : base(options)
+        {
+        }
     }
 }

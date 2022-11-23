@@ -7,4 +7,6 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers;
 /// Contract used to filter matching HTML elements.
 /// Marker interface for <see cref="TagHelper"/>s.
 /// </summary>
-public interface ITagHelper : ITagHelperComponent { }
+public interface ITagHelper : ITagHelperComponent
+{
+}

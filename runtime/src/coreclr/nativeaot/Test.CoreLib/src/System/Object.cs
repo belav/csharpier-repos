@@ -20,10 +20,14 @@ namespace System
 #pragma warning restore
 
         // Creates a new instance of an Object.
-        public Object() { }
+        public Object()
+        {
+        }
 
 #pragma warning disable CA1821 // Remove empty Finalizers
-        ~Object() { }
+        ~Object()
+        {
+        }
 #pragma warning restore CA1821
 
         public virtual bool Equals(object o)

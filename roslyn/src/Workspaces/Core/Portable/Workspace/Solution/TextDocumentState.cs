@@ -86,7 +86,9 @@ namespace Microsoft.CodeAnalysis
                             info.FilePath
                         )
                     )
-            ) { }
+            )
+        {
+        }
 
         public DocumentId Id => Attributes.Id;
         public string? FilePath => Attributes.FilePath;

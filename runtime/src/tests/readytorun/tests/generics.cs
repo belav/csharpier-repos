@@ -530,9 +530,13 @@ class Program
             }
         }
 
-        struct ValueGen<T> { }
+        struct ValueGen<T>
+        {
+        }
 
-        class ClassGen<T> { }
+        class ClassGen<T>
+        {
+        }
 
         public static void Run()
         {
@@ -546,11 +550,17 @@ class Program
     /// </summary>
     class TestStaticBaseLookups
     {
-        class C1 { }
+        class C1
+        {
+        }
 
-        class C2 { }
+        class C2
+        {
+        }
 
-        class C3 { }
+        class C3
+        {
+        }
 
         class GenHolder<T>
         {
@@ -1064,9 +1074,13 @@ class Program
     /// </summary>
     class TestVirtualMethodUseTracking
     {
-        class C1 { }
+        class C1
+        {
+        }
 
-        class C2 { }
+        class C2
+        {
+        }
 
         class Base1<T> where T : class
         {
@@ -1733,9 +1747,13 @@ class Program
 
     class TestConstrainedMethodCalls
     {
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
         interface IFoo<T>
         {
@@ -1894,7 +1912,9 @@ class Program
     {
         class Gen1<T>
         {
-            public Gen1(T t) { }
+            public Gen1(T t)
+            {
+            }
         }
 
         public static void Run()
@@ -2088,7 +2108,9 @@ class Program
             }
         }
 
-        public class AnotherDerivedClass<T> : AnotherBaseClass<T>, IFace<T> { }
+        public class AnotherDerivedClass<T> : AnotherBaseClass<T>, IFace<T>
+        {
+        }
 
         public class BarImplementor : IBar<int>
         {
@@ -2307,7 +2329,9 @@ class Program
 
     class TestGvmDelegates
     {
-        class Atom { }
+        class Atom
+        {
+        }
 
         interface IFoo
         {
@@ -2393,7 +2417,9 @@ class Program
 
     class TestGvmDependencies
     {
-        class Atom { }
+        class Atom
+        {
+        }
 
         class Foo
         {
@@ -2427,11 +2453,17 @@ class Program
 
     class TestFieldAccess
     {
-        class ClassType { }
+        class ClassType
+        {
+        }
 
-        class ClassType2 { }
+        class ClassType2
+        {
+        }
 
-        struct StructType { }
+        struct StructType
+        {
+        }
 
         class Foo<T>
         {
@@ -2488,7 +2520,9 @@ class Program
             public T _t;
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public DynamicBase() { }
+            public DynamicBase()
+            {
+            }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public int SimpleMethod()
@@ -2528,7 +2562,9 @@ class Program
         public class DynamicDerived<T> : DynamicBase<T>
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public DynamicDerived() { }
+            public DynamicDerived()
+            {
+            }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public override string VirtualMethod(T t)
@@ -2559,7 +2595,9 @@ class Program
 #pragma warning restore
         }
 
-        class UnconstructedTypeInstantiator<T> { }
+        class UnconstructedTypeInstantiator<T>
+        {
+        }
 
         public static int s_FooClassTypeCctorCount = 0;
         public static int s_FooStructTypeCctorCount = 0;
@@ -2977,7 +3015,9 @@ class Program
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public void Blagh() { }
+            public void Blagh()
+            {
+            }
         }
 
         public static void Run()
@@ -3001,7 +3041,9 @@ class Program
 
     class TestInterfaceVTableTracking
     {
-        class Gen<T> { }
+        class Gen<T>
+        {
+        }
 
         interface IFoo<T>
         {
@@ -3016,7 +3058,9 @@ class Program
             }
         }
 
-        class Derived<T> : GenericBase<Gen<T>> { }
+        class Derived<T> : GenericBase<Gen<T>>
+        {
+        }
 
         static volatile IFoo<Gen<string>> s_foo;
 
@@ -3031,7 +3075,9 @@ class Program
 
     class TestClassVTableTracking
     {
-        class Unit { }
+        class Unit
+        {
+        }
 
         class Gen<T, U>
         {
@@ -3055,7 +3101,9 @@ class Program
 
     class TestNullableCasting
     {
-        struct Mine<T> { }
+        struct Mine<T>
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool CallWithNullable<T>(object m)
@@ -3092,9 +3140,13 @@ class Program
     {
         private delegate T GenericDelegate<out T>();
 
-        class Base { }
+        class Base
+        {
+        }
 
-        class Derived : Base { }
+        class Derived : Base
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool IsInstanceOfGenericDelegateOf<T>(object o)
@@ -3112,7 +3164,9 @@ class Program
 
     class TestByRefLikeVTables
     {
-        class Atom<T> { }
+        class Atom<T>
+        {
+        }
 
         ref struct RefStruct<T>
         {
@@ -3295,9 +3349,13 @@ class Program
 
     class TestGenericInlining
     {
-        class NeverSeenInstantiated<T> { }
+        class NeverSeenInstantiated<T>
+        {
+        }
 
-        class AnotherNeverSeenInstantiated<T> { }
+        class AnotherNeverSeenInstantiated<T>
+        {
+        }
 
         class NeverAllocatedIndirection<T, U>
         {
@@ -3313,7 +3371,9 @@ class Program
             public string GetStringIndirect() => s_indirection.GetString();
         }
 
-        class Dummy { }
+        class Dummy
+        {
+        }
 
         static NeverAllocated<Dummy> s_neverAllocated = null;
 
@@ -3515,11 +3575,17 @@ public interface IFoo<T>
     string IFooFunc();
 }
 
-public class MyClass0 { }
+public class MyClass0
+{
+}
 
-public class MyClass1 { }
+public class MyClass1
+{
+}
 
-public class MyClass2 { }
+public class MyClass2
+{
+}
 
 public class MyGenClass1<T>
 {
@@ -3557,7 +3623,9 @@ public class MyIdClass0
 {
     string _id;
 
-    public MyIdClass0() { }
+    public MyIdClass0()
+    {
+    }
 
     public MyIdClass0(string id)
     {
@@ -3574,7 +3642,9 @@ public class MyIdClass1
 {
     string _id;
 
-    public MyIdClass1() { }
+    public MyIdClass1()
+    {
+    }
 
     public MyIdClass1(string id)
     {

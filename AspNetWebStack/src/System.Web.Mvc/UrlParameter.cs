@@ -15,7 +15,9 @@ namespace System.Web.Mvc
         public static readonly UrlParameter Optional = new UrlParameter();
 
         // singleton constructor
-        private UrlParameter() { }
+        private UrlParameter()
+        {
+        }
 
         public override string ToString()
         {

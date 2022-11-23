@@ -15,7 +15,9 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
             Evt("123");
         }
 
-        public AddNestedClass() { }
+        public AddNestedClass()
+        {
+        }
 
         public string TestMethod()
         {
@@ -29,7 +31,9 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
 
         private class Nested<T, U>
         {
-            public Nested() { }
+            public Nested()
+            {
+            }
 
             internal T f;
             internal U g;

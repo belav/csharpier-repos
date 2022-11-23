@@ -10,7 +10,8 @@ namespace Microsoft.Win32.SafeHandles
     public abstract class SafeHandleMinusOneIsInvalid : SafeHandle
     {
         protected SafeHandleMinusOneIsInvalid(bool ownsHandle) : base(new IntPtr(-1), ownsHandle)
-        { }
+        {
+        }
 
         public override bool IsInvalid => handle == new IntPtr(-1);
     }

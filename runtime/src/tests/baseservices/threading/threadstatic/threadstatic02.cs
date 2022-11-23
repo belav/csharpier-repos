@@ -11,7 +11,9 @@ public class MyData
     public AutoResetEvent autoEvent;
 
     //This static constructor causes the C# compiler to make this class precise instead of beforefieldinit
-    static MyData() { }
+    static MyData()
+    {
+    }
 
     [ThreadStatic]
     private static object One = 32;

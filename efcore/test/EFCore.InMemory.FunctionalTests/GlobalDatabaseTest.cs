@@ -264,7 +264,9 @@ public class GlobalDatabaseTest
 
     private class BooFooContext : DbContext
     {
-        public BooFooContext(DbContextOptions options) : base(options) { }
+        public BooFooContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

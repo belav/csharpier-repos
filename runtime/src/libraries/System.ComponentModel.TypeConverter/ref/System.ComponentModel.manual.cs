@@ -6,8 +6,12 @@ namespace System.ComponentModel.Design
     public abstract partial class DesignerOptionService
     {
         [System.ComponentModel.TypeConverter(typeof(DesignerOptionConverter))]
-        public sealed partial class DesignerOptionCollection { }
+        public sealed partial class DesignerOptionCollection
+        {
+        }
 
-        internal sealed class DesignerOptionConverter { }
+        internal sealed class DesignerOptionConverter
+        {
+        }
     }
 }

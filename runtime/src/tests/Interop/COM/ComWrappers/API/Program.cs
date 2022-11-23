@@ -648,7 +648,8 @@ namespace ComWrappersTests
         unsafe class Derived : ITrackerObjectWrapper
         {
             public Derived(ComWrappers cw, bool aggregateRefTracker) : base(cw, aggregateRefTracker)
-            { }
+            {
+            }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static WeakReference<Derived> AllocateAndUseBaseType(

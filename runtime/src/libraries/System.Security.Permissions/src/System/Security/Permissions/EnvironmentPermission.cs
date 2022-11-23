@@ -14,18 +14,26 @@ namespace System.Security.Permissions
         : CodeAccessPermission,
             IUnrestrictedPermission
     {
-        public EnvironmentPermission(EnvironmentPermissionAccess flag, string pathList) { }
+        public EnvironmentPermission(EnvironmentPermissionAccess flag, string pathList)
+        {
+        }
 
-        public EnvironmentPermission(PermissionState state) { }
+        public EnvironmentPermission(PermissionState state)
+        {
+        }
 
-        public void AddPathList(EnvironmentPermissionAccess flag, string pathList) { }
+        public void AddPathList(EnvironmentPermissionAccess flag, string pathList)
+        {
+        }
 
         public override IPermission Copy()
         {
             return default(IPermission);
         }
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
 
         public string GetPathList(EnvironmentPermissionAccess flag)
         {
@@ -47,7 +55,9 @@ namespace System.Security.Permissions
             return false;
         }
 
-        public void SetPathList(EnvironmentPermissionAccess flag, string pathList) { }
+        public void SetPathList(EnvironmentPermissionAccess flag, string pathList)
+        {
+        }
 
         public override SecurityElement ToXml()
         {

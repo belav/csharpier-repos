@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class CSharpProjectFileLoader : ProjectFileLoader
     {
-        public CSharpProjectFileLoader() { }
+        public CSharpProjectFileLoader()
+        {
+        }
 
         public override string Language => LanguageNames.CSharp;
 

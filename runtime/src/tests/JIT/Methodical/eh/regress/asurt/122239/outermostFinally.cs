@@ -46,8 +46,12 @@ namespace test_outermostFinally
                     Console.WriteLine("\tfinally 1.1");
                     Console.WriteLine("\t\tThrowing an exception here");
                     Console.WriteLine(array[array.Length]);
-                    try { }
-                    finally { }
+                    try
+                    {
+                    }
+                    finally
+                    {
+                    }
                 }
             }
             catch (IndexOutOfRangeException)

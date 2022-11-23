@@ -18,7 +18,9 @@ namespace Castle.Core.Resource
 
     public class UncResourceFactory : IResourceFactory
     {
-        public UncResourceFactory() { }
+        public UncResourceFactory()
+        {
+        }
 
         public bool Accept(CustomUri uri)
         {

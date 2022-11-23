@@ -334,7 +334,9 @@ namespace System.Net.Http.Internal
             var range = new RangeItemHeaderValue(from, to);
             var data = new byte[25];
             var offset = 5;
-            var callback = new AsyncCallback(_ => { });
+            var callback = new AsyncCallback(_ =>
+            {
+            });
             var userState = new object();
 
             using (var rangeStream = new ByteRangeStream(mockInnerStream.Object, range))
@@ -359,7 +361,9 @@ namespace System.Net.Http.Internal
             var originalText = "This is the whole text.";
             var range = new RangeItemHeaderValue(0L, null);
             var data = new byte[25];
-            var callback = new AsyncCallback(_ => { });
+            var callback = new AsyncCallback(_ =>
+            {
+            });
             var userState = new object();
 
             using (var innerStream = new MemoryStream())

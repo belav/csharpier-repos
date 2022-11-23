@@ -90,8 +90,12 @@ public class GrpcSwaggerServiceExtensionsTests
         );
     }
 
-    private class GreeterService : Greeter.GreeterBase { }
+    private class GreeterService : Greeter.GreeterBase
+    {
+    }
 
     [ApiExplorerSettings(GroupName = "v2")]
-    private class CounterService : Counter.CounterBase { }
+    private class CounterService : Counter.CounterBase
+    {
+    }
 }

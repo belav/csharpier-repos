@@ -22,6 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public EmbeddedLanguageCompletionProvider(
             [ImportMany]
                 IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices
-        ) : base(languageServices, LanguageNames.CSharp) { }
+        ) : base(languageServices, LanguageNames.CSharp)
+        {
+        }
     }
 }

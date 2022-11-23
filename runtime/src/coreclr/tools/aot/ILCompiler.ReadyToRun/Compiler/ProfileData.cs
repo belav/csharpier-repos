@@ -149,7 +149,9 @@ namespace ILCompiler
     {
         private static readonly EmptyProfileData s_singleton = new EmptyProfileData();
 
-        private EmptyProfileData() { }
+        private EmptyProfileData()
+        {
+        }
 
         public override MibcConfig Config { get; } = new();
 

@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInlineTypeHintsService() { }
+        public CSharpInlineTypeHintsService()
+        {
+        }
 
         protected override TypeHint? TryGetTypeHint(
             SemanticModel semanticModel,

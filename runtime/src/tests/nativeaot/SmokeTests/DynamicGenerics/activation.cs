@@ -7,7 +7,9 @@ using System.Reflection;
 using CoreFXTestLibrary;
 using TypeOfRepo;
 
-public class Foo { }
+public class Foo
+{
+}
 
 public class My
 {

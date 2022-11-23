@@ -12,6 +12,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
     )]
     public sealed class BindNeverAttribute : BindingBehaviorAttribute
     {
-        public BindNeverAttribute() : base(BindingBehavior.Never) { }
+        public BindNeverAttribute() : base(BindingBehavior.Never)
+        {
+        }
     }
 }

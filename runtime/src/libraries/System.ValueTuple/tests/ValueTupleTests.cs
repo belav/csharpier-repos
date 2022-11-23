@@ -3309,7 +3309,9 @@ namespace System.Tests
         {
             private readonly int _value;
 
-            internal TestClass() : this(0) { }
+            internal TestClass() : this(0)
+            {
+            }
 
             internal TestClass(int value)
             {
@@ -3335,7 +3337,9 @@ namespace System.Tests
         {
             private readonly int _value;
 
-            internal TestClass2() : this(0) { }
+            internal TestClass2() : this(0)
+            {
+            }
 
             internal TestClass2(int value)
             {

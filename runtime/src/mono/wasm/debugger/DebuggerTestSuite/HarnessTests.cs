@@ -14,7 +14,9 @@ namespace DebuggerTests
 {
     public class HarnessTests : DebuggerTests
     {
-        public HarnessTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public HarnessTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task TimedOutWaitingForInvalidBreakpoint()

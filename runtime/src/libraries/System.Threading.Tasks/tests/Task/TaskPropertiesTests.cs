@@ -119,7 +119,11 @@ namespace System.Threading.Tasks.Tests
             {
                 TaskCreationOptions options = (TaskCreationOptions)i;
 
-                tasks[i] = new Task(() => { }, options);
+                tasks[i] = new Task(
+                    () => {
+                    },
+                    options
+                );
                 if (runSync)
                     tasks[i].RunSynchronously();
                 else

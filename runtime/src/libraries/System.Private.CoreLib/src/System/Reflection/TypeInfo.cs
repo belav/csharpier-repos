@@ -8,7 +8,9 @@ namespace System.Reflection
 {
     public abstract partial class TypeInfo : Type, IReflectableType
     {
-        protected TypeInfo() { }
+        protected TypeInfo()
+        {
+        }
 
         TypeInfo IReflectableType.GetTypeInfo() => this;
 

@@ -23,7 +23,9 @@ namespace System.Reflection.Runtime.MethodInfos
     [DebuggerDisplay("{_debugName}")]
     internal abstract partial class RuntimeMethodInfo : MethodInfo
     {
-        protected RuntimeMethodInfo() { }
+        protected RuntimeMethodInfo()
+        {
+        }
 
         public abstract override MethodAttributes Attributes { get; }
 

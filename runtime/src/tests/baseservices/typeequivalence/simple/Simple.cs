@@ -209,7 +209,9 @@ public class Simple
 
     class Generic<V> : IGeneric<V>
     {
-        public void Method(V input) { }
+        public void Method(V input)
+        {
+        }
     }
 
     private static void TestGenericClassNonEquivalence()

@@ -42,7 +42,9 @@ namespace System.Xml.RwFactoryWriterTests
             string desc,
             Exception e,
             CTestModule testModule
-        ) : this(name, desc, e, tagVARIATION_STATUS.eVariationStatusAborted, testModule) { }
+        ) : this(name, desc, e, tagVARIATION_STATUS.eVariationStatusAborted, testModule)
+        {
+        }
 
         internal CXmlDriverErrorTestCase(
             string name,

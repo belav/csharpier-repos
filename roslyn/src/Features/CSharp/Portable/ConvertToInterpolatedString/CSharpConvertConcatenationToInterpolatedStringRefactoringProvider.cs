@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToInterpolatedString
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertConcatenationToInterpolatedStringRefactoringProvider() { }
+        public CSharpConvertConcatenationToInterpolatedStringRefactoringProvider()
+        {
+        }
 
         protected override string GetTextWithoutQuotes(
             string text,

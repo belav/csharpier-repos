@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public SolutionCrawlerService() { }
+            public SolutionCrawlerService()
+            {
+            }
 
             public void Reanalyze(
                 Workspace workspace,

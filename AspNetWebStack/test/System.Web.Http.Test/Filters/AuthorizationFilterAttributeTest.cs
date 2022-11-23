@@ -262,5 +262,7 @@ namespace System.Web.Http.Filters
         }
     }
 
-    public class TestableAuthorizationFilter : AuthorizationFilterAttribute { }
+    public class TestableAuthorizationFilter : AuthorizationFilterAttribute
+    {
+    }
 }

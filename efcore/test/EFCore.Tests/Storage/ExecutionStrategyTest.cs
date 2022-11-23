@@ -76,7 +76,11 @@ public class ExecutionStrategyTest : IDisposable
 
     [ConditionalFact]
     public void Execute_Action_throws_for_an_existing_transaction() =>
-        Execute_throws_for_an_existing_transaction(e => e.Execute(() => { }));
+        Execute_throws_for_an_existing_transaction(
+            e =>
+                e.Execute(() => {
+                })
+        );
 
     [ConditionalFact]
     public void Execute_Func_throws_for_an_existing_transaction() =>
@@ -101,7 +105,11 @@ public class ExecutionStrategyTest : IDisposable
 
     [ConditionalFact]
     public void Execute_Action_throws_for_an_ambient_transaction() =>
-        Execute_throws_for_an_ambient_transaction(e => e.Execute(() => { }));
+        Execute_throws_for_an_ambient_transaction(
+            e =>
+                e.Execute(() => {
+                })
+        );
 
     [ConditionalFact]
     public void Execute_Func_throws_for_an_ambient_transaction() =>
@@ -126,7 +134,11 @@ public class ExecutionStrategyTest : IDisposable
 
     [ConditionalFact]
     public void Execute_Action_throws_for_an_enlisted_transaction() =>
-        Execute_throws_for_an_enlisted_transaction(e => e.Execute(() => { }));
+        Execute_throws_for_an_enlisted_transaction(
+            e =>
+                e.Execute(() => {
+                })
+        );
 
     [ConditionalFact]
     public void Execute_Func_throws_for_an_enlisted_transaction() =>
@@ -813,7 +825,9 @@ public class ExecutionStrategyTest : IDisposable
         }
 
         protected TestExecutionStrategy()
-            : base((ExecutionStrategyDependencies)null, DefaultMaxRetryCount, DefaultMaxDelay) { }
+            : base((ExecutionStrategyDependencies)null, DefaultMaxRetryCount, DefaultMaxDelay)
+        {
+        }
 
         protected internal override bool ShouldRetryOn(Exception exception) =>
             _shouldRetryOn?.Invoke(exception) == true;

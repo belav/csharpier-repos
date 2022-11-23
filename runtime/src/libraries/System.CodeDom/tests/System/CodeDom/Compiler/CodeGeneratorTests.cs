@@ -1510,8 +1510,10 @@ namespace System.CodeDom.Compiler.Tests
             generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
             generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            generator.GenerateNamespaceStartAction = (actualE) => { };
-            generator.GenerateNamespaceEndAction = (actualE) => { };
+            generator.GenerateNamespaceStartAction = (actualE) => {
+            };
+            generator.GenerateNamespaceEndAction = (actualE) => {
+            };
 
             Assert.Throws<NullReferenceException>(() => generator.GenerateNamespace(e));
         }
@@ -1527,8 +1529,10 @@ namespace System.CodeDom.Compiler.Tests
                 generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
                 generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
                     baseMethod(actualE);
-                generator.GenerateNamespaceStartAction = (actualE) => { };
-                generator.GenerateNamespaceEndAction = (actualE) => { };
+                generator.GenerateNamespaceStartAction = (actualE) => {
+                };
+                generator.GenerateNamespaceEndAction = (actualE) => {
+                };
 
                 Assert.Throws<ArgumentException>("e", () => generator.GenerateNamespace(e));
             });
@@ -1844,7 +1848,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualType, actualName);
             generator.OutputDirectionAction = (actualDirection, baseMethod) =>
                 baseMethod(actualDirection);
-            generator.OutputTypeAction = (actualType) => { };
+            generator.OutputTypeAction = (actualType) => {
+            };
             Assert.Throws<NullReferenceException>(
                 () => generator.GenerateParameterDeclarationExpression(e)
             );
@@ -2958,8 +2963,10 @@ namespace System.CodeDom.Compiler.Tests
                 generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
                 generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
                     baseMethod(actualE);
-                generator.GenerateNamespaceStartAction = (actualE) => { };
-                generator.GenerateNamespaceEndAction = (actualE) => { };
+                generator.GenerateNamespaceStartAction = (actualE) => {
+                };
+                generator.GenerateNamespaceEndAction = (actualE) => {
+                };
 
                 Assert.Throws<ArgumentException>("e", () => generator.GenerateTypes(e));
             });
@@ -3214,8 +3221,10 @@ namespace System.CodeDom.Compiler.Tests
             );
             generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
-            generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => { };
-            generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
+            generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => {
+            };
+            generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => {
+            };
             Assert.Throws<NullReferenceException>(
                 () => generator.OutputAttributeDeclarations(attributes)
             );
@@ -3235,10 +3244,12 @@ namespace System.CodeDom.Compiler.Tests
                 );
                 generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
                     baseMethod(actualAttributes);
-                generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => { };
+                generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => {
+                };
                 generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
                     baseMethod(actualArg);
-                generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
+                generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => {
+                };
                 Assert.Throws<ArgumentNullException>(
                     "e",
                     () => generator.OutputAttributeDeclarations(attributes)
@@ -4129,7 +4140,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualDirection);
             generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) =>
                 baseMethod(actualTypeRef, actualName);
-            generator.OutputTypeAction = (actualTypeRef) => { };
+            generator.OutputTypeAction = (actualTypeRef) => {
+            };
             Assert.Throws<NullReferenceException>(() => generator.OutputParameters(parameters));
         }
 
@@ -4190,7 +4202,8 @@ namespace System.CodeDom.Compiler.Tests
             var typeRef = new CodeTypeReference();
             generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) =>
                 baseMethod(actualTypeRef, actualName);
-            generator.OutputTypeAction = (actualTypeRef) => { };
+            generator.OutputTypeAction = (actualTypeRef) => {
+            };
             Assert.Throws<NullReferenceException>(
                 () => generator.OutputTypeNamePair(typeRef, "name")
             );
@@ -5285,8 +5298,12 @@ namespace System.CodeDom.Compiler.Tests
             ValidateIdentifierAction(value, base.ValidateIdentifier);
         }
 
-        private class CustomCodeExpression : CodeExpression { }
+        private class CustomCodeExpression : CodeExpression
+        {
+        }
 
-        private class CustomCodeStatement : CodeStatement { }
+        private class CustomCodeStatement : CodeStatement
+        {
+        }
     }
 }

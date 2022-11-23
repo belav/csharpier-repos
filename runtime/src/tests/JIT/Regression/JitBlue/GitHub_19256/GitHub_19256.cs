@@ -39,5 +39,7 @@ public class GitHub_19256
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Use(S2 arg) { }
+    private static void Use(S2 arg)
+    {
+    }
 }

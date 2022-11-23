@@ -138,15 +138,21 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 );
             }
 
-            internal WithManyChildren(ArrayElement<GreenNode>[] children) : base(children) { }
+            internal WithManyChildren(ArrayElement<GreenNode>[] children) : base(children)
+            {
+            }
 
             internal WithManyChildren(
                 DiagnosticInfo[]? diagnostics,
                 SyntaxAnnotation[]? annotations,
                 ArrayElement<GreenNode>[] children
-            ) : base(diagnostics, annotations, children) { }
+            ) : base(diagnostics, annotations, children)
+            {
+            }
 
-            internal WithManyChildren(ObjectReader reader) : base(reader) { }
+            internal WithManyChildren(ObjectReader reader) : base(reader)
+            {
+            }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[]? errors)
             {

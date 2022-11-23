@@ -88,7 +88,9 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="JConstructor"/> class.
         /// </summary>
-        public JConstructor() { }
+        public JConstructor()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JConstructor"/> class from another <see cref="JConstructor"/> object.
@@ -104,7 +106,9 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="name">The constructor name.</param>
         /// <param name="content">The contents of the constructor.</param>
-        public JConstructor(string name, params object[] content) : this(name, (object)content) { }
+        public JConstructor(string name, params object[] content) : this(name, (object)content)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JConstructor"/> class with the specified name and content.

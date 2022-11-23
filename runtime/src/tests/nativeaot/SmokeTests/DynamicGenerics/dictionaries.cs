@@ -17,7 +17,9 @@ namespace Dictionaries
         public abstract Object Test(int i, Object o);
     }
 
-    public struct GenericStruct<T> { }
+    public struct GenericStruct<T>
+    {
+    }
 
     public class NullableTest<T> : Base where T : struct
     {
@@ -104,7 +106,9 @@ namespace Dictionaries
             IFace2<string>,
             IDerivedIFace<string>
     {
-        public Gen() { }
+        public Gen()
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string TestTypeDict()
@@ -254,7 +258,9 @@ namespace Dictionaries
                 Console.WriteLine("Didn't throw expected exception!");
                 Assert.AreEqual(false, true);
             }
-            catch (InvalidCastException) { }
+            catch (InvalidCastException)
+            {
+            }
             try
             {
                 Test_Method.Invoke(genOf, new object[] { 5, genOf });
@@ -489,7 +495,9 @@ namespace Dictionaries
                     Console.WriteLine("Didn't throw expected exception!");
                     Assert.AreEqual(false, true);
                 }
-                catch (InvalidCastException) { }
+                catch (InvalidCastException)
+                {
+                }
             }
 
             // Delegates taking Nullable<T>
@@ -511,7 +519,9 @@ namespace Dictionaries
 
 namespace TypeDictTestTypes
 {
-    public class MyClass5 { }
+    public class MyClass5
+    {
+    }
 
     public class MyClass4<X, Y>
     {
@@ -881,11 +891,17 @@ namespace BaseTypeDict
     }
 
 #if USC
-    public struct Foo2 { }
+    public struct Foo2
+    {
+    }
 #else
-    public class Foo1 { }
+    public class Foo1
+    {
+    }
 
-    public class Foo2 : Foo1 { }
+    public class Foo2 : Foo1
+    {
+    }
 #endif
 
     public class GenBase2<T, U>
@@ -1108,21 +1124,37 @@ namespace BaseTypeDict
 namespace DictDependency
 {
 #if USC
-    public struct MyType1<A, B> { }
+    public struct MyType1<A, B>
+    {
+    }
 
-    public struct MyType2<A, B> { }
+    public struct MyType2<A, B>
+    {
+    }
 
-    public struct MyType3 { }
+    public struct MyType3
+    {
+    }
 
-    public struct MyType4 { }
+    public struct MyType4
+    {
+    }
 #else
-    public class MyType1<A, B> { }
+    public class MyType1<A, B>
+    {
+    }
 
-    public class MyType2<A, B> { }
+    public class MyType2<A, B>
+    {
+    }
 
-    public class MyType3 { }
+    public class MyType3
+    {
+    }
 
-    public class MyType4 { }
+    public class MyType4
+    {
+    }
 #endif
 
     public class TestClass1<T>
@@ -1244,7 +1276,9 @@ namespace CtorDict
             _n = 123;
         }
 
-        ~MyType2() { }
+        ~MyType2()
+        {
+        }
 
         public override string ToString()
         {
@@ -1254,7 +1288,9 @@ namespace CtorDict
 
     public class MyType3
     {
-        public MyType3(string s) { }
+        public MyType3(string s)
+        {
+        }
 
         public override string ToString()
         {
@@ -1305,7 +1341,9 @@ namespace CtorDict
             _double = 12345.6789;
         }
 
-        ~MyType6() { }
+        ~MyType6()
+        {
+        }
 
         public override string ToString()
         {
@@ -1483,7 +1521,9 @@ namespace CtorDict
                 Console.WriteLine("ArgumentException not thrown!!");
                 Assert.AreEqual(true, false);
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
 
             result = m.Invoke(inst, new object[] { 6 });
             Assert.AreEqual(Activator.CreateInstance(t1).ToString(), result.ToString());
@@ -1532,13 +1572,21 @@ namespace CtorDict
 namespace MethodAndUnboxingStubTesting
 {
 #if USC
-    public struct Class1 { }
+    public struct Class1
+    {
+    }
 
-    public struct Class2 { }
+    public struct Class2
+    {
+    }
 #else
-    public class Class1 { }
+    public class Class1
+    {
+    }
 
-    public class Class2 { }
+    public class Class2
+    {
+    }
 #endif
 
     public class GenericClass<T, U>
@@ -1760,21 +1808,37 @@ namespace MethodAndUnboxingStubTesting
 namespace ExistingInstantiations
 {
 #if USC
-    public struct MyClass1 { }
+    public struct MyClass1
+    {
+    }
 
-    public struct MyClass2 { }
+    public struct MyClass2
+    {
+    }
 
-    public struct MyClass3 { }
+    public struct MyClass3
+    {
+    }
 
-    public struct MyClass4 { }
+    public struct MyClass4
+    {
+    }
 #else
-    public class MyClass1 { }
+    public class MyClass1
+    {
+    }
 
-    public class MyClass2 { }
+    public class MyClass2
+    {
+    }
 
-    public class MyClass3 { }
+    public class MyClass3
+    {
+    }
 
-    public class MyClass4 { }
+    public class MyClass4
+    {
+    }
 #endif
 
     public class Gen<T, U>
@@ -1824,7 +1888,9 @@ namespace ExistingInstantiations
         }
     }
 
-    public class Foo<T, U> { }
+    public class Foo<T, U>
+    {
+    }
 
     public struct MyIntWrapper
     {
@@ -2059,166 +2125,274 @@ namespace ExistingInstantiations
 
 namespace TemplateDependencyFromGenArgs
 {
-    public class A1<T, U> { }
+    public class A1<T, U>
+    {
+    }
 
-    public class A2<T> { }
+    public class A2<T>
+    {
+    }
 
-    public class A3<T> { }
+    public class A3<T>
+    {
+    }
 
-    public class B1<T, U> { }
+    public class B1<T, U>
+    {
+    }
 
-    public class B2<T> { }
+    public class B2<T>
+    {
+    }
 
-    public class B3<T> { }
+    public class B3<T>
+    {
+    }
 
-    public class C1<T, U> { }
+    public class C1<T, U>
+    {
+    }
 
-    public class C2<T> { }
+    public class C2<T>
+    {
+    }
 
-    public class C3<T> { }
+    public class C3<T>
+    {
+    }
 
-    public class D1<T, U> { }
+    public class D1<T, U>
+    {
+    }
 
-    public class D2<T> { }
+    public class D2<T>
+    {
+    }
 
-    public class D3<T> { }
+    public class D3<T>
+    {
+    }
 
-    public class E1<T, U> { }
+    public class E1<T, U>
+    {
+    }
 
-    public class E2<T> { }
+    public class E2<T>
+    {
+    }
 
-    public class E3<T> { }
+    public class E3<T>
+    {
+    }
 
-    public class F1<T, U> { }
+    public class F1<T, U>
+    {
+    }
 
-    public class F2<T> { }
+    public class F2<T>
+    {
+    }
 
-    public class F3<T> { }
+    public class F3<T>
+    {
+    }
 
-    public class G1<T, U> { }
+    public class G1<T, U>
+    {
+    }
 
-    public class G2<T> { }
+    public class G2<T>
+    {
+    }
 
-    public class G3<T> { }
+    public class G3<T>
+    {
+    }
 
-    public class H1<T, U> { }
+    public class H1<T, U>
+    {
+    }
 
-    public class H2<T> { }
+    public class H2<T>
+    {
+    }
 
-    public class H3<T> { }
+    public class H3<T>
+    {
+    }
 
-    public class I1<T, U> { }
+    public class I1<T, U>
+    {
+    }
 
-    public class I2<T> { }
+    public class I2<T>
+    {
+    }
 
-    public class I3<T> { }
+    public class I3<T>
+    {
+    }
 
-    public class J1<T, U> { }
+    public class J1<T, U>
+    {
+    }
 
-    public class J2<T> { }
+    public class J2<T>
+    {
+    }
 
-    public class J3<T> { }
+    public class J3<T>
+    {
+    }
 
-    public class K1<T, U> { }
+    public class K1<T, U>
+    {
+    }
 
-    public class K2<T> { }
+    public class K2<T>
+    {
+    }
 
-    public class K3<T> { }
+    public class K3<T>
+    {
+    }
 
-    public class L1<T, U> { }
+    public class L1<T, U>
+    {
+    }
 
-    public class L2<T> { }
+    public class L2<T>
+    {
+    }
 
-    public class L3<T> { }
+    public class L3<T>
+    {
+    }
 
     public class M1<T, U>
     {
-        public class Nested<V> { }
+        public class Nested<V>
+        {
+        }
     }
 
     public class M2<T>
     {
-        public class Nested<V> { }
+        public class Nested<V>
+        {
+        }
     }
 
     public class M3<T>
     {
-        public class Nested<V> { }
+        public class Nested<V>
+        {
+        }
     }
 
     public class N1<T, U>
     {
-        public class Nested<V> { }
+        public class Nested<V>
+        {
+        }
     }
 
     public class N2<T>
     {
-        public class Nested<V> { }
+        public class Nested<V>
+        {
+        }
     }
 
     public class N3<T>
     {
-        public class Nested<V> { }
+        public class Nested<V>
+        {
+        }
     }
 
     public class O1<T, U>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class O2<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class O3<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class P1<T, U>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class P2<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class P3<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class Q1<T, U>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class Q2<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class Q3<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class R1<T, U>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class R2<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public class R3<T>
     {
-        public class Nested { }
+        public class Nested
+        {
+        }
     }
 
     public static class MyTypeExtension

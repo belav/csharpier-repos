@@ -15,15 +15,20 @@ namespace System.IO.Pipes
         private bool _clientHandleExposed;
 
         public AnonymousPipeServerStream() : this(PipeDirection.Out, HandleInheritability.None, 0)
-        { }
+        {
+        }
 
         public AnonymousPipeServerStream(PipeDirection direction)
-            : this(direction, HandleInheritability.None, 0) { }
+            : this(direction, HandleInheritability.None, 0)
+        {
+        }
 
         public AnonymousPipeServerStream(
             PipeDirection direction,
             HandleInheritability inheritability
-        ) : this(direction, inheritability, 0) { }
+        ) : this(direction, inheritability, 0)
+        {
+        }
 
         // Create an AnonymousPipeServerStream from two existing pipe handles.
         public AnonymousPipeServerStream(

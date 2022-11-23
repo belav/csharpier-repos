@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseRangeOperatorCodeFixProvider() { }
+        public CSharpUseRangeOperatorCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseRangeOperatorDiagnosticId);

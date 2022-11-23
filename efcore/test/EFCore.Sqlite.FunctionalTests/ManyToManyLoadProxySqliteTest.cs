@@ -7,7 +7,8 @@ public class ManyToManyLoadProxySqliteTest
     : ManyToManyLoadSqliteTestBase<ManyToManyLoadProxySqliteTest.ManyToManyLoadProxySqliteFixture>
 {
     public ManyToManyLoadProxySqliteTest(ManyToManyLoadProxySqliteFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     protected override bool ExpectLazyLoading => true;
 

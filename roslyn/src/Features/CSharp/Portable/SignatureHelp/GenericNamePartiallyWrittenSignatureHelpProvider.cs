@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GenericNamePartiallyWrittenSignatureHelpProvider() { }
+        public GenericNamePartiallyWrittenSignatureHelpProvider()
+        {
+        }
 
         protected override bool TryGetGenericIdentifier(
             SyntaxNode root,

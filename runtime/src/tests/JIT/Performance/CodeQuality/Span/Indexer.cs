@@ -25,7 +25,9 @@ namespace Span
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     class BenchmarkAttribute : Attribute
     {
-        public BenchmarkAttribute() { }
+        public BenchmarkAttribute()
+        {
+        }
 
         private long _innerIterationsCount = 1;
         public long InnerIterationCount

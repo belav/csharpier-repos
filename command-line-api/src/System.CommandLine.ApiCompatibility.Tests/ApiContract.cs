@@ -198,7 +198,9 @@ internal static class ApiContract
                 .OrderBy(c => c.Name)
         )
         {
-            if (method.Name == "AddAliasInner") { }
+            if (method.Name == "AddAliasInner")
+            {
+            }
 
             if (printedMethods.Add(method))
             {

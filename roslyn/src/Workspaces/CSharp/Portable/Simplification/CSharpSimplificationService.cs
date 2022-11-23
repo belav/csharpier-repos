@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSimplificationService() : base(s_reducers) { }
+        public CSharpSimplificationService() : base(s_reducers)
+        {
+        }
 
         public override SimplifierOptions DefaultOptions => CSharpSimplifierOptions.Default;
 

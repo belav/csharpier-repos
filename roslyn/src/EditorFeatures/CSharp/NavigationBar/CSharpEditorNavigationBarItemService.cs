@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.NavigationBar
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpEditorNavigationBarItemService(IThreadingContext threadingContext)
-            : base(threadingContext) { }
+            : base(threadingContext)
+        {
+        }
 
         protected override async Task<bool> TryNavigateToItemAsync(
             Document document,

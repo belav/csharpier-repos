@@ -33,7 +33,9 @@ namespace System
         // However when the ctor is called from OnCreateUri context the calling parser
         // settings will later override the result on the base class
         //
-        protected UriParser() : this(SchemeOnlyFlags) { }
+        protected UriParser() : this(SchemeOnlyFlags)
+        {
+        }
 
         //
         // Is called on each Uri ctor for every non-simple parser i.e. the one that does have
@@ -48,7 +50,9 @@ namespace System
         // Is called whenever a parser gets registered with some scheme
         // The base implementation is a nop.
         //
-        protected virtual void OnRegister(string schemeName, int defaultPort) { }
+        protected virtual void OnRegister(string schemeName, int defaultPort)
+        {
+        }
 
         //
         // Parses and validates a Uri object, is called at the Uri ctor time.

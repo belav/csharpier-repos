@@ -12,7 +12,9 @@ namespace System.Web.Mvc
             ModelMetadata metadata,
             ControllerContext context,
             MaxLengthAttribute attribute
-        ) : base(metadata, context, attribute) { }
+        ) : base(metadata, context, attribute)
+        {
+        }
 
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {

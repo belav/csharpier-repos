@@ -431,7 +431,9 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        private static void ValidateCommentStatement(CodeCommentStatement e) { }
+        private static void ValidateCommentStatement(CodeCommentStatement e)
+        {
+        }
 
         private void ValidateStatement(CodeStatement e)
         {

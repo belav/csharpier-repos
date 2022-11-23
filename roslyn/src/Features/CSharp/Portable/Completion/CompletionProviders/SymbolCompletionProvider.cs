@@ -92,7 +92,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolCompletionProvider() { }
+        public SymbolCompletionProvider()
+        {
+        }
 
         public override ImmutableHashSet<char> TriggerCharacters { get; } =
             CompletionUtilities.CommonTriggerCharactersWithArgumentList;

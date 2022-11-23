@@ -357,21 +357,35 @@ namespace Microsoft.Extensions.Internal
             Assert.Equal(expectedTypeName, displayName);
         }
 
-        private class A { }
+        private class A
+        {
+        }
 
-        private class B<T> { }
+        private class B<T>
+        {
+        }
 
-        private class C<T1, T2> { }
+        private class C<T1, T2>
+        {
+        }
 
-        private class PartiallyClosedGeneric<T> : C<T, int> { }
+        private class PartiallyClosedGeneric<T> : C<T, int>
+        {
+        }
 
         private class Outer<T>
         {
-            public class D { }
+            public class D
+            {
+            }
 
-            public class E<T1> { }
+            public class E<T1>
+            {
+            }
 
-            public class F<T1, T2> { }
+            public class F<T1, T2>
+            {
+            }
         }
 
         private class OuterGeneric<T1>
@@ -380,9 +394,13 @@ namespace Microsoft.Extensions.Internal
             {
                 public class InnerGeneric<T2, T3>
                 {
-                    public class InnerGenericLeafNode<T4> { }
+                    public class InnerGenericLeafNode<T4>
+                    {
+                    }
 
-                    public class InnerLeafNode { }
+                    public class InnerLeafNode
+                    {
+                    }
                 }
             }
         }
@@ -391,10 +409,14 @@ namespace Microsoft.Extensions.Internal
         {
             public class Level2<T2>
             {
-                public class Level3<T3> { }
+                public class Level3<T3>
+                {
+                }
             }
         }
     }
 }
 
-internal class ClassInGlobalNamespace<T> { }
+internal class ClassInGlobalNamespace<T>
+{
+}

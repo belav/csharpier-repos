@@ -48,7 +48,9 @@ namespace System.Web.Razor.Generator
             InnerWriter.Write(")");
         }
 
-        protected internal override void EmitEndLambdaExpression() { }
+        protected internal override void EmitEndLambdaExpression()
+        {
+        }
 
         public override void WriteParameterSeparator()
         {
@@ -67,8 +69,12 @@ namespace System.Web.Razor.Generator
             }
         }
 
-        protected internal virtual void WriteStartGenerics() { }
+        protected internal virtual void WriteStartGenerics()
+        {
+        }
 
-        protected internal virtual void WriteEndGenerics() { }
+        protected internal virtual void WriteEndGenerics()
+        {
+        }
     }
 }

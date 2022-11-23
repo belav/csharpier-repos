@@ -18,7 +18,9 @@ internal readonly record struct DocumentationCommentOptions
     [DataMember]
     public bool AutoXmlDocCommentGeneration { get; init; } = true;
 
-    public DocumentationCommentOptions() { }
+    public DocumentationCommentOptions()
+    {
+    }
 
     public bool UseTabs => LineFormatting.UseTabs;
     public int TabSize => LineFormatting.TabSize;

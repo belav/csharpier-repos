@@ -3,5 +3,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
-    public class PocoClass { }
+    public class PocoClass
+    {
+    }
 }

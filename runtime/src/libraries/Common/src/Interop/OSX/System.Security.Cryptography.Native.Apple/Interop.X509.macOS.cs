@@ -498,11 +498,15 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeSecIdentityHandle : SafeKeychainItemHandle
     {
-        public SafeSecIdentityHandle() { }
+        public SafeSecIdentityHandle()
+        {
+        }
     }
 
     internal sealed class SafeSecCertificateHandle : SafeKeychainItemHandle
     {
-        public SafeSecCertificateHandle() { }
+        public SafeSecCertificateHandle()
+        {
+        }
     }
 }

@@ -12,7 +12,9 @@ namespace System.Threading.RateLimiting
 
         private long _totalSuccessfulLeases;
 
-        public NoopLimiter() { }
+        public NoopLimiter()
+        {
+        }
 
         public override TimeSpan? IdleDuration => null;
 

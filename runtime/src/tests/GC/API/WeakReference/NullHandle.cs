@@ -12,7 +12,9 @@ using System.Runtime.CompilerServices;
 
 public class WR : WeakReference
 {
-    public WR(Object o) : base(o, false) { }
+    public WR(Object o) : base(o, false)
+    {
+    }
 
     ~WR()
     {

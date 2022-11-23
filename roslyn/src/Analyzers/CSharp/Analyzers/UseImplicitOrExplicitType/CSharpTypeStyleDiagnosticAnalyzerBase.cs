@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
                 ),
                 title,
                 message
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

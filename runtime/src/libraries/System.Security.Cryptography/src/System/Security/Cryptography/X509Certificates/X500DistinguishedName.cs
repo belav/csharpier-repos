@@ -13,7 +13,9 @@ namespace System.Security.Cryptography.X509Certificates
         private List<X500RelativeDistinguishedName>? _parsedAttributes;
 
         public X500DistinguishedName(byte[] encodedDistinguishedName)
-            : base(new Oid(null, null), encodedDistinguishedName) { }
+            : base(new Oid(null, null), encodedDistinguishedName)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X500DistinguishedName"/>
@@ -24,10 +26,14 @@ namespace System.Security.Cryptography.X509Certificates
         /// </param>
         /// <seealso cref="Encode"/>
         public X500DistinguishedName(ReadOnlySpan<byte> encodedDistinguishedName)
-            : base(new Oid(null, null), encodedDistinguishedName) { }
+            : base(new Oid(null, null), encodedDistinguishedName)
+        {
+        }
 
         public X500DistinguishedName(AsnEncodedData encodedDistinguishedName)
-            : base(encodedDistinguishedName) { }
+            : base(encodedDistinguishedName)
+        {
+        }
 
         public X500DistinguishedName(X500DistinguishedName distinguishedName)
             : base(distinguishedName)
@@ -36,7 +42,9 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X500DistinguishedName(string distinguishedName)
-            : this(distinguishedName, X500DistinguishedNameFlags.Reversed) { }
+            : this(distinguishedName, X500DistinguishedNameFlags.Reversed)
+        {
+        }
 
         public X500DistinguishedName(string distinguishedName, X500DistinguishedNameFlags flag)
             : base(new Oid(null, null), Encode(distinguishedName, flag))

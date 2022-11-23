@@ -20,7 +20,9 @@ namespace System.Runtime.InteropServices.Tests
     {
         private sealed class PendingException : Exception
         {
-            public PendingException(string message) : base(message) { }
+            public PendingException(string message) : base(message)
+            {
+            }
         }
 
         [UnmanagedCallersOnly]

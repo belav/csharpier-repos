@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.FixInterpolatedVerbatimString
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FixInterpolatedVerbatimStringCommandHandler() { }
+        public FixInterpolatedVerbatimStringCommandHandler()
+        {
+        }
 
         public string DisplayName => CSharpEditorResources.Fix_interpolated_verbatim_string;
 

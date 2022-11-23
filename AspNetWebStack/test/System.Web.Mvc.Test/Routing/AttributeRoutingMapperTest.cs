@@ -142,12 +142,16 @@ namespace System.Web.Mvc.Routing
         [InvalidConstraintRoute("invalidconstraint/{action}")]
         public class InvalidConstraintController : Controller
         {
-            public void A1() { }
+            public void A1()
+            {
+            }
         }
 
         public class InvalidConstraintRouteAttribute : RouteFactoryAttribute
         {
-            public InvalidConstraintRouteAttribute(string template) : base(template) { }
+            public InvalidConstraintRouteAttribute(string template) : base(template)
+            {
+            }
 
             public override RouteValueDictionary Constraints
             {
@@ -165,27 +169,39 @@ namespace System.Web.Mvc.Routing
             [HttpGet]
             [Route("")]
             [ActionName("ActionName")]
-            public void MethodName() { }
+            public void MethodName()
+            {
+            }
         }
 
         [Route("controller/{action}")]
         public class AnotherController : Controller
         {
-            public void RegularAction() { }
+            public void RegularAction()
+            {
+            }
 
-            public void AnotherAction() { }
+            public void AnotherAction()
+            {
+            }
         }
 
         [Route("controller/{action}")]
-        public class NoActionsController : Controller { }
+        public class NoActionsController : Controller
+        {
+        }
 
         [Route("controller/{action}")]
         public class MixedRoutingController : Controller
         {
             [Route("Yep")]
-            public void DirectRouteAction() { }
+            public void DirectRouteAction()
+            {
+            }
 
-            public void GoodAction() { }
+            public void GoodAction()
+            {
+            }
         }
     }
 }

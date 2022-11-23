@@ -28,12 +28,16 @@ namespace System.Collections.Specialized
         public int this[System.Collections.Specialized.BitVector32.Section section]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool this[int bit]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static int CreateMask()
@@ -151,13 +155,21 @@ namespace System.Collections.Specialized
             System.Collections.IDictionary,
             System.Collections.IEnumerable
     {
-        public HybridDictionary() { }
+        public HybridDictionary()
+        {
+        }
 
-        public HybridDictionary(bool caseInsensitive) { }
+        public HybridDictionary(bool caseInsensitive)
+        {
+        }
 
-        public HybridDictionary(int initialSize) { }
+        public HybridDictionary(int initialSize)
+        {
+        }
 
-        public HybridDictionary(int initialSize, bool caseInsensitive) { }
+        public HybridDictionary(int initialSize, bool caseInsensitive)
+        {
+        }
 
         public int Count
         {
@@ -178,7 +190,9 @@ namespace System.Collections.Specialized
         public object? this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ICollection Keys
         {
@@ -193,23 +207,31 @@ namespace System.Collections.Specialized
             get { throw null; }
         }
 
-        public void Add(object key, object? value) { }
+        public void Add(object key, object? value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object key)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public System.Collections.IDictionaryEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -233,9 +255,13 @@ namespace System.Collections.Specialized
             System.Collections.IDictionary,
             System.Collections.IEnumerable
     {
-        public ListDictionary() { }
+        public ListDictionary()
+        {
+        }
 
-        public ListDictionary(System.Collections.IComparer? comparer) { }
+        public ListDictionary(System.Collections.IComparer? comparer)
+        {
+        }
 
         public int Count
         {
@@ -256,7 +282,9 @@ namespace System.Collections.Specialized
         public object? this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ICollection Keys
         {
@@ -271,23 +299,31 @@ namespace System.Collections.Specialized
             get { throw null; }
         }
 
-        public void Add(object key, object? value) { }
+        public void Add(object key, object? value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object key)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public System.Collections.IDictionaryEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -301,10 +337,13 @@ namespace System.Collections.Specialized
             System.Runtime.Serialization.IDeserializationCallback,
             System.Runtime.Serialization.ISerializable
     {
-        protected NameObjectCollectionBase() { }
+        protected NameObjectCollectionBase()
+        {
+        }
 
         protected NameObjectCollectionBase(System.Collections.IEqualityComparer? equalityComparer)
-        { }
+        {
+        }
 
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use NameObjectCollectionBase(IEqualityComparer) instead."
@@ -312,14 +351,20 @@ namespace System.Collections.Specialized
         protected NameObjectCollectionBase(
             System.Collections.IHashCodeProvider? hashProvider,
             System.Collections.IComparer? comparer
-        ) { }
+        )
+        {
+        }
 
-        protected NameObjectCollectionBase(int capacity) { }
+        protected NameObjectCollectionBase(int capacity)
+        {
+        }
 
         protected NameObjectCollectionBase(
             int capacity,
             System.Collections.IEqualityComparer? equalityComparer
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use NameObjectCollectionBase(Int32, IEqualityComparer) instead."
@@ -328,12 +373,16 @@ namespace System.Collections.Specialized
             int capacity,
             System.Collections.IHashCodeProvider? hashProvider,
             System.Collections.IComparer? comparer
-        ) { }
+        )
+        {
+        }
 
         protected NameObjectCollectionBase(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public virtual int Count
         {
@@ -342,7 +391,9 @@ namespace System.Collections.Specialized
         protected bool IsReadOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Collections.Specialized.NameObjectCollectionBase.KeysCollection Keys
         {
@@ -357,9 +408,13 @@ namespace System.Collections.Specialized
             get { throw null; }
         }
 
-        protected void BaseAdd(string? name, object? value) { }
+        protected void BaseAdd(string? name, object? value)
+        {
+        }
 
-        protected void BaseClear() { }
+        protected void BaseClear()
+        {
+        }
 
         protected object? BaseGet(int index)
         {
@@ -396,13 +451,21 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        protected void BaseRemove(string? name) { }
+        protected void BaseRemove(string? name)
+        {
+        }
 
-        protected void BaseRemoveAt(int index) { }
+        protected void BaseRemoveAt(int index)
+        {
+        }
 
-        protected void BaseSet(int index, object? value) { }
+        protected void BaseSet(int index, object? value)
+        {
+        }
 
-        protected void BaseSet(string? name, object? value) { }
+        protected void BaseSet(string? name, object? value)
+        {
+        }
 
         public virtual System.Collections.IEnumerator GetEnumerator()
         {
@@ -412,17 +475,25 @@ namespace System.Collections.Specialized
         public virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public virtual void OnDeserialization(object? sender) { }
+        public virtual void OnDeserialization(object? sender)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         public partial class KeysCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
-            internal KeysCollection() { }
+            internal KeysCollection()
+            {
+            }
 
             public int Count
             {
@@ -451,16 +522,22 @@ namespace System.Collections.Specialized
                 throw null;
             }
 
-            void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+            void System.Collections.ICollection.CopyTo(System.Array array, int index)
+            {
+            }
         }
     }
 
     public partial class NameValueCollection
         : System.Collections.Specialized.NameObjectCollectionBase
     {
-        public NameValueCollection() { }
+        public NameValueCollection()
+        {
+        }
 
-        public NameValueCollection(System.Collections.IEqualityComparer? equalityComparer) { }
+        public NameValueCollection(System.Collections.IEqualityComparer? equalityComparer)
+        {
+        }
 
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use NameValueCollection(IEqualityComparer) instead."
@@ -468,16 +545,24 @@ namespace System.Collections.Specialized
         public NameValueCollection(
             System.Collections.IHashCodeProvider? hashProvider,
             System.Collections.IComparer? comparer
-        ) { }
+        )
+        {
+        }
 
-        public NameValueCollection(System.Collections.Specialized.NameValueCollection col) { }
+        public NameValueCollection(System.Collections.Specialized.NameValueCollection col)
+        {
+        }
 
-        public NameValueCollection(int capacity) { }
+        public NameValueCollection(int capacity)
+        {
+        }
 
         public NameValueCollection(
             int capacity,
             System.Collections.IEqualityComparer? equalityComparer
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use NameValueCollection(Int32, IEqualityComparer) instead."
@@ -486,17 +571,23 @@ namespace System.Collections.Specialized
             int capacity,
             System.Collections.IHashCodeProvider? hashProvider,
             System.Collections.IComparer? comparer
-        ) { }
+        )
+        {
+        }
 
         public NameValueCollection(
             int capacity,
             System.Collections.Specialized.NameValueCollection col
-        ) { }
+        )
+        {
+        }
 
         protected NameValueCollection(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public virtual string?[] AllKeys
         {
@@ -509,16 +600,26 @@ namespace System.Collections.Specialized
         public string? this[string? name]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Add(System.Collections.Specialized.NameValueCollection c) { }
+        public void Add(System.Collections.Specialized.NameValueCollection c)
+        {
+        }
 
-        public virtual void Add(string? name, string? value) { }
+        public virtual void Add(string? name, string? value)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
-        public void CopyTo(System.Array dest, int index) { }
+        public void CopyTo(System.Array dest, int index)
+        {
+        }
 
         public virtual string? Get(int index)
         {
@@ -550,11 +651,17 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        protected void InvalidateCachedArrays() { }
+        protected void InvalidateCachedArrays()
+        {
+        }
 
-        public virtual void Remove(string? name) { }
+        public virtual void Remove(string? name)
+        {
+        }
 
-        public virtual void Set(string? name, string? value) { }
+        public virtual void Set(string? name, string? value)
+        {
+        }
     }
 
     public partial class OrderedDictionary
@@ -565,18 +672,28 @@ namespace System.Collections.Specialized
             System.Runtime.Serialization.IDeserializationCallback,
             System.Runtime.Serialization.ISerializable
     {
-        public OrderedDictionary() { }
+        public OrderedDictionary()
+        {
+        }
 
-        public OrderedDictionary(System.Collections.IEqualityComparer? comparer) { }
+        public OrderedDictionary(System.Collections.IEqualityComparer? comparer)
+        {
+        }
 
-        public OrderedDictionary(int capacity) { }
+        public OrderedDictionary(int capacity)
+        {
+        }
 
-        public OrderedDictionary(int capacity, System.Collections.IEqualityComparer? comparer) { }
+        public OrderedDictionary(int capacity, System.Collections.IEqualityComparer? comparer)
+        {
+        }
 
         protected OrderedDictionary(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public int Count
         {
@@ -589,12 +706,16 @@ namespace System.Collections.Specialized
         public object? this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object? this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ICollection Keys
         {
@@ -617,21 +738,27 @@ namespace System.Collections.Specialized
             get { throw null; }
         }
 
-        public void Add(object key, object? value) { }
+        public void Add(object key, object? value)
+        {
+        }
 
         public System.Collections.Specialized.OrderedDictionary AsReadOnly()
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object key)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public virtual System.Collections.IDictionaryEnumerator GetEnumerator()
         {
@@ -641,24 +768,34 @@ namespace System.Collections.Specialized
         public virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public void Insert(int index, object key, object? value) { }
+        public void Insert(int index, object key, object? value)
+        {
+        }
 
-        protected virtual void OnDeserialization(object? sender) { }
+        protected virtual void OnDeserialization(object? sender)
+        {
+        }
 
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
 
-        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
-            object? sender
-        ) { }
+        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object? sender)
+        {
+        }
     }
 
     public partial class StringCollection
@@ -666,7 +803,9 @@ namespace System.Collections.Specialized
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        public StringCollection() { }
+        public StringCollection()
+        {
+        }
 
         public int Count
         {
@@ -683,7 +822,9 @@ namespace System.Collections.Specialized
         public string? this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object SyncRoot
         {
@@ -700,7 +841,9 @@ namespace System.Collections.Specialized
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(string? value)
@@ -708,16 +851,22 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        public void AddRange(string[] value) { }
+        public void AddRange(string[] value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(string? value)
         {
             throw null;
         }
 
-        public void CopyTo(string[] array, int index) { }
+        public void CopyTo(string[] array, int index)
+        {
+        }
 
         public System.Collections.Specialized.StringEnumerator GetEnumerator()
         {
@@ -729,13 +878,21 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        public void Insert(int index, string? value) { }
+        public void Insert(int index, string? value)
+        {
+        }
 
-        public void Remove(string? value) { }
+        public void Remove(string? value)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -757,9 +914,13 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
     }
 
     [System.ComponentModel.Design.Serialization.DesignerSerializerAttribute(
@@ -768,7 +929,9 @@ namespace System.Collections.Specialized
     )]
     public partial class StringDictionary : System.Collections.IEnumerable
     {
-        public StringDictionary() { }
+        public StringDictionary()
+        {
+        }
 
         public virtual int Count
         {
@@ -781,7 +944,9 @@ namespace System.Collections.Specialized
         public virtual string? this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Collections.ICollection Keys
         {
@@ -796,9 +961,13 @@ namespace System.Collections.Specialized
             get { throw null; }
         }
 
-        public virtual void Add(string key, string? value) { }
+        public virtual void Add(string key, string? value)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual bool ContainsKey(string key)
         {
@@ -810,19 +979,25 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        public virtual void CopyTo(System.Array array, int index) { }
+        public virtual void CopyTo(System.Array array, int index)
+        {
+        }
 
         public virtual System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public virtual void Remove(string key) { }
+        public virtual void Remove(string key)
+        {
+        }
     }
 
     public partial class StringEnumerator
     {
-        internal StringEnumerator() { }
+        internal StringEnumerator()
+        {
+        }
 
         public string? Current
         {
@@ -834,6 +1009,8 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 }

@@ -12,7 +12,9 @@ namespace Internal.TypeSystem
         private static RuntimeInterfacesAlgorithm _singleton =
             new BaseTypeRuntimeInterfacesAlgorithm();
 
-        private BaseTypeRuntimeInterfacesAlgorithm() { }
+        private BaseTypeRuntimeInterfacesAlgorithm()
+        {
+        }
 
         public static RuntimeInterfacesAlgorithm Instance
         {

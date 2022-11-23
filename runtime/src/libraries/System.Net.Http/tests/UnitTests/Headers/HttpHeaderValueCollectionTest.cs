@@ -690,16 +690,24 @@ namespace System.Net.Http.Tests
 
         public class MockException : Exception
         {
-            public MockException() { }
+            public MockException()
+            {
+            }
 
-            public MockException(string message) : base(message) { }
+            public MockException(string message) : base(message)
+            {
+            }
 
-            public MockException(string message, Exception inner) : base(message, inner) { }
+            public MockException(string message, Exception inner) : base(message, inner)
+            {
+            }
         }
 
         private class MockHeaders : HttpHeaders
         {
-            public MockHeaders() { }
+            public MockHeaders()
+            {
+            }
         }
 
         private class MockHeaderParser : HttpHeaderParser

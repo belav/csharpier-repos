@@ -20,7 +20,9 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CosmosExecutionStrategy(DbContext context) : this(context, DefaultMaxRetryCount) { }
+    public CosmosExecutionStrategy(DbContext context) : this(context, DefaultMaxRetryCount)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,7 +31,9 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public CosmosExecutionStrategy(ExecutionStrategyDependencies dependencies)
-        : this(dependencies, DefaultMaxRetryCount) { }
+        : this(dependencies, DefaultMaxRetryCount)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,7 +42,9 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public CosmosExecutionStrategy(DbContext context, int maxRetryCount)
-        : this(context, maxRetryCount, DefaultMaxDelay) { }
+        : this(context, maxRetryCount, DefaultMaxDelay)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,7 +53,9 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public CosmosExecutionStrategy(ExecutionStrategyDependencies dependencies, int maxRetryCount)
-        : this(dependencies, maxRetryCount, DefaultMaxDelay) { }
+        : this(dependencies, maxRetryCount, DefaultMaxDelay)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -56,7 +64,9 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public CosmosExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
-        : base(context, maxRetryCount, maxRetryDelay) { }
+        : base(context, maxRetryCount, maxRetryDelay)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -68,7 +78,9 @@ public class CosmosExecutionStrategy : ExecutionStrategy
         ExecutionStrategyDependencies dependencies,
         int maxRetryCount,
         TimeSpan maxRetryDelay
-    ) : base(dependencies, maxRetryCount, maxRetryDelay) { }
+    ) : base(dependencies, maxRetryCount, maxRetryDelay)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

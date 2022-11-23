@@ -15,7 +15,9 @@ namespace System.Xml.Tests
     ////////////////////////////////////////////////////////////////
     public class CGenericTestModule : CTestModule
     {
-        public CGenericTestModule() : base() { }
+        public CGenericTestModule() : base()
+        {
+        }
 
         private string _TestData = null;
         public string TestData
@@ -70,7 +72,9 @@ namespace System.Xml.Tests
     ////////////////////////////////////////////////////////////////
     public class CGenericTestCase : CTestCase
     {
-        public CGenericTestCase() : base() { }
+        public CGenericTestCase() : base()
+        {
+        }
 
         public string TestData
         {
@@ -101,7 +105,9 @@ namespace System.Xml.Tests
     // of the suites (Reader and ValidatingReader)
     ////////////////////////////////////////////////////////////////
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public class InheritRequired : Attribute { }
+    public class InheritRequired : Attribute
+    {
+    }
 
     ////////////////////////////////////////////////////////////////
     // Common interface for creating different readers in derived

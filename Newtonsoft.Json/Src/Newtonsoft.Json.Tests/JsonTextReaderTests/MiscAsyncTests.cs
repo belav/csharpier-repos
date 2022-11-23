@@ -324,7 +324,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             using (JsonReader jsonReader = new JsonTextReader(new StringReader(input)))
             {
-                while (await jsonReader.ReadAsync()) { }
+                while (await jsonReader.ReadAsync())
+                {
+                }
             }
         }
 
@@ -553,7 +555,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 {
                     reader.ArrayPool = arrayPool;
 
-                    while (await reader.ReadAsync()) { }
+                    while (await reader.ReadAsync())
+                    {
+                    }
                 }
 
                 if ((i + 1) % 100 == 0)
@@ -583,12 +587,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 {
                     reader.ArrayPool = arrayPool;
 
-                    while (await reader.ReadAsync()) { }
+                    while (await reader.ReadAsync())
+                    {
+                    }
                 }
 
                 Assert.Fail();
             }
-            catch { }
+            catch
+            {
+            }
 
             Assert.AreEqual(0, arrayPool.UsedArrays.Count);
             Assert.AreEqual(2, arrayPool.FreeArrays.Count);

@@ -102,7 +102,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 firstInRegion,
                 lastInRegion,
                 unassignedVariableAddressOfSyntaxes: unassignedVariableAddressOfSyntaxes
-            ) { }
+            )
+        {
+        }
 
         protected override void EnterRegion()
         {

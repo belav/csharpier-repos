@@ -15,7 +15,9 @@ namespace Precise
         public static byte b1 = 0xC;
         public byte b2 = 0xC;
 
-        public static void f() { }
+        public static void f()
+        {
+        }
 
         public static void f(ref byte b)
         {

@@ -46,7 +46,9 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlReader r = doc.CreateReader();
-                    while (r.Read()) { }
+                    while (r.Read())
+                    {
+                    }
                     ;
                     if (r.ReadState != ReadState.EndOfFile)
                         throw new TestFailedException("");
@@ -61,7 +63,9 @@ namespace CoreXml.Test.XLinq
                     {
                         r.ReadContentAsInt();
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                     if (r.ReadState != ReadState.Initial)
                         throw new TestFailedException("");
                 }
@@ -71,13 +75,17 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = XDocument.Parse("<a/>");
                     XmlReader r = doc.CreateReader();
-                    while (r.Read()) { }
+                    while (r.Read())
+                    {
+                    }
                     ;
                     try
                     {
                         r.ReadContentAsInt();
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                     if (r.ReadState != ReadState.EndOfFile)
                         throw new TestFailedException("");
                 }

@@ -389,7 +389,9 @@ namespace System.Web.Mvc.Test
             Assert.Same(expected, actual);
         }
 
-        class DerivedRequiredAttribute : RequiredAttribute { }
+        class DerivedRequiredAttribute : RequiredAttribute
+        {
+        }
 
         class SampleModel
         {

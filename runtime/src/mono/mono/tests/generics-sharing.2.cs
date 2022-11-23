@@ -6,13 +6,21 @@ namespace GenericSharingTest
 {
     public delegate int IntVoidDelegate();
 
-    public class ClassA { }
+    public class ClassA
+    {
+    }
 
-    public class ClassB { }
+    public class ClassB
+    {
+    }
 
-    public class ClassC { }
+    public class ClassC
+    {
+    }
 
-    public class GenExc<T> : Exception { }
+    public class GenExc<T> : Exception
+    {
+    }
 
     public class NonGen
     {
@@ -124,7 +132,9 @@ namespace GenericSharingTest
             arr = new T[3];
         }
 
-        public GenA() { }
+        public GenA()
+        {
+        }
 
         public GenA<T> newGen()
         {
@@ -518,7 +528,9 @@ namespace GenericSharingTest
         }
     }
 
-    public class RGCTXTestSubASub : RGCTXTestSubA<ClassA> { }
+    public class RGCTXTestSubASub : RGCTXTestSubA<ClassA>
+    {
+    }
 
     public class RGCTXTestSubASubSub<T> : RGCTXTestSubASub
     {

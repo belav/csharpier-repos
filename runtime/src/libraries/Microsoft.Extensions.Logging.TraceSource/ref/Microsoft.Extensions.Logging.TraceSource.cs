@@ -51,18 +51,24 @@ namespace Microsoft.Extensions.Logging.TraceSource
         : Microsoft.Extensions.Logging.ILoggerProvider,
             System.IDisposable
     {
-        public TraceSourceLoggerProvider(System.Diagnostics.SourceSwitch rootSourceSwitch) { }
+        public TraceSourceLoggerProvider(System.Diagnostics.SourceSwitch rootSourceSwitch)
+        {
+        }
 
         public TraceSourceLoggerProvider(
             System.Diagnostics.SourceSwitch rootSourceSwitch,
             System.Diagnostics.TraceListener? rootTraceListener
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string name)
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

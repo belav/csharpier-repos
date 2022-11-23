@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateConstructorService() { }
+        public CSharpGenerateConstructorService()
+        {
+        }
 
         protected override bool ContainingTypesOrSelfHasUnsafeKeyword(
             INamedTypeSymbol containingType

@@ -31,7 +31,9 @@ namespace System.Security.Cryptography
                     null,
                     s_useMachineKeyStore
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the DSACryptoServiceProvider class with the specified key size.
@@ -48,7 +50,9 @@ namespace System.Security.Cryptography
                     null,
                     s_useMachineKeyStore
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the DSACryptoServiceProvider class with the specified parameters
@@ -56,7 +60,9 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="parameters">The parameters for the CSP.</param>
         [SupportedOSPlatform("windows")]
-        public DSACryptoServiceProvider(CspParameters? parameters) : this(0, parameters) { }
+        public DSACryptoServiceProvider(CspParameters? parameters) : this(0, parameters)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the DSACryptoServiceProvider class with the specified key size and parameters

@@ -70,12 +70,18 @@ namespace System.Runtime.Loader
 
         private readonly bool _isCollectible;
 
-        protected AssemblyLoadContext() : this(false, false, null) { }
+        protected AssemblyLoadContext() : this(false, false, null)
+        {
+        }
 
-        protected AssemblyLoadContext(bool isCollectible) : this(false, isCollectible, null) { }
+        protected AssemblyLoadContext(bool isCollectible) : this(false, isCollectible, null)
+        {
+        }
 
         public AssemblyLoadContext(string? name, bool isCollectible = false)
-            : this(false, isCollectible, name) { }
+            : this(false, isCollectible, name)
+        {
+        }
 
         private protected AssemblyLoadContext(
             bool representsTPALoadContext,
@@ -934,11 +940,15 @@ namespace System.Runtime.Loader
         internal static readonly AssemblyLoadContext s_loadContext =
             new DefaultAssemblyLoadContext();
 
-        internal DefaultAssemblyLoadContext() : base(true, false, "Default") { }
+        internal DefaultAssemblyLoadContext() : base(true, false, "Default")
+        {
+        }
     }
 
     internal sealed class IndividualAssemblyLoadContext : AssemblyLoadContext
     {
-        internal IndividualAssemblyLoadContext(string name) : base(false, false, name) { }
+        internal IndividualAssemblyLoadContext(string name) : base(false, false, name)
+        {
+        }
     }
 }

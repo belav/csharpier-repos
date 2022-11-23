@@ -39,7 +39,9 @@ namespace System.Data.Odbc
         private string _dsn = DbConnectionStringDefaults.Dsn;
         private string _driver = DbConnectionStringDefaults.Driver;
 
-        public OdbcConnectionStringBuilder() : this(null) { }
+        public OdbcConnectionStringBuilder() : this(null)
+        {
+        }
 
         public OdbcConnectionStringBuilder(string? connectionString) : base(true)
         {

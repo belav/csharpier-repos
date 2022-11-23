@@ -6,6 +6,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     Route("/mypage")]
     public class DiagnosticsAreReturned_IfRouteAttribute_IsAppliedToPageModel : PageModel
     {
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 }

@@ -311,7 +311,9 @@ namespace System.Security.AccessControl.Tests
                     }
                 }
             }
-            else if (null == acl1 && null == acl2) { }
+            else if (null == acl1 && null == acl2)
+            {
+            }
             else
                 result = false;
 

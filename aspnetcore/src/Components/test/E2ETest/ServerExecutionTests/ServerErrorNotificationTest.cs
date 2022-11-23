@@ -16,5 +16,7 @@ public class ServerErrorNotificationTest : ErrorNotificationTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }

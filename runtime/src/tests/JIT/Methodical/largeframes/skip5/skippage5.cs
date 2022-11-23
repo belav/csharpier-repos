@@ -25,7 +25,9 @@ namespace Test_skippage5_cs
         public static int TestEntryPoint() => Test(new C());
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void Call(int r0, int r1, int r2, int r3, int r4, int r5, int r6, S s) { }
+        static void Call(int r0, int r1, int r2, int r3, int r4, int r5, int r6, S s)
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int Test(C c)

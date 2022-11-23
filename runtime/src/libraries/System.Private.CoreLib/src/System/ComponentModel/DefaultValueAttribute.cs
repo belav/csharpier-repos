@@ -114,7 +114,9 @@ namespace System.ComponentModel
                     return true;
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>

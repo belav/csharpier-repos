@@ -9,7 +9,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeLsaHandle : SafeHandle
     {
-        public SafeLsaHandle() : base(IntPtr.Zero, true) { }
+        public SafeLsaHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         protected sealed override bool ReleaseHandle()
         {

@@ -402,7 +402,9 @@ namespace System.Net
         // Custom instance cleanup method.
         //
         // Derived types override this method to release unmanaged resources associated with an IO request.
-        protected virtual void Cleanup() { }
+        protected virtual void Cleanup()
+        {
+        }
 
         internal object? InternalWaitForCompletion()
         {

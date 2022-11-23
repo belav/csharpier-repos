@@ -26,7 +26,9 @@ namespace System.IO.Enumeration
             string directory,
             FindTransform transform,
             EnumerationOptions? options = null
-        ) : this(directory, transform, options, isNormalized: false) { }
+        ) : this(directory, transform, options, isNormalized: false)
+        {
+        }
 
         internal FileSystemEnumerable(
             string directory,

@@ -163,7 +163,9 @@ namespace System.Web.Http.ModelBinding.Binders
         }
 
         [TypeConverter(typeof(DummyTypeConverter))]
-        private struct Dummy { }
+        private struct Dummy
+        {
+        }
 
         private sealed class DummyTypeConverter : TypeConverter
         {

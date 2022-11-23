@@ -12,7 +12,9 @@ namespace System.Security.Policy
 #endif
     public sealed partial class Site : EvidenceBase, IIdentityPermissionFactory
     {
-        public Site(string name) { }
+        public Site(string name)
+        {
+        }
 
         public string Name
         {

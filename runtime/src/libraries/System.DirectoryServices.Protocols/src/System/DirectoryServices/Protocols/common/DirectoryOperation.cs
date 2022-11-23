@@ -7,6 +7,8 @@ namespace System.DirectoryServices.Protocols
     {
         internal string _directoryRequestID;
 
-        protected DirectoryOperation() { }
+        protected DirectoryOperation()
+        {
+        }
     }
 }

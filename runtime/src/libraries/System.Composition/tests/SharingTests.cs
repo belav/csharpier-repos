@@ -21,9 +21,13 @@ namespace System.Composition.UnitTests
     public class NonSharedClass : ISharedTestingClass
     {
         [ImportingConstructor]
-        public NonSharedClass() { }
+        public NonSharedClass()
+        {
+        }
 
-        public void Method() { }
+        public void Method()
+        {
+        }
     }
 
     [Export(typeof(ISharedTestingClass))]
@@ -31,9 +35,13 @@ namespace System.Composition.UnitTests
     public class SharedClass : ISharedTestingClass
     {
         [ImportingConstructor]
-        public SharedClass() { }
+        public SharedClass()
+        {
+        }
 
-        public void Method() { }
+        public void Method()
+        {
+        }
     }
 
     [Export]
@@ -83,7 +91,9 @@ namespace System.Composition.UnitTests
         [Import]
         public ExportFactory<ISharedTestingClass> _fact { get; set; }
 
-        public ClassWithExportFactoryAsAProperty() { }
+        public ClassWithExportFactoryAsAProperty()
+        {
+        }
 
         public ISharedTestingClass Method()
         {
@@ -94,9 +104,13 @@ namespace System.Composition.UnitTests
         }
     }
 
-    internal interface IX { }
+    internal interface IX
+    {
+    }
 
-    internal interface IY { }
+    internal interface IY
+    {
+    }
 
     [Export]
     [Shared("Boundary")]
@@ -218,7 +232,9 @@ namespace System.Composition.UnitTests
         }
     }
 
-    public interface IProj { }
+    public interface IProj
+    {
+    }
 
     [Export]
     public class SolA
@@ -249,48 +265,64 @@ namespace System.Composition.UnitTests
     public class ProjA : IProj
     {
         [ImportingConstructor]
-        public ProjA(DocA docA, ColA colA) { }
+        public ProjA(DocA docA, ColA colA)
+        {
+        }
     }
 
     [Export(typeof(IProj))]
     public class ProjB : IProj
     {
         [ImportingConstructor]
-        public ProjB(DocB docA, ColB colA) { }
+        public ProjB(DocB docA, ColB colA)
+        {
+        }
     }
 
     [Export]
     public class DocA
     {
         [ImportingConstructor]
-        public DocA(ColA colA) { }
+        public DocA(ColA colA)
+        {
+        }
     }
 
     [Export]
     public class DocB
     {
         [ImportingConstructor]
-        public DocB(ColB colB) { }
+        public DocB(ColB colB)
+        {
+        }
     }
 
     [Export]
     [Shared("B1")]
     public class ColA
     {
-        public ColA() { }
+        public ColA()
+        {
+        }
     }
 
     [Export]
     [Shared("B2")]
     public class ColB
     {
-        public ColB() { }
+        public ColB()
+        {
+        }
     }
 
-    public interface ICol { }
+    public interface ICol
+    {
+    }
 
     [Export(typeof(IX)), Export(typeof(IY)), Shared]
-    public class XY : IX, IY { }
+    public class XY : IX, IY
+    {
+    }
 
     public class SharingTest : ContainerTests
     {
@@ -469,7 +501,9 @@ namespace System.Composition.UnitTests
         }
 
         [Shared, Export]
-        public class ASharedPart { }
+        public class ASharedPart
+        {
+        }
 
         [Fact]
         public void ConsistentResultsAreReturneWhenResolvingLargeNumbersOfSharedParts()

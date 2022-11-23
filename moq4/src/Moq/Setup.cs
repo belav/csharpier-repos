@@ -110,7 +110,9 @@ namespace Moq
             return this.expectation.Equals(expectation);
         }
 
-        public virtual void SetOutParameters(Invocation invocation) { }
+        public virtual void SetOutParameters(Invocation invocation)
+        {
+        }
 
         public override string ToString()
         {
@@ -182,7 +184,9 @@ namespace Moq
             this.ResetCore();
         }
 
-        protected virtual void ResetCore() { }
+        protected virtual void ResetCore()
+        {
+        }
 
         public void Verify(bool recursive = true)
         {

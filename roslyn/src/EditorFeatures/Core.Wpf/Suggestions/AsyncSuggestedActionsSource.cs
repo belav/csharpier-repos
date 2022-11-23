@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     textView,
                     textBuffer,
                     suggestedActionCategoryRegistry
-                ) { }
+                )
+            {
+            }
 
             public async Task GetSuggestedActionsAsync(
                 ISuggestedActionCategorySet requestedActionCategories,

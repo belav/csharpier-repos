@@ -3,4 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
-public class Daisy : Flower { }
+public class Daisy : Flower
+{
+}

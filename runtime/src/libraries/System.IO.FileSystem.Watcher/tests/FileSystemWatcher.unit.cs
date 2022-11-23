@@ -62,7 +62,8 @@ namespace System.IO.Tests
             string file = CreateTestFile(TestDirectory, "file");
             using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(file)))
             {
-                Action action = () => { };
+                Action action = () => {
+                };
 
                 ExpectEvent(watcher, 0, action, expectedPath: file);
             }
@@ -139,7 +140,10 @@ namespace System.IO.Tests
         {
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
-                var handler = new FileSystemEventHandler((o, e) => { });
+                var handler = new FileSystemEventHandler(
+                    (o, e) => {
+                    }
+                );
 
                 // add / remove
                 watcher.Changed += handler;
@@ -155,7 +159,10 @@ namespace System.IO.Tests
         {
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
-                var handler = new FileSystemEventHandler((o, e) => { });
+                var handler = new FileSystemEventHandler(
+                    (o, e) => {
+                    }
+                );
 
                 // add / remove
                 watcher.Created += handler;
@@ -171,7 +178,10 @@ namespace System.IO.Tests
         {
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
-                var handler = new FileSystemEventHandler((o, e) => { });
+                var handler = new FileSystemEventHandler(
+                    (o, e) => {
+                    }
+                );
 
                 // add / remove
                 watcher.Deleted += handler;
@@ -210,7 +220,10 @@ namespace System.IO.Tests
         {
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
-                var handler = new ErrorEventHandler((o, e) => { });
+                var handler = new ErrorEventHandler(
+                    (o, e) => {
+                    }
+                );
 
                 // add / remove
                 watcher.Error += handler;
@@ -596,7 +609,10 @@ namespace System.IO.Tests
         {
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
-                var handler = new RenamedEventHandler((o, e) => { });
+                var handler = new RenamedEventHandler(
+                    (o, e) => {
+                    }
+                );
 
                 // add / remove
                 watcher.Renamed += handler;

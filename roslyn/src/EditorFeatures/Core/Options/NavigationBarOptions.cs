@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NavigationBarOptionsProvider() { }
+        public NavigationBarOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(NavigationBarOptions.ShowNavigationBar);

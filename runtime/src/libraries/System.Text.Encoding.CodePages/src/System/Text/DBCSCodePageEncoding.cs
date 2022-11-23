@@ -30,17 +30,22 @@ namespace System.Text
         private int _byteCountUnknown;
         protected char charUnknown;
 
-        public DBCSCodePageEncoding(int codePage) : this(codePage, codePage) { }
+        public DBCSCodePageEncoding(int codePage) : this(codePage, codePage)
+        {
+        }
 
         internal DBCSCodePageEncoding(int codePage, int dataCodePage) : base(codePage, dataCodePage)
-        { }
+        {
+        }
 
         internal DBCSCodePageEncoding(
             int codePage,
             int dataCodePage,
             EncoderFallback enc,
             DecoderFallback dec
-        ) : base(codePage, dataCodePage, enc, dec) { }
+        ) : base(codePage, dataCodePage, enc, dec)
+        {
+        }
 
         internal static unsafe char ReadChar(char* pChar)
         {
@@ -232,7 +237,9 @@ namespace System.Text
         }
 
         // Any special processing for this code page
-        protected virtual unsafe void CleanUpEndBytes(char* chars) { }
+        protected virtual unsafe void CleanUpEndBytes(char* chars)
+        {
+        }
 
         // Private object for locking instead of locking on a public type for SQL reliability work.
         private static object? s_InternalSyncObject;

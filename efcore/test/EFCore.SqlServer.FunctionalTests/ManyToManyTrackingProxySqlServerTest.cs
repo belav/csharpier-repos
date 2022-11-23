@@ -9,7 +9,9 @@ public class ManyToManyTrackingProxySqlServerTest
     : ManyToManyTrackingSqlServerTestBase<ManyToManyTrackingProxySqlServerTest.ManyToManyTrackingProxySqlServerFixture>
 {
     public ManyToManyTrackingProxySqlServerTest(ManyToManyTrackingProxySqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     protected override Dictionary<string, DeleteBehavior> CustomDeleteBehaviors { get; } =
         new()

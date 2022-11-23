@@ -126,11 +126,17 @@ namespace Moq.Tests
             return expression;
         }
 
-        private void Do<T>(T value) { }
+        private void Do<T>(T value)
+        {
+        }
 
-        private static void DoStatic(int value) { }
+        private static void DoStatic(int value)
+        {
+        }
 
-        private static void DoStaticGeneric<T>(T value) { }
+        private static void DoStaticGeneric<T>(T value)
+        {
+        }
 
         public interface IFoo
         {

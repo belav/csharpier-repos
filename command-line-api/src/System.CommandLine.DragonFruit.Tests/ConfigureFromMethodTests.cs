@@ -259,7 +259,9 @@ namespace System.CommandLine.DragonFruit.Tests
             _receivedValues = new object[] { x, y };
         }
 
-        internal void Method_returning_void() { }
+        internal void Method_returning_void()
+        {
+        }
 
         internal int Method_returning_int(int i)
         {
@@ -276,49 +278,65 @@ namespace System.CommandLine.DragonFruit.Tests
             string stringOption,
             int intOption,
             string argument
-        ) { }
+        )
+        {
+        }
 
         internal void Method_having_string_argument_with_null_default_value(
             string stringOption,
             int intOption,
             string argument = null
-        ) { }
+        )
+        {
+        }
 
         internal void Method_having_string_argument_with_non_null_default_value(
             string stringOption,
             int intOption,
             string argument = "the-default-value"
-        ) { }
+        )
+        {
+        }
 
         internal void Method_having_string_array_arguments(
             string stringOption,
             int intOption,
             string[] arguments
-        ) { }
+        )
+        {
+        }
 
         internal void Method_having_string_array_arguments_with_default_value(
             string stringOption,
             int intOption,
             string[] arguments = null
-        ) { }
+        )
+        {
+        }
 
         internal void Method_having_FileInfo_argument(
             string stringOption,
             int intOption,
             FileInfo argument
-        ) { }
+        )
+        {
+        }
 
         internal void Method_having_FileInfo_argument_with_default_value(
             string stringOption,
             int intOption,
             FileInfo argument = null
-        ) { }
+        )
+        {
+        }
 
         internal void Method_having_FileInfo_array_args(
             string stringOption,
             int intOption,
             FileInfo[] args
-        ) { }
+        )
+        {
+        }
 
         internal void Method_with_multiple_default_values(int firstValue = 1, int secondValue = 2)
         {

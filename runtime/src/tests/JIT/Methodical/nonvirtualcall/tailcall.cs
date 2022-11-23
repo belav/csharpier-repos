@@ -10,7 +10,9 @@ namespace Test_tailcall
 {
     class ApplicationException : Exception
     {
-        public ApplicationException(string message) : base(message) { }
+        public ApplicationException(string message) : base(message)
+        {
+        }
     }
 
     namespace Test

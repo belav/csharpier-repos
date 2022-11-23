@@ -378,13 +378,17 @@ namespace System.Net.Http.Tests
 
         private sealed class WrapperStream : DelegatingStream
         {
-            public WrapperStream(Stream wrapped) : base(wrapped) { }
+            public WrapperStream(Stream wrapped) : base(wrapped)
+            {
+            }
         }
 
         private sealed class NonSeekableMemoryStream : MemoryStream
         {
             public NonSeekableMemoryStream(byte[] input, bool sourceIsExposable)
-                : base(input, 0, input.Length, true, sourceIsExposable) { }
+                : base(input, 0, input.Length, true, sourceIsExposable)
+            {
+            }
 
             public override bool CanSeek => false;
         }

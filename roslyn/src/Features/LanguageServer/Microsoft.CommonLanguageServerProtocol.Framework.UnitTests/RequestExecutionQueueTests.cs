@@ -163,5 +163,7 @@ public class RequestExecutionQueueTests
         Assert.True(task2.IsCompleted);
     }
 
-    private class TestResponse { }
+    private class TestResponse
+    {
+    }
 }

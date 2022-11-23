@@ -31,7 +31,9 @@ namespace Sample
             get { return measurements; }
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         public abstract class ExcMeasurement : BenchTask.Measurement
         {
@@ -70,7 +72,9 @@ namespace Sample
                 {
                     DoNothing();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
@@ -92,7 +96,9 @@ namespace Sample
                 {
                     DoThrow();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
@@ -114,7 +120,9 @@ namespace Sample
                 {
                     DoNothing();
                 }
-                catch (Exception e) when (e.Message == "message") { }
+                catch (Exception e) when (e.Message == "message")
+                {
+                }
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
@@ -136,7 +144,9 @@ namespace Sample
                 {
                     DoNothing();
                 }
-                catch (Exception e) when (e.Message == "message") { }
+                catch (Exception e) when (e.Message == "message")
+                {
+                }
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -158,8 +168,12 @@ namespace Sample
                 {
                     DoThrow();
                 }
-                catch (Exception e) when (e.Message == "message") { }
-                catch { }
+                catch (Exception e) when (e.Message == "message")
+                {
+                }
+                catch
+                {
+                }
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
@@ -181,7 +195,9 @@ namespace Sample
                 {
                     DoThrow();
                 }
-                catch (Exception e) when (e.Message == "Reached DoThrow and threw") { }
+                catch (Exception e) when (e.Message == "Reached DoThrow and threw")
+                {
+                }
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]

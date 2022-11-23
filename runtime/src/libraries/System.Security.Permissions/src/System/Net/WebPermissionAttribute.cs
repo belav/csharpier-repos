@@ -24,27 +24,37 @@ namespace System.Net
     )]
     public sealed class WebPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public WebPermissionAttribute(SecurityAction action) : base(action) { }
+        public WebPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public string Accept
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public string AcceptPattern
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public string Connect
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public string ConnectPattern
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override IPermission CreatePermission()

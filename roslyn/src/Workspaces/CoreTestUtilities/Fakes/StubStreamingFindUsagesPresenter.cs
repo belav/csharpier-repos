@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Fakes
             _globalOptions = globalOptions;
         }
 
-        public void ClearAll() { }
+        public void ClearAll()
+        {
+        }
 
         public (FindUsagesContext, CancellationToken) StartSearch(
             string title,

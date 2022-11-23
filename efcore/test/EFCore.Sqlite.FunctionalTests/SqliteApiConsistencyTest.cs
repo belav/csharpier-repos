@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class SqliteApiConsistencyTest
     : ApiConsistencyTestBase<SqliteApiConsistencyTest.SqliteApiConsistencyFixture>
 {
-    public SqliteApiConsistencyTest(SqliteApiConsistencyFixture fixture) : base(fixture) { }
+    public SqliteApiConsistencyTest(SqliteApiConsistencyFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void AddServices(ServiceCollection serviceCollection) =>
         serviceCollection.AddEntityFrameworkSqlite();

@@ -142,5 +142,7 @@ public class ControllerActivatorProviderTest
         }
     }
 
-    private class TestService { }
+    private class TestService
+    {
+    }
 }

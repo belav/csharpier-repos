@@ -257,7 +257,9 @@ namespace Microsoft.VisualBasic
             new string[] { "class_initialize", }
         };
 
-        internal VBCodeGenerator() { }
+        internal VBCodeGenerator()
+        {
+        }
 
         internal VBCodeGenerator(IDictionary<string, string> providerOptions)
         {

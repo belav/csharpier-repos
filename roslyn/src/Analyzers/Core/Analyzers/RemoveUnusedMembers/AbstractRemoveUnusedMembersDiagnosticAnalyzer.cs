@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 ImmutableArray.Create(s_removeUnusedMembersRule, s_removeUnreadMembersRule),
                 GeneratedCodeAnalysisFlags.Analyze
             ) // We want to analyze references in generated code, but not report unused members in generated code.
-        { }
+        {
+        }
 
         // We need to analyze the whole document even for edits within a method body,
         // because we might add or remove references to members in executable code.
@@ -90,7 +91,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
         protected virtual void HandleNamedTypeSymbolStart(
             SymbolStartAnalysisContext context,
             Action<ISymbol, ValueUsageInfo> onSymbolUsageFound
-        ) { }
+        )
+        {
+        }
 
         private sealed class CompilationAnalyzer
         {

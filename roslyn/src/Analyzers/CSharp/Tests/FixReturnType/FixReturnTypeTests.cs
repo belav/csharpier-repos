@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnTy
     public partial class FixReturnTypeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public FixReturnTypeTests(ITestOutputHelper logger) : base(logger) { }
+        public FixReturnTypeTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

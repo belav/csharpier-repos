@@ -32,7 +32,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    public class C { }
+    public class C
+    {
+    }
 
     public class Test
     {
@@ -261,7 +263,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     //<Expects Status=success></Expects>
     // <Code>
 
-    public class Temp { }
+    public class Temp
+    {
+    }
 
     public class Test
     {

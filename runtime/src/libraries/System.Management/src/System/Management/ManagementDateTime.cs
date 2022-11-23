@@ -77,7 +77,9 @@ namespace System.Management
         private const int MAXSIZE_UTC_DMTF = 999;
         private const long MAXDATE_INTIMESPAN = 99999999;
 
-        private ManagementDateTimeConverter() { }
+        private ManagementDateTimeConverter()
+        {
+        }
 
         /// <summary>
         /// <para>Converts a given DMTF datetime to <see cref='System.DateTime'/> object. The returned DateTime will be in the

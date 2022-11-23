@@ -154,12 +154,18 @@ namespace Tests.Integration
             Assert.Equal(1, catalog.LoadedTypes.Count());
         }
 
-        public class IExporter { }
+        public class IExporter
+        {
+        }
 
-        public class IImporter { }
+        public class IImporter
+        {
+        }
 
         [Export(typeof(IExporter))]
-        public class ExportingPart : IExporter { }
+        public class ExportingPart : IExporter
+        {
+        }
 
         [Export(typeof(IImporter))]
         public class PartImportingLazily : IImporter

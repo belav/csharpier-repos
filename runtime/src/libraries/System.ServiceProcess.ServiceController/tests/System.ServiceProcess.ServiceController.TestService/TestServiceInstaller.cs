@@ -11,7 +11,9 @@ namespace System.ServiceProcess.Tests
 {
     public class TestServiceInstaller
     {
-        public TestServiceInstaller() { }
+        public TestServiceInstaller()
+        {
+        }
 
         public string DisplayName { get; set; } = string.Empty;
 

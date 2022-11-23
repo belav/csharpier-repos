@@ -13,7 +13,9 @@ namespace System.Runtime.Intrinsics.X86
     [CLSCompliant(false)]
     public abstract class X86Serialize : X86Base
     {
-        internal X86Serialize() { }
+        internal X86Serialize()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -23,7 +25,9 @@ namespace System.Runtime.Intrinsics.X86
         [Intrinsic]
         public new abstract class X64 : X86Base.X64
         {
-            internal X64() { }
+            internal X64()
+            {
+            }
 
             public static new bool IsSupported
             {

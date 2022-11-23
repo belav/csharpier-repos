@@ -940,7 +940,9 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                         AnnotationId,
                         string.Format("{0} {1}", type, oppositeMarkerType)
                     )
-                ) { }
+                )
+            {
+            }
 
             private static readonly char[] s_separators = new char[] { ' ' };
 

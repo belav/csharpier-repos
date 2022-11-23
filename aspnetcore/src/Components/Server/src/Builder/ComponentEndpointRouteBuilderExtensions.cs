@@ -51,7 +51,12 @@ public static class ComponentEndpointRouteBuilderExtensions
             throw new ArgumentNullException(nameof(path));
         }
 
-        return endpoints.MapBlazorHub(path, configureOptions: _ => { });
+        return endpoints.MapBlazorHub(
+            path,
+            configureOptions: _ =>
+            {
+            }
+        );
     }
 
     /// <summary>

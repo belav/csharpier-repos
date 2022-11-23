@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LabelPositionOptionsViewModelFactory() { }
+        public LabelPositionOptionsViewModelFactory()
+        {
+        }
 
         public IEnumSettingViewModel CreateViewModel(WhitespaceSetting setting)
         {

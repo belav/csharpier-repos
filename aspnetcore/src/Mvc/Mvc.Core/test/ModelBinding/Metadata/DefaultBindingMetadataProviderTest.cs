@@ -728,7 +728,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         Assert.Equal(initialValue, context.BindingMetadata.IsBindingRequired);
     }
 
-    private class DefaultConstructorType { }
+    private class DefaultConstructorType
+    {
+    }
 
     [Fact]
     public void GetBoundConstructor_DefaultConstructor_ReturnsNull()
@@ -745,7 +747,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private class ParameterlessConstructorType
     {
-        public ParameterlessConstructorType() { }
+        public ParameterlessConstructorType()
+        {
+        }
     }
 
     [Fact]
@@ -763,7 +767,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private class NonPublicParameterlessConstructorType
     {
-        protected NonPublicParameterlessConstructorType() { }
+        protected NonPublicParameterlessConstructorType()
+        {
+        }
     }
 
     [Fact]
@@ -781,9 +787,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private class MultipleConstructorType
     {
-        public MultipleConstructorType() { }
+        public MultipleConstructorType()
+        {
+        }
 
-        public MultipleConstructorType(string prop) { }
+        public MultipleConstructorType(string prop)
+        {
+        }
     }
 
     [Fact]
@@ -799,7 +809,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         Assert.Null(result);
     }
 
-    private record RecordTypeWithPrimaryConstructor(string name) { }
+    private record RecordTypeWithPrimaryConstructor(string name)
+    {
+    }
 
     [Fact]
     public void GetBoundConstructor_ReturnsPrimaryConstructor_ForRecordType()
@@ -824,7 +836,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private record RecordTypeWithParameterlessConstructor
     {
-        public RecordTypeWithParameterlessConstructor() { }
+        public RecordTypeWithParameterlessConstructor()
+        {
+        }
 
         public string Name { get; init; }
 
@@ -847,7 +861,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     {
         public RecordTypeWithMultipleConstructors(string Name, int age) : this(Name) => Age = age;
 
-        public RecordTypeWithMultipleConstructors(int age) : this(string.Empty, age) { }
+        public RecordTypeWithMultipleConstructors(int age) : this(string.Empty, age)
+        {
+        }
 
         public int Age { get; set; }
     }
@@ -889,7 +905,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private record RecordTypeWithConformingSynthesizedConstructor
     {
-        public RecordTypeWithConformingSynthesizedConstructor(string Name, int Age) { }
+        public RecordTypeWithConformingSynthesizedConstructor(string Name, int Age)
+        {
+        }
 
         public string Name { get; set; }
 
@@ -916,7 +934,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private record RecordTypeWithNonConformingSynthesizedConstructor
     {
-        public RecordTypeWithNonConformingSynthesizedConstructor(string name, string age) { }
+        public RecordTypeWithNonConformingSynthesizedConstructor(string name, string age)
+        {
+        }
 
         public string Name { get; set; }
 
@@ -942,7 +962,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         public string Property { get; set; }
     }
 
-    private class InheritedBindNeverOnClass : BindNeverOnClass { }
+    private class InheritedBindNeverOnClass : BindNeverOnClass
+    {
+    }
 
     [BindRequired]
     private class BindRequiredOnClass
@@ -951,7 +973,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     }
 
     [BindRequired]
-    private class BindRequiredOverridesInheritedBindNever : BindNeverOnClass { }
+    private class BindRequiredOverridesInheritedBindNever : BindNeverOnClass
+    {
+    }
 
     private class BindingSourceModelBinderAttribute : ModelBinderAttribute
     {
@@ -963,7 +987,9 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private class ParameterInfos
     {
-        public void Method(object param1) { }
+        public void Method(object param1)
+        {
+        }
 
         public static ParameterInfo SampleParameterInfo = typeof(ParameterInfos)
             .GetMethod(nameof(ParameterInfos.Method))

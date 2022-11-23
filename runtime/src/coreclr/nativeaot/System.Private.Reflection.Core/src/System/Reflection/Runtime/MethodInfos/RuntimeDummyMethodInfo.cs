@@ -14,7 +14,9 @@ namespace System.Reflection.Runtime.MethodInfos
     //
     internal sealed class RuntimeDummyMethodInfo : RuntimeNamedMethodInfo
     {
-        private RuntimeDummyMethodInfo() { }
+        private RuntimeDummyMethodInfo()
+        {
+        }
 
         public sealed override bool Equals(object obj) => object.ReferenceEquals(this, obj);
 

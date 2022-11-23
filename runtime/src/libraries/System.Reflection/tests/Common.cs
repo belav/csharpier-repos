@@ -101,7 +101,9 @@ namespace System.Reflection.Tests
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
-    public class NullAttr : Attribute { }
+    public class NullAttr : Attribute
+    {
+    }
 
     public class Helpers
     {

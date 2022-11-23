@@ -74,7 +74,9 @@ public interface ISaveChangesInterceptor : IInterceptor
     ///     Called when an exception has been thrown in <see cref="O:DbContext.SaveChanges" />.
     /// </summary>
     /// <param name="eventData">Contextual information about the failure.</param>
-    void SaveChangesFailed(DbContextErrorEventData eventData) { }
+    void SaveChangesFailed(DbContextErrorEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called at the start of <see cref="O:DbContext.SaveChangesAsync" />.
@@ -142,7 +144,9 @@ public interface ISaveChangesInterceptor : IInterceptor
     ///     Called when <see cref="O:DbContext.SaveChanges" /> was canceled.
     /// </summary>
     /// <param name="eventData">Contextual information about the failure.</param>
-    void SaveChangesCanceled(DbContextEventData eventData) { }
+    void SaveChangesCanceled(DbContextEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called when <see cref="O:DbContext.SaveChangesAsync" /> was canceled.

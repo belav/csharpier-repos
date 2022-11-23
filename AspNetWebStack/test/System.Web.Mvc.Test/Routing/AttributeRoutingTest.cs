@@ -889,7 +889,9 @@ namespace System.Web.Routing
     }
 
     [Route("derivedwithroute/{action}")]
-    public class DerivedFromBaseRouteWithRouteController : BaseRouteController { }
+    public class DerivedFromBaseRouteWithRouteController : BaseRouteController
+    {
+    }
 
     #endregion
 
@@ -1125,7 +1127,9 @@ namespace System.Web.Routing
         public string Prefix { get; private set; }
     }
 
-    public class ExtendedRoutePrefixAttribute : RoutePrefixAttribute { }
+    public class ExtendedRoutePrefixAttribute : RoutePrefixAttribute
+    {
+    }
 
     namespace ControllersWithCustomizedRoutePrefixAttribute
     {

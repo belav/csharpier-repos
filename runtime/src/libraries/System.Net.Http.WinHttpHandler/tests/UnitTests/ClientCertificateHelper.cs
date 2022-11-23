@@ -254,7 +254,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 )
             );
 
-        public ClientCertificateHelper() { }
+        public ClientCertificateHelper()
+        {
+        }
 
         public object[][] ValidClientCertificates
         {

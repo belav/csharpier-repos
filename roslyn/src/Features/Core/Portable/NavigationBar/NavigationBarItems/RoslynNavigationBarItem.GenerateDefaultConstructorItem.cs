@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                     text,
                     Glyph.MethodPublic,
                     destinationTypeSymbolKey
-                ) { }
+                )
+            {
+            }
 
             protected internal override SerializableNavigationBarItem Dehydrate() =>
                 SerializableNavigationBarItem.GenerateDefaultConstructor(

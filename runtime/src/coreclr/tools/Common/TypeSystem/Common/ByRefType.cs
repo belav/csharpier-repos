@@ -8,7 +8,9 @@ namespace Internal.TypeSystem
     /// </summary>
     public sealed partial class ByRefType : ParameterizedType
     {
-        internal ByRefType(TypeDesc parameter) : base(parameter) { }
+        internal ByRefType(TypeDesc parameter) : base(parameter)
+        {
+        }
 
         public override int GetHashCode()
         {

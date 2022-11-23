@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly BlockSyntax _block;
 
         public BlockBinder(Binder enclosing, BlockSyntax block)
-            : this(enclosing, block, enclosing.Flags) { }
+            : this(enclosing, block, enclosing.Flags)
+        {
+        }
 
         public BlockBinder(Binder enclosing, BlockSyntax block, BinderFlags additionalFlags)
             : base(enclosing, enclosing.Flags | additionalFlags)

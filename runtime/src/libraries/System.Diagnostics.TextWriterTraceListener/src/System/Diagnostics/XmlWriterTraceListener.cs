@@ -22,21 +22,33 @@ namespace System.Diagnostics
         private StringBuilder? _strBldr;
         private XmlTextWriter? _xmlBlobWriter;
 
-        public XmlWriterTraceListener(Stream stream) : base(stream) { }
+        public XmlWriterTraceListener(Stream stream) : base(stream)
+        {
+        }
 
-        public XmlWriterTraceListener(Stream stream, string? name) : base(stream, name) { }
+        public XmlWriterTraceListener(Stream stream, string? name) : base(stream, name)
+        {
+        }
 
-        public XmlWriterTraceListener(TextWriter writer) : base(writer) { }
+        public XmlWriterTraceListener(TextWriter writer) : base(writer)
+        {
+        }
 
-        public XmlWriterTraceListener(TextWriter writer, string? name) : base(writer, name) { }
+        public XmlWriterTraceListener(TextWriter writer, string? name) : base(writer, name)
+        {
+        }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public XmlWriterTraceListener(string? filename) : base(filename) { }
+        public XmlWriterTraceListener(string? filename) : base(filename)
+        {
+        }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public XmlWriterTraceListener(string? filename, string? name) : base(filename, name) { }
+        public XmlWriterTraceListener(string? filename, string? name) : base(filename, name)
+        {
+        }
 
         public override void Write(string? message)
         {

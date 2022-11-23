@@ -18,10 +18,14 @@ public class CrossJoinExpression : JoinExpressionBase
     ///     Creates a new instance of the <see cref="CrossJoinExpression" /> class.
     /// </summary>
     /// <param name="table">A table source to CROSS JOIN with.</param>
-    public CrossJoinExpression(TableExpressionBase table) : this(table, annotations: null) { }
+    public CrossJoinExpression(TableExpressionBase table) : this(table, annotations: null)
+    {
+    }
 
     private CrossJoinExpression(TableExpressionBase table, IEnumerable<IAnnotation>? annotations)
-        : base(table, annotations) { }
+        : base(table, annotations)
+    {
+    }
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor) =>

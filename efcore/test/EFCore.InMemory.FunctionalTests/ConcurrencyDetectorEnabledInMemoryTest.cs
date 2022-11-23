@@ -7,7 +7,9 @@ public class ConcurrencyDetectorEnabledInMemoryTest
     : ConcurrencyDetectorEnabledTestBase<ConcurrencyDetectorEnabledInMemoryTest.ConcurrencyDetectorInMemoryFixture>
 {
     public ConcurrencyDetectorEnabledInMemoryTest(ConcurrencyDetectorInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class ConcurrencyDetectorInMemoryFixture : ConcurrencyDetectorFixtureBase
     {

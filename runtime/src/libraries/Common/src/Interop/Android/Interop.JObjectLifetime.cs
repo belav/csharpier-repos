@@ -24,7 +24,9 @@ internal static partial class Interop
 
         internal class SafeJObjectHandle : SafeHandle
         {
-            public SafeJObjectHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+            public SafeJObjectHandle() : base(IntPtr.Zero, ownsHandle: true)
+            {
+            }
 
             internal SafeJObjectHandle(IntPtr ptr) : base(IntPtr.Zero, ownsHandle: true)
             {

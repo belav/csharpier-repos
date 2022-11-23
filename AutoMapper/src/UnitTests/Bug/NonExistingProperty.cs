@@ -2,9 +2,13 @@
 
 public class NonExistingProperty : NonValidatingSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Destination { }
+    public class Destination
+    {
+    }
 
     [Fact]
     public void Should_report_missing_property()
@@ -12,7 +16,14 @@ public class NonExistingProperty : NonValidatingSpecBase
         new Action(
             () =>
                 new MapperConfiguration(
-                    cfg => cfg.CreateMap<Source, Destination>().ForMember("X", s => { })
+                    cfg =>
+                        cfg.CreateMap<Source, Destination>()
+                            .ForMember(
+                                "X",
+                                s =>
+                                {
+                                }
+                            )
                 )
         ).ShouldThrow<ArgumentOutOfRangeException>();
     }

@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
 {
-    public CodeGenerationIntegrationTest() : base(generateBaselines: null) { }
+    public CodeGenerationIntegrationTest() : base(generateBaselines: null)
+    {
+    }
 
     #region Runtime
     [Fact]

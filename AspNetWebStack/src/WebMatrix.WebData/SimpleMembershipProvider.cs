@@ -27,7 +27,9 @@ namespace WebMatrix.WebData
         private readonly MembershipProvider _previousProvider;
         private SimpleMembershipProviderCasingBehavior _casingBehavior;
 
-        public SimpleMembershipProvider() : this(null) { }
+        public SimpleMembershipProvider() : this(null)
+        {
+        }
 
         public SimpleMembershipProvider(MembershipProvider previousProvider)
         {

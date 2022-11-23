@@ -20,7 +20,9 @@ namespace System.Runtime.CompilerServices
 
         private const int MaxRules = 128;
 
-        internal RuleCache() { }
+        internal RuleCache()
+        {
+        }
 
         internal T[] GetRules()
         {

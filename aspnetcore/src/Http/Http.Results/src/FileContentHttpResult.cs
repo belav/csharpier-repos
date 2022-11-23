@@ -22,7 +22,9 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
     /// <param name="fileContents">The bytes that represent the file contents.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     internal FileContentHttpResult(ReadOnlyMemory<byte> fileContents, string? contentType)
-        : this(fileContents, contentType, fileDownloadName: null) { }
+        : this(fileContents, contentType, fileDownloadName: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="FileContentHttpResult"/> instance with
@@ -36,7 +38,9 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
         ReadOnlyMemory<byte> fileContents,
         string? contentType,
         string? fileDownloadName
-    ) : this(fileContents, contentType, fileDownloadName, enableRangeProcessing: false) { }
+    ) : this(fileContents, contentType, fileDownloadName, enableRangeProcessing: false)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="FileContentHttpResult"/> instance with the provided values.

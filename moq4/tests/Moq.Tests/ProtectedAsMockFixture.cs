@@ -452,7 +452,9 @@ namespace Moq.Tests
 
         public abstract class Foo
         {
-            protected Foo() { }
+            protected Foo()
+            {
+            }
 
             public int ReadOnlyProperty => this.ReadOnlyPropertyImpl;
 

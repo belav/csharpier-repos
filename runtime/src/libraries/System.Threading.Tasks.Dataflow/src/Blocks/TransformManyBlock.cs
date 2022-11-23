@@ -61,7 +61,9 @@ namespace System.Threading.Tasks.Dataflow
         /// </param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
         public TransformManyBlock(Func<TInput, IEnumerable<TOutput>> transform)
-            : this(transform, ExecutionDataflowBlockOptions.Default) { }
+            : this(transform, ExecutionDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="transform">
@@ -95,7 +97,9 @@ namespace System.Threading.Tasks.Dataflow
         /// </param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
         public TransformManyBlock(Func<TInput, Task<IEnumerable<TOutput>>> transform)
-            : this(transform, ExecutionDataflowBlockOptions.Default) { }
+            : this(transform, ExecutionDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="transform">

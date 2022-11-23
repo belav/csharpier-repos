@@ -6,7 +6,9 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
     public class AddStaticField
     {
-        public AddStaticField() { }
+        public AddStaticField()
+        {
+        }
 
         public string GetField => s_field;
 

@@ -9,7 +9,9 @@ namespace AuthSamples.Cookies;
 internal class ConfigureMyCookie : IConfigureNamedOptions<CookieAuthenticationOptions>
 {
     // You can inject services here
-    public ConfigureMyCookie() { }
+    public ConfigureMyCookie()
+    {
+    }
 
     public void Configure(string name, CookieAuthenticationOptions options)
     {

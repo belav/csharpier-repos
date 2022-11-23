@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public QuickInfoOptionsProvider() { }
+        public QuickInfoOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(QuickInfoOptions.ShowRemarksInQuickInfo);

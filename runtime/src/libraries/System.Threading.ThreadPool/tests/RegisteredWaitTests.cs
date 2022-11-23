@@ -14,7 +14,9 @@ namespace System.Threading.ThreadPools.Tests
         private const int ExpectedTimeoutMilliseconds =
             ThreadTestHelpers.ExpectedTimeoutMilliseconds;
 
-        private sealed class InvalidWaitHandle : WaitHandle { }
+        private sealed class InvalidWaitHandle : WaitHandle
+        {
+        }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void QueueRegisterPositiveAndFlowTest()
@@ -170,7 +172,8 @@ namespace System.Threading.ThreadPools.Tests
             );
 
             WaitHandle waitHandle = new ManualResetEvent(true);
-            WaitOrTimerCallback callback = (state, timedOut) => { };
+            WaitOrTimerCallback callback = (state, timedOut) => {
+            };
             Assert.Throws<ArgumentNullException>(
                 () => ThreadPool.RegisterWaitForSingleObject(null, callback, null, 0, true)
             );
@@ -512,7 +515,8 @@ namespace System.Threading.ThreadPools.Tests
         public static void CanRegisterMoreThan64Waits()
         {
             RegisteredWaitHandle[] registeredWaitHandles = new RegisteredWaitHandle[65];
-            WaitOrTimerCallback waitCallback = (_, __) => { };
+            WaitOrTimerCallback waitCallback = (_, __) => {
+            };
             for (int i = 0; i < registeredWaitHandles.Length; ++i)
             {
                 registeredWaitHandles[i] = ThreadPool.RegisterWaitForSingleObject(
@@ -647,7 +651,8 @@ namespace System.Threading.ThreadPools.Tests
             var waitEvent = new AutoResetEvent(false);
             RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
                 waitEvent,
-                (_, __) => { },
+                (_, __) => {
+                },
                 null,
                 UnexpectedTimeoutMilliseconds,
                 true
@@ -665,7 +670,8 @@ namespace System.Threading.ThreadPools.Tests
             {
                 RegisteredWaitHandle registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
                     waitEvent,
-                    (_, __) => { },
+                    (_, __) => {
+                    },
                     null,
                     UnexpectedTimeoutMilliseconds,
                     true

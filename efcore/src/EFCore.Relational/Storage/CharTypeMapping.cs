@@ -26,13 +26,17 @@ public class CharTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public CharTypeMapping(string storeType, DbType? dbType = System.Data.DbType.String)
-        : base(storeType, typeof(char), dbType) { }
+        : base(storeType, typeof(char), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="CharTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected CharTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected CharTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

@@ -7,7 +7,9 @@ public class AspNetIdentityIntKeySqlServerTest
     : AspNetIdentityIntKeyTestBase<AspNetIdentityIntKeySqlServerTest.AspNetIdentityIntKeySqlServerFixture>
 {
     public AspNetIdentityIntKeySqlServerTest(AspNetIdentityIntKeySqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class AspNetIdentityIntKeySqlServerFixture : AspNetIdentityFixtureBase
     {

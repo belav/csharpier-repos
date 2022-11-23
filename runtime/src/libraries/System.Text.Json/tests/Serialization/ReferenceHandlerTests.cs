@@ -324,8 +324,9 @@ namespace System.Text.Json.Serialization.Tests
         #endregion Root Object
 
         #region Root Dictionary
-        private class DictionaryWithGenericCycle
-            : Dictionary<string, DictionaryWithGenericCycle> { }
+        private class DictionaryWithGenericCycle : Dictionary<string, DictionaryWithGenericCycle>
+        {
+        }
 
         [Fact]
         public static void DictionaryLoop()
@@ -395,7 +396,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         private class DictionaryWithGenericCycleWithinList
-            : Dictionary<string, List<DictionaryWithGenericCycleWithinList>> { }
+            : Dictionary<string, List<DictionaryWithGenericCycleWithinList>>
+        {
+        }
 
         [Fact]
         public static void DictionaryArrayLoop()
@@ -594,7 +597,9 @@ namespace System.Text.Json.Serialization.Tests
         #endregion
 
         #region Root Array
-        private class ListWithGenericCycle : List<ListWithGenericCycle> { }
+        private class ListWithGenericCycle : List<ListWithGenericCycle>
+        {
+        }
 
         [Fact]
         public static void ArrayLoop()
@@ -679,7 +684,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         private class ListWithGenericCycleWithinDictionary
-            : List<Dictionary<string, ListWithGenericCycleWithinDictionary>> { }
+            : List<Dictionary<string, ListWithGenericCycleWithinDictionary>>
+        {
+        }
 
         [Fact]
         public static void ArrayDictionaryLoop()

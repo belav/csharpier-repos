@@ -10,7 +10,9 @@ namespace AutoMapper.UnitTests
             {
                 private readonly int _value;
 
-                public FooResolver() : this(1) { }
+                public FooResolver() : this(1)
+                {
+                }
 
                 public FooResolver(int value)
                 {
@@ -99,7 +101,9 @@ namespace AutoMapper.UnitTests
             {
                 private readonly int _value;
 
-                public FooTypeConverter() : this(1) { }
+                public FooTypeConverter() : this(1)
+                {
+                }
 
                 public FooTypeConverter(int value)
                 {

@@ -11,7 +11,9 @@ namespace System.Data
     internal sealed class ConstraintConverter : ExpandableObjectConverter
     {
         // converter classes should have public ctor
-        public ConstraintConverter() { }
+        public ConstraintConverter()
+        {
+        }
 
         /// <summary>
         /// Gets a value indicating whether this converter can

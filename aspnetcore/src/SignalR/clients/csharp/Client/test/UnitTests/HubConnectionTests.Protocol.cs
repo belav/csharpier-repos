@@ -1055,7 +1055,11 @@ public partial class HubConnectionTests
                 await hubConnection.StartAsync().DefaultTimeout();
 
                 // No result provided
-                hubConnection.On("Result", () => { });
+                hubConnection.On(
+                    "Result",
+                    () => {
+                    }
+                );
 
                 await connection
                     .ReceiveTextAsync(

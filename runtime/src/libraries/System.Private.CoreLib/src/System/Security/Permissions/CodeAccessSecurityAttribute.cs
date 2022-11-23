@@ -11,6 +11,8 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public abstract partial class CodeAccessSecurityAttribute : SecurityAttribute
     {
-        protected CodeAccessSecurityAttribute(SecurityAction action) : base(default) { }
+        protected CodeAccessSecurityAttribute(SecurityAction action) : base(default)
+        {
+        }
     }
 }

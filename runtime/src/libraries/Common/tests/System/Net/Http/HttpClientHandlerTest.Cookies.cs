@@ -26,7 +26,9 @@ namespace System.Net.Http.Functional.Tests
 
         private const string s_simpleContent = "Hello world!";
 
-        public HttpClientHandlerTest_Cookies(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Cookies(ITestOutputHelper output) : base(output)
+        {
+        }
 
         //
         // Send cookie tests
@@ -946,7 +948,9 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandlerTest_Cookies_Http11 : HttpClientHandlerTestBase
     {
-        public HttpClientHandlerTest_Cookies_Http11(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Cookies_Http11(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.Browser, "CookieContainer is not supported on Browser")]

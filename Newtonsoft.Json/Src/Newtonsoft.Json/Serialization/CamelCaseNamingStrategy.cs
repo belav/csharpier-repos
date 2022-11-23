@@ -73,7 +73,9 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="CamelCaseNamingStrategy"/> class.
         /// </summary>
-        public CamelCaseNamingStrategy() { }
+        public CamelCaseNamingStrategy()
+        {
+        }
 
         /// <summary>
         /// Resolves the specified property name.

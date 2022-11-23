@@ -47,7 +47,9 @@ class C3
 {
     public int F0;
 
-    public C3(int f0) { }
+    public C3(int f0)
+    {
+    }
 }
 
 public class Program

@@ -20,7 +20,9 @@ public class UserOnlyStore<TUser> : UserOnlyStore<TUser, DbContext, string>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public UserOnlyStore(DbContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>
@@ -38,7 +40,9 @@ public class UserOnlyStore<TUser, TContext> : UserOnlyStore<TUser, TContext, str
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public UserOnlyStore(TContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>
@@ -66,7 +70,9 @@ public class UserOnlyStore<TUser, TContext, TKey>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public UserOnlyStore(TContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>

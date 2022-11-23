@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
     public partial class InvokeDelegateWithConditionalAccessTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public InvokeDelegateWithConditionalAccessTests(ITestOutputHelper logger) : base(logger) { }
+        public InvokeDelegateWithConditionalAccessTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

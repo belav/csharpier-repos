@@ -17,7 +17,9 @@ namespace System.CodeDom.Compiler
         internal string[] _compilerExtensions; // This can never by null
         private Type _type;
 
-        private CompilerInfo() { } // Not createable
+        private CompilerInfo()
+        {
+        } // Not createable
 
         public string[] GetLanguages() => (string[])_compilerLanguages.Clone();
 

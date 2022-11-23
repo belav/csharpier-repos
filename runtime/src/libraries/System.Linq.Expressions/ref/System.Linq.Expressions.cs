@@ -8,7 +8,9 @@ namespace System.Dynamic
 {
     public abstract partial class BinaryOperationBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected BinaryOperationBinder(System.Linq.Expressions.ExpressionType operation) { }
+        protected BinaryOperationBinder(System.Linq.Expressions.ExpressionType operation)
+        {
+        }
 
         public System.Linq.Expressions.ExpressionType Operation
         {
@@ -44,7 +46,9 @@ namespace System.Dynamic
 
     public abstract partial class BindingRestrictions
     {
-        internal BindingRestrictions() { }
+        internal BindingRestrictions()
+        {
+        }
 
         public static readonly System.Dynamic.BindingRestrictions Empty;
 
@@ -93,9 +97,13 @@ namespace System.Dynamic
 
     public sealed partial class CallInfo
     {
-        public CallInfo(int argCount, System.Collections.Generic.IEnumerable<string> argNames) { }
+        public CallInfo(int argCount, System.Collections.Generic.IEnumerable<string> argNames)
+        {
+        }
 
-        public CallInfo(int argCount, params string[] argNames) { }
+        public CallInfo(int argCount, params string[] argNames)
+        {
+        }
 
         public int ArgumentCount
         {
@@ -119,7 +127,9 @@ namespace System.Dynamic
 
     public abstract partial class ConvertBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected ConvertBinder(System.Type type, bool @explicit) { }
+        protected ConvertBinder(System.Type type, bool @explicit)
+        {
+        }
 
         public bool Explicit
         {
@@ -157,7 +167,9 @@ namespace System.Dynamic
 
     public abstract partial class CreateInstanceBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected CreateInstanceBinder(System.Dynamic.CallInfo callInfo) { }
+        protected CreateInstanceBinder(System.Dynamic.CallInfo callInfo)
+        {
+        }
 
         public System.Dynamic.CallInfo CallInfo
         {
@@ -193,7 +205,9 @@ namespace System.Dynamic
 
     public abstract partial class DeleteIndexBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected DeleteIndexBinder(System.Dynamic.CallInfo callInfo) { }
+        protected DeleteIndexBinder(System.Dynamic.CallInfo callInfo)
+        {
+        }
 
         public System.Dynamic.CallInfo CallInfo
         {
@@ -229,7 +243,9 @@ namespace System.Dynamic
 
     public abstract partial class DeleteMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected DeleteMemberBinder(string name, bool ignoreCase) { }
+        protected DeleteMemberBinder(string name, bool ignoreCase)
+        {
+        }
 
         public bool IgnoreCase
         {
@@ -272,13 +288,17 @@ namespace System.Dynamic
         public DynamicMetaObject(
             System.Linq.Expressions.Expression expression,
             System.Dynamic.BindingRestrictions restrictions
-        ) { }
+        )
+        {
+        }
 
         public DynamicMetaObject(
             System.Linq.Expressions.Expression expression,
             System.Dynamic.BindingRestrictions restrictions,
             object value
-        ) { }
+        )
+        {
+        }
 
         public System.Linq.Expressions.Expression Expression
         {
@@ -415,7 +435,9 @@ namespace System.Dynamic
     public abstract partial class DynamicMetaObjectBinder
         : System.Runtime.CompilerServices.CallSiteBinder
     {
-        protected DynamicMetaObjectBinder() { }
+        protected DynamicMetaObjectBinder()
+        {
+        }
 
         public virtual System.Type ReturnType
         {
@@ -458,7 +480,9 @@ namespace System.Dynamic
 
     public partial class DynamicObject : System.Dynamic.IDynamicMetaObjectProvider
     {
-        protected DynamicObject() { }
+        protected DynamicObject()
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerable<string> GetDynamicMemberNames()
         {
@@ -577,7 +601,9 @@ namespace System.Dynamic
             System.ComponentModel.INotifyPropertyChanged,
             System.Dynamic.IDynamicMetaObjectProvider
     {
-        public ExpandoObject() { }
+        public ExpandoObject()
+        {
+        }
 
         int System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             string,
@@ -596,7 +622,9 @@ namespace System.Dynamic
         object? System.Collections.Generic.IDictionary<string, object?>.this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Collections.Generic.ICollection<string> System.Collections.Generic.IDictionary<
             string,
@@ -614,19 +642,27 @@ namespace System.Dynamic
         }
         event System.ComponentModel.PropertyChangedEventHandler? System.ComponentModel.INotifyPropertyChanged.PropertyChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             string,
             object?
-        >>.Add(System.Collections.Generic.KeyValuePair<string, object> item) { }
+        >>.Add(System.Collections.Generic.KeyValuePair<string, object> item)
+        {
+        }
 
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             string,
             object?
-        >>.Clear() { }
+        >>.Clear()
+        {
+        }
 
         bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             string,
@@ -639,10 +675,9 @@ namespace System.Dynamic
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             string,
             object?
-        >>.CopyTo(
-            System.Collections.Generic.KeyValuePair<string, object>[] array,
-            int arrayIndex
-        ) { }
+        >>.CopyTo(System.Collections.Generic.KeyValuePair<string, object>[] array, int arrayIndex)
+        {
+        }
 
         bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             string,
@@ -652,10 +687,9 @@ namespace System.Dynamic
             throw null;
         }
 
-        void System.Collections.Generic.IDictionary<string, object?>.Add(
-            string key,
-            object? value
-        ) { }
+        void System.Collections.Generic.IDictionary<string, object?>.Add(string key, object? value)
+        {
+        }
 
         bool System.Collections.Generic.IDictionary<string, object?>.ContainsKey(string key)
         {
@@ -701,7 +735,9 @@ namespace System.Dynamic
 
     public abstract partial class GetIndexBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected GetIndexBinder(System.Dynamic.CallInfo callInfo) { }
+        protected GetIndexBinder(System.Dynamic.CallInfo callInfo)
+        {
+        }
 
         public System.Dynamic.CallInfo CallInfo
         {
@@ -737,7 +773,9 @@ namespace System.Dynamic
 
     public abstract partial class GetMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected GetMemberBinder(string name, bool ignoreCase) { }
+        protected GetMemberBinder(string name, bool ignoreCase)
+        {
+        }
 
         public bool IgnoreCase
         {
@@ -787,7 +825,9 @@ namespace System.Dynamic
 
     public abstract partial class InvokeBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected InvokeBinder(System.Dynamic.CallInfo callInfo) { }
+        protected InvokeBinder(System.Dynamic.CallInfo callInfo)
+        {
+        }
 
         public System.Dynamic.CallInfo CallInfo
         {
@@ -824,7 +864,8 @@ namespace System.Dynamic
     public abstract partial class InvokeMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected InvokeMemberBinder(string name, bool ignoreCase, System.Dynamic.CallInfo callInfo)
-        { }
+        {
+        }
 
         public System.Dynamic.CallInfo CallInfo
         {
@@ -874,7 +915,9 @@ namespace System.Dynamic
 
     public abstract partial class SetIndexBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected SetIndexBinder(System.Dynamic.CallInfo callInfo) { }
+        protected SetIndexBinder(System.Dynamic.CallInfo callInfo)
+        {
+        }
 
         public System.Dynamic.CallInfo CallInfo
         {
@@ -912,7 +955,9 @@ namespace System.Dynamic
 
     public abstract partial class SetMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected SetMemberBinder(string name, bool ignoreCase) { }
+        protected SetMemberBinder(string name, bool ignoreCase)
+        {
+        }
 
         public bool IgnoreCase
         {
@@ -952,7 +997,9 @@ namespace System.Dynamic
 
     public abstract partial class UnaryOperationBinder : System.Dynamic.DynamicMetaObjectBinder
     {
-        protected UnaryOperationBinder(System.Linq.Expressions.ExpressionType operation) { }
+        protected UnaryOperationBinder(System.Linq.Expressions.ExpressionType operation)
+        {
+        }
 
         public System.Linq.Expressions.ExpressionType Operation
         {
@@ -989,14 +1036,18 @@ namespace System.Linq
 {
     public partial interface IOrderedQueryable
         : System.Collections.IEnumerable,
-            System.Linq.IQueryable { }
+            System.Linq.IQueryable
+    {
+    }
 
     public partial interface IOrderedQueryable<out T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
             System.Linq.IOrderedQueryable,
             System.Linq.IQueryable,
-            System.Linq.IQueryable<T> { }
+            System.Linq.IQueryable<T>
+    {
+    }
 
     public partial interface IQueryable : System.Collections.IEnumerable
     {
@@ -1008,7 +1059,9 @@ namespace System.Linq
     public partial interface IQueryable<out T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
-            System.Linq.IQueryable { }
+            System.Linq.IQueryable
+    {
+    }
 
     public partial interface IQueryProvider
     {
@@ -1025,7 +1078,9 @@ namespace System.Linq.Expressions
 {
     public partial class BinaryExpression : System.Linq.Expressions.Expression
     {
-        internal BinaryExpression() { }
+        internal BinaryExpression()
+        {
+        }
 
         public override bool CanReduce
         {
@@ -1080,7 +1135,9 @@ namespace System.Linq.Expressions
 
     public partial class BlockExpression : System.Linq.Expressions.Expression
     {
-        internal BlockExpression() { }
+        internal BlockExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Expressions
         {
@@ -1121,7 +1178,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class CatchBlock
     {
-        internal CatchBlock() { }
+        internal CatchBlock()
+        {
+        }
 
         public System.Linq.Expressions.Expression Body
         {
@@ -1157,7 +1216,9 @@ namespace System.Linq.Expressions
 
     public partial class ConditionalExpression : System.Linq.Expressions.Expression
     {
-        internal ConditionalExpression() { }
+        internal ConditionalExpression()
+        {
+        }
 
         public System.Linq.Expressions.Expression IfFalse
         {
@@ -1199,7 +1260,9 @@ namespace System.Linq.Expressions
 
     public partial class ConstantExpression : System.Linq.Expressions.Expression
     {
-        internal ConstantExpression() { }
+        internal ConstantExpression()
+        {
+        }
 
         public sealed override System.Linq.Expressions.ExpressionType NodeType
         {
@@ -1224,7 +1287,9 @@ namespace System.Linq.Expressions
 
     public partial class DebugInfoExpression : System.Linq.Expressions.Expression
     {
-        internal DebugInfoExpression() { }
+        internal DebugInfoExpression()
+        {
+        }
 
         public System.Linq.Expressions.SymbolDocumentInfo Document
         {
@@ -1269,7 +1334,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class DefaultExpression : System.Linq.Expressions.Expression
     {
-        internal DefaultExpression() { }
+        internal DefaultExpression()
+        {
+        }
 
         public sealed override System.Linq.Expressions.ExpressionType NodeType
         {
@@ -1293,7 +1360,9 @@ namespace System.Linq.Expressions
             System.Linq.Expressions.IArgumentProvider,
             System.Linq.Expressions.IDynamicExpression
     {
-        internal DynamicExpression() { }
+        internal DynamicExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Arguments
         {
@@ -1477,7 +1546,9 @@ namespace System.Linq.Expressions
     public abstract partial class DynamicExpressionVisitor
         : System.Linq.Expressions.ExpressionVisitor
     {
-        protected DynamicExpressionVisitor() { }
+        protected DynamicExpressionVisitor()
+        {
+        }
 
         protected internal override System.Linq.Expressions.Expression VisitDynamic(
             System.Linq.Expressions.DynamicExpression node
@@ -1489,7 +1560,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class ElementInit : System.Linq.Expressions.IArgumentProvider
     {
-        internal ElementInit() { }
+        internal ElementInit()
+        {
+        }
 
         public System.Reflection.MethodInfo AddMethod
         {
@@ -1526,12 +1599,16 @@ namespace System.Linq.Expressions
 
     public abstract partial class Expression
     {
-        protected Expression() { }
+        protected Expression()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use a different constructor that does not take ExpressionType. Then override NodeType and Type properties to provide the values that would be specified to this constructor."
         )]
-        protected Expression(System.Linq.Expressions.ExpressionType nodeType, System.Type type) { }
+        protected Expression(System.Linq.Expressions.ExpressionType nodeType, System.Type type)
+        {
+        }
 
         public virtual bool CanReduce
         {
@@ -4351,7 +4428,9 @@ namespace System.Linq.Expressions
 
     public abstract partial class ExpressionVisitor
     {
-        protected ExpressionVisitor() { }
+        protected ExpressionVisitor()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Visit(
             System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> nodes
@@ -4633,7 +4712,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class Expression<TDelegate> : System.Linq.Expressions.LambdaExpression
     {
-        internal Expression() { }
+        internal Expression()
+        {
+        }
 
         protected internal override System.Linq.Expressions.Expression Accept(
             System.Linq.Expressions.ExpressionVisitor visitor
@@ -4670,7 +4751,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class GotoExpression : System.Linq.Expressions.Expression
     {
-        internal GotoExpression() { }
+        internal GotoExpression()
+        {
+        }
 
         public System.Linq.Expressions.GotoExpressionKind Kind
         {
@@ -4734,7 +4817,9 @@ namespace System.Linq.Expressions
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
-        internal IndexExpression() { }
+        internal IndexExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Arguments
         {
@@ -4788,7 +4873,9 @@ namespace System.Linq.Expressions
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
-        internal InvocationExpression() { }
+        internal InvocationExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Arguments
         {
@@ -4836,7 +4923,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class LabelExpression : System.Linq.Expressions.Expression
     {
-        internal LabelExpression() { }
+        internal LabelExpression()
+        {
+        }
 
         public System.Linq.Expressions.Expression? DefaultValue
         {
@@ -4873,7 +4962,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class LabelTarget
     {
-        internal LabelTarget() { }
+        internal LabelTarget()
+        {
+        }
 
         public string? Name
         {
@@ -4892,7 +4983,9 @@ namespace System.Linq.Expressions
 
     public abstract partial class LambdaExpression : System.Linq.Expressions.Expression
     {
-        internal LambdaExpression() { }
+        internal LambdaExpression()
+        {
+        }
 
         public System.Linq.Expressions.Expression Body
         {
@@ -4943,7 +5036,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class ListInitExpression : System.Linq.Expressions.Expression
     {
-        internal ListInitExpression() { }
+        internal ListInitExpression()
+        {
+        }
 
         public override bool CanReduce
         {
@@ -4989,7 +5084,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class LoopExpression : System.Linq.Expressions.Expression
     {
-        internal LoopExpression() { }
+        internal LoopExpression()
+        {
+        }
 
         public System.Linq.Expressions.Expression Body
         {
@@ -5035,7 +5132,9 @@ namespace System.Linq.Expressions
             : base(
                 default(System.Linq.Expressions.MemberBindingType),
                 default(System.Reflection.MemberInfo)
-            ) { }
+            )
+        {
+        }
 
         public System.Linq.Expressions.Expression Expression
         {
@@ -5056,7 +5155,9 @@ namespace System.Linq.Expressions
         protected MemberBinding(
             System.Linq.Expressions.MemberBindingType type,
             System.Reflection.MemberInfo member
-        ) { }
+        )
+        {
+        }
 
         public System.Linq.Expressions.MemberBindingType BindingType
         {
@@ -5082,7 +5183,9 @@ namespace System.Linq.Expressions
 
     public partial class MemberExpression : System.Linq.Expressions.Expression
     {
-        internal MemberExpression() { }
+        internal MemberExpression()
+        {
+        }
 
         public System.Linq.Expressions.Expression? Expression
         {
@@ -5114,7 +5217,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class MemberInitExpression : System.Linq.Expressions.Expression
     {
-        internal MemberInitExpression() { }
+        internal MemberInitExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.MemberBinding> Bindings
         {
@@ -5164,7 +5269,9 @@ namespace System.Linq.Expressions
             : base(
                 default(System.Linq.Expressions.MemberBindingType),
                 default(System.Reflection.MemberInfo)
-            ) { }
+            )
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.ElementInit> Initializers
         {
@@ -5185,7 +5292,9 @@ namespace System.Linq.Expressions
             : base(
                 default(System.Linq.Expressions.MemberBindingType),
                 default(System.Reflection.MemberInfo)
-            ) { }
+            )
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.MemberBinding> Bindings
         {
@@ -5204,7 +5313,9 @@ namespace System.Linq.Expressions
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
-        internal MethodCallExpression() { }
+        internal MethodCallExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Arguments
         {
@@ -5256,7 +5367,9 @@ namespace System.Linq.Expressions
 
     public partial class NewArrayExpression : System.Linq.Expressions.Expression
     {
-        internal NewArrayExpression() { }
+        internal NewArrayExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Expressions
         {
@@ -5286,7 +5399,9 @@ namespace System.Linq.Expressions
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
-        internal NewExpression() { }
+        internal NewExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Arguments
         {
@@ -5337,7 +5452,9 @@ namespace System.Linq.Expressions
 
     public partial class ParameterExpression : System.Linq.Expressions.Expression
     {
-        internal ParameterExpression() { }
+        internal ParameterExpression()
+        {
+        }
 
         public bool IsByRef
         {
@@ -5366,7 +5483,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class RuntimeVariablesExpression : System.Linq.Expressions.Expression
     {
-        internal RuntimeVariablesExpression() { }
+        internal RuntimeVariablesExpression()
+        {
+        }
 
         public sealed override System.Linq.Expressions.ExpressionType NodeType
         {
@@ -5398,7 +5517,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class SwitchCase
     {
-        internal SwitchCase() { }
+        internal SwitchCase()
+        {
+        }
 
         public System.Linq.Expressions.Expression Body
         {
@@ -5425,7 +5546,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class SwitchExpression : System.Linq.Expressions.Expression
     {
-        internal SwitchExpression() { }
+        internal SwitchExpression()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.SwitchCase> Cases
         {
@@ -5471,7 +5594,9 @@ namespace System.Linq.Expressions
 
     public partial class SymbolDocumentInfo
     {
-        internal SymbolDocumentInfo() { }
+        internal SymbolDocumentInfo()
+        {
+        }
 
         public virtual System.Guid DocumentType
         {
@@ -5493,7 +5618,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class TryExpression : System.Linq.Expressions.Expression
     {
-        internal TryExpression() { }
+        internal TryExpression()
+        {
+        }
 
         public System.Linq.Expressions.Expression Body
         {
@@ -5540,7 +5667,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class TypeBinaryExpression : System.Linq.Expressions.Expression
     {
-        internal TypeBinaryExpression() { }
+        internal TypeBinaryExpression()
+        {
+        }
 
         public System.Linq.Expressions.Expression Expression
         {
@@ -5576,7 +5705,9 @@ namespace System.Linq.Expressions
 
     public sealed partial class UnaryExpression : System.Linq.Expressions.Expression
     {
-        internal UnaryExpression() { }
+        internal UnaryExpression()
+        {
+        }
 
         public override bool CanReduce
         {
@@ -5632,7 +5763,9 @@ namespace System.Runtime.CompilerServices
 {
     public partial class CallSite
     {
-        internal CallSite() { }
+        internal CallSite()
+        {
+        }
 
         public System.Runtime.CompilerServices.CallSiteBinder? Binder
         {
@@ -5650,7 +5783,9 @@ namespace System.Runtime.CompilerServices
 
     public abstract partial class CallSiteBinder
     {
-        protected CallSiteBinder() { }
+        protected CallSiteBinder()
+        {
+        }
 
         public static System.Linq.Expressions.LabelTarget UpdateLabel
         {
@@ -5670,7 +5805,9 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        protected void CacheTarget<T>(T target) where T : class { }
+        protected void CacheTarget<T>(T target) where T : class
+        {
+        }
     }
 
     public static partial class CallSiteHelpers
@@ -5683,7 +5820,9 @@ namespace System.Runtime.CompilerServices
 
     public partial class CallSite<T> : System.Runtime.CompilerServices.CallSite where T : class
     {
-        internal CallSite() { }
+        internal CallSite()
+        {
+        }
 
         public T Target;
         public T Update
@@ -5701,7 +5840,9 @@ namespace System.Runtime.CompilerServices
 
     public abstract partial class DebugInfoGenerator
     {
-        protected DebugInfoGenerator() { }
+        protected DebugInfoGenerator()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "The CreatePdbGenerator API is not supported and throws PlatformNotSupportedException.",
@@ -5730,9 +5871,13 @@ namespace System.Runtime.CompilerServices
     )]
     public sealed partial class DynamicAttribute : System.Attribute
     {
-        public DynamicAttribute() { }
+        public DynamicAttribute()
+        {
+        }
 
-        public DynamicAttribute(bool[] transformFlags) { }
+        public DynamicAttribute(bool[] transformFlags)
+        {
+        }
 
         public System.Collections.Generic.IList<bool> TransformFlags
         {
@@ -5754,16 +5899,24 @@ namespace System.Runtime.CompilerServices
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        public ReadOnlyCollectionBuilder() { }
+        public ReadOnlyCollectionBuilder()
+        {
+        }
 
-        public ReadOnlyCollectionBuilder(System.Collections.Generic.IEnumerable<T> collection) { }
+        public ReadOnlyCollectionBuilder(System.Collections.Generic.IEnumerable<T> collection)
+        {
+        }
 
-        public ReadOnlyCollectionBuilder(int capacity) { }
+        public ReadOnlyCollectionBuilder(int capacity)
+        {
+        }
 
         public int Capacity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Count
         {
@@ -5772,7 +5925,9 @@ namespace System.Runtime.CompilerServices
         public T this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.Collections.Generic.ICollection<T>.IsReadOnly
         {
@@ -5797,19 +5952,27 @@ namespace System.Runtime.CompilerServices
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Add(T item) { }
+        public void Add(T item)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(T item)
         {
             throw null;
         }
 
-        public void CopyTo(T[] array, int arrayIndex) { }
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
@@ -5821,20 +5984,30 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public void Insert(int index, T item) { }
+        public void Insert(int index, T item)
+        {
+        }
 
         public bool Remove(T item)
         {
             throw null;
         }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        public void Reverse() { }
+        public void Reverse()
+        {
+        }
 
-        public void Reverse(int index, int count) { }
+        public void Reverse(int index, int count)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -5856,9 +6029,13 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
         public T[] ToArray()
         {
@@ -5876,6 +6053,8 @@ namespace System.Runtime.CompilerServices
     )]
     public partial class RuleCache<T> where T : class
     {
-        internal RuleCache() { }
+        internal RuleCache()
+        {
+        }
     }
 }

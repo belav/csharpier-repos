@@ -35,5 +35,7 @@ namespace BlazorWpfApp
 
     // Workaround for compiler error "error MC3050: Cannot find the type 'local:Main'"
     // It seems that, although WPF's design-time build can see Razor components, its runtime build cannot.
-    public partial class Main { }
+    public partial class Main
+    {
+    }
 }

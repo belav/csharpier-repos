@@ -15,7 +15,9 @@ public sealed class ComponentRenderingTest : ComponentRenderingTestBase
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     [Fact]
     public void CanDispatchAsyncWorkToSyncContext()

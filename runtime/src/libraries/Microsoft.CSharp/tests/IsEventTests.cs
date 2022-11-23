@@ -66,7 +66,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void BindToNonExistent()
         {
             dynamic d = new TypeWithEvents();
-            Action<int> handler = i => { };
+            Action<int> handler = i =>
+            {
+            };
             Assert.Throws<RuntimeBinderException>(() => d.NothingHere += handler);
         }
 
@@ -74,7 +76,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void BindToNonEvents()
         {
             dynamic d = new TypeWithEvents();
-            Action<int> handler = i => { };
+            Action<int> handler = i =>
+            {
+            };
             Assert.Throws<RuntimeBinderException>(() => d.NonEventField += handler);
             Assert.Throws<RuntimeBinderException>(() => d.NonEventProperty += handler);
             Assert.Throws<RuntimeBinderException>(() => d.Raise += handler);

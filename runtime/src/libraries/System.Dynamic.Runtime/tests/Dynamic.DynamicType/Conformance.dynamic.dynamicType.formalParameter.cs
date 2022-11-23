@@ -265,13 +265,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
     // <Code>
     using System;
 
-    public interface MyInterface { }
+    public interface MyInterface
+    {
+    }
 
-    public class MyClass : MyInterface { }
+    public class MyClass : MyInterface
+    {
+    }
 
-    public class MyDerivedClass : MyClass { }
+    public class MyDerivedClass : MyClass
+    {
+    }
 
-    public struct MyStruct { }
+    public struct MyStruct
+    {
+    }
 
     public enum MyEnum
     {
@@ -495,7 +503,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
             return false;
         }
 
-        public static void DelMethod() { }
+        public static void DelMethod()
+        {
+        }
     }
     // </Code>
 }
@@ -637,13 +647,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
     // <Expects Status=success></Expects>
     // <Code>
 
-    public interface MyInterface { }
+    public interface MyInterface
+    {
+    }
 
-    public class MyClass : MyInterface { }
+    public class MyClass : MyInterface
+    {
+    }
 
-    public class MyDerivedClass : MyClass { }
+    public class MyDerivedClass : MyClass
+    {
+    }
 
-    internal struct MyStruct { }
+    internal struct MyStruct
+    {
+    }
 
     internal enum MyEnum
     {
@@ -702,7 +720,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
 
     public class Test
     {
-        public static void DelMethod() { }
+        public static void DelMethod()
+        {
+        }
 
         public static void DynamicCSharpRunTest()
         {
@@ -801,7 +821,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
     {
         private static int s_rez = 0;
 
-        public D() { }
+        public D()
+        {
+        }
 
         public D(int x)
         {
@@ -1057,14 +1079,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
 
     public abstract class C
     {
-        public C(int x) { }
+        public C(int x)
+        {
+        }
 
-        public C() { }
+        public C()
+        {
+        }
     }
 
     public class D : C
     {
-        public D(string s) { }
+        public D(string s)
+        {
+        }
     }
     // </Code>
 }
@@ -1708,7 +1736,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
 
     public class CommonLibrary
     {
-        public void Method1<T>(Dictionary<T, dynamic> d) { }
+        public void Method1<T>(Dictionary<T, dynamic> d)
+        {
+        }
     }
 
     public class Test

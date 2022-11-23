@@ -60,38 +60,62 @@ internal enum InternalEnum
 #if ALL_PUB
 public
 #endif
-class DefaultClass { }
+class DefaultClass
+{
+}
 
 public class PublicClass
 {
     //
     // Ctors
     //
-    public PublicClass() { }
+    public PublicClass()
+    {
+    }
 
 #if ALL_PUB
     public
 #endif
-    PublicClass(int i1) { }
+    PublicClass(int i1)
+    {
+    }
 
-    public PublicClass(int i1, int i2) { }
+    public PublicClass(int i1, int i2)
+    {
+    }
 
 #if ALL_PUB
-    public PublicClass(int i1, int i2, int i3) { }
+    public PublicClass(int i1, int i2, int i3)
+    {
+    }
 
-    public PublicClass(int i1, int i2, int i3, int i4) { }
+    public PublicClass(int i1, int i2, int i3, int i4)
+    {
+    }
 
-    public PublicClass(int i1, int i2, int i3, int i4, int i5) { }
+    public PublicClass(int i1, int i2, int i3, int i4, int i5)
+    {
+    }
 
-    public PublicClass(int i1, int i2, int i3, int i4, int i5, int i6) { }
+    public PublicClass(int i1, int i2, int i3, int i4, int i5, int i6)
+    {
+    }
 #else
-    protected PublicClass(int i1, int i2, int i3) { }
+    protected PublicClass(int i1, int i2, int i3)
+    {
+    }
 
-    internal PublicClass(int i1, int i2, int i3, int i4) { }
+    internal PublicClass(int i1, int i2, int i3, int i4)
+    {
+    }
 
-    protected internal PublicClass(int i1, int i2, int i3, int i4, int i5) { }
+    protected internal PublicClass(int i1, int i2, int i3, int i4, int i5)
+    {
+    }
 
-    private PublicClass(int i1, int i2, int i3, int i4, int i5, int i6) { }
+    private PublicClass(int i1, int i2, int i3, int i4, int i5, int i6)
+    {
+    }
 #endif
 
     //
@@ -378,7 +402,8 @@ public class InternalClass
 #else
 internal class InternalClass
 #endif
-{ }
+{
+}
 
 //
 // Static Class
@@ -436,7 +461,9 @@ internal interface InternalInterface
 #if ALL_PUB
 public
 #endif
-struct DefaultStruct { }
+struct DefaultStruct
+{
+}
 
 public struct PublicStruct
 {
@@ -670,7 +697,11 @@ public struct PublicStruct
 }
 
 #if ALL_PUB
-public struct InternalStruct { };
+public struct InternalStruct
+{
+};
 #else
-internal struct InternalStruct { };
+internal struct InternalStruct
+{
+};
 #endif

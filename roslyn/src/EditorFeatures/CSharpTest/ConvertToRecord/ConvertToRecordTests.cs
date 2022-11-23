@@ -4998,7 +4998,9 @@ namespace N
                     )
                 );
 
-            public override void Initialize(AnalysisContext context) { }
+            public override void Initialize(AnalysisContext context)
+            {
+            }
         }
     }
 }

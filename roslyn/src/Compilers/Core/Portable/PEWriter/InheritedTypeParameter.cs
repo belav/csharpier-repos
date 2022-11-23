@@ -173,7 +173,9 @@ namespace Microsoft.Cci
             return _parentParameter.GetAttributes(context);
         }
 
-        public void Dispatch(MetadataVisitor visitor) { }
+        public void Dispatch(MetadataVisitor visitor)
+        {
+        }
 
         #endregion
 

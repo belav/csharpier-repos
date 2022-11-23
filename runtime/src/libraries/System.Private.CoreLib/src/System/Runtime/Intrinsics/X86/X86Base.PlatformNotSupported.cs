@@ -11,7 +11,9 @@ namespace System.Runtime.Intrinsics.X86
     /// </summary>
     public abstract partial class X86Base
     {
-        internal X86Base() { }
+        internal X86Base()
+        {
+        }
 
         public static bool IsSupported
         {
@@ -21,7 +23,9 @@ namespace System.Runtime.Intrinsics.X86
 
         public abstract class X64
         {
-            internal X64() { }
+            internal X64()
+            {
+            }
 
             public static bool IsSupported
             {

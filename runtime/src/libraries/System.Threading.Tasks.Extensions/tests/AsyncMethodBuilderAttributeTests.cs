@@ -23,16 +23,24 @@ namespace System.Runtime.CompilerServices.Tests
         // No tests for the following, other than verifying that they successfully compile
 
         [AsyncMethodBuilder(typeof(string))]
-        class MyClass { }
+        class MyClass
+        {
+        }
 
         [AsyncMethodBuilder(typeof(string))]
-        struct MyStruct { }
+        struct MyStruct
+        {
+        }
 
         [AsyncMethodBuilder(typeof(string))]
-        interface MyInterface { }
+        interface MyInterface
+        {
+        }
 
         [AsyncMethodBuilder(typeof(string))]
-        enum MyEnum { }
+        enum MyEnum
+        {
+        }
 
         [AsyncMethodBuilder(typeof(string))]
         delegate void MyDelegate();

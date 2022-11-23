@@ -163,7 +163,9 @@ namespace System.Collections.Immutable.Tests
 
             var manualEnum = builder.GetEnumerator();
             Assert.Throws<InvalidOperationException>(() => manualEnum.Current);
-            while (manualEnum.MoveNext()) { }
+            while (manualEnum.MoveNext())
+            {
+            }
             Assert.False(manualEnum.MoveNext());
             Assert.Throws<InvalidOperationException>(() => manualEnum.Current);
         }

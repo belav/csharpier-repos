@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             : base(
                 unusedValueExpressionStatementOption: CSharpCodeStyleOptions.UnusedValueExpressionStatement,
                 unusedValueAssignmentOption: CSharpCodeStyleOptions.UnusedValueAssignment
-            ) { }
+            )
+        {
+        }
 
         protected override bool IsRecordDeclaration(SyntaxNode node) =>
             node is RecordDeclarationSyntax;

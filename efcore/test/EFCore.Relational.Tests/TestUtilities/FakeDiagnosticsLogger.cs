@@ -24,7 +24,9 @@ public class FakeDiagnosticsLogger<T> : IDiagnosticsLogger<T>, ILogger
         TState state,
         Exception exception,
         Func<TState, Exception, string> formatter
-    ) { }
+    )
+    {
+    }
 
     public bool IsEnabled(LogLevel logLevel) => true;
 

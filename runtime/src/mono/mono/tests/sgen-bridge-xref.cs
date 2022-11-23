@@ -9,7 +9,9 @@ public class Bridge
     public string id;
     public List<object> link = new List<object>();
 
-    ~Bridge() { }
+    ~Bridge()
+    {
+    }
 }
 
 class Driver

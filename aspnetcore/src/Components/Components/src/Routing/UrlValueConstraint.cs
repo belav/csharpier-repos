@@ -183,7 +183,9 @@ internal abstract class UrlValueConstraint
         where T : struct
     {
         public NullableTypedUrlValueConstraint(TryParseDelegate<T> parser)
-            : base(SupportNullable(parser)) { }
+            : base(SupportNullable(parser))
+        {
+        }
 
         private static TryParseDelegate<T?> SupportNullable(TryParseDelegate<T> parser)
         {

@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioNavigateToLinkService() { }
+        public VisualStudioNavigateToLinkService()
+        {
+        }
 
         public Task<bool> TryNavigateToLinkAsync(Uri uri, CancellationToken cancellationToken)
         {

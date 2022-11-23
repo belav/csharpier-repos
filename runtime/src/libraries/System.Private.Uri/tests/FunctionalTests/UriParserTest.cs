@@ -33,7 +33,9 @@ namespace System.PrivateUri.Tests
     #region Test class
     public sealed class TestUriParser : UriParser
     {
-        public TestUriParser() : base() { }
+        public TestUriParser() : base()
+        {
+        }
 
         public new string GetComponents(Uri uri, UriComponents components, UriFormat format) =>
             base.GetComponents(uri, components, format);

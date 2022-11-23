@@ -37,6 +37,8 @@ namespace Application
 
     class MyClass : IMyInterface
     {
-        public void Run() { }
+        public void Run()
+        {
+        }
     }
 }

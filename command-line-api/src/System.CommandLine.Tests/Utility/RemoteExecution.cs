@@ -69,7 +69,9 @@ namespace System.CommandLine.Tests.Utility
                     {
                         Process.Kill();
                     }
-                    catch { } // ignore all cleanup errors
+                    catch
+                    {
+                    } // ignore all cleanup errors
                 }
 
                 Process.Dispose();

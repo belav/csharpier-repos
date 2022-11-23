@@ -7,22 +7,34 @@ public class IncludeAllDerived : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    public class B : A { }
+    public class B : A
+    {
+    }
 
-    public class C : B { }
+    public class C : B
+    {
+    }
 
-    public class D : A { }
+    public class D : A
+    {
+    }
 
     public class ADto
     {
         public int Value { get; set; }
     }
 
-    public class BDto : ADto { }
+    public class BDto : ADto
+    {
+    }
 
-    public class CDto : BDto { }
+    public class CDto : BDto
+    {
+    }
 
-    public class DDto : ADto { }
+    public class DDto : ADto
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

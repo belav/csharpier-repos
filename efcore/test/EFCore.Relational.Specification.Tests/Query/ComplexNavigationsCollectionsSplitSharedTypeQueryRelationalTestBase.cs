@@ -8,7 +8,9 @@ public abstract class ComplexNavigationsCollectionsSplitSharedTypeQueryRelationa
     where TFixture : ComplexNavigationsSharedTypeQueryRelationalFixtureBase, new()
 {
     protected ComplexNavigationsCollectionsSplitSharedTypeQueryRelationalTestBase(TFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override async Task SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
         bool async

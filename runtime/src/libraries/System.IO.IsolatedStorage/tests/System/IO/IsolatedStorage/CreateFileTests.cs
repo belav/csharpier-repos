@@ -30,7 +30,9 @@ namespace System.IO.IsolatedStorage
         public void CreateFile_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
+            {
+            }
 
             Assert.Throws<ObjectDisposedException>(() => isf.CreateFile("foo"));
         }
@@ -61,13 +63,17 @@ namespace System.IO.IsolatedStorage
             {
                 string file = "CreateFile_Existence";
                 string subdirectory = "CreateFile_Existence_Subdirectory";
-                using (isf.CreateFile(file)) { }
+                using (isf.CreateFile(file))
+                {
+                }
                 Assert.True(isf.FileExists(file), "file exists");
                 isf.CreateDirectory(subdirectory);
                 Assert.True(isf.DirectoryExists(subdirectory), "directory exists");
 
                 string nestedFile = Path.Combine(subdirectory, file);
-                using (isf.CreateFile(nestedFile)) { }
+                using (isf.CreateFile(nestedFile))
+                {
+                }
 
                 Assert.True(isf.FileExists(nestedFile), "nested file exists");
             }

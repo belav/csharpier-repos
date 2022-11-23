@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.Differencing
     {
         private static readonly LongestCommonSubstring s_instance = new();
 
-        private LongestCommonSubstring() { }
+        private LongestCommonSubstring()
+        {
+        }
 
         protected override bool ItemsEqual(
             string oldSequence,

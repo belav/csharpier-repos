@@ -91,7 +91,9 @@ namespace System.Xml.Linq
         /// See XContainer.Add(object content) for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XElement(XName name, params object?[] content) : this(name, (object)content) { }
+        public XElement(XName name, params object?[] content) : this(name, (object)content)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the XElement class from another XElement object.
@@ -131,9 +133,13 @@ namespace System.Xml.Linq
             AddContentSkipNotify(other.content);
         }
 
-        internal XElement() : this("default"!) { }
+        internal XElement() : this("default"!)
+        {
+        }
 
-        internal XElement(XmlReader r) : this(r, LoadOptions.None) { }
+        internal XElement(XmlReader r) : this(r, LoadOptions.None)
+        {
+        }
 
         private XElement(AsyncConstructionSentry s)
         {
@@ -145,7 +151,9 @@ namespace System.Xml.Linq
             // do the async processing.  This is because ctors can't be 'async'.
         }
 
-        private struct AsyncConstructionSentry { }
+        private struct AsyncConstructionSentry
+        {
+        }
 
         internal XElement(XmlReader r, LoadOptions o)
         {

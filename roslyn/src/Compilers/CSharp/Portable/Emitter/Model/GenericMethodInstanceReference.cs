@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Cci.IGenericMethodInstanceReference
     {
         public GenericMethodInstanceReference(MethodSymbol underlyingMethod)
-            : base(underlyingMethod) { }
+            : base(underlyingMethod)
+        {
+        }
 
         public override void Dispatch(Cci.MetadataVisitor visitor)
         {

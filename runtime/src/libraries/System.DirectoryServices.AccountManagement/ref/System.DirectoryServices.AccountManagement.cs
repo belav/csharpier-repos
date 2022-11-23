@@ -9,44 +9,59 @@ namespace System.DirectoryServices.AccountManagement
     public partial class AdvancedFilters
     {
         protected internal AdvancedFilters(System.DirectoryServices.AccountManagement.Principal p)
-        { }
+        {
+        }
 
         public void AccountExpirationDate(
             System.DateTime expirationTime,
             System.DirectoryServices.AccountManagement.MatchType match
-        ) { }
+        )
+        {
+        }
 
         public void AccountLockoutTime(
             System.DateTime lockoutTime,
             System.DirectoryServices.AccountManagement.MatchType match
-        ) { }
+        )
+        {
+        }
 
         protected void AdvancedFilterSet(
             string attribute,
             object value,
             System.Type objectType,
             System.DirectoryServices.AccountManagement.MatchType mt
-        ) { }
+        )
+        {
+        }
 
         public void BadLogonCount(
             int badLogonCount,
             System.DirectoryServices.AccountManagement.MatchType match
-        ) { }
+        )
+        {
+        }
 
         public void LastBadPasswordAttempt(
             System.DateTime lastAttempt,
             System.DirectoryServices.AccountManagement.MatchType match
-        ) { }
+        )
+        {
+        }
 
         public void LastLogonTime(
             System.DateTime logonTime,
             System.DirectoryServices.AccountManagement.MatchType match
-        ) { }
+        )
+        {
+        }
 
         public void LastPasswordSetTime(
             System.DateTime passwordSetTime,
             System.DirectoryServices.AccountManagement.MatchType match
-        ) { }
+        )
+        {
+        }
     }
 
     [System.DirectoryServices.AccountManagement.DirectoryRdnPrefixAttribute("CN")]
@@ -55,19 +70,25 @@ namespace System.DirectoryServices.AccountManagement
     {
         protected internal AuthenticablePrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context
-        ) { }
+        )
+        {
+        }
 
         protected internal AuthenticablePrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string samAccountName,
             string password,
             bool enabled
-        ) { }
+        )
+        {
+        }
 
         public System.DateTime? AccountExpirationDate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime? AccountLockoutTime
         {
@@ -80,7 +101,9 @@ namespace System.DirectoryServices.AccountManagement
         public bool AllowReversiblePasswordEncryption
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int BadLogonCount
         {
@@ -93,22 +116,30 @@ namespace System.DirectoryServices.AccountManagement
         public bool DelegationPermitted
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool? Enabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string HomeDirectory
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string HomeDrive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime? LastBadPasswordAttempt
         {
@@ -125,17 +156,23 @@ namespace System.DirectoryServices.AccountManagement
         public bool PasswordNeverExpires
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PasswordNotRequired
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] PermittedLogonTimes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.AccountManagement.PrincipalValueCollection<string> PermittedWorkstations
         {
@@ -144,22 +181,32 @@ namespace System.DirectoryServices.AccountManagement
         public string ScriptPath
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SmartcardLogonRequired
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UserCannotChangePassword
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void ChangePassword(string oldPassword, string newPassword) { }
+        public void ChangePassword(string oldPassword, string newPassword)
+        {
+        }
 
-        public void ExpirePasswordNow() { }
+        public void ExpirePasswordNow()
+        {
+        }
 
         public static System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.AuthenticablePrincipal> FindByBadPasswordAttempt(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
@@ -256,11 +303,17 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        public void RefreshExpiredPassword() { }
+        public void RefreshExpiredPassword()
+        {
+        }
 
-        public void SetPassword(string newPassword) { }
+        public void SetPassword(string newPassword)
+        {
+        }
 
-        public void UnlockAccount() { }
+        public void UnlockAccount()
+        {
+        }
     }
 
     [System.DirectoryServices.AccountManagement.DirectoryRdnPrefixAttribute("CN")]
@@ -269,14 +322,18 @@ namespace System.DirectoryServices.AccountManagement
     {
         public ComputerPrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context
-        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext))
+        {
+        }
 
         public ComputerPrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string samAccountName,
             string password,
             bool enabled
-        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext))
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.PrincipalValueCollection<string> ServicePrincipalNames
         {
@@ -367,7 +424,9 @@ namespace System.DirectoryServices.AccountManagement
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = true)]
     public sealed partial class DirectoryObjectClassAttribute : System.Attribute
     {
-        public DirectoryObjectClassAttribute(string objectClass) { }
+        public DirectoryObjectClassAttribute(string objectClass)
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.ContextType? Context
         {
@@ -382,12 +441,16 @@ namespace System.DirectoryServices.AccountManagement
     [System.AttributeUsageAttribute(System.AttributeTargets.Property, AllowMultiple = true)]
     public sealed partial class DirectoryPropertyAttribute : System.Attribute
     {
-        public DirectoryPropertyAttribute(string schemaAttributeName) { }
+        public DirectoryPropertyAttribute(string schemaAttributeName)
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.ContextType? Context
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SchemaAttributeName
         {
@@ -398,7 +461,9 @@ namespace System.DirectoryServices.AccountManagement
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = true)]
     public sealed partial class DirectoryRdnPrefixAttribute : System.Attribute
     {
-        public DirectoryRdnPrefixAttribute(string rdnPrefix) { }
+        public DirectoryRdnPrefixAttribute(string rdnPrefix)
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.ContextType? Context
         {
@@ -414,29 +479,38 @@ namespace System.DirectoryServices.AccountManagement
     public partial class GroupPrincipal : System.DirectoryServices.AccountManagement.Principal
     {
         public GroupPrincipal(System.DirectoryServices.AccountManagement.PrincipalContext context)
-        { }
+        {
+        }
 
         public GroupPrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string samAccountName
-        ) { }
+        )
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.GroupScope? GroupScope
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool? IsSecurityGroup
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.AccountManagement.PrincipalCollection Members
         {
             get { throw null; }
         }
 
-        public override void Dispose() { }
+        public override void Dispose()
+        {
+        }
 
         public static new System.DirectoryServices.AccountManagement.GroupPrincipal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
@@ -502,7 +576,9 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         protected MultipleMatchesException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -511,19 +587,25 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public MultipleMatchesException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public MultipleMatchesException(string message, System.Exception innerException)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
     }
 
     public partial class NoMatchingPrincipalException
@@ -533,7 +615,9 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         protected NoMatchingPrincipalException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -542,19 +626,25 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public NoMatchingPrincipalException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public NoMatchingPrincipalException(string message, System.Exception innerException)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
     }
 
     public partial class PasswordException
@@ -564,7 +654,9 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         protected PasswordException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -573,25 +665,33 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PasswordException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PasswordException(string message, System.Exception innerException)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
     }
 
     public abstract partial class Principal : System.IDisposable
     {
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        protected Principal() { }
+        protected Principal()
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.PrincipalContext Context
         {
@@ -605,7 +705,9 @@ namespace System.DirectoryServices.AccountManagement
         protected internal System.DirectoryServices.AccountManagement.PrincipalContext ContextRaw
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.AccountManagement.ContextType ContextType
         {
@@ -614,12 +716,16 @@ namespace System.DirectoryServices.AccountManagement
         public string Description
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string DisplayName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string DistinguishedName
         {
@@ -632,12 +738,16 @@ namespace System.DirectoryServices.AccountManagement
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SamAccountName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Principal.SecurityIdentifier Sid
         {
@@ -650,15 +760,23 @@ namespace System.DirectoryServices.AccountManagement
         public string UserPrincipalName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        protected void CheckDisposedOrDeleted() { }
+        protected void CheckDisposedOrDeleted()
+        {
+        }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
 
         public override bool Equals(object o)
         {
@@ -670,7 +788,9 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        protected void ExtensionSet(string attribute, object value) { }
+        protected void ExtensionSet(string attribute, object value)
+        {
+        }
 
         public static System.DirectoryServices.AccountManagement.Principal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
@@ -751,9 +871,13 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        public void Save() { }
+        public void Save()
+        {
+        }
 
-        public void Save(System.DirectoryServices.AccountManagement.PrincipalContext context) { }
+        public void Save(System.DirectoryServices.AccountManagement.PrincipalContext context)
+        {
+        }
 
         public override string ToString()
         {
@@ -767,7 +891,9 @@ namespace System.DirectoryServices.AccountManagement
             System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal PrincipalCollection() { }
+        internal PrincipalCollection()
+        {
+        }
 
         public int Count
         {
@@ -798,21 +924,33 @@ namespace System.DirectoryServices.AccountManagement
             get { throw null; }
         }
 
-        public void Add(System.DirectoryServices.AccountManagement.ComputerPrincipal computer) { }
+        public void Add(System.DirectoryServices.AccountManagement.ComputerPrincipal computer)
+        {
+        }
 
-        public void Add(System.DirectoryServices.AccountManagement.GroupPrincipal group) { }
+        public void Add(System.DirectoryServices.AccountManagement.GroupPrincipal group)
+        {
+        }
 
-        public void Add(System.DirectoryServices.AccountManagement.Principal principal) { }
+        public void Add(System.DirectoryServices.AccountManagement.Principal principal)
+        {
+        }
 
         public void Add(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) { }
+        )
+        {
+        }
 
-        public void Add(System.DirectoryServices.AccountManagement.UserPrincipal user) { }
+        public void Add(System.DirectoryServices.AccountManagement.UserPrincipal user)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(System.DirectoryServices.AccountManagement.ComputerPrincipal computer)
         {
@@ -843,10 +981,9 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        public void CopyTo(
-            System.DirectoryServices.AccountManagement.Principal[] array,
-            int index
-        ) { }
+        public void CopyTo(System.DirectoryServices.AccountManagement.Principal[] array, int index)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<System.DirectoryServices.AccountManagement.Principal> GetEnumerator()
         {
@@ -882,7 +1019,9 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -893,25 +1032,32 @@ namespace System.DirectoryServices.AccountManagement
     public partial class PrincipalContext : System.IDisposable
     {
         public PrincipalContext(System.DirectoryServices.AccountManagement.ContextType contextType)
-        { }
+        {
+        }
 
         public PrincipalContext(
             System.DirectoryServices.AccountManagement.ContextType contextType,
             string name
-        ) { }
+        )
+        {
+        }
 
         public PrincipalContext(
             System.DirectoryServices.AccountManagement.ContextType contextType,
             string name,
             string container
-        ) { }
+        )
+        {
+        }
 
         public PrincipalContext(
             System.DirectoryServices.AccountManagement.ContextType contextType,
             string name,
             string container,
             System.DirectoryServices.AccountManagement.ContextOptions options
-        ) { }
+        )
+        {
+        }
 
         public PrincipalContext(
             System.DirectoryServices.AccountManagement.ContextType contextType,
@@ -920,14 +1066,18 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.ContextOptions options,
             string userName,
             string password
-        ) { }
+        )
+        {
+        }
 
         public PrincipalContext(
             System.DirectoryServices.AccountManagement.ContextType contextType,
             string name,
             string userName,
             string password
-        ) { }
+        )
+        {
+        }
 
         public PrincipalContext(
             System.DirectoryServices.AccountManagement.ContextType contextType,
@@ -935,7 +1085,9 @@ namespace System.DirectoryServices.AccountManagement
             string container,
             string userName,
             string password
-        ) { }
+        )
+        {
+        }
 
         public string ConnectedServer
         {
@@ -962,7 +1114,9 @@ namespace System.DirectoryServices.AccountManagement
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool ValidateCredentials(string userName, string password)
         {
@@ -984,7 +1138,9 @@ namespace System.DirectoryServices.AccountManagement
         protected PrincipalException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class PrincipalExistsException
@@ -994,7 +1150,9 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         protected PrincipalExistsException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -1003,19 +1161,25 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalExistsException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalExistsException(string message, System.Exception innerException)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
     }
 
     public partial class PrincipalOperationException
@@ -1025,7 +1189,9 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         protected PrincipalOperationException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -1034,19 +1200,25 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalOperationException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalOperationException(string message, System.Exception innerException)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalOperationException(
             string message,
@@ -1056,13 +1228,17 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalOperationException(string message, int errorCode)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public int ErrorCode
         {
@@ -1072,15 +1248,20 @@ namespace System.DirectoryServices.AccountManagement
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class PrincipalSearcher : System.IDisposable
     {
-        public PrincipalSearcher() { }
+        public PrincipalSearcher()
+        {
+        }
 
         public PrincipalSearcher(System.DirectoryServices.AccountManagement.Principal queryFilter)
-        { }
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.PrincipalContext Context
         {
@@ -1089,10 +1270,14 @@ namespace System.DirectoryServices.AccountManagement
         public System.DirectoryServices.AccountManagement.Principal QueryFilter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
 
         public System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.Principal> FindAll()
         {
@@ -1120,9 +1305,13 @@ namespace System.DirectoryServices.AccountManagement
             System.Collections.IEnumerable,
             System.IDisposable
     {
-        internal PrincipalSearchResult() { }
+        internal PrincipalSearchResult()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
@@ -1142,7 +1331,9 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         protected PrincipalServerDownException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -1151,19 +1342,25 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalServerDownException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalServerDownException(string message, System.Exception innerException)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalServerDownException(
             string message,
@@ -1173,7 +1370,9 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalServerDownException(
             string message,
@@ -1184,18 +1383,24 @@ namespace System.DirectoryServices.AccountManagement
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public PrincipalServerDownException(string message, int errorCode)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class PrincipalValueCollection<T>
@@ -1206,7 +1411,9 @@ namespace System.DirectoryServices.AccountManagement
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        internal PrincipalValueCollection() { }
+        internal PrincipalValueCollection()
+        {
+        }
 
         public int Count
         {
@@ -1227,7 +1434,9 @@ namespace System.DirectoryServices.AccountManagement
         public T this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object SyncRoot
         {
@@ -1256,19 +1465,27 @@ namespace System.DirectoryServices.AccountManagement
         object System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Add(T value) { }
+        public void Add(T value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(T value)
         {
             throw null;
         }
 
-        public void CopyTo(T[] array, int index) { }
+        public void CopyTo(T[] array, int index)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
@@ -1280,16 +1497,22 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        public void Insert(int index, T value) { }
+        public void Insert(int index, T value)
+        {
+        }
 
         public bool Remove(T value)
         {
             throw null;
         }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1301,7 +1524,9 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object value)
         {
@@ -1313,11 +1538,17 @@ namespace System.DirectoryServices.AccountManagement
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object value) { }
+        void System.Collections.IList.Insert(int index, object value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object value) { }
+        void System.Collections.IList.Remove(object value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
     }
 
     [System.DirectoryServices.AccountManagement.DirectoryRdnPrefixAttribute("CN")]
@@ -1325,14 +1556,18 @@ namespace System.DirectoryServices.AccountManagement
         : System.DirectoryServices.AccountManagement.AuthenticablePrincipal
     {
         public UserPrincipal(System.DirectoryServices.AccountManagement.PrincipalContext context)
-            : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+            : base(default(System.DirectoryServices.AccountManagement.PrincipalContext))
+        {
+        }
 
         public UserPrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string samAccountName,
             string password,
             bool enabled
-        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext))
+        {
+        }
 
         public override System.DirectoryServices.AccountManagement.AdvancedFilters AdvancedSearchFilter
         {
@@ -1345,32 +1580,44 @@ namespace System.DirectoryServices.AccountManagement
         public string EmailAddress
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string EmployeeId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string GivenName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string MiddleName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Surname
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string VoiceTelephoneNumber
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.UserPrincipal> FindByBadPasswordAttempt(

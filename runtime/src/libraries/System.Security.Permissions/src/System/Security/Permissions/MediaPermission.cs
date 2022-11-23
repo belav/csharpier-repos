@@ -56,21 +56,33 @@ namespace System.Security.Permissions
 #endif
     public sealed class MediaPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public MediaPermission() { }
+        public MediaPermission()
+        {
+        }
 
-        public MediaPermission(PermissionState state) { }
+        public MediaPermission(PermissionState state)
+        {
+        }
 
-        public MediaPermission(MediaPermissionAudio permissionAudio) { }
+        public MediaPermission(MediaPermissionAudio permissionAudio)
+        {
+        }
 
-        public MediaPermission(MediaPermissionVideo permissionVideo) { }
+        public MediaPermission(MediaPermissionVideo permissionVideo)
+        {
+        }
 
-        public MediaPermission(MediaPermissionImage permissionImage) { }
+        public MediaPermission(MediaPermissionImage permissionImage)
+        {
+        }
 
         public MediaPermission(
             MediaPermissionAudio permissionAudio,
             MediaPermissionVideo permissionVideo,
             MediaPermissionImage permissionImage
-        ) { }
+        )
+        {
+        }
 
         public bool IsUnrestricted()
         {
@@ -102,7 +114,9 @@ namespace System.Security.Permissions
             return default(SecurityElement);
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public MediaPermissionAudio Audio
         {
@@ -136,7 +150,9 @@ namespace System.Security.Permissions
     )]
     public sealed class MediaPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public MediaPermissionAttribute(SecurityAction action) : base(action) { }
+        public MediaPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public override IPermission CreatePermission()
         {
@@ -146,17 +162,23 @@ namespace System.Security.Permissions
         public MediaPermissionAudio Audio
         {
             get { return MediaPermissionAudio.AllAudio; }
-            set { }
+            set
+            {
+            }
         }
         public MediaPermissionVideo Video
         {
             get { return MediaPermissionVideo.AllVideo; }
-            set { }
+            set
+            {
+            }
         }
         public MediaPermissionImage Image
         {
             get { return MediaPermissionImage.AllImage; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

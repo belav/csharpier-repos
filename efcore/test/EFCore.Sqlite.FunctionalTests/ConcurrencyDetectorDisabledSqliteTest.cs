@@ -7,7 +7,9 @@ public class ConcurrencyDetectorDisabledSqliteTest
     : ConcurrencyDetectorDisabledRelationalTestBase<ConcurrencyDetectorDisabledSqliteTest.ConcurrencyDetectorSqlServerFixture>
 {
     public ConcurrencyDetectorDisabledSqliteTest(ConcurrencyDetectorSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class ConcurrencyDetectorSqlServerFixture : ConcurrencyDetectorFixtureBase
     {

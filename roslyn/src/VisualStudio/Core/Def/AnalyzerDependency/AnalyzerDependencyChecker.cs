@@ -154,7 +154,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 return new AnalyzerInfo(filePath, identity, mvid, references);
             }
-            catch { }
+            catch
+            {
+            }
 
             return null;
         }

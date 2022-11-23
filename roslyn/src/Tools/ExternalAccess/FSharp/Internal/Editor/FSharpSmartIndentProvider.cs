@@ -65,7 +65,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                 _provider = provider;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public int? GetDesiredIndentation(ITextSnapshotLine line) =>
                 GetDesiredIndentation(line, CancellationToken.None);

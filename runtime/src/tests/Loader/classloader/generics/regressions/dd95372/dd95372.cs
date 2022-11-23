@@ -22,10 +22,13 @@ public class my
     }
 }
 
-public class test<T> : TopLevel<T> where T : IMember<IMember<T, object>, object> { }
+public class test<T> : TopLevel<T> where T : IMember<IMember<T, object>, object>
+{
+}
 
-public interface TopLevel<T> : ISubIface<T, object>
-    where T : IMember<IMember<T, object>, object> { }
+public interface TopLevel<T> : ISubIface<T, object> where T : IMember<IMember<T, object>, object>
+{
+}
 
 public interface ISubIface<
     T,
@@ -45,7 +48,9 @@ public interface ISubIface<
                 U /*=object*/
             >,
             object
-        > { }
+        >
+{
+}
 
 public interface IMembers<
     T,
@@ -57,6 +62,10 @@ public interface IMembers<
             U /*=IMember<T, U>*/
             ,
             V /*=object*/
-        > { }
+        >
+{
+}
 
-public interface IMember<T, U> { }
+public interface IMember<T, U>
+{
+}

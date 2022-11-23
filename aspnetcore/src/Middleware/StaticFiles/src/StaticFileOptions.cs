@@ -12,12 +12,16 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public class StaticFileOptions : SharedOptionsBase
 {
-    internal static readonly Action<StaticFileResponseContext> _defaultOnPrepareResponse = _ => { };
+    internal static readonly Action<StaticFileResponseContext> _defaultOnPrepareResponse = _ =>
+    {
+    };
 
     /// <summary>
     /// Defaults to all request paths
     /// </summary>
-    public StaticFileOptions() : this(new SharedOptions()) { }
+    public StaticFileOptions() : this(new SharedOptions())
+    {
+    }
 
     /// <summary>
     /// Defaults to all request paths

@@ -7,7 +7,9 @@ namespace System.Security.Policy
 {
     public sealed partial class ApplicationTrustCollection : ICollection, IEnumerable
     {
-        internal ApplicationTrustCollection() { }
+        internal ApplicationTrustCollection()
+        {
+        }
 
         public int Count
         {
@@ -35,13 +37,21 @@ namespace System.Security.Policy
             return 0;
         }
 
-        public void AddRange(ApplicationTrust[] trusts) { }
+        public void AddRange(ApplicationTrust[] trusts)
+        {
+        }
 
-        public void AddRange(ApplicationTrustCollection trusts) { }
+        public void AddRange(ApplicationTrustCollection trusts)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
-        public void CopyTo(ApplicationTrust[] array, int index) { }
+        public void CopyTo(ApplicationTrust[] array, int index)
+        {
+        }
 
         public ApplicationTrustCollection Find(
             ApplicationIdentity applicationIdentity,
@@ -56,18 +66,28 @@ namespace System.Security.Policy
             return new ApplicationTrustEnumerator();
         }
 
-        public void Remove(ApplicationTrust trust) { }
+        public void Remove(ApplicationTrust trust)
+        {
+        }
 
         public void Remove(
             ApplicationIdentity applicationIdentity,
             ApplicationVersionMatch versionMatch
-        ) { }
+        )
+        {
+        }
 
-        public void RemoveRange(ApplicationTrust[] trusts) { }
+        public void RemoveRange(ApplicationTrust[] trusts)
+        {
+        }
 
-        public void RemoveRange(ApplicationTrustCollection trusts) { }
+        public void RemoveRange(ApplicationTrustCollection trusts)
+        {
+        }
 
-        void ICollection.CopyTo(Array array, int index) { }
+        void ICollection.CopyTo(Array array, int index)
+        {
+        }
 
         IEnumerator IEnumerable.GetEnumerator()
         {

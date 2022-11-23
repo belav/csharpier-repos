@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Options
                 globalOptions,
                 values: ImmutableDictionary<OptionKey, object?>.Empty,
                 changedOptionKeys: ImmutableHashSet<OptionKey>.Empty
-            ) { }
+            )
+        {
+        }
 
         [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/30819", AllowLocks = false)]
         private protected override object? GetOptionCore(OptionKey optionKey)

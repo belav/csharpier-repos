@@ -157,5 +157,7 @@ internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         _knownHeaderType = default;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

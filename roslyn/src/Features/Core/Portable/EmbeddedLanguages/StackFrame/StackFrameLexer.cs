@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public readonly VirtualCharSequence Text;
         public int Position { get; private set; }
 
-        private StackFrameLexer(string text) : this(VirtualCharSequence.Create(0, text)) { }
+        private StackFrameLexer(string text) : this(VirtualCharSequence.Create(0, text))
+        {
+        }
 
         private StackFrameLexer(VirtualCharSequence text) : this() => Text = text;
 

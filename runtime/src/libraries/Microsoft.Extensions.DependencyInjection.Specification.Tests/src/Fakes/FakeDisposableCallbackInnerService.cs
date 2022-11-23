@@ -7,6 +7,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
         : FakeDisposableCallbackService,
             IFakeMultipleService
     {
-        public FakeDisposableCallbackInnerService(FakeDisposeCallback callback) : base(callback) { }
+        public FakeDisposableCallbackInnerService(FakeDisposeCallback callback) : base(callback)
+        {
+        }
     }
 }

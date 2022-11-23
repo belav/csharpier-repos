@@ -15,7 +15,9 @@ namespace System.Web.Mvc
             MessageId = "0#",
             Justification = "Response.Redirect() takes its URI as a string parameter."
         )]
-        public RedirectResult(string url) : this(url, permanent: false) { }
+        public RedirectResult(string url) : this(url, permanent: false)
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Design",

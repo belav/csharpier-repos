@@ -241,7 +241,9 @@ namespace System.Xml
 #endif
         }
 
-        private DtdParser() { }
+        private DtdParser()
+        {
+        }
 
         internal static IDtdParser Create()
         {

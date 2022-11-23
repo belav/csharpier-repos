@@ -82,7 +82,9 @@ namespace Castle.DynamicProxy.Tests
 
         internal class InternalClass
         {
-            internal InternalClass() { }
+            internal InternalClass()
+            {
+            }
         }
 
         [Test]

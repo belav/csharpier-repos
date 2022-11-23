@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     {
         public static readonly LambdaSyntaxFacts Instance = new CSharpLambdaSyntaxFacts();
 
-        private CSharpLambdaSyntaxFacts() { }
+        private CSharpLambdaSyntaxFacts()
+        {
+        }
 
         public override SyntaxNode GetLambda(SyntaxNode lambdaOrLambdaBodySyntax) =>
             LambdaUtilities.GetLambda(lambdaOrLambdaBodySyntax);

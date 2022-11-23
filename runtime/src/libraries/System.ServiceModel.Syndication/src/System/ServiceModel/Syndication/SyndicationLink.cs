@@ -12,7 +12,9 @@ namespace System.ServiceModel.Syndication
         private ExtensibleSyndicationObject _extensions;
         private long _length;
 
-        public SyndicationLink(Uri uri) : this(uri, null, null, null, 0) { }
+        public SyndicationLink(Uri uri) : this(uri, null, null, null, 0)
+        {
+        }
 
         public SyndicationLink(
             Uri uri,
@@ -35,7 +37,9 @@ namespace System.ServiceModel.Syndication
             _length = length;
         }
 
-        public SyndicationLink() : this(null, null, null, null, 0) { }
+        public SyndicationLink() : this(null, null, null, null, 0)
+        {
+        }
 
         protected SyndicationLink(SyndicationLink source)
         {

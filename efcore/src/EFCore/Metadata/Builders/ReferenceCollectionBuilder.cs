@@ -31,7 +31,9 @@ public class ReferenceCollectionBuilder : RelationshipBuilderBase
         IMutableEntityType principalEntityType,
         IMutableEntityType dependentEntityType,
         IMutableForeignKey foreignKey
-    ) : base(principalEntityType, dependentEntityType, foreignKey) { }
+    ) : base(principalEntityType, dependentEntityType, foreignKey)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,7 +48,9 @@ public class ReferenceCollectionBuilder : RelationshipBuilderBase
         bool foreignKeySet = false,
         bool principalKeySet = false,
         bool requiredSet = false
-    ) : base(builder, oldBuilder, foreignKeySet, principalKeySet, requiredSet) { }
+    ) : base(builder, oldBuilder, foreignKeySet, principalKeySet, requiredSet)
+    {
+    }
 
     /// <summary>
     ///     Adds or updates an annotation on the relationship. If an annotation with the key specified in

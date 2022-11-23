@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpUpgradeProject : AbstractUpdateProjectTest
     {
         public CSharpUpgradeProject(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         private void InvokeFix(string version = "latest")
         {

@@ -7,7 +7,9 @@ namespace Microsoft.AspNetCore.Components.Routing;
 
 public class QueryParameterValueSupplierTest
 {
-    private class NoQueryParameters : ComponentBase { }
+    private class NoQueryParameters : ComponentBase
+    {
+    }
 
     [Fact]
     public void ComponentWithNoQueryParametersHasNoSupplier()

@@ -174,6 +174,8 @@ namespace System.Net.Mail
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
     }
 }

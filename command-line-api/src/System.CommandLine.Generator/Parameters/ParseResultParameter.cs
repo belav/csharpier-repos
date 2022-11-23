@@ -4,7 +4,9 @@ namespace System.CommandLine.Generator.Parameters
 {
     internal class ParseResultParameter : Parameter, IEquatable<ParseResultParameter>
     {
-        public ParseResultParameter(ITypeSymbol parseResultType) : base(parseResultType) { }
+        public ParseResultParameter(ITypeSymbol parseResultType) : base(parseResultType)
+        {
+        }
 
         public override string GetValueFromContext() => "context.ParseResult";
 

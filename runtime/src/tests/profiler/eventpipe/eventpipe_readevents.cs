@@ -18,7 +18,8 @@ namespace EventPipeTests
     public class EventPipeTestEventSource : EventSource
     {
         public EventPipeTestEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat)
-        { }
+        {
+        }
 
         [Event(1)]
         public void MyEvent(int i)

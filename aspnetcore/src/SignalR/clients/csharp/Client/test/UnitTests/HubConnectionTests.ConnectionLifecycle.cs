@@ -204,7 +204,9 @@ public partial class HubConnectionTests
                         {
                             await connection.StartAsync().DefaultTimeout();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
 
                         await connection.StopAsync().DefaultTimeout();
                         Assert.True(testConnection.Started.IsCompleted);

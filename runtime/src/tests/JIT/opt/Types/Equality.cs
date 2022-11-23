@@ -5,9 +5,13 @@
 
 using System;
 
-struct Wrap1<T> { }
+struct Wrap1<T>
+{
+}
 
-struct Wrap2<T> { }
+struct Wrap2<T>
+{
+}
 
 class EqualityTests
 {

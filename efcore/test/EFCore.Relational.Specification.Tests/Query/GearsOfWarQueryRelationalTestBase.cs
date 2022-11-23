@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
     : GearsOfWarQueryTestBase<TFixture> where TFixture : GearsOfWarQueryFixtureBase, new()
 {
-    protected GearsOfWarQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected GearsOfWarQueryRelationalTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

@@ -124,7 +124,9 @@ namespace System.Threading
         }
 
         /// <summary>Initializes the <see cref="CancellationTokenSource"/>.</summary>
-        public CancellationTokenSource() { }
+        public CancellationTokenSource()
+        {
+        }
 
         /// <summary>
         /// Constructs a <see cref="CancellationTokenSource"/> that will be canceled after a specified time span.

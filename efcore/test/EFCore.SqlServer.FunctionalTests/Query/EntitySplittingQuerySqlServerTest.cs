@@ -7,7 +7,9 @@ public class EntitySplittingQuerySqlServerTest : EntitySplittingQueryTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    public EntitySplittingQuerySqlServerTest() { }
+    public EntitySplittingQuerySqlServerTest()
+    {
+    }
 
     [ConditionalFact]
     public virtual void Check_all_tests_overridden() =>

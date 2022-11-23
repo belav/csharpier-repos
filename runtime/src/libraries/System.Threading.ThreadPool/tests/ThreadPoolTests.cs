@@ -496,7 +496,8 @@ namespace System.Threading.ThreadPools.Tests
                 "callBack",
                 () =>
                     ThreadPool.UnsafeQueueUserWorkItem(
-                        new InvalidWorkItemAndTask(() => { }),
+                        new InvalidWorkItemAndTask(() => {
+                        }),
                         preferLocal
                     )
             );
@@ -590,9 +591,13 @@ namespace System.Threading.ThreadPools.Tests
 
         private sealed class InvalidWorkItemAndTask : Task, IThreadPoolWorkItem
         {
-            public InvalidWorkItemAndTask(Action action) : base(action) { }
+            public InvalidWorkItemAndTask(Action action) : base(action)
+            {
+            }
 
-            public void Execute() { }
+            public void Execute()
+            {
+            }
         }
 
         public static bool IsMetricsTestSupported =>

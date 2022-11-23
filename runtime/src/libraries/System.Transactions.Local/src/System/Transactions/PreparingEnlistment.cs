@@ -5,7 +5,9 @@ namespace System.Transactions
 {
     public class PreparingEnlistment : Enlistment
     {
-        internal PreparingEnlistment(InternalEnlistment enlistment) : base(enlistment) { }
+        internal PreparingEnlistment(InternalEnlistment enlistment) : base(enlistment)
+        {
+        }
 
         public void Prepared()
         {

@@ -73,7 +73,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler can create ModuleSymbols.
-        internal ModuleSymbol() { }
+        internal ModuleSymbol()
+        {
+        }
 
         /// <summary>
         /// Module's ordinal within containing assembly's Modules array.

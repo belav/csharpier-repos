@@ -21,7 +21,9 @@ public sealed class ExpressionEqualityComparer : IEqualityComparer<Expression?>
     /// <summary>
     ///     Creates a new <see cref="ExpressionEqualityComparer" />.
     /// </summary>
-    private ExpressionEqualityComparer() { }
+    private ExpressionEqualityComparer()
+    {
+    }
 
     /// <summary>
     ///     Gets an instance of <see cref="ExpressionEqualityComparer" />.

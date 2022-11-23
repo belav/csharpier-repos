@@ -22,7 +22,9 @@ namespace System.Data.Common
                 SqlDateTime.Null,
                 SqlDateTime.Null,
                 StorageType.SqlDateTime
-            ) { }
+            )
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

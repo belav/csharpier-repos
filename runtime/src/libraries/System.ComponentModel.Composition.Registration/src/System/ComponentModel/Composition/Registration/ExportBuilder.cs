@@ -13,7 +13,9 @@ namespace System.ComponentModel.Composition.Registration
         private List<Tuple<string, object>> _metadataItems;
         private List<Tuple<string, Func<Type, object>>> _metadataItemFuncs;
 
-        public ExportBuilder() { }
+        public ExportBuilder()
+        {
+        }
 
         public ExportBuilder AsContractType<T>()
         {

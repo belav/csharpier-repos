@@ -71,7 +71,9 @@ internal sealed class ApiBehaviorApplicationModelProvider : IApplicationModelPro
 
     public List<IActionModelConvention> ActionModelConventions { get; }
 
-    public void OnProvidersExecuted(ApplicationModelProviderContext context) { }
+    public void OnProvidersExecuted(ApplicationModelProviderContext context)
+    {
+    }
 
     public void OnProvidersExecuting(ApplicationModelProviderContext context)
     {

@@ -16,7 +16,9 @@ namespace Wasm.Build.Tests
         public WasmNativeDefaultsTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         [Theory]
         /* relink by default for publish+Release */

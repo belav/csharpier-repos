@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteDocumentHighlightsService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         public ValueTask<ImmutableArray<SerializableDocumentHighlights>> GetDocumentHighlightsAsync(
             Checksum solutionChecksum,

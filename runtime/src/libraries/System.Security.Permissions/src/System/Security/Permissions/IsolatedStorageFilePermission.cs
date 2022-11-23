@@ -12,7 +12,9 @@ namespace System.Security.Permissions
 #endif
     public sealed class IsolatedStorageFilePermission : IsolatedStoragePermission
     {
-        public IsolatedStorageFilePermission(PermissionState state) : base(state) { }
+        public IsolatedStorageFilePermission(PermissionState state) : base(state)
+        {
+        }
 
         public override IPermission Union(IPermission target)
         {

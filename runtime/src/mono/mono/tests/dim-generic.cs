@@ -13,7 +13,9 @@ interface INativeThingy<T> : IBaseThingy
     }
 }
 
-class NativeThingy : INativeThingy<string> { }
+class NativeThingy : INativeThingy<string>
+{
+}
 
 public class Test
 {

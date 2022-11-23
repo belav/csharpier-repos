@@ -128,8 +128,12 @@ public static class HandleTests
     {
         public event Action MyEvent
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 #pragma warning disable 0649
         public int MyField;
@@ -139,10 +143,16 @@ public static class HandleTests
         public int MyProperty1 { get; private set; }
         public int MyProperty2 { private get; set; }
 
-        public static void MyMethod() { }
+        public static void MyMethod()
+        {
+        }
 
-        public static void GenericMethod<T>() { }
+        public static void GenericMethod<T>()
+        {
+        }
     }
 
-    private class Derived : Base { }
+    private class Derived : Base
+    {
+    }
 }

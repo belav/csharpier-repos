@@ -117,23 +117,31 @@ namespace Castle.Core.Logging
         ///   No-op.
         /// </summary>
         /// <param name = "message">Ignored</param>
-        public void Trace(string message) { }
+        public void Trace(string message)
+        {
+        }
 
-        public void Trace(Func<string> messageFactory) { }
+        public void Trace(Func<string> messageFactory)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "exception">Ignored</param>
         /// <param name = "message">Ignored</param>
-        public void Trace(string message, Exception exception) { }
+        public void Trace(string message, Exception exception)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void TraceFormat(string format, params object[] args) { }
+        public void TraceFormat(string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -141,55 +149,65 @@ namespace Castle.Core.Logging
         /// <param name = "exception">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void TraceFormat(Exception exception, string format, params object[] args) { }
+        public void TraceFormat(Exception exception, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
+        /// <param name = "formatProvider">Ignored</param>
+        /// <param name = "format">Ignored</param>
+        /// <param name = "args">Ignored</param>
+        public void TraceFormat(IFormatProvider formatProvider, string format, params object[] args)
+        {
+        }
+
+        /// <summary>
+        ///   No-op.
+        /// </summary>
+        /// <param name = "exception">Ignored</param>
         /// <param name = "formatProvider">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
         public void TraceFormat(
-            IFormatProvider formatProvider,
-            string format,
-            params object[] args
-        ) { }
-
-        /// <summary>
-        ///   No-op.
-        /// </summary>
-        /// <param name = "exception">Ignored</param>
-        /// <param name = "formatProvider">Ignored</param>
-        /// <param name = "format">Ignored</param>
-        /// <param name = "args">Ignored</param>
-        public void TraceFormat(
             Exception exception,
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "message">Ignored</param>
-        public void Debug(string message) { }
+        public void Debug(string message)
+        {
+        }
 
-        public void Debug(Func<string> messageFactory) { }
+        public void Debug(Func<string> messageFactory)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "exception">Ignored</param>
         /// <param name = "message">Ignored</param>
-        public void Debug(string message, Exception exception) { }
+        public void Debug(string message, Exception exception)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void DebugFormat(string format, params object[] args) { }
+        public void DebugFormat(string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -197,7 +215,9 @@ namespace Castle.Core.Logging
         /// <param name = "exception">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void DebugFormat(Exception exception, string format, params object[] args) { }
+        public void DebugFormat(Exception exception, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -205,11 +225,9 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void DebugFormat(
-            IFormatProvider formatProvider,
-            string format,
-            params object[] args
-        ) { }
+        public void DebugFormat(IFormatProvider formatProvider, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -223,29 +241,39 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "message">Ignored</param>
-        public void Error(string message) { }
+        public void Error(string message)
+        {
+        }
 
-        public void Error(Func<string> messageFactory) { }
+        public void Error(Func<string> messageFactory)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "exception">Ignored</param>
         /// <param name = "message">Ignored</param>
-        public void Error(string message, Exception exception) { }
+        public void Error(string message, Exception exception)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void ErrorFormat(string format, params object[] args) { }
+        public void ErrorFormat(string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -253,7 +281,9 @@ namespace Castle.Core.Logging
         /// <param name = "exception">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void ErrorFormat(Exception exception, string format, params object[] args) { }
+        public void ErrorFormat(Exception exception, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -261,11 +291,9 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void ErrorFormat(
-            IFormatProvider formatProvider,
-            string format,
-            params object[] args
-        ) { }
+        public void ErrorFormat(IFormatProvider formatProvider, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -279,29 +307,39 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "message">Ignored</param>
-        public void Fatal(string message) { }
+        public void Fatal(string message)
+        {
+        }
 
-        public void Fatal(Func<string> messageFactory) { }
+        public void Fatal(Func<string> messageFactory)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "exception">Ignored</param>
         /// <param name = "message">Ignored</param>
-        public void Fatal(string message, Exception exception) { }
+        public void Fatal(string message, Exception exception)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void FatalFormat(string format, params object[] args) { }
+        public void FatalFormat(string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -309,7 +347,9 @@ namespace Castle.Core.Logging
         /// <param name = "exception">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void FatalFormat(Exception exception, string format, params object[] args) { }
+        public void FatalFormat(Exception exception, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -317,11 +357,9 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void FatalFormat(
-            IFormatProvider formatProvider,
-            string format,
-            params object[] args
-        ) { }
+        public void FatalFormat(IFormatProvider formatProvider, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -335,29 +373,39 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "message">Ignored</param>
-        public void Info(string message) { }
+        public void Info(string message)
+        {
+        }
 
-        public void Info(Func<string> messageFactory) { }
+        public void Info(Func<string> messageFactory)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "exception">Ignored</param>
         /// <param name = "message">Ignored</param>
-        public void Info(string message, Exception exception) { }
+        public void Info(string message, Exception exception)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void InfoFormat(string format, params object[] args) { }
+        public void InfoFormat(string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -365,7 +413,9 @@ namespace Castle.Core.Logging
         /// <param name = "exception">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void InfoFormat(Exception exception, string format, params object[] args) { }
+        public void InfoFormat(Exception exception, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -373,11 +423,9 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void InfoFormat(
-            IFormatProvider formatProvider,
-            string format,
-            params object[] args
-        ) { }
+        public void InfoFormat(IFormatProvider formatProvider, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -391,29 +439,39 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "message">Ignored</param>
-        public void Warn(string message) { }
+        public void Warn(string message)
+        {
+        }
 
-        public void Warn(Func<string> messageFactory) { }
+        public void Warn(Func<string> messageFactory)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "exception">Ignored</param>
         /// <param name = "message">Ignored</param>
-        public void Warn(string message, Exception exception) { }
+        public void Warn(string message, Exception exception)
+        {
+        }
 
         /// <summary>
         ///   No-op.
         /// </summary>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void WarnFormat(string format, params object[] args) { }
+        public void WarnFormat(string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -421,7 +479,9 @@ namespace Castle.Core.Logging
         /// <param name = "exception">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void WarnFormat(Exception exception, string format, params object[] args) { }
+        public void WarnFormat(Exception exception, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -429,11 +489,9 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">Ignored</param>
         /// <param name = "format">Ignored</param>
         /// <param name = "args">Ignored</param>
-        public void WarnFormat(
-            IFormatProvider formatProvider,
-            string format,
-            params object[] args
-        ) { }
+        public void WarnFormat(IFormatProvider formatProvider, string format, params object[] args)
+        {
+        }
 
         /// <summary>
         ///   No-op.
@@ -447,7 +505,9 @@ namespace Castle.Core.Logging
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) { }
+        )
+        {
+        }
 
         private class NullContextProperties : IContextProperties
         {
@@ -456,7 +516,9 @@ namespace Castle.Core.Logging
             public object this[string key]
             {
                 get { return null; }
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -469,7 +531,9 @@ namespace Castle.Core.Logging
                 get { return 0; }
             }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public string Pop()
             {

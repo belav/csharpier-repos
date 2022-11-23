@@ -51,18 +51,24 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlReflectionImporter() : this(null, null) { }
+        public XmlReflectionImporter() : this(null, null)
+        {
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlReflectionImporter(string? defaultNamespace) : this(null, defaultNamespace) { }
+        public XmlReflectionImporter(string? defaultNamespace) : this(null, defaultNamespace)
+        {
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public XmlReflectionImporter(XmlAttributeOverrides? attributeOverrides)
-            : this(attributeOverrides, null) { }
+            : this(attributeOverrides, null)
+        {
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

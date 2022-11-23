@@ -30,7 +30,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private CompiledXPathNode previous;
         private IList<CompiledXPathNode> dependencies;
 
-        internal CompiledXPathNode() { }
+        internal CompiledXPathNode()
+        {
+        }
 
         public string Prefix
         {

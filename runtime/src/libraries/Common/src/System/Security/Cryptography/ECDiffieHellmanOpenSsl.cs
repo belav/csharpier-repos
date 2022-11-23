@@ -28,7 +28,9 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public ECDiffieHellmanOpenSsl() : this(521) { }
+        public ECDiffieHellmanOpenSsl() : this(521)
+        {
+        }
 
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]

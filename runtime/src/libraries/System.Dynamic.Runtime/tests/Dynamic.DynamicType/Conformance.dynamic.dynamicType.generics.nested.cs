@@ -264,7 +264,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class Foo { }
+    public class Foo
+    {
+    }
 
     public class Base<T> where T : Foo
     {

@@ -26,7 +26,9 @@ namespace System.ComponentModel
         private static readonly object s_internalSyncObject = new object();
 
         // not creatable...
-        private LicenseManager() { }
+        private LicenseManager()
+        {
+        }
 
         /// <summary>
         /// Gets or sets the current <see cref='System.ComponentModel.LicenseContext'/> which specifies when the licensed object can be

@@ -8,7 +8,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 [Serializable]
-public struct TypeWithoutNamespace { }
+public struct TypeWithoutNamespace
+{
+}
 
 namespace System.Runtime.Serialization.Formatters.Tests
 {
@@ -243,28 +245,44 @@ namespace System.Runtime.Serialization.Formatters.Tests
     }
 
     [Serializable]
-    public enum ByteEnum : byte { }
+    public enum ByteEnum : byte
+    {
+    }
 
     [Serializable]
-    public enum SByteEnum : sbyte { }
+    public enum SByteEnum : sbyte
+    {
+    }
 
     [Serializable]
-    public enum Int16Enum : short { }
+    public enum Int16Enum : short
+    {
+    }
 
     [Serializable]
-    public enum UInt16Enum : ushort { }
+    public enum UInt16Enum : ushort
+    {
+    }
 
     [Serializable]
-    public enum Int32Enum : int { }
+    public enum Int32Enum : int
+    {
+    }
 
     [Serializable]
-    public enum UInt32Enum : uint { }
+    public enum UInt32Enum : uint
+    {
+    }
 
     [Serializable]
-    public enum Int64Enum : long { }
+    public enum Int64Enum : long
+    {
+    }
 
     [Serializable]
-    public enum UInt64Enum : ulong { }
+    public enum UInt64Enum : ulong
+    {
+    }
 
     public struct NonSerializableStruct
     {
@@ -289,7 +307,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
     }
 
     [Serializable]
-    public struct EmptyStruct { }
+    public struct EmptyStruct
+    {
+    }
 
     [Serializable]
     public struct StructWithIntField
@@ -372,12 +392,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
         : BasicISerializableObject
     {
         public DerivedISerializableWithNonPublicDeserializationCtor(int value1, string value2)
-            : base(value1, value2) { }
+            : base(value1, value2)
+        {
+        }
 
         private DerivedISerializableWithNonPublicDeserializationCtor(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
     }
 
     [Serializable]
@@ -390,7 +414,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public int IncrementedDuringOnDeserializingMethod;
         public int IncrementedDuringOnDeserializedMethod;
 
-        public IncrementCountsDuringRoundtrip(string ignored) { } // non-default ctor so that we can observe changes from OnDeserializing
+        public IncrementCountsDuringRoundtrip(string ignored)
+        {
+        } // non-default ctor so that we can observe changes from OnDeserializing
 
         [OnSerializing]
         private void OnSerializingMethod(StreamingContext context) =>
@@ -419,7 +445,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
         internal int DerivedIncrementedDuringOnDeserializingMethod;
         internal int DerivedIncrementedDuringOnDeserializedMethod;
 
-        public DerivedIncrementCountsDuringRoundtrip(string ignored) : base(ignored) { }
+        public DerivedIncrementCountsDuringRoundtrip(string ignored) : base(ignored)
+        {
+        }
 
         [OnSerializing]
         private void OnSerializingMethod(StreamingContext context) =>
@@ -476,7 +504,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
     }
 
     [Serializable]
-    public class Version1ClassWithoutField { }
+    public class Version1ClassWithoutField
+    {
+    }
 
     [Serializable]
     public class Version2ClassWithoutOptionalField

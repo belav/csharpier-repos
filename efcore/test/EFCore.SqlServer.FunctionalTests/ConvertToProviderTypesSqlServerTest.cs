@@ -8,7 +8,9 @@ public class ConvertToProviderTypesSqlServerTest
     : ConvertToProviderTypesTestBase<ConvertToProviderTypesSqlServerTest.ConvertToProviderTypesSqlServerFixture>
 {
     public ConvertToProviderTypesSqlServerTest(ConvertToProviderTypesSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public virtual void Columns_have_expected_data_types()

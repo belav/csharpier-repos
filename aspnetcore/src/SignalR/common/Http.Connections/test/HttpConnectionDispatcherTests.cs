@@ -1285,7 +1285,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             throw new NotImplementedException();
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -3516,7 +3518,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             _loggerFactory = loggerFactory;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public ILogger CreateLogger(string categoryName)
         {
@@ -3889,9 +3893,13 @@ public class JwtConnectionHandler : ConnectionHandler
 
 public class ResponseFeature : HttpResponseFeature
 {
-    public override void OnCompleted(Func<object, Task> callback, object state) { }
+    public override void OnCompleted(Func<object, Task> callback, object state)
+    {
+    }
 
-    public override void OnStarting(Func<object, Task> callback, object state) { }
+    public override void OnStarting(Func<object, Task> callback, object state)
+    {
+    }
 }
 
 public class MessageWrapper

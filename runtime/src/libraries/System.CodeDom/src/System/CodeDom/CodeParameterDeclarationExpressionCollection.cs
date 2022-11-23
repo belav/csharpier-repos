@@ -7,7 +7,9 @@ namespace System.CodeDom
 {
     public class CodeParameterDeclarationExpressionCollection : CollectionBase
     {
-        public CodeParameterDeclarationExpressionCollection() { }
+        public CodeParameterDeclarationExpressionCollection()
+        {
+        }
 
         public CodeParameterDeclarationExpressionCollection(
             CodeParameterDeclarationExpressionCollection value

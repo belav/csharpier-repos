@@ -21,7 +21,9 @@ public class NonNullableNavigationConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public NonNullableNavigationConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     public virtual void ProcessNavigationAdded(

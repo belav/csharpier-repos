@@ -210,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken = default
         )
         {
-            onAnalyzerException ??= (ex, analyzer, diagnostic) => { };
+            onAnalyzerException ??= (ex, analyzer, diagnostic) => {
+            };
             return new AnalyzerExecutor(
                 compilation: null,
                 analyzerOptions: null,

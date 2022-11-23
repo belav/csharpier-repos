@@ -45,7 +45,9 @@ namespace Roslyn.Test.EditorUtilities.NavigateTo
 
             public INavigateToOptions Options { get; }
 
-            public void ReportProgress(int current, int maximum) { }
+            public void ReportProgress(int current, int maximum)
+            {
+            }
         }
     }
 }

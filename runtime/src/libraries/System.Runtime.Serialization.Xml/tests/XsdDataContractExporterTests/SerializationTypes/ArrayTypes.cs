@@ -41,7 +41,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.ArrayTyp
         [DataMember]
         Employee[] employees;
 
-        public Company2() { }
+        public Company2()
+        {
+        }
     }
 
     [DataContract(
@@ -92,5 +94,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.ArrayTyp
     }
 
     [CollectionDataContract]
-    public class ManagerEmployeeList : List<List<Employee>> { }
+    public class ManagerEmployeeList : List<List<Employee>>
+    {
+    }
 }

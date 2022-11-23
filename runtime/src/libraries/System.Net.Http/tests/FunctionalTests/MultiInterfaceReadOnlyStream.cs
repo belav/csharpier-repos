@@ -44,7 +44,9 @@ namespace System.Net.Http.Functional.Tests
             get { return false; }
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override long Length
         {
@@ -143,7 +145,9 @@ namespace System.Net.Http.Functional.Tests
             set { throw new NotImplementedException(); }
         }
 
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
 
         byte[] ReadInternal(int count)
         {

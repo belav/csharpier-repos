@@ -26,12 +26,18 @@ public class C<T> : IPos<T>, INeg<T>
         return default(T);
     }
 
-    public void consume(T t) { }
+    public void consume(T t)
+    {
+    }
 }
 
-enum intEnum : int { }
+enum intEnum : int
+{
+}
 
-enum uintEnum : uint { }
+enum uintEnum : uint
+{
+}
 
 class Test_vsw543506
 {

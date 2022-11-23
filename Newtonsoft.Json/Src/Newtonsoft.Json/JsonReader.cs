@@ -1127,7 +1127,9 @@ namespace Newtonsoft.Json
             {
                 int depth = Depth;
 
-                while (Read() && (depth < Depth)) { }
+                while (Read() && (depth < Depth))
+                {
+                }
             }
         }
 

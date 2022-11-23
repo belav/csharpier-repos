@@ -20,5 +20,7 @@ public class Runtime_70124
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void CallForVtor2(Vector2 vtor) { }
+    private static void CallForVtor2(Vector2 vtor)
+    {
+    }
 }

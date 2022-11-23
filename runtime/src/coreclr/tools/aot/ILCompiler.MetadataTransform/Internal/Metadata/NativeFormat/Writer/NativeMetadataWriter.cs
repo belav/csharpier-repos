@@ -291,7 +291,9 @@ namespace Internal.Metadata.NativeFormat.Writer
         public readonly MetadataRecord MetaSourceVertex = new SourceVertex();
     }
 
-    internal sealed class RecordVisitor : RecordVisitorBase { }
+    internal sealed class RecordVisitor : RecordVisitorBase
+    {
+    }
 
     internal sealed partial class MetadataHeader : MetadataRecord
     {
@@ -579,7 +581,9 @@ namespace Internal.Metadata.NativeFormat.Writer
         IList<CustomAttribute> GetCustomAttributes();
     }
 
-    public abstract partial class Blob : MetadataRecord { }
+    public abstract partial class Blob : MetadataRecord
+    {
+    }
 
     /// <summary>
     /// Supplements generated class with convenient coversion operators

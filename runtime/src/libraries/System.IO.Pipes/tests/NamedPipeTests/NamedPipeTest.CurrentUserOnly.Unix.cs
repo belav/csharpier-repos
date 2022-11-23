@@ -65,7 +65,9 @@ namespace System.IO.Pipes.Tests
                             : "false",
                         new RemoteInvokeOptions { RunAsSudo = true }
                     )
-                ) { }
+                )
+                {
+                }
 
                 if (serverPipeOptions == PipeOptions.CurrentUserOnly && !isRoot)
                     await Assert.ThrowsAsync<UnauthorizedAccessException>(() => serverTask);

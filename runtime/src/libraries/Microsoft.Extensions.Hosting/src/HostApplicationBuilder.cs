@@ -23,7 +23,9 @@ namespace Microsoft.Extensions.Hosting
         private readonly ServiceCollection _serviceCollection = new();
 
         private Func<IServiceProvider> _createServiceProvider;
-        private Action<object> _configureContainer = _ => { };
+        private Action<object> _configureContainer = _ =>
+        {
+        };
         private HostBuilderAdapter? _hostBuilderAdapter;
 
         private IServiceProvider? _appServices;
@@ -47,7 +49,9 @@ namespace Microsoft.Extensions.Hosting
         ///   </list>
         /// </remarks>
         [RequiresDynamicCode(Host.RequiresDynamicCodeMessage)]
-        public HostApplicationBuilder() : this(args: null) { }
+        public HostApplicationBuilder() : this(args: null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with preconfigured defaults.
@@ -69,7 +73,9 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="args">The command line args.</param>
         [RequiresDynamicCode(Host.RequiresDynamicCodeMessage)]
         public HostApplicationBuilder(string[]? args)
-            : this(new HostApplicationBuilderSettings { Args = args }) { }
+            : this(new HostApplicationBuilderSettings { Args = args })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/>.

@@ -139,7 +139,9 @@ namespace Newtonsoft.Json
         public override char QuoteChar
         {
             get { return _reader.QuoteChar; }
-            protected internal set { }
+            protected internal set
+            {
+            }
         }
 
         /// <summary>

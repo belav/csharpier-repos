@@ -24,7 +24,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         private const string module1FileName = "Module1.vb";
 
         public BasicEditAndContinue(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

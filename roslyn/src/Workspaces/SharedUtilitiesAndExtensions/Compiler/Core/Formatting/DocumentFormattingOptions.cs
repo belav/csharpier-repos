@@ -28,7 +28,8 @@ internal interface DocumentFormattingOptionsProvider
 #if !CODE_STYLE
     : OptionsProvider<DocumentFormattingOptions>
 #endif
-{ }
+{
+}
 
 internal static class DocumentFormattingOptionsProviders
 {

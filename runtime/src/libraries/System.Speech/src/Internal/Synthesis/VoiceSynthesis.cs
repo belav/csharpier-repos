@@ -464,7 +464,9 @@ namespace System.Speech.Internal.Synthesis
                         }
                     }
                     // Wait for completion
-                    lock (_processingSpeakLock) { }
+                    lock (_processingSpeakLock)
+                    {
+                    }
                 }
             }
         }
@@ -1557,9 +1559,15 @@ namespace System.Speech.Internal.Synthesis
                     }
                 }
             }
-            catch (ArgumentException) { }
-            catch (IOException) { }
-            catch (BadImageFormatException) { }
+            catch (ArgumentException)
+            {
+            }
+            catch (IOException)
+            {
+            }
+            catch (BadImageFormatException)
+            {
+            }
             return engineProxy;
         }
 
@@ -1587,11 +1595,21 @@ namespace System.Speech.Internal.Synthesis
                     }
                 }
             }
-            catch (ArgumentException) { }
-            catch (IOException) { }
-            catch (BadImageFormatException) { }
-            catch (COMException) { }
-            catch (FormatException) { }
+            catch (ArgumentException)
+            {
+            }
+            catch (IOException)
+            {
+            }
+            catch (BadImageFormatException)
+            {
+            }
+            catch (COMException)
+            {
+            }
+            catch (FormatException)
+            {
+            }
             return engineProxy;
         }
 

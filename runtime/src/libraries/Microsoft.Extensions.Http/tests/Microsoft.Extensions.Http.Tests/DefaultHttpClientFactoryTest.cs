@@ -123,7 +123,9 @@ namespace Microsoft.Extensions.Http
             );
 
             // Act
-            using (factory.CreateClient()) { }
+            using (factory.CreateClient())
+            {
+            }
 
             // Assert (does not throw)
         }
@@ -156,7 +158,9 @@ namespace Microsoft.Extensions.Http
             );
 
             // Act
-            using (factory.CreateHandler()) { }
+            using (factory.CreateHandler())
+            {
+            }
 
             // Assert (does not throw)
         }

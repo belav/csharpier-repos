@@ -7,7 +7,9 @@ public class MonsterFixupSnapshotInMemoryTest
     : MonsterFixupTestBase<MonsterFixupSnapshotInMemoryTest.MonsterFixupSnapshotInMemoryFixture>
 {
     public MonsterFixupSnapshotInMemoryTest(MonsterFixupSnapshotInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class MonsterFixupSnapshotInMemoryFixture : MonsterFixupSnapshotFixtureBase
     {

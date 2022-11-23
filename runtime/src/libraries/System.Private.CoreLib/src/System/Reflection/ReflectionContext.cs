@@ -5,7 +5,9 @@ namespace System.Reflection
 {
     public abstract class ReflectionContext
     {
-        protected ReflectionContext() { }
+        protected ReflectionContext()
+        {
+        }
 
         public abstract Assembly MapAssembly(Assembly assembly);
 

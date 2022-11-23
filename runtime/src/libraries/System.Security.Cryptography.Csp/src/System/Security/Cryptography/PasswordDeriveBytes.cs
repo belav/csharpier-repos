@@ -30,10 +30,14 @@ namespace System.Security.Cryptography
 
 #pragma warning disable CA1416 // Validate platform compatibility, CspParametersis is windows only type, we might want to annotate this constructors windows only, suppressing for now
         public PasswordDeriveBytes(string strPassword, byte[]? rgbSalt)
-            : this(strPassword, rgbSalt, new CspParameters()) { }
+            : this(strPassword, rgbSalt, new CspParameters())
+        {
+        }
 
         public PasswordDeriveBytes(byte[] password, byte[]? salt)
-            : this(password, salt, new CspParameters()) { }
+            : this(password, salt, new CspParameters())
+        {
+        }
 
         [RequiresUnreferencedCode(HashAlgorithmUnreferencedCodeMessage)]
         public PasswordDeriveBytes(
@@ -41,11 +45,15 @@ namespace System.Security.Cryptography
             byte[]? rgbSalt,
             string strHashName,
             int iterations
-        ) : this(strPassword, rgbSalt, strHashName, iterations, new CspParameters()) { }
+        ) : this(strPassword, rgbSalt, strHashName, iterations, new CspParameters())
+        {
+        }
 
         [RequiresUnreferencedCode(HashAlgorithmUnreferencedCodeMessage)]
         public PasswordDeriveBytes(byte[] password, byte[]? salt, string hashName, int iterations)
-            : this(password, salt, hashName, iterations, new CspParameters()) { }
+            : this(password, salt, hashName, iterations, new CspParameters())
+        {
+        }
 #pragma warning restore CA1416
 
 #pragma warning disable SYSLIB0021 // Obsolete: derived cryptographic types
@@ -59,7 +67,9 @@ namespace System.Security.Cryptography
             typeof(SHA1CryptoServiceProvider)
         )]
         public PasswordDeriveBytes(string strPassword, byte[]? rgbSalt, CspParameters? cspParams)
-            : this(strPassword, rgbSalt, "SHA1", 100, cspParams) { }
+            : this(strPassword, rgbSalt, "SHA1", 100, cspParams)
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -71,7 +81,9 @@ namespace System.Security.Cryptography
             typeof(SHA1CryptoServiceProvider)
         )]
         public PasswordDeriveBytes(byte[] password, byte[]? salt, CspParameters? cspParams)
-            : this(password, salt, "SHA1", 100, cspParams) { }
+            : this(password, salt, "SHA1", 100, cspParams)
+        {
+        }
 #pragma warning restore SYSLIB0021
 
         [RequiresUnreferencedCode(HashAlgorithmUnreferencedCodeMessage)]
@@ -88,7 +100,9 @@ namespace System.Security.Cryptography
                 strHashName,
                 iterations,
                 cspParams
-            ) { }
+            )
+        {
+        }
 
         [RequiresUnreferencedCode(HashAlgorithmUnreferencedCodeMessage)]
         public PasswordDeriveBytes(

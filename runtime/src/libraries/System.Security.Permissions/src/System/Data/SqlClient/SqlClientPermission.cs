@@ -15,18 +15,26 @@ namespace System.Data.SqlClient
 #endif
     public sealed class SqlClientPermission : DBDataPermission
     {
-        public SqlClientPermission() : base(default(PermissionState)) { }
+        public SqlClientPermission() : base(default(PermissionState))
+        {
+        }
 
-        public SqlClientPermission(PermissionState state) : base(default(PermissionState)) { }
+        public SqlClientPermission(PermissionState state) : base(default(PermissionState))
+        {
+        }
 
         public SqlClientPermission(PermissionState state, bool allowBlankPassword)
-            : base(default(PermissionState)) { }
+            : base(default(PermissionState))
+        {
+        }
 
         public override void Add(
             string connectionString,
             string restrictions,
             KeyRestrictionBehavior behavior
-        ) { }
+        )
+        {
+        }
 
         public override System.Security.IPermission Copy()
         {

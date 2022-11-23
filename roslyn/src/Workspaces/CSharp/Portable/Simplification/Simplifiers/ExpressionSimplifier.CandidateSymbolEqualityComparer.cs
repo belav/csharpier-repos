@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             public static CandidateSymbolEqualityComparer Instance { get; } =
                 new CandidateSymbolEqualityComparer();
 
-            private CandidateSymbolEqualityComparer() { }
+            private CandidateSymbolEqualityComparer()
+            {
+            }
 
             public bool Equals(ISymbol x, ISymbol y)
             {

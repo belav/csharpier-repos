@@ -19,7 +19,9 @@ namespace System.Speech.Synthesis.TtsEngine
         /// </summary>
         /// <param name="registryKey">Voice token registry entry
         /// from where this engine was created from</param>
-        protected TtsEngineSsml(string registryKey) { }
+        protected TtsEngineSsml(string registryKey)
+        {
+        }
 
         /// <summary>
         /// Queries the engine about the output format it supports.
@@ -170,7 +172,9 @@ namespace System.Speech.Synthesis.TtsEngine
             set { _count = value; }
         }
 
-        public SkipInfo() { }
+        public SkipInfo()
+        {
+        }
 
         private int _type;
         private int _count;
@@ -183,7 +187,9 @@ namespace System.Speech.Synthesis.TtsEngine
     [DebuggerDisplay("{State.Action} {TextToSpeak!=null?TextToSpeak:\"\"}")]
     public class TextFragment
     {
-        public TextFragment() { }
+        public TextFragment()
+        {
+        }
 
         public FragmentState State
         {
@@ -210,10 +216,14 @@ namespace System.Speech.Synthesis.TtsEngine
             set { _textLength = value; }
         }
 
-        internal TextFragment(FragmentState fragState) : this(fragState, null, null, 0, 0) { }
+        internal TextFragment(FragmentState fragState) : this(fragState, null, null, 0, 0)
+        {
+        }
 
         internal TextFragment(FragmentState fragState, string textToSpeak)
-            : this(fragState, textToSpeak, textToSpeak, 0, textToSpeak.Length) { }
+            : this(fragState, textToSpeak, textToSpeak, 0, textToSpeak.Length)
+        {
+        }
 
         internal TextFragment(
             FragmentState fragState,

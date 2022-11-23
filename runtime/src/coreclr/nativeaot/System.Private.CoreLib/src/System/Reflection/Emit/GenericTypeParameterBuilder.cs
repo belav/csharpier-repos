@@ -451,17 +451,27 @@ namespace System.Reflection.Emit
 
         public void SetBaseTypeConstraint(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type baseTypeConstraint
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
 
         public void SetGenericParameterAttributes(
             GenericParameterAttributes genericParameterAttributes
-        ) { }
+        )
+        {
+        }
 
-        public void SetInterfaceConstraints(params Type[] interfaceConstraints) { }
+        public void SetInterfaceConstraints(params Type[] interfaceConstraints)
+        {
+        }
 
         public override string ToString()
         {

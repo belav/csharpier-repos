@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
         }
 
         [Obsolete("Called by the deserializer", error: true)]
-        public MSBuildTestCase() { }
+        public MSBuildTestCase()
+        {
+        }
 
         public async Task<RunSummary> RunAsync(
             IMessageSink diagnosticMessageSink,

@@ -24,7 +24,9 @@ namespace MonoDelta
             );
         }
 
-        DeltaHelper() { }
+        DeltaHelper()
+        {
+        }
 
         public static DeltaHelper Make()
         {

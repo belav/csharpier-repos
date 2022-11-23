@@ -56,7 +56,9 @@ namespace StackOverflowTest
             {
                 return WaitOne();
             }
-            catch (ThreadInterruptedException e) { }
+            catch (ThreadInterruptedException e)
+            {
+            }
             return false;
         }
     }

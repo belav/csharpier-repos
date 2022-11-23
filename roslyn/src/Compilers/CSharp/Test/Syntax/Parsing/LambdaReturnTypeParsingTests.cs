@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class LambdaReturnTypeParsingTests : ParsingTests
     {
-        public LambdaReturnTypeParsingTests(ITestOutputHelper output) : base(output) { }
+        public LambdaReturnTypeParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions? options)
         {

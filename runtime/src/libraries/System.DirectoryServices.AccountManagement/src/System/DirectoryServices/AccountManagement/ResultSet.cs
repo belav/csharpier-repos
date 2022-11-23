@@ -36,5 +36,7 @@ namespace System.DirectoryServices.AccountManagement
         internal abstract void RestoreBookmark(ResultSetBookmark bookmark);
     }
 
-    internal abstract class ResultSetBookmark { }
+    internal abstract class ResultSetBookmark
+    {
+    }
 }

@@ -62,7 +62,9 @@ namespace System.Web.Mvc.Test
         private class FileContentResultHelper : FileContentResult
         {
             public FileContentResultHelper(byte[] fileContents, string contentType)
-                : base(fileContents, contentType) { }
+                : base(fileContents, contentType)
+            {
+            }
 
             public void PublicWriteFile(HttpResponseBase response)
             {

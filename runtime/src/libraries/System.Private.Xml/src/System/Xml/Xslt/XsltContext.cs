@@ -25,13 +25,19 @@ namespace System.Xml.Xsl
 
     public abstract class XsltContext : XmlNamespaceManager
     {
-        protected XsltContext(NameTable table) : base(table) { }
+        protected XsltContext(NameTable table) : base(table)
+        {
+        }
 
-        protected XsltContext() : base(new NameTable()) { }
+        protected XsltContext() : base(new NameTable())
+        {
+        }
 
         // This dummy XsltContext that doesn't actualy initialize XmlNamespaceManager
         // is used by XsltCompileContext
-        internal XsltContext(bool dummy) : base() { }
+        internal XsltContext(bool dummy) : base()
+        {
+        }
 
         public abstract IXsltContextVariable ResolveVariable(string prefix, string name);
         public abstract IXsltContextFunction ResolveFunction(

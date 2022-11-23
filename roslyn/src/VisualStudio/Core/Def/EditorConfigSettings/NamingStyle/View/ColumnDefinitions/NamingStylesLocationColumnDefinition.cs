@@ -22,7 +22,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStylesLocationColumnDefinition() { }
+        public NamingStylesLocationColumnDefinition()
+        {
+        }
 
         public override string Name => Location;
         public override string DisplayName => ServicesVSResources.Location;

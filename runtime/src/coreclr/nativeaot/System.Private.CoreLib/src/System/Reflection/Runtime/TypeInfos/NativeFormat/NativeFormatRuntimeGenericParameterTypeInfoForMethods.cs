@@ -45,7 +45,9 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        public void PrepareKey() { }
+        public void PrepareKey()
+        {
+        }
 
         //
         // Implements IKeyedItem.Key.

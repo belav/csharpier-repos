@@ -139,7 +139,9 @@ namespace Castle.DynamicProxy.Tests
 
 		#region Test Types
 
-        public interface IEmptyInterface { }
+        public interface IEmptyInterface
+        {
+        }
 
         public interface ISingleMethodInterface
         {
@@ -148,14 +150,20 @@ namespace Castle.DynamicProxy.Tests
 
         public class NonVirtualMethodClass : ISingleMethodInterface
         {
-            public void ClassMethod() { }
+            public void ClassMethod()
+            {
+            }
 
-            public void InterfaceMethod() { }
+            public void InterfaceMethod()
+            {
+            }
         }
 
         public class ClassWithInterfaceMethodExplicitlyImplemented : ISingleMethodInterface
         {
-            void ISingleMethodInterface.InterfaceMethod() { }
+            void ISingleMethodInterface.InterfaceMethod()
+            {
+            }
         }
 
         public class EmptyHook : IProxyGenerationHook
@@ -165,9 +173,13 @@ namespace Castle.DynamicProxy.Tests
                 return true;
             }
 
-            public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
+            public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+            {
+            }
 
-            public void MethodsInspected() { }
+            public void MethodsInspected()
+            {
+            }
         }
 
 		#endregion

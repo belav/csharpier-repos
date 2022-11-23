@@ -2,9 +2,13 @@ namespace AutoMapper.UnitTests.MappingInheritance;
 
 public class IncludeBaseWithNonGenericUsage : AutoMapperSpecBase
 {
-    class Source : SourceBase<string> { }
+    class Source : SourceBase<string>
+    {
+    }
 
-    class Destination : DestinationBase<string> { }
+    class Destination : DestinationBase<string>
+    {
+    }
 
     abstract class SourceBase<T>
     {
@@ -34,9 +38,13 @@ public class IncludeBaseWithNonGenericUsage : AutoMapperSpecBase
 
 public class IncludeBaseWithGenericUsage : AutoMapperSpecBase
 {
-    class Source : SourceBase<string> { }
+    class Source : SourceBase<string>
+    {
+    }
 
-    class Destination : DestinationBase<string> { }
+    class Destination : DestinationBase<string>
+    {
+    }
 
     abstract class SourceBase<T>
     {

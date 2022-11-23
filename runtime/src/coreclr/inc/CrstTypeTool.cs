@@ -824,11 +824,15 @@ class TypeFileParser
     internal class ParseError : Exception
     {
         // A raw error message.
-        public ParseError(string message) : base(message) { }
+        public ParseError(string message) : base(message)
+        {
+        }
 
         // An error message tagged with a file, line and column (coming from an error token).
         public ParseError(string message, Token errorToken)
-            : base(String.Format("{0}: {1}", errorToken.Location, message)) { }
+            : base(String.Format("{0}: {1}", errorToken.Location, message))
+        {
+        }
 
         // Produce a textual name for the given keyword type.
         protected static string IdToName(KeywordId id)
@@ -846,14 +850,18 @@ class TypeFileParser
         // Produce an unexpected token message with a file, line and column coming from an error token and
         // optionally the names of zero or more tokens that would have been accepted.
         public UnexpectedTokenError(Token errorToken, params KeywordId[] expected)
-            : base(FormatErrorMessage(errorToken, expected)) { }
+            : base(FormatErrorMessage(errorToken, expected))
+        {
+        }
 
         static string FormatErrorMessage(Token errorToken, KeywordId[] expected)
         {
             StringBuilder message = new StringBuilder(
                 String.Format("Unexpected token '{0}' at {1}", errorToken.Text, errorToken.Location)
             );
-            if (expected.Length == 0) { }
+            if (expected.Length == 0)
+            {
+            }
             else if (expected.Length == 1)
             {
                 message.Append(String.Format("; expected {0}", IdToName(expected[0])));
@@ -873,7 +881,9 @@ class TypeFileParser
     // Syntax error used when we unexpectedly ran out of tokens.
     internal class UnexpectedEofError : ParseError
     {
-        public UnexpectedEofError() : base("Unexpected end of file") { }
+        public UnexpectedEofError() : base("Unexpected end of file")
+        {
+        }
     }
 }
 

@@ -23,7 +23,9 @@ namespace System.Threading.Tasks.Tests
             // Exercise void overload that takes IAsyncResult instead of StartMethod
             t = Task.Factory.FromAsync(
                 fac.StartWrite("", 0, 0, null, null),
-                delegate(IAsyncResult iar) { }
+                delegate(IAsyncResult iar)
+                {
+                }
             );
             t.Wait();
             check = fac.ToString();
@@ -32,7 +34,9 @@ namespace System.Threading.Tasks.Tests
             //CreationOption overload
             t = Task.Factory.FromAsync(
                 fac.StartWrite("", 0, 0, null, null),
-                delegate(IAsyncResult iar) { },
+                delegate(IAsyncResult iar)
+                {
+                },
                 TaskCreationOptions.None
             );
             t.Wait();
@@ -662,7 +666,9 @@ namespace System.Threading.Tasks.Tests
                         callback(ar);
                     return ar;
                 },
-                iar => { },
+                iar =>
+                {
+                },
                 null
             );
             Assert.Equal(TaskStatus.RanToCompletion, t.Status);

@@ -770,7 +770,10 @@ namespace DispatchProxyTests
                 return null;
             };
 
-            EventHandler handler = new EventHandler((sender, e) => { });
+            EventHandler handler = new EventHandler(
+                (sender, e) => {
+                }
+            );
 
             proxy
                 .GetType()

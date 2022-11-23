@@ -36,10 +36,14 @@ namespace System.Net.Http.Headers
         }
 
         public ViaHeaderValue(string protocolVersion, string receivedBy)
-            : this(protocolVersion, receivedBy, null, null) { }
+            : this(protocolVersion, receivedBy, null, null)
+        {
+        }
 
         public ViaHeaderValue(string protocolVersion, string receivedBy, string? protocolName)
-            : this(protocolVersion, receivedBy, protocolName, null) { }
+            : this(protocolVersion, receivedBy, protocolName, null)
+        {
+        }
 
         public ViaHeaderValue(
             string protocolVersion,

@@ -35,21 +35,27 @@ namespace System.Security.Cryptography
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
         public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations)
-            : this(password, salt, iterations, HashAlgorithmName.SHA1) { }
+            : this(password, salt, iterations, HashAlgorithmName.SHA1)
+        {
+        }
 
         public Rfc2898DeriveBytes(
             byte[] password,
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) : this(password, salt, iterations, hashAlgorithm, clearPassword: false) { }
+        ) : this(password, salt, iterations, hashAlgorithm, clearPassword: false)
+        {
+        }
 
         [Obsolete(
             Obsoletions.Rfc2898OutdatedCtorMessage,
             DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public Rfc2898DeriveBytes(string password, byte[] salt) : this(password, salt, 1000) { }
+        public Rfc2898DeriveBytes(string password, byte[] salt) : this(password, salt, 1000)
+        {
+        }
 
         [Obsolete(
             Obsoletions.Rfc2898OutdatedCtorMessage,
@@ -57,7 +63,9 @@ namespace System.Security.Cryptography
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
         public Rfc2898DeriveBytes(string password, byte[] salt, int iterations)
-            : this(password, salt, iterations, HashAlgorithmName.SHA1) { }
+            : this(password, salt, iterations, HashAlgorithmName.SHA1)
+        {
+        }
 
         public Rfc2898DeriveBytes(
             string password,
@@ -73,7 +81,9 @@ namespace System.Security.Cryptography
                 iterations,
                 hashAlgorithm,
                 clearPassword: true
-            ) { }
+            )
+        {
+        }
 
         [Obsolete(
             Obsoletions.Rfc2898OutdatedCtorMessage,
@@ -81,7 +91,8 @@ namespace System.Security.Cryptography
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
         public Rfc2898DeriveBytes(string password, int saltSize) : this(password, saltSize, 1000)
-        { }
+        {
+        }
 
         [Obsolete(
             Obsoletions.Rfc2898OutdatedCtorMessage,
@@ -89,7 +100,9 @@ namespace System.Security.Cryptography
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
         public Rfc2898DeriveBytes(string password, int saltSize, int iterations)
-            : this(password, saltSize, iterations, HashAlgorithmName.SHA1) { }
+            : this(password, saltSize, iterations, HashAlgorithmName.SHA1)
+        {
+        }
 
         public Rfc2898DeriveBytes(
             string password,

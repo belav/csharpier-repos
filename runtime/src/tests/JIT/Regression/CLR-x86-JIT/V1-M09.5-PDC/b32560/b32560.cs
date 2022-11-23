@@ -19,9 +19,13 @@ namespace Test
                 {
                     param5 = (int)param4[2];
 
-                    do { } while (param5 != (uint)(new AA().m_fField3));
+                    do
+                    {
+                    } while (param5 != (uint)(new AA().m_fField3));
 
-                    do { } while (param5 > 0);
+                    do
+                    {
+                    } while (param5 > 0);
                     return;
                 }
             } while (param1[2]);

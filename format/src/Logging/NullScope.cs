@@ -8,8 +8,12 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
     {
         public static NullScope Instance { get; } = new NullScope();
 
-        private NullScope() { }
+        private NullScope()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

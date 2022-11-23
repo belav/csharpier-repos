@@ -11,7 +11,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SelfRef1 Data;
 
-        public SelfRef1() { }
+        public SelfRef1()
+        {
+        }
 
         public SelfRef1(bool init)
         {
@@ -28,7 +30,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SelfRef1DoubleDM Data2;
 
-        public SelfRef1DoubleDM() { }
+        public SelfRef1DoubleDM()
+        {
+        }
 
         public SelfRef1DoubleDM(bool init)
         {
@@ -46,7 +50,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SelfRef1 RefData;
 
-        public SelfRef2() { }
+        public SelfRef2()
+        {
+        }
 
         public SelfRef2(bool init)
         {
@@ -64,7 +70,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SelfRef2 RefData;
 
-        public SelfRef3() { }
+        public SelfRef3()
+        {
+        }
 
         public SelfRef3(bool init)
         {
@@ -79,7 +87,9 @@ namespace SerializationTestTypes
         [DataMember]
         public Cyclic2 Data;
 
-        public Cyclic1() { }
+        public Cyclic1()
+        {
+        }
 
         public Cyclic1(bool init)
         {
@@ -93,7 +103,9 @@ namespace SerializationTestTypes
         [DataMember]
         public Cyclic1 Data;
 
-        public Cyclic2() { }
+        public Cyclic2()
+        {
+        }
 
         public Cyclic2(bool init)
         {
@@ -108,7 +120,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicB Data;
 
-        public CyclicA() { }
+        public CyclicA()
+        {
+        }
 
         public CyclicA(bool init)
         {
@@ -123,7 +137,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicC Data;
 
-        public CyclicB() { }
+        public CyclicB()
+        {
+        }
 
         public CyclicB(bool init)
         {
@@ -138,7 +154,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicD Data;
 
-        public CyclicC() { }
+        public CyclicC()
+        {
+        }
 
         public CyclicC(bool init)
         {
@@ -153,7 +171,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicA Data;
 
-        public CyclicD() { }
+        public CyclicD()
+        {
+        }
 
         public CyclicD(bool init)
         {
@@ -170,7 +190,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicA Data;
 
-        public CyclicABCD1() { }
+        public CyclicABCD1()
+        {
+        }
 
         public CyclicABCD1(bool init)
         {
@@ -185,7 +207,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicA Data;
 
-        public CyclicABCD2() { }
+        public CyclicABCD2()
+        {
+        }
 
         public CyclicABCD2(bool init)
         {
@@ -200,7 +224,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicA Data;
 
-        public CyclicABCD3() { }
+        public CyclicABCD3()
+        {
+        }
 
         public CyclicABCD3(bool init)
         {
@@ -216,7 +242,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicA Data;
 
-        public CyclicABCD4() { }
+        public CyclicABCD4()
+        {
+        }
 
         public CyclicABCD4(bool init)
         {
@@ -236,7 +264,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicA Data2;
 
-        public CyclicABCD5() { }
+        public CyclicABCD5()
+        {
+        }
 
         public CyclicABCD5(bool init)
         {
@@ -259,7 +289,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicB Data3;
 
-        public CyclicABCD6() { }
+        public CyclicABCD6()
+        {
+        }
 
         public CyclicABCD6(bool init)
         {
@@ -286,7 +318,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicC Data4;
 
-        public CyclicABCD7() { }
+        public CyclicABCD7()
+        {
+        }
 
         public CyclicABCD7(bool init)
         {
@@ -317,7 +351,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicD Data5;
 
-        public CyclicABCD8() { }
+        public CyclicABCD8()
+        {
+        }
 
         public CyclicABCD8(bool init)
         {
@@ -339,7 +375,9 @@ namespace SerializationTestTypes
         [DataMember]
         public CyclicA Data;
 
-        public CyclicABCDNoCycles() { }
+        public CyclicABCDNoCycles()
+        {
+        }
 
         public CyclicABCDNoCycles(bool init)
         {
@@ -357,7 +395,9 @@ namespace SerializationTestTypes
         [DataMember]
         public B1 Data;
 
-        public A1() { }
+        public A1()
+        {
+        }
 
         public A1(bool init)
         {
@@ -374,7 +414,9 @@ namespace SerializationTestTypes
         [DataMember]
         public C1 Data2;
 
-        public B1() { }
+        public B1()
+        {
+        }
 
         public B1(bool init)
         {
@@ -389,7 +431,9 @@ namespace SerializationTestTypes
         [DataMember]
         public B1 Data;
 
-        public C1() { }
+        public C1()
+        {
+        }
 
         public C1(bool init)
         {
@@ -405,7 +449,9 @@ namespace SerializationTestTypes
         [DataMember]
         public BBB1 Data;
 
-        public BB1() { }
+        public BB1()
+        {
+        }
 
         public BB1(bool init)
         {
@@ -419,7 +465,9 @@ namespace SerializationTestTypes
         [DataMember]
         public A1 Data;
 
-        public BBB1() { }
+        public BBB1()
+        {
+        }
 
         public BBB1(bool init)
         {

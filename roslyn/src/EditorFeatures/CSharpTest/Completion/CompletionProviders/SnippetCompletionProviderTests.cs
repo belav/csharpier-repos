@@ -253,7 +253,9 @@ class C
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public MockSnippetInfoService() { }
+            public MockSnippetInfoService()
+            {
+            }
 
             public IEnumerable<SnippetInfo> GetSnippetsIfAvailable() =>
                 new List<SnippetInfo>

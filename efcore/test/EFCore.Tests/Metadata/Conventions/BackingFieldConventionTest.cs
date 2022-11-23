@@ -519,7 +519,9 @@ public class BackingFieldConventionTest
         public object this[string name]
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
     }
 

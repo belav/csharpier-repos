@@ -12,7 +12,9 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex> where TVertex : notnu
     private readonly Dictionary<TVertex, Dictionary<TVertex, object?>> _successorMap = new();
     private readonly Dictionary<TVertex, Dictionary<TVertex, object?>> _predecessorMap = new();
 
-    public Multigraph() { }
+    public Multigraph()
+    {
+    }
 
     public Multigraph(IComparer<TVertex> secondarySortComparer)
     {
@@ -20,7 +22,9 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex> where TVertex : notnu
     }
 
     public Multigraph(Comparison<TVertex> secondarySortComparer)
-        : this(Comparer<TVertex>.Create(secondarySortComparer)) { }
+        : this(Comparer<TVertex>.Create(secondarySortComparer))
+    {
+    }
 
     public IEnumerable<TEdge> GetEdges(TVertex from, TVertex to)
     {

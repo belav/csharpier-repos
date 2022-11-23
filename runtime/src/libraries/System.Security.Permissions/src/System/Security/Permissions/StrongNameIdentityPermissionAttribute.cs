@@ -14,7 +14,9 @@ namespace System.Security.Permissions
     public sealed partial class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public StrongNameIdentityPermissionAttribute(SecurityAction action)
-            : base(default(SecurityAction)) { }
+            : base(default(SecurityAction))
+        {
+        }
 
         public string Name { get; set; }
         public string PublicKey { get; set; }

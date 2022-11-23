@@ -177,10 +177,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class TypeWithWarnings
         {
             [RequiresUnreferencedCode("--Method1--")]
-            public void Method1() { }
+            public void Method1()
+            {
+            }
 
             [RequiresUnreferencedCode("--Method2--")]
-            public void Method2() { }
+            public void Method2()
+            {
+            }
 
             // https://github.com/dotnet/linker/issues/2273
             [ExpectedWarning(
@@ -214,7 +218,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(OverConstTypeName);
 
             [RequiresUnreferencedCode("--Method1--")]
-            public void Method1() { }
+            public void Method1()
+            {
+            }
 
             // https://github.com/dotnet/linker/issues/2273
             [ExpectedWarning(

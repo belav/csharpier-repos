@@ -15,7 +15,9 @@ namespace System.Web.Http
         public void Constructor_Initializes()
         {
             // Arrange
-            AsyncCallback callback = new AsyncCallback(_ => { });
+            AsyncCallback callback = new AsyncCallback(_ =>
+            {
+            });
             object state = new object();
 
             // Act
@@ -159,7 +161,9 @@ namespace System.Web.Http
 
         internal class MockAsyncResult : AsyncResult
         {
-            public MockAsyncResult(AsyncCallback callback, object state) : base(callback, state) { }
+            public MockAsyncResult(AsyncCallback callback, object state) : base(callback, state)
+            {
+            }
 
             public new void Complete(bool completedSynchronously)
             {

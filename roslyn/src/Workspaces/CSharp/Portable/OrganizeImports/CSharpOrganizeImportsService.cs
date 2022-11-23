@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpOrganizeImportsService() { }
+        public CSharpOrganizeImportsService()
+        {
+        }
 
         public async Task<Document> OrganizeImportsAsync(
             Document document,

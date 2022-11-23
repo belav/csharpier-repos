@@ -23,7 +23,9 @@ namespace System.Net.Mime
         private AsyncCallback? _writeCallback;
         private const int maxBufferSize = 0x4400; //seems optimal for send based on perf analysis
 
-        internal MimePart() { }
+        internal MimePart()
+        {
+        }
 
         public void Dispose()
         {

@@ -28,7 +28,9 @@ namespace System.Reflection.Metadata
             SignatureKind kind,
             SignatureCallingConvention convention,
             SignatureAttributes attributes
-        ) : this((byte)((int)kind | (int)convention | (int)attributes)) { }
+        ) : this((byte)((int)kind | (int)convention | (int)attributes))
+        {
+        }
 
         public byte RawValue
         {

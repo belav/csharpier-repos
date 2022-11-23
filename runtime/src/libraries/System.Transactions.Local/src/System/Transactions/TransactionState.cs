@@ -449,9 +449,13 @@ namespace System.Transactions
             );
         }
 
-        internal virtual void CompleteBlockingClone(InternalTransaction tx) { }
+        internal virtual void CompleteBlockingClone(InternalTransaction tx)
+        {
+        }
 
-        internal virtual void CompleteAbortingClone(InternalTransaction tx) { }
+        internal virtual void CompleteAbortingClone(InternalTransaction tx)
+        {
+        }
 
         internal virtual void CreateBlockingClone(InternalTransaction tx)
         {
@@ -613,7 +617,9 @@ namespace System.Transactions
             throw new InvalidOperationException();
         }
 
-        internal virtual void Timeout(InternalTransaction tx) { }
+        internal virtual void Timeout(InternalTransaction tx)
+        {
+        }
 
         internal virtual void Phase0VolatilePrepareDone(InternalTransaction tx)
         {
@@ -702,7 +708,9 @@ namespace System.Transactions
             );
         }
 
-        internal virtual void DisposeRoot(InternalTransaction tx) { }
+        internal virtual void DisposeRoot(InternalTransaction tx)
+        {
+        }
 
         internal virtual bool IsCompleted(InternalTransaction tx)
         {

@@ -29,7 +29,9 @@ namespace System.Runtime.Serialization
             int maxItemsInObjectGraph,
             StreamingContext streamingContext,
             bool ignoreExtensionDataObject
-        ) : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject) { }
+        ) : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject)
+        {
+        }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

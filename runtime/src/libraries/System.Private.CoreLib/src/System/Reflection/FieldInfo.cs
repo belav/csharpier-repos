@@ -9,7 +9,9 @@ namespace System.Reflection
 {
     public abstract partial class FieldInfo : MemberInfo
     {
-        protected FieldInfo() { }
+        protected FieldInfo()
+        {
+        }
 
         public override MemberTypes MemberType => MemberTypes.Field;
 

@@ -119,7 +119,9 @@ namespace System.Runtime.Serialization
 
         private LocalBuilder? _stringFormatArray;
 
-        internal CodeGenerator() { }
+        internal CodeGenerator()
+        {
+        }
 
         internal void BeginMethod(
             DynamicMethod dynamicMethod,

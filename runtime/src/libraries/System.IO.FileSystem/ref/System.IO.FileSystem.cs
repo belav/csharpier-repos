@@ -13,9 +13,13 @@ namespace System.IO
             throw null;
         }
 
-        public static void Delete(string path) { }
+        public static void Delete(string path)
+        {
+        }
 
-        public static void Delete(string path, bool recursive) { }
+        public static void Delete(string path, bool recursive)
+        {
+        }
 
         public static System.Collections.Generic.IEnumerable<string> EnumerateDirectories(
             string path
@@ -255,26 +259,44 @@ namespace System.IO
             throw null;
         }
 
-        public static void Move(string sourceDirName, string destDirName) { }
+        public static void Move(string sourceDirName, string destDirName)
+        {
+        }
 
-        public static void SetCreationTime(string path, System.DateTime creationTime) { }
+        public static void SetCreationTime(string path, System.DateTime creationTime)
+        {
+        }
 
-        public static void SetCreationTimeUtc(string path, System.DateTime creationTimeUtc) { }
+        public static void SetCreationTimeUtc(string path, System.DateTime creationTimeUtc)
+        {
+        }
 
-        public static void SetCurrentDirectory(string path) { }
+        public static void SetCurrentDirectory(string path)
+        {
+        }
 
-        public static void SetLastAccessTime(string path, System.DateTime lastAccessTime) { }
+        public static void SetLastAccessTime(string path, System.DateTime lastAccessTime)
+        {
+        }
 
-        public static void SetLastAccessTimeUtc(string path, System.DateTime lastAccessTimeUtc) { }
+        public static void SetLastAccessTimeUtc(string path, System.DateTime lastAccessTimeUtc)
+        {
+        }
 
-        public static void SetLastWriteTime(string path, System.DateTime lastWriteTime) { }
+        public static void SetLastWriteTime(string path, System.DateTime lastWriteTime)
+        {
+        }
 
-        public static void SetLastWriteTimeUtc(string path, System.DateTime lastWriteTimeUtc) { }
+        public static void SetLastWriteTimeUtc(string path, System.DateTime lastWriteTimeUtc)
+        {
+        }
     }
 
     public sealed partial class DirectoryInfo : System.IO.FileSystemInfo
     {
-        public DirectoryInfo(string path) { }
+        public DirectoryInfo(string path)
+        {
+        }
 
         public override bool Exists
         {
@@ -293,16 +315,22 @@ namespace System.IO
             get { throw null; }
         }
 
-        public void Create() { }
+        public void Create()
+        {
+        }
 
         public System.IO.DirectoryInfo CreateSubdirectory(string path)
         {
             throw null;
         }
 
-        public override void Delete() { }
+        public override void Delete()
+        {
+        }
 
-        public void Delete(bool recursive) { }
+        public void Delete(bool recursive)
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<System.IO.DirectoryInfo> EnumerateDirectories()
         {
@@ -466,7 +494,9 @@ namespace System.IO
             throw null;
         }
 
-        public void MoveTo(string destDirName) { }
+        public void MoveTo(string destDirName)
+        {
+        }
 
         public override string ToString()
         {
@@ -476,47 +506,65 @@ namespace System.IO
 
     public partial class EnumerationOptions
     {
-        public EnumerationOptions() { }
+        public EnumerationOptions()
+        {
+        }
 
         public System.IO.FileAttributes AttributesToSkip
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int BufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IgnoreInaccessible
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.MatchCasing MatchCasing
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.MatchType MatchType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxRecursionDepth
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RecurseSubdirectories
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ReturnSpecialDirectories
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -525,13 +573,17 @@ namespace System.IO
         public static void AppendAllLines(
             string path,
             System.Collections.Generic.IEnumerable<string> contents
-        ) { }
+        )
+        {
+        }
 
         public static void AppendAllLines(
             string path,
             System.Collections.Generic.IEnumerable<string> contents,
             System.Text.Encoding encoding
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task AppendAllLinesAsync(
             string path,
@@ -554,13 +606,17 @@ namespace System.IO
             throw null;
         }
 
-        public static void AppendAllText(string path, string? contents) { }
+        public static void AppendAllText(string path, string? contents)
+        {
+        }
 
         public static void AppendAllText(
             string path,
             string? contents,
             System.Text.Encoding encoding
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task AppendAllTextAsync(
             string path,
@@ -588,9 +644,13 @@ namespace System.IO
             throw null;
         }
 
-        public static void Copy(string sourceFileName, string destFileName) { }
+        public static void Copy(string sourceFileName, string destFileName)
+        {
+        }
 
-        public static void Copy(string sourceFileName, string destFileName, bool overwrite) { }
+        public static void Copy(string sourceFileName, string destFileName, bool overwrite)
+        {
+        }
 
         public static System.IO.FileStream Create(string path)
         {
@@ -617,12 +677,18 @@ namespace System.IO
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void Decrypt(string path) { }
+        public static void Decrypt(string path)
+        {
+        }
 
-        public static void Delete(string path) { }
+        public static void Delete(string path)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void Encrypt(string path) { }
+        public static void Encrypt(string path)
+        {
+        }
 
         public static bool Exists(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? path
@@ -666,9 +732,13 @@ namespace System.IO
             throw null;
         }
 
-        public static void Move(string sourceFileName, string destFileName) { }
+        public static void Move(string sourceFileName, string destFileName)
+        {
+        }
 
-        public static void Move(string sourceFileName, string destFileName, bool overwrite) { }
+        public static void Move(string sourceFileName, string destFileName, bool overwrite)
+        {
+        }
 
         public static System.IO.FileStream Open(string path, System.IO.FileMode mode)
         {
@@ -798,30 +868,50 @@ namespace System.IO
             string sourceFileName,
             string destinationFileName,
             string? destinationBackupFileName
-        ) { }
+        )
+        {
+        }
 
         public static void Replace(
             string sourceFileName,
             string destinationFileName,
             string? destinationBackupFileName,
             bool ignoreMetadataErrors
-        ) { }
+        )
+        {
+        }
 
-        public static void SetAttributes(string path, System.IO.FileAttributes fileAttributes) { }
+        public static void SetAttributes(string path, System.IO.FileAttributes fileAttributes)
+        {
+        }
 
-        public static void SetCreationTime(string path, System.DateTime creationTime) { }
+        public static void SetCreationTime(string path, System.DateTime creationTime)
+        {
+        }
 
-        public static void SetCreationTimeUtc(string path, System.DateTime creationTimeUtc) { }
+        public static void SetCreationTimeUtc(string path, System.DateTime creationTimeUtc)
+        {
+        }
 
-        public static void SetLastAccessTime(string path, System.DateTime lastAccessTime) { }
+        public static void SetLastAccessTime(string path, System.DateTime lastAccessTime)
+        {
+        }
 
-        public static void SetLastAccessTimeUtc(string path, System.DateTime lastAccessTimeUtc) { }
+        public static void SetLastAccessTimeUtc(string path, System.DateTime lastAccessTimeUtc)
+        {
+        }
 
-        public static void SetLastWriteTime(string path, System.DateTime lastWriteTime) { }
+        public static void SetLastWriteTime(string path, System.DateTime lastWriteTime)
+        {
+        }
 
-        public static void SetLastWriteTimeUtc(string path, System.DateTime lastWriteTimeUtc) { }
+        public static void SetLastWriteTimeUtc(string path, System.DateTime lastWriteTimeUtc)
+        {
+        }
 
-        public static void WriteAllBytes(string path, byte[] bytes) { }
+        public static void WriteAllBytes(string path, byte[] bytes)
+        {
+        }
 
         public static System.Threading.Tasks.Task WriteAllBytesAsync(
             string path,
@@ -836,21 +926,29 @@ namespace System.IO
         public static void WriteAllLines(
             string path,
             System.Collections.Generic.IEnumerable<string> contents
-        ) { }
+        )
+        {
+        }
 
         public static void WriteAllLines(
             string path,
             System.Collections.Generic.IEnumerable<string> contents,
             System.Text.Encoding encoding
-        ) { }
+        )
+        {
+        }
 
-        public static void WriteAllLines(string path, string[] contents) { }
+        public static void WriteAllLines(string path, string[] contents)
+        {
+        }
 
         public static void WriteAllLines(
             string path,
             string[] contents,
             System.Text.Encoding encoding
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task WriteAllLinesAsync(
             string path,
@@ -873,13 +971,17 @@ namespace System.IO
             throw null;
         }
 
-        public static void WriteAllText(string path, string? contents) { }
+        public static void WriteAllText(string path, string? contents)
+        {
+        }
 
         public static void WriteAllText(
             string path,
             string? contents,
             System.Text.Encoding encoding
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task WriteAllTextAsync(
             string path,
@@ -905,7 +1007,9 @@ namespace System.IO
 
     public sealed partial class FileInfo : System.IO.FileSystemInfo
     {
-        public FileInfo(string fileName) { }
+        public FileInfo(string fileName)
+        {
+        }
 
         public System.IO.DirectoryInfo? Directory
         {
@@ -922,7 +1026,9 @@ namespace System.IO
         public bool IsReadOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long Length
         {
@@ -959,16 +1065,26 @@ namespace System.IO
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public void Decrypt() { }
+        public void Decrypt()
+        {
+        }
 
-        public override void Delete() { }
+        public override void Delete()
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public void Encrypt() { }
+        public void Encrypt()
+        {
+        }
 
-        public void MoveTo(string destFileName) { }
+        public void MoveTo(string destFileName)
+        {
+        }
 
-        public void MoveTo(string destFileName, bool overwrite) { }
+        public void MoveTo(string destFileName, bool overwrite)
+        {
+        }
 
         public System.IO.FileStream Open(System.IO.FileMode mode)
         {
@@ -1034,27 +1150,37 @@ namespace System.IO
         protected string FullPath;
         protected string OriginalPath;
 
-        protected FileSystemInfo() { }
+        protected FileSystemInfo()
+        {
+        }
 
         protected FileSystemInfo(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public System.IO.FileAttributes Attributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime CreationTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime CreationTimeUtc
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract bool Exists { get; }
         public string Extension
@@ -1068,22 +1194,30 @@ namespace System.IO
         public System.DateTime LastAccessTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime LastAccessTimeUtc
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime LastWriteTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime LastWriteTimeUtc
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract string Name { get; }
         public abstract void Delete();
@@ -1091,9 +1225,13 @@ namespace System.IO
         public virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public void Refresh() { }
+        public void Refresh()
+        {
+        }
 
         public override string ToString()
         {
@@ -1196,17 +1334,23 @@ namespace System.IO.Enumeration
             string directory,
             System.IO.Enumeration.FileSystemEnumerable<TResult>.FindTransform transform,
             System.IO.EnumerationOptions? options = null
-        ) { }
+        )
+        {
+        }
 
         public System.IO.Enumeration.FileSystemEnumerable<TResult>.FindPredicate? ShouldIncludePredicate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.Enumeration.FileSystemEnumerable<TResult>.FindPredicate? ShouldRecursePredicate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Collections.Generic.IEnumerator<TResult> GetEnumerator()
@@ -1230,7 +1374,8 @@ namespace System.IO.Enumeration
             System.IDisposable
     {
         public FileSystemEnumerator(string directory, System.IO.EnumerationOptions? options = null)
-        { }
+        {
+        }
 
         public TResult Current
         {
@@ -1246,18 +1391,26 @@ namespace System.IO.Enumeration
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public bool MoveNext()
         {
             throw null;
         }
 
-        protected virtual void OnDirectoryFinished(System.ReadOnlySpan<char> directory) { }
+        protected virtual void OnDirectoryFinished(System.ReadOnlySpan<char> directory)
+        {
+        }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         protected virtual bool ShouldIncludeEntry(ref System.IO.Enumeration.FileSystemEntry entry)
         {

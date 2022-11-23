@@ -208,7 +208,9 @@ public interface IDbTransactionInterceptor : IInterceptor
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void TransactionCommitted(DbTransaction transaction, TransactionEndEventData eventData) { }
+    void TransactionCommitted(DbTransaction transaction, TransactionEndEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just before EF intends to call
@@ -281,7 +283,9 @@ public interface IDbTransactionInterceptor : IInterceptor
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void TransactionRolledBack(DbTransaction transaction, TransactionEndEventData eventData) { }
+    void TransactionRolledBack(DbTransaction transaction, TransactionEndEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just before EF intends to call
@@ -354,7 +358,9 @@ public interface IDbTransactionInterceptor : IInterceptor
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData) { }
+    void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just before EF intends to create a transaction savepoint.
@@ -426,7 +432,9 @@ public interface IDbTransactionInterceptor : IInterceptor
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void RolledBackToSavepoint(DbTransaction transaction, TransactionEventData eventData) { }
+    void RolledBackToSavepoint(DbTransaction transaction, TransactionEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just before EF intends to roll back to a transaction savepoint.
@@ -498,7 +506,9 @@ public interface IDbTransactionInterceptor : IInterceptor
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData) { }
+    void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just before EF intends to release a transaction savepoint.
@@ -546,7 +556,9 @@ public interface IDbTransactionInterceptor : IInterceptor
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void TransactionFailed(DbTransaction transaction, TransactionErrorEventData eventData) { }
+    void TransactionFailed(DbTransaction transaction, TransactionErrorEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called when use of a <see cref="DbTransaction" /> has failed with an exception.

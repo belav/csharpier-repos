@@ -17,7 +17,9 @@ namespace System.Buffers
         private readonly Bucket[] _buckets;
 
         internal ConfigurableArrayPool()
-            : this(DefaultMaxArrayLength, DefaultMaxNumberOfArraysPerBucket) { }
+            : this(DefaultMaxArrayLength, DefaultMaxNumberOfArraysPerBucket)
+        {
+        }
 
         internal ConfigurableArrayPool(int maxArrayLength, int maxArraysPerBucket)
         {

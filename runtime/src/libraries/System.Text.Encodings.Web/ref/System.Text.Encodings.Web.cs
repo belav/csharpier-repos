@@ -8,7 +8,9 @@ namespace System.Text.Encodings.Web
 {
     public abstract partial class HtmlEncoder : System.Text.Encodings.Web.TextEncoder
     {
-        protected HtmlEncoder() { }
+        protected HtmlEncoder()
+        {
+        }
 
         public static System.Text.Encodings.Web.HtmlEncoder Default
         {
@@ -32,7 +34,9 @@ namespace System.Text.Encodings.Web
 
     public abstract partial class JavaScriptEncoder : System.Text.Encodings.Web.TextEncoder
     {
-        protected JavaScriptEncoder() { }
+        protected JavaScriptEncoder()
+        {
+        }
 
         public static System.Text.Encodings.Web.JavaScriptEncoder Default
         {
@@ -60,7 +64,9 @@ namespace System.Text.Encodings.Web
 
     public abstract partial class TextEncoder
     {
-        protected TextEncoder() { }
+        protected TextEncoder()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -72,16 +78,22 @@ namespace System.Text.Encodings.Web
             char[] value,
             int startIndex,
             int characterCount
-        ) { }
+        )
+        {
+        }
 
-        public void Encode(System.IO.TextWriter output, string value) { }
+        public void Encode(System.IO.TextWriter output, string value)
+        {
+        }
 
         public virtual void Encode(
             System.IO.TextWriter output,
             string value,
             int startIndex,
             int characterCount
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Buffers.OperationStatus Encode(
             System.ReadOnlySpan<char> source,
@@ -143,33 +155,57 @@ namespace System.Text.Encodings.Web
 
     public partial class TextEncoderSettings
     {
-        public TextEncoderSettings() { }
+        public TextEncoderSettings()
+        {
+        }
 
-        public TextEncoderSettings(System.Text.Encodings.Web.TextEncoderSettings other) { }
+        public TextEncoderSettings(System.Text.Encodings.Web.TextEncoderSettings other)
+        {
+        }
 
-        public TextEncoderSettings(params System.Text.Unicode.UnicodeRange[] allowedRanges) { }
+        public TextEncoderSettings(params System.Text.Unicode.UnicodeRange[] allowedRanges)
+        {
+        }
 
-        public virtual void AllowCharacter(char character) { }
+        public virtual void AllowCharacter(char character)
+        {
+        }
 
-        public virtual void AllowCharacters(params char[] characters) { }
+        public virtual void AllowCharacters(params char[] characters)
+        {
+        }
 
-        public virtual void AllowCodePoints(
-            System.Collections.Generic.IEnumerable<int> codePoints
-        ) { }
+        public virtual void AllowCodePoints(System.Collections.Generic.IEnumerable<int> codePoints)
+        {
+        }
 
-        public virtual void AllowRange(System.Text.Unicode.UnicodeRange range) { }
+        public virtual void AllowRange(System.Text.Unicode.UnicodeRange range)
+        {
+        }
 
-        public virtual void AllowRanges(params System.Text.Unicode.UnicodeRange[] ranges) { }
+        public virtual void AllowRanges(params System.Text.Unicode.UnicodeRange[] ranges)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
-        public virtual void ForbidCharacter(char character) { }
+        public virtual void ForbidCharacter(char character)
+        {
+        }
 
-        public virtual void ForbidCharacters(params char[] characters) { }
+        public virtual void ForbidCharacters(params char[] characters)
+        {
+        }
 
-        public virtual void ForbidRange(System.Text.Unicode.UnicodeRange range) { }
+        public virtual void ForbidRange(System.Text.Unicode.UnicodeRange range)
+        {
+        }
 
-        public virtual void ForbidRanges(params System.Text.Unicode.UnicodeRange[] ranges) { }
+        public virtual void ForbidRanges(params System.Text.Unicode.UnicodeRange[] ranges)
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerable<int> GetAllowedCodePoints()
         {
@@ -179,7 +215,9 @@ namespace System.Text.Encodings.Web
 
     public abstract partial class UrlEncoder : System.Text.Encodings.Web.TextEncoder
     {
-        protected UrlEncoder() { }
+        protected UrlEncoder()
+        {
+        }
 
         public static System.Text.Encodings.Web.UrlEncoder Default
         {
@@ -206,7 +244,9 @@ namespace System.Text.Unicode
 {
     public sealed partial class UnicodeRange
     {
-        public UnicodeRange(int firstCodePoint, int length) { }
+        public UnicodeRange(int firstCodePoint, int length)
+        {
+        }
 
         public int FirstCodePoint
         {

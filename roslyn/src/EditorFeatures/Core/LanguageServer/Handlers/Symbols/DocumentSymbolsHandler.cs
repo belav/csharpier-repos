@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentSymbolsHandler() { }
+        public DocumentSymbolsHandler()
+        {
+        }
 
         public TextDocumentIdentifier GetTextDocumentIdentifier(
             RoslynDocumentSymbolParams request

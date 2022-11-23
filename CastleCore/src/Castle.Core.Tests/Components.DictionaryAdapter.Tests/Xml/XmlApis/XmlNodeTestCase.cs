@@ -378,6 +378,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         protected static XmlKnownTypeSet KnownTypes;
         protected static MockXmlIncludedTypeMap IncludedTypes;
 
-        protected sealed class T { }
+        protected sealed class T
+        {
+        }
     }
 }

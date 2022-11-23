@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.EditorFeatures.Cocoa
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NavigateToLinkService() { }
+        public NavigateToLinkService()
+        {
+        }
 
         public Task<bool> TryNavigateToLinkAsync(Uri uri, CancellationToken cancellationToken)
         {

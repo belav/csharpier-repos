@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpInlineTemporaryCodeRefactoringProvider() { }
+        public CSharpInlineTemporaryCodeRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

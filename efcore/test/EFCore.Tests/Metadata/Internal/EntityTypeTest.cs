@@ -3690,7 +3690,9 @@ public partial class EntityTypeTest
         public SpecialistStaff Tester { get; set; }
     }
 
-    private class SpecialistStaff { }
+    private class SpecialistStaff
+    {
+    }
 
     [ConditionalFact]
     public void All_properties_have_original_value_indexes_when_using_snapshot_change_tracking()
@@ -3901,7 +3903,9 @@ public partial class EntityTypeTest
         public string H { get; set; }
     }
 
-    private class D : C { }
+    private class D : C
+    {
+    }
 
     private class Level1
     {
@@ -3953,7 +3957,9 @@ public partial class EntityTypeTest
         public object this[string name]
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
 
         public ICollection<Order> Orders { get; set; }
@@ -3971,7 +3977,9 @@ public partial class EntityTypeTest
         public IEnumerable<SpecialOrder> DerivedOrders { get; set; }
     }
 
-    private class VerySpecialCustomer : SpecialCustomer { }
+    private class VerySpecialCustomer : SpecialCustomer
+    {
+    }
 
     private class Order : BaseType
     {
@@ -4008,7 +4016,9 @@ public partial class EntityTypeTest
         public SpecialCustomer DerivedCustomer { get; set; }
     }
 
-    private class VerySpecialOrder : SpecialOrder { }
+    private class VerySpecialOrder : SpecialOrder
+    {
+    }
 
     private class OrderProduct
     {

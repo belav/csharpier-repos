@@ -164,7 +164,9 @@ namespace SerializationTypes
         public Dictionary<StructNotSerializable, StructNotSerializable> WithStructs;
         public Dictionary<Nullable<short>, Nullable<bool>> WithNullables;
 
-        public DictionaryWithVariousKeyValueTypes() { }
+        public DictionaryWithVariousKeyValueTypes()
+        {
+        }
 
         public DictionaryWithVariousKeyValueTypes(bool init)
         {
@@ -306,7 +308,9 @@ namespace SerializationTypes
     {
         private List<T> _items = new List<T>();
 
-        public MyEnumerable() { }
+        public MyEnumerable()
+        {
+        }
 
         public MyEnumerable(params T[] values)
         {
@@ -355,7 +359,9 @@ namespace SerializationTypes
     {
         private List<object> _items = new List<object>();
 
-        public MyCollection() { }
+        public MyCollection()
+        {
+        }
 
         public MyCollection(params object[] values)
         {
@@ -419,7 +425,9 @@ namespace SerializationTypes
     {
         private List<object> _items = new List<object>();
 
-        public MyEnumerable() { }
+        public MyEnumerable()
+        {
+        }
 
         public MyEnumerable(params object[] values)
         {
@@ -539,7 +547,9 @@ namespace SerializationTypes
         [DataMember]
         public CircularLink RandomHangingLink;
 
-        public CircularLink() { }
+        public CircularLink()
+        {
+        }
 
         public CircularLink(bool init)
         {
@@ -558,9 +568,13 @@ namespace SerializationTypes
     [KnownType(typeof(CircularLink))]
     public class CircularLinkDerived : CircularLink
     {
-        public CircularLinkDerived() { }
+        public CircularLinkDerived()
+        {
+        }
 
-        public CircularLinkDerived(bool init) : base(init) { }
+        public CircularLinkDerived(bool init) : base(init)
+        {
+        }
     }
 
     [DataContract]
@@ -582,9 +596,13 @@ namespace SerializationTypes
         [DataMember]
         public string BaseData = string.Empty;
 
-        public SimpleBase() { }
+        public SimpleBase()
+        {
+        }
 
-        public SimpleBase(bool init) { }
+        public SimpleBase(bool init)
+        {
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -600,7 +618,9 @@ namespace SerializationTypes
         [DataMember]
         public K genericData2;
 
-        public GenericBase2() { }
+        public GenericBase2()
+        {
+        }
 
         public GenericBase2(bool init)
         {
@@ -615,9 +635,13 @@ namespace SerializationTypes
         [DataMember]
         public string DerivedData = string.Empty;
 
-        public SimpleBaseDerived() { }
+        public SimpleBaseDerived()
+        {
+        }
 
-        public SimpleBaseDerived(bool init) : base(init) { }
+        public SimpleBaseDerived(bool init) : base(init)
+        {
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -626,9 +650,13 @@ namespace SerializationTypes
         [DataMember]
         public string DerivedData = string.Empty;
 
-        public SimpleBaseDerived2() { }
+        public SimpleBaseDerived2()
+        {
+        }
 
-        public SimpleBaseDerived2(bool init) : base(init) { }
+        public SimpleBaseDerived2(bool init) : base(init)
+        {
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -639,7 +667,9 @@ namespace SerializationTypes
         [DataMember]
         public object GenericData;
 
-        public GenericContainer() { }
+        public GenericContainer()
+        {
+        }
 
         public GenericContainer(bool init)
         {
@@ -653,7 +683,9 @@ namespace SerializationTypes
         [DataMember]
         public object genericData;
 
-        public GenericBase() { }
+        public GenericBase()
+        {
+        }
 
         public GenericBase(bool init)
         {
@@ -671,7 +703,9 @@ namespace SerializationTypes
         [DataMember]
         public object Base2;
 
-        public SimpleBaseContainer() { }
+        public SimpleBaseContainer()
+        {
+        }
 
         public SimpleBaseContainer(bool init)
         {
@@ -689,7 +723,9 @@ namespace SerializationTypes
         public DuplicateTypeNamesTest.ns2.StructA StructA2;
         public DuplicateTypeNamesTest.ns2.EnumA EnumA2;
 
-        public WithDuplicateNames() { }
+        public WithDuplicateNames()
+        {
+        }
 
         public WithDuplicateNames(bool init)
         {
@@ -709,7 +745,9 @@ namespace SerializationTypes
     {
         public XElement e;
 
-        public WithXElement() { }
+        public WithXElement()
+        {
+        }
 
         public WithXElement(bool init)
         {
@@ -723,7 +761,9 @@ namespace SerializationTypes
     {
         public XmlElement xml;
 
-        public WithXmlElement() { }
+        public WithXmlElement()
+        {
+        }
 
         public WithXmlElement(bool init)
         {
@@ -736,7 +776,9 @@ namespace SerializationTypes
     {
         public XElement e1;
 
-        public WithXElementWithNestedXElement() { }
+        public WithXElementWithNestedXElement()
+        {
+        }
 
         public WithXElementWithNestedXElement(bool init)
         {
@@ -755,7 +797,9 @@ namespace SerializationTypes
     {
         public XElement[] a;
 
-        public WithArrayOfXElement() { }
+        public WithArrayOfXElement()
+        {
+        }
 
         public WithArrayOfXElement(bool init)
         {
@@ -774,7 +818,9 @@ namespace SerializationTypes
     {
         public List<XElement> list;
 
-        public WithListOfXElement() { }
+        public WithListOfXElement()
+        {
+        }
 
         public WithListOfXElement(bool init)
         {
@@ -945,7 +991,9 @@ namespace SerializationTypes
         [DataMember]
         public SimpleDC RefData;
 
-        public SimpleDCWithRef() { }
+        public SimpleDCWithRef()
+        {
+        }
 
         public SimpleDCWithRef(bool init)
         {
@@ -960,7 +1008,9 @@ namespace SerializationTypes
         [DataMember]
         public LinkedList<SimpleDCWithRef> Data;
 
-        public ContainsLinkedList() { }
+        public ContainsLinkedList()
+        {
+        }
 
         public ContainsLinkedList(bool init)
         {
@@ -992,7 +1042,9 @@ namespace SerializationTypes
     {
         private List<string> _data = new List<string>();
 
-        public SimpleCDC() { }
+        public SimpleCDC()
+        {
+        }
 
         public SimpleCDC(bool init)
         {
@@ -1071,7 +1123,9 @@ namespace SerializationTypes
     [CollectionDataContract]
     public class MyDerivedCollection : LinkedList<string>
     {
-        public MyDerivedCollection() { }
+        public MyDerivedCollection()
+        {
+        }
     }
 
     [DataContract]
@@ -1240,7 +1294,9 @@ namespace SerializationTypes
     [DataContract(Namespace = "SerializationTypes.GenericTypeWithPrivateSetter")]
     public class GenericTypeWithPrivateSetter<T>
     {
-        public GenericTypeWithPrivateSetter() { }
+        public GenericTypeWithPrivateSetter()
+        {
+        }
 
         public GenericTypeWithPrivateSetter(string value)
         {
@@ -1293,7 +1349,9 @@ namespace SerializationTypes
     [DataContract]
     public class ArticleBase : IArticle
     {
-        public ArticleBase() : this("Untitled", "Uncategorized") { }
+        public ArticleBase() : this("Untitled", "Uncategorized")
+        {
+        }
 
         public ArticleBase(string title, string category)
         {
@@ -1327,12 +1385,16 @@ namespace SerializationTypes
 
     public class NewsArticle : ArticleBase
     {
-        public NewsArticle() : base("Untitled News", "News") { }
+        public NewsArticle() : base("Untitled News", "News")
+        {
+        }
     }
 
     public class SummaryArticle : ArticleBase
     {
-        public SummaryArticle() : base("Untitled Summary", "Summary") { }
+        public SummaryArticle() : base("Untitled Summary", "Summary")
+        {
+        }
     }
 
     [DataContract]
@@ -1465,7 +1527,9 @@ namespace SerializationTypes
 
     public abstract class HighScoreManager<T> where T : HighScoreManager<T>.HighScoreBase
     {
-        public abstract class HighScoreBase { }
+        public abstract class HighScoreBase
+        {
+        }
     }
 
     public class HighScores : HighScoreManager<HighScores.BridgeGameHighScore>
@@ -1552,7 +1616,9 @@ namespace SerializationTypes
     }
 
     [DataContract]
-    public class DerivedTypeWithDataMemberInBaseType : BaseTypeWithDataMember { }
+    public class DerivedTypeWithDataMemberInBaseType : BaseTypeWithDataMember
+    {
+    }
 
     [DataContract]
     public class TypeAsEmbeddedDataMember
@@ -1566,7 +1632,9 @@ namespace SerializationTypes
         public PocoTypeAsEmbeddedDataMember EmbeddedDataMember { get; set; }
     }
 
-    public class PocoDerivedTypeWithDataMemberInBaseType : PocoBaseTypeWithDataMember { }
+    public class PocoDerivedTypeWithDataMemberInBaseType : PocoBaseTypeWithDataMember
+    {
+    }
 
     public class PocoTypeAsEmbeddedDataMember
     {
@@ -1575,7 +1643,9 @@ namespace SerializationTypes
 
     public class SpotlightDescription
     {
-        public SpotlightDescription() { }
+        public SpotlightDescription()
+        {
+        }
 
         public bool IsDynamic { get; set; }
         public string Value { get; set; }
@@ -1592,7 +1662,9 @@ namespace SerializationTypes
 
     public class SerializableSlide
     {
-        public SerializableSlide() { }
+        public SerializableSlide()
+        {
+        }
 
         public SpotlightDescription Description { get; set; }
         public string DisplayCondition { get; set; }
@@ -1624,7 +1696,9 @@ namespace SerializationTypes
 
     public class TypeWithPropertyWithoutDefaultCtor
     {
-        public TypeWithPropertyWithoutDefaultCtor() { }
+        public TypeWithPropertyWithoutDefaultCtor()
+        {
+        }
 
         public string Name { get; set; }
         public TypeWithNoDefaultCtor MemberWithInvalidDataContract { get; set; }
@@ -1669,7 +1743,9 @@ namespace SerializationTypes
     )]
     public sealed class CollectionDataContractWithCustomKeyName : Dictionary<int, int>
     {
-        public CollectionDataContractWithCustomKeyName() { }
+        public CollectionDataContractWithCustomKeyName()
+        {
+        }
     }
 
     // Dictionary<int, int> is already used above so there will be a conflict.
@@ -1682,7 +1758,9 @@ namespace SerializationTypes
     )]
     public sealed class CollectionDataContractWithCustomKeyNameDuplicate : Dictionary<int, int>
     {
-        public CollectionDataContractWithCustomKeyNameDuplicate() { }
+        public CollectionDataContractWithCustomKeyNameDuplicate()
+        {
+        }
     }
 
     public class CollectionWithoutDefaultConstructor : MyCollection<string>
@@ -1711,7 +1789,9 @@ namespace SerializationTypes
         }
     }
 
-    public class TypeMissingSerializationCodeBase { }
+    public class TypeMissingSerializationCodeBase
+    {
+    }
 
     public class TypeMissingSerializationCodeDerived : TypeMissingSerializationCodeBase
     {
@@ -1800,7 +1880,9 @@ namespace SerializationTypes
     {
         private List<T> _items = new List<T>();
 
-        public TypeImplementsGenericICollection() { }
+        public TypeImplementsGenericICollection()
+        {
+        }
 
         public TypeImplementsGenericICollection(params T[] values)
         {
@@ -2244,12 +2326,18 @@ public class TypeWithCompilerGeneratedAttributeButWithoutPublicSetter
 
 public class TestableDerivedException : System.Exception
 {
-    public TestableDerivedException() : base() { }
+    public TestableDerivedException() : base()
+    {
+    }
 
-    public TestableDerivedException(string message) : base(message) { }
+    public TestableDerivedException(string message) : base(message)
+    {
+    }
 
     public TestableDerivedException(string message, Exception innerException)
-        : base(message, innerException) { }
+        : base(message, innerException)
+    {
+    }
 
     public string TestProperty { get; set; }
 }
@@ -2512,7 +2600,9 @@ public class TypeWithCollectionInterfaceGetOnlyCollection
         }
     }
 
-    public TypeWithCollectionInterfaceGetOnlyCollection() { }
+    public TypeWithCollectionInterfaceGetOnlyCollection()
+    {
+    }
 
     public TypeWithCollectionInterfaceGetOnlyCollection(List<string> items)
     {
@@ -2538,7 +2628,9 @@ public class TypeWithEnumerableInterfaceGetOnlyCollection
         }
     }
 
-    public TypeWithEnumerableInterfaceGetOnlyCollection() { }
+    public TypeWithEnumerableInterfaceGetOnlyCollection()
+    {
+    }
 
     public TypeWithEnumerableInterfaceGetOnlyCollection(List<string> items)
     {
@@ -2547,13 +2639,19 @@ public class TypeWithEnumerableInterfaceGetOnlyCollection
 }
 
 [CollectionDataContract]
-public class RecursiveCollection : List<RecursiveCollection2> { }
+public class RecursiveCollection : List<RecursiveCollection2>
+{
+}
 
 [CollectionDataContract]
-public class RecursiveCollection2 : List<RecursiveCollection3> { }
+public class RecursiveCollection2 : List<RecursiveCollection3>
+{
+}
 
 [CollectionDataContract]
-public class RecursiveCollection3 : List<RecursiveCollection> { }
+public class RecursiveCollection3 : List<RecursiveCollection>
+{
+}
 
 [DataContract]
 public class TypeWithListOfReferenceChildren
@@ -2575,7 +2673,9 @@ public class TypeOfReferenceChild
 [DataContract]
 public sealed class TypeWithInternalDefaultConstructor
 {
-    internal TypeWithInternalDefaultConstructor() { }
+    internal TypeWithInternalDefaultConstructor()
+    {
+    }
 
     internal static TypeWithInternalDefaultConstructor CreateInstance()
     {
@@ -2588,7 +2688,9 @@ public sealed class TypeWithInternalDefaultConstructor
 
 public sealed class TypeWithInternalDefaultConstructorWithoutDataContractAttribute
 {
-    internal TypeWithInternalDefaultConstructorWithoutDataContractAttribute() { }
+    internal TypeWithInternalDefaultConstructorWithoutDataContractAttribute()
+    {
+    }
 
     internal static TypeWithInternalDefaultConstructorWithoutDataContractAttribute CreateInstance()
     {
@@ -2617,7 +2719,9 @@ public class TypeWithNonDefaultNamcespace
 }
 
 [CollectionDataContract(Namespace = "CollectionNamespace")]
-public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace> { }
+public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace>
+{
+}
 
 #region Type for Xml_ConstructorWithXmlAttributeOverrides
 
@@ -2840,9 +2944,13 @@ public class Line
 
 public class MyReader : XmlSerializationReader
 {
-    protected override void InitCallbacks() { }
+    protected override void InitCallbacks()
+    {
+    }
 
-    protected override void InitIDs() { }
+    protected override void InitIDs()
+    {
+    }
 
     public static byte[] HexToBytes(string value)
     {
@@ -2852,7 +2960,9 @@ public class MyReader : XmlSerializationReader
 
 public class MyWriter : XmlSerializationWriter
 {
-    protected override void InitCallbacks() { }
+    protected override void InitCallbacks()
+    {
+    }
 
     public static string BytesToHex(byte[] by)
     {
@@ -3202,7 +3312,9 @@ public class TestData
 [Serializable]
 public class MyISerializableType : ISerializable
 {
-    public MyISerializableType() { }
+    public MyISerializableType()
+    {
+    }
 
     private string _stringValue;
 
@@ -3423,7 +3535,9 @@ public class SampleTextWriter : IXmlTextWriterInitializer
     public Encoding Encoding;
     public Stream Stream;
 
-    public SampleTextWriter() { }
+    public SampleTextWriter()
+    {
+    }
 
     public void SetOutput(Stream stream, Encoding encoding, bool ownsStream)
     {
@@ -3432,7 +3546,9 @@ public class SampleTextWriter : IXmlTextWriterInitializer
     }
 }
 
-public class MycodeGenerator : XmlSerializationGeneratedCode { }
+public class MycodeGenerator : XmlSerializationGeneratedCode
+{
+}
 
 public class SoapEncodedTestType1
 {
@@ -3487,7 +3603,9 @@ public class MyCircularLink
     public MyCircularLink Link;
     public int IntValue;
 
-    public MyCircularLink() { }
+    public MyCircularLink()
+    {
+    }
 
     public MyCircularLink(bool init)
     {
@@ -3542,7 +3660,9 @@ public partial class GetDataRequestBody
     [System.Runtime.Serialization.DataMemberAttribute(Order = 0)]
     public int value;
 
-    public GetDataRequestBody() { }
+    public GetDataRequestBody()
+    {
+    }
 
     public GetDataRequestBody(int value)
     {
@@ -3556,7 +3676,9 @@ public partial class GetDataUsingDataContractRequestBody
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public CompositeTypeForXmlMembersMapping composite;
 
-    public GetDataUsingDataContractRequestBody() { }
+    public GetDataUsingDataContractRequestBody()
+    {
+    }
 
     public GetDataUsingDataContractRequestBody(CompositeTypeForXmlMembersMapping composite)
     {
@@ -3616,7 +3738,9 @@ public delegate void MyDelegate();
 [Serializable]
 public class TypeWithDelegate : ISerializable
 {
-    public TypeWithDelegate() { }
+    public TypeWithDelegate()
+    {
+    }
 
     public TypeWithDelegate(SerializationInfo info, StreamingContext context)
     {
@@ -3927,7 +4051,9 @@ public class ImplementDictionary : IDictionary
             Array.Copy(_items, index + 1, _items, index, _itemsInUse - index - 1);
             _itemsInUse--;
         }
-        else { }
+        else
+        {
+        }
     }
 
     public void Clear()
@@ -4155,7 +4281,9 @@ public class Group4WithXmlTextAttr
 [DataContract]
 public class DelegateClass
 {
-    public DelegateClass() { }
+    public DelegateClass()
+    {
+    }
 
     [DataMember]
     public object container;
@@ -4184,7 +4312,9 @@ public class People
         Name = "smith";
     }
 
-    public People() { }
+    public People()
+    {
+    }
 
     [DataMember]
     public int Age;
@@ -4228,7 +4358,9 @@ public class EmployeeC
 [DataContract]
 public class Manager : EmployeeC
 {
-    public Manager(string name) : base(name) { }
+    public Manager(string name) : base(name)
+    {
+    }
 
     [DataMember]
     public int age;
@@ -4242,9 +4374,13 @@ public class MyArgumentException : Exception, ISerializable
 {
     private string _paramName;
 
-    public MyArgumentException() : base() { }
+    public MyArgumentException() : base()
+    {
+    }
 
-    public MyArgumentException(string message) : base(message) { }
+    public MyArgumentException(string message) : base(message)
+    {
+    }
 
     public MyArgumentException(string message, string paramName) : base(message)
     {
@@ -4290,7 +4426,9 @@ public class SampleICollectionTExplicitWithoutDC : ICollection<DC>
 {
     private List<DC> _internalList = new List<DC>();
 
-    public SampleICollectionTExplicitWithoutDC() { }
+    public SampleICollectionTExplicitWithoutDC()
+    {
+    }
 
     public SampleICollectionTExplicitWithoutDC(bool init)
     {
@@ -4393,17 +4531,23 @@ public class NetNativeTestData
     public Func<object> Instantiate { get; set; }
 }
 
-public abstract class Invalid_Class_Base_Without_DataContract { }
+public abstract class Invalid_Class_Base_Without_DataContract
+{
+}
 
 // Invalid because it is a derived [DataContract] class whose base class is not
 [DataContract]
-public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract { }
+public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract
+{
+}
 
 // Invalid because its [KnownType] is an invalid type
 [KnownType(typeof(Invalid_Class_No_Parameterless_Ctor))]
 public class Invalid_Class_KnownType_Invalid_Type
 {
-    public Invalid_Class_KnownType_Invalid_Type() { }
+    public Invalid_Class_KnownType_Invalid_Type()
+    {
+    }
 }
 
 public class Invalid_Class_No_Parameterless_Ctor
@@ -4518,7 +4662,9 @@ public class TypeWithCollectionAndDateTimeOffset
 [KnownType(typeof(ushort))]
 [KnownType(typeof(Uri))]
 [CollectionDataContract]
-public class TypeWithPrimitiveKnownTypes : List<object> { }
+public class TypeWithPrimitiveKnownTypes : List<object>
+{
+}
 
 public enum TestEnum
 {
@@ -4527,7 +4673,9 @@ public enum TestEnum
     Both
 }
 
-public class EnumTestBase { }
+public class EnumTestBase
+{
+}
 
 public class EnumTestDerived : EnumTestBase
 {
@@ -4535,7 +4683,9 @@ public class EnumTestDerived : EnumTestBase
     public TestEnum Test { get; set; }
 }
 
-public class PrimiveAttributeTestBase { }
+public class PrimiveAttributeTestBase
+{
+}
 
 public class PrimiveAttributeTestDerived : PrimiveAttributeTestBase
 {

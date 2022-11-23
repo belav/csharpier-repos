@@ -541,14 +541,22 @@ namespace System.ComponentModel.Composition
         public const string TestContractName = "TestContractName";
     }
 
-    public class TestContractTypeWithoutName { }
+    public class TestContractTypeWithoutName
+    {
+    }
 
-    public class TypeDerivingFromTestContractType : TestContractType { }
+    public class TypeDerivingFromTestContractType : TestContractType
+    {
+    }
 
     [Export(typeof(TestContractType))]
-    public class ExportedTypeWithContractType { }
+    public class ExportedTypeWithContractType
+    {
+    }
 
-    public class TypeDerivingFromExportedTypeWithContractType : ExportedTypeWithContractType { }
+    public class TypeDerivingFromExportedTypeWithContractType : ExportedTypeWithContractType
+    {
+    }
 
     [Export("ImportDefaultFunctions")]
     public class ImportDefaultFunctions
@@ -632,7 +640,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Export("ActionWith0Args")]
-        public void MyAction0() { }
+        public void MyAction0()
+        {
+        }
 
         [Export("ActionWith1Arg")]
         public void MyAction1(int i1)
@@ -666,16 +676,24 @@ namespace System.ComponentModel.Composition
     }
 
     [Export]
-    public class CatalogComponentTest { }
+    public class CatalogComponentTest
+    {
+    }
 
     [Export]
     [PartNotDiscoverable]
-    public class CatalogComponentTestNonComponentPart { }
+    public class CatalogComponentTestNonComponentPart
+    {
+    }
 
-    public interface ICatalogComponentTest { }
+    public interface ICatalogComponentTest
+    {
+    }
 
     [Export(typeof(ICatalogComponentTest))]
-    public class CatalogComponentInterfaceTest1 : ICatalogComponentTest { }
+    public class CatalogComponentInterfaceTest1 : ICatalogComponentTest
+    {
+    }
 
     public class CatalogComponentInterfaceTest2
     {
@@ -764,16 +782,24 @@ namespace System.ComponentModel.Composition
     }
 
     [Export]
-    public class StaticExport { }
+    public class StaticExport
+    {
+    }
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class NonStaticExport { }
+    public class NonStaticExport
+    {
+    }
 
-    public interface IUnnamedExport { }
+    public interface IUnnamedExport
+    {
+    }
 
     [Export(typeof(IUnnamedExport))]
-    public class UnnamedExport : IUnnamedExport { }
+    public class UnnamedExport : IUnnamedExport
+    {
+    }
 
     public interface IExportableTest
     {
@@ -813,7 +839,9 @@ namespace System.ComponentModel.Composition
     [Export]
     [MetadataWithCollectionProperty("One", "two", "3")]
     [PartNotDiscoverable]
-    public class ComponentWithCollectionProperty { }
+    public class ComponentWithCollectionProperty
+    {
+    }
 
     public interface ICollectionOfStrings
     {
@@ -893,7 +921,9 @@ namespace System.ComponentModel.Composition
         public IEnumerable<Export> Exports;
     }
 
-    public class DerivedExport : Export { }
+    public class DerivedExport : Export
+    {
+    }
 
     public class DerivedExportImporter
     {
@@ -929,7 +959,9 @@ namespace System.ComponentModel.Composition
     }
 
     [Export]
-    public class MyExport { }
+    public class MyExport
+    {
+    }
 
     [Export]
     public class MySharedPartExport
@@ -962,7 +994,9 @@ namespace System.ComponentModel.Composition
     {
         public class GenericContract2
         {
-            public class GenericContract3<N> { }
+            public class GenericContract3<N>
+            {
+            }
         }
     }
 
@@ -970,27 +1004,36 @@ namespace System.ComponentModel.Composition
     {
         public class GenericContract5<A, B>
         {
-            public class GenericContract6<N, M> { }
+            public class GenericContract6<N, M>
+            {
+            }
         }
     }
 
     public class OuterClassWithGenericNested
     {
-        public class GenericNested<T> { }
+        public class GenericNested<T>
+        {
+        }
     }
 
     public class GenericContract7
         : GenericContract4<string, string>.GenericContract5<int, int>.GenericContract6<
             double,
             double
-        > { }
+        >
+    {
+    }
 
-    public class GenericContract8<T>
-        : GenericContract1<string>.GenericContract2.GenericContract3<T> { }
+    public class GenericContract8<T> : GenericContract1<string>.GenericContract2.GenericContract3<T>
+    {
+    }
 
     public class NestedParent
     {
-        public class NestedChild { }
+        public class NestedChild
+        {
+        }
     }
 
     public class ImporterOfExporterNotifyPropertyChanged
@@ -1124,7 +1167,9 @@ namespace System.ComponentModel.Composition
     }
 
     [InheritedExport]
-    public class ExportWithGenericParameter<T> { }
+    public class ExportWithGenericParameter<T>
+    {
+    }
 
     public class ExportWithGenericParameterOfInt
     {
@@ -1136,10 +1181,14 @@ namespace System.ComponentModel.Composition
     }
 
     [Export]
-    public static class StaticExportWithGenericParameter<T> { }
+    public static class StaticExportWithGenericParameter<T>
+    {
+    }
 
     [Export]
-    public class ExportWhichInheritsFromGeneric : ExportWithGenericParameter<string> { }
+    public class ExportWhichInheritsFromGeneric : ExportWithGenericParameter<string>
+    {
+    }
 
     [Export]
     public class ExportWithExceptionDuringConstruction
@@ -1165,73 +1214,103 @@ namespace System.ComponentModel.Composition
     [Export]
     public class ClassWithNoMarkedOrDefaultConstructor
     {
-        public ClassWithNoMarkedOrDefaultConstructor(int blah) { }
+        public ClassWithNoMarkedOrDefaultConstructor(int blah)
+        {
+        }
     }
 
     public class ClassWhichOnlyHasImportingConstructorWithOneArgument
     {
         [ImportingConstructor]
-        public ClassWhichOnlyHasImportingConstructorWithOneArgument(int blah) { }
+        public ClassWhichOnlyHasImportingConstructorWithOneArgument(int blah)
+        {
+        }
     }
 
     public class ClassWhichOnlyHasImportingConstructor
     {
         [ImportingConstructor]
-        public ClassWhichOnlyHasImportingConstructor() { }
+        public ClassWhichOnlyHasImportingConstructor()
+        {
+        }
     }
 
     public class ClassWhichOnlyHasDefaultConstructor
     {
-        public ClassWhichOnlyHasDefaultConstructor() { }
+        public ClassWhichOnlyHasDefaultConstructor()
+        {
+        }
     }
 
     [Export]
-    public class BaseExportForImportingConstructors { }
+    public class BaseExportForImportingConstructors
+    {
+    }
 
     public class ClassWithOnlyHasImportingConstructorButInherits
         : BaseExportForImportingConstructors
     {
         [ImportingConstructor]
-        public ClassWithOnlyHasImportingConstructorButInherits(int blah) { }
+        public ClassWithOnlyHasImportingConstructorButInherits(int blah)
+        {
+        }
     }
 
     public class ClassWithOnlyHasMultipleImportingConstructorButInherits
         : BaseExportForImportingConstructors
     {
         [ImportingConstructor]
-        public ClassWithOnlyHasMultipleImportingConstructorButInherits(int blah) { }
+        public ClassWithOnlyHasMultipleImportingConstructorButInherits(int blah)
+        {
+        }
 
         [ImportingConstructor]
-        public ClassWithOnlyHasMultipleImportingConstructorButInherits(string blah) { }
+        public ClassWithOnlyHasMultipleImportingConstructorButInherits(string blah)
+        {
+        }
     }
 
     [Export]
     public class ClassWithMultipleMarkedConstructors
     {
         [ImportingConstructor]
-        public ClassWithMultipleMarkedConstructors(int i) { }
+        public ClassWithMultipleMarkedConstructors(int i)
+        {
+        }
 
         [ImportingConstructor]
-        public ClassWithMultipleMarkedConstructors(string s) { }
+        public ClassWithMultipleMarkedConstructors(string s)
+        {
+        }
 
-        public ClassWithMultipleMarkedConstructors() { }
+        public ClassWithMultipleMarkedConstructors()
+        {
+        }
     }
 
     [Export]
     public class ClassWithOneMarkedAndOneDefaultConstructor
     {
         [ImportingConstructor]
-        public ClassWithOneMarkedAndOneDefaultConstructor(int i) { }
+        public ClassWithOneMarkedAndOneDefaultConstructor(int i)
+        {
+        }
 
-        public ClassWithOneMarkedAndOneDefaultConstructor() { }
+        public ClassWithOneMarkedAndOneDefaultConstructor()
+        {
+        }
     }
 
     [Export]
     public class ClassWithTwoZeroParameterConstructors
     {
-        public ClassWithTwoZeroParameterConstructors() { }
+        public ClassWithTwoZeroParameterConstructors()
+        {
+        }
 
-        static ClassWithTwoZeroParameterConstructors() { }
+        static ClassWithTwoZeroParameterConstructors()
+        {
+        }
     }
 
     [Export]
@@ -1273,7 +1352,9 @@ namespace System.ComponentModel.Composition
         public double Argument3 { get; set; }
         public string Argument4 { get; set; }
 
-        public ThisIsMyMetadataMetadataAttribute() { }
+        public ThisIsMyMetadataMetadataAttribute()
+        {
+        }
 
         public ThisIsMyMetadataMetadataAttribute(string Argument1, int Argument2)
         {
@@ -1284,7 +1365,9 @@ namespace System.ComponentModel.Composition
 
     [Export]
     [ThisIsMyMetadataMetadataAttribute("One", 2, Argument3 = 3.0)]
-    public class ExportedTypeWithConcreteMetadata { }
+    public class ExportedTypeWithConcreteMetadata
+    {
+    }
 
     public class Int32CollectionImporter
     {
@@ -1323,7 +1406,9 @@ namespace System.ComponentModel.Composition
 
     public class Int32Importer
     {
-        public Int32Importer() { }
+        public Int32Importer()
+        {
+        }
 
         [Import("Value", AllowRecomposition = true)]
         public int Value { get; set; }
@@ -1331,7 +1416,9 @@ namespace System.ComponentModel.Composition
 
     public class Int32ImporterInternal
     {
-        public Int32ImporterInternal() { }
+        public Int32ImporterInternal()
+        {
+        }
 
         [Import("Value")]
         public int Value { get; set; }

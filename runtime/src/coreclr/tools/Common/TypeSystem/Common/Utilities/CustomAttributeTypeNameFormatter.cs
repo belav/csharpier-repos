@@ -16,7 +16,9 @@ namespace Internal.TypeSystem
     {
         private readonly IAssemblyDesc _relativeHomeAssembly;
 
-        public CustomAttributeTypeNameFormatter() { }
+        public CustomAttributeTypeNameFormatter()
+        {
+        }
 
         public CustomAttributeTypeNameFormatter(IAssemblyDesc relativeHomeAssembly)
         {

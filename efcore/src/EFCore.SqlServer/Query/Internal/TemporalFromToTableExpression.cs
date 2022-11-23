@@ -23,7 +23,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public TemporalFromToTableExpression(ITableBase table, DateTime from, DateTime to)
-            : base(table, from, to) { }
+            : base(table, from, to)
+        {
+        }
 
         private TemporalFromToTableExpression(
             string name,
@@ -31,7 +33,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             string? alias,
             DateTime from,
             DateTime to
-        ) : base(name, schema, alias, from, to) { }
+        ) : base(name, schema, alias, from, to)
+        {
+        }
 
         /// <inheritdoc />
         public override TableExpressionBase Clone() =>

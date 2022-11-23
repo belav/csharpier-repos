@@ -2241,7 +2241,9 @@ class C
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
             public AnalyzerProviderNoWaitNoBlock(IGlobalOptionService globalOptions)
-                : base(new Analyzer(globalOptions)) { }
+                : base(new Analyzer(globalOptions))
+            {
+            }
         }
 
         [ExportIncrementalAnalyzerProvider(
@@ -2255,7 +2257,9 @@ class C
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
             public AnalyzerProviderWaitNoBlock(IGlobalOptionService globalOptions)
-                : base(new Analyzer(globalOptions, waitForCancellation: true)) { }
+                : base(new Analyzer(globalOptions, waitForCancellation: true))
+            {
+            }
         }
 
         [ExportIncrementalAnalyzerProvider(
@@ -2269,7 +2273,9 @@ class C
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
             public AnalyzerProviderNoWaitBlock(IGlobalOptionService globalOptions)
-                : base(new Analyzer(globalOptions, blockedRun: true)) { }
+                : base(new Analyzer(globalOptions, blockedRun: true))
+            {
+            }
         }
 
         [ExportIncrementalAnalyzerProvider(
@@ -2282,7 +2288,9 @@ class C
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public AnalyzerProvider2() : base(new Analyzer2()) { }
+            public AnalyzerProvider2() : base(new Analyzer2())
+            {
+            }
         }
 
         internal static class Metadata
@@ -2561,7 +2569,9 @@ class C
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
 
-            public void LogAnalyzerCountSummary() { }
+            public void LogAnalyzerCountSummary()
+            {
+            }
 
             public int Priority => 1;
 
@@ -2651,11 +2661,15 @@ class C
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
 
-            public void LogAnalyzerCountSummary() { }
+            public void LogAnalyzerCountSummary()
+            {
+            }
 
             public int Priority => 1;
 
-            public void Shutdown() { }
+            public void Shutdown()
+            {
+            }
 
             #endregion
         }

@@ -4534,7 +4534,9 @@ namespace System.Tests
                         string id = $"Etc/GMT{i:+0;-0}";
                         tz = TimeZoneInfo.FindSystemTimeZoneById(id);
                     }
-                    catch (TimeZoneNotFoundException) { }
+                    catch (TimeZoneNotFoundException)
+                    {
+                    }
 
                     if (tz != null)
                     {
@@ -4972,7 +4974,9 @@ namespace System.Tests
                 {
                     File.Delete(zoneFilePath);
                 }
-                catch { } // don't fail the test if we couldn't delete the file.
+                catch
+                {
+                } // don't fail the test if we couldn't delete the file.
             }
         }
 

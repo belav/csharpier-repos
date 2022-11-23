@@ -17,10 +17,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 {
     public abstract class CSharpResultProviderTestBase : ResultProviderTestBase
     {
-        public CSharpResultProviderTestBase() : this(new CSharpFormatter()) { }
+        public CSharpResultProviderTestBase() : this(new CSharpFormatter())
+        {
+        }
 
         private CSharpResultProviderTestBase(CSharpFormatter formatter)
-            : this(CreateDkmInspectionSession(formatter)) { }
+            : this(CreateDkmInspectionSession(formatter))
+        {
+        }
 
         internal CSharpResultProviderTestBase(
             DkmInspectionSession inspectionSession,
@@ -34,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         DkmEvaluationFlags.None,
                         radix: 10
                     )
-            ) { }
+            )
+        {
+        }
 
         internal static DkmInspectionContext CreateDkmInspectionContext(
             DkmEvaluationFlags evalFlags

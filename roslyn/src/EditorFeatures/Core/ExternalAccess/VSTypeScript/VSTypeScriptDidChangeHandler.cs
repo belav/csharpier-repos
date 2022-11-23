@@ -22,5 +22,7 @@ internal class VSTypeScriptDidChangeHandler : DidChangeHandler
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptDidChangeHandler() { }
+    public VSTypeScriptDidChangeHandler()
+    {
+    }
 }

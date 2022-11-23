@@ -28,7 +28,9 @@ class Program
             Console.WriteLine("failed " + action.Method.Name);
             returnCode--;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     private static void RunTestNoThrow(Action action)

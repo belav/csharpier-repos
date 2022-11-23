@@ -25,7 +25,9 @@ namespace System.Web.Mvc
 
         private string _inherits;
 
-        public ViewTypeParserFilter() { }
+        public ViewTypeParserFilter()
+        {
+        }
 
         public override bool AllowCode
         {

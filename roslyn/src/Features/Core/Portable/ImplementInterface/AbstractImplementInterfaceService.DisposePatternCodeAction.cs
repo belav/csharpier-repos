@@ -118,7 +118,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     abstractly,
                     onlyRemaining: !explicitly,
                     throughMember
-                ) { }
+                )
+            {
+            }
 
             public static ImplementInterfaceWithDisposePatternCodeAction CreateImplementWithDisposePatternCodeAction(
                 AbstractImplementInterfaceService service,

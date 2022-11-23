@@ -49,7 +49,9 @@ namespace System
             value = val;
         }
 
-        internal RuntimeTypeHandle(RuntimeType type) : this(type._impl.value) { }
+        internal RuntimeTypeHandle(RuntimeType type) : this(type._impl.value)
+        {
+        }
 
         private RuntimeTypeHandle(SerializationInfo info, StreamingContext context)
         {

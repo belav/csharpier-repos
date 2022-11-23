@@ -194,6 +194,8 @@ namespace WebMatrix.WebData
         public abstract DateTime GetPasswordChangedDate(string userName);
         public abstract DateTime GetLastPasswordFailureDate(string userName);
 
-        internal virtual void VerifyInitialized() { }
+        internal virtual void VerifyInitialized()
+        {
+        }
     }
 }

@@ -15,10 +15,14 @@ public struct AA
             args[0] = "";
             while (flag)
             {
-                while (flag) { }
+                while (flag)
+                {
+                }
                 throw new Exception();
             }
-            while (flag) { }
+            while (flag)
+            {
+            }
         }
         return 100;
     }

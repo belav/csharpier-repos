@@ -12,13 +12,19 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9AttributeObject() : base() { }
+        public Pkcs9AttributeObject() : base()
+        {
+        }
 
         public Pkcs9AttributeObject(string oid, byte[] encodedData)
-            : this(new AsnEncodedData(oid, encodedData)) { }
+            : this(new AsnEncodedData(oid, encodedData))
+        {
+        }
 
         public Pkcs9AttributeObject(Oid oid, byte[] encodedData)
-            : this(new AsnEncodedData(oid, encodedData)) { }
+            : this(new AsnEncodedData(oid, encodedData))
+        {
+        }
 
         public Pkcs9AttributeObject(AsnEncodedData asnEncodedData) : base(asnEncodedData)
         {
@@ -46,7 +52,8 @@ namespace System.Security.Cryptography.Pkcs
 #else
             : this(new AsnEncodedData(oid, encodedData.ToArray()))
 #endif
-        { }
+        {
+        }
 
         internal Pkcs9AttributeObject(Oid oid)
         {

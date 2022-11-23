@@ -53,7 +53,9 @@ public static class XmlSerializerTests
 
     public class TwoClasses
     {
-        public TwoClasses() { }
+        public TwoClasses()
+        {
+        }
 
         [XmlElement("first")]
         public FirstClass First;

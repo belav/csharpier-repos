@@ -188,7 +188,9 @@ namespace HttpStress
                     {
                         File.Delete(filename);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 loggerConfiguration = loggerConfiguration

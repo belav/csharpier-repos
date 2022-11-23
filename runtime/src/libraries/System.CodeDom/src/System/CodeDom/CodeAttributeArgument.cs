@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _name;
 
-        public CodeAttributeArgument() { }
+        public CodeAttributeArgument()
+        {
+        }
 
         public CodeAttributeArgument(CodeExpression value)
         {

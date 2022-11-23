@@ -26,5 +26,7 @@ public class FoldingExtendsInt32On64BitHostsTest
         return -1;
     }
 
-    private static void Use(int a) { }
+    private static void Use(int a)
+    {
+    }
 }

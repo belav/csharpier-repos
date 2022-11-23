@@ -66,7 +66,9 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.NotEqual(IntPtr.Zero, p1);
                 Marshal.FreeCoTaskMem(p1);
             }
-            catch (OutOfMemoryException) { }
+            catch (OutOfMemoryException)
+            {
+            }
 
             IntPtr p2 = Marshal.AllocCoTaskMem(1);
             try
@@ -74,7 +76,9 @@ namespace System.Runtime.InteropServices.Tests
                 p2 = Marshal.ReAllocCoTaskMem(p2, -1);
                 Assert.NotEqual(IntPtr.Zero, p2);
             }
-            catch (OutOfMemoryException) { }
+            catch (OutOfMemoryException)
+            {
+            }
             Marshal.FreeCoTaskMem(p2);
         }
     }

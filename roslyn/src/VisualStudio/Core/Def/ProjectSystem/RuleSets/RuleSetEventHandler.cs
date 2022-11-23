@@ -275,7 +275,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
             uint[] rgFlags,
             VSQUERYREMOVEFILERESULTS[] pSummaryResult,
             VSQUERYREMOVEFILERESULTS[] rgResults
-        ) { }
+        )
+        {
+        }
 
         void IVsTrackProjectDocumentsEvents4.OnQueryRemoveDirectoriesEx(
             IVsProject pProject,
@@ -284,7 +286,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
             uint[] rgFlags,
             VSQUERYREMOVEDIRECTORYRESULTS[] pSummaryResult,
             VSQUERYREMOVEDIRECTORYRESULTS[] rgResults
-        ) { }
+        )
+        {
+        }
 
         void IVsTrackProjectDocumentsEvents4.OnAfterRemoveFilesEx(
             int cProjects,
@@ -374,7 +378,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
             int[] rgFirstIndices,
             string[] rgpszMkDocuments,
             uint[] rgFlags
-        ) { }
+        )
+        {
+        }
 
         private void UpdateCodeAnalysisRuleSetPropertiesInAllProjects(string newFileFullPath)
         {

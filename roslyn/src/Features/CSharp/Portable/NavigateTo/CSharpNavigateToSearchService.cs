@@ -14,6 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigateTo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpNavigateToSearchService() { }
+        public CSharpNavigateToSearchService()
+        {
+        }
     }
 }

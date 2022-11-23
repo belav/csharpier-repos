@@ -41,7 +41,9 @@ namespace Microsoft.Extensions.FileProviders.Physical
                 new DirectoryInfoWrapper(new DirectoryInfo(root)),
                 pattern,
                 Physical.Clock.Instance
-            ) { }
+            )
+        {
+        }
 
         // Internal for unit testing.
         internal PollingWildCardChangeToken(

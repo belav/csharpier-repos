@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
             public SettingsEntriesSnapshot(
                 ImmutableArray<FormattingSetting> data,
                 int currentVersionNumber
-            ) : base(data, currentVersionNumber) { }
+            ) : base(data, currentVersionNumber)
+            {
+            }
 
             protected override bool TryGetValue(
                 FormattingSetting result,

@@ -38,7 +38,9 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     Creates a new set of options with everything set to default values.
     /// </summary>
-    protected RelationalOptionsExtension() { }
+    protected RelationalOptionsExtension()
+    {
+    }
 
     /// <summary>
     ///     Called by a derived class constructor when implementing the <see cref="Clone" /> method.
@@ -370,7 +372,9 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     If options are invalid, then an exception should be thrown.
     /// </summary>
     /// <param name="options">The options being validated.</param>
-    public virtual void Validate(IDbContextOptions options) { }
+    public virtual void Validate(IDbContextOptions options)
+    {
+    }
 
     /// <summary>
     ///     Adds default <see cref="WarningBehavior" /> for relational events.
@@ -414,7 +418,8 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
         /// </summary>
         /// <param name="extension">The extension.</param>
         protected RelationalExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
-        { }
+        {
+        }
 
         /// <summary>
         ///     The extension for which this instance contains metadata.

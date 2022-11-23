@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
         : CodeRefactoringProvider where TLocalDeclaration : SyntaxNode
     {
         [ImportingConstructor]
-        public AbstractMoveDeclarationNearReferenceCodeRefactoringProvider() { }
+        public AbstractMoveDeclarationNearReferenceCodeRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

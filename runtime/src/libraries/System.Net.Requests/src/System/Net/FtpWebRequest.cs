@@ -1798,7 +1798,9 @@ namespace System.Net
     //
     internal sealed class FtpWebRequestCreator : IWebRequestCreate
     {
-        internal FtpWebRequestCreator() { }
+        internal FtpWebRequestCreator()
+        {
+        }
 
         public WebRequest Create(Uri uri)
         {

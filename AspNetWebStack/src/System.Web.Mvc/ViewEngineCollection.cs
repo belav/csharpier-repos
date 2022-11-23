@@ -13,9 +13,13 @@ namespace System.Web.Mvc
         private IViewEngine[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public ViewEngineCollection() { }
+        public ViewEngineCollection()
+        {
+        }
 
-        public ViewEngineCollection(IList<IViewEngine> list) : base(list) { }
+        public ViewEngineCollection(IList<IViewEngine> list) : base(list)
+        {
+        }
 
         internal ViewEngineCollection(
             IList<IViewEngine> list,

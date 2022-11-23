@@ -120,7 +120,9 @@ End Module
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicAddMissingReference(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

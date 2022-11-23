@@ -20,7 +20,9 @@ public class TypeOne
         {
             z = 10;
         }
-        catch (Exception e) { }
+        catch (Exception e)
+        {
+        }
     }
 }
 
@@ -37,13 +39,17 @@ public abstract class TypeTwo
         {
             new TypeOne();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         try
         {
             new TypeOne();
         }
-        finally { }
+        finally
+        {
+        }
     }
 
     [DllImport("bla.dll")]
@@ -73,7 +79,9 @@ public abstract class AbsClass
             z = typeof(int).GetHashCode();
             z = typeof(int).GetHashCode();
         }
-        finally { }
+        finally
+        {
+        }
     }
 
     public abstract void AbsBla();
@@ -87,19 +95,29 @@ public static class InternalCall
 
 public class ClassWithCCtor
 {
-    static ClassWithCCtor() { }
+    static ClassWithCCtor()
+    {
+    }
 }
 
 public class MethodWithLostsOfParams
 {
-    static void Foo(int a, int b, int c) { }
+    static void Foo(int a, int b, int c)
+    {
+    }
 
-    static void Foo2(int a, int b, int c) { }
+    static void Foo2(int a, int b, int c)
+    {
+    }
 
-    static void Foo3(int a, int b, int c) { }
+    static void Foo3(int a, int b, int c)
+    {
+    }
 }
 
 public class LastClass
 {
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

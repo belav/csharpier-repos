@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis
         }
 
         public CustomAttributesBag()
-            : this(CustomAttributeBagCompletionPart.None, default(ImmutableArray<T>)) { }
+            : this(CustomAttributeBagCompletionPart.None, default(ImmutableArray<T>))
+        {
+        }
 
         /// <summary>
         /// Returns a non-sealed custom attribute bag with null initialized <see cref="_earlyDecodedWellKnownAttributeData"/>, null initialized <see cref="_decodedWellKnownAttributeData"/> and uninitialized <see cref="_customAttributes"/>.

@@ -176,7 +176,9 @@ namespace System.Runtime.CompilerServices
             Target = GetUpdateDelegate();
         }
 
-        private CallSite() : base(null) { }
+        private CallSite() : base(null)
+        {
+        }
 
         internal static CallSite<T> CreateMatchMaker()
         {

@@ -10,7 +10,9 @@ namespace System.Net.NetworkInformation
     /// </summary>
     public abstract partial class IPv4InterfaceStatistics
     {
-        protected IPv4InterfaceStatistics() { }
+        protected IPv4InterfaceStatistics()
+        {
+        }
 
         public abstract long BytesReceived { get; }
         public abstract long BytesSent { get; }

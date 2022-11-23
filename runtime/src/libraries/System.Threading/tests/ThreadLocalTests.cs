@@ -497,7 +497,9 @@ namespace System.Threading.Tests
                             {
                                 IList<int> values = tl.Values;
                             }
-                            catch (ObjectDisposedException) { }
+                            catch (ObjectDisposedException)
+                            {
+                            }
                             catch
                             {
                                 gotUnexpectedException.Set();

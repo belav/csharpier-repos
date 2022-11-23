@@ -3,11 +3,17 @@
 
 using System;
 
-public class Base { }
+public class Base
+{
+}
 
-public class Sub : Base { }
+public class Sub : Base
+{
+}
 
-public struct GVal<T> { }
+public struct GVal<T>
+{
+}
 
 public class TestClass
 {

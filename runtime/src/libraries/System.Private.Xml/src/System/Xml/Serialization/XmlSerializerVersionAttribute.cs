@@ -13,7 +13,9 @@ namespace System.Xml.Serialization
         private string? _ns;
         private Type? _type;
 
-        public XmlSerializerVersionAttribute() { }
+        public XmlSerializerVersionAttribute()
+        {
+        }
 
         public XmlSerializerVersionAttribute(Type? type)
         {

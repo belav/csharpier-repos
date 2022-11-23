@@ -1869,7 +1869,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         {
             private Dictionary<LabelSymbol, GeneratedLabelSymbol> _labelClones;
 
-            private FinallyCloner() { }
+            private FinallyCloner()
+            {
+            }
 
             /// <summary>
             /// The argument is BoundTryStatement (and not a BoundBlock) specifically

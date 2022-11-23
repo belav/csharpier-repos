@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class LongKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public LongKeywordRecommender() : base(SyntaxKind.LongKeyword) { }
+        public LongKeywordRecommender() : base(SyntaxKind.LongKeyword)
+        {
+        }
 
         protected override bool IsValidContextWorker(
             int position,

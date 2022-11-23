@@ -27,4 +27,6 @@ struct MyStruct<T> : IFoo
     Type IFoo.GetTheType() => typeof(T);
 }
 
-class Atom { }
+class Atom
+{
+}

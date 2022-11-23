@@ -128,9 +128,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             finder.CancelSearch();
         }
 
-        public void FindReferences() { }
+        public void FindReferences()
+        {
+        }
 
-        public void ItemSelected() { }
+        public void ItemSelected()
+        {
+        }
 
         public void NavigateTo()
         {

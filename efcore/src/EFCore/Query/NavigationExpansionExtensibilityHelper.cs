@@ -35,7 +35,9 @@ public class NavigationExpansionExtensibilityHelper : INavigationExpansionExtens
     public virtual void ValidateQueryRootCreation(
         IEntityType entityType,
         EntityQueryRootExpression? source
-    ) { }
+    )
+    {
+    }
 
     /// <inheritdoc />
     public virtual bool AreQueryRootsCompatible(

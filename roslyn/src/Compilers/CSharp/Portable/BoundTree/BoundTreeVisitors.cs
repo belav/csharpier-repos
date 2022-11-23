@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract partial class BoundTreeVisitor<A, R>
     {
-        protected BoundTreeVisitor() { }
+        protected BoundTreeVisitor()
+        {
+        }
 
         public virtual R Visit(BoundNode node, A arg)
         {
@@ -149,7 +151,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal abstract partial class BoundTreeVisitor
     {
-        protected BoundTreeVisitor() { }
+        protected BoundTreeVisitor()
+        {
+        }
 
         [DebuggerHidden]
         public virtual BoundNode Visit(BoundNode node)

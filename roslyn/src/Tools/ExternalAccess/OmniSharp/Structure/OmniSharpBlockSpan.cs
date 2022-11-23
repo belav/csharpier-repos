@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
                 bannerText,
                 autoCollapse,
                 isDefaultCollapsed
-            ) { }
+            )
+        {
+        }
 
         public OmniSharpBlockSpan(
             string type,

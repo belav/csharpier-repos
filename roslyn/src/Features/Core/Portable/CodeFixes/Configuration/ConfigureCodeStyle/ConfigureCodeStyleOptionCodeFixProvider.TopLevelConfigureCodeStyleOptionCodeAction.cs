@@ -22,12 +22,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 : base(
                     nestedActions,
                     string.Format(FeaturesResources.Configure_0_code_style, diagnostic.Id)
-                ) { }
+                )
+            {
+            }
 
             public TopLevelConfigureCodeStyleOptionCodeAction(
                 string optionName,
                 ImmutableArray<CodeAction> nestedActions
-            ) : base(nestedActions, optionName) { }
+            ) : base(nestedActions, optionName)
+            {
+            }
         }
     }
 }

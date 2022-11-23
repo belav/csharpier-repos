@@ -160,7 +160,9 @@ namespace System.IO.Ports.Tests
                 {
                     com1.BaseStream.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 TCSupport.WaitForTaskCompletion(t);
 
@@ -333,7 +335,9 @@ namespace System.IO.Ports.Tests
                     "Err_6941814ahbpa!!!: Read did not throw Timeout Exception when it timed out for the first time"
                 );
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
@@ -345,7 +349,9 @@ namespace System.IO.Ports.Tests
                     com.BaseStream.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize);
                     Fail("Err_17087ahps!!!: Read did not reuturn 0 when it timed out");
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 timer.Stop();
                 actualTime += (int)timer.ElapsedMilliseconds;

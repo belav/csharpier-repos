@@ -1962,7 +1962,9 @@ class Tests
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static void dummy() { }
+    static void dummy()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static int div_zero_llvm_inner(int i)
@@ -2272,7 +2274,9 @@ class Tests
 
         try
         {
-            foreach (double d in a) { }
+            foreach (double d in a)
+            {
+            }
             return 1;
         }
         catch (InvalidCastException e)
@@ -2853,7 +2857,9 @@ class Tests
         int exception = 0;
         checked
         {
-            try { }
+            try
+            {
+            }
             catch
             {
                 exception = 1;
@@ -3048,7 +3054,9 @@ class Tests
                 k = 5;
             }
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         if (k != 5)
             return 7;
 
@@ -3125,7 +3133,9 @@ class Tests
                 {
                     throw new DivideByZeroException();
                 }
-                catch (Exception foo) { }
+                catch (Exception foo)
+                {
+                }
 
                 throw;
             }
@@ -3139,9 +3149,13 @@ class Tests
         return 1;
     }
 
-    interface IFace { }
+    interface IFace
+    {
+    }
 
-    class Face : IFace { }
+    class Face : IFace
+    {
+    }
 
     public static int test_1_array_mismatch_2()
     {
@@ -3257,7 +3271,9 @@ class Tests
                 get_sp(j);
                 throw new Exception();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
         return (addr[0].ToInt64() - addr[100].ToInt64() < 100) ? 0 : 1;
     }
@@ -3271,7 +3287,9 @@ class Tests
         {
             throw new Exception();
         }
-        catch { }
+        catch
+        {
+        }
         return 0;
     }
 
@@ -3375,7 +3393,9 @@ class Tests
                 i++;
             }
         }
-        catch { }
+        catch
+        {
+        }
 
         return (i == 1) ? 0 : 1;
     }
@@ -3387,21 +3407,31 @@ class Tests
 
         object o = new object();
 
-        try { }
+        try
+        {
+        }
         catch (Exception ExCon)
         {
             if (o != null)
                 Reconect = true;
 
-            try { }
-            catch (Exception Last) { }
+            try
+            {
+            }
+            catch (Exception Last)
+            {
+            }
         }
         finally
         {
             if (Reconect == true)
             {
-                try { }
-                catch (Exception ex) { }
+                try
+                {
+                }
+                catch (Exception ex)
+                {
+                }
             }
         }
 
@@ -3449,7 +3479,9 @@ class Tests
                 .Invoke(null, new object[] { });
 #endif
         }
-        catch (TargetInvocationException) { }
+        catch (TargetInvocationException)
+        {
+        }
         return 0;
     }
 
@@ -3475,9 +3507,13 @@ class Tests
     {
         try
         {
-            lock (null) { }
+            lock (null)
+            {
+            }
         }
-        catch { }
+        catch
+        {
+        }
     }
 
     private static void do_raise()
@@ -3549,7 +3585,9 @@ class Tests
         {
             value = c.Method();
         }
-        catch { }
+        catch
+        {
+        }
         return (int)value;
     }
 
@@ -3558,7 +3596,9 @@ class Tests
         public object AnObj;
     }
 
-    public static void DoSomething(ref object o) { }
+    public static void DoSomething(ref object o)
+    {
+    }
 
     public static int test_0_ldflda_null()
     {
@@ -3617,7 +3657,9 @@ class Tests
         {
             try_clause_in_finally_clause_regalloc_inner(out res);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return res;
     }
 
@@ -3660,7 +3702,9 @@ class Tests
                 else
                     res = 1;
             }
-            catch (DivideByZeroException) { }
+            catch (DivideByZeroException)
+            {
+            }
         }
     }
 
@@ -3716,7 +3760,9 @@ class Tests
         {
             regress_30472(Int32.MaxValue - 1, 2);
         }
-        catch (Exception ex) { }
+        catch (Exception ex)
+        {
+        }
         return finally_called ? 0 : 1;
     }
 
@@ -3730,14 +3776,18 @@ class Tests
             byte b = arr[-1];
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
         try
         {
             byte[] arr = new byte[array_len_1];
             arr[-1] = 1;
             return 2;
         }
-        catch { }
+        catch
+        {
+        }
         return 0;
     }
 
@@ -3749,7 +3799,9 @@ class Tests
             char c = s[-1];
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
         return 0;
     }
 
@@ -3862,7 +3914,9 @@ class Tests
         {
             throw new Exception();
         }
-        catch (Exception) when (ExceptionFilter(default(byte), default(FooStruct))) { }
+        catch (Exception) when (ExceptionFilter(default(byte), default(FooStruct)))
+        {
+        }
         return 0;
     }
 
@@ -3960,7 +4014,9 @@ class Tests
                 }
             );
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return finally_deopt_res;
     }
 
@@ -3977,7 +4033,9 @@ class Tests
         {
             throw new Exception();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     static int finally_deopt_res;
@@ -4030,5 +4088,7 @@ class Tests
 }
 
 #if !__MOBILE__
-class ExceptionTests : Tests { }
+class ExceptionTests : Tests
+{
+}
 #endif

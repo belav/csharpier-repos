@@ -11,7 +11,9 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {
-    internal interface IDummyLanguageService : ILanguageService { }
+    internal interface IDummyLanguageService : ILanguageService
+    {
+    }
 
     [
         ExportLanguageService(typeof(IDummyLanguageService), LanguageName, ServiceLayer.Test),
@@ -24,7 +26,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DummyLanguageService() { }
+        public DummyLanguageService()
+        {
+        }
 
         // do nothing
     }

@@ -101,14 +101,32 @@ internal class CommandLineApplication
         string template,
         string description,
         CommandOptionType optionType
-    ) => Option(template, description, optionType, _ => { }, inherited: false);
+    ) =>
+        Option(
+            template,
+            description,
+            optionType,
+            _ =>
+            {
+            },
+            inherited: false
+        );
 
     public CommandOption Option(
         string template,
         string description,
         CommandOptionType optionType,
         bool inherited
-    ) => Option(template, description, optionType, _ => { }, inherited);
+    ) =>
+        Option(
+            template,
+            description,
+            optionType,
+            _ =>
+            {
+            },
+            inherited
+        );
 
     public CommandOption Option(
         string template,
@@ -137,7 +155,14 @@ internal class CommandLineApplication
 
     public CommandArgument Argument(string name, string description, bool multipleValues = false)
     {
-        return Argument(name, description, _ => { }, multipleValues);
+        return Argument(
+            name,
+            description,
+            _ =>
+            {
+            },
+            multipleValues
+        );
     }
 
     public CommandArgument Argument(

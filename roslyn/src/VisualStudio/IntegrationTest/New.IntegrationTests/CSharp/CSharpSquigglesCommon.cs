@@ -12,7 +12,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     public abstract class CSharpSquigglesCommon : AbstractEditorTest
     {
         protected CSharpSquigglesCommon(string projectTemplate)
-            : base(nameof(CSharpSquigglesCommon), projectTemplate) { }
+            : base(nameof(CSharpSquigglesCommon), projectTemplate)
+        {
+        }
 
         protected abstract bool SupportsGlobalUsings { get; }
 

@@ -50,7 +50,9 @@ namespace System.Runtime.Tests
                 {
                     File.Delete(profileFile);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

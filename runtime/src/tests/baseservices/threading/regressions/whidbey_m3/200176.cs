@@ -27,6 +27,8 @@ public class Stop
         {
             throw new Exception();
         }
-        catch { }
+        catch
+        {
+        }
     }
 }

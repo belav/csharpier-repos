@@ -11,16 +11,24 @@ namespace System.Configuration
     )]
     public class SettingsPropertyIsReadOnlyException : Exception
     {
-        public SettingsPropertyIsReadOnlyException(string message) : base(message) { }
+        public SettingsPropertyIsReadOnlyException(string message) : base(message)
+        {
+        }
 
         public SettingsPropertyIsReadOnlyException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected SettingsPropertyIsReadOnlyException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
 
-        public SettingsPropertyIsReadOnlyException() { }
+        public SettingsPropertyIsReadOnlyException()
+        {
+        }
     }
 }

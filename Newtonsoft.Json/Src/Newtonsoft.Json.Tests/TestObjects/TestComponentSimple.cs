@@ -31,6 +31,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [JsonProperty]
         public int MyProperty { get; set; }
 
-        public TestComponentSimple() { }
+        public TestComponentSimple()
+        {
+        }
     }
 }

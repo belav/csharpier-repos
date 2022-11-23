@@ -14,7 +14,9 @@ public abstract class MigrationsModelDifferTestBase
         bool skipSourceConventions = false
     ) =>
         Execute(
-            m => { },
+            m =>
+            {
+            },
             buildSourceAction,
             buildTargetAction,
             assertAction,

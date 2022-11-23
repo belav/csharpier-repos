@@ -12,9 +12,13 @@ namespace System.ServiceModel.Syndication
     {
         private ExtensibleSyndicationObject _extensions;
 
-        public SyndicationPerson() : this((string)null) { }
+        public SyndicationPerson() : this((string)null)
+        {
+        }
 
-        public SyndicationPerson(string email) : this(email, null, null) { }
+        public SyndicationPerson(string email) : this(email, null, null)
+        {
+        }
 
         public SyndicationPerson(string email, string name, string uri)
         {

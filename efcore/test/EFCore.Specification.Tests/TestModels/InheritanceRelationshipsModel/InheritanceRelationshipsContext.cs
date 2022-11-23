@@ -7,7 +7,9 @@ public class InheritanceRelationshipsContext : PoolableDbContext
 {
     public static readonly string StoreName = "InheritanceRelationships";
 
-    public InheritanceRelationshipsContext(DbContextOptions options) : base(options) { }
+    public InheritanceRelationshipsContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public DbSet<BaseCollectionOnBase> BaseCollectionsOnBase { get; set; }
     public DbSet<BaseCollectionOnDerived> BaseCollectionsOnDerived { get; set; }

@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class OutKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public OutKeywordRecommender() : base(SyntaxKind.OutKeyword) { }
+        public OutKeywordRecommender() : base(SyntaxKind.OutKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

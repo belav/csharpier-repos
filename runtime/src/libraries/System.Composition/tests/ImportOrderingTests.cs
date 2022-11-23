@@ -18,22 +18,34 @@ namespace System.Composition.UnitTests
 {
     public class ImportOrderingTests
     {
-        public interface IItem { }
+        public interface IItem
+        {
+        }
 
         [Shared, Export(typeof(IItem)), ExportMetadata("Order", 1)]
-        public class Item1 : IItem { }
+        public class Item1 : IItem
+        {
+        }
 
         [Shared, Export(typeof(IItem)), ExportMetadata("Order", 4)]
-        public class Item4 : IItem { }
+        public class Item4 : IItem
+        {
+        }
 
         [Shared, Export(typeof(IItem)), ExportMetadata("Order", 2)]
-        public class Item2 : IItem { }
+        public class Item2 : IItem
+        {
+        }
 
         [Shared, Export(typeof(IItem)), ExportMetadata("Order", 3)]
-        public class Item3 : IItem { }
+        public class Item3 : IItem
+        {
+        }
 
         [Export(typeof(IItem))]
-        public class ItemWithoutOrder : IItem { }
+        public class ItemWithoutOrder : IItem
+        {
+        }
 
         [Export]
         public class HasImportedItems

@@ -9,7 +9,9 @@ namespace System.Reflection
     {
         public static readonly Missing Value = new Missing();
 
-        private Missing() { }
+        private Missing()
+        {
+        }
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -11,7 +11,9 @@ namespace System.Drawing.Printing
     /// </summary>
     public sealed class PrinterUnitConvert
     {
-        private PrinterUnitConvert() { }
+        private PrinterUnitConvert()
+        {
+        }
 
         /// <summary>
         /// Converts the value, in fromUnit units, to toUnit units.

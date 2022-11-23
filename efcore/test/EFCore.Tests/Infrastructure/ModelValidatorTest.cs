@@ -88,7 +88,9 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
 
     public class CustomValueComparer<T> : ValueComparer<T> // Doesn't implement IComparer
     {
-        public CustomValueComparer() : base(false) { }
+        public CustomValueComparer() : base(false)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -138,7 +140,9 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
         public NotComparable Foo { get; set; }
     }
 
-    protected struct NotComparable { }
+    protected struct NotComparable
+    {
+    }
 
     [ConditionalFact]
     public virtual void Detects_custom_converter_for_collection_type_without_comparer()

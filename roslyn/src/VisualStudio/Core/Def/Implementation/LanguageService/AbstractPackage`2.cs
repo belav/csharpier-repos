@@ -33,7 +33,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         private VisualStudioSymbolSearchService _symbolSearchService;
         private IComponentModel _componentModel_doNotAccessDirectly;
 
-        protected AbstractPackage() { }
+        protected AbstractPackage()
+        {
+        }
 
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,

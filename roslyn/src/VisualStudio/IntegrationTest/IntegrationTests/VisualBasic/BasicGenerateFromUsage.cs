@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGenerateFromUsage(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGenerateFromUsage)) { }
+            : base(instanceFactory, nameof(BasicGenerateFromUsage))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateLocal)]
         public void GenerateLocal()

@@ -1391,9 +1391,13 @@ namespace System.Text.Json.Serialization.Tests
             [JsonExtensionData]
             public Dictionary<string, object?>? ExtensionData { get; set; }
 
-            public class DerivedClass1 : PolymorphicClass_NoTypeDiscriminators { }
+            public class DerivedClass1 : PolymorphicClass_NoTypeDiscriminators
+            {
+            }
 
-            public class DerivedClass2 : PolymorphicClass_NoTypeDiscriminators { }
+            public class DerivedClass2 : PolymorphicClass_NoTypeDiscriminators
+            {
+            }
         }
 
         [Fact]
@@ -1436,7 +1440,9 @@ namespace System.Text.Json.Serialization.Tests
             [JsonDerivedType(typeof(DerivedClass.DerivedClass2), "derivedClass")]
             public class DerivedClass : PolymorphicClass_WithDerivedPolymorphicClass
             {
-                public class DerivedClass2 : DerivedClass { }
+                public class DerivedClass2 : DerivedClass
+                {
+                }
             }
         }
 
@@ -1665,7 +1671,9 @@ namespace System.Text.Json.Serialization.Tests
 
             public class DerivedClass : PolymorphicClassWithConstructor
             {
-                public DerivedClass() : base(0) { }
+                public DerivedClass() : base(0)
+                {
+                }
 
                 public string String { get; set; }
             }
@@ -1685,7 +1693,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 private List<int> _list = new();
 
-                public DerivedCollection() : base(0) { }
+                public DerivedCollection() : base(0)
+                {
+                }
 
                 bool ICollection<int>.IsReadOnly => false;
 
@@ -1713,7 +1723,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 private Dictionary<string, int> _dict = new();
 
-                public DerivedDictionary() : base(0) { }
+                public DerivedDictionary() : base(0)
+                {
+                }
 
                 public int this[string key]
                 {
@@ -2340,9 +2352,13 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(DerivedList1), "derivedList")]
         public class PolymorphicList : List<int>
         {
-            public class DerivedList1 : PolymorphicList { }
+            public class DerivedList1 : PolymorphicList
+            {
+            }
 
-            public class DerivedList2 : PolymorphicList { }
+            public class DerivedList2 : PolymorphicList
+            {
+            }
 
             public static IEnumerable<TestData> GetSerializeTestData()
             {
@@ -2535,9 +2551,13 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(DerivedDictionary1), "derivedDictionary")]
         public class PolymorphicDictionary : Dictionary<string, int>
         {
-            public class DerivedDictionary1 : PolymorphicDictionary { }
+            public class DerivedDictionary1 : PolymorphicDictionary
+            {
+            }
 
-            public class DerivedDictionary2 : PolymorphicDictionary { }
+            public class DerivedDictionary2 : PolymorphicDictionary
+            {
+            }
 
             public static IEnumerable<TestData> GetSerializeTestData()
             {
@@ -3173,7 +3193,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [JsonPolymorphic]
-        public class PolymorphicClassWithoutDerivedTypeAttribute { }
+        public class PolymorphicClassWithoutDerivedTypeAttribute
+        {
+        }
 
         [Fact]
         public async Task PolymorphicClassWithNullDerivedTypeAttribute_ThrowsInvalidOperationException()
@@ -3185,7 +3207,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [JsonDerivedType(derivedType: null)]
-        public class PolymorphicClassWithNullDerivedTypeAttribute { }
+        public class PolymorphicClassWithNullDerivedTypeAttribute
+        {
+        }
 
         [Fact]
         public async Task PolymorphicClassWithStructDerivedTypeAttribute_ThrowsInvalidOperationException()
@@ -3197,7 +3221,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [JsonDerivedType(typeof(Guid))]
-        public class PolymorphicClassWithStructDerivedTypeAttribute { }
+        public class PolymorphicClassWithStructDerivedTypeAttribute
+        {
+        }
 
         [Fact]
         public async Task PolymorphicClassWithObjectDerivedTypeAttribute_ThrowsInvalidOperationException()
@@ -3209,7 +3235,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [JsonDerivedType(typeof(object), "object")]
-        public class PolymorphicClassWithObjectDerivedTypeAttribute { }
+        public class PolymorphicClassWithObjectDerivedTypeAttribute
+        {
+        }
 
         [Fact]
         public async Task PolymorphicClassWithNonAssignableDerivedTypeAttribute_ThrowsInvalidOperationException()
@@ -3221,7 +3249,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [JsonDerivedType(typeof(object))]
-        public class PolymorphicClassWithNonAssignableDerivedTypeAttribute { }
+        public class PolymorphicClassWithNonAssignableDerivedTypeAttribute
+        {
+        }
 
         [Fact]
         public async Task PolymorphicInterfaceWithInterfaceDerivedType_Serialization_ThrowsInvalidOperationException()
@@ -3277,10 +3307,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             public interface DerivedInterface : PolymorphicInterfaceWithInterfaceDerivedType
             {
-                public class ImplementingClass : DerivedInterface { }
+                public class ImplementingClass : DerivedInterface
+                {
+                }
             }
 
-            public class DerivedClass : PolymorphicInterfaceWithInterfaceDerivedType { }
+            public class DerivedClass : PolymorphicInterfaceWithInterfaceDerivedType
+            {
+            }
         }
 
         public static JsonSerializerOptions PolymorphicInterfaceWithInterfaceDerivedType_OptionsWithFallbackToNearestAncestor { get; } =
@@ -3315,9 +3349,13 @@ namespace System.Text.Json.Serialization.Tests
         public abstract class PolymorphicAbstractClassWithAbstractClassDerivedType
         {
             public abstract class DerivedAbstractClass
-                : PolymorphicAbstractClassWithAbstractClassDerivedType { }
+                : PolymorphicAbstractClassWithAbstractClassDerivedType
+            {
+            }
 
-            public class DerivedClass : PolymorphicAbstractClassWithAbstractClassDerivedType { }
+            public class DerivedClass : PolymorphicAbstractClassWithAbstractClassDerivedType
+            {
+            }
         }
 
         [Fact]
@@ -3334,7 +3372,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(DerivedClass), "id")]
         public class PolymorphicClassWithDuplicateDerivedTypeRegistrations
         {
-            public class DerivedClass : PolymorphicClassWithDuplicateDerivedTypeRegistrations { }
+            public class DerivedClass : PolymorphicClassWithDuplicateDerivedTypeRegistrations
+            {
+            }
         }
 
         [Fact]
@@ -3350,9 +3390,13 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(B), "duplicateId")]
         public class PolymorphicClasWithDuplicateTypeDiscriminators
         {
-            public class A : PolymorphicClasWithDuplicateTypeDiscriminators { }
+            public class A : PolymorphicClasWithDuplicateTypeDiscriminators
+            {
+            }
 
-            public class B : PolymorphicClasWithDuplicateTypeDiscriminators { }
+            public class B : PolymorphicClasWithDuplicateTypeDiscriminators
+            {
+            }
         }
 
         [Fact]
@@ -3367,7 +3411,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(PolymorphicGenericClass<>.DerivedClass))]
         public class PolymorphicGenericClass<T>
         {
-            public class DerivedClass : PolymorphicGenericClass<T> { }
+            public class DerivedClass : PolymorphicGenericClass<T>
+            {
+            }
         }
 
         [Fact]
@@ -3383,7 +3429,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(DerivedClass<>))]
         public class PolymorphicDerivedGenericClass
         {
-            public class DerivedClass<T> : PolymorphicDerivedGenericClass { }
+            public class DerivedClass<T> : PolymorphicDerivedGenericClass
+            {
+            }
         }
 
         [Fact]
@@ -3412,7 +3460,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(DerivedClass), "derivedClass")]
         public class PolymorphicClass_CustomConverter_TypeDiscriminator
         {
-            public class DerivedClass : PolymorphicClass_CustomConverter_TypeDiscriminator { }
+            public class DerivedClass : PolymorphicClass_CustomConverter_TypeDiscriminator
+            {
+            }
 
             public class CustomConverter
                 : JsonConverter<PolymorphicClass_CustomConverter_TypeDiscriminator>
@@ -3566,8 +3616,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             public int Number { get; set; }
 
-            public class DerivedClass
-                : PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName { }
+            public class DerivedClass : PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName
+            {
+            }
 
             public static JsonSerializerOptions? CreatePolymorphicConfigurationWithCustomPropertyName(
                 string customPropertyName
@@ -3682,7 +3733,9 @@ namespace System.Text.Json.Serialization.Tests
         public class CustomPolymorphismResolver<TBaseType> : CustomPolymorphismResolver
             where TBaseType : class
         {
-            public CustomPolymorphismResolver() : base(typeof(TBaseType)) { }
+            public CustomPolymorphismResolver() : base(typeof(TBaseType))
+            {
+            }
 
             public CustomPolymorphismResolver<TBaseType> WithDerivedType<TDerivedType>()
                 where TDerivedType : TBaseType

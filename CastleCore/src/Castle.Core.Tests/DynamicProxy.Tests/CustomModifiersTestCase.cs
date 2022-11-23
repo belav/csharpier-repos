@@ -506,8 +506,12 @@ namespace Castle.DynamicProxy.Tests
             this.generatedTypes.Add(typeName, typeBuilder.CreateType());
         }
 
-        public class Foo { }
+        public class Foo
+        {
+        }
 
-        public class Bar { }
+        public class Bar
+        {
+        }
     }
 }

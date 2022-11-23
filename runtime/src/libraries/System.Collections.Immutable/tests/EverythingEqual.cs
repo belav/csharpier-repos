@@ -13,7 +13,9 @@ namespace System.Collections.Immutable.Tests
     {
         private static EverythingEqual<T> s_singleton = new EverythingEqual<T>();
 
-        private EverythingEqual() { }
+        private EverythingEqual()
+        {
+        }
 
         internal static EverythingEqual<T> Default
         {

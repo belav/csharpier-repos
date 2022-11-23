@@ -64,7 +64,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public abstract Task<Stream> AcceptAsync(CancellationToken token);
 
@@ -189,7 +191,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
         protected IpcSocketServerTransport(
             IIpcServerTransportCallbackInternal transportCallback = null
-        ) : base(transportCallback) { }
+        ) : base(transportCallback)
+        {
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -201,7 +205,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 {
                     _socket.Shutdown(SocketShutdown.Both);
                 }
-                catch { }
+                catch
+                {
+                }
                 finally
                 {
                     _socket.Close(0);

@@ -44,9 +44,13 @@ namespace Moq.Tests
                 Assert.Equal("42", returnValue);
             }
 
-            public abstract class ClassType { }
+            public abstract class ClassType
+            {
+            }
 
-            public interface IInterfaceType { }
+            public interface IInterfaceType
+            {
+            }
         }
 
         private static object CreateProxy(Type type, IInterceptor interceptor)

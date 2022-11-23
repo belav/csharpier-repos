@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSemanticQuickInfoProvider() { }
+        public CSharpSemanticQuickInfoProvider()
+        {
+        }
 
         /// <summary>
         /// If the token is the '=>' in a lambda, or the 'delegate' in an anonymous function,

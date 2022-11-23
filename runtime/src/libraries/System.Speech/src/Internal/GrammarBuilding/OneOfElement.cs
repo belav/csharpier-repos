@@ -12,7 +12,9 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal OneOfElement() { }
+        internal OneOfElement()
+        {
+        }
 
         #endregion
 

@@ -8,7 +8,9 @@ namespace System.Reflection
 {
     public abstract partial class MethodInfo : MethodBase
     {
-        protected MethodInfo() { }
+        protected MethodInfo()
+        {
+        }
 
         public override MemberTypes MemberType => MemberTypes.Method;
 

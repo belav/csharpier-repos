@@ -255,7 +255,9 @@ namespace System.Runtime.InteropServices.JavaScript
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)] // https://github.com/dotnet/runtime/issues/71425
-        public static void StopProfile() { }
+        public static void StopProfile()
+        {
+        }
 
         // Called by the AOT profiler to save profile data into INTERNAL.aotProfileData
         [MethodImpl(MethodImplOptions.NoInlining)] // https://github.com/dotnet/runtime/issues/71425

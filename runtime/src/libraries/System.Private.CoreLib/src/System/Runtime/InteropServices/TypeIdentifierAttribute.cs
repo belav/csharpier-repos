@@ -13,7 +13,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed class TypeIdentifierAttribute : Attribute
     {
-        public TypeIdentifierAttribute() { }
+        public TypeIdentifierAttribute()
+        {
+        }
 
         public TypeIdentifierAttribute(string? scope, string? identifier)
         {

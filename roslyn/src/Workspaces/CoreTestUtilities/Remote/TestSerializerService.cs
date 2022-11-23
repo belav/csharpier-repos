@@ -196,7 +196,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
             public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>

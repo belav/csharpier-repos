@@ -92,7 +92,9 @@ namespace System.Web.WebPages.Instrumentation
                 else
                 {
                     Getter = () => false;
-                    Setter = _ => { };
+                    Setter = _ =>
+                    {
+                    };
                 }
             }
         }

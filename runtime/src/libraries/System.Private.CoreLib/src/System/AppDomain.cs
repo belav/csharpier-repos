@@ -25,7 +25,9 @@ namespace System
         private Func<IPrincipal>? s_getWindowsPrincipal;
         private Func<IPrincipal>? s_getUnauthenticatedPrincipal;
 
-        private AppDomain() { }
+        private AppDomain()
+        {
+        }
 
         public static AppDomain CurrentDomain => s_domain;
 
@@ -51,7 +53,9 @@ namespace System
         public string? DynamicDirectory => null;
 
         [Obsolete("AppDomain.SetDynamicBase has been deprecated and is not supported.")]
-        public void SetDynamicBase(string? path) { }
+        public void SetDynamicBase(string? path)
+        {
+        }
 
         public string FriendlyName
         {
@@ -249,22 +253,34 @@ namespace System
         public bool ShadowCopyFiles => false;
 
         [Obsolete("AppDomain.AppendPrivatePath has been deprecated and is not supported.")]
-        public void AppendPrivatePath(string? path) { }
+        public void AppendPrivatePath(string? path)
+        {
+        }
 
         [Obsolete("AppDomain.ClearPrivatePath has been deprecated and is not supported.")]
-        public void ClearPrivatePath() { }
+        public void ClearPrivatePath()
+        {
+        }
 
         [Obsolete("AppDomain.ClearShadowCopyPath has been deprecated and is not supported.")]
-        public void ClearShadowCopyPath() { }
+        public void ClearShadowCopyPath()
+        {
+        }
 
         [Obsolete("AppDomain.SetCachePath has been deprecated and is not supported.")]
-        public void SetCachePath(string? path) { }
+        public void SetCachePath(string? path)
+        {
+        }
 
         [Obsolete("AppDomain.SetShadowCopyFiles has been deprecated and is not supported.")]
-        public void SetShadowCopyFiles() { }
+        public void SetShadowCopyFiles()
+        {
+        }
 
         [Obsolete("AppDomain.SetShadowCopyPath has been deprecated and is not supported.")]
-        public void SetShadowCopyPath(string? path) { }
+        public void SetShadowCopyPath(string? path)
+        {
+        }
 
         public Assembly[] GetAssemblies() => AssemblyLoadContext.GetLoadedAssemblies();
 

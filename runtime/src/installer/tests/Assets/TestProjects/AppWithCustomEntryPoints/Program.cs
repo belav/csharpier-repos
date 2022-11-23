@@ -8,7 +8,9 @@ namespace AppWithCustomEntryPoints
 {
     public static class Program
     {
-        public static void Main(string[] args) { }
+        public static void Main(string[] args)
+        {
+        }
 
         private static int functionPointerCallCount = 0;
         private static int entryPoint1CallCount = 0;

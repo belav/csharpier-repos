@@ -53,7 +53,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OnTypeRenameHandler() { }
+        public OnTypeRenameHandler()
+        {
+        }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;

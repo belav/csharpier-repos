@@ -10,7 +10,9 @@ namespace Microsoft.Extensions.Logging.Console
     /// </summary>
     public class JsonConsoleFormatterOptions : ConsoleFormatterOptions
     {
-        public JsonConsoleFormatterOptions() { }
+        public JsonConsoleFormatterOptions()
+        {
+        }
 
         /// <summary>
         /// Gets or sets JsonWriterOptions.

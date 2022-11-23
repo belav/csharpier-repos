@@ -71,7 +71,9 @@ namespace StaticTestGenerator
                         Log($"Loaded {a} from {a.Location}");
                         return a;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 return null;

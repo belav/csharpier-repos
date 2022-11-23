@@ -7,5 +7,7 @@ namespace Roslyn.Utilities
     /// <summary>
     /// Explicitly indicates result is void
     /// </summary>
-    internal struct VoidResult { }
+    internal struct VoidResult
+    {
+    }
 }

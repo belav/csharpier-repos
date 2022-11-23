@@ -829,7 +829,9 @@ namespace System.Dynamic
         private sealed class MetaExpando : DynamicMetaObject
         {
             public MetaExpando(Expression expression, ExpandoObject value)
-                : base(expression, BindingRestrictions.Empty, value) { }
+                : base(expression, BindingRestrictions.Empty, value)
+            {
+            }
 
             private DynamicMetaObject BindGetOrInvokeMember(
                 DynamicMetaObjectBinder binder,

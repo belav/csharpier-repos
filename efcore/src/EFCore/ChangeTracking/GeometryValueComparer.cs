@@ -23,7 +23,9 @@ public class GeometryValueComparer<
             GetEqualsExpression(),
             CreateDefaultHashCodeExpression(favorStructuralComparisons: false),
             GetSnapshotExpression()
-        ) { }
+        )
+    {
+    }
 
     private static Expression<Func<TGeometry?, TGeometry?, bool>> GetEqualsExpression()
     {

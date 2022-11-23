@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpInlineDeclarationCodeFixProvider() { }
+        public CSharpInlineDeclarationCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.InlineDeclarationDiagnosticId);

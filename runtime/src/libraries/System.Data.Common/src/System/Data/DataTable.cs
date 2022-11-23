@@ -4169,7 +4169,9 @@ namespace System.Data
         /// Notifies the <see cref='System.Data.DataTable'/> that a <see cref='System.Data.DataColumn'/> is
         /// being removed.
         /// </summary>
-        protected virtual void OnRemoveColumn(DataColumn column) { }
+        protected virtual void OnRemoveColumn(DataColumn column)
+        {
+        }
 
         private DataRowChangeEventArgs? OnRowChanged(
             DataRowChangeEventArgs? args,

@@ -8,7 +8,9 @@ namespace System.Net.Connections
 {
     public abstract partial class Connection : System.Net.Connections.ConnectionBase
     {
-        protected Connection() { }
+        protected Connection()
+        {
+        }
 
         public System.IO.Pipelines.IDuplexPipe Pipe
         {
@@ -54,7 +56,9 @@ namespace System.Net.Connections
 
     public abstract partial class ConnectionBase : System.IAsyncDisposable, System.IDisposable
     {
-        protected ConnectionBase() { }
+        protected ConnectionBase()
+        {
+        }
 
         public abstract System.Net.Connections.IConnectionProperties ConnectionProperties { get; }
         public abstract System.Net.EndPoint? LocalEndPoint { get; }
@@ -75,7 +79,9 @@ namespace System.Net.Connections
             System.Threading.CancellationToken cancellationToken
         );
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -116,7 +122,9 @@ namespace System.Net.Connections
 
     public abstract partial class ConnectionFactory : System.IAsyncDisposable, System.IDisposable
     {
-        protected ConnectionFactory() { }
+        protected ConnectionFactory()
+        {
+        }
 
         public abstract System.Threading.Tasks.ValueTask<System.Net.Connections.Connection> ConnectAsync(
             System.Net.EndPoint? endPoint,
@@ -125,9 +133,13 @@ namespace System.Net.Connections
                 default(System.Threading.CancellationToken)
         );
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -142,7 +154,9 @@ namespace System.Net.Connections
 
     public abstract partial class ConnectionListener : System.IAsyncDisposable, System.IDisposable
     {
-        protected ConnectionListener() { }
+        protected ConnectionListener()
+        {
+        }
 
         public abstract System.Net.Connections.IConnectionProperties ListenerProperties { get; }
         public abstract System.Net.EndPoint? LocalEndPoint { get; }
@@ -152,9 +166,13 @@ namespace System.Net.Connections
                 default(System.Threading.CancellationToken)
         );
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -171,7 +189,9 @@ namespace System.Net.Connections
         : System.IAsyncDisposable,
             System.IDisposable
     {
-        protected ConnectionListenerFactory() { }
+        protected ConnectionListenerFactory()
+        {
+        }
 
         public abstract System.Threading.Tasks.ValueTask<System.Net.Connections.ConnectionListener> ListenAsync(
             System.Net.EndPoint? endPoint,
@@ -180,9 +200,13 @@ namespace System.Net.Connections
                 default(System.Threading.CancellationToken)
         );
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -209,12 +233,16 @@ namespace System.Net.Connections
             System.Net.Sockets.AddressFamily addressFamily,
             System.Net.Sockets.SocketType socketType,
             System.Net.Sockets.ProtocolType protocolType
-        ) { }
+        )
+        {
+        }
 
         public SocketsConnectionFactory(
             System.Net.Sockets.SocketType socketType,
             System.Net.Sockets.ProtocolType protocolType
-        ) { }
+        )
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask<System.Net.Connections.Connection> ConnectAsync(
             System.Net.EndPoint? endPoint,
@@ -255,18 +283,24 @@ namespace System.Net
 
     public class NetworkException : System.IO.IOException
     {
-        public NetworkException(NetworkError error, Exception? innerException = null) { }
+        public NetworkException(NetworkError error, Exception? innerException = null)
+        {
+        }
 
         public NetworkException(
             string message,
             NetworkError error,
             Exception? innerException = null
-        ) { }
+        )
+        {
+        }
 
         protected NetworkException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public NetworkError NetworkError
         {

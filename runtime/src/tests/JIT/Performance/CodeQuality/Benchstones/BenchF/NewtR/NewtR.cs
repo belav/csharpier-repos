@@ -17,7 +17,9 @@ namespace Benchstone.BenchF
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void Escape(object _) { }
+        private static void Escape(object _)
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static bool Bench()
@@ -46,7 +48,9 @@ namespace Benchstone.BenchF
                     System.Console.WriteLine(" THE ROOT IS {0:e} F(ROOT) := {1:E}\n", x0, fx0);
                 }
 
-                L888: { }
+                L888:
+                {
+                }
             }
 
             // Escape iflag, x0, and fx0 so that they appear live

@@ -19,7 +19,9 @@ namespace System.Net.Http.Formatting
         private static readonly StringWithQualityHeaderValueComparer _qualityComparer =
             new StringWithQualityHeaderValueComparer();
 
-        private StringWithQualityHeaderValueComparer() { }
+        private StringWithQualityHeaderValueComparer()
+        {
+        }
 
         public static StringWithQualityHeaderValueComparer QualityComparer
         {

@@ -34,36 +34,48 @@ namespace System.Configuration
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
-        public ConfigurationException() : this(null, null, null, 0) { }
+        public ConfigurationException() : this(null, null, null, 0)
+        {
+        }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
-        public ConfigurationException(string message) : this(message, null, null, 0) { }
+        public ConfigurationException(string message) : this(message, null, null, 0)
+        {
+        }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
         public ConfigurationException(string message, Exception inner)
-            : this(message, inner, null, 0) { }
+            : this(message, inner, null, 0)
+        {
+        }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
         public ConfigurationException(string message, XmlNode node)
-            : this(message, null, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node)) { }
+            : this(message, null, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node))
+        {
+        }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
         public ConfigurationException(string message, Exception inner, XmlNode node)
-            : this(message, inner, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node)) { }
+            : this(message, inner, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node))
+        {
+        }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
         public ConfigurationException(string message, string filename, int line)
-            : this(message, null, filename, line) { }
+            : this(message, null, filename, line)
+        {
+        }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."

@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 EnforceOnBuildValues.UseConditionalExpressionForAssignment,
                 message,
                 CodeStyleOptions2.PreferConditionalExpressionOverAssignment
-            ) { }
+            )
+        {
+        }
 
         protected sealed override CodeStyleOption2<bool> GetStylePreference(
             OperationAnalysisContext context

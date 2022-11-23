@@ -5,7 +5,9 @@ using System;
 
 namespace ToBoxOrNotToBox
 {
-    public interface IObjectId { }
+    public interface IObjectId
+    {
+    }
 
     internal class ClassObjectId : IObjectId
     {

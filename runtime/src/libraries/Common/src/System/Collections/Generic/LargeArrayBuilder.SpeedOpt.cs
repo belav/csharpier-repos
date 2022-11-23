@@ -25,7 +25,9 @@ namespace System.Collections.Generic
         /// <summary>
         /// Constructs a new builder.
         /// </summary>
-        public LargeArrayBuilder() : this(maxCapacity: int.MaxValue) { }
+        public LargeArrayBuilder() : this(maxCapacity: int.MaxValue)
+        {
+        }
 
         /// <summary>
         /// Constructs a new builder with the specified maximum capacity.

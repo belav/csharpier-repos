@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     internal abstract partial class AbstractPartialTypeCompletionProvider<TSyntaxContext>
         : LSPCompletionProvider where TSyntaxContext : SyntaxContext
     {
-        protected AbstractPartialTypeCompletionProvider() { }
+        protected AbstractPartialTypeCompletionProvider()
+        {
+        }
 
         public sealed override async Task ProvideCompletionsAsync(
             CompletionContext completionContext

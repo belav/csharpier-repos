@@ -43,7 +43,9 @@ namespace System.Threading.Tasks.Dataflow
         private readonly JoinBlockTarget<T2> _target2;
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2}"/>.</summary>
-        public JoinBlock() : this(GroupingDataflowBlockOptions.Default) { }
+        public JoinBlock() : this(GroupingDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2}"/>.</summary>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="JoinBlock{T1,T2}"/>.</param>
@@ -406,7 +408,9 @@ namespace System.Threading.Tasks.Dataflow
         private readonly JoinBlockTarget<T3> _target3;
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2,T3}"/>.</summary>
-        public JoinBlock() : this(GroupingDataflowBlockOptions.Default) { }
+        public JoinBlock() : this(GroupingDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2,T3}"/>.</summary>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="JoinBlock{T1,T2}"/>.</param>

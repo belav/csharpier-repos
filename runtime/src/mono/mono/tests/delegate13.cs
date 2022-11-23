@@ -21,7 +21,11 @@ public static class Program
         return 0;
     }
 
-    public static void Method1() { }
+    public static void Method1()
+    {
+    }
 
-    public static void Method2() { }
+    public static void Method2()
+    {
+    }
 }

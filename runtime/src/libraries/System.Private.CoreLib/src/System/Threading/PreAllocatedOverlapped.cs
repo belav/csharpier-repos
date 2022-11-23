@@ -48,7 +48,9 @@ namespace System.Threading
         /// </exception>
         [CLSCompliant(false)]
         public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData)
-            : this(callback, state, pinData, flowExecutionContext: true) { }
+            : this(callback, state, pinData, flowExecutionContext: true)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PreAllocatedOverlapped"/> class, specifying

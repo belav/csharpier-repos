@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GenericNameSignatureHelpProvider() { }
+        public GenericNameSignatureHelpProvider()
+        {
+        }
 
         public override bool IsTriggerCharacter(char ch) => ch is '<' or ',';
 

@@ -7,7 +7,9 @@ namespace System.Configuration
 {
     public sealed class ConfigurationSettings
     {
-        internal ConfigurationSettings() { }
+        internal ConfigurationSettings()
+        {
+        }
 
         [Obsolete(
             "ConfigurationSettings.AppSettings has been deprecated. Use System.Configuration.ConfigurationManager.AppSettings instead."

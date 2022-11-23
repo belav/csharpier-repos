@@ -191,7 +191,9 @@ public class Program
             return myClass;
         }
 
-        protected override void InitCallbacks() { }
+        protected override void InitCallbacks()
+        {
+        }
 
         protected override void InitIDs()
         {
@@ -200,6 +202,8 @@ public class Program
             id1_MyClass = Reader.NameTable.Add("MyClass");
         }
 
-        public XmlSerializationReaderMyClass() { }
+        public XmlSerializationReaderMyClass()
+        {
+        }
     }
 }

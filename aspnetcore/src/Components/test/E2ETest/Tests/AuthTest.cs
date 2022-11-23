@@ -26,7 +26,9 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : this(browserFixture, serverFixture, output, ExecutionMode.Client) { }
+    ) : this(browserFixture, serverFixture, output, ExecutionMode.Client)
+    {
+    }
 
     protected AuthTest(
         BrowserFixture browserFixture,

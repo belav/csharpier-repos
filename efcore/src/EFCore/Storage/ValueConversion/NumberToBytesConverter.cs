@@ -28,7 +28,9 @@ public class NumberToBytesConverter<TNumber> : ValueConverter<TNumber, byte[]>
     ///         See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public NumberToBytesConverter() : this(null) { }
+    public NumberToBytesConverter() : this(null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -49,7 +51,9 @@ public class NumberToBytesConverter<TNumber> : ValueConverter<TNumber, byte[]>
     ///     facets for the converted data.
     /// </param>
     public NumberToBytesConverter(ConverterMappingHints? mappingHints)
-        : base(ToBytes(), ToNumber(), DefaultHints.With(mappingHints)) { }
+        : base(ToBytes(), ToNumber(), DefaultHints.With(mappingHints))
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

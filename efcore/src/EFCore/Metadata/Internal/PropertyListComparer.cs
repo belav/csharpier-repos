@@ -22,7 +22,9 @@ public sealed class PropertyListComparer
     /// </summary>
     public static readonly PropertyListComparer Instance = new();
 
-    private PropertyListComparer() { }
+    private PropertyListComparer()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

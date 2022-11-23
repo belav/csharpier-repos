@@ -576,10 +576,14 @@ namespace System.Security.Claims
         private sealed class CustomClaimsIdentity : ClaimsIdentity, ISerializable
         {
             public CustomClaimsIdentity(string authenticationType, string nameType, string roleType)
-                : base(authenticationType, nameType, roleType) { }
+                : base(authenticationType, nameType, roleType)
+            {
+            }
 
             public CustomClaimsIdentity(SerializationInfo info, StreamingContext context)
-                : base(info, context) { }
+                : base(info, context)
+            {
+            }
 
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {

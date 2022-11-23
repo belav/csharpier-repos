@@ -262,7 +262,8 @@ namespace Moq.Tests
         public void ShouldAttachToInheritedEvent()
         {
             var bar = new Mock<IDerived>(MockBehavior.Strict);
-            bar.Object.Event += (o, e) => { }; // Exception Fired here
+            bar.Object.Event += (o, e) => {
+            }; // Exception Fired here
         }
 
         [Fact]
@@ -667,7 +668,8 @@ namespace Moq.Tests
             var mock = new Mock<FordawrdEventDoProtectedImplementation>();
             INotifyPropertyChanged observable = mock.Object;
 
-            observable.PropertyChanged += (sender, args) => { };
+            observable.PropertyChanged += (sender, args) => {
+            };
         }
 
         [Fact]
@@ -727,11 +729,17 @@ namespace Moq.Tests
         {
             //Arrange
             var mock = new Mock<IAdder<EventArgs>>();
-            mock.SetupAdd(m => m.Added += (sender, args) => { });
+            mock.SetupAdd(
+                m =>
+                    m.Added += (sender, args) => {
+                    }
+            );
 
             //Act
-            mock.Object.Added += (sender, args) => { };
-            mock.Object.Added += (sender, args) => { };
+            mock.Object.Added += (sender, args) => {
+            };
+            mock.Object.Added += (sender, args) => {
+            };
 
             //Assert
             mock.VerifyAdd(m => m.Added += It.IsAny<EventHandler>(), Times.Exactly(2));
@@ -742,11 +750,17 @@ namespace Moq.Tests
         {
             //Arrange
             var mock = new Mock<IAdder<EventArgs>>();
-            mock.SetupRemove(m => m.Added -= (sender, args) => { });
+            mock.SetupRemove(
+                m =>
+                    m.Added -= (sender, args) => {
+                    }
+            );
 
             //Act
-            mock.Object.Added -= (sender, args) => { };
-            mock.Object.Added -= (sender, args) => { };
+            mock.Object.Added -= (sender, args) => {
+            };
+            mock.Object.Added -= (sender, args) => {
+            };
 
             //Assert
             mock.VerifyRemove(m => m.Added -= It.IsAny<EventHandler>(), Times.Exactly(2));
@@ -761,8 +775,10 @@ namespace Moq.Tests
             mock.SetupRemove(m => m.Added -= It.IsAny<EventHandler>());
 
             //Act
-            mock.Object.Added += (sender, args) => { };
-            mock.Object.Added -= (sender, args) => { };
+            mock.Object.Added += (sender, args) => {
+            };
+            mock.Object.Added -= (sender, args) => {
+            };
 
             //Assert
             mock.VerifyAll();
@@ -777,7 +793,8 @@ namespace Moq.Tests
             mock.SetupRemove(m => m.Added -= It.IsAny<EventHandler>());
 
             //Act
-            mock.Object.Added += (sender, args) => { };
+            mock.Object.Added += (sender, args) => {
+            };
 
             //Assert
             mock.Verify();
@@ -792,7 +809,8 @@ namespace Moq.Tests
             mock.SetupRemove(m => m.Added -= It.IsAny<EventHandler>()).Verifiable("not invoked");
 
             //Act
-            mock.Object.Added += (sender, args) => { };
+            mock.Object.Added += (sender, args) => {
+            };
 
             //Assert
             Assert.Throws<MockException>(() => mock.Verify());
@@ -860,7 +878,8 @@ namespace Moq.Tests
             mock.SetupAdd(m => m.Added += It.IsAny<EventHandler>()).Verifiable();
 
             //Act
-            mock.Object.Added += (sender, args) => { };
+            mock.Object.Added += (sender, args) => {
+            };
 
             //Assert
             Assert.Throws<MockException>(() => mock.VerifyNoOtherCalls());
@@ -874,7 +893,8 @@ namespace Moq.Tests
             mock.SetupAdd(m => m.Added += It.IsAny<EventHandler>()).Verifiable();
 
             //Act
-            mock.Object.Added += (sender, args) => { };
+            mock.Object.Added += (sender, args) => {
+            };
 
             //Assert
             mock.Verify();
@@ -918,7 +938,8 @@ namespace Moq.Tests
             mock.SetupAdd(m => m.Added += It.IsAny<EventHandler>()).Callback(() => invoked = true);
 
             //Act
-            mock.Object.Added += (s, a) => { };
+            mock.Object.Added += (s, a) => {
+            };
 
             //Assert
             Assert.True(invoked);
@@ -934,7 +955,8 @@ namespace Moq.Tests
                 .Callback(() => invoked = true);
 
             //Act
-            mock.Object.Added -= (s, a) => { };
+            mock.Object.Added -= (s, a) => {
+            };
 
             //Assert
             Assert.True(invoked);
@@ -951,10 +973,14 @@ namespace Moq.Tests
 
         public class WithEvent : IWithEvent
         {
-            public event EventHandler InterfaceEvent = (s, e) => { };
-            public event EventHandler ClassEvent = (s, e) => { };
-            public event CustomEvent CustomEvent = (s, e) => { };
-            public virtual event EventHandler VirtualEvent = (s, e) => { };
+            public event EventHandler InterfaceEvent = (s, e) => {
+            };
+            public event EventHandler ClassEvent = (s, e) => {
+            };
+            public event CustomEvent CustomEvent = (s, e) => {
+            };
+            public virtual event EventHandler VirtualEvent = (s, e) => {
+            };
 
             public void OnVirtualEvent() => VirtualEvent?.Invoke(this, new EventArgs());
 
@@ -1019,7 +1045,9 @@ namespace Moq.Tests
             event EventHandler<DoneArgs> Done;
         }
 
-        public interface IDerived : IParent { }
+        public interface IDerived : IParent
+        {
+        }
 
         public interface IInterfaceWithEvent
         {

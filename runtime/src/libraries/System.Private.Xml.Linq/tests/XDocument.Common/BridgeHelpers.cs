@@ -591,7 +591,9 @@ namespace CoreXml.Test.XLinq
                 throw new TestException(TestResult.Failed, "");
         }
 
-        public static void DeleteTestFile(string strFileName) { }
+        public static void DeleteTestFile(string strFileName)
+        {
+        }
 
         public static void CreateByteTestFile(string strFileName)
         {

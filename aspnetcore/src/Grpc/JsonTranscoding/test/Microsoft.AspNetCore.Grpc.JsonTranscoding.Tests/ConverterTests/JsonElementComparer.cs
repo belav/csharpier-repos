@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.ConverterTests;
 
 public class JsonElementComparer : IEqualityComparer<JsonElement>
 {
-    public JsonElementComparer() : this(maxHashDepth: -1, compareRawStrings: false) { }
+    public JsonElementComparer() : this(maxHashDepth: -1, compareRawStrings: false)
+    {
+    }
 
     public JsonElementComparer(int maxHashDepth, bool compareRawStrings)
     {

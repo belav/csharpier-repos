@@ -282,7 +282,9 @@ namespace System.Reflection
             bool genericCheck
         );
 
-        internal RuntimeMethodInfo() { }
+        internal RuntimeMethodInfo()
+        {
+        }
 
         internal RuntimeMethodInfo(RuntimeMethodHandle mhandle)
         {

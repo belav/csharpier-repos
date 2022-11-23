@@ -49,7 +49,9 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="batchSize">The number of items to group into a batch.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">The <paramref name="batchSize"/> must be positive.</exception>
         public BatchedJoinBlock(int batchSize)
-            : this(batchSize, GroupingDataflowBlockOptions.Default) { }
+            : this(batchSize, GroupingDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes this <see cref="BatchedJoinBlock{T1,T2}"/> with the specified configuration.</summary>
         /// <param name="batchSize">The number of items to group into a batch.</param>
@@ -436,7 +438,9 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="batchSize">The number of items to group into a batch.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">The <paramref name="batchSize"/> must be positive.</exception>
         public BatchedJoinBlock(int batchSize)
-            : this(batchSize, GroupingDataflowBlockOptions.Default) { }
+            : this(batchSize, GroupingDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes this <see cref="BatchedJoinBlock{T1,T2,T3}"/> with the specified configuration.</summary>
         /// <param name="batchSize">The number of items to group into a batch.</param>

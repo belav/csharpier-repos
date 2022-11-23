@@ -35,7 +35,9 @@ public class Tests
 
     public class ResultHolder : MarshalByRefObject
     {
-        public ResultHolder() { }
+        public ResultHolder()
+        {
+        }
 
         public int Result { get; set; }
     }
@@ -44,7 +46,9 @@ public class Tests
     {
         public class SpecialExn : Exception
         {
-            public SpecialExn() : base() { }
+            public SpecialExn() : base()
+            {
+            }
         }
 
         public void TheTest(ResultHolder holder)

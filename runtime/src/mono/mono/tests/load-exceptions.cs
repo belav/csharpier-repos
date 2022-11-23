@@ -6,11 +6,15 @@ using System;
 using System.IO;
 using System.Reflection;
 
-class Miss1 : Missing.Foo1 { }
+class Miss1 : Missing.Foo1
+{
+}
 
 public class Miss2
 {
-    public class Foo : Missing.Foo1 { }
+    public class Foo : Missing.Foo1
+    {
+    }
 }
 
 public class Tests : LoadMissing
@@ -284,7 +288,9 @@ public class Tests : LoadMissing
         {
             missing_local();
         }
-        catch (TypeLoadException ex) { }
+        catch (TypeLoadException ex)
+        {
+        }
 
         /* MS.NET doesn't throw an exception if a local is not found */
         return 0;
@@ -299,7 +305,9 @@ public class Tests : LoadMissing
             asm.GetType("BrokenClass", false);
             return 1;
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
         return 0;
     }
 
@@ -310,7 +318,9 @@ public class Tests : LoadMissing
             BadOverridesDriver.bad_override1();
             return 1;
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
         return 0;
     }
 
@@ -321,7 +331,9 @@ public class Tests : LoadMissing
             BadOverridesDriver.bad_override2();
             return 1;
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
         return 0;
     }
 
@@ -332,7 +344,9 @@ public class Tests : LoadMissing
             BadOverridesDriver.bad_override3();
             return 1;
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
         return 0;
     }
 
@@ -343,7 +357,9 @@ public class Tests : LoadMissing
             BadOverridesDriver.bad_override4();
             return 1;
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
         return 0;
     }
 

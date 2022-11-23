@@ -51,7 +51,9 @@ namespace System.Runtime.Serialization.DataContracts
         public override XmlDictionaryString? TopLevelElementNamespace
         {
             get { return DictionaryGlobals.SerializationNamespace; }
-            internal set { }
+            internal set
+            {
+            }
         }
 
         internal override bool CanContainReferences => false;
@@ -217,10 +219,14 @@ namespace System.Runtime.Serialization.DataContracts
     internal class CharDataContract : PrimitiveDataContract
     {
         public CharDataContract()
-            : this(DictionaryGlobals.CharLocalName, DictionaryGlobals.SerializationNamespace) { }
+            : this(DictionaryGlobals.CharLocalName, DictionaryGlobals.SerializationNamespace)
+        {
+        }
 
         internal CharDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(char), name, ns) { }
+            : base(typeof(char), name, ns)
+        {
+        }
 
         internal override string WriteMethodName => "WriteChar";
         internal override string ReadMethodName => "ReadElementContentAsChar";
@@ -265,7 +271,9 @@ namespace System.Runtime.Serialization.DataContracts
     internal sealed class AsmxCharDataContract : CharDataContract
     {
         internal AsmxCharDataContract()
-            : base(DictionaryGlobals.CharLocalName, DictionaryGlobals.AsmxTypesNamespace) { }
+            : base(DictionaryGlobals.CharLocalName, DictionaryGlobals.AsmxTypesNamespace)
+        {
+        }
     }
 
     internal sealed class BooleanDataContract : PrimitiveDataContract
@@ -275,7 +283,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(bool),
                 DictionaryGlobals.BooleanLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteBoolean";
         internal override string ReadMethodName => "ReadElementContentAsBoolean";
@@ -324,7 +334,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(sbyte),
                 DictionaryGlobals.SignedByteLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteSignedByte";
         internal override string ReadMethodName => "ReadElementContentAsSignedByte";
@@ -373,7 +385,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(byte),
                 DictionaryGlobals.UnsignedByteLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteUnsignedByte";
         internal override string ReadMethodName => "ReadElementContentAsUnsignedByte";
@@ -422,7 +436,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(short),
                 DictionaryGlobals.ShortLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteShort";
         internal override string ReadMethodName => "ReadElementContentAsShort";
@@ -471,7 +487,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(ushort),
                 DictionaryGlobals.UnsignedShortLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteUnsignedShort";
         internal override string ReadMethodName => "ReadElementContentAsUnsignedShort";
@@ -534,7 +552,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(NullPrimitiveDataContract),
                 DictionaryGlobals.EmptyString,
                 DictionaryGlobals.EmptyString
-            ) { }
+            )
+        {
+        }
 
         internal override string ReadMethodName
         {
@@ -585,7 +605,8 @@ namespace System.Runtime.Serialization.DataContracts
     {
         public IntDataContract()
             : base(typeof(int), DictionaryGlobals.IntLocalName, DictionaryGlobals.SchemaNamespace)
-        { }
+        {
+        }
 
         internal override string WriteMethodName => "WriteInt";
         internal override string ReadMethodName => "ReadElementContentAsInt";
@@ -634,7 +655,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(uint),
                 DictionaryGlobals.UnsignedIntLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteUnsignedInt";
         internal override string ReadMethodName => "ReadElementContentAsUnsignedInt";
@@ -679,10 +702,14 @@ namespace System.Runtime.Serialization.DataContracts
     internal class LongDataContract : PrimitiveDataContract
     {
         public LongDataContract()
-            : this(DictionaryGlobals.LongLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : this(DictionaryGlobals.LongLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
 
         internal LongDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(long), name, ns) { }
+            : base(typeof(long), name, ns)
+        {
+        }
 
         internal override string WriteMethodName => "WriteLong";
         internal override string ReadMethodName => "ReadElementContentAsLong";
@@ -727,35 +754,41 @@ namespace System.Runtime.Serialization.DataContracts
     internal sealed class IntegerDataContract : LongDataContract
     {
         internal IntegerDataContract()
-            : base(DictionaryGlobals.integerLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.integerLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class PositiveIntegerDataContract : LongDataContract
     {
         internal PositiveIntegerDataContract()
             : base(DictionaryGlobals.positiveIntegerLocalName, DictionaryGlobals.SchemaNamespace)
-        { }
+        {
+        }
     }
 
     internal sealed class NegativeIntegerDataContract : LongDataContract
     {
         internal NegativeIntegerDataContract()
             : base(DictionaryGlobals.negativeIntegerLocalName, DictionaryGlobals.SchemaNamespace)
-        { }
+        {
+        }
     }
 
     internal sealed class NonPositiveIntegerDataContract : LongDataContract
     {
         internal NonPositiveIntegerDataContract()
             : base(DictionaryGlobals.nonPositiveIntegerLocalName, DictionaryGlobals.SchemaNamespace)
-        { }
+        {
+        }
     }
 
     internal sealed class NonNegativeIntegerDataContract : LongDataContract
     {
         internal NonNegativeIntegerDataContract()
             : base(DictionaryGlobals.nonNegativeIntegerLocalName, DictionaryGlobals.SchemaNamespace)
-        { }
+        {
+        }
     }
 
     internal sealed class UnsignedLongDataContract : PrimitiveDataContract
@@ -765,7 +798,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(ulong),
                 DictionaryGlobals.UnsignedLongLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteUnsignedLong";
         internal override string ReadMethodName => "ReadElementContentAsUnsignedLong";
@@ -814,7 +849,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(float),
                 DictionaryGlobals.FloatLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteFloat";
         internal override string ReadMethodName => "ReadElementContentAsFloat";
@@ -863,7 +900,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(double),
                 DictionaryGlobals.DoubleLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteDouble";
         internal override string ReadMethodName => "ReadElementContentAsDouble";
@@ -912,7 +951,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(decimal),
                 DictionaryGlobals.DecimalLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteDecimal";
         internal override string ReadMethodName => "ReadElementContentAsDecimal";
@@ -961,7 +1002,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(DateTime),
                 DictionaryGlobals.DateTimeLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteDateTime";
         internal override string ReadMethodName => "ReadElementContentAsDateTime";
@@ -1006,10 +1049,14 @@ namespace System.Runtime.Serialization.DataContracts
     internal class StringDataContract : PrimitiveDataContract
     {
         public StringDataContract()
-            : this(DictionaryGlobals.StringLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : this(DictionaryGlobals.StringLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
 
         internal StringDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(string), name, ns) { }
+            : base(typeof(string), name, ns)
+        {
+        }
 
         internal override string WriteMethodName => "WriteString";
         internal override string ReadMethodName => "ReadElementContentAsString";
@@ -1059,122 +1106,161 @@ namespace System.Runtime.Serialization.DataContracts
     internal sealed class TimeDataContract : StringDataContract
     {
         internal TimeDataContract()
-            : base(DictionaryGlobals.timeLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.timeLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class DateDataContract : StringDataContract
     {
         internal DateDataContract()
-            : base(DictionaryGlobals.dateLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.dateLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class HexBinaryDataContract : StringDataContract
     {
         internal HexBinaryDataContract()
-            : base(DictionaryGlobals.hexBinaryLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.hexBinaryLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class GYearMonthDataContract : StringDataContract
     {
         internal GYearMonthDataContract()
-            : base(DictionaryGlobals.gYearMonthLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.gYearMonthLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class GYearDataContract : StringDataContract
     {
         internal GYearDataContract()
-            : base(DictionaryGlobals.gYearLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.gYearLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class GMonthDayDataContract : StringDataContract
     {
         internal GMonthDayDataContract()
-            : base(DictionaryGlobals.gMonthDayLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.gMonthDayLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class GDayDataContract : StringDataContract
     {
         internal GDayDataContract()
-            : base(DictionaryGlobals.gDayLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.gDayLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class GMonthDataContract : StringDataContract
     {
         internal GMonthDataContract()
-            : base(DictionaryGlobals.gMonthLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.gMonthLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class NormalizedStringDataContract : StringDataContract
     {
         internal NormalizedStringDataContract()
             : base(DictionaryGlobals.normalizedStringLocalName, DictionaryGlobals.SchemaNamespace)
-        { }
+        {
+        }
     }
 
     internal sealed class TokenDataContract : StringDataContract
     {
         internal TokenDataContract()
-            : base(DictionaryGlobals.tokenLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.tokenLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class LanguageDataContract : StringDataContract
     {
         internal LanguageDataContract()
-            : base(DictionaryGlobals.languageLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.languageLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class NameDataContract : StringDataContract
     {
         internal NameDataContract()
-            : base(DictionaryGlobals.NameLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.NameLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class NCNameDataContract : StringDataContract
     {
         internal NCNameDataContract()
-            : base(DictionaryGlobals.NCNameLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.NCNameLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class IDDataContract : StringDataContract
     {
         internal IDDataContract()
-            : base(DictionaryGlobals.XSDIDLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.XSDIDLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class IDREFDataContract : StringDataContract
     {
         internal IDREFDataContract()
-            : base(DictionaryGlobals.IDREFLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.IDREFLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class IDREFSDataContract : StringDataContract
     {
         internal IDREFSDataContract()
-            : base(DictionaryGlobals.IDREFSLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.IDREFSLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class ENTITYDataContract : StringDataContract
     {
         internal ENTITYDataContract()
-            : base(DictionaryGlobals.ENTITYLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.ENTITYLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class ENTITIESDataContract : StringDataContract
     {
         internal ENTITIESDataContract()
-            : base(DictionaryGlobals.ENTITIESLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.ENTITIESLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class NMTOKENDataContract : StringDataContract
     {
         internal NMTOKENDataContract()
-            : base(DictionaryGlobals.NMTOKENLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.NMTOKENLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class NMTOKENSDataContract : StringDataContract
     {
         internal NMTOKENSDataContract()
-            : base(DictionaryGlobals.NMTOKENSLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.NMTOKENSLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal sealed class ByteArrayDataContract : PrimitiveDataContract
@@ -1184,7 +1270,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(byte[]),
                 DictionaryGlobals.ByteArrayLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteBase64";
         internal override string ReadMethodName => "ReadElementContentAsBase64";
@@ -1240,7 +1328,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(object),
                 DictionaryGlobals.ObjectLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteAnyType";
         internal override string ReadMethodName => "ReadElementContentAsAnyType";
@@ -1301,10 +1391,13 @@ namespace System.Runtime.Serialization.DataContracts
     {
         public TimeSpanDataContract()
             : this(DictionaryGlobals.TimeSpanLocalName, DictionaryGlobals.SerializationNamespace)
-        { }
+        {
+        }
 
         internal TimeSpanDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(TimeSpan), name, ns) { }
+            : base(typeof(TimeSpan), name, ns)
+        {
+        }
 
         internal override string WriteMethodName => "WriteTimeSpan";
         internal override string ReadMethodName => "ReadElementContentAsTimeSpan";
@@ -1349,16 +1442,22 @@ namespace System.Runtime.Serialization.DataContracts
     internal sealed class XsDurationDataContract : TimeSpanDataContract
     {
         public XsDurationDataContract()
-            : base(DictionaryGlobals.TimeSpanLocalName, DictionaryGlobals.SchemaNamespace) { }
+            : base(DictionaryGlobals.TimeSpanLocalName, DictionaryGlobals.SchemaNamespace)
+        {
+        }
     }
 
     internal class GuidDataContract : PrimitiveDataContract
     {
         public GuidDataContract()
-            : this(DictionaryGlobals.GuidLocalName, DictionaryGlobals.SerializationNamespace) { }
+            : this(DictionaryGlobals.GuidLocalName, DictionaryGlobals.SerializationNamespace)
+        {
+        }
 
         internal GuidDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(Guid), name, ns) { }
+            : base(typeof(Guid), name, ns)
+        {
+        }
 
         internal override string WriteMethodName => "WriteGuid";
         internal override string ReadMethodName => "ReadElementContentAsGuid";
@@ -1403,14 +1502,17 @@ namespace System.Runtime.Serialization.DataContracts
     internal sealed class AsmxGuidDataContract : GuidDataContract
     {
         internal AsmxGuidDataContract()
-            : base(DictionaryGlobals.GuidLocalName, DictionaryGlobals.AsmxTypesNamespace) { }
+            : base(DictionaryGlobals.GuidLocalName, DictionaryGlobals.AsmxTypesNamespace)
+        {
+        }
     }
 
     internal sealed class UriDataContract : PrimitiveDataContract
     {
         public UriDataContract()
             : base(typeof(Uri), DictionaryGlobals.UriLocalName, DictionaryGlobals.SchemaNamespace)
-        { }
+        {
+        }
 
         internal override string WriteMethodName => "WriteUri";
         internal override string ReadMethodName => "ReadElementContentAsUri";
@@ -1464,7 +1566,9 @@ namespace System.Runtime.Serialization.DataContracts
                 typeof(XmlQualifiedName),
                 DictionaryGlobals.QNameLocalName,
                 DictionaryGlobals.SchemaNamespace
-            ) { }
+            )
+        {
+        }
 
         internal override string WriteMethodName => "WriteQName";
         internal override string ReadMethodName => "ReadElementContentAsQName";

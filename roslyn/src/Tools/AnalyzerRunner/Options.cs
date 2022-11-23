@@ -79,7 +79,9 @@ namespace AnalyzerRunner
                 usePersistentStorage,
                 fullSolutionAnalysis,
                 incrementalAnalyzerNames
-            ) { }
+            )
+        {
+        }
 
         internal Options(
             string analyzerPath,

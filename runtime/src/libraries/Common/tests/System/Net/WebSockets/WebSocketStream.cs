@@ -25,13 +25,19 @@ namespace System.Net.WebSockets
         private int _disposed;
 
         public WebSocketStream(WebSocket socket)
-            : this(socket, FileAccess.ReadWrite, ownsSocket: false) { }
+            : this(socket, FileAccess.ReadWrite, ownsSocket: false)
+        {
+        }
 
         public WebSocketStream(WebSocket socket, bool ownsSocket)
-            : this(socket, FileAccess.ReadWrite, ownsSocket) { }
+            : this(socket, FileAccess.ReadWrite, ownsSocket)
+        {
+        }
 
         public WebSocketStream(WebSocket socket, FileAccess access)
-            : this(socket, access, ownsSocket: false) { }
+            : this(socket, access, ownsSocket: false)
+        {
+        }
 
         public WebSocketStream(WebSocket socket, FileAccess access, bool ownsSocket)
         {
@@ -164,7 +170,9 @@ namespace System.Net.WebSockets
                             );
                             Task.WaitAll(task);
                         }
-                        catch (Exception) { }
+                        catch (Exception)
+                        {
+                        }
                         finally
                         {
                             _streamSocket.Dispose();
@@ -285,7 +293,9 @@ namespace System.Net.WebSockets
             }
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {

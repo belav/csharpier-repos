@@ -9,7 +9,9 @@ public class StoreGeneratedFixupInMemoryTest
     : StoreGeneratedFixupTestBase<StoreGeneratedFixupInMemoryTest.StoreGeneratedFixupInMemoryFixture>
 {
     public StoreGeneratedFixupInMemoryTest(StoreGeneratedFixupInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override void Temporary_value_equals_database_generated_value()
     {

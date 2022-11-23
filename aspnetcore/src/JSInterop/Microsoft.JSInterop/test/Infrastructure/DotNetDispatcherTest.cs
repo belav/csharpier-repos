@@ -1187,7 +1187,9 @@ public class DotNetDispatcherTest
     internal class SomeInteralType
     {
         [JSInvokable("MethodOnInternalType")]
-        public void MyMethod() { }
+        public void MyMethod()
+        {
+        }
     }
 
     public class SomePublicType
@@ -1196,14 +1198,22 @@ public class DotNetDispatcherTest
         public bool DidInvokeMyInvocableInstanceVoid;
 
         [JSInvokable("PrivateMethod")]
-        private static void MyPrivateMethod() { }
+        private static void MyPrivateMethod()
+        {
+        }
 
         [JSInvokable("ProtectedMethod")]
-        protected static void MyProtectedMethod() { }
+        protected static void MyProtectedMethod()
+        {
+        }
 
-        protected static void StaticMethodWithoutAttribute() { }
+        protected static void StaticMethodWithoutAttribute()
+        {
+        }
 
-        protected static void InstanceMethodWithoutAttribute() { }
+        protected static void InstanceMethodWithoutAttribute()
+        {
+        }
 
         [JSInvokable("InvocableStaticVoid")]
         public static void MyInvocableVoid()
@@ -1352,7 +1362,9 @@ public class DotNetDispatcherTest
         }
     }
 
-    public class DerivedClass : BaseClass { }
+    public class DerivedClass : BaseClass
+    {
+    }
 
     public class TestDTO
     {

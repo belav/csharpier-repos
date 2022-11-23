@@ -27,7 +27,9 @@ namespace System.Speech.Internal.SrgsCompiler
         /// <summary>
         /// Clear all the rules
         /// </summary>
-        void IElementFactory.RemoveAllRules() { }
+        void IElementFactory.RemoveAllRules()
+        {
+        }
 
         IPropertyTag IElementFactory.CreatePropertyTag(IElement parent)
         {
@@ -187,11 +189,17 @@ namespace System.Speech.Internal.SrgsCompiler
             }
         }
 
-        void IElementFactory.AddItem(IOneOf oneOf, IItem item) { }
+        void IElementFactory.AddItem(IOneOf oneOf, IItem item)
+        {
+        }
 
-        void IElementFactory.AddElement(IRule rule, IElement value) { }
+        void IElementFactory.AddElement(IRule rule, IElement value)
+        {
+        }
 
-        void IElementFactory.AddElement(IItem item, IElement value) { }
+        void IElementFactory.AddElement(IItem item, IElement value)
+        {
+        }
 
         #endregion
 

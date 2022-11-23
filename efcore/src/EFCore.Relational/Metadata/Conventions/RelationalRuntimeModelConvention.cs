@@ -316,7 +316,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IEntityTypeMappingFragment entityTypeMappingFragment,
         RuntimeEntityTypeMappingFragment runtimeEntityTypeMappingFragment,
         bool runtime
-    ) { }
+    )
+    {
+    }
 
     private void CreateAnnotations<TSource, TTarget>(
         TSource source,
@@ -370,7 +372,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IDbFunction function,
         RuntimeDbFunction runtimeFunction,
         bool runtime
-    ) { }
+    )
+    {
+    }
 
     private static RuntimeDbFunctionParameter Create(
         IDbFunctionParameter parameter,
@@ -396,7 +400,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IDbFunctionParameter parameter,
         RuntimeDbFunctionParameter runtimeParameter,
         bool runtime
-    ) { }
+    )
+    {
+    }
 
     private static RuntimeSequence Create(ISequence sequence, RuntimeModel runtimeModel) =>
         new(
@@ -424,7 +430,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         ISequence sequence,
         RuntimeSequence runtimeSequence,
         bool runtime
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Updates the property annotations that will be set on the read-only object.
@@ -519,7 +527,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IRelationalPropertyOverrides propertyOverrides,
         RuntimeRelationalPropertyOverrides runtimePropertyOverrides,
         bool runtime
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Updates the key annotations that will be set on the read-only object.
@@ -668,7 +678,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IStoredProcedure storedProcedure,
         RuntimeStoredProcedure runtimeStoredProcedure,
         bool runtime
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Updates the stored procedure parameter annotations that will be set on the read-only object.
@@ -682,7 +694,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IStoredProcedureParameter parameter,
         RuntimeStoredProcedureParameter runtimeParameter,
         bool runtime
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Updates the stored procedure result column annotations that will be set on the read-only object.
@@ -696,5 +710,7 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IStoredProcedureResultColumn resultColumn,
         RuntimeStoredProcedureResultColumn runtimeResultColumn,
         bool runtime
-    ) { }
+    )
+    {
+    }
 }

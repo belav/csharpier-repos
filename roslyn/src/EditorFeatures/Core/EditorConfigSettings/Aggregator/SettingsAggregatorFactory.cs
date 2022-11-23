@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SettingsAggregatorFactory() { }
+        public SettingsAggregatorFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new SettingsAggregator(workspaceServices.Workspace);

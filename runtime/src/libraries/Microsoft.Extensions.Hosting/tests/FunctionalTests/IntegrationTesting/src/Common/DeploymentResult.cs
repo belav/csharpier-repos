@@ -40,7 +40,9 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 deploymentParameters: deploymentParameters,
                 contentRoot: string.Empty,
                 hostShutdownToken: CancellationToken.None
-            ) { }
+            )
+        {
+        }
 
         public DeploymentResult(
             ILoggerFactory loggerFactory,

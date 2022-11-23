@@ -166,7 +166,9 @@ public class InstanceFactoryTest
 
     private class Parameterless
     {
-        private Parameterless() { }
+        private Parameterless()
+        {
+        }
 
         public int Id { get; set; }
     }
@@ -184,7 +186,9 @@ public class InstanceFactoryTest
 
     private class ParameterlessAndWithProperties
     {
-        public ParameterlessAndWithProperties() { }
+        public ParameterlessAndWithProperties()
+        {
+        }
 
         public ParameterlessAndWithProperties(int id)
         {

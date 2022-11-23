@@ -96,9 +96,13 @@ namespace System.Security.Cryptography
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) => null!;
 
@@ -107,7 +111,9 @@ namespace System.Security.Cryptography
 
     public sealed partial class CngKey : System.IDisposable
     {
-        internal CngKey() { }
+        internal CngKey()
+        {
+        }
 
         public CngAlgorithm Algorithm => null!;
         public CngAlgorithmGroup? AlgorithmGroup => null;
@@ -121,16 +127,22 @@ namespace System.Security.Cryptography
         public IntPtr ParentWindowHandle
         {
             get => default;
-            set { }
+            set
+            {
+            }
         }
         public CngProvider? Provider => null;
         public SafeNCryptProviderHandle ProviderHandle => null!;
         public CngUIPolicy UIPolicy => null!;
         public string? UniqueName => null;
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public byte[] Export(CngKeyBlobFormat format) => null!;
 
@@ -138,7 +150,9 @@ namespace System.Security.Cryptography
 
         public bool HasProperty(string name, CngPropertyOptions options) => false;
 
-        public void SetProperty(CngProperty property) { }
+        public void SetProperty(CngProperty property)
+        {
+        }
 
         [SupportedOSPlatform("windows")]
         public static CngKey Create(CngAlgorithm algorithm)
@@ -250,7 +264,9 @@ namespace System.Security.Cryptography
 
         public override DSAParameters ExportParameters(bool includePrivateParameters) => default;
 
-        public override void ImportParameters(DSAParameters parameters) { }
+        public override void ImportParameters(DSAParameters parameters)
+        {
+        }
 
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) => false;
     }
@@ -284,38 +300,52 @@ namespace System.Security.Cryptography
         public CngAlgorithm HashAlgorithm
         {
             get => null!;
-            set { }
+            set
+            {
+            }
         }
         public byte[]? HmacKey
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
         public CngKey Key => null!;
         public ECDiffieHellmanKeyDerivationFunction KeyDerivationFunction
         {
             get => default;
-            set { }
+            set
+            {
+            }
         }
         public byte[]? Label
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
         public byte[]? SecretAppend
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
         public byte[]? SecretPrepend
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
         public byte[]? Seed
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
         public bool UseSecretAgreementAsHmacKey => false;
 
@@ -333,7 +363,9 @@ namespace System.Security.Cryptography
             DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public void FromXmlString(string xml, ECKeyXmlFormat format) { }
+        public void FromXmlString(string xml, ECKeyXmlFormat format)
+        {
+        }
 
         [Obsolete(
             Obsoletions.EccXmlExportImportMessage,
@@ -347,11 +379,15 @@ namespace System.Security.Cryptography
 
     public sealed partial class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
     {
-        internal ECDiffieHellmanCngPublicKey() { }
+        internal ECDiffieHellmanCngPublicKey()
+        {
+        }
 
         public CngKeyBlobFormat BlobFormat => null!;
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public CngKey Import() => null!;
 
@@ -414,7 +450,9 @@ namespace System.Security.Cryptography
         public CngAlgorithm HashAlgorithm
         {
             get => null!;
-            set { }
+            set
+            {
+            }
         }
         public CngKey Key => null!;
 
@@ -423,7 +461,9 @@ namespace System.Security.Cryptography
             DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public void FromXmlString(string xml, ECKeyXmlFormat format) { }
+        public void FromXmlString(string xml, ECKeyXmlFormat format)
+        {
+        }
 
         public byte[] SignData(byte[] data) => null!;
 
@@ -473,7 +513,9 @@ namespace System.Security.Cryptography
 
         public override RSAParameters ExportParameters(bool includePrivateParameters) => default;
 
-        public override void ImportParameters(RSAParameters parameters) { }
+        public override void ImportParameters(RSAParameters parameters)
+        {
+        }
     }
 
     public sealed partial class TripleDESCng : TripleDES
@@ -502,9 +544,13 @@ namespace System.Security.Cryptography
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) => null!;
 

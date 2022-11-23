@@ -455,7 +455,14 @@ namespace System.Web.Helpers.Test
             // Act
             WebImage image = new WebImage(context, _ => _JpgImageBytes, @"c:\images\foo.jpg");
 
-            image.Save(context, (_, __) => { }, @"x:\1.exe", "jpg", forceWellKnownExtension: true);
+            image.Save(
+                context,
+                (_, __) => {
+                },
+                @"x:\1.exe",
+                "jpg",
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(@"x:\1.exe.jpeg", image.FileName);
@@ -471,7 +478,14 @@ namespace System.Web.Helpers.Test
             // Act
             WebImage image = new WebImage(context, _ => _JpgImageBytes, imagePath);
 
-            image.Save(context, (_, __) => { }, imagePath, "png", forceWellKnownExtension: true);
+            image.Save(
+                context,
+                (_, __) => {
+                },
+                imagePath,
+                "png",
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(@"x:\images\foo.jpg.png", image.FileName);
@@ -487,7 +501,14 @@ namespace System.Web.Helpers.Test
             // Act
             WebImage image = new WebImage(context, _ => _JpgImageBytes, imagePath);
 
-            image.Save(context, (_, __) => { }, imagePath, "jpg", forceWellKnownExtension: true);
+            image.Save(
+                context,
+                (_, __) => {
+                },
+                imagePath,
+                "jpg",
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(@"x:\images\foo.jpg", image.FileName);
@@ -1109,7 +1130,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SaveOverwritesExistingFile()
         {
-            Action<string, byte[]> saveAction = (path, content) => { };
+            Action<string, byte[]> saveAction = (path, content) => {
+            };
 
             WebImage image = new WebImage(_BmpImageBytes);
             string newFileName = @"x:\newImage.bmp";
@@ -1136,7 +1158,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SaveThrowsWhenPathIsNull()
         {
-            Action<string, byte[]> saveAction = (path, content) => { };
+            Action<string, byte[]> saveAction = (path, content) => {
+            };
 
             // this constructor will not set path
             byte[] originalContent = _BmpImageBytes;
@@ -1158,7 +1181,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SaveThrowsWhenPathIsEmpty()
         {
-            Action<string, byte[]> saveAction = (path, content) => { };
+            Action<string, byte[]> saveAction = (path, content) => {
+            };
             WebImage image = new WebImage(_BmpImageBytes);
 
             Assert.ThrowsArgumentNullOrEmptyString(

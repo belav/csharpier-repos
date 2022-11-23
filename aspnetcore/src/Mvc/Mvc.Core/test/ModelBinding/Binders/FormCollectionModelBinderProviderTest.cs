@@ -56,10 +56,14 @@ public class FormCollectionModelBinderProviderTest
         Assert.IsType<FormCollectionModelBinder>(result);
     }
 
-    private class TestClass { }
+    private class TestClass
+    {
+    }
 
     private class DerivedFormCollection : FormCollection
     {
-        public DerivedFormCollection() : base(fields: null, files: null) { }
+        public DerivedFormCollection() : base(fields: null, files: null)
+        {
+        }
     }
 }

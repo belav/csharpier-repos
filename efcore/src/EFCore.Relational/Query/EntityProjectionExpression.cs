@@ -35,7 +35,9 @@ public class EntityProjectionExpression : Expression
             propertyExpressionMap,
             new Dictionary<INavigation, EntityShaperExpression>(),
             discriminatorExpression
-        ) { }
+        )
+    {
+    }
 
     private EntityProjectionExpression(
         IEntityType entityType,

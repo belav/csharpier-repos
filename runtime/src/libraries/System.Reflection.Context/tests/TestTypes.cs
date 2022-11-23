@@ -37,7 +37,8 @@ namespace System.Reflection.Context.Tests
                     numberType,
                     "number",
                     _ => 42,
-                    (a, b) => { },
+                    (a, b) => {
+                    },
                     new Attribute[] { new TestPropertyAttribute() },
                     new Attribute[] { new TestGetterSetterAttribute() },
                     new Attribute[] { new TestGetterSetterAttribute() }
@@ -74,7 +75,9 @@ namespace System.Reflection.Context.Tests
 
     internal class FaultyTestCustomReflectionContext : CustomReflectionContext
     {
-        public FaultyTestCustomReflectionContext() : base(null) { }
+        public FaultyTestCustomReflectionContext() : base(null)
+        {
+        }
     }
 
     internal class VirtualPropertyInfoCustomReflectionContext : CustomReflectionContext
@@ -118,27 +121,44 @@ namespace System.Reflection.Context.Tests
                     numberType,
                     "number",
                     _ => 42,
-                    (a, b) => { },
+                    (a, b) => {
+                    },
                     new Attribute[] { new TestPropertyAttribute() },
                     new Attribute[] { new TestGetterSetterAttribute() },
                     new Attribute[] { new TestGetterSetterAttribute() }
                 );
 
-                yield return CreateProperty(numberType, "number2", null, (a, b) => { });
+                yield return CreateProperty(
+                    numberType,
+                    "number2",
+                    null,
+                    (a, b) => {
+                    }
+                );
                 yield return CreateProperty(numberType, "number3", _ => 42, null);
             }
         }
     }
 
-    internal struct NullGetterAndSetterCase { }
+    internal struct NullGetterAndSetterCase
+    {
+    }
 
-    internal struct WrongContextCase { }
+    internal struct WrongContextCase
+    {
+    }
 
-    internal struct NullPropertyNameCase { }
+    internal struct NullPropertyNameCase
+    {
+    }
 
-    internal struct EmptyPropertyNameCase { }
+    internal struct EmptyPropertyNameCase
+    {
+    }
 
-    internal struct NullPropertyTypeCase { }
+    internal struct NullPropertyTypeCase
+    {
+    }
 
     [DataContract]
     internal class TestObject
@@ -160,20 +180,32 @@ namespace System.Reflection.Context.Tests
         public int this[int index]
         {
             get => 42;
-            set { }
+            set
+            {
+            }
         }
     }
 
-    internal class TestAttribute : Attribute { }
+    internal class TestAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Parameter)]
-    internal class TestParameterAttribute : Attribute { }
+    internal class TestParameterAttribute : Attribute
+    {
+    }
 
-    internal class TestPropertyAttribute : Attribute { }
+    internal class TestPropertyAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Property)]
-    internal class TestGetterSetterAttribute : Attribute { }
+    internal class TestGetterSetterAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    internal class TestAssemblyAttribute : Attribute { }
+    internal class TestAssemblyAttribute : Attribute
+    {
+    }
 }

@@ -17,7 +17,9 @@ namespace System.Runtime.Serialization
         private bool _isReference;
         private bool _isReferenceSetExplicitly;
 
-        public DataContractAttribute() { }
+        public DataContractAttribute()
+        {
+        }
 
         public bool IsReference
         {

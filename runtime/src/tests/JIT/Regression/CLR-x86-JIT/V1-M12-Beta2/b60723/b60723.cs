@@ -35,7 +35,9 @@ namespace Test
             }
             finally
             {
-                while (m_bFwd2) { }
+                while (m_bFwd2)
+                {
+                }
             }
         }
     }

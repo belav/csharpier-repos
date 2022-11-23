@@ -1823,7 +1823,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonNumberHandling(
             JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
         )]
-        public class MyCustomList : List<int> { }
+        public class MyCustomList : List<int>
+        {
+        }
 
         [Fact]
         public static void TypeAttributeAppliesTo_CustomCollectionElements_HonoredWhenProperty()
@@ -1849,7 +1851,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonNumberHandling(
             JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
         )]
-        public class MyCustomDictionary : Dictionary<string, int> { }
+        public class MyCustomDictionary : Dictionary<string, int>
+        {
+        }
 
         [Fact]
         public static void TypeAttributeAppliesTo_CustomDictionaryElements_HonoredWhenProperty()
@@ -2006,7 +2010,9 @@ namespace System.Text.Json.Serialization.Tests
 
         [JsonNumberHandling(JsonNumberHandling.Strict)]
         [JsonConverter(typeof(ConverterForMyType))]
-        public class ClassWith_NumberHandlingOn_Type_WithCustomConverter { }
+        public class ClassWith_NumberHandlingOn_Type_WithCustomConverter
+        {
+        }
 
         private class ConverterForMyType
             : JsonConverter<ClassWith_NumberHandlingOn_Type_WithCustomConverter>
@@ -2382,33 +2388,45 @@ namespace System.Text.Json.Serialization.Tests
     public class NumberHandlingTests_AsyncStreamOverload : NumberHandlingTests_OverloadSpecific
     {
         public NumberHandlingTests_AsyncStreamOverload()
-            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+            : base(JsonSerializerWrapper.AsyncStreamSerializer)
+        {
+        }
     }
 
     public class NumberHandlingTests_SyncStreamOverload : NumberHandlingTests_OverloadSpecific
     {
         public NumberHandlingTests_SyncStreamOverload()
-            : base(JsonSerializerWrapper.SyncStreamSerializer) { }
+            : base(JsonSerializerWrapper.SyncStreamSerializer)
+        {
+        }
     }
 
     public class NumberHandlingTests_SyncOverload : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_SyncOverload() : base(JsonSerializerWrapper.StringSerializer) { }
+        public NumberHandlingTests_SyncOverload() : base(JsonSerializerWrapper.StringSerializer)
+        {
+        }
     }
 
     public class NumberHandlingTests_Document : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Document() : base(JsonSerializerWrapper.DocumentSerializer) { }
+        public NumberHandlingTests_Document() : base(JsonSerializerWrapper.DocumentSerializer)
+        {
+        }
     }
 
     public class NumberHandlingTests_Element : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Element() : base(JsonSerializerWrapper.ElementSerializer) { }
+        public NumberHandlingTests_Element() : base(JsonSerializerWrapper.ElementSerializer)
+        {
+        }
     }
 
     public class NumberHandlingTests_Node : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Node() : base(JsonSerializerWrapper.NodeSerializer) { }
+        public NumberHandlingTests_Node() : base(JsonSerializerWrapper.NodeSerializer)
+        {
+        }
     }
 
     public abstract class NumberHandlingTests_OverloadSpecific

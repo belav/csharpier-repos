@@ -73,7 +73,9 @@ namespace System.IO.Tests
                     Assert.True(length > 0);
                 }
             }
-            catch (IOException) { }
+            catch (IOException)
+            {
+            }
         }
     }
 }

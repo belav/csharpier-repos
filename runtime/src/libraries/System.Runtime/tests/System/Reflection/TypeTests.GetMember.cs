@@ -320,18 +320,28 @@ public static class TypeTests_GetMember
 
     private class Mixed
     {
-        public Mixed() { }
+        public Mixed()
+        {
+        }
 
         public event Action MyEvent
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public int MyField;
 
-        public void MyMethod() { }
+        public void MyMethod()
+        {
+        }
 
-        public class MyType { }
+        public class MyType
+        {
+        }
 
         public int MyProperty { get; }
     }

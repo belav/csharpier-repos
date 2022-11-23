@@ -89,7 +89,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         protected abstract class NotMovableVariableSymbol : VariableSymbol
         {
             public NotMovableVariableSymbol(Compilation compilation, ITypeSymbol type)
-                : base(compilation, type) { }
+                : base(compilation, type)
+            {
+            }
 
             public override bool GetUseSaferDeclarationBehavior(CancellationToken cancellationToken)
             {

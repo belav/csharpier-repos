@@ -185,7 +185,9 @@ interface IFooBarBlah : IFoo, IBar, IBlah
 
 class FooBarBlahImpl
     : IBlahImpl, // @REMOVE
-        IFooBarBlah { }
+        IFooBarBlah
+{
+}
 
 class Program
 {

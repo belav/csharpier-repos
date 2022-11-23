@@ -27,7 +27,9 @@ namespace System.Text.RegularExpressions.Symbolic
         private int _size;
 
         /// <summary>Creates a new empty list</summary>
-        public DoublyLinkedList() { }
+        public DoublyLinkedList()
+        {
+        }
 
         /// <summary>Creates a new singleton list containing the given element</summary>
         public DoublyLinkedList(T elem)

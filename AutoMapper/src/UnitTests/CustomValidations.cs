@@ -5,9 +5,13 @@ namespace AutoMapper.UnitTests;
 
 public class CustomValidations
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Destination { }
+    public class Destination
+    {
+    }
 
     public class When_using_custom_validation
     {

@@ -120,7 +120,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             public IsPatternExpressionGeneralLocalRewriter(
                 SyntaxNode node,
                 LocalRewriter localRewriter
-            ) : base(node, localRewriter, generateInstrumentation: false) { }
+            ) : base(node, localRewriter, generateInstrumentation: false)
+            {
+            }
 
             protected override ArrayBuilder<BoundStatement> BuilderForSection(SyntaxNode section) =>
                 _statements;

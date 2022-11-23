@@ -16,6 +16,8 @@ namespace System.Formats.Cbor
 
     public partial class CborWriter
     {
-        public void WriteHalf(System.Half value) { }
+        public void WriteHalf(System.Half value)
+        {
+        }
     }
 }

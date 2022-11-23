@@ -54,7 +54,9 @@ internal class AA
         return arg;
     }
 
-    public void verify() { }
+    public void verify()
+    {
+    }
 
     public static void verify_all()
     {

@@ -2235,7 +2235,9 @@ namespace System.Web.Mvc.Test
                 ControllerContext = new ControllerContext { Controller = this };
             }
 
-            public void SimpleAction() { }
+            public void SimpleAction()
+            {
+            }
         }
 
         private static ControllerContext GetControllerContext(string actionName)
@@ -2403,7 +2405,9 @@ namespace System.Web.Mvc.Test
             public ModelBindingContext BindingContext;
         }
 
-        private class MyModelSubclassed : MyModel { }
+        private class MyModelSubclassed : MyModel
+        {
+        }
 
         private class MyModelBinder : IModelBinder
         {
@@ -2425,7 +2429,9 @@ namespace System.Web.Mvc.Test
         public void SaveTempData(
             ControllerContext controllerContext,
             IDictionary<string, object> values
-        ) { }
+        )
+        {
+        }
 
         public IDictionary<string, object> LoadTempData(ControllerContext controllerContext)
         {

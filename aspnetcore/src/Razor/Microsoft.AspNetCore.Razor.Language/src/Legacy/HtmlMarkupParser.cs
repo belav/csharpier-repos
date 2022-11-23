@@ -39,7 +39,9 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
                 ? FirstDirectiveHtmlLanguageCharacteristics.Instance
                 : HtmlLanguageCharacteristics.Instance,
             context
-        ) { }
+        )
+    {
+    }
 
     private TagTracker CurrentTracker => _tagTracker.Count > 0 ? _tagTracker.Peek() : null;
 

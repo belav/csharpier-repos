@@ -33,6 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 subjectBuffer,
                 nextCommandTarget,
                 languageService.Package.ComponentModel
-            ) { }
+            )
+        {
+        }
     }
 }

@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.Logging.Console
     /// </summary>
     public class ConsoleFormatterOptions
     {
-        public ConsoleFormatterOptions() { }
+        public ConsoleFormatterOptions()
+        {
+        }
 
         /// <summary>
         /// Includes scopes when <see langword="true" />.

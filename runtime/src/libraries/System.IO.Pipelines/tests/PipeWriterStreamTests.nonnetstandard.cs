@@ -269,7 +269,9 @@ namespace System.IO.Pipelines.Tests
 
         public class NotImplementedPipeWriter : PipeWriter
         {
-            public NotImplementedPipeWriter() { }
+            public NotImplementedPipeWriter()
+            {
+            }
 
             public override void Advance(int bytes) => throw new NotImplementedException();
 

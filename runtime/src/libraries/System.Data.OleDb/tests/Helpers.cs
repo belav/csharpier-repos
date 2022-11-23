@@ -30,7 +30,9 @@ namespace System.Data.OleDb.Tests
             private static readonly Nested s_instance = new Nested();
             private const string ExpectedProviderName = @"Microsoft.ACE.OLEDB.12.0";
 
-            private Nested() { }
+            private Nested()
+            {
+            }
 
             static Nested()
             {

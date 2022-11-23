@@ -109,7 +109,9 @@ namespace Internal.Runtime.TypeLoader
             public MissingTemplateException()
                 // Cannot afford calling into resource manager from here, even to get the default message for System.Exception.
                 // This exception is always caught and rethrown as something more user friendly.
-                : base("Template is missing") { }
+                : base("Template is missing")
+            {
+            }
         }
 
         private static bool CheckAllHandlesValidForMethod(MethodDesc method)

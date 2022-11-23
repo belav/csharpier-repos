@@ -24,7 +24,9 @@ class FirefoxInspectorClient : InspectorClient
     internal string? ThreadActorId { get; set; }
     private ClientWebSocket? _clientSocket;
 
-    public FirefoxInspectorClient(ILogger logger) : base(logger) { }
+    public FirefoxInspectorClient(ILogger logger) : base(logger)
+    {
+    }
 
     protected override async Task<WasmDebuggerConnection> SetupConnection(
         Uri webserverUri,

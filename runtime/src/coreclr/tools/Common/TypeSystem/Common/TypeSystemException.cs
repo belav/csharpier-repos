@@ -47,7 +47,9 @@ namespace Internal.TypeSystem
                     return string.Format(formatString, (object[])args);
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return "[TEMPORARY EXCEPTION MESSAGE] "
                 + id.ToString()
@@ -90,7 +92,9 @@ namespace Internal.TypeSystem
         public abstract class MissingMemberException : TypeSystemException
         {
             protected internal MissingMemberException(ExceptionStringID id, params string[] args)
-                : base(id, args) { }
+                : base(id, args)
+            {
+            }
         }
 
         /// <summary>
@@ -99,7 +103,9 @@ namespace Internal.TypeSystem
         public class MissingMethodException : MissingMemberException
         {
             internal MissingMethodException(ExceptionStringID id, params string[] args)
-                : base(id, args) { }
+                : base(id, args)
+            {
+            }
         }
 
         /// <summary>
@@ -108,7 +114,9 @@ namespace Internal.TypeSystem
         public class MissingFieldException : MissingMemberException
         {
             internal MissingFieldException(ExceptionStringID id, params string[] args)
-                : base(id, args) { }
+                : base(id, args)
+            {
+            }
         }
 
         /// <summary>
@@ -117,7 +125,9 @@ namespace Internal.TypeSystem
         public class FileNotFoundException : TypeSystemException
         {
             internal FileNotFoundException(ExceptionStringID id, string fileName)
-                : base(id, fileName) { }
+                : base(id, fileName)
+            {
+            }
         }
 
         /// <summary>
@@ -127,24 +137,35 @@ namespace Internal.TypeSystem
         public class InvalidProgramException : TypeSystemException
         {
             internal InvalidProgramException(ExceptionStringID id, string method) : base(id, method)
-            { }
+            {
+            }
 
-            internal InvalidProgramException(ExceptionStringID id) : base(id) { }
+            internal InvalidProgramException(ExceptionStringID id) : base(id)
+            {
+            }
 
-            internal InvalidProgramException() : base(ExceptionStringID.InvalidProgramDefault) { }
+            internal InvalidProgramException() : base(ExceptionStringID.InvalidProgramDefault)
+            {
+            }
         }
 
         public class BadImageFormatException : TypeSystemException
         {
-            internal BadImageFormatException() : base(ExceptionStringID.BadImageFormatGeneric) { }
+            internal BadImageFormatException() : base(ExceptionStringID.BadImageFormatGeneric)
+            {
+            }
 
             internal BadImageFormatException(string reason)
-                : base(ExceptionStringID.BadImageFormatSpecific, reason) { }
+                : base(ExceptionStringID.BadImageFormatSpecific, reason)
+            {
+            }
         }
 
         public class MarshalDirectiveException : TypeSystemException
         {
-            internal MarshalDirectiveException(ExceptionStringID id) : base(id) { }
+            internal MarshalDirectiveException(ExceptionStringID id) : base(id)
+            {
+            }
         }
     }
 }

@@ -9,5 +9,7 @@ public class NorthwindQueryTaggingQueryInMemoryTest
     public NorthwindQueryTaggingQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 }

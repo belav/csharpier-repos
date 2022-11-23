@@ -142,7 +142,9 @@ namespace System.Net.Http
             foreach (HttpContent content in multipartContent)
             {
                 provider.Contents.Add(content);
-                using (provider.GetStream(multipartContent, content.Headers)) { }
+                using (provider.GetStream(multipartContent, content.Headers))
+                {
+                }
             }
 
             // Act

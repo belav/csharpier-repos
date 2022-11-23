@@ -17,6 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInlineHintsService() { }
+        public CSharpInlineHintsService()
+        {
+        }
     }
 }

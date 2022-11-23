@@ -13,9 +13,13 @@ namespace System.Security.Cryptography.Xml
         private TransformChain? _transformChain;
         internal XmlElement? _cachedXml;
 
-        protected EncryptedReference() : this(string.Empty, new TransformChain()) { }
+        protected EncryptedReference() : this(string.Empty, new TransformChain())
+        {
+        }
 
-        protected EncryptedReference(string uri) : this(uri, new TransformChain()) { }
+        protected EncryptedReference(string uri) : this(uri, new TransformChain())
+        {
+        }
 
         protected EncryptedReference(string uri, TransformChain transformChain)
         {

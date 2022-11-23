@@ -2026,8 +2026,8 @@ namespace System.Xml.Schema
         }
     }
 
-    internal sealed class MiscFacetsChecker
-        : FacetsChecker { //For bool, anySimpleType
+    internal sealed class MiscFacetsChecker : FacetsChecker
+    { //For bool, anySimpleType
     }
 
     internal sealed class BinaryFacetsChecker : FacetsChecker

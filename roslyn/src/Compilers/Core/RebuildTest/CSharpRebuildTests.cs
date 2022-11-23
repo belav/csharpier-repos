@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             );
             var originalPeReader = new PEReader(originalBytes);
             var originalPdbReader = originalPeReader.GetEmbeddedPdbMetadataReader()!;
-            var factory = LoggerFactory.Create(configure => { });
+            var factory = LoggerFactory.Create(configure =>
+            {
+            });
             var logger = factory.CreateLogger("Test");
 
             var optionsReader = new CompilationOptionsReader(

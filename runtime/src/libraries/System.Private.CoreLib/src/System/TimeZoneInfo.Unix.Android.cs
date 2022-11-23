@@ -324,7 +324,9 @@ namespace System
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             [MemberNotNullWhen(true, nameof(_ids))]
@@ -345,7 +347,9 @@ namespace System
                     }
                     return true;
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return false;
             }

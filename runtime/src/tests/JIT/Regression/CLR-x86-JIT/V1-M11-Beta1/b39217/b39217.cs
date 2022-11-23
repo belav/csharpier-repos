@@ -12,7 +12,9 @@ namespace Test
         bool[] m_ab = null;
         static App[] m_ax = new App[7];
 
-        public static void Method1() { }
+        public static void Method1()
+        {
+        }
 
         public bool[] Method1(ref int param1, App param4)
         {

@@ -491,7 +491,9 @@ public class GenerateEmbeddedResourcesManifestTest
 
     public class TestGenerateEmbeddedResourcesManifest : GenerateEmbeddedResourcesManifest
     {
-        public TestGenerateEmbeddedResourcesManifest() : this(new MemoryStream()) { }
+        public TestGenerateEmbeddedResourcesManifest() : this(new MemoryStream())
+        {
+        }
 
         public TestGenerateEmbeddedResourcesManifest(Stream output)
         {

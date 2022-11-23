@@ -11,7 +11,9 @@ public class NonGenericConstructorTests : AutoMapperSpecBase
 
     public class Dest
     {
-        public Dest() { }
+        public Dest()
+        {
+        }
 
         public Dest(int other)
         {

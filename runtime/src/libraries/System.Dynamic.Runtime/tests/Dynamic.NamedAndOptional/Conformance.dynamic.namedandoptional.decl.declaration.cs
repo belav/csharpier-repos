@@ -12,7 +12,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Code>
     public class Parent
     {
-        public Parent(dynamic i = null) { }
+        public Parent(dynamic i = null)
+        {
+        }
 
         public dynamic Foo()
         {
@@ -46,7 +48,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Code>
     public class Parent
     {
-        public Parent(dynamic i = default(object)) { }
+        public Parent(dynamic i = default(object))
+        {
+        }
 
         public int Foo()
         {
@@ -81,7 +85,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Code>
     public class Parent
     {
-        public Parent(dynamic i = default(dynamic), dynamic j = null) { }
+        public Parent(dynamic i = default(dynamic), dynamic j = null)
+        {
+        }
 
         public int Foo()
         {
@@ -115,7 +121,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Code>
     public class Parent
     {
-        public Parent(dynamic i, int j = 1) { }
+        public Parent(dynamic i, int j = 1)
+        {
+        }
 
         public int Foo()
         {
@@ -149,7 +157,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Code>
     public class Parent
     {
-        public Parent(dynamic i, int j = 1) { }
+        public Parent(dynamic i, int j = 1)
+        {
+        }
 
         public int Foo()
         {
@@ -850,7 +860,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         }
     }
 
-    public class Foo { }
+    public class Foo
+    {
+    }
 
     public class Test
     {
@@ -886,7 +898,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         }
     }
 
-    public class Foo { }
+    public class Foo
+    {
+    }
 
     public class Test
     {
@@ -917,7 +931,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[dynamic index = null, dynamic index2 = default(dynamic)]
         {
             get { return index2 ?? 1 - index; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -950,7 +966,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[int? index = 1, int? index2 = 1]
         {
             get { return (int)index2 - 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -984,7 +1002,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[int? index = 1, long? index2 = 1]
         {
             get { return (int)(index2 - 1); }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1018,7 +1038,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[int index = 1, dynamic index2 = null]
         {
             get { return index2 == null ? 0 : 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1051,7 +1073,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[int? index = 1, string index2 = "test"]
         {
             get { return index2 == "test" ? 0 : 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1090,7 +1114,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[int? index = 1, S s = default(S)]
         {
             get { return s.x == 0 ? 0 : 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1119,14 +1145,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Description>Simple Declaration of an indexer with optional parameters</Description>
     // <Expects status=success></Expects>
     // <Code>
-    public class S { }
+    public class S
+    {
+    }
 
     public class Parent
     {
         public int this[int? index = 1, S s = null]
         {
             get { return s == null ? 0 : 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1160,7 +1190,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[dynamic index = null, int? s = null]
         {
             get { return s == null ? 0 : 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1193,7 +1225,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[int? index = 1, int? s = null]
         {
             get { return s == null ? 0 : 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1227,7 +1261,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         public int this[int? index = 1, int? s = 0]
         {
             get { return s == 0 ? 0 : 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 

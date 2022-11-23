@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     & ~SymbolDisplayGenericsOptions.IncludeTypeParameters
             );
 
-        protected AbstractSignatureHelpProvider() { }
+        protected AbstractSignatureHelpProvider()
+        {
+        }
 
         public abstract bool IsTriggerCharacter(char ch);
         public abstract bool IsRetriggerCharacter(char ch);

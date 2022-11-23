@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Instrumenter.NoOp
         );
 
-        public DebugInfoInjector(Instrumenter previous) : base(previous) { }
+        public DebugInfoInjector(Instrumenter previous) : base(previous)
+        {
+        }
 
         public override BoundStatement InstrumentNoOpStatement(
             BoundNoOpStatement original,

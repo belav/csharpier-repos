@@ -70,7 +70,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             }
         }
 
-        public SemanticTokensCache() { }
+        public SemanticTokensCache()
+        {
+        }
 
         /// <summary>
         /// Updates the given document's token set cache. Removes old cache results if the document's

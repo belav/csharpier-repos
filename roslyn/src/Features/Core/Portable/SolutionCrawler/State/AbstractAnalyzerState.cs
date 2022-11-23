@@ -95,7 +95,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler.State
                     return TryGetExistingData(stream, value, cancellationToken);
                 }
             }
-            catch (Exception e) when (IOUtilities.IsNormalIOException(e)) { }
+            catch (Exception e) when (IOUtilities.IsNormalIOException(e))
+            {
+            }
 
             return default;
         }

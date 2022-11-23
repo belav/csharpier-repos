@@ -37,7 +37,9 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Prevents a default instance of the <see cref="HashBucketByRefEqualityComparer"/> class from being created.
             /// </summary>
-            private HashBucketByRefEqualityComparer() { }
+            private HashBucketByRefEqualityComparer()
+            {
+            }
 
             /// <inheritdoc />
             public bool Equals(HashBucket x, HashBucket y) => x.EqualsByRef(y);

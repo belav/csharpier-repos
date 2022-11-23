@@ -12,19 +12,29 @@ namespace System.Security.Cryptography
     )]
     public class CryptographicUnexpectedOperationException : CryptographicException
     {
-        public CryptographicUnexpectedOperationException() : base(SR.Arg_CryptographyException) { }
+        public CryptographicUnexpectedOperationException() : base(SR.Arg_CryptographyException)
+        {
+        }
 
-        public CryptographicUnexpectedOperationException(string? message) : base(message) { }
+        public CryptographicUnexpectedOperationException(string? message) : base(message)
+        {
+        }
 
         public CryptographicUnexpectedOperationException(string? message, Exception? inner)
-            : base(message, inner) { }
+            : base(message, inner)
+        {
+        }
 
         public CryptographicUnexpectedOperationException(string format, string? insert)
-            : base(string.Format(CultureInfo.CurrentCulture, format, insert)) { }
+            : base(string.Format(CultureInfo.CurrentCulture, format, insert))
+        {
+        }
 
         protected CryptographicUnexpectedOperationException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
     }
 }

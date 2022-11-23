@@ -400,7 +400,9 @@ class InactiveForeignException
                 fPassed = true;
             }
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         Console.WriteLine("{0}", (fPassed) ? "Passed" : "Failed");
 

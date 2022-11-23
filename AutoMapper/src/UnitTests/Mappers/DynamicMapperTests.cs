@@ -44,7 +44,9 @@ public class When_mapping_to_dynamic_from_getter_only_property
     [Fact]
     public void Should_map_source_properties()
     {
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         dynamic destination = config.CreateMapper().Map<DynamicDictionary>(new Source());
         ((int)destination.Count).ShouldBe(1);
         Assert.Equal(24, destination.Value);
@@ -58,7 +60,9 @@ public class When_mapping_to_dynamic
     [Fact]
     public void Should_map_source_properties()
     {
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         var data = new[] { 1, 2, 3 };
         _destination = config
             .CreateMapper()
@@ -90,7 +94,9 @@ public class When_mapping_from_dynamic
         source.Foo = "Foo";
         source.Bar = "Bar";
         source.Jack = "Jack";
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _destination = config.CreateMapper().Map<Destination>((object)source);
         _destination.Foo.ShouldBe("Foo");
         _destination.Bar.ShouldBe("Bar");
@@ -116,7 +122,9 @@ public class When_mapping_struct_from_dynamic
         source.Foo = "Foo";
         source.Bar = "Bar";
         source.Jack = "Jack";
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _destination = config.CreateMapper().Map<Destination>((object)source);
         _destination.Foo.ShouldBe("Foo");
         _destination.Bar.ShouldBe("Bar");
@@ -131,7 +139,9 @@ public class When_mapping_from_dynamic_with_missing_property
     {
         dynamic source = new DynamicDictionary();
         source.Foo = "Foo";
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         var destination = config.CreateMapper().Map<Destination>((object)source);
         destination.Foo.ShouldBe("Foo");
         destination.Bar.ShouldBeNull();
@@ -142,7 +152,9 @@ public class When_mapping_from_dynamic_with_missing_property
     {
         dynamic source = new DynamicDictionary();
         source.Foo = "Foo";
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         var destination = new Destination { Baz = 42 };
         config.CreateMapper().Map((object)source, destination);
         destination.Foo.ShouldBe("Foo");
@@ -160,7 +172,9 @@ public class When_mapping_from_dynamic_null_to_int
         dynamic source = new DynamicDictionary();
         source.Foo = "Foo";
         source.Baz = null;
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _destination = config.CreateMapper().Map<Destination>((object)source);
         _destination.Foo.ShouldBe("Foo");
         _destination.Bar.ShouldBeNull();
@@ -178,7 +192,9 @@ public class When_mapping_from_dynamic_to_dynamic
         dynamic source = new DynamicDictionary();
         source.Foo = "Foo";
         source.Bar = "Bar";
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _destination = config.CreateMapper().Map<DynamicDictionary>((object)source);
         Assert.Equal("Foo", _destination.Foo);
         Assert.Equal("Bar", _destination.Bar);
@@ -199,7 +215,9 @@ public class When_mapping_from_dynamic_to_nullable
         dynamic source = new DynamicDictionary();
         source.StringValue = "Test";
         source.NullIntValue = 5;
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         var destination = config.CreateMapper().Map<DestinationWithNullable>((object)source);
         Assert.Equal("Test", destination.StringValue);
         Assert.Equal(5, destination.NullIntValue);
@@ -210,7 +228,9 @@ public class When_mapping_from_dynamic_to_nullable
     {
         dynamic source = new DynamicDictionary();
         source.StringValue = "Test";
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         var destination = config.CreateMapper().Map<DestinationWithNullable>((object)source);
         Assert.Equal("Test", destination.StringValue);
         Assert.Equal((int?)null, destination.NullIntValue);
@@ -222,7 +242,9 @@ public class When_mapping_from_dynamic_to_nullable
         dynamic source = new DynamicDictionary();
         source.StringValue = "Test";
         source.NullIntValue = null;
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         var destination = config.CreateMapper().Map<DestinationWithNullable>((object)source);
         Assert.Equal("Test", destination.StringValue);
         Assert.Equal((int?)null, destination.NullIntValue);

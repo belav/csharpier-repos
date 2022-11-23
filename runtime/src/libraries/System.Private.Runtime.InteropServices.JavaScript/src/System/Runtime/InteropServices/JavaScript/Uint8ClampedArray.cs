@@ -10,26 +10,44 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of the JavaScript Core Uint8ClampedArray class.
         /// </summary>
-        public Uint8ClampedArray() { }
+        public Uint8ClampedArray()
+        {
+        }
 
-        public Uint8ClampedArray(int length) : base(length) { }
+        public Uint8ClampedArray(int length) : base(length)
+        {
+        }
 
-        public Uint8ClampedArray(ArrayBuffer buffer) : base(buffer) { }
+        public Uint8ClampedArray(ArrayBuffer buffer) : base(buffer)
+        {
+        }
 
-        public Uint8ClampedArray(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
+        public Uint8ClampedArray(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset)
+        {
+        }
 
         public Uint8ClampedArray(ArrayBuffer buffer, int byteOffset, int length)
-            : base(buffer, byteOffset, length) { }
+            : base(buffer, byteOffset, length)
+        {
+        }
 
-        public Uint8ClampedArray(SharedArrayBuffer buffer) : base(buffer) { }
+        public Uint8ClampedArray(SharedArrayBuffer buffer) : base(buffer)
+        {
+        }
 
         public Uint8ClampedArray(SharedArrayBuffer buffer, int byteOffset)
-            : base(buffer, byteOffset) { }
+            : base(buffer, byteOffset)
+        {
+        }
 
         public Uint8ClampedArray(SharedArrayBuffer buffer, int byteOffset, int length)
-            : base(buffer, byteOffset, length) { }
+            : base(buffer, byteOffset, length)
+        {
+        }
 
-        internal Uint8ClampedArray(IntPtr jsHandle) : base(jsHandle) { }
+        internal Uint8ClampedArray(IntPtr jsHandle) : base(jsHandle)
+        {
+        }
 
         /// <summary>
         /// Defines an implicit conversion of JavaScript Core Uint8ClampedArray class to a Span&lt;byte&gt;

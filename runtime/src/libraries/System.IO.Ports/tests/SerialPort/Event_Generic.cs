@@ -453,7 +453,9 @@ namespace System.IO.Ports.Tests
         private class PinChangedEventHandler : TestEventHandler<SerialPinChange>
         {
             public PinChangedEventHandler(SerialPort com, bool shouldThrow, bool shouldWait)
-                : base(com, shouldThrow, shouldWait) { }
+                : base(com, shouldThrow, shouldWait)
+            {
+            }
 
             public void HandleEvent(object source, SerialPinChangedEventArgs e)
             {
@@ -464,7 +466,9 @@ namespace System.IO.Ports.Tests
         private class ErrorEventHandler : TestEventHandler<SerialError>
         {
             public ErrorEventHandler(SerialPort com, bool shouldThrow, bool shouldWait)
-                : base(com, shouldThrow, shouldWait) { }
+                : base(com, shouldThrow, shouldWait)
+            {
+            }
 
             public void HandleEvent(object source, SerialErrorReceivedEventArgs e)
             {
@@ -475,7 +479,9 @@ namespace System.IO.Ports.Tests
         private class ReceivedEventHandler : TestEventHandler<SerialData>
         {
             public ReceivedEventHandler(SerialPort com, bool shouldThrow, bool shouldWait)
-                : base(com, shouldThrow, shouldWait) { }
+                : base(com, shouldThrow, shouldWait)
+            {
+            }
 
             public void HandleEvent(object source, SerialDataReceivedEventArgs e)
             {

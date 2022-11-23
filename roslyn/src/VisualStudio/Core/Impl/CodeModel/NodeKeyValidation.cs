@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 List<GlobalNodeKey>
             >();
 
-        public NodeKeyValidation() { }
+        public NodeKeyValidation()
+        {
+        }
 
         public NodeKeyValidation(ProjectCodeModelFactory projectCodeModelFactory)
         {

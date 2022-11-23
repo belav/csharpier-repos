@@ -8,12 +8,16 @@ public static class Program
         private T1 a;
         private T2 b;
 
-        public static void blah() { }
+        public static void blah()
+        {
+        }
     }
 
     class DerivedType<T> : BaseType<string, T>
     {
-        public static void blah2() { }
+        public static void blah2()
+        {
+        }
     }
 
     public static int Main(string[] args)

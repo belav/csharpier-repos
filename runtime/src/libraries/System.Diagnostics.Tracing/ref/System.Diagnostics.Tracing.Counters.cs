@@ -8,17 +8,23 @@ namespace System.Diagnostics.Tracing
 #endif
     public abstract partial class DiagnosticCounter : System.IDisposable
     {
-        internal DiagnosticCounter() { }
+        internal DiagnosticCounter()
+        {
+        }
 
         public string DisplayName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string DisplayUnits
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.Tracing.EventSource EventSource
         {
@@ -29,9 +35,13 @@ namespace System.Diagnostics.Tracing
             get { throw null; }
         }
 
-        public void AddMetadata(string key, string? value) { }
+        public void AddMetadata(string key, string? value)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
 #if !FEATURE_WASM_PERFTRACING
@@ -43,7 +53,9 @@ namespace System.Diagnostics.Tracing
             string name,
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Func<double> metricProvider
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -59,15 +71,21 @@ namespace System.Diagnostics.Tracing
         public IncrementingEventCounter(
             string name,
             System.Diagnostics.Tracing.EventSource eventSource
-        ) { }
+        )
+        {
+        }
 
         public System.TimeSpan DisplayRateTimeScale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Increment(double increment = 1) { }
+        public void Increment(double increment = 1)
+        {
+        }
 
         public override string ToString()
         {
@@ -84,12 +102,16 @@ namespace System.Diagnostics.Tracing
             string name,
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Func<double> totalValueProvider
-        ) { }
+        )
+        {
+        }
 
         public System.TimeSpan DisplayRateTimeScale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override string ToString()
@@ -103,15 +125,21 @@ namespace System.Diagnostics.Tracing
 #endif
     public partial class EventCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
-        public EventCounter(string name, System.Diagnostics.Tracing.EventSource eventSource) { }
+        public EventCounter(string name, System.Diagnostics.Tracing.EventSource eventSource)
+        {
+        }
 
         public override string ToString()
         {
             throw null;
         }
 
-        public void WriteMetric(double value) { }
+        public void WriteMetric(double value)
+        {
+        }
 
-        public void WriteMetric(float value) { }
+        public void WriteMetric(float value)
+        {
+        }
     }
 }

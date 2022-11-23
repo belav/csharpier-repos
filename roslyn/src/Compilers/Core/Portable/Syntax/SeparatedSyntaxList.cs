@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal SeparatedSyntaxList(SyntaxNode node, int index)
-            : this(new SyntaxNodeOrTokenList(node, index)) { }
+            : this(new SyntaxNodeOrTokenList(node, index))
+        {
+        }
 
         internal SyntaxNode? Node
         {

@@ -5,7 +5,9 @@ using System;
 using System.IO;
 using Xunit;
 
-public class GenException<T> : Exception { }
+public class GenException<T> : Exception
+{
+}
 
 public interface IGen
 {

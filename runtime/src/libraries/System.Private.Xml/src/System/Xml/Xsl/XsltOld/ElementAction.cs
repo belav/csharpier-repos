@@ -22,7 +22,9 @@ namespace System.Xml.Xsl.XsltOld
         private string? _nsUri;
         private PrefixQName? _qname; // When we not have AVTs at all we can do this. null otherwise.
 
-        internal ElementAction() { }
+        internal ElementAction()
+        {
+        }
 
         private static PrefixQName CreateElementQName(
             string name,

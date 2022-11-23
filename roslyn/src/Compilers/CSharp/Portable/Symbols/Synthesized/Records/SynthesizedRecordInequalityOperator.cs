@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 WellKnownMemberNames.InequalityOperatorName,
                 memberOffset,
                 diagnostics
-            ) { }
+            )
+        {
+        }
 
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,

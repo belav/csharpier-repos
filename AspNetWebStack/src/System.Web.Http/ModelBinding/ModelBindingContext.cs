@@ -18,7 +18,9 @@ namespace System.Web.Http.ModelBinding
         private Dictionary<string, ModelMetadata> _propertyMetadata;
         private ModelValidationNode _validationNode;
 
-        public ModelBindingContext() : this(null) { }
+        public ModelBindingContext() : this(null)
+        {
+        }
 
         // copies certain values that won't change between parent and child objects,
         // e.g. ValueProvider, ModelState

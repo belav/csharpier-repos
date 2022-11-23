@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         public static readonly IEqualityComparer<INavigateToSearchResult> Instance =
             new NavigateToSearchResultComparer();
 
-        private NavigateToSearchResultComparer() { }
+        private NavigateToSearchResultComparer()
+        {
+        }
 
         public bool Equals(INavigateToSearchResult? x, INavigateToSearchResult? y) =>
             x?.NavigableItem.Document.FilePath == y?.NavigableItem.Document.FilePath

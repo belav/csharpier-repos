@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
         public static readonly AbstractFormattingRule Instance =
             new CSharpDecompiledSourceFormattingRule();
 
-        private CSharpDecompiledSourceFormattingRule() { }
+        private CSharpDecompiledSourceFormattingRule()
+        {
+        }
 
         public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
             in SyntaxToken previousToken,

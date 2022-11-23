@@ -28,7 +28,9 @@ public sealed class GeneratedRegexAttribute : Attribute
     /// <summary>Initializes a new instance of the <see cref="GeneratedRegexAttribute"/> with the specified pattern.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
     public GeneratedRegexAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string pattern)
-        : this(pattern, RegexOptions.None) { }
+        : this(pattern, RegexOptions.None)
+    {
+    }
 
     /// <summary>Initializes a new instance of the <see cref="GeneratedRegexAttribute"/> with the specified pattern and options.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
@@ -36,7 +38,9 @@ public sealed class GeneratedRegexAttribute : Attribute
     public GeneratedRegexAttribute(
         [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
         RegexOptions options
-    ) : this(pattern, options, Timeout.Infinite) { }
+    ) : this(pattern, options, Timeout.Infinite)
+    {
+    }
 
     /// <summary>Initializes a new instance of the <see cref="GeneratedRegexAttribute"/> with the specified pattern and options.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
@@ -53,7 +57,9 @@ public sealed class GeneratedRegexAttribute : Attribute
         [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
         RegexOptions options,
         string cultureName
-    ) : this(pattern, options, Timeout.Infinite, cultureName) { }
+    ) : this(pattern, options, Timeout.Infinite, cultureName)
+    {
+    }
 
     /// <summary>Initializes a new instance of the <see cref="GeneratedRegexAttribute"/> with the specified pattern, options, and timeout.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
@@ -69,7 +75,9 @@ public sealed class GeneratedRegexAttribute : Attribute
             options,
             matchTimeoutMilliseconds,
             string.Empty /* Empty string means Invariant culture */
-        ) { }
+        )
+    {
+    }
 
     /// <summary>Initializes a new instance of the <see cref="GeneratedRegexAttribute"/> with the specified pattern, options, and timeout.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>

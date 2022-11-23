@@ -79,7 +79,9 @@ namespace Microsoft.CodeAnalysis
                 get { return _e.Current; }
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             object IEnumerator.Current
             {

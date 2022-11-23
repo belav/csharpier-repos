@@ -1159,9 +1159,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture> : IClassFixture<T
         }
     }
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
-    protected virtual void RecordLog() { }
+    protected virtual void RecordLog()
+    {
+    }
 
     protected TFixture Fixture { get; }
 

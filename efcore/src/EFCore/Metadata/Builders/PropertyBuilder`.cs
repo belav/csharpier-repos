@@ -27,7 +27,9 @@ public class PropertyBuilder<TProperty> : PropertyBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public PropertyBuilder(IMutableProperty property) : base(property) { }
+    public PropertyBuilder(IMutableProperty property) : base(property)
+    {
+    }
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in

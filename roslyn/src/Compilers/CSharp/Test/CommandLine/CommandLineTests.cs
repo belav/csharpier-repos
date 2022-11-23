@@ -21036,7 +21036,8 @@ key7 = value7"
                 );
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (gc) =>
                 {
                     // can get the global options
@@ -21125,7 +21126,12 @@ key7 = value7"
         {
             var dir = Temp.CreateDirectory();
             var src = dir.CreateFile("temp.cs").WriteAllText(@"class C {}");
-            var generator = new CallbackGenerator(i => { }, e => throw null);
+            var generator = new CallbackGenerator(
+                i =>
+                {
+                },
+                e => throw null
+            );
 
             var output = VerifyOutput(
                 dir,
@@ -21204,7 +21210,9 @@ class C
                 );
             }
 
-            private static void AnalyzeFieldDeclaration(SyntaxNodeAnalysisContext context) { }
+            private static void AnalyzeFieldDeclaration(SyntaxNodeAnalysisContext context)
+            {
+            }
         }
 
         [Fact]

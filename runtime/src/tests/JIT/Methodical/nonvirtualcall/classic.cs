@@ -10,7 +10,9 @@ namespace Test_classic
 {
     class ApplicationException : Exception
     {
-        public ApplicationException(string message) : base(message) { }
+        public ApplicationException(string message) : base(message)
+        {
+        }
     }
 
     namespace Test
@@ -172,7 +174,9 @@ namespace Test_classic
             }
         }
 
-        public sealed class SealedGrandChild : GrandChild { }
+        public sealed class SealedGrandChild : GrandChild
+        {
+        }
 
         public static class Program
         {

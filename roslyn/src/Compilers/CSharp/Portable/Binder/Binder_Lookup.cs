@@ -201,7 +201,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// If qualifierOpt is null, look for any symbols in
@@ -1183,7 +1185,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             LookupOptions options,
             Binder originalBinder
-        ) { }
+        )
+        {
+        }
 
         // Does a member lookup in a single type, without considering inheritance.
         protected static void LookupMembersWithoutInheritance(

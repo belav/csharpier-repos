@@ -9,12 +9,13 @@ public class PersistedGrantDbContextInMemoryTest
     : PersistedGrantDbContextTestBase<PersistedGrantDbContextInMemoryTest.PersistedGrantDbContextInMemoryFixture>
 {
     public PersistedGrantDbContextInMemoryTest(PersistedGrantDbContextInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
-    protected override void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected override async Task ExecuteWithStrategyInTransactionAsync(
         Func<PersistedGrantDbContext, Task> testOperation,

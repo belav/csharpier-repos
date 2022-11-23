@@ -1497,7 +1497,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 new SpecialMembersSignatureComparer();
 
             // Methods
-            protected SpecialMembersSignatureComparer() { }
+            protected SpecialMembersSignatureComparer()
+            {
+            }
 
             protected override TypeSymbol? GetMDArrayElementType(TypeSymbol type)
             {

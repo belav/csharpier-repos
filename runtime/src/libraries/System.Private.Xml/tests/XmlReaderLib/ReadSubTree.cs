@@ -422,7 +422,9 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader("<a><b></b></a>"));
             DataReader.PositionOnElement("b");
 
-            using (XmlReader subtreeReader = DataReader.ReadSubtree()) { }
+            using (XmlReader subtreeReader = DataReader.ReadSubtree())
+            {
+            }
 
             if (
                 DataReader.NodeType.ToString() == "EndElement"

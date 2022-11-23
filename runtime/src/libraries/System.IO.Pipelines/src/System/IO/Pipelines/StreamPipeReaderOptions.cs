@@ -24,7 +24,9 @@ namespace System.IO.Pipelines
             int bufferSize,
             int minimumReadSize,
             bool leaveOpen
-        ) : this(pool, bufferSize, minimumReadSize, leaveOpen, useZeroByteReads: false) { }
+        ) : this(pool, bufferSize, minimumReadSize, leaveOpen, useZeroByteReads: false)
+        {
+        }
 
         /// <summary>Initializes a <see cref="System.IO.Pipelines.StreamPipeReaderOptions" /> instance, optionally specifying a memory pool, a minimum buffer size, a minimum read size, and whether the underlying stream should be left open after the <see cref="System.IO.Pipelines.PipeReader" /> completes.</summary>
         /// <param name="pool">The memory pool to use when allocating memory. The default value is <see langword="null" />.</param>

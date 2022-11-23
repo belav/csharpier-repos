@@ -8,14 +8,22 @@
 namespace System.Data
 {
     [System.ComponentModel.TypeConverter(typeof(ConstraintConverter))]
-    public abstract partial class Constraint { }
+    public abstract partial class Constraint
+    {
+    }
 
-    internal sealed class ConstraintConverter { }
+    internal sealed class ConstraintConverter
+    {
+    }
 
     [System.ComponentModel.TypeConverter(typeof(RelationshipConverter))]
-    public partial class DataRelation { }
+    public partial class DataRelation
+    {
+    }
 
-    internal sealed class RelationshipConverter { }
+    internal sealed class RelationshipConverter
+    {
+    }
 
     public partial class DataColumn
     {
@@ -32,7 +40,9 @@ namespace System.Data
         public System.Type DataType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.TypeConverter(typeof(DefaultValueTypeConverter))]
@@ -40,13 +50,19 @@ namespace System.Data
         public object DefaultValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
-    internal sealed class ColumnTypeConverter { }
+    internal sealed class ColumnTypeConverter
+    {
+    }
 
-    internal sealed class DefaultValueTypeConverter { }
+    internal sealed class DefaultValueTypeConverter
+    {
+    }
 
     public partial class DataTable
     {
@@ -59,11 +75,15 @@ namespace System.Data
         public System.Data.DataColumn[] PrimaryKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
-    internal sealed class PrimaryKeyTypeConverter { }
+    internal sealed class PrimaryKeyTypeConverter
+    {
+    }
 
     public partial class DataView
     {
@@ -75,11 +95,15 @@ namespace System.Data
         public System.Data.DataTable? Table
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
-    internal sealed class DataTableTypeConverter { }
+    internal sealed class DataTableTypeConverter
+    {
+    }
 }
 
 namespace System.Data.Common
@@ -89,7 +113,9 @@ namespace System.Data.Common
     )]
     public sealed partial class DataColumnMapping
     {
-        internal sealed class DataColumnMappingConverter { }
+        internal sealed class DataColumnMappingConverter
+        {
+        }
     }
 
     [System.ComponentModel.TypeConverterAttribute(
@@ -97,6 +123,8 @@ namespace System.Data.Common
     )]
     public sealed partial class DataTableMapping
     {
-        internal sealed class DataTableMappingConverter { }
+        internal sealed class DataTableMappingConverter
+        {
+        }
     }
 }

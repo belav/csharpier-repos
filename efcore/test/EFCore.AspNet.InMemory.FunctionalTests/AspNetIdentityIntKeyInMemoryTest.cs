@@ -10,12 +10,13 @@ public class AspNetIdentityIntKeyInMemoryTest
     : AspNetIdentityIntKeyTestBase<AspNetIdentityIntKeyInMemoryTest.AspNetIdentityIntKeyInMemoryFixture>
 {
     public AspNetIdentityIntKeyInMemoryTest(AspNetIdentityIntKeyInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
-    protected override void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected override async Task ExecuteWithStrategyInTransactionAsync(
         Func<IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>, Task> testOperation,

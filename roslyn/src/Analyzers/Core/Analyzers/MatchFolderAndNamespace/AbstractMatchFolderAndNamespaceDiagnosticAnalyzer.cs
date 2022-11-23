@@ -49,7 +49,9 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
                 CodeStyleOptions2.PreferNamespaceAndFolderMatchStructure,
                 s_localizableTitle,
                 s_localizableInsideMessage
-            ) { }
+            )
+        {
+        }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
         protected abstract ImmutableArray<TSyntaxKind> GetSyntaxKindsToAnalyze();

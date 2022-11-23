@@ -6,7 +6,9 @@ using Xunit;
 
 namespace JitTest_castclass_ldloc_cs
 {
-    public class BaseClass { }
+    public class BaseClass
+    {
+    }
 
     public class TestClass : BaseClass
     {
@@ -66,7 +68,11 @@ namespace JitTest_castclass_ldloc_cs
         }
     }
 
-    internal class DerivedClass : TestClass { }
+    internal class DerivedClass : TestClass
+    {
+    }
 
-    internal class OtherClass { }
+    internal class OtherClass
+    {
+    }
 }

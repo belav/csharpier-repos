@@ -44,7 +44,9 @@ namespace System.Security.Claims
         /// </summary>
         /// <param name="reader">a <see cref="BinaryReader"/> pointing to a <see cref="Claim"/>.</param>
         /// <exception cref="ArgumentNullException">if 'reader' is null.</exception>
-        public Claim(BinaryReader reader) : this(reader, null) { }
+        public Claim(BinaryReader reader) : this(reader, null)
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="Claim"/> using a <see cref="BinaryReader"/>.
@@ -161,7 +163,9 @@ namespace System.Security.Claims
                 ClaimsIdentity.DefaultIssuer,
                 ClaimsIdentity.DefaultIssuer,
                 (ClaimsIdentity?)null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="Claim"/> with the specified type, value, and value type.
@@ -186,7 +190,9 @@ namespace System.Security.Claims
                 ClaimsIdentity.DefaultIssuer,
                 ClaimsIdentity.DefaultIssuer,
                 (ClaimsIdentity?)null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="Claim"/> with the specified type, value, value type, and issuer.
@@ -204,7 +210,9 @@ namespace System.Security.Claims
         /// <seealso cref="ClaimTypes"/>
         /// <seealso cref="ClaimValueTypes"/>
         public Claim(string type, string value, string? valueType, string? issuer)
-            : this(type, value, valueType, issuer, issuer, (ClaimsIdentity?)null) { }
+            : this(type, value, valueType, issuer, issuer, (ClaimsIdentity?)null)
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="Claim"/> with the specified type, value, value type, issuer and original issuer.
@@ -227,7 +235,9 @@ namespace System.Security.Claims
             string? valueType,
             string? issuer,
             string? originalIssuer
-        ) : this(type, value, valueType, issuer, originalIssuer, (ClaimsIdentity?)null) { }
+        ) : this(type, value, valueType, issuer, originalIssuer, (ClaimsIdentity?)null)
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="Claim"/> with the specified type, value, value type, issuer, original issuer and subject.
@@ -249,7 +259,9 @@ namespace System.Security.Claims
             string? issuer,
             string? originalIssuer,
             ClaimsIdentity? subject
-        ) : this(type, value, valueType, issuer, originalIssuer, subject, null, null) { }
+        ) : this(type, value, valueType, issuer, originalIssuer, subject, null, null)
+        {
+        }
 
         /// <summary>
         /// This internal constructor was added as a performance boost when adding claims that are found in the NTToken.
@@ -298,7 +310,9 @@ namespace System.Security.Claims
         /// <remarks><see cref="Claim.Subject"/>will be set to 'null'.</remarks>
         /// <exception cref="ArgumentNullException">if 'other' is null.</exception>
         protected Claim(Claim other)
-            : this(other, (other == null ? (ClaimsIdentity?)null : other._subject)) { }
+            : this(other, (other == null ? (ClaimsIdentity?)null : other._subject))
+        {
+        }
 
         /// <summary>
         /// Copy constructor for <see cref="Claim"/>

@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected abstract int GetTargetCaretPosition(SyntaxNode caretTarget);
         protected abstract SyntaxNode GetSyntax(SyntaxToken commonSyntaxToken);
 
-        public AbstractMemberInsertingCompletionProvider() { }
+        public AbstractMemberInsertingCompletionProvider()
+        {
+        }
 
         public override async Task<CompletionChange> GetChangeAsync(
             Document document,

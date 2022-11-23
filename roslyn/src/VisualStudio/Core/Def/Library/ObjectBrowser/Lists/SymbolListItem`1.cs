@@ -17,7 +17,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             string fullNameText,
             string searchText,
             bool isHidden
-        ) : base(projectId, symbol, displayText, fullNameText, searchText, isHidden) { }
+        ) : base(projectId, symbol, displayText, fullNameText, searchText, isHidden)
+        {
+        }
 
         public TSymbol ResolveTypedSymbol(Compilation compilation) =>
             (TSymbol)ResolveSymbol(compilation);

@@ -10,6 +10,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
     internal sealed class DefinitionResult : Vertex
     {
         public DefinitionResult(IdFactory idFactory) : base(label: "definitionResult", idFactory)
-        { }
+        {
+        }
     }
 }

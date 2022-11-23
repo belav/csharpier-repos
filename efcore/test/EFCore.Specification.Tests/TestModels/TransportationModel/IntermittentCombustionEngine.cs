@@ -3,4 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
-public class IntermittentCombustionEngine : CombustionEngine { }
+public class IntermittentCombustionEngine : CombustionEngine
+{
+}

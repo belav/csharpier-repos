@@ -8,7 +8,9 @@ namespace Internal.TypeSystem
     /// </summary>
     public sealed partial class PointerType : ParameterizedType
     {
-        internal PointerType(TypeDesc parameterType) : base(parameterType) { }
+        internal PointerType(TypeDesc parameterType) : base(parameterType)
+        {
+        }
 
         public override int GetHashCode()
         {

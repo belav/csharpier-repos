@@ -39,7 +39,9 @@ internal sealed class KestrelServerImpl : IServer
         IOptions<KestrelServerOptions> options,
         IEnumerable<IConnectionListenerFactory> transportFactories,
         ILoggerFactory loggerFactory
-    ) : this(transportFactories, null, CreateServiceContext(options, loggerFactory, null)) { }
+    ) : this(transportFactories, null, CreateServiceContext(options, loggerFactory, null))
+    {
+    }
 
     public KestrelServerImpl(
         IOptions<KestrelServerOptions> options,
@@ -51,7 +53,9 @@ internal sealed class KestrelServerImpl : IServer
             transportFactories,
             multiplexedFactories,
             CreateServiceContext(options, loggerFactory, null)
-        ) { }
+        )
+    {
+    }
 
     public KestrelServerImpl(
         IOptions<KestrelServerOptions> options,
@@ -64,13 +68,17 @@ internal sealed class KestrelServerImpl : IServer
             transportFactories,
             multiplexedFactories,
             CreateServiceContext(options, loggerFactory, diagnosticSource)
-        ) { }
+        )
+    {
+    }
 
     // For testing
     internal KestrelServerImpl(
         IConnectionListenerFactory transportFactory,
         ServiceContext serviceContext
-    ) : this(new[] { transportFactory }, null, serviceContext) { }
+    ) : this(new[] { transportFactory }, null, serviceContext)
+    {
+    }
 
     // For testing
     internal KestrelServerImpl(

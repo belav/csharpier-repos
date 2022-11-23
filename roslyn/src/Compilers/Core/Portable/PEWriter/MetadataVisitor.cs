@@ -36,7 +36,9 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IAssemblyReference assemblyReference) { }
+        public virtual void Visit(IAssemblyReference assemblyReference)
+        {
+        }
 
         public void Visit(IEnumerable<ICustomAttribute> customAttributes)
         {
@@ -138,11 +140,13 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IFileReference fileReference) { }
+        public virtual void Visit(IFileReference fileReference)
+        {
+        }
 
-        public virtual void Visit(
-            IGenericMethodInstanceReference genericMethodInstanceReference
-        ) { }
+        public virtual void Visit(IGenericMethodInstanceReference genericMethodInstanceReference)
+        {
+        }
 
         public void Visit(IEnumerable<IGenericMethodParameter> genericParameters)
         {
@@ -152,11 +156,13 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IGenericMethodParameter genericMethodParameter) { }
+        public virtual void Visit(IGenericMethodParameter genericMethodParameter)
+        {
+        }
 
-        public virtual void Visit(
-            IGenericMethodParameterReference genericMethodParameterReference
-        ) { }
+        public virtual void Visit(IGenericMethodParameterReference genericMethodParameterReference)
+        {
+        }
 
         public virtual void Visit(IGenericParameter genericParameter)
         {
@@ -176,9 +182,13 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IGenericTypeParameter genericTypeParameter) { }
+        public virtual void Visit(IGenericTypeParameter genericTypeParameter)
+        {
+        }
 
-        public virtual void Visit(IGenericTypeParameterReference genericTypeParameterReference) { }
+        public virtual void Visit(IGenericTypeParameterReference genericTypeParameterReference)
+        {
+        }
 
         public virtual void Visit(IGlobalFieldDefinition globalFieldDefinition)
         {
@@ -209,7 +219,9 @@ namespace Microsoft.Cci
             throw ExceptionUtilities.Unreachable();
         }
 
-        public virtual void Visit(MetadataConstant constant) { }
+        public virtual void Visit(MetadataConstant constant)
+        {
+        }
 
         public virtual void Visit(MetadataCreateArray createArray)
         {
@@ -348,7 +360,9 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IModuleReference moduleReference) { }
+        public virtual void Visit(IModuleReference moduleReference)
+        {
+        }
 
         public void Visit(IEnumerable<INamedTypeDefinition> types)
         {
@@ -358,9 +372,13 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(INamespaceTypeDefinition namespaceTypeDefinition) { }
+        public virtual void Visit(INamespaceTypeDefinition namespaceTypeDefinition)
+        {
+        }
 
-        public virtual void Visit(INamespaceTypeReference namespaceTypeReference) { }
+        public virtual void Visit(INamespaceTypeReference namespaceTypeReference)
+        {
+        }
 
         public void VisitNestedTypes(IEnumerable<INamedTypeDefinition> nestedTypes)
         {
@@ -370,7 +388,9 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(INestedTypeDefinition nestedTypeDefinition) { }
+        public virtual void Visit(INestedTypeDefinition nestedTypeDefinition)
+        {
+        }
 
         public virtual void Visit(INestedTypeReference nestedTypeReference)
         {
@@ -449,7 +469,9 @@ namespace Microsoft.Cci
             this.Visit(parameterTypeInformation.GetType(Context));
         }
 
-        public virtual void Visit(IPlatformInvokeInformation platformInvokeInformation) { }
+        public virtual void Visit(IPlatformInvokeInformation platformInvokeInformation)
+        {
+        }
 
         public virtual void Visit(IPointerTypeReference pointerTypeReference)
         {
@@ -490,7 +512,9 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(ManagedResource resource) { }
+        public virtual void Visit(ManagedResource resource)
+        {
+        }
 
         public virtual void Visit(SecurityAttribute securityAttribute)
         {
@@ -681,6 +705,8 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IWin32Resource win32Resource) { }
+        public virtual void Visit(IWin32Resource win32Resource)
+        {
+        }
     }
 }

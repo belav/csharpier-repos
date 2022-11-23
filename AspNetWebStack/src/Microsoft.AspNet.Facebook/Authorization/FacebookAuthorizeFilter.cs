@@ -252,7 +252,9 @@ namespace Microsoft.AspNet.Facebook.Authorization
         /// Set the <paramref name="context"/>'s Result property to modify login flow.
         /// </summary>
         /// <param name="context">Provides access to permission information associated with the user.</param>
-        protected virtual void OnDeniedPermissionPrompt(PermissionContext context) { }
+        protected virtual void OnDeniedPermissionPrompt(PermissionContext context)
+        {
+        }
 
         /// <summary>
         /// Invoked during <see cref="OnAuthorization"/> prior to a permission prompt that is requesting permissions that have

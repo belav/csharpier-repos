@@ -217,7 +217,9 @@ namespace System.Xml.XmlWriterApiTests
                     wSettings.NamespaceHandling = (NamespaceHandling)(999);
                     CError.Compare(false, "Failed2");
                 }
-                catch (ArgumentOutOfRangeException) { }
+                catch (ArgumentOutOfRangeException)
+                {
+                }
             }
 
             using (XmlWriter w = CreateMemWriter(utils, wSettings))
@@ -862,7 +864,9 @@ namespace System.Xml.XmlWriterApiTests
                 else
                     w.WriteElementString("p", "a", "n" + 4, "val");
             }
-            catch (XmlException) { }
+            catch (XmlException)
+            {
+            }
             finally
             {
                 w.Dispose();

@@ -128,7 +128,11 @@ public class StringLocalizerOfTTest
         Assert.NotNull(localizer);
     }
 
-    private class BaseType { }
+    private class BaseType
+    {
+    }
 
-    private class DerivedType : BaseType { }
+    private class DerivedType : BaseType
+    {
+    }
 }

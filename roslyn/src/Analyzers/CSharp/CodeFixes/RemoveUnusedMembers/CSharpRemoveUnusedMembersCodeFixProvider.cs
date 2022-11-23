@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnusedMembersCodeFixProvider() { }
+        public CSharpRemoveUnusedMembersCodeFixProvider()
+        {
+        }
 
         /// <summary>
         /// This method adjusts the <paramref name="declarators"/> to remove based on whether or not all variable declarators

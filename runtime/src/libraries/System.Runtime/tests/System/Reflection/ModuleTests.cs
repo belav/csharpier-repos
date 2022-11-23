@@ -13,7 +13,9 @@ using TestAttributes;
 
 namespace TestAttributes
 {
-    public class FooAttribute : Attribute { }
+    public class FooAttribute : Attribute
+    {
+    }
 
     public class ComplicatedAttribute : Attribute
     {
@@ -537,6 +539,8 @@ namespace System.Reflection.Tests
 
     public class Foo<T>
     {
-        public void Bar(T t) { }
+        public void Bar(T t)
+        {
+        }
     }
 }

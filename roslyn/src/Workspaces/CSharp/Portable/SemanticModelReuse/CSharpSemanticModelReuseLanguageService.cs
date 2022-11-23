@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSemanticModelReuseLanguageService() { }
+        public CSharpSemanticModelReuseLanguageService()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

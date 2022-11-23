@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class GraphUpdatesSqlServerTptIdentityTest
     : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerTptIdentityTest.SqlServerFixture>
 {
-    public GraphUpdatesSqlServerTptIdentityTest(SqlServerFixture fixture) : base(fixture) { }
+    public GraphUpdatesSqlServerTptIdentityTest(SqlServerFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

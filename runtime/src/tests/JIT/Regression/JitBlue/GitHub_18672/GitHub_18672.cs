@@ -66,5 +66,7 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void M() { }
+    private static void M()
+    {
+    }
 }

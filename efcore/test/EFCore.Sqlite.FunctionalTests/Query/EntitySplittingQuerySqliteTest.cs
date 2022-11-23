@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class EntitySplittingQuerySqliteTest : EntitySplittingQueryTestBase
 {
-    public EntitySplittingQuerySqliteTest() { }
+    public EntitySplittingQuerySqliteTest()
+    {
+    }
 
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 

@@ -265,24 +265,32 @@ namespace System.Web.Mvc.Test
 
         private class NoParameterlessCtor
         {
-            public NoParameterlessCtor(int x) { }
+            public NoParameterlessCtor(int x)
+            {
+            }
         }
 
         private class TestableBuildManagerViewEngine : BuildManagerViewEngine
         {
             private bool _isPrecompiledNonUpdateableSite;
 
-            public TestableBuildManagerViewEngine() : base() { }
+            public TestableBuildManagerViewEngine() : base()
+            {
+            }
 
             public TestableBuildManagerViewEngine(IViewPageActivator viewPageActivator)
-                : base(viewPageActivator) { }
+                : base(viewPageActivator)
+            {
+            }
 
             public TestableBuildManagerViewEngine(
                 IViewPageActivator viewPageActivator = null,
                 IResolver<IViewPageActivator> activatorResolver = null,
                 IDependencyResolver dependencyResolver = null,
                 VirtualPathProvider pathProvider = null
-            ) : base(viewPageActivator, activatorResolver, dependencyResolver, pathProvider) { }
+            ) : base(viewPageActivator, activatorResolver, dependencyResolver, pathProvider)
+            {
+            }
 
             public new IViewPageActivator ViewPageActivator
             {

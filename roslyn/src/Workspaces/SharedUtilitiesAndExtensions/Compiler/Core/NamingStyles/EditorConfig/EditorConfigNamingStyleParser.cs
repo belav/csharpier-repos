@@ -186,7 +186,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private abstract class NamingRuleSubsetComparer : IComparer<NamingRule>
         {
-            protected NamingRuleSubsetComparer() { }
+            protected NamingRuleSubsetComparer()
+            {
+            }
 
             public int Compare(NamingRule x, NamingRule y)
             {
@@ -218,7 +220,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             internal static readonly NamingRuleAccessibilityListComparer Instance = new();
 
-            private NamingRuleAccessibilityListComparer() { }
+            private NamingRuleAccessibilityListComparer()
+            {
+            }
 
             protected override bool FirstIsSubset(in NamingRule x, in NamingRule y)
             {
@@ -238,7 +242,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             internal static readonly NamingRuleModifierListComparer Instance = new();
 
-            private NamingRuleModifierListComparer() { }
+            private NamingRuleModifierListComparer()
+            {
+            }
 
             protected override bool FirstIsSubset(in NamingRule x, in NamingRule y)
             {
@@ -278,7 +284,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             internal static readonly NamingRuleSymbolListComparer Instance = new();
 
-            private NamingRuleSymbolListComparer() { }
+            private NamingRuleSymbolListComparer()
+            {
+            }
 
             protected override bool FirstIsSubset(in NamingRule x, in NamingRule y)
             {

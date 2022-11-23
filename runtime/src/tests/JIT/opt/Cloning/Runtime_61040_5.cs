@@ -17,14 +17,18 @@ unsafe class Runtime_61040_5
             ProblemWithBlkAsg(arr, ArrLen);
             return 101;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         try
         {
             ProblemWithLclFldAsg(arr, ArrLen);
             return 102;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
 
         return 100;
     }

@@ -28,7 +28,9 @@ namespace Roslyn.Utilities
         }
 
         public SpellChecker(Checksum checksum, IEnumerable<ReadOnlyMemory<char>> corpus)
-            : this(checksum, BKTree.Create(corpus)) { }
+            : this(checksum, BKTree.Create(corpus))
+        {
+        }
 
         public IList<string> FindSimilarWords(string value) =>
             FindSimilarWords(value, substringsAreSimilar: false);

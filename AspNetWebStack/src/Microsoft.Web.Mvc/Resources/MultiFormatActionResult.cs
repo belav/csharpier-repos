@@ -30,7 +30,9 @@ namespace Microsoft.Web.Mvc.Resources
         private HttpStatusCode _statusCode;
 
         public MultiFormatActionResult(object model, ContentType responseFormat)
-            : this(model, responseFormat, HttpStatusCode.OK) { }
+            : this(model, responseFormat, HttpStatusCode.OK)
+        {
+        }
 
         public MultiFormatActionResult(
             object model,

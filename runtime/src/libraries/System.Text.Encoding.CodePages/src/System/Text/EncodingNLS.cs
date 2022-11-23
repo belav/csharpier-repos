@@ -25,10 +25,14 @@ namespace System.Text
         private string? _encodingName;
         private string? _webName;
 
-        protected EncodingNLS(int codePage) : base(codePage) { }
+        protected EncodingNLS(int codePage) : base(codePage)
+        {
+        }
 
         protected EncodingNLS(int codePage, EncoderFallback enc, DecoderFallback dec)
-            : base(codePage, enc, dec) { }
+            : base(codePage, enc, dec)
+        {
+        }
 
         public abstract unsafe int GetByteCount(char* chars, int count, EncoderNLS? encoder);
         public abstract unsafe int GetBytes(

@@ -10,7 +10,8 @@ public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixtur
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
     protected NorthwindAggregateOperatorsQueryRelationalTestBase(TFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     public override async Task Last_when_no_order_by(bool async) =>
         Assert.Equal(

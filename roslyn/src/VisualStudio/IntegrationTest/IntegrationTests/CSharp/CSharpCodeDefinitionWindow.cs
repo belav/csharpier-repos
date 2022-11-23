@@ -15,7 +15,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpCodeDefinitionWindow(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpCodeDefinitionWindow)) { }
+            : base(instanceFactory, nameof(CSharpCodeDefinitionWindow))
+        {
+        }
 
         [WpfTheory]
         [CombinatorialData]

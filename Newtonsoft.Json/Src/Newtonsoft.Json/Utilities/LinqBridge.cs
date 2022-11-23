@@ -3093,7 +3093,9 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<T, K> keySelector,
             IComparer<K> comparer,
             bool descending
-        ) : this(source, null, keySelector, comparer, descending) { }
+        ) : this(source, null, keySelector, comparer, descending)
+        {
+        }
 
         private OrderedEnumerable(
             IEnumerable<T> source,
@@ -3287,7 +3289,9 @@ namespace System.Runtime.CompilerServices
     /// </remarks>
 
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
-    internal sealed class ExtensionAttribute : Attribute { }
+    internal sealed class ExtensionAttribute : Attribute
+    {
+    }
 }
 
 #endif

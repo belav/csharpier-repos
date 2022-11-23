@@ -107,7 +107,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

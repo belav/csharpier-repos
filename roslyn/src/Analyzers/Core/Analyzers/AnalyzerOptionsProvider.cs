@@ -41,7 +41,9 @@ internal readonly struct AnalyzerOptionsProvider
     }
 
     public AnalyzerOptionsProvider(AnalyzerConfigOptions options, AnalyzerOptions fallbackOptions)
-        : this(options, fallbackOptions.GetIdeOptions()) { }
+        : this(options, fallbackOptions.GetIdeOptions())
+    {
+    }
 
     // SimplifierOptions
 

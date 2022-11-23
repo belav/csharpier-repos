@@ -5,7 +5,9 @@ namespace System.Security.Policy
 {
     public sealed partial class ApplicationDirectory : EvidenceBase
     {
-        public ApplicationDirectory(string name) { }
+        public ApplicationDirectory(string name)
+        {
+        }
 
         public string Directory
         {

@@ -170,7 +170,9 @@ namespace Tracing.Tests.Common
                     {
                         serverStream.Disconnect();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     finally
                     {
                         serverStream.Dispose();

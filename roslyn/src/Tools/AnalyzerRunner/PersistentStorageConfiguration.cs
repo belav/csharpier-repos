@@ -18,7 +18,9 @@ namespace AnalyzerRunner
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PersistentStorageConfiguration() { }
+        public PersistentStorageConfiguration()
+        {
+        }
 
         public bool ThrowOnFailure => true;
 

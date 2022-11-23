@@ -27,7 +27,9 @@ namespace System.Diagnostics
         /// <summary>
         /// Create a new instance of the collection.
         /// </summary>
-        public ActivityTagsCollection() { }
+        public ActivityTagsCollection()
+        {
+        }
 
         /// <summary>
         /// Create a new instance of the collection and store the input list items in the collection.

@@ -13,7 +13,9 @@ internal sealed class DefaultPolicy : IOutputCachePolicy
 {
     public static readonly DefaultPolicy Instance = new();
 
-    private DefaultPolicy() { }
+    private DefaultPolicy()
+    {
+    }
 
     /// <inheritdoc />
     ValueTask IOutputCachePolicy.CacheRequestAsync(

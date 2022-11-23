@@ -27,7 +27,9 @@ namespace System.Xml.Serialization
             _shareTypes = shareTypes;
         }
 
-        internal ImportContext() : this(null, false) { }
+        internal ImportContext() : this(null, false)
+        {
+        }
 
         internal SchemaObjectCache Cache => _cache ??= new SchemaObjectCache();
 
@@ -182,7 +184,9 @@ namespace System.Xml.Serialization
             object? hash = Hash[o];
             if (hash != null)
             {
-                if (hash is XmlSchemaObject) { }
+                if (hash is XmlSchemaObject)
+                {
+                }
                 else
                 {
                     return (int)hash;

@@ -257,7 +257,9 @@ public struct Struct3 : IDisposable
 {
     public int field1;
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public struct GenericStruct1<T>
@@ -290,12 +292,20 @@ public enum SimpleEnum_uint : uint
     E
 }
 
-public class ClassA { }
+public class ClassA
+{
+}
 
-public class ClassB : ClassA { }
+public class ClassB : ClassA
+{
+}
 
-public class ClassC : ClassB { }
+public class ClassC : ClassB
+{
+}
 
-public class ClassD : ClassA { }
+public class ClassD : ClassA
+{
+}
 
 public delegate void CustomAction();

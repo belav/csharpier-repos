@@ -9,7 +9,9 @@ public class StoreGeneratedFixupSqlServerTest
     : StoreGeneratedFixupRelationalTestBase<StoreGeneratedFixupSqlServerTest.StoreGeneratedFixupSqlServerFixture>
 {
     public StoreGeneratedFixupSqlServerTest(StoreGeneratedFixupSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public void Temp_values_are_replaced_on_save() =>

@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public HostSolutionCrawlerWorkspaceEventListener() { }
+        public HostSolutionCrawlerWorkspaceEventListener()
+        {
+        }
 
         public void StartListening(Workspace workspace, object? serviceOpt)
         {

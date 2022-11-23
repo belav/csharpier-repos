@@ -74,7 +74,9 @@ namespace System.Xml.NameTableTests
             }
         }
 
-        protected static void DeleteTestFile(string strFileName) { }
+        protected static void DeleteTestFile(string strFileName)
+        {
+        }
 
         public static void CreateGenericTestFile(string strFileName)
         {

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember
         where TSimpleNameSyntax : TExpressionSyntax
         where TExpressionSyntax : SyntaxNode
     {
-        protected AbstractGenerateMemberService() { }
+        protected AbstractGenerateMemberService()
+        {
+        }
 
         protected static readonly ISet<TypeKind> EnumType = new HashSet<TypeKind> { TypeKind.Enum };
         protected static readonly ISet<TypeKind> ClassInterfaceModuleStructTypes =

@@ -22,7 +22,9 @@ public class SqliteSharedTableConvention : SharedTableConvention
     public SqliteSharedTableConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    ) : base(dependencies, relationalDependencies)
+    {
+    }
 
     /// <inheritdoc />
     protected override bool CheckConstraintsUniqueAcrossTables => false;

@@ -14,7 +14,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
     {
         public static readonly BlankLineInGeneratedMethodFormattingRule Instance = new();
 
-        private BlankLineInGeneratedMethodFormattingRule() { }
+        private BlankLineInGeneratedMethodFormattingRule()
+        {
+        }
 
         public override AdjustNewLinesOperation GetAdjustNewLinesOperation(
             in SyntaxToken previousToken,

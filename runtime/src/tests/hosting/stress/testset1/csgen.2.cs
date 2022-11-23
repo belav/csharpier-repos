@@ -29,7 +29,9 @@ public class AA
                     try
                     {
                         uint[,][] local1 = (new uint[88u, 43u][]);
-                        do { } while (App.m_bFwd2);
+                        do
+                        {
+                        } while (App.m_bFwd2);
                     }
                     catch (Exception)
                     {
@@ -46,7 +48,9 @@ public class AA
                 } while (App.m_bFwd2);
             throw new DivideByZeroException();
         }
-        try { }
+        try
+        {
+        }
         catch (IndexOutOfRangeException)
         {
             byte local5 = ((byte)(26.0));
@@ -69,11 +73,19 @@ public class AA
             {
                 Array local7 = ((Array)(null));
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
-        try { }
-        catch (IndexOutOfRangeException) { }
-        while (App.m_bFwd2) { }
+        try
+        {
+        }
+        catch (IndexOutOfRangeException)
+        {
+        }
+        while (App.m_bFwd2)
+        {
+        }
         return App.m_aushFwd6;
     }
 
@@ -115,13 +127,17 @@ public class AA
                         sbyte[,,] local14 = (new sbyte[97u, 62u, 10u]);
                     }
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
                 if (App.m_bFwd2)
                     for (
                         App.m_sbyFwd7 /= ((sbyte)(local10));
                         App.m_bFwd2;
                         App.m_lFwd9 /= App.m_lFwd9
-                    ) { }
+                    )
+                    {
+                    }
             }
         }
         return (new short[16u]);
@@ -153,11 +169,19 @@ public class AA
                 {
                     int local19 = 45;
                     if ((new AA() == null))
-                        try { }
-                        catch (Exception) { }
-                    else { }
+                        try
+                        {
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    else
+                    {
+                    }
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
                 local17 += local17;
                 goto label2;
             }
@@ -213,42 +237,58 @@ public class App
         {
             AA.Static1();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static2();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static3();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static4();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static5();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static6();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static7();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static8();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return 100;
     }
 

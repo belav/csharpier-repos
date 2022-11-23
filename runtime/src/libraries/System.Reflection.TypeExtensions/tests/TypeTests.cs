@@ -2734,57 +2734,97 @@ namespace System.Reflection.Tests
         private static int s_privateStaticField;
         internal static int InternalStaticField;
 
-        public TI_Class() { }
+        public TI_Class()
+        {
+        }
 
-        protected TI_Class(int i) { }
+        protected TI_Class(int i)
+        {
+        }
 
-        private TI_Class(int i, int j) { }
+        private TI_Class(int i, int j)
+        {
+        }
 
-        internal TI_Class(int i, int j, int k) { }
+        internal TI_Class(int i, int j, int k)
+        {
+        }
 
-        public void PublicMethod() { }
+        public void PublicMethod()
+        {
+        }
 
-        protected void ProtectedMethod() { }
+        protected void ProtectedMethod()
+        {
+        }
 
-        private void PrivateMethod() { }
+        private void PrivateMethod()
+        {
+        }
 
-        internal void InternalMethod() { }
+        internal void InternalMethod()
+        {
+        }
 
-        public static void PublicStaticMethod() { }
+        public static void PublicStaticMethod()
+        {
+        }
 
-        protected static void ProtectedStaticMethod() { }
+        protected static void ProtectedStaticMethod()
+        {
+        }
 
-        private static void PrivateStaticMethod() { }
+        private static void PrivateStaticMethod()
+        {
+        }
 
-        internal static void InternalStaticMethod() { }
+        internal static void InternalStaticMethod()
+        {
+        }
 
-        public class PublicNestedType { }
+        public class PublicNestedType
+        {
+        }
 
-        protected class ProtectedNestedType { }
+        protected class ProtectedNestedType
+        {
+        }
 
-        private class PrivateNestedType { }
+        private class PrivateNestedType
+        {
+        }
 
-        internal class InternalNestedType { }
+        internal class InternalNestedType
+        {
+        }
 
         public int PublicProperty
         {
             get { return default(int); }
-            set { }
+            set
+            {
+            }
         }
         protected int ProtectedProperty
         {
             get { return default(int); }
-            set { }
+            set
+            {
+            }
         }
         private int PrivateProperty
         {
             get { return default(int); }
-            set { }
+            set
+            {
+            }
         }
         internal int InternalProperty
         {
             get { return default(int); }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -3084,22 +3124,32 @@ namespace System.Reflection.Tests
         }
     }
 
-    internal interface TI_Interface1 { }
+    internal interface TI_Interface1
+    {
+    }
 
-    internal interface TI_Interface2 { }
+    internal interface TI_Interface2
+    {
+    }
 
     internal interface TI_Interface3
     {
         void DoSomething();
     }
 
-    internal struct TI_StructWithInterface : TI_Interface1 { }
+    internal struct TI_StructWithInterface : TI_Interface1
+    {
+    }
 
-    internal struct TI_Struct { }
+    internal struct TI_Struct
+    {
+    }
 
     internal struct TI_StructWithInterfaces : TI_Interface1, TI_Interface3
     {
-        public void DoSomething() { }
+        public void DoSomething()
+        {
+        }
     }
 
     internal struct TI_GenericStruct<T>
@@ -3107,20 +3157,34 @@ namespace System.Reflection.Tests
         public T field;
     }
 
-    internal class TI_BaseClassWithInterface : TI_Interface1, TI_Interface2 { }
+    internal class TI_BaseClassWithInterface : TI_Interface1, TI_Interface2
+    {
+    }
 
-    internal class TI_SubClassWithInterface : TI_BaseClassWithInterface { }
+    internal class TI_SubClassWithInterface : TI_BaseClassWithInterface
+    {
+    }
 
-    internal class TI_GenericSubClassWithInterface<T> : TI_SubClassWithInterface { }
+    internal class TI_GenericSubClassWithInterface<T> : TI_SubClassWithInterface
+    {
+    }
 
-    internal class TI_GenericBaseClass<T> { }
+    internal class TI_GenericBaseClass<T>
+    {
+    }
 
-    internal class TI_GenericSubClass<T> : TI_GenericBaseClass<T> { }
+    internal class TI_GenericSubClass<T> : TI_GenericBaseClass<T>
+    {
+    }
 
-    internal class TI_GenericSubSubClass<T> : TI_GenericSubClass<T> { }
+    internal class TI_GenericSubSubClass<T> : TI_GenericSubClass<T>
+    {
+    }
 
     internal class TI_GenericSubClassWithConstraints<T>
-        where T : TI_GenericSubClassWithInterface<T>, TI_Interface1, TI_Interface2 { }
+        where T : TI_GenericSubClassWithInterface<T>, TI_Interface1, TI_Interface2
+    {
+    }
 
     internal class StringImpersonator
     {
@@ -3315,14 +3379,22 @@ namespace System.Reflection.Tests
 
     namespace CustomNamespace
     {
-        internal abstract class TI_AbstractBaseClass { }
+        internal abstract class TI_AbstractBaseClass
+        {
+        }
 
-        internal abstract class TI_AbstractSubClass : TI_AbstractBaseClass { }
+        internal abstract class TI_AbstractSubClass : TI_AbstractBaseClass
+        {
+        }
 
-        internal class TI_SubClass : TI_AbstractSubClass { }
+        internal class TI_SubClass : TI_AbstractSubClass
+        {
+        }
     }
 
-    internal class TI_GenericClassWithConstraints<T> where T : TI_Interface1 { }
+    internal class TI_GenericClassWithConstraints<T> where T : TI_Interface1
+    {
+    }
 
 #pragma warning restore 0169, 0067, 0649
 }

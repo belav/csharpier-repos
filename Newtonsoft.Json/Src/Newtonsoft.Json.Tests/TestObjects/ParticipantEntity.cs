@@ -33,7 +33,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
         private Dictionary<string, string> _properties;
 
         [JsonConstructor]
-        public ParticipantEntity() { }
+        public ParticipantEntity()
+        {
+        }
 
         /// <summary>
         /// Gets or sets the date and time that the participant was created in the CU.

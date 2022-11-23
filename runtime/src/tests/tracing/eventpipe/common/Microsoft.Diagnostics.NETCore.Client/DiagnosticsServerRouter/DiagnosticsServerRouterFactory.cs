@@ -20,13 +20,16 @@ namespace Microsoft.Diagnostics.NETCore.Client
     {
         public RuntimeTimeoutException(int TimeoutMs)
             : base(string.Format("No new runtime endpoints connected, waited {0} ms", TimeoutMs))
-        { }
+        {
+        }
     }
 
     internal class BackendStreamTimeoutException : TimeoutException
     {
         public BackendStreamTimeoutException(int TimeoutMs)
-            : base(string.Format("No new back end streams available, waited {0} ms", TimeoutMs)) { }
+            : base(string.Format("No new back end streams available, waited {0} ms", TimeoutMs))
+        {
+        }
     }
 
     /// <summary>
@@ -141,7 +144,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     // Wait before rechecking connection.
                     await Task.Delay(IsStreamConnectedTimeoutMs, token).ConfigureAwait(false);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -382,9 +387,13 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return await ConnectTcpStreamAsyncInternal(token, retry).ConfigureAwait(false);
         }
 
-        public virtual void Start() { }
+        public virtual void Start()
+        {
+        }
 
-        public virtual void Stop() { }
+        public virtual void Stop()
+        {
+        }
 
         async Task<Stream> ConnectTcpStreamAsyncInternal(CancellationToken token, bool retry)
         {
@@ -519,7 +528,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
             );
         }
 
-        public void Start() { }
+        public void Start()
+        {
+        }
 
         public void Stop()
         {

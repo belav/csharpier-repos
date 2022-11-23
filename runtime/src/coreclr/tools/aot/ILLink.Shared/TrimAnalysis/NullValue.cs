@@ -10,7 +10,9 @@ namespace ILLink.Shared.TrimAnalysis
 {
     internal sealed record NullValue : SingleValue
     {
-        private NullValue() { }
+        private NullValue()
+        {
+        }
 
         public static NullValue Instance { get; } = new NullValue();
 

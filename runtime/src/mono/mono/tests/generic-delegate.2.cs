@@ -1,6 +1,8 @@
 using System;
 
-public class ClassA { }
+public class ClassA
+{
+}
 
 public delegate int IntDelegate(int x);
 public delegate T[] TDelegate<T>();

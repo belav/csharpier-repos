@@ -299,7 +299,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             private string _namespaceUri;
             private bool _rendered;
 
-            public NamespaceEntry() { }
+            public NamespaceEntry()
+            {
+            }
 
             public string Prefix
             {
@@ -341,7 +343,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
         {
             private static NamespaceComparer s_instance = new NamespaceComparer();
 
-            private NamespaceComparer() { }
+            private NamespaceComparer()
+            {
+            }
 
             public static NamespaceComparer Instance
             {

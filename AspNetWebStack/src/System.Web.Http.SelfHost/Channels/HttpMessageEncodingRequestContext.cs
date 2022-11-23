@@ -156,7 +156,9 @@ namespace System.Web.Http.SelfHost.Channels
                 {
                     _configuredRequestMessage.Close();
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

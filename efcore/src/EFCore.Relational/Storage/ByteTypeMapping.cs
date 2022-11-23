@@ -26,13 +26,17 @@ public class ByteTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public ByteTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Byte)
-        : base(storeType, typeof(byte), dbType) { }
+        : base(storeType, typeof(byte), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ByteTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected ByteTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected ByteTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

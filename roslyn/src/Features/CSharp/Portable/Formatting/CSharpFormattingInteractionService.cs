@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFormattingInteractionService() { }
+        public CSharpFormattingInteractionService()
+        {
+        }
 
         public bool SupportsFormatDocument => true;
         public bool SupportsFormatOnPaste => true;

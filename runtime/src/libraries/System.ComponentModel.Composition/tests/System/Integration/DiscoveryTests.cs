@@ -76,7 +76,9 @@ namespace Tests.Integration
         }
 
         [Export]
-        public class DerivedBaseWithNonPublicImportAndExport : BaseWithNonPublicImportAndExport { }
+        public class DerivedBaseWithNonPublicImportAndExport : BaseWithNonPublicImportAndExport
+        {
+        }
 
         [Fact]
         public void Import_PrivateOnClass_ShouldSetImport()
@@ -171,7 +173,9 @@ namespace Tests.Integration
             );
         }
 
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
         [InheritedExport]
         public abstract class BaseWithVirtualExport
@@ -202,15 +206,21 @@ namespace Tests.Integration
             Assert.Equal(1, exports2.Count());
         }
 
-        public interface IDocument { }
+        public interface IDocument
+        {
+        }
 
         [Export(typeof(IDocument))]
         [ExportMetadata("Name", "TextDocument")]
-        public class TextDocument : IDocument { }
+        public class TextDocument : IDocument
+        {
+        }
 
         [Export(typeof(IDocument))]
         [ExportMetadata("Name", "XmlDocument")]
-        public class XmlDocument : TextDocument { }
+        public class XmlDocument : TextDocument
+        {
+        }
 
         [Fact]
         public void Export_ExportingSameContractInDerived_ShouldResultInHidingBaseExport()
@@ -244,12 +254,16 @@ namespace Tests.Integration
             Assert.IsType<XmlDocument>(exports.ElementAt(1).Value);
         }
 
-        public interface IObjectSerializer { }
+        public interface IObjectSerializer
+        {
+        }
 
         [Export(typeof(IDocument))]
         [Export(typeof(IObjectSerializer))]
         [ExportMetadata("Name", "XamlDocument")]
-        public class XamlDocument : XmlDocument, IObjectSerializer { }
+        public class XamlDocument : XmlDocument, IObjectSerializer
+        {
+        }
 
         [Fact]
         public void Export_ExportingSameContractInDerivedAndNewContract_ShouldResultInHidingBaseAndExportingNewContract()
@@ -267,7 +281,9 @@ namespace Tests.Integration
 
         [Export(typeof(IDocument))]
         [ExportMetadata("Name", "WPFDocument")]
-        public class WPFDocument : XamlDocument { }
+        public class WPFDocument : XamlDocument
+        {
+        }
 
         [Fact]
         public void Export_ExportingSameContractInDerivedAndAnotherContractInBase_ShouldResultInHidingOneBaseAndInheritingNewContract()
@@ -308,7 +324,9 @@ namespace Tests.Integration
             Assert.Equal(version, plugin.Version);
         }
 
-        public class Plugin1 : Plugin { }
+        public class Plugin1 : Plugin
+        {
+        }
 
         [Fact]
         public void Export_Plugin1()
@@ -541,11 +559,17 @@ namespace Tests.Integration
         }
 
         [InheritedExport]
-        public interface IOrderScreen { }
+        public interface IOrderScreen
+        {
+        }
 
-        public class NorthwindOrderScreen : IOrderScreen { }
+        public class NorthwindOrderScreen : IOrderScreen
+        {
+        }
 
-        public class SouthsandOrderScreen : IOrderScreen { }
+        public class SouthsandOrderScreen : IOrderScreen
+        {
+        }
 
         [Fact]
         public void Export_ExportOnlyOnBaseInterfacewithInheritedMarked_ShouldFindAllImplementers()
@@ -623,25 +647,37 @@ namespace Tests.Integration
         [Addin("Addin1", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101C}")]
         public class Addin1 : IAddin
         {
-            public void LoadAddin(object application) { }
+            public void LoadAddin(object application)
+            {
+            }
 
-            public void Shutdown() { }
+            public void Shutdown()
+            {
+            }
         }
 
         [Addin("Addin2", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101D}")]
         public class Addin2 : IAddin
         {
-            public void LoadAddin(object application) { }
+            public void LoadAddin(object application)
+            {
+            }
 
-            public void Shutdown() { }
+            public void Shutdown()
+            {
+            }
         }
 
         [Addin("Addin3", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101E}")]
         public class Addin3 : IAddin
         {
-            public void LoadAddin(object application) { }
+            public void LoadAddin(object application)
+            {
+            }
 
-            public void Shutdown() { }
+            public void Shutdown()
+            {
+            }
         }
 
         [Fact]
@@ -691,7 +727,9 @@ namespace Tests.Integration
             Assert.Equal("{63D1B00F-AD2F-4F14-8A36-FFA59E4A101C}", addin.Metadata["Id"]);
         }
 
-        public class CustomInheritedExportAttribute : InheritedExportAttribute { }
+        public class CustomInheritedExportAttribute : InheritedExportAttribute
+        {
+        }
 
         [CustomInheritedExport]
         public interface IUsesCustomInheritedExport
@@ -743,15 +781,21 @@ namespace Tests.Integration
 
         [InheritedExport("Foo")]
         [ExportMetadata("Name", "IFoo1")]
-        public interface IFoo1 { }
+        public interface IFoo1
+        {
+        }
 
         [InheritedExport("Foo")]
         [ExportMetadata("Name", "IFoo2")]
-        public interface IFoo2 { }
+        public interface IFoo2
+        {
+        }
 
         [InheritedExport("Foo")]
         [ExportMetadata("Name", "FooWithOneFoo")]
-        public class FooWithOneFoo : IFoo1 { }
+        public class FooWithOneFoo : IFoo1
+        {
+        }
 
         [Fact]
         public void InheritedExport_OnTypeAndInterface()
@@ -764,7 +808,9 @@ namespace Tests.Integration
             Assert.Equal("FooWithOneFoo", foos[0].Metadata["Name"]);
         }
 
-        public class FooWithTwoFoos : IFoo1, IFoo2 { }
+        public class FooWithTwoFoos : IFoo1, IFoo2
+        {
+        }
 
         [Fact]
         [ActiveIssue("https://github.com/mono/mono/issues/16417", TestRuntimes.Mono)]
@@ -782,7 +828,9 @@ namespace Tests.Integration
             );
         }
 
-        public class FooWithIfaceByOneFoo : FooWithOneFoo, IFoo1 { }
+        public class FooWithIfaceByOneFoo : FooWithOneFoo, IFoo1
+        {
+        }
 
         [Fact]
         public void InheritedExport_BaseAndInterface()
@@ -800,7 +848,9 @@ namespace Tests.Integration
 
         [InheritedExport("Foo")]
         [ExportMetadata("Name", "FooWithInheritedOnSelf")]
-        public class FooWithInheritedOnSelf : FooWithOneFoo, IFoo1 { }
+        public class FooWithInheritedOnSelf : FooWithOneFoo, IFoo1
+        {
+        }
 
         [Fact]
         public void InheritedExport_BaseInterfaceAndSelf()
@@ -818,9 +868,13 @@ namespace Tests.Integration
 
         [InheritedExport("Foo")]
         [ExportMetadata("Name", "IFoo3")]
-        public interface IFoo3 : IFoo1 { }
+        public interface IFoo3 : IFoo1
+        {
+        }
 
-        public class FooWithInterfaceWithMultipleFoos : IFoo3 { }
+        public class FooWithInterfaceWithMultipleFoos : IFoo3
+        {
+        }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
@@ -841,7 +895,9 @@ namespace Tests.Integration
 
         [InheritedExport("Foo2")]
         [ExportMetadata("Name", "FooWithMultipleInheritedExports")]
-        public class FooWithMultipleInheritedExports : IFoo1 { }
+        public class FooWithMultipleInheritedExports : IFoo1
+        {
+        }
 
         [Fact]
         public void InheritedExport_MultipleDifferentContracts()

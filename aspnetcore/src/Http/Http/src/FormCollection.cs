@@ -213,7 +213,9 @@ public class FormCollection : IFormCollection
         }
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         object IEnumerator.Current
         {

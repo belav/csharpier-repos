@@ -17,7 +17,8 @@ namespace System.Data.Common
 
         public SqlSingleStorage(DataColumn column)
             : base(column, typeof(SqlSingle), SqlSingle.Null, SqlSingle.Null, StorageType.SqlSingle)
-        { }
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

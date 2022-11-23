@@ -9,7 +9,9 @@ namespace System
     [ComVisible(true)]
     public abstract class MarshalByRefObject
     {
-        protected MarshalByRefObject() { }
+        protected MarshalByRefObject()
+        {
+        }
 
         [Obsolete(
             Obsoletions.RemotingApisMessage,

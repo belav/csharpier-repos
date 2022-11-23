@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteMissingImportDiscoveryServiceCallbackDispatcher() { }
+        public RemoteMissingImportDiscoveryServiceCallbackDispatcher()
+        {
+        }
 
         private ISymbolSearchService GetService(RemoteServiceCallbackId callbackId) =>
             (ISymbolSearchService)GetCallback(callbackId);

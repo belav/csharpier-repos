@@ -5,23 +5,35 @@ namespace System.Collections.Specialized.Tests
 {
     public partial class MyNameObjectCollection : NameObjectCollectionBase
     {
-        public MyNameObjectCollection() : base() { }
+        public MyNameObjectCollection() : base()
+        {
+        }
 
-        public MyNameObjectCollection(int capacity) : base(capacity) { }
+        public MyNameObjectCollection(int capacity) : base(capacity)
+        {
+        }
 
-        public MyNameObjectCollection(IEqualityComparer comparer) : base(comparer) { }
+        public MyNameObjectCollection(IEqualityComparer comparer) : base(comparer)
+        {
+        }
 
         public MyNameObjectCollection(int capacity, IEqualityComparer comparer)
-            : base(capacity, comparer) { }
+            : base(capacity, comparer)
+        {
+        }
 #pragma warning disable CS0618 // Type or member is obsolete
         public MyNameObjectCollection(IHashCodeProvider hashProvider, IComparer comparer)
-            : base(hashProvider, comparer) { }
+            : base(hashProvider, comparer)
+        {
+        }
 
         public MyNameObjectCollection(
             int capacity,
             IHashCodeProvider hashProvider,
             IComparer comparer
-        ) : base(capacity, hashProvider, comparer) { }
+        ) : base(capacity, hashProvider, comparer)
+        {
+        }
 #pragma warning restore CS0618 // Type or member is obsolete
 
         public new bool IsReadOnly

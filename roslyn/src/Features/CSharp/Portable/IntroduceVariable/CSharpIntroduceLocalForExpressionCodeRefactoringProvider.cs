@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpIntroduceLocalForExpressionCodeRefactoringProvider() { }
+        public CSharpIntroduceLocalForExpressionCodeRefactoringProvider()
+        {
+        }
 
         protected override bool IsValid(
             ExpressionStatementSyntax expressionStatement,

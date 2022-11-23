@@ -40,7 +40,9 @@ public abstract class Intermediate : PseudoBase
 
 public class Leaf : Intermediate
 {
-    public Leaf() { }
+    public Leaf()
+    {
+    }
 
     public override C getI()
     {
@@ -48,7 +50,9 @@ public class Leaf : Intermediate
     }
 }
 
-public interface I { }
+public interface I
+{
+}
 
 public class C : I
 {

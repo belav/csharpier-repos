@@ -527,7 +527,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         private abstract class AbstractFoo
         {
             // The constructor should be public, since that is checked as well.
-            public AbstractFoo() { }
+            public AbstractFoo()
+            {
+            }
         }
 
         private sealed class Bar
@@ -540,9 +542,13 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         private class StaticConstructorClass
         {
-            static StaticConstructorClass() { }
+            static StaticConstructorClass()
+            {
+            }
 
-            private StaticConstructorClass() { }
+            private StaticConstructorClass()
+            {
+            }
         }
     }
 }

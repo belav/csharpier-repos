@@ -25,11 +25,15 @@ namespace Castle.Core.Configuration
     public class ConfigurationAttributeCollection
         : System.Collections.Specialized.NameValueCollection
     {
-        public ConfigurationAttributeCollection() { }
+        public ConfigurationAttributeCollection()
+        {
+        }
 
 #if FEATURE_SERIALIZATION
         protected ConfigurationAttributeCollection(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 #endif
     }
 }

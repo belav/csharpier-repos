@@ -20,7 +20,9 @@ public class SqliteGuidTypeMapping : GuidTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteGuidTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Guid)
-        : base(storeType, dbType) { }
+        : base(storeType, dbType)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,7 +31,8 @@ public class SqliteGuidTypeMapping : GuidTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqliteGuidTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
-    { }
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

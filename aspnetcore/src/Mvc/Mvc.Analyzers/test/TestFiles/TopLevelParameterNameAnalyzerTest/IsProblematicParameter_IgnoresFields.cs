@@ -4,6 +4,8 @@
     {
         public string model;
 
-        public void ActionMethod(IsProblematicParameter_IgnoresFields model) { }
+        public void ActionMethod(IsProblematicParameter_IgnoresFields model)
+        {
+        }
     }
 }

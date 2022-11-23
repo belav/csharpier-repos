@@ -483,7 +483,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             HasError = hasError;
         }
 
-        public MonoBinaryReader(byte[] data) : base(new MemoryStream(data)) { }
+        public MonoBinaryReader(byte[] data) : base(new MemoryStream(data))
+        {
+        }
 
         public static MonoBinaryReader From(Result result)
         {
@@ -544,7 +546,9 @@ namespace Microsoft.WebAssembly.Diagnostics
 
     internal sealed class MonoBinaryWriter : BinaryWriter
     {
-        public MonoBinaryWriter() : base(new MemoryStream(20)) { }
+        public MonoBinaryWriter() : base(new MemoryStream(20))
+        {
+        }
 
         public override void Write(string val)
         {

@@ -39,7 +39,9 @@ namespace System.Reflection.Emit
     {
         private DynamicMethod method = null!;
 
-        internal DynamicILInfo() { }
+        internal DynamicILInfo()
+        {
+        }
 
         internal DynamicILInfo(DynamicMethod method)
         {

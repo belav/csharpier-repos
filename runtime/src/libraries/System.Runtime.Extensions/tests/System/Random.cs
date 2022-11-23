@@ -1603,9 +1603,13 @@ namespace System.Tests
             public bool SampleCalled,
                 NextCalled;
 
-            public SubRandom() { }
+            public SubRandom()
+            {
+            }
 
-            public SubRandom(int Seed) : base(Seed) { }
+            public SubRandom(int Seed) : base(Seed)
+            {
+            }
 
             public double ExposeSample() => Sample();
 

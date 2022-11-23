@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
 {
     public class AddYieldTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddYieldTests(ITestOutputHelper logger) : base(logger) { }
+        public AddYieldTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

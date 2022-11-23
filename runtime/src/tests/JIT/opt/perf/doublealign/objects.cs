@@ -4,7 +4,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public class CMyException : System.Exception { }
+public class CMyException : System.Exception
+{
+}
 
 public class Class1
 {
@@ -32,10 +34,14 @@ public class CTest
     private static int s_unalignedCount = 0;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void UseShort(short x) { }
+    private static void UseShort(short x)
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void UseByte(byte x) { }
+    private static void UseByte(byte x)
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     private static unsafe bool CheckDoubleAlignment(double* p)

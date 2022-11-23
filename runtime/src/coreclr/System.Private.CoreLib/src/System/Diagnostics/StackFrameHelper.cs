@@ -185,7 +185,9 @@ namespace System.Diagnostics
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 t_reentrancy--;

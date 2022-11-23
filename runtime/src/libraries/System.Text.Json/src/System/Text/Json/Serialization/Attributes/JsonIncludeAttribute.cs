@@ -21,6 +21,8 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Initializes a new instance of <see cref="JsonIncludeAttribute"/>.
         /// </summary>
-        public JsonIncludeAttribute() { }
+        public JsonIncludeAttribute()
+        {
+        }
     }
 }

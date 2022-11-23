@@ -635,7 +635,9 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         }
     }
 
-    public void Reset() { }
+    public void Reset()
+    {
+    }
 
     internal void OnRequestProcessingEnded()
     {

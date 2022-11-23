@@ -14,7 +14,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     public class BasicErrorListNetCore : BasicErrorListCommon
     {
         public BasicErrorListNetCore()
-            : base(WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary) { }
+            : base(WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

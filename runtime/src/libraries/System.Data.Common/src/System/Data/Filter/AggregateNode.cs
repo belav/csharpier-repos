@@ -35,7 +35,9 @@ namespace System.Data
         private DataRelation? _relation;
 
         internal AggregateNode(DataTable? table, FunctionId aggregateType, string columnName)
-            : this(table, aggregateType, columnName, true, null) { }
+            : this(table, aggregateType, columnName, true, null)
+        {
+        }
 
         internal AggregateNode(
             DataTable? table,

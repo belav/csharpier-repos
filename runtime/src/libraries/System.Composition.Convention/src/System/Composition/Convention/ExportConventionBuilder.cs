@@ -21,7 +21,9 @@ namespace System.Composition.Convention
         private List<Tuple<string, Func<Type, object>>> _metadataItemFuncs;
         private Func<Type, string> _getContractNameFromPartType;
 
-        internal ExportConventionBuilder() { }
+        internal ExportConventionBuilder()
+        {
+        }
 
         /// <summary>
         /// Specify the contract type for the export.

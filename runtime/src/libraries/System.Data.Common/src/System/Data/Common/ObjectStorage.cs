@@ -713,7 +713,9 @@ namespace System.Data.Common
                 KeyValuePair<Type, XmlRootAttribute>
             > s_default = new TempAssemblyComparer();
 
-            private TempAssemblyComparer() { }
+            private TempAssemblyComparer()
+            {
+            }
 
             public bool Equals(
                 KeyValuePair<Type, XmlRootAttribute> x,

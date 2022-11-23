@@ -9,7 +9,9 @@ namespace System.Net.NetworkInformation
     {
         private readonly List<IPAddressInformation> _addresses = new List<IPAddressInformation>();
 
-        internal IPAddressInformationCollection() { }
+        internal IPAddressInformationCollection()
+        {
+        }
 
         public virtual void CopyTo(IPAddressInformation[] array, int offset)
         {

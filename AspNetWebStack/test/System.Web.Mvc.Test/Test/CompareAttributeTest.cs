@@ -230,7 +230,9 @@ namespace System.Web.Mvc.Test
 
         private class DerivedCompareAttribute : CompareAttribute
         {
-            public DerivedCompareAttribute(string otherProperty) : base(otherProperty) { }
+            public DerivedCompareAttribute(string otherProperty) : base(otherProperty)
+            {
+            }
 
             public override bool IsValid(object value)
             {

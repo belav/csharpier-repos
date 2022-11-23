@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateTypeService() { }
+        public CSharpGenerateTypeService()
+        {
+        }
 
         protected override string DefaultFileExtension => ".cs";
 

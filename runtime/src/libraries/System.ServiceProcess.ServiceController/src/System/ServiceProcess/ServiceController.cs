@@ -57,7 +57,9 @@ namespace System.ServiceProcess
         /// Creates a ServiceController object, based on service name.
         /// </summary>
         /// <param name="name">Name of the service</param>
-        public ServiceController(string name) : this(name, DefaultMachineName) { }
+        public ServiceController(string name) : this(name, DefaultMachineName)
+        {
+        }
 
         /// <summary>
         /// Creates a ServiceController object, based on machine and service name.

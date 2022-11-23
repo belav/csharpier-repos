@@ -36,7 +36,9 @@ namespace System.Linq.Expressions.Tests
 
     public class RawILStringToTextWriter : ReadableILStringToTextWriter
     {
-        public RawILStringToTextWriter(TextWriter writer) : base(writer) { }
+        public RawILStringToTextWriter(TextWriter writer) : base(writer)
+        {
+        }
 
         public override void Process(ILInstruction ilInstruction, string operandString)
         {
@@ -189,59 +191,89 @@ namespace System.Linq.Expressions.Tests
     {
         public virtual void VisitInlineBrTargetInstruction(
             InlineBrTargetInstruction inlineBrTargetInstruction
-        ) { }
+        )
+        {
+        }
 
         public virtual void VisitInlineFieldInstruction(
             InlineFieldInstruction inlineFieldInstruction
-        ) { }
+        )
+        {
+        }
 
-        public virtual void VisitInlineIInstruction(InlineIInstruction inlineIInstruction) { }
+        public virtual void VisitInlineIInstruction(InlineIInstruction inlineIInstruction)
+        {
+        }
 
-        public virtual void VisitInlineI8Instruction(InlineI8Instruction inlineI8Instruction) { }
+        public virtual void VisitInlineI8Instruction(InlineI8Instruction inlineI8Instruction)
+        {
+        }
 
         public virtual void VisitInlineMethodInstruction(
             InlineMethodInstruction inlineMethodInstruction
-        ) { }
+        )
+        {
+        }
 
-        public virtual void VisitInlineNoneInstruction(
-            InlineNoneInstruction inlineNoneInstruction
-        ) { }
+        public virtual void VisitInlineNoneInstruction(InlineNoneInstruction inlineNoneInstruction)
+        {
+        }
 
-        public virtual void VisitInlineRInstruction(InlineRInstruction inlineRInstruction) { }
+        public virtual void VisitInlineRInstruction(InlineRInstruction inlineRInstruction)
+        {
+        }
 
-        public virtual void VisitInlineSigInstruction(InlineSigInstruction inlineSigInstruction) { }
+        public virtual void VisitInlineSigInstruction(InlineSigInstruction inlineSigInstruction)
+        {
+        }
 
         public virtual void VisitInlineStringInstruction(
             InlineStringInstruction inlineStringInstruction
-        ) { }
+        )
+        {
+        }
 
         public virtual void VisitInlineSwitchInstruction(
             InlineSwitchInstruction inlineSwitchInstruction
-        ) { }
+        )
+        {
+        }
 
-        public virtual void VisitInlineTokInstruction(InlineTokInstruction inlineTokInstruction) { }
+        public virtual void VisitInlineTokInstruction(InlineTokInstruction inlineTokInstruction)
+        {
+        }
 
-        public virtual void VisitInlineTypeInstruction(
-            InlineTypeInstruction inlineTypeInstruction
-        ) { }
+        public virtual void VisitInlineTypeInstruction(InlineTypeInstruction inlineTypeInstruction)
+        {
+        }
 
-        public virtual void VisitInlineVarInstruction(InlineVarInstruction inlineVarInstruction) { }
+        public virtual void VisitInlineVarInstruction(InlineVarInstruction inlineVarInstruction)
+        {
+        }
 
         public virtual void VisitShortInlineBrTargetInstruction(
             ShortInlineBrTargetInstruction shortInlineBrTargetInstruction
-        ) { }
+        )
+        {
+        }
 
         public virtual void VisitShortInlineIInstruction(
             ShortInlineIInstruction shortInlineIInstruction
-        ) { }
+        )
+        {
+        }
 
         public virtual void VisitShortInlineRInstruction(
             ShortInlineRInstruction shortInlineRInstruction
-        ) { }
+        )
+        {
+        }
 
         public virtual void VisitShortInlineVarInstruction(
             ShortInlineVarInstruction shortInlineVarInstruction
-        ) { }
+        )
+        {
+        }
     }
 
     public class ReadableILStringVisitor : ILInstructionVisitor
@@ -250,7 +282,9 @@ namespace System.Linq.Expressions.Tests
         protected readonly IILStringCollector collector;
 
         public ReadableILStringVisitor(IILStringCollector collector)
-            : this(collector, DefaultFormatProvider.Instance) { }
+            : this(collector, DefaultFormatProvider.Instance)
+        {
+        }
 
         public ReadableILStringVisitor(IILStringCollector collector, IFormatProvider formatProvider)
         {
@@ -440,10 +474,14 @@ namespace System.Linq.Expressions.Tests
     public sealed class RawILStringVisitor : ReadableILStringVisitor
     {
         public RawILStringVisitor(IILStringCollector collector)
-            : this(collector, DefaultFormatProvider.Instance) { }
+            : this(collector, DefaultFormatProvider.Instance)
+        {
+        }
 
         public RawILStringVisitor(IILStringCollector collector, IFormatProvider formatProvider)
-            : base(collector, formatProvider) { }
+            : base(collector, formatProvider)
+        {
+        }
 
         public override void VisitInlineBrTargetInstruction(
             InlineBrTargetInstruction inlineBrTargetInstruction

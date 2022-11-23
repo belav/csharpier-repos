@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
 {
     internal class RQNamespace : RQTypeOrNamespace
     {
-        public RQNamespace(IList<string> namespaceNames) : base(namespaceNames) { }
+        public RQNamespace(IList<string> namespaceNames) : base(namespaceNames)
+        {
+        }
 
         protected override string RQKeyword
         {

@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
     {
         private class TestViewModel : ISettingsEditorViewModel
         {
-            public void NotifyOfUpdate() { }
+            public void NotifyOfUpdate()
+            {
+            }
 
             Task<SourceText> ISettingsEditorViewModel.UpdateEditorConfigAsync(SourceText sourceText)
             {

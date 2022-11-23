@@ -928,7 +928,9 @@ namespace System.Xml
             FlushElement();
         }
 
-        protected static void EndComment() { }
+        protected static void EndComment()
+        {
+        }
 
         protected void StartContent()
         {
@@ -1000,7 +1002,9 @@ namespace System.Xml
             return (ch == ' ' || ch == '\n' || ch == '\r' || ch == 't');
         }
 
-        protected static void EndContent() { }
+        protected static void EndContent()
+        {
+        }
 
         private void AutoComplete(WriteState writeState)
         {
@@ -2774,7 +2778,9 @@ namespace System.Xml
                 private string? _lang;
                 private int _depth;
 
-                public XmlAttribute() { }
+                public XmlAttribute()
+                {
+                }
 
                 public int Depth
                 {
@@ -2808,7 +2814,9 @@ namespace System.Xml
                 private int _depth;
                 private char _prefixChar;
 
-                public Namespace() { }
+                public Namespace()
+                {
+                }
 
                 public void Clear()
                 {

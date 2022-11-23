@@ -4193,7 +4193,9 @@ class C { }";
 
         private class InMemoryAssemblyLoader : IAnalyzerAssemblyLoader
         {
-            public void AddDependencyLocation(string fullPath) { }
+            public void AddDependencyLocation(string fullPath)
+            {
+            }
 
             public Assembly LoadFromPath(string fullPath)
             {

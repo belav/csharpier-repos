@@ -13,7 +13,9 @@ namespace System.Xml.Xsl.Qil
     /// </remarks>
     internal sealed class QilFactory
     {
-        public QilFactory() { }
+        public QilFactory()
+        {
+        }
 
         //-----------------------------------------------
         // Convenience methods

@@ -585,7 +585,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         .Select(i => join.Target2.SendAsync(i))
                         .ToArray();
                     var ab = new ActionBlock<Tuple<int, int>>(
-                        i => { },
+                        i =>
+                        {
+                        },
                         new ExecutionDataflowBlockOptions { BoundedCapacity = 1 }
                     );
                     join.LinkTo(ab, new DataflowLinkOptions { PropagateCompletion = true });
@@ -633,7 +635,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             >
                         >(i => count++);
 
-                        join1.LinkTo(new ActionBlock<Tuple<int, string>>(item => { }), t => false); // ensure don't propagate across false filtered link
+                        join1.LinkTo(
+                            new ActionBlock<Tuple<int, string>>(item =>
+                            {
+                            }),
+                            t => false
+                        ); // ensure don't propagate across false filtered link
                         join1.LinkTo(join5.Target1, linkOptions, t => true); // ensure joins work through filters
                         join2.LinkTo(join5.Target2, linkOptions);
                         join3.LinkTo(join6.Target1, linkOptions, t => true);

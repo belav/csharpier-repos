@@ -22,7 +22,9 @@ namespace Microsoft.Interop
                     .Select(p => p.Identifier.GetLocation())
                     .ToImmutableArray(),
                 syntax.Identifier.GetLocation()
-            ) { }
+            )
+        {
+        }
 
         public bool Equals(MethodSignatureDiagnosticLocations other)
         {

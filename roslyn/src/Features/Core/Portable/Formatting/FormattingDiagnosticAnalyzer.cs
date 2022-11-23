@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                     FeaturesResources.ResourceManager,
                     typeof(FeaturesResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;

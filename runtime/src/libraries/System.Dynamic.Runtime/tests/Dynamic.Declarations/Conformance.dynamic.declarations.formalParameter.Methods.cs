@@ -990,7 +990,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
     }
 
-    public class Derived<V> : Base<dynamic> { }
+    public class Derived<V> : Base<dynamic>
+    {
+    }
 
     public class Base2<U, V>
     {
@@ -1045,7 +1047,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public class MyClass1<T> { }
+        public class MyClass1<T>
+        {
+        }
 
         public class MyClass2<U> : MyClass1<U>
         {
@@ -1055,9 +1059,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
             }
         }
 
-        public class MyClass3<T> : MyClass2<dynamic> { }
+        public class MyClass3<T> : MyClass2<dynamic>
+        {
+        }
 
-        public class MyClass4<V> : MyClass3<V> { }
+        public class MyClass4<V> : MyClass3<V>
+        {
+        }
 
         public class Test
         {
@@ -1090,7 +1098,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public class MyClass1<T> { }
+        public class MyClass1<T>
+        {
+        }
 
         public class MyClass11<U, V> : MyClass1<dynamic>
         {
@@ -1139,11 +1149,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public interface I1 { }
+        public interface I1
+        {
+        }
 
-        public interface I2<T> : I1 { }
+        public interface I2<T> : I1
+        {
+        }
 
-        public interface I3<U, V> { }
+        public interface I3<U, V>
+        {
+        }
 
         public class MyClass1<T> : I1, I2<T>
         {
@@ -1153,7 +1169,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
             }
         }
 
-        public class MyClass2<U, V> : MyClass1<dynamic>, I1, I2<V> { }
+        public class MyClass2<U, V> : MyClass1<dynamic>, I1, I2<V>
+        {
+        }
 
         public class MyClass3<X, Y, Z> : MyClass2<X, dynamic>, I3<X, Z>
         {
@@ -1202,20 +1220,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public interface I1 { }
+        public interface I1
+        {
+        }
 
-        public interface I2 { }
+        public interface I2
+        {
+        }
 
-        public interface I3<T> : I1, I2 { }
+        public interface I3<T> : I1, I2
+        {
+        }
 
-        public interface I4<U, V> : I3<U> { }
+        public interface I4<U, V> : I3<U>
+        {
+        }
 
         public class MyClass1<T> : I1, I2 // where T : new()
         {
-            public MyClass1() { }
+            public MyClass1()
+            {
+            }
         }
 
-        public class MyClass2<U, @dynamic> : I1, I3<U> where U : class { }
+        public class MyClass2<U, @dynamic> : I1, I3<U> where U : class
+        {
+        }
 
         public class MyClass3<X, Y, Z> : MyClass2<X, dynamic>, I4<X, Z>
             where X : MyClass1<int>

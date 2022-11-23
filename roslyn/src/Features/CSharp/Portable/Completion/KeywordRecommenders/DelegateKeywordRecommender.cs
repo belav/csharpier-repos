@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.UnsafeKeyword
         };
 
-        public DelegateKeywordRecommender() : base(SyntaxKind.DelegateKeyword) { }
+        public DelegateKeywordRecommender() : base(SyntaxKind.DelegateKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

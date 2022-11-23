@@ -13,7 +13,9 @@ namespace System.IO.IsolatedStorage
 
     public abstract partial class IsolatedStorage : System.MarshalByRefObject
     {
-        protected IsolatedStorage() { }
+        protected IsolatedStorage()
+        {
+        }
 
         public object ApplicationIdentity
         {
@@ -78,36 +80,50 @@ namespace System.IO.IsolatedStorage
         protected void InitStore(
             System.IO.IsolatedStorage.IsolatedStorageScope scope,
             System.Type appEvidenceType
-        ) { }
+        )
+        {
+        }
 
         protected void InitStore(
             System.IO.IsolatedStorage.IsolatedStorageScope scope,
             System.Type? domainEvidenceType,
             System.Type? assemblyEvidenceType
-        ) { }
+        )
+        {
+        }
 
         public abstract void Remove();
     }
 
     public partial class IsolatedStorageException : System.Exception
     {
-        public IsolatedStorageException() { }
+        public IsolatedStorageException()
+        {
+        }
 
         protected IsolatedStorageException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public IsolatedStorageException(string? message) { }
+        public IsolatedStorageException(string? message)
+        {
+        }
 
-        public IsolatedStorageException(string? message, System.Exception? inner) { }
+        public IsolatedStorageException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     public sealed partial class IsolatedStorageFile
         : System.IO.IsolatedStorage.IsolatedStorage,
             System.IDisposable
     {
-        internal IsolatedStorageFile() { }
+        internal IsolatedStorageFile()
+        {
+        }
 
         public override long AvailableFreeSpace
         {
@@ -144,29 +160,43 @@ namespace System.IO.IsolatedStorage
             get { throw null; }
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void CopyFile(string sourceFileName, string destinationFileName) { }
+        public void CopyFile(string sourceFileName, string destinationFileName)
+        {
+        }
 
-        public void CopyFile(string sourceFileName, string destinationFileName, bool overwrite) { }
+        public void CopyFile(string sourceFileName, string destinationFileName, bool overwrite)
+        {
+        }
 
-        public void CreateDirectory(string dir) { }
+        public void CreateDirectory(string dir)
+        {
+        }
 
         public System.IO.IsolatedStorage.IsolatedStorageFileStream CreateFile(string path)
         {
             throw null;
         }
 
-        public void DeleteDirectory(string dir) { }
+        public void DeleteDirectory(string dir)
+        {
+        }
 
-        public void DeleteFile(string file) { }
+        public void DeleteFile(string file)
+        {
+        }
 
         public bool DirectoryExists(string path)
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool FileExists(string path)
         {
@@ -289,9 +319,13 @@ namespace System.IO.IsolatedStorage
             throw null;
         }
 
-        public void MoveDirectory(string sourceDirectoryName, string destinationDirectoryName) { }
+        public void MoveDirectory(string sourceDirectoryName, string destinationDirectoryName)
+        {
+        }
 
-        public void MoveFile(string sourceFileName, string destinationFileName) { }
+        public void MoveFile(string sourceFileName, string destinationFileName)
+        {
+        }
 
         public System.IO.IsolatedStorage.IsolatedStorageFileStream OpenFile(
             string path,
@@ -320,9 +354,13 @@ namespace System.IO.IsolatedStorage
             throw null;
         }
 
-        public override void Remove() { }
+        public override void Remove()
+        {
+        }
 
-        public static void Remove(System.IO.IsolatedStorage.IsolatedStorageScope scope) { }
+        public static void Remove(System.IO.IsolatedStorage.IsolatedStorageScope scope)
+        {
+        }
     }
 
     public partial class IsolatedStorageFileStream : System.IO.FileStream
@@ -331,14 +369,17 @@ namespace System.IO.IsolatedStorage
             : base(
                 default(Microsoft.Win32.SafeHandles.SafeFileHandle),
                 default(System.IO.FileAccess)
-            ) { }
+            )
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
             System.IO.FileMode mode,
             System.IO.FileAccess access
         ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -346,7 +387,8 @@ namespace System.IO.IsolatedStorage
             System.IO.FileAccess access,
             System.IO.FileShare share
         ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -355,7 +397,8 @@ namespace System.IO.IsolatedStorage
             System.IO.FileShare share,
             int bufferSize
         ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -365,7 +408,8 @@ namespace System.IO.IsolatedStorage
             int bufferSize,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
         ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -374,7 +418,8 @@ namespace System.IO.IsolatedStorage
             System.IO.FileShare share,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
         ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -382,14 +427,16 @@ namespace System.IO.IsolatedStorage
             System.IO.FileAccess access,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
         ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
             System.IO.FileMode mode,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
         ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        {
+        }
 
         public override bool CanRead
         {
@@ -422,7 +469,9 @@ namespace System.IO.IsolatedStorage
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override Microsoft.Win32.SafeHandles.SafeFileHandle SafeFileHandle
         {
@@ -451,7 +500,9 @@ namespace System.IO.IsolatedStorage
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -463,11 +514,17 @@ namespace System.IO.IsolatedStorage
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
-        public override void Flush(bool flushToDisk) { }
+        public override void Flush(bool flushToDisk)
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -477,7 +534,9 @@ namespace System.IO.IsolatedStorage
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatform("macos")]
-        public override void Lock(long position, long length) { }
+        public override void Lock(long position, long length)
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -518,14 +577,22 @@ namespace System.IO.IsolatedStorage
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatform("macos")]
-        public override void Unlock(long position, long length) { }
+        public override void Unlock(long position, long length)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Write(System.ReadOnlySpan<byte> buffer) { }
+        public override void Write(System.ReadOnlySpan<byte> buffer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -546,7 +613,9 @@ namespace System.IO.IsolatedStorage
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 
     [System.FlagsAttribute]

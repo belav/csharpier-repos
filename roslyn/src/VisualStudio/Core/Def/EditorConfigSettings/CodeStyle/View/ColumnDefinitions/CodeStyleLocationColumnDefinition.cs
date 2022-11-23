@@ -17,7 +17,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeStyleLocationColumnDefinition() { }
+        public CodeStyleLocationColumnDefinition()
+        {
+        }
 
         public override string Name => Location;
         public override string DisplayName => ServicesVSResources.Location;

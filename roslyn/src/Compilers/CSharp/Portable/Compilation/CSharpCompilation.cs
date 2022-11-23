@@ -462,7 +462,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxTreeCommonFeatures(syntaxAndDeclarations.ExternalSyntaxTrees),
                 semanticModelProvider,
                 eventQueue
-            ) { }
+            )
+        {
+        }
 
         private CSharpCompilation(
             string? assemblyName,

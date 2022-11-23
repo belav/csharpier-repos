@@ -16,7 +16,9 @@ struct AA
             int n = 0;
             while (f)
             {
-                do { } while (f);
+                do
+                {
+                } while (f);
             }
         }
         return 100;

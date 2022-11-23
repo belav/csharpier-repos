@@ -232,7 +232,9 @@ namespace System.Linq.Tests
             using (var en = selected.GetEnumerator())
                 Assert.Throws<OverflowException>(() =>
                 {
-                    while (en.MoveNext()) { }
+                    while (en.MoveNext())
+                    {
+                    }
                 });
         }
 

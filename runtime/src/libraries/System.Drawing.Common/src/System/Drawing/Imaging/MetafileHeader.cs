@@ -16,7 +16,9 @@ namespace System.Drawing.Imaging
         internal MetafileHeaderWmf? wmf;
         internal MetafileHeaderEmf? emf;
 
-        internal MetafileHeader() { }
+        internal MetafileHeader()
+        {
+        }
 
         /// <summary>
         /// Gets the type of the associated <see cref='Metafile'/>.

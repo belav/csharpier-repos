@@ -34,10 +34,14 @@ namespace System.Security.Cryptography.X509Certificates
                     pathLengthConstraint
                 ),
                 critical
-            ) { }
+            )
+        {
+        }
 
         public X509BasicConstraintsExtension(AsnEncodedData encodedBasicConstraints, bool critical)
-            : base(Oids.BasicConstraints2Oid, encodedBasicConstraints.RawData, critical) { }
+            : base(Oids.BasicConstraints2Oid, encodedBasicConstraints.RawData, critical)
+        {
+        }
 
         public bool CertificateAuthority
         {

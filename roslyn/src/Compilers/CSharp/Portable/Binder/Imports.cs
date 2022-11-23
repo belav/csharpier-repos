@@ -264,7 +264,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static readonly IEqualityComparer<NamespaceOrTypeAndUsingDirective> Instance =
                 new UsingTargetComparer();
 
-            private UsingTargetComparer() { }
+            private UsingTargetComparer()
+            {
+            }
 
             bool IEqualityComparer<NamespaceOrTypeAndUsingDirective>.Equals(
                 NamespaceOrTypeAndUsingDirective x,

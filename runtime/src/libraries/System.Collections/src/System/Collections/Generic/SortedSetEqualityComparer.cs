@@ -14,7 +14,9 @@ namespace System.Collections.Generic
         private readonly IEqualityComparer<T> _memberEqualityComparer;
 
         public SortedSetEqualityComparer(IEqualityComparer<T>? memberEqualityComparer)
-            : this(comparer: null, memberEqualityComparer: memberEqualityComparer) { }
+            : this(comparer: null, memberEqualityComparer: memberEqualityComparer)
+        {
+        }
 
         /// <summary>
         /// Create a new SetEqualityComparer, given a comparer for member order and another for member equality (these

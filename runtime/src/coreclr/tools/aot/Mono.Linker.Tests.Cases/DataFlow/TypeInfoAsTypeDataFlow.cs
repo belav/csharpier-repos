@@ -52,6 +52,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             noValue.AsType().RequiresPublicMethods();
         }
 
-        class TestType { }
+        class TestType
+        {
+        }
     }
 }

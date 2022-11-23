@@ -783,22 +783,32 @@ namespace System.Net.Http
             void IHttpStreamHeadersHandler.OnHeader(
                 ReadOnlySpan<byte> name,
                 ReadOnlySpan<byte> value
-            ) { }
+            )
+            {
+            }
 
-            void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream) { }
+            void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream)
+            {
+            }
 
-            void IHttpStreamHeadersHandler.OnStaticIndexedHeader(int index) { }
+            void IHttpStreamHeadersHandler.OnStaticIndexedHeader(int index)
+            {
+            }
 
             void IHttpStreamHeadersHandler.OnStaticIndexedHeader(
                 int index,
                 ReadOnlySpan<byte> value
-            ) { }
+            )
+            {
+            }
 
             void IHttpStreamHeadersHandler.OnDynamicIndexedHeader(
                 int? index,
                 ReadOnlySpan<byte> name,
                 ReadOnlySpan<byte> value
-            ) { }
+            )
+            {
+            }
         }
 
         private static ReadOnlySpan<byte> GetFrameData(

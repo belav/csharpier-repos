@@ -5,20 +5,30 @@ namespace Missing
 #if FOUND
     public class Foo1
     {
-        public class InnerFoo { }
+        public class InnerFoo
+        {
+        }
     }
 #endif
 
     public class Foo2
     {
-        public Foo2() { }
+        public Foo2()
+        {
+        }
 
 #if FOUND
-        public Foo2(int i) { }
+        public Foo2(int i)
+        {
+        }
 
-        public void missing() { }
+        public void missing()
+        {
+        }
 
-        public static void static_missing() { }
+        public static void static_missing()
+        {
+        }
 #endif
     }
 
@@ -39,11 +49,15 @@ namespace Missing
     public class Foo5
     {
 #if FOUND
-        public virtual void missing_virtual() { }
+        public virtual void missing_virtual()
+        {
+        }
 #endif
     }
 
 #if FOUND
-    public struct Foo6 { }
+    public struct Foo6
+    {
+    }
 #endif
 }

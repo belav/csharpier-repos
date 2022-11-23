@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
         : AbstractUnncessarySuppressionDiagnosticTest
     {
         protected RemoveUnnecessaryInlineSuppressionsTests(ITestOutputHelper logger) : base(logger)
-        { }
+        {
+        }
 
         #region Helpers
 
@@ -151,7 +152,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
 
             public override void Initialize(AnalysisContext context) =>
                 context.RegisterCompilationStartAction(
-                    context => context.RegisterCompilationEndAction(_ => { })
+                    context =>
+                        context.RegisterCompilationEndAction(_ =>
+                        {
+                        })
                 );
         }
 
@@ -161,7 +165,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
 
         public abstract class CompilerOrAnalyzerTests : RemoveUnnecessaryInlineSuppressionsTests
         {
-            protected CompilerOrAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+            protected CompilerOrAnalyzerTests(ITestOutputHelper logger) : base(logger)
+            {
+            }
 
             protected abstract bool IsCompilerDiagnosticsTest { get; }
             protected abstract string VariableDeclaredButNotUsedDiagnosticId { get; }
@@ -170,7 +176,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
 
             public sealed class CompilerTests : CompilerOrAnalyzerTests
             {
-                public CompilerTests(ITestOutputHelper logger) : base(logger) { }
+                public CompilerTests(ITestOutputHelper logger) : base(logger)
+                {
+                }
 
                 internal override ImmutableArray<DiagnosticAnalyzer> OtherAnalyzers =>
                     ImmutableArray.Create<DiagnosticAnalyzer>(
@@ -210,7 +218,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
 
             public sealed class AnalyzerTests : CompilerOrAnalyzerTests
             {
-                public AnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+                public AnalyzerTests(ITestOutputHelper logger) : base(logger)
+                {
+                }
 
                 internal override ImmutableArray<DiagnosticAnalyzer> OtherAnalyzers =>
                     ImmutableArray.Create<DiagnosticAnalyzer>(
@@ -1107,7 +1117,9 @@ class Class
 
         public sealed class CompilerAndAnalyzerTests : RemoveUnnecessaryInlineSuppressionsTests
         {
-            public CompilerAndAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+            public CompilerAndAnalyzerTests(ITestOutputHelper logger) : base(logger)
+            {
+            }
 
             internal override ImmutableArray<DiagnosticAnalyzer> OtherAnalyzers =>
                 ImmutableArray.Create<DiagnosticAnalyzer>(
@@ -1417,7 +1429,9 @@ class Class
         public sealed class NonLocalDiagnosticsAnalyzerTests
             : RemoveUnnecessaryInlineSuppressionsTests
         {
-            public NonLocalDiagnosticsAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+            public NonLocalDiagnosticsAnalyzerTests(ITestOutputHelper logger) : base(logger)
+            {
+            }
 
             private sealed class NonLocalDiagnosticsAnalyzer : DiagnosticAnalyzer
             {
@@ -1476,7 +1490,9 @@ namespace N
 
         public sealed class UseAutoPropertyAnalyzerTests : RemoveUnnecessaryInlineSuppressionsTests
         {
-            public UseAutoPropertyAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+            public UseAutoPropertyAnalyzerTests(ITestOutputHelper logger) : base(logger)
+            {
+            }
 
             internal override ImmutableArray<DiagnosticAnalyzer> OtherAnalyzers =>
                 ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpUseAutoPropertyAnalyzer());

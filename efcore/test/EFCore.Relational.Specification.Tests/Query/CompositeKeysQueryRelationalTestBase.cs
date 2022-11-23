@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class CompositeKeysQueryRelationalTestBase<TFixture>
     : CompositeKeysQueryTestBase<TFixture> where TFixture : CompositeKeysQueryFixtureBase, new()
 {
-    public CompositeKeysQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    public CompositeKeysQueryRelationalTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     protected virtual bool CanExecuteQueryString => false;
 

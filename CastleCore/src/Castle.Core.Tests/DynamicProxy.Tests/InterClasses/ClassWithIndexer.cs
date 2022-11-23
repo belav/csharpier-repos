@@ -19,7 +19,9 @@ namespace Castle.DynamicProxy.Tests.InterClasses
         public object this[int index]
         {
             get { return index; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

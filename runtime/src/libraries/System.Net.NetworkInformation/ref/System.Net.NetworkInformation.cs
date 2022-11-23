@@ -17,7 +17,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class GatewayIPAddressInformation
     {
-        protected GatewayIPAddressInformation() { }
+        protected GatewayIPAddressInformation()
+        {
+        }
 
         public abstract System.Net.IPAddress Address { get; }
     }
@@ -27,7 +29,9 @@ namespace System.Net.NetworkInformation
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.GatewayIPAddressInformation>,
             System.Collections.IEnumerable
     {
-        protected internal GatewayIPAddressInformationCollection() { }
+        protected internal GatewayIPAddressInformationCollection()
+        {
+        }
 
         public virtual int Count
         {
@@ -42,11 +46,13 @@ namespace System.Net.NetworkInformation
             get { throw null; }
         }
 
-        public virtual void Add(
-            System.Net.NetworkInformation.GatewayIPAddressInformation address
-        ) { }
+        public virtual void Add(System.Net.NetworkInformation.GatewayIPAddressInformation address)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual bool Contains(
             System.Net.NetworkInformation.GatewayIPAddressInformation address
@@ -58,7 +64,9 @@ namespace System.Net.NetworkInformation
         public virtual void CopyTo(
             System.Net.NetworkInformation.GatewayIPAddressInformation[] array,
             int offset
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerator<System.Net.NetworkInformation.GatewayIPAddressInformation> GetEnumerator()
         {
@@ -80,7 +88,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IcmpV4Statistics
     {
-        protected IcmpV4Statistics() { }
+        protected IcmpV4Statistics()
+        {
+        }
 
         public abstract long AddressMaskRepliesReceived { get; }
         public abstract long AddressMaskRepliesSent { get; }
@@ -132,7 +142,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IcmpV6Statistics
     {
-        protected IcmpV6Statistics() { }
+        protected IcmpV6Statistics()
+        {
+        }
 
         public abstract long DestinationUnreachableMessagesReceived { get; }
         public abstract long DestinationUnreachableMessagesSent { get; }
@@ -190,7 +202,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPAddressInformation
     {
-        protected IPAddressInformation() { }
+        protected IPAddressInformation()
+        {
+        }
 
         public abstract System.Net.IPAddress Address { get; }
 
@@ -206,7 +220,9 @@ namespace System.Net.NetworkInformation
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.IPAddressInformation>,
             System.Collections.IEnumerable
     {
-        internal IPAddressInformationCollection() { }
+        internal IPAddressInformationCollection()
+        {
+        }
 
         public virtual int Count
         {
@@ -221,9 +237,13 @@ namespace System.Net.NetworkInformation
             get { throw null; }
         }
 
-        public virtual void Add(System.Net.NetworkInformation.IPAddressInformation address) { }
+        public virtual void Add(System.Net.NetworkInformation.IPAddressInformation address)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual bool Contains(System.Net.NetworkInformation.IPAddressInformation address)
         {
@@ -233,7 +253,9 @@ namespace System.Net.NetworkInformation
         public virtual void CopyTo(
             System.Net.NetworkInformation.IPAddressInformation[] array,
             int offset
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerator<System.Net.NetworkInformation.IPAddressInformation> GetEnumerator()
         {
@@ -253,7 +275,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPGlobalProperties
     {
-        protected IPGlobalProperties() { }
+        protected IPGlobalProperties()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         public abstract string DhcpScopeName { get; }
@@ -334,7 +358,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPGlobalStatistics
     {
-        protected IPGlobalStatistics() { }
+        protected IPGlobalStatistics()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         public abstract int DefaultTtl { get; }
@@ -401,7 +427,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPInterfaceProperties
     {
-        protected IPInterfaceProperties() { }
+        protected IPInterfaceProperties()
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public abstract System.Net.NetworkInformation.IPAddressInformationCollection AnycastAddresses { get; }
@@ -446,7 +474,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPInterfaceStatistics
     {
-        protected IPInterfaceStatistics() { }
+        protected IPInterfaceStatistics()
+        {
+        }
 
         public abstract long BytesReceived { get; }
         public abstract long BytesSent { get; }
@@ -473,7 +503,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPv4InterfaceProperties
     {
-        protected IPv4InterfaceProperties() { }
+        protected IPv4InterfaceProperties()
+        {
+        }
 
         public abstract int Index { get; }
 
@@ -498,7 +530,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPv4InterfaceStatistics
     {
-        protected IPv4InterfaceStatistics() { }
+        protected IPv4InterfaceStatistics()
+        {
+        }
 
         public abstract long BytesReceived { get; }
         public abstract long BytesSent { get; }
@@ -521,7 +555,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class IPv6InterfaceProperties
     {
-        protected IPv6InterfaceProperties() { }
+        protected IPv6InterfaceProperties()
+        {
+        }
 
         public abstract int Index { get; }
         public abstract int Mtu { get; }
@@ -539,7 +575,9 @@ namespace System.Net.NetworkInformation
     public abstract partial class MulticastIPAddressInformation
         : System.Net.NetworkInformation.IPAddressInformation
     {
-        protected MulticastIPAddressInformation() { }
+        protected MulticastIPAddressInformation()
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public abstract long AddressPreferredLifetime { get; }
@@ -565,7 +603,9 @@ namespace System.Net.NetworkInformation
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.MulticastIPAddressInformation>,
             System.Collections.IEnumerable
     {
-        protected internal MulticastIPAddressInformationCollection() { }
+        protected internal MulticastIPAddressInformationCollection()
+        {
+        }
 
         public virtual int Count
         {
@@ -580,11 +620,13 @@ namespace System.Net.NetworkInformation
             get { throw null; }
         }
 
-        public virtual void Add(
-            System.Net.NetworkInformation.MulticastIPAddressInformation address
-        ) { }
+        public virtual void Add(System.Net.NetworkInformation.MulticastIPAddressInformation address)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual bool Contains(
             System.Net.NetworkInformation.MulticastIPAddressInformation address
@@ -596,7 +638,9 @@ namespace System.Net.NetworkInformation
         public virtual void CopyTo(
             System.Net.NetworkInformation.MulticastIPAddressInformation[] array,
             int offset
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerator<System.Net.NetworkInformation.MulticastIPAddressInformation> GetEnumerator()
         {
@@ -633,7 +677,9 @@ namespace System.Net.NetworkInformation
 
     public partial class NetworkAvailabilityEventArgs : System.EventArgs
     {
-        internal NetworkAvailabilityEventArgs() { }
+        internal NetworkAvailabilityEventArgs()
+        {
+        }
 
         public bool IsAvailable
         {
@@ -650,22 +696,32 @@ namespace System.Net.NetworkInformation
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
             true
         )]
-        public NetworkChange() { }
+        public NetworkChange()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("illumos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("solaris")]
         public static event System.Net.NetworkInformation.NetworkAddressChangedEventHandler? NetworkAddressChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("illumos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("solaris")]
         public static event System.Net.NetworkInformation.NetworkAvailabilityChangedEventHandler? NetworkAvailabilityChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -675,19 +731,27 @@ namespace System.Net.NetworkInformation
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
             true
         )]
-        public static void RegisterNetworkChange(System.Net.NetworkInformation.NetworkChange nc) { }
+        public static void RegisterNetworkChange(System.Net.NetworkInformation.NetworkChange nc)
+        {
+        }
     }
 
     public partial class NetworkInformationException : System.ComponentModel.Win32Exception
     {
-        public NetworkInformationException() { }
+        public NetworkInformationException()
+        {
+        }
 
-        public NetworkInformationException(int errorCode) { }
+        public NetworkInformationException(int errorCode)
+        {
+        }
 
         protected NetworkInformationException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override int ErrorCode
         {
@@ -697,7 +761,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class NetworkInterface
     {
-        protected NetworkInterface() { }
+        protected NetworkInterface()
+        {
+        }
 
         public virtual string Description
         {
@@ -843,7 +909,9 @@ namespace System.Net.NetworkInformation
     {
         public static readonly System.Net.NetworkInformation.PhysicalAddress None;
 
-        public PhysicalAddress(byte[] address) { }
+        public PhysicalAddress(byte[] address)
+        {
+        }
 
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
@@ -931,7 +999,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class TcpConnectionInformation
     {
-        protected TcpConnectionInformation() { }
+        protected TcpConnectionInformation()
+        {
+        }
 
         public abstract System.Net.IPEndPoint LocalEndPoint { get; }
         public abstract System.Net.IPEndPoint RemoteEndPoint { get; }
@@ -957,7 +1027,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class TcpStatistics
     {
-        protected TcpStatistics() { }
+        protected TcpStatistics()
+        {
+        }
 
         public abstract long ConnectionsAccepted { get; }
         public abstract long ConnectionsInitiated { get; }
@@ -977,7 +1049,9 @@ namespace System.Net.NetworkInformation
 
     public abstract partial class UdpStatistics
     {
-        protected UdpStatistics() { }
+        protected UdpStatistics()
+        {
+        }
 
         public abstract long DatagramsReceived { get; }
         public abstract long DatagramsSent { get; }
@@ -989,7 +1063,9 @@ namespace System.Net.NetworkInformation
     public abstract partial class UnicastIPAddressInformation
         : System.Net.NetworkInformation.IPAddressInformation
     {
-        protected UnicastIPAddressInformation() { }
+        protected UnicastIPAddressInformation()
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public abstract long AddressPreferredLifetime { get; }
@@ -1020,7 +1096,9 @@ namespace System.Net.NetworkInformation
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.UnicastIPAddressInformation>,
             System.Collections.IEnumerable
     {
-        protected internal UnicastIPAddressInformationCollection() { }
+        protected internal UnicastIPAddressInformationCollection()
+        {
+        }
 
         public virtual int Count
         {
@@ -1035,11 +1113,13 @@ namespace System.Net.NetworkInformation
             get { throw null; }
         }
 
-        public virtual void Add(
-            System.Net.NetworkInformation.UnicastIPAddressInformation address
-        ) { }
+        public virtual void Add(System.Net.NetworkInformation.UnicastIPAddressInformation address)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual bool Contains(
             System.Net.NetworkInformation.UnicastIPAddressInformation address
@@ -1051,7 +1131,9 @@ namespace System.Net.NetworkInformation
         public virtual void CopyTo(
             System.Net.NetworkInformation.UnicastIPAddressInformation[] array,
             int offset
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerator<System.Net.NetworkInformation.UnicastIPAddressInformation> GetEnumerator()
         {

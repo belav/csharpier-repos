@@ -4,7 +4,9 @@ using System;
 using System.Globalization;
 using System.IO;
 
-class MyException : Exception { }
+class MyException : Exception
+{
+}
 
 public class Help
 {

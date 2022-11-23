@@ -88,10 +88,14 @@ namespace System.Composition.TypedParts.Tests
             return new ContainerConfiguration().WithParts(types).CreateContainer();
         }
 
-        public interface IA { }
+        public interface IA
+        {
+        }
 
         [Export(typeof(IA))]
-        public class A : IA { }
+        public class A : IA
+        {
+        }
 
         public interface IB
         {

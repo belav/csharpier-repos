@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseDeconstructionCodeFixProvider() { }
+        public CSharpUseDeconstructionCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseDeconstructionDiagnosticId);

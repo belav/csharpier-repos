@@ -54,7 +54,9 @@ namespace System
     public class GenericUriParser : UriParser
     {
         public GenericUriParser(GenericUriParserOptions options)
-            : base(MapGenericParserOptions(options)) { }
+            : base(MapGenericParserOptions(options))
+        {
+        }
 
         private static UriSyntaxFlags MapGenericParserOptions(GenericUriParserOptions options)
         {

@@ -95,7 +95,8 @@ public class LazyLoadingProxyTests
     {
         public LazyContext()
             : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false)
-        { }
+        {
+        }
     }
 
     public sealed class LazySealedEntity
@@ -143,7 +144,9 @@ public class LazyLoadingProxyTests
 
     private class JammieDodgerContext : DbContext
     {
-        public JammieDodgerContext(DbContextOptions options) : base(options) { }
+        public JammieDodgerContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Phone>();

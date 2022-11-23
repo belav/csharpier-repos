@@ -19,7 +19,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
         private string number;
         private string extension;
 
-        public Phone() { }
+        public Phone()
+        {
+        }
 
         public Phone(string number, string extension)
         {

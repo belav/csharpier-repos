@@ -38,7 +38,9 @@ namespace AutoMapper.Configuration
             MemberList memberList,
             Type sourceType,
             Type destinationType
-        ) : this(memberList, new TypePair(sourceType, destinationType)) { }
+        ) : this(memberList, new TypePair(sourceType, destinationType))
+        {
+        }
 
         protected MappingExpressionBase(MemberList memberList, TypePair types)
         {
@@ -343,16 +345,22 @@ namespace AutoMapper.Configuration
             IMappingExpressionBase<TSource, TDestination, TMappingExpression>
     {
         protected MappingExpressionBase(MemberList memberList)
-            : base(memberList, typeof(TSource), typeof(TDestination)) { }
+            : base(memberList, typeof(TSource), typeof(TDestination))
+        {
+        }
 
         protected MappingExpressionBase(
             MemberList memberList,
             Type sourceType,
             Type destinationType
-        ) : base(memberList, sourceType, destinationType) { }
+        ) : base(memberList, sourceType, destinationType)
+        {
+        }
 
         protected MappingExpressionBase(MemberList memberList, TypePair types)
-            : base(memberList, types) { }
+            : base(memberList, types)
+        {
+        }
 
         public TMappingExpression MaxDepth(int depth)
         {

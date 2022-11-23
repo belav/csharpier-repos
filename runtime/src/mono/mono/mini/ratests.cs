@@ -11,7 +11,9 @@ public class Tests
         return TestDriver.RunTests(typeof(Tests));
     }
 
-    static void call_clobber_inner() { }
+    static void call_clobber_inner()
+    {
+    }
 
     public static int test_15_clobber_1()
     {
@@ -75,7 +77,9 @@ public class Tests
         int a = 4;
         int b = 5;
 
-        if (a != b) { }
+        if (a != b)
+        {
+        }
         else
         {
             call_clobber_inner();
@@ -91,7 +95,9 @@ public class Tests
         int b = 5;
         int c = 3;
 
-        if (a != b) { }
+        if (a != b)
+        {
+        }
         else
         {
             call_clobber_inner();
@@ -261,7 +267,9 @@ public class Tests
             // i is spilled by the call, then reloaded for the loop check
             // make sure the move from its first reg to its second is inserted in the
             // if body bblock, not the for body bblock
-            if (i == 0) { }
+            if (i == 0)
+            {
+            }
             else
             {
                 if (return_arg(j) != 5)
@@ -279,7 +287,9 @@ public class Tests
         {
             // i and temporaries are spilled by the call, then reloaded after the call
             // make sure the two moves inserted in the if bblock are in the proper order
-            if (i == 0) { }
+            if (i == 0)
+            {
+            }
             else
             {
                 temporaries[i] = return_arg(i);

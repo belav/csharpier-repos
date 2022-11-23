@@ -137,7 +137,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private ImmutableDictionary<string, string> _dictionary;
 
-        public StringToStringIImmutableDictionaryWrapper() { }
+        public StringToStringIImmutableDictionaryWrapper()
+        {
+        }
 
         public StringToStringIImmutableDictionaryWrapper(Dictionary<string, string> items)
         {
@@ -227,7 +229,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private ImmutableDictionary<TKey, TValue> _dictionary;
 
-        public GenericIImmutableDictionaryWrapper() { }
+        public GenericIImmutableDictionaryWrapper()
+        {
+        }
 
         public GenericIImmutableDictionaryWrapper(Dictionary<TKey, TValue> items)
         {
@@ -316,7 +320,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private ImmutableList<string> _list = ImmutableList.Create<string>();
 
-        public StringIImmutableListWrapper() { }
+        public StringIImmutableListWrapper()
+        {
+        }
 
         public StringIImmutableListWrapper(List<string> items)
         {
@@ -432,7 +438,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private ImmutableStack<string> _stack = ImmutableStack.Create<string>();
 
-        public StringIImmutableStackWrapper() { }
+        public StringIImmutableStackWrapper()
+        {
+        }
 
         public StringIImmutableStackWrapper(List<string> items)
         {
@@ -476,7 +484,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private ImmutableQueue<string> _queue = ImmutableQueue.Create<string>();
 
-        public StringIImmutableQueueWrapper() { }
+        public StringIImmutableQueueWrapper()
+        {
+        }
 
         public StringIImmutableQueueWrapper(List<string> items)
         {
@@ -520,7 +530,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private ImmutableHashSet<string> _set = ImmutableHashSet.Create<string>();
 
-        public StringIImmutableSetWrapper() { }
+        public StringIImmutableSetWrapper()
+        {
+        }
 
         public StringIImmutableSetWrapper(List<string> items)
         {

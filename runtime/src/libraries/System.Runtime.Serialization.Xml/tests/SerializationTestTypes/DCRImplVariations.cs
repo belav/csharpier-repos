@@ -19,7 +19,9 @@ namespace SerializationTestTypes
             address = new Address("rd", "wa", 90012);
         }
 
-        public Person1() { }
+        public Person1()
+        {
+        }
 
         [DataMember]
         public int age;
@@ -79,7 +81,9 @@ namespace SerializationTestTypes
     [DataContract]
     public class Address
     {
-        public Address() { }
+        public Address()
+        {
+        }
 
         public Address(string c, string s, int z)
         {

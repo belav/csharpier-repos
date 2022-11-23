@@ -21,7 +21,9 @@ public class DbContextOptions<TContext> : DbContextOptions where TContext : DbCo
     ///     <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> or use a <see cref="DbContextOptionsBuilder{TContext}" />
     ///     to create instances of this class and it is not designed to be directly constructed in your application code.
     /// </summary>
-    public DbContextOptions() { }
+    public DbContextOptions()
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptions{TContext}" /> class. You normally override
@@ -30,14 +32,18 @@ public class DbContextOptions<TContext> : DbContextOptions where TContext : DbCo
     /// </summary>
     /// <param name="extensions">The extensions that store the configured options.</param>
     public DbContextOptions(IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
-        : base(extensions) { }
+        : base(extensions)
+    {
+    }
 
     private DbContextOptions(
         ImmutableSortedDictionary<
             Type,
             (IDbContextOptionsExtension Extension, int Ordinal)
         > extensions
-    ) : base(extensions) { }
+    ) : base(extensions)
+    {
+    }
 
     /// <inheritdoc />
     public override DbContextOptions WithExtension<TExtension>(TExtension extension)

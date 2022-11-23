@@ -4,7 +4,9 @@
 
 using System;
 
-interface I<T> { }
+interface I<T>
+{
+}
 
 class C1<T> : I<T>
 {

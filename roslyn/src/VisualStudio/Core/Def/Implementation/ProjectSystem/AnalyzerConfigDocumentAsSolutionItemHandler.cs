@@ -151,7 +151,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 yield return new InfoBarUI(
                     title: ServicesVSResources.No,
                     kind: InfoBarUI.UIKind.Button,
-                    action: () => { },
+                    action: () => {
+                    },
                     closeAfterAction: true
                 );
 

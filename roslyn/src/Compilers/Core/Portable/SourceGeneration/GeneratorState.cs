@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis
                 ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>>.Empty,
                 exception: null,
                 elapsedTime: TimeSpan.Zero
-            ) { }
+            )
+        {
+        }
 
         private GeneratorState(
             ImmutableArray<GeneratedSyntaxTree> postInitTrees,

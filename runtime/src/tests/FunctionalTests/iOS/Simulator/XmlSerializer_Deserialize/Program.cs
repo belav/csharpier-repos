@@ -35,7 +35,9 @@ public static class Program
     [XmlType("TestClass", AnonymousType = true, Namespace = "")]
     public class TestClass
     {
-        public TestClass() { }
+        public TestClass()
+        {
+        }
 
         [XmlElement("TestData")]
         public string TestData { get; set; }

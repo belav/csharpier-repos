@@ -37,6 +37,8 @@ namespace System.Diagnostics.CodeAnalysis
         /// <summary>
         /// Initializes a new instance of the <see cref="UnscopedRefAttribute"/> class.
         /// </summary>
-        public UnscopedRefAttribute() { }
+        public UnscopedRefAttribute()
+        {
+        }
     }
 }

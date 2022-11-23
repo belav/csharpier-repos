@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected override void InitializeWorker(AnalysisContext context) =>
             context.RegisterCompilationStartAction(context =>

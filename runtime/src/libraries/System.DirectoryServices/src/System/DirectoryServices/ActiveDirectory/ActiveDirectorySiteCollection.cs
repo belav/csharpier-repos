@@ -12,7 +12,9 @@ namespace System.DirectoryServices.ActiveDirectory
         internal bool initialized;
         internal DirectoryContext? context;
 
-        internal ActiveDirectorySiteCollection() { }
+        internal ActiveDirectorySiteCollection()
+        {
+        }
 
         internal ActiveDirectorySiteCollection(ArrayList sites)
         {

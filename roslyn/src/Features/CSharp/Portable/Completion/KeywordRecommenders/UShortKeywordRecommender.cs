@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class UShortKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public UShortKeywordRecommender() : base(SyntaxKind.UShortKeyword) { }
+        public UShortKeywordRecommender() : base(SyntaxKind.UShortKeyword)
+        {
+        }
 
         /// <summary>
         /// We set the <see cref="MatchPriority"/> of this item less than the default value so that

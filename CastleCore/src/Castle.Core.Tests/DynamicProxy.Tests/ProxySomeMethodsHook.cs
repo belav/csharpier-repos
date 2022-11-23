@@ -34,11 +34,12 @@ namespace Castle.DynamicProxy.Tests
             return shouldInterceptMethod(type, methodInfo);
         }
 
-        void IProxyGenerationHook.MethodsInspected() { }
+        void IProxyGenerationHook.MethodsInspected()
+        {
+        }
 
-        void IProxyGenerationHook.NonProxyableMemberNotification(
-            Type type,
-            MemberInfo memberInfo
-        ) { }
+        void IProxyGenerationHook.NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+        {
+        }
     }
 }

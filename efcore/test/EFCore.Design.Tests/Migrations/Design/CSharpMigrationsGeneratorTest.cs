@@ -513,7 +513,9 @@ public class CSharpMigrationsGeneratorTest
     private class TestCSharpSnapshotGenerator : CSharpSnapshotGenerator
     {
         public TestCSharpSnapshotGenerator(CSharpSnapshotGeneratorDependencies dependencies)
-            : base(dependencies) { }
+            : base(dependencies)
+        {
+        }
 
         public virtual void TestGenerateEntityTypeAnnotations(
             string builderName,
@@ -534,7 +536,9 @@ public class CSharpMigrationsGeneratorTest
         public int Id { get; set; }
     }
 
-    private class Derived : WithAnnotations { }
+    private class Derived : WithAnnotations
+    {
+    }
 
     [ConditionalFact]
     public void Snapshot_with_enum_discriminator_uses_converted_values()
@@ -1136,7 +1140,9 @@ namespace MyNamespace
         return (ModelSnapshot)Activator.CreateInstance(snapshotType);
     }
 
-    public class MyContext { }
+    public class MyContext
+    {
+    }
 
     [ConditionalFact]
     public void Namespaces_imported_for_insert_data()

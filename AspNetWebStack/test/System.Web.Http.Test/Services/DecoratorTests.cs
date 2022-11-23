@@ -115,11 +115,17 @@ namespace System.Web.Http.Services
             Assert.Same(dummyBaseWrapper, innerObject);
         }
 
-        private interface IBaseInterface { }
+        private interface IBaseInterface
+        {
+        }
 
-        private class DummyAggregatedClass : IBaseInterface { }
+        private class DummyAggregatedClass : IBaseInterface
+        {
+        }
 
-        private class DummyWrapper : IBaseInterface { }
+        private class DummyWrapper : IBaseInterface
+        {
+        }
 
         private class DummyObjectWrapper : IBaseInterface, IDecorator<DummyAggregatedClass>
         {

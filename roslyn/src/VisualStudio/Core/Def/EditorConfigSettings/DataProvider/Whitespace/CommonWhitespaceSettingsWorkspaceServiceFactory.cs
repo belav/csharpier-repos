@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Whites
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CommonWhitespaceSettingsWorkspaceServiceFactory() { }
+        public CommonWhitespaceSettingsWorkspaceServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new CommonWhitespaceSettingsProviderFactory(workspaceServices.Workspace);

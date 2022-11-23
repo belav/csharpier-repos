@@ -3,4 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
-public class ProtectedPersonalDataAttribute : PersonalDataAttribute { }
+public class ProtectedPersonalDataAttribute : PersonalDataAttribute
+{
+}

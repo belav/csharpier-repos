@@ -10,7 +10,9 @@ namespace System.Security.Cryptography.Xml
     // object also maintains the inclusive prefix list in a tokenized form.
     internal sealed class C14NAncestralNamespaceContextManager : AncestralNamespaceContextManager
     {
-        internal C14NAncestralNamespaceContextManager() { }
+        internal C14NAncestralNamespaceContextManager()
+        {
+        }
 
         private void GetNamespaceToRender(
             string nsPrefix,

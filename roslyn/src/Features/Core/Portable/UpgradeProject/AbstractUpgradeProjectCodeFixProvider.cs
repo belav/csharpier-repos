@@ -118,7 +118,9 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
                 equivalenceKey: null,
                 priority: CodeActionPriority.Default,
                 createdFromFactoryMethod: true
-            ) { }
+            )
+        {
+        }
 
         public static ProjectOptionsChangeAction Create(
             string title,

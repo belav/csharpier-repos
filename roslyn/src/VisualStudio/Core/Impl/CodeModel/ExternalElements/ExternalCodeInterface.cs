@@ -37,7 +37,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) : base(state, projectId, typeSymbol) { }
+        ) : base(state, projectId, typeSymbol)
+        {
+        }
 
         public override EnvDTE.vsCMElement Kind
         {

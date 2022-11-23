@@ -74,7 +74,9 @@ namespace System.Net.Mime
         }
 
         // no padding in q-encoding
-        public override void AppendPadding() { }
+        public override void AppendPadding()
+        {
+        }
 
         protected override void ApppendEncodedByte(byte b)
         {

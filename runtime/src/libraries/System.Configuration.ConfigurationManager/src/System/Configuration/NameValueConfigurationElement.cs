@@ -22,7 +22,9 @@ namespace System.Configuration
         private static readonly ConfigurationPropertyCollection s_properties =
             new ConfigurationPropertyCollection { s_propName, s_propValue };
 
-        internal NameValueConfigurationElement() { }
+        internal NameValueConfigurationElement()
+        {
+        }
 
         public NameValueConfigurationElement(string name, string value)
         {

@@ -808,7 +808,9 @@ namespace Microsoft.Extensions.Primitives
             /// Instantiates an <see cref="Enumerator"/> using a <see cref="StringValues"/>.
             /// </summary>
             /// <param name="values">The <see cref="StringValues"/> to enumerate.</param>
-            public Enumerator(ref StringValues values) : this(values._values) { }
+            public Enumerator(ref StringValues values) : this(values._values)
+            {
+            }
 
             public bool MoveNext()
             {
@@ -845,7 +847,9 @@ namespace Microsoft.Extensions.Primitives
                 throw new NotSupportedException();
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

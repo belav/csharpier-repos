@@ -2,7 +2,9 @@ using System;
 
 public class MyEx : Exception
 {
-    public MyEx() { }
+    public MyEx()
+    {
+    }
 }
 
 public class Ex

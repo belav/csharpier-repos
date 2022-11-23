@@ -373,7 +373,9 @@ namespace System.Net.Http.Headers
             : base(
                 HttpHeaderType.General | HttpHeaderType.Request | HttpHeaderType.Custom,
                 HttpHeaderType.Response
-            ) { }
+            )
+        {
+        }
 
         internal override void AddHeaders(HttpHeaders sourceHeaders)
         {

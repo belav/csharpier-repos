@@ -531,7 +531,9 @@ namespace System.IO.Tests
                 // handling) is unaffected by this race condition.
                 Directory.Delete("C:");
             }
-            catch (DirectoryNotFoundException) { }
+            catch (DirectoryNotFoundException)
+            {
+            }
         }
 
         [Fact]

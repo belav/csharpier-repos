@@ -36,7 +36,9 @@ namespace SerializationTestTypes
     }
 
     [DataContract(Name = "EmptyDCType", Namespace = "http://www.Default.com")]
-    public class EmptyDCType { }
+    public class EmptyDCType
+    {
+    }
 
     [KnownType(typeof(EmptyDCType))]
     public class POCOObjectContainer
@@ -104,7 +106,9 @@ namespace SerializationTestTypes
 
         public object data1;
 
-        public Individual() { }
+        public Individual()
+        {
+        }
     }
 
     [DataContract]
@@ -211,7 +215,9 @@ namespace SerializationTestTypes
         }
     }
 
-    public class TypeNotFound { };
+    public class TypeNotFound
+    {
+    };
 
     public class TypeLibraryManager
     {
@@ -1048,7 +1054,9 @@ namespace SerializationTestTypes
                                 new object[] { }
                             );
                         }
-                        catch (Exception) { }
+                        catch (Exception)
+                        {
+                        }
                         IDictionaryEnumerator dictEnum = dictEnumObj as IDictionaryEnumerator;
                         if (dictEnum != null)
                         {

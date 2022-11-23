@@ -7,7 +7,9 @@
             public int OtherValue { get; set; }
         }
 
-        public class Source : SourceBase { }
+        public class Source : SourceBase
+        {
+        }
 
         public class Dest
         {

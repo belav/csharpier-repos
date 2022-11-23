@@ -17,7 +17,9 @@ namespace System.Configuration
                 | ClassSupportsDelayedInit
         );
 
-        private RuntimeConfigurationRecord() { }
+        private RuntimeConfigurationRecord()
+        {
+        }
 
         protected override SimpleBitVector32 ClassFlags => s_runtimeClassFlags;
 

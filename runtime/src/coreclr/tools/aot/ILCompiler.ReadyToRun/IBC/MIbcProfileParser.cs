@@ -686,7 +686,8 @@ namespace ILCompiler.IBC
             private sealed class CanonModule : ModuleDesc, IAssemblyDesc
             {
                 public CanonModule(TypeSystemContext wrappedContext) : base(wrappedContext, null)
-                { }
+                {
+                }
 
                 public override IEnumerable<MetadataType> GetAllTypes()
                 {

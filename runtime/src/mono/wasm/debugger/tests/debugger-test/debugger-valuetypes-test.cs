@@ -90,7 +90,9 @@ namespace DebuggerTests
             public uint V
             {
                 get { return 0xDEADBEEF + (uint)dt.Month; }
-                set { }
+                set
+                {
+                }
             }
             public string str_member;
             public DateTime dt;

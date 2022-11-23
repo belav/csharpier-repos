@@ -14,7 +14,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.ComponentConverter'/> class.
         /// </summary>
-        public ComponentConverter(Type type) : base(type) { }
+        public ComponentConverter(Type type) : base(type)
+        {
+        }
 
         /// <summary>
         /// Gets a collection of properties for the type of component

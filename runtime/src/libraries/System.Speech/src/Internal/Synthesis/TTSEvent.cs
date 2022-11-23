@@ -36,7 +36,9 @@ namespace System.Speech.Internal.Synthesis
             _lParam = lParam;
         }
 
-        private TTSEvent() { }
+        private TTSEvent()
+        {
+        }
 
         internal static TTSEvent CreatePhonemeEvent(
             string phoneme,

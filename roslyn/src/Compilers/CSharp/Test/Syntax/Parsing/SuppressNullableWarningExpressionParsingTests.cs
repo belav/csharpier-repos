@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
     public class SuppressNullableWarningExpressionParsingTests : ParsingTests
     {
         public SuppressNullableWarningExpressionParsingTests(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
 
         protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options)
         {

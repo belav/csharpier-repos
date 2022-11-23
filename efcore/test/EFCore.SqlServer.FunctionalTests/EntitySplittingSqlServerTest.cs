@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class EntitySplittingSqlServerTest : EntitySplittingTestBase
 {
     public EntitySplittingSqlServerTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    { }
+    {
+    }
 
     [ConditionalFact]
     public virtual async Task Can_roundtrip_with_triggers()

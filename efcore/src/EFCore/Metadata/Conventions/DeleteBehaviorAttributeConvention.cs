@@ -20,7 +20,9 @@ public class DeleteBehaviorAttributeConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public DeleteBehaviorAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Called after a navigation is added to the entity type.

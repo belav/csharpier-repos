@@ -147,19 +147,33 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             }
         }
 
-        interface ICustomService { }
+        interface ICustomService
+        {
+        }
 
-        class CustomService1 : ICustomService { }
+        class CustomService1 : ICustomService
+        {
+        }
 
-        class CustomService2 : ICustomService { }
+        class CustomService2 : ICustomService
+        {
+        }
 
-        class CustomService3 : ICustomService { }
+        class CustomService3 : ICustomService
+        {
+        }
 
-        class CustomService4 : ICustomService { }
+        class CustomService4 : ICustomService
+        {
+        }
 
-        class CustomService5 : ICustomService { }
+        class CustomService5 : ICustomService
+        {
+        }
 
-        class CustomService6 : ICustomService { }
+        class CustomService6 : ICustomService
+        {
+        }
 
         [Theory]
         // GenericTypeDefinition, Abstract GenericTypeDefinition
@@ -486,7 +500,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 (sp as IDisposable).Dispose();
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         [Theory]
@@ -832,30 +848,42 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
         private class Thing5
         {
-            public Thing5(Thing4 thing) { }
+            public Thing5(Thing4 thing)
+            {
+            }
         }
 
         private class Thing4
         {
-            public Thing4(Thing3 thing) { }
+            public Thing4(Thing3 thing)
+            {
+            }
         }
 
         private class Thing3
         {
-            public Thing3(Thing2 thing) { }
+            public Thing3(Thing2 thing)
+            {
+            }
         }
 
         private class Thing2
         {
-            public Thing2(Thing1 thing1) { }
+            public Thing2(Thing1 thing1)
+            {
+            }
         }
 
         private class Thing1
         {
-            public Thing1(Thing0 thing0) { }
+            public Thing1(Thing0 thing0)
+            {
+            }
         }
 
-        private class Thing0 { }
+        private class Thing0
+        {
+        }
 
         [Theory]
         [InlineData(ServiceLifetime.Transient)]
@@ -1254,7 +1282,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         {
             public FakeMultipleServiceWithIEnumerableDependency(
                 IEnumerable<IFakeService> fakeServices
-            ) { }
+            )
+            {
+            }
         }
 
         private abstract class AbstractFakeOpenGenericService<T> : IFakeOpenGenericService<T>
@@ -1432,25 +1462,45 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             return succeeded;
         }
 
-        private class A { }
+        private class A
+        {
+        }
 
-        private class B { }
+        private class B
+        {
+        }
 
-        private class C { }
+        private class C
+        {
+        }
 
-        private class D { }
+        private class D
+        {
+        }
 
-        private class E { }
+        private class E
+        {
+        }
 
-        private class F { }
+        private class F
+        {
+        }
 
-        private class G { }
+        private class G
+        {
+        }
 
-        private class H { }
+        private class H
+        {
+        }
 
-        private class I { }
+        private class I
+        {
+        }
 
-        private class J { }
+        private class J
+        {
+        }
 
         private class Aa
         {

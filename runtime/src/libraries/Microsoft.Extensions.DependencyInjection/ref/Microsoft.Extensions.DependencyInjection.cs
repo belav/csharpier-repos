@@ -12,11 +12,15 @@ namespace Microsoft.Extensions.DependencyInjection
     public partial class DefaultServiceProviderFactory
         : Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<Microsoft.Extensions.DependencyInjection.IServiceCollection>
     {
-        public DefaultServiceProviderFactory() { }
+        public DefaultServiceProviderFactory()
+        {
+        }
 
         public DefaultServiceProviderFactory(
             Microsoft.Extensions.DependencyInjection.ServiceProviderOptions options
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.DependencyInjection.IServiceCollection CreateBuilder(
             Microsoft.Extensions.DependencyInjection.IServiceCollection services
@@ -73,9 +77,13 @@ namespace Microsoft.Extensions.DependencyInjection
             System.IDisposable,
             System.IServiceProvider
     {
-        internal ServiceProvider() { }
+        internal ServiceProvider()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -90,17 +98,23 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public partial class ServiceProviderOptions
     {
-        public ServiceProviderOptions() { }
+        public ServiceProviderOptions()
+        {
+        }
 
         public bool ValidateOnBuild
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ValidateScopes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

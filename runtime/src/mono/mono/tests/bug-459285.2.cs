@@ -15,7 +15,9 @@ public class Foo<T>
     }
 }
 
-public class Bar : Foo<string> { }
+public class Bar : Foo<string>
+{
+}
 
 public class MainClass
 {

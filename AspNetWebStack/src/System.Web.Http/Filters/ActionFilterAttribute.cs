@@ -18,9 +18,13 @@ namespace System.Web.Http.Filters
     )]
     public abstract class ActionFilterAttribute : FilterAttribute, IActionFilter
     {
-        public virtual void OnActionExecuting(HttpActionContext actionContext) { }
+        public virtual void OnActionExecuting(HttpActionContext actionContext)
+        {
+        }
 
-        public virtual void OnActionExecuted(HttpActionExecutedContext actionExecutedContext) { }
+        public virtual void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Design",

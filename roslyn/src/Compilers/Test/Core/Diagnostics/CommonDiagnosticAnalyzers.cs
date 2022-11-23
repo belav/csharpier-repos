@@ -960,7 +960,9 @@ namespace Microsoft.CodeAnalysis
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(DummyRule);
 
-            public override void Initialize(AnalysisContext context) { }
+            public override void Initialize(AnalysisContext context)
+            {
+            }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
@@ -980,7 +982,12 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSymbolAction(_ => { }, SymbolKind.NamedType);
+                context.RegisterSymbolAction(
+                    _ =>
+                    {
+                    },
+                    SymbolKind.NamedType
+                );
             }
         }
 
@@ -1029,7 +1036,9 @@ namespace Microsoft.CodeAnalysis
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
-            public override void Initialize(AnalysisContext context) { }
+            public override void Initialize(AnalysisContext context)
+            {
+            }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
@@ -1066,7 +1075,9 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(_ => { });
+                context.RegisterCompilationAction(_ =>
+                {
+                });
             }
         }
 
@@ -1267,7 +1278,9 @@ namespace Microsoft.CodeAnalysis
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 throw new NotImplementedException();
 
-            public override void Initialize(AnalysisContext context) { }
+            public override void Initialize(AnalysisContext context)
+            {
+            }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
@@ -2952,7 +2965,9 @@ namespace Microsoft.CodeAnalysis
             public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
                 throw _exception;
 
-            public override void ReportSuppressions(SuppressionAnalysisContext context) { }
+            public override void ReportSuppressions(SuppressionAnalysisContext context)
+            {
+            }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
@@ -3316,7 +3331,12 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext analysisContext)
             {
-                analysisContext.RegisterOperationAction(_ => { }, OperationKind.Invocation);
+                analysisContext.RegisterOperationAction(
+                    _ =>
+                    {
+                    },
+                    OperationKind.Invocation
+                );
                 analysisContext.RegisterOperationBlockStartAction(OnOperationBlockStart);
             }
 

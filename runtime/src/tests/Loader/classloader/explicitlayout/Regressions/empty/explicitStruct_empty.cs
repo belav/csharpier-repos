@@ -7,16 +7,24 @@ using System.Runtime.InteropServices;
 using Xunit;
 
 [StructLayout(LayoutKind.Explicit)]
-public struct S { }
+public struct S
+{
+}
 
 [StructLayout(LayoutKind.Explicit)]
-public struct S2 { }
+public struct S2
+{
+}
 
 [StructLayout(LayoutKind.Explicit)]
-public class C { }
+public class C
+{
+}
 
 [StructLayout(LayoutKind.Explicit)]
-public class C2 { }
+public class C2
+{
+}
 
 public class Test_explicitStruct_empty
 {

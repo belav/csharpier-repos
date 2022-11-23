@@ -370,7 +370,9 @@ namespace System.Reflection
         private IList<CustomAttributeNamedArgument> m_namedArgs = null!;
 
         #region Constructor
-        protected CustomAttributeData() { }
+        protected CustomAttributeData()
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

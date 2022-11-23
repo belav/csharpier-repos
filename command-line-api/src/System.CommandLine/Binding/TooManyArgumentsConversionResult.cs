@@ -6,6 +6,8 @@ namespace System.CommandLine.Binding
     internal class TooManyArgumentsConversionResult : FailedArgumentConversionArityResult
     {
         internal TooManyArgumentsConversionResult(IArgument argument, string errorMessage)
-            : base(argument, errorMessage) { }
+            : base(argument, errorMessage)
+        {
+        }
     }
 }

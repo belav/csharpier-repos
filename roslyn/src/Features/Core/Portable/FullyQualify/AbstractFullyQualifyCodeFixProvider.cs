@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         private const int TypeWeight = 1;
         private const int NamespaceWithErrorsWeight = 2;
 
-        protected AbstractFullyQualifyCodeFixProvider() { }
+        protected AbstractFullyQualifyCodeFixProvider()
+        {
+        }
 
         public override FixAllProvider? GetFixAllProvider()
         {
@@ -474,7 +476,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         private class GroupingCodeAction : CodeAction.CodeActionWithNestedActions
         {
             public GroupingCodeAction(string title, ImmutableArray<CodeAction> nestedActions)
-                : base(title, nestedActions, isInlinable: true) { }
+                : base(title, nestedActions, isInlinable: true)
+            {
+            }
         }
     }
 }

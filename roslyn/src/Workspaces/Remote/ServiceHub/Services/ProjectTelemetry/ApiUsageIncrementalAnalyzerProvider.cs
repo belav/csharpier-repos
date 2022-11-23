@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ApiUsageIncrementalAnalyzerProvider() { }
+        public ApiUsageIncrementalAnalyzerProvider()
+        {
+        }
 
         public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
         {
@@ -303,7 +305,9 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
 
             public int Priority => 1;
 
-            public void LogAnalyzerCountSummary() { }
+            public void LogAnalyzerCountSummary()
+            {
+            }
         }
     }
 }

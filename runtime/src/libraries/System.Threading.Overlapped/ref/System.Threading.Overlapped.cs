@@ -24,20 +24,27 @@ namespace System.Threading
 
     public partial class Overlapped
     {
-        public Overlapped() { }
+        public Overlapped()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "This constructor is not 64-bit compatible and has been deprecated. Use the constructor that accepts an IntPtr for the event handle instead."
         )]
-        public Overlapped(int offsetLo, int offsetHi, int hEvent, System.IAsyncResult? ar) { }
+        public Overlapped(int offsetLo, int offsetHi, int hEvent, System.IAsyncResult? ar)
+        {
+        }
 
         public Overlapped(int offsetLo, int offsetHi, System.IntPtr hEvent, System.IAsyncResult? ar)
-        { }
+        {
+        }
 
         public System.IAsyncResult? AsyncResult
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -46,26 +53,36 @@ namespace System.Threading
         public int EventHandle
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IntPtr EventHandleIntPtr
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int OffsetHigh
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int OffsetLow
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe static void Free(System.Threading.NativeOverlapped* nativeOverlappedPtr) { }
+        public unsafe static void Free(System.Threading.NativeOverlapped* nativeOverlappedPtr)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
@@ -123,11 +140,17 @@ namespace System.Threading
             System.Threading.IOCompletionCallback callback,
             object? state,
             object? pinData
-        ) { }
+        )
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        ~PreAllocatedOverlapped() { }
+        ~PreAllocatedOverlapped()
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public static System.Threading.PreAllocatedOverlapped UnsafeCreate(
@@ -142,7 +165,9 @@ namespace System.Threading
 
     public sealed partial class ThreadPoolBoundHandle : System.IDisposable
     {
-        internal ThreadPoolBoundHandle() { }
+        internal ThreadPoolBoundHandle()
+        {
+        }
 
         public System.Runtime.InteropServices.SafeHandle Handle
         {
@@ -174,10 +199,14 @@ namespace System.Threading
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe void FreeNativeOverlapped(System.Threading.NativeOverlapped* overlapped) { }
+        public unsafe void FreeNativeOverlapped(System.Threading.NativeOverlapped* overlapped)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public unsafe static object? GetNativeOverlappedState(

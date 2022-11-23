@@ -20,5 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         }
     }
 
-    public class NoDiagnosticsAreReturned_ForOkResultReturningActionModel { }
+    public class NoDiagnosticsAreReturned_ForOkResultReturningActionModel
+    {
+    }
 }

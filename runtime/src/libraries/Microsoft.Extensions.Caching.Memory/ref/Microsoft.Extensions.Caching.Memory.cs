@@ -11,12 +11,16 @@ namespace Microsoft.Extensions.Caching.Distributed
     {
         public MemoryDistributedCache(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryDistributedCacheOptions> optionsAccessor
-        ) { }
+        )
+        {
+        }
 
         public MemoryDistributedCache(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryDistributedCacheOptions> optionsAccessor,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
-        ) { }
+        )
+        {
+        }
 
         public byte[]? Get(string key)
         {
@@ -31,7 +35,9 @@ namespace Microsoft.Extensions.Caching.Distributed
             throw null;
         }
 
-        public void Refresh(string key) { }
+        public void Refresh(string key)
+        {
+        }
 
         public System.Threading.Tasks.Task RefreshAsync(
             string key,
@@ -41,7 +47,9 @@ namespace Microsoft.Extensions.Caching.Distributed
             throw null;
         }
 
-        public void Remove(string key) { }
+        public void Remove(string key)
+        {
+        }
 
         public System.Threading.Tasks.Task RemoveAsync(
             string key,
@@ -55,7 +63,9 @@ namespace Microsoft.Extensions.Caching.Distributed
             string key,
             byte[] value,
             Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task SetAsync(
             string key,
@@ -77,39 +87,55 @@ namespace Microsoft.Extensions.Caching.Memory
     {
         public MemoryCache(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions> optionsAccessor
-        ) { }
+        )
+        {
+        }
 
         public MemoryCache(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions> optionsAccessor,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
-        ) { }
+        )
+        {
+        }
 
         public int Count
         {
             get { throw null; }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
-        public void Compact(double percentage) { }
+        public void Compact(double percentage)
+        {
+        }
 
         public Microsoft.Extensions.Caching.Memory.ICacheEntry CreateEntry(object key)
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~MemoryCache() { }
+        ~MemoryCache()
+        {
+        }
 
         public Microsoft.Extensions.Caching.Memory.MemoryCacheStatistics? GetCurrentStatistics()
         {
             throw null;
         }
 
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
         public bool TryGetValue(object key, out object? result)
         {
@@ -120,22 +146,30 @@ namespace Microsoft.Extensions.Caching.Memory
     public partial class MemoryCacheOptions
         : Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions>
     {
-        public MemoryCacheOptions() { }
+        public MemoryCacheOptions()
+        {
+        }
 
         public Microsoft.Extensions.Internal.ISystemClock? Clock
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public double CompactionPercentage
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan ExpirationScanFrequency
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         Microsoft.Extensions.Caching.Memory.MemoryCacheOptions Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions>.Value
         {
@@ -144,24 +178,32 @@ namespace Microsoft.Extensions.Caching.Memory
         public long? SizeLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TrackLinkedCacheEntries
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TrackStatistics
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class MemoryDistributedCacheOptions
         : Microsoft.Extensions.Caching.Memory.MemoryCacheOptions
     {
-        public MemoryDistributedCacheOptions() { }
+        public MemoryDistributedCacheOptions()
+        {
+        }
     }
 }
 

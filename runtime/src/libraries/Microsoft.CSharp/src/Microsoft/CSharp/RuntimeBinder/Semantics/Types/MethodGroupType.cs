@@ -12,6 +12,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         public static readonly MethodGroupType Instance = new MethodGroupType();
 
-        private MethodGroupType() : base(TypeKind.TK_MethodGroupType) { }
+        private MethodGroupType() : base(TypeKind.TK_MethodGroupType)
+        {
+        }
     }
 }

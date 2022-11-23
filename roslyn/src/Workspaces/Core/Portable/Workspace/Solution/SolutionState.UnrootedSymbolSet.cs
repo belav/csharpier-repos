@@ -163,7 +163,9 @@ namespace Microsoft.CodeAnalysis
             {
                 public static readonly WeakSymbolComparer Instance = new WeakSymbolComparer();
 
-                private WeakSymbolComparer() { }
+                private WeakSymbolComparer()
+                {
+                }
 
                 public int Compare(
                     (int hashcode, WeakReference<ISymbol> symbol) x,

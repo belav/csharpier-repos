@@ -529,12 +529,16 @@ namespace System.Collections.ObjectModel.Tests
         : KeyedCollection<TKey, IKeyedItem<TKey, TValue>> where TKey : IEquatable<TKey>
     {
         public TestKeyedCollectionOfIKeyedItem(int collectionDictionaryThreshold = 32)
-            : base(null, collectionDictionaryThreshold) { }
+            : base(null, collectionDictionaryThreshold)
+        {
+        }
 
         public TestKeyedCollectionOfIKeyedItem(
             IEqualityComparer<TKey> comp,
             int collectionDictionaryThreshold = 32
-        ) : base(comp, collectionDictionaryThreshold) { }
+        ) : base(comp, collectionDictionaryThreshold)
+        {
+        }
 
         protected override TKey GetKeyForItem(IKeyedItem<TKey, TValue> item)
         {

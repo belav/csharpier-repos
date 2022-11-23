@@ -55,7 +55,9 @@ public class UsingEngineInsideMap : AutoMapperSpecBase
 
 public class When_mapping_null_with_context_mapper : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {

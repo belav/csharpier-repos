@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 private readonly ArrayBuilder<ClassifiedSpan> _classifications = new();
 
                 public LastLineCache(IThreadingContext threadingContext) : base(threadingContext)
-                { }
+                {
+                }
 
                 private void Clear()
                 {

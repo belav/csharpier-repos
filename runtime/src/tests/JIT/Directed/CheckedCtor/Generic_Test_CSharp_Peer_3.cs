@@ -36,9 +36,13 @@ namespace Test
     public class DerivedClass<T> : BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(int selector) : this(() => selector) { }
+        public DerivedClass(int selector) : this(() => selector)
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private DerivedClass(Func<int> arg) : base(arg) { }
+        private DerivedClass(Func<int> arg) : base(arg)
+        {
+        }
     }
 }

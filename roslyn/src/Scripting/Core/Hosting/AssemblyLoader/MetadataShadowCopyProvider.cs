@@ -212,7 +212,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     // Second, delete everything.
                     Directory.Delete(directory, recursive: true);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

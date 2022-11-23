@@ -721,7 +721,9 @@ namespace System.Diagnostics.Tests
                     checkGroupsExact.ToString(),
                     invokeOptions
                 )
-            ) { }
+            )
+            {
+            }
         }
 
         /// <summary>
@@ -769,7 +771,9 @@ namespace System.Diagnostics.Tests
                         checkGroupsExact.ToString(),
                         invokeOptions
                     )
-                ) { }
+                )
+                {
+                }
 
                 return RemoteExecutor.SuccessExitCode;
             };
@@ -783,7 +787,9 @@ namespace System.Diagnostics.Tests
                     useRootGroups.ToString(),
                     new RemoteInvokeOptions { RunAsSudo = true }
                 )
-            ) { }
+            )
+            {
+            }
         }
 
         private static string GetUserId(string username) =>
@@ -1009,7 +1015,9 @@ namespace System.Diagnostics.Tests
                     flags.ToString(CultureInfo.InvariantCulture),
                     options
                 )
-            ) { }
+            )
+            {
+            }
 
             static void ExecuteChildProcess(string filename, string flags)
             {

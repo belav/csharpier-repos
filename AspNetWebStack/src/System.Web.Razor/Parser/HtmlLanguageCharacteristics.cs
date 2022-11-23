@@ -17,7 +17,9 @@ namespace System.Web.Razor.Parser
         private static readonly HtmlLanguageCharacteristics _instance =
             new HtmlLanguageCharacteristics();
 
-        private HtmlLanguageCharacteristics() { }
+        private HtmlLanguageCharacteristics()
+        {
+        }
 
         public static HtmlLanguageCharacteristics Instance
         {

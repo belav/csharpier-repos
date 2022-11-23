@@ -23,7 +23,9 @@ namespace System.Xml.Serialization
         private SoapEnumAttribute? _soapEnum;
         private object? _soapDefaultValue;
 
-        public SoapAttributes() { }
+        public SoapAttributes()
+        {
+        }
 
         public SoapAttributes(ICustomAttributeProvider provider)
         {

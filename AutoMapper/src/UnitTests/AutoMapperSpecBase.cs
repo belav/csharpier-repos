@@ -30,7 +30,9 @@ public abstract class NonValidatingSpecBase
         return config.CreateMapper();
     }
 
-    protected virtual void OnConfig(MapperConfiguration mapperConfiguration) { }
+    protected virtual void OnConfig(MapperConfiguration mapperConfiguration)
+    {
+    }
 
     protected TDestination Map<TDestination>(object source) => Mapper.Map<TDestination>(source);
 
@@ -70,14 +72,18 @@ public abstract class NonValidatingSpecBase
 
     public IEnumerable<ProfileMap> GetProfiles() => Configuration.Profiles;
 
-    protected virtual void Because_of() { }
+    protected virtual void Because_of()
+    {
+    }
 }
 
 /// <summary>
 /// Ignore this member for validation and skip during mapping
 /// </summary>
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public class IgnoreMapAttribute : Attribute { }
+public class IgnoreMapAttribute : Attribute
+{
+}
 
 static class Utils
 {

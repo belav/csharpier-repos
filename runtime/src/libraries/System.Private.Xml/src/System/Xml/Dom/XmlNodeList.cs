@@ -30,6 +30,8 @@ namespace System.Xml
             PrivateDisposeNodeList();
         }
 
-        protected virtual void PrivateDisposeNodeList() { }
+        protected virtual void PrivateDisposeNodeList()
+        {
+        }
     }
 }

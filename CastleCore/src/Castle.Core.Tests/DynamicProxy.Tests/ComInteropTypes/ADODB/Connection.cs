@@ -20,5 +20,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [Guid("00000550-0000-0010-8000-00aa006d2ea4")]
     //[CoClass(typeof(ConnectionClass))]
     public interface Connection // : (inherited event interface omitted)
-    { }
+    {
+    }
 }

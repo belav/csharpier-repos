@@ -117,7 +117,9 @@ namespace System.Security.Cryptography.Tests.Symmetric
                     byte[] hugeKey = new byte[536870917]; // value chosen so that when multiplied by 8 (bits) it overflows to the value 40
                     Assert.Throws<CryptographicException>(() => s.Key = hugeKey);
                 }
-                catch (OutOfMemoryException) { } // in case there isn't enough memory at test-time to allocate the large array
+                catch (OutOfMemoryException)
+                {
+                } // in case there isn't enough memory at test-time to allocate the large array
             }
         }
 
@@ -425,12 +427,20 @@ namespace System.Security.Cryptography.Tests.Symmetric
             }
         }
 
-        private class GenerateIvNotImplementedException : Exception { }
+        private class GenerateIvNotImplementedException : Exception
+        {
+        }
 
-        private class GenerateKeyNotImplementedException : Exception { }
+        private class GenerateKeyNotImplementedException : Exception
+        {
+        }
 
-        private class CreateDecryptorNotImplementedException : Exception { }
+        private class CreateDecryptorNotImplementedException : Exception
+        {
+        }
 
-        private class CreateEncryptorNotImplementedException : Exception { }
+        private class CreateEncryptorNotImplementedException : Exception
+        {
+        }
     }
 }

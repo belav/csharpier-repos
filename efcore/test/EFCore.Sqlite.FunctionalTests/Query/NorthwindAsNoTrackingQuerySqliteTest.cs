@@ -8,5 +8,7 @@ public class NorthwindAsNoTrackingQuerySqliteTest
 {
     public NorthwindAsNoTrackingQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 }

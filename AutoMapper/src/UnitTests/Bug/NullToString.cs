@@ -9,7 +9,9 @@ public class NullToString : AutoMapperSpecBase
         public InnerSource Inner { get; set; }
     }
 
-    class InnerSource { }
+    class InnerSource
+    {
+    }
 
     class Destination
     {

@@ -30,7 +30,9 @@ class MainLoopCloselyNestedTry
                 }
                 result = temp;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
         finally
         {

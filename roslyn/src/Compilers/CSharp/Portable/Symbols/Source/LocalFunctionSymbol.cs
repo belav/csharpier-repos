@@ -430,7 +430,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return OneOrMany.Create(Syntax.AttributeLists);
         }
 
-        protected override void NoteAttributesComplete(bool forReturnType) { }
+        protected override void NoteAttributesComplete(bool forReturnType)
+        {
+        }
 
         public override Symbol? AssociatedSymbol => null;
 

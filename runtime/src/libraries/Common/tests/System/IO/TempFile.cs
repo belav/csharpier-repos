@@ -16,7 +16,9 @@ namespace System.IO
         public string Path { get; }
 
         public TempFile(string path, long length = 0)
-            : this(path, length > -1 ? new byte[length] : null) { }
+            : this(path, length > -1 ? new byte[length] : null)
+        {
+        }
 
         public TempFile(string path, byte[] data)
         {

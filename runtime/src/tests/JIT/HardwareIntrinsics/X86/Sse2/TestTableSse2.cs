@@ -3015,7 +3015,9 @@ namespace IntelHardwareIntrinsicTest
             {
                 InitializeWithConstValue(value, inArray1);
             }
-            else if (mode == InitMode.NumberAllVectors) { }
+            else if (mode == InitMode.NumberAllVectors)
+            {
+            }
         }
 
         public static unsafe void InitializeWithRandomData<T>(

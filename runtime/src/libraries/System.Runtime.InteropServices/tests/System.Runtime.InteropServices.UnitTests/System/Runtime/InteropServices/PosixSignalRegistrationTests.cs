@@ -26,7 +26,13 @@ namespace System.Tests
         public void Create_InvalidSignal_Throws(PosixSignal signal)
         {
             Assert.Throws<PlatformNotSupportedException>(
-                () => PosixSignalRegistration.Create(signal, ctx => { })
+                () =>
+                    PosixSignalRegistration.Create(
+                        signal,
+                        ctx =>
+                        {
+                        }
+                    )
             );
         }
 
@@ -34,14 +40,29 @@ namespace System.Tests
         [MemberData(nameof(UninstallableSignals))]
         public void Create_UninstallableSignal_Throws(PosixSignal signal)
         {
-            Assert.Throws<IOException>(() => PosixSignalRegistration.Create(signal, ctx => { }));
+            Assert.Throws<IOException>(
+                () =>
+                    PosixSignalRegistration.Create(
+                        signal,
+                        ctx =>
+                        {
+                        }
+                    )
+            );
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile))]
         [MemberData(nameof(SupportedSignals))]
         public void Create_ValidSignal_Success(PosixSignal signal)
         {
-            PosixSignalRegistration.Create(signal, ctx => { }).Dispose();
+            PosixSignalRegistration
+                .Create(
+                    signal,
+                    ctx =>
+                    {
+                    }
+                )
+                .Dispose();
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile))]
@@ -50,7 +71,9 @@ namespace System.Tests
         {
             PosixSignalRegistration registration = PosixSignalRegistration.Create(
                 signal,
-                ctx => { }
+                ctx =>
+                {
+                }
             );
             registration.Dispose();
             registration.Dispose();
@@ -67,7 +90,12 @@ namespace System.Tests
                     foreach (object[] signal in SupportedSignals())
                     {
                         registrations.Add(
-                            PosixSignalRegistration.Create((PosixSignal)signal[0], _ => { })
+                            PosixSignalRegistration.Create(
+                                (PosixSignal)signal[0],
+                                _ =>
+                                {
+                                }
+                            )
                         );
                     }
                 }

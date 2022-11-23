@@ -13,7 +13,9 @@ namespace DebuggerTests
 {
     public class DelegateTests : DebuggerTests
     {
-        public DelegateTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public DelegateTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         [ConditionalTheory(nameof(RunningOnChrome))]
         [InlineData(0, 53, 8, "Math.DelegatesTest", false)]

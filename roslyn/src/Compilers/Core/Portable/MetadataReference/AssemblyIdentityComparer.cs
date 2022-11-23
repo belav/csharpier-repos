@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis
             get { return StringComparer.OrdinalIgnoreCase; }
         }
 
-        internal AssemblyIdentityComparer() { }
+        internal AssemblyIdentityComparer()
+        {
+        }
 
         /// <summary>
         /// A set of possible outcomes of <see cref="AssemblyIdentity"/> comparison.

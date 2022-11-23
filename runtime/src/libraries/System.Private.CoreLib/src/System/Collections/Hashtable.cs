@@ -227,11 +227,15 @@ namespace System.Collections
 
         // Note: this constructor is a bogus constructor that does nothing
         // and is for use only with SyncHashtable.
-        internal Hashtable(bool _) { }
+        internal Hashtable(bool _)
+        {
+        }
 
         // Constructs a new hashtable. The hashtable is created with an initial
         // capacity of zero and a load factor of 1.0.
-        public Hashtable() : this(0, 1.0f) { }
+        public Hashtable() : this(0, 1.0f)
+        {
+        }
 
         // Constructs a new hashtable with the given initial capacity and a load
         // factor of 1.0. The capacity argument serves as an indication of
@@ -240,7 +244,9 @@ namespace System.Collections
         // eliminate a number of resizing operations that would otherwise be
         // performed when elements are added to the hashtable.
         //
-        public Hashtable(int capacity) : this(capacity, 1.0f) { }
+        public Hashtable(int capacity) : this(capacity, 1.0f)
+        {
+        }
 
         // Constructs a new hashtable with the given initial capacity and load
         // factor. The capacity argument serves as an indication of the
@@ -294,38 +300,53 @@ namespace System.Collections
             "This constructor has been deprecated. Use Hashtable(IEqualityComparer) instead."
         )]
         public Hashtable(IHashCodeProvider? hcp, IComparer? comparer) : this(0, 1.0f, hcp, comparer)
-        { }
+        {
+        }
 
-        public Hashtable(IEqualityComparer? equalityComparer) : this(0, 1.0f, equalityComparer) { }
+        public Hashtable(IEqualityComparer? equalityComparer) : this(0, 1.0f, equalityComparer)
+        {
+        }
 
         [Obsolete(
             "This constructor has been deprecated. Use Hashtable(int, IEqualityComparer) instead."
         )]
         public Hashtable(int capacity, IHashCodeProvider? hcp, IComparer? comparer)
-            : this(capacity, 1.0f, hcp, comparer) { }
+            : this(capacity, 1.0f, hcp, comparer)
+        {
+        }
 
         public Hashtable(int capacity, IEqualityComparer? equalityComparer)
-            : this(capacity, 1.0f, equalityComparer) { }
+            : this(capacity, 1.0f, equalityComparer)
+        {
+        }
 
         // Constructs a new hashtable containing a copy of the entries in the given
         // dictionary. The hashtable is created with a load factor of 1.0.
         //
-        public Hashtable(IDictionary d) : this(d, 1.0f) { }
+        public Hashtable(IDictionary d) : this(d, 1.0f)
+        {
+        }
 
         // Constructs a new hashtable containing a copy of the entries in the given
         // dictionary. The hashtable is created with the given load factor.
         //
         public Hashtable(IDictionary d, float loadFactor)
-            : this(d, loadFactor, (IEqualityComparer?)null) { }
+            : this(d, loadFactor, (IEqualityComparer?)null)
+        {
+        }
 
         [Obsolete(
             "This constructor has been deprecated. Use Hashtable(IDictionary, IEqualityComparer) instead."
         )]
         public Hashtable(IDictionary d, IHashCodeProvider? hcp, IComparer? comparer)
-            : this(d, 1.0f, hcp, comparer) { }
+            : this(d, 1.0f, hcp, comparer)
+        {
+        }
 
         public Hashtable(IDictionary d, IEqualityComparer? equalityComparer)
-            : this(d, 1.0f, equalityComparer) { }
+            : this(d, 1.0f, equalityComparer)
+        {
+        }
 
         [Obsolete(
             "This constructor has been deprecated. Use Hashtable(int, float, IEqualityComparer) instead."

@@ -109,7 +109,9 @@ class NameConfigWithPid
                             File.Delete(expectedPath);
                         return 100;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     Thread.Sleep(1000);
                 }
                 Console.WriteLine($"Unable to delete {expectedPath}");

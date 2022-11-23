@@ -16,7 +16,9 @@ namespace System.Threading.Tasks.Dataflow
         /// </param>
         /// <exception cref="ArgumentNullException">The <paramref name="transform"/> is <see langword="null" />.</exception>
         public TransformManyBlock(Func<TInput, IAsyncEnumerable<TOutput>> transform)
-            : this(transform, ExecutionDataflowBlockOptions.Default) { }
+            : this(transform, ExecutionDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="transform">

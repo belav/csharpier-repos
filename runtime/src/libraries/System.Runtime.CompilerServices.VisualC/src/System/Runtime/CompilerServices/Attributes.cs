@@ -16,7 +16,9 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHere
     {
-        internal AssemblyAttributesGoHere() { }
+        internal AssemblyAttributesGoHere()
+        {
+        }
     }
 
     [TypeForwardedFrom(
@@ -24,7 +26,9 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHereS
     {
-        internal AssemblyAttributesGoHereS() { }
+        internal AssemblyAttributesGoHereS()
+        {
+        }
     }
 
     [TypeForwardedFrom(
@@ -32,7 +36,9 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHereM
     {
-        internal AssemblyAttributesGoHereM() { }
+        internal AssemblyAttributesGoHereM()
+        {
+        }
     }
 
     [TypeForwardedFrom(
@@ -40,58 +46,90 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHereSM
     {
-        internal AssemblyAttributesGoHereSM() { }
+        internal AssemblyAttributesGoHereSM()
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.All)]
     internal sealed class DecoratedNameAttribute : Attribute
     {
-        public DecoratedNameAttribute(string decoratedName) { }
+        public DecoratedNameAttribute(string decoratedName)
+        {
+        }
     }
 
     // Indicates that the modified instance is pinned in memory.
-    public static class IsPinned { }
+    public static class IsPinned
+    {
+    }
 
-    public static partial class IsBoxed { }
+    public static partial class IsBoxed
+    {
+    }
 
-    public static partial class IsByValue { }
+    public static partial class IsByValue
+    {
+    }
 
-    public static partial class IsCopyConstructed { }
+    public static partial class IsCopyConstructed
+    {
+    }
 
-    public static partial class IsExplicitlyDereferenced { }
+    public static partial class IsExplicitlyDereferenced
+    {
+    }
 
-    public static partial class IsImplicitlyDereferenced { }
+    public static partial class IsImplicitlyDereferenced
+    {
+    }
 
-    public static partial class IsJitIntrinsic { }
+    public static partial class IsJitIntrinsic
+    {
+    }
 
-    public static partial class IsLong { }
+    public static partial class IsLong
+    {
+    }
 
-    public static partial class IsSignUnspecifiedByte { }
+    public static partial class IsSignUnspecifiedByte
+    {
+    }
 
-    public static partial class IsUdtReturn { }
+    public static partial class IsUdtReturn
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Struct)]
     public sealed class HasCopySemanticsAttribute : Attribute
     {
-        public HasCopySemanticsAttribute() { }
+        public HasCopySemanticsAttribute()
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.Enum)]
     public sealed class ScopelessEnumAttribute : Attribute
     {
-        public ScopelessEnumAttribute() { }
+        public ScopelessEnumAttribute()
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.Struct, Inherited = true)]
     public sealed class NativeCppClassAttribute : Attribute
     {
-        public NativeCppClassAttribute() { }
+        public NativeCppClassAttribute()
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class CppInlineNamespaceAttribute : Attribute
     {
-        public CppInlineNamespaceAttribute(string dottedName) { }
+        public CppInlineNamespaceAttribute(string dottedName)
+        {
+        }
     }
 
     [AttributeUsage(
@@ -123,7 +161,9 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class SuppressMergeCheckAttribute : Attribute
     {
-        public SuppressMergeCheckAttribute() { }
+        public SuppressMergeCheckAttribute()
+        {
+        }
     }
 
     // The CLR data marshaler has some behaviors that are incompatible with
@@ -139,5 +179,7 @@ namespace System.Runtime.CompilerServices
     //
     // Indicates that the modified instance differs from its true type for
     // correct marshalling.
-    public static class CompilerMarshalOverride { }
+    public static class CompilerMarshalOverride
+    {
+    }
 }

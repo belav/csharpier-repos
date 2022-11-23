@@ -12,7 +12,9 @@ namespace Legacy.Support
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
     class KnownFailureAttribute : Attribute, ITraitAttribute
     {
-        public KnownFailureAttribute() { }
+        public KnownFailureAttribute()
+        {
+        }
     }
 
     public class KnownFailureDiscoverer : ITraitDiscoverer

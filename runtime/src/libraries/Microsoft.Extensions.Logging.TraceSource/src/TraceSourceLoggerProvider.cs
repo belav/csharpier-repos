@@ -29,7 +29,9 @@ namespace Microsoft.Extensions.Logging.TraceSource
         /// </summary>
         /// <param name="rootSourceSwitch">The <see cref="SourceSwitch"/> to use.</param>
         public TraceSourceLoggerProvider(SourceSwitch rootSourceSwitch)
-            : this(rootSourceSwitch, null) { }
+            : this(rootSourceSwitch, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TraceSourceLoggerProvider"/> class.

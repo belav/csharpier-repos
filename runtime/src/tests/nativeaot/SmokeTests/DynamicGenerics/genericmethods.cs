@@ -168,7 +168,9 @@ namespace MakeGenMethod
 
     public class Gen<T>
     {
-        public Gen() { }
+        public Gen()
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string TestMethodDict<U>()

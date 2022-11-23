@@ -29,7 +29,8 @@ namespace System.Web.Mvc.Async.Test
                         capturedCallback = callback;
                         return innerResult;
                     },
-                    (ar, state) => { },
+                    (ar, state) => {
+                    },
                     null
                 );
 
@@ -131,7 +132,8 @@ namespace System.Web.Mvc.Async.Test
                     null,
                     "outer state",
                     (callback, callbackState, state) => innerResult,
-                    (ar, state) => { },
+                    (ar, state) => {
+                    },
                     null
                 );
 
@@ -165,7 +167,8 @@ namespace System.Web.Mvc.Async.Test
                         callback(innerResult);
                         return innerResult;
                     },
-                    (ar, state) => { },
+                    (ar, state) => {
+                    },
                     null
                 );
 
@@ -191,7 +194,8 @@ namespace System.Web.Mvc.Async.Test
                     callback(innerResultMock.Object);
                     return innerResultMock.Object;
                 },
-                (ar, state) => { },
+                (ar, state) => {
+                },
                 null
             );
 
@@ -283,7 +287,8 @@ namespace System.Web.Mvc.Async.Test
                         asyncResult.AsyncState = callbackState;
                         return asyncResult;
                     },
-                    (ar, state) => { },
+                    (ar, state) => {
+                    },
                     null,
                     callbackSyncContext: syncContext
                 );
@@ -398,7 +403,8 @@ namespace System.Web.Mvc.Async.Test
                                     asyncResult.AsyncState = callbackState;
                                     return asyncResult;
                                 },
-                                (ar, state) => { },
+                                (ar, state) => {
+                                },
                                 null,
                                 callbackSyncContext: capturingSyncContext
                             );
@@ -512,7 +518,8 @@ namespace System.Web.Mvc.Async.Test
                     null,
                     null,
                     (callback, callbackState, state) => mockResult,
-                    (ar, state) => { },
+                    (ar, state) => {
+                    },
                     null
                 );
 
@@ -552,7 +559,8 @@ namespace System.Web.Mvc.Async.Test
                     null,
                     null,
                     (callback, callbackState, state) => mockResult,
-                    (ar, state) => { },
+                    (ar, state) => {
+                    },
                     null,
                     "some tag"
                 );
@@ -580,7 +588,8 @@ namespace System.Web.Mvc.Async.Test
                     null,
                     null,
                     (callback, callbackState, state) => mockResult,
-                    (ar, state) => { },
+                    (ar, state) => {
+                    },
                     null
                 );
 

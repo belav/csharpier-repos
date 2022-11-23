@@ -21,7 +21,9 @@ namespace System.Xml.Schema
         public SchemaCollectionCompiler(
             XmlNameTable nameTable,
             ValidationEventHandler? eventHandler
-        ) : base(nameTable, null, eventHandler) { }
+        ) : base(nameTable, null, eventHandler)
+        {
+        }
 
         public bool Execute(XmlSchema schema, SchemaInfo schemaInfo, bool compileContentModel)
         {

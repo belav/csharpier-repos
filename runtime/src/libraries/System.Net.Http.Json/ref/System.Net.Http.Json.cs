@@ -708,7 +708,9 @@ namespace System.Net.Http.Json
 
     public sealed partial class JsonContent : System.Net.Http.HttpContent
     {
-        internal JsonContent() { }
+        internal JsonContent()
+        {
+        }
 
         public System.Type ObjectType
         {

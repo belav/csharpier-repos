@@ -8,7 +8,9 @@ namespace Microsoft.Extensions.Tools.Internal;
 public class TemporaryOpenApiProject : TemporaryCSharpProject
 {
     public TemporaryOpenApiProject(string name, TemporaryDirectory directory, string sdk)
-        : base(name, directory, sdk) { }
+        : base(name, directory, sdk)
+    {
+    }
 
     protected override string Template =>
         @"<Project Sdk=""{2}"">

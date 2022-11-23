@@ -22,7 +22,9 @@ public class InternalStoredProcedureResultColumnBuilder
     public InternalStoredProcedureResultColumnBuilder(
         StoredProcedureResultColumn resultColumn,
         IConventionModelBuilder modelBuilder
-    ) : base(resultColumn, modelBuilder) { }
+    ) : base(resultColumn, modelBuilder)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

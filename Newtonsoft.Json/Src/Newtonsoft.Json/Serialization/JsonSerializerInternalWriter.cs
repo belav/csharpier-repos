@@ -53,7 +53,9 @@ namespace Newtonsoft.Json.Serialization
         private int _rootLevel;
         private readonly List<object> _serializeStack = new List<object>();
 
-        public JsonSerializerInternalWriter(JsonSerializer serializer) : base(serializer) { }
+        public JsonSerializerInternalWriter(JsonSerializer serializer) : base(serializer)
+        {
+        }
 
         public void Serialize(JsonWriter jsonWriter, object? value, Type? objectType)
         {

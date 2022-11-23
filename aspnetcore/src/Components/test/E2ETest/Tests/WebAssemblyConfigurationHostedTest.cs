@@ -19,7 +19,9 @@ public class WebAssemblyConfigurationHostedTest
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<TestServer.ClientStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     protected override void InitializeAsyncCore()
     {

@@ -511,7 +511,9 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Uri value,
                 JsonSerializerOptions options
-            ) { }
+            )
+            {
+            }
         }
 
         private class BadObjectConverter : JsonConverter<object>

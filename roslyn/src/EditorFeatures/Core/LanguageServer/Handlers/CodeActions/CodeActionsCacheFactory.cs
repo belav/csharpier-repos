@@ -13,7 +13,9 @@ internal class CodeActionsCacheFactory : ILspServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CodeActionsCacheFactory() { }
+    public CodeActionsCacheFactory()
+    {
+    }
 
     public ILspService CreateILspService(
         LspServices lspServices,

@@ -22,9 +22,13 @@ namespace Microsoft.Test.ModuleCore
         protected TestFunc pfunc = null;
 
         //Constructor
-        public TestVariation() : base(null, null, TestType.TestVariation) { }
+        public TestVariation() : base(null, null, TestType.TestVariation)
+        {
+        }
 
-        public TestVariation(TestFunc func) : this(func, null) { }
+        public TestVariation(TestFunc func) : this(func, null)
+        {
+        }
 
         public TestVariation(TestFunc func, string desc) : base(null, desc, TestType.TestVariation)
         {

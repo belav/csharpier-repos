@@ -17,15 +17,23 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public abstract class PrincipalException : SystemException
     {
-        internal PrincipalException() : base() { }
+        internal PrincipalException() : base()
+        {
+        }
 
-        internal PrincipalException(string message) : base(message) { }
+        internal PrincipalException(string message) : base(message)
+        {
+        }
 
         internal PrincipalException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected PrincipalException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     [Serializable]
@@ -34,15 +42,23 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class MultipleMatchesException : PrincipalException
     {
-        public MultipleMatchesException() : base() { }
+        public MultipleMatchesException() : base()
+        {
+        }
 
-        public MultipleMatchesException(string message) : base(message) { }
+        public MultipleMatchesException(string message) : base(message)
+        {
+        }
 
         public MultipleMatchesException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected MultipleMatchesException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     [Serializable]
@@ -51,12 +67,18 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class NoMatchingPrincipalException : PrincipalException
     {
-        public NoMatchingPrincipalException() : base() { }
+        public NoMatchingPrincipalException() : base()
+        {
+        }
 
-        public NoMatchingPrincipalException(string message) : base(message) { }
+        public NoMatchingPrincipalException(string message) : base(message)
+        {
+        }
 
         public NoMatchingPrincipalException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected NoMatchingPrincipalException(SerializationInfo info, StreamingContext context)
             : base(info, context)
@@ -71,15 +93,23 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class PasswordException : PrincipalException
     {
-        public PasswordException() : base() { }
+        public PasswordException() : base()
+        {
+        }
 
-        public PasswordException(string message) : base(message) { }
+        public PasswordException(string message) : base(message)
+        {
+        }
 
         public PasswordException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected PasswordException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     [Serializable]
@@ -88,15 +118,23 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class PrincipalExistsException : PrincipalException
     {
-        public PrincipalExistsException() : base() { }
+        public PrincipalExistsException() : base()
+        {
+        }
 
-        public PrincipalExistsException(string message) : base(message) { }
+        public PrincipalExistsException(string message) : base(message)
+        {
+        }
 
         public PrincipalExistsException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected PrincipalExistsException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     [Serializable]
@@ -108,12 +146,18 @@ namespace System.DirectoryServices.AccountManagement
         private readonly int _errorCode;
         private readonly string _serverName;
 
-        public PrincipalServerDownException() : base() { }
+        public PrincipalServerDownException() : base()
+        {
+        }
 
-        public PrincipalServerDownException(string message) : base(message) { }
+        public PrincipalServerDownException(string message) : base(message)
+        {
+        }
 
         public PrincipalServerDownException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         public PrincipalServerDownException(string message, int errorCode) : base(message)
         {
@@ -160,12 +204,18 @@ namespace System.DirectoryServices.AccountManagement
     {
         private readonly int _errorCode;
 
-        public PrincipalOperationException() : base() { }
+        public PrincipalOperationException() : base()
+        {
+        }
 
-        public PrincipalOperationException(string message) : base(message) { }
+        public PrincipalOperationException(string message) : base(message)
+        {
+        }
 
         public PrincipalOperationException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         public PrincipalOperationException(string message, int errorCode) : base(message)
         {

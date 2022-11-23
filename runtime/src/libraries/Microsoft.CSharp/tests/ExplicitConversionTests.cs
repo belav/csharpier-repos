@@ -54,21 +54,37 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             }
         }
 
-        private interface IInterface { }
+        private interface IInterface
+        {
+        }
 
-        private class UnsealedClass { }
+        private class UnsealedClass
+        {
+        }
 
-        private sealed class SealedClass { }
+        private sealed class SealedClass
+        {
+        }
 
-        private class ImplementingClass : IInterface { }
+        private class ImplementingClass : IInterface
+        {
+        }
 
-        private class ImplementingSealedClass : IInterface { }
+        private class ImplementingSealedClass : IInterface
+        {
+        }
 
-        private class UnrelatedNonInterface { }
+        private class UnrelatedNonInterface
+        {
+        }
 
-        private struct Struct { }
+        private struct Struct
+        {
+        }
 
-        private struct ImplementingStruct : IInterface { }
+        private struct ImplementingStruct : IInterface
+        {
+        }
 
         [Fact]
         [ActiveIssue(

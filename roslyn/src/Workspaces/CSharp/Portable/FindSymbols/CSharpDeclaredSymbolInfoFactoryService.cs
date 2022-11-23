@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDeclaredSymbolInfoFactoryService() { }
+        public CSharpDeclaredSymbolInfoFactoryService()
+        {
+        }
 
         private static ImmutableArray<string> GetInheritanceNames(
             StringTable stringTable,

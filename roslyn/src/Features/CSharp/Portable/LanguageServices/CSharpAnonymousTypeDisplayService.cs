@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAnonymousTypeDisplayService() { }
+        public CSharpAnonymousTypeDisplayService()
+        {
+        }
 
         public override ImmutableArray<SymbolDisplayPart> GetAnonymousTypeParts(
             INamedTypeSymbol anonymousType,

@@ -32,12 +32,16 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             AccessThroughLdToken.Test();
         }
 
-        class TestType { }
+        class TestType
+        {
+        }
 
         [RequiresUnreferencedCode("Message for --RequiresOnlyThroughReflection--")]
         [RequiresDynamicCode("Message for --RequiresOnlyThroughReflection--")]
         [RequiresAssemblyFiles("Message for --RequiresOnlyThroughReflection--")]
-        static void RequiresOnlyThroughReflection() { }
+        static void RequiresOnlyThroughReflection()
+        {
+        }
 
         [ExpectedWarning("IL2026", "--RequiresOnlyThroughReflection--")]
         static void TestRequiresOnlyThroughReflection()
@@ -55,7 +59,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message for --GenericType.RequiresOnlyThroughReflection--")]
             [RequiresDynamicCode("Message for --GenericType.RequiresOnlyThroughReflection--")]
             [RequiresAssemblyFiles("Message for --GenericType.RequiresOnlyThroughReflection--")]
-            public static void RequiresOnlyThroughReflection() { }
+            public static void RequiresOnlyThroughReflection()
+            {
+            }
 
             [ExpectedWarning("IL2026", "--GenericType.RequiresOnlyThroughReflection--")]
             public static void Test()
@@ -76,7 +82,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 [RequiresUnreferencedCode("Message for --DebuggerProxyType.Method--")]
                 [RequiresDynamicCode("Message for --DebuggerProxyType.Method--")]
                 [RequiresAssemblyFiles("Message for --DebuggerProxyType.Method--")]
-                public void Method() { }
+                public void Method()
+                {
+                }
             }
 
             public static void Test()
@@ -92,7 +100,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 [RequiresUnreferencedCode("Message for --PInvokeReturnType.ctor--")]
                 [RequiresDynamicCode("Message for --PInvokeReturnType.ctor--")]
                 [RequiresAssemblyFiles("Message for --PInvokeReturnType.ctor--")]
-                public PInvokeReturnType() { }
+                public PInvokeReturnType()
+                {
+                }
             }
 
             // https://github.com/mono/linker/issues/2116
@@ -119,13 +129,19 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 [RequiresUnreferencedCode("Message for --NewConstraintTestType.ctor--")]
                 [RequiresAssemblyFiles("Message for --NewConstraintTestType.ctor--")]
                 [RequiresDynamicCode("Message for --NewConstraintTestType.ctor--")]
-                public NewConstraintTestType() { }
+                public NewConstraintTestType()
+                {
+                }
             }
 
             [RequiresUnreferencedCode("Message for --NewConstraintTestAnnotatedType--")]
-            class NewConstraintTestAnnotatedType { }
+            class NewConstraintTestAnnotatedType
+            {
+            }
 
-            static void GenericMethod<T>() where T : new() { }
+            static void GenericMethod<T>() where T : new()
+            {
+            }
 
             // NativeAOT doesnt generate warnings when marking generic constraints
             // https://github.com/dotnet/runtime/issues/68688
@@ -158,10 +174,14 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
             static class NewConstraintOnTypeParameterOfStaticType<T> where T : new()
             {
-                public static void DoNothing() { }
+                public static void DoNothing()
+                {
+                }
             }
 
-            class NewConstraintOnTypeParameter<T> where T : new() { }
+            class NewConstraintOnTypeParameter<T> where T : new()
+            {
+            }
 
             // NativeAOT doesnt generate warnings when marking generic constraints
             // https://github.com/dotnet/runtime/issues/68688

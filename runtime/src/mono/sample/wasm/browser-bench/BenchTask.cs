@@ -31,7 +31,9 @@ public abstract class BenchTask
         return result.ToString();
     }
 
-    public virtual void Initialize() { }
+    public virtual void Initialize()
+    {
+    }
 
     public abstract Measurement[] Measurements { get; }
 
@@ -65,7 +67,9 @@ public abstract class BenchTask
             return Task.CompletedTask;
         }
 
-        public virtual void RunStep() { }
+        public virtual void RunStep()
+        {
+        }
 
         public virtual async Task RunStepAsync()
         {

@@ -14,7 +14,9 @@ namespace System.Drawing.Imaging
         /// <summary>
         /// Initializes a new instance of the <see cref='ColorMap'/> class.
         /// </summary>
-        public ColorMap() { }
+        public ColorMap()
+        {
+        }
 
         /// <summary>
         /// Specifies the existing <see cref='Color'/> to be converted.

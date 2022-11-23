@@ -9,7 +9,9 @@ namespace System
     {
         private string _exceptionString;
 
-        public Exception() { }
+        public Exception()
+        {
+        }
 
         public Exception(string str)
         {
@@ -19,71 +21,99 @@ namespace System
 
     internal sealed class NullReferenceException : Exception
     {
-        public NullReferenceException() { }
+        public NullReferenceException()
+        {
+        }
     }
 
     internal sealed class InvalidOperationException : Exception
     {
-        public InvalidOperationException() { }
+        public InvalidOperationException()
+        {
+        }
     }
 
     internal sealed class ArgumentOutOfRangeException : Exception
     {
-        public ArgumentOutOfRangeException() { }
+        public ArgumentOutOfRangeException()
+        {
+        }
     }
 
     internal sealed class IndexOutOfRangeException : Exception
     {
-        public IndexOutOfRangeException() { }
+        public IndexOutOfRangeException()
+        {
+        }
     }
 
     internal sealed class ArgumentNullException : Exception
     {
-        public ArgumentNullException() { }
+        public ArgumentNullException()
+        {
+        }
     }
 
     internal sealed class NotImplementedException : Exception
     {
-        public NotImplementedException() { }
+        public NotImplementedException()
+        {
+        }
     }
 
     internal sealed class NotSupportedException : Exception
     {
-        public NotSupportedException() { }
+        public NotSupportedException()
+        {
+        }
     }
 
     internal sealed class PlatformNotSupportedException : Exception
     {
-        public PlatformNotSupportedException() { }
+        public PlatformNotSupportedException()
+        {
+        }
     }
 
     internal sealed class InvalidCastException : Exception
     {
-        public InvalidCastException() { }
+        public InvalidCastException()
+        {
+        }
     }
 
     internal sealed class ArrayTypeMismatchException : Exception
     {
-        public ArrayTypeMismatchException() { }
+        public ArrayTypeMismatchException()
+        {
+        }
     }
 
     internal sealed class OverflowException : Exception
     {
-        public OverflowException() { }
+        public OverflowException()
+        {
+        }
     }
 
     internal sealed class ArithmeticException : Exception
     {
-        public ArithmeticException() { }
+        public ArithmeticException()
+        {
+        }
     }
 
     internal sealed class DivideByZeroException : Exception
     {
-        public DivideByZeroException() { }
+        public DivideByZeroException()
+        {
+        }
     }
 
     internal class OutOfMemoryException : Exception
     {
-        public OutOfMemoryException() { }
+        public OutOfMemoryException()
+        {
+        }
     }
 }

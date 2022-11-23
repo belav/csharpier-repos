@@ -210,7 +210,12 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public static void PrepareDelegate()
         {
-            RuntimeHelpers.PrepareDelegate((Action)(() => { }));
+            RuntimeHelpers.PrepareDelegate(
+                (Action)(
+                    () => {
+                    }
+                )
+            );
             RuntimeHelpers.PrepareDelegate((Func<int>)(() => 1) + (Func<int>)(() => 2));
             RuntimeHelpers.PrepareDelegate(null);
         }
@@ -317,7 +322,9 @@ namespace System.Runtime.CompilerServices.Tests
         [ClassInterface((short)0x0000)]
         [Guid("674B6698-EE92-11D0-AD71-00C04FD8FDFF")]
         [ComImport]
-        internal class WbemContext { }
+        internal class WbemContext
+        {
+        }
 
         internal class ClassWithBeforeFieldInitCctor
         {

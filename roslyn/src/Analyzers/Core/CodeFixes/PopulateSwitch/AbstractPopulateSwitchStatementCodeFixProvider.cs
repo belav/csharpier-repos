@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         where TMemberAccessExpression : SyntaxNode
     {
         protected AbstractPopulateSwitchStatementCodeFixProvider()
-            : base(IDEDiagnosticIds.PopulateSwitchStatementDiagnosticId) { }
+            : base(IDEDiagnosticIds.PopulateSwitchStatementDiagnosticId)
+        {
+        }
 
         protected sealed override void FixOneDiagnostic(
             Document document,

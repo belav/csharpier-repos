@@ -12,7 +12,9 @@ namespace System.Web.Razor.Generator
     {
         private StringWriter _writer;
 
-        protected CodeWriter() { }
+        protected CodeWriter()
+        {
+        }
 
         private enum WriterMode
         {
@@ -69,20 +71,30 @@ namespace System.Web.Razor.Generator
             }
         }
 
-        public virtual void WriteHiddenLinePragma() { }
+        public virtual void WriteHiddenLinePragma()
+        {
+        }
 
-        public virtual void WriteDisableUnusedFieldWarningPragma() { }
+        public virtual void WriteDisableUnusedFieldWarningPragma()
+        {
+        }
 
-        public virtual void WriteRestoreUnusedFieldWarningPragma() { }
+        public virtual void WriteRestoreUnusedFieldWarningPragma()
+        {
+        }
 
         public virtual void WriteIdentifier(string identifier)
         {
             InnerWriter.Write(identifier);
         }
 
-        public virtual void WriteHelperHeaderSuffix(string templateTypeName) { }
+        public virtual void WriteHelperHeaderSuffix(string templateTypeName)
+        {
+        }
 
-        public virtual void WriteHelperTrailer() { }
+        public virtual void WriteHelperTrailer()
+        {
+        }
 
         public void WriteStartMethodInvoke(string methodName)
         {
@@ -99,7 +111,9 @@ namespace System.Web.Razor.Generator
             EmitEndMethodInvoke();
         }
 
-        public virtual void WriteEndStatement() { }
+        public virtual void WriteEndStatement()
+        {
+        }
 
         public virtual void WriteStartAssignment(string variableName)
         {
@@ -137,7 +151,9 @@ namespace System.Web.Razor.Generator
             EmitEndLambdaDelegate();
         }
 
-        public virtual void WriteLineContinuation() { }
+        public virtual void WriteLineContinuation()
+        {
+        }
 
         public virtual void WriteBooleanLiteral(bool value)
         {

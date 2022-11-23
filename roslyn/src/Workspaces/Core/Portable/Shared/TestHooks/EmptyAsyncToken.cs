@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
     {
         public static IAsyncToken Instance { get; } = new EmptyAsyncToken();
 
-        private EmptyAsyncToken() { }
+        private EmptyAsyncToken()
+        {
+        }
 
         public void Dispose()
         {

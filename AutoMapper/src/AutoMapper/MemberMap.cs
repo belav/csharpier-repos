@@ -25,14 +25,18 @@ public class MemberMap : IValueResolver
     public virtual MemberInfo[] SourceMembers
     {
         get => Array.Empty<MemberInfo>();
-        set { }
+        set
+        {
+        }
     }
     public virtual IncludedMember IncludedMember => null;
     public virtual string DestinationName => default;
     public virtual Type DestinationType
     {
         get => default;
-        protected set { }
+        protected set
+        {
+        }
     }
 
     public virtual TypePair Types() => new(SourceType, DestinationType);
@@ -42,34 +46,46 @@ public class MemberMap : IValueResolver
     public virtual bool Ignored
     {
         get => default;
-        set { }
+        set
+        {
+        }
     }
     public virtual bool Inline { get; set; } = true;
     public virtual bool? AllowNull
     {
         get => null;
-        set { }
+        set
+        {
+        }
     }
     public virtual bool CanBeSet => true;
     public virtual bool? UseDestinationValue
     {
         get => default;
-        set { }
+        set
+        {
+        }
     }
     public virtual object NullSubstitute
     {
         get => default;
-        set { }
+        set
+        {
+        }
     }
     public virtual LambdaExpression PreCondition
     {
         get => default;
-        set { }
+        set
+        {
+        }
     }
     public virtual LambdaExpression Condition
     {
         get => default;
-        set { }
+        set
+        {
+        }
     }
     public IValueResolver Resolver { get; protected set; }
     public virtual IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers =>

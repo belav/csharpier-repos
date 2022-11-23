@@ -739,7 +739,9 @@ namespace AutoMapper.UnitTests
                     _addend = addend;
                 }
 
-                public Dest() : this(0) { }
+                public Dest() : this(0)
+                {
+                }
             }
 
             protected override MapperConfiguration CreateConfiguration() =>
@@ -895,15 +897,23 @@ namespace AutoMapper.UnitTests
 
         public class When_specifying_to_include_all_derived_via_attribute : NonValidatingSpecBase
         {
-            public class Foo { }
+            public class Foo
+            {
+            }
 
-            public class FooBar : Foo { }
+            public class FooBar : Foo
+            {
+            }
 
             [AutoMap(typeof(Foo), IncludeAllDerived = true)]
-            public class FooDto { }
+            public class FooDto
+            {
+            }
 
             [AutoMap(typeof(FooBar))]
-            public class FooBarDto : FooDto { }
+            public class FooBarDto : FooDto
+            {
+            }
 
             protected override MapperConfiguration CreateConfiguration() =>
                 new(cfg =>

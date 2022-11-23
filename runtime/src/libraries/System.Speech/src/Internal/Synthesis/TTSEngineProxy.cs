@@ -92,7 +92,9 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Release the COM interface for COM object
         /// </summary>
-        internal override void ReleaseInterface() { }
+        internal override void ReleaseInterface()
+        {
+        }
 
         #endregion
 

@@ -118,13 +118,17 @@ public class DefaultViewCompilerTest
                     new TestViewsFeatureProvider { CompiledViews = compiledViews }
                 ),
                 NullLogger<DefaultViewCompiler>.Instance
-            ) { }
+            )
+        {
+        }
 
         public TestRazorViewCompiler(TestViewsFeatureProvider featureProvider)
             : base(
                 GetApplicationPartManager(featureProvider),
                 NullLogger<DefaultViewCompiler>.Instance
-            ) { }
+            )
+        {
+        }
 
         private static ApplicationPartManager GetApplicationPartManager(
             TestViewsFeatureProvider featureProvider

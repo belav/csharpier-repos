@@ -451,7 +451,9 @@ namespace Tests.Integration
             public IExportedInterface[] Imports { get; set; }
         }
 
-        public interface IExportedInterface { }
+        public interface IExportedInterface
+        {
+        }
 
         [Export(typeof(IExportedInterface))]
         public class Exporter1 : IExportedInterface
@@ -468,10 +470,14 @@ namespace Tests.Integration
         }
 
         [Export]
-        public class ExportedService { }
+        public class ExportedService
+        {
+        }
 
         [Export]
-        public class Part { }
+        public class Part
+        {
+        }
 
         [Export]
         [PartCreationPolicy(CreationPolicy.NonShared)]

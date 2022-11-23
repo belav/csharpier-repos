@@ -19,7 +19,10 @@ namespace System.Xml.XmlSchemaTests
             try
             {
                 XmlSchemaSet sc = new XmlSchemaSet();
-                sc.ValidationEventHandler += new ValidationEventHandler((s, args) => { });
+                sc.ValidationEventHandler += new ValidationEventHandler(
+                    (s, args) => {
+                    }
+                );
                 sc.XmlResolver = null;
                 XmlSchema Schema = sc.Add(
                     null,
@@ -39,7 +42,10 @@ namespace System.Xml.XmlSchemaTests
         public void v2()
         {
             XmlSchemaSet sc = new XmlSchemaSet();
-            sc.ValidationEventHandler += new ValidationEventHandler((s, args) => { });
+            sc.ValidationEventHandler += new ValidationEventHandler(
+                (s, args) => {
+                }
+            );
             sc.XmlResolver = null;
             sc.Add(null, Path.Combine(TestData._Root, "xmlresolver_v2.xsd"));
             CError.Compare(sc.Count, 1, "SchemaSet count");
@@ -50,7 +56,10 @@ namespace System.Xml.XmlSchemaTests
         public void v3()
         {
             XmlSchemaSet sc = new XmlSchemaSet();
-            sc.ValidationEventHandler += new ValidationEventHandler((s, args) => { });
+            sc.ValidationEventHandler += new ValidationEventHandler(
+                (s, args) => {
+                }
+            );
             sc.Add(null, Path.Combine(TestData._Root, "xmlresolver_v2.xsd"));
             CError.Compare(sc.Count, 1, "SchemaSet count");
         }

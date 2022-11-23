@@ -7,4 +7,6 @@ namespace Microsoft.AspNetCore.Testing.Tracing;
 // It enables EventSourceTestBase's parallel isolation functionality.
 
 [Xunit.CollectionDefinition(EventSourceTestBase.CollectionName, DisableParallelization = true)]
-public class EventSourceTestCollection { }
+public class EventSourceTestCollection
+{
+}

@@ -13,7 +13,9 @@ namespace System.Net.Http.Formatting.DataSets.Types
     {
         private WcfPocoType reference;
 
-        public DerivedXmlSerializableType() { }
+        public DerivedXmlSerializableType()
+        {
+        }
 
         public DerivedXmlSerializableType(int id, string name, WcfPocoType reference)
             : base(id, name)

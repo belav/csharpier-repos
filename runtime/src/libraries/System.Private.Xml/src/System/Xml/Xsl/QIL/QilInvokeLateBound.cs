@@ -19,7 +19,9 @@ namespace System.Xml.Xsl.Qil
         /// Construct a new node
         /// </summary>
         public QilInvokeLateBound(QilNodeType nodeType, QilNode name, QilNode arguments)
-            : base(nodeType, name, arguments) { }
+            : base(nodeType, name, arguments)
+        {
+        }
 
         //-----------------------------------------------
         // QilInvokeLateBound methods

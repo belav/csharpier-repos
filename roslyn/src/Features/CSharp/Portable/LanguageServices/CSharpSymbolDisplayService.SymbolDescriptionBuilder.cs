@@ -59,7 +59,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                     structuralTypeDisplayService,
                     options,
                     cancellationToken
-                ) { }
+                )
+            {
+            }
 
             protected override void AddDeprecatedPrefix()
             {

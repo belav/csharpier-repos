@@ -30,7 +30,9 @@ namespace System.Reflection.Metadata
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="length"/> is negative.</exception>
         /// <exception cref="PlatformNotSupportedException">The current platform is not little-endian.</exception>
         public BlobReader(byte* buffer, int length)
-            : this(MemoryBlock.CreateChecked(buffer, length)) { }
+            : this(MemoryBlock.CreateChecked(buffer, length))
+        {
+        }
 
         internal BlobReader(MemoryBlock block)
         {

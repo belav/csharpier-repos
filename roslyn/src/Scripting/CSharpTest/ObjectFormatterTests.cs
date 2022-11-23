@@ -879,7 +879,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
             );
         }
 
-        private void TaskMethod() { }
+        private void TaskMethod()
+        {
+        }
 
         [Fact, WorkItem(10838, "https://github.com/mono/mono/issues/10838")]
         public void DebuggerProxy_FrameworkTypes_Task()

@@ -207,9 +207,13 @@ namespace Moq.Tests
             Assert.Same(bMockOriginal, bMockRoundtripped);
         }
 
-        public interface A { }
+        public interface A
+        {
+        }
 
-        public interface B : A { }
+        public interface B : A
+        {
+        }
 
         public class Service : IService
         {
@@ -261,7 +265,9 @@ namespace Moq.Tests
 
             public abstract int Value { get; set; }
 
-            void IBag.Add(string key, object o) { }
+            void IBag.Add(string key, object o)
+            {
+            }
 
             object IBag.Get(string key)
             {

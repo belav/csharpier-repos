@@ -9,7 +9,9 @@ public class ValueConvertersEndToEndSqlServerTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndSqlServerTest.ValueConvertersEndToEndSqlServerFixture>
 {
     public ValueConvertersEndToEndSqlServerTest(ValueConvertersEndToEndSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(nameof(ConvertingEntity.BoolAsChar), "nvarchar(1)", false)]
@@ -213,7 +215,9 @@ WHERE CAST(DATALENGTH(CAST(N'' AS nvarchar(max))) AS int) = 1",
     private class WrappedStringToStringConverter : ValueConverter<WrappedString, string>
     {
         public WrappedStringToStringConverter()
-            : base(v => v.Value, v => new WrappedString { Value = v }) { }
+            : base(v => v.Value, v => new WrappedString { Value = v })
+        {
+        }
     }
 
     public class ValueConvertersEndToEndSqlServerFixture : ValueConvertersEndToEndFixtureBase

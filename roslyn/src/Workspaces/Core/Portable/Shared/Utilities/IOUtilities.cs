@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             {
                 return function();
             }
-            catch (Exception e) when (IsNormalIOException(e)) { }
+            catch (Exception e) when (IsNormalIOException(e))
+            {
+            }
 
             return defaultValue;
         }
@@ -42,7 +44,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             {
                 return await function().ConfigureAwait(false);
             }
-            catch (Exception e) when (IsNormalIOException(e)) { }
+            catch (Exception e) when (IsNormalIOException(e))
+            {
+            }
 
             return defaultValue;
         }

@@ -398,7 +398,9 @@ namespace System.IO.Tests
 
         private class BinaryWriterOutStream : BinaryWriter
         {
-            public BinaryWriterOutStream(Stream output) : base(output) { }
+            public BinaryWriterOutStream(Stream output) : base(output)
+            {
+            }
 
             public Stream GetOutStream => OutStream;
         }

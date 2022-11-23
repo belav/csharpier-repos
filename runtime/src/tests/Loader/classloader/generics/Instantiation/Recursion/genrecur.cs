@@ -6,7 +6,9 @@ using System;
 #pragma warning disable 0414
 
 // Some generally-useful stuff
-public class List<T> { }
+public class List<T>
+{
+}
 
 public class Utils
 {
@@ -33,7 +35,9 @@ class Test1
         }
     }
 
-    class D : C<D> { }
+    class D : C<D>
+    {
+    }
 
     public static void Test()
     {
@@ -84,9 +88,13 @@ class Test3
         }
     }
 
-    class D : C<E> { }
+    class D : C<E>
+    {
+    }
 
-    class E : C<D> { }
+    class E : C<D>
+    {
+    }
 
     public static void Test()
     {
@@ -112,7 +120,9 @@ class Test4
         }
     }
 
-    class D<T> : C<D<T>> { }
+    class D<T> : C<D<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -136,9 +146,13 @@ class Test5
         }
     }
 
-    class D<T> : C<E<T>> { }
+    class D<T> : C<E<T>>
+    {
+    }
 
-    class E<T> : C<D<T>> { }
+    class E<T> : C<D<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -312,7 +326,9 @@ class Test9
     {
         public RecursiveStruct2<A> f2; //TODO: Assign to default value after compile supports T.default
 
-        public RecursiveClass2() { }
+        public RecursiveClass2()
+        {
+        }
     }
 
     struct RecursiveStruct2<A>
@@ -331,7 +347,9 @@ class Test9
     {
         public NonRecursiveStruct2<int> f2;
 
-        public NonRecursiveClass2() { }
+        public NonRecursiveClass2()
+        {
+        }
     }
 
     struct NonRecursiveStruct2<A>
@@ -350,7 +368,9 @@ class Test9
     {
         public ExpansiveStruct2<ExpansiveClass2<A>> f2; //TODO: Assign to default value after compile supports T.default
 
-        public ExpansiveClass2() { }
+        public ExpansiveClass2()
+        {
+        }
     }
 
     struct ExpansiveStruct2<A>
@@ -394,7 +414,9 @@ class Test10
     {
         public RecursiveStruct1<A> f1;
 
-        public RecursiveClass1() { }
+        public RecursiveClass1()
+        {
+        }
     }
 
     struct RecursiveStruct1<A>
@@ -411,7 +433,9 @@ class Test10
     {
         public NonRecursiveStruct1<int> f1;
 
-        public NonRecursiveClass1() { }
+        public NonRecursiveClass1()
+        {
+        }
     }
 
     struct NonRecursiveStruct1<A>
@@ -428,7 +452,9 @@ class Test10
     {
         public ExpansiveStruct1<ExpansiveClass1<A>> f1;
 
-        public ExpansiveClass1() { }
+        public ExpansiveClass1()
+        {
+        }
     }
 
     struct ExpansiveStruct1<A>
@@ -472,9 +498,13 @@ class Test11
         }
     }
 
-    class C : G<D> { }
+    class C : G<D>
+    {
+    }
 
-    class D : C { }
+    class D : C
+    {
+    }
 
     public static void Test()
     {
@@ -497,11 +527,17 @@ class Test12
         }
     }
 
-    class C : G<D> { }
+    class C : G<D>
+    {
+    }
 
-    class D : C { }
+    class D : C
+    {
+    }
 
-    class E<T> : D { }
+    class E<T> : D
+    {
+    }
 
     public static void Test()
     {
@@ -526,11 +562,17 @@ class Test13
         }
     }
 
-    class C : G<D<E>> { }
+    class C : G<D<E>>
+    {
+    }
 
-    class D<T> : C { }
+    class D<T> : C
+    {
+    }
 
-    class E : D<E> { }
+    class E : D<E>
+    {
+    }
 
     public static void Test()
     {
@@ -674,7 +716,9 @@ class Test16
         }
     }
 
-    class D : C { }
+    class D : C
+    {
+    }
 
     public static void Test()
     {
@@ -707,7 +751,9 @@ class Test17
         }
     }
 
-    class D<T> : C<T> { }
+    class D<T> : C<T>
+    {
+    }
 
     public static void Test()
     {

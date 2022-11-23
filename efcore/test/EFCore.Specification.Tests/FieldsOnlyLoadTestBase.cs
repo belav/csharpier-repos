@@ -5073,16 +5073,22 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
         return context;
     }
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
-    protected virtual void RecordLog() { }
+    protected virtual void RecordLog()
+    {
+    }
 
     protected class ChangeDetectorProxy : ChangeDetector
     {
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        ) : base(logger, loggingOptions)
+        {
+        }
 
         public bool DetectChangesCalled { get; set; }
 

@@ -2962,7 +2962,9 @@ namespace System
             protected override void AddEmbeddedResourcesFromAddedModules(
                 ArrayBuilder<ManagedResource> builder,
                 DiagnosticBag diagnostics
-            ) { }
+            )
+            {
+            }
 
             internal override SynthesizedAttributeData SynthesizeEmbeddedAttribute()
             {

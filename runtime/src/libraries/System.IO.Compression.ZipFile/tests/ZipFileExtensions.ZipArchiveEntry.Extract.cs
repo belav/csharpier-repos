@@ -34,7 +34,9 @@ namespace System.IO.Compression.Tests
                 Assert.Throws<IOException>(() => e.ExtractToFile(file, false));
 
                 //truncate file
-                using (Stream fs = File.Open(file, FileMode.Truncate)) { }
+                using (Stream fs = File.Open(file, FileMode.Truncate))
+                {
+                }
 
                 //now use overwrite mode
                 e.ExtractToFile(file, true);

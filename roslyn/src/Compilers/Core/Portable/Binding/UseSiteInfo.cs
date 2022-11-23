@@ -39,16 +39,24 @@ namespace Microsoft.CodeAnalysis
         public readonly ImmutableHashSet<TAssemblySymbol>? SecondaryDependencies;
 
         public UseSiteInfo(TAssemblySymbol? primaryDependency)
-            : this(diagnosticInfo: null, primaryDependency, secondaryDependencies: null) { }
+            : this(diagnosticInfo: null, primaryDependency, secondaryDependencies: null)
+        {
+        }
 
         public UseSiteInfo(ImmutableHashSet<TAssemblySymbol>? secondaryDependencies)
-            : this(diagnosticInfo: null, primaryDependency: null, secondaryDependencies) { }
+            : this(diagnosticInfo: null, primaryDependency: null, secondaryDependencies)
+        {
+        }
 
         public UseSiteInfo(DiagnosticInfo? diagnosticInfo)
-            : this(diagnosticInfo, primaryDependency: null, secondaryDependencies: null) { }
+            : this(diagnosticInfo, primaryDependency: null, secondaryDependencies: null)
+        {
+        }
 
         public UseSiteInfo(DiagnosticInfo? diagnosticInfo, TAssemblySymbol? primaryDependency)
-            : this(diagnosticInfo, primaryDependency, secondaryDependencies: null) { }
+            : this(diagnosticInfo, primaryDependency, secondaryDependencies: null)
+        {
+        }
 
         public UseSiteInfo(
             DiagnosticInfo? diagnosticInfo,

@@ -130,14 +130,18 @@ public static class TieredVtableMethodTests
     private class Derived : Base
     {
         // Prevent this type from sharing the vtable chunk from the base
-        public virtual void VirtualMethod2() { }
+        public virtual void VirtualMethod2()
+        {
+        }
     }
 
     // Derived type that is sealed for testing devirtualization of calls to inherited virtual methods
     private sealed class DerivedForDevirtualization : Derived
     {
         // Prevent this type from sharing the vtable chunk from the base
-        public override void VirtualMethod() { }
+        public override void VirtualMethod()
+        {
+        }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

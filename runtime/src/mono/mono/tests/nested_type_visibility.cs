@@ -4,7 +4,9 @@ namespace ConsoleApplication1
     {
         protected abstract class SuperInnerAbstractClass
         {
-            protected class SuperInnerInnerClass { }
+            protected class SuperInnerInnerClass
+            {
+            }
         }
     }
 

@@ -130,7 +130,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     reportSuppressedDiagnostics: false
                 ),
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new compilation by attaching diagnostic analyzers to an existing compilation.
@@ -143,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             CompilationWithAnalyzersOptions analysisOptions
         ) : this(compilation, analyzers, analysisOptions, cancellationToken: CancellationToken.None)
-        { }
+        {
+        }
 
         private CompilationWithAnalyzers(
             Compilation compilation,
@@ -2049,7 +2052,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         [Obsolete(
             "This API is no longer required to be invoked. Analyzer state is automatically cleaned up when CompilationWithAnalyzers instance is released."
         )]
-        public static void ClearAnalyzerState(ImmutableArray<DiagnosticAnalyzer> analyzers) { }
+        public static void ClearAnalyzerState(ImmutableArray<DiagnosticAnalyzer> analyzers)
+        {
+        }
 
         /// <summary>
         /// Gets telemetry info for the given analyzer, such as count of registered actions, the total execution time (if <see cref="CompilationWithAnalyzersOptions.LogAnalyzerExecutionTime"/> is true), etc.

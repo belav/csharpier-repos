@@ -48,7 +48,9 @@ public class ApiExplorerDataFilter : IResourceFilter
         context.Result = new JsonResult(descriptions);
     }
 
-    public void OnResourceExecuted(ResourceExecutedContext context) { }
+    public void OnResourceExecuted(ResourceExecutedContext context)
+    {
+    }
 
     private ApiExplorerData CreateSerializableData(ApiDescription description)
     {

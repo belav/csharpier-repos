@@ -80,7 +80,9 @@ namespace System.Collections.Generic
         /// <exception cref="ArgumentOutOfRangeException">
         ///  The specified <paramref name="initialCapacity"/> was negative.
         /// </exception>
-        public PriorityQueue(int initialCapacity) : this(initialCapacity, comparer: null) { }
+        public PriorityQueue(int initialCapacity) : this(initialCapacity, comparer: null)
+        {
+        }
 
         /// <summary>
         ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
@@ -136,7 +138,9 @@ namespace System.Collections.Generic
         ///  which is generally faster than enqueuing individual elements sequentially.
         /// </remarks>
         public PriorityQueue(IEnumerable<(TElement Element, TPriority Priority)> items)
-            : this(items, comparer: null) { }
+            : this(items, comparer: null)
+        {
+        }
 
         /// <summary>
         ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
@@ -948,7 +952,9 @@ namespace System.Collections.Generic
                 /// <summary>
                 /// Releases all resources used by the <see cref="Enumerator"/>.
                 /// </summary>
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 /// <summary>
                 /// Advances the enumerator to the next element of the <see cref="UnorderedItems"/>.

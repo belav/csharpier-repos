@@ -36,7 +36,9 @@ namespace System.Numerics
         public System.Numerics.Vector2 Translation
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Numerics.Matrix3x2 Add(
@@ -313,7 +315,9 @@ namespace System.Numerics
         public System.Numerics.Vector3 Translation
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Numerics.Matrix4x4 Add(
@@ -2079,11 +2083,17 @@ namespace System.Numerics
             throw null;
         }
 
-        public readonly void CopyTo(float[] array) { }
+        public readonly void CopyTo(float[] array)
+        {
+        }
 
-        public readonly void CopyTo(float[] array, int index) { }
+        public readonly void CopyTo(float[] array, int index)
+        {
+        }
 
-        public readonly void CopyTo(System.Span<float> destination) { }
+        public readonly void CopyTo(System.Span<float> destination)
+        {
+        }
 
         public readonly bool TryCopyTo(System.Span<float> destination)
         {
@@ -2422,11 +2432,17 @@ namespace System.Numerics
             throw null;
         }
 
-        public readonly void CopyTo(float[] array) { }
+        public readonly void CopyTo(float[] array)
+        {
+        }
 
-        public readonly void CopyTo(float[] array, int index) { }
+        public readonly void CopyTo(float[] array, int index)
+        {
+        }
 
-        public readonly void CopyTo(System.Span<float> destination) { }
+        public readonly void CopyTo(System.Span<float> destination)
+        {
+        }
 
         public readonly bool TryCopyTo(System.Span<float> destination)
         {
@@ -2767,11 +2783,17 @@ namespace System.Numerics
             throw null;
         }
 
-        public readonly void CopyTo(float[] array) { }
+        public readonly void CopyTo(float[] array)
+        {
+        }
 
-        public readonly void CopyTo(float[] array, int index) { }
+        public readonly void CopyTo(float[] array, int index)
+        {
+        }
 
-        public readonly void CopyTo(System.Span<float> destination) { }
+        public readonly void CopyTo(System.Span<float> destination)
+        {
+        }
 
         public readonly bool TryCopyTo(System.Span<float> destination)
         {
@@ -3093,13 +3115,21 @@ namespace System.Numerics
             get { throw null; }
         }
 
-        public void CopyTo(System.Span<byte> destination) { }
+        public void CopyTo(System.Span<byte> destination)
+        {
+        }
 
-        public void CopyTo(System.Span<T> destination) { }
+        public void CopyTo(System.Span<T> destination)
+        {
+        }
 
-        public void CopyTo(T[] destination) { }
+        public void CopyTo(T[] destination)
+        {
+        }
 
-        public void CopyTo(T[] destination, int startIndex) { }
+        public void CopyTo(T[] destination, int startIndex)
+        {
+        }
 
         public bool Equals(System.Numerics.Vector<T> other)
         {

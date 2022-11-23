@@ -55,7 +55,9 @@ public class QueryAsserter
 
     protected IQueryFixtureBase QueryFixture { get; }
 
-    protected virtual void AssertRogueExecution(int expectedCount, IQueryable queryable) { }
+    protected virtual void AssertRogueExecution(int expectedCount, IQueryable queryable)
+    {
+    }
 
     protected ISetSource GetExpectedData(DbContext context, bool filteredQuery) =>
         filteredQuery

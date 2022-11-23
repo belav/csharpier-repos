@@ -48,14 +48,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
             _cachedInstance = attributedPart;
         }
 
-        protected virtual void EnsureRunning() { }
+        protected virtual void EnsureRunning()
+        {
+        }
 
         protected void RequiresRunning()
         {
             EnsureRunning();
         }
 
-        protected virtual void ReleaseInstanceIfNecessary(object? instance) { }
+        protected virtual void ReleaseInstanceIfNecessary(object? instance)
+        {
+        }
 
         private Dictionary<ImportDefinition, object?> ImportValues
         {

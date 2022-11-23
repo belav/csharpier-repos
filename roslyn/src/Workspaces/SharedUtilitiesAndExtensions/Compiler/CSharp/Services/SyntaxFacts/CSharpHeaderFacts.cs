@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         public static readonly IHeaderFacts Instance = new CSharpHeaderFacts();
 
-        protected CSharpHeaderFacts() { }
+        protected CSharpHeaderFacts()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

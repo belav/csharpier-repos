@@ -597,10 +597,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 Analyzers = analyzers;
             }
 
-            public MockAnalyzerReference() : this(s_defaultFixer, s_defaultAnalyzers) { }
+            public MockAnalyzerReference() : this(s_defaultFixer, s_defaultAnalyzers)
+            {
+            }
 
             public MockAnalyzerReference(CodeFixProvider? fixer) : this(fixer, s_defaultAnalyzers)
-            { }
+            {
+            }
 
             public override string Display
             {
@@ -659,12 +662,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                     );
 
                 public MockDiagnosticAnalyzer(string diagnosticId, string category)
-                    : this(ImmutableArray.Create((diagnosticId, category))) { }
+                    : this(ImmutableArray.Create((diagnosticId, category)))
+                {
+                }
 
                 public MockDiagnosticAnalyzer(ImmutableArray<string> reportedDiagnosticIds)
-                    : this(reportedDiagnosticIds.SelectAsArray(id => (id, "InternalCategory"))) { }
+                    : this(reportedDiagnosticIds.SelectAsArray(id => (id, "InternalCategory")))
+                {
+                }
 
-                public MockDiagnosticAnalyzer() : this(ImmutableArray.Create(MockFixer.Id)) { }
+                public MockDiagnosticAnalyzer() : this(ImmutableArray.Create(MockFixer.Id))
+                {
+                }
 
                 public bool ReceivedCallback { get; private set; }
 
@@ -699,10 +708,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                     );
 
                 public MockDocumentDiagnosticAnalyzer(ImmutableArray<string> reportedDiagnosticIds)
-                    : this(reportedDiagnosticIds.SelectAsArray(id => (id, "InternalCategory"))) { }
+                    : this(reportedDiagnosticIds.SelectAsArray(id => (id, "InternalCategory")))
+                {
+                }
 
                 public MockDocumentDiagnosticAnalyzer() : this(ImmutableArray.Create(MockFixer.Id))
-                { }
+                {
+                }
 
                 public bool ReceivedCallback { get; private set; }
 
@@ -992,13 +1004,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
         private sealed class NuGetCodeFixProvider : AbstractNuGetOrVsixCodeFixProvider
         {
             public NuGetCodeFixProvider(ImmutableArray<string> fixableDiagnsoticIds)
-                : base(fixableDiagnsoticIds, nameof(NuGetCodeFixProvider)) { }
+                : base(fixableDiagnsoticIds, nameof(NuGetCodeFixProvider))
+            {
+            }
         }
 
         private sealed class VsixCodeFixProvider : AbstractNuGetOrVsixCodeFixProvider
         {
             public VsixCodeFixProvider(ImmutableArray<string> fixableDiagnsoticIds)
-                : base(fixableDiagnsoticIds, nameof(VsixCodeFixProvider)) { }
+                : base(fixableDiagnsoticIds, nameof(VsixCodeFixProvider))
+            {
+            }
         }
 
         private abstract class AbstractNuGetOrVsixCodeFixProvider : CodeFixProvider

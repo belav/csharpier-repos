@@ -1632,7 +1632,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | ReservedAttributes.NativeIntegerAttribute
                         | ReservedAttributes.RequiredMemberAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.DisallowNullAttribute))
             {
                 arguments

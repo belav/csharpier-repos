@@ -10,7 +10,9 @@ class Foo : IDisposable
 {
     public bool IsConstructed { get; } = true;
 
-    public Foo(int ignored) { }
+    public Foo(int ignored)
+    {
+    }
 
     ~Foo()
     {
@@ -42,7 +44,9 @@ class Runtime_4781
             int x = Throw();
             return new Foo(x);
         }
-        catch { }
+        catch
+        {
+        }
         return new Foo(2);
     }
 

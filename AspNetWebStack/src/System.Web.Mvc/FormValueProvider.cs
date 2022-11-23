@@ -14,7 +14,9 @@ namespace System.Web.Mvc
                 new UnvalidatedRequestValuesWrapper(
                     controllerContext.HttpContext.Request.Unvalidated
                 )
-            ) { }
+            )
+        {
+        }
 
         // For unit testing
         internal FormValueProvider(
@@ -25,6 +27,8 @@ namespace System.Web.Mvc
                 controllerContext.HttpContext.Request.Form,
                 unvalidatedValues.Form,
                 CultureInfo.CurrentCulture
-            ) { }
+            )
+        {
+        }
     }
 }

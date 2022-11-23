@@ -24,7 +24,9 @@ public sealed class NullableListComparer<TElement, TCollection> : ValueComparer<
             (a, b) => Compare(a, b, (ValueComparer<TElement>)elementComparer),
             o => GetHashCode(o, (ValueComparer<TElement>)elementComparer),
             source => Snapshot(source, (ValueComparer<TElement>)elementComparer, readOnly)
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

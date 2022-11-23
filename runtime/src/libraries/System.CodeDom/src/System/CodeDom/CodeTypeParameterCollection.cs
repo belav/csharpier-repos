@@ -7,7 +7,9 @@ namespace System.CodeDom
 {
     public class CodeTypeParameterCollection : CollectionBase
     {
-        public CodeTypeParameterCollection() { }
+        public CodeTypeParameterCollection()
+        {
+        }
 
         public CodeTypeParameterCollection(CodeTypeParameterCollection value)
         {

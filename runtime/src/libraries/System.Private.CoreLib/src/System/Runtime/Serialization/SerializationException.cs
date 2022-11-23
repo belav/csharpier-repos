@@ -30,6 +30,8 @@ namespace System.Runtime.Serialization
         }
 
         protected SerializationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

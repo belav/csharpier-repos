@@ -52,7 +52,9 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
             return new List<string>();
         }
 
-        public void Populate<T>(IList<T> list) { }
+        public void Populate<T>(IList<T> list)
+        {
+        }
     }
 
     public class Proxy : GenInterfaceWithGenericTypes

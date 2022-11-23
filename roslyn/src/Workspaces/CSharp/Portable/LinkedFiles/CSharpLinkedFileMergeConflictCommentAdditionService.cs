@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpLinkedFileMergeConflictCommentAdditionService() { }
+        public CSharpLinkedFileMergeConflictCommentAdditionService()
+        {
+        }
 
         internal override string GetConflictCommentText(
             string header,

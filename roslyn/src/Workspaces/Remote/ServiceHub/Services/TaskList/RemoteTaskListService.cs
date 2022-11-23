@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteTaskListService(in ServiceConstructionArguments arguments) : base(arguments)
-        { }
+        {
+        }
 
         public ValueTask<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(
             Checksum solutionChecksum,

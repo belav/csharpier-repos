@@ -33,7 +33,9 @@ public class TestServerTests
                             serviceProvider => new TestServer(serviceProvider)
                         );
                     })
-                    .Configure(app => { });
+                    .Configure(app =>
+                    {
+                    });
             })
             .Build();
         await host.StartAsync();
@@ -48,7 +50,11 @@ public class TestServerTests
         using var host = await new HostBuilder()
             .ConfigureWebHost(webBuilder =>
             {
-                webBuilder.UseTestServer().Configure(app => { });
+                webBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                    });
             })
             .StartAsync();
 
@@ -62,7 +68,11 @@ public class TestServerTests
         using var host = await new HostBuilder()
             .ConfigureWebHost(webBuilder =>
             {
-                webBuilder.UseTestServer().Configure(app => { });
+                webBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                    });
             })
             .StartAsync();
 
@@ -76,7 +86,11 @@ public class TestServerTests
         using var host = await new HostBuilder()
             .ConfigureWebHost(webBuilder =>
             {
-                webBuilder.UseTestServer().Configure(app => { });
+                webBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                    });
             })
             .StartAsync();
 
@@ -88,13 +102,21 @@ public class TestServerTests
     {
         // Arrange
         // Act & Assert (Does not throw)
-        new TestServer(new WebHostBuilder().Configure(app => { }));
+        new TestServer(
+            new WebHostBuilder().Configure(app =>
+            {
+            })
+        );
     }
 
     [Fact]
     public void CreateWithDelegate_DI()
     {
-        var builder = new WebHostBuilder().Configure(app => { }).UseTestServer();
+        var builder = new WebHostBuilder()
+            .Configure(app =>
+            {
+            })
+            .UseTestServer();
 
         using var host = builder.Build();
         host.Start();
@@ -194,7 +216,9 @@ public class TestServerTests
     {
         var testService = new TestService();
         var builder = new WebHostBuilder()
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .ConfigureServices(services =>
             {
                 services.AddSingleton(testService);
@@ -324,7 +348,9 @@ public class TestServerTests
     [Fact]
     public void TestServerConstructorWithNullFeatureCollectionThrows()
     {
-        var builder = new WebHostBuilder().Configure(b => { });
+        var builder = new WebHostBuilder().Configure(b =>
+        {
+        });
 
         Assert.Throws<ArgumentNullException>(() => new TestServer(builder, null));
     }
@@ -349,7 +375,9 @@ public class TestServerTests
         var testService = new TestService();
         var builder = new WebHostBuilder()
             .ConfigureServices(services => services.AddSingleton(testService))
-            .Configure(_ => { });
+            .Configure(_ =>
+            {
+            });
 
         // Act
         var testServer = new TestServer(builder);
@@ -369,7 +397,9 @@ public class TestServerTests
                 webBuilder
                     .UseTestServer()
                     .ConfigureServices(services => services.AddSingleton(testService))
-                    .Configure(_ => { });
+                    .Configure(_ =>
+                    {
+                    });
             })
             .StartAsync();
 
@@ -396,7 +426,9 @@ public class TestServerTests
                         options.PreserveExecutionContext = true;
                         options.BaseAddress = baseAddress;
                     })
-                    .Configure(_ => { });
+                    .Configure(_ =>
+                    {
+                    });
             })
             .StartAsync();
 
@@ -903,9 +935,13 @@ public class TestServerTests
         }
     }
 
-    public interface IProxyHttpContext { }
+    public interface IProxyHttpContext
+    {
+    }
 
-    public interface IProxyException { }
+    public interface IProxyException
+    {
+    }
 
     public class Startup
     {
@@ -917,7 +953,9 @@ public class TestServerTests
 
     public class SimpleService
     {
-        public SimpleService() { }
+        public SimpleService()
+        {
+        }
 
         public string Message { get; set; }
     }
@@ -929,7 +967,9 @@ public class TestServerTests
             services.AddSingleton<SimpleService>();
         }
 
-        public void ConfigureFooServices(IServiceCollection services) { }
+        public void ConfigureFooServices(IServiceCollection services)
+        {
+        }
 
         public void Configure(IApplicationBuilder app)
         {

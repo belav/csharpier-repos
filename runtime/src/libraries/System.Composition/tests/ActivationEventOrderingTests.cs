@@ -12,7 +12,9 @@ using Xunit;
 namespace System.Composition.UnitTests
 {
     [Export]
-    public class Imported { }
+    public class Imported
+    {
+    }
 
     [Export]
     public class TracksImportSatisfaction

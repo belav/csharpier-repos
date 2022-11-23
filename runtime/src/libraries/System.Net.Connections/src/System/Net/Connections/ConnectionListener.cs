@@ -48,7 +48,9 @@ namespace System.Net.Connections
         /// Disposes the <see cref="ConnectionFactory"/>.
         /// </summary>
         /// <param name="disposing">If true, the <see cref="ConnectionFactory"/> is being disposed. If false, the <see cref="ConnectionFactory"/> is being finalized.</param>
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         /// <summary>
         /// Asynchronously disposes the <see cref="ConnectionFactory"/>.

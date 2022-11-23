@@ -1,8 +1,12 @@
 using System;
 
-public interface IX { }
+public interface IX
+{
+}
 
-public interface IY : IX { }
+public interface IY : IX
+{
+}
 
 public class X : IX
 {
@@ -30,7 +34,9 @@ public interface IB : IA
     new IY Prop { get; }
 }
 
-public interface IC : IB { }
+public interface IC : IB
+{
+}
 
 public class A : IA
 {
@@ -53,7 +59,9 @@ public class B : A, IA, IB
     }
 }
 
-public class C : B, IC { }
+public class C : B, IC
+{
+}
 
 class MainClass
 {

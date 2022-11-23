@@ -2327,7 +2327,9 @@ namespace System.Xml
 
         internal DocumentXPathNodeIterator_AllElemChildren(
             DocumentXPathNodeIterator_AllElemChildren other
-        ) : base(other) { }
+        ) : base(other)
+        {
+        }
 
         public override XPathNodeIterator Clone()
         {
@@ -2346,11 +2348,15 @@ namespace System.Xml
         : DocumentXPathNodeIterator_AllElemChildren
     {
         internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(DocumentXPathNavigator nav)
-            : base(nav) { }
+            : base(nav)
+        {
+        }
 
         internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(
             DocumentXPathNodeIterator_AllElemChildren_AndSelf other
-        ) : base(other) { }
+        ) : base(other)
+        {
+        }
 
         public override XPathNodeIterator Clone()
         {
@@ -2416,11 +2422,15 @@ namespace System.Xml
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName(
             DocumentXPathNavigator nav,
             string nsAtom
-        ) : base(nav, nsAtom) { }
+        ) : base(nav, nsAtom)
+        {
+        }
 
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName(
             DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName other
-        ) : base(other) { }
+        ) : base(other)
+        {
+        }
 
         public override XPathNodeIterator Clone()
         {
@@ -2501,7 +2511,9 @@ namespace System.Xml
 
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf(
             DocumentXPathNodeIterator_ElemChildren_AndSelf other
-        ) : base(other) { }
+        ) : base(other)
+        {
+        }
 
         public override XPathNodeIterator Clone()
         {

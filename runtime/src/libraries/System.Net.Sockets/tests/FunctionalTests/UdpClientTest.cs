@@ -1173,9 +1173,13 @@ namespace System.Net.Sockets.Tests
 
         private sealed class DerivedUdpClient : UdpClient
         {
-            public DerivedUdpClient() { }
+            public DerivedUdpClient()
+            {
+            }
 
-            public DerivedUdpClient(string hostname, int port) : base(hostname, port) { }
+            public DerivedUdpClient(string hostname, int port) : base(hostname, port)
+            {
+            }
 
             ~DerivedUdpClient()
             {

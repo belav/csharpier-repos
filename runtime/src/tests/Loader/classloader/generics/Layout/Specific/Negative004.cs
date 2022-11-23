@@ -17,7 +17,9 @@ public class GenBase<T>
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public class GenInt : GenBase<int> { }
+public class GenInt : GenBase<int>
+{
+}
 
 public class GenTest
 {

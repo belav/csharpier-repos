@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ReadOnlySiteLinkCollection : ReadOnlyCollectionBase
     {
-        internal ReadOnlySiteLinkCollection() { }
+        internal ReadOnlySiteLinkCollection()
+        {
+        }
 
         public ActiveDirectorySiteLink this[int index]
         {

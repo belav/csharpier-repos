@@ -310,7 +310,9 @@ namespace System.Threading.Tasks
                     {
                         m_cancellationRegistration.Value.Dispose();
                     }
-                    catch (ObjectDisposedException) { }
+                    catch (ObjectDisposedException)
+                    {
+                    }
                     m_cancellationRegistration = null;
                 }
             }
@@ -407,7 +409,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action and <see cref="System.Threading.CancellationToken">CancellationToken</see>.
@@ -428,7 +432,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action and creation options.
@@ -454,7 +460,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action and creation options.
@@ -488,7 +496,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action and state.
@@ -507,7 +517,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action, state, and options.
@@ -530,7 +542,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action, state, and options.
@@ -557,7 +571,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action, state, and options.
@@ -593,7 +609,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// An internal constructor used by the factory methods on task and its descendent(s).
@@ -3459,7 +3477,9 @@ namespace System.Threading.Tasks
         // Used in SpinThenBlockingWait (below), but could be seen as a general purpose mechanism.
         private sealed class SetOnInvokeMres : ManualResetEventSlim, ITaskCompletionAction
         {
-            internal SetOnInvokeMres() : base(false, 0) { }
+            internal SetOnInvokeMres() : base(false, 0)
+            {
+            }
 
             public void Invoke(Task completingTask)
             {
@@ -3997,7 +4017,9 @@ namespace System.Threading.Tasks
             //
 
             // Wait for any concurrent adds or removes to be retired
-            lock (continuations) { }
+            lock (continuations)
+            {
+            }
             int continuationCount = continuations.Count;
 
             // Fire the asynchronous continuations first. However, if we're not able to run any continuations synchronously,
@@ -7882,7 +7904,9 @@ namespace System.Threading.Tasks
 
     // Special internal struct that we use to signify that we are not interested in
     // a Task<VoidTaskResult>'s result.
-    internal struct VoidTaskResult { }
+    internal struct VoidTaskResult
+    {
+    }
 
     // Interface to which all completion actions must conform.
     // This interface allows us to combine functionality and reduce allocations.

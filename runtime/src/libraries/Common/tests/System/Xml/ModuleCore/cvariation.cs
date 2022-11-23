@@ -20,7 +20,9 @@ namespace OLEDB.Test.ModuleCore
         private TestFunc _pfunc = null;
 
         //Constructor
-        public CVariation(CTestCase testcase) : this(testcase, null) { }
+        public CVariation(CTestCase testcase) : this(testcase, null)
+        {
+        }
 
         public CVariation(CTestCase testcase, string desc)
             : this(testcase, desc, "Variation_" + (testcase.GetVariationCount() + 1))

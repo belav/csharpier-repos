@@ -14,7 +14,9 @@ public class ConnectionItems : IDictionary<object, object?>
     /// <summary>
     /// Initializes a new instance of <see cref="ConnectionItems"/>.
     /// </summary>
-    public ConnectionItems() : this(new Dictionary<object, object?>()) { }
+    public ConnectionItems() : this(new Dictionary<object, object?>())
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ConnectionItems"/> with <paramref name="items"/>.

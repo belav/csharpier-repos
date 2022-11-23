@@ -23,7 +23,9 @@ namespace Algorithms
         }
 
         public VectorDoubleStrictRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc) { }
+            : base(dp, abortFunc)
+        {
+        }
 
         // Render the fractal on multiple threads using the ComplexVecDouble data type
         // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs

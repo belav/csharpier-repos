@@ -18,7 +18,9 @@ namespace Wasm.Build.Tests
     public class WorkloadTests : BuildTestBase
     {
         public WorkloadTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext) { }
+            : base(output, buildContext)
+        {
+        }
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.Windows, "Not applicable on windows")]

@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SemanticModelReuseWorkspaceServiceFactory() { }
+        public SemanticModelReuseWorkspaceServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new SemanticModelReuseWorkspaceService(workspaceServices.Workspace);

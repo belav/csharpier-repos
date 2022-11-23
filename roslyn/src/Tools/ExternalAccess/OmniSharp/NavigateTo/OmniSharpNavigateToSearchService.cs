@@ -76,8 +76,12 @@ internal static class OmniSharpNavigateToSearcher
             return _callback(project, omniSharpResult, cancellationToken);
         }
 
-        public void Done(bool isFullyLoaded) { }
+        public void Done(bool isFullyLoaded)
+        {
+        }
 
-        public void ReportProgress(int current, int maximum) { }
+        public void ReportProgress(int current, int maximum)
+        {
+        }
     }
 }

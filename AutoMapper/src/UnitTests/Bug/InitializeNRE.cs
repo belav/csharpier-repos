@@ -2,7 +2,9 @@
 
 public class InitializeNRE2 : AutoMapperSpecBase
 {
-    public interface IRes : IValueResolver<Source, Destination, int> { }
+    public interface IRes : IValueResolver<Source, Destination, int>
+    {
+    }
 
     public class Res : IRes
     {
@@ -17,7 +19,9 @@ public class InitializeNRE2 : AutoMapperSpecBase
         }
     }
 
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Destination
     {

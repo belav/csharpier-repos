@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             public static readonly CSharpSyntaxRewriter Instance =
                 new ConvertValueToReturnsRewriter();
 
-            private ConvertValueToReturnsRewriter() { }
+            private ConvertValueToReturnsRewriter()
+            {
+            }
 
             private static XmlNameSyntax ConvertToReturns(XmlNameSyntax name) =>
                 name.ReplaceToken(name.LocalName, SyntaxFactory.Identifier("returns"));

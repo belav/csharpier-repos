@@ -11,15 +11,25 @@ using TypeOfRepo;
 
 public class InterfacesTests
 {
-    public interface IInterface<T> { }
+    public interface IInterface<T>
+    {
+    }
 
-    public class Gen<T> : IInterface<T> { }
+    public class Gen<T> : IInterface<T>
+    {
+    }
 
-    public class Recursive<T> : IInterface<Recursive<T>> { }
+    public class Recursive<T> : IInterface<Recursive<T>>
+    {
+    }
 
-    public class DoublyRecursive<T> : Recursive<T> { }
+    public class DoublyRecursive<T> : Recursive<T>
+    {
+    }
 
-    public class WithInterfaceOverArrayType<T> : IInterface<T[]> { }
+    public class WithInterfaceOverArrayType<T> : IInterface<T[]>
+    {
+    }
 
     public interface IFrobber<T>
     {
@@ -95,11 +105,15 @@ public class InterfacesTests
         }
     }
 
-    public class DerivedTypeIGnr<T, U> : GenBaseTypeIGnr<T>, IGnr<U> { }
+    public class DerivedTypeIGnr<T, U> : GenBaseTypeIGnr<T>, IGnr<U>
+    {
+    }
 
     public class DerivedTypeIGnrExplicitBasetypeInstantiation<T, U>
         : GenBaseTypeIGnr<string>,
-            IGnr<U> { }
+            IGnr<U>
+    {
+    }
 
     [TestMethod]
     public static void TestGenericCollapsingInInterfaceMap()

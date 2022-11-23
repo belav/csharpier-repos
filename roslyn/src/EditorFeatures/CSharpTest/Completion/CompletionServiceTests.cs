@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public ThirdPartyCompletionProvider() { }
+            public ThirdPartyCompletionProvider()
+            {
+            }
 
             public override Task ProvideCompletionsAsync(CompletionContext context) =>
                 Task.CompletedTask;
@@ -183,7 +185,9 @@ namespace N
 
             var generatorRanCount = 0;
             var generator = new CallbackGenerator(
-                onInit: _ => { },
+                onInit: _ =>
+                {
+                },
                 onExecute: _ => Interlocked.Increment(ref generatorRanCount)
             );
 

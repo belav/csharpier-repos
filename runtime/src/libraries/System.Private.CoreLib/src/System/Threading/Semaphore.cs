@@ -13,10 +13,14 @@ namespace System.Threading
         // creates a nameless semaphore object
         // Win32 only takes maximum count of int.MaxValue
         public Semaphore(int initialCount, int maximumCount)
-            : this(initialCount, maximumCount, null) { }
+            : this(initialCount, maximumCount, null)
+        {
+        }
 
         public Semaphore(int initialCount, int maximumCount, string? name)
-            : this(initialCount, maximumCount, name, out _) { }
+            : this(initialCount, maximumCount, name, out _)
+        {
+        }
 
         public Semaphore(int initialCount, int maximumCount, string? name, out bool createdNew)
         {

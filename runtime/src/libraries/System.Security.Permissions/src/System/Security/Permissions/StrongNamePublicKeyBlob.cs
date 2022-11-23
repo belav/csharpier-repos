@@ -12,7 +12,9 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class StrongNamePublicKeyBlob
     {
-        public StrongNamePublicKeyBlob(byte[] publicKey) { }
+        public StrongNamePublicKeyBlob(byte[] publicKey)
+        {
+        }
 
         public override bool Equals(object o) => base.Equals(o);
 

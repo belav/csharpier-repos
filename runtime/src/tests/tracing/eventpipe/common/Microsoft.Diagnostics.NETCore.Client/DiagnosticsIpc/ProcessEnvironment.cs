@@ -16,7 +16,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
         ) /* 16KiB */
         ;
 
-        private ProcessEnvironmentHelper() { }
+        private ProcessEnvironmentHelper()
+        {
+        }
 
         public static ProcessEnvironmentHelper Parse(byte[] payload)
         {

@@ -20,7 +20,9 @@ public class IPAddressToStringConverter : ValueConverter<IPAddress?, string?>
     /// <summary>
     ///     Creates a new instance of this converter.
     /// </summary>
-    public IPAddressToStringConverter() : this(null) { }
+    public IPAddressToStringConverter() : this(null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -33,7 +35,9 @@ public class IPAddressToStringConverter : ValueConverter<IPAddress?, string?>
     ///     facets for the converted data.
     /// </param>
     public IPAddressToStringConverter(ConverterMappingHints? mappingHints)
-        : base(ToString(), ToIPAddress(), DefaultHints.With(mappingHints)) { }
+        : base(ToString(), ToIPAddress(), DefaultHints.With(mappingHints))
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

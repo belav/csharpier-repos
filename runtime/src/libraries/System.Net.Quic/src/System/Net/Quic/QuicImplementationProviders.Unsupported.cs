@@ -14,7 +14,9 @@ namespace System.Net.Quic
 
         private sealed class UnsupportedQuicImplementationProvider : QuicImplementationProvider
         {
-            internal UnsupportedQuicImplementationProvider() : base(false) { }
+            internal UnsupportedQuicImplementationProvider() : base(false)
+            {
+            }
 
             public override bool IsSupported => false;
         }
@@ -27,6 +29,8 @@ namespace System.Net.Quic.Implementations
     {
         // alternative constructor because currently it is not possible to exlude ctors from
         // PNSE autogeneration (https://github.com/dotnet/arcade/issues/8676)
-        internal QuicImplementationProvider(bool _) { }
+        internal QuicImplementationProvider(bool _)
+        {
+        }
     }
 }

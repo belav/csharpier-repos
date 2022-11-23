@@ -145,7 +145,9 @@ namespace EncodingTests
     // a simple fallback class which fallback using the character sequence 'a', 'b', 'c',...etc.
     internal sealed class EncoderCustomFallback : EncoderFallback
     {
-        public EncoderCustomFallback() { }
+        public EncoderCustomFallback()
+        {
+        }
 
         public string DefaultString
         {

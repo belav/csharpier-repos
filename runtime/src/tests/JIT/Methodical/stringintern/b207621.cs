@@ -28,7 +28,9 @@ public class Test_b207621
                 b = FooBar();
                 throw new Exception();
             }
-            catch (System.Exception) { }
+            catch (System.Exception)
+            {
+            }
 
             Console.Write("Dynamic interning of non fixed up string...");
             if ((object)a != (object)b)
@@ -47,7 +49,9 @@ public class Test_b207621
                 b = FooBar();
                 throw new Exception();
             }
-            catch (System.Exception) { }
+            catch (System.Exception)
+            {
+            }
 
             Console.Write("Dynamic interning of fixed up string...");
             if ((object)a != (object)b)
@@ -66,7 +70,9 @@ public class Test_b207621
                 b = "Hello World non fixed up";
                 throw new Exception();
             }
-            catch (System.Exception) { }
+            catch (System.Exception)
+            {
+            }
 
             Console.Write("Dynamic interning of string that is not in fixup list...");
             if ((object)a != (object)b)

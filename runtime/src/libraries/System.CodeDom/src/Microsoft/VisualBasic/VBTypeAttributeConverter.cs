@@ -7,7 +7,9 @@ namespace Microsoft.VisualBasic
 {
     internal sealed class VBTypeAttributeConverter : VBModifierAttributeConverter
     {
-        private VBTypeAttributeConverter() { } // no  need to create an instance; use Default
+        private VBTypeAttributeConverter()
+        {
+        } // no  need to create an instance; use Default
 
         public static VBTypeAttributeConverter Default { get; } = new VBTypeAttributeConverter();
         protected override string[] Names { get; } = new[] { "Public", "Friend" };

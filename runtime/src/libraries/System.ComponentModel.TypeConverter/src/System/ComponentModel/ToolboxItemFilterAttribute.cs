@@ -50,7 +50,9 @@ namespace System.ComponentModel
         /// "Allow".
         /// </summary>
         public ToolboxItemFilterAttribute(string filterString)
-            : this(filterString, ToolboxItemFilterType.Allow) { }
+            : this(filterString, ToolboxItemFilterType.Allow)
+        {
+        }
 
         /// <summary>
         /// Initializes a new ToolboxItemFilterAttribute with the provide filter string and filter type.

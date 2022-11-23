@@ -502,7 +502,9 @@ namespace System.PrivateUri.Tests
                     Assert.Equal(uriInput, uri.AbsoluteUri); //"Unexpected URI normalization behavior."
                     Assert.Equal(expectedToString, uri.ToString()); //"Unexpected URI normalization behavior."
                 }
-                catch (FormatException) { }
+                catch (FormatException)
+                {
+                }
             }
         }
 
@@ -529,7 +531,9 @@ namespace System.PrivateUri.Tests
                 Uri u = new Uri(bigString2);
                 Assert.False(true, "Expected UriFormatException: Uri too large");
             }
-            catch (FormatException) { }
+            catch (FormatException)
+            {
+            }
         }
 
         [Theory]

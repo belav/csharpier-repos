@@ -18,7 +18,9 @@ namespace Test
             {
                 while (b)
                 {
-                    while (b) { }
+                    while (b)
+                    {
+                    }
                 }
             }
             return 100;

@@ -56,7 +56,9 @@ public class ShortEnregisteredLocal
                 int __loopvar4 = s_loopInvariant;
                 s_int_8 < s_int_8;
                 __loopvar4 += 3, uint_51 &= 15 / 4
-            ) { }
+            )
+            {
+            }
             Log("s2_55", s2_55);
             return float_27 /= 15 + 4;
         }
@@ -67,7 +69,9 @@ public class ShortEnregisteredLocal
         unchecked
         {
             S2 s2_137 = new S2();
-            do { } while (
+            do
+            {
+            } while (
                 Method1(ref float_27, out s_s2_17, s_byte_3, s2_137, ref int_24) - LeafMethod9()
                 == (s_float_11 *= 15 + 4)
                     / Method1(ref float_27, out s2_33, LeafMethod1(), s2_33, ref s_int_8)
@@ -84,5 +88,7 @@ public class ShortEnregisteredLocal
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void Log(string varName, object varValue) { }
+    public static void Log(string varName, object varValue)
+    {
+    }
 }

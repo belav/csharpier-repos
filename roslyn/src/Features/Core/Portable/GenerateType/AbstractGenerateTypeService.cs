@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
         where TTypeDeclarationSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
     {
-        protected AbstractGenerateTypeService() { }
+        protected AbstractGenerateTypeService()
+        {
+        }
 
         protected abstract bool TryInitializeState(
             SemanticDocument document,

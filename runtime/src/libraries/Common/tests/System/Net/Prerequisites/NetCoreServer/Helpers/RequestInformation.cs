@@ -96,6 +96,8 @@ namespace NetCoreServer
             return JsonConvert.SerializeObject(this, new NameValueCollectionConverter());
         }
 
-        private RequestInformation() { }
+        private RequestInformation()
+        {
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tags
         /// </summary>
         public string Name { get; set; }
 
-        public ExportImageIdServiceAttribute() : base(typeof(IImageIdService)) { }
+        public ExportImageIdServiceAttribute() : base(typeof(IImageIdService))
+        {
+        }
     }
 }

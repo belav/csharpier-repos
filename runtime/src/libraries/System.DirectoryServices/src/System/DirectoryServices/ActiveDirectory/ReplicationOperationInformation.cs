@@ -9,7 +9,9 @@ namespace System.DirectoryServices.ActiveDirectory
         internal ReplicationOperation? currentOp;
         internal ReplicationOperationCollection? collection;
 
-        public ReplicationOperationInformation() { }
+        public ReplicationOperationInformation()
+        {
+        }
 
         public DateTime OperationStartTime => startTime;
 

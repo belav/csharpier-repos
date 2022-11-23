@@ -4,9 +4,13 @@
 using System;
 using Xunit;
 
-internal class BaseException : Exception { }
+internal class BaseException : Exception
+{
+}
 
-internal class DerivedException : BaseException { }
+internal class DerivedException : BaseException
+{
+}
 
 public class Test_cast_throw
 {

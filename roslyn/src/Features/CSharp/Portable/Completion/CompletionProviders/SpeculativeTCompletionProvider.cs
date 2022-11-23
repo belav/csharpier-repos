@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SpeculativeTCompletionProvider() { }
+        public SpeculativeTCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

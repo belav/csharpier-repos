@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpIfLikeStatementGenerator() { }
+        public CSharpIfLikeStatementGenerator()
+        {
+        }
 
         public bool IsIfOrElseIf(SyntaxNode node) => node is IfStatementSyntax;
 

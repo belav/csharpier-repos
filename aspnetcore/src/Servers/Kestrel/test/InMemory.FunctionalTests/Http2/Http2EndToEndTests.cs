@@ -104,7 +104,9 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
             _scopeProvider = scopeProvider;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private class MockScopeLogger : ILogger
         {

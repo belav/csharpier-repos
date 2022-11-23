@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReassignedVariable
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpReassignedVariableService() { }
+        public CSharpReassignedVariableService()
+        {
+        }
 
         protected override SyntaxToken GetIdentifierOfVariable(VariableDeclaratorSyntax variable) =>
             variable.Identifier;

@@ -73,10 +73,14 @@ namespace Castle.DynamicProxy.Tests
 
 			#region IMulti Members
 
-            public void OriginalMethod1() { }
+            public void OriginalMethod1()
+            {
+            }
 
             // VIRTUAL method
-            public virtual void OriginalMethod2() { }
+            public virtual void OriginalMethod2()
+            {
+            }
 
 			#endregion
         }
@@ -87,7 +91,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [Guid("AFCF8240-61AF-4089-BD98-3CD4D719EDBA")]
-        public interface IWithGuid { }
+        public interface IWithGuid
+        {
+        }
 
         [Test]
         public void CanGetCorrectValuesFromIntPtr()
@@ -438,7 +444,9 @@ namespace Castle.DynamicProxy.Tests
 
     public class WithInternalMethod
     {
-        internal virtual void Foo() { }
+        internal virtual void Foo()
+        {
+        }
     }
 
     public interface IDoubleGeneric<One>

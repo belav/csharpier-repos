@@ -39,7 +39,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     internal class AutomationDelegatingListViewAutomationPeer : FrameworkElementAutomationPeer
     {
         public AutomationDelegatingListViewAutomationPeer(AutomationDelegatingListView listView)
-            : base(listView) { }
+            : base(listView)
+        {
+        }
 
         protected override List<AutomationPeer>? GetChildrenCore()
         {

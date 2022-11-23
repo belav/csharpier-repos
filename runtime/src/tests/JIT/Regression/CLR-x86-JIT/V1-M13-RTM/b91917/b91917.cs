@@ -28,8 +28,12 @@ class CC
         {
             while (b == null)
             {
-                do { } while ((bool)b);
-                while ((bool)b) { }
+                do
+                {
+                } while ((bool)b);
+                while ((bool)b)
+                {
+                }
                 GC.Collect();
             }
         }

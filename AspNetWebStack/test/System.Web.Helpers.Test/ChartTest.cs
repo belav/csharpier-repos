@@ -958,7 +958,9 @@ namespace System.Web.Helpers.Test
 
             class MockVirtualFile : VirtualFile
             {
-                public MockVirtualFile(string virtualPath) : base(virtualPath) { }
+                public MockVirtualFile(string virtualPath) : base(virtualPath)
+                {
+                }
 
                 public override Stream Open()
                 {

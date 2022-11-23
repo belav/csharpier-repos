@@ -9,7 +9,9 @@ class GCD
     private int _val = -2;
     private int _exitcode = -1;
 
-    public GCD() { }
+    public GCD()
+    {
+    }
 
     public int GetExitCode()
     {
@@ -50,7 +52,9 @@ class ExecuteCodeWithGuaranteedCleanupTest
             RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(t, c, val);
 #pragma warning restore SYSLIB0004
         }
-        catch (Exception Ex) { }
+        catch (Exception Ex)
+        {
+        }
 
         int res = gcd.GetExitCode();
         if (res != 100)

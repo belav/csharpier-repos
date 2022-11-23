@@ -35,12 +35,16 @@ public partial class IISExpressDeployer : IISDeployerBase
     public IISExpressDeployer(
         DeploymentParameters deploymentParameters,
         ILoggerFactory loggerFactory
-    ) : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
+    ) : base(new IISDeploymentParameters(deploymentParameters), loggerFactory)
+    {
+    }
 
     public IISExpressDeployer(
         IISDeploymentParameters deploymentParameters,
         ILoggerFactory loggerFactory
-    ) : base(deploymentParameters, loggerFactory) { }
+    ) : base(deploymentParameters, loggerFactory)
+    {
+    }
 
     protected override string ApplicationHostConfigPath =>
         DeploymentParameters.ServerConfigLocation;
@@ -612,7 +616,9 @@ public partial class IISExpressDeployer : IISDeployerBase
                     "CA1822:Mark members as static",
                     Justification = "This method is part of the marshaller shape and is required to be an instance method."
                 )]
-                public void Free() { }
+                public void Free()
+                {
+                }
             }
         }
     }

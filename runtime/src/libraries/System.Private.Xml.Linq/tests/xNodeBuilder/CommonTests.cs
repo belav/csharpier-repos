@@ -1758,7 +1758,9 @@ namespace CoreXml.Test.XLinq
                             Path.Combine("XmlWriter2", "XmlReader.xml")
                         )
                     );
-                    while (xr.Read()) { }
+                    while (xr.Read())
+                    {
+                    }
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
                     w.WriteStartElement("Root");
@@ -1779,7 +1781,9 @@ namespace CoreXml.Test.XLinq
                             Path.Combine("XmlWriter2", "XmlReader.xml")
                         )
                     );
-                    while (xr.Read()) { }
+                    while (xr.Read())
+                    {
+                    }
                     xr.Dispose();
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);

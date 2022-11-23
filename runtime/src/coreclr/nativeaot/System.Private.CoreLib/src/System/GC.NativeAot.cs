@@ -486,7 +486,9 @@ namespace System
 
         [Intrinsic]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // disable optimizations
-        public static void KeepAlive(object? obj) { }
+        public static void KeepAlive(object? obj)
+        {
+        }
 
         // Returns the maximum GC generation.  Currently assumes only 1 heap.
         //

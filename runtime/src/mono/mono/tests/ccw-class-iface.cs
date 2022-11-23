@@ -30,7 +30,9 @@ public interface IDrupe
     int parent_iface_method();
 }
 
-public class TestGeneric<T, V> { }
+public class TestGeneric<T, V>
+{
+}
 
 public class TestParent : IDrupe
 {
@@ -95,7 +97,9 @@ public class TestAutoDual : TestParent, IBanana, ICherry
         return 0;
     }
 
-    public TestAutoDual(int arg) { }
+    public TestAutoDual(int arg)
+    {
+    }
 
     public int iface2_method()
     {

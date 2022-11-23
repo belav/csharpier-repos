@@ -202,5 +202,7 @@ public class EnumerableWrapperProviderFactoryTest
         public string Name { get; set; }
     }
 
-    internal class PersonList : List<Person> { }
+    internal class PersonList : List<Person>
+    {
+    }
 }

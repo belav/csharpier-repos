@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class PropertyValuesSqlServerTest
     : PropertyValuesTestBase<PropertyValuesSqlServerTest.PropertyValuesSqlServerFixture>
 {
-    public PropertyValuesSqlServerTest(PropertyValuesSqlServerFixture fixture) : base(fixture) { }
+    public PropertyValuesSqlServerTest(PropertyValuesSqlServerFixture fixture) : base(fixture)
+    {
+    }
 
     public class PropertyValuesSqlServerFixture : PropertyValuesFixtureBase
     {

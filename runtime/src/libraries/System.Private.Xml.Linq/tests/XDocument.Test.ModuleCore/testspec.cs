@@ -334,6 +334,8 @@ namespace Microsoft.Test.ModuleCore
         public object UserData = null;
 
         public CXmlElement(string prefix, string name, string namespaceURI, CXmlDocument xmldoc)
-            : base(prefix, name, namespaceURI, xmldoc) { }
+            : base(prefix, name, namespaceURI, xmldoc)
+        {
+        }
     }
 }

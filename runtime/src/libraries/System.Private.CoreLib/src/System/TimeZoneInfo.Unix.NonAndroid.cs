@@ -135,8 +135,12 @@ namespace System
                     }
                 }
             }
-            catch (IOException) { }
-            catch (UnauthorizedAccessException) { }
+            catch (IOException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
 
             return timeZoneIds;
         }
@@ -352,9 +356,15 @@ namespace System
                     }
                 }
             }
-            catch (IOException) { }
-            catch (SecurityException) { }
-            catch (UnauthorizedAccessException) { }
+            catch (IOException)
+            {
+            }
+            catch (SecurityException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
 
             return false;
         }
@@ -409,9 +419,15 @@ namespace System
                     }
                 );
             }
-            catch (IOException) { }
-            catch (SecurityException) { }
-            catch (UnauthorizedAccessException) { }
+            catch (IOException)
+            {
+            }
+            catch (SecurityException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
 
             return id;
         }
@@ -438,9 +454,15 @@ namespace System
                     }
                     return true;
                 }
-                catch (IOException) { }
-                catch (SecurityException) { }
-                catch (UnauthorizedAccessException) { }
+                catch (IOException)
+                {
+                }
+                catch (SecurityException)
+                {
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
             }
             return false;
         }

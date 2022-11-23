@@ -24,7 +24,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
             : base(
                 nameof(BasicGoToDefinition),
                 WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary
-            ) { }
+            )
+        {
+        }
 
         [IdeFact]
         public async Task GoToClassDeclaration()

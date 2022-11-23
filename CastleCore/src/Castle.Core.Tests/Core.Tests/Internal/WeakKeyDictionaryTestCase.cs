@@ -1097,8 +1097,12 @@ namespace Castle.Core.Internal.Tests
             return (IEnumerable)collection;
         }
 
-        private sealed class TKey { }
+        private sealed class TKey
+        {
+        }
 
-        private sealed class TValue { }
+        private sealed class TValue
+        {
+        }
     }
 }

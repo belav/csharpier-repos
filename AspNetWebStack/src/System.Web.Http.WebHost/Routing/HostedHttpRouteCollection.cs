@@ -17,7 +17,9 @@ namespace System.Web.Http.WebHost.Routing
         private readonly string _virtualPathRoot;
 
         public HostedHttpRouteCollection(RouteCollection routeCollection)
-            : this(routeCollection, virtualPathRoot: null) { }
+            : this(routeCollection, virtualPathRoot: null)
+        {
+        }
 
         public HostedHttpRouteCollection(RouteCollection routeCollection, string virtualPathRoot)
         {

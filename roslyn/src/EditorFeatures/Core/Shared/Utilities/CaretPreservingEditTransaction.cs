@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 description,
                 undoHistoryRegistry.GetHistory(textView.TextBuffer),
                 editorOperationsFactoryService.GetEditorOperations(textView)
-            ) { }
+            )
+        {
+        }
 
         public CaretPreservingEditTransaction(
             string description,

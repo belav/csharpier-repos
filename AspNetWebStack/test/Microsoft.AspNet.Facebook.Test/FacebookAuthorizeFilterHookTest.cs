@@ -382,7 +382,9 @@ namespace Microsoft.AspNet.Facebook.Test
 
         private class CustomInvalidAuthorizeFilter : FacebookAuthorizeFilter
         {
-            public CustomInvalidAuthorizeFilter(FacebookConfiguration config) : base(config) { }
+            public CustomInvalidAuthorizeFilter(FacebookConfiguration config) : base(config)
+            {
+            }
 
             protected override void OnCannotCreateCookies(PermissionContext context)
             {
@@ -402,7 +404,9 @@ namespace Microsoft.AspNet.Facebook.Test
 
         private class CustomDefaultAuthorizeFilter : FacebookAuthorizeFilter
         {
-            public CustomDefaultAuthorizeFilter(FacebookConfiguration config) : base(config) { }
+            public CustomDefaultAuthorizeFilter(FacebookConfiguration config) : base(config)
+            {
+            }
 
             public bool CannotCreateCookiesHookTriggered { get; private set; }
             public bool PermissionPromptHookTriggered { get; private set; }

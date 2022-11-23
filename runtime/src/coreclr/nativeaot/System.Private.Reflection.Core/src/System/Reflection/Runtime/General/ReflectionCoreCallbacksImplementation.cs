@@ -26,7 +26,9 @@ namespace System.Reflection.Runtime.General
 {
     internal sealed class ReflectionCoreCallbacksImplementation : ReflectionCoreCallbacks
     {
-        internal ReflectionCoreCallbacksImplementation() { }
+        internal ReflectionCoreCallbacksImplementation()
+        {
+        }
 
         public sealed override Assembly Load(AssemblyName assemblyRef, bool throwOnFileNotFound)
         {

@@ -22,7 +22,9 @@ class A
         {
             Test();
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 100;
     }
 }

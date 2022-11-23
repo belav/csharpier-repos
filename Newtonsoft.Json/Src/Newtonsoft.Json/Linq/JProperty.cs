@@ -329,7 +329,9 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="name">The property name.</param>
         /// <param name="content">The property content.</param>
-        public JProperty(string name, params object[] content) : this(name, (object)content) { }
+        public JProperty(string name, params object[] content) : this(name, (object)content)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JProperty"/> class.

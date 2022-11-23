@@ -42,7 +42,9 @@ namespace N
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void CallSomeMethod(int n = 0) { }
+        static void CallSomeMethod(int n = 0)
+        {
+        }
 
         static int SharedTop(int n, int a, int b, int x, int y)
         {
@@ -82,7 +84,9 @@ namespace N
                     node = node.next;
                 }
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException)
+            {
+            }
             return false;
         }
 

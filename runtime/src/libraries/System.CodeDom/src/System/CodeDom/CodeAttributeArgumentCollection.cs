@@ -7,7 +7,9 @@ namespace System.CodeDom
 {
     public class CodeAttributeArgumentCollection : CollectionBase
     {
-        public CodeAttributeArgumentCollection() { }
+        public CodeAttributeArgumentCollection()
+        {
+        }
 
         public CodeAttributeArgumentCollection(CodeAttributeArgumentCollection value)
         {

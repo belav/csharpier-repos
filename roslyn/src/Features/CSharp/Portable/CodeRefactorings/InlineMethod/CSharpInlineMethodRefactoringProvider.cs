@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpInlineMethodRefactoringProvider()
-            : base(CSharpSyntaxFacts.Instance, CSharpSemanticFactsService.Instance) { }
+            : base(CSharpSyntaxFacts.Instance, CSharpSemanticFactsService.Instance)
+        {
+        }
 
         protected override ExpressionSyntax? GetRawInlineExpression(
             BaseMethodDeclarationSyntax methodDeclarationSyntax

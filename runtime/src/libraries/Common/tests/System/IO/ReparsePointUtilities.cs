@@ -75,12 +75,16 @@ public static partial class MountHelper
         {
             File.Delete(path);
         }
-        catch { }
+        catch
+        {
+        }
         try
         {
             File.Delete(linkPath);
         }
-        catch { }
+        catch
+        {
+        }
 
         // Verify directory symlink creation
         path = Path.GetTempFileName();
@@ -91,12 +95,16 @@ public static partial class MountHelper
         {
             Directory.Delete(path);
         }
-        catch { }
+        catch
+        {
+        }
         try
         {
             Directory.Delete(linkPath);
         }
-        catch { }
+        catch
+        {
+        }
 
         // Reduce the risk we accidentally stop running these altogether
         // on Windows, due to a bug in CreateSymbolicLink

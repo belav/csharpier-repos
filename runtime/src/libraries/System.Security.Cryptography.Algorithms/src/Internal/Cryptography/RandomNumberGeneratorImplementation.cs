@@ -13,7 +13,9 @@ namespace System.Security.Cryptography
             new RandomNumberGeneratorImplementation();
 
         // private ctor used only by singleton
-        private RandomNumberGeneratorImplementation() { }
+        private RandomNumberGeneratorImplementation()
+        {
+        }
 
         // As long as each implementation can provide a static GetBytes(ref byte buf, int length)
         // they can share this one implementation of FillSpan.

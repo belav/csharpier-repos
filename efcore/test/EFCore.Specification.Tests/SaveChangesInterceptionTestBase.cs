@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 {
-    protected SaveChangesInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
+    protected SaveChangesInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(false, false, false)]
@@ -78,7 +80,9 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         Assert.Equal(1, context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35));
     }
 
-    protected class PassiveSaveChangesInterceptor : SaveChangesInterceptorBase { }
+    protected class PassiveSaveChangesInterceptor : SaveChangesInterceptorBase
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(false, false, false)]

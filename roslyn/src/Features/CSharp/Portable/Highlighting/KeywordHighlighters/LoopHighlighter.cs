@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LoopHighlighter() { }
+        public LoopHighlighter()
+        {
+        }
 
         protected override bool IsHighlightableNode(SyntaxNode node) =>
             node.IsContinuableConstruct();

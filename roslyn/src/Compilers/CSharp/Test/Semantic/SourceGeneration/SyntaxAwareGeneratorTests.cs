@@ -75,7 +75,8 @@ class C { }
             ISyntaxReceiver? receiver = null;
 
             var testGenerator = new CallbackGenerator(
-                onInit: (i) => { },
+                onInit: (i) => {
+                },
                 onExecute: (e) => receiver = e.SyntaxReceiver
             );
 
@@ -143,7 +144,8 @@ class C { }
             ISyntaxContextReceiver? receiver = null;
 
             var testGenerator = new CallbackGenerator(
-                onInit: (i) => { },
+                onInit: (i) => {
+                },
                 onExecute: (e) => receiver = e.SyntaxContextReceiver
             );
 
@@ -611,13 +613,15 @@ class D
             );
             var testGenerator1 = new CallbackGenerator(
                 onInit: (i) => i.RegisterForSyntaxNotifications(() => receiver1),
-                onExecute: (e) => { }
+                onExecute: (e) => {
+                }
             );
 
             TestSyntaxReceiver receiver2 = new TestSyntaxReceiver(tag: 1);
             var testGenerator2 = new CallbackGenerator2(
                 onInit: (i) => i.RegisterForSyntaxNotifications(() => receiver2),
-                onExecute: (e) => { }
+                onExecute: (e) => {
+                }
             );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -675,7 +679,8 @@ class C
                                 }
                             )
                     ),
-                onExecute: (e) => { }
+                onExecute: (e) => {
+                }
             );
 
             ISyntaxReceiver? receiver = null;
@@ -1007,7 +1012,8 @@ class D
             var testGenerator2 = new CallbackGenerator2(
                 onInit: (i) =>
                     i.RegisterForPostInitialization((pic) => pic.AddSource("postInit", source2)),
-                onExecute: (e) => { }
+                onExecute: (e) => {
+                }
             );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1092,7 +1098,8 @@ class D
                         (pic) => pic.AddSource("postInit", postInitSource)
                     );
                 },
-                onExecute: (e) => { }
+                onExecute: (e) => {
+                }
             );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1674,7 +1681,11 @@ class D
                             .Identifier
                             .ValueText
                 );
-                context.RegisterSourceOutput(source, (spc, fieldName) => { });
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) => {
+                    }
+                );
             });
 
             var testGenerator2 = new PipelineCallbackGenerator2(context =>
@@ -1686,7 +1697,11 @@ class D
                             .Identifier
                             .ValueText
                 );
-                context.RegisterSourceOutput(source, (spc, fieldName) => { });
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) => {
+                    }
+                );
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -2186,7 +2201,11 @@ class C
                 source = source
                     .WithComparer(new LambdaComparer<string>((a, b) => true))
                     .WithTrackingName("Fields");
-                context.RegisterSourceOutput(source, (spc, fieldName) => { });
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) => {
+                    }
+                );
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -2294,7 +2313,11 @@ class C
                 source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
                 source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
                 source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
-                context.RegisterSourceOutput(source, (spc, fieldName) => { });
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) => {
+                    }
+                );
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -2450,12 +2473,14 @@ class C
 
                 context.RegisterSourceOutput(
                     source.Select((s, ct) => $"Output1_{s}").WithTrackingName("Output"),
-                    (spc, fieldName) => { }
+                    (spc, fieldName) => {
+                    }
                 );
 
                 context.RegisterSourceOutput(
                     source.Select((s, ct) => $"Output2_{s}").WithTrackingName("Output"),
-                    (spc, fieldName) => { }
+                    (spc, fieldName) => {
+                    }
                 );
             });
 
@@ -2572,7 +2597,8 @@ class C
 
                 context.RegisterSourceOutput(
                     source2.Select((value, ct) => value.Left.Left.Left).WithTrackingName("Output"),
-                    (spc, output) => { }
+                    (spc, output) => {
+                    }
                 );
             });
 
@@ -2669,7 +2695,8 @@ class C
                 var joinedSource = source.Combine(comparerSource.Collect());
                 context.RegisterSourceOutput(
                     joinedSource.Select((value, ct) => value.Left).WithTrackingName("Output"),
-                    (spc, fieldName) => { }
+                    (spc, fieldName) => {
+                    }
                 );
             });
 
@@ -2777,7 +2804,8 @@ class C
                         },
                         (c, _) => c.Node
                     ),
-                    (spc, s) => { }
+                    (spc, s) => {
+                    }
                 );
             });
 
@@ -2840,7 +2868,8 @@ class C
                         (s, _) => s is AssignmentExpressionSyntax,
                         (c, _) => throw exception
                     ),
-                    (spc, s) => { }
+                    (spc, s) => {
+                    }
                 );
             });
 
@@ -2903,7 +2932,8 @@ class C
                         (s, _) => s is AssignmentExpressionSyntax,
                         (c, _) => throw exception
                     ),
-                    (spc, s) => { }
+                    (spc, s) => {
+                    }
                 );
             });
 
@@ -3159,7 +3189,8 @@ class C
                             return true;
                         }
                     ),
-                    (spc, s) => { }
+                    (spc, s) => {
+                    }
                 );
             }).AsSourceGenerator();
 
@@ -3174,7 +3205,8 @@ class C
                             return true;
                         }
                     ),
-                    (spc, s) => { }
+                    (spc, s) => {
+                    }
                 );
                 ctx.RegisterSourceOutput(
                     ctx.SyntaxProvider.CreateSyntaxProvider<object>(
@@ -3185,7 +3217,8 @@ class C
                             return true;
                         }
                     ),
-                    (spc, s) => { }
+                    (spc, s) => {
+                    }
                 );
             }).AsSourceGenerator();
 
@@ -3244,7 +3277,9 @@ class C
         private class TestSyntaxReceiver : TestReceiverBase<SyntaxNode>, ISyntaxReceiver
         {
             public TestSyntaxReceiver(int tag = 0, Action<SyntaxNode>? callback = null)
-                : base(tag, callback) { }
+                : base(tag, callback)
+            {
+            }
         }
 
         private class TestSyntaxContextReceiver
@@ -3254,7 +3289,9 @@ class C
             public TestSyntaxContextReceiver(
                 int tag = 0,
                 Action<GeneratorSyntaxContext>? callback = null
-            ) : base(tag, callback) { }
+            ) : base(tag, callback)
+            {
+            }
         }
     }
 }

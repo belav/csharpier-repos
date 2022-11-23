@@ -38,7 +38,9 @@ namespace Test
 
     public class Setting<T>
     {
-        Setting() { }
+        Setting()
+        {
+        }
 
         public Setting(T value)
         {

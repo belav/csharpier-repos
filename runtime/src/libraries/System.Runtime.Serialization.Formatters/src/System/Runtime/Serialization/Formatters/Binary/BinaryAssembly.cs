@@ -10,7 +10,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int _assemId;
         internal string? _assemblyString;
 
-        internal BinaryAssembly() { }
+        internal BinaryAssembly()
+        {
+        }
 
         internal void Set(int assemId, string assemblyString)
         {

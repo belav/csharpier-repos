@@ -1457,7 +1457,9 @@ namespace System.Threading.Tasks.Tests
 
             public bool IsCompleted => false;
 
-            public void GetResult() { }
+            public void GetResult()
+            {
+            }
 
             public void OnCompleted(Action continuation) =>
                 Task.Factory.StartNew(

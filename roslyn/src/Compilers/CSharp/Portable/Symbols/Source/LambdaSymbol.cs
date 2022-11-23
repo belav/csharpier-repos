@@ -459,6 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool IsNullableAnalysisEnabled() =>
             throw ExceptionUtilities.Unreachable();
 
-        protected override void NoteAttributesComplete(bool forReturnType) { }
+        protected override void NoteAttributesComplete(bool forReturnType)
+        {
+        }
     }
 }

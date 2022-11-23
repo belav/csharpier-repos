@@ -374,9 +374,13 @@ namespace System.Text.RegularExpressions.Tests
 
         private sealed class DerivedRegex : Regex
         {
-            public DerivedRegex() { }
+            public DerivedRegex()
+            {
+            }
 
-            public DerivedRegex(string pattern) : base(pattern) { }
+            public DerivedRegex(string pattern) : base(pattern)
+            {
+            }
 
             public new void InitializeReferences() => base.InitializeReferences();
 
@@ -408,10 +412,14 @@ namespace System.Text.RegularExpressions.Tests
         [Serializable]
         private sealed class SerializableDerivedRegex : Regex
         {
-            public SerializableDerivedRegex() : base("") { }
+            public SerializableDerivedRegex() : base("")
+            {
+            }
 
             public SerializableDerivedRegex(SerializationInfo info, StreamingContext context)
-                : base(info, context) { }
+                : base(info, context)
+            {
+            }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

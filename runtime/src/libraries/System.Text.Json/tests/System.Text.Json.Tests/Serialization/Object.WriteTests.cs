@@ -213,7 +213,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 JsonSerializer.SerializeToUtf8Bytes(items);
             }
-            catch (OutOfMemoryException) { }
+            catch (OutOfMemoryException)
+            {
+            }
 
             items.AddRange(Enumerable.Repeat(dto, 1000).ToList());
             Assert.Throws<OutOfMemoryException>(() => JsonSerializer.SerializeToUtf8Bytes(items));

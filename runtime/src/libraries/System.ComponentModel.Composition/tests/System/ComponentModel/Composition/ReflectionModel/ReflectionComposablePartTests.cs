@@ -605,12 +605,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class MethodExporter
         {
             [Export("Method")]
-            public void Method() { }
+            public void Method()
+            {
+            }
         }
 
         [PartNotDiscoverable]
         [Export]
-        public class TypeExporter { }
+        public class TypeExporter
+        {
+        }
 
         [Fact]
         public void GetExportedObjectAlwaysReturnsSameReference_ForProperty()
@@ -660,15 +664,21 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class MethodWithoutContractName
         {
             [Export]
-            public void MethodWithoutContractNameNotAllowed() { }
+            public void MethodWithoutContractNameNotAllowed()
+            {
+            }
         }
 
-        public interface IContract { }
+        public interface IContract
+        {
+        }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
         public class CustomImportAttributeInvalidTarget : ImportAttribute
         {
-            public CustomImportAttributeInvalidTarget() : base(typeof(IContract)) { }
+            public CustomImportAttributeInvalidTarget() : base(typeof(IContract))
+            {
+            }
         }
 
         [PartNotDiscoverable]
@@ -682,7 +692,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class ImportWithCustomImportInvalidTarget
         {
             [CustomImportAttributeInvalidTarget]
-            void InvalidImport() { }
+            void InvalidImport()
+            {
+            }
         }
 
         [Fact]
@@ -722,7 +734,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class ImportManyWithCustomImportManyInvalidTarget
         {
             [CustomImportMany]
-            void InvalidImportMany() { }
+            void InvalidImportMany()
+            {
+            }
         }
 
         [Fact]
@@ -754,28 +768,36 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = false)]
         public class CustomImportingConstructorAttribute : ImportingConstructorAttribute
         {
-            public CustomImportingConstructorAttribute() : base() { }
+            public CustomImportingConstructorAttribute() : base()
+            {
+            }
         }
 
         [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = true, Inherited = false)]
         public class CustomImportingConstructorAllowMultipleAttribute
             : ImportingConstructorAttribute
         {
-            public CustomImportingConstructorAllowMultipleAttribute() : base() { }
+            public CustomImportingConstructorAllowMultipleAttribute() : base()
+            {
+            }
         }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
         public class CustomImportingConstructorInvalidTargetAttribute
             : ImportingConstructorAttribute
         {
-            public CustomImportingConstructorInvalidTargetAttribute() : base() { }
+            public CustomImportingConstructorInvalidTargetAttribute() : base()
+            {
+            }
         }
 
         [PartNotDiscoverable]
         public class ImportingConstructorWithCustomImportingConstructor
         {
             [CustomImportingConstructor]
-            ImportingConstructorWithCustomImportingConstructor([Import] IContract argument) { }
+            ImportingConstructorWithCustomImportingConstructor([Import] IContract argument)
+            {
+            }
         }
 
         [PartNotDiscoverable]
@@ -785,14 +807,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
             [CustomImportingConstructorAllowMultiple]
             ImportingConstructorWithCustomImportingConstructorAllowMultiple(
                 [Import] IContract argument
-            ) { }
+            )
+            {
+            }
         }
 
         [PartNotDiscoverable]
         public class ImportingConstructorWithCustomImportingConstructorInvalidTarget
         {
             [CustomImportingConstructorInvalidTarget]
-            void InvalidImportingConstructor() { }
+            void InvalidImportingConstructor()
+            {
+            }
         }
 
         [Fact]
@@ -884,7 +910,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             [Import(AllowDefault = true)]
             public int Foo { get; set; }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         private ReflectionComposablePart CreateDefaultDisposablePart()

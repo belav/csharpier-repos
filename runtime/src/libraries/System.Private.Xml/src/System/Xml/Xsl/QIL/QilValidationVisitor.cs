@@ -37,7 +37,9 @@ namespace System.Xml.Xsl.Qil
             new QilValidationVisitor().VisitAssumeReference(node);
         }
 
-        private QilValidationVisitor() { }
+        private QilValidationVisitor()
+        {
+        }
 
 #if DEBUG
         private Hashtable allNodes = new ObjectHashtable();

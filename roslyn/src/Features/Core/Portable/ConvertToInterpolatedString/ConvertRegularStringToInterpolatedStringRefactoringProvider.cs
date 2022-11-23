@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public ConvertRegularStringToInterpolatedStringRefactoringProvider() { }
+        public ConvertRegularStringToInterpolatedStringRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

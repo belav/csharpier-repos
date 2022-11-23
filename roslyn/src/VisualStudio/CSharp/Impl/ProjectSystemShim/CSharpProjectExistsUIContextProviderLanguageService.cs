@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpProjectExistsUIContextProviderLanguageService() { }
+        public CSharpProjectExistsUIContextProviderLanguageService()
+        {
+        }
 
         public UIContext GetUIContext() =>
             UIContext.FromUIContextGuid(Guids.CSharpProjectExistsInWorkspaceUIContext);

@@ -117,7 +117,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         ImmutableHashSet.Create<IIncrementalAnalyzer>(),
                         retry: false,
                         asyncToken
-                    ) { }
+                    )
+                {
+                }
 
                 public WorkItem(
                     DocumentId documentId,
@@ -139,7 +141,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             : ImmutableHashSet.Create(analyzer),
                         retry: false,
                         asyncToken
-                    ) { }
+                    )
+                {
+                }
 
                 public object Key => DocumentId ?? (object)ProjectId;
 

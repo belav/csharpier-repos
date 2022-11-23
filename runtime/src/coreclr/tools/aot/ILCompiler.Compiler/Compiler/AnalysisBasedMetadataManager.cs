@@ -49,7 +49,9 @@ namespace ILCompiler
                 Array.Empty<ReflectableEntity<FieldDesc>>(),
                 Array.Empty<ReflectableCustomAttribute>(),
                 Array.Empty<MetadataType>()
-            ) { }
+            )
+        {
+        }
 
         public AnalysisBasedMetadataManager(
             CompilerTypeSystemContext typeSystemContext,

@@ -126,7 +126,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 var value = new IpcTcpSocketEndPoint(address);
                 isLooback = IPAddress.IsLoopback(value.EndPoint.Address);
             }
-            catch { }
+            catch
+            {
+            }
 
             return isLooback;
         }

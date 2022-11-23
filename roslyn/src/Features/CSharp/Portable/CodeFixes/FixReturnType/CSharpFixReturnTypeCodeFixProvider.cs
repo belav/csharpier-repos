@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpFixReturnTypeCodeFixProvider() : base(supportsFixAll: false) { }
+        public CSharpFixReturnTypeCodeFixProvider() : base(supportsFixAll: false)
+        {
+        }
 
         internal override CodeFixCategory CodeFixCategory => CodeFixCategory.Compile;
 
@@ -201,7 +203,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
                     CSharpFeaturesResources.Fix_return_type,
                     createChangedDocument,
                     CSharpFeaturesResources.Fix_return_type
-                ) { }
+                )
+            {
+            }
         }
     }
 }

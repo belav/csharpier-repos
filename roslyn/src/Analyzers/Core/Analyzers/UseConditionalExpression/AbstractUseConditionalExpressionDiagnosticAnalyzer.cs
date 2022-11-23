@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     typeof(AnalyzersResources)
                 ),
                 message
-            ) { }
+            )
+        {
+        }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
         protected abstract bool TryMatchPattern(

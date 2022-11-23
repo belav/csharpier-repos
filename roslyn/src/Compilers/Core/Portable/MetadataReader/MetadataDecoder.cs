@@ -63,7 +63,9 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal FieldInfo(TypeSymbol type)
-            : this(isByRef: false, refCustomModifiers: default, type, customModifiers: default) { }
+            : this(isByRef: false, refCustomModifiers: default, type, customModifiers: default)
+        {
+        }
     }
 
     [StructLayout(LayoutKind.Auto)]
@@ -2518,7 +2520,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return resultBuilder.ToImmutableAndFree();
         }
@@ -2618,7 +2622,9 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return null;
         }
@@ -2924,7 +2930,9 @@ namespace Microsoft.CodeAnalysis
                         return GetSymbolForMemberRef((MemberReferenceHandle)token);
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             // error: unexpected token in IL
             return null;

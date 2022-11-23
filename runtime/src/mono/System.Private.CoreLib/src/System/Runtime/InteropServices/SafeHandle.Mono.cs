@@ -5,5 +5,7 @@ namespace System.Runtime.InteropServices
 {
     // Mono runtime relies on exact layout
     [StructLayout(LayoutKind.Sequential)]
-    public abstract partial class SafeHandle { }
+    public abstract partial class SafeHandle
+    {
+    }
 }

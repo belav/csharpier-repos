@@ -494,7 +494,9 @@ namespace CseTest
 #endif
 #if TRY
             }
-            finally { }
+            finally
+            {
+            }
 #endif
 #if LOOP
             } while (ret == 1000);

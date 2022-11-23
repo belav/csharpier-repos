@@ -547,7 +547,9 @@ namespace System.ComponentModel.Composition
 
         private class NoOverridesContractBasedImportDefinition : ContractBasedImportDefinition
         {
-            public NoOverridesContractBasedImportDefinition() { }
+            public NoOverridesContractBasedImportDefinition()
+            {
+            }
         }
 
         private class DerivedContractBasedImportDefinition : ContractBasedImportDefinition

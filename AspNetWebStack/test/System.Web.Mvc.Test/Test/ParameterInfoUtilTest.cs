@@ -161,7 +161,9 @@ namespace System.Web.Mvc.Test
             public void DefaultValues(
                 string noDefaultValue,
                 [DefaultValue("someValue")] string hasDefaultValue
-            ) { }
+            )
+            {
+            }
 
             public void AttributeDefaultValues(
                 [DefaultValue(true)] bool boolParam,
@@ -176,7 +178,9 @@ namespace System.Web.Mvc.Test
                 [DefaultValue(null)] object objectParam,
                 [DefaultValue((short)42)] short shortParam,
                 [DefaultValue("abc")] string stringParam
-            ) { }
+            )
+            {
+            }
 
             public void OptionalParamDefaultValues(
                 bool boolParam = true,
@@ -190,7 +194,9 @@ namespace System.Web.Mvc.Test
                 object objectParam = null,
                 short shortParam = 42,
                 string stringParam = "abc"
-            ) { }
+            )
+            {
+            }
         }
 
         private enum MyEnum

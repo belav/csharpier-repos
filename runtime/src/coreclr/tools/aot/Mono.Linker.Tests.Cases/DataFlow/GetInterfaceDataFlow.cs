@@ -261,8 +261,12 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
         }
 
-        interface ITestInterface { }
+        interface ITestInterface
+        {
+        }
 
-        class TestType : ITestInterface { }
+        class TestType : ITestInterface
+        {
+        }
     }
 }

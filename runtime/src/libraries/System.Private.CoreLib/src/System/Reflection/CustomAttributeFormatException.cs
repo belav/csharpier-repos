@@ -11,9 +11,13 @@ namespace System.Reflection
     )]
     public class CustomAttributeFormatException : FormatException
     {
-        public CustomAttributeFormatException() : this(SR.Arg_CustomAttributeFormatException) { }
+        public CustomAttributeFormatException() : this(SR.Arg_CustomAttributeFormatException)
+        {
+        }
 
-        public CustomAttributeFormatException(string? message) : this(message, null) { }
+        public CustomAttributeFormatException(string? message) : this(message, null)
+        {
+        }
 
         public CustomAttributeFormatException(string? message, Exception? inner)
             : base(message, inner)
@@ -22,6 +26,8 @@ namespace System.Reflection
         }
 
         protected CustomAttributeFormatException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

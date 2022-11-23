@@ -20,7 +20,9 @@ public partial class FileContentResultExecutor
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     public FileContentResultExecutor(ILoggerFactory loggerFactory)
-        : base(CreateLogger<FileContentResultExecutor>(loggerFactory)) { }
+        : base(CreateLogger<FileContentResultExecutor>(loggerFactory))
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task ExecuteAsync(ActionContext context, FileContentResult result)

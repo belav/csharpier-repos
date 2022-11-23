@@ -9,7 +9,9 @@ namespace Identity.DefaultUI.WebSite;
 
 public class PocoUserStartup : StartupBase<PocoUser, IdentityDbContext>
 {
-    public PocoUserStartup(IConfiguration configuration) : base(configuration) { }
+    public PocoUserStartup(IConfiguration configuration) : base(configuration)
+    {
+    }
 
     public override void ConfigureServices(IServiceCollection services)
     {

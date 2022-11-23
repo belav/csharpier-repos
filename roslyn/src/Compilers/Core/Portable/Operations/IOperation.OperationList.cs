@@ -158,7 +158,9 @@ namespace Microsoft.CodeAnalysis
                 public IOperation Current => _enumerator.Current;
                 object? IEnumerator.Current => _enumerator.Current;
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 public bool MoveNext() => _enumerator.MoveNext();
 

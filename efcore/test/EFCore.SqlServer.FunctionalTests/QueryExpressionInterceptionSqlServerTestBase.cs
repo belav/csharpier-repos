@@ -9,7 +9,9 @@ public abstract class QueryExpressionInterceptionSqlServerTestBase
     : QueryExpressionInterceptionTestBase
 {
     protected QueryExpressionInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public abstract class InterceptionSqlServerFixtureBase : InterceptionFixtureBase
     {
@@ -38,7 +40,9 @@ public abstract class QueryExpressionInterceptionSqlServerTestBase
             IClassFixture<QueryExpressionInterceptionSqlServerTest.InterceptionSqlServerFixture>
     {
         public QueryExpressionInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
@@ -54,7 +58,9 @@ public abstract class QueryExpressionInterceptionSqlServerTestBase
     {
         public QueryExpressionInterceptionWithDiagnosticsSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        ) : base(fixture)
+        {
+        }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {

@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.ValueTracking
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ValueTrackingService() { }
+        public ValueTrackingService()
+        {
+        }
 
         public async Task<ImmutableArray<ValueTrackedItem>> TrackValueSourceAsync(
             TextSpan selection,

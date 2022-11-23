@@ -214,7 +214,9 @@ public class Ex
                 return 16;
 
             ocount = 0;
-            try { }
+            try
+            {
+            }
             catch
             {
                 ocount++;

@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
     internal sealed class EmbeddedMethod : EmbeddedTypesManager.CommonEmbeddedMethod
     {
         public EmbeddedMethod(EmbeddedType containingType, MethodSymbolAdapter underlyingMethod)
-            : base(containingType, underlyingMethod) { }
+            : base(containingType, underlyingMethod)
+        {
+        }
 
         internal override EmbeddedTypesManager TypeManager
         {

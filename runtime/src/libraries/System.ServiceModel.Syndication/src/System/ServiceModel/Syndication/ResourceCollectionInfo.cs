@@ -14,20 +14,28 @@ namespace System.ServiceModel.Syndication
         private Collection<CategoriesDocument> _categories;
         private ExtensibleSyndicationObject _extensions;
 
-        public ResourceCollectionInfo() { }
+        public ResourceCollectionInfo()
+        {
+        }
 
         public ResourceCollectionInfo(string title, Uri link)
-            : this((title == null) ? null : new TextSyndicationContent(title), link) { }
+            : this((title == null) ? null : new TextSyndicationContent(title), link)
+        {
+        }
 
         public ResourceCollectionInfo(TextSyndicationContent title, Uri link)
-            : this(title, link, null, null) { }
+            : this(title, link, null, null)
+        {
+        }
 
         public ResourceCollectionInfo(
             TextSyndicationContent title,
             Uri link,
             IEnumerable<CategoriesDocument> categories,
             bool allowsNewEntries
-        ) : this(title, link, categories, (allowsNewEntries) ? null : CreateSingleEmptyAccept()) { }
+        ) : this(title, link, categories, (allowsNewEntries) ? null : CreateSingleEmptyAccept())
+        {
+        }
 
         public ResourceCollectionInfo(
             TextSyndicationContent title,

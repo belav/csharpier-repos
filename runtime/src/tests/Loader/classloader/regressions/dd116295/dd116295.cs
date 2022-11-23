@@ -9,7 +9,9 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        public struct A { }
+        public struct A
+        {
+        }
 
         public struct B
         {

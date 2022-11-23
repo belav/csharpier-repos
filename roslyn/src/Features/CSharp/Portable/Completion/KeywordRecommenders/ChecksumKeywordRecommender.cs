@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ChecksumKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ChecksumKeywordRecommender()
-            : base(SyntaxKind.ChecksumKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.ChecksumKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

@@ -116,7 +116,9 @@ namespace System.ComponentModel.Tests
             public string getsetproperty { get; set; }
         }
 
-        public class MulticaseSubSubClass : MulticaseSubClass { }
+        public class MulticaseSubSubClass : MulticaseSubClass
+        {
+        }
 
         [Fact]
         public void ApplyResources_IComponentWithNullSite_Success()
@@ -189,7 +191,9 @@ namespace System.ComponentModel.Tests
             public event EventHandler Disposed;
 #pragma warning restore 0067
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public string GetSetProperty { get; set; }
         }

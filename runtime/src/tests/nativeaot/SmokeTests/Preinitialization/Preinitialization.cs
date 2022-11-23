@@ -509,7 +509,9 @@ class TestTryCatch
 class TestBadClass
 {
     [StructLayout(LayoutKind.Explicit)]
-    class BadLayoutClass<T> { }
+    class BadLayoutClass<T>
+    {
+    }
 
     static int s_cookie;
     static object s_badClass;
@@ -840,7 +842,9 @@ unsafe class TestFunctionPointers
         internal static WithFunctionPointer s_foo { get; } =
             new WithFunctionPointer() { Ptr = (delegate* <void>)&X };
 
-        internal static void X() { }
+        internal static void X()
+        {
+        }
     }
 
     public static void Run()

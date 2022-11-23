@@ -32,7 +32,9 @@ namespace System.Dynamic
         /// <see cref="DynamicObject"/> instances cannot be directly instantiated because they have no
         /// implementation of dynamic behavior.
         /// </remarks>
-        protected DynamicObject() { }
+        protected DynamicObject()
+        {
+        }
 
         #region Public Virtual APIs
 
@@ -219,7 +221,9 @@ namespace System.Dynamic
         private sealed class MetaDynamic : DynamicMetaObject
         {
             internal MetaDynamic(Expression expression, DynamicObject value)
-                : base(expression, BindingRestrictions.Empty, value) { }
+                : base(expression, BindingRestrictions.Empty, value)
+            {
+            }
 
             public override IEnumerable<string> GetDynamicMemberNames() =>
                 Value.GetDynamicMemberNames();
@@ -978,7 +982,9 @@ namespace System.Dynamic
             private sealed class GetBinderAdapter : GetMemberBinder
             {
                 internal GetBinderAdapter(InvokeMemberBinder binder)
-                    : base(binder.Name, binder.IgnoreCase) { }
+                    : base(binder.Name, binder.IgnoreCase)
+                {
+                }
 
                 public override DynamicMetaObject FallbackGetMember(
                     DynamicMetaObject target,

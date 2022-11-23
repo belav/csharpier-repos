@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
         where TExpressionSyntax : SyntaxNode
         where TInvocationExpressionSyntax : TExpressionSyntax
     {
-        protected AbstractGenerateParameterizedMemberService() { }
+        protected AbstractGenerateParameterizedMemberService()
+        {
+        }
 
         protected abstract AbstractInvocationInfo CreateInvocationMethodInfo(
             SemanticDocument document,

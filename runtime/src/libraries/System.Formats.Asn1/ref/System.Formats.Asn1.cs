@@ -141,16 +141,24 @@ namespace System.Formats.Asn1
 
     public partial class AsnContentException : System.Exception
     {
-        public AsnContentException() { }
+        public AsnContentException()
+        {
+        }
 
         protected AsnContentException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public AsnContentException(string? message) { }
+        public AsnContentException(string? message)
+        {
+        }
 
-        public AsnContentException(string? message, System.Exception? inner) { }
+        public AsnContentException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     public static partial class AsnDecoder
@@ -513,7 +521,9 @@ namespace System.Formats.Asn1
             System.Formats.Asn1.AsnEncodingRules ruleSet,
             System.Formats.Asn1.AsnReaderOptions options =
                 default(System.Formats.Asn1.AsnReaderOptions)
-        ) { }
+        )
+        {
+        }
 
         public bool HasData
         {
@@ -634,7 +644,9 @@ namespace System.Formats.Asn1
 
         public void ReadNull(
             System.Formats.Asn1.Asn1Tag? expectedTag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public string ReadObjectIdentifier(
             System.Formats.Asn1.Asn1Tag? expectedTag = default(System.Formats.Asn1.Asn1Tag?)
@@ -687,7 +699,9 @@ namespace System.Formats.Asn1
             throw null;
         }
 
-        public void ThrowIfNotEmpty() { }
+        public void ThrowIfNotEmpty()
+        {
+        }
 
         public bool TryReadBitString(
             System.Span<byte> destination,
@@ -793,27 +807,37 @@ namespace System.Formats.Asn1
         public bool SkipSetSortOrderVerification
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int UtcTimeTwoDigitYearMax
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed partial class AsnWriter
     {
-        public AsnWriter(System.Formats.Asn1.AsnEncodingRules ruleSet) { }
+        public AsnWriter(System.Formats.Asn1.AsnEncodingRules ruleSet)
+        {
+        }
 
-        public AsnWriter(System.Formats.Asn1.AsnEncodingRules ruleSet, int initialCapacity) { }
+        public AsnWriter(System.Formats.Asn1.AsnEncodingRules ruleSet, int initialCapacity)
+        {
+        }
 
         public System.Formats.Asn1.AsnEncodingRules RuleSet
         {
             get { throw null; }
         }
 
-        public void CopyTo(System.Formats.Asn1.AsnWriter destination) { }
+        public void CopyTo(System.Formats.Asn1.AsnWriter destination)
+        {
+        }
 
         public byte[] Encode()
         {
@@ -842,15 +866,21 @@ namespace System.Formats.Asn1
 
         public void PopOctetString(
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void PopSequence(
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void PopSetOf(
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public System.Formats.Asn1.AsnWriter.Scope PushOctetString(
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
@@ -873,7 +903,9 @@ namespace System.Formats.Asn1
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         public bool TryEncode(System.Span<byte> destination, out int bytesWritten)
         {
@@ -884,120 +916,166 @@ namespace System.Formats.Asn1
             System.ReadOnlySpan<byte> value,
             int unusedBitCount = 0,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteBoolean(
             bool value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteCharacterString(
             System.Formats.Asn1.UniversalTagNumber encodingType,
             System.ReadOnlySpan<char> str,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteCharacterString(
             System.Formats.Asn1.UniversalTagNumber encodingType,
             string value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
-        public void WriteEncodedValue(System.ReadOnlySpan<byte> value) { }
+        public void WriteEncodedValue(System.ReadOnlySpan<byte> value)
+        {
+        }
 
         public void WriteEnumeratedValue(
             System.Enum value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteEnumeratedValue<TEnum>(
             TEnum value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TEnum : System.Enum { }
+        ) where TEnum : System.Enum
+        {
+        }
 
         public void WriteGeneralizedTime(
             System.DateTimeOffset value,
             bool omitFractionalSeconds = false,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteInteger(
             long value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteInteger(
             System.Numerics.BigInteger value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteInteger(
             System.ReadOnlySpan<byte> value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public void WriteInteger(
             ulong value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteIntegerUnsigned(
             System.ReadOnlySpan<byte> value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteNamedBitList(
             System.Collections.BitArray value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteNamedBitList(
             System.Enum value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteNamedBitList<TEnum>(
             TEnum value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TEnum : System.Enum { }
+        ) where TEnum : System.Enum
+        {
+        }
 
         public void WriteNull(
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteObjectIdentifier(
             System.ReadOnlySpan<char> oidValue,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteObjectIdentifier(
             string oidValue,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteOctetString(
             System.ReadOnlySpan<byte> value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteUtcTime(
             System.DateTimeOffset value,
             int twoDigitYearMax,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public void WriteUtcTime(
             System.DateTimeOffset value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) { }
+        )
+        {
+        }
 
         public readonly partial struct Scope : System.IDisposable
         {
             private readonly object _dummy;
             private readonly int _dummyPrimitive;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 

@@ -58,7 +58,8 @@ namespace System.Threading.Tasks.Tests
                     Action = () => Volatile.Write(ref finalized, true)
                 };
                 var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
-                t = Task.Run(() => { }); // run a task that'll capture EC
+                t = Task.Run(() => {
+                }); // run a task that'll capture EC
                 al.Value = null;
             })
             {

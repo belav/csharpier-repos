@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.StaticKeyword,
         };
 
-        public ReadOnlyKeywordRecommender() : base(SyntaxKind.ReadOnlyKeyword) { }
+        public ReadOnlyKeywordRecommender() : base(SyntaxKind.ReadOnlyKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

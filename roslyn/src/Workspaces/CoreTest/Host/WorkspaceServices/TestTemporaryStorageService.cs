@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestTemporaryStorageService() { }
+        public TestTemporaryStorageService()
+        {
+        }
 
         public ITemporaryStreamStorage CreateTemporaryStreamStorage(
             CancellationToken cancellationToken = default

@@ -386,21 +386,27 @@ public class PropertyTest
 
     private class StaticValueGeneratorFactory : ValueGeneratorFactory
     {
-        private StaticValueGeneratorFactory() { }
+        private StaticValueGeneratorFactory()
+        {
+        }
 
         public override ValueGenerator Create(IProperty property, IEntityType entityType) => null;
     }
 
     private class PrivateValueGeneratorFactory : ValueGeneratorFactory
     {
-        private PrivateValueGeneratorFactory() { }
+        private PrivateValueGeneratorFactory()
+        {
+        }
 
         public override ValueGenerator Create(IProperty property, IEntityType entityType) => null;
     }
 
     private class NonParameterlessValueGeneratorFactory : ValueGeneratorFactory
     {
-        public NonParameterlessValueGeneratorFactory(object _) { }
+        public NonParameterlessValueGeneratorFactory(object _)
+        {
+        }
 
         public override ValueGenerator Create(IProperty property, IEntityType entityType) => null;
     }
@@ -465,24 +471,34 @@ public class PropertyTest
         );
     }
 
-    private class NonDerivedValueConverter { }
+    private class NonDerivedValueConverter
+    {
+    }
 
-    private abstract class AbstractValueConverter : StringToBoolConverter { }
+    private abstract class AbstractValueConverter : StringToBoolConverter
+    {
+    }
 
     private class StaticValueConverter : StringToBoolConverter
     {
-        private StaticValueConverter() { }
+        private StaticValueConverter()
+        {
+        }
     }
 
     private class PrivateValueConverter : StringToBoolConverter
     {
-        private PrivateValueConverter() { }
+        private PrivateValueConverter()
+        {
+        }
     }
 
     private class NonParameterlessValueConverter : StringToBoolConverter
     {
         public NonParameterlessValueConverter(ConverterMappingHints mappingHints = null)
-            : base(mappingHints) { }
+            : base(mappingHints)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -545,27 +561,37 @@ public class PropertyTest
         );
     }
 
-    private class NonDerivedValueComparer { }
+    private class NonDerivedValueComparer
+    {
+    }
 
     private abstract class AbstractValueComparer : ValueComparer<string>
     {
-        public AbstractValueComparer() : base(false) { }
+        public AbstractValueComparer() : base(false)
+        {
+        }
     }
 
     private class StaticValueComparer : ValueComparer<string>
     {
-        private StaticValueComparer() : base(false) { }
+        private StaticValueComparer() : base(false)
+        {
+        }
     }
 
     private class PrivateValueComparer : ValueComparer<string>
     {
-        private PrivateValueComparer() : base(false) { }
+        private PrivateValueComparer() : base(false)
+        {
+        }
     }
 
     private class NonParameterlessValueComparer : ValueComparer<string>
     {
         public NonParameterlessValueComparer(bool favorStructuralComparison)
-            : base(favorStructuralComparison) { }
+            : base(favorStructuralComparison)
+        {
+        }
     }
 
     private static IMutableModel CreateModel() => new Model();

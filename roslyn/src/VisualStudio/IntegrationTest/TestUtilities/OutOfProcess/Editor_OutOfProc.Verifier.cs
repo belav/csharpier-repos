@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public class Verifier : Verifier<Editor_OutOfProc>
         {
             public Verifier(Editor_OutOfProc editor, VisualStudioInstance instance)
-                : base(editor, instance) { }
+                : base(editor, instance)
+            {
+            }
 
             public void CurrentLineText(
                 string expectedText,

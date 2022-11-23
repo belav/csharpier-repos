@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpSimplifyThisOrMeCodeFixProvider() { }
+        public CSharpSimplifyThisOrMeCodeFixProvider()
+        {
+        }
 
         protected override string GetTitle() => CSharpFeaturesResources.Remove_this_qualification;
 

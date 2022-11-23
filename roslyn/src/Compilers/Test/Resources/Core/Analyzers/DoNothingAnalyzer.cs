@@ -14,5 +14,7 @@ public sealed class DoNothingAnalyzer : DiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
         ImmutableArray<DiagnosticDescriptor>.Empty;
 
-    public override void Initialize(AnalysisContext context) { }
+    public override void Initialize(AnalysisContext context)
+    {
+    }
 }

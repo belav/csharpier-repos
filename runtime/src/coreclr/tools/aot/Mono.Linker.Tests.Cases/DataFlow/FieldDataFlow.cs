@@ -208,7 +208,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             MakeArrayValuesUnknown(array);
             TypeStore._staticTypeWithPublicParameterlessConstructor = (Type)array[0];
 
-            static void MakeArrayValuesUnknown(object[] array) { }
+            static void MakeArrayValuesUnknown(object[] array)
+            {
+            }
         }
 
         private static void TestStringEmpty()
@@ -304,24 +306,32 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         private static void RequirePublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] string s
-        ) { }
+        )
+        {
+        }
 
         private static void RequirePublicParameterlessConstructor(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         private static void RequirePublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         private static void RequireNonPublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         [return: DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
@@ -348,7 +358,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             return null;
         }
 
-        private static void RequireNothing(Type type) { }
+        private static void RequireNothing(Type type)
+        {
+        }
 
         class TypeStore
         {

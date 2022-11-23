@@ -32,7 +32,9 @@ namespace System.Collections.Concurrent.Tests
                         Assert.Equal(expect, data);
                         expect++;
                     }
-                    catch (InvalidOperationException) { } // throw when CompleteAdding called
+                    catch (InvalidOperationException)
+                    {
+                    } // throw when CompleteAdding called
                 }
             });
 

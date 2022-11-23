@@ -21,7 +21,9 @@ namespace System.Security.Cryptography.X509Certificates
 
             public SafeHandle? SafeHandle => null;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public void Add(ICertificatePal cert)
             {

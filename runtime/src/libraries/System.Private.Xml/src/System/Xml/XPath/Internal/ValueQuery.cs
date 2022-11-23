@@ -9,11 +9,17 @@ namespace MS.Internal.Xml.XPath
 {
     internal abstract class ValueQuery : Query
     {
-        public ValueQuery() { }
+        public ValueQuery()
+        {
+        }
 
-        protected ValueQuery(ValueQuery other) : base(other) { }
+        protected ValueQuery(ValueQuery other) : base(other)
+        {
+        }
 
-        public sealed override void Reset() { }
+        public sealed override void Reset()
+        {
+        }
 
         public sealed override XPathNavigator Current
         {

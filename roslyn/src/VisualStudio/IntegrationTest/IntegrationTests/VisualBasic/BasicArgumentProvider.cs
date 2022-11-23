@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicArgumentProvider(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicArgumentProvider)) { }
+            : base(instanceFactory, nameof(BasicArgumentProvider))
+        {
+        }
 
         public override async Task InitializeAsync()
         {

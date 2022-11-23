@@ -4626,7 +4626,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.nullable.nu
         Two = 2
     }
 
-    public struct S { }
+    public struct S
+    {
+    }
 
     namespace Test
     {
@@ -4681,7 +4683,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.nullable.nu
         Two = 2
     }
 
-    public struct S { }
+    public struct S
+    {
+    }
 
     namespace Test
     {
@@ -4774,9 +4778,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.nullable.co
             }
         }
 
-        public enum E { }
+        public enum E
+        {
+        }
 
-        public struct S { }
+        public struct S
+        {
+        }
     }
     // </Code>
 }

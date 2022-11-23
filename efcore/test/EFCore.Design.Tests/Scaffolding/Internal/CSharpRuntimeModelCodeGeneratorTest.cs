@@ -130,7 +130,9 @@ namespace TestNamespace
                 }
             );
 
-        public class EmptyContext : ContextBase { }
+        public class EmptyContext : ContextBase
+        {
+        }
 
         [ConditionalFact]
         public void Global_namespace_works() =>
@@ -430,7 +432,9 @@ namespace TestNamespace
 
         private class FakeValueComparer : ValueComparer<int>
         {
-            public FakeValueComparer() : base(false) { }
+            public FakeValueComparer() : base(false)
+            {
+            }
 
             public override Type Type { get; } = typeof(int);
 
@@ -975,7 +979,9 @@ namespace Internal
         private class FullyQualifiedCSharpHelper : CSharpHelper
         {
             public FullyQualifiedCSharpHelper(ITypeMappingSource typeMappingSource)
-                : base(typeMappingSource) { }
+                : base(typeMappingSource)
+            {
+            }
 
             protected override bool ShouldUseFullName(Type type) => base.ShouldUseFullName(type);
 
@@ -3541,7 +3547,9 @@ namespace TestNamespace
 
         public class CustomValueComparer<T> : ValueComparer<T>
         {
-            public CustomValueComparer() : base(false) { }
+            public CustomValueComparer() : base(false)
+            {
+            }
         }
 
         public abstract class AbstractBase
@@ -3584,7 +3592,9 @@ namespace TestNamespace
 
         public class DependentDerived<TKey> : DependentBase<TKey>
         {
-            public DependentDerived(TKey id) : base(id) { }
+            public DependentDerived(TKey id) : base(id)
+            {
+            }
 
             private string Data { get; set; }
         }
@@ -5594,7 +5604,9 @@ namespace TestNamespace
         public Guid Id { get; set; }
     }
 
-    public class IdentityUser : TestModels.AspNetIdentity.IdentityUser { }
+    public class IdentityUser : TestModels.AspNetIdentity.IdentityUser
+    {
+    }
 
     public class SelfReferentialEntity
     {
@@ -5603,7 +5615,9 @@ namespace TestNamespace
         public SelfReferentialProperty Collection { get; set; }
     }
 
-    public class SelfReferentialProperty : List<SelfReferentialProperty> { }
+    public class SelfReferentialProperty : List<SelfReferentialProperty>
+    {
+    }
 }
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.TestModel.Internal
@@ -5641,9 +5655,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.TestModel.Internal
     public class SelfReferentialPropertyValueConverter
         : ValueConverter<SelfReferentialProperty, string>
     {
-        public SelfReferentialPropertyValueConverter() : this(null) { }
+        public SelfReferentialPropertyValueConverter() : this(null)
+        {
+        }
 
         public SelfReferentialPropertyValueConverter(ConverterMappingHints hints)
-            : base(v => null, v => null, hints) { }
+            : base(v => null, v => null, hints)
+        {
+        }
     }
 }

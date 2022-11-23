@@ -329,34 +329,60 @@ namespace System.Web.Mvc.Async.Test
 
         private class MethodLocatorController : Controller
         {
-            public void Foo() { }
+            public void Foo()
+            {
+            }
 
-            public void Foo(string s) { }
+            public void Foo(string s)
+            {
+            }
 
             [ActionName("Foo")]
-            public void FooRenamed() { }
+            public void FooRenamed()
+            {
+            }
 
             [ActionName("Bar")]
-            public void Bar() { }
+            public void Bar()
+            {
+            }
 
             [ActionName("PrivateVoid")]
-            private void PrivateVoid() { }
+            private void PrivateVoid()
+            {
+            }
 
-            protected void ProtectedVoidAction() { }
+            protected void ProtectedVoidAction()
+            {
+            }
 
-            public static void StaticMethod() { }
+            public static void StaticMethod()
+            {
+            }
 
-            public void EventPatternAsync() { }
+            public void EventPatternAsync()
+            {
+            }
 
-            public void EventPatternCompleted() { }
+            public void EventPatternCompleted()
+            {
+            }
 
-            public void EventPatternWithoutCompletionMethodAsync() { }
+            public void EventPatternWithoutCompletionMethodAsync()
+            {
+            }
 
-            public void EventPatternAmbiguousAsync() { }
+            public void EventPatternAmbiguousAsync()
+            {
+            }
 
-            public void EventPatternAmbiguousCompleted(int i) { }
+            public void EventPatternAmbiguousCompleted(int i)
+            {
+            }
 
-            public void EventPatternAmbiguousCompleted(string s) { }
+            public void EventPatternAmbiguousCompleted(string s)
+            {
+            }
 
             public Task TaskPattern()
             {
@@ -369,7 +395,9 @@ namespace System.Web.Mvc.Async.Test
             }
 
             [ActionName("RenamedCompleted")]
-            public void Renamed() { }
+            public void Renamed()
+            {
+            }
 
             // ensure that methods inheriting from Controller or a base class are not matched
             [ActionName("Blah")]
@@ -388,20 +416,32 @@ namespace System.Web.Mvc.Async.Test
         private class SelectionAttributeController : Controller
         {
             [Match(false)]
-            public void OneMatch() { }
+            public void OneMatch()
+            {
+            }
 
-            public void OneMatch(string s) { }
+            public void OneMatch(string s)
+            {
+            }
 
-            public void TwoMatch() { }
+            public void TwoMatch()
+            {
+            }
 
             [ActionName("TwoMatch")]
-            public void TwoMatch2() { }
+            public void TwoMatch2()
+            {
+            }
 
             [Match(true), ActionName("ShouldMatchMethodWithSelectionAttribute")]
-            public void MethodHasSelectionAttribute1() { }
+            public void MethodHasSelectionAttribute1()
+            {
+            }
 
             [ActionName("ShouldMatchMethodWithSelectionAttribute")]
-            public void MethodDoesNotHaveSelectionAttribute1() { }
+            public void MethodDoesNotHaveSelectionAttribute1()
+            {
+            }
 
             private class MatchAttribute : ActionMethodSelectorAttribute
             {

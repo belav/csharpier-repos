@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSimplifyPropertyPatternCodeFixProvider() { }
+        public CSharpSimplifyPropertyPatternCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.SimplifyPropertyPatternDiagnosticId);

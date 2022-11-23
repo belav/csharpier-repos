@@ -11,7 +11,9 @@ public class FakeLogger<T> : ILogger<T>
         TState state,
         Exception exception,
         Func<TState, Exception, string> formatter
-    ) { }
+    )
+    {
+    }
 
     public bool IsEnabled(LogLevel logLevel) => true;
 

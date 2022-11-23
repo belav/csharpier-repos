@@ -78,7 +78,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 null,
                 generateDebugInfo: true,
                 hasMethodBodyDependency: true
-            ) { }
+            )
+        {
+        }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -154,7 +156,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 associatedProperty,
                 generateDebugInfo: false,
                 hasMethodBodyDependency: hasMethodBodyDependency
-            ) { }
+            )
+        {
+        }
 
         internal sealed override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,

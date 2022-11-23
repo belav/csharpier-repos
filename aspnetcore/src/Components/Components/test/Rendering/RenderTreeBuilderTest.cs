@@ -243,7 +243,9 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        Action<EventArgs> eventHandler = eventInfo => { };
+        Action<EventArgs> eventHandler = eventInfo =>
+        {
+        };
 
         // Act
         builder.OpenElement(0, "myelement"); //  0: <myelement
@@ -288,7 +290,9 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        Action<EventArgs> eventHandler = eventInfo => { };
+        Action<EventArgs> eventHandler = eventInfo =>
+        {
+        };
 
         // Act
         builder.OpenElement(0, "myelement");
@@ -466,7 +470,13 @@ public class RenderTreeBuilderTest
         // Act/Assert
         Assert.Throws<InvalidOperationException>(() =>
         {
-            builder.AddAttribute(0, "name", new Action<string>(text => { }));
+            builder.AddAttribute(
+                0,
+                "name",
+                new Action<string>(text =>
+                {
+                })
+            );
         });
     }
 
@@ -496,7 +506,13 @@ public class RenderTreeBuilderTest
         {
             builder.OpenElement(0, "some element");
             builder.AddContent(1, "hello");
-            builder.AddAttribute(2, "name", new Action<EventArgs>(eventInfo => { }));
+            builder.AddAttribute(
+                2,
+                "name",
+                new Action<EventArgs>(eventInfo =>
+                {
+                })
+            );
         });
     }
 
@@ -524,7 +540,12 @@ public class RenderTreeBuilderTest
         Assert.Throws<InvalidOperationException>(() =>
         {
             builder.OpenElement(0, "some element");
-            builder.AddElementReferenceCapture(1, _ => { });
+            builder.AddElementReferenceCapture(
+                1,
+                _ =>
+                {
+                }
+            );
             builder.AddAttribute(2, "name", "value");
         });
     }
@@ -539,7 +560,12 @@ public class RenderTreeBuilderTest
         Assert.Throws<InvalidOperationException>(() =>
         {
             builder.OpenComponent<TestComponent>(0);
-            builder.AddComponentReferenceCapture(1, _ => { });
+            builder.AddComponentReferenceCapture(
+                1,
+                _ =>
+                {
+                }
+            );
             builder.AddAttribute(2, "name", "value");
         });
     }
@@ -667,7 +693,9 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        Action<ElementReference> referenceCaptureAction = elementReference => { };
+        Action<ElementReference> referenceCaptureAction = elementReference =>
+        {
+        };
 
         // Act
         builder.OpenElement(0, "myelement"); //  0: <myelement
@@ -695,7 +723,12 @@ public class RenderTreeBuilderTest
         // Act/Assert
         Assert.Throws<InvalidOperationException>(() =>
         {
-            builder.AddElementReferenceCapture(0, _ => { });
+            builder.AddElementReferenceCapture(
+                0,
+                _ =>
+                {
+                }
+            );
         });
     }
 
@@ -709,7 +742,12 @@ public class RenderTreeBuilderTest
         Assert.Throws<InvalidOperationException>(() =>
         {
             builder.OpenComponent<TestComponent>(0);
-            builder.AddElementReferenceCapture(1, _ => { });
+            builder.AddElementReferenceCapture(
+                1,
+                _ =>
+                {
+                }
+            );
         });
     }
 
@@ -723,7 +761,12 @@ public class RenderTreeBuilderTest
         Assert.Throws<InvalidOperationException>(() =>
         {
             builder.OpenRegion(0);
-            builder.AddElementReferenceCapture(1, _ => { });
+            builder.AddElementReferenceCapture(
+                1,
+                _ =>
+                {
+                }
+            );
         });
     }
 
@@ -737,8 +780,12 @@ public class RenderTreeBuilderTest
 
         // Arrange
         var builder = new RenderTreeBuilder();
-        Action<ElementReference> referenceCaptureAction1 = elementReference => { };
-        Action<ElementReference> referenceCaptureAction2 = elementReference => { };
+        Action<ElementReference> referenceCaptureAction1 = elementReference =>
+        {
+        };
+        Action<ElementReference> referenceCaptureAction2 = elementReference =>
+        {
+        };
 
         // Act
         builder.OpenElement(0, "myelement");
@@ -760,7 +807,9 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        Action<object> myAction = elementReference => { };
+        Action<object> myAction = elementReference =>
+        {
+        };
 
         // Act
         builder.OpenComponent<TestComponent>(0); //  0: <TestComponent
@@ -788,7 +837,12 @@ public class RenderTreeBuilderTest
         // Act/Assert
         Assert.Throws<InvalidOperationException>(() =>
         {
-            builder.AddComponentReferenceCapture(0, _ => { });
+            builder.AddComponentReferenceCapture(
+                0,
+                _ =>
+                {
+                }
+            );
         });
     }
 
@@ -802,7 +856,12 @@ public class RenderTreeBuilderTest
         Assert.Throws<InvalidOperationException>(() =>
         {
             builder.OpenElement(0, "myelement");
-            builder.AddComponentReferenceCapture(1, _ => { });
+            builder.AddComponentReferenceCapture(
+                1,
+                _ =>
+                {
+                }
+            );
         });
     }
 
@@ -816,7 +875,12 @@ public class RenderTreeBuilderTest
         Assert.Throws<InvalidOperationException>(() =>
         {
             builder.OpenRegion(0);
-            builder.AddComponentReferenceCapture(1, _ => { });
+            builder.AddComponentReferenceCapture(
+                1,
+                _ =>
+                {
+                }
+            );
         });
     }
 
@@ -830,8 +894,12 @@ public class RenderTreeBuilderTest
 
         // Arrange
         var builder = new RenderTreeBuilder();
-        Action<object> referenceCaptureAction1 = elementReference => { };
-        Action<object> referenceCaptureAction2 = elementReference => { };
+        Action<object> referenceCaptureAction1 = elementReference =>
+        {
+        };
+        Action<object> referenceCaptureAction2 = elementReference =>
+        {
+        };
 
         // Act
         builder.OpenComponent<TestComponent>(0);
@@ -987,7 +1055,10 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
 
-        var value = new Action<EventArgs>((e) => { });
+        var value = new Action<EventArgs>(
+            (e) => {
+            }
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1026,7 +1097,8 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
 
-        var value = new Action(() => { });
+        var value = new Action(() => {
+        });
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1060,7 +1132,12 @@ public class RenderTreeBuilderTest
     }
 
     public static TheoryData<Action<EventArgs>> EventHandlerValues =>
-        new TheoryData<Action<EventArgs>> { null, (e) => { }, };
+        new TheoryData<Action<EventArgs>>
+        {
+            null,
+            (e) => {
+            },
+        };
 
     [Theory]
     [MemberData(nameof(EventHandlerValues))]
@@ -1087,7 +1164,11 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        var callback = new EventCallback(null, new Action(() => { }));
+        var callback = new EventCallback(
+            null,
+            new Action(() => {
+            })
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1127,7 +1208,11 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
         var receiver = Mock.Of<IHandleEvent>();
-        var callback = new EventCallback(receiver, new Action(() => { }));
+        var callback = new EventCallback(
+            receiver,
+            new Action(() => {
+            })
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1148,7 +1233,11 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
         var receiver = Mock.Of<IHandleEvent>();
-        var callback = new EventCallback(receiver, new Action(() => { }));
+        var callback = new EventCallback(
+            receiver,
+            new Action(() => {
+            })
+        );
 
         // Act
         builder.OpenComponent<TestComponent>(0);
@@ -1168,7 +1257,13 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        var callback = new EventCallback<string>(null, new Action<string>((s) => { }));
+        var callback = new EventCallback<string>(
+            null,
+            new Action<string>(
+                (s) => {
+                }
+            )
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1208,7 +1303,13 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
         var receiver = Mock.Of<IHandleEvent>();
-        var callback = new EventCallback<string>(receiver, new Action<string>((s) => { }));
+        var callback = new EventCallback<string>(
+            receiver,
+            new Action<string>(
+                (s) => {
+                }
+            )
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1235,7 +1336,13 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
         var receiver = Mock.Of<IHandleEvent>();
-        var callback = new EventCallback<string>(receiver, new Action<string>((s) => { }));
+        var callback = new EventCallback<string>(
+            receiver,
+            new Action<string>(
+                (s) => {
+                }
+            )
+        );
 
         // Act
         builder.OpenComponent<TestComponent>(0);
@@ -1352,7 +1459,10 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
 
-        var value = new Action<EventArgs>((e) => { });
+        var value = new Action<EventArgs>(
+            (e) => {
+            }
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1373,7 +1483,10 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
 
-        var value = new Action<EventArgs>((e) => { });
+        var value = new Action<EventArgs>(
+            (e) => {
+            }
+        );
 
         // Act
         builder.OpenComponent<TestComponent>(0);
@@ -1394,7 +1507,8 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
 
-        var value = new Action(() => { });
+        var value = new Action(() => {
+        });
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1415,7 +1529,8 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
 
-        var value = new Action(() => { });
+        var value = new Action(() => {
+        });
 
         // Act
         builder.OpenComponent<TestComponent>(0);
@@ -1435,7 +1550,11 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        var callback = new EventCallback(null, new Action(() => { }));
+        var callback = new EventCallback(
+            null,
+            new Action(() => {
+            })
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1475,7 +1594,11 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
         var receiver = Mock.Of<IHandleEvent>();
-        var callback = new EventCallback(receiver, new Action(() => { }));
+        var callback = new EventCallback(
+            receiver,
+            new Action(() => {
+            })
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1496,7 +1619,11 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
         var receiver = Mock.Of<IHandleEvent>();
-        var callback = new EventCallback(receiver, new Action(() => { }));
+        var callback = new EventCallback(
+            receiver,
+            new Action(() => {
+            })
+        );
 
         // Act
         builder.OpenComponent<TestComponent>(0);
@@ -1516,7 +1643,13 @@ public class RenderTreeBuilderTest
     {
         // Arrange
         var builder = new RenderTreeBuilder();
-        var callback = new EventCallback<string>(null, new Action<string>((s) => { }));
+        var callback = new EventCallback<string>(
+            null,
+            new Action<string>(
+                (s) => {
+                }
+            )
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1556,7 +1689,13 @@ public class RenderTreeBuilderTest
         // Arrange
         var builder = new RenderTreeBuilder();
         var receiver = Mock.Of<IHandleEvent>();
-        var callback = new EventCallback<string>(receiver, new Action<string>((s) => { }));
+        var callback = new EventCallback<string>(
+            receiver,
+            new Action<string>(
+                (s) => {
+                }
+            )
+        );
 
         // Act
         builder.OpenElement(0, "elem");
@@ -1752,7 +1891,11 @@ public class RenderTreeBuilderTest
     public void ProcessDuplicateAttributes_StopsAtFirstNonAttributeFrame_Capture()
     {
         // Arrange
-        var capture = (Action<ElementReference>)((_) => { });
+        var capture =
+            (Action<ElementReference>)(
+                (_) => {
+                }
+            );
 
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "div");
@@ -1913,7 +2056,17 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "div");
         builder.AddAttribute(0, "A", "hi");
-        builder.AddAttribute(0, "2", new EventCallback(null, (Action)(() => { })));
+        builder.AddAttribute(
+            0,
+            "2",
+            new EventCallback(
+                null,
+                (Action)(
+                    () => {
+                    }
+                )
+            )
+        );
         builder.AddMultipleAttributes(
             0,
             new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
@@ -1931,7 +2084,16 @@ public class RenderTreeBuilderTest
             new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
                 { "5", null }, // overwrite value with null
-                { "6", new EventCallback(null, (Action)(() => { })) },
+                {
+                    "6",
+                    new EventCallback(
+                        null,
+                        (Action)(
+                            () => {
+                            }
+                        )
+                    )
+                },
             }
         );
         builder.AddAttribute(0, "6", default(EventCallback<string>)); // Replace with a 'silent' EventCallback<string>
@@ -2028,17 +2190,23 @@ public class RenderTreeBuilderTest
 
     private class TestComponent : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) =>
             throw new NotImplementedException();
     }
 
-    private class OtherComponent : TestComponent { }
+    private class OtherComponent : TestComponent
+    {
+    }
 
     private class TestRenderer : Renderer
     {
-        public TestRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public TestRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 

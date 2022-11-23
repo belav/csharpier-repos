@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
     [Trait(Traits.Feature, Traits.Features.Formatting)]
     public class FormattingEngineTests : CSharpFormattingEngineTestBase
     {
-        public FormattingEngineTests(ITestOutputHelper output) : base(output) { }
+        public FormattingEngineTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         private static OptionsCollection SmartIndentButDoNotFormatWhileTyping()
         {
@@ -2883,7 +2885,8 @@ interface I1
 
             commandHandler.ExecuteCommand(
                 new TypeCharCommandArgs(textView, subjectDocument.GetTextBuffer(), typedChar[0]),
-                () => { },
+                () => {
+                },
                 TestCommandExecutionContext.Create()
             );
 

@@ -29,10 +29,14 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         }
 
         public Event(EventKind kind, Id<LsifProject> data, IdFactory idFactory)
-            : this(kind, "project", data.As<LsifProject, Element>(), idFactory) { }
+            : this(kind, "project", data.As<LsifProject, Element>(), idFactory)
+        {
+        }
 
         public Event(EventKind kind, Id<LsifDocument> data, IdFactory idFactory)
-            : this(kind, "document", data.As<LsifDocument, Element>(), idFactory) { }
+            : this(kind, "document", data.As<LsifDocument, Element>(), idFactory)
+        {
+        }
 
         public enum EventKind
         {

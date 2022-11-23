@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Remote.Services
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteGlobalOperationNotificationService() { }
+        public RemoteGlobalOperationNotificationService()
+        {
+        }
 
         public IDisposable Start(string operation)
         {

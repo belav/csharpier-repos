@@ -597,9 +597,13 @@ public class InternalEntryEntrySubscriberTest
         public void PropertyChanging(InternalEntityEntry entry, IPropertyBase property) =>
             Changing.Add(Tuple.Create(entry, property));
 
-        public void DetectChanges(IStateManager stateManager) { }
+        public void DetectChanges(IStateManager stateManager)
+        {
+        }
 
-        public void DetectChanges(InternalEntityEntry entry) { }
+        public void DetectChanges(InternalEntityEntry entry)
+        {
+        }
 
         public (
             EventHandler<DetectChangesEventArgs> DetectingAllChanges,
@@ -613,7 +617,9 @@ public class InternalEntryEntrySubscriberTest
             EventHandler<DetectedChangesEventArgs> detectedAllChanges,
             EventHandler<DetectEntityChangesEventArgs> detectingEntityChanges,
             EventHandler<DetectedEntityChangesEventArgs> detectedEntityChanges
-        ) { }
+        )
+        {
+        }
 
         public event EventHandler<DetectEntityChangesEventArgs> DetectingEntityChanges;
 
@@ -637,11 +643,17 @@ public class InternalEntryEntrySubscriberTest
         public void OnDetectedAllChanges(IStateManager stateManager, bool changesFound) =>
             DetectedAllChanges?.Invoke(null, null);
 
-        public void Suspend() { }
+        public void Suspend()
+        {
+        }
 
-        public void Resume() { }
+        public void Resume()
+        {
+        }
 
-        public void ResetState() { }
+        public void ResetState()
+        {
+        }
     }
 
     private class TestNavigationListener : INavigationFixer
@@ -652,16 +664,22 @@ public class InternalEntryEntrySubscriberTest
 
         public bool BeginDelayedFixup() => false;
 
-        public void CompleteDelayedFixup() { }
+        public void CompleteDelayedFixup()
+        {
+        }
 
-        public void AbortDelayedFixup() { }
+        public void AbortDelayedFixup()
+        {
+        }
 
         public void NavigationReferenceChanged(
             InternalEntityEntry entry,
             INavigationBase navigationBase,
             object oldValue,
             object newValue
-        ) { }
+        )
+        {
+        }
 
         public void NavigationCollectionChanged(
             InternalEntityEntry entry,
@@ -670,17 +688,21 @@ public class InternalEntryEntrySubscriberTest
             IEnumerable<object> removed
         ) => CollectionChanged.Add(Tuple.Create(entry, navigationBase, added, removed));
 
-        public void TrackedFromQuery(InternalEntityEntry entry) { }
+        public void TrackedFromQuery(InternalEntityEntry entry)
+        {
+        }
 
-        public void StateChanging(InternalEntityEntry entry, EntityState newState) { }
+        public void StateChanging(InternalEntityEntry entry, EntityState newState)
+        {
+        }
 
-        public void StateChanged(
-            InternalEntityEntry entry,
-            EntityState oldState,
-            bool fromQuery
-        ) { }
+        public void StateChanged(InternalEntityEntry entry, EntityState oldState, bool fromQuery)
+        {
+        }
 
-        public void FixupResolved(InternalEntityEntry entry, InternalEntityEntry duplicateEntry) { }
+        public void FixupResolved(InternalEntityEntry entry, InternalEntityEntry duplicateEntry)
+        {
+        }
 
         public void KeyPropertyChanged(
             InternalEntityEntry entry,
@@ -689,7 +711,9 @@ public class InternalEntryEntrySubscriberTest
             IEnumerable<IForeignKey> containingForeignKeys,
             object oldValue,
             object newValue
-        ) { }
+        )
+        {
+        }
     }
 
     private static IModel BuildModel(

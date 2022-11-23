@@ -62,10 +62,14 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public void ThrowIfDisposed() { }
+    public void ThrowIfDisposed()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public void QueueCurrentBufferForUploadAndSetNewBuffer() { }
+    public void QueueCurrentBufferForUploadAndSetNewBuffer()
+    {
+    }
 
     public void Test()
     {

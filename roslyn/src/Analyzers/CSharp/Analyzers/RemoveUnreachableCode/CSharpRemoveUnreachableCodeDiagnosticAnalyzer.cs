@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
                     typeof(CSharpAnalyzersResources)
                 ),
                 configurable: false
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

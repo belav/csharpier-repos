@@ -90,7 +90,9 @@ namespace System.Web.Mvc.Test
         private class BadConverter : IModelBinder
         {
             // no public parameterless constructor
-            public BadConverter(string s) { }
+            public BadConverter(string s)
+            {
+            }
 
             public object BindModel(
                 ControllerContext controllerContext,

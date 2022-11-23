@@ -35,16 +35,24 @@ class Program
     {
         class PublicOnly
         {
-            public PublicOnly(int x) { }
+            public PublicOnly(int x)
+            {
+            }
 
-            private PublicOnly(double x) { }
+            private PublicOnly(double x)
+            {
+            }
         }
 
         class PublicAndPrivate
         {
-            public PublicAndPrivate(int x) { }
+            public PublicAndPrivate(int x)
+            {
+            }
 
-            private PublicAndPrivate(double x) { }
+            private PublicAndPrivate(double x)
+            {
+            }
         }
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
@@ -73,7 +81,9 @@ class Program
 
         static class TestClass
         {
-            public static void UnusedButKeptMethod() { }
+            public static void UnusedButKeptMethod()
+            {
+            }
         }
 
         private static void SetField() => s_annotatedType = typeof(TestClass);
@@ -106,9 +116,13 @@ class Program
 
         class TestType3
         {
-            public TestType3(int val) { }
+            public TestType3(int val)
+            {
+            }
 
-            private TestType3(double val) { }
+            private TestType3(double val)
+            {
+            }
         }
 
         public static void Run()
@@ -136,9 +150,13 @@ class Program
 
     class TestGetInterface
     {
-        interface INeverUsedInterface { }
+        interface INeverUsedInterface
+        {
+        }
 
-        class UsedType : INeverUsedInterface { }
+        class UsedType : INeverUsedInterface
+        {
+        }
 
         public static void Run()
         {
@@ -151,7 +169,9 @@ class Program
     {
         class MyGenericType<T>
         {
-            public static void MyGenericMethod<U>(T param1, U param2) { }
+            public static void MyGenericMethod<U>(T param1, U param2)
+            {
+            }
         }
 
         static void GenericMethod<T, U>()
@@ -167,7 +187,9 @@ class Program
 
         class TestType
         {
-            public TestType(double c) { }
+            public TestType(double c)
+            {
+            }
         }
 
         public static void Run()
@@ -183,7 +205,9 @@ class Program
             public RequiresNonPublicMethods(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
                     Type needed
-            ) { }
+            )
+            {
+            }
 
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.NonPublicMethods
@@ -197,23 +221,35 @@ class Program
 
         static class Type1WithNonPublicKept
         {
-            private static void KeptMethod() { }
+            private static void KeptMethod()
+            {
+            }
 
-            public static void RemovedMethod() { }
+            public static void RemovedMethod()
+            {
+            }
         }
 
         static class Type2WithAllKept
         {
-            private static void KeptMethod() { }
+            private static void KeptMethod()
+            {
+            }
 
-            public static void AlsoKeptMethod() { }
+            public static void AlsoKeptMethod()
+            {
+            }
         }
 
         static class Type3WithPublicKept
         {
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            private static void RemovedMethod() { }
+            private static void RemovedMethod()
+            {
+            }
         }
 
         [RequiresNonPublicMethods(
@@ -240,38 +276,62 @@ class Program
     {
         class Type1WithNonPublicKept
         {
-            private static void KeptMethod() { }
+            private static void KeptMethod()
+            {
+            }
 
-            private static void AlsoKeptMethod() { }
+            private static void AlsoKeptMethod()
+            {
+            }
 
-            public static void RemovedMethod() { }
+            public static void RemovedMethod()
+            {
+            }
         }
 
         class Type2WithPublicKept
         {
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            public static void AlsoKeptMethod() { }
+            public static void AlsoKeptMethod()
+            {
+            }
 
-            private static void RemovedMethod() { }
+            private static void RemovedMethod()
+            {
+            }
         }
 
         class Type3WithPublicKept
         {
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            public static void AlsoKeptMethod() { }
+            public static void AlsoKeptMethod()
+            {
+            }
 
-            private static void RemovedMethod() { }
+            private static void RemovedMethod()
+            {
+            }
         }
 
         struct Struct1WithPublicKept
         {
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            public static void AlsoKeptMethod() { }
+            public static void AlsoKeptMethod()
+            {
+            }
 
-            private static void RemovedMethod() { }
+            private static void RemovedMethod()
+            {
+            }
         }
 
         class KeepsNonPublic<
@@ -286,7 +346,9 @@ class Program
             }
         }
 
-        class KeepsNonPublic : KeepsNonPublic<Type1WithNonPublicKept> { }
+        class KeepsNonPublic : KeepsNonPublic<Type1WithNonPublicKept>
+        {
+        }
 
         static void KeepPublic<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
@@ -350,7 +412,9 @@ class Program
             private static int GetNumber() => 42;
         }
 
-        class Derived : Base { }
+        class Derived : Base
+        {
+        }
 
         private static MethodInfo GetPrivateMethod(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type t
@@ -530,18 +594,28 @@ class Program
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
         class TypeWithNonPublicMethodsKept
         {
-            private void Method1() { }
+            private void Method1()
+            {
+            }
 
-            public void Method2() { }
+            public void Method2()
+            {
+            }
 
-            private void Method3() { }
+            private void Method3()
+            {
+            }
         }
 
         class TypeWithNonPublicMethodsKeptThroughBase : TypeWithNonPublicMethodsKept
         {
-            private void Method4() { }
+            private void Method4()
+            {
+            }
 
-            public void Method5() { }
+            public void Method5()
+            {
+            }
         }
 
         static NeverAllocatedTypeAskingForNonPublicMethods s_neverAllocatedTypeAskingForNonPublicMethods =
@@ -549,20 +623,30 @@ class Program
 
         class NeverAllocatedTypeAskingForNonPublicMethods : TypeWithNonPublicMethodsKept
         {
-            private void Method4() { }
+            private void Method4()
+            {
+            }
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
         interface IInterfaceWithNonPublicMethodsKept
         {
-            public static void Method1() { }
-            private static void Method2() { }
+            public static void Method1()
+            {
+            }
+            private static void Method2()
+            {
+            }
         }
 
         interface IInterfaceWithNonPublicMethodsKeptIndirectly : IInterfaceWithNonPublicMethodsKept
         {
-            public static void Method3() { }
-            private static void Method4() { }
+            public static void Method3()
+            {
+            }
+            private static void Method4()
+            {
+            }
         }
 
         static IInterfaceWithNonPublicMethodsKeptIndirectly s_interfaceWithNonPublicMethodsKeptIndirectly =
@@ -571,40 +655,64 @@ class Program
         class TypeWithNonPublicMethodsKeptThroughIndirectInterface
             : IInterfaceWithNonPublicMethodsKeptIndirectly
         {
-            private void Method1() { }
+            private void Method1()
+            {
+            }
 
-            public void Method2() { }
+            public void Method2()
+            {
+            }
         }
 
         class TypeWithNonPublicMethodsKeptThroughIndirectInterfaceNeverAllocated
             : IInterfaceWithNonPublicMethodsKept
         {
-            private void Method1() { }
+            private void Method1()
+            {
+            }
 
-            public void Method2() { }
+            public void Method2()
+            {
+            }
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-        interface IKeepNonPublicCtors { }
+        interface IKeepNonPublicCtors
+        {
+        }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-        interface IKeepPublicMethods { }
+        interface IKeepPublicMethods
+        {
+        }
 
         static BaseWithMixKept s_baseWithMixKept = new DerivedWithMixKept(123);
 
-        class BaseWithMixKept : IKeepNonPublicCtors, IKeepPublicMethods { }
+        class BaseWithMixKept : IKeepNonPublicCtors, IKeepPublicMethods
+        {
+        }
 
         class DerivedWithMixKept : BaseWithMixKept
         {
-            public DerivedWithMixKept(int x) { }
+            public DerivedWithMixKept(int x)
+            {
+            }
 
-            public DerivedWithMixKept(double x) { }
+            public DerivedWithMixKept(double x)
+            {
+            }
 
-            private DerivedWithMixKept(string y) { }
+            private DerivedWithMixKept(string y)
+            {
+            }
 
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
         }
 
         public static void Run()
@@ -857,6 +965,8 @@ namespace System.Diagnostics.CodeAnalysis
 {
     internal sealed class DynamicallyAccessedMembersAttribute : Attribute
     {
-        public DynamicallyAccessedMembersAttribute(DynamicallyAccessedMemberTypes memberTypes) { }
+        public DynamicallyAccessedMembersAttribute(DynamicallyAccessedMemberTypes memberTypes)
+        {
+        }
     }
 }

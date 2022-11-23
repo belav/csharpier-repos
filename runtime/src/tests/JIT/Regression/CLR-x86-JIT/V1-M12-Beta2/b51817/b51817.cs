@@ -7,7 +7,9 @@ namespace QQ
 
     internal class AA
     {
-        private static void Test(TypedReference arg, String result) { }
+        private static void Test(TypedReference arg, String result)
+        {
+        }
 
         private static int Main()
         {

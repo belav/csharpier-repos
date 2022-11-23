@@ -69,7 +69,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 new DiagnosticReporter(workspace),
                 projectFileLoaderRegistry: null,
                 properties
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// The MSBuild properties used when interpreting project files.

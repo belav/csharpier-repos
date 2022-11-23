@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class LineKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public LineKeywordRecommender()
-            : base(SyntaxKind.LineKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.LineKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

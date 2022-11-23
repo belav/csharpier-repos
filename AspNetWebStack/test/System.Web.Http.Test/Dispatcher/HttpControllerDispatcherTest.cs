@@ -860,7 +860,9 @@ namespace System.Web.Http.Dispatcher
 
         private class PrivateController : ApiController
         {
-            public void Get() { }
+            public void Get()
+            {
+            }
 
             public override Task<HttpResponseMessage> ExecuteAsync(
                 HttpControllerContext controllerContext,

@@ -75,7 +75,9 @@ public abstract class ManyToManyHeterogeneousQueryTestBase : NonSharedModelTestB
 
     protected class Context20277 : DbContext
     {
-        public Context20277(DbContextOptions options) : base(options) { }
+        public Context20277(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder

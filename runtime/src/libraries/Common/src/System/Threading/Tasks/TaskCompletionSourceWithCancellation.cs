@@ -11,7 +11,9 @@ namespace System.Threading.Tasks
     internal class TaskCompletionSourceWithCancellation<T> : TaskCompletionSource<T>
     {
         public TaskCompletionSourceWithCancellation()
-            : base(TaskCreationOptions.RunContinuationsAsynchronously) { }
+            : base(TaskCreationOptions.RunContinuationsAsynchronously)
+        {
+        }
 
         public async ValueTask<T> WaitWithCancellationAsync(CancellationToken cancellationToken)
         {

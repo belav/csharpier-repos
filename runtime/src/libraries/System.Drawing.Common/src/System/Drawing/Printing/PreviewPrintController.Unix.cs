@@ -37,7 +37,9 @@ namespace System.Drawing.Printing
 {
     public partial class PreviewPrintController : PrintController
     {
-        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
+        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
+        {
+        }
 
         public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
         {
@@ -54,7 +56,9 @@ namespace System.Drawing.Printing
             _list.Clear();
         }
 
-        public override void OnEndPrint(PrintDocument document, PrintEventArgs e) { }
+        public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
+        {
+        }
 
         public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
         {

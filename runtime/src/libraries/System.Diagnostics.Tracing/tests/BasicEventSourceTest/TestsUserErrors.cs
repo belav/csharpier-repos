@@ -218,7 +218,9 @@ namespace BasicEventSourceTests
     /// </summary>
     internal class BadEventSource_MismatchedIds : EventSource
     {
-        public BadEventSource_MismatchedIds(EventSourceSettings settings) : base(settings) { }
+        public BadEventSource_MismatchedIds(EventSourceSettings settings) : base(settings)
+        {
+        }
 
         public void Event1(int arg)
         {

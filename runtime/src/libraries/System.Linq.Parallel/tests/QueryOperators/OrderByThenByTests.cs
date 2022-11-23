@@ -927,7 +927,9 @@ namespace System.Linq.Parallel.Tests
 
             AggregateException ae = Assert.Throws<AggregateException>(() =>
             {
-                foreach (int i in query) { }
+                foreach (int i in query)
+                {
+                }
             });
             Assert.All(ae.InnerExceptions, e => Assert.IsType<DeliberateTestException>(e));
         }
@@ -961,7 +963,9 @@ namespace System.Linq.Parallel.Tests
 
             AggregateException ae = Assert.Throws<AggregateException>(() =>
             {
-                foreach (int i in query) { }
+                foreach (int i in query)
+                {
+                }
             });
             Assert.Single(ae.InnerExceptions);
             Assert.All(ae.InnerExceptions, e => Assert.IsType<DeliberateTestException>(e));

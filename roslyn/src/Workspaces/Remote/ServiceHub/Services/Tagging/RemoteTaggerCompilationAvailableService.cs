@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteCompilationAvailableService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         public ValueTask ComputeCompilationAsync(
             Checksum solutionChecksum,

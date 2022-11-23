@@ -55,7 +55,9 @@ namespace Microsoft.CodeAnalysis
                     state => state,
                     DocumentIdComparer.Instance
                 )
-            ) { }
+            )
+        {
+        }
 
         public TextDocumentStates(
             IEnumerable<DocumentInfo> infos,
@@ -68,7 +70,9 @@ namespace Microsoft.CodeAnalysis
                     stateConstructor,
                     DocumentIdComparer.Instance
                 )
-            ) { }
+            )
+        {
+        }
 
         public TextDocumentStates<TState> WithCompilationOrder(ImmutableList<DocumentId> ids) =>
             new(ids, _map);
@@ -259,7 +263,9 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly IComparer<DocumentId?> Instance = new DocumentIdComparer();
 
-            private DocumentIdComparer() { }
+            private DocumentIdComparer()
+            {
+            }
 
             public int Compare(DocumentId? x, DocumentId? y)
             {

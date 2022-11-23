@@ -26,7 +26,8 @@ namespace System.Data.SqlClient
     public sealed class SqlClientPermissionAttribute : DBDataPermissionAttribute
     {
         public SqlClientPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        {
+        }
 
         public override IPermission CreatePermission()
         {

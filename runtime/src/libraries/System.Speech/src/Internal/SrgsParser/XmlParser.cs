@@ -33,7 +33,9 @@ namespace System.Speech.Internal.SrgsParser
                         uri = new Uri(_xmlTextReader.BaseURI);
                     }
 #pragma warning disable 56502 // Remove the empty catch statements warnings
-                    catch (UriFormatException) { }
+                    catch (UriFormatException)
+                    {
+                    }
 #pragma warning restore 56502
                 }
             }

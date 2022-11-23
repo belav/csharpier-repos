@@ -306,5 +306,7 @@ public class PolicyEvaluatorTests
         ) => throw new NotImplementedException();
     }
 
-    private class DummyRequirement : IAuthorizationRequirement { }
+    private class DummyRequirement : IAuthorizationRequirement
+    {
+    }
 }

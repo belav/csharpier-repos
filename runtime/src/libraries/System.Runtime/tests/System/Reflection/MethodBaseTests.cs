@@ -184,6 +184,8 @@ namespace System.Reflection.Tests
             Assert.Equal("T", m.GetGenericArguments()[0].Name);
         }
 
-        private static void MyFakeGenericMethod<T>() { }
+        private static void MyFakeGenericMethod<T>()
+        {
+        }
     }
 }

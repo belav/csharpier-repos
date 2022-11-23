@@ -163,9 +163,13 @@ namespace System.Collections.Generic
     public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?>, ISerializable
         where T : struct
     {
-        public NullableEqualityComparer() { }
+        public NullableEqualityComparer()
+        {
+        }
 
-        private NullableEqualityComparer(SerializationInfo info, StreamingContext context) { }
+        private NullableEqualityComparer(SerializationInfo info, StreamingContext context)
+        {
+        }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -259,10 +263,14 @@ namespace System.Collections.Generic
     public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>, ISerializable
         where T : struct, Enum
     {
-        public EnumEqualityComparer() { }
+        public EnumEqualityComparer()
+        {
+        }
 
         // This is used by the serialization engine.
-        private EnumEqualityComparer(SerializationInfo information, StreamingContext context) { }
+        private EnumEqualityComparer(SerializationInfo information, StreamingContext context)
+        {
+        }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

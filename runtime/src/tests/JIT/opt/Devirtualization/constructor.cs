@@ -29,7 +29,9 @@ class Test_constructor
 class Child : Test_constructor
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public Child() { }
+    public Child()
+    {
+    }
 
     public override string ToString()
     {

@@ -402,13 +402,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
 
             public event EventHandler<DocumentId> ActiveDocumentChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public event EventHandler<EventArgs> NonRoslynBufferTextChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             public DocumentId TryGetActiveDocument() => null;
@@ -427,7 +435,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             {
                 [ImportingConstructor]
                 [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-                public Factory() { }
+                public Factory()
+                {
+                }
 
                 [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
                 public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
@@ -447,13 +457,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
 
             public event EventHandler<DocumentId> ActiveDocumentChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public event EventHandler<EventArgs> NonRoslynBufferTextChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             public DocumentId TryGetActiveDocument() =>
@@ -473,7 +491,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             {
                 [ImportingConstructor]
                 [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-                public Factory() { }
+                public Factory()
+                {
+                }
 
                 [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
                 public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>

@@ -48,7 +48,9 @@ namespace Microsoft.Extensions.Configuration
         /// <summary>
         /// Loads (or reloads) the data for this provider.
         /// </summary>
-        public virtual void Load() { }
+        public virtual void Load()
+        {
+        }
 
         /// <summary>
         /// Returns the list of keys that this provider has.

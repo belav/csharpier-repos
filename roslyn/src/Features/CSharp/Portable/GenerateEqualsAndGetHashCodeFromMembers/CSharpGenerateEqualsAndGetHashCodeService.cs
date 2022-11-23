@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateEqualsAndGetHashCodeFromMembers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateEqualsAndGetHashCodeService() { }
+        public CSharpGenerateEqualsAndGetHashCodeService()
+        {
+        }
 
         protected override bool TryWrapWithUnchecked(
             ImmutableArray<SyntaxNode> statements,

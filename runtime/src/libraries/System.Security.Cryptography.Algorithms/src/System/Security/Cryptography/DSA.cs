@@ -28,7 +28,9 @@ namespace System.Security.Cryptography
 
         public abstract void ImportParameters(DSAParameters parameters);
 
-        protected DSA() { }
+        protected DSA()
+        {
+        }
 
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static new DSA? Create(string algName)

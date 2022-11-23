@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 : base(
                     createAssetStorage,
                     CreateRemoteWorkspace(sharedTestGeneratorReferences, additionalRemoteParts)
-                ) { }
+                )
+            {
+            }
         }
 
         private static RemoteWorkspace CreateRemoteWorkspace(

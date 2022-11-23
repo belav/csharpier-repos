@@ -9,7 +9,9 @@ class ResourceUpdater : IDisposable
 {
     private class UpdateResourceHandle : SafeHandle
     {
-        public UpdateResourceHandle() : base(IntPtr.Zero, true) { }
+        public UpdateResourceHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

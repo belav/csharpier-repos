@@ -9,5 +9,7 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     /// Verifies that name of the member is removed
     /// </summary>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
-    public class RemovedNameValueAttribute : BaseExpectedLinkedBehaviorAttribute { }
+    public class RemovedNameValueAttribute : BaseExpectedLinkedBehaviorAttribute
+    {
+    }
 }

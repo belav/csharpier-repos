@@ -16,5 +16,7 @@ namespace Castle.DynamicProxy.Tests.Classes
 {
     using Castle.DynamicProxy.Tests.GenClasses;
 
-    public class ClassWithIndexer : ClassWithIndexer<string, int> { }
+    public class ClassWithIndexer : ClassWithIndexer<string, int>
+    {
+    }
 }

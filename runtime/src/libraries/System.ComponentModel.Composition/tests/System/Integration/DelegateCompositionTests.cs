@@ -31,7 +31,9 @@ namespace Tests.Integration
 
             [Export("ActionWith8Arguments")]
             [Export("ActionWith8Arguments", typeof(Delegate))]
-            public void Action(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8) { }
+            public void Action(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8)
+            {
+            }
 
             [Export("FunctionWith8Arguments")]
             [Export("FunctionWith8Arguments", typeof(Delegate))]

@@ -8,7 +8,9 @@ namespace System.Security.Policy
 {
     public sealed partial class Hash : EvidenceBase, System.Runtime.Serialization.ISerializable
     {
-        public Hash(System.Reflection.Assembly assembly) { }
+        public Hash(System.Reflection.Assembly assembly)
+        {
+        }
 
         public byte[] MD5
         {

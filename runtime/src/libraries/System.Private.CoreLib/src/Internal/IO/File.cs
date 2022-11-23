@@ -41,9 +41,15 @@ namespace Internal.IO
 
                 return InternalExists(path);
             }
-            catch (ArgumentException) { }
-            catch (IOException) { }
-            catch (UnauthorizedAccessException) { }
+            catch (ArgumentException)
+            {
+            }
+            catch (IOException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
 
             return false;
         }

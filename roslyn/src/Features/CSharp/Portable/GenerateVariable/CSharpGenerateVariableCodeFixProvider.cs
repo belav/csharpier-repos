@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateVariable
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpGenerateVariableCodeFixProvider() { }
+        public CSharpGenerateVariableCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS1061, CS0103, CS0117, CS0539, CS0246, CS0120, CS0118);

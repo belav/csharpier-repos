@@ -10,7 +10,9 @@ namespace ILLink.Shared.TrimAnalysis
 {
     internal sealed record UnknownValue : SingleValue
     {
-        private UnknownValue() { }
+        private UnknownValue()
+        {
+        }
 
         public static UnknownValue Instance { get; } = new UnknownValue();
 

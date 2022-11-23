@@ -14,7 +14,9 @@ namespace DebuggerTests;
 
 public class SetNextIpTests : DebuggerTests
 {
-    public SetNextIpTests(ITestOutputHelper testOutput) : base(testOutput) { }
+    public SetNextIpTests(ITestOutputHelper testOutput) : base(testOutput)
+    {
+    }
 
     [ConditionalFact(nameof(RunningOnChrome))]
     public async Task SetAndCheck()

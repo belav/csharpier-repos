@@ -245,10 +245,14 @@ namespace System.Linq.Expressions.Interpreter
     [Serializable]
     internal sealed class RethrowException : Exception
     {
-        public RethrowException() : base() { }
+        public RethrowException() : base()
+        {
+        }
 
         internal RethrowException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     internal sealed class DebugInfo
@@ -3460,7 +3464,9 @@ namespace System.Linq.Expressions.Interpreter
 
         public abstract void Update(InterpretedFrame frame, object? value);
 
-        public virtual void UndefineTemps(InstructionList instructions, LocalVariables locals) { }
+        public virtual void UndefineTemps(InstructionList instructions, LocalVariables locals)
+        {
+        }
     }
 
     internal sealed class ParameterByRefUpdater : ByRefUpdater

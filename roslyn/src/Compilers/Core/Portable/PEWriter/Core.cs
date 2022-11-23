@@ -11,7 +11,9 @@ namespace Microsoft.Cci
     /// <summary>
     /// An object corresponding to a metadata entity such as a type or a field.
     /// </summary>
-    internal interface IDefinition : IReference { }
+    internal interface IDefinition : IReference
+    {
+    }
 
     /// <summary>
     /// An object corresponding to reference to a metadata entity such as a type or a field.

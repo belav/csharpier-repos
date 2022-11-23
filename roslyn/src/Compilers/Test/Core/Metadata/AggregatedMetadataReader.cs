@@ -20,7 +20,9 @@ namespace Roslyn.Test.MetadataUtilities
         public ImmutableArray<MetadataReader> Readers { get; }
 
         public AggregatedMetadataReader(params MetadataReader[] readers)
-            : this((IEnumerable<MetadataReader>)readers) { }
+            : this((IEnumerable<MetadataReader>)readers)
+        {
+        }
 
         public AggregatedMetadataReader(IEnumerable<MetadataReader> readers)
         {

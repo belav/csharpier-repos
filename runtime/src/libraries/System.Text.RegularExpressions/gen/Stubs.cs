@@ -102,7 +102,9 @@ namespace System.Text.RegularExpressions
 {
     internal sealed class RegexReplacement
     {
-        public RegexReplacement(string rep, RegexNode concat, Hashtable caps) { }
+        public RegexReplacement(string rep, RegexNode concat, Hashtable caps)
+        {
+        }
 
         public const int LeftPortion = -1;
         public const int RightPortion = -2;

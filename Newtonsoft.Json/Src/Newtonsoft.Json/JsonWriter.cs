@@ -984,22 +984,30 @@ namespace Newtonsoft.Json
         /// Writes the specified end token.
         /// </summary>
         /// <param name="token">The end token to write.</param>
-        protected virtual void WriteEnd(JsonToken token) { }
+        protected virtual void WriteEnd(JsonToken token)
+        {
+        }
 
         /// <summary>
         /// Writes indent characters.
         /// </summary>
-        protected virtual void WriteIndent() { }
+        protected virtual void WriteIndent()
+        {
+        }
 
         /// <summary>
         /// Writes the JSON value delimiter.
         /// </summary>
-        protected virtual void WriteValueDelimiter() { }
+        protected virtual void WriteValueDelimiter()
+        {
+        }
 
         /// <summary>
         /// Writes an indent space.
         /// </summary>
-        protected virtual void WriteIndentSpace() { }
+        protected virtual void WriteIndentSpace()
+        {
+        }
 
         internal void AutoComplete(JsonToken tokenBeingWritten)
         {
@@ -1938,7 +1946,9 @@ namespace Newtonsoft.Json
             AutoComplete(JsonToken.PropertyName);
         }
 
-        internal void InternalWriteRaw() { }
+        internal void InternalWriteRaw()
+        {
+        }
 
         internal void InternalWriteStart(JsonToken token, JsonContainerType container)
         {

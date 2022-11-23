@@ -3,4 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
-public class PrincipalEntity : NonEntityBase { }
+public class PrincipalEntity : NonEntityBase
+{
+}

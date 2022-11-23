@@ -131,7 +131,11 @@ public class ServiceBasedPageModelActivatorProviderTest
         Assert.Null(releaser);
     }
 
-    private class SimpleModel { }
+    private class SimpleModel
+    {
+    }
 
-    private class DISimpleModel : SimpleModel { }
+    private class DISimpleModel : SimpleModel
+    {
+    }
 }

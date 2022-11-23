@@ -34,7 +34,9 @@ namespace System.Data.Common
             internal Exception? _errors;
         }
 
-        protected DbDataAdapter() : base() { }
+        protected DbDataAdapter() : base()
+        {
+        }
 
         protected DbDataAdapter(DbDataAdapter adapter) : base(adapter)
         {
@@ -858,9 +860,13 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        protected virtual void OnRowUpdated(RowUpdatedEventArgs value) { }
+        protected virtual void OnRowUpdated(RowUpdatedEventArgs value)
+        {
+        }
 
-        protected virtual void OnRowUpdating(RowUpdatingEventArgs value) { }
+        protected virtual void OnRowUpdating(RowUpdatingEventArgs value)
+        {
+        }
 
         private void ParameterInput(
             IDataParameterCollection parameters,

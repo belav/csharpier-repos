@@ -14,7 +14,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal string[]? _memberNames;
         internal int _assemId;
 
-        internal BinaryObjectWithMap() { }
+        internal BinaryObjectWithMap()
+        {
+        }
 
         internal BinaryObjectWithMap(BinaryHeaderEnum binaryHeaderEnum)
         {

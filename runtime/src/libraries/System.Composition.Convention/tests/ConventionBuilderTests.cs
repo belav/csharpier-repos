@@ -10,7 +10,9 @@ namespace System.Composition.Convention.Tests
 {
     public class ConventionBuilderTests
     {
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         private class FooImpl : IFoo
         {
@@ -21,11 +23,17 @@ namespace System.Composition.Convention.Tests
 
         private class FooImplWithConstructors : IFoo
         {
-            public FooImplWithConstructors() { }
+            public FooImplWithConstructors()
+            {
+            }
 
-            public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+            public FooImplWithConstructors(IEnumerable<IFoo> ids)
+            {
+            }
 
-            public FooImplWithConstructors(int id, string name) { }
+            public FooImplWithConstructors(int id, string name)
+            {
+            }
         }
 
         [Fact]

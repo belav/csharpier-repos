@@ -25,7 +25,9 @@ public class Runtime_56495
         {
             if (s_1)
             {
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     vr1 = vr1;

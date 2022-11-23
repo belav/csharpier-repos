@@ -21,7 +21,9 @@ namespace System.Web.Mvc.Routing
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteBuilder" /> class using the default inline constraint resolver.
         /// </summary>
-        public RouteBuilder() : this(new DefaultInlineConstraintResolver()) { }
+        public RouteBuilder() : this(new DefaultInlineConstraintResolver())
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteBuilder" /> class.

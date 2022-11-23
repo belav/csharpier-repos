@@ -29,26 +29,76 @@ public partial class ThreadPoolBoundHandleTests
     [Fact]
     public unsafe void PreAllocatedOverlapped_NullAsContext_DoesNotThrow()
     {
-        using (new PreAllocatedOverlapped((_, __, ___) => { }, (object)null, new byte[256])) { }
         using (
-            PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, (object)null, new byte[256])
-        ) { }
+            new PreAllocatedOverlapped(
+                (_, __, ___) => {
+                },
+                (object)null,
+                new byte[256]
+            )
+        )
+        {
+        }
+        using (
+            PreAllocatedOverlapped.UnsafeCreate(
+                (_, __, ___) => {
+                },
+                (object)null,
+                new byte[256]
+            )
+        )
+        {
+        }
     }
 
     [Fact]
     public unsafe void PreAllocatedOverlapped_NullAsPinData_DoesNotThrow()
     {
-        using (new PreAllocatedOverlapped((_, __, ___) => { }, new object(), (byte[])null)) { }
-        using (PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), (byte[])null))
-        { }
+        using (
+            new PreAllocatedOverlapped(
+                (_, __, ___) => {
+                },
+                new object(),
+                (byte[])null
+            )
+        )
+        {
+        }
+        using (
+            PreAllocatedOverlapped.UnsafeCreate(
+                (_, __, ___) => {
+                },
+                new object(),
+                (byte[])null
+            )
+        )
+        {
+        }
     }
 
     [Fact]
     public unsafe void PreAllocatedOverlapped_EmptyArrayAsPinData_DoesNotThrow()
     {
-        using (new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[0])) { }
-        using (PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), new byte[0]))
-        { }
+        using (
+            new PreAllocatedOverlapped(
+                (_, __, ___) => {
+                },
+                new object(),
+                new byte[0]
+            )
+        )
+        {
+        }
+        using (
+            PreAllocatedOverlapped.UnsafeCreate(
+                (_, __, ___) => {
+                },
+                new object(),
+                new byte[0]
+            )
+        )
+        {
+        }
     }
 
     [Fact]
@@ -58,7 +108,8 @@ public partial class ThreadPoolBoundHandleTests
         Assert.Throws<ArgumentException>(
             () =>
                 new PreAllocatedOverlapped(
-                    (_, __, ___) => { },
+                    (_, __, ___) => {
+                    },
                     new object(),
                     new NonBlittableType() { s = "foo" }
                 )
@@ -66,7 +117,8 @@ public partial class ThreadPoolBoundHandleTests
         Assert.Throws<ArgumentException>(
             () =>
                 PreAllocatedOverlapped.UnsafeCreate(
-                    (_, __, ___) => { },
+                    (_, __, ___) => {
+                    },
                     new object(),
                     new NonBlittableType() { s = "foo" }
                 )
@@ -82,18 +134,24 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (
             new PreAllocatedOverlapped(
-                (_, __, ___) => { },
+                (_, __, ___) => {
+                },
                 new object(),
                 new BlittableType() { i = 42 }
             )
-        ) { }
+        )
+        {
+        }
         using (
             PreAllocatedOverlapped.UnsafeCreate(
-                (_, __, ___) => { },
+                (_, __, ___) => {
+                },
                 new object(),
                 new BlittableType() { i = 42 }
             )
-        ) { }
+        )
+        {
+        }
     }
 
     [Fact]
@@ -105,8 +163,26 @@ public partial class ThreadPoolBoundHandleTests
             new byte[5],
         };
 
-        using (new PreAllocatedOverlapped((_, __, ___) => { }, new object(), array)) { }
-        using (PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array)) { }
+        using (
+            new PreAllocatedOverlapped(
+                (_, __, ___) => {
+                },
+                new object(),
+                array
+            )
+        )
+        {
+        }
+        using (
+            PreAllocatedOverlapped.UnsafeCreate(
+                (_, __, ___) => {
+                },
+                new object(),
+                array
+            )
+        )
+        {
+        }
     }
 
     [Fact]
@@ -120,10 +196,22 @@ public partial class ThreadPoolBoundHandleTests
         };
 
         Assert.Throws<ArgumentException>(
-            () => new PreAllocatedOverlapped((_, __, ___) => { }, new object(), array)
+            () =>
+                new PreAllocatedOverlapped(
+                    (_, __, ___) => {
+                    },
+                    new object(),
+                    array
+                )
         );
         Assert.Throws<ArgumentException>(
-            () => PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array)
+            () =>
+                PreAllocatedOverlapped.UnsafeCreate(
+                    (_, __, ___) => {
+                    },
+                    new object(),
+                    array
+                )
         );
 
         // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.
@@ -134,18 +222,50 @@ public partial class ThreadPoolBoundHandleTests
     [Fact]
     public unsafe void PreAllocatedOverlapped_ReturnedNativeOverlapped_InternalLowAndInternalHighSetToZero()
     {
-        using (new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256])) { }
         using (
-            PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), new byte[256])
-        ) { }
+            new PreAllocatedOverlapped(
+                (_, __, ___) => {
+                },
+                new object(),
+                new byte[256]
+            )
+        )
+        {
+        }
+        using (
+            PreAllocatedOverlapped.UnsafeCreate(
+                (_, __, ___) => {
+                },
+                new object(),
+                new byte[256]
+            )
+        )
+        {
+        }
     }
 
     [Fact]
     public unsafe void PreAllocatedOverlapped_ReturnedNativeOverlapped_OffsetLowAndOffsetHighSetToZero()
     {
-        using (new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256])) { }
         using (
-            PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), new byte[256])
-        ) { }
+            new PreAllocatedOverlapped(
+                (_, __, ___) => {
+                },
+                new object(),
+                new byte[256]
+            )
+        )
+        {
+        }
+        using (
+            PreAllocatedOverlapped.UnsafeCreate(
+                (_, __, ___) => {
+                },
+                new object(),
+                new byte[256]
+            )
+        )
+        {
+        }
     }
 }

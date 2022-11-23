@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             public readonly IReadOnlyList<string> NameParts;
 
             public SymbolResult(INamespaceOrTypeSymbol symbol, int weight)
-                : this(symbol, weight, originalSymbol: null) { }
+                : this(symbol, weight, originalSymbol: null)
+            {
+            }
 
             private SymbolResult(
                 INamespaceOrTypeSymbol symbol,

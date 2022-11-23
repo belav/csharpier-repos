@@ -37,7 +37,9 @@ namespace Microsoft.Interop
     /// </remarks>
     public abstract record MarshallingInfo
     {
-        protected MarshallingInfo() { }
+        protected MarshallingInfo()
+        {
+        }
     }
 
     /// <summary>
@@ -47,7 +49,9 @@ namespace Microsoft.Interop
     {
         public static readonly MarshallingInfo Instance = new NoMarshallingInfo();
 
-        private NoMarshallingInfo() { }
+        private NoMarshallingInfo()
+        {
+        }
     }
 
     /// <summary>
@@ -85,14 +89,18 @@ namespace Microsoft.Interop
 
     public abstract record CountInfo
     {
-        private protected CountInfo() { }
+        private protected CountInfo()
+        {
+        }
     }
 
     public sealed record NoCountInfo : CountInfo
     {
         public static readonly NoCountInfo Instance = new NoCountInfo();
 
-        private NoCountInfo() { }
+        private NoCountInfo()
+        {
+        }
     }
 
     public sealed record ConstSizeCountInfo(int Size) : CountInfo;

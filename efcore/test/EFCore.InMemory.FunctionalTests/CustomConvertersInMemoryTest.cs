@@ -6,15 +6,23 @@ namespace Microsoft.EntityFrameworkCore;
 public class CustomConvertersInMemoryTest
     : CustomConvertersTestBase<CustomConvertersInMemoryTest.CustomConvertersInMemoryFixture>
 {
-    public CustomConvertersInMemoryTest(CustomConvertersInMemoryFixture fixture) : base(fixture) { }
+    public CustomConvertersInMemoryTest(CustomConvertersInMemoryFixture fixture) : base(fixture)
+    {
+    }
 
-    public override void Optional_datetime_reading_null_from_database() { }
+    public override void Optional_datetime_reading_null_from_database()
+    {
+    }
 
     // Disabled: In-memory database is case-sensitive
-    public override void Can_insert_and_read_back_with_case_insensitive_string_key() { }
+    public override void Can_insert_and_read_back_with_case_insensitive_string_key()
+    {
+    }
 
     [ConditionalFact(Skip = "Issue#17050")]
-    public override void Value_conversion_with_property_named_value() { }
+    public override void Value_conversion_with_property_named_value()
+    {
+    }
 
     [ConditionalFact(Skip = "Issue#17050")]
     public override void Collection_property_as_scalar_Any() =>

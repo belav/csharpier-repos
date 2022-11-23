@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpUpdateProjectToAllowUnsafe : AbstractUpdateProjectTest
     {
         public CSharpUpdateProjectToAllowUnsafe(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         private void InvokeFix()
         {

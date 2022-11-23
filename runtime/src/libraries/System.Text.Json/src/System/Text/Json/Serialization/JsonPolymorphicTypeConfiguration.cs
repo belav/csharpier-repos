@@ -256,7 +256,9 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Creates a new polymorphic configuration instance for a given base type.
         /// </summary>
-        public JsonPolymorphicTypeConfiguration() : base(typeof(TBaseType)) { }
+        public JsonPolymorphicTypeConfiguration() : base(typeof(TBaseType))
+        {
+        }
 
         /// <summary>
         /// Associates specified derived type with supplied string identifier.

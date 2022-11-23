@@ -28,7 +28,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         private AddParameterDialog_OutOfProc AddParameterDialog => VisualStudio.AddParameterDialog;
 
         public BasicChangeSignatureDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicChangeSignatureDialog)) { }
+            : base(instanceFactory, nameof(BasicChangeSignatureDialog))
+        {
+        }
 
         [WpfFact]
         public void VerifyCodeRefactoringOffered()

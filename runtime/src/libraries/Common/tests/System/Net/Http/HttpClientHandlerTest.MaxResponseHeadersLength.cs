@@ -29,7 +29,9 @@ namespace System.Net.Http.Functional.Tests
         private const int Http3ExcessiveLoad = 0x107;
 
         public HttpClientHandler_MaxResponseHeadersLength_Test(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
 
         [Theory]
         [InlineData(0)]
@@ -119,12 +121,16 @@ namespace System.Net.Http.Functional.Tests
                     catch (IOException ex)
                         when (ex.InnerException is SocketException se
                             && se.SocketErrorCode == SocketError.Shutdown
-                        ) { }
+                        )
+                    {
+                    }
 #if !WINHTTPHANDLER_TEST
                     catch (QuicException ex)
                         when (ex.QuicError == QuicError.StreamAborted
                             && ex.ApplicationErrorCode == Http3ExcessiveLoad
-                        ) { }
+                        )
+                    {
+                    }
 #endif
                 }
             );
@@ -187,12 +193,16 @@ namespace System.Net.Http.Functional.Tests
                     catch (IOException ex)
                         when (ex.InnerException is SocketException se
                             && se.SocketErrorCode == SocketError.Shutdown
-                        ) { }
+                        )
+                    {
+                    }
 #if !WINHTTPHANDLER_TEST
                     catch (QuicException ex)
                         when (ex.QuicError == QuicError.StreamAborted
                             && ex.ApplicationErrorCode == Http3ExcessiveLoad
-                        ) { }
+                        )
+                    {
+                    }
 #endif
                 }
             );

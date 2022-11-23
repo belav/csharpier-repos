@@ -1080,7 +1080,9 @@ namespace DefaultNamespace
                 if (args[0].Equals("-v"))
                     cbX.verbose = true;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             try
             {

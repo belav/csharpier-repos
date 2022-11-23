@@ -13,9 +13,13 @@ namespace AssemblyDependencyResolverTests
         protected string BinaryBasePath { get; private set; }
         protected string CoreRoot { get; private set; }
 
-        protected virtual void Initialize() { }
+        protected virtual void Initialize()
+        {
+        }
 
-        protected virtual void Cleanup() { }
+        protected virtual void Cleanup()
+        {
+        }
 
         public static int RunTests(params Type[] testTypes)
         {

@@ -458,7 +458,9 @@ namespace Newtonsoft.Json.Converters
     {
         private XDocument Document => (XDocument)WrappedNode!;
 
-        public XDocumentWrapper(XDocument document) : base(document) { }
+        public XDocumentWrapper(XDocument document) : base(document)
+        {
+        }
 
         public override List<IXmlNode> ChildNodes
         {
@@ -593,7 +595,9 @@ namespace Newtonsoft.Json.Converters
     {
         private XText Text => (XText)WrappedNode!;
 
-        public XTextWrapper(XText text) : base(text) { }
+        public XTextWrapper(XText text) : base(text)
+        {
+        }
 
         public override string? Value
         {
@@ -619,7 +623,9 @@ namespace Newtonsoft.Json.Converters
     {
         private XComment Text => (XComment)WrappedNode!;
 
-        public XCommentWrapper(XComment text) : base(text) { }
+        public XCommentWrapper(XComment text) : base(text)
+        {
+        }
 
         public override string? Value
         {
@@ -647,7 +653,9 @@ namespace Newtonsoft.Json.Converters
             (XProcessingInstruction)WrappedNode!;
 
         public XProcessingInstructionWrapper(XProcessingInstruction processingInstruction)
-            : base(processingInstruction) { }
+            : base(processingInstruction)
+        {
+        }
 
         public override string? LocalName => ProcessingInstruction.Target;
 
@@ -664,7 +672,9 @@ namespace Newtonsoft.Json.Converters
 
         private XContainer Container => (XContainer)WrappedNode!;
 
-        public XContainerWrapper(XContainer container) : base(container) { }
+        public XContainerWrapper(XContainer container) : base(container)
+        {
+        }
 
         public override List<IXmlNode> ChildNodes
         {
@@ -800,7 +810,9 @@ namespace Newtonsoft.Json.Converters
     {
         private XAttribute Attribute => (XAttribute)WrappedNode!;
 
-        public XAttributeWrapper(XAttribute attribute) : base(attribute) { }
+        public XAttributeWrapper(XAttribute attribute) : base(attribute)
+        {
+        }
 
         public override string? Value
         {
@@ -832,7 +844,9 @@ namespace Newtonsoft.Json.Converters
 
         private XElement Element => (XElement)WrappedNode!;
 
-        public XElementWrapper(XElement element) : base(element) { }
+        public XElementWrapper(XElement element) : base(element)
+        {
+        }
 
         public void SetAttributeNode(IXmlNode attribute)
         {

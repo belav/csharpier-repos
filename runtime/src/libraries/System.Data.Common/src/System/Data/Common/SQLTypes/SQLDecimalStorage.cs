@@ -22,7 +22,9 @@ namespace System.Data.Common
                 SqlDecimal.Null,
                 SqlDecimal.Null,
                 StorageType.SqlDecimal
-            ) { }
+            )
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

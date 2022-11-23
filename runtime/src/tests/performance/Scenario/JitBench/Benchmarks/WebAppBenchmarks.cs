@@ -15,7 +15,9 @@ namespace JitBench
                 "MusicStore",
                 "MusicStore.dll",
                 new string[] { Path.Combine("src", "MusicStore", "MusicStore.csproj") }
-            ) { }
+            )
+        {
+        }
 
         protected override string GetJitBenchRepoRootDir(string outputDir)
         {
@@ -35,7 +37,9 @@ namespace JitBench
                 "AllReady",
                 "AllReady.dll",
                 new string[] { Path.Combine("src", "AllReady", "AllReady.csproj") }
-            ) { }
+            )
+        {
+        }
 
         protected override string GetJitBenchRepoRootDir(string outputDir)
         {

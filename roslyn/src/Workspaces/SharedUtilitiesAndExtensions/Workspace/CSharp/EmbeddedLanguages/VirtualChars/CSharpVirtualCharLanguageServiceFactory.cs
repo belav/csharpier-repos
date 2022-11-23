@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpVirtualCharLanguageServiceFactory() { }
+        public CSharpVirtualCharLanguageServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
             CSharpVirtualCharLanguageService.Instance;
@@ -29,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
         {
             internal static new readonly CSharpVirtualCharLanguageService Instance = new();
 
-            private CSharpVirtualCharLanguageService() { }
+            private CSharpVirtualCharLanguageService()
+            {
+            }
         }
     }
 }

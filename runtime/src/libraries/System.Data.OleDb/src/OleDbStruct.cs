@@ -139,7 +139,9 @@ namespace System.Data.OleDb
         internal byte bPrecision;
         internal byte bScale;
 
-        internal tagDBBINDING() { }
+        internal tagDBBINDING()
+        {
+        }
 
 #if DEBUG
         public override string ToString()
@@ -263,7 +265,9 @@ namespace System.Data.OleDb
 
         internal int cchMaxLen;
 
-        internal tagDBLITERALINFO() { }
+        internal tagDBLITERALINFO()
+        {
+        }
     }
 
 #if false
@@ -284,7 +288,9 @@ namespace System.Data.OleDb
         internal int cProperties;
         internal Guid guidPropertySet;
 
-        internal tagDBPROPSET() { }
+        internal tagDBPROPSET()
+        {
+        }
 
         internal tagDBPROPSET(int propertyCount, Guid propertySet)
         {
@@ -329,7 +335,9 @@ namespace System.Data.OleDb
         [MarshalAs(UnmanagedType.Struct)]
         internal object? vValue;
 
-        internal tagDBPROP_x86() { }
+        internal tagDBPROP_x86()
+        {
+        }
 
         internal tagDBPROP_x86(int propertyID, bool required, object value)
         {
@@ -357,7 +365,9 @@ namespace System.Data.OleDb
         [MarshalAs(UnmanagedType.Struct)]
         internal object? vValue;
 
-        internal tagDBPROP() { }
+        internal tagDBPROP()
+        {
+        }
 
         internal tagDBPROP(int propertyID, bool required, object value)
         {
@@ -385,7 +395,9 @@ namespace System.Data.OleDb
         internal int cParamSets;
         internal IntPtr hAccessor;
 
-        internal tagDBPARAMS() { }
+        internal tagDBPARAMS()
+        {
+        }
     }
 
 #if false
@@ -428,7 +440,9 @@ namespace System.Data.OleDb
 
         internal tagDBIDX columnid;
 
-        internal tagDBCOLUMNINFO() { }
+        internal tagDBCOLUMNINFO()
+        {
+        }
 
 #if DEBUG
         public override string ToString()
@@ -467,7 +481,9 @@ namespace System.Data.OleDb
         internal int cPropertyInfos;
         internal Guid guidPropertySet;
 
-        internal tagDBPROPINFOSET() { }
+        internal tagDBPROPINFOSET()
+        {
+        }
     }
 
 #if false
@@ -513,7 +529,9 @@ namespace System.Data.OleDb
         [MarshalAs(UnmanagedType.Struct)]
         internal object? vValue;
 
-        internal tagDBPROPINFO_x86() { }
+        internal tagDBPROPINFO_x86()
+        {
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -540,7 +558,9 @@ namespace System.Data.OleDb
         [MarshalAs(UnmanagedType.Struct)]
         internal object? vValue;
 
-        internal tagDBPROPINFO() { }
+        internal tagDBPROPINFO()
+        {
+        }
     }
 
 #if false

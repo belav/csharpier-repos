@@ -1,4 +1,6 @@
 ﻿namespace Library1
 {
-    class Class1 { }
+    class Class1
+    {
+    }
 }

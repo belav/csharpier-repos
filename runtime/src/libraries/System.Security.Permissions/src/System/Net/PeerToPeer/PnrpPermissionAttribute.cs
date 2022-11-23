@@ -24,7 +24,9 @@ namespace System.Net.PeerToPeer
     )]
     public sealed class PnrpPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public PnrpPermissionAttribute(SecurityAction action) : base(action) { }
+        public PnrpPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public override IPermission CreatePermission()
         {

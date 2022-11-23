@@ -368,7 +368,9 @@ namespace System.IO.Ports.Tests
                     {
                         com1.RtsEnable = !rtsEnable;
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
                 else
                 {

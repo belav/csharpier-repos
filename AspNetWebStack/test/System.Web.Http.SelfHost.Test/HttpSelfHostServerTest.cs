@@ -424,7 +424,9 @@ namespace System.Web.Http.SelfHost
         internal class ThrowsBeforeTaskObjectContent : ObjectContent
         {
             public ThrowsBeforeTaskObjectContent()
-                : base(typeof(string), "testContent", new JsonMediaTypeFormatter()) { }
+                : base(typeof(string), "testContent", new JsonMediaTypeFormatter())
+            {
+            }
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
@@ -435,7 +437,9 @@ namespace System.Web.Http.SelfHost
         internal class ThrowBeforeWriteObjectContent : ObjectContent
         {
             public ThrowBeforeWriteObjectContent()
-                : base(typeof(string), "testContent", new JsonMediaTypeFormatter()) { }
+                : base(typeof(string), "testContent", new JsonMediaTypeFormatter())
+            {
+            }
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
@@ -449,7 +453,9 @@ namespace System.Web.Http.SelfHost
         internal class ThrowAfterWriteObjectContent : ObjectContent
         {
             public ThrowAfterWriteObjectContent()
-                : base(typeof(string), "testContent", new JsonMediaTypeFormatter()) { }
+                : base(typeof(string), "testContent", new JsonMediaTypeFormatter())
+            {
+            }
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
@@ -465,7 +471,9 @@ namespace System.Web.Http.SelfHost
         internal class ThrowBeforeWriteStream : StreamContent
         {
             public ThrowBeforeWriteStream()
-                : base(new MemoryStream(Encoding.UTF8.GetBytes("ThrowBeforeWriteStream"))) { }
+                : base(new MemoryStream(Encoding.UTF8.GetBytes("ThrowBeforeWriteStream")))
+            {
+            }
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
@@ -476,7 +484,9 @@ namespace System.Web.Http.SelfHost
         internal class ThrowAfterWriteStream : StreamContent
         {
             public ThrowAfterWriteStream()
-                : base(new MemoryStream(Encoding.UTF8.GetBytes("ThrowAfterWriteStream"))) { }
+                : base(new MemoryStream(Encoding.UTF8.GetBytes("ThrowAfterWriteStream")))
+            {
+            }
 
             protected override async Task SerializeToStreamAsync(
                 Stream stream,

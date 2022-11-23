@@ -16,6 +16,8 @@ namespace Castle.DynamicProxy.Tests.Classes
 {
     public class HasCtorWithParamsStrings
     {
-        public HasCtorWithParamsStrings(params string[] arguments) { }
+        public HasCtorWithParamsStrings(params string[] arguments)
+        {
+        }
     }
 }

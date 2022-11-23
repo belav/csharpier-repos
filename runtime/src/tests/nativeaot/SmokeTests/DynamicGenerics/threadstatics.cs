@@ -317,7 +317,9 @@ namespace ThreadLocalStatics
         }
     }
 
-    public struct T3 { }
+    public struct T3
+    {
+    }
 
     public struct T4
     {
@@ -379,7 +381,9 @@ namespace ThreadLocalStatics
         }
     }
 
-    public class T3 { }
+    public class T3
+    {
+    }
 
     public class T4
     {

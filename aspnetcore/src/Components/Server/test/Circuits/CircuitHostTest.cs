@@ -369,7 +369,9 @@ public class CircuitHostTest
                 NullLogger.Instance,
                 CreateJSRuntime(new CircuitOptions()),
                 new CircuitJSComponentInterop(new CircuitOptions())
-            ) { }
+            )
+        {
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -405,7 +407,9 @@ public class CircuitHostTest
     {
         public bool DidCallDispose { get; private set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
 
@@ -453,7 +457,9 @@ public class CircuitHostTest
             _id = _instanceCount++;
         }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public async Task SetParametersAsync(ParameterView parameters)
         {
@@ -478,7 +484,9 @@ public class CircuitHostTest
 
         public Exception ExceptionDuringDisposeAsync { get; private set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
 

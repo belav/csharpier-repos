@@ -73,18 +73,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public sealed override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds() =>
             ImmutableArray<TypeParameterConstraintKind>.Empty;
 
-        protected sealed override void PartialMethodChecks(BindingDiagnosticBag diagnostics) { }
+        protected sealed override void PartialMethodChecks(BindingDiagnosticBag diagnostics)
+        {
+        }
 
-        protected sealed override void ExtensionMethodChecks(BindingDiagnosticBag diagnostics) { }
+        protected sealed override void ExtensionMethodChecks(BindingDiagnosticBag diagnostics)
+        {
+        }
 
-        protected sealed override void CompleteAsyncMethodChecksBetweenStartAndFinish() { }
+        protected sealed override void CompleteAsyncMethodChecksBetweenStartAndFinish()
+        {
+        }
 
         protected sealed override TypeSymbol? ExplicitInterfaceType => null;
 
         protected sealed override void CheckConstraintsForExplicitInterfaceType(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) { }
+        )
+        {
+        }
 
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,

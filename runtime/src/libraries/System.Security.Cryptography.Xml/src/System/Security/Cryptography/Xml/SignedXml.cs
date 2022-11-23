@@ -940,7 +940,9 @@ namespace System.Security.Cryptography.Xml
         {
             private ArrayList? _references;
 
-            public ReferenceLevelSortOrder() { }
+            public ReferenceLevelSortOrder()
+            {
+            }
 
             public ArrayList References
             {

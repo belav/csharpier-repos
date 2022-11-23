@@ -477,7 +477,9 @@ namespace Roslyn.Test.PdbUtilities
             // Constructs a new hashtable. The hashtable is created with an initial
             // capacity of zero and a load factor of 1.0.
             //| <include path='docs/doc[@for="IntHashTable.IntHashTable"]/*' />
-            internal IntHashTable() : this(0, 100) { }
+            internal IntHashTable() : this(0, 100)
+            {
+            }
 
             internal IntHashTable(int capacity, int loadFactorPerc)
             {
@@ -949,7 +951,9 @@ namespace Roslyn.Test.PdbUtilities
 
         private class DataStream
         {
-            internal DataStream() { }
+            internal DataStream()
+            {
+            }
 
             internal DataStream(int contentSize, BitAccess bits, int count)
             {
@@ -1214,7 +1218,9 @@ namespace Roslyn.Test.PdbUtilities
             //internal byte[] rgl;        // user data, force 4-byte alignment
         };
 
-        private Token2SourceLineExporter() { }
+        private Token2SourceLineExporter()
+        {
+        }
 
         private static readonly XmlWriterSettings s_xmlWriterSettings = new XmlWriterSettings
         {

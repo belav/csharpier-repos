@@ -16,7 +16,9 @@ namespace JitBench
     /// </summary>
     internal sealed class CommandLineOptions
     {
-        public CommandLineOptions() { }
+        public CommandLineOptions()
+        {
+        }
 
         [Option(
             "use-existing-setup",

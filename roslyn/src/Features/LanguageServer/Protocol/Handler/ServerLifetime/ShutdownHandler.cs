@@ -17,7 +17,9 @@ internal class ShutdownHandler : ILspServiceNotificationHandler
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public ShutdownHandler() { }
+    public ShutdownHandler()
+    {
+    }
 
     public bool MutatesSolutionState => true;
 

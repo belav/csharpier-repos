@@ -16,7 +16,9 @@ namespace System.Threading
 #endif
     public sealed class RegisteredWaitHandle : MarshalByRefObject
     {
-        internal RegisteredWaitHandle() { }
+        internal RegisteredWaitHandle()
+        {
+        }
 
         public bool Unregister(WaitHandle? waitObject)
         {
@@ -78,7 +80,9 @@ namespace System.Threading
             QueueCallback();
         }
 
-        internal static void NotifyWorkItemProgress() { }
+        internal static void NotifyWorkItemProgress()
+        {
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool NotifyWorkItemComplete(
@@ -91,7 +95,9 @@ namespace System.Threading
 
         internal static bool NotifyThreadBlocked() => false;
 
-        internal static void NotifyThreadUnblocked() { }
+        internal static void NotifyThreadUnblocked()
+        {
+        }
 
         internal static object? GetOrCreateThreadLocalCompletionCountObject() => null;
 

@@ -19,7 +19,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
     public class Foo
     {
-        public void Method(params int[] x) { }
+        public void Method(params int[] x)
+        {
+        }
     }
 
     public class Test
@@ -73,7 +75,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
     public class Foo
     {
-        public void Method(params int[] x) { }
+        public void Method(params int[] x)
+        {
+        }
     }
 
     public class Test

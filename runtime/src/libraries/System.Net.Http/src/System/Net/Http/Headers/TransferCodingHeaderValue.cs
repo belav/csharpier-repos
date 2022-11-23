@@ -20,7 +20,9 @@ namespace System.Net.Http.Headers
         public ICollection<NameValueHeaderValue> Parameters =>
             _parameters ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
 
-        internal TransferCodingHeaderValue() { }
+        internal TransferCodingHeaderValue()
+        {
+        }
 
         protected TransferCodingHeaderValue(TransferCodingHeaderValue source)
         {

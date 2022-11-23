@@ -19,7 +19,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     {
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        public BasicGoToImplementation() : base(nameof(BasicGoToImplementation)) { }
+        public BasicGoToImplementation() : base(nameof(BasicGoToImplementation))
+        {
+        }
 
         [IdeTheory]
         [CombinatorialData]

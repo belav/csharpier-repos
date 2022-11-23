@@ -16,7 +16,9 @@ namespace System.CommandLine.Help
         }
 
         public HelpOption(Func<LocalizationResources> getLocalizationResources)
-            : this(new[] { "-h", "/h", "--help", "-?", "/?" }, getLocalizationResources) { }
+            : this(new[] { "-h", "/h", "--help", "-?", "/?" }, getLocalizationResources)
+        {
+        }
 
         public override string? Description
         {

@@ -24,7 +24,9 @@ namespace System.Net.NetworkInformation
     )]
     public sealed class NetworkInformationPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public NetworkInformationPermissionAttribute(SecurityAction action) : base(action) { }
+        public NetworkInformationPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public string Access { get; set; }
 

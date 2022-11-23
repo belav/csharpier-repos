@@ -131,7 +131,9 @@ namespace System.Xml.Schema
                             namespaceManager
                         );
                     }
-                    catch (XmlSchemaException) { }
+                    catch (XmlSchemaException)
+                    {
+                    }
                     if (typedValue != null)
                     {
                         si.MemberType = mt;

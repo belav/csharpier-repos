@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 State state,
                 string fileName,
                 CancellationToken cancellationToken
-            ) : base(service, state, fileName, cancellationToken) { }
+            ) : base(service, state, fileName, cancellationToken)
+            {
+            }
 
             /// <summary>
             /// Given a document and a type contained in it, moves the type

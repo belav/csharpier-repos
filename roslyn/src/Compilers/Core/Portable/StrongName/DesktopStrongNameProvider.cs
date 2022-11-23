@@ -29,13 +29,17 @@ namespace Microsoft.CodeAnalysis
 
         // The path from where this is thrown to where it is caught is all internal,
         // so there's no chance of an API consumer seeing it.
-        internal sealed class ClrStrongNameMissingException : Exception { }
+        internal sealed class ClrStrongNameMissingException : Exception
+        {
+        }
 
         private readonly ImmutableArray<string> _keyFileSearchPaths;
         internal override StrongNameFileSystem FileSystem { get; }
 
         public DesktopStrongNameProvider(ImmutableArray<string> keyFileSearchPaths)
-            : this(keyFileSearchPaths, StrongNameFileSystem.Instance) { }
+            : this(keyFileSearchPaths, StrongNameFileSystem.Instance)
+        {
+        }
 
         /// <summary>
         /// Creates an instance of <see cref="DesktopStrongNameProvider"/>.
@@ -51,7 +55,9 @@ namespace Microsoft.CodeAnalysis
                 tempPath == null
                     ? StrongNameFileSystem.Instance
                     : new StrongNameFileSystem(tempPath)
-            ) { }
+            )
+        {
+        }
 
         internal DesktopStrongNameProvider(
             ImmutableArray<string> keyFileSearchPaths,

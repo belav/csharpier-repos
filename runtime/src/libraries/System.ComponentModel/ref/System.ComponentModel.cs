@@ -16,14 +16,20 @@ namespace System.ComponentModel
 {
     public partial class CancelEventArgs : System.EventArgs
     {
-        public CancelEventArgs() { }
+        public CancelEventArgs()
+        {
+        }
 
-        public CancelEventArgs(bool cancel) { }
+        public CancelEventArgs(bool cancel)
+        {
+        }
 
         public bool Cancel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 

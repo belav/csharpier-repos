@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model;
 
 public class AdventureWorksContext : PoolableDbContext
 {
-    public AdventureWorksContext(DbContextOptions options) : base(options) { }
+    public AdventureWorksContext(DbContextOptions options) : base(options)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

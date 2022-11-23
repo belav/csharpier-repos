@@ -100,7 +100,9 @@ namespace System.Data
             internal static readonly DataRowReferenceComparer s_default =
                 new DataRowReferenceComparer();
 
-            private DataRowReferenceComparer() { }
+            private DataRowReferenceComparer()
+            {
+            }
 
             public bool Equals(DataRow? x, DataRow? y) => x == (object?)y;
 

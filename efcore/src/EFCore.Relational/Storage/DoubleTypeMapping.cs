@@ -27,13 +27,17 @@ public class DoubleTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public DoubleTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Double)
-        : base(storeType, typeof(double), dbType) { }
+        : base(storeType, typeof(double), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DoubleTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected DoubleTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected DoubleTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

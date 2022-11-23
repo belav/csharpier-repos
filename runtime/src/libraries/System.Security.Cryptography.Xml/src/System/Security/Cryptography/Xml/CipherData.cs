@@ -12,7 +12,9 @@ namespace System.Security.Cryptography.Xml
         private CipherReference? _cipherReference;
         private byte[]? _cipherValue;
 
-        public CipherData() { }
+        public CipherData()
+        {
+        }
 
         public CipherData(byte[] cipherValue)
         {

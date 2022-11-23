@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 isPublic: true,
                 isReadOnly: false,
                 isStatic: false
-            ) { }
+            )
+        {
+        }
 
         internal override bool SuppressDynamicAttribute
         {

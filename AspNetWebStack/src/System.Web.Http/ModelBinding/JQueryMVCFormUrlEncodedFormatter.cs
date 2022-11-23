@@ -13,7 +13,9 @@ namespace System.Web.Http.ModelBinding
     {
         private readonly HttpConfiguration _configuration = null;
 
-        public JQueryMvcFormUrlEncodedFormatter() { }
+        public JQueryMvcFormUrlEncodedFormatter()
+        {
+        }
 
         public JQueryMvcFormUrlEncodedFormatter(HttpConfiguration config)
         {

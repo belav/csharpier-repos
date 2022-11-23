@@ -317,7 +317,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <summary>
     ///     Generates a pseudo FROM clause. Required by some providers when a query has no actual FROM clause.
     /// </summary>
-    protected virtual void GeneratePseudoFromClause() { }
+    protected virtual void GeneratePseudoFromClause()
+    {
+    }
 
     /// <inheritdoc />
     protected override Expression VisitProjection(ProjectionExpression projectionExpression)
@@ -1088,7 +1090,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     ///     Generates a TOP construct in the relational command
     /// </summary>
     /// <param name="selectExpression">A select expression to use.</param>
-    protected virtual void GenerateTop(SelectExpression selectExpression) { }
+    protected virtual void GenerateTop(SelectExpression selectExpression)
+    {
+    }
 
     /// <summary>
     ///     Generates an ORDER BY clause in the relational command

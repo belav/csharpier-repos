@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
             : base(
                 @"using System;
 using Goo = System.Data;"
-            ) { }
+            )
+        {
+        }
 
         private CodeImport GetCodeImport(object path)
         {

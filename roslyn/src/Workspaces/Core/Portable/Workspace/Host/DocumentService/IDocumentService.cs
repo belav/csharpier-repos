@@ -9,5 +9,7 @@ namespace Microsoft.CodeAnalysis.Host
     /// <summary>
     /// Empty interface just to mark document services.
     /// </summary>
-    internal interface IDocumentService { }
+    internal interface IDocumentService
+    {
+    }
 }

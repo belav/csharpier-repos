@@ -64,13 +64,21 @@ namespace System.Reflection.Emit.Tests
         }
     }
 
-    public class TestClass { }
+    public class TestClass
+    {
+    }
 
-    public class GenericClass<T> { }
+    public class GenericClass<T>
+    {
+    }
 
-    public class GenericClass2<T, U> { }
+    public class GenericClass2<T, U>
+    {
+    }
 
-    public interface TestInterface { }
+    public interface TestInterface
+    {
+    }
 
     public class IDClass
     {
@@ -81,7 +89,9 @@ namespace System.Reflection.Emit.Tests
             _id = id;
         }
 
-        public IDClass() : this(0) { }
+        public IDClass() : this(0)
+        {
+        }
 
         public int ID => _id;
     }

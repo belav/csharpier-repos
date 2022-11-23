@@ -497,7 +497,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 get { return ImmutableArray.Create(_descriptor); }
             }
 
-            public override void Initialize(AnalysisContext context) { }
+            public override void Initialize(AnalysisContext context)
+            {
+            }
         }
 
         private class ThrowingLocalizableString : LocalizableString

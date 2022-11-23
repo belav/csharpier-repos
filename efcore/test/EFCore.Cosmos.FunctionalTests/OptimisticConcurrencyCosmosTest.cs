@@ -24,7 +24,9 @@ public class OptimisticConcurrencyCosmosTest
     public override Task Concurrency_issue_where_the_FK_is_the_concurrency_token_can_be_handled() =>
         Task.CompletedTask;
 
-    public override void Nullable_client_side_concurrency_token_can_be_used() { }
+    public override void Nullable_client_side_concurrency_token_can_be_used()
+    {
+    }
 
     // ETag concurrency doesn't work after an item was deleted
     public override Task Deleting_the_same_entity_twice_results_in_DbUpdateConcurrencyException() =>
@@ -49,16 +51,22 @@ public class OptimisticConcurrencyCosmosTest
     {
         public Guid TransactionId => new();
 
-        public void Commit() { }
+        public void Commit()
+        {
+        }
 
         public Task CommitAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public ValueTask DisposeAsync() => default;
 
-        public void Rollback() { }
+        public void Rollback()
+        {
+        }
 
         public Task RollbackAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;

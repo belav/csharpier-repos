@@ -53,7 +53,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [NonInheritable]
-        public class AttributedClass_NonInheritable { }
+        public class AttributedClass_NonInheritable
+        {
+        }
 
         [Test]
         public void InheritableAttribute_should_not_be_replicated_as_it_is_inherited_by_the_runtime()
@@ -63,7 +65,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [Inheritable]
-        public class AttributedClass_Inheritable { }
+        public class AttributedClass_Inheritable
+        {
+        }
 
         [Test]
         public void SecurityPermissionAttribute_should_not_be_replicated_as_it_is_part_of_cas()
@@ -73,7 +77,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [SecurityPermission(SecurityAction.Demand)]
-        public class AttributedClass_SecurityPermission { }
+        public class AttributedClass_SecurityPermission
+        {
+        }
 
         [Test]
         public void ReflectionPermissionAttribute_should_not_be_replicated_as_it_is_part_of_cas()
@@ -83,7 +89,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [ReflectionPermission(SecurityAction.Demand)]
-        public class AttributedClass_ReflectionPermission { }
+        public class AttributedClass_ReflectionPermission
+        {
+        }
 
         private int AttributeCount<TAttribute>(object proxy) where TAttribute : Attribute
         {

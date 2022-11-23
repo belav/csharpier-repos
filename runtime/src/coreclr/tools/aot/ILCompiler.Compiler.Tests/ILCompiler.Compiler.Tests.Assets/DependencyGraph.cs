@@ -33,7 +33,9 @@ namespace ILCompiler.Compiler.Tests.Assets
 
         class GenericVirtualMethodDirectCallDependencyTest
         {
-            class NeverAllocated { }
+            class NeverAllocated
+            {
+            }
 
             class Base
             {
@@ -69,17 +71,23 @@ namespace ILCompiler.Compiler.Tests.Assets
     #region Custom attributes that define invariants to check
     public class GeneratesConstructedEETypeAttribute : Attribute
     {
-        public GeneratesConstructedEETypeAttribute(Type type) { }
+        public GeneratesConstructedEETypeAttribute(Type type)
+        {
+        }
     }
 
     public class NoConstructedEETypeAttribute : Attribute
     {
-        public NoConstructedEETypeAttribute(Type type) { }
+        public NoConstructedEETypeAttribute(Type type)
+        {
+        }
     }
 
     public class GeneratesMethodBodyAttribute : Attribute
     {
-        public GeneratesMethodBodyAttribute(Type owningType, string methodName) { }
+        public GeneratesMethodBodyAttribute(Type owningType, string methodName)
+        {
+        }
 
         public Type[] GenericArguments;
         public Type[] Signature;
@@ -87,7 +95,9 @@ namespace ILCompiler.Compiler.Tests.Assets
 
     public class NoMethodBodyAttribute : Attribute
     {
-        public NoMethodBodyAttribute(Type owningType, string methodName) { }
+        public NoMethodBodyAttribute(Type owningType, string methodName)
+        {
+        }
 
         public Type[] GenericArguments;
         public Type[] Signature;

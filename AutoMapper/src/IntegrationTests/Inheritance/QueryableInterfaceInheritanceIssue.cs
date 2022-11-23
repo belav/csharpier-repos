@@ -10,7 +10,9 @@ public class QueryableInterfaceInheritanceIssue
         string Id { get; set; }
     }
 
-    public interface IQueryableInterface : IBaseQueryableInterface { }
+    public interface IQueryableInterface : IBaseQueryableInterface
+    {
+    }
 
     public class QueryableInterfaceImpl : IQueryableInterface
     {

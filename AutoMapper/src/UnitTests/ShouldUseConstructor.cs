@@ -4,15 +4,21 @@ public class ShouldUseConstructorInternal : NonValidatingSpecBase
 {
     class Destination
     {
-        internal Destination(int a, string b) { }
+        internal Destination(int a, string b)
+        {
+        }
 
         public int A { get; }
 
         public string B { get; }
 
-        public Destination(int a) { }
+        public Destination(int a)
+        {
+        }
 
-        private Destination() { }
+        private Destination()
+        {
+        }
     }
 
     class Source
@@ -36,15 +42,21 @@ public class ShouldUseConstructorPrivate : NonValidatingSpecBase
 {
     class Destination
     {
-        private Destination(int a, string b) { }
+        private Destination(int a, string b)
+        {
+        }
 
         public int A { get; }
 
         public string B { get; }
 
-        internal Destination(int a) { }
+        internal Destination(int a)
+        {
+        }
 
-        public Destination() { }
+        public Destination()
+        {
+        }
     }
 
     class Source
@@ -68,15 +80,21 @@ public class ShouldUseConstructorPublic : NonValidatingSpecBase
 {
     class Destination
     {
-        public Destination(int a, string b) { }
+        public Destination(int a, string b)
+        {
+        }
 
         public int A { get; }
 
         public string B { get; }
 
-        internal Destination(int a) { }
+        internal Destination(int a)
+        {
+        }
 
-        private Destination() { }
+        private Destination()
+        {
+        }
     }
 
     class Source
@@ -102,13 +120,17 @@ public class ShouldUseConstructorDefault : AutoMapperSpecBase
 {
     class Destination
     {
-        public Destination(int a, string b) { }
+        public Destination(int a, string b)
+        {
+        }
 
         public int A { get; }
 
         public string B { get; }
 
-        private Destination() { }
+        private Destination()
+        {
+        }
     }
 
     class Source
@@ -132,7 +154,9 @@ public class ShouldIgnoreExplicitStaticConstructor : NonValidatingSpecBase
     {
         public string B { get; }
 
-        static Destination() { }
+        static Destination()
+        {
+        }
 
         public Destination(string b)
         {

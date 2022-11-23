@@ -35,11 +35,17 @@ public abstract partial class ModelBuilderTest
         public BigMak? BigMak { get; set; }
     }
 
-    protected class Pickle : Ingredient { }
+    protected class Pickle : Ingredient
+    {
+    }
 
-    protected class Bun : Ingredient { }
+    protected class Bun : Ingredient
+    {
+    }
 
-    protected class SesameBun : Bun { }
+    protected class SesameBun : Bun
+    {
+    }
 
     protected class Whoopper
     {
@@ -107,7 +113,9 @@ public abstract partial class ModelBuilderTest
         public ICollection<SpecialOrder>? SpecialOrders { get; set; }
     }
 
-    protected class OtherCustomer : Customer { }
+    protected class OtherCustomer : Customer
+    {
+    }
 
     protected class DetailsBase
     {
@@ -376,7 +384,9 @@ public abstract partial class ModelBuilderTest
         public Guid? UpdatedById { get; set; }
     }
 
-    protected class SelfRefManyToOneDerived : SelfRefManyToOne { }
+    protected class SelfRefManyToOneDerived : SelfRefManyToOne
+    {
+    }
 
     protected class Book
     {
@@ -425,9 +435,13 @@ public abstract partial class ModelBuilderTest
         public BookLabel? BookLabel { get; set; }
     }
 
-    protected class ExtraSpecialBookLabel : SpecialBookLabel { }
+    protected class ExtraSpecialBookLabel : SpecialBookLabel
+    {
+    }
 
-    protected class AnotherBookLabel : BookLabel { }
+    protected class AnotherBookLabel : BookLabel
+    {
+    }
 
     private class EntityWithoutId
     {
@@ -660,7 +674,9 @@ public abstract partial class ModelBuilderTest
         public PrincipalTypeWithKeyAnnotation Navigation { get; set; } = null!;
     }
 
-    protected class DerivedTypeWithKeyAnnotation : BaseTypeWithKeyAnnotation { }
+    protected class DerivedTypeWithKeyAnnotation : BaseTypeWithKeyAnnotation
+    {
+    }
 
     protected class PrincipalTypeWithKeyAnnotation
     {
@@ -692,20 +708,30 @@ public abstract partial class ModelBuilderTest
         public virtual CityViewModel CityVM { get; set; } = null!;
     }
 
-    protected class CitizenViewModel : PersonBaseViewModel { }
+    protected class CitizenViewModel : PersonBaseViewModel
+    {
+    }
 
-    protected abstract class ServicePersonViewModel : PersonBaseViewModel { }
+    protected abstract class ServicePersonViewModel : PersonBaseViewModel
+    {
+    }
 
-    protected class DoctorViewModel : ServicePersonViewModel { }
+    protected class DoctorViewModel : ServicePersonViewModel
+    {
+    }
 
-    protected class PoliceViewModel : ServicePersonViewModel { }
+    protected class PoliceViewModel : ServicePersonViewModel
+    {
+    }
 
     protected class StringIdBase
     {
         public string Id { get; set; } = "";
     }
 
-    protected class StringIdDerived : StringIdBase { }
+    protected class StringIdDerived : StringIdBase
+    {
+    }
 
     protected class Friendship
     {
@@ -821,7 +847,9 @@ public abstract partial class ModelBuilderTest
         public OwnedTypeInheritance2 Owned2 { get; set; } = null!;
     }
 
-    protected class DerivedOwner : BaseOwner { }
+    protected class DerivedOwner : BaseOwner
+    {
+    }
 
     [Owned]
     protected class OwnedTypeInheritance1
@@ -1192,9 +1220,13 @@ public abstract partial class ModelBuilderTest
         public ICollection<DreJr>? Jrs { get; set; }
     }
 
-    protected class Dre { }
+    protected class Dre
+    {
+    }
 
-    protected class DreJr : Dre { }
+    protected class DreJr : Dre
+    {
+    }
 
     protected class Store
     {

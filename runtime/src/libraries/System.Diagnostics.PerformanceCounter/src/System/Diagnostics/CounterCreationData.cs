@@ -14,7 +14,9 @@ namespace System.Diagnostics
         private string _counterName = string.Empty;
         private string _counterHelp = string.Empty;
 
-        public CounterCreationData() { }
+        public CounterCreationData()
+        {
+        }
 
         public CounterCreationData(
             string counterName,

@@ -8,7 +8,9 @@ internal class FirstDirectiveHtmlLanguageCharacteristics : HtmlLanguageCharacter
     private static readonly FirstDirectiveHtmlLanguageCharacteristics _instance =
         new FirstDirectiveHtmlLanguageCharacteristics();
 
-    private FirstDirectiveHtmlLanguageCharacteristics() { }
+    private FirstDirectiveHtmlLanguageCharacteristics()
+    {
+    }
 
     public static new FirstDirectiveHtmlLanguageCharacteristics Instance => _instance;
 

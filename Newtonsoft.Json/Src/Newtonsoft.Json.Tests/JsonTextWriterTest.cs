@@ -129,7 +129,9 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.Fail();
             }
-            catch { }
+            catch
+            {
+            }
 
             Assert.AreEqual(0, arrayPool.UsedArrays.Count);
             Assert.AreEqual(1, arrayPool.FreeArrays.Count);

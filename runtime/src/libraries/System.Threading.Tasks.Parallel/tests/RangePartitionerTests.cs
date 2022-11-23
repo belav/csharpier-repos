@@ -21,7 +21,8 @@ namespace System.Threading.Tasks.Tests
             // Somewhere a Signal() is going to be after a Wait() in the same chunk, and
             // the loop will deadlock.
             for (int i = 0; i < 252; i++)
-                actions[i] = () => { };
+                actions[i] = () => {
+                };
             actions[252] = () =>
             {
                 cde.Wait();

@@ -39,7 +39,9 @@ namespace Test_castClassEH_cs
                 Helper<SrcType> hs = new Helper<SrcType>(s);
                 d = (Helper<DestType>)(object)hs;
             }
-            catch (InvalidCastException) { }
+            catch (InvalidCastException)
+            {
+            }
             try
             {
                 DestType r = d.t;

@@ -934,7 +934,9 @@ namespace System.Diagnostics
                                 .CreateFromString(_parentId.AsSpan(36, 16))
                                 .ToHexString();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                     else if (Parent != null && Parent.IdFormat == ActivityIdFormat.W3C)
                     {
@@ -1085,7 +1087,9 @@ namespace System.Diagnostics
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         /// <summary>
         /// SetCustomProperty allow attaching any custom object to this Activity object.
@@ -1279,7 +1283,9 @@ namespace System.Diagnostics
             {
                 throw exception;
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -1415,7 +1421,9 @@ namespace System.Diagnostics
                         .CreateFromString(_parentId.AsSpan(3, 32))
                         .ToHexString();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return _traceId != null;

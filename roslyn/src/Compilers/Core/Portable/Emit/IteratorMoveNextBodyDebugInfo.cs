@@ -13,6 +13,8 @@ namespace Microsoft.CodeAnalysis.Emit
     internal sealed class IteratorMoveNextBodyDebugInfo : StateMachineMoveNextBodyDebugInfo
     {
         public IteratorMoveNextBodyDebugInfo(Cci.IMethodDefinition kickoffMethod)
-            : base(kickoffMethod) { }
+            : base(kickoffMethod)
+        {
+        }
     }
 }

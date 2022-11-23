@@ -11,6 +11,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow.Dependencies
 {
     public class UnresolvedType
     {
-        public static void Method() { }
+        public static void Method()
+        {
+        }
     }
 }

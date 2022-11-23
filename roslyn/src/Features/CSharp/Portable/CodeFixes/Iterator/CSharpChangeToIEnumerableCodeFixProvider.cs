@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpChangeToIEnumerableCodeFixProvider() { }
+        public CSharpChangeToIEnumerableCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {
@@ -176,7 +178,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(string title, Document newDocument)
-                : base(title, c => Task.FromResult(newDocument), title) { }
+                : base(title, c => Task.FromResult(newDocument), title)
+            {
+            }
         }
     }
 }

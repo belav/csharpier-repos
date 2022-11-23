@@ -18,7 +18,9 @@ public sealed partial class RedirectHttpResult : IResult
     /// provided.
     /// </summary>
     /// <param name="url">The URL to redirect to.</param>
-    internal RedirectHttpResult(string url) : this(url, permanent: false) { }
+    internal RedirectHttpResult(string url) : this(url, permanent: false)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectHttpResult"/> class with the values
@@ -27,7 +29,9 @@ public sealed partial class RedirectHttpResult : IResult
     /// <param name="url">The URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     internal RedirectHttpResult(string url, bool permanent)
-        : this(url, permanent, preserveMethod: false) { }
+        : this(url, permanent, preserveMethod: false)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectHttpResult"/> class with the values
@@ -38,7 +42,9 @@ public sealed partial class RedirectHttpResult : IResult
     /// <param name="preserveMethod">If set to true, make the temporary redirect (307)
     /// or permanent redirect (308) preserve the initial request method.</param>
     internal RedirectHttpResult(string url, bool permanent, bool preserveMethod)
-        : this(url, acceptLocalUrlOnly: false, permanent, preserveMethod) { }
+        : this(url, acceptLocalUrlOnly: false, permanent, preserveMethod)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectHttpResult"/> class with the values

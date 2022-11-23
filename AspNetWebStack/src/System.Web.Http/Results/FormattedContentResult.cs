@@ -45,7 +45,9 @@ namespace System.Web.Http.Results
                 formatter,
                 mediaType,
                 new StatusCodeResult.DirectDependencyProvider(request)
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormattedContentResult{T}"/> class with the values provided.
@@ -71,7 +73,9 @@ namespace System.Web.Http.Results
                 formatter,
                 mediaType,
                 new StatusCodeResult.ApiControllerDependencyProvider(controller)
-            ) { }
+            )
+        {
+        }
 
         private FormattedContentResult(
             HttpStatusCode statusCode,

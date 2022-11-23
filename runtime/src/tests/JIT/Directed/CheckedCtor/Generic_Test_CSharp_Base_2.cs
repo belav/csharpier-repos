@@ -37,6 +37,8 @@ namespace Test
     public class DerivedClass<T> : BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(string selector) : base(selector ?? "NeededToFallBack") { }
+        public DerivedClass(string selector) : base(selector ?? "NeededToFallBack")
+        {
+        }
     }
 }

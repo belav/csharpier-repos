@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     internal abstract partial class AbstractOverrideCompletionProvider
         : AbstractMemberInsertingCompletionProvider
     {
-        public AbstractOverrideCompletionProvider() { }
+        public AbstractOverrideCompletionProvider()
+        {
+        }
 
         public abstract SyntaxToken FindStartingToken(
             SyntaxTree tree,

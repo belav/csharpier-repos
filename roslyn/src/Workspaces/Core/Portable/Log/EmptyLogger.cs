@@ -17,14 +17,18 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         public bool IsEnabled(FunctionId functionId) => false;
 
-        public void Log(FunctionId functionId, LogMessage logMessage) { }
+        public void Log(FunctionId functionId, LogMessage logMessage)
+        {
+        }
 
         public void LogBlockStart(
             FunctionId functionId,
             LogMessage logMessage,
             int uniquePairId,
             CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         public void LogBlockEnd(
             FunctionId functionId,
@@ -32,6 +36,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             int uniquePairId,
             int delta,
             CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
     }
 }

@@ -31,7 +31,9 @@ namespace System.IO
                     Directory.Delete(VirtualDriveTargetDir, recursive: true);
                 }
             }
-            catch { } // avoid exceptions on dispose
+            catch
+            {
+            } // avoid exceptions on dispose
         }
 
         /// <summary>

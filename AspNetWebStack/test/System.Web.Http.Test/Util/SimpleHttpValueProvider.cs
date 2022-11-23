@@ -11,7 +11,9 @@ namespace System.Web.Http.Util
     {
         private readonly CultureInfo _culture;
 
-        public SimpleHttpValueProvider() : this(null) { }
+        public SimpleHttpValueProvider() : this(null)
+        {
+        }
 
         public SimpleHttpValueProvider(CultureInfo culture) : base(StringComparer.OrdinalIgnoreCase)
         {

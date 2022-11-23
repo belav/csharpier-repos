@@ -29,9 +29,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public NullResultMetadataAsSourceFileProvider() { }
+            public NullResultMetadataAsSourceFileProvider()
+            {
+            }
 
-            public void CleanupGeneratedFiles(Workspace? workspace) { }
+            public void CleanupGeneratedFiles(Workspace? workspace)
+            {
+            }
 
             public Task<MetadataAsSourceFile?> GetGeneratedFileAsync(
                 Workspace workspace,

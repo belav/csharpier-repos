@@ -60,10 +60,14 @@ namespace System.Composition.UnitTests
         }
 
         [Export, NameNull, NameNull]
-        public class NameNullTwiceExport { }
+        public class NameNullTwiceExport
+        {
+        }
 
         [ExportWithNameFoo]
-        public class SingleNamedExport { }
+        public class SingleNamedExport
+        {
+        }
 
         public class Named
         {
@@ -78,10 +82,14 @@ namespace System.Composition.UnitTests
         }
 
         [ExportWithNameFoo, Export, ExportMetadata("Priority", 10)]
-        public class MultipleExportsOneNamedAndBothPrioritized { }
+        public class MultipleExportsOneNamedAndBothPrioritized
+        {
+        }
 
         [ExportWithNameFoo, ExportMetadata("Priority", 10)]
-        public class NamedAndPrioritized { }
+        public class NamedAndPrioritized
+        {
+        }
 
         [MetadataAttribute]
         public class NameFooAttribute : Attribute
@@ -98,10 +106,14 @@ namespace System.Composition.UnitTests
             ExportMetadata("Name", "B"),
             ExportMetadata("Name", "B")
         ]
-        public class MultipleNames { }
+        public class MultipleNames
+        {
+        }
 
         [Export, NameFoo]
-        public class NamedWithCustomMetadata { }
+        public class NamedWithCustomMetadata
+        {
+        }
 
         public class MultiValuedName
         {
@@ -175,7 +187,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export, ExportMetadata("Name", "Fred")]
-        public class NamedFred { }
+        public class NamedFred
+        {
+        }
 
         [Fact]
         public void SupportsExportMetadata()

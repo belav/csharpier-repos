@@ -30,13 +30,17 @@ namespace Newtonsoft.Json.Tests.TestObjects
         protected internal object this[string propertyName]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         protected internal object this[object property]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

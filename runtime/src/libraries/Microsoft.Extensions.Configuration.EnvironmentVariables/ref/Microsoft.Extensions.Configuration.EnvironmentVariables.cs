@@ -38,11 +38,17 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
     public partial class EnvironmentVariablesConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider
     {
-        public EnvironmentVariablesConfigurationProvider() { }
+        public EnvironmentVariablesConfigurationProvider()
+        {
+        }
 
-        public EnvironmentVariablesConfigurationProvider(string? prefix) { }
+        public EnvironmentVariablesConfigurationProvider(string? prefix)
+        {
+        }
 
-        public override void Load() { }
+        public override void Load()
+        {
+        }
 
         public override string ToString()
         {
@@ -53,12 +59,16 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
     public partial class EnvironmentVariablesConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
-        public EnvironmentVariablesConfigurationSource() { }
+        public EnvironmentVariablesConfigurationSource()
+        {
+        }
 
         public string? Prefix
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(

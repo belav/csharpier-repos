@@ -252,7 +252,9 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        void IUnsafeComStream.Commit(int grfCommitFlags) { }
+        void IUnsafeComStream.Commit(int grfCommitFlags)
+        {
+        }
 
         void IUnsafeComStream.Clone(out IStream ppstm)
         {

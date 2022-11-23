@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             "RS0034:Exported parts should have [ImportingConstructor]",
             Justification = "Used incorrectly by tests"
         )]
-        internal EditAndContinueDiagnosticUpdateSource() { }
+        internal EditAndContinueDiagnosticUpdateSource()
+        {
+        }
 
         public event EventHandler<DiagnosticsUpdatedArgs>? DiagnosticsUpdated;
         public event EventHandler? DiagnosticsCleared;

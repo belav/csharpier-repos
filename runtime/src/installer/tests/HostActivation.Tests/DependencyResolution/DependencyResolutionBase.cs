@@ -187,7 +187,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                             )
                     )
                     .WithCustomizer(customizer)
-                    .WithRuntimeConfig(config => { })
+                    .WithRuntimeConfig(config =>
+                    {
+                    })
                     .Build(testApp);
 
                 return testApp;

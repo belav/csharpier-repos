@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 return SpecializedCollections.EmptyEnumerable<ITagSpan<TTag>>();
             }
 
-            public event EventHandler<SnapshotSpanEventArgs> TagsChanged = (s, e) => { };
+            public event EventHandler<SnapshotSpanEventArgs> TagsChanged = (s, e) => {
+            };
         }
     }
 }

@@ -9,28 +9,38 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class InvalidTypeTests_Span : InvalidTypeTests
     {
-        public InvalidTypeTests_Span() : base(SerializationWrapper.SpanSerializer) { }
+        public InvalidTypeTests_Span() : base(SerializationWrapper.SpanSerializer)
+        {
+        }
     }
 
     public class InvalidTypeTests_String : InvalidTypeTests
     {
-        public InvalidTypeTests_String() : base(SerializationWrapper.StringSerializer) { }
+        public InvalidTypeTests_String() : base(SerializationWrapper.StringSerializer)
+        {
+        }
     }
 
     public class InvalidTypeTests_Stream : InvalidTypeTests
     {
-        public InvalidTypeTests_Stream() : base(SerializationWrapper.StreamSerializer) { }
+        public InvalidTypeTests_Stream() : base(SerializationWrapper.StreamSerializer)
+        {
+        }
     }
 
     public class InvalidTypeTests_StreamWithSmallBuffer : InvalidTypeTests
     {
         public InvalidTypeTests_StreamWithSmallBuffer()
-            : base(SerializationWrapper.StreamSerializerWithSmallBuffer) { }
+            : base(SerializationWrapper.StreamSerializerWithSmallBuffer)
+        {
+        }
     }
 
     public class InvalidTypeTests_Writer : InvalidTypeTests
     {
-        public InvalidTypeTests_Writer() : base(SerializationWrapper.WriterSerializer) { }
+        public InvalidTypeTests_Writer() : base(SerializationWrapper.WriterSerializer)
+        {
+        }
     }
 
     public abstract class InvalidTypeTests
@@ -134,7 +144,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Contains(openNullableType.ToString(), ex.ToString());
         }
 
-        private class Test<T> { }
+        private class Test<T>
+        {
+        }
 
         public static IEnumerable<object[]> OpenGenericTypes()
         {
@@ -192,7 +204,9 @@ namespace System.Text.Json.Serialization.Tests
             public unsafe int* IntPtr { get; }
         }
 
-        private ref struct MyRefStruct { }
+        private ref struct MyRefStruct
+        {
+        }
 
         [Fact]
         public void ArraySegmentTest()

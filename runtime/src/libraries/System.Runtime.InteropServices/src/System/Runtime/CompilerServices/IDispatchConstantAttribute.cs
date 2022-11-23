@@ -10,7 +10,9 @@ namespace System.Runtime.CompilerServices
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false)]
     public sealed partial class IDispatchConstantAttribute : CustomConstantAttribute
     {
-        public IDispatchConstantAttribute() { }
+        public IDispatchConstantAttribute()
+        {
+        }
 
         public override object Value => new DispatchWrapper(null);
     }

@@ -327,9 +327,13 @@ namespace System.IO.Pipelines.Tests
 
         public class BuggyPipeReader : PipeReader
         {
-            public override void AdvanceTo(SequencePosition consumed) { }
+            public override void AdvanceTo(SequencePosition consumed)
+            {
+            }
 
-            public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) { }
+            public override void AdvanceTo(SequencePosition consumed, SequencePosition examined)
+            {
+            }
 
             public override void CancelPendingRead()
             {

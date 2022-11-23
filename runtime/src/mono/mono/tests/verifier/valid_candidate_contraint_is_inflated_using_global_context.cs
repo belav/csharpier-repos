@@ -39,19 +39,29 @@ IronRuby.Runtime.Calls.ConvertToReferenceTypeAction`2<.ctor (class IronRuby.Runt
 namespace IronRuby.Runtime.Calls
 {
     public abstract class ProtocolConversionAction<TSelf>
-        where TSelf : ProtocolConversionAction<TSelf>, new() { }
+        where TSelf : ProtocolConversionAction<TSelf>, new()
+    {
+    }
 
     public abstract class ConvertToReferenceTypeAction<TSelf, TTargetType>
         : ProtocolConversionAction<TSelf>
         where TSelf : ConvertToReferenceTypeAction<TSelf, TTargetType>, new()
-        where TTargetType : class { }
+        where TTargetType : class
+    {
+    }
 }
 
-public class Foo { }
+public class Foo
+{
+}
 
-public class Bar { }
+public class Bar
+{
+}
 
-public class BarToFoo : IronRuby.Runtime.Calls.ConvertToReferenceTypeAction<BarToFoo, Foo> { }
+public class BarToFoo : IronRuby.Runtime.Calls.ConvertToReferenceTypeAction<BarToFoo, Foo>
+{
+}
 
 public class Driver
 {

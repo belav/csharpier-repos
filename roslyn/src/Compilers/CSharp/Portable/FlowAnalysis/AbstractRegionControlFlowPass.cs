@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
+        ) : base(compilation, member, node, firstInRegion, lastInRegion)
+        {
+        }
 
         public override BoundNode Visit(BoundNode node)
         {

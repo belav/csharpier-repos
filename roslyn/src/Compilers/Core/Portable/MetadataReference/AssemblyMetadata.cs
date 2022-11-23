@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis
             public readonly ImmutableArray<ModuleMetadata> Modules;
             public readonly PEAssembly? Assembly;
 
-            private Data() { }
+            private Data()
+            {
+            }
 
             public Data(ImmutableArray<ModuleMetadata> modules, PEAssembly assembly)
             {

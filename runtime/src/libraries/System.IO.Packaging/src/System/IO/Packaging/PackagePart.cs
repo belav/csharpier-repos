@@ -37,7 +37,9 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentNullException">If parameter "package" is null</exception>
         /// <exception cref="ArgumentNullException">If parameter "partUri" is null</exception>
         protected PackagePart(Package package, Uri partUri)
-            : this(package, partUri, null, CompressionOption.NotCompressed) { }
+            : this(package, partUri, null, CompressionOption.NotCompressed)
+        {
+        }
 
         /// <summary>
         /// Protected constructor for the abstract Base class.
@@ -63,7 +65,9 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentNullException">If parameter "partUri" is null</exception>
         /// <exception cref="ArgumentException">If parameter "partUri" does not conform to the valid partUri syntax</exception>
         protected PackagePart(Package package, Uri partUri, string? contentType)
-            : this(package, partUri, contentType, CompressionOption.NotCompressed) { }
+            : this(package, partUri, contentType, CompressionOption.NotCompressed)
+        {
+        }
 
         /// <summary>
         /// Protected constructor for the abstract Base class.

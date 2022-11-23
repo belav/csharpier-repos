@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpRemoveUnnecessaryImportsCodeFixProvider() { }
+        public CSharpRemoveUnnecessaryImportsCodeFixProvider()
+        {
+        }
 
         protected override string GetTitle() => CSharpCodeFixesResources.Remove_Unnecessary_Usings;
 

@@ -36,13 +36,17 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <see cref="ImportEngine"/> access to <see cref="Export"/>s.
         /// </param>
         public ImportEngine(ExportProvider sourceProvider)
-            : this(sourceProvider, CompositionOptions.Default) { }
+            : this(sourceProvider, CompositionOptions.Default)
+        {
+        }
 
         public ImportEngine(ExportProvider sourceProvider, bool isThreadSafe)
             : this(
                 sourceProvider,
                 isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default
-            ) { }
+            )
+        {
+        }
 
         public ImportEngine(ExportProvider sourceProvider, CompositionOptions compositionOptions)
         {

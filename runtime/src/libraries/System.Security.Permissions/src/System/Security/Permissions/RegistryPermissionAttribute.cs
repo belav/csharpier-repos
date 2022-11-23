@@ -14,7 +14,8 @@ namespace System.Security.Permissions
     public sealed partial class RegistryPermissionAttribute : CodeAccessSecurityAttribute
     {
         public RegistryPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        {
+        }
 
         [Obsolete(
             "RegistryPermissionAttribute.Add has been deprecated. Use ViewAndModify instead."

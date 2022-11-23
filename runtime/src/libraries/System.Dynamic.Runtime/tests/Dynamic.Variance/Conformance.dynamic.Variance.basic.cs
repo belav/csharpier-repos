@@ -15,9 +15,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     //<Expects Status=warning>\(53,26\).*CS0168</Expects>
     using System;
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -33,7 +37,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         {
             int result = 0;
             bool ret = true;
-            dynamic f11 = (Foo<Tiger>)((Tiger a) => { });
+            dynamic f11 =
+                (Foo<Tiger>)(
+                    (Tiger a) => {
+                    }
+                );
             try
             {
                 Foo<Animal> f12 = f11;
@@ -51,21 +59,30 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
                     result++;
             }
 
-            Foo<Tiger> f21 = (Tiger a) => { };
+            Foo<Tiger> f21 = (Tiger a) => {
+            };
             try
             {
                 dynamic f22 = (Foo<Animal>)f21;
                 result++;
             }
-            catch (InvalidCastException e) { }
+            catch (InvalidCastException e)
+            {
+            }
 
-            dynamic f31 = (Foo<Tiger>)((Tiger a) => { });
+            dynamic f31 =
+                (Foo<Tiger>)(
+                    (Tiger a) => {
+                    }
+                );
             try
             {
                 dynamic f32 = (Foo<Animal>)f31;
                 result++;
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+            }
 
             return result;
         }
@@ -81,9 +98,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -97,13 +118,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 
         public static int MainMethod()
         {
-            dynamic f11 = (Foo<Animal>)((Animal a) => { });
+            dynamic f11 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             Foo<Tiger> f12 = (Foo<Tiger>)f11;
             f12(new Tiger());
-            Foo<Animal> f21 = (Animal a) => { };
+            Foo<Animal> f21 = (Animal a) => {
+            };
             dynamic f22 = (Foo<Tiger>)f21;
             f22(new Tiger());
-            dynamic f31 = (Foo<Animal>)((Animal a) => { });
+            dynamic f31 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             dynamic f32 = (Foo<Tiger>)f31;
             f32(new Tiger());
             return 0;
@@ -120,9 +150,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -174,9 +208,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success></Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -269,12 +307,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -351,12 +395,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -404,9 +454,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -488,9 +542,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -543,7 +601,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         {
             int result = 0;
             bool ret = true;
-            dynamic f11 = (Foo<string>)((string a) => { });
+            dynamic f11 =
+                (Foo<string>)(
+                    (string a) => {
+                    }
+                );
             try
             {
                 Foo<dynamic> f12 = f11;
@@ -561,21 +623,30 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
                     result++;
             }
 
-            Foo<string> f21 = (string a) => { };
+            Foo<string> f21 = (string a) => {
+            };
             try
             {
                 dynamic f22 = (Foo<dynamic>)f21;
                 result++;
             }
-            catch (InvalidCastException e) { }
+            catch (InvalidCastException e)
+            {
+            }
 
-            dynamic f31 = (Foo<string>)((string a) => { });
+            dynamic f31 =
+                (Foo<string>)(
+                    (string a) => {
+                    }
+                );
             try
             {
                 dynamic f32 = (Foo<dynamic>)f31;
                 result++;
             }
-            catch (InvalidCastException e) { }
+            catch (InvalidCastException e)
+            {
+            }
 
             return result;
         }
@@ -603,13 +674,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 
         public static int MainMethod()
         {
-            dynamic f11 = (Foo<dynamic>)((dynamic a) => { });
+            dynamic f11 =
+                (Foo<dynamic>)(
+                    (dynamic a) => {
+                    }
+                );
             Foo<string> f12 = (Foo<string>)f11;
             f12(string.Empty);
-            Foo<dynamic> f21 = (dynamic a) => { };
+            Foo<dynamic> f21 = (dynamic a) => {
+            };
             dynamic f22 = (Foo<string>)f21;
             f22(null);
-            dynamic f31 = (Foo<dynamic>)((dynamic a) => { });
+            dynamic f31 =
+                (Foo<dynamic>)(
+                    (dynamic a) => {
+                    }
+                );
             dynamic f32 = (Foo<string>)f31;
             f32("ABC");
             return 0;
@@ -767,7 +847,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
     public class C
@@ -844,7 +926,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
     public class C

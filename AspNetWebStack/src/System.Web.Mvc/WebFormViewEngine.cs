@@ -5,7 +5,9 @@ namespace System.Web.Mvc
 {
     public class WebFormViewEngine : BuildManagerViewEngine
     {
-        public WebFormViewEngine() : this(null) { }
+        public WebFormViewEngine() : this(null)
+        {
+        }
 
         public WebFormViewEngine(IViewPageActivator viewPageActivator) : base(viewPageActivator)
         {

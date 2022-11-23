@@ -50,7 +50,9 @@ namespace System.Net
             return BeginReadCore(buffer, offset, count, callback, state)!;
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 

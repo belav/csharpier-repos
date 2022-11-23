@@ -40,7 +40,9 @@ namespace System.Web.Http.Results
                 statusCode,
                 content,
                 new DirectDependencyProvider(contentNegotiator, request, formatters)
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NegotiatedContentResult{T}"/> class with the values provided.
@@ -52,7 +54,9 @@ namespace System.Web.Http.Results
             HttpStatusCode statusCode,
             T content,
             ApiController controller
-        ) : this(statusCode, content, new ApiControllerDependencyProvider(controller)) { }
+        ) : this(statusCode, content, new ApiControllerDependencyProvider(controller))
+        {
+        }
 
         private NegotiatedContentResult(
             HttpStatusCode statusCode,

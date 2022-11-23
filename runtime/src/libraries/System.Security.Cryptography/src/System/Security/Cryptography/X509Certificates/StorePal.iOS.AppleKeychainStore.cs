@@ -18,7 +18,9 @@ namespace System.Security.Cryptography.X509Certificates
                 _readonly = (openFlags & (OpenFlags.ReadWrite | OpenFlags.MaxAllowed)) == 0;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public void CloneTo(X509Certificate2Collection collection)
             {

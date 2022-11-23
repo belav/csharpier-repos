@@ -42,7 +42,9 @@ namespace System.Diagnostics.Tracing
         /// The name of the event source. Must not be null.
         /// </param>
         public EventSource(string eventSourceName)
-            : this(eventSourceName, EventSourceSettings.EtwSelfDescribingEventFormat) { }
+            : this(eventSourceName, EventSourceSettings.EtwSelfDescribingEventFormat)
+        {
+        }
 
         /// <summary>
         /// Construct an EventSource with a given name for non-contract based events (e.g. those using the Write() API).
@@ -54,7 +56,9 @@ namespace System.Diagnostics.Tracing
         /// Configuration options for the EventSource as a whole.
         /// </param>
         public EventSource(string eventSourceName, EventSourceSettings config)
-            : this(eventSourceName, config, null) { }
+            : this(eventSourceName, config, null)
+        {
+        }
 
         /// <summary>
         /// Construct an EventSource with a given name for non-contract based events (e.g. those using the Write() API).
@@ -84,7 +88,9 @@ namespace System.Diagnostics.Tracing
                 eventSourceName,
                 config,
                 traits
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Writes an event with no fields and default options.

@@ -802,7 +802,13 @@ public abstract class TrackGraphTestBase
 
         Assert.Equal(
             new List<string> { "<None> -----> ProductDetails:1" },
-            TrackGraph(context, details, e => { })
+            TrackGraph(
+                context,
+                details,
+                e =>
+                {
+                }
+            )
         );
 
         Assert.Equal(
@@ -1268,7 +1274,9 @@ public abstract class TrackGraphTestBase
 
     private class MyTracker : KeyValueEntityTracker
     {
-        public MyTracker(bool updateExistingEntities) : base(updateExistingEntities) { }
+        public MyTracker(bool updateExistingEntities) : base(updateExistingEntities)
+        {
+        }
 
         public override EntityState DetermineState(EntityEntry entry)
         {
@@ -1392,7 +1400,9 @@ public abstract class TrackGraphTestBase
                 .UseInMemoryDatabase(nameof(TheShadows));
     }
 
-    private class Dark { }
+    private class Dark
+    {
+    }
 
     private static Product CreateSimpleGraph(int id) =>
         new()
@@ -1406,7 +1416,9 @@ public abstract class TrackGraphTestBase
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        ) : base(logger, loggingOptions)
+        {
+        }
 
         public bool DetectChangesCalled { get; set; }
 
@@ -1521,9 +1533,13 @@ public abstract class TrackGraphTestBase
         public OfThis OfThis { get; set; }
     }
 
-    private class AreMade { }
+    private class AreMade
+    {
+    }
 
-    private class OfThis : AreMade { }
+    private class OfThis : AreMade
+    {
+    }
 
     private class EarlyLearningCenter : DbContext
     {

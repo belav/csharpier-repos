@@ -115,7 +115,9 @@ public class MutexWaitOne1
                 );
                 retVal = false;
             }
-            catch (AbandonedMutexException) { }
+            catch (AbandonedMutexException)
+            {
+            }
             catch (Exception e)
             {
                 TestLibrary.TestFramework.LogError("102", "Unexpected exception: " + e);
@@ -152,7 +154,9 @@ public class MutexWaitOne1
             );
             retVal = false;
         }
-        catch (ObjectDisposedException) { }
+        catch (ObjectDisposedException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("104", "Unexpected exception: " + e);

@@ -742,7 +742,9 @@ namespace System.DirectoryServices.AccountManagement
         //
         //
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        protected Principal() { }
+        protected Principal()
+        {
+        }
 
         //------------------------------------------------
         // Protected functions for use by derived classes.

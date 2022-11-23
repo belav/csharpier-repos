@@ -20,7 +20,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicImmediate(VisualStudioInstanceFactory instanceFactory) : base(instanceFactory)
-        { }
+        {
+        }
 
         public override async Task InitializeAsync()
         {

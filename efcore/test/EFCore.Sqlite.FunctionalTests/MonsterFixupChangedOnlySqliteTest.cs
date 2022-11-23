@@ -7,7 +7,9 @@ public class MonsterFixupChangedOnlySqliteTest
     : MonsterFixupTestBase<MonsterFixupChangedOnlySqliteTest.MonsterFixupChangedOnlySqliteFixture>
 {
     public MonsterFixupChangedOnlySqliteTest(MonsterFixupChangedOnlySqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class MonsterFixupChangedOnlySqliteFixture : MonsterFixupChangedOnlyFixtureBase
     {

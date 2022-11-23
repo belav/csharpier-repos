@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         private Stack<TFrame> _stack = new();
         protected TFrame Frame;
 
-        public virtual void Declare(Action<IPathSegment, bool> declare) { }
+        public virtual void Declare(Action<IPathSegment, bool> declare)
+        {
+        }
 
         public abstract PatternTestResult Test(FileInfoBase file);
 

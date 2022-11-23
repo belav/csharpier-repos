@@ -16,7 +16,9 @@ public class AuthenticateResult
     /// <summary>
     /// Creates a new <see cref="AuthenticateResult"/> instance.
     /// </summary>
-    protected AuthenticateResult() { }
+    protected AuthenticateResult()
+    {
+    }
 
     /// <summary>
     /// If a ticket was produced, authenticate was successful.

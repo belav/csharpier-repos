@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class UncheckedKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public UncheckedKeywordRecommender() : base(SyntaxKind.UncheckedKeyword) { }
+        public UncheckedKeywordRecommender() : base(SyntaxKind.UncheckedKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

@@ -7,7 +7,9 @@ namespace System.CodeDom.Compiler
 {
     public class CompilerErrorCollection : CollectionBase
     {
-        public CompilerErrorCollection() { }
+        public CompilerErrorCollection()
+        {
+        }
 
         public CompilerErrorCollection(CompilerErrorCollection value)
         {

@@ -8,7 +8,9 @@ namespace Microsoft.Win32
 {
     public partial class PowerModeChangedEventArgs : System.EventArgs
     {
-        public PowerModeChangedEventArgs(Microsoft.Win32.PowerModes mode) { }
+        public PowerModeChangedEventArgs(Microsoft.Win32.PowerModes mode)
+        {
+        }
 
         public Microsoft.Win32.PowerModes Mode
         {
@@ -30,7 +32,9 @@ namespace Microsoft.Win32
 
     public partial class SessionEndedEventArgs : System.EventArgs
     {
-        public SessionEndedEventArgs(Microsoft.Win32.SessionEndReasons reason) { }
+        public SessionEndedEventArgs(Microsoft.Win32.SessionEndReasons reason)
+        {
+        }
 
         public Microsoft.Win32.SessionEndReasons Reason
         {
@@ -45,12 +49,16 @@ namespace Microsoft.Win32
 
     public partial class SessionEndingEventArgs : System.EventArgs
     {
-        public SessionEndingEventArgs(Microsoft.Win32.SessionEndReasons reason) { }
+        public SessionEndingEventArgs(Microsoft.Win32.SessionEndReasons reason)
+        {
+        }
 
         public bool Cancel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Win32.SessionEndReasons Reason
         {
@@ -71,7 +79,9 @@ namespace Microsoft.Win32
 
     public partial class SessionSwitchEventArgs : System.EventArgs
     {
-        public SessionSwitchEventArgs(Microsoft.Win32.SessionSwitchReason reason) { }
+        public SessionSwitchEventArgs(Microsoft.Win32.SessionSwitchReason reason)
+        {
+        }
 
         public Microsoft.Win32.SessionSwitchReason Reason
         {
@@ -99,27 +109,45 @@ namespace Microsoft.Win32
 
     public sealed partial class SystemEvents
     {
-        internal SystemEvents() { }
+        internal SystemEvents()
+        {
+        }
 
         public static event System.EventHandler? DisplaySettingsChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event System.EventHandler? DisplaySettingsChanging
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event System.EventHandler? EventsThreadShutdown
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event System.EventHandler? InstalledFontsChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -129,53 +157,93 @@ namespace Microsoft.Win32
         [System.ObsoleteAttribute("The LowMemory event has been deprecated and is not supported.")]
         public static event System.EventHandler? LowMemory
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event System.EventHandler? PaletteChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event Microsoft.Win32.PowerModeChangedEventHandler? PowerModeChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event Microsoft.Win32.SessionEndedEventHandler? SessionEnded
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event Microsoft.Win32.SessionEndingEventHandler? SessionEnding
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event Microsoft.Win32.SessionSwitchEventHandler? SessionSwitch
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event System.EventHandler? TimeChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event Microsoft.Win32.TimerElapsedEventHandler? TimerElapsed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event Microsoft.Win32.UserPreferenceChangedEventHandler? UserPreferenceChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static event Microsoft.Win32.UserPreferenceChangingEventHandler? UserPreferenceChanging
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public static System.IntPtr CreateTimer(int interval)
@@ -183,14 +251,20 @@ namespace Microsoft.Win32
             throw null;
         }
 
-        public static void InvokeOnEventsThread(System.Delegate method) { }
+        public static void InvokeOnEventsThread(System.Delegate method)
+        {
+        }
 
-        public static void KillTimer(System.IntPtr timerId) { }
+        public static void KillTimer(System.IntPtr timerId)
+        {
+        }
     }
 
     public partial class TimerElapsedEventArgs : System.EventArgs
     {
-        public TimerElapsedEventArgs(System.IntPtr timerId) { }
+        public TimerElapsedEventArgs(System.IntPtr timerId)
+        {
+        }
 
         public System.IntPtr TimerId
         {
@@ -223,7 +297,9 @@ namespace Microsoft.Win32
 
     public partial class UserPreferenceChangedEventArgs : System.EventArgs
     {
-        public UserPreferenceChangedEventArgs(Microsoft.Win32.UserPreferenceCategory category) { }
+        public UserPreferenceChangedEventArgs(Microsoft.Win32.UserPreferenceCategory category)
+        {
+        }
 
         public Microsoft.Win32.UserPreferenceCategory Category
         {
@@ -238,7 +314,9 @@ namespace Microsoft.Win32
 
     public partial class UserPreferenceChangingEventArgs : System.EventArgs
     {
-        public UserPreferenceChangingEventArgs(Microsoft.Win32.UserPreferenceCategory category) { }
+        public UserPreferenceChangingEventArgs(Microsoft.Win32.UserPreferenceCategory category)
+        {
+        }
 
         public Microsoft.Win32.UserPreferenceCategory Category
         {

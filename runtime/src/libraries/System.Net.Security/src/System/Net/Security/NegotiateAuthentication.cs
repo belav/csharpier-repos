@@ -70,11 +70,14 @@ namespace System.Net.Security
                 );
             }
             catch (PlatformNotSupportedException) // Managed implementation, Unix
-            { }
+            {
+            }
             catch (NotSupportedException) // Windows implementation
-            { }
+            {
+            }
             catch (Win32Exception) // Unix implementation in native layer
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -129,11 +132,14 @@ namespace System.Net.Security
                 );
             }
             catch (PlatformNotSupportedException) // Managed implementation, Unix
-            { }
+            {
+            }
             catch (NotSupportedException) // Windows implementation
-            { }
+            {
+            }
             catch (Win32Exception) // Unix implementation in native layer
-            { }
+            {
+            }
         }
 
         /// <summary>

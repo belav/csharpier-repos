@@ -172,7 +172,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             /// <summary>
             /// Initializes a new instance of the <see cref="Parts"/> class.
             /// </summary>
-            internal Parts() { }
+            internal Parts()
+            {
+            }
 
             /// <summary>
             /// Name of the file or tool (not localized)

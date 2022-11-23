@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LessAndGreaterThanBraceCompletionService() { }
+        public LessAndGreaterThanBraceCompletionService()
+        {
+        }
 
         protected override bool NeedsSemantics => true;
 

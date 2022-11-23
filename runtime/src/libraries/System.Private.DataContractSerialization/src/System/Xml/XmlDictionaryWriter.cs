@@ -1100,7 +1100,9 @@ namespace System.Xml
             }
         }
 
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
         private sealed class XmlWrappedWriter : XmlDictionaryWriter
         {

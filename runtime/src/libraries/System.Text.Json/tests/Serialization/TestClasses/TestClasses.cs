@@ -1594,7 +1594,9 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class SimpleDerivedTestClass : SimpleTestClass { }
+    public class SimpleDerivedTestClass : SimpleTestClass
+    {
+    }
 
     public class OverridePropertyNameRuntime_TestClass
     {
@@ -1679,7 +1681,9 @@ namespace System.Text.Json.Serialization.Tests
         public const int MyStringArrayElementStringLength = 50;
     }
 
-    public class EmptyClass { }
+    public class EmptyClass
+    {
+    }
 
     public class BasicPerson : ITestClass
     {

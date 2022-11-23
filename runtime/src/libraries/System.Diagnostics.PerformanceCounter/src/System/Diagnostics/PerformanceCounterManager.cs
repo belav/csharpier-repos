@@ -10,7 +10,9 @@ namespace System.Diagnostics
         [Obsolete(
             "PerformanceCounterManager has been deprecated. Use the PerformanceCounters through the System.Diagnostics.PerformanceCounter class instead."
         )]
-        public PerformanceCounterManager() { }
+        public PerformanceCounterManager()
+        {
+        }
 
         [Obsolete(
             "PerformanceCounterManager has been deprecated. Use the PerformanceCounters through the System.Diagnostics.PerformanceCounter class instead."
@@ -29,6 +31,8 @@ namespace System.Diagnostics
         [Obsolete(
             "PerformanceCounterManager has been deprecated. Use the PerformanceCounters through the System.Diagnostics.PerformanceCounter class instead."
         )]
-        void ICollectData.CloseData() { }
+        void ICollectData.CloseData()
+        {
+        }
     }
 }

@@ -10,7 +10,9 @@ namespace System.Web.Mvc
         private ActionResult _result;
 
         // parameterless constructor used for mocking
-        public ExceptionContext() { }
+        public ExceptionContext()
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

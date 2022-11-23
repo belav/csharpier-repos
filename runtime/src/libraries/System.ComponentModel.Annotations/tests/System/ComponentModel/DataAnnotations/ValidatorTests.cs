@@ -2101,7 +2101,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
         }
 
         [ValidClass, ValidClassDuplicate]
-        public class DoublyInvalid { }
+        public class DoublyInvalid
+        {
+        }
 
         [ValidClass]
         public class ToBeValidated
@@ -2122,7 +2124,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public string this[int index]
             {
                 get { return null; }
-                set { }
+                set
+                {
+                }
             }
 
             public TestEnum EnumProperty { get; set; }
@@ -2135,25 +2139,33 @@ namespace System.ComponentModel.DataAnnotations.Tests
             [Required]
             private string PrivateSetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
 
             [Required]
             protected string ProtectedSetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
 
             [Required]
             internal string InternalSetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
 
             [Required]
             protected internal string ProtectedInternalSetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
 
             [Required]

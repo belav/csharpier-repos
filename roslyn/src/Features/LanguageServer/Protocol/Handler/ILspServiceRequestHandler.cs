@@ -10,9 +10,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 internal interface ILspServiceRequestHandler<TRequest, TResponse>
     : ILspService,
         IRequestHandler<TRequest, TResponse, RequestContext>,
-        ISolutionRequiredHandler { }
+        ISolutionRequiredHandler
+{
+}
 
 internal interface ILspServiceDocumentRequestHandler<TRequest, TResponse>
     : ILspServiceRequestHandler<TRequest, TResponse>,
         ITextDocumentIdentifierHandler<TRequest, TextDocumentIdentifier>,
-        ISolutionRequiredHandler { }
+        ISolutionRequiredHandler
+{
+}

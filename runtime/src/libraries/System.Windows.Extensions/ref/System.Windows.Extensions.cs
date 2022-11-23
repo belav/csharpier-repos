@@ -11,16 +11,24 @@ namespace System.Media
         : System.ComponentModel.Component,
             System.Runtime.Serialization.ISerializable
     {
-        public SoundPlayer() { }
+        public SoundPlayer()
+        {
+        }
 
-        public SoundPlayer(System.IO.Stream? stream) { }
+        public SoundPlayer(System.IO.Stream? stream)
+        {
+        }
 
         protected SoundPlayer(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public SoundPlayer(string soundLocation) { }
+        public SoundPlayer(string soundLocation)
+        {
+        }
 
         public bool IsLoadCompleted
         {
@@ -29,68 +37,112 @@ namespace System.Media
         public int LoadTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SoundLocation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.Stream? Stream
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object? Tag
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.ComponentModel.AsyncCompletedEventHandler? LoadCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler? SoundLocationChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler? StreamChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void Load() { }
+        public void Load()
+        {
+        }
 
-        public void LoadAsync() { }
+        public void LoadAsync()
+        {
+        }
 
-        protected virtual void OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs e) { }
+        protected virtual void OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+        }
 
-        protected virtual void OnSoundLocationChanged(System.EventArgs e) { }
+        protected virtual void OnSoundLocationChanged(System.EventArgs e)
+        {
+        }
 
-        protected virtual void OnStreamChanged(System.EventArgs e) { }
+        protected virtual void OnStreamChanged(System.EventArgs e)
+        {
+        }
 
-        public void Play() { }
+        public void Play()
+        {
+        }
 
-        public void PlayLooping() { }
+        public void PlayLooping()
+        {
+        }
 
-        public void PlaySync() { }
+        public void PlaySync()
+        {
+        }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class SystemSound
     {
-        internal SystemSound() { }
+        internal SystemSound()
+        {
+        }
 
-        public void Play() { }
+        public void Play()
+        {
+        }
     }
 
     public static partial class SystemSounds
@@ -122,16 +174,22 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed partial class X509Certificate2UI
     {
-        public X509Certificate2UI() { }
+        public X509Certificate2UI()
+        {
+        }
 
         public static void DisplayCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        )
+        {
+        }
 
         public static void DisplayCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             System.IntPtr hwndParent
-        ) { }
+        )
+        {
+        }
 
         public static System.Security.Cryptography.X509Certificates.X509Certificate2Collection SelectFromCollection(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates,
@@ -166,7 +224,9 @@ namespace System.Xaml.Permissions
 {
     public partial class XamlAccessLevel
     {
-        internal XamlAccessLevel() { }
+        internal XamlAccessLevel()
+        {
+        }
 
         public System.Reflection.AssemblyName AssemblyAccessToAssemblyName
         {

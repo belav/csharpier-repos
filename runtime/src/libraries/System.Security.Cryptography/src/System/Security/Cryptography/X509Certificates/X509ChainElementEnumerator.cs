@@ -27,7 +27,9 @@ namespace System.Security.Cryptography.X509Certificates
             get { return Current; }
         }
 
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
 
         public bool MoveNext()
         {

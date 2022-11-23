@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioGenerateTypeOptionsServiceFactory() { }
+        public VisualStudioGenerateTypeOptionsServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new VisualStudioGenerateTypeOptionsService();

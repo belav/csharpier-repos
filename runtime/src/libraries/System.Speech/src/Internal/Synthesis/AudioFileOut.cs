@@ -194,7 +194,9 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         internal override void WaitUntilDone()
         {
-            lock (_noWriteOutLock) { }
+            lock (_noWriteOutLock)
+            {
+            }
         }
 
         #endregion

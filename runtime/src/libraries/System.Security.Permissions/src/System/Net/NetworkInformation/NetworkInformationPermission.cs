@@ -15,13 +15,19 @@ namespace System.Net.NetworkInformation
 #endif
     public sealed class NetworkInformationPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public NetworkInformationPermission(PermissionState state) { }
+        public NetworkInformationPermission(PermissionState state)
+        {
+        }
 
-        public NetworkInformationPermission(NetworkInformationAccess access) { }
+        public NetworkInformationPermission(NetworkInformationAccess access)
+        {
+        }
 
         public NetworkInformationAccess Access { get; }
 
-        public void AddPermission(NetworkInformationAccess access) { }
+        public void AddPermission(NetworkInformationAccess access)
+        {
+        }
 
         public bool IsUnrestricted() => true;
 
@@ -33,7 +39,9 @@ namespace System.Net.NetworkInformation
 
         public override bool IsSubsetOf(IPermission target) => false;
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override SecurityElement ToXml() => null;
     }

@@ -69,7 +69,9 @@ namespace FractalPerf
 
     public class Mandelbrot : Fractal
     {
-        public Mandelbrot() : base(-2.0, -1.5, 1.0, 1.5) { }
+        public Mandelbrot() : base(-2.0, -1.5, 1.0, 1.5)
+        {
+        }
 
         public override double Render()
         {

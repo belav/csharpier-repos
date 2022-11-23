@@ -41,7 +41,9 @@ namespace System.DirectoryServices.Protocols.Tests
         internal static void DereferenceConnection(
             LdapConnection primaryConnection,
             LdapConnection connectionToDereference
-        ) { }
+        )
+        {
+        }
 
         internal static bool NotifyNewConnection(
             LdapConnection primaryConnection,

@@ -45,7 +45,9 @@ namespace System.IO.Tests
                     return new string(buffer, skip, (int)result - skip);
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return TestDirectory;
         }

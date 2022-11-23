@@ -2,9 +2,13 @@
 
 public class ConfigurationRules : NonValidatingSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Dest { }
+    public class Dest
+    {
+    }
 
     public class Profile1 : Profile
     {

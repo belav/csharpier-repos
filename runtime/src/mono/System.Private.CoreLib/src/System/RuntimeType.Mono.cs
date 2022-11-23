@@ -1950,7 +1950,9 @@ namespace System
                         }
                     }
                 }
-                finally { }
+                finally
+                {
+                }
             }
             catch (Exception)
             {

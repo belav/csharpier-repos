@@ -227,7 +227,9 @@ public class FullRangeComparisonTest
             );
             return 101;
         }
-        catch (NullReferenceException ex) { }
+        catch (NullReferenceException ex)
+        {
+        }
         catch (Exception ex)
         {
             Console.WriteLine(

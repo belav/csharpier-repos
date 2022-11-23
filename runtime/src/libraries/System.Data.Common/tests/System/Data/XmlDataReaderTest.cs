@@ -330,7 +330,9 @@ namespace System.Data.Tests
         public class CustomTypeXml : IXmlSerializable
         {
             #region Constructors
-            public CustomTypeXml() { }
+            public CustomTypeXml()
+            {
+            }
 
             public CustomTypeXml(string str)
             {
@@ -368,21 +370,27 @@ namespace System.Data.Tests
                             doc.DocumentElement.Attributes["ReturnType"]
                         );
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     try
                     {
                         doc.DocumentElement.Attributes.Remove(
                             doc.DocumentElement.Attributes["ReturnTId"]
                         );
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     try
                     {
                         doc.DocumentElement.Attributes.Remove(
                             doc.DocumentElement.Attributes["CSharpType"]
                         );
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 else
                 {
@@ -430,27 +438,37 @@ namespace System.Data.Tests
                 {
                     xNode.Attributes.Remove(xNode.Attributes["TId"]);
                 }
-                catch { }
+                catch
+                {
+                }
                 try
                 {
                     xNode.Attributes.Remove(xNode.Attributes["OnError"]);
                 }
-                catch { }
+                catch
+                {
+                }
                 try
                 {
                     xNode.Attributes.Remove(xNode.Attributes["Check"]);
                 }
-                catch { }
+                catch
+                {
+                }
                 try
                 {
                     xNode.Attributes.Remove(xNode.Attributes["ParamType"]);
                 }
-                catch { }
+                catch
+                {
+                }
                 try
                 {
                     xNode.Attributes.Remove(xNode.Attributes["RealLen"]);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 // Attribute removals (order)
                 try
@@ -459,7 +477,9 @@ namespace System.Data.Tests
                     xNode.Attributes.Remove(xNode.Attributes["IsExpGetRef"]);
                     xNode.Attributes.InsertAfter(attr, xNode.Attributes["ExpectedValue"]);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 // Attribute value formats (prefix, etc.)
                 string tmp = xNode.Attributes["HandleInput"].Value;

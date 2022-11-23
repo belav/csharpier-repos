@@ -64,7 +64,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockEditAndContinueWorkspaceService() { }
+        public MockEditAndContinueWorkspaceService()
+        {
+        }
 
         public void BreakStateOrCapabilitiesChanged(
             DebuggingSessionId sessionId,

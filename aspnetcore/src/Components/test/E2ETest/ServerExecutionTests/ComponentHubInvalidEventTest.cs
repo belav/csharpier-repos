@@ -22,7 +22,9 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
     public ComponentHubInvalidEventTest(
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(serverFixture, output) { }
+    ) : base(serverFixture, output)
+    {
+    }
 
     protected override async Task InitializeAsync()
     {

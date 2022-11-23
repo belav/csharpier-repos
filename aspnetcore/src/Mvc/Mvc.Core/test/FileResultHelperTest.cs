@@ -538,9 +538,13 @@ public class FileResultTest
     {
         public bool WasWriteFileCalled;
 
-        public EmptyFileResult() : base("application/octet") { }
+        public EmptyFileResult() : base("application/octet")
+        {
+        }
 
-        public EmptyFileResult(string contentType) : base(contentType) { }
+        public EmptyFileResult(string contentType) : base(contentType)
+        {
+        }
 
         public override Task ExecuteResultAsync(ActionContext context)
         {
@@ -553,7 +557,9 @@ public class FileResultTest
     private class EmptyFileResultExecutor : FileResultExecutorBase
     {
         public EmptyFileResultExecutor(ILoggerFactory loggerFactory)
-            : base(CreateLogger<EmptyFileResultExecutor>(loggerFactory)) { }
+            : base(CreateLogger<EmptyFileResultExecutor>(loggerFactory))
+        {
+        }
 
         public Task ExecuteAsync(ActionContext context, EmptyFileResult result)
         {

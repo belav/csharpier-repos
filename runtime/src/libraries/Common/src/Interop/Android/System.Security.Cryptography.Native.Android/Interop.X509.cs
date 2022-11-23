@@ -148,8 +148,12 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeX509Handle : Interop.JObjectLifetime.SafeJObjectHandle
     {
-        public SafeX509Handle() { }
+        public SafeX509Handle()
+        {
+        }
 
-        internal SafeX509Handle(IntPtr ptr) : base(ptr) { }
+        internal SafeX509Handle(IntPtr ptr) : base(ptr)
+        {
+        }
     }
 }

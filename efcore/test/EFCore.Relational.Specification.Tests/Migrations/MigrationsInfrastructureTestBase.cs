@@ -33,7 +33,9 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
 
                 stillExists = db.GetService<IRelationalDatabaseCreator>().Exists();
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -48,7 +50,9 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
 
                 stillExists = await db.GetService<IRelationalDatabaseCreator>().ExistsAsync();
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -352,12 +356,16 @@ public abstract class MigrationsInfrastructureFixtureBase
 
     public class EmptyMigrationsContext : DbContext
     {
-        public EmptyMigrationsContext(DbContextOptions options) : base(options) { }
+        public EmptyMigrationsContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     public class MigrationsContext : PoolableDbContext
     {
-        public MigrationsContext(DbContextOptions options) : base(options) { }
+        public MigrationsContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Foo> Foos { get; set; }
     }
@@ -417,6 +425,8 @@ public abstract class MigrationsInfrastructureFixtureBase
             }
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder) { }
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+        }
     }
 }

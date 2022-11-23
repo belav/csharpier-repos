@@ -17,7 +17,9 @@ namespace JitBench
         readonly string _closingBrace;
 
         public IndentedTestOutputHelper(string header, ITestOutputHelper innerOutput)
-            : this(header, innerOutput, "    ", "{", "}" + Environment.NewLine) { }
+            : this(header, innerOutput, "    ", "{", "}" + Environment.NewLine)
+        {
+        }
 
         public IndentedTestOutputHelper(
             string header,

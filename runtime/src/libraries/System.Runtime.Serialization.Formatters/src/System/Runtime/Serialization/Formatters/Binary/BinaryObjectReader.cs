@@ -1166,7 +1166,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     {
                         assm = Assembly.Load(assmName);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 if (assm == null)
@@ -1205,7 +1207,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 return Assembly.Load(assemblyName);
             }
-            catch { }
+            catch
+            {
+            }
 
             if (assemblyName != null)
             {
@@ -1213,7 +1217,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 {
                     return Assembly.Load(assemblyName.Name!);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return null;
@@ -1232,10 +1238,18 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 type = FormatterServices.GetTypeFromAssembly(assm, typeName);
             }
-            catch (TypeLoadException) { }
-            catch (FileNotFoundException) { }
-            catch (FileLoadException) { }
-            catch (BadImageFormatException) { }
+            catch (TypeLoadException)
+            {
+            }
+            catch (FileNotFoundException)
+            {
+            }
+            catch (FileLoadException)
+            {
+            }
+            catch (BadImageFormatException)
+            {
+            }
 
             if (type == null)
             {

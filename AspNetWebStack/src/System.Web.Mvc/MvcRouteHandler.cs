@@ -11,7 +11,9 @@ namespace System.Web.Mvc
     {
         private IControllerFactory _controllerFactory;
 
-        public MvcRouteHandler() { }
+        public MvcRouteHandler()
+        {
+        }
 
         public MvcRouteHandler(IControllerFactory controllerFactory)
         {

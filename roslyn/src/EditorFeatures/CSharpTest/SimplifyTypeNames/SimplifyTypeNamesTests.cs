@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
     public partial class SimplifyTypeNamesTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public SimplifyTypeNamesTests(ITestOutputHelper logger) : base(logger) { }
+        public SimplifyTypeNamesTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

@@ -775,7 +775,9 @@ namespace System.Xml.Tests
 
         public virtual bool Namespaces
         {
-            set { }
+            set
+            {
+            }
             get { return false; }
         }
 
@@ -841,7 +843,9 @@ namespace System.Xml.Tests
             return x;
         }
 
-        public void ResetState() { }
+        public void ResetState()
+        {
+        }
 
         ////////////////////////////////////////////////////////////////
         // Dump ALL properties

@@ -2,15 +2,25 @@
 
 public class ReverseMapWithInclude : NonValidatingSpecBase
 {
-    public class Duck : Animal { }
+    public class Duck : Animal
+    {
+    }
 
-    public class DuckDto : AnimalDto { }
+    public class DuckDto : AnimalDto
+    {
+    }
 
-    public abstract class Animal { }
+    public abstract class Animal
+    {
+    }
 
-    public abstract class AnimalDto { }
+    public abstract class AnimalDto
+    {
+    }
 
-    public class DuckProxyClassFoo : Duck { }
+    public class DuckProxyClassFoo : Duck
+    {
+    }
 
     [Fact]
     public void Should_map_correctly()
@@ -40,14 +50,18 @@ public class ReverseMapWithIncludeBase : AutoMapperSpecBase
         public string Name { get; set; }
     }
 
-    public class ConcreteDestination : Destination { }
+    public class ConcreteDestination : Destination
+    {
+    }
 
     public class Source
     {
         public string Title { get; set; }
     }
 
-    public class ConcreteSource : Source { }
+    public class ConcreteSource : Source
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

@@ -14,6 +14,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     )]
     internal sealed class WindowsRuntimeImportAttribute : Attribute
     {
-        public WindowsRuntimeImportAttribute() { }
+        public WindowsRuntimeImportAttribute()
+        {
+        }
     }
 }

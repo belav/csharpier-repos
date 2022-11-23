@@ -14,7 +14,9 @@ namespace System.Data.Common
         private sbyte[] _values = default!; // Late-initialized
 
         public SByteStorage(DataColumn column)
-            : base(column, typeof(sbyte), defaultValue, StorageType.SByte) { }
+            : base(column, typeof(sbyte), defaultValue, StorageType.SByte)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

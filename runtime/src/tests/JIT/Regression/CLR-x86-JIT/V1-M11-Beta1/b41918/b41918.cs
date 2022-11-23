@@ -12,16 +12,22 @@ namespace Test
 
         public static int Main()
         {
-            try { }
+            try
+            {
+            }
             finally
             {
                 try
                 {
 #pragma warning disable 1718
-                    while (BB.m_ulStatic1 < BB.m_ulStatic1) { }
+                    while (BB.m_ulStatic1 < BB.m_ulStatic1)
+                    {
+                    }
 #pragma warning restore
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
             return 100;
         }

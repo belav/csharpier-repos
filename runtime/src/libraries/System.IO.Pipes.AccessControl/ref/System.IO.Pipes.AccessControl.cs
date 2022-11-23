@@ -74,7 +74,9 @@ namespace System.IO.Pipes
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public PipeAccessRule(
             string identity,
@@ -88,7 +90,9 @@ namespace System.IO.Pipes
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public System.IO.Pipes.PipeAccessRights PipeAccessRights
         {
@@ -110,7 +114,9 @@ namespace System.IO.Pipes
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public PipeAuditRule(
             string identity,
@@ -124,7 +130,9 @@ namespace System.IO.Pipes
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public System.IO.Pipes.PipeAccessRights PipeAccessRights
         {
@@ -135,7 +143,9 @@ namespace System.IO.Pipes
     public partial class PipeSecurity : System.Security.AccessControl.NativeObjectSecurity
     {
         public PipeSecurity()
-            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+            : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         public override System.Type AccessRightType
         {
@@ -162,9 +172,13 @@ namespace System.IO.Pipes
             throw null;
         }
 
-        public void AddAccessRule(System.IO.Pipes.PipeAccessRule rule) { }
+        public void AddAccessRule(System.IO.Pipes.PipeAccessRule rule)
+        {
+        }
 
-        public void AddAuditRule(System.IO.Pipes.PipeAuditRule rule) { }
+        public void AddAuditRule(System.IO.Pipes.PipeAuditRule rule)
+        {
+        }
 
         public sealed override System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
@@ -178,31 +192,47 @@ namespace System.IO.Pipes
             throw null;
         }
 
-        protected internal void Persist(System.Runtime.InteropServices.SafeHandle handle) { }
+        protected internal void Persist(System.Runtime.InteropServices.SafeHandle handle)
+        {
+        }
 
-        protected internal void Persist(string name) { }
+        protected internal void Persist(string name)
+        {
+        }
 
         public bool RemoveAccessRule(System.IO.Pipes.PipeAccessRule rule)
         {
             throw null;
         }
 
-        public void RemoveAccessRuleSpecific(System.IO.Pipes.PipeAccessRule rule) { }
+        public void RemoveAccessRuleSpecific(System.IO.Pipes.PipeAccessRule rule)
+        {
+        }
 
         public bool RemoveAuditRule(System.IO.Pipes.PipeAuditRule rule)
         {
             throw null;
         }
 
-        public void RemoveAuditRuleAll(System.IO.Pipes.PipeAuditRule rule) { }
+        public void RemoveAuditRuleAll(System.IO.Pipes.PipeAuditRule rule)
+        {
+        }
 
-        public void RemoveAuditRuleSpecific(System.IO.Pipes.PipeAuditRule rule) { }
+        public void RemoveAuditRuleSpecific(System.IO.Pipes.PipeAuditRule rule)
+        {
+        }
 
-        public void ResetAccessRule(System.IO.Pipes.PipeAccessRule rule) { }
+        public void ResetAccessRule(System.IO.Pipes.PipeAccessRule rule)
+        {
+        }
 
-        public void SetAccessRule(System.IO.Pipes.PipeAccessRule rule) { }
+        public void SetAccessRule(System.IO.Pipes.PipeAccessRule rule)
+        {
+        }
 
-        public void SetAuditRule(System.IO.Pipes.PipeAuditRule rule) { }
+        public void SetAuditRule(System.IO.Pipes.PipeAuditRule rule)
+        {
+        }
     }
 
     public static partial class PipesAclExtensions
@@ -217,6 +247,8 @@ namespace System.IO.Pipes
         public static void SetAccessControl(
             this System.IO.Pipes.PipeStream stream,
             System.IO.Pipes.PipeSecurity pipeSecurity
-        ) { }
+        )
+        {
+        }
     }
 }

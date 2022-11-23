@@ -1869,7 +1869,9 @@ third line",
 ]";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
         }
 
         [Test]
@@ -1910,7 +1912,9 @@ third line",
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.MaxDepth = 150;
 
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
         }
 
         [Test]
@@ -1921,7 +1925,9 @@ third line",
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.MaxDepth = null;
 
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
         }
 
         [Test]
@@ -1932,7 +1938,9 @@ third line",
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.MaxDepth = int.MaxValue;
 
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
         }
     }
 }

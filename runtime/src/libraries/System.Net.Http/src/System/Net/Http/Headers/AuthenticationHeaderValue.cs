@@ -30,7 +30,9 @@ namespace System.Net.Http.Headers
             get { return _parameter; }
         }
 
-        public AuthenticationHeaderValue(string scheme) : this(scheme, null) { }
+        public AuthenticationHeaderValue(string scheme) : this(scheme, null)
+        {
+        }
 
         public AuthenticationHeaderValue(string scheme, string? parameter)
         {

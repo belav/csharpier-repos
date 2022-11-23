@@ -145,7 +145,9 @@ namespace System.ComponentModel.Composition
 
         internal class MockCompositionService : ICompositionService
         {
-            public MockCompositionService() { }
+            public MockCompositionService()
+            {
+            }
 
             public void SatisfyImportsOnce(ComposablePart part)
             {
@@ -160,7 +162,9 @@ namespace System.ComponentModel.Composition
 
         public class MockAttributedPart
         {
-            public MockAttributedPart() { }
+            public MockAttributedPart()
+            {
+            }
         }
     }
 }

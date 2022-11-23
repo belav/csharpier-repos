@@ -8,7 +8,9 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12ShroudedKeyBag(
             ReadOnlyMemory<byte> encryptedPkcs8PrivateKey,
             bool skipCopy = false
-        ) : base(Oids.Pkcs12ShroudedKeyBag, encryptedPkcs8PrivateKey, skipCopy) { }
+        ) : base(Oids.Pkcs12ShroudedKeyBag, encryptedPkcs8PrivateKey, skipCopy)
+        {
+        }
 
         public ReadOnlyMemory<byte> EncryptedPkcs8PrivateKey => EncodedBagValue;
     }

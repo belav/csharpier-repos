@@ -83,7 +83,9 @@ namespace System.Security.Cryptography
 {
     internal sealed class SafeAppleCryptorHandle : SafeHandle
     {
-        public SafeAppleCryptorHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeAppleCryptorHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

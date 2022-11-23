@@ -8,7 +8,9 @@ namespace System.Configuration
     {
         private static volatile IDisposable s_emptyImpersonationContext;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         internal static IDisposable GetStaticInstance()
         {

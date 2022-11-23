@@ -16,7 +16,9 @@ namespace System.Xml
         private XmlDictionaryString[]? _strings;
         private Dictionary<int, XmlDictionaryString>? _stringDict;
 
-        public XmlBinaryReaderSession() { }
+        public XmlBinaryReaderSession()
+        {
+        }
 
         public XmlDictionaryString Add(int id, string value)
         {

@@ -14,10 +14,14 @@ namespace Microsoft.Extensions.Logging.Testing
         private readonly LogLevel _minLevel;
         private readonly DateTimeOffset? _logStart;
 
-        public XunitLoggerProvider(ITestOutputHelper output) : this(output, LogLevel.Trace) { }
+        public XunitLoggerProvider(ITestOutputHelper output) : this(output, LogLevel.Trace)
+        {
+        }
 
         public XunitLoggerProvider(ITestOutputHelper output, LogLevel minLevel)
-            : this(output, minLevel, null) { }
+            : this(output, minLevel, null)
+        {
+        }
 
         public XunitLoggerProvider(
             ITestOutputHelper output,
@@ -35,7 +39,9 @@ namespace Microsoft.Extensions.Logging.Testing
             return new XunitLogger(_output, categoryName, _minLevel, _logStart);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public class XunitLogger : ILogger
@@ -128,7 +134,9 @@ namespace Microsoft.Extensions.Logging.Testing
 
         private class NullScope : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

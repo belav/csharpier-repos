@@ -11,13 +11,17 @@ namespace System.Security.Cryptography.Pkcs
         public CmsRecipient(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             System.Security.Cryptography.RSAEncryptionPadding rsaEncryptionPadding
-        ) { }
+        )
+        {
+        }
 
         public CmsRecipient(
             System.Security.Cryptography.Pkcs.SubjectIdentifierType recipientIdentifierType,
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             System.Security.Cryptography.RSAEncryptionPadding rsaEncryptionPadding
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.RSAEncryptionPadding? RSAEncryptionPadding
         {
@@ -31,24 +35,32 @@ namespace System.Security.Cryptography.Pkcs
             System.Security.Cryptography.Pkcs.SubjectIdentifierType signerIdentifierType,
             System.Security.Cryptography.X509Certificates.X509Certificate2? certificate,
             System.Security.Cryptography.AsymmetricAlgorithm? privateKey
-        ) { }
+        )
+        {
+        }
 
         public CmsSigner(
             System.Security.Cryptography.Pkcs.SubjectIdentifierType signerIdentifierType,
             System.Security.Cryptography.X509Certificates.X509Certificate2? certificate,
             System.Security.Cryptography.RSA? privateKey,
             System.Security.Cryptography.RSASignaturePadding? signaturePadding
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.AsymmetricAlgorithm? PrivateKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.RSASignaturePadding? SignaturePadding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -64,17 +76,23 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class EnvelopedCms
     {
-        public void Decode(System.ReadOnlySpan<byte> encodedMessage) { }
+        public void Decode(System.ReadOnlySpan<byte> encodedMessage)
+        {
+        }
 
         public void Decrypt(
             System.Security.Cryptography.Pkcs.RecipientInfo recipientInfo,
             System.Security.Cryptography.AsymmetricAlgorithm? privateKey
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class Pkcs12Builder
     {
-        public Pkcs12Builder() { }
+        public Pkcs12Builder()
+        {
+        }
 
         public bool IsSealed
         {
@@ -85,29 +103,39 @@ namespace System.Security.Cryptography.Pkcs
             System.Security.Cryptography.Pkcs.Pkcs12SafeContents safeContents,
             byte[]? passwordBytes,
             System.Security.Cryptography.PbeParameters pbeParameters
-        ) { }
+        )
+        {
+        }
 
         public void AddSafeContentsEncrypted(
             System.Security.Cryptography.Pkcs.Pkcs12SafeContents safeContents,
             System.ReadOnlySpan<byte> passwordBytes,
             System.Security.Cryptography.PbeParameters pbeParameters
-        ) { }
+        )
+        {
+        }
 
         public void AddSafeContentsEncrypted(
             System.Security.Cryptography.Pkcs.Pkcs12SafeContents safeContents,
             System.ReadOnlySpan<char> password,
             System.Security.Cryptography.PbeParameters pbeParameters
-        ) { }
+        )
+        {
+        }
 
         public void AddSafeContentsEncrypted(
             System.Security.Cryptography.Pkcs.Pkcs12SafeContents safeContents,
             string? password,
             System.Security.Cryptography.PbeParameters pbeParameters
-        ) { }
+        )
+        {
+        }
 
         public void AddSafeContentsUnencrypted(
             System.Security.Cryptography.Pkcs.Pkcs12SafeContents safeContents
-        ) { }
+        )
+        {
+        }
 
         public byte[] Encode()
         {
@@ -118,15 +146,21 @@ namespace System.Security.Cryptography.Pkcs
             System.ReadOnlySpan<char> password,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             int iterationCount
-        ) { }
+        )
+        {
+        }
 
         public void SealWithMac(
             string? password,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             int iterationCount
-        ) { }
+        )
+        {
+        }
 
-        public void SealWithoutIntegrity() { }
+        public void SealWithoutIntegrity()
+        {
+        }
 
         public bool TryEncode(System.Span<byte> destination, out int bytesWritten)
         {
@@ -139,7 +173,9 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12CertBag(
             System.Security.Cryptography.Oid certificateType,
             System.ReadOnlyMemory<byte> encodedCertificate
-        ) : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
+        ) : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool))
+        {
+        }
 
         public System.ReadOnlyMemory<byte> EncodedCertificate
         {
@@ -171,7 +207,9 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class Pkcs12Info
     {
-        internal Pkcs12Info() { }
+        internal Pkcs12Info()
+        {
+        }
 
         public System.Collections.ObjectModel.ReadOnlyCollection<System.Security.Cryptography.Pkcs.Pkcs12SafeContents> AuthenticatedSafe
         {
@@ -213,7 +251,9 @@ namespace System.Security.Cryptography.Pkcs
     public sealed partial class Pkcs12KeyBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         public Pkcs12KeyBag(System.ReadOnlyMemory<byte> pkcs8PrivateKey, bool skipCopy = false)
-            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
+            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool))
+        {
+        }
 
         public System.ReadOnlyMemory<byte> Pkcs8PrivateKey
         {
@@ -227,7 +267,9 @@ namespace System.Security.Cryptography.Pkcs
             string bagIdValue,
             System.ReadOnlyMemory<byte> encodedBagValue,
             bool skipCopy = false
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.CryptographicAttributeObjectCollection Attributes
         {
@@ -256,7 +298,9 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class Pkcs12SafeContents
     {
-        public Pkcs12SafeContents() { }
+        public Pkcs12SafeContents()
+        {
+        }
 
         public System.Security.Cryptography.Pkcs.Pkcs12ConfidentialityMode ConfidentialityMode
         {
@@ -288,7 +332,9 @@ namespace System.Security.Cryptography.Pkcs
             throw null;
         }
 
-        public void AddSafeBag(System.Security.Cryptography.Pkcs.Pkcs12SafeBag safeBag) { }
+        public void AddSafeBag(System.Security.Cryptography.Pkcs.Pkcs12SafeBag safeBag)
+        {
+        }
 
         public System.Security.Cryptography.Pkcs.Pkcs12SecretBag AddSecret(
             System.Security.Cryptography.Oid secretType,
@@ -334,13 +380,21 @@ namespace System.Security.Cryptography.Pkcs
             throw null;
         }
 
-        public void Decrypt(byte[]? passwordBytes) { }
+        public void Decrypt(byte[]? passwordBytes)
+        {
+        }
 
-        public void Decrypt(System.ReadOnlySpan<byte> passwordBytes) { }
+        public void Decrypt(System.ReadOnlySpan<byte> passwordBytes)
+        {
+        }
 
-        public void Decrypt(System.ReadOnlySpan<char> password) { }
+        public void Decrypt(System.ReadOnlySpan<char> password)
+        {
+        }
 
-        public void Decrypt(string? password) { }
+        public void Decrypt(string? password)
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<System.Security.Cryptography.Pkcs.Pkcs12SafeBag> GetBags()
         {
@@ -352,7 +406,9 @@ namespace System.Security.Cryptography.Pkcs
         : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         internal Pkcs12SafeContentsBag()
-            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
+            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool))
+        {
+        }
 
         public System.Security.Cryptography.Pkcs.Pkcs12SafeContents? SafeContents
         {
@@ -363,7 +419,9 @@ namespace System.Security.Cryptography.Pkcs
     public sealed partial class Pkcs12SecretBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         internal Pkcs12SecretBag()
-            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
+            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool))
+        {
+        }
 
         public System.ReadOnlyMemory<byte> SecretValue
         {
@@ -382,7 +440,9 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12ShroudedKeyBag(
             System.ReadOnlyMemory<byte> encryptedPkcs8PrivateKey,
             bool skipCopy = false
-        ) : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
+        ) : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool))
+        {
+        }
 
         public System.ReadOnlyMemory<byte> EncryptedPkcs8PrivateKey
         {
@@ -397,7 +457,9 @@ namespace System.Security.Cryptography.Pkcs
             System.ReadOnlyMemory<byte>? algorithmParameters,
             System.ReadOnlyMemory<byte> privateKey,
             bool skipCopies = false
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.Oid AlgorithmId
         {
@@ -500,11 +562,17 @@ namespace System.Security.Cryptography.Pkcs
     public sealed partial class Pkcs9LocalKeyId
         : System.Security.Cryptography.Pkcs.Pkcs9AttributeObject
     {
-        public Pkcs9LocalKeyId() { }
+        public Pkcs9LocalKeyId()
+        {
+        }
 
-        public Pkcs9LocalKeyId(byte[] keyId) { }
+        public Pkcs9LocalKeyId(byte[] keyId)
+        {
+        }
 
-        public Pkcs9LocalKeyId(System.ReadOnlySpan<byte> keyId) { }
+        public Pkcs9LocalKeyId(System.ReadOnlySpan<byte> keyId)
+        {
+        }
 
         public System.ReadOnlyMemory<byte> KeyId
         {
@@ -514,7 +582,9 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class Rfc3161TimestampRequest
     {
-        internal Rfc3161TimestampRequest() { }
+        internal Rfc3161TimestampRequest()
+        {
+        }
 
         public bool HasExtensions
         {
@@ -631,7 +701,9 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class Rfc3161TimestampToken
     {
-        internal Rfc3161TimestampToken() { }
+        internal Rfc3161TimestampToken()
+        {
+        }
 
         public System.Security.Cryptography.Pkcs.Rfc3161TimestampTokenInfo TokenInfo
         {
@@ -714,7 +786,9 @@ namespace System.Security.Cryptography.Pkcs
             System.ReadOnlyMemory<byte>? timestampAuthorityName =
                 default(System.ReadOnlyMemory<byte>?),
             System.Security.Cryptography.X509Certificates.X509ExtensionCollection? extensions = null
-        ) { }
+        )
+        {
+        }
 
         public long? AccuracyInMicroseconds
         {
@@ -795,13 +869,19 @@ namespace System.Security.Cryptography.Pkcs
     {
         public void AddCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        )
+        {
+        }
 
-        public void Decode(System.ReadOnlySpan<byte> encodedMessage) { }
+        public void Decode(System.ReadOnlySpan<byte> encodedMessage)
+        {
+        }
 
         public void RemoveCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class SignerInfo
@@ -818,11 +898,15 @@ namespace System.Security.Cryptography.Pkcs
 
         public void AddUnsignedAttribute(
             System.Security.Cryptography.AsnEncodedData unsignedAttribute
-        ) { }
+        )
+        {
+        }
 
         public void RemoveUnsignedAttribute(
             System.Security.Cryptography.AsnEncodedData unsignedAttribute
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class SubjectIdentifier

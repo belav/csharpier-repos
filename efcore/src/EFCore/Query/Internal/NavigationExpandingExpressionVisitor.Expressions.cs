@@ -91,7 +91,9 @@ public partial class NavigationExpandingExpressionVisitor
     {
         private EntityReference? _entityReference;
 
-        public IncludeTreeNode(IEntityType entityType) : this(entityType, null, setLoaded: true) { }
+        public IncludeTreeNode(IEntityType entityType) : this(entityType, null, setLoaded: true)
+        {
+        }
 
         public IncludeTreeNode(
             IEntityType entityType,

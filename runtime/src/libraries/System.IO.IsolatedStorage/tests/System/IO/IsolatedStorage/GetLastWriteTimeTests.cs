@@ -30,7 +30,9 @@ namespace System.IO.IsolatedStorage
         public void GetLastWriteTime_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
+            {
+            }
 
             Assert.Throws<ObjectDisposedException>(() => isf.GetLastWriteTime("foo"));
         }

@@ -24,7 +24,9 @@ namespace AppWithSubDirs
                 new System.Runtime.Loader.AssemblyDependencyResolver("qwerty");
             }
             catch (InvalidOperationException ex)
-                when (ex.Message.Contains("Failed to locate managed application")) { }
+                when (ex.Message.Contains("Failed to locate managed application"))
+            {
+            }
 
             string Part(string dir = "", string subdir = "", string subsubdir = "")
             {

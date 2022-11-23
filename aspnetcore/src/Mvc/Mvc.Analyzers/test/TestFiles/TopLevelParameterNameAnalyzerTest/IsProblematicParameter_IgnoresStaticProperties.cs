@@ -4,6 +4,8 @@
     {
         public static string Model { get; set; }
 
-        public void ActionMethod(IsProblematicParameter_IgnoresStaticProperties model) { }
+        public void ActionMethod(IsProblematicParameter_IgnoresStaticProperties model)
+        {
+        }
     }
 }

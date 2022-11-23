@@ -300,7 +300,9 @@ namespace CoreXml.Test.XLinq
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElement_Op_Eplicit_Null
                 // Test Case
-                public override void AddChildren() { }
+                public override void AddChildren()
+                {
+                }
             }
 
             public partial class XElementName : XLinqTestCase

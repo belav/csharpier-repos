@@ -31,7 +31,9 @@ namespace Test
                 AA[] aa = null;
                 Static1(ref aa, m_nStaticFld);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

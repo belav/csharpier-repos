@@ -467,12 +467,20 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        public class Synchronous : PolymorphicTests<SocketHelperArraySync> { }
+        public class Synchronous : PolymorphicTests<SocketHelperArraySync>
+        {
+        }
 
-        public class Apm : PolymorphicTests<SocketHelperApm> { }
+        public class Apm : PolymorphicTests<SocketHelperApm>
+        {
+        }
 
-        public class TaskBased : PolymorphicTests<SocketHelperTask> { }
+        public class TaskBased : PolymorphicTests<SocketHelperTask>
+        {
+        }
 
-        public class Eap : PolymorphicTests<SocketHelperEap> { }
+        public class Eap : PolymorphicTests<SocketHelperEap>
+        {
+        }
     }
 }

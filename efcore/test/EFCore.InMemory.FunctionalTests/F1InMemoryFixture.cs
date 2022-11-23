@@ -3,9 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class F1InMemoryFixture : F1InMemoryFixtureBase<byte[]> { }
+public class F1InMemoryFixture : F1InMemoryFixtureBase<byte[]>
+{
+}
 
-public class F1ULongInMemoryFixture : F1InMemoryFixtureBase<ulong> { }
+public class F1ULongInMemoryFixture : F1InMemoryFixtureBase<ulong>
+{
+}
 
 public abstract class F1InMemoryFixtureBase<TRowVersion> : F1FixtureBase<TRowVersion>
 {

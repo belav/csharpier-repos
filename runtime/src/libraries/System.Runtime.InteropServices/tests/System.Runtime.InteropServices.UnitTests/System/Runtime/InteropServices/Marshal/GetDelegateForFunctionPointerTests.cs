@@ -234,6 +234,8 @@ namespace System.Runtime.InteropServices.Tests
         public delegate void NonGenericDelegate(string t);
         public delegate void OtherNonGenericDelegate(string t);
 
-        private static void Method(string s) { }
+        private static void Method(string s)
+        {
+        }
     }
 }

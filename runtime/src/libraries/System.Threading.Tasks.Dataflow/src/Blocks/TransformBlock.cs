@@ -53,7 +53,9 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="transform">The function to invoke with each data element received.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
         public TransformBlock(Func<TInput, TOutput> transform)
-            : this(transform, null, ExecutionDataflowBlockOptions.Default) { }
+            : this(transform, null, ExecutionDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>
         /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/> and
@@ -66,13 +68,17 @@ namespace System.Threading.Tasks.Dataflow
         public TransformBlock(
             Func<TInput, TOutput> transform,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) : this(transform, null, dataflowBlockOptions) { }
+        ) : this(transform, null, dataflowBlockOptions)
+        {
+        }
 
         /// <summary>Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>.</summary>
         /// <param name="transform">The function to invoke with each data element received.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
         public TransformBlock(Func<TInput, Task<TOutput>> transform)
-            : this(null, transform, ExecutionDataflowBlockOptions.Default) { }
+            : this(null, transform, ExecutionDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>
         /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>
@@ -85,7 +91,9 @@ namespace System.Threading.Tasks.Dataflow
         public TransformBlock(
             Func<TInput, Task<TOutput>> transform,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) : this(null, transform, dataflowBlockOptions) { }
+        ) : this(null, transform, dataflowBlockOptions)
+        {
+        }
 
         /// <summary>
         /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>

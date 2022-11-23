@@ -17,7 +17,9 @@ namespace System.Web.Mvc
         private readonly List<IExceptionFilter> _exceptionFilters = new List<IExceptionFilter>();
         private readonly List<IResultFilter> _resultFilters = new List<IResultFilter>();
 
-        public FilterInfo() { }
+        public FilterInfo()
+        {
+        }
 
         public FilterInfo(IEnumerable<Filter> filters)
         {

@@ -54,7 +54,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 globalOptions,
                 visibilityTracker,
                 listenerProvider.GetListener(FeatureAttribute.Classification)
-            ) { }
+            )
+        {
+        }
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.NearImmediate;
 

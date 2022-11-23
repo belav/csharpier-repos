@@ -57,7 +57,9 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Required by <see cref="SymbolDisplayPartKind"/>.
     /// </summary>
-    internal static class IErrorTypeSymbol { }
+    internal static class IErrorTypeSymbol
+    {
+    }
 
     /// <summary>
     /// Required by <see cref="Microsoft.CodeAnalysis.FailFast"/>
@@ -82,7 +84,9 @@ namespace System.Runtime.CompilerServices
         Inherited = false
     )]
     // To allow this dll to use extension methods even though we are targeting CLR v2, re-define ExtensionAttribute
-    internal class ExtensionAttribute : Attribute { }
+    internal class ExtensionAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// This satisfies a cref on <see cref="Microsoft.CodeAnalysis.ExpressionEvaluator.DynamicFlagsCustomTypeInfo.CopyTo"/>.
@@ -95,7 +99,9 @@ namespace System.Runtime.CompilerServices
             | AttributeTargets.Parameter
             | AttributeTargets.ReturnValue
     )]
-    internal class DynamicAttribute : Attribute { }
+    internal class DynamicAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// This satisfies a cref on <see cref="Microsoft.CodeAnalysis.WellKnownMemberNames"/>.

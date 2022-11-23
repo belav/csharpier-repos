@@ -47,7 +47,9 @@ namespace System.Net.Connections
         /// <param name="protocolType">The <see cref="ProtocolType"/> to forward to the socket.</param>
         /// <remarks>The created socket will be an IPv6 socket with <see cref="Socket.DualMode"/> enabled.</remarks>
         public SocketsConnectionFactory(SocketType socketType, ProtocolType protocolType)
-            : this(AddressFamily.InterNetworkV6, socketType, protocolType) { }
+            : this(AddressFamily.InterNetworkV6, socketType, protocolType)
+        {
+        }
 
         /// <inheritdoc />
         /// <exception cref="ArgumentNullException">When <paramref name="endPoint"/> is <see langword="null"/>.</exception>

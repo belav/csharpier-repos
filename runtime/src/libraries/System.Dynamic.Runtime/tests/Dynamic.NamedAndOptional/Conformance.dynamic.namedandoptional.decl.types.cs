@@ -787,13 +787,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.t
         e3
     }
 
-    public struct S { }
+    public struct S
+    {
+    }
 
-    public struct GS<T> { }
+    public struct GS<T>
+    {
+    }
 
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public interface GI<T> { }
+    public interface GI<T>
+    {
+    }
 
     public delegate void D();
     public delegate void GD<T>();
@@ -1570,7 +1578,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.t
     // <Description></Description>
     // <Expects status=success></Expects>
     // <Code>
-    public struct S { }
+    public struct S
+    {
+    }
 
     public class Parent
     {
@@ -1604,7 +1614,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.t
     // <Description></Description>
     // <Expects status=success></Expects>
     // <Code>
-    public struct S { }
+    public struct S
+    {
+    }
 
     public class Parent
     {

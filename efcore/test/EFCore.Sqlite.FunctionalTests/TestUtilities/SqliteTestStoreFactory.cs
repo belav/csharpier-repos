@@ -7,7 +7,9 @@ public class SqliteTestStoreFactory : RelationalTestStoreFactory
 {
     public static SqliteTestStoreFactory Instance { get; } = new();
 
-    protected SqliteTestStoreFactory() { }
+    protected SqliteTestStoreFactory()
+    {
+    }
 
     public override TestStore Create(string storeName) => SqliteTestStore.Create(storeName);
 

@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-public interface IProxyView { }
+public interface IProxyView
+{
+}

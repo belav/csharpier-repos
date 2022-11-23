@@ -16,7 +16,9 @@ namespace System.Composition.UnitTests
 {
     public class CircularityTests : ContainerTests
     {
-        public interface IA { }
+        public interface IA
+        {
+        }
 
         [Export, Shared]
         public class BLazy
@@ -105,14 +107,18 @@ namespace System.Composition.UnitTests
         public class PrDepA
         {
             [ImportingConstructor]
-            public PrDepA(PrDepB b) { }
+            public PrDepA(PrDepB b)
+            {
+            }
         }
 
         [Export]
         public class PrDepB
         {
             [ImportingConstructor]
-            public PrDepB(PrDepA a) { }
+            public PrDepB(PrDepA a)
+            {
+            }
         }
 
         [Fact]

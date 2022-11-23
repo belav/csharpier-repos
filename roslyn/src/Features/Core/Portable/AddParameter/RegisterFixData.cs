@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 new SeparatedSyntaxList<TArgumentSyntax>(),
                 ImmutableArray<IMethodSymbol>.Empty,
                 false
-            ) { }
+            )
+        {
+        }
 
         public RegisterFixData(
             SeparatedSyntaxList<TArgumentSyntax> arguments,

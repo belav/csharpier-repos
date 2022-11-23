@@ -336,6 +336,8 @@ namespace System.Tests
             Guid("42424242-4242-4242-4242-424242424242"),
             InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
         ]
-        public interface ITestComInterface { }
+        public interface ITestComInterface
+        {
+        }
     }
 }

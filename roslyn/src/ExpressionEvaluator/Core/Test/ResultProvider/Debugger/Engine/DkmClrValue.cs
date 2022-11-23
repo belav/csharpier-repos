@@ -79,7 +79,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
         internal readonly object RawValue;
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
         public DkmClrValue Dereference(DkmInspectionContext inspectionContext)
         {

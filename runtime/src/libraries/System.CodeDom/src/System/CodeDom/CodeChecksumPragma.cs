@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _fileName;
 
-        public CodeChecksumPragma() { }
+        public CodeChecksumPragma()
+        {
+        }
 
         public CodeChecksumPragma(string fileName, Guid checksumAlgorithmId, byte[] checksumData)
         {

@@ -389,7 +389,9 @@ public interface IDbCommandInterceptor : IInterceptor
     /// </summary>
     /// <param name="command">The command.</param>
     /// <param name="eventData">Contextual information about the command and execution.</param>
-    void CommandCanceled(DbCommand command, CommandEndEventData eventData) { }
+    void CommandCanceled(DbCommand command, CommandEndEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called when a command was canceled.
@@ -410,7 +412,9 @@ public interface IDbCommandInterceptor : IInterceptor
     /// </summary>
     /// <param name="command">The command.</param>
     /// <param name="eventData">Contextual information about the command and execution.</param>
-    void CommandFailed(DbCommand command, CommandErrorEventData eventData) { }
+    void CommandFailed(DbCommand command, CommandErrorEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called when execution of a command has failed with an exception.

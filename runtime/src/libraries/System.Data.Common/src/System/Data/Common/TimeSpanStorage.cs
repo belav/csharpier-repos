@@ -14,7 +14,9 @@ namespace System.Data.Common
         private TimeSpan[] _values = default!; // Late-initialized
 
         public TimeSpanStorage(DataColumn column)
-            : base(column, typeof(TimeSpan), s_defaultValue, StorageType.TimeSpan) { }
+            : base(column, typeof(TimeSpan), s_defaultValue, StorageType.TimeSpan)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

@@ -717,7 +717,9 @@ dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') 
 
         private class TestViewModel : ISettingsEditorViewModel
         {
-            public void NotifyOfUpdate() { }
+            public void NotifyOfUpdate()
+            {
+            }
 
             Task<SourceText> ISettingsEditorViewModel.UpdateEditorConfigAsync(SourceText sourceText)
             {

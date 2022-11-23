@@ -28,7 +28,9 @@ struct S0
 
 class C0
 {
-    public C0(S0 f7, S0 f8) { }
+    public C0(S0 f7, S0 f8)
+    {
+    }
 }
 
 class C1
@@ -39,7 +41,9 @@ class C1
 
 struct S2
 {
-    public S2(C0 f4) : this() { }
+    public S2(C0 f4) : this()
+    {
+    }
 }
 
 struct S3

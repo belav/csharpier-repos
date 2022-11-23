@@ -15,7 +15,9 @@ namespace DebuggerTests
 {
     public class CustomViewTests : DebuggerTests
     {
-        public CustomViewTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public CustomViewTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task UsingDebuggerDisplay()

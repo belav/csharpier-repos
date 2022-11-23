@@ -15,7 +15,9 @@ namespace System.Web.WebPages
             ValidationAttribute attribute,
             string errorMessage,
             ModelClientValidationRule clientValidationRule
-        ) : this(attribute, errorMessage, clientValidationRule, useUnvalidatedValues: false) { }
+        ) : this(attribute, errorMessage, clientValidationRule, useUnvalidatedValues: false)
+        {
+        }
 
         public ValidationAttributeAdapter(
             ValidationAttribute attribute,

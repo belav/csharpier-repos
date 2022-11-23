@@ -328,7 +328,9 @@ namespace System.Resources
                         return (ResourceSet)
                             Activator.CreateInstance(_mediator.UserResourceSet, args)!;
                     }
-                    catch (MissingMethodException) { }
+                    catch (MissingMethodException)
+                    {
+                    }
 
                     args = new object[1];
                     args[0] = store;
@@ -492,7 +494,9 @@ namespace System.Resources
                     _mediator.SatelliteContractVersion
                 );
             }
-            catch (FileLoadException) { }
+            catch (FileLoadException)
+            {
+            }
             catch (BadImageFormatException)
             {
                 // Don't throw for zero-length satellite assemblies, for compat with v1

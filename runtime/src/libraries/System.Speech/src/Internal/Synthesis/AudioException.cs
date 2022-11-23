@@ -9,7 +9,9 @@ namespace System.Speech.Internal.Synthesis
     internal class AudioException : Exception
     {
         #region Constructors
-        internal AudioException() { }
+        internal AudioException()
+        {
+        }
 
         internal AudioException(Interop.WinMM.MMSYSERR errorCode)
             : base(
@@ -19,10 +21,14 @@ namespace System.Speech.Internal.Synthesis
                     SR.Get(SRID.AudioDeviceError),
                     (int)errorCode
                 )
-            ) { }
+            )
+        {
+        }
 
         protected AudioException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         #endregion
     }

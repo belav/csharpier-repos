@@ -159,7 +159,9 @@ namespace IdeCoreBenchmarks
             var root = await document.GetSyntaxRootAsync();
             if (root != null)
             {
-                foreach (var child in root.DescendantNodesAndTokensAndSelf()) { }
+                foreach (var child in root.DescendantNodesAndTokensAndSelf())
+                {
+                }
             }
         }
 

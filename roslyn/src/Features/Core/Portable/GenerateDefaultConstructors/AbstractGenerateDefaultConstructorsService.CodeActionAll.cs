@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 IList<IMethodSymbol> constructors,
                 CodeAndImportGenerationOptionsProvider fallbackOptions
             ) : base(document, state, constructors, FeaturesResources.Generate_all, fallbackOptions)
-            { }
+            {
+            }
         }
     }
 }

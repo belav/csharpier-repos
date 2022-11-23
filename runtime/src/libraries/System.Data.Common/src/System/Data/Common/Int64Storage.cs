@@ -14,7 +14,9 @@ namespace System.Data.Common
         private long[] _values = default!; // Late-initialized
 
         internal Int64Storage(DataColumn column)
-            : base(column, typeof(long), defaultValue, StorageType.Int64) { }
+            : base(column, typeof(long), defaultValue, StorageType.Int64)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

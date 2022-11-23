@@ -41,7 +41,9 @@ namespace System.Xml.Schema
 
         public static readonly CompiledIdentityConstraint Empty = new CompiledIdentityConstraint();
 
-        private CompiledIdentityConstraint() { }
+        private CompiledIdentityConstraint()
+        {
+        }
 
         public CompiledIdentityConstraint(
             XmlSchemaIdentityConstraint constraint,

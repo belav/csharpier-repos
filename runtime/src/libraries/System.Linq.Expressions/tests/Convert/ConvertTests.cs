@@ -19043,7 +19043,9 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private struct HalfLiftedTo { }
+        private struct HalfLiftedTo
+        {
+        }
 
         private struct ImplicitHalfLiftedFrom
         {
@@ -19372,7 +19374,9 @@ namespace System.Linq.Expressions.Tests
             public static CustomConversions ConvertFromRefInt(ref int x) =>
                 new CustomConversions { Value = x++ };
 
-            public static void DoNothing(CustomConversions cc) { }
+            public static void DoNothing(CustomConversions cc)
+            {
+            }
 
             public static CustomConversions Create() => new CustomConversions();
 
@@ -19602,11 +19606,17 @@ namespace System.Linq.Expressions.Tests
             );
         }
 
-        interface IInterface { }
+        interface IInterface
+        {
+        }
 
-        class NonSealed { }
+        class NonSealed
+        {
+        }
 
-        class Derived : NonSealed, IInterface { }
+        class Derived : NonSealed, IInterface
+        {
+        }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void NonSealedArrayToIfaceArray(bool useInterpreter)

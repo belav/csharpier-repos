@@ -42,7 +42,9 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public ECDsaOpenSsl() : this(521) { }
+        public ECDsaOpenSsl() : this(521)
+        {
+        }
 
         /// <summary>
         ///     Creates a new ECDsaOpenSsl object that will use a randomly generated key of the specified size.

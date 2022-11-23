@@ -5,7 +5,9 @@ namespace System.CodeDom
 {
     public class CodeIterationStatement : CodeStatement
     {
-        public CodeIterationStatement() { }
+        public CodeIterationStatement()
+        {
+        }
 
         public CodeIterationStatement(
             CodeStatement initStatement,

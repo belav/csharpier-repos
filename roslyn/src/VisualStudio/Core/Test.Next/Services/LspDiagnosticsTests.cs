@@ -881,7 +881,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         private class TestLanguageClient : AbstractInProcLanguageClient
         {
             public TestLanguageClient() : base(null!, null!, null, null!, null!, null!, null!, null)
-            { }
+            {
+            }
 
             protected override ImmutableArray<string> SupportedLanguages =>
                 ProtocolConstants.RoslynLspLanguages;

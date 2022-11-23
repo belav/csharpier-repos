@@ -37,7 +37,9 @@ namespace IDynamicInterfaceCastableTests
         int ImplementedMethod();
     }
 
-    public interface INotImplemented { }
+    public interface INotImplemented
+    {
+    }
 
     [DynamicInterfaceCastableImplementation]
     public interface ITestImpl : ITest
@@ -110,9 +112,13 @@ namespace IDynamicInterfaceCastableTests
     }
 
     [DynamicInterfaceCastableImplementation]
-    public interface IDiamondTest : ITestImpl, ITestReabstracted { }
+    public interface IDiamondTest : ITestImpl, ITestReabstracted
+    {
+    }
 
-    public interface IOverrideTest : ITestImpl { }
+    public interface IOverrideTest : ITestImpl
+    {
+    }
 
     [DynamicInterfaceCastableImplementation]
     public interface IOverrideTestImpl : IOverrideTest
@@ -174,7 +180,9 @@ namespace IDynamicInterfaceCastableTests
         public static string ErrorFormat = "REQUESTED={0}";
 
         public DynamicInterfaceCastableException(RuntimeTypeHandle interfaceType)
-            : base(string.Format(ErrorFormat, Type.GetTypeFromHandle(interfaceType))) { }
+            : base(string.Format(ErrorFormat, Type.GetTypeFromHandle(interfaceType)))
+        {
+        }
     }
 
     public class DynamicInterfaceCastable : IDynamicInterfaceCastable, IDirectlyImplemented
@@ -291,15 +299,23 @@ namespace IDynamicInterfaceCastableTests
             return other.OtherMethod();
         }
 
-        private class TestImpl : ITestImpl { }
+        private class TestImpl : ITestImpl
+        {
+        }
 
-        private interface INoAttributeImpl : ITestImpl { }
+        private interface INoAttributeImpl : ITestImpl
+        {
+        }
 
         [DynamicInterfaceCastableImplementation]
-        private interface INotTestImpl { }
+        private interface INotTestImpl
+        {
+        }
 
         [DynamicInterfaceCastableImplementation]
-        private interface ITestNoDefaultImpl : ITest { }
+        private interface ITestNoDefaultImpl : ITest
+        {
+        }
 
         [DynamicInterfaceCastableImplementation]
         private interface ITestPartialImpl : ITest

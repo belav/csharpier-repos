@@ -141,7 +141,9 @@ public class DatabaseErrorLogStateTest
 
         public class Blog
         {
-            public Blog() : this(true) { }
+            public Blog() : this(true)
+            {
+            }
 
             public Blog(bool jimSaysThrow)
             {
@@ -168,11 +170,15 @@ public class DatabaseErrorLogStateTest
     {
         public readonly TestLogger Logger = new();
 
-        public void AddProvider(ILoggerProvider provider) { }
+        public void AddProvider(ILoggerProvider provider)
+        {
+        }
 
         public ILogger CreateLogger(string name) => Logger;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public class TestLogger : ILogger
         {

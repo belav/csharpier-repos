@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpReplaceDefaultLiteralCodeFixProvider() { }
+        public CSharpReplaceDefaultLiteralCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS8313, CS8505);

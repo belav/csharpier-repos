@@ -1944,7 +1944,9 @@ namespace System
                         //
                         // Skip all year pattern charaters.
                         //
-                        for (; i + 1 < pattern.Length && pattern[i + 1] == 'y'; i++) { }
+                        for (; i + 1 < pattern.Length && pattern[i + 1] == 'y'; i++)
+                        {
+                        }
                     }
                     else if (ch == 'M')
                     {
@@ -1952,7 +1954,9 @@ namespace System
                         //
                         // Skip all month pattern characters.
                         //
-                        for (; i + 1 < pattern.Length && pattern[i + 1] == 'M'; i++) { }
+                        for (; i + 1 < pattern.Length && pattern[i + 1] == 'M'; i++)
+                        {
+                        }
                     }
                 }
             }
@@ -2024,7 +2028,9 @@ namespace System
                         //
                         // Skip all month pattern characters.
                         //
-                        for (; i + 1 < pattern.Length && pattern[i + 1] == 'M'; i++) { }
+                        for (; i + 1 < pattern.Length && pattern[i + 1] == 'M'; i++)
+                        {
+                        }
                     }
                 }
             }

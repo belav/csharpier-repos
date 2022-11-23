@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
                 parameters: ImmutableArray<IParameterSymbol>.Empty,
                 returnTypeAttributes: ImmutableArray<AttributeData>.Empty
-            ) { }
+            )
+        {
+        }
 
         public override MethodKind MethodKind => MethodKind.Destructor;
 

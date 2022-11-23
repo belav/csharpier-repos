@@ -98,7 +98,9 @@ public abstract class Migration
     ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
     /// </remarks>
     /// <param name="modelBuilder">The <see cref="ModelBuilder" /> to use to build the model.</param>
-    protected virtual void BuildTargetModel(ModelBuilder modelBuilder) { }
+    protected virtual void BuildTargetModel(ModelBuilder modelBuilder)
+    {
+    }
 
     /// <summary>
     ///     Builds the operations that will migrate the database 'up'.

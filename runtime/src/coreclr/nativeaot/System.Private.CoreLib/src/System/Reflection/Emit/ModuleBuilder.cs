@@ -30,7 +30,9 @@ namespace System.Reflection.Emit
             get { return default; }
         }
 
-        public void CreateGlobalFunctions() { }
+        public void CreateGlobalFunctions()
+        {
+        }
 
         public EnumBuilder DefineEnum(string name, TypeAttributes visibility, Type underlyingType)
         {
@@ -130,8 +132,12 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
     }
 }

@@ -480,10 +480,14 @@ namespace System
 
 #if HAS_CUSTOM_BLOCKS
         [StructLayout(LayoutKind.Sequential, Size = 16)]
-        private struct Block16 { }
+        private struct Block16
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, Size = 64)]
-        private struct Block64 { }
+        private struct Block64
+        {
+        }
 #endif // HAS_CUSTOM_BLOCKS
     }
 }

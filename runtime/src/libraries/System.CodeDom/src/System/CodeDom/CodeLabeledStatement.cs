@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _label;
 
-        public CodeLabeledStatement() { }
+        public CodeLabeledStatement()
+        {
+        }
 
         public CodeLabeledStatement(string label)
         {

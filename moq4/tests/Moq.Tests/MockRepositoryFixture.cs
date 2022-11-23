@@ -320,7 +320,9 @@ namespace Moq.Tests
         {
             public bool BaseCalled;
 
-            public BaseClass() { }
+            public BaseClass()
+            {
+            }
 
             public BaseClass(string value)
             {
@@ -337,7 +339,9 @@ namespace Moq.Tests
 
         public class ClassWithoutParameterlessConstructor : BaseClass
         {
-            public ClassWithoutParameterlessConstructor(string value) : base(value) { }
+            public ClassWithoutParameterlessConstructor(string value) : base(value)
+            {
+            }
         }
     }
 }

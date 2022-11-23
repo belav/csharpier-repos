@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class NameParsingTests : ParsingTests
     {
-        public NameParsingTests(ITestOutputHelper output) : base(output) { }
+        public NameParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         private NameSyntax ParseName(string text)
         {

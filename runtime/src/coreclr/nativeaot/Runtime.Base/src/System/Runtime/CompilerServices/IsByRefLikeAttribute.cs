@@ -6,5 +6,7 @@ using System;
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Struct)]
-    internal sealed class IsByRefLikeAttribute : Attribute { }
+    internal sealed class IsByRefLikeAttribute : Attribute
+    {
+    }
 }

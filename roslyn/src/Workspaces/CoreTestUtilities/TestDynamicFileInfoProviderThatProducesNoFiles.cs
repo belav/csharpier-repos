@@ -21,12 +21,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestDynamicFileInfoProviderThatProducesNoFiles() { }
+        public TestDynamicFileInfoProviderThatProducesNoFiles()
+        {
+        }
 
         event EventHandler<string> IDynamicFileInfoProvider.Updated
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public Task<DynamicFileInfo> GetDynamicFileInfoAsync(

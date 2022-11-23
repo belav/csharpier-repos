@@ -7,7 +7,9 @@ public class ConfigurationDbContextSqlServerTest
     : ConfigurationDbContextTestBase<ConfigurationDbContextSqlServerTest.ConfigurationDbContextSqlServerFixture>
 {
     public ConfigurationDbContextSqlServerTest(ConfigurationDbContextSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class ConfigurationDbContextSqlServerFixture : ConfigurationDbContextFixtureBase
     {

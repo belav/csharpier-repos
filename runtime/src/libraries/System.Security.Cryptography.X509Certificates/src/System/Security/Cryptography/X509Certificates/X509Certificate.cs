@@ -50,10 +50,14 @@ namespace System.Security.Cryptography.X509Certificates
             DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public X509Certificate() { }
+        public X509Certificate()
+        {
+        }
 
         // Null turns into the empty span here, which is correct for compat.
-        public X509Certificate(byte[] data) : this(new ReadOnlySpan<byte>(data)) { }
+        public X509Certificate(byte[] data) : this(new ReadOnlySpan<byte>(data))
+        {
+        }
 
         private protected X509Certificate(ReadOnlySpan<byte> data)
         {
@@ -72,11 +76,15 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X509Certificate(byte[] rawData, string? password)
-            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet) { }
+            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate(byte[] rawData, SecureString? password)
-            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet) { }
+            : this(rawData, password, X509KeyStorageFlags.DefaultKeySet)
+        {
+        }
 
         public X509Certificate(
             byte[] rawData,
@@ -142,14 +150,20 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X509Certificate(string fileName)
-            : this(fileName, (string?)null, X509KeyStorageFlags.DefaultKeySet) { }
+            : this(fileName, (string?)null, X509KeyStorageFlags.DefaultKeySet)
+        {
+        }
 
         public X509Certificate(string fileName, string? password)
-            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet) { }
+            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate(string fileName, SecureString? password)
-            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet) { }
+            : this(fileName, password, X509KeyStorageFlags.DefaultKeySet)
+        {
+        }
 
         public X509Certificate(
             string fileName,

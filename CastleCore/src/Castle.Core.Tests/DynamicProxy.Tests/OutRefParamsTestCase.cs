@@ -112,7 +112,11 @@ namespace Castle.DynamicProxy.Tests
         public void CanCallMethodWithOutParameter()
         {
             int i;
-            var interceptor = new WithCallbackInterceptor(delegate { });
+            var interceptor = new WithCallbackInterceptor(
+                delegate
+                {
+                }
+            );
             var proxy = (IWithRefOut)
                 generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
             proxy.Do(out i);

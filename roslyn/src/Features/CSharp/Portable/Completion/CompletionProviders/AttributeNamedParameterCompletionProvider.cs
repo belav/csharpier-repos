@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AttributeNamedParameterCompletionProvider() { }
+        public AttributeNamedParameterCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

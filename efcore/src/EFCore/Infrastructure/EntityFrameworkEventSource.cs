@@ -45,7 +45,9 @@ public sealed class EntityFrameworkEventSource : EventSource
     /// </remarks>
     public static readonly EntityFrameworkEventSource Log = new();
 
-    private EntityFrameworkEventSource() : base("Microsoft.EntityFrameworkCore") { }
+    private EntityFrameworkEventSource() : base("Microsoft.EntityFrameworkCore")
+    {
+    }
 
     /// <summary>
     ///     Indicates that a new <see cref="DbContext" /> instance is being initialized.

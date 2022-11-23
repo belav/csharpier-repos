@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateDeconstructMethodService() { }
+        public CSharpGenerateDeconstructMethodService()
+        {
+        }
 
         protected override bool ContainingTypesOrSelfHasUnsafeKeyword(
             INamedTypeSymbol containingType

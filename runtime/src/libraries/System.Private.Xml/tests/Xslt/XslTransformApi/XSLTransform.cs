@@ -39,7 +39,9 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     //[TestModule(Name = "XSLTransform API Tests", Desc = "XSLTransform API Tests", Pri = 1)]
-    public class XSLTransformModule { }
+    public class XSLTransformModule
+    {
+    }
 
     ////////////////////////////////////////////////////////////////
     // Base class for test cases
@@ -673,7 +675,9 @@ namespace System.Xml.Tests
                         {
                             try
                             {
-                                while (xrXSLT.Read()) { }
+                                while (xrXSLT.Read())
+                                {
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -801,7 +805,9 @@ namespace System.Xml.Tests
                         {
                             try
                             {
-                                while (xrXSLT.Read()) { }
+                                while (xrXSLT.Read())
+                                {
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -936,7 +942,9 @@ namespace System.Xml.Tests
                         {
                             try
                             {
-                                while (xrXSLT.Read()) { }
+                                while (xrXSLT.Read())
+                                {
+                                }
                             }
                             catch (Exception ex)
                             {

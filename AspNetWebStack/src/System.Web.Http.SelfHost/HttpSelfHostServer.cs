@@ -883,7 +883,9 @@ namespace System.Web.Http.SelfHost
             {
                 replyContext.RequestContext.EndReply(result);
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 Interlocked.Decrement(ref _requestsOutstanding);
@@ -1026,7 +1028,9 @@ namespace System.Web.Http.SelfHost
             {
                 server._listener.EndClose(result);
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 CloseNextChannel(server);
@@ -1100,7 +1104,9 @@ namespace System.Web.Http.SelfHost
             {
                 channelContext.Channel.EndClose(result);
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 CloseNextChannel(channelContext.Server);
@@ -1225,7 +1231,9 @@ namespace System.Web.Http.SelfHost
                         {
                             RequestContext.Close();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
 
                         // HttpMessage.Close can throw if the request message throws in its Dispose implementation
                         // Catch here to avoid throwing in a Dispose method
@@ -1233,7 +1241,9 @@ namespace System.Web.Http.SelfHost
                         {
                             Reply.Close();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
 
                     _disposed = true;

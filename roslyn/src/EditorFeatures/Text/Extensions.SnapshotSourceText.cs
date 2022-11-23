@@ -295,7 +295,9 @@ namespace Microsoft.CodeAnalysis.Text
                     ITextBufferCloneService? textBufferCloneService,
                     ITextImage textImage,
                     Encoding? encoding
-                ) : base(textBufferCloneService, textImage, encoding, container: null) { }
+                ) : base(textBufferCloneService, textImage, encoding, container: null)
+                {
+                }
             }
 
             /// <summary>

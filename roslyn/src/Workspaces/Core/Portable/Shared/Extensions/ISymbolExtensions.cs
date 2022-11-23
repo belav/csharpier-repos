@@ -384,7 +384,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1385578
                 }
                 catch (Exception e)
-                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken)) { }
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                {
+                }
             }
 
             return RoslynString.IsNullOrEmpty(xmlText)

@@ -282,7 +282,9 @@ public class Driver<K, V>
             {
                 tbl.Add(keys[i], values[i]);
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
         }
 
         // try to get value for a key that already exists in the table
@@ -438,14 +440,18 @@ public class Driver<K, V>
 
 public class NoDefaultConstructor
 {
-    public NoDefaultConstructor(string str) { }
+    public NoDefaultConstructor(string str)
+    {
+    }
 }
 
 public class WithDefaultConstructor
 {
     private string str;
 
-    public WithDefaultConstructor() { }
+    public WithDefaultConstructor()
+    {
+    }
 
     public WithDefaultConstructor(string s)
     {

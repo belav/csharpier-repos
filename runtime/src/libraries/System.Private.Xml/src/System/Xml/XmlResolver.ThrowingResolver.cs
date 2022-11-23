@@ -28,7 +28,9 @@ namespace System.Xml
             internal static readonly XmlThrowingResolver s_singleton = new();
 
             // Private constructor ensures existing only one instance of XmlThrowingResolver
-            private XmlThrowingResolver() { }
+            private XmlThrowingResolver()
+            {
+            }
 
             public override ICredentials Credentials
             {

@@ -29,7 +29,9 @@ namespace System.ComponentModel.Composition.Primitives
         ///         and <see cref="GetExportedValueCore"/>.
         ///     </note>
         /// </remarks>
-        protected Export() { }
+        protected Export()
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class
@@ -57,7 +59,9 @@ namespace System.ComponentModel.Composition.Primitives
             : this(
                 new ExportDefinition(contractName, (IDictionary<string, object?>?)null),
                 exportedValueGetter
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class
@@ -91,7 +95,9 @@ namespace System.ComponentModel.Composition.Primitives
             string contractName,
             IDictionary<string, object?>? metadata,
             Func<object?> exportedValueGetter
-        ) : this(new ExportDefinition(contractName, metadata), exportedValueGetter) { }
+        ) : this(new ExportDefinition(contractName, metadata), exportedValueGetter)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class

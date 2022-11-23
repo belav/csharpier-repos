@@ -134,7 +134,9 @@ namespace System.Net
         ///   </para>
         /// </devdoc>
         public IPAddress(byte[] address, long scopeid)
-            : this(new ReadOnlySpan<byte>(address ?? ThrowAddressNullException()), scopeid) { }
+            : this(new ReadOnlySpan<byte>(address ?? ThrowAddressNullException()), scopeid)
+        {
+        }
 
         public IPAddress(ReadOnlySpan<byte> address, long scopeid)
         {
@@ -178,7 +180,9 @@ namespace System.Net
         ///   </para>
         /// </devdoc>
         public IPAddress(byte[] address)
-            : this(new ReadOnlySpan<byte>(address ?? ThrowAddressNullException())) { }
+            : this(new ReadOnlySpan<byte>(address ?? ThrowAddressNullException()))
+        {
+        }
 
         public IPAddress(ReadOnlySpan<byte> address)
         {
@@ -672,7 +676,9 @@ namespace System.Net
 
         private sealed class ReadOnlyIPAddress : IPAddress
         {
-            public ReadOnlyIPAddress(ReadOnlySpan<byte> newAddress) : base(newAddress) { }
+            public ReadOnlyIPAddress(ReadOnlySpan<byte> newAddress) : base(newAddress)
+            {
+            }
         }
     }
 }

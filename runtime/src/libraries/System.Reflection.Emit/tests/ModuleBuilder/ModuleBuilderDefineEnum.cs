@@ -243,6 +243,8 @@ namespace System.Reflection.Emit.Tests
             Assert.Throws<TypeLoadException>(() => enumBuilder.CreateType());
         }
 
-        protected enum Int32Enum { }
+        protected enum Int32Enum
+        {
+        }
     }
 }

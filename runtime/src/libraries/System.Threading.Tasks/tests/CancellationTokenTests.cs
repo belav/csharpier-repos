@@ -175,7 +175,8 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
 
-            CancellationTokenRegistration preDisposeRegistration = token.Register(() => { });
+            CancellationTokenRegistration preDisposeRegistration = token.Register(() => {
+            });
 
             //WaitHandle and Dispose
             WaitHandle wh = token.WaitHandle; //ok
@@ -207,7 +208,8 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
 
-            CancellationTokenRegistration preDisposeRegistration = token.Register(() => { });
+            CancellationTokenRegistration preDisposeRegistration = token.Register(() => {
+            });
 
             //WaitHandle and Dispose
             tokenSource.Dispose();
@@ -216,7 +218,8 @@ namespace System.Threading.Tasks.Tests
             Assert.Throws<ObjectDisposedException>(() => tokenSource.Token);
 
             //shouldn't throw
-            token.Register(() => { });
+            token.Register(() => {
+            });
 
             // Allow ctr.Dispose() to succeed when the backing cts has already been disposed.
             preDisposeRegistration.Dispose();
@@ -638,7 +641,8 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
 
-            token.Register(() => { });
+            token.Register(() => {
+            });
             tokenSource.Cancel();
         }
 
@@ -742,7 +746,8 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
-            CancellationTokenRegistration registration = ct.Register(() => { });
+            CancellationTokenRegistration registration = ct.Register(() => {
+            });
             try
             {
                 registration.Dispose();
@@ -949,7 +954,8 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
-            CancellationTokenRegistration ctr1 = ct.Register(() => { });
+            CancellationTokenRegistration ctr1 = ct.Register(() => {
+            });
             ct.Register(() =>
             {
                 ctr1.Dispose();
@@ -1358,7 +1364,11 @@ namespace System.Threading.Tasks.Tests
 
             // register a null delegate, but use the currently registered syncContext.
             // the testSyncContext will track that it was used when the delegate is invoked.
-            token.Register(() => { }, true);
+            token.Register(
+                () => {
+                },
+                true
+            );
 
             Task.Run(() =>
             {
@@ -1557,10 +1567,14 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
-            CancellationTokenRegistration ctr1 = ct.Register(() => { });
-            CancellationTokenRegistration ctr2 = ct.Register(() => { });
-            CancellationTokenRegistration ctr3 = ct.Register(() => { });
-            CancellationTokenRegistration ctr4 = ct.Register(() => { });
+            CancellationTokenRegistration ctr1 = ct.Register(() => {
+            });
+            CancellationTokenRegistration ctr2 = ct.Register(() => {
+            });
+            CancellationTokenRegistration ctr3 = ct.Register(() => {
+            });
+            CancellationTokenRegistration ctr4 = ct.Register(() => {
+            });
 
             ct.Register(
                 () =>
@@ -1639,7 +1653,10 @@ namespace System.Threading.Tasks.Tests
             var cts = new CancellationTokenSource();
             Assert.NotEqual(default(CancellationToken), cts.Token);
 
-            using (var ctr = cts.Token.Register(() => { }))
+            using (
+                var ctr = cts.Token.Register(() => {
+                })
+            )
             {
                 Assert.Equal(cts.Token, ctr.Token);
             }
@@ -1650,7 +1667,8 @@ namespace System.Threading.Tasks.Tests
         {
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
-            CancellationTokenRegistration ctr = ct.Register(() => { });
+            CancellationTokenRegistration ctr = ct.Register(() => {
+            });
 
             cts.Dispose();
             Assert.Throws<ObjectDisposedException>(() => cts.Token);
@@ -1811,7 +1829,8 @@ namespace System.Threading.Tasks.Tests
                     {
                         while (Volatile.Read(ref run) && DateTime.UtcNow < end)
                         {
-                            reg = cts.Token.Register(() => { });
+                            reg = cts.Token.Register(() => {
+                            });
                             reg.Unregister();
                             reg = default;
                         }
@@ -1986,7 +2005,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(2)]
         public static void CancellationTokenRegistration_DisposeAsync_NopAfterDispose(int mode)
         {
-            var reg = new CancellationTokenSource().Token.Register(() => { });
+            var reg = new CancellationTokenSource().Token.Register(() => {
+            });
 
             switch (mode)
             {

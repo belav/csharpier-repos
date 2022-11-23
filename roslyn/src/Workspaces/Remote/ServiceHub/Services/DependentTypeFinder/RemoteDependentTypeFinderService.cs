@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteDependentTypeFinderService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         public ValueTask<ImmutableArray<SerializableSymbolAndProjectId>> FindTypesAsync(
             Checksum solutionChecksum,

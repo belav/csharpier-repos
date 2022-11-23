@@ -35,7 +35,9 @@ namespace Mono
             // MonoClass* interfaces [];
         }
 
-        internal struct MonoClass { }
+        internal struct MonoClass
+        {
+        }
 
         // class-internals.h MonoGenericParamInfo
         internal unsafe struct GenericParamInfo
@@ -81,7 +83,9 @@ namespace Mono
     // See mini-generic-sharing.c
     // We use these instead of the normal ValueTuple types to avoid linking in the
     // c# methods belonging to those types
-    internal struct ValueTuple { }
+    internal struct ValueTuple
+    {
+    }
 
     internal struct ValueTuple<T1>
     {
@@ -118,24 +122,42 @@ namespace Mono
         public T5 Item5;
     }
 
-    internal enum I8Enum : byte { }
+    internal enum I8Enum : byte
+    {
+    }
 
-    internal enum UI8Enum : sbyte { }
+    internal enum UI8Enum : sbyte
+    {
+    }
 
-    internal enum I16Enum : short { }
+    internal enum I16Enum : short
+    {
+    }
 
-    internal enum UI16Enum : ushort { }
+    internal enum UI16Enum : ushort
+    {
+    }
 
-    internal enum I32Enum : int { }
+    internal enum I32Enum : int
+    {
+    }
 
-    internal enum UI32Enum : uint { }
+    internal enum UI32Enum : uint
+    {
+    }
 
-    internal enum I64Enum : long { }
+    internal enum I64Enum : long
+    {
+    }
 
-    internal enum UI64Enum : ulong { }
+    internal enum UI64Enum : ulong
+    {
+    }
 
     internal sealed class NullByRefReturnException : Exception
     {
-        public NullByRefReturnException() { }
+        public NullByRefReturnException()
+        {
+        }
     }
 }

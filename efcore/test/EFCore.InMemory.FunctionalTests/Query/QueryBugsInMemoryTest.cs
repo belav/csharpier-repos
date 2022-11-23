@@ -16,7 +16,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Include_throw_when_empty_9849()
     {
-        using (CreateScratch<DatabaseContext>(_ => { }, "9849"))
+        using (
+            CreateScratch<DatabaseContext>(
+                _ =>
+                {
+                },
+                "9849"
+            )
+        )
         {
             using var context = new DatabaseContext();
             var results = context.VehicleInspections.Include(_ => _.Motors).ToList();
@@ -28,7 +35,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Include_throw_when_empty_9849_2()
     {
-        using (CreateScratch<DatabaseContext>(_ => { }, "9849"))
+        using (
+            CreateScratch<DatabaseContext>(
+                _ =>
+                {
+                },
+                "9849"
+            )
+        )
         {
             using var context = new DatabaseContext();
 #pragma warning disable IDE1006 // Naming Styles
@@ -42,7 +56,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Include_throw_when_empty_9849_3()
     {
-        using (CreateScratch<DatabaseContext>(_ => { }, "9849"))
+        using (
+            CreateScratch<DatabaseContext>(
+                _ =>
+                {
+                },
+                "9849"
+            )
+        )
         {
             using var context = new DatabaseContext();
 #pragma warning disable IDE1006 // Naming Styles
@@ -56,7 +77,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Include_throw_when_empty_9849_4()
     {
-        using (CreateScratch<DatabaseContext>(_ => { }, "9849"))
+        using (
+            CreateScratch<DatabaseContext>(
+                _ =>
+                {
+                },
+                "9849"
+            )
+        )
         {
             using var context = new DatabaseContext();
 #pragma warning disable IDE1006 // Naming Styles
@@ -70,7 +98,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Include_throw_when_empty_9849_5()
     {
-        using (CreateScratch<DatabaseContext>(_ => { }, "9849"))
+        using (
+            CreateScratch<DatabaseContext>(
+                _ =>
+                {
+                },
+                "9849"
+            )
+        )
         {
             using var context = new DatabaseContext();
             var results = (
@@ -87,7 +122,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Include_throw_when_empty_9849_6()
     {
-        using (CreateScratch<DatabaseContext>(_ => { }, "9849"))
+        using (
+            CreateScratch<DatabaseContext>(
+                _ =>
+                {
+                },
+                "9849"
+            )
+        )
         {
             using var context = new DatabaseContext();
 #pragma warning disable IDE1006 // Naming Styles
@@ -675,7 +717,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Entity_passed_to_DTO_constructor_works()
     {
-        using (CreateScratch<MyContext8282>(e => { }, "8282"))
+        using (
+            CreateScratch<MyContext8282>(
+                e =>
+                {
+                },
+                "8282"
+            )
+        )
         {
             using var context = new MyContext8282();
             var query = context.Entity.Select(e => new EntityDto8282(e)).ToList();
@@ -841,7 +890,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     [ConditionalFact]
     public virtual void Using_explicit_interface_implementation_as_navigation_works()
     {
-        using (CreateScratch<MyContext21768>(t => { }, "21768"))
+        using (
+            CreateScratch<MyContext21768>(
+                t =>
+                {
+                },
+                "21768"
+            )
+        )
         {
             using var context = new MyContext21768();
             Expression<Func<IBook21768, BookViewModel21768>> projection = b =>

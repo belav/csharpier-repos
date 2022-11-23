@@ -8,7 +8,9 @@ namespace System.Text
 {
     public partial class ASCIIEncoding : System.Text.Encoding
     {
-        public ASCIIEncoding() { }
+        public ASCIIEncoding()
+        {
+        }
 
         public override bool IsSingleByte
         {
@@ -137,11 +139,17 @@ namespace System.Text
     {
         public const int CharSize = 2;
 
-        public UnicodeEncoding() { }
+        public UnicodeEncoding()
+        {
+        }
 
-        public UnicodeEncoding(bool bigEndian, bool byteOrderMark) { }
+        public UnicodeEncoding(bool bigEndian, bool byteOrderMark)
+        {
+        }
 
-        public UnicodeEncoding(bool bigEndian, bool byteOrderMark, bool throwOnInvalidBytes) { }
+        public UnicodeEncoding(bool bigEndian, bool byteOrderMark, bool throwOnInvalidBytes)
+        {
+        }
 
         public override System.ReadOnlySpan<byte> Preamble
         {
@@ -265,11 +273,17 @@ namespace System.Text
 
     public sealed partial class UTF32Encoding : System.Text.Encoding
     {
-        public UTF32Encoding() { }
+        public UTF32Encoding()
+        {
+        }
 
-        public UTF32Encoding(bool bigEndian, bool byteOrderMark) { }
+        public UTF32Encoding(bool bigEndian, bool byteOrderMark)
+        {
+        }
 
-        public UTF32Encoding(bool bigEndian, bool byteOrderMark, bool throwOnInvalidCharacters) { }
+        public UTF32Encoding(bool bigEndian, bool byteOrderMark, bool throwOnInvalidCharacters)
+        {
+        }
 
         public override System.ReadOnlySpan<byte> Preamble
         {
@@ -398,14 +412,18 @@ namespace System.Text
             DiagnosticId = "SYSLIB0001",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public UTF7Encoding() { }
+        public UTF7Encoding()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.",
             DiagnosticId = "SYSLIB0001",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public UTF7Encoding(bool allowOptionals) { }
+        public UTF7Encoding(bool allowOptionals)
+        {
+        }
 
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
@@ -519,11 +537,17 @@ namespace System.Text
 
     public partial class UTF8Encoding : System.Text.Encoding
     {
-        public UTF8Encoding() { }
+        public UTF8Encoding()
+        {
+        }
 
-        public UTF8Encoding(bool encoderShouldEmitUTF8Identifier) { }
+        public UTF8Encoding(bool encoderShouldEmitUTF8Identifier)
+        {
+        }
 
-        public UTF8Encoding(bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes) { }
+        public UTF8Encoding(bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes)
+        {
+        }
 
         public override System.ReadOnlySpan<byte> Preamble
         {

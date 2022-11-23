@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     internal sealed partial class CSharpFormatter : Formatter
     {
         public CSharpFormatter()
-            : base(defaultFormat: "{{{0}}}", nullString: "null", thisString: "this") { }
+            : base(defaultFormat: "{{{0}}}", nullString: "null", thisString: "this")
+        {
+        }
 
         internal override bool IsValidIdentifier(string name)
         {

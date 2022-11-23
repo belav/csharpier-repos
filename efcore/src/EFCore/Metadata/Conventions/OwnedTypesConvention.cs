@@ -43,6 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
             IConventionContext<IConventionEntityType> context
-        ) { }
+        )
+        {
+        }
     }
 }

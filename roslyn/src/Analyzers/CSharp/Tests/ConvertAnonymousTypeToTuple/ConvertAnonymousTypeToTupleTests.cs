@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousTypeToT
     public partial class ConvertAnonymousTypeToTupleTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ConvertAnonymousTypeToTupleTests(ITestOutputHelper logger) : base(logger) { }
+        public ConvertAnonymousTypeToTupleTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

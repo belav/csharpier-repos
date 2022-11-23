@@ -6,12 +6,16 @@ using System;
 //Define some classes and method for use in our scenarios...
 class A<T>
 {
-    public virtual void GMeth<U>() { }
+    public virtual void GMeth<U>()
+    {
+    }
 }
 
 class B<T> : A<int>
 {
-    public override void GMeth<U>() { }
+    public override void GMeth<U>()
+    {
+    }
 }
 
 //Define our delegate types...

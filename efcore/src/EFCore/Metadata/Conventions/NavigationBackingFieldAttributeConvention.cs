@@ -21,7 +21,9 @@ public class NavigationBackingFieldAttributeConvention
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public NavigationBackingFieldAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    ) : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Called after a navigation property that has an attribute is added to an entity type.

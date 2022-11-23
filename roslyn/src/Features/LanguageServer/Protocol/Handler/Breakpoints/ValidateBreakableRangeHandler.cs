@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ValidateBreakableRangeHandler() { }
+        public ValidateBreakableRangeHandler()
+        {
+        }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;

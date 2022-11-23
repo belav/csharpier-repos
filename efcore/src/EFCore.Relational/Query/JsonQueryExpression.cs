@@ -41,7 +41,9 @@ public class JsonQueryExpression : Expression, IPrintableExpression
             type,
             collection,
             jsonColumn.IsNullable
-        ) { }
+        )
+    {
+    }
 
     private JsonQueryExpression(
         IEntityType entityType,

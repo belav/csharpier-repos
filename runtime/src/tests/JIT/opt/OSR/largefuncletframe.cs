@@ -134,12 +134,18 @@ public class LargeFuncletFrame
                         if (
                             (ulong_41 = 15 + 4) * s_ulong_22
                             <= (15 - 4 * (ulong_61 &= ulong_61) & s_ulong_22 % 15 - 4 + 11)
-                        ) { }
-                        else { }
+                        )
+                        {
+                        }
+                        else
+                        {
+                        }
 
                         throw new Exception();
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                     finally
                     {
                         s_s1_s1_d1_f2_24.s1_s1_d1_f1_4.uint_2 |= s_s1_s1_d1_f2_24

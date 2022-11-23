@@ -10,7 +10,9 @@ public class MaterializationInterceptionSqliteTest
         IClassFixture<MaterializationInterceptionSqliteTest.MaterializationInterceptionSqliteFixture>
 {
     public MaterializationInterceptionSqliteTest(MaterializationInterceptionSqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class MaterializationInterceptionSqliteFixture : SingletonInterceptorsFixtureBase
     {

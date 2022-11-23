@@ -29,7 +29,8 @@ public class DeadThreads
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void StartNoOpThread()
     {
-        var t = new Thread(() => { });
+        var t = new Thread(() => {
+        });
         t.IsBackground = true;
         t.Start();
     }

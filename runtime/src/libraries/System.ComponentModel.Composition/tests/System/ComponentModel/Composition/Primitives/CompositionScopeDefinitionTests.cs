@@ -11,7 +11,9 @@ namespace System.ComponentModel.Composition.Hosting
 {
     public class CompositionScopeDefinitionTests
     {
-        public interface IFooContract { }
+        public interface IFooContract
+        {
+        }
 
         [Export(typeof(IFooContract))]
         public class FooImpl : IFooContract
@@ -21,15 +23,21 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [Export(typeof(IFooContract))]
-        public class FooImpl2 : IFooContract { }
+        public class FooImpl2 : IFooContract
+        {
+        }
 
         [Export(typeof(IFooContract))]
-        public class FooImpl3 : IFooContract { }
+        public class FooImpl3 : IFooContract
+        {
+        }
 
         [Export("One", typeof(IFooContract))]
         [Export("Two", typeof(IFooContract))]
         [Export("Three", typeof(IFooContract))]
-        public class FooImpl4 : IFooContract { }
+        public class FooImpl4 : IFooContract
+        {
+        }
 
         public class TestCatalog : ComposablePartCatalog, INotifyComposablePartCatalogChanged
         {

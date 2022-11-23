@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class TypeGenerator : ITypeGenerator
     {
-        public TypeGenerator() { }
+        public TypeGenerator()
+        {
+        }
 
         public ITypeSymbol CreateArrayTypeSymbol(ITypeSymbol elementType, int rank) =>
             CodeGenerationSymbolFactory.CreateArrayTypeSymbol(elementType, rank);

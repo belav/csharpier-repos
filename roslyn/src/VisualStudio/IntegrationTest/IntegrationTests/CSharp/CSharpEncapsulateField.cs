@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpEncapsulateField : AbstractEditorTest
     {
         public CSharpEncapsulateField(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpEncapsulateField)) { }
+            : base(instanceFactory, nameof(CSharpEncapsulateField))
+        {
+        }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

@@ -32,7 +32,9 @@ namespace System.Xml.Serialization
         private readonly XmlMappingAccess _access;
 
         internal XmlMapping(TypeScope? scope, ElementAccessor accessor)
-            : this(scope, accessor, XmlMappingAccess.Read | XmlMappingAccess.Write) { }
+            : this(scope, accessor, XmlMappingAccess.Read | XmlMappingAccess.Write)
+        {
+        }
 
         internal XmlMapping(TypeScope? scope, ElementAccessor accessor, XmlMappingAccess access)
         {

@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return typeParameters.SelectAsArray(_ => s_instance);
         }
 
-        private PlaceholderTypeArgumentSymbol() { }
+        private PlaceholderTypeArgumentSymbol()
+        {
+        }
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
         {

@@ -89,6 +89,8 @@ namespace System.Web.Http.Filters
             Assert.True(result.Status == TaskStatus.RanToCompletion);
         }
 
-        public sealed class TestableExceptionFilter : ExceptionFilterAttribute { }
+        public sealed class TestableExceptionFilter : ExceptionFilterAttribute
+        {
+        }
     }
 }

@@ -58,7 +58,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
         [DebuggerDisplay("Disposed = true")]
         private sealed class NopDisposable : IDisposable
         {
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
 
         /// <summary>An IDisposable that will run a delegate when disposed.</summary>

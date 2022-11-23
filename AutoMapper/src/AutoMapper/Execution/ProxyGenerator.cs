@@ -244,7 +244,9 @@ public static class ProxyGenerator
 
 public abstract class ProxyBase
 {
-    public ProxyBase() { }
+    public ProxyBase()
+    {
+    }
 
     protected void NotifyPropertyChanged(PropertyChangedEventHandler handler, string method) =>
         handler?.Invoke(this, new PropertyChangedEventArgs(method));
@@ -271,5 +273,7 @@ public readonly record struct TypeDescription(Type Type, PropertyDescription[] A
 public readonly record struct PropertyDescription(string Name, Type Type, bool CanWrite = true)
 {
     public PropertyDescription(PropertyInfo property)
-        : this(property.Name, property.PropertyType, property.CanWrite) { }
+        : this(property.Name, property.PropertyType, property.CanWrite)
+    {
+    }
 }

@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     {
         internal static readonly NativeViewExpansion Instance = new NativeViewExpansion();
 
-        private NativeViewExpansion() { }
+        private NativeViewExpansion()
+        {
+        }
 
         internal override void GetRows(
             ResultProvider resultProvider,

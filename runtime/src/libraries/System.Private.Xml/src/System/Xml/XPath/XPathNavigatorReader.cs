@@ -1100,7 +1100,9 @@ namespace System.Xml.XPath
             XPathNavigator navToRead,
             IXmlLineInfo xli,
             IXmlSchemaInfo? xsi
-        ) : base(navToRead, xli, xsi) { }
+        ) : base(navToRead, xli, xsi)
+        {
+        }
 
         //-----------------------------------------------
         // IXmlLineInfo
@@ -1130,7 +1132,9 @@ namespace System.Xml.XPath
             XPathNavigator navToRead,
             IXmlLineInfo xli,
             IXmlSchemaInfo xsi
-        ) : base(navToRead, xli, xsi) { }
+        ) : base(navToRead, xli, xsi)
+        {
+        }
 
         //-----------------------------------------------
         // IXmlSchemaInfo
@@ -1223,7 +1227,9 @@ namespace System.Xml.XPath
     {
         private static volatile XmlEmptyNavigator? s_singleton;
 
-        private XmlEmptyNavigator() { }
+        private XmlEmptyNavigator()
+        {
+        }
 
         public static XmlEmptyNavigator Singleton =>
             XmlEmptyNavigator.s_singleton ??= new XmlEmptyNavigator();

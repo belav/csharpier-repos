@@ -27,7 +27,9 @@ public class DbFunctionAttribute : Attribute
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbFunctionAttribute" /> class.
     /// </summary>
-    public DbFunctionAttribute() { }
+    public DbFunctionAttribute()
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbFunctionAttribute" /> class.

@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class TrustRelationshipInformationCollection : ReadOnlyCollectionBase
     {
-        internal TrustRelationshipInformationCollection() { }
+        internal TrustRelationshipInformationCollection()
+        {
+        }
 
         internal TrustRelationshipInformationCollection(
             DirectoryContext context,

@@ -115,7 +115,9 @@ public class When_mappping_null_with_AllowNull_and_inheritance : AutoMapperSpecB
         public int[] Collection { get; set; }
     }
 
-    class SourceDerived : Source { }
+    class SourceDerived : Source
+    {
+    }
 
     public class InnerSource
     {
@@ -128,7 +130,9 @@ public class When_mappping_null_with_AllowNull_and_inheritance : AutoMapperSpecB
         public int[] Collection { get; set; }
     }
 
-    class DestinationDerived : Destination { }
+    class DestinationDerived : Destination
+    {
+    }
 
     public class InnerDestination
     {
@@ -162,7 +166,9 @@ public class When_mappping_null_with_DoNotAllowNull_and_inheritance : AutoMapper
         public int[] Collection { get; set; }
     }
 
-    class SourceDerived : Source { }
+    class SourceDerived : Source
+    {
+    }
 
     public class InnerSource
     {
@@ -175,7 +181,9 @@ public class When_mappping_null_with_DoNotAllowNull_and_inheritance : AutoMapper
         public int[] Collection { get; set; }
     }
 
-    class DestinationDerived : Destination { }
+    class DestinationDerived : Destination
+    {
+    }
 
     public class InnerDestination
     {
@@ -205,13 +213,23 @@ public class When_mappping_null_with_DoNotAllowNull_and_inheritance : AutoMapper
 
 public class When_mappping_null_collection_with_AllowNullCollections_false : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     [Fact]
     public void Should_map_to_non_null()
     {
         Mapper.Map<int[]>(null).ShouldNotBeNull();
-        Mapper.Map<int[]>(null, _ => { }).ShouldNotBeNull();
+        Mapper
+            .Map<int[]>(
+                null,
+                _ =>
+                {
+                }
+            )
+            .ShouldNotBeNull();
     }
 }
 
@@ -224,7 +242,14 @@ public class When_mappping_null_collection_with_AllowNullCollections_true : Auto
     public void Should_map_to_null()
     {
         Mapper.Map<int[]>(null).ShouldBeNull();
-        Mapper.Map<int[]>(null, _ => { }).ShouldBeNull();
+        Mapper
+            .Map<int[]>(
+                null,
+                _ =>
+                {
+                }
+            )
+            .ShouldBeNull();
     }
 }
 
@@ -1188,9 +1213,13 @@ public class When_overriding_collection_null_behavior_in_profile : AutoMapperSpe
 
 public class When_mapping_a_null_model : AutoMapperSpecBase
 {
-    public class ModelDto { }
+    public class ModelDto
+    {
+    }
 
-    public class ModelObject { }
+    public class ModelObject
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

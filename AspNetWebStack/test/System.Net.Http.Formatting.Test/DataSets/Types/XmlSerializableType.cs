@@ -15,7 +15,9 @@ namespace System.Net.Http.Formatting.DataSets.Types
         private int id;
         private string name;
 
-        public XmlSerializableType() { }
+        public XmlSerializableType()
+        {
+        }
 
         public XmlSerializableType(int id, string name)
         {

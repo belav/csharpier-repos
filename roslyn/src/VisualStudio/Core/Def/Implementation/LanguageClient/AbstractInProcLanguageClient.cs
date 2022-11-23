@@ -72,8 +72,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         /// </summary>
         public event AsyncEventHandler<EventArgs>? StopAsync
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public AbstractInProcLanguageClient(

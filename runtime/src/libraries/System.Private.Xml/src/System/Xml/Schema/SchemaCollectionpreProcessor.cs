@@ -62,7 +62,9 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             SchemaNames? schemaNames,
             ValidationEventHandler? eventHandler
-        ) : base(nameTable, schemaNames, eventHandler) { }
+        ) : base(nameTable, schemaNames, eventHandler)
+        {
+        }
 
         public bool Execute(
             XmlSchema schema,

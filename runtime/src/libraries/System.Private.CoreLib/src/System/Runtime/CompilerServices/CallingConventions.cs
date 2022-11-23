@@ -5,17 +5,23 @@ namespace System.Runtime.CompilerServices
 {
     public class CallConvCdecl
     {
-        public CallConvCdecl() { }
+        public CallConvCdecl()
+        {
+        }
     }
 
     public class CallConvFastcall
     {
-        public CallConvFastcall() { }
+        public CallConvFastcall()
+        {
+        }
     }
 
     public class CallConvStdcall
     {
-        public CallConvStdcall() { }
+        public CallConvStdcall()
+        {
+        }
     }
 
     /// <summary>
@@ -30,12 +36,16 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Initializes a new instance of the <see cref="CallConvSuppressGCTransition" /> class.
         /// </summary>
-        public CallConvSuppressGCTransition() { }
+        public CallConvSuppressGCTransition()
+        {
+        }
     }
 
     public class CallConvThiscall
     {
-        public CallConvThiscall() { }
+        public CallConvThiscall()
+        {
+        }
     }
 
     /// <summary>
@@ -46,6 +56,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Initializes a new instance of the <see cref="CallConvMemberFunction" /> class.
         /// </summary>
-        public CallConvMemberFunction() { }
+        public CallConvMemberFunction()
+        {
+        }
     }
 }

@@ -494,7 +494,9 @@ namespace System.Globalization
             return year;
         }
 
-        public ChineseLunisolarCalendar() { }
+        public ChineseLunisolarCalendar()
+        {
+        }
 
         public override int GetEra(DateTime time)
         {

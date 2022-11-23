@@ -48,7 +48,9 @@ namespace System.Runtime.InteropServices.Tests
 
         private class NonRuntimeModule : Module
         {
-            public NonRuntimeModule() { }
+            public NonRuntimeModule()
+            {
+            }
         }
     }
 }

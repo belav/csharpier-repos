@@ -63,7 +63,9 @@ namespace System.Web.Razor.Parser
             TSymbolType
         > Language { get; }
 
-        protected virtual void HandleEmbeddedTransition() { }
+        protected virtual void HandleEmbeddedTransition()
+        {
+        }
 
         protected virtual bool IsAtEmbeddedTransition(
             bool allowTemplatesAndComments,

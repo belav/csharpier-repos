@@ -817,10 +817,14 @@ namespace System.Net.Http.Formatting
 
         public class TestJsonMediaTypeFormatter : JsonMediaTypeFormatter
         {
-            public TestJsonMediaTypeFormatter() { }
+            public TestJsonMediaTypeFormatter()
+            {
+            }
 
             public TestJsonMediaTypeFormatter(TestJsonMediaTypeFormatter formatter)
-                : base(formatter) { }
+                : base(formatter)
+            {
+            }
 
             public bool ThrowAnExceptionOnCreate { get; set; }
             public bool ReturnNullOnCreate { get; set; }

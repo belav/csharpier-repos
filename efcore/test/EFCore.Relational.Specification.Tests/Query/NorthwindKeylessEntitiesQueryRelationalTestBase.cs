@@ -9,7 +9,9 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
     : NorthwindKeylessEntitiesQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindKeylessEntitiesQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindKeylessEntitiesQueryRelationalTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     protected virtual bool CanExecuteQueryString => false;
 

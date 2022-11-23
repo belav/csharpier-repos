@@ -17,14 +17,18 @@ public class ReadonlyCollectionPropertiesOverride : AutoMapperSpecBase
         public ICollection<string> CodeList { get; } = new List<string>();
     }
 
-    public class Source : SourceBase { }
+    public class Source : SourceBase
+    {
+    }
 
     public class DestinationBase
     {
         public ICollection<string> CodeList { get; set; } = new HashSet<string>();
     }
 
-    public class Destination : DestinationBase { }
+    public class Destination : DestinationBase
+    {
+    }
 
     [Fact]
     public void ShouldMapOk() =>
@@ -60,7 +64,9 @@ public class ReadonlyCollectionProperties : AutoMapperSpecBase
         public ICollection<string> CodeList { get; } = new List<string>();
     }
 
-    public class DomainModel : DomainModelBase { }
+    public class DomainModel : DomainModelBase
+    {
+    }
 
     public class ModelBase
     {
@@ -68,7 +74,9 @@ public class ReadonlyCollectionProperties : AutoMapperSpecBase
         public ICollection<string> CodeList { get; } = new List<string>();
     }
 
-    public class Model : ModelBase { }
+    public class Model : ModelBase
+    {
+    }
 
     public class KeyValueModel
     {

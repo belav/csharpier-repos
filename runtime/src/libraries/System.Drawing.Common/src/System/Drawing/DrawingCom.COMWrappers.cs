@@ -35,7 +35,9 @@ namespace System.Drawing
 
         internal static DrawingCom Instance { get; } = new DrawingCom();
 
-        private DrawingCom() { }
+        private DrawingCom()
+        {
+        }
 
         private static ComInterfaceEntry* InitializeComInterfaceEntry()
         {

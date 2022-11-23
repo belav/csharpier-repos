@@ -393,12 +393,16 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// No-op.
         /// </summary>
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
         /// <summary>
         /// No-op.
         /// </summary>
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         /// <summary>
         /// Should never be called.

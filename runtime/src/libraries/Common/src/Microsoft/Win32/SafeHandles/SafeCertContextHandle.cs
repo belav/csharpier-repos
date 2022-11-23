@@ -16,7 +16,9 @@ namespace Microsoft.Win32.SafeHandles
     {
         private SafeCertContextHandle? _parent;
 
-        public SafeCertContextHandle() { }
+        public SafeCertContextHandle()
+        {
+        }
 
         public SafeCertContextHandle(SafeCertContextHandle parent)
         {

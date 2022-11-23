@@ -1056,9 +1056,13 @@ namespace System.Globalization
         }
 
         // A dummy struct that is used for 'ToUpper' in generic parameters
-        private readonly struct ToUpperConversion { }
+        private readonly struct ToUpperConversion
+        {
+        }
 
         // A dummy struct that is used for 'ToLower' in generic parameters
-        private readonly struct ToLowerConversion { }
+        private readonly struct ToLowerConversion
+        {
+        }
     }
 }

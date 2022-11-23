@@ -9,7 +9,9 @@ namespace System.ComponentModel.DataAnnotations
     public partial class AssociatedMetadataTypeTypeDescriptionProvider
         : System.ComponentModel.TypeDescriptionProvider
     {
-        public AssociatedMetadataTypeTypeDescriptionProvider(System.Type type) { }
+        public AssociatedMetadataTypeTypeDescriptionProvider(System.Type type)
+        {
+        }
 
         public AssociatedMetadataTypeTypeDescriptionProvider(
             System.Type type,
@@ -17,7 +19,9 @@ namespace System.ComponentModel.DataAnnotations
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type associatedMetadataType
-        ) { }
+        )
+        {
+        }
 
         public override System.ComponentModel.ICustomTypeDescriptor GetTypeDescriptor(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -39,12 +43,16 @@ namespace System.ComponentModel.DataAnnotations
     [System.ObsoleteAttribute("AssociationAttribute has been deprecated and is not supported.")]
     public sealed partial class AssociationAttribute : System.Attribute
     {
-        public AssociationAttribute(string name, string thisKey, string otherKey) { }
+        public AssociationAttribute(string name, string thisKey, string otherKey)
+        {
+        }
 
         public bool IsForeignKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
@@ -75,7 +83,9 @@ namespace System.ComponentModel.DataAnnotations
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved."
         )]
-        public CompareAttribute(string otherProperty) { }
+        public CompareAttribute(string otherProperty)
+        {
+        }
 
         public string OtherProperty
         {
@@ -111,7 +121,9 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed partial class ConcurrencyCheckAttribute : System.Attribute
     {
-        public ConcurrencyCheckAttribute() { }
+        public ConcurrencyCheckAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -124,7 +136,8 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public CreditCardAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType))
-        { }
+        {
+        }
 
         public override bool IsValid(object? value)
         {
@@ -149,7 +162,9 @@ namespace System.ComponentModel.DataAnnotations
             )]
                 System.Type validatorType,
             string method
-        ) { }
+        )
+        {
+        }
 
         public string Method
         {
@@ -209,9 +224,13 @@ namespace System.ComponentModel.DataAnnotations
     public partial class DataTypeAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
-        public DataTypeAttribute(System.ComponentModel.DataAnnotations.DataType dataType) { }
+        public DataTypeAttribute(System.ComponentModel.DataAnnotations.DataType dataType)
+        {
+        }
 
-        public DataTypeAttribute(string customDataType) { }
+        public DataTypeAttribute(string customDataType)
+        {
+        }
 
         public string? CustomDataType
         {
@@ -224,7 +243,9 @@ namespace System.ComponentModel.DataAnnotations
         public System.ComponentModel.DataAnnotations.DisplayFormatAttribute? DisplayFormat
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
 
         public virtual string GetDataTypeName()
@@ -248,42 +269,58 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed partial class DisplayAttribute : System.Attribute
     {
-        public DisplayAttribute() { }
+        public DisplayAttribute()
+        {
+        }
 
         public bool AutoGenerateField
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool AutoGenerateFilter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Description
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? GroupName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Order
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Prompt
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -292,12 +329,16 @@ namespace System.ComponentModel.DataAnnotations
         public System.Type? ResourceType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? ShortName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool? GetAutoGenerateField()
@@ -348,12 +389,17 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public partial class DisplayColumnAttribute : System.Attribute
     {
-        public DisplayColumnAttribute(string displayColumn) { }
+        public DisplayColumnAttribute(string displayColumn)
+        {
+        }
 
-        public DisplayColumnAttribute(string displayColumn, string? sortColumn) { }
+        public DisplayColumnAttribute(string displayColumn, string? sortColumn)
+        {
+        }
 
         public DisplayColumnAttribute(string displayColumn, string? sortColumn, bool sortDescending)
-        { }
+        {
+        }
 
         public string DisplayColumn
         {
@@ -375,32 +421,44 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public partial class DisplayFormatAttribute : System.Attribute
     {
-        public DisplayFormatAttribute() { }
+        public DisplayFormatAttribute()
+        {
+        }
 
         public bool ApplyFormatInEditMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ConvertEmptyStringToNull
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? DataFormatString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool HtmlEncode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? NullDisplayText
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -409,7 +467,9 @@ namespace System.ComponentModel.DataAnnotations
         public System.Type? NullDisplayTextResourceType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public string? GetNullDisplayText()
@@ -425,7 +485,9 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed partial class EditableAttribute : System.Attribute
     {
-        public EditableAttribute(bool allowEdit) { }
+        public EditableAttribute(bool allowEdit)
+        {
+        }
 
         public bool AllowEdit
         {
@@ -434,7 +496,9 @@ namespace System.ComponentModel.DataAnnotations
         public bool AllowInitialValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -448,7 +512,9 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public EmailAddressAttribute()
-            : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+            : base(default(System.ComponentModel.DataAnnotations.DataType))
+        {
+        }
 
         public override bool IsValid(object? value)
         {
@@ -467,7 +533,9 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public EnumDataTypeAttribute(System.Type enumType)
-            : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+            : base(default(System.ComponentModel.DataAnnotations.DataType))
+        {
+        }
 
         public System.Type EnumType
         {
@@ -490,12 +558,16 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public FileExtensionsAttribute()
-            : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+            : base(default(System.ComponentModel.DataAnnotations.DataType))
+        {
+        }
 
         public string Extensions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override string FormatErrorMessage(string name)
@@ -516,15 +588,21 @@ namespace System.ComponentModel.DataAnnotations
     [System.ObsoleteAttribute("FilterUIHintAttribute has been deprecated and is not supported.")]
     public sealed partial class FilterUIHintAttribute : System.Attribute
     {
-        public FilterUIHintAttribute(string filterUIHint) { }
+        public FilterUIHintAttribute(string filterUIHint)
+        {
+        }
 
-        public FilterUIHintAttribute(string filterUIHint, string? presentationLayer) { }
+        public FilterUIHintAttribute(string filterUIHint, string? presentationLayer)
+        {
+        }
 
         public FilterUIHintAttribute(
             string filterUIHint,
             string? presentationLayer,
             params object?[] controlParameters
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IDictionary<string, object?> ControlParameters
         {
@@ -566,7 +644,9 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed partial class KeyAttribute : System.Attribute
     {
-        public KeyAttribute() { }
+        public KeyAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -581,12 +661,16 @@ namespace System.ComponentModel.DataAnnotations
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved."
         )]
-        public MaxLengthAttribute() { }
+        public MaxLengthAttribute()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved."
         )]
-        public MaxLengthAttribute(int length) { }
+        public MaxLengthAttribute(int length)
+        {
+        }
 
         public int Length
         {
@@ -612,7 +696,9 @@ namespace System.ComponentModel.DataAnnotations
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type metadataClassType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -635,7 +721,9 @@ namespace System.ComponentModel.DataAnnotations
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved."
         )]
-        public MinLengthAttribute(int length) { }
+        public MinLengthAttribute(int length)
+        {
+        }
 
         public int Length
         {
@@ -662,7 +750,9 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class PhoneAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
-        public PhoneAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+        public PhoneAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType))
+        {
+        }
 
         public override bool IsValid(object? value)
         {
@@ -678,9 +768,13 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public partial class RangeAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
-        public RangeAttribute(double minimum, double maximum) { }
+        public RangeAttribute(double minimum, double maximum)
+        {
+        }
 
-        public RangeAttribute(int minimum, int maximum) { }
+        public RangeAttribute(int minimum, int maximum)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All."
@@ -692,12 +786,16 @@ namespace System.ComponentModel.DataAnnotations
                 System.Type type,
             string minimum,
             string maximum
-        ) { }
+        )
+        {
+        }
 
         public bool ConvertValueInInvariantCulture
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object Maximum
         {
@@ -718,7 +816,9 @@ namespace System.ComponentModel.DataAnnotations
         public bool ParseLimitsInInvariantCulture
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override string FormatErrorMessage(string name)
@@ -743,12 +843,16 @@ namespace System.ComponentModel.DataAnnotations
     {
         public RegularExpressionAttribute(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("Regex")] string pattern
-        ) { }
+        )
+        {
+        }
 
         public int MatchTimeoutInMilliseconds
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan MatchTimeout
         {
@@ -779,12 +883,16 @@ namespace System.ComponentModel.DataAnnotations
     public partial class RequiredAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
-        public RequiredAttribute() { }
+        public RequiredAttribute()
+        {
+        }
 
         public bool AllowEmptyStrings
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool IsValid(object? value)
@@ -799,7 +907,9 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public partial class ScaffoldColumnAttribute : System.Attribute
     {
-        public ScaffoldColumnAttribute(bool scaffold) { }
+        public ScaffoldColumnAttribute(bool scaffold)
+        {
+        }
 
         public bool Scaffold
         {
@@ -816,7 +926,9 @@ namespace System.ComponentModel.DataAnnotations
     public partial class StringLengthAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
-        public StringLengthAttribute(int maximumLength) { }
+        public StringLengthAttribute(int maximumLength)
+        {
+        }
 
         public int MaximumLength
         {
@@ -825,7 +937,9 @@ namespace System.ComponentModel.DataAnnotations
         public int MinimumLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override string FormatErrorMessage(string name)
@@ -846,7 +960,9 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed partial class TimestampAttribute : System.Attribute
     {
-        public TimestampAttribute() { }
+        public TimestampAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -855,15 +971,21 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public partial class UIHintAttribute : System.Attribute
     {
-        public UIHintAttribute(string uiHint) { }
+        public UIHintAttribute(string uiHint)
+        {
+        }
 
-        public UIHintAttribute(string uiHint, string? presentationLayer) { }
+        public UIHintAttribute(string uiHint, string? presentationLayer)
+        {
+        }
 
         public UIHintAttribute(
             string uiHint,
             string? presentationLayer,
             params object?[]? controlParameters
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IDictionary<string, object?> ControlParameters
         {
@@ -900,7 +1022,9 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class UrlAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
-        public UrlAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+        public UrlAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType))
+        {
+        }
 
         public override bool IsValid(object? value)
         {
@@ -910,21 +1034,31 @@ namespace System.ComponentModel.DataAnnotations
 
     public abstract partial class ValidationAttribute : System.Attribute
     {
-        protected ValidationAttribute() { }
+        protected ValidationAttribute()
+        {
+        }
 
-        protected ValidationAttribute(System.Func<string> errorMessageAccessor) { }
+        protected ValidationAttribute(System.Func<string> errorMessageAccessor)
+        {
+        }
 
-        protected ValidationAttribute(string errorMessage) { }
+        protected ValidationAttribute(string errorMessage)
+        {
+        }
 
         public string? ErrorMessage
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? ErrorMessageResourceName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -934,7 +1068,9 @@ namespace System.ComponentModel.DataAnnotations
         public System.Type? ErrorMessageResourceType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected string ErrorMessageString
         {
@@ -974,9 +1110,13 @@ namespace System.ComponentModel.DataAnnotations
         public void Validate(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
-        ) { }
+        )
+        {
+        }
 
-        public void Validate(object? value, string name) { }
+        public void Validate(object? value, string name)
+        {
+        }
     }
 
     public sealed partial class ValidationContext : System.IServiceProvider
@@ -984,7 +1124,9 @@ namespace System.ComponentModel.DataAnnotations
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
         )]
-        public ValidationContext(object instance) { }
+        public ValidationContext(object instance)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
@@ -992,7 +1134,9 @@ namespace System.ComponentModel.DataAnnotations
         public ValidationContext(
             object instance,
             System.Collections.Generic.IDictionary<object, object?>? items
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
@@ -1001,12 +1145,16 @@ namespace System.ComponentModel.DataAnnotations
             object instance,
             System.IServiceProvider? serviceProvider,
             System.Collections.Generic.IDictionary<object, object?>? items
-        ) { }
+        )
+        {
+        }
 
         public string DisplayName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IDictionary<object, object?> Items
         {
@@ -1015,7 +1163,9 @@ namespace System.ComponentModel.DataAnnotations
         public string? MemberName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object ObjectInstance
         {
@@ -1031,33 +1181,47 @@ namespace System.ComponentModel.DataAnnotations
             throw null;
         }
 
-        public void InitializeServiceProvider(System.Func<System.Type, object?> serviceProvider) { }
+        public void InitializeServiceProvider(System.Func<System.Type, object?> serviceProvider)
+        {
+        }
     }
 
     public partial class ValidationException : System.Exception
     {
-        public ValidationException() { }
+        public ValidationException()
+        {
+        }
 
         public ValidationException(
             System.ComponentModel.DataAnnotations.ValidationResult validationResult,
             System.ComponentModel.DataAnnotations.ValidationAttribute? validatingAttribute,
             object? value
-        ) { }
+        )
+        {
+        }
 
         protected ValidationException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public ValidationException(string? message) { }
+        public ValidationException(string? message)
+        {
+        }
 
         public ValidationException(
             string? errorMessage,
             System.ComponentModel.DataAnnotations.ValidationAttribute? validatingAttribute,
             object? value
-        ) { }
+        )
+        {
+        }
 
-        public ValidationException(string? message, System.Exception? innerException) { }
+        public ValidationException(string? message, System.Exception? innerException)
+        {
+        }
 
         public System.ComponentModel.DataAnnotations.ValidationAttribute? ValidationAttribute
         {
@@ -1079,19 +1243,27 @@ namespace System.ComponentModel.DataAnnotations
 
         protected ValidationResult(
             System.ComponentModel.DataAnnotations.ValidationResult validationResult
-        ) { }
+        )
+        {
+        }
 
-        public ValidationResult(string? errorMessage) { }
+        public ValidationResult(string? errorMessage)
+        {
+        }
 
         public ValidationResult(
             string? errorMessage,
             System.Collections.Generic.IEnumerable<string>? memberNames
-        ) { }
+        )
+        {
+        }
 
         public string? ErrorMessage
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IEnumerable<string> MemberNames
         {
@@ -1159,7 +1331,9 @@ namespace System.ComponentModel.DataAnnotations
         public static void ValidateObject(
             object instance,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
@@ -1168,7 +1342,9 @@ namespace System.ComponentModel.DataAnnotations
             object instance,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
             bool validateAllProperties
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of validationContext.ObjectType cannot be statically discovered."
@@ -1176,13 +1352,17 @@ namespace System.ComponentModel.DataAnnotations
         public static void ValidateProperty(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
-        ) { }
+        )
+        {
+        }
 
         public static void ValidateValue(
             object value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
             System.Collections.Generic.IEnumerable<System.ComponentModel.DataAnnotations.ValidationAttribute> validationAttributes
-        ) { }
+        )
+        {
+        }
     }
 }
 
@@ -1194,9 +1374,13 @@ namespace System.ComponentModel.DataAnnotations.Schema
     )]
     public partial class ColumnAttribute : System.Attribute
     {
-        public ColumnAttribute() { }
+        public ColumnAttribute()
+        {
+        }
 
-        public ColumnAttribute(string name) { }
+        public ColumnAttribute(string name)
+        {
+        }
 
         public string? Name
         {
@@ -1205,21 +1389,27 @@ namespace System.ComponentModel.DataAnnotations.Schema
         public int Order
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public string? TypeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
     public partial class ComplexTypeAttribute : System.Attribute
     {
-        public ComplexTypeAttribute() { }
+        public ComplexTypeAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -1230,7 +1420,9 @@ namespace System.ComponentModel.DataAnnotations.Schema
     {
         public DatabaseGeneratedAttribute(
             System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption databaseGeneratedOption
-        ) { }
+        )
+        {
+        }
 
         public System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption DatabaseGeneratedOption
         {
@@ -1251,7 +1443,9 @@ namespace System.ComponentModel.DataAnnotations.Schema
     )]
     public partial class ForeignKeyAttribute : System.Attribute
     {
-        public ForeignKeyAttribute(string name) { }
+        public ForeignKeyAttribute(string name)
+        {
+        }
 
         public string Name
         {
@@ -1265,7 +1459,9 @@ namespace System.ComponentModel.DataAnnotations.Schema
     )]
     public partial class InversePropertyAttribute : System.Attribute
     {
-        public InversePropertyAttribute(string property) { }
+        public InversePropertyAttribute(string property)
+        {
+        }
 
         public string Property
         {
@@ -1281,13 +1477,17 @@ namespace System.ComponentModel.DataAnnotations.Schema
     )]
     public partial class NotMappedAttribute : System.Attribute
     {
-        public NotMappedAttribute() { }
+        public NotMappedAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
     public partial class TableAttribute : System.Attribute
     {
-        public TableAttribute(string name) { }
+        public TableAttribute(string name)
+        {
+        }
 
         public string Name
         {
@@ -1298,7 +1498,9 @@ namespace System.ComponentModel.DataAnnotations.Schema
         public string? Schema
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

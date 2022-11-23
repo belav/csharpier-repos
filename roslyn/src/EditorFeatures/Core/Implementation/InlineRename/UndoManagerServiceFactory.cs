@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             public InlineRenameUndoManager(InlineRenameService inlineRenameService)
-                : base(inlineRenameService) { }
+                : base(inlineRenameService)
+            {
+            }
 
             public void CreateStartRenameUndoTransaction(
                 Workspace workspace,

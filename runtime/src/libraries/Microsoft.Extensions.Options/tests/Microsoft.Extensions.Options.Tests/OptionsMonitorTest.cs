@@ -373,7 +373,13 @@ namespace Microsoft.Extensions.Options.Tests
                 using (var sp = services.BuildServiceProvider())
                 {
                     var monitor = sp.GetRequiredService<IOptionsMonitor<FakeOptions>>();
-                    using (monitor.OnChange(o => { })) { }
+                    using (
+                        monitor.OnChange(o =>
+                        {
+                        })
+                    )
+                    {
+                    }
                 }
             }
 

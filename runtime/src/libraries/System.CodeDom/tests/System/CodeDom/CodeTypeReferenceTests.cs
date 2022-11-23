@@ -441,8 +441,12 @@ namespace System.CodeDom.Tests
             }
         }
 
-        public class NestedClass { }
+        public class NestedClass
+        {
+        }
     }
 }
 
-public class ClassWithoutNamespace { }
+public class ClassWithoutNamespace
+{
+}

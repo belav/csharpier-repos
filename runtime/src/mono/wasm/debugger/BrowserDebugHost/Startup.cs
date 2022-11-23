@@ -286,6 +286,8 @@ namespace Microsoft.WebAssembly.Diagnostics
     internal sealed class HostConnectionException : Exception
     {
         public HostConnectionException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
     }
 }

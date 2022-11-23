@@ -8,11 +8,15 @@ namespace Microsoft.CSharp
 {
     public partial class CSharpCodeProvider : System.CodeDom.Compiler.CodeDomProvider
     {
-        public CSharpCodeProvider() { }
+        public CSharpCodeProvider()
+        {
+        }
 
         public CSharpCodeProvider(
             System.Collections.Generic.IDictionary<string, string> providerOptions
-        ) { }
+        )
+        {
+        }
 
         public override string FileExtension
         {
@@ -39,7 +43,9 @@ namespace Microsoft.CSharp
             System.CodeDom.CodeTypeMember member,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public override System.ComponentModel.TypeConverter GetConverter(System.Type type)
         {
@@ -52,11 +58,15 @@ namespace Microsoft.VisualBasic
 {
     public partial class VBCodeProvider : System.CodeDom.Compiler.CodeDomProvider
     {
-        public VBCodeProvider() { }
+        public VBCodeProvider()
+        {
+        }
 
         public VBCodeProvider(
             System.Collections.Generic.IDictionary<string, string> providerOptions
-        ) { }
+        )
+        {
+        }
 
         public override string FileExtension
         {
@@ -87,7 +97,9 @@ namespace Microsoft.VisualBasic
             System.CodeDom.CodeTypeMember member,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public override System.ComponentModel.TypeConverter GetConverter(System.Type type)
         {
@@ -100,56 +112,83 @@ namespace System.CodeDom
 {
     public partial class CodeArgumentReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeArgumentReferenceExpression() { }
+        public CodeArgumentReferenceExpression()
+        {
+        }
 
-        public CodeArgumentReferenceExpression(string parameterName) { }
+        public CodeArgumentReferenceExpression(string parameterName)
+        {
+        }
 
         public string ParameterName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeArrayCreateExpression : System.CodeDom.CodeExpression
     {
-        public CodeArrayCreateExpression() { }
+        public CodeArrayCreateExpression()
+        {
+        }
 
         public CodeArrayCreateExpression(
             System.CodeDom.CodeTypeReference createType,
             System.CodeDom.CodeExpression size
-        ) { }
+        )
+        {
+        }
 
         public CodeArrayCreateExpression(
             System.CodeDom.CodeTypeReference createType,
             params System.CodeDom.CodeExpression[] initializers
-        ) { }
+        )
+        {
+        }
 
-        public CodeArrayCreateExpression(System.CodeDom.CodeTypeReference createType, int size) { }
+        public CodeArrayCreateExpression(System.CodeDom.CodeTypeReference createType, int size)
+        {
+        }
 
-        public CodeArrayCreateExpression(string createType, System.CodeDom.CodeExpression size) { }
+        public CodeArrayCreateExpression(string createType, System.CodeDom.CodeExpression size)
+        {
+        }
 
         public CodeArrayCreateExpression(
             string createType,
             params System.CodeDom.CodeExpression[] initializers
-        ) { }
+        )
+        {
+        }
 
-        public CodeArrayCreateExpression(string createType, int size) { }
+        public CodeArrayCreateExpression(string createType, int size)
+        {
+        }
 
         public CodeArrayCreateExpression(System.Type createType, System.CodeDom.CodeExpression size)
-        { }
+        {
+        }
 
         public CodeArrayCreateExpression(
             System.Type createType,
             params System.CodeDom.CodeExpression[] initializers
-        ) { }
+        )
+        {
+        }
 
-        public CodeArrayCreateExpression(System.Type createType, int size) { }
+        public CodeArrayCreateExpression(System.Type createType, int size)
+        {
+        }
 
         public System.CodeDom.CodeTypeReference CreateType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpressionCollection Initializers
         {
@@ -158,23 +197,31 @@ namespace System.CodeDom
         public int Size
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression SizeExpression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeArrayIndexerExpression : System.CodeDom.CodeExpression
     {
-        public CodeArrayIndexerExpression() { }
+        public CodeArrayIndexerExpression()
+        {
+        }
 
         public CodeArrayIndexerExpression(
             System.CodeDom.CodeExpression targetObject,
             params System.CodeDom.CodeExpression[] indices
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeExpressionCollection Indices
         {
@@ -183,91 +230,128 @@ namespace System.CodeDom
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeAssignStatement : System.CodeDom.CodeStatement
     {
-        public CodeAssignStatement() { }
+        public CodeAssignStatement()
+        {
+        }
 
         public CodeAssignStatement(
             System.CodeDom.CodeExpression left,
             System.CodeDom.CodeExpression right
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeExpression Left
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression Right
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeAttachEventStatement : System.CodeDom.CodeStatement
     {
-        public CodeAttachEventStatement() { }
+        public CodeAttachEventStatement()
+        {
+        }
 
         public CodeAttachEventStatement(
             System.CodeDom.CodeEventReferenceExpression eventRef,
             System.CodeDom.CodeExpression listener
-        ) { }
+        )
+        {
+        }
 
         public CodeAttachEventStatement(
             System.CodeDom.CodeExpression targetObject,
             string eventName,
             System.CodeDom.CodeExpression listener
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeEventReferenceExpression Event
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression Listener
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeAttributeArgument
     {
-        public CodeAttributeArgument() { }
+        public CodeAttributeArgument()
+        {
+        }
 
-        public CodeAttributeArgument(System.CodeDom.CodeExpression value) { }
+        public CodeAttributeArgument(System.CodeDom.CodeExpression value)
+        {
+        }
 
-        public CodeAttributeArgument(string name, System.CodeDom.CodeExpression value) { }
+        public CodeAttributeArgument(string name, System.CodeDom.CodeExpression value)
+        {
+        }
 
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeAttributeArgumentCollection : System.Collections.CollectionBase
     {
-        public CodeAttributeArgumentCollection() { }
+        public CodeAttributeArgumentCollection()
+        {
+        }
 
         public CodeAttributeArgumentCollection(System.CodeDom.CodeAttributeArgumentCollection value)
-        { }
+        {
+        }
 
-        public CodeAttributeArgumentCollection(System.CodeDom.CodeAttributeArgument[] value) { }
+        public CodeAttributeArgumentCollection(System.CodeDom.CodeAttributeArgument[] value)
+        {
+        }
 
         public System.CodeDom.CodeAttributeArgument this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeAttributeArgument value)
@@ -275,44 +359,64 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeAttributeArgumentCollection value) { }
+        public void AddRange(System.CodeDom.CodeAttributeArgumentCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeAttributeArgument[] value) { }
+        public void AddRange(System.CodeDom.CodeAttributeArgument[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeAttributeArgument value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeAttributeArgument[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeAttributeArgument[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeAttributeArgument value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeAttributeArgument value) { }
+        public void Insert(int index, System.CodeDom.CodeAttributeArgument value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeAttributeArgument value) { }
+        public void Remove(System.CodeDom.CodeAttributeArgument value)
+        {
+        }
     }
 
     public partial class CodeAttributeDeclaration
     {
-        public CodeAttributeDeclaration() { }
+        public CodeAttributeDeclaration()
+        {
+        }
 
-        public CodeAttributeDeclaration(System.CodeDom.CodeTypeReference attributeType) { }
+        public CodeAttributeDeclaration(System.CodeDom.CodeTypeReference attributeType)
+        {
+        }
 
         public CodeAttributeDeclaration(
             System.CodeDom.CodeTypeReference attributeType,
             params System.CodeDom.CodeAttributeArgument[] arguments
-        ) { }
+        )
+        {
+        }
 
-        public CodeAttributeDeclaration(string name) { }
+        public CodeAttributeDeclaration(string name)
+        {
+        }
 
         public CodeAttributeDeclaration(
             string name,
             params System.CodeDom.CodeAttributeArgument[] arguments
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeAttributeArgumentCollection Arguments
         {
@@ -325,25 +429,34 @@ namespace System.CodeDom
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeAttributeDeclarationCollection : System.Collections.CollectionBase
     {
-        public CodeAttributeDeclarationCollection() { }
+        public CodeAttributeDeclarationCollection()
+        {
+        }
 
         public CodeAttributeDeclarationCollection(
             System.CodeDom.CodeAttributeDeclarationCollection value
-        ) { }
+        )
+        {
+        }
 
         public CodeAttributeDeclarationCollection(System.CodeDom.CodeAttributeDeclaration[] value)
-        { }
+        {
+        }
 
         public System.CodeDom.CodeAttributeDeclaration this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeAttributeDeclaration value)
@@ -351,56 +464,78 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeAttributeDeclarationCollection value) { }
+        public void AddRange(System.CodeDom.CodeAttributeDeclarationCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeAttributeDeclaration[] value) { }
+        public void AddRange(System.CodeDom.CodeAttributeDeclaration[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeAttributeDeclaration value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeAttributeDeclaration[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeAttributeDeclaration[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeAttributeDeclaration value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeAttributeDeclaration value) { }
+        public void Insert(int index, System.CodeDom.CodeAttributeDeclaration value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeAttributeDeclaration value) { }
+        public void Remove(System.CodeDom.CodeAttributeDeclaration value)
+        {
+        }
     }
 
     public partial class CodeBaseReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeBaseReferenceExpression() { }
+        public CodeBaseReferenceExpression()
+        {
+        }
     }
 
     public partial class CodeBinaryOperatorExpression : System.CodeDom.CodeExpression
     {
-        public CodeBinaryOperatorExpression() { }
+        public CodeBinaryOperatorExpression()
+        {
+        }
 
         public CodeBinaryOperatorExpression(
             System.CodeDom.CodeExpression left,
             System.CodeDom.CodeBinaryOperatorType op,
             System.CodeDom.CodeExpression right
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeExpression Left
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeBinaryOperatorType Operator
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression Right
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -427,56 +562,79 @@ namespace System.CodeDom
 
     public partial class CodeCastExpression : System.CodeDom.CodeExpression
     {
-        public CodeCastExpression() { }
+        public CodeCastExpression()
+        {
+        }
 
         public CodeCastExpression(
             System.CodeDom.CodeTypeReference targetType,
             System.CodeDom.CodeExpression expression
-        ) { }
+        )
+        {
+        }
 
-        public CodeCastExpression(string targetType, System.CodeDom.CodeExpression expression) { }
+        public CodeCastExpression(string targetType, System.CodeDom.CodeExpression expression)
+        {
+        }
 
         public CodeCastExpression(System.Type targetType, System.CodeDom.CodeExpression expression)
-        { }
+        {
+        }
 
         public System.CodeDom.CodeExpression Expression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReference TargetType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeCatchClause
     {
-        public CodeCatchClause() { }
+        public CodeCatchClause()
+        {
+        }
 
-        public CodeCatchClause(string localName) { }
+        public CodeCatchClause(string localName)
+        {
+        }
 
         public CodeCatchClause(
             string localName,
             System.CodeDom.CodeTypeReference catchExceptionType
-        ) { }
+        )
+        {
+        }
 
         public CodeCatchClause(
             string localName,
             System.CodeDom.CodeTypeReference catchExceptionType,
             params System.CodeDom.CodeStatement[] statements
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeTypeReference CatchExceptionType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string LocalName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeStatementCollection Statements
         {
@@ -486,16 +644,24 @@ namespace System.CodeDom
 
     public partial class CodeCatchClauseCollection : System.Collections.CollectionBase
     {
-        public CodeCatchClauseCollection() { }
+        public CodeCatchClauseCollection()
+        {
+        }
 
-        public CodeCatchClauseCollection(System.CodeDom.CodeCatchClauseCollection value) { }
+        public CodeCatchClauseCollection(System.CodeDom.CodeCatchClauseCollection value)
+        {
+        }
 
-        public CodeCatchClauseCollection(System.CodeDom.CodeCatchClause[] value) { }
+        public CodeCatchClauseCollection(System.CodeDom.CodeCatchClause[] value)
+        {
+        }
 
         public System.CodeDom.CodeCatchClause this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeCatchClause value)
@@ -503,104 +669,151 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeCatchClauseCollection value) { }
+        public void AddRange(System.CodeDom.CodeCatchClauseCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeCatchClause[] value) { }
+        public void AddRange(System.CodeDom.CodeCatchClause[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeCatchClause value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeCatchClause[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeCatchClause[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeCatchClause value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeCatchClause value) { }
+        public void Insert(int index, System.CodeDom.CodeCatchClause value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeCatchClause value) { }
+        public void Remove(System.CodeDom.CodeCatchClause value)
+        {
+        }
     }
 
     public partial class CodeChecksumPragma : System.CodeDom.CodeDirective
     {
-        public CodeChecksumPragma() { }
+        public CodeChecksumPragma()
+        {
+        }
 
         public CodeChecksumPragma(
             string fileName,
             System.Guid checksumAlgorithmId,
             byte[] checksumData
-        ) { }
+        )
+        {
+        }
 
         public System.Guid ChecksumAlgorithmId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] ChecksumData
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string FileName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeComment : System.CodeDom.CodeObject
     {
-        public CodeComment() { }
+        public CodeComment()
+        {
+        }
 
-        public CodeComment(string text) { }
+        public CodeComment(string text)
+        {
+        }
 
-        public CodeComment(string text, bool docComment) { }
+        public CodeComment(string text, bool docComment)
+        {
+        }
 
         public bool DocComment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Text
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeCommentStatement : System.CodeDom.CodeStatement
     {
-        public CodeCommentStatement() { }
+        public CodeCommentStatement()
+        {
+        }
 
-        public CodeCommentStatement(System.CodeDom.CodeComment comment) { }
+        public CodeCommentStatement(System.CodeDom.CodeComment comment)
+        {
+        }
 
-        public CodeCommentStatement(string text) { }
+        public CodeCommentStatement(string text)
+        {
+        }
 
-        public CodeCommentStatement(string text, bool docComment) { }
+        public CodeCommentStatement(string text, bool docComment)
+        {
+        }
 
         public System.CodeDom.CodeComment Comment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeCommentStatementCollection : System.Collections.CollectionBase
     {
-        public CodeCommentStatementCollection() { }
+        public CodeCommentStatementCollection()
+        {
+        }
 
         public CodeCommentStatementCollection(System.CodeDom.CodeCommentStatementCollection value)
-        { }
+        {
+        }
 
-        public CodeCommentStatementCollection(System.CodeDom.CodeCommentStatement[] value) { }
+        public CodeCommentStatementCollection(System.CodeDom.CodeCommentStatement[] value)
+        {
+        }
 
         public System.CodeDom.CodeCommentStatement this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeCommentStatement value)
@@ -608,30 +821,42 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeCommentStatementCollection value) { }
+        public void AddRange(System.CodeDom.CodeCommentStatementCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeCommentStatement[] value) { }
+        public void AddRange(System.CodeDom.CodeCommentStatement[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeCommentStatement value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeCommentStatement[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeCommentStatement[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeCommentStatement value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeCommentStatement value) { }
+        public void Insert(int index, System.CodeDom.CodeCommentStatement value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeCommentStatement value) { }
+        public void Remove(System.CodeDom.CodeCommentStatement value)
+        {
+        }
     }
 
     public partial class CodeCompileUnit : System.CodeDom.CodeObject
     {
-        public CodeCompileUnit() { }
+        public CodeCompileUnit()
+        {
+        }
 
         public System.CodeDom.CodeAttributeDeclarationCollection AssemblyCustomAttributes
         {
@@ -657,23 +882,31 @@ namespace System.CodeDom
 
     public partial class CodeConditionStatement : System.CodeDom.CodeStatement
     {
-        public CodeConditionStatement() { }
+        public CodeConditionStatement()
+        {
+        }
 
         public CodeConditionStatement(
             System.CodeDom.CodeExpression condition,
             params System.CodeDom.CodeStatement[] trueStatements
-        ) { }
+        )
+        {
+        }
 
         public CodeConditionStatement(
             System.CodeDom.CodeExpression condition,
             System.CodeDom.CodeStatement[] trueStatements,
             System.CodeDom.CodeStatement[] falseStatements
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeExpression Condition
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeStatementCollection FalseStatements
         {
@@ -687,7 +920,9 @@ namespace System.CodeDom
 
     public partial class CodeConstructor : System.CodeDom.CodeMemberMethod
     {
-        public CodeConstructor() { }
+        public CodeConstructor()
+        {
+        }
 
         public System.CodeDom.CodeExpressionCollection BaseConstructorArgs
         {
@@ -701,54 +936,76 @@ namespace System.CodeDom
 
     public partial class CodeDefaultValueExpression : System.CodeDom.CodeExpression
     {
-        public CodeDefaultValueExpression() { }
+        public CodeDefaultValueExpression()
+        {
+        }
 
-        public CodeDefaultValueExpression(System.CodeDom.CodeTypeReference type) { }
+        public CodeDefaultValueExpression(System.CodeDom.CodeTypeReference type)
+        {
+        }
 
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeDelegateCreateExpression : System.CodeDom.CodeExpression
     {
-        public CodeDelegateCreateExpression() { }
+        public CodeDelegateCreateExpression()
+        {
+        }
 
         public CodeDelegateCreateExpression(
             System.CodeDom.CodeTypeReference delegateType,
             System.CodeDom.CodeExpression targetObject,
             string methodName
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeTypeReference DelegateType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string MethodName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeDelegateInvokeExpression : System.CodeDom.CodeExpression
     {
-        public CodeDelegateInvokeExpression() { }
+        public CodeDelegateInvokeExpression()
+        {
+        }
 
-        public CodeDelegateInvokeExpression(System.CodeDom.CodeExpression targetObject) { }
+        public CodeDelegateInvokeExpression(System.CodeDom.CodeExpression targetObject)
+        {
+        }
 
         public CodeDelegateInvokeExpression(
             System.CodeDom.CodeExpression targetObject,
             params System.CodeDom.CodeExpression[] parameters
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeExpressionCollection Parameters
         {
@@ -757,48 +1014,68 @@ namespace System.CodeDom
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeDirectionExpression : System.CodeDom.CodeExpression
     {
-        public CodeDirectionExpression() { }
+        public CodeDirectionExpression()
+        {
+        }
 
         public CodeDirectionExpression(
             System.CodeDom.FieldDirection direction,
             System.CodeDom.CodeExpression expression
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.FieldDirection Direction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression Expression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeDirective : System.CodeDom.CodeObject
     {
-        public CodeDirective() { }
+        public CodeDirective()
+        {
+        }
     }
 
     public partial class CodeDirectiveCollection : System.Collections.CollectionBase
     {
-        public CodeDirectiveCollection() { }
+        public CodeDirectiveCollection()
+        {
+        }
 
-        public CodeDirectiveCollection(System.CodeDom.CodeDirectiveCollection value) { }
+        public CodeDirectiveCollection(System.CodeDom.CodeDirectiveCollection value)
+        {
+        }
 
-        public CodeDirectiveCollection(System.CodeDom.CodeDirective[] value) { }
+        public CodeDirectiveCollection(System.CodeDom.CodeDirective[] value)
+        {
+        }
 
         public System.CodeDom.CodeDirective this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeDirective value)
@@ -806,70 +1083,100 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeDirectiveCollection value) { }
+        public void AddRange(System.CodeDom.CodeDirectiveCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeDirective[] value) { }
+        public void AddRange(System.CodeDom.CodeDirective[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeDirective value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeDirective[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeDirective[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeDirective value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeDirective value) { }
+        public void Insert(int index, System.CodeDom.CodeDirective value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeDirective value) { }
+        public void Remove(System.CodeDom.CodeDirective value)
+        {
+        }
     }
 
     public partial class CodeEntryPointMethod : System.CodeDom.CodeMemberMethod
     {
-        public CodeEntryPointMethod() { }
+        public CodeEntryPointMethod()
+        {
+        }
     }
 
     public partial class CodeEventReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeEventReferenceExpression() { }
+        public CodeEventReferenceExpression()
+        {
+        }
 
         public CodeEventReferenceExpression(
             System.CodeDom.CodeExpression targetObject,
             string eventName
-        ) { }
+        )
+        {
+        }
 
         public string EventName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeExpression : System.CodeDom.CodeObject
     {
-        public CodeExpression() { }
+        public CodeExpression()
+        {
+        }
     }
 
     public partial class CodeExpressionCollection : System.Collections.CollectionBase
     {
-        public CodeExpressionCollection() { }
+        public CodeExpressionCollection()
+        {
+        }
 
-        public CodeExpressionCollection(System.CodeDom.CodeExpressionCollection value) { }
+        public CodeExpressionCollection(System.CodeDom.CodeExpressionCollection value)
+        {
+        }
 
-        public CodeExpressionCollection(System.CodeDom.CodeExpression[] value) { }
+        public CodeExpressionCollection(System.CodeDom.CodeExpression[] value)
+        {
+        }
 
         public System.CodeDom.CodeExpression this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeExpression value)
@@ -877,82 +1184,116 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeExpressionCollection value) { }
+        public void AddRange(System.CodeDom.CodeExpressionCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeExpression[] value) { }
+        public void AddRange(System.CodeDom.CodeExpression[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeExpression value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeExpression[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeExpression[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeExpression value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeExpression value) { }
+        public void Insert(int index, System.CodeDom.CodeExpression value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeExpression value) { }
+        public void Remove(System.CodeDom.CodeExpression value)
+        {
+        }
     }
 
     public partial class CodeExpressionStatement : System.CodeDom.CodeStatement
     {
-        public CodeExpressionStatement() { }
+        public CodeExpressionStatement()
+        {
+        }
 
-        public CodeExpressionStatement(System.CodeDom.CodeExpression expression) { }
+        public CodeExpressionStatement(System.CodeDom.CodeExpression expression)
+        {
+        }
 
         public System.CodeDom.CodeExpression Expression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeFieldReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeFieldReferenceExpression() { }
+        public CodeFieldReferenceExpression()
+        {
+        }
 
         public CodeFieldReferenceExpression(
             System.CodeDom.CodeExpression targetObject,
             string fieldName
-        ) { }
+        )
+        {
+        }
 
         public string FieldName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeGotoStatement : System.CodeDom.CodeStatement
     {
-        public CodeGotoStatement() { }
+        public CodeGotoStatement()
+        {
+        }
 
-        public CodeGotoStatement(string label) { }
+        public CodeGotoStatement(string label)
+        {
+        }
 
         public string Label
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeIndexerExpression : System.CodeDom.CodeExpression
     {
-        public CodeIndexerExpression() { }
+        public CodeIndexerExpression()
+        {
+        }
 
         public CodeIndexerExpression(
             System.CodeDom.CodeExpression targetObject,
             params System.CodeDom.CodeExpression[] indices
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeExpressionCollection Indices
         {
@@ -961,30 +1302,40 @@ namespace System.CodeDom
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeIterationStatement : System.CodeDom.CodeStatement
     {
-        public CodeIterationStatement() { }
+        public CodeIterationStatement()
+        {
+        }
 
         public CodeIterationStatement(
             System.CodeDom.CodeStatement initStatement,
             System.CodeDom.CodeExpression testExpression,
             System.CodeDom.CodeStatement incrementStatement,
             params System.CodeDom.CodeStatement[] statements
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeStatement IncrementStatement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeStatement InitStatement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeStatementCollection Statements
         {
@@ -993,51 +1344,73 @@ namespace System.CodeDom
         public System.CodeDom.CodeExpression TestExpression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeLabeledStatement : System.CodeDom.CodeStatement
     {
-        public CodeLabeledStatement() { }
+        public CodeLabeledStatement()
+        {
+        }
 
-        public CodeLabeledStatement(string label) { }
+        public CodeLabeledStatement(string label)
+        {
+        }
 
-        public CodeLabeledStatement(string label, System.CodeDom.CodeStatement statement) { }
+        public CodeLabeledStatement(string label, System.CodeDom.CodeStatement statement)
+        {
+        }
 
         public string Label
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeStatement Statement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeLinePragma
     {
-        public CodeLinePragma() { }
+        public CodeLinePragma()
+        {
+        }
 
-        public CodeLinePragma(string fileName, int lineNumber) { }
+        public CodeLinePragma(string fileName, int lineNumber)
+        {
+        }
 
         public string FileName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int LineNumber
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeMemberEvent : System.CodeDom.CodeTypeMember
     {
-        public CodeMemberEvent() { }
+        public CodeMemberEvent()
+        {
+        }
 
         public System.CodeDom.CodeTypeReferenceCollection ImplementationTypes
         {
@@ -1046,40 +1419,58 @@ namespace System.CodeDom
         public System.CodeDom.CodeTypeReference PrivateImplementationType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeMemberField : System.CodeDom.CodeTypeMember
     {
-        public CodeMemberField() { }
+        public CodeMemberField()
+        {
+        }
 
-        public CodeMemberField(System.CodeDom.CodeTypeReference type, string name) { }
+        public CodeMemberField(System.CodeDom.CodeTypeReference type, string name)
+        {
+        }
 
-        public CodeMemberField(string type, string name) { }
+        public CodeMemberField(string type, string name)
+        {
+        }
 
-        public CodeMemberField(System.Type type, string name) { }
+        public CodeMemberField(System.Type type, string name)
+        {
+        }
 
         public System.CodeDom.CodeExpression InitExpression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeMemberMethod : System.CodeDom.CodeTypeMember
     {
-        public CodeMemberMethod() { }
+        public CodeMemberMethod()
+        {
+        }
 
         public System.CodeDom.CodeTypeReferenceCollection ImplementationTypes
         {
@@ -1092,12 +1483,16 @@ namespace System.CodeDom
         public System.CodeDom.CodeTypeReference PrivateImplementationType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReference ReturnType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeAttributeDeclarationCollection ReturnTypeCustomAttributes
         {
@@ -1113,24 +1508,38 @@ namespace System.CodeDom
         }
         public event System.EventHandler PopulateImplementationTypes
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler PopulateParameters
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler PopulateStatements
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 
     public partial class CodeMemberProperty : System.CodeDom.CodeTypeMember
     {
-        public CodeMemberProperty() { }
+        public CodeMemberProperty()
+        {
+        }
 
         public System.CodeDom.CodeStatementCollection GetStatements
         {
@@ -1139,12 +1548,16 @@ namespace System.CodeDom
         public bool HasGet
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool HasSet
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReferenceCollection ImplementationTypes
         {
@@ -1157,7 +1570,9 @@ namespace System.CodeDom
         public System.CodeDom.CodeTypeReference PrivateImplementationType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeStatementCollection SetStatements
         {
@@ -1166,29 +1581,39 @@ namespace System.CodeDom
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeMethodInvokeExpression : System.CodeDom.CodeExpression
     {
-        public CodeMethodInvokeExpression() { }
+        public CodeMethodInvokeExpression()
+        {
+        }
 
         public CodeMethodInvokeExpression(
             System.CodeDom.CodeExpression targetObject,
             string methodName,
             params System.CodeDom.CodeExpression[] parameters
-        ) { }
+        )
+        {
+        }
 
         public CodeMethodInvokeExpression(
             System.CodeDom.CodeMethodReferenceExpression method,
             params System.CodeDom.CodeExpression[] parameters
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeMethodReferenceExpression Method
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpressionCollection Parameters
         {
@@ -1198,28 +1623,38 @@ namespace System.CodeDom
 
     public partial class CodeMethodReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeMethodReferenceExpression() { }
+        public CodeMethodReferenceExpression()
+        {
+        }
 
         public CodeMethodReferenceExpression(
             System.CodeDom.CodeExpression targetObject,
             string methodName
-        ) { }
+        )
+        {
+        }
 
         public CodeMethodReferenceExpression(
             System.CodeDom.CodeExpression targetObject,
             string methodName,
             params System.CodeDom.CodeTypeReference[] typeParameters
-        ) { }
+        )
+        {
+        }
 
         public string MethodName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReferenceCollection TypeArguments
         {
@@ -1229,22 +1664,32 @@ namespace System.CodeDom
 
     public partial class CodeMethodReturnStatement : System.CodeDom.CodeStatement
     {
-        public CodeMethodReturnStatement() { }
+        public CodeMethodReturnStatement()
+        {
+        }
 
-        public CodeMethodReturnStatement(System.CodeDom.CodeExpression expression) { }
+        public CodeMethodReturnStatement(System.CodeDom.CodeExpression expression)
+        {
+        }
 
         public System.CodeDom.CodeExpression Expression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeNamespace : System.CodeDom.CodeObject
     {
-        public CodeNamespace() { }
+        public CodeNamespace()
+        {
+        }
 
-        public CodeNamespace(string name) { }
+        public CodeNamespace(string name)
+        {
+        }
 
         public System.CodeDom.CodeCommentStatementCollection Comments
         {
@@ -1257,7 +1702,9 @@ namespace System.CodeDom
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeDeclarationCollection Types
         {
@@ -1265,33 +1712,53 @@ namespace System.CodeDom
         }
         public event System.EventHandler PopulateComments
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler PopulateImports
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler PopulateTypes
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 
     public partial class CodeNamespaceCollection : System.Collections.CollectionBase
     {
-        public CodeNamespaceCollection() { }
+        public CodeNamespaceCollection()
+        {
+        }
 
-        public CodeNamespaceCollection(System.CodeDom.CodeNamespaceCollection value) { }
+        public CodeNamespaceCollection(System.CodeDom.CodeNamespaceCollection value)
+        {
+        }
 
-        public CodeNamespaceCollection(System.CodeDom.CodeNamespace[] value) { }
+        public CodeNamespaceCollection(System.CodeDom.CodeNamespace[] value)
+        {
+        }
 
         public System.CodeDom.CodeNamespace this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeNamespace value)
@@ -1299,42 +1766,60 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeNamespaceCollection value) { }
+        public void AddRange(System.CodeDom.CodeNamespaceCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeNamespace[] value) { }
+        public void AddRange(System.CodeDom.CodeNamespace[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeNamespace value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeNamespace[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeNamespace[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeNamespace value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeNamespace value) { }
+        public void Insert(int index, System.CodeDom.CodeNamespace value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeNamespace value) { }
+        public void Remove(System.CodeDom.CodeNamespace value)
+        {
+        }
     }
 
     public partial class CodeNamespaceImport : System.CodeDom.CodeObject
     {
-        public CodeNamespaceImport() { }
+        public CodeNamespaceImport()
+        {
+        }
 
-        public CodeNamespaceImport(string nameSpace) { }
+        public CodeNamespaceImport(string nameSpace)
+        {
+        }
 
         public System.CodeDom.CodeLinePragma LinePragma
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1343,7 +1828,9 @@ namespace System.CodeDom
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        public CodeNamespaceImportCollection() { }
+        public CodeNamespaceImportCollection()
+        {
+        }
 
         public int Count
         {
@@ -1352,7 +1839,9 @@ namespace System.CodeDom
         public System.CodeDom.CodeNamespaceImport this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         int System.Collections.ICollection.Count
         {
@@ -1377,21 +1866,31 @@ namespace System.CodeDom
         object System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Add(System.CodeDom.CodeNamespaceImport value) { }
+        public void Add(System.CodeDom.CodeNamespaceImport value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeNamespaceImport[] value) { }
+        public void AddRange(System.CodeDom.CodeNamespaceImport[] value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1403,7 +1902,9 @@ namespace System.CodeDom
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object value)
         {
@@ -1415,16 +1916,24 @@ namespace System.CodeDom
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object value) { }
+        void System.Collections.IList.Insert(int index, object value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object value) { }
+        void System.Collections.IList.Remove(object value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
     }
 
     public partial class CodeObject
     {
-        public CodeObject() { }
+        public CodeObject()
+        {
+        }
 
         public System.Collections.IDictionary UserData
         {
@@ -1434,27 +1943,37 @@ namespace System.CodeDom
 
     public partial class CodeObjectCreateExpression : System.CodeDom.CodeExpression
     {
-        public CodeObjectCreateExpression() { }
+        public CodeObjectCreateExpression()
+        {
+        }
 
         public CodeObjectCreateExpression(
             System.CodeDom.CodeTypeReference createType,
             params System.CodeDom.CodeExpression[] parameters
-        ) { }
+        )
+        {
+        }
 
         public CodeObjectCreateExpression(
             string createType,
             params System.CodeDom.CodeExpression[] parameters
-        ) { }
+        )
+        {
+        }
 
         public CodeObjectCreateExpression(
             System.Type createType,
             params System.CodeDom.CodeExpression[] parameters
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeTypeReference CreateType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpressionCollection Parameters
         {
@@ -1464,56 +1983,80 @@ namespace System.CodeDom
 
     public partial class CodeParameterDeclarationExpression : System.CodeDom.CodeExpression
     {
-        public CodeParameterDeclarationExpression() { }
+        public CodeParameterDeclarationExpression()
+        {
+        }
 
         public CodeParameterDeclarationExpression(
             System.CodeDom.CodeTypeReference type,
             string name
-        ) { }
+        )
+        {
+        }
 
-        public CodeParameterDeclarationExpression(string type, string name) { }
+        public CodeParameterDeclarationExpression(string type, string name)
+        {
+        }
 
-        public CodeParameterDeclarationExpression(System.Type type, string name) { }
+        public CodeParameterDeclarationExpression(System.Type type, string name)
+        {
+        }
 
         public System.CodeDom.CodeAttributeDeclarationCollection CustomAttributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.FieldDirection Direction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeParameterDeclarationExpressionCollection
         : System.Collections.CollectionBase
     {
-        public CodeParameterDeclarationExpressionCollection() { }
+        public CodeParameterDeclarationExpressionCollection()
+        {
+        }
 
         public CodeParameterDeclarationExpressionCollection(
             System.CodeDom.CodeParameterDeclarationExpressionCollection value
-        ) { }
+        )
+        {
+        }
 
         public CodeParameterDeclarationExpressionCollection(
             System.CodeDom.CodeParameterDeclarationExpression[] value
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeParameterDeclarationExpression this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeParameterDeclarationExpression value)
@@ -1521,81 +2064,115 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeParameterDeclarationExpressionCollection value) { }
+        public void AddRange(System.CodeDom.CodeParameterDeclarationExpressionCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeParameterDeclarationExpression[] value) { }
+        public void AddRange(System.CodeDom.CodeParameterDeclarationExpression[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeParameterDeclarationExpression value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeParameterDeclarationExpression[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeParameterDeclarationExpression[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeParameterDeclarationExpression value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeParameterDeclarationExpression value) { }
+        public void Insert(int index, System.CodeDom.CodeParameterDeclarationExpression value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeParameterDeclarationExpression value) { }
+        public void Remove(System.CodeDom.CodeParameterDeclarationExpression value)
+        {
+        }
     }
 
     public partial class CodePrimitiveExpression : System.CodeDom.CodeExpression
     {
-        public CodePrimitiveExpression() { }
+        public CodePrimitiveExpression()
+        {
+        }
 
-        public CodePrimitiveExpression(object value) { }
+        public CodePrimitiveExpression(object value)
+        {
+        }
 
         public object Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodePropertyReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodePropertyReferenceExpression() { }
+        public CodePropertyReferenceExpression()
+        {
+        }
 
         public CodePropertyReferenceExpression(
             System.CodeDom.CodeExpression targetObject,
             string propertyName
-        ) { }
+        )
+        {
+        }
 
         public string PropertyName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression TargetObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodePropertySetValueReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodePropertySetValueReferenceExpression() { }
+        public CodePropertySetValueReferenceExpression()
+        {
+        }
     }
 
     public partial class CodeRegionDirective : System.CodeDom.CodeDirective
     {
-        public CodeRegionDirective() { }
+        public CodeRegionDirective()
+        {
+        }
 
-        public CodeRegionDirective(System.CodeDom.CodeRegionMode regionMode, string regionText) { }
+        public CodeRegionDirective(System.CodeDom.CodeRegionMode regionMode, string regionText)
+        {
+        }
 
         public System.CodeDom.CodeRegionMode RegionMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RegionText
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1608,91 +2185,129 @@ namespace System.CodeDom
 
     public partial class CodeRemoveEventStatement : System.CodeDom.CodeStatement
     {
-        public CodeRemoveEventStatement() { }
+        public CodeRemoveEventStatement()
+        {
+        }
 
         public CodeRemoveEventStatement(
             System.CodeDom.CodeEventReferenceExpression eventRef,
             System.CodeDom.CodeExpression listener
-        ) { }
+        )
+        {
+        }
 
         public CodeRemoveEventStatement(
             System.CodeDom.CodeExpression targetObject,
             string eventName,
             System.CodeDom.CodeExpression listener
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeEventReferenceExpression Event
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeExpression Listener
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeSnippetCompileUnit : System.CodeDom.CodeCompileUnit
     {
-        public CodeSnippetCompileUnit() { }
+        public CodeSnippetCompileUnit()
+        {
+        }
 
-        public CodeSnippetCompileUnit(string value) { }
+        public CodeSnippetCompileUnit(string value)
+        {
+        }
 
         public System.CodeDom.CodeLinePragma LinePragma
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeSnippetExpression : System.CodeDom.CodeExpression
     {
-        public CodeSnippetExpression() { }
+        public CodeSnippetExpression()
+        {
+        }
 
-        public CodeSnippetExpression(string value) { }
+        public CodeSnippetExpression(string value)
+        {
+        }
 
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeSnippetStatement : System.CodeDom.CodeStatement
     {
-        public CodeSnippetStatement() { }
+        public CodeSnippetStatement()
+        {
+        }
 
-        public CodeSnippetStatement(string value) { }
+        public CodeSnippetStatement(string value)
+        {
+        }
 
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeSnippetTypeMember : System.CodeDom.CodeTypeMember
     {
-        public CodeSnippetTypeMember() { }
+        public CodeSnippetTypeMember()
+        {
+        }
 
-        public CodeSnippetTypeMember(string text) { }
+        public CodeSnippetTypeMember(string text)
+        {
+        }
 
         public string Text
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeStatement : System.CodeDom.CodeObject
     {
-        public CodeStatement() { }
+        public CodeStatement()
+        {
+        }
 
         public System.CodeDom.CodeDirectiveCollection EndDirectives
         {
@@ -1701,7 +2316,9 @@ namespace System.CodeDom
         public System.CodeDom.CodeLinePragma LinePragma
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeDirectiveCollection StartDirectives
         {
@@ -1711,16 +2328,24 @@ namespace System.CodeDom
 
     public partial class CodeStatementCollection : System.Collections.CollectionBase
     {
-        public CodeStatementCollection() { }
+        public CodeStatementCollection()
+        {
+        }
 
-        public CodeStatementCollection(System.CodeDom.CodeStatementCollection value) { }
+        public CodeStatementCollection(System.CodeDom.CodeStatementCollection value)
+        {
+        }
 
-        public CodeStatementCollection(System.CodeDom.CodeStatement[] value) { }
+        public CodeStatementCollection(System.CodeDom.CodeStatement[] value)
+        {
+        }
 
         public System.CodeDom.CodeStatement this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeExpression value)
@@ -1733,59 +2358,83 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeStatementCollection value) { }
+        public void AddRange(System.CodeDom.CodeStatementCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeStatement[] value) { }
+        public void AddRange(System.CodeDom.CodeStatement[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeStatement value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeStatement[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeStatement[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeStatement value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeStatement value) { }
+        public void Insert(int index, System.CodeDom.CodeStatement value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeStatement value) { }
+        public void Remove(System.CodeDom.CodeStatement value)
+        {
+        }
     }
 
     public partial class CodeThisReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeThisReferenceExpression() { }
+        public CodeThisReferenceExpression()
+        {
+        }
     }
 
     public partial class CodeThrowExceptionStatement : System.CodeDom.CodeStatement
     {
-        public CodeThrowExceptionStatement() { }
+        public CodeThrowExceptionStatement()
+        {
+        }
 
-        public CodeThrowExceptionStatement(System.CodeDom.CodeExpression toThrow) { }
+        public CodeThrowExceptionStatement(System.CodeDom.CodeExpression toThrow)
+        {
+        }
 
         public System.CodeDom.CodeExpression ToThrow
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeTryCatchFinallyStatement : System.CodeDom.CodeStatement
     {
-        public CodeTryCatchFinallyStatement() { }
+        public CodeTryCatchFinallyStatement()
+        {
+        }
 
         public CodeTryCatchFinallyStatement(
             System.CodeDom.CodeStatement[] tryStatements,
             System.CodeDom.CodeCatchClause[] catchClauses
-        ) { }
+        )
+        {
+        }
 
         public CodeTryCatchFinallyStatement(
             System.CodeDom.CodeStatement[] tryStatements,
             System.CodeDom.CodeCatchClause[] catchClauses,
             System.CodeDom.CodeStatement[] finallyStatements
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeCatchClauseCollection CatchClauses
         {
@@ -1803,14 +2452,20 @@ namespace System.CodeDom
 
     public partial class CodeTypeConstructor : System.CodeDom.CodeMemberMethod
     {
-        public CodeTypeConstructor() { }
+        public CodeTypeConstructor()
+        {
+        }
     }
 
     public partial class CodeTypeDeclaration : System.CodeDom.CodeTypeMember
     {
-        public CodeTypeDeclaration() { }
+        public CodeTypeDeclaration()
+        {
+        }
 
-        public CodeTypeDeclaration(string name) { }
+        public CodeTypeDeclaration(string name)
+        {
+        }
 
         public System.CodeDom.CodeTypeReferenceCollection BaseTypes
         {
@@ -1819,27 +2474,37 @@ namespace System.CodeDom
         public bool IsClass
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsEnum
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsInterface
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsPartial
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsStruct
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeMemberCollection Members
         {
@@ -1848,7 +2513,9 @@ namespace System.CodeDom
         public System.Reflection.TypeAttributes TypeAttributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeParameterCollection TypeParameters
         {
@@ -1856,28 +2523,44 @@ namespace System.CodeDom
         }
         public event System.EventHandler PopulateBaseTypes
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler PopulateMembers
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 
     public partial class CodeTypeDeclarationCollection : System.Collections.CollectionBase
     {
-        public CodeTypeDeclarationCollection() { }
+        public CodeTypeDeclarationCollection()
+        {
+        }
 
-        public CodeTypeDeclarationCollection(System.CodeDom.CodeTypeDeclarationCollection value) { }
+        public CodeTypeDeclarationCollection(System.CodeDom.CodeTypeDeclarationCollection value)
+        {
+        }
 
-        public CodeTypeDeclarationCollection(System.CodeDom.CodeTypeDeclaration[] value) { }
+        public CodeTypeDeclarationCollection(System.CodeDom.CodeTypeDeclaration[] value)
+        {
+        }
 
         public System.CodeDom.CodeTypeDeclaration this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeTypeDeclaration value)
@@ -1885,32 +2568,46 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeTypeDeclarationCollection value) { }
+        public void AddRange(System.CodeDom.CodeTypeDeclarationCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeTypeDeclaration[] value) { }
+        public void AddRange(System.CodeDom.CodeTypeDeclaration[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeTypeDeclaration value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeTypeDeclaration[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeTypeDeclaration[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeTypeDeclaration value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeTypeDeclaration value) { }
+        public void Insert(int index, System.CodeDom.CodeTypeDeclaration value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeTypeDeclaration value) { }
+        public void Remove(System.CodeDom.CodeTypeDeclaration value)
+        {
+        }
     }
 
     public partial class CodeTypeDelegate : System.CodeDom.CodeTypeDeclaration
     {
-        public CodeTypeDelegate() { }
+        public CodeTypeDelegate()
+        {
+        }
 
-        public CodeTypeDelegate(string name) { }
+        public CodeTypeDelegate(string name)
+        {
+        }
 
         public System.CodeDom.CodeParameterDeclarationExpressionCollection Parameters
         {
@@ -1919,18 +2616,24 @@ namespace System.CodeDom
         public System.CodeDom.CodeTypeReference ReturnType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeTypeMember : System.CodeDom.CodeObject
     {
-        public CodeTypeMember() { }
+        public CodeTypeMember()
+        {
+        }
 
         public System.CodeDom.MemberAttributes Attributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeCommentStatementCollection Comments
         {
@@ -1939,7 +2642,9 @@ namespace System.CodeDom
         public System.CodeDom.CodeAttributeDeclarationCollection CustomAttributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeDirectiveCollection EndDirectives
         {
@@ -1948,12 +2653,16 @@ namespace System.CodeDom
         public System.CodeDom.CodeLinePragma LinePragma
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeDirectiveCollection StartDirectives
         {
@@ -1963,16 +2672,24 @@ namespace System.CodeDom
 
     public partial class CodeTypeMemberCollection : System.Collections.CollectionBase
     {
-        public CodeTypeMemberCollection() { }
+        public CodeTypeMemberCollection()
+        {
+        }
 
-        public CodeTypeMemberCollection(System.CodeDom.CodeTypeMemberCollection value) { }
+        public CodeTypeMemberCollection(System.CodeDom.CodeTypeMemberCollection value)
+        {
+        }
 
-        public CodeTypeMemberCollection(System.CodeDom.CodeTypeMember[] value) { }
+        public CodeTypeMemberCollection(System.CodeDom.CodeTypeMember[] value)
+        {
+        }
 
         public System.CodeDom.CodeTypeMember this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeTypeMember value)
@@ -1980,49 +2697,73 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void AddRange(System.CodeDom.CodeTypeMemberCollection value) { }
+        public void AddRange(System.CodeDom.CodeTypeMemberCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeTypeMember[] value) { }
+        public void AddRange(System.CodeDom.CodeTypeMember[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeTypeMember value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeTypeMember[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeTypeMember[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeTypeMember value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeTypeMember value) { }
+        public void Insert(int index, System.CodeDom.CodeTypeMember value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeTypeMember value) { }
+        public void Remove(System.CodeDom.CodeTypeMember value)
+        {
+        }
     }
 
     public partial class CodeTypeOfExpression : System.CodeDom.CodeExpression
     {
-        public CodeTypeOfExpression() { }
+        public CodeTypeOfExpression()
+        {
+        }
 
-        public CodeTypeOfExpression(System.CodeDom.CodeTypeReference type) { }
+        public CodeTypeOfExpression(System.CodeDom.CodeTypeReference type)
+        {
+        }
 
-        public CodeTypeOfExpression(string type) { }
+        public CodeTypeOfExpression(string type)
+        {
+        }
 
-        public CodeTypeOfExpression(System.Type type) { }
+        public CodeTypeOfExpression(System.Type type)
+        {
+        }
 
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeTypeParameter : System.CodeDom.CodeObject
     {
-        public CodeTypeParameter() { }
+        public CodeTypeParameter()
+        {
+        }
 
-        public CodeTypeParameter(string name) { }
+        public CodeTypeParameter(string name)
+        {
+        }
 
         public System.CodeDom.CodeTypeReferenceCollection Constraints
         {
@@ -2035,27 +2776,39 @@ namespace System.CodeDom
         public bool HasConstructorConstraint
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeTypeParameterCollection : System.Collections.CollectionBase
     {
-        public CodeTypeParameterCollection() { }
+        public CodeTypeParameterCollection()
+        {
+        }
 
-        public CodeTypeParameterCollection(System.CodeDom.CodeTypeParameterCollection value) { }
+        public CodeTypeParameterCollection(System.CodeDom.CodeTypeParameterCollection value)
+        {
+        }
 
-        public CodeTypeParameterCollection(System.CodeDom.CodeTypeParameter[] value) { }
+        public CodeTypeParameterCollection(System.CodeDom.CodeTypeParameter[] value)
+        {
+        }
 
         public System.CodeDom.CodeTypeParameter this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeTypeParameter value)
@@ -2063,77 +2816,115 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void Add(string value) { }
+        public void Add(string value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeTypeParameterCollection value) { }
+        public void AddRange(System.CodeDom.CodeTypeParameterCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeTypeParameter[] value) { }
+        public void AddRange(System.CodeDom.CodeTypeParameter[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeTypeParameter value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeTypeParameter[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeTypeParameter[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeTypeParameter value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeTypeParameter value) { }
+        public void Insert(int index, System.CodeDom.CodeTypeParameter value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeTypeParameter value) { }
+        public void Remove(System.CodeDom.CodeTypeParameter value)
+        {
+        }
     }
 
     public partial class CodeTypeReference : System.CodeDom.CodeObject
     {
-        public CodeTypeReference() { }
+        public CodeTypeReference()
+        {
+        }
 
-        public CodeTypeReference(System.CodeDom.CodeTypeParameter typeParameter) { }
+        public CodeTypeReference(System.CodeDom.CodeTypeParameter typeParameter)
+        {
+        }
 
-        public CodeTypeReference(System.CodeDom.CodeTypeReference arrayType, int rank) { }
+        public CodeTypeReference(System.CodeDom.CodeTypeReference arrayType, int rank)
+        {
+        }
 
-        public CodeTypeReference(string typeName) { }
+        public CodeTypeReference(string typeName)
+        {
+        }
 
         public CodeTypeReference(
             string typeName,
             System.CodeDom.CodeTypeReferenceOptions codeTypeReferenceOption
-        ) { }
+        )
+        {
+        }
 
         public CodeTypeReference(
             string typeName,
             params System.CodeDom.CodeTypeReference[] typeArguments
-        ) { }
+        )
+        {
+        }
 
-        public CodeTypeReference(string baseType, int rank) { }
+        public CodeTypeReference(string baseType, int rank)
+        {
+        }
 
-        public CodeTypeReference(System.Type type) { }
+        public CodeTypeReference(System.Type type)
+        {
+        }
 
         public CodeTypeReference(
             System.Type type,
             System.CodeDom.CodeTypeReferenceOptions codeTypeReferenceOption
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeTypeReference ArrayElementType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ArrayRank
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string BaseType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReferenceOptions Options
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReferenceCollection TypeArguments
         {
@@ -2143,16 +2934,24 @@ namespace System.CodeDom
 
     public partial class CodeTypeReferenceCollection : System.Collections.CollectionBase
     {
-        public CodeTypeReferenceCollection() { }
+        public CodeTypeReferenceCollection()
+        {
+        }
 
-        public CodeTypeReferenceCollection(System.CodeDom.CodeTypeReferenceCollection value) { }
+        public CodeTypeReferenceCollection(System.CodeDom.CodeTypeReferenceCollection value)
+        {
+        }
 
-        public CodeTypeReferenceCollection(System.CodeDom.CodeTypeReference[] value) { }
+        public CodeTypeReferenceCollection(System.CodeDom.CodeTypeReference[] value)
+        {
+        }
 
         public System.CodeDom.CodeTypeReference this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.CodeTypeReference value)
@@ -2160,45 +2959,69 @@ namespace System.CodeDom
             throw null;
         }
 
-        public void Add(string value) { }
+        public void Add(string value)
+        {
+        }
 
-        public void Add(System.Type value) { }
+        public void Add(System.Type value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeTypeReferenceCollection value) { }
+        public void AddRange(System.CodeDom.CodeTypeReferenceCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.CodeTypeReference[] value) { }
+        public void AddRange(System.CodeDom.CodeTypeReference[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.CodeTypeReference value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.CodeTypeReference[] array, int index) { }
+        public void CopyTo(System.CodeDom.CodeTypeReference[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.CodeTypeReference value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.CodeTypeReference value) { }
+        public void Insert(int index, System.CodeDom.CodeTypeReference value)
+        {
+        }
 
-        public void Remove(System.CodeDom.CodeTypeReference value) { }
+        public void Remove(System.CodeDom.CodeTypeReference value)
+        {
+        }
     }
 
     public partial class CodeTypeReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeTypeReferenceExpression() { }
+        public CodeTypeReferenceExpression()
+        {
+        }
 
-        public CodeTypeReferenceExpression(System.CodeDom.CodeTypeReference type) { }
+        public CodeTypeReferenceExpression(System.CodeDom.CodeTypeReference type)
+        {
+        }
 
-        public CodeTypeReferenceExpression(string type) { }
+        public CodeTypeReferenceExpression(string type)
+        {
+        }
 
-        public CodeTypeReferenceExpression(System.Type type) { }
+        public CodeTypeReferenceExpression(System.Type type)
+        {
+        }
 
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -2211,60 +3034,85 @@ namespace System.CodeDom
 
     public partial class CodeVariableDeclarationStatement : System.CodeDom.CodeStatement
     {
-        public CodeVariableDeclarationStatement() { }
+        public CodeVariableDeclarationStatement()
+        {
+        }
 
         public CodeVariableDeclarationStatement(System.CodeDom.CodeTypeReference type, string name)
-        { }
+        {
+        }
 
         public CodeVariableDeclarationStatement(
             System.CodeDom.CodeTypeReference type,
             string name,
             System.CodeDom.CodeExpression initExpression
-        ) { }
+        )
+        {
+        }
 
-        public CodeVariableDeclarationStatement(string type, string name) { }
+        public CodeVariableDeclarationStatement(string type, string name)
+        {
+        }
 
         public CodeVariableDeclarationStatement(
             string type,
             string name,
             System.CodeDom.CodeExpression initExpression
-        ) { }
+        )
+        {
+        }
 
-        public CodeVariableDeclarationStatement(System.Type type, string name) { }
+        public CodeVariableDeclarationStatement(System.Type type, string name)
+        {
+        }
 
         public CodeVariableDeclarationStatement(
             System.Type type,
             string name,
             System.CodeDom.CodeExpression initExpression
-        ) { }
+        )
+        {
+        }
 
         public System.CodeDom.CodeExpression InitExpression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.CodeTypeReference Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CodeVariableReferenceExpression : System.CodeDom.CodeExpression
     {
-        public CodeVariableReferenceExpression() { }
+        public CodeVariableReferenceExpression()
+        {
+        }
 
-        public CodeVariableReferenceExpression(string variableName) { }
+        public CodeVariableReferenceExpression(string variableName)
+        {
+        }
 
         public string VariableName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -2302,7 +3150,9 @@ namespace System.CodeDom.Compiler
         : System.CodeDom.Compiler.CodeGenerator,
             System.CodeDom.Compiler.ICodeCompiler
     {
-        protected CodeCompiler() { }
+        protected CodeCompiler()
+        {
+        }
 
         protected abstract string CompilerName { get; }
         protected abstract string FileExtension { get; }
@@ -2428,7 +3278,9 @@ namespace System.CodeDom.Compiler
     [System.ComponentModel.ToolboxItemAttribute(false)]
     public abstract partial class CodeDomProvider : System.ComponentModel.Component
     {
-        protected CodeDomProvider() { }
+        protected CodeDomProvider()
+        {
+        }
 
         public virtual string FileExtension
         {
@@ -2520,37 +3372,49 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeCompileUnit compileUnit,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public virtual void GenerateCodeFromExpression(
             System.CodeDom.CodeExpression expression,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public virtual void GenerateCodeFromMember(
             System.CodeDom.CodeTypeMember member,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public virtual void GenerateCodeFromNamespace(
             System.CodeDom.CodeNamespace codeNamespace,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public virtual void GenerateCodeFromStatement(
             System.CodeDom.CodeStatement statement,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public virtual void GenerateCodeFromType(
             System.CodeDom.CodeTypeDeclaration codeType,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         public static System.CodeDom.Compiler.CompilerInfo[] GetAllCompilerInfo()
         {
@@ -2605,7 +3469,9 @@ namespace System.CodeDom.Compiler
 
     public abstract partial class CodeGenerator : System.CodeDom.Compiler.ICodeGenerator
     {
-        protected CodeGenerator() { }
+        protected CodeGenerator()
+        {
+        }
 
         protected System.CodeDom.CodeTypeDeclaration CurrentClass
         {
@@ -2626,7 +3492,9 @@ namespace System.CodeDom.Compiler
         protected int Indent
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected bool IsCurrentClass
         {
@@ -2658,7 +3526,9 @@ namespace System.CodeDom.Compiler
             get { throw null; }
         }
 
-        protected virtual void ContinueOnNewLine(string st) { }
+        protected virtual void ContinueOnNewLine(string st)
+        {
+        }
 
         protected abstract string CreateEscapedIdentifier(string value);
         protected abstract string CreateValidIdentifier(string value);
@@ -2687,7 +3557,9 @@ namespace System.CodeDom.Compiler
 
         protected virtual void GenerateBinaryOperatorExpression(
             System.CodeDom.CodeBinaryOperatorExpression e
-        ) { }
+        )
+        {
+        }
 
         protected abstract void GenerateCastExpression(System.CodeDom.CodeCastExpression e);
 
@@ -2695,21 +3567,33 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeTypeMember member,
             System.IO.TextWriter writer,
             System.CodeDom.Compiler.CodeGeneratorOptions options
-        ) { }
+        )
+        {
+        }
 
         protected abstract void GenerateComment(System.CodeDom.CodeComment e);
 
-        protected virtual void GenerateCommentStatement(System.CodeDom.CodeCommentStatement e) { }
+        protected virtual void GenerateCommentStatement(System.CodeDom.CodeCommentStatement e)
+        {
+        }
 
         protected virtual void GenerateCommentStatements(
             System.CodeDom.CodeCommentStatementCollection e
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void GenerateCompileUnit(System.CodeDom.CodeCompileUnit e) { }
+        protected virtual void GenerateCompileUnit(System.CodeDom.CodeCompileUnit e)
+        {
+        }
 
-        protected virtual void GenerateCompileUnitEnd(System.CodeDom.CodeCompileUnit e) { }
+        protected virtual void GenerateCompileUnitEnd(System.CodeDom.CodeCompileUnit e)
+        {
+        }
 
-        protected virtual void GenerateCompileUnitStart(System.CodeDom.CodeCompileUnit e) { }
+        protected virtual void GenerateCompileUnitStart(System.CodeDom.CodeCompileUnit e)
+        {
+        }
 
         protected abstract void GenerateConditionStatement(System.CodeDom.CodeConditionStatement e);
         protected abstract void GenerateConstructor(
@@ -2717,11 +3601,15 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeTypeDeclaration c
         );
 
-        protected virtual void GenerateDecimalValue(decimal d) { }
+        protected virtual void GenerateDecimalValue(decimal d)
+        {
+        }
 
         protected virtual void GenerateDefaultValueExpression(
             System.CodeDom.CodeDefaultValueExpression e
-        ) { }
+        )
+        {
+        }
 
         protected abstract void GenerateDelegateCreateExpression(
             System.CodeDom.CodeDelegateCreateExpression e
@@ -2730,15 +3618,17 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeDelegateInvokeExpression e
         );
 
-        protected virtual void GenerateDirectionExpression(
-            System.CodeDom.CodeDirectionExpression e
-        ) { }
+        protected virtual void GenerateDirectionExpression(System.CodeDom.CodeDirectionExpression e)
+        {
+        }
 
-        protected virtual void GenerateDirectives(
-            System.CodeDom.CodeDirectiveCollection directives
-        ) { }
+        protected virtual void GenerateDirectives(System.CodeDom.CodeDirectiveCollection directives)
+        {
+        }
 
-        protected virtual void GenerateDoubleValue(double d) { }
+        protected virtual void GenerateDoubleValue(double d)
+        {
+        }
 
         protected abstract void GenerateEntryPointMethod(
             System.CodeDom.CodeEntryPointMethod e,
@@ -2752,7 +3642,9 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeEventReferenceExpression e
         );
 
-        protected void GenerateExpression(System.CodeDom.CodeExpression e) { }
+        protected void GenerateExpression(System.CodeDom.CodeExpression e)
+        {
+        }
 
         protected abstract void GenerateExpressionStatement(
             System.CodeDom.CodeExpressionStatement e
@@ -2781,14 +3673,20 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeMethodReturnStatement e
         );
 
-        protected virtual void GenerateNamespace(System.CodeDom.CodeNamespace e) { }
+        protected virtual void GenerateNamespace(System.CodeDom.CodeNamespace e)
+        {
+        }
 
         protected abstract void GenerateNamespaceEnd(System.CodeDom.CodeNamespace e);
         protected abstract void GenerateNamespaceImport(System.CodeDom.CodeNamespaceImport e);
 
-        protected void GenerateNamespaceImports(System.CodeDom.CodeNamespace e) { }
+        protected void GenerateNamespaceImports(System.CodeDom.CodeNamespace e)
+        {
+        }
 
-        protected void GenerateNamespaces(System.CodeDom.CodeCompileUnit e) { }
+        protected void GenerateNamespaces(System.CodeDom.CodeCompileUnit e)
+        {
+        }
 
         protected abstract void GenerateNamespaceStart(System.CodeDom.CodeNamespace e);
         protected abstract void GenerateObjectCreateExpression(
@@ -2797,11 +3695,13 @@ namespace System.CodeDom.Compiler
 
         protected virtual void GenerateParameterDeclarationExpression(
             System.CodeDom.CodeParameterDeclarationExpression e
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void GeneratePrimitiveExpression(
-            System.CodeDom.CodePrimitiveExpression e
-        ) { }
+        protected virtual void GeneratePrimitiveExpression(System.CodeDom.CodePrimitiveExpression e)
+        {
+        }
 
         protected abstract void GenerateProperty(
             System.CodeDom.CodeMemberProperty e,
@@ -2817,20 +3717,28 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeRemoveEventStatement e
         );
 
-        protected virtual void GenerateSingleFloatValue(float s) { }
+        protected virtual void GenerateSingleFloatValue(float s)
+        {
+        }
 
-        protected virtual void GenerateSnippetCompileUnit(
-            System.CodeDom.CodeSnippetCompileUnit e
-        ) { }
+        protected virtual void GenerateSnippetCompileUnit(System.CodeDom.CodeSnippetCompileUnit e)
+        {
+        }
 
         protected abstract void GenerateSnippetExpression(System.CodeDom.CodeSnippetExpression e);
         protected abstract void GenerateSnippetMember(System.CodeDom.CodeSnippetTypeMember e);
 
-        protected virtual void GenerateSnippetStatement(System.CodeDom.CodeSnippetStatement e) { }
+        protected virtual void GenerateSnippetStatement(System.CodeDom.CodeSnippetStatement e)
+        {
+        }
 
-        protected void GenerateStatement(System.CodeDom.CodeStatement e) { }
+        protected void GenerateStatement(System.CodeDom.CodeStatement e)
+        {
+        }
 
-        protected void GenerateStatements(System.CodeDom.CodeStatementCollection stmts) { }
+        protected void GenerateStatements(System.CodeDom.CodeStatementCollection stmts)
+        {
+        }
 
         protected abstract void GenerateThisReferenceExpression(
             System.CodeDom.CodeThisReferenceExpression e
@@ -2844,13 +3752,19 @@ namespace System.CodeDom.Compiler
         protected abstract void GenerateTypeConstructor(System.CodeDom.CodeTypeConstructor e);
         protected abstract void GenerateTypeEnd(System.CodeDom.CodeTypeDeclaration e);
 
-        protected virtual void GenerateTypeOfExpression(System.CodeDom.CodeTypeOfExpression e) { }
+        protected virtual void GenerateTypeOfExpression(System.CodeDom.CodeTypeOfExpression e)
+        {
+        }
 
         protected virtual void GenerateTypeReferenceExpression(
             System.CodeDom.CodeTypeReferenceExpression e
-        ) { }
+        )
+        {
+        }
 
-        protected void GenerateTypes(System.CodeDom.CodeNamespace e) { }
+        protected void GenerateTypes(System.CodeDom.CodeNamespace e)
+        {
+        }
 
         protected abstract void GenerateTypeStart(System.CodeDom.CodeTypeDeclaration e);
         protected abstract void GenerateVariableDeclarationStatement(
@@ -2867,42 +3781,60 @@ namespace System.CodeDom.Compiler
             throw null;
         }
 
-        protected virtual void OutputAttributeArgument(System.CodeDom.CodeAttributeArgument arg) { }
+        protected virtual void OutputAttributeArgument(System.CodeDom.CodeAttributeArgument arg)
+        {
+        }
 
         protected virtual void OutputAttributeDeclarations(
             System.CodeDom.CodeAttributeDeclarationCollection attributes
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OutputDirection(System.CodeDom.FieldDirection dir) { }
+        protected virtual void OutputDirection(System.CodeDom.FieldDirection dir)
+        {
+        }
 
         protected virtual void OutputExpressionList(
             System.CodeDom.CodeExpressionCollection expressions
-        ) { }
+        )
+        {
+        }
 
         protected virtual void OutputExpressionList(
             System.CodeDom.CodeExpressionCollection expressions,
             bool newlineBetweenItems
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OutputFieldScopeModifier(
-            System.CodeDom.MemberAttributes attributes
-        ) { }
+        protected virtual void OutputFieldScopeModifier(System.CodeDom.MemberAttributes attributes)
+        {
+        }
 
-        protected virtual void OutputIdentifier(string ident) { }
+        protected virtual void OutputIdentifier(string ident)
+        {
+        }
 
         protected virtual void OutputMemberAccessModifier(
             System.CodeDom.MemberAttributes attributes
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OutputMemberScopeModifier(
-            System.CodeDom.MemberAttributes attributes
-        ) { }
+        protected virtual void OutputMemberScopeModifier(System.CodeDom.MemberAttributes attributes)
+        {
+        }
 
-        protected virtual void OutputOperator(System.CodeDom.CodeBinaryOperatorType op) { }
+        protected virtual void OutputOperator(System.CodeDom.CodeBinaryOperatorType op)
+        {
+        }
 
         protected virtual void OutputParameters(
             System.CodeDom.CodeParameterDeclarationExpressionCollection parameters
-        ) { }
+        )
+        {
+        }
 
         protected abstract void OutputType(System.CodeDom.CodeTypeReference typeRef);
 
@@ -2910,12 +3842,16 @@ namespace System.CodeDom.Compiler
             System.Reflection.TypeAttributes attributes,
             bool isStruct,
             bool isEnum
-        ) { }
+        )
+        {
+        }
 
         protected virtual void OutputTypeNamePair(
             System.CodeDom.CodeTypeReference typeRef,
             string name
-        ) { }
+        )
+        {
+        }
 
         protected abstract string QuoteSnippetString(string value);
         protected abstract bool Supports(System.CodeDom.Compiler.GeneratorSupport support);
@@ -2934,31 +3870,41 @@ namespace System.CodeDom.Compiler
             System.CodeDom.CodeCompileUnit e,
             System.IO.TextWriter w,
             System.CodeDom.Compiler.CodeGeneratorOptions o
-        ) { }
+        )
+        {
+        }
 
         void System.CodeDom.Compiler.ICodeGenerator.GenerateCodeFromExpression(
             System.CodeDom.CodeExpression e,
             System.IO.TextWriter w,
             System.CodeDom.Compiler.CodeGeneratorOptions o
-        ) { }
+        )
+        {
+        }
 
         void System.CodeDom.Compiler.ICodeGenerator.GenerateCodeFromNamespace(
             System.CodeDom.CodeNamespace e,
             System.IO.TextWriter w,
             System.CodeDom.Compiler.CodeGeneratorOptions o
-        ) { }
+        )
+        {
+        }
 
         void System.CodeDom.Compiler.ICodeGenerator.GenerateCodeFromStatement(
             System.CodeDom.CodeStatement e,
             System.IO.TextWriter w,
             System.CodeDom.Compiler.CodeGeneratorOptions o
-        ) { }
+        )
+        {
+        }
 
         void System.CodeDom.Compiler.ICodeGenerator.GenerateCodeFromType(
             System.CodeDom.CodeTypeDeclaration e,
             System.IO.TextWriter w,
             System.CodeDom.Compiler.CodeGeneratorOptions o
-        ) { }
+        )
+        {
+        }
 
         string System.CodeDom.Compiler.ICodeGenerator.GetTypeOutput(
             System.CodeDom.CodeTypeReference type
@@ -2979,59 +3925,83 @@ namespace System.CodeDom.Compiler
             throw null;
         }
 
-        void System.CodeDom.Compiler.ICodeGenerator.ValidateIdentifier(string value) { }
+        void System.CodeDom.Compiler.ICodeGenerator.ValidateIdentifier(string value)
+        {
+        }
 
-        protected virtual void ValidateIdentifier(string value) { }
+        protected virtual void ValidateIdentifier(string value)
+        {
+        }
 
-        public static void ValidateIdentifiers(System.CodeDom.CodeObject e) { }
+        public static void ValidateIdentifiers(System.CodeDom.CodeObject e)
+        {
+        }
     }
 
     public partial class CodeGeneratorOptions
     {
-        public CodeGeneratorOptions() { }
+        public CodeGeneratorOptions()
+        {
+        }
 
         public bool BlankLinesBetweenMembers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string BracingStyle
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ElseOnClosing
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string IndentString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object this[string index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool VerbatimOrder
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public abstract partial class CodeParser : System.CodeDom.Compiler.ICodeParser
     {
-        protected CodeParser() { }
+        protected CodeParser()
+        {
+        }
 
         public abstract System.CodeDom.CodeCompileUnit Parse(System.IO.TextReader codeStream);
     }
 
     public partial class CompilerError
     {
-        public CompilerError() { }
+        public CompilerError()
+        {
+        }
 
         public CompilerError(
             string fileName,
@@ -3039,37 +4009,51 @@ namespace System.CodeDom.Compiler
             int column,
             string errorNumber,
             string errorText
-        ) { }
+        )
+        {
+        }
 
         public int Column
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ErrorNumber
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ErrorText
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string FileName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsWarning
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Line
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override string ToString()
@@ -3080,11 +4064,17 @@ namespace System.CodeDom.Compiler
 
     public partial class CompilerErrorCollection : System.Collections.CollectionBase
     {
-        public CompilerErrorCollection() { }
+        public CompilerErrorCollection()
+        {
+        }
 
-        public CompilerErrorCollection(System.CodeDom.Compiler.CompilerErrorCollection value) { }
+        public CompilerErrorCollection(System.CodeDom.Compiler.CompilerErrorCollection value)
+        {
+        }
 
-        public CompilerErrorCollection(System.CodeDom.Compiler.CompilerError[] value) { }
+        public CompilerErrorCollection(System.CodeDom.Compiler.CompilerError[] value)
+        {
+        }
 
         public bool HasErrors
         {
@@ -3097,7 +4087,9 @@ namespace System.CodeDom.Compiler
         public System.CodeDom.Compiler.CompilerError this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.CodeDom.Compiler.CompilerError value)
@@ -3105,30 +4097,42 @@ namespace System.CodeDom.Compiler
             throw null;
         }
 
-        public void AddRange(System.CodeDom.Compiler.CompilerErrorCollection value) { }
+        public void AddRange(System.CodeDom.Compiler.CompilerErrorCollection value)
+        {
+        }
 
-        public void AddRange(System.CodeDom.Compiler.CompilerError[] value) { }
+        public void AddRange(System.CodeDom.Compiler.CompilerError[] value)
+        {
+        }
 
         public bool Contains(System.CodeDom.Compiler.CompilerError value)
         {
             throw null;
         }
 
-        public void CopyTo(System.CodeDom.Compiler.CompilerError[] array, int index) { }
+        public void CopyTo(System.CodeDom.Compiler.CompilerError[] array, int index)
+        {
+        }
 
         public int IndexOf(System.CodeDom.Compiler.CompilerError value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.CodeDom.Compiler.CompilerError value) { }
+        public void Insert(int index, System.CodeDom.Compiler.CompilerError value)
+        {
+        }
 
-        public void Remove(System.CodeDom.Compiler.CompilerError value) { }
+        public void Remove(System.CodeDom.Compiler.CompilerError value)
+        {
+        }
     }
 
     public sealed partial class CompilerInfo
     {
-        internal CompilerInfo() { }
+        internal CompilerInfo()
+        {
+        }
 
         public System.Type CodeDomProviderType
         {
@@ -3179,27 +4183,39 @@ namespace System.CodeDom.Compiler
 
     public partial class CompilerParameters
     {
-        public CompilerParameters() { }
+        public CompilerParameters()
+        {
+        }
 
-        public CompilerParameters(string[] assemblyNames) { }
+        public CompilerParameters(string[] assemblyNames)
+        {
+        }
 
-        public CompilerParameters(string[] assemblyNames, string outputName) { }
+        public CompilerParameters(string[] assemblyNames, string outputName)
+        {
+        }
 
         public CompilerParameters(
             string[] assemblyNames,
             string outputName,
             bool includeDebugInformation
-        ) { }
+        )
+        {
+        }
 
         public string CompilerOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string CoreAssemblyFileName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Specialized.StringCollection EmbeddedResources
         {
@@ -3208,17 +4224,23 @@ namespace System.CodeDom.Compiler
         public bool GenerateExecutable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool GenerateInMemory
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IncludeDebugInformation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Specialized.StringCollection LinkedResources
         {
@@ -3227,12 +4249,16 @@ namespace System.CodeDom.Compiler
         public string MainClass
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string OutputAssembly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Specialized.StringCollection ReferencedAssemblies
         {
@@ -3241,38 +4267,52 @@ namespace System.CodeDom.Compiler
         public System.CodeDom.Compiler.TempFileCollection TempFiles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TreatWarningsAsErrors
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IntPtr UserToken
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int WarningLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Win32Resource
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CompilerResults
     {
-        public CompilerResults(System.CodeDom.Compiler.TempFileCollection tempFiles) { }
+        public CompilerResults(System.CodeDom.Compiler.TempFileCollection tempFiles)
+        {
+        }
 
         public System.Reflection.Assembly CompiledAssembly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.Compiler.CompilerErrorCollection Errors
         {
@@ -3281,7 +4321,9 @@ namespace System.CodeDom.Compiler
         public int NativeCompilerReturnValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Specialized.StringCollection Output
         {
@@ -3290,12 +4332,16 @@ namespace System.CodeDom.Compiler
         public string PathToAssembly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.CodeDom.Compiler.TempFileCollection TempFiles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -3304,7 +4350,9 @@ namespace System.CodeDom.Compiler
         public static void ExecWait(
             string cmd,
             System.CodeDom.Compiler.TempFileCollection tempFiles
-        ) { }
+        )
+        {
+        }
 
         public static int ExecWaitWithCapture(
             System.IntPtr userToken,
@@ -3462,11 +4510,17 @@ namespace System.CodeDom.Compiler
             System.Collections.IEnumerable,
             System.IDisposable
     {
-        public TempFileCollection() { }
+        public TempFileCollection()
+        {
+        }
 
-        public TempFileCollection(string tempDir) { }
+        public TempFileCollection(string tempDir)
+        {
+        }
 
-        public TempFileCollection(string tempDir, bool keepFiles) { }
+        public TempFileCollection(string tempDir, bool keepFiles)
+        {
+        }
 
         public string BasePath
         {
@@ -3479,7 +4533,9 @@ namespace System.CodeDom.Compiler
         public bool KeepFiles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         int System.Collections.ICollection.Count
         {
@@ -3508,28 +4564,42 @@ namespace System.CodeDom.Compiler
             throw null;
         }
 
-        public void AddFile(string fileName, bool keepFile) { }
+        public void AddFile(string fileName, bool keepFile)
+        {
+        }
 
-        public void CopyTo(string[] fileNames, int start) { }
+        public void CopyTo(string[] fileNames, int start)
+        {
+        }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~TempFileCollection() { }
+        ~TempFileCollection()
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int start) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int start)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 }

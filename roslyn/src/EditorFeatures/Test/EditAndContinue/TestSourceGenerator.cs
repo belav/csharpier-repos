@@ -18,8 +18,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         public void Execute(GeneratorExecutionContext context) =>
             (ExecuteImpl ?? throw new NotImplementedException()).Invoke(context);
 
-        public void Initialize(GeneratorInitializationContext context) { }
+        public void Initialize(GeneratorInitializationContext context)
+        {
+        }
 
-        public override void Initialize(AnalysisContext context) { }
+        public override void Initialize(AnalysisContext context)
+        {
+        }
     }
 }

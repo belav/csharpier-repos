@@ -1214,7 +1214,9 @@ public class RelationalCommandTest
             RelationalCommandBuilderDependencies dependencies,
             string commandText,
             IReadOnlyList<IRelationalParameter> parameters
-        ) : base(dependencies, commandText, parameters) { }
+        ) : base(dependencies, commandText, parameters)
+        {
+        }
 
         protected override RelationalDataReader CreateRelationalDataReader() =>
             new ThrowingRelationalReader();
@@ -1841,9 +1843,13 @@ public class RelationalCommandTest
             DetailedErrorsEnabled = detailedErrorsEnabled;
         }
 
-        public void Initialize(IDbContextOptions options) { }
+        public void Initialize(IDbContextOptions options)
+        {
+        }
 
-        public void Validate(IDbContextOptions options) { }
+        public void Validate(IDbContextOptions options)
+        {
+        }
 
         public bool IsSensitiveDataLoggingEnabled { get; }
         public bool IsSensitiveDataLoggingWarned { get; set; }

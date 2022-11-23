@@ -4157,7 +4157,9 @@ public class ConventionDispatcherTest
         public virtual ICollection<Product> Products { get; set; }
     }
 
-    private class SpecialOrder : Order { }
+    private class SpecialOrder : Order
+    {
+    }
 
     private class OrderDetails
     {

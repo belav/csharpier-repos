@@ -24,7 +24,8 @@ namespace System.Linq.Parallel
         //
 
         internal NullableDecimalSumAggregationOperator(IEnumerable<decimal?> child) : base(child)
-        { }
+        {
+        }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the

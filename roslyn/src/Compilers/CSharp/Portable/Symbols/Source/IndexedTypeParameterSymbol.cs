@@ -191,7 +191,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
-        internal override void EnsureAllConstraintsAreResolved() { }
+        internal override void EnsureAllConstraintsAreResolved()
+        {
+        }
 
         internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
             ConsList<TypeParameterSymbol> inProgress

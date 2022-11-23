@@ -16,7 +16,9 @@ namespace System.Diagnostics
     {
         // not creatable...
         //
-        private Trace() { }
+        private Trace()
+        {
+        }
 
         private static CorrelationManager? s_correlationManager;
 

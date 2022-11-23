@@ -22,5 +22,7 @@ using System;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public sealed class DkmContinueCorruptingExceptionAttribute : Attribute
 {
-    public DkmContinueCorruptingExceptionAttribute() { }
+    public DkmContinueCorruptingExceptionAttribute()
+    {
+    }
 }

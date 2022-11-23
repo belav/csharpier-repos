@@ -62,7 +62,9 @@ namespace Microsoft.Extensions.Logging.EventLog
                         );
                     }
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
     }

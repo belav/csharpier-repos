@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
 {
     internal interface ILSPServiceRequestExecutionQueue
         : IRequestExecutionQueue<RequestContext>,
-            ILspService { }
+            ILspService
+    {
+    }
 
     [
         ExportLspServiceFactory(

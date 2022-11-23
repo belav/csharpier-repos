@@ -798,7 +798,9 @@ public class SqlServerDatabaseCreatorTest
     private class TestSqlServerExecutionStrategyFactory : SqlServerExecutionStrategyFactory
     {
         public TestSqlServerExecutionStrategyFactory(ExecutionStrategyDependencies dependencies)
-            : base(dependencies) { }
+            : base(dependencies)
+        {
+        }
 
         protected override IExecutionStrategy CreateDefaultStrategy(
             ExecutionStrategyDependencies dependencies
@@ -816,7 +818,9 @@ public class SqlServerDatabaseCreatorTest
     {
         private readonly string _connectionString;
 
-        public BloggingContext(SqlServerTestStore testStore) : this(testStore.ConnectionString) { }
+        public BloggingContext(SqlServerTestStore testStore) : this(testStore.ConnectionString)
+        {
+        }
 
         public BloggingContext(string connectionString)
         {
@@ -862,7 +866,9 @@ public class SqlServerDatabaseCreatorTest
             RelationalDatabaseCreatorDependencies dependencies,
             ISqlServerConnection connection,
             IRawSqlCommandBuilder rawSqlCommandBuilder
-        ) : base(dependencies, connection, rawSqlCommandBuilder) { }
+        ) : base(dependencies, connection, rawSqlCommandBuilder)
+        {
+        }
 
         public bool HasTablesBase() => HasTables();
 

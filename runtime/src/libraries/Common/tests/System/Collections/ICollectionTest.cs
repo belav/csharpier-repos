@@ -82,7 +82,9 @@ namespace Tests.Collections
         public void SyncRootCanBeLocked()
         {
             ICollection collection = GetCollection(GenerateItems(16));
-            lock (collection.SyncRoot) { }
+            lock (collection.SyncRoot)
+            {
+            }
         }
 
         [Fact]
@@ -281,8 +283,12 @@ namespace Tests.Collections
             Assert.All(items, item => Assert.True(collection.Contains((T)item)));
         }
 
-        internal class MyInvalidReferenceType { }
+        internal class MyInvalidReferenceType
+        {
+        }
 
-        internal struct MyInvalidValueType { }
+        internal struct MyInvalidValueType
+        {
+        }
     }
 }

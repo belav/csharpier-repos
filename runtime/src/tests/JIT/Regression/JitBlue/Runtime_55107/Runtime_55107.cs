@@ -8,7 +8,9 @@ namespace Runtime_55107
 {
     class Program
     {
-        class G { }
+        class G
+        {
+        }
 
         static int Main(string[] args)
         {

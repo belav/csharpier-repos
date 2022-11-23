@@ -128,9 +128,13 @@ namespace System.ComponentModel.Tests
 
         private class SubDescriptionAttribute : DescriptionAttribute
         {
-            public SubDescriptionAttribute() : base() { }
+            public SubDescriptionAttribute() : base()
+            {
+            }
 
-            public SubDescriptionAttribute(string description) : base(description) { }
+            public SubDescriptionAttribute(string description) : base(description)
+            {
+            }
 
             public new string DescriptionValue
             {
@@ -141,9 +145,13 @@ namespace System.ComponentModel.Tests
 
         private class AlwaysEqualAttribute : DescriptionAttribute
         {
-            public AlwaysEqualAttribute() : base() { }
+            public AlwaysEqualAttribute() : base()
+            {
+            }
 
-            public AlwaysEqualAttribute(string description) : base(description) { }
+            public AlwaysEqualAttribute(string description) : base(description)
+            {
+            }
 
             public override bool Equals(object obj) => true;
 

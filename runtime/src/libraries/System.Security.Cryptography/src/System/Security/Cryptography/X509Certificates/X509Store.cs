@@ -14,13 +14,21 @@ namespace System.Security.Cryptography.X509Certificates
 
         private IStorePal? _storePal;
 
-        public X509Store() : this("MY", StoreLocation.CurrentUser) { }
+        public X509Store() : this("MY", StoreLocation.CurrentUser)
+        {
+        }
 
-        public X509Store(string storeName) : this(storeName, StoreLocation.CurrentUser) { }
+        public X509Store(string storeName) : this(storeName, StoreLocation.CurrentUser)
+        {
+        }
 
-        public X509Store(StoreName storeName) : this(storeName, StoreLocation.CurrentUser) { }
+        public X509Store(StoreName storeName) : this(storeName, StoreLocation.CurrentUser)
+        {
+        }
 
-        public X509Store(StoreLocation storeLocation) : this("MY", storeLocation) { }
+        public X509Store(StoreLocation storeLocation) : this("MY", storeLocation)
+        {
+        }
 
         public X509Store(StoreName storeName, StoreLocation storeLocation)
         {

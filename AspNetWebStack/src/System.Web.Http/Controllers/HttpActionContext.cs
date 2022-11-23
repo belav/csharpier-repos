@@ -41,7 +41,9 @@ namespace System.Web.Http.Controllers
         /// Initializes a new instance of the <see cref="HttpActionContext"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public HttpActionContext() { }
+        public HttpActionContext()
+        {
+        }
 
         public HttpControllerContext ControllerContext
         {

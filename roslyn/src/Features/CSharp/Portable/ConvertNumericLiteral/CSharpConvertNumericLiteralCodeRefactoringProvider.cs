@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNumericLiteral
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpConvertNumericLiteralCodeRefactoringProvider() { }
+        public CSharpConvertNumericLiteralCodeRefactoringProvider()
+        {
+        }
 
         protected override (string hexPrefix, string binaryPrefix) GetNumericLiteralPrefixes() =>
             (hexPrefix: "0x", binaryPrefix: "0b");

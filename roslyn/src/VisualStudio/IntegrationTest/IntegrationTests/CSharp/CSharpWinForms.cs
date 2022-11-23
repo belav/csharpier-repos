@@ -27,7 +27,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
                 instanceFactory,
                 nameof(CSharpWinForms),
                 WellKnownProjectTemplates.WinFormsApplication
-            ) { }
+            )
+        {
+        }
 
         [WpfFact]
         public void AddControl()

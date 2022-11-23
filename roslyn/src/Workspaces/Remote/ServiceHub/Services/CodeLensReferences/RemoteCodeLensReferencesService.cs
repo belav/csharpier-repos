@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteCodeLensReferencesService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         private static async ValueTask<SyntaxNode?> TryFindNodeAsync(
             Solution solution,

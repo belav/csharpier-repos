@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnreachableCodeCodeFixProvider() { }
+        public CSharpRemoveUnreachableCodeCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnreachableCodeDiagnosticId);

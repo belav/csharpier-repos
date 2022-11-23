@@ -238,7 +238,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             RefKind refKind,
             DeclarationScope scope,
             string name
-        ) : base(container, type, ordinal, refKind, scope, name) { }
+        ) : base(container, type, ordinal, refKind, scope, name)
+        {
+        }
 
         internal sealed override bool IsMetadataIn => RefKind == RefKind.In;
 

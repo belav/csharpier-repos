@@ -5,7 +5,9 @@
 
 using System;
 
-interface IFoo { }
+interface IFoo
+{
+}
 
 interface IGenericBase<T>
 {
@@ -14,7 +16,9 @@ interface IGenericBase<T>
 
 abstract class GenericBase<T> : IGenericBase<T>
 {
-    public virtual void M<U>() where U : IGenericBase<T> { }
+    public virtual void M<U>() where U : IGenericBase<T>
+    {
+    }
 }
 
 class Derived : GenericBase<IFoo>, IGenericBase<IFoo>

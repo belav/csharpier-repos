@@ -1738,7 +1738,9 @@ namespace System.Xml.Serialization
             {
                 return _aliasBase + (++_tempNamespacePrefix);
             }
-            while (_usedPrefixes.Contains(++_tempNamespacePrefix)) { }
+            while (_usedPrefixes.Contains(++_tempNamespacePrefix))
+            {
+            }
             return _aliasBase + _tempNamespacePrefix;
         }
 
@@ -2704,7 +2706,9 @@ namespace System.Xml.Serialization
             TypeScope[] scopes,
             string access,
             string className
-        ) : base(writer, scopes, access, className) { }
+        ) : base(writer, scopes, access, className)
+        {
+        }
 
         [RequiresUnreferencedCode("calls WriteStructMethod")]
         internal void GenerateBegin()

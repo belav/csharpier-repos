@@ -17,7 +17,9 @@ namespace System.Web.Razor.Text
         }
 
         public LocationTagged(T value, int offset, int line, int col)
-            : this(value, new SourceLocation(offset, line, col)) { }
+            : this(value, new SourceLocation(offset, line, col))
+        {
+        }
 
         public LocationTagged(T value, SourceLocation location)
         {

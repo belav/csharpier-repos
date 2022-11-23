@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         private static readonly TypeSyntax VarNameIdentifier = SyntaxFactory.IdentifierName("var");
 
         public DefaultConverter(ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo)
-            : base(forEachInfo) { }
+            : base(forEachInfo)
+        {
+        }
 
         public override void Convert(
             SyntaxEditor editor,

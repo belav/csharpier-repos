@@ -396,9 +396,13 @@ namespace System.Composition.Hosting.Tests
             Assert.Equal(0, container.GetExport<IRepository<int>>().Fetch());
         }
 
-        public interface IContainer { }
+        public interface IContainer
+        {
+        }
 
-        public class Container : IContainer { }
+        public class Container : IContainer
+        {
+        }
 
         public interface IRepository<T>
         {
@@ -407,7 +411,9 @@ namespace System.Composition.Hosting.Tests
 
         public class EFRepository<T> : IRepository<T>
         {
-            public EFRepository(IContainer test) { }
+            public EFRepository(IContainer test)
+            {
+            }
 
             public T Fetch() => default(T);
         }
@@ -434,14 +440,18 @@ namespace System.Composition.Hosting.Tests
             Assert.IsAssignableFrom<Imported>(export.Imported);
         }
 
-        public class Imported { }
+        public class Imported
+        {
+        }
 
         public class BaseWithImport
         {
             public virtual Imported Imported { get; set; }
         }
 
-        public class DerivedFromBaseWithImport : BaseWithImport { }
+        public class DerivedFromBaseWithImport : BaseWithImport
+        {
+        }
 
         [Fact]
         public void CreateContainer_ExportConventionsWithInheritedProperties_Success()
@@ -464,7 +474,9 @@ namespace System.Composition.Hosting.Tests
             }
         }
 
-        public class DerivedFromBaseWithExport : BaseWithExport { }
+        public class DerivedFromBaseWithExport : BaseWithExport
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -489,7 +501,9 @@ namespace System.Composition.Hosting.Tests
             public virtual string Exported => "A";
         }
 
-        public class DerivedFromBaseWithExport2 : BaseWithExport { }
+        public class DerivedFromBaseWithExport2 : BaseWithExport
+        {
+        }
 
         [Fact]
         public void CreateContainer_HasConventions_ClassExportsAreNotInherited()
@@ -518,9 +532,13 @@ namespace System.Composition.Hosting.Tests
             public string Property { get; set; }
         }
 
-        public class DerivedFromBaseWithDeclaredExports : BaseWithDeclaredExports { }
+        public class DerivedFromBaseWithDeclaredExports : BaseWithDeclaredExports
+        {
+        }
 
-        public class CustomExport : ExportAttribute { }
+        public class CustomExport : ExportAttribute
+        {
+        }
 
         [Fact]
         public void CreateContainer_HasConventions_CustomAttributesAreNotInherited()
@@ -532,9 +550,13 @@ namespace System.Composition.Hosting.Tests
         }
 
         [CustomExport]
-        public class BaseWithCustomExport { }
+        public class BaseWithCustomExport
+        {
+        }
 
-        public class DerivedFromBaseWithCustomExport : BaseWithCustomExport { }
+        public class DerivedFromBaseWithCustomExport : BaseWithCustomExport
+        {
+        }
 
         [Fact]
         public void CreateContainer_OpenGenericTypePart_Success()
@@ -566,10 +588,14 @@ namespace System.Composition.Hosting.Tests
         }
 
         [Export(typeof(GenericExportedType<>))]
-        public class IncompatibleGenericExportedType<T> { }
+        public class IncompatibleGenericExportedType<T>
+        {
+        }
 
         [Export(typeof(GenericExportedType<>))]
-        public class IncompatibleGenericExportedTypeDerived<T> : GenericExportedType<int> { }
+        public class IncompatibleGenericExportedTypeDerived<T> : GenericExportedType<int>
+        {
+        }
 
         [Theory]
         [InlineData(typeof(NonGenericExportedType<>))]
@@ -583,7 +609,9 @@ namespace System.Composition.Hosting.Tests
         }
 
         [Export(typeof(string))]
-        public class NonGenericExportedType<T> { }
+        public class NonGenericExportedType<T>
+        {
+        }
 
         [Fact]
         public void CreateContainer_UnassignableType_ThrowsCompositionFailedException()
@@ -595,7 +623,9 @@ namespace System.Composition.Hosting.Tests
         }
 
         [Export(typeof(Derived))]
-        public class ContractExportedType { }
+        public class ContractExportedType
+        {
+        }
 
         [Fact]
         public void CreateContainer_AbstractOrStructType_Success()
@@ -610,9 +640,13 @@ namespace System.Composition.Hosting.Tests
             Assert.Throws<CompositionFailedException>(() => container.GetExport<StructType>());
         }
 
-        public abstract class AbstractClass { }
+        public abstract class AbstractClass
+        {
+        }
 
-        public struct StructType { }
+        public struct StructType
+        {
+        }
 
         [Fact]
         public void CreateContainer_MetadataProperty_Success()
@@ -669,7 +703,9 @@ namespace System.Composition.Hosting.Tests
         }
 
         [CustomMetadataExport]
-        public class MetadataClass { }
+        public class MetadataClass
+        {
+        }
 
         [Fact]
         public void CreateContainer_ExportIncompatibleNonGenericProperty_ThrowsCompositionFailedException()
@@ -779,7 +815,9 @@ namespace System.Composition.Hosting.Tests
             }
         }
 
-        public interface IOpen<T> { }
+        public interface IOpen<T>
+        {
+        }
 
         public class MoreOpenWithDependency<T> : IOpen<T>
         {
@@ -791,6 +829,8 @@ namespace System.Composition.Hosting.Tests
             }
         }
 
-        public class Dependency { }
+        public class Dependency
+        {
+        }
     }
 }

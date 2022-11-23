@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         new CSharpResultProvider()
                     )
                 )
-            ) { }
+            )
+        {
+        }
 
         [Fact]
         public void Root()

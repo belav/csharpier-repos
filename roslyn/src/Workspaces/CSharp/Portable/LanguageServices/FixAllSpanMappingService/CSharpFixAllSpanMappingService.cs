@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixesAndRefactorings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFixAllSpanMappingService() { }
+        public CSharpFixAllSpanMappingService()
+        {
+        }
 
         protected override async Task<
             ImmutableDictionary<Document, ImmutableArray<TextSpan>>

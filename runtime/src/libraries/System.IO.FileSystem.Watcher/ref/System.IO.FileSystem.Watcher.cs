@@ -8,7 +8,9 @@ namespace System.IO
 {
     public partial class ErrorEventArgs : System.EventArgs
     {
-        public ErrorEventArgs(System.Exception exception) { }
+        public ErrorEventArgs(System.Exception exception)
+        {
+        }
 
         public virtual System.Exception GetException()
         {
@@ -24,7 +26,9 @@ namespace System.IO
             System.IO.WatcherChangeTypes changeType,
             string directory,
             string? name
-        ) { }
+        )
+        {
+        }
 
         public System.IO.WatcherChangeTypes ChangeType
         {
@@ -46,21 +50,31 @@ namespace System.IO
         : System.ComponentModel.Component,
             System.ComponentModel.ISupportInitialize
     {
-        public FileSystemWatcher() { }
+        public FileSystemWatcher()
+        {
+        }
 
-        public FileSystemWatcher(string path) { }
+        public FileSystemWatcher(string path)
+        {
+        }
 
-        public FileSystemWatcher(string path, string filter) { }
+        public FileSystemWatcher(string path, string filter)
+        {
+        }
 
         public bool EnableRaisingEvents
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Filter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ObjectModel.Collection<string> Filters
         {
@@ -69,17 +83,23 @@ namespace System.IO
         public bool IncludeSubdirectories
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int InternalBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.NotifyFilters NotifyFilter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorAttribute(
@@ -89,59 +109,101 @@ namespace System.IO
         public string Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.ComponentModel.ISite? Site
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.ComponentModel.ISynchronizeInvoke? SynchronizingObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.IO.FileSystemEventHandler? Changed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.IO.FileSystemEventHandler? Created
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.IO.FileSystemEventHandler? Deleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.IO.ErrorEventHandler? Error
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.IO.RenamedEventHandler? Renamed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void BeginInit() { }
+        public void BeginInit()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public void EndInit() { }
+        public void EndInit()
+        {
+        }
 
-        protected void OnChanged(System.IO.FileSystemEventArgs e) { }
+        protected void OnChanged(System.IO.FileSystemEventArgs e)
+        {
+        }
 
-        protected void OnCreated(System.IO.FileSystemEventArgs e) { }
+        protected void OnCreated(System.IO.FileSystemEventArgs e)
+        {
+        }
 
-        protected void OnDeleted(System.IO.FileSystemEventArgs e) { }
+        protected void OnDeleted(System.IO.FileSystemEventArgs e)
+        {
+        }
 
-        protected void OnError(System.IO.ErrorEventArgs e) { }
+        protected void OnError(System.IO.ErrorEventArgs e)
+        {
+        }
 
-        protected void OnRenamed(System.IO.RenamedEventArgs e) { }
+        protected void OnRenamed(System.IO.RenamedEventArgs e)
+        {
+        }
 
         public System.IO.WaitForChangedResult WaitForChanged(
             System.IO.WatcherChangeTypes changeType
@@ -169,16 +231,24 @@ namespace System.IO
 
     public partial class InternalBufferOverflowException : System.SystemException
     {
-        public InternalBufferOverflowException() { }
+        public InternalBufferOverflowException()
+        {
+        }
 
         protected InternalBufferOverflowException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InternalBufferOverflowException(string? message) { }
+        public InternalBufferOverflowException(string? message)
+        {
+        }
 
-        public InternalBufferOverflowException(string? message, System.Exception? inner) { }
+        public InternalBufferOverflowException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -201,7 +271,9 @@ namespace System.IO
             string directory,
             string? name,
             string? oldName
-        ) : base(default(System.IO.WatcherChangeTypes), default(string), default(string)) { }
+        ) : base(default(System.IO.WatcherChangeTypes), default(string), default(string))
+        {
+        }
 
         public string OldFullPath
         {
@@ -222,22 +294,30 @@ namespace System.IO
         public System.IO.WatcherChangeTypes ChangeType
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Name
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? OldName
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TimedOut
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 

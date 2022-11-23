@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Remote
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
                 new SolutionAssetStorageProvider(_storage);

@@ -120,7 +120,9 @@ namespace System.Net.Sockets
         /// differ based on operating system, such as <see cref="Socket.ProtocolType"/> and <see cref="Socket.Blocking"/>.
         /// </remarks>
         public Socket(SafeSocketHandle handle)
-            : this(ValidateHandle(handle), loadPropertiesFromHandle: true) { }
+            : this(ValidateHandle(handle), loadPropertiesFromHandle: true)
+        {
+        }
 
         private unsafe Socket(SafeSocketHandle handle, bool loadPropertiesFromHandle)
         {
@@ -276,7 +278,9 @@ namespace System.Net.Sockets
                                     break;
                             }
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
             }
@@ -427,7 +431,9 @@ namespace System.Net.Sockets
                     {
                         _remoteEndPoint = _rightEndPoint.Create(socketAddress);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 return _remoteEndPoint;
@@ -489,7 +495,9 @@ namespace System.Net.Sockets
         public bool UseOnlyOverlappedIO
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
 
         // Gets the connection state of the Socket. This property will return the latest
@@ -1845,7 +1853,9 @@ namespace System.Net.Sockets
                 {
                     remoteEP = endPointSnapshot.Create(receiveAddress);
                 }
-                catch { }
+                catch
+                {
+                }
                 // Save a copy of the EndPoint so we can use it for Create().
                 _rightEndPoint ??= endPointSnapshot;
             }
@@ -1956,7 +1966,9 @@ namespace System.Net.Sockets
                 {
                     remoteEP = endPointSnapshot.Create(receiveAddress);
                 }
-                catch { }
+                catch
+                {
+                }
                 // Save a copy of the EndPoint so we can use it for Create().
                 _rightEndPoint ??= endPointSnapshot;
             }
@@ -2035,7 +2047,9 @@ namespace System.Net.Sockets
                 {
                     remoteEP = endPointSnapshot.Create(socketAddress);
                 }
-                catch { }
+                catch
+                {
+                }
                 // Save a copy of the EndPoint so we can use it for Create().
                 _rightEndPoint ??= endPointSnapshot;
             }
@@ -2163,7 +2177,9 @@ namespace System.Net.Sockets
                 {
                     remoteEP = endPointSnapshot.Create(socketAddress);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 // Save a copy of the EndPoint so we can use it for Create().
                 _rightEndPoint ??= endPointSnapshot;
@@ -3924,7 +3940,9 @@ namespace System.Net.Sockets
                 {
                     NetEventSource.Info(this, $"disposing:{disposing} Disposed:{Disposed}");
                 }
-                catch (Exception exception) when (!ExceptionCheck.IsFatal(exception)) { }
+                catch (Exception exception) when (!ExceptionCheck.IsFatal(exception))
+                {
+                }
             }
 
             // Make sure we're the first call to Dispose
@@ -4069,7 +4087,9 @@ namespace System.Net.Sockets
                             }
                         }
                     }
-                    catch (ObjectDisposedException) { }
+                    catch (ObjectDisposedException)
+                    {
+                    }
                 }
                 else
                 {
@@ -4091,7 +4111,9 @@ namespace System.Net.Sockets
                     {
                         File.Delete(unixEndPoint.BoundFileName);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
 
@@ -4124,7 +4146,9 @@ namespace System.Net.Sockets
             {
                 SocketPal.Shutdown(_handle, _isConnected, _isDisconnected, how);
             }
-            catch (ObjectDisposedException) { }
+            catch (ObjectDisposedException)
+            {
+            }
         }
 
         // Set the socket option to begin receiving packet information if it has not been

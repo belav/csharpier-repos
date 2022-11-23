@@ -10,10 +10,14 @@ namespace System.Web.Mvc
     public class WebFormView : BuildManagerCompiledView
     {
         public WebFormView(ControllerContext controllerContext, string viewPath)
-            : this(controllerContext, viewPath, null, null) { }
+            : this(controllerContext, viewPath, null, null)
+        {
+        }
 
         public WebFormView(ControllerContext controllerContext, string viewPath, string masterPath)
-            : this(controllerContext, viewPath, masterPath, null) { }
+            : this(controllerContext, viewPath, masterPath, null)
+        {
+        }
 
         public WebFormView(
             ControllerContext controllerContext,

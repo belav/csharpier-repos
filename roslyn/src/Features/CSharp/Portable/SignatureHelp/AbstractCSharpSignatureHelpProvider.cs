@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
             );
 
-        protected AbstractCSharpSignatureHelpProvider() { }
+        protected AbstractCSharpSignatureHelpProvider()
+        {
+        }
 
         protected static SymbolDisplayPart Keyword(SyntaxKind kind) =>
             new SymbolDisplayPart(SymbolDisplayPartKind.Keyword, null, SyntaxFacts.GetText(kind));

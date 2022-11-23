@@ -38,7 +38,9 @@ public abstract class ValueConverter
         LambdaExpression convertToProviderExpression,
         LambdaExpression convertFromProviderExpression,
         ConverterMappingHints? mappingHints = null
-    ) : this(convertToProviderExpression, convertFromProviderExpression, false, mappingHints) { }
+    ) : this(convertToProviderExpression, convertFromProviderExpression, false, mappingHints)
+    {
+    }
 
     /// <summary>
     ///     <para>

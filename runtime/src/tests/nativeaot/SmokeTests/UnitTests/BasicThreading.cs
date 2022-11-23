@@ -333,7 +333,8 @@ class ThreadTest
 
     private static void TestJoinMethod()
     {
-        var t = new Thread(() => { });
+        var t = new Thread(() => {
+        });
         ExpectException<InvalidOperationException>(
             () => t.Start(null),
             "Expected InvalidOperationException for t.Start()"
@@ -367,7 +368,8 @@ class ThreadTest
 
     private static void TestNameProperty()
     {
-        var t = new Thread(() => { });
+        var t = new Thread(() => {
+        });
 
         t.Name = null;
         // It is OK to set the null Name multiple times
@@ -636,7 +638,8 @@ class ThreadTest
         static Thread s_stoppedResurrected;
 
         bool _unstarted;
-        Thread _thread = new Thread(() => { });
+        Thread _thread = new Thread(() => {
+        });
 
         Resurrector(bool unstarted)
         {

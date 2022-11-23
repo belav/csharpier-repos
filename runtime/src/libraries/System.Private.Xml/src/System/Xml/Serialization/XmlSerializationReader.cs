@@ -2189,7 +2189,9 @@ namespace System.Xml.Serialization
             return childNodes;
         }
 
-        protected void CheckReaderCount(ref int whileIterations, ref int readerCount) { }
+        protected void CheckReaderCount(ref int whileIterations, ref int readerCount)
+        {
+        }
 
         ///<internalonly/>
         protected class Fixup
@@ -2199,7 +2201,9 @@ namespace System.Xml.Serialization
             private readonly string?[]? _ids;
 
             public Fixup(object? o, XmlSerializationFixupCallback callback, int count)
-                : this(o, callback, new string[count]) { }
+                : this(o, callback, new string[count])
+            {
+            }
 
             public Fixup(object? o, XmlSerializationFixupCallback callback, string?[]? ids)
             {
@@ -2326,7 +2330,9 @@ namespace System.Xml.Serialization
                 string arrayName,
                 int i,
                 MemberMapping mapping
-            ) : this(outerClass, source, null, arrayName, i, mapping, false, null) { }
+            ) : this(outerClass, source, null, arrayName, i, mapping, false, null)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
@@ -2335,7 +2341,9 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping,
                 string? choiceSource
-            ) : this(outerClass, source, null, arrayName, i, mapping, false, choiceSource) { }
+            ) : this(outerClass, source, null, arrayName, i, mapping, false, choiceSource)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
@@ -2344,7 +2352,9 @@ namespace System.Xml.Serialization
                 string arrayName,
                 int i,
                 MemberMapping mapping
-            ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, null) { }
+            ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, null)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
@@ -2355,7 +2365,8 @@ namespace System.Xml.Serialization
                 MemberMapping mapping,
                 string? choiceSource
             ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, choiceSource)
-            { }
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
@@ -2364,7 +2375,9 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping,
                 bool multiRef
-            ) : this(outerClass, source, null, arrayName, i, mapping, multiRef, null) { }
+            ) : this(outerClass, source, null, arrayName, i, mapping, multiRef, null)
+            {
+            }
 
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
@@ -2519,7 +2532,9 @@ namespace System.Xml.Serialization
             TypeScope[] scopes,
             string access,
             string className
-        ) : base(writer, scopes, access, className) { }
+        ) : base(writer, scopes, access, className)
+        {
+        }
 
         [RequiresUnreferencedCode("calls WriteReflectionInit")]
         internal void GenerateBegin()

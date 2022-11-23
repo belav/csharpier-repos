@@ -16,7 +16,9 @@ namespace System.Net.Http
         // Apps and libraries will use this key so it shouldn't change.
         private const string RequestMessagePropertyName = "__ResponseTrailers";
 
-        private sealed class HttpResponseTrailers : HttpHeaders { }
+        private sealed class HttpResponseTrailers : HttpHeaders
+        {
+        }
 #endif
 
         private static Lazy<bool> s_trailersSupported = new Lazy<bool>(GetTrailersSupported);

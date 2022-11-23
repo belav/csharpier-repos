@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Attribute constructor used to specify the attached class is a source generator that provides CSharp sources.
         /// </summary>
-        public GeneratorAttribute() : this(LanguageNames.CSharp) { }
+        public GeneratorAttribute() : this(LanguageNames.CSharp)
+        {
+        }
 
         /// <summary>
         /// Attribute constructor used to specify the attached class is a source generator and indicate which language(s) it supports.

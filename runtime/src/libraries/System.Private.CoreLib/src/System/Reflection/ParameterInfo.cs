@@ -8,7 +8,9 @@ namespace System.Reflection
 {
     public class ParameterInfo : ICustomAttributeProvider, IObjectReference
     {
-        protected ParameterInfo() { }
+        protected ParameterInfo()
+        {
+        }
 
         public virtual ParameterAttributes Attributes => AttrsImpl;
         public virtual MemberInfo Member => MemberImpl;

@@ -111,7 +111,9 @@ namespace System.MemoryTests
 
         internal class OtherMemoryForTest<T> : MemoryManager<T>
         {
-            public OtherMemoryForTest() { }
+            public OtherMemoryForTest()
+            {
+            }
 
             public override Span<T> GetSpan() => throw new NotImplementedException();
 

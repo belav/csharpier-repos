@@ -8,7 +8,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal InternalPrimitiveTypeE _primitiveTypeEnum;
         internal object? _value;
 
-        internal MemberPrimitiveTyped() { }
+        internal MemberPrimitiveTyped()
+        {
+        }
 
         internal void Set(InternalPrimitiveTypeE primitiveTypeEnum, object? value)
         {

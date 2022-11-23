@@ -70,7 +70,9 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override long Seek(long offset, SeekOrigin origin)
         {

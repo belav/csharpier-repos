@@ -197,7 +197,9 @@ namespace Microsoft.Extensions.Caching.Memory
                     }
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             Assert.False(cache.TryGetValue(key, out int obj));
 
@@ -224,7 +226,9 @@ namespace Microsoft.Extensions.Caching.Memory
                     }
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             Assert.False(cache.TryGetValue(key, out int obj));
 

@@ -36,17 +36,27 @@ namespace System.Net.NetworkInformation
 
     public partial class Ping : System.ComponentModel.Component
     {
-        public Ping() { }
+        public Ping()
+        {
+        }
 
         public event System.Net.NetworkInformation.PingCompletedEventHandler? PingCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected void OnPingCompleted(System.Net.NetworkInformation.PingCompletedEventArgs e) { }
+        protected void OnPingCompleted(System.Net.NetworkInformation.PingCompletedEventArgs e)
+        {
+        }
 
         public System.Net.NetworkInformation.PingReply Send(System.Net.IPAddress address)
         {
@@ -135,18 +145,26 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             System.Net.NetworkInformation.PingOptions? options,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
         public void SendAsync(
             System.Net.IPAddress address,
             int timeout,
             byte[] buffer,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
-        public void SendAsync(System.Net.IPAddress address, int timeout, object? userToken) { }
+        public void SendAsync(System.Net.IPAddress address, int timeout, object? userToken)
+        {
+        }
 
-        public void SendAsync(System.Net.IPAddress address, object? userToken) { }
+        public void SendAsync(System.Net.IPAddress address, object? userToken)
+        {
+        }
 
         public void SendAsync(
             string hostNameOrAddress,
@@ -154,20 +172,30 @@ namespace System.Net.NetworkInformation
             byte[] buffer,
             System.Net.NetworkInformation.PingOptions? options,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
         public void SendAsync(
             string hostNameOrAddress,
             int timeout,
             byte[] buffer,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
-        public void SendAsync(string hostNameOrAddress, int timeout, object? userToken) { }
+        public void SendAsync(string hostNameOrAddress, int timeout, object? userToken)
+        {
+        }
 
-        public void SendAsync(string hostNameOrAddress, object? userToken) { }
+        public void SendAsync(string hostNameOrAddress, object? userToken)
+        {
+        }
 
-        public void SendAsyncCancel() { }
+        public void SendAsyncCancel()
+        {
+        }
 
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
             System.Net.IPAddress address
@@ -263,7 +291,9 @@ namespace System.Net.NetworkInformation
     public partial class PingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal PingCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public System.Net.NetworkInformation.PingReply? Reply
         {
@@ -281,34 +311,50 @@ namespace System.Net.NetworkInformation
         protected PingException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
-        public PingException(string? message) { }
+        public PingException(string? message)
+        {
+        }
 
-        public PingException(string? message, System.Exception? innerException) { }
+        public PingException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class PingOptions
     {
-        public PingOptions() { }
+        public PingOptions()
+        {
+        }
 
-        public PingOptions(int ttl, bool dontFragment) { }
+        public PingOptions(int ttl, bool dontFragment)
+        {
+        }
 
         public bool DontFragment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Ttl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class PingReply
     {
-        internal PingReply() { }
+        internal PingReply()
+        {
+        }
 
         public System.Net.IPAddress Address
         {

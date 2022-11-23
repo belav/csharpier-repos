@@ -46,5 +46,7 @@ public class IndexingSideEffects
         }
     }
 
-    private static void NopInlinedCall() { }
+    private static void NopInlinedCall()
+    {
+    }
 }

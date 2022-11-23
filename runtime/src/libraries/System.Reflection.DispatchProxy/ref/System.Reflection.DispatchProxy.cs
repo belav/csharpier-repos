@@ -8,7 +8,9 @@ namespace System.Reflection
 {
     public abstract partial class DispatchProxy
     {
-        protected DispatchProxy() { }
+        protected DispatchProxy()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Creating a proxy instance requires generating code at runtime"

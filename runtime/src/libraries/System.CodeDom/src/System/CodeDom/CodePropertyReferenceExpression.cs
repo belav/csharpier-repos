@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _propertyName;
 
-        public CodePropertyReferenceExpression() { }
+        public CodePropertyReferenceExpression()
+        {
+        }
 
         public CodePropertyReferenceExpression(CodeExpression targetObject, string propertyName)
         {

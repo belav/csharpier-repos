@@ -48,14 +48,18 @@ namespace Castle.DynamicProxy
         /// <summary>
         ///   Initializes a new instance of the <see cref = "ProxyGenerator" /> class.
         /// </summary>
-        public ProxyGenerator() : this(new DefaultProxyBuilder()) { }
+        public ProxyGenerator() : this(new DefaultProxyBuilder())
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "ProxyGenerator" /> class.
         /// </summary>
         /// <param name="disableSignedModule">If <c>true</c> forces all types to be generated into an unsigned module.</param>
         public ProxyGenerator(bool disableSignedModule)
-            : this(new DefaultProxyBuilder(new ModuleScope(false, disableSignedModule))) { }
+            : this(new DefaultProxyBuilder(new ModuleScope(false, disableSignedModule)))
+        {
+        }
 
         /// <summary>
         ///   Gets or sets the <see cref = "ILogger" /> that this <see cref = "ProxyGenerator" /> log to.

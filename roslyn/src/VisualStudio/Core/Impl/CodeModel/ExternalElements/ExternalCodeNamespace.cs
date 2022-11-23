@@ -35,7 +35,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             INamespaceSymbol namespaceSymbol
-        ) : base(state, projectId, namespaceSymbol) { }
+        ) : base(state, projectId, namespaceSymbol)
+        {
+        }
 
         private INamespaceSymbol NamespaceSymbol
         {

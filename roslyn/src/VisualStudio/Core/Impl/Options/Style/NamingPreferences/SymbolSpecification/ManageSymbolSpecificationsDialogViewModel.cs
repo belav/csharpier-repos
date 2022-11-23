@@ -49,7 +49,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             );
         }
 
-        internal void AddSymbolSpecification(INamingStylesInfoDialogViewModel _) { }
+        internal void AddSymbolSpecification(INamingStylesInfoDialogViewModel _)
+        {
+        }
 
         internal void RemoveSymbolSpecification(
             INamingStylesInfoDialogViewModel symbolSpecification

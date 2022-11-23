@@ -25,7 +25,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public InteropReliabilityTests(
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(serverFixture, output) { }
+    ) : base(serverFixture, output)
+    {
+    }
 
     protected override async Task InitializeAsync()
     {

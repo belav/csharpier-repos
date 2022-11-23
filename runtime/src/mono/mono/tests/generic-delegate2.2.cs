@@ -100,7 +100,9 @@ public class main
             Console.WriteLine("object method for string delegate");
             return 1;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
 
         /*
         DelObj delObj = (DelObj)Delegate.CreateDelegate (typeof (DelObj), null, miObj);

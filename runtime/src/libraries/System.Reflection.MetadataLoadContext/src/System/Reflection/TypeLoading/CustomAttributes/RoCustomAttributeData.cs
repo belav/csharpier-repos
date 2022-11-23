@@ -10,7 +10,9 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract partial class RoCustomAttributeData : LeveledCustomAttributeData
     {
-        protected RoCustomAttributeData() { }
+        protected RoCustomAttributeData()
+        {
+        }
 
         public sealed override Type AttributeType => _lazyAttributeType ??= ComputeAttributeType()!;
         protected abstract Type? ComputeAttributeType();

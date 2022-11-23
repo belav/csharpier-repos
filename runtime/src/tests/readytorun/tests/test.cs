@@ -92,10 +92,14 @@ public class MyClass : IMyInterface
     public static DateTime ThreadStaticDateTimeField;
 #endif
 
-    public MyClass() { }
+    public MyClass()
+    {
+    }
 
 #if V2
-    public virtual void NewVirtualMethod() { }
+    public virtual void NewVirtualMethod()
+    {
+    }
 
     public virtual void NewInterfaceMethod()
     {
@@ -183,7 +187,9 @@ public class MyClass : IMyInterface
 
 public class MyChildClass : MyClass
 {
-    public MyChildClass() { }
+    public MyChildClass()
+    {
+    }
 
 #if !V2
     public string MovedToBaseClass()
@@ -205,9 +211,13 @@ public struct MyStruct : IDisposable
     int x;
 
 #if V2
-    void IDisposable.Dispose() { }
+    void IDisposable.Dispose()
+    {
+    }
 #else
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 #endif
 }
 
@@ -242,7 +252,9 @@ public class MyGeneric<T, U>
     [ThreadStatic]
     public static Object ThreadStatic;
 
-    public MyGeneric() { }
+    public MyGeneric()
+    {
+    }
 
     public virtual string GenericVirtualMethod<V, W>()
     {
@@ -280,7 +292,9 @@ public class MyGeneric<T, U>
 
 public class MyChildGeneric<T> : MyGeneric<T, T>
 {
-    public MyChildGeneric() { }
+    public MyChildGeneric()
+    {
+    }
 
 #if !V2
     public string MovedToBaseClass<W>()
@@ -427,7 +441,9 @@ public class ILInliningTest
     }
 }
 
-public class NonGenericClass { }
+public class NonGenericClass
+{
+}
 
 static class OpenClosedDelegateExtensionTest
 {
@@ -812,7 +828,9 @@ public class ILInliningVersioningTest<T>
                 System.Runtime.Loader.AssemblyLoadContext
                     .GetLoadContext(Assembly.GetExecutingAssembly())
                     .IsCollectible
-            ) { }
+            )
+        {
+        }
 
         public void TestMultipleLoads()
         {

@@ -46,7 +46,9 @@ public class MigrationsEndPointMiddlewareTest
 
     class SuccessMiddleware
     {
-        public SuccessMiddleware(RequestDelegate next) { }
+        public SuccessMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual async Task Invoke(HttpContext context)
         {

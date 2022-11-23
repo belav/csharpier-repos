@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
     [Trait(Traits.Feature, Traits.Features.ValidateRegexString)]
     public class ValidateRegexStringTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ValidateRegexStringTests(ITestOutputHelper logger) : base(logger) { }
+        public ValidateRegexStringTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider?) CreateDiagnosticProviderAndFixer(
             Workspace workspace

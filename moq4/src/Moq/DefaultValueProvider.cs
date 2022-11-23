@@ -30,7 +30,9 @@ namespace Moq
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultValueProvider"/> class.
         /// </summary>
-        protected DefaultValueProvider() { }
+        protected DefaultValueProvider()
+        {
+        }
 
         /// <summary>
         /// Gets the <see cref="DefaultValue"/> enumeration value that corresponds to this default value provider.

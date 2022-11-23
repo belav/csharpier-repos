@@ -21,7 +21,9 @@ namespace System.ComponentModel.Composition.Primitives
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class.
         /// </summary>
         public ComposablePartException()
-            : this((string?)null, (ICompositionElement?)null, (Exception?)null) { }
+            : this((string?)null, (ICompositionElement?)null, (Exception?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
@@ -60,7 +62,9 @@ namespace System.ComponentModel.Composition.Primitives
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         public ComposablePartException(string? message)
-            : this(message, (ICompositionElement?)null, (Exception?)null) { }
+            : this(message, (ICompositionElement?)null, (Exception?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
@@ -79,7 +83,9 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <see langword="null"/>.
         /// </param>
         public ComposablePartException(string? message, ICompositionElement? element)
-            : this(message, element, (Exception?)null) { }
+            : this(message, element, (Exception?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
@@ -97,7 +103,9 @@ namespace System.ComponentModel.Composition.Primitives
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
         public ComposablePartException(string? message, Exception? innerException)
-            : this(message, (ICompositionElement?)null, innerException) { }
+            : this(message, (ICompositionElement?)null, innerException)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class

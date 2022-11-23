@@ -226,7 +226,9 @@ namespace DelegateTest
                 TestLibrary.TestFramework.LogError("009", "a ArgumentException should be throw ");
                 retVal = false;
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
             catch (Exception e)
             {
                 TestLibrary.TestFramework.LogError("010", "Unexpected exception: " + e);

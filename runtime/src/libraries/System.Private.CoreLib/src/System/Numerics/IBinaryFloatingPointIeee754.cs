@@ -7,5 +7,7 @@ namespace System.Numerics
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     public interface IBinaryFloatingPointIeee754<TSelf>
         : IBinaryNumber<TSelf>,
-            IFloatingPointIeee754<TSelf> where TSelf : IBinaryFloatingPointIeee754<TSelf>? { }
+            IFloatingPointIeee754<TSelf> where TSelf : IBinaryFloatingPointIeee754<TSelf>?
+    {
+    }
 }

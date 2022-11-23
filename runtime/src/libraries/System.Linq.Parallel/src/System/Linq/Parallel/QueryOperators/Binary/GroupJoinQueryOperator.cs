@@ -417,7 +417,9 @@ namespace System.Linq.Parallel
             private const int OrderKey = unchecked((int)0xdeadbeef);
 
             internal GroupJoinHashLookup(HashLookup<THashKey, ListChunk<TElement>> lookup)
-                : base(lookup) { }
+                : base(lookup)
+            {
+            }
 
             protected override int EmptyValueKey => OrderKey;
 
@@ -535,7 +537,9 @@ namespace System.Linq.Parallel
             : GroupJoinHashLookup<THashKey, TElement, GroupKeyData, Pair<bool, TOrderKey>>
         {
             internal OrderedGroupJoinHashLookup(HashLookup<THashKey, GroupKeyData> lookup)
-                : base(lookup) { }
+                : base(lookup)
+            {
+            }
 
             protected override Pair<bool, TOrderKey> EmptyValueKey =>
                 default(Pair<bool, TOrderKey>);

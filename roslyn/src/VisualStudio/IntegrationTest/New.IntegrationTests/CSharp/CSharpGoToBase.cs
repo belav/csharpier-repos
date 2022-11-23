@@ -15,7 +15,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpGoToBase() : base(nameof(CSharpGoToBase)) { }
+        public CSharpGoToBase() : base(nameof(CSharpGoToBase))
+        {
+        }
 
         [IdeFact]
         public async Task GoToBaseFromMetadataAsSource()

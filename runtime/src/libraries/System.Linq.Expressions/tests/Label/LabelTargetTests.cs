@@ -19,7 +19,9 @@ namespace System.Linq.Expressions.Tests
             public CustomException()
                 : base(
                     "This is a custom exception that exists just to distinguish throwing it in a test from any other cause of exceptions being thrown."
-                ) { }
+                )
+            {
+            }
         }
 
         [Fact]

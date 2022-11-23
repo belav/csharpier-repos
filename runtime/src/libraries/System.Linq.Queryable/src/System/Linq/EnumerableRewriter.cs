@@ -22,7 +22,9 @@ namespace System.Linq
         // Finding equivalent types can be relatively expensive, and hitting with the same types repeatedly is quite likely.
         private Dictionary<Type, Type>? _equivalentTypeCache;
 
-        public EnumerableRewriter() { }
+        public EnumerableRewriter()
+        {
+        }
 
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {

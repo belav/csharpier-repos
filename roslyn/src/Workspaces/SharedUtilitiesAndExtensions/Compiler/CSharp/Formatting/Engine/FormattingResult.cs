@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     internal class FormattingResult : AbstractFormattingResult
     {
         internal FormattingResult(TreeData treeInfo, TokenStream tokenStream, TextSpan spanToFormat)
-            : base(treeInfo, tokenStream, spanToFormat) { }
+            : base(treeInfo, tokenStream, spanToFormat)
+        {
+        }
 
         protected override SyntaxNode Rewriter(
             Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> changeMap,

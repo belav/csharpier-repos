@@ -15,10 +15,14 @@ namespace Program
 
     public class AxControlEventArgs : AxControlEventArgs<WindowlessControl>
     {
-        public AxControlEventArgs(WindowlessControl c) : base(c) { }
+        public AxControlEventArgs(WindowlessControl c) : base(c)
+        {
+        }
     }
 
-    public class AlignPadLayoutPanel : AlignPadLayoutPanel<WindowlessControl> { }
+    public class AlignPadLayoutPanel : AlignPadLayoutPanel<WindowlessControl>
+    {
+    }
 
     public class AlignPadLayoutPanel<T> : WindowlessControl where T : WindowlessControl
     {
@@ -28,10 +32,14 @@ namespace Program
             base.OnControlAdded(e);
         }
 
-        private void Content_Resize(object sender, EventArgs e) { }
+        private void Content_Resize(object sender, EventArgs e)
+        {
+        }
     }
 
-    public class GroupBox : AlignPadLayoutPanel { } //NOT OK
+    public class GroupBox : AlignPadLayoutPanel
+    {
+    } //NOT OK
 
     //public class GroupBox : AlignPadLayoutPanel<WindowlessControl> {} //OK
 
@@ -92,7 +100,9 @@ namespace Program
             OnControlAdded(new AxControlEventArgs(control));
         }
 
-        protected virtual void OnControlAdded(AxControlEventArgs e) { }
+        protected virtual void OnControlAdded(AxControlEventArgs e)
+        {
+        }
     }
 
     public struct AttachedProperty<T>

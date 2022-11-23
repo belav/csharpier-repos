@@ -12,6 +12,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                 handle,
                 ptr => MsQuicApi.Api.ApiTable->ConnectionClose((QUIC_HANDLE*)ptr),
                 SafeHandleType.Connection
-            ) { }
+            )
+        {
+        }
     }
 }

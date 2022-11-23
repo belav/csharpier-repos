@@ -35,7 +35,9 @@ struct S
 
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpNavigationBar() : base(nameof(CSharpNavigationBar)) { }
+        public CSharpNavigationBar() : base(nameof(CSharpNavigationBar))
+        {
+        }
 
         [IdeFact]
         public async Task VerifyNavBar()

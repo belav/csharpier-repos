@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Modulo";
 
-        private ModuloInstruction() { }
+        private ModuloInstruction()
+        {
+        }
 
         private sealed class ModuloInt16 : ModuloInstruction
         {

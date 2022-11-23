@@ -18,7 +18,9 @@ namespace System.Security.Cryptography.Pkcs
         private Oid? _hashAlgorithmId;
         private Oid? _requestedPolicyId;
 
-        private Rfc3161TimestampRequest() { }
+        private Rfc3161TimestampRequest()
+        {
+        }
 
         public int Version => _parsedData.Version;
 
@@ -408,8 +410,12 @@ namespace System.Security.Cryptography.Pkcs
                 bytesConsumed = firstElement.Length;
                 return true;
             }
-            catch (AsnContentException) { }
-            catch (CryptographicException) { }
+            catch (AsnContentException)
+            {
+            }
+            catch (CryptographicException)
+            {
+            }
 
             request = null;
             bytesConsumed = 0;

@@ -88,7 +88,9 @@ namespace System.Globalization
         // negative sign is not the hyphen. For example, the Swedish culture (e.g. "sv-SE") has U+2212 as the negative sign.
         private bool _allowHyphenDuringParsing;
 
-        public NumberFormatInfo() { }
+        public NumberFormatInfo()
+        {
+        }
 
         private static void VerifyNativeDigits(string[] nativeDig, string propertyName)
         {

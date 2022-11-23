@@ -294,11 +294,16 @@ namespace System.IO.Tests
         private static WeakReference CreateEnabledWatcher(string path)
         {
             var fsw = new FileSystemWatcher(path);
-            fsw.Created += (s, e) => { };
-            fsw.Deleted += (s, e) => { };
-            fsw.Changed += (s, e) => { };
-            fsw.Renamed += (s, e) => { };
-            fsw.Error += (s, e) => { };
+            fsw.Created += (s, e) => {
+            };
+            fsw.Deleted += (s, e) => {
+            };
+            fsw.Changed += (s, e) => {
+            };
+            fsw.Renamed += (s, e) => {
+            };
+            fsw.Error += (s, e) => {
+            };
             fsw.EnableRaisingEvents = true;
             return new WeakReference(fsw);
         }

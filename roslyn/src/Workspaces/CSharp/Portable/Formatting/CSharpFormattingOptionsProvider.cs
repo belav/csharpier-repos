@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFormattingOptionsProvider() { }
+        public CSharpFormattingOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             CSharpFormattingOptions2.AllOptions.As<IOption>();

@@ -24,7 +24,9 @@ namespace System.Runtime.Caching
         private object _fcnState;
         private DateTimeOffset _lastModified;
 
-        private HostFileChangeMonitor() { } // hide default .ctor
+        private HostFileChangeMonitor()
+        {
+        } // hide default .ctor
 
         private void InitDisposableMembers()
         {

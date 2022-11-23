@@ -148,7 +148,9 @@ namespace System.Web.Http.ModelBinding
         private class EmptyParameterBinding : HttpParameterBinding
         {
             public EmptyParameterBinding()
-                : base(CreateParameterDescriptor(typeof(object), "dummy")) { }
+                : base(CreateParameterDescriptor(typeof(object), "dummy"))
+            {
+            }
 
             public override Threading.Tasks.Task ExecuteBindingAsync(
                 ModelMetadataProvider metadataProvider,

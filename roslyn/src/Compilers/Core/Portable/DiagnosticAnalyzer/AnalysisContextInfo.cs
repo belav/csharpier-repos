@@ -21,10 +21,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public AnalysisContextInfo(Compilation compilation)
             : this(compilation: compilation, operation: null, symbol: null, file: null, node: null)
-        { }
+        {
+        }
 
         public AnalysisContextInfo(SemanticModel model)
-            : this(model.Compilation, new SourceOrAdditionalFile(model.SyntaxTree)) { }
+            : this(model.Compilation, new SourceOrAdditionalFile(model.SyntaxTree))
+        {
+        }
 
         public AnalysisContextInfo(Compilation compilation, ISymbol symbol)
             : this(
@@ -33,11 +36,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 symbol: symbol,
                 file: null,
                 node: null
-            ) { }
+            )
+        {
+        }
 
         public AnalysisContextInfo(Compilation compilation, SourceOrAdditionalFile file)
             : this(compilation: compilation, operation: null, symbol: null, file: file, node: null)
-        { }
+        {
+        }
 
         public AnalysisContextInfo(Compilation compilation, SyntaxNode node)
             : this(
@@ -46,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 symbol: null,
                 file: new SourceOrAdditionalFile(node.SyntaxTree),
                 node
-            ) { }
+            )
+        {
+        }
 
         public AnalysisContextInfo(Compilation compilation, IOperation operation)
             : this(
@@ -55,7 +63,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 symbol: null,
                 file: new SourceOrAdditionalFile(operation.Syntax.SyntaxTree),
                 node: operation.Syntax
-            ) { }
+            )
+        {
+        }
 
         public AnalysisContextInfo(Compilation compilation, ISymbol symbol, SyntaxNode node)
             : this(
@@ -64,7 +74,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 symbol: symbol,
                 file: new SourceOrAdditionalFile(node.SyntaxTree),
                 node
-            ) { }
+            )
+        {
+        }
 
         private AnalysisContextInfo(
             Compilation? compilation,

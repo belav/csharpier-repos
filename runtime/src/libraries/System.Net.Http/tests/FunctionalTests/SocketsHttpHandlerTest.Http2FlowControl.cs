@@ -24,7 +24,9 @@ namespace System.Net.Http.Functional.Tests
 
         protected override Version UseVersion => HttpVersion20.Value;
 
-        public SocketsHttpHandler_Http2FlowControl_Test(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_Http2FlowControl_Test(ITestOutputHelper output) : base(output)
+        {
+        }
 
         private static Http2Options NoAutoPingResponseHttp2Options =>
             new Http2Options() { EnableTransparentPingResponse = false };
@@ -370,7 +372,9 @@ namespace System.Net.Http.Functional.Tests
                         }
                     }
                 }
-                catch (OperationCanceledException) { }
+                catch (OperationCanceledException)
+                {
+                }
 
                 output?.WriteLine("ProcessIncomingFramesAsync finished");
             }

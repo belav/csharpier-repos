@@ -2341,7 +2341,9 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Null(item.Title);
         }
 
-        public class SyndicationItemSubclass : SyndicationItem { }
+        public class SyndicationItemSubclass : SyndicationItem
+        {
+        }
 
         public class SyndicationItemTryParseTrueSubclass : SyndicationItem
         {
@@ -2423,14 +2425,22 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : Rss20ItemFormatter
         {
-            public Formatter() : base() { }
+            public Formatter() : base()
+            {
+            }
 
-            public Formatter(SyndicationItem itemToWrite) : base(itemToWrite) { }
+            public Formatter(SyndicationItem itemToWrite) : base(itemToWrite)
+            {
+            }
 
             public Formatter(SyndicationItem itemToWrite, bool serializeExtensionsAsAtom)
-                : base(itemToWrite, serializeExtensionsAsAtom) { }
+                : base(itemToWrite, serializeExtensionsAsAtom)
+            {
+            }
 
-            public Formatter(Type itemTypeToCreate) : base(itemTypeToCreate) { }
+            public Formatter(Type itemTypeToCreate) : base(itemTypeToCreate)
+            {
+            }
 
             public Type ItemTypeEntryPoint => ItemType;
 
@@ -2439,12 +2449,18 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class GenericFormatter<T> : Rss20ItemFormatter<T> where T : SyndicationItem, new()
         {
-            public GenericFormatter() : base() { }
+            public GenericFormatter() : base()
+            {
+            }
 
-            public GenericFormatter(T itemToWrite) : base(itemToWrite) { }
+            public GenericFormatter(T itemToWrite) : base(itemToWrite)
+            {
+            }
 
             public GenericFormatter(T itemToWrite, bool serializeExtensionsAsAtom)
-                : base(itemToWrite, serializeExtensionsAsAtom) { }
+                : base(itemToWrite, serializeExtensionsAsAtom)
+            {
+            }
 
             public Type ItemTypeEntryPoint => ItemType;
 

@@ -641,7 +641,9 @@ namespace System.Threading.Tasks
                     {
                         task.ScheduleAndStart(needsProtection: false);
                     }
-                    catch (TaskSchedulerException) { } // No further action is necessary, as ScheduleAndStart already transitioned task to faulted
+                    catch (TaskSchedulerException)
+                    {
+                    } // No further action is necessary, as ScheduleAndStart already transitioned task to faulted
                 }
             }
         }

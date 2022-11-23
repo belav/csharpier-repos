@@ -28,7 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeModelNavigationPointServiceFactory() { }
+        public CSharpCodeModelNavigationPointServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices provider)
         {

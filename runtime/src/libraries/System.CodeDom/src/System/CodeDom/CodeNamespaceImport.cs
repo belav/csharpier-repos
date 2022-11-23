@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _nameSpace;
 
-        public CodeNamespaceImport() { }
+        public CodeNamespaceImport()
+        {
+        }
 
         public CodeNamespaceImport(string nameSpace)
         {

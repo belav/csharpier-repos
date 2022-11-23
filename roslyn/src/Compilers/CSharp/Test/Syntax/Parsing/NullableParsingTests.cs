@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class NullableParsingTests : ParsingTests
     {
-        public NullableParsingTests(ITestOutputHelper output) : base(output) { }
+        public NullableParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [WorkItem(23272, "https://github.com/dotnet/roslyn/issues/23272")]
         [Fact]

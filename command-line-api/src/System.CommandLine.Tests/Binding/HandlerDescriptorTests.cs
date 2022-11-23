@@ -90,6 +90,8 @@ namespace System.CommandLine.Tests.Binding
             }
         }
 
-        public void Handler<T>(T value) { }
+        public void Handler<T>(T value)
+        {
+        }
     }
 }

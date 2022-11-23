@@ -499,7 +499,9 @@ namespace Internal.CommandLine
                 if (!Console.IsOutputRedirected)
                     return Console.WindowWidth;
             }
-            catch { }
+            catch
+            {
+            }
             return 100;
         }
 

@@ -41,7 +41,9 @@ namespace System.IO.IsolatedStorage
                 string rootDirectory = isf.GetIdentityRootDirectory();
                 string identityFile = Path.Combine(rootDirectory, "identity.dat");
                 string quotaFile = Path.Combine(rootDirectory, "info.dat");
-                using (File.OpenWrite(identityFile)) { }
+                using (File.OpenWrite(identityFile))
+                {
+                }
                 Assert.False(
                     (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
                     "identity ok"
@@ -51,7 +53,9 @@ namespace System.IO.IsolatedStorage
                     (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
                     "quota ok"
                 );
-                using (File.OpenWrite(identityFile)) { }
+                using (File.OpenWrite(identityFile))
+                {
+                }
                 Assert.False(
                     (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
                     "both ok"
@@ -70,12 +74,16 @@ namespace System.IO.IsolatedStorage
                 string otherFile = Path.Combine(rootDirectory, "ContainsUnknownFiles_NotOkFiles");
                 string identityFile = Path.Combine(rootDirectory, "identity.dat");
                 string quotaFile = Path.Combine(rootDirectory, "info.dat");
-                using (File.OpenWrite(otherFile)) { }
+                using (File.OpenWrite(otherFile))
+                {
+                }
                 Assert.True(
                     (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
                     "other file not ok"
                 );
-                using (File.OpenWrite(identityFile)) { }
+                using (File.OpenWrite(identityFile))
+                {
+                }
                 Assert.True(
                     (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
                     "other file with identity not ok"
@@ -85,7 +93,9 @@ namespace System.IO.IsolatedStorage
                     (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
                     "other file with quota not ok"
                 );
-                using (File.OpenWrite(identityFile)) { }
+                using (File.OpenWrite(identityFile))
+                {
+                }
                 Assert.True(
                     (bool)s_containsUnknownFilesMethod.Invoke(isf, new object[] { rootDirectory }),
                     "too many files not ok"

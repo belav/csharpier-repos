@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormattingCategoryGroupingSet() { }
+        public FormattingCategoryGroupingSet()
+        {
+        }
     }
 
     [Export(typeof(ITableColumnDefinition))]
@@ -29,7 +31,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormattingCategoryColumnDefinition() { }
+        public FormattingCategoryColumnDefinition()
+        {
+        }
 
         public override string Name => Category;
         public override string DisplayName => ServicesVSResources.Category;

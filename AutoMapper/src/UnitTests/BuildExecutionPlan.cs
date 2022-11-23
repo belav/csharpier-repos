@@ -75,7 +75,9 @@ public class When_reusing_the_execution_plan_inner_map : AutoMapperSpecBase
         public Inner Inner { get; set; }
     }
 
-    class Inner { }
+    class Inner
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(c =>
@@ -111,7 +113,9 @@ public class AllowNullWithMapAtRuntime : AutoMapperSpecBase
         public Inner Inner { get; set; }
     }
 
-    class Inner { }
+    class Inner
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(c =>

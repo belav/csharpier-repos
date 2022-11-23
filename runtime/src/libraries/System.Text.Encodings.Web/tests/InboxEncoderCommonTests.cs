@@ -11,7 +11,9 @@ namespace System.Text.Encodings.Web.Tests
     public class HtmlEncoderDefaultCommonTests : InboxEncoderCommonTestBase
     {
         public HtmlEncoderDefaultCommonTests()
-            : base(HtmlEncoder.Default, allowedChar: 'a', disallowedChar: '&') { }
+            : base(HtmlEncoder.Default, allowedChar: 'a', disallowedChar: '&')
+        {
+        }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {
@@ -106,7 +108,9 @@ namespace System.Text.Encodings.Web.Tests
     public class JavaScriptEncoderDefaultCommonTests : InboxEncoderCommonTestBase
     {
         public JavaScriptEncoderDefaultCommonTests()
-            : base(JavaScriptEncoder.Default, allowedChar: 'a', disallowedChar: '\"') { }
+            : base(JavaScriptEncoder.Default, allowedChar: 'a', disallowedChar: '\"')
+        {
+        }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {
@@ -221,7 +225,9 @@ namespace System.Text.Encodings.Web.Tests
                 JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 allowedChar: 'a',
                 disallowedChar: '\"'
-            ) { }
+            )
+        {
+        }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {
@@ -358,7 +364,9 @@ namespace System.Text.Encodings.Web.Tests
     public class UrlEncoderDefaultCommonTests : InboxEncoderCommonTestBase
     {
         public UrlEncoderDefaultCommonTests()
-            : base(UrlEncoder.Default, allowedChar: 'a', disallowedChar: '?') { }
+            : base(UrlEncoder.Default, allowedChar: 'a', disallowedChar: '?')
+        {
+        }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {

@@ -12,4 +12,6 @@ namespace Microsoft.AspNetCore.Testing;
     "Microsoft.AspNetCore.Testing." + nameof(ConditionalTheoryDiscoverer),
     "Microsoft.AspNetCore.Testing"
 )]
-public class ConditionalTheoryAttribute : TheoryAttribute { }
+public class ConditionalTheoryAttribute : TheoryAttribute
+{
+}

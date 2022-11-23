@@ -27,7 +27,9 @@ public interface IExtra
     int InnocentMethod();
 }
 
-public class CastableException : Exception { };
+public class CastableException : Exception
+{
+};
 
 public class RetArgImpl : IRetArg<string>
 {
@@ -206,7 +208,9 @@ public class CastableTests
                 var _ = (IUnimplemented)implProxy;
                 Assert(false, "pProxy should not be castable to I1");
             }
-            catch (InvalidCastException) { }
+            catch (InvalidCastException)
+            {
+            }
 
             object nullCastable = new Castable(null);
             try
@@ -214,7 +218,9 @@ public class CastableTests
                 var _ = (IRetThis)nullCastable;
                 Assert(false, "Exceptions should be thrown from IsInstanceOfInterface");
             }
-            catch (CastableException) { }
+            catch (CastableException)
+            {
+            }
 
             Assert(
                 !(nullCastable is IRetThis),
@@ -231,7 +237,9 @@ public class CastableTests
                 r.ReturnThis();
                 Assert(false, "Exceptions should be thrown from ReturnThis()");
             }
-            catch (EntryPointNotFoundException) { }
+            catch (EntryPointNotFoundException)
+            {
+            }
 
             //delegate testing
             Func<int> fInt = new Func<int>(extra.InnocentMethod);

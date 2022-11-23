@@ -29,7 +29,9 @@ namespace Moq.Expressions.Visitors
     {
         public static readonly ExpressionVisitor Rewriter = new UpgradePropertyAccessorMethods();
 
-        private UpgradePropertyAccessorMethods() { }
+        private UpgradePropertyAccessorMethods()
+        {
+        }
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {

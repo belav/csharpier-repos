@@ -18,7 +18,9 @@ public class GitHub_18144
         Vector256<byte> v6,
         Vector256<byte> v7,
         Vector256<byte> v8
-    ) { }
+    )
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void DoThis()
@@ -35,7 +37,9 @@ public class GitHub_18144
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void DoThat() { }
+    static void DoThat()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void dummy128(
@@ -47,7 +51,9 @@ public class GitHub_18144
         Vector128<byte> v6,
         Vector128<byte> v7,
         Vector128<byte> v8
-    ) { }
+    )
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void DoThis128()

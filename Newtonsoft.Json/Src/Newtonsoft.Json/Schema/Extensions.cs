@@ -154,7 +154,9 @@ namespace Newtonsoft.Json.Schema
                     reader.ValidationEventHandler += validationEventHandler;
                 }
 
-                while (reader.Read()) { }
+                while (reader.Read())
+                {
+                }
             }
         }
     }

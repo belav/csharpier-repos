@@ -61,4 +61,6 @@ namespace NS.Module
     }
 }
 
-public static class StaticModClass { }
+public static class StaticModClass
+{
+}

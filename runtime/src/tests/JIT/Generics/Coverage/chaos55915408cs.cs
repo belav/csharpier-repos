@@ -384,7 +384,9 @@ namespace Chaos
         }
     }
 
-    public interface IA1A2<T0> where T0 : new() { }
+    public interface IA1A2<T0> where T0 : new()
+    {
+    }
 
     public class A0A0A0<T0> : A0A0 where T0 : new()
     {

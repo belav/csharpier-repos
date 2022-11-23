@@ -101,7 +101,9 @@ public class JSObjectReferenceJsonConverterTest
         : JSInProcessObjectReference,
             IJSUnmarshalledObjectReference
     {
-        public TestJSUnmarshalledObjectReference(long id) : base(default!, id) { }
+        public TestJSUnmarshalledObjectReference(long id) : base(default!, id)
+        {
+        }
 
         public TResult InvokeUnmarshalled<TResult>(string identifier)
         {

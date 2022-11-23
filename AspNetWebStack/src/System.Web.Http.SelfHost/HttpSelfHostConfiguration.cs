@@ -48,7 +48,8 @@ namespace System.Web.Http.SelfHost
         /// </summary>
         /// <param name="baseAddress">The base address.</param>
         public HttpSelfHostConfiguration(string baseAddress) : this(CreateBaseAddress(baseAddress))
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpSelfHostConfiguration"/> class.

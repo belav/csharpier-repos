@@ -18,9 +18,13 @@ namespace System.Web.Http.ValueProviders.Providers
             IValueProvider,
             IEnumerableValueProvider
     {
-        public CompositeValueProvider() { }
+        public CompositeValueProvider()
+        {
+        }
 
-        public CompositeValueProvider(IList<IValueProvider> list) : base(list) { }
+        public CompositeValueProvider(IList<IValueProvider> list) : base(list)
+        {
+        }
 
         public virtual bool ContainsPrefix(string prefix)
         {

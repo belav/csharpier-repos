@@ -37,6 +37,8 @@ namespace Test
     public class DerivedClass : BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(int selector) : base((selector < 4) ? "LessThan4" : "AtLeast4") { }
+        public DerivedClass(int selector) : base((selector < 4) ? "LessThan4" : "AtLeast4")
+        {
+        }
     }
 }

@@ -9,5 +9,7 @@ namespace System.Configuration
     /// this or a derived attribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class SettingAttribute : Attribute { }
+    public class SettingAttribute : Attribute
+    {
+    }
 }

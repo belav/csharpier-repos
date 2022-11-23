@@ -10,7 +10,9 @@ namespace System.Security.Policy
             ISecurityPolicyEncodable,
             IMembershipCondition
     {
-        public PublisherMembershipCondition(X509Certificate certificate) { }
+        public PublisherMembershipCondition(X509Certificate certificate)
+        {
+        }
 
         public X509Certificate Certificate { get; set; }
 
@@ -26,9 +28,13 @@ namespace System.Security.Policy
 
         public override bool Equals(object o) => base.Equals(o);
 
-        public void FromXml(SecurityElement e) { }
+        public void FromXml(SecurityElement e)
+        {
+        }
 
-        public void FromXml(SecurityElement e, PolicyLevel level) { }
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 

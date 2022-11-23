@@ -432,7 +432,9 @@ namespace System.Web.Mvc.Test
         }
 
         [ReadOnly(true)]
-        private class TypeModel { }
+        private class TypeModel
+        {
+        }
 
         class TestableAssociatedMetadataProvider : AssociatedMetadataProvider
         {

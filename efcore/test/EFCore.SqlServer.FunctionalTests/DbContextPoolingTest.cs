@@ -97,11 +97,15 @@ public class DbContextPoolingTest
                 poolSize
             );
 
-    private interface IPooledContext { }
+    private interface IPooledContext
+    {
+    }
 
     private class DefaultOptionsPooledContext : DbContext
     {
-        public DefaultOptionsPooledContext(DbContextOptions options) : base(options) { }
+        public DefaultOptionsPooledContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     private class PooledContext : DbContext, IPooledContext
@@ -121,17 +125,28 @@ public class DbContextPoolingTest
             Database.AutoSavepointsEnabled = false;
             ChangeTracker.CascadeDeleteTiming = CascadeTiming.Never;
             ChangeTracker.DeleteOrphansTiming = CascadeTiming.Never;
-            SavingChanges += (sender, args) => { };
-            SavedChanges += (sender, args) => { };
-            SaveChangesFailed += (sender, args) => { };
-            ChangeTracker.Tracking += (sender, args) => { };
-            ChangeTracker.Tracked += (sender, args) => { };
-            ChangeTracker.StateChanging += (sender, args) => { };
-            ChangeTracker.StateChanged += (sender, args) => { };
-            ChangeTracker.DetectingAllChanges += (sender, args) => { };
-            ChangeTracker.DetectedAllChanges += (sender, args) => { };
-            ChangeTracker.DetectingEntityChanges += (sender, args) => { };
-            ChangeTracker.DetectedEntityChanges += (sender, args) => { };
+            SavingChanges += (sender, args) => {
+            };
+            SavedChanges += (sender, args) => {
+            };
+            SaveChangesFailed += (sender, args) => {
+            };
+            ChangeTracker.Tracking += (sender, args) => {
+            };
+            ChangeTracker.Tracked += (sender, args) => {
+            };
+            ChangeTracker.StateChanging += (sender, args) => {
+            };
+            ChangeTracker.StateChanged += (sender, args) => {
+            };
+            ChangeTracker.DetectingAllChanges += (sender, args) => {
+            };
+            ChangeTracker.DetectedAllChanges += (sender, args) => {
+            };
+            ChangeTracker.DetectingEntityChanges += (sender, args) => {
+            };
+            ChangeTracker.DetectedEntityChanges += (sender, args) => {
+            };
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -157,7 +172,9 @@ public class DbContextPoolingTest
 
     private class PooledContextWithOverrides : DbContext, IPooledContext
     {
-        public PooledContextWithOverrides(DbContextOptions options) : base(options) { }
+        public PooledContextWithOverrides(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Customer> Customers { get; set; }
 
@@ -177,13 +194,17 @@ public class DbContextPoolingTest
         public string OrderId { get; set; }
     }
 
-    private interface ISecondContext { }
+    private interface ISecondContext
+    {
+    }
 
     private class SecondContext : DbContext, ISecondContext
     {
         public DbSet<Blog> Blogs { get; set; }
 
-        public SecondContext(DbContextOptions options) : base(options) { }
+        public SecondContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public class Blog
         {
@@ -404,7 +425,9 @@ public class DbContextPoolingTest
         }
     }
 
-    private class BadCtorContext : DbContext { }
+    private class BadCtorContext : DbContext
+    {
+    }
 
     [ConditionalFact]
     public void Throws_when_used_with_parameterless_constructor_context()
@@ -415,16 +438,10 @@ public class DbContextPoolingTest
             CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
             Assert
                 .Throws<ArgumentException>(
-                    () => serviceCollection.AddDbContextPool<BadCtorContext>(_ => { })
-                )
-                .Message
-        );
-
-        Assert.Equal(
-            CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
-            Assert
-                .Throws<ArgumentException>(
-                    () => serviceCollection.AddDbContextPool<BadCtorContext>((_, __) => { })
+                    () =>
+                        serviceCollection.AddDbContextPool<BadCtorContext>(_ =>
+                        {
+                        })
                 )
                 .Message
         );
@@ -434,7 +451,23 @@ public class DbContextPoolingTest
             Assert
                 .Throws<ArgumentException>(
                     () =>
-                        serviceCollection.AddPooledDbContextFactory<BadCtorContext>((_, __) => { })
+                        serviceCollection.AddDbContextPool<BadCtorContext>(
+                            (_, __) => {
+                            }
+                        )
+                )
+                .Message
+        );
+
+        Assert.Equal(
+            CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
+            Assert
+                .Throws<ArgumentException>(
+                    () =>
+                        serviceCollection.AddPooledDbContextFactory<BadCtorContext>(
+                            (_, __) => {
+                            }
+                        )
                 )
                 .Message
         );
@@ -444,7 +477,9 @@ public class DbContextPoolingTest
     public void Throws_when_pooled_context_constructor_has_more_than_one_parameter()
     {
         var serviceProvider = new ServiceCollection()
-            .AddDbContextPool<TwoParameterConstructorContext>(_ => { })
+            .AddDbContextPool<TwoParameterConstructorContext>(_ =>
+            {
+            })
             .BuildServiceProvider(validateScopes: true);
 
         using var scope = serviceProvider.CreateScope();
@@ -462,14 +497,17 @@ public class DbContextPoolingTest
     private class TwoParameterConstructorContext : DbContext
     {
         public TwoParameterConstructorContext(DbContextOptions options, string x) : base(options)
-        { }
+        {
+        }
     }
 
     [ConditionalFact]
     public void Throws_when_pooled_context_constructor_wrong_parameter()
     {
         var serviceProvider = new ServiceCollection()
-            .AddDbContextPool<WrongParameterConstructorContext>(_ => { })
+            .AddDbContextPool<WrongParameterConstructorContext>(_ =>
+            {
+            })
             .BuildServiceProvider(validateScopes: true);
 
         using var scope = serviceProvider.CreateScope();
@@ -487,14 +525,18 @@ public class DbContextPoolingTest
     private class WrongParameterConstructorContext : DbContext
     {
         public WrongParameterConstructorContext(string x)
-            : base(new DbContextOptions<WrongParameterConstructorContext>()) { }
+            : base(new DbContextOptions<WrongParameterConstructorContext>())
+        {
+        }
     }
 
     [ConditionalFact]
     public void Does_not_throw_when_parameterless_and_correct_constructor()
     {
         var serviceProvider = new ServiceCollection()
-            .AddDbContextPool<WithParameterlessConstructorContext>(_ => { })
+            .AddDbContextPool<WithParameterlessConstructorContext>(_ =>
+            {
+            })
             .BuildServiceProvider(validateScopes: true);
 
         using var scope = serviceProvider.CreateScope();
@@ -509,7 +551,9 @@ public class DbContextPoolingTest
     public void Does_not_throw_when_parameterless_and_correct_constructor_using_factory_pool()
     {
         var serviceProvider = new ServiceCollection()
-            .AddPooledDbContextFactory<WithParameterlessConstructorContext>(_ => { })
+            .AddPooledDbContextFactory<WithParameterlessConstructorContext>(_ =>
+            {
+            })
             .BuildServiceProvider(validateScopes: true);
 
         using var scope = serviceProvider.CreateScope();

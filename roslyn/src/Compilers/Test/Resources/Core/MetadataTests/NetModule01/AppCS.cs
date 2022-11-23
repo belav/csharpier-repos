@@ -81,7 +81,9 @@ namespace AppCS
     {
         public CT1 ContraGooProp
         {
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -101,9 +103,13 @@ namespace AppCS
         }
     }
 
-    class Animal { }
+    class Animal
+    {
+    }
 
-    class Tiger : Animal { }
+    class Tiger : Animal
+    {
+    }
 
     public class Test
     {

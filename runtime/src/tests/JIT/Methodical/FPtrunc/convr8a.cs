@@ -37,7 +37,9 @@ public class ConvR8test
     private static int s_a1 = 3;
     private static double s_b1 = (1.0 / 3.0);
 
-    private static void disableInline(ref int x) { }
+    private static void disableInline(ref int x)
+    {
+    }
 
     //f1 and delta1 are static filed of a1 class
     private static double doubleadd()

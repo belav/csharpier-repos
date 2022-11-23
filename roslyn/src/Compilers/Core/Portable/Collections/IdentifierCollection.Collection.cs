@@ -98,7 +98,9 @@ namespace Microsoft.CodeAnalysis
         private sealed class CaseSensitiveCollection : CollectionBase
         {
             public CaseSensitiveCollection(IdentifierCollection identifierCollection)
-                : base(identifierCollection) { }
+                : base(identifierCollection)
+            {
+            }
 
             public override bool Contains(string item) =>
                 IdentifierCollection.CaseSensitiveContains(item);
@@ -107,7 +109,9 @@ namespace Microsoft.CodeAnalysis
         private sealed class CaseInsensitiveCollection : CollectionBase
         {
             public CaseInsensitiveCollection(IdentifierCollection identifierCollection)
-                : base(identifierCollection) { }
+                : base(identifierCollection)
+            {
+            }
 
             public override bool Contains(string item) =>
                 IdentifierCollection.CaseInsensitiveContains(item);

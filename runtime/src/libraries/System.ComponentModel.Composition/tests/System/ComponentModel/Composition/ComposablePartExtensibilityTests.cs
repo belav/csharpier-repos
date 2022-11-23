@@ -97,7 +97,9 @@ namespace System.ComponentModel.Composition
     {
         public Queue<string> CallOrder = new Queue<string>();
 
-        public OrderingTestComposablePart() { }
+        public OrderingTestComposablePart()
+        {
+        }
 
         public new void AddExport(string contractName, object value)
         {
@@ -189,7 +191,9 @@ namespace System.ComponentModel.Composition
 
     public class AClass
     {
-        public AClass(BClass b) { }
+        public AClass(BClass b)
+        {
+        }
 
         public BClass B { get; private set; }
     }
@@ -283,7 +287,9 @@ namespace System.ComponentModel.Composition
 
                 return obj;
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         public override void SetImport(ImportDefinition definition, IEnumerable<Export> exports)

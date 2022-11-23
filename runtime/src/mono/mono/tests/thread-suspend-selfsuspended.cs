@@ -21,7 +21,9 @@ class Driver
                 {
                     t1.Resume();
                 }
-                catch (ThreadStateException) { }
+                catch (ThreadStateException)
+                {
+                }
 
                 Thread.Yield();
             }

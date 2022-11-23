@@ -30,7 +30,9 @@ namespace Internal.Cryptography.Pal.Native
 
     internal sealed class SafeChainEngineHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeChainEngineHandle() : base(true) { }
+        public SafeChainEngineHandle() : base(true)
+        {
+        }
 
         private SafeChainEngineHandle(IntPtr handle) : base(true)
         {

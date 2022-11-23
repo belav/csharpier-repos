@@ -24,7 +24,9 @@ namespace R2RDump
             TextWriter writer,
             Disassembler disassembler,
             DumpOptions options
-        ) : base(r2r, writer, disassembler, options) { }
+        ) : base(r2r, writer, disassembler, options)
+        {
+        }
 
         internal override void Begin()
         {

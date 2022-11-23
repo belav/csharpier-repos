@@ -324,9 +324,13 @@ namespace CodeStyleConfigFileGenerator
         {
             public static IAnalyzerAssemblyLoader Instance = new AnalyzerAssemblyLoader();
 
-            private AnalyzerAssemblyLoader() { }
+            private AnalyzerAssemblyLoader()
+            {
+            }
 
-            public void AddDependencyLocation(string fullPath) { }
+            public void AddDependencyLocation(string fullPath)
+            {
+            }
 
             public Assembly LoadFromPath(string fullPath) => Assembly.LoadFrom(fullPath);
         }

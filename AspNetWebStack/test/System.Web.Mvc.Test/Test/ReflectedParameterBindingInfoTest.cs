@@ -163,17 +163,25 @@ namespace System.Web.Mvc.Test
                     Exclude = "excl_a, excl_b"
                 )]
                     object p1
-            ) { }
+            )
+            {
+            }
 
-            public void ParameterHasNoBindAttributes(object p1) { }
+            public void ParameterHasNoBindAttributes(object p1)
+            {
+            }
 
             public void ParameterHasSingleModelBinderAttribute(
                 [ModelBinder(typeof(MyModelBinder))] object p1
-            ) { }
+            )
+            {
+            }
 
             public void ParameterHasMultipleModelBinderAttributes(
                 [MyCustomModelBinder, MyCustomModelBinder] object p1
-            ) { }
+            )
+            {
+            }
         }
 
         [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = true, Inherited = true)]

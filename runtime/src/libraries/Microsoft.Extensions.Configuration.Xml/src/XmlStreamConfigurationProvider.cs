@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         /// </summary>
         /// <param name="source">The <see cref="XmlStreamConfigurationSource"/>.</param>
         public XmlStreamConfigurationProvider(XmlStreamConfigurationSource source) : base(source)
-        { }
+        {
+        }
 
         /// <summary>
         /// Read a stream of XML values into a key/value dictionary.

@@ -189,7 +189,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             try
             {
-                using (ECDsa ecdsa = ECDsa.Create(ECCurve.NamedCurves.brainpoolP256r1)) { }
+                using (ECDsa ecdsa = ECDsa.Create(ECCurve.NamedCurves.brainpoolP256r1))
+                {
+                }
 
                 return true;
             }

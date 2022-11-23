@@ -53,7 +53,9 @@ public class NotInlined
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void NotInlinedMeth() { }
+    public static void NotInlinedMeth()
+    {
+    }
 }
 
 public class Inlined
@@ -64,7 +66,9 @@ public class Inlined
         throw new Exception();
     }
 
-    public static void InlinedMeth() { }
+    public static void InlinedMeth()
+    {
+    }
 }
 
 public struct NotInlinedVal
@@ -76,7 +80,9 @@ public struct NotInlinedVal
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void NotInlinedValMeth() { }
+    public static void NotInlinedValMeth()
+    {
+    }
 }
 
 public class InlinedVal
@@ -87,7 +93,9 @@ public class InlinedVal
         throw new Exception();
     }
 
-    public static void InlinedValMeth() { }
+    public static void InlinedValMeth()
+    {
+    }
 }
 
 public class Test_CctorThrowInlinedStatic

@@ -294,7 +294,9 @@ namespace System.ServiceProcess
         ///       Service Control Manager. Specifies the actions to take when a
         ///       service resumes normal functioning after being paused.</para>
         /// </summary>
-        protected virtual void OnContinue() { }
+        protected virtual void OnContinue()
+        {
+        }
 
         /// <summary>
         ///    <para> When implemented in a
@@ -303,7 +305,9 @@ namespace System.ServiceProcess
         ///       the service by the Service Control Manager. Specifies the
         ///       actions to take when a service pauses.</para>
         /// </summary>
-        protected virtual void OnPause() { }
+        protected virtual void OnPause()
+        {
+        }
 
         /// <summary>
         ///    <para>
@@ -320,7 +324,9 @@ namespace System.ServiceProcess
         ///    <para>When implemented in a derived class,
         ///       executes when a Terminal Server session change event is received.</para>
         /// </summary>
-        protected virtual void OnSessionChange(SessionChangeDescription changeDescription) { }
+        protected virtual void OnSessionChange(SessionChangeDescription changeDescription)
+        {
+        }
 
         /// <summary>
         ///    <para>When implemented in a derived class,
@@ -329,7 +335,9 @@ namespace System.ServiceProcess
         ///       happen just prior
         ///       to the system shutting down.</para>
         /// </summary>
-        protected virtual void OnShutdown() { }
+        protected virtual void OnShutdown()
+        {
+        }
 
         /// <summary>
         ///    <para> When implemented in a
@@ -346,7 +354,9 @@ namespace System.ServiceProcess
         ///       services that start automatically at boot-up?
         ///    </note>
         /// </summary>
-        protected virtual void OnStart(string[] args) { }
+        protected virtual void OnStart(string[] args)
+        {
+        }
 
         /// <summary>
         ///    <para> When implemented in a
@@ -355,7 +365,9 @@ namespace System.ServiceProcess
         ///       service stops
         ///       running.</para>
         /// </summary>
-        protected virtual void OnStop() { }
+        protected virtual void OnStop()
+        {
+        }
 
         private unsafe void DeferredContinue()
         {
@@ -529,7 +541,9 @@ namespace System.ServiceProcess
         /// executes when a custom command is passed to the service. Specifies the actions to take when
         /// a command with the specified parameter value occurs.</para>
         /// </summary>
-        protected virtual void OnCustomCommand(int command) { }
+        protected virtual void OnCustomCommand(int command)
+        {
+        }
 
         /// <summary>
         ///    <para>Provides the main entry point for an executable that

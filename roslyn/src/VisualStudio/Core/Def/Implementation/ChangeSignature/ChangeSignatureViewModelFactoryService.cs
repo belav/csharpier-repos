@@ -9,7 +9,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
     internal abstract class ChangeSignatureViewModelFactoryService
         : IChangeSignatureViewModelFactoryService
     {
-        public ChangeSignatureViewModelFactoryService() { }
+        public ChangeSignatureViewModelFactoryService()
+        {
+        }
 
         public abstract SymbolDisplayPart[] GeneratePreviewDisplayParts(
             ChangeSignatureDialogViewModel.AddedParameterViewModel addedParameterViewModel

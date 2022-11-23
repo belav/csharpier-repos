@@ -46,7 +46,9 @@ namespace System.Reflection.Emit.Tests
         public string GetString;
         public int GetInt;
 
-        public MethodBuilderCustomAttribute() { }
+        public MethodBuilderCustomAttribute()
+        {
+        }
 
         public MethodBuilderCustomAttribute(string getOnlyString, int getOnlyInt32)
         {

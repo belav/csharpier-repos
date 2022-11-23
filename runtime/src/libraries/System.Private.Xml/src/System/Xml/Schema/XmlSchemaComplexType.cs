@@ -99,7 +99,9 @@ namespace System.Xml.Schema
             return localAnyType;
         }
 
-        public XmlSchemaComplexType() { }
+        public XmlSchemaComplexType()
+        {
+        }
 
         [XmlIgnore]
         internal static XmlSchemaComplexType AnyType

@@ -23,13 +23,17 @@ namespace Microsoft.CodeAnalysis.Storage
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
                 new LegacyPersistentStorageService();
         }
 
-        public LegacyPersistentStorageService() { }
+        public LegacyPersistentStorageService()
+        {
+        }
 
         public IPersistentStorage GetStorage(Solution solution) =>
             NoOpPersistentStorage.GetOrThrow(throwOnFailure: false);

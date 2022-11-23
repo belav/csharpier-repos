@@ -19,12 +19,16 @@ namespace System.Web.Http.Results
         /// <summary>Initializes a new instance of the <see cref="NotFoundResult"/> class.</summary>
         /// <param name="request">The request message which led to this result.</param>
         public NotFoundResult(HttpRequestMessage request)
-            : this(new StatusCodeResult.DirectDependencyProvider(request)) { }
+            : this(new StatusCodeResult.DirectDependencyProvider(request))
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="NotFoundResult"/> class.</summary>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public NotFoundResult(ApiController controller)
-            : this(new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
+            : this(new StatusCodeResult.ApiControllerDependencyProvider(controller))
+        {
+        }
 
         private NotFoundResult(StatusCodeResult.IDependencyProvider dependencies)
         {

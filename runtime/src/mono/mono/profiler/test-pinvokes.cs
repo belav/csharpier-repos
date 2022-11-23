@@ -4,7 +4,9 @@ using System.Runtime.CompilerServices;
 
 public class MonoPInvokeCallbackAttribute : Attribute
 {
-    public MonoPInvokeCallbackAttribute(Type delegateType) { }
+    public MonoPInvokeCallbackAttribute(Type delegateType)
+    {
+    }
 }
 
 public class T

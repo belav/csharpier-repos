@@ -78,7 +78,9 @@ namespace System.Data.SqlTypes
         }
 
         // Create a SqlChars from a SqlString
-        public SqlChars(SqlString value) : this(value.IsNull ? null : value.Value.ToCharArray()) { }
+        public SqlChars(SqlString value) : this(value.IsNull ? null : value.Value.ToCharArray())
+        {
+        }
 
         // Create a SqlChars from a SqlStreamChars
         internal SqlChars(SqlStreamChars s)
@@ -419,7 +421,9 @@ namespace System.Data.SqlTypes
         {
             Debug.Assert(_state >= SqlBytesCharsState.Null && _state <= SqlBytesCharsState.Stream);
 
-            if (IsNull) { }
+            if (IsNull)
+            {
+            }
             else
             {
                 Debug.Assert((_lCurLen >= 0 && _lCurLen <= x_lMaxLen) || FStream());

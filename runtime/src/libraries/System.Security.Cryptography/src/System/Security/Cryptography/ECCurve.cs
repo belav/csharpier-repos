@@ -134,7 +134,9 @@ namespace System.Security.Cryptography
                 {
                     oid = Oid.FromFriendlyName(oidFriendlyName, OidGroup.PublicKeyAlgorithm);
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             oid ??= new Oid(oidValue, oidFriendlyName);

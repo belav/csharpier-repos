@@ -26,7 +26,8 @@ public sealed class DesignTimeServicesReferenceAttribute : Attribute
     ///     This type should implement <see cref="IDesignTimeServices" />.
     /// </param>
     public DesignTimeServicesReferenceAttribute(string typeName) : this(typeName, forProvider: null)
-    { }
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DesignTimeServicesReferenceAttribute" /> class.

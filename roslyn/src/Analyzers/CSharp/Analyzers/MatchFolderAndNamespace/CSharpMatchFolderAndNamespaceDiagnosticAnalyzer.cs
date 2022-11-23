@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.MatchFolderAndNamespace
 #if !CODE_STYLE
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMatchFolderAndNamespaceDiagnosticAnalyzer() { }
+        public CSharpMatchFolderAndNamespaceDiagnosticAnalyzer()
+        {
+        }
 #endif
 
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;

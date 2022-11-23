@@ -21,7 +21,9 @@ namespace ILCompiler
     {
         private readonly FeatureSwitchHashtable _hashtable;
 
-        protected ManifestResourceBlockingPolicy() { }
+        protected ManifestResourceBlockingPolicy()
+        {
+        }
 
         public ManifestResourceBlockingPolicy(IEnumerable<KeyValuePair<string, bool>> switchValues)
         {
@@ -135,7 +137,9 @@ namespace ILCompiler
                 XmlReader reader,
                 ModuleDesc module,
                 IReadOnlyDictionary<string, bool> featureSwitchValues
-            ) : base(context, reader, module, featureSwitchValues) { }
+            ) : base(context, reader, module, featureSwitchValues)
+            {
+            }
 
             public static HashSet<string> GetSubstitutions(
                 TypeSystemContext context,

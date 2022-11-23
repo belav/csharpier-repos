@@ -18,6 +18,8 @@ namespace System.Security
     )]
     public sealed class SecuritySafeCriticalAttribute : Attribute
     {
-        public SecuritySafeCriticalAttribute() { }
+        public SecuritySafeCriticalAttribute()
+        {
+        }
     }
 }

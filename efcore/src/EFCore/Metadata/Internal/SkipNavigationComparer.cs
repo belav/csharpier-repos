@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 /// </summary>
 public sealed class SkipNavigationComparer : IComparer<IReadOnlySkipNavigation>
 {
-    private SkipNavigationComparer() { }
+    private SkipNavigationComparer()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

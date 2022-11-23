@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
     public class UseExpressionBodyForLambdasAnalyzerTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseExpressionBodyForLambdasAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+        public UseExpressionBodyForLambdasAnalyzerTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

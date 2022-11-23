@@ -37,7 +37,9 @@ class InheritingFromGrowingBase : GrowingBase
     public int x;
 }
 
-struct LocallyDefinedStructure { }
+struct LocallyDefinedStructure
+{
+}
 
 static class OpenClosedDelegateExtension
 {
@@ -361,7 +363,9 @@ class Program
         public MyLoadContext()
             : base(
                 AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly()).IsCollectible
-            ) { }
+            )
+        {
+        }
 
         public void TestMultipleLoads()
         {

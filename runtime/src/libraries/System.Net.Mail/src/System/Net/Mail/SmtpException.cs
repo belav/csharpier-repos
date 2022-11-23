@@ -84,12 +84,18 @@ namespace System.Net.Mail
             _statusCode = statusCode;
         }
 
-        public SmtpException() : this(SmtpStatusCode.GeneralFailure) { }
+        public SmtpException() : this(SmtpStatusCode.GeneralFailure)
+        {
+        }
 
-        public SmtpException(string? message) : base(message) { }
+        public SmtpException(string? message) : base(message)
+        {
+        }
 
         public SmtpException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected SmtpException(
             SerializationInfo serializationInfo,
@@ -109,7 +115,9 @@ namespace System.Net.Mail
         }
 
         internal SmtpException(string message, string? serverResponse)
-            : base(message + " " + SR.Format(SR.MailServerResponse, serverResponse)) { }
+            : base(message + " " + SR.Format(SR.MailServerResponse, serverResponse))
+        {
+        }
 
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,

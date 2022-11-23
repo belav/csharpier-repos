@@ -63,7 +63,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         internal static readonly PopInstruction Instance = new PopInstruction();
 
-        private PopInstruction() { }
+        private PopInstruction()
+        {
+        }
 
         public override int ConsumedStack => 1;
         public override string InstructionName => "Pop";
@@ -79,7 +81,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         internal static readonly DupInstruction Instance = new DupInstruction();
 
-        private DupInstruction() { }
+        private DupInstruction()
+        {
+        }
 
         public override int ProducedStack => 1;
 

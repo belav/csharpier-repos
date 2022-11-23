@@ -75,7 +75,9 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        public HttpClientHandler_RemoteServerTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_RemoteServerTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [OuterLoop("Uses external servers")]
         [Theory]

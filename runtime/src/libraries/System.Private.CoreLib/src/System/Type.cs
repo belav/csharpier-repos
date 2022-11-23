@@ -14,7 +14,9 @@ namespace System
 {
     public abstract partial class Type : MemberInfo, IReflect
     {
-        protected Type() { }
+        protected Type()
+        {
+        }
 
         public override MemberTypes MemberType => MemberTypes.TypeInfo;
 

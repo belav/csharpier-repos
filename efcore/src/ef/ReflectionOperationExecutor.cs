@@ -126,7 +126,9 @@ internal class ReflectionOperationExecutor : OperationExecutorBase
                 {
                     return Assembly.LoadFrom(path);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

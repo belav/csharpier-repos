@@ -33,7 +33,9 @@ namespace Test
                 {
                     while (Static2() && Static2())
                     {
-                        while (Static1(ref m_auForward3)[2] > 175u) { }
+                        while (Static1(ref m_auForward3)[2] > 175u)
+                        {
+                        }
                         //new float[7]; - not a valid statement, see VS7 #244656.
                         new float();
                     }
@@ -41,7 +43,9 @@ namespace Test
                 }
                 //new AA[7]; - not a valid statement, see VS7 #244656.
                 new AA();
-                while (local2.m_bField3) { }
+                while (local2.m_bField3)
+                {
+                }
                 return;
             }
         }

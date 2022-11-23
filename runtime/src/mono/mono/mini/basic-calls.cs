@@ -36,7 +36,9 @@ class Tests
     }
 #endif
 
-    static void dummy() { }
+    static void dummy()
+    {
+    }
 
     public static int test_0_return()
     {

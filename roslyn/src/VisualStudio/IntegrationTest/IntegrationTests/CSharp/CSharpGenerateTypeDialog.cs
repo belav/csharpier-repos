@@ -24,7 +24,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         private GenerateTypeDialog_OutOfProc GenerateTypeDialog => VisualStudio.GenerateTypeDialog;
 
         public CSharpGenerateTypeDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpGenerateTypeDialog)) { }
+            : base(instanceFactory, nameof(CSharpGenerateTypeDialog))
+        {
+        }
 
         [WpfFact]
         public void OpenAndCloseDialog()

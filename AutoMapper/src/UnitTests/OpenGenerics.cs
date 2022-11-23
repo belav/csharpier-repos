@@ -37,7 +37,9 @@ public class SealGenerics : AutoMapperSpecBase
 
 public class OpenGenerics_With_Struct : AutoMapperSpecBase
 {
-    public struct Id<T> { }
+    public struct Id<T>
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(
@@ -60,7 +62,9 @@ public class OpenGenerics_With_Base_Generic : AutoMapperSpecBase
         public T Value2 { get; set; }
     }
 
-    public class Bar<T> : BarBase<T> { }
+    public class Bar<T> : BarBase<T>
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(
@@ -87,7 +91,9 @@ public class GenericMapsAsNonGeneric : AutoMapperSpecBase
         public T Value;
     }
 
-    class NonGenericDestination : Destination<string> { }
+    class NonGenericDestination : Destination<string>
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

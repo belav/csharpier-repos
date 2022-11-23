@@ -35,7 +35,9 @@ namespace Internal.Runtime.TypeLoader
 
     internal class GenericTypeDictionary : GenericDictionary
     {
-        public GenericTypeDictionary(GenericDictionaryCell[] cells) : base(cells) { }
+        public GenericTypeDictionary(GenericDictionaryCell[] cells) : base(cells)
+        {
+        }
 
         public override IntPtr Allocate()
         {
@@ -55,7 +57,9 @@ namespace Internal.Runtime.TypeLoader
 
     internal class GenericMethodDictionary : GenericDictionary
     {
-        public GenericMethodDictionary(GenericDictionaryCell[] cells) : base(cells) { }
+        public GenericMethodDictionary(GenericDictionaryCell[] cells) : base(cells)
+        {
+        }
 
         public override unsafe IntPtr Allocate()
         {

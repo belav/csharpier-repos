@@ -7,7 +7,9 @@ namespace System
 {
     public abstract class ContextBoundObject : MarshalByRefObject
     {
-        protected ContextBoundObject() { }
+        protected ContextBoundObject()
+        {
+        }
     }
 
     [Serializable]
@@ -16,9 +18,13 @@ namespace System
     )]
     public class ContextMarshalException : SystemException
     {
-        public ContextMarshalException() : this(SR.Arg_ContextMarshalException, null) { }
+        public ContextMarshalException() : this(SR.Arg_ContextMarshalException, null)
+        {
+        }
 
-        public ContextMarshalException(string? message) : this(message, null) { }
+        public ContextMarshalException(string? message) : this(message, null)
+        {
+        }
 
         public ContextMarshalException(string? message, Exception? inner) : base(message, inner)
         {
@@ -26,12 +32,16 @@ namespace System
         }
 
         protected ContextMarshalException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     public partial class ContextStaticAttribute : Attribute
     {
-        public ContextStaticAttribute() { }
+        public ContextStaticAttribute()
+        {
+        }
     }
 }

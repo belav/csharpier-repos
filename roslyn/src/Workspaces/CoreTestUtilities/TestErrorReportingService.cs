@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestErrorReportingService() { }
+        public TestErrorReportingService()
+        {
+        }
 
         public Action<string> OnError { get; set; } = message => Assert.False(true, message);
 

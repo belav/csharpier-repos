@@ -63,7 +63,9 @@ public class ConventionSetBuilderTests
         public void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) { }
+        )
+        {
+        }
     }
 
     protected class DerivedTestConvention : TestConvention, IModelInitializedConvention
@@ -71,7 +73,9 @@ public class ConventionSetBuilderTests
         public void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) { }
+        )
+        {
+        }
     }
 
     protected virtual ConventionSet GetConventionSet() => InMemoryConventionSetBuilder.Build();

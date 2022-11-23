@@ -205,7 +205,9 @@ namespace System.Xml.Tests
         }
 
         public ExceptionVerifier(string assemblyName, ITestOutputHelper output)
-            : this(assemblyName, ExceptionVerificationFlags.None, output) { }
+            : this(assemblyName, ExceptionVerificationFlags.None, output)
+        {
+        }
 
         private void ExceptionInfoOutput()
         {
@@ -448,6 +450,8 @@ namespace System.Xml.Tests
 
     public class VerifyException : Exception
     {
-        public VerifyException(string msg) : base(msg) { }
+        public VerifyException(string msg) : base(msg)
+        {
+        }
     }
 }

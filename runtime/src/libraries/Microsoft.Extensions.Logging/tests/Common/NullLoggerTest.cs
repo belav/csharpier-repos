@@ -14,7 +14,9 @@ namespace Microsoft.Extensions.Logging.Abstractions
             var logger = NullLogger.Instance;
 
             // Act & Assert
-            using (logger.BeginScope("48656c6c6f20576f726c64")) { }
+            using (logger.BeginScope("48656c6c6f20576f726c64"))
+            {
+            }
         }
 
         [Fact]

@@ -15,7 +15,9 @@ namespace System.Text.Json.Serialization.Tests
     public abstract partial class ReferenceHandlerTests_IgnoreCycles : SerializerTests
     {
         public ReferenceHandlerTests_IgnoreCycles(JsonSerializerWrapper stringSerializer)
-            : base(stringSerializer) { }
+            : base(stringSerializer)
+        {
+        }
 
         private static readonly JsonSerializerOptions s_optionsIgnoreCycles =
             new JsonSerializerOptions
@@ -652,9 +654,13 @@ namespace System.Text.Json.Serialization.Tests
             public IValueNodeWithIValueNodeProperty Next { get; set; }
         }
 
-        public class EmptyClass { }
+        public class EmptyClass
+        {
+        }
 
-        public struct EmptyStruct { }
+        public struct EmptyStruct
+        {
+        }
 
         public class EmptyClassWithExtensionProperty
         {
@@ -671,9 +677,13 @@ namespace System.Text.Json.Serialization.Tests
             public NodeWithExtensionData Next { get; set; }
         }
 
-        public class RecursiveDictionary : Dictionary<string, RecursiveDictionary> { }
+        public class RecursiveDictionary : Dictionary<string, RecursiveDictionary>
+        {
+        }
 
-        public class RecursiveList : List<RecursiveList> { }
+        public class RecursiveList : List<RecursiveList>
+        {
+        }
 
         public class Person
         {

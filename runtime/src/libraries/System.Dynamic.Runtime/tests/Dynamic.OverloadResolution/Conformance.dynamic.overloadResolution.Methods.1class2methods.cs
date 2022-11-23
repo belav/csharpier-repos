@@ -1993,9 +1993,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -2042,9 +2046,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -2091,9 +2099,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -2141,9 +2153,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
     public class Target
     {
@@ -2190,9 +2206,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
     public class Target
     {
@@ -2240,9 +2260,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
     public class Target
     {
@@ -2488,7 +2512,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Derived : Base
     {
@@ -2544,9 +2570,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Test
     {
@@ -2590,9 +2620,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Test
     {
@@ -2636,7 +2670,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -2680,7 +2716,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -2724,9 +2762,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Test
     {
@@ -2770,9 +2812,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Test
     {
@@ -3056,7 +3102,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3101,7 +3149,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3146,9 +3196,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Test
     {
@@ -3193,9 +3247,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Test
     {
@@ -3240,7 +3298,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3285,7 +3345,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3472,7 +3534,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3516,7 +3580,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3560,7 +3626,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3604,7 +3672,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Test
     {
@@ -3983,9 +4053,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             return 0;
         }
 
-        public void Bar<T, S>(Func<T, Func<S, int>> x) { }
+        public void Bar<T, S>(Func<T, Func<S, int>> x)
+        {
+        }
 
-        public void Bar<T, S>(Func<T, Func<S, S>> x) { }
+        public void Bar<T, S>(Func<T, Func<S, S>> x)
+        {
+        }
     }
     // </Code>
 }
@@ -4156,7 +4230,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T> where T : class { }
+    public class C<T> where T : class
+    {
+    }
 
     public class A
     {
@@ -4189,9 +4265,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class C<T> where T : I { }
+    public class C<T> where T : I
+    {
+    }
 
     public class A
     {
@@ -4224,7 +4304,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T> where T : class { }
+    public class C<T> where T : class
+    {
+    }
 
     public class A
     {

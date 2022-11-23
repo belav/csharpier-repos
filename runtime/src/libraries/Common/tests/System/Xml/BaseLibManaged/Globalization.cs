@@ -7,7 +7,9 @@ namespace WebData.BaseLib
 {
     public class WebDataBaseLibException : System.Exception
     {
-        public WebDataBaseLibException(string sExceptionMsg) : base(sExceptionMsg) { }
+        public WebDataBaseLibException(string sExceptionMsg) : base(sExceptionMsg)
+        {
+        }
     }
 
     public class StringGen

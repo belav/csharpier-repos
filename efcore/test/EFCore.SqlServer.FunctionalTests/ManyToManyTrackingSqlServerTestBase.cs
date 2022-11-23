@@ -9,7 +9,9 @@ public abstract class ManyToManyTrackingSqlServerTestBase<TFixture>
     : ManyToManyTrackingRelationalTestBase<TFixture>
     where TFixture : ManyToManyTrackingSqlServerTestBase<TFixture>.ManyToManyTrackingSqlServerFixtureBase
 {
-    protected ManyToManyTrackingSqlServerTestBase(TFixture fixture) : base(fixture) { }
+    protected ManyToManyTrackingSqlServerTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     protected override Dictionary<string, DeleteBehavior> CustomDeleteBehaviors { get; } =
         new()

@@ -12,7 +12,9 @@ public class CustomConvertersSqliteTest
     }
 
     // Disabled: SQLite database is case-sensitive
-    public override void Can_insert_and_read_back_with_case_insensitive_string_key() { }
+    public override void Can_insert_and_read_back_with_case_insensitive_string_key()
+    {
+    }
 
     [ConditionalFact]
     public override void Value_conversion_is_appropriately_used_for_join_condition()

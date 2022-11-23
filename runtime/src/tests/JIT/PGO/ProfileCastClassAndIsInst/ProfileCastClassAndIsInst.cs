@@ -6,17 +6,29 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-public interface IInterface { }
+public interface IInterface
+{
+}
 
-public interface IGenericInterface<T> { }
+public interface IGenericInterface<T>
+{
+}
 
-public class ClassA : IInterface { }
+public class ClassA : IInterface
+{
+}
 
-public class ClassB : ClassA { }
+public class ClassB : ClassA
+{
+}
 
-public class ClassC { }
+public class ClassC
+{
+}
 
-public struct GenericStruct<T> : IGenericInterface<T> { }
+public struct GenericStruct<T> : IGenericInterface<T>
+{
+}
 
 public class Program
 {

@@ -9,10 +9,14 @@ namespace System.IO.Pipes
     public sealed class PipeAuditRule : AuditRule
     {
         public PipeAuditRule(IdentityReference identity, PipeAccessRights rights, AuditFlags flags)
-            : this(identity, AccessMaskFromRights(rights), false, flags) { }
+            : this(identity, AccessMaskFromRights(rights), false, flags)
+        {
+        }
 
         public PipeAuditRule(string identity, PipeAccessRights rights, AuditFlags flags)
-            : this(new NTAccount(identity), AccessMaskFromRights(rights), false, flags) { }
+            : this(new NTAccount(identity), AccessMaskFromRights(rights), false, flags)
+        {
+        }
 
         internal PipeAuditRule(
             IdentityReference identity,
@@ -27,7 +31,9 @@ namespace System.IO.Pipes
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 flags
-            ) { }
+            )
+        {
+        }
 
         private static int AccessMaskFromRights(PipeAccessRights rights)
         {

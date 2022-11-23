@@ -12,9 +12,13 @@ namespace System.Web.Mvc
         private IModelBinderProvider[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public ModelBinderProviderCollection() { }
+        public ModelBinderProviderCollection()
+        {
+        }
 
-        public ModelBinderProviderCollection(IList<IModelBinderProvider> list) : base(list) { }
+        public ModelBinderProviderCollection(IList<IModelBinderProvider> list) : base(list)
+        {
+        }
 
         internal ModelBinderProviderCollection(
             IList<IModelBinderProvider> list,

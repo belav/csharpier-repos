@@ -50,7 +50,9 @@ namespace System.Text.Json.Serialization.Tests
 
     public class SimpleTestClassWithNulls : SimpleBaseClassWithNullables, ITestClass
     {
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {

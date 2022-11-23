@@ -11,7 +11,9 @@ namespace System.Formats.Tar
     {
         // Constructor called when reading a TarEntry from a TarReader.
         internal GnuTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.Gnu) { }
+            : base(header, readerOfOrigin, TarEntryFormat.Gnu)
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="GnuTarEntry"/> instance with the specified entry type and entry name.

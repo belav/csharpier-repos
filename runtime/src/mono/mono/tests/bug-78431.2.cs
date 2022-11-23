@@ -6,7 +6,9 @@ public class Pair<T>
 
 public class RList<T>
 {
-    public class Nil : RList<T> { }
+    public class Nil : RList<T>
+    {
+    }
 
     public class Zero : RList<T>
     {

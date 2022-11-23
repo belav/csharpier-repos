@@ -30,7 +30,9 @@ namespace System.Web.Helpers.Test
         private class DynamicWrapperMetaObject : DynamicMetaObject
         {
             public DynamicWrapperMetaObject(Expression expression, object value)
-                : base(expression, BindingRestrictions.Empty, value) { }
+                : base(expression, BindingRestrictions.Empty, value)
+            {
+            }
 
             private object WrappedObject
             {

@@ -20,7 +20,9 @@ namespace System.Drawing.Printing
         /// </remarks>
         internal sealed class SafeDeviceModeHandle : SafeHandle
         {
-            public SafeDeviceModeHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+            public SafeDeviceModeHandle() : base(IntPtr.Zero, ownsHandle: true)
+            {
+            }
 
             internal SafeDeviceModeHandle(IntPtr handle) : base(IntPtr.Zero, ownsHandle: true)
             {
@@ -59,7 +61,9 @@ namespace System.Drawing.Printing
 
         private protected SafeDeviceModeHandle? _modeHandle;
 
-        protected PrintController() { }
+        protected PrintController()
+        {
+        }
 
         public virtual bool IsPreview => false;
 
@@ -74,7 +78,9 @@ namespace System.Drawing.Printing
         /// <summary>
         /// When overridden in a derived class, completes the control sequence of when and how to print a page in a document.
         /// </summary>
-        public virtual void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
+        public virtual void OnEndPage(PrintDocument document, PrintPageEventArgs e)
+        {
+        }
 
         /// <remarks>
         /// If you have nested PrintControllers, this method won't get called on the inner one.

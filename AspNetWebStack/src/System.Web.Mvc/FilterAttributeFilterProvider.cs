@@ -10,7 +10,9 @@ namespace System.Web.Mvc
     {
         private readonly bool _cacheAttributeInstances;
 
-        public FilterAttributeFilterProvider() : this(true) { }
+        public FilterAttributeFilterProvider() : this(true)
+        {
+        }
 
         public FilterAttributeFilterProvider(bool cacheAttributeInstances)
         {

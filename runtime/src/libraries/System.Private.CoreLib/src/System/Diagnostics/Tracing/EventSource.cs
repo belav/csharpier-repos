@@ -177,7 +177,9 @@ namespace System.Diagnostics.Tracing
 {
     [Conditional("NEEDED_FOR_SOURCE_GENERATOR_ONLY")]
     [AttributeUsage(AttributeTargets.Class)]
-    internal sealed class EventSourceAutoGenerateAttribute : Attribute { }
+    internal sealed class EventSourceAutoGenerateAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// This class is meant to be inherited by a user-defined event source in order to define a managed
@@ -733,7 +735,9 @@ namespace System.Diagnostics.Tracing
         /// If the ETW provider name of the EventSource is not given, the name of the EventSource class is used as
         /// the ETW provider name.
         /// </summary>
-        protected EventSource() : this(EventSourceSettings.EtwManifestEventFormat) { }
+        protected EventSource() : this(EventSourceSettings.EtwManifestEventFormat)
+        {
+        }
 
         /// <summary>
         /// By default calling the 'WriteEvent' methods do NOT throw on errors (they silently discard the event).
@@ -750,12 +754,16 @@ namespace System.Diagnostics.Tracing
             : this(
                 EventSourceSettings.EtwManifestEventFormat
                     | (throwOnEventWriteErrors ? EventSourceSettings.ThrowOnEventWriteErrors : 0)
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Construct an EventSource with additional non-default settings (see EventSourceSettings for more)
         /// </summary>
-        protected EventSource(EventSourceSettings settings) : this(settings, null) { }
+        protected EventSource(EventSourceSettings settings) : this(settings, null)
+        {
+        }
 
         /// <summary>
         /// Construct an EventSource with additional non-default settings.
@@ -836,7 +844,9 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// This method is called when the eventSource is updated by the controller.
         /// </summary>
-        protected virtual void OnEventCommand(EventCommandEventArgs command) { }
+        protected virtual void OnEventCommand(EventCommandEventArgs command)
+        {
+        }
 
 #pragma warning disable 1591
         // optimized for common signatures (no args)
@@ -1618,7 +1628,9 @@ namespace System.Diagnostics.Tracing
                     {
                         SendManifest(m_rawManifest);
                     }
-                    catch { } // If it fails, simply give up.
+                    catch
+                    {
+                    } // If it fails, simply give up.
                     m_eventSourceEnabled = false;
                 }
                 if (m_etwProvider != null)
@@ -1706,7 +1718,9 @@ namespace System.Diagnostics.Tracing
         // FrameworkEventSource is on the startup path for the framework, so we have this internal overload that it can use
         // to prevent the working set hit from looking at the custom attributes on the type to get the Guid.
         internal EventSource(Guid eventSourceGuid, string eventSourceName)
-            : this(eventSourceGuid, eventSourceName, EventSourceSettings.EtwManifestEventFormat) { }
+            : this(eventSourceGuid, eventSourceName, EventSourceSettings.EtwManifestEventFormat)
+        {
+        }
 
         // Used by the internal FrameworkEventSource constructor and the TraceLogging-style event source constructor
         internal EventSource(
@@ -4592,7 +4606,9 @@ namespace System.Diagnostics.Tracing
                 WriteEventString(msg);
                 WriteStringToAllListeners("EventSourceMessage", msg);
             }
-            catch { } // If we fail during last chance logging, well, we have to give up....
+            catch
+            {
+            } // If we fail during last chance logging, well, we have to give up....
         }
 
         private static EventSourceSettings ValidateSettings(EventSourceSettings settings)
@@ -5824,7 +5840,9 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Constructs a default NonEventAttribute
         /// </summary>
-        public NonEventAttribute() { }
+        public NonEventAttribute()
+        {
+        }
     }
 
     // FUTURE we may want to expose this at some point once we have a partner that can help us validate the design.

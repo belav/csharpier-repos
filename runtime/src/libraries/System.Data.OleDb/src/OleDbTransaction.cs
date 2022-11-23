@@ -30,7 +30,9 @@ namespace System.Data.OleDb
             ) : base(transaction)
             {
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     hr = transaction.StartTransaction(isolevel, 0, IntPtr.Zero, out _);
@@ -56,7 +58,9 @@ namespace System.Data.OleDb
                 {
                     DangerousAddRef(ref mustRelease);
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    try { }
+                    try
+                    {
+                    }
                     finally
                     {
                         hr = (OleDbHResult)
@@ -84,7 +88,9 @@ namespace System.Data.OleDb
                 {
                     DangerousAddRef(ref mustRelease);
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    try { }
+                    try
+                    {
+                    }
                     finally
                     {
                         hr = (OleDbHResult)

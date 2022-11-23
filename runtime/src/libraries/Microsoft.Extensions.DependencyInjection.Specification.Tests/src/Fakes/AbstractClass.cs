@@ -3,5 +3,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
-    public abstract class AbstractClass { }
+    public abstract class AbstractClass
+    {
+    }
 }

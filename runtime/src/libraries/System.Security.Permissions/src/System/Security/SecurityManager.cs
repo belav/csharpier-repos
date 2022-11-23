@@ -102,9 +102,13 @@ namespace System.Security
         }
 
         [Obsolete]
-        public static void SavePolicy() { }
+        public static void SavePolicy()
+        {
+        }
 
         [Obsolete]
-        public static void SavePolicyLevel(PolicyLevel level) { }
+        public static void SavePolicyLevel(PolicyLevel level)
+        {
+        }
     }
 }

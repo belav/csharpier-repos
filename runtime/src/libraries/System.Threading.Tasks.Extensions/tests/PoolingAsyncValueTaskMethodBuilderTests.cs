@@ -744,7 +744,9 @@ namespace System.Threading.Tasks.Tests
 
             public void MoveNext() => MoveNextDelegate?.Invoke();
 
-            public void SetStateMachine(IAsyncStateMachine stateMachine) { }
+            public void SetStateMachine(IAsyncStateMachine stateMachine)
+            {
+            }
         }
     }
 }

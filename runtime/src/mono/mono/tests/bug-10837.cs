@@ -29,7 +29,9 @@ namespace Repro
             Console.WriteLine("Derived`2.Method()");
         }
 
-        ~Derived() { }
+        ~Derived()
+        {
+        }
     }
 
     class FinalClass : Derived<int>, Interface<string>, Interface<int>

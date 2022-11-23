@@ -355,7 +355,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             private readonly Type _type;
             private readonly ICompositionElement _origin;
 
-            public TypeOrigin(Type type) : this(type, null) { }
+            public TypeOrigin(Type type) : this(type, null)
+            {
+            }
 
             public TypeOrigin(Type type, ICompositionElement origin)
             {

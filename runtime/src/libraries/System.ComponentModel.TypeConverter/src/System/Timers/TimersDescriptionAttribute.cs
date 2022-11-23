@@ -19,7 +19,9 @@ namespace System.Timers
         /// <summary>
         /// Constructs a new sys description.
         /// </summary>
-        public TimersDescriptionAttribute(string description) : base(description) { }
+        public TimersDescriptionAttribute(string description) : base(description)
+        {
+        }
 
         /// <summary>
         /// Constructs a new localized sys description.

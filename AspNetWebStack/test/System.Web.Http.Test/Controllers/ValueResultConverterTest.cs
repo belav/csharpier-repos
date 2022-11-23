@@ -73,8 +73,12 @@ namespace System.Web.Http.Controllers
             Assert.Same(_request, result.RequestMessage);
         }
 
-        public class Animal { }
+        public class Animal
+        {
+        }
 
-        public class Dog : Animal { }
+        public class Dog : Animal
+        {
+        }
     }
 }

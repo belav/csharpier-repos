@@ -49,7 +49,8 @@ namespace System.Threading.Tasks.Tests
         {
             // Verify that a task can be disposed by a continuation
             var endTask = new ManualResetEvent(false);
-            var task = new Task(() => { });
+            var task = new Task(() => {
+            });
             var task2 = task.ContinueWith(completedTask =>
             {
                 completedTask.Dispose();
@@ -65,11 +66,14 @@ namespace System.Threading.Tasks.Tests
         public static void Dispose_ThenAddContinuation()
         {
             // Verify that a continuation can be added after a task is completed and disposed
-            var task = new Task(() => { });
+            var task = new Task(() => {
+            });
             task.Start();
             task.Wait();
             task.Dispose();
-            var task2 = task.ContinueWith(completedTask => { });
+            var task2 = task.ContinueWith(completedTask =>
+            {
+            });
             task2.Wait();
             task2.Dispose();
         }

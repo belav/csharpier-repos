@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             public static readonly BoolValueSetFactory Instance = new BoolValueSetFactory();
 
-            private BoolValueSetFactory() { }
+            private BoolValueSetFactory()
+            {
+            }
 
             IValueSet IValueSetFactory.AllValues => BoolValueSet.AllValues;
 

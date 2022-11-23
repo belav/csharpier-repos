@@ -628,7 +628,9 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                 if (relatedEntities != null)
                 {
                     using var enumerator = relatedEntities.GetEnumerator();
-                    while (enumerator.MoveNext()) { }
+                    while (enumerator.MoveNext())
+                    {
+                    }
                 }
                 else
                 {

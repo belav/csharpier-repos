@@ -122,7 +122,9 @@ namespace Microsoft.Extensions.Logging.Console
 {
     public abstract partial class ConsoleFormatter
     {
-        protected ConsoleFormatter(string name) { }
+        protected ConsoleFormatter(string name)
+        {
+        }
 
         public string Name
         {
@@ -144,24 +146,32 @@ namespace Microsoft.Extensions.Logging.Console
 
     public partial class ConsoleFormatterOptions
     {
-        public ConsoleFormatterOptions() { }
+        public ConsoleFormatterOptions()
+        {
+        }
 
         public bool IncludeScopes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("DateTimeFormat")]
         public string? TimestampFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseUtcTimestamp
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -174,7 +184,9 @@ namespace Microsoft.Extensions.Logging.Console
 
     public partial class ConsoleLoggerOptions
     {
-        public ConsoleLoggerOptions() { }
+        public ConsoleLoggerOptions()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "ConsoleLoggerOptions.DisableColors has been deprecated. Use SimpleConsoleFormatterOptions.ColorBehavior instead."
@@ -182,7 +194,9 @@ namespace Microsoft.Extensions.Logging.Console
         public bool DisableColors
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -191,12 +205,16 @@ namespace Microsoft.Extensions.Logging.Console
         public Microsoft.Extensions.Logging.Console.ConsoleLoggerFormat Format
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? FormatterName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -205,22 +223,30 @@ namespace Microsoft.Extensions.Logging.Console
         public bool IncludeScopes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Extensions.Logging.LogLevel LogToStandardErrorThreshold
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxQueueLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Extensions.Logging.Console.ConsoleLoggerQueueFullMode QueueFullMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -229,7 +255,9 @@ namespace Microsoft.Extensions.Logging.Console
         public string? TimestampFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -238,7 +266,9 @@ namespace Microsoft.Extensions.Logging.Console
         public bool UseUtcTimestamp
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -251,23 +281,31 @@ namespace Microsoft.Extensions.Logging.Console
     {
         public ConsoleLoggerProvider(
             Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions> options
-        ) { }
+        )
+        {
+        }
 
         public ConsoleLoggerProvider(
             Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions> options,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Logging.Console.ConsoleFormatter>? formatters
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string name)
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void SetScopeProvider(
             Microsoft.Extensions.Logging.IExternalScopeProvider scopeProvider
-        ) { }
+        )
+        {
+        }
     }
 
     public enum ConsoleLoggerQueueFullMode
@@ -279,12 +317,16 @@ namespace Microsoft.Extensions.Logging.Console
     public partial class JsonConsoleFormatterOptions
         : Microsoft.Extensions.Logging.Console.ConsoleFormatterOptions
     {
-        public JsonConsoleFormatterOptions() { }
+        public JsonConsoleFormatterOptions()
+        {
+        }
 
         public System.Text.Json.JsonWriterOptions JsonWriterOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -298,17 +340,23 @@ namespace Microsoft.Extensions.Logging.Console
     public partial class SimpleConsoleFormatterOptions
         : Microsoft.Extensions.Logging.Console.ConsoleFormatterOptions
     {
-        public SimpleConsoleFormatterOptions() { }
+        public SimpleConsoleFormatterOptions()
+        {
+        }
 
         public Microsoft.Extensions.Logging.Console.LoggerColorBehavior ColorBehavior
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SingleLine
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

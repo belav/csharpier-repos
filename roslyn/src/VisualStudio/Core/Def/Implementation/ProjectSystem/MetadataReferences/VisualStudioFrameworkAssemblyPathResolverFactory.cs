@@ -112,9 +112,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             return true;
                         }
                     }
-                    catch (FileNotFoundException) { }
-                    catch (FileLoadException) { }
-                    catch (BadImageFormatException) { }
+                    catch (FileNotFoundException)
+                    {
+                    }
+                    catch (FileLoadException)
+                    {
+                    }
+                    catch (BadImageFormatException)
+                    {
+                    }
                 }
 
                 return false;

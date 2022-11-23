@@ -222,7 +222,9 @@ namespace System.Threading.Channels.Tests
                                     Interlocked.Increment(ref readCount);
                                 }
                             }
-                            catch (ChannelClosedException) { }
+                            catch (ChannelClosedException)
+                            {
+                            }
                         }
                     )
                 );

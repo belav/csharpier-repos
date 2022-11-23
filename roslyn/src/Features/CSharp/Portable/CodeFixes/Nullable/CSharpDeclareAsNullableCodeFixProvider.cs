@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpDeclareAsNullableCodeFixProvider() { }
+        public CSharpDeclareAsNullableCodeFixProvider()
+        {
+        }
 
         // warning CS8603: Possible null reference return.
         // warning CS8600: Converting null literal or possible null value to non-nullable type.
@@ -508,7 +510,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                     CSharpFeaturesResources.Declare_as_nullable,
                     createChangedDocument,
                     equivalenceKey
-                ) { }
+                )
+            {
+            }
         }
     }
 }

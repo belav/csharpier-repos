@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpF1Help() : base(nameof(CSharpF1Help)) { }
+        public CSharpF1Help() : base(nameof(CSharpF1Help))
+        {
+        }
 
         [IdeFact]
         private async Task F1Help()

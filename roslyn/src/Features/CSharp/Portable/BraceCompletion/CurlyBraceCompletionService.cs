@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CurlyBraceCompletionService() { }
+        public CurlyBraceCompletionService()
+        {
+        }
 
         protected override char OpeningBrace => CurlyBrace.OpenCharacter;
 
@@ -134,7 +136,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             private readonly CSharpSyntaxFormattingOptions _options;
 
             public BraceCompletionFormattingRule(FormattingOptions2.IndentStyle indentStyle)
-                : this(indentStyle, CSharpSyntaxFormattingOptions.Default) { }
+                : this(indentStyle, CSharpSyntaxFormattingOptions.Default)
+            {
+            }
 
             private BraceCompletionFormattingRule(
                 FormattingOptions2.IndentStyle indentStyle,

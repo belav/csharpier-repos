@@ -77,7 +77,9 @@ namespace System.SpanTests
             );
         }
 
-        private struct NotImcomparable { }
+        private struct NotImcomparable
+        {
+        }
 
         [Theory]
         [InlineData(0)]

@@ -90,12 +90,16 @@ namespace System.Net
             System.Collections.IEnumerable,
             System.Runtime.Serialization.ISerializable
     {
-        public WebHeaderCollection() { }
+        public WebHeaderCollection()
+        {
+        }
 
         protected WebHeaderCollection(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override string[] AllKeys
         {
@@ -108,29 +112,45 @@ namespace System.Net
         public string? this[System.Net.HttpRequestHeader header]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? this[System.Net.HttpResponseHeader header]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Collections.Specialized.NameObjectCollectionBase.KeysCollection Keys
         {
             get { throw null; }
         }
 
-        public void Add(System.Net.HttpRequestHeader header, string? value) { }
+        public void Add(System.Net.HttpRequestHeader header, string? value)
+        {
+        }
 
-        public void Add(System.Net.HttpResponseHeader header, string? value) { }
+        public void Add(System.Net.HttpResponseHeader header, string? value)
+        {
+        }
 
-        public void Add(string header) { }
+        public void Add(string header)
+        {
+        }
 
-        public override void Add(string name, string? value) { }
+        public override void Add(string name, string? value)
+        {
+        }
 
-        protected void AddWithoutValidate(string headerName, string? headerValue) { }
+        protected void AddWithoutValidate(string headerName, string? headerValue)
+        {
+        }
 
-        public override void Clear() { }
+        public override void Clear()
+        {
+        }
 
         public override string? Get(int index)
         {
@@ -155,7 +175,9 @@ namespace System.Net
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override string[]? GetValues(int index)
         {
@@ -177,24 +199,40 @@ namespace System.Net
             throw null;
         }
 
-        public override void OnDeserialization(object? sender) { }
+        public override void OnDeserialization(object? sender)
+        {
+        }
 
-        public void Remove(System.Net.HttpRequestHeader header) { }
+        public void Remove(System.Net.HttpRequestHeader header)
+        {
+        }
 
-        public void Remove(System.Net.HttpResponseHeader header) { }
+        public void Remove(System.Net.HttpResponseHeader header)
+        {
+        }
 
-        public override void Remove(string name) { }
+        public override void Remove(string name)
+        {
+        }
 
-        public void Set(System.Net.HttpRequestHeader header, string? value) { }
+        public void Set(System.Net.HttpRequestHeader header, string? value)
+        {
+        }
 
-        public void Set(System.Net.HttpResponseHeader header, string? value) { }
+        public void Set(System.Net.HttpResponseHeader header, string? value)
+        {
+        }
 
-        public override void Set(string name, string? value) { }
+        public override void Set(string name, string? value)
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public byte[] ToByteArray()
         {

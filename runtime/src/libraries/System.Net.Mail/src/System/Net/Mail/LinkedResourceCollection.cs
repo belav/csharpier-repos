@@ -10,7 +10,9 @@ namespace System.Net.Mail
     {
         private bool _disposed;
 
-        internal LinkedResourceCollection() { }
+        internal LinkedResourceCollection()
+        {
+        }
 
         public void Dispose()
         {

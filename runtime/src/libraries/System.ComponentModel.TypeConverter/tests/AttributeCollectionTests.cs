@@ -583,19 +583,33 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        public class TestAttribute1 : Attribute { }
+        public class TestAttribute1 : Attribute
+        {
+        }
 
-        public class TestAttribute2 : Attribute { }
+        public class TestAttribute2 : Attribute
+        {
+        }
 
-        public class TestAttribute3 : Attribute { }
+        public class TestAttribute3 : Attribute
+        {
+        }
 
-        public class TestAttribute4 : Attribute { }
+        public class TestAttribute4 : Attribute
+        {
+        }
 
-        public class TestAttribute5a : Attribute { }
+        public class TestAttribute5a : Attribute
+        {
+        }
 
-        public class TestAttribute5b : TestAttribute5a { }
+        public class TestAttribute5b : TestAttribute5a
+        {
+        }
 
-        public class TestAttribute6 : Attribute { }
+        public class TestAttribute6 : Attribute
+        {
+        }
 
         private class AttributeWithDefaultField : Attribute
         {
@@ -615,14 +629,18 @@ namespace System.ComponentModel.Tests
 
         private class AttributeWithDefaultConstructor : Attribute
         {
-            public AttributeWithDefaultConstructor() { }
+            public AttributeWithDefaultConstructor()
+            {
+            }
 
             public override bool IsDefaultAttribute() => true;
         }
 
         private class AttributeWithDefaultConstructorNotDefault : Attribute
         {
-            public AttributeWithDefaultConstructorNotDefault() { }
+            public AttributeWithDefaultConstructorNotDefault()
+            {
+            }
 
             public override bool IsDefaultAttribute() => false;
         }
@@ -641,9 +659,13 @@ namespace System.ComponentModel.Tests
 
         public class SubAttributeCollection : AttributeCollection
         {
-            public SubAttributeCollection() : base() { }
+            public SubAttributeCollection() : base()
+            {
+            }
 
-            public SubAttributeCollection(params Attribute[] attributes) : base(attributes) { }
+            public SubAttributeCollection(params Attribute[] attributes) : base(attributes)
+            {
+            }
 
             public new Attribute[] Attributes => base.Attributes;
 

@@ -158,7 +158,9 @@ namespace System.Data.SqlTypes
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
         public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data, bool fUnicode)
-            : this(lcid, compareOptions, data, 0, data.Length, fUnicode) { }
+            : this(lcid, compareOptions, data, 0, data.Length, fUnicode)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
@@ -169,13 +171,17 @@ namespace System.Data.SqlTypes
             byte[]? data,
             int index,
             int count
-        ) : this(lcid, compareOptions, data, index, count, true) { }
+        ) : this(lcid, compareOptions, data, index, count, true)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
         public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data)
-            : this(lcid, compareOptions, data, 0, data.Length, true) { }
+            : this(lcid, compareOptions, data, 0, data.Length, true)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
@@ -201,13 +207,17 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(string? data, int lcid) : this(data, lcid, s_iDefaultFlag) { }
+        public SqlString(string? data, int lcid) : this(data, lcid, s_iDefaultFlag)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
         public SqlString(string? data)
-            : this(data, System.Globalization.CultureInfo.CurrentCulture.LCID, s_iDefaultFlag) { }
+            : this(data, System.Globalization.CultureInfo.CurrentCulture.LCID, s_iDefaultFlag)
+        {
+        }
 
         private SqlString(
             int lcid,

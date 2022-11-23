@@ -297,10 +297,18 @@ namespace System.Linq.Tests
                 "foreach",
                 e =>
                 {
-                    foreach (int item in e) { }
+                    foreach (int item in e)
+                    {
+                    }
                 }
             );
-            yield return new Sink("nop", e => { }, shortCircuits: true);
+            yield return new Sink(
+                "nop",
+                e =>
+                {
+                },
+                shortCircuits: true
+            );
         }
 
         private sealed class LifecycleTrackingEnumerable<T> : IEnumerable<T>
@@ -376,7 +384,9 @@ namespace System.Linq.Tests
         private sealed class Source : Operation<IEnumerable<int>>
         {
             public Source(string name, IEnumerable<int> enumerable, bool shortCircuits = false)
-                : base(name, enumerable, shortCircuits) { }
+                : base(name, enumerable, shortCircuits)
+            {
+            }
         }
 
         private sealed class Unary : Operation<Func<IEnumerable<int>, IEnumerable<int>>>
@@ -385,7 +395,9 @@ namespace System.Linq.Tests
                 string name,
                 Func<IEnumerable<int>, IEnumerable<int>> unary,
                 bool shortCircuits = false
-            ) : base(name, unary, shortCircuits) { }
+            ) : base(name, unary, shortCircuits)
+            {
+            }
         }
 
         private sealed class Binary
@@ -395,13 +407,17 @@ namespace System.Linq.Tests
                 string name,
                 Func<IEnumerable<int>, IEnumerable<int>, IEnumerable<int>> binary,
                 bool shortCircuits = false
-            ) : base(name, binary, shortCircuits) { }
+            ) : base(name, binary, shortCircuits)
+            {
+            }
         }
 
         private sealed class Sink : Operation<Action<IEnumerable<int>>>
         {
             public Sink(string name, Action<IEnumerable<int>> sink, bool shortCircuits = false)
-                : base(name, sink, shortCircuits) { }
+                : base(name, sink, shortCircuits)
+            {
+            }
         }
     }
 }

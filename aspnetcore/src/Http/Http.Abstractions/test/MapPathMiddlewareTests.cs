@@ -146,7 +146,15 @@ public class MapPathMiddlewareTests
     public void MatchPathWithTrailingSlashThrowsException(string matchPath)
     {
         Assert.Throws<ArgumentException>(
-            () => new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build()
+            () =>
+                new ApplicationBuilder(serviceProvider: null!)
+                    .Map(
+                        matchPath,
+                        map =>
+                        {
+                        }
+                    )
+                    .Build()
         );
     }
 
@@ -250,7 +258,12 @@ public class MapPathMiddlewareTests
     {
         var mockWebApplication = new MockWebApplication();
 
-        mockWebApplication.Map("/foo", app => { });
+        mockWebApplication.Map(
+            "/foo",
+            app =>
+            {
+            }
+        );
 
         Assert.True(mockWebApplication.UseCalled);
     }
@@ -260,7 +273,11 @@ public class MapPathMiddlewareTests
     {
         var mockWebApplication = new MockWebApplication();
 
-        mockWebApplication.Map("/foo", (IApplicationBuilder app) => { });
+        mockWebApplication.Map(
+            "/foo",
+            (IApplicationBuilder app) => {
+            }
+        );
 
         Assert.True(mockWebApplication.UseCalled);
     }

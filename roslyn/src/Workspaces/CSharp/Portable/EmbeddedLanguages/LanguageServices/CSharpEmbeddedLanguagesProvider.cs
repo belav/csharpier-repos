@@ -32,6 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEmbeddedLanguagesProvider() { }
+        public CSharpEmbeddedLanguagesProvider()
+        {
+        }
     }
 }

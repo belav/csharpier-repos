@@ -46,7 +46,9 @@ namespace System.CommandLine.Binding
                 argument,
                 FormatErrorMessage(argument, expectedType, value, localizationResources),
                 ArgumentConversionResultType.FailedType
-            ) { }
+            )
+        {
+        }
 
         internal static ArgumentConversionResult Failure(
             Argument argument,

@@ -1919,7 +1919,9 @@ namespace Newtonsoft.Json.Tests
             };
             reader.Schema = JsonSchema.Parse(schema);
 
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
 
             Assert.AreEqual(1, validationEventArgs.Count);
         }

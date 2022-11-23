@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             IServiceProvider serviceProvider,
             Stream stream,
             IEnumerable<JsonConverter>? jsonConverters = null
-        ) : base(serviceProvider, stream, jsonConverters) { }
+        ) : base(serviceProvider, stream, jsonConverters)
+        {
+        }
 
         protected new void StartService() => base.StartService();
 

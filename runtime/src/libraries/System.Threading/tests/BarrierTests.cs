@@ -419,7 +419,9 @@ namespace System.Threading.Tests
                             if (b.SignalAndWait(-1, src.Token))
                                 src.Cancel();
                         }
-                        catch (OperationCanceledException) { }
+                        catch (OperationCanceledException)
+                        {
+                        }
                     });
                 }
                 Task.WaitAll(tasks);

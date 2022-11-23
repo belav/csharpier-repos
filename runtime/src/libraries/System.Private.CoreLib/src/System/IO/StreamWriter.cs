@@ -76,17 +76,23 @@ namespace System.IO
         // StreamReader though for different reason). Either way, the buffered data will be lost!
         private static Encoding UTF8NoBOM => EncodingCache.UTF8NoBOM;
 
-        public StreamWriter(Stream stream) : this(stream, UTF8NoBOM, DefaultBufferSize, false) { }
+        public StreamWriter(Stream stream) : this(stream, UTF8NoBOM, DefaultBufferSize, false)
+        {
+        }
 
         public StreamWriter(Stream stream, Encoding encoding)
-            : this(stream, encoding, DefaultBufferSize, false) { }
+            : this(stream, encoding, DefaultBufferSize, false)
+        {
+        }
 
         // Creates a new StreamWriter for the given stream.  The
         // character encoding is set by encoding and the buffer size,
         // in number of 16-bit characters, is set by bufferSize.
         //
         public StreamWriter(Stream stream, Encoding encoding, int bufferSize)
-            : this(stream, encoding, bufferSize, false) { }
+            : this(stream, encoding, bufferSize, false)
+        {
+        }
 
         public StreamWriter(
             Stream stream,
@@ -137,13 +143,19 @@ namespace System.IO
             _closable = !leaveOpen;
         }
 
-        public StreamWriter(string path) : this(path, false, UTF8NoBOM, DefaultBufferSize) { }
+        public StreamWriter(string path) : this(path, false, UTF8NoBOM, DefaultBufferSize)
+        {
+        }
 
         public StreamWriter(string path, bool append)
-            : this(path, append, UTF8NoBOM, DefaultBufferSize) { }
+            : this(path, append, UTF8NoBOM, DefaultBufferSize)
+        {
+        }
 
         public StreamWriter(string path, bool append, Encoding encoding)
-            : this(path, append, encoding, DefaultBufferSize) { }
+            : this(path, append, encoding, DefaultBufferSize)
+        {
+        }
 
         public StreamWriter(string path, bool append, Encoding encoding, int bufferSize)
             : this(
@@ -151,17 +163,22 @@ namespace System.IO
                 encoding,
                 bufferSize,
                 leaveOpen: false
-            ) { }
+            )
+        {
+        }
 
         public StreamWriter(string path, FileStreamOptions options) : this(path, UTF8NoBOM, options)
-        { }
+        {
+        }
 
         public StreamWriter(string path, Encoding encoding, FileStreamOptions options)
             : this(
                 ValidateArgsAndOpenPath(path, encoding, options),
                 encoding,
                 DefaultFileStreamBufferSize
-            ) { }
+            )
+        {
+        }
 
         private static Stream ValidateArgsAndOpenPath(
             string path,

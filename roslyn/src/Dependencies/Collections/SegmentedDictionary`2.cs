@@ -62,11 +62,17 @@ namespace Microsoft.CodeAnalysis.Collections
         private ValueCollection? _values;
         private const int StartOfFreeList = -3;
 
-        public SegmentedDictionary() : this(0, null) { }
+        public SegmentedDictionary() : this(0, null)
+        {
+        }
 
-        public SegmentedDictionary(int capacity) : this(capacity, null) { }
+        public SegmentedDictionary(int capacity) : this(capacity, null)
+        {
+        }
 
-        public SegmentedDictionary(IEqualityComparer<TKey>? comparer) : this(0, comparer) { }
+        public SegmentedDictionary(IEqualityComparer<TKey>? comparer) : this(0, comparer)
+        {
+        }
 
         public SegmentedDictionary(int capacity, IEqualityComparer<TKey>? comparer)
         {
@@ -92,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         public SegmentedDictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null)
-        { }
+        {
+        }
 
         public SegmentedDictionary(
             IDictionary<TKey, TValue> dictionary,
@@ -130,7 +137,9 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         public SegmentedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
-            : this(collection, null) { }
+            : this(collection, null)
+        {
+        }
 
         public SegmentedDictionary(
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
@@ -1234,7 +1243,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
             public KeyValuePair<TKey, TValue> Current => _current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             object? IEnumerator.Current
             {
@@ -1457,7 +1468,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     _currentKey = default;
                 }
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 public bool MoveNext()
                 {
@@ -1662,7 +1675,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     _currentValue = default;
                 }
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 public bool MoveNext()
                 {

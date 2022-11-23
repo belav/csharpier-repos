@@ -12,7 +12,9 @@ namespace System.Text.Json.Serialization.Tests
     public abstract partial class PropertyVisibilityTests : SerializerTests
     {
         public PropertyVisibilityTests(JsonSerializerWrapper serializerWrapper)
-            : base(serializerWrapper) { }
+            : base(serializerWrapper)
+        {
+        }
 
         [Fact]
         public async Task Serialize_NewSlotPublicField()
@@ -867,7 +869,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public class ClassTwiceInheritedWithPropertyNamingConflictWhichThrowsDummy
-            : ClassWithPublicProperty { }
+            : ClassWithPublicProperty
+        {
+        }
 
         public class ClassTwiceInheritedWithPropertyNamingConflictWhichThrows
             : ClassTwiceInheritedWithPropertyNamingConflictWhichThrowsDummy
@@ -919,7 +923,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public class ClassInheritedWithPropertyPolicyConflictWhichThrowsDummy
-            : ClassWithPublicProperty { }
+            : ClassWithPublicProperty
+        {
+        }
 
         public class ClassTwiceInheritedWithPropertyPolicyConflictWhichThrows
             : ClassInheritedWithPropertyPolicyConflictWhichThrowsDummy
@@ -1261,7 +1267,9 @@ namespace System.Text.Json.Serialization.Tests
             public NestedClass Class { get; private set; }
         }
 
-        public class NestedClass { }
+        public class NestedClass
+        {
+        }
 
         [Fact]
         public async Task JsonIgnoreAttribute()
@@ -1491,7 +1499,9 @@ namespace System.Text.Json.Serialization.Tests
             );
         }
 
-        public class ObjectDictWrapper : Dictionary<int, string> { }
+        public class ObjectDictWrapper : Dictionary<int, string>
+        {
+        }
 
         public class ClassWithUnsupportedDictionary
         {
@@ -2617,7 +2627,9 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        public class PointClass { }
+        public class PointClass
+        {
+        }
 
         [Fact]
 #if BUILDING_SOURCE_GENERATOR_TESTS
@@ -2853,7 +2865,9 @@ namespace System.Text.Json.Serialization.Tests
             public Point_2D_Struct MyBadMember { get; set; }
         }
 
-        public interface IUseCustomConverter { }
+        public interface IUseCustomConverter
+        {
+        }
 
         [JsonConverter(typeof(MyCustomConverter))]
         public struct MyValueTypeWithProperties : IUseCustomConverter
@@ -2889,7 +2903,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public class MyClassWithValueType
         {
-            public MyClassWithValueType() { }
+            public MyClassWithValueType()
+            {
+            }
 
             public MyValueTypeWithProperties Value { get; set; }
         }
@@ -3051,9 +3067,13 @@ namespace System.Text.Json.Serialization.Tests
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public IInterface MyProp { get; set; }
 
-            public interface IInterface { }
+            public interface IInterface
+            {
+            }
 
-            public struct MyStruct : IInterface { }
+            public struct MyStruct : IInterface
+            {
+            }
         }
 
         [Fact]
@@ -3283,7 +3303,9 @@ namespace System.Text.Json.Serialization.Tests
             public string? Property { get; set; }
         }
 
-        public class BadConverter { }
+        public class BadConverter
+        {
+        }
 
         [Fact]
         public async Task TestClassWithIgnoredCallbacks()

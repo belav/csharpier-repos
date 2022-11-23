@@ -282,7 +282,9 @@ namespace System.Security.Cryptography
 {
     internal sealed class SafeRsaHandle : SafeKeyHandle
     {
-        public SafeRsaHandle() { }
+        public SafeRsaHandle()
+        {
+        }
 
         public SafeRsaHandle(IntPtr ptr)
         {

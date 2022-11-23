@@ -15,7 +15,9 @@ public sealed class EventHandlerAttribute : Attribute
     /// <param name="attributeName"></param>
     /// <param name="eventArgsType"></param>
     public EventHandlerAttribute(string attributeName, Type eventArgsType)
-        : this(attributeName, eventArgsType, false, false) { }
+        : this(attributeName, eventArgsType, false, false)
+    {
+    }
 
     /// <summary>
     /// Constructs an instance of <see cref="EventHandlerAttribute"/>.

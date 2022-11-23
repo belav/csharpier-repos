@@ -41,7 +41,9 @@ internal class ExperimentalDocumentPullDiagnosticsHandler
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
         IGlobalOptionService globalOptions
-    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
+    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
+    {
+    }
 
     public override TextDocumentIdentifier GetTextDocumentIdentifier(
         DocumentDiagnosticParams diagnosticsParams

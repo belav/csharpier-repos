@@ -7,4 +7,6 @@ Console.WriteLine(obj?.GetType().Name);
 
 return 100;
 
-public class _测试数据记录仪_Iiİı_åäö_Controller_DataLogger1_log_all_ { }
+public class _测试数据记录仪_Iiİı_åäö_Controller_DataLogger1_log_all_
+{
+}

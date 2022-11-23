@@ -10,6 +10,8 @@ namespace System.Runtime.Serialization
     )]
     public sealed class IgnoreDataMemberAttribute : Attribute
     {
-        public IgnoreDataMemberAttribute() { }
+        public IgnoreDataMemberAttribute()
+        {
+        }
     }
 }

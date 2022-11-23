@@ -66,9 +66,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             _log.AppendLine();
         }
 
-        public void LogCustomEvent(CustomBuildEventArgs eventArgs) { }
+        public void LogCustomEvent(CustomBuildEventArgs eventArgs)
+        {
+        }
 
-        public void LogMessageEvent(BuildMessageEventArgs eventArgs) { }
+        public void LogMessageEvent(BuildMessageEventArgs eventArgs)
+        {
+        }
 
         public string ProjectFileOfTaskNode => "";
         public int ColumnNumberOfTaskNode => 0;

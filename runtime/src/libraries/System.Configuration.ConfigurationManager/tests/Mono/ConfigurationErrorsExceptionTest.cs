@@ -632,7 +632,9 @@ namespace MonoTests.System.Configuration
 
         class XmlErrorReader : XmlTextReader, IConfigErrorInfo
         {
-            public XmlErrorReader(string filename) : base(filename) { }
+            public XmlErrorReader(string filename) : base(filename)
+            {
+            }
 
             string IConfigErrorInfo.Filename
             {

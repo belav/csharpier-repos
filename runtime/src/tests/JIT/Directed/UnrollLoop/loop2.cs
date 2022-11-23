@@ -840,7 +840,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -856,7 +858,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -872,7 +876,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -888,7 +894,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -904,7 +912,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -920,7 +930,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -936,7 +948,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -952,7 +966,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -968,7 +984,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -984,7 +1002,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -1000,7 +1020,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -1016,7 +1038,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
         return sum + i;
     }
@@ -1032,7 +1056,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         return sum + i;
@@ -1049,7 +1075,9 @@ internal unsafe class B : A
             {
                 sum += amount;
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         return sum + i;

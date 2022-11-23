@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 hasBody: true,
                 memberOffset: memberOffset,
                 diagnostics
-            ) { }
+            )
+        {
+        }
 
         protected override DeclarationModifiers MakeDeclarationModifiers(
             DeclarationModifiers allowedModifiers,

@@ -115,7 +115,9 @@ namespace Microsoft.Extensions.Hosting
                     null
                 ) ?? throw new MissingMethodException();
 
-            configure ??= _ => { };
+            configure ??= _ =>
+            {
+            };
             _addWindowsServiceLifetimeMethod.Invoke(null, new object[] { services, configure });
         }
     }

@@ -1375,7 +1375,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public static readonly NameCollisionForAddedModulesTypeComparer Singleton =
                 new NameCollisionForAddedModulesTypeComparer();
 
-            private NameCollisionForAddedModulesTypeComparer() { }
+            private NameCollisionForAddedModulesTypeComparer()
+            {
+            }
 
             public int Compare(NamedTypeSymbol x, NamedTypeSymbol y)
             {

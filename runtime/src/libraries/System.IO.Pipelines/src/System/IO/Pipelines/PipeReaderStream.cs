@@ -45,7 +45,9 @@ namespace System.IO.Pipelines
 
         internal bool LeaveOpen { get; set; }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

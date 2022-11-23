@@ -23,9 +23,13 @@ namespace System.Text.Json.Node.Tests
             Assert.Throws<ArgumentException>(() => JsonValue.Create(JsonValue.Create(42)));
         }
 
-        private class Polymorphic_Base { }
+        private class Polymorphic_Base
+        {
+        }
 
-        private class Polymorphic_Derived : Polymorphic_Base { }
+        private class Polymorphic_Derived : Polymorphic_Base
+        {
+        }
 
         [Fact]
         public static void Polymorphic()

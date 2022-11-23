@@ -147,9 +147,13 @@ namespace System.Xml.Schema
             get { return false; }
         }
 
-        public virtual void Validate() { }
+        public virtual void Validate()
+        {
+        }
 
-        public virtual void CompleteValidation() { }
+        public virtual void CompleteValidation()
+        {
+        }
 
         public virtual object? FindId(string name)
         {

@@ -15,7 +15,9 @@ namespace System.CommandLine.Parsing
         /// </summary>
         public static readonly CommandLineStringSplitter Instance = new();
 
-        private CommandLineStringSplitter() { }
+        private CommandLineStringSplitter()
+        {
+        }
 
         private enum Boundary
         {

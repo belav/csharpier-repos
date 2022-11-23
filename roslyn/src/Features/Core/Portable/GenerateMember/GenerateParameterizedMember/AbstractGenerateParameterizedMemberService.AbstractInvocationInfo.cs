@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             );
 
             protected AbstractInvocationInfo(SemanticDocument document, State state)
-                : base(document, state) { }
+                : base(document, state)
+            {
+            }
 
             protected override ImmutableArray<ITypeParameterSymbol> DetermineTypeParametersWorker(
                 CancellationToken cancellationToken

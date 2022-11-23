@@ -48,7 +48,9 @@ namespace System.Reflection
         private IList<CustomAttributeNamedArgument> namedArgs = null!;
         private LazyCAttrData? lazyData;
 
-        protected CustomAttributeData() { }
+        protected CustomAttributeData()
+        {
+        }
 
         // custom-attrs.c:create_custom_attr_data ()
         internal CustomAttributeData(
@@ -70,7 +72,9 @@ namespace System.Reflection
                 ctorInfo,
                 Array.Empty<CustomAttributeTypedArgument>(),
                 Array.Empty<CustomAttributeNamedArgument>()
-            ) { }
+            )
+        {
+        }
 
         internal CustomAttributeData(
             ConstructorInfo ctorInfo,

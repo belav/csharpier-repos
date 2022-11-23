@@ -153,7 +153,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         }
     }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Test
     {

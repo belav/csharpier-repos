@@ -46,7 +46,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     $"Precondition test failed with unknown code {e.HResult}, running anyways."
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             return true;
         }

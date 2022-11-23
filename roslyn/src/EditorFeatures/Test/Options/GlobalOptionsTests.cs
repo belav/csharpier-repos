@@ -47,7 +47,9 @@ public class GlobalOptionsTests
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestGlobalOptions() { }
+        public TestGlobalOptions()
+        {
+        }
 
         private void OnOptionAccessed(OptionKey key)
         {
@@ -70,9 +72,13 @@ public class GlobalOptionsTests
 
         #region Unused
 
-        public void RegisterWorkspace(Workspace workspace) { }
+        public void RegisterWorkspace(Workspace workspace)
+        {
+        }
 
-        public void UnregisterWorkspace(Workspace workspace) { }
+        public void UnregisterWorkspace(Workspace workspace)
+        {
+        }
 
 #pragma warning disable CS0067
         public event EventHandler<OptionChangedEventArgs>? OptionChanged;

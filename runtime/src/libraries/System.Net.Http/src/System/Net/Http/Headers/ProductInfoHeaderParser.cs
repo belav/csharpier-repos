@@ -19,7 +19,9 @@ namespace System.Net.Http.Headers
             new ProductInfoHeaderParser(true);
 
         private ProductInfoHeaderParser(bool supportsMultipleValues)
-            : base(supportsMultipleValues, separator) { }
+            : base(supportsMultipleValues, separator)
+        {
+        }
 
         public override bool TryParseValue(
             [NotNullWhen(true)] string? value,

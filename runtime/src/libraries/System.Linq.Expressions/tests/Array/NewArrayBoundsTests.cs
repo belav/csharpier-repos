@@ -34,7 +34,9 @@ namespace System.Linq.Expressions.Tests
 
             public bool Contains(T item) => false;
 
-            public void CopyTo(T[] array, int arrayIndex) { }
+            public void CopyTo(T[] array, int arrayIndex)
+            {
+            }
 
             public IEnumerator<T> GetEnumerator() => Enumerable.Empty<T>().GetEnumerator();
 
@@ -60,7 +62,9 @@ namespace System.Linq.Expressions.Tests
 
         private class BogusReadOnlyCollection<T> : ReadOnlyCollection<T>
         {
-            public BogusReadOnlyCollection() : base(new BogusCollection<T>()) { }
+            public BogusReadOnlyCollection() : base(new BogusCollection<T>())
+            {
+            }
         }
 
         public static IEnumerable<object> Bounds_TestData()

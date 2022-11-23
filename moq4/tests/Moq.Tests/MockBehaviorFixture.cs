@@ -240,7 +240,9 @@ namespace Moq.Tests
             IQueryable GetQueryableObjects();
         }
 
-        public interface IBar { }
+        public interface IBar
+        {
+        }
 
         public abstract class Foo : IFoo
         {
@@ -251,9 +253,13 @@ namespace Moq.Tests
             public abstract object GetObject();
             public abstract string DoReturnString();
 
-            public void DoNonVirtual() { }
+            public void DoNonVirtual()
+            {
+            }
 
-            public virtual void DoVirtual() { }
+            public virtual void DoVirtual()
+            {
+            }
 
             public int NonVirtualGet()
             {

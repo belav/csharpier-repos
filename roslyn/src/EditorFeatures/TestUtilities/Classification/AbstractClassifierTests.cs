@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
     [UseExportProvider]
     public abstract class AbstractClassifierTests
     {
-        protected AbstractClassifierTests() { }
+        protected AbstractClassifierTests()
+        {
+        }
 
         protected abstract Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(
             string text,

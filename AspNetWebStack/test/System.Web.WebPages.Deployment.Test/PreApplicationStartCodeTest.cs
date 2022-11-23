@@ -709,7 +709,8 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             {
                 loadedVersion = version;
             };
-            Action registerForChange = () => { };
+            Action registerForChange = () => {
+            };
             Func<string, AssemblyName> getAssembyName = _ =>
                 new AssemblyName(
                     "System.Web.WebPages.Deployment, Version="
@@ -764,7 +765,8 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             {
                 loadedVersion = version;
             };
-            Action registerForChange = () => { };
+            Action registerForChange = () => {
+            };
 
             // Act and Assert
             Assert.Throws<InvalidOperationException>(

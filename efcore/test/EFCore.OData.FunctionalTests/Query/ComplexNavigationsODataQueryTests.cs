@@ -12,7 +12,9 @@ public class ComplexNavigationsODataQueryTests
         IClassFixture<ComplexNavigationsODataQueryTestFixture>
 {
     public ComplexNavigationsODataQueryTests(ComplexNavigationsODataQueryTestFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task Query_level_ones()

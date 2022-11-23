@@ -134,7 +134,9 @@ namespace System.Xml.Serialization
             TypeKind kind,
             TypeDesc? baseTypeDesc,
             TypeFlags flags
-        ) : this(name, fullName, (XmlSchemaType?)null, kind, baseTypeDesc, flags, null) { }
+        ) : this(name, fullName, (XmlSchemaType?)null, kind, baseTypeDesc, flags, null)
+        {
+        }
 
         internal TypeDesc(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,

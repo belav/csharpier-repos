@@ -119,7 +119,8 @@ namespace System.ComponentModel.Tests
             Assert.False(bindingList.AllowNew);
 
             // Binding an AddingNew delegate allows new.
-            bindingList.AddingNew += (object sender, AddingNewEventArgs e) => { };
+            bindingList.AddingNew += (object sender, AddingNewEventArgs e) => {
+            };
             Assert.True(bindingList.AllowNew);
         }
 
@@ -1008,9 +1009,13 @@ namespace System.ComponentModel.Tests
             protected override void ApplySortCore(
                 PropertyDescriptor prop,
                 ListSortDirection direction
-            ) { }
+            )
+            {
+            }
 
-            protected override void RemoveSortCore() { }
+            protected override void RemoveSortCore()
+            {
+            }
 
             protected override int FindCore(PropertyDescriptor prop, object key) => 200;
         }

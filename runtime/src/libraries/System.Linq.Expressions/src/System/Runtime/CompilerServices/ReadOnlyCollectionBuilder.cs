@@ -482,7 +482,9 @@ namespace System.Runtime.CompilerServices
 
             #region IDisposable Members
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             #endregion
 

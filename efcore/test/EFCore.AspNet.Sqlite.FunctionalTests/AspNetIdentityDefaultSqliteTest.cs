@@ -7,7 +7,9 @@ public class AspNetIdentityDefaultSqliteTest
     : AspNetIdentityDefaultTestBase<AspNetIdentityDefaultSqliteTest.AspNetDefaultIdentitySqliteFixture>
 {
     public AspNetIdentityDefaultSqliteTest(AspNetDefaultIdentitySqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class AspNetDefaultIdentitySqliteFixture : AspNetIdentityFixtureBase
     {

@@ -11,7 +11,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
     public class DecryptTestsUsingCertWithPrivateKey : DecryptTests
     {
-        public DecryptTestsUsingCertWithPrivateKey() : base(false) { }
+        public DecryptTestsUsingCertWithPrivateKey() : base(false)
+        {
+        }
 
         [Fact]
         [OuterLoop( /* Leaks key on disk if interrupted */

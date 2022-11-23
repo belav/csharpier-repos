@@ -21,7 +21,9 @@ namespace System.IO.Compression
         private bool _isDisposed;
 
         internal WrappedStream(Stream baseStream, bool closeBaseStream)
-            : this(baseStream, closeBaseStream, null, null) { }
+            : this(baseStream, closeBaseStream, null, null)
+        {
+        }
 
         private WrappedStream(
             Stream baseStream,
@@ -41,7 +43,9 @@ namespace System.IO.Compression
             Stream baseStream,
             ZipArchiveEntry entry,
             Action<ZipArchiveEntry?>? onClosed
-        ) : this(baseStream, false, entry, onClosed) { }
+        ) : this(baseStream, false, entry, onClosed)
+        {
+        }
 
         public override long Length
         {

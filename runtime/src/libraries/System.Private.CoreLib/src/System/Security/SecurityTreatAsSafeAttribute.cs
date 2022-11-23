@@ -22,6 +22,8 @@ namespace System.Security
     )]
     public sealed class SecurityTreatAsSafeAttribute : Attribute
     {
-        public SecurityTreatAsSafeAttribute() { }
+        public SecurityTreatAsSafeAttribute()
+        {
+        }
     }
 }

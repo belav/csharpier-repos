@@ -35,6 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
                 workspace,
                 streamingPresenter,
                 listenerProvider
-            ) { }
+            )
+        {
+        }
     }
 }

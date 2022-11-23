@@ -26,13 +26,17 @@ public class TimeOnlyTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public TimeOnlyTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Time)
-        : base(storeType, typeof(TimeOnly), dbType) { }
+        : base(storeType, typeof(TimeOnly), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="TimeOnlyTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected TimeOnlyTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected TimeOnlyTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

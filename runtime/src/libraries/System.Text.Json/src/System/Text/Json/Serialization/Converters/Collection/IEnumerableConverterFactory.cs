@@ -25,7 +25,9 @@ namespace System.Text.Json.Serialization.Converters
             new IListConverter<IList>();
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
-        public IEnumerableConverterFactory() { }
+        public IEnumerableConverterFactory()
+        {
+        }
 
         public override bool CanConvert(Type typeToConvert)
         {

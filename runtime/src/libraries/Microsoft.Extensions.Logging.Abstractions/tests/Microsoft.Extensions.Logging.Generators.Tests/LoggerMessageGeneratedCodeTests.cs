@@ -481,7 +481,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             Assert.Equal("LoggerMethodWithTrueSkipEnabledCheck", logger.LastEventId.Name);
         }
 
-        private struct MyStruct { }
+        private struct MyStruct
+        {
+        }
 
         [Fact]
         public void ConstraintsTests()

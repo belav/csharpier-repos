@@ -4,7 +4,9 @@ namespace test
 {
     public class tester
     {
-        public tester() { }
+        public tester()
+        {
+        }
 
         public static int Main()
         {
@@ -26,7 +28,9 @@ namespace test
             {
                 exception = true;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             if (!exception)
                 return 1;
@@ -66,7 +70,9 @@ namespace test
             {
                 exception = true;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             exception = false;
 
             a = -1e30f;
@@ -84,7 +90,9 @@ namespace test
             {
                 exception = true;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             if (!exception)
                 return 4;

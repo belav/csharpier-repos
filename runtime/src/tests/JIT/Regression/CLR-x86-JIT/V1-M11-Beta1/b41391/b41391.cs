@@ -61,7 +61,9 @@ namespace Test
                 null,
                 __arglist()
             );
-            while ((bool)m_axStatic2) { }
+            while ((bool)m_axStatic2)
+            {
+            }
         }
 
         static int Main()
@@ -70,7 +72,9 @@ namespace Test
             {
                 Static2(null);
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException)
+            {
+            }
             return 100;
         }
     }

@@ -44,7 +44,9 @@ class Baz
 {
 
 "
-            ) { }
+            )
+        {
+        }
 
         private CodeClass GetCodeClass(params object[] path)
         {

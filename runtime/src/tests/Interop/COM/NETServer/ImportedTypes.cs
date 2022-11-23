@@ -31,5 +31,7 @@ namespace NETServer
 
     [ComImport]
     [Guid("09799AFB-AD67-11d1-ABCD-00C04FC30936")]
-    public class ContextMenu { }
+    public class ContextMenu
+    {
+    }
 }

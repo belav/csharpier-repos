@@ -7897,10 +7897,9 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             nestedTestOperation3
         );
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected ManyToManyContext CreateContext() => Fixture.CreateContext();
 

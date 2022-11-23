@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     public abstract class CSharpErrorListCommon : AbstractEditorTest
     {
         protected CSharpErrorListCommon(string templateName)
-            : base(nameof(CSharpErrorListCommon), templateName) { }
+            : base(nameof(CSharpErrorListCommon), templateName)
+        {
+        }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

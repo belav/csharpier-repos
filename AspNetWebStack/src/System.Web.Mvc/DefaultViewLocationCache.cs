@@ -18,7 +18,9 @@ namespace System.Web.Mvc
         )]
         public static readonly IViewLocationCache Null = new NullViewLocationCache();
 
-        public DefaultViewLocationCache() : this(_defaultTimeSpan) { }
+        public DefaultViewLocationCache() : this(_defaultTimeSpan)
+        {
+        }
 
         public DefaultViewLocationCache(TimeSpan timeSpan)
         {

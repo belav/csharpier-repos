@@ -566,7 +566,9 @@ namespace System.Threading.Tasks.Dataflow
                         {
                             ((SendAsyncSource<TOutput>)state!).TrySetResult(true);
                         }
-                        catch (ObjectDisposedException) { }
+                        catch (ObjectDisposedException)
+                        {
+                        }
                     },
                     this,
                     runAsync
@@ -586,7 +588,9 @@ namespace System.Threading.Tasks.Dataflow
                         {
                             ((SendAsyncSource<TOutput>)state!).TrySetResult(false);
                         }
-                        catch (ObjectDisposedException) { }
+                        catch (ObjectDisposedException)
+                        {
+                        }
                     },
                     this,
                     runAsync
@@ -606,7 +610,9 @@ namespace System.Threading.Tasks.Dataflow
                         {
                             tuple.Item1.TrySetException(tuple.Item2);
                         }
-                        catch (ObjectDisposedException) { }
+                        catch (ObjectDisposedException)
+                        {
+                        }
                     },
                     Tuple.Create<SendAsyncSource<TOutput>, Exception>(this, exception),
                     runAsync
@@ -624,7 +630,9 @@ namespace System.Threading.Tasks.Dataflow
                         {
                             ((SendAsyncSource<TOutput>)state!).TrySetCanceled();
                         }
-                        catch (ObjectDisposedException) { }
+                        catch (ObjectDisposedException)
+                        {
+                        }
                     },
                     this,
                     runAsync
@@ -1492,7 +1500,9 @@ namespace System.Threading.Tasks.Dataflow
             }
 
             /// <summary>Initializes the target.</summary>
-            internal ReceiveTarget() { }
+            internal ReceiveTarget()
+            {
+            }
 
             /// <summary>Offers a message to be used to complete the TaskCompletionSource.</summary>
             DataflowMessageStatus ITargetBlock<T>.OfferMessage(
@@ -3552,10 +3562,14 @@ namespace System.Threading.Tasks.Dataflow
             }
 
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
-            void IDataflowBlock.Complete() { } // No-op
+            void IDataflowBlock.Complete()
+            {
+            } // No-op
 
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
-            void IDataflowBlock.Fault(Exception exception) { } // No-op
+            void IDataflowBlock.Fault(Exception exception)
+            {
+            } // No-op
 
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
             Task IDataflowBlock.Completion

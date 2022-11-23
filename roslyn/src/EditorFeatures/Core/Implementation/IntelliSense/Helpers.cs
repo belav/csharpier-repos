@@ -300,8 +300,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                         .ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+            {
+            }
         }
 
         private static ClassifiedTextRunStyle GetClassifiedTextRunStyle(TaggedTextStyle style)

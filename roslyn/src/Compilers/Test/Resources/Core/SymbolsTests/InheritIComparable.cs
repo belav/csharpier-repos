@@ -10,7 +10,9 @@ class BaseTypeSpecifierClass : global::System.IComparable
     }
 }
 
-class GooAttribute : System.Attribute { }
+class GooAttribute : System.Attribute
+{
+}
 
 interface I1
 {
@@ -19,7 +21,9 @@ interface I1
 
 class Test : I1
 {
-    struct N1 { }
+    struct N1
+    {
+    }
 
     int I1.Method()
     {

@@ -7,7 +7,9 @@ public class AspNetIdentityDefaultSqlServerTest
     : AspNetIdentityDefaultTestBase<AspNetIdentityDefaultSqlServerTest.AspNetDefaultIdentitySqlServerFixture>
 {
     public AspNetIdentityDefaultSqlServerTest(AspNetDefaultIdentitySqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class AspNetDefaultIdentitySqlServerFixture : AspNetIdentityFixtureBase
     {

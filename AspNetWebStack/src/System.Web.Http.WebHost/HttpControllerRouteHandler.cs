@@ -20,7 +20,9 @@ namespace System.Web.Http.WebHost
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpControllerRouteHandler"/> class.
         /// </summary>
-        protected HttpControllerRouteHandler() { }
+        protected HttpControllerRouteHandler()
+        {
+        }
 
         /// <summary>
         /// Gets the singleton <see cref="HttpControllerRouteHandler"/> instance.

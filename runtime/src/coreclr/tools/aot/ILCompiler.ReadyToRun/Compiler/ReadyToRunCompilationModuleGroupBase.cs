@@ -829,7 +829,9 @@ namespace ILCompiler
                                         );
                                     }
                                 }
-                                catch (TypeSystemException) { }
+                                catch (TypeSystemException)
+                                {
+                                }
                             }
                         }
                         Volatile.Write(

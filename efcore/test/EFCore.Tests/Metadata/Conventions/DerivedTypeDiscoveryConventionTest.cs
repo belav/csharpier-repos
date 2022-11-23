@@ -110,11 +110,17 @@ public class DerivedTypeDiscoveryConventionTest
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-    private class A { }
+    private class A
+    {
+    }
 
-    private class B : A { }
+    private class B : A
+    {
+    }
 
-    private class C : B { }
+    private class C : B
+    {
+    }
 
     private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
     {

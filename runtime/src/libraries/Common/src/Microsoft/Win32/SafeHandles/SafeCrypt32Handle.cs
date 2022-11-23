@@ -11,7 +11,9 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal abstract class SafeCrypt32Handle<T> : SafeHandle where T : SafeHandle, new()
     {
-        protected SafeCrypt32Handle() : base(IntPtr.Zero, true) { }
+        protected SafeCrypt32Handle() : base(IntPtr.Zero, true)
+        {
+        }
 
         public sealed override bool IsInvalid
         {

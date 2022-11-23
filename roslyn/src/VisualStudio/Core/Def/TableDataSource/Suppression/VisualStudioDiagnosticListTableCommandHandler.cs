@@ -111,7 +111,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             AddCommand(
                 menuCommandService,
                 ID.RoslynCommands.ErrorListSetSeveritySubMenu,
-                delegate { },
+                delegate
+                {
+                },
                 OnErrorListSetSeveritySubMenuStatus
             );
 
@@ -120,37 +122,49 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 menuCommandService,
                 ID.RoslynCommands.ErrorListSetSeverityDefault,
                 SetSeverityHandler,
-                delegate { }
+                delegate
+                {
+                }
             );
             AddCommand(
                 menuCommandService,
                 ID.RoslynCommands.ErrorListSetSeverityError,
                 SetSeverityHandler,
-                delegate { }
+                delegate
+                {
+                }
             );
             AddCommand(
                 menuCommandService,
                 ID.RoslynCommands.ErrorListSetSeverityWarning,
                 SetSeverityHandler,
-                delegate { }
+                delegate
+                {
+                }
             );
             AddCommand(
                 menuCommandService,
                 ID.RoslynCommands.ErrorListSetSeverityInfo,
                 SetSeverityHandler,
-                delegate { }
+                delegate
+                {
+                }
             );
             AddCommand(
                 menuCommandService,
                 ID.RoslynCommands.ErrorListSetSeverityHidden,
                 SetSeverityHandler,
-                delegate { }
+                delegate
+                {
+                }
             );
             AddCommand(
                 menuCommandService,
                 ID.RoslynCommands.ErrorListSetSeverityNone,
                 SetSeverityHandler,
-                delegate { }
+                delegate
+                {
+                }
             );
         }
 
@@ -167,7 +181,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             var commandIdWithGroupId = new CommandID(Guids.RoslynGroupId, commandId);
             var command = new OleMenuCommand(
                 invokeHandler,
-                delegate { },
+                delegate
+                {
+                },
                 beforeQueryStatus,
                 commandIdWithGroupId
             );
@@ -311,8 +327,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     });
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+            {
+            }
 
             return;
 

@@ -23,7 +23,9 @@ public class RouteValueProvider : BindingSourceValueProvider
     /// <param name="values">The values.</param>
     /// <remarks>Sets <see cref="Culture"/> to <see cref="CultureInfo.InvariantCulture" />.</remarks>
     public RouteValueProvider(BindingSource bindingSource, RouteValueDictionary values)
-        : this(bindingSource, values, CultureInfo.InvariantCulture) { }
+        : this(bindingSource, values, CultureInfo.InvariantCulture)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="RouteValueProvider"/>.

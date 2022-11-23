@@ -59,7 +59,9 @@ namespace System.Security.AccessControl
 
         #region Constructors
 
-        protected ObjectSecurity() { }
+        protected ObjectSecurity()
+        {
+        }
 
         protected ObjectSecurity(bool isContainer, bool isDS) : this()
         {

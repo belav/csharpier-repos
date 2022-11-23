@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.SyntaxClassification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxClassificationServiceFactory() { }
+        public CSharpSyntaxClassificationServiceFactory()
+        {
+        }
 
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>

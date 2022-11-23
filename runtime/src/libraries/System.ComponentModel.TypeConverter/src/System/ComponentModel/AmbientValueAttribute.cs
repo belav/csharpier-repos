@@ -29,7 +29,9 @@ namespace System.ComponentModel
             {
                 Value = TypeDescriptor.GetConverter(type).ConvertFromInvariantString(value);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>

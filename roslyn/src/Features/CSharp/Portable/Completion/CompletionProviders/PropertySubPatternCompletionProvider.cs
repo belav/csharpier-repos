@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PropertySubpatternCompletionProvider() { }
+        public PropertySubpatternCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

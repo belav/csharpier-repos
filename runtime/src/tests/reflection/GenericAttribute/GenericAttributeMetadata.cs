@@ -23,7 +23,9 @@ using System.Runtime.CompilerServices;
     AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Property,
     AllowMultiple = false
 )]
-public class SingleAttribute<T> : Attribute { }
+public class SingleAttribute<T> : Attribute
+{
+}
 
 [AttributeUsage(
     AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Property,
@@ -33,7 +35,9 @@ public class MultiAttribute<T> : Attribute
 {
     public T Value { get; set; }
 
-    public MultiAttribute() { }
+    public MultiAttribute()
+    {
+    }
 
     public MultiAttribute(T value)
     {
@@ -64,7 +68,9 @@ public enum MyEnum
 [MultiAttribute<MyEnum>(Value = MyEnum.Property)]
 public class Class
 {
-    public class Derive : Class { }
+    public class Derive : Class
+    {
+    }
 
     [SingleAttribute<int>()]
     [SingleAttribute<bool>()]

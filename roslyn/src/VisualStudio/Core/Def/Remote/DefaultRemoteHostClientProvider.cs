@@ -14,7 +14,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
     internal sealed class DefaultRemoteHostClientProvider : IRemoteHostClientProvider
     {
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-        public DefaultRemoteHostClientProvider() { }
+        public DefaultRemoteHostClientProvider()
+        {
+        }
 
         public Task<RemoteHostClient?> TryGetRemoteHostClientAsync(
             CancellationToken cancellationToken

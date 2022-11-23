@@ -54,7 +54,9 @@ namespace System.Xml.Schema
         private XmlDocument? _document;
         private XmlNameTable? _nameTable;
 
-        public XmlSchema() { }
+        public XmlSchema()
+        {
+        }
 
         public static XmlSchema? Read(
             TextReader reader,

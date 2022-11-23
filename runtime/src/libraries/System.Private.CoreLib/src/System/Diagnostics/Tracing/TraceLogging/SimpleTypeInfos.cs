@@ -15,7 +15,9 @@ namespace System.Diagnostics.Tracing
     {
         private static NullTypeInfo? s_instance;
 
-        public NullTypeInfo() : base(typeof(EmptyStruct)) { }
+        public NullTypeInfo() : base(typeof(EmptyStruct))
+        {
+        }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new NullTypeInfo();
 
@@ -28,7 +30,9 @@ namespace System.Diagnostics.Tracing
             collector.AddGroup(name);
         }
 
-        public override void WriteData(PropertyValue value) { }
+        public override void WriteData(PropertyValue value)
+        {
+        }
 
         public override object? GetData(object? value)
         {
@@ -282,7 +286,9 @@ namespace System.Diagnostics.Tracing
     {
         private static StringTypeInfo? s_instance;
 
-        public StringTypeInfo() : base(typeof(string)) { }
+        public StringTypeInfo() : base(typeof(string))
+        {
+        }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new StringTypeInfo();
 
@@ -325,7 +331,9 @@ namespace System.Diagnostics.Tracing
     {
         private static DateTimeTypeInfo? s_instance;
 
-        public DateTimeTypeInfo() : base(typeof(DateTime)) { }
+        public DateTimeTypeInfo() : base(typeof(DateTime))
+        {
+        }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new DateTimeTypeInfo();
 
@@ -358,7 +366,9 @@ namespace System.Diagnostics.Tracing
     {
         private static DateTimeOffsetTypeInfo? s_instance;
 
-        public DateTimeOffsetTypeInfo() : base(typeof(DateTimeOffset)) { }
+        public DateTimeOffsetTypeInfo() : base(typeof(DateTimeOffset))
+        {
+        }
 
         public static TraceLoggingTypeInfo Instance() =>
             s_instance ??= new DateTimeOffsetTypeInfo();
@@ -392,7 +402,9 @@ namespace System.Diagnostics.Tracing
     {
         private static TimeSpanTypeInfo? s_instance;
 
-        public TimeSpanTypeInfo() : base(typeof(TimeSpan)) { }
+        public TimeSpanTypeInfo() : base(typeof(TimeSpan))
+        {
+        }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new TimeSpanTypeInfo();
 
@@ -418,7 +430,9 @@ namespace System.Diagnostics.Tracing
     {
         private static DecimalTypeInfo? s_instance;
 
-        public DecimalTypeInfo() : base(typeof(decimal)) { }
+        public DecimalTypeInfo() : base(typeof(decimal))
+        {
+        }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new DecimalTypeInfo();
 

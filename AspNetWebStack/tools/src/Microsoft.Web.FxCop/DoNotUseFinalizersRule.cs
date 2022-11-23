@@ -7,7 +7,9 @@ namespace Microsoft.Web.FxCop
 {
     public class DoNotUseFinalizersRule : IntrospectionRule
     {
-        public DoNotUseFinalizersRule() : base("DoNotUseFinalizers") { }
+        public DoNotUseFinalizersRule() : base("DoNotUseFinalizers")
+        {
+        }
 
         public override ProblemCollection Check(Member member)
         {

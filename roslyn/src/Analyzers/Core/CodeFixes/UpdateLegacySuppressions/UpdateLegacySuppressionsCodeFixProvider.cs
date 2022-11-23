@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UpdateLegacySuppressionsCodeFixProvider() { }
+        public UpdateLegacySuppressionsCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(

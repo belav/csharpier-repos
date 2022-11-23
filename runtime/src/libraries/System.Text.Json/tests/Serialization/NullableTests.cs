@@ -490,14 +490,18 @@ namespace System.Text.Json.Serialization.Tests
             ValidateEnumerableOfEnumerable(parsedEnumerableOfEnumerableWithNull, default);
         }
 
-        public class MyDictionaryWrapper<TValue> : Dictionary<string, TValue> { }
+        public class MyDictionaryWrapper<TValue> : Dictionary<string, TValue>
+        {
+        }
 
         public class MyIDictionaryWrapper<TValue> : IDictionary<string, TValue>
         {
             Dictionary<string, TValue> dict = new Dictionary<string, TValue>();
 
             // Derived types need default constructors to be supported.
-            public MyIDictionaryWrapper() { }
+            public MyIDictionaryWrapper()
+            {
+            }
 
             public TValue this[string key]
             {

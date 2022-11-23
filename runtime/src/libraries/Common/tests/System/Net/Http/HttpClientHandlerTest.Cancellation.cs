@@ -23,7 +23,9 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandler_Cancellation_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_Cancellation_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Cancellation_Test(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [InlineData(false, CancellationMode.Token)]
@@ -644,7 +646,9 @@ namespace System.Net.Http.Functional.Tests
                             canSeekFunc: () => true,
                             lengthFunc: () => 1,
                             positionGetFunc: () => 0,
-                            positionSetFunc: _ => { },
+                            positionSetFunc: _ =>
+                            {
+                            },
                             readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
                             {
                                 int result = 1;
@@ -684,7 +688,9 @@ namespace System.Net.Http.Functional.Tests
                             canSeekFunc: () => true,
                             lengthFunc: () => 1,
                             positionGetFunc: () => 0,
-                            positionSetFunc: _ => { },
+                            positionSetFunc: _ =>
+                            {
+                            },
                             readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
                             {
                                 int result = 1;
@@ -757,7 +763,9 @@ namespace System.Net.Http.Functional.Tests
                                 Assert.Equal("Hello World", await resp.Content.ReadAsStringAsync());
                             }
                         }
-                        catch (OperationCanceledException) { }
+                        catch (OperationCanceledException)
+                        {
+                        }
                 },
                 async server =>
                 {
@@ -765,7 +773,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         await server.HandleRequestAsync(content: "Hello World");
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
             );
         }

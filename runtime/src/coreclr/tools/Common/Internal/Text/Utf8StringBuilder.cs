@@ -12,7 +12,9 @@ namespace Internal.Text
         private byte[] _buffer = Array.Empty<byte>();
         private int _length;
 
-        public Utf8StringBuilder() { }
+        public Utf8StringBuilder()
+        {
+        }
 
         // TODO: This should return ReadOnlySpan<byte> instead once available
         public byte[] UnderlyingArray => _buffer;

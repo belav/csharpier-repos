@@ -34,7 +34,9 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Initializes a new instance of a the <see cref='Margins'/> class with one-inch margins.
         /// </summary>
-        public Margins() : this(100, 100, 100, 100) { }
+        public Margins() : this(100, 100, 100, 100)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of a the <see cref='Margins'/> class with the specified left, right, top, and bottom margins.

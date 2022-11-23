@@ -8,13 +8,19 @@ using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 
 [StructLayout(LayoutKind.Sequential, Pack = 8, Size = 8)]
-struct MyVector64<T> where T : struct { }
+struct MyVector64<T> where T : struct
+{
+}
 
 [StructLayout(LayoutKind.Sequential, Pack = 16, Size = 16)]
-struct MyVector128<T> where T : struct { }
+struct MyVector128<T> where T : struct
+{
+}
 
 [StructLayout(LayoutKind.Sequential, Pack = 32, Size = 32)]
-struct MyVector256<T> where T : struct { }
+struct MyVector256<T> where T : struct
+{
+}
 
 interface ITestStructure
 {

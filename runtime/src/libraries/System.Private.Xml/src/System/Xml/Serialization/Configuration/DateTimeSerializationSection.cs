@@ -18,6 +18,8 @@ namespace System.Xml.Serialization.Configuration
             Local = 2,
         }
 
-        public DateTimeSerializationSection() { }
+        public DateTimeSerializationSection()
+        {
+        }
     }
 }

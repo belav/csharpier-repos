@@ -116,7 +116,9 @@ public class MethodHub : TestHub
         return data;
     }
 
-    public void VoidMethod() { }
+    public void VoidMethod()
+    {
+    }
 
     public string ConcatString(byte b, int i, char c, string s)
     {
@@ -148,13 +150,19 @@ public class MethodHub : TestHub
         return Task.FromException(new InvalidOperationException("BOOM!"));
     }
 
-    public static void StaticMethod() { }
+    public static void StaticMethod()
+    {
+    }
 
     [Authorize("test")]
-    public void AuthMethod() { }
+    public void AuthMethod()
+    {
+    }
 
     [Authorize("test")]
-    public void MultiParamAuthMethod(string s1, string s2) { }
+    public void MultiParamAuthMethod(string s1, string s2)
+    {
+    }
 
     public Task SendToAllExcept(string message, IReadOnlyList<string> excludedConnectionIds)
     {
@@ -181,7 +189,9 @@ public class MethodHub : TestHub
         return Clients.Caller.SendAsync("Send", new SelfRef());
     }
 
-    public void InvalidArgument(CancellationToken token) { }
+    public void InvalidArgument(CancellationToken token)
+    {
+    }
 
     public async Task<string> StreamingConcat(ChannelReader<string> source)
     {
@@ -200,7 +210,9 @@ public class MethodHub : TestHub
 
     public async Task StreamDontRead(ChannelReader<string> source)
     {
-        while (await source.WaitToReadAsync()) { }
+        while (await source.WaitToReadAsync())
+        {
+        }
     }
 
     public async Task<int> StreamingSum(ChannelReader<int> source)
@@ -305,7 +317,9 @@ public class MethodHub : TestHub
         {
             while (await source.WaitToReadAsync())
             {
-                while (source.TryRead(out var item)) { }
+                while (source.TryRead(out var item))
+                {
+                }
             }
         }
         catch (Exception ex)
@@ -629,14 +643,20 @@ public class BaseHub : TestHub
 
 public class InvalidHub : TestHub
 {
-    public void OverloadedMethod(int num) { }
+    public void OverloadedMethod(int num)
+    {
+    }
 
-    public void OverloadedMethod(string message) { }
+    public void OverloadedMethod(string message)
+    {
+    }
 }
 
 public class GenericMethodHub : Hub
 {
-    public void GenericMethod<T>() { }
+    public void GenericMethod<T>()
+    {
+    }
 }
 
 public class DisposeTrackingHub : TestHub
@@ -666,7 +686,9 @@ public class HubWithAsyncDisposable : TestHub
         _disposable = disposable;
     }
 
-    public void Test() { }
+    public void Test()
+    {
+    }
 }
 
 public class AbortHub : Hub
@@ -952,7 +974,9 @@ public class StreamingHub : TestHub
         public string Value { get; set; }
     }
 
-    public class DerivedParameterTestObject : DerivedParameterTestObjectBase { }
+    public class DerivedParameterTestObject : DerivedParameterTestObjectBase
+    {
+    }
 
     public class DerivedParameterKnownTypesBinder : ISerializationBinder
     {
@@ -1374,13 +1398,21 @@ public class CallerService
 }
 
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
-public class FromService : Attribute, IFromServiceMetadata { }
+public class FromService : Attribute, IFromServiceMetadata
+{
+}
 
-public class Service1 { }
+public class Service1
+{
+}
 
-public class Service2 { }
+public class Service2
+{
+}
 
-public class Service3 { }
+public class Service3
+{
+}
 
 public class ServicesHub : TestHub
 {
@@ -1501,5 +1533,7 @@ public class TooManyParamsHub : Hub
         int a63,
         int a64,
         [FromService] Service1 service
-    ) { }
+    )
+    {
+    }
 }

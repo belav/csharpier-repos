@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics
         : AbstractDiagnosticProviderBasedUserDiagnosticTest
     {
         protected AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest(ITestOutputHelper logger)
-            : base(logger) { }
+            : base(logger)
+        {
+        }
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 

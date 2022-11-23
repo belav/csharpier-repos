@@ -158,7 +158,8 @@ namespace TypeSystemTests
                 new Dictionary<TypeDesc, MethodDesc>();
 
             public SyntheticVirtualOverrideTypeSystemContext() : base(TargetArchitecture.Unknown)
-            { }
+            {
+            }
 
             private MethodDesc GetGetHashCodeMethod(TypeDesc type)
             {

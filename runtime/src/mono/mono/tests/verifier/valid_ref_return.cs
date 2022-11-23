@@ -12,7 +12,9 @@ class Foo
     static int[] Arr = new int[1];
     int y;
 
-    static void Main() { }
+    static void Main()
+    {
+    }
 
     static ref int ReturnStatic()
     {

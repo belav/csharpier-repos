@@ -15,7 +15,9 @@ namespace System.Data.Common
         private byte[] _values = default!; // Late-initialized
 
         internal ByteStorage(DataColumn column)
-            : base(column, typeof(byte), defaultValue, StorageType.Byte) { }
+            : base(column, typeof(byte), defaultValue, StorageType.Byte)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

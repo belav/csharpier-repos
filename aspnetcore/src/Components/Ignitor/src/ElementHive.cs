@@ -99,9 +99,13 @@ public class ElementHive
         ApplyEdits(batch, component, 0, edits);
     }
 
-    private void DisposeComponent(int componentId) { }
+    private void DisposeComponent(int componentId)
+    {
+    }
 
-    private void DisposeEventHandler(ulong eventHandlerId) { }
+    private void DisposeEventHandler(ulong eventHandlerId)
+    {
+    }
 
     private void ApplyEdits(
         RenderBatch batch,

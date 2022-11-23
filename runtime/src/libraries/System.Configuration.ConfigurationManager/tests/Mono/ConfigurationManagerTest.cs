@@ -460,7 +460,9 @@ namespace MonoTests.System.Configuration
             }
         }
 
-        class TestSection : ConfigurationSection { }
+        class TestSection : ConfigurationSection
+        {
+        }
 
         class TestContextSection : ConfigurationSection
         {

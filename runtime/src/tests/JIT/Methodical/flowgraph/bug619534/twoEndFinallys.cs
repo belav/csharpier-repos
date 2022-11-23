@@ -97,7 +97,9 @@ namespace Test_twoEndFinallys
                 }
                 return null;
             }
-            finally { }
+            finally
+            {
+            }
         }
     }
 }

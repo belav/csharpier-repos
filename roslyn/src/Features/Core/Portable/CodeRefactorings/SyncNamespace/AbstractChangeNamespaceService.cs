@@ -1260,7 +1260,9 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
 
         private class SyntaxNodeSpanStartComparer : IComparer<SyntaxNode>
         {
-            private SyntaxNodeSpanStartComparer() { }
+            private SyntaxNodeSpanStartComparer()
+            {
+            }
 
             public static SyntaxNodeSpanStartComparer Instance { get; } =
                 new SyntaxNodeSpanStartComparer();

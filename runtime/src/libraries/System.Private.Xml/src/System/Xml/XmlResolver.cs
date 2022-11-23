@@ -73,7 +73,9 @@ namespace System.Xml
         /// </devdoc>
         public virtual ICredentials Credentials
         {
-            set { }
+            set
+            {
+            }
         }
 
         public virtual bool SupportsType(Uri absoluteUri, Type? type)

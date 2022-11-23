@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class TrueKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public TrueKeywordRecommender()
-            : base(SyntaxKind.TrueKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.TrueKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

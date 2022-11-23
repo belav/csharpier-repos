@@ -202,7 +202,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public class CustomConverterFactory : JsonConverterFactory
     {
-        public CustomConverterFactory() { }
+        public CustomConverterFactory()
+        {
+        }
 
         public override bool CanConvert(Type typeToConvert)
         {

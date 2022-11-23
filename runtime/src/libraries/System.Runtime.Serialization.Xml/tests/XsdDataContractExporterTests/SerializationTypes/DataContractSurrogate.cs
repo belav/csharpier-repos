@@ -22,7 +22,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             public Circle[] Circles
             {
                 get { return null; }
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -52,7 +54,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         [XmlRoot("XmlSerializerPersonElement")]
         public class XmlSerializerPerson
         {
-            public XmlSerializerPerson() { }
+            public XmlSerializerPerson()
+            {
+            }
 
             [XmlAttribute]
             public string Name;

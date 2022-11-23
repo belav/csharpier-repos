@@ -33,7 +33,9 @@ namespace Moq.Linq
         private int stackIndex;
         private int quoteDepth;
 
-        public MockSetupsBuilder() { }
+        public MockSetupsBuilder()
+        {
+        }
 
         protected override Expression VisitBinary(BinaryExpression node)
         {

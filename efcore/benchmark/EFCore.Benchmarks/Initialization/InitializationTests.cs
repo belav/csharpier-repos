@@ -21,7 +21,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization
             for (var i = 0; i < 10000; i++)
             {
                 // ReSharper disable once UnusedVariable
-                using (var context = CreateContext()) { }
+                using (var context = CreateContext())
+                {
+                }
             }
         }
 

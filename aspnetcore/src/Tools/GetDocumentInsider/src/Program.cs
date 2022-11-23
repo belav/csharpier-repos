@@ -8,7 +8,9 @@ namespace Microsoft.Extensions.ApiDescription.Tool;
 
 internal sealed class Program : ProgramBase
 {
-    public Program(IConsole console) : base(console) { }
+    public Program(IConsole console) : base(console)
+    {
+    }
 
     private static int Main(string[] args)
     {

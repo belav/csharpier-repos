@@ -326,11 +326,17 @@ public static class GenericVirtualMethods
 
     public class GenericTypeWithThreeParameters<X, Y, Z>
     {
-        public GenericTypeWithThreeParameters(int x) { }
+        public GenericTypeWithThreeParameters(int x)
+        {
+        }
 
-        private GenericTypeWithThreeParameters(String s) { }
+        private GenericTypeWithThreeParameters(String s)
+        {
+        }
 
-        public void SimpleMethod() { }
+        public void SimpleMethod()
+        {
+        }
 
         public M SimpleGenericMethod<M, N>(X arg1, N arg2)
         {
@@ -442,7 +448,9 @@ public static class GenericVirtualMethods
         );
     }
 
-    class Exception<T> : Exception { }
+    class Exception<T> : Exception
+    {
+    }
 
     class MyGenericTypeWithExceptionCatchingSupport<T>
     {
@@ -537,9 +545,13 @@ public static class GenericVirtualMethods
         Assert.IsTrue(mgt.RunAsyncMethod(true));
     }
 
-    class Base { }
+    class Base
+    {
+    }
 
-    class Derived : Base { }
+    class Derived : Base
+    {
+    }
 
     interface IInVariant<in T>
     {

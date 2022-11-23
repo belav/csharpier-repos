@@ -16,6 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SolutionCrawler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDocumentDifferenceService() { }
+        public CSharpDocumentDifferenceService()
+        {
+        }
     }
 }

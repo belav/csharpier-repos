@@ -340,7 +340,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
         {
             public static readonly FieldComparer Instance = new FieldComparer();
 
-            private FieldComparer() { }
+            private FieldComparer()
+            {
+            }
 
             public int Compare(SynthesizedStaticField? x, SynthesizedStaticField? y)
             {
@@ -516,7 +518,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal ModuleVersionIdField(
             Cci.INamedTypeDefinition containingType,
             Cci.ITypeReference type
-        ) : base("MVID", containingType, type) { }
+        ) : base("MVID", containingType, type)
+        {
+        }
 
         public override ImmutableArray<byte> MappedData => default(ImmutableArray<byte>);
     }
@@ -527,7 +531,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.INamedTypeDefinition containingType,
             int analysisIndex,
             Cci.ITypeReference payloadType
-        ) : base("PayloadRoot" + analysisIndex.ToString(), containingType, payloadType) { }
+        ) : base("PayloadRoot" + analysisIndex.ToString(), containingType, payloadType)
+        {
+        }
 
         public override ImmutableArray<byte> MappedData => default(ImmutableArray<byte>);
     }

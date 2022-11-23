@@ -13,7 +13,9 @@ namespace System.Data.Odbc
     {
         private readonly ArrayList _items = new ArrayList(); // Do not rename (binary serialization)
 
-        internal OdbcErrorCollection() { }
+        internal OdbcErrorCollection()
+        {
+        }
 
         object System.Collections.ICollection.SyncRoot
         {

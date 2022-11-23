@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
     public class WorkspacesNetCore : WorkspaceBase
     {
         public WorkspacesNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary) { }
+            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary)
+        {
+        }
 
         [WpfFact]
         [Trait(Traits.Feature, Traits.Features.Workspace)]

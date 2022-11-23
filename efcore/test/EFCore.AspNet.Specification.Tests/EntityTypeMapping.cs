@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class EntityTypeMapping
 {
-    public EntityTypeMapping() { }
+    public EntityTypeMapping()
+    {
+    }
 
     public EntityTypeMapping(IEntityType entityType)
     {

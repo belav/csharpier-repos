@@ -34,7 +34,9 @@ namespace Castle.Services.Logging.NLogIntegration
             Factory = factory;
         }
 
-        internal NLogLogger() { }
+        internal NLogLogger()
+        {
+        }
 
         /// <summary>
         ///   Determines if messages of priority "trace" will be logged.

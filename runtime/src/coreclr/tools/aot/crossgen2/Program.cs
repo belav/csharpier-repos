@@ -403,7 +403,9 @@ namespace ILCompiler
                             versionBubbleModulesHash.Add(module);
                         }
                     }
-                    catch { } // Ignore non-managed pe files
+                    catch
+                    {
+                    } // Ignore non-managed pe files
                 }
 
                 if (_inputBubble)
@@ -422,7 +424,9 @@ namespace ILCompiler
 
                             versionBubbleModulesHash.Add(module);
                         }
-                        catch { } // Ignore non-managed pe files
+                        catch
+                        {
+                        } // Ignore non-managed pe files
                     }
                 }
             }

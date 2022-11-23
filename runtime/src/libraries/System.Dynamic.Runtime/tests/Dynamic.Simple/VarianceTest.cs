@@ -5,9 +5,13 @@ using Xunit;
 
 namespace SampleDynamicTests
 {
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class VarianceTest
     {

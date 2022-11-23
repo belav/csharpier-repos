@@ -15,22 +15,32 @@ namespace System.Net.Mail
 #endif
     public sealed class SmtpPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public SmtpPermission(bool unrestricted) { }
+        public SmtpPermission(bool unrestricted)
+        {
+        }
 
-        public SmtpPermission(SmtpAccess access) { }
+        public SmtpPermission(SmtpAccess access)
+        {
+        }
 
-        public SmtpPermission(PermissionState state) { }
+        public SmtpPermission(PermissionState state)
+        {
+        }
 
         public SmtpAccess Access { get; }
 
-        public void AddPermission(SmtpAccess access) { }
+        public void AddPermission(SmtpAccess access)
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

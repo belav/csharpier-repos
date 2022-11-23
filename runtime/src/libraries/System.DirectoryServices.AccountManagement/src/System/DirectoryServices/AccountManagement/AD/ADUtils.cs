@@ -505,7 +505,9 @@ namespace System.DirectoryServices.AccountManagement
                     return true;
                 }
             }
-            catch (ActiveDirectoryObjectNotFoundException) { }
+            catch (ActiveDirectoryObjectNotFoundException)
+            {
+            }
 
             // Since we were able to retrieve the computer domain above we should be able to access the current forest here.
             Forest currentForest = Forest.GetCurrentForest();
@@ -528,7 +530,9 @@ namespace System.DirectoryServices.AccountManagement
                     return true;
                 }
             }
-            catch (ActiveDirectoryObjectNotFoundException) { }
+            catch (ActiveDirectoryObjectNotFoundException)
+            {
+            }
 
             return false;
         }

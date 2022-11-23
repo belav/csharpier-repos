@@ -118,16 +118,22 @@ namespace Castle.DynamicProxy.Tests
             );
         }
 
-        public interface IEmptyInterface { }
+        public interface IEmptyInterface
+        {
+        }
 
         public interface ISingleMethodInterface
         {
             void Method();
         }
 
-        public abstract class EmptyClass { }
+        public abstract class EmptyClass
+        {
+        }
 
-        public sealed class EmptyTarget : EmptyClass, IEmptyInterface { }
+        public sealed class EmptyTarget : EmptyClass, IEmptyInterface
+        {
+        }
 
         public abstract class SingleMethodClass
         {
@@ -136,7 +142,9 @@ namespace Castle.DynamicProxy.Tests
 
         public sealed class SingleMethodTarget : SingleMethodClass, ISingleMethodInterface
         {
-            public override void Method() { }
+            public override void Method()
+            {
+            }
         }
     }
 }

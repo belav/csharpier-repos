@@ -184,7 +184,9 @@ class StrSwitchFinalTest
                                     try
                                     {
                                         _trace.WriteLine("s == " + s[s.Length]);
-                                        try { }
+                                        try
+                                        {
+                                        }
                                         finally
                                         {
                                             _trace.WriteLine("Unreached");

@@ -16,7 +16,13 @@ public readonly struct EventCallback : IEventCallback
     /// <summary>
     /// Gets an empty <see cref="EventCallback"/>.
     /// </summary>
-    public static readonly EventCallback Empty = new EventCallback(null, (Action)(() => { }));
+    public static readonly EventCallback Empty = new EventCallback(
+        null,
+        (Action)(
+            () => {
+            }
+        )
+    );
 
     internal readonly MulticastDelegate? Delegate;
     internal readonly IHandleEvent? Receiver;

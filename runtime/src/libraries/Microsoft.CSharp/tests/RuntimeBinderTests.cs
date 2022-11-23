@@ -149,7 +149,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             int Add(int arg);
         }
 
-        interface ITestDerived : ITestInterface { }
+        interface ITestDerived : ITestInterface
+        {
+        }
 
         class TestImpl : ITestDerived
         {
@@ -197,9 +199,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             public int Zero() => 0;
         }
 
-        class Second<T> : First<T> where T : First<T> { }
+        class Second<T> : First<T> where T : First<T>
+        {
+        }
 
-        class Third<T> : Second<Third<T>> { }
+        class Third<T> : Second<Third<T>>
+        {
+        }
 
         public class Castable
         {
@@ -237,9 +243,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             }
         }
 
-        public class BuilderBaseEx<T> : BuilderBase<T> where T : BuilderBaseEx<T> { }
+        public class BuilderBaseEx<T> : BuilderBase<T> where T : BuilderBaseEx<T>
+        {
+        }
 
-        public class BuilderBase<T> where T : BuilderBase<T> { }
+        public class BuilderBase<T> where T : BuilderBase<T>
+        {
+        }
 
         [Fact]
         public void CircularOnOwnNested()
@@ -342,7 +352,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             int ExplicitCount { get; set; }
         }
 
-        interface ICounterBoth : ICounter1, ICounter2 { }
+        interface ICounterBoth : ICounter1, ICounter2
+        {
+        }
 
         [Fact]
         public void AmbiguousInterfaceInheritedMethodError()

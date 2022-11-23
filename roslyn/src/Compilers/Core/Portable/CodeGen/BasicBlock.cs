@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 return new ObjectPool<BasicBlock>(() => new PooledBasicBlock(), size);
             }
 
-            protected BasicBlock() { }
+            protected BasicBlock()
+            {
+            }
 
             internal BasicBlock(ILBuilder builder)
             {

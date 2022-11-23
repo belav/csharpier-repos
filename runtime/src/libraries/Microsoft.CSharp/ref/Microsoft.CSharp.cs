@@ -155,7 +155,9 @@ namespace Microsoft.CSharp.RuntimeBinder
     )]
     public sealed partial class CSharpArgumentInfo
     {
-        internal CSharpArgumentInfo() { }
+        internal CSharpArgumentInfo()
+        {
+        }
 
         public static Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo Create(
             Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags flags,
@@ -201,32 +203,48 @@ namespace Microsoft.CSharp.RuntimeBinder
 
     public partial class RuntimeBinderException : System.Exception
     {
-        public RuntimeBinderException() { }
+        public RuntimeBinderException()
+        {
+        }
 
         protected RuntimeBinderException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public RuntimeBinderException(string? message) { }
+        public RuntimeBinderException(string? message)
+        {
+        }
 
-        public RuntimeBinderException(string? message, System.Exception? innerException) { }
+        public RuntimeBinderException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class RuntimeBinderInternalCompilerException : System.Exception
     {
-        public RuntimeBinderInternalCompilerException() { }
+        public RuntimeBinderInternalCompilerException()
+        {
+        }
 
         protected RuntimeBinderInternalCompilerException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public RuntimeBinderInternalCompilerException(string? message) { }
+        public RuntimeBinderInternalCompilerException(string? message)
+        {
+        }
 
         public RuntimeBinderInternalCompilerException(
             string? message,
             System.Exception? innerException
-        ) { }
+        )
+        {
+        }
     }
 }

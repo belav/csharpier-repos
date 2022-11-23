@@ -30,7 +30,9 @@ namespace System.Linq.Expressions.Compiler
                 EmitStore();
             }
 
-            internal virtual void FreeLocal() { }
+            internal virtual void FreeLocal()
+            {
+            }
         }
 
         private sealed class LocalStorage : Storage

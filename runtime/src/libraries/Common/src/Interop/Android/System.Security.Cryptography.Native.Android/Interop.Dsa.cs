@@ -243,7 +243,9 @@ namespace System.Security.Cryptography
 {
     internal sealed class SafeDsaHandle : SafeKeyHandle
     {
-        public SafeDsaHandle() { }
+        public SafeDsaHandle()
+        {
+        }
 
         internal SafeDsaHandle(IntPtr ptr)
         {

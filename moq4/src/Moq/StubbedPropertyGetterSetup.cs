@@ -44,6 +44,8 @@ namespace Moq
             return true;
         }
 
-        protected override void VerifySelf() { }
+        protected override void VerifySelf()
+        {
+        }
     }
 }

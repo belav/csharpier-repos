@@ -22,7 +22,9 @@ namespace System.Security.Cryptography.Pkcs
 
         public Rfc3161TimestampTokenInfo TokenInfo { get; private set; } = null!;
 
-        private Rfc3161TimestampToken() { }
+        private Rfc3161TimestampToken()
+        {
+        }
 
         /// <summary>
         /// Get a SignedCms representation of the RFC3161 Timestamp Token.
@@ -307,7 +309,9 @@ namespace System.Security.Cryptography.Pkcs
                     signer.CheckSignature(new X509Certificate2Collection(tsaCertificate), true);
                     return true;
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             return false;
@@ -455,8 +459,12 @@ namespace System.Security.Cryptography.Pkcs
                     return true;
                 }
             }
-            catch (AsnContentException) { }
-            catch (CryptographicException) { }
+            catch (AsnContentException)
+            {
+            }
+            catch (CryptographicException)
+            {
+            }
 
             return false;
         }

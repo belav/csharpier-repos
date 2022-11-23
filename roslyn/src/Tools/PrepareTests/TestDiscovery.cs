@@ -118,7 +118,9 @@ internal class TestDiscovery
             Console.WriteLine(message);
         }
 
-        public void HandleRawMessage(string rawMessage) { }
+        public void HandleRawMessage(string rawMessage)
+        {
+        }
 
         public ImmutableArray<TestCase> GetTests()
         {

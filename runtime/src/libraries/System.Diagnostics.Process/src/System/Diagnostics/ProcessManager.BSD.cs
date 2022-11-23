@@ -54,7 +54,9 @@ namespace System.Diagnostics
                     };
                 }
             }
-            catch { } // eat all errors
+            catch
+            {
+            } // eat all errors
 
             return new ProcessModuleCollection(0);
         }

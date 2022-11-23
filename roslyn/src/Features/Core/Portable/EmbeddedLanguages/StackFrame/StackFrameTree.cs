@@ -12,6 +12,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         : EmbeddedSyntaxTree<StackFrameKind, StackFrameNode, StackFrameCompilationUnit>
     {
         public StackFrameTree(VirtualCharSequence text, StackFrameCompilationUnit root)
-            : base(text, root, ImmutableArray<EmbeddedDiagnostic>.Empty) { }
+            : base(text, root, ImmutableArray<EmbeddedDiagnostic>.Empty)
+        {
+        }
     }
 }

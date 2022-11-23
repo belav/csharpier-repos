@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LoggerOptions() { }
+        public LoggerOptions()
+        {
+        }
 
         ImmutableArray<IOption> IOptionProvider.Options { get; } =
             ImmutableArray.Create<IOption>(EtwLoggerKey, TraceLoggerKey, OutputWindowLoggerKey);

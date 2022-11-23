@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateDefaultConstructors
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateDefaultConstructorsCodeFixProvider() { }
+        public CSharpGenerateDefaultConstructorsCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS1729, CS7036, CS8983);

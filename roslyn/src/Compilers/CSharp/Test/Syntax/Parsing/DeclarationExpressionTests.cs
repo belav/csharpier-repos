@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
     [CompilerTrait(CompilerFeature.Tuples)]
     public class DeclarationExpressionTests : ParsingTests
     {
-        public DeclarationExpressionTests(ITestOutputHelper output) : base(output) { }
+        public DeclarationExpressionTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void NullaboutOutDeclaration()

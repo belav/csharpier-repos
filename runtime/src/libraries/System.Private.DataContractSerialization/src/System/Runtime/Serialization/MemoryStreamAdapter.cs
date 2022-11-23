@@ -18,7 +18,9 @@ namespace System.Runtime.Serialization
         public object? Identity
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 #pragma warning restore CA1822
     }

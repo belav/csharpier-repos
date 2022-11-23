@@ -16,7 +16,9 @@ namespace System.Xml.Xsl.XsltOld
         // Compile time precalculated AVT
         private string? _name;
 
-        internal ProcessingInstructionAction() { }
+        internal ProcessingInstructionAction()
+        {
+        }
 
         internal override void Compile(Compiler compiler)
         {

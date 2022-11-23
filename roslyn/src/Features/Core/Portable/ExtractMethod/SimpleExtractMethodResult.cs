@@ -23,6 +23,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 formattingRules,
                 invocationNameToken,
                 methodDefinition
-            ) { }
+            )
+        {
+        }
     }
 }

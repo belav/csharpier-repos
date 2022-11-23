@@ -409,14 +409,20 @@ namespace Microsoft.Extensions.Hosting.Tests
             Assert.Equal(notDefaultTimeoutSeconds, hostOptions.Value.ShutdownTimeout.TotalSeconds);
         }
 
-        internal class ServiceA { }
+        internal class ServiceA
+        {
+        }
 
         internal class ServiceB
         {
-            public ServiceB(ServiceC c) { }
+            public ServiceB(ServiceC c)
+            {
+            }
         }
 
-        internal class ServiceC { }
+        internal class ServiceC
+        {
+        }
 
         private class ScopeDelegateLoggerProvider : ILoggerProvider, ISupportExternalScope
         {
@@ -434,7 +440,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 return _logger;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public void SetScopeProvider(IExternalScopeProvider scopeProvider)
             {
@@ -482,7 +490,9 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             private class Scope : IDisposable
             {
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
             }
         }
 

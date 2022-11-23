@@ -7,7 +7,9 @@ namespace System.Web.Mvc
     {
         internal static readonly string ViewStartFileName = "_ViewStart";
 
-        public RazorViewEngine() : this(null) { }
+        public RazorViewEngine() : this(null)
+        {
+        }
 
         public RazorViewEngine(IViewPageActivator viewPageActivator) : base(viewPageActivator)
         {

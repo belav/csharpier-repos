@@ -14,19 +14,27 @@ namespace System.Diagnostics
 #endif
     public sealed class PerformanceCounterPermission : ResourcePermissionBase
     {
-        public PerformanceCounterPermission() { }
+        public PerformanceCounterPermission()
+        {
+        }
 
         public PerformanceCounterPermission(
             PerformanceCounterPermissionAccess permissionAccess,
             string machineName,
             string categoryName
-        ) { }
+        )
+        {
+        }
 
         public PerformanceCounterPermission(
             PerformanceCounterPermissionEntry[] permissionAccessEntries
-        ) { }
+        )
+        {
+        }
 
-        public PerformanceCounterPermission(PermissionState state) { }
+        public PerformanceCounterPermission(PermissionState state)
+        {
+        }
 
         public PerformanceCounterPermissionEntryCollection PermissionEntries
         {

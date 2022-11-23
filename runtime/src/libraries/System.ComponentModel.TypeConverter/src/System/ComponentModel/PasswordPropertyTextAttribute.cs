@@ -37,7 +37,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a default PasswordPropertyTextAttribute.
         /// </summary>
-        public PasswordPropertyTextAttribute() : this(false) { }
+        public PasswordPropertyTextAttribute() : this(false)
+        {
+        }
 
         /// <summary>
         /// Creates a PasswordPropertyTextAttribute with the given password value.

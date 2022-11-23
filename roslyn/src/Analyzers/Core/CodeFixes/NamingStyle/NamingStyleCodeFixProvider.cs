@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public NamingStyleCodeFixProvider() { }
+        public NamingStyleCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.NamingRuleId);

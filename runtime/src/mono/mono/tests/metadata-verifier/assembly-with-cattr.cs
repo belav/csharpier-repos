@@ -22,19 +22,29 @@ using System.ComponentModel;
 [AttributeUsage(AttributeTargets.All)]
 public sealed class GenericAttribute : Attribute
 {
-    public GenericAttribute() { }
+    public GenericAttribute()
+    {
+    }
 
-    public GenericAttribute(int x) { }
+    public GenericAttribute(int x)
+    {
+    }
 }
 
-public interface IFace { }
+public interface IFace
+{
+}
 
-public class Foo : IFace { }
+public class Foo : IFace
+{
+}
 
 public class Foo<T>
 {
     [Generic(70)]
-    public void Bla<D>() { }
+    public void Bla<D>()
+    {
+    }
 }
 
 public delegate int Del();
@@ -57,5 +67,7 @@ public class Class
     public event Del Zzz;
 
     [Generic(10)]
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

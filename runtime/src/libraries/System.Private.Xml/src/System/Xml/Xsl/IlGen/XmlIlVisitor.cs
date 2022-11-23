@@ -37,7 +37,9 @@ namespace System.Xml.Xsl.IlGen
         [RequiresUnreferencedCode(
             "Method VisitXsltInvokeEarlyBound will require code that cannot be statically analyzed."
         )]
-        public XmlILVisitor() { }
+        public XmlILVisitor()
+        {
+        }
 
         //-----------------------------------------------
         // Entry

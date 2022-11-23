@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         > _analyzerAndFixerMap = new();
 
         protected AbstractDiagnosticProviderBasedUserDiagnosticTest(ITestOutputHelper logger)
-            : base(logger) { }
+            : base(logger)
+        {
+        }
 
         internal abstract (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

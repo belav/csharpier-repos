@@ -10,23 +10,33 @@ namespace System.Reflection.Emit
             // Prevent generating a default constructor
         }
 
-        public void AddArgument(Type clsArgument) { }
+        public void AddArgument(Type clsArgument)
+        {
+        }
 
-        public void AddArgument(Type argument, bool pinned) { }
+        public void AddArgument(Type argument, bool pinned)
+        {
+        }
 
         public void AddArgument(
             Type argument,
             Type[] requiredCustomModifiers,
             Type[] optionalCustomModifiers
-        ) { }
+        )
+        {
+        }
 
         public void AddArguments(
             Type[] arguments,
             Type[][] requiredCustomModifiers,
             Type[][] optionalCustomModifiers
-        ) { }
+        )
+        {
+        }
 
-        public void AddSentinel() { }
+        public void AddSentinel()
+        {
+        }
 
         public override bool Equals(object? obj)
         {

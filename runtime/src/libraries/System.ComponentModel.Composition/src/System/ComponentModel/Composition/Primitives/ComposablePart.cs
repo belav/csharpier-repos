@@ -14,7 +14,9 @@ namespace System.ComponentModel.Composition.Primitives
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePart"/> class.
         /// </summary>
-        protected ComposablePart() { }
+        protected ComposablePart()
+        {
+        }
 
         /// <summary>
         ///     Gets the export definitions that describe the exported values provided by the part.
@@ -117,7 +119,9 @@ namespace System.ComponentModel.Composition.Primitives
         /// <exception cref="ComposablePartException">
         ///     An error occurred activating the <see cref="ComposablePart"/>.
         /// </exception>
-        public virtual void Activate() { }
+        public virtual void Activate()
+        {
+        }
 
         /// <summary>
         ///     Gets the exported value described by the specified definition.

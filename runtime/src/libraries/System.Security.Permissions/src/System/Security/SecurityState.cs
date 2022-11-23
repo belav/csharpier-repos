@@ -5,7 +5,9 @@ namespace System.Security
 {
     public abstract partial class SecurityState
     {
-        protected SecurityState() { }
+        protected SecurityState()
+        {
+        }
 
         public abstract void EnsureState();
 

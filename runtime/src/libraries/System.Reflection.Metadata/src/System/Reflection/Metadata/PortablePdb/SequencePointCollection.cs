@@ -218,7 +218,9 @@ namespace System.Reflection.Metadata
                 _current = default(SequencePoint);
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 }

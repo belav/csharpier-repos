@@ -16,7 +16,9 @@ public partial class HubConnectionHandlerTests
         using (StartVerifiableLog())
         {
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                builder => { },
+                builder =>
+                {
+                },
                 LoggerFactory
             );
             var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
@@ -286,7 +288,9 @@ public partial class HubConnectionHandlerTests
         using (StartVerifiableLog())
         {
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                builder => { },
+                builder =>
+                {
+                },
                 LoggerFactory
             );
             var connectionHandler = serviceProvider.GetService<HubConnectionHandler<HubT>>();
@@ -645,7 +649,9 @@ public partial class HubConnectionHandlerTests
         using (StartVerifiableLog())
         {
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                builder => { },
+                builder =>
+                {
+                },
                 LoggerFactory
             );
             var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
@@ -698,7 +704,9 @@ public partial class HubConnectionHandlerTests
         using (StartVerifiableLog())
         {
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                builder => { },
+                builder =>
+                {
+                },
                 LoggerFactory
             );
             var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();

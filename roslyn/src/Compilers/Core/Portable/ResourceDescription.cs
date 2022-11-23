@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis
                 isPublic,
                 isEmbedded: true,
                 checkArgs: true
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a representation of a resource whose file name will be recorded in the assembly.
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis
             Func<Stream> dataProvider,
             bool isPublic
         ) : this(resourceName, fileName, dataProvider, isPublic, isEmbedded: false, checkArgs: true)
-        { }
+        {
+        }
 
         internal ResourceDescription(
             string resourceName,

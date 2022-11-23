@@ -587,7 +587,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         private class ModelWithBindAttribute
         {
             [Bind]
-            private class ModelWithBindAttribute_Buddy { }
+            private class ModelWithBindAttribute_Buddy
+            {
+            }
         }
 
         [ModelBinderProviderOptions(FrontOfList = true)]
@@ -603,25 +605,39 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         }
 
         [ExtensibleModelBinder(typeof(object))]
-        private class ModelWithProviderAttribute_BadAttribute { }
+        private class ModelWithProviderAttribute_BadAttribute
+        {
+        }
 
         [ExtensibleModelBinder(typeof(CustomBinder))]
-        private class ModelWithProviderAttribute_Binder { }
+        private class ModelWithProviderAttribute_Binder
+        {
+        }
 
         [ExtensibleModelBinder(typeof(CustomGenericBinder<>))]
-        private class ModelWithProviderAttribute_Binder_Generic<T> { }
+        private class ModelWithProviderAttribute_Binder_Generic<T>
+        {
+        }
 
         [ExtensibleModelBinder(typeof(CustomBinder), SuppressPrefixCheck = true)]
-        private class ModelWithProviderAttribute_Binder_SuppressPrefix { }
+        private class ModelWithProviderAttribute_Binder_SuppressPrefix
+        {
+        }
 
         [ExtensibleModelBinder(typeof(CustomProvider))]
-        private class ModelWithProviderAttribute_Provider { }
+        private class ModelWithProviderAttribute_Provider
+        {
+        }
 
         [ExtensibleModelBinder(typeof(NoParameterlessCtorProvider))]
-        private class ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor { }
+        private class ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor
+        {
+        }
 
         [ExtensibleModelBinder(typeof(NoParameterlessCtorBinder<>))]
-        private class ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor<T> { }
+        private class ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor<T>
+        {
+        }
 
         private class CustomProvider : ModelBinderProvider
         {
@@ -658,7 +674,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class NoParameterlessCtorProvider : ModelBinderProvider
         {
-            public NoParameterlessCtorProvider(int parameter) { }
+            public NoParameterlessCtorProvider(int parameter)
+            {
+            }
 
             public override IExtensibleModelBinder GetBinder(
                 ControllerContext controllerContext,
@@ -671,7 +689,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class NoParameterlessCtorBinder<T> : IExtensibleModelBinder
         {
-            public NoParameterlessCtorBinder(int parameter) { }
+            public NoParameterlessCtorBinder(int parameter)
+            {
+            }
 
             public bool BindModel(
                 ControllerContext controllerContext,

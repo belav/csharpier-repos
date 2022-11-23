@@ -25,7 +25,9 @@ namespace Internal.NativeFormat
         internal const int Placed = -2;
         internal const int Unified = -3;
 
-        public Vertex() { }
+        public Vertex()
+        {
+        }
 
         internal abstract void Save(NativeWriter writer);
 
@@ -49,7 +51,9 @@ namespace Internal.NativeFormat
         internal List<Vertex> _items = new List<Vertex>();
         internal Dictionary<Vertex, Vertex> _placedMap = new Dictionary<Vertex, Vertex>();
 
-        public Section() { }
+        public Section()
+        {
+        }
 
         public Vertex Place(Vertex vertex)
         {

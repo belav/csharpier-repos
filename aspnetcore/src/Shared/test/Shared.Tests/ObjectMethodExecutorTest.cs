@@ -413,7 +413,9 @@ public class ObjectMethodExecutorTest
             return i + j;
         }
 
-        public void VoidValueMethod(int i) { }
+        public void VoidValueMethod(int i)
+        {
+        }
 
         public TestObject ValueMethodWithReturnType(int i)
         {
@@ -498,7 +500,9 @@ public class ObjectMethodExecutorTest
             return new ValueTask<string>(result);
         }
 
-        public void MethodWithMultipleParameters(int valueTypeParam, string referenceTypeParam) { }
+        public void MethodWithMultipleParameters(int valueTypeParam, string referenceTypeParam)
+        {
+        }
 
         public FSharpAsync<string> FSharpAsyncMethod(string parameter)
         {
@@ -590,11 +594,15 @@ public class ObjectMethodExecutorTest
 
     public class TestAwaiterWithICriticalNotifyCompletion
         : CompletionTrackingAwaiterBase,
-            ICriticalNotifyCompletion { }
+            ICriticalNotifyCompletion
+    {
+    }
 
     public class TestAwaiterWithoutICriticalNotifyCompletion
         : CompletionTrackingAwaiterBase,
-            INotifyCompletion { }
+            INotifyCompletion
+    {
+    }
 
     public class CompletionTrackingAwaiterBase
     {

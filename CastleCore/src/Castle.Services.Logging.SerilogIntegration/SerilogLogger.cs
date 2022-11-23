@@ -30,7 +30,9 @@ namespace Castle.Services.Logging.SerilogIntegration
             Factory = factory;
         }
 
-        internal SerilogLogger() { }
+        internal SerilogLogger()
+        {
+        }
 
         protected internal ILogger Logger { get; set; }
 

@@ -19,7 +19,9 @@ namespace Microsoft.Interop.Diagnostics
         private const int StartSourceGenerationEventId = 1;
         private const int StopSourceGenerationEventId = StartSourceGenerationEventId + 1;
 
-        private Events() { }
+        private Events()
+        {
+        }
 
         /// <summary>
         /// Utility function that wraps emitting start/stop events for the source generation event.

@@ -28,5 +28,7 @@ public class TestDbContextOperations : DbContextOperations
             nullable,
             args,
             appServicesFactory
-        ) { }
+        )
+    {
+    }
 }

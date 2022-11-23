@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public JsonClassifier() { }
+        public JsonClassifier()
+        {
+        }
 
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {

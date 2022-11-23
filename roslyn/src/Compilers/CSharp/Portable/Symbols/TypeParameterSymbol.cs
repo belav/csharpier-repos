@@ -188,7 +188,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler can create TypeParameterSymbols.
-        internal TypeParameterSymbol() { }
+        internal TypeParameterSymbol()
+        {
+        }
 
         public sealed override Accessibility DeclaredAccessibility
         {
@@ -676,7 +678,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return Hash.Combine(ContainingSymbol, Ordinal);
         }
 
-        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms) { }
+        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms)
+        {
+        }
 
         internal override bool ApplyNullableTransforms(
             byte defaultTransformFlag,

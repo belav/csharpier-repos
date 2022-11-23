@@ -8,9 +8,13 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class OpenSslExportProvider : UnixExportProvider
     {
-        internal OpenSslExportProvider(ICertificatePalCore singleCertPal) : base(singleCertPal) { }
+        internal OpenSslExportProvider(ICertificatePalCore singleCertPal) : base(singleCertPal)
+        {
+        }
 
-        internal OpenSslExportProvider(X509Certificate2Collection certs) : base(certs) { }
+        internal OpenSslExportProvider(X509Certificate2Collection certs) : base(certs)
+        {
+        }
 
         protected override byte[] ExportPkcs8(
             ICertificatePalCore certificatePal,
@@ -26,7 +30,9 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 alg = new RSAOpenSsl(privateKey!);
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             if (alg == null)
             {
@@ -34,7 +40,9 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     alg = new ECDsaOpenSsl(privateKey!);
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             if (alg == null)
@@ -43,7 +51,9 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     alg = new DSAOpenSsl(privateKey!);
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             Debug.Assert(alg != null);

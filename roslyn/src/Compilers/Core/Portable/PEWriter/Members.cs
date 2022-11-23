@@ -922,7 +922,9 @@ namespace Microsoft.Cci
     /// <summary>
     /// Represents a global field in symbol table.
     /// </summary>
-    internal interface IGlobalFieldDefinition : IFieldDefinition { }
+    internal interface IGlobalFieldDefinition : IFieldDefinition
+    {
+    }
 
     /// <summary>
     /// Represents a global method in symbol table.

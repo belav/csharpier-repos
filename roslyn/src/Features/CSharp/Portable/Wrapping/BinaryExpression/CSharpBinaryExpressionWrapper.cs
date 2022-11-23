@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.BinaryExpression
                 CSharpIndentationService.Instance,
                 CSharpSyntaxFacts.Instance,
                 CSharpExpressionPrecedenceService.Instance
-            ) { }
+            )
+        {
+        }
 
         protected override SyntaxTriviaList GetNewLineBeforeOperatorTrivia(
             SyntaxTriviaList newLine

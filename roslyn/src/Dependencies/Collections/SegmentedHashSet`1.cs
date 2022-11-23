@@ -71,7 +71,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
         #region Constructors
 
-        public SegmentedHashSet() : this((IEqualityComparer<T>?)null) { }
+        public SegmentedHashSet() : this((IEqualityComparer<T>?)null)
+        {
+        }
 
         public SegmentedHashSet(IEqualityComparer<T>? comparer)
         {
@@ -86,9 +88,13 @@ namespace Microsoft.CodeAnalysis.Collections
 #endif
         }
 
-        public SegmentedHashSet(int capacity) : this(capacity, null) { }
+        public SegmentedHashSet(int capacity) : this(capacity, null)
+        {
+        }
 
-        public SegmentedHashSet(IEnumerable<T> collection) : this(collection, null) { }
+        public SegmentedHashSet(IEnumerable<T> collection) : this(collection, null)
+        {
+        }
 
         public SegmentedHashSet(IEnumerable<T> collection, IEqualityComparer<T>? comparer)
             : this(comparer)
@@ -1517,7 +1523,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
             public T Current => _current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             object? IEnumerator.Current
             {

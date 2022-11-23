@@ -16,7 +16,9 @@ public readonly record struct TypeMappingInfo
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.
     /// </summary>
     /// <param name="property">The property for which mapping is needed.</param>
-    public TypeMappingInfo(IProperty property) : this(property.GetPrincipals()) { }
+    public TypeMappingInfo(IProperty property) : this(property.GetPrincipals())
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.

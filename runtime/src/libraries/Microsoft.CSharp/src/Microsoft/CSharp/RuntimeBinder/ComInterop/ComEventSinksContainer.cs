@@ -14,7 +14,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     /// </summary>
     internal sealed class ComEventSinksContainer : List<ComEventsSink>, IDisposable
     {
-        private ComEventSinksContainer() { }
+        private ComEventSinksContainer()
+        {
+        }
 
         private static readonly object s_comObjectEventSinksKey = new object();
 

@@ -285,7 +285,9 @@ namespace System.Diagnostics.SymbolStore
     {
         public static readonly System.Guid Text;
 
-        public SymDocumentType() { }
+        public SymDocumentType()
+        {
+        }
     }
 
     public partial class SymLanguageType
@@ -302,14 +304,18 @@ namespace System.Diagnostics.SymbolStore
         public static readonly System.Guid Pascal;
         public static readonly System.Guid SMC;
 
-        public SymLanguageType() { }
+        public SymLanguageType()
+        {
+        }
     }
 
     public partial class SymLanguageVendor
     {
         public static readonly System.Guid Microsoft;
 
-        public SymLanguageVendor() { }
+        public SymLanguageVendor()
+        {
+        }
     }
 }
 #endif // !BUILDING_CORELIB_REFERENCE
@@ -320,17 +326,29 @@ namespace System.Diagnostics
     {
         public const int OFFSET_UNKNOWN = -1;
 
-        public StackFrame() { }
+        public StackFrame()
+        {
+        }
 
-        public StackFrame(bool needFileInfo) { }
+        public StackFrame(bool needFileInfo)
+        {
+        }
 
-        public StackFrame(int skipFrames) { }
+        public StackFrame(int skipFrames)
+        {
+        }
 
-        public StackFrame(int skipFrames, bool needFileInfo) { }
+        public StackFrame(int skipFrames, bool needFileInfo)
+        {
+        }
 
-        public StackFrame(string? fileName, int lineNumber) { }
+        public StackFrame(string? fileName, int lineNumber)
+        {
+        }
 
-        public StackFrame(string? fileName, int lineNumber, int colNumber) { }
+        public StackFrame(string? fileName, int lineNumber, int colNumber)
+        {
+        }
 
         public virtual int GetFileColumnNumber()
         {
@@ -410,23 +428,41 @@ namespace System.Diagnostics
     {
         public const int METHODS_TO_SKIP = 0;
 
-        public StackTrace() { }
+        public StackTrace()
+        {
+        }
 
-        public StackTrace(bool fNeedFileInfo) { }
+        public StackTrace(bool fNeedFileInfo)
+        {
+        }
 
-        public StackTrace(System.Diagnostics.StackFrame frame) { }
+        public StackTrace(System.Diagnostics.StackFrame frame)
+        {
+        }
 
-        public StackTrace(System.Exception e) { }
+        public StackTrace(System.Exception e)
+        {
+        }
 
-        public StackTrace(System.Exception e, bool fNeedFileInfo) { }
+        public StackTrace(System.Exception e, bool fNeedFileInfo)
+        {
+        }
 
-        public StackTrace(System.Exception e, int skipFrames) { }
+        public StackTrace(System.Exception e, int skipFrames)
+        {
+        }
 
-        public StackTrace(System.Exception e, int skipFrames, bool fNeedFileInfo) { }
+        public StackTrace(System.Exception e, int skipFrames, bool fNeedFileInfo)
+        {
+        }
 
-        public StackTrace(int skipFrames) { }
+        public StackTrace(int skipFrames)
+        {
+        }
 
-        public StackTrace(int skipFrames, bool fNeedFileInfo) { }
+        public StackTrace(int skipFrames, bool fNeedFileInfo)
+        {
+        }
 
         public virtual int FrameCount
         {

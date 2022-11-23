@@ -8,24 +8,34 @@ namespace System.Security.Cryptography.Xml
 {
     public sealed partial class CipherData
     {
-        public CipherData() { }
+        public CipherData()
+        {
+        }
 
-        public CipherData(byte[] cipherValue) { }
+        public CipherData(byte[] cipherValue)
+        {
+        }
 
-        public CipherData(System.Security.Cryptography.Xml.CipherReference cipherReference) { }
+        public CipherData(System.Security.Cryptography.Xml.CipherReference cipherReference)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.Security.Cryptography.Xml.CipherReference? CipherReference
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public byte[]? CipherValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Xml.XmlElement GetXml()
@@ -33,55 +43,76 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public sealed partial class CipherReference
         : System.Security.Cryptography.Xml.EncryptedReference
     {
-        public CipherReference() { }
+        public CipherReference()
+        {
+        }
 
-        public CipherReference(string uri) { }
+        public CipherReference(string uri)
+        {
+        }
 
         public CipherReference(
             string uri,
             System.Security.Cryptography.Xml.TransformChain transformChain
-        ) { }
+        )
+        {
+        }
 
         public override System.Xml.XmlElement GetXml()
         {
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class DataObject
     {
-        public DataObject() { }
+        public DataObject()
+        {
+        }
 
         public DataObject(string id, string mimeType, string encoding, System.Xml.XmlElement data)
-        { }
+        {
+        }
 
         public System.Xml.XmlNodeList Data
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Encoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Id
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? MimeType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Xml.XmlElement GetXml()
@@ -89,33 +120,47 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public sealed partial class DataReference : System.Security.Cryptography.Xml.EncryptedReference
     {
-        public DataReference() { }
+        public DataReference()
+        {
+        }
 
-        public DataReference(string uri) { }
+        public DataReference(string uri)
+        {
+        }
 
         public DataReference(
             string uri,
             System.Security.Cryptography.Xml.TransformChain transformChain
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class DSAKeyValue : System.Security.Cryptography.Xml.KeyInfoClause
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-        public DSAKeyValue() { }
+        public DSAKeyValue()
+        {
+        }
 
-        public DSAKeyValue(System.Security.Cryptography.DSA key) { }
+        public DSAKeyValue(System.Security.Cryptography.DSA key)
+        {
+        }
 
         public System.Security.Cryptography.DSA Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Xml.XmlElement GetXml()
@@ -123,64 +168,88 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public sealed partial class EncryptedData : System.Security.Cryptography.Xml.EncryptedType
     {
-        public EncryptedData() { }
+        public EncryptedData()
+        {
+        }
 
         public override System.Xml.XmlElement GetXml()
         {
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public sealed partial class EncryptedKey : System.Security.Cryptography.Xml.EncryptedType
     {
-        public EncryptedKey() { }
+        public EncryptedKey()
+        {
+        }
 
         public string? CarriedKeyName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Recipient
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.Xml.ReferenceList ReferenceList
         {
             get { throw null; }
         }
 
-        public void AddReference(System.Security.Cryptography.Xml.DataReference dataReference) { }
+        public void AddReference(System.Security.Cryptography.Xml.DataReference dataReference)
+        {
+        }
 
-        public void AddReference(System.Security.Cryptography.Xml.KeyReference keyReference) { }
+        public void AddReference(System.Security.Cryptography.Xml.KeyReference keyReference)
+        {
+        }
 
         public override System.Xml.XmlElement GetXml()
         {
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public abstract partial class EncryptedReference
     {
-        protected EncryptedReference() { }
+        protected EncryptedReference()
+        {
+        }
 
-        protected EncryptedReference(string uri) { }
+        protected EncryptedReference(string uri)
+        {
+        }
 
         protected EncryptedReference(
             string uri,
             System.Security.Cryptography.Xml.TransformChain transformChain
-        ) { }
+        )
+        {
+        }
 
         protected internal bool CacheValid
         {
@@ -189,47 +258,65 @@ namespace System.Security.Cryptography.Xml
         protected string? ReferenceType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.Xml.TransformChain TransformChain
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Uri
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddTransform(System.Security.Cryptography.Xml.Transform transform) { }
+        public void AddTransform(System.Security.Cryptography.Xml.Transform transform)
+        {
+        }
 
         public virtual System.Xml.XmlElement GetXml()
         {
             throw null;
         }
 
-        public virtual void LoadXml(System.Xml.XmlElement value) { }
+        public virtual void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public abstract partial class EncryptedType
     {
-        protected EncryptedType() { }
+        protected EncryptedType()
+        {
+        }
 
         public virtual System.Security.Cryptography.Xml.CipherData CipherData
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string? Encoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Cryptography.Xml.EncryptionMethod? EncryptionMethod
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Cryptography.Xml.EncryptionPropertyCollection EncryptionProperties
         {
@@ -238,27 +325,37 @@ namespace System.Security.Cryptography.Xml
         public virtual string? Id
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Security.Cryptography.Xml.KeyInfo KeyInfo
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string? MimeType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string? Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddProperty(System.Security.Cryptography.Xml.EncryptionProperty ep) { }
+        public void AddProperty(System.Security.Cryptography.Xml.EncryptionProperty ep)
+        {
+        }
 
         public abstract System.Xml.XmlElement GetXml();
         public abstract void LoadXml(System.Xml.XmlElement value);
@@ -285,56 +382,80 @@ namespace System.Security.Cryptography.Xml
             "http://www.w3.org/2001/04/xmlenc#kw-tripledes";
         public const string XmlEncTripleDESUrl = "http://www.w3.org/2001/04/xmlenc#tripledes-cbc";
 
-        public EncryptedXml() { }
+        public EncryptedXml()
+        {
+        }
 
-        public EncryptedXml(System.Xml.XmlDocument document) { }
+        public EncryptedXml(System.Xml.XmlDocument document)
+        {
+        }
 
         public EncryptedXml(
             System.Xml.XmlDocument document,
             System.Security.Policy.Evidence? evidence
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Policy.Evidence? DocumentEvidence
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Text.Encoding Encoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.CipherMode Mode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.PaddingMode Padding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Recipient
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.XmlResolver? Resolver
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int XmlDSigSearchDepth
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddKeyNameMapping(string keyName, object keyObject) { }
+        public void AddKeyNameMapping(string keyName, object keyObject)
+        {
+        }
 
-        public void ClearKeyNameMappings() { }
+        public void ClearKeyNameMappings()
+        {
+        }
 
         public byte[] DecryptData(
             System.Security.Cryptography.Xml.EncryptedData encryptedData,
@@ -344,7 +465,9 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void DecryptDocument() { }
+        public void DecryptDocument()
+        {
+        }
 
         public virtual byte[]? DecryptEncryptedKey(
             System.Security.Cryptography.Xml.EncryptedKey encryptedKey
@@ -444,30 +567,42 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void ReplaceData(System.Xml.XmlElement inputElement, byte[] decryptedData) { }
+        public void ReplaceData(System.Xml.XmlElement inputElement, byte[] decryptedData)
+        {
+        }
 
         public static void ReplaceElement(
             System.Xml.XmlElement inputElement,
             System.Security.Cryptography.Xml.EncryptedData encryptedData,
             bool content
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class EncryptionMethod
     {
-        public EncryptionMethod() { }
+        public EncryptionMethod()
+        {
+        }
 
-        public EncryptionMethod(string? algorithm) { }
+        public EncryptionMethod(string? algorithm)
+        {
+        }
 
         public string? KeyAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Xml.XmlElement GetXml()
@@ -475,14 +610,20 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public sealed partial class EncryptionProperty
     {
-        public EncryptionProperty() { }
+        public EncryptionProperty()
+        {
+        }
 
-        public EncryptionProperty(System.Xml.XmlElement elementProperty) { }
+        public EncryptionProperty(System.Xml.XmlElement elementProperty)
+        {
+        }
 
         public string? Id
         {
@@ -493,7 +634,9 @@ namespace System.Security.Cryptography.Xml
         public System.Xml.XmlElement? PropertyElement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Target
         {
@@ -505,7 +648,9 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public sealed partial class EncryptionPropertyCollection
@@ -513,7 +658,9 @@ namespace System.Security.Cryptography.Xml
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        public EncryptionPropertyCollection() { }
+        public EncryptionPropertyCollection()
+        {
+        }
 
         public int Count
         {
@@ -536,7 +683,9 @@ namespace System.Security.Cryptography.Xml
         public System.Security.Cryptography.Xml.EncryptionProperty this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object SyncRoot
         {
@@ -545,7 +694,9 @@ namespace System.Security.Cryptography.Xml
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Security.Cryptography.Xml.EncryptionProperty value)
@@ -553,19 +704,22 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(System.Security.Cryptography.Xml.EncryptionProperty value)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(
-            System.Security.Cryptography.Xml.EncryptionProperty[] array,
-            int index
-        ) { }
+        public void CopyTo(System.Security.Cryptography.Xml.EncryptionProperty[] array, int index)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -577,16 +731,22 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void Insert(int index, System.Security.Cryptography.Xml.EncryptionProperty value) { }
+        public void Insert(int index, System.Security.Cryptography.Xml.EncryptionProperty value)
+        {
+        }
 
         public System.Security.Cryptography.Xml.EncryptionProperty Item(int index)
         {
             throw null;
         }
 
-        public void Remove(System.Security.Cryptography.Xml.EncryptionProperty value) { }
+        public void Remove(System.Security.Cryptography.Xml.EncryptionProperty value)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
         int System.Collections.IList.Add(object? value)
         {
@@ -603,9 +763,13 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
     }
 
     public partial interface IRelDecryptor
@@ -619,7 +783,9 @@ namespace System.Security.Cryptography.Xml
 
     public partial class KeyInfo : System.Collections.IEnumerable
     {
-        public KeyInfo() { }
+        public KeyInfo()
+        {
+        }
 
         public int Count
         {
@@ -628,10 +794,14 @@ namespace System.Security.Cryptography.Xml
         public string? Id
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddClause(System.Security.Cryptography.Xml.KeyInfoClause clause) { }
+        public void AddClause(System.Security.Cryptography.Xml.KeyInfoClause clause)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -648,12 +818,16 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public abstract partial class KeyInfoClause
     {
-        protected KeyInfoClause() { }
+        protected KeyInfoClause()
+        {
+        }
 
         public abstract System.Xml.XmlElement GetXml();
         public abstract void LoadXml(System.Xml.XmlElement element);
@@ -661,14 +835,20 @@ namespace System.Security.Cryptography.Xml
 
     public partial class KeyInfoEncryptedKey : System.Security.Cryptography.Xml.KeyInfoClause
     {
-        public KeyInfoEncryptedKey() { }
+        public KeyInfoEncryptedKey()
+        {
+        }
 
-        public KeyInfoEncryptedKey(System.Security.Cryptography.Xml.EncryptedKey encryptedKey) { }
+        public KeyInfoEncryptedKey(System.Security.Cryptography.Xml.EncryptedKey encryptedKey)
+        {
+        }
 
         public System.Security.Cryptography.Xml.EncryptedKey? EncryptedKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Xml.XmlElement GetXml()
@@ -676,19 +856,27 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class KeyInfoName : System.Security.Cryptography.Xml.KeyInfoClause
     {
-        public KeyInfoName() { }
+        public KeyInfoName()
+        {
+        }
 
-        public KeyInfoName(string? keyName) { }
+        public KeyInfoName(string? keyName)
+        {
+        }
 
         public string? Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Xml.XmlElement GetXml()
@@ -696,19 +884,27 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class KeyInfoNode : System.Security.Cryptography.Xml.KeyInfoClause
     {
-        public KeyInfoNode() { }
+        public KeyInfoNode()
+        {
+        }
 
-        public KeyInfoNode(System.Xml.XmlElement node) { }
+        public KeyInfoNode(System.Xml.XmlElement node)
+        {
+        }
 
         public System.Xml.XmlElement? Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Xml.XmlElement GetXml()
@@ -716,26 +912,38 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class KeyInfoRetrievalMethod : System.Security.Cryptography.Xml.KeyInfoClause
     {
-        public KeyInfoRetrievalMethod() { }
+        public KeyInfoRetrievalMethod()
+        {
+        }
 
-        public KeyInfoRetrievalMethod(string? strUri) { }
+        public KeyInfoRetrievalMethod(string? strUri)
+        {
+        }
 
-        public KeyInfoRetrievalMethod(string strUri, string typeName) { }
+        public KeyInfoRetrievalMethod(string strUri, string typeName)
+        {
+        }
 
         public string? Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Uri
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Xml.XmlElement GetXml()
@@ -743,22 +951,31 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class KeyInfoX509Data : System.Security.Cryptography.Xml.KeyInfoClause
     {
-        public KeyInfoX509Data() { }
+        public KeyInfoX509Data()
+        {
+        }
 
-        public KeyInfoX509Data(byte[] rgbCert) { }
+        public KeyInfoX509Data(byte[] rgbCert)
+        {
+        }
 
         public KeyInfoX509Data(System.Security.Cryptography.X509Certificates.X509Certificate cert)
-        { }
+        {
+        }
 
         public KeyInfoX509Data(
             System.Security.Cryptography.X509Certificates.X509Certificate cert,
             System.Security.Cryptography.X509Certificates.X509IncludeOption includeOption
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.ArrayList? Certificates
         {
@@ -767,7 +984,9 @@ namespace System.Security.Cryptography.Xml
         public byte[]? CRL
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ArrayList? IssuerSerials
         {
@@ -784,83 +1003,123 @@ namespace System.Security.Cryptography.Xml
 
         public void AddCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate certificate
-        ) { }
+        )
+        {
+        }
 
-        public void AddIssuerSerial(string issuerName, string serialNumber) { }
+        public void AddIssuerSerial(string issuerName, string serialNumber)
+        {
+        }
 
-        public void AddSubjectKeyId(byte[] subjectKeyId) { }
+        public void AddSubjectKeyId(byte[] subjectKeyId)
+        {
+        }
 
-        public void AddSubjectKeyId(string subjectKeyId) { }
+        public void AddSubjectKeyId(string subjectKeyId)
+        {
+        }
 
-        public void AddSubjectName(string subjectName) { }
+        public void AddSubjectName(string subjectName)
+        {
+        }
 
         public override System.Xml.XmlElement GetXml()
         {
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement element) { }
+        public override void LoadXml(System.Xml.XmlElement element)
+        {
+        }
     }
 
     public sealed partial class KeyReference : System.Security.Cryptography.Xml.EncryptedReference
     {
-        public KeyReference() { }
+        public KeyReference()
+        {
+        }
 
-        public KeyReference(string uri) { }
+        public KeyReference(string uri)
+        {
+        }
 
         public KeyReference(
             string uri,
             System.Security.Cryptography.Xml.TransformChain transformChain
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class Reference
     {
-        public Reference() { }
+        public Reference()
+        {
+        }
 
-        public Reference(System.IO.Stream stream) { }
+        public Reference(System.IO.Stream stream)
+        {
+        }
 
-        public Reference(string? uri) { }
+        public Reference(string? uri)
+        {
+        }
 
         public string DigestMethod
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[]? DigestValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Id
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.Xml.TransformChain TransformChain
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Uri
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddTransform(System.Security.Cryptography.Xml.Transform transform) { }
+        public void AddTransform(System.Security.Cryptography.Xml.Transform transform)
+        {
+        }
 
         public System.Xml.XmlElement GetXml()
         {
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public sealed partial class ReferenceList
@@ -868,7 +1127,9 @@ namespace System.Security.Cryptography.Xml
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        public ReferenceList() { }
+        public ReferenceList()
+        {
+        }
 
         public int Count
         {
@@ -883,7 +1144,9 @@ namespace System.Security.Cryptography.Xml
         public System.Security.Cryptography.Xml.EncryptedReference this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object SyncRoot
         {
@@ -900,7 +1163,9 @@ namespace System.Security.Cryptography.Xml
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(object? value)
@@ -908,14 +1173,18 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object? value)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -927,28 +1196,40 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void Insert(int index, object? value) { }
+        public void Insert(int index, object? value)
+        {
+        }
 
         public System.Security.Cryptography.Xml.EncryptedReference? Item(int index)
         {
             throw null;
         }
 
-        public void Remove(object? value) { }
+        public void Remove(object? value)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
     }
 
     public partial class RSAKeyValue : System.Security.Cryptography.Xml.KeyInfoClause
     {
-        public RSAKeyValue() { }
+        public RSAKeyValue()
+        {
+        }
 
-        public RSAKeyValue(System.Security.Cryptography.RSA key) { }
+        public RSAKeyValue(System.Security.Cryptography.RSA key)
+        {
+        }
 
         public System.Security.Cryptography.RSA Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Xml.XmlElement GetXml()
@@ -956,58 +1237,80 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadXml(System.Xml.XmlElement value) { }
+        public override void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class Signature
     {
-        public Signature() { }
+        public Signature()
+        {
+        }
 
         public string? Id
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.Xml.KeyInfo KeyInfo
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.IList ObjectList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[]? SignatureValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.Xml.SignedInfo? SignedInfo
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddObject(System.Security.Cryptography.Xml.DataObject dataObject) { }
+        public void AddObject(System.Security.Cryptography.Xml.DataObject dataObject)
+        {
+        }
 
         public System.Xml.XmlElement GetXml()
         {
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class SignedInfo : System.Collections.ICollection, System.Collections.IEnumerable
     {
-        public SignedInfo() { }
+        public SignedInfo()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string CanonicalizationMethod
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.Xml.Transform CanonicalizationMethodObject
         {
@@ -1020,7 +1323,9 @@ namespace System.Security.Cryptography.Xml
         public string? Id
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsReadOnly
         {
@@ -1037,21 +1342,29 @@ namespace System.Security.Cryptography.Xml
         public string? SignatureLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? SignatureMethod
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object SyncRoot
         {
             get { throw null; }
         }
 
-        public void AddReference(System.Security.Cryptography.Xml.Reference reference) { }
+        public void AddReference(System.Security.Cryptography.Xml.Reference reference)
+        {
+        }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -1063,7 +1376,9 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public partial class SignedXml
@@ -1107,26 +1422,38 @@ namespace System.Security.Cryptography.Xml
         public const string XmlLicenseTransformUrl =
             "urn:mpeg:mpeg21:2003:01-REL-R-NS:licenseTransform";
 
-        public SignedXml() { }
+        public SignedXml()
+        {
+        }
 
-        public SignedXml(System.Xml.XmlDocument document) { }
+        public SignedXml(System.Xml.XmlDocument document)
+        {
+        }
 
-        public SignedXml(System.Xml.XmlElement elem) { }
+        public SignedXml(System.Xml.XmlElement elem)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Security.Cryptography.Xml.EncryptedXml EncryptedXml
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.Xml.KeyInfo KeyInfo
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.XmlResolver Resolver
         {
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ObjectModel.Collection<string> SafeCanonicalizationMethods
         {
@@ -1142,7 +1469,9 @@ namespace System.Security.Cryptography.Xml
         > SignatureFormatValidator
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? SignatureLength
         {
@@ -1163,17 +1492,25 @@ namespace System.Security.Cryptography.Xml
         public System.Security.Cryptography.AsymmetricAlgorithm? SigningKey
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? SigningKeyName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddObject(System.Security.Cryptography.Xml.DataObject dataObject) { }
+        public void AddObject(System.Security.Cryptography.Xml.DataObject dataObject)
+        {
+        }
 
-        public void AddReference(System.Security.Cryptography.Xml.Reference reference) { }
+        public void AddReference(System.Security.Cryptography.Xml.Reference reference)
+        {
+        }
 
         public bool CheckSignature()
         {
@@ -1205,9 +1542,13 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void ComputeSignature() { }
+        public void ComputeSignature()
+        {
+        }
 
-        public void ComputeSignature(System.Security.Cryptography.KeyedHashAlgorithm macAlg) { }
+        public void ComputeSignature(System.Security.Cryptography.KeyedHashAlgorithm macAlg)
+        {
+        }
 
         public virtual System.Xml.XmlElement? GetIdElement(
             System.Xml.XmlDocument? document,
@@ -1227,22 +1568,30 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public void LoadXml(System.Xml.XmlElement value) { }
+        public void LoadXml(System.Xml.XmlElement value)
+        {
+        }
     }
 
     public abstract partial class Transform
     {
-        protected Transform() { }
+        protected Transform()
+        {
+        }
 
         public string? Algorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.XmlElement? Context
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract System.Type[] InputTypes { get; }
         public abstract System.Type[] OutputTypes { get; }
@@ -1252,7 +1601,9 @@ namespace System.Security.Cryptography.Xml
         }
         public System.Xml.XmlResolver? Resolver
         {
-            set { }
+            set
+            {
+            }
         }
 
         public virtual byte[] GetDigestedOutput(System.Security.Cryptography.HashAlgorithm hash)
@@ -1275,7 +1626,9 @@ namespace System.Security.Cryptography.Xml
 
     public partial class TransformChain
     {
-        public TransformChain() { }
+        public TransformChain()
+        {
+        }
 
         public int Count
         {
@@ -1286,7 +1639,9 @@ namespace System.Security.Cryptography.Xml
             get { throw null; }
         }
 
-        public void Add(System.Security.Cryptography.Xml.Transform transform) { }
+        public void Add(System.Security.Cryptography.Xml.Transform transform)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -1296,12 +1651,16 @@ namespace System.Security.Cryptography.Xml
 
     public partial class XmlDecryptionTransform : System.Security.Cryptography.Xml.Transform
     {
-        public XmlDecryptionTransform() { }
+        public XmlDecryptionTransform()
+        {
+        }
 
         public System.Security.Cryptography.Xml.EncryptedXml EncryptedXml
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Type[] InputTypes
         {
@@ -1312,7 +1671,9 @@ namespace System.Security.Cryptography.Xml
             get { throw null; }
         }
 
-        public void AddExceptUri(string uri) { }
+        public void AddExceptUri(string uri)
+        {
+        }
 
         protected override System.Xml.XmlNodeList? GetInnerXml()
         {
@@ -1334,14 +1695,20 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 
     public partial class XmlDsigBase64Transform : System.Security.Cryptography.Xml.Transform
     {
-        public XmlDsigBase64Transform() { }
+        public XmlDsigBase64Transform()
+        {
+        }
 
         public override System.Type[] InputTypes
         {
@@ -1367,16 +1734,24 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 
     public partial class XmlDsigC14NTransform : System.Security.Cryptography.Xml.Transform
     {
-        public XmlDsigC14NTransform() { }
+        public XmlDsigC14NTransform()
+        {
+        }
 
-        public XmlDsigC14NTransform(bool includeComments) { }
+        public XmlDsigC14NTransform(bool includeComments)
+        {
+        }
 
         public override System.Type[] InputTypes
         {
@@ -1407,23 +1782,33 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 
     public partial class XmlDsigC14NWithCommentsTransform
         : System.Security.Cryptography.Xml.XmlDsigC14NTransform
     {
-        public XmlDsigC14NWithCommentsTransform() { }
+        public XmlDsigC14NWithCommentsTransform()
+        {
+        }
     }
 
     public partial class XmlDsigEnvelopedSignatureTransform
         : System.Security.Cryptography.Xml.Transform
     {
-        public XmlDsigEnvelopedSignatureTransform() { }
+        public XmlDsigEnvelopedSignatureTransform()
+        {
+        }
 
-        public XmlDsigEnvelopedSignatureTransform(bool includeComments) { }
+        public XmlDsigEnvelopedSignatureTransform(bool includeComments)
+        {
+        }
 
         public override System.Type[] InputTypes
         {
@@ -1449,26 +1834,39 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 
     public partial class XmlDsigExcC14NTransform : System.Security.Cryptography.Xml.Transform
     {
-        public XmlDsigExcC14NTransform() { }
+        public XmlDsigExcC14NTransform()
+        {
+        }
 
-        public XmlDsigExcC14NTransform(bool includeComments) { }
+        public XmlDsigExcC14NTransform(bool includeComments)
+        {
+        }
 
         public XmlDsigExcC14NTransform(bool includeComments, string? inclusiveNamespacesPrefixList)
-        { }
+        {
+        }
 
-        public XmlDsigExcC14NTransform(string inclusiveNamespacesPrefixList) { }
+        public XmlDsigExcC14NTransform(string inclusiveNamespacesPrefixList)
+        {
+        }
 
         public string? InclusiveNamespacesPrefixList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Type[] InputTypes
         {
@@ -1499,22 +1897,32 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 
     public partial class XmlDsigExcC14NWithCommentsTransform
         : System.Security.Cryptography.Xml.XmlDsigExcC14NTransform
     {
-        public XmlDsigExcC14NWithCommentsTransform() { }
+        public XmlDsigExcC14NWithCommentsTransform()
+        {
+        }
 
-        public XmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList) { }
+        public XmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList)
+        {
+        }
     }
 
     public partial class XmlDsigXPathTransform : System.Security.Cryptography.Xml.Transform
     {
-        public XmlDsigXPathTransform() { }
+        public XmlDsigXPathTransform()
+        {
+        }
 
         public override System.Type[] InputTypes
         {
@@ -1540,16 +1948,24 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 
     public partial class XmlDsigXsltTransform : System.Security.Cryptography.Xml.Transform
     {
-        public XmlDsigXsltTransform() { }
+        public XmlDsigXsltTransform()
+        {
+        }
 
-        public XmlDsigXsltTransform(bool includeComments) { }
+        public XmlDsigXsltTransform(bool includeComments)
+        {
+        }
 
         public override System.Type[] InputTypes
         {
@@ -1575,19 +1991,27 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 
     public partial class XmlLicenseTransform : System.Security.Cryptography.Xml.Transform
     {
-        public XmlLicenseTransform() { }
+        public XmlLicenseTransform()
+        {
+        }
 
         public System.Security.Cryptography.Xml.IRelDecryptor? Decryptor
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Type[] InputTypes
         {
@@ -1613,8 +2037,12 @@ namespace System.Security.Cryptography.Xml
             throw null;
         }
 
-        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList) { }
+        public override void LoadInnerXml(System.Xml.XmlNodeList nodeList)
+        {
+        }
 
-        public override void LoadInput(object obj) { }
+        public override void LoadInput(object obj)
+        {
+        }
     }
 }

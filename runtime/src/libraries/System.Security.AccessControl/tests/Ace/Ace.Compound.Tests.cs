@@ -7,7 +7,9 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public abstract class KnownAce_Tests : GenericAce_Tests { }
+    public abstract class KnownAce_Tests : GenericAce_Tests
+    {
+    }
 
     public class CompoundAce_Tests : KnownAce_Tests
     {

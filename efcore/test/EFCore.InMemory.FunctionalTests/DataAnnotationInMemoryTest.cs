@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class DataAnnotationInMemoryTest
     : DataAnnotationTestBase<DataAnnotationInMemoryTest.DataAnnotationInMemoryFixture>
 {
-    public DataAnnotationInMemoryTest(DataAnnotationInMemoryFixture fixture) : base(fixture) { }
+    public DataAnnotationInMemoryTest(DataAnnotationInMemoryFixture fixture) : base(fixture)
+    {
+    }
 
     protected override TestHelpers TestHelpers => InMemoryTestHelpers.Instance;
 

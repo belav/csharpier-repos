@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public IfStatementHighlighter() { }
+        public IfStatementHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             IfStatementSyntax ifStatement,

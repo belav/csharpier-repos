@@ -20,7 +20,9 @@ internal class LspMiscellaneousFilesWorkspaceFactory : ILspServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LspMiscellaneousFilesWorkspaceFactory() { }
+    public LspMiscellaneousFilesWorkspaceFactory()
+    {
+    }
 
     public ILspService CreateILspService(
         LspServices lspServices,

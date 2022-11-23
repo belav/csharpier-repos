@@ -244,7 +244,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         protected AbstractLanguageDetector(
             EmbeddedLanguageInfo info,
             ImmutableArray<string> languageIdentifiers
-        ) : base(info, languageIdentifiers) { }
+        ) : base(info, languageIdentifiers)
+        {
+        }
 
         /// <summary>
         /// Tries to parse out an appropriate language tree given the characters in this string literal.

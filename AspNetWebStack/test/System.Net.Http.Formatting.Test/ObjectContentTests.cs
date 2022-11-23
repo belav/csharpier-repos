@@ -199,7 +199,8 @@ namespace System.Net.Http
             var context = new Mock<TransportContext>().Object;
             var formatterMock = new Mock<TestableMediaTypeFormatter> { CallBase = true };
             var oc = new TestableObjectContent(typeof(string), "abc", formatterMock.Object);
-            var task = new Task(() => { });
+            var task = new Task(() => {
+            });
             formatterMock
                 .Setup(f => f.WriteToStreamAsync(typeof(string), "abc", stream, oc, context))
                 .Returns(task)
@@ -226,7 +227,9 @@ namespace System.Net.Http
         public class TestableObjectContent : ObjectContent
         {
             public TestableObjectContent(Type type, object value, MediaTypeFormatter formatter)
-                : base(type, value, formatter) { }
+                : base(type, value, formatter)
+            {
+            }
 
             public bool CallTryComputeLength(out long length)
             {

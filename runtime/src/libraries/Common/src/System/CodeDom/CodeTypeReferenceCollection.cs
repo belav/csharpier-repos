@@ -15,7 +15,9 @@ namespace System.Runtime.Serialization
     internal sealed class CodeTypeReferenceCollection : CollectionBase
 #endif
     {
-        public CodeTypeReferenceCollection() { }
+        public CodeTypeReferenceCollection()
+        {
+        }
 
         public CodeTypeReferenceCollection(CodeTypeReferenceCollection value)
         {

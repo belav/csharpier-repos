@@ -43,6 +43,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 visibilityTracker,
                 listenerProvider,
                 ClassificationType.EmbeddedLanguage
-            ) { }
+            )
+        {
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
         Inherited = false,
         AllowMultiple = false
     )]
-    public class ExpectLocalsModifiedAttribute : BaseInAssemblyAttribute { }
+    public class ExpectLocalsModifiedAttribute : BaseInAssemblyAttribute
+    {
+    }
 }

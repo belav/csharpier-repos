@@ -24,6 +24,8 @@ namespace System.Diagnostics.Tests
 {
     public class Test
     {
-        public static void Main() { }
+        public static void Main()
+        {
+        }
     }
 }

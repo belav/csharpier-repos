@@ -31,8 +31,12 @@ public class Runtime_70466
         }
     }
 
-    public static void Use<T>(T arg) { }
+    public static void Use<T>(T arg)
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void JitUse<T>(T arg) { }
+    public static void JitUse<T>(T arg)
+    {
+    }
 }

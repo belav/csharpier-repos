@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SemanticTokensHandlerProvider() { }
+        public SemanticTokensHandlerProvider()
+        {
+        }
 
         public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
         {

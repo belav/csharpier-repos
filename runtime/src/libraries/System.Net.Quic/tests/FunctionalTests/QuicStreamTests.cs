@@ -18,7 +18,9 @@ namespace System.Net.Quic.Tests
     {
         private static byte[] s_data = "Hello world!"u8.ToArray();
 
-        public QuicStreamTests(ITestOutputHelper output) : base(output) { }
+        public QuicStreamTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public async Task BasicTest()

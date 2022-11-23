@@ -27,15 +27,20 @@ public class TestClass8505
     {
         unchecked
         {
-            try { }
+            try
+            {
+            }
             finally
             {
                 {
                     int __loopvar1 = s_loopInvariant,
                         __loopSecondaryVar1_0 = 15 - 4;
-                    do { } while (15 % 4 > LeafMethod8() / 15 + 4);
+                    do
+                    {
+                    } while (15 % 4 > LeafMethod8() / 15 + 4);
                 }
-                { }
+                {
+                }
             }
             return;
         }

@@ -26,7 +26,9 @@ namespace DebuggerTests
 #endif
     {
         public DebuggerTests(ITestOutputHelper testOutput, string driver = "debugger-driver.html")
-            : base(testOutput, driver) { }
+            : base(testOutput, driver)
+        {
+        }
     }
 
     public class DebuggerTestBase : IAsyncLifetime
@@ -2131,7 +2133,9 @@ namespace DebuggerTests
                     {
                         value_json = JObject.Parse(Value);
                     }
-                    catch (JsonReaderException) { }
+                    catch (JsonReaderException)
+                    {
+                    }
                 }
 
                 return value_json;

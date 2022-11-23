@@ -33,7 +33,9 @@ public struct CC
                 String local8 = "62";
             } while (new object[1] == new object[] { });
             if (local4)
-                for (; (new bool[1])[0]; m_su++) { }
+                for (; (new bool[1])[0]; m_su++)
+                {
+                }
         }
     }
 }

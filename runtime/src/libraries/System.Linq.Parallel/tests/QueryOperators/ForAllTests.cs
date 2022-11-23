@@ -41,7 +41,12 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void ForAll_OperationCanceledException_PreCanceled()
         {
-            AssertThrows.AlreadyCanceled(source => source.ForAll(x => { }));
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    source.ForAll(x =>
+                    {
+                    })
+            );
         }
 
         [Fact]
@@ -68,7 +73,9 @@ namespace System.Linq.Parallel.Tests
                                 }
                             )
                         )
-                        .ForAll(x => { })
+                        .ForAll(x =>
+                        {
+                        })
             );
         }
 
@@ -77,7 +84,10 @@ namespace System.Linq.Parallel.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => ((ParallelQuery<int>)null).ForAll(x => { })
+                () =>
+                    ((ParallelQuery<int>)null).ForAll(x =>
+                    {
+                    })
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "action",
@@ -94,7 +104,9 @@ namespace System.Linq.Parallel.Tests
                 new int[Count]
                     .AsParallel()
                     .Select<int, int>(i => throw new AggregateException())
-                    .ForAll(_ => { });
+                    .ForAll(_ =>
+                    {
+                    });
             }
             catch (AggregateException e)
             {

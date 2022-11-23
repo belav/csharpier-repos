@@ -24,31 +24,57 @@ namespace Internal.JitInterface
         public const ushort CORINFO_NO_SIZE_CHECK = 0xffff;
     }
 
-    public struct CORINFO_METHOD_STRUCT_ { }
+    public struct CORINFO_METHOD_STRUCT_
+    {
+    }
 
-    public struct CORINFO_FIELD_STRUCT_ { }
+    public struct CORINFO_FIELD_STRUCT_
+    {
+    }
 
-    public struct CORINFO_CLASS_STRUCT_ { }
+    public struct CORINFO_CLASS_STRUCT_
+    {
+    }
 
-    public struct CORINFO_ARG_LIST_STRUCT_ { }
+    public struct CORINFO_ARG_LIST_STRUCT_
+    {
+    }
 
-    public struct CORINFO_MODULE_STRUCT_ { }
+    public struct CORINFO_MODULE_STRUCT_
+    {
+    }
 
-    public struct CORINFO_ASSEMBLY_STRUCT_ { }
+    public struct CORINFO_ASSEMBLY_STRUCT_
+    {
+    }
 
-    public struct CORINFO_CONTEXT_STRUCT { }
+    public struct CORINFO_CONTEXT_STRUCT
+    {
+    }
 
-    public struct CORINFO_GENERIC_STRUCT_ { }
+    public struct CORINFO_GENERIC_STRUCT_
+    {
+    }
 
-    public struct CORINFO_JUST_MY_CODE_HANDLE_ { }
+    public struct CORINFO_JUST_MY_CODE_HANDLE_
+    {
+    }
 
-    public struct CORINFO_VarArgInfo { }
+    public struct CORINFO_VarArgInfo
+    {
+    }
 
-    public struct PatchpointInfo { }
+    public struct PatchpointInfo
+    {
+    }
 
-    public struct MethodSignatureInfo { }
+    public struct MethodSignatureInfo
+    {
+    }
 
-    public enum _EXCEPTION_POINTERS { }
+    public enum _EXCEPTION_POINTERS
+    {
+    }
 
     public unsafe struct CORINFO_SIG_INST
     {
@@ -58,7 +84,9 @@ namespace Internal.JitInterface
         public CORINFO_CLASS_STRUCT_** methInst; // (representative, not exact) instantiation for method type variables in signature
     }
 
-    public enum mdToken : uint { }
+    public enum mdToken : uint
+    {
+    }
 
     public enum HRESULT
     {

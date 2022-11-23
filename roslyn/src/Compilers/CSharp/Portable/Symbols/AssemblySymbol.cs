@@ -193,7 +193,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler can create AssemblySymbols.
-        internal AssemblySymbol() { }
+        internal AssemblySymbol()
+        {
+        }
 
         /// <summary>
         /// Does this symbol represent a missing assembly.

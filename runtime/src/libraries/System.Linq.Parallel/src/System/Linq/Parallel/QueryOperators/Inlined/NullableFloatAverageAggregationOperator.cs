@@ -24,7 +24,8 @@ namespace System.Linq.Parallel
         //
 
         internal NullableFloatAverageAggregationOperator(IEnumerable<float?> child) : base(child)
-        { }
+        {
+        }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the

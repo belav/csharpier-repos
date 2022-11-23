@@ -167,9 +167,13 @@ namespace System.Memory.Tests
                     );
                 }
 
-                public override void Unpin() { }
+                public override void Unpin()
+                {
+                }
 
-                protected override void Dispose(bool disposing) { }
+                protected override void Dispose(bool disposing)
+                {
+                }
             }
         }
 

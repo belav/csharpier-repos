@@ -299,7 +299,9 @@ namespace System.Security.Cryptography.Tests
             );
         }
 
-        private class AESFancy { }
+        private class AESFancy
+        {
+        }
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]

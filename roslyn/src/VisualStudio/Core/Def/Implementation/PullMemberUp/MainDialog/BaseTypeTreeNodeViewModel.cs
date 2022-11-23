@@ -38,7 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
             );
 
         private BaseTypeTreeNodeViewModel(INamedTypeSymbol node, IGlyphService glyphService)
-            : base(node, glyphService) { }
+            : base(node, glyphService)
+        {
+        }
 
         /// <summary>
         /// Use breadth first search to create the inheritance tree. Only non-generated types in the solution will be included in the tree.

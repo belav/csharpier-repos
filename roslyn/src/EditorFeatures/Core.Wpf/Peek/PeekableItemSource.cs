@@ -213,6 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

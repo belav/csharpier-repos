@@ -187,7 +187,9 @@ namespace System.Data.ProviderBase
         internal readonly Counter NumberOfStasisConnections;
         internal readonly Counter NumberOfReclaimedConnections;
 
-        protected DbConnectionPoolCounters() : this(null, null) { }
+        protected DbConnectionPoolCounters() : this(null, null)
+        {
+        }
 
         protected DbConnectionPoolCounters(string? categoryName, string? categoryHelp)
         {
@@ -428,6 +430,8 @@ namespace System.Data.ProviderBase
         public static readonly DbConnectionPoolCountersNoCounters SingletonInstance =
             new DbConnectionPoolCountersNoCounters();
 
-        private DbConnectionPoolCountersNoCounters() : base() { }
+        private DbConnectionPoolCountersNoCounters() : base()
+        {
+        }
     }
 }

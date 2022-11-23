@@ -141,7 +141,9 @@ namespace Newtonsoft.Json.Tests.Schema
                     JsonValidatingReader validatingReader = new JsonValidatingReader(reader);
                     validatingReader.Schema = schema;
 
-                    while (validatingReader.Read()) { }
+                    while (validatingReader.Read())
+                    {
+                    }
                 }
             }
         }
@@ -153,7 +155,9 @@ namespace Newtonsoft.Json.Tests.Schema
         private readonly Action<TimeSpan> _callback;
 
         public PerformanceTester(string description)
-            : this(ts => Console.WriteLine(description + ": " + ts.TotalSeconds)) { }
+            : this(ts => Console.WriteLine(description + ": " + ts.TotalSeconds))
+        {
+        }
 
         public PerformanceTester(Action<TimeSpan> callback)
         {

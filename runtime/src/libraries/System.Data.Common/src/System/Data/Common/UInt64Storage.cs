@@ -14,7 +14,9 @@ namespace System.Data.Common
         private ulong[] _values = default!; // Late-initialized
 
         public UInt64Storage(DataColumn column)
-            : base(column, typeof(ulong), DefaultValue, StorageType.UInt64) { }
+            : base(column, typeof(ulong), DefaultValue, StorageType.UInt64)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

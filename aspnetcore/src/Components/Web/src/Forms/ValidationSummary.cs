@@ -96,7 +96,9 @@ public class ValidationSummary : ComponentBase, IDisposable
     }
 
     /// <inheritdoc/>
-    protected virtual void Dispose(bool disposing) { }
+    protected virtual void Dispose(bool disposing)
+    {
+    }
 
     void IDisposable.Dispose()
     {

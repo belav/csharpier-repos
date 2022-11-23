@@ -8,14 +8,19 @@ class AA
 {
     static void f(ref Array param)
     {
-        try { }
+        try
+        {
+        }
         finally
         {
-            for (int i = 0; i < 3; i++) { }
+            for (int i = 0; i < 3; i++)
+            {
+            }
 #pragma warning disable 1718
             while ((param != param))
 #pragma warning restore 1718
-            { }
+            {
+            }
         }
     }
 

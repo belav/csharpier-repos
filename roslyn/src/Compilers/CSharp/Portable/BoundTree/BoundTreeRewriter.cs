@@ -65,7 +65,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private int _recursionDepth;
 
-        protected BoundTreeRewriterWithStackGuard() { }
+        protected BoundTreeRewriterWithStackGuard()
+        {
+        }
 
         protected BoundTreeRewriterWithStackGuard(int recursionDepth)
         {
@@ -102,11 +104,15 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal abstract class BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         : BoundTreeRewriterWithStackGuard
     {
-        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator() { }
+        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator()
+        {
+        }
 
         protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(
             int recursionDepth
-        ) : base(recursionDepth) { }
+        ) : base(recursionDepth)
+        {
+        }
 
         public sealed override BoundNode? VisitBinaryOperator(BoundBinaryOperator node)
         {

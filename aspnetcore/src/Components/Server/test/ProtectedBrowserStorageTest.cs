@@ -470,6 +470,8 @@ public class ProtectedBrowserStorageTest
             string storeName,
             IJSRuntime jsRuntime,
             IDataProtectionProvider dataProtectionProvider
-        ) : base(storeName, jsRuntime, dataProtectionProvider) { }
+        ) : base(storeName, jsRuntime, dataProtectionProvider)
+        {
+        }
     }
 }

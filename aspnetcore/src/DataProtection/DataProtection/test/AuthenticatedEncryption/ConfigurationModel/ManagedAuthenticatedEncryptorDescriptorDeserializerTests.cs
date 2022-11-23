@@ -188,7 +188,9 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
 
     public class CustomAlgorithmNoConstructor : SymmetricAlgorithm
     {
-        private CustomAlgorithmNoConstructor() { }
+        private CustomAlgorithmNoConstructor()
+        {
+        }
 
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) =>
             throw new NotImplementedException();

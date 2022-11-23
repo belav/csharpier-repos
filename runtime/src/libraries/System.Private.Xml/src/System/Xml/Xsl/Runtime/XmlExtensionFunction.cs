@@ -84,7 +84,9 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlExtensionFunction() { }
+        public XmlExtensionFunction()
+        {
+        }
 
         /// <summary>
         /// Constructor (directly binds to passed MethodInfo).

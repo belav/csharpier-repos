@@ -24,7 +24,9 @@ public static class KestrelServerOptionsSystemdExtensions
     /// </returns>
     public static KestrelServerOptions UseSystemd(this KestrelServerOptions options)
     {
-        return options.UseSystemd(_ => { });
+        return options.UseSystemd(_ =>
+        {
+        });
     }
 
     /// <summary>

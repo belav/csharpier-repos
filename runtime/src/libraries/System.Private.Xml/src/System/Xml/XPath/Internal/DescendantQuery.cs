@@ -16,7 +16,9 @@ namespace MS.Internal.Xml.XPath
             XPathNodeType Type,
             bool matchSelf,
             bool abbrAxis
-        ) : base(qyParent, Name, Prefix, Type, matchSelf, abbrAxis) { }
+        ) : base(qyParent, Name, Prefix, Type, matchSelf, abbrAxis)
+        {
+        }
 
         public DescendantQuery(DescendantQuery other) : base(other)
         {

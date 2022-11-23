@@ -107,7 +107,9 @@ class Driver
         }
     }
 
-    class StaticConstructor2Exception : Exception { }
+    class StaticConstructor2Exception : Exception
+    {
+    }
 
     class StaticConstructor2
     {
@@ -328,7 +330,9 @@ class Driver
         {
             try
             {
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     StaticConstructor4.Init();
@@ -447,7 +451,9 @@ class Driver
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Setup6()
         {
-            try { }
+            try
+            {
+            }
             finally
             {
                 Driver.sema1.Release();

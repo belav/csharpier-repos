@@ -13,7 +13,9 @@ namespace System.Security.Cryptography
         [System.Diagnostics.CodeAnalysis.MaybeNullAttribute]
         protected System.Security.Cryptography.KeySizes[] LegalKeySizesValue;
 
-        protected AsymmetricAlgorithm() { }
+        protected AsymmetricAlgorithm()
+        {
+        }
 
         public virtual string? KeyExchangeAlgorithm
         {
@@ -22,7 +24,9 @@ namespace System.Security.Cryptography
         public virtual int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Cryptography.KeySizes[] LegalKeySizes
         {
@@ -33,7 +37,9 @@ namespace System.Security.Cryptography
             get { throw null; }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "The default implementation of this cryptography algorithm is not supported",
@@ -53,9 +59,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public virtual byte[] ExportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<byte> passwordBytes,
@@ -83,7 +93,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public virtual void FromXmlString(string xmlString) { }
+        public virtual void FromXmlString(string xmlString)
+        {
+        }
 
         public virtual void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<byte> passwordBytes,
@@ -106,14 +118,20 @@ namespace System.Security.Cryptography
         public virtual void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<byte> passwordBytes
-        ) { }
+        )
+        {
+        }
 
         public virtual void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<char> password
-        ) { }
+        )
+        {
+        }
 
-        public virtual void ImportFromPem(System.ReadOnlySpan<char> input) { }
+        public virtual void ImportFromPem(System.ReadOnlySpan<char> input)
+        {
+        }
 
         public virtual void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
@@ -196,25 +214,36 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public static void ZeroMemory(System.Span<byte> buffer) { }
+        public static void ZeroMemory(System.Span<byte> buffer)
+        {
+        }
     }
 
     public partial class CryptographicUnexpectedOperationException
         : System.Security.Cryptography.CryptographicException
     {
-        public CryptographicUnexpectedOperationException() { }
+        public CryptographicUnexpectedOperationException()
+        {
+        }
 
         protected CryptographicUnexpectedOperationException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public CryptographicUnexpectedOperationException(string? message) { }
+        public CryptographicUnexpectedOperationException(string? message)
+        {
+        }
 
         public CryptographicUnexpectedOperationException(string? message, System.Exception? inner)
-        { }
+        {
+        }
 
-        public CryptographicUnexpectedOperationException(string format, string? insert) { }
+        public CryptographicUnexpectedOperationException(string format, string? insert)
+        {
+        }
     }
 
     public partial class CryptoStream : System.IO.Stream, System.IDisposable
@@ -223,14 +252,18 @@ namespace System.Security.Cryptography
             System.IO.Stream stream,
             System.Security.Cryptography.ICryptoTransform transform,
             System.Security.Cryptography.CryptoStreamMode mode
-        ) { }
+        )
+        {
+        }
 
         public CryptoStream(
             System.IO.Stream stream,
             System.Security.Cryptography.ICryptoTransform transform,
             System.Security.Cryptography.CryptoStreamMode mode,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
         public override bool CanRead
         {
@@ -255,7 +288,9 @@ namespace System.Security.Cryptography
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.IAsyncResult BeginRead(
@@ -280,7 +315,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public override void CopyTo(System.IO.Stream destination, int bufferSize)
         {
@@ -296,7 +333,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -308,9 +347,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -319,7 +362,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void FlushFinalBlock() { }
+        public void FlushFinalBlock()
+        {
+        }
 
         public System.Threading.Tasks.ValueTask FlushFinalBlockAsync(
             System.Threading.CancellationToken cancellationToken =
@@ -362,9 +407,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -384,7 +433,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 
     public enum CryptoStreamMode
@@ -401,7 +452,9 @@ namespace System.Security.Cryptography
         protected internal byte[]? HashValue;
         protected int State;
 
-        protected HashAlgorithm() { }
+        protected HashAlgorithm()
+        {
+        }
 
         public virtual bool CanReuseTransform
         {
@@ -428,7 +481,9 @@ namespace System.Security.Cryptography
             get { throw null; }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public byte[] ComputeHash(byte[] buffer)
         {
@@ -472,13 +527,19 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         protected abstract void HashCore(byte[] array, int ibStart, int cbSize);
 
-        protected virtual void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected virtual void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected abstract byte[] HashFinal();
         public abstract void Initialize();
@@ -604,22 +665,30 @@ namespace System.Security.Cryptography
 
     public abstract partial class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
     {
-        protected HMAC() { }
+        protected HMAC()
+        {
+        }
 
         protected int BlockSizeValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string HashName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -640,18 +709,26 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] rgb, int ib, int cb) { }
+        protected override void HashCore(byte[] rgb, int ib, int cb)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected override byte[] HashFinal()
         {
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         protected override bool TryHashFinal(System.Span<byte> destination, out int bytesWritten)
         {
@@ -679,12 +756,16 @@ namespace System.Security.Cryptography
     {
         protected byte[] KeyValue;
 
-        protected KeyedHashAlgorithm() { }
+        protected KeyedHashAlgorithm()
+        {
+        }
 
         public virtual byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -705,12 +786,16 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
     }
 
     public sealed partial class KeySizes
     {
-        public KeySizes(int minSize, int maxSize, int skipSize) { }
+        public KeySizes(int minSize, int maxSize, int skipSize)
+        {
+        }
 
         public int MaxSize
         {
@@ -750,7 +835,9 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeEncryptionAlgorithm encryptionAlgorithm,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             int iterationCount
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.PbeEncryptionAlgorithm EncryptionAlgorithm
         {
@@ -782,32 +869,44 @@ namespace System.Security.Cryptography
         protected System.Security.Cryptography.CipherMode ModeValue;
         protected System.Security.Cryptography.PaddingMode PaddingValue;
 
-        protected SymmetricAlgorithm() { }
+        protected SymmetricAlgorithm()
+        {
+        }
 
         public virtual int BlockSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual int FeedbackSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual byte[] IV
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Cryptography.KeySizes[] LegalBlockSizes
         {
@@ -820,15 +919,21 @@ namespace System.Security.Cryptography
         public virtual System.Security.Cryptography.CipherMode Mode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Cryptography.PaddingMode Padding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "The default implementation of this cryptography algorithm is not supported",
@@ -868,9 +973,13 @@ namespace System.Security.Cryptography
             byte[]? rgbIV
         );
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public abstract void GenerateIV();
         public abstract void GenerateKey();

@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-interface IFoo { }
+interface IFoo
+{
+}
 
-class Foo : IFoo { }
+class Foo : IFoo
+{
+}
 
 class Driver
 {

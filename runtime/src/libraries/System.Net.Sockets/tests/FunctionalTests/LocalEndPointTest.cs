@@ -21,7 +21,9 @@ namespace System.Net.Sockets.Tests
 
         private IPAddress Loopback => IPv6 ? IPAddress.IPv6Loopback : IPAddress.Loopback;
 
-        public LocalEndPointTest(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public async Task UdpSocket_WhenBoundToWildcardAddress_LocalEPDoesNotChangeOnSendTo()
@@ -220,7 +222,9 @@ namespace System.Net.Sockets.Tests
     {
         protected override bool IPv6 => false;
 
-        public LocalEndPointTestIPv4(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv4(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public abstract class LocalEndPointTestIPv6<T> : LocalEndPointTest<T>
@@ -228,13 +232,17 @@ namespace System.Net.Sockets.Tests
     {
         protected override bool IPv6 => true;
 
-        public LocalEndPointTestIPv6(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv6(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv4", "true")]
     public sealed class LocalEndPointTestIPv4Sync : LocalEndPointTestIPv4<SocketHelperArraySync>
     {
-        public LocalEndPointTestIPv4Sync(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv4Sync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv4", "true")]
@@ -242,31 +250,40 @@ namespace System.Net.Sockets.Tests
         : LocalEndPointTestIPv4<SocketHelperSyncForceNonBlocking>
     {
         public LocalEndPointTestIPv4SyncForceNonBlocking(ITestOutputHelper output) : base(output)
-        { }
+        {
+        }
     }
 
     [Trait("IPv4", "true")]
     public sealed class LocalEndPointTestIPv4Apm : LocalEndPointTestIPv4<SocketHelperApm>
     {
-        public LocalEndPointTestIPv4Apm(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv4Apm(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv4", "true")]
     public sealed class LocalEndPointTestIPv4Task : LocalEndPointTestIPv4<SocketHelperTask>
     {
-        public LocalEndPointTestIPv4Task(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv4Task(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv4", "true")]
     public sealed class LocalEndPointTestIPv4Eap : LocalEndPointTestIPv4<SocketHelperEap>
     {
-        public LocalEndPointTestIPv4Eap(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv4Eap(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv6", "true")]
     public sealed class LocalEndPointTestIPv6Sync : LocalEndPointTestIPv6<SocketHelperArraySync>
     {
-        public LocalEndPointTestIPv6Sync(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv6Sync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv6", "true")]
@@ -274,24 +291,31 @@ namespace System.Net.Sockets.Tests
         : LocalEndPointTestIPv6<SocketHelperSyncForceNonBlocking>
     {
         public LocalEndPointTestIPv6SyncForceNonBlocking(ITestOutputHelper output) : base(output)
-        { }
+        {
+        }
     }
 
     [Trait("IPv6", "true")]
     public sealed class LocalEndPointTestIPv6Apm : LocalEndPointTestIPv6<SocketHelperApm>
     {
-        public LocalEndPointTestIPv6Apm(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv6Apm(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv6", "true")]
     public sealed class LocalEndPointTestIPv6Task : LocalEndPointTestIPv6<SocketHelperTask>
     {
-        public LocalEndPointTestIPv6Task(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv6Task(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     [Trait("IPv6", "true")]
     public sealed class LocalEndPointTestIPv6Eap : LocalEndPointTestIPv6<SocketHelperEap>
     {
-        public LocalEndPointTestIPv6Eap(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv6Eap(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 }

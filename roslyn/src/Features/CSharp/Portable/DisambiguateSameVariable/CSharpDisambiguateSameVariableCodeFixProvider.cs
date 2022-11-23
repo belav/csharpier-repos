@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpDisambiguateSameVariableCodeFixProvider() { }
+        public CSharpDisambiguateSameVariableCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS1717, CS1718);
@@ -223,7 +225,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
                     title,
                     createChangedDocument,
                     nameof(CSharpDisambiguateSameVariableCodeFixProvider)
-                ) { }
+                )
+            {
+            }
         }
     }
 }

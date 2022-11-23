@@ -9434,7 +9434,9 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected class BaseEntity
     {
-        public BaseEntity() { }
+        public BaseEntity()
+        {
+        }
 
         public BaseEntity(Key key, TextEntity text)
         {

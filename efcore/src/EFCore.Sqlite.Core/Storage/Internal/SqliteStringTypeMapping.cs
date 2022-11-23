@@ -26,14 +26,17 @@ public class SqliteStringTypeMapping : StringTypeMapping
         DbType? dbType = null,
         bool unicode = false,
         int? size = null
-    ) : base(storeType, dbType, unicode, size) { }
+    ) : base(storeType, dbType, unicode, size)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SqliteStringTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected SqliteStringTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
-    { }
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

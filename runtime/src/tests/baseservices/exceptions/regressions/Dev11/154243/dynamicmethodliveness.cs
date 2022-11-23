@@ -22,7 +22,9 @@ public class My
             {
                 throw theException;
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -57,7 +59,9 @@ public class My
         throw theException;
     }
 
-    public static void Noop() { }
+    public static void Noop()
+    {
+    }
 
     static void DoStuff()
     {
@@ -97,7 +101,9 @@ public class My
                     GC.Collect();
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
         Console.WriteLine("Test case Pass");
         return 100;

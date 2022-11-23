@@ -63,7 +63,9 @@ namespace System.DirectoryServices
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectoryEntry'/> class.
         /// </devdoc>
         public DirectoryEntry(string? path, string? username, string? password)
-            : this(path, username, password, AuthenticationTypes.Secure) { }
+            : this(path, username, password, AuthenticationTypes.Secure)
+        {
+        }
 
         /// <devdoc>
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectoryEntry'/> class.
@@ -112,7 +114,9 @@ namespace System.DirectoryServices
         /// to the native Active Directory object which is passed in.
         /// </devdoc>
         public DirectoryEntry(object adsObject)
-            : this(adsObject, true, null, null, AuthenticationTypes.Secure, true) { }
+            : this(adsObject, true, null, null, AuthenticationTypes.Secure, true)
+        {
+        }
 
         internal DirectoryEntry(
             object adsObject,
@@ -120,7 +124,9 @@ namespace System.DirectoryServices
             string? username,
             string? password,
             AuthenticationTypes authenticationType
-        ) : this(adsObject, useCache, username, password, authenticationType, false) { }
+        ) : this(adsObject, useCache, username, password, authenticationType, false)
+        {
+        }
 
         internal DirectoryEntry(
             object adsObject,

@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class CheckedKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public CheckedKeywordRecommender() : base(SyntaxKind.CheckedKeyword) { }
+        public CheckedKeywordRecommender() : base(SyntaxKind.CheckedKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

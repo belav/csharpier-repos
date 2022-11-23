@@ -7,11 +7,17 @@ namespace Internal.CommandLine
 {
     public sealed class ArgumentSyntaxException : Exception
     {
-        public ArgumentSyntaxException() { }
+        public ArgumentSyntaxException()
+        {
+        }
 
-        public ArgumentSyntaxException(string message) : base(message) { }
+        public ArgumentSyntaxException(string message) : base(message)
+        {
+        }
 
         public ArgumentSyntaxException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
     }
 }

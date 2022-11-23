@@ -10,7 +10,9 @@ interface IB
     int Add(int i);
 }
 
-interface IC : IA, IB { }
+interface IC : IA, IB
+{
+}
 
 interface IE : ICloneable, IDisposable
 {
@@ -32,7 +34,9 @@ class D : IC, IB
 
 class E : IE, IC
 {
-    public E() { }
+    public E()
+    {
+    }
 
     public void doom()
     {
@@ -44,7 +48,9 @@ class E : IE, IC
         return null;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     int IA.Add(int i)
     {

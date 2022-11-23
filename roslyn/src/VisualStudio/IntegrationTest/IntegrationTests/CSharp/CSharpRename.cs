@@ -30,7 +30,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         private InlineRenameDialog_OutOfProc InlineRenameDialog => VisualStudio.InlineRenameDialog;
 
         public CSharpRename(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpRename)) { }
+            : base(instanceFactory, nameof(CSharpRename))
+        {
+        }
 
         public override async Task InitializeAsync()
         {

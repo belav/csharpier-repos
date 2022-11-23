@@ -14,7 +14,13 @@ public class UseWhenExtensionsTests
         var builder = CreateBuilder();
 
         // Act
-        Action nullPredicate = () => builder.UseWhen(null!, app => { });
+        Action nullPredicate = () =>
+            builder.UseWhen(
+                null!,
+                app =>
+                {
+                }
+            );
         Action nullConfiguration = () => builder.UseWhen(TruePredicate, null!);
 
         // Assert

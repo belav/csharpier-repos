@@ -12,6 +12,8 @@ namespace System.Web.Http
     )]
     public sealed class HttpBindRequiredAttribute : HttpBindingBehaviorAttribute
     {
-        public HttpBindRequiredAttribute() : base(HttpBindingBehavior.Required) { }
+        public HttpBindRequiredAttribute() : base(HttpBindingBehavior.Required)
+        {
+        }
     }
 }

@@ -44,11 +44,17 @@ public class DbFunctionMetadataTests
             nameof(InstanceProtectedInternalBase)
         };
 
-        public static void Foo() { }
+        public static void Foo()
+        {
+        }
 
-        public static void Skip2() { }
+        public static void Skip2()
+        {
+        }
 
-        private static void Skip() { }
+        private static void Skip()
+        {
+        }
 
         [DbFunction]
         public static int StaticPublicBase() => throw new Exception();
@@ -103,11 +109,17 @@ public class DbFunctionMetadataTests
             nameof(InstanceProtectedInternalDerived)
         };
 
-        public static void Bar() { }
+        public static void Bar()
+        {
+        }
 
-        public static void Skip3() { }
+        public static void Skip3()
+        {
+        }
 
-        private static void Skip4() { }
+        private static void Skip4()
+        {
+        }
 
         public static int DuplicateNameTest() => throw new Exception();
 
@@ -197,7 +209,9 @@ public class DbFunctionMetadataTests
         [DbFunction("MethodFoo", "bar")]
         public static int MethodB(string c, int d) => throw new NotImplementedException();
 
-        public static void MethodC() { }
+        public static void MethodC()
+        {
+        }
 
         public static TestMethods MethodD() => throw new NotImplementedException();
 

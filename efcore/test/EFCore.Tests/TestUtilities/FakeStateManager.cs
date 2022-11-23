@@ -12,12 +12,16 @@ public class FakeStateManager : IStateManager
     public bool SaveChangesCalled { get; set; }
     public bool SaveChangesAsyncCalled { get; set; }
 
-    public void ResetState() { }
+    public void ResetState()
+    {
+    }
 
     public Task ResetStateAsync(CancellationToken cancellationToken = default) =>
         Task.CompletedTask;
 
-    public void Unsubscribe() { }
+    public void Unsubscribe()
+    {
+    }
 
     public (
         EventHandler<EntityTrackingEventArgs> Tracking,
@@ -31,7 +35,9 @@ public class FakeStateManager : IStateManager
         EventHandler<EntityTrackedEventArgs> tracked,
         EventHandler<EntityStateChangingEventArgs> stateChanging,
         EventHandler<EntityStateChangedEventArgs> stateChanged
-    ) { }
+    )
+    {
+    }
 
     public int SaveChanges(bool acceptAllChangesOnSuccess)
     {

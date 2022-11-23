@@ -394,7 +394,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
 
             return testAssemblies;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         return Array.Empty<Assembly>();
     }
@@ -491,7 +493,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     /// Gives a fixture an opportunity to configure the application before it gets built.
     /// </summary>
     /// <param name="builder">The <see cref="IWebHostBuilder"/> for the application.</param>
-    protected virtual void ConfigureWebHost(IWebHostBuilder builder) { }
+    protected virtual void ConfigureWebHost(IWebHostBuilder builder)
+    {
+    }
 
     /// <summary>
     /// Creates an instance of <see cref="HttpClient"/> that automatically follows

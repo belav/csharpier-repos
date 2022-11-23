@@ -52,7 +52,9 @@ internal sealed class DefaultPageApplicationModelProvider : IPageApplicationMode
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
+    {
+    }
 
     /// <summary>
     /// Creates a <see cref="PageApplicationModel"/> for the given <paramref name="pageTypeInfo"/>.

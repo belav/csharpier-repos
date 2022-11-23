@@ -258,7 +258,9 @@ namespace System.Buffers.Tests
                     );
                 }
             }
-            catch (OutOfMemoryException) { }
+            catch (OutOfMemoryException)
+            {
+            }
         }
 
         [Fact]

@@ -7,7 +7,9 @@ namespace Test
 
     internal class App
     {
-        private static void Func(TypedReference tr) { }
+        private static void Func(TypedReference tr)
+        {
+        }
 
         private static int Main()
         {

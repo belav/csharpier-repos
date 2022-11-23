@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     isConstant,
                     isLocal,
                     isQueryLocal
-                ) { }
+                )
+            {
+            }
         }
     }
 }

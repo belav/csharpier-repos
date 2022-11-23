@@ -8,19 +8,33 @@
 #pragma warning disable 0649
 using System;
 
-interface BaseInter { }
+interface BaseInter
+{
+}
 
-interface GenInter<T> { }
+interface GenInter<T>
+{
+}
 
-struct Struct { }
+struct Struct
+{
+}
 
-struct ImplStruct : BaseInter { }
+struct ImplStruct : BaseInter
+{
+}
 
-struct OpenGenImplStruct<T> : GenInter<T> { }
+struct OpenGenImplStruct<T> : GenInter<T>
+{
+}
 
-struct CloseGenImplStruct : GenInter<int> { }
+struct CloseGenImplStruct : GenInter<int>
+{
+}
 
-class Foo { }
+class Foo
+{
+}
 
 class NullableTest1
 {

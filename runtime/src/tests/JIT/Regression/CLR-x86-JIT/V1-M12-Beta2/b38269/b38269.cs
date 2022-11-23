@@ -16,7 +16,9 @@ namespace Test
                 m_buddy = new AA(reclevel + 1);
         }
 
-        ~AA() { }
+        ~AA()
+        {
+        }
     }
 
     class App

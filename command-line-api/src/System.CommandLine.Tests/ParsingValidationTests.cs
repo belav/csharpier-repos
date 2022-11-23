@@ -1045,7 +1045,8 @@ namespace System.CommandLine.Tests
         {
             var outer = new Command("outer");
             var inner = new Command("inner");
-            inner.SetHandler(() => { });
+            inner.SetHandler(() => {
+            });
             var innerer = new Command("inner-er");
             outer.AddCommand(inner);
             inner.AddCommand(innerer);
@@ -1103,7 +1104,9 @@ namespace System.CommandLine.Tests
         {
             var command = new RootCommand();
             command.AddValidator(result => result.ErrorMessage = "Wrong");
-            command.AddValidator(_ => { });
+            command.AddValidator(_ =>
+            {
+            });
 
             var parseResult = command.Parse("");
 
@@ -1115,7 +1118,9 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<string>("-x");
             option.AddValidator(result => result.ErrorMessage = "Wrong");
-            option.AddValidator(_ => { });
+            option.AddValidator(_ =>
+            {
+            });
 
             var command = new RootCommand { option };
 
@@ -1129,7 +1134,9 @@ namespace System.CommandLine.Tests
         {
             var argument = new Argument<string>();
             argument.AddValidator(result => result.ErrorMessage = "Wrong");
-            argument.AddValidator(_ => { });
+            argument.AddValidator(_ =>
+            {
+            });
 
             var command = new RootCommand { argument };
 

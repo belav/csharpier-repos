@@ -8,10 +8,14 @@ namespace System.Diagnostics
 {
     public class SourceSwitch : Switch
     {
-        public SourceSwitch(string name) : base(name, string.Empty) { }
+        public SourceSwitch(string name) : base(name, string.Empty)
+        {
+        }
 
         public SourceSwitch(string displayName, string defaultSwitchValue)
-            : base(displayName, string.Empty, defaultSwitchValue) { }
+            : base(displayName, string.Empty, defaultSwitchValue)
+        {
+        }
 
         public SourceLevels Level
         {

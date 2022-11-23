@@ -11,21 +11,27 @@ namespace System.Reflection.Emit
         public CustomAttributeBuilder(
             System.Reflection.ConstructorInfo con,
             object?[] constructorArgs
-        ) { }
+        )
+        {
+        }
 
         public CustomAttributeBuilder(
             System.Reflection.ConstructorInfo con,
             object?[] constructorArgs,
             System.Reflection.FieldInfo[] namedFields,
             object?[] fieldValues
-        ) { }
+        )
+        {
+        }
 
         public CustomAttributeBuilder(
             System.Reflection.ConstructorInfo con,
             object?[] constructorArgs,
             System.Reflection.PropertyInfo[] namedProperties,
             object?[] propertyValues
-        ) { }
+        )
+        {
+        }
 
         public CustomAttributeBuilder(
             System.Reflection.ConstructorInfo con,
@@ -34,32 +40,46 @@ namespace System.Reflection.Emit
             object?[] propertyValues,
             System.Reflection.FieldInfo[] namedFields,
             object?[] fieldValues
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class ILGenerator
     {
-        internal ILGenerator() { }
+        internal ILGenerator()
+        {
+        }
 
         public virtual int ILOffset
         {
             get { throw null; }
         }
 
-        public virtual void BeginCatchBlock(System.Type? exceptionType) { }
+        public virtual void BeginCatchBlock(System.Type? exceptionType)
+        {
+        }
 
-        public virtual void BeginExceptFilterBlock() { }
+        public virtual void BeginExceptFilterBlock()
+        {
+        }
 
         public virtual System.Reflection.Emit.Label BeginExceptionBlock()
         {
             throw null;
         }
 
-        public virtual void BeginFaultBlock() { }
+        public virtual void BeginFaultBlock()
+        {
+        }
 
-        public virtual void BeginFinallyBlock() { }
+        public virtual void BeginFinallyBlock()
+        {
+        }
 
-        public virtual void BeginScope() { }
+        public virtual void BeginScope()
+        {
+        }
 
         public virtual System.Reflection.Emit.LocalBuilder DeclareLocal(System.Type localType)
         {
@@ -79,67 +99,103 @@ namespace System.Reflection.Emit
             throw null;
         }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, byte arg) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, byte arg)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, double arg) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, double arg)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, short arg) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, short arg)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, int arg) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, int arg)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, long arg) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, long arg)
+        {
+        }
 
         public virtual void Emit(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.ConstructorInfo con
-        ) { }
+        )
+        {
+        }
 
         public virtual void Emit(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.Emit.Label label
-        ) { }
+        )
+        {
+        }
 
         public virtual void Emit(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.Emit.Label[] labels
-        ) { }
+        )
+        {
+        }
 
         public virtual void Emit(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.Emit.LocalBuilder local
-        ) { }
+        )
+        {
+        }
 
         public virtual void Emit(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.Emit.SignatureHelper signature
-        ) { }
+        )
+        {
+        }
 
         public virtual void Emit(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.FieldInfo field
-        ) { }
+        )
+        {
+        }
 
         public virtual void Emit(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.MethodInfo meth
-        ) { }
+        )
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public void Emit(System.Reflection.Emit.OpCode opcode, sbyte arg) { }
+        public void Emit(System.Reflection.Emit.OpCode opcode, sbyte arg)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, float arg) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, float arg)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, string str) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, string str)
+        {
+        }
 
-        public virtual void Emit(System.Reflection.Emit.OpCode opcode, System.Type cls) { }
+        public virtual void Emit(System.Reflection.Emit.OpCode opcode, System.Type cls)
+        {
+        }
 
         public virtual void EmitCall(
             System.Reflection.Emit.OpCode opcode,
             System.Reflection.MethodInfo methodInfo,
             System.Type[]? optionalParameterTypes
-        ) { }
+        )
+        {
+        }
 
         public virtual void EmitCalli(
             System.Reflection.Emit.OpCode opcode,
@@ -147,26 +203,42 @@ namespace System.Reflection.Emit
             System.Type? returnType,
             System.Type[]? parameterTypes,
             System.Type[]? optionalParameterTypes
-        ) { }
+        )
+        {
+        }
 
         public virtual void EmitCalli(
             System.Reflection.Emit.OpCode opcode,
             System.Runtime.InteropServices.CallingConvention unmanagedCallConv,
             System.Type? returnType,
             System.Type[]? parameterTypes
-        ) { }
+        )
+        {
+        }
 
-        public virtual void EmitWriteLine(System.Reflection.Emit.LocalBuilder localBuilder) { }
+        public virtual void EmitWriteLine(System.Reflection.Emit.LocalBuilder localBuilder)
+        {
+        }
 
-        public virtual void EmitWriteLine(System.Reflection.FieldInfo fld) { }
+        public virtual void EmitWriteLine(System.Reflection.FieldInfo fld)
+        {
+        }
 
-        public virtual void EmitWriteLine(string value) { }
+        public virtual void EmitWriteLine(string value)
+        {
+        }
 
-        public virtual void EndExceptionBlock() { }
+        public virtual void EndExceptionBlock()
+        {
+        }
 
-        public virtual void EndScope() { }
+        public virtual void EndScope()
+        {
+        }
 
-        public virtual void MarkLabel(System.Reflection.Emit.Label loc) { }
+        public virtual void MarkLabel(System.Reflection.Emit.Label loc)
+        {
+        }
 
         public virtual void ThrowException(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -177,9 +249,13 @@ namespace System.Reflection.Emit
                     .PublicParameterlessConstructor
             )]
                 System.Type excType
-        ) { }
+        )
+        {
+        }
 
-        public virtual void UsingNamespace(string usingNamespace) { }
+        public virtual void UsingNamespace(string usingNamespace)
+        {
+        }
     }
 
     public readonly partial struct Label : System.IEquatable<System.Reflection.Emit.Label>
@@ -222,7 +298,9 @@ namespace System.Reflection.Emit
 
     public sealed partial class LocalBuilder : System.Reflection.LocalVariableInfo
     {
-        internal LocalBuilder() { }
+        internal LocalBuilder()
+        {
+        }
 
         public override bool IsPinned
         {
@@ -240,7 +318,9 @@ namespace System.Reflection.Emit
 
     public partial class ParameterBuilder
     {
-        internal ParameterBuilder() { }
+        internal ParameterBuilder()
+        {
+        }
 
         public virtual int Attributes
         {
@@ -267,39 +347,55 @@ namespace System.Reflection.Emit
             get { throw null; }
         }
 
-        public virtual void SetConstant(object? defaultValue) { }
+        public virtual void SetConstant(object? defaultValue)
+        {
+        }
 
         public void SetCustomAttribute(
             System.Reflection.ConstructorInfo con,
             byte[] binaryAttribute
-        ) { }
+        )
+        {
+        }
 
-        public void SetCustomAttribute(
-            System.Reflection.Emit.CustomAttributeBuilder customBuilder
-        ) { }
+        public void SetCustomAttribute(System.Reflection.Emit.CustomAttributeBuilder customBuilder)
+        {
+        }
     }
 
     public sealed partial class SignatureHelper
     {
-        internal SignatureHelper() { }
+        internal SignatureHelper()
+        {
+        }
 
-        public void AddArgument(System.Type clsArgument) { }
+        public void AddArgument(System.Type clsArgument)
+        {
+        }
 
-        public void AddArgument(System.Type argument, bool pinned) { }
+        public void AddArgument(System.Type argument, bool pinned)
+        {
+        }
 
         public void AddArgument(
             System.Type argument,
             System.Type[]? requiredCustomModifiers,
             System.Type[]? optionalCustomModifiers
-        ) { }
+        )
+        {
+        }
 
         public void AddArguments(
             System.Type[]? arguments,
             System.Type[][]? requiredCustomModifiers,
             System.Type[][]? optionalCustomModifiers
-        ) { }
+        )
+        {
+        }
 
-        public void AddSentinel() { }
+        public void AddSentinel()
+        {
+        }
 
         public override bool Equals(object? obj)
         {

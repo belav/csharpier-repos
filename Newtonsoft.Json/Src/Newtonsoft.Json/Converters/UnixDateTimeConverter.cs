@@ -58,7 +58,9 @@ namespace Newtonsoft.Json.Converters
         /// <summary>
         /// Initializes a new instance of the <see cref="UnixDateTimeConverter"/> class.
         /// </summary>
-        public UnixDateTimeConverter() : this(false) { }
+        public UnixDateTimeConverter() : this(false)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnixDateTimeConverter"/> class.

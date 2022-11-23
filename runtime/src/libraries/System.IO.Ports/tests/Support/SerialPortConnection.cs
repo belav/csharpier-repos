@@ -176,7 +176,9 @@ namespace Legacy.Support
                 {
                     com.Write(testBlock, 0, testBlock.Length);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
                 catch (IOException)
                 {
                     // We may see hardware exceptions when the task calls Discard

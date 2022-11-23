@@ -78,7 +78,9 @@ public class ForAllMaps : AutoMapperSpecBase
 
 public class ForAllMapsWithConstructors : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {

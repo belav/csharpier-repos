@@ -15,7 +15,9 @@ namespace System.Data
         private const string DbNullString = "<DBNull>";
 
         // converter classes should have public ctor
-        public DefaultValueTypeConverter() { }
+        public DefaultValueTypeConverter()
+        {
+        }
 
         public override object? ConvertTo(
             ITypeDescriptorContext? context,

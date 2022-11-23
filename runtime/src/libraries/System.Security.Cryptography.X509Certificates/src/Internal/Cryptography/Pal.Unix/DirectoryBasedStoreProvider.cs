@@ -74,7 +74,9 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void CloneTo(X509Certificate2Collection collection)
         {

@@ -87,7 +87,8 @@ namespace System.Runtime.Versioning
         }
 
         public FrameworkName(string identifier, Version version) : this(identifier, version, null)
-        { }
+        {
+        }
 
         public FrameworkName(string identifier, Version version, string? profile)
         {

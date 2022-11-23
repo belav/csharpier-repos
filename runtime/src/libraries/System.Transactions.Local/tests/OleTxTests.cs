@@ -18,7 +18,9 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 {
     private static readonly TimeSpan Timeout = TimeSpan.FromMinutes(1);
 
-    public OleTxTests(OleTxFixture fixture) { }
+    public OleTxTests(OleTxFixture fixture)
+    {
+    }
 
     [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
     [InlineData(
@@ -245,7 +247,9 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                     remote1?.Process.Kill();
                     remote2?.Process.Kill();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 throw;
             }

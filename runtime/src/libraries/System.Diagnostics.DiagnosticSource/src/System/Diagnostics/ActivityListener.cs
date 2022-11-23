@@ -20,7 +20,9 @@ namespace System.Diagnostics
         /// <summary>
         /// Construct a new <see cref="ActivityListener"/> object to start listening to the <see cref="Activity"/> events.
         /// </summary>
-        public ActivityListener() { }
+        public ActivityListener()
+        {
+        }
 
         /// <summary>
         /// Set or get the callback used to listen to the <see cref="Activity"/> start event.

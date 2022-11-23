@@ -6,5 +6,7 @@ using System.Runtime.CompilerServices;
 
 public class Driver
 {
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

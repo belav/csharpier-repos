@@ -15,7 +15,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             IAsyncResult expectedResult = new Mock<IAsyncResult>().Object;
-            AsyncCallback cb = delegate { };
+            AsyncCallback cb = delegate
+            {
+            };
 
             HttpContext httpContext = GetHttpContext();
             Mock<IHttpAsyncHandler> mockHttpHandler = new Mock<IHttpAsyncHandler>();

@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 option: null, // No unique option to configure the diagnosticId
                 s_localizableTitleNamingStyle,
                 s_localizableMessageFormat
-            ) { }
+            )
+        {
+        }
 
         // Applicable SymbolKind list is limited due to https://github.com/dotnet/roslyn/issues/8753.
         // Locals and fields are handled by SupportedSyntaxKinds for now.

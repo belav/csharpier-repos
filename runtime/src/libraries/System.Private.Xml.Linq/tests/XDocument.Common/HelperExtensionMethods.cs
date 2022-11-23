@@ -609,7 +609,9 @@ namespace CoreXml.Test.XLinq
         }
         public XText originalReference; // it is used for checking the text node identities
 
-        public ExpectedValue(bool isOriginal, object data) : this(isOriginal, data, null) { }
+        public ExpectedValue(bool isOriginal, object data) : this(isOriginal, data, null)
+        {
+        }
 
         public ExpectedValue(bool isOriginal, object data, XText origRef)
         {

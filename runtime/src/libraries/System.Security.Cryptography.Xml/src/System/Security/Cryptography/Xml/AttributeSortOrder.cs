@@ -9,7 +9,9 @@ namespace System.Security.Cryptography.Xml
     // This class does lexicographic sorting by NamespaceURI first and then by LocalName.
     internal sealed class AttributeSortOrder : IComparer
     {
-        internal AttributeSortOrder() { }
+        internal AttributeSortOrder()
+        {
+        }
 
         public int Compare(object? a, object? b)
         {

@@ -7,18 +7,26 @@ using System.Diagnostics;
 public class Target
 {
     [DebuggerHidden]
-    public void Foo() { }
+    public void Foo()
+    {
+    }
 }
 
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
 public sealed class GenericAttribute : Attribute
 {
-    public GenericAttribute() { }
+    public GenericAttribute()
+    {
+    }
 
-    public GenericAttribute(int x) { }
+    public GenericAttribute(int x)
+    {
+    }
 }
 
 public class Class
 {
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

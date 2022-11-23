@@ -61,7 +61,11 @@ public partial class Program
         IsFalse(IsValueType<string>("42"));
         IsFalse(IsValueType<object>(new object()));
         IsFalse(IsValueType<IEnumerable<int>>(new int[10]));
-        IsFalse(IsValueType<Action<int>>(_ => { }));
+        IsFalse(
+            IsValueType<Action<int>>(_ =>
+            {
+            })
+        );
         IsTrue(IsValueType<GenericStruct<int>>(default));
         IsTrue(IsValueType<GenericStruct<string>>(default));
         IsTrue(IsValueType(SimpleEnum.B));
@@ -74,7 +78,15 @@ public partial class Program
         IsFalse(IsValueTypeObj("42"));
         IsFalse(IsValueTypeObj(new object()));
         IsFalse(IsValueTypeObj(new int[10]));
-        IsFalse(IsValueTypeObj((Action<int>)(_ => { })));
+        IsFalse(
+            IsValueTypeObj(
+                (Action<int>)(
+                    _ =>
+                    {
+                    }
+                )
+            )
+        );
         IsTrue(IsValueTypeObj(new GenericStruct<int>()));
         IsTrue(IsValueTypeObj(new GenericStruct<string>()));
         IsTrue(IsValueTypeObj(SimpleEnum.B));
@@ -120,7 +132,9 @@ public partial class Program
     private static string _varString = "42";
     private static object _varObject = new object();
     private static int[] _varArrayOfInt = new int[10];
-    private static Action<int> _varAction = _ => { };
+    private static Action<int> _varAction = _ =>
+    {
+    };
     private static GenericStruct<int> _varGenericStructInt = new GenericStruct<int> { field = 42 };
     private static GenericStruct<string> _varGenericStructStr = new GenericStruct<string>
     {

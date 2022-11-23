@@ -15,7 +15,9 @@ namespace Wasm.Build.Tests
         public NativeLibraryTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         [Theory]
         [BuildAndRun(aot: false)]
@@ -55,7 +57,9 @@ namespace Wasm.Build.Tests
                 buildArgs,
                 buildDir: _projectDir,
                 expectedExitCode: 0,
-                test: output => { },
+                test: output =>
+                {
+                },
                 host: host,
                 id: id
             );
@@ -113,7 +117,9 @@ public class Test
                 buildArgs,
                 buildDir: _projectDir,
                 expectedExitCode: 0,
-                test: output => { },
+                test: output =>
+                {
+                },
                 host: host,
                 id: id,
                 args: "mono.png"
@@ -165,7 +171,9 @@ public class Test
                 buildArgs,
                 buildDir: _projectDir,
                 expectedExitCode: 0,
-                test: output => { },
+                test: output =>
+                {
+                },
                 host: host,
                 id: id
             );

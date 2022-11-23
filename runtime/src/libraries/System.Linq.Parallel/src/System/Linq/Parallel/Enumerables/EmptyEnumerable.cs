@@ -21,7 +21,9 @@ namespace System.Linq.Parallel
     /// <typeparam name="T"></typeparam>
     internal sealed class EmptyEnumerable<T> : ParallelQuery<T>
     {
-        private EmptyEnumerable() : base(QuerySettings.Empty) { }
+        private EmptyEnumerable() : base(QuerySettings.Empty)
+        {
+        }
 
         // A singleton cached and shared among callers.
         private static volatile EmptyEnumerable<T>? s_instance;
@@ -61,6 +63,8 @@ namespace System.Linq.Parallel
             return false;
         }
 
-        void Collections.IEnumerator.Reset() { }
+        void Collections.IEnumerator.Reset()
+        {
+        }
     }
 }

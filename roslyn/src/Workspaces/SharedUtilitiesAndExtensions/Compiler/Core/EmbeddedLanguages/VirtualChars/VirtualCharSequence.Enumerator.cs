@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 
             object? IEnumerator.Current => this.Current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

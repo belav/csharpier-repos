@@ -259,7 +259,9 @@ public class AuthorizationEndpointConventionBuilderExtensionsTests
         Assert.Equal(policy, endpointModel.Metadata[1]);
     }
 
-    class TestRequirement : IAuthorizationRequirement { }
+    class TestRequirement : IAuthorizationRequirement
+    {
+    }
 
     [Fact]
     public void AllowAnonymous_Default()

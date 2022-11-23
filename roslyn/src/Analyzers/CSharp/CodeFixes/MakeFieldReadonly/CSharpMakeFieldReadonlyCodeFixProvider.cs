@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeFieldReadonly
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpMakeFieldReadonlyCodeFixProvider() { }
+        public CSharpMakeFieldReadonlyCodeFixProvider()
+        {
+        }
 
         protected override SyntaxNode? GetInitializerNode(VariableDeclaratorSyntax declaration) =>
             declaration.Initializer?.Value;

@@ -19,7 +19,9 @@ public class ReportMissingInclude
         );
     }
 
-    public class BaseType { }
+    public class BaseType
+    {
+    }
 
     public class ChildType : BaseType
     {
@@ -47,7 +49,9 @@ public class ReportMissingIncludeCreateMissingMap
         );
     }
 
-    public class BaseType { }
+    public class BaseType
+    {
+    }
 
     public class ChildType : BaseType
     {
@@ -74,7 +78,9 @@ public class ReportMissingIncludeBase
         );
     }
 
-    public class BaseType { }
+    public class BaseType
+    {
+    }
 
     public class ChildType : BaseType
     {
@@ -102,7 +108,9 @@ public class ReportMissingIncludeBaseCreateMissingMap
         );
     }
 
-    public class BaseType { }
+    public class BaseType
+    {
+    }
 
     public class ChildType : BaseType
     {

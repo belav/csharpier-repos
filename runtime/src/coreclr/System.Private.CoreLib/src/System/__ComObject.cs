@@ -23,7 +23,9 @@ namespace System
         /// <summary>
         /// Default constructor - can't instantiate this directly.
         /// </summary>
-        protected __ComObject() { }
+        protected __ComObject()
+        {
+        }
 
         /// <summary>
         /// Retrieves the data associated with the specified if such data exists.

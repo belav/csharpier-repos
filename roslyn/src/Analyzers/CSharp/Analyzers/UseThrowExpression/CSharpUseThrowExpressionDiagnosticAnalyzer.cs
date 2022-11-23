@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseThrowExpression
         : AbstractUseThrowExpressionDiagnosticAnalyzer
     {
         public CSharpUseThrowExpressionDiagnosticAnalyzer()
-            : base(CSharpCodeStyleOptions.PreferThrowExpression) { }
+            : base(CSharpCodeStyleOptions.PreferThrowExpression)
+        {
+        }
 
         protected override CodeStyleOption2<bool> PreferThrowExpressionStyle(
             OperationAnalysisContext context

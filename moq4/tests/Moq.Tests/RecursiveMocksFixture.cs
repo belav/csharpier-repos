@@ -441,7 +441,9 @@ namespace Moq.Tests
             public IBar this[int index]
             {
                 get { return null; }
-                set { }
+                set
+                {
+                }
             }
 
             public string Do(string command)

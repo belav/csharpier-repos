@@ -25,8 +25,12 @@ public class TestCosmosExecutionStrategy : CosmosExecutionStrategy
             ),
             DefaultMaxRetryCount,
             DefaultMaxDelay
-        ) { }
+        )
+    {
+    }
 
     public TestCosmosExecutionStrategy(ExecutionStrategyDependencies dependencies)
-        : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay) { }
+        : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay)
+    {
+    }
 }

@@ -16,6 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddAccessibilityModifiersService() { }
+        public CSharpAddAccessibilityModifiersService()
+        {
+        }
     }
 }

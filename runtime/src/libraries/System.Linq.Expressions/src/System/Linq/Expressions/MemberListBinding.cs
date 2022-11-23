@@ -49,7 +49,9 @@ namespace System.Linq.Expressions
             return Expression.ListBind(Member, initializers!);
         }
 
-        internal override void ValidateAsDefinedHere(int index) { }
+        internal override void ValidateAsDefinedHere(int index)
+        {
+        }
     }
 
     public partial class Expression

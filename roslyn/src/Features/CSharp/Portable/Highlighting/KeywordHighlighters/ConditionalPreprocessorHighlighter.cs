@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConditionalPreprocessorHighlighter() { }
+        public ConditionalPreprocessorHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             DirectiveTriviaSyntax directive,

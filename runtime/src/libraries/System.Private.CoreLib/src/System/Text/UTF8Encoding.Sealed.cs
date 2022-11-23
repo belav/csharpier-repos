@@ -20,7 +20,9 @@ namespace System.Text
             private const int MaxSmallInputElementCount = 32;
 
             public UTF8EncodingSealed(bool encoderShouldEmitUTF8Identifier)
-                : base(encoderShouldEmitUTF8Identifier) { }
+                : base(encoderShouldEmitUTF8Identifier)
+            {
+            }
 
             public override ReadOnlySpan<byte> Preamble =>
                 _emitUTF8Identifier ? PreambleSpan : default;

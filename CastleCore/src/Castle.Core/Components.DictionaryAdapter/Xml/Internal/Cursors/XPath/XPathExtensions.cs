@@ -32,7 +32,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (!navigator.MoveToFirstChild())
                 return false;
 
-            while (navigator.MoveToNext()) { }
+            while (navigator.MoveToNext())
+            {
+            }
 
             return true;
         }
@@ -42,7 +44,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (!navigator.MoveToFirstAttribute())
                 return false;
 
-            while (navigator.MoveToNextAttribute()) { }
+            while (navigator.MoveToNextAttribute())
+            {
+            }
 
             return true;
         }

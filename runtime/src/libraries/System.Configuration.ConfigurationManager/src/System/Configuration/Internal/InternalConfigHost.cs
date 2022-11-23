@@ -14,7 +14,9 @@ namespace System.Configuration.Internal
         void IInternalConfigHost.Init(
             IInternalConfigRoot configRoot,
             params object[] hostInitParams
-        ) { }
+        )
+        {
+        }
 
         void IInternalConfigHost.InitForConfiguration(
             ref string locationSubPath,
@@ -38,7 +40,9 @@ namespace System.Configuration.Internal
             return false;
         }
 
-        void IInternalConfigHost.RequireCompleteInit(IInternalConfigRecord configRecord) { }
+        void IInternalConfigHost.RequireCompleteInit(IInternalConfigRecord configRecord)
+        {
+        }
 
         public bool IsSecondaryRoot(string configPath)
         {
@@ -162,7 +166,9 @@ namespace System.Configuration.Internal
             ConfigurationAllowDefinition allowDefinition,
             ConfigurationAllowExeDefinition allowExeDefinition,
             IConfigErrorInfo errorInfo
-        ) { }
+        )
+        {
+        }
 
         bool IInternalConfigHost.SupportsLocation => false;
 

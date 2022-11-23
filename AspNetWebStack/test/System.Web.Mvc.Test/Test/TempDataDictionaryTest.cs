@@ -337,7 +337,9 @@ namespace System.Web.Mvc.Test
             public void SaveTempData(
                 ControllerContext controllerContext,
                 IDictionary<string, object> values
-            ) { }
+            )
+            {
+            }
 
             public IDictionary<string, object> LoadTempData(ControllerContext controllerContext)
             {
@@ -357,7 +359,9 @@ namespace System.Web.Mvc.Test
             public void SaveTempData(
                 ControllerContext controllerContext,
                 IDictionary<string, object> values
-            ) { }
+            )
+            {
+            }
 
             public IDictionary<string, object> LoadTempData(ControllerContext controllerContext)
             {

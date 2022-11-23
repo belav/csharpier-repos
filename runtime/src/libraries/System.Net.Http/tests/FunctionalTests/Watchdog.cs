@@ -24,7 +24,9 @@ namespace System.Net.Http.Functional.Tests
     {
         private object _box;
 
-        private Watchdog() { }
+        private Watchdog()
+        {
+        }
 
         public static Watchdog CreateAsync() => new Watchdog();
 

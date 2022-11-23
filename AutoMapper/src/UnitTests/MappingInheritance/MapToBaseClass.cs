@@ -4,11 +4,17 @@ public class MapToBaseClass : AutoMapperSpecBase
 {
     A _destination;
 
-    public class Input { }
+    public class Input
+    {
+    }
 
-    public class A { }
+    public class A
+    {
+    }
 
-    public class B : A { }
+    public class B : A
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(c =>
@@ -31,13 +37,21 @@ public class MapToBaseClass : AutoMapperSpecBase
 
 public class OverrideInclude : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
-    class Destination { }
+    class Destination
+    {
+    }
 
-    class SourceDerived : Source { }
+    class SourceDerived : Source
+    {
+    }
 
-    class DestinationDerived : Destination { }
+    class DestinationDerived : Destination
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(c =>
@@ -54,15 +68,25 @@ public class OverrideInclude : AutoMapperSpecBase
 
 public class IncludeAs : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
-    abstract class Destination { }
+    abstract class Destination
+    {
+    }
 
-    class SourceDerived : Source { }
+    class SourceDerived : Source
+    {
+    }
 
-    class DestinationDerived : Destination { }
+    class DestinationDerived : Destination
+    {
+    }
 
-    class DestinationConcrete : Destination { }
+    class DestinationConcrete : Destination
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(c =>

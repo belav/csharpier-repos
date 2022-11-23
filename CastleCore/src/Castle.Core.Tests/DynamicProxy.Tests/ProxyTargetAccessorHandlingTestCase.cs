@@ -250,7 +250,9 @@ namespace Castle.DynamicProxy.Tests
 		#endregion
     }
 
-    public interface IProxyTargetAccessorDerived : IProxyTargetAccessor { }
+    public interface IProxyTargetAccessorDerived : IProxyTargetAccessor
+    {
+    }
 
     public class ImplementsProxyTargetAccessorDerived : IProxyTargetAccessorDerived
     {

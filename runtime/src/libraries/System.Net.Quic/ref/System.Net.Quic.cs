@@ -16,28 +16,38 @@ namespace System.Net.Quic
 
     public sealed partial class QuicClientConnectionOptions : System.Net.Quic.QuicConnectionOptions
     {
-        public QuicClientConnectionOptions() { }
+        public QuicClientConnectionOptions()
+        {
+        }
 
         public System.Net.Security.SslClientAuthenticationOptions ClientAuthenticationOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.IPEndPoint? LocalEndPoint
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.EndPoint RemoteEndPoint
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed partial class QuicConnection : System.IAsyncDisposable
     {
-        internal QuicConnection() { }
+        internal QuicConnection()
+        {
+        }
 
         public static bool IsSupported
         {
@@ -108,32 +118,44 @@ namespace System.Net.Quic
 
     public abstract partial class QuicConnectionOptions
     {
-        internal QuicConnectionOptions() { }
+        internal QuicConnectionOptions()
+        {
+        }
 
         public long DefaultCloseErrorCode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long DefaultStreamErrorCode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan IdleTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxInboundBidirectionalStreams
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxInboundUnidirectionalStreams
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -161,7 +183,9 @@ namespace System.Net.Quic
             System.Net.Quic.QuicError error,
             long? applicationErrorCode,
             string message
-        ) { }
+        )
+        {
+        }
 
         public long? ApplicationErrorCode
         {
@@ -175,7 +199,9 @@ namespace System.Net.Quic
 
     public sealed partial class QuicListener : System.IAsyncDisposable
     {
-        internal QuicListener() { }
+        internal QuicListener()
+        {
+        }
 
         public static bool IsSupported
         {
@@ -216,12 +242,16 @@ namespace System.Net.Quic
 
     public sealed partial class QuicListenerOptions
     {
-        public QuicListenerOptions() { }
+        public QuicListenerOptions()
+        {
+        }
 
         public System.Collections.Generic.List<System.Net.Security.SslApplicationProtocol> ApplicationProtocols
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Func<
             System.Net.Quic.QuicConnection,
@@ -231,34 +261,46 @@ namespace System.Net.Quic
         > ConnectionOptionsCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ListenBacklog
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.IPEndPoint ListenEndPoint
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed partial class QuicServerConnectionOptions : System.Net.Quic.QuicConnectionOptions
     {
-        public QuicServerConnectionOptions() { }
+        public QuicServerConnectionOptions()
+        {
+        }
 
         public System.Net.Security.SslServerAuthenticationOptions ServerAuthenticationOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed partial class QuicStream : System.IO.Stream
     {
-        internal QuicStream() { }
+        internal QuicStream()
+        {
+        }
 
         public override bool CanRead
         {
@@ -287,7 +329,9 @@ namespace System.Net.Quic
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.Tasks.Task ReadsClosed
         {
@@ -296,7 +340,9 @@ namespace System.Net.Quic
         public override int ReadTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Quic.QuicStreamType Type
         {
@@ -309,10 +355,14 @@ namespace System.Net.Quic
         public override int WriteTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Abort(System.Net.Quic.QuicAbortDirection abortDirection, long errorCode) { }
+        public void Abort(System.Net.Quic.QuicAbortDirection abortDirection, long errorCode)
+        {
+        }
 
         public override System.IAsyncResult BeginRead(
             byte[] buffer,
@@ -336,9 +386,13 @@ namespace System.Net.Quic
             throw null;
         }
 
-        public void CompleteWrites() { }
+        public void CompleteWrites()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -350,9 +404,13 @@ namespace System.Net.Quic
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken =
@@ -402,11 +460,17 @@ namespace System.Net.Quic
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Write(System.ReadOnlySpan<byte> buffer) { }
+        public override void Write(System.ReadOnlySpan<byte> buffer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -438,7 +502,9 @@ namespace System.Net.Quic
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 
     public enum QuicStreamType

@@ -265,7 +265,9 @@ namespace System.Net.Http.Formatting
         }
 
         public MockBufferedMediaTypeFormatter(MockBufferedMediaTypeFormatter formatter)
-            : base(formatter) { }
+            : base(formatter)
+        {
+        }
 
         public override bool CanReadType(Type type)
         {

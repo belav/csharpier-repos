@@ -22,7 +22,10 @@ public static class IdentityServiceCollectionUIExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IdentityBuilder"/>.</returns>
     public static IdentityBuilder AddDefaultIdentity<TUser>(this IServiceCollection services)
-        where TUser : class => services.AddDefaultIdentity<TUser>(_ => { });
+        where TUser : class =>
+        services.AddDefaultIdentity<TUser>(_ =>
+        {
+        });
 
     /// <summary>
     /// Adds a set of common identity services to the application, including a default UI, token providers,
@@ -47,7 +50,9 @@ public static class IdentityServiceCollectionUIExtensions
                 o.DefaultScheme = IdentityConstants.ApplicationScheme;
                 o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
             })
-            .AddIdentityCookies(o => { });
+            .AddIdentityCookies(o =>
+            {
+            });
 
         return services
             .AddIdentityCore<TUser>(o =>

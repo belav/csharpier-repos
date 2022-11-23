@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Host
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultAnalyzerService() { }
+        public DefaultAnalyzerService()
+        {
+        }
 
         public IAnalyzerAssemblyLoader GetLoader()
         {

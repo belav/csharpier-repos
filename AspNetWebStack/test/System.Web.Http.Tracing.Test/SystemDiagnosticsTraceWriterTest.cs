@@ -105,7 +105,14 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             // Act & Assert
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => writer.Trace(new HttpRequestMessage(), null, TraceLevel.Info, (tr) => { })
+                () =>
+                    writer.Trace(
+                        new HttpRequestMessage(),
+                        null,
+                        TraceLevel.Info,
+                        (tr) => {
+                        }
+                    )
             );
             Assert.Equal("category", exception.ParamName);
         }
@@ -139,7 +146,14 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             // Act & Assert
             ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => writer.Trace(new HttpRequestMessage(), "MyCategory", level, (tr) => { })
+                () =>
+                    writer.Trace(
+                        new HttpRequestMessage(),
+                        "MyCategory",
+                        level,
+                        (tr) => {
+                        }
+                    )
             );
             Assert.Equal("level", exception.ParamName);
             Assert.Contains(
@@ -374,7 +388,13 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(request, "TestCategory", TraceLevel.Info, (tr) => { });
+            writer.Trace(
+                request,
+                "TestCategory",
+                TraceLevel.Info,
+                (tr) => {
+                }
+            );
 
             // Assert
             Assert.Equal(0, ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages.Count);
@@ -430,7 +450,13 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(request, "TestCategory", level - 1, (tr) => { });
+            writer.Trace(
+                request,
+                "TestCategory",
+                level - 1,
+                (tr) => {
+                }
+            );
 
             // Assert
             Assert.Equal(0, ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages.Count);

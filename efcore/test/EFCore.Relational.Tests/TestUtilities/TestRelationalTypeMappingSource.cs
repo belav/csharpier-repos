@@ -72,10 +72,13 @@ public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
                     ),
                     "some_int_array_mapping"
                 )
-            ) { }
+            )
+        {
+        }
 
         private IntArrayTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
-        { }
+        {
+        }
 
         protected override RelationalTypeMapping Clone(
             RelationalTypeMappingParameters parameters
@@ -145,7 +148,9 @@ public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
     public TestRelationalTypeMappingSource(
         TypeMappingSourceDependencies dependencies,
         RelationalTypeMappingSourceDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    ) : base(dependencies, relationalDependencies)
+    {
+    }
 
     private class TestStringTypeMapping : StringTypeMapping
     {
@@ -166,7 +171,9 @@ public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
                     size,
                     fixedLength
                 )
-            ) { }
+            )
+        {
+        }
 
         protected override string ProcessStoreType(
             RelationalTypeMappingParameters parameters,

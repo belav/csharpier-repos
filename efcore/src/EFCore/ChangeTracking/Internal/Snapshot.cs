@@ -21,7 +21,9 @@ public sealed class Snapshot : ISnapshot
     /// </summary>
     public const int MaxGenericTypes = 30;
 
-    private Snapshot() { }
+    private Snapshot()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

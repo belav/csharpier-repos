@@ -20,7 +20,9 @@ namespace System.Security.Cryptography.X509Certificates
         public X509SubjectKeyIdentifierExtension(
             AsnEncodedData encodedSubjectKeyIdentifier,
             bool critical
-        ) : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical) { }
+        ) : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical)
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(byte[] subjectKeyIdentifier, bool critical)
             : this(
@@ -29,7 +31,9 @@ namespace System.Security.Cryptography.X509Certificates
                     ?? throw new ArgumentNullException(nameof(subjectKeyIdentifier))
                 ),
                 critical
-            ) { }
+            )
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(
             ReadOnlySpan<byte> subjectKeyIdentifier,
@@ -40,10 +44,14 @@ namespace System.Security.Cryptography.X509Certificates
                 EncodeExtension(subjectKeyIdentifier),
                 critical,
                 skipCopy: true
-            ) { }
+            )
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(PublicKey key, bool critical)
-            : this(key, X509SubjectKeyIdentifierHashAlgorithm.Sha1, critical) { }
+            : this(key, X509SubjectKeyIdentifierHashAlgorithm.Sha1, critical)
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(
             PublicKey key,
@@ -55,7 +63,9 @@ namespace System.Security.Cryptography.X509Certificates
                 EncodeExtension(key, algorithm),
                 critical,
                 skipCopy: true
-            ) { }
+            )
+        {
+        }
 
         public X509SubjectKeyIdentifierExtension(string subjectKeyIdentifier, bool critical)
             : base(
@@ -63,7 +73,9 @@ namespace System.Security.Cryptography.X509Certificates
                 EncodeExtension(subjectKeyIdentifier),
                 critical,
                 skipCopy: true
-            ) { }
+            )
+        {
+        }
 
         public string? SubjectKeyIdentifier
         {

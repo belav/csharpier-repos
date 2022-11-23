@@ -158,8 +158,24 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             AssertEx.Equal(new byte[] { 0x01, 0x00 }, b.ToArray());
             b.Clear();
 
-            Assert.Throws<ArgumentNullException>(() => e.CustomAttributeSignature(null, n => { }));
-            Assert.Throws<ArgumentNullException>(() => e.CustomAttributeSignature(f => { }, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.CustomAttributeSignature(
+                        null,
+                        n =>
+                        {
+                        }
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.CustomAttributeSignature(
+                        f =>
+                        {
+                        },
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -276,8 +292,26 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                         out parameters
                     )
             );
-            Assert.Throws<ArgumentNullException>(() => e.Parameters(0, null, ps => { }));
-            Assert.Throws<ArgumentNullException>(() => e.Parameters(0, rt => { }, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.Parameters(
+                        0,
+                        null,
+                        ps =>
+                        {
+                        }
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.Parameters(
+                        0,
+                        rt =>
+                        {
+                        },
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -483,8 +517,24 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             e.TaggedVector(at => Assert.Same(b, at.Builder), v => Assert.Same(b, v.Builder));
 
-            Assert.Throws<ArgumentNullException>(() => e.TaggedVector(null, v => { }));
-            Assert.Throws<ArgumentNullException>(() => e.TaggedVector(at => { }, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.TaggedVector(
+                        null,
+                        v =>
+                        {
+                        }
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.TaggedVector(
+                        at =>
+                        {
+                        },
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -517,8 +567,24 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             e.TaggedScalar(et => Assert.Same(b, et.Builder), s => Assert.Same(b, s.Builder));
 
-            Assert.Throws<ArgumentNullException>(() => e.TaggedScalar(null, s => { }));
-            Assert.Throws<ArgumentNullException>(() => e.TaggedScalar(et => { }, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.TaggedScalar(
+                        null,
+                        s =>
+                        {
+                        }
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.TaggedScalar(
+                        et =>
+                        {
+                        },
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -740,13 +806,43 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             b.Clear();
 
             Assert.Throws<ArgumentNullException>(
-                () => e.AddArgument(true, null, _ => { }, _ => { })
+                () =>
+                    e.AddArgument(
+                        true,
+                        null,
+                        _ =>
+                        {
+                        },
+                        _ =>
+                        {
+                        }
+                    )
             );
             Assert.Throws<ArgumentNullException>(
-                () => e.AddArgument(true, _ => { }, null, _ => { })
+                () =>
+                    e.AddArgument(
+                        true,
+                        _ =>
+                        {
+                        },
+                        null,
+                        _ =>
+                        {
+                        }
+                    )
             );
             Assert.Throws<ArgumentNullException>(
-                () => e.AddArgument(true, _ => { }, _ => { }, null)
+                () =>
+                    e.AddArgument(
+                        true,
+                        _ =>
+                        {
+                        },
+                        _ =>
+                        {
+                        },
+                        null
+                    )
             );
         }
 
@@ -1138,8 +1234,24 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             AssertEx.Equal(new byte[] { 0x14 }, b.ToArray());
             b.Clear();
 
-            Assert.Throws<ArgumentNullException>(() => e.Array(null, n => { }));
-            Assert.Throws<ArgumentNullException>(() => e.Array(n => { }, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.Array(
+                        null,
+                        n =>
+                        {
+                        }
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    e.Array(
+                        n =>
+                        {
+                        },
+                        null
+                    )
+            );
         }
 
         [Fact]

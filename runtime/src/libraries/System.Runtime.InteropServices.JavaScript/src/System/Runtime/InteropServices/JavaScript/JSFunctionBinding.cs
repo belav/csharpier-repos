@@ -20,7 +20,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// This API supports JSImport infrastructure and is not intended to be used directly from your code.
         /// </summary>
-        internal JSFunctionBinding() { }
+        internal JSFunctionBinding()
+        {
+        }
 
         #region intentionally opaque internal structure
         internal unsafe JSBindingHeader* Header;

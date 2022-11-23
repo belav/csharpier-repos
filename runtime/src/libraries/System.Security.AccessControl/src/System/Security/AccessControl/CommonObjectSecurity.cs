@@ -22,10 +22,14 @@ namespace System.Security.AccessControl
     {
         #region Constructors
 
-        protected CommonObjectSecurity(bool isContainer) : base(isContainer, false) { }
+        protected CommonObjectSecurity(bool isContainer) : base(isContainer, false)
+        {
+        }
 
         internal CommonObjectSecurity(CommonSecurityDescriptor securityDescriptor)
-            : base(securityDescriptor) { }
+            : base(securityDescriptor)
+        {
+        }
 
         #endregion
 

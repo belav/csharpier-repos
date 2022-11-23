@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestSymbolRenamedCodeActionOperationFactoryWorkspaceService() { }
+        public TestSymbolRenamedCodeActionOperationFactoryWorkspaceService()
+        {
+        }
 
         public CodeActionOperation CreateSymbolRenamedOperation(
             ISymbol symbol,

@@ -14,15 +14,23 @@ namespace Test
         {
             try
             {
-                while (m_abStatic1[1]) { }
+                while (m_abStatic1[1])
+                {
+                }
                 for (; ; )
                 {
                     throw new Exception();
                 }
-                try { }
-                finally { }
+                try
+                {
+                }
+                finally
+                {
+                }
             }
-            catch (DivideByZeroException) { }
+            catch (DivideByZeroException)
+            {
+            }
             return 0;
         }
 

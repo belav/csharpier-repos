@@ -18,9 +18,13 @@ static class Program
     }
 }
 
-public abstract class EntityBase { }
+public abstract class EntityBase
+{
+}
 
-public class GenEntity<T> : EntityBase { }
+public class GenEntity<T> : EntityBase
+{
+}
 
 class DocumentForm<T>
 {
@@ -54,7 +58,9 @@ public class Grid2<TEntity> : MarshalByRefObject where TEntity : EntityBase, new
 
 public class Engine : MarshalByRefObject
 {
-    public Engine() { }
+    public Engine()
+    {
+    }
 
     public string GetDomainName<T>()
     {

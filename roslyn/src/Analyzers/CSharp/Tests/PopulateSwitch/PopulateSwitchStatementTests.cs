@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
     public partial class PopulateSwitchStatementTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public PopulateSwitchStatementTests(ITestOutputHelper logger) : base(logger) { }
+        public PopulateSwitchStatementTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

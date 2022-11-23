@@ -18,7 +18,9 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientMiniStress_NoVersion : HttpClientMiniStress
     {
         public SocketsHttpHandler_HttpClientMiniStress_NoVersion(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
 
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
@@ -37,7 +39,9 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientMiniStress_Http3 : HttpClientMiniStress
     {
         public SocketsHttpHandler_HttpClientMiniStress_Http3(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
 
         protected override Version UseVersion => HttpVersion.Version30;
     }
@@ -45,7 +49,9 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientMiniStress_Http2 : HttpClientMiniStress
     {
         public SocketsHttpHandler_HttpClientMiniStress_Http2(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }
@@ -53,7 +59,9 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_HttpClientMiniStress_Http11 : HttpClientMiniStress
     {
         public SocketsHttpHandler_HttpClientMiniStress_Http11(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
 
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
@@ -123,7 +131,9 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Security is not supported on Browser")]
     public abstract class HttpClientMiniStress : HttpClientHandlerTestBase
     {
-        public HttpClientMiniStress(ITestOutputHelper output) : base(output) { }
+        public HttpClientMiniStress(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override HttpClient CreateHttpClient() =>
             CreateHttpClient(CreateSocketsHttpHandler(allowAllCertificates: true));

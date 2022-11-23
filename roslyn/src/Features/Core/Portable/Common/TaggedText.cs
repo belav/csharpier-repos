@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis
         /// <param name="text">The actual text to be displayed.</param>
         public TaggedText(string tag, string text)
             : this(tag, text, TaggedTextStyle.None, navigationTarget: null, navigationHint: null)
-        { }
+        {
+        }
 
         /// <summary>
         /// Creates a new instance of <see cref="TaggedText"/>

@@ -43,7 +43,9 @@ namespace System.IO.Compression
         /// developers should prefer using the constructor
         /// <code>public ZLibException(string message, string zlibErrorContext, ZLibNative.ErrorCode zlibErrorCode, string zlibErrorMessage)</code>.
         /// </summary>
-        public ZLibException() { }
+        public ZLibException()
+        {
+        }
 
         /// <summary>
         /// This constructor is provided in compliance with common .NET Framework design patterns;
@@ -53,7 +55,9 @@ namespace System.IO.Compression
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or a <code>null</code>.</param>
         public ZLibException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         /// <summary>
         /// Initializes a new ZLibException with serialized data.

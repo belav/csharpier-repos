@@ -871,7 +871,9 @@ namespace BasicEventSourceTests
     public sealed class EventSourceTestSelfDescribingOnly : EventSource
     {
         public EventSourceTestSelfDescribingOnly()
-            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat)
+        {
+        }
 
         public void EventByteArrayInt(byte[] array, int anInt)
         {
@@ -896,7 +898,9 @@ namespace BasicEventSourceTests
 
     public sealed class EventSourceTestByteArray : EventSource
     {
-        public EventSourceTestByteArray(EventSourceSettings settings) : base(settings) { }
+        public EventSourceTestByteArray(EventSourceSettings settings) : base(settings)
+        {
+        }
 
         // byte[] args not supported on 4.5
         [Event(1, Level = EventLevel.Informational, Message = "Int arg after byte array: {1}")]

@@ -235,6 +235,8 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreEqual(target, result);
         }
 
-        private class PrivateClass { }
+        private class PrivateClass
+        {
+        }
     }
 }

@@ -20,6 +20,8 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     )]
     public class AddedPseudoAttributeAttribute : BaseExpectedLinkedBehaviorAttribute
     {
-        public AddedPseudoAttributeAttribute(uint value) { }
+        public AddedPseudoAttributeAttribute(uint value)
+        {
+        }
     }
 }

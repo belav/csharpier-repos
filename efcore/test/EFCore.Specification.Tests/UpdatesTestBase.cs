@@ -679,10 +679,9 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             nestedTestOperation2
         );
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected UpdatesContext CreateContext() => Fixture.CreateContext();
 

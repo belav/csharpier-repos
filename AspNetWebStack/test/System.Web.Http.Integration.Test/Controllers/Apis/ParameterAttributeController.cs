@@ -27,8 +27,12 @@ namespace System.Web.Http
             return null;
         }
 
-        public void DeleteUserWithNullableIdAndName(int? id, string name) { }
+        public void DeleteUserWithNullableIdAndName(int? id, string name)
+        {
+        }
 
-        public void DeleteUser(string address) { }
+        public void DeleteUser(string address)
+        {
+        }
     }
 }

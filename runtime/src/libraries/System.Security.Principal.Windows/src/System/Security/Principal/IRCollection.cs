@@ -27,7 +27,9 @@ namespace System.Security.Principal
         // Creates an empty collection of default size
         //
 
-        public IdentityReferenceCollection() : this(0) { }
+        public IdentityReferenceCollection() : this(0)
+        {
+        }
 
         //
         // Creates an empty collection of given initial size
@@ -415,7 +417,9 @@ namespace System.Security.Principal
             _current = -1;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
         #endregion
     }
 }

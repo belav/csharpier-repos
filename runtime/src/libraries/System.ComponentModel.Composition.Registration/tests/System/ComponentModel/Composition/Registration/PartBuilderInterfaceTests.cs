@@ -10,28 +10,48 @@ namespace System.ComponentModel.Composition.Registration.Tests
 {
     public class PartBuilderInterfaceTests
     {
-        public interface IFirst { }
+        public interface IFirst
+        {
+        }
 
-        public interface ISecond { }
+        public interface ISecond
+        {
+        }
 
-        public interface IThird { }
+        public interface IThird
+        {
+        }
 
-        public interface IFourth { }
+        public interface IFourth
+        {
+        }
 
-        public interface IFifth : IFourth { }
+        public interface IFifth : IFourth
+        {
+        }
 
-        public class Standard : IFirst, ISecond, IThird, IFifth { }
+        public class Standard : IFirst, ISecond, IThird, IFifth
+        {
+        }
 
         public class Dippy : IFirst, ISecond, IThird, IFifth, IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
-        public class BareClass { }
+        public class BareClass
+        {
+        }
 
-        public class Base : IFirst, ISecond { }
+        public class Base : IFirst, ISecond
+        {
+        }
 
-        public class Derived : Base, IThird, IFifth { }
+        public class Derived : Base, IThird, IFifth
+        {
+        }
 
         public class Importer
         {

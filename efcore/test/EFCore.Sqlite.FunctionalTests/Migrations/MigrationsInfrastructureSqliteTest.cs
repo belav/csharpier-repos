@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         : MigrationsInfrastructureTestBase<MigrationsInfrastructureSqliteTest.MigrationsInfrastructureSqliteFixture>
     {
         public MigrationsInfrastructureSqliteTest(MigrationsInfrastructureSqliteFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public override void Can_generate_migration_from_initial_database_to_initial()
         {

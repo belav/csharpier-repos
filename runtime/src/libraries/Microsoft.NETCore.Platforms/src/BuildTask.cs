@@ -16,7 +16,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             get { return _log ??= new Log(new TaskLoggingHelper(this)); }
         }
 
-        public BuildTask() { }
+        public BuildTask()
+        {
+        }
 
         public IBuildEngine BuildEngine { get; set; }
 

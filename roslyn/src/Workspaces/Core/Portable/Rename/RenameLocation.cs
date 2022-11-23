@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.Rename
                 documentId,
                 candidateReason: referenceLocation.CandidateReason,
                 isWrittenTo: referenceLocation.IsWrittenTo
-            ) { }
+            )
+        {
+        }
 
         public bool Equals(RenameLocation other) => Location == other.Location;
 

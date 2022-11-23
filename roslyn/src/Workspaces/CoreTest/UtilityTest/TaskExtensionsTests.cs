@@ -47,6 +47,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static int ThrowTestException() => throw new TestException();
 
-        private class TestException : Exception { }
+        private class TestException : Exception
+        {
+        }
     }
 }

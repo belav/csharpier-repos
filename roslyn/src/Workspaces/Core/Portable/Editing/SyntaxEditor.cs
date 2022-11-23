@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.Editing
                 (workspace ?? throw new ArgumentNullException(nameof(workspace)))
                     .Services
                     .SolutionServices
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new <see cref="SyntaxEditor"/> instance.
@@ -40,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Editing
             : this(
                 root,
                 (services ?? throw new ArgumentNullException(nameof(services))).SolutionServices
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new <see cref="SyntaxEditor"/> instance.
@@ -52,7 +56,9 @@ namespace Microsoft.CodeAnalysis.Editing
                     services ?? throw new ArgumentNullException(nameof(services)),
                     root.Language
                 )
-            ) { }
+            )
+        {
+        }
 
         internal SyntaxEditor(SyntaxNode root, SyntaxGenerator generator)
         {
@@ -327,7 +333,9 @@ namespace Microsoft.CodeAnalysis.Editing
 
         private sealed class NoChange : Change
         {
-            public NoChange(SyntaxNode node) : base(node) { }
+            public NoChange(SyntaxNode node) : base(node)
+            {
+            }
 
             protected override SyntaxNode Apply(
                 SyntaxNode root,

@@ -106,7 +106,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     new VirtualStrongNameFileSystem(
                         new HashSet<string>(existingFullPaths, StringComparer.OrdinalIgnoreCase)
                     )
-                ) { }
+                )
+            {
+            }
         }
     }
 }

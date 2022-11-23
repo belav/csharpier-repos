@@ -77,7 +77,9 @@ namespace System.Data
         /// parent, and child columns.
         /// </summary>
         public DataRelation(string? relationName, DataColumn parentColumn, DataColumn childColumn)
-            : this(relationName, parentColumn, childColumn, true) { }
+            : this(relationName, parentColumn, childColumn, true)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name, parent, and child columns, and
@@ -114,7 +116,9 @@ namespace System.Data
             string? relationName,
             DataColumn[] parentColumns,
             DataColumn[] childColumns
-        ) : this(relationName, parentColumns, childColumns, true) { }
+        ) : this(relationName, parentColumns, childColumns, true)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name, matched arrays of parent

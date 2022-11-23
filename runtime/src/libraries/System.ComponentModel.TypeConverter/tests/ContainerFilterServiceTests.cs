@@ -17,6 +17,8 @@ namespace System.ComponentModel.Tests
             Assert.Same(components, service.FilterComponents(components));
         }
 
-        private class SubContainerFilterService : ContainerFilterService { }
+        private class SubContainerFilterService : ContainerFilterService
+        {
+        }
     }
 }

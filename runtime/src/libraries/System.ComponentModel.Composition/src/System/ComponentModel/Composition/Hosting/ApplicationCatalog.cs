@@ -20,7 +20,9 @@ namespace System.ComponentModel.Composition.Hosting
         private readonly ICompositionElement? _definitionOrigin;
         private readonly ReflectionContext? _reflectionContext;
 
-        public ApplicationCatalog() { }
+        public ApplicationCatalog()
+        {
+        }
 
         public ApplicationCatalog(ICompositionElement definitionOrigin)
         {

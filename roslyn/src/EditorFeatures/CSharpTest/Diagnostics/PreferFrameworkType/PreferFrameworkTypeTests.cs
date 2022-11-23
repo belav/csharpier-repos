@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PreferFrame
     public partial class PreferFrameworkTypeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public PreferFrameworkTypeTests(ITestOutputHelper logger) : base(logger) { }
+        public PreferFrameworkTypeTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

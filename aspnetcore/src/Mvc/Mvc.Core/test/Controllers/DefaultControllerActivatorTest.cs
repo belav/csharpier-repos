@@ -142,9 +142,13 @@ public class DefaultControllerActivatorTest
         serviceProvider.Verify();
     }
 
-    public class Controller { }
+    public class Controller
+    {
+    }
 
-    private class TypeDerivingFromController : Controller { }
+    private class TypeDerivingFromController : Controller
+    {
+    }
 
     private class TypeDerivingFromControllerWithServices : Controller
     {
@@ -174,9 +178,13 @@ public class DefaultControllerActivatorTest
         return services.Object;
     }
 
-    private class PocoType { }
+    private class PocoType
+    {
+    }
 
-    private class TestService { }
+    private class TestService
+    {
+    }
 
     private class MyController : IDisposable
     {
@@ -192,7 +200,9 @@ public class DefaultControllerActivatorTest
     {
         public bool Disposed { get; set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public ValueTask DisposeAsync()
         {

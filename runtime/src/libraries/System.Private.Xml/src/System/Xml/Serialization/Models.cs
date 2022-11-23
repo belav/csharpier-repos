@@ -137,7 +137,9 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             TypeDesc typeDesc,
             ModelScope scope
-        ) : base(type, typeDesc, scope) { }
+        ) : base(type, typeDesc, scope)
+        {
+        }
 
         internal TypeModel Element
         {
@@ -152,7 +154,9 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             TypeDesc typeDesc,
             ModelScope scope
-        ) : base(type, typeDesc, scope) { }
+        ) : base(type, typeDesc, scope)
+        {
+        }
     }
 
     internal sealed class SpecialModel : TypeModel
@@ -161,7 +165,9 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             TypeDesc typeDesc,
             ModelScope scope
-        ) : base(type, typeDesc, scope) { }
+        ) : base(type, typeDesc, scope)
+        {
+        }
     }
 
     internal sealed class StructModel : TypeModel
@@ -170,7 +176,9 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             TypeDesc typeDesc,
             ModelScope scope
-        ) : base(type, typeDesc, scope) { }
+        ) : base(type, typeDesc, scope)
+        {
+        }
 
         internal MemberInfo[] GetMemberInfos()
         {
@@ -340,7 +348,9 @@ namespace System.Xml.Serialization
             TypeDesc fieldTypeDesc,
             bool checkSpecified,
             bool checkShouldPersist
-        ) : this(name, fieldType, fieldTypeDesc, checkSpecified, checkShouldPersist, false) { }
+        ) : this(name, fieldType, fieldTypeDesc, checkSpecified, checkShouldPersist, false)
+        {
+        }
 
         internal FieldModel(
             string name,
@@ -518,7 +528,9 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             TypeDesc typeDesc,
             ModelScope scope
-        ) : base(type, typeDesc, scope) { }
+        ) : base(type, typeDesc, scope)
+        {
+        }
 
         internal ConstantModel[] Constants
         {

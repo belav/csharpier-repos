@@ -29,7 +29,9 @@ namespace System.Diagnostics
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceListener'/> class.</para>
         /// </devdoc>
-        protected TraceListener() { }
+        protected TraceListener()
+        {
+        }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceListener'/> class using the specified name as the

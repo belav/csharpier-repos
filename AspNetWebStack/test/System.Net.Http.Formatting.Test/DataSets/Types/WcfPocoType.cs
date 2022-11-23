@@ -16,7 +16,9 @@ namespace System.Net.Http.Formatting.DataSets.Types
         private int id;
         private string name;
 
-        public WcfPocoType() { }
+        public WcfPocoType()
+        {
+        }
 
         public WcfPocoType(int id, string name)
         {

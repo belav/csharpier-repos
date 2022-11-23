@@ -432,7 +432,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<ParameterSymbol> Parameters
         ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics);
 
-        protected sealed override void ExtensionMethodChecks(BindingDiagnosticBag diagnostics) { }
+        protected sealed override void ExtensionMethodChecks(BindingDiagnosticBag diagnostics)
+        {
+        }
 
         protected sealed override MethodSymbol FindExplicitlyImplementedMethod(
             BindingDiagnosticBag diagnostics
@@ -1084,6 +1086,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        protected sealed override void PartialMethodChecks(BindingDiagnosticBag diagnostics) { }
+        protected sealed override void PartialMethodChecks(BindingDiagnosticBag diagnostics)
+        {
+        }
     }
 }

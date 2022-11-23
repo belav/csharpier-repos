@@ -1,8 +1,12 @@
 using System;
 
-public class GenA<T> { };
+public class GenA<T>
+{
+};
 
-public class GenB<T> : GenA<GenB<GenB<T>>> { };
+public class GenB<T> : GenA<GenB<GenB<T>>>
+{
+};
 
 public class GenC<T>
 {
@@ -12,7 +16,9 @@ public class GenC<T>
     }
 }
 
-public class GenD<T> : GenC<GenD<GenD<T>>> { };
+public class GenD<T> : GenC<GenD<GenD<T>>>
+{
+};
 
 public class main
 {

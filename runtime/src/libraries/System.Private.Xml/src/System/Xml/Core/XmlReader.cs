@@ -693,7 +693,9 @@ namespace System.Xml
         public abstract bool EOF { get; }
 
         // Closes the stream/TextReader (if CloseInput==true), changes the ReadState to Closed, and sets all the properties back to zero/empty string.
-        public virtual void Close() { }
+        public virtual void Close()
+        {
+        }
 
         // Returns the read state of the XmlReader.
         public abstract ReadState ReadState { get; }

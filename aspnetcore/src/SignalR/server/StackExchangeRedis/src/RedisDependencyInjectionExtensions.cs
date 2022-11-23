@@ -21,7 +21,12 @@ public static class StackExchangeRedisDependencyInjectionExtensions
         this ISignalRServerBuilder signalrBuilder
     )
     {
-        return AddStackExchangeRedis(signalrBuilder, o => { });
+        return AddStackExchangeRedis(
+            signalrBuilder,
+            o =>
+            {
+            }
+        );
     }
 
     /// <summary>

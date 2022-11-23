@@ -21,7 +21,9 @@ class T
             {
                 DoStuff();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             // This call will send us back up to label one; and we'll loop forver
             Thread.CurrentThread.Abort();
         }

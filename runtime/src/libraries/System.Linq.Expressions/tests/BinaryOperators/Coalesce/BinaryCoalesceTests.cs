@@ -78,7 +78,10 @@ namespace System.Linq.Expressions.Tests
                             {
                                 return i + 1;
                             },
-                        (Action<object>)delegate { }
+                        (Action<object>)
+                            delegate
+                            {
+                            }
                     },
                     new Delegate[]
                     {
@@ -93,7 +96,10 @@ namespace System.Linq.Expressions.Tests
                             {
                                 return i + 1;
                             },
-                        (Action<object>)delegate { }
+                        (Action<object>)
+                            delegate
+                            {
+                            }
                     },
                     useInterpreter
                 };
@@ -919,7 +925,9 @@ namespace System.Linq.Expressions.Tests
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

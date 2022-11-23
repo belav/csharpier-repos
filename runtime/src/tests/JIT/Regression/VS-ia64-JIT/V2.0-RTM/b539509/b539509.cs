@@ -78,10 +78,16 @@ public class AA<TA, TB, TC, TD, TE, TF>
                                 }
                             }
                             local1 -= 88u;
-                            while (((bool)(((object)(local2))))) { }
+                            while (((bool)(((object)(local2)))))
+                            {
+                            }
                             if (Convert.ToBoolean(((int)(local2))))
-                                do { } while (App.m_bFwd2);
-                            else { }
+                                do
+                                {
+                                } while (App.m_bFwd2);
+                            else
+                            {
+                            }
                         } while ((null != new AA<TA, TB, TC, TD, TE, TF>()));
                         local4 = (
                             local4 = (
@@ -93,28 +99,42 @@ public class AA<TA, TB, TC, TD, TE, TF>
                                 }
                             )
                         );
-                        do { } while (Convert.ToBoolean(local2));
+                        do
+                        {
+                        } while (Convert.ToBoolean(local2));
                         for (
                             App.m_byFwd1 = ((byte)(local1));
                             ((bool)(((object)(local1))));
                             local2 -= (local2 + local2)
-                        ) { }
-                        while (Convert.ToBoolean(((short)(local1)))) { }
+                        )
+                        {
+                        }
+                        while (Convert.ToBoolean(((short)(local1))))
+                        {
+                        }
                     }
-                    if (((bool)(((object)(new BB()))))) { }
+                    if (((bool)(((object)(new BB())))))
+                    {
+                    }
                     else
                         for (
                             App.m_iFwd3 -= 33;
                             ((bool)(((object)(local2))));
                             App.m_bFwd2 = App.m_bFwd2
-                        ) { }
+                        )
+                        {
+                        }
                 }
                 for (
                     App.m_iFwd3 /= (Convert.ToByte(33.0) ^ ((byte)(local1)));
                     App.m_bFwd2;
                     App.m_shFwd4 = ((short)(((sbyte)(local2))))
-                ) { }
-                while (App.m_bFwd2) { }
+                )
+                {
+                }
+                while (App.m_bFwd2)
+                {
+                }
                 break;
             } while (
                 ( /*2 REFS*/
@@ -126,12 +146,18 @@ public class AA<TA, TB, TC, TD, TE, TF>
                     )
                 )
             );
-            for (App.m_iFwd3 = 60; ((bool)(((object)(new BB())))); local2 = local2) { }
+            for (App.m_iFwd3 = 60; ((bool)(((object)(new BB())))); local2 = local2)
+            {
+            }
             local3 = ((String[])(((object)(local2))));
         }
         local3[((int)(((byte)(65))))] = "47";
-        try { }
-        catch (IndexOutOfRangeException) { }
+        try
+        {
+        }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return new short[][][]
         { /*2 REFS*/
             (new short[36u][]),
@@ -203,24 +229,37 @@ public class AA<TA, TB, TC, TD, TE, TF>
                                 local7 = local7;
                                 local5 = (local5 += local5);
                             }
-                            while (((bool)(((object)(local5))))) { }
+                            while (((bool)(((object)(local5)))))
+                            {
+                            }
                             goto label1;
                         }
-                        catch (InvalidOperationException) { }
-                        do { } while (
+                        catch (InvalidOperationException)
+                        {
+                        }
+                        do
+                        {
+                        } while (
                             (new AA<TA, TB, TC, TD, TE, TF>() == new AA<TA, TB, TC, TD, TE, TF>())
                         );
                         label1:
-                        try { }
-                        catch (Exception) { }
+                        try
+                        {
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                     for (
                         App.m_fFwd6 = App.m_fFwd6;
                         ((bool)(((object)(new BB()))));
                         App.m_dblFwd7 /= 94.0
-                    ) { }
+                    )
+                    {
+                    }
                     for (App.m_shFwd4--; App.m_bFwd2; App.m_ulFwd8 = ((ulong)(((ushort)(local5)))))
-                    { }
+                    {
+                    }
                     local7 = local7;
                     local8[
                         ((int)(Convert.ToUInt64(26.0))),
@@ -232,13 +271,21 @@ public class AA<TA, TB, TC, TD, TE, TF>
                 }
                 param1 = (param1 = param1);
             }
-            finally { }
+            finally
+            {
+            }
             local8 = local8;
         } while (((bool)(((object)(local7)))));
         if ((local5 == (local5 -= local5)))
-            while ((((Array)(null)) != ((object)(local7)))) { }
-        else { }
-        for (App.m_dblFwd7++; App.m_bFwd2; App.m_chFwd9 += '\x69') { }
+            while ((((Array)(null)) != ((object)(local7))))
+            {
+            }
+        else
+        {
+        }
+        for (App.m_dblFwd7++; App.m_bFwd2; App.m_chFwd9 += '\x69')
+        {
+        }
         return ((ulong)(105));
     }
 
@@ -276,42 +323,76 @@ public class AA<TA, TB, TC, TD, TE, TF>
                                                         != new AA<TA, TB, TC, TD, TE, TF>()
                                                     );
                                                     App.m_ushFwd5 *= ((ushort)(((sbyte)(param1))))
-                                                ) { }
+                                                )
+                                                {
+                                                }
                                         }
-                                        catch (IndexOutOfRangeException) { }
-                                        do { } while (((bool)(((object)(param1)))));
+                                        catch (IndexOutOfRangeException)
+                                        {
+                                        }
+                                        do
+                                        {
+                                        } while (((bool)(((object)(param1)))));
                                     }
-                                    catch (InvalidOperationException) { }
+                                    catch (InvalidOperationException)
+                                    {
+                                    }
                                 } while (("95" == Convert.ToString(local10)));
                                 local11 -= ((double)(30));
-                                while (((bool)(((object)(local10))))) { }
+                                while (((bool)(((object)(local10)))))
+                                {
+                                }
                             }
-                            catch (NullReferenceException) { }
-                            try { }
-                            catch (InvalidOperationException) { }
+                            catch (NullReferenceException)
+                            {
+                            }
+                            try
+                            {
+                            }
+                            catch (InvalidOperationException)
+                            {
+                            }
                             param3 /= ((param3 /= param3) / param3);
                         } while ((((long)(param2)) != (55 | param3)));
                         local10 = ((char)(((object)(local10))));
                         param1 *= ((ulong)(((ushort)(54u))));
-                        try { }
-                        catch (Exception) { }
+                        try
+                        {
+                        }
+                        catch (Exception)
+                        {
+                        }
                         param4 = (param4 = param4);
                     } while ((param2 == param2));
-                    do { } while (((bool)(((object)(new AA<TA, TB, TC, TD, TE, TF>())))));
+                    do
+                    {
+                    } while (((bool)(((object)(new AA<TA, TB, TC, TD, TE, TF>())))));
                     throw new DivideByZeroException();
                 } while ((param3 == (65u / param3)));
-                do { } while ((((sbyte)(local11)) == ((sbyte)(local11))));
+                do
+                {
+                } while ((((sbyte)(local11)) == ((sbyte)(local11))));
                 local12[116, ((int)((param2 *= param2)))] = (
                     new sbyte[((uint)(param2)), (param3 += param3), 67u, 116u][]
                 );
-                try { }
-                finally { }
+                try
+                {
+                }
+                finally
+                {
+                }
             }
-            finally { }
-            for (App.m_lFwd10 = (60 * param3); ((bool)(((object)(local10)))); local11--) { }
+            finally
+            {
+            }
+            for (App.m_lFwd10 = (60 * param3); ((bool)(((object)(local10)))); local11--)
+            {
+            }
             local12 = (local12 = (local12 = local12));
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         local9 = local9;
         param1 *= (param1 >> ((ushort)(30)));
         return new char[] { (local10 = local10), local10, (local10 = local10), '\x7e' };
@@ -391,7 +472,9 @@ public class AA<TA, TB, TC, TD, TE, TF>
                             {
                                 for (local22 = local22; local23; App.m_abyFwd11 = App.m_abyFwd11)
                                 {
-                                    while (local23) { }
+                                    while (local23)
+                                    {
+                                    }
                                 }
                                 local22 = local22;
                             }
@@ -413,26 +496,45 @@ public class AA<TA, TB, TC, TD, TE, TF>
                             (new char[102u, 36u])
                         };
                     }
-                    catch (DivideByZeroException) { }
+                    catch (DivideByZeroException)
+                    {
+                    }
                     local21 = local21;
                 }
-                try { }
-                catch (Exception) { }
+                try
+                {
+                }
+                catch (Exception)
+                {
+                }
                 throw new InvalidOperationException();
             }
-            try { }
-            catch (Exception) { }
-            for (App.m_uFwd12--; local23; App.m_lFwd10 /= ((long)(((short)(28u))))) { }
+            try
+            {
+            }
+            catch (Exception)
+            {
+            }
+            for (App.m_uFwd12--; local23; App.m_lFwd10 /= ((long)(((short)(28u)))))
+            {
+            }
         }
         param5 = (new long[108u, 115u, 20u, 126u][][][][,]);
         local21[(((ushort)(local22)) << ((int)(local22)))].m_achField1[101] = (new char[21u, 43u]);
         for (App.m_shFwd4 = ((short)(76.0f)); ((bool)(((object)(local23)))); App.m_chFwd9 *= '\x67')
-        { }
+        {
+        }
         if (local23)
-            try { }
-            catch (InvalidOperationException) { }
+            try
+            {
+            }
+            catch (InvalidOperationException)
+            {
+            }
         else
-            while (local23) { }
+            while (local23)
+            {
+            }
         return 83;
     }
 }
@@ -510,9 +612,15 @@ public struct BB
                                             param6 /= param6;
                                             while ((((long)(44u)) != ((long)(param6))))
                                             {
-                                                try { }
-                                                catch (InvalidOperationException) { }
-                                                do { } while (App.m_bFwd2);
+                                                try
+                                                {
+                                                }
+                                                catch (InvalidOperationException)
+                                                {
+                                                }
+                                                do
+                                                {
+                                                } while (App.m_bFwd2);
                                                 local25 = local25;
                                                 for (
                                                     App.m_shFwd4 -= App.m_shFwd4;
@@ -521,7 +629,9 @@ public struct BB
                                                             ((byte)(9u)),
                                                             ((byte)(40u))
                                                         )
-                                                ) { }
+                                                )
+                                                {
+                                                }
                                             }
                                             local25[12] = App.m_ushFwd5;
                                             local28 = (new ushort[111u, 80u]);
@@ -529,24 +639,38 @@ public struct BB
                                                 App.m_dblFwd7 = App.m_dblFwd7;
                                                 (param6 == ((int)(101.0)));
                                                 param6 *= param6
-                                            ) { }
+                                            )
+                                            {
+                                            }
                                         }
-                                        catch (IndexOutOfRangeException) { }
+                                        catch (IndexOutOfRangeException)
+                                        {
+                                        }
                             param1 = param1;
                             param2[param6] = ((String[])(((Array)(null))));
-                            try { }
-                            catch (Exception) { }
+                            try
+                            {
+                            }
+                            catch (Exception)
+                            {
+                            }
                         }
-                        finally { }
+                        finally
+                        {
+                        }
                     }
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             } while (App.m_bFwd2);
             for (
                 App.m_xFwd14 = App.m_xFwd14;
                 ((param6 - (0.0f)) == 86.0f);
                 App.m_fFwd6 += (108u - ((float)(param6)))
-            ) { }
+            )
+            {
+            }
             if ((((object)(new AA<sbyte, byte, uint, uint, long, bool>())) == "32"))
                 param5.m_aguiGeneric1 = new AA<
                     sbyte,
@@ -557,11 +681,17 @@ public struct BB
                     bool
                 >().m_aguiGeneric1;
             else
-                do { } while (((bool)(((object)(new AA<sbyte, byte, uint, uint, long, bool>())))));
-            if (App.m_bFwd2) { }
+                do
+                {
+                } while (((bool)(((object)(new AA<sbyte, byte, uint, uint, long, bool>())))));
+            if (App.m_bFwd2)
+            {
+            }
         } while (Convert.ToBoolean(param6));
         param5.m_aguiGeneric1 = (param4 = param4).m_aguiGeneric1;
-        do { } while (Convert.ToBoolean(param6));
+        do
+        {
+        } while (Convert.ToBoolean(param6));
         ;
     }
 }

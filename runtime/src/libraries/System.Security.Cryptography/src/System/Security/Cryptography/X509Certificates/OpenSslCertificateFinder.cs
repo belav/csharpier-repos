@@ -9,7 +9,9 @@ namespace System.Security.Cryptography.X509Certificates
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly
-        ) : base(findFrom, copyTo, validOnly) { }
+        ) : base(findFrom, copyTo, validOnly)
+        {
+        }
 
         protected override byte[] GetSubjectPublicKeyInfo(X509Certificate2 cert)
         {

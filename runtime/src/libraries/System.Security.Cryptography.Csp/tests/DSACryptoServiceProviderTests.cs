@@ -440,7 +440,9 @@ namespace System.Security.Cryptography.Csp.Tests
                         dsa.PersistKeyInCsp = false;
                     }
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
         }
     }

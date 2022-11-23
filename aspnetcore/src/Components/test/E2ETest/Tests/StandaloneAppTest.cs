@@ -17,7 +17,9 @@ public class StandaloneAppTest
         BrowserFixture browserFixture,
         BlazorWasmTestAppFixture<StandaloneApp.Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     protected override void InitializeAsyncCore()
     {

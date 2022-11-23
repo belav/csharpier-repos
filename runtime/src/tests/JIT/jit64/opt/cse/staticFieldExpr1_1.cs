@@ -310,7 +310,9 @@ namespace CseTest
 #endif
 #if TRY
             }
-            finally { }
+            finally
+            {
+            }
 #endif
 #if LOOP
             } while (v == 0);

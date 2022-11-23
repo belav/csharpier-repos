@@ -34,25 +34,33 @@ namespace System.IO.Ports.Tests
                 {
                     com.Write(new byte[8], 0, 8);
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.Write(new char[8], 0, 8);
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.Write("A");
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.WriteLine("A");
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
 
@@ -75,37 +83,49 @@ namespace System.IO.Ports.Tests
                 {
                     com.Read(new byte[8], 0, 8);
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.Read(new char[8], 0, 8);
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.ReadByte();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.ReadExisting();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.ReadLine();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.ReadTo("A");
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
 
@@ -128,13 +148,17 @@ namespace System.IO.Ports.Tests
                 {
                     com.DiscardInBuffer();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
                     com.DiscardOutBuffer();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
 
@@ -157,7 +181,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.Close();
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
 
                 com.Open();
 
@@ -166,7 +192,9 @@ namespace System.IO.Ports.Tests
                     if (com.IsOpen)
                         com.Close();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -262,7 +290,9 @@ namespace System.IO.Ports.Tests
                     if (com1.IsOpen)
                         com1.Close();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
             // Give the port time to finish closing since we potentially have an unclosed BeginRead/BeginWrite
             Thread.Sleep(200);
@@ -311,7 +341,9 @@ namespace System.IO.Ports.Tests
                         if (com.IsOpen)
                             com.Close();
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
         }

@@ -17,7 +17,9 @@ namespace System.Xml.Serialization
         internal const int MaxIdentifierLength = 511;
 
         [Obsolete("This class should never get constructed as it contains only static methods.")]
-        public CodeIdentifier() { }
+        public CodeIdentifier()
+        {
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

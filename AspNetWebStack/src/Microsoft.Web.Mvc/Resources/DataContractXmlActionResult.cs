@@ -26,7 +26,9 @@ namespace Microsoft.Web.Mvc.Resources
         /// The content type of the response defaults to application/xml
         /// </summary>
         public DataContractXmlActionResult(object data)
-            : this(data, new ContentType("application/xml")) { }
+            : this(data, new ContentType("application/xml"))
+        {
+        }
 
         public DataContractXmlActionResult(object data, ContentType contentType)
         {

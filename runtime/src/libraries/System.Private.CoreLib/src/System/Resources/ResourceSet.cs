@@ -32,7 +32,9 @@ namespace System.Resources
 
         // For RuntimeResourceSet, ignore the Table parameter - it's a wasted
         // allocation.
-        internal ResourceSet(bool _) { }
+        internal ResourceSet(bool _)
+        {
+        }
 
         // Creates a ResourceSet using the system default ResourceReader
         // implementation.  Use this constructor to open & read from a file

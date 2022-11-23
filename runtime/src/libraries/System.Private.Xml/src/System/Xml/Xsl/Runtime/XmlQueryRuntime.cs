@@ -1250,10 +1250,8 @@ namespace System.Xml.Xsl.Runtime
             return true;
         }
 
-        private static void OnCurrentNodeChanged2(
-            string baseUri,
-            int lineNumber,
-            int linePosition
-        ) { }
+        private static void OnCurrentNodeChanged2(string baseUri, int lineNumber, int linePosition)
+        {
+        }
     }
 }

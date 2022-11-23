@@ -20,7 +20,9 @@ namespace DefaultNamespace
         internal static int n;
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void AllocRoot() { }
+        public static void AllocRoot()
+        {
+        }
 
         public static int Main(String[] args)
         {
@@ -86,6 +88,8 @@ namespace DefaultNamespace
             }
         }
 
-        ~RootMem() { }
+        ~RootMem()
+        {
+        }
     }
 }

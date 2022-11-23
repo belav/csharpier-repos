@@ -54,7 +54,9 @@ namespace System.Web.Razor
         /// </summary>
         /// <param name="codeLanguage">The code language to use</param>
         public RazorEngineHost(RazorCodeLanguage codeLanguage)
-            : this(codeLanguage, () => new HtmlMarkupParser()) { }
+            : this(codeLanguage, () => new HtmlMarkupParser())
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

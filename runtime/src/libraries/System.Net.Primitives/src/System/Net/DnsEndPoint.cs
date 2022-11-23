@@ -12,7 +12,9 @@ namespace System.Net
         private readonly int _port;
         private readonly AddressFamily _family;
 
-        public DnsEndPoint(string host, int port) : this(host, port, AddressFamily.Unspecified) { }
+        public DnsEndPoint(string host, int port) : this(host, port, AddressFamily.Unspecified)
+        {
+        }
 
         public DnsEndPoint(string host, int port, AddressFamily addressFamily)
         {

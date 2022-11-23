@@ -4,7 +4,9 @@ namespace SSA
 {
     class Test
     {
-        static void empty() { }
+        static void empty()
+        {
+        }
 
         static int ret_int()
         {

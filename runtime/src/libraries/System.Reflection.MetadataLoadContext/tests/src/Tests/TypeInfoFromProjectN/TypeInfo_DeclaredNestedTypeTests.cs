@@ -128,30 +128,50 @@ namespace System.Reflection.Tests
     {
         public static int iDeclaredNests = 6;
 
-        public class NestPublic { }
+        public class NestPublic
+        {
+        }
 
-        public class NestPublic2 { }
+        public class NestPublic2
+        {
+        }
 
-        private class NestPrivate { } // private, so not inherited
+        private class NestPrivate
+        {
+        } // private, so not inherited
 
-        internal class NestInternal { } // internal members are not inherited
+        internal class NestInternal
+        {
+        } // internal members are not inherited
 
-        protected class NestProtected { }
+        protected class NestProtected
+        {
+        }
 
-        private class NestAssemblyPrivate { } // same as private, so not inherited
+        private class NestAssemblyPrivate
+        {
+        } // same as private, so not inherited
     }
 
     public class TestNestDerived : TestNest
     {
         public static new int iDeclaredNests = 4;
 
-        public new class NestPublic { }
+        public new class NestPublic
+        {
+        }
 
-        public class NestPublic3 { }
+        public class NestPublic3
+        {
+        }
 
-        public class NESTPUBLIC3 { }
+        public class NESTPUBLIC3
+        {
+        }
 
-        private class NestPrivate2 { }
+        private class NestPrivate2
+        {
+        }
     }
 
     public class TestMultiNest
@@ -170,6 +190,8 @@ namespace System.Reflection.Tests
 
     public class TestNestGeneric<T>
     {
-        public class Nest1 { }
+        public class Nest1
+        {
+        }
     }
 }

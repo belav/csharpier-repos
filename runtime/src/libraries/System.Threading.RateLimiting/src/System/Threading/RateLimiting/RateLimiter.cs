@@ -96,7 +96,9 @@ namespace System.Threading.RateLimiting
         /// Dispose method for implementations to write.
         /// </summary>
         /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         /// <summary>
         /// Disposes the RateLimiter. This completes any queued acquires with a failed lease.

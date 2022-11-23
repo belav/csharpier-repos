@@ -7,7 +7,9 @@ public class TitleSponsor : Sponsor
 {
     public class TitleSponsorProxy : TitleSponsor, IF1Proxy
     {
-        public TitleSponsorProxy(ILazyLoader loader) : base(loader) { }
+        public TitleSponsorProxy(ILazyLoader loader) : base(loader)
+        {
+        }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
@@ -17,7 +19,9 @@ public class TitleSponsor : Sponsor
     private readonly ILazyLoader _loader;
     private SponsorDetails _details;
 
-    public TitleSponsor() { }
+    public TitleSponsor()
+    {
+    }
 
     private TitleSponsor(ILazyLoader loader)
     {

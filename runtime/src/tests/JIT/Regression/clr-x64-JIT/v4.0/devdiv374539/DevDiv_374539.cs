@@ -26,131 +26,215 @@ internal class Test_DevDiv_374539
         IntPtr clrDllHandle = GetModuleHandle("clr.dll");
         long clrDll = (long)clrDllHandle;
 
-        for (long i = clrDll - 0x300000000; i < clrDll + 0x300000000; i += 0x10000) { }
+        for (long i = clrDll - 0x300000000; i < clrDll + 0x300000000; i += 0x10000)
+        {
+        }
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A1() { }
+    private static void A1()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A2() { }
+    private static void A2()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A3() { }
+    private static void A3()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A4() { }
+    private static void A4()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A5() { }
+    private static void A5()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A6() { }
+    private static void A6()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A7() { }
+    private static void A7()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A8() { }
+    private static void A8()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A9() { }
+    private static void A9()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void A10() { }
+    private static void A10()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B1() { }
+    private static void B1()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B2() { }
+    private static void B2()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B3() { }
+    private static void B3()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B4() { }
+    private static void B4()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B5() { }
+    private static void B5()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B6() { }
+    private static void B6()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B7() { }
+    private static void B7()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B8() { }
+    private static void B8()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B9() { }
+    private static void B9()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void B10() { }
+    private static void B10()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C1() { }
+    private static void C1()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C2() { }
+    private static void C2()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C3() { }
+    private static void C3()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C4() { }
+    private static void C4()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C5() { }
+    private static void C5()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C6() { }
+    private static void C6()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C7() { }
+    private static void C7()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C8() { }
+    private static void C8()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C9() { }
+    private static void C9()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void C10() { }
+    private static void C10()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D1() { }
+    private static void D1()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D2() { }
+    private static void D2()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D3() { }
+    private static void D3()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D4() { }
+    private static void D4()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D5() { }
+    private static void D5()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D6() { }
+    private static void D6()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D7() { }
+    private static void D7()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D8() { }
+    private static void D8()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D9() { }
+    private static void D9()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void D10() { }
+    private static void D10()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void Dummy() { }
+    private static void Dummy()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     private static void GenericRecursion<T, U>(int level)

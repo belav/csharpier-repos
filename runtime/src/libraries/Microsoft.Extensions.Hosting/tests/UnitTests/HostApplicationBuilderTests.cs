@@ -620,7 +620,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 _disposable?.Dispose();
             }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(DiagnosticListener value)
             {
@@ -638,11 +640,17 @@ namespace Microsoft.Extensions.Hosting.Tests
 
         private class ServiceC
         {
-            public ServiceC(ServiceD serviceD) { }
+            public ServiceC(ServiceD serviceD)
+            {
+            }
         }
 
-        private class ServiceD { }
+        private class ServiceD
+        {
+        }
 
-        private class ServiceA { }
+        private class ServiceA
+        {
+        }
     }
 }

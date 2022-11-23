@@ -33,7 +33,9 @@ namespace System.Web.Mvc
             FilterProviders.Providers.GetFilters;
         private ControllerDescriptorCache _instanceDescriptorCache;
 
-        public ControllerActionInvoker() { }
+        public ControllerActionInvoker()
+        {
+        }
 
         internal ControllerActionInvoker(params object[] filters) : this()
         {

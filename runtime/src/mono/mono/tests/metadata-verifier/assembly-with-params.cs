@@ -16,5 +16,7 @@ public class SimpleArgs
 
 public class LastClass
 {
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

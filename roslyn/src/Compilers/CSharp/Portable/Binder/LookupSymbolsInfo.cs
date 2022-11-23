@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static readonly ObjectPool<LookupSymbolsInfo> s_pool =
             new ObjectPool<LookupSymbolsInfo>(() => new LookupSymbolsInfo(), poolSize);
 
-        private LookupSymbolsInfo() : base(StringComparer.Ordinal) { }
+        private LookupSymbolsInfo() : base(StringComparer.Ordinal)
+        {
+        }
 
         // To implement Poolable, you need two things:
         // 1) Expose Freeing primitive.

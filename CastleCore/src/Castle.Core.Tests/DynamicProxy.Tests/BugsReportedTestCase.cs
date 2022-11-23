@@ -151,9 +151,13 @@ namespace Castle.DynamicProxy.Tests
         TEntity GetById(TKey key);
     }
 
-    public class User { }
+    public class User
+    {
+    }
 
-    public interface IUserRepository : IRepository<User, string> { }
+    public interface IUserRepository : IRepository<User, string>
+    {
+    }
 
     public abstract class AbstractClass
     {
@@ -173,10 +177,14 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-    public interface Marker<T> { }
+    public interface Marker<T>
+    {
+    }
 
     public class WithMixin
     {
-        public virtual void Method() { }
+        public virtual void Method()
+        {
+        }
     }
 }

@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.AddImport
         where TUsingOrAliasSyntax : SyntaxNode
         where TExternSyntax : SyntaxNode
     {
-        protected AbstractAddImportsService() { }
+        protected AbstractAddImportsService()
+        {
+        }
 
         protected abstract SyntaxNode? GetAlias(TUsingOrAliasSyntax usingOrAlias);
         protected abstract ImmutableArray<SyntaxNode> GetGlobalImports(

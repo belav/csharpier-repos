@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
     {
         public static CSharpUseExplicitTypeHelper Instance = new();
 
-        private CSharpUseExplicitTypeHelper() { }
+        private CSharpUseExplicitTypeHelper()
+        {
+        }
 
         protected override bool IsStylePreferred(in State state)
         {

@@ -18,7 +18,9 @@ namespace System.Composition.Hosting.Core
         private object _sharingLock;
 
         // Construct using Run() method.
-        private CompositionOperation() { }
+        private CompositionOperation()
+        {
+        }
 
         /// <summary>
         /// Execute a new composition operation starting within the specified lifetime

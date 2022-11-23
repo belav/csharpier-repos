@@ -16,14 +16,22 @@ namespace Test
                 int[] an = new int[2];
                 while (an[-10] != 4)
                 {
-                    try { }
-                    catch (Exception) { }
+                    try
+                    {
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
             else
             {
-                try { }
-                catch (Exception) { }
+                try
+                {
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -33,7 +41,9 @@ namespace Test
             {
                 Method1();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

@@ -34,7 +34,9 @@ namespace System.ComponentModel.Composition
                 message,
                 (ICompositionElement?)null,
                 (Exception?)null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionError"/> class
@@ -53,7 +55,9 @@ namespace System.ComponentModel.Composition
         ///     <see cref="Description"/> property to an empty string ("").
         /// </param>
         public CompositionError(string? message, ICompositionElement? element)
-            : this(CompositionErrorId.Unknown, message, element, (Exception?)null) { }
+            : this(CompositionErrorId.Unknown, message, element, (Exception?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionError"/> class
@@ -71,7 +75,9 @@ namespace System.ComponentModel.Composition
         ///     the <see cref="CompositionError.Exception"/> property to <see langword="null"/>.
         /// </param>
         public CompositionError(string? message, Exception? exception)
-            : this(CompositionErrorId.Unknown, message, (ICompositionElement?)null, exception) { }
+            : this(CompositionErrorId.Unknown, message, (ICompositionElement?)null, exception)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionError"/> class
@@ -95,7 +101,9 @@ namespace System.ComponentModel.Composition
         ///     the <see cref="CompositionError.Exception"/> property to <see langword="null"/>.
         /// </param>
         public CompositionError(string? message, ICompositionElement? element, Exception? exception)
-            : this(CompositionErrorId.Unknown, message, element, exception) { }
+            : this(CompositionErrorId.Unknown, message, element, exception)
+        {
+        }
 
         internal CompositionError(
             CompositionErrorId id,

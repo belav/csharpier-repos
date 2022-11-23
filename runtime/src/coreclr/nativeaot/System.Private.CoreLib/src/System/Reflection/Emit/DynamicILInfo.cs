@@ -15,20 +15,32 @@ namespace System.Reflection.Emit
             get { return default; }
         }
 
-        public void SetCode(byte[] code, int maxStackSize) { }
+        public void SetCode(byte[] code, int maxStackSize)
+        {
+        }
 
         [CLSCompliant(false)]
-        public unsafe void SetCode(byte* code, int codeSize, int maxStackSize) { }
+        public unsafe void SetCode(byte* code, int codeSize, int maxStackSize)
+        {
+        }
 
-        public void SetExceptions(byte[] exceptions) { }
+        public void SetExceptions(byte[] exceptions)
+        {
+        }
 
         [CLSCompliant(false)]
-        public unsafe void SetExceptions(byte* exceptions, int exceptionsSize) { }
+        public unsafe void SetExceptions(byte* exceptions, int exceptionsSize)
+        {
+        }
 
-        public void SetLocalSignature(byte[] localSignature) { }
+        public void SetLocalSignature(byte[] localSignature)
+        {
+        }
 
         [CLSCompliant(false)]
-        public unsafe void SetLocalSignature(byte* localSignature, int signatureSize) { }
+        public unsafe void SetLocalSignature(byte* localSignature, int signatureSize)
+        {
+        }
 
         public int GetTokenFor(RuntimeMethodHandle method)
         {

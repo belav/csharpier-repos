@@ -912,6 +912,8 @@ namespace System.Text.Json.Serialization.Tests
         [JsonSerializable(typeof(BaseClassWithoutRequiredProperties))]
         [JsonSerializable(typeof(BaseClassWithRequiredProperties))]
         [JsonSerializable(typeof(StructWithRequiredProperties))]
-        internal partial class Context : JsonSerializerContext { }
+        internal partial class Context : JsonSerializerContext
+        {
+        }
     }
 }

@@ -264,7 +264,9 @@ namespace System.Web.Http.WebHost
 
         private class AccessibleStreamWrapper : SeekableBufferedRequestStream
         {
-            public AccessibleStreamWrapper(HttpRequestBase request) : base(request) { }
+            public AccessibleStreamWrapper(HttpRequestBase request) : base(request)
+            {
+            }
 
             public new Stream InnerStream
             {
@@ -274,9 +276,13 @@ namespace System.Web.Http.WebHost
 
         private class NonSeekableStream : MemoryStream
         {
-            public NonSeekableStream() { }
+            public NonSeekableStream()
+            {
+            }
 
-            public NonSeekableStream(byte[] bytes) : base(bytes) { }
+            public NonSeekableStream(byte[] bytes) : base(bytes)
+            {
+            }
 
             public override bool CanSeek
             {

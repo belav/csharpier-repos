@@ -16,7 +16,9 @@ namespace Roslyn.Utilities
 
         private readonly Dictionary<string, object> _eventNameToRegistries = new();
 
-        public EventMap() { }
+        public EventMap()
+        {
+        }
 
         public void AddEventHandler<TEventHandler>(string eventName, TEventHandler eventHandler)
             where TEventHandler : class

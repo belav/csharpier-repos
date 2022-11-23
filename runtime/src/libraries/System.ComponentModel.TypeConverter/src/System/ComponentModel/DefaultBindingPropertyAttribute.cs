@@ -14,7 +14,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/> class.
         /// </summary>
-        public DefaultBindingPropertyAttribute() { }
+        public DefaultBindingPropertyAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/> class.

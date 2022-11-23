@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpConvertForEachToLinqQueryProvider() { }
+        public CSharpConvertForEachToLinqQueryProvider()
+        {
+        }
 
         protected override IConverter<
             ForEachStatementSyntax,

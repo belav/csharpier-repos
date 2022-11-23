@@ -3,7 +3,9 @@ using System.Threading;
 using MonoTests.Helpers;
 
 [AttributeUsage(AttributeTargets.Field)]
-public sealed class Weak2Attribute : Attribute { }
+public sealed class Weak2Attribute : Attribute
+{
+}
 
 public class Finalizable
 {

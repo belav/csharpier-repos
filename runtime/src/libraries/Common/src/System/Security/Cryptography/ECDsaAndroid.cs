@@ -32,7 +32,9 @@ namespace System.Security.Cryptography
             /// <summary>
             ///     Create an ECDsaAndroid algorithm with a random 521 bit key pair.
             /// </summary>
-            public ECDsaAndroid() : this(521) { }
+            public ECDsaAndroid() : this(521)
+            {
+            }
 
             /// <summary>
             ///     Creates a new ECDsaAndroid object that will use a randomly generated key of the specified size.

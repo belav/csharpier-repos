@@ -64,7 +64,11 @@ public class RendererSynchronizationContextTest
         // Assert
         //
         // Use another item to 'push through' the throwing one
-        context.Send((_) => { }, null);
+        context.Send(
+            (_) => {
+            },
+            null
+        );
         Assert.NotNull(exception);
     }
 
@@ -219,7 +223,11 @@ public class RendererSynchronizationContextTest
         await task;
 
         // Use another item to 'push through' the throwing one
-        context.Send((_) => { }, null);
+        context.Send(
+            (_) => {
+            },
+            null
+        );
         Assert.NotNull(exception);
     }
 

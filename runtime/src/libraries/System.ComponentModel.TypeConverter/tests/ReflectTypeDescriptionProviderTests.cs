@@ -37,7 +37,8 @@ namespace System.ComponentModel.Tests
         {
             using ComponentExtendedProvider testComponent = new ComponentExtendedProvider();
             testComponent.Site = new TestSiteWithoutService();
-            testComponent.Disposed += (object obj, EventArgs args) => { };
+            testComponent.Disposed += (object obj, EventArgs args) => {
+            };
             PropertyDescriptorCollection propertyDescriptorCollection =
                 TypeDescriptor.GetProperties(testComponent);
             PropertyDescriptor testPropDescriptor = propertyDescriptorCollection["TestProp"];
@@ -54,7 +55,8 @@ namespace System.ComponentModel.Tests
         {
             using TestComponent testComponent = new TestComponent();
             testComponent.Site = new TestSiteWithService();
-            testComponent.Disposed += (object obj, EventArgs args) => { };
+            testComponent.Disposed += (object obj, EventArgs args) => {
+            };
             PropertyDescriptorCollection propertyDescriptorCollection =
                 TypeDescriptor.GetProperties(testComponent);
             PropertyDescriptor testPropDescriptor = propertyDescriptorCollection["TestProp"];
@@ -75,7 +77,9 @@ namespace System.ComponentModel.Tests
         [Description]
         internal class TestClass1 : TestInterface
         {
-            public void Action() { }
+            public void Action()
+            {
+            }
         }
 
         internal class TestComponent : IComponent

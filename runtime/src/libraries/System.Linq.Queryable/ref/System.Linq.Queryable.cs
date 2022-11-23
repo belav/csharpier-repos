@@ -8,17 +8,23 @@ namespace System.Linq
 {
     public abstract partial class EnumerableExecutor
     {
-        internal EnumerableExecutor() { }
+        internal EnumerableExecutor()
+        {
+        }
     }
 
     public partial class EnumerableExecutor<T> : System.Linq.EnumerableExecutor
     {
-        public EnumerableExecutor(System.Linq.Expressions.Expression expression) { }
+        public EnumerableExecutor(System.Linq.Expressions.Expression expression)
+        {
+        }
     }
 
     public abstract partial class EnumerableQuery
     {
-        internal EnumerableQuery() { }
+        internal EnumerableQuery()
+        {
+        }
     }
 
     [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -37,9 +43,13 @@ namespace System.Linq
             System.Linq.IQueryable<T>,
             System.Linq.IQueryProvider
     {
-        public EnumerableQuery(System.Collections.Generic.IEnumerable<T> enumerable) { }
+        public EnumerableQuery(System.Collections.Generic.IEnumerable<T> enumerable)
+        {
+        }
 
-        public EnumerableQuery(System.Linq.Expressions.Expression expression) { }
+        public EnumerableQuery(System.Linq.Expressions.Expression expression)
+        {
+        }
 
         System.Type System.Linq.IQueryable.ElementType
         {

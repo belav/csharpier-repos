@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteAsynchronousOperationListenerService(in ServiceConstructionArguments arguments)
-            : base(in arguments) { }
+            : base(in arguments)
+        {
+        }
 
         public ValueTask EnableAsync(
             bool enable,

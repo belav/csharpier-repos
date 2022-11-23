@@ -8,13 +8,21 @@ namespace System.IO.Hashing
 {
     public sealed partial class Crc32 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public Crc32() : base(default(int)) { }
+        public Crc32() : base(default(int))
+        {
+        }
 
-        public override void Append(System.ReadOnlySpan<byte> source) { }
+        public override void Append(System.ReadOnlySpan<byte> source)
+        {
+        }
 
-        protected override void GetCurrentHashCore(System.Span<byte> destination) { }
+        protected override void GetCurrentHashCore(System.Span<byte> destination)
+        {
+        }
 
-        protected override void GetHashAndResetCore(System.Span<byte> destination) { }
+        protected override void GetHashAndResetCore(System.Span<byte> destination)
+        {
+        }
 
         public static byte[] Hash(byte[] source)
         {
@@ -31,7 +39,9 @@ namespace System.IO.Hashing
             throw null;
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
 
         public static bool TryHash(
             System.ReadOnlySpan<byte> source,
@@ -45,13 +55,21 @@ namespace System.IO.Hashing
 
     public sealed partial class Crc64 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public Crc64() : base(default(int)) { }
+        public Crc64() : base(default(int))
+        {
+        }
 
-        public override void Append(System.ReadOnlySpan<byte> source) { }
+        public override void Append(System.ReadOnlySpan<byte> source)
+        {
+        }
 
-        protected override void GetCurrentHashCore(System.Span<byte> destination) { }
+        protected override void GetCurrentHashCore(System.Span<byte> destination)
+        {
+        }
 
-        protected override void GetHashAndResetCore(System.Span<byte> destination) { }
+        protected override void GetHashAndResetCore(System.Span<byte> destination)
+        {
+        }
 
         public static byte[] Hash(byte[] source)
         {
@@ -68,7 +86,9 @@ namespace System.IO.Hashing
             throw null;
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
 
         public static bool TryHash(
             System.ReadOnlySpan<byte> source,
@@ -82,16 +102,22 @@ namespace System.IO.Hashing
 
     public abstract partial class NonCryptographicHashAlgorithm
     {
-        protected NonCryptographicHashAlgorithm(int hashLengthInBytes) { }
+        protected NonCryptographicHashAlgorithm(int hashLengthInBytes)
+        {
+        }
 
         public int HashLengthInBytes
         {
             get { throw null; }
         }
 
-        public void Append(byte[] source) { }
+        public void Append(byte[] source)
+        {
+        }
 
-        public void Append(System.IO.Stream stream) { }
+        public void Append(System.IO.Stream stream)
+        {
+        }
 
         public abstract void Append(System.ReadOnlySpan<byte> source);
 
@@ -126,7 +152,9 @@ namespace System.IO.Hashing
             throw null;
         }
 
-        protected virtual void GetHashAndResetCore(System.Span<byte> destination) { }
+        protected virtual void GetHashAndResetCore(System.Span<byte> destination)
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -148,13 +176,21 @@ namespace System.IO.Hashing
 
     public sealed partial class XxHash32 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public XxHash32() : base(default(int)) { }
+        public XxHash32() : base(default(int))
+        {
+        }
 
-        public XxHash32(int seed) : base(default(int)) { }
+        public XxHash32(int seed) : base(default(int))
+        {
+        }
 
-        public override void Append(System.ReadOnlySpan<byte> source) { }
+        public override void Append(System.ReadOnlySpan<byte> source)
+        {
+        }
 
-        protected override void GetCurrentHashCore(System.Span<byte> destination) { }
+        protected override void GetCurrentHashCore(System.Span<byte> destination)
+        {
+        }
 
         public static byte[] Hash(byte[] source)
         {
@@ -180,7 +216,9 @@ namespace System.IO.Hashing
             throw null;
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
 
         public static bool TryHash(
             System.ReadOnlySpan<byte> source,
@@ -195,13 +233,21 @@ namespace System.IO.Hashing
 
     public sealed partial class XxHash64 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public XxHash64() : base(default(int)) { }
+        public XxHash64() : base(default(int))
+        {
+        }
 
-        public XxHash64(long seed) : base(default(int)) { }
+        public XxHash64(long seed) : base(default(int))
+        {
+        }
 
-        public override void Append(System.ReadOnlySpan<byte> source) { }
+        public override void Append(System.ReadOnlySpan<byte> source)
+        {
+        }
 
-        protected override void GetCurrentHashCore(System.Span<byte> destination) { }
+        protected override void GetCurrentHashCore(System.Span<byte> destination)
+        {
+        }
 
         public static byte[] Hash(byte[] source)
         {
@@ -227,7 +273,9 @@ namespace System.IO.Hashing
             throw null;
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
 
         public static bool TryHash(
             System.ReadOnlySpan<byte> source,

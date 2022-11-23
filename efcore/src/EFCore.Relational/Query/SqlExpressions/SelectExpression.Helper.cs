@@ -636,7 +636,9 @@ public sealed partial class SelectExpression
                 property.ClrType.UnwrapNullableType(),
                 column.PropertyMappings.First(m => m.Property == property).TypeMapping,
                 nullable || column.IsNullable
-            ) { }
+            )
+        {
+        }
 
         public ConcreteColumnExpression(
             ProjectionExpression subqueryProjection,
@@ -648,7 +650,9 @@ public sealed partial class SelectExpression
                 subqueryProjection.Type,
                 subqueryProjection.Expression.TypeMapping!,
                 IsNullableProjection(subqueryProjection)
-            ) { }
+            )
+        {
+        }
 
         private static bool IsNullableProjection(ProjectionExpression projectionExpression) =>
             projectionExpression.Expression switch

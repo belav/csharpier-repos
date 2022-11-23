@@ -487,32 +487,48 @@ namespace System.Reflection.Tests
         // Metadata for reflection
         public class ParameterInfoMetadata
         {
-            public void Foo1(BindingFlags bf = BindingFlags.DeclaredOnly) { }
+            public void Foo1(BindingFlags bf = BindingFlags.DeclaredOnly)
+            {
+            }
 
-            public void Foo2(
-                [CustomBindingFlags(Value = BindingFlags.IgnoreCase)] BindingFlags bf
-            ) { }
+            public void Foo2([CustomBindingFlags(Value = BindingFlags.IgnoreCase)] BindingFlags bf)
+            {
+            }
 
             public void Foo3(
                 [CustomBindingFlags(Value = BindingFlags.DeclaredOnly)]
                     BindingFlags bf = BindingFlags.FlattenHierarchy
-            ) { }
+            )
+            {
+            }
 
-            public void MethodWithCustomAttribute([My(2)] string str, int iValue, long lValue) { }
+            public void MethodWithCustomAttribute([My(2)] string str, int iValue, long lValue)
+            {
+            }
 
             public virtual void VirtualMethodWithCustomAttributes(
                 [My(3)] int val1,
                 [My(4)] int val2,
                 int val3
-            ) { }
+            )
+            {
+            }
 
-            public void Method1(string str, int iValue, long lValue) { }
+            public void Method1(string str, int iValue, long lValue)
+            {
+            }
 
-            public void Method2() { }
+            public void Method2()
+            {
+            }
 
-            public void MethodWithArray(string[] strArray) { }
+            public void MethodWithArray(string[] strArray)
+            {
+            }
 
-            public virtual void VirtualMethod(long data) { }
+            public virtual void VirtualMethod(long data)
+            {
+            }
 
             public void MethodWithRefParameter(ref string str)
             {
@@ -544,15 +560,25 @@ namespace System.Reflection.Tests
                 return 1;
             }
 
-            public void MethodWithDefaultDateTime(DateTime arg = default(DateTime)) { }
+            public void MethodWithDefaultDateTime(DateTime arg = default(DateTime))
+            {
+            }
 
-            public void MethodWithDefaultNullableDateTime(DateTime? arg = default(DateTime?)) { }
+            public void MethodWithDefaultNullableDateTime(DateTime? arg = default(DateTime?))
+            {
+            }
 
-            public void MethodWithByRefLikeArgWithDefault(MyByRefLikeStruct arg = default) { }
+            public void MethodWithByRefLikeArgWithDefault(MyByRefLikeStruct arg = default)
+            {
+            }
 
-            public void MethodWithEnum(AttributeTargets arg = AttributeTargets.All) { }
+            public void MethodWithEnum(AttributeTargets arg = AttributeTargets.All)
+            {
+            }
 
-            public void MethodWithNullableEnum(AttributeTargets? arg = AttributeTargets.All) { }
+            public void MethodWithNullableEnum(AttributeTargets? arg = AttributeTargets.All)
+            {
+            }
 
             public int MethodWithOptionalAndNoDefault([Optional] object o)
             {
@@ -573,12 +599,16 @@ namespace System.Reflection.Tests
                 [My(30)] int val1,
                 int val2,
                 [My(50)] int val3
-            ) { }
+            )
+            {
+            }
         }
 
         public class GenericClass<T>
         {
-            public void GenericMethod(T t) { }
+            public void GenericMethod(T t)
+            {
+            }
 
             public string GenericMethodWithDefault(int i, T t = default(T))
             {
@@ -613,9 +643,13 @@ namespace System.Reflection.Tests
 
         private sealed class PretendParent
         {
-            public PretendParent(int a, int b) { }
+            public PretendParent(int a, int b)
+            {
+            }
 
-            public void PretendMethod(int x, int y) { }
+            public void PretendMethod(int x, int y)
+            {
+            }
 
             public int this[int index1, int index2]
             {

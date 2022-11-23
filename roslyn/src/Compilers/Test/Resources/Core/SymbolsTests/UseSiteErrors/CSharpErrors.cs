@@ -7,23 +7,41 @@
 
 namespace CSharpErrors
 {
-    public class Subclass1 : UnavailableClass { }
+    public class Subclass1 : UnavailableClass
+    {
+    }
 
-    public class Subclass2<T> : UnavailableClass<T> { }
+    public class Subclass2<T> : UnavailableClass<T>
+    {
+    }
 
-    public class Subclass3 : UnavailableClass<int> { }
+    public class Subclass3 : UnavailableClass<int>
+    {
+    }
 
-    public class ImplementingClass1 : UnavailableInterface { }
+    public class ImplementingClass1 : UnavailableInterface
+    {
+    }
 
-    public class ImplementingClass2<T> : UnavailableInterface<T> { }
+    public class ImplementingClass2<T> : UnavailableInterface<T>
+    {
+    }
 
-    public class ImplementingClass3 : UnavailableInterface<int> { }
+    public class ImplementingClass3 : UnavailableInterface<int>
+    {
+    }
 
-    public struct ImplementingStruct1 : UnavailableInterface { }
+    public struct ImplementingStruct1 : UnavailableInterface
+    {
+    }
 
-    public struct ImplementingStruct2<T> : UnavailableInterface<T> { }
+    public struct ImplementingStruct2<T> : UnavailableInterface<T>
+    {
+    }
 
-    public struct ImplementingStruct3 : UnavailableInterface<int> { }
+    public struct ImplementingStruct3 : UnavailableInterface<int>
+    {
+    }
 
     public delegate UnavailableClass DelegateReturnType1();
     public delegate UnavailableClass DelegateReturnType2();
@@ -43,9 +61,13 @@ namespace CSharpErrors
             return null;
         }
 
-        public virtual void ParameterType1(UnavailableClass u) { }
+        public virtual void ParameterType1(UnavailableClass u)
+        {
+        }
 
-        public virtual void ParameterType2(UnavailableClass[] u) { }
+        public virtual void ParameterType2(UnavailableClass[] u)
+        {
+        }
     }
 
     public interface InterfaceMethods
@@ -71,11 +93,15 @@ namespace CSharpErrors
         }
         public virtual UnavailableClass Set1
         {
-            set { }
+            set
+            {
+            }
         }
         public virtual UnavailableClass[] Set2
         {
-            set { }
+            set
+            {
+            }
         }
     }
 

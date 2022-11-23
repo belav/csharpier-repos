@@ -27,7 +27,9 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public TypeMappingConfigurationBuilder(PropertyConfiguration scalar) : base(scalar) { }
+    public TypeMappingConfigurationBuilder(PropertyConfiguration scalar) : base(scalar)
+    {
+    }
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in

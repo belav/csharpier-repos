@@ -393,7 +393,9 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 1)]
-        public struct OpaqueStruct { }
+        public struct OpaqueStruct
+        {
+        }
 
         public struct NonBlittableWithOpaque
         {

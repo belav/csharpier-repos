@@ -16,7 +16,9 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsOneOf : SrgsElement, IOneOf
     {
         #region Constructors
-        public SrgsOneOf() { }
+        public SrgsOneOf()
+        {
+        }
 
         public SrgsOneOf(params string[] items) : this()
         {

@@ -44,7 +44,9 @@ window.mvcClientValidationMetadata.push({0});
         private FormContext _defaultFormContext = new FormContext();
 
         // parameterless constructor used for mocking
-        public ViewContext() { }
+        public ViewContext()
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

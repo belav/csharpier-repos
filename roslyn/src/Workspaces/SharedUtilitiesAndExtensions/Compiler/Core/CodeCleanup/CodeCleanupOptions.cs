@@ -58,7 +58,9 @@ internal interface CodeCleanupOptionsProvider
     SyntaxFormattingOptionsProvider,
         SimplifierOptionsProvider,
         AddImportPlacementOptionsProvider,
-        DocumentFormattingOptionsProvider { }
+        DocumentFormattingOptionsProvider
+{
+}
 
 #if !CODE_STYLE
 internal abstract class AbstractCodeCleanupOptionsProvider : CodeCleanupOptionsProvider

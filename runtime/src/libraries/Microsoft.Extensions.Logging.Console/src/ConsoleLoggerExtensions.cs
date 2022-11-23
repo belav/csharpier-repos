@@ -234,7 +234,9 @@ namespace Microsoft.Extensions.Logging
         [RequiresUnreferencedCode(ConsoleLoggerExtensions.TrimmingRequiresUnreferencedCodeMessage)]
         public ConsoleLoggerFormatterConfigureOptions(
             ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration
-        ) : base(providerConfiguration.Configuration.GetSection("FormatterOptions")) { }
+        ) : base(providerConfiguration.Configuration.GetSection("FormatterOptions"))
+        {
+        }
     }
 
     [UnsupportedOSPlatform("browser")]
@@ -245,6 +247,8 @@ namespace Microsoft.Extensions.Logging
     {
         public ConsoleLoggerFormatterOptionsChangeTokenSource(
             ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration
-        ) : base(providerConfiguration.Configuration.GetSection("FormatterOptions")) { }
+        ) : base(providerConfiguration.Configuration.GetSection("FormatterOptions"))
+        {
+        }
     }
 }

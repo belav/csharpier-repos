@@ -20,7 +20,9 @@ namespace System.Security
     public sealed class SecurityCriticalAttribute : Attribute
     {
 #pragma warning disable 618    // We still use SecurityCriticalScope for v2 compat
-        public SecurityCriticalAttribute() { }
+        public SecurityCriticalAttribute()
+        {
+        }
 
         public SecurityCriticalAttribute(SecurityCriticalScope scope)
         {

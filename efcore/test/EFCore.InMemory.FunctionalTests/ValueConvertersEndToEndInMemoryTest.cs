@@ -9,7 +9,9 @@ public class ValueConvertersEndToEndInMemoryTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndInMemoryTest.ValueConvertersEndToEndInMemoryFixture>
 {
     public ValueConvertersEndToEndInMemoryTest(ValueConvertersEndToEndInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class ValueConvertersEndToEndInMemoryFixture : ValueConvertersEndToEndFixtureBase
     {

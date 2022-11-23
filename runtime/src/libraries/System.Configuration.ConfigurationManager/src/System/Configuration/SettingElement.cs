@@ -28,7 +28,9 @@ namespace System.Configuration
         private static readonly ConfigurationPropertyCollection s_properties =
             new ConfigurationPropertyCollection() { s_propName, s_propSerializeAs, s_propValue };
 
-        public SettingElement() { }
+        public SettingElement()
+        {
+        }
 
         public SettingElement(string name, SettingsSerializeAs serializeAs) : this()
         {

@@ -67,6 +67,8 @@ namespace System.Net
             _callback.Invoke(this);
         }
 
-        internal void InternalWaitForCompletion() { }
+        internal void InternalWaitForCompletion()
+        {
+        }
     }
 }

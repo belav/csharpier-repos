@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseCompoundCoalesceAssignmentCodeFixProvider() { }
+        public CSharpUseCompoundCoalesceAssignmentCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId);

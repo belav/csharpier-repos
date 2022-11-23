@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     public class BasicEncapsulateField : AbstractEditorTest
     {
         public BasicEncapsulateField(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicEncapsulateField)) { }
+            : base(instanceFactory, nameof(BasicEncapsulateField))
+        {
+        }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

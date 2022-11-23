@@ -18,7 +18,9 @@ namespace Microsoft.Interop
             Token(SyntaxKind.UShortKeyword)
         );
 
-        public Utf16CharMarshaller() { }
+        public Utf16CharMarshaller()
+        {
+        }
 
         public bool IsSupported(TargetFramework target, Version version) => true;
 

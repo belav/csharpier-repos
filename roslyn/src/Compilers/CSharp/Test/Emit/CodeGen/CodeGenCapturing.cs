@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             // from `this` to most nested scope)
             public readonly List<IList<string>> VariablesByScope = new List<IList<string>>();
 
-            private CaptureContext() { }
+            private CaptureContext()
+            {
+            }
 
             public CaptureContext(int MaxVariables)
             {
@@ -294,7 +296,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 CaptureContext = new CaptureContext(MaxCaptures);
             }
 
-            private MethodInfo() { }
+            private MethodInfo()
+            {
+            }
 
             public List<IList<string>> LocalFuncs { get; private set; }
 

@@ -27,7 +27,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpCodeActions(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpCodeActions)) { }
+            : base(instanceFactory, nameof(CSharpCodeActions))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public void GenerateMethodInClosedFile()

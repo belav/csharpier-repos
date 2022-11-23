@@ -26,13 +26,17 @@ public class UShortTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public UShortTypeMapping(string storeType, DbType? dbType = System.Data.DbType.UInt16)
-        : base(storeType, typeof(ushort), dbType) { }
+        : base(storeType, typeof(ushort), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="UShortTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected UShortTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected UShortTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

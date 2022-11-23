@@ -16,7 +16,9 @@ public class LG3Controller : Controller
         _linkGenerator = linkGenerator;
     }
 
-    public void SomeAction() { }
+    public void SomeAction()
+    {
+    }
 
     public string LinkInsideOfArea()
     {

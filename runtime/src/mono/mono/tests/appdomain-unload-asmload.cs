@@ -49,10 +49,9 @@ namespace AppDomainUnloadAsmLoad
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
         }
 
-        private static void CurrentDomain_AssemblyLoad(
-            object sender,
-            AssemblyLoadEventArgs args
-        ) { }
+        private static void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
+        {
+        }
 
         internal void Test()
         {

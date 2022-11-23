@@ -12,7 +12,9 @@ namespace Algorithms
     internal class ScalarDoubleRenderer : FractalRenderer
     {
         public ScalarDoubleRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc) { }
+            : base(dp, abortFunc)
+        {
+        }
 
         protected const double limit = 4.0;
 

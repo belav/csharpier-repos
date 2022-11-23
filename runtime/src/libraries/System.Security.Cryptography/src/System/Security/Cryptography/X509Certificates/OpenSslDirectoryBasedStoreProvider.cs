@@ -71,7 +71,9 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void CloneTo(X509Certificate2Collection collection)
         {
@@ -196,7 +198,8 @@ namespace System.Security.Cryptography.X509Certificates
                         File.SetUnixFileMode(existingFilename, UserReadWrite);
                     }
                     catch (IOException) // Ignore errors. We verify permissions when we've opened the file.
-                    { }
+                    {
+                    }
                 }
                 else if (findOpenSlot)
                 {

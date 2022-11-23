@@ -33,7 +33,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             TelemetrySessionInitialized();
         }
 
-        protected virtual void TelemetrySessionInitialized() { }
+        protected virtual void TelemetrySessionInitialized()
+        {
+        }
 
         public bool HasActiveSession => CurrentSession != null && CurrentSession.IsOptedIn;
 

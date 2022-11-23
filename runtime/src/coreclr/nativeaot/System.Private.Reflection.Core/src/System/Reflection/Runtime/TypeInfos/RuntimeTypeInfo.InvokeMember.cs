@@ -443,7 +443,9 @@ namespace System.Reflection.Runtime.TypeInfos
                         out state
                     );
                 }
-                catch (MissingMethodException) { }
+                catch (MissingMethodException)
+                {
+                }
 
                 if (invokeMethod == null)
                     throw new MissingMethodException(FullName, name);

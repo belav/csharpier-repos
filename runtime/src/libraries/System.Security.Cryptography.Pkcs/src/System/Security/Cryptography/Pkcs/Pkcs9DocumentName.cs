@@ -14,7 +14,9 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9DocumentName() : base(Oids.DocumentNameOid.CopyOid()) { }
+        public Pkcs9DocumentName() : base(Oids.DocumentNameOid.CopyOid())
+        {
+        }
 
         public Pkcs9DocumentName(string documentName)
             : base(Oids.DocumentNameOid.CopyOid(), Encode(documentName))
@@ -23,10 +25,14 @@ namespace System.Security.Cryptography.Pkcs
         }
 
         public Pkcs9DocumentName(byte[] encodedDocumentName)
-            : base(Oids.DocumentNameOid.CopyOid(), encodedDocumentName) { }
+            : base(Oids.DocumentNameOid.CopyOid(), encodedDocumentName)
+        {
+        }
 
         internal Pkcs9DocumentName(ReadOnlySpan<byte> encodedDocumentName)
-            : base(Oids.DocumentNameOid.CopyOid(), encodedDocumentName) { }
+            : base(Oids.DocumentNameOid.CopyOid(), encodedDocumentName)
+        {
+        }
 
         //
         // Public methods.

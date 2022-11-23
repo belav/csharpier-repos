@@ -36,7 +36,9 @@ namespace System.Globalization
         private bool _allowUnassigned;
         private bool _useStd3AsciiRules;
 
-        public IdnMapping() { }
+        public IdnMapping()
+        {
+        }
 
         public bool AllowUnassigned
         {

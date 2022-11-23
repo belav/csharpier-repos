@@ -10,7 +10,9 @@ public sealed class ConditionalTheoryTestCase : XunitTheoryTestCase
     [Obsolete(
         "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes"
     )]
-    public ConditionalTheoryTestCase() { }
+    public ConditionalTheoryTestCase()
+    {
+    }
 
     public ConditionalTheoryTestCase(
         IMessageSink diagnosticMessageSink,
@@ -18,7 +20,8 @@ public sealed class ConditionalTheoryTestCase : XunitTheoryTestCase
         TestMethodDisplayOptions defaultMethodDisplayOptions,
         ITestMethod testMethod
     ) : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod)
-    { }
+    {
+    }
 
     public override async Task<RunSummary> RunAsync(
         IMessageSink diagnosticMessageSink,

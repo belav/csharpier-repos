@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInlineParameterNameHintsService() { }
+        public CSharpInlineParameterNameHintsService()
+        {
+        }
 
         protected override void AddAllParameterNameHintLocations(
             SemanticModel semanticModel,

@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         private const string FileName = "Program.cs";
 
         public CSharpSendToInteractive(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

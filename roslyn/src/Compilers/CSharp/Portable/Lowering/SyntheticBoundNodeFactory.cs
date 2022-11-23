@@ -182,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
         ) : this(topLevelMethod, topLevelMethod.ContainingType, node, compilationState, diagnostics)
-        { }
+        {
+        }
 
         /// <param name="topLevelMethodOpt">The top-level method that will contain the code</param>
         /// <param name="currentClassOpt">The enclosing class</param>

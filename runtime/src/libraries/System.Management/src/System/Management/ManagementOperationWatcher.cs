@@ -179,7 +179,9 @@ namespace System.Management
                         copiedSinkTable.Add(entry.Key, entry.Value);
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             // Now step through the copy and cancel everything
@@ -197,10 +199,14 @@ namespace System.Management
                     {
                         eventSink.Cancel();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal WmiEventSink GetNewSink(ManagementScope scope, object context)
@@ -240,7 +246,9 @@ namespace System.Management
                     if (Progress != null)
                         result = ((Progress.GetInvocationList()).Length > 0);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return result;
             }
@@ -318,7 +326,9 @@ namespace System.Management
                 // Release the stub as we are now disconnected
                 eventSink.ReleaseStub();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -331,7 +341,9 @@ namespace System.Management
             {
                 delegateInvoker.FireEventToDelegates(ObjectReady, args);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void FireCompleted(CompletedEventArgs args)
@@ -340,7 +352,9 @@ namespace System.Management
             {
                 delegateInvoker.FireEventToDelegates(Completed, args);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void FireProgress(ProgressEventArgs args)
@@ -349,7 +363,9 @@ namespace System.Management
             {
                 delegateInvoker.FireEventToDelegates(Progress, args);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void FireObjectPut(ObjectPutEventArgs args)
@@ -358,7 +374,9 @@ namespace System.Management
             {
                 delegateInvoker.FireEventToDelegates(ObjectPut, args);
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -428,11 +446,15 @@ namespace System.Management
                         {
                             d.DynamicInvoke(new object[] { this.sender, args });
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 }

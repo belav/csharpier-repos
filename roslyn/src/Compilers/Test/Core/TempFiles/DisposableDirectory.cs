@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public sealed class DisposableDirectory : TempDirectory, IDisposable
     {
-        public DisposableDirectory(TempRoot root) : base(root) { }
+        public DisposableDirectory(TempRoot root) : base(root)
+        {
+        }
 
         public void Dispose()
         {
@@ -21,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 {
                     Directory.Delete(Path, recursive: true);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
     }

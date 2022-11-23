@@ -36,6 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public XamlOptions() { }
+        public XamlOptions()
+        {
+        }
     }
 }

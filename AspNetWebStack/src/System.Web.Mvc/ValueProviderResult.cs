@@ -16,7 +16,9 @@ namespace System.Web.Mvc
         private CultureInfo _instanceCulture;
 
         // default constructor so that subclassed types can set the properties themselves
-        protected ValueProviderResult() { }
+        protected ValueProviderResult()
+        {
+        }
 
         public ValueProviderResult(object rawValue, string attemptedValue, CultureInfo culture)
         {
@@ -84,7 +86,9 @@ namespace System.Web.Mvc
                     {
                         return convertible.ToType(destinationType, culture);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
 

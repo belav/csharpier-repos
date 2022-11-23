@@ -52,7 +52,9 @@ internal partial class OutputCacheFilter : IActionFilter
         }
     }
 
-    public void OnActionExecuted(ActionExecutedContext context) { }
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+    }
 
     private static partial class Log
     {

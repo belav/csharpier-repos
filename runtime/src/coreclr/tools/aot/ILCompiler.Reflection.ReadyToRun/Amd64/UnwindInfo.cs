@@ -56,7 +56,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
 
         public bool IsOpInfo { get; set; }
 
-        public UnwindCode() { }
+        public UnwindCode()
+        {
+        }
 
         /// <summary>
         /// Unwinde code parsing is based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/jit/unwindamd64.cpp">src\jit\unwindamd64.cpp</a> DumpUnwindInfo
@@ -182,7 +184,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         public List<UnwindCode> UnwindCodes { get; set; }
         public uint PersonalityRoutineRVA { get; set; }
 
-        public UnwindInfo() { }
+        public UnwindInfo()
+        {
+        }
 
         /// <summary>
         /// based on <a href="https://github.com/dotnet/coreclr/blob/master/src/zap/zapcode.cpp">ZapUnwindData::Save</a>

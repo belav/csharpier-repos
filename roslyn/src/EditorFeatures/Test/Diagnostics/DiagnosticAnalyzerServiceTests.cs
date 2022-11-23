@@ -1075,7 +1075,9 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 bool registerFromInitialize,
                 TextSpan diagnosticSpan,
                 string id
-            ) : base(registerFromInitialize, diagnosticSpan, id) { }
+            ) : base(registerFromInitialize, diagnosticSpan, id)
+            {
+            }
         }
 
         [Theory, CombinatorialData]
@@ -1524,7 +1526,9 @@ class A
                 throw ExceptionUtilities.Unreachable();
             }
             catch (OperationCanceledException ex)
-                when (ex.CancellationToken == analyzer.CancellationToken) { }
+                when (ex.CancellationToken == analyzer.CancellationToken)
+            {
+            }
 
             Assert.Single(analyzer.CanceledCompilations);
             Assert.Null(diagnostic);
@@ -1674,7 +1678,9 @@ class A
                 throw ExceptionUtilities.Unreachable();
             }
             catch (OperationCanceledException ex)
-                when (ex.CancellationToken == analyzer.CancellationToken) { }
+                when (ex.CancellationToken == analyzer.CancellationToken)
+            {
+            }
 
             Assert.Single(analyzer.CanceledCompilations);
 
@@ -2198,27 +2204,37 @@ class A
 
         private class Priority20Analyzer : PriorityTestDocumentDiagnosticAnalyzer
         {
-            public Priority20Analyzer() : base(priority: 20) { }
+            public Priority20Analyzer() : base(priority: 20)
+            {
+            }
         }
 
         private class Priority15Analyzer : PriorityTestProjectDiagnosticAnalyzer
         {
-            public Priority15Analyzer() : base(priority: 15) { }
+            public Priority15Analyzer() : base(priority: 15)
+            {
+            }
         }
 
         private class Priority10Analyzer : PriorityTestDocumentDiagnosticAnalyzer
         {
-            public Priority10Analyzer() : base(priority: 10) { }
+            public Priority10Analyzer() : base(priority: 10)
+            {
+            }
         }
 
         private class Priority1Analyzer : PriorityTestProjectDiagnosticAnalyzer
         {
-            public Priority1Analyzer() : base(priority: 1) { }
+            public Priority1Analyzer() : base(priority: 1)
+            {
+            }
         }
 
         private class Priority0Analyzer : PriorityTestDocumentDiagnosticAnalyzer
         {
-            public Priority0Analyzer() : base(priority: -1) { }
+            public Priority0Analyzer() : base(priority: -1)
+            {
+            }
         }
 
         private class PriorityTestDocumentDiagnosticAnalyzer : DocumentDiagnosticAnalyzer

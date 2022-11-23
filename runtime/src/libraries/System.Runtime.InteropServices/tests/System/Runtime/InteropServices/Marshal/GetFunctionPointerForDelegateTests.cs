@@ -120,6 +120,8 @@ namespace System.Runtime.InteropServices.Tests
         public delegate void GenericDelegate<T>(T t);
         public delegate void NonGenericDelegate(string t);
 
-        private static void Method(string s) { }
+        private static void Method(string s)
+        {
+        }
     }
 }

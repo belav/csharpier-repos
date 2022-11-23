@@ -14,7 +14,9 @@ namespace System.Threading
         private readonly Action<AsyncLocalValueChangedArgs<T>>? _valueChangedHandler;
 
         /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that does not receive change notifications.</summary>
-        public AsyncLocal() { }
+        public AsyncLocal()
+        {
+        }
 
         /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that receives change notifications.</summary>
         /// <param name="valueChangedHandler">The delegate that is called whenever the current value changes on any thread.</param>
@@ -580,7 +582,9 @@ namespace System.Threading
             : Dictionary<IAsyncLocal, object?>,
                 IAsyncLocalValueMap
         {
-            public ManyElementAsyncLocalValueMap(int capacity) : base(capacity) { }
+            public ManyElementAsyncLocalValueMap(int capacity) : base(capacity)
+            {
+            }
 
             public IAsyncLocalValueMap Set(
                 IAsyncLocal key,

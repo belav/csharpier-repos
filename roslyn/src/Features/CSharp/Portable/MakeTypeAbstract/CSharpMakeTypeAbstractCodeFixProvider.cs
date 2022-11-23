@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeTypeAbstract
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpMakeTypeAbstractCodeFixProvider() { }
+        public CSharpMakeTypeAbstractCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(

@@ -614,7 +614,9 @@ namespace System.Security.Cryptography
                     Oid oid = Oid.FromFriendlyName(name, OidGroup.All);
                     oidName = oid.Value;
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             return oidName;

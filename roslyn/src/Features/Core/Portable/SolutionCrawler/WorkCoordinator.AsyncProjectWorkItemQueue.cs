@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 public AsyncProjectWorkItemQueue(
                     SolutionCrawlerProgressReporter progressReporter,
                     Workspace workspace
-                ) : base(progressReporter, workspace) { }
+                ) : base(progressReporter, workspace)
+                {
+                }
 
                 protected override int WorkItemCount_NoLock => _projectWorkQueue.Count;
 

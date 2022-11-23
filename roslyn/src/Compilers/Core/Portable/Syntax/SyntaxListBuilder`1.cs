@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.Syntax
     {
         private readonly SyntaxListBuilder? _builder;
 
-        public SyntaxListBuilder(int size) : this(new SyntaxListBuilder(size)) { }
+        public SyntaxListBuilder(int size) : this(new SyntaxListBuilder(size))
+        {
+        }
 
         public static SyntaxListBuilder<TNode> Create()
         {

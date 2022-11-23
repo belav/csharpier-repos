@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ImplementAbstractClassTests_ThroughMemberTests(ITestOutputHelper logger)
-            : base(logger) { }
+            : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

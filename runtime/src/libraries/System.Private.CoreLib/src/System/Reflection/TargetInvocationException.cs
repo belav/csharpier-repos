@@ -23,6 +23,8 @@ namespace System.Reflection
         }
 
         private TargetInvocationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

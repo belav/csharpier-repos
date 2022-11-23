@@ -12,7 +12,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 "ProfileDataSectionNode_Begin",
                 "ProfileDataSectionNode_End",
                 new EmbeddedObjectNodeComparer(new CompilerComparer())
-            ) { }
+            )
+        {
+        }
 
         public override int ClassCode => 576050264;
 

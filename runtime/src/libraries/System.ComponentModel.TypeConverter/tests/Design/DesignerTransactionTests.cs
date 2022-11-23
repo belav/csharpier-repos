@@ -108,18 +108,28 @@ namespace System.ComponentModel.Design.Tests
 
         private class NonDisposingDesignerTransaction : DesignerTransaction
         {
-            protected override void Dispose(bool disposing) { }
+            protected override void Dispose(bool disposing)
+            {
+            }
 
-            protected override void OnCancel() { }
+            protected override void OnCancel()
+            {
+            }
 
-            protected override void OnCommit() { }
+            protected override void OnCommit()
+            {
+            }
         }
 
         private class TestDesignerTransaction : DesignerTransaction
         {
-            public TestDesignerTransaction() : base() { }
+            public TestDesignerTransaction() : base()
+            {
+            }
 
-            public TestDesignerTransaction(string description) : base(description) { }
+            public TestDesignerTransaction(string description) : base(description)
+            {
+            }
 
             public int CancelCount { get; set; }
 

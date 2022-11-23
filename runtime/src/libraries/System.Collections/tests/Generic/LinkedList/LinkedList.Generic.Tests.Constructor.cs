@@ -285,7 +285,9 @@ namespace System.Collections.Tests
                 {
                     T tempCurrent = enumerator.Current;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
 
             // There is a sequential order to the collection, so we're testing for that.
@@ -331,7 +333,9 @@ namespace System.Collections.Tests
                 {
                     T tempCurrent = enumerator.Current;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
 
             enumerator.Dispose();
@@ -353,7 +357,9 @@ namespace System.Collections.Tests
                 {
                     object tempCurrent = enumerator.Current;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
 
             // There is no sequential order to the collection, so we're testing that all the items
@@ -427,7 +433,9 @@ namespace System.Collections.Tests
                 {
                     object tempCurrent = enumerator.Current;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
     }

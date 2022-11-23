@@ -79,7 +79,9 @@ namespace System.ComponentModel
 
         private static readonly object s_internalSyncObject = new object();
 
-        private TypeDescriptor() { }
+        private TypeDescriptor()
+        {
+        }
 
         /// <summary>
         /// This property returns a Type object that can be passed to the various
@@ -3173,7 +3175,9 @@ namespace System.ComponentModel
         }
 
         [TypeDescriptionProvider(typeof(ComNativeDescriptorProxy))]
-        private sealed class TypeDescriptorComObject { }
+        private sealed class TypeDescriptorComObject
+        {
+        }
 
         // This class is being used to aid in diagnosability. The alternative to having this proxy would be
         // to set the fully qualified type name in the TypeDescriptionProvider attribute. The issue with the
@@ -4435,6 +4439,8 @@ namespace System.ComponentModel
         /// This is a simple internal type that allows external parties to
         /// register a custom type description provider for all interface types.
         /// </summary>
-        private sealed class TypeDescriptorInterface { }
+        private sealed class TypeDescriptorInterface
+        {
+        }
     }
 }

@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         {
             public static readonly SuppressionFixAllProvider Instance = new();
 
-            private SuppressionFixAllProvider() { }
+            private SuppressionFixAllProvider()
+            {
+            }
 
             public override IEnumerable<FixAllScope> GetSupportedFixAllScopes() =>
                 ImmutableArray.Create(

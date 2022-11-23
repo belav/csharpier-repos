@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestGenerateTypeOptionsService() { }
+        public TestGenerateTypeOptionsService()
+        {
+        }
 
         // Actual input
         public string ClassName { get; private set; }

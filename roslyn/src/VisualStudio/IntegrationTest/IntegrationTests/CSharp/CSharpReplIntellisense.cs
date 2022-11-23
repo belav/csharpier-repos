@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpReplIntellisense : AbstractInteractiveWindowTest
     {
         public CSharpReplIntellisense(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         [WpfFact]
         public void VerifyCompletionListOnEmptyTextAtTopLevel()

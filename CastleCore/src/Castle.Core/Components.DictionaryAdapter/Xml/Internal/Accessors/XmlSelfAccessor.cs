@@ -24,7 +24,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             context
         ) => new XmlSelfAccessor(type, context);
 
-        public XmlSelfAccessor(Type clrType, IXmlContext context) : base(clrType, context) { }
+        public XmlSelfAccessor(Type clrType, IXmlContext context) : base(clrType, context)
+        {
+        }
 
         public override void ConfigureNillable(bool nillable)
         {

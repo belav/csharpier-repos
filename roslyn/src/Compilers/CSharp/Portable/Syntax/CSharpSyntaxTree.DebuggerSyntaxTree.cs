@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     directives: Syntax.InternalSyntax.DirectiveStack.Empty,
                     diagnosticOptions: null,
                     cloneRoot: true
-                ) { }
+                )
+            {
+            }
 
             internal override bool SupportsLocations
             {

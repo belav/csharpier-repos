@@ -8,7 +8,9 @@ namespace System.Text
 {
     public sealed partial class CodePagesEncodingProvider : System.Text.EncodingProvider
     {
-        internal CodePagesEncodingProvider() { }
+        internal CodePagesEncodingProvider()
+        {
+        }
 
         public static System.Text.EncodingProvider Instance
         {

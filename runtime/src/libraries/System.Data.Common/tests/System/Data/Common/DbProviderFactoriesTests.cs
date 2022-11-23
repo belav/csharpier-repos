@@ -13,7 +13,9 @@ namespace System.Data.Common
     {
         public static readonly TestProviderFactory Instance = new TestProviderFactory();
 
-        private TestProviderFactory() { }
+        private TestProviderFactory()
+        {
+        }
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]

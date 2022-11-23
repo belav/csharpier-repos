@@ -42,7 +42,9 @@ namespace System.Security.Cryptography.X509Certificates
             get { return TestControl.CurrentUserCertificateStore; }
         }
 
-        public void Open(OpenFlags flags) { }
+        public void Open(OpenFlags flags)
+        {
+        }
 
         public void Dispose()
         {

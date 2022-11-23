@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultTextBufferSupportsFeatureService() { }
+        public DefaultTextBufferSupportsFeatureService()
+        {
+        }
 
         public bool SupportsCodeFixes(ITextBuffer textBuffer) => true;
 

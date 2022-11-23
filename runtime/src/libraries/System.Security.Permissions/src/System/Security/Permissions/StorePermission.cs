@@ -12,9 +12,13 @@ namespace System.Security.Permissions
 #endif
     public sealed class StorePermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public StorePermission(PermissionState state) { }
+        public StorePermission(PermissionState state)
+        {
+        }
 
-        public StorePermission(StorePermissionFlags flag) { }
+        public StorePermission(StorePermissionFlags flag)
+        {
+        }
 
         public StorePermissionFlags Flags { get; set; }
 
@@ -48,6 +52,8 @@ namespace System.Security.Permissions
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
     }
 }

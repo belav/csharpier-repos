@@ -26,7 +26,15 @@ namespace Microsoft.Extensions.Options
             OptionsBuilderConfigurationExtensions.TrimmingRequiredUnreferencedCodeMessage
         )]
         public NamedConfigureFromConfigurationOptions(string? name, IConfiguration config)
-            : this(name, config, _ => { }) { }
+            : this(
+                name,
+                config,
+                _ =>
+                {
+                }
+            )
+        {
+        }
 
         /// <summary>
         /// Constructor that takes the <see cref="IConfiguration"/> instance to bind against.

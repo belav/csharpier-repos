@@ -1,6 +1,8 @@
 class Base : System.MarshalByRefObject
 {
-    public virtual void method() { }
+    public virtual void method()
+    {
+    }
 }
 
 class Derived : Base

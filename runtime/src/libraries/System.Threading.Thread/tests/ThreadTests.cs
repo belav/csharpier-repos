@@ -87,8 +87,23 @@ namespace System.Threading.Threads.Tests
                 () => new Thread((ParameterizedThreadStart)null, 0)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Thread(() => { }, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Thread(state => { }, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new Thread(
+                        () => {
+                        },
+                        -1
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new Thread(
+                        state =>
+                        {
+                        },
+                        -1
+                    )
+            );
         }
 
         public static IEnumerable<object[]> ApartmentStateTest_MemberData()
@@ -368,7 +383,8 @@ namespace System.Threading.Threads.Tests
             int setType /* 0 = ApartmentState setter, 1 = SetApartmentState, 2 = TrySetApartmentState */
         )
         {
-            var t = new Thread(() => { });
+            var t = new Thread(() => {
+            });
             Assert.Equal(ApartmentState.Unknown, getApartmentState(t));
             Assert.Equal(0, setApartmentState(t, ApartmentState.Unknown));
 
@@ -633,7 +649,8 @@ namespace System.Threading.Threads.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void IsBackgroundTest()
         {
-            var t = new Thread(() => { });
+            var t = new Thread(() => {
+            });
             Assert.False(t.IsBackground);
             t.IsBackground = true;
             Assert.True(t.IsBackground);
@@ -1106,7 +1123,9 @@ namespace System.Threading.Threads.Tests
                 out waitForThread,
                 () =>
                 {
-                    try { }
+                    try
+                    {
+                    }
                     finally
                     {
                         Assert.Throws<ThreadInterruptedException>(

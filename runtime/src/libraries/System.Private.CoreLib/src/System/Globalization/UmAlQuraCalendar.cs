@@ -992,7 +992,9 @@ namespace System.Globalization
 
         public override CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.LunarCalendar;
 
-        public UmAlQuraCalendar() { }
+        public UmAlQuraCalendar()
+        {
+        }
 
         internal override CalendarId BaseCalendarID => CalendarId.HIJRI;
 
@@ -1108,7 +1110,9 @@ namespace System.Globalization
             // A Hijri year is 354 or 355 days.  Use 355 days so that we will search from a lower index.
 
             int index = (int)((time.Ticks - s_minDate.Ticks) / Calendar.TicksPerDay) / 355;
-            do { } while (time.CompareTo(s_hijriYearInfo[++index].GregorianDate) > 0); // while greater
+            do
+            {
+            } while (time.CompareTo(s_hijriYearInfo[++index].GregorianDate) > 0); // while greater
 
             if (time.CompareTo(s_hijriYearInfo[index].GregorianDate) != 0)
             {

@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PerformanceTrackerService()
-            : this(DefaultMinLOFValue, DefaultAverageThreshold, DefaultStddevThreshold) { }
+            : this(DefaultMinLOFValue, DefaultAverageThreshold, DefaultStddevThreshold)
+        {
+        }
 
         // internal for testing
         [SuppressMessage(

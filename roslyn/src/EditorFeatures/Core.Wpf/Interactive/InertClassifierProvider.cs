@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InertClassifierProvider() { }
+        public InertClassifierProvider()
+        {
+        }
 
         public IClassifier GetClassifier(ITextBuffer textBuffer) => new InertClassifier(textBuffer);
 

@@ -325,7 +325,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             public static readonly MockHostServices Instance = new MockHostServices();
 
-            private MockHostServices() { }
+            private MockHostServices()
+            {
+            }
 
             protected internal override HostWorkspaceServices CreateWorkspaceServices(
                 Workspace workspace
@@ -400,9 +402,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         ImmutableArray<Lazy<IOptionPersisterProvider>>.Empty
                     );
 
-                public void RegisterWorkspace(Workspace workspace) { }
+                public void RegisterWorkspace(Workspace workspace)
+                {
+                }
 
-                public void UnregisterWorkspace(Workspace workspace) { }
+                public void UnregisterWorkspace(Workspace workspace)
+                {
+                }
 
                 public object GetOption(OptionKey key) => throw new NotImplementedException();
 

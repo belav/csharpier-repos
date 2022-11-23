@@ -8,7 +8,9 @@ namespace System.Security
 {
     public partial class HostSecurityManager
     {
-        public HostSecurityManager() { }
+        public HostSecurityManager()
+        {
+        }
 
         public virtual PolicyLevel DomainPolicy
         {

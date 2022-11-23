@@ -29,7 +29,9 @@ namespace System.Net.Http
         /// Initializes a new instance of the <see cref="MultipartFileStreamProvider"/> class.
         /// </summary>
         /// <param name="rootPath">The root path where the content of MIME multipart body parts are written to.</param>
-        public MultipartFileStreamProvider(string rootPath) : this(rootPath, DefaultBufferSize) { }
+        public MultipartFileStreamProvider(string rootPath) : this(rootPath, DefaultBufferSize)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MultipartFileStreamProvider"/> class.

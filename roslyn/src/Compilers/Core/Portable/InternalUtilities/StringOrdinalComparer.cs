@@ -18,7 +18,9 @@ namespace Roslyn.Utilities
     {
         public static readonly StringOrdinalComparer Instance = new StringOrdinalComparer();
 
-        private StringOrdinalComparer() { }
+        private StringOrdinalComparer()
+        {
+        }
 
         bool IEqualityComparer<string>.Equals(string? a, string? b)
         {

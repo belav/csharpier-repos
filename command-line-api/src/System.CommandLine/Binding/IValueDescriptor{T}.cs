@@ -4,5 +4,7 @@
 namespace System.CommandLine.Binding
 {
     /// <inheritdoc />
-    public interface IValueDescriptor<out T> : IValueDescriptor { }
+    public interface IValueDescriptor<out T> : IValueDescriptor
+    {
+    }
 }

@@ -405,9 +405,13 @@ namespace Moq.Tests
             return 5;
         }
 
-        public class Bar { }
+        public class Bar
+        {
+        }
 
-        public class Baz { }
+        public class Baz
+        {
+        }
 
         public interface IFoo
         {

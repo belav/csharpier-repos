@@ -20,7 +20,9 @@ class Program
             CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
             return -1; // we expect new CultureInfo("tr-TR") to throw.
         }
-        catch (CultureNotFoundException) { }
+        catch (CultureNotFoundException)
+        {
+        }
 
         if ("i".ToUpper() != "I")
         {

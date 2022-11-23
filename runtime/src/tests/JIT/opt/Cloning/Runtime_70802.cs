@@ -18,7 +18,9 @@ public class D : B
 class Runtime_70802
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void G() { }
+    static void G()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int F(B b, int n = 10, int m = 10)

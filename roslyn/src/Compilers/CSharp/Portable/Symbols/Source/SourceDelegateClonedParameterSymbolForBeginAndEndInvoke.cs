@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceParameterSymbol originalParam,
             SourceDelegateMethodSymbol newOwner,
             int newOrdinal
-        ) : base(originalParam, newOwner, newOrdinal, suppressOptional: true) { }
+        ) : base(originalParam, newOwner, newOrdinal, suppressOptional: true)
+        {
+        }
 
         internal override bool IsCallerFilePath => _originalParam.IsCallerFilePath;
 

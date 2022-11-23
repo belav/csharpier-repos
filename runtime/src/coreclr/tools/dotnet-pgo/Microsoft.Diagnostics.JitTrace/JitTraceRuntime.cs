@@ -217,7 +217,9 @@ namespace Microsoft.Diagnostics.JitTrace
                                         returnConstructorInfo = ci;
                                     }
                                 }
-                                catch { }
+                                catch
+                                {
+                                }
                                 if (returnConstructorInfo != null)
                                 {
                                     yield return returnConstructorInfo.MethodHandle;
@@ -273,7 +275,9 @@ namespace Microsoft.Diagnostics.JitTrace
                                         returnMethodInfo = mi;
                                     }
                                 }
-                                catch { }
+                                catch
+                                {
+                                }
 
                                 if (returnMethodInfo != null)
                                 {

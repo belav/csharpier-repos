@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis
                             $"We should always be able to map a body symbol back to a document:\r\n{symbol.Kind}\r\n{symbol.Name}\r\n{syntaxTree.FilePath}\r\n{projectId}"
                         );
                     }
-                    catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+                    catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+                    {
+                    }
                 }
                 else if (documentId.ProjectId != projectId)
                 {
@@ -56,7 +58,9 @@ namespace Microsoft.CodeAnalysis
                             $"Syntax tree for a body symbol should map to the same project as the body symbol's assembly:\r\n{symbol.Kind}\r\n{symbol.Name}\r\n{syntaxTree.FilePath}\r\n{projectId}\r\n{documentId.ProjectId}"
                         );
                     }
-                    catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+                    catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+                    {
+                    }
                 }
             }
 

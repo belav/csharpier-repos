@@ -30,76 +30,140 @@ namespace System
             return null;
         }
 
-        ~Object() { }
+        ~Object()
+        {
+        }
     }
 
-    public struct Void { }
+    public struct Void
+    {
+    }
 
-    public struct Boolean { }
+    public struct Boolean
+    {
+    }
 
-    public struct Char { }
+    public struct Char
+    {
+    }
 
-    public struct SByte { }
+    public struct SByte
+    {
+    }
 
-    public struct Byte { }
+    public struct Byte
+    {
+    }
 
-    public struct Int16 { }
+    public struct Int16
+    {
+    }
 
-    public struct UInt16 { }
+    public struct UInt16
+    {
+    }
 
-    public struct Int32 { }
+    public struct Int32
+    {
+    }
 
-    public struct UInt32 { }
+    public struct UInt32
+    {
+    }
 
-    public struct Int64 { }
+    public struct Int64
+    {
+    }
 
-    public struct UInt64 { }
+    public struct UInt64
+    {
+    }
 
-    public struct IntPtr { }
+    public struct IntPtr
+    {
+    }
 
-    public struct UIntPtr { }
+    public struct UIntPtr
+    {
+    }
 
-    public struct Single { }
+    public struct Single
+    {
+    }
 
-    public struct Double { }
+    public struct Double
+    {
+    }
 
-    public abstract class ValueType { }
+    public abstract class ValueType
+    {
+    }
 
-    public abstract class Enum : ValueType { }
+    public abstract class Enum : ValueType
+    {
+    }
 
-    public struct Nullable<T> where T : struct { }
+    public struct Nullable<T> where T : struct
+    {
+    }
 
-    public sealed class String { }
+    public sealed class String
+    {
+    }
 
-    public abstract class Array : System.Collections.IList { }
+    public abstract class Array : System.Collections.IList
+    {
+    }
 
-    public abstract class Delegate { }
+    public abstract class Delegate
+    {
+    }
 
-    public abstract class MulticastDelegate : Delegate { }
+    public abstract class MulticastDelegate : Delegate
+    {
+    }
 
-    public struct RuntimeTypeHandle { }
+    public struct RuntimeTypeHandle
+    {
+    }
 
-    public struct RuntimeMethodHandle { }
+    public struct RuntimeMethodHandle
+    {
+    }
 
-    public struct RuntimeFieldHandle { }
+    public struct RuntimeFieldHandle
+    {
+    }
 
-    public class Attribute { }
+    public class Attribute
+    {
+    }
 
     public class AttributeUsageAttribute : Attribute
     {
-        public AttributeUsageAttribute(AttributeTargets targets) { }
+        public AttributeUsageAttribute(AttributeTargets targets)
+        {
+        }
 
         public bool AllowMultiple { get; set; }
         public bool Inherited { get; set; }
     }
 
-    public enum AttributeTargets { }
+    public enum AttributeTargets
+    {
+    }
 
-    public class ThreadStaticAttribute : Attribute { }
+    public class ThreadStaticAttribute : Attribute
+    {
+    }
 
-    public class Array<T> : Array, System.Collections.Generic.IList<T> { }
+    public class Array<T> : Array, System.Collections.Generic.IList<T>
+    {
+    }
 
-    public class Exception { }
+    public class Exception
+    {
+    }
 
     public ref struct TypedReference
     {
@@ -126,20 +190,32 @@ namespace System
 
 namespace System.Collections
 {
-    interface IEnumerable { }
+    interface IEnumerable
+    {
+    }
 
-    interface ICollection : IEnumerable { }
+    interface ICollection : IEnumerable
+    {
+    }
 
-    interface IList : ICollection { }
+    interface IList : ICollection
+    {
+    }
 }
 
 namespace System.Collections.Generic
 {
-    interface IEnumerable<out T> { }
+    interface IEnumerable<out T>
+    {
+    }
 
-    interface ICollection<T> : IEnumerable<T> { }
+    interface ICollection<T> : IEnumerable<T>
+    {
+    }
 
-    interface IList<T> : ICollection<T> { }
+    interface IList<T> : ICollection<T>
+    {
+    }
 }
 
 namespace System.Runtime.InteropServices
@@ -186,7 +262,9 @@ namespace System.Runtime.InteropServices
 
 namespace System.Runtime.CompilerServices
 {
-    public sealed class IsByRefLikeAttribute : Attribute { }
+    public sealed class IsByRefLikeAttribute : Attribute
+    {
+    }
 
     public static class RuntimeFeature
     {
@@ -194,7 +272,9 @@ namespace System.Runtime.CompilerServices
         public const string VirtualStaticsInInterfaces = nameof(VirtualStaticsInInterfaces);
     }
 
-    internal sealed class IntrinsicAttribute : Attribute { }
+    internal sealed class IntrinsicAttribute : Attribute
+    {
+    }
 }
 
 namespace System.Runtime.Intrinsics

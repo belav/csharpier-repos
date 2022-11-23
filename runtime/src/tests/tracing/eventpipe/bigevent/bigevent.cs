@@ -20,7 +20,9 @@ namespace Tracing.Tests.BigEventsValidation
         private static string bigString = new String('a', 100 * 1024);
         private static string smallString = new String('a', 10);
 
-        private BigEventSource() { }
+        private BigEventSource()
+        {
+        }
 
         public static BigEventSource Log = new BigEventSource();
 

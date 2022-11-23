@@ -583,8 +583,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                     });
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+            {
+            }
         }
 
         private static IEnumerable<DiagnosticData> FilterDiagnostics(

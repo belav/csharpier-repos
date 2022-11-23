@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpLineSeparatorService() { }
+        public CSharpLineSeparatorService()
+        {
+        }
 
         /// <summary>
         /// Given a tree returns line separator spans.

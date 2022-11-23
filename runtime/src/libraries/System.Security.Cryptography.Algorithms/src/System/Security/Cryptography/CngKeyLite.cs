@@ -773,7 +773,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal class SafeNCryptHandle : SafeHandle
     {
-        public SafeNCryptHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeNCryptHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {
@@ -790,11 +792,17 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    internal class SafeNCryptKeyHandle : SafeNCryptHandle { }
+    internal class SafeNCryptKeyHandle : SafeNCryptHandle
+    {
+    }
 
-    internal sealed class SafeNCryptProviderHandle : SafeNCryptHandle { }
+    internal sealed class SafeNCryptProviderHandle : SafeNCryptHandle
+    {
+    }
 
-    internal sealed class SafeNCryptSecretHandle : SafeNCryptHandle { }
+    internal sealed class SafeNCryptSecretHandle : SafeNCryptHandle
+    {
+    }
 
 #pragma warning disable CA1419 // TODO https://github.com/dotnet/roslyn-analyzers/issues/5232: not intended for use with P/Invoke
 

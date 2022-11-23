@@ -440,13 +440,21 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
     protected abstract void ApplicationAbort();
 
-    protected virtual void OnRequestProcessingEnding() { }
+    protected virtual void OnRequestProcessingEnding()
+    {
+    }
 
-    protected virtual void OnRequestProcessingEnded() { }
+    protected virtual void OnRequestProcessingEnded()
+    {
+    }
 
-    protected virtual void BeginRequestProcessing() { }
+    protected virtual void BeginRequestProcessing()
+    {
+    }
 
-    protected virtual void OnErrorAfterResponseStarted() { }
+    protected virtual void OnErrorAfterResponseStarted()
+    {
+    }
 
     protected virtual bool BeginRead(out ValueTask<ReadResult> awaitable)
     {

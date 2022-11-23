@@ -19,7 +19,9 @@ namespace Microsoft.Win32.SafeHandles
     internal abstract class SafeProvOrNCryptKeyHandle : SafeHandle
     {
         internal SafeProvOrNCryptKeyHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle) { }
+            : base(handle, ownsHandle)
+        {
+        }
 
         public sealed override bool IsInvalid
         {

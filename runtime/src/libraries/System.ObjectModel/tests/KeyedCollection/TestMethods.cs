@@ -2003,7 +2003,9 @@ namespace System.Collections.ObjectModel.Tests
     public abstract class IListTestKeyedCollection<TKey, TValue>
         : IListTest<KeyedCollection<TKey, TValue>, TValue>
     {
-        protected IListTestKeyedCollection() : base(false, false, false, false, true, true) { }
+        protected IListTestKeyedCollection() : base(false, false, false, false, true, true)
+        {
+        }
 
         protected abstract TKey GetKeyForItem(TValue item);
 
@@ -2045,7 +2047,8 @@ namespace System.Collections.ObjectModel.Tests
         : IListTest<KeyedCollection<BadKey<TKey>, TValue>, TValue> where TKey : IEquatable<TKey>
     {
         protected IListTestKeyedCollectionBadKey() : base(false, false, false, false, true, true)
-        { }
+        {
+        }
 
         /// <summary>
         ///     When overridden in a derived class, Gets an instance of the list under test containing the given items.

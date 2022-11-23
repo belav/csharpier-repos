@@ -9,7 +9,9 @@ public sealed class SimpleValueProvider : Dictionary<string, object>, IValueProv
 {
     private readonly CultureInfo _culture;
 
-    public SimpleValueProvider() : this(null) { }
+    public SimpleValueProvider() : this(null)
+    {
+    }
 
     public SimpleValueProvider(CultureInfo culture) : base(StringComparer.OrdinalIgnoreCase)
     {

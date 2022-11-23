@@ -16,7 +16,9 @@ namespace System.Text.Json.Serialization.Converters
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        public LargeObjectWithParameterizedConstructorConverterWithReflection() { }
+        public LargeObjectWithParameterizedConstructorConverterWithReflection()
+        {
+        }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]

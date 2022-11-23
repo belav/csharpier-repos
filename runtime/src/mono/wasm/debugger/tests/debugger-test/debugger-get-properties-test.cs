@@ -17,7 +17,9 @@ namespace DebuggerTests.GetPropertiesTests
         string LastName { get; }
     }
 
-    public interface IName : IFirstName, ILastName { }
+    public interface IName : IFirstName, ILastName
+    {
+    }
 
     public class BaseBaseClass
     {

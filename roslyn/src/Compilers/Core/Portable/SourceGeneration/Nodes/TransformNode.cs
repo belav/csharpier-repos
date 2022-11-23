@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis
                 userFunc: (i, token) => ImmutableArray.Create(userFunc(i, token)),
                 comparer,
                 name
-            ) { }
+            )
+        {
+        }
 
         public TransformNode(
             IIncrementalGeneratorNode<TInput> sourceNode,

@@ -19,14 +19,20 @@ namespace System.IO
 
         // Constructs a new StringWriter. A new StringBuilder is automatically
         // created and associated with the new StringWriter.
-        public StringWriter() : this(new StringBuilder(), CultureInfo.CurrentCulture) { }
+        public StringWriter() : this(new StringBuilder(), CultureInfo.CurrentCulture)
+        {
+        }
 
         public StringWriter(IFormatProvider? formatProvider)
-            : this(new StringBuilder(), formatProvider) { }
+            : this(new StringBuilder(), formatProvider)
+        {
+        }
 
         // Constructs a new StringWriter that writes to the given StringBuilder.
         //
-        public StringWriter(StringBuilder sb) : this(sb, CultureInfo.CurrentCulture) { }
+        public StringWriter(StringBuilder sb) : this(sb, CultureInfo.CurrentCulture)
+        {
+        }
 
         public StringWriter(StringBuilder sb, IFormatProvider? formatProvider)
             : base(formatProvider)

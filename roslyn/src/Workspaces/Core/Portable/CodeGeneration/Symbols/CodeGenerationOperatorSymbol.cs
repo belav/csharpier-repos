@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 parameters,
                 returnTypeAttributes,
                 documentationCommentXml
-            ) { }
+            )
+        {
+        }
 
         public override MethodKind MethodKind => MethodKind.UserDefinedOperator;
 

@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxClassificationService() { }
+        public CSharpSyntaxClassificationService()
+        {
+        }
 
         public override ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers() =>
             s_defaultSyntaxClassifiers;

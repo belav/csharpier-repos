@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRefactoringHelpersService() { }
+        public CSharpRefactoringHelpersService()
+        {
+        }
 
         protected override IHeaderFacts HeaderFacts => CSharpHeaderFacts.Instance;
 

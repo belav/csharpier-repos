@@ -9,9 +9,13 @@ namespace System.Configuration
     internal sealed class ReadOnlyNameValueCollection : NameValueCollection
     {
         internal ReadOnlyNameValueCollection(IEqualityComparer equalityComparer)
-            : base(equalityComparer) { }
+            : base(equalityComparer)
+        {
+        }
 
-        internal ReadOnlyNameValueCollection(ReadOnlyNameValueCollection value) : base(value) { }
+        internal ReadOnlyNameValueCollection(ReadOnlyNameValueCollection value) : base(value)
+        {
+        }
 
         internal void SetReadOnly()
         {

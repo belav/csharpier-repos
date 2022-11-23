@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _regionText;
 
-        public CodeRegionDirective() { }
+        public CodeRegionDirective()
+        {
+        }
 
         public CodeRegionDirective(CodeRegionMode regionMode, string regionText)
         {

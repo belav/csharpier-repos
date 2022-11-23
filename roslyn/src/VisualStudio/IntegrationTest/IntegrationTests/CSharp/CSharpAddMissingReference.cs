@@ -112,7 +112,9 @@ class Program
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpAddMissingReference(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

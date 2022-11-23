@@ -21,7 +21,9 @@ namespace System.Security.Policy
             StrongNamePublicKeyBlob blob,
             string name,
             Version version
-        ) { }
+        )
+        {
+        }
 
         public string Name { get; set; }
         public StrongNamePublicKeyBlob PublicKey { get; set; }
@@ -39,9 +41,13 @@ namespace System.Security.Policy
 
         public override bool Equals(object o) => base.Equals(o);
 
-        public void FromXml(SecurityElement e) { }
+        public void FromXml(SecurityElement e)
+        {
+        }
 
-        public void FromXml(SecurityElement e, PolicyLevel level) { }
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 

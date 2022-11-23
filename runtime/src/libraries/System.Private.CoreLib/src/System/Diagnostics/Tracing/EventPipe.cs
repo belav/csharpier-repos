@@ -86,7 +86,9 @@ namespace System.Diagnostics.Tracing
         NetTrace
     }
 
-    internal sealed class EventPipeWaitHandle : WaitHandle { }
+    internal sealed class EventPipeWaitHandle : WaitHandle
+    {
+    }
 
     internal static partial class EventPipeInternal
     {

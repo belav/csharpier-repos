@@ -11,7 +11,9 @@ namespace ILCompiler.DependencyAnalysis
 {
     public abstract class AssemblyStubNode : ObjectNode, ISymbolDefinitionNode
     {
-        public AssemblyStubNode() { }
+        public AssemblyStubNode()
+        {
+        }
 
         /// <summary>
         /// Gets a value indicating whether the stub's address is visible from managed code

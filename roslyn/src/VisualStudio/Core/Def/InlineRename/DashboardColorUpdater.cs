@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DashboardColorUpdater() { }
+        public DashboardColorUpdater()
+        {
+        }
 
         public void UpdateColors()
         {

@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.DependencyModel
         public IReadOnlyList<string?> Fallbacks { get; set; }
 
         public RuntimeFallbacks(string runtime, params string?[] fallbacks)
-            : this(runtime, (IEnumerable<string?>)fallbacks) { }
+            : this(runtime, (IEnumerable<string?>)fallbacks)
+        {
+        }
 
         public RuntimeFallbacks(string runtime, IEnumerable<string?> fallbacks)
         {

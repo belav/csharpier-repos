@@ -52,7 +52,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             );
         }
 
-        public class AnyImplicitExport { }
+        public class AnyImplicitExport
+        {
+        }
 
         [Fact]
         public void CreatePartDefinition_AnyType_ShouldHaveMetadataWithAnyImplicitCreationPolicy()
@@ -68,7 +70,9 @@ namespace System.ComponentModel.Composition.AttributedModel
         }
 
         [PartCreationPolicy(CreationPolicy.Any)]
-        public class AnyExport { }
+        public class AnyExport
+        {
+        }
 
         [Fact]
         public void CreatePartDefinition_AnyType_ShouldHaveMetadataWithAnyCreationPolicy()
@@ -84,7 +88,9 @@ namespace System.ComponentModel.Composition.AttributedModel
         }
 
         [PartCreationPolicy(CreationPolicy.Shared)]
-        public class SharedExport { }
+        public class SharedExport
+        {
+        }
 
         [Fact]
         public void CreatePartDefinition_SharedType_ShouldHaveMetadataWithSharedCreationPolicy()
@@ -100,7 +106,9 @@ namespace System.ComponentModel.Composition.AttributedModel
         }
 
         [PartCreationPolicy(CreationPolicy.NonShared)]
-        public class NonSharedExport { }
+        public class NonSharedExport
+        {
+        }
 
         [Fact]
         public void CreatePartDefinition_NonSharedType_ShouldHaveMetadataWithNonSharedCreationPolicy()
@@ -120,7 +128,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             CreationPolicy.NonShared
         )]
         [PartMetadata("ShouldNotBeIgnored", "Value")]
-        public class PartWithIgnoredMetadata { }
+        public class PartWithIgnoredMetadata
+        {
+        }
 
         [Fact]
         public void CreatePartDefinition_SharedTypeMarkedWithNonSharedMetadata_ShouldHaveMetadatWithSharedCreationPolicy()
@@ -142,11 +152,15 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         [PartMetadata("BaseOnlyName", 1)]
         [PartMetadata("OverrideName", 2)]
-        public class BasePartWithMetadata { }
+        public class BasePartWithMetadata
+        {
+        }
 
         [PartMetadata("DerivedOnlyName", 3)]
         [PartMetadata("OverrideName", 4)]
-        public class DerivedPartWithMetadata : BasePartWithMetadata { }
+        public class DerivedPartWithMetadata : BasePartWithMetadata
+        {
+        }
 
         [Fact]
         public void CreatePartDefinition_InheritedPartMetadata_ShouldNotContainPartMetadataFromBase()

@@ -24,9 +24,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order1.or
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -76,9 +80,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order2.or
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -148,9 +156,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order3.or
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -202,9 +214,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order4.or
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -306,9 +322,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.partial01
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public partial class C
     {

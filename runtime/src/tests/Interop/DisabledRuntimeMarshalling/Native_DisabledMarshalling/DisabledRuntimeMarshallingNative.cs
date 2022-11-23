@@ -89,7 +89,9 @@ public unsafe class DisabledRuntimeMarshallingNative
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class LayoutClass { }
+    public class LayoutClass
+    {
+    }
 
     [StructLayout(LayoutKind.Auto)]
     public struct AutoLayoutStruct

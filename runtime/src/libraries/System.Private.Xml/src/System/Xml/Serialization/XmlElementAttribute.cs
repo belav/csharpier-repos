@@ -31,7 +31,9 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlElementAttribute() { }
+        public XmlElementAttribute()
+        {
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

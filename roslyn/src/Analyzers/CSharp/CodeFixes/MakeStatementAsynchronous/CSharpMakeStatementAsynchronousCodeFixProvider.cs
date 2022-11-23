@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpMakeStatementAsynchronousCodeFixProvider() { }
+        public CSharpMakeStatementAsynchronousCodeFixProvider()
+        {
+        }
 
         // error CS8414: foreach statement cannot operate on variables of type 'IAsyncEnumerable<int>' because 'IAsyncEnumerable<int>' does not contain a public instance definition for 'GetEnumerator'. Did you mean 'await foreach'?
         // error CS8418: 'IAsyncDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'. Did you mean 'await using' rather than 'using'?

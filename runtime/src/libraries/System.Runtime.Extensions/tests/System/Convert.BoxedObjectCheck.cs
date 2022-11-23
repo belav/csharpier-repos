@@ -66,8 +66,12 @@ namespace System.Tests
                         );
                         Assert.NotSame(testValue, converted);
                     }
-                    catch (InvalidCastException) { }
-                    catch (OverflowException) { }
+                    catch (InvalidCastException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                 }
             );
         }

@@ -14,7 +14,9 @@ namespace System.Security.Policy
 #endif
     public sealed partial class Publisher : EvidenceBase, IIdentityPermissionFactory
     {
-        public Publisher(X509Certificate cert) { }
+        public Publisher(X509Certificate cert)
+        {
+        }
 
         public X509Certificate Certificate
         {

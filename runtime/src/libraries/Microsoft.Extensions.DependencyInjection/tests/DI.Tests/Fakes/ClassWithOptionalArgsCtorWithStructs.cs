@@ -45,6 +45,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
             CustomStructDefault = customStructDefault;
         }
 
-        public struct CustomStruct { }
+        public struct CustomStruct
+        {
+        }
     }
 }

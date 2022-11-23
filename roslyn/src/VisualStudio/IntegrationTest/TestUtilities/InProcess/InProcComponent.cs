@@ -139,14 +139,22 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
             =>
             CurrentApplicationDispatcher
-                .InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle)
+                .InvokeAsync(
+                    () => {
+                    },
+                    DispatcherPriority.ApplicationIdle
+                )
                 .Wait(timeout);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
 
         protected static void WaitForSystemIdle()
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
             =>
-            CurrentApplicationDispatcher.Invoke(() => { }, DispatcherPriority.SystemIdle);
+            CurrentApplicationDispatcher.Invoke(
+                () => {
+                },
+                DispatcherPriority.SystemIdle
+            );
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
 
         // Ensure InProcComponents live forever

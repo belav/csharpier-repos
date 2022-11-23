@@ -629,11 +629,17 @@ namespace System.Reflection.Tests
                 set { _staticObjectArrayProperty = value; }
             }
 
-            public enum ShortEnum : short { }
+            public enum ShortEnum : short
+            {
+            }
 
-            public enum IntEnum { }
+            public enum IntEnum
+            {
+            }
 
-            public enum LongEnum : long { }
+            public enum LongEnum : long
+            {
+            }
 
             public ShortEnum ShortEnumProperty { get; set; }
             public IntEnum IntEnumProperty { get; set; }
@@ -786,7 +792,9 @@ namespace System.Reflection.Tests
             public int ReadWriteProperty
             {
                 get { return 1; }
-                set { }
+                set
+                {
+                }
             }
             public string ReadOnlyProperty
             {
@@ -794,12 +802,16 @@ namespace System.Reflection.Tests
             }
             public char WriteOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
             public int this[int index]
             {
                 get { return 2; }
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -808,7 +820,9 @@ namespace System.Reflection.Tests
             public int ReadWriteProperty
             {
                 get { return 1; }
-                set { }
+                set
+                {
+                }
             }
             public string ReadOnlyProperty
             {
@@ -816,7 +830,9 @@ namespace System.Reflection.Tests
             }
             public char WriteOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
             public string this[int index]
             {

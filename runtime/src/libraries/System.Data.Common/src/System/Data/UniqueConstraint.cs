@@ -180,7 +180,9 @@ namespace System.Data
             _key.CheckState();
         }
 
-        internal override void CheckCanAddToCollection(ConstraintCollection constraints) { }
+        internal override void CheckCanAddToCollection(ConstraintCollection constraints)
+        {
+        }
 
         internal override bool CanBeRemovedFromCollection(
             ConstraintCollection constraints,

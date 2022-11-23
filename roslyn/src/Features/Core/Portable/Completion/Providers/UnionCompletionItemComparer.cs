@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     {
         public static readonly UnionCompletionItemComparer Instance = new();
 
-        private UnionCompletionItemComparer() { }
+        private UnionCompletionItemComparer()
+        {
+        }
 
         public bool Equals(CompletionItem? x, CompletionItem? y) =>
             ReferenceEquals(x, y)

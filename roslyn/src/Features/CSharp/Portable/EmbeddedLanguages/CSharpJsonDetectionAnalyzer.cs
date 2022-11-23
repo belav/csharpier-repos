@@ -11,6 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpJsonDetectionAnalyzer : AbstractJsonDetectionAnalyzer
     {
-        public CSharpJsonDetectionAnalyzer() : base(CSharpEmbeddedLanguagesProvider.Info) { }
+        public CSharpJsonDetectionAnalyzer() : base(CSharpEmbeddedLanguagesProvider.Info)
+        {
+        }
     }
 }

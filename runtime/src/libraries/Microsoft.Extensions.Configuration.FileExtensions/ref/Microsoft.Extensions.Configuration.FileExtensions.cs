@@ -53,18 +53,26 @@ namespace Microsoft.Extensions.Configuration
     {
         public FileConfigurationProvider(
             Microsoft.Extensions.Configuration.FileConfigurationSource source
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.Configuration.FileConfigurationSource Source
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public override void Load() { }
+        public override void Load()
+        {
+        }
 
         public abstract void Load(System.IO.Stream stream);
 
@@ -77,69 +85,93 @@ namespace Microsoft.Extensions.Configuration
     public abstract partial class FileConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
-        protected FileConfigurationSource() { }
+        protected FileConfigurationSource()
+        {
+        }
 
         public Microsoft.Extensions.FileProviders.IFileProvider? FileProvider
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Action<Microsoft.Extensions.Configuration.FileLoadExceptionContext>? OnLoadException
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Optional
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNull]
         public string? Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReloadDelay
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ReloadOnChange
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
         );
 
-        public void EnsureDefaults(
-            Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) { }
+        public void EnsureDefaults(Microsoft.Extensions.Configuration.IConfigurationBuilder builder)
+        {
+        }
 
-        public void ResolveFileProvider() { }
+        public void ResolveFileProvider()
+        {
+        }
     }
 
     public partial class FileLoadExceptionContext
     {
-        public FileLoadExceptionContext() { }
+        public FileLoadExceptionContext()
+        {
+        }
 
         public System.Exception Exception
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Ignore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Extensions.Configuration.FileConfigurationProvider Provider
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

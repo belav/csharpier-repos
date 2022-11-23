@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CallbackDispatcher() { }
+            public CallbackDispatcher()
+            {
+            }
 
             private FindLiteralsServerCallback GetFindLiteralsCallback(
                 RemoteServiceCallbackId callbackId

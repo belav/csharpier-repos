@@ -396,7 +396,13 @@ namespace System.Reflection.PortableExecutable.Tests
 
             new BlobEncoder(parameterlessCtorSignature)
                 .MethodSignature(isInstanceMethod: true)
-                .Parameters(0, returnType => returnType.Void(), parameters => { });
+                .Parameters(
+                    0,
+                    returnType => returnType.Void(),
+                    parameters =>
+                    {
+                    }
+                );
 
             var parameterlessCtorBlobIndex = metadata.GetOrAddBlob(parameterlessCtorSignature);
 
@@ -410,7 +416,13 @@ namespace System.Reflection.PortableExecutable.Tests
 
             new BlobEncoder(mainSignature)
                 .MethodSignature()
-                .Parameters(0, returnType => returnType.Void(), parameters => { });
+                .Parameters(
+                    0,
+                    returnType => returnType.Void(),
+                    parameters =>
+                    {
+                    }
+                );
 
             var methodBodyStream = new MethodBodyStreamEncoder(ilBuilder);
 
@@ -744,7 +756,13 @@ namespace System.Reflection.PortableExecutable.Tests
                     BuildSignature(
                         e =>
                             e.MethodSignature(isInstanceMethod: true)
-                                .Parameters(0, returnType => returnType.Void(), parameters => { })
+                                .Parameters(
+                                    0,
+                                    returnType => returnType.Void(),
+                                    parameters =>
+                                    {
+                                    }
+                                )
                     )
                 ),
                 fooBodyOffset,
@@ -874,7 +892,9 @@ namespace System.Reflection.PortableExecutable.Tests
 
         private class TestResourceSectionBuilder : ResourceSectionBuilder
         {
-            public TestResourceSectionBuilder() { }
+            public TestResourceSectionBuilder()
+            {
+            }
 
             protected internal override void Serialize(
                 BlobBuilder builder,
@@ -925,7 +945,9 @@ namespace System.Reflection.PortableExecutable.Tests
 
         private class BadResourceSectionBuilder : ResourceSectionBuilder
         {
-            public BadResourceSectionBuilder() { }
+            public BadResourceSectionBuilder()
+            {
+            }
 
             protected internal override void Serialize(
                 BlobBuilder builder,

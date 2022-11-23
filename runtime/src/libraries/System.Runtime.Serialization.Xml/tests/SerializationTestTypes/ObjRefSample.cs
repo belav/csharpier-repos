@@ -12,7 +12,9 @@ namespace SerializationTestTypes
         [DataMember]
         public string Data;
 
-        public SimpleDC() { }
+        public SimpleDC()
+        {
+        }
 
         public SimpleDC(bool init)
         {
@@ -29,7 +31,9 @@ namespace SerializationTestTypes
         [DataMember]
         public string RefData;
 
-        public SimpleDCWithSimpleDMRef() { }
+        public SimpleDCWithSimpleDMRef()
+        {
+        }
 
         public SimpleDCWithSimpleDMRef(bool init)
         {
@@ -47,7 +51,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SimpleDC RefData;
 
-        public SimpleDCWithRef() { }
+        public SimpleDCWithRef()
+        {
+        }
 
         public SimpleDCWithRef(bool init)
         {
@@ -65,7 +71,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SimpleDCWithRef RefData;
 
-        public ContainsSimpleDCWithRef() { }
+        public ContainsSimpleDCWithRef()
+        {
+        }
 
         public ContainsSimpleDCWithRef(bool init)
         {
@@ -92,7 +100,9 @@ namespace SerializationTestTypes
         [DataMember(IsRequired = false)]
         public string Data;
 
-        public SimpleDCWithIsRequiredFalse() { }
+        public SimpleDCWithIsRequiredFalse()
+        {
+        }
 
         public SimpleDCWithIsRequiredFalse(bool init)
         {
@@ -134,7 +144,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SimpleStructDCWithRef Data5;
 
-        public Mixed1() { }
+        public Mixed1()
+        {
+        }
 
         public Mixed1(bool init)
         {
@@ -159,7 +171,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SimpleDC RefData;
 
-        public DCVersioned1() { }
+        public DCVersioned1()
+        {
+        }
 
         public DCVersioned1(bool init)
         {
@@ -186,7 +200,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SimpleDC Data;
 
-        public DCVersioned2() { }
+        public DCVersioned2()
+        {
+        }
 
         public DCVersioned2(bool init)
         {
@@ -212,7 +228,9 @@ namespace SerializationTestTypes
         [DataMember]
         public DCVersioned1 DataVersion1;
 
-        public DCVersionedContainer1() { }
+        public DCVersionedContainer1()
+        {
+        }
 
         public DCVersionedContainer1(bool init)
         {
@@ -247,7 +265,9 @@ namespace SerializationTestTypes
         [DataMember]
         public DCVersioned2 RefDataVersion2;
 
-        public DCVersionedContainerVersion1() { }
+        public DCVersionedContainerVersion1()
+        {
+        }
 
         public DCVersionedContainerVersion1(bool init)
         {
@@ -280,7 +300,9 @@ namespace SerializationTestTypes
         [DataMember]
         public DCVersioned2 DataVersion2;
 
-        public DCVersionedContainerVersion2() { }
+        public DCVersionedContainerVersion2()
+        {
+        }
 
         public DCVersionedContainerVersion2(bool init)
         {
@@ -316,7 +338,9 @@ namespace SerializationTestTypes
 
         public DCVersioned2 NewDataVersion2;
 
-        public DCVersionedContainerVersion3() { }
+        public DCVersionedContainerVersion3()
+        {
+        }
 
         public DCVersionedContainerVersion3(bool init)
         {
@@ -341,7 +365,9 @@ namespace SerializationTestTypes
         [NonSerialized]
         public PublicDC containedData = new PublicDC();
 
-        public SerIser() { }
+        public SerIser()
+        {
+        }
 
         public SerIser(SerializationInfo info, StreamingContext context)
         {
@@ -364,5 +390,7 @@ namespace SerializationTestTypes
         }
     }
 
-    public class IgnoreMemberAttribute : Attribute { }
+    public class IgnoreMemberAttribute : Attribute
+    {
+    }
 }

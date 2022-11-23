@@ -288,7 +288,9 @@ namespace System.Xml.Tests
             }
         }
 
-        protected static void DeleteTestFile(string strFileName) { }
+        protected static void DeleteTestFile(string strFileName)
+        {
+        }
 
         public static void CreateByteTestFile(string strFileName)
         {
@@ -611,21 +613,37 @@ namespace System.Xml.Tests
             FilePathUtil.addStream(strFileName, s);
         }
 
-        public static void CreateInvalidDTDTestFile(string strFileName) { }
+        public static void CreateInvalidDTDTestFile(string strFileName)
+        {
+        }
 
-        public static void CreateValidDTDTestFile(string strFileName) { }
+        public static void CreateValidDTDTestFile(string strFileName)
+        {
+        }
 
-        public static void CreateWellFormedDTDTestFile(string strFileName) { }
+        public static void CreateWellFormedDTDTestFile(string strFileName)
+        {
+        }
 
-        public static void CreateNonWellFormedDTDTestFile(string strFileName) { }
+        public static void CreateNonWellFormedDTDTestFile(string strFileName)
+        {
+        }
 
-        public static void CreateInvWellFormedDTDTestFile(string strFileName) { }
+        public static void CreateInvWellFormedDTDTestFile(string strFileName)
+        {
+        }
 
-        public static void CreateInvalidXMLXDRTestFile(string strFileName) { }
+        public static void CreateInvalidXMLXDRTestFile(string strFileName)
+        {
+        }
 
-        public static void CreateXDRXMLTestFile(string strFileName) { }
+        public static void CreateXDRXMLTestFile(string strFileName)
+        {
+        }
 
-        public static void CreateXDRTestFile(string strFileName) { }
+        public static void CreateXDRTestFile(string strFileName)
+        {
+        }
 
         public static void CreateInvalidNamespaceTestFile(string strFileName)
         {
@@ -947,7 +965,9 @@ namespace System.Xml.Tests
             FilePathUtil.addStream(strFileName, s);
         }
 
-        public static void CreateBinaryTestFile(string strFileName) { }
+        public static void CreateBinaryTestFile(string strFileName)
+        {
+        }
 
         public static void ensureSpace(ref byte[] buffer, int len)
         {

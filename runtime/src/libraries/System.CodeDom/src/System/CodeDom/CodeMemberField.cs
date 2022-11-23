@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private CodeTypeReference _type;
 
-        public CodeMemberField() { }
+        public CodeMemberField()
+        {
+        }
 
         public CodeMemberField(CodeTypeReference type, string name)
         {

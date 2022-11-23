@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         private static readonly ObjectPool<IReductionRewriter> s_pool =
             new(() => new Rewriter(s_pool));
 
-        public CSharpDefaultExpressionReducer() : base(s_pool) { }
+        public CSharpDefaultExpressionReducer() : base(s_pool)
+        {
+        }
 
         protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
     }

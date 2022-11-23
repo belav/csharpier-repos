@@ -22,7 +22,9 @@ namespace Test
             int[] param3,
             int[] param4,
             long param5
-        ) { }
+        )
+        {
+        }
 
         public static ulong[] Static3(ref double param1, ref ulong param2)
         {
@@ -61,7 +63,9 @@ namespace Test
                     (long)(object)m_f - (39u + (uint)m_n)
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
 

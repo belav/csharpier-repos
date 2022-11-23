@@ -44,6 +44,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <summary>
         /// Placeholder type for a generic parameter.
         /// </summary>
-        public struct GenericPlaceholder { }
+        public struct GenericPlaceholder
+        {
+        }
     }
 }

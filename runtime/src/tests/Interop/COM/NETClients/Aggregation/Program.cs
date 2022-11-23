@@ -13,7 +13,9 @@ namespace NetClient
 
     class Program
     {
-        class ManagedInner : AggregationTestingClass { }
+        class ManagedInner : AggregationTestingClass
+        {
+        }
 
         static void ValidateNativeOuter()
         {

@@ -31,7 +31,9 @@ namespace Castle.DynamicProxy.Tests.Mixins
 #endif
     public class DomainWithMixin : IDomainWithMixin
     {
-        public void DoSomething() { }
+        public void DoSomething()
+        {
+        }
     }
 
 #if FEATURE_SERIALIZATION
@@ -39,7 +41,9 @@ namespace Castle.DynamicProxy.Tests.Mixins
 #endif
     public class DomainsAs : IDomainsAs
     {
-        public void DoSomethingElse() { }
+        public void DoSomethingElse()
+        {
+        }
     }
 
     public class MixinDomainObject

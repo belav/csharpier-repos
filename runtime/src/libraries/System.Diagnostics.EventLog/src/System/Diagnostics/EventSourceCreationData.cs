@@ -7,7 +7,9 @@ namespace System.Diagnostics
     {
         private int _categoryCount;
 
-        private EventSourceCreationData() { }
+        private EventSourceCreationData()
+        {
+        }
 
         public EventSourceCreationData(string source, string logName)
         {

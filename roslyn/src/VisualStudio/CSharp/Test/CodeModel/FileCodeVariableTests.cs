@@ -41,7 +41,9 @@ unsafe public struct DevDivBugs70194
 {
     fixed char buffer[100];
 }"
-            ) { }
+            )
+        {
+        }
 
         private CodeVariable GetCodeVariable(params object[] path)
         {

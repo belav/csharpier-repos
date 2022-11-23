@@ -7,7 +7,9 @@ public class OverzealousInitializationSqlServerTest
     : OverzealousInitializationTestBase<OverzealousInitializationSqlServerTest.OverzealousInitializationSqlServerFixture>
 {
     public OverzealousInitializationSqlServerTest(OverzealousInitializationSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class OverzealousInitializationSqlServerFixture : OverzealousInitializationFixtureBase
     {

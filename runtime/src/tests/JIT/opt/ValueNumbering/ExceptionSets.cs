@@ -15,7 +15,9 @@ class ExceptionSets
             TestObjGetType(null, 0);
             return 101;
         }
-        catch (NullReferenceException) { }
+        catch (NullReferenceException)
+        {
+        }
 
         return 100;
     }

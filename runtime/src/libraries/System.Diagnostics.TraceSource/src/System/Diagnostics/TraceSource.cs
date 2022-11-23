@@ -24,7 +24,9 @@ namespace System.Diagnostics
         internal volatile bool _configInitializing;
         private StringDictionary? _attributes;
 
-        public TraceSource(string name) : this(name, SourceLevels.Off) { }
+        public TraceSource(string name) : this(name, SourceLevels.Off)
+        {
+        }
 
         public TraceSource(string name, SourceLevels defaultLevel)
         {

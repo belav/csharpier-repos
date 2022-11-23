@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceCacheService() { }
+        public WorkspaceCacheService()
+        {
+        }
 
         /// <summary>
         /// Called by the host to try and reduce memory occupied by caches.

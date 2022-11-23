@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         private static readonly ObjectPool<Stack<(Node? node, bool firstTime)>> s_stackPool =
             SharedPools.Default<Stack<(Node? node, bool firstTime)>>();
 
-        public IntervalTree() { }
+        public IntervalTree()
+        {
+        }
 
         public static IntervalTree<T> Create<TIntrospector>(
             in TIntrospector introspector,

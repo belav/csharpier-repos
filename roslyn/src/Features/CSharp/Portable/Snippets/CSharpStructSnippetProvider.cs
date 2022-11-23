@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStructSnippetProvider() { }
+        public CSharpStructSnippetProvider()
+        {
+        }
 
         public override string SnippetIdentifier => "struct";
 

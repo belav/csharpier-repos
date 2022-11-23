@@ -57,13 +57,18 @@ public abstract class CXmlBase
     }
 
     public CXmlBase(string strPrefix, string strName, XmlNodeType NodeType, string strNamespace)
-        : this(strPrefix, strName, strName, NodeType, strNamespace) { }
+        : this(strPrefix, strName, strName, NodeType, strNamespace)
+    {
+    }
 
     public CXmlBase(string strPrefix, string strName, XmlNodeType NodeType)
-        : this(strPrefix, strName, strName, NodeType, "") { }
+        : this(strPrefix, strName, strName, NodeType, "")
+    {
+    }
 
     public CXmlBase(string strName, XmlNodeType NodeType) : this("", strName, strName, NodeType, "")
-    { }
+    {
+    }
 
     //
     // Virtual Methods and Properties
@@ -288,7 +293,9 @@ public class CXmlNode : CXmlBase
     // Constructors
     //
     public CXmlNode(string strPrefix, string strName, XmlNodeType NodeType)
-        : base(strPrefix, strName, NodeType) { }
+        : base(strPrefix, strName, NodeType)
+    {
+    }
 
     public CXmlNode(XmlReader rXmlReader)
         : base(
@@ -749,7 +756,9 @@ public class CXmlCache
     //
     // Constructor
     //
-    public CXmlCache() { }
+    public CXmlCache()
+    {
+    }
 
     //
     // Public Methods and Properties

@@ -89,7 +89,9 @@ namespace Internal.CommandLine
             {
                 details.Add(Environment.GetCommandLineArgs()[0]);
             }
-            catch { }
+            catch
+            {
+            }
             try
             {
                 details.Add(
@@ -98,7 +100,9 @@ namespace Internal.CommandLine
                         .ToString()
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             details.Add("------------------------");
             details.Add("Actual Command Line Args");
@@ -116,7 +120,9 @@ namespace Internal.CommandLine
                     {
                         details.AddRange(File.ReadAllLines(rspFileName));
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
 

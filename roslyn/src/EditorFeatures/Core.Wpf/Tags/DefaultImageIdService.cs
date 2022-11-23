@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tags
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultImageIdService() { }
+        public DefaultImageIdService()
+        {
+        }
 
         public bool TryGetImageId(ImmutableArray<string> tags, out ImageId imageId)
         {

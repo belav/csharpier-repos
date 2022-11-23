@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             string originalString,
             int lineBreaks,
             int spaces
-        ) : base(context, formattingRules, token1, token2, originalString, lineBreaks, spaces) { }
+        ) : base(context, formattingRules, token1, token2, originalString, lineBreaks, spaces)
+        {
+        }
 
         protected override bool Succeeded() => _succeeded;
 

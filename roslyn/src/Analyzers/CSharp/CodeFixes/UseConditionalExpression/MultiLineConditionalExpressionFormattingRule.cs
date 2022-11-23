@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
         public static readonly AbstractFormattingRule Instance =
             new MultiLineConditionalExpressionFormattingRule();
 
-        private MultiLineConditionalExpressionFormattingRule() { }
+        private MultiLineConditionalExpressionFormattingRule()
+        {
+        }
 
         private static bool IsQuestionOrColonOfNewConditional(SyntaxToken token)
         {

@@ -20,7 +20,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         public static readonly BinaryFormatterEventSource Log = new BinaryFormatterEventSource();
 
-        private BinaryFormatterEventSource() { }
+        private BinaryFormatterEventSource()
+        {
+        }
 
         [Event(
             EventId_SerializationStart,

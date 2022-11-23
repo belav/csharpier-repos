@@ -8,7 +8,9 @@ public class AspNetIdentityCustomTypesIntKeySqliteTest
 {
     public AspNetIdentityCustomTypesIntKeySqliteTest(
         AspNetIdentityCustomTypesIntKeySqliteFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public class AspNetIdentityCustomTypesIntKeySqliteFixture : AspNetIdentityFixtureBase
     {

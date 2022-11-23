@@ -10,7 +10,9 @@ namespace System.Security.Cryptography
         private RSA? _rsaKey;
         private RandomNumberGenerator? RngValue;
 
-        public RSAPKCS1KeyExchangeDeformatter() { }
+        public RSAPKCS1KeyExchangeDeformatter()
+        {
+        }
 
         public RSAPKCS1KeyExchangeDeformatter(AsymmetricAlgorithm key)
         {
@@ -28,7 +30,9 @@ namespace System.Security.Cryptography
         public override string? Parameters
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] DecryptKeyExchange(byte[] rgbIn)

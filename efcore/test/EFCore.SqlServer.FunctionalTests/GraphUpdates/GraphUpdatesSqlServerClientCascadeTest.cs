@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class GraphUpdatesSqlServerClientCascadeTest
     : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerClientCascadeTest.SqlServerFixture>
 {
-    public GraphUpdatesSqlServerClientCascadeTest(SqlServerFixture fixture) : base(fixture) { }
+    public GraphUpdatesSqlServerClientCascadeTest(SqlServerFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

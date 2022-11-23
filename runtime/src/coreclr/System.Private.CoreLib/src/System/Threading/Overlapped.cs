@@ -184,7 +184,9 @@ namespace System.Threading
             "This constructor is not 64-bit compatible and has been deprecated. Use the constructor that accepts an IntPtr for the event handle instead."
         )]
         public Overlapped(int offsetLo, int offsetHi, int hEvent, IAsyncResult? ar)
-            : this(offsetLo, offsetHi, new IntPtr(hEvent), ar) { }
+            : this(offsetLo, offsetHi, new IntPtr(hEvent), ar)
+        {
+        }
 
         public IAsyncResult? AsyncResult
         {

@@ -122,7 +122,9 @@ namespace System.Drawing
                     );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex)) { }
+                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex))
+                {
+                }
                 finally
                 {
                     NativeRegion = IntPtr.Zero;

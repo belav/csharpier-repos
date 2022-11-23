@@ -40,10 +40,9 @@ public abstract class DbConnectionInterceptor : IDbConnectionInterceptor
     ) => new(result);
 
     /// <inheritdoc />
-    public virtual void ConnectionOpened(
-        DbConnection connection,
-        ConnectionEndEventData eventData
-    ) { }
+    public virtual void ConnectionOpened(DbConnection connection, ConnectionEndEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task ConnectionOpenedAsync(
@@ -67,10 +66,9 @@ public abstract class DbConnectionInterceptor : IDbConnectionInterceptor
     ) => new(result);
 
     /// <inheritdoc />
-    public virtual void ConnectionClosed(
-        DbConnection connection,
-        ConnectionEndEventData eventData
-    ) { }
+    public virtual void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task ConnectionClosedAsync(
@@ -96,7 +94,9 @@ public abstract class DbConnectionInterceptor : IDbConnectionInterceptor
     public virtual void ConnectionDisposed(
         DbConnection connection,
         ConnectionEndEventData eventData
-    ) { }
+    )
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task ConnectionDisposedAsync(
@@ -108,7 +108,9 @@ public abstract class DbConnectionInterceptor : IDbConnectionInterceptor
     public virtual void ConnectionFailed(
         DbConnection connection,
         ConnectionErrorEventData eventData
-    ) { }
+    )
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task ConnectionFailedAsync(

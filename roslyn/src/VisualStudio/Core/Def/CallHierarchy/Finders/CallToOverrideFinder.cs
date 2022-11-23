@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             ProjectId projectId,
             IAsynchronousOperationListener asyncListener,
             CallHierarchyProvider provider
-        ) : base(symbol, projectId, asyncListener, provider) { }
+        ) : base(symbol, projectId, asyncListener, provider)
+        {
+        }
 
         public override string DisplayName => EditorFeaturesResources.Calls_To_Overrides;
 

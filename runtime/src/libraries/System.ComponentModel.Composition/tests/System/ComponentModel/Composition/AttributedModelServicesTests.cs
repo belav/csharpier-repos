@@ -26,7 +26,9 @@ namespace System.ComponentModel.Composition.AttributedModel
         }
     }
 
-    public class CPDTest { }
+    public class CPDTest
+    {
+    }
 
     public class AttributedModelServicesTests
     {
@@ -278,15 +280,23 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.True(part1Optional.Imports<IContract1>(ImportCardinality.ZeroOrOne));
         }
 
-        public interface IContract1 { }
+        public interface IContract1
+        {
+        }
 
-        public interface IContract2 { }
+        public interface IContract2
+        {
+        }
 
         [Export(typeof(IContract1))]
-        public class PartExportingContract1 : IContract1 { }
+        public class PartExportingContract1 : IContract1
+        {
+        }
 
         [Export(typeof(IContract2))]
-        public class PartExportingContract2 : IContract2 { }
+        public class PartExportingContract2 : IContract2
+        {
+        }
 
         public class PartImportingContract1
         {

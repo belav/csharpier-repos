@@ -294,7 +294,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private class PublicParameterizedConstructorTestClass
         {
-            public PublicParameterizedConstructorTestClass(string name) { }
+            public PublicParameterizedConstructorTestClass(string name)
+            {
+            }
 
             private PublicParameterizedConstructorTestClass(int internalId)
             {
@@ -716,7 +718,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(18, parsedObject.ParsedSubMixedTypeParsedClass.ParsedDictionary["Key1"]);
         }
 
-        private class POCO { }
+        private class POCO
+        {
+        }
 
         [Theory]
         [InlineData("{}{}")]
@@ -765,7 +769,9 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Deserialize<POCO>(ref reader);
                 Assert.True(false, "Expected exception.");
             }
-            catch (JsonException) { }
+            catch (JsonException)
+            {
+            }
 
             Assert.Equal(0, reader.BytesConsumed);
         }

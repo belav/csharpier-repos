@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract ISyntaxKinds SyntaxKinds { get; }
         protected abstract ISimplification Simplification { get; }

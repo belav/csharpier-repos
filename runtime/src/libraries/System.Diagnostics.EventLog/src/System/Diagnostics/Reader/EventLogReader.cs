@@ -50,12 +50,17 @@ namespace System.Diagnostics.Eventing.Reader
         private readonly ProviderMetadataCachedInformation _cachedMetadataInformation;
 
         public EventLogReader(string path) : this(new EventLogQuery(path, PathType.LogName), null)
-        { }
+        {
+        }
 
         public EventLogReader(string path, PathType pathType)
-            : this(new EventLogQuery(path, pathType), null) { }
+            : this(new EventLogQuery(path, pathType), null)
+        {
+        }
 
-        public EventLogReader(EventLogQuery eventQuery) : this(eventQuery, null) { }
+        public EventLogReader(EventLogQuery eventQuery) : this(eventQuery, null)
+        {
+        }
 
         public EventLogReader(EventLogQuery eventQuery, EventBookmark bookmark)
         {

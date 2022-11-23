@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _value;
 
-        public CodeSnippetExpression() { }
+        public CodeSnippetExpression()
+        {
+        }
 
         public CodeSnippetExpression(string value)
         {

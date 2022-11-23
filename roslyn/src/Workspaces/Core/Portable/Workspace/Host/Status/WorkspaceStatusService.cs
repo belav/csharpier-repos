@@ -18,12 +18,18 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceStatusService() { }
+        public WorkspaceStatusService()
+        {
+        }
 
         event EventHandler IWorkspaceStatusService.StatusChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public Task WaitUntilFullyLoadedAsync(CancellationToken cancellationToken)

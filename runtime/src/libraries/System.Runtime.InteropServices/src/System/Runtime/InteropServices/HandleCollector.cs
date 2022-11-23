@@ -16,7 +16,9 @@ namespace System.Runtime.InteropServices
         private int _gcGeneration;
 
         public HandleCollector(string? name, int initialThreshold)
-            : this(name, initialThreshold, int.MaxValue) { }
+            : this(name, initialThreshold, int.MaxValue)
+        {
+        }
 
         public HandleCollector(string? name, int initialThreshold, int maximumThreshold)
         {

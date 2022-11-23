@@ -8,7 +8,9 @@ public class F1ULongSqliteFixture : F1SqliteFixtureBase<ulong?>
     protected override string StoreName => "F1ULongTest";
 }
 
-public class F1SqliteFixture : F1SqliteFixtureBase<byte[]> { }
+public class F1SqliteFixture : F1SqliteFixtureBase<byte[]>
+{
+}
 
 public abstract class F1SqliteFixtureBase<TRowVersion> : F1RelationalFixture<TRowVersion>
 {

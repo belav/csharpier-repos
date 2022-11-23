@@ -87,7 +87,9 @@ public class KerberosExecutor : IDisposable
                 _testOutputHelper.WriteLine("GSSAPI trace:");
                 _testOutputHelper.WriteLine(File.ReadAllText(_tracePath));
             }
-            catch (IOException) { }
+            catch (IOException)
+            {
+            }
             throw;
         }
         finally

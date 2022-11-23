@@ -247,7 +247,9 @@ namespace Microsoft.Interop.Analyzers
         private static void IgnoreArityMismatch(
             INamedTypeSymbol marshallerType,
             INamedTypeSymbol managedType
-        ) { }
+        )
+        {
+        }
 
         private static async Task<Solution> AddMissingMembers(
             Document doc,

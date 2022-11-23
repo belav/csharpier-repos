@@ -25,7 +25,9 @@ namespace Castle.DynamicProxy.Generators
         public MinimialisticMethodGenerator(
             MetaMethod method,
             OverrideMethodDelegate overrideMethod
-        ) : base(method, overrideMethod) { }
+        ) : base(method, overrideMethod)
+        {
+        }
 
         protected override MethodEmitter BuildProxiedMethodBody(
             MethodEmitter emitter,

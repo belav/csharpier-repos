@@ -13,7 +13,9 @@ namespace System.Net.Http
         {
             private static readonly byte[] s_finalChunkBytes = "0\r\n\r\n"u8.ToArray();
 
-            public ChunkedEncodingWriteStream(HttpConnection connection) : base(connection) { }
+            public ChunkedEncodingWriteStream(HttpConnection connection) : base(connection)
+            {
+            }
 
             public override void Write(ReadOnlySpan<byte> buffer)
             {

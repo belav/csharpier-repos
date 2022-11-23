@@ -55,7 +55,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 newPosition,
                 includesCommitCharacter,
                 ImmutableDictionary<string, string>.Empty
-            ) { }
+            )
+        {
+        }
 
         private CompletionChange(
             TextChange textChange,

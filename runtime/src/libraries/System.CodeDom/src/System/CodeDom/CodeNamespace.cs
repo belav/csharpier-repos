@@ -23,7 +23,9 @@ namespace System.CodeDom
         public event EventHandler PopulateImports;
         public event EventHandler PopulateTypes;
 
-        public CodeNamespace() { }
+        public CodeNamespace()
+        {
+        }
 
         public CodeNamespace(string name)
         {

@@ -210,7 +210,9 @@ public class string1
                 ima2d[0, -1] = "5";
                 pass = false;
             }
-            catch (IndexOutOfRangeException) { }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
 
         Console.WriteLine();
@@ -271,7 +273,9 @@ public class string1
                 ima3d[0, 100, 0] = "";
                 pass = false;
             }
-            catch (IndexOutOfRangeException) { }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
 
         Console.WriteLine();

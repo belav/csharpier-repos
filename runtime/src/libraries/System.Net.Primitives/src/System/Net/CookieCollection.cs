@@ -30,7 +30,9 @@ namespace System.Net
         private DateTime m_TimeStamp = DateTime.MinValue; // Do not rename (binary serialization)
         private bool m_has_other_versions; // Do not rename (binary serialization)
 
-        public CookieCollection() { }
+        public CookieCollection()
+        {
+        }
 
         public Cookie this[int index]
         {

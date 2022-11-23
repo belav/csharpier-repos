@@ -648,9 +648,13 @@ namespace System.Net.Http.Formatting
         public Ref Reference;
     }
 
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     [DataContract]
     public class TypeWithCallbacks
@@ -682,12 +686,16 @@ namespace System.Net.Http.Formatting
         }
     }
 
-    public class DangerousType { }
+    public class DangerousType
+    {
+    }
 
     [Serializable]
     public class ISerializableType : ISerializable, IEquatable<ISerializableType>
     {
-        public ISerializableType() { }
+        public ISerializableType()
+        {
+        }
 
         protected ISerializableType(SerializationInfo info, StreamingContext context)
         {

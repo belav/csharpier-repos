@@ -35,6 +35,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 listenerProvider,
                 AbstractTypeImportCompletionService.BatchUpdateCacheAsync,
                 CancellationToken.None
-            ) { }
+            )
+        {
+        }
     }
 }

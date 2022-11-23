@@ -320,7 +320,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             bool consumed;
             block.ConsumeMessage(
                 new DataflowMessageHeader(-99),
-                new ActionBlock<T>(i => { }),
+                new ActionBlock<T>(i =>
+                {
+                }),
                 out consumed
             );
             Assert.False(consumed);
@@ -345,7 +347,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 block.ConsumeMessage(
                     offeredMessage,
-                    new ActionBlock<T>(delegate { }),
+                    new ActionBlock<T>(
+                        delegate
+                        {
+                        }
+                    ),
                     out consumed
                 ); // different target tries to consume
                 Assert.False(consumed);

@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing
                 organizers
                     .Where(o => o.Metadata.Language == LanguageNames.CSharp)
                     .Select(o => o.Value)
-            ) { }
+            )
+        {
+        }
 
         protected override async Task<Document> ProcessAsync(
             Document document,

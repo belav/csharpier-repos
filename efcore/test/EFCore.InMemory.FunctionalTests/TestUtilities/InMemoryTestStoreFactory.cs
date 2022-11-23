@@ -7,7 +7,9 @@ public class InMemoryTestStoreFactory : ITestStoreFactory
 {
     public static InMemoryTestStoreFactory Instance { get; } = new();
 
-    protected InMemoryTestStoreFactory() { }
+    protected InMemoryTestStoreFactory()
+    {
+    }
 
     public TestStore Create(string storeName) => InMemoryTestStore.Create(storeName);
 

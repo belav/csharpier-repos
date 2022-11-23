@@ -181,7 +181,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private class LowerCaseEnumConverter : JsonStringEnumConverter
         {
-            public LowerCaseEnumConverter() : base(new ToLowerNamingPolicy()) { }
+            public LowerCaseEnumConverter() : base(new ToLowerNamingPolicy())
+            {
+            }
         }
 
         [Fact]
@@ -265,7 +267,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("1", JsonSerializer.Serialize((EmptyEnum)(1), options));
         }
 
-        public enum EmptyEnum { };
+        public enum EmptyEnum
+        {
+        };
 
         [Fact]
         public static void MoreThan64EnumValuesToSerialize()

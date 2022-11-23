@@ -31,7 +31,9 @@ class Runtime_764
         Ptr<string> ptr = new Ptr<string>("Hello, world");
 
         bool res = false;
-        while (res) { }
+        while (res)
+        {
+        }
 
         string summary = ptr.Release();
 

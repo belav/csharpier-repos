@@ -15,7 +15,9 @@ interface IC
     int Add(int i);
 }
 
-interface ID : IA, IB { }
+interface ID : IA, IB
+{
+}
 
 class D : ID
 {

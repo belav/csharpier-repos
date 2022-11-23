@@ -37,7 +37,9 @@ namespace System.Xml.Xsl.Xslt
 
     internal sealed class CompilerErrorCollection : CollectionBase
     {
-        public CompilerErrorCollection() { }
+        public CompilerErrorCollection()
+        {
+        }
 
         public int Add(CompilerError value) => List.Add(value);
 

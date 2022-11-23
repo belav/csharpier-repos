@@ -34,7 +34,8 @@ namespace System.Web.WebPages
 
         public BuildManagerWrapper()
             : this(() => HostingEnvironment.VirtualPathProvider, new VirtualPathUtilityWrapper())
-        { }
+        {
+        }
 
         public BuildManagerWrapper(VirtualPathProvider vpp, IVirtualPathUtility virtualPathUtility)
             : this(() => vpp, virtualPathUtility)

@@ -44,7 +44,9 @@ namespace BigFrames_skippage3
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void Escape(ref LargeStruct s) { }
+        public static void Escape(ref LargeStruct s)
+        {
+        }
 
         // A lot of time the stack when we are called has a bunch of committed pages
         // before the guard page. So eat up a bunch of stack before doing our test,

@@ -3011,7 +3011,9 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Null(feed.Title);
         }
 
-        public class SyndicationFeedSubclass : SyndicationFeed { }
+        public class SyndicationFeedSubclass : SyndicationFeed
+        {
+        }
 
         public class SyndicationFeedTryParseTrueSubclass : SyndicationFeed
         {
@@ -3134,11 +3136,17 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : Atom10FeedFormatter
         {
-            public Formatter() : base() { }
+            public Formatter() : base()
+            {
+            }
 
-            public Formatter(SyndicationFeed feedToWrite) : base(feedToWrite) { }
+            public Formatter(SyndicationFeed feedToWrite) : base(feedToWrite)
+            {
+            }
 
-            public Formatter(Type feedTypeToCreate) : base(feedTypeToCreate) { }
+            public Formatter(Type feedTypeToCreate) : base(feedTypeToCreate)
+            {
+            }
 
             public Type FeedTypeEntryPoint => FeedType;
 
@@ -3171,9 +3179,13 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class GenericFormatter<T> : Atom10FeedFormatter<T> where T : SyndicationFeed, new()
         {
-            public GenericFormatter() : base() { }
+            public GenericFormatter() : base()
+            {
+            }
 
-            public GenericFormatter(T feedToWrite) : base(feedToWrite) { }
+            public GenericFormatter(T feedToWrite) : base(feedToWrite)
+            {
+            }
 
             public Type FeedTypeEntryPoint => FeedType;
 

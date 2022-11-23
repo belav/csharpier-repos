@@ -22,7 +22,9 @@ public struct A
         FLAG.success = true;
     }
 
-    public void methodA() { }
+    public void methodA()
+    {
+    }
 }
 
 public class Test_CctorZeroVal01

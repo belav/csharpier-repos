@@ -22,7 +22,9 @@ namespace System.Net.Http.Headers
             get { return _version; }
         }
 
-        public ProductHeaderValue(string name) : this(name, null) { }
+        public ProductHeaderValue(string name) : this(name, null)
+        {
+        }
 
         public ProductHeaderValue(string name, string? version)
         {

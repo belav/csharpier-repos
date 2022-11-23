@@ -24,7 +24,9 @@ public class OwnedNavigationTableValuedFunctionBuilder<TOwnerEntity, TDependentE
     public OwnedNavigationTableValuedFunctionBuilder(
         IMutableDbFunction function,
         OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder
-    ) : base(function, ownedNavigationBuilder) { }
+    ) : base(function, ownedNavigationBuilder)
+    {
+    }
 
     private OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> OwnedNavigationBuilder =>
         (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)

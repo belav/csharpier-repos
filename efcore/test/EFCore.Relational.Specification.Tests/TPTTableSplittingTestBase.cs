@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class TPTTableSplittingTestBase : TableSplittingTestBase
 {
     protected TPTTableSplittingTestBase(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    { }
+    {
+    }
 
     public override Task Can_use_optional_dependents_with_shared_concurrency_tokens()
         // TODO: Issue #22060

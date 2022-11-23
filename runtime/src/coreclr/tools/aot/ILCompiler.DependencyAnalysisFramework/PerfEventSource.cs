@@ -12,7 +12,9 @@ namespace ILCompiler.DependencyAnalysisFramework
     [EventSource(Name = "Microsoft-ILCompiler-Graph-Perf")]
     public class PerfEventSource : EventSource
     {
-        private PerfEventSource() { }
+        private PerfEventSource()
+        {
+        }
 
         public static PerfEventSource Log = new PerfEventSource();
 

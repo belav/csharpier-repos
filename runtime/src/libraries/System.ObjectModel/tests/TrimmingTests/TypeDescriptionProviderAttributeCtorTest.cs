@@ -52,7 +52,11 @@ class Program
         return true;
     }
 
-    private class MyTypeDescriptionProvider : TypeDescriptionProvider { }
+    private class MyTypeDescriptionProvider : TypeDescriptionProvider
+    {
+    }
 
-    private class MyOtherTypeDescriptionProvider : TypeDescriptionProvider { }
+    private class MyOtherTypeDescriptionProvider : TypeDescriptionProvider
+    {
+    }
 }

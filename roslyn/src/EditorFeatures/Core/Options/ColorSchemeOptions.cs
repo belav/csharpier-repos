@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ColorSchemeOptions() { }
+        public ColorSchemeOptions()
+        {
+        }
 
         ImmutableArray<IOption> IOptionProvider.Options =>
             ImmutableArray.Create<IOption>(ColorScheme, LegacyUseEnhancedColors);

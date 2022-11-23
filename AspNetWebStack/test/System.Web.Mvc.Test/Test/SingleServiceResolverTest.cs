@@ -222,6 +222,8 @@ namespace System.Web.Mvc.Test
             );
         }
 
-        private class TestProvider { }
+        private class TestProvider
+        {
+        }
     }
 }

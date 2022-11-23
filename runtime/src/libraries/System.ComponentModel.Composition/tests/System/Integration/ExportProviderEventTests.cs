@@ -80,7 +80,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Export]
-        public class SampleCatalogExport { }
+        public class SampleCatalogExport
+        {
+        }
 
         [Fact]
         public void CatalogAdd_ShouldFireEvents()

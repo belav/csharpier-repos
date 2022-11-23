@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal class CSharpCommandLineArgumentReader : CommandLineArgumentReader
     {
         private CSharpCommandLineArgumentReader(MSB.Execution.ProjectInstance project)
-            : base(project) { }
+            : base(project)
+        {
+        }
 
         public static ImmutableArray<string> Read(MSB.Execution.ProjectInstance project)
         {

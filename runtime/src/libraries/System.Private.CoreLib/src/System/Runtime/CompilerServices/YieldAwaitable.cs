@@ -225,7 +225,9 @@ namespace System.Runtime.CompilerServices
             }
 
             /// <summary>Ends the await operation.</summary>
-            public void GetResult() { } // Nop. It exists purely because the compiler pattern demands it.
+            public void GetResult()
+            {
+            } // Nop. It exists purely because the compiler pattern demands it.
         }
     }
 }

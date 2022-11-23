@@ -28,7 +28,9 @@ internal partial class XmlSnippetParser
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public XmlSnippetParser() { }
+    public XmlSnippetParser()
+    {
+    }
 
     internal ParsedXmlSnippet? GetParsedXmlSnippet(
         SnippetInfo matchingSnippetInfo,

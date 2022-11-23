@@ -91,7 +91,9 @@ namespace Moq.Tests.ProxyFactories
             string Method() => "Method in IA";
         }
 
-        public class CA : IA { }
+        public class CA : IA
+        {
+        }
 
         public class CAimpl : IA
         {

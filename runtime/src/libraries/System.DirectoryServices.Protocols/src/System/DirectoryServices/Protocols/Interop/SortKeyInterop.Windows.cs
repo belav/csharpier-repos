@@ -12,5 +12,7 @@ using System.Runtime.Versioning;
 namespace System.DirectoryServices.Protocols
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    internal partial struct SortKeyInterop { }
+    internal partial struct SortKeyInterop
+    {
+    }
 }

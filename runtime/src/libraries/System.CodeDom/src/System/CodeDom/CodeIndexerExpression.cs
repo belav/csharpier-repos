@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private CodeExpressionCollection _indices;
 
-        public CodeIndexerExpression() { }
+        public CodeIndexerExpression()
+        {
+        }
 
         public CodeIndexerExpression(CodeExpression targetObject, params CodeExpression[] indices)
         {

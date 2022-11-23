@@ -33,7 +33,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates an empty ExtenderProvidedPropertyAttribute.
         /// </summary>
-        public ExtenderProvidedPropertyAttribute() { }
+        public ExtenderProvidedPropertyAttribute()
+        {
+        }
 
         /// <summary>
         /// PropertyDescriptor of the property that is being provided.

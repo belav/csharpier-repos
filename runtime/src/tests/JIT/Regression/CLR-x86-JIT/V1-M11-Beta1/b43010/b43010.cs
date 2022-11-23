@@ -8,7 +8,9 @@ namespace Test
 
     class App
     {
-        static void Static1(ulong param2, object param3) { }
+        static void Static1(ulong param2, object param3)
+        {
+        }
 
         static int Main()
         {
@@ -21,7 +23,9 @@ namespace Test
                 {
                     Static1(arr[(int)u], (object)(205 + (150u * i)));
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
             return 100;
         }

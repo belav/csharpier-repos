@@ -34,13 +34,17 @@ public class DecimalTypeMapping : RelationalTypeMapping
         DbType? dbType = System.Data.DbType.Decimal,
         int? precision = null,
         int? scale = null
-    ) : base(storeType, typeof(decimal), dbType, precision: precision, scale: scale) { }
+    ) : base(storeType, typeof(decimal), dbType, precision: precision, scale: scale)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DecimalTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected DecimalTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected DecimalTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

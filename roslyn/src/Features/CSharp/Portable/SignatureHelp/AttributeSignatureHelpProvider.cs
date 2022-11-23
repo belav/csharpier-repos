@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AttributeSignatureHelpProvider() { }
+        public AttributeSignatureHelpProvider()
+        {
+        }
 
         public override bool IsTriggerCharacter(char ch) => ch is '(' or ',';
 

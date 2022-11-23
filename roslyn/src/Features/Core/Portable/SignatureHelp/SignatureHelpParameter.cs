@@ -170,7 +170,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 prefixDisplayParts.ToTaggedText(),
                 suffixDisplayParts.ToTaggedText(),
                 selectedDisplayParts.ToTaggedText()
-            ) { }
+            )
+        {
+        }
 
         public SignatureHelpParameter(
             string name,

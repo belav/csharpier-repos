@@ -25,7 +25,8 @@ namespace Moq.Tests
         [Fact]
         public void Returns_does_not_accept_delegate_without_return_value()
         {
-            Action<object> delegateWithoutReturnValue = (arg) => { };
+            Action<object> delegateWithoutReturnValue = (arg) => {
+            };
 
             var ex = Record.Exception(() =>
             {

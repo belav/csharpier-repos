@@ -663,7 +663,9 @@ namespace System.IO.Compression
                                             0,
                                             buffer.Length
                                         ) != 0
-                                    ) { }
+                                    )
+                                    {
+                                    }
                                     ;
                                     break;
 
@@ -675,16 +677,22 @@ namespace System.IO.Compression
                                             0,
                                             buffer.Length
                                         ) != 0
-                                    ) { }
+                                    )
+                                    {
+                                    }
                                     ;
                                     break;
 
                                 case TestScenario.ReadByte:
-                                    while (decompressor.ReadByte() != -1) { }
+                                    while (decompressor.ReadByte() != -1)
+                                    {
+                                    }
                                     break;
 
                                 case TestScenario.ReadByteAsync:
-                                    while (await decompressor.ReadByteAsync() != -1) { }
+                                    while (await decompressor.ReadByteAsync() != -1)
+                                    {
+                                    }
                                     break;
                             }
                         }
@@ -770,9 +778,13 @@ namespace System.IO.Compression
                 : base.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override bool CanRead
         {

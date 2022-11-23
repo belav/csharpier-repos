@@ -81,9 +81,13 @@ public abstract class CodeTarget
         return builder.Build();
     }
 
-    internal static void AddDesignTimeDefaults(CodeTargetBuilder builder) { }
+    internal static void AddDesignTimeDefaults(CodeTargetBuilder builder)
+    {
+    }
 
-    internal static void AddRuntimeDefaults(CodeTargetBuilder builder) { }
+    internal static void AddRuntimeDefaults(CodeTargetBuilder builder)
+    {
+    }
 
     public abstract IntermediateNodeWriter CreateNodeWriter();
 

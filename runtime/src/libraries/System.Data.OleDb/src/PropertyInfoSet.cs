@@ -37,7 +37,9 @@ namespace System.Data.OleDb
             OleDbHResult hr;
             int propIDSetCount = propIDSet.Count;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 hr = idbProperties.GetPropertyInfo(

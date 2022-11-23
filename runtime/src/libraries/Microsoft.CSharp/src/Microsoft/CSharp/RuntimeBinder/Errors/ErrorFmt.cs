@@ -60,7 +60,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
         internal MethPropWithInstMemo mpwiMemo;
         internal SymWithTypeMemo swtMemo;
 
-        public ErrArg() { }
+        public ErrArg()
+        {
+        }
 
         public ErrArg(int n)
         {
@@ -83,7 +85,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.psz = psz;
         }
 
-        public ErrArg(CType pType) : this(pType, ErrArgFlags.None) { }
+        public ErrArg(CType pType) : this(pType, ErrArgFlags.None)
+        {
+        }
 
         public ErrArg(CType pType, ErrArgFlags eaf)
         {
@@ -92,7 +96,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.pType = pType;
         }
 
-        public ErrArg(Symbol pSym) : this(pSym, ErrArgFlags.None) { }
+        public ErrArg(Symbol pSym) : this(pSym, ErrArgFlags.None)
+        {
+        }
 
         private ErrArg(Symbol pSym, ErrArgFlags eaf)
         {

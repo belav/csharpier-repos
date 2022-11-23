@@ -73,7 +73,9 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="SnakeCaseNamingStrategy"/> class.
         /// </summary>
-        public SnakeCaseNamingStrategy() { }
+        public SnakeCaseNamingStrategy()
+        {
+        }
 
         /// <summary>
         /// Resolves the specified property name.

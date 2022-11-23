@@ -214,7 +214,9 @@ namespace Internal.TypeSystem.Interop
         /// Protected ctor
         /// Only Marshaller.CreateMarshaller can create a marshaller
         /// </summary>
-        protected Marshaller() { }
+        protected Marshaller()
+        {
+        }
 
         /// <summary>
         /// Create a marshaller
@@ -778,7 +780,9 @@ namespace Internal.TypeSystem.Interop
             TransformNativeToManaged(codeStream);
         }
 
-        protected virtual void AllocManagedToNative(ILCodeStream codeStream) { }
+        protected virtual void AllocManagedToNative(ILCodeStream codeStream)
+        {
+        }
 
         protected virtual void TransformManagedToNative(ILCodeStream codeStream)
         {
@@ -786,9 +790,13 @@ namespace Internal.TypeSystem.Interop
             StoreNativeValue(codeStream);
         }
 
-        protected virtual void ClearManagedTransform(ILCodeStream codeStream) { }
+        protected virtual void ClearManagedTransform(ILCodeStream codeStream)
+        {
+        }
 
-        protected virtual void AllocNativeToManaged(ILCodeStream codeStream) { }
+        protected virtual void AllocNativeToManaged(ILCodeStream codeStream)
+        {
+        }
 
         protected virtual void TransformNativeToManaged(ILCodeStream codeStream)
         {
@@ -796,7 +804,9 @@ namespace Internal.TypeSystem.Interop
             StoreManagedValue(codeStream);
         }
 
-        protected virtual void EmitCleanupManaged(ILCodeStream codeStream) { }
+        protected virtual void EmitCleanupManaged(ILCodeStream codeStream)
+        {
+        }
 
         protected virtual void EmitMarshalReturnValueNativeToManaged()
         {
@@ -904,11 +914,17 @@ namespace Internal.TypeSystem.Interop
             LoadManagedValue(codeStream);
         }
 
-        protected virtual void ReInitManagedTransform(ILCodeStream codeStream) { }
+        protected virtual void ReInitManagedTransform(ILCodeStream codeStream)
+        {
+        }
 
-        protected virtual void ReInitNativeTransform(ILCodeStream codeStream) { }
+        protected virtual void ReInitNativeTransform(ILCodeStream codeStream)
+        {
+        }
 
-        internal virtual void EmitElementCleanup(ILCodeStream codestream, ILEmitter emitter) { }
+        internal virtual void EmitElementCleanup(ILCodeStream codestream, ILEmitter emitter)
+        {
+        }
     }
 
     internal sealed class NotSupportedMarshaller : Marshaller
@@ -921,9 +937,13 @@ namespace Internal.TypeSystem.Interop
 
     internal sealed class VoidReturnMarshaller : Marshaller
     {
-        protected override void EmitMarshalReturnValueManagedToNative() { }
+        protected override void EmitMarshalReturnValueManagedToNative()
+        {
+        }
 
-        protected override void EmitMarshalReturnValueNativeToManaged() { }
+        protected override void EmitMarshalReturnValueNativeToManaged()
+        {
+        }
 
         public override void LoadReturnValue(ILCodeStream codeStream)
         {

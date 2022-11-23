@@ -111,7 +111,9 @@ namespace Microsoft.CodeAnalysis
                     return false;
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             try
             {

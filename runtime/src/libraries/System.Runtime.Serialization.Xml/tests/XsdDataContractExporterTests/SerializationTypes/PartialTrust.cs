@@ -75,7 +75,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 //Console.WriteLine("Default Ctor");
             }
 
-            public AttributeOnlyIXmlSerializable(string init) { }
+            public AttributeOnlyIXmlSerializable(string init)
+            {
+            }
 
             public XmlSchema GetSchema()
             {
@@ -103,7 +105,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 //may be called to invoke GetSchema() method
             }
 
-            public UnsafeAttributeOnlyIXmlSerializable(string init) { }
+            public UnsafeAttributeOnlyIXmlSerializable(string init)
+            {
+            }
         }
     }
 }

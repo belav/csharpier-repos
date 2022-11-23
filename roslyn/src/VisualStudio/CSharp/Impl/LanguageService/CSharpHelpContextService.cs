@@ -33,7 +33,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpHelpContextService() { }
+        public CSharpHelpContextService()
+        {
+        }
 
         public override string Language => "csharp";
         public override string Product => "csharp";

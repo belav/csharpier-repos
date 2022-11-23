@@ -15,7 +15,9 @@ namespace System.Net
         private int _storedOffset;
         private readonly bool _readMore;
 
-        internal BufferedReadStream(Stream stream) : this(stream, false) { }
+        internal BufferedReadStream(Stream stream) : this(stream, false)
+        {
+        }
 
         internal BufferedReadStream(Stream stream, bool readMore) : base(stream)
         {

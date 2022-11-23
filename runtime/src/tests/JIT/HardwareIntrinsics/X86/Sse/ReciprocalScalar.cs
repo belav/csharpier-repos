@@ -131,7 +131,9 @@ namespace IntelHardwareIntrinsicTest
             GCHandle inHandle2;
             GCHandle outHandle;
 
-            public TestTable(T[] a, T[] b) : this(a, a, b) { }
+            public TestTable(T[] a, T[] b) : this(a, a, b)
+            {
+            }
 
             public TestTable(T[] a, T[] b, T[] c)
             {

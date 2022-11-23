@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CommentSelection
                 editorOperationsFactoryService,
                 navigatorSelectorService,
                 editorOptionsService
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Gets block comments by parsing the text for comment markers.

@@ -379,7 +379,9 @@ public class Child<T>
                 >
             >
         >
-    >.Method1<Sa>() { }
+    >.Method1<Sa>()
+    {
+    }
 }
 
 public class Child2<T>
@@ -439,5 +441,7 @@ public class Child2<T>
         IParent<IParent<bool>>,
         IParent<char>,
         IParent<int>
-    >.Method1<Sa>() { }
+    >.Method1<Sa>()
+    {
+    }
 }

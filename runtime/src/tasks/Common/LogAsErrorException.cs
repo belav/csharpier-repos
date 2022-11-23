@@ -3,5 +3,7 @@
 
 public class LogAsErrorException : System.Exception
 {
-    public LogAsErrorException(string message) : base(message) { }
+    public LogAsErrorException(string message) : base(message)
+    {
+    }
 }

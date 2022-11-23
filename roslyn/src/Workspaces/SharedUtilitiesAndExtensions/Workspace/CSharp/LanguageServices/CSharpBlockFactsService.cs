@@ -15,6 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpBlockFactsService() { }
+        public CSharpBlockFactsService()
+        {
+        }
     }
 }

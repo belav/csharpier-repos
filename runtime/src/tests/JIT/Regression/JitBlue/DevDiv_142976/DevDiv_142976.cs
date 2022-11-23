@@ -45,7 +45,9 @@ class DevDiv_142976
         {
             Bar();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         Console.WriteLine("Pass");
         return 100;

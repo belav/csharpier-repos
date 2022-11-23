@@ -74,7 +74,9 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                             currentSyntaxTree
                         );
                     }
-                    catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+                    catch (Exception e) when (FatalError.ReportAndCatch(e))
+                    {
+                    }
                 }
 
                 return null;

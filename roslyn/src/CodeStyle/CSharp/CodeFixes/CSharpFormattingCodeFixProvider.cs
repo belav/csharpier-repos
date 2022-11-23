@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFormattingCodeFixProvider() { }
+        public CSharpFormattingCodeFixProvider()
+        {
+        }
 
         protected override ISyntaxFormattingService SyntaxFormattingService =>
             CSharpSyntaxFormattingService.Instance;

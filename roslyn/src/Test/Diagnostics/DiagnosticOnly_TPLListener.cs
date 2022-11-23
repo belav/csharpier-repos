@@ -26,7 +26,8 @@ namespace Roslyn.Hosting.Diagnostics
         {
             // make sure TPL installs its own event source
             Task.Factory.StartNew(
-                () => { },
+                () => {
+                },
                 CancellationToken.None,
                 TaskCreationOptions.None,
                 TaskScheduler.Default

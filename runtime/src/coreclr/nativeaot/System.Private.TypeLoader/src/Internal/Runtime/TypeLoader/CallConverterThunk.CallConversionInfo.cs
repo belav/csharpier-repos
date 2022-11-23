@@ -28,7 +28,9 @@ namespace Internal.Runtime.TypeLoader
 
     internal class CallConversionInfo : IEquatable<CallConversionInfo>
     {
-        private CallConversionInfo() { }
+        private CallConversionInfo()
+        {
+        }
 
         private static int s_callConvertersCount;
         private static volatile CallConversionInfo[] s_callConverters = new CallConversionInfo[512];

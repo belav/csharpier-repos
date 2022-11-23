@@ -666,9 +666,13 @@ namespace System.Text.Json.Serialization.Tests
                 };
         }
 
-        public class MyPublicClass { }
+        public class MyPublicClass
+        {
+        }
 
-        public struct MyPublicStruct { }
+        public struct MyPublicStruct
+        {
+        }
 
         public enum MyEnum
         {

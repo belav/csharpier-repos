@@ -13,14 +13,18 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
         /// </summary>
         /// <param name="assemblyName"></param>
         /// <param name="attributeTypeName"></param>
-        public RemovedAttributeInAssembly(string assemblyName, string attributeTypeName) { }
+        public RemovedAttributeInAssembly(string assemblyName, string attributeTypeName)
+        {
+        }
 
         /// <summary>
         /// Asserts a CustomAttribute was kept on an assembly
         /// </summary>
         /// <param name="assemblyName"></param>
         /// <param name="attributeType"></param>
-        public RemovedAttributeInAssembly(string assemblyName, Type attributeType) { }
+        public RemovedAttributeInAssembly(string assemblyName, Type attributeType)
+        {
+        }
 
         /// <summary>
         /// Asserts a CustomAttribute was kept on a specific type
@@ -32,7 +36,9 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
             string assemblyName,
             string attributeTypeName,
             string onType
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// Asserts a CustomAttribute was kept on a specific type
@@ -40,7 +46,9 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
         /// <param name="assemblyName"></param>
         /// <param name="attributeType"></param>
         /// <param name="onType"></param>
-        public RemovedAttributeInAssembly(string assemblyName, Type attributeType, Type onType) { }
+        public RemovedAttributeInAssembly(string assemblyName, Type attributeType, Type onType)
+        {
+        }
 
         /// <summary>
         /// Asserts a CustomAttribute was kept on a member in a specific type
@@ -54,7 +62,9 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
             string attributeTypeName,
             string onType,
             string member
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// Asserts a CustomAttribute was kept on a member in a specific type
@@ -68,6 +78,8 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
             Type attributeType,
             Type onType,
             string member
-        ) { }
+        )
+        {
+        }
     }
 }

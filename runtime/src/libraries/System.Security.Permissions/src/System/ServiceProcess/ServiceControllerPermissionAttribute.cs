@@ -25,22 +25,30 @@ namespace System.ServiceProcess
     )]
     public class ServiceControllerPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public ServiceControllerPermissionAttribute(SecurityAction action) : base(action) { }
+        public ServiceControllerPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public string MachineName
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
         public ServiceControllerPermissionAccess PermissionAccess
         {
             get => default(ServiceControllerPermissionAccess);
-            set { }
+            set
+            {
+            }
         }
         public string ServiceName
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
 
         public override IPermission CreatePermission()

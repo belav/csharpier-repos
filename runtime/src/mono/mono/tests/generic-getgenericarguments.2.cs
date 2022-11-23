@@ -5,7 +5,9 @@ public delegate void TestDelegate();
 
 public class Bla
 {
-    public static void test<T>() { }
+    public static void test<T>()
+    {
+    }
 }
 
 public class main

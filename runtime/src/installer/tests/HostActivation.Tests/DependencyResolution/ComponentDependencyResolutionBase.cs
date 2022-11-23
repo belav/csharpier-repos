@@ -52,9 +52,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             protected virtual void CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(
                 NetCoreAppBuilder builder
-            ) { }
+            )
+            {
+            }
 
-            protected virtual void CustomizeDotNetWithNetCoreApp(DotNetBuilder builder) { }
+            protected virtual void CustomizeDotNetWithNetCoreApp(DotNetBuilder builder)
+            {
+            }
 
             public CommandResult RunComponentResolutionTest(
                 TestApp component,

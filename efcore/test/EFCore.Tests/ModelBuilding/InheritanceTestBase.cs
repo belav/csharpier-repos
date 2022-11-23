@@ -1156,9 +1156,13 @@ public abstract partial class ModelBuilderTest
             public Q F { get; set; }
         }
 
-        protected abstract class P : PBase { }
+        protected abstract class P : PBase
+        {
+        }
 
-        protected class Q : PBase { }
+        protected class Q : PBase
+        {
+        }
 
         protected abstract class PBase
         {

@@ -214,7 +214,9 @@ namespace System.DirectoryServices.Protocols
         public BerVal ldctl_value;
         public bool ldctl_iscritical;
 
-        public LdapControl() { }
+        public LdapControl()
+        {
+        }
     }
 
 #if NET7_0_OR_GREATER
@@ -307,7 +309,9 @@ namespace System.DirectoryServices.Protocols
 
                 public void OnInvoked() => GC.KeepAlive(_managed);
 
-                public void Free() { }
+                public void Free()
+                {
+                }
             }
         }
 #else

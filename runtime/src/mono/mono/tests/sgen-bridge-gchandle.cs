@@ -14,7 +14,9 @@ public class Bridge
         {
             Console.WriteLine("bridge {0} gone", id);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 }
 

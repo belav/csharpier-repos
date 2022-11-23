@@ -571,7 +571,8 @@ namespace MonoTests.System.Runtime.Caching
             Assert.True(mc.Contains("key3_A2-2"));
 
             cip = new CacheItemPolicy();
-            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
+            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => {
+            };
             object value = mc.AddOrGetExisting("key3_A2-3", "value", cip);
             Assert.True(mc.Contains("key3_A2-3"));
             Assert.Null(value);
@@ -651,7 +652,8 @@ namespace MonoTests.System.Runtime.Caching
 
             ci = new CacheItem("key3", "value");
             var cip = new CacheItemPolicy();
-            cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => { };
+            cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => {
+            };
             Assert.Throws<ArgumentException>(() =>
             {
                 ci2 = mc.AddOrGetExisting(ci, cip);
@@ -704,7 +706,8 @@ namespace MonoTests.System.Runtime.Caching
 
             ci = new CacheItem("key3_B7", "value");
             cip = new CacheItemPolicy();
-            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
+            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => {
+            };
             ci2 = mc.AddOrGetExisting(ci, cip);
             Assert.True(mc.Contains("key3_B7"));
 
@@ -755,8 +758,10 @@ namespace MonoTests.System.Runtime.Caching
             });
 
             var cip = new CacheItemPolicy();
-            cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => { };
-            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
+            cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => {
+            };
+            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => {
+            };
             Assert.Throws<ArgumentException>(() =>
             {
                 mc.Set("key", "value", cip);
@@ -794,7 +799,8 @@ namespace MonoTests.System.Runtime.Caching
             });
 
             cip = new CacheItemPolicy();
-            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
+            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => {
+            };
             mc.Set("key_A2", "value_A2", cip);
             Assert.True(mc.Contains("key_A2"));
 
@@ -902,8 +908,10 @@ namespace MonoTests.System.Runtime.Caching
 
             ci = new CacheItem("key", "value");
             var cip = new CacheItemPolicy();
-            cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => { };
-            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
+            cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => {
+            };
+            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => {
+            };
             Assert.Throws<ArgumentException>(() =>
             {
                 mc.Set(ci, cip);
@@ -947,7 +955,8 @@ namespace MonoTests.System.Runtime.Caching
 
             ci = new CacheItem("key_A2", "value_A2");
             cip = new CacheItemPolicy();
-            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
+            cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => {
+            };
             mc.Set(ci, cip);
             Assert.True(mc.Contains("key_A2"));
 

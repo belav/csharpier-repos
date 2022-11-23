@@ -10,7 +10,9 @@ namespace ILCompiler.IBC
 {
     public class IBCException : Exception
     {
-        public IBCException(string message) : base(message) { }
+        public IBCException(string message) : base(message)
+        {
+        }
     }
 
     public static class IBCData
@@ -282,7 +284,9 @@ namespace ILCompiler.IBC
             public byte[] Payload;
         }
 
-        public class EndOfStreamEntry : BlobEntry { }
+        public class EndOfStreamEntry : BlobEntry
+        {
+        }
     }
 
     // Fields are null if the corresponding section did not occur in the file.

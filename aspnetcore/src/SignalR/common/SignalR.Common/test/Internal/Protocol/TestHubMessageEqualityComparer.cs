@@ -13,7 +13,9 @@ public class TestHubMessageEqualityComparer : IEqualityComparer<HubMessage>
     public static readonly TestHubMessageEqualityComparer Instance =
         new TestHubMessageEqualityComparer();
 
-    private TestHubMessageEqualityComparer() { }
+    private TestHubMessageEqualityComparer()
+    {
+    }
 
     public bool Equals(HubMessage x, HubMessage y)
     {

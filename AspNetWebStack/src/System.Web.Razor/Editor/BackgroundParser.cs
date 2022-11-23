@@ -129,7 +129,9 @@ namespace System.Web.Razor.Editor
             private int _id = -1;
 #endif
 
-            protected ThreadStateBase() { }
+            protected ThreadStateBase()
+            {
+            }
 
             [SuppressMessage(
                 "Microsoft.Performance",
@@ -534,7 +536,9 @@ namespace System.Web.Razor.Editor
                                     _main.ReturnParcel(args);
                                 }
                             }
-                            catch (OperationCanceledException) { }
+                            catch (OperationCanceledException)
+                            {
+                            }
                         }
                         else
                         {

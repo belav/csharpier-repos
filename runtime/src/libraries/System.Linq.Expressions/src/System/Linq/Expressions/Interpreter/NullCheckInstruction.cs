@@ -7,7 +7,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         public static readonly Instruction Instance = new NullCheckInstruction();
 
-        private NullCheckInstruction() { }
+        private NullCheckInstruction()
+        {
+        }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;

@@ -27,5 +27,7 @@ class Runtime_57535_1
         return result;
     }
 
-    static void Bar(long z) { }
+    static void Bar(long z)
+    {
+    }
 }

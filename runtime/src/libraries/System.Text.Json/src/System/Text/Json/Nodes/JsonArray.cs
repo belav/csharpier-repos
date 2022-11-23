@@ -26,7 +26,9 @@ namespace System.Text.Json.Nodes
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that is empty.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonArray(JsonNodeOptions? options = null) : base(options) { }
+        public JsonArray(JsonNodeOptions? options = null) : base(options)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that contains items from the specified params array.

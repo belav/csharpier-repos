@@ -121,7 +121,9 @@ namespace System.Net
                     NetEventSource.Info(this);
                 ((IDisposable)this).Dispose();
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         public void Close(byte[] responseEntity, bool willBlock)
@@ -145,7 +147,9 @@ namespace System.Net
                 {
                     _responseStream.Write(responseEntity, 0, responseEntity.Length);
                 }
-                catch (Win32Exception) { }
+                catch (Win32Exception)
+                {
+                }
                 finally
                 {
                     _responseStream.Close();
@@ -193,7 +197,9 @@ namespace System.Net
             {
                 _responseStream!.EndWrite(asyncResult);
             }
-            catch (Win32Exception) { }
+            catch (Win32Exception)
+            {
+            }
             finally
             {
                 _responseStream!.Close();

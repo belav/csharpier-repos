@@ -55,7 +55,13 @@ public class MemoryOptimizedTablesTest
     protected TestStore CreateTestStore()
     {
         TestStore = SqlServerTestStore.Create(nameof(MemoryOptimizedTablesTest));
-        TestStore.Initialize(null, CreateContext, c => { });
+        TestStore.Initialize(
+            null,
+            CreateContext,
+            c =>
+            {
+            }
+        );
         return TestStore;
     }
 
@@ -68,7 +74,9 @@ public class MemoryOptimizedTablesTest
 
     private class MemoryOptimizedContext : DbContext
     {
-        public MemoryOptimizedContext(DbContextOptions options) : base(options) { }
+        public MemoryOptimizedContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<FastUn> FastUns { get; set; }
 

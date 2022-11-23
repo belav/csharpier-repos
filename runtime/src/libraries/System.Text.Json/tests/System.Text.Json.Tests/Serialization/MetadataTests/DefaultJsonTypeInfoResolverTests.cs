@@ -42,9 +42,12 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Same(r.Modifiers, r.Modifiers);
             var mods = r.Modifiers;
 
-            Action<JsonTypeInfo> el0 = (ti) => { };
-            Action<JsonTypeInfo> el1 = (ti) => { };
-            Action<JsonTypeInfo> el2 = (ti) => { };
+            Action<JsonTypeInfo> el0 = (ti) => {
+            };
+            Action<JsonTypeInfo> el1 = (ti) => {
+            };
+            Action<JsonTypeInfo> el2 = (ti) => {
+            };
             Assert.NotSame(el0, el1);
             Assert.NotSame(el1, el2);
             IEnumerator<Action<JsonTypeInfo>> enumerator;
@@ -110,8 +113,21 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Same(mods, r.Modifiers);
             Assert.Equal(0, mods.Count);
 
-            Assert.Throws<InvalidOperationException>(() => mods.Add((ti) => { }));
-            Assert.Throws<InvalidOperationException>(() => mods.Insert(0, (ti) => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    mods.Add(
+                        (ti) => {
+                        }
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    mods.Insert(
+                        0,
+                        (ti) => {
+                        }
+                    )
+            );
         }
 
         [Fact]
@@ -119,8 +135,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             DefaultJsonTypeInfoResolver r = new();
             IList<Action<JsonTypeInfo>> mods = r.Modifiers;
-            Action<JsonTypeInfo> el0 = (ti) => { };
-            Action<JsonTypeInfo> el1 = (ti) => { };
+            Action<JsonTypeInfo> el0 = (ti) => {
+            };
+            Action<JsonTypeInfo> el1 = (ti) => {
+            };
             mods.Add(el0);
             mods.Add(el1);
 
@@ -130,8 +148,21 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Same(mods, r.Modifiers);
             Assert.Equal(2, mods.Count);
 
-            Assert.Throws<InvalidOperationException>(() => mods.Add((ti) => { }));
-            Assert.Throws<InvalidOperationException>(() => mods.Insert(0, (ti) => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    mods.Add(
+                        (ti) => {
+                        }
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    mods.Insert(
+                        0,
+                        (ti) => {
+                        }
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() => mods.Remove(el0));
             Assert.Throws<InvalidOperationException>(() => mods.RemoveAt(0));
         }
@@ -217,7 +248,9 @@ namespace System.Text.Json.Serialization.Tests
 
         [JsonSerializable(typeof(SomeClass))]
         [JsonSerializable(typeof(SomeOtherClass))]
-        private partial class SomeClassContext : JsonSerializerContext { }
+        private partial class SomeClassContext : JsonSerializerContext
+        {
+        }
 
         private class CustomThrowingConverter<T> : JsonConverter<T>
         {
@@ -246,7 +279,9 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 T value,
                 JsonSerializerOptions options
-            ) { }
+            )
+            {
+            }
         }
 
         private class SomeRecursiveClass
@@ -258,7 +293,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(DerivedClass))]
         private class SomePolymorphicClass
         {
-            public class DerivedClass : SomePolymorphicClass { }
+            public class DerivedClass : SomePolymorphicClass
+            {
+            }
         }
     }
 }

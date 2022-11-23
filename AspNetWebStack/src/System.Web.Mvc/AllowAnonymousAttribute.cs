@@ -12,5 +12,7 @@ namespace System.Web.Mvc
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed class AllowAnonymousAttribute : Attribute { }
+    public sealed class AllowAnonymousAttribute : Attribute
+    {
+    }
 }

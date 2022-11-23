@@ -11,7 +11,9 @@ namespace System.IO.Strategies
     internal sealed partial class AsyncWindowsFileStreamStrategy : OSFileStreamStrategy
     {
         internal AsyncWindowsFileStreamStrategy(SafeFileHandle handle, FileAccess access)
-            : base(handle, access) { }
+            : base(handle, access)
+        {
+        }
 
         internal AsyncWindowsFileStreamStrategy(
             string path,
@@ -21,7 +23,9 @@ namespace System.IO.Strategies
             FileOptions options,
             long preallocationSize,
             UnixFileMode? unixCreateMode
-        ) : base(path, mode, access, share, options, preallocationSize, unixCreateMode) { }
+        ) : base(path, mode, access, share, options, preallocationSize, unixCreateMode)
+        {
+        }
 
         internal override bool IsAsync => true;
 

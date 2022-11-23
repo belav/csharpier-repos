@@ -45,7 +45,9 @@ public class ThreadSafe
     public KrisClass Val = new KrisClass("hello world! ");
     private int numberOfIterations;
 
-    public ThreadSafe() : this(100) { }
+    public ThreadSafe() : this(100)
+    {
+    }
 
     public ThreadSafe(int loops)
     {

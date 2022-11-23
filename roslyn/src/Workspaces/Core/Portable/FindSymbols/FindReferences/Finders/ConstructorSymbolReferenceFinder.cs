@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
     {
         public static readonly ConstructorSymbolReferenceFinder Instance = new();
 
-        private ConstructorSymbolReferenceFinder() { }
+        private ConstructorSymbolReferenceFinder()
+        {
+        }
 
         protected override bool CanFind(IMethodSymbol symbol) =>
             symbol.MethodKind is MethodKind.Constructor or MethodKind.StaticConstructor;

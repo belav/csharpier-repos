@@ -299,7 +299,9 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasFixedSlots => false;
 
         public LazilyBuiltDictionaryLayoutNode(TypeSystemEntity owningMethodOrType)
-            : base(owningMethodOrType) { }
+            : base(owningMethodOrType)
+        {
+        }
 
         public override void EnsureEntry(GenericLookupResult entry)
         {

@@ -117,7 +117,13 @@ namespace System.Tests
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "length",
-                () => string.Create(-1, 0, (span, state) => { })
+                () =>
+                    string.Create(
+                        -1,
+                        0,
+                        (span, state) => {
+                        }
+                    )
             );
         }
 

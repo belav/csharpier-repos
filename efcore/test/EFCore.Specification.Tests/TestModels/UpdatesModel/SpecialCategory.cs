@@ -5,4 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-public class SpecialCategory : Category { }
+public class SpecialCategory : Category
+{
+}

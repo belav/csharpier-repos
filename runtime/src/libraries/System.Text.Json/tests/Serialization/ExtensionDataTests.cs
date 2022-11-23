@@ -356,7 +356,9 @@ namespace System.Text.Json.Serialization.Tests
             public T Overflow { get; set; }
         }
 
-        public class CustomOverflowDictionary<T> : Dictionary<string, T> { }
+        public class CustomOverflowDictionary<T> : Dictionary<string, T>
+        {
+        }
 
         public class DictionaryOverflowConverter : JsonConverter<Dictionary<string, object>>
         {

@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common
         public int Column { get; set; }
         public string? Code { get; set; }
 
-        public Reference() { }
+        public Reference()
+        {
+        }
 
         public bool Equals(Reference? other)
         {

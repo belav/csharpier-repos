@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnnecessaryImportsService() { }
+        public CSharpRemoveUnnecessaryImportsService()
+        {
+        }
 
 #if CODE_STYLE
         private static ISyntaxFormatting GetSyntaxFormatting() => CSharpSyntaxFormatting.Instance;

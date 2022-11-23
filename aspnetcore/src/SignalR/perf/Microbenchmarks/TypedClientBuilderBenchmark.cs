@@ -16,7 +16,9 @@ public class TypedClientBuilderBenchmark
         return TypedClientBuilder<ITestClient>.Build(Dummy);
     }
 
-    public interface ITestClient { }
+    public interface ITestClient
+    {
+    }
 
     private sealed class DummyProxy : IClientProxy
     {

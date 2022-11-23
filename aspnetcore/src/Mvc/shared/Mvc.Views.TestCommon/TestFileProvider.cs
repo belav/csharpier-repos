@@ -18,7 +18,9 @@ public class TestFileProvider : IFileProvider
         TestFileChangeToken
     >(StringComparer.Ordinal);
 
-    public TestFileProvider() : this(string.Empty) { }
+    public TestFileProvider() : this(string.Empty)
+    {
+    }
 
     public TestFileProvider(string root)
     {

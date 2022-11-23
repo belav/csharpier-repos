@@ -19,7 +19,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     ReferenceHandlerTests_IgnoreCyclesContext_Metadata.Default,
                     (options) => new ReferenceHandlerTests_IgnoreCyclesContext_Metadata(options)
                 )
-            ) { }
+            )
+        {
+        }
     }
 
     public sealed class ReferenceHandlerTests_IgnoreCycles_Metadata_AsyncStream
@@ -31,14 +33,18 @@ namespace System.Text.Json.SourceGeneration.Tests
                     ReferenceHandlerTests_IgnoreCyclesContext_Metadata.Default,
                     (options) => new ReferenceHandlerTests_IgnoreCyclesContext_Metadata(options)
                 )
-            ) { }
+            )
+        {
+        }
     }
 
     public abstract partial class ReferenceHandlerTests_IgnoreCycles_Metadata
         : ReferenceHandlerTests_IgnoreCycles
     {
         public ReferenceHandlerTests_IgnoreCycles_Metadata(JsonSerializerWrapper serializer)
-            : base(serializer) { }
+            : base(serializer)
+        {
+        }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(Dictionary<string, object>))]
@@ -97,7 +103,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TreeNode<object>))]
         [JsonSerializable(typeof(int))]
         internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Metadata
-            : JsonSerializerContext { }
+            : JsonSerializerContext
+        {
+        }
     }
 
     public sealed class ReferenceHandlerTests_IgnoreCycles_Default_String
@@ -109,7 +117,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     ReferenceHandlerTests_IgnoreCyclesContext_Default.Default,
                     (options) => new ReferenceHandlerTests_IgnoreCyclesContext_Default(options)
                 )
-            ) { }
+            )
+        {
+        }
     }
 
     public sealed class ReferenceHandlerTests_IgnoreCycles_Default_AsyncStream
@@ -121,14 +131,18 @@ namespace System.Text.Json.SourceGeneration.Tests
                     ReferenceHandlerTests_IgnoreCyclesContext_Default.Default,
                     (options) => new ReferenceHandlerTests_IgnoreCyclesContext_Default(options)
                 )
-            ) { }
+            )
+        {
+        }
     }
 
     public abstract partial class ReferenceHandlerTests_IgnoreCycles_Default
         : ReferenceHandlerTests_IgnoreCycles
     {
         public ReferenceHandlerTests_IgnoreCycles_Default(JsonSerializerWrapper serializer)
-            : base(serializer) { }
+            : base(serializer)
+        {
+        }
 
         [JsonSerializable(typeof(Dictionary<string, object>))]
         [JsonSerializable(typeof(GenericIDictionaryWrapper<string, object>))]
@@ -186,6 +200,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TreeNode<object>))]
         [JsonSerializable(typeof(int))]
         internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Default
-            : JsonSerializerContext { }
+            : JsonSerializerContext
+        {
+        }
     }
 }

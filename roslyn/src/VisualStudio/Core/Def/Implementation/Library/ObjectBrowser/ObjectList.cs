@@ -38,7 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint flags,
             AbstractObjectBrowserLibraryManager manager,
             ImmutableArray<ObjectListItem> items
-        ) : this(kind, flags, null, null, manager, items) { }
+        ) : this(kind, flags, null, null, manager, items)
+        {
+        }
 
         public ObjectList(
             ObjectListKind kind,
@@ -878,8 +880,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         .ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+            {
+            }
         }
 
         protected override uint GetUpdateCounter()

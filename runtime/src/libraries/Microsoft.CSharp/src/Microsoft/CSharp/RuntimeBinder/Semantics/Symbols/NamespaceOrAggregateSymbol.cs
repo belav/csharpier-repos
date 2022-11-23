@@ -13,5 +13,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     // Parent is another BAG. Children are other BAGs, members, type vars, etc.
     // ----------------------------------------------------------------------------
 
-    internal abstract class NamespaceOrAggregateSymbol : ParentSymbol { }
+    internal abstract class NamespaceOrAggregateSymbol : ParentSymbol
+    {
+    }
 }

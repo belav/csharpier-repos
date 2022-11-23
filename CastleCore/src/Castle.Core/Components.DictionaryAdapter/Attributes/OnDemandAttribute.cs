@@ -27,7 +27,9 @@ namespace Castle.Components.DictionaryAdapter
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = false)]
     public class OnDemandAttribute : DictionaryBehaviorAttribute, IDictionaryPropertyGetter
     {
-        public OnDemandAttribute() { }
+        public OnDemandAttribute()
+        {
+        }
 
         public OnDemandAttribute(Type type)
         {

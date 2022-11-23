@@ -665,7 +665,9 @@ namespace System.Xml.XmlSchemaTests
                 XmlSchema parent = sc.Add(null, Path.Combine(TestData._Root, param0.ToString()));
                 Assert.True(false);
             }
-            catch (XmlSchemaException) { }
+            catch (XmlSchemaException)
+            {
+            }
 
             CError.Compare(sc.Count, 1, "Add2Count");
             CError.Compare(sc.IsCompiled, true, "Add2IsCompiled");
@@ -1401,7 +1403,9 @@ namespace System.Xml.XmlSchemaTests
                 XmlSchema parent = sc.Add(null, Path.Combine(TestData._Root, param0.ToString()));
                 Assert.True(false);
             }
-            catch (XmlSchemaException) { }
+            catch (XmlSchemaException)
+            {
+            }
             CError.Compare(sc.Count, 1, "Add2Count");
             CError.Compare(sc.IsCompiled, false, "Add2IsCompiled");
 
@@ -1410,7 +1414,9 @@ namespace System.Xml.XmlSchemaTests
                 sc.Compile();
                 Assert.True(false);
             }
-            catch (XmlSchemaException) { }
+            catch (XmlSchemaException)
+            {
+            }
             CError.Compare(sc.Count, 1, "CompileCount");
             CError.Compare(sc.IsCompiled, false, "CompileIsCompiled");
 

@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _text;
 
-        public CodeComment() { }
+        public CodeComment()
+        {
+        }
 
         public CodeComment(string text)
         {

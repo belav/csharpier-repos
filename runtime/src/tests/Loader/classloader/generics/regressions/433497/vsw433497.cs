@@ -4,7 +4,9 @@
 using System;
 using System.Reflection;
 
-public class Map<K, D> { }
+public class Map<K, D>
+{
+}
 
 public class C
 {

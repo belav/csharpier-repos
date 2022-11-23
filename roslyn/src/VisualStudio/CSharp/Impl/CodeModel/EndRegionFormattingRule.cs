@@ -14,7 +14,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
     {
         public static readonly EndRegionFormattingRule Instance = new();
 
-        private EndRegionFormattingRule() { }
+        private EndRegionFormattingRule()
+        {
+        }
 
         private static bool IsAfterEndRegionBeforeMethodDeclaration(SyntaxToken previousToken)
         {

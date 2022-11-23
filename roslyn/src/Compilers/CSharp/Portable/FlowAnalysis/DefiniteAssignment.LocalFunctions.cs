@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             public BitVector InvertedCapturedMask = BitVector.Null;
 
             public LocalFunctionState(LocalState stateFromBottom, LocalState stateFromTop)
-                : base(stateFromBottom, stateFromTop) { }
+                : base(stateFromBottom, stateFromTop)
+            {
+            }
         }
 
         protected override LocalFunctionState CreateLocalFunctionState(

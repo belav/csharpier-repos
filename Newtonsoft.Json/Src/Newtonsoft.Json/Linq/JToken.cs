@@ -313,7 +313,9 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        internal JToken() { }
+        internal JToken()
+        {
+        }
 
         /// <summary>
         /// Adds the specified content immediately after this token.

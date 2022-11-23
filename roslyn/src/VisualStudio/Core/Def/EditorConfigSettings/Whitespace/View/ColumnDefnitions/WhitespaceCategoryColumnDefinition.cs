@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WhitespaceCategoryGroupingSet() { }
+        public WhitespaceCategoryGroupingSet()
+        {
+        }
     }
 
     [Export(typeof(ITableColumnDefinition))]
@@ -29,7 +31,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WhitespaceCategoryColumnDefinition() { }
+        public WhitespaceCategoryColumnDefinition()
+        {
+        }
 
         public override string Name => Category;
         public override string DisplayName => ServicesVSResources.Category;

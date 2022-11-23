@@ -117,7 +117,9 @@ namespace Internal.Cryptography.Pal
                 {
                     return s_downloadBytes(uri, cts?.Token ?? default);
                 }
-                catch { }
+                catch
+                {
+                }
                 finally
                 {
                     cts?.Dispose();

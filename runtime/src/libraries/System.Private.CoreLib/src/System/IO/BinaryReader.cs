@@ -37,9 +37,13 @@ namespace System.IO
         private readonly bool _leaveOpen;
         private bool _disposed;
 
-        public BinaryReader(Stream input) : this(input, Encoding.UTF8, false) { }
+        public BinaryReader(Stream input) : this(input, Encoding.UTF8, false)
+        {
+        }
 
-        public BinaryReader(Stream input, Encoding encoding) : this(input, encoding, false) { }
+        public BinaryReader(Stream input, Encoding encoding) : this(input, encoding, false)
+        {
+        }
 
         public BinaryReader(Stream input, Encoding encoding, bool leaveOpen)
         {

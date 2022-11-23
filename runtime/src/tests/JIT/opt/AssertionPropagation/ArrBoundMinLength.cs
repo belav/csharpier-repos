@@ -51,7 +51,9 @@ class Program
             Tests.ModOutOfBounds(arr, 6);
             returnCode--;
         }
-        catch { }
+        catch
+        {
+        }
 
         arr = new int[0];
         RunTestThrows(Tests.ZeroOutOfBounds);
@@ -86,7 +88,9 @@ class Program
             Console.WriteLine("failed " + action.Method.Name);
             returnCode--;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     private static void RunTestNoThrow(Action<int[]> action)

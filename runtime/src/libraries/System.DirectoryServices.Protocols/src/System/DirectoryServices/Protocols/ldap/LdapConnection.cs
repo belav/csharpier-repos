@@ -64,13 +64,19 @@ namespace System.DirectoryServices.Protocols
         private bool _connected;
         internal QUERYCLIENTCERT _clientCertificateRoutine;
 
-        public LdapConnection(string server) : this(new LdapDirectoryIdentifier(server)) { }
+        public LdapConnection(string server) : this(new LdapDirectoryIdentifier(server))
+        {
+        }
 
         public LdapConnection(LdapDirectoryIdentifier identifier)
-            : this(identifier, null, AuthType.Negotiate) { }
+            : this(identifier, null, AuthType.Negotiate)
+        {
+        }
 
         public LdapConnection(LdapDirectoryIdentifier identifier, NetworkCredential credential)
-            : this(identifier, credential, AuthType.Negotiate) { }
+            : this(identifier, credential, AuthType.Negotiate)
+        {
+        }
 
         public unsafe LdapConnection(
             LdapDirectoryIdentifier identifier,

@@ -29,7 +29,9 @@ public class AssemblyName
         {
             new AssemblyFileVersionAttribute(null);
         }
-        catch (ArgumentNullException) { }
+        catch (ArgumentNullException)
+        {
+        }
         Console.WriteLine(
             (new AssemblyInformationalVersionAttribute("my informational")).InformationalVersion
         );

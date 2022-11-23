@@ -47,7 +47,9 @@ namespace Microsoft.Interop
         // non-nullable fields/properties on this type in the constructor
         // since we always use a property initializer.
 #pragma warning disable 8618
-        private DllImportStubContext() { }
+        private DllImportStubContext()
+        {
+        }
 #pragma warning restore
 
         public ImmutableArray<TypePositionInfo> ElementTypeInformation { get; init; }

@@ -43,7 +43,9 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Initializes a new instance of <see cref="JsonConverterAttribute"/>.
         /// </summary>
-        protected JsonConverterAttribute() { }
+        protected JsonConverterAttribute()
+        {
+        }
 
         /// <summary>
         /// The type of the converter to create, or null if <see cref="CreateConverter(Type)"/> should be used to obtain the converter.

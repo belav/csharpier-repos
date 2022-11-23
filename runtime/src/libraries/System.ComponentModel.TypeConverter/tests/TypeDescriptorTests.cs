@@ -123,7 +123,9 @@ namespace System.ComponentModel.Tests
             mockProvider2.Verify(p => p.IsSupportedType(typeof(int)), Times.Once());
         }
 
-        private class AddProvider_InvokeType_GetProviderReturnsExpectedType { }
+        private class AddProvider_InvokeType_GetProviderReturnsExpectedType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -177,7 +179,9 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private class AddProvider_InvokeTypeMultipleTimes_RefreshesType { }
+        private class AddProvider_InvokeTypeMultipleTimes_RefreshesType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -331,7 +335,9 @@ namespace System.ComponentModel.Tests
             mockProvider2.Verify(p => p.IsSupportedType(typeof(int)), Times.Once());
         }
 
-        private class AddProviderTransparent_InvokeType_GetProviderReturnsExpectedType { }
+        private class AddProviderTransparent_InvokeType_GetProviderReturnsExpectedType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -385,7 +391,9 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private class AddProviderTransparent_InvokeTypeMultipleTimes_RefreshesType { }
+        private class AddProviderTransparent_InvokeTypeMultipleTimes_RefreshesType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -752,7 +760,9 @@ namespace System.ComponentModel.Tests
             mockProvider3.Verify(p => p.IsSupportedType(typeof(int)), Times.Once());
         }
 
-        private class RemoveProvider_InvokeType_RemovesProviderType { }
+        private class RemoveProvider_InvokeType_RemovesProviderType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -794,7 +804,9 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private class RemoveProvider_InvokeObjectWithProviders_RefreshesType { }
+        private class RemoveProvider_InvokeObjectWithProviders_RefreshesType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -824,7 +836,9 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private class RemoveProvider_InvokeTypeWithoutProviders_RefreshesType { }
+        private class RemoveProvider_InvokeTypeWithoutProviders_RefreshesType
+        {
+        }
 
         [Fact]
         public void RemoveProvider_NullProvider_ThrowsArgumentNullException()
@@ -1019,7 +1033,9 @@ namespace System.ComponentModel.Tests
             mockProvider3.Verify(p => p.IsSupportedType(typeof(int)), Times.Once());
         }
 
-        private class RemoveProviderTransparent_InvokeType_RemovesProviderType { }
+        private class RemoveProviderTransparent_InvokeType_RemovesProviderType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -1061,7 +1077,9 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private class RemoveProviderTransparent_InvokeObjectWithProviders_RefreshesType { }
+        private class RemoveProviderTransparent_InvokeObjectWithProviders_RefreshesType
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -1091,7 +1109,9 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private class RemoveProviderTransparent_InvokeTypeWithoutProviders_RefreshesType { }
+        private class RemoveProviderTransparent_InvokeTypeWithoutProviders_RefreshesType
+        {
+        }
 
         [Fact]
         public void RemoveProviderTransparent_NullProvider_ThrowsArgumentNullException()
@@ -1304,7 +1324,9 @@ namespace System.ComponentModel.Tests
         }
 
         [PropertyFilterFalseMatch]
-        public class ClassWithFilterAttribute { }
+        public class ClassWithFilterAttribute
+        {
+        }
 
         class FooBarBase
         {
@@ -1325,16 +1347,24 @@ namespace System.ComponentModel.Tests
 
         class DerivedUri : Uri
         {
-            protected DerivedUri() : base("https://hello") { }
+            protected DerivedUri() : base("https://hello")
+            {
+            }
         }
 
-        class TwiceDerivedUri : DerivedUri { }
+        class TwiceDerivedUri : DerivedUri
+        {
+        }
 
         class DerivedCultureInfo : CultureInfo
         {
-            protected DerivedCultureInfo() : base("hello") { }
+            protected DerivedCultureInfo() : base("hello")
+            {
+            }
         }
 
-        class TwiceDerivedCultureInfo : DerivedCultureInfo { }
+        class TwiceDerivedCultureInfo : DerivedCultureInfo
+        {
+        }
     }
 }

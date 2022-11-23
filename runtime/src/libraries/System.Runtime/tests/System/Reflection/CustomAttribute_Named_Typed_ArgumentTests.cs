@@ -96,7 +96,9 @@ namespace System.Reflection.Tests
         }
 
         [MyAttr(MyKinds.First, Desc = "This is a description on a method")]
-        private static void MyMethod() { }
+        private static void MyMethod()
+        {
+        }
     }
 
     internal enum MyKinds

@@ -433,7 +433,8 @@ namespace System.Web.Http.Tracing
                         "",
                         "",
                         beginTrace: null,
-                        execute: () => { },
+                        execute: () => {
+                        },
                         endTrace: null,
                         errorTrace: null
                     ),
@@ -481,7 +482,8 @@ namespace System.Web.Http.Tracing
                 "",
                 "",
                 beginTrace: null,
-                execute: () => { },
+                execute: () => {
+                },
                 endTrace: null,
                 errorTrace: null
             );
@@ -506,9 +508,12 @@ namespace System.Web.Http.Tracing
                 {
                     invoked = true;
                 },
-                execute: () => { },
-                endTrace: (tr) => { },
-                errorTrace: (tr) => { }
+                execute: () => {
+                },
+                endTrace: (tr) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -535,9 +540,12 @@ namespace System.Web.Http.Tracing
                 {
                     invoked = true;
                 },
-                execute: () => { },
-                endTrace: (tr) => { },
-                errorTrace: (tr) => { }
+                execute: () => {
+                },
+                endTrace: (tr) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -559,13 +567,16 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Fatal,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () =>
                 {
                     invoked = true;
                 },
-                endTrace: (tr) => { },
-                errorTrace: (tr) => { }
+                endTrace: (tr) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -587,13 +598,16 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Off,
                 "",
                 "",
-                beginTrace: (tr) => { },
-                execute: () => { },
+                beginTrace: (tr) => {
+                },
+                execute: () => {
+                },
                 endTrace: (tr) =>
                 {
                     invoked = true;
                 },
-                errorTrace: (tr) => { }
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -618,7 +632,8 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Off,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () =>
                         {
                             throw exception;
@@ -627,7 +642,8 @@ namespace System.Web.Http.Tracing
                         {
                             invoked = true;
                         },
-                        errorTrace: (tr) => { }
+                        errorTrace: (tr) => {
+                        }
                     )
             );
             Assert.False(invoked);
@@ -650,13 +666,16 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Info,
                 "",
                 "",
-                beginTrace: (tr) => { },
-                execute: () => { },
+                beginTrace: (tr) => {
+                },
+                execute: () => {
+                },
                 endTrace: (tr) =>
                 {
                     invoked = true;
                 },
-                errorTrace: (tr) => { }
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -681,12 +700,14 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Off,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () =>
                         {
                             throw exception;
                         },
-                        endTrace: (tr) => { },
+                        endTrace: (tr) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -716,12 +737,14 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Info,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () =>
                         {
                             throw exception;
                         },
-                        endTrace: (tr) => { },
+                        endTrace: (tr) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -751,12 +774,14 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Off,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () =>
                         {
                             throw exception;
                         },
-                        endTrace: (tr) => { },
+                        endTrace: (tr) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -782,9 +807,12 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Info,
                 "",
                 "",
-                beginTrace: (tr) => { },
-                execute: () => { },
-                endTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
+                execute: () => {
+                },
+                endTrace: (tr) => {
+                },
                 errorTrace: (tr) =>
                 {
                     invoked = true;
@@ -830,7 +858,8 @@ namespace System.Web.Http.Tracing
                 {
                     tr.Message = "beginMessage";
                 },
-                execute: () => { },
+                execute: () => {
+                },
                 endTrace: (tr) =>
                 {
                     tr.Message = "endMessage";
@@ -1063,8 +1092,10 @@ namespace System.Web.Http.Tracing
                         {
                             throw exception;
                         },
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) => { }
+                        endTrace: (tr) => {
+                        },
+                        errorTrace: (tr) => {
+                        }
                     )
             );
             Assert.False(invoked);
@@ -1163,8 +1194,10 @@ namespace System.Web.Http.Tracing
                     invoked = true;
                 },
                 execute: () => TaskHelpers.Completed(),
-                endTrace: (tr) => { },
-                errorTrace: (tr) => { }
+                endTrace: (tr) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -1192,8 +1225,10 @@ namespace System.Web.Http.Tracing
                     invoked = true;
                 },
                 execute: () => TaskHelpers.Completed(),
-                endTrace: (tr) => { },
-                errorTrace: (tr) => { }
+                endTrace: (tr) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -1288,8 +1323,10 @@ namespace System.Web.Http.Tracing
                             invoked = true;
                         },
                         execute: () => TaskHelpers.FromError(exception),
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) => { }
+                        endTrace: (tr) => {
+                        },
+                        errorTrace: (tr) => {
+                        }
                     )
             );
             Assert.False(invoked);
@@ -1312,14 +1349,17 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Fatal,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () =>
                 {
                     invoked = true;
                     return TaskHelpers.Completed();
                 },
-                endTrace: (tr) => { },
-                errorTrace: (tr) => { }
+                endTrace: (tr) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -1341,13 +1381,15 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Off,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () => TaskHelpers.Completed(),
                 endTrace: (tr) =>
                 {
                     invoked = true;
                 },
-                errorTrace: (tr) => { }
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -1374,13 +1416,15 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Off,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
                         endTrace: (tr) =>
                         {
                             invoked = true;
                         },
-                        errorTrace: (tr) => { }
+                        errorTrace: (tr) => {
+                        }
                     )
             );
             Assert.False(invoked);
@@ -1403,13 +1447,15 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Info,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () => TaskHelpers.Completed(),
                 endTrace: (tr) =>
                 {
                     invoked = true;
                 },
-                errorTrace: (tr) => { }
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -1436,9 +1482,11 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Off,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
-                        endTrace: (tr) => { },
+                        endTrace: (tr) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -1470,9 +1518,11 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Info,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
-                        endTrace: (tr) => { },
+                        endTrace: (tr) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -1504,9 +1554,11 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Info,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
-                        endTrace: (tr) => { },
+                        endTrace: (tr) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -1534,9 +1586,11 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Off,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () => tcs.Task,
-                endTrace: (tr) => { },
+                endTrace: (tr) => {
+                },
                 errorTrace: (tr) =>
                 {
                     invoked = true;
@@ -1883,8 +1937,10 @@ namespace System.Web.Http.Tracing
                     invoked = true;
                 },
                 execute: () => Task.FromResult<int>(1),
-                endTrace: (tr, value) => { },
-                errorTrace: (tr) => { }
+                endTrace: (tr, value) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -2056,8 +2112,10 @@ namespace System.Web.Http.Tracing
                             TaskHelpers.FromError(
                                 new HttpResponseException(Net.HttpStatusCode.NotFound)
                             ),
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) => { }
+                        endTrace: (tr) => {
+                        },
+                        errorTrace: (tr) => {
+                        }
                     )
             );
             Assert.False(invoked);
@@ -2085,8 +2143,10 @@ namespace System.Web.Http.Tracing
                     invoked = true;
                 },
                 execute: () => Task.FromResult<int>(1),
-                endTrace: (tr, value) => { },
-                errorTrace: (tr) => { }
+                endTrace: (tr, value) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -2108,14 +2168,17 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Fatal,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () =>
                 {
                     invoked = true;
                     return Task.FromResult<int>(1);
                 },
-                endTrace: (tr, value) => { },
-                errorTrace: (tr) => { }
+                endTrace: (tr, value) => {
+                },
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -2139,14 +2202,16 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Off,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () => Task.FromResult<int>(1),
                 endTrace: (tr, value) =>
                 {
                     invoked = true;
                     invokedValue = value;
                 },
-                errorTrace: (tr) => { }
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -2174,13 +2239,15 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Off,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
                         endTrace: (tr, value) =>
                         {
                             invoked = true;
                         },
-                        errorTrace: (tr) => { }
+                        errorTrace: (tr) => {
+                        }
                     )
             );
             Assert.False(invoked);
@@ -2203,13 +2270,15 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Info,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () => Task.FromResult<int>(1),
                 endTrace: (tr, value) =>
                 {
                     invoked = true;
                 },
-                errorTrace: (tr) => { }
+                errorTrace: (tr) => {
+                }
             );
 
             // Assert
@@ -2236,9 +2305,11 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Off,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
-                        endTrace: (tr, value) => { },
+                        endTrace: (tr, value) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -2270,9 +2341,11 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Info,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
-                        endTrace: (tr, value) => { },
+                        endTrace: (tr, value) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -2304,9 +2377,11 @@ namespace System.Web.Http.Tracing
                         TraceLevel.Info,
                         "",
                         "",
-                        beginTrace: (tr) => { },
+                        beginTrace: (tr) => {
+                        },
                         execute: () => tcs.Task,
-                        endTrace: (tr, value) => { },
+                        endTrace: (tr, value) => {
+                        },
                         errorTrace: (tr) =>
                         {
                             invoked = true;
@@ -2334,9 +2409,11 @@ namespace System.Web.Http.Tracing
                 TraceLevel.Off,
                 "",
                 "",
-                beginTrace: (tr) => { },
+                beginTrace: (tr) => {
+                },
                 execute: () => tcs.Task,
-                endTrace: (tr, value) => { },
+                endTrace: (tr, value) => {
+                },
                 errorTrace: (tr) =>
                 {
                     invoked = true;

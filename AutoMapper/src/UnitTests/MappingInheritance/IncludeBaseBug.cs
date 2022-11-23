@@ -158,7 +158,9 @@ public class IgnoreBaseMatching : AutoMapperSpecBase
         public int AbstractValue { get; set; }
     }
 
-    public class FromDerived : From { }
+    public class FromDerived : From
+    {
+    }
 
     public class Concrete
     {

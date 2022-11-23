@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
         internal sealed class SettingsSnapshotFactory
             : SettingsSnapshotFactoryBase<AnalyzerSetting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<AnalyzerSetting> data) : base(data) { }
+            public SettingsSnapshotFactory(ISettingsProvider<AnalyzerSetting> data) : base(data)
+            {
+            }
 
             protected override SettingsEntriesSnapshot CreateSnapshot(
                 ImmutableArray<AnalyzerSetting> data,

@@ -49,7 +49,9 @@ namespace System.Management
     {
         private readonly ManagementObject parent;
 
-        private sealed class enumLock { } //used to lock usage of BeginMethodEnum/NextMethod
+        private sealed class enumLock
+        {
+        } //used to lock usage of BeginMethodEnum/NextMethod
 
         internal MethodDataCollection(ManagementObject parent) : base()
         {

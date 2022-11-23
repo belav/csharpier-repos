@@ -76,7 +76,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                             cancellationToken,
                             ErrorSeverity.General
                         )
-                    ) { }
+                    )
+                {
+                }
             }
 
             return document;

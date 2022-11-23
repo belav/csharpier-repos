@@ -16,7 +16,9 @@ public class CC
 #pragma warning disable 1717
                 param1 = param1;
 #pragma warning restore 1717
-                while (a) { }
+                while (a)
+                {
+                }
             } while (a);
         }
     }

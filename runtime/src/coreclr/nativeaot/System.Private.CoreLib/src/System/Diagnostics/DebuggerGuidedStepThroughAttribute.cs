@@ -13,6 +13,8 @@ namespace System.Diagnostics
     )]
     public sealed class DebuggerGuidedStepThroughAttribute : Attribute
     {
-        public DebuggerGuidedStepThroughAttribute() { }
+        public DebuggerGuidedStepThroughAttribute()
+        {
+        }
     }
 }

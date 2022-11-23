@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class CommandInterceptionSqlServerTestBase : CommandInterceptionTestBase
 {
     protected CommandInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override async Task<string> Intercept_query_passively(bool async, bool inject)
     {
@@ -101,7 +103,9 @@ public abstract class CommandInterceptionSqlServerTestBase : CommandInterception
 
     protected class StatisticsCommandInterceptor : CommandInterceptorBase
     {
-        public StatisticsCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public StatisticsCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
@@ -170,7 +174,9 @@ public abstract class CommandInterceptionSqlServerTestBase : CommandInterception
             IClassFixture<CommandInterceptionSqlServerTest.InterceptionSqlServerFixture>
     {
         public CommandInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
@@ -191,7 +197,9 @@ public abstract class CommandInterceptionSqlServerTestBase : CommandInterception
             IClassFixture<CommandInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
     {
         public CommandInterceptionWithDiagnosticsSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {

@@ -12,6 +12,8 @@ namespace System
     {
         public static readonly EventArgs Empty = new EventArgs();
 
-        public EventArgs() { }
+        public EventArgs()
+        {
+        }
     }
 }

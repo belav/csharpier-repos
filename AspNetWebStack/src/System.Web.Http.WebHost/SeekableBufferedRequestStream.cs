@@ -152,7 +152,9 @@ namespace System.Web.Http.WebHost
                 // This is done synchronously, because we need to block the calling thread so that the result of
                 // Seek can be returned.
                 byte[] buffer = new byte[ReadBufferSize];
-                while (InnerStream.Read(buffer, 0, buffer.Length) > 0) { }
+                while (InnerStream.Read(buffer, 0, buffer.Length) > 0)
+                {
+                }
 
                 SwapToSeekableStream();
             }

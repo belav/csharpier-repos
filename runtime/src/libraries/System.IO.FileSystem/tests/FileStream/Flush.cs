@@ -207,7 +207,9 @@ namespace System.IO.Tests
 
         private sealed class StoreFlushArgFileStream : FileStream
         {
-            public StoreFlushArgFileStream(string path, FileMode mode) : base(path, mode) { }
+            public StoreFlushArgFileStream(string path, FileMode mode) : base(path, mode)
+            {
+            }
 
             public bool? LastFlushArg { get; set; }
 

@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorNotificationServiceFactory() { }
+        public EditorNotificationServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {

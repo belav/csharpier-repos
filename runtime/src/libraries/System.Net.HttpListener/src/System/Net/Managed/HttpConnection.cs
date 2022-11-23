@@ -511,7 +511,9 @@ namespace System.Net
             {
                 _socket.Close();
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 _socket = null;
@@ -563,7 +565,9 @@ namespace System.Net
                 {
                     s?.Shutdown(SocketShutdown.Both);
                 }
-                catch { }
+                catch
+                {
+                }
                 finally
                 {
                     s?.Close();

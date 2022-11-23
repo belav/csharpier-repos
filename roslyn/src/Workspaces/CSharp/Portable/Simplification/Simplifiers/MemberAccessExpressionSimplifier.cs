@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
     {
         public static readonly MemberAccessExpressionSimplifier Instance = new();
 
-        private MemberAccessExpressionSimplifier() { }
+        private MemberAccessExpressionSimplifier()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

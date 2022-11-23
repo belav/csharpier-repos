@@ -15,7 +15,9 @@ namespace Moq
             Expression originalExpression,
             Mock mock,
             MethodExpectation expectation
-        ) : base(originalExpression, mock, expectation) { }
+        ) : base(originalExpression, mock, expectation)
+        {
+        }
 
         public MethodInfo Method => ((MethodExpectation)this.Expectation).Method;
     }

@@ -43,6 +43,8 @@ namespace System.Net.Security.Tests
             return false;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

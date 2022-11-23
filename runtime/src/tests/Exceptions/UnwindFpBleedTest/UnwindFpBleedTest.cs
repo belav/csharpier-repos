@@ -54,7 +54,9 @@ class Program
         {
             FloatManipulationMethod();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

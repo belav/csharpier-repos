@@ -61,7 +61,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         protected virtual void OnOptions(
             AnalyzerOptions options,
             [CallerMemberName] string callerName = null
-        ) { }
+        )
+        {
+        }
 
         #region Implementation
 

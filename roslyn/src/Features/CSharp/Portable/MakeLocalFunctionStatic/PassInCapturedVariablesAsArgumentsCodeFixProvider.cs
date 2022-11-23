@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public PassInCapturedVariablesAsArgumentsCodeFixProvider() { }
+        public PassInCapturedVariablesAsArgumentsCodeFixProvider()
+        {
+        }
 
         //  "CS8421: A static local function can't contain a reference to <variable>."
         public override ImmutableArray<string> FixableDiagnosticIds =>

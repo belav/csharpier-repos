@@ -299,9 +299,13 @@ public class BadHttpRequestTests : LoggedTest
             _callback(pair);
         }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
         public virtual void Dispose() => _subscription.Dispose();
     }
@@ -397,7 +401,11 @@ public class BadHttpRequestTests : LoggedTest
 
         // Set up a listener to catch the BadRequest event
         var diagListener = new DiagnosticListener("NotBadRequestTestsDiagListener");
-        var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) => { });
+        var badRequestEventListener = new BadRequestEventListener(
+            diagListener,
+            (pair) => {
+            }
+        );
 
         await using (
             var server = new TestServer(
@@ -470,7 +478,11 @@ public class BadHttpRequestTests : LoggedTest
 
         // Set up a listener to catch the BadRequest event
         var diagListener = new DiagnosticListener("NotBadRequestTestsDiagListener");
-        var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) => { });
+        var badRequestEventListener = new BadRequestEventListener(
+            diagListener,
+            (pair) => {
+            }
+        );
 
         await using (
             var server = new TestServer(
@@ -546,7 +558,11 @@ public class BadHttpRequestTests : LoggedTest
 
         // Set up a listener to catch the BadRequest event
         var diagListener = new DiagnosticListener("NotBadRequestTestsDiagListener");
-        var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) => { });
+        var badRequestEventListener = new BadRequestEventListener(
+            diagListener,
+            (pair) => {
+            }
+        );
 
         await using (
             var server = new TestServer(

@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private ImmutableArray<InternalSyntax.DirectiveStack> _preprocessorStates;
 
-        public CSharpSyntaxTree() : this(directives: default) { }
+        public CSharpSyntaxTree() : this(directives: default)
+        {
+        }
 
         internal CSharpSyntaxTree(InternalSyntax.DirectiveStack directives)
         {

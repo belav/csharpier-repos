@@ -14,5 +14,7 @@ namespace Moq.Language.Flow
             IOccurrence,
             IRaise<TMock>,
             IVerifies,
-            IFluentInterface { }
+            IFluentInterface
+    {
+    }
 }

@@ -12,13 +12,19 @@ namespace System.Composition.UnitTests
 {
     public class ImportManyTests : ContainerTests
     {
-        public interface IA { }
+        public interface IA
+        {
+        }
 
         [Export(typeof(IA))]
-        public class A : IA { }
+        public class A : IA
+        {
+        }
 
         [Export(typeof(IA))]
-        public class A2 : IA { }
+        public class A2 : IA
+        {
+        }
 
         [Export]
         public class ImportManyIA
@@ -38,7 +44,9 @@ namespace System.Composition.UnitTests
             [ImportMany]
             public IEnumerable<IA> AllA { get; set; }
 
-            public ImportManyPropsOfA() { }
+            public ImportManyPropsOfA()
+            {
+            }
         }
 
         [Fact]

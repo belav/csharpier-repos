@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
                     FeaturesResources.ResourceManager,
                     typeof(FeaturesResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override bool OpenFileOnly(SimplifierOptions? options)
         {

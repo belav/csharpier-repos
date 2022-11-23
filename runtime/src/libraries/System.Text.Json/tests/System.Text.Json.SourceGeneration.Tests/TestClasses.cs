@@ -109,7 +109,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public record HighLowTempsRecord(int High, int Low);
 
-    public class EmptyPoco { }
+    public class EmptyPoco
+    {
+    }
 
     public class MyType
     {
@@ -153,7 +155,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         public int Length => Message?.Length ?? 0; // Read-only property
     }
 
-    internal struct MyStruct { }
+    internal struct MyStruct
+    {
+    }
 
     public struct PersonStruct
     {
@@ -179,10 +183,14 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string TestProperty { get; set; }
     }
 
-    public class DerivedAttribute : BaseAttribute { }
+    public class DerivedAttribute : BaseAttribute
+    {
+    }
 
     [Derived(TestProperty = "Test")]
-    public class TypeWithDerivedAttribute { }
+    public class TypeWithDerivedAttribute
+    {
+    }
 
     [JsonDerivedType(typeof(DerivedClass), "derivedClass")]
     public class PolymorphicClass
@@ -199,16 +207,24 @@ namespace System.Text.Json.SourceGeneration.Tests
     {
         public class MyNestedClass
         {
-            public class MyNestedNestedClass { }
+            public class MyNestedNestedClass
+            {
+            }
 
-            public class MyNestedNestedGenericClass<T1> { }
+            public class MyNestedNestedGenericClass<T1>
+            {
+            }
         }
 
         public class MyNestedGenericClass<T1>
         {
-            public class MyNestedGenericNestedClass { }
+            public class MyNestedGenericNestedClass
+            {
+            }
 
-            public class MyNestedGenericNestedGenericClass<T2> { }
+            public class MyNestedGenericNestedGenericClass<T2>
+            {
+            }
         }
     }
 
@@ -216,14 +232,20 @@ namespace System.Text.Json.SourceGeneration.Tests
     {
         public class MyNestedClass
         {
-            public class MyNestedNestedClass { }
+            public class MyNestedNestedClass
+            {
+            }
 
-            public class MyNestedNestedGenericClass<T1> { }
+            public class MyNestedNestedGenericClass<T1>
+            {
+            }
         }
 
         public class MyNestedGenericClass<T1>
         {
-            public class MyNestedGenericNestedClass { }
+            public class MyNestedGenericNestedClass
+            {
+            }
 
             public class MyNestedGenericNestedGenericClass<T2>
             {
@@ -265,27 +287,43 @@ namespace System.Text.Json.SourceGeneration.Tests
         private PrivateProtectedClass PrivateField5 = null;
 #pragma warning restore
 
-        private class PrivateClass { }
+        private class PrivateClass
+        {
+        }
 
-        protected class ProtectedClass { }
+        protected class ProtectedClass
+        {
+        }
 
-        protected internal class ProtectedInternalClass { }
+        protected internal class ProtectedInternalClass
+        {
+        }
 
-        private protected class PrivateProtectedClass { }
+        private protected class PrivateProtectedClass
+        {
+        }
 
-        class PrivateClass2 { }
+        class PrivateClass2
+        {
+        }
     }
 
     internal class InternalTestClass
     {
-        public class PublicClass { }
+        public class PublicClass
+        {
+        }
 
-        protected internal class ProtectedInternalClass { }
+        protected internal class ProtectedInternalClass
+        {
+        }
     }
 
     public class PublicTestClass
     {
-        internal class InternalNestedClass { }
+        internal class InternalNestedClass
+        {
+        }
     }
 
     public sealed class ClassWithStringValues

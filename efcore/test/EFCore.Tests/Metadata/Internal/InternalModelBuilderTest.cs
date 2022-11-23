@@ -796,7 +796,9 @@ public class InternalModelBuilderTest
         public Details Details { get; set; }
     }
 
-    private class SpecialCustomer : Customer { }
+    private class SpecialCustomer : Customer
+    {
+    }
 
     private class Order
     {

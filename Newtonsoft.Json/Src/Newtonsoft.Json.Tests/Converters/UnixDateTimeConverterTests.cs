@@ -397,10 +397,14 @@ namespace Newtonsoft.Json.Tests.Converters
     }
 
     [JsonArray(ItemConverterType = typeof(UnixDateTimeConverter))]
-    public class UnixConverterList<T> : List<T> { }
+    public class UnixConverterList<T> : List<T>
+    {
+    }
 
     [JsonDictionary(ItemConverterType = typeof(UnixDateTimeConverter))]
-    public class UnixConverterDictionary<T> : Dictionary<string, T> { }
+    public class UnixConverterDictionary<T> : Dictionary<string, T>
+    {
+    }
 
     [JsonObject(ItemConverterType = typeof(UnixDateTimeConverter))]
     public class UnixConverterObject

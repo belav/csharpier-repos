@@ -311,7 +311,9 @@ namespace DelegateTest
                 TestLibrary.TestFramework.LogError("015", "delegate remove error ");
                 retVal = false;
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
             catch (Exception e)
             {
                 TestLibrary.TestFramework.LogError("016", "Unexpected exception: " + e);

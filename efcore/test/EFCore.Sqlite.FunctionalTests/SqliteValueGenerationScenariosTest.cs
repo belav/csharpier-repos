@@ -31,7 +31,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextIdentity : ContextBase
     {
-        public BlogContextIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextIdentity(string databaseName) : base(databaseName)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -70,7 +72,9 @@ public class SqliteValueGenerationScenariosTest
     public class BlogContextUIntToIdentityUsingValueConverter : ContextBase
     {
         public BlogContextUIntToIdentityUsingValueConverter(string databaseName)
-            : base(databaseName) { }
+            : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithUIntKey> UnsignedBlogs { get; set; }
 
@@ -123,7 +127,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextIntEnumToIdentity : ContextBase
     {
-        public BlogContextIntEnumToIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextIntEnumToIdentity(string databaseName) : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithIntEnumKey> EnumBlogs { get; set; }
 
@@ -141,7 +147,9 @@ public class SqliteValueGenerationScenariosTest
         public string Name { get; set; }
     }
 
-    public enum IntKey { }
+    public enum IntKey
+    {
+    }
 
     [ConditionalFact]
     public void Insert_ushort_enum_to_Identity_column()
@@ -178,7 +186,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextUShortEnumToIdentity : ContextBase
     {
-        public BlogContextUShortEnumToIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextUShortEnumToIdentity(string databaseName) : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithUShortEnumKey> EnumBlogs { get; set; }
 
@@ -196,7 +206,9 @@ public class SqliteValueGenerationScenariosTest
         public string Name { get; set; }
     }
 
-    public enum UShortKey : ushort { }
+    public enum UShortKey : ushort
+    {
+    }
 
     [ConditionalFact]
     public void Insert_string_to_Identity_column_using_value_converter()
@@ -234,7 +246,9 @@ public class SqliteValueGenerationScenariosTest
     public class BlogContextStringToIdentityUsingValueConverter : ContextBase
     {
         public BlogContextStringToIdentityUsingValueConverter(string databaseName)
-            : base(databaseName) { }
+            : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithStringKey> StringyBlogs { get; set; }
 
@@ -296,7 +310,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNoKeyGeneration : ContextBase
     {
-        public BlogContextNoKeyGeneration(string databaseName) : base(databaseName) { }
+        public BlogContextNoKeyGeneration(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -341,7 +357,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNoKeyGenerationNullableKey : ContextBase
     {
-        public BlogContextNoKeyGenerationNullableKey(string databaseName) : base(databaseName) { }
+        public BlogContextNoKeyGenerationNullableKey(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -426,7 +444,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNonKeyDefaultValue : ContextBase
     {
-        public BlogContextNonKeyDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextNonKeyDefaultValue(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -504,7 +524,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNonKeyReadOnlyDefaultValue : ContextBase
     {
-        public BlogContextNonKeyReadOnlyDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextNonKeyReadOnlyDefaultValue(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -560,7 +582,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextClientGuidKey : ContextBase
     {
-        public BlogContextClientGuidKey(string databaseName) : base(databaseName) { }
+        public BlogContextClientGuidKey(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -576,7 +600,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextClientGuidNonKey : ContextBase
     {
-        public BlogContextClientGuidNonKey(string databaseName) : base(databaseName) { }
+        public BlogContextClientGuidNonKey(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -608,7 +634,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContext : ContextBase
     {
-        public BlogContext(string databaseName) : base(databaseName) { }
+        public BlogContext(string databaseName) : base(databaseName)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -646,7 +674,9 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextSpecifyKeysUsingDefault : ContextBase
     {
-        public BlogContextSpecifyKeysUsingDefault(string databaseName) : base(databaseName) { }
+        public BlogContextSpecifyKeysUsingDefault(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

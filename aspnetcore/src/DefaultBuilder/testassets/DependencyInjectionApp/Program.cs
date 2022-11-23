@@ -43,14 +43,22 @@ public class Program
             .Run();
     }
 
-    interface IService<T> { }
+    interface IService<T>
+    {
+    }
 
-    interface IAnotherService { }
+    interface IAnotherService
+    {
+    }
 
     class Service<T> : IService<T>
     {
-        public Service(T t) { }
+        public Service(T t)
+        {
+        }
     }
 
-    class AnotherService : IAnotherService { }
+    class AnotherService : IAnotherService
+    {
+    }
 }

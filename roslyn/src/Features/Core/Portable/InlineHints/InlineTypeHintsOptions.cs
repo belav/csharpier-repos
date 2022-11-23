@@ -21,7 +21,9 @@ internal readonly record struct InlineTypeHintsOptions
     [DataMember]
     public bool ForImplicitObjectCreation { get; init; } = true;
 
-    public InlineTypeHintsOptions() { }
+    public InlineTypeHintsOptions()
+    {
+    }
 
     public static readonly InlineTypeHintsOptions Default = new();
 }

@@ -205,7 +205,9 @@ namespace System.Web.Mvc
 
         internal class SwitchWriter : TextWriter
         {
-            public SwitchWriter() : base(CultureInfo.CurrentCulture) { }
+            public SwitchWriter() : base(CultureInfo.CurrentCulture)
+            {
+            }
 
             public override Encoding Encoding
             {

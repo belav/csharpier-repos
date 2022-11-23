@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Classification
         public TextSpan TextSpan { get; }
 
         public ClassifiedSpan(string classificationType, TextSpan textSpan)
-            : this(textSpan, classificationType) { }
+            : this(textSpan, classificationType)
+        {
+        }
 
         public ClassifiedSpan(TextSpan textSpan, string classificationType)
         {

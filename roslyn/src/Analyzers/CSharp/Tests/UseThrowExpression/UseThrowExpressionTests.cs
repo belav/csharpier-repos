@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
     public partial class UseThrowExpressionTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseThrowExpressionTests(ITestOutputHelper logger) : base(logger) { }
+        public UseThrowExpressionTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

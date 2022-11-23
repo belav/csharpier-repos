@@ -242,7 +242,9 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        private XmlNavAttrFilter() { }
+        private XmlNavAttrFilter()
+        {
+        }
 
         /// <summary>
         /// Reposition the navigator on the first non-attribute child.
@@ -311,7 +313,9 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        private XmlNavNeverFilter() { }
+        private XmlNavNeverFilter()
+        {
+        }
 
         /// <summary>
         /// Reposition the navigator on the first child (attribute or non-attribute).

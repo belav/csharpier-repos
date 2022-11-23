@@ -508,7 +508,9 @@ public class SimdTests
             array.SetVector(new Vector4ui(), 0);
             return 1;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -521,7 +523,9 @@ public class SimdTests
             array.SetVector(new Vector4ui(), -1);
             return 1;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -534,7 +538,9 @@ public class SimdTests
             array.SetVector(new Vector4ui(), 1);
             return 1;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -565,7 +571,9 @@ public class SimdTests
             Vector4ui res = array.GetVector(0);
             return 1;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -578,7 +586,9 @@ public class SimdTests
             Vector4ui res = array.GetVector(-1);
             return 1;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 
@@ -591,7 +601,9 @@ public class SimdTests
             Vector4ui res = array.GetVector(1);
             return 1;
         }
-        catch (IndexOutOfRangeException) { }
+        catch (IndexOutOfRangeException)
+        {
+        }
         return 0;
     }
 

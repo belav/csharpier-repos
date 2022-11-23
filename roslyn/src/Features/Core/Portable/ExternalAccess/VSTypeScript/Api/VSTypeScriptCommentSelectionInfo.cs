@@ -32,6 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
                     blockCommentStartString,
                     blockCommentEndString
                 )
-            ) { }
+            )
+        {
+        }
     }
 }

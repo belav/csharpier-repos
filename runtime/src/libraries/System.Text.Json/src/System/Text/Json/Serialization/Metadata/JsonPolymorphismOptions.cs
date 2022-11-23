@@ -20,7 +20,9 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Creates an empty <see cref="JsonPolymorphismOptions"/> instance.
         /// </summary>
-        public JsonPolymorphismOptions() { }
+        public JsonPolymorphismOptions()
+        {
+        }
 
         /// <summary>
         /// Gets the list of derived types supported in the current polymorphic type configuration.

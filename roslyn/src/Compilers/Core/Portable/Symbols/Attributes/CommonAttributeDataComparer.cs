@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis
     {
         public static CommonAttributeDataComparer Instance = new CommonAttributeDataComparer();
 
-        private CommonAttributeDataComparer() { }
+        private CommonAttributeDataComparer()
+        {
+        }
 
         public bool Equals(AttributeData attr1, AttributeData attr2)
         {

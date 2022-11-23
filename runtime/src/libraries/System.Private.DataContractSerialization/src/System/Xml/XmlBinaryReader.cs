@@ -38,7 +38,9 @@ namespace System.Xml
         private XmlBinaryNodeType _arrayNodeType;
         private OnXmlDictionaryReaderClose? _onClose;
 
-        public XmlBinaryReader() { }
+        public XmlBinaryReader()
+        {
+        }
 
         public void SetInput(
             byte[] buffer,

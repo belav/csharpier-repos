@@ -5,10 +5,14 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class ClonableStack<T> : System.Collections.Generic.List<T>
     {
-        public ClonableStack() { }
+        public ClonableStack()
+        {
+        }
 
         private ClonableStack(System.Collections.Generic.IEnumerable<T> collection)
-            : base(collection) { }
+            : base(collection)
+        {
+        }
 
         public void Push(T value)
         {

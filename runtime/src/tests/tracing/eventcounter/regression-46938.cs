@@ -20,7 +20,9 @@ namespace EventCounterRegressionTests
 
         public bool SawNanFragmentation = false;
 
-        public SimpleEventListener() { }
+        public SimpleEventListener()
+        {
+        }
 
         protected override void OnEventSourceCreated(EventSource source)
         {

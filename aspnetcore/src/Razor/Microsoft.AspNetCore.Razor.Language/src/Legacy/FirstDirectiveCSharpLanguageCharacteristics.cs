@@ -8,7 +8,9 @@ internal class FirstDirectiveCSharpLanguageCharacteristics : CSharpLanguageChara
     private static readonly FirstDirectiveCSharpLanguageCharacteristics _instance =
         new FirstDirectiveCSharpLanguageCharacteristics();
 
-    private FirstDirectiveCSharpLanguageCharacteristics() { }
+    private FirstDirectiveCSharpLanguageCharacteristics()
+    {
+    }
 
     public static new FirstDirectiveCSharpLanguageCharacteristics Instance => _instance;
 

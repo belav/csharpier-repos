@@ -159,7 +159,11 @@ namespace IdeCoreBenchmarks
                     );
                     // var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("JsonSerializableAttribute");
 #endif
-                    ctx.RegisterSourceOutput(input, (spc, node) => { });
+                    ctx.RegisterSourceOutput(
+                        input,
+                        (spc, node) => {
+                        }
+                    );
                 })
             ).AsSourceGenerator();
 

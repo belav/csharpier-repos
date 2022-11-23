@@ -37,7 +37,9 @@ namespace System.IO
 
         private const int MemStreamMaxLength = int.MaxValue;
 
-        public MemoryStream() : this(0) { }
+        public MemoryStream() : this(0)
+        {
+        }
 
         public MemoryStream(int capacity)
         {
@@ -55,7 +57,9 @@ namespace System.IO
             _isOpen = true;
         }
 
-        public MemoryStream(byte[] buffer) : this(buffer, true) { }
+        public MemoryStream(byte[] buffer) : this(buffer, true)
+        {
+        }
 
         public MemoryStream(byte[] buffer, bool writable)
         {
@@ -68,10 +72,14 @@ namespace System.IO
         }
 
         public MemoryStream(byte[] buffer, int index, int count)
-            : this(buffer, index, count, true, false) { }
+            : this(buffer, index, count, true, false)
+        {
+        }
 
         public MemoryStream(byte[] buffer, int index, int count, bool writable)
-            : this(buffer, index, count, writable, false) { }
+            : this(buffer, index, count, writable, false)
+        {
+        }
 
         public MemoryStream(
             byte[] buffer,
@@ -165,7 +173,9 @@ namespace System.IO
             return false;
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {

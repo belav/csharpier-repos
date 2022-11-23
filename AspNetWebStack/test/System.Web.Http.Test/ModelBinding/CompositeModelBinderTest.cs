@@ -239,7 +239,9 @@ namespace System.Web.Http.ModelBinding
             return ContextUtil.CreateControllerContext();
         }
 
-        private class SimpleController : ApiController { }
+        private class SimpleController : ApiController
+        {
+        }
 
         private class SimpleModel
         {
@@ -251,7 +253,9 @@ namespace System.Web.Http.ModelBinding
         {
             private readonly CultureInfo _culture;
 
-            public SimpleValueProvider() : this(null) { }
+            public SimpleValueProvider() : this(null)
+            {
+            }
 
             public SimpleValueProvider(CultureInfo culture) : base(StringComparer.OrdinalIgnoreCase)
             {

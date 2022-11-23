@@ -20,7 +20,9 @@ namespace System.IO.IsolatedStorage
         public void DeleteFile_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
+            {
+            }
 
             Assert.Throws<ObjectDisposedException>(() => isf.DeleteFile("foo"));
         }

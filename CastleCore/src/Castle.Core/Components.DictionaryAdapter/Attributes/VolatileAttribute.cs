@@ -20,5 +20,7 @@ namespace Castle.Components.DictionaryAdapter
     /// Indicates that underlying values are changeable and should not be cached.
     /// </summary>
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = false)]
-    public class VolatileAttribute : Attribute { }
+    public class VolatileAttribute : Attribute
+    {
+    }
 }

@@ -30,7 +30,9 @@ namespace System.Web.Http.Routing
             object
         >.Value;
 
-        public RouteCollectionRoute() { }
+        public RouteCollectionRoute()
+        {
+        }
 
         // This will enumerate all controllers and action descriptors, which will run those
         // Initialization hooks, which may try to initialize controller-specific config, which

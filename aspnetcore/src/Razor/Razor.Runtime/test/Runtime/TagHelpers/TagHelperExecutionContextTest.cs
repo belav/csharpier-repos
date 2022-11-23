@@ -21,7 +21,9 @@ public class TagHelperExecutionContextTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => throw new Exception(),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () =>
             {
                 calledEnd = true;
@@ -47,7 +49,9 @@ public class TagHelperExecutionContextTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => throw new Exception(),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () =>
             {
                 calledEnd = true;
@@ -80,7 +84,9 @@ public class TagHelperExecutionContextTest
 
                 return Task.FromResult(result: true);
             },
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => tagHelperContent
         );
 
@@ -103,7 +109,9 @@ public class TagHelperExecutionContextTest
             callCount++;
             return Task.FromResult(true);
         };
-        Action<HtmlEncoder> startTagHelperWritingScope = _ => { };
+        Action<HtmlEncoder> startTagHelperWritingScope = _ =>
+        {
+        };
         Func<TagHelperContent> endTagHelperWritingScope = () => null;
         var executionContext = new TagHelperExecutionContext(
             tagName,
@@ -163,7 +171,9 @@ public class TagHelperExecutionContextTest
             callCount++;
             return Task.FromResult(true);
         };
-        Action<HtmlEncoder> startWritingScope = _ => { };
+        Action<HtmlEncoder> startWritingScope = _ =>
+        {
+        };
         Func<TagHelperContent> endWritingScope = () => null;
         var executionContext = new TagHelperExecutionContext(
             tagName,
@@ -226,7 +236,9 @@ public class TagHelperExecutionContextTest
             items: expectedItems,
             uniqueId: string.Empty,
             executeChildContentAsync: async () => await Task.FromResult(result: true),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -288,7 +300,9 @@ public class TagHelperExecutionContextTest
 
                 return Task.FromResult(result: true);
             },
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => tagHelperContent
         );
 
@@ -341,7 +355,9 @@ public class TagHelperExecutionContextTest
                 executionCount++;
                 return Task.FromResult(result: true);
             },
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -375,7 +391,9 @@ public class TagHelperExecutionContextTest
                 executionCount++;
                 return Task.FromResult(result: true);
             },
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -409,7 +427,9 @@ public class TagHelperExecutionContextTest
                 executionCount++;
                 return Task.FromResult(result: true);
             },
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -446,7 +466,9 @@ public class TagHelperExecutionContextTest
                 executionCount++;
                 return Task.FromResult(result: true);
             },
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -470,7 +492,9 @@ public class TagHelperExecutionContextTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -633,5 +657,7 @@ public class TagHelperExecutionContextTest
         Assert.Same(tagHelper2, tagHelpers[1]);
     }
 
-    private class PTagHelper : TagHelper { }
+    private class PTagHelper : TagHelper
+    {
+    }
 }

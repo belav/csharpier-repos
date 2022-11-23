@@ -35,7 +35,9 @@ public readonly struct ParameterView
         in ParameterViewLifetime lifetime,
         RenderTreeFrame[] frames,
         int ownerIndex
-    ) : this(lifetime, frames, ownerIndex, Array.Empty<CascadingParameterState>()) { }
+    ) : this(lifetime, frames, ownerIndex, Array.Empty<CascadingParameterState>())
+    {
+    }
 
     private ParameterView(
         in ParameterViewLifetime lifetime,

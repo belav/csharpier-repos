@@ -137,7 +137,9 @@ public class When_mapping_generic_interface : AutoMapperSpecBase
         public String PropertyToIgnore { get; set; } = "I am not ignored";
     }
 
-    public class Destination : DestinationBase<String> { }
+    public class Destination : DestinationBase<String>
+    {
+    }
 
     public abstract class DestinationBase<T> : DestinationBaseBase, IDestinationBase<T>
     {
@@ -337,7 +339,9 @@ public class When_mapping_an_interface_to_an_abstract_type : AutoMapperSpecBase
         public virtual string ChildProperty { get; set; }
     }
 
-    public class SubDtoChildObject : DtoChildObject { }
+    public class SubDtoChildObject : DtoChildObject
+    {
+    }
 
     protected override void Because_of()
     {
@@ -763,17 +767,29 @@ public class MappingToInterfacesWithPolymorphism : AutoMapperSpecBase
 {
     private BaseDto[] _baseDtos;
 
-    public interface IBase { }
+    public interface IBase
+    {
+    }
 
-    public interface IDerived : IBase { }
+    public interface IDerived : IBase
+    {
+    }
 
-    public class Base : IBase { }
+    public class Base : IBase
+    {
+    }
 
-    public class Derived : Base, IDerived { }
+    public class Derived : Base, IDerived
+    {
+    }
 
-    public class BaseDto { }
+    public class BaseDto
+    {
+    }
 
-    public class DerivedDto : BaseDto { }
+    public class DerivedDto : BaseDto
+    {
+    }
 
     //and following mappings:
     protected override MapperConfiguration CreateConfiguration() =>

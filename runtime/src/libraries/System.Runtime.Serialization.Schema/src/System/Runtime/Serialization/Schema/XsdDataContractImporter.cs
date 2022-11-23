@@ -40,7 +40,9 @@ namespace System.Runtime.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="XsdDataContractImporter"/> class.
         /// </summary>
-        public XsdDataContractImporter() { }
+        public XsdDataContractImporter()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XsdDataContractImporter"/> class with the <see cref="System.CodeDom.CodeCompileUnit"/> that will be used to generate CLR code.

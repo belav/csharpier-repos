@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioPersistentStorageLocationService() { }
+        public VisualStudioPersistentStorageLocationService()
+        {
+        }
 
         public override bool IsSupported(Workspace workspace) => workspace is VisualStudioWorkspace;
     }

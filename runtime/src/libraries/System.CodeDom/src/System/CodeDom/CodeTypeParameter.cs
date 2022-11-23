@@ -9,7 +9,9 @@ namespace System.CodeDom
         private CodeAttributeDeclarationCollection _customAttributes;
         private CodeTypeReferenceCollection _constraints;
 
-        public CodeTypeParameter() { }
+        public CodeTypeParameter()
+        {
+        }
 
         public CodeTypeParameter(string name)
         {

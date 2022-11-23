@@ -20,13 +20,17 @@ public class LeftJoinExpression : PredicateJoinExpressionBase
     /// <param name="table">A table source to LEFT JOIN with.</param>
     /// <param name="joinPredicate">A predicate to use for the join.</param>
     public LeftJoinExpression(TableExpressionBase table, SqlExpression joinPredicate)
-        : this(table, joinPredicate, annotations: null) { }
+        : this(table, joinPredicate, annotations: null)
+    {
+    }
 
     private LeftJoinExpression(
         TableExpressionBase table,
         SqlExpression joinPredicate,
         IEnumerable<IAnnotation>? annotations
-    ) : base(table, joinPredicate, annotations) { }
+    ) : base(table, joinPredicate, annotations)
+    {
+    }
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)

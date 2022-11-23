@@ -10,7 +10,9 @@ namespace System.Net.NetworkInformation
     {
         private readonly Interop.IpHlpApi.MibTcpStats _stats;
 
-        private SystemTcpStatistics() { }
+        private SystemTcpStatistics()
+        {
+        }
 
         internal unsafe SystemTcpStatistics(AddressFamily family)
         {

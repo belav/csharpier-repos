@@ -11,7 +11,9 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X509KeyUsageExtension(AsnEncodedData encodedKeyUsage, bool critical)
-            : base(Oids.KeyUsageOid, encodedKeyUsage.RawData, critical) { }
+            : base(Oids.KeyUsageOid, encodedKeyUsage.RawData, critical)
+        {
+        }
 
         public X509KeyUsageExtension(X509KeyUsageFlags keyUsages, bool critical)
             : base(
@@ -19,7 +21,9 @@ namespace System.Security.Cryptography.X509Certificates
                 X509Pal.Instance.EncodeX509KeyUsageExtension(keyUsages),
                 critical,
                 skipCopy: true
-            ) { }
+            )
+        {
+        }
 
         public X509KeyUsageFlags KeyUsages
         {

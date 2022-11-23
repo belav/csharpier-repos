@@ -9,7 +9,9 @@ namespace Internal.Reflection.Core
 {
     public abstract class ReflectionDomainSetup
     {
-        protected ReflectionDomainSetup() { }
+        protected ReflectionDomainSetup()
+        {
+        }
 
         public abstract AssemblyBinder AssemblyBinder { get; }
         public abstract Exception CreateMissingMetadataException(TypeInfo pertainant);

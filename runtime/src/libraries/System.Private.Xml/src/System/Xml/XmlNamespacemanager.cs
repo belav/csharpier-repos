@@ -50,7 +50,9 @@ namespace System.Xml
         // Constants
         private const int MinDeclsCountForHashtable = 16;
 
-        internal XmlNamespaceManager() { }
+        internal XmlNamespaceManager()
+        {
+        }
 
         public XmlNamespaceManager(XmlNameTable nameTable)
         {

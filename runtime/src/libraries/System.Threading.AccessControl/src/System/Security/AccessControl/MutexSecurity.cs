@@ -55,7 +55,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         public MutexAccessRule(string identity, MutexRights eventRights, AccessControlType type)
             : this(
@@ -65,7 +67,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         //
         // Internal constructor to be called by public constructors
@@ -78,7 +82,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
+        {
+        }
 
         public MutexRights MutexRights
         {
@@ -96,7 +102,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 flags
-            ) { }
+            )
+        {
+        }
 
         internal MutexAuditRule(
             IdentityReference identity,
@@ -105,7 +113,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
+        {
+        }
 
         public MutexRights MutexRights
         {
@@ -115,7 +125,9 @@ namespace System.Security.AccessControl
 
     public sealed class MutexSecurity : NativeObjectSecurity
     {
-        public MutexSecurity() : base(true, ResourceType.KernelObject) { }
+        public MutexSecurity() : base(true, ResourceType.KernelObject)
+        {
+        }
 
         public MutexSecurity(string name, AccessControlSections includeSections)
             : base(true, ResourceType.KernelObject, name, includeSections, HandleErrorCode, null)

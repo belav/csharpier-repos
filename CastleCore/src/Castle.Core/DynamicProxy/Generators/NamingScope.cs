@@ -22,7 +22,9 @@ namespace Castle.DynamicProxy.Generators
         private readonly IDictionary<string, int> names = new Dictionary<string, int>();
         private readonly INamingScope parentScope;
 
-        public NamingScope() { }
+        public NamingScope()
+        {
+        }
 
         private NamingScope(INamingScope parent)
         {

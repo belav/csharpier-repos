@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerCategoryGroupingSet() { }
+        public AnalyzerCategoryGroupingSet()
+        {
+        }
     }
 
     [Export(typeof(ITableColumnDefinition))]
@@ -29,7 +31,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerCategoryColumnDefinition() { }
+        public AnalyzerCategoryColumnDefinition()
+        {
+        }
 
         public override string Name => Category;
         public override string DisplayName => ServicesVSResources.Category;

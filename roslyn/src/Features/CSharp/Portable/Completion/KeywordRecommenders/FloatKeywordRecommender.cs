@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class FloatKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public FloatKeywordRecommender() : base(SyntaxKind.FloatKeyword) { }
+        public FloatKeywordRecommender() : base(SyntaxKind.FloatKeyword)
+        {
+        }
 
         protected override bool IsValidContextWorker(
             int position,

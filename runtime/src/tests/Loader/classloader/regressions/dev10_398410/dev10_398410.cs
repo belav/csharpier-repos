@@ -13,7 +13,9 @@
 
 using System;
 
-public class MyDerived : MyBase, I { }
+public class MyDerived : MyBase, I
+{
+}
 
 class MyTest
 {

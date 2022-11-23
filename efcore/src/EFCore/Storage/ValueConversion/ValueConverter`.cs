@@ -33,7 +33,9 @@ public class ValueConverter<TModel, TProvider> : ValueConverter
         Expression<Func<TModel, TProvider>> convertToProviderExpression,
         Expression<Func<TProvider, TModel>> convertFromProviderExpression,
         ConverterMappingHints? mappingHints = null
-    ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
+    ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
+    {
+    }
 
     /// <summary>
     ///     <para>
@@ -71,7 +73,9 @@ public class ValueConverter<TModel, TProvider> : ValueConverter
             convertFromProviderExpression,
             convertsNulls,
             mappingHints
-        ) { }
+        )
+    {
+    }
 
     private static Func<object?, object?> SanitizeConverter<TIn, TOut>(
         Expression<Func<TIn, TOut>> convertExpression,

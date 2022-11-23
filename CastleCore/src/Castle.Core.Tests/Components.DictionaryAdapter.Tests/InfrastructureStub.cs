@@ -24,13 +24,19 @@ namespace Castle.Components.DictionaryAdapter.Tests
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void BeginEdit() { }
+        public void BeginEdit()
+        {
+        }
 
-        public void CancelEdit() { }
+        public void CancelEdit()
+        {
+        }
 
         public void EndEdit()
         {
-            if (PropertyChanged != null) { }
+            if (PropertyChanged != null)
+            {
+            }
         }
 
         public string Error

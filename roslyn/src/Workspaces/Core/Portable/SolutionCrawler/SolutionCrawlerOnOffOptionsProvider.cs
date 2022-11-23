@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SolutionCrawlerOnOffOptionsProvider() { }
+        public SolutionCrawlerOnOffOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(

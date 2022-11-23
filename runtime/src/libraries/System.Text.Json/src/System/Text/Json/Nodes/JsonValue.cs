@@ -18,7 +18,9 @@ namespace System.Text.Json.Nodes
         internal const string CreateDynamicCodeMessage =
             "Creating JsonValue instances with non-primitive types requires generating code at runtime.";
 
-        private protected JsonValue(JsonNodeOptions? options = null) : base(options) { }
+        private protected JsonValue(JsonNodeOptions? options = null) : base(options)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonValue"/> class that contains the specified value.

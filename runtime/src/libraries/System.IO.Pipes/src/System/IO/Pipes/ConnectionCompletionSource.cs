@@ -47,5 +47,7 @@ namespace System.IO.Pipes
             );
     }
 
-    internal struct VoidResult { }
+    internal struct VoidResult
+    {
+    }
 }

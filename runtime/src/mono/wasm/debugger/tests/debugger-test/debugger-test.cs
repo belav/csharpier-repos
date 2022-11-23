@@ -246,9 +246,11 @@ public partial class Math
 
     public static int ActionTSignatureTest()
     {
-        Action<GenericStruct<int[]>> fn_action = (_) => { };
+        Action<GenericStruct<int[]>> fn_action = (_) => {
+        };
         Action<GenericStruct<int[]>> fn_action_del = Math.DelegateTargetWithVoidReturn;
-        Action fn_action_bare = () => { };
+        Action fn_action_bare = () => {
+        };
         Action<GenericStruct<int[]>> fn_action_null = null;
         var fn_action_arr = new Action<GenericStruct<int[]>>[]
         {
@@ -303,7 +305,8 @@ public partial class Math
             (m, gs) => new GenericStruct<bool[]>()
         };
         Func<char[], bool> _fn_func = (cs) => cs.Length == 0;
-        Action<GenericStruct<int>[]> _fn_action = (gss) => { };
+        Action<GenericStruct<int>[]> _fn_action = (gss) => {
+        };
 
         new Math().MethodWithDelegateArgs(_dst_arr, _fn_func, _fn_action);
     }
@@ -331,7 +334,8 @@ public partial class Math
             (m, gs) => new GenericStruct<bool[]>()
         };
         Func<char[], bool> _fn_func = (cs) => cs.Length == 0;
-        Action<GenericStruct<int>[]> _fn_action = (gss) => { };
+        Action<GenericStruct<int>[]> _fn_action = (gss) => {
+        };
 
         Console.WriteLine($"Placeholder for breakpoint");
         await System.Threading.Tasks.Task.CompletedTask;
@@ -339,7 +343,9 @@ public partial class Math
 
     public delegate void DelegateWithVoidReturn(GenericStruct<int[]> gs);
 
-    public static void DelegateTargetWithVoidReturn(GenericStruct<int[]> gs) { }
+    public static void DelegateTargetWithVoidReturn(GenericStruct<int[]> gs)
+    {
+    }
 
     public delegate GenericStruct<bool[]> DelegateForSignatureTest(
         Math m,
@@ -395,7 +401,9 @@ public partial class DebuggerTest
         return 0;
     }
 
-    static void locals_inner() { }
+    static void locals_inner()
+    {
+    }
 
     public static void BoxingTest()
     {
@@ -837,7 +845,9 @@ public class Foo
 
 public class MainPage
 {
-    public MainPage() { }
+    public MainPage()
+    {
+    }
 
     int count = 0;
     private int someValue;
@@ -854,7 +864,9 @@ public class MainPage
             {
                 var view = 150;
 
-                if (view != 50) { }
+                if (view != 50)
+                {
+                }
                 System.Diagnostics.Debugger.Break();
             }
 

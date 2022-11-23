@@ -54,7 +54,9 @@ namespace Microsoft.CSharp
             | GeneratorSupport.GenericTypeDeclaration
             | GeneratorSupport.DeclareIndexerProperties;
 
-        internal CSharpCodeGenerator() { }
+        internal CSharpCodeGenerator()
+        {
+        }
 
         internal CSharpCodeGenerator(IDictionary<string, string> providerOptions)
         {

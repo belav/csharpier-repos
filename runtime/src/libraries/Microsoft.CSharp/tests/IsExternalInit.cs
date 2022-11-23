@@ -3,5 +3,7 @@
 
 namespace System.Runtime.CompilerServices
 {
-    public sealed class IsExternalInit { }
+    public sealed class IsExternalInit
+    {
+    }
 }

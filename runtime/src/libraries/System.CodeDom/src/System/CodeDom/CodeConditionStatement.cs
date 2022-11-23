@@ -5,7 +5,9 @@ namespace System.CodeDom
 {
     public class CodeConditionStatement : CodeStatement
     {
-        public CodeConditionStatement() { }
+        public CodeConditionStatement()
+        {
+        }
 
         public CodeConditionStatement(
             CodeExpression condition,

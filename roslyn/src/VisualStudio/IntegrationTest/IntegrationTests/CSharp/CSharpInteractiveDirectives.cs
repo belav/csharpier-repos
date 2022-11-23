@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpInteractiveDirectives : AbstractInteractiveWindowTest
     {
         public CSharpInteractiveDirectives(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         [WpfFact]
         public void VerifyHostCommandsCompletionList()

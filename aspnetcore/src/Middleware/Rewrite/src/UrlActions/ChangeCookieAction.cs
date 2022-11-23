@@ -10,7 +10,9 @@ internal sealed class ChangeCookieAction : UrlAction
     private readonly Func<DateTimeOffset> _timeSource;
     private CookieOptions? _cachedOptions;
 
-    public ChangeCookieAction(string name) : this(name, () => DateTimeOffset.UtcNow) { }
+    public ChangeCookieAction(string name) : this(name, () => DateTimeOffset.UtcNow)
+    {
+    }
 
     // for testing
     internal ChangeCookieAction(string name, Func<DateTimeOffset> timeSource)

@@ -12,7 +12,9 @@ namespace MS.Internal.Xml.XPath
         private bool _onAttribute;
 
         public AttributeQuery(Query qyParent, string Name, string Prefix, XPathNodeType Type)
-            : base(qyParent, Name, Prefix, Type) { }
+            : base(qyParent, Name, Prefix, Type)
+        {
+        }
 
         private AttributeQuery(AttributeQuery other) : base(other)
         {

@@ -20,7 +20,9 @@ class OpenSemaphoreNeg
         Mutex mu = new Mutex(false, sName);
         try
         {
-            using (Semaphore sem = Semaphore.OpenExisting(sName)) { }
+            using (Semaphore sem = Semaphore.OpenExisting(sName))
+            {
+            }
         }
         catch (WaitHandleCannotBeOpenedException)
         {

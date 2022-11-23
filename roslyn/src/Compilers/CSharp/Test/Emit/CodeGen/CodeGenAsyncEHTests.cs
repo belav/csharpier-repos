@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             SystemCoreRef_v4_0_30319_17929
         };
 
-        public CodeGenAsyncEHTests() { }
+        public CodeGenAsyncEHTests()
+        {
+        }
 
         private CompilationVerifier CompileAndVerify(
             string source,

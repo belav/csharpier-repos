@@ -7,6 +7,8 @@ namespace Microsoft.Interop.JavaScript
 {
     internal sealed class VoidGenerator : BaseJSGenerator
     {
-        public VoidGenerator(MarshalerType marshalerType) : base(marshalerType, new Forwarder()) { }
+        public VoidGenerator(MarshalerType marshalerType) : base(marshalerType, new Forwarder())
+        {
+        }
     }
 }

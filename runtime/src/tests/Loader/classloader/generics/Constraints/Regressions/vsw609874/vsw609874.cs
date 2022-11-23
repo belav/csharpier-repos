@@ -25,10 +25,16 @@ namespace ConsoleApplication3
             return 100;
         }
 
-        static void Repro<T>(B<T> b) where T : Program { }
+        static void Repro<T>(B<T> b) where T : Program
+        {
+        }
     }
 
-    class A<T> { }
+    class A<T>
+    {
+    }
 
-    class B<T> where T : class { }
+    class B<T> where T : class
+    {
+    }
 }

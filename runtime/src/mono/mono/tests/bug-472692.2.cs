@@ -17,4 +17,6 @@ public class Foo<T>
     }
 }
 
-public class Helper<T> { }
+public class Helper<T>
+{
+}

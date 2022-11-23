@@ -14,7 +14,9 @@ namespace System.Web.Http.ApiExplorer
         }
 
         [HttpPost]
-        public void AddData() { }
+        public void AddData()
+        {
+        }
 
         public int Get()
         {

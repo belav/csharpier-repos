@@ -188,7 +188,9 @@ namespace System.Web.Mvc
                     controllerContext,
                     "date",
                     GetFieldMustBeDateResource(controllerContext)
-                ) { }
+                )
+            {
+            }
         }
 
         internal sealed class NumericModelValidator : ClientModelValidator
@@ -202,7 +204,9 @@ namespace System.Web.Mvc
                     controllerContext,
                     "number",
                     GetFieldMustBeNumericResource(controllerContext)
-                ) { }
+                )
+            {
+            }
         }
     }
 }

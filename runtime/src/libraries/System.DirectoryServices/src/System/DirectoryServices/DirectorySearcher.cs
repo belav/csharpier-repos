@@ -124,7 +124,9 @@ namespace System.DirectoryServices
         /// value, and <see cref='System.DirectoryServices.DirectorySearcher.Filter'/>, <see cref='System.DirectoryServices.DirectorySearcher.PropertiesToLoad'/>, and <see cref='System.DirectoryServices.DirectorySearcher.SearchScope'/> set to the respective given values.
         /// </devdoc>
         public DirectorySearcher(string? filter, string[]? propertiesToLoad, SearchScope scope)
-            : this(null, filter, propertiesToLoad, scope) { }
+            : this(null, filter, propertiesToLoad, scope)
+        {
+        }
 
         /// <devdoc>
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectorySearcher'/> class with the <see cref='System.DirectoryServices.DirectorySearcher.SearchRoot'/>, <see cref='System.DirectoryServices.DirectorySearcher.Filter'/>, <see cref='System.DirectoryServices.DirectorySearcher.PropertiesToLoad'/>, and <see cref='System.DirectoryServices.DirectorySearcher.SearchScope'/> properties set to the given

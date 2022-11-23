@@ -428,7 +428,8 @@ namespace System.IO.Strategies
         private sealed unsafe class AsyncCopyToAwaitable : ICriticalNotifyCompletion
         {
             /// <summary>Sentinel object used to indicate that the I/O operation has completed before being awaited.</summary>
-            private static readonly Action s_sentinel = () => { };
+            private static readonly Action s_sentinel = () => {
+            };
 
             /// <summary>Cached delegate to IOCallback.</summary>
             internal static readonly IOCompletionCallback s_callback = IOCallback;
@@ -507,7 +508,9 @@ namespace System.IO.Strategies
 
             public bool IsCompleted => ReferenceEquals(_continuation, s_sentinel);
 
-            public void GetResult() { }
+            public void GetResult()
+            {
+            }
 
             public void OnCompleted(Action continuation) => UnsafeOnCompleted(continuation);
 

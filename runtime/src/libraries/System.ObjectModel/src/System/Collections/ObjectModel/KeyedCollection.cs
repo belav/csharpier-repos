@@ -22,10 +22,14 @@ namespace System.Collections.ObjectModel
         private int keyCount; // Do not rename (binary serialization)
         private readonly int threshold; // Do not rename (binary serialization)
 
-        protected KeyedCollection() : this(null, DefaultThreshold) { }
+        protected KeyedCollection() : this(null, DefaultThreshold)
+        {
+        }
 
         protected KeyedCollection(IEqualityComparer<TKey>? comparer)
-            : this(comparer, DefaultThreshold) { }
+            : this(comparer, DefaultThreshold)
+        {
+        }
 
         protected KeyedCollection(
             IEqualityComparer<TKey>? comparer,

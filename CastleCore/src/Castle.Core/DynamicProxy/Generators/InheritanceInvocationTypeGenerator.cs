@@ -31,7 +31,9 @@ namespace Castle.DynamicProxy.Generators
             MetaMethod method,
             MethodInfo callback,
             IInvocationCreationContributor contributor
-        ) : base(targetType, method, callback, false, contributor) { }
+        ) : base(targetType, method, callback, false, contributor)
+        {
+        }
 
         protected override ArgumentReference[] GetBaseCtorArguments(
             Type targetFieldType,

@@ -63,7 +63,9 @@ namespace Microsoft.Extensions.Configuration
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
     public sealed partial class ConfigurationKeyNameAttribute : System.Attribute
     {
-        public ConfigurationKeyNameAttribute(string name) { }
+        public ConfigurationKeyNameAttribute(string name)
+        {
+        }
 
         public string Name
         {

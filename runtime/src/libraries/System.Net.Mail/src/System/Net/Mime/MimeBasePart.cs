@@ -16,7 +16,9 @@ namespace System.Net.Mime
         protected ContentDisposition? _contentDisposition;
         private HeaderCollection? _headers;
 
-        internal MimeBasePart() { }
+        internal MimeBasePart()
+        {
+        }
 
         internal static bool ShouldUseBase64Encoding(Encoding? encoding) =>
             encoding == Encoding.Unicode
@@ -268,7 +270,9 @@ namespace System.Net.Mime
         internal sealed class MimePartAsyncResult : LazyAsyncResult
         {
             internal MimePartAsyncResult(MimeBasePart part, object? state, AsyncCallback? callback)
-                : base(part, state, callback) { }
+                : base(part, state, callback)
+            {
+            }
         }
     }
 }

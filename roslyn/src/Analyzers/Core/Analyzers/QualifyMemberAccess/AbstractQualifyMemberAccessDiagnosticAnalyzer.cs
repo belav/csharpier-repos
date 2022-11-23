@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override bool OpenFileOnly(SimplifierOptions? options)
         {

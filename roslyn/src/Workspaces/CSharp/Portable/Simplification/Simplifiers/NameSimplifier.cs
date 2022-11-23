@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
     {
         public static readonly NameSimplifier Instance = new();
 
-        private NameSimplifier() { }
+        private NameSimplifier()
+        {
+        }
 
         public override bool TrySimplify(
             NameSyntax name,

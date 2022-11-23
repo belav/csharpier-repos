@@ -17,7 +17,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         private BinaryHeaderEnum _binaryHeaderEnum;
         internal BinaryArrayTypeEnum _binaryArrayTypeEnum;
 
-        internal BinaryArray() { }
+        internal BinaryArray()
+        {
+        }
 
         internal BinaryArray(BinaryHeaderEnum binaryHeaderEnum)
         {

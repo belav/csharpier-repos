@@ -124,20 +124,32 @@ namespace System.Web.Mvc.Test
         }
     }
 
-    public class TypeCacheMarkerAttribute : Attribute { }
+    public class TypeCacheMarkerAttribute : Attribute
+    {
+    }
 
     [TypeCacheMarker]
-    public class TypeCacheValidFoo { }
+    public class TypeCacheValidFoo
+    {
+    }
 
     [TypeCacheMarker]
-    public class TypeCacheValidBar { }
+    public class TypeCacheValidBar
+    {
+    }
 
     [TypeCacheMarker]
-    internal class TypeCacheInvalidInternal { }
+    internal class TypeCacheInvalidInternal
+    {
+    }
 
     [TypeCacheMarker]
-    public abstract class TypeCacheInvalidAbstract { }
+    public abstract class TypeCacheInvalidAbstract
+    {
+    }
 
     [TypeCacheMarker]
-    public struct TypeCacheInvalidStruct { }
+    public struct TypeCacheInvalidStruct
+    {
+    }
 }

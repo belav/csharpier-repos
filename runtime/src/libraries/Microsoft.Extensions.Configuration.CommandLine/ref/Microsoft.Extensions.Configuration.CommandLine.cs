@@ -43,30 +43,40 @@ namespace Microsoft.Extensions.Configuration.CommandLine
         public CommandLineConfigurationProvider(
             System.Collections.Generic.IEnumerable<string> args,
             System.Collections.Generic.IDictionary<string, string>? switchMappings = null
-        ) { }
+        )
+        {
+        }
 
         protected System.Collections.Generic.IEnumerable<string> Args
         {
             get { throw null; }
         }
 
-        public override void Load() { }
+        public override void Load()
+        {
+        }
     }
 
     public partial class CommandLineConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
-        public CommandLineConfigurationSource() { }
+        public CommandLineConfigurationSource()
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<string> Args
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IDictionary<string, string>? SwitchMappings
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(

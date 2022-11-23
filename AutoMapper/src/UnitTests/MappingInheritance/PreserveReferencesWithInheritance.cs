@@ -28,9 +28,13 @@
             public int Position { get; set; }
         }
 
-        public sealed class Property : Member { }
+        public sealed class Property : Member
+        {
+        }
 
-        public sealed class Field : Member { }
+        public sealed class Field : Member
+        {
+        }
     }
 
     namespace Target
@@ -56,9 +60,13 @@
             public int Position { get; set; }
         }
 
-        public sealed class Property : Member { }
+        public sealed class Property : Member
+        {
+        }
 
-        public sealed class Field : Member { }
+        public sealed class Field : Member
+        {
+        }
     }
 
     public class PreserveReferencesWithInheritance : AutoMapperSpecBase

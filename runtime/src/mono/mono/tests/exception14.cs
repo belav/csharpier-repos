@@ -10,7 +10,9 @@ class Class1
         {
             bool huh = s1.StartsWith(null);
         }
-        catch (ArgumentNullException) { }
+        catch (ArgumentNullException)
+        {
+        }
 
         if (s1.StartsWith("o"))
         {

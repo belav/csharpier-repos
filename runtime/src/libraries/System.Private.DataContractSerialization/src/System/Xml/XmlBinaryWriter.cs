@@ -163,7 +163,9 @@ namespace System.Xml
             Advance(9);
         }
 
-        public override void WriteDeclaration() { }
+        public override void WriteDeclaration()
+        {
+        }
 
         public override void WriteStartElement(string? prefix, string localName)
         {
@@ -898,7 +900,9 @@ namespace System.Xml
             WriteNode(XmlBinaryNodeType.StartListText);
         }
 
-        public override void WriteListSeparator() { }
+        public override void WriteListSeparator()
+        {
+        }
 
         public override void WriteEndListText()
         {

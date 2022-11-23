@@ -146,6 +146,7 @@ public class SqliteDbContextOptionsBuilderExtensionsTest
     private class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        { }
+        {
+        }
     }
 }

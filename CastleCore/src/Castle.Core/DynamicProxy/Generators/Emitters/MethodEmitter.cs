@@ -41,7 +41,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
         }
 
         internal MethodEmitter(AbstractTypeEmitter owner, string name, MethodAttributes attributes)
-            : this(owner.TypeBuilder.DefineMethod(name, attributes)) { }
+            : this(owner.TypeBuilder.DefineMethod(name, attributes))
+        {
+        }
 
         internal MethodEmitter(
             AbstractTypeEmitter owner,

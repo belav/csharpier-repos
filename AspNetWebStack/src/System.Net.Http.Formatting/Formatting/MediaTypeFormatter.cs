@@ -590,7 +590,8 @@ namespace System.Net.Http.Formatting
             private static readonly Type _mediaTypeHeaderValueType = typeof(MediaTypeHeaderValue);
 
             internal MediaTypeHeaderValueCollection(IList<MediaTypeHeaderValue> list) : base(list)
-            { }
+            {
+            }
 
             /// <summary>
             /// Inserts the <paramref name="item"/> into the collection at the specified <paramref name="index"/>.

@@ -104,6 +104,8 @@ namespace System.CommandLine.Rendering.Tests
 
     public class ParseResultView : ContentView<ParseResult>
     {
-        public ParseResultView(ParseResult value) : base(value) { }
+        public ParseResultView(ParseResult value) : base(value)
+        {
+        }
     }
 }

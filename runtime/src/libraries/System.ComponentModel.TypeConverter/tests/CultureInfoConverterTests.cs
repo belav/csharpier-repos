@@ -40,7 +40,9 @@ namespace System.ComponentModel.Tests
             {
                 culture = new CultureInfo("nl--B");
             }
-            catch { }
+            catch
+            {
+            }
 
             if (culture != null)
             {
@@ -248,7 +250,9 @@ namespace System.ComponentModel.Tests
         [Serializable]
         private sealed class CustomCultureInfo : CultureInfo
         {
-            public CustomCultureInfo() : base("nl-BE") { }
+            public CustomCultureInfo() : base("nl-BE")
+            {
+            }
 
             public override string DisplayName => "display";
 

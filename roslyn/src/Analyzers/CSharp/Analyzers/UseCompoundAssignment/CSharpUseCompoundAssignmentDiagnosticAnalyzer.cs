@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
         >
     {
         public CSharpUseCompoundAssignmentDiagnosticAnalyzer()
-            : base(CSharpSyntaxFacts.Instance, Utilities.Kinds) { }
+            : base(CSharpSyntaxFacts.Instance, Utilities.Kinds)
+        {
+        }
 
         protected override SyntaxKind GetAnalysisKind() => SyntaxKind.SimpleAssignmentExpression;
 

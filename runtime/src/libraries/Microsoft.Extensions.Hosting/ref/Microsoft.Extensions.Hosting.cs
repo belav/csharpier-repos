@@ -35,12 +35,16 @@ namespace Microsoft.Extensions.Hosting
 
     public partial class ConsoleLifetimeOptions
     {
-        public ConsoleLifetimeOptions() { }
+        public ConsoleLifetimeOptions()
+        {
+        }
 
         public bool SuppressStatusMessages
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -86,19 +90,25 @@ namespace Microsoft.Extensions.Hosting
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime."
         )]
-        public HostApplicationBuilder() { }
+        public HostApplicationBuilder()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime."
         )]
         public HostApplicationBuilder(
             Microsoft.Extensions.Hosting.HostApplicationBuilderSettings? settings
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime."
         )]
-        public HostApplicationBuilder(string[]? args) { }
+        public HostApplicationBuilder(string[]? args)
+        {
+        }
 
         public Microsoft.Extensions.Configuration.ConfigurationManager Configuration
         {
@@ -125,42 +135,58 @@ namespace Microsoft.Extensions.Hosting
         public void ConfigureContainer<TContainerBuilder>(
             Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder> factory,
             System.Action<TContainerBuilder>? configure = null
-        ) where TContainerBuilder : notnull { }
+        ) where TContainerBuilder : notnull
+        {
+        }
     }
 
     public sealed partial class HostApplicationBuilderSettings
     {
-        public HostApplicationBuilderSettings() { }
+        public HostApplicationBuilderSettings()
+        {
+        }
 
         public string? ApplicationName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string[]? Args
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Extensions.Configuration.ConfigurationManager? Configuration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? ContentRootPath
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool DisableDefaults
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? EnvironmentName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -169,7 +195,9 @@ namespace Microsoft.Extensions.Hosting
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime."
         )]
-        public HostBuilder() { }
+        public HostBuilder()
+        {
+        }
 
         public System.Collections.Generic.IDictionary<object, object> Properties
         {
@@ -405,17 +433,23 @@ namespace Microsoft.Extensions.Hosting
 
     public partial class HostOptions
     {
-        public HostOptions() { }
+        public HostOptions()
+        {
+        }
 
         public Microsoft.Extensions.Hosting.BackgroundServiceExceptionBehavior BackgroundServiceExceptionBehavior
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan ShutdownTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }
@@ -428,7 +462,9 @@ namespace Microsoft.Extensions.Hosting.Internal
     {
         public ApplicationLifetime(
             Microsoft.Extensions.Logging.ILogger<Microsoft.Extensions.Hosting.Internal.ApplicationLifetime> logger
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.CancellationToken ApplicationStarted
         {
@@ -443,11 +479,17 @@ namespace Microsoft.Extensions.Hosting.Internal
             get { throw null; }
         }
 
-        public void NotifyStarted() { }
+        public void NotifyStarted()
+        {
+        }
 
-        public void NotifyStopped() { }
+        public void NotifyStopped()
+        {
+        }
 
-        public void StopApplication() { }
+        public void StopApplication()
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
@@ -463,7 +505,9 @@ namespace Microsoft.Extensions.Hosting.Internal
             Microsoft.Extensions.Hosting.IHostEnvironment environment,
             Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> hostOptions
-        ) { }
+        )
+        {
+        }
 
         public ConsoleLifetime(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.ConsoleLifetimeOptions> options,
@@ -471,9 +515,13 @@ namespace Microsoft.Extensions.Hosting.Internal
             Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> hostOptions,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
-        ) { }
+        )
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
@@ -494,27 +542,37 @@ namespace Microsoft.Extensions.Hosting.Internal
         : Microsoft.Extensions.Hosting.IHostEnvironment,
             Microsoft.Extensions.Hosting.IHostingEnvironment
     {
-        public HostingEnvironment() { }
+        public HostingEnvironment()
+        {
+        }
 
         public string ApplicationName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Extensions.FileProviders.IFileProvider ContentRootFileProvider
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ContentRootPath
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string EnvironmentName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

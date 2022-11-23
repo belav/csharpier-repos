@@ -24,7 +24,9 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public RSAOpenSsl() : this(2048) { }
+        public RSAOpenSsl() : this(2048)
+        {
+        }
 
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]

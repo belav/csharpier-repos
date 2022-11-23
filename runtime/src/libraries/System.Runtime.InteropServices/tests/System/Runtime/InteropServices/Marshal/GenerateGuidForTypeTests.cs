@@ -70,7 +70,9 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Guid("12345678-0939-11d1-8be1-00c04fd8d503")]
-        public class ClassWithGuidAttribute { }
+        public class ClassWithGuidAttribute
+        {
+        }
 
         [Fact]
         public void GenerateGuidForType_NullType_ThrowsArgumentNullException()

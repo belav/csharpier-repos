@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpAutomaticBraceCompletion(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpAutomaticBraceCompletion)) { }
+            : base(instanceFactory, nameof(CSharpAutomaticBraceCompletion))
+        {
+        }
 
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Braces_InsertionAndTabCompleting(bool showCompletionInArgumentLists)

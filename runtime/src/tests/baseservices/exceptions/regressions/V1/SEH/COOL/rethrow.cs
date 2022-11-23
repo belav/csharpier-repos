@@ -8,7 +8,9 @@ public class UserException1 : Exception
 {
     int ExceptionId;
 
-    public UserException1() { }
+    public UserException1()
+    {
+    }
 
     public UserException1(int id)
     {
@@ -19,7 +21,9 @@ public class UserException1 : Exception
     {
         new int ExceptionId;
 
-        public UserException2() { }
+        public UserException2()
+        {
+        }
 
         public UserException2(int id) : base(id)
         {
@@ -30,7 +34,9 @@ public class UserException1 : Exception
         {
             new int ExceptionId;
 
-            public UserException3() { }
+            public UserException3()
+            {
+            }
 
             public UserException3(int id) : base(id)
             {
@@ -41,7 +47,9 @@ public class UserException1 : Exception
             {
                 new int ExceptionId;
 
-                public UserException4() { }
+                public UserException4()
+                {
+                }
 
                 public UserException4(int id) : base(id)
                 {

@@ -14,7 +14,9 @@ namespace System.Buffers
             _length = length;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override Span<T> GetSpan()
         {
@@ -26,6 +28,8 @@ namespace System.Buffers
             throw new NotSupportedException();
         }
 
-        public override void Unpin() { }
+        public override void Unpin()
+        {
+        }
     }
 }

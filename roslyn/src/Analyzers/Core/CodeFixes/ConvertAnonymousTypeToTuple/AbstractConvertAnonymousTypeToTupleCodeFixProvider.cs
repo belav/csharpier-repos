@@ -187,7 +187,9 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
                     AnalyzersResources.Convert_to_tuple,
                     createChangedDocument,
                     AnalyzersResources.Convert_to_tuple
-                ) { }
+                )
+            {
+            }
         }
     }
 }

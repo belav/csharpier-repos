@@ -32,7 +32,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
                 subjectBuffer,
                 caseGenerationLocationField,
                 switchExpressionField
-            ) { }
+            )
+        {
+        }
 
         protected override string CaseFormat
         {

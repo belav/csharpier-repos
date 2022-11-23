@@ -37,7 +37,9 @@ public class SqliteGeometryTypeMapping<TGeometry> : RelationalGeometryTypeMappin
                 CreateWriter(storeType)
             ),
             storeType
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,7 +50,9 @@ public class SqliteGeometryTypeMapping<TGeometry> : RelationalGeometryTypeMappin
     protected SqliteGeometryTypeMapping(
         RelationalTypeMappingParameters parameters,
         ValueConverter<TGeometry, byte[]>? converter
-    ) : base(parameters, converter) { }
+    ) : base(parameters, converter)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -840,11 +840,17 @@ namespace Moq.Tests
             void Method(Derived b);
         }
 
-        public class Base { }
+        public class Base
+        {
+        }
 
-        public class Derived : Base { }
+        public class Derived : Base
+        {
+        }
 
-        private void TraceMe(Base b) { }
+        private void TraceMe(Base b)
+        {
+        }
 
         public interface IFoo
         {

@@ -123,7 +123,9 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void Dispose_ShouldNotThrow()
         {
-            using (var catalog = CreateAggregateCatalog()) { }
+            using (var catalog = CreateAggregateCatalog())
+            {
+            }
         }
 
         [Fact]
@@ -514,15 +516,23 @@ namespace System.ComponentModel.Composition.Hosting
             return new AggregateCatalog();
         }
 
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
-        public interface IBar { }
+        public interface IBar
+        {
+        }
 
         [Export(typeof(IFoo))]
-        public class FooExporter : IFoo { }
+        public class FooExporter : IFoo
+        {
+        }
 
         [Export(typeof(IBar))]
-        public class BarExporter : IBar { }
+        public class BarExporter : IBar
+        {
+        }
 
         public class CatalogListener
         {

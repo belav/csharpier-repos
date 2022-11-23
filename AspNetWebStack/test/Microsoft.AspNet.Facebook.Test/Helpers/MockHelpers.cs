@@ -129,6 +129,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
             return client.Object;
         }
 
-        private sealed class EmptyHttpResponse : HttpResponseBase { }
+        private sealed class EmptyHttpResponse : HttpResponseBase
+        {
+        }
     }
 }

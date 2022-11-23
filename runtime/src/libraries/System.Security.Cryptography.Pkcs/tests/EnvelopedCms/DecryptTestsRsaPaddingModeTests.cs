@@ -13,7 +13,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static bool SupportsDiffieHellman { get; } =
             KeyAgreeRecipientInfoTests.SupportsDiffieHellman;
 
-        public DecryptTestsRsaPaddingMode() : base(false) { }
+        public DecryptTestsRsaPaddingMode() : base(false)
+        {
+        }
 
         [Theory]
         [MemberData(nameof(Roundtrip_RsaPaddingModes_TestData))]

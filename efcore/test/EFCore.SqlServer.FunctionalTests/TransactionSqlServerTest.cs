@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class TransactionSqlServerTest
     : TransactionTestBase<TransactionSqlServerTest.TransactionSqlServerFixture>
 {
-    public TransactionSqlServerTest(TransactionSqlServerFixture fixture) : base(fixture) { }
+    public TransactionSqlServerTest(TransactionSqlServerFixture fixture) : base(fixture)
+    {
+    }
 
     // Test relies on savepoints, which are disabled when MARS is enabled
     public override Task SaveChanges_implicitly_creates_savepoint(bool async) =>

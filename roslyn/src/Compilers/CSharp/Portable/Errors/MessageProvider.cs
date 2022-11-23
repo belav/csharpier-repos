@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ObjectBinder.RegisterTypeReader(typeof(MessageProvider), r => Instance);
         }
 
-        private MessageProvider() { }
+        private MessageProvider()
+        {
+        }
 
         bool IObjectWritable.ShouldReuseInSerialization => true;
 

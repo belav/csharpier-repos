@@ -527,7 +527,8 @@ namespace System.Xml.Tests
             }
 
             // for function Read65
-            { }
+            {
+            }
 
             // for function Read66
             {

@@ -147,7 +147,9 @@ namespace CseTest
                     }
 #if TRY
                 }
-                finally { }
+                finally
+                {
+                }
 #endif
                 if (v7 != 348)
                 {

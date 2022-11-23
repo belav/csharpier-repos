@@ -1719,7 +1719,9 @@ public class DefaultObjectValidatorTests
         void DoSomething();
     }
 
-    private void Validate_Throws_ForTopLevelMetadataData(DepthObject depthObject) { }
+    private void Validate_Throws_ForTopLevelMetadataData(DepthObject depthObject)
+    {
+    }
 
     // Custom validation attribute that returns multiple entries in ValidationResult.MemberNames and those member
     // names are indexers. An example scenario is an attribute that confirms all entries in a list are unique.

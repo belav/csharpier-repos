@@ -34,7 +34,9 @@ namespace Castle.DynamicProxy
         /// <summary>
         ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class with new <see cref = "ModuleScope" />.
         /// </summary>
-        public DefaultProxyBuilder() : this(new ModuleScope()) { }
+        public DefaultProxyBuilder() : this(new ModuleScope())
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class.

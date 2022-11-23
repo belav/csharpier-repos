@@ -7,7 +7,9 @@ namespace System.Security.Cryptography
     {
         private RSA? _rsaKey;
 
-        public RSAOAEPKeyExchangeDeformatter() { }
+        public RSAOAEPKeyExchangeDeformatter()
+        {
+        }
 
         public RSAOAEPKeyExchangeDeformatter(AsymmetricAlgorithm key)
         {
@@ -19,7 +21,9 @@ namespace System.Security.Cryptography
         public override string? Parameters
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] DecryptKeyExchange(byte[] rgbData)

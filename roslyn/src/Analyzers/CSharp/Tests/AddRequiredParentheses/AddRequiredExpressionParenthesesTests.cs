@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
     public partial class AddRequiredExpressionParenthesesTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddRequiredExpressionParenthesesTests(ITestOutputHelper logger) : base(logger) { }
+        public AddRequiredExpressionParenthesesTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

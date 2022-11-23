@@ -1,4 +1,6 @@
-public class ClassA { }
+public class ClassA
+{
+}
 
 public struct GenStruct<T>
 {

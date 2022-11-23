@@ -134,7 +134,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             RegexToken openBracketToken,
             RegexSequenceNode components,
             RegexToken closeBracketToken
-        ) : base(RegexKind.CharacterClass, openBracketToken, components, closeBracketToken) { }
+        ) : base(RegexKind.CharacterClass, openBracketToken, components, closeBracketToken)
+        {
+        }
 
         internal override int ChildCount => 3;
 
@@ -286,7 +288,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     /// </summary>
     internal abstract class RegexExpressionNode : RegexNode
     {
-        protected RegexExpressionNode(RegexKind kind) : base(kind) { }
+        protected RegexExpressionNode(RegexKind kind) : base(kind)
+        {
+        }
     }
 
     /// <summary>
@@ -294,7 +298,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     /// </summary>
     internal abstract class RegexPrimaryExpressionNode : RegexExpressionNode
     {
-        protected RegexPrimaryExpressionNode(RegexKind kind) : base(kind) { }
+        protected RegexPrimaryExpressionNode(RegexKind kind) : base(kind)
+        {
+        }
     }
 
     /// <summary>
@@ -327,7 +333,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     /// </summary>
     internal abstract class RegexQuantifierNode : RegexExpressionNode
     {
-        protected RegexQuantifierNode(RegexKind kind) : base(kind) { }
+        protected RegexQuantifierNode(RegexKind kind) : base(kind)
+        {
+        }
     }
 
     /// <summary>
@@ -504,7 +512,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 openBraceToken,
                 numberToken,
                 closeBraceToken
-            ) { }
+            )
+        {
+        }
 
         internal override int ChildCount => 4;
 
@@ -766,7 +776,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 questionToken,
                 optionsToken,
                 closeParenToken
-            ) { }
+            )
+        {
+        }
 
         internal override int ChildCount => 4;
 
@@ -1375,7 +1387,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     internal sealed class RegexAnchorEscapeNode : RegexTypeEscapeNode
     {
         public RegexAnchorEscapeNode(RegexToken backslashToken, RegexToken typeToken)
-            : base(RegexKind.AnchorEscape, backslashToken, typeToken) { }
+            : base(RegexKind.AnchorEscape, backslashToken, typeToken)
+        {
+        }
 
         internal override int ChildCount => 2;
 
@@ -1396,7 +1410,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     internal sealed class RegexCharacterClassEscapeNode : RegexTypeEscapeNode
     {
         public RegexCharacterClassEscapeNode(RegexToken backslashToken, RegexToken typeToken)
-            : base(RegexKind.CharacterClassEscape, backslashToken, typeToken) { }
+            : base(RegexKind.CharacterClassEscape, backslashToken, typeToken)
+        {
+        }
 
         internal override int ChildCount => 2;
 

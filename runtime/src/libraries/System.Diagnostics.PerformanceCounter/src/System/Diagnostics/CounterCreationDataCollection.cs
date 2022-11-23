@@ -8,7 +8,9 @@ namespace System.Diagnostics
 {
     public class CounterCreationDataCollection : CollectionBase
     {
-        public CounterCreationDataCollection() { }
+        public CounterCreationDataCollection()
+        {
+        }
 
         public CounterCreationDataCollection(CounterCreationDataCollection value)
         {

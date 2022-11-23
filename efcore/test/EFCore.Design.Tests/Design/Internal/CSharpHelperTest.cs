@@ -262,10 +262,14 @@ public class CSharpHelperTest
 
     private static class Nested
     {
-        public class DoubleNested { }
+        public class DoubleNested
+        {
+        }
     }
 
-    internal class NestedGeneric<T> { }
+    internal class NestedGeneric<T>
+    {
+    }
 
     private enum SomeEnum
     {
@@ -922,7 +926,9 @@ public class CSharpHelperTest
 
     private class SimpleTestNonImplementedTypeMapping : RelationalTypeMapping
     {
-        public SimpleTestNonImplementedTypeMapping() : base("storeType", typeof(SimpleTestType)) { }
+        public SimpleTestNonImplementedTypeMapping() : base("storeType", typeof(SimpleTestType))
+        {
+        }
 
         protected override RelationalTypeMapping Clone(
             RelationalTypeMappingParameters parameters
@@ -946,9 +952,13 @@ internal class SimpleTestType
     public static int SomeStaticProperty { get; } = 8;
     public int SomeInstanceProperty { get; } = 8;
 
-    public SimpleTestType() { }
+    public SimpleTestType()
+    {
+    }
 
-    public SimpleTestType(string arg1) : this(arg1, null) { }
+    public SimpleTestType(string arg1) : this(arg1, null)
+    {
+    }
 
     public SimpleTestType(string arg1, int? arg2)
     {
@@ -962,7 +972,9 @@ internal class SimpleTestType
 
 internal class SimpleTestTypeFactory
 {
-    public SimpleTestTypeFactory() { }
+    public SimpleTestTypeFactory()
+    {
+    }
 
     public SimpleTestTypeFactory(string factoryArg)
     {
@@ -984,6 +996,10 @@ internal class SimpleTestTypeFactory
     public static object StaticCreate(string arg1, int? arg2) => new SimpleTestType(arg1, arg2);
 }
 
-internal class Generic<T> { }
+internal class Generic<T>
+{
+}
 
-internal class MultiGeneric<T1, T2> { }
+internal class MultiGeneric<T1, T2>
+{
+}

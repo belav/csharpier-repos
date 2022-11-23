@@ -18,7 +18,9 @@ public sealed class NotFound : IResult, IEndpointMetadataProvider, IStatusCodeHt
     /// <summary>
     /// Initializes a new instance of the <see cref="NotFound"/> class with the values.
     /// </summary>
-    internal NotFound() { }
+    internal NotFound()
+    {
+    }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status404NotFound"/>

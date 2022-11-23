@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         );
 
         public CSharpExpressionCompiler()
-            : base(new CSharpFrameDecoder(), new CSharpLanguageInstructionDecoder()) { }
+            : base(new CSharpFrameDecoder(), new CSharpLanguageInstructionDecoder())
+        {
+        }
 
         internal override DiagnosticFormatter DiagnosticFormatter
         {

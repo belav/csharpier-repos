@@ -46,7 +46,9 @@ internal sealed class DecoderStreamReader
     private IntegerDecoder _integerDecoder;
     private State _state;
 
-    public DecoderStreamReader() { }
+    public DecoderStreamReader()
+    {
+    }
 
     public void Read(ReadOnlySequence<byte> data)
     {

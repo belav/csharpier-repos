@@ -8,11 +8,17 @@ namespace System.Text.Json.Serialization.Tests
 {
     public static partial class CustomConverterTests
     {
-        private class PocoWithNoBaseClass { }
+        private class PocoWithNoBaseClass
+        {
+        }
 
-        private class DerivedCustomer : Customer { }
+        private class DerivedCustomer : Customer
+        {
+        }
 
-        private class SuccessException : Exception { }
+        private class SuccessException : Exception
+        {
+        }
 
         private class BadCustomerConverter : JsonConverter<Customer>
         {
@@ -92,7 +98,9 @@ namespace System.Text.Json.Serialization.Tests
         private class InvalidConverterAttribute : JsonConverterAttribute
         {
             // converterType is not valid since typeof(int) is not a type that derives from JsonConverter.
-            public InvalidConverterAttribute() : base(converterType: typeof(int)) { }
+            public InvalidConverterAttribute() : base(converterType: typeof(int))
+            {
+            }
         }
 
         private class PocoWithInvalidConverter
@@ -103,7 +111,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private class NullConverterAttribute : JsonConverterAttribute
         {
-            public NullConverterAttribute() : base(null) { }
+            public NullConverterAttribute() : base(null)
+            {
+            }
 
             public override JsonConverter CreateConverter(Type typeToConvert)
             {
@@ -199,7 +209,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        private class InvalidTypeConverterClassWithAttribute { }
+        private class InvalidTypeConverterClassWithAttribute
+        {
+        }
 
         [Fact]
         public static void AttributeOnClassFail()
@@ -532,7 +544,9 @@ namespace System.Text.Json.Serialization.Tests
         internal class ConverterWithoutPublicEmptyCtor
             : JsonConverter<ClassWithConverterWithoutPublicEmptyCtor>
         {
-            public ConverterWithoutPublicEmptyCtor(int x) { }
+            public ConverterWithoutPublicEmptyCtor(int x)
+            {
+            }
 
             public override ClassWithConverterWithoutPublicEmptyCtor Read(
                 ref Utf8JsonReader reader,

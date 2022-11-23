@@ -244,7 +244,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return localPosition;
         }
 
-        protected override void MethodChecks(BindingDiagnosticBag diagnostics) { }
+        protected override void MethodChecks(BindingDiagnosticBag diagnostics)
+        {
+        }
 
         internal override bool IsExpressionBodied => false;
 

@@ -194,7 +194,9 @@ namespace System.Drawing.Printing.Tests
                 return true;
             }
 
-            public void OnComponentChanged() { }
+            public void OnComponentChanged()
+            {
+            }
 
             public object GetService(Type serviceType)
             {

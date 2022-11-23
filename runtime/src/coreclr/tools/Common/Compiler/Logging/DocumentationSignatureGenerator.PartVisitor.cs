@@ -21,7 +21,9 @@ namespace ILCompiler.Logging
         {
             internal static readonly PartVisitor Instance = new PartVisitor();
 
-            private PartVisitor() { }
+            private PartVisitor()
+            {
+            }
 
             public override void AppendName(StringBuilder builder, ArrayType arrayType)
             {

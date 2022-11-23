@@ -65,7 +65,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
                             );
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             });
 
             _featureFlags = featureFlags;
@@ -132,7 +134,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
                             new object[] { experimentName }
                         );
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return false;

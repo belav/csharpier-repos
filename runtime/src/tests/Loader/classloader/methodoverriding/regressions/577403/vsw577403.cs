@@ -106,7 +106,9 @@ class GenericLevel2<T> : Level1, ITest
     }
 }
 
-class GenericLevel3 : GenericLevel2<int> { }
+class GenericLevel3 : GenericLevel2<int>
+{
+}
 
 class GenericLevel4 : GenericLevel3, ITest
 {

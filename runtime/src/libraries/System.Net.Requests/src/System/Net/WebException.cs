@@ -20,15 +20,23 @@ namespace System.Net
         private readonly WebExceptionStatus _status = DefaultStatus;
         private readonly WebResponse? _response;
 
-        public WebException() { }
+        public WebException()
+        {
+        }
 
-        public WebException(string? message) : base(message) { }
+        public WebException(string? message) : base(message)
+        {
+        }
 
         public WebException(string? message, Exception? innerException)
-            : this(message, innerException, DefaultStatus, null) { }
+            : this(message, innerException, DefaultStatus, null)
+        {
+        }
 
         public WebException(string? message, WebExceptionStatus status)
-            : this(message, null, status, null) { }
+            : this(message, null, status, null)
+        {
+        }
 
         public WebException(
             string? message,
@@ -49,7 +57,9 @@ namespace System.Net
         protected WebException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
 
         public WebExceptionStatus Status => _status;
 

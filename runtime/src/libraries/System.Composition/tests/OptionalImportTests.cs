@@ -12,10 +12,14 @@ namespace System.Composition.UnitTests
 {
     public class OptionalImportTests : ContainerTests
     {
-        private class Missing { }
+        private class Missing
+        {
+        }
 
         [Export]
-        private class Supplied { }
+        private class Supplied
+        {
+        }
 
         [Export]
         private class HasOptionalConstructorParameter

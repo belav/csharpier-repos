@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 State state,
                 string fileName,
                 CancellationToken cancellationToken
-            ) : base(service, state, fileName, cancellationToken) { }
+            ) : base(service, state, fileName, cancellationToken)
+            {
+            }
 
             /// <summary>
             /// Renames a type to match its containing file name.

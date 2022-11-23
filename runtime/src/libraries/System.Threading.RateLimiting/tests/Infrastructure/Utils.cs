@@ -217,7 +217,10 @@ namespace System.Threading.RateLimiting.Tests
             CancellationToken cancellationToken
         ) => AcquireAsyncCoreImpl(permitCount, cancellationToken);
 
-        public Action<bool> DisposeImpl { get; set; } = _ => { };
+        public Action<bool> DisposeImpl { get; set; } =
+            _ =>
+            {
+            };
 
         protected override void Dispose(bool disposing) => DisposeImpl(disposing);
 
@@ -305,7 +308,9 @@ namespace System.Threading.RateLimiting.Tests
         public override bool TryGetMetadata(string metadataName, out object? metadata) =>
             TryGetMetadataImpl(metadataName, out metadata);
 
-        public Action<bool> DisposeImpl = _ => { };
+        public Action<bool> DisposeImpl = _ =>
+        {
+        };
 
         protected override void Dispose(bool disposing) => DisposeImpl(disposing);
     }

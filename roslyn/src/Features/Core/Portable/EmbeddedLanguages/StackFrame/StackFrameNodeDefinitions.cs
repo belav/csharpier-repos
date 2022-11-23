@@ -16,14 +16,18 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
     internal abstract class StackFrameNode : EmbeddedSyntaxNode<StackFrameKind, StackFrameNode>
     {
-        protected StackFrameNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameNode(StackFrameKind kind) : base(kind)
+        {
+        }
 
         public abstract void Accept(IStackFrameNodeVisitor visitor);
     }
 
     internal abstract class StackFrameDeclarationNode : StackFrameNode
     {
-        protected StackFrameDeclarationNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameDeclarationNode(StackFrameKind kind) : base(kind)
+        {
+        }
     }
 
     internal sealed class StackFrameMethodDeclarationNode : StackFrameDeclarationNode
@@ -62,7 +66,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// </summary>
     internal abstract class StackFrameTypeNode : StackFrameNode
     {
-        protected StackFrameTypeNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameTypeNode(StackFrameKind kind) : base(kind)
+        {
+        }
     }
 
     /// <summary>
@@ -75,7 +81,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// </remarks>
     internal abstract class StackFrameNameNode : StackFrameTypeNode
     {
-        protected StackFrameNameNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameNameNode(StackFrameKind kind) : base(kind)
+        {
+        }
     }
 
     /// <summary>
@@ -137,7 +145,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         internal override int ChildCount => 1;
 
         public StackFrameIdentifierNameNode(StackFrameToken identifier)
-            : base(identifier, StackFrameKind.TypeIdentifier) { }
+            : base(identifier, StackFrameKind.TypeIdentifier)
+        {
+        }
 
         public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
@@ -191,7 +201,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     internal abstract class StackFrameGeneratedNameNode : StackFrameSimpleNameNode
     {
         protected StackFrameGeneratedNameNode(StackFrameToken identifier, StackFrameKind kind)
-            : base(identifier, kind) { }
+            : base(identifier, kind)
+        {
+        }
     }
 
     /// <summary>

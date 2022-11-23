@@ -22,7 +22,9 @@ namespace System.Runtime.Serialization
         /// </summary>
         /// <param name="formatString">Specifies the formatString to be used.</param>
         public DateTimeFormat(string formatString)
-            : this(formatString, DateTimeFormatInfo.CurrentInfo) { }
+            : this(formatString, DateTimeFormatInfo.CurrentInfo)
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="DateTimeFormat"/> with the specified

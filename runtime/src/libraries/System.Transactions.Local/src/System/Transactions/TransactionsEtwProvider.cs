@@ -91,7 +91,9 @@ namespace System.Transactions
         internal static readonly TransactionsEtwProvider Log = new TransactionsEtwProvider();
 
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
-        private TransactionsEtwProvider() { }
+        private TransactionsEtwProvider()
+        {
+        }
 
         /// <summary>Enabled for all keywords.</summary>
         private const EventKeywords ALL_KEYWORDS = (EventKeywords)(-1);

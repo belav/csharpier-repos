@@ -14,7 +14,8 @@ namespace System.Security.Permissions
     public sealed partial class ReflectionPermissionAttribute : CodeAccessSecurityAttribute
     {
         public ReflectionPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        {
+        }
 
         public ReflectionPermissionFlag Flags { get; set; }
         public bool MemberAccess { get; set; }

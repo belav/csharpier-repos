@@ -13,9 +13,13 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(4205), AllowMultiple = true, Inherited = false)]
     public sealed partial class HostProtectionAttribute : CodeAccessSecurityAttribute
     {
-        public HostProtectionAttribute() : base(default(SecurityAction)) { }
+        public HostProtectionAttribute() : base(default(SecurityAction))
+        {
+        }
 
-        public HostProtectionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public HostProtectionAttribute(SecurityAction action) : base(default(SecurityAction))
+        {
+        }
 
         public bool ExternalProcessMgmt { get; set; }
         public bool ExternalThreading { get; set; }

@@ -82,7 +82,9 @@ namespace Microsoft.CodeAnalysis.Collections
         // The underlying dictionary we store our data in.  null if we are empty.
         private PooledDictionary<K, ValueSet>? _dictionary;
 
-        public OrderPreservingMultiDictionary() { }
+        public OrderPreservingMultiDictionary()
+        {
+        }
 
         private void EnsureDictionary()
         {
@@ -362,7 +364,9 @@ namespace Microsoft.CodeAnalysis.Collections
                     _index = -1;
                 }
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
             }
         }
     }

@@ -11,7 +11,9 @@ namespace System.ComponentModel
     /// </summary>
     public abstract class ContainerFilterService
     {
-        protected ContainerFilterService() { }
+        protected ContainerFilterService()
+        {
+        }
 
         /// <summary>
         /// Filters the components collection by optionally returning a new, modified collection.

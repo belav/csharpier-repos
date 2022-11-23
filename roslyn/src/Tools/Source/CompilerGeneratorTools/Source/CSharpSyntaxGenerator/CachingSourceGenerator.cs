@@ -38,7 +38,9 @@ namespace CSharpSyntaxGenerator
             CancellationToken cancellationToken
         );
 
-        public void Initialize(GeneratorInitializationContext context) { }
+        public void Initialize(GeneratorInitializationContext context)
+        {
+        }
 
         public void Execute(GeneratorExecutionContext context)
         {

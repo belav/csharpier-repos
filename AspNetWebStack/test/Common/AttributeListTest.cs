@@ -115,22 +115,30 @@ namespace System.ComponentModel
 
         private class TestAttribute : Attribute
         {
-            public TestAttribute() { }
+            public TestAttribute()
+            {
+            }
         }
 
         private class DerivedAttribute : TestAttribute
         {
-            public DerivedAttribute() { }
+            public DerivedAttribute()
+            {
+            }
         }
 
         private class DerivedDerivedAttribute : DerivedAttribute
         {
-            public DerivedDerivedAttribute() { }
+            public DerivedDerivedAttribute()
+            {
+            }
         }
 
         private class MissingAttribute : Attribute
         {
-            public MissingAttribute() { }
+            public MissingAttribute()
+            {
+            }
         }
     }
 }

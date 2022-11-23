@@ -64,6 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public KeybindingResetOptions() { }
+        public KeybindingResetOptions()
+        {
+        }
     }
 }

@@ -19,8 +19,12 @@ public class CookieConsentTests
     public async Task ConsentChecksOffByDefault()
     {
         var httpContext = await RunTestAsync(
-            options => { },
-            requestContext => { },
+            options =>
+            {
+            },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -42,7 +46,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -64,7 +70,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -97,7 +105,9 @@ public class CookieConsentTests
                     context.IssueCookie = true;
                 };
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -123,7 +133,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -235,7 +247,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -288,7 +302,9 @@ public class CookieConsentTests
                     context.CookieOptions.Extensions.Add("extension");
                 };
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -357,7 +373,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             async context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -394,7 +412,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -553,7 +573,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -589,7 +611,9 @@ public class CookieConsentTests
                     context.IssueCookie = false;
                 };
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -612,7 +636,9 @@ public class CookieConsentTests
             {
                 options.CheckConsentNeeded = context => true;
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -667,7 +693,9 @@ public class CookieConsentTests
                     context.CookieValue += "1";
                 };
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();
@@ -714,7 +742,9 @@ public class CookieConsentTests
                 options.CheckConsentNeeded = context => true;
                 options.ConsentCookieValue = "true";
             },
-            requestContext => { },
+            requestContext =>
+            {
+            },
             context =>
             {
                 var feature = context.Features.Get<ITrackingConsentFeature>();

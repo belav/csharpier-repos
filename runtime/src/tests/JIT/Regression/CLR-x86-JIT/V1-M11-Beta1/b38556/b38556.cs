@@ -17,7 +17,9 @@ namespace Test
             return param2;
         }
 
-        static void AA_Static1(ref uint param2, ref uint param4) { }
+        static void AA_Static1(ref uint param2, ref uint param4)
+        {
+        }
 
         static JJ CC_Static1()
         {

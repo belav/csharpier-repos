@@ -24,7 +24,9 @@ internal class ExecuteWorkspaceCommandHandler
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public ExecuteWorkspaceCommandHandler() { }
+    public ExecuteWorkspaceCommandHandler()
+    {
+    }
 
     public async Task<object?> HandleRequestAsync(
         ExecuteCommandParams request,

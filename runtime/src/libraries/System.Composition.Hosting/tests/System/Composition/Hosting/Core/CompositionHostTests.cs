@@ -397,7 +397,9 @@ namespace System.Composition.Hosting.Core.Tests
 
         private class ParameterlessConstructor
         {
-            public ParameterlessConstructor() { }
+            public ParameterlessConstructor()
+            {
+            }
 
             public int PublicProperty { get; set; }
 
@@ -405,24 +407,32 @@ namespace System.Composition.Hosting.Core.Tests
             public int GetOnlyProperty { get; }
             public int SetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
             private int PrivateProperty { get; set; }
         }
 
         private class PrivateConstructor
         {
-            private PrivateConstructor() { }
+            private PrivateConstructor()
+            {
+            }
         }
 
         private class NoParameterlessConstructor
         {
-            public NoParameterlessConstructor(int x) { }
+            public NoParameterlessConstructor(int x)
+            {
+            }
         }
 
         private abstract class AbstractConstructor
         {
-            public AbstractConstructor() { }
+            public AbstractConstructor()
+            {
+            }
         }
     }
 }

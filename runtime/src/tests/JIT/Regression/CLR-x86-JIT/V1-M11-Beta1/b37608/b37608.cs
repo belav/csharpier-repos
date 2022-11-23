@@ -20,7 +20,9 @@ namespace Test
                 new AA();
                 while (local6)
                 {
-                    while (0 == local4.m_adField1[2]) { }
+                    while (0 == local4.m_adField1[2])
+                    {
+                    }
                     break;
                 }
             }

@@ -13,7 +13,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     internal class GenerateTypeDialog_InProc
         : AbstractCodeRefactorDialog_InProc<GenerateTypeDialog, GenerateTypeDialog.TestAccessor>
     {
-        private GenerateTypeDialog_InProc() { }
+        private GenerateTypeDialog_InProc()
+        {
+        }
 
         public static GenerateTypeDialog_InProc Create() => new GenerateTypeDialog_InProc();
 

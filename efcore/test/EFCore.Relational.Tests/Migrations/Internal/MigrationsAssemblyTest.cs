@@ -74,25 +74,33 @@ public class MigrationsAssemblyTest
             logger ?? new FakeDiagnosticsLogger<DbLoggerCategory.Migrations>()
         );
 
-    private class Context : DbContext { }
+    private class Context : DbContext
+    {
+    }
 
     [DbContext(typeof(Context))]
     [Migration("20150302103100_Flutter")]
     private class Migration1 : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder) { }
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+        }
     }
 
     [DbContext(typeof(Context))]
     [Migration("20150302103100_FLUTTER")]
     private class Migration2 : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder) { }
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+        }
     }
 
     [DbContext(typeof(Context))]
     private class MigrationWithoutAttribute : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder) { }
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+        }
     }
 }

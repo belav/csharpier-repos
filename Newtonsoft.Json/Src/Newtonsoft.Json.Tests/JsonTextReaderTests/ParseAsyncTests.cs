@@ -60,7 +60,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 ";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            while (await reader.ReadAsync()) { }
+            while (await reader.ReadAsync())
+            {
+            }
         }
 
         [Test]

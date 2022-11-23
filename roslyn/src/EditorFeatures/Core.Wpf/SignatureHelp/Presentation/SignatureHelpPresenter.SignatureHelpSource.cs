@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         private class SignatureHelpSource : ForegroundThreadAffinitizedObject, ISignatureHelpSource
         {
             public SignatureHelpSource(IThreadingContext threadingContext) : base(threadingContext)
-            { }
+            {
+            }
 
             public void AugmentSignatureHelpSession(
                 ISignatureHelpSession session,
@@ -43,7 +44,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 return session.SelectedSignature;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

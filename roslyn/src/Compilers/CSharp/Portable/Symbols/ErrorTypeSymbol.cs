@@ -333,7 +333,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler should create error symbols.
-        internal ErrorTypeSymbol(TupleExtraData? tupleData = null) : base(tupleData) { }
+        internal ErrorTypeSymbol(TupleExtraData? tupleData = null) : base(tupleData)
+        {
+        }
 
         /// <summary>
         /// Get this accessibility that was declared on this symbol. For symbols that do not have

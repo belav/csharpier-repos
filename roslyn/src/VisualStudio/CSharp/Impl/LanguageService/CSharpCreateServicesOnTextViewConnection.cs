@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             IAsynchronousOperationListenerProvider listenerProvider,
             IThreadingContext threadingContext
         ) : base(workspace, globalOptions, listenerProvider, threadingContext, LanguageNames.CSharp)
-        { }
+        {
+        }
 
         protected override async Task InitializeServiceForOpenedDocumentAsync(Document document)
         {

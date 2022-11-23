@@ -461,7 +461,9 @@ namespace System.Diagnostics
         private DiagnosticSourceEventSource()
             // This constructor uses EventSourceSettings which is only available on V4.6 and above
             // Use the EventSourceSettings to turn on support for complex types, if available (v4.6 and above).
-            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat)
+        {
+        }
 
         /// <summary>
         /// Called when the EventSource gets a command from a EventListener or ETW.
@@ -1929,7 +1931,9 @@ namespace System.Diagnostics
                     /// </summary>
                     private sealed class EnumeratePropertyFetch : PropertyFetch
                     {
-                        public EnumeratePropertyFetch(Type type) : base(type) { }
+                        public EnumeratePropertyFetch(Type type) : base(type)
+                        {
+                        }
 
                         public override object? Fetch(object? obj)
                         {
@@ -1981,7 +1985,9 @@ namespace System.Diagnostics
                     /// </summary>
                     private sealed class CurrentActivityPropertyFetch : PropertyFetch
                     {
-                        public CurrentActivityPropertyFetch() : base(null) { }
+                        public CurrentActivityPropertyFetch() : base(null)
+                        {
+                        }
 
                         public override object? Fetch(object? obj)
                         {
@@ -1994,7 +2000,9 @@ namespace System.Diagnostics
                     /// </summary>
                     private sealed class EnumeratePropertyFetch<ElementType> : PropertyFetch
                     {
-                        public EnumeratePropertyFetch(Type type) : base(type) { }
+                        public EnumeratePropertyFetch(Type type) : base(type)
+                        {
+                        }
 
                         public override object? Fetch(object? obj)
                         {
@@ -2029,9 +2037,13 @@ namespace System.Diagnostics
             }
 
 #region private
-            public void OnCompleted() { }
+            public void OnCompleted()
+            {
+            }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(T value)
             {

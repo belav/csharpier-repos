@@ -19,7 +19,9 @@ namespace System.ComponentModel.DataAnnotations
         ///     This constructor selects a reasonable default error message for
         ///     <see cref="ValidationAttribute.FormatErrorMessage" />
         /// </remarks>
-        public RequiredAttribute() : base(() => SR.RequiredAttribute_ValidationError) { }
+        public RequiredAttribute() : base(() => SR.RequiredAttribute_ValidationError)
+        {
+        }
 
         /// <summary>
         ///     Gets or sets a flag indicating whether the attribute should allow empty strings.

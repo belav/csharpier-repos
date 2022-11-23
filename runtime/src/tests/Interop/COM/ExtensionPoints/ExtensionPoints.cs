@@ -33,7 +33,9 @@ public class ExtensionPoints
             return pRequest;
         }
 
-        public virtual void PostFree([MarshalAs(UnmanagedType.Bool)] bool fSpyed) { }
+        public virtual void PostFree([MarshalAs(UnmanagedType.Bool)] bool fSpyed)
+        {
+        }
 
         public virtual unsafe nuint PreRealloc(
             void* pRequest,
@@ -68,9 +70,13 @@ public class ExtensionPoints
             int fActual
         ) => fActual;
 
-        public virtual void PreHeapMinimize() { }
+        public virtual void PreHeapMinimize()
+        {
+        }
 
-        public virtual void PostHeapMinimize() { }
+        public virtual void PostHeapMinimize()
+        {
+        }
     }
 
     [Fact]

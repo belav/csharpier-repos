@@ -81,8 +81,12 @@ namespace System.Reflection.Emit.Tests
 
     public class HelperAttribute
     {
-        public HelperAttribute() { }
+        public HelperAttribute()
+        {
+        }
 
-        public HelperAttribute(string str) { }
+        public HelperAttribute(string str)
+        {
+        }
     }
 }

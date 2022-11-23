@@ -119,7 +119,9 @@ namespace Moq
         ///     var mock = new Mock&lt;IFormatProvider&gt;();
         ///   </code>
         /// </example>
-        public Mock() : this(MockBehavior.Default) { }
+        public Mock() : this(MockBehavior.Default)
+        {
+        }
 
         /// <summary>
         ///   Initializes an instance of the mock with <see cref="MockBehavior.Default"/> behavior
@@ -135,7 +137,9 @@ namespace Moq
         ///     var mock = new Mock&lt;MyProvider&gt;(someArgument, 25);
         ///   </code>
         /// </example>
-        public Mock(params object[] args) : this(MockBehavior.Default, args) { }
+        public Mock(params object[] args) : this(MockBehavior.Default, args)
+        {
+        }
 
         /// <summary>
         ///   Initializes an instance of the mock with the specified <see cref="MockBehavior"/> behavior.
@@ -146,7 +150,9 @@ namespace Moq
         ///     var mock = new Mock&lt;IFormatProvider&gt;(MockBehavior.Strict);
         ///   </code>
         /// </example>
-        public Mock(MockBehavior behavior) : this(behavior, new object[0]) { }
+        public Mock(MockBehavior behavior) : this(behavior, new object[0])
+        {
+        }
 
         /// <summary>
         ///   Initializes an instance of the mock with a specific <see cref="MockBehavior"/> behavior
@@ -194,7 +200,9 @@ namespace Moq
             : this(
                 behavior,
                 Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression)
-            ) { }
+            )
+        {
+        }
 
         private static string CreateUniqueDefaultMockName()
         {

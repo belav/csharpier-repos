@@ -70,7 +70,9 @@ public partial class ModelStateInvalidFilter : IActionFilter, IOrderedFilter
     /// Invoked when an action is executed.
     /// </summary>
     /// <param name="context">The <see cref="ActionExecutedContext"/>.</param>
-    public void OnActionExecuted(ActionExecutedContext context) { }
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+    }
 
     /// <summary>
     /// Invoked when an action is executing.

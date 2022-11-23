@@ -58,7 +58,9 @@ namespace System.Threading
         // but those types of changes may race with the reset anyway, so this field doesn't need to be synchronized.
         private bool _mayNeedResetForThreadPool;
 
-        private Thread() { }
+        private Thread()
+        {
+        }
 
         public extern int ManagedThreadId
         {
@@ -314,7 +316,9 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.InternalCall)]
         public extern void DisableComObjectEagerCleanup();
 #else // !FEATURE_COMINTEROP
-        public void DisableComObjectEagerCleanup() { }
+        public void DisableComObjectEagerCleanup()
+        {
+        }
 #endif // FEATURE_COMINTEROP
 
         /// <summary>

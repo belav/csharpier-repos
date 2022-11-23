@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos;
 public class BuiltInDataTypesCosmosTest
     : BuiltInDataTypesTestBase<BuiltInDataTypesCosmosTest.BuiltInDataTypesCosmosFixture>
 {
-    public BuiltInDataTypesCosmosTest(BuiltInDataTypesCosmosFixture fixture) : base(fixture) { }
+    public BuiltInDataTypesCosmosTest(BuiltInDataTypesCosmosFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory(Skip = "Issue #17246 No Explicit Convert")]
     public override Task Can_filter_projection_with_inline_enum_variable(bool async) =>

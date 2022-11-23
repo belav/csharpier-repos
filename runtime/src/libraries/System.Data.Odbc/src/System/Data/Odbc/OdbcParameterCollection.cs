@@ -16,7 +16,9 @@ namespace System.Data.Odbc
 
         private static readonly Type s_itemType = typeof(OdbcParameter);
 
-        internal OdbcParameterCollection() : base() { }
+        internal OdbcParameterCollection() : base()
+        {
+        }
 
         internal bool RebindCollection
         {

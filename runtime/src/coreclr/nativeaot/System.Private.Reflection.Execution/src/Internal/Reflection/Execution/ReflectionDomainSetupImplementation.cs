@@ -14,7 +14,9 @@ namespace Internal.Reflection.Execution
     //=========================================================================================================================
     internal sealed class ReflectionDomainSetupImplementation : ReflectionDomainSetup
     {
-        public ReflectionDomainSetupImplementation() { }
+        public ReflectionDomainSetupImplementation()
+        {
+        }
 
         // Obtain it lazily to avoid using RuntimeAugments.Callbacks before it is initialized
         public sealed override AssemblyBinder AssemblyBinder =>

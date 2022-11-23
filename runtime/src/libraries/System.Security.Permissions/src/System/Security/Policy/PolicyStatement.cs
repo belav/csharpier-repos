@@ -12,7 +12,9 @@ namespace System.Security.Policy
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
 #endif
-        public PolicyStatement(PermissionSet permSet) { }
+        public PolicyStatement(PermissionSet permSet)
+        {
+        }
 
 #if NETCOREAPP
         [Obsolete(
@@ -21,7 +23,9 @@ namespace System.Security.Policy
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
 #endif
-        public PolicyStatement(PermissionSet permSet, PolicyStatementAttribute attributes) { }
+        public PolicyStatement(PermissionSet permSet, PolicyStatementAttribute attributes)
+        {
+        }
 
         public PolicyStatementAttribute Attributes { get; set; }
         public string AttributeString
@@ -45,9 +49,13 @@ namespace System.Security.Policy
 
         public override bool Equals(object o) => base.Equals(o);
 
-        public void FromXml(SecurityElement et) { }
+        public void FromXml(SecurityElement et)
+        {
+        }
 
-        public void FromXml(SecurityElement et, PolicyLevel level) { }
+        public void FromXml(SecurityElement et, PolicyLevel level)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 

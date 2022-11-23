@@ -16,7 +16,9 @@ namespace Roslyn.Test.Performance.Utilities
     {
         private string _workingDir;
 
-        public RelativeDirectory() { }
+        public RelativeDirectory()
+        {
+        }
 
         public RelativeDirectory(string workingDir)
         {

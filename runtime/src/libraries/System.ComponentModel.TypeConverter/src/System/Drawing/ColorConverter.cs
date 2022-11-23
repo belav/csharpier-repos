@@ -24,7 +24,9 @@ namespace System.Drawing
                 );
             });
 
-        public ColorConverter() { }
+        public ColorConverter()
+        {
+        }
 
         public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         {

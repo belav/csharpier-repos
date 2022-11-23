@@ -84,7 +84,9 @@ namespace Roslyn.Test.Utilities.Desktop
 
             internal ImmutableArray<Diagnostic> Diagnostics;
 
-            internal EmitData() { }
+            internal EmitData()
+            {
+            }
         }
 
         /// <summary>

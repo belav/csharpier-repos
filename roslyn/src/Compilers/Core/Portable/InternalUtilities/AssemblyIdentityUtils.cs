@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis
                     hasPublicKey
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             return null;
         }

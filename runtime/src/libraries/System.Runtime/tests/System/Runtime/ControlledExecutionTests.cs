@@ -355,6 +355,8 @@ namespace System.Runtime.Tests
             }
         }
 
-        private sealed class TestException : Exception { }
+        private sealed class TestException : Exception
+        {
+        }
     }
 }

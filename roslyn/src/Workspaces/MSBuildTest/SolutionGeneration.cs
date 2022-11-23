@@ -203,7 +203,9 @@ EndGlobal
             return string.Format(SolutionTemplate, sb.ToString());
         }
 
-        public interface IBuilder { }
+        public interface IBuilder
+        {
+        }
 
         private class ProjectBuilder : IBuilder
         {
@@ -364,7 +366,9 @@ EndGlobal
             public string Value { get; set; }
         }
 
-        private class SignBuilder : IBuilder { }
+        private class SignBuilder : IBuilder
+        {
+        }
 
         private class DocumentBuilder : IBuilder
         {

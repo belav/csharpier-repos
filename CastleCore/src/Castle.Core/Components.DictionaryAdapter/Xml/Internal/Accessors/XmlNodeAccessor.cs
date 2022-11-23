@@ -26,7 +26,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private XmlKnownTypeSet knownTypes;
 
         protected XmlNodeAccessor(Type type, IXmlContext context)
-            : this(context.GetDefaultXsiType(type).LocalName, type, context) { }
+            : this(context.GetDefaultXsiType(type).LocalName, type, context)
+        {
+        }
 
         protected XmlNodeAccessor(string name, Type type, IXmlContext context) : base(type, context)
         {

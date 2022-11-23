@@ -42,7 +42,9 @@ public class ModelBindingCommandHandler : ICommandHandler
     internal ModelBindingCommandHandler(
         MethodInfo handlerMethodInfo,
         IMethodDescriptor methodDescriptor
-    ) : this(handlerMethodInfo, methodDescriptor, null) { }
+    ) : this(handlerMethodInfo, methodDescriptor, null)
+    {
+    }
 
     internal ModelBindingCommandHandler(
         Delegate handlerDelegate,

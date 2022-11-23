@@ -433,7 +433,9 @@ namespace System.Text.Json.Node
         private sealed class GetBinderAdapter : GetMemberBinder
         {
             internal GetBinderAdapter(InvokeMemberBinder binder)
-                : base(binder.Name, binder.IgnoreCase) { }
+                : base(binder.Name, binder.IgnoreCase)
+            {
+            }
 
             public override DynamicMetaObject FallbackGetMember(
                 DynamicMetaObject target,
@@ -450,7 +452,9 @@ namespace System.Text.Json.Node
             /// Creates instance of TrueReadOnlyCollection, wrapping passed in array.
             /// !!! DOES NOT COPY THE ARRAY !!!
             /// </summary>
-            public TrueReadOnlyCollection(params T[] list) : base(list) { }
+            public TrueReadOnlyCollection(params T[] list) : base(list)
+            {
+            }
         }
 
         internal static BindingRestrictions GetTypeRestriction(DynamicMetaObject obj)

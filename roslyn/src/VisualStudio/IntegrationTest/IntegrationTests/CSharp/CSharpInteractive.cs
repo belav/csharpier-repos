@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpInteractive : AbstractInteractiveWindowTest
     {
         public CSharpInteractive(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         [WpfFact]
         public void BclMathCall()

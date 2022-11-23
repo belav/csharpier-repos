@@ -20,7 +20,9 @@ namespace System.Data
         internal string _name = string.Empty;
         internal PropertyCollection? _extendedProperties;
 
-        internal Constraint() { }
+        internal Constraint()
+        {
+        }
 
         /// <summary>
         /// The name of this constraint within the <see cref='System.Data.ConstraintCollection'/>.

@@ -10,7 +10,9 @@ namespace Microsoft.Data.Sqlite
     /// </summary>
     public class SqliteFactory : DbProviderFactory
     {
-        private SqliteFactory() { }
+        private SqliteFactory()
+        {
+        }
 
         /// <summary>
         ///     The singleton instance.

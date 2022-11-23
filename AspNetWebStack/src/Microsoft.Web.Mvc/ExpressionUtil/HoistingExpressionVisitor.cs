@@ -17,7 +17,9 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         private int _numConstantsProcessed;
 
         // factory will create instance
-        private HoistingExpressionVisitor() { }
+        private HoistingExpressionVisitor()
+        {
+        }
 
         public static Expression<Hoisted<TIn, TOut>> Hoist(Expression<Func<TIn, TOut>> expr)
         {

@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCompilationOptionsChangingService() { }
+        public CSharpCompilationOptionsChangingService()
+        {
+        }
 
         public bool CanApplyChange(CompilationOptions oldOptions, CompilationOptions newOptions)
         {

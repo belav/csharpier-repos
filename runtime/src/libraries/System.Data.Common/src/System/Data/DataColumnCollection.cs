@@ -614,7 +614,9 @@ namespace System.Data
             // while index events are suspended else the indexes won't be properly maintained.
             // However, all the above checks should catch those participating columns.
             // except when a column is in a DataView RowFilter or Sort clause
-            foreach (Index _ in _table.LiveIndexes) { }
+            foreach (Index _ in _table.LiveIndexes)
+            {
+            }
 
             return true;
         }

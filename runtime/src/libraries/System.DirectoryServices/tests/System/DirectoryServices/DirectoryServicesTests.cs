@@ -452,7 +452,9 @@ namespace System.DirectoryServices.Tests
             {
                 Assert.Throws<COMException>(() =>
                 {
-                    foreach (var e in de.Children) { }
+                    foreach (var e in de.Children)
+                    {
+                    }
                 });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
@@ -469,7 +471,9 @@ namespace System.DirectoryServices.Tests
             {
                 CheckSpecificException(() =>
                 {
-                    foreach (var e in de.Children) { }
+                    foreach (var e in de.Children)
+                    {
+                    }
                 });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
@@ -492,7 +496,9 @@ namespace System.DirectoryServices.Tests
             {
                 CheckSpecificException(() =>
                 {
-                    foreach (var e in de.Children) { }
+                    foreach (var e in de.Children)
+                    {
+                    }
                 });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
@@ -511,7 +517,9 @@ namespace System.DirectoryServices.Tests
             {
                 CheckSpecificException(() =>
                 {
-                    foreach (var e in de.Children) { }
+                    foreach (var e in de.Children)
+                    {
+                    }
                 });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {

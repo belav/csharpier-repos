@@ -60,7 +60,9 @@ public class SqlServerConfigPatternsTest
 
         private class NorthwindContext : DbContext
         {
-            public NorthwindContext(DbContextOptions options) : base(options) { }
+            public NorthwindContext(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<Customer> Customers { get; set; }
 
@@ -91,7 +93,9 @@ public class SqlServerConfigPatternsTest
 
         private class NorthwindContext : DbContext
         {
-            public NorthwindContext(DbContextOptions options) : base(options) { }
+            public NorthwindContext(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<Customer> Customers { get; set; }
 
@@ -132,7 +136,9 @@ public class SqlServerConfigPatternsTest
 
         private class NorthwindContext : DbContext
         {
-            public NorthwindContext(DbContextOptions options) : base(options) { }
+            public NorthwindContext(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<Customer> Customers { get; set; }
 
@@ -171,7 +177,9 @@ public class SqlServerConfigPatternsTest
 
         private class NorthwindContext : DbContext
         {
-            public NorthwindContext(DbContextOptions options) : base(options) { }
+            public NorthwindContext(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<Customer> Customers { get; set; }
 
@@ -242,7 +250,9 @@ public class SqlServerConfigPatternsTest
 
         private class NorthwindContext : DbContext
         {
-            public NorthwindContext(DbContextOptions options) : base(options) { }
+            public NorthwindContext(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<Customer> Customers { get; set; }
 
@@ -388,7 +398,9 @@ public class SqlServerConfigPatternsTest
 
         private class NorthwindContext : DbContext
         {
-            public NorthwindContext(DbContextOptions options) : base(options) { }
+            public NorthwindContext(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<Customer> Customers { get; set; }
 

@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 ),
                 CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
                 ImmutableArray.Create(SyntaxKind.LocalFunctionStatement)
-            ) { }
+            )
+        {
+        }
 
         public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
             CSharpCodeGenerationOptions options

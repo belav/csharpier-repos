@@ -107,7 +107,9 @@ class Program
 
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpAddMissingReference() { }
+        public CSharpAddMissingReference()
+        {
+        }
 
         public override async Task InitializeAsync()
         {

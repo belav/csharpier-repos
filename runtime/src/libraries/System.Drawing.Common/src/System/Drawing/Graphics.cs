@@ -107,7 +107,9 @@ namespace System.Drawing
                     GC.KeepAlive(_managed);
                 }
 
-                public void Free() { }
+                public void Free()
+                {
+                }
             }
         }
 #endif
@@ -184,7 +186,9 @@ namespace System.Drawing
                     GC.KeepAlive(_managed);
                 }
 
-                public void Free() { }
+                public void Free()
+                {
+                }
             }
         }
 #endif
@@ -336,7 +340,9 @@ namespace System.Drawing
                     );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex)) { }
+                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex))
+                {
+                }
                 finally
                 {
                     NativeGraphics = IntPtr.Zero;

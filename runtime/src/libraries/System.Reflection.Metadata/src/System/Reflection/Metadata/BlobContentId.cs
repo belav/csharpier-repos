@@ -22,7 +22,9 @@ namespace System.Reflection.Metadata
         }
 
         public BlobContentId(ImmutableArray<byte> id)
-            : this(ImmutableByteArrayInterop.DangerousGetUnderlyingArray(id)!) { }
+            : this(ImmutableByteArrayInterop.DangerousGetUnderlyingArray(id)!)
+        {
+        }
 
         public unsafe BlobContentId(byte[] id)
         {

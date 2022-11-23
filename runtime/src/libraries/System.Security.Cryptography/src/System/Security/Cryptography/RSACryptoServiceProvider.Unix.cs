@@ -18,7 +18,9 @@ namespace System.Security.Cryptography
         private bool _publicOnly;
 
         [UnsupportedOSPlatform("browser")]
-        public RSACryptoServiceProvider() : this(DefaultKeySize) { }
+        public RSACryptoServiceProvider() : this(DefaultKeySize)
+        {
+        }
 
         [UnsupportedOSPlatform("browser")]
         public RSACryptoServiceProvider(int dwKeySize)

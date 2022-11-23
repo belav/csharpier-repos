@@ -813,12 +813,16 @@ public class ParameterBindingMethodCacheTests
 
     private class ClassWithInternalConstructor
     {
-        internal ClassWithInternalConstructor() { }
+        internal ClassWithInternalConstructor()
+        {
+        }
     }
 
     private record RecordWithInternalConstructor
     {
-        internal RecordWithInternalConstructor() { }
+        internal RecordWithInternalConstructor()
+        {
+        }
     }
 
     [Theory]
@@ -884,67 +888,109 @@ public class ParameterBindingMethodCacheTests
         Three
     }
 
-    private static void TryParseStringRecordMethod(TryParseStringRecord arg) { }
+    private static void TryParseStringRecordMethod(TryParseStringRecord arg)
+    {
+    }
 
-    private static void TryParseStringStructMethod(TryParseStringStruct arg) { }
+    private static void TryParseStringStructMethod(TryParseStringStruct arg)
+    {
+    }
 
-    private static void TryParseStringNullableStructMethod(TryParseStringStruct? arg) { }
+    private static void TryParseStringNullableStructMethod(TryParseStringStruct? arg)
+    {
+    }
 
-    private static void BindAsyncRecordMethod(BindAsyncRecord arg) { }
+    private static void BindAsyncRecordMethod(BindAsyncRecord arg)
+    {
+    }
 
-    private static void BindAsyncStructMethod(BindAsyncStruct arg) { }
+    private static void BindAsyncStructMethod(BindAsyncStruct arg)
+    {
+    }
 
-    private static void BindAsyncNullableStructMethod(BindAsyncStruct? arg) { }
+    private static void BindAsyncNullableStructMethod(BindAsyncStruct? arg)
+    {
+    }
 
-    private static void NullableReturningBindAsyncStructMethod(
-        NullableReturningBindAsyncStruct arg
-    ) { }
+    private static void NullableReturningBindAsyncStructMethod(NullableReturningBindAsyncStruct arg)
+    {
+    }
 
-    private static void BindAsyncSingleArgRecordMethod(BindAsyncSingleArgRecord arg) { }
+    private static void BindAsyncSingleArgRecordMethod(BindAsyncSingleArgRecord arg)
+    {
+    }
 
-    private static void BindAsyncSingleArgStructMethod(BindAsyncSingleArgStruct arg) { }
+    private static void BindAsyncSingleArgStructMethod(BindAsyncSingleArgStruct arg)
+    {
+    }
 
-    private static void InheritBindAsyncMethod(InheritBindAsync arg) { }
+    private static void InheritBindAsyncMethod(InheritBindAsync arg)
+    {
+    }
 
     private static void InheritBindAsyncWithParameterInfoMethod(
         InheritBindAsyncWithParameterInfo args
-    ) { }
+    )
+    {
+    }
 
-    private static void BindAsyncFromInterfaceMethod(BindAsyncFromInterface arg) { }
+    private static void BindAsyncFromInterfaceMethod(BindAsyncFromInterface arg)
+    {
+    }
 
     private static void BindAsyncFromGrandparentInterfaceMethod(
         BindAsyncFromGrandparentInterface arg
-    ) { }
+    )
+    {
+    }
 
     private static void BindAsyncDirectlyAndFromInterfaceMethod(
         BindAsyncDirectlyAndFromInterface arg
-    ) { }
+    )
+    {
+    }
 
-    private static void BindAsyncFromClassAndInterfaceMethod(BindAsyncFromClassAndInterface arg) { }
+    private static void BindAsyncFromClassAndInterfaceMethod(BindAsyncFromClassAndInterface arg)
+    {
+    }
 
     private static void BindAsyncFromInterfaceWithParameterInfoMethod(
         BindAsyncFromInterfaceWithParameterInfo args
-    ) { }
+    )
+    {
+    }
 
-    private static void BindAsyncFallbackMethod(BindAsyncFallsBack? arg) { }
+    private static void BindAsyncFallbackMethod(BindAsyncFallsBack? arg)
+    {
+    }
 
-    private static void BindAsyncBadMethodMethod(BindAsyncBadMethod? arg) { }
+    private static void BindAsyncBadMethodMethod(BindAsyncBadMethod? arg)
+    {
+    }
 
     private static void BindAsyncFromImplicitStaticAbstractInterfaceMethod(
         BindAsyncFromImplicitStaticAbstractInterface arg
-    ) { }
+    )
+    {
+    }
 
     private static void BindAsyncFromExplicitStaticAbstractInterfaceMethod(
         BindAsyncFromExplicitStaticAbstractInterface arg
-    ) { }
+    )
+    {
+    }
 
     private static void BindAsyncFromImplicitStaticAbstractInterfaceMethodInsteadOfReflectionMatchedMethod(
         BindAsyncFromStaticAbstractInterfaceAndBindAsync arg
-    ) { }
+    )
+    {
+    }
 
     private static void BindAsyncFromStaticAbstractInterfaceWrongTypeMethod(
         BindAsyncFromStaticAbstractInterfaceWrongType arg
-    ) { }
+    )
+    {
+    }
 
     private static ParameterInfo GetFirstParameter<T>(Expression<Action<T>> expr)
     {
@@ -1214,10 +1260,14 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private class TryParseInheritClass : BaseTryParseClass<TryParseInheritClass> { }
+    private class TryParseInheritClass : BaseTryParseClass<TryParseInheritClass>
+    {
+    }
 
     // using wrong T on purpose
-    private class TryParseWrongTypeInheritClass : BaseTryParseClass<TryParseInheritClass> { }
+    private class TryParseWrongTypeInheritClass : BaseTryParseClass<TryParseInheritClass>
+    {
+    }
 
     private class BaseTryParseClassWithFormatProvider<T>
     {
@@ -1229,7 +1279,9 @@ public class ParameterBindingMethodCacheTests
     }
 
     private class TryParseInheritClassWithFormatProvider
-        : BaseTryParseClassWithFormatProvider<TryParseInheritClassWithFormatProvider> { }
+        : BaseTryParseClassWithFormatProvider<TryParseInheritClassWithFormatProvider>
+    {
+    }
 
     private interface ITryParse<T>
     {
@@ -1249,12 +1301,18 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private interface IImplementITryParse<T> : ITryParse<T> { }
+    private interface IImplementITryParse<T> : ITryParse<T>
+    {
+    }
 
-    private class TryParseFromInterface : ITryParse<TryParseFromInterface> { }
+    private class TryParseFromInterface : ITryParse<TryParseFromInterface>
+    {
+    }
 
     private class TryParseFromGrandparentInterface
-        : IImplementITryParse<TryParseFromGrandparentInterface> { }
+        : IImplementITryParse<TryParseFromGrandparentInterface>
+    {
+    }
 
     private class TryParseDirectlyAndFromInterface : ITryParse<TryParseDirectlyAndFromInterface>
     {
@@ -1267,14 +1325,20 @@ public class ParameterBindingMethodCacheTests
 
     private class TryParseFromClassAndInterface
         : BaseTryParseClass<TryParseFromClassAndInterface>,
-            ITryParse<TryParseFromClassAndInterface> { }
+            ITryParse<TryParseFromClassAndInterface>
+    {
+    }
 
     private class TryParseFromMultipleInterfaces
         : ITryParse<TryParseFromMultipleInterfaces>,
-            ITryParse2<TryParseFromMultipleInterfaces> { }
+            ITryParse2<TryParseFromMultipleInterfaces>
+    {
+    }
 
     // using wrong T on purpose
-    private class TryParseWrongTypeFromInterface : ITryParse<TryParseFromInterface> { }
+    private class TryParseWrongTypeFromInterface : ITryParse<TryParseFromInterface>
+    {
+    }
 
     private interface ITryParseWithFormatProvider<T>
     {
@@ -1286,7 +1350,9 @@ public class ParameterBindingMethodCacheTests
     }
 
     private class TryParseFromInterfaceWithFormatProvider
-        : ITryParseWithFormatProvider<TryParseFromInterfaceWithFormatProvider> { }
+        : ITryParseWithFormatProvider<TryParseFromInterfaceWithFormatProvider>
+    {
+    }
 
     private record BindAsyncRecord(int Value)
     {
@@ -1423,10 +1489,14 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private class InheritBindAsync : BaseBindAsync<InheritBindAsync> { }
+    private class InheritBindAsync : BaseBindAsync<InheritBindAsync>
+    {
+    }
 
     // Using wrong T on purpose
-    private class BindAsyncWrongTypeInherit : BaseBindAsync<InheritBindAsync> { }
+    private class BindAsyncWrongTypeInherit : BaseBindAsync<InheritBindAsync>
+    {
+    }
 
     private class BaseBindAsyncWithParameterInfo<T>
     {
@@ -1437,11 +1507,15 @@ public class ParameterBindingMethodCacheTests
     }
 
     private class InheritBindAsyncWithParameterInfo
-        : BaseBindAsyncWithParameterInfo<InheritBindAsyncWithParameterInfo> { }
+        : BaseBindAsyncWithParameterInfo<InheritBindAsyncWithParameterInfo>
+    {
+    }
 
     // Using wrong T on purpose
     private class BindAsyncWithParameterInfoWrongTypeInherit
-        : BaseBindAsyncWithParameterInfo<InheritBindAsync> { }
+        : BaseBindAsyncWithParameterInfo<InheritBindAsync>
+    {
+    }
 
     private interface IBindAsync<T>
     {
@@ -1459,12 +1533,18 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private interface IImeplmentIBindAsync<T> : IBindAsync<T> { }
+    private interface IImeplmentIBindAsync<T> : IBindAsync<T>
+    {
+    }
 
-    private class BindAsyncFromInterface : IBindAsync<BindAsyncFromInterface> { }
+    private class BindAsyncFromInterface : IBindAsync<BindAsyncFromInterface>
+    {
+    }
 
     private class BindAsyncFromGrandparentInterface
-        : IImeplmentIBindAsync<BindAsyncFromGrandparentInterface> { }
+        : IImeplmentIBindAsync<BindAsyncFromGrandparentInterface>
+    {
+    }
 
     private class BindAsyncDirectlyAndFromInterface : IBindAsync<BindAsyncDirectlyAndFromInterface>
     {
@@ -1476,14 +1556,20 @@ public class ParameterBindingMethodCacheTests
 
     private class BindAsyncFromClassAndInterface
         : BaseBindAsync<BindAsyncFromClassAndInterface>,
-            IBindAsync<BindAsyncFromClassAndInterface> { }
+            IBindAsync<BindAsyncFromClassAndInterface>
+    {
+    }
 
     private class BindAsyncFromMultipleInterfaces
         : IBindAsync<BindAsyncFromMultipleInterfaces>,
-            IBindAsync2<BindAsyncFromMultipleInterfaces> { }
+            IBindAsync2<BindAsyncFromMultipleInterfaces>
+    {
+    }
 
     // using wrong T on purpose
-    private class BindAsyncWrongTypeFromInterface : IBindAsync<BindAsyncFromInterface> { }
+    private class BindAsyncWrongTypeFromInterface : IBindAsync<BindAsyncFromInterface>
+    {
+    }
 
     private interface IBindAsyncWithParameterInfo<T>
     {
@@ -1494,7 +1580,9 @@ public class ParameterBindingMethodCacheTests
     }
 
     private class BindAsyncFromInterfaceWithParameterInfo
-        : IBindAsync<BindAsyncFromInterfaceWithParameterInfo> { }
+        : IBindAsync<BindAsyncFromInterfaceWithParameterInfo>
+    {
+    }
 
     private class BindAsyncFallsBack
     {
@@ -1525,7 +1613,9 @@ public class ParameterBindingMethodCacheTests
     {
         public int Foo { get; set; }
 
-        public ClassWithParameterizedConstructor(int foo) { }
+        public ClassWithParameterizedConstructor(int foo)
+        {
+        }
     }
 
     public record RecordClassParameterizedConstructor(int Foo);
@@ -1544,82 +1634,126 @@ public class ParameterBindingMethodCacheTests
 
     public class ClassWithParameterlessConstructor
     {
-        public ClassWithParameterlessConstructor() { }
+        public ClassWithParameterlessConstructor()
+        {
+        }
 
-        public ClassWithParameterlessConstructor(int foo) { }
+        public ClassWithParameterlessConstructor(int foo)
+        {
+        }
     }
 
     public record RecordClassParameterlessConstructor
     {
-        public RecordClassParameterlessConstructor() { }
+        public RecordClassParameterlessConstructor()
+        {
+        }
 
-        public RecordClassParameterlessConstructor(int foo) { }
+        public RecordClassParameterlessConstructor(int foo)
+        {
+        }
     }
 
     public struct StructWithParameterlessConstructor
     {
-        public StructWithParameterlessConstructor() { }
+        public StructWithParameterlessConstructor()
+        {
+        }
 
-        public StructWithParameterlessConstructor(int foo) { }
+        public StructWithParameterlessConstructor(int foo)
+        {
+        }
     }
 
     public record struct RecordStructWithParameterlessConstructor
     {
-        public RecordStructWithParameterlessConstructor() { }
+        public RecordStructWithParameterlessConstructor()
+        {
+        }
 
-        public RecordStructWithParameterlessConstructor(int foo) { }
+        public RecordStructWithParameterlessConstructor(int foo)
+        {
+        }
     }
 
-    public class ClassWithDefaultConstructor { }
+    public class ClassWithDefaultConstructor
+    {
+    }
 
-    public record RecordClassWithDefaultConstructor { }
+    public record RecordClassWithDefaultConstructor
+    {
+    }
 
-    public struct StructWithDefaultConstructor { }
+    public struct StructWithDefaultConstructor
+    {
+    }
 
-    public record struct RecordStructWithDefaultConstructor { }
+    public record struct RecordStructWithDefaultConstructor
+    {
+    }
 
     public struct StructWithMultipleConstructors
     {
-        public StructWithMultipleConstructors(int foo) { }
+        public StructWithMultipleConstructors(int foo)
+        {
+        }
 
-        public StructWithMultipleConstructors(int foo, int bar) { }
+        public StructWithMultipleConstructors(int foo, int bar)
+        {
+        }
     }
 
     public record struct RecordStructWithMultipleConstructors(int Foo)
     {
-        public RecordStructWithMultipleConstructors(int foo, int bar) : this(foo) { }
+        public RecordStructWithMultipleConstructors(int foo, int bar) : this(foo)
+        {
+        }
     }
 
-    private abstract class AbstractClass { }
+    private abstract class AbstractClass
+    {
+    }
 
     private abstract record AbstractRecord();
 
     private class ClassWithMultipleConstructors
     {
-        public ClassWithMultipleConstructors(int foo) { }
+        public ClassWithMultipleConstructors(int foo)
+        {
+        }
 
-        public ClassWithMultipleConstructors(int foo, int bar) { }
+        public ClassWithMultipleConstructors(int foo, int bar)
+        {
+        }
     }
 
     private record RecordWithMultipleConstructors
     {
-        public RecordWithMultipleConstructors(int foo) { }
+        public RecordWithMultipleConstructors(int foo)
+        {
+        }
 
-        public RecordWithMultipleConstructors(int foo, int bar) { }
+        public RecordWithMultipleConstructors(int foo, int bar)
+        {
+        }
     }
 
     private class ClassWithInvalidConstructors
     {
         public int Foo { get; set; }
 
-        public ClassWithInvalidConstructors(int foo, int bar) { }
+        public ClassWithInvalidConstructors(int foo, int bar)
+        {
+        }
     }
 
     private record RecordClassWithInvalidConstructors
     {
         public int Foo { get; set; }
 
-        public RecordClassWithInvalidConstructors(int foo, int bar) { }
+        public RecordClassWithInvalidConstructors(int foo, int bar)
+        {
+        }
     }
 
     private struct StructWithInvalidConstructors

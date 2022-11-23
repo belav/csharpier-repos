@@ -74,8 +74,16 @@ namespace System.Threading.Tasks.Tests
             Debug.WriteLine("* RunBuggySchedulerTests()");
 
             BuggyTaskScheduler bts = new BuggyTaskScheduler();
-            Task t1 = new Task(delegate { });
-            Task t2 = new Task(delegate { });
+            Task t1 = new Task(
+                delegate
+                {
+                }
+            );
+            Task t2 = new Task(
+                delegate
+                {
+                }
+            );
 
             //
             // Test Task.Start(buggy scheduler)
@@ -86,7 +94,9 @@ namespace System.Threading.Tasks.Tests
                 t1.Start(bts);
                 Assert.True(false, string.Format("    > FAILED.  No exception thrown."));
             }
-            catch (TaskSchedulerException) { }
+            catch (TaskSchedulerException)
+            {
+            }
             catch (Exception e)
             {
                 Assert.True(
@@ -141,7 +151,9 @@ namespace System.Threading.Tasks.Tests
                 t2.RunSynchronously(bts);
                 Assert.True(false, string.Format("    > FAILED.  No exception thrown."));
             }
-            catch (TaskSchedulerException) { }
+            catch (TaskSchedulerException)
+            {
+            }
             catch (Exception e)
             {
                 Assert.True(
@@ -194,14 +206,18 @@ namespace System.Threading.Tasks.Tests
             try
             {
                 Task t3 = Task.Factory.StartNew(
-                    delegate { },
+                    delegate
+                    {
+                    },
                     CancellationToken.None,
                     TaskCreationOptions.None,
                     bts
                 );
                 Assert.True(false, string.Format("    > FAILED.  No exception thrown."));
             }
-            catch (TaskSchedulerException) { }
+            catch (TaskSchedulerException)
+            {
+            }
             catch (Exception e)
             {
                 Assert.True(
@@ -217,11 +233,17 @@ namespace System.Threading.Tasks.Tests
             // Test continuations
             //
             Debug.WriteLine("  -- testing Task.ContinueWith(buggy scheduler)");
-            Task completedTask = Task.Factory.StartNew(delegate { });
+            Task completedTask = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
             completedTask.Wait();
 
             Task tc1 = completedTask.ContinueWith(
-                delegate { },
+                delegate
+                {
+                },
                 CancellationToken.None,
                 TaskContinuationOptions.ExecuteSynchronously,
                 bts
@@ -255,7 +277,9 @@ namespace System.Threading.Tasks.Tests
             }
 
             Task tc2 = completedTask.ContinueWith(
-                delegate { },
+                delegate
+                {
+                },
                 CancellationToken.None,
                 TaskContinuationOptions.None,
                 bts
@@ -291,14 +315,20 @@ namespace System.Threading.Tasks.Tests
             // Test Wait()/inlining
             Debug.WriteLine("  -- testing Task.Wait(task started on buggy scheduler)");
             BuggyTaskScheduler bts2 = new BuggyTaskScheduler(false); // won't throw on QueueTask
-            Task t4 = new Task(delegate { });
+            Task t4 = new Task(
+                delegate
+                {
+                }
+            );
             t4.Start(bts2);
             try
             {
                 t4.Wait();
                 Assert.True(false, string.Format("    > FAILED.  Expected inlining exception"));
             }
-            catch (TaskSchedulerException) { }
+            catch (TaskSchedulerException)
+            {
+            }
             catch (Exception e)
             {
                 Assert.True(false, string.Format("    > FAILED.  Wrong exception thrown: {0}", e));
@@ -445,7 +475,8 @@ namespace System.Threading.Tasks.Tests
             Task[] queuedTasks = (
                 from i in Enumerable.Range(0, 10)
                 select Task.Factory.StartNew(
-                    () => { },
+                    () => {
+                    },
                     CancellationToken.None,
                     TaskCreationOptions.None,
                     nonExecutingScheduler
@@ -495,7 +526,9 @@ namespace System.Threading.Tasks.Tests
                 return _tasks;
             }
 
-            public BuggyTaskScheduler() : this(true) { }
+            public BuggyTaskScheduler() : this(true)
+            {
+            }
 
             public BuggyTaskScheduler(bool faultQueues)
             {

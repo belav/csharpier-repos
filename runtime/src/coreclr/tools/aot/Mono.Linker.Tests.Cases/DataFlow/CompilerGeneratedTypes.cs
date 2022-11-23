@@ -46,7 +46,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         private static void UseIterator()
         {
-            foreach (var m in BasicIterator<string>()) { }
+            foreach (var m in BasicIterator<string>())
+            {
+            }
         }
 
         private static IEnumerable<MethodInfo> BasicIterator<
@@ -85,7 +87,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         private static void LocalIterator()
         {
-            foreach (var m in Local<string, string>()) { }
+            foreach (var m in Local<string, string>())
+            {
+            }
 
             static IEnumerable<object> Local<
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T1,

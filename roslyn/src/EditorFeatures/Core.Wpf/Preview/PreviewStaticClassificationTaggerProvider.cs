@@ -61,8 +61,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             /// </summary>
             event EventHandler<SnapshotSpanEventArgs> ITagger<IClassificationTag>.TagsChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             public IEnumerable<ITagSpan<IClassificationTag>> GetTags(

@@ -11,7 +11,9 @@ namespace System.Security.Cryptography
         private Oid[] _oids = Array.Empty<Oid>();
         private int _count;
 
-        public OidCollection() { }
+        public OidCollection()
+        {
+        }
 
         public int Add(Oid oid)
         {

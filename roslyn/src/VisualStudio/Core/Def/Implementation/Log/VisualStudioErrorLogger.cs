@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Log
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioErrorLogger() { }
+        public VisualStudioErrorLogger()
+        {
+        }
 
         public void LogException(object source, Exception exception)
         {

@@ -141,7 +141,9 @@ namespace UniversalGen
 #pragma warning restore 0414
     }
 
-    public struct MyStruct { }
+    public struct MyStruct
+    {
+    }
 
     public struct MyGenStruct<T>
     {
@@ -163,7 +165,9 @@ namespace UniversalGen
 #pragma warning restore 0414
     }
 
-    public class MyDerivedList<T> : List<T> { }
+    public class MyDerivedList<T> : List<T>
+    {
+    }
 
     public struct MyListItem
     {
@@ -197,17 +201,29 @@ namespace UniversalGen
 
     public class TestFieldsBase
     {
-        public virtual void SetVal1(object val) { }
+        public virtual void SetVal1(object val)
+        {
+        }
 
-        public virtual void SetVal2(object val) { }
+        public virtual void SetVal2(object val)
+        {
+        }
 
-        public virtual void SetVal3(object val) { }
+        public virtual void SetVal3(object val)
+        {
+        }
 
-        public virtual void SetVal4(object val) { }
+        public virtual void SetVal4(object val)
+        {
+        }
 
-        public virtual void SetVal5(object val) { }
+        public virtual void SetVal5(object val)
+        {
+        }
 
-        public virtual void SetVal6(object val) { }
+        public virtual void SetVal6(object val)
+        {
+        }
 
         public virtual object GetVal1()
         {
@@ -707,7 +723,9 @@ namespace UniversalGen
         public virtual object this[int index]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual bool EmptyMethodTest(object param)
@@ -750,9 +768,13 @@ namespace UniversalGen
             return false;
         }
 
-        public virtual void InterlockedTests(object o1, object o2) { }
+        public virtual void InterlockedTests(object o1, object o2)
+        {
+        }
 
-        public virtual void nestedTest() { }
+        public virtual void nestedTest()
+        {
+        }
     }
 
     public class UnmanagedByRef<T> : Base where T : struct, IGetValue
@@ -823,7 +845,9 @@ namespace UniversalGen
             set { _elements[index] = (T)value; }
         }
 
-        private void Empty(T t, T u) { }
+        private void Empty(T t, T u)
+        {
+        }
 
         public override void nestedTest()
         {
@@ -1063,7 +1087,9 @@ namespace UniversalGen
                     o[i] = val;
                     Assert.IsTrue(false);
                 }
-                catch (InvalidCastException) { }
+                catch (InvalidCastException)
+                {
+                }
 
                 o[i] = (short)val;
                 Assert.AreEqual(o.GetElementAt(i), o[i]);
@@ -1335,19 +1361,25 @@ namespace PartialUSC
 {
     public class TestVirtualCallsBase
     {
-        public virtual void TestVirtualCall0(object o) { }
+        public virtual void TestVirtualCall0(object o)
+        {
+        }
 
-        public virtual void TestVirtualCall1(object o, string instTypeName) { }
+        public virtual void TestVirtualCall1(object o, string instTypeName)
+        {
+        }
 
-        public virtual void TestVirtualCall2(object o, string instTypeName) { }
+        public virtual void TestVirtualCall2(object o, string instTypeName)
+        {
+        }
 
-        public virtual void TestVirtualCall3(
-            object o,
-            bool TAndUAreTheSame,
-            string instTypeName
-        ) { }
+        public virtual void TestVirtualCall3(object o, bool TAndUAreTheSame, string instTypeName)
+        {
+        }
 
-        public virtual void TestVirtualCall4(object o, string instTypeName) { }
+        public virtual void TestVirtualCall4(object o, string instTypeName)
+        {
+        }
     }
 
     public class UCGTestVirtualCalls<T, U> : TestVirtualCallsBase
@@ -1540,11 +1572,15 @@ namespace PartialUSC
     }
 #pragma warning restore 114
 
-    public struct MyStruct<T, U> { }
+    public struct MyStruct<T, U>
+    {
+    }
 
     public class TestRelatedTypeCases
     {
-        public virtual void DoTest() { }
+        public virtual void DoTest()
+        {
+        }
     }
 
     public class NullableCaseTest<T> : TestRelatedTypeCases
@@ -1584,10 +1620,14 @@ namespace PartialUSC
     public class CustomCollection<V>
         : System.Collections.ObjectModel.KeyedCollection<V, System.Collections.DictionaryEntry>
     {
-        public CustomCollection() { }
+        public CustomCollection()
+        {
+        }
 
         public CustomCollection(System.Collections.Generic.IEqualityComparer<V> comparer)
-            : base(comparer) { }
+            : base(comparer)
+        {
+        }
 
         protected override V GetKeyForItem(System.Collections.DictionaryEntry entry)
         {
@@ -1647,20 +1687,26 @@ namespace PartialUSC
                             caller.TestVirtualCall3(obj, true, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
                         try
                         {
                             caller.TestVirtualCall3(obj, false, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
 
                         try
                         {
                             caller.TestVirtualCall4(obj, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
                     }
 
                     {
@@ -1688,14 +1734,18 @@ namespace PartialUSC
                             caller.TestVirtualCall3(obj, false, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
 
                         try
                         {
                             caller.TestVirtualCall4(obj, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
                     }
 
                     {
@@ -1727,7 +1777,9 @@ namespace PartialUSC
                             caller_type.TestVirtualCall1(obj, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
 
                         caller_int.TestVirtualCall2(
                             obj,
@@ -1738,7 +1790,9 @@ namespace PartialUSC
                             caller_type.TestVirtualCall2(obj, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
 
                         caller_type.TestVirtualCall3(
                             obj,
@@ -1750,19 +1804,25 @@ namespace PartialUSC
                             caller_type.TestVirtualCall3(obj, true, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
                         try
                         {
                             caller_int.TestVirtualCall3(obj, false, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
                         try
                         {
                             caller_int.TestVirtualCall3(obj, true, "");
                             Assert.IsTrue(false);
                         }
-                        catch (InvalidCastException) { }
+                        catch (InvalidCastException)
+                        {
+                        }
 
                         caller_int.TestVirtualCall4(
                             obj,
@@ -1794,22 +1854,31 @@ namespace PartialUSC
 
 namespace VirtualCalls
 {
-    public class TestClass { }
+    public class TestClass
+    {
+    }
 
-    public struct TestStruct { }
+    public struct TestStruct
+    {
+    }
 
     public class TestVirtualCallsBase
     {
-        public virtual void TestVirtualCallNonGenericInstance(object o) { }
+        public virtual void TestVirtualCallNonGenericInstance(object o)
+        {
+        }
 
-        public virtual void TestVirtualCallStaticallyCompiledGenericInstance(
-            object o1,
-            object o2
-        ) { }
+        public virtual void TestVirtualCallStaticallyCompiledGenericInstance(object o1, object o2)
+        {
+        }
 
-        public virtual void TestUniversalGenericMethodCallOnNonUniversalContainingType() { }
+        public virtual void TestUniversalGenericMethodCallOnNonUniversalContainingType()
+        {
+        }
 
-        public virtual void TestVirtualCall(object o, object value) { }
+        public virtual void TestVirtualCall(object o, object value)
+        {
+        }
 
         public virtual void TestVirtualCallUsingDelegates(object o, object value)
         {
@@ -2291,7 +2360,9 @@ namespace CallingConvention
     {
         public static short ShortValue;
 
-        public virtual void TestUseInterface(object o, object value) { }
+        public virtual void TestUseInterface(object o, object value)
+        {
+        }
     }
 
     public class UCGTestUseInterface<T> : TestInterfaceUseBase
@@ -2667,7 +2738,9 @@ namespace CallingConvention
         T _tValue = default(T);
         static MainClass<T, T> _mainTT = null;
 
-        public MainClass() { }
+        public MainClass()
+        {
+        }
 
         private MainClass(string id, T tValue)
         {
@@ -5975,7 +6048,9 @@ namespace ArrayVarianceTest
 
 namespace IsInstTest
 {
-    public interface IBase { }
+    public interface IBase
+    {
+    }
 
     public interface IObject : IBase
     {
@@ -6104,7 +6179,9 @@ namespace IsInstTest
 
 namespace DelegateCallTest
 {
-    public interface IBar { }
+    public interface IBar
+    {
+    }
 
     public class Bar : IBar
     {
@@ -6186,7 +6263,9 @@ namespace FieldLayoutBugRepro
         }
     }
 
-    public interface IInterface { }
+    public interface IInterface
+    {
+    }
 
     public class BaseType : IInterface
     {
@@ -6232,7 +6311,9 @@ namespace FieldLayoutBugRepro
         }
     }
 
-    public interface IMyComparer<T> { }
+    public interface IMyComparer<T>
+    {
+    }
 
     public class MyComparer<T> : IMyComparer<T>
     {
@@ -6242,7 +6323,9 @@ namespace FieldLayoutBugRepro
         }
     }
 
-    public interface IScheduledItem<TAbsolute> { }
+    public interface IScheduledItem<TAbsolute>
+    {
+    }
 
     public abstract class ScheduledItem<TAbsolute>
         : IScheduledItem<TAbsolute>,
@@ -6288,7 +6371,9 @@ namespace FieldLayoutBugRepro
             TValue state,
             Func<IInterface, TValue, string> action,
             TAbsolute dueTime
-        ) : this(scheduler, state, action, dueTime, new MyComparer<TAbsolute>()) { }
+        ) : this(scheduler, state, action, dueTime, new MyComparer<TAbsolute>())
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public ScheduledItem(
@@ -6358,7 +6443,9 @@ namespace FieldLayoutBugRepro
         }
     }
 
-    public sealed class EventPattern<TEventArgs> { }
+    public sealed class EventPattern<TEventArgs>
+    {
+    }
 
     public partial class Runner
     {
@@ -6492,9 +6579,13 @@ namespace DelegateTest
 
 namespace ArrayExceptionsTest
 {
-    public enum IntBasedEnum { }
+    public enum IntBasedEnum
+    {
+    }
 
-    public enum ShortBasedEnum : short { }
+    public enum ShortBasedEnum : short
+    {
+    }
 
     public abstract class BaseType
     {
@@ -6511,7 +6602,9 @@ namespace ArrayExceptionsTest
     public class DerivedType<T, U, V> : BaseType
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        void Func(ref U t) { }
+        void Func(ref U t)
+        {
+        }
 
         public override void TestSetExceptionRank1(object valToSet)
         {
@@ -7591,7 +7684,9 @@ namespace HFATest
 
 namespace ComparerOfTTests
 {
-    struct BoringStruct { }
+    struct BoringStruct
+    {
+    }
 
     struct StructThatImplementsIComparable : IComparable<StructThatImplementsIComparable>
     {
@@ -7920,8 +8015,9 @@ namespace ArrayOfGenericStructGCTests
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class ClassWithNonPointerSizedFinalField<T>
-        : ClassWithNonPointerSizedFinalFieldBase2<T> { }
+    public class ClassWithNonPointerSizedFinalField<T> : ClassWithNonPointerSizedFinalFieldBase2<T>
+    {
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct StructWithNonPointerSizedFinalField<T>

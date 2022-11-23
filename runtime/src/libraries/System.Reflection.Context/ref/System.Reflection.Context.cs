@@ -8,9 +8,13 @@ namespace System.Reflection.Context
 {
     public abstract partial class CustomReflectionContext : System.Reflection.ReflectionContext
     {
-        protected CustomReflectionContext() { }
+        protected CustomReflectionContext()
+        {
+        }
 
-        protected CustomReflectionContext(System.Reflection.ReflectionContext source) { }
+        protected CustomReflectionContext(System.Reflection.ReflectionContext source)
+        {
+        }
 
         protected virtual System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> AddProperties(
             System.Type type

@@ -26,7 +26,9 @@ public class SqlServerStoreGenerationConvention : StoreGenerationConvention
     public SqlServerStoreGenerationConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    ) : base(dependencies, relationalDependencies)
+    {
+    }
 
     /// <summary>
     ///     Called after an annotation is changed on a property.

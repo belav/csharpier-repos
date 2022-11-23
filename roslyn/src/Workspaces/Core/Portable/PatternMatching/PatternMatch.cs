@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 matchedSpan == null
                     ? ImmutableArray<TextSpan>.Empty
                     : ImmutableArray.Create(matchedSpan.Value)
-            ) { }
+            )
+        {
+        }
 
         internal PatternMatch(
             PatternMatchKind resultType,

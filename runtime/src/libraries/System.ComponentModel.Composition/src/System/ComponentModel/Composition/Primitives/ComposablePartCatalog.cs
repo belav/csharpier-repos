@@ -31,7 +31,9 @@ namespace System.ComponentModel.Composition.Primitives
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartCatalog"/> class.
         /// </summary>
-        protected ComposablePartCatalog() { }
+        protected ComposablePartCatalog()
+        {
+        }
 
         /// <summary>
         ///     Gets the part definitions of the catalog.

@@ -17,7 +17,9 @@ namespace Microsoft.VisualBasic.Tests
             {
                 FileSystem.FileClose(0); // close all files
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             base.Dispose(disposing);
         }
 
@@ -651,7 +653,9 @@ namespace Microsoft.VisualBasic.Tests
                                         writer.Write(text);
                                     }
                                 }
-                                catch (System.IO.IOException) { }
+                                catch (System.IO.IOException)
+                                {
+                                }
                             }
                         },
                         fileName,

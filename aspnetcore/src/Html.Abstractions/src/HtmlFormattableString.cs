@@ -26,7 +26,9 @@ public class HtmlFormattableString : IHtmlContent
     /// <param name="format">A composite format string.</param>
     /// <param name="args">An array that contains objects to format.</param>
     public HtmlFormattableString(string format, params object?[] args)
-        : this(formatProvider: null, format: format, args: args) { }
+        : this(formatProvider: null, format: format, args: args)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="HtmlFormattableString"/> with the given <paramref name="formatProvider"/>,

@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public UseThrowExpressionCodeFixProvider() { }
+        public UseThrowExpressionCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseThrowExpressionDiagnosticId);

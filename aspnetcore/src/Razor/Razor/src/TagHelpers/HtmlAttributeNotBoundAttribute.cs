@@ -12,5 +12,7 @@ public sealed class HtmlAttributeNotBoundAttribute : Attribute
     /// <summary>
     /// Instantiates a new instance of the <see cref="HtmlAttributeNotBoundAttribute"/> class.
     /// </summary>
-    public HtmlAttributeNotBoundAttribute() { }
+    public HtmlAttributeNotBoundAttribute()
+    {
+    }
 }

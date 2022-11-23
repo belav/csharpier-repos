@@ -55,7 +55,8 @@ namespace System.Security.AccessControl.Tests
             verifierGAce = discretionaryAcl[index];
 
             Assert.True(TestIndex(gAce, verifierGAce));
-            { }
+            {
+            }
 
             //case 2, two ACEs, index at Count -1
             rawAcl = new RawAcl(1, 2);
@@ -100,7 +101,8 @@ namespace System.Security.AccessControl.Tests
             verifierGAce = discretionaryAcl[index];
 
             Assert.True(TestIndex(gAce, verifierGAce));
-            { }
+            {
+            }
 
             //case 3, only three ACEs, index at Count/2
             rawAcl = new RawAcl(1, 3);
@@ -159,7 +161,8 @@ namespace System.Security.AccessControl.Tests
             verifierGAce = discretionaryAcl[index];
 
             Assert.True(TestIndex(gAce, verifierGAce));
-            { }
+            {
+            }
         }
 
         [Fact]

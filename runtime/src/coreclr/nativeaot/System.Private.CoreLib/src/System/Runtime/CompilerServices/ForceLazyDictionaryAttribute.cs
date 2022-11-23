@@ -19,6 +19,8 @@ namespace System.Runtime.CompilerServices
     )]
     public sealed class ForceLazyDictionaryAttribute : Attribute
     {
-        public ForceLazyDictionaryAttribute() { }
+        public ForceLazyDictionaryAttribute()
+        {
+        }
     }
 }

@@ -64,10 +64,14 @@ public unsafe class Tests
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 0)]
-    public struct EmptyStruct { }
+    public struct EmptyStruct
+    {
+    }
 
     [StructLayout(LayoutKind.Sequential, Size = 1)]
-    public struct EmptyStructCpp { }
+    public struct EmptyStructCpp
+    {
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct DelegateStruct
@@ -129,7 +133,9 @@ public unsafe class Tests
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class EmptyClass { }
+    public class EmptyClass
+    {
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct LongAlignStruct
@@ -1189,7 +1195,9 @@ public unsafe class Tests
             mono_entry_point_not_found();
             return 1;
         }
-        catch (EntryPointNotFoundException) { }
+        catch (EntryPointNotFoundException)
+        {
+        }
 
         return 0;
     }
@@ -1201,7 +1209,9 @@ public unsafe class Tests
             mono_library_not_found();
             return 1;
         }
-        catch (DllNotFoundException) { }
+        catch (DllNotFoundException)
+        {
+        }
 
         return 0;
     }
@@ -1256,14 +1266,18 @@ public unsafe class Tests
             mono_test_asany(c, 0);
             return 5;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
 
         try
         {
             mono_test_asany(new Object(), 0);
             return 6;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
 
         if (mono_test_asany(new IntPtr(5), 5) != 0)
             return 7;

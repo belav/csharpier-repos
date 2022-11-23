@@ -8,7 +8,9 @@ namespace System.Web.Mvc
     public class ResultExecutedContext : ControllerContext
     {
         // parameterless constructor used for mocking
-        public ResultExecutedContext() { }
+        public ResultExecutedContext()
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

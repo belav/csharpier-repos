@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 isAdder,
                 isIterator: false,
                 isNullableAnalysisEnabled: false
-            ) { }
+            )
+        {
+        }
 
         public override bool IsImplicitlyDeclared
         {

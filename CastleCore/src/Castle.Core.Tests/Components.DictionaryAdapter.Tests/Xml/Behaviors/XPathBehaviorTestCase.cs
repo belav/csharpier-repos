@@ -429,7 +429,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 IBar A { get; set; }
             }
 
-            public interface IBar { }
+            public interface IBar
+            {
+            }
 
             [Test]
             public void Get()

@@ -342,13 +342,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override void VisitParenthesizedLambdaExpression(
             ParenthesizedLambdaExpressionSyntax node
-        ) { }
+        )
+        {
+        }
 
-        public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node) { }
+        public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
+        {
+        }
 
-        public override void VisitAnonymousMethodExpression(
-            AnonymousMethodExpressionSyntax node
-        ) { }
+        public override void VisitAnonymousMethodExpression(AnonymousMethodExpressionSyntax node)
+        {
+        }
 
         public override void VisitQueryExpression(QueryExpressionSyntax node)
         {

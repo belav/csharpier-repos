@@ -31,7 +31,9 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal SpeechRecognizedEventArgs(RecognitionResult result) : base(result) { }
+        internal SpeechRecognizedEventArgs(RecognitionResult result) : base(result)
+        {
+        }
 
         #endregion
     }
@@ -41,7 +43,9 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal SpeechRecognitionRejectedEventArgs(RecognitionResult result) : base(result) { }
+        internal SpeechRecognitionRejectedEventArgs(RecognitionResult result) : base(result)
+        {
+        }
 
         #endregion
     }
@@ -51,7 +55,9 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal SpeechHypothesizedEventArgs(RecognitionResult result) : base(result) { }
+        internal SpeechHypothesizedEventArgs(RecognitionResult result) : base(result)
+        {
+        }
 
         #endregion
     }

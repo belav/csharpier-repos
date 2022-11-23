@@ -31,7 +31,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the specified <paramref name="name"/> and no attributes.
         /// </summary>
-        protected MemberDescriptor(string name) : this(name, null) { }
+        protected MemberDescriptor(string name) : this(name, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the specified <paramref name="name"/> and <paramref name="attributes "/> array.
@@ -346,7 +348,9 @@ namespace System.ComponentModel
                     {
                         FillAttributes(list);
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
                 else
                 {

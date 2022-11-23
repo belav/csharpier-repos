@@ -153,7 +153,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                 return 1;
             }
 
-            private void b(dynamic d) { }
+            private void b(dynamic d)
+            {
+            }
         }
     }
     // </Code>

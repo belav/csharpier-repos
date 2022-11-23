@@ -334,14 +334,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
         }
 
-        protected class NonPrimitiveNonNavigationAsPropertyEntity { }
+        protected class NonPrimitiveNonNavigationAsPropertyEntity
+        {
+        }
 
         protected class NonPrimitiveAsPropertyEntity
         {
             public NavigationAsProperty Property { get; set; }
         }
 
-        protected class NavigationAsProperty { }
+        protected class NavigationAsProperty
+        {
+        }
 
         protected class PrimitivePropertyEntity
         {

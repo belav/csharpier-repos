@@ -126,7 +126,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public class TestClassWithCycle
         {
-            public TestClassWithCycle() { }
+            public TestClassWithCycle()
+            {
+            }
 
             public TestClassWithCycle(string name)
             {

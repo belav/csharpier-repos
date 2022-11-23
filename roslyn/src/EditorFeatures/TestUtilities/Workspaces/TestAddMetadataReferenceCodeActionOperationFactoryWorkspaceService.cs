@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestAddMetadataReferenceCodeActionOperationFactoryWorkspaceService() { }
+        public TestAddMetadataReferenceCodeActionOperationFactoryWorkspaceService()
+        {
+        }
 
         public CodeActionOperation CreateAddMetadataReferenceOperation(
             ProjectId projectId,

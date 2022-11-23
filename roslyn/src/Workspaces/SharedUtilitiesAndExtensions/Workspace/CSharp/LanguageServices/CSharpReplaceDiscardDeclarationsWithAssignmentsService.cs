@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpReplaceDiscardDeclarationsWithAssignmentsService() { }
+        public CSharpReplaceDiscardDeclarationsWithAssignmentsService()
+        {
+        }
 
         public async Task<SyntaxNode> ReplaceAsync(
             Document document,

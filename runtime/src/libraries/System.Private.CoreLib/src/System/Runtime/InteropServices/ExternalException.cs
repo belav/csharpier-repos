@@ -45,7 +45,9 @@ namespace System.Runtime.InteropServices
         }
 
         protected ExternalException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public virtual int ErrorCode => HResult;
 

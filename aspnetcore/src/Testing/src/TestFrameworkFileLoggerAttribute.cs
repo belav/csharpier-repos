@@ -12,5 +12,7 @@ public class TestFrameworkFileLoggerAttribute : TestOutputDirectoryAttribute
         string preserveExistingLogsInOutput,
         string tfm,
         string baseDirectory = null
-    ) : base(preserveExistingLogsInOutput, tfm, baseDirectory) { }
+    ) : base(preserveExistingLogsInOutput, tfm, baseDirectory)
+    {
+    }
 }

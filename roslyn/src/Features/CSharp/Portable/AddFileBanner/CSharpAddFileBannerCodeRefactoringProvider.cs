@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddFileBanner
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpAddFileBannerCodeRefactoringProvider() { }
+        public CSharpAddFileBannerCodeRefactoringProvider()
+        {
+        }
 
         protected override bool IsCommentStartCharacter(char ch) => ch == '/';
 

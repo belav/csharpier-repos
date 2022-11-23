@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public GenerateConversionCodeFixProvider() { }
+        public GenerateConversionCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {

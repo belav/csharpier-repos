@@ -348,7 +348,9 @@ namespace ILCompiler
             return null;
         }
 
-        protected virtual void ProcessField(TypeDesc type, FieldDesc field, XPathNavigator nav) { }
+        protected virtual void ProcessField(TypeDesc type, FieldDesc field, XPathNavigator nav)
+        {
+        }
 
         private void ProcessSelectedMethods(XPathNavigator nav, TypeDesc type, object? customData)
         {
@@ -403,7 +405,9 @@ namespace ILCompiler
             MethodDesc method,
             XPathNavigator nav,
             object? customData
-        ) { }
+        )
+        {
+        }
 
         private void ProcessSelectedEvents(XPathNavigator nav, TypeDesc type, object? customData)
         {
@@ -473,7 +477,9 @@ namespace ILCompiler
             EventPseudoDesc @event,
             XPathNavigator nav,
             object? customData
-        ) { }
+        )
+        {
+        }
 
         private void ProcessSelectedProperties(
             XPathNavigator nav,
@@ -554,7 +560,9 @@ namespace ILCompiler
             XPathNavigator nav,
             object? customData,
             bool fromSignature
-        ) { }
+        )
+        {
+        }
 
         protected virtual AssemblyName GetAssemblyName(XPathNavigator nav)
         {
@@ -674,9 +682,13 @@ namespace ILCompiler
                 sb.Append(type.Name);
             }
 
-            public override void AppendName(StringBuilder sb, SignatureMethodVariable type) { }
+            public override void AppendName(StringBuilder sb, SignatureMethodVariable type)
+            {
+            }
 
-            public override void AppendName(StringBuilder sb, SignatureTypeVariable type) { }
+            public override void AppendName(StringBuilder sb, SignatureTypeVariable type)
+            {
+            }
 
             protected override void AppendNameForInstantiatedType(StringBuilder sb, DefType type)
             {

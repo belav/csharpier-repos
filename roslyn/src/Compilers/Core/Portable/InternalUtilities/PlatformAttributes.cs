@@ -27,7 +27,9 @@ namespace System.Runtime.Versioning
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
     internal sealed class TargetPlatformAttribute : OSPlatformAttribute
     {
-        public TargetPlatformAttribute(string platformName) : base(platformName) { }
+        public TargetPlatformAttribute(string platformName) : base(platformName)
+        {
+        }
     }
 
     /// <summary>
@@ -56,7 +58,9 @@ namespace System.Runtime.Versioning
     )]
     internal sealed class SupportedOSPlatformAttribute : OSPlatformAttribute
     {
-        public SupportedOSPlatformAttribute(string platformName) : base(platformName) { }
+        public SupportedOSPlatformAttribute(string platformName) : base(platformName)
+        {
+        }
     }
 
     /// <summary>
@@ -82,7 +86,9 @@ namespace System.Runtime.Versioning
     )]
     internal sealed class UnsupportedOSPlatformAttribute : OSPlatformAttribute
     {
-        public UnsupportedOSPlatformAttribute(string platformName) : base(platformName) { }
+        public UnsupportedOSPlatformAttribute(string platformName) : base(platformName)
+        {
+        }
     }
 }
 

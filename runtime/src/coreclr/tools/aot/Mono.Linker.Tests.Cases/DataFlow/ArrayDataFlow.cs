@@ -282,7 +282,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             arr[1].RequiresPublicFields(); // Warns
         }
 
-        static void TakesTypeByRef(ref Type type) { }
+        static void TakesTypeByRef(ref Type type)
+        {
+        }
 
         [ExpectedWarning("IL2062", nameof(DataFlowTypeExtensions.RequiresPublicFields))]
         static void TestArrayResetAfterCall()
@@ -297,7 +299,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             arr[0].RequiresPublicFields(); // Warns
         }
 
-        static void TakesTypesArray(Type[] types) { }
+        static void TakesTypesArray(Type[] types)
+        {
+        }
 
         // https://github.com/dotnet/linker/issues/2680
         // [ExpectedWarning ("IL2062", nameof (DataFlowTypeExtensions.RequiresPublicFields))]
@@ -680,7 +684,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 arr[0, 0].RequiresPublicFields(); // Warns
             }
 
-            static void TakesTypeByRef(ref Type type) { }
+            static void TakesTypeByRef(ref Type type)
+            {
+            }
 
             [ExpectedWarning(
                 "IL2062",
@@ -705,7 +711,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 arr[0, 0].RequiresPublicFields(); // Warns
             }
 
-            static void TakesTypesArray(Type[,] types) { }
+            static void TakesTypesArray(Type[,] types)
+            {
+            }
 
             // https://github.com/dotnet/linker/issues/2680
             [ExpectedWarning(
@@ -901,6 +909,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             return null;
         }
 
-        public class TestType { }
+        public class TestType
+        {
+        }
     }
 }

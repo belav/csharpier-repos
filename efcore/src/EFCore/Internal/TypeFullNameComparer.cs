@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 /// </summary>
 public sealed class TypeFullNameComparer : IComparer<Type>, IEqualityComparer<Type>
 {
-    private TypeFullNameComparer() { }
+    private TypeFullNameComparer()
+    {
+    }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.

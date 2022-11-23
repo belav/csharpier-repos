@@ -24,7 +24,9 @@ namespace Castle.DynamicProxy.Contributors
 
     internal class WrappedClassMembersCollector : ClassMembersCollector
     {
-        public WrappedClassMembersCollector(Type type) : base(type) { }
+        public WrappedClassMembersCollector(Type type) : base(type)
+        {
+        }
 
         public override void CollectMembersToProxy(
             IProxyGenerationHook hook,

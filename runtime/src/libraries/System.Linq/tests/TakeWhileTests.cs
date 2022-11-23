@@ -129,7 +129,9 @@ namespace System.Linq.Tests
             using (var en = taken.GetEnumerator())
                 Assert.Throws<OverflowException>(() =>
                 {
-                    while (en.MoveNext()) { }
+                    while (en.MoveNext())
+                    {
+                    }
                 });
         }
 

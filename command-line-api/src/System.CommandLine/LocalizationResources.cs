@@ -23,7 +23,9 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalizationResources"/> class.
         /// </summary>
-        protected LocalizationResources() { }
+        protected LocalizationResources()
+        {
+        }
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Command &apos;{0}&apos; expects a single argument but {1} were provided.

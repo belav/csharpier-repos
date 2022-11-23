@@ -80,7 +80,9 @@ namespace System.Net.Http
                     .ConfigureAwait(false);
                 return ret;
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 cts?.Dispose();

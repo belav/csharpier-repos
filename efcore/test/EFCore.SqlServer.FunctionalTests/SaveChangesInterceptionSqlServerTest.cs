@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInterceptionTestBase
 {
     protected SaveChangesInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(false, false, false)]
@@ -189,7 +191,9 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
             IClassFixture<SaveChangesInterceptionSqlServerTest.InterceptionSqlServerFixture>
     {
         public SaveChangesInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
@@ -205,7 +209,9 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
     {
         public SaveChangesInterceptionWithDiagnosticsSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        ) : base(fixture)
+        {
+        }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {

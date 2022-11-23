@@ -48,30 +48,46 @@ class TestClass
                                             //							Console.WriteLine("Exception not thrown.");
                                             //  							iExitCode = 1;
                                         }
-                                        catch (DivideByZeroException) { }
+                                        catch (DivideByZeroException)
+                                        {
+                                        }
                                         finally
                                         {
                                             double[] s = new double[1];
                                         }
                                     }
-                                    catch (DivideByZeroException) { }
+                                    catch (DivideByZeroException)
+                                    {
+                                    }
                                 }
-                                catch (DivideByZeroException) { }
+                                catch (DivideByZeroException)
+                                {
+                                }
                                 finally
                                 {
                                     Console.WriteLine("Somewhere in a finally");
                                     float[] j = new float[99];
                                 }
                             }
-                            catch (DivideByZeroException) { }
+                            catch (DivideByZeroException)
+                            {
+                            }
                         }
-                        catch (DivideByZeroException) { }
+                        catch (DivideByZeroException)
+                        {
+                        }
                     }
-                    catch (DivideByZeroException) { }
+                    catch (DivideByZeroException)
+                    {
+                    }
                 }
-                catch (DivideByZeroException) { }
+                catch (DivideByZeroException)
+                {
+                }
             }
-            catch (DivideByZeroException) { }
+            catch (DivideByZeroException)
+            {
+            }
             catch (SecurityException)
             {
                 caught++;
@@ -84,7 +100,9 @@ class TestClass
                 {
                     Console.WriteLine("Something new");
                 }
-                catch (DivideByZeroException) { }
+                catch (DivideByZeroException)
+                {
+                }
                 finally
                 {
                     Console.WriteLine("Is this ever reached?");

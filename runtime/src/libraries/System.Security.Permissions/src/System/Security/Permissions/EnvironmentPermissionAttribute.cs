@@ -14,7 +14,8 @@ namespace System.Security.Permissions
     public sealed partial class EnvironmentPermissionAttribute : CodeAccessSecurityAttribute
     {
         public EnvironmentPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        {
+        }
 
         public string All { get; set; }
         public string Read { get; set; }

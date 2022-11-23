@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class AsyncKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public AsyncKeywordRecommender()
-            : base(SyntaxKind.AsyncKeyword, isValidInPreprocessorContext: false) { }
+            : base(SyntaxKind.AsyncKeyword, isValidInPreprocessorContext: false)
+        {
+        }
 
         private static readonly ISet<SyntaxKind> s_validLocalFunctionModifiers =
             new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)

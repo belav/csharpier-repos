@@ -82,7 +82,9 @@ namespace System.Globalization
 
         public override CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.LunarCalendar;
 
-        public HijriCalendar() { }
+        public HijriCalendar()
+        {
+        }
 
         internal override CalendarId ID => CalendarId.HIJRI;
 

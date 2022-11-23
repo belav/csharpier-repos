@@ -161,7 +161,9 @@ namespace System.Drawing.Imaging
                     return _managed;
                 }
 
-                public void Free() { }
+                public void Free()
+                {
+                }
             }
         }
 #endif

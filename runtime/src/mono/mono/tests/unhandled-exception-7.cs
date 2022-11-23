@@ -4,7 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.Remoting.Messaging;
 
-class CustomException : Exception { }
+class CustomException : Exception
+{
+}
 
 class CrossDomain : MarshalByRefObject
 {
@@ -33,14 +35,16 @@ class Driver
     static void Main(string[] args)
     {
         if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
-            AppDomain.CurrentDomain.UnhandledException += (s, e) => { };
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => {
+            };
 
         ManualResetEvent mre = new ManualResetEvent(false);
 
         var ad = AppDomain.CreateDomain("ad");
 
         if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
-            ad.UnhandledException += (s, e) => { };
+            ad.UnhandledException += (s, e) => {
+            };
 
         var cd = (CrossDomain)
             ad.CreateInstanceAndUnwrap(typeof(CrossDomain).Assembly.FullName, "CrossDomain");

@@ -46,7 +46,9 @@ namespace System.IO.Tests
         public void ReadOnlyThrows()
         {
             string fileName = GetTestFilePath();
-            using (FileStream fs = new FileStream(fileName, FileMode.Create)) { }
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            {
+            }
 
             using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {

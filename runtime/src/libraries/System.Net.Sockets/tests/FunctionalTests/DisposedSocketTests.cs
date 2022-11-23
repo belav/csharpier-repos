@@ -31,7 +31,9 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        private static void TheAsyncCallback(IAsyncResult ar) { }
+        private static void TheAsyncCallback(IAsyncResult ar)
+        {
+        }
 
         [Fact]
         public void Available_Throws_ObjectDisposed()

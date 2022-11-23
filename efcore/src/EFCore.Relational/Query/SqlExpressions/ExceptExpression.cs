@@ -26,7 +26,9 @@ public class ExceptExpression : SetOperationBase
         SelectExpression source1,
         SelectExpression source2,
         bool distinct
-    ) : this(alias, source1, source2, distinct, annotations: null) { }
+    ) : this(alias, source1, source2, distinct, annotations: null)
+    {
+    }
 
     private ExceptExpression(
         string alias,
@@ -34,7 +36,9 @@ public class ExceptExpression : SetOperationBase
         SelectExpression source2,
         bool distinct,
         IEnumerable<IAnnotation>? annotations
-    ) : base(alias, source1, source2, distinct, annotations) { }
+    ) : base(alias, source1, source2, distinct, annotations)
+    {
+    }
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)

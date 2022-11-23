@@ -17,7 +17,9 @@ namespace System.Net.Http.Functional.Tests
     {
         protected abstract bool SupportsIdna { get; }
 
-        public IdnaProtocolTests(ITestOutputHelper output) : base(output) { }
+        public IdnaProtocolTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [MemberData(nameof(InternationalHostNames))]

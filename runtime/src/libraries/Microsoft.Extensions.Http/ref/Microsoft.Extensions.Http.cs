@@ -420,12 +420,16 @@ namespace Microsoft.Extensions.Http
 {
     public partial class HttpClientFactoryOptions
     {
-        public HttpClientFactoryOptions() { }
+        public HttpClientFactoryOptions()
+        {
+        }
 
         public System.TimeSpan HandlerLifetime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IList<System.Action<System.Net.Http.HttpClient>> HttpClientActions
         {
@@ -442,20 +446,26 @@ namespace Microsoft.Extensions.Http
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool SuppressHandlerScope
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public abstract partial class HttpMessageHandlerBuilder
     {
-        protected HttpMessageHandlerBuilder() { }
+        protected HttpMessageHandlerBuilder()
+        {
+        }
 
         public abstract System.Collections.Generic.IList<System.Net.Http.DelegatingHandler> AdditionalHandlers { get; }
 
@@ -500,12 +510,16 @@ namespace Microsoft.Extensions.Http.Logging
 {
     public partial class LoggingHttpMessageHandler : System.Net.Http.DelegatingHandler
     {
-        public LoggingHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger) { }
+        public LoggingHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger)
+        {
+        }
 
         public LoggingHttpMessageHandler(
             Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Http.HttpClientFactoryOptions options
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.DebuggerStepThroughAttribute]
         protected override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
@@ -519,12 +533,16 @@ namespace Microsoft.Extensions.Http.Logging
 
     public partial class LoggingScopeHttpMessageHandler : System.Net.Http.DelegatingHandler
     {
-        public LoggingScopeHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger) { }
+        public LoggingScopeHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger)
+        {
+        }
 
         public LoggingScopeHttpMessageHandler(
             Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Http.HttpClientFactoryOptions options
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.DebuggerStepThroughAttribute]
         protected override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(

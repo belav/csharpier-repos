@@ -12,7 +12,9 @@ class Tests
     static int loops = 20;
     static int threads = 100;
 
-    static void Empty() { }
+    static void Empty()
+    {
+    }
 
     static void Create()
     {

@@ -34,7 +34,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         public AccessRule(string identity, T rights, AccessControlType type)
             : this(
@@ -44,7 +46,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 type
-            ) { }
+            )
+        {
+        }
 
         //
         // Constructor for creating access rules for folder objects
@@ -56,7 +60,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, type) { }
+        ) : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, type)
+        {
+        }
 
         public AccessRule(
             string identity,
@@ -72,7 +78,9 @@ namespace System.Security.AccessControl
                 inheritanceFlags,
                 propagationFlags,
                 type
-            ) { }
+            )
+        {
+        }
 
         //
         // Internal constructor to be called by public constructors
@@ -86,7 +94,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
+        {
+        }
 
         #endregion
 
@@ -104,7 +114,9 @@ namespace System.Security.AccessControl
         #region Constructors
 
         public AuditRule(IdentityReference identity, T rights, AuditFlags flags)
-            : this(identity, rights, InheritanceFlags.None, PropagationFlags.None, flags) { }
+            : this(identity, rights, InheritanceFlags.None, PropagationFlags.None, flags)
+        {
+        }
 
         public AuditRule(
             IdentityReference identity,
@@ -113,7 +125,8 @@ namespace System.Security.AccessControl
             PropagationFlags propagationFlags,
             AuditFlags flags
         ) : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, flags)
-        { }
+        {
+        }
 
         public AuditRule(string identity, T rights, AuditFlags flags)
             : this(
@@ -122,7 +135,9 @@ namespace System.Security.AccessControl
                 InheritanceFlags.None,
                 PropagationFlags.None,
                 flags
-            ) { }
+            )
+        {
+        }
 
         public AuditRule(
             string identity,
@@ -138,7 +153,9 @@ namespace System.Security.AccessControl
                 inheritanceFlags,
                 propagationFlags,
                 flags
-            ) { }
+            )
+        {
+        }
 
         internal AuditRule(
             IdentityReference identity,
@@ -147,7 +164,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
+        {
+        }
 
         #endregion
 
@@ -165,14 +184,18 @@ namespace System.Security.AccessControl
         #region Constructors
 
         protected ObjectSecurity(bool isContainer, ResourceType resourceType)
-            : base(isContainer, resourceType, null, null) { }
+            : base(isContainer, resourceType, null, null)
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
             ResourceType resourceType,
             string? name,
             AccessControlSections includeSections
-        ) : base(isContainer, resourceType, name, includeSections, null, null) { }
+        ) : base(isContainer, resourceType, name, includeSections, null, null)
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -189,14 +212,18 @@ namespace System.Security.AccessControl
                 includeSections,
                 exceptionFromErrorCode,
                 exceptionContext
-            ) { }
+            )
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
             ResourceType resourceType,
             SafeHandle? safeHandle,
             AccessControlSections includeSections
-        ) : base(isContainer, resourceType, safeHandle, includeSections, null, null) { }
+        ) : base(isContainer, resourceType, safeHandle, includeSections, null, null)
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -213,7 +240,9 @@ namespace System.Security.AccessControl
                 includeSections,
                 exceptionFromErrorCode,
                 exceptionContext
-            ) { }
+            )
+        {
+        }
 
         #endregion
         #region Factories

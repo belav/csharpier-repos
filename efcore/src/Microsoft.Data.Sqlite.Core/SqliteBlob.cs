@@ -43,7 +43,9 @@ namespace Microsoft.Data.Sqlite
                 columnName,
                 rowid,
                 readOnly
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteBlob" /> class.
@@ -345,7 +347,9 @@ namespace Microsoft.Data.Sqlite
         ///     Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
         ///     Does nothing.
         /// </summary>
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         /// <summary>
         ///     Sets the length of the current stream. This is not supported by sqlite blobs.

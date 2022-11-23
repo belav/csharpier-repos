@@ -36,7 +36,9 @@ namespace System.Threading
         public static CdsSyncEtwBCLProvider Log = new CdsSyncEtwBCLProvider();
 
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
-        private CdsSyncEtwBCLProvider() { }
+        private CdsSyncEtwBCLProvider()
+        {
+        }
 
         /// <summary>Enabled for all keywords.</summary>
         private const EventKeywords ALL_KEYWORDS = (EventKeywords)(-1);

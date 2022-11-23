@@ -40,7 +40,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="filterUIHint">The name of the UI control.</param>
         public FilterUIHintAttribute(string filterUIHint)
-            : this(filterUIHint, null, Array.Empty<object>()) { }
+            : this(filterUIHint, null, Array.Empty<object>())
+        {
+        }
 
         /// <summary>
         /// Constructor that accepts both the name of the control as well as the
@@ -50,7 +52,9 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="presentationLayer">The name of the presentation layer that
         /// supports this control</param>
         public FilterUIHintAttribute(string filterUIHint, string? presentationLayer)
-            : this(filterUIHint, presentationLayer, Array.Empty<object>()) { }
+            : this(filterUIHint, presentationLayer, Array.Empty<object>())
+        {
+        }
 
         /// <summary>
         /// Full constructor that accepts the name of the control, presentation layer,

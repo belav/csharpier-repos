@@ -10,7 +10,9 @@ namespace System.Transactions.DtcProxyShim;
 internal sealed class VoterNotifyShim : NotificationShimBase, ITransactionVoterNotifyAsync2
 {
     internal VoterNotifyShim(DtcProxyShimFactory shimFactory, object enlistmentIdentifier)
-        : base(shimFactory, enlistmentIdentifier) { }
+        : base(shimFactory, enlistmentIdentifier)
+    {
+    }
 
     public void VoteRequest()
     {

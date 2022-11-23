@@ -743,7 +743,9 @@ public class ClientHandlerTests
         void IHttpApplication<TestHostingContext>.DisposeContext(
             TestHostingContext context,
             Exception exception
-        ) { }
+        )
+        {
+        }
 
         internal override Task ProcessRequestAsync(object context)
         {
@@ -794,7 +796,9 @@ public class ClientHandlerTests
         void IHttpApplication<TestHostingContext>.DisposeContext(
             TestHostingContext context,
             Exception exception
-        ) { }
+        )
+        {
+        }
 
         internal override Task ProcessRequestAsync(object context)
         {
@@ -854,7 +858,9 @@ public class ClientHandlerTests
 
         class NoopDispoasble : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 

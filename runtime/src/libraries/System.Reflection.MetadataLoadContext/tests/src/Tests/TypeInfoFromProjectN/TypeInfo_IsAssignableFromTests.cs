@@ -647,60 +647,112 @@ namespace System.Reflection.Tests
     } //end class
 
     //Metadata for Reflection
-    public interface I1 { }
+    public interface I1
+    {
+    }
 
-    public interface I2 { }
+    public interface I2
+    {
+    }
 
-    public struct S : I1 { }
+    public struct S : I1
+    {
+    }
 
-    public class B : I1, I2 { }
+    public class B : I1, I2
+    {
+    }
 
-    public class D : B { }
+    public class D : B
+    {
+    }
 
-    public class Gen<T> : D { }
+    public class Gen<T> : D
+    {
+    }
 
-    public class I<T> { }
+    public class I<T>
+    {
+    }
 
-    public class G<T> : I<T> { }
+    public class G<T> : I<T>
+    {
+    }
 
-    public class G2<T> : G<T> { }
+    public class G2<T> : G<T>
+    {
+    }
 
-    public class Gen2<T> where T : Gen<T>, I1, I2 { }
+    public class Gen2<T> where T : Gen<T>, I1, I2
+    {
+    }
 
-    public class Gen3<T> where T : D { }
+    public class Gen3<T> where T : D
+    {
+    }
 
-    public class Gen4<T> where T : struct { }
+    public class Gen4<T> where T : struct
+    {
+    }
 
-    public class Gen5<T, U> where T : U { }
+    public class Gen5<T, U> where T : U
+    {
+    }
 
-    public class GBase<T> { }
+    public class GBase<T>
+    {
+    }
 
-    public class GDerived<T> : GBase<T> { }
+    public class GDerived<T> : GBase<T>
+    {
+    }
 
     namespace Case500
     {
-        public abstract class A { }
+        public abstract class A
+        {
+        }
 
-        public abstract class B : A { }
+        public abstract class B : A
+        {
+        }
 
-        public class C : B { }
+        public class C : B
+        {
+        }
     }
 
-    public class G10<T> where T : I1 { }
+    public class G10<T> where T : I1
+    {
+    }
 
-    public enum Eint : int { }
+    public enum Eint : int
+    {
+    }
 
-    public enum Euint : uint { }
+    public enum Euint : uint
+    {
+    }
 
-    public enum Eshort : short { }
+    public enum Eshort : short
+    {
+    }
 
-    public enum Eushort : ushort { }
+    public enum Eushort : ushort
+    {
+    }
 
-    public interface IContraVariant<in T> { }
+    public interface IContraVariant<in T>
+    {
+    }
 
-    public interface ICoVariant<out T> { }
+    public interface ICoVariant<out T>
+    {
+    }
 
     public class G5<T, U>
         where T : U
-        where U : class, I1 { }
+        where U : class, I1
+    {
+    }
 }

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestProjectManagementService() { }
+        public TestProjectManagementService()
+        {
+        }
 
         public IList<string> GetFolders(ProjectId projectId, Workspace workspace) => null;
 

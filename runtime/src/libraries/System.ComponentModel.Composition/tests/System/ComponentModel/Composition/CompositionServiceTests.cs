@@ -8,9 +8,13 @@ namespace System.ComponentModel.Composition
 {
     public class CompositionServiceTests
     {
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
-        public class CFoo : IFoo { }
+        public class CFoo : IFoo
+        {
+        }
 
         public class FooImporter
         {

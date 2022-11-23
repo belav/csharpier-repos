@@ -11,7 +11,9 @@ namespace System.ServiceModel.Syndication
     {
         private ExtensibleSyndicationObject _extensions;
 
-        internal CategoriesDocument() { }
+        internal CategoriesDocument()
+        {
+        }
 
         public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
             _extensions.AttributeExtensions;

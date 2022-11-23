@@ -133,7 +133,9 @@ namespace System.Linq.Expressions.Interpreter
         internal readonly bool _hasResult;
         internal readonly bool _hasValue;
 
-        internal BranchInstruction() : this(false, false) { }
+        internal BranchInstruction() : this(false, false)
+        {
+        }
 
         public BranchInstruction(bool hasResult, bool hasValue)
         {
@@ -468,7 +470,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         private TryFaultHandler? _tryHandler;
 
-        internal EnterTryFaultInstruction(int targetIndex) : base(targetIndex) { }
+        internal EnterTryFaultInstruction(int targetIndex) : base(targetIndex)
+        {
+        }
 
         public override string InstructionName => "EnterTryFault";
         public override int ProducedContinuations => 1;
@@ -555,7 +559,9 @@ namespace System.Linq.Expressions.Interpreter
             CacheSize
         ];
 
-        private EnterFinallyInstruction(int labelIndex) : base(labelIndex) { }
+        private EnterFinallyInstruction(int labelIndex) : base(labelIndex)
+        {
+        }
 
         public override string InstructionName => "EnterFinally";
         public override int ProducedStack => 2;
@@ -593,7 +599,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         internal static readonly Instruction Instance = new LeaveFinallyInstruction();
 
-        private LeaveFinallyInstruction() { }
+        private LeaveFinallyInstruction()
+        {
+        }
 
         public override int ConsumedStack => 2;
         public override string InstructionName => "LeaveFinally";
@@ -619,7 +627,9 @@ namespace System.Linq.Expressions.Interpreter
             CacheSize
         ];
 
-        private EnterFaultInstruction(int labelIndex) : base(labelIndex) { }
+        private EnterFaultInstruction(int labelIndex) : base(labelIndex)
+        {
+        }
 
         public override string InstructionName => "EnterFault";
         public override int ProducedStack => 2;
@@ -649,7 +659,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         internal static readonly Instruction Instance = new LeaveFaultInstruction();
 
-        private LeaveFaultInstruction() { }
+        private LeaveFaultInstruction()
+        {
+        }
 
         public override int ConsumedStack => 2;
         public override int ConsumedContinuations => 1;
@@ -671,7 +683,9 @@ namespace System.Linq.Expressions.Interpreter
         internal static readonly EnterExceptionFilterInstruction Instance =
             new EnterExceptionFilterInstruction();
 
-        private EnterExceptionFilterInstruction() { }
+        private EnterExceptionFilterInstruction()
+        {
+        }
 
         public override string InstructionName => "EnterExceptionFilter";
 
@@ -690,7 +704,9 @@ namespace System.Linq.Expressions.Interpreter
         internal static readonly LeaveExceptionFilterInstruction Instance =
             new LeaveExceptionFilterInstruction();
 
-        private LeaveExceptionFilterInstruction() { }
+        private LeaveExceptionFilterInstruction()
+        {
+        }
 
         public override string InstructionName => "LeaveExceptionFilter";
 

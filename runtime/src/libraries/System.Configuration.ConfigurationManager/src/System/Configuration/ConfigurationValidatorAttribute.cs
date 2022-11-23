@@ -10,7 +10,9 @@ namespace System.Configuration
     {
         internal Type _declaringType;
 
-        protected ConfigurationValidatorAttribute() { }
+        protected ConfigurationValidatorAttribute()
+        {
+        }
 
         public ConfigurationValidatorAttribute(Type validator)
         {

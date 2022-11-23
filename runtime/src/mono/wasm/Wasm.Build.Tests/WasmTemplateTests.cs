@@ -19,7 +19,9 @@ namespace Wasm.Build.Tests
         public WasmTemplateTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         private void UpdateProgramCS()
         {

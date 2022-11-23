@@ -1397,7 +1397,9 @@ public class AdaptiveCapacityDictionaryTests
         public bool this[string key]
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
     }
 

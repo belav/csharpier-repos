@@ -8,6 +8,8 @@ namespace Microsoft.Web.FxCop
     public abstract class IntrospectionRule : BaseIntrospectionRule
     {
         protected IntrospectionRule(string name)
-            : base(name, "Microsoft.Web.FxCop.Rules", typeof(IntrospectionRule).Assembly) { }
+            : base(name, "Microsoft.Web.FxCop.Rules", typeof(IntrospectionRule).Assembly)
+        {
+        }
     }
 }

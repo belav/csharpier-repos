@@ -31,7 +31,9 @@ namespace System.Xml.Schema
             while (
                 reader.NodeType != XmlNodeType.Element
                 && await reader.ReadAsync().ConfigureAwait(false)
-            ) { }
+            )
+            {
+            }
 
             _markupDepth = int.MaxValue;
             _schemaXmlDepth = reader.Depth;

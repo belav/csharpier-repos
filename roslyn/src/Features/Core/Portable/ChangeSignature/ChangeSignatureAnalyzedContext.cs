@@ -6,7 +6,9 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.ChangeSignature
 {
-    internal abstract class ChangeSignatureAnalyzedContext { }
+    internal abstract class ChangeSignatureAnalyzedContext
+    {
+    }
 
     internal sealed class ChangeSignatureAnalysisSucceededContext : ChangeSignatureAnalyzedContext
     {

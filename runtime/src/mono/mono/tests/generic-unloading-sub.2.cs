@@ -1,6 +1,8 @@
 using System;
 
-public class Gen<A, B, C> { }
+public class Gen<A, B, C>
+{
+}
 
 public class main
 {

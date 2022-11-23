@@ -33,7 +33,9 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
     protected UpdateAndSelectSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     public override ResultSetMapping AppendInsertOperation(

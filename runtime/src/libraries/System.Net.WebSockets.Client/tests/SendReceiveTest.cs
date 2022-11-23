@@ -14,35 +14,45 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerMemorySendReceiveTest : MemorySendReceiveTest
     {
-        public InvokerMemorySendReceiveTest(ITestOutputHelper output) : base(output) { }
+        public InvokerMemorySendReceiveTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public sealed class HttpClientMemorySendReceiveTest : MemorySendReceiveTest
     {
-        public HttpClientMemorySendReceiveTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientMemorySendReceiveTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseHttpClient => true;
     }
 
     public sealed class InvokerArraySegmentSendReceiveTest : ArraySegmentSendReceiveTest
     {
-        public InvokerArraySegmentSendReceiveTest(ITestOutputHelper output) : base(output) { }
+        public InvokerArraySegmentSendReceiveTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public sealed class HttpClientArraySegmentSendReceiveTest : ArraySegmentSendReceiveTest
     {
-        public HttpClientArraySegmentSendReceiveTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientArraySegmentSendReceiveTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseHttpClient => true;
     }
 
     public class MemorySendReceiveTest : SendReceiveTest
     {
-        public MemorySendReceiveTest(ITestOutputHelper output) : base(output) { }
+        public MemorySendReceiveTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override async Task<WebSocketReceiveResult> ReceiveAsync(
             WebSocket ws,
@@ -82,7 +92,9 @@ namespace System.Net.WebSockets.Client.Tests
 
     public class ArraySegmentSendReceiveTest : SendReceiveTest
     {
-        public ArraySegmentSendReceiveTest(ITestOutputHelper output) : base(output) { }
+        public ArraySegmentSendReceiveTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override Task<WebSocketReceiveResult> ReceiveAsync(
             WebSocket ws,
@@ -114,7 +126,9 @@ namespace System.Net.WebSockets.Client.Tests
             CancellationToken cancellationToken
         );
 
-        public SendReceiveTest(ITestOutputHelper output) : base(output) { }
+        public SendReceiveTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [OuterLoop(
             "Uses external servers",

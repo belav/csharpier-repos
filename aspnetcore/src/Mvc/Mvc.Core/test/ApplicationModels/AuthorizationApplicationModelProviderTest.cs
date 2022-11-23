@@ -247,27 +247,37 @@ public class AuthorizationApplicationModelProviderTest
     private class BaseController
     {
         [Authorize(Policy = "Base")]
-        public virtual void Authorize() { }
+        public virtual void Authorize()
+        {
+        }
     }
 
     private class DerivedController : BaseController
     {
         [Authorize(Policy = "Derived")]
-        public override void Authorize() { }
+        public override void Authorize()
+        {
+        }
     }
 
     [Authorize]
-    public class AccountController { }
+    public class AccountController
+    {
+    }
 
     public class NoAuthController
     {
-        public void NoAuthAction() { }
+        public void NoAuthAction()
+        {
+        }
     }
 
     [AllowAnonymous]
     public class AnonymousController
     {
         [AllowAnonymous]
-        public void SomeAction() { }
+        public void SomeAction()
+        {
+        }
     }
 }

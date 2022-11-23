@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
                 globalOptions.Service,
                 visibilityTracker: null,
                 asyncListenerProvider.GetListener(FeatureAttribute.Classification)
-            ) { }
+            )
+        {
+        }
 
         protected VSTypeScriptAsynchronousTaggerProvider(
             IThreadingContext threadingContext,
@@ -40,6 +42,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
                 globalOptions.Service,
                 visibilityTracker,
                 asyncListenerProvider.GetListener(FeatureAttribute.Classification)
-            ) { }
+            )
+        {
+        }
     }
 }

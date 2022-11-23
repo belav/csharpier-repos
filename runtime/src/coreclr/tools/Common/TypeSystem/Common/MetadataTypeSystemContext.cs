@@ -43,9 +43,13 @@ namespace Internal.TypeSystem
 
         private MetadataType[] _wellKnownTypes;
 
-        public MetadataTypeSystemContext() { }
+        public MetadataTypeSystemContext()
+        {
+        }
 
-        public MetadataTypeSystemContext(TargetDetails details) : base(details) { }
+        public MetadataTypeSystemContext(TargetDetails details) : base(details)
+        {
+        }
 
         public virtual void SetSystemModule(ModuleDesc systemModule)
         {

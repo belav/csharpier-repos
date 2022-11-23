@@ -25,5 +25,7 @@ public sealed class ProtectedSessionStorage : ProtectedBrowserStorage
     public ProtectedSessionStorage(
         IJSRuntime jsRuntime,
         IDataProtectionProvider dataProtectionProvider
-    ) : base("sessionStorage", jsRuntime, dataProtectionProvider) { }
+    ) : base("sessionStorage", jsRuntime, dataProtectionProvider)
+    {
+    }
 }

@@ -44,7 +44,9 @@ Test4
             b = C.teststr1;
             throw new Exception();
         }
-        catch (System.Exception) { }
+        catch (System.Exception)
+        {
+        }
 
         if ((object)teststr1 != (object)b)
         {
@@ -89,7 +91,9 @@ Test4
         {
             throw new Exception();
         }
-        catch (System.Exception) { }
+        catch (System.Exception)
+        {
+        }
         finally
         {
             teststr2[2] = "array \u47BBelement 2";
@@ -113,7 +117,9 @@ Test4
                 passed = false;
                 Console.WriteLine("FAILED, (object) teststr3 == (object)C.teststr3() is expected");
             }
-            try { }
+            try
+            {
+            }
             finally
             {
                 if ((object)teststr4 != (object)C.teststr4)
@@ -127,7 +133,9 @@ Test4
                 {
                     throw new Exception();
                 }
-                catch { }
+                catch
+                {
+                }
                 finally
                 {
                     teststr5 = String.Empty;
@@ -149,7 +157,9 @@ Test4
             b = GenC<string>.teststr1;
             throw new Exception();
         }
-        catch (System.Exception) { }
+        catch (System.Exception)
+        {
+        }
 
         if ((object)teststr1 != (object)b)
         {
@@ -197,7 +207,9 @@ Test4
         {
             throw new Exception();
         }
-        catch (System.Exception) { }
+        catch (System.Exception)
+        {
+        }
         finally
         {
             teststr2[2] = "GenC array \u47BBelement 2";
@@ -225,7 +237,9 @@ Test4
                     "FAILED, (object) teststr3 == (object)GenC<string>.teststr3<int>() is expected"
                 );
             }
-            try { }
+            try
+            {
+            }
             finally
             {
                 if ((object)testgenstr4 != (object)GenC<string>.teststr4)
@@ -239,7 +253,9 @@ Test4
                 {
                     throw new Exception();
                 }
-                catch { }
+                catch
+                {
+                }
                 finally
                 {
                     teststr5 = String.Empty;

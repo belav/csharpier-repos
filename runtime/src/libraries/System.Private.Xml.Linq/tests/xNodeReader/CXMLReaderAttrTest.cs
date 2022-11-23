@@ -2068,7 +2068,9 @@ namespace CoreXml.Test.XLinq
                         DataReader.Read();
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (XmlException) { }
+                    catch (XmlException)
+                    {
+                    }
                 }
 
                 //[Variation("Redefine namespace attached to xmlns prefix")]
@@ -2081,7 +2083,9 @@ namespace CoreXml.Test.XLinq
                         DataReader.Read();
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (XmlException) { }
+                    catch (XmlException)
+                    {
+                    }
                 }
             }
         }

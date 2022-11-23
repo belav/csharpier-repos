@@ -13,5 +13,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
         "Microsoft.CodeAnalysis.Tools.Tests.XUnit.MSBuildTheoryDiscoverer",
         "dotnet-format.UnitTests"
     )]
-    public sealed class MSBuildTheoryAttribute : TheoryAttribute { }
+    public sealed class MSBuildTheoryAttribute : TheoryAttribute
+    {
+    }
 }

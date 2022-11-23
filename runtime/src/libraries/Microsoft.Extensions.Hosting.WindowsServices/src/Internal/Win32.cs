@@ -43,7 +43,9 @@ namespace Microsoft.Extensions.Hosting.WindowsServices.Internal
                     } while (Interop.Kernel32.Process32Next(snapshotHandle, &procEntry));
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             finally
             {
                 Interop.Kernel32.CloseHandle(snapshotHandle);

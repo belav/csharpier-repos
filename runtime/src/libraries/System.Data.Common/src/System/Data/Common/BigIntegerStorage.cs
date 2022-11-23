@@ -13,7 +13,9 @@ namespace System.Data.Common
         private BigInteger[] _values = default!; // Late-initialized
 
         internal BigIntegerStorage(DataColumn column)
-            : base(column, typeof(BigInteger), BigInteger.Zero, StorageType.BigInteger) { }
+            : base(column, typeof(BigInteger), BigInteger.Zero, StorageType.BigInteger)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

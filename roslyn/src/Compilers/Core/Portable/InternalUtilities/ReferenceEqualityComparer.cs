@@ -14,7 +14,9 @@ namespace Roslyn.Utilities
     {
         public static readonly ReferenceEqualityComparer Instance = new();
 
-        private ReferenceEqualityComparer() { }
+        private ReferenceEqualityComparer()
+        {
+        }
 
         bool IEqualityComparer<object?>.Equals(object? a, object? b)
         {

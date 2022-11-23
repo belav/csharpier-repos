@@ -79,7 +79,9 @@ namespace System.Net.Http.Headers
         }
 
         /// <summary>Used by the parser to create a new instance of this type.</summary>
-        internal MediaTypeHeaderValue() { }
+        internal MediaTypeHeaderValue()
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
         /// <param name="source">A <see cref="MediaTypeHeaderValue"/> object used to initialize the new instance.</param>
@@ -93,7 +95,9 @@ namespace System.Net.Http.Headers
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
         /// <param name="mediaType">The source represented as a string to initialize the new instance.</param>
-        public MediaTypeHeaderValue(string mediaType) : this(mediaType, charSet: null) { }
+        public MediaTypeHeaderValue(string mediaType) : this(mediaType, charSet: null)
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
         /// <param name="mediaType">The source represented as a string to initialize the new instance.</param>

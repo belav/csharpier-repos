@@ -15,5 +15,7 @@ namespace System.Web.Http.ValueProviders
         "CA1040:AvoidEmptyInterfaces",
         Justification = "Tagging interface is intentional to allow Linq TypeOf"
     )]
-    public interface IUriValueProviderFactory { }
+    public interface IUriValueProviderFactory
+    {
+    }
 }

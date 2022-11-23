@@ -13,7 +13,9 @@ public class SocketConnectionFactoryOptions
     /// <summary>
     /// Create a new instance.
     /// </summary>
-    public SocketConnectionFactoryOptions() { }
+    public SocketConnectionFactoryOptions()
+    {
+    }
 
     internal SocketConnectionFactoryOptions(SocketTransportOptions transportOptions)
     {

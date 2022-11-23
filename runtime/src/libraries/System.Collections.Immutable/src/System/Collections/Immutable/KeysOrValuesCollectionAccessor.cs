@@ -176,7 +176,9 @@ namespace System.Collections.Immutable
         /// Initializes a new instance of the <see cref="KeysCollectionAccessor{TKey, TValue}"/> class.
         /// </summary>
         internal KeysCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionary)
-            : base(dictionary, dictionary.Keys) { }
+            : base(dictionary, dictionary.Keys)
+        {
+        }
 
         /// <summary>
         /// See <see cref="ICollection{T}"/>
@@ -197,7 +199,9 @@ namespace System.Collections.Immutable
         /// Initializes a new instance of the <see cref="ValuesCollectionAccessor{TKey, TValue}"/> class.
         /// </summary>
         internal ValuesCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionary)
-            : base(dictionary, dictionary.Values) { }
+            : base(dictionary, dictionary.Values)
+        {
+        }
 
         /// <summary>
         /// See <see cref="ICollection{T}"/>

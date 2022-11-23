@@ -9,7 +9,9 @@ public class FakeDbCommand : DbCommand
 {
     private readonly FakeCommandExecutor _commandExecutor;
 
-    public FakeDbCommand() { }
+    public FakeDbCommand()
+    {
+    }
 
     public FakeDbCommand(FakeDbConnection connection, FakeCommandExecutor commandExecutor)
     {

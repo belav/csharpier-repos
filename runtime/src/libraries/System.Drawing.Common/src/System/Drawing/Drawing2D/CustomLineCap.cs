@@ -18,13 +18,19 @@ namespace System.Drawing.Drawing2D
         private bool _disposed;
 
         // For subclass creation
-        internal CustomLineCap() { }
+        internal CustomLineCap()
+        {
+        }
 
         public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath)
-            : this(fillPath, strokePath, LineCap.Flat) { }
+            : this(fillPath, strokePath, LineCap.Flat)
+        {
+        }
 
         public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath, LineCap baseCap)
-            : this(fillPath, strokePath, baseCap, 0) { }
+            : this(fillPath, strokePath, baseCap, 0)
+        {
+        }
 
         public CustomLineCap(
             GraphicsPath? fillPath,

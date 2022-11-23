@@ -14,9 +14,13 @@ namespace System.Web.WebPages.Scope
         private static readonly IDictionary<object, object> _innerDictionary =
             new ConcurrentDictionary<object, object>(ScopeStorageComparer.Instance);
 
-        public ApplicationScopeStorageDictionary() : this(new WebConfigScopeDictionary()) { }
+        public ApplicationScopeStorageDictionary() : this(new WebConfigScopeDictionary())
+        {
+        }
 
         public ApplicationScopeStorageDictionary(WebConfigScopeDictionary webConfigState)
-            : base(baseScope: webConfigState, backingStore: _innerDictionary) { }
+            : base(baseScope: webConfigState, backingStore: _innerDictionary)
+        {
+        }
     }
 }

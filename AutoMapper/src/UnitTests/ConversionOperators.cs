@@ -28,7 +28,9 @@ namespace AutoMapper.UnitTests
             public void Should_use_the_implicit_conversion_operator()
             {
                 var source = new Foo { Value = "Hello" };
-                var config = new MapperConfiguration(cfg => { });
+                var config = new MapperConfiguration(cfg =>
+                {
+                });
 
                 _bar = config.CreateMapper().Map<Foo, Bar>(source);
 
@@ -65,7 +67,9 @@ namespace AutoMapper.UnitTests
             {
                 var source = new Foo { Value = "Hello" };
 
-                var config = new MapperConfiguration(cfg => { });
+                var config = new MapperConfiguration(cfg =>
+                {
+                });
                 _bar = config.CreateMapper().Map<Foo, Bar>(source);
 
                 _bar.OtherValue.ShouldBe("Hello");
@@ -94,7 +98,9 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_use_the_explicit_conversion_operator()
             {
-                var config = new MapperConfiguration(cfg => { });
+                var config = new MapperConfiguration(cfg =>
+                {
+                });
                 _bar = config.CreateMapper().Map<Foo, Bar>(new Foo { Value = "Hello" });
                 _bar.OtherValue.ShouldBe("Hello");
             }
@@ -122,7 +128,9 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_use_the_explicit_conversion_operator()
             {
-                var config = new MapperConfiguration(cfg => { });
+                var config = new MapperConfiguration(cfg =>
+                {
+                });
                 _bar = config.CreateMapper().Map<Foo, Bar>(new Foo { Value = "Hello" });
                 _bar.OtherValue.ShouldBe("Hello");
             }

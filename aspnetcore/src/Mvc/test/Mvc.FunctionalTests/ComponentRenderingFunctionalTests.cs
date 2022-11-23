@@ -186,7 +186,9 @@ public class ComponentRenderingFunctionalTests
 
     // A simple delegating handler used in setting up test services so that we can configure
     // services that talk back to the TestServer using HttpClient.
-    private class LoopHttpHandler : DelegatingHandler { }
+    private class LoopHttpHandler : DelegatingHandler
+    {
+    }
 
     private HttpClient CreateClient(
         WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture

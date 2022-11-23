@@ -8,23 +8,37 @@ namespace System.IO
 {
     public partial class FileFormatException : System.FormatException
     {
-        public FileFormatException() { }
+        public FileFormatException()
+        {
+        }
 
-        public FileFormatException(string? message) { }
+        public FileFormatException(string? message)
+        {
+        }
 
-        public FileFormatException(string? message, System.Exception? innerException) { }
+        public FileFormatException(string? message, System.Exception? innerException)
+        {
+        }
 
-        public FileFormatException(System.Uri? sourceUri) { }
+        public FileFormatException(System.Uri? sourceUri)
+        {
+        }
 
-        public FileFormatException(System.Uri? sourceUri, System.Exception? innerException) { }
+        public FileFormatException(System.Uri? sourceUri, System.Exception? innerException)
+        {
+        }
 
-        public FileFormatException(System.Uri? sourceUri, string? message) { }
+        public FileFormatException(System.Uri? sourceUri, string? message)
+        {
+        }
 
         public FileFormatException(
             System.Uri? sourceUri,
             string? message,
             System.Exception? innerException
-        ) { }
+        )
+        {
+        }
 
         public System.Uri? SourceUri
         {
@@ -52,7 +66,9 @@ namespace System.IO.Packaging
 
     public abstract partial class Package : System.IDisposable
     {
-        protected Package(System.IO.FileAccess openFileAccess) { }
+        protected Package(System.IO.FileAccess openFileAccess)
+        {
+        }
 
         public System.IO.FileAccess FileOpenAccess
         {
@@ -63,7 +79,9 @@ namespace System.IO.Packaging
             get { throw null; }
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
         public System.IO.Packaging.PackagePart CreatePart(System.Uri partUri, string contentType)
         {
@@ -104,15 +122,23 @@ namespace System.IO.Packaging
             throw null;
         }
 
-        public void DeletePart(System.Uri partUri) { }
+        public void DeletePart(System.Uri partUri)
+        {
+        }
 
         protected abstract void DeletePartCore(System.Uri partUri);
 
-        public void DeleteRelationship(string id) { }
+        public void DeleteRelationship(string id)
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public void Flush() { }
+        public void Flush()
+        {
+        }
 
         protected abstract void FlushCore();
 
@@ -208,25 +234,33 @@ namespace System.IO.Packaging
             throw null;
         }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 
     public abstract partial class PackagePart
     {
-        protected PackagePart(System.IO.Packaging.Package package, System.Uri partUri) { }
+        protected PackagePart(System.IO.Packaging.Package package, System.Uri partUri)
+        {
+        }
 
         protected PackagePart(
             System.IO.Packaging.Package package,
             System.Uri partUri,
             string? contentType
-        ) { }
+        )
+        {
+        }
 
         protected PackagePart(
             System.IO.Packaging.Package package,
             System.Uri partUri,
             string? contentType,
             System.IO.Packaging.CompressionOption compressionOption
-        ) { }
+        )
+        {
+        }
 
         public System.IO.Packaging.CompressionOption CompressionOption
         {
@@ -264,7 +298,9 @@ namespace System.IO.Packaging
             throw null;
         }
 
-        public void DeleteRelationship(string id) { }
+        public void DeleteRelationship(string id)
+        {
+        }
 
         protected virtual string GetContentTypeCore()
         {
@@ -318,7 +354,9 @@ namespace System.IO.Packaging
         : System.Collections.Generic.IEnumerable<System.IO.Packaging.PackagePart>,
             System.Collections.IEnumerable
     {
-        internal PackagePartCollection() { }
+        internal PackagePartCollection()
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<System.IO.Packaging.PackagePart> GetEnumerator()
         {
@@ -338,7 +376,9 @@ namespace System.IO.Packaging
 
     public abstract partial class PackageProperties : System.IDisposable
     {
-        protected PackageProperties() { }
+        protected PackageProperties()
+        {
+        }
 
         public abstract string? Category { get; set; }
         public abstract string? ContentStatus { get; set; }
@@ -357,14 +397,20 @@ namespace System.IO.Packaging
         public abstract string? Title { get; set; }
         public abstract string? Version { get; set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
     }
 
     public partial class PackageRelationship
     {
-        internal PackageRelationship() { }
+        internal PackageRelationship()
+        {
+        }
 
         public string Id
         {
@@ -396,7 +442,9 @@ namespace System.IO.Packaging
         : System.Collections.Generic.IEnumerable<System.IO.Packaging.PackageRelationship>,
             System.Collections.IEnumerable
     {
-        internal PackageRelationshipCollection() { }
+        internal PackageRelationshipCollection()
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<System.IO.Packaging.PackageRelationship> GetEnumerator()
         {
@@ -415,7 +463,9 @@ namespace System.IO.Packaging
             System.Uri sourceUri,
             System.IO.Packaging.PackageRelationshipSelectorType selectorType,
             string selectionCriteria
-        ) { }
+        )
+        {
+        }
 
         public string SelectionCriteria
         {
@@ -499,7 +549,9 @@ namespace System.IO.Packaging
 
     public sealed partial class ZipPackage : System.IO.Packaging.Package
     {
-        internal ZipPackage() : base(default(System.IO.FileAccess)) { }
+        internal ZipPackage() : base(default(System.IO.FileAccess))
+        {
+        }
 
         protected override System.IO.Packaging.PackagePart CreatePartCore(
             System.Uri partUri,
@@ -510,11 +562,17 @@ namespace System.IO.Packaging
             throw null;
         }
 
-        protected override void DeletePartCore(System.Uri partUri) { }
+        protected override void DeletePartCore(System.Uri partUri)
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void FlushCore() { }
+        protected override void FlushCore()
+        {
+        }
 
         protected override System.IO.Packaging.PackagePart? GetPartCore(System.Uri partUri)
         {
@@ -530,7 +588,8 @@ namespace System.IO.Packaging
     public sealed partial class ZipPackagePart : System.IO.Packaging.PackagePart
     {
         internal ZipPackagePart() : base(default(System.IO.Packaging.Package), default(System.Uri))
-        { }
+        {
+        }
 
         protected override System.IO.Stream? GetStreamCore(
             System.IO.FileMode streamFileMode,

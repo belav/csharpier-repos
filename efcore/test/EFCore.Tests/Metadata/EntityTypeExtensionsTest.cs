@@ -171,7 +171,9 @@ public class EntityTypeExtensionsTest
 
     private static IMutableModel CreateModel() => new Model();
 
-    private class A<T> { }
+    private class A<T>
+    {
+    }
 
     private class SelfRef
     {
@@ -193,5 +195,7 @@ public class EntityTypeExtensionsTest
         public Guid AlternateId { get; set; }
     }
 
-    private class SpecialCustomer : Customer { }
+    private class SpecialCustomer : Customer
+    {
+    }
 }

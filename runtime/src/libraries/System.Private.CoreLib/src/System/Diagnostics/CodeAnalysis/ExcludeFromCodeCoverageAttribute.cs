@@ -16,7 +16,9 @@ namespace System.Diagnostics.CodeAnalysis
     )]
     public sealed class ExcludeFromCodeCoverageAttribute : Attribute
     {
-        public ExcludeFromCodeCoverageAttribute() { }
+        public ExcludeFromCodeCoverageAttribute()
+        {
+        }
 
         /// <summary>Gets or sets the justification for excluding the member from code coverage.</summary>
         public string? Justification { get; set; }

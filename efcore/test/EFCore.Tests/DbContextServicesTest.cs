@@ -429,9 +429,13 @@ namespace Microsoft.EntityFrameworkCore
 
             public bool BeginDelayedFixup() => false;
 
-            public void CompleteDelayedFixup() { }
+            public void CompleteDelayedFixup()
+            {
+            }
 
-            public void AbortDelayedFixup() { }
+            public void AbortDelayedFixup()
+            {
+            }
 
             public void NavigationReferenceChanged(
                 InternalEntityEntry entry,
@@ -627,7 +631,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly IServiceProvider _serviceProvider;
 
-            public EarlyLearningCenter() { }
+            public EarlyLearningCenter()
+            {
+            }
 
             public EarlyLearningCenter(IServiceProvider serviceProvider)
             {
@@ -660,7 +666,9 @@ namespace Microsoft.EntityFrameworkCore
         private class FakeEntityMaterializerSource : EntityMaterializerSource
         {
             public FakeEntityMaterializerSource(EntityMaterializerSourceDependencies dependencies)
-                : base(dependencies) { }
+                : base(dependencies)
+            {
+            }
         }
 
         private class FakeModelSource : IModelSource
@@ -1247,9 +1255,13 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private class SomeAppService { }
+        private class SomeAppService
+        {
+        }
 
-        private class SomeScopedAppService { }
+        private class SomeScopedAppService
+        {
+        }
 
         [ConditionalFact]
         public void Can_add_derived_context_with_options()
@@ -2065,7 +2077,9 @@ namespace Microsoft.EntityFrameworkCore
                 Assert
                     .Throws<ArgumentException>(
                         () =>
-                            serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(_ => { })
+                            serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(_ =>
+                            {
+                            })
                     )
                     .Message
             );
@@ -2076,7 +2090,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<ArgumentException>(
                         () =>
                             serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(
-                                (_, __) => { }
+                                (_, __) => {
+                                }
                             )
                     )
                     .Message
@@ -3164,7 +3179,9 @@ namespace Microsoft.EntityFrameworkCore
         private class CustomModelCustomizer : ModelCustomizer
         {
             public CustomModelCustomizer(ModelCustomizerDependencies dependencies)
-                : base(dependencies) { }
+                : base(dependencies)
+            {
+            }
         }
 
         private class CustomInMemoryValueGeneratorSelector : InMemoryValueGeneratorSelector
@@ -3172,7 +3189,9 @@ namespace Microsoft.EntityFrameworkCore
             public CustomInMemoryValueGeneratorSelector(
                 ValueGeneratorSelectorDependencies dependencies,
                 IInMemoryDatabase inMemoryDatabase
-            ) : base(dependencies, inMemoryDatabase) { }
+            ) : base(dependencies, inMemoryDatabase)
+            {
+            }
         }
 
         private class CustomInMemoryTableFactory : InMemoryTableFactory
@@ -3180,7 +3199,9 @@ namespace Microsoft.EntityFrameworkCore
             public CustomInMemoryTableFactory(
                 ILoggingOptions loggingOptions,
                 IInMemorySingletonOptions options
-            ) : base(loggingOptions, options) { }
+            ) : base(loggingOptions, options)
+            {
+            }
         }
 
         [ConditionalFact]
@@ -3527,7 +3548,9 @@ namespace Microsoft.EntityFrameworkCore
                     .UseInMemoryDatabase(Guid.NewGuid().ToString());
         }
 
-        private class DummyInterceptor : ISingletonInterceptor { }
+        private class DummyInterceptor : ISingletonInterceptor
+        {
+        }
 
         [ConditionalFact]
         public void Throws_setting_LoggerFactory_in_options_when_UseInternalServiceProvider()
@@ -3676,14 +3699,18 @@ namespace Microsoft.EntityFrameworkCore
 
         private class FakeMemoryCache : IMemoryCache
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool TryGetValue(object key, out object value) =>
                 throw new NotImplementedException();
 
             public ICacheEntry CreateEntry(object key) => throw new NotImplementedException();
 
-            public void Remove(object key) { }
+            public void Remove(object key)
+            {
+            }
         }
 
         [ConditionalFact]
@@ -4029,17 +4056,23 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ConstructorTestContext1A : DbContext
         {
-            public ConstructorTestContext1A(DbContextOptions options) : base(options) { }
+            public ConstructorTestContext1A(DbContextOptions options) : base(options)
+            {
+            }
         }
 
         private class ConstructorTestContextWithSets : DbContext
         {
-            public ConstructorTestContextWithSets(DbContextOptions options) : base(options) { }
+            public ConstructorTestContextWithSets(DbContextOptions options) : base(options)
+            {
+            }
 
             public DbSet<Product> Products { get; set; }
         }
 
-        private class ConstructorTestContextNoConfiguration : DbContext { }
+        private class ConstructorTestContextNoConfiguration : DbContext
+        {
+        }
 
         private class ConstructorTestContextNoConfigurationWithSets : DbContext
         {
@@ -4118,25 +4151,35 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private interface IConstructorTestContextWithOC1A { }
+        private interface IConstructorTestContextWithOC1A
+        {
+        }
 
         private class ConstructorTestContextWithOC1A
             : ConstructorTestContextWithOCBase,
-                IConstructorTestContextWithOC1A { }
+                IConstructorTestContextWithOC1A
+        {
+        }
 
         private class ConstructorTestContextWithOC2A : ConstructorTestContextWithOCBase
         {
             public ConstructorTestContextWithOC2A(IServiceProvider internalServicesProvider)
-                : base(internalServicesProvider) { }
+                : base(internalServicesProvider)
+            {
+            }
         }
 
-        private interface IConstructorTestContextWithOC3A { }
+        private interface IConstructorTestContextWithOC3A
+        {
+        }
 
         private class ConstructorTestContextWithOC3A
             : ConstructorTestContextWithOCBase,
                 IConstructorTestContextWithOC3A
         {
-            public ConstructorTestContextWithOC3A(DbContextOptions options) : base(options) { }
+            public ConstructorTestContextWithOC3A(DbContextOptions options) : base(options)
+            {
+            }
         }
 
         private class ConstructorTestContextWithOC1B : ConstructorTestContextWithOCBase
@@ -4144,7 +4187,9 @@ namespace Microsoft.EntityFrameworkCore
             public ConstructorTestContextWithOC1B(
                 ILoggerFactory loggerFactory,
                 IMemoryCache memoryCache
-            ) : base(loggerFactory, memoryCache) { }
+            ) : base(loggerFactory, memoryCache)
+            {
+            }
         }
 
         private class ConstructorTestContextWithOC2B : ConstructorTestContextWithOCBase
@@ -4153,7 +4198,9 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceProvider internalServicesProvider,
                 ILoggerFactory loggerFactory,
                 IMemoryCache memoryCache
-            ) : base(internalServicesProvider, loggerFactory, memoryCache) { }
+            ) : base(internalServicesProvider, loggerFactory, memoryCache)
+            {
+            }
         }
 
         [ConditionalFact]
@@ -4202,12 +4249,16 @@ namespace Microsoft.EntityFrameworkCore
 
         private class NonGenericOptions1 : DbContext
         {
-            public NonGenericOptions1(DbContextOptions options) : base(options) { }
+            public NonGenericOptions1(DbContextOptions options) : base(options)
+            {
+            }
         }
 
         private class NonGenericOptions2 : DbContext
         {
-            public NonGenericOptions2(DbContextOptions options) : base(options) { }
+            public NonGenericOptions2(DbContextOptions options) : base(options)
+            {
+            }
         }
 
         [ConditionalFact]
@@ -4284,14 +4335,20 @@ namespace Microsoft.EntityFrameworkCore
 
         private class DerivedContext1 : DbContext
         {
-            public DerivedContext1(DbContextOptions<DerivedContext1> options) : base(options) { }
+            public DerivedContext1(DbContextOptions<DerivedContext1> options) : base(options)
+            {
+            }
 
-            protected DerivedContext1(DbContextOptions options) : base(options) { }
+            protected DerivedContext1(DbContextOptions options) : base(options)
+            {
+            }
         }
 
         private class DerivedContext2 : DerivedContext1
         {
-            public DerivedContext2(DbContextOptions<DerivedContext2> options) : base(options) { }
+            public DerivedContext2(DbContextOptions<DerivedContext2> options) : base(options)
+            {
+            }
         }
     }
 }

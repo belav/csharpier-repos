@@ -297,9 +297,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        internal virtual void OnSave() { }
+        internal virtual void OnSave()
+        {
+        }
 
-        internal virtual void Close() { }
+        internal virtual void Close()
+        {
+        }
 
         internal virtual void OnSearch(string searchString)
         {

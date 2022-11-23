@@ -25,7 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public DerivedTypeDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies) { }
+            : base(dependencies)
+        {
+        }
 
         /// <summary>
         ///     Called after an entity type is added to the model.

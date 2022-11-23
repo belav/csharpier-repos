@@ -318,13 +318,17 @@ namespace System.Net.Test.Common
                 {
                     clientSocket.Close();
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
 
                 try
                 {
                     serverSocket.Close();
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
 
                 // Eat reset/abort.
                 if (

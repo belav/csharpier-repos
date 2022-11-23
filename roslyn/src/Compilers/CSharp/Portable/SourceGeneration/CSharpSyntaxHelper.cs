@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public static readonly ISyntaxHelper Instance = new CSharpSyntaxHelper();
 
-        private CSharpSyntaxHelper() { }
+        private CSharpSyntaxHelper()
+        {
+        }
 
         public override bool IsCaseSensitive => true;
 

@@ -14,7 +14,9 @@ namespace System.Net.Tests
 {
     public class HttpWebResponseHeaderTest
     {
-        private static void HttpContinueMethod(int StatusCode, WebHeaderCollection httpHeaders) { }
+        private static void HttpContinueMethod(int StatusCode, WebHeaderCollection httpHeaders)
+        {
+        }
 
         [Fact]
         public async Task HttpWebRequest_ContinueDelegateProperty_Success()

@@ -14,7 +14,9 @@ namespace System.ComponentModel.Composition
                 contractType,
                 (IDictionary<string, object>)null,
                 exportedValues
-            ) { }
+            )
+        {
+        }
 
         public MicroExport(string contractName, params object[] exportedValues)
             : this(
@@ -22,7 +24,9 @@ namespace System.ComponentModel.Composition
                 exportedValues[0].GetType(),
                 (IDictionary<string, object>)null,
                 exportedValues
-            ) { }
+            )
+        {
+        }
 
         public MicroExport(
             Type contractType,
@@ -34,17 +38,22 @@ namespace System.ComponentModel.Composition
                 exportedValues[0].GetType(),
                 metadata,
                 exportedValues
-            ) { }
+            )
+        {
+        }
 
         public MicroExport(string contractName, Type contractType, params object[] exportedValues)
             : this(contractName, contractType, (IDictionary<string, object>)null, exportedValues)
-        { }
+        {
+        }
 
         public MicroExport(
             string contractName,
             IDictionary<string, object> metadata,
             params object[] exportedValues
-        ) : this(contractName, exportedValues[0].GetType(), metadata, exportedValues) { }
+        ) : this(contractName, exportedValues[0].GetType(), metadata, exportedValues)
+        {
+        }
 
         public MicroExport(
             string contractName,

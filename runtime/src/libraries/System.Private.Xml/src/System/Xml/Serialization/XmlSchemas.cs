@@ -890,7 +890,9 @@ namespace System.Xml.Serialization
             _end = list.Count - 1;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool MoveNext()
         {

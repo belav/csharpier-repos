@@ -806,7 +806,9 @@ namespace System.IO.Strategies
             internal Memory<byte> Memory;
 
             /// <summary>Initialize the AsyncState.</summary>
-            internal AsyncState() : base(initialCount: 1, maxCount: 1) { }
+            internal AsyncState() : base(initialCount: 1, maxCount: 1)
+            {
+            }
         }
     }
 }

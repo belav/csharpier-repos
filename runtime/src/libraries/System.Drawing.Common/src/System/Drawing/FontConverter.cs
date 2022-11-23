@@ -439,7 +439,9 @@ namespace System.Drawing
                 _fonts = FontFamily.Families;
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
             {
@@ -511,7 +513,9 @@ namespace System.Drawing
 
         public class FontUnitConverter : EnumConverter
         {
-            public FontUnitConverter() : base(typeof(GraphicsUnit)) { }
+            public FontUnitConverter() : base(typeof(GraphicsUnit))
+            {
+            }
 
             public override StandardValuesCollection GetStandardValues(
                 ITypeDescriptorContext? context

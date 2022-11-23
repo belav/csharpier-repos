@@ -91,7 +91,9 @@ namespace Internal.Cryptography
 
         public override int HashSizeInBytes => _hashSizeInBytes;
 
-        public override void Dispose(bool disposing) { }
+        public override void Dispose(bool disposing)
+        {
+        }
 
         public override void Reset()
         {

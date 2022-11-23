@@ -36,7 +36,8 @@ public class HttpResponseStreamWriter : TextWriter
     /// <param name="encoding">The character encoding to use.</param>
     public HttpResponseStreamWriter(Stream stream, Encoding encoding)
         : this(stream, encoding, DefaultBufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-    { }
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpResponseStreamWriter"/>.
@@ -45,7 +46,9 @@ public class HttpResponseStreamWriter : TextWriter
     /// <param name="encoding">The character encoding to use.</param>
     /// <param name="bufferSize">The minimum buffer size.</param>
     public HttpResponseStreamWriter(Stream stream, Encoding encoding, int bufferSize)
-        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared) { }
+        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpResponseStreamWriter"/>.

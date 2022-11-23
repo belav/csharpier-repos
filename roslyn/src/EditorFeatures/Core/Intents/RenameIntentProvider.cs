@@ -24,7 +24,9 @@ internal class RenameIntentProvider : IIntentProvider
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public RenameIntentProvider() { }
+    public RenameIntentProvider()
+    {
+    }
 
     public async Task<ImmutableArray<IntentProcessorResult>> ComputeIntentAsync(
         Document priorDocument,

@@ -4,7 +4,9 @@ public class MappingExpression
     : MappingExpressionBase<object, object, IMappingExpression>,
         IMappingExpression
 {
-    public MappingExpression(TypePair types, MemberList memberList) : base(memberList, types) { }
+    public MappingExpression(TypePair types, MemberList memberList) : base(memberList, types)
+    {
+    }
 
     public string[] IncludedMembersNames { get; internal set; } = Array.Empty<string>();
 
@@ -82,7 +84,9 @@ public class MappingExpression<TSource, TDestination>
         Projection = projection;
 
     public MappingExpression(MemberList memberList, Type sourceType, Type destinationType)
-        : base(memberList, sourceType, destinationType) { }
+        : base(memberList, sourceType, destinationType)
+    {
+    }
 
     public IMappingExpression<TSource, TDestination> ForPath<TMember>(
         Expression<Func<TDestination, TMember>> destinationMember,

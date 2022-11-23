@@ -151,11 +151,15 @@ namespace System.Net.Http
 
         private sealed class ReadOnlyStream : DelegatingStream
         {
-            public ReadOnlyStream(Stream innerStream) : base(innerStream) { }
+            public ReadOnlyStream(Stream innerStream) : base(innerStream)
+            {
+            }
 
             public override bool CanWrite => false;
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override Task FlushAsync(CancellationToken cancellationToken) =>
                 Task.CompletedTask;

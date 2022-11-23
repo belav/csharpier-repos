@@ -7,7 +7,9 @@ public class KeysWithConvertersSqlServerTest
     : KeysWithConvertersTestBase<KeysWithConvertersSqlServerTest.KeysWithConvertersSqlServerFixture>
 {
     public KeysWithConvertersSqlServerTest(KeysWithConvertersSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class KeysWithConvertersSqlServerFixture : KeysWithConvertersFixtureBase
     {

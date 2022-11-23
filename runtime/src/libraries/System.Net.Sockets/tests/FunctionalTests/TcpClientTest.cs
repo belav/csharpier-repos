@@ -501,7 +501,8 @@ namespace System.Net.Sockets.Tests
                     await connectTask;
                 }
                 catch (SocketException e) when (e.SocketErrorCode == SocketError.OperationAborted)
-                { }
+                {
+                }
                 sw.Stop();
 
                 Assert.Null(client.Client); // should be nulled out after Dispose

@@ -18,17 +18,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             null
         );
 
-        public BindingDiagnosticBag() : this(usePool: false) { }
+        public BindingDiagnosticBag() : this(usePool: false)
+        {
+        }
 
-        private BindingDiagnosticBag(bool usePool) : base(usePool) { }
+        private BindingDiagnosticBag(bool usePool) : base(usePool)
+        {
+        }
 
         public BindingDiagnosticBag(DiagnosticBag? diagnosticBag)
-            : base(diagnosticBag, dependenciesBag: null) { }
+            : base(diagnosticBag, dependenciesBag: null)
+        {
+        }
 
         public BindingDiagnosticBag(
             DiagnosticBag? diagnosticBag,
             ICollection<AssemblySymbol>? dependenciesBag
-        ) : base(diagnosticBag, dependenciesBag) { }
+        ) : base(diagnosticBag, dependenciesBag)
+        {
+        }
 
         internal static BindingDiagnosticBag GetInstance()
         {

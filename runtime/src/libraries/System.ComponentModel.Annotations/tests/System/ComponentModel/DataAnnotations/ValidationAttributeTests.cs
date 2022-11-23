@@ -415,7 +415,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.NotEmpty(validationResult.ErrorMessage);
         }
 
-        public class ValidationAttributeNoOverrides : ValidationAttribute { }
+        public class ValidationAttributeNoOverrides : ValidationAttribute
+        {
+        }
 
         public class ValidationAttributeOverrideOneArgIsValid : ValidationAttribute
         {
@@ -461,12 +463,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public string GetOnlyProperty { get; }
             public string SetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
 
             public static string StaticSetOnlyProperty
             {
-                set { }
+                set
+                {
+                }
             }
             public static int StaticIntProperty { get; set; }
 
@@ -538,7 +544,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
         private static string PrivateProperty => "";
         internal string SetOnlyProperty
         {
-            set { }
+            set
+            {
+            }
         }
         internal static bool BoolProperty => false;
     }

@@ -45,7 +45,9 @@ namespace A.B
     {
     }
 }"
-            ) { }
+            )
+        {
+        }
 
         private CodeNamespace GetCodeNamespace(params object[] path)
         {

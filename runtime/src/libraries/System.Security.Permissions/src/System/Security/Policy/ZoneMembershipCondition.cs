@@ -5,7 +5,9 @@ namespace System.Security.Policy
 {
     public sealed partial class ZoneMembershipCondition : ISecurityEncodable, IMembershipCondition
     {
-        public ZoneMembershipCondition(SecurityZone zone) { }
+        public ZoneMembershipCondition(SecurityZone zone)
+        {
+        }
 
         public SecurityZone SecurityZone { get; set; }
 
@@ -21,9 +23,13 @@ namespace System.Security.Policy
 
         public override bool Equals(object o) => base.Equals(o);
 
-        public void FromXml(SecurityElement e) { }
+        public void FromXml(SecurityElement e)
+        {
+        }
 
-        public void FromXml(SecurityElement e, PolicyLevel level) { }
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
         public override int GetHashCode() => base.GetHashCode();
 

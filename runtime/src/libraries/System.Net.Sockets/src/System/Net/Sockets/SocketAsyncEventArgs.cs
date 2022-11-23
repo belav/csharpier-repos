@@ -84,7 +84,9 @@ namespace System.Net.Sockets
 
         private CancellationTokenSource? _multipleConnectCancellation;
 
-        public SocketAsyncEventArgs() : this(unsafeSuppressExecutionContextFlow: false) { }
+        public SocketAsyncEventArgs() : this(unsafeSuppressExecutionContextFlow: false)
+        {
+        }
 
         /// <summary>Initialize the SocketAsyncEventArgs</summary>
         /// <param name="unsafeSuppressExecutionContextFlow">
@@ -943,7 +945,9 @@ namespace System.Net.Sockets
             private int _isCompleted;
 
             public MultiConnectSocketAsyncEventArgs()
-                : base(unsafeSuppressExecutionContextFlow: false) { }
+                : base(unsafeSuppressExecutionContextFlow: false)
+            {
+            }
 
             public void GetResult(short token) => _mrvtsc.GetResult(token);
 
@@ -1003,7 +1007,9 @@ namespace System.Net.Sockets
                                     _acceptSocket.LocalEndPoint
                                 );
                             }
-                            catch (ObjectDisposedException) { }
+                            catch (ObjectDisposedException)
+                            {
+                            }
                         }
                     }
                     else
@@ -1028,7 +1034,9 @@ namespace System.Net.Sockets
                                     _currentSocket.RemoteEndPoint
                                 );
                             }
-                            catch (ObjectDisposedException) { }
+                            catch (ObjectDisposedException)
+                            {
+                            }
                         }
 
                         // Mark socket connected.
@@ -1059,7 +1067,9 @@ namespace System.Net.Sockets
                         {
                             _remoteEndPoint = _remoteEndPoint!.Create(_socketAddress);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                     break;
 
@@ -1073,7 +1083,9 @@ namespace System.Net.Sockets
                         {
                             _remoteEndPoint = _remoteEndPoint!.Create(_socketAddress);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
 
                     FinishOperationReceiveMessageFrom();

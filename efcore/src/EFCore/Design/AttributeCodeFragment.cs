@@ -21,7 +21,9 @@ public class AttributeCodeFragment
     /// <param name="type">The attribute's CLR type.</param>
     /// <param name="arguments">The attribute's arguments.</param>
     public AttributeCodeFragment(Type type, params object?[] arguments)
-        : this(type, arguments, new Dictionary<string, object?>(0)) { }
+        : this(type, arguments, new Dictionary<string, object?>(0))
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="AttributeCodeFragment" /> class.

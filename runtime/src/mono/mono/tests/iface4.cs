@@ -71,7 +71,9 @@ public class Derived2 : Base, IVehicle
     }
 }
 
-public class Derived3 : Derived1, IWalker { }
+public class Derived3 : Derived1, IWalker
+{
+}
 
 public class Test
 {

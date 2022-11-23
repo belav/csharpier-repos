@@ -20,7 +20,9 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             SchemaNames? schemaNames,
             ValidationEventHandler? eventHandler
-        ) : this(nameTable, schemaNames, eventHandler, new XmlSchemaCompilationSettings()) { } //Use the default for XmlSchemaCollection
+        ) : this(nameTable, schemaNames, eventHandler, new XmlSchemaCompilationSettings())
+        {
+        } //Use the default for XmlSchemaCollection
 
         public BaseProcessor(
             XmlNameTable nameTable,

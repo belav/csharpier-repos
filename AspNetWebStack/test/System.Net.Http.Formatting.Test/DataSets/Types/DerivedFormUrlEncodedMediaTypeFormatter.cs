@@ -4,5 +4,7 @@
 
 namespace System.Net.Http.Formatting.DataSets.Types
 {
-    public class DerivedFormUrlEncodedMediaTypeFormatter : FormUrlEncodedMediaTypeFormatter { }
+    public class DerivedFormUrlEncodedMediaTypeFormatter : FormUrlEncodedMediaTypeFormatter
+    {
+    }
 }

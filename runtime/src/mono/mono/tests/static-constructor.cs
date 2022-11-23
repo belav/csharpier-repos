@@ -4,12 +4,16 @@ using System.Threading;
 
 struct A
 {
-    public A(int i) { }
+    public A(int i)
+    {
+    }
 }
 
 struct B
 {
-    public B(int i) { }
+    public B(int i)
+    {
+    }
 }
 
 public class StaticInitFails
@@ -84,7 +88,9 @@ public class Tests
             Run2();
             return 1;
         }
-        catch (TypeInitializationException ex) { }
+        catch (TypeInitializationException ex)
+        {
+        }
 
         // Try again synchronously
         try
@@ -92,7 +98,9 @@ public class Tests
             Run2();
             return 1;
         }
-        catch (TypeInitializationException ex) { }
+        catch (TypeInitializationException ex)
+        {
+        }
 
         return 0;
     }
@@ -103,7 +111,9 @@ public class Tests
         {
             StaticInitFails.foo();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     private static void Run2()

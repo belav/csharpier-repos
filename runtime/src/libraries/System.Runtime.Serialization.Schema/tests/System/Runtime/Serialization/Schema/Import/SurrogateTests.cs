@@ -246,7 +246,9 @@ namespace System.Runtime.Serialization.Schema.Tests
         public object GetDeserializedObject(object obj, Type targetType) =>
             throw new NotImplementedException();
 
-        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
+        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes)
+        {
+        }
 
         public object GetObjectToSerialize(object obj, Type targetType) =>
             throw new NotImplementedException();

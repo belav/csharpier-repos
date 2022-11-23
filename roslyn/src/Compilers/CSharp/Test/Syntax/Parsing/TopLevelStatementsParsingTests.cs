@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     [CompilerTrait(CompilerFeature.TopLevelStatements)]
     public sealed class TopLevelStatementsParsingTests : ParsingTests
     {
-        public TopLevelStatementsParsingTests(ITestOutputHelper output) : base(output) { }
+        public TopLevelStatementsParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void InsertOpenBraceBeforeCodes()

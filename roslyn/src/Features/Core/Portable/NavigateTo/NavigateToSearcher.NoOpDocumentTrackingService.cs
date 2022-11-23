@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             public static readonly IDocumentTrackingService Instance =
                 new NoOpDocumentTrackingService();
 
-            private NoOpDocumentTrackingService() { }
+            private NoOpDocumentTrackingService()
+            {
+            }
 
 #pragma warning disable CS0067
             public event EventHandler<DocumentId>? ActiveDocumentChanged;

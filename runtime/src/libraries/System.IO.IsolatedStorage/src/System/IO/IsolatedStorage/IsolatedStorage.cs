@@ -14,7 +14,9 @@ namespace System.IO.IsolatedStorage
         private object? _assemblyIdentity;
         private object? _domainIdentity;
 
-        protected IsolatedStorage() { }
+        protected IsolatedStorage()
+        {
+        }
 
         public object ApplicationIdentity
         {

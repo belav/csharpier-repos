@@ -118,7 +118,9 @@ namespace System.ComponentModel
                     {
                         retVal = new CultureInfo(text);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 // Finally, try to find a partial match.

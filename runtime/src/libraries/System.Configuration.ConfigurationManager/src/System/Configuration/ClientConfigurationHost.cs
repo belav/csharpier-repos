@@ -314,14 +314,18 @@ namespace System.Configuration
             {
                 client.Credentials = CredentialCache.DefaultCredentials;
             }
-            catch { }
+            catch
+            {
+            }
 
             byte[] fileData = null;
             try
             {
                 fileData = client.DownloadData(streamName);
             }
-            catch { }
+            catch
+            {
+            }
 #pragma warning restore SYSLIB0014
 
             if (fileData == null)

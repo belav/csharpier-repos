@@ -23,7 +23,9 @@ namespace System.DirectoryServices.ActiveDirectory
         private bool _linksRetrieved;
 
         public ActiveDirectorySiteLinkBridge(DirectoryContext context, string bridgeName)
-            : this(context, bridgeName, ActiveDirectoryTransportType.Rpc) { }
+            : this(context, bridgeName, ActiveDirectoryTransportType.Rpc)
+        {
+        }
 
         public ActiveDirectorySiteLinkBridge(
             DirectoryContext context,

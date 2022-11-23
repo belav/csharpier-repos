@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.Logging.EventSource
     {
         public static ExceptionInfo Empty { get; } = new ExceptionInfo();
 
-        private ExceptionInfo() { }
+        private ExceptionInfo()
+        {
+        }
 
         public ExceptionInfo(Exception exception)
         {

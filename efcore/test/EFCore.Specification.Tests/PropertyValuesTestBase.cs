@@ -2572,7 +2572,9 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
 
     protected class Building : PropertyValuesBase
     {
-        private Building() { }
+        private Building()
+        {
+        }
 
         public static Building Create(Guid buildingId, string name, decimal value) =>
             new()
@@ -2688,7 +2690,9 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         public string LastName { get; set; }
     }
 
-    protected class UnMappedOffice : Office { }
+    protected class UnMappedOffice : Office
+    {
+    }
 
     protected class CurrentEmployee : Employee
     {

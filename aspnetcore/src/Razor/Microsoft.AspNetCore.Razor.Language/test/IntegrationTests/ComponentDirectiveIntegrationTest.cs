@@ -141,17 +141,31 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
         }
     }
 
-    public interface ITestInterface { }
+    public interface ITestInterface
+    {
+    }
 
-    public interface ITestInterface2 { }
+    public interface ITestInterface2
+    {
+    }
 
-    public class TestBaseClass : ComponentBase { }
+    public class TestBaseClass : ComponentBase
+    {
+    }
 
-    public interface IMyService1 { }
+    public interface IMyService1
+    {
+    }
 
-    public interface IMyService2 { }
+    public interface IMyService2
+    {
+    }
 
-    public class MyService1Impl : IMyService1 { }
+    public class MyService1Impl : IMyService1
+    {
+    }
 
-    public class MyService2Impl : IMyService2 { }
+    public class MyService2Impl : IMyService2
+    {
+    }
 }

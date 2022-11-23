@@ -23,7 +23,9 @@ namespace Test
                     if (m_a == (String[])L)
                         return L3[0x7fffffff];
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
                 bool b = (bool)L;
             }
             return 0;

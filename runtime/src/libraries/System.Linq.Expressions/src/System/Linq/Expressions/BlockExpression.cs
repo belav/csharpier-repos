@@ -31,7 +31,9 @@ namespace System.Linq.Expressions
         /// </summary>
         public Expression Result => GetExpression(ExpressionCount - 1);
 
-        internal BlockExpression() { }
+        internal BlockExpression()
+        {
+        }
 
         /// <summary>
         /// Dispatches to the specific visit method for this node type.
@@ -572,7 +574,9 @@ namespace System.Linq.Expressions
         private object _body;
 
         internal Scope1(IReadOnlyList<ParameterExpression> variables, Expression body)
-            : this(variables, (object)body) { }
+            : this(variables, (object)body)
+        {
+        }
 
         private Scope1(IReadOnlyList<ParameterExpression> variables, object body) : base(variables)
         {

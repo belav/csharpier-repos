@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddInheritdoc
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AddInheritdocCodeFixProvider() { }
+        public AddInheritdocCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS1591);

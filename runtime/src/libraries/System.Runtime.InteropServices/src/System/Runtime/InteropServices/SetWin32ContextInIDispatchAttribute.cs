@@ -9,6 +9,8 @@ namespace System.Runtime.InteropServices
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
     public sealed class SetWin32ContextInIDispatchAttribute : Attribute
     {
-        public SetWin32ContextInIDispatchAttribute() { }
+        public SetWin32ContextInIDispatchAttribute()
+        {
+        }
     }
 }

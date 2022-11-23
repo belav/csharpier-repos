@@ -4954,14 +4954,24 @@ namespace System.CodeDom.Compiler.Tests
             );
         }
 
-        private class CustomCodeExpression : CodeExpression { }
+        private class CustomCodeExpression : CodeExpression
+        {
+        }
 
-        private class CustomCodeStatement : CodeStatement { }
+        private class CustomCodeStatement : CodeStatement
+        {
+        }
 
-        private class CustomCodeTypeMember : CodeTypeMember { }
+        private class CustomCodeTypeMember : CodeTypeMember
+        {
+        }
 
-        private class CustomCodeDirective : CodeDirective { }
+        private class CustomCodeDirective : CodeDirective
+        {
+        }
 
-        private class CustomCodeObject : CodeObject { }
+        private class CustomCodeObject : CodeObject
+        {
+        }
     }
 }

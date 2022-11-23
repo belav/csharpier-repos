@@ -20,14 +20,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 currentRecursionDepth: 0,
                 includeNullability: includeNullability,
                 otherNullabilityOpt: null
-            ) { }
+            )
+        {
+        }
 
         private TypeConversions(
             AssemblySymbol corLibrary,
             int currentRecursionDepth,
             bool includeNullability,
             TypeConversions otherNullabilityOpt
-        ) : base(corLibrary, currentRecursionDepth, includeNullability, otherNullabilityOpt) { }
+        ) : base(corLibrary, currentRecursionDepth, includeNullability, otherNullabilityOpt)
+        {
+        }
 
         protected override ConversionsBase CreateInstance(int currentRecursionDepth)
         {

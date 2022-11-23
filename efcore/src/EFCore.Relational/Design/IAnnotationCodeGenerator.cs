@@ -37,7 +37,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IModel model,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -48,7 +50,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IEntityType entity,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -59,7 +63,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IEntityTypeMappingFragment fragment,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -70,7 +76,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IProperty property,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -81,7 +89,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IKey key,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -92,7 +102,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IForeignKey foreignKey,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -103,7 +115,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         INavigation navigation,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -114,7 +128,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         ISkipNavigation navigation,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -125,7 +141,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IIndex index,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -136,7 +154,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         ICheckConstraint checkConstraint,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -147,7 +167,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         ITrigger trigger,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -158,7 +180,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         IRelationalPropertyOverrides overrides,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be
@@ -169,7 +193,9 @@ public interface IAnnotationCodeGenerator
     void RemoveAnnotationsHandledByConventions(
         ISequence sequence,
         IDictionary<string, IAnnotation> annotations
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Removes annotation whose configuration is already applied by convention, and do not need to be

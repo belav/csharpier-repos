@@ -195,7 +195,10 @@ namespace System.Linq.Expressions.Tests
                         {
                             return i + 1;
                         },
-                    (Action<object>)delegate { }
+                    (Action<object>)
+                        delegate
+                        {
+                        }
                 }
             };
             Expression[][] exprs = new Expression[array.Length][];
@@ -980,7 +983,9 @@ namespace System.Linq.Expressions.Tests
                 return false;
             }
 
-            public void CopyTo(T[] array, int arrayIndex) { }
+            public void CopyTo(T[] array, int arrayIndex)
+            {
+            }
 
             public IEnumerator<T> GetEnumerator()
             {
@@ -1015,7 +1020,9 @@ namespace System.Linq.Expressions.Tests
 
         private class BogusReadOnlyCollection<T> : ReadOnlyCollection<T>
         {
-            public BogusReadOnlyCollection() : base(new BogusCollection<T>()) { }
+            public BogusReadOnlyCollection() : base(new BogusCollection<T>())
+            {
+            }
         }
 
         private static void CheckGenericArrayListHelper<T>(bool useInterpreter)

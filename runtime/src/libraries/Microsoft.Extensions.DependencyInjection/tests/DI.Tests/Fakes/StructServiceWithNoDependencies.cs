@@ -7,6 +7,8 @@ namespace Microsoft.Extensions.DependencyInjection.Fakes
 {
     public struct StructServiceWithNoDependencies : IFakeService
     {
-        public StructServiceWithNoDependencies() { }
+        public StructServiceWithNoDependencies()
+        {
+        }
     }
 }

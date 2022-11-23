@@ -173,7 +173,9 @@ public class RelationalDatabaseFacadeExtensionsTest
         public int BeginCount { get; set; }
         public int BeginAsyncCount { get; set; }
 
-        public void ResetState() { }
+        public void ResetState()
+        {
+        }
 
         public Task ResetStateAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;
@@ -192,9 +194,13 @@ public class RelationalDatabaseFacadeExtensionsTest
             return Task.FromResult<IDbContextTransaction>(new InMemoryTransaction());
         }
 
-        public void CommitTransaction() { }
+        public void CommitTransaction()
+        {
+        }
 
-        public void RollbackTransaction() { }
+        public void RollbackTransaction()
+        {
+        }
 
         public Task CommitTransactionAsync(CancellationToken cancellationToken = default) =>
             Task.CompletedTask;
@@ -206,7 +212,9 @@ public class RelationalDatabaseFacadeExtensionsTest
 
         public Transaction EnlistedTransaction { get; }
 
-        public void EnlistTransaction(Transaction transaction) { }
+        public void EnlistTransaction(Transaction transaction)
+        {
+        }
     }
 
     [ConditionalFact]

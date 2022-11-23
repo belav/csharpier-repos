@@ -1475,9 +1475,13 @@ namespace System.Linq.Expressions.Tests
 
         public class NonGenericClass
         {
-            public void InstanceMethod() { }
+            public void InstanceMethod()
+            {
+            }
 
-            public static void StaticVoidMethod() { }
+            public static void StaticVoidMethod()
+            {
+            }
 
             public static int StaticIntMethod0() => 0;
 

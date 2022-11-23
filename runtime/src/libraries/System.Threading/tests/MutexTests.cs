@@ -364,7 +364,9 @@ namespace System.Threading.Tests
             Assert.False(Mutex.TryOpenExisting(name, out m));
             Assert.Null(m);
 
-            using (m = new Mutex(false, name)) { }
+            using (m = new Mutex(false, name))
+            {
+            }
             Assert.Throws<WaitHandleCannotBeOpenedException>(() => Mutex.OpenExisting(name));
             Assert.False(Mutex.TryOpenExisting(name, out m));
             Assert.Null(m);
@@ -859,8 +861,12 @@ namespace System.Threading.Tests
                             // then release the last reference to the mutex. On some implementations T1 may not be able to destroy
                             // the mutex when it is still locked by T0, or there may be potential for races in the sequence. This
                             // test only looks for errors from race conditions.
-                            using (var mutex = new Mutex(true, mutexName)) { }
-                            using (var mutex = new Mutex(true, mutex2Name)) { }
+                            using (var mutex = new Mutex(true, mutexName))
+                            {
+                            }
+                            using (var mutex = new Mutex(true, mutex2Name))
+                            {
+                            }
                         }
                     }
                 );

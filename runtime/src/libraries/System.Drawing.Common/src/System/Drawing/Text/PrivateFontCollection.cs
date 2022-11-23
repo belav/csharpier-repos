@@ -45,7 +45,9 @@ namespace System.Drawing.Text
                     );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex)) { }
+                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex))
+                {
+                }
                 finally
                 {
                     _nativeFontCollection = IntPtr.Zero;

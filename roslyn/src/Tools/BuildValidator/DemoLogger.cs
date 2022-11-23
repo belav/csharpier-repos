@@ -58,14 +58,18 @@ namespace BuildValidator
     {
         public ILogger CreateLogger(string categoryName) => new DemoLogger();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     internal sealed class EmptyLogger : ILogger, IDisposable
     {
         public static EmptyLogger Instance { get; } = new EmptyLogger();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public IDisposable BeginScope<TState>(TState state) => this;
 
@@ -77,6 +81,8 @@ namespace BuildValidator
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) { }
+        )
+        {
+        }
     }
 }

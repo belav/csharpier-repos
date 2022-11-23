@@ -282,7 +282,9 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
 
     private sealed class NullTypeMapping : RelationalTypeMapping
     {
-        public NullTypeMapping(string storeType) : base(storeType, typeof(object)) { }
+        public NullTypeMapping(string storeType) : base(storeType, typeof(object))
+        {
+        }
 
         protected override RelationalTypeMapping Clone(
             RelationalTypeMappingParameters parameters
@@ -349,7 +351,9 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
                 precision,
                 scale
             )
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     Returns the parameters used to create this type mapping.
@@ -568,7 +572,9 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
     ///     Configures type information of a <see cref="DbParameter" />.
     /// </summary>
     /// <param name="parameter">The parameter to be configured.</param>
-    protected virtual void ConfigureParameter(DbParameter parameter) { }
+    protected virtual void ConfigureParameter(DbParameter parameter)
+    {
+    }
 
     /// <summary>
     ///     Generates the SQL representation of a literal value.

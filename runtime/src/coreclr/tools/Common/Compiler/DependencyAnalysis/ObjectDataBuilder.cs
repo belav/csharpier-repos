@@ -15,7 +15,9 @@ namespace ILCompiler.DependencyAnalysis
 #endif
     {
         public ObjectDataBuilder(NodeFactory factory, bool relocsOnly)
-            : this(factory.Target, relocsOnly) { }
+            : this(factory.Target, relocsOnly)
+        {
+        }
 
         public ObjectDataBuilder(TargetDetails target, bool relocsOnly)
         {
@@ -338,7 +340,9 @@ namespace ILCompiler.DependencyAnalysis
             return returnData;
         }
 
-        public enum Reservation { }
+        public enum Reservation
+        {
+        }
 
         public void AddSymbol(ISymbolDefinitionNode node)
         {

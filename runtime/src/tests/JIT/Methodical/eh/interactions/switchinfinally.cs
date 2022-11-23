@@ -26,7 +26,9 @@ namespace test3
 
         public void testit(int i)
         {
-            try { }
+            try
+            {
+            }
             finally
             {
                 switch (i)

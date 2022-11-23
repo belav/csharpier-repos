@@ -36,12 +36,16 @@ public class AnnotatableBase : IAnnotatable
     /// <summary>
     ///     Throws if the model is not read-only.
     /// </summary>
-    protected virtual void EnsureReadOnly() { }
+    protected virtual void EnsureReadOnly()
+    {
+    }
 
     /// <summary>
     ///     Throws if the model is read-only.
     /// </summary>
-    protected virtual void EnsureMutable() { }
+    protected virtual void EnsureMutable()
+    {
+    }
 
     /// <summary>
     ///     Gets all annotations on the current object.

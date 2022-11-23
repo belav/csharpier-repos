@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         public string ClassificationName { get; }
         public string Text { get; }
 
-        private FormattedClassification() { }
+        private FormattedClassification()
+        {
+        }
 
         public FormattedClassification(string text, string classificationName)
         {

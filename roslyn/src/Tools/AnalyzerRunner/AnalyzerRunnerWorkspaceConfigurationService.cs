@@ -18,6 +18,8 @@ namespace AnalyzerRunner
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerRunnerWorkspaceConfigurationService() { }
+        public AnalyzerRunnerWorkspaceConfigurationService()
+        {
+        }
     }
 }

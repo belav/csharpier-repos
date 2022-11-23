@@ -13,7 +13,9 @@ namespace System.Data
         internal readonly object _val;
 
         internal ConstNode(DataTable? table, ValueType type, object constant)
-            : this(table, type, constant, true) { }
+            : this(table, type, constant, true)
+        {
+        }
 
         internal ConstNode(DataTable? table, ValueType type, object constant, bool fParseQuotes)
             : base(table)

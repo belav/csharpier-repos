@@ -5,7 +5,9 @@ namespace System.CodeDom
 {
     public class CodeThrowExceptionStatement : CodeStatement
     {
-        public CodeThrowExceptionStatement() { }
+        public CodeThrowExceptionStatement()
+        {
+        }
 
         public CodeThrowExceptionStatement(CodeExpression toThrow)
         {

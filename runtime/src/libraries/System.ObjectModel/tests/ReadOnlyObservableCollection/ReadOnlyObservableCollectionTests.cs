@@ -326,7 +326,9 @@ namespace System.Collections.ObjectModel.Tests
             _expectedItems = expectedItems;
         }
 
-        public IReadOnlyList_T_Test() { }
+        public IReadOnlyList_T_Test()
+        {
+        }
 
         /// <summary>
         /// This verifies that the collection contains the expected items.

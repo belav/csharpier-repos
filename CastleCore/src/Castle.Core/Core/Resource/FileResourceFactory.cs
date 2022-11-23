@@ -21,7 +21,9 @@ namespace Castle.Core.Resource
     /// </summary>
     public class FileResourceFactory : IResourceFactory
     {
-        public FileResourceFactory() { }
+        public FileResourceFactory()
+        {
+        }
 
         public bool Accept(CustomUri uri)
         {

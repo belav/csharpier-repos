@@ -11,9 +11,13 @@ namespace System.Runtime.Serialization
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
 
-        internal DeserializationToken(object tracker) { }
+        internal DeserializationToken(object tracker)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public sealed partial class SerializationInfo
@@ -29,7 +33,9 @@ namespace System.Diagnostics
 {
     public partial class DebugProvider
     {
-        public DebugProvider() { }
+        public DebugProvider()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute]
         public virtual void Fail(string? message, string? detailMessage)
@@ -42,17 +48,29 @@ namespace System.Diagnostics
             string? message,
             string? detailMessage,
             string errorSource
-        ) { }
+        )
+        {
+        }
 
-        public virtual void OnIndentLevelChanged(int indentLevel) { }
+        public virtual void OnIndentLevelChanged(int indentLevel)
+        {
+        }
 
-        public virtual void OnIndentSizeChanged(int indentSize) { }
+        public virtual void OnIndentSizeChanged(int indentSize)
+        {
+        }
 
-        public virtual void Write(string? message) { }
+        public virtual void Write(string? message)
+        {
+        }
 
-        public static void WriteCore(string message) { }
+        public static void WriteCore(string message)
+        {
+        }
 
-        public virtual void WriteLine(string? message) { }
+        public virtual void WriteLine(string? message)
+        {
+        }
     }
 
     public static partial class Debug

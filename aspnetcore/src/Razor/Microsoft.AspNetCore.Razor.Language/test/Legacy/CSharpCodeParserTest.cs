@@ -197,7 +197,15 @@ public class CSharpCodeParserTest
         var parser = new CSharpCodeParser(context);
 
         // Act & Assert (Does not throw)
-        parser.MapDirectives((b, t) => { }, "test");
-        parser.MapDirectives((b, t) => { }, "test");
+        parser.MapDirectives(
+            (b, t) => {
+            },
+            "test"
+        );
+        parser.MapDirectives(
+            (b, t) => {
+            },
+            "test"
+        );
     }
 }

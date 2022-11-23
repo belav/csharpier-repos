@@ -10,10 +10,14 @@ namespace System.ServiceModel.Syndication
     {
         private Collection<SyndicationCategory> _categories;
 
-        public InlineCategoriesDocument() { }
+        public InlineCategoriesDocument()
+        {
+        }
 
         public InlineCategoriesDocument(IEnumerable<SyndicationCategory> categories)
-            : this(categories, false, null) { }
+            : this(categories, false, null)
+        {
+        }
 
         public InlineCategoriesDocument(
             IEnumerable<SyndicationCategory> categories,

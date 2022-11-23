@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class ManyToManyLoadSqliteTestBase<TFixture> : ManyToManyLoadTestBase<TFixture>
     where TFixture : ManyToManyLoadSqliteTestBase<TFixture>.ManyToManyLoadSqliteFixtureBase
 {
-    protected ManyToManyLoadSqliteTestBase(TFixture fixture) : base(fixture) { }
+    protected ManyToManyLoadSqliteTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     public class ManyToManyLoadSqliteFixtureBase : ManyToManyLoadFixtureBase
     {

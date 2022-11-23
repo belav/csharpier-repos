@@ -284,9 +284,13 @@ namespace System.Reflection.Tests
             Assert.False(eventInfo.IsSpecialName);
         }
 
-        private static void ObjectEventArgsHandler(object o, EventArgs e) { }
+        private static void ObjectEventArgsHandler(object o, EventArgs e)
+        {
+        }
 
-        private static void ObjectHandler(object o) { }
+        private static void ObjectHandler(object o)
+        {
+        }
 
         public delegate void ObjectDelegate(object o);
 

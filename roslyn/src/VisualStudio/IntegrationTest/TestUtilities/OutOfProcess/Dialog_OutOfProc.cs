@@ -10,7 +10,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
     public class Dialog_OutOfProc : OutOfProcComponent
     {
         public Dialog_OutOfProc(VisualStudioInstance visualStudioInstance)
-            : base(visualStudioInstance) { }
+            : base(visualStudioInstance)
+        {
+        }
 
         public void VerifyOpen(string dialogName)
         {

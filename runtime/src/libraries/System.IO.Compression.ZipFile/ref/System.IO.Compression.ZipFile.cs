@@ -11,14 +11,18 @@ namespace System.IO.Compression
         public static void CreateFromDirectory(
             string sourceDirectoryName,
             string destinationArchiveFileName
-        ) { }
+        )
+        {
+        }
 
         public static void CreateFromDirectory(
             string sourceDirectoryName,
             string destinationArchiveFileName,
             System.IO.Compression.CompressionLevel compressionLevel,
             bool includeBaseDirectory
-        ) { }
+        )
+        {
+        }
 
         public static void CreateFromDirectory(
             string sourceDirectoryName,
@@ -26,31 +30,41 @@ namespace System.IO.Compression
             System.IO.Compression.CompressionLevel compressionLevel,
             bool includeBaseDirectory,
             System.Text.Encoding? entryNameEncoding
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName,
             bool overwriteFiles
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName,
             System.Text.Encoding? entryNameEncoding
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName,
             System.Text.Encoding? entryNameEncoding,
             bool overwriteFiles
-        ) { }
+        )
+        {
+        }
 
         public static System.IO.Compression.ZipArchive Open(
             string archiveFileName,
@@ -102,23 +116,31 @@ namespace System.IO.Compression
         public static void ExtractToDirectory(
             this System.IO.Compression.ZipArchive source,
             string destinationDirectoryName
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToDirectory(
             this System.IO.Compression.ZipArchive source,
             string destinationDirectoryName,
             bool overwriteFiles
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToFile(
             this System.IO.Compression.ZipArchiveEntry source,
             string destinationFileName
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToFile(
             this System.IO.Compression.ZipArchiveEntry source,
             string destinationFileName,
             bool overwrite
-        ) { }
+        )
+        {
+        }
     }
 }

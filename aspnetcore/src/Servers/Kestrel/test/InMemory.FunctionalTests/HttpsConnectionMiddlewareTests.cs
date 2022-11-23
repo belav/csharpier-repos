@@ -1840,7 +1840,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 line = await reader.ReadLineAsync();
             }
-            catch (IOException) { }
+            catch (IOException)
+            {
+            }
             Assert.Null(line);
         }
     }

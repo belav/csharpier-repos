@@ -11,5 +11,7 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IMutableForeignKey" />.
     /// </summary>
     [Obsolete("Use IMutableForeignKey")]
-    public static class MutableForeignKeyExtensions { }
+    public static class MutableForeignKeyExtensions
+    {
+    }
 }

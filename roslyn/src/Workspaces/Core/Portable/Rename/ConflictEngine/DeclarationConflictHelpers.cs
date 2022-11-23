@@ -117,7 +117,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         {
             public static readonly ConflictingSignatureComparer Instance = new();
 
-            private ConflictingSignatureComparer() { }
+            private ConflictingSignatureComparer()
+            {
+            }
 
             public bool Equals(ImmutableArray<ITypeSymbol> x, ImmutableArray<ITypeSymbol> y) =>
                 x.SequenceEqual(y);

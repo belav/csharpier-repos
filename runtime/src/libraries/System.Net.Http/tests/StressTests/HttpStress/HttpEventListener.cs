@@ -28,7 +28,9 @@ namespace HttpStress
                 {
                     File.Delete(filename);
                 }
-                catch { }
+                catch
+                {
+                }
             }
             _log = new StreamWriter("client.log", false) { AutoFlush = true };
 

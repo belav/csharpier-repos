@@ -20,7 +20,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="type">The type for which the metadata provider is created.</param>
         public AssociatedMetadataTypeTypeDescriptionProvider(Type type)
-            : base(TypeDescriptor.GetProvider(type)) { }
+            : base(TypeDescriptor.GetProvider(type))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the System.ComponentModel.DataAnnotations.AssociatedMetadataTypeTypeDescriptionProvider

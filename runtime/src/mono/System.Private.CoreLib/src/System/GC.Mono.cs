@@ -132,7 +132,9 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // disable optimizations
-        public static void KeepAlive(object? obj) { }
+        public static void KeepAlive(object? obj)
+        {
+        }
 
         public static int GetGeneration(WeakReference wo)
         {

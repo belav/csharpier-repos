@@ -55,7 +55,9 @@ namespace System.Net.Http
                 {
                     _content.Dispose();
                 }
-                catch { } // same as StreamToStreamCopy behavior
+                catch
+                {
+                } // same as StreamToStreamCopy behavior
             }
             else
             {
@@ -66,7 +68,9 @@ namespace System.Net.Http
                         {
                             ((Stream)s!).Dispose();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                         t.GetAwaiter().GetResult();
                     },
                     _content,

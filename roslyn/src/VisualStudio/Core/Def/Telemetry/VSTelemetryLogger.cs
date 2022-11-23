@@ -50,7 +50,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 var telemetryEvent = CreateTelemetryEvent(functionId, logMessage);
                 _session.PostEvent(telemetryEvent);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void LogBlockStart(
@@ -72,7 +74,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
                 _pendingScopes[blockId] = CreateAndStartScope(kind, functionId);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void LogBlockEnd(
@@ -110,7 +114,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                         throw ExceptionUtilities.UnexpectedValue(kind);
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static bool IgnoreMessage(LogMessage logMessage) =>

@@ -645,7 +645,9 @@ public class ModelBinderFactoryTest
         }
     }
 
-    private class WidgetId { }
+    private class WidgetId
+    {
+    }
 
     private class WidgetIdBinder : IModelBinder
     {

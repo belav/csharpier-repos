@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     {
         public static readonly NoOpFixAllProvider Instance = new();
 
-        private NoOpFixAllProvider() { }
+        private NoOpFixAllProvider()
+        {
+        }
 
         public override Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext) =>
             Task.FromResult<CodeAction?>(null);

@@ -114,7 +114,9 @@ namespace System.Web.Mvc.Test
 
         class MockViewStartPage : ViewStartPage
         {
-            public override void Execute() { }
+            public override void Execute()
+            {
+            }
         }
     }
 }

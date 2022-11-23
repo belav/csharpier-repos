@@ -22,9 +22,13 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeHandle" />.
         /// </summary>
-        public SafeProcessHandle() : this(IntPtr.Zero) { }
+        public SafeProcessHandle() : this(IntPtr.Zero)
+        {
+        }
 
-        internal SafeProcessHandle(IntPtr handle) : this(handle, true) { }
+        internal SafeProcessHandle(IntPtr handle) : this(handle, true)
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeHandle" /> around a process handle.

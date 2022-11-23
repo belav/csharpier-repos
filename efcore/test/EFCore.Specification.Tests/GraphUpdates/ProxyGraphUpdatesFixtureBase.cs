@@ -895,7 +895,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Root
     {
-        protected Root() { }
+        protected Root()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -955,7 +957,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Required1
     {
-        protected Required1() { }
+        protected Required1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -977,7 +981,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Required1Derived : Required1
     {
-        protected Required1Derived() { }
+        protected Required1Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Required1Derived);
 
@@ -986,7 +992,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Required1MoreDerived : Required1Derived
     {
-        protected Required1MoreDerived() { }
+        protected Required1MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Required1MoreDerived);
 
@@ -995,7 +1003,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Required2
     {
-        protected Required2() { }
+        protected Required2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1014,7 +1024,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Required2Derived : Required2
     {
-        protected Required2Derived() { }
+        protected Required2Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Required2Derived);
 
@@ -1023,7 +1035,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Required2MoreDerived : Required2Derived
     {
-        protected Required2MoreDerived() { }
+        protected Required2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Required2MoreDerived);
 
@@ -1032,7 +1046,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Optional1
     {
-        protected Optional1() { }
+        protected Optional1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1057,7 +1073,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Optional1Derived : Optional1
     {
-        protected Optional1Derived() { }
+        protected Optional1Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Optional1Derived);
 
@@ -1066,7 +1084,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Optional1MoreDerived : Optional1Derived
     {
-        protected Optional1MoreDerived() { }
+        protected Optional1MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Optional1MoreDerived);
 
@@ -1075,7 +1095,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Optional2
     {
-        protected Optional2() { }
+        protected Optional2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1094,7 +1116,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Optional2Derived : Optional2
     {
-        protected Optional2Derived() { }
+        protected Optional2Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Optional2Derived);
 
@@ -1103,7 +1127,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class Optional2MoreDerived : Optional2Derived
     {
-        protected Optional2MoreDerived() { }
+        protected Optional2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as Optional2MoreDerived);
 
@@ -1112,7 +1138,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredSingle1
     {
-        protected RequiredSingle1() { }
+        protected RequiredSingle1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1131,7 +1159,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredSingle2
     {
-        protected RequiredSingle2() { }
+        protected RequiredSingle2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1148,7 +1178,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingle1
     {
-        protected RequiredNonPkSingle1() { }
+        protected RequiredNonPkSingle1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1169,7 +1201,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingle1Derived : RequiredNonPkSingle1
     {
-        protected RequiredNonPkSingle1Derived() { }
+        protected RequiredNonPkSingle1Derived()
+        {
+        }
 
         public virtual int DerivedRootId { get; set; }
 
@@ -1182,7 +1216,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingle1MoreDerived : RequiredNonPkSingle1Derived
     {
-        protected RequiredNonPkSingle1MoreDerived() { }
+        protected RequiredNonPkSingle1MoreDerived()
+        {
+        }
 
         public virtual int MoreDerivedRootId { get; set; }
 
@@ -1196,7 +1232,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingle2
     {
-        protected RequiredNonPkSingle2() { }
+        protected RequiredNonPkSingle2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1215,7 +1253,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingle2Derived : RequiredNonPkSingle2
     {
-        protected RequiredNonPkSingle2Derived() { }
+        protected RequiredNonPkSingle2Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as RequiredNonPkSingle2Derived);
 
@@ -1224,7 +1264,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingle2MoreDerived : RequiredNonPkSingle2Derived
     {
-        protected RequiredNonPkSingle2MoreDerived() { }
+        protected RequiredNonPkSingle2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) =>
             base.Equals(obj as RequiredNonPkSingle2MoreDerived);
@@ -1234,7 +1276,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingle1
     {
-        protected OptionalSingle1() { }
+        protected OptionalSingle1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1255,7 +1299,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingle1Derived : OptionalSingle1
     {
-        protected OptionalSingle1Derived() { }
+        protected OptionalSingle1Derived()
+        {
+        }
 
         public virtual int? DerivedRootId { get; set; }
 
@@ -1268,7 +1314,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingle1MoreDerived : OptionalSingle1Derived
     {
-        protected OptionalSingle1MoreDerived() { }
+        protected OptionalSingle1MoreDerived()
+        {
+        }
 
         public virtual int? MoreDerivedRootId { get; set; }
 
@@ -1281,7 +1329,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingle2
     {
-        protected OptionalSingle2() { }
+        protected OptionalSingle2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1300,7 +1350,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingle2Derived : OptionalSingle2
     {
-        protected OptionalSingle2Derived() { }
+        protected OptionalSingle2Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalSingle2Derived);
 
@@ -1309,7 +1361,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingle2MoreDerived : OptionalSingle2Derived
     {
-        protected OptionalSingle2MoreDerived() { }
+        protected OptionalSingle2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalSingle2MoreDerived);
 
@@ -1318,7 +1372,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredAk1
     {
-        protected RequiredAk1() { }
+        protected RequiredAk1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1345,7 +1401,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredAk1Derived : RequiredAk1
     {
-        protected RequiredAk1Derived() { }
+        protected RequiredAk1Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as RequiredAk1Derived);
 
@@ -1354,7 +1412,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredAk1MoreDerived : RequiredAk1Derived
     {
-        protected RequiredAk1MoreDerived() { }
+        protected RequiredAk1MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as RequiredAk1MoreDerived);
 
@@ -1363,7 +1423,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredAk2
     {
-        protected RequiredAk2() { }
+        protected RequiredAk2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1384,7 +1446,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredComposite1
     {
-        protected RequiredComposite1() { }
+        protected RequiredComposite1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1406,7 +1470,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalOverlapping2
     {
-        protected OptionalOverlapping2() { }
+        protected OptionalOverlapping2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1429,7 +1495,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredComposite2
     {
-        protected RequiredComposite2() { }
+        protected RequiredComposite2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1450,7 +1518,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredAk2Derived : RequiredAk2
     {
-        protected RequiredAk2Derived() { }
+        protected RequiredAk2Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as RequiredAk2Derived);
 
@@ -1459,7 +1529,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredAk2MoreDerived : RequiredAk2Derived
     {
-        protected RequiredAk2MoreDerived() { }
+        protected RequiredAk2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as RequiredAk2MoreDerived);
 
@@ -1468,7 +1540,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalAk1
     {
-        protected OptionalAk1() { }
+        protected OptionalAk1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1495,7 +1569,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalAk1Derived : OptionalAk1
     {
-        protected OptionalAk1Derived() { }
+        protected OptionalAk1Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalAk1Derived);
 
@@ -1504,7 +1580,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalAk1MoreDerived : OptionalAk1Derived
     {
-        protected OptionalAk1MoreDerived() { }
+        protected OptionalAk1MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalAk1MoreDerived);
 
@@ -1513,7 +1591,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalAk2
     {
-        protected OptionalAk2() { }
+        protected OptionalAk2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1534,7 +1614,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalComposite2
     {
-        protected OptionalComposite2() { }
+        protected OptionalComposite2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1559,7 +1641,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalAk2Derived : OptionalAk2
     {
-        protected OptionalAk2Derived() { }
+        protected OptionalAk2Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalAk2Derived);
 
@@ -1568,7 +1652,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalAk2MoreDerived : OptionalAk2Derived
     {
-        protected OptionalAk2MoreDerived() { }
+        protected OptionalAk2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalAk2MoreDerived);
 
@@ -1577,7 +1663,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredSingleAk1
     {
-        protected RequiredSingleAk1() { }
+        protected RequiredSingleAk1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1602,7 +1690,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredSingleAk2
     {
-        protected RequiredSingleAk2() { }
+        protected RequiredSingleAk2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1623,7 +1713,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredSingleComposite2
     {
-        protected RequiredSingleComposite2() { }
+        protected RequiredSingleComposite2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1644,7 +1736,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingleAk1
     {
-        protected RequiredNonPkSingleAk1() { }
+        protected RequiredNonPkSingleAk1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1667,7 +1761,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingleAk1Derived : RequiredNonPkSingleAk1
     {
-        protected RequiredNonPkSingleAk1Derived() { }
+        protected RequiredNonPkSingleAk1Derived()
+        {
+        }
 
         public virtual Guid DerivedRootId { get; set; }
 
@@ -1681,7 +1777,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingleAk1MoreDerived : RequiredNonPkSingleAk1Derived
     {
-        protected RequiredNonPkSingleAk1MoreDerived() { }
+        protected RequiredNonPkSingleAk1MoreDerived()
+        {
+        }
 
         public virtual Guid MoreDerivedRootId { get; set; }
 
@@ -1695,7 +1793,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingleAk2
     {
-        protected RequiredNonPkSingleAk2() { }
+        protected RequiredNonPkSingleAk2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1716,7 +1816,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingleAk2Derived : RequiredNonPkSingleAk2
     {
-        protected RequiredNonPkSingleAk2Derived() { }
+        protected RequiredNonPkSingleAk2Derived()
+        {
+        }
 
         public override bool Equals(object obj) =>
             base.Equals(obj as RequiredNonPkSingleAk2Derived);
@@ -1726,7 +1828,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class RequiredNonPkSingleAk2MoreDerived : RequiredNonPkSingleAk2Derived
     {
-        protected RequiredNonPkSingleAk2MoreDerived() { }
+        protected RequiredNonPkSingleAk2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) =>
             base.Equals(obj as RequiredNonPkSingleAk2MoreDerived);
@@ -1736,7 +1840,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingleAk1
     {
-        protected OptionalSingleAk1() { }
+        protected OptionalSingleAk1()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1761,7 +1867,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingleAk1Derived : OptionalSingleAk1
     {
-        protected OptionalSingleAk1Derived() { }
+        protected OptionalSingleAk1Derived()
+        {
+        }
 
         public virtual Guid? DerivedRootId { get; set; }
 
@@ -1774,7 +1882,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingleAk1MoreDerived : OptionalSingleAk1Derived
     {
-        protected OptionalSingleAk1MoreDerived() { }
+        protected OptionalSingleAk1MoreDerived()
+        {
+        }
 
         public virtual Guid? MoreDerivedRootId { get; set; }
 
@@ -1787,7 +1897,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingleAk2
     {
-        protected OptionalSingleAk2() { }
+        protected OptionalSingleAk2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1808,7 +1920,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingleComposite2
     {
-        protected OptionalSingleComposite2() { }
+        protected OptionalSingleComposite2()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1829,7 +1943,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingleAk2Derived : OptionalSingleAk2
     {
-        protected OptionalSingleAk2Derived() { }
+        protected OptionalSingleAk2Derived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalSingleAk2Derived);
 
@@ -1838,7 +1954,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class OptionalSingleAk2MoreDerived : OptionalSingleAk2Derived
     {
-        protected OptionalSingleAk2MoreDerived() { }
+        protected OptionalSingleAk2MoreDerived()
+        {
+        }
 
         public override bool Equals(object obj) => base.Equals(obj as OptionalSingleAk2MoreDerived);
 
@@ -1847,7 +1965,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class BadCustomer
     {
-        protected BadCustomer() { }
+        protected BadCustomer()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1859,7 +1979,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
     public class BadOrder
     {
-        protected BadOrder() { }
+        protected BadOrder()
+        {
+        }
 
         public virtual int Id { get; set; }
 
@@ -1938,8 +2060,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             nestedTestOperation3
         );
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 }

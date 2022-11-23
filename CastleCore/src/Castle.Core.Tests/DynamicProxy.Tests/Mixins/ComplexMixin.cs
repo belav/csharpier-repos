@@ -36,12 +36,20 @@ namespace Castle.DynamicProxy.Tests.Mixins
 #endif
     public class ComplexMixin : IThird
     {
-        public ComplexMixin() { }
+        public ComplexMixin()
+        {
+        }
 
-        public void DoThird() { }
+        public void DoThird()
+        {
+        }
 
-        public void DoSecond() { }
+        public void DoSecond()
+        {
+        }
 
-        public void DoFirst() { }
+        public void DoFirst()
+        {
+        }
     }
 }

@@ -21,7 +21,9 @@ namespace System
         private static IntPtr InvalidHandleValue => new IntPtr(-1);
 
         /// <summary>Ensures that the console has been initialized for use.</summary>
-        internal static void EnsureConsoleInitialized() { }
+        internal static void EnsureConsoleInitialized()
+        {
+        }
 
         private static bool IsWindows7()
         {

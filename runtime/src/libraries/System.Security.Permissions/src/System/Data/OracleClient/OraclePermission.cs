@@ -15,7 +15,9 @@ namespace System.Data.OracleClient
 #endif
     public sealed class OraclePermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public OraclePermission(PermissionState state) { }
+        public OraclePermission(PermissionState state)
+        {
+        }
 
         public bool AllowBlankPassword { get; set; }
 
@@ -23,14 +25,18 @@ namespace System.Data.OracleClient
             string connectionString,
             string restrictions,
             KeyRestrictionBehavior behavior
-        ) { }
+        )
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
             IGlobalOptionService globalOptions
         ) : base(diagnosticAnalyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
-        { }
+        {
+        }
 
         public abstract LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
             TDiagnosticsParams diagnosticsParams

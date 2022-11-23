@@ -35,7 +35,9 @@ namespace System.Speech.Internal.ObjectTokens
         }
 
         protected RegistryDataKey(string fullPath, RegistryKey managedRegKey)
-            : this(fullPath, managedRegKey.Handle) { }
+            : this(fullPath, managedRegKey.Handle)
+        {
+        }
 
         protected RegistryDataKey(string fullPath, RegistryDataKey copyKey)
         {
@@ -52,7 +54,9 @@ namespace System.Speech.Internal.ObjectTokens
         }
 
         protected RegistryDataKey(ISpObjectToken sapiToken)
-            : this(GetTokenIdFromToken(sapiToken), sapiToken, false) { }
+            : this(GetTokenIdFromToken(sapiToken), sapiToken, false)
+        {
+        }
 
         internal static RegistryDataKey Open(string registryPath, bool fCreateIfNotExist)
         {

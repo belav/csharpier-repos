@@ -22,7 +22,9 @@ public class SqlServerMigrationsAnnotationProvider : MigrationsAnnotationProvide
         MigrationsAnnotationProviderDependencies dependencies
     )
 #pragma warning restore EF1001 // Internal EF Core API usage.
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     public override IEnumerable<IAnnotation> ForRemove(IRelationalModel model) =>

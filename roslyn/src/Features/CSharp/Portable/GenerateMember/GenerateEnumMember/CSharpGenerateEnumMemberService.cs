@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateEnumMember
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateEnumMemberService() { }
+        public CSharpGenerateEnumMemberService()
+        {
+        }
 
         protected override bool IsIdentifierNameGeneration(SyntaxNode node) =>
             node is IdentifierNameSyntax;

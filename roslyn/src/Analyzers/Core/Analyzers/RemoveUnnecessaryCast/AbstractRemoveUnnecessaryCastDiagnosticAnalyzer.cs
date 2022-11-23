@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryCast
                     CompilerExtensionsResources.ResourceManager,
                     typeof(CompilerExtensionsResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
         protected abstract TextSpan GetFadeSpan(TCastExpression node);

@@ -95,7 +95,9 @@ namespace System.Data.Common
                 _index = -1;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

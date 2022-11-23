@@ -123,9 +123,13 @@ public class SqlServerDatabaseFacadeTest
 
     private class ProviderContext : DbContext
     {
-        protected ProviderContext() { }
+        protected ProviderContext()
+        {
+        }
 
-        public ProviderContext(DbContextOptions options) : base(options) { }
+        public ProviderContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public bool? IsSqlServerSet { get; protected set; }
     }
@@ -170,7 +174,9 @@ public class SqlServerDatabaseFacadeTest
 
     private class ProviderOnModelContext : ProviderContext
     {
-        public ProviderOnModelContext(DbContextOptions options) : base(options) { }
+        public ProviderOnModelContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             IsSqlServerSet = Database.IsSqlServer();
@@ -186,7 +192,9 @@ public class SqlServerDatabaseFacadeTest
 
     private class ProviderUseInOnConfiguringContext : ProviderContext
     {
-        public ProviderUseInOnConfiguringContext(DbContextOptions options) : base(options) { }
+        public ProviderUseInOnConfiguringContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             IsSqlServerSet = Database.IsSqlServer();

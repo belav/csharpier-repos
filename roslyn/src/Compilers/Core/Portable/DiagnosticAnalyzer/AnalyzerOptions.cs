@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         /// <param name="additionalFiles">A set of additional non-code text files that can be used by analyzers.</param>
         public AnalyzerOptions(ImmutableArray<AdditionalText> additionalFiles)
-            : this(additionalFiles, CompilerAnalyzerConfigOptionsProvider.Empty) { }
+            : this(additionalFiles, CompilerAnalyzerConfigOptionsProvider.Empty)
+        {
+        }
 
         /// <summary>
         /// Returns analyzer options with the given <paramref name="additionalFiles"/>.

@@ -13,9 +13,13 @@ namespace System.Web.Mvc
             IUnvalidatedValueProvider,
             IEnumerableValueProvider
     {
-        public ValueProviderCollection() { }
+        public ValueProviderCollection()
+        {
+        }
 
-        public ValueProviderCollection(IList<IValueProvider> list) : base(list) { }
+        public ValueProviderCollection(IList<IValueProvider> list) : base(list)
+        {
+        }
 
         public virtual bool ContainsPrefix(string prefix)
         {

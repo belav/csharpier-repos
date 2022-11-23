@@ -16,7 +16,9 @@ namespace SerializationTestTypes
         [NonSerialized]
         public static SelfRef1 containedData = new SelfRef1();
 
-        public DCExplicitInterfaceIObjRef() { }
+        public DCExplicitInterfaceIObjRef()
+        {
+        }
 
         public DCExplicitInterfaceIObjRef(bool init)
         {
@@ -49,9 +51,13 @@ namespace SerializationTestTypes
         [NonSerialized]
         private static SimpleDCWithRef s_containedData = new SimpleDCWithRef(true);
 
-        public DCIObjRef() { }
+        public DCIObjRef()
+        {
+        }
 
-        public DCIObjRef(bool init) { }
+        public DCIObjRef(bool init)
+        {
+        }
 
         public object GetRealObject(StreamingContext context)
         {

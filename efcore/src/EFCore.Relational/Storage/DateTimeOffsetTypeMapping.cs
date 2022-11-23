@@ -30,14 +30,18 @@ public class DateTimeOffsetTypeMapping : RelationalTypeMapping
     public DateTimeOffsetTypeMapping(
         string storeType,
         DbType? dbType = System.Data.DbType.DateTimeOffset
-    ) : base(storeType, typeof(DateTimeOffset), dbType) { }
+    ) : base(storeType, typeof(DateTimeOffset), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DateTimeOffsetTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected DateTimeOffsetTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters) { }
+        : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

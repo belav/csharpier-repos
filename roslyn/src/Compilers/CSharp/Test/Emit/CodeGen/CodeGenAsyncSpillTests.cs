@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class CodeGenAsyncSpillTests : EmitMetadataTestBase
     {
-        public CodeGenAsyncSpillTests() { }
+        public CodeGenAsyncSpillTests()
+        {
+        }
 
         private CompilationVerifier CompileAndVerify(
             string source,

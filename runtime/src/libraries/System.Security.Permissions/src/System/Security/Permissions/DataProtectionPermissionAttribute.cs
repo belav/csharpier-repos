@@ -22,7 +22,9 @@ namespace System.Security.Permissions
     public sealed class DataProtectionPermissionAttribute : CodeAccessSecurityAttribute
     {
         public DataProtectionPermissionAttribute(SecurityAction action)
-            : base(default(SecurityAction)) { }
+            : base(default(SecurityAction))
+        {
+        }
 
         public DataProtectionPermissionFlags Flags { get; set; }
         public bool ProtectData { get; set; }

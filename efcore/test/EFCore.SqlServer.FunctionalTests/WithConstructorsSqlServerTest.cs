@@ -7,7 +7,8 @@ public class WithConstructorsSqlServerTest
     : WithConstructorsTestBase<WithConstructorsSqlServerTest.WithConstructorsSqlServerFixture>
 {
     public WithConstructorsSqlServerTest(WithConstructorsSqlServerFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

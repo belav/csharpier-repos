@@ -14,7 +14,9 @@ namespace Moq.Expressions.Visitors
     {
         public static readonly ExpressionVisitor Rewriter = new EvaluateCaptures();
 
-        private EvaluateCaptures() { }
+        private EvaluateCaptures()
+        {
+        }
 
         protected override Expression VisitMember(MemberExpression node)
         {

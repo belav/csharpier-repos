@@ -8,19 +8,27 @@ namespace System.Formats.Tar
 {
     public sealed partial class GnuTarEntry : System.Formats.Tar.PosixTarEntry
     {
-        public GnuTarEntry(System.Formats.Tar.TarEntry other) { }
+        public GnuTarEntry(System.Formats.Tar.TarEntry other)
+        {
+        }
 
-        public GnuTarEntry(System.Formats.Tar.TarEntryType entryType, string entryName) { }
+        public GnuTarEntry(System.Formats.Tar.TarEntryType entryType, string entryName)
+        {
+        }
 
         public System.DateTimeOffset AccessTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset ChangeTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -32,7 +40,9 @@ namespace System.Formats.Tar
                 string,
                 string
             >> globalExtendedAttributes
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IReadOnlyDictionary<
             string,
@@ -45,9 +55,13 @@ namespace System.Formats.Tar
 
     public sealed partial class PaxTarEntry : System.Formats.Tar.PosixTarEntry
     {
-        public PaxTarEntry(System.Formats.Tar.TarEntry other) { }
+        public PaxTarEntry(System.Formats.Tar.TarEntry other)
+        {
+        }
 
-        public PaxTarEntry(System.Formats.Tar.TarEntryType entryType, string entryName) { }
+        public PaxTarEntry(System.Formats.Tar.TarEntryType entryType, string entryName)
+        {
+        }
 
         public PaxTarEntry(
             System.Formats.Tar.TarEntryType entryType,
@@ -56,7 +70,9 @@ namespace System.Formats.Tar
                 string,
                 string
             >> extendedAttributes
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IReadOnlyDictionary<string, string> ExtendedAttributes
         {
@@ -66,33 +82,45 @@ namespace System.Formats.Tar
 
     public abstract partial class PosixTarEntry : System.Formats.Tar.TarEntry
     {
-        internal PosixTarEntry() { }
+        internal PosixTarEntry()
+        {
+        }
 
         public int DeviceMajor
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int DeviceMinor
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string GroupName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string UserName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public abstract partial class TarEntry
     {
-        internal TarEntry() { }
+        internal TarEntry()
+        {
+        }
 
         public int Checksum
         {
@@ -101,7 +129,9 @@ namespace System.Formats.Tar
         public System.IO.Stream? DataStream
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Formats.Tar.TarEntryType EntryType
         {
@@ -114,7 +144,9 @@ namespace System.Formats.Tar
         public int Gid
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long Length
         {
@@ -123,30 +155,42 @@ namespace System.Formats.Tar
         public string LinkName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.UnixFileMode Mode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTimeOffset ModificationTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Uid
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void ExtractToFile(string destinationFileName, bool overwrite) { }
+        public void ExtractToFile(string destinationFileName, bool overwrite)
+        {
+        }
 
         public System.Threading.Tasks.Task ExtractToFileAsync(
             string destinationFileName,
@@ -201,13 +245,17 @@ namespace System.Formats.Tar
             string sourceDirectoryName,
             System.IO.Stream destination,
             bool includeBaseDirectory
-        ) { }
+        )
+        {
+        }
 
         public static void CreateFromDirectory(
             string sourceDirectoryName,
             string destinationFileName,
             bool includeBaseDirectory
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task CreateFromDirectoryAsync(
             string sourceDirectoryName,
@@ -235,13 +283,17 @@ namespace System.Formats.Tar
             System.IO.Stream source,
             string destinationDirectoryName,
             bool overwriteFiles
-        ) { }
+        )
+        {
+        }
 
         public static void ExtractToDirectory(
             string sourceFileName,
             string destinationDirectoryName,
             bool overwriteFiles
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task ExtractToDirectoryAsync(
             System.IO.Stream source,
@@ -268,9 +320,13 @@ namespace System.Formats.Tar
 
     public sealed partial class TarReader : System.IAsyncDisposable, System.IDisposable
     {
-        public TarReader(System.IO.Stream archiveStream, bool leaveOpen = false) { }
+        public TarReader(System.IO.Stream archiveStream, bool leaveOpen = false)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -294,31 +350,43 @@ namespace System.Formats.Tar
 
     public sealed partial class TarWriter : System.IAsyncDisposable, System.IDisposable
     {
-        public TarWriter(System.IO.Stream archiveStream) { }
+        public TarWriter(System.IO.Stream archiveStream)
+        {
+        }
 
-        public TarWriter(System.IO.Stream archiveStream, bool leaveOpen = false) { }
+        public TarWriter(System.IO.Stream archiveStream, bool leaveOpen = false)
+        {
+        }
 
         public TarWriter(
             System.IO.Stream archiveStream,
             System.Formats.Tar.TarEntryFormat format = System.Formats.Tar.TarEntryFormat.Pax,
             bool leaveOpen = false
-        ) { }
+        )
+        {
+        }
 
         public System.Formats.Tar.TarEntryFormat Format
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
 
-        public void WriteEntry(System.Formats.Tar.TarEntry entry) { }
+        public void WriteEntry(System.Formats.Tar.TarEntry entry)
+        {
+        }
 
-        public void WriteEntry(string fileName, string? entryName) { }
+        public void WriteEntry(string fileName, string? entryName)
+        {
+        }
 
         public System.Threading.Tasks.Task WriteEntryAsync(
             System.Formats.Tar.TarEntry entry,
@@ -342,15 +410,23 @@ namespace System.Formats.Tar
 
     public sealed partial class UstarTarEntry : System.Formats.Tar.PosixTarEntry
     {
-        public UstarTarEntry(System.Formats.Tar.TarEntry other) { }
+        public UstarTarEntry(System.Formats.Tar.TarEntry other)
+        {
+        }
 
-        public UstarTarEntry(System.Formats.Tar.TarEntryType entryType, string entryName) { }
+        public UstarTarEntry(System.Formats.Tar.TarEntryType entryType, string entryName)
+        {
+        }
     }
 
     public sealed partial class V7TarEntry : System.Formats.Tar.TarEntry
     {
-        public V7TarEntry(System.Formats.Tar.TarEntry other) { }
+        public V7TarEntry(System.Formats.Tar.TarEntry other)
+        {
+        }
 
-        public V7TarEntry(System.Formats.Tar.TarEntryType entryType, string entryName) { }
+        public V7TarEntry(System.Formats.Tar.TarEntryType entryType, string entryName)
+        {
+        }
     }
 }

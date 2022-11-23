@@ -10,7 +10,9 @@ namespace System.Net.Http.Headers
     {
         internal static readonly TimeSpanHeaderParser Parser = new TimeSpanHeaderParser();
 
-        private TimeSpanHeaderParser() : base(false) { }
+        private TimeSpanHeaderParser() : base(false)
+        {
+        }
 
         public override string ToString(object value)
         {

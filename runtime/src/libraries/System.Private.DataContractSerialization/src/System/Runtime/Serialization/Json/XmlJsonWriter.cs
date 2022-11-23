@@ -88,7 +88,9 @@ namespace System.Runtime.Serialization.Json
         private readonly string? _indentChars;
         private int _indentLevel;
 
-        public XmlJsonWriter() : this(false, null) { }
+        public XmlJsonWriter() : this(false, null)
+        {
+        }
 
         public XmlJsonWriter(bool indent, string? indentChars)
         {

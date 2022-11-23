@@ -49,7 +49,8 @@ namespace System.Runtime.CompilerServices.Tests
             d.ConfigureAwait(continueOnCapturedContext)
                 .DisposeAsync()
                 .GetAwaiter()
-                .UnsafeOnCompleted(() => { });
+                .UnsafeOnCompleted(() => {
+                });
             Assert.Equal(
                 continueOnCapturedContext
                     ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext

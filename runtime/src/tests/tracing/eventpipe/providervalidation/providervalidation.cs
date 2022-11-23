@@ -16,7 +16,9 @@ namespace Tracing.Tests.ProviderValidation
 {
     public sealed class MyEventSource : EventSource
     {
-        private MyEventSource() { }
+        private MyEventSource()
+        {
+        }
 
         public static MyEventSource Log = new MyEventSource();
 

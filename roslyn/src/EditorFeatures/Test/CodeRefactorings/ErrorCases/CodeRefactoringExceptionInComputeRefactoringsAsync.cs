@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService.ErrorCa
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExceptionInComputeRefactoringsAsync() { }
+        public ExceptionInComputeRefactoringsAsync()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

@@ -257,14 +257,24 @@ namespace System.Text.Json.Tests.Serialization
             );
         }
 
-        private interface Interface { }
+        private interface Interface
+        {
+        }
 
-        private class Class : Interface { }
+        private class Class : Interface
+        {
+        }
 
-        private struct Struct : Interface { }
+        private struct Struct : Interface
+        {
+        }
 
-        private sealed class SealedClass : Interface { }
+        private sealed class SealedClass : Interface
+        {
+        }
 
-        private class GenericClass<T> : Class { }
+        private class GenericClass<T> : Class
+        {
+        }
     }
 }

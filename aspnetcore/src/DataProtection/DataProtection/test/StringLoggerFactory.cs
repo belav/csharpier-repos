@@ -28,7 +28,9 @@ internal sealed class StringLoggerFactory : ILoggerFactory
         return new StringLogger(name, this);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public override string ToString()
     {

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     internal partial class TriviaDataFactory : AbstractTriviaDataFactory
     {
         public TriviaDataFactory(TreeData treeInfo, SyntaxFormattingOptions options)
-            : base(treeInfo, options) { }
+            : base(treeInfo, options)
+        {
+        }
 
         private static bool IsCSharpWhitespace(char c) =>
             SyntaxFacts.IsWhitespace(c) || SyntaxFacts.IsNewLine(c);

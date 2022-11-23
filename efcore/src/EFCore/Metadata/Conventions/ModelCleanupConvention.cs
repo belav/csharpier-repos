@@ -150,6 +150,8 @@ public class ModelCleanupConvention : IForeignKeyRemovedConvention, IModelFinali
                 )
                 .Union(to.GetSkipNavigations().Select(sn => sn.TargetEntityType));
 
-        public override void Clear() { }
+        public override void Clear()
+        {
+        }
     }
 }

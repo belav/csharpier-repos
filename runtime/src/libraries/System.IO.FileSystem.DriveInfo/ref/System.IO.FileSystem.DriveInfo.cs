@@ -8,7 +8,9 @@ namespace System.IO
 {
     public sealed partial class DriveInfo : System.Runtime.Serialization.ISerializable
     {
-        public DriveInfo(string driveName) { }
+        public DriveInfo(string driveName)
+        {
+        }
 
         public long AvailableFreeSpace
         {
@@ -48,7 +50,9 @@ namespace System.IO
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
 
         public static System.IO.DriveInfo[] GetDrives()
@@ -59,7 +63,9 @@ namespace System.IO
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -69,16 +75,24 @@ namespace System.IO
 
     public partial class DriveNotFoundException : System.IO.IOException
     {
-        public DriveNotFoundException() { }
+        public DriveNotFoundException()
+        {
+        }
 
         protected DriveNotFoundException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DriveNotFoundException(string? message) { }
+        public DriveNotFoundException(string? message)
+        {
+        }
 
-        public DriveNotFoundException(string? message, System.Exception? innerException) { }
+        public DriveNotFoundException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public enum DriveType

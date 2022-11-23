@@ -14,7 +14,9 @@ namespace System.Linq.Expressions.Tests
         {
             public int this[int index]
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

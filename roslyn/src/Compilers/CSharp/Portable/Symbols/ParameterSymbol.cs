@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal const string ValueParameterName = "value";
 
-        internal ParameterSymbol() { }
+        internal ParameterSymbol()
+        {
+        }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another

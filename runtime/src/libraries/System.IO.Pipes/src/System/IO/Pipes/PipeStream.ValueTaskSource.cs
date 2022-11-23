@@ -94,7 +94,9 @@ namespace System.IO.Pipes
                                         Interop.Kernel32.CancelIoEx(handle, vts._overlapped);
                                         // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
                                     }
-                                    catch (ObjectDisposedException) { } // in case the SafeHandle is (erroneously) closed concurrently
+                                    catch (ObjectDisposedException)
+                                    {
+                                    } // in case the SafeHandle is (erroneously) closed concurrently
                                 }
                             },
                             this
@@ -237,7 +239,9 @@ namespace System.IO.Pipes
 
         internal sealed class ConnectionValueTaskSource : PipeValueTaskSource
         {
-            internal ConnectionValueTaskSource(NamedPipeServerStream server) : base(server) { }
+            internal ConnectionValueTaskSource(NamedPipeServerStream server) : base(server)
+            {
+            }
 
             private protected override void CompleteCore(uint errorCode, uint numBytes)
             {

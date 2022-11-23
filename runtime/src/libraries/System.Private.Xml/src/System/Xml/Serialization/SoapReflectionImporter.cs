@@ -24,12 +24,18 @@ namespace System.Xml.Serialization
         private readonly string _defaultNs;
         private readonly ModelScope _modelScope;
 
-        public SoapReflectionImporter() : this(null, null) { }
+        public SoapReflectionImporter() : this(null, null)
+        {
+        }
 
-        public SoapReflectionImporter(string? defaultNamespace) : this(null, defaultNamespace) { }
+        public SoapReflectionImporter(string? defaultNamespace) : this(null, defaultNamespace)
+        {
+        }
 
         public SoapReflectionImporter(SoapAttributeOverrides? attributeOverrides)
-            : this(attributeOverrides, null) { }
+            : this(attributeOverrides, null)
+        {
+        }
 
         public SoapReflectionImporter(
             SoapAttributeOverrides? attributeOverrides,

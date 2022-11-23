@@ -98,7 +98,9 @@ namespace System.Reflection.Emit
 
     public partial class OpCodes
     {
-        internal OpCodes() { }
+        internal OpCodes()
+        {
+        }
 
         public static readonly System.Reflection.Emit.OpCode Add;
         public static readonly System.Reflection.Emit.OpCode Add_Ovf;

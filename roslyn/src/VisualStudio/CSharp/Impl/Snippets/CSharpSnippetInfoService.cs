@@ -38,7 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 (IAsyncServiceProvider)serviceProvider,
                 Guids.CSharpLanguageServiceId,
                 listenerProvider
-            ) { }
+            )
+        {
+        }
 
         public override bool ShouldFormatSnippet(SnippetInfo snippetInfo) =>
             _formatTriggeringSnippets.Contains(snippetInfo.Shortcut);

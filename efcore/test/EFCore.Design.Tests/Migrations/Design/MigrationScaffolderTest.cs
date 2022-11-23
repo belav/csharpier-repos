@@ -157,14 +157,20 @@ public class MigrationsScaffolderTest
     }
 
     // ReSharper disable once UnusedTypeParameter
-    private class GenericContext<T> : DbContext { }
+    private class GenericContext<T> : DbContext
+    {
+    }
 
-    private class ContextWithSnapshot : DbContext { }
+    private class ContextWithSnapshot : DbContext
+    {
+    }
 
     [DbContext(typeof(ContextWithSnapshot))]
     private class ContextWithSnapshotModelSnapshot : ModelSnapshot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder) { }
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
+        }
     }
 
     private class MockHistoryRepository : IHistoryRepository

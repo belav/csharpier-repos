@@ -1,6 +1,8 @@
 using System;
 
-public class Gen<T> { }
+public class Gen<T>
+{
+}
 
 static class Stuff
 {

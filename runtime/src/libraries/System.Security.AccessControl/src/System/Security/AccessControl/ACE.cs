@@ -1415,7 +1415,9 @@ namespace System.Security.AccessControl
             SecurityIdentifier sid,
             bool isCallback,
             byte[]? opaque
-        ) : base(TypeFromQualifier(isCallback, qualifier), flags, accessMask, sid, opaque) { }
+        ) : base(TypeFromQualifier(isCallback, qualifier), flags, accessMask, sid, opaque)
+        {
+        }
 
         #endregion
 

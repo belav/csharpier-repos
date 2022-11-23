@@ -197,7 +197,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     CPUInstruction: null
                 );
                 // Use async overload of OnFunctionResolved to avoid deadlock.
-                request.OnFunctionResolved(workList, address, result => { });
+                request.OnFunctionResolved(
+                    workList,
+                    address,
+                    result =>
+                    {
+                    }
+                );
             };
         }
 

@@ -581,7 +581,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | ReservedAttributes.NullablePublicOnlyAttribute
                         | ReservedAttributes.RefSafetyRulesAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SkipLocalsInitAttribute)
             )

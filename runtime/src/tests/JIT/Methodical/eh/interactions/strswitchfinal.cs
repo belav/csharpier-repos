@@ -146,7 +146,9 @@ namespace strswitch_strswitchfinal_cs
                                         try
                                         {
                                             Console.WriteLine("s == " + s[s.Length]);
-                                            try { }
+                                            try
+                                            {
+                                            }
                                             finally
                                             {
                                                 Console.WriteLine("Unreached");

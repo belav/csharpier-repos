@@ -39,25 +39,37 @@ class Program
 
     class TypedClientA
     {
-        public TypedClientA(HttpClient httpClient) { }
+        public TypedClientA(HttpClient httpClient)
+        {
+        }
     }
 
-    interface ITypedClientB { }
+    interface ITypedClientB
+    {
+    }
 
     class TypedClientB : ITypedClientB
     {
-        public TypedClientB(HttpClient httpClient) { }
+        public TypedClientB(HttpClient httpClient)
+        {
+        }
     }
 
     class TypedClientC
     {
-        public TypedClientC(HttpClient httpClient) { }
+        public TypedClientC(HttpClient httpClient)
+        {
+        }
     }
 
-    interface ITypedClientD { }
+    interface ITypedClientD
+    {
+    }
 
     class TypedClientD : ITypedClientD
     {
-        public TypedClientD(HttpClient httpClient) { }
+        public TypedClientD(HttpClient httpClient)
+        {
+        }
     }
 }

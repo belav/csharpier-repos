@@ -32,16 +32,24 @@ namespace System.Linq.Parallel
         //
 
         internal UnaryQueryOperator(IEnumerable<TInput> child)
-            : this(QueryOperator<TInput>.AsQueryOperator(child)) { }
+            : this(QueryOperator<TInput>.AsQueryOperator(child))
+        {
+        }
 
         internal UnaryQueryOperator(IEnumerable<TInput> child, bool outputOrdered)
-            : this(QueryOperator<TInput>.AsQueryOperator(child), outputOrdered) { }
+            : this(QueryOperator<TInput>.AsQueryOperator(child), outputOrdered)
+        {
+        }
 
         private UnaryQueryOperator(QueryOperator<TInput> child)
-            : this(child, child.OutputOrdered, child.SpecifiedQuerySettings) { }
+            : this(child, child.OutputOrdered, child.SpecifiedQuerySettings)
+        {
+        }
 
         internal UnaryQueryOperator(QueryOperator<TInput> child, bool outputOrdered)
-            : this(child, outputOrdered, child.SpecifiedQuerySettings) { }
+            : this(child, outputOrdered, child.SpecifiedQuerySettings)
+        {
+        }
 
         private UnaryQueryOperator(
             QueryOperator<TInput> child,

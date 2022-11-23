@@ -20,7 +20,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicIntelliSense(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicIntelliSense)) { }
+            : base(instanceFactory, nameof(BasicIntelliSense))
+        {
+        }
 
         public override async Task InitializeAsync()
         {

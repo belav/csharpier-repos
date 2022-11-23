@@ -26,11 +26,14 @@ namespace Microsoft.CodeAnalysis
         private readonly ImmutableArray<KeyValuePair<string, string>> _pathMap;
 
         public SourceFileResolver(IEnumerable<string> searchPaths, string? baseDirectory)
-            : this(searchPaths.AsImmutableOrNull(), baseDirectory) { }
+            : this(searchPaths.AsImmutableOrNull(), baseDirectory)
+        {
+        }
 
         public SourceFileResolver(ImmutableArray<string> searchPaths, string? baseDirectory)
             : this(searchPaths, baseDirectory, ImmutableArray<KeyValuePair<string, string>>.Empty)
-        { }
+        {
+        }
 
         public SourceFileResolver(
             ImmutableArray<string> searchPaths,

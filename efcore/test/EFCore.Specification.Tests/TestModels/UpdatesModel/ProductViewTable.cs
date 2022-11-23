@@ -5,4 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-public class ProductViewTable : Product { }
+public class ProductViewTable : Product
+{
+}

@@ -80,7 +80,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             private readonly CancellationTokenSource _cancellationTokenSource =
                 new CancellationTokenSource();
 
-            public MemoryHogger() { }
+            public MemoryHogger()
+            {
+            }
 
             public int Count
             {
@@ -129,7 +131,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                             await Task.Yield();
                         }
                     }
-                    catch (OutOfMemoryException) { }
+                    catch (OutOfMemoryException)
+                    {
+                    }
 
                     // monitor memory to keep it paged in
                     while (true)
@@ -155,7 +159,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                                 await Task.Yield();
                             }
                         }
-                        catch (OutOfMemoryException) { }
+                        catch (OutOfMemoryException)
+                        {
+                        }
 
                         await Task.Delay(MonitorDelay, _cancellationTokenSource.Token)
                             .ConfigureAwait(false);

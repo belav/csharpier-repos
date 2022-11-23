@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         internal static CallSiteJsonFormatter Instance = new CallSiteJsonFormatter();
 
-        private CallSiteJsonFormatter() { }
+        private CallSiteJsonFormatter()
+        {
+        }
 
         public string Format(ServiceCallSite callSite)
         {

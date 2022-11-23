@@ -14,10 +14,14 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        public Argument() { }
+        public Argument()
+        {
+        }
 
         /// <inheritdoc />
-        public Argument(string? name, string? description = null) : base(name, description) { }
+        public Argument(string? name, string? description = null) : base(name, description)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
@@ -102,7 +106,9 @@ namespace System.CommandLine
         /// <param name="parse">A custom argument parser.</param>
         /// <param name="isDefault"><see langword="true"/> to use the <paramref name="parse"/> result as default value.</param>
         public Argument(ParseArgument<T> parse, bool isDefault = false)
-            : this(null!, parse, isDefault) { }
+            : this(null!, parse, isDefault)
+        {
+        }
 
         internal override bool HasCustomParser => _hasCustomParser;
 

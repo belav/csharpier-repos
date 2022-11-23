@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
 
-        private AssemblyLoadTestFixtureCollection() { }
+        private AssemblyLoadTestFixtureCollection()
+        {
+        }
     }
 
     [Collection(AssemblyLoadTestFixtureCollection.Name)]
@@ -1073,7 +1075,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     MetadataReferenceProperties.Assembly,
                     "missing_reference",
                     XmlDocumentationProvider.Default
-                ) { }
+                )
+            {
+            }
 
             protected override DocumentationProvider CreateDocumentationProvider() => null;
 
@@ -1092,7 +1096,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             public MockShadowCopyAnalyzerAssemblyLoader(ImmutableDictionary<string, string> map) =>
                 _map = map;
 
-            public void AddDependencyLocation(string fullPath) { }
+            public void AddDependencyLocation(string fullPath)
+            {
+            }
 
             public Assembly LoadFromPath(string fullPath) => Assembly.LoadFrom(_map[fullPath]);
         }

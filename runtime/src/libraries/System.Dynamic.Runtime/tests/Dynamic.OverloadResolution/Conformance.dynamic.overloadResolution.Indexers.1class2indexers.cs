@@ -1830,9 +1830,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -1894,9 +1898,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class MyClass
     {
@@ -1963,9 +1971,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -2028,9 +2040,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
     public class Target
     {
@@ -2092,9 +2108,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
     public class Target
     {
@@ -2157,9 +2177,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
     public class Target
     {
@@ -2482,7 +2506,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Derived : Base
     {

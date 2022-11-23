@@ -184,7 +184,9 @@ namespace System.Text.Json.Serialization.Tests
             [JsonExtensionData]
             public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
-            public Class_ExtData_CtorParam(Dictionary<string, JsonElement> extensionData) { }
+            public Class_ExtData_CtorParam(Dictionary<string, JsonElement> extensionData)
+            {
+            }
         }
 
         [Fact]

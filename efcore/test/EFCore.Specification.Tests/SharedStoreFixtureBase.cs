@@ -111,7 +111,9 @@ public abstract class SharedStoreFixtureBase<TContext> : FixtureBase, IDisposabl
         await SeedAsync(context);
     }
 
-    protected virtual void Seed(TContext context) { }
+    protected virtual void Seed(TContext context)
+    {
+    }
 
     protected virtual Task SeedAsync(TContext context)
     {
@@ -119,7 +121,9 @@ public abstract class SharedStoreFixtureBase<TContext> : FixtureBase, IDisposabl
         return Task.CompletedTask;
     }
 
-    protected virtual void Clean(DbContext context) { }
+    protected virtual void Clean(DbContext context)
+    {
+    }
 
     protected virtual Task CleanAsync(DbContext context)
     {
@@ -128,7 +132,9 @@ public abstract class SharedStoreFixtureBase<TContext> : FixtureBase, IDisposabl
     }
 
     // Called after DisposeAsync
-    public virtual void Dispose() { }
+    public virtual void Dispose()
+    {
+    }
 
     public virtual Task DisposeAsync() => TestStore.DisposeAsync();
 }

@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static readonly SyntaxGenerator s_generatorInstance =
             CSharpSyntaxGenerator.Instance;
 
-        private CSharpFlagsEnumGenerator() { }
+        private CSharpFlagsEnumGenerator()
+        {
+        }
 
         protected override SyntaxNode CreateExplicitlyCastedLiteralValue(
             INamedTypeSymbol enumType,

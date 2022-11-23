@@ -319,7 +319,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                         .OrderByDescending(f => new FileInfo(f).LastWriteTime)
                         .FirstOrDefault();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
 
             return !string.IsNullOrEmpty(defaultAddress);

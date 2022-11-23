@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Naming
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStyleSettingsWorkspaceServiceFactory() { }
+        public NamingStyleSettingsWorkspaceServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new NamingStyleSettingsProviderFactory(workspaceServices.Workspace);

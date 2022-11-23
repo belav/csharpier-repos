@@ -14,7 +14,9 @@ namespace System.ComponentModel
 
         public static readonly DataObjectAttribute Default = NonDataObject;
 
-        public DataObjectAttribute() : this(true) { }
+        public DataObjectAttribute() : this(true)
+        {
+        }
 
         public DataObjectAttribute(bool isDataObject)
         {

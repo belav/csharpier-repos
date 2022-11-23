@@ -10,5 +10,7 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed class KeptBackingFieldAttribute : KeptAttribute { }
+    public sealed class KeptBackingFieldAttribute : KeptAttribute
+    {
+    }
 }

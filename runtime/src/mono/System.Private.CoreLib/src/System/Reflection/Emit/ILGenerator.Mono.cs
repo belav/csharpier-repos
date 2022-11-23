@@ -437,7 +437,9 @@ namespace System.Reflection.Emit
             ex_handlers[cur_block].AddFinally(code_len);
         }
 
-        public virtual void BeginScope() { }
+        public virtual void BeginScope()
+        {
+        }
 
         public virtual LocalBuilder DeclareLocal(Type localType)
         {
@@ -937,7 +939,9 @@ namespace System.Reflection.Emit
                 cur_block = open_blocks.Peek()!;
         }
 
-        public virtual void EndScope() { }
+        public virtual void EndScope()
+        {
+        }
 
         public virtual void MarkLabel(Label loc)
         {
@@ -1039,7 +1043,9 @@ namespace System.Reflection.Emit
 
     internal sealed class Int32Stack : List<int>
     {
-        public Int32Stack(int initialCapacity) : base(initialCapacity) { }
+        public Int32Stack(int initialCapacity) : base(initialCapacity)
+        {
+        }
 
         public int Peek()
         {

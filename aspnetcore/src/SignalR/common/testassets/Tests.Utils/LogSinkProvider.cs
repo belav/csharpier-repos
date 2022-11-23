@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             return new LogSinkLogger(categoryName, this);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public IList<LogRecord> GetLogs() => _logs.ToList();
 

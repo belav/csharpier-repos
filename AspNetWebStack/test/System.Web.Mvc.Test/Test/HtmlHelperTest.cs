@@ -1388,7 +1388,9 @@ namespace System.Web.Mvc.Test
         private class TestableHtmlHelper : HtmlHelper
         {
             TestableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-                : base(viewContext, viewDataContainer) { }
+                : base(viewContext, viewDataContainer)
+            {
+            }
 
             public static TestableHtmlHelper Create()
             {

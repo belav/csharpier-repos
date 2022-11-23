@@ -39,7 +39,9 @@ public class ArrayInit
             TestFramework.LogError("001", "Expected exception to be thrown from Initialize");
             retVal = false;
         }
-        catch (NotSupportedException) { }
+        catch (NotSupportedException)
+        {
+        }
         catch (Exception e)
         {
             TestFramework.LogError("002", "Unexpected exception: " + e.ToString());
@@ -61,7 +63,9 @@ public class ArrayInit
             TestFramework.LogError("001", "Expected exception to be thrown from Initialize");
             retVal = false;
         }
-        catch (NotSupportedException) { }
+        catch (NotSupportedException)
+        {
+        }
         catch (Exception e)
         {
             TestFramework.LogError("002", "Unexpected exception: " + e.ToString());

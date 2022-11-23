@@ -34,7 +34,9 @@ namespace System.Data.OleDb
 
         internal static OleDbComWrappers Instance { get; } = new OleDbComWrappers();
 
-        private OleDbComWrappers() { }
+        private OleDbComWrappers()
+        {
+        }
 
         protected override unsafe ComInterfaceEntry* ComputeVtables(
             object obj,

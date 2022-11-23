@@ -346,7 +346,8 @@ namespace System.Threading
                         int numUserWaits = _numUserWaits;
                         int j = 0;
                         for (; j < numUserWaits && waitHandleToRemove != _registeredWaits[j]; j++)
-                        { }
+                        {
+                        }
                         Debug.Assert(j < numUserWaits);
 
                         waitHandleToRemove.OnRemoveWait();

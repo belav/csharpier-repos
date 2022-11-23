@@ -49,7 +49,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private class TestDocumentOperationService : IDocumentOperationService
         {
-            public TestDocumentOperationService() { }
+            public TestDocumentOperationService()
+            {
+            }
 
             public bool CanApplyChange { get; set; }
             public bool SupportDiagnostics { get; set; }

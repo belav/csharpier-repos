@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentationCommentSnippetService() { }
+        public DocumentationCommentSnippetService()
+        {
+        }
 
         protected override MemberDeclarationSyntax? GetContainingMember(
             SyntaxTree syntaxTree,

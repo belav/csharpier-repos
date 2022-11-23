@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioDiagnosticModeServiceFactory() { }
+        public VisualStudioDiagnosticModeServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new VisualStudioDiagnosticModeService(workspaceServices.Workspace);

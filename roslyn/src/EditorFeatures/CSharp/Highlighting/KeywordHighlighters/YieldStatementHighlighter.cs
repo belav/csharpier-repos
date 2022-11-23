@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public YieldStatementHighlighter() { }
+        public YieldStatementHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             YieldStatementSyntax yieldStatement,

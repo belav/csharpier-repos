@@ -247,7 +247,9 @@ namespace System.IO.Strategies
 
         protected abstract void OnInitFromHandle(SafeFileHandle handle);
 
-        protected virtual void OnInit() { }
+        protected virtual void OnInit()
+        {
+        }
 
         private void Init(FileMode mode, string originalPath)
         {

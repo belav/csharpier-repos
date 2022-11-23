@@ -465,13 +465,17 @@ namespace System.Net.Security.Tests
     {
         public override bool TestAuthenticateAsync => true;
 
-        public SslStreamAlpnTest_Async(ITestOutputHelper output) : base(output) { }
+        public SslStreamAlpnTest_Async(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SslStreamAlpnTest_Sync : SslStreamAlpnTestBase
     {
         public override bool TestAuthenticateAsync => false;
 
-        public SslStreamAlpnTest_Sync(ITestOutputHelper output) : base(output) { }
+        public SslStreamAlpnTest_Sync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 }

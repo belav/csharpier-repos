@@ -19,7 +19,9 @@ public class RedirectHandler : DelegatingHandler
     /// <summary>
     /// Creates a new instance of <see cref="RedirectHandler"/>.
     /// </summary>
-    public RedirectHandler() : this(maxRedirects: DefaultMaxRedirects) { }
+    public RedirectHandler() : this(maxRedirects: DefaultMaxRedirects)
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of <see cref="RedirectHandler"/>.

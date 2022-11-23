@@ -20,9 +20,9 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [ComImport]
     [Guid("00000556-0000-0010-8000-00aa006d2ea4")]
     [CoClass(typeof(RecordsetClass))]
-    public interface Recordset
-        : _Recordset //, (inherited event interface omitted)
-    { }
+    public interface Recordset : _Recordset //, (inherited event interface omitted)
+    {
+    }
 
     [ComImport]
     [ClassInterface(ClassInterfaceType.None)]
@@ -31,7 +31,8 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     //[ComSourceInterfaces("ADODB.RecordsetEvents")]
     //[DefaultMember("Fields")]
     public class RecordsetClass // : (implemented interfaces omitted)
-    { }
+    {
+    }
 
     [ComImport]
     [TypeLibType(

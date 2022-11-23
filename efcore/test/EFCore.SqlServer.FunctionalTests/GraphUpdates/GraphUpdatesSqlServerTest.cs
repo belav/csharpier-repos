@@ -14,7 +14,9 @@ namespace Microsoft.EntityFrameworkCore
     {
         public class ClientCascade : GraphUpdatesSqlServerTestBase<ClientCascade.SqlServerFixture>
         {
-            public ClientCascade(SqlServerFixture fixture) : base(fixture) { }
+            public ClientCascade(SqlServerFixture fixture) : base(fixture)
+            {
+            }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -49,7 +51,9 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ClientNoAction : GraphUpdatesSqlServerTestBase<ClientNoAction.SqlServerFixture>
         {
-            public ClientNoAction(SqlServerFixture fixture) : base(fixture) { }
+            public ClientNoAction(SqlServerFixture fixture) : base(fixture)
+            {
+            }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -83,7 +87,9 @@ namespace Microsoft.EntityFrameworkCore
 
         public class TptIdentity : GraphUpdatesSqlServerTestBase<TptIdentity.SqlServerFixture>
         {
-            public TptIdentity(SqlServerFixture fixture) : base(fixture) { }
+            public TptIdentity(SqlServerFixture fixture) : base(fixture)
+            {
+            }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -194,7 +200,9 @@ namespace Microsoft.EntityFrameworkCore
 
         public class Identity : GraphUpdatesSqlServerTestBase<Identity.SqlServerFixture>
         {
-            public Identity(SqlServerFixture fixture) : base(fixture) { }
+            public Identity(SqlServerFixture fixture) : base(fixture)
+            {
+            }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -219,7 +227,9 @@ namespace Microsoft.EntityFrameworkCore
 
         public class HiLo : GraphUpdatesSqlServerTestBase<HiLo.SqlServerFixture>
         {
-            public HiLo(SqlServerFixture fixture) : base(fixture) { }
+            public HiLo(SqlServerFixture fixture) : base(fixture)
+            {
+            }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -244,26 +254,36 @@ namespace Microsoft.EntityFrameworkCore
 
         public class Owned : GraphUpdatesSqlServerTestBase<Owned.SqlServerFixture>
         {
-            public Owned(SqlServerFixture fixture) : base(fixture) { }
+            public Owned(SqlServerFixture fixture) : base(fixture)
+            {
+            }
 
             // Owned dependents are always loaded
             public override void Required_one_to_one_are_cascade_deleted_in_store(
                 CascadeTiming? cascadeDeleteTiming,
                 CascadeTiming? deleteOrphansTiming
-            ) { }
+            )
+            {
+            }
 
             public override void Required_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
                 CascadeTiming? cascadeDeleteTiming,
                 CascadeTiming? deleteOrphansTiming
-            ) { }
+            )
+            {
+            }
 
             public override void Required_one_to_one_relationships_are_one_to_one(
                 CascadeTiming? deleteOrphansTiming
-            ) { }
+            )
+            {
+            }
 
             public override void Required_one_to_one_with_AK_relationships_are_one_to_one(
                 CascadeTiming? deleteOrphansTiming
-            ) { }
+            )
+            {
+            }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -690,7 +710,9 @@ namespace Microsoft.EntityFrameworkCore
             where TFixture : GraphUpdatesSqlServerTestBase<TFixture>.GraphUpdatesSqlServerFixtureBase,
                 new()
         {
-            protected GraphUpdatesSqlServerTestBase(TFixture fixture) : base(fixture) { }
+            protected GraphUpdatesSqlServerTestBase(TFixture fixture) : base(fixture)
+            {
+            }
 
             protected override IQueryable<Root> ModifyQueryRoot(IQueryable<Root> query) =>
                 query.AsSplitQuery();

@@ -20,7 +20,9 @@ namespace System.Web.WebPages.Scope
         private readonly IEqualityComparer<string> _stringComparer =
             StringComparer.OrdinalIgnoreCase;
 
-        private ScopeStorageComparer() { }
+        private ScopeStorageComparer()
+        {
+        }
 
         public static IEqualityComparer<object> Instance
         {

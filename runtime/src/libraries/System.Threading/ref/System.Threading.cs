@@ -9,12 +9,16 @@ namespace System.Threading
 {
     public partial class Barrier : System.IDisposable
     {
-        public Barrier(int participantCount) { }
+        public Barrier(int participantCount)
+        {
+        }
 
         public Barrier(
             int participantCount,
             System.Action<System.Threading.Barrier>? postPhaseAction
-        ) { }
+        )
+        {
+        }
 
         public long CurrentPhaseNumber
         {
@@ -41,16 +45,26 @@ namespace System.Threading
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public void RemoveParticipant() { }
+        public void RemoveParticipant()
+        {
+        }
 
-        public void RemoveParticipants(int participantCount) { }
+        public void RemoveParticipants(int participantCount)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void SignalAndWait() { }
+        public void SignalAndWait()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool SignalAndWait(int millisecondsTimeout)
@@ -68,7 +82,9 @@ namespace System.Threading
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void SignalAndWait(System.Threading.CancellationToken cancellationToken) { }
+        public void SignalAndWait(System.Threading.CancellationToken cancellationToken)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool SignalAndWait(System.TimeSpan timeout)
@@ -88,23 +104,35 @@ namespace System.Threading
 
     public partial class BarrierPostPhaseException : System.Exception
     {
-        public BarrierPostPhaseException() { }
+        public BarrierPostPhaseException()
+        {
+        }
 
-        public BarrierPostPhaseException(System.Exception? innerException) { }
+        public BarrierPostPhaseException(System.Exception? innerException)
+        {
+        }
 
         protected BarrierPostPhaseException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public BarrierPostPhaseException(string? message) { }
+        public BarrierPostPhaseException(string? message)
+        {
+        }
 
-        public BarrierPostPhaseException(string? message, System.Exception? innerException) { }
+        public BarrierPostPhaseException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class CountdownEvent : System.IDisposable
     {
-        public CountdownEvent(int initialCount) { }
+        public CountdownEvent(int initialCount)
+        {
+        }
 
         public int CurrentCount
         {
@@ -123,17 +151,29 @@ namespace System.Threading
             get { throw null; }
         }
 
-        public void AddCount() { }
+        public void AddCount()
+        {
+        }
 
-        public void AddCount(int signalCount) { }
+        public void AddCount(int signalCount)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
-        public void Reset(int count) { }
+        public void Reset(int count)
+        {
+        }
 
         public bool Signal()
         {
@@ -156,7 +196,9 @@ namespace System.Threading
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void Wait() { }
+        public void Wait()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool Wait(int millisecondsTimeout)
@@ -174,7 +216,9 @@ namespace System.Threading
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void Wait(System.Threading.CancellationToken cancellationToken) { }
+        public void Wait(System.Threading.CancellationToken cancellationToken)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool Wait(System.TimeSpan timeout)
@@ -194,14 +238,20 @@ namespace System.Threading
 
     public partial class HostExecutionContext : System.IDisposable
     {
-        public HostExecutionContext() { }
+        public HostExecutionContext()
+        {
+        }
 
-        public HostExecutionContext(object? state) { }
+        public HostExecutionContext(object? state)
+        {
+        }
 
         protected internal object? State
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual System.Threading.HostExecutionContext CreateCopy()
@@ -209,21 +259,29 @@ namespace System.Threading
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public virtual void Dispose(bool disposing) { }
+        public virtual void Dispose(bool disposing)
+        {
+        }
     }
 
     public partial class HostExecutionContextManager
     {
-        public HostExecutionContextManager() { }
+        public HostExecutionContextManager()
+        {
+        }
 
         public virtual System.Threading.HostExecutionContext? Capture()
         {
             throw null;
         }
 
-        public virtual void Revert(object previousState) { }
+        public virtual void Revert(object previousState)
+        {
+        }
 
         public virtual object SetHostExecutionContext(
             System.Threading.HostExecutionContext hostExecutionContext
@@ -268,7 +326,9 @@ namespace System.Threading
     public sealed partial class ReaderWriterLock
         : System.Runtime.ConstrainedExecution.CriticalFinalizerObject
     {
-        public ReaderWriterLock() { }
+        public ReaderWriterLock()
+        {
+        }
 
         public bool IsReaderLockHeld
         {
@@ -284,33 +344,49 @@ namespace System.Threading
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void AcquireReaderLock(int millisecondsTimeout) { }
+        public void AcquireReaderLock(int millisecondsTimeout)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void AcquireReaderLock(System.TimeSpan timeout) { }
+        public void AcquireReaderLock(System.TimeSpan timeout)
+        {
+        }
 
-        public void AcquireWriterLock(int millisecondsTimeout) { }
+        public void AcquireWriterLock(int millisecondsTimeout)
+        {
+        }
 
-        public void AcquireWriterLock(System.TimeSpan timeout) { }
+        public void AcquireWriterLock(System.TimeSpan timeout)
+        {
+        }
 
         public bool AnyWritersSince(int seqNum)
         {
             throw null;
         }
 
-        public void DowngradeFromWriterLock(ref System.Threading.LockCookie lockCookie) { }
+        public void DowngradeFromWriterLock(ref System.Threading.LockCookie lockCookie)
+        {
+        }
 
         public System.Threading.LockCookie ReleaseLock()
         {
             throw null;
         }
 
-        public void ReleaseReaderLock() { }
+        public void ReleaseReaderLock()
+        {
+        }
 
-        public void ReleaseWriterLock() { }
+        public void ReleaseWriterLock()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void RestoreLock(ref System.Threading.LockCookie lockCookie) { }
+        public void RestoreLock(ref System.Threading.LockCookie lockCookie)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Threading.LockCookie UpgradeToWriterLock(int millisecondsTimeout)
@@ -331,31 +407,45 @@ namespace System.Threading
 {
     public partial class AbandonedMutexException : System.SystemException
     {
-        public AbandonedMutexException() { }
+        public AbandonedMutexException()
+        {
+        }
 
-        public AbandonedMutexException(int location, System.Threading.WaitHandle? handle) { }
+        public AbandonedMutexException(int location, System.Threading.WaitHandle? handle)
+        {
+        }
 
         protected AbandonedMutexException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public AbandonedMutexException(string? message) { }
+        public AbandonedMutexException(string? message)
+        {
+        }
 
-        public AbandonedMutexException(string? message, System.Exception? inner) { }
+        public AbandonedMutexException(string? message, System.Exception? inner)
+        {
+        }
 
         public AbandonedMutexException(
             string? message,
             System.Exception? inner,
             int location,
             System.Threading.WaitHandle? handle
-        ) { }
+        )
+        {
+        }
 
         public AbandonedMutexException(
             string? message,
             int location,
             System.Threading.WaitHandle? handle
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Mutex? Mutex
         {
@@ -372,7 +462,9 @@ namespace System.Threading
         private object _dummy;
         private int _dummyPrimitive;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
@@ -407,7 +499,9 @@ namespace System.Threading
             throw null;
         }
 
-        public void Undo() { }
+        public void Undo()
+        {
+        }
     }
 
     public readonly partial struct AsyncLocalValueChangedArgs<T>
@@ -431,24 +525,32 @@ namespace System.Threading
 
     public sealed partial class AsyncLocal<T>
     {
-        public AsyncLocal() { }
+        public AsyncLocal()
+        {
+        }
 
         public AsyncLocal(
             System.Action<System.Threading.AsyncLocalValueChangedArgs<T>>? valueChangedHandler
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.MaybeNullAttribute]
         public T Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed partial class AutoResetEvent : System.Threading.EventWaitHandle
     {
         public AutoResetEvent(bool initialState)
-            : base(default(bool), default(System.Threading.EventResetMode)) { }
+            : base(default(bool), default(System.Threading.EventResetMode))
+        {
+        }
     }
 
     public delegate void ContextCallback(object? state);
@@ -461,13 +563,17 @@ namespace System.Threading
 
     public partial class EventWaitHandle : System.Threading.WaitHandle
     {
-        public EventWaitHandle(bool initialState, System.Threading.EventResetMode mode) { }
+        public EventWaitHandle(bool initialState, System.Threading.EventResetMode mode)
+        {
+        }
 
         public EventWaitHandle(
             bool initialState,
             System.Threading.EventResetMode mode,
             string? name
-        ) { }
+        )
+        {
+        }
 
         public EventWaitHandle(
             bool initialState,
@@ -510,7 +616,9 @@ namespace System.Threading
         : System.IDisposable,
             System.Runtime.Serialization.ISerializable
     {
-        internal ExecutionContext() { }
+        internal ExecutionContext()
+        {
+        }
 
         public static System.Threading.ExecutionContext? Capture()
         {
@@ -522,27 +630,37 @@ namespace System.Threading
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public static bool IsFlowSuppressed()
         {
             throw null;
         }
 
-        public static void Restore(System.Threading.ExecutionContext executionContext) { }
+        public static void Restore(System.Threading.ExecutionContext executionContext)
+        {
+        }
 
-        public static void RestoreFlow() { }
+        public static void RestoreFlow()
+        {
+        }
 
         public static void Run(
             System.Threading.ExecutionContext executionContext,
             System.Threading.ContextCallback callback,
             object? state
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.AsyncFlowControl SuppressFlow()
         {
@@ -769,9 +887,13 @@ namespace System.Threading
             throw null;
         }
 
-        public static void MemoryBarrier() { }
+        public static void MemoryBarrier()
+        {
+        }
 
-        public static void MemoryBarrierProcessWide() { }
+        public static void MemoryBarrierProcessWide()
+        {
+        }
 
         public static int Or(ref int location1, int value)
         {
@@ -874,16 +996,24 @@ namespace System.Threading
 
     public partial class LockRecursionException : System.Exception
     {
-        public LockRecursionException() { }
+        public LockRecursionException()
+        {
+        }
 
         protected LockRecursionException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public LockRecursionException(string? message) { }
+        public LockRecursionException(string? message)
+        {
+        }
 
-        public LockRecursionException(string? message, System.Exception? innerException) { }
+        public LockRecursionException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public enum LockRecursionPolicy
@@ -895,16 +1025,24 @@ namespace System.Threading
     public sealed partial class ManualResetEvent : System.Threading.EventWaitHandle
     {
         public ManualResetEvent(bool initialState)
-            : base(default(bool), default(System.Threading.EventResetMode)) { }
+            : base(default(bool), default(System.Threading.EventResetMode))
+        {
+        }
     }
 
     public partial class ManualResetEventSlim : System.IDisposable
     {
-        public ManualResetEventSlim() { }
+        public ManualResetEventSlim()
+        {
+        }
 
-        public ManualResetEventSlim(bool initialState) { }
+        public ManualResetEventSlim(bool initialState)
+        {
+        }
 
-        public ManualResetEventSlim(bool initialState, int spinCount) { }
+        public ManualResetEventSlim(bool initialState, int spinCount)
+        {
+        }
 
         public bool IsSet
         {
@@ -919,16 +1057,26 @@ namespace System.Threading
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
-        public void Set() { }
+        public void Set()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void Wait() { }
+        public void Wait()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool Wait(int millisecondsTimeout)
@@ -946,7 +1094,9 @@ namespace System.Threading
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void Wait(System.Threading.CancellationToken cancellationToken) { }
+        public void Wait(System.Threading.CancellationToken cancellationToken)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool Wait(System.TimeSpan timeout)
@@ -971,41 +1121,57 @@ namespace System.Threading
             get { throw null; }
         }
 
-        public static void Enter(object obj) { }
+        public static void Enter(object obj)
+        {
+        }
 
-        public static void Enter(object obj, ref bool lockTaken) { }
+        public static void Enter(object obj, ref bool lockTaken)
+        {
+        }
 
-        public static void Exit(object obj) { }
+        public static void Exit(object obj)
+        {
+        }
 
         public static bool IsEntered(object obj)
         {
             throw null;
         }
 
-        public static void Pulse(object obj) { }
+        public static void Pulse(object obj)
+        {
+        }
 
-        public static void PulseAll(object obj) { }
+        public static void PulseAll(object obj)
+        {
+        }
 
         public static bool TryEnter(object obj)
         {
             throw null;
         }
 
-        public static void TryEnter(object obj, ref bool lockTaken) { }
+        public static void TryEnter(object obj, ref bool lockTaken)
+        {
+        }
 
         public static bool TryEnter(object obj, int millisecondsTimeout)
         {
             throw null;
         }
 
-        public static void TryEnter(object obj, int millisecondsTimeout, ref bool lockTaken) { }
+        public static void TryEnter(object obj, int millisecondsTimeout, ref bool lockTaken)
+        {
+        }
 
         public static bool TryEnter(object obj, System.TimeSpan timeout)
         {
             throw null;
         }
 
-        public static void TryEnter(object obj, System.TimeSpan timeout, ref bool lockTaken) { }
+        public static void TryEnter(object obj, System.TimeSpan timeout, ref bool lockTaken)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static bool Wait(object obj)
@@ -1040,11 +1206,17 @@ namespace System.Threading
 
     public sealed partial class Mutex : System.Threading.WaitHandle
     {
-        public Mutex() { }
+        public Mutex()
+        {
+        }
 
-        public Mutex(bool initiallyOwned) { }
+        public Mutex(bool initiallyOwned)
+        {
+        }
 
-        public Mutex(bool initiallyOwned, string? name) { }
+        public Mutex(bool initiallyOwned, string? name)
+        {
+        }
 
         public Mutex(bool initiallyOwned, string? name, out bool createdNew)
         {
@@ -1056,7 +1228,9 @@ namespace System.Threading
             throw null;
         }
 
-        public void ReleaseMutex() { }
+        public void ReleaseMutex()
+        {
+        }
 
         public static bool TryOpenExisting(
             string name,
@@ -1070,9 +1244,13 @@ namespace System.Threading
 
     public partial class ReaderWriterLockSlim : System.IDisposable
     {
-        public ReaderWriterLockSlim() { }
+        public ReaderWriterLockSlim()
+        {
+        }
 
-        public ReaderWriterLockSlim(System.Threading.LockRecursionPolicy recursionPolicy) { }
+        public ReaderWriterLockSlim(System.Threading.LockRecursionPolicy recursionPolicy)
+        {
+        }
 
         public int CurrentReadCount
         {
@@ -1119,19 +1297,33 @@ namespace System.Threading
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void EnterReadLock() { }
+        public void EnterReadLock()
+        {
+        }
 
-        public void EnterUpgradeableReadLock() { }
+        public void EnterUpgradeableReadLock()
+        {
+        }
 
-        public void EnterWriteLock() { }
+        public void EnterWriteLock()
+        {
+        }
 
-        public void ExitReadLock() { }
+        public void ExitReadLock()
+        {
+        }
 
-        public void ExitUpgradeableReadLock() { }
+        public void ExitUpgradeableReadLock()
+        {
+        }
 
-        public void ExitWriteLock() { }
+        public void ExitWriteLock()
+        {
+        }
 
         public bool TryEnterReadLock(int millisecondsTimeout)
         {
@@ -1166,9 +1358,13 @@ namespace System.Threading
 
     public sealed partial class Semaphore : System.Threading.WaitHandle
     {
-        public Semaphore(int initialCount, int maximumCount) { }
+        public Semaphore(int initialCount, int maximumCount)
+        {
+        }
 
-        public Semaphore(int initialCount, int maximumCount, string? name) { }
+        public Semaphore(int initialCount, int maximumCount, string? name)
+        {
+        }
 
         public Semaphore(int initialCount, int maximumCount, string? name, out bool createdNew)
         {
@@ -1204,23 +1400,35 @@ namespace System.Threading
 
     public partial class SemaphoreFullException : System.SystemException
     {
-        public SemaphoreFullException() { }
+        public SemaphoreFullException()
+        {
+        }
 
         protected SemaphoreFullException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public SemaphoreFullException(string? message) { }
+        public SemaphoreFullException(string? message)
+        {
+        }
 
-        public SemaphoreFullException(string? message, System.Exception? innerException) { }
+        public SemaphoreFullException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class SemaphoreSlim : System.IDisposable
     {
-        public SemaphoreSlim(int initialCount) { }
+        public SemaphoreSlim(int initialCount)
+        {
+        }
 
-        public SemaphoreSlim(int initialCount, int maxCount) { }
+        public SemaphoreSlim(int initialCount, int maxCount)
+        {
+        }
 
         public System.Threading.WaitHandle AvailableWaitHandle
         {
@@ -1231,9 +1439,13 @@ namespace System.Threading
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public int Release()
         {
@@ -1246,7 +1458,9 @@ namespace System.Threading
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void Wait() { }
+        public void Wait()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool Wait(int millisecondsTimeout)
@@ -1264,7 +1478,9 @@ namespace System.Threading
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void Wait(System.Threading.CancellationToken cancellationToken) { }
+        public void Wait(System.Threading.CancellationToken cancellationToken)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool Wait(System.TimeSpan timeout)
@@ -1344,17 +1560,29 @@ namespace System.Threading
             get { throw null; }
         }
 
-        public void Enter(ref bool lockTaken) { }
+        public void Enter(ref bool lockTaken)
+        {
+        }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
 
-        public void Exit(bool useMemoryBarrier) { }
+        public void Exit(bool useMemoryBarrier)
+        {
+        }
 
-        public void TryEnter(ref bool lockTaken) { }
+        public void TryEnter(ref bool lockTaken)
+        {
+        }
 
-        public void TryEnter(int millisecondsTimeout, ref bool lockTaken) { }
+        public void TryEnter(int millisecondsTimeout, ref bool lockTaken)
+        {
+        }
 
-        public void TryEnter(System.TimeSpan timeout, ref bool lockTaken) { }
+        public void TryEnter(System.TimeSpan timeout, ref bool lockTaken)
+        {
+        }
     }
 
     public partial struct SpinWait
@@ -1369,13 +1597,21 @@ namespace System.Threading
             get { throw null; }
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
-        public void SpinOnce() { }
+        public void SpinOnce()
+        {
+        }
 
-        public void SpinOnce(int sleep1Threshold) { }
+        public void SpinOnce(int sleep1Threshold)
+        {
+        }
 
-        public static void SpinUntil(System.Func<bool> condition) { }
+        public static void SpinUntil(System.Func<bool> condition)
+        {
+        }
 
         public static bool SpinUntil(System.Func<bool> condition, int millisecondsTimeout)
         {
@@ -1390,7 +1626,9 @@ namespace System.Threading
 
     public partial class SynchronizationContext
     {
-        public SynchronizationContext() { }
+        public SynchronizationContext()
+        {
+        }
 
         public static System.Threading.SynchronizationContext? Current
         {
@@ -1407,19 +1645,31 @@ namespace System.Threading
             throw null;
         }
 
-        public virtual void OperationCompleted() { }
+        public virtual void OperationCompleted()
+        {
+        }
 
-        public virtual void OperationStarted() { }
+        public virtual void OperationStarted()
+        {
+        }
 
-        public virtual void Post(System.Threading.SendOrPostCallback d, object? state) { }
+        public virtual void Post(System.Threading.SendOrPostCallback d, object? state)
+        {
+        }
 
-        public virtual void Send(System.Threading.SendOrPostCallback d, object? state) { }
+        public virtual void Send(System.Threading.SendOrPostCallback d, object? state)
+        {
+        }
 
         public static void SetSynchronizationContext(
             System.Threading.SynchronizationContext? syncContext
-        ) { }
+        )
+        {
+        }
 
-        protected void SetWaitNotificationRequired() { }
+        protected void SetWaitNotificationRequired()
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public virtual int Wait(System.IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
@@ -1440,27 +1690,43 @@ namespace System.Threading
 
     public partial class SynchronizationLockException : System.SystemException
     {
-        public SynchronizationLockException() { }
+        public SynchronizationLockException()
+        {
+        }
 
         protected SynchronizationLockException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public SynchronizationLockException(string? message) { }
+        public SynchronizationLockException(string? message)
+        {
+        }
 
-        public SynchronizationLockException(string? message, System.Exception? innerException) { }
+        public SynchronizationLockException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class ThreadLocal<T> : System.IDisposable
     {
-        public ThreadLocal() { }
+        public ThreadLocal()
+        {
+        }
 
-        public ThreadLocal(bool trackAllValues) { }
+        public ThreadLocal(bool trackAllValues)
+        {
+        }
 
-        public ThreadLocal(System.Func<T> valueFactory) { }
+        public ThreadLocal(System.Func<T> valueFactory)
+        {
+        }
 
-        public ThreadLocal(System.Func<T> valueFactory, bool trackAllValues) { }
+        public ThreadLocal(System.Func<T> valueFactory, bool trackAllValues)
+        {
+        }
 
         public bool IsValueCreated
         {
@@ -1471,18 +1737,26 @@ namespace System.Threading
         public T Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IList<T> Values
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~ThreadLocal() { }
+        ~ThreadLocal()
+        {
+        }
 
         public override string? ToString()
         {
@@ -1570,55 +1844,90 @@ namespace System.Threading
             throw null;
         }
 
-        public static void Write(ref bool location, bool value) { }
+        public static void Write(ref bool location, bool value)
+        {
+        }
 
-        public static void Write(ref byte location, byte value) { }
+        public static void Write(ref byte location, byte value)
+        {
+        }
 
-        public static void Write(ref double location, double value) { }
+        public static void Write(ref double location, double value)
+        {
+        }
 
-        public static void Write(ref short location, short value) { }
+        public static void Write(ref short location, short value)
+        {
+        }
 
-        public static void Write(ref int location, int value) { }
+        public static void Write(ref int location, int value)
+        {
+        }
 
-        public static void Write(ref long location, long value) { }
+        public static void Write(ref long location, long value)
+        {
+        }
 
-        public static void Write(ref System.IntPtr location, System.IntPtr value) { }
+        public static void Write(ref System.IntPtr location, System.IntPtr value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void Write(ref sbyte location, sbyte value) { }
+        public static void Write(ref sbyte location, sbyte value)
+        {
+        }
 
-        public static void Write(ref float location, float value) { }
-
-        [System.CLSCompliantAttribute(false)]
-        public static void Write(ref ushort location, ushort value) { }
-
-        [System.CLSCompliantAttribute(false)]
-        public static void Write(ref uint location, uint value) { }
+        public static void Write(ref float location, float value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void Write(ref ulong location, ulong value) { }
+        public static void Write(ref ushort location, ushort value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public static void Write(ref System.UIntPtr location, System.UIntPtr value) { }
+        public static void Write(ref uint location, uint value)
+        {
+        }
+
+        [System.CLSCompliantAttribute(false)]
+        public static void Write(ref ulong location, ulong value)
+        {
+        }
+
+        [System.CLSCompliantAttribute(false)]
+        public static void Write(ref System.UIntPtr location, System.UIntPtr value)
+        {
+        }
 
         public static void Write<T>(
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")] ref T location,
             T value
-        ) where T : class? { }
+        ) where T : class?
+        {
+        }
     }
 
     public partial class WaitHandleCannotBeOpenedException : System.ApplicationException
     {
-        public WaitHandleCannotBeOpenedException() { }
+        public WaitHandleCannotBeOpenedException()
+        {
+        }
 
         protected WaitHandleCannotBeOpenedException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public WaitHandleCannotBeOpenedException(string? message) { }
+        public WaitHandleCannotBeOpenedException(string? message)
+        {
+        }
 
         public WaitHandleCannotBeOpenedException(string? message, System.Exception? innerException)
-        { }
+        {
+        }
     }
 }

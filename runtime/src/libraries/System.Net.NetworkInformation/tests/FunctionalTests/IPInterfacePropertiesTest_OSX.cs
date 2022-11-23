@@ -61,7 +61,9 @@ namespace System.Net.NetworkInformation.Tests
                             _log.WriteLine("- Dns Suffix: " + ipProperties.DnsSuffix);
                         }
                         // If /etc/resolv.conf does not exist, DNS values cannot be retrieved.
-                        catch (PlatformNotSupportedException) { }
+                        catch (PlatformNotSupportedException)
+                        {
+                        }
 
                         Assert.NotNull(ipProperties.GatewayAddresses);
                         _log.WriteLine(

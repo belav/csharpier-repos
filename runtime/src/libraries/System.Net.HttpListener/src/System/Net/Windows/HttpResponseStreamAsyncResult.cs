@@ -53,7 +53,9 @@ namespace System.Net
             object asyncObject,
             object? userState,
             AsyncCallback? callback
-        ) : base(asyncObject, userState, callback) { }
+        ) : base(asyncObject, userState, callback)
+        {
+        }
 
         private static byte[] GetChunkHeader(int size, out int offset)
         {

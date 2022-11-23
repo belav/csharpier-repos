@@ -13,4 +13,6 @@ public interface ITextDocumentIdentifierHandler<TRequest, TTextDocumentIdentifie
     TTextDocumentIdentifier GetTextDocumentIdentifier(TRequest request);
 }
 
-public interface ITextDocumentIdentifierHandler { }
+public interface ITextDocumentIdentifierHandler
+{
+}

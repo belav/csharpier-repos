@@ -34,7 +34,9 @@ public class CollectionEntry<TEntity, TRelatedEntity> : CollectionEntry
     /// </summary>
     [EntityFrameworkInternal]
     public CollectionEntry(InternalEntityEntry internalEntry, string name)
-        : base(internalEntry, name) { }
+        : base(internalEntry, name)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,7 +46,9 @@ public class CollectionEntry<TEntity, TRelatedEntity> : CollectionEntry
     /// </summary>
     [EntityFrameworkInternal]
     public CollectionEntry(InternalEntityEntry internalEntry, INavigationBase navigationBase)
-        : base(internalEntry, navigationBase) { }
+        : base(internalEntry, navigationBase)
+    {
+    }
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.

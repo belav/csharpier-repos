@@ -140,7 +140,9 @@ namespace System.Net.Sockets.Tests
                 {
                     File.Delete(path);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

@@ -15,7 +15,8 @@ namespace ClientSample;
 
 public class SocketAwaitable : ICriticalNotifyCompletion
 {
-    private static readonly Action _callbackCompleted = () => { };
+    private static readonly Action _callbackCompleted = () => {
+    };
 
     private readonly PipeScheduler _ioScheduler;
 

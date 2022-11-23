@@ -13,7 +13,9 @@ class NestedDoLoops
     {
         do
         {
-            do { } while (inner++ < innerTo);
+            do
+            {
+            } while (inner++ < innerTo);
             inner = 0;
         } while (outer++ < outerTo);
 

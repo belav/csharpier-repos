@@ -473,7 +473,9 @@ namespace System.Web.Http.Routing
     public class PrefixedController : ApiController
     {
         // Should not be reachable be our routes since there's no route attribute.
-        public void Post() { }
+        public void Post()
+        {
+        }
 
         [Route("")]
         public string Get()
@@ -786,7 +788,9 @@ namespace System.Web.Http.Routing
 
         private class ConstrainedRouteAttribute : RouteFactoryAttribute
         {
-            public ConstrainedRouteAttribute() : base(null) { }
+            public ConstrainedRouteAttribute() : base(null)
+            {
+            }
 
             public bool ConstraintMatches { get; set; }
 

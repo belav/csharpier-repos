@@ -9,21 +9,37 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-interface IType<T0> { }
+interface IType<T0>
+{
+}
 
-class RType1<T0> : IType<RType1<string>> { }
+class RType1<T0> : IType<RType1<string>>
+{
+}
 
-class RType2<T0> : IType<RType2<int>> { }
+class RType2<T0> : IType<RType2<int>>
+{
+}
 
-class RType3<T0> : IType<RType3<DateTime>> { }
+class RType3<T0> : IType<RType3<DateTime>>
+{
+}
 
-class RType4 { }
+class RType4
+{
+}
 
-struct VType1<T0> : IType<RType1<string>> { }
+struct VType1<T0> : IType<RType1<string>>
+{
+}
 
-struct VType2<T0> : IType<VType2<string>> { }
+struct VType2<T0> : IType<VType2<string>>
+{
+}
 
-struct VType3<T0> : IType<VType3<int>> { }
+struct VType3<T0> : IType<VType3<int>>
+{
+}
 
 class Program
 {

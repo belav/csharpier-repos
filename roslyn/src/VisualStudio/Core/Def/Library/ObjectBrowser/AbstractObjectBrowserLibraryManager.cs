@@ -130,7 +130,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
                 UpdateClassAndMemberVersions();
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Diagnostic)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Diagnostic))
+            {
+            }
         }
 
         internal uint ClassVersion
@@ -592,8 +594,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     await context.OnCompletedAsync(cancellationToken).ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Critical)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Critical))
+            {
+            }
         }
 
         private static async Task FindReferencesAsync(

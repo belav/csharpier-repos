@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CallbackDispatcher() { }
+            public CallbackDispatcher()
+            {
+            }
 
             public ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(
                 RemoteServiceCallbackId callbackId,
@@ -389,7 +391,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             public static readonly LocalConnection Instance = new();
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

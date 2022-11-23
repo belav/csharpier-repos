@@ -129,7 +129,11 @@ public class EndpointFilterInvocationContextOfTTests
         Assert.Equal(currentContent, generatedContent);
     }
 
-    interface ITodo { }
+    interface ITodo
+    {
+    }
 
-    class Todo : ITodo { }
+    class Todo : ITodo
+    {
+    }
 }

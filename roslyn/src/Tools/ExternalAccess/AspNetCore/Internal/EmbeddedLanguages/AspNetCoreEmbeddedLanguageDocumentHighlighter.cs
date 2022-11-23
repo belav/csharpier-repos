@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AspNetCoreEmbeddedLanguageDocumentHighlighter() { }
+        public AspNetCoreEmbeddedLanguageDocumentHighlighter()
+        {
+        }
 
         public ImmutableArray<DocumentHighlights> GetDocumentHighlights(
             Document document,

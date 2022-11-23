@@ -8,7 +8,9 @@ public class MaterializationInterceptionCosmosTest
         IClassFixture<MaterializationInterceptionCosmosTest.MaterializationInterceptionCosmosFixture>
 {
     public MaterializationInterceptionCosmosTest(MaterializationInterceptionCosmosFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class MaterializationInterceptionCosmosFixture : SingletonInterceptorsFixtureBase
     {

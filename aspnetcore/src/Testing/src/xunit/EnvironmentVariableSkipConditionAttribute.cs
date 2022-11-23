@@ -26,7 +26,9 @@ public class EnvironmentVariableSkipConditionAttribute : Attribute, ITestConditi
     /// <param name="variableName">Name of the environment variable.</param>
     /// <param name="values">Value(s) of the environment variable to match for the test to be skipped</param>
     public EnvironmentVariableSkipConditionAttribute(string variableName, params string[] values)
-        : this(new EnvironmentVariable(), variableName, values) { }
+        : this(new EnvironmentVariable(), variableName, values)
+    {
+    }
 
     // To enable unit testing
     internal EnvironmentVariableSkipConditionAttribute(

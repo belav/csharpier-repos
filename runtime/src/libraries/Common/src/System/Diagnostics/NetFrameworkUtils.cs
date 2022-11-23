@@ -63,7 +63,9 @@ namespace System.Diagnostics
         {
             bool ret;
 
-            try { }
+            try
+            {
+            }
             finally
             {
                 // Wait for the mutex for half a second (long enough to gain the mutex in most scenarios and short enough to avoid

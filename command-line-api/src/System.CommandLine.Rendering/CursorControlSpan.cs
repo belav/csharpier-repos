@@ -9,7 +9,9 @@ namespace System.CommandLine.Rendering
     public class CursorControlSpan : ControlSpan
     {
         public CursorControlSpan(string name, AnsiControlCode ansiControlCode)
-            : base(name, ansiControlCode) { }
+            : base(name, ansiControlCode)
+        {
+        }
 
         public override int ContentLength => 0;
 

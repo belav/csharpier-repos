@@ -117,14 +117,18 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     s_testSalt,
                     new CspParameters()
                 )
-            ) { }
+            )
+            {
+            }
             using (
                 var deriveBytes = new PasswordDeriveBytes(
                     string.Empty,
                     s_testSalt,
                     new CspParameters()
                 )
-            ) { }
+            )
+            {
+            }
             using (
                 var deriveBytes = new PasswordDeriveBytes(
                     TestPassword,
@@ -133,7 +137,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     100,
                     new CspParameters()
                 )
-            ) { }
+            )
+            {
+            }
             using (
                 var deriveBytes = new PasswordDeriveBytes(
                     string.Empty,
@@ -142,14 +148,20 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     100,
                     new CspParameters()
                 )
-            ) { }
+            )
+            {
+            }
         }
 
         [Fact]
         public static void Ctor_CspParameters_Null()
         {
-            using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt, null)) { }
-            using (var deriveBytes = new PasswordDeriveBytes(string.Empty, s_testSalt, null)) { }
+            using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt, null))
+            {
+            }
+            using (var deriveBytes = new PasswordDeriveBytes(string.Empty, s_testSalt, null))
+            {
+            }
             using (
                 var deriveBytes = new PasswordDeriveBytes(
                     TestPassword,
@@ -158,7 +170,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     100,
                     null
                 )
-            ) { }
+            )
+            {
+            }
             using (
                 var deriveBytes = new PasswordDeriveBytes(
                     string.Empty,
@@ -167,7 +181,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     100,
                     null
                 )
-            ) { }
+            )
+            {
+            }
         }
 
         [Fact]

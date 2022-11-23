@@ -172,7 +172,9 @@ public class KeyDiscoveryConvention
     protected virtual void ProcessKeyProperties(
         IList<IConventionProperty> keyProperties,
         IConventionEntityType entityType
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Returns the properties that should be used for the primary key.

@@ -132,9 +132,13 @@ namespace Moq.Tests.Regressions
             Issue78TypeTwo GetTypeTwo();
         }
 
-        public class Issue78TypeOne { }
+        public class Issue78TypeOne
+        {
+        }
 
-        public class Issue78TypeTwo { }
+        public class Issue78TypeTwo
+        {
+        }
 
         public class Issue78Sut
         {
@@ -321,7 +325,9 @@ namespace Moq.Tests.Regressions
 
             public class ConcreteClass : ISomeInterface
             {
-                public void Method() { }
+                public void Method()
+                {
+                }
             }
         }
 
@@ -397,7 +403,9 @@ namespace Moq.Tests.Regressions
             {
                 var streamMock = new Mock<Stream>();
 
-                using (var stream = streamMock.Object) { }
+                using (var stream = streamMock.Object)
+                {
+                }
 
                 // non-mocked Dispose methods calls Close which is virtual and can thus be verified
                 streamMock.Verify(x => x.Close());
@@ -410,7 +418,9 @@ namespace Moq.Tests.Regressions
                     Close();
                 }
 
-                public virtual void Close() { }
+                public virtual void Close()
+                {
+                }
             }
         }
 
@@ -469,10 +479,9 @@ namespace Moq.Tests.Regressions
             [Serializable]
             public abstract class NoDeserializationCtor : ISerializable
             {
-                public virtual void GetObjectData(
-                    SerializationInfo info,
-                    StreamingContext context
-                ) { }
+                public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+                {
+                }
             }
 
             /// <summary>
@@ -537,62 +546,88 @@ namespace Moq.Tests.Regressions
 
                 public abstract class NoSerializableAttribute : ISerializable
                 {
-                    protected NoSerializableAttribute() { }
+                    protected NoSerializableAttribute()
+                    {
+                    }
 
                     protected NoSerializableAttribute(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
 
-                    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+                    public void GetObjectData(SerializationInfo info, StreamingContext context)
+                    {
+                    }
                 }
 
                 public abstract class NoSerializableAttributeAndNoDeserializationCtor
                     : ISerializable
                 {
-                    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+                    public void GetObjectData(SerializationInfo info, StreamingContext context)
+                    {
+                    }
                 }
 
                 public abstract class NoSerializableAttributeAndGetObjectDataNotVirtual
                     : ISerializable
                 {
-                    protected NoSerializableAttributeAndGetObjectDataNotVirtual() { }
+                    protected NoSerializableAttributeAndGetObjectDataNotVirtual()
+                    {
+                    }
 
                     protected NoSerializableAttributeAndGetObjectDataNotVirtual(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
 
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
                 }
 
                 [Serializable]
                 public abstract class CorrectImplementation : ISerializable
                 {
-                    protected CorrectImplementation() { }
+                    protected CorrectImplementation()
+                    {
+                    }
 
                     protected CorrectImplementation(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
 
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
                 }
 
                 [Serializable]
                 public abstract class NotISerializable
                 {
-                    protected NotISerializable() { }
+                    protected NotISerializable()
+                    {
+                    }
 
-                    protected NotISerializable(SerializationInfo info, StreamingContext context) { }
+                    protected NotISerializable(SerializationInfo info, StreamingContext context)
+                    {
+                    }
 
-                    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+                    public void GetObjectData(SerializationInfo info, StreamingContext context)
+                    {
+                    }
                 }
 
                 [Serializable]
@@ -601,23 +636,31 @@ namespace Moq.Tests.Regressions
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
                 }
 
                 [Serializable]
                 public abstract class NotISerializableAndGetObjectDataNotVirtual
                 {
-                    protected NotISerializableAndGetObjectDataNotVirtual() { }
+                    protected NotISerializableAndGetObjectDataNotVirtual()
+                    {
+                    }
 
                     protected NotISerializableAndGetObjectDataNotVirtual(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
 
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
                 }
 
                 [Serializable]
@@ -626,20 +669,28 @@ namespace Moq.Tests.Regressions
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
                 }
 
                 [Serializable]
                 public abstract class GetObjectDataNotVirtual : ISerializable
                 {
-                    protected GetObjectDataNotVirtual() { }
+                    protected GetObjectDataNotVirtual()
+                    {
+                    }
 
                     protected GetObjectDataNotVirtual(
                         SerializationInfo info,
                         StreamingContext context
-                    ) { }
+                    )
+                    {
+                    }
 
-                    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+                    public void GetObjectData(SerializationInfo info, StreamingContext context)
+                    {
+                    }
                 }
             }
         }
@@ -795,7 +846,9 @@ namespace Moq.Tests.Regressions
                 decimal Run(IInput input);
             }
 
-            public interface IInput : IEnumerable<int> { }
+            public interface IInput : IEnumerable<int>
+            {
+            }
 
             public class Foo
             {
@@ -894,7 +947,9 @@ namespace Moq.Tests.Regressions
 
             public class ExtendedConcreteType : ExtendingTypeBase
             {
-                public ExtendedConcreteType(int extendedValue) : base(extendedValue) { }
+                public ExtendedConcreteType(int extendedValue) : base(extendedValue)
+                {
+                }
 
                 public override int CommonValue { get; set; }
             }
@@ -1024,7 +1079,9 @@ namespace Moq.Tests.Regressions
 
             public class C : I
             {
-                public void Method<U>() { }
+                public void Method<U>()
+                {
+                }
             }
         }
 
@@ -1124,7 +1181,9 @@ namespace Moq.Tests.Regressions
                 int Method(MyClass a, MyClass b);
             }
 
-            public class MyClass { }
+            public class MyClass
+            {
+            }
         }
 
 		#endregion // #252
@@ -1576,7 +1635,9 @@ namespace Moq.Tests.Regressions
                 Assert.Null(user);
             }
 
-            public class User { }
+            public class User
+            {
+            }
 
             public interface IUserProvider
             {
@@ -1622,9 +1683,13 @@ namespace Moq.Tests.Regressions
             [Serializable]
             public class Foo
             {
-                public Foo() { }
+                public Foo()
+                {
+                }
 
-                protected Foo(SerializationInfo info, StreamingContext context) { }
+                protected Foo(SerializationInfo info, StreamingContext context)
+                {
+                }
             }
         }
 
@@ -1634,13 +1699,21 @@ namespace Moq.Tests.Regressions
 
         public class Issue343
         {
-            public class Fruit { }
+            public class Fruit
+            {
+            }
 
-            public class Apple : Fruit { }
+            public class Apple : Fruit
+            {
+            }
 
-            public class GreenApple : Apple { }
+            public class GreenApple : Apple
+            {
+            }
 
-            public class Orange : Fruit { }
+            public class Orange : Fruit
+            {
+            }
 
             public interface IFruitPicker
             {
@@ -2020,9 +2093,13 @@ namespace Moq.Tests.Regressions
                 Assert.Same(o1, o2);
             }
 
-            public interface IFoo { }
+            public interface IFoo
+            {
+            }
 
-            public class Foo : IFoo { }
+            public class Foo : IFoo
+            {
+            }
         }
 
 		#endregion
@@ -2055,7 +2132,9 @@ namespace Moq.Tests.Regressions
                 public virtual System.Data.Entity.DbSet<MyEntity> MyEntity { get; set; }
             }
 
-            public class MyEntity { }
+            public class MyEntity
+            {
+            }
         }
 #endif
 
@@ -2077,11 +2156,17 @@ namespace Moq.Tests.Regressions
                 void GenericMethod<T>(GenericClass2<T> a);
             }
 
-            public abstract class BaseType<T> { }
+            public abstract class BaseType<T>
+            {
+            }
 
-            public class GenericClass1<T> : BaseType<T> { }
+            public class GenericClass1<T> : BaseType<T>
+            {
+            }
 
-            public class GenericClass2<T> : BaseType<T> { }
+            public class GenericClass2<T> : BaseType<T>
+            {
+            }
         }
 
 		#endregion
@@ -2213,7 +2298,9 @@ namespace Moq.Tests.Regressions
                 void Method();
             }
 
-            public class Bar { }
+            public class Bar
+            {
+            }
 
             [Fact]
             public void CallBase_has_no_effect_for_methods_of_additional_interfaces()
@@ -2308,7 +2395,9 @@ namespace Moq.Tests.Regressions
         {
             // Taken from https://github.com/castleproject/Core/issues/339.
 
-            public readonly struct Struct { }
+            public readonly struct Struct
+            {
+            }
 
             public interface IStructByRefConsumer
             {
@@ -2494,7 +2583,8 @@ namespace Moq.Tests.Regressions
                 var mock = new Mock<ISomeDependency>();
                 mock.Setup(x => x.DoMoreStuffAsync())
                     .Returns(Task.CompletedTask)
-                    .Callback(() => { });
+                    .Callback(() => {
+                    });
                 await mock.Object.DoMoreStuffAsync();
             }
 
@@ -2512,7 +2602,8 @@ namespace Moq.Tests.Regressions
                 var mock = new Mock<ISomeDependency>() { DefaultValue = defaultValue };
                 mock.Setup(x => x.DoMoreStuffAsync())
                     //  .Returns(Task.CompletedTask)
-                    .Callback(() => { });
+                    .Callback(() => {
+                    });
                 await mock.Object.DoMoreStuffAsync();
             }
         }
@@ -2717,7 +2808,9 @@ namespace Moq.Tests.Regressions
 
             public class ClassWithoutDefaultConstructor
             {
-                public ClassWithoutDefaultConstructor(string dummy) { }
+                public ClassWithoutDefaultConstructor(string dummy)
+                {
+                }
             }
 
             public interface IProperty
@@ -2961,7 +3054,9 @@ namespace Moq.Tests.Regressions
                     {
                         await mock.Object.DoAsync();
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
 
                 // Cause verification failure. We expect a regular verification exception.
@@ -3308,9 +3403,13 @@ namespace Moq.Tests.Regressions
                 IReadOnlyList<T> Method<T>();
             }
 
-            public interface I { }
+            public interface I
+            {
+            }
 
-            public class C : I { }
+            public class C : I
+            {
+            }
         }
 
 		#endregion
@@ -3769,9 +3868,13 @@ namespace Moq.Tests.Regressions
 
             public class MyClass
             {
-                public virtual void FirstCall() { }
+                public virtual void FirstCall()
+                {
+                }
 
-                public virtual void SecondCall() { }
+                public virtual void SecondCall()
+                {
+                }
             }
         }
 
@@ -4040,7 +4143,9 @@ namespace Moq.Tests.Regressions
                 bool Property { get; set; }
             }
 
-            public interface IDerived : IBase { }
+            public interface IDerived : IBase
+            {
+            }
 
             public class Base : IBase
             {
@@ -4069,7 +4174,9 @@ namespace Moq.Tests.Regressions
 
         public class Issue1249
         {
-            public class NonSealedType { }
+            public class NonSealedType
+            {
+            }
 
             public interface IFoo
             {
@@ -4120,7 +4227,9 @@ namespace Moq.Tests.Regressions
                 mock.SetupAllProperties();
             }
 
-            public class MockOfX : Mock<IX> { }
+            public class MockOfX : Mock<IX>
+            {
+            }
 
             public interface IX
             {
@@ -4398,7 +4507,9 @@ namespace Moq.Tests.Regressions
                 }
             }
 
-            public class Bar { }
+            public class Bar
+            {
+            }
         }
 
 #endregion
@@ -4535,11 +4646,17 @@ namespace Moq.Tests.Regressions
                 string Resolve<T>();
             }
 
-            public class DataWriter<T> { }
+            public class DataWriter<T>
+            {
+            }
 
-            public class DataA { }
+            public class DataA
+            {
+            }
 
-            public class DataB { }
+            public class DataB
+            {
+            }
 
             [Fact]
             public void ShouldDifferentiateBetweenGenericsParams()
@@ -4697,7 +4814,9 @@ namespace Moq.Tests.Regressions
             {
                 public long Id { get; set; }
 
-                public void SetIt(long it) { }
+                public void SetIt(long it)
+                {
+                }
             }
 
             public interface IBar
@@ -4888,7 +5007,9 @@ namespace Moq.Tests.Regressions
                     Bar();
                 }
 
-                public virtual void Bar() { }
+                public virtual void Bar()
+                {
+                }
             }
 
             public void ShouldRenderCustomMessage()
@@ -4988,7 +5109,9 @@ namespace Moq.Tests.Regressions
                 void Collaborate(IServiceNo1 serviceNo1);
             }
 
-            public interface IServiceNo1 : IEnumerable { }
+            public interface IServiceNo1 : IEnumerable
+            {
+            }
         }
 
 #endregion
@@ -5082,12 +5205,16 @@ namespace Moq.Tests.Regressions
 
             public class Foo
             {
-                public class Inner { }
+                public class Inner
+                {
+                }
             }
 
             public class Bar
             {
-                public class Inner { }
+                public class Inner
+                {
+                }
             }
 
             public interface IGeneric
@@ -5406,11 +5533,17 @@ namespace Moq.Tests.Regressions
                 void Insert(IEntity entity);
             }
 
-            public interface IEntity { }
+            public interface IEntity
+            {
+            }
 
-            public class Foo : IEntity { }
+            public class Foo : IEntity
+            {
+            }
 
-            public class Bar : IEntity { }
+            public class Bar : IEntity
+            {
+            }
 
             public class Service
             {
@@ -5448,10 +5581,13 @@ namespace Moq.Tests.Regressions
 
             public class PropertyChangedBase : INotifyPropertyChanged
             {
-                public virtual event PropertyChangedEventHandler PropertyChanged = (s, e) => { };
+                public virtual event PropertyChangedEventHandler PropertyChanged = (s, e) => {
+                };
             }
 
-            public class PropertyChangedInherited : PropertyChangedBase { }
+            public class PropertyChangedInherited : PropertyChangedBase
+            {
+            }
         }
 
 #endregion
@@ -5525,7 +5661,9 @@ namespace Moq.Tests.Regressions
                 public virtual int Foo { get; set; }
                 public virtual string Bar { get; set; }
 
-                ~ClassWithFinalizer() { }
+                ~ClassWithFinalizer()
+                {
+                }
             }
         }
 
@@ -5673,7 +5811,9 @@ namespace Moq.Tests.Regressions
                 Assert.False(raised);
             }
 
-            public class Foo { }
+            public class Foo
+            {
+            }
 
             public interface IBar
             {
@@ -5730,7 +5870,9 @@ namespace Moq.Tests.Regressions
 
             public abstract class HttpContext
             {
-                protected HttpContext() { }
+                protected HttpContext()
+                {
+                }
 
                 public virtual HttpResponse Response
                 {
@@ -5740,7 +5882,9 @@ namespace Moq.Tests.Regressions
 
             public abstract class HttpResponse
             {
-                protected HttpResponse() { }
+                protected HttpResponse()
+                {
+                }
 
                 public virtual bool ShouldEncode
                 {

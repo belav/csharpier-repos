@@ -468,7 +468,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                         var onProjectAnalyzed =
                             statusBarUpdater != null
                                 ? statusBarUpdater.OnProjectAnalyzed
-                                : (Action<Project>)((Project _) => { });
+                                : (Action<Project>)(
+                                    (Project _) => {
+                                    }
+                                );
                         await _diagnosticService
                             .ForceAnalyzeAsync(
                                 solution,

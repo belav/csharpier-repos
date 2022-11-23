@@ -19,7 +19,9 @@ namespace Microsoft.Cci
         private readonly HashSet<IReferenceOrISignature> _alreadyHasToken = new();
         protected bool typeReferenceNeedsToken;
 
-        internal ReferenceIndexerBase(EmitContext context) : base(context) { }
+        internal ReferenceIndexerBase(EmitContext context) : base(context)
+        {
+        }
 
         public override void Visit(IAssemblyReference assemblyReference)
         {

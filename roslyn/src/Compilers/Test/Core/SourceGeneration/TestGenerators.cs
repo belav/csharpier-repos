@@ -17,7 +17,9 @@ namespace Roslyn.Test.Utilities.TestGenerators
     {
         private readonly List<(string content, string hintName)> _sources = new();
 
-        public SingleFileTestGenerator() { }
+        public SingleFileTestGenerator()
+        {
+        }
 
         public SingleFileTestGenerator(string content, string? hintName = null)
         {
@@ -36,7 +38,9 @@ namespace Roslyn.Test.Utilities.TestGenerators
                 context.AddSource(hintName, SourceText.From(content, Encoding.UTF8));
         }
 
-        public void Initialize(GeneratorInitializationContext context) { }
+        public void Initialize(GeneratorInitializationContext context)
+        {
+        }
     }
 
     /// <summary>
@@ -62,7 +66,9 @@ namespace Roslyn.Test.Utilities.TestGenerators
             _produceLocation = produceLocation;
         }
 
-        public void Initialize(GeneratorInitializationContext context) { }
+        public void Initialize(GeneratorInitializationContext context)
+        {
+        }
 
         public void Execute(GeneratorExecutionContext context)
         {
@@ -73,7 +79,9 @@ namespace Roslyn.Test.Utilities.TestGenerators
     internal class SingleFileTestGenerator2 : SingleFileTestGenerator
     {
         public SingleFileTestGenerator2(string content, string hintName = "generatedFile")
-            : base(content, hintName) { }
+            : base(content, hintName)
+        {
+        }
     }
 
     internal class CallbackGenerator : ISourceGenerator
@@ -111,7 +119,9 @@ namespace Roslyn.Test.Utilities.TestGenerators
             Action<GeneratorInitializationContext> onInit,
             Action<GeneratorExecutionContext> onExecute,
             string? source = ""
-        ) : base(onInit, onExecute, source) { }
+        ) : base(onInit, onExecute, source)
+        {
+        }
     }
 
     internal class InMemoryAdditionalText : AdditionalText
@@ -131,7 +141,9 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
         internal class BinaryText : InMemoryAdditionalText
         {
-            public BinaryText(string path) : base(path, string.Empty) { }
+            public BinaryText(string path) : base(path, string.Empty)
+            {
+            }
 
             public override SourceText GetText(CancellationToken cancellationToken = default) =>
                 throw new InvalidDataException("Binary content not supported");

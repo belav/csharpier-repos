@@ -228,7 +228,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 {
                     stream = await transport.AcceptAsync(token).ConfigureAwait(false);
                 }
-                catch (OperationCanceledException) { }
+                catch (OperationCanceledException)
+                {
+                }
                 catch (Exception)
                 {
                     // The advertise data could be incomplete if the runtime shuts down before completely writing
@@ -373,7 +375,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     socket.Blocking = false;
                     socket.Send(Array.Empty<byte>(), 0, SocketFlags.None);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
                 finally
                 {
                     socket.Blocking = blocking;

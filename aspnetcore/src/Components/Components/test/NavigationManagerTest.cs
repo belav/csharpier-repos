@@ -1016,7 +1016,9 @@ public class NavigationManagerTest
 
     private class TestNavigationManager : NavigationManager
     {
-        public TestNavigationManager() { }
+        public TestNavigationManager()
+        {
+        }
 
         public TestNavigationManager(string baseUri = null, string uri = null)
         {
@@ -1042,7 +1044,9 @@ public class NavigationManagerTest
             throw new System.NotImplementedException();
         }
 
-        protected override void SetNavigationLockState(bool value) { }
+        protected override void SetNavigationLockState(bool value)
+        {
+        }
     }
 
     private class TestNavigationManagerWithLocationChangingExceptionTracking : TestNavigationManager
@@ -1055,7 +1059,9 @@ public class NavigationManagerTest
         public TestNavigationManagerWithLocationChangingExceptionTracking(
             string baseUri = null,
             string uri = null
-        ) : base(baseUri, uri) { }
+        ) : base(baseUri, uri)
+        {
+        }
 
         protected override void HandleLocationChangingHandlerException(
             Exception ex,

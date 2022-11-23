@@ -8,16 +8,22 @@ namespace MS.Internal.Xml.XPath
     internal sealed class XPathAncestorIterator : XPathAxisIterator
     {
         public XPathAncestorIterator(XPathNavigator nav, XPathNodeType type, bool matchSelf)
-            : base(nav, type, matchSelf) { }
+            : base(nav, type, matchSelf)
+        {
+        }
 
         public XPathAncestorIterator(
             XPathNavigator nav,
             string name,
             string namespaceURI,
             bool matchSelf
-        ) : base(nav, name, namespaceURI, matchSelf) { }
+        ) : base(nav, name, namespaceURI, matchSelf)
+        {
+        }
 
-        public XPathAncestorIterator(XPathAncestorIterator other) : base(other) { }
+        public XPathAncestorIterator(XPathAncestorIterator other) : base(other)
+        {
+        }
 
         public override bool MoveNext()
         {

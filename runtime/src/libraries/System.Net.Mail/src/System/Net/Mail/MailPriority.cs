@@ -38,7 +38,9 @@ namespace System.Net.Mail
 
         #region Constructors
 
-        internal Message() { }
+        internal Message()
+        {
+        }
 
         internal Message(string from, string to) : this()
         {
@@ -109,7 +111,9 @@ namespace System.Net.Mail
                     // extract the encoding from =?encoding?BorQ?blablalba?=
                     inputEncoding = MimeBasePart.DecodeEncoding(value);
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
                 ;
 
                 if (inputEncoding != null && value != null)
@@ -121,7 +125,9 @@ namespace System.Net.Mail
                         _subjectEncoding ??= inputEncoding;
                     }
                     // Failed to decode, just pass it through as ascii (legacy)
-                    catch (FormatException) { }
+                    catch (FormatException)
+                    {
+                    }
                 }
 
                 if (value != null && MailBnfHelper.HasCROrLF(value))

@@ -18,7 +18,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             public GcStackSlot StackSlot { get; set; }
             public GcSlotFlags Flags { get; set; }
 
-            public GcSlot() { }
+            public GcSlot()
+            {
+            }
 
             public GcSlot(
                 int index,
@@ -102,7 +104,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
 
         public List<GcSlot> GcSlots { get; set; }
 
-        public GcSlotTable() { }
+        public GcSlotTable()
+        {
+        }
 
         /// <summary>
         /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/gcinfodecoder.cpp">GcSlotDecoder::DecodeSlotTable</a>

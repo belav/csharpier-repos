@@ -153,7 +153,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// A marker interface for tokens returned from <see cref="IContext.EnqueueWatchingFile(string)"/>. This is just to ensure type safety and avoid
         /// leaking the full surface area of the nested types.
         /// </summary>
-        public interface IFileWatchingToken { }
+        public interface IFileWatchingToken
+        {
+        }
 
         /// <summary>
         /// Represents an operation to subscribe or unsubscribe from <see cref="IVsAsyncFileChangeEx"/> events. The

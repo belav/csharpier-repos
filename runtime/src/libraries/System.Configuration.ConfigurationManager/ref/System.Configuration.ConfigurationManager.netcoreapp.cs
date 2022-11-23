@@ -8,6 +8,8 @@ namespace System.Diagnostics
 {
     public static partial class TraceConfiguration
     {
-        public static void Register() { }
+        public static void Register()
+        {
+        }
     }
 }

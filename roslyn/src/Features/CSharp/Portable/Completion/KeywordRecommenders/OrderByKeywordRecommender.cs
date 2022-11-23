@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class OrderByKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public OrderByKeywordRecommender() : base(SyntaxKind.OrderByKeyword) { }
+        public OrderByKeywordRecommender() : base(SyntaxKind.OrderByKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

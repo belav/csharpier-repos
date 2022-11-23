@@ -7,5 +7,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
     /// <summary>
     /// Marker interface for services that handle features for embedded languages.
     /// </summary>
-    internal interface IEmbeddedLanguageFeatureService { }
+    internal interface IEmbeddedLanguageFeatureService
+    {
+    }
 }

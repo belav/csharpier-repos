@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 fixAllScope,
                 codeAction.Title,
                 codeAction.EquivalenceKey
-            ) { }
+            )
+        {
+        }
 
         public FixAllState(
             FixAllProvider fixAllProvider,
@@ -73,7 +75,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 fixAllScope,
                 codeAction.Title,
                 codeAction.EquivalenceKey
-            ) { }
+            )
+        {
+        }
 
         private FixAllState(
             FixAllProvider fixAllProvider,

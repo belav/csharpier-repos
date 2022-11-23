@@ -142,7 +142,9 @@ namespace System.Collections
         // keys of all entries in the given dictionary as well as keys
         // subsequently added to the sorted list.
         //
-        public SortedList(IDictionary d) : this(d, null) { }
+        public SortedList(IDictionary d) : this(d, null)
+        {
+        }
 
         // Constructs a new sorted list containing a copy of the entries in the
         // given dictionary. The elements of the sorted list are ordered according

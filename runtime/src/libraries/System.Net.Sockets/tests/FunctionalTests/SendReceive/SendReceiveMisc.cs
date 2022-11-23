@@ -216,7 +216,9 @@ namespace System.Net.Sockets.Tests
                         await receiveTask.WaitAsync(TimeSpan.FromMilliseconds(3));
                         break;
                     }
-                    catch (TimeoutException) { }
+                    catch (TimeoutException)
+                    {
+                    }
                 }
             }
 

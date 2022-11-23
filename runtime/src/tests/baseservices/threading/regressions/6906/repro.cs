@@ -19,7 +19,9 @@ public class Beta
             Console.WriteLine("ERROR -- Enabled a wait with -2");
             rValue = 10;
         }
-        catch (ArgumentOutOfRangeException) { }
+        catch (ArgumentOutOfRangeException)
+        {
+        }
 
         try
         {
@@ -28,7 +30,9 @@ public class Beta
 
             rValue = 20;
         }
-        catch (ArgumentOutOfRangeException) { }
+        catch (ArgumentOutOfRangeException)
+        {
+        }
 
         try
         {
@@ -36,7 +40,9 @@ public class Beta
             Console.WriteLine("ERROR -- Enabled a wait with -1000000");
             rValue = 20;
         }
-        catch (ArgumentOutOfRangeException) { }
+        catch (ArgumentOutOfRangeException)
+        {
+        }
 
         Console.WriteLine("Test {0}", rValue == 100 ? "Passed" : "Failed");
         return rValue;

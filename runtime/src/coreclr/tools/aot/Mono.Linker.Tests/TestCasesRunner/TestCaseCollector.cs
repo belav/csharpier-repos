@@ -17,7 +17,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
         private readonly NPath _testCaseAssemblyPath;
 
         public TestCaseCollector(string rootDirectory, string testCaseAssemblyPath)
-            : this(rootDirectory.ToNPath(), testCaseAssemblyPath.ToNPath()) { }
+            : this(rootDirectory.ToNPath(), testCaseAssemblyPath.ToNPath())
+        {
+        }
 
         public TestCaseCollector(NPath rootDirectory, NPath testCaseAssemblyPath)
         {

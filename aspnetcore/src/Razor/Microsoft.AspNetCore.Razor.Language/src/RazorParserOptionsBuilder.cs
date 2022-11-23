@@ -21,5 +21,7 @@ public abstract class RazorParserOptionsBuilder
 
     public abstract RazorParserOptions Build();
 
-    public virtual void SetDesignTime(bool designTime) { }
+    public virtual void SetDesignTime(bool designTime)
+    {
+    }
 }

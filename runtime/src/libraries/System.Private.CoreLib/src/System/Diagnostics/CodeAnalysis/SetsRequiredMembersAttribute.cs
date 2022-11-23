@@ -13,5 +13,7 @@ namespace System.Diagnostics.CodeAnalysis
 #else
     internal
 #endif
-    sealed class SetsRequiredMembersAttribute : Attribute { }
+    sealed class SetsRequiredMembersAttribute : Attribute
+    {
+    }
 }

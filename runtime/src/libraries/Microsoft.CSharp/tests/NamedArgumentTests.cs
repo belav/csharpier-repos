@@ -761,20 +761,26 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         class C5
         {
-            public C5() { }
+            public C5()
+            {
+            }
 
             int this[int a, int b]
             {
                 get { throw null; }
             }
 
-            C5(int a, int b) { }
+            C5(int a, int b)
+            {
+            }
 
             // In the static test this is a local function on Main, but to test that without hunting
             // for the name (likely C.<Main>g__local|3_0, but that's implementation-dependent) to
             // push in with reflection we need the support from the compiler that we have yet to make
             // possible. Cut out the chicken-egg problem and just test on a non-local equivalent.
-            void Method(int a, int b) { }
+            void Method(int a, int b)
+            {
+            }
         }
 
         [Fact]
@@ -1048,7 +1054,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         class C9
         {
-            static void M(params int[] x) { }
+            static void M(params int[] x)
+            {
+            }
         }
 
         [Fact]
@@ -1374,7 +1382,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         class C11
         {
-            static void M(int x, params int[] y) { }
+            static void M(int x, params int[] y)
+            {
+            }
         }
 
         [Fact]
@@ -1505,7 +1515,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         class C13
         {
-            static void M(int a = 1, int b = 2, int c = 3) { }
+            static void M(int a = 1, int b = 2, int c = 3)
+            {
+            }
         }
 
         [Fact]
@@ -1545,7 +1557,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         class C14
         {
-            static void M(int a = 1, int b = 2, int c = 3) { }
+            static void M(int a = 1, int b = 2, int c = 3)
+            {
+            }
 
             static void M(long c = 1, long b = 2)
             {
@@ -1623,7 +1637,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         class C15
         {
-            static void M(long a = 1, long b = 2, long c = 3) { }
+            static void M(long a = 1, long b = 2, long c = 3)
+            {
+            }
 
             static void M(int c = 1, int b = 2)
             {
@@ -1767,7 +1783,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         class C17
         {
-            static void M(int a, int b, params int[] c) { }
+            static void M(int a, int b, params int[] c)
+            {
+            }
         }
 
         [Fact]

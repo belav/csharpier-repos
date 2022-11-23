@@ -14,7 +14,9 @@ namespace System.Net.Http.Functional.Tests
 {
     public class HttpClientHandlerTest_Url : HttpClientHandlerTestBase
     {
-        public HttpClientHandlerTest_Url(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Url(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [InlineData("/test%20", "/test%20")]

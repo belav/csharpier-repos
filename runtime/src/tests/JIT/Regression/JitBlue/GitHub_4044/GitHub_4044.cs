@@ -84,7 +84,9 @@ class C
         {
             throw new Exception();
         }
-        catch when (Print2(Print2(0, --x), ++x) == 1) { }
+        catch when (Print2(Print2(0, --x), ++x) == 1)
+        {
+        }
         catch
         {
             // Need a PHI here for x that includes the decremented
@@ -127,7 +129,9 @@ class C
         // won't separate Throw(x) out from the Ignore(..)
         // tree, but will still separate out ++y, creating
         // the bad reordering
-        catch when (Ignore(Throw(x), ++y)) { }
+        catch when (Ignore(Throw(x), ++y))
+        {
+        }
         catch
         {
             Print3(y);
@@ -151,7 +155,9 @@ class C
         // Same as Test3 except that the tree which raises
         // an exception is the array access x[100] instead
         // of a call.
-        catch when (Ignore(x[100], ++y)) { }
+        catch when (Ignore(x[100], ++y))
+        {
+        }
         catch
         {
             Print3(y);
@@ -204,7 +210,9 @@ class C
         // sure we recognize the heap modification and don't think
         // we can value-number the load here the same as the load
         // on entry to the function.
-        catch when ((box.Field = true) && ((BoxedBool)null).Field) { }
+        catch when ((box.Field = true) && ((BoxedBool)null).Field)
+        {
+        }
         catch
         {
             b = box.Field;
@@ -236,8 +244,12 @@ class C
         {
             throw new Exception();
         }
-        catch when (Filter5(ref n)) { }
-        catch { }
+        catch when (Filter5(ref n))
+        {
+        }
+        catch
+        {
+        }
         return n;
     }
 
@@ -267,8 +279,12 @@ class C
         {
             throw new Exception();
         }
-        catch when (Filter6(ref n)) { }
-        catch { }
+        catch when (Filter6(ref n))
+        {
+        }
+        catch
+        {
+        }
         return n;
     }
 

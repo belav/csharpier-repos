@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis
             _keyComparer = keyComparer;
         }
 
-        public ConcurrentCache(int size) : this(size, EqualityComparer<TKey>.Default) { }
+        public ConcurrentCache(int size) : this(size, EqualityComparer<TKey>.Default)
+        {
+        }
 
         public bool TryAdd(TKey key, TValue value)
         {

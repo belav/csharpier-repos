@@ -5,7 +5,9 @@ namespace System.Reflection.Emit
 {
     internal sealed class EmptyCAHolder : ICustomAttributeProvider
     {
-        internal EmptyCAHolder() { }
+        internal EmptyCAHolder()
+        {
+        }
 
         object[] ICustomAttributeProvider.GetCustomAttributes(Type attributeType, bool inherit) =>
             Array.Empty<object>();

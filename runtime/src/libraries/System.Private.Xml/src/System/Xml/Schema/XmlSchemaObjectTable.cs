@@ -13,7 +13,9 @@ namespace System.Xml.Schema
             new Dictionary<XmlQualifiedName, XmlSchemaObject>();
         private readonly List<XmlSchemaObjectEntry> _entries = new List<XmlSchemaObjectEntry>();
 
-        internal XmlSchemaObjectTable() { }
+        internal XmlSchemaObjectTable()
+        {
+        }
 
         internal void Add(XmlQualifiedName name, XmlSchemaObject value)
         {
@@ -339,7 +341,9 @@ namespace System.Xml.Schema
                 List<XmlSchemaObjectEntry> entries,
                 int size,
                 EnumeratorType enumType
-            ) : base(entries, size, enumType) { }
+            ) : base(entries, size, enumType)
+            {
+            }
 
             //IDictionaryEnumerator members
             public DictionaryEntry Entry

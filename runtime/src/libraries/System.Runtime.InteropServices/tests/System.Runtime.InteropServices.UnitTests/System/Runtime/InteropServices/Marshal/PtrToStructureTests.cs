@@ -335,7 +335,9 @@ namespace System.Runtime.InteropServices.Tests
         [StructLayout(LayoutKind.Sequential)]
         public class SequentialClass
         {
-            internal SequentialClass() { }
+            internal SequentialClass()
+            {
+            }
 
             public int i;
             public string s;

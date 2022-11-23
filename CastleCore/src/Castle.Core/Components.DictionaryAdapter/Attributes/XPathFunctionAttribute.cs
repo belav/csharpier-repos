@@ -21,7 +21,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
     public abstract class XPathFunctionAttribute : Attribute, IXsltContextFunction
     {
-        protected XPathFunctionAttribute() { }
+        protected XPathFunctionAttribute()
+        {
+        }
 
         public abstract XmlName Name { get; }
         public abstract XPathResultType ReturnType { get; }

@@ -30,7 +30,9 @@ class Tests
     [Category("!WASM")] //Requires a working threadpool
     static int test_0_array_delegate_full_aot()
     {
-        ArrayDelegate d = delegate(int[,] arr) { };
+        ArrayDelegate d = delegate(int[,] arr)
+        {
+        };
         int[,] a = new int[5, 6];
         d.BeginInvoke(a, null, null);
         return 0;
@@ -1015,7 +1017,9 @@ class Tests
             };
             d();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return 0;
     }
 
@@ -1036,7 +1040,9 @@ class Tests
 
     // Requires c# 7.2
 #if !__MonoCS__
-    public interface GameComponent { }
+    public interface GameComponent
+    {
+    }
 
     public struct Components<T>
     {
@@ -1044,7 +1050,9 @@ class Tests
         public int Count;
     }
 
-    struct AStruct : GameComponent { }
+    struct AStruct : GameComponent
+    {
+    }
 
     public class ReadonlyTest<T> where T : GameComponent
     {
@@ -1073,7 +1081,9 @@ class Tests
     }
 #endif
 
-    struct DummyStruct { }
+    struct DummyStruct
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void array_ienumerable<T1, T>(T t) where T : IEnumerable<T1>

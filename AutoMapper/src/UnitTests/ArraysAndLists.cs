@@ -105,7 +105,10 @@ public class When_mapping_an_array : AutoMapperSpecBase
     decimal[] _source = Enumerable.Range(1, 10).Select(i => (decimal)i).ToArray();
     decimal[] _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(c => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -124,7 +127,10 @@ public class When_mapping_a_primitive_array : AutoMapperSpecBase
     int[] _source = Enumerable.Range(1, 10).ToArray();
     long[] _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(c => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -298,7 +304,12 @@ public class When_mapping_collections : AutoMapperSpecBase
 {
     Author mappedAuthor;
 
-    protected override MapperConfiguration CreateConfiguration() => new(delegate { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(
+            delegate
+            {
+            }
+        );
 
     protected override void Because_of()
     {
@@ -757,7 +768,9 @@ public class When_mapping_to_a_custom_list_with_the_same_type : AutoMapperSpecBa
     private Destination _destination;
     private Source _source;
 
-    public class ValueCollection : Collection<int> { }
+    public class ValueCollection : Collection<int>
+    {
+    }
 
     public class Source
     {

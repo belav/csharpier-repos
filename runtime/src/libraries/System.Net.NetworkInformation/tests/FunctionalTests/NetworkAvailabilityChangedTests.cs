@@ -9,7 +9,9 @@ namespace System.Net.NetworkInformation.Tests
     // so that the tests for each don't run concurrently
     public partial class NetworkChangedTests
     {
-        private readonly NetworkAvailabilityChangedEventHandler _availabilityHandler = delegate { };
+        private readonly NetworkAvailabilityChangedEventHandler _availabilityHandler = delegate
+        {
+        };
 
         [Fact]
         public void NetworkAvailabilityChanged_AddRemove_Success()
@@ -33,7 +35,8 @@ namespace System.Net.NetworkInformation.Tests
             // We cannot test this via RemoteInvoke() as that calls Environment.Exit()
             // and forces quit even when foreground threads are running.
             NetworkChange.NetworkAddressChanged += _addressHandler;
-            { }
+            {
+            }
             ;
         }
 

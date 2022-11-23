@@ -18,15 +18,21 @@ namespace Microsoft.CSharp.RuntimeBinder
     [EditorBrowsable(EditorBrowsableState.Never)]
     internal sealed class DynamicBindingFailedException : Exception
     {
-        public DynamicBindingFailedException() : base() { }
+        public DynamicBindingFailedException() : base()
+        {
+        }
 
         private DynamicBindingFailedException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     internal sealed class GetMemberValueBinder : GetMemberBinder
     {
-        public GetMemberValueBinder(string name, bool ignoreCase) : base(name, ignoreCase) { }
+        public GetMemberValueBinder(string name, bool ignoreCase) : base(name, ignoreCase)
+        {
+        }
 
         public override DynamicMetaObject FallbackGetMember(
             DynamicMetaObject self,
@@ -536,10 +542,14 @@ namespace Microsoft.CSharp.RuntimeBinder
         [Serializable]
         internal sealed class DynamicDebugViewEmptyException : Exception
         {
-            public DynamicDebugViewEmptyException() { }
+            public DynamicDebugViewEmptyException()
+            {
+            }
 
             private DynamicDebugViewEmptyException(SerializationInfo info, StreamingContext context)
-                : base(info, context) { }
+                : base(info, context)
+            {
+            }
 
 #pragma warning disable CA1822
             // This property value is used by the debugger EE as the message

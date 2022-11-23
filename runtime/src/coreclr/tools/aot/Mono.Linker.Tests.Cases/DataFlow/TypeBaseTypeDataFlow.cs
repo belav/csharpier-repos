@@ -425,9 +425,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         class Mixed_Base
         {
-            public static void PublicMethod() { }
+            public static void PublicMethod()
+            {
+            }
 
-            private static void PrivateMethod() { }
+            private static void PrivateMethod()
+            {
+            }
         }
 
         class Mixed_Derived : Mixed_Base
@@ -536,6 +540,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
         }
 
-        class TestType { }
+        class TestType
+        {
+        }
     }
 }

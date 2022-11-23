@@ -96,7 +96,9 @@ namespace System.Web.WebPages.Razor
             EnableInstrumentation = false;
         }
 
-        public WebPageRazorHost(string virtualPath) : this(virtualPath, null) { }
+        public WebPageRazorHost(string virtualPath) : this(virtualPath, null)
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

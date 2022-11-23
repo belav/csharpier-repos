@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.TestSourceGenerator
         public const string GeneratedEnglishClassName = "HelloWorld";
         public const string GeneratedSpanishClassName = "HolaMundo";
 
-        public void Initialize(GeneratorInitializationContext context) { }
+        public void Initialize(GeneratorInitializationContext context)
+        {
+        }
 
         public void Execute(GeneratorExecutionContext context)
         {

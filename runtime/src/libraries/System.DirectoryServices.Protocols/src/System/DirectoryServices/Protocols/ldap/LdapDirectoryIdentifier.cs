@@ -8,10 +8,14 @@ namespace System.DirectoryServices.Protocols
         private readonly string[] _servers;
 
         public LdapDirectoryIdentifier(string server)
-            : this(server != null ? new string[] { server } : null, false, false) { }
+            : this(server != null ? new string[] { server } : null, false, false)
+        {
+        }
 
         public LdapDirectoryIdentifier(string server, int portNumber)
-            : this(server != null ? new string[] { server } : null, portNumber, false, false) { }
+            : this(server != null ? new string[] { server } : null, portNumber, false, false)
+        {
+        }
 
         public LdapDirectoryIdentifier(
             string server,
@@ -22,7 +26,9 @@ namespace System.DirectoryServices.Protocols
                 server != null ? new string[] { server } : null,
                 fullyQualifiedDnsHostName,
                 connectionless
-            ) { }
+            )
+        {
+        }
 
         public LdapDirectoryIdentifier(
             string server,
@@ -35,7 +41,9 @@ namespace System.DirectoryServices.Protocols
                 portNumber,
                 fullyQualifiedDnsHostName,
                 connectionless
-            ) { }
+            )
+        {
+        }
 
         public LdapDirectoryIdentifier(
             string[] servers,

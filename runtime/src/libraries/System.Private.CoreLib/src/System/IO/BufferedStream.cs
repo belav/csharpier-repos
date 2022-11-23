@@ -59,7 +59,9 @@ namespace System.IO
 
         // (perf optimization for successive reads of the same size)
 
-        public BufferedStream(Stream stream) : this(stream, DefaultBufferSize) { }
+        public BufferedStream(Stream stream) : this(stream, DefaultBufferSize)
+        {
+        }
 
         public BufferedStream(Stream stream, int bufferSize)
         {

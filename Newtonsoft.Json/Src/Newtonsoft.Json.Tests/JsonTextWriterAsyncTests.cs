@@ -51,7 +51,9 @@ namespace Newtonsoft.Json.Tests
     {
         public class LazyStringWriter : StringWriter
         {
-            public LazyStringWriter(IFormatProvider formatProvider) : base(formatProvider) { }
+            public LazyStringWriter(IFormatProvider formatProvider) : base(formatProvider)
+            {
+            }
 
             public override Task FlushAsync()
             {
@@ -312,7 +314,9 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.Fail();
             }
-            catch { }
+            catch
+            {
+            }
 
             Assert.AreEqual(0, arrayPool.UsedArrays.Count);
             Assert.AreEqual(1, arrayPool.FreeArrays.Count);
@@ -1933,12 +1937,16 @@ null//comment
 
         private class NoOverridesDerivedJsonTextWriter : JsonTextWriter
         {
-            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter) : base(textWriter) { }
+            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter) : base(textWriter)
+            {
+            }
         }
 
         private class MinimalOverridesDerivedJsonWriter : JsonWriter
         {
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
         }
 
         [Test]
@@ -2147,7 +2155,9 @@ null//comment
 
     public class CustomAsyncJsonTextWriter : CustomJsonTextWriter
     {
-        public CustomAsyncJsonTextWriter(TextWriter textWriter) : base(textWriter) { }
+        public CustomAsyncJsonTextWriter(TextWriter textWriter) : base(textWriter)
+        {
+        }
 
         public override Task WritePropertyNameAsync(
             string name,

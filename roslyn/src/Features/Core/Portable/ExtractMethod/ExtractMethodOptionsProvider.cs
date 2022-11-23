@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExtractMethodOptionsProvider() { }
+        public ExtractMethodOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(

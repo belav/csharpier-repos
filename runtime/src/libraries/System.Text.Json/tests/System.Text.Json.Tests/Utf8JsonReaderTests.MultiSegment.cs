@@ -1397,7 +1397,9 @@ namespace System.Text.Json.Tests
                 }
                 Assert.True(false, "Expected JsonException due to invalid JSON.");
             }
-            catch (JsonException) { }
+            catch (JsonException)
+            {
+            }
         }
 
         private static void SpanSequenceStatesAreEqual(byte[] dataUtf8)
@@ -2012,7 +2014,9 @@ namespace System.Text.Json.Tests
                             $"Expected JsonException was not thrown. CommentHandling = {jsonCommentHandling}"
                         );
                     }
-                    catch (JsonException) { }
+                    catch (JsonException)
+                    {
+                    }
                 }
             }
         }
@@ -2053,7 +2057,9 @@ namespace System.Text.Json.Tests
                             $"Expected JsonException was not thrown. CommentHandling = {jsonCommentHandling}"
                         );
                     }
-                    catch (JsonException) { }
+                    catch (JsonException)
+                    {
+                    }
                 }
             }
         }
@@ -3164,7 +3170,9 @@ namespace System.Text.Json.Tests
                     }
                 );
                 var reader = new Utf8JsonReader(sequence, isFinalBlock: true, state);
-                while (reader.Read()) { }
+                while (reader.Read())
+                {
+                }
 
                 Assert.Equal(utf8.Length - 1, reader.TokenStartIndex);
             }
@@ -3196,7 +3204,9 @@ namespace System.Text.Json.Tests
                     }
                 );
                 var reader = new Utf8JsonReader(sequence, isFinalBlock: true, state);
-                while (reader.Read()) { }
+                while (reader.Read())
+                {
+                }
 
                 Assert.Equal(utf8.Length - 1, reader.TokenStartIndex);
             }

@@ -26,6 +26,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
                 sourceSpans: default,
                 properties: null,
                 displayIfNoReferences: true
-            ) { }
+            )
+        {
+        }
     }
 }

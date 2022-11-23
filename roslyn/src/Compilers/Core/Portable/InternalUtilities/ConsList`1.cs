@@ -60,7 +60,9 @@ namespace Roslyn.Utilities
                 return false;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             object? IEnumerator.Current
             {

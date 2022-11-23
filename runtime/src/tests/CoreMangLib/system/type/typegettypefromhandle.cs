@@ -117,12 +117,18 @@ public class TypeGetTypeFromHandle
 
 public class BaseClass
 {
-    public BaseClass(string param, string s, int i) { }
+    public BaseClass(string param, string s, int i)
+    {
+    }
 }
 
 public class TestClass : BaseClass
 {
-    public TestClass(string param, string s) : base(param, s, 1) { }
+    public TestClass(string param, string s) : base(param, s, 1)
+    {
+    }
 
-    public TestClass() : base("", "", 1) { }
+    public TestClass() : base("", "", 1)
+    {
+    }
 }

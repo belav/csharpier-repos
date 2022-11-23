@@ -4967,7 +4967,9 @@ namespace System.IO.Packaging.Tests
 
     public class NonEnumerablePackage : Package
     {
-        public NonEnumerablePackage() : base(FileAccess.Read) { }
+        public NonEnumerablePackage() : base(FileAccess.Read)
+        {
+        }
 
         protected override PackagePart CreatePartCore(
             Uri partUri,
@@ -5001,7 +5003,9 @@ namespace System.IO.Packaging.Tests
 
     public class MockPackagePart : PackagePart
     {
-        public MockPackagePart(Package package, Uri uri) : base(package, uri) { }
+        public MockPackagePart(Package package, Uri uri) : base(package, uri)
+        {
+        }
 
         protected override Stream GetStreamCore(FileMode mode, FileAccess access)
         {

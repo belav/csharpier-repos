@@ -22,7 +22,13 @@ public static class MessagePackProtocolDependencyInjectionExtensions
     /// <param name="builder">The <see cref="ISignalRBuilder"/> representing the SignalR server to add MessagePack protocol support to.</param>
     /// <returns>The value of <paramref name="builder"/></returns>
     public static TBuilder AddMessagePackProtocol<TBuilder>(this TBuilder builder)
-        where TBuilder : ISignalRBuilder => AddMessagePackProtocol(builder, _ => { });
+        where TBuilder : ISignalRBuilder =>
+        AddMessagePackProtocol(
+            builder,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Enables the MessagePack protocol for SignalR and allows options for the MessagePack protocol to be configured.

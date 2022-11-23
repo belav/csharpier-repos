@@ -124,7 +124,9 @@ class Devirtualization
 
     class DevirtualizeIntoUnallocatedGenericType
     {
-        class Never { }
+        class Never
+        {
+        }
 
         class SomeGeneric<T>
         {

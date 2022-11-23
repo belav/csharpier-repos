@@ -2,11 +2,15 @@
 
 public class ConstructorParameterNamedType
 {
-    public class SourceClass { }
+    public class SourceClass
+    {
+    }
 
     public class DestinationClass
     {
-        public DestinationClass() { }
+        public DestinationClass()
+        {
+        }
 
         public DestinationClass(int type)
         {

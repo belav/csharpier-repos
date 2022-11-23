@@ -13,7 +13,8 @@ namespace System.Net.Sockets
         private bool _skipCompletionPortOnSuccess;
 
 #pragma warning disable CA1822
-        internal void SetExposed() { /* nop */
+        internal void SetExposed()
+        { /* nop */
         }
 #pragma warning restore CA1822
 

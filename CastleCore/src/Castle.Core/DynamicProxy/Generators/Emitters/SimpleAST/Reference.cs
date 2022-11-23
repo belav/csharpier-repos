@@ -20,7 +20,9 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
     {
         protected Reference owner = SelfReference.Self;
 
-        protected Reference() { }
+        protected Reference()
+        {
+        }
 
         protected Reference(Reference owner)
         {
@@ -39,7 +41,9 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
 
         public abstract void StoreReference(ILGenerator gen);
 
-        public virtual void Generate(ILGenerator gen) { }
+        public virtual void Generate(ILGenerator gen)
+        {
+        }
 
         public void Emit(ILGenerator gen)
         {

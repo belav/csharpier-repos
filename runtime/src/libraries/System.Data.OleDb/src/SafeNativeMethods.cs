@@ -63,7 +63,9 @@ namespace System.Data.Common
 
         internal sealed class Wrapper
         {
-            private Wrapper() { }
+            private Wrapper()
+            {
+            }
 
             // SxS: clearing error information is considered safe
             internal static void ClearErrorInfo()

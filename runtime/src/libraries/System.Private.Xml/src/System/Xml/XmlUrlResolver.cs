@@ -20,7 +20,9 @@ namespace System.Xml
             ?? Interlocked.CompareExchange(ref s_downloadManager, new XmlDownloadManager(), null)
             ?? s_downloadManager;
 
-        public XmlUrlResolver() { }
+        public XmlUrlResolver()
+        {
+        }
 
         [UnsupportedOSPlatform("browser")]
         public override ICredentials? Credentials
@@ -36,7 +38,9 @@ namespace System.Xml
 
         public RequestCachePolicy CachePolicy
         {
-            set { } // nop, as caching isn't implemented
+            set
+            {
+            } // nop, as caching isn't implemented
         }
 
         // Maps a URI to an Object containing the actual resource.

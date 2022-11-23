@@ -33,7 +33,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class ShutdownTests : IISFunctionalTestBase
 {
-    public ShutdownTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public ShutdownTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task ShutdownTimeoutIsApplied()
@@ -427,7 +429,9 @@ public class ShutdownTests : IISFunctionalTestBase
         await deploymentResult.AssertStarts();
 
         // Just "touching" web.config should be enough
-        deploymentResult.ModifyWebConfig(element => { });
+        deploymentResult.ModifyWebConfig(element =>
+        {
+        });
 
         await deploymentResult.AssertRecycledAsync();
     }
@@ -443,7 +447,9 @@ public class ShutdownTests : IISFunctionalTestBase
         var processBefore = await deploymentResult.HttpClient.GetStringAsync("/ProcessId");
 
         // Just "touching" web.config should be enough
-        deploymentResult.ModifyWebConfig(element => { });
+        deploymentResult.ModifyWebConfig(element =>
+        {
+        });
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process gets restarted with new process id
@@ -466,7 +472,9 @@ public class ShutdownTests : IISFunctionalTestBase
         await deploymentResult.AssertStarts();
 
         // Just "touching" web.config should be enough
-        deploymentResult.ModifyWebConfig(element => { });
+        deploymentResult.ModifyWebConfig(element =>
+        {
+        });
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
@@ -489,7 +497,9 @@ public class ShutdownTests : IISFunctionalTestBase
         await deploymentResult.AssertStarts();
 
         // Just "touching" applicationHost.config should be enough
-        _deployer.ModifyApplicationHostConfig(element => { });
+        _deployer.ModifyApplicationHostConfig(element =>
+        {
+        });
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
@@ -511,7 +521,9 @@ public class ShutdownTests : IISFunctionalTestBase
         var processBefore = await deploymentResult.HttpClient.GetStringAsync("/ProcessId");
 
         // Just "touching" web.config should be enough
-        deploymentResult.ModifyWebConfig(element => { });
+        deploymentResult.ModifyWebConfig(element =>
+        {
+        });
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
@@ -576,7 +588,10 @@ public class ShutdownTests : IISFunctionalTestBase
         {
             // ModifyWebConfig might fail if web.config is being read by IIS
             RetryHelper.RetryOperation(
-                () => deploymentResult.ModifyWebConfig(element => { }),
+                () =>
+                    deploymentResult.ModifyWebConfig(element =>
+                    {
+                    }),
                 e => Logger.LogError($"Failed to touch web.config : {e.Message}"),
                 retryCount: 3,
                 retryDelayMilliseconds: RetryDelay.Milliseconds

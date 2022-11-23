@@ -556,7 +556,9 @@ GROUP BY [d].[Id]"
 
     protected class Context27427 : DbContext
     {
-        public Context27427(DbContextOptions options) : base(options) { }
+        public Context27427(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<DemoEntity> DemoEntities { get; set; }
     }

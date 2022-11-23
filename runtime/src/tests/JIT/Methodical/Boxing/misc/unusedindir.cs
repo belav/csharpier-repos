@@ -27,7 +27,9 @@ namespace Test_unusedindir_cs
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void Escape(bool b) { }
+        static void Escape(bool b)
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static NotPromoted Test(TypeWithStruct obj)

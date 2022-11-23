@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     internal class IncrementalAnalyzerBase : IIncrementalAnalyzer
     {
-        protected IncrementalAnalyzerBase() { }
+        protected IncrementalAnalyzerBase()
+        {
+        }
 
         public virtual Task NewSolutionSnapshotAsync(
             Solution solution,
@@ -88,13 +90,17 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             CancellationToken cancellationToken
         ) => Task.CompletedTask;
 
-        public void LogAnalyzerCountSummary() { }
+        public void LogAnalyzerCountSummary()
+        {
+        }
 
         /// <summary>
         /// Order all incremental analyzers below DiagnosticIncrementalAnalyzer
         /// </summary>
         public virtual int Priority => 1;
 
-        public virtual void Shutdown() { }
+        public virtual void Shutdown()
+        {
+        }
     }
 }

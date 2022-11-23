@@ -19,7 +19,9 @@ class OpenMutexNeg
         //  open a closed mutex
         try
         {
-            using (Mutex mut1 = new Mutex(false, sName)) { }
+            using (Mutex mut1 = new Mutex(false, sName))
+            {
+            }
             Mutex mut2 = Mutex.OpenExisting(sName);
         }
         catch (WaitHandleCannotBeOpenedException)

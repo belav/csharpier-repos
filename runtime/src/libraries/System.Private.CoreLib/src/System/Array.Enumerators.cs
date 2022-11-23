@@ -116,6 +116,8 @@ namespace System
 
         void IEnumerator.Reset() => _index = -1;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

@@ -69,9 +69,13 @@ namespace Castle.DynamicProxy.Tests
         string Handle(EventArgs ea);
     }
 
-    public interface IEventHandler<T> : IEventHandler where T : EventArgs { }
+    public interface IEventHandler<T> : IEventHandler where T : EventArgs
+    {
+    }
 
-    public class EventArgs1 : EventArgs { }
+    public class EventArgs1 : EventArgs
+    {
+    }
 
     public class Handler1 : IEventHandler<EventArgs1>
     {
@@ -81,7 +85,9 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-    public class EventArgs2 : EventArgs { }
+    public class EventArgs2 : EventArgs
+    {
+    }
 
     public class Handler2 : IEventHandler<EventArgs2>
     {
@@ -91,7 +97,9 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-    public interface IEventHandler3 : IEventHandler { }
+    public interface IEventHandler3 : IEventHandler
+    {
+    }
 
     public class Handler3 : IEventHandler3
     {

@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             };
 
         public LspMiscellaneousFilesWorkspace()
-            : base(MefHostServices.DefaultHost, WorkspaceKind.MiscellaneousFiles) { }
+            : base(MefHostServices.DefaultHost, WorkspaceKind.MiscellaneousFiles)
+        {
+        }
 
         /// <summary>
         /// Takes in a file URI and text and creates a misc project and document for the file.

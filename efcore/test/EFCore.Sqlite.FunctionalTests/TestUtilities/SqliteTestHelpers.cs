@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class SqliteTestHelpers : RelationalTestHelpers
 {
-    protected SqliteTestHelpers() { }
+    protected SqliteTestHelpers()
+    {
+    }
 
     public static SqliteTestHelpers Instance { get; } = new();
 

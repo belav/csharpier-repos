@@ -71,7 +71,9 @@ namespace System.Reflection.Tests
         public static int Members = 3;
         public static int MembersEverything = 9;
 
-        static StaticClass() { }
+        static StaticClass()
+        {
+        }
     }
 
     public class ClassWithMultipleConstructors
@@ -79,15 +81,25 @@ namespace System.Reflection.Tests
         public static int Members = 9;
         public static int MembersEverything = 15;
 
-        static ClassWithMultipleConstructors() { }
+        static ClassWithMultipleConstructors()
+        {
+        }
 
-        public ClassWithMultipleConstructors() { }
+        public ClassWithMultipleConstructors()
+        {
+        }
 
-        public ClassWithMultipleConstructors(TimeSpan ts) { }
+        public ClassWithMultipleConstructors(TimeSpan ts)
+        {
+        }
 
-        public ClassWithMultipleConstructors(object o1, object o2) { }
+        public ClassWithMultipleConstructors(object o1, object o2)
+        {
+        }
 
-        public ClassWithMultipleConstructors(object obj0, int i4) { }
+        public ClassWithMultipleConstructors(object obj0, int i4)
+        {
+        }
     }
 
     public class TypeInfoBaseClass
@@ -95,17 +107,27 @@ namespace System.Reflection.Tests
         public static int Members = 5;
         public static int MembersEverything = 11;
 
-        static TypeInfoBaseClass() { }
+        static TypeInfoBaseClass()
+        {
+        }
 
-        public TypeInfoBaseClass() { }
+        public TypeInfoBaseClass()
+        {
+        }
 
-        public TypeInfoBaseClass(short i2) { }
+        public TypeInfoBaseClass(short i2)
+        {
+        }
     }
 
     public class TypeInfoSubClass : TypeInfoBaseClass
     {
-        public TypeInfoSubClass(string s) { }
+        public TypeInfoSubClass(string s)
+        {
+        }
 
-        public TypeInfoSubClass(short i2) { }
+        public TypeInfoSubClass(short i2)
+        {
+        }
     }
 }

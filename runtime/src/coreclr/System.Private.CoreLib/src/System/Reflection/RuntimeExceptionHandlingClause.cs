@@ -9,7 +9,9 @@ namespace System.Reflection
     internal sealed class RuntimeExceptionHandlingClause : ExceptionHandlingClause
     {
         // This class can only be created from inside the EE.
-        private RuntimeExceptionHandlingClause() { }
+        private RuntimeExceptionHandlingClause()
+        {
+        }
 
         private RuntimeMethodBody _methodBody = null!;
         private ExceptionHandlingClauseOptions _flags;

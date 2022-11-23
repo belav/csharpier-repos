@@ -26,6 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TodoListTableControlEventProcessorProvider() { }
+        public TodoListTableControlEventProcessorProvider()
+        {
+        }
     }
 }

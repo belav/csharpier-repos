@@ -42,7 +42,9 @@ public class FileBufferingReadStream : Stream
             memoryThreshold,
             bufferLimit: null,
             tempFileDirectoryAccessor: AspNetCoreTempDirectory.TempDirectoryFactory
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FileBufferingReadStream" />.
@@ -57,7 +59,8 @@ public class FileBufferingReadStream : Stream
         long? bufferLimit,
         Func<string> tempFileDirectoryAccessor
     ) : this(inner, memoryThreshold, bufferLimit, tempFileDirectoryAccessor, ArrayPool<byte>.Shared)
-    { }
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FileBufferingReadStream" />.
@@ -115,7 +118,9 @@ public class FileBufferingReadStream : Stream
         int memoryThreshold,
         long? bufferLimit,
         string tempFileDirectory
-    ) : this(inner, memoryThreshold, bufferLimit, tempFileDirectory, ArrayPool<byte>.Shared) { }
+    ) : this(inner, memoryThreshold, bufferLimit, tempFileDirectory, ArrayPool<byte>.Shared)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FileBufferingReadStream" />.

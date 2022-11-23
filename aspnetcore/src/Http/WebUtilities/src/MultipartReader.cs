@@ -35,7 +35,9 @@ public class MultipartReader
     /// <param name="boundary">The multipart boundary.</param>
     /// <param name="stream">The <see cref="Stream"/> containing multipart data.</param>
     public MultipartReader(string boundary, Stream stream)
-        : this(boundary, stream, DefaultBufferSize) { }
+        : this(boundary, stream, DefaultBufferSize)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="MultipartReader"/>.

@@ -226,7 +226,13 @@ namespace Microsoft.Data.Sqlite
         }
 
         private void RetryWhileBusy(Func<int> action, int timeout, Stopwatch? timer = null) =>
-            RetryWhileBusy(action, () => { }, timeout, timer);
+            RetryWhileBusy(
+                action,
+                () => {
+                },
+                timeout,
+                timer
+            );
 
         private void RetryWhileBusy(
             Func<int> action,

@@ -15,9 +15,13 @@ namespace System.Web.Razor.Generator
         )]
         public static readonly IBlockCodeGenerator Null = new NullBlockCodeGenerator();
 
-        public virtual void GenerateStartBlockCode(Block target, CodeGeneratorContext context) { }
+        public virtual void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
+        {
+        }
 
-        public virtual void GenerateEndBlockCode(Block target, CodeGeneratorContext context) { }
+        public virtual void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
+        {
+        }
 
         public override bool Equals(object obj)
         {
@@ -31,9 +35,13 @@ namespace System.Web.Razor.Generator
 
         private class NullBlockCodeGenerator : IBlockCodeGenerator
         {
-            public void GenerateStartBlockCode(Block target, CodeGeneratorContext context) { }
+            public void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
+            {
+            }
 
-            public void GenerateEndBlockCode(Block target, CodeGeneratorContext context) { }
+            public void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
+            {
+            }
 
             public override string ToString()
             {

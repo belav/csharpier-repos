@@ -20,6 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor
             ImmutableArray<NavigationBarItem> childItems = default,
             bool bolded = false,
             bool grayed = false
-        ) : base(text, glyph, spans, childItems, indent: 0, bolded: bolded, grayed: grayed) { }
+        ) : base(text, glyph, spans, childItems, indent: 0, bolded: bolded, grayed: grayed)
+        {
+        }
     }
 }

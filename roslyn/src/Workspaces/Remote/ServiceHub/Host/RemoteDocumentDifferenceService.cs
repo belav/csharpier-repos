@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CSharpDocumentDifferenceService() { }
+            public CSharpDocumentDifferenceService()
+            {
+            }
         }
 
         [
@@ -51,7 +53,9 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public VisualBasicDocumentDifferenceService() { }
+            public VisualBasicDocumentDifferenceService()
+            {
+            }
         }
 
         public async Task<DocumentDifferenceResult?> GetDifferenceAsync(

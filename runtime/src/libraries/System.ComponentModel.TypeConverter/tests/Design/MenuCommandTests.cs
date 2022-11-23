@@ -403,7 +403,8 @@ namespace System.ComponentModel.Design.Tests
         private class SubMenuCommand : MenuCommand
         {
             public SubMenuCommand(EventHandler handler, CommandID command) : base(handler, command)
-            { }
+            {
+            }
 
             public new void OnCommandChanged(EventArgs e) => base.OnCommandChanged(e);
         }

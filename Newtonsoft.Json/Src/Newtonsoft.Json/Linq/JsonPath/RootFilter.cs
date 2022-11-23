@@ -6,7 +6,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
     {
         public static readonly RootFilter Instance = new RootFilter();
 
-        private RootFilter() { }
+        private RootFilter()
+        {
+        }
 
         public override IEnumerable<JToken> ExecuteFilter(
             JToken root,

@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 lastInRegion,
                 unassignedVariables,
                 unassignedVariableAddressOfSyntaxes
-            ) { }
+            )
+        {
+        }
 
         internal static HashSet<Symbol> Analyze(
             CSharpCompilation compilation,

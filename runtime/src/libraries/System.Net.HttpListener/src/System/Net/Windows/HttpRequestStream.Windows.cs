@@ -375,7 +375,9 @@ namespace System.Net
                 object asyncObject,
                 object? userState,
                 AsyncCallback? callback
-            ) : base(asyncObject, userState, callback) { }
+            ) : base(asyncObject, userState, callback)
+            {
+            }
 
             internal HttpRequestStreamAsyncResult(
                 object asyncObject,

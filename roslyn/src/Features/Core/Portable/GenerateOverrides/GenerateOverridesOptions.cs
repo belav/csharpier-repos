@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public GenerateOverridesOptionsProvider() { }
+            public GenerateOverridesOptionsProvider()
+            {
+            }
 
             public ImmutableArray<IOption> Options { get; } =
                 ImmutableArray.Create<IOption>(GenerateOverridesOptions.SelectAll);

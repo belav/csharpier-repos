@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                             (AbstractSyntacticSingleKeywordRecommender)recommender
                         );
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
         }

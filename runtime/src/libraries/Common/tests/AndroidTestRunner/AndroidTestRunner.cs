@@ -69,7 +69,9 @@ public class SimpleAndroidTestRunner : AndroidApplicationEntryPoint, IDevice
         }
     }
 
-    protected override void TerminateWithSuccess() { }
+    protected override void TerminateWithSuccess()
+    {
+    }
 
     private int? _maxParallelThreads;
 

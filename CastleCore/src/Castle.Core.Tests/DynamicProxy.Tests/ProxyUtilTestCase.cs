@@ -162,20 +162,32 @@ namespace Castle.DynamicProxy.Tests
 
         public class PublicTestClass
         {
-            public void APublicMethod() { }
+            public void APublicMethod()
+            {
+            }
 
-            protected void AProtectedMethod() { }
+            protected void AProtectedMethod()
+            {
+            }
 
-            internal void AnInternalMethod() { }
+            internal void AnInternalMethod()
+            {
+            }
 
-            protected internal void AProtectedInternalMethod() { }
+            protected internal void AProtectedInternalMethod()
+            {
+            }
 
-            private void APrivateMethod() { }
+            private void APrivateMethod()
+            {
+            }
         }
 
         private class PrivateTestClass
         {
-            public void APublicMethod() { }
+            public void APublicMethod()
+            {
+            }
         }
 
         private sealed class FakeProxyWithInvokeMethods

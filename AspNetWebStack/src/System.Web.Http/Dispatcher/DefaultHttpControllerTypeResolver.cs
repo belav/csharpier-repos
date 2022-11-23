@@ -22,7 +22,9 @@ namespace System.Web.Http.Dispatcher
         /// Initializes a new instance of the <see cref="DefaultHttpControllerTypeResolver"/> with a default
         /// filter for detecting controller types.
         /// </summary>
-        public DefaultHttpControllerTypeResolver() : this(IsControllerType) { }
+        public DefaultHttpControllerTypeResolver() : this(IsControllerType)
+        {
+        }
 
         /// <summary>
         /// Creates a new <see cref="DefaultHttpControllerTypeResolver"/> instance using a predicate to filter controller types.

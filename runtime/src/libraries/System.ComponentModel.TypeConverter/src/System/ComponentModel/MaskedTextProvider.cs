@@ -165,7 +165,8 @@ namespace System.ComponentModel
         /// </summary>
         public MaskedTextProvider(string mask)
             : this(mask, null, DEFAULT_ALLOW_PROMPT, DEFAULT_PROMPT_CHAR, NULL_PASSWORD_CHAR, false)
-        { }
+        {
+        }
 
         /// <summary>
         /// Creates a MaskedTextProvider object from the specified mask.
@@ -179,7 +180,9 @@ namespace System.ComponentModel
                 DEFAULT_PROMPT_CHAR,
                 NULL_PASSWORD_CHAR,
                 restrictToAscii
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a MaskedTextProvider object from the specified mask.
@@ -194,7 +197,9 @@ namespace System.ComponentModel
                 DEFAULT_PROMPT_CHAR,
                 NULL_PASSWORD_CHAR,
                 false
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a MaskedTextProvider object from the specified mask.
@@ -210,7 +215,9 @@ namespace System.ComponentModel
                 DEFAULT_PROMPT_CHAR,
                 NULL_PASSWORD_CHAR,
                 restrictToAscii
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a MaskedTextProvider object from the specified mask .
@@ -218,7 +225,9 @@ namespace System.ComponentModel
         /// 'allowPromptAsInput' specifies whether the prompt character should be accepted as a valid input or not.
         /// </summary>
         public MaskedTextProvider(string mask, char passwordChar, bool allowPromptAsInput)
-            : this(mask, null, allowPromptAsInput, DEFAULT_PROMPT_CHAR, passwordChar, false) { }
+            : this(mask, null, allowPromptAsInput, DEFAULT_PROMPT_CHAR, passwordChar, false)
+        {
+        }
 
         /// <summary>
         /// Creates a MaskedTextProvider object from the specified mask .
@@ -230,7 +239,9 @@ namespace System.ComponentModel
             CultureInfo? culture,
             char passwordChar,
             bool allowPromptAsInput
-        ) : this(mask, culture, allowPromptAsInput, DEFAULT_PROMPT_CHAR, passwordChar, false) { }
+        ) : this(mask, culture, allowPromptAsInput, DEFAULT_PROMPT_CHAR, passwordChar, false)
+        {
+        }
 
         /// <summary>
         /// Creates a MaskedTextProvider object from the specified mask.

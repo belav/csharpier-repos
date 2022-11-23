@@ -83,7 +83,9 @@ namespace Microsoft.CodeAnalysis.ConvertLinq
             public readonly ImmutableArray<TStatement> Destinations;
 
             public DocumentUpdateInfo(TStatement source, TStatement destination)
-                : this(source, new[] { destination }) { }
+                : this(source, new[] { destination })
+            {
+            }
 
             public DocumentUpdateInfo(TStatement source, IEnumerable<TStatement> destinations)
             {

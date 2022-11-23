@@ -21,7 +21,9 @@ namespace Mono.Linker
         {
             internal static readonly PartVisitor Instance = new PartVisitor();
 
-            private PartVisitor() { }
+            private PartVisitor()
+            {
+            }
 
             public void VisitArrayType(
                 ArrayType arrayType,

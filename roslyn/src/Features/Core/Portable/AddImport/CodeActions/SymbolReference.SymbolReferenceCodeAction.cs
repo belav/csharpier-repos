@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.AddImport
         private abstract class SymbolReferenceCodeAction : AddImportCodeAction
         {
             protected SymbolReferenceCodeAction(Document originalDocument, AddImportFixData fixData)
-                : base(originalDocument, fixData) { }
+                : base(originalDocument, fixData)
+            {
+            }
 
             protected override async Task<
                 IEnumerable<CodeActionOperation>

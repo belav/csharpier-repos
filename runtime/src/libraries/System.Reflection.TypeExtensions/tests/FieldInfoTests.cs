@@ -184,9 +184,13 @@ namespace System.Reflection.Tests
         public const FI_Enum ConstField = FI_Enum.Case1;
     }
 
-    public class FI_SubClass : FI_BaseClass { }
+    public class FI_SubClass : FI_BaseClass
+    {
+    }
 
-    public struct FI_EmptyStruct { }
+    public struct FI_EmptyStruct
+    {
+    }
 
     public class FI_EquatableClass
     {
@@ -205,10 +209,14 @@ namespace System.Reflection.Tests
 
         public override int GetHashCode() => ID.GetHashCode();
 
-        public class NestedClass { }
+        public class NestedClass
+        {
+        }
     }
 
-    public interface FI_EmptyInterface { }
+    public interface FI_EmptyInterface
+    {
+    }
 
     public enum FI_Enum
     {

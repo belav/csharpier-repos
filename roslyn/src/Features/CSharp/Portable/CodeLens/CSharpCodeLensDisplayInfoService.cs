@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeLensDisplayInfoService() { }
+        public CSharpCodeLensDisplayInfoService()
+        {
+        }
 
         /// <summary>
         /// Returns the node that should be displayed

@@ -33,7 +33,9 @@ public static class Program
                 Type inst = typeof(GenericType<>).MakeGenericType(type);
                 Activator.CreateInstance(inst);
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 

@@ -62,7 +62,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestThirdPartyCodeFixWithFixAll() { }
+            public TestThirdPartyCodeFixWithFixAll()
+            {
+            }
 
             public override FixAllProvider GetFixAllProvider() => BatchFixAllProvider.Instance;
         }
@@ -72,7 +74,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestThirdPartyCodeFixWithOutFixAll() { }
+            public TestThirdPartyCodeFixWithOutFixAll()
+            {
+            }
         }
 
         [PartNotDiscoverable, Shared, ExportCodeFixProvider(LanguageNames.CSharp)]
@@ -80,7 +84,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestThirdPartyCodeFixModifiesSolution() { }
+            public TestThirdPartyCodeFixModifiesSolution()
+            {
+            }
 
             public override FixAllProvider GetFixAllProvider() => new ModifySolutionFixAll();
 
@@ -144,7 +150,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestThirdPartyCodeFixDoesNotSupportDocumentScope() { }
+            public TestThirdPartyCodeFixDoesNotSupportDocumentScope()
+            {
+            }
 
             public override FixAllProvider GetFixAllProvider() => new ModifySolutionFixAll();
 

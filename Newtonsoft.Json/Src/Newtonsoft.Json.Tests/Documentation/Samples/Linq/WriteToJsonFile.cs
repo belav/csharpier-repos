@@ -70,7 +70,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 return new StreamWriter(new MemoryStream());
             }
 
-            public static void WriteAllText(string s1, string s2) { }
+            public static void WriteAllText(string s1, string s2)
+            {
+            }
         }
     }
 }

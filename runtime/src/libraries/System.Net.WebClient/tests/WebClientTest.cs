@@ -1284,7 +1284,9 @@ namespace System.Net.Tests
             );
         }
 
-        private sealed class DerivedWebClient : WebClient { }
+        private sealed class DerivedWebClient : WebClient
+        {
+        }
     }
 
     public abstract class WebClientTestBase

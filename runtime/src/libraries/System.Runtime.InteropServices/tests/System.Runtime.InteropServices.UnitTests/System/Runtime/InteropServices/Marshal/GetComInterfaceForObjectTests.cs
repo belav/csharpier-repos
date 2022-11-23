@@ -133,9 +133,13 @@ namespace System.Runtime.InteropServices.Tests
             }
         }
 
-        public class ClassWithInterface : INonGenericInterface { }
+        public class ClassWithInterface : INonGenericInterface
+        {
+        }
 
-        public struct StructWithInterface : INonGenericInterface { }
+        public struct StructWithInterface : INonGenericInterface
+        {
+        }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]

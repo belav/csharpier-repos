@@ -45,5 +45,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ActualApiResponseMeta
         public IActionResult ActionWithActionResultOfTReturningOkResultExpression() => Ok();
     }
 
-    public class TryGetActualResponseMetadataModel { }
+    public class TryGetActualResponseMetadataModel
+    {
+    }
 }

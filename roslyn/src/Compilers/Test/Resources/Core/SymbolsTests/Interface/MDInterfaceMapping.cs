@@ -22,7 +22,9 @@ public class A
     }
 }
 
-public class B : A, IGoo { }
+public class B : A, IGoo
+{
+}
 
 public class C : B
 {

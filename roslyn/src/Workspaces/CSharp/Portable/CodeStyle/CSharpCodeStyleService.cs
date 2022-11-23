@@ -14,7 +14,9 @@ internal sealed class CSharpCodeStyleService : ICodeStyleService
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpCodeStyleService() { }
+    public CSharpCodeStyleService()
+    {
+    }
 
     public IdeCodeStyleOptions DefaultOptions => CSharpIdeCodeStyleOptions.Default;
 }

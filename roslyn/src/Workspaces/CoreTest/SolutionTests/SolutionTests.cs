@@ -2589,7 +2589,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 get { throw new NotImplementedException(); }
             }
 
-            public override void Initialize(AnalysisContext analysisContext) { }
+            public override void Initialize(AnalysisContext analysisContext)
+            {
+            }
         }
 
         [Fact]
@@ -3572,7 +3574,9 @@ End Class";
         }
 #endif
 
-        private interface ITestLanguageService : ILanguageService { }
+        private interface ITestLanguageService : ILanguageService
+        {
+        }
 
         [
             ExportLanguageService(
@@ -3587,7 +3591,9 @@ End Class";
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestLanguageServiceA() { }
+            public TestLanguageServiceA()
+            {
+            }
         }
 
         [
@@ -3599,7 +3605,9 @@ End Class";
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestLanguageServiceB() { }
+            public TestLanguageServiceB()
+            {
+            }
         }
 
         [Fact, WorkItem(666263, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/666263")]
@@ -3942,7 +3950,8 @@ public class C : A {
         private class TestSmallFileTextLoader : FileTextLoader
         {
             public TestSmallFileTextLoader(string path, Encoding encoding) : base(path, encoding)
-            { }
+            {
+            }
 
             // set max file length to 1 byte
             internal override int MaxFileLength => 1;

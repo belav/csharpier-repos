@@ -83,7 +83,9 @@ namespace System.ComponentModel.Design
         /// This method is called on demand the first time a user asks for child
         /// options or properties of an options collection.
         /// </summary>
-        protected virtual void PopulateOptionCollection(DesignerOptionCollection options) { }
+        protected virtual void PopulateOptionCollection(DesignerOptionCollection options)
+        {
+        }
 
         /// <summary>
         /// This method must be implemented to show the options dialog UI for the given object.
@@ -525,9 +527,13 @@ namespace System.ComponentModel.Design
 
                 public override object GetValue(object? component) => _option;
 
-                public override void ResetValue(object component) { }
+                public override void ResetValue(object component)
+                {
+                }
 
-                public override void SetValue(object? component, object? value) { }
+                public override void SetValue(object? component, object? value)
+                {
+                }
 
                 public override bool ShouldSerializeValue(object component) => false;
             }

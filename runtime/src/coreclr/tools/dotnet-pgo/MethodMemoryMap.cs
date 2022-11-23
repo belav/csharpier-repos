@@ -73,7 +73,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     method = idParser.ResolveMethodID(e.MethodID, out _);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 if (method != null)
                 {
@@ -105,7 +107,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     method = idParser.ResolveMethodID(e.MethodID, out _, throwIfNotFound: false);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 if (method != null)
                 {

@@ -188,7 +188,11 @@ namespace Moq.Tests.Matchers.Wildcard
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Dolphin : Animal { }
+    public class Dolphin : Animal
+    {
+    }
 }

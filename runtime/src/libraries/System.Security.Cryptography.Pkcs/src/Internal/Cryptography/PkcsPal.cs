@@ -170,7 +170,9 @@ namespace Internal.Cryptography
         };
         private protected static readonly byte[] s_rsaPkcsParameters = { 0x05, 0x00 };
 
-        protected PkcsPal() { }
+        protected PkcsPal()
+        {
+        }
 
         /// <summary>
         /// Encrypt and encode a CMS. Return value is the RFC-compliant representation of the CMS that can be transmitted "on the wire."

@@ -522,7 +522,9 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                 Stream stream,
                 ICryptoTransform transform,
                 CryptoStreamMode mode
-            ) : base(stream, transform, mode) { }
+            ) : base(stream, transform, mode)
+            {
+            }
 
             protected override void Dispose(bool disposing)
             {
@@ -584,7 +586,9 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                 get { return _outputBlockSize; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public int TransformBlock(
                 byte[] inputBuffer,
@@ -639,7 +643,9 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                 Stream stream,
                 ICryptoTransform transform,
                 CryptoStreamMode mode
-            ) : base(stream, transform, mode) { }
+            ) : base(stream, transform, mode)
+            {
+            }
 
             public override void Flush()
             {

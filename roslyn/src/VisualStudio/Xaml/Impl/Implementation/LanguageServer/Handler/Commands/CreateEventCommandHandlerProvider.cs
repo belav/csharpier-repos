@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CreateEventCommandHandlerProvider() { }
+        public CreateEventCommandHandlerProvider()
+        {
+        }
 
         public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
         {

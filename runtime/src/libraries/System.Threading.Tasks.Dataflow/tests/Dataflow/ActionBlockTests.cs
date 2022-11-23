@@ -16,10 +16,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new ActionBlock<int>(
-                            i => { },
+                            i =>
+                            {
+                            },
                             new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
                         )
-                        : new ActionBlock<int>(i => { })
+                        : new ActionBlock<int>(i =>
+                        {
+                        })
             );
 
             // Test ToString() with other configuration
@@ -27,7 +31,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new ActionBlock<int>(
-                            i => { },
+                            i =>
+                            {
+                            },
                             new ExecutionDataflowBlockOptions()
                             {
                                 NameFormat = nameFormat,
@@ -35,7 +41,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             }
                         )
                         : new ActionBlock<int>(
-                            i => { },
+                            i =>
+                            {
+                            },
                             new ExecutionDataflowBlockOptions() { SingleProducerConstrained = true }
                         )
             );
@@ -46,15 +54,22 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var generators = new Func<ActionBlock<int>>[]
             {
-                () => new ActionBlock<int>(i => { }),
+                () =>
+                    new ActionBlock<int>(i =>
+                    {
+                    }),
                 () =>
                     new ActionBlock<int>(
-                        i => { },
+                        i =>
+                        {
+                        },
                         new ExecutionDataflowBlockOptions { BoundedCapacity = 10 }
                     ),
                 () =>
                     new ActionBlock<int>(
-                        i => { },
+                        i =>
+                        {
+                        },
                         new ExecutionDataflowBlockOptions
                         {
                             BoundedCapacity = 10,
@@ -85,7 +100,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool bounded in DataflowTestHelpers.BooleanValues)
             {
                 ActionBlock<int> ab = new ActionBlock<int>(
-                    i => { },
+                    i =>
+                    {
+                    },
                     new ExecutionDataflowBlockOptions { BoundedCapacity = bounded ? 1 : -1 }
                 ); // test greedy and then non-greedy
                 Assert.True(
@@ -100,7 +117,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestCompletionTask()
         {
-            await DataflowTestHelpers.TestCompletionTask(() => new ActionBlock<int>(i => { }));
+            await DataflowTestHelpers.TestCompletionTask(
+                () =>
+                    new ActionBlock<int>(i =>
+                    {
+                    })
+            );
         }
 
         [Fact]
@@ -109,7 +131,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // Invalid arguments
             Assert.Throws<ArgumentNullException>(() => new ActionBlock<int>((Func<int, Task>)null));
             Assert.Throws<ArgumentNullException>(() => new ActionBlock<int>((Func<int, Task>)null));
-            Assert.Throws<ArgumentNullException>(() => new ActionBlock<int>(i => { }, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new ActionBlock<int>(
+                        i =>
+                        {
+                        },
+                        null
+                    )
+            );
             Assert.Throws<ArgumentNullException>(
                 () => new ActionBlock<int>(i => default(Task), null)
             );
@@ -117,13 +147,19 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // Valid arguments; make sure they don't throw, and validate some properties afterwards
             var blocks = new[]
             {
-                new ActionBlock<int>(i => { }),
+                new ActionBlock<int>(i =>
+                {
+                }),
                 new ActionBlock<int>(
-                    i => { },
+                    i =>
+                    {
+                    },
                     new ExecutionDataflowBlockOptions { MaxMessagesPerTask = 1 }
                 ),
                 new ActionBlock<int>(
-                    i => { },
+                    i =>
+                    {
+                    },
                     new ExecutionDataflowBlockOptions
                     {
                         MaxMessagesPerTask = 1,
@@ -440,7 +476,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
             };
             var blocks = new[]
             {
-                new ActionBlock<int>(i => { }, options),
+                new ActionBlock<int>(
+                    i =>
+                    {
+                    },
+                    options
+                ),
                 new ActionBlock<int>(i => Task.FromResult(0), options)
             };
 
@@ -463,7 +504,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool singleProducerConstrained in DataflowTestHelpers.BooleanValues)
             {
                 var ab = new ActionBlock<int>(
-                    i => { },
+                    i =>
+                    {
+                    },
                     new ExecutionDataflowBlockOptions { SingleProducerConstrained = true }
                 );
                 Assert.Throws<ArgumentNullException>(() => ((IDataflowBlock)ab).Fault(null));
@@ -656,7 +699,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestFaultyScheduler()
         {
             var ab = new ActionBlock<int>(
-                i => { },
+                i =>
+                {
+                },
                 new ExecutionDataflowBlockOptions
                 {
                     TaskScheduler = new DelegateTaskScheduler

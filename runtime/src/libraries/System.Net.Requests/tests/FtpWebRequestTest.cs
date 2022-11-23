@@ -376,7 +376,9 @@ namespace System.Net.Tests
                 DoDownload(mode, WebRequestMethods.Ftp.ListDirectory, dir);
                 return true;
             }
-            catch (WebException) { }
+            catch (WebException)
+            {
+            }
 
             return false;
         }
@@ -388,7 +390,9 @@ namespace System.Net.Tests
                 DoDownload(mode, WebRequestMethods.Ftp.DownloadFile, file);
                 return true;
             }
-            catch (WebException) { }
+            catch (WebException)
+            {
+            }
 
             return false;
         }

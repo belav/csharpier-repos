@@ -206,7 +206,9 @@ namespace System.Net.Security
         private int _nestedWrite;
         private int _nestedRead;
 
-        public SslStream(Stream innerStream) : this(innerStream, false, null, null) { }
+        public SslStream(Stream innerStream) : this(innerStream, false, null, null)
+        {
+        }
 
         public SslStream(Stream innerStream, bool leaveInnerStreamOpen)
             : this(
@@ -215,7 +217,9 @@ namespace System.Net.Security
                 null,
                 null,
                 EncryptionPolicy.RequireEncryption
-            ) { }
+            )
+        {
+        }
 
         public SslStream(
             Stream innerStream,
@@ -228,7 +232,9 @@ namespace System.Net.Security
                 userCertificateValidationCallback,
                 null,
                 EncryptionPolicy.RequireEncryption
-            ) { }
+            )
+        {
+        }
 
         public SslStream(
             Stream innerStream,
@@ -242,7 +248,9 @@ namespace System.Net.Security
                 userCertificateValidationCallback,
                 userCertificateSelectionCallback,
                 EncryptionPolicy.RequireEncryption
-            ) { }
+            )
+        {
+        }
 
         public SslStream(
             Stream innerStream,

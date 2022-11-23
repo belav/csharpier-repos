@@ -12,21 +12,27 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerCancelTest : CancelTest
     {
-        public InvokerCancelTest(ITestOutputHelper output) : base(output) { }
+        public InvokerCancelTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public sealed class HttpClientCancelTest : CancelTest
     {
-        public HttpClientCancelTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientCancelTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseHttpClient => true;
     }
 
     public class CancelTest : ClientWebSocketTestBase
     {
-        public CancelTest(ITestOutputHelper output) : base(output) { }
+        public CancelTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [OuterLoop(
             "Uses external servers",

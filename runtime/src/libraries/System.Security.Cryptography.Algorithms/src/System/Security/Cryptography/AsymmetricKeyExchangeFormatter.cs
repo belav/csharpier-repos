@@ -8,7 +8,9 @@ namespace System.Security.Cryptography
     [UnsupportedOSPlatform("browser")]
     public abstract class AsymmetricKeyExchangeFormatter
     {
-        protected AsymmetricKeyExchangeFormatter() { }
+        protected AsymmetricKeyExchangeFormatter()
+        {
+        }
 
         public abstract string? Parameters { get; }
 

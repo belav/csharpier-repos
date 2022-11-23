@@ -14,15 +14,21 @@ public class MultipleInterfaceInheritance : AutoMapperSpecBase
         public ItemDto[] Items { get; set; }
     }
 
-    public class Item : IItem { }
+    public class Item : IItem
+    {
+    }
 
-    public class ItemDto { }
+    public class ItemDto
+    {
+    }
 
-    public interface IItem
-        : ISome // everything works well if IItem doesn't inherit ISome.
-    { }
+    public interface IItem : ISome // everything works well if IItem doesn't inherit ISome.
+    {
+    }
 
-    public interface ISome { }
+    public interface ISome
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

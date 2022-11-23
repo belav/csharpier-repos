@@ -33,7 +33,9 @@ namespace System.Linq.Parallel
         internal static PlinqEtwProvider Log = new PlinqEtwProvider();
 
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
-        private PlinqEtwProvider() { }
+        private PlinqEtwProvider()
+        {
+        }
 
         /// <summary>Cached id for the default scheduler.</summary>
         /// <remarks>If PLINQ ever supports other schedulers, that information will need to be passed into the query events.</remarks>

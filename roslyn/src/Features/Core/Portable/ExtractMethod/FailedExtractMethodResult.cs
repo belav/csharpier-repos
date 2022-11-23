@@ -17,6 +17,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 ImmutableArray<AbstractFormattingRule>.Empty,
                 default,
                 null
-            ) { }
+            )
+        {
+        }
     }
 }

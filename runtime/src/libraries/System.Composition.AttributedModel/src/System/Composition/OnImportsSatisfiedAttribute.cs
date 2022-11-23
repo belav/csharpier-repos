@@ -9,5 +9,7 @@ namespace System.Composition
     /// completed. The method must be public or internal.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
-    public sealed class OnImportsSatisfiedAttribute : Attribute { }
+    public sealed class OnImportsSatisfiedAttribute : Attribute
+    {
+    }
 }

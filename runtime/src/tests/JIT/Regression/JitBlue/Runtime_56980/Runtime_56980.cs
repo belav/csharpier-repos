@@ -58,5 +58,7 @@ public class Program
         return 100;
     }
 
-    static void M17(ref uint arg2) { }
+    static void M17(ref uint arg2)
+    {
+    }
 }

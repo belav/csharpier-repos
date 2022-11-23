@@ -179,7 +179,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         {
             public static VSItemComparer Instance { get; } = new();
 
-            private VSItemComparer() { }
+            private VSItemComparer()
+            {
+            }
 
             public int Compare(VSCompletionItem? x, VSCompletionItem? y)
             {

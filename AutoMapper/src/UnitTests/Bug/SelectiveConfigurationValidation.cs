@@ -2,9 +2,13 @@
 
 public class SelectiveConfigurationValidation : NonValidatingSpecBase
 {
-    public class GoodSrc { }
+    public class GoodSrc
+    {
+    }
 
-    public class GoodDest { }
+    public class GoodDest
+    {
+    }
 
     public class BadSrc
     {

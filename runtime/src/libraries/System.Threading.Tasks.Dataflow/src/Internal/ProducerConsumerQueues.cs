@@ -228,7 +228,9 @@ namespace System.Threading.Tasks
             newSegment._state._last = 1;
             newSegment._state._lastCopy = 1;
 
-            try { }
+            try
+            {
+            }
             finally
             {
                 // Finally block to protect against corruption due to a thread abort

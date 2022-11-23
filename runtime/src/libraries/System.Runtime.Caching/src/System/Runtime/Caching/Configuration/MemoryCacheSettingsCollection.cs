@@ -24,7 +24,9 @@ namespace System.Runtime.Caching.Configuration
             get { return s_properties; }
         }
 
-        public MemoryCacheSettingsCollection() { }
+        public MemoryCacheSettingsCollection()
+        {
+        }
 
         public MemoryCacheElement this[int index]
         {

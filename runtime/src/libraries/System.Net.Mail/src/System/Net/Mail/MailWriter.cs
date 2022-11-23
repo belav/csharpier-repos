@@ -19,7 +19,8 @@ namespace System.Net.Mail
             : base(stream, encodeForTransport)
         // This is the only stream that should encoding leading dots on a line.
         // This way it is done message wide and only once.
-        { }
+        {
+        }
 
         internal override void WriteHeaders(NameValueCollection headers, bool allowUnicode)
         {

@@ -32,7 +32,9 @@ namespace Microsoft.Extensions.Logging.Abstractions
             TState state,
             Exception? exception,
             Func<TState, Exception?, string> formatter
-        ) { }
+        )
+        {
+        }
 
         /// <inheritdoc />
         public bool IsEnabled(LogLevel logLevel)

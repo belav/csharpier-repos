@@ -87,7 +87,9 @@ namespace Microsoft.Cci
             int tryEndOffset,
             int handlerStartOffset,
             int handlerEndOffset
-        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset) { }
+        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset)
+        {
+        }
 
         public override ExceptionRegionKind HandlerKind
         {
@@ -102,7 +104,9 @@ namespace Microsoft.Cci
             int tryEndOffset,
             int handlerStartOffset,
             int handlerEndOffset
-        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset) { }
+        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset)
+        {
+        }
 
         public override ExceptionRegionKind HandlerKind
         {

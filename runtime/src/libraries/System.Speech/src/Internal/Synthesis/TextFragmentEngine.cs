@@ -129,9 +129,13 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public void ProcessDesc(CultureInfo culture) { }
+        public void ProcessDesc(CultureInfo culture)
+        {
+        }
 
-        public void ProcessEmphasis(bool noLevel, EmphasisWord word) { }
+        public void ProcessEmphasis(bool noLevel, EmphasisWord word)
+        {
+        }
 
         public void ProcessMark(
             object voice,
@@ -204,9 +208,13 @@ namespace System.Speech.Internal.Synthesis
             string volume,
             string duration,
             string points
-        ) { }
+        )
+        {
+        }
 
-        public void ProcessSayAs(string interpretAs, string format, string detail) { }
+        public void ProcessSayAs(string interpretAs, string format, string detail)
+        {
+        }
 
         public void ProcessSub(
             string alias,
@@ -295,14 +303,18 @@ namespace System.Speech.Internal.Synthesis
 
         #region Prompt Engine
 
-        public void ContainsPexml(string pexmlPrefix) { }
+        public void ContainsPexml(string pexmlPrefix)
+        {
+        }
 
         public bool BeginPromptEngineOutput(object voice)
         {
             return false;
         }
 
-        public void EndPromptEngineOutput(object voice) { }
+        public void EndPromptEngineOutput(object voice)
+        {
+        }
 
         public bool ProcessPromptEngineDatabase(
             object voice,
@@ -329,26 +341,36 @@ namespace System.Speech.Internal.Synthesis
             return false;
         }
 
-        public void EndPromptEngineTts(object voice) { }
+        public void EndPromptEngineTts(object voice)
+        {
+        }
 
         public bool BeginPromptEngineWithTag(object voice, string tag)
         {
             return false;
         }
 
-        public void EndPromptEngineWithTag(object voice, string tag) { }
+        public void EndPromptEngineWithTag(object voice, string tag)
+        {
+        }
 
         public bool BeginPromptEngineRule(object voice, string name)
         {
             return false;
         }
 
-        public void EndPromptEngineRule(object voice, string name) { }
+        public void EndPromptEngineRule(object voice, string name)
+        {
+        }
         #endregion
 
-        public void EndElement() { }
+        public void EndElement()
+        {
+        }
 
-        public void EndSpeakElement() { }
+        public void EndSpeakElement()
+        {
+        }
 
         #endregion
 

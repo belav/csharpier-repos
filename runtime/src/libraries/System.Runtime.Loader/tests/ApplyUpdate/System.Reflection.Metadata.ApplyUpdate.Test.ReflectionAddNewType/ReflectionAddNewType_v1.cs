@@ -9,7 +9,9 @@ public interface IExistingInterface
     public string ItfMethod(int i);
 }
 
-public struct QExistingStruct { }
+public struct QExistingStruct
+{
+}
 
 public enum FExistingEnum
 {
@@ -31,7 +33,9 @@ public class ZExistingClass
         }
     }
 
-    public class NewNestedClass { };
+    public class NewNestedClass
+    {
+    };
 
     public string NewMethod(string s, int i) => s + i.ToString();
 
@@ -65,14 +69,18 @@ public class NewToplevelClass : IExistingInterface, ICloneable
     }
 
     [CustomNote("abcd")]
-    public void SomeMethod(int x) { }
+    public void SomeMethod(int x)
+    {
+    }
 
     public virtual object Clone()
     {
         return new NewToplevelClass();
     }
 
-    public class AlsoNested { }
+    public class AlsoNested
+    {
+    }
 
     [CustomNote("hijkl")]
     public float NewProp { get; set; }
@@ -91,7 +99,9 @@ public class NewGenericClass<T> : NewToplevelClass
     }
 }
 
-public struct NewToplevelStruct { }
+public struct NewToplevelStruct
+{
+}
 
 public interface INewInterface : IExistingInterface
 {

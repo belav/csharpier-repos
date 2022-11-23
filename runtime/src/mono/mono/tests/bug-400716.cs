@@ -40,7 +40,9 @@ namespace Repro
                     )
                 );
             }
-            catch (InvalidCastException) { }
+            catch (InvalidCastException)
+            {
+            }
         }
 
         public static int Main()

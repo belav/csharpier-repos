@@ -76,7 +76,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(29,18\).*CS0108</Expects>
-    public class C { }
+    public class C
+    {
+    }
 
     public class Base
     {
@@ -141,7 +143,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C { }
+    public class C
+    {
+    }
 
     public class Base
     {
@@ -926,9 +930,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C { }
+    public class C
+    {
+    }
 
-    public class D : C { }
+    public class D : C
+    {
+    }
 
     public class Base
     {
@@ -999,9 +1007,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C { }
+    public class C
+    {
+    }
 
-    public class D : C { }
+    public class D : C
+    {
+    }
 
     public class Base
     {
@@ -1072,9 +1084,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C { }
+    public class C
+    {
+    }
 
-    public class D : C { }
+    public class D : C
+    {
+    }
 
     public class Base
     {
@@ -1145,9 +1161,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C { }
+    public class C
+    {
+    }
 
-    public class D : C { }
+    public class D : C
+    {
+    }
 
     public class Base
     {
@@ -1218,7 +1238,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C { }
+    public class C
+    {
+    }
 
     public class Base
     {

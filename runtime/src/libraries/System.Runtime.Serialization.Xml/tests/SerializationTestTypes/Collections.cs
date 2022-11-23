@@ -11,7 +11,9 @@ namespace SerializationTestTypes
     {
         public LinkedList<SimpleDCWithRef> Data;
 
-        public ContainsLinkedList() { }
+        public ContainsLinkedList()
+        {
+        }
 
         public ContainsLinkedList(bool init)
         {
@@ -45,7 +47,9 @@ namespace SerializationTestTypes
     {
         private List<string> _data = new List<string>();
 
-        public SimpleCDC() { }
+        public SimpleCDC()
+        {
+        }
 
         public SimpleCDC(bool init)
         {
@@ -117,7 +121,9 @@ namespace SerializationTestTypes
     {
         private List<string> _data = new List<string>();
 
-        public SimpleCDC2() { }
+        public SimpleCDC2()
+        {
+        }
 
         public SimpleCDC2(bool init)
         {
@@ -193,7 +199,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SimpleCDC2 data2;
 
-        public ContainsSimpleCDC() { }
+        public ContainsSimpleCDC()
+        {
+        }
 
         public ContainsSimpleCDC(bool init)
         {
@@ -214,7 +222,9 @@ namespace SerializationTestTypes
         [DataMember]
         public List<SimpleDC> List1;
 
-        public DMInCollection1() { }
+        public DMInCollection1()
+        {
+        }
 
         public DMInCollection1(bool init)
         {
@@ -250,7 +260,9 @@ namespace SerializationTestTypes
         [DataMember]
         public string InnerInnerContent;
 
-        public DMInCollection2() { }
+        public DMInCollection2()
+        {
+        }
 
         public DMInCollection2(bool init)
         {
@@ -295,7 +307,9 @@ namespace SerializationTestTypes
         [DataMember]
         public string InnerData1;
 
-        public DMInDict1() { }
+        public DMInDict1()
+        {
+        }
 
         public DMInDict1(bool init)
         {
@@ -336,7 +350,9 @@ namespace SerializationTestTypes
         [DataMember]
         public string InnerData1;
 
-        public DMWithRefInCollection1() { }
+        public DMWithRefInCollection1()
+        {
+        }
 
         public DMWithRefInCollection1(bool init)
         {
@@ -386,7 +402,9 @@ namespace SerializationTestTypes
         [DataMember]
         public string InnerInnerContent;
 
-        public DMWithRefInCollection2() { }
+        public DMWithRefInCollection2()
+        {
+        }
 
         public DMWithRefInCollection2(bool init)
         {
@@ -450,7 +468,9 @@ namespace SerializationTestTypes
         [DataMember]
         public SimpleDC InnerData1;
 
-        public DMWithRefInDict1() { }
+        public DMWithRefInDict1()
+        {
+        }
 
         public DMWithRefInDict1(bool init)
         {

@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 storageLocations: ImmutableArray<OptionStorageLocation>.Empty
-            ) { }
+            )
+        {
+        }
 
         public PerLanguageOption(
             string feature,
@@ -50,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 storageLocations.ToImmutableArray()
-            ) { }
+            )
+        {
+        }
 
         internal PerLanguageOption(
             string feature,
@@ -63,14 +67,18 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 storageLocations: ImmutableArray.Create(storageLocation)
-            ) { }
+            )
+        {
+        }
 
         internal PerLanguageOption(
             string feature,
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation> storageLocations
-        ) : this(feature, OptionGroup.Default, name, defaultValue, storageLocations) { }
+        ) : this(feature, OptionGroup.Default, name, defaultValue, storageLocations)
+        {
+        }
 
         internal PerLanguageOption(
             string feature,
@@ -82,7 +90,9 @@ namespace Microsoft.CodeAnalysis.Options
             : this(
                 new OptionDefinition(feature, group, name, defaultValue, typeof(T)),
                 storageLocations
-            ) { }
+            )
+        {
+        }
 
         internal PerLanguageOption(
             OptionDefinition optionDefinition,

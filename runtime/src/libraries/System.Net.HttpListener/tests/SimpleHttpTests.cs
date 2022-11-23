@@ -189,7 +189,14 @@ namespace System.Net.Tests
 
                 HttpListenerContext context = sync
                     ? listener.GetContext()
-                    : listener.EndGetContext(listener.BeginGetContext(ar => { }, null));
+                    : listener.EndGetContext(
+                        listener.BeginGetContext(
+                            ar =>
+                            {
+                            },
+                            null
+                        )
+                    );
 
                 HttpListenerResponse response = context.Response;
                 response.OutputStream.Write(Encoding.UTF8.GetBytes(Content));
@@ -219,7 +226,14 @@ namespace System.Net.Tests
 
                 context = sync
                     ? listener.GetContext()
-                    : listener.EndGetContext(listener.BeginGetContext(ar => { }, null));
+                    : listener.EndGetContext(
+                        listener.BeginGetContext(
+                            ar =>
+                            {
+                            },
+                            null
+                        )
+                    );
 
                 response = context.Response;
                 response.OutputStream.Write(Encoding.UTF8.GetBytes(Content));

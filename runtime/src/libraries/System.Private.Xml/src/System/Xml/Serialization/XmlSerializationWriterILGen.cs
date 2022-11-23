@@ -18,7 +18,9 @@ namespace System.Xml.Serialization
     {
         [RequiresUnreferencedCode("creates XmlSerializationILGen")]
         internal XmlSerializationWriterILGen(TypeScope[] scopes, string access, string className)
-            : base(scopes, access, className) { }
+            : base(scopes, access, className)
+        {
+        }
 
         [RequiresUnreferencedCode("calls WriteReflectionInit")]
         internal void GenerateBegin()
@@ -2899,7 +2901,9 @@ namespace System.Xml.Serialization
         // ArrayAccessor    "0:"+CodeIdentifier.EscapedKeywords(typeof(Array).FullName)
         // MyCollectionAccessor     "0:"+CodeIdentifier.EscapedKeywords(typeof(MyCollection).FullName)
         // ----------------------------------------------------------------------------------
-        internal ReflectionAwareILGen() { }
+        internal ReflectionAwareILGen()
+        {
+        }
 
         [RequiresUnreferencedCode("calls GetTypeDesc")]
         internal static void WriteReflectionInit(TypeScope scope)

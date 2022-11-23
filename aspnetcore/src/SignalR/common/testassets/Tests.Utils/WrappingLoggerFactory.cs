@@ -44,7 +44,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             public IExternalScopeProvider ScopeProvider { get; private set; }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public ILogger CreateLogger(string categoryName)
             {

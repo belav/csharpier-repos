@@ -16,7 +16,9 @@ internal class InitializedHandler : ILspServiceNotificationHandler<InitializedPa
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public InitializedHandler() { }
+    public InitializedHandler()
+    {
+    }
 
     public bool MutatesSolutionState => true;
 

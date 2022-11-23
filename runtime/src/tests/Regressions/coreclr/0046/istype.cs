@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 
-public struct MyStruct { }
+public struct MyStruct
+{
+}
 
 public class IsType
 {

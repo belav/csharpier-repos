@@ -20,7 +20,9 @@ public partial class FileStreamResultExecutor
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     public FileStreamResultExecutor(ILoggerFactory loggerFactory)
-        : base(CreateLogger<FileStreamResultExecutor>(loggerFactory)) { }
+        : base(CreateLogger<FileStreamResultExecutor>(loggerFactory))
+    {
+    }
 
     /// <inheritdoc />
     public virtual async Task ExecuteAsync(ActionContext context, FileStreamResult result)

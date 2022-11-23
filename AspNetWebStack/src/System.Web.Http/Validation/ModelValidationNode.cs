@@ -17,7 +17,9 @@ namespace System.Web.Http.Validation
         private readonly List<ModelValidationNode> _childNodes;
 
         public ModelValidationNode(ModelMetadata modelMetadata, string modelStateKey)
-            : this(modelMetadata, modelStateKey, null) { }
+            : this(modelMetadata, modelStateKey, null)
+        {
+        }
 
         public ModelValidationNode(
             ModelMetadata modelMetadata,

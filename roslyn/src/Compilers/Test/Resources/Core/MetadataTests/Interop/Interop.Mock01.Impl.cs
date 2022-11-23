@@ -23,7 +23,9 @@ namespace MockInterop01.Impl
         string IGoo.this[string p, IGoo p2]
         {
             get { return p; }
-            set { }
+            set
+            {
+            }
         }
 
         InteropDeleWithStructArray _GooEvent;
@@ -46,9 +48,13 @@ namespace MockInterop01.Impl
             return p;
         }
 
-        public void UnRegister(object o) { }
+        public void UnRegister(object o)
+        {
+        }
 
-        public void LibFunc(decimal p1, DateTime p2) { }
+        public void LibFunc(decimal p1, DateTime p2)
+        {
+        }
     }
 
     public class EventImpl : IEventEvent

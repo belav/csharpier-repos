@@ -129,7 +129,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
             }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public override void DefaultVisit(SyntaxNode node)
         {

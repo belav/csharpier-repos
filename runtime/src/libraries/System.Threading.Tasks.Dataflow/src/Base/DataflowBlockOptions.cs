@@ -109,7 +109,9 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <summary>Initializes the <see cref="DataflowBlockOptions"/>.</summary>
-        public DataflowBlockOptions() { }
+        public DataflowBlockOptions()
+        {
+        }
 
         /// <summary>Gets or sets the <see cref="System.Threading.Tasks.TaskScheduler"/> to use for scheduling tasks.</summary>
         public TaskScheduler TaskScheduler
@@ -295,7 +297,9 @@ namespace System.Threading.Tasks.Dataflow
         private bool _singleProducerConstrained;
 
         /// <summary>Initializes the <see cref="ExecutionDataflowBlockOptions"/>.</summary>
-        public ExecutionDataflowBlockOptions() { }
+        public ExecutionDataflowBlockOptions()
+        {
+        }
 
         /// <summary>Gets the maximum number of messages that may be processed by the block concurrently.</summary>
         public int MaxDegreeOfParallelism
@@ -440,7 +444,9 @@ namespace System.Threading.Tasks.Dataflow
         private long _maxNumberOfGroups = Unbounded;
 
         /// <summary>Initializes the <see cref="GroupingDataflowBlockOptions"/>.</summary>
-        public GroupingDataflowBlockOptions() { }
+        public GroupingDataflowBlockOptions()
+        {
+        }
 
         /// <summary>Gets or sets the Boolean value to use to determine whether to greedily consume offered messages.</summary>
         public bool Greedy

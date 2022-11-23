@@ -109,7 +109,9 @@ public class InterpOnly : InterpOnlyIFace
         {
             try_after_jitonly_call();
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
     }
 }
 

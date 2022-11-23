@@ -18,13 +18,19 @@ using System.ComponentModel.Design;
 
 namespace System.ComponentModel.Tests
 {
-    public class UnlicensedObject { }
+    public class UnlicensedObject
+    {
+    }
 
     [LicenseProvider(typeof(TestLicenseProvider))]
-    public class LicensedObject { }
+    public class LicensedObject
+    {
+    }
 
     [LicenseProvider(typeof(TestLicenseProvider))]
-    public class InvalidLicensedObject { }
+    public class InvalidLicensedObject
+    {
+    }
 
     [LicenseProvider(typeof(TestLicenseProvider))]
     public class RuntimeLicensedObject
@@ -34,7 +40,9 @@ namespace System.ComponentModel.Tests
             LicenseManager.Validate(typeof(RuntimeLicensedObject));
         }
 
-        public RuntimeLicensedObject(int a) : this() { }
+        public RuntimeLicensedObject(int a) : this()
+        {
+        }
     }
 
     [LicenseProvider(typeof(TestLicenseProvider))]
@@ -50,12 +58,16 @@ namespace System.ComponentModel.Tests
     {
         private class TestLicense : License
         {
-            public override void Dispose() { }
+            public override void Dispose()
+            {
+            }
 
             public override string LicenseKey => "YourLicenseKey";
         }
 
-        public TestLicenseProvider() : base() { }
+        public TestLicenseProvider() : base()
+        {
+        }
 
         public override License GetLicense(
             LicenseContext context,

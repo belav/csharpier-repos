@@ -40,7 +40,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             using (
                 HttpResponseMessage response = SendRequestHelper.Send(
                     handler,
-                    () => { },
+                    () => {
+                    },
                     TestServer.FakeServerEndpoint
                 )
             )
@@ -60,7 +61,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 using (
                     HttpResponseMessage response = SendRequestHelper.Send(
                         handler,
-                        () => { },
+                        () => {
+                        },
                         TestServer.FakeServerEndpoint
                     )
                 )
@@ -77,7 +79,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             using (
                 HttpResponseMessage response = SendRequestHelper.Send(
                     handler,
-                    () => { },
+                    () => {
+                    },
                     TestServer.FakeSecureServerEndpoint
                 )
             )
@@ -98,7 +101,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 using (
                     HttpResponseMessage response = SendRequestHelper.Send(
                         handler,
-                        () => { },
+                        () => {
+                        },
                         TestServer.FakeSecureServerEndpoint
                     )
                 )
@@ -120,7 +124,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 using (
                     HttpResponseMessage response = SendRequestHelper.Send(
                         handler,
-                        () => { },
+                        () => {
+                        },
                         TestServer.FakeSecureServerEndpoint
                     )
                 )
@@ -140,7 +145,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 using (
                     HttpResponseMessage response = SendRequestHelper.Send(
                         handler,
-                        () => { },
+                        () => {
+                        },
                         TestServer.FakeSecureServerEndpoint
                     )
                 )
@@ -162,7 +168,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 using (
                     HttpResponseMessage response = SendRequestHelper.Send(
                         handler,
-                        () => { },
+                        () => {
+                        },
                         TestServer.FakeSecureServerEndpoint
                     )
                 )
@@ -184,7 +191,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 using (
                     HttpResponseMessage response = SendRequestHelper.Send(
                         handler,
-                        () => { },
+                        () => {
+                        },
                         TestServer.FakeSecureServerEndpoint
                     )
                 )
@@ -207,7 +215,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 using (
                     HttpResponseMessage response = SendRequestHelper.Send(
                         handler,
-                        () => { },
+                        () => {
+                        },
                         TestServer.FakeSecureServerEndpoint
                     )
                 )

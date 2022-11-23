@@ -23,7 +23,9 @@ public class TestableHtmlGenerator : DefaultHtmlGenerator
     private readonly IDictionary<string, object> _validationAttributes;
 
     public TestableHtmlGenerator(IModelMetadataProvider metadataProvider)
-        : this(metadataProvider, Mock.Of<IUrlHelper>()) { }
+        : this(metadataProvider, Mock.Of<IUrlHelper>())
+    {
+    }
 
     public TestableHtmlGenerator(IModelMetadataProvider metadataProvider, IUrlHelper urlHelper)
         : this(
@@ -31,7 +33,9 @@ public class TestableHtmlGenerator : DefaultHtmlGenerator
             GetOptions(),
             urlHelper,
             validationAttributes: new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-        ) { }
+        )
+    {
+    }
 
     public TestableHtmlGenerator(
         IModelMetadataProvider metadataProvider,

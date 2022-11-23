@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EventDeclarationOrganizer() { }
+        public EventDeclarationOrganizer()
+        {
+        }
 
         protected override EventDeclarationSyntax Organize(
             EventDeclarationSyntax syntax,

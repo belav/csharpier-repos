@@ -17,12 +17,16 @@ namespace System.Security.Permissions
         public KeyContainerPermissionAccessEntry(
             string keyContainerName,
             KeyContainerPermissionFlags flags
-        ) { }
+        )
+        {
+        }
 
         public KeyContainerPermissionAccessEntry(
             CspParameters parameters,
             KeyContainerPermissionFlags flags
-        ) { }
+        )
+        {
+        }
 
         public KeyContainerPermissionAccessEntry(
             string keyStore,
@@ -31,7 +35,9 @@ namespace System.Security.Permissions
             string keyContainerName,
             int keySpec,
             KeyContainerPermissionFlags flags
-        ) { }
+        )
+        {
+        }
 
         public string KeyStore { get; set; }
         public string ProviderName { get; set; }

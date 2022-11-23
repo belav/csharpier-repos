@@ -20,7 +20,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpGoToImplementation(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpGoToImplementation)) { }
+            : base(instanceFactory, nameof(CSharpGoToImplementation))
+        {
+        }
 
         [
             WpfFact,

@@ -157,7 +157,9 @@ namespace System.Drawing
                     {
                         defaultFont = new Font("Tahoma", 8);
                     }
-                    catch (Exception ex) when (!IsCriticalFontException(ex)) { }
+                    catch (Exception ex) when (!IsCriticalFontException(ex))
+                    {
+                    }
                 }
 
                 // First try DEFAULT_GUI.
@@ -186,7 +188,9 @@ namespace System.Drawing
                     {
                         defaultFont = new Font("Tahoma", 8);
                     }
-                    catch (ArgumentException) { }
+                    catch (ArgumentException)
+                    {
+                    }
                 }
 
                 // Use GenericSansSerif as a last resort - this will always work.
@@ -266,7 +270,9 @@ namespace System.Drawing
             {
                 font = Font.FromLogFont(ref logFont);
             }
-            catch (Exception ex) when (!IsCriticalFontException(ex)) { }
+            catch (Exception ex) when (!IsCriticalFontException(ex))
+            {
+            }
 
             return font == null
                 ? DefaultFont

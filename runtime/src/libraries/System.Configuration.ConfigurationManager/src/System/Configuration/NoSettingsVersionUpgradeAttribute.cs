@@ -8,5 +8,7 @@ namespace System.Configuration
     /// upgrade is detected.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class NoSettingsVersionUpgradeAttribute : Attribute { }
+    public sealed class NoSettingsVersionUpgradeAttribute : Attribute
+    {
+    }
 }

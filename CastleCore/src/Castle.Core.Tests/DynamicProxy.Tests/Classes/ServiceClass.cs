@@ -68,14 +68,18 @@ namespace Castle.DynamicProxy.Tests.Classes
             get { return false; }
         }
 
-        public void NonVirtualMethod() { }
+        public void NonVirtualMethod()
+        {
+        }
 
         public bool NonVirtualProp
         {
             get { return false; }
         }
 
-        public class InernalClass { }
+        public class InernalClass
+        {
+        }
     }
 
     public class ServiceClass2
@@ -90,7 +94,9 @@ namespace Castle.DynamicProxy.Tests.Classes
             DoSomethingElse();
         }
 
-        public virtual void DoSomethingElse() { }
+        public virtual void DoSomethingElse()
+        {
+        }
     }
 
     public class ExtendedServiceClass : ServiceClass

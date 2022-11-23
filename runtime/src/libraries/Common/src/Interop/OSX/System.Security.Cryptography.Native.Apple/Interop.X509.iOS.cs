@@ -222,7 +222,9 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeSecIdentityHandle : SafeHandle
     {
-        public SafeSecIdentityHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSecIdentityHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {
@@ -236,7 +238,9 @@ namespace System.Security.Cryptography.X509Certificates
 
     internal sealed class SafeSecCertificateHandle : SafeHandle
     {
-        public SafeSecCertificateHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSecCertificateHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

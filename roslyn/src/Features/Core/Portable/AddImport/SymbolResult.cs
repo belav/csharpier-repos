@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.AddImport
                     result.NameNode,
                     INamespaceOrTypeSymbolExtensions.GetNameParts(result.Symbol),
                     result.Weight
-                ) { }
+                )
+            {
+            }
 
             public SearchResult(
                 string? desiredName,

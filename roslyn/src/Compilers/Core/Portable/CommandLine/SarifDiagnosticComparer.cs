@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis
     {
         public static readonly SarifDiagnosticComparer Instance = new SarifDiagnosticComparer();
 
-        private SarifDiagnosticComparer() { }
+        private SarifDiagnosticComparer()
+        {
+        }
 
         public bool Equals(DiagnosticDescriptor? x, DiagnosticDescriptor? y)
         {

@@ -45,5 +45,7 @@ public sealed record RelationalQueryTranslationPreprocessorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalQueryTranslationPreprocessorDependencies() { }
+    public RelationalQueryTranslationPreprocessorDependencies()
+    {
+    }
 }

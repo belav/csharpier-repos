@@ -1885,7 +1885,9 @@ namespace Moq.Tests
             void Save(object o);
         }
 
-        public interface IBazParam { }
+        public interface IBazParam
+        {
+        }
 
         public interface IBaz
         {
@@ -1894,9 +1896,13 @@ namespace Moq.Tests
             void Subscribe();
         }
 
-        public class BazParam : IBazParam { }
+        public class BazParam : IBazParam
+        {
+        }
 
-        public class BazParam2 : BazParam { }
+        public class BazParam2 : BazParam
+        {
+        }
 
         public interface IArrays
         {
@@ -1915,9 +1921,13 @@ namespace Moq.Tests
             void Hiss();
         }
 
-        public class ParentDto { }
+        public class ParentDto
+        {
+        }
 
-        public class ChildDto : ParentDto { }
+        public class ChildDto : ParentDto
+        {
+        }
 
         public class Parent
         {

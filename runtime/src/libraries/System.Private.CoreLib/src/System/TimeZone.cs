@@ -44,7 +44,9 @@ namespace System
             }
         }
 
-        protected TimeZone() { }
+        protected TimeZone()
+        {
+        }
 
         public static TimeZone CurrentTimeZone
         {

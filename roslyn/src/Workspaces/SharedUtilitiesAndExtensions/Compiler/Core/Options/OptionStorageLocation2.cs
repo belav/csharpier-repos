@@ -11,5 +11,6 @@ namespace Microsoft.CodeAnalysis.Options
 #if !CODE_STYLE
         : OptionStorageLocation
 #endif
-    { }
+    {
+    }
 }

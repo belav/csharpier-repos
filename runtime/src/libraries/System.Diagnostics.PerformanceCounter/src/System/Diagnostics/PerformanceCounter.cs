@@ -108,7 +108,9 @@ namespace System.Diagnostics
         ///     Creates the Performance Counter Object on local machine.
         /// </summary>
         public PerformanceCounter(string categoryName, string counterName, string instanceName)
-            : this(categoryName, counterName, instanceName, true) { }
+            : this(categoryName, counterName, instanceName, true)
+        {
+        }
 
         /// <summary>
         ///     Creates the Performance Counter Object on local machine.
@@ -137,13 +139,17 @@ namespace System.Diagnostics
         ///     Creates the Performance Counter Object, assumes that it's a single instance
         /// </summary>
         public PerformanceCounter(string categoryName, string counterName)
-            : this(categoryName, counterName, true) { }
+            : this(categoryName, counterName, true)
+        {
+        }
 
         /// <summary>
         ///     Creates the Performance Counter Object, assumes that it's a single instance
         /// </summary>
         public PerformanceCounter(string categoryName, string counterName, bool readOnly)
-            : this(categoryName, counterName, "", readOnly) { }
+            : this(categoryName, counterName, "", readOnly)
+        {
+        }
 
         /// <summary>
         ///     Returns the performance category name for this performance counter

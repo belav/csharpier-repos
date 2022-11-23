@@ -43,7 +43,9 @@ End Module";
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicExtractMethod(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicExtractMethod)) { }
+            : base(instanceFactory, nameof(BasicExtractMethod))
+        {
+        }
 
         [WpfFact]
         public void SimpleExtractMethod()

@@ -49,15 +49,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         public bool AllowCancel
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
 
         public string Message
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

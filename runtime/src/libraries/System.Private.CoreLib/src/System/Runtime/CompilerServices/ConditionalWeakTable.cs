@@ -407,7 +407,9 @@ namespace System.Runtime.CompilerServices
 
             object? IEnumerator.Current => Current;
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
 
         /// <summary>Worker for adding a new key/value pair. Will resize the container if it is full.</summary>

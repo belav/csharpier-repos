@@ -15,7 +15,9 @@ namespace System.Web.Razor.Generator
             string rootNamespaceName,
             string sourceFileName,
             RazorEngineHost host
-        ) : base(className, rootNamespaceName, sourceFileName, host) { }
+        ) : base(className, rootNamespaceName, sourceFileName, host)
+        {
+        }
 
         internal override Func<CodeWriter> CodeWriterFactory
         {

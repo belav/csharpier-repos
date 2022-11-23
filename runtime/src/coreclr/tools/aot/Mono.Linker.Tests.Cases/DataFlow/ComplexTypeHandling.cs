@@ -29,9 +29,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         class ArrayElementType
         {
-            public ArrayElementType() { }
+            public ArrayElementType()
+            {
+            }
 
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
             private int _privateField;
         }
@@ -57,9 +61,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         class ArrayElementInGenericType
         {
-            public ArrayElementInGenericType() { }
+            public ArrayElementInGenericType()
+            {
+            }
 
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
             private int _privateField;
         }
@@ -70,7 +78,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 T
-        > { }
+        >
+        {
+        }
 
         [Kept]
         static void TestArrayOnGeneric()
@@ -94,7 +104,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         sealed class ArrayGetTypeFromMethodParamElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
         }
 
         [Kept]
@@ -113,7 +125,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         sealed class ArrayGetTypeFromFieldElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
         }
 
         [Kept]
@@ -129,7 +143,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         sealed class ArrayTypeGetTypeElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
         }
 
         [Kept]
@@ -149,7 +165,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         class ArrayCreateInstanceByNameElement
         {
-            public ArrayCreateInstanceByNameElement() { }
+            public ArrayCreateInstanceByNameElement()
+            {
+            }
         }
 
         [Kept]
@@ -165,20 +183,26 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class ArrayInAttributeParamElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
         }
 
         [Kept]
         [KeptAttributeAttribute(typeof(RequiresPublicMethodAttribute))]
         [RequiresPublicMethod(typeof(ArrayInAttributeParamElement[]))]
-        static void TestArrayInAttributeParameter() { }
+        static void TestArrayInAttributeParameter()
+        {
+        }
 
         [Kept]
         private static void RequirePublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         [Kept]
         [KeptBaseType(typeof(Attribute))]
@@ -189,7 +213,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                     Type t
-            ) { }
+            )
+            {
+            }
         }
     }
 }

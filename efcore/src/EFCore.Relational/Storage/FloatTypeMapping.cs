@@ -27,13 +27,17 @@ public class FloatTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public FloatTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Single)
-        : base(storeType, typeof(float), dbType) { }
+        : base(storeType, typeof(float), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="FloatTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected FloatTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected FloatTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

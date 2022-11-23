@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
     public class UseExplicitTupleNameTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseExplicitTupleNameTests(ITestOutputHelper logger) : base(logger) { }
+        public UseExplicitTupleNameTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

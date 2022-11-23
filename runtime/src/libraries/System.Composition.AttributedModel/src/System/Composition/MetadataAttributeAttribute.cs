@@ -13,6 +13,8 @@ namespace System.Composition
         /// <summary>
         ///     Initializes a new instance of the <see cref="MetadataAttributeAttribute"/> class.
         /// </summary>
-        public MetadataAttributeAttribute() { }
+        public MetadataAttributeAttribute()
+        {
+        }
     }
 }

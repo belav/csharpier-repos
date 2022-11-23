@@ -7,6 +7,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 {
     public class DependOnNonexistentService
     {
-        public DependOnNonexistentService(IFakeService nonExistentService) { }
+        public DependOnNonexistentService(IFakeService nonExistentService)
+        {
+        }
     }
 }

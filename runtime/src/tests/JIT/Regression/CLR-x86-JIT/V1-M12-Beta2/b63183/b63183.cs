@@ -29,7 +29,9 @@ namespace Test
                         }
                         finally
                         {
-                            while (m_bFlag) { }
+                            while (m_bFlag)
+                            {
+                            }
                         }
                     }
                 }

@@ -21,7 +21,9 @@ namespace MS.Internal.Xml.XPath
             string prefix,
             XPathNodeType typeTest,
             bool abbrAxis
-        ) : base(qyParent, name, prefix, typeTest, matchSelf, abbrAxis) { }
+        ) : base(qyParent, name, prefix, typeTest, matchSelf, abbrAxis)
+        {
+        }
 
         private DescendantOverDescendantQuery(DescendantOverDescendantQuery other) : base(other)
         {

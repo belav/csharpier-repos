@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDecompiledSourceService() { }
+        public CSharpDecompiledSourceService()
+        {
+        }
 
         public async Task<Document?> AddSourceToAsync(
             Document document,

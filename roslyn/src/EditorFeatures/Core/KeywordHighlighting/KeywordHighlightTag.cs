@@ -14,6 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
 
         public static readonly KeywordHighlightTag Instance = new();
 
-        private KeywordHighlightTag() : base(TagId) { }
+        private KeywordHighlightTag() : base(TagId)
+        {
+        }
     }
 }

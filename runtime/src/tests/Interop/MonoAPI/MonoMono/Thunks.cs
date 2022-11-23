@@ -56,7 +56,9 @@ public class Thunks
         return new Thunks();
     }
 
-    public static void Test0() { }
+    public static void Test0()
+    {
+    }
 
     public static int Test1()
     {

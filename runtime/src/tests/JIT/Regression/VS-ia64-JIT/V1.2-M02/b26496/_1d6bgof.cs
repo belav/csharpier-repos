@@ -63,12 +63,16 @@ public class AA
 #pragma warning disable 1717
                     AA.m_fStatic1 *= (AA.m_fStatic1 = AA.m_fStatic1);
 #pragma warning restore 1717
-                    do { } while (((bool)(local2)));
+                    do
+                    {
+                    } while (((bool)(local2)));
                 } while (((bool)(local2)));
             } while (((bool)(local2)));
             local5 += local1;
         }
-        for (App.m_sbyFwd4 = ((sbyte)(local1)); App.m_bFwd2; local1 *= (local1 -= local1)) { }
+        for (App.m_sbyFwd4 = ((sbyte)(local1)); App.m_bFwd2; local1 *= (local1 -= local1))
+        {
+        }
         param1[74, 65, ((int)(AA.m_fStatic1))] = '\x30';
         return ((ushort)(33u));
     }
@@ -112,16 +116,24 @@ public class AA
             }
             finally
             {
-                do { } while ((local11 || true));
+                do
+                {
+                } while ((local11 || true));
                 local10 = '\x11';
-                do { } while (local11);
+                do
+                {
+                } while (local11);
             }
             if (local11)
                 return 93u;
             continue;
         }
-        try { }
-        catch (Exception) { }
+        try
+        {
+        }
+        catch (Exception)
+        {
+        }
         param1[106, ((int)('\x40'))] = "34";
         return 17u;
     }
@@ -230,14 +242,20 @@ public class AA
                                 ref param8
                             );
                         }
-                        do { } while (App.m_bFwd2);
+                        do
+                        {
+                        } while (App.m_bFwd2);
                         for (
                             param8 /= (param8 | param8);
                             App.m_bFwd2;
                             App.m_uFwd10 -= ((uint)(110.0))
-                        ) { }
+                        )
+                        {
+                        }
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                     param4 *= param4;
                 } while (App.m_bFwd2);
                 AA.m_fStatic1 /= AA.m_fStatic1;

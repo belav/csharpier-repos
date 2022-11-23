@@ -114,7 +114,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.attribute01
     using System;
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class MyAttr : System.Attribute { }
+    public class MyAttr : System.Attribute
+    {
+    }
 
     [MyAttr]
     public unsafe class US
@@ -398,7 +400,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.dlgate01.dl
             return 0;
         }
 
-        public static void Bar(int* q) { }
+        public static void Bar(int* q)
+        {
+        }
     }
     // </Code>
 }
@@ -462,7 +466,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.evnt01.evnt
             return 0;
         }
 
-        public static void Bar(int* q) { }
+        public static void Bar(int* q)
+        {
+        }
     }
     // </Code>
 }
@@ -726,7 +732,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.indexer04.i
                 int temp = 10;
                 return &temp;
             }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -775,7 +783,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.integereger
 
     public unsafe class C : IF
     {
-        public void Foo(dynamic p) { }
+        public void Foo(dynamic p)
+        {
+        }
     }
 
     public unsafe class Test
@@ -977,7 +987,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method07.me
 
     public static class Ext
     {
-        public static void Foo(this US u, dynamic d) { }
+        public static void Foo(this US u, dynamic d)
+        {
+        }
     }
 
     public class Test
@@ -1012,7 +1024,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method08.me
 
     public unsafe class Test
     {
-        public void Foo(void* ptr = null) { }
+        public void Foo(void* ptr = null)
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()

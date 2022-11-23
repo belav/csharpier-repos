@@ -1235,9 +1235,13 @@ public class CollectionModelBinderIntegrationTest
         );
     }
 
-    private class ClosedGenericCollection : Collection<string> { }
+    private class ClosedGenericCollection : Collection<string>
+    {
+    }
 
-    private class ClosedGenericList : List<string> { }
+    private class ClosedGenericList : List<string>
+    {
+    }
 
     private class ExplicitClosedGenericCollection : ICollection<string>
     {

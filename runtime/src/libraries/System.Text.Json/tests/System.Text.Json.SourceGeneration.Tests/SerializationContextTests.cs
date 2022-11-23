@@ -367,12 +367,16 @@ namespace System.Text.Json.SourceGeneration.Tests
     public class SerializationContextTests : RealWorldContextTests
     {
         public SerializationContextTests()
-            : this(SerializationContext.Default, (options) => new SerializationContext(options)) { }
+            : this(SerializationContext.Default, (options) => new SerializationContext(options))
+        {
+        }
 
         internal SerializationContextTests(
             ITestContext defaultContext,
             Func<JsonSerializerOptions, ITestContext> contextCreator
-        ) : base(defaultContext, contextCreator) { }
+        ) : base(defaultContext, contextCreator)
+        {
+        }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()
@@ -925,7 +929,9 @@ namespace System.Text.Json.SourceGeneration.Tests
             : base(
                 SerializationWithPerTypeAttributeContext.Default,
                 (options) => new SerializationContext(options)
-            ) { }
+            )
+        {
+        }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()

@@ -29,7 +29,9 @@ namespace System.DirectoryServices.ActiveDirectory
         internal TrustDirection direction;
         internal DirectoryContext context = null!;
 
-        internal TrustRelationshipInformation() { }
+        internal TrustRelationshipInformation()
+        {
+        }
 
         internal TrustRelationshipInformation(
             DirectoryContext context,

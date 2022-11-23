@@ -29,7 +29,9 @@ public class UserException : Exception
                 counter--;
                 continue;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             finally
             {
                 counter++;

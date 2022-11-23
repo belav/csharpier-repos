@@ -123,7 +123,9 @@ class Driver
             Console.WriteLine("invoked literal with reference value");
             return 5;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         try
         {
@@ -192,7 +194,9 @@ class BaseBinder : Binder
         return null;
     }
 
-    public override void ReorderArgumentArray(ref object[] a, object b) { }
+    public override void ReorderArgumentArray(ref object[] a, object b)
+    {
+    }
 
     public override MethodBase SelectMethod(
         System.Reflection.BindingFlags a,

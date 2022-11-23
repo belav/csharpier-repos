@@ -29,7 +29,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public string Name;
 
-        public Article() { }
+        public Article()
+        {
+        }
 
         public Article(string name)
         {

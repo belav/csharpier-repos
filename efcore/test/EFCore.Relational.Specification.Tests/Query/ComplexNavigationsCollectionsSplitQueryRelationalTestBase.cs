@@ -8,7 +8,9 @@ public abstract class ComplexNavigationsCollectionsSplitQueryRelationalTestBase<
     where TFixture : ComplexNavigationsQueryFixtureBase, new()
 {
     protected ComplexNavigationsCollectionsSplitQueryRelationalTestBase(TFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     protected override Expression RewriteServerQueryExpression(Expression serverQueryExpression) =>
         new SplitQueryRewritingExpressionVisitor().Visit(serverQueryExpression);

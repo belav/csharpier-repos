@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Host
         private static readonly IChecksummedPersistentStorageService Instance =
             new NoOpPersistentStorageService();
 
-        private NoOpPersistentStorageService() { }
+        private NoOpPersistentStorageService()
+        {
+        }
 
         public static IChecksummedPersistentStorageService GetOrThrow(
             IPersistentStorageConfiguration configuration

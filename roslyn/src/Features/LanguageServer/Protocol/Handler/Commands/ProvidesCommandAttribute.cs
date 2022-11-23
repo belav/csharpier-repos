@@ -12,6 +12,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Commands
     internal class CommandAttribute : MethodAttribute
     {
         public CommandAttribute(string command)
-            : base(AbstractExecuteWorkspaceCommandHandler.GetRequestNameForCommandName(command)) { }
+            : base(AbstractExecuteWorkspaceCommandHandler.GetRequestNameForCommandName(command))
+        {
+        }
     }
 }

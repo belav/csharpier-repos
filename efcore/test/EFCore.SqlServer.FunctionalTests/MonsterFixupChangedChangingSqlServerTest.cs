@@ -8,7 +8,9 @@ public class MonsterFixupChangedChangingSqlServerTest
 {
     public MonsterFixupChangedChangingSqlServerTest(
         MonsterFixupChangedChangingSqlServerFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public class MonsterFixupChangedChangingSqlServerFixture
         : MonsterFixupChangedChangingFixtureBase

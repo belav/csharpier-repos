@@ -384,7 +384,9 @@ public class MismatchedKeyTypesSqlServerTest
     protected class MismatchedKeyTypesContextNoFks : MismatchedKeyTypesContext
     {
         public MismatchedKeyTypesContextNoFks(MismatchedKeyTypesSqlServerFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -23,7 +23,9 @@ namespace System.IO.Compression.Tests
             {
                 Assert.Throws<TException>(() =>
                 {
-                    using (ZipArchive archive = constructor()) { }
+                    using (ZipArchive archive = constructor())
+                    {
+                    }
                 });
             }
             catch (Exception e)

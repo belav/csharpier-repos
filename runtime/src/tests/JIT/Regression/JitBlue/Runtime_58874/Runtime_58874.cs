@@ -28,7 +28,9 @@ public unsafe class Runtime_58874
     {
         private void* _addr;
 
-        private EndOfPage() { }
+        private EndOfPage()
+        {
+        }
 
         public Test* Pointer => (Test*)((byte*)_addr + 0x1000 - sizeof(Test));
 

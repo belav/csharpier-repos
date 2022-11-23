@@ -18,19 +18,25 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.WarningException'/> class with the last Win32 error
         /// that occurred.
         /// </summary>
-        public WarningException() : this(null, null, null) { }
+        public WarningException() : this(null, null, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.WarningException'/> class with
         /// the specified message and no Help file.
         /// </summary>
-        public WarningException(string? message) : this(message, null, null) { }
+        public WarningException(string? message) : this(message, null, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.WarningException'/> class with
         /// the specified message, and with access to the specified Help file.
         /// </summary>
-        public WarningException(string? message, string? helpUrl) : this(message, helpUrl, null) { }
+        public WarningException(string? message, string? helpUrl) : this(message, helpUrl, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message and a
@@ -38,7 +44,9 @@ namespace System.ComponentModel
         /// FxCop CA1032: Multiple constructors are required to correctly implement a custom exception.
         /// </summary>
         public WarningException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.WarningException'/> class with the

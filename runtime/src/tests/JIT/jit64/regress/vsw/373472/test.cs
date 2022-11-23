@@ -111,7 +111,9 @@ public class StrideTest
         {
             return true;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         Console.WriteLine("Test4 failed");
         return false;
@@ -139,7 +141,9 @@ public class StrideTest
         {
             return true;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         Console.WriteLine("Test5 failed");
         return false;

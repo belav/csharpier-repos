@@ -2184,7 +2184,9 @@ public class RelationalModelValidator : ModelValidator
         string indexName,
         in StoreObjectIdentifier storeObject,
         IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Validates the mapping/configuration of inheritance in the model.

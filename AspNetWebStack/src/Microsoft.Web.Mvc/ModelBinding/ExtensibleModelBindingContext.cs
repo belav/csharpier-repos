@@ -17,7 +17,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private Dictionary<string, ModelMetadata> _propertyMetadata;
         private ModelValidationNode _validationNode;
 
-        public ExtensibleModelBindingContext() : this(null) { }
+        public ExtensibleModelBindingContext() : this(null)
+        {
+        }
 
         // copies certain values that won't change between parent and child objects,
         // e.g. ValueProvider, ModelState

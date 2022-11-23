@@ -39,7 +39,9 @@ public class PropertyInfoExtensionsTest
         public static int No
         {
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
 
         public int Nuts { get; set; }
@@ -52,7 +54,9 @@ public class PropertyInfoExtensionsTest
         public int Just
         {
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
 
         public static int Like { private get; set; }

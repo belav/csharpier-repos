@@ -11,7 +11,9 @@ public class ComplexNavigationsCollectionsSplitSharedTypeQuerySqliteTest
     public ComplexNavigationsCollectionsSplitSharedTypeQuerySqliteTest(
         ComplexNavigationsSharedTypeQuerySqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public override async Task Complex_query_with_let_collection_projection_FirstOrDefault_with_ToList_on_inner_and_outer(
         bool async

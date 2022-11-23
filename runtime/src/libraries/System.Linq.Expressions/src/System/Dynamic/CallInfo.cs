@@ -36,7 +36,9 @@ namespace System.Dynamic
         /// <param name="argNames">The argument names.</param>
         /// <returns>The new <see cref="CallInfo"/> instance.</returns>
         public CallInfo(int argCount, params string[] argNames)
-            : this(argCount, (IEnumerable<string>)argNames) { }
+            : this(argCount, (IEnumerable<string>)argNames)
+        {
+        }
 
         /// <summary>
         /// Creates a new <see cref="CallInfo"/> that represents arguments in the dynamic binding process.

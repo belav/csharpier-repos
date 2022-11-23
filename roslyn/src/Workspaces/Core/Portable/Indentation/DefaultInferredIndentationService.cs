@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Indentation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultInferredIndentationService() { }
+        public DefaultInferredIndentationService()
+        {
+        }
 
         public Task<DocumentOptionSet> GetDocumentOptionsWithInferredIndentationAsync(
             Document document,

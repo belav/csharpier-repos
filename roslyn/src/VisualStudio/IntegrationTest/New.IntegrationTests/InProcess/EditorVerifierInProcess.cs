@@ -366,14 +366,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 int uniquePairId,
                 int delta,
                 CancellationToken cancellationToken
-            ) { }
+            )
+            {
+            }
 
             public void LogBlockStart(
                 FunctionId functionId,
                 LogMessage logMessage,
                 int uniquePairId,
                 CancellationToken cancellationToken
-            ) { }
+            )
+            {
+            }
         }
 
         private readonly struct WorkspaceEventRestorer : IDisposable

@@ -105,17 +105,29 @@ namespace Tests.Integration
             Assert.Equal(20, importer.Extensions[1].Id);
         }
 
-        public interface IMissing { }
+        public interface IMissing
+        {
+        }
 
-        public interface ISingle { }
+        public interface ISingle
+        {
+        }
 
-        public interface IMultiple { }
+        public interface IMultiple
+        {
+        }
 
-        public interface IConditional { }
+        public interface IConditional
+        {
+        }
 
-        public class SingleImpl : ISingle { }
+        public class SingleImpl : ISingle
+        {
+        }
 
-        public class MultipleImpl : IMultiple { }
+        public class MultipleImpl : IMultiple
+        {
+        }
 
         public class NoImportPart
         {
@@ -139,7 +151,9 @@ namespace Tests.Integration
         [Export]
         public class Needy
         {
-            public Needy() { }
+            public Needy()
+            {
+            }
 
             [Import]
             public ISingle SingleImport { get; set; }
@@ -311,9 +325,13 @@ namespace Tests.Integration
             );
         }
 
-        public interface ILoopA { }
+        public interface ILoopA
+        {
+        }
 
-        public interface ILoopB { }
+        public interface ILoopB
+        {
+        }
 
         [Export(typeof(ILoopA))]
         public class LoopA1 : ILoopA

@@ -1751,7 +1751,9 @@ public class DefaultAntiforgeryTest
             get => _hasStarted;
         }
 
-        public TestResponseFeature() { }
+        public TestResponseFeature()
+        {
+        }
 
         public void StartResponse()
         {

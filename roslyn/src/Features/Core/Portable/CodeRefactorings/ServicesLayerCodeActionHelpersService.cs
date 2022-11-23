@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ServicesLayerCodeActionHelpersService() { }
+        public ServicesLayerCodeActionHelpersService()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new CodeActionHelpersService();

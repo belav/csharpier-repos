@@ -30,15 +30,25 @@ namespace System.Security.Cryptography
     public sealed partial class ECDiffieHellmanOpenSsl
         : System.Security.Cryptography.ECDiffieHellman
     {
-        public ECDiffieHellmanOpenSsl() { }
+        public ECDiffieHellmanOpenSsl()
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(int keySize) { }
+        public ECDiffieHellmanOpenSsl(int keySize)
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(System.IntPtr handle) { }
+        public ECDiffieHellmanOpenSsl(System.IntPtr handle)
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.ECCurve curve) { }
+        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
-        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle) { }
+        public ECDiffieHellmanOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle)
+        {
+        }
 
         public override System.Security.Cryptography.ECDiffieHellmanPublicKey PublicKey
         {
@@ -101,11 +111,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+        public override void GenerateKey(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
-        public override void ImportParameters(
-            System.Security.Cryptography.ECParameters parameters
-        ) { }
+        public override void ImportParameters(System.Security.Cryptography.ECParameters parameters)
+        {
+        }
     }
 
     public sealed partial class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle

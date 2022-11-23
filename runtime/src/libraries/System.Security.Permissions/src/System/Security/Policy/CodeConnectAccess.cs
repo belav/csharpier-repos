@@ -10,7 +10,9 @@ namespace System.Security.Policy
         public static readonly int OriginPort;
         public static readonly string OriginScheme;
 
-        public CodeConnectAccess(string allowScheme, int allowPort) { }
+        public CodeConnectAccess(string allowScheme, int allowPort)
+        {
+        }
 
         public int Port
         {

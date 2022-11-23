@@ -43,7 +43,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public virtual NotificationOptionViewModel SelectedNotificationPreference
         {
             get { return NotificationPreferences.First(); }
-            set { }
+            set
+            {
+            }
         }
 
         public AbstractCodeStyleOptionViewModel(

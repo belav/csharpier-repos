@@ -12,7 +12,9 @@ namespace System.Security.Cryptography.Cng.Tests
         public static void CreateEmphemeral_Default()
         {
             CngAlgorithm alg = CngAlgorithm.ECDiffieHellmanP256;
-            using (CngKey key = CngKey.Create(alg, null, null)) { }
+            using (CngKey key = CngKey.Create(alg, null, null))
+            {
+            }
         }
 
         [Fact]

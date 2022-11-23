@@ -44,12 +44,16 @@ namespace System.Threading.Tasks
         /// with a <see cref="TaskCompletionSource"/>.
         /// </exception>
         public TaskCompletionSource(TaskCreationOptions creationOptions)
-            : this(null, creationOptions) { }
+            : this(null, creationOptions)
+        {
+        }
 
         /// <summary>Creates a <see cref="TaskCompletionSource"/> with the specified state.</summary>
         /// <param name="state">The state to use as the underlying
         /// <see cref="Tasks.Task"/>'s AsyncState.</param>
-        public TaskCompletionSource(object? state) : this(state, TaskCreationOptions.None) { }
+        public TaskCompletionSource(object? state) : this(state, TaskCreationOptions.None)
+        {
+        }
 
         /// <summary>Creates a <see cref="TaskCompletionSource"/> with the specified state and options.</summary>
         /// <param name="creationOptions">The options to use when creating the underlying <see cref="Tasks.Task"/>.</param>

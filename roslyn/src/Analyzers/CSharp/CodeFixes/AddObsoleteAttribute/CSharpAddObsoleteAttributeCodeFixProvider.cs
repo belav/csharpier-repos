@@ -34,6 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddObsoleteAttribute
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpAddObsoleteAttributeCodeFixProvider()
-            : base(CSharpSyntaxFacts.Instance, CSharpCodeFixesResources.Add_Obsolete) { }
+            : base(CSharpSyntaxFacts.Instance, CSharpCodeFixesResources.Add_Obsolete)
+        {
+        }
     }
 }

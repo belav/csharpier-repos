@@ -5,7 +5,9 @@ namespace System.Net
 {
     public class EndpointPermission
     {
-        internal EndpointPermission() { }
+        internal EndpointPermission()
+        {
+        }
 
         public string Hostname
         {

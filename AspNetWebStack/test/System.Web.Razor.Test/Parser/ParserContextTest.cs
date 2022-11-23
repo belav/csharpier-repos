@@ -281,7 +281,15 @@ namespace System.Web.Razor.Test.Parser
         {
             var codeParser = new CSharpCodeParser();
             var markupParser = new HtmlMarkupParser();
-            return SetupTestContext(document, b => { }, codeParser, markupParser, codeParser);
+            return SetupTestContext(
+                document,
+                b =>
+                {
+                },
+                codeParser,
+                markupParser,
+                codeParser
+            );
         }
 
         private ParserContext SetupTestContext(

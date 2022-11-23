@@ -128,10 +128,14 @@ namespace System.Xml.Linq
 
         public static void Remove(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute?> source
-        ) { }
+        )
+        {
+        }
 
         public static void Remove<T>(this System.Collections.Generic.IEnumerable<T?> source)
-            where T : System.Xml.Linq.XNode { }
+            where T : System.Xml.Linq.XNode
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -163,9 +167,13 @@ namespace System.Xml.Linq
     )]
     public partial class XAttribute : System.Xml.Linq.XObject
     {
-        public XAttribute(System.Xml.Linq.XAttribute other) { }
+        public XAttribute(System.Xml.Linq.XAttribute other)
+        {
+        }
 
-        public XAttribute(System.Xml.Linq.XName name, object value) { }
+        public XAttribute(System.Xml.Linq.XName name, object value)
+        {
+        }
 
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> EmptySequence
         {
@@ -194,7 +202,9 @@ namespace System.Xml.Linq
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.CLSCompliantAttribute(false)]
@@ -362,9 +372,13 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void Remove() { }
+        public void Remove()
+        {
+        }
 
-        public void SetValue(object value) { }
+        public void SetValue(object value)
+        {
+        }
 
         public override string ToString()
         {
@@ -374,16 +388,22 @@ namespace System.Xml.Linq
 
     public partial class XCData : System.Xml.Linq.XText
     {
-        public XCData(string value) : base(default(string)) { }
+        public XCData(string value) : base(default(string))
+        {
+        }
 
-        public XCData(System.Xml.Linq.XCData other) : base(default(string)) { }
+        public XCData(System.Xml.Linq.XCData other) : base(default(string))
+        {
+        }
 
         public override System.Xml.XmlNodeType NodeType
         {
             get { throw null; }
         }
 
-        public override void WriteTo(System.Xml.XmlWriter writer) { }
+        public override void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
@@ -396,9 +416,13 @@ namespace System.Xml.Linq
 
     public partial class XComment : System.Xml.Linq.XNode
     {
-        public XComment(string value) { }
+        public XComment(string value)
+        {
+        }
 
-        public XComment(System.Xml.Linq.XComment other) { }
+        public XComment(System.Xml.Linq.XComment other)
+        {
+        }
 
         public override System.Xml.XmlNodeType NodeType
         {
@@ -407,10 +431,14 @@ namespace System.Xml.Linq
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void WriteTo(System.Xml.XmlWriter writer) { }
+        public override void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
@@ -423,7 +451,9 @@ namespace System.Xml.Linq
 
     public abstract partial class XContainer : System.Xml.Linq.XNode
     {
-        internal XContainer() { }
+        internal XContainer()
+        {
+        }
 
         public System.Xml.Linq.XNode? FirstNode
         {
@@ -434,13 +464,21 @@ namespace System.Xml.Linq
             get { throw null; }
         }
 
-        public void Add(object? content) { }
+        public void Add(object? content)
+        {
+        }
 
-        public void Add(params object?[] content) { }
+        public void Add(params object?[] content)
+        {
+        }
 
-        public void AddFirst(object? content) { }
+        public void AddFirst(object? content)
+        {
+        }
 
-        public void AddFirst(params object?[] content) { }
+        public void AddFirst(params object?[] content)
+        {
+        }
 
         public System.Xml.XmlWriter CreateWriter()
         {
@@ -486,33 +524,49 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void RemoveNodes() { }
+        public void RemoveNodes()
+        {
+        }
 
-        public void ReplaceNodes(object? content) { }
+        public void ReplaceNodes(object? content)
+        {
+        }
 
-        public void ReplaceNodes(params object?[] content) { }
+        public void ReplaceNodes(params object?[] content)
+        {
+        }
     }
 
     public partial class XDeclaration
     {
-        public XDeclaration(string? version, string? encoding, string? standalone) { }
+        public XDeclaration(string? version, string? encoding, string? standalone)
+        {
+        }
 
-        public XDeclaration(System.Xml.Linq.XDeclaration other) { }
+        public XDeclaration(System.Xml.Linq.XDeclaration other)
+        {
+        }
 
         public string? Encoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Standalone
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override string ToString()
@@ -523,18 +577,28 @@ namespace System.Xml.Linq
 
     public partial class XDocument : System.Xml.Linq.XContainer
     {
-        public XDocument() { }
+        public XDocument()
+        {
+        }
 
-        public XDocument(params object?[] content) { }
+        public XDocument(params object?[] content)
+        {
+        }
 
-        public XDocument(System.Xml.Linq.XDeclaration? declaration, params object?[] content) { }
+        public XDocument(System.Xml.Linq.XDeclaration? declaration, params object?[] content)
+        {
+        }
 
-        public XDocument(System.Xml.Linq.XDocument other) { }
+        public XDocument(System.Xml.Linq.XDocument other)
+        {
+        }
 
         public System.Xml.Linq.XDeclaration? Declaration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Linq.XDocumentType? DocumentType
         {
@@ -643,19 +707,33 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void Save(System.IO.Stream stream) { }
+        public void Save(System.IO.Stream stream)
+        {
+        }
 
-        public void Save(System.IO.Stream stream, System.Xml.Linq.SaveOptions options) { }
+        public void Save(System.IO.Stream stream, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(System.IO.TextWriter textWriter) { }
+        public void Save(System.IO.TextWriter textWriter)
+        {
+        }
 
-        public void Save(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options) { }
+        public void Save(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(string fileName) { }
+        public void Save(string fileName)
+        {
+        }
 
-        public void Save(string fileName, System.Xml.Linq.SaveOptions options) { }
+        public void Save(string fileName, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(System.Xml.XmlWriter writer) { }
+        public void Save(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Threading.Tasks.Task SaveAsync(
             System.IO.Stream stream,
@@ -683,7 +761,9 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public override void WriteTo(System.Xml.XmlWriter writer) { }
+        public override void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
@@ -701,19 +781,27 @@ namespace System.Xml.Linq
             string? publicId,
             string? systemId,
             string? internalSubset
-        ) { }
+        )
+        {
+        }
 
-        public XDocumentType(System.Xml.Linq.XDocumentType other) { }
+        public XDocumentType(System.Xml.Linq.XDocumentType other)
+        {
+        }
 
         public string? InternalSubset
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Xml.XmlNodeType NodeType
         {
@@ -722,15 +810,21 @@ namespace System.Xml.Linq
         public string? PublicId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? SystemId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void WriteTo(System.Xml.XmlWriter writer) { }
+        public override void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
@@ -749,15 +843,25 @@ namespace System.Xml.Linq
         : System.Xml.Linq.XContainer,
             System.Xml.Serialization.IXmlSerializable
     {
-        public XElement(System.Xml.Linq.XElement other) { }
+        public XElement(System.Xml.Linq.XElement other)
+        {
+        }
 
-        public XElement(System.Xml.Linq.XName name) { }
+        public XElement(System.Xml.Linq.XName name)
+        {
+        }
 
-        public XElement(System.Xml.Linq.XName name, object? content) { }
+        public XElement(System.Xml.Linq.XName name, object? content)
+        {
+        }
 
-        public XElement(System.Xml.Linq.XName name, params object?[] content) { }
+        public XElement(System.Xml.Linq.XName name, params object?[] content)
+        {
+        }
 
-        public XElement(System.Xml.Linq.XStreamingElement other) { }
+        public XElement(System.Xml.Linq.XStreamingElement other)
+        {
+        }
 
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> EmptySequence
         {
@@ -786,7 +890,9 @@ namespace System.Xml.Linq
         public System.Xml.Linq.XName Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Xml.XmlNodeType NodeType
         {
@@ -795,7 +901,9 @@ namespace System.Xml.Linq
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf()
@@ -1116,31 +1224,57 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void RemoveAll() { }
+        public void RemoveAll()
+        {
+        }
 
-        public void RemoveAttributes() { }
+        public void RemoveAttributes()
+        {
+        }
 
-        public void ReplaceAll(object? content) { }
+        public void ReplaceAll(object? content)
+        {
+        }
 
-        public void ReplaceAll(params object?[] content) { }
+        public void ReplaceAll(params object?[] content)
+        {
+        }
 
-        public void ReplaceAttributes(object? content) { }
+        public void ReplaceAttributes(object? content)
+        {
+        }
 
-        public void ReplaceAttributes(params object?[] content) { }
+        public void ReplaceAttributes(params object?[] content)
+        {
+        }
 
-        public void Save(System.IO.Stream stream) { }
+        public void Save(System.IO.Stream stream)
+        {
+        }
 
-        public void Save(System.IO.Stream stream, System.Xml.Linq.SaveOptions options) { }
+        public void Save(System.IO.Stream stream, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(System.IO.TextWriter textWriter) { }
+        public void Save(System.IO.TextWriter textWriter)
+        {
+        }
 
-        public void Save(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options) { }
+        public void Save(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(string fileName) { }
+        public void Save(string fileName)
+        {
+        }
 
-        public void Save(string fileName, System.Xml.Linq.SaveOptions options) { }
+        public void Save(string fileName, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(System.Xml.XmlWriter writer) { }
+        public void Save(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Threading.Tasks.Task SaveAsync(
             System.IO.Stream stream,
@@ -1168,22 +1302,34 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void SetAttributeValue(System.Xml.Linq.XName name, object? value) { }
+        public void SetAttributeValue(System.Xml.Linq.XName name, object? value)
+        {
+        }
 
-        public void SetElementValue(System.Xml.Linq.XName name, object? value) { }
+        public void SetElementValue(System.Xml.Linq.XName name, object? value)
+        {
+        }
 
-        public void SetValue(object value) { }
+        public void SetValue(object value)
+        {
+        }
 
         System.Xml.Schema.XmlSchema System.Xml.Serialization.IXmlSerializable.GetSchema()
         {
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
-        public override void WriteTo(System.Xml.XmlWriter writer) { }
+        public override void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
@@ -1198,7 +1344,9 @@ namespace System.Xml.Linq
         : System.IEquatable<System.Xml.Linq.XName>,
             System.Runtime.Serialization.ISerializable
     {
-        internal XName() { }
+        internal XName()
+        {
+        }
 
         public string LocalName
         {
@@ -1260,7 +1408,9 @@ namespace System.Xml.Linq
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -1270,7 +1420,9 @@ namespace System.Xml.Linq
 
     public sealed partial class XNamespace
     {
-        internal XNamespace() { }
+        internal XNamespace()
+        {
+        }
 
         public string NamespaceName
         {
@@ -1350,7 +1502,9 @@ namespace System.Xml.Linq
 
     public abstract partial class XNode : System.Xml.Linq.XObject
     {
-        internal XNode() { }
+        internal XNode()
+        {
+        }
 
         public static System.Xml.Linq.XNodeDocumentOrderComparer DocumentOrderComparer
         {
@@ -1369,13 +1523,21 @@ namespace System.Xml.Linq
             get { throw null; }
         }
 
-        public void AddAfterSelf(object? content) { }
+        public void AddAfterSelf(object? content)
+        {
+        }
 
-        public void AddAfterSelf(params object?[] content) { }
+        public void AddAfterSelf(params object?[] content)
+        {
+        }
 
-        public void AddBeforeSelf(object? content) { }
+        public void AddBeforeSelf(object? content)
+        {
+        }
 
-        public void AddBeforeSelf(params object?[] content) { }
+        public void AddBeforeSelf(params object?[] content)
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Ancestors()
         {
@@ -1466,11 +1628,17 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void Remove() { }
+        public void Remove()
+        {
+        }
 
-        public void ReplaceWith(object? content) { }
+        public void ReplaceWith(object? content)
+        {
+        }
 
-        public void ReplaceWith(params object?[] content) { }
+        public void ReplaceWith(params object?[] content)
+        {
+        }
 
         public override string ToString()
         {
@@ -1493,7 +1661,9 @@ namespace System.Xml.Linq
         : System.Collections.Generic.IComparer<System.Xml.Linq.XNode?>,
             System.Collections.IComparer
     {
-        public XNodeDocumentOrderComparer() { }
+        public XNodeDocumentOrderComparer()
+        {
+        }
 
         public int Compare(System.Xml.Linq.XNode? x, System.Xml.Linq.XNode? y)
         {
@@ -1510,7 +1680,9 @@ namespace System.Xml.Linq
         : System.Collections.Generic.IEqualityComparer<System.Xml.Linq.XNode>,
             System.Collections.IEqualityComparer
     {
-        public XNodeEqualityComparer() { }
+        public XNodeEqualityComparer()
+        {
+        }
 
         public bool Equals(System.Xml.Linq.XNode? x, System.Xml.Linq.XNode? y)
         {
@@ -1535,7 +1707,9 @@ namespace System.Xml.Linq
 
     public abstract partial class XObject : System.Xml.IXmlLineInfo
     {
-        internal XObject() { }
+        internal XObject()
+        {
+        }
 
         public string BaseUri
         {
@@ -1560,16 +1734,26 @@ namespace System.Xml.Linq
         }
         public event System.EventHandler<System.Xml.Linq.XObjectChangeEventArgs> Changed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler<System.Xml.Linq.XObjectChangeEventArgs> Changing
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void AddAnnotation(object annotation) { }
+        public void AddAnnotation(object annotation)
+        {
+        }
 
         public object? Annotation(System.Type type)
         {
@@ -1591,9 +1775,13 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void RemoveAnnotations(System.Type type) { }
+        public void RemoveAnnotations(System.Type type)
+        {
+        }
 
-        public void RemoveAnnotations<T>() where T : class { }
+        public void RemoveAnnotations<T>() where T : class
+        {
+        }
 
         bool System.Xml.IXmlLineInfo.HasLineInfo()
         {
@@ -1616,7 +1804,9 @@ namespace System.Xml.Linq
         public static readonly System.Xml.Linq.XObjectChangeEventArgs Remove;
         public static readonly System.Xml.Linq.XObjectChangeEventArgs Value;
 
-        public XObjectChangeEventArgs(System.Xml.Linq.XObjectChange objectChange) { }
+        public XObjectChangeEventArgs(System.Xml.Linq.XObjectChange objectChange)
+        {
+        }
 
         public System.Xml.Linq.XObjectChange ObjectChange
         {
@@ -1626,14 +1816,20 @@ namespace System.Xml.Linq
 
     public partial class XProcessingInstruction : System.Xml.Linq.XNode
     {
-        public XProcessingInstruction(string target, string data) { }
+        public XProcessingInstruction(string target, string data)
+        {
+        }
 
-        public XProcessingInstruction(System.Xml.Linq.XProcessingInstruction other) { }
+        public XProcessingInstruction(System.Xml.Linq.XProcessingInstruction other)
+        {
+        }
 
         public string Data
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Xml.XmlNodeType NodeType
         {
@@ -1642,10 +1838,14 @@ namespace System.Xml.Linq
         public string Target
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void WriteTo(System.Xml.XmlWriter writer) { }
+        public override void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
@@ -1658,35 +1858,61 @@ namespace System.Xml.Linq
 
     public partial class XStreamingElement
     {
-        public XStreamingElement(System.Xml.Linq.XName name) { }
+        public XStreamingElement(System.Xml.Linq.XName name)
+        {
+        }
 
-        public XStreamingElement(System.Xml.Linq.XName name, object? content) { }
+        public XStreamingElement(System.Xml.Linq.XName name, object? content)
+        {
+        }
 
-        public XStreamingElement(System.Xml.Linq.XName name, params object?[] content) { }
+        public XStreamingElement(System.Xml.Linq.XName name, params object?[] content)
+        {
+        }
 
         public System.Xml.Linq.XName Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Add(object? content) { }
+        public void Add(object? content)
+        {
+        }
 
-        public void Add(params object?[] content) { }
+        public void Add(params object?[] content)
+        {
+        }
 
-        public void Save(System.IO.Stream stream) { }
+        public void Save(System.IO.Stream stream)
+        {
+        }
 
-        public void Save(System.IO.Stream stream, System.Xml.Linq.SaveOptions options) { }
+        public void Save(System.IO.Stream stream, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(System.IO.TextWriter textWriter) { }
+        public void Save(System.IO.TextWriter textWriter)
+        {
+        }
 
-        public void Save(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options) { }
+        public void Save(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(string fileName) { }
+        public void Save(string fileName)
+        {
+        }
 
-        public void Save(string fileName, System.Xml.Linq.SaveOptions options) { }
+        public void Save(string fileName, System.Xml.Linq.SaveOptions options)
+        {
+        }
 
-        public void Save(System.Xml.XmlWriter writer) { }
+        public void Save(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override string ToString()
         {
@@ -1698,14 +1924,20 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public void WriteTo(System.Xml.XmlWriter writer) { }
+        public void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
     }
 
     public partial class XText : System.Xml.Linq.XNode
     {
-        public XText(string value) { }
+        public XText(string value)
+        {
+        }
 
-        public XText(System.Xml.Linq.XText other) { }
+        public XText(System.Xml.Linq.XText other)
+        {
+        }
 
         public override System.Xml.XmlNodeType NodeType
         {
@@ -1714,10 +1946,14 @@ namespace System.Xml.Linq
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void WriteTo(System.Xml.XmlWriter writer) { }
+        public override void WriteTo(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
@@ -1752,7 +1988,9 @@ namespace System.Xml.Schema
             System.Xml.Schema.XmlSchemaObject partialValidationType,
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler
-        ) { }
+        )
+        {
+        }
 
         public static void Validate(
             this System.Xml.Linq.XAttribute source,
@@ -1760,27 +1998,35 @@ namespace System.Xml.Schema
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler,
             bool addSchemaInfo
-        ) { }
+        )
+        {
+        }
 
         public static void Validate(
             this System.Xml.Linq.XDocument source,
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler
-        ) { }
+        )
+        {
+        }
 
         public static void Validate(
             this System.Xml.Linq.XDocument source,
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler,
             bool addSchemaInfo
-        ) { }
+        )
+        {
+        }
 
         public static void Validate(
             this System.Xml.Linq.XElement source,
             System.Xml.Schema.XmlSchemaObject partialValidationType,
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler
-        ) { }
+        )
+        {
+        }
 
         public static void Validate(
             this System.Xml.Linq.XElement source,
@@ -1788,6 +2034,8 @@ namespace System.Xml.Schema
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler,
             bool addSchemaInfo
-        ) { }
+        )
+        {
+        }
     }
 }

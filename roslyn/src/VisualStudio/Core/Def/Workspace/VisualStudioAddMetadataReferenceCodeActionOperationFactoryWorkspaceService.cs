@@ -30,7 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioAddMetadataReferenceCodeActionOperationFactoryWorkspaceService() { }
+        public VisualStudioAddMetadataReferenceCodeActionOperationFactoryWorkspaceService()
+        {
+        }
 
         public CodeActionOperation CreateAddMetadataReferenceOperation(
             ProjectId projectId,

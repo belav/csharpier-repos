@@ -30,7 +30,9 @@ namespace System.Xml.Xsl
         // Used for reporting xsl:message's during execution
         internal XsltMessageEncounteredEventHandler? xsltMessageEncountered;
 
-        public XsltArgumentList() { }
+        public XsltArgumentList()
+        {
+        }
 
         public object? GetParam(string name, string namespaceUri)
         {

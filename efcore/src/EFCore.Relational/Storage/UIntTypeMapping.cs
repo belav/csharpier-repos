@@ -26,13 +26,17 @@ public class UIntTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public UIntTypeMapping(string storeType, DbType? dbType = System.Data.DbType.UInt32)
-        : base(storeType, typeof(uint), dbType) { }
+        : base(storeType, typeof(uint), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="UIntTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected UIntTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected UIntTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

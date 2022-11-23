@@ -202,7 +202,9 @@ namespace System.Speech.Internal.Synthesis
             _audio.InjectEvent(evt);
         }
 
-        public void FlushEvent() { }
+        public void FlushEvent()
+        {
+        }
 
         internal void SetEventsInterest(int eventInterest)
         {

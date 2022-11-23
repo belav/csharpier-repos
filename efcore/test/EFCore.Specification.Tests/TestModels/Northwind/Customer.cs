@@ -10,7 +10,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 public class Customer : IComparable<Customer>
 {
-    public Customer() { }
+    public Customer()
+    {
+    }
 
     // Custom ctor binding
     public Customer(DbContext context, ILazyLoader lazyLoader, string customerID)

@@ -73,6 +73,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
         static void TestRequiresInDynamicallyAccessedMethodFromCopiedAssembly(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) { }
+        )
+        {
+        }
     }
 }

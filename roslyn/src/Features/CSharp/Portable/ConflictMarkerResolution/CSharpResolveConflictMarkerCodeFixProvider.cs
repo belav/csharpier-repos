@@ -26,6 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConflictMarkerResolution
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpResolveConflictMarkerCodeFixProvider()
-            : base(CSharpSyntaxKinds.Instance, CS8300) { }
+            : base(CSharpSyntaxKinds.Instance, CS8300)
+        {
+        }
     }
 }

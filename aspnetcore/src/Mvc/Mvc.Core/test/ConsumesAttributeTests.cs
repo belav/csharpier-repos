@@ -479,5 +479,7 @@ public class ConsumesAttributeTests
         return httpContext;
     }
 
-    internal interface ITestActionConsumeConstraint : IConsumesActionConstraint, IResourceFilter { }
+    internal interface ITestActionConsumeConstraint : IConsumesActionConstraint, IResourceFilter
+    {
+    }
 }

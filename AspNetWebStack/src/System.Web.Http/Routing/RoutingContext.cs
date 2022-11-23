@@ -25,7 +25,9 @@ namespace System.Web.Http.Routing
             return new RoutingContext() { PathSegments = pathSegments, IsValid = true, };
         }
 
-        private RoutingContext() { }
+        private RoutingContext()
+        {
+        }
 
         public bool IsValid { get; private set; }
 

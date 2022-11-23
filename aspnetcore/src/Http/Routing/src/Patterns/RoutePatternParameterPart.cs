@@ -18,7 +18,9 @@ public sealed class RoutePatternParameterPart : RoutePatternPart
         object? @default,
         RoutePatternParameterKind parameterKind,
         RoutePatternParameterPolicyReference[] parameterPolicies
-    ) : this(parameterName, @default, parameterKind, parameterPolicies, encodeSlashes: true) { }
+    ) : this(parameterName, @default, parameterKind, parameterPolicies, encodeSlashes: true)
+    {
+    }
 
     internal RoutePatternParameterPart(
         string parameterName,

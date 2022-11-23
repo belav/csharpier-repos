@@ -18,4 +18,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// are also not executed in cases where an exception filter handles an exception by producing an action result.
 /// </para>
 /// </remarks>
-public interface IAsyncAlwaysRunResultFilter : IAsyncResultFilter { }
+public interface IAsyncAlwaysRunResultFilter : IAsyncResultFilter
+{
+}

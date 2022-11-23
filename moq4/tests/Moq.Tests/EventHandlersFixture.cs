@@ -97,7 +97,8 @@ namespace Moq.Tests
         public void Event_subscription__recorded__if_CallBase_false()
         {
             var mock = new Mock<HasEvent>();
-            mock.Object.Event += () => { };
+            mock.Object.Event += () => {
+            };
             Assert.Single(mock.Invocations);
         }
 
@@ -105,7 +106,8 @@ namespace Moq.Tests
         public void Event_subscription__recorded__if_CallBase_true()
         {
             var mock = new Mock<HasEvent>() { CallBase = true };
-            mock.Object.Event += () => { };
+            mock.Object.Event += () => {
+            };
             Assert.Single(mock.Invocations);
         }
 
@@ -114,7 +116,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<HasEvent>();
             mock.SetupAdd(m => m.Event += It.IsAny<Action>());
-            mock.Object.Event += () => { };
+            mock.Object.Event += () => {
+            };
             Assert.Single(mock.Invocations);
         }
 
@@ -122,7 +125,8 @@ namespace Moq.Tests
         public void VerifyNoOtherCalls__sees_event_subscription__if_CallBase_false()
         {
             var mock = new Mock<HasEvent>();
-            mock.Object.Event += () => { };
+            mock.Object.Event += () => {
+            };
             Assert.Throws<MockException>(() => mock.VerifyNoOtherCalls());
         }
 
@@ -130,7 +134,8 @@ namespace Moq.Tests
         public void VerifyNoOtherCalls__sees_event_subscription__if_CallBase_true()
         {
             var mock = new Mock<HasEvent>() { CallBase = true };
-            mock.Object.Event += () => { };
+            mock.Object.Event += () => {
+            };
             Assert.Throws<MockException>(() => mock.VerifyNoOtherCalls());
         }
 
@@ -139,7 +144,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<HasEvent>() { CallBase = true };
             mock.SetupRemove(m => m.Event -= null);
-            mock.Object.Event += () => { };
+            mock.Object.Event += () => {
+            };
             Assert.Throws<MockException>(() => mock.VerifyNoOtherCalls());
         }
 

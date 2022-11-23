@@ -6,9 +6,13 @@
 // Seed: 4314857431407232792
 // Reduced from 582.3 KiB to 3.3 KiB in 02:00:04
 // Crashes the runtime
-public interface I0 { }
+public interface I0
+{
+}
 
-public interface I3 { }
+public interface I3
+{
+}
 
 public struct S0 : I0
 {
@@ -18,7 +22,9 @@ public struct S0 : I0
     public int F4;
     public bool F5;
 
-    public S0(bool f5) : this() { }
+    public S0(bool f5) : this()
+    {
+    }
 
     public S1 M34(S1[] arg0)
     {
@@ -33,7 +39,9 @@ public struct S1 : I0, I3
     public S0 F2;
     public S0 F3;
 
-    public S1(S0 f1, S0 f2, S0 f3) : this() { }
+    public S1(S0 f1, S0 f2, S0 f3) : this()
+    {
+    }
 }
 
 public class Runtime_58293

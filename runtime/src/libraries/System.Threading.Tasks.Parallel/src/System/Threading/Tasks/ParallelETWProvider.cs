@@ -29,7 +29,9 @@ namespace System.Threading.Tasks
         public static readonly ParallelEtwProvider Log = new ParallelEtwProvider();
 
         /// <summary>Prevent external instantiation. All logging should go through the Log instance.</summary>
-        private ParallelEtwProvider() { }
+        private ParallelEtwProvider()
+        {
+        }
 
         /// <summary>Type of a fork/join operation.</summary>
         public enum ForkJoinOperationType

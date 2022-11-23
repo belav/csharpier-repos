@@ -82,11 +82,15 @@ namespace System.Threading.Tasks
         }
 
         // Construct a promise-style task without any options.
-        internal Task() { }
+        internal Task()
+        {
+        }
 
         // Construct a promise-style task with state and options.
         internal Task(object? state, TaskCreationOptions options)
-            : base(state, options, promiseStyle: true) { }
+            : base(state, options, promiseStyle: true)
+        {
+        }
 
         // Construct a pre-completed Task<TResult>
         internal Task(TResult result) : base(false, TaskCreationOptions.None, default)
@@ -125,7 +129,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task{TResult}"/> with the specified function.
@@ -149,7 +155,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task{TResult}"/> with the specified function and creation options.
@@ -177,7 +185,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task{TResult}"/> with the specified function and creation options.
@@ -213,7 +223,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task{TResult}"/> with the specified function and state.
@@ -235,7 +247,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task{TResult}"/> with the specified action, state, and options.
@@ -265,7 +279,9 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task{TResult}"/> with the specified action, state, and options.
@@ -299,7 +315,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Task{TResult}"/> with the specified action, state, and options.
@@ -338,7 +356,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 InternalTaskOptions.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new future object.
@@ -365,7 +385,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 internalOptions,
                 scheduler
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new future object.
@@ -394,7 +416,9 @@ namespace System.Threading.Tasks
                 creationOptions,
                 internalOptions,
                 scheduler
-            ) { }
+            )
+        {
+        }
 
         // Internal method used by TaskFactory<TResult>.StartNew() methods
         internal static Task<TResult> StartNew(

@@ -77,7 +77,9 @@ namespace System.Threading.Tasks.Dataflow
             new DataflowLinkOptions() { MaxMessages = 1, PropagateCompletion = true };
 
         /// <summary>Initializes the <see cref="DataflowLinkOptions"/>.</summary>
-        public DataflowLinkOptions() { }
+        public DataflowLinkOptions()
+        {
+        }
 
         /// <summary>Gets or sets whether the linked target will have completion and faulting notification propagated to it automatically.</summary>
         public bool PropagateCompletion

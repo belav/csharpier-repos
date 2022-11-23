@@ -9,7 +9,9 @@ namespace System.Configuration
         private static readonly ConfigurationPropertyCollection s_properties =
             new ConfigurationPropertyCollection();
 
-        public ProviderSettingsCollection() : base(StringComparer.OrdinalIgnoreCase) { }
+        public ProviderSettingsCollection() : base(StringComparer.OrdinalIgnoreCase)
+        {
+        }
 
         protected internal override ConfigurationPropertyCollection Properties => s_properties;
 

@@ -493,7 +493,9 @@ namespace Newtonsoft.Json.Utilities
         private sealed class GetBinderAdapter : GetMemberBinder
         {
             internal GetBinderAdapter(InvokeMemberBinder binder)
-                : base(binder.Name, binder.IgnoreCase) { }
+                : base(binder.Name, binder.IgnoreCase)
+            {
+            }
 
             public override DynamicMetaObject FallbackGetMember(
                 DynamicMetaObject target,

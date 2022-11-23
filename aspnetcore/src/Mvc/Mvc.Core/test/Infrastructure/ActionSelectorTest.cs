@@ -1226,32 +1226,46 @@ public class ActionSelectorTest
             }
         }
 
-        public void OnProvidersExecuted(ActionConstraintProviderContext context) { }
+        public void OnProvidersExecuted(ActionConstraintProviderContext context)
+        {
+        }
     }
 
     private class NonActionController
     {
         [NonAction]
-        public void Put() { }
+        public void Put()
+        {
+        }
 
         [NonAction]
-        public void RPCMethod() { }
+        public void RPCMethod()
+        {
+        }
 
         [NonAction]
         [HttpGet]
-        public void RPCMethodWithHttpGet() { }
+        public void RPCMethodWithHttpGet()
+        {
+        }
     }
 
     private class ActionNameController
     {
         [ActionName("CustomActionName_Verb")]
-        public void Put() { }
+        public void Put()
+        {
+        }
 
         [ActionName("CustomActionName_DefaultMethod")]
-        public void Index() { }
+        public void Index()
+        {
+        }
 
         [ActionName("CustomActionName_RpcMethod")]
-        public void RPCMethodWithHttpGet() { }
+        public void RPCMethodWithHttpGet()
+        {
+        }
     }
 
     private class HttpMethodAttributeTests_RestOnlyController
@@ -1262,9 +1276,13 @@ public class ActionSelectorTest
         [HttpDelete]
         [HttpPatch]
         [HttpHead]
-        public void Put() { }
+        public void Put()
+        {
+        }
 
         [AcceptVerbs("PUT", "post", "GET", "delete", "pATcH")]
-        public void Patch() { }
+        public void Patch()
+        {
+        }
     }
 }

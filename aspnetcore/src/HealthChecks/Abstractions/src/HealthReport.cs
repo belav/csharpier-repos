@@ -26,7 +26,9 @@ public sealed class HealthReport
                 entries?.Values ?? throw new ArgumentNullException(nameof(entries))
             ),
             totalDuration
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Create a new <see cref="HealthReport"/> from the specified results.

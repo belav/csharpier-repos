@@ -23,27 +23,37 @@ namespace System.Net.Http
 
     public partial class WinHttpHandler : System.Net.Http.HttpMessageHandler
     {
-        public WinHttpHandler() { }
+        public WinHttpHandler()
+        {
+        }
 
         public System.Net.DecompressionMethods AutomaticDecompression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool AutomaticRedirection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool CheckCertificateRevocationList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.ClientCertificateOption ClientCertificateOption
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate2Collection ClientCertificates
         {
@@ -52,47 +62,65 @@ namespace System.Net.Http
         public System.Net.CookieContainer? CookieContainer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.CookieUsePolicy CookieUsePolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.ICredentials? DefaultProxyCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnableMultipleHttp2Connections
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxAutomaticRedirections
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxConnectionsPerServer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxResponseDrainSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxResponseHeadersLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PreAuthenticate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IDictionary<string, object> Properties
         {
@@ -101,22 +129,30 @@ namespace System.Net.Http
         public System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan ReceiveDataTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan ReceiveHeadersTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan SendTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Func<
             System.Net.Http.HttpRequestMessage,
@@ -127,40 +163,56 @@ namespace System.Net.Http
         >? ServerCertificateValidationCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.ICredentials? ServerCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Authentication.SslProtocols SslProtocols
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TcpKeepAliveEnabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan TcpKeepAliveTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan TcpKeepAliveInterval
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.WindowsProxyUsePolicy WindowsProxyUsePolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,

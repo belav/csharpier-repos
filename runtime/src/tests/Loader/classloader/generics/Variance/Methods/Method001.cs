@@ -3,21 +3,37 @@
 
 using System;
 
-public class Base { }
+public class Base
+{
+}
 
-public class Sub : Base { }
+public class Sub : Base
+{
+}
 
-public class GBase<T> { }
+public class GBase<T>
+{
+}
 
-public class GSubT<T> : GBase<T> { }
+public class GSubT<T> : GBase<T>
+{
+}
 
-public class GSubTArr<T> : GBase<T[]> { }
+public class GSubTArr<T> : GBase<T[]>
+{
+}
 
-public class GSubGRefT<T> : GBase<GRef<T>> { }
+public class GSubGRefT<T> : GBase<GRef<T>>
+{
+}
 
-public class GRef<T> { }
+public class GRef<T>
+{
+}
 
-public struct GVal<T> { }
+public struct GVal<T>
+{
+}
 
 public class TestClass
 {

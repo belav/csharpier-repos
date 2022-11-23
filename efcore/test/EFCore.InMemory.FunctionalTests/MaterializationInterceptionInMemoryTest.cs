@@ -11,7 +11,9 @@ public class MaterializationInterceptionInMemoryTest
 {
     public MaterializationInterceptionInMemoryTest(
         MaterializationInterceptionInMemoryFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public class MaterializationInterceptionInMemoryFixture : SingletonInterceptorsFixtureBase
     {

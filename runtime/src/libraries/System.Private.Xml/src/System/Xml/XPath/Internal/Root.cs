@@ -7,7 +7,9 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class Root : AstNode
     {
-        public Root() { }
+        public Root()
+        {
+        }
 
         public override AstType Type
         {

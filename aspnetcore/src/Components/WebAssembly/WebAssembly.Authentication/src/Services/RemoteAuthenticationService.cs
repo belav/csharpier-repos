@@ -73,7 +73,9 @@ public class RemoteAuthenticationService<
         IOptionsSnapshot<RemoteAuthenticationOptions<TProviderOptions>> options,
         NavigationManager navigation,
         AccountClaimsPrincipalFactory<TAccount> accountClaimsPrincipalFactory
-    ) : this(jsRuntime, options, navigation, accountClaimsPrincipalFactory, null) { }
+    ) : this(jsRuntime, options, navigation, accountClaimsPrincipalFactory, null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance.

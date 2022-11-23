@@ -49,7 +49,9 @@ namespace System.Net.Http.Functional.Tests
             )
             : null;
 
-        public DefaultCredentialsTest(ITestOutputHelper output) : base(output) { }
+        public DefaultCredentialsTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]

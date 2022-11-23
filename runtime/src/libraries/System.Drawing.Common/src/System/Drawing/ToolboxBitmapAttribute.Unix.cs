@@ -48,9 +48,13 @@ namespace System.Drawing
         private Image? bigImage;
         public static readonly ToolboxBitmapAttribute Default = new ToolboxBitmapAttribute();
 
-        private ToolboxBitmapAttribute() { }
+        private ToolboxBitmapAttribute()
+        {
+        }
 
-        public ToolboxBitmapAttribute(string imageFile) { }
+        public ToolboxBitmapAttribute(string imageFile)
+        {
+        }
 
         public ToolboxBitmapAttribute(Type t)
         {

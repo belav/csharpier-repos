@@ -51,7 +51,9 @@ namespace System.Web.Http.Results
                 routeValues,
                 content,
                 new DirectDependencyProvider(urlFactory, contentNegotiator, request, formatters)
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedAtRouteNegotiatedContentResult{T}"/> class with the
@@ -67,7 +69,8 @@ namespace System.Web.Http.Results
             T content,
             ApiController controller
         ) : this(routeName, routeValues, content, new ApiControllerDependencyProvider(controller))
-        { }
+        {
+        }
 
         private CreatedAtRouteNegotiatedContentResult(
             string routeName,

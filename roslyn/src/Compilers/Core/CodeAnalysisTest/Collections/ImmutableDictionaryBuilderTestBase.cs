@@ -172,7 +172,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             var manualEnum = builder.GetEnumerator();
             Assert.Equal(default(KeyValuePair<string, int>), manualEnum.Current);
-            while (manualEnum.MoveNext()) { }
+            while (manualEnum.MoveNext())
+            {
+            }
             Assert.False(manualEnum.MoveNext());
             Assert.Equal(default(KeyValuePair<string, int>), manualEnum.Current);
         }

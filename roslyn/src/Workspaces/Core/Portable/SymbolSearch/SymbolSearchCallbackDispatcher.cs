@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolSearchCallbackDispatcher() { }
+        public SymbolSearchCallbackDispatcher()
+        {
+        }
 
         private ISymbolSearchLogService GetLogService(RemoteServiceCallbackId callbackId) =>
             (ISymbolSearchLogService)GetCallback(callbackId);

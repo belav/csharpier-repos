@@ -84,9 +84,13 @@ internal sealed class MacOSCertificateManager : CertificateManager
         + "A prompt might appear to ask for permission to access the key. "
         + "When that happens, select 'Always Allow' to grant 'dotnet' access to the certificate key in the future.";
 
-    public MacOSCertificateManager() { }
+    public MacOSCertificateManager()
+    {
+    }
 
-    internal MacOSCertificateManager(string subject, int version) : base(subject, version) { }
+    internal MacOSCertificateManager(string subject, int version) : base(subject, version)
+    {
+    }
 
     protected override void TrustCertificateCore(X509Certificate2 publicCertificate)
     {
@@ -226,7 +230,9 @@ internal sealed class MacOSCertificateManager : CertificateManager
                 RemoveAdminTrustRule(certificate);
                 RemoveCertificateFromKeychain(MacOSSystemKeychain, certificate);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         RemoveCertificateFromUserStoreCore(certificate);

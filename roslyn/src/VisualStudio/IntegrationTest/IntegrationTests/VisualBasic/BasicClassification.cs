@@ -20,7 +20,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicClassification(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicClassification)) { }
+            : base(instanceFactory, nameof(BasicClassification))
+        {
+        }
 
         [WpfFact]
         public void Verify_Color_Of_Some_Tokens()

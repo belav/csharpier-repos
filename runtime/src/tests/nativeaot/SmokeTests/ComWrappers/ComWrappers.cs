@@ -98,7 +98,9 @@ namespace ComWrappersTests
                     "Cannot work without ComWrappers.RegisterForMarshalling called"
                 );
             }
-            catch (NotSupportedException) { }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         public static void TestComInteropReleaseProcess()
@@ -288,7 +290,9 @@ namespace ComWrappersTests
             return new NativeComObjectWrapper(externalComObject);
         }
 
-        protected override void ReleaseObjects(System.Collections.IEnumerable objects) { }
+        protected override void ReleaseObjects(System.Collections.IEnumerable objects)
+        {
+        }
     }
 
     internal unsafe class IComInterfaceProxy

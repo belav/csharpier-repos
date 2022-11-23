@@ -538,7 +538,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     | DynamicallyAccessedMemberTypes.NonPublicFields
             )]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         static void RequiresSomePublic(
             [DynamicallyAccessedMembers(
@@ -548,7 +550,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     | DynamicallyAccessedMemberTypes.PublicMethods
             )]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         [ExpectedWarning(
             "IL2067",
@@ -583,6 +587,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             RequiresSomePublic(type);
         }
 
-        class TestType { }
+        class TestType
+        {
+        }
     }
 }

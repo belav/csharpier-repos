@@ -22,5 +22,7 @@ internal class VSTypeScriptProjectContextHandler : GetTextDocumentWithContextHan
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptProjectContextHandler() { }
+    public VSTypeScriptProjectContextHandler()
+    {
+    }
 }

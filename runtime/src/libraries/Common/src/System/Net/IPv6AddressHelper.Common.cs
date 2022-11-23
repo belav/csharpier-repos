@@ -338,10 +338,13 @@ namespace System
 
                         start = i;
                         for (++i; i < address.Length && address[i] != ']' && address[i] != '/'; ++i)
-                        { }
+                        {
+                        }
                         scopeId = new string(address.Slice(start, i - start));
                         // ignore prefix if any
-                        for (; i < address.Length && address[i] != ']'; ++i) { }
+                        for (; i < address.Length && address[i] != ']'; ++i)
+                        {
+                        }
                         break;
 
                     case ':':

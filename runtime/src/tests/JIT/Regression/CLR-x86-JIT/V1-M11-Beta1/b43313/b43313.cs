@@ -42,7 +42,9 @@ namespace Test
                     }
                 }
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         static int Main()

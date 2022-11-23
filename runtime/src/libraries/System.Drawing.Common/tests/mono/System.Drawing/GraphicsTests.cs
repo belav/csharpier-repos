@@ -50,7 +50,9 @@ namespace MonoTests.System.Drawing
             {
                 font = new Font("Arial", 12);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void Dispose()

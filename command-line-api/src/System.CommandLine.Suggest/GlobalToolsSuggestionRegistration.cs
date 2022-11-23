@@ -32,7 +32,9 @@ namespace System.CommandLine.Suggest
                 );
         }
 
-        public void AddSuggestionRegistration(Registration registration) { }
+        public void AddSuggestionRegistration(Registration registration)
+        {
+        }
 
         public IEnumerable<Registration> FindAllRegistrations()
         {

@@ -91,7 +91,9 @@ public class ShadowStateUpdateTest : IClassFixture<InMemoryFixture>
             Id = (int)values[0];
         }
 
-        public Customer() { }
+        public Customer()
+        {
+        }
 
         public int Id { get; set; }
     }

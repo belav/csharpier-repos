@@ -27,7 +27,9 @@ namespace System.Net.Http.Functional.Tests
     {
         public static bool IsNotWinHttpHandler = !IsWinHttpHandler;
 
-        public HttpClientHandlerTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void CookieContainer_SetNull_ThrowsArgumentNullException()

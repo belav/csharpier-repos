@@ -4,12 +4,16 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public class CMyException : System.Exception { }
+public class CMyException : System.Exception
+{
+}
 
 public class CTest
 {
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void UseByte(byte x) { }
+    private static void UseByte(byte x)
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     private static unsafe void CheckDoubleAlignment(double* p)

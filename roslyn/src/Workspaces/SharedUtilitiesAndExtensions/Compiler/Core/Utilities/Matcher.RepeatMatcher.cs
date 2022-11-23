@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             public override bool TryMatch(IList<T> sequence, ref int index)
             {
-                while (_matcher.TryMatch(sequence, ref index)) { }
+                while (_matcher.TryMatch(sequence, ref index))
+                {
+                }
 
                 return true;
             }

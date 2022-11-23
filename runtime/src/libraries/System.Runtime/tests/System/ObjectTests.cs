@@ -143,7 +143,9 @@ namespace System.Tests
             public S CallMemberwiseClone() => (S)MemberwiseClone();
         }
 
-        private class Generic<T> { }
+        private class Generic<T>
+        {
+        }
 
         private class EOverrider
         {

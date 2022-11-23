@@ -260,7 +260,9 @@ namespace System.Diagnostics
                             {
                                 s_iniFilePath = Path.GetTempFileName();
                             }
-                            finally { }
+                            finally
+                            {
+                            }
                         }
                     }
                 }
@@ -300,7 +302,9 @@ namespace System.Diagnostics
                             {
                                 s_symbolFilePath = Path.GetTempFileName();
                             }
-                            finally { }
+                            finally
+                            {
+                            }
                         }
                     }
                 }
@@ -541,7 +545,9 @@ namespace System.Diagnostics
                     iniWriter.Close();
                 }
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         private static void CreateRegistryEntry(
@@ -634,7 +640,9 @@ namespace System.Diagnostics
                     symbolWriter.Close();
                 }
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         private static void DeleteRegistryEntry(string categoryName)
@@ -676,13 +684,17 @@ namespace System.Diagnostics
             {
                 File.Delete(IniFilePath);
             }
-            catch { }
+            catch
+            {
+            }
 
             try
             {
                 File.Delete(SymbolFilePath);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         // Ensures that the customCategoryTable is initialized and decides whether the category passed in
@@ -1331,7 +1343,9 @@ namespace System.Diagnostics
 
                 res = p.ExitCode;
             }
-            finally { }
+            finally
+            {
+            }
 
             if (res == Interop.Errors.ERROR_ACCESS_DENIED)
             {

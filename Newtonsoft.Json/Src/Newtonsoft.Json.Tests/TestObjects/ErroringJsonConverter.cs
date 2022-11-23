@@ -29,7 +29,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class ErroringJsonConverter : JsonConverter
     {
-        public ErroringJsonConverter(string s) { }
+        public ErroringJsonConverter(string s)
+        {
+        }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Serialization
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpOptionsSerializationService() { }
+        public CSharpOptionsSerializationService()
+        {
+        }
 
         public override void WriteTo(
             CompilationOptions options,

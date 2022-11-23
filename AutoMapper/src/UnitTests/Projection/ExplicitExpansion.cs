@@ -11,7 +11,9 @@ public class ExplicitExpansion : AutoMapperSpecBase
         public ChildSource Child3 { get; set; }
     }
 
-    public class ChildSource { }
+    public class ChildSource
+    {
+    }
 
     public class Dest
     {
@@ -20,7 +22,9 @@ public class ExplicitExpansion : AutoMapperSpecBase
         public ChildDest Child3 { get; set; }
     }
 
-    public class ChildDest { }
+    public class ChildDest
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

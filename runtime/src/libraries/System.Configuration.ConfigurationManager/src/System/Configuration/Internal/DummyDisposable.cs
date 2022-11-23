@@ -8,6 +8,8 @@ namespace System.Configuration.Internal
     /// </summary>
     internal sealed class DummyDisposable : IDisposable
     {
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

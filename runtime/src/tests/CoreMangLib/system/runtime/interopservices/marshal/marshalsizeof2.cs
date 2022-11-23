@@ -486,7 +486,9 @@ public class MarshalSizeOf2
                 retVal = false;
             }
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("009.0", "Unexpected exception: " + e);
@@ -517,7 +519,9 @@ public class MarshalSizeOf2
             );
             retVal = false;
         }
-        catch (ArgumentNullException) { }
+        catch (ArgumentNullException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("101.0", "Unexpected exception: " + e);
@@ -547,7 +551,9 @@ public class MarshalSizeOf2
             );
             retVal = false;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("102.0", "Unexpected exception: " + e);
@@ -577,7 +583,9 @@ public class MarshalSizeOf2
             );
             retVal = false;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("103.0", "Unexpected exception: " + e);
@@ -607,7 +615,9 @@ public class MarshalSizeOf2
             );
             retVal = false;
         }
-        catch (ArgumentException) { }
+        catch (ArgumentException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("104.0", "Unexpected exception: " + e);

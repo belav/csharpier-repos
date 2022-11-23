@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddImportsService() { }
+        public CSharpAddImportsService()
+        {
+        }
 
         public override CodeStyleOption2<AddImportPlacement> GetUsingDirectivePlacementCodeStyleOption(
             AnalyzerConfigOptions configOptions,

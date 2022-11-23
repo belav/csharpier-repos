@@ -41,7 +41,9 @@ class Test
                 rwh.Unregister(_mre);
                 bUnregisterSucceeded = true;
             }
-            catch (ObjectDisposedException) { }
+            catch (ObjectDisposedException)
+            {
+            }
 
             if (bUnregisterSucceeded)
             {
@@ -52,7 +54,9 @@ class Test
                         Console.Write("@");
                     }
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
             }
 
             if (i % 100 == 0)

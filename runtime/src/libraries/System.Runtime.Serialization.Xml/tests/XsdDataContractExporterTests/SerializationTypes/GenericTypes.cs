@@ -57,7 +57,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     internal class WrapperISerializable<T> : ISerializable
     {
         [SecurityCritical]
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 
     [XmlSchemaProvider("StaticGetSchema")]

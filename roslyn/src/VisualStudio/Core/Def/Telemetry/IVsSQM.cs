@@ -321,5 +321,7 @@ namespace Microsoft.VisualStudio.Shell.Interop
     [ComImport()]
     [ComVisible(false)]
     [Guid("2508FDF0-EF80-4366-878E-C9F024B8D981")]
-    internal interface SVsLog { }
+    internal interface SVsLog
+    {
+    }
 }

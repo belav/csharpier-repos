@@ -12,7 +12,9 @@ namespace System.Runtime.Serialization
     {
         private IList<ExtensionDataMember>? _members;
 
-        internal ExtensionDataObject() { }
+        internal ExtensionDataObject()
+        {
+        }
 
         internal IList<ExtensionDataMember>? Members
         {

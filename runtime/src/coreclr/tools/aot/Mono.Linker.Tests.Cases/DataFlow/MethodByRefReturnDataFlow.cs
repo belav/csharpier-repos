@@ -109,7 +109,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         public class TestTypeWithRequires
         {
             [RequiresUnreferencedCode("Message for --TestType.Requires--")]
-            public static void Requires() { }
+            public static void Requires()
+            {
+            }
         }
     }
 }

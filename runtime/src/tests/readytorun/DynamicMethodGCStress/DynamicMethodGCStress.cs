@@ -49,302 +49,502 @@ internal static class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func0() { }
+    private static void Func0()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func1() { }
+    private static void Func1()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func2() { }
+    private static void Func2()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func3() { }
+    private static void Func3()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func4() { }
+    private static void Func4()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func5() { }
+    private static void Func5()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func6() { }
+    private static void Func6()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func7() { }
+    private static void Func7()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func8() { }
+    private static void Func8()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func9() { }
+    private static void Func9()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func10() { }
+    private static void Func10()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func11() { }
+    private static void Func11()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func12() { }
+    private static void Func12()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func13() { }
+    private static void Func13()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func14() { }
+    private static void Func14()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func15() { }
+    private static void Func15()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func16() { }
+    private static void Func16()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func17() { }
+    private static void Func17()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func18() { }
+    private static void Func18()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func19() { }
+    private static void Func19()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func20() { }
+    private static void Func20()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func21() { }
+    private static void Func21()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func22() { }
+    private static void Func22()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func23() { }
+    private static void Func23()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func24() { }
+    private static void Func24()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func25() { }
+    private static void Func25()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func26() { }
+    private static void Func26()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func27() { }
+    private static void Func27()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func28() { }
+    private static void Func28()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func29() { }
+    private static void Func29()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func30() { }
+    private static void Func30()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func31() { }
+    private static void Func31()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func32() { }
+    private static void Func32()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func33() { }
+    private static void Func33()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func34() { }
+    private static void Func34()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func35() { }
+    private static void Func35()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func36() { }
+    private static void Func36()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func37() { }
+    private static void Func37()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func38() { }
+    private static void Func38()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func39() { }
+    private static void Func39()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func40() { }
+    private static void Func40()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func41() { }
+    private static void Func41()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func42() { }
+    private static void Func42()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func43() { }
+    private static void Func43()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func44() { }
+    private static void Func44()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func45() { }
+    private static void Func45()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func46() { }
+    private static void Func46()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func47() { }
+    private static void Func47()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func48() { }
+    private static void Func48()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func49() { }
+    private static void Func49()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func50() { }
+    private static void Func50()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func51() { }
+    private static void Func51()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func52() { }
+    private static void Func52()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func53() { }
+    private static void Func53()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func54() { }
+    private static void Func54()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func55() { }
+    private static void Func55()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func56() { }
+    private static void Func56()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func57() { }
+    private static void Func57()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func58() { }
+    private static void Func58()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func59() { }
+    private static void Func59()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func60() { }
+    private static void Func60()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func61() { }
+    private static void Func61()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func62() { }
+    private static void Func62()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func63() { }
+    private static void Func63()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func64() { }
+    private static void Func64()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func65() { }
+    private static void Func65()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func66() { }
+    private static void Func66()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func67() { }
+    private static void Func67()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func68() { }
+    private static void Func68()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func69() { }
+    private static void Func69()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func70() { }
+    private static void Func70()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func71() { }
+    private static void Func71()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func72() { }
+    private static void Func72()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func73() { }
+    private static void Func73()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func74() { }
+    private static void Func74()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func75() { }
+    private static void Func75()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func76() { }
+    private static void Func76()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func77() { }
+    private static void Func77()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func78() { }
+    private static void Func78()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func79() { }
+    private static void Func79()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func80() { }
+    private static void Func80()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func81() { }
+    private static void Func81()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func82() { }
+    private static void Func82()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func83() { }
+    private static void Func83()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func84() { }
+    private static void Func84()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func85() { }
+    private static void Func85()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func86() { }
+    private static void Func86()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func87() { }
+    private static void Func87()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func88() { }
+    private static void Func88()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func89() { }
+    private static void Func89()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func90() { }
+    private static void Func90()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func91() { }
+    private static void Func91()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func92() { }
+    private static void Func92()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func93() { }
+    private static void Func93()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func94() { }
+    private static void Func94()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func95() { }
+    private static void Func95()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func96() { }
+    private static void Func96()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func97() { }
+    private static void Func97()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func98() { }
+    private static void Func98()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Func99() { }
+    private static void Func99()
+    {
+    }
 }

@@ -11,7 +11,9 @@ using System.Runtime.CompilerServices;
 
 public class ImplicitByrefTailCalls
 {
-    public static void Z() { }
+    public static void Z()
+    {
+    }
 
     public static bool Z(bool b) => b;
 
@@ -220,7 +222,9 @@ public class ImplicitByrefTailCalls
                 MustThrow(x);
             }
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         return 10000 + x[0];
     }

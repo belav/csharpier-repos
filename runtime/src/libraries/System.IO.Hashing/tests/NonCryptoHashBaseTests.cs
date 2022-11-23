@@ -496,7 +496,9 @@ namespace System.IO.Hashing.Tests
         {
             private int _count;
 
-            public CountingAlgorithm() : base(sizeof(int)) { }
+            public CountingAlgorithm() : base(sizeof(int))
+            {
+            }
 
             public override void Append(ReadOnlySpan<byte> source)
             {

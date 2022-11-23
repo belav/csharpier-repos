@@ -17,7 +17,9 @@ namespace System.Web.Http.ApiExplorer
         }
 
         [HttpDelete]
-        public void RemoveItem(int id) { }
+        public void RemoveItem(int id)
+        {
+        }
     }
 
     public class AttributedController : ApiController
@@ -95,7 +97,9 @@ namespace System.Web.Http.ApiExplorer
     public class PrefixedController : ApiController
     {
         // Should not be reachable be our routes since there's no route attribute.
-        public void Post() { }
+        public void Post()
+        {
+        }
 
         [Route("")]
         public string Get()

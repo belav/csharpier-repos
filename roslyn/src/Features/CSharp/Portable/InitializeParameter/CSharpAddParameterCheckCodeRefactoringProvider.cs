@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddParameterCheckCodeRefactoringProvider() { }
+        public CSharpAddParameterCheckCodeRefactoringProvider()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

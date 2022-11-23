@@ -15,7 +15,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     {
         public static CallSiteRuntimeResolver Instance { get; } = new();
 
-        private CallSiteRuntimeResolver() { }
+        private CallSiteRuntimeResolver()
+        {
+        }
 
         public object? Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
         {

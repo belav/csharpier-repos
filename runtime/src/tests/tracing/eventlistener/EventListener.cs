@@ -11,7 +11,9 @@ namespace Tracing.Tests
     [EventSource(Name = "SimpleEventSource")]
     class SimpleEventSource : EventSource
     {
-        public SimpleEventSource() : base(true) { }
+        public SimpleEventSource() : base(true)
+        {
+        }
 
         [Event(1)]
         internal void MathResult(int x, int y, int z, string formula)

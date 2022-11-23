@@ -23,13 +23,17 @@ namespace System
     {
         // Creates a new instance of an Object.
         [NonVersionable]
-        public Object() { }
+        public Object()
+        {
+        }
 
         // Allow an object to free resources before the object is reclaimed by the GC.
         // This method's virtual slot number is hardcoded in runtimes. Do not add any virtual methods ahead of this.
         [NonVersionable]
 #pragma warning disable CA1821 // Remove empty Finalizers
-        ~Object() { }
+        ~Object()
+        {
+        }
 #pragma warning restore CA1821
 
         /// <summary>Returns a string that represents the current object.</summary>

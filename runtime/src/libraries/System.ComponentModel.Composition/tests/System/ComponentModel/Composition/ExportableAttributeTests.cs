@@ -83,7 +83,9 @@ namespace System.ComponentModel.Composition
         [Name("MEF")]
         [Name("MEF2")]
         [PartNotDiscoverable]
-        public class BasicTestComponentWithInvalidMetadata { }
+        public class BasicTestComponentWithInvalidMetadata
+        {
+        }
 
         [Fact]
         [Trait("Type", "Integration")]
@@ -127,7 +129,9 @@ namespace System.ComponentModel.Composition
         [Export]
         [MetadataWithInvalidCustomAttributeType]
         [PartNotDiscoverable]
-        public class ClassWithInvalidCustomAttributeType { }
+        public class ClassWithInvalidCustomAttributeType
+        {
+        }
 
         [Fact]
         public void InvalidAttributType_CustomType_ShouldThrow()
@@ -160,7 +164,9 @@ namespace System.ComponentModel.Composition
         [Export]
         [MetadataWithInvalidVersionPropertyAttributeType]
         [PartNotDiscoverable]
-        public class ClassWithInvalidVersionPropertyAttributeType { }
+        public class ClassWithInvalidVersionPropertyAttributeType
+        {
+        }
 
         [Fact]
         public void InvalidAttributType_VersionPropertyType_ShouldThrow()
@@ -197,7 +203,9 @@ namespace System.ComponentModel.Composition
 
         [Export]
         [DerivedMetadata]
-        public class ExportWithDerivedMetadataAttribute { }
+        public class ExportWithDerivedMetadataAttribute
+        {
+        }
 
         [Fact]
         public void DerivedMetadataAttributeAttribute_ShouldSupplyMetadata()
@@ -266,5 +274,7 @@ namespace System.ComponentModel.Composition
     [PartNotDiscoverable]
     [Export]
     [BasicMetadata]
-    public class BasicTestComponent { }
+    public class BasicTestComponent
+    {
+    }
 }

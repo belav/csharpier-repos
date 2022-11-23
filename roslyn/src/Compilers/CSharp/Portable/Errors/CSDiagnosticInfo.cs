@@ -27,13 +27,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Array.Empty<object>(),
                 ImmutableArray<Symbol>.Empty,
                 ImmutableArray<Location>.Empty
-            ) { }
+            )
+        {
+        }
 
         internal CSDiagnosticInfo(ErrorCode code, params object[] args)
-            : this(code, args, ImmutableArray<Symbol>.Empty, ImmutableArray<Location>.Empty) { }
+            : this(code, args, ImmutableArray<Symbol>.Empty, ImmutableArray<Location>.Empty)
+        {
+        }
 
         internal CSDiagnosticInfo(ErrorCode code, ImmutableArray<Symbol> symbols, object[] args)
-            : this(code, args, symbols, ImmutableArray<Location>.Empty) { }
+            : this(code, args, symbols, ImmutableArray<Location>.Empty)
+        {
+        }
 
         internal CSDiagnosticInfo(
             ErrorCode code,

@@ -4,6 +4,8 @@
     {
         protected string Model { get; set; }
 
-        public void ActionMethod(IsProblematicParameter_IgnoresNonPublicProperties model) { }
+        public void ActionMethod(IsProblematicParameter_IgnoresNonPublicProperties model)
+        {
+        }
     }
 }

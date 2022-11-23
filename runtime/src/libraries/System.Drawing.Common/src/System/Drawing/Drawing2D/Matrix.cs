@@ -31,7 +31,9 @@ namespace System.Drawing.Drawing2D
         /// Construct a <see cref="Matrix"/> utilizing the given <paramref name="matrix"/>.
         /// </summary>
         /// <param name="matrix">Matrix data to construct from.</param>
-        public Matrix(Matrix3x2 matrix) : this(CreateNativeHandle(matrix)) { }
+        public Matrix(Matrix3x2 matrix) : this(CreateNativeHandle(matrix))
+        {
+        }
 
         private Matrix(IntPtr nativeMatrix)
         {

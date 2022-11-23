@@ -39,7 +39,9 @@ namespace System.Reflection
         }
         #endregion
 
-        protected CustomAttributeData() { }
+        protected CustomAttributeData()
+        {
+        }
 
         #region Object Override
         public override string ToString()

@@ -287,7 +287,9 @@ namespace System.Tests
         {
             public static readonly TestFormatProvider s_instance = new TestFormatProvider();
 
-            private TestFormatProvider() { }
+            private TestFormatProvider()
+            {
+            }
 
             public object GetFormat(Type formatType)
             {

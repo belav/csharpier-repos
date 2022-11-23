@@ -254,7 +254,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_ShouldNotThrow()
         {
-            using (var catalog = CreateDirectoryCatalog()) { }
+            using (var catalog = CreateDirectoryCatalog())
+            {
+            }
         }
 
         [Fact]
@@ -389,7 +391,9 @@ namespace System.ComponentModel.Composition
                 File.CreateText(
                     Path.Combine(TemporaryFileCopier.GetNewTemporaryDirectory(), "Test.txt")
                 )
-            ) { }
+            )
+            {
+            }
 
             // Add two dll's
             string dll1 = Path.Combine(TemporaryFileCopier.GetNewTemporaryDirectory(), "Test1.dll");
@@ -425,7 +429,9 @@ namespace System.ComponentModel.Composition
                 File.CreateText(
                     Path.Combine(TemporaryFileCopier.GetNewTemporaryDirectory(), "Test.dll")
                 )
-            ) { }
+            )
+            {
+            }
             var cat = new DirectoryCatalog(TemporaryFileCopier.GetNewTemporaryDirectory());
         }
 
@@ -457,7 +463,9 @@ namespace System.ComponentModel.Composition
                 File.CreateText(
                     Path.Combine(TemporaryFileCopier.GetNewTemporaryDirectory(), "Test.txt")
                 )
-            ) { }
+            )
+            {
+            }
             Assert.Throws<IOException>(
                 () =>
                     new DirectoryCatalog(
@@ -667,7 +675,9 @@ namespace System.ComponentModel.Composition
         private class DerivedDirectoryCatalog : DirectoryCatalog
         {
             public DerivedDirectoryCatalog(string path, string searchPattern)
-                : base(path, searchPattern) { }
+                : base(path, searchPattern)
+            {
+            }
         }
     }
 }

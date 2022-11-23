@@ -1,12 +1,18 @@
 namespace CuriouslyRecurringPatternThroughInterface
 {
-    interface IGeneric<T_IGeneric> { }
+    interface IGeneric<T_IGeneric>
+    {
+    }
 
     interface ICuriouslyRecurring<T_ICuriouslyRecurring>
-        : IGeneric<CuriouslyRecurringThroughInterface<T_ICuriouslyRecurring>> { }
+        : IGeneric<CuriouslyRecurringThroughInterface<T_ICuriouslyRecurring>>
+    {
+    }
 
     class CuriouslyRecurringThroughInterface<T_CuriouslyRecurringThroughInterface>
-        : ICuriouslyRecurring<T_CuriouslyRecurringThroughInterface> { }
+        : ICuriouslyRecurring<T_CuriouslyRecurringThroughInterface>
+    {
+    }
 
     class Program
     {

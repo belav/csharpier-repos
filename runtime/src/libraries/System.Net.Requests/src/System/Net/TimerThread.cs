@@ -278,7 +278,9 @@ namespace System.Net
         /// </summary>
         private sealed class InfiniteTimerQueue : Queue
         {
-            internal InfiniteTimerQueue() : base(Timeout.Infinite) { }
+            internal InfiniteTimerQueue() : base(Timeout.Infinite)
+            {
+            }
 
             /// <summary>
             /// <para>Always returns a dummy infinite timer.</para>
@@ -477,7 +479,9 @@ namespace System.Net
         /// </summary>
         private sealed class InfiniteTimer : Timer
         {
-            internal InfiniteTimer() : base(Timeout.Infinite) { }
+            internal InfiniteTimer() : base(Timeout.Infinite)
+            {
+            }
 
             private int _cancelled;
 

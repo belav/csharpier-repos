@@ -23,7 +23,9 @@ namespace System.Web.Http
         }
 
         [AcceptVerbs("PATCH")]
-        public void PutUser(User user) { }
+        public void PutUser(User user)
+        {
+        }
 
         public User GetUserByNameAndId(string name, int id)
         {
@@ -106,8 +108,12 @@ namespace System.Web.Http
             return null;
         }
 
-        public void Head_Id_OptSize_OptIndex(int id, int size = 10, int index = 0) { }
+        public void Head_Id_OptSize_OptIndex(int id, int size = 10, int index = 0)
+        {
+        }
 
-        public void Head() { }
+        public void Head()
+        {
+        }
     }
 }

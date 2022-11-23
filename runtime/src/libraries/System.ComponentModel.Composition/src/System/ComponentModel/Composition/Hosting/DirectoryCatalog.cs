@@ -72,7 +72,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="UnauthorizedAccessException">
         ///     The caller does not have the required permission.
         /// </exception>
-        public DirectoryCatalog(string path) : this(path, "*.dll") { }
+        public DirectoryCatalog(string path) : this(path, "*.dll")
+        {
+        }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the *.dll files
@@ -109,7 +111,9 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The caller does not have the required permission.
         /// </exception>
         public DirectoryCatalog(string path, ReflectionContext reflectionContext)
-            : this(path, "*.dll", reflectionContext) { }
+            : this(path, "*.dll", reflectionContext)
+        {
+        }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the *.dll files
@@ -145,7 +149,9 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The caller does not have the required permission.
         /// </exception>
         public DirectoryCatalog(string path, ICompositionElement definitionOrigin)
-            : this(path, "*.dll", definitionOrigin) { }
+            : this(path, "*.dll", definitionOrigin)
+        {
+        }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the given searchPattern
@@ -189,7 +195,9 @@ namespace System.ComponentModel.Composition.Hosting
             string path,
             ReflectionContext reflectionContext,
             ICompositionElement definitionOrigin
-        ) : this(path, "*.dll", reflectionContext, definitionOrigin) { }
+        ) : this(path, "*.dll", reflectionContext, definitionOrigin)
+        {
+        }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the *.dll files

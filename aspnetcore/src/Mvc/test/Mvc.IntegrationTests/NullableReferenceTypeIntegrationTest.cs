@@ -151,7 +151,9 @@ public class NullableReferenceTypeIntegrationTest
     }
 
 #nullable enable
-    private void NonNullableParameter(string param1) { }
+    private void NonNullableParameter(string param1)
+    {
+    }
 
 #nullable restore
 

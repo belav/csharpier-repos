@@ -12,9 +12,13 @@ namespace System.Security.Permissions
 #endif
     public sealed class DataProtectionPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public DataProtectionPermission(PermissionState state) { }
+        public DataProtectionPermission(PermissionState state)
+        {
+        }
 
-        public DataProtectionPermission(DataProtectionPermissionFlags flag) { }
+        public DataProtectionPermission(DataProtectionPermissionFlags flag)
+        {
+        }
 
         public bool IsUnrestricted() => false;
 
@@ -37,7 +41,9 @@ namespace System.Security.Permissions
 
         public override bool IsSubsetOf(IPermission target) => false;
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override SecurityElement ToXml()
         {

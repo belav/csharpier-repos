@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
         where TSimpleNameSyntax : TExpressionSyntax
         where TExpressionSyntax : SyntaxNode
     {
-        protected AbstractGenerateVariableService() { }
+        protected AbstractGenerateVariableService()
+        {
+        }
 
         protected abstract bool IsExplicitInterfaceGeneration(SyntaxNode node);
         protected abstract bool IsIdentifierNameGeneration(SyntaxNode node);

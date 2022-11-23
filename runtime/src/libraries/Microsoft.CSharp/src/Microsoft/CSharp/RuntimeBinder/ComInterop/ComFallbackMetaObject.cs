@@ -20,7 +20,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Expression expression,
             BindingRestrictions restrictions,
             object arg
-        ) : base(expression, restrictions, arg) { }
+        ) : base(expression, restrictions, arg)
+        {
+        }
 
         public override DynamicMetaObject BindGetIndex(
             GetIndexBinder binder,
@@ -83,6 +85,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Expression expression,
             BindingRestrictions restrictions,
             object value
-        ) : base(expression, restrictions, value) { }
+        ) : base(expression, restrictions, value)
+        {
+        }
     }
 }

@@ -184,7 +184,9 @@ public class TempDataDictionaryTest
             return null;
         }
 
-        public void SaveTempData(HttpContext context, IDictionary<string, object> values) { }
+        public void SaveTempData(HttpContext context, IDictionary<string, object> values)
+        {
+        }
     }
 
     private class TestTempDataProvider : ITempDataProvider
@@ -201,6 +203,8 @@ public class TempDataDictionaryTest
             return _data;
         }
 
-        public void SaveTempData(HttpContext context, IDictionary<string, object> values) { }
+        public void SaveTempData(HttpContext context, IDictionary<string, object> values)
+        {
+        }
     }
 }

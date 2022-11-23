@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpGoToImplementation() : base(nameof(CSharpGoToImplementation)) { }
+        public CSharpGoToImplementation() : base(nameof(CSharpGoToImplementation))
+        {
+        }
 
         [IdeTheory]
         [CombinatorialData]

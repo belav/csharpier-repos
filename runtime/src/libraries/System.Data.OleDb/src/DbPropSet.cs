@@ -26,7 +26,9 @@ namespace System.Data.OleDb
             this.propertySetCount = propertysetCount;
             nuint countOfBytes = (nuint)(propertysetCount * ODB.SizeOf_tagDBPROPSET);
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 base.handle = Interop.Ole32.CoTaskMemAlloc(countOfBytes);
@@ -277,7 +279,9 @@ namespace System.Data.OleDb
                 );
 
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     // must allocate and clear the memory without interruption

@@ -20,7 +20,9 @@ namespace Internal.Win32.SafeHandles
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />.
         /// </summary>
-        public SafeRegistryHandle() : base(true) { }
+        public SafeRegistryHandle() : base(true)
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" /> around a registry handle.

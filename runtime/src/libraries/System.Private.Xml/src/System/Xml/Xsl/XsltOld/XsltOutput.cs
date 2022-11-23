@@ -142,8 +142,12 @@ namespace System.Xml.Xsl.XsltOld
                         _encoding = System.Text.Encoding.GetEncoding(value);
                         _encodingSId = compiler.Stylesheetid;
                     }
-                    catch (System.NotSupportedException) { }
-                    catch (System.ArgumentException) { }
+                    catch (System.NotSupportedException)
+                    {
+                    }
+                    catch (System.ArgumentException)
+                    {
+                    }
                     Debug.Assert(_encoding != null);
                 }
             }

@@ -35,7 +35,9 @@ namespace System.Globalization.Tests
             string entry,
             string fallbackValue,
             IdnaTestResultType resultType = IdnaTestResultType.ToAscii
-        ) : this(entry, fallbackValue, null, null, useValueForStatus: true, resultType) { }
+        ) : this(entry, fallbackValue, null, null, useValueForStatus: true, resultType)
+        {
+        }
 
         public ConformanceIdnaTestResult(
             string entry,
@@ -51,7 +53,9 @@ namespace System.Globalization.Tests
                 statusFallbackValue,
                 useValueForStatus: false,
                 resultType
-            ) { }
+            )
+        {
+        }
 
         private ConformanceIdnaTestResult(
             string entry,

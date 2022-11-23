@@ -37,11 +37,17 @@ namespace System.Xml.Schema
         //
         // Constructors
         //
-        public SchemaAttDef(XmlQualifiedName name, string? prefix) : base(name, prefix) { }
+        public SchemaAttDef(XmlQualifiedName name, string? prefix) : base(name, prefix)
+        {
+        }
 
-        public SchemaAttDef(XmlQualifiedName name) : base(name, null) { }
+        public SchemaAttDef(XmlQualifiedName name) : base(name, null)
+        {
+        }
 
-        private SchemaAttDef() { }
+        private SchemaAttDef()
+        {
+        }
 
         //
         // IDtdAttributeInfo interface

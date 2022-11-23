@@ -7,7 +7,9 @@ namespace Microsoft.VisualBasic
 {
     internal sealed class VBMemberAttributeConverter : VBModifierAttributeConverter
     {
-        private VBMemberAttributeConverter() { } // no  need to create an instance; use Default
+        private VBMemberAttributeConverter()
+        {
+        } // no  need to create an instance; use Default
 
         public static VBMemberAttributeConverter Default { get; } =
             new VBMemberAttributeConverter();

@@ -26,7 +26,9 @@ public class RdExperienceTests
         }
     }
 
-    public class Bar { }
+    public class Bar
+    {
+    }
 
     [TestMethod]
     public static void TestRdExperience()

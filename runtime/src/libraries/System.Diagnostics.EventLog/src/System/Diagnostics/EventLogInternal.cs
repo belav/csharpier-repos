@@ -118,10 +118,14 @@ namespace System.Diagnostics
         }
 
         public EventLogInternal(string logName, string machineName)
-            : this(logName, machineName, "", null) { }
+            : this(logName, machineName, "", null)
+        {
+        }
 
         public EventLogInternal(string logName, string machineName, string source)
-            : this(logName, machineName, source, null) { }
+            : this(logName, machineName, source, null)
+        {
+        }
 
         public EventLogInternal(string logName, string machineName, string source, EventLog parent)
         {
@@ -591,7 +595,9 @@ namespace System.Diagnostics
                     count = EntryCount + oldest;
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             try
             {
@@ -603,7 +609,9 @@ namespace System.Diagnostics
                 else
                     lastSeenCount = i;
             }
-            catch (Win32Exception) { }
+            catch (Win32Exception)
+            {
+            }
 
             lock (InstanceLockObject)
             {
@@ -912,7 +920,9 @@ namespace System.Diagnostics
             {
                 entry = GetEntryWithOldest(index);
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             return entry;
         }

@@ -15,7 +15,9 @@ namespace Roslyn.Utilities
         public static readonly CharMemoryEqualityComparer Instance =
             new CharMemoryEqualityComparer();
 
-        private CharMemoryEqualityComparer() { }
+        private CharMemoryEqualityComparer()
+        {
+        }
 
         public bool Equals(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y) =>
             x.Span.SequenceEqual(y.Span);

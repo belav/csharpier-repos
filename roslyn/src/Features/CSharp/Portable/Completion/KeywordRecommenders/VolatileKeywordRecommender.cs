@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.StaticKeyword,
         };
 
-        public VolatileKeywordRecommender() : base(SyntaxKind.VolatileKeyword) { }
+        public VolatileKeywordRecommender() : base(SyntaxKind.VolatileKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

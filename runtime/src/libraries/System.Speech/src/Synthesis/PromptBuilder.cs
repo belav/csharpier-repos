@@ -16,7 +16,9 @@ namespace System.Speech.Synthesis
     public class PromptBuilder
     {
         #region Constructors
-        public PromptBuilder() : this(CultureInfo.CurrentUICulture) { }
+        public PromptBuilder() : this(CultureInfo.CurrentUICulture)
+        {
+        }
 
         public PromptBuilder(CultureInfo culture)
         {

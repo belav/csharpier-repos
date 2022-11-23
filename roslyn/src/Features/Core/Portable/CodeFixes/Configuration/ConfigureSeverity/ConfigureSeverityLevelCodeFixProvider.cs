@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public ConfigureSeverityLevelCodeFixProvider() { }
+        public ConfigureSeverityLevelCodeFixProvider()
+        {
+        }
 
         // We only offer fix for configurable diagnostics.
         // Also skip suppressed diagnostics defensively, though the code fix engine should ideally never call us for suppressed diagnostics.

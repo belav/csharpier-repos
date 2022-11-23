@@ -23,5 +23,7 @@ public class DatabaseOperationsTest
         );
     }
 
-    private class TestContext : DbContext { }
+    private class TestContext : DbContext
+    {
+    }
 }

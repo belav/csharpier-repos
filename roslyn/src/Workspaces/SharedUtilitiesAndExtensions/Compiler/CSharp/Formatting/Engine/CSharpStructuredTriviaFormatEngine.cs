@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 formattingRules,
                 startToken,
                 endToken
-            ) { }
+            )
+        {
+        }
 
         internal override IHeaderFacts HeaderFacts => CSharpHeaderFacts.Instance;
 

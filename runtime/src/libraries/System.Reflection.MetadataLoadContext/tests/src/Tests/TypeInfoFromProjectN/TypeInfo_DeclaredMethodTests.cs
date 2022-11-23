@@ -86,17 +86,29 @@ namespace System.Reflection.Tests
             "PubMeth2ToOverride"
         };
 
-        public void PubBaseMeth1() { }
+        public void PubBaseMeth1()
+        {
+        }
 
-        public void PubBaseMeth1(string str) { }
+        public void PubBaseMeth1(string str)
+        {
+        }
 
-        public void PubMeth1() { }
+        public void PubMeth1()
+        {
+        }
 
-        public virtual void PubMeth2() { }
+        public virtual void PubMeth2()
+        {
+        }
 
-        public virtual void PubMeth2ToOverride() { }
+        public virtual void PubMeth2ToOverride()
+        {
+        }
 
-        public static void PubMeth3() { }
+        public static void PubMeth3()
+        {
+        }
     }
 
     public class TypeInfoMethodSubClass : TypeInfoMethodBaseClass
@@ -109,12 +121,20 @@ namespace System.Reflection.Tests
             "PubMeth2ToOverride"
         };
 
-        public new void PubMeth1() { }
+        public new void PubMeth1()
+        {
+        }
 
-        public new virtual void PubMeth2() { }
+        public new virtual void PubMeth2()
+        {
+        }
 
-        public override void PubMeth2ToOverride() { }
+        public override void PubMeth2ToOverride()
+        {
+        }
 
-        public static new void PubMeth3() { }
+        public static new void PubMeth3()
+        {
+        }
     }
 }

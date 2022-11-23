@@ -59,7 +59,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     return new IdentifierInfo(identifierFilter, escapedIdentifierFilter);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 return null;
             }

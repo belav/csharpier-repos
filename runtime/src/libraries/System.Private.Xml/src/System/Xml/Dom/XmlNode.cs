@@ -20,7 +20,9 @@ namespace System.Xml
     {
         internal XmlNode? parentNode; //this pointer is reused to save the userdata information, need to prevent internal user access the pointer directly.
 
-        internal XmlNode() { }
+        internal XmlNode()
+        {
+        }
 
         internal XmlNode(XmlDocument doc)
         {
@@ -217,7 +219,9 @@ namespace System.Xml
         internal virtual XmlLinkedNode? LastNode
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         internal bool AncestorNode(XmlNode node)
@@ -857,7 +861,9 @@ namespace System.Xml
         public virtual string Prefix
         {
             get { return string.Empty; }
-            set { }
+            set
+            {
+            }
         }
 
         // Gets the name of the node without the namespace prefix.

@@ -30,7 +30,9 @@ public class LevelOneController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class LevelTwoController : TestODataController, IDisposable
@@ -55,7 +57,9 @@ public class LevelTwoController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class LevelThreeController : TestODataController, IDisposable
@@ -80,7 +84,9 @@ public class LevelThreeController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class LevelFourController : TestODataController, IDisposable
@@ -105,5 +111,7 @@ public class LevelFourController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

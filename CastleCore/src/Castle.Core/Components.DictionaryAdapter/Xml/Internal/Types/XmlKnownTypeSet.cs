@@ -122,7 +122,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             public static readonly XmlIdentityComparer Instance = new XmlIdentityComparer();
 
-            private XmlIdentityComparer() { }
+            private XmlIdentityComparer()
+            {
+            }
 
             public bool Equals(IXmlIdentity x, IXmlIdentity y)
             {
@@ -159,7 +161,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             public static readonly XmlKnownTypeNameComparer Instance =
                 new XmlKnownTypeNameComparer();
 
-            private XmlKnownTypeNameComparer() { }
+            private XmlKnownTypeNameComparer()
+            {
+            }
 
             public bool Equals(IXmlKnownType knownTypeA, IXmlKnownType knownTypeB)
             {

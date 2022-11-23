@@ -11,7 +11,9 @@ namespace DebuggerTests
 {
     public class DateTimeTests : DebuggerTests
     {
-        public DateTimeTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public DateTimeTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         [Theory]
         [InlineData(

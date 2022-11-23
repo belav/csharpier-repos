@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public sealed class DisposableFile : TempFile, IDisposable
     {
-        public DisposableFile(string path) : base(path) { }
+        public DisposableFile(string path) : base(path)
+        {
+        }
 
         public DisposableFile(
             string prefix = null,
@@ -22,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string directory = null,
             string callerSourcePath = null,
             int callerLineNumber = 0
-        ) : base(prefix, extension, directory, callerSourcePath, callerLineNumber) { }
+        ) : base(prefix, extension, directory, callerSourcePath, callerLineNumber)
+        {
+        }
 
         public void Dispose()
         {

@@ -202,7 +202,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpAddImportCodeFixProvider() { }
+        public CSharpAddImportCodeFixProvider()
+        {
+        }
 
         /// <summary>For testing purposes only (so that tests can pass in mock values)</summary>
         [SuppressMessage(
@@ -213,6 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         internal CSharpAddImportCodeFixProvider(
             IPackageInstallerService installerService,
             ISymbolSearchService symbolSearchService
-        ) : base(installerService, symbolSearchService) { }
+        ) : base(installerService, symbolSearchService)
+        {
+        }
     }
 }

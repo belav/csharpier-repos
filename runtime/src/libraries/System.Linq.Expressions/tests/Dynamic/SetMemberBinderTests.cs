@@ -14,7 +14,9 @@ namespace System.Dynamic.Tests
         private class MinimumOverrideSetMemberBinder : SetMemberBinder
         {
             public MinimumOverrideSetMemberBinder(string name, bool ignoreCase)
-                : base(name, ignoreCase) { }
+                : base(name, ignoreCase)
+            {
+            }
 
             public override DynamicMetaObject FallbackSetMember(
                 DynamicMetaObject target,

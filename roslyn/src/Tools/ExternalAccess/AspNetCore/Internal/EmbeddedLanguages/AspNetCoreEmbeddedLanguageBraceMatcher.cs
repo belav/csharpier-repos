@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AspNetCoreEmbeddedLanguageBraceMatcher() { }
+        public AspNetCoreEmbeddedLanguageBraceMatcher()
+        {
+        }
 
         public BraceMatchingResult? FindBraces(
             Project project,

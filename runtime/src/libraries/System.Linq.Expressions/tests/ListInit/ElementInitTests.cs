@@ -13,28 +13,38 @@ namespace System.Linq.Expressions.Tests
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
         private class ParameterlessAdd
         {
-            public void Add() { }
+            public void Add()
+            {
+            }
         }
 
         private class StaticAdd
         {
-            public static void Add(int value) { }
+            public static void Add(int value)
+            {
+            }
         }
 
         private class ByRefAdd
         {
-            public static void Add(ref int value) { }
+            public static void Add(ref int value)
+            {
+            }
         }
 
         private class GenericAdd
         {
-            public static void Add<T>(T value) { }
+            public static void Add<T>(T value)
+            {
+            }
         }
 
         [Fact]

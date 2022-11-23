@@ -12,7 +12,9 @@ namespace System.Runtime.Intrinsics.Arm
     [CLSCompliant(false)]
     public abstract class Rdm : AdvSimd
     {
-        internal Rdm() { }
+        internal Rdm()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -22,7 +24,9 @@ namespace System.Runtime.Intrinsics.Arm
         [Intrinsic]
         public new abstract class Arm64 : AdvSimd.Arm64
         {
-            internal Arm64() { }
+            internal Arm64()
+            {
+            }
 
             public static new bool IsSupported
             {

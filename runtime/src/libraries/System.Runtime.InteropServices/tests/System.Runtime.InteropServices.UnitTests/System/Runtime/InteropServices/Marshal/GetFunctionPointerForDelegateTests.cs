@@ -151,6 +151,8 @@ namespace System.Runtime.InteropServices.Tests
         public delegate void NonGenericDelegate(string t);
         public delegate void NoArgsDelegate();
 
-        private static void Method(string s) { }
+        private static void Method(string s)
+        {
+        }
     }
 }

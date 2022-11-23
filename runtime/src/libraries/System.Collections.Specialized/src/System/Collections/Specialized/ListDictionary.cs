@@ -23,7 +23,9 @@ namespace System.Collections.Specialized
         private int count; // Do not rename (binary serialization)
         private readonly IComparer? comparer; // Do not rename (binary serialization)
 
-        public ListDictionary() { }
+        public ListDictionary()
+        {
+        }
 
         public ListDictionary(IComparer? comparer)
         {

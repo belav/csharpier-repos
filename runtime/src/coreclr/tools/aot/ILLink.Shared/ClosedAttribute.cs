@@ -10,6 +10,8 @@ namespace StaticCs
     [Conditional("EMIT_STATICCS_CLOSEDATTRIBUTE")]
     internal sealed class ClosedAttribute : Attribute
     {
-        public ClosedAttribute() { }
+        public ClosedAttribute()
+        {
+        }
     }
 }

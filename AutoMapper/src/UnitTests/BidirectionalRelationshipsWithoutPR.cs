@@ -7,7 +7,9 @@ public class CyclesWithInheritance : AutoMapperSpecBase
         public FlowNode[] Nodes;
     }
 
-    class FlowNode { }
+    class FlowNode
+    {
+    }
 
     class FlowStep : FlowNode
     {

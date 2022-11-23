@@ -68,11 +68,15 @@ public class ApiConventionResultTest
         [ProducesResponseType(200)]
         [ProducesResponseType(202)]
         [ProducesResponseType(404)]
-        public static void Get(int id) { }
+        public static void Get(int id)
+        {
+        }
 
         [ProducesResponseType(201)]
         [ProducesResponseType(403)]
-        public static void Match(int id) { }
+        public static void Match(int id)
+        {
+        }
     }
 
     [Fact]
@@ -259,5 +263,7 @@ public class ApiConventionResultTest
         public IActionResult EditUser(int id, User user) => null;
     }
 
-    public class User { }
+    public class User
+    {
+    }
 }

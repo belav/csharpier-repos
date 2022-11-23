@@ -150,7 +150,9 @@ namespace System.IO.Ports.Tests
                     s_DEFAULT_WRITE_BYTE_ARRAY_SIZE
                 );
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             return bufferSize;
         }
 
@@ -162,7 +164,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(charsToWrite, 0, charsToWrite.Length);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             return com.Encoding.GetByteCount(charsToWrite);
         }
 
@@ -172,7 +176,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(s_DEFAULT_STRING_TO_WRITE);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             return com.Encoding.GetByteCount(s_DEFAULT_STRING_TO_WRITE.ToCharArray());
         }
 
@@ -182,7 +188,9 @@ namespace System.IO.Ports.Tests
             {
                 com.WriteLine(s_DEFAULT_STRING_TO_WRITE);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
             return com.Encoding.GetByteCount(s_DEFAULT_STRING_TO_WRITE.ToCharArray())
                 + com.Encoding.GetByteCount(com.NewLine.ToCharArray());
         }

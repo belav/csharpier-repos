@@ -12,7 +12,9 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class HttpClientHandler_AltSvc_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_AltSvc_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_AltSvc_Test(ITestOutputHelper output) : base(output)
+        {
+        }
 
         /// <summary>
         /// HTTP/3 tests by default use prenegotiated HTTP/3. To test Alt-Svc upgrades, that must be disabled.

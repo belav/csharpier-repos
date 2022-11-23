@@ -529,7 +529,9 @@ public class GenericParameterViewComponent
     public string Invoke(List<string> Foo, Dictionary<string, int> Bar) => null;
 }
 
-public class ViewComponentWithoutInvokeMethod { }
+public class ViewComponentWithoutInvokeMethod
+{
+}
 
 public class AsyncViewComponentWithGenericTask
 {
@@ -543,7 +545,9 @@ public class AsyncViewComponentWithNonGenericTask
 
 public class AsyncViewComponentWithVoid
 {
-    public void InvokeAsync() { }
+    public void InvokeAsync()
+    {
+    }
 }
 
 public class AsyncViewComponentWithString
@@ -553,7 +557,9 @@ public class AsyncViewComponentWithString
 
 public class SyncViewComponentWithVoid
 {
-    public void Invoke() { }
+    public void Invoke()
+    {
+    }
 }
 
 public class SyncViewComponentWithNonGenericTask
@@ -566,9 +572,13 @@ public class SyncViewComponentWithGenericTask
     public Task<string> Invoke() => null;
 }
 
-public class SyncDerivedViewComponent : StringParameterViewComponent { }
+public class SyncDerivedViewComponent : StringParameterViewComponent
+{
+}
 
-public class AsyncDerivedViewComponent : AsyncViewComponentWithNonGenericTask { }
+public class AsyncDerivedViewComponent : AsyncViewComponentWithNonGenericTask
+{
+}
 
 public class DerivedViewComponentWithAmbiguity : AsyncViewComponentWithNonGenericTask
 {

@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioRemoteHostClientShutdownCancellationService() { }
+        public VisualStudioRemoteHostClientShutdownCancellationService()
+        {
+        }
 
         public CancellationToken ShutdownToken => VsShellUtilities.ShutdownToken;
     }

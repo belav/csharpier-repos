@@ -14,7 +14,9 @@ using System.Runtime.CompilerServices;
 class DevDiv_714266
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void CallWithoutUsesAndDefs() { }
+    public static void CallWithoutUsesAndDefs()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void MethodWithManyLiveVectors()

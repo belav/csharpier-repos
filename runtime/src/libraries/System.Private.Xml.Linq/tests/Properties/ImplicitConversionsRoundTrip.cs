@@ -343,7 +343,9 @@ namespace CoreXml.Test.XLinq
                         el.SetValue(null);
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
                 }
 
                 //[Variation(Desc = "XAttribute.SetValue(null)")]
@@ -355,7 +357,9 @@ namespace CoreXml.Test.XLinq
                         a.SetValue(null);
                         throw new TestException(TestResult.Failed, "");
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
                 }
 
                 //[Variation(Desc = "Conversion to bool overloads (1,True,true)", Params = new object[] { true, new string[] { "1", "True", "true","TRUE", " TRue " } })]

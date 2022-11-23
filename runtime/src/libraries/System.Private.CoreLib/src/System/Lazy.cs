@@ -231,7 +231,8 @@ namespace System
         /// </remarks>
         public Lazy()
             : this(null, LazyThreadSafetyMode.ExecutionAndPublication, useDefaultConstructor: true)
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Lazy{T}"/> class that
@@ -264,7 +265,9 @@ namespace System
                 valueFactory,
                 LazyThreadSafetyMode.ExecutionAndPublication,
                 useDefaultConstructor: false
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Lazy{T}"/>
@@ -277,7 +280,9 @@ namespace System
                 null,
                 LazyHelper.GetModeFromIsThreadSafe(isThreadSafe),
                 useDefaultConstructor: true
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Lazy{T}"/>
@@ -285,7 +290,9 @@ namespace System
         /// </summary>
         /// <param name="mode">The lazy thread-safety mode</param>
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="mode"/> mode contains an invalid valuee</exception>
-        public Lazy(LazyThreadSafetyMode mode) : this(null, mode, useDefaultConstructor: true) { }
+        public Lazy(LazyThreadSafetyMode mode) : this(null, mode, useDefaultConstructor: true)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Lazy{T}"/> class
@@ -303,7 +310,9 @@ namespace System
                 valueFactory,
                 LazyHelper.GetModeFromIsThreadSafe(isThreadSafe),
                 useDefaultConstructor: false
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Lazy{T}"/> class
@@ -317,7 +326,9 @@ namespace System
         /// a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="mode"/> mode contains an invalid value.</exception>
         public Lazy(Func<T> valueFactory, LazyThreadSafetyMode mode)
-            : this(valueFactory, mode, useDefaultConstructor: false) { }
+            : this(valueFactory, mode, useDefaultConstructor: false)
+        {
+        }
 
         private Lazy(Func<T>? valueFactory, LazyThreadSafetyMode mode, bool useDefaultConstructor)
         {

@@ -37,7 +37,9 @@ namespace Test
             {
                 AA.Static3();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

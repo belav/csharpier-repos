@@ -13,7 +13,9 @@ namespace System.Composition.UnitTests
 {
     public class ContractTests
     {
-        private class AType { }
+        private class AType
+        {
+        }
 
         private static readonly Type s_defaultContractType = typeof(AType);
 

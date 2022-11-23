@@ -30,7 +30,9 @@ namespace TestUtil
             this._bufferIsFull = false;
         }
 
-        public StringRecorder(TextWriter ostream) : this(ostream, 0) { }
+        public StringRecorder(TextWriter ostream) : this(ostream, 0)
+        {
+        }
 
         // Only these three methods need to be overridden in order to override
         // all different overloads of Write/WriteLine methods.
@@ -97,9 +99,13 @@ namespace TestUtil
         protected StringWriter testOut;
         protected StringWriter testError;
 
-        public TestLog() : this(null, null) { }
+        public TestLog() : this(null, null)
+        {
+        }
 
-        public TestLog(object expOut) : this(expOut, null) { }
+        public TestLog(object expOut) : this(expOut, null)
+        {
+        }
 
         // Creates a new TestLog and set both expected output, and
         // expected error to supplied values.

@@ -49,7 +49,9 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
         public string firstName = "John";
         public string lastName = "Smith";
 
-        internal NonAttributedPersonClass() { }
+        internal NonAttributedPersonClass()
+        {
+        }
     }
 
     public class ExtendedSquare : Square
@@ -88,15 +90,21 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     }
 
     [DataContract(IsReference = true)]
-    public class RefType1 { }
+    public class RefType1
+    {
+    }
 
     [DataContract]
-    public class NonRefType { }
+    public class NonRefType
+    {
+    }
 
     [Serializable]
     public class ISerializableFormatClass : ISerializable
     {
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 
 #pragma warning disable CS0169, IDE0051, IDE1006
@@ -104,7 +112,9 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     [XmlRoot("XmlSerializerPersonElement")]
     public class XmlSerializerPerson
     {
-        public XmlSerializerPerson() { }
+        public XmlSerializerPerson()
+        {
+        }
 
         [XmlAttribute]
         public string Name;
@@ -120,7 +130,9 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
         public SerializableCircle Circle
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         [DataMember]

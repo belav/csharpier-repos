@@ -554,7 +554,9 @@ namespace System.Linq.Parallel
     {
         public static readonly ProducerComparerInt Instance = new ProducerComparerInt();
 
-        private ProducerComparerInt() { }
+        private ProducerComparerInt()
+        {
+        }
 
         public int Compare(Producer<int> x, Producer<int> y)
         {

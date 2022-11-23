@@ -98,7 +98,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e)) { }
+                catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e))
+                {
+                }
 
                 return false;
             }
@@ -157,7 +159,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e)) { }
+                catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e))
+                {
+                }
 
                 return false;
             }
@@ -218,7 +222,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     {
                         throw new ArgumentOutOfRangeException();
                     }
-                    catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e)) { }
+                    catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e))
+                    {
+                    }
                 }
 
                 return text.GetVsTextSpanForSpan(boundedTextSpan);
@@ -307,7 +313,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     {
                         throw new ArgumentOutOfRangeException();
                     }
-                    catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e)) { }
+                    catch (ArgumentOutOfRangeException e) when (FatalError.ReportAndCatch(e))
+                    {
+                    }
                 }
 
                 return text.GetVsTextSpanForPosition(boundedPosition, virtualSpace);

@@ -754,7 +754,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 serializationProperties,
                 manifestResources,
                 ImmutableArray<NamedTypeSymbol>.Empty
-            ) { }
+            )
+        {
+        }
 
         public override EmitBaseline? PreviousGeneration => null;
         public override SymbolChanges? EncSymbolChanges => null;

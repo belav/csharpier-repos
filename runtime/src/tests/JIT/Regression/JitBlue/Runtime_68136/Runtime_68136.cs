@@ -13,7 +13,9 @@ public class Program
             var vr1 = (uint)((int)M2(ref s_1, 0) % (long)1);
             M2(ref s_1, vr1);
         }
-        catch (System.Exception) { }
+        catch (System.Exception)
+        {
+        }
 
         return 100;
     }

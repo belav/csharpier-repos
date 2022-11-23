@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private class RangeVariableMap : Dictionary<RangeVariableSymbol, ImmutableArray<string>>
         {
-            public RangeVariableMap() { }
+            public RangeVariableMap()
+            {
+            }
         }
     }
 }

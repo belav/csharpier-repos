@@ -19,9 +19,13 @@ Generic virtual methods:
 
 using System;
 
-public class A<T> { }
+public class A<T>
+{
+}
 
-public struct S<T> { }
+public struct S<T>
+{
+}
 
 public interface I
 {

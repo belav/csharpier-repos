@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider()
-            : this(pickMembersService: null) { }
+            : this(pickMembersService: null)
+        {
+        }
 
         [SuppressMessage(
             "RoslynDiagnosticsReliability",

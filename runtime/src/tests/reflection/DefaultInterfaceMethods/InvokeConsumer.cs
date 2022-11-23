@@ -92,7 +92,8 @@ class Program
             return 501;
         }
         catch (TargetInvocationException ie) when (ie.InnerException is EntryPointNotFoundException)
-        { }
+        {
+        }
 
         return 100;
     }

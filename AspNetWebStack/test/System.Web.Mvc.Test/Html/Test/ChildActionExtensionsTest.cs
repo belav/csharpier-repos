@@ -595,13 +595,17 @@ namespace System.Web.Mvc.Html.Test
         [Route("controller/{action}")]
         private class DirectRouteController : Controller
         {
-            public void Action() { }
+            public void Action()
+            {
+            }
         }
 
         private class DirectRouteActionController : Controller
         {
             [Route("controller/Action")]
-            public void Action() { }
+            public void Action()
+            {
+            }
         }
     }
 }

@@ -5,7 +5,9 @@ namespace System.CodeDom
 {
     public class CodeTryCatchFinallyStatement : CodeStatement
     {
-        public CodeTryCatchFinallyStatement() { }
+        public CodeTryCatchFinallyStatement()
+        {
+        }
 
         public CodeTryCatchFinallyStatement(
             CodeStatement[] tryStatements,

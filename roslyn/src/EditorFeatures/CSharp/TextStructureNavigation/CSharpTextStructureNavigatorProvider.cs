@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
             ITextStructureNavigatorSelectorService selectorService,
             IContentTypeRegistryService contentTypeService,
             IUIThreadOperationExecutor uIThreadOperationExecutor
-        ) : base(selectorService, contentTypeService, uIThreadOperationExecutor) { }
+        ) : base(selectorService, contentTypeService, uIThreadOperationExecutor)
+        {
+        }
 
         protected override bool ShouldSelectEntireTriviaFromStart(SyntaxTrivia trivia) =>
             trivia.IsRegularOrDocComment();

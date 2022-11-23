@@ -31,7 +31,9 @@ namespace Castle.Services.Logging.NLogIntegration
         ///   Configures NLog with a config file name 'nlog.config'
         ///   <seealso cref="Create(string)" />
         /// </summary>
-        public ExtendedNLogFactory() : this(NLogFactory.defaultConfigFileName) { }
+        public ExtendedNLogFactory() : this(NLogFactory.defaultConfigFileName)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="ExtendedNLogFactory" /> class with the configfile specified by <paramref

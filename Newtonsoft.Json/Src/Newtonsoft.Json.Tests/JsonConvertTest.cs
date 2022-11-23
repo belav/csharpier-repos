@@ -1663,7 +1663,9 @@ namespace Newtonsoft.Json.Tests
             }
 
             public ClobberingJsonConverter(string clobberValueString)
-                : this(clobberValueString, 1337) { }
+                : this(clobberValueString, 1337)
+            {
+            }
 
             public override void WriteJson(
                 JsonWriter writer,
@@ -2083,10 +2085,14 @@ namespace Newtonsoft.Json.Tests
             int _precision;
             MidpointRounding _rounding;
 
-            public RoundingJsonConverter() : this(2) { }
+            public RoundingJsonConverter() : this(2)
+            {
+            }
 
             public RoundingJsonConverter(int precision)
-                : this(precision, MidpointRounding.AwayFromZero) { }
+                : this(precision, MidpointRounding.AwayFromZero)
+            {
+            }
 
             public RoundingJsonConverter(int precision, MidpointRounding rounding)
             {
@@ -2141,7 +2147,9 @@ namespace Newtonsoft.Json.Tests
             public override string Data { get; set; }
         }
 
-        public class NonGenericChildClass : GenericIntermediateClass<int> { }
+        public class NonGenericChildClass : GenericIntermediateClass<int>
+        {
+        }
 
         [Test]
         public void ShouldNotPopulateReadOnlyEnumerableObjectWithNonDefaultConstructor()
@@ -2195,7 +2203,9 @@ namespace Newtonsoft.Json.Tests
                 new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
 
             [JsonConstructor]
-            public HasReadOnlyDictionary([JsonProperty("bar")] int bar) { }
+            public HasReadOnlyDictionary([JsonProperty("bar")] int bar)
+            {
+            }
         }
 #endif
 
@@ -2205,7 +2215,9 @@ namespace Newtonsoft.Json.Tests
             public EnumerableWithConverter Foo { get; } = new EnumerableWithConverter();
 
             [JsonConstructor]
-            public HasReadOnlyEnumerableObject([JsonProperty("bar")] int bar) { }
+            public HasReadOnlyEnumerableObject([JsonProperty("bar")] int bar)
+            {
+            }
         }
 
         public sealed class HasReadOnlyEnumerableObjectAndDefaultConstructor
@@ -2214,7 +2226,9 @@ namespace Newtonsoft.Json.Tests
             public EnumerableWithConverter Foo { get; } = new EnumerableWithConverter();
 
             [JsonConstructor]
-            public HasReadOnlyEnumerableObjectAndDefaultConstructor() { }
+            public HasReadOnlyEnumerableObjectAndDefaultConstructor()
+            {
+            }
         }
 
         public sealed class AcceptsEnumerableObjectToConstructor
@@ -2223,7 +2237,9 @@ namespace Newtonsoft.Json.Tests
             public AcceptsEnumerableObjectToConstructor(
                 [JsonProperty("foo")] EnumerableWithConverter foo,
                 [JsonProperty("bar")] int bar
-            ) { }
+            )
+            {
+            }
         }
 
         public sealed class HasEnumerableObject
@@ -2232,7 +2248,9 @@ namespace Newtonsoft.Json.Tests
             public EnumerableWithConverter Foo { get; set; } = new EnumerableWithConverter();
 
             [JsonConstructor]
-            public HasEnumerableObject([JsonProperty("bar")] int bar) { }
+            public HasEnumerableObject([JsonProperty("bar")] int bar)
+            {
+            }
         }
 
         [JsonConverter(typeof(Converter))]

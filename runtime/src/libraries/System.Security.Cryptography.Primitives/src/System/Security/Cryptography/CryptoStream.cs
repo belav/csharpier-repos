@@ -31,7 +31,9 @@ namespace System.Security.Cryptography
         // Constructors
 
         public CryptoStream(Stream stream, ICryptoTransform transform, CryptoStreamMode mode)
-            : this(stream, transform, mode, false) { }
+            : this(stream, transform, mode, false)
+        {
+        }
 
         public CryptoStream(
             Stream stream,

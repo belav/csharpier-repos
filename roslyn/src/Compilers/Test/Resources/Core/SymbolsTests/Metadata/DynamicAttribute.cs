@@ -4,17 +4,25 @@
 
 // csc /t:library /unsafe DynamicAttribute.cs
 
-public class Base0 { }
+public class Base0
+{
+}
 
-public class Base1<T> { }
+public class Base1<T>
+{
+}
 
-public class Base2<T, U> { }
+public class Base2<T, U>
+{
+}
 
 public class Outer<T> : Base1<dynamic>
 {
     public class Inner<U, V> : Base2<dynamic, V>
     {
-        public class InnerInner<W> : Base1<dynamic> { }
+        public class InnerInner<W> : Base1<dynamic>
+        {
+        }
     }
 }
 
@@ -22,7 +30,9 @@ public class Outer2<T> : Base1<dynamic>
 {
     public class Inner2<U, V> : Base0
     {
-        public class InnerInner2<W> : Base0 { }
+        public class InnerInner2<W> : Base0
+        {
+        }
     }
 }
 
@@ -119,7 +129,9 @@ public unsafe class UnsafeClass<T>
             Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[],
             dynamic
         >.InnerInner<dynamic>[][]
-    > { }
+    >
+{
+}
 
 public struct Struct
 {

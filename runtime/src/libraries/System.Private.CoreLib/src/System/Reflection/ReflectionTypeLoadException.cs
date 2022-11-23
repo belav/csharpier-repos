@@ -14,7 +14,9 @@ namespace System.Reflection
     public sealed class ReflectionTypeLoadException : SystemException, ISerializable
     {
         public ReflectionTypeLoadException(Type?[]? classes, Exception?[]? exceptions)
-            : this(classes, exceptions, null) { }
+            : this(classes, exceptions, null)
+        {
+        }
 
         public ReflectionTypeLoadException(
             Type?[]? classes,

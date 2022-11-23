@@ -1347,7 +1347,9 @@ public abstract class UserStoreBase<
     /// Creates a new instance.
     /// </summary>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/> used to describe store errors.</param>
-    public UserStoreBase(IdentityErrorDescriber describer) : base(describer) { }
+    public UserStoreBase(IdentityErrorDescriber describer) : base(describer)
+    {
+    }
 
     /// <summary>
     /// Called to create a new instance of a <see cref="IdentityUserRole{TKey}"/>.

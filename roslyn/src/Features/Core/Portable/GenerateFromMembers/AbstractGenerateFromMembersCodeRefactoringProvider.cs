@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
     internal abstract partial class AbstractGenerateFromMembersCodeRefactoringProvider
         : CodeRefactoringProvider
     {
-        protected AbstractGenerateFromMembersCodeRefactoringProvider() { }
+        protected AbstractGenerateFromMembersCodeRefactoringProvider()
+        {
+        }
 
         protected static async Task<SelectedMemberInfo?> GetSelectedMemberInfoAsync(
             Document document,

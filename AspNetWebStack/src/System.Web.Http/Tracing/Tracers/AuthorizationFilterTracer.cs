@@ -22,7 +22,9 @@ namespace System.Web.Http.Tracing.Tracers
             "ExecuteAuthorizationFilterAsync";
 
         public AuthorizationFilterTracer(IAuthorizationFilter innerFilter, ITraceWriter traceWriter)
-            : base(innerFilter, traceWriter) { }
+            : base(innerFilter, traceWriter)
+        {
+        }
 
         public new IAuthorizationFilter Inner
         {

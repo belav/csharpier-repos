@@ -29,11 +29,17 @@ public static class Program
 
         public override long Seek(long offset, SeekOrigin origin) => 0;
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override IAsyncResult BeginRead(
             byte[] buffer,

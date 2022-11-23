@@ -18,7 +18,9 @@ namespace ArrayTests
     {
         public string m_Member;
 
-        public SomeClassForArrayTests() { }
+        public SomeClassForArrayTests()
+        {
+        }
 
         public override string ToString()
         {

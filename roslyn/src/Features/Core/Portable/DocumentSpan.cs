@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis
         public ImmutableDictionary<string, object>? Properties { get; }
 
         public DocumentSpan(Document document, TextSpan sourceSpan)
-            : this(document, sourceSpan, properties: null) { }
+            : this(document, sourceSpan, properties: null)
+        {
+        }
 
         public DocumentSpan(
             Document document,

@@ -40,7 +40,9 @@ namespace System.Xml.XslTransformApiTests
             return;
         }
 
-        protected virtual void Load(string _strXslFile, string _strXmlFile) { }
+        protected virtual void Load(string _strXslFile, string _strXmlFile)
+        {
+        }
 
         public virtual int Transform(object args)
         {

@@ -9,13 +9,21 @@ namespace System.ComponentModel.Composition.Hosting
 {
     public class FilteredCatalogTransitiveClosureTests
     {
-        public interface IContract1 { }
+        public interface IContract1
+        {
+        }
 
-        public interface IContract2 { }
+        public interface IContract2
+        {
+        }
 
-        public interface IContract3 { }
+        public interface IContract3
+        {
+        }
 
-        public interface IOther { }
+        public interface IOther
+        {
+        }
 
         [Fact]
         public void IncludeDependentsSimpleChain()
@@ -407,13 +415,19 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [Export(typeof(IContract1))]
-        public class Exporter1 : IContract1 { }
+        public class Exporter1 : IContract1
+        {
+        }
 
         [Export(typeof(IContract2))]
-        public class Exporter2 : IContract2 { }
+        public class Exporter2 : IContract2
+        {
+        }
 
         [Export(typeof(IContract3))]
-        public class Exporter3 : IContract3 { }
+        public class Exporter3 : IContract3
+        {
+        }
 
         [Export(typeof(IContract2))]
         public class Exporter2Import1 : IContract2
@@ -485,7 +499,9 @@ namespace System.ComponentModel.Composition.Hosting
             public IContract3 Import { get; set; }
         }
 
-        public interface IContract<T1, T2> { }
+        public interface IContract<T1, T2>
+        {
+        }
 
         [Export(typeof(IContract<,>))]
         public class OpenGenericExporter<T1, T2> : IContract<T1, T2>

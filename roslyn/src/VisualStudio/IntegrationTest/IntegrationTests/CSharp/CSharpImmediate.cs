@@ -21,7 +21,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpImmediate(VisualStudioInstanceFactory instanceFactory) : base(instanceFactory)
-        { }
+        {
+        }
 
         public override async Task InitializeAsync()
         {

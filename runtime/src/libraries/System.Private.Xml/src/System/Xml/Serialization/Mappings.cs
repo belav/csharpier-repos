@@ -32,7 +32,9 @@ namespace System.Xml.Serialization
         private bool _isOptional;
         private XmlSchemaForm _form = XmlSchemaForm.None;
 
-        internal Accessor() { }
+        internal Accessor()
+        {
+        }
 
         internal TypeMapping? Mapping
         {
@@ -215,9 +217,13 @@ namespace System.Xml.Serialization
         }
     }
 
-    internal sealed class TextAccessor : Accessor { }
+    internal sealed class TextAccessor : Accessor
+    {
+    }
 
-    internal sealed class XmlnsAccessor : Accessor { }
+    internal sealed class XmlnsAccessor : Accessor
+    {
+    }
 
     internal sealed class AttributeAccessor : Accessor
     {
@@ -271,7 +277,9 @@ namespace System.Xml.Serialization
     {
         private bool _isSoap;
 
-        internal Mapping() { }
+        internal Mapping()
+        {
+        }
 
         protected Mapping(Mapping mapping)
         {
@@ -333,7 +341,9 @@ namespace System.Xml.Serialization
         internal virtual bool IsList
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
 
         internal bool IsReference
@@ -761,7 +771,9 @@ namespace System.Xml.Serialization
         private XmlnsAccessor? _xmlns;
         private bool _ignore;
 
-        internal AccessorMapping() { }
+        internal AccessorMapping()
+        {
+        }
 
         protected AccessorMapping(AccessorMapping mapping) : base(mapping)
         {
@@ -986,7 +998,9 @@ namespace System.Xml.Serialization
         private MemberInfo? _checkSpecifiedMemberInfo;
         private MethodInfo? _checkShouldPersistMethodInfo;
 
-        internal MemberMapping() { }
+        internal MemberMapping()
+        {
+        }
 
         private MemberMapping(MemberMapping mapping) : base(mapping)
         {
@@ -1137,7 +1151,9 @@ namespace System.Xml.Serialization
         private SerializableMapping? _nextDerivedMapping;
         private SerializableMapping? _next; // all mappings with the same qname
 
-        internal SerializableMapping() { }
+        internal SerializableMapping()
+        {
+        }
 
         internal SerializableMapping(MethodInfo getSchemaMethod, bool any, string? ns)
         {

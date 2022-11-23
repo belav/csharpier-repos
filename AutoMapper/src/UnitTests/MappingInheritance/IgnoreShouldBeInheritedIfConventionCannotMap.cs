@@ -2,13 +2,21 @@
 
 public class IgnoreShouldBeInheritedIfConventionCannotMap
 {
-    public class BaseDomain { }
+    public class BaseDomain
+    {
+    }
 
-    public class StandardDomain : BaseDomain { }
+    public class StandardDomain : BaseDomain
+    {
+    }
 
-    public class SpecificDomain : StandardDomain { }
+    public class SpecificDomain : StandardDomain
+    {
+    }
 
-    public class MoreSpecificDomain : SpecificDomain { }
+    public class MoreSpecificDomain : SpecificDomain
+    {
+    }
 
     public class Dto
     {

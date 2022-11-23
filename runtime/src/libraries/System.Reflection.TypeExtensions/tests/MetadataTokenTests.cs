@@ -22,14 +22,20 @@ namespace System.Reflection.Tests
             );
         }
 
-        private class Test<T> { }
+        private class Test<T>
+        {
+        }
 
         public int Field;
         public int Property { get; set; }
         public event EventHandler Event
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public static readonly object[][] MembersWithExpectedTableIndex = new object[][]

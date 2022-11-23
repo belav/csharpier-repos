@@ -16,7 +16,9 @@ namespace System.Data.Common
         private SqlInt32[] _values = default!; // Late-initialized
 
         public SqlInt32Storage(DataColumn column)
-            : base(column, typeof(SqlInt32), SqlInt32.Null, SqlInt32.Null, StorageType.SqlInt32) { }
+            : base(column, typeof(SqlInt32), SqlInt32.Null, SqlInt32.Null, StorageType.SqlInt32)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

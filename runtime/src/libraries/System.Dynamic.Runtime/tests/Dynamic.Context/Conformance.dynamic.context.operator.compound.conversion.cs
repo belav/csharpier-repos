@@ -438,7 +438,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     {
         private int _f1 = 10;
 
-        public Test() { }
+        public Test()
+        {
+        }
 
         public Test(int p1)
         {

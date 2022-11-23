@@ -10,7 +10,9 @@ namespace Test
     {
         bool m_b;
 
-        static void Static1(BB param3, ref bool param5) { }
+        static void Static1(BB param3, ref bool param5)
+        {
+        }
 
         static int Main()
         {

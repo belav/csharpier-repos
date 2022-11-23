@@ -129,11 +129,15 @@ namespace System.Linq.Tests
 
             public bool MoveNext() => true;
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
             object IEnumerator.Current => default(T);
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public T Current => default(T);
         }
@@ -242,7 +246,9 @@ namespace System.Linq.Tests
 
             object IEnumerator.Current => Current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public virtual IEnumerator<int> GetEnumerator() => this;
 
@@ -366,11 +372,15 @@ namespace System.Linq.Tests
             {
                 CountWorker = () => 0;
                 IsReadOnlyWorker = () => false;
-                AddWorker = item => { };
-                ClearWorker = () => { };
+                AddWorker = item =>
+                {
+                };
+                ClearWorker = () => {
+                };
                 ContainsWorker = item => false;
                 RemoveWorker = item => false;
-                CopyToWorker = (array, arrayIndex) => { };
+                CopyToWorker = (array, arrayIndex) => {
+                };
                 GetEnumeratorWorker = () => Enumerable.Empty<T>().GetEnumerator();
                 NonGenericGetEnumeratorWorker = () => GetEnumeratorWorker();
             }

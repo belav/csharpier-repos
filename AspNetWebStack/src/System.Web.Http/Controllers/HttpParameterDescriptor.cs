@@ -20,7 +20,9 @@ namespace System.Web.Http.Controllers
         private HttpConfiguration _configuration;
         private HttpActionDescriptor _actionDescriptor;
 
-        protected HttpParameterDescriptor() { }
+        protected HttpParameterDescriptor()
+        {
+        }
 
         protected HttpParameterDescriptor(HttpActionDescriptor actionDescriptor)
         {

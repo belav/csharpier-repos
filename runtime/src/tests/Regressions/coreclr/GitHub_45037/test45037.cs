@@ -41,7 +41,9 @@ class Child<T> : Parent where T : class
     }
 }
 
-class Foo { }
+class Foo
+{
+}
 
 class Program
 {

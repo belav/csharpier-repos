@@ -55,7 +55,9 @@ namespace System.Threading
         }
 
         protected AbandonedMutexException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         private void SetupException(int location, WaitHandle? handle)
         {

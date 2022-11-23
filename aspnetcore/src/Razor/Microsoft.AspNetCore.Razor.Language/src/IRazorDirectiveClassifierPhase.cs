@@ -19,4 +19,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// <see cref="IRazorDirectiveClassifierPass.Order"/> property.
 /// </para>
 /// </remarks>
-public interface IRazorDirectiveClassifierPhase : IRazorEnginePhase { }
+public interface IRazorDirectiveClassifierPhase : IRazorEnginePhase
+{
+}

@@ -24,7 +24,9 @@ public class ShapedQueryExpression : Expression, IPrintableExpression
     /// <param name="queryExpression">The query expression to get results from server.</param>
     /// <param name="shaperExpression">The shaper expression to create result objects from server results.</param>
     public ShapedQueryExpression(Expression queryExpression, Expression shaperExpression)
-        : this(queryExpression, shaperExpression, ResultCardinality.Enumerable) { }
+        : this(queryExpression, shaperExpression, ResultCardinality.Enumerable)
+    {
+    }
 
     private ShapedQueryExpression(
         Expression queryExpression,

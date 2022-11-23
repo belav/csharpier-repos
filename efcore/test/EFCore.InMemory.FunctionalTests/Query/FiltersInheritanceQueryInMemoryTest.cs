@@ -7,5 +7,7 @@ public class FiltersInheritanceQueryInMemoryTest
     : FiltersInheritanceQueryTestBase<FiltersInheritanceQueryInMemoryFixture>
 {
     public FiltersInheritanceQueryInMemoryTest(FiltersInheritanceQueryInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 }

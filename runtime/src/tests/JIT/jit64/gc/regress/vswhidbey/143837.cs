@@ -93,7 +93,9 @@ public class TestClass
 {
     public string strField;
 
-    public TestClass() { }
+    public TestClass()
+    {
+    }
 
     public TestClass(String strIn)
     {
@@ -109,7 +111,9 @@ public class TestClass
 
 public class DerivedClass : TestClass
 {
-    public DerivedClass() { }
+    public DerivedClass()
+    {
+    }
 
     public override string strProperty
     {

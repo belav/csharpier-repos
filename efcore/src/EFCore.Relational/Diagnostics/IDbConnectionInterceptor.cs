@@ -127,7 +127,9 @@ public interface IDbConnectionInterceptor : IInterceptor
     /// </summary>
     /// <param name="connection">The connection.</param>
     /// <param name="eventData">Contextual information about the connection.</param>
-    void ConnectionOpened(DbConnection connection, ConnectionEndEventData eventData) { }
+    void ConnectionOpened(DbConnection connection, ConnectionEndEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just after EF has called <see cref="DbConnection.OpenAsync()" />.
@@ -196,7 +198,9 @@ public interface IDbConnectionInterceptor : IInterceptor
     /// </summary>
     /// <param name="connection">The connection.</param>
     /// <param name="eventData">Contextual information about the connection.</param>
-    void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData) { }
+    void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just after EF has called <see cref="DbConnection.CloseAsync()" />.
@@ -260,7 +264,9 @@ public interface IDbConnectionInterceptor : IInterceptor
     /// </summary>
     /// <param name="connection">The connection.</param>
     /// <param name="eventData">Contextual information about the connection.</param>
-    void ConnectionDisposed(DbConnection connection, ConnectionEndEventData eventData) { }
+    void ConnectionDisposed(DbConnection connection, ConnectionEndEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called just after EF has called <see cref="DbConnection.DisposeAsync()" />.
@@ -276,7 +282,9 @@ public interface IDbConnectionInterceptor : IInterceptor
     /// </summary>
     /// <param name="connection">The connection.</param>
     /// <param name="eventData">Contextual information about the connection.</param>
-    void ConnectionFailed(DbConnection connection, ConnectionErrorEventData eventData) { }
+    void ConnectionFailed(DbConnection connection, ConnectionErrorEventData eventData)
+    {
+    }
 
     /// <summary>
     ///     Called when closing of a connection has failed with an exception.

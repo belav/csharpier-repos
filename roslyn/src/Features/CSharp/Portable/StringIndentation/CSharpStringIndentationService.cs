@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStringIndentationService() { }
+        public CSharpStringIndentationService()
+        {
+        }
 
         public async Task<ImmutableArray<StringIndentationRegion>> GetStringIndentationRegionsAsync(
             Document document,

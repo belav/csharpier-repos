@@ -51,7 +51,9 @@ public class SpatialQuerySqliteFixture : SpatialQueryRelationalFixture
         public ReplacementTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
             RelationalTypeMappingSourceDependencies relationalDependencies
-        ) : base(dependencies, relationalDependencies) { }
+        ) : base(dependencies, relationalDependencies)
+        {
+        }
 
         protected override RelationalTypeMapping FindMapping(
             in RelationalTypeMappingInfo mappingInfo

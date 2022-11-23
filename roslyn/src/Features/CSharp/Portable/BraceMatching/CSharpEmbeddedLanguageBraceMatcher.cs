@@ -27,6 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
                 CSharpEmbeddedLanguagesProvider.Info,
                 CSharpSyntaxKinds.Instance,
                 services
-            ) { }
+            )
+        {
+        }
     }
 }

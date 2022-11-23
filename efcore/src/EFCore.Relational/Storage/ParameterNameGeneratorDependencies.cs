@@ -45,5 +45,7 @@ public sealed record ParameterNameGeneratorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public ParameterNameGeneratorDependencies() { }
+    public ParameterNameGeneratorDependencies()
+    {
+    }
 }

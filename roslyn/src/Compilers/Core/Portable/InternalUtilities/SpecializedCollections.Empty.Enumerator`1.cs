@@ -15,11 +15,15 @@ namespace Roslyn.Utilities
             {
                 public static new readonly IEnumerator<T> Instance = new Enumerator<T>();
 
-                protected Enumerator() { }
+                protected Enumerator()
+                {
+                }
 
                 public new T Current => throw new InvalidOperationException();
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
             }
         }
     }

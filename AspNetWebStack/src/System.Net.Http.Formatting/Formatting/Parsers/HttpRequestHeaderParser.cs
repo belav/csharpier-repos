@@ -26,7 +26,9 @@ namespace System.Net.Http.Formatting.Parsers
         /// </summary>
         /// <param name="httpRequest">The parsed HTTP request without any header sorting.</param>
         public HttpRequestHeaderParser(HttpUnsortedRequest httpRequest)
-            : this(httpRequest, DefaultMaxRequestLineSize, DefaultMaxHeaderSize) { }
+            : this(httpRequest, DefaultMaxRequestLineSize, DefaultMaxHeaderSize)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestHeaderParser"/> class.

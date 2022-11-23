@@ -8,5 +8,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 {
-    internal interface IVirtualCharLanguageService : IVirtualCharService, ILanguageService { }
+    internal interface IVirtualCharLanguageService : IVirtualCharService, ILanguageService
+    {
+    }
 }

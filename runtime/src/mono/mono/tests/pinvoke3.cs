@@ -1624,13 +1624,17 @@ public class Tests
             Marshal.GetFunctionPointerForDelegate<NullableReturnDelegate>(nullable_ret_cb);
             return 1;
         }
-        catch (MarshalDirectiveException) { }
+        catch (MarshalDirectiveException)
+        {
+        }
         try
         {
             mono_test_marshal_nullable_ret_delegate(nullable_ret_cb);
             return 2;
         }
-        catch (MarshalDirectiveException) { }
+        catch (MarshalDirectiveException)
+        {
+        }
 
         return 0;
     }

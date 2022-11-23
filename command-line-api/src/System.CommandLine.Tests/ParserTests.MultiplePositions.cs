@@ -104,7 +104,8 @@ namespace System.CommandLine.Tests
             )
             {
                 var reusedCommand = new Command("reused");
-                reusedCommand.SetHandler(() => { });
+                reusedCommand.SetHandler(() => {
+                });
                 reusedCommand.Add(new Option<string>("--the-option"));
 
                 var outer = new Command("outer")

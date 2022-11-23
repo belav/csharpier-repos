@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddRequiredParentheses
         >
     {
         public CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer()
-            : base(CSharpPatternPrecedenceService.Instance) { }
+            : base(CSharpPatternPrecedenceService.Instance)
+        {
+        }
 
         private static readonly ImmutableArray<SyntaxKind> s_kinds = ImmutableArray.Create(
             SyntaxKind.AndPattern,

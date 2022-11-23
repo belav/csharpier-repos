@@ -52,7 +52,9 @@ namespace System.Web.Http.ExceptionHandling
 
         /// <summary>When overridden in a derived class, logs the exception synchronously.</summary>
         /// <param name="context">The exception logger context.</param>
-        public virtual void Log(ExceptionLoggerContext context) { }
+        public virtual void Log(ExceptionLoggerContext context)
+        {
+        }
 
         /// <summary>Determines whether the exception should be logged.</summary>
         /// <param name="context">The exception logger context.</param>

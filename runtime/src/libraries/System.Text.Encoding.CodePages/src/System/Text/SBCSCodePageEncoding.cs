@@ -25,10 +25,13 @@ namespace System.Text
         private byte _byteUnknown;
         private char _charUnknown;
 
-        public SBCSCodePageEncoding(int codePage) : this(codePage, codePage) { }
+        public SBCSCodePageEncoding(int codePage) : this(codePage, codePage)
+        {
+        }
 
         public SBCSCodePageEncoding(int codePage, int dataCodePage) : base(codePage, dataCodePage)
-        { }
+        {
+        }
 
         internal static unsafe ushort ReadUInt16(byte* pByte)
         {

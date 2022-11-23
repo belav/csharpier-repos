@@ -8,15 +8,23 @@ using Xunit;
 
 namespace System.Composition.Convention.Tests
 {
-    public interface IContract1 { }
+    public interface IContract1
+    {
+    }
 
-    public interface IContract2 { }
+    public interface IContract2
+    {
+    }
 
     public class ClassWithLifetimeConcerns : IContract1, IContract2, IDisposable
     {
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void OnImportsSatisfied() { }
+        public void OnImportsSatisfied()
+        {
+        }
     }
 
     internal static class DELETE_ME_TESTER

@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos;
 public class CosmosApiConsistencyTest
     : ApiConsistencyTestBase<CosmosApiConsistencyTest.CosmosApiConsistencyFixture>
 {
-    public CosmosApiConsistencyTest(CosmosApiConsistencyFixture fixture) : base(fixture) { }
+    public CosmosApiConsistencyTest(CosmosApiConsistencyFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void AddServices(ServiceCollection serviceCollection) =>
         serviceCollection.AddEntityFrameworkCosmos();

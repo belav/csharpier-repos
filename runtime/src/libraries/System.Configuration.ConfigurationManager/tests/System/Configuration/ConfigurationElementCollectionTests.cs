@@ -10,15 +10,21 @@ namespace System.ConfigurationTests
 {
     public class ConfigurationElementCollectionTests
     {
-        public class SimpleElement : ConfigurationElement { }
+        public class SimpleElement : ConfigurationElement
+        {
+        }
 
         private class SimpleCollection : ConfigurationElementCollection
         {
             public static ConfigurationElement TestElement = new SimpleElement();
 
-            public SimpleCollection() : base() { }
+            public SimpleCollection() : base()
+            {
+            }
 
-            public SimpleCollection(IComparer comparer) : base(comparer) { }
+            public SimpleCollection(IComparer comparer) : base(comparer)
+            {
+            }
 
             // These two are abstract
             protected override ConfigurationElement CreateNewElement() => TestElement;

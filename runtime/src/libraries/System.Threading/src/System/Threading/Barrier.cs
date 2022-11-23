@@ -29,19 +29,25 @@ namespace System.Threading
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class.
         /// </summary>
-        public BarrierPostPhaseException() : this((string?)null) { }
+        public BarrierPostPhaseException() : this((string?)null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with the specified inner exception.
         /// </summary>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
-        public BarrierPostPhaseException(Exception? innerException) : this(null, innerException) { }
+        public BarrierPostPhaseException(Exception? innerException) : this(null, innerException)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">A string that describes the exception.</param>
-        public BarrierPostPhaseException(string? message) : this(message, null) { }
+        public BarrierPostPhaseException(string? message) : this(message, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with a specified error message and inner exception.
@@ -49,7 +55,9 @@ namespace System.Threading
         /// <param name="message">A string that describes the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public BarrierPostPhaseException(string? message, Exception? innerException)
-            : base(message is null ? SR.BarrierPostPhaseException : message, innerException) { }
+            : base(message is null ? SR.BarrierPostPhaseException : message, innerException)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the BarrierPostPhaseException class with serialized data.
@@ -57,7 +65,9 @@ namespace System.Threading
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
         protected BarrierPostPhaseException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 
     /// <summary>
@@ -181,7 +191,9 @@ namespace System.Threading
         /// <param name="participantCount">The number of participating threads.</param>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="participantCount"/> is less than 0
         /// or greater than <see cref="short.MaxValue"/>.</exception>
-        public Barrier(int participantCount) : this(participantCount, null) { }
+        public Barrier(int participantCount) : this(participantCount, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Barrier"/> class.

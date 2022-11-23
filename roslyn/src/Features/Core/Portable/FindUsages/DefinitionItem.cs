@@ -136,7 +136,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 properties,
                 ImmutableDictionary<string, string>.Empty,
                 displayIfNoReferences
-            ) { }
+            )
+        {
+        }
 
         protected DefinitionItem(
             ImmutableArray<string> tags,

@@ -250,7 +250,9 @@ namespace System.Net
                         userResult.InvokeCallback(exception);
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public override IAsyncResult BeginRead(

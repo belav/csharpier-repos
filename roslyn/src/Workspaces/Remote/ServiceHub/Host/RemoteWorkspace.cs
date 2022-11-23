@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Remote
 
         // internal for testing purposes.
         internal RemoteWorkspace(HostServices hostServices)
-            : base(hostServices, WorkspaceKind.RemoteWorkspace) { }
+            : base(hostServices, WorkspaceKind.RemoteWorkspace)
+        {
+        }
 
         protected override void Dispose(bool finalize)
         {

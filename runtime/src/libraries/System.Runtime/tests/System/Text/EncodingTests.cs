@@ -226,7 +226,9 @@ namespace System.Text.Tests
             [ThreadStatic]
             private static EncodingProvider _staticInstance;
 
-            private ThreadStaticEncodingProvider() { }
+            private ThreadStaticEncodingProvider()
+            {
+            }
 
             public static void WithEncodingProvider(EncodingProvider instance, Action action)
             {

@@ -33,7 +33,9 @@ namespace Castle.Services.Logging.Log4netIntegration
         private static readonly IContextStacks threadContextStacks = new ThreadContextStacks();
 
         public ExtendedLog4netLogger(ILog log, ExtendedLog4netFactory factory)
-            : this(log.Logger, factory) { }
+            : this(log.Logger, factory)
+        {
+        }
 
         public ExtendedLog4netLogger(ILogger logger, ExtendedLog4netFactory factory)
         {

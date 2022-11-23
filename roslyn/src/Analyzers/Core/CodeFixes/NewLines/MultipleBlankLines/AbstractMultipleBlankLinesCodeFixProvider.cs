@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MultipleBlankLinesCodeFixProvider() { }
+        public MultipleBlankLinesCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.MultipleBlankLinesDiagnosticId);

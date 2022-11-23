@@ -98,7 +98,9 @@ namespace System.Buffers.ArrayPool.Tests
                 Assert.NotNull(buffer);
                 Assert.True(buffer.Length >= len);
             }
-            catch (OutOfMemoryException) { }
+            catch (OutOfMemoryException)
+            {
+            }
         }
 
         [Theory]

@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
     /// </summary>
     internal abstract class AbstractSuppressionBatchFixAllProvider : FixAllProvider
     {
-        protected AbstractSuppressionBatchFixAllProvider() { }
+        protected AbstractSuppressionBatchFixAllProvider()
+        {
+        }
 
         public override async Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext)
         {

@@ -12,5 +12,7 @@ using System;
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.All)]
-    internal class __BlockReflectionAttribute : Attribute { }
+    internal class __BlockReflectionAttribute : Attribute
+    {
+    }
 }

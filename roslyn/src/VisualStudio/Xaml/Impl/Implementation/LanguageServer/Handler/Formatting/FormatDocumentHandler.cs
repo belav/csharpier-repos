@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentHandler() { }
+        public FormatDocumentHandler()
+        {
+        }
 
         public override LSP.TextDocumentIdentifier GetTextDocumentIdentifier(
             LSP.DocumentFormattingParams request

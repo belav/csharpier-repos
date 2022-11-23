@@ -52,7 +52,9 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             )
             using (JsonTextReader jsonTextReader = new JsonTextReader(fs))
             {
-                while (jsonTextReader.Read()) { }
+                while (jsonTextReader.Read())
+                {
+                }
             }
         }
 
@@ -65,7 +67,9 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             {
                 jsonTextReader.Read();
 
-                while (jsonTextReader.ReadAsDecimal() != null) { }
+                while (jsonTextReader.ReadAsDecimal() != null)
+                {
+                }
             }
         }
     }

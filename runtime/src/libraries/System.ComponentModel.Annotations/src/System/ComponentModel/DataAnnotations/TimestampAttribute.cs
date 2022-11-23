@@ -11,5 +11,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed class TimestampAttribute : Attribute { }
+    public sealed class TimestampAttribute : Attribute
+    {
+    }
 }

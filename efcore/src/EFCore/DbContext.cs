@@ -84,7 +84,9 @@ public class DbContext
             + "Some specific coding pattern are usually required to make trimming work properly, see https://aka.ms/efcore-docs-trimming for "
             + "more details."
     )]
-    protected DbContext() : this(new DbContextOptions<DbContext>()) { }
+    protected DbContext() : this(new DbContextOptions<DbContext>())
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContext" /> class using the specified options.
@@ -515,7 +517,9 @@ public class DbContext
     ///     A builder used to create or modify options for this context. Databases (and other extensions)
     ///     typically define extension methods on this object that allow you to configure the context.
     /// </param>
-    protected internal virtual void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
+    protected internal virtual void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+    }
 
     /// <summary>
     ///     Override this method to set defaults and configure conventions before they run. This method is invoked before
@@ -536,7 +540,9 @@ public class DbContext
     /// </param>
     protected internal virtual void ConfigureConventions(
         ModelConfigurationBuilder configurationBuilder
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Override this method to further configure the model that was discovered by convention from the entity types
@@ -558,7 +564,9 @@ public class DbContext
     ///     define extension methods on this object that allow you to configure aspects of the model that are specific
     ///     to a given database.
     /// </param>
-    protected internal virtual void OnModelCreating(ModelBuilder modelBuilder) { }
+    protected internal virtual void OnModelCreating(ModelBuilder modelBuilder)
+    {
+    }
 
     /// <summary>
     ///     Saves all changes made in this context to the database.

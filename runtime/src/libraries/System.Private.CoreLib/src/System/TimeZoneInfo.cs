@@ -1758,7 +1758,9 @@ namespace System
                             time >= ambiguousStartModified && time < ambiguousEndModified
                         );
                     }
-                    catch (ArgumentOutOfRangeException) { }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                    }
 
                     if (!isAmbiguousLocalDst)
                     {
@@ -1770,7 +1772,9 @@ namespace System
                                 time >= ambiguousStartModified && time < ambiguousEndModified
                             );
                         }
-                        catch (ArgumentOutOfRangeException) { }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                        }
                     }
                 }
             }
@@ -2005,7 +2009,9 @@ namespace System
                         time >= endModifiedAmbiguousTime && time < startModifiedAmbiguousTime
                     );
                 }
-                catch (ArgumentOutOfRangeException) { }
+                catch (ArgumentOutOfRangeException)
+                {
+                }
 
                 if (!isAmbiguous)
                 {
@@ -2017,7 +2023,9 @@ namespace System
                             time >= endModifiedAmbiguousTime && time < startModifiedAmbiguousTime
                         );
                     }
-                    catch (ArgumentOutOfRangeException) { }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                    }
                 }
             }
             return isAmbiguous;
@@ -2081,7 +2089,9 @@ namespace System
                     endModifiedInvalidTime = endInvalidTime.AddYears(1);
                     isInvalid = (time >= startModifiedInvalidTime && time < endModifiedInvalidTime);
                 }
-                catch (ArgumentOutOfRangeException) { }
+                catch (ArgumentOutOfRangeException)
+                {
+                }
 
                 if (!isInvalid)
                 {
@@ -2093,7 +2103,9 @@ namespace System
                             time >= startModifiedInvalidTime && time < endModifiedInvalidTime
                         );
                     }
-                    catch (ArgumentOutOfRangeException) { }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                    }
                 }
             }
             return isInvalid;

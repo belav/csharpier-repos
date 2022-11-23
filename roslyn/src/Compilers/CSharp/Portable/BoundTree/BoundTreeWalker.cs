@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract partial class BoundTreeWalker : BoundTreeVisitor
     {
-        protected BoundTreeWalker() { }
+        protected BoundTreeWalker()
+        {
+        }
 
         public void VisitList<T>(ImmutableArray<T> list) where T : BoundNode
         {
@@ -56,7 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private int _recursionDepth;
 
-        protected BoundTreeWalkerWithStackGuard() { }
+        protected BoundTreeWalkerWithStackGuard()
+        {
+        }
 
         protected BoundTreeWalkerWithStackGuard(int recursionDepth)
         {
@@ -95,11 +99,15 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal abstract class BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         : BoundTreeWalkerWithStackGuard
     {
-        protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator() { }
+        protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator()
+        {
+        }
 
         protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(
             int recursionDepth
-        ) : base(recursionDepth) { }
+        ) : base(recursionDepth)
+        {
+        }
 
         public sealed override BoundNode? VisitBinaryOperator(BoundBinaryOperator node)
         {

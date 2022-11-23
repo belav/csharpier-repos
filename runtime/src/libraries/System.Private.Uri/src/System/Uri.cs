@@ -2208,7 +2208,9 @@ namespace System
                 //
                 //STEP 1.5 decide on the Authority component
                 //
-                if ((_flags & (Flags.UncPath | Flags.DosPath | Flags.UnixPath)) != 0) { }
+                if ((_flags & (Flags.UncPath | Flags.DosPath | Flags.UnixPath)) != 0)
+                {
+                }
                 else if ((idx + 2) <= length)
                 {
                     char first = pUriString[idx];

@@ -18,7 +18,9 @@ internal readonly record struct SymbolDescriptionOptions
     public ClassificationOptions ClassificationOptions { get; init; } =
         ClassificationOptions.Default;
 
-    public SymbolDescriptionOptions() { }
+    public SymbolDescriptionOptions()
+    {
+    }
 
     public static readonly SymbolDescriptionOptions Default = new();
 }

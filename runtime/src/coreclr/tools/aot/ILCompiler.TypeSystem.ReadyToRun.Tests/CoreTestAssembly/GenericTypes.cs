@@ -19,9 +19,13 @@ namespace GenericTypes
         /// <summary>
         /// Purpose is to manipulate a method involving a generic parameter in its parameter list.
         /// </summary>
-        public void Bar(T a) { }
+        public void Bar(T a)
+        {
+        }
 
-        ~GenericClass() { }
+        ~GenericClass()
+        {
+        }
     }
 
     public class DerivedGenericClass<T> : GenericClass<T>
@@ -40,12 +44,16 @@ namespace GenericTypes
         /// <summary>
         /// Purpose is to allow testing of the properties of non-generic methods on generic types
         /// </summary>
-        public void NonGenericFunction() { }
+        public void NonGenericFunction()
+        {
+        }
 
         /// <summary>
         /// Purpose is to allow testing of the properties of generic methods on generic types
         /// </summary>
-        public void GenericFunction<K, V>() { }
+        public void GenericFunction<K, V>()
+        {
+        }
     }
 
     /// <summary>
@@ -58,7 +66,9 @@ namespace GenericTypes
         /// </summary>
         /// <typeparam name="K"></typeparam>
         /// <typeparam name="V"></typeparam>
-        public void GenericFunction<K, V>() { }
+        public void GenericFunction<K, V>()
+        {
+        }
     }
 
     /// <summary>

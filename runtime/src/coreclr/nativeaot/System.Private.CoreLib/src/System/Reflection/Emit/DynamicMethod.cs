@@ -107,7 +107,9 @@ namespace System.Reflection.Emit
         public bool InitLocals
         {
             get { return default; }
-            set { }
+            set
+            {
+            }
         }
 
         public override RuntimeMethodHandle MethodHandle

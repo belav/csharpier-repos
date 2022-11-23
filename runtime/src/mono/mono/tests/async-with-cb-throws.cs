@@ -2,7 +2,9 @@ using System;
 using System.Threading;
 using System.Runtime.InteropServices;
 
-class AsyncException : Exception { }
+class AsyncException : Exception
+{
+}
 
 class Tests
 {

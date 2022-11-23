@@ -60,7 +60,9 @@ namespace System.Web.Http.Controllers
         /// Initializes a new instance of the <see cref="HttpControllerDescriptor"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public HttpControllerDescriptor() { }
+        public HttpControllerDescriptor()
+        {
+        }
 
         // For unit testing purposes.
         internal HttpControllerDescriptor(HttpConfiguration configuration)

@@ -111,7 +111,9 @@ namespace System.Threading
         /// both <see cref="CanBeCanceled"/> and <see cref="IsCancellationRequested"/> will be true.
         /// </remarks>
         public CancellationToken(bool canceled)
-            : this(canceled ? CancellationTokenSource.s_canceledSource : null) { }
+            : this(canceled ? CancellationTokenSource.s_canceledSource : null)
+        {
+        }
 
         /// <summary>
         /// Registers a delegate that will be called when this <see cref="System.Threading.CancellationToken">CancellationToken</see> is canceled.

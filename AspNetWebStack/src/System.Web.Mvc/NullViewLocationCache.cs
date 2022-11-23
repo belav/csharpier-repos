@@ -12,11 +12,9 @@ namespace System.Web.Mvc
             return null;
         }
 
-        public void InsertViewLocation(
-            HttpContextBase httpContext,
-            string key,
-            string virtualPath
-        ) { }
+        public void InsertViewLocation(HttpContextBase httpContext, string key, string virtualPath)
+        {
+        }
 
         #endregion
     }

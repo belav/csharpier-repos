@@ -11,7 +11,9 @@ namespace System.Threading.Channels
         protected ChannelClosedException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public abstract partial class ChannelReader<T>

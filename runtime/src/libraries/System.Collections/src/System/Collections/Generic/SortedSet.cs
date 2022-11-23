@@ -86,7 +86,9 @@ namespace System.Collections.Generic
             this.comparer = comparer ?? Comparer<T>.Default;
         }
 
-        public SortedSet(IEnumerable<T> collection) : this(collection, Comparer<T>.Default) { }
+        public SortedSet(IEnumerable<T> collection) : this(collection, Comparer<T>.Default)
+        {
+        }
 
         public SortedSet(IEnumerable<T> collection, IComparer<T>? comparer) : this(comparer)
         {
@@ -292,7 +294,9 @@ namespace System.Collections.Generic
         #region Subclass helpers
 
         // Virtual function for TreeSubSet, which may need to update its count.
-        internal virtual void VersionCheck(bool updateCount = false) { }
+        internal virtual void VersionCheck(bool updateCount = false)
+        {
+        }
 
         // Virtual function for TreeSubSet, which may need the count variable of the parent set.
         internal virtual int TotalCount()
@@ -1937,7 +1941,9 @@ namespace System.Collections.Generic
 
             private readonly bool _reverse;
 
-            internal Enumerator(SortedSet<T> set) : this(set, reverse: false) { }
+            internal Enumerator(SortedSet<T> set) : this(set, reverse: false)
+            {
+            }
 
             internal Enumerator(SortedSet<T> set, bool reverse)
             {
@@ -2030,7 +2036,9 @@ namespace System.Collections.Generic
                 return true;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public T Current
             {

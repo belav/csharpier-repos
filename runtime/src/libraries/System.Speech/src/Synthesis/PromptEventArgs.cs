@@ -36,7 +36,9 @@ namespace System.Speech.Synthesis
     public class SpeakStartedEventArgs : PromptEventArgs
     {
         #region Constructors
-        internal SpeakStartedEventArgs(Prompt prompt) : base(prompt) { }
+        internal SpeakStartedEventArgs(Prompt prompt) : base(prompt)
+        {
+        }
 
         #endregion
     }

@@ -86,7 +86,9 @@ namespace MonoTests.System.Configuration
             {
                 v.Validate(5);
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 Assert.True(hit_failure, "A1");

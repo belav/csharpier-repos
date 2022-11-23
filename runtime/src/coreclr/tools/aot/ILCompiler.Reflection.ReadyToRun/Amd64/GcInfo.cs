@@ -82,7 +82,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         public List<InterruptibleRange> InterruptibleRanges { get; set; }
         public GcSlotTable SlotTable { get; set; }
 
-        public GcInfo() { }
+        public GcInfo()
+        {
+        }
 
         /// <summary>
         /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/gcinfodecoder.cpp">GcInfoDecoder::GcInfoDecoder</a>

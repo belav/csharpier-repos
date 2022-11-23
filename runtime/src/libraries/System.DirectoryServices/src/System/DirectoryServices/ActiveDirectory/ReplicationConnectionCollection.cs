@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ReplicationConnectionCollection : ReadOnlyCollectionBase
     {
-        internal ReplicationConnectionCollection() { }
+        internal ReplicationConnectionCollection()
+        {
+        }
 
         public ReplicationConnection this[int index] => (ReplicationConnection)InnerList[index]!;
 

@@ -25,7 +25,9 @@ namespace System.Web.Mvc
                 actionName,
                 controllerDescriptor,
                 true /* validateMethod */
-            ) { }
+            )
+        {
+        }
 
         internal ReflectedActionDescriptor(
             MethodInfo methodInfo,

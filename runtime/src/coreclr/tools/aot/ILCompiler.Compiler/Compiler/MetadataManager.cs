@@ -566,7 +566,9 @@ namespace ILCompiler
             ref DependencyList dependencies,
             NodeFactory factory,
             MethodDesc method
-        ) { }
+        )
+        {
+        }
 
         protected virtual void GetMetadataDependenciesDueToReflectability(
             ref DependencyList dependencies,
@@ -689,7 +691,9 @@ namespace ILCompiler
             NodeFactory factory,
             MethodDesc decl,
             MethodDesc impl
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// This method is an extension point that can provide additional metadata-based dependencies to generated method bodies.
@@ -1094,14 +1098,18 @@ namespace ILCompiler
             NodeFactory factory,
             MethodIL methodIL,
             MethodDesc calledMethod
-        ) { }
+        )
+        {
+        }
 
         public virtual void GetDependenciesDueToAccess(
             ref DependencyList dependencies,
             NodeFactory factory,
             MethodIL methodIL,
             FieldDesc writtenField
-        ) { }
+        )
+        {
+        }
 
         public virtual DependencyList GetDependenciesForCustomAttribute(
             NodeFactory factory,
@@ -1117,18 +1125,21 @@ namespace ILCompiler
             ref DependencyList dependencies,
             NodeFactory factory,
             MethodDesc method
-        ) { }
+        )
+        {
+        }
 
         public virtual void GetDependenciesForGenericDictionary(
             ref DependencyList dependencies,
             NodeFactory factory,
             TypeDesc type
-        ) { }
+        )
+        {
+        }
 
-        public virtual void NoteOverridingMethod(
-            MethodDesc baseMethod,
-            MethodDesc overridingMethod
-        ) { }
+        public virtual void NoteOverridingMethod(MethodDesc baseMethod, MethodDesc overridingMethod)
+        {
+        }
     }
 
     public struct MetadataMapping<TEntity>

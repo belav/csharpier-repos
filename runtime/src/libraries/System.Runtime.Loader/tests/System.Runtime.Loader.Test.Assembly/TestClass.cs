@@ -35,6 +35,8 @@ namespace System.Runtime.Loader.Tests
 
         [ComImport]
         [Guid("AC7A1319-E041-4F75-9481-AB5F632F95F7")]
-        public class COMClass { }
+        public class COMClass
+        {
+        }
     }
 }

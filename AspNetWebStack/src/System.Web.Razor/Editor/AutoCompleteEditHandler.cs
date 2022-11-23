@@ -18,7 +18,9 @@ namespace System.Web.Razor.Parser.SyntaxTree
             Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
         )]
         public AutoCompleteEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer)
-            : base(tokenizer) { }
+            : base(tokenizer)
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Design",
@@ -28,7 +30,9 @@ namespace System.Web.Razor.Parser.SyntaxTree
         public AutoCompleteEditHandler(
             Func<string, IEnumerable<ISymbol>> tokenizer,
             AcceptedCharacters accepted
-        ) : base(tokenizer, accepted) { }
+        ) : base(tokenizer, accepted)
+        {
+        }
 
         public bool AutoCompleteAtEndOfSpan { get; set; }
         public string AutoCompleteString { get; set; }

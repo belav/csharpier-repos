@@ -197,7 +197,9 @@ namespace System.Drawing
                     );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsCriticalException(ex)) { }
+                catch (Exception ex) when (!ClientUtils.IsCriticalException(ex))
+                {
+                }
                 finally
                 {
                     _nativeFamily = IntPtr.Zero;

@@ -25,7 +25,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             var commandIdWithGroupId = new CommandID(commandGroup, commandId);
             var command = new OleMenuCommand(
                 invokeHandler,
-                delegate { },
+                delegate
+                {
+                },
                 beforeQueryStatus,
                 commandIdWithGroupId
             );

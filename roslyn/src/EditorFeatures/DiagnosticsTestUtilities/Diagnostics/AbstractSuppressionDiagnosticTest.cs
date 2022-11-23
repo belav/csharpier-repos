@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public abstract class AbstractSuppressionDiagnosticTest : AbstractUserDiagnosticTest
     {
         protected AbstractSuppressionDiagnosticTest(ITestOutputHelper logger = null) : base(logger)
-        { }
+        {
+        }
 
         protected abstract int CodeActionIndex { get; }
         protected virtual bool IncludeSuppressedDiagnostics => false;

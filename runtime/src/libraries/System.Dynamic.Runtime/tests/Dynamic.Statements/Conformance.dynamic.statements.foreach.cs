@@ -339,17 +339,29 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     //<Expects Status=success></Expects>
     // <Code>
 
-    public class A { }
+    public class A
+    {
+    }
 
-    public class B : A { }
+    public class B : A
+    {
+    }
 
-    public interface I1 { }
+    public interface I1
+    {
+    }
 
-    public interface I2 : I1 { }
+    public interface I2 : I1
+    {
+    }
 
-    public class CI1 : I1 { }
+    public class CI1 : I1
+    {
+    }
 
-    public class CI2 : I2 { }
+    public class CI2 : I2
+    {
+    }
 
     public class Test
     {
@@ -409,7 +421,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     //<Expects Status=success></Expects>
     // <Code>
 
-    public struct S { }
+    public struct S
+    {
+    }
 
     public class Test
     {
@@ -1297,7 +1311,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class GenC<T> { }
+    public class GenC<T>
+    {
+    }
 
     public class Test
     {
@@ -1315,7 +1331,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             dynamic darr = new string[2] { "aa", "bb" };
             try
             {
-                foreach (int v in darr) { }
+                foreach (int v in darr)
+                {
+                }
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
@@ -1332,7 +1350,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             dynamic darr2 = new string[2];
             try
             {
-                foreach (int v in darr2) { }
+                foreach (int v in darr2)
+                {
+                }
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {

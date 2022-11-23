@@ -31,7 +31,9 @@ namespace System.Reflection.Tests
             return Pointer.Box((byte*)expected, typeof(byte*));
         }
 
-        public static void MethodWithVoidPointer(void* vp) { }
+        public static void MethodWithVoidPointer(void* vp)
+        {
+        }
     }
 
     unsafe delegate void MethodDelegate(byte* ptr, int expected);

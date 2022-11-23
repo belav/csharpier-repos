@@ -9,7 +9,9 @@ public class AutoMapperMappingException : Exception
 {
     private readonly string _message;
 
-    public AutoMapperMappingException() { }
+    public AutoMapperMappingException()
+    {
+    }
 
     public AutoMapperMappingException(string message) : base(message) => _message = message;
 
@@ -146,10 +148,13 @@ public class AutoMapperConfigurationException : Exception
         }
     }
 
-    public AutoMapperConfigurationException(string message) : base(message) { }
+    public AutoMapperConfigurationException(string message) : base(message)
+    {
+    }
 
     public AutoMapperConfigurationException(string message, Exception inner) : base(message, inner)
-    { }
+    {
+    }
 
     public AutoMapperConfigurationException(TypeMapConfigErrors[] errors) => Errors = errors;
 

@@ -36,7 +36,9 @@ namespace System.Xml.Serialization
             internal string? methodKey;
         }
 
-        private TempAssembly() { }
+        private TempAssembly()
+        {
+        }
 
         internal TempAssembly(
             XmlMapping[] xmlMappings,
@@ -861,7 +863,9 @@ namespace System.Xml.Serialization
             }
         }
 
-        internal sealed class TempMethodDictionary : Dictionary<string, TempMethod> { }
+        internal sealed class TempMethodDictionary : Dictionary<string, TempMethod>
+        {
+        }
     }
 
     internal sealed class TempAssemblyCacheKey

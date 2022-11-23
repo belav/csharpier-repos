@@ -15,9 +15,13 @@ public class ListSourceMapperBug
         }
     }
 
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Dest { }
+    public class Dest
+    {
+    }
 
     [Fact]
     public void CustomListSourceShouldNotBlowUp()

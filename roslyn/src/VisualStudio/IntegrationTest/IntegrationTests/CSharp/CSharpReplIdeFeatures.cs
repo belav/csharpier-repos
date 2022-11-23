@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpReplIdeFeatures : AbstractInteractiveWindowTest
     {
         public CSharpReplIdeFeatures(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         public override Task DisposeAsync()
         {

@@ -477,7 +477,9 @@ namespace System.Runtime.Serialization.DataContracts
                 }
                 return _helper.XmlFormatGetOnlyCollectionReaderDelegate;
             }
-            set { }
+            set
+            {
+            }
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
@@ -982,7 +984,9 @@ namespace System.Runtime.Serialization.DataContracts
                 XmlWriterDelegator xmlWriter,
                 object obj,
                 XmlObjectSerializerWriteContext context
-            ) { }
+            )
+            {
+            }
 
             [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
             internal void IncrementCollectionCount(

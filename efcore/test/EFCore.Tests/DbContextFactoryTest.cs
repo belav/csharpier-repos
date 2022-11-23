@@ -245,14 +245,20 @@ public class DbContextFactoryTest
 
     private class GruntaContext : DbContext
     {
-        public GruntaContext() { }
+        public GruntaContext()
+        {
+        }
 
-        public GruntaContext(DbContextOptions<GruntaContext> options) : base(options) { }
+        public GruntaContext(DbContextOptions<GruntaContext> options) : base(options)
+        {
+        }
     }
 
     private class WoolacombeContext : DbContext
     {
-        public WoolacombeContext(DbContextOptions<WoolacombeContext> options) : base(options) { }
+        public WoolacombeContext(DbContextOptions<WoolacombeContext> options) : base(options)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -274,9 +280,13 @@ public class DbContextFactoryTest
 
     private class CroydeContext : DbContext
     {
-        public CroydeContext() { }
+        public CroydeContext()
+        {
+        }
 
-        public CroydeContext(DbContextOptions options) : base(options) { }
+        public CroydeContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -358,7 +368,9 @@ public class DbContextFactoryTest
         public void Dispose() => IsDisposed = true;
     }
 
-    private class SingletonService { }
+    private class SingletonService
+    {
+    }
 
     private class IlfracombeContext : DbContext
     {
@@ -552,7 +564,9 @@ public class DbContextFactoryTest
 
     private class WestwardHoContext : DbContext
     {
-        public WestwardHoContext(DbContextOptions options, Random random) : base(options) { }
+        public WestwardHoContext(DbContextOptions options, Random random) : base(options)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -581,7 +595,9 @@ public class DbContextFactoryTest
 
     private class ClovellyContext : DbContext
     {
-        public ClovellyContext(DbContextOptions options) : base(options) { }
+        public ClovellyContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -611,7 +627,8 @@ public class DbContextFactoryTest
     private class WidemouthBayContext : DbContext
     {
         public WidemouthBayContext(DbContextOptions<WidemouthBayContext> options) : base(options)
-        { }
+        {
+        }
     }
 
     [ConditionalFact]

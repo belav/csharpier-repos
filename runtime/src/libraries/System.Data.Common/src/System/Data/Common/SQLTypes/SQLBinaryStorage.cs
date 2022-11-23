@@ -17,7 +17,8 @@ namespace System.Data.Common
 
         public SqlBinaryStorage(DataColumn column)
             : base(column, typeof(SqlBinary), SqlBinary.Null, SqlBinary.Null, StorageType.SqlBinary)
-        { }
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

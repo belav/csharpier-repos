@@ -1339,9 +1339,15 @@ namespace System.Xml
                     {
                         return Convert.ToDouble(o, NumberFormatInfo.InvariantInfo);
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
-                    catch (ArgumentNullException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
+                    catch (ArgumentNullException)
+                    {
+                    }
 
                     return double.NaN;
             }

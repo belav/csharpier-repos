@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpNamespaceDeclarationNewDocumentFormattingProvider() { }
+        public CSharpNamespaceDeclarationNewDocumentFormattingProvider()
+        {
+        }
 
         public async Task<Document> FormatNewDocumentAsync(
             Document document,

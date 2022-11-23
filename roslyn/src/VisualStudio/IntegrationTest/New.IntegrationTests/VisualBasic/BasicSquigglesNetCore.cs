@@ -14,7 +14,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     public class BasicSquigglesNetCore : BasicSquigglesCommon
     {
         public BasicSquigglesNetCore()
-            : base(WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary) { }
+            : base(WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

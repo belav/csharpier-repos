@@ -17,7 +17,9 @@ namespace Internal.Reflection.Execution.FieldAccessors
             int fieldOffset,
             FieldTableFlags fieldBase,
             RuntimeTypeHandle fieldTypeHandle
-        ) : base(cctorContext, staticsBase, fieldOffset, fieldBase, fieldTypeHandle) { }
+        ) : base(cctorContext, staticsBase, fieldOffset, fieldBase, fieldTypeHandle)
+        {
+        }
 
         protected sealed override unsafe object GetFieldBypassCctor()
         {

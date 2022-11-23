@@ -29,7 +29,9 @@ namespace Microsoft.Data.Sqlite
         ///     Initializes a new instance of the <see cref="SqliteParameter" /> class.
         /// </summary>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
-        public SqliteParameter() { }
+        public SqliteParameter()
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteParameter" /> class.

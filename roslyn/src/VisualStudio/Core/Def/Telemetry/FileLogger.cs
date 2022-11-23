@@ -50,7 +50,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             : this(
                 optionService,
                 Path.Combine(Path.GetTempPath(), "Roslyn", "Telemetry", GetLogFileName())
-            ) { }
+            )
+        {
+        }
 
         private static string GetLogFileName() =>
             DateTime.Now

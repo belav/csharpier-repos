@@ -252,14 +252,18 @@ public class IncludeBaseOpenGenerics : AutoMapperSpecBase
         public string Number { get; set; }
     }
 
-    public class InternetOrderModel : OrderModel<int> { }
+    public class InternetOrderModel : OrderModel<int>
+    {
+    }
 
     public abstract class Order<T>
     {
         public string OrderNumber { get; set; }
     }
 
-    public class InternetOrder : Order<int> { }
+    public class InternetOrder : Order<int>
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(c =>

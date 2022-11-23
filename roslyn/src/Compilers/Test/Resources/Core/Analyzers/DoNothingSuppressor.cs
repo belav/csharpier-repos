@@ -14,5 +14,7 @@ public sealed class DoNothingSuppressor : DiagnosticSuppressor
     public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
         ImmutableArray<SuppressionDescriptor>.Empty;
 
-    public override void ReportSuppressions(SuppressionAnalysisContext context) { }
+    public override void ReportSuppressions(SuppressionAnalysisContext context)
+    {
+    }
 }

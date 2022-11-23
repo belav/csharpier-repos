@@ -83,7 +83,9 @@ namespace System.Net.Http.Functional.Tests
                     BaseUrl = url;
                     return;
                 }
-                catch (HttpListenerException) { }
+                catch (HttpListenerException)
+                {
+                }
             }
 
             throw new Exception("Failed to locate a free port.");

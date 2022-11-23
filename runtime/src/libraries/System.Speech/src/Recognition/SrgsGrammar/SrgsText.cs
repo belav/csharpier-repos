@@ -13,7 +13,9 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsText : SrgsElement, IElementText
     {
         #region Constructors
-        public SrgsText() { }
+        public SrgsText()
+        {
+        }
 
         public SrgsText(string text)
         {

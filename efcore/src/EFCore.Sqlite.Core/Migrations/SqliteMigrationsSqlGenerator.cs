@@ -33,7 +33,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     public SqliteMigrationsSqlGenerator(
         MigrationsSqlGeneratorDependencies dependencies,
         IRelationalAnnotationProvider migrationsAnnotations
-    ) : base(dependencies) { }
+    ) : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Generates commands from a list of operations.
@@ -1143,7 +1145,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         EnsureSchemaOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Ignored, since schemas are not supported by SQLite and are silently ignored to improve testing compatibility.
@@ -1155,7 +1159,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         DropSchemaOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder
-    ) { }
+    )
+    {
+    }
 
     #endregion
 

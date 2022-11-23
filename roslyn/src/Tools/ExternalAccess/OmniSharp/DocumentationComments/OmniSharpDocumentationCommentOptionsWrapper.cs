@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
                     },
                     AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration
                 }
-            ) { }
+            )
+        {
+        }
 
         public static async ValueTask<OmniSharpDocumentationCommentOptionsWrapper> FromDocumentAsync(
             Document document,

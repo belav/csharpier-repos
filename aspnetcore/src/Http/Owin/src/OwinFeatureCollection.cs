@@ -467,7 +467,9 @@ public class OwinFeatureCollection
         }
     }
 
-    void IHttpResponseBodyFeature.DisableBuffering() { }
+    void IHttpResponseBodyFeature.DisableBuffering()
+    {
+    }
 
     async Task IHttpResponseBodyFeature.StartAsync(CancellationToken cancellationToken)
     {
@@ -491,5 +493,7 @@ public class OwinFeatureCollection
     }
 
     /// <inheritdoc/>
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

@@ -62,9 +62,15 @@ namespace VirtualStaticInterfaceMethods
         public static string WhichMethod(T b) => throw null;
     }
 
-    class Base { }
+    class Base
+    {
+    }
 
-    class Mid : Base { }
+    class Mid : Base
+    {
+    }
 
-    class Derived : Mid { }
+    class Derived : Mid
+    {
+    }
 }

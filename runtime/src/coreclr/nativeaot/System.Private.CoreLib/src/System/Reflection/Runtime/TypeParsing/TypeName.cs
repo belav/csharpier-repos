@@ -72,12 +72,16 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     // Base class for all non-assembly-qualified type names.
     //
-    internal abstract class NonQualifiedTypeName : TypeName { }
+    internal abstract class NonQualifiedTypeName : TypeName
+    {
+    }
 
     //
     // Base class for namespace or nested type.
     //
-    internal abstract class NamedTypeName : NonQualifiedTypeName { }
+    internal abstract class NamedTypeName : NonQualifiedTypeName
+    {
+    }
 
     //
     // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName for
@@ -197,7 +201,9 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ArrayTypeName : HasElementTypeName
     {
-        public ArrayTypeName(TypeName elementTypeName) : base(elementTypeName) { }
+        public ArrayTypeName(TypeName elementTypeName) : base(elementTypeName)
+        {
+        }
 
         public sealed override string ToString()
         {
@@ -258,7 +264,9 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ByRefTypeName : HasElementTypeName
     {
-        public ByRefTypeName(TypeName elementTypeName) : base(elementTypeName) { }
+        public ByRefTypeName(TypeName elementTypeName) : base(elementTypeName)
+        {
+        }
 
         public sealed override string ToString()
         {
@@ -281,7 +289,9 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class PointerTypeName : HasElementTypeName
     {
-        public PointerTypeName(TypeName elementTypeName) : base(elementTypeName) { }
+        public PointerTypeName(TypeName elementTypeName) : base(elementTypeName)
+        {
+        }
 
         public sealed override string ToString()
         {

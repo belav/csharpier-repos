@@ -26,9 +26,13 @@ class DeadCodeElimination
 
     class SanityTest
     {
-        class PresentType { }
+        class PresentType
+        {
+        }
 
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {
@@ -43,7 +47,9 @@ class DeadCodeElimination
 
     class TestInstanceMethodOptimization
     {
-        class UnreferencedType { }
+        class UnreferencedType
+        {
+        }
 
         class NeverAllocatedType
         {
@@ -74,7 +80,9 @@ class DeadCodeElimination
 
     class TestAbstractTypeNeverDerivedVirtualsOptimization
     {
-        class UnreferencedType1 { }
+        class UnreferencedType1
+        {
+        }
 
         class TheBase
         {
@@ -92,7 +100,9 @@ class DeadCodeElimination
             public object TrySomething() => Something();
         }
 
-        abstract class AbstractDerivedAgain : AbstractDerived { }
+        abstract class AbstractDerivedAgain : AbstractDerived
+        {
+        }
 
         static TheBase s_b = new TheBase();
         static AbstractDerived s_d = null;
@@ -128,9 +138,13 @@ class DeadCodeElimination
             public virtual void DoSomething() => new UnreferencedType1().ToString();
         }
 
-        sealed class Derived : Base { }
+        sealed class Derived : Base
+        {
+        }
 
-        class UnreferencedType1 { }
+        class UnreferencedType1
+        {
+        }
 
         public static void Run()
         {
@@ -161,14 +175,20 @@ class DeadCodeElimination
             public virtual void DoSomething() => new UnreferencedType1().ToString();
         }
 
-        sealed class Derived1 : Base { }
+        sealed class Derived1 : Base
+        {
+        }
 
         sealed class Derived2 : Base
         {
-            public override void DoSomething() { }
+            public override void DoSomething()
+            {
+            }
         }
 
-        class UnreferencedType1 { }
+        class UnreferencedType1
+        {
+        }
 
         public static void Run()
         {
@@ -206,11 +226,15 @@ class DeadCodeElimination
             }
         }
 
-        class NeverReferenced { }
+        class NeverReferenced
+        {
+        }
 
         class SomeInstance : IBar<object>
         {
-            void IFoo<object>.DoSomething() { }
+            void IFoo<object>.DoSomething()
+            {
+            }
         }
 
         static IFoo<object> s_instance = new SomeInstance();
@@ -256,21 +280,27 @@ class DeadCodeElimination
             }
         }
 
-        class Marker1 { }
+        class Marker1
+        {
+        }
 
         struct NeverAllocated1
         {
             public override string ToString() => typeof(Marker1).ToString();
         }
 
-        class Marker2 { }
+        class Marker2
+        {
+        }
 
         struct NeverAllocated2
         {
             public override string ToString() => typeof(Marker2).ToString();
         }
 
-        class Marker3 { }
+        class Marker3
+        {
+        }
 
         class NeverAllocated3
         {
@@ -295,9 +325,13 @@ class DeadCodeElimination
             public static Type Frob() => typeof(Marker2);
         }
 
-        class Marker1 { }
+        class Marker1
+        {
+        }
 
-        class Marker2 { }
+        class Marker2
+        {
+        }
 
         static Type Call<T>() where T : IFoo => T.Frob();
 
@@ -318,7 +352,9 @@ class DeadCodeElimination
 
     class TestTypeEquals
     {
-        sealed class Never { }
+        sealed class Never
+        {
+        }
 
         static Type s_type = null;
 

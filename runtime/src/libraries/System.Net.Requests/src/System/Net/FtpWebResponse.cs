@@ -76,7 +76,9 @@ namespace System.Net
 
         internal sealed class EmptyStream : MemoryStream
         {
-            internal EmptyStream() : base(Array.Empty<byte>(), false) { }
+            internal EmptyStream() : base(Array.Empty<byte>(), false)
+            {
+            }
         }
 
         internal void SetResponseStream(Stream? stream)

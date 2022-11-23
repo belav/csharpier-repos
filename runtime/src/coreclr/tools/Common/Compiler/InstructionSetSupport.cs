@@ -29,7 +29,9 @@ namespace ILCompiler
                 supportedInstructionSets,
                 default(InstructionSetFlags),
                 architecture
-            ) { }
+            )
+        {
+        }
 
         public InstructionSetSupport(
             InstructionSetFlags supportedInstructionSets,

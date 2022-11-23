@@ -183,7 +183,9 @@ namespace System.Net.Http
                 {
                     auth = Uri.UnescapeDataString(auth);
                 }
-                catch { }
+                catch
+                {
+                }
                 ;
 
                 value = value.Substring(separatorIndex + 1);
@@ -259,7 +261,9 @@ namespace System.Net.Http
 
                 return uri;
             }
-            catch { }
+            catch
+            {
+            }
             ;
             return null;
         }

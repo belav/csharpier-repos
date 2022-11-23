@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class EndIfKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public EndIfKeywordRecommender()
-            : base(SyntaxKind.EndIfKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.EndIfKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

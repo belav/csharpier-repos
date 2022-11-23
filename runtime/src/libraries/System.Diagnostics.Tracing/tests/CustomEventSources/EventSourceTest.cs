@@ -36,7 +36,9 @@ namespace SdtEventSources
                         ? EventSourceSettings.EtwSelfDescribingEventFormat
                         : EventSourceSettings.EtwManifestEventFormat
                 ) | (throwOnEventWriteErrors ? EventSourceSettings.ThrowOnEventWriteErrors : 0)
-            ) { }
+            )
+        {
+        }
 
         protected override void OnEventCommand(EventCommandEventArgs command)
         {

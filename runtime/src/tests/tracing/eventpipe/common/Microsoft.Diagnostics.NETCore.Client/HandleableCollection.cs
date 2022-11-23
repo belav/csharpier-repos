@@ -287,6 +287,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
         }
 
-        protected virtual void OnHandlerBegin() { }
+        protected virtual void OnHandlerBegin()
+        {
+        }
     }
 }

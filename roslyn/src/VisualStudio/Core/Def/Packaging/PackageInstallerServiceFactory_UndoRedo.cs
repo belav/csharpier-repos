@@ -162,14 +162,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 {
                     await DoWorkerAsync(pUndoManager).ConfigureAwait(false);
                 }
-                catch (OperationCanceledException) { }
-                catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+                catch (OperationCanceledException)
+                {
+                }
+                catch (Exception e) when (FatalError.ReportAndCatch(e))
+                {
+                }
             }
 
             public void GetUnitType(out Guid pClsid, out int plID) =>
                 throw new NotImplementedException();
 
-            public void OnNextAdd() { }
+            public void OnNextAdd()
+            {
+            }
         }
 
         private class UninstallPackageUndoUnit : BaseUndoUnit
@@ -195,7 +201,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                     dte,
                     dteProject,
                     undoManager
-                ) { }
+                )
+            {
+            }
 
             protected override async Task DoWorkerAsync(IOleUndoManager pUndoManager)
             {
@@ -251,7 +259,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                     dte,
                     dteProject,
                     undoManager
-                ) { }
+                )
+            {
+            }
 
             public override void GetDescription(out string pBstr) =>
                 pBstr = string.Format(ServicesVSResources.Install_0, packageName);

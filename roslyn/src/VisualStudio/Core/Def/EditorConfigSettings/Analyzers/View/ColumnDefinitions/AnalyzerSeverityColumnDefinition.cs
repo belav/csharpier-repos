@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerSeverityColumnDefinition() { }
+        public AnalyzerSeverityColumnDefinition()
+        {
+        }
 
         public override string Name => Severity;
         public override string DisplayName => ServicesVSResources.Severity;

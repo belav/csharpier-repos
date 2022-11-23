@@ -51,7 +51,9 @@ namespace System.ComponentModel.Composition.Hosting
         ///     </para>
         ///     <paramref name="types"/> contains an element that was loaded in the Reflection-only context.
         /// </exception>
-        public TypeCatalog(params Type[] types) : this((IEnumerable<Type>)types) { }
+        public TypeCatalog(params Type[] types) : this((IEnumerable<Type>)types)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TypeCatalog"/> class

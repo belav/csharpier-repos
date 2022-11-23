@@ -536,7 +536,9 @@ namespace System.Web.Mvc
         private class AreaAwareViewLocation : ViewLocation
         {
             public AreaAwareViewLocation(string virtualPathFormatString)
-                : base(virtualPathFormatString) { }
+                : base(virtualPathFormatString)
+            {
+            }
 
             public override string Format(string viewName, string controllerName, string areaName)
             {

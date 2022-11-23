@@ -15,13 +15,17 @@ namespace System.DirectoryServices.ActiveDirectory
 
         #region constructors
         internal GlobalCatalog(DirectoryContext context, string globalCatalogName)
-            : base(context, globalCatalogName) { }
+            : base(context, globalCatalogName)
+        {
+        }
 
         internal GlobalCatalog(
             DirectoryContext context,
             string globalCatalogName,
             DirectoryEntryManager directoryEntryMgr
-        ) : base(context, globalCatalogName, directoryEntryMgr) { }
+        ) : base(context, globalCatalogName, directoryEntryMgr)
+        {
+        }
         #endregion constructors
 
         #region public methods

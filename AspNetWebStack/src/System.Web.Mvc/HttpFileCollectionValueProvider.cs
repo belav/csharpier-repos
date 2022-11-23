@@ -14,7 +14,9 @@ namespace System.Web.Mvc
             new Dictionary<string, HttpPostedFileBase[]>();
 
         public HttpFileCollectionValueProvider(ControllerContext controllerContext)
-            : base(GetHttpPostedFileDictionary(controllerContext), CultureInfo.InvariantCulture) { }
+            : base(GetHttpPostedFileDictionary(controllerContext), CultureInfo.InvariantCulture)
+        {
+        }
 
         private static Dictionary<string, HttpPostedFileBase[]> GetHttpPostedFileDictionary(
             ControllerContext controllerContext

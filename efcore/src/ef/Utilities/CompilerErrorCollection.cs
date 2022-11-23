@@ -8,7 +8,9 @@ namespace System.CodeDom.Compiler
     {
         public bool HasErrors => false;
 
-        public void Add(CompilerError error) { }
+        public void Add(CompilerError error)
+        {
+        }
     }
 }
 

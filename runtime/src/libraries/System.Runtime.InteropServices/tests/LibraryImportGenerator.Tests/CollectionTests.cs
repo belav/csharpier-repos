@@ -290,9 +290,13 @@ namespace LibraryImportGenerator.IntegrationTests
                             int length
                         ) => default;
 
-                        public void FromUnmanaged(byte* value) { }
+                        public void FromUnmanaged(byte* value)
+                        {
+                        }
 
-                        public void Free() { }
+                        public void Free()
+                        {
+                        }
                     }
                 }
             }

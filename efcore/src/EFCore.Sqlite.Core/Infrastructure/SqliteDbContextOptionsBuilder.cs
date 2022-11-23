@@ -28,5 +28,7 @@ public class SqliteDbContextOptionsBuilder
     /// </summary>
     /// <param name="optionsBuilder">The options builder.</param>
     public SqliteDbContextOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
-        : base(optionsBuilder) { }
+        : base(optionsBuilder)
+    {
+    }
 }

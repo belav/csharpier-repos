@@ -19,7 +19,9 @@ public sealed class HtmlTargetElementAttribute : Attribute
     /// elements with the required <see cref="Attributes"/>.
     /// </summary>
     /// <remarks><see cref="Tag"/> is set to <c>*</c>.</remarks>
-    public HtmlTargetElementAttribute() : this(ElementCatchAllTarget) { }
+    public HtmlTargetElementAttribute() : this(ElementCatchAllTarget)
+    {
+    }
 
     /// <summary>
     /// Instantiates a new instance of the <see cref="HtmlTargetElementAttribute"/> class with the given

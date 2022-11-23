@@ -13,7 +13,9 @@ public class NullConstructorParameterName
         );
     }
 
-    public class ResourcePointDTO { }
+    public class ResourcePointDTO
+    {
+    }
 
     object CreateDynamicObject()
     {

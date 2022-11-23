@@ -55,8 +55,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             public TrackingSession TrackingSession { get; private set; }
             public ITextBuffer Buffer => _buffer;
 
-            public event Action TrackingSessionUpdated = delegate { };
-            public event Action<ITrackingSpan> TrackingSessionCleared = delegate { };
+            public event Action TrackingSessionUpdated = delegate
+            {
+            };
+            public event Action<ITrackingSpan> TrackingSessionCleared = delegate
+            {
+            };
 
             public StateMachine(
                 IThreadingContext threadingContext,

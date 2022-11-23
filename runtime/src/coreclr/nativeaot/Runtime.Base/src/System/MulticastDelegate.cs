@@ -5,5 +5,7 @@ using System.Runtime;
 
 namespace System
 {
-    public class MulticastDelegate : Delegate { }
+    public class MulticastDelegate : Delegate
+    {
+    }
 }

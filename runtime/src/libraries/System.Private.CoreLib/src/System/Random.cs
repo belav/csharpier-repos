@@ -245,7 +245,9 @@ namespace System
             [ThreadStatic]
             private static XoshiroImpl? t_random;
 
-            public ThreadSafeRandom() : base(isThreadSafeRandom: true) { }
+            public ThreadSafeRandom() : base(isThreadSafeRandom: true)
+            {
+            }
 
             private static XoshiroImpl LocalRandom => t_random ?? Create();
 

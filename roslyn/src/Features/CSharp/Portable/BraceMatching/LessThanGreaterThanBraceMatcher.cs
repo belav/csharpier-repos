@@ -16,6 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public LessThanGreaterThanBraceMatcher()
-            : base(SyntaxKind.LessThanToken, SyntaxKind.GreaterThanToken) { }
+            : base(SyntaxKind.LessThanToken, SyntaxKind.GreaterThanToken)
+        {
+        }
     }
 }

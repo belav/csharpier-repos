@@ -356,8 +356,12 @@ namespace System
             {
                 return new TimeZoneInfo(timeZoneInformation, dstDisabled);
             }
-            catch (ArgumentException) { }
-            catch (InvalidTimeZoneException) { }
+            catch (ArgumentException)
+            {
+            }
+            catch (InvalidTimeZoneException)
+            {
+            }
 
             // if 'dstDisabled' was false then try passing in 'true' as a last ditch effort
             if (!dstDisabled)
@@ -366,8 +370,12 @@ namespace System
                 {
                     return new TimeZoneInfo(timeZoneInformation, dstDisabled: true);
                 }
-                catch (ArgumentException) { }
-                catch (InvalidTimeZoneException) { }
+                catch (ArgumentException)
+                {
+                }
+                catch (InvalidTimeZoneException)
+                {
+                }
             }
 
             // the data returned from Windows is completely bogus; return a dummy entry

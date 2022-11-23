@@ -566,9 +566,13 @@ public class ChangeTrackerTest
         public Skinner? TheHero { get; set; }
     }
 
-    public class Skinner { }
+    public class Skinner
+    {
+    }
 
-    public class TheStreets { }
+    public class TheStreets
+    {
+    }
 
     public class WeakHerosContext : DbContext
     {
@@ -2694,16 +2698,24 @@ public class ChangeTrackerTest
     private class LikeAZooContextPooled : LikeAZooContext
     {
         public LikeAZooContextPooled(DbContextOptions<LikeAZooContextPooled> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        }
     }
 
     private class LikeAZooContext : DbContext
     {
-        public LikeAZooContext() { }
+        public LikeAZooContext()
+        {
+        }
 
-        protected LikeAZooContext(DbContextOptions options) : base(options) { }
+        protected LikeAZooContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Cat> Cats => Set<Cat>();
 
@@ -4190,7 +4202,9 @@ public class ChangeTrackerTest
                 .UseInMemoryDatabase(nameof(TheShadows));
     }
 
-    private class Dark { }
+    private class Dark
+    {
+    }
 
     private class Category
     {
@@ -4228,7 +4242,9 @@ public class ChangeTrackerTest
         public OptionalCategory? Category { get; set; }
     }
 
-    private class SpecialProduct : Product { }
+    private class SpecialProduct : Product
+    {
+    }
 
     private class ProductDetails
     {
@@ -4287,9 +4303,13 @@ public class ChangeTrackerTest
         public OfThis? OfThis { get; set; }
     }
 
-    private class AreMade { }
+    private class AreMade
+    {
+    }
 
-    private class OfThis : AreMade { }
+    private class OfThis : AreMade
+    {
+    }
 
     private class WhoAmI
     {

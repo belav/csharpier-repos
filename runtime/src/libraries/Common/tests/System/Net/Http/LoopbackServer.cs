@@ -174,7 +174,9 @@ namespace System.Net.Test.Common
                 catch (SocketException ex)
                     when (ex.SocketErrorCode == SocketError.InvalidArgument
                         && PlatformDetection.IsOSXLike
-                    ) { }
+                    )
+                {
+                }
 
                 stream = new NetworkStream(socket, ownsSocket: false);
 #endif
@@ -807,7 +809,9 @@ namespace System.Net.Test.Common
                     // This may throw if the socket was already closed, so eat any exception.
                     _socket?.Shutdown(SocketShutdown.Send);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
 #if !NETSTANDARD2_0 && !NETFRAMEWORK
                 await _stream.DisposeAsync().ConfigureAwait(false);

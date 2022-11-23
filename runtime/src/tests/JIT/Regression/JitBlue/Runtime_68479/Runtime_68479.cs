@@ -21,7 +21,9 @@ public class Runtime_68479
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void BlockFwdSub() { }
+    private static void BlockFwdSub()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Use(ref int a, long b, long c)

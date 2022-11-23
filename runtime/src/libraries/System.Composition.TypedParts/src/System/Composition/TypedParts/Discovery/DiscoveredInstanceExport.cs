@@ -12,7 +12,9 @@ namespace System.Composition.TypedParts.Discovery
         public DiscoveredInstanceExport(
             CompositionContract contract,
             IDictionary<string, object> metadata
-        ) : base(contract, metadata) { }
+        ) : base(contract, metadata)
+        {
+        }
 
         protected override ExportDescriptor GetExportDescriptor(CompositeActivator partActivator)
         {

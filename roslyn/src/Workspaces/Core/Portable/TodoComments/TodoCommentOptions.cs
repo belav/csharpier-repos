@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.TodoComments
         [property: DataMember(Order = 0)] string TokenList = ""
     )
     {
-        public TodoCommentOptions() : this(TokenList: "") { }
+        public TodoCommentOptions() : this(TokenList: "")
+        {
+        }
 
         public static readonly TodoCommentOptions Default = new();
     }

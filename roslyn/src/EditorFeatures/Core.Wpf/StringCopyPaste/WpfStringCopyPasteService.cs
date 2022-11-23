@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.StringCopyPaste
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WpfStringCopyPasteService() { }
+        public WpfStringCopyPasteService()
+        {
+        }
 
         private static string GetFormat(string key) => $"{RoslynFormat}-{key}";
 
@@ -52,7 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.StringCopyPaste
                 // Expected exception.  The clipboard is a shared windows resource that can be locked by any other
                 // process. If we weren't able to acquire it, then just bail out gracefully.
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
+            {
+            }
 
             return false;
         }
@@ -68,7 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.StringCopyPaste
                     return dataObject.GetData(format) as string;
                 }
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
+            {
+            }
 
             return null;
         }

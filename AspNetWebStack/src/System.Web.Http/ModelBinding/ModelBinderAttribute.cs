@@ -35,7 +35,9 @@ namespace System.Web.Http.ModelBinding
     )]
     public class ModelBinderAttribute : ParameterBindingAttribute
     {
-        public ModelBinderAttribute() : this(null) { }
+        public ModelBinderAttribute() : this(null)
+        {
+        }
 
         public ModelBinderAttribute(Type binderType)
         {

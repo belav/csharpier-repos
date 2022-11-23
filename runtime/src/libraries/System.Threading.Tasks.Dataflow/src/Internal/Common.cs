@@ -487,8 +487,12 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 return block.Completion;
             }
-            catch (NotImplementedException) { }
-            catch (NotSupportedException) { }
+            catch (NotImplementedException)
+            {
+            }
+            catch (NotSupportedException)
+            {
+            }
             return null;
         }
 
@@ -833,7 +837,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Initializes the BoundingState.</summary>
         /// <param name="boundedCapacity">The positive bounded capacity.</param>
-        internal BoundingStateWithPostponed(int boundedCapacity) : base(boundedCapacity) { }
+        internal BoundingStateWithPostponed(int boundedCapacity) : base(boundedCapacity)
+        {
+        }
 
         /// <summary>Gets the number of postponed messages for the debugger.</summary>
         private int PostponedMessagesCountForDebugger
@@ -852,7 +858,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Initializes the BoundingState.</summary>
         /// <param name="boundedCapacity">The positive bounded capacity.</param>
-        internal BoundingStateWithPostponedAndTask(int boundedCapacity) : base(boundedCapacity) { }
+        internal BoundingStateWithPostponedAndTask(int boundedCapacity) : base(boundedCapacity)
+        {
+        }
     }
 
     /// <summary>
@@ -861,5 +869,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
     /// that in the future could lead to compat problems.
     /// </summary>
     [DebuggerNonUserCode]
-    internal struct VoidResult { }
+    internal struct VoidResult
+    {
+    }
 }

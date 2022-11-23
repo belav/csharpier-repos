@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpAddDocCommentNodesCodeFixProvider() { }
+        public CSharpAddDocCommentNodesCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS1573);

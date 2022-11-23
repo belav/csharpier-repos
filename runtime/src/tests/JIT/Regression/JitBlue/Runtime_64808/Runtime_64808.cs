@@ -25,7 +25,9 @@ public struct S0
 {
     public int F0;
 
-    public S0(int f0) : this() { }
+    public S0(int f0) : this()
+    {
+    }
 }
 
 public class Runtime_64808

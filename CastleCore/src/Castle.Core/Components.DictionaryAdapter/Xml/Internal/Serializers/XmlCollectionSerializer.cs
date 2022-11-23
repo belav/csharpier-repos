@@ -19,7 +19,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public abstract class XmlCollectionSerializer : XmlTypeSerializer
     {
-        protected XmlCollectionSerializer() { }
+        protected XmlCollectionSerializer()
+        {
+        }
 
         public override XmlTypeKind Kind
         {

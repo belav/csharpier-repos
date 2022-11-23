@@ -19,22 +19,32 @@ namespace Tests.Integration
         // Import.Shared     Shared     Shared       N/A
         // Import.NonShared  NonShared  N/A          NonShared
 
-        public interface ICreationPolicyExport { }
+        public interface ICreationPolicyExport
+        {
+        }
 
         [Export(typeof(ICreationPolicyExport))]
-        public class CreationPolicyAnyExportImplicit : ICreationPolicyExport { }
+        public class CreationPolicyAnyExportImplicit : ICreationPolicyExport
+        {
+        }
 
         [Export(typeof(ICreationPolicyExport))]
         [PartCreationPolicy(CreationPolicy.Any)]
-        public class CreationPolicyAnyExportExplicit : ICreationPolicyExport { }
+        public class CreationPolicyAnyExportExplicit : ICreationPolicyExport
+        {
+        }
 
         [Export(typeof(ICreationPolicyExport))]
         [PartCreationPolicy(CreationPolicy.Shared)]
-        public class CreationPolicySharedExport : ICreationPolicyExport { }
+        public class CreationPolicySharedExport : ICreationPolicyExport
+        {
+        }
 
         [Export(typeof(ICreationPolicyExport))]
         [PartCreationPolicy(CreationPolicy.NonShared)]
-        public class CreationPolicyNonSharedExport : ICreationPolicyExport { }
+        public class CreationPolicyNonSharedExport : ICreationPolicyExport
+        {
+        }
 
         [Export]
         public class RequiredAnyImporterImplicit

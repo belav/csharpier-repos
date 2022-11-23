@@ -48,7 +48,9 @@ namespace System.Reflection.Internal
         }
 #endif
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override bool CanRead => true;
         public override bool CanSeek => true;

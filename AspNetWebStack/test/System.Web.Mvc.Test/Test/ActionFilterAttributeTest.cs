@@ -41,6 +41,8 @@ namespace System.Web.Mvc.Test
             );
         }
 
-        private class EmptyActionFilterAttribute : ActionFilterAttribute { }
+        private class EmptyActionFilterAttribute : ActionFilterAttribute
+        {
+        }
     }
 }

@@ -56,6 +56,8 @@ namespace System.Drawing
             // Do nothing on Unix.
         }
 
-        public void Invalidate() { }
+        public void Invalidate()
+        {
+        }
     }
 }

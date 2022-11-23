@@ -96,7 +96,9 @@ namespace Newtonsoft.Json.Converters
         /// <summary>
         /// Initializes a new instance of the <see cref="StringEnumConverter"/> class.
         /// </summary>
-        public StringEnumConverter() { }
+        public StringEnumConverter()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringEnumConverter"/> class.

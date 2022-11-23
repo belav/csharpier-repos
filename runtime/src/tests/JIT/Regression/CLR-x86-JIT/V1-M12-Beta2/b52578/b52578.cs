@@ -8,7 +8,9 @@ namespace Test
 
     class App
     {
-        static void Func(ref Array param1) { }
+        static void Func(ref Array param1)
+        {
+        }
 
         static void Main1()
         {

@@ -12,6 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
 
         public static readonly ActiveStatementTag Instance = new();
 
-        private ActiveStatementTag() : base(TagId) { }
+        private ActiveStatementTag() : base(TagId)
+        {
+        }
     }
 }

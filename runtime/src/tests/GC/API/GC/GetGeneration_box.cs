@@ -6,9 +6,13 @@
 
 using System;
 
-public struct StructType { }
+public struct StructType
+{
+}
 
-public enum EnumType { }
+public enum EnumType
+{
+}
 
 public class Test_GetGeneration_box
 {

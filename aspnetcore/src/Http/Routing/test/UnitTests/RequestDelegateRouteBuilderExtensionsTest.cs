@@ -30,7 +30,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareRoute("api/{id}", app => { });
+                        b.MapMiddlewareRoute(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     null
                 },
@@ -47,7 +52,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareDelete("api/{id}", app => { });
+                        b.MapMiddlewareDelete(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -67,7 +77,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareGet("api/{id}", app => { });
+                        b.MapMiddlewareGet(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -87,7 +102,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewarePost("api/{id}", app => { });
+                        b.MapMiddlewarePost(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -107,7 +127,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewarePut("api/{id}", app => { });
+                        b.MapMiddlewarePut(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -127,7 +152,13 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareVerb("PUT", "api/{id}", app => { });
+                        b.MapMiddlewareVerb(
+                            "PUT",
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -179,7 +210,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareRoute("api/{id}/extra", app => { });
+                        b.MapMiddlewareRoute(
+                            "api/{id}/extra",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     null
                 },
@@ -196,7 +232,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareDelete("api/{id}", app => { });
+                        b.MapMiddlewareDelete(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -216,7 +257,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareDelete("api/{id}/extra", app => { });
+                        b.MapMiddlewareDelete(
+                            "api/{id}/extra",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -236,7 +282,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareGet("api/{id}", app => { });
+                        b.MapMiddlewareGet(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -256,7 +307,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareGet("api/{id}/extra", app => { });
+                        b.MapMiddlewareGet(
+                            "api/{id}/extra",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -276,7 +332,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewarePost("api/{id}", app => { });
+                        b.MapMiddlewarePost(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -296,7 +357,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewarePost("api/{id}/extra", app => { });
+                        b.MapMiddlewarePost(
+                            "api/{id}/extra",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -316,7 +382,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewarePut("api/{id}", app => { });
+                        b.MapMiddlewarePut(
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -336,7 +407,12 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewarePut("api/{id}/extra", app => { });
+                        b.MapMiddlewarePut(
+                            "api/{id}/extra",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -356,7 +432,13 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareVerb("PUT", "api/{id}", app => { });
+                        b.MapMiddlewareVerb(
+                            "PUT",
+                            "api/{id}",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {
@@ -376,7 +458,13 @@ public class RequestDelegateRouteBuilderExtensionsTest
                 {
                     b =>
                     {
-                        b.MapMiddlewareVerb("PUT", "api/{id}/extra", app => { });
+                        b.MapMiddlewareVerb(
+                            "PUT",
+                            "api/{id}/extra",
+                            app =>
+                            {
+                            }
+                        );
                     },
                     c =>
                     {

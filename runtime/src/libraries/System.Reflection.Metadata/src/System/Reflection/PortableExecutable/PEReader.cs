@@ -52,7 +52,8 @@ namespace System.Reflection.PortableExecutable
         /// The content of the image is not read during the construction of the <see cref="PEReader"/>
         /// </remarks>
         public unsafe PEReader(byte* peImage, int size) : this(peImage, size, isLoadedImage: false)
-        { }
+        {
+        }
 
         /// <summary>
         /// Creates a Portable Executable reader over a PE image stored in memory.
@@ -92,7 +93,9 @@ namespace System.Reflection.PortableExecutable
         /// Ownership of the stream is transferred to the <see cref="PEReader"/> upon successful validation of constructor arguments. It will be
         /// disposed by the <see cref="PEReader"/> and the caller must not manipulate it.
         /// </remarks>
-        public PEReader(Stream peStream) : this(peStream, PEStreamOptions.Default) { }
+        public PEReader(Stream peStream) : this(peStream, PEStreamOptions.Default)
+        {
+        }
 
         /// <summary>
         /// Creates a Portable Executable reader over a PE image stored in a stream beginning at its current position and ending at the end of the stream.
@@ -117,7 +120,9 @@ namespace System.Reflection.PortableExecutable
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="options"/> has an invalid value.</exception>
         /// <exception cref="IOException">Error reading from the stream (only when prefetching data).</exception>
         /// <exception cref="BadImageFormatException"><see cref="PEStreamOptions.PrefetchMetadata"/> is specified and the PE headers of the image are invalid.</exception>
-        public PEReader(Stream peStream, PEStreamOptions options) : this(peStream, options, 0) { }
+        public PEReader(Stream peStream, PEStreamOptions options) : this(peStream, options, 0)
+        {
+        }
 
         /// <summary>
         /// Creates a Portable Executable reader over a PE image of the given size beginning at the stream's current position.

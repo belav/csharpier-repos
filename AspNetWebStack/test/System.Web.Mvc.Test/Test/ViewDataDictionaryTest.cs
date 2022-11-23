@@ -545,7 +545,9 @@ namespace System.Web.Mvc.Test
 
         public class PersonPropertyDescriptor : PropertyDescriptor
         {
-            public PersonPropertyDescriptor() : base("Bar.Baz", null) { }
+            public PersonPropertyDescriptor() : base("Bar.Baz", null)
+            {
+            }
 
             public override object GetValue(object component)
             {
@@ -572,9 +574,13 @@ namespace System.Web.Mvc.Test
                 get { return typeof(string); }
             }
 
-            public override void ResetValue(object component) { }
+            public override void ResetValue(object component)
+            {
+            }
 
-            public override void SetValue(object component, object value) { }
+            public override void SetValue(object component, object value)
+            {
+            }
 
             public override bool ShouldSerializeValue(object component)
             {

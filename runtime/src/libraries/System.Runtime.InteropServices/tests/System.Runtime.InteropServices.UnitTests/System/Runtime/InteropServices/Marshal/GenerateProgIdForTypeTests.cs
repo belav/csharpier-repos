@@ -37,11 +37,15 @@ namespace System.Runtime.InteropServices.Tests
 
         [ComVisible(true)]
         [ProgId("TestProgID")]
-        public class ClassWithProgID { }
+        public class ClassWithProgID
+        {
+        }
 
         [ComVisible(true)]
         [ProgId(null)]
-        public class ClassWithNullProgID { }
+        public class ClassWithNullProgID
+        {
+        }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GenerateProgIdForType_NullType_ThrowsArgumentNullException()

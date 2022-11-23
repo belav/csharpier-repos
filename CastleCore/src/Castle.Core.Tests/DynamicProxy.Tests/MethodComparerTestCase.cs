@@ -25,11 +25,17 @@ namespace Castle.DynamicProxy.Tests
     [TestFixture]
     public class MethodComparerTestCase
     {
-        public static void GenericMethod<T>() { }
+        public static void GenericMethod<T>()
+        {
+        }
 
-        public static void GenericMethod2<T>() { }
+        public static void GenericMethod2<T>()
+        {
+        }
 
-        public static void GenericMethod3<T, H>(T t, H h) { }
+        public static void GenericMethod3<T, H>(T t, H h)
+        {
+        }
 
         public static T GenericMethod4<T>(T t)
         {
@@ -53,23 +59,35 @@ namespace Castle.DynamicProxy.Tests
 
         private class FakeScope
         {
-            public static void GenericMethod() { }
+            public static void GenericMethod()
+            {
+            }
 
-            public static void GenericMethod3<T>(T t) { }
+            public static void GenericMethod3<T>(T t)
+            {
+            }
         }
 
         private class NewScope
         {
-            public static void GenericMethod3<T, H>(H t, T h) { }
+            public static void GenericMethod3<T, H>(H t, T h)
+            {
+            }
         }
 
         private class Base
         {
-            public virtual void GenericMethod() { }
+            public virtual void GenericMethod()
+            {
+            }
 
-            public virtual void GenericMethod2<T>() { }
+            public virtual void GenericMethod2<T>()
+            {
+            }
 
-            public virtual void GenericMethod3<T, H>(T t, H h) { }
+            public virtual void GenericMethod3<T, H>(T t, H h)
+            {
+            }
 
             public virtual T GenericMethod4<T>(T t)
             {
@@ -565,8 +583,12 @@ namespace Castle.DynamicProxy.Tests
             void GenericMethod<T>(GenericClass2<T> arg);
         }
 
-        private class GenericClass1<T> { }
+        private class GenericClass1<T>
+        {
+        }
 
-        private class GenericClass2<T> { }
+        private class GenericClass2<T>
+        {
+        }
     }
 }

@@ -5,7 +5,9 @@ namespace GcInfoTransitions
 {
     class GcInfoTransitions
     {
-        static void abc(string a) { }
+        static void abc(string a)
+        {
+        }
 
         static void Main(string[] args)
         {

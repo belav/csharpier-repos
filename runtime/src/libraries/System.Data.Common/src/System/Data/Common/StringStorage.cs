@@ -13,7 +13,9 @@ namespace System.Data.Common
         private string?[] _values = default!; // Late-initialized
 
         public StringStorage(DataColumn column)
-            : base(column, typeof(string), string.Empty, StorageType.String) { }
+            : base(column, typeof(string), string.Empty, StorageType.String)
+        {
+        }
 
         public override object Aggregate(int[] recordNos, AggregateType kind)
         {

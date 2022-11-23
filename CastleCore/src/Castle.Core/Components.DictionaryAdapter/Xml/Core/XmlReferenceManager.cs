@@ -583,7 +583,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             public readonly bool IsInGraph;
 
             public EntryValue(Type type, object value, bool isInGraph)
-                : this(type, new WeakReference(value), isInGraph) { }
+                : this(type, new WeakReference(value), isInGraph)
+            {
+            }
 
             public EntryValue(Type type, WeakReference value, bool isInGraph)
             {

@@ -1601,7 +1601,9 @@ namespace System.Web.Http
             Assert.DoesNotThrow(() => controller.Validate(entity));
         }
 
-        private class TestController : ApiController { }
+        private class TestController : ApiController
+        {
+        }
 
         private class TestEntity
         {
@@ -1728,16 +1730,22 @@ namespace System.Web.Http
 
         public class ExceptionlessController : ApiController
         {
-            public void Get() { }
+            public void Get()
+            {
+            }
         }
 
         public class SpyDisposeController : ApiController
         {
             public static bool DisposeWasCalled = false;
 
-            public SpyDisposeController() { }
+            public SpyDisposeController()
+            {
+            }
 
-            public void Get() { }
+            public void Get()
+            {
+            }
 
             protected override void Dispose(bool disposing)
             {

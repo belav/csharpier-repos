@@ -267,7 +267,9 @@ namespace XLinqTests
                     }
                     TestLog.Compare(false, "Exception has been expected here");
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
             }
         }
 
@@ -293,7 +295,9 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument invalid add - DTD after element")]
@@ -315,7 +319,9 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument invalid add - multiple root elements")]
@@ -340,7 +346,9 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument invalid add - CData, attribute, text (no whitespace)")]
@@ -372,7 +380,9 @@ namespace XLinqTests
                     }
                     TestLog.Compare(false, "Exception expected");
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
             }
         }
 

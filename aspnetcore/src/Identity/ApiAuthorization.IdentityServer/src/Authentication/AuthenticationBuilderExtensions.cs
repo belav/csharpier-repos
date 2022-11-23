@@ -52,7 +52,13 @@ public static class AuthenticationBuilderExtensions
                         ).SelectScheme;
                 }
             )
-            .AddJwtBearer(IdentityServerJwtConstants.IdentityServerJwtBearerScheme, null, o => { });
+            .AddJwtBearer(
+                IdentityServerJwtConstants.IdentityServerJwtBearerScheme,
+                null,
+                o =>
+                {
+                }
+            );
 
         return builder;
 

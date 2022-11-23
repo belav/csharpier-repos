@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             _builder = builder;
         }
 
-        public override void DefaultVisit(Symbol symbol) { }
+        public override void DefaultVisit(Symbol symbol)
+        {
+        }
 
         public override void VisitModule(ModuleSymbol module)
         {

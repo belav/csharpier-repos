@@ -125,7 +125,9 @@ namespace System.DirectoryServices.Protocols
         private readonly int _keyExchangeAlgorithm;
         private readonly int _exchangeStrength;
 
-        internal SecurityPackageContextConnectionInformation() { }
+        internal SecurityPackageContextConnectionInformation()
+        {
+        }
 
         public SecurityProtocol Protocol => _securityProtocol;
 
@@ -147,7 +149,9 @@ namespace System.DirectoryServices.Protocols
 
     public sealed class ReferralCallback
     {
-        public ReferralCallback() { }
+        public ReferralCallback()
+        {
+        }
 
         public QueryForConnectionCallback QueryForConnection { get; set; }
 

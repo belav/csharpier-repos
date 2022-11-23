@@ -494,6 +494,8 @@ namespace System.Linq.Parallel.Tests
             }
         }
 
-        private class TestDisposeException : Exception { }
+        private class TestDisposeException : Exception
+        {
+        }
     }
 }

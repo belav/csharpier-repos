@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 storageLocations: ImmutableArray<OptionStorageLocation>.Empty
-            ) { }
+            )
+        {
+        }
 
         public Option(
             string feature,
@@ -58,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 storageLocations.ToImmutableArray()
-            ) { }
+            )
+        {
+        }
 
         internal Option(
             string feature,
@@ -71,14 +75,18 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 storageLocations: ImmutableArray.Create(storageLocation)
-            ) { }
+            )
+        {
+        }
 
         internal Option(
             string feature,
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation> storageLocations
-        ) : this(feature, OptionGroup.Default, name, defaultValue, storageLocations) { }
+        ) : this(feature, OptionGroup.Default, name, defaultValue, storageLocations)
+        {
+        }
 
         internal Option(
             string feature,
@@ -90,7 +98,9 @@ namespace Microsoft.CodeAnalysis.Options
             : this(
                 new OptionDefinition(feature, group, name, defaultValue, typeof(T)),
                 storageLocations
-            ) { }
+            )
+        {
+        }
 
         internal Option(
             OptionDefinition optionDefinition,

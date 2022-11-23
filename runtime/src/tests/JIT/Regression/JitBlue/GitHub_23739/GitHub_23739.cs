@@ -83,7 +83,9 @@ class GitHub_23739
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Sink<T>(ref T t) { }
+    static void Sink<T>(ref T t)
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Test1f(Cls1f c)

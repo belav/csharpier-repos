@@ -13,9 +13,13 @@ namespace System.Net.Http
     {
         private const string formData = "form-data";
 
-        public MultipartFormDataContent() : base(formData) { }
+        public MultipartFormDataContent() : base(formData)
+        {
+        }
 
-        public MultipartFormDataContent(string boundary) : base(formData, boundary) { }
+        public MultipartFormDataContent(string boundary) : base(formData, boundary)
+        {
+        }
 
         public override void Add(HttpContent content)
         {

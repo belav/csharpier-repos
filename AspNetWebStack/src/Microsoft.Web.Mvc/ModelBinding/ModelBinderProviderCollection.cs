@@ -13,9 +13,13 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class ModelBinderProviderCollection : Collection<ModelBinderProvider>
     {
-        public ModelBinderProviderCollection() { }
+        public ModelBinderProviderCollection()
+        {
+        }
 
-        public ModelBinderProviderCollection(IList<ModelBinderProvider> list) : base(list) { }
+        public ModelBinderProviderCollection(IList<ModelBinderProvider> list) : base(list)
+        {
+        }
 
         private static void EnsureNoBindAttribute(Type modelType)
         {

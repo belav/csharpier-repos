@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.GoToImplementation
                 uiThreadOperationExecutor,
                 listenerProvider.GetListener(FeatureAttribute.GoToImplementation),
                 globalOptions
-            ) { }
+            )
+        {
+        }
 
         public override string DisplayName => EditorFeaturesResources.Go_To_Implementation;
 

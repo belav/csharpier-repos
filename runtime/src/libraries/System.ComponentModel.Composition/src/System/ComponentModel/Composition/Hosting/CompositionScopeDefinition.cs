@@ -24,7 +24,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositionScopeDefinition"/> class.
         /// </summary>
-        protected CompositionScopeDefinition() { }
+        protected CompositionScopeDefinition()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositionScopeDefinition"/> class.

@@ -233,7 +233,9 @@ namespace System.ComponentModel.Composition
         private class ContainerUnawareProviderRedirect : TypeDescriptionProvider
         {
             public ContainerUnawareProviderRedirect(Type forType)
-                : base(TypeDescriptor.GetProvider(forType)) { }
+                : base(TypeDescriptor.GetProvider(forType))
+            {
+            }
 
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 Type objectType,

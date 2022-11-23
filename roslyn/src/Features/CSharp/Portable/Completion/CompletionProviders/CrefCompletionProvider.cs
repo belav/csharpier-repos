@@ -68,7 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CrefCompletionProvider() { }
+        public CrefCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

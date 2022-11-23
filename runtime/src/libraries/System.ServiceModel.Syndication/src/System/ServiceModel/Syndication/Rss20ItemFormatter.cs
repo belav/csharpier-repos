@@ -16,7 +16,9 @@ namespace System.ServiceModel.Syndication
         private bool _preserveElementExtensions = true;
         private bool _serializeExtensionsAsAtom;
 
-        public Rss20ItemFormatter() : this(typeof(SyndicationItem)) { }
+        public Rss20ItemFormatter() : this(typeof(SyndicationItem))
+        {
+        }
 
         public Rss20ItemFormatter(Type itemTypeToCreate) : base()
         {
@@ -44,7 +46,9 @@ namespace System.ServiceModel.Syndication
             ItemType = itemTypeToCreate;
         }
 
-        public Rss20ItemFormatter(SyndicationItem itemToWrite) : this(itemToWrite, true) { }
+        public Rss20ItemFormatter(SyndicationItem itemToWrite) : this(itemToWrite, true)
+        {
+        }
 
         public Rss20ItemFormatter(SyndicationItem itemToWrite, bool serializeExtensionsAsAtom)
             : base(itemToWrite)
@@ -170,12 +174,18 @@ namespace System.ServiceModel.Syndication
     public class Rss20ItemFormatter<TSyndicationItem> : Rss20ItemFormatter, IXmlSerializable
         where TSyndicationItem : SyndicationItem, new()
     {
-        public Rss20ItemFormatter() : base(typeof(TSyndicationItem)) { }
+        public Rss20ItemFormatter() : base(typeof(TSyndicationItem))
+        {
+        }
 
-        public Rss20ItemFormatter(TSyndicationItem itemToWrite) : base(itemToWrite) { }
+        public Rss20ItemFormatter(TSyndicationItem itemToWrite) : base(itemToWrite)
+        {
+        }
 
         public Rss20ItemFormatter(TSyndicationItem itemToWrite, bool serializeExtensionsAsAtom)
-            : base(itemToWrite, serializeExtensionsAsAtom) { }
+            : base(itemToWrite, serializeExtensionsAsAtom)
+        {
+        }
 
         protected override SyndicationItem CreateItemInstance() => new TSyndicationItem();
     }

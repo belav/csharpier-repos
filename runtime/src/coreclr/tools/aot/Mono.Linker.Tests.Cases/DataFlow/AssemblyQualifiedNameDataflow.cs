@@ -114,7 +114,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-        class AnnotatedType { }
+        class AnnotatedType
+        {
+        }
 
         static void TestObjectGetTypeValue(AnnotatedType instance = null)
         {
@@ -130,19 +132,27 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 string type
-        ) { }
+        )
+        {
+        }
 
         private static void RequirePublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 string type
-        ) { }
+        )
+        {
+        }
 
         private static void RequireNonPublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
                 string type
-        ) { }
+        )
+        {
+        }
 
-        private static void RequireNothing(string type) { }
+        private static void RequireNothing(string type)
+        {
+        }
 
         [return: DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicParameterlessConstructor

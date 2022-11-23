@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public Task<(CompletionContext, RoslynCompletionList)>? ExpandedItemsTask { get; set; }
         public bool IsExclusive { get; set; }
 
-        private CompletionSessionData() { }
+        private CompletionSessionData()
+        {
+        }
 
         public static CompletionSessionData GetOrCreateSessionData(
             IAsyncCompletionSession session

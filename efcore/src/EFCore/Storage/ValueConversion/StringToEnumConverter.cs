@@ -20,7 +20,9 @@ public class StringToEnumConverter<TEnum> : StringEnumConverter<string, TEnum, T
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public StringToEnumConverter() : this(null) { }
+    public StringToEnumConverter() : this(null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter does not preserve order.
@@ -33,7 +35,9 @@ public class StringToEnumConverter<TEnum> : StringEnumConverter<string, TEnum, T
     ///     facets for the converted data.
     /// </param>
     public StringToEnumConverter(ConverterMappingHints? mappingHints)
-        : base(ToEnum(), ToString(), mappingHints) { }
+        : base(ToEnum(), ToString(), mappingHints)
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

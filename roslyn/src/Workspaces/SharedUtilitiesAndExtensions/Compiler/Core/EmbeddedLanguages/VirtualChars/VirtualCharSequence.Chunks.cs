@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         /// </summary>
         private abstract partial class Chunk
         {
-            protected Chunk() { }
+            protected Chunk()
+            {
+            }
 
             public abstract int Length { get; }
             public abstract VirtualChar this[int index] { get; }

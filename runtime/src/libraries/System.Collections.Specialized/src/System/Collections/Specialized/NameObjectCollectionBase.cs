@@ -41,7 +41,9 @@ namespace System.Collections.Specialized
         /// <para> Creates an empty <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance with the default initial capacity and using the default case-insensitive hash
         ///    code provider and the default case-insensitive comparer.</para>
         /// </devdoc>
-        protected NameObjectCollectionBase() : this(s_defaultComparer) { }
+        protected NameObjectCollectionBase() : this(s_defaultComparer)
+        {
+        }
 
         protected NameObjectCollectionBase(IEqualityComparer? equalityComparer)
         {

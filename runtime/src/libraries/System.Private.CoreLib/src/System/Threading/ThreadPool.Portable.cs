@@ -33,7 +33,9 @@ namespace System.Threading
 #endif
 
         // Threadpool specific initialization of a new thread. Used by OS-provided threadpools. No-op for portable threadpool.
-        internal static void InitializeForThreadPoolThread() { }
+        internal static void InitializeForThreadPoolThread()
+        {
+        }
 
 #pragma warning disable IDE0060
         internal static bool CanSetMinIOCompletionThreads(int ioCompletionThreads) => false;
@@ -42,10 +44,14 @@ namespace System.Threading
 #pragma warning restore IDE0060
 
         [Conditional("unnecessary")]
-        internal static void SetMinIOCompletionThreads(int ioCompletionThreads) { }
+        internal static void SetMinIOCompletionThreads(int ioCompletionThreads)
+        {
+        }
 
         [Conditional("unnecessary")]
-        internal static void SetMaxIOCompletionThreads(int ioCompletionThreads) { }
+        internal static void SetMaxIOCompletionThreads(int ioCompletionThreads)
+        {
+        }
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
             PortableThreadPool.ThreadPoolInstance.SetMaxThreads(

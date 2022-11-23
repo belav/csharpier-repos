@@ -13,7 +13,12 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             var virtualPath = "~/index.cshtml";
-            var mockPage = Utils.CreatePage(_ => { }, virtualPath);
+            var mockPage = Utils.CreatePage(
+                _ =>
+                {
+                },
+                virtualPath
+            );
             var factory = new Mock<IVirtualPathFactory>();
             factory.Setup(c => c.Exists(virtualPath)).Returns(true).Verifiable();
             factory.Setup(c => c.CreateInstance(virtualPath)).Returns(mockPage);
@@ -32,7 +37,12 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             var virtualPath = "~/index.cshtml";
-            var mockPage = Utils.CreatePage(_ => { }, virtualPath);
+            var mockPage = Utils.CreatePage(
+                _ =>
+                {
+                },
+                virtualPath
+            );
             var factory1 = new HashVirtualPathFactory(mockPage);
             var factory2 = new HashVirtualPathFactory(
                 Utils.CreatePage(null, "~/_admin/index.cshtml")
@@ -51,7 +61,14 @@ namespace System.Web.WebPages.Test
         public void GenericCreateInstanceReturnsNullIfNoFactoryCanCreateVirtualPath()
         {
             // Arrange
-            var factory1 = new HashVirtualPathFactory(Utils.CreatePage(_ => { }, "~/index.cshtml"));
+            var factory1 = new HashVirtualPathFactory(
+                Utils.CreatePage(
+                    _ =>
+                    {
+                    },
+                    "~/index.cshtml"
+                )
+            );
             var factory2 = new HashVirtualPathFactory(
                 Utils.CreatePage(null, "~/_admin/index.cshtml")
             );

@@ -47,7 +47,9 @@ namespace Newtonsoft.Json.Tests.Converters
             StringProperty2 = "StringProperty2";
         }
 
-        public VersionClass() { }
+        public VersionClass()
+        {
+        }
 
         public string StringProperty1 { get; set; }
         public Version Version1 { get; set; }

@@ -207,22 +207,30 @@ namespace System.Net
 
     public partial class IPHostEntry
     {
-        public IPHostEntry() { }
+        public IPHostEntry()
+        {
+        }
 
         public System.Net.IPAddress[] AddressList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string[] Aliases
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string HostName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

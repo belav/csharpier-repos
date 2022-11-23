@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
                 CSharpEmbeddedLanguagesProvider.Info,
                 CSharpSyntaxKinds.Instance,
                 services
-            ) { }
+            )
+        {
+        }
 
         protected override async Task<ImmutableArray<Location>> GetAdditionalReferencesAsync(
             Document document,

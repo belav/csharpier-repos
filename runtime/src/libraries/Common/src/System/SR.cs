@@ -37,7 +37,9 @@ namespace System
                 ResourceManager.GetString(resourceKey);
 #endif
             }
-            catch (MissingManifestResourceException) { }
+            catch (MissingManifestResourceException)
+            {
+            }
 
             return resourceString!; // only null if missing resources
         }

@@ -10,7 +10,9 @@ namespace System.Linq.Expressions.Tests
 {
     public static class ConstantTests
     {
-        private class PrivateGenericClass<T> { }
+        private class PrivateGenericClass<T>
+        {
+        }
 
 #region Test methods
 
@@ -103,7 +105,10 @@ namespace System.Linq.Expressions.Tests
                         {
                             return i + 1;
                         },
-                    (Action<object>)delegate { }
+                    (Action<object>)
+                        delegate
+                        {
+                        }
                 }
             )
             {
@@ -1213,8 +1218,12 @@ namespace System.Linq.Expressions.Tests
     // NB: Should be public in order for ILGen to emit ldtoken
     public class SomePublicMethodsForLdToken
     {
-        public static void Bar() { }
+        public static void Bar()
+        {
+        }
 
-        public static void Qux<T>() { }
+        public static void Qux<T>()
+        {
+        }
     }
 }

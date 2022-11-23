@@ -235,7 +235,9 @@ namespace System.Reflection.Tests
         public int GetSetProperty
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -244,18 +246,24 @@ namespace System.Reflection.Tests
         public static int PublicGetPublicSetStaticProperty
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
         protected static int ProtectedGetProtectedSetStaticProperty
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public int PublicGetPublicSetProperty
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
         public int PublicGetProperty1
         {
@@ -263,13 +271,17 @@ namespace System.Reflection.Tests
         }
         public int PublicSetProperty
         {
-            set { }
+            set
+            {
+            }
         }
 
         protected int ProtectedGetProtectedSetProperty
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
         public int PublicGetPrivateSetProperty { get; private set; }
     }
@@ -292,7 +304,9 @@ namespace System.Reflection.Tests
         public int PublicGetPublicSetProperty
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

@@ -12,6 +12,8 @@ namespace System.Runtime.InteropServices
 
         public bool ExactSpelling;
 
-        public DllImportAttribute(string dllName) { }
+        public DllImportAttribute(string dllName)
+        {
+        }
     }
 }

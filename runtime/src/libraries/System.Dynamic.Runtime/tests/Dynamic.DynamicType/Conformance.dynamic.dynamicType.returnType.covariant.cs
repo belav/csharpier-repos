@@ -2883,7 +2883,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public virtual object this[int x]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -2910,7 +2912,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public override dynamic this[int x]
         {
             get { return x; }
-            set { }
+            set
+            {
+            }
         }
 
         //Some operators
@@ -2980,7 +2984,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public virtual object this[int x]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static object operator &(Base b, object o)
@@ -3012,7 +3018,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public override dynamic this[int x]
         {
             get { return x; }
-            set { }
+            set
+            {
+            }
         }
 
         //Some operators

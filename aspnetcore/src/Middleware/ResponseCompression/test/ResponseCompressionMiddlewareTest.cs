@@ -1470,7 +1470,14 @@ public class ResponseCompressionMiddlewareTest
                     .UseTestServer()
                     .ConfigureServices(services =>
                     {
-                        services.AddResponseCompression(configure ?? (_ => { }));
+                        services.AddResponseCompression(
+                            configure
+                                ?? (
+                                    _ =>
+                                    {
+                                    }
+                                )
+                        );
                         services.AddSingleton<ILoggerFactory>(loggerFactory);
                     })
                     .Configure(app =>

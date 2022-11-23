@@ -29,7 +29,9 @@ internal class Program
             sbSql.Append(p_lFirstId);
             p_lFirstId++;
 
-            foreach (string sColonne in liste) { }
+            foreach (string sColonne in liste)
+            {
+            }
         }
 
         System.Console.WriteLine(sbSql.ToString());

@@ -32,7 +32,9 @@ internal class LocallocTest
             unwindTest1();
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
         if (!Global.verifyStack("intArray1", intArray1, s_locallocSize, 1000))
         {
             return 1;

@@ -29,7 +29,9 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
             sql,
             arguments,
             annotations: null
-        ) { }
+        )
+    {
+    }
 
     // See issue#21660/21627
     ///// <summary>
@@ -48,7 +50,9 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
     /// <param name="sql">A user-provided custom SQL for the table source.</param>
     /// <param name="arguments">A user-provided parameters to pass to the custom SQL.</param>
     public FromSqlExpression(string alias, string sql, Expression arguments)
-        : this(alias, null, sql, arguments, annotations: null) { }
+        : this(alias, null, sql, arguments, annotations: null)
+    {
+    }
 
     private FromSqlExpression(
         string alias,

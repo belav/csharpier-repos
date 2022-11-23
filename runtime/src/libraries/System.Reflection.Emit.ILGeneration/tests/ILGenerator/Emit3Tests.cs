@@ -5,7 +5,9 @@ using Xunit;
 
 namespace System.Reflection.Emit.Tests
 {
-    public struct EmitStruct3 { }
+    public struct EmitStruct3
+    {
+    }
 
     public class ILGeneratorEmit3
     {

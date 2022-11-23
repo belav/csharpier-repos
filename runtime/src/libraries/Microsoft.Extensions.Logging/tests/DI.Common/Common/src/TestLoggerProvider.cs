@@ -17,6 +17,8 @@ namespace Microsoft.Extensions.Logging.Testing
             return new TestLogger(categoryName, _sink, enabled: true);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

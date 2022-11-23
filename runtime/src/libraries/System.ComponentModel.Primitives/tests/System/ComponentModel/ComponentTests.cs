@@ -300,7 +300,9 @@ namespace System.ComponentModel.Tests
                         DesignMode = true,
                         Name = "Name1"
                     };
-                set { }
+                set
+                {
+                }
             }
         }
     }

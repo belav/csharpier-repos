@@ -15,7 +15,9 @@ namespace System.Security.Cryptography
         ///     Create a DSACng algorithm with a random 2048 bit key pair.
         /// </summary>
         [SupportedOSPlatform("windows")]
-        public DSACng() : this(keySize: s_defaultKeySize) { }
+        public DSACng() : this(keySize: s_defaultKeySize)
+        {
+        }
 
         /// <summary>
         ///     Creates a new DSACng object that will use a randomly generated key of the specified size.

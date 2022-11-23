@@ -14,7 +14,9 @@ namespace Microsoft.EntityFrameworkCore;
 /// </remarks>
 public sealed class DbFunctions
 {
-    private DbFunctions() { }
+    private DbFunctions()
+    {
+    }
 
     internal static DbFunctions Instance { get; } = new();
 

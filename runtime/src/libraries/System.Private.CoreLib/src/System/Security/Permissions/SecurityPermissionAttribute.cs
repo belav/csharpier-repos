@@ -11,7 +11,9 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class SecurityPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public SecurityPermissionAttribute(SecurityAction action) : base(default) { }
+        public SecurityPermissionAttribute(SecurityAction action) : base(default)
+        {
+        }
 
         public bool Assertion { get; set; }
         public bool BindingRedirects { get; set; }

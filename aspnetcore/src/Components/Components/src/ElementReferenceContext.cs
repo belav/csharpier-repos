@@ -6,4 +6,6 @@ namespace Microsoft.AspNetCore.Components;
 /// <summary>
 /// Context for an <see cref="ElementReference"/>.
 /// </summary>
-public abstract class ElementReferenceContext { }
+public abstract class ElementReferenceContext
+{
+}

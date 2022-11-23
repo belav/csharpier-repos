@@ -13,8 +13,12 @@ namespace System.Reflection
 {
     internal sealed class MissingRuntimeArtifactException : MemberAccessException
     {
-        public MissingRuntimeArtifactException() { }
+        public MissingRuntimeArtifactException()
+        {
+        }
 
-        public MissingRuntimeArtifactException(string message) : base(message) { }
+        public MissingRuntimeArtifactException(string message) : base(message)
+        {
+        }
     }
 }

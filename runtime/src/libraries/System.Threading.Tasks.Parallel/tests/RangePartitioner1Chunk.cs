@@ -212,7 +212,12 @@ namespace System.Threading.Tasks.Tests
                     EnumerablePartitionerOptions.NoBuffering
                 );
                 var exception = Assert.Throws<AggregateException>(
-                    () => Parallel.ForEach(partitioner, (index) => { })
+                    () =>
+                        Parallel.ForEach(
+                            partitioner,
+                            (index) => {
+                            }
+                        )
                 );
                 VerifyAggregateException(exception, userEx);
                 Assert.True(customEnumerable.AreEnumeratorsDisposed());

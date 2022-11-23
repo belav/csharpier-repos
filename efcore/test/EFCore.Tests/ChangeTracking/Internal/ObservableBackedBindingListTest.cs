@@ -391,7 +391,9 @@ public class ObservableBackedBindingListTest
 
     private class ListElement
     {
-        public ListElement() { }
+        public ListElement()
+        {
+        }
 
         public ListElement(int i)
         {
@@ -416,7 +418,9 @@ public class ObservableBackedBindingListTest
             TypeDescriptor.GetProperties(typeof(ListElement))[name];
     }
 
-    private abstract class NotXNode { }
+    private abstract class NotXNode
+    {
+    }
 
     private class NotXText : NotXNode
     {

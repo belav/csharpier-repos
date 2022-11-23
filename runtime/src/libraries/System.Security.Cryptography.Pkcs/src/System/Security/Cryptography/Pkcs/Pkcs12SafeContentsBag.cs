@@ -11,7 +11,9 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12SafeContents? SafeContents { get; private set; }
 
         private Pkcs12SafeContentsBag(ReadOnlyMemory<byte> encoded)
-            : base(Oids.Pkcs12SafeContentsBag, encoded) { }
+            : base(Oids.Pkcs12SafeContentsBag, encoded)
+        {
+        }
 
         internal static Pkcs12SafeContentsBag Create(Pkcs12SafeContents copyFrom)
         {

@@ -27,7 +27,9 @@ namespace Microsoft.Web.Mvc.Resources
         /// </summary>
         /// <param name="document"></param>
         public AtomServiceDocumentActionResult(ServiceDocument document)
-            : this(document, new ContentType("application/atomsvc+xml")) { }
+            : this(document, new ContentType("application/atomsvc+xml"))
+        {
+        }
 
         public AtomServiceDocumentActionResult(ServiceDocument document, ContentType contentType)
         {

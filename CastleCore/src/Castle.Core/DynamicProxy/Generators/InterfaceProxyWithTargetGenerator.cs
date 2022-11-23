@@ -29,7 +29,9 @@ namespace Castle.DynamicProxy.Generators
             Type[] interfaces,
             Type proxyTargetType,
             ProxyGenerationOptions options
-        ) : base(scope, targetType, interfaces, proxyTargetType, options) { }
+        ) : base(scope, targetType, interfaces, proxyTargetType, options)
+        {
+        }
 
         protected override bool AllowChangeTarget => false;
 

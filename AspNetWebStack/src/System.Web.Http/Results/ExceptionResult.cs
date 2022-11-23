@@ -46,13 +46,17 @@ namespace System.Web.Http.Results
                     request,
                     formatters
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="ExceptionResult"/> class.</summary>
         /// <param name="exception">The exception to include in the error.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public ExceptionResult(Exception exception, ApiController controller)
-            : this(exception, new ApiControllerDependencyProvider(controller)) { }
+            : this(exception, new ApiControllerDependencyProvider(controller))
+        {
+        }
 
         private ExceptionResult(Exception exception, IDependencyProvider dependencies)
         {

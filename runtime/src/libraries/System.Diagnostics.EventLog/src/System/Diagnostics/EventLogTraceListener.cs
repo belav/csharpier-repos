@@ -11,7 +11,9 @@ namespace System.Diagnostics
     {
         private bool _nameSet;
 
-        public EventLogTraceListener() { }
+        public EventLogTraceListener()
+        {
+        }
 
         public EventLogTraceListener(EventLog eventLog)
             : base(eventLog != null ? eventLog.Source : string.Empty)

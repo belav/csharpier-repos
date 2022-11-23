@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis
         public abstract string FilePath { get; }
         public abstract ParseOptions Options { get; }
 
-        protected SyntaxTreeKey() { }
+        protected SyntaxTreeKey()
+        {
+        }
 
         public abstract SourceText GetText(CancellationToken cancellationToken = default);
 

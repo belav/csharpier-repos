@@ -455,7 +455,9 @@ namespace System.Runtime.Caching
 
             try
             {
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     // prevent ThreadAbortEx from interrupting

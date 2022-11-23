@@ -87,7 +87,9 @@ namespace System.Data.SqlTypes
         }
 
         // Create a SqlBytes from a SqlBinary
-        public SqlBytes(SqlBinary value) : this(value.IsNull ? null : value.Value!) { }
+        public SqlBytes(SqlBinary value) : this(value.IsNull ? null : value.Value!)
+        {
+        }
 
         public SqlBytes(Stream? s)
         {
@@ -421,7 +423,9 @@ namespace System.Data.SqlTypes
         {
             Debug.Assert(_state >= SqlBytesCharsState.Null && _state <= SqlBytesCharsState.Stream);
 
-            if (IsNull) { }
+            if (IsNull)
+            {
+            }
             else
             {
                 Debug.Assert((_lCurLen >= 0 && _lCurLen <= x_lMaxLen) || FStream());

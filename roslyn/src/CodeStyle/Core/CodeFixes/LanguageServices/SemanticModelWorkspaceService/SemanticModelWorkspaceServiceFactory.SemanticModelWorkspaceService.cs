@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         private sealed class SemanticModelReuseWorkspaceService
             : ISemanticModelReuseWorkspaceService
         {
-            public SemanticModelReuseWorkspaceService(Workspace _) { }
+            public SemanticModelReuseWorkspaceService(Workspace _)
+            {
+            }
 
             public ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(
                 Document document,

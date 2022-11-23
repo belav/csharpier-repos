@@ -74,7 +74,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             IWpfTextView textView,
             ConnectionReason reason,
             Collection<ITextBuffer> subjectBuffers
-        ) { }
+        )
+        {
+        }
 
         private void InitializeServiceOnDocumentOpened(object sender, DocumentEventArgs e)
         {

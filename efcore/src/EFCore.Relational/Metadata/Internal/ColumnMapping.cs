@@ -18,7 +18,9 @@ public class ColumnMapping : ColumnMappingBase, IColumnMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public ColumnMapping(IProperty property, Column column, TableMapping tableMapping)
-        : base(property, column, tableMapping) { }
+        : base(property, column, tableMapping)
+    {
+    }
 
     /// <inheritdoc />
     public new virtual ITableMapping TableMapping => (ITableMapping)base.TableMapping;

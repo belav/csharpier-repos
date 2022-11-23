@@ -285,8 +285,12 @@ namespace System.Xml.Tests
                     fileInfo.Delete();
                 }
             }
-            catch (ArgumentException) { }
-            catch (PathTooLongException) { }
+            catch (ArgumentException)
+            {
+            }
+            catch (PathTooLongException)
+            {
+            }
             catch (Exception e)
             {
                 s_output.WriteLine(e.Message);
@@ -371,7 +375,9 @@ namespace System.Xml.Tests
 
         public class AssemblyLoader //: MarshalByRefObject
         {
-            public AssemblyLoader(string asmName) { }
+            public AssemblyLoader(string asmName)
+            {
+            }
 
             public bool Verify(string asmName, string typeName, string baselineFile, bool pdb)
             {

@@ -49,7 +49,9 @@ namespace System.IO.Packaging
         /// This default implementation is provided for subclasses that do not
         /// make use of the IDisposable functionality.
         /// </summary>
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         #endregion IDisposable
 

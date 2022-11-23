@@ -46,5 +46,7 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Consume(int n) { }
+    static void Consume(int n)
+    {
+    }
 }

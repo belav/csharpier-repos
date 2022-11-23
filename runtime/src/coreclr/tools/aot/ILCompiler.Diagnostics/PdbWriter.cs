@@ -172,7 +172,9 @@ namespace ILCompiler.Diagnostics
                     {
                         File.Delete(_tempSourceDllName);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 if (failed && (_pdbFilePath != null))
@@ -182,7 +184,9 @@ namespace ILCompiler.Diagnostics
                         // If anything fails, do not create a partial pdb file
                         File.Delete(_pdbFilePath);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
         }

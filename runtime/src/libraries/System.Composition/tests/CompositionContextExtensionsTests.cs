@@ -12,7 +12,9 @@ namespace System.Composition.UnitTests
 {
     public class CompositionContextExtensionsTests : ContainerTests
     {
-        public interface IUnregistered { }
+        public interface IUnregistered
+        {
+        }
 
         [Fact]
         public void GettingAnOptionalExportThatDoesntExistReturnsNull()

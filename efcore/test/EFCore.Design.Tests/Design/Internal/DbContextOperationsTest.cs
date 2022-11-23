@@ -201,7 +201,9 @@ public class DbContextOperationsTest
             throw new Exception("This isn't the constructor you're looking for.");
         }
 
-        public TestContext(DbContextOptions<TestContext> options) : base(options) { }
+        public TestContext(DbContextOptions<TestContext> options) : base(options)
+        {
+        }
     }
 
     private class TestContextFromFactory : DbContext
@@ -212,7 +214,9 @@ public class DbContextOperationsTest
         }
 
         public TestContextFromFactory(DbContextOptions<TestContextFromFactory> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
     }
 
     private class BaseContext : DbContext
@@ -230,7 +234,9 @@ public class DbContextOperationsTest
 
     private class DerivedContext : BaseContext
     {
-        public DerivedContext(string factoryUsed) : base(factoryUsed) { }
+        public DerivedContext(string factoryUsed) : base(factoryUsed)
+        {
+        }
     }
 
     private class HierarchyContextFactory

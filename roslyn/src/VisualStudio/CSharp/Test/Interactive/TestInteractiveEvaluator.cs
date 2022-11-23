@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
         public IInteractiveWindow CurrentWindow { get; set; }
         public InteractiveEvaluatorResetOptions ResetOptions { get; set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task<ExecutionResult> InitializeAsync() => Task.FromResult(ExecutionResult.Success);
 
@@ -38,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
 
         public string FormatClipboard() => null;
 
-        public void AbortExecution() { }
+        public void AbortExecution()
+        {
+        }
 
         public string GetConfiguration() => "config";
 

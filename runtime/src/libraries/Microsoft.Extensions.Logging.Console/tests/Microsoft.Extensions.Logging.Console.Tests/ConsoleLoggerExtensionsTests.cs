@@ -474,7 +474,14 @@ namespace Microsoft.Extensions.Logging.Console.Test
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(configs).Build();
 
             var loggerProvider = new ServiceCollection()
-                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))
+                .AddLogging(
+                    builder =>
+                        builder
+                            .AddConfiguration(configuration)
+                            .AddConsole(o =>
+                            {
+                            })
+                )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -503,7 +510,14 @@ namespace Microsoft.Extensions.Logging.Console.Test
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(configs).Build();
 
             IServiceProvider serviceProvider = new ServiceCollection()
-                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))
+                .AddLogging(
+                    builder =>
+                        builder
+                            .AddConfiguration(configuration)
+                            .AddConsole(o =>
+                            {
+                            })
+                )
                 .BuildServiceProvider();
 
             // the configuration binder throws TargetInvocationException when setting options property MaxQueueLength throws exception
@@ -522,7 +536,14 @@ namespace Microsoft.Extensions.Logging.Console.Test
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(configs).Build();
 
             var loggerProvider = new ServiceCollection()
-                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))
+                .AddLogging(
+                    builder =>
+                        builder
+                            .AddConfiguration(configuration)
+                            .AddConsole(o =>
+                            {
+                            })
+                )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 

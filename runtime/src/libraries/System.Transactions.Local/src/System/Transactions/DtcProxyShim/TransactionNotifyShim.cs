@@ -8,7 +8,9 @@ namespace System.Transactions.DtcProxyShim;
 internal sealed class TransactionNotifyShim : NotificationShimBase, ITransactionOutcomeEvents
 {
     internal TransactionNotifyShim(DtcProxyShimFactory shimFactory, object? enlistmentIdentifier)
-        : base(shimFactory, enlistmentIdentifier) { }
+        : base(shimFactory, enlistmentIdentifier)
+    {
+    }
 
     public void Committed(bool fRetaining, IntPtr pNewUOW, int hresult)
     {

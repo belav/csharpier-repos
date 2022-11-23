@@ -125,7 +125,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message")]
             [RequiresAssemblyFiles("Message")]
             [RequiresDynamicCode("Message")]
-            public virtual void VirtualMethod() { }
+            public virtual void VirtualMethod()
+            {
+            }
 
             public virtual string VirtualPropertyAnnotationInAccesor
             {
@@ -151,7 +153,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
         class BaseClassWithoutRequires
         {
-            public virtual void VirtualMethod() { }
+            public virtual void VirtualMethod()
+            {
+            }
 
             public virtual string VirtualPropertyAnnotationInAccesor { get; set; }
 
@@ -180,7 +184,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "BaseClassWithoutRequires.VirtualMethod()",
                 ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
             )]
-            public override void VirtualMethod() { }
+            public override void VirtualMethod()
+            {
+            }
 
             private string name;
             public override string VirtualPropertyAnnotationInAccesor
@@ -240,7 +246,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "BaseClassWithRequires.VirtualMethod()",
                 ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
             )]
-            public override void VirtualMethod() { }
+            public override void VirtualMethod()
+            {
+            }
 
             private string name;
             public override string VirtualPropertyAnnotationInAccesor
@@ -321,7 +329,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "BaseClassWithRequires.VirtualMethod()",
                 ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
             )]
-            public override void VirtualMethod() { }
+            public override void VirtualMethod()
+            {
+            }
 
             private string name;
 
@@ -511,7 +521,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "IBaseWithoutRequires.Method()",
                 ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
             )]
-            public void Method() { }
+            public void Method()
+            {
+            }
 
             private string name;
             public string PropertyAnnotationInAccesor
@@ -622,7 +634,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "ExplicitImplementationClassWithRequires.IBaseWithoutRequires.Method()",
                 ProducedBy = ProducedBy.Analyzer
             )]
-            void IBaseWithoutRequires.Method() { }
+            void IBaseWithoutRequires.Method()
+            {
+            }
 
             private string name;
             string IBaseWithoutRequires.PropertyAnnotationInAccesor
@@ -710,7 +724,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "IBaseWithRequires.Method()",
                 ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
             )]
-            public void Method() { }
+            public void Method()
+            {
+            }
 
             private string name;
             public string PropertyAnnotationInAccesor
@@ -824,7 +840,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "ExplicitImplementationClassWithoutRequires.IBaseWithRequires.Method()",
                 ProducedBy = ProducedBy.Analyzer
             )]
-            void IBaseWithRequires.Method() { }
+            void IBaseWithRequires.Method()
+            {
+            }
 
             private string name;
             string IBaseWithRequires.PropertyAnnotationInAccesor
@@ -906,7 +924,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "IBaseWithRequiresInReference.Method()",
                 ProducedBy = ProducedBy.Analyzer | ProducedBy.NativeAot
             )]
-            public void Method() { }
+            public void Method()
+            {
+            }
 
             private string name;
             public string PropertyAnnotationInAccesor
@@ -966,7 +986,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message")]
             [RequiresAssemblyFiles("Message")]
             [RequiresDynamicCode("Message")]
-            public void Method() { }
+            public void Method()
+            {
+            }
 
             private string name;
             public string PropertyAnnotationInAccesor

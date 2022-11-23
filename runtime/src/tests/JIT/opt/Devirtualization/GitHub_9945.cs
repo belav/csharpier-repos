@@ -23,13 +23,21 @@ public class Base
 
 public class D1 : Base
 {
-    public virtual void MA() { }
+    public virtual void MA()
+    {
+    }
 
-    public virtual void MB() { }
+    public virtual void MB()
+    {
+    }
 
-    public virtual void MC() { }
+    public virtual void MC()
+    {
+    }
 
-    public virtual void MD() { }
+    public virtual void MD()
+    {
+    }
 
     public virtual void M1()
     {
@@ -39,13 +47,21 @@ public class D1 : Base
 
 public class D2 : Base
 {
-    public virtual void MA() { }
+    public virtual void MA()
+    {
+    }
 
-    public virtual void MB() { }
+    public virtual void MB()
+    {
+    }
 
-    public virtual void MC() { }
+    public virtual void MC()
+    {
+    }
 
-    public virtual void MD() { }
+    public virtual void MD()
+    {
+    }
 
     public virtual void M1()
     {

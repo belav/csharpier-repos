@@ -14,7 +14,9 @@ namespace Microsoft.Interop
     {
         public static readonly SyntaxEquivalentComparer Instance = new();
 
-        private SyntaxEquivalentComparer() { }
+        private SyntaxEquivalentComparer()
+        {
+        }
 
         public bool Equals(SyntaxNode x, SyntaxNode y)
         {

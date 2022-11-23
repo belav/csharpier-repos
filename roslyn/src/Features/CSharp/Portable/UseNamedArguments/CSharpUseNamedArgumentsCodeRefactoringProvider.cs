@@ -133,6 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNamedArguments
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
         public CSharpUseNamedArgumentsCodeRefactoringProvider()
-            : base(new ArgumentAnalyzer(), new AttributeArgumentAnalyzer()) { }
+            : base(new ArgumentAnalyzer(), new AttributeArgumentAnalyzer())
+        {
+        }
     }
 }

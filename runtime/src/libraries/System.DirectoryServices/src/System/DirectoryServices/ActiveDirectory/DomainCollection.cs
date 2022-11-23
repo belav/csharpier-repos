@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class DomainCollection : ReadOnlyCollectionBase
     {
-        internal DomainCollection() { }
+        internal DomainCollection()
+        {
+        }
 
         internal DomainCollection(ArrayList? values)
         {

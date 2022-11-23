@@ -137,7 +137,9 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
                     value = await reader(value, context.HttpContext.RequestAborted);
                 }
                 catch (OperationCanceledException)
-                    when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+                    when (context.HttpContext.RequestAborted.IsCancellationRequested)
+                {
+                }
                 if (context.HttpContext.RequestAborted.IsCancellationRequested)
                 {
                     return;

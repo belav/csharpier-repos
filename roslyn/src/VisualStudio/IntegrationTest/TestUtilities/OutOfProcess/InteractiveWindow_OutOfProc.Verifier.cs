@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             public Verifier(
                 InteractiveWindow_OutOfProc interactiveWindow,
                 VisualStudioInstance instance
-            ) : base(interactiveWindow, instance) { }
+            ) : base(interactiveWindow, instance)
+            {
+            }
 
             public void LastReplInput(string expectedReplInput)
             {

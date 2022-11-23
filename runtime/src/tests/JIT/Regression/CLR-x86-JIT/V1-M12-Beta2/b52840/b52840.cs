@@ -9,7 +9,9 @@ namespace Test
     {
         private static byte s_b;
 
-        private static void Func(ref String s) { }
+        private static void Func(ref String s)
+        {
+        }
 
         private static void Main1()
         {

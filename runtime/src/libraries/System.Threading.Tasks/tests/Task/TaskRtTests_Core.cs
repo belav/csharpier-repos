@@ -366,7 +366,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
                 try
                 {
                     tcs.SetException(new Exception("bar"));
@@ -377,7 +379,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
                 try
                 {
                     tcs.SetCanceled();
@@ -388,7 +392,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
                 if (tcs.Task.Status != TaskStatus.Faulted)
                 {
                     Assert.True(
@@ -409,7 +415,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             // Test that setting multiple exceptions works correctly
@@ -476,7 +484,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
                 catch (Exception e)
                 {
                     Assert.True(
@@ -498,7 +508,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
                 catch (Exception e)
                 {
                     Assert.True(
@@ -520,7 +532,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
                 catch (Exception e)
                 {
                     Assert.True(
@@ -543,7 +557,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
                 catch (Exception e)
                 {
                     Assert.True(
@@ -565,7 +581,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
                 catch (Exception e)
                 {
                     Assert.True(
@@ -663,7 +681,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
             try
             {
                 tcs.SetException(new Exception("yet another exception"));
@@ -674,7 +694,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
             try
             {
                 tcs.SetCanceled();
@@ -685,7 +707,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
             try
             {
                 int i = tcs.Task.Result;
@@ -696,7 +720,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             if (tcs.Task.Status != TaskStatus.Canceled)
             {
@@ -715,7 +741,12 @@ namespace System.Threading.Tasks.Tests
         {
             try
             {
-                Task t = new Task(delegate { }, (TaskCreationOptions)0x100);
+                Task t = new Task(
+                    delegate
+                    {
+                    },
+                    (TaskCreationOptions)0x100
+                );
                 Assert.True(
                     false,
                     string.Format(
@@ -723,7 +754,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         // Test "bare" overloads for Task<T> ctor, Task<T>.Factory.StartNew
@@ -1344,7 +1377,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
             catch (Exception e)
             {
                 Assert.True(false, string.Format("Wrong exception thrown. " + e));
@@ -1368,7 +1403,12 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
-            Task t1 = new Task(delegate { }, ct); // Notice we aren't throwing an OCE.
+            Task t1 = new Task(
+                delegate
+                {
+                },
+                ct
+            ); // Notice we aren't throwing an OCE.
             cts.Cancel();
             try
             {
@@ -1396,8 +1436,15 @@ namespace System.Threading.Tasks.Tests
             }
 
             // Executing RunSynchronously() on a continuation task
-            t1 = new Task(delegate { });
-            Task t2 = t1.ContinueWith((completedTask) => { });
+            t1 = new Task(
+                delegate
+                {
+                }
+            );
+            Task t2 = t1.ContinueWith(
+                (completedTask) => {
+                }
+            );
             try
             {
                 t2.RunSynchronously();
@@ -1521,7 +1568,11 @@ namespace System.Threading.Tasks.Tests
             //Executing RunSynchronously() validations on external thread
 
             // do RunSynchronously for a non-exceptional task
-            Task t = new Task(delegate { });
+            Task t = new Task(
+                delegate
+                {
+                }
+            );
 
             t.RunSynchronously();
 
@@ -1536,10 +1587,16 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             // RunSynchronously() should throw on a task which is already started
-            t = Task.Factory.StartNew(delegate { });
+            t = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
             try
             {
                 t.RunSynchronously();
@@ -1550,7 +1607,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             //
             // RunSynchronously() should not throw itself for exceptional tasks, and we should get the exception
@@ -1586,14 +1645,20 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         // Simply throws an exception from the task and ensures it is propagated.
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunTaskExceptionTest()
         {
-            Task t = Task.Factory.StartNew(delegate { });
+            Task t = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
             t.Wait();
             try
             {
@@ -1655,7 +1720,9 @@ namespace System.Threading.Tasks.Tests
             {
                 outer.Wait();
             }
-            catch { }
+            catch
+            {
+            }
 
             Exception e = new Exception("foobomb");
 
@@ -1731,26 +1798,36 @@ namespace System.Threading.Tasks.Tests
             );
 
             // Test that already-completed task is returned
-            Task t1 = Task.Factory.StartNew(delegate { });
+            Task t1 = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
             t1.Wait();
             int tonsOfIterations = 100000;
             // these are cold tasks... should not have started or run at all.
             Task t2 = new Task(
                 delegate
                 {
-                    for (int i = 0; i < tonsOfIterations; i++) { }
+                    for (int i = 0; i < tonsOfIterations; i++)
+                    {
+                    }
                 }
             );
             Task t3 = new Task(
                 delegate
                 {
-                    for (int i = 0; i < tonsOfIterations; i++) { }
+                    for (int i = 0; i < tonsOfIterations; i++)
+                    {
+                    }
                 }
             );
             Task t4 = new Task(
                 delegate
                 {
-                    for (int i = 0; i < tonsOfIterations; i++) { }
+                    for (int i = 0; i < tonsOfIterations; i++)
+                    {
+                    }
                 }
             );
 
@@ -1775,12 +1852,24 @@ namespace System.Threading.Tasks.Tests
                 () => Task.WaitAny(new Task[] { null })
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => Task.WaitAny(new Task[] { Task.Factory.StartNew(() => { }) }, -2)
+                () =>
+                    Task.WaitAny(
+                        new Task[]
+                        {
+                            Task.Factory.StartNew(() => {
+                            })
+                        },
+                        -2
+                    )
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
                     Task.WaitAny(
-                        new Task[] { Task.Factory.StartNew(() => { }) },
+                        new Task[]
+                        {
+                            Task.Factory.StartNew(() => {
+                            })
+                        },
                         TimeSpan.FromMilliseconds(-2)
                     )
             );
@@ -1799,7 +1888,11 @@ namespace System.Threading.Tasks.Tests
 
             // Create filler tasks
             for (int i = 0; i < fillerTasks; i++)
-                tasks[i] = new Task(delegate { }); // don't start it -- that might make things complicated
+                tasks[i] = new Task(
+                    delegate
+                    {
+                    }
+                ); // don't start it -- that might make things complicated
 
             // Create a MRES to gate the finishers
             ManualResetEvent mres = new ManualResetEvent(false);
@@ -1905,7 +1998,12 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource ctsForTaskCancellation = new CancellationTokenSource();
                 for (int i = 0; i < nTasks; i++)
                 {
-                    tasks[i] = new Task(delegate { }, ctsForTaskCancellation.Token);
+                    tasks[i] = new Task(
+                        delegate
+                        {
+                        },
+                        ctsForTaskCancellation.Token
+                    );
                 }
 
                 CancellationTokenSource ctsForWaitAny = new CancellationTokenSource();
@@ -1933,7 +2031,9 @@ namespace System.Threading.Tasks.Tests
                                 )
                             );
                         }
-                        catch (OperationCanceledException) { }
+                        catch (OperationCanceledException)
+                        {
+                        }
                         catch
                         {
                             Debug.WriteLine(
@@ -1958,7 +2058,9 @@ namespace System.Threading.Tasks.Tests
                     cancelThread = new Task(
                         delegate
                         {
-                            for (int i = 0; i < 200; i++) { }
+                            for (int i = 0; i < 200; i++)
+                            {
+                            }
                             ctsForWaitAny.Cancel();
                         }
                     );
@@ -1976,7 +2078,9 @@ namespace System.Threading.Tasks.Tests
                         tasks[i].Start(); // get rid of all tasks we created
                     Task.WaitAll(tasks);
                 }
-                catch { } // ignore any exceptions
+                catch
+                {
+                } // ignore any exceptions
             };
 
             // Test some small number of tasks
@@ -2009,12 +2113,24 @@ namespace System.Threading.Tasks.Tests
                 () => Task.WaitAll(new Task[] { null })
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => Task.WaitAll(new Task[] { Task.Factory.StartNew(() => { }) }, -2)
+                () =>
+                    Task.WaitAll(
+                        new Task[]
+                        {
+                            Task.Factory.StartNew(() => {
+                            })
+                        },
+                        -2
+                    )
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
                     Task.WaitAll(
-                        new Task[] { Task.Factory.StartNew(() => { }) },
+                        new Task[]
+                        {
+                            Task.Factory.StartNew(() => {
+                            })
+                        },
                         TimeSpan.FromMilliseconds(-2)
                     )
             );
@@ -2040,14 +2156,20 @@ namespace System.Threading.Tasks.Tests
             int nSecondHalfCount = nTaskCount - nFirstHalfCount;
 
             //CancellationTokenSource ctsForSleepAndAckCancelAction = null; // this needs to be allocated every time sleepAndAckCancelAction is about to be used
-            Action<object> emptyAction = delegate(object o) { };
+            Action<object> emptyAction = delegate(object o)
+            {
+            };
             Action<object> sleepAction = delegate(object o)
             {
-                for (int i = 0; i < 200; i++) { }
+                for (int i = 0; i < 200; i++)
+                {
+                }
             };
             Action<object> longAction = delegate(object o)
             {
-                for (int i = 0; i < 400; i++) { }
+                for (int i = 0; i < 400; i++)
+                {
+                }
             };
 
             Action<object> sleepAndAckCancelAction = delegate(object o)
@@ -2290,7 +2412,9 @@ namespace System.Threading.Tasks.Tests
                         if (bWaitOnAct1)
                             tasks[i].Wait();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 else
                 {
@@ -3184,7 +3308,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             try
             {
@@ -3196,7 +3322,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             try
             {
@@ -3208,10 +3336,20 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
-            t = new Task(delegate { });
-            Task t2 = t.ContinueWith(delegate { });
+            t = new Task(
+                delegate
+                {
+                }
+            );
+            Task t2 = t.ContinueWith(
+                delegate
+                {
+                }
+            );
             try
             {
                 t2.Start();
@@ -3222,9 +3360,15 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
-            t = new Task(delegate { });
+            t = new Task(
+                delegate
+                {
+                }
+            );
             try
             {
                 t.Start(null);
@@ -3235,13 +3379,21 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
-            t = Task.Factory.StartNew(delegate { });
+            t = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
             try
             {
                 t = Task.Factory.StartNew(
-                    delegate { },
+                    delegate
+                    {
+                    },
                     CancellationToken.None,
                     TaskCreationOptions.None,
                     (TaskScheduler)null
@@ -3253,7 +3405,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             tr = new TaskCompletionSource<int>();
             tr.SetException(new Exception("some exception"));
@@ -3267,7 +3421,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             finally
             {
                 //prevent finalize from crashing on exception
@@ -3286,7 +3442,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             finally
             {
                 // clean up.
@@ -3307,7 +3465,11 @@ namespace System.Threading.Tasks.Tests
             // Test for TaskStatus.Created
             //
             {
-                t = new Task(delegate { });
+                t = new Task(
+                    delegate
+                    {
+                    }
+                );
                 ts = t.Status;
                 if (ts != TaskStatus.Created)
                 {
@@ -3334,7 +3496,11 @@ namespace System.Threading.Tasks.Tests
             // Test for TaskStatus.WaitingForActivation
             //
             {
-                Task ct = t.ContinueWith(delegate { });
+                Task ct = t.ContinueWith(
+                    delegate
+                    {
+                    }
+                );
                 ts = ct.Status;
                 if (ts != TaskStatus.WaitingForActivation)
                 {
@@ -3387,7 +3553,12 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource cts = new CancellationTokenSource();
                 CancellationToken token = cts.Token;
                 cts.Cancel();
-                t = new Task(delegate { }, token); // should immediately transition into cancelled state
+                t = new Task(
+                    delegate
+                    {
+                    },
+                    token
+                ); // should immediately transition into cancelled state
 
                 ts = t.Status;
                 if (ts != TaskStatus.Canceled)
@@ -3409,7 +3580,12 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource cts = new CancellationTokenSource();
                 CancellationToken token = cts.Token;
 
-                t = new Task(delegate { }, token); // should immediately transition into cancelled state
+                t = new Task(
+                    delegate
+                    {
+                    },
+                    token
+                ); // should immediately transition into cancelled state
                 cts.Cancel();
 
                 ts = t.Status;
@@ -3444,7 +3620,9 @@ namespace System.Threading.Tasks.Tests
                 {
                     t.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 ts = t.Status;
                 if (ts != TaskStatus.RanToCompletion)
@@ -3529,7 +3707,9 @@ namespace System.Threading.Tasks.Tests
             // This makes sure that task started running on a TP thread and created the child task
             childCreatedMre.WaitOne();
             // and this makes sure the delegate quit and the first stage of t.Finish() executed
-            while (t.Status == TaskStatus.Running) { }
+            while (t.Status == TaskStatus.Running)
+            {
+            }
 
             ts = t.Status;
             if (ts != TaskStatus.WaitingForChildrenToComplete)
@@ -3559,7 +3739,11 @@ namespace System.Threading.Tasks.Tests
             // Test for TaskStatus.RanToCompletion
             //
             {
-                t = Task.Factory.StartNew(delegate { });
+                t = Task.Factory.StartNew(
+                    delegate
+                    {
+                    }
+                );
                 t.Wait();
                 ts = t.Status;
                 if (ts != TaskStatus.RanToCompletion)
@@ -3601,7 +3785,9 @@ namespace System.Threading.Tasks.Tests
                     delegate
                     {
                         taskStartMRE.Set();
-                        while (!cts.Token.IsCancellationRequested) { }
+                        while (!cts.Token.IsCancellationRequested)
+                        {
+                        }
                         throw new OperationCanceledException(cts.Token);
                     },
                     cts.Token
@@ -3615,7 +3801,9 @@ namespace System.Threading.Tasks.Tests
                 {
                     t.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 ts = t.Status;
                 if (ts != TaskStatus.Canceled)
@@ -3649,7 +3837,9 @@ namespace System.Threading.Tasks.Tests
                 t = Task.Factory.StartNew(
                     delegate
                     {
-                        while (!ctoken.IsCancellationRequested) { }
+                        while (!ctoken.IsCancellationRequested)
+                        {
+                        }
                         throw new OperationCanceledException(ctoken);
                     },
                     ctoken
@@ -3660,7 +3850,9 @@ namespace System.Threading.Tasks.Tests
                 {
                     t.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 ts = t.Status;
                 if (ts != TaskStatus.Canceled)
@@ -3739,7 +3931,9 @@ namespace System.Threading.Tasks.Tests
                 {
                     tCanceled.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             //
@@ -3760,7 +3954,9 @@ namespace System.Threading.Tasks.Tests
                     t.Wait();
                     cts.Cancel(); // Should have NO EFFECT on status, since task already completed/faulted.
                 }
-                catch { }
+                catch
+                {
+                }
                 ts = t.Status;
                 if (ts != TaskStatus.Faulted)
                 {
@@ -3842,7 +4038,9 @@ namespace System.Threading.Tasks.Tests
                 {
                     tFaulted.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             // Make sure that Faulted trumps Canceled
@@ -3871,7 +4069,9 @@ namespace System.Threading.Tasks.Tests
                 {
                     t.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 ts = t.Status;
                 if (ts != TaskStatus.Faulted)
@@ -3891,7 +4091,11 @@ namespace System.Threading.Tasks.Tests
         public static void RunTaskWaitTest()
         {
             // wait on non-exceptional task
-            Task t = Task.Factory.StartNew(delegate { });
+            Task t = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
             t.Wait();
 
             if (!t.IsCompleted)
@@ -3903,7 +4107,11 @@ namespace System.Threading.Tasks.Tests
             }
 
             // wait on non-exceptional delay started task
-            t = new Task(delegate { });
+            t = new Task(
+                delegate
+                {
+                }
+            );
             t.Start();
             //Timer tmr = new Timer((o) => t.Start(), null, 100, Timeout.Infinite);
             t.Wait();
@@ -3960,7 +4168,8 @@ namespace System.Threading.Tasks.Tests
             string exceptionMsg = "myexception";
 
             // test exceptions
-            var task = Task.Factory.StartNew(() => { });
+            var task = Task.Factory.StartNew(() => {
+            });
             Assert.Throws<ArgumentOutOfRangeException>(() => task.Wait(-2));
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => task.Wait(TimeSpan.FromMilliseconds(-2))
@@ -3978,7 +4187,9 @@ namespace System.Threading.Tasks.Tests
                 () =>
                 {
                     taskStartedEvent.Set();
-                    while (!ct.IsCancellationRequested) { }
+                    while (!ct.IsCancellationRequested)
+                    {
+                    }
                     throw new OperationCanceledException(ct); //acknowledge the request
                 },
                 ct
@@ -4114,7 +4325,11 @@ namespace System.Threading.Tasks.Tests
             Task t = Task.Factory.StartNew(
                 delegate
                 {
-                    t2 = Task.Factory.StartNew(delegate { });
+                    t2 = Task.Factory.StartNew(
+                        delegate
+                        {
+                        }
+                    );
                     t2.Wait();
                 }
             );
@@ -4144,7 +4359,11 @@ namespace System.Threading.Tasks.Tests
             t = new Task(
                 delegate
                 {
-                    t2 = new Task(delegate { });
+                    t2 = new Task(
+                        delegate
+                        {
+                        }
+                    );
                     t2.Start();
                     t2.Wait();
                 }
@@ -4362,7 +4581,8 @@ namespace System.Threading.Tasks.Tests
             Assert.Null(tce.Task); // , "RunTaskCanceledExceptionTests:  Expected null Task prop after ctor(string)")
             Assert.Null(tce.InnerException); // , "RunTaskCanceledExceptionTests:  Expected null InnerException prop after ctor(string)")
 
-            Task t1 = Task.Factory.StartNew(() => { });
+            Task t1 = Task.Factory.StartNew(() => {
+            });
             tce = new TaskCanceledException(t1);
             Assert.True(
                 tce.Task == t1,
@@ -4443,7 +4663,8 @@ namespace System.Threading.Tasks.Tests
 
             // To complete coverage for CompletedEvent_get, we need to grab a fresh AsyncWaitHandle from
             // an already-completed Task.
-            t1 = Task.Factory.StartNew(() => { });
+            t1 = Task.Factory.StartNew(() => {
+            });
             t1.Wait();
             wh = ((IAsyncResult)t1).AsyncWaitHandle;
             Assert.True(

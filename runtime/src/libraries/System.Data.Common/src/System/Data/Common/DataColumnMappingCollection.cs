@@ -13,7 +13,9 @@ namespace System.Data.Common
     {
         private List<DataColumnMapping>? _items; // delay creation until AddWithoutEvents, Insert, CopyTo, GetEnumerator
 
-        public DataColumnMappingCollection() { }
+        public DataColumnMappingCollection()
+        {
+        }
 
         // explicit ICollection implementation
         bool ICollection.IsSynchronized

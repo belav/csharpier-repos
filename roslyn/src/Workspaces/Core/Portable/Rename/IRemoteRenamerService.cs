@@ -83,7 +83,9 @@ namespace Microsoft.CodeAnalysis.Rename
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteRenamerServiceCallbackDispatcher() { }
+        public RemoteRenamerServiceCallbackDispatcher()
+        {
+        }
 
         public ValueTask<CodeCleanupOptions> GetOptionsAsync(
             RemoteServiceCallbackId callbackId,

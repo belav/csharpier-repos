@@ -363,7 +363,9 @@ namespace System.Threading
         private static extern bool YieldInternal();
 
         [Intrinsic]
-        private static void SpinWait_nop() { }
+        private static void SpinWait_nop()
+        {
+        }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern bool JoinInternal(Thread thread, int millisecondsTimeout);

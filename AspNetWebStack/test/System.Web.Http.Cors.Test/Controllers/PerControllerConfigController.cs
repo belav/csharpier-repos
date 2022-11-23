@@ -4,5 +4,7 @@
 namespace System.Web.Http.Cors.Test.Controllers
 {
     [ExternalActionSelector]
-    public class PerControllerConfigController : ApiController { }
+    public class PerControllerConfigController : ApiController
+    {
+    }
 }

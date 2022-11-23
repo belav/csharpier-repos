@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ProjectCacheServiceFactory() { }
+        public ProjectCacheServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {

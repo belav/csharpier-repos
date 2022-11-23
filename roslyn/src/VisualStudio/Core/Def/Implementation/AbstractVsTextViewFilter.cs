@@ -33,7 +33,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     internal abstract class AbstractVsTextViewFilter : AbstractOleCommandTarget, IVsTextViewFilter
     {
         public AbstractVsTextViewFilter(IWpfTextView wpfTextView, IComponentModel componentModel)
-            : base(wpfTextView, componentModel) { }
+            : base(wpfTextView, componentModel)
+        {
+        }
 
         int IVsTextViewFilter.GetDataTipText(TextSpan[] pSpan, out string pbstrText)
         {

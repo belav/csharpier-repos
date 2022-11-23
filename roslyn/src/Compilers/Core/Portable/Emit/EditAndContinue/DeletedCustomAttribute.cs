@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
         public DeletedCustomAttribute(
             ICustomAttribute oldAttribute,
             Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
-        ) : base(oldAttribute, typesUsedByDeletedMembers) { }
+        ) : base(oldAttribute, typesUsedByDeletedMembers)
+        {
+        }
 
         public int ArgumentCount => OldDefinition.ArgumentCount;
 

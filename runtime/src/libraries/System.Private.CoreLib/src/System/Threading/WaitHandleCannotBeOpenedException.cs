@@ -31,6 +31,8 @@ namespace System.Threading
         protected WaitHandleCannotBeOpenedException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
     }
 }

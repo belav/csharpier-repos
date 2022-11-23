@@ -103,7 +103,9 @@ namespace System.DirectoryServices.ActiveDirectory
             | SORT_STRINGSORT;
 
         // To disable public/protected constructors for this class
-        private Utils() { }
+        private Utils()
+        {
+        }
 
         internal static unsafe string GetDnsNameFromDN(string distinguishedName)
         {

@@ -10,7 +10,9 @@ namespace System.Reflection
 {
     public abstract partial class Module : ICustomAttributeProvider, ISerializable
     {
-        protected Module() { }
+        protected Module()
+        {
+        }
 
         public virtual Assembly Assembly => throw NotImplemented.ByDesign;
 

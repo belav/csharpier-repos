@@ -10,6 +10,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
     internal class HighlightTag : TextMarkerTag
     {
-        public HighlightTag() : base("blue") { }
+        public HighlightTag() : base("blue")
+        {
+        }
     }
 }

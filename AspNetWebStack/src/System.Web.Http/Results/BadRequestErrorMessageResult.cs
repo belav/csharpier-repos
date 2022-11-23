@@ -38,7 +38,9 @@ namespace System.Web.Http.Results
                     request,
                     formatters
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="BadRequestErrorMessageResult"/> class.</summary>
         /// <param name="message">The user-visible error message.</param>
@@ -47,7 +49,9 @@ namespace System.Web.Http.Results
             : this(
                 message,
                 new NegotiatedContentResult<HttpError>.ApiControllerDependencyProvider(controller)
-            ) { }
+            )
+        {
+        }
 
         private BadRequestErrorMessageResult(
             string message,

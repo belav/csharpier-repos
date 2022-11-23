@@ -1076,7 +1076,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | ReservedAttributes.NativeIntegerAttribute
                         | ReservedAttributes.ScopedRefAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.AllowNullAttribute))
             {
                 arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasAllowNullAttribute =
@@ -2163,7 +2165,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 isParams,
                 isExtensionMethodThis,
                 scope
-            ) { }
+            )
+        {
+        }
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers =>
             ImmutableArray<CustomModifier>.Empty;

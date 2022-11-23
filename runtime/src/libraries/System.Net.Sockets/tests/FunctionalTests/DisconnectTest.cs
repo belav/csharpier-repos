@@ -11,7 +11,9 @@ namespace System.Net.Sockets.Tests
 {
     public abstract class Disconnect<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
     {
-        protected Disconnect(ITestOutputHelper output) : base(output) { }
+        protected Disconnect(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [InlineData(true)]
@@ -153,18 +155,24 @@ namespace System.Net.Sockets.Tests
 
     public sealed class Disconnect_Sync : Disconnect<SocketHelperArraySync>
     {
-        public Disconnect_Sync(ITestOutputHelper output) : base(output) { }
+        public Disconnect_Sync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class Disconnect_SyncForceNonBlocking
         : Disconnect<SocketHelperSyncForceNonBlocking>
     {
-        public Disconnect_SyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public Disconnect_SyncForceNonBlocking(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class Disconnect_Apm : Disconnect<SocketHelperApm>
     {
-        public Disconnect_Apm(ITestOutputHelper output) : base(output) { }
+        public Disconnect_Apm(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void EndDisconnect_InvalidArguments_Throws()
@@ -191,12 +199,16 @@ namespace System.Net.Sockets.Tests
 
     public sealed class Disconnect_Task : Disconnect<SocketHelperTask>
     {
-        public Disconnect_Task(ITestOutputHelper output) : base(output) { }
+        public Disconnect_Task(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class Disconnect_CancellableTask : Disconnect<SocketHelperCancellableTask>
     {
-        public Disconnect_CancellableTask(ITestOutputHelper output) : base(output) { }
+        public Disconnect_CancellableTask(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [InlineData(true)]
@@ -238,7 +250,9 @@ namespace System.Net.Sockets.Tests
 
     public sealed class Disconnect_Eap : Disconnect<SocketHelperEap>
     {
-        public Disconnect_Eap(ITestOutputHelper output) : base(output) { }
+        public Disconnect_Eap(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void InvalidArguments_Throw()

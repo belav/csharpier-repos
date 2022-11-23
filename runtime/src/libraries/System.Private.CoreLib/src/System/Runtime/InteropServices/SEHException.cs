@@ -30,7 +30,9 @@ namespace System.Runtime.InteropServices
         }
 
         protected SEHException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         // Exceptions can be resumable, meaning a filtered exception
         // handler can correct the problem that caused the exception,

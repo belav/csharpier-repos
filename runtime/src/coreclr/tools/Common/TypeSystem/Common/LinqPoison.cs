@@ -16,5 +16,7 @@ namespace System
     // "using System.Linq" from your file. Do not modify this file or
     // remove it from the project.
     //
-    internal sealed class Linq { }
+    internal sealed class Linq
+    {
+    }
 }

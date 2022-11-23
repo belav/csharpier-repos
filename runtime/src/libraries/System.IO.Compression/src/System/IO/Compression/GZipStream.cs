@@ -13,7 +13,9 @@ namespace System.IO.Compression
         private DeflateStream _deflateStream;
 
         public GZipStream(Stream stream, CompressionMode mode)
-            : this(stream, mode, leaveOpen: false) { }
+            : this(stream, mode, leaveOpen: false)
+        {
+        }
 
         public GZipStream(Stream stream, CompressionMode mode, bool leaveOpen)
         {
@@ -27,7 +29,9 @@ namespace System.IO.Compression
 
         // Implies mode = Compress
         public GZipStream(Stream stream, CompressionLevel compressionLevel)
-            : this(stream, compressionLevel, leaveOpen: false) { }
+            : this(stream, compressionLevel, leaveOpen: false)
+        {
+        }
 
         // Implies mode = Compress
         public GZipStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen)

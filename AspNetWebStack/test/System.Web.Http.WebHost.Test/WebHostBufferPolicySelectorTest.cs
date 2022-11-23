@@ -34,7 +34,13 @@ namespace System.Web.Http.WebHost
                     // StreamContent (unknown length) should not buffer
                     { new StreamContent(mockStream.Object), false },
                     // PushStreamContent (unknown length) should not buffer
-                    { new PushStreamContent((stream, headers, context) => { }), false },
+                    {
+                        new PushStreamContent(
+                            (stream, headers, context) => {
+                            }
+                        ),
+                        false
+                    },
                     // ObjectContent (unknown length) should buffer
                     { new ObjectContent<string>(testString, new XmlMediaTypeFormatter()), true }
                 };

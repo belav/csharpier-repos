@@ -33,9 +33,13 @@ namespace System.IO.Pipelines
 
     public sealed partial class Pipe
     {
-        public Pipe() { }
+        public Pipe()
+        {
+        }
 
-        public Pipe(System.IO.Pipelines.PipeOptions options) { }
+        public Pipe(System.IO.Pipelines.PipeOptions options)
+        {
+        }
 
         public System.IO.Pipelines.PipeReader Reader
         {
@@ -46,7 +50,9 @@ namespace System.IO.Pipelines
             get { throw null; }
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     public partial class PipeOptions
@@ -59,7 +65,9 @@ namespace System.IO.Pipelines
             long resumeWriterThreshold = (long)-1,
             int minimumSegmentSize = -1,
             bool useSynchronizationContext = true
-        ) { }
+        )
+        {
+        }
 
         public static System.IO.Pipelines.PipeOptions Default
         {
@@ -97,7 +105,9 @@ namespace System.IO.Pipelines
 
     public abstract partial class PipeReader
     {
-        protected PipeReader() { }
+        protected PipeReader()
+        {
+        }
 
         public abstract void AdvanceTo(System.SequencePosition consumed);
         public abstract void AdvanceTo(
@@ -159,7 +169,9 @@ namespace System.IO.Pipelines
         public virtual void OnWriterCompleted(
             System.Action<System.Exception?, object?> callback,
             object? state
-        ) { }
+        )
+        {
+        }
 
         public abstract System.Threading.Tasks.ValueTask<System.IO.Pipelines.ReadResult> ReadAsync(
             System.Threading.CancellationToken cancellationToken =
@@ -188,7 +200,9 @@ namespace System.IO.Pipelines
 
     public abstract partial class PipeScheduler
     {
-        protected PipeScheduler() { }
+        protected PipeScheduler()
+        {
+        }
 
         public static System.IO.Pipelines.PipeScheduler Inline
         {
@@ -203,7 +217,9 @@ namespace System.IO.Pipelines
 
     public abstract partial class PipeWriter : System.Buffers.IBufferWriter<byte>
     {
-        protected PipeWriter() { }
+        protected PipeWriter()
+        {
+        }
 
         public abstract void Advance(int bytes);
 
@@ -253,7 +269,9 @@ namespace System.IO.Pipelines
         public virtual void OnReaderCompleted(
             System.Action<System.Exception?, object?> callback,
             object? state
-        ) { }
+        )
+        {
+        }
 
         public virtual long UnflushedBytes => throw null;
 
@@ -315,7 +333,9 @@ namespace System.IO.Pipelines
             int bufferSize,
             int minimumReadSize,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
         public StreamPipeReaderOptions(
             System.Buffers.MemoryPool<byte>? pool = null,
@@ -323,7 +343,9 @@ namespace System.IO.Pipelines
             int minimumReadSize = -1,
             bool leaveOpen = false,
             bool useZeroByteReads = false
-        ) { }
+        )
+        {
+        }
 
         public int BufferSize
         {
@@ -353,7 +375,9 @@ namespace System.IO.Pipelines
             System.Buffers.MemoryPool<byte>? pool = null,
             int minimumBufferSize = -1,
             bool leaveOpen = false
-        ) { }
+        )
+        {
+        }
 
         public bool LeaveOpen
         {

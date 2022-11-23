@@ -83,7 +83,9 @@ public class BatchExecutorTest
             .BuildServiceProvider(validateScopes: true);
 
         public TestContext()
-            : base(FakeRelationalTestHelpers.Instance.CreateOptions(_serviceProvider)) { }
+            : base(FakeRelationalTestHelpers.Instance.CreateOptions(_serviceProvider))
+        {
+        }
 
         public DbSet<Foo> Foos { get; set; }
         public DbSet<Bar> Bars { get; set; }

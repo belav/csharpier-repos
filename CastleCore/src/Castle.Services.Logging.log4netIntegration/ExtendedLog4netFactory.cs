@@ -27,7 +27,9 @@ namespace Castle.Services.Logging.Log4netIntegration
     {
         static readonly Assembly _callingAssembly = typeof(Log4netFactory).Assembly;
 
-        public ExtendedLog4netFactory() : this(Log4netFactory.defaultConfigFileName) { }
+        public ExtendedLog4netFactory() : this(Log4netFactory.defaultConfigFileName)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="ExtendedLog4netFactory" /> class.

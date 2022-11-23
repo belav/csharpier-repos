@@ -16,7 +16,9 @@ namespace Roslyn.Utilities
     {
         public static readonly EmptyComparer Instance = new EmptyComparer();
 
-        private EmptyComparer() { }
+        private EmptyComparer()
+        {
+        }
 
         bool IEqualityComparer<object>.Equals(object? a, object? b)
         {

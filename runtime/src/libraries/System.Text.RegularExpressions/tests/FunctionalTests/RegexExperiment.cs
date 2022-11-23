@@ -124,7 +124,9 @@ namespace System.Text.RegularExpressions.Tests
                     }
                 }
             }
-            catch (NotSupportedException e) when (e.Message.Contains("conditional")) { }
+            catch (NotSupportedException e) when (e.Message.Contains("conditional"))
+            {
+            }
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]

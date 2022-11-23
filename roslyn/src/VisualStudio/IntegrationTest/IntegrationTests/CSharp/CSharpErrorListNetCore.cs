@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpErrorListNetCore : CSharpErrorListCommon
     {
         public CSharpErrorListNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary) { }
+            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

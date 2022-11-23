@@ -65,7 +65,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public SharedGlobalCache() { }
+            public SharedGlobalCache()
+            {
+            }
         }
 
         internal DiagnosticAnalyzerInfoCache()

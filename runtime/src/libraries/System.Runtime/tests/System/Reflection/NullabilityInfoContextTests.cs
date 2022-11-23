@@ -2959,7 +2959,9 @@ namespace System.Reflection.Tests
 
         public string[] MethodReturnsUnknown() => null!;
 
-        public void MethodParametersUnknown(string s, IDictionary<Type, string[]> dict) { }
+        public void MethodParametersUnknown(string s, IDictionary<Type, string[]> dict)
+        {
+        }
 
 #nullable enable
         public TypeWithNotNullContext? PropertyNullable { get; set; }
@@ -3012,7 +3014,9 @@ namespace System.Reflection.Tests
         public string? this[int i]
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
         private protected string?[]?[]? PropertyJaggedArrayNullNullNull { get; set; }
         public static string?[]?[] PropertyJaggedArrayNullNullNon { get; set; } = null!;
@@ -3136,7 +3140,9 @@ namespace System.Reflection.Tests
             string
         > MethodReturnsNonTupleNonTupleNullStringNullStringNonString() => null!;
 
-        public void MethodNullNonNullNonNon(string? s, IDictionary<Type, string?[]> dict) { }
+        public void MethodNullNonNullNonNon(string? s, IDictionary<Type, string?[]> dict)
+        {
+        }
 
         public void MethodNonNullNonNullNotNull(
             string s,
@@ -3146,12 +3152,16 @@ namespace System.Reflection.Tests
             dict = new Dictionary<Type, string[]?>();
         }
 
-        public void MethodNullNonNullNullNon(string? s, IDictionary<Type, string?[]?> dict) { }
+        public void MethodNullNonNullNullNon(string? s, IDictionary<Type, string?[]?> dict)
+        {
+        }
 
         public void MethodAllowNullNonNonNonNull(
             [AllowNull] string s,
             IDictionary<Type, string[]>? dict
-        ) { }
+        )
+        {
+        }
 
         public ref readonly int? MethodWithByRefs(
             out int? a,
@@ -3171,12 +3181,18 @@ namespace System.Reflection.Tests
         public ref T ConstrainedGenericMethodWithByRef<T>(out T[] array) where T : class? =>
             throw new NotImplementedException();
 
-        public unsafe void MethodWithPointers(int* a, int?* b) { }
+        public unsafe void MethodWithPointers(int* a, int?* b)
+        {
+        }
 
-        public unsafe void GenericMethodWithPointers<T>(T* a, T?* b) where T : unmanaged { }
+        public unsafe void GenericMethodWithPointers<T>(T* a, T?* b) where T : unmanaged
+        {
+        }
     }
 
-    public struct GenericStruct<T, Y> { }
+    public struct GenericStruct<T, Y>
+    {
+    }
 
     internal class GenericTest<T>
     {
@@ -3189,7 +3205,9 @@ namespace System.Reflection.Tests
 
         public T MethodReturnsUnknown() => default!;
 
-        public void MethodParametersUnknown(T s, IDictionary<Type, T> dict) { }
+        public void MethodParametersUnknown(T s, IDictionary<Type, T> dict)
+        {
+        }
 
 #nullable enable
 
@@ -3254,9 +3272,13 @@ namespace System.Reflection.Tests
 
         public List<T>? MethodNullListNonNullGeneric() => null;
 
-        public void MethodArgsNullGenericNullDictValueGeneric(T? s, IDictionary<Type, T>? dict) { }
+        public void MethodArgsNullGenericNullDictValueGeneric(T? s, IDictionary<Type, T>? dict)
+        {
+        }
 
-        public void MethodArgsGenericDictValueNullGeneric(T s, IDictionary<string, T?> dict) { }
+        public void MethodArgsGenericDictValueNullGeneric(T s, IDictionary<string, T?> dict)
+        {
+        }
 
         public ref T? this[in T a, in List<T?> b] => throw new NotImplementedException();
     }
@@ -3289,25 +3311,41 @@ namespace System.Reflection.Tests
         public T? PropertyNullable { get; set; }
     }
 
-    public class ListOfUnconstrained<T> : List<T> { }
+    public class ListOfUnconstrained<T> : List<T>
+    {
+    }
 
-    public class ListUnconstrainedOfNullable<T> : ListOfUnconstrained<T> where T : class? { }
+    public class ListUnconstrainedOfNullable<T> : ListOfUnconstrained<T> where T : class?
+    {
+    }
 
-    public class ListUnconstrainedOfNullableOfObject<T> : ListUnconstrainedOfNullable<object> { }
+    public class ListUnconstrainedOfNullableOfObject<T> : ListUnconstrainedOfNullable<object>
+    {
+    }
 
-    public class ListOfArrayOfNullableString : List<string?[]> { }
+    public class ListOfArrayOfNullableString : List<string?[]>
+    {
+    }
 
-    public class ListOfNotNull<T> : List<T> where T : notnull { }
+    public class ListOfNotNull<T> : List<T> where T : notnull
+    {
+    }
 
-    public class ListOfListOfObject<T> : List<List<object>> { }
+    public class ListOfListOfObject<T> : List<List<object>>
+    {
+    }
 
     public class ListMultiGenericOfNotNull<T, U, V> : List<U>
         where T : class?
         where U : class
-        where V : class? { }
+        where V : class?
+    {
+    }
 
     public class ListOfTupleOfDictionaryOfStringNullableBoolIntNullableObject
-        : List<(Dictionary<string, bool?>, int, object?)> { }
+        : List<(Dictionary<string, bool?>, int, object?)>
+    {
+    }
 
     public class DerivesFromTupleOfNestedGenerics
         : Tuple<List<string[]>, Dictionary<object[], List<object>>, IDisposable[]?>
@@ -3316,7 +3354,9 @@ namespace System.Reflection.Tests
             List<string[]> item1,
             Dictionary<object[], List<object>> item2,
             IDisposable[]? item3
-        ) : base(item1, item2, item3) { }
+        ) : base(item1, item2, item3)
+        {
+        }
     }
 
     public class TypeWithPropertiesNestingItsGenericTypeArgument<T>

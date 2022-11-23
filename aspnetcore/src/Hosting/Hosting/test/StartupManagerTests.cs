@@ -191,7 +191,9 @@ public class StartupManagerTests
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
 
-        public void Configure(IApplicationBuilder builder) { }
+        public void Configure(IApplicationBuilder builder)
+        {
+        }
     }
 
     public class ConfigureServicesAndConfigureContainerStartup
@@ -210,7 +212,9 @@ public class StartupManagerTests
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
 
-        public void Configure(IApplicationBuilder builder) { }
+        public void Configure(IApplicationBuilder builder)
+        {
+        }
     }
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -272,7 +276,9 @@ public class StartupManagerTests
             return services.BuildServiceProvider();
         }
 
-        public void Configure(IApplicationBuilder builder) { }
+        public void Configure(IApplicationBuilder builder)
+        {
+        }
     }
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -329,7 +335,9 @@ public class StartupManagerTests
             services.TryAddSingleton(new ServiceAfter { Message = "Configure services" });
         }
 
-        public void Configure(IApplicationBuilder builder) { }
+        public void Configure(IApplicationBuilder builder)
+        {
+        }
     }
 
     public class ServiceBefore
@@ -828,21 +836,29 @@ public class StartupManagerTests
 
     public class MyContainerStartupWithOverloads
     {
-        public void ConfigureServices(IServiceCollection services) { }
+        public void ConfigureServices(IServiceCollection services)
+        {
+        }
 
         public void ConfigureContainer(MyContainer container)
         {
             container.MyFancyContainerMethod();
         }
 
-        public void ConfigureContainer(IServiceCollection services) { }
+        public void ConfigureContainer(IServiceCollection services)
+        {
+        }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     public class MyContainerStartupEnvironmentBased
     {
-        public void ConfigureServices(IServiceCollection services) { }
+        public void ConfigureServices(IServiceCollection services)
+        {
+        }
 
         public void ConfigureDevelopmentContainer(MyContainer container)
         {
@@ -854,27 +870,37 @@ public class StartupManagerTests
             container.Environment = Environments.Production;
         }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     public class MyContainerStartup
     {
-        public void ConfigureServices(IServiceCollection services) { }
+        public void ConfigureServices(IServiceCollection services)
+        {
+        }
 
         public void ConfigureContainer(MyContainer container)
         {
             container.MyFancyContainerMethod();
         }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     public class MyContainerStartupBaseClass : StartupBase<MyContainer>
     {
         public MyContainerStartupBaseClass(IServiceProviderFactory<MyContainer> factory)
-            : base(factory) { }
+            : base(factory)
+        {
+        }
 
-        public override void Configure(IApplicationBuilder app) { }
+        public override void Configure(IApplicationBuilder app)
+        {
+        }
 
         public override void ConfigureContainer(MyContainer containerBuilder)
         {
@@ -884,7 +910,9 @@ public class StartupManagerTests
 
     public class SimpleService
     {
-        public SimpleService() { }
+        public SimpleService()
+        {
+        }
 
         public string Message { get; set; }
     }
@@ -896,7 +924,9 @@ public class StartupManagerTests
             services.AddSingleton<SimpleService>();
         }
 
-        public void ConfigureNoServices(IServiceCollection services) { }
+        public void ConfigureNoServices(IServiceCollection services)
+        {
+        }
 
         public void Configure(IApplicationBuilder app)
         {

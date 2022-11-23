@@ -9,4 +9,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-keys">Keys</see> for more information and examples.
 /// </remarks>
-public interface IPrimaryKeyConstraint : IUniqueConstraint { }
+public interface IPrimaryKeyConstraint : IUniqueConstraint
+{
+}

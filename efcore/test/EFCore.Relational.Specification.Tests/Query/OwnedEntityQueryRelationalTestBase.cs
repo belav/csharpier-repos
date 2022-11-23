@@ -29,7 +29,9 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
     protected class Context24777 : DbContext
     {
-        public Context24777(DbContextOptions options) : base(options) { }
+        public Context24777(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Root24777> Roots { get; set; }
 
@@ -150,7 +152,9 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
     protected class Context25680 : DbContext
     {
-        public Context25680(DbContextOptions options) : base(options) { }
+        public Context25680(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -223,7 +227,9 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
     protected class MyContext26592 : MyContext26592Base
     {
-        public MyContext26592(DbContextOptions options) : base(options) { }
+        public MyContext26592(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -332,7 +338,9 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
     protected class MyContext28247 : DbContext
     {
-        public MyContext28247(DbContextOptions options) : base(options) { }
+        public MyContext28247(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<RotRutCase> RotRutCases { get; set; }
 

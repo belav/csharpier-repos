@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 originalDefinition: originalDefinition,
                 // An Arity-0 member of an unbound type, e.g. A<>.B, is unbound.
                 unbound: newContainer.IsUnboundGenericType && originalDefinition.Arity == 0
-            ) { }
+            )
+        {
+        }
 
         internal override bool GetUnificationUseSiteDiagnosticRecursive(
             ref DiagnosticInfo result,

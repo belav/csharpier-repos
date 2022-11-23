@@ -21,11 +21,15 @@ namespace AutoMapper.UnitTests.Bug
                 string Prop2 { get; }
             }
 
-            public interface IMapFromElementDerived2 : IMapFromElement { }
+            public interface IMapFromElementDerived2 : IMapFromElement
+            {
+            }
 
             public interface IMapFromElementDerivedBoth
                 : IMapFromElementDerived1,
-                    IMapFromElementDerived2 { }
+                    IMapFromElementDerived2
+            {
+            }
 
             public interface IMapToElementWritable
             {

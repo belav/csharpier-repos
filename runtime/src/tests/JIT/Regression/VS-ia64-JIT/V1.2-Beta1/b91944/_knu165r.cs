@@ -59,7 +59,9 @@ public struct AA
                             }
                             param4[((int)(108.0f)), 27] /= local4;
                         } while ((param1 == null));
-                        try { }
+                        try
+                        {
+                        }
                         catch (Exception)
                         {
                             bool local8 = true;
@@ -148,16 +150,24 @@ public struct AA
                 (new float[local16][,,])
             );
         }
-        catch (InvalidOperationException) { }
+        catch (InvalidOperationException)
+        {
+        }
         if (App.m_bFwd2)
             do
             {
                 sbyte local28 = App.m_sbyFwd5;
             } while (App.m_bFwd2);
-        else { }
+        else
+        {
+        }
         local15[47, ((int)(124.0f))] = new AA();
-        try { }
-        catch (InvalidOperationException) { }
+        try
+        {
+        }
+        catch (InvalidOperationException)
+        {
+        }
         if (App.m_bFwd2)
             local15[88, 123].m_objField1 = ((object)(true));
         return (new TestEnum[local16]);
@@ -178,12 +188,16 @@ public class App
                 new float[][,,] { (new float[87u, 93u, 100u]), (new float[27u, 39u, 9u]) }
             );
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA.Static2();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return 100;
     }
 

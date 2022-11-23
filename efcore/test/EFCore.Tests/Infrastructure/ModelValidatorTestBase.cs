@@ -99,11 +99,17 @@ public abstract class ModelValidatorTestBase
         public ICollection<A> ManyAs { get; set; }
     }
 
-    protected class C : A { }
+    protected class C : A
+    {
+    }
 
-    protected class D : A { }
+    protected class D : A
+    {
+    }
 
-    protected class F : D { }
+    protected class F : D
+    {
+    }
 
     protected class G
     {
@@ -117,10 +123,14 @@ public abstract class ModelValidatorTestBase
         public A A { get; set; }
     }
 
-    protected abstract class Abstract : A { }
+    protected abstract class Abstract : A
+    {
+    }
 
     // ReSharper disable once UnusedTypeParameter
-    protected class Generic<T> : Abstract { }
+    protected class Generic<T> : Abstract
+    {
+    }
 
     public class SampleEntity
     {
@@ -153,7 +163,9 @@ public abstract class ModelValidatorTestBase
         public ReferencedEntityMinimal ReferencedEntity { get; set; }
     }
 
-    public class ReferencedEntityMinimal { }
+    public class ReferencedEntityMinimal
+    {
+    }
 
     public class AnotherSampleEntityMinimal
     {
@@ -184,7 +196,9 @@ public abstract class ModelValidatorTestBase
         public int WriteOnly
         {
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
 
         // ReSharper disable once UnassignedGetOnlyAutoProperty
@@ -197,7 +211,9 @@ public abstract class ModelValidatorTestBase
         {
             get => 0;
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
     }
 

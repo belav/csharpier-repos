@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
                 typeof(TestFormattingRuleFactoryServiceFactory)
             );
 
-        public CSharpFormatterTestsBase(ITestOutputHelper output) : base(output) { }
+        public CSharpFormatterTestsBase(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected const string HtmlMarkup =
             @"<html>

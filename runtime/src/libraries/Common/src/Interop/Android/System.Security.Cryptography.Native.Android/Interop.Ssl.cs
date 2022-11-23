@@ -278,7 +278,9 @@ internal static partial class Interop
 
         internal sealed class SslException : Exception
         {
-            internal SslException() { }
+            internal SslException()
+            {
+            }
 
             internal SslException(int errorCode)
             {
@@ -377,7 +379,9 @@ namespace System.Net
 {
     internal sealed class SafeSslHandle : SafeHandle
     {
-        public SafeSslHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSslHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

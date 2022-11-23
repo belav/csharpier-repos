@@ -343,7 +343,8 @@ namespace System.Linq.Expressions.Tests
 #pragma warning disable xUnit1013 // needs to be public for reflection-based test
         public static void DoNothing()
 #pragma warning restore xUnit1013
-        { }
+        {
+        }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/mono/mono/issues/14919", TestRuntimes.Mono)]

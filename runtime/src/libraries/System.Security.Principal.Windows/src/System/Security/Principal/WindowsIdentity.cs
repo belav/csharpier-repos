@@ -64,20 +64,28 @@ namespace System.Security.Principal
 
         private static bool s_ignoreWindows8Properties;
 
-        public WindowsIdentity(IntPtr userToken) : this(userToken, null, -1) { }
+        public WindowsIdentity(IntPtr userToken) : this(userToken, null, -1)
+        {
+        }
 
-        public WindowsIdentity(IntPtr userToken, string type) : this(userToken, type, -1) { }
+        public WindowsIdentity(IntPtr userToken, string type) : this(userToken, type, -1)
+        {
+        }
 
         // The actual accType is ignored and always will be retrieved from the system.
         public WindowsIdentity(IntPtr userToken, string type, WindowsAccountType acctType)
-            : this(userToken, type, -1) { }
+            : this(userToken, type, -1)
+        {
+        }
 
         public WindowsIdentity(
             IntPtr userToken,
             string type,
             WindowsAccountType acctType,
             bool isAuthenticated
-        ) : this(userToken, type, isAuthenticated ? 1 : 0) { }
+        ) : this(userToken, type, isAuthenticated ? 1 : 0)
+        {
+        }
 
         protected WindowsIdentity(WindowsIdentity identity)
             : base(identity, null, GetAuthType(identity), null, null)

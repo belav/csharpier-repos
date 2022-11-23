@@ -16,7 +16,9 @@ namespace System.Text.Json
         /// <summary>
         /// Initializes a new instance of <see cref="JsonNamingPolicy"/>.
         /// </summary>
-        protected JsonNamingPolicy() { }
+        protected JsonNamingPolicy()
+        {
+        }
 
         /// <summary>
         /// Returns the naming policy for camel-casing.

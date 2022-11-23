@@ -19,11 +19,17 @@ namespace System.Formats.Cbor
         protected CborContentException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public CborContentException(string? message) { }
+        public CborContentException(string? message)
+        {
+        }
 
-        public CborContentException(string? message, System.Exception? inner) { }
+        public CborContentException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     public partial class CborReader
@@ -33,7 +39,9 @@ namespace System.Formats.Cbor
             System.Formats.Cbor.CborConformanceMode conformanceMode =
                 System.Formats.Cbor.CborConformanceMode.Strict,
             bool allowMultipleRootLevelValues = false
-        ) { }
+        )
+        {
+        }
 
         public bool AllowMultipleRootLevelValues
         {
@@ -116,13 +124,21 @@ namespace System.Formats.Cbor
             throw null;
         }
 
-        public void ReadEndArray() { }
+        public void ReadEndArray()
+        {
+        }
 
-        public void ReadEndIndefiniteLengthByteString() { }
+        public void ReadEndIndefiniteLengthByteString()
+        {
+        }
 
-        public void ReadEndIndefiniteLengthTextString() { }
+        public void ReadEndIndefiniteLengthTextString()
+        {
+        }
 
-        public void ReadEndMap() { }
+        public void ReadEndMap()
+        {
+        }
 
         public int ReadInt32()
         {
@@ -134,7 +150,9 @@ namespace System.Formats.Cbor
             throw null;
         }
 
-        public void ReadNull() { }
+        public void ReadNull()
+        {
+        }
 
         public System.Formats.Cbor.CborSimpleValue ReadSimpleValue()
         {
@@ -151,9 +169,13 @@ namespace System.Formats.Cbor
             throw null;
         }
 
-        public void ReadStartIndefiniteLengthByteString() { }
+        public void ReadStartIndefiniteLengthByteString()
+        {
+        }
 
-        public void ReadStartIndefiniteLengthTextString() { }
+        public void ReadStartIndefiniteLengthTextString()
+        {
+        }
 
         public int? ReadStartMap()
         {
@@ -188,9 +210,13 @@ namespace System.Formats.Cbor
             throw null;
         }
 
-        public void SkipToParent(bool disableConformanceModeChecks = false) { }
+        public void SkipToParent(bool disableConformanceModeChecks = false)
+        {
+        }
 
-        public void SkipValue(bool disableConformanceModeChecks = false) { }
+        public void SkipValue(bool disableConformanceModeChecks = false)
+        {
+        }
 
         public bool TryReadByteString(System.Span<byte> destination, out int bytesWritten)
         {
@@ -264,7 +290,9 @@ namespace System.Formats.Cbor
                 System.Formats.Cbor.CborConformanceMode.Strict,
             bool convertIndefiniteLengthEncodings = false,
             bool allowMultipleRootLevelValues = false
-        ) { }
+        )
+        {
+        }
 
         public bool AllowMultipleRootLevelValues
         {
@@ -301,73 +329,133 @@ namespace System.Formats.Cbor
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         public bool TryEncode(System.Span<byte> destination, out int bytesWritten)
         {
             throw null;
         }
 
-        public void WriteBigInteger(System.Numerics.BigInteger value) { }
+        public void WriteBigInteger(System.Numerics.BigInteger value)
+        {
+        }
 
-        public void WriteBoolean(bool value) { }
+        public void WriteBoolean(bool value)
+        {
+        }
 
-        public void WriteByteString(byte[] value) { }
+        public void WriteByteString(byte[] value)
+        {
+        }
 
-        public void WriteByteString(System.ReadOnlySpan<byte> value) { }
-
-        [System.CLSCompliantAttribute(false)]
-        public void WriteCborNegativeIntegerRepresentation(ulong value) { }
-
-        public void WriteDateTimeOffset(System.DateTimeOffset value) { }
-
-        public void WriteDecimal(decimal value) { }
-
-        public void WriteDouble(double value) { }
-
-        public void WriteEncodedValue(System.ReadOnlySpan<byte> encodedValue) { }
-
-        public void WriteEndArray() { }
-
-        public void WriteEndIndefiniteLengthByteString() { }
-
-        public void WriteEndIndefiniteLengthTextString() { }
-
-        public void WriteEndMap() { }
-
-        public void WriteInt32(int value) { }
-
-        public void WriteInt64(long value) { }
-
-        public void WriteNull() { }
-
-        public void WriteSimpleValue(System.Formats.Cbor.CborSimpleValue value) { }
-
-        public void WriteSingle(float value) { }
-
-        public void WriteStartArray(int? definiteLength) { }
-
-        public void WriteStartIndefiniteLengthByteString() { }
-
-        public void WriteStartIndefiniteLengthTextString() { }
-
-        public void WriteStartMap(int? definiteLength) { }
+        public void WriteByteString(System.ReadOnlySpan<byte> value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public void WriteTag(System.Formats.Cbor.CborTag tag) { }
+        public void WriteCborNegativeIntegerRepresentation(ulong value)
+        {
+        }
 
-        public void WriteTextString(System.ReadOnlySpan<char> value) { }
+        public void WriteDateTimeOffset(System.DateTimeOffset value)
+        {
+        }
 
-        public void WriteTextString(string value) { }
+        public void WriteDecimal(decimal value)
+        {
+        }
+
+        public void WriteDouble(double value)
+        {
+        }
+
+        public void WriteEncodedValue(System.ReadOnlySpan<byte> encodedValue)
+        {
+        }
+
+        public void WriteEndArray()
+        {
+        }
+
+        public void WriteEndIndefiniteLengthByteString()
+        {
+        }
+
+        public void WriteEndIndefiniteLengthTextString()
+        {
+        }
+
+        public void WriteEndMap()
+        {
+        }
+
+        public void WriteInt32(int value)
+        {
+        }
+
+        public void WriteInt64(long value)
+        {
+        }
+
+        public void WriteNull()
+        {
+        }
+
+        public void WriteSimpleValue(System.Formats.Cbor.CborSimpleValue value)
+        {
+        }
+
+        public void WriteSingle(float value)
+        {
+        }
+
+        public void WriteStartArray(int? definiteLength)
+        {
+        }
+
+        public void WriteStartIndefiniteLengthByteString()
+        {
+        }
+
+        public void WriteStartIndefiniteLengthTextString()
+        {
+        }
+
+        public void WriteStartMap(int? definiteLength)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public void WriteUInt32(uint value) { }
+        public void WriteTag(System.Formats.Cbor.CborTag tag)
+        {
+        }
+
+        public void WriteTextString(System.ReadOnlySpan<char> value)
+        {
+        }
+
+        public void WriteTextString(string value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public void WriteUInt64(ulong value) { }
+        public void WriteUInt32(uint value)
+        {
+        }
 
-        public void WriteUnixTimeSeconds(double seconds) { }
+        [System.CLSCompliantAttribute(false)]
+        public void WriteUInt64(ulong value)
+        {
+        }
 
-        public void WriteUnixTimeSeconds(long seconds) { }
+        public void WriteUnixTimeSeconds(double seconds)
+        {
+        }
+
+        public void WriteUnixTimeSeconds(long seconds)
+        {
+        }
     }
 }

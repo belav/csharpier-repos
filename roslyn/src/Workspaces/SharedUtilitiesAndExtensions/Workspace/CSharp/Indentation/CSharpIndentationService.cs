@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839"
         )]
-        public CSharpIndentationService() { }
+        public CSharpIndentationService()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

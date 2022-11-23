@@ -39,7 +39,9 @@ namespace System.Data.SqlTypes
             m_value = value ? x_True : x_False;
         }
 
-        public SqlBoolean(int value) : this(value, false) { }
+        public SqlBoolean(int value) : this(value, false)
+        {
+        }
 
         private SqlBoolean(int value, bool fNull)
         {

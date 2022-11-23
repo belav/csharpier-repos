@@ -566,5 +566,7 @@ public class SqlServerMetadataBuilderExtensionsTest
         Assert.Equal("Splow", relationshipBuilder.Metadata.GetConstraintName());
     }
 
-    private class Splot { }
+    private class Splot
+    {
+    }
 }

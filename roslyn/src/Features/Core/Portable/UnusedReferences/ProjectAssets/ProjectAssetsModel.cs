@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
         public Dictionary<string, ProjectAssetsTargetLibraryCompile>? Compile { get; set; }
     }
 
-    internal class ProjectAssetsTargetLibraryCompile { }
+    internal class ProjectAssetsTargetLibraryCompile
+    {
+    }
 
     internal class ProjectAssetsLibrary
     {

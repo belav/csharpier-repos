@@ -21,7 +21,9 @@ internal static class CSharpSyntaxFormattingOptionsStorage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Service() { }
+        public Service()
+        {
+        }
 
         public SyntaxFormattingOptions GetOptions(IGlobalOptionService globalOptions) =>
             GetCSharpSyntaxFormattingOptions(globalOptions);

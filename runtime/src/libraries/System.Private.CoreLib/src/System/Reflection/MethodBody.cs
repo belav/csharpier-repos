@@ -7,7 +7,9 @@ namespace System.Reflection
 {
     public class MethodBody
     {
-        protected MethodBody() { }
+        protected MethodBody()
+        {
+        }
 
         public virtual int LocalSignatureMetadataToken => 0;
         public virtual IList<LocalVariableInfo> LocalVariables =>

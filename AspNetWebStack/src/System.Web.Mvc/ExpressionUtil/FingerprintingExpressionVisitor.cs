@@ -18,7 +18,9 @@ namespace System.Web.Mvc.ExpressionUtil
             new ExpressionFingerprintChain();
         private bool _gaveUp;
 
-        private FingerprintingExpressionVisitor() { }
+        private FingerprintingExpressionVisitor()
+        {
+        }
 
         private T GiveUp<T>(T node)
         {

@@ -46,7 +46,9 @@ public readonly struct RelationalCommandParameterObject
             context,
             logger,
             detailedErrorsEnabled: false
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     <para>
@@ -79,7 +81,9 @@ public readonly struct RelationalCommandParameterObject
             logger,
             detailedErrorsEnabled: false,
             commandSource
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     <para>
@@ -112,7 +116,9 @@ public readonly struct RelationalCommandParameterObject
             logger,
             detailedErrorsEnabled,
             CommandSource.Unknown
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     <para>

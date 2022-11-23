@@ -18,7 +18,9 @@ namespace System.IO
         /// Construct a random temp directory in the temp folder.
         /// </summary>
         public TempDirectory()
-            : this(IO.Path.Combine(IO.Path.GetTempPath(), IO.Path.GetRandomFileName())) { }
+            : this(IO.Path.Combine(IO.Path.GetTempPath(), IO.Path.GetRandomFileName()))
+        {
+        }
 
         public TempDirectory(string path)
         {

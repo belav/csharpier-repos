@@ -10,7 +10,9 @@ public sealed class ConditionalFactTestCase : XunitTestCase
     [Obsolete(
         "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes"
     )]
-    public ConditionalFactTestCase() { }
+    public ConditionalFactTestCase()
+    {
+    }
 
     public ConditionalFactTestCase(
         IMessageSink diagnosticMessageSink,
@@ -25,7 +27,9 @@ public sealed class ConditionalFactTestCase : XunitTestCase
             defaultMethodDisplayOptions,
             testMethod,
             testMethodArguments
-        ) { }
+        )
+    {
+    }
 
     public override async Task<RunSummary> RunAsync(
         IMessageSink diagnosticMessageSink,

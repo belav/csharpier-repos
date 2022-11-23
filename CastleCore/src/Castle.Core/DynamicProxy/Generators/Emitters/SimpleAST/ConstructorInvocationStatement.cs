@@ -24,7 +24,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
         private readonly ConstructorInfo cmethod;
 
         public ConstructorInvocationStatement(Type baseType) : this(GetDefaultConstructor(baseType))
-        { }
+        {
+        }
 
         public ConstructorInvocationStatement(ConstructorInfo method, params IExpression[] args)
         {

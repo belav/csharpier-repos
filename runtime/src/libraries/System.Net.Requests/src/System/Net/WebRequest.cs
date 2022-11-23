@@ -39,7 +39,9 @@ namespace System.Net
             DiagnosticId = Obsoletions.WebRequestDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        protected WebRequest() { }
+        protected WebRequest()
+        {
+        }
 
         [Obsolete(
             Obsoletions.WebRequestMessage,

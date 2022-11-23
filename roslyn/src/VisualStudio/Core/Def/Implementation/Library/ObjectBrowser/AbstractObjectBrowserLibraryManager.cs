@@ -603,8 +603,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     await context.OnCompletedAsync(cancellationToken).ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
 
         private static async Task FindReferencesAsync(

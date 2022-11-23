@@ -343,7 +343,9 @@ namespace XmlCoreTest.Common
             return CreateReader(readerParams);
         }
 
-        public static void CreateXSLTStyleSheetWCopyTestFile(string strFileName) { }
+        public static void CreateXSLTStyleSheetWCopyTestFile(string strFileName)
+        {
+        }
 
         public static XmlReader CreateReader(CreateReaderParams createParams)
         {

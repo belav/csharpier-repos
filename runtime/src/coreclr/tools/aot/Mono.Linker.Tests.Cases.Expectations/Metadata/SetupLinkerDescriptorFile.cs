@@ -11,6 +11,8 @@ namespace Mono.Linker.Tests.Cases.Expectations.Metadata
         public SetupLinkerDescriptorFile(
             string relativePathToFile,
             string destinationFileName = null
-        ) { }
+        )
+        {
+        }
     }
 }

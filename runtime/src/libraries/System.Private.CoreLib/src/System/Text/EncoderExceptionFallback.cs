@@ -12,7 +12,9 @@ namespace System.Text
             new EncoderExceptionFallback();
 
         // Construction
-        public EncoderExceptionFallback() { }
+        public EncoderExceptionFallback()
+        {
+        }
 
         public override EncoderFallbackBuffer CreateFallbackBuffer() =>
             new EncoderExceptionFallbackBuffer();
@@ -28,7 +30,9 @@ namespace System.Text
 
     public sealed class EncoderExceptionFallbackBuffer : EncoderFallbackBuffer
     {
-        public EncoderExceptionFallbackBuffer() { }
+        public EncoderExceptionFallbackBuffer()
+        {
+        }
 
         public override bool Fallback(char charUnknown, int index)
         {
@@ -141,7 +145,9 @@ namespace System.Text
         private EncoderFallbackException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
 
         public char CharUnknown => _charUnknown;
 

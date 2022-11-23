@@ -10,7 +10,9 @@ namespace Test
 {
     using System;
 
-    class AA { }
+    class AA
+    {
+    }
 
     class BB
     {
@@ -26,7 +28,9 @@ namespace Test
             {
                 AA aa = ((AA)(BB.Method1(new String[4])));
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

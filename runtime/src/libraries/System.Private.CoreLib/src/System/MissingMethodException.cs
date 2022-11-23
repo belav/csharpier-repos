@@ -43,7 +43,9 @@ namespace System
         }
 
         protected MissingMethodException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public override string Message =>
             ClassName == null

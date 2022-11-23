@@ -439,9 +439,13 @@ namespace Castle.DynamicProxy.Tests
             );
         }
 
-        private interface PrivateInterface { }
+        private interface PrivateInterface
+        {
+        }
 
-        private class PrivateClass : PrivateInterface { }
+        private class PrivateClass : PrivateInterface
+        {
+        }
     }
 
     public class MultiGenericClass : IMultiGenericInterface

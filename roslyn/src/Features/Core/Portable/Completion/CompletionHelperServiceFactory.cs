@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionHelperServiceFactory() { }
+        public CompletionHelperServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new Service(workspaceServices.Workspace);

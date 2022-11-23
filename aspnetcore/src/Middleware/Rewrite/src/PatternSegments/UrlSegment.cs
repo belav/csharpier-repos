@@ -10,7 +10,9 @@ internal sealed class UrlSegment : PatternSegment
 {
     private readonly UriMatchPart _uriMatchPart;
 
-    public UrlSegment() : this(UriMatchPart.Path) { }
+    public UrlSegment() : this(UriMatchPart.Path)
+    {
+    }
 
     public UrlSegment(UriMatchPart uriMatchPart)
     {

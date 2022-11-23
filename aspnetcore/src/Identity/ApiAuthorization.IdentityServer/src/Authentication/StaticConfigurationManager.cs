@@ -16,5 +16,7 @@ internal sealed class StaticConfigurationManager : IConfigurationManager<OpenIdC
     public Task<OpenIdConnectConfiguration> GetConfigurationAsync(CancellationToken cancel) =>
         _configuration;
 
-    public void RequestRefresh() { }
+    public void RequestRefresh()
+    {
+    }
 }

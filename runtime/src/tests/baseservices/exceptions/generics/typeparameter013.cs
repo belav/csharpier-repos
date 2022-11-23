@@ -12,9 +12,13 @@
 
 using System;
 
-public class GenException<T> : Exception { }
+public class GenException<T> : Exception
+{
+}
 
-public class GenExceptionSub<T> : GenException<T> { }
+public class GenExceptionSub<T> : GenException<T>
+{
+}
 
 public class Gen
 {

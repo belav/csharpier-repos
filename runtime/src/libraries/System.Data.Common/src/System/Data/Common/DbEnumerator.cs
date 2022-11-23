@@ -37,10 +37,14 @@ namespace System.Data.Common
             _closeReader = closeReader;
         }
 
-        public DbEnumerator(DbDataReader reader) : this((IDataReader)reader) { }
+        public DbEnumerator(DbDataReader reader) : this((IDataReader)reader)
+        {
+        }
 
         public DbEnumerator(DbDataReader reader, bool closeReader)
-            : this((IDataReader)reader, closeReader) { }
+            : this((IDataReader)reader, closeReader)
+        {
+        }
 
         // TODO: this should throw InvalidOperationException if null
         public object Current => _current!;

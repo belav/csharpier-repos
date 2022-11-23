@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpIfSnippetProvider() { }
+        public CSharpIfSnippetProvider()
+        {
+        }
 
         protected override void GetIfStatementCursorPosition(
             SourceText sourceText,

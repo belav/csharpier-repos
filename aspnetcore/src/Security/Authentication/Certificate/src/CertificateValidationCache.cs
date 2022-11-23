@@ -39,7 +39,9 @@ public class CertificateValidationCache : ICertificateValidationCache
     /// </summary>
     /// <param name="options">An accessor to <see cref="CertificateValidationCacheOptions"/></param>
     public CertificateValidationCache(IOptions<CertificateValidationCacheOptions> options)
-        : this(options, new SystemClock()) { }
+        : this(options, new SystemClock())
+    {
+    }
 
     /// <summary>
     /// Get the <see cref="AuthenticateResult"/> for the connection and certificate.

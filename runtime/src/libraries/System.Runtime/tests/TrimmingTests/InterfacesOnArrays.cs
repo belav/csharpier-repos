@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 class Program
 {
-    class Mine { }
+    class Mine
+    {
+    }
 
     static int Main()
     {

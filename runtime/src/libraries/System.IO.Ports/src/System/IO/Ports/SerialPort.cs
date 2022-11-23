@@ -536,16 +536,24 @@ namespace System.IO.Ports
         // Note: Calling SerialPort() does not open a port connection but merely instantiates an object.
         //     : A connection must be made using SerialPort's Open() method.
         public SerialPort(string portName)
-            : this(portName, DefaultBaudRate, DefaultParity, DefaultDataBits, DefaultStopBits) { }
+            : this(portName, DefaultBaudRate, DefaultParity, DefaultDataBits, DefaultStopBits)
+        {
+        }
 
         public SerialPort(string portName, int baudRate)
-            : this(portName, baudRate, DefaultParity, DefaultDataBits, DefaultStopBits) { }
+            : this(portName, baudRate, DefaultParity, DefaultDataBits, DefaultStopBits)
+        {
+        }
 
         public SerialPort(string portName, int baudRate, Parity parity)
-            : this(portName, baudRate, parity, DefaultDataBits, DefaultStopBits) { }
+            : this(portName, baudRate, parity, DefaultDataBits, DefaultStopBits)
+        {
+        }
 
         public SerialPort(string portName, int baudRate, Parity parity, int dataBits)
-            : this(portName, baudRate, parity, dataBits, DefaultStopBits) { }
+            : this(portName, baudRate, parity, dataBits, DefaultStopBits)
+        {
+        }
 
         // all the magic happens in the call to the instance's .Open() method.
         // Internally, the SerialStream constructor opens the file handle, sets the device

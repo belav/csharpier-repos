@@ -20,7 +20,9 @@ namespace System.Web.Mvc
         private ModelMetadata _modelMetadata;
         private TemplateInfo _templateMetadata;
 
-        public ViewDataDictionary() : this((object)null) { }
+        public ViewDataDictionary() : this((object)null)
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

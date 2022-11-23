@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InvocationExpressionSignatureHelpProvider() { }
+        public InvocationExpressionSignatureHelpProvider()
+        {
+        }
     }
 
     internal partial class InvocationExpressionSignatureHelpProviderBase

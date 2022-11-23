@@ -20,9 +20,13 @@ namespace System.ComponentModel
         private Dictionary<CultureInfo, SortedList<string, object?>?>? _resourceSets;
         private CultureInfo? _neutralResourcesCulture;
 
-        public ComponentResourceManager() { }
+        public ComponentResourceManager()
+        {
+        }
 
-        public ComponentResourceManager(Type t) : base(t) { }
+        public ComponentResourceManager(Type t) : base(t)
+        {
+        }
 
         /// <summary>
         /// The culture of the main assembly's neutral resources. If someone is asking for this culture's resources,

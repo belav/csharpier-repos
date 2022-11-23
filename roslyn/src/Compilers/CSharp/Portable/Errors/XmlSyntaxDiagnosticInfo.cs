@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly XmlParseErrorCode _xmlErrorCode;
 
         internal XmlSyntaxDiagnosticInfo(XmlParseErrorCode code, params object[] args)
-            : this(0, 0, code, args) { }
+            : this(0, 0, code, args)
+        {
+        }
 
         internal XmlSyntaxDiagnosticInfo(
             int offset,

@@ -13,12 +13,17 @@ namespace System.Security.Principal
     {
         private IdentityReferenceCollection? _unmappedIdentities;
 
-        public IdentityNotMappedException() : base(SR.IdentityReference_IdentityNotMapped) { }
+        public IdentityNotMappedException() : base(SR.IdentityReference_IdentityNotMapped)
+        {
+        }
 
-        public IdentityNotMappedException(string? message) : base(message) { }
+        public IdentityNotMappedException(string? message) : base(message)
+        {
+        }
 
         public IdentityNotMappedException(string? message, Exception? inner) : base(message, inner)
-        { }
+        {
+        }
 
         internal IdentityNotMappedException(
             string? message,
@@ -29,7 +34,9 @@ namespace System.Security.Principal
         }
 
         private IdentityNotMappedException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public override void GetObjectData(
             SerializationInfo serializationInfo,

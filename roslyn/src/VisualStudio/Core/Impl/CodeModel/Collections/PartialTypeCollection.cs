@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         }
 
         private PartialTypeCollection(CodeModelState state, AbstractCodeType parent)
-            : base(state, parent) { }
+            : base(state, parent)
+        {
+        }
 
         private ImmutableArray<EnvDTE.CodeElement> _parts;
 

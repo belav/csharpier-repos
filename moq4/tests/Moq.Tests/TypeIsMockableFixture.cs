@@ -88,33 +88,59 @@ namespace Moq.Tests
             Assert.False(type.IsMockable());
         }
 
-        public struct Struct { }
+        public struct Struct
+        {
+        }
 
-        public struct Struct<T> { }
+        public struct Struct<T>
+        {
+        }
 
-        public enum Enumeration { }
+        public enum Enumeration
+        {
+        }
 
         public delegate void VoidDelegate();
         public delegate T NonVoidDelegate<T>();
 
-        public interface IInterface { }
+        public interface IInterface
+        {
+        }
 
-        public interface IInterface<T> { }
+        public interface IInterface<T>
+        {
+        }
 
-        public class NonSealedClass { }
+        public class NonSealedClass
+        {
+        }
 
-        public class NonSealedClass<T> { }
+        public class NonSealedClass<T>
+        {
+        }
 
-        public abstract class AbstractClass { }
+        public abstract class AbstractClass
+        {
+        }
 
-        public abstract class AbstractClass<T> { }
+        public abstract class AbstractClass<T>
+        {
+        }
 
-        public static class StaticClass { }
+        public static class StaticClass
+        {
+        }
 
-        public static class StaticClass<T> { }
+        public static class StaticClass<T>
+        {
+        }
 
-        public sealed class SealedClass { }
+        public sealed class SealedClass
+        {
+        }
 
-        public sealed class SealedClass<T> { }
+        public sealed class SealedClass<T>
+        {
+        }
     }
 }

@@ -42,7 +42,9 @@ namespace System.Net.Sockets.Tests
             public object this[int index]
             {
                 get { return null; }
-                set { }
+                set
+                {
+                }
             }
 
             public int Add(object value)
@@ -50,14 +52,18 @@ namespace System.Net.Sockets.Tests
                 return -1;
             }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public bool Contains(object value)
             {
                 return false;
             }
 
-            public void CopyTo(Array array, int index) { }
+            public void CopyTo(Array array, int index)
+            {
+            }
 
             public IEnumerator GetEnumerator()
             {
@@ -69,11 +75,17 @@ namespace System.Net.Sockets.Tests
                 return -1;
             }
 
-            public void Insert(int index, object value) { }
+            public void Insert(int index, object value)
+            {
+            }
 
-            public void Remove(object value) { }
+            public void Remove(object value)
+            {
+            }
 
-            public void RemoveAt(int index) { }
+            public void RemoveAt(int index)
+            {
+            }
         }
 
         private static readonly byte[] s_buffer = new byte[1];
@@ -93,7 +105,9 @@ namespace System.Net.Sockets.Tests
             ProtocolType.Tcp
         );
 
-        private static void TheAsyncCallback(IAsyncResult ar) { }
+        private static void TheAsyncCallback(IAsyncResult ar)
+        {
+        }
 
         private static Socket GetSocket(AddressFamily addressFamily = AddressFamily.InterNetwork)
         {

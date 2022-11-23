@@ -7,7 +7,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
     {
         internal int _nullCount;
 
-        internal ObjectNull() { }
+        internal ObjectNull()
+        {
+        }
 
         internal void SetNullCount(int nullCount)
         {

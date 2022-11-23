@@ -163,11 +163,15 @@ public class DbContextOptionsTest
 
         public virtual void ApplyServices(IServiceCollection services) => AppliedServices = true;
 
-        public virtual void Validate(IDbContextOptions options) { }
+        public virtual void Validate(IDbContextOptions options)
+        {
+        }
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
+            {
+            }
 
             public override bool IsDatabaseProvider => false;
 
@@ -179,7 +183,9 @@ public class DbContextOptionsTest
 
             public override string LogFragment => "";
 
-            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) { }
+            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
+            {
+            }
         }
     }
 
@@ -193,11 +199,15 @@ public class DbContextOptionsTest
 
         public virtual void ApplyServices(IServiceCollection services) => AppliedServices = true;
 
-        public virtual void Validate(IDbContextOptions options) { }
+        public virtual void Validate(IDbContextOptions options)
+        {
+        }
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
+            {
+            }
 
             public override bool IsDatabaseProvider => true;
 
@@ -209,7 +219,9 @@ public class DbContextOptionsTest
 
             public override string LogFragment => "";
 
-            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) { }
+            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
+            {
+            }
         }
     }
 
@@ -340,5 +352,7 @@ public class DbContextOptionsTest
     private DbContextOptions<UnkoolContext> GenericCheck(DbContextOptions<UnkoolContext> options) =>
         options;
 
-    private class UnkoolContext : DbContext { }
+    private class UnkoolContext : DbContext
+    {
+    }
 }

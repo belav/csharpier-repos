@@ -11,7 +11,9 @@ namespace System.Text.Json.Serialization.Tests
         // A custom long[] converter as comma-delimited string "1,2,3".
         internal class LongArrayConverter : JsonConverter<long[]>
         {
-            public LongArrayConverter() { }
+            public LongArrayConverter()
+            {
+            }
 
             public override long[] Read(
                 ref Utf8JsonReader reader,

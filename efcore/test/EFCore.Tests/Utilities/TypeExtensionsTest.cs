@@ -46,10 +46,14 @@ public class TypeExtensionsTest
 
     public class CtorFixture
     {
-        public CtorFixture() { }
+        public CtorFixture()
+        {
+        }
 
         // ReSharper disable once UnusedParameter.Local
-        public CtorFixture(int frob) { }
+        public CtorFixture(int frob)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -296,7 +300,9 @@ public class TypeExtensionsTest
         public virtual int Singing
         {
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int TravellingLight { get; set; }
@@ -317,7 +323,9 @@ public class TypeExtensionsTest
 
         public override int Seaweed
         {
-            set { }
+            set
+            {
+            }
         }
 
         public override int VertrauenII { get; protected set; }
@@ -327,7 +335,9 @@ public class TypeExtensionsTest
 
         public override int Singing
         {
-            set { }
+            set
+            {
+            }
         }
 
         public new virtual int TravellingLight { get; set; }
@@ -347,7 +357,9 @@ public class TypeExtensionsTest
 
         public override int Seaweed
         {
-            set { }
+            set
+            {
+            }
         }
 
         public override int VertrauenII { get; protected set; }
@@ -357,7 +369,9 @@ public class TypeExtensionsTest
 
         public override int Singing
         {
-            set { }
+            set
+            {
+            }
         }
 
         public override int TravellingLight { get; set; }
@@ -439,7 +453,9 @@ public class TypeExtensionsTest
         string Permissions { get; set; }
     }
 
-    private interface IRoleCollection2014 : ICollection<IRole2014> { }
+    private interface IRoleCollection2014 : ICollection<IRole2014>
+    {
+    }
 
 #pragma warning disable CA1061 // Do not hide base class methods
     private class RoleCollection2014 : List<Role2014>, IRoleCollection2014
@@ -478,11 +494,17 @@ public class TypeExtensionsTest
     public void GetBaseTypes_return_empty_if_no_base_type_exists() =>
         Assert.False(typeof(object).GetBaseTypes().Any());
 
-    private class MultipleHierarchy : Some { }
+    private class MultipleHierarchy : Some
+    {
+    }
 
-    private class Some : Base { }
+    private class Some : Base
+    {
+    }
 
-    private class Base { }
+    private class Base
+    {
+    }
 
     // ReSharper restore InconsistentNaming
 
@@ -557,13 +579,19 @@ public class TypeExtensionsTest
         Assert.Contains(typeof(SomeTypeWithoutDefaultCtor), types);
     }
 
-    private abstract class SomeAbstractClass { }
+    private abstract class SomeAbstractClass
+    {
+    }
 
-    private class SomeGenericClass<T> { }
+    private class SomeGenericClass<T>
+    {
+    }
 
     private class SomeTypeWithoutDefaultCtor
     {
-        public SomeTypeWithoutDefaultCtor(int value) { }
+        public SomeTypeWithoutDefaultCtor(int value)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -611,7 +639,11 @@ public class TypeExtensionsTest
         );
     }
 
-    private class Outer<T> { }
+    private class Outer<T>
+    {
+    }
 
-    private class A { }
+    private class A
+    {
+    }
 }

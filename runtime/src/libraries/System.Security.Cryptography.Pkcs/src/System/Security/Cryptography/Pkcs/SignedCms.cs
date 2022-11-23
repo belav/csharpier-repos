@@ -303,7 +303,9 @@ namespace System.Security.Cryptography.Pkcs
 
                 return rented.AsSpan(0, bytesWritten).ToArray();
             }
-            catch (Exception) when (contentType != Oids.Pkcs7Data) { }
+            catch (Exception) when (contentType != Oids.Pkcs7Data)
+            {
+            }
             catch (AsnContentException e)
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);

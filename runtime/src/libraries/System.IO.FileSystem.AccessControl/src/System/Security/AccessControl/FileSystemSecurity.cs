@@ -13,7 +13,9 @@ namespace System.Security.AccessControl
         private const ResourceType s_ResourceType = ResourceType.FileObject;
 
         internal FileSystemSecurity(bool isContainer)
-            : base(isContainer, s_ResourceType, _HandleErrorCode, isContainer) { }
+            : base(isContainer, s_ResourceType, _HandleErrorCode, isContainer)
+        {
+        }
 
         internal FileSystemSecurity(
             bool isContainer,
@@ -28,7 +30,9 @@ namespace System.Security.AccessControl
                 includeSections,
                 _HandleErrorCode,
                 isDirectory
-            ) { }
+            )
+        {
+        }
 
         internal FileSystemSecurity(
             bool isContainer,
@@ -43,7 +47,9 @@ namespace System.Security.AccessControl
                 includeSections,
                 _HandleErrorCode,
                 isDirectory
-            ) { }
+            )
+        {
+        }
 
         private static Exception? _HandleErrorCode(
             int errorCode,

@@ -71,6 +71,8 @@ namespace System.ComponentModel.Composition
 
         // Type needs to be public otherwise container.GetExportedValue<CustomCompositionContainer>
         // fails on Silverlight because it cannot construct a Lazy<T,M> factory.
-        public class CustomCompositionContainer : CompositionContainer { }
+        public class CustomCompositionContainer : CompositionContainer
+        {
+        }
     }
 }

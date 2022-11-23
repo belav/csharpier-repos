@@ -1071,7 +1071,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
     public class Test
     {
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1471,9 +1473,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //<Expects Status=success></Expects>
     // <Code>
 
-    public class A { }
+    public class A
+    {
+    }
 
-    public class B : A { }
+    public class B : A
+    {
+    }
 
     public class C
     {
@@ -1534,7 +1540,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
     public class A
     {
-        public class B : A { }
+        public class B : A
+        {
+        }
     }
 
     public class C
@@ -1609,7 +1617,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         }
     }
 
-    public class C { }
+    public class C
+    {
+    }
 
     public class D : C
     {
@@ -1656,9 +1666,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //<Expects Status=warning>\(40,16\).*CS0168</Expects>
     // <Code>
 
-    public class A<T> { }
+    public class A<T>
+    {
+    }
 
-    public class B<T> : A<T> { }
+    public class B<T> : A<T>
+    {
+    }
 
     public class C<T>
     {

@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static readonly DocumentationCommentIDVisitor Instance =
             new DocumentationCommentIDVisitor();
 
-        private DocumentationCommentIDVisitor() { }
+        private DocumentationCommentIDVisitor()
+        {
+        }
 
         public override object DefaultVisit(Symbol symbol, StringBuilder builder)
         {

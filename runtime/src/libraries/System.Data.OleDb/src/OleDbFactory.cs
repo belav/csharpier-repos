@@ -9,7 +9,9 @@ namespace System.Data.OleDb
     {
         public static readonly OleDbFactory Instance = new OleDbFactory();
 
-        private OleDbFactory() { }
+        private OleDbFactory()
+        {
+        }
 
         public override DbCommand CreateCommand()
         {

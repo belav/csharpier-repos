@@ -33,7 +33,9 @@ public class CC
                 return;
             do
             {
-                while (a) { }
+                while (a)
+                {
+                }
             } while (a);
         }
         finally
@@ -44,7 +46,9 @@ public class CC
             }
             catch (NullReferenceException)
             {
-                do { } while (Method2());
+                do
+                {
+                } while (Method2());
             }
         }
     }

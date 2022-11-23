@@ -187,7 +187,9 @@ namespace System.Net.Http.Headers
             object IEnumerator.Current => _current;
 
             /// <inheritdoc/>
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             /// <inheritdoc/>
             void IEnumerator.Reset() => throw new NotSupportedException();

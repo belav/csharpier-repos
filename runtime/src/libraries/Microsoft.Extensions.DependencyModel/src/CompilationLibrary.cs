@@ -29,7 +29,9 @@ namespace Microsoft.Extensions.DependencyModel
                 serviceable,
                 path: null,
                 hashPath: null
-            ) { }
+            )
+        {
+        }
 
         public CompilationLibrary(
             string type,

@@ -74,8 +74,12 @@ namespace Microsoft.Web.Mvc.Test
             );
         }
 
-        private class SampleSyncController : Controller { }
+        private class SampleSyncController : Controller
+        {
+        }
 
-        private class SampleAsyncController : AsyncController { }
+        private class SampleAsyncController : AsyncController
+        {
+        }
     }
 }

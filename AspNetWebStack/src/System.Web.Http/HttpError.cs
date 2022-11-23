@@ -33,7 +33,9 @@ namespace System.Web.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpError"/> class.
         /// </summary>
-        public HttpError() : base(StringComparer.OrdinalIgnoreCase) { }
+        public HttpError() : base(StringComparer.OrdinalIgnoreCase)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpError"/> class containing error message <paramref name="message"/>.

@@ -110,7 +110,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 spellChecker,
                 CreateIndexBasedInheritanceMap(sortedNodes, inheritanceMap),
                 receiverTypeNameToExtensionMethodMap
-            ) { }
+            )
+        {
+        }
 
         private SymbolTreeInfo(
             Checksum checksum,

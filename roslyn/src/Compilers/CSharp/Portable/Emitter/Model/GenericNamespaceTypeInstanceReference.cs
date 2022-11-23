@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     internal sealed class GenericNamespaceTypeInstanceReference : GenericTypeInstanceReference
     {
         public GenericNamespaceTypeInstanceReference(NamedTypeSymbol underlyingNamedType)
-            : base(underlyingNamedType) { }
+            : base(underlyingNamedType)
+        {
+        }
 
         public override Microsoft.Cci.IGenericTypeInstanceReference AsGenericTypeInstanceReference
         {

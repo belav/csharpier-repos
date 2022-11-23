@@ -18,9 +18,13 @@ public class Node<a>
     }
 }
 
-public struct NodeStruct<a> { }
+public struct NodeStruct<a>
+{
+}
 
-public class NodeSys<a> { }
+public class NodeSys<a>
+{
+}
 
 public class SystemMap<a>
 {

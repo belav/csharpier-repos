@@ -18,7 +18,9 @@ namespace Castle.DynamicProxy.Tests.Explicit
 
     public class TwoInterfacesExplicit : ISimpleInterface, IDisposable
     {
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
 
         int ISimpleInterface.Do()
         {

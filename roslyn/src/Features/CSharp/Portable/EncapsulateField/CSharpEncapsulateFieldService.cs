@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEncapsulateFieldService() { }
+        public CSharpEncapsulateFieldService()
+        {
+        }
 
         protected override async Task<SyntaxNode> RewriteFieldNameAndAccessibilityAsync(
             string originalFieldName,

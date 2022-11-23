@@ -12,22 +12,36 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     {
         public static readonly ILspServiceLogger Instance = new NoOpLspLogger();
 
-        private NoOpLspLogger() { }
+        private NoOpLspLogger()
+        {
+        }
 
         public void LogException(
             Exception exception,
             string? message = null,
             params object[] @params
-        ) { }
+        )
+        {
+        }
 
-        public void LogInformation(string message, params object[] @params) { }
+        public void LogInformation(string message, params object[] @params)
+        {
+        }
 
-        public void LogWarning(string message, params object[] @params) { }
+        public void LogWarning(string message, params object[] @params)
+        {
+        }
 
-        public void LogError(string message, params object[] @params) { }
+        public void LogError(string message, params object[] @params)
+        {
+        }
 
-        public void LogStartContext(string message, params object[] @params) { }
+        public void LogStartContext(string message, params object[] @params)
+        {
+        }
 
-        public void LogEndContext(string message, params object[] @params) { }
+        public void LogEndContext(string message, params object[] @params)
+        {
+        }
     }
 }

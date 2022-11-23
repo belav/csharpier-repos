@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         }
 
         private OverloadsCollection(CodeModelState state, CodeFunction parent) : base(state, parent)
-        { }
+        {
+        }
 
         private ImmutableArray<EnvDTE.CodeElement> _overloads;
 

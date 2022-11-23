@@ -8,7 +8,9 @@ namespace System
     [Serializable]
     public sealed class DBNull : ISerializable, IConvertible
     {
-        private DBNull() { }
+        private DBNull()
+        {
+        }
 
         private DBNull(SerializationInfo info, StreamingContext context)
         {

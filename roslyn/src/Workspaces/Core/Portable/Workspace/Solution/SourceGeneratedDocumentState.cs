@@ -124,7 +124,9 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly SourceGeneratedTextDocumentServiceProvider Instance = new();
 
-            private SourceGeneratedTextDocumentServiceProvider() { }
+            private SourceGeneratedTextDocumentServiceProvider()
+            {
+            }
 
             public TService? GetService<TService>() where TService : class, IDocumentService
             {

@@ -18,7 +18,9 @@ namespace System.IO
         private const int MaxChunkSize = 1024 * InitialChunkDefaultSize;
         private int _totalLength;
 
-        internal ChunkedMemoryStream() { }
+        internal ChunkedMemoryStream()
+        {
+        }
 
         public byte[] ToArray()
         {
@@ -127,7 +129,9 @@ namespace System.IO
         public override bool CanWrite => true;
         public override long Length => _totalLength;
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 

@@ -14,7 +14,9 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
         private readonly string? _socketPath;
 
-        public SystemdNotifier() : this(GetNotifySocketPath()) { }
+        public SystemdNotifier() : this(GetNotifySocketPath())
+        {
+        }
 
         // For testing
         internal SystemdNotifier(string? socketPath)

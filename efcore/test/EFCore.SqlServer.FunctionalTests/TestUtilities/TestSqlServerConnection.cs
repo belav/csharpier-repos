@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 public class TestSqlServerConnection : SqlServerConnection
 {
     public TestSqlServerConnection(RelationalConnectionDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     public int ErrorNumber { get; set; } = -2;
     public Queue<bool?> OpenFailures { get; } = new();

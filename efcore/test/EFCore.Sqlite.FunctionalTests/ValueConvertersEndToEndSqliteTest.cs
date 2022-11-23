@@ -9,7 +9,9 @@ public class ValueConvertersEndToEndSqliteTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndSqliteTest.ValueConvertersEndToEndSqliteFixture>
 {
     public ValueConvertersEndToEndSqliteTest(ValueConvertersEndToEndSqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(nameof(ConvertingEntity.BoolAsChar), "TEXT", false)]

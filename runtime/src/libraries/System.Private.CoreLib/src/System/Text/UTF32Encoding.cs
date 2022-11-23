@@ -47,7 +47,9 @@ namespace System.Text
         private readonly bool _isThrowException;
         private readonly bool _bigEndian;
 
-        public UTF32Encoding() : this(false, true) { }
+        public UTF32Encoding() : this(false, true)
+        {
+        }
 
         public UTF32Encoding(bool bigEndian, bool byteOrderMark) : base(bigEndian ? 12001 : 12000)
         {

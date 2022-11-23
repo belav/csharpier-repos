@@ -11,7 +11,9 @@ namespace System.Diagnostics
             System.IDisposable,
             System.IObservable<System.Collections.Generic.KeyValuePair<string, object?>>
     {
-        public DiagnosticListener(string name) { }
+        public DiagnosticListener(string name)
+        {
+        }
 
         public static System.IObservable<System.Diagnostics.DiagnosticListener> AllListeners
         {
@@ -22,7 +24,9 @@ namespace System.Diagnostics
             get { throw null; }
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
 
         public bool IsEnabled()
         {
@@ -70,12 +74,16 @@ namespace System.Diagnostics
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "The type of object being written to DiagnosticSource cannot be discovered statically."
         )]
-        public override void Write(string name, object? value) { }
+        public override void Write(string name, object? value)
+        {
+        }
     }
 
     public abstract partial class DiagnosticSource
     {
-        protected DiagnosticSource() { }
+        protected DiagnosticSource()
+        {
+        }
 
         public abstract bool IsEnabled(string name);
 

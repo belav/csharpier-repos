@@ -84,7 +84,11 @@ namespace N2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "N1.XAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -146,7 +150,11 @@ namespace N2
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(name);
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -199,7 +207,11 @@ namespace N2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "N2.XAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -251,7 +263,11 @@ using System;
                 var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -303,7 +319,11 @@ using System;
                 var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -352,7 +372,11 @@ using System;
                 var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -401,7 +425,11 @@ using System;
                 var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -452,7 +480,11 @@ using System;
                 var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -509,7 +541,11 @@ void LocalFunc()
                 var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -567,7 +603,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -628,7 +668,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -679,7 +723,11 @@ class C<[CLSCompliant(true)] T>
                 var input = ctx.ForAttributeWithMetadataName<TypeParameterSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -733,7 +781,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -788,7 +840,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -842,7 +898,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -901,7 +961,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -954,7 +1018,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1007,7 +1075,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1067,7 +1139,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1120,7 +1196,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1176,7 +1256,11 @@ Func<int, int> v = [CLSCompliant(true)] (int i) => i;
                 var input = ctx.ForAttributeWithMetadataName<LambdaExpressionSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1228,7 +1312,11 @@ class C
                 var input = ctx.ForAttributeWithMetadataName<AccessorDeclarationSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1282,7 +1370,11 @@ class C<[CLSCompliant(true)]T>
                 var input = ctx.ForAttributeWithMetadataName<TypeParameterSyntax>(
                     "System.CLSCompliantAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1340,7 +1432,11 @@ class Outer2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "Outer1+InnerAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1399,7 +1495,11 @@ class Outer2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "Outer2+InnerAttribute"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1458,7 +1558,11 @@ class Outer2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "Outer1+InnerAttribute`1"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1517,7 +1621,11 @@ class Outer2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "Outer2+InnerAttribute`2"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1576,7 +1684,11 @@ class Outer2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "Outer1+InnerAttribute`2"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1628,7 +1740,11 @@ class Outer2
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "Outer2+InnerAttribute`1"
                 );
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2065,7 +2181,11 @@ class XAttribute : System.Attribute
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2182,7 +2302,11 @@ class XAttribute : System.Attribute
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2299,7 +2423,11 @@ class XAttribute : System.Attribute
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2415,7 +2543,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2535,7 +2667,11 @@ class C2 { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2661,7 +2797,11 @@ class C2 { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2789,7 +2929,11 @@ class XAttribute : System.Attribute
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2915,7 +3059,11 @@ class XAttribute : System.Attribute
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 

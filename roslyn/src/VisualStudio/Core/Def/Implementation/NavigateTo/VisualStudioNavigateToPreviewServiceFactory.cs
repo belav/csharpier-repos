@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigateTo
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioNavigateToPreviewServiceFactory() { }
+        public VisualStudioNavigateToPreviewServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             _singleton.Value;

@@ -77,7 +77,9 @@ namespace JitTest_catchfinally_tail_cs
                         }
                     }
                 }
-                catch (NullReferenceException) { }
+                catch (NullReferenceException)
+                {
+                }
                 return ret;
             }
             return recurseLevel == 0;

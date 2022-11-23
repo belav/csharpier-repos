@@ -3,9 +3,13 @@
 using System;
 using System.Threading;
 
-public struct ValX1<T> { }
+public struct ValX1<T>
+{
+}
 
-public class RefX1<T> { }
+public class RefX1<T>
+{
+}
 
 class Gen<T>
 {

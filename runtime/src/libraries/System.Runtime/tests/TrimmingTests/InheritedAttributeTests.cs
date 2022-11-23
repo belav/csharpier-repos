@@ -4,13 +4,19 @@
 using System;
 
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
-class FooAttribute : Attribute { }
+class FooAttribute : Attribute
+{
+}
 
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
-class BarAttribute : Attribute { }
+class BarAttribute : Attribute
+{
+}
 
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
-class BazAttribute : Attribute { }
+class BazAttribute : Attribute
+{
+}
 
 class Base
 {

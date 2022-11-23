@@ -9,7 +9,9 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeMemoryMappedFileHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeMemoryMappedFileHandle() : base(default(bool)) { }
+        public SafeMemoryMappedFileHandle() : base(default(bool))
+        {
+        }
 
         public override bool IsInvalid
         {
@@ -25,7 +27,9 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeMemoryMappedViewHandle
         : System.Runtime.InteropServices.SafeBuffer
     {
-        public SafeMemoryMappedViewHandle() : base(default(bool)) { }
+        public SafeMemoryMappedViewHandle() : base(default(bool))
+        {
+        }
 
         protected override bool ReleaseHandle()
         {
@@ -38,7 +42,9 @@ namespace System.IO.MemoryMappedFiles
 {
     public partial class MemoryMappedFile : System.IDisposable
     {
-        internal MemoryMappedFile() { }
+        internal MemoryMappedFile()
+        {
+        }
 
         public Microsoft.Win32.SafeHandles.SafeMemoryMappedFileHandle SafeMemoryMappedFileHandle
         {
@@ -203,9 +209,13 @@ namespace System.IO.MemoryMappedFiles
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.IO.MemoryMappedFiles.MemoryMappedFile OpenExisting(string mapName)
@@ -270,7 +280,9 @@ namespace System.IO.MemoryMappedFiles
 
     public sealed partial class MemoryMappedViewAccessor : System.IO.UnmanagedMemoryAccessor
     {
-        internal MemoryMappedViewAccessor() { }
+        internal MemoryMappedViewAccessor()
+        {
+        }
 
         public long PointerOffset
         {
@@ -281,14 +293,20 @@ namespace System.IO.MemoryMappedFiles
             get { throw null; }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public void Flush() { }
+        public void Flush()
+        {
+        }
     }
 
     public sealed partial class MemoryMappedViewStream : System.IO.UnmanagedMemoryStream
     {
-        internal MemoryMappedViewStream() { }
+        internal MemoryMappedViewStream()
+        {
+        }
 
         public long PointerOffset
         {
@@ -299,10 +317,16 @@ namespace System.IO.MemoryMappedFiles
             get { throw null; }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
     }
 }

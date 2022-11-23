@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.Logging.Abstractions
         /// <summary>
         /// Creates a new <see cref="NullLoggerFactory"/> instance.
         /// </summary>
-        public NullLoggerFactory() { }
+        public NullLoggerFactory()
+        {
+        }
 
         /// <summary>
         /// Returns the shared instance of <see cref="NullLoggerFactory"/>.
@@ -32,9 +34,13 @@ namespace Microsoft.Extensions.Logging.Abstractions
         /// <remarks>
         /// This method ignores the parameter and does nothing.
         /// </remarks>
-        public void AddProvider(ILoggerProvider provider) { }
+        public void AddProvider(ILoggerProvider provider)
+        {
+        }
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

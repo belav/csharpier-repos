@@ -110,7 +110,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -216,7 +218,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -337,7 +341,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -445,7 +451,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -568,7 +576,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -689,7 +699,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -812,7 +824,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -933,7 +947,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1038,7 +1054,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1153,7 +1171,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1256,7 +1276,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1347,7 +1369,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1437,7 +1461,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1527,7 +1553,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1618,7 +1646,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1806,7 +1836,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1897,7 +1929,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 
@@ -1987,7 +2021,9 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 }

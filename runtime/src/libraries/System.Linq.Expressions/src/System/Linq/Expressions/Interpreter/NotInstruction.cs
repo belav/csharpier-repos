@@ -17,7 +17,9 @@ namespace System.Linq.Expressions.Interpreter
             s_Byte,
             s_SByte;
 
-        private NotInstruction() { }
+        private NotInstruction()
+        {
+        }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;

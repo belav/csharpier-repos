@@ -581,7 +581,9 @@ namespace System.Data.OleDb
             private StandardValuesCollection? _standardValues;
 
             // converter classes should have public ctor
-            public OleDbProviderConverter() { }
+            public OleDbProviderConverter()
+            {
+            }
 
             public override bool GetStandardValuesSupported(ITypeDescriptorContext? context)
             {
@@ -653,7 +655,9 @@ namespace System.Data.OleDb
             private StandardValuesCollection? _standardValues;
 
             // converter classes should have public ctor
-            public OleDbServicesConverter() : base() { }
+            public OleDbServicesConverter() : base()
+            {
+            }
 
             public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
             {
@@ -761,7 +765,9 @@ namespace System.Data.OleDb
         internal sealed class OleDbConnectionStringBuilderConverter : ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public OleDbConnectionStringBuilderConverter() { }
+            public OleDbConnectionStringBuilderConverter()
+            {
+            }
 
             public override bool CanConvertTo(
                 ITypeDescriptorContext? context,

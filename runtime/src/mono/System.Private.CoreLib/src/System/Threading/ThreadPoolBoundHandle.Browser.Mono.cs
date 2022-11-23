@@ -9,7 +9,9 @@ namespace System.Threading
     {
         public SafeHandle Handle => null!;
 
-        private ThreadPoolBoundHandle() { }
+        private ThreadPoolBoundHandle()
+        {
+        }
 
         public static ThreadPoolBoundHandle BindHandle(SafeHandle handle)
         {
@@ -66,6 +68,8 @@ namespace System.Threading
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_OverlappedIO);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

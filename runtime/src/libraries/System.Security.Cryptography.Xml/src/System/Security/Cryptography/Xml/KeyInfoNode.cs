@@ -14,7 +14,9 @@ namespace System.Security.Cryptography.Xml
         // public constructors
         //
 
-        public KeyInfoNode() { }
+        public KeyInfoNode()
+        {
+        }
 
         public KeyInfoNode(XmlElement node)
         {

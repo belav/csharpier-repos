@@ -17,7 +17,9 @@ namespace Microsoft.AspNetCore.Components
             string changeAttribute,
             bool isInvariantCulture,
             string format
-        ) { }
+        )
+        {
+        }
 
         public string ChangeAttribute
         {
@@ -75,7 +77,9 @@ namespace Microsoft.AspNetCore.Components.Forms
 
     public partial class EditForm : Microsoft.AspNetCore.Components.ComponentBase
     {
-        public EditForm() { }
+        public EditForm()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
@@ -83,7 +87,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -92,7 +98,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -101,7 +109,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -110,7 +120,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -119,7 +131,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -128,7 +142,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -137,19 +153,27 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
-        protected override void OnParametersSet() { }
+        protected override void OnParametersSet()
+        {
+        }
     }
 
     public abstract partial class InputBase<TValue> : Microsoft.AspNetCore.Components.ComponentBase
     {
-        protected InputBase() { }
+        protected InputBase()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
@@ -157,7 +181,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         protected string CssClass
         {
@@ -166,26 +192,34 @@ namespace Microsoft.AspNetCore.Components.Forms
         protected TValue CurrentValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected string CurrentValueAsString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected Microsoft.AspNetCore.Components.Forms.EditContext EditContext
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         protected Microsoft.AspNetCore.Components.Forms.FieldIdentifier FieldIdentifier
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -194,7 +228,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -203,7 +239,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -212,7 +250,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected virtual string FormatValueAsString(TValue value)
@@ -236,11 +276,15 @@ namespace Microsoft.AspNetCore.Components.Forms
 
     public partial class InputCheckbox : Microsoft.AspNetCore.Components.Forms.InputBase<bool>
     {
-        public InputCheckbox() { }
+        public InputCheckbox()
+        {
+        }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
         protected override bool TryParseValueFromString(
             string value,
@@ -254,7 +298,9 @@ namespace Microsoft.AspNetCore.Components.Forms
 
     public partial class InputDate<TValue> : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
-        public InputDate() { }
+        public InputDate()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public string ParsingErrorMessage
@@ -262,12 +308,16 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
         protected override string FormatValueAsString(TValue value)
         {
@@ -287,7 +337,9 @@ namespace Microsoft.AspNetCore.Components.Forms
     public partial class InputNumber<TValue>
         : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
-        public InputNumber() { }
+        public InputNumber()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public string ParsingErrorMessage
@@ -295,12 +347,16 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
         protected override string FormatValueAsString(TValue value)
         {
@@ -320,7 +376,9 @@ namespace Microsoft.AspNetCore.Components.Forms
     public partial class InputSelect<TValue>
         : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
-        public InputSelect() { }
+        public InputSelect()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.RenderFragment ChildContent
@@ -328,12 +386,16 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
         protected override bool TryParseValueFromString(
             string value,
@@ -347,11 +409,15 @@ namespace Microsoft.AspNetCore.Components.Forms
 
     public partial class InputText : Microsoft.AspNetCore.Components.Forms.InputBase<string>
     {
-        public InputText() { }
+        public InputText()
+        {
+        }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
         protected override bool TryParseValueFromString(
             string value,
@@ -365,11 +431,15 @@ namespace Microsoft.AspNetCore.Components.Forms
 
     public partial class InputTextArea : Microsoft.AspNetCore.Components.Forms.InputBase<string>
     {
-        public InputTextArea() { }
+        public InputTextArea()
+        {
+        }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
         protected override bool TryParseValueFromString(
             string value,
@@ -385,7 +455,9 @@ namespace Microsoft.AspNetCore.Components.Forms
         : Microsoft.AspNetCore.Components.ComponentBase,
             System.IDisposable
     {
-        public ValidationMessage() { }
+        public ValidationMessage()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
@@ -393,7 +465,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -402,25 +476,37 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        protected override void OnParametersSet() { }
+        protected override void OnParametersSet()
+        {
+        }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 
     public partial class ValidationSummary
         : Microsoft.AspNetCore.Components.ComponentBase,
             System.IDisposable
     {
-        public ValidationSummary() { }
+        public ValidationSummary()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
@@ -428,18 +514,28 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        protected override void OnParametersSet() { }
+        protected override void OnParametersSet()
+        {
+        }
 
-        void System.IDisposable.Dispose() { }
+        void System.IDisposable.Dispose()
+        {
+        }
     }
 }
 
@@ -447,35 +543,45 @@ namespace Microsoft.AspNetCore.Components.RenderTree
 {
     public sealed partial class WebEventDescriptor
     {
-        public WebEventDescriptor() { }
+        public WebEventDescriptor()
+        {
+        }
 
         public int BrowserRendererId
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string EventArgsType
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.AspNetCore.Components.RenderTree.EventFieldInfo EventFieldInfo
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public ulong EventHandlerId
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 }
@@ -484,7 +590,9 @@ namespace Microsoft.AspNetCore.Components.Routing
 {
     public partial class NavLink : Microsoft.AspNetCore.Components.ComponentBase, System.IDisposable
     {
-        public NavLink() { }
+        public NavLink()
+        {
+        }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public string ActiveClass
@@ -492,7 +600,9 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
@@ -501,7 +611,9 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -510,14 +622,18 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         protected string CssClass
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         [Microsoft.AspNetCore.Components.ParameterAttribute]
@@ -526,18 +642,28 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
 
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
-        ) { }
+        )
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected override void OnInitialized() { }
+        protected override void OnInitialized()
+        {
+        }
 
-        protected override void OnParametersSet() { }
+        protected override void OnParametersSet()
+        {
+        }
     }
 
     public enum NavLinkMatch
@@ -663,133 +789,173 @@ namespace Microsoft.AspNetCore.Components.Web
         false,
         null
     )]
-    public static partial class BindAttributes { }
+    public static partial class BindAttributes
+    {
+    }
 
     public partial class ClipboardEventArgs : System.EventArgs
     {
-        public ClipboardEventArgs() { }
+        public ClipboardEventArgs()
+        {
+        }
 
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class DataTransfer
     {
-        public DataTransfer() { }
+        public DataTransfer()
+        {
+        }
 
         public string DropEffect
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string EffectAllowed
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string[] Files
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.AspNetCore.Components.Web.DataTransferItem[] Items
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string[] Types
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class DataTransferItem
     {
-        public DataTransferItem() { }
+        public DataTransferItem()
+        {
+        }
 
         public string Kind
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class DragEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
-        public DragEventArgs() { }
+        public DragEventArgs()
+        {
+        }
 
         public Microsoft.AspNetCore.Components.Web.DataTransfer DataTransfer
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class ErrorEventArgs : System.EventArgs
     {
-        public ErrorEventArgs() { }
+        public ErrorEventArgs()
+        {
+        }
 
         public int Colno
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Filename
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public int Lineno
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Message
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1339,397 +1505,513 @@ namespace Microsoft.AspNetCore.Components.Web
         true,
         true
     )]
-    public static partial class EventHandlers { }
+    public static partial class EventHandlers
+    {
+    }
 
     public partial class FocusEventArgs : System.EventArgs
     {
-        public FocusEventArgs() { }
+        public FocusEventArgs()
+        {
+        }
 
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class KeyboardEventArgs : System.EventArgs
     {
-        public KeyboardEventArgs() { }
+        public KeyboardEventArgs()
+        {
+        }
 
         public bool AltKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Code
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool CtrlKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Key
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public float Location
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool MetaKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool Repeat
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool ShiftKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class MouseEventArgs : System.EventArgs
     {
-        public MouseEventArgs() { }
+        public MouseEventArgs()
+        {
+        }
 
         public bool AltKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long Button
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long Buttons
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double ClientX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double ClientY
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool CtrlKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long Detail
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool MetaKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double ScreenX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double ScreenY
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool ShiftKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class PointerEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
-        public PointerEventArgs() { }
+        public PointerEventArgs()
+        {
+        }
 
         public float Height
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool IsPrimary
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long PointerId
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string PointerType
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public float Pressure
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public float TiltX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public float TiltY
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public float Width
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class ProgressEventArgs : System.EventArgs
     {
-        public ProgressEventArgs() { }
+        public ProgressEventArgs()
+        {
+        }
 
         public bool LengthComputable
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long Loaded
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long Total
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class TouchEventArgs : System.EventArgs
     {
-        public TouchEventArgs() { }
+        public TouchEventArgs()
+        {
+        }
 
         public bool AltKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.AspNetCore.Components.Web.TouchPoint[] ChangedTouches
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool CtrlKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long Detail
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool MetaKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public bool ShiftKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.AspNetCore.Components.Web.TouchPoint[] TargetTouches
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.AspNetCore.Components.Web.TouchPoint[] Touches
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class TouchPoint
     {
-        public TouchPoint() { }
+        public TouchPoint()
+        {
+        }
 
         public double ClientX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double ClientY
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public long Identifier
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double PageX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double PageY
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double ScreenX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double ScreenY
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1953,47 +2235,61 @@ namespace Microsoft.AspNetCore.Components.Web
             int sequence,
             string eventName,
             bool value
-        ) { }
+        )
+        {
+        }
 
         public static void AddEventStopPropagationAttribute(
             this Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder,
             int sequence,
             string eventName,
             bool value
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
-        public WheelEventArgs() { }
+        public WheelEventArgs()
+        {
+        }
 
         public long DeltaMode
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double DeltaX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double DeltaY
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
         public double DeltaZ
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             get { throw null; }
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
-            set { }
+            set
+            {
+            }
         }
     }
 }

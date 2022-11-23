@@ -1456,7 +1456,9 @@ public class RelationshipDiscoveryConventionTest
         public OneToManyDependent WriteOnly
         {
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
 
         // ReSharper disable once UnusedParameter.Local
@@ -1464,7 +1466,9 @@ public class RelationshipDiscoveryConventionTest
         {
             get => null;
             // ReSharper disable once ValueParameterNotUsed
-            set { }
+            set
+            {
+            }
         }
 
         public MyStruct Struct { get; set; }

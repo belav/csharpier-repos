@@ -21,7 +21,9 @@ namespace System.Reflection
         private static bool s_loadFromHandlerSet;
         private static int s_cachedSerializationSwitch;
 
-        protected Assembly() { }
+        protected Assembly()
+        {
+        }
 
         public virtual IEnumerable<TypeInfo> DefinedTypes
         {

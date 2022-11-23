@@ -26,7 +26,9 @@ namespace System.Composition.Convention
         private List<Tuple<string, object>> _metadataConstraintItems;
         private List<Tuple<string, Func<Type, object>>> _metadataConstraintItemFuncs;
 
-        internal ImportConventionBuilder() { }
+        internal ImportConventionBuilder()
+        {
+        }
 
         /// <summary>
         /// Specify the contract name for the import.

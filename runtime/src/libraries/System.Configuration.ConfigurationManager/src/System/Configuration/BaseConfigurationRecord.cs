@@ -1557,7 +1557,9 @@ namespace System.Configuration
                                     locationInput.Result
                                 );
                             }
-                            catch { }
+                            catch
+                            {
+                            }
                         }
 
                         if (getRuntimeObject && !locationInput.HasResultRuntimeObject)
@@ -3561,7 +3563,9 @@ namespace System.Configuration
         }
 
         // If you wish to keep track of the Location Fields, then use this
-        protected virtual void AddLocation(string locationSubPath) { }
+        protected virtual void AddLocation(string locationSubPath)
+        {
+        }
 
         // Resolve information about a location section at the time that the location section
         // is being used by child configuration records. This allows us to:

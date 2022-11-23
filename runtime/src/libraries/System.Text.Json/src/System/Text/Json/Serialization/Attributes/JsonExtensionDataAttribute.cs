@@ -26,5 +26,7 @@ namespace System.Text.Json.Serialization
     /// an <see cref="InvalidOperationException"/> is thrown during the first serialization or deserialization of that type.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-    public sealed class JsonExtensionDataAttribute : JsonAttribute { }
+    public sealed class JsonExtensionDataAttribute : JsonAttribute
+    {
+    }
 }

@@ -32,7 +32,9 @@ namespace System.Diagnostics
         private static bool PriorityBoostEnabledCore
         {
             get { return false; }
-            set { } // Nop
+            set
+            {
+            } // Nop
         }
 
         /// <summary>

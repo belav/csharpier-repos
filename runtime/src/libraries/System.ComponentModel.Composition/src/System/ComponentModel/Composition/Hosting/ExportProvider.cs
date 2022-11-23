@@ -18,7 +18,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportProvider"/> class.
         /// </summary>
-        protected ExportProvider() { }
+        protected ExportProvider()
+        {
+        }
 
         /// <summary>
         ///     Occurs when the exports in the <see cref="ExportProvider"/> have changed.

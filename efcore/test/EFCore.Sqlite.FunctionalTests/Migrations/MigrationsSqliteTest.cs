@@ -1164,8 +1164,12 @@ FROM ""People"";",
     public virtual async Task ValueGeneratedOnAdd_on_properties()
     {
         await Test(
-            builder => { },
-            builder => { },
+            builder =>
+            {
+            },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Person",

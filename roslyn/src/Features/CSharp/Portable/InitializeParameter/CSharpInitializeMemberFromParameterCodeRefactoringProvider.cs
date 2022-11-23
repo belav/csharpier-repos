@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpInitializeMemberFromParameterCodeRefactoringProvider() { }
+        public CSharpInitializeMemberFromParameterCodeRefactoringProvider()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

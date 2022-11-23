@@ -15,7 +15,9 @@ namespace Xunit
     /// <summary>
     /// A copy of the Xunit.FactAttribute type for assemblies that reference System.Private.CoreLib directly.
     /// </summary>
-    public sealed class FactAttribute : Attribute { }
+    public sealed class FactAttribute : Attribute
+    {
+    }
 
     /// <summary>
     ///    A collection of helper classes to test various conditions within
@@ -232,8 +234,12 @@ namespace Xunit
     /// </summary>
     public class XunitException : Exception
     {
-        public XunitException(string message) : base(message) { }
+        public XunitException(string message) : base(message)
+        {
+        }
 
-        public XunitException() : base() { }
+        public XunitException() : base()
+        {
+        }
     }
 }

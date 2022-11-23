@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.GoToBase
                 uiThreadOperationExecutor,
                 listenerProvider.GetListener(FeatureAttribute.GoToBase),
                 globalOptions
-            ) { }
+            )
+        {
+        }
 
         public override string DisplayName => EditorFeaturesResources.Go_To_Base;
 

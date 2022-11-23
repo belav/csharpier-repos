@@ -44,7 +44,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     includeContainingTypeAndMemberColumns,
                     includeKindColumn,
                     threadingContext
-                ) { }
+                )
+            {
+            }
 
             // We should never be called in a context where we get references.
             protected override ValueTask OnReferenceFoundWorkerAsync(

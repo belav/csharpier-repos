@@ -162,7 +162,9 @@ namespace System.Web.Mvc.Test
 
         private class NoParameterlessCtor
         {
-            public NoParameterlessCtor(int x) { }
+            public NoParameterlessCtor(int x)
+            {
+            }
         }
 
         private sealed class TestableBuildManagerCompiledView : BuildManagerCompiledView
@@ -172,7 +174,9 @@ namespace System.Web.Mvc.Test
                 string viewPath,
                 IViewPageActivator viewPageActivator = null,
                 IDependencyResolver dependencyResolver = null
-            ) : base(controllerContext, viewPath, viewPageActivator, dependencyResolver) { }
+            ) : base(controllerContext, viewPath, viewPageActivator, dependencyResolver)
+            {
+            }
 
             protected override void RenderView(
                 ViewContext viewContext,

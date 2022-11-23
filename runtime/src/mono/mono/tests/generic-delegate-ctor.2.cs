@@ -2,7 +2,9 @@ using System;
 
 public delegate R Function<R>();
 
-public struct GenStruct<T> { }
+public struct GenStruct<T>
+{
+}
 
 public class Gen<T>
 {

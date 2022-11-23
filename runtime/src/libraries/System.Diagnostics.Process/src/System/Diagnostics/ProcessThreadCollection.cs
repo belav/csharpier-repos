@@ -13,7 +13,9 @@ namespace System.Diagnostics
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected ProcessThreadCollection() { }
+        protected ProcessThreadCollection()
+        {
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

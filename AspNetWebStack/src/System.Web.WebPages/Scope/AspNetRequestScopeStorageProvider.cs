@@ -19,7 +19,9 @@ namespace System.Web.WebPages.Scope
             : this(
                 httpContext: null,
                 appStartExecuted: () => WebPageHttpModule.AppStartExecuteCompleted
-            ) { }
+            )
+        {
+        }
 
         internal AspNetRequestScopeStorageProvider(
             HttpContextBase httpContext,

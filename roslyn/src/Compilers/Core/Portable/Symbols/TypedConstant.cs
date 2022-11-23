@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal TypedConstant(ITypeSymbolInternal type, ImmutableArray<TypedConstant> array)
-            : this(type, TypedConstantKind.Array, value: array.IsDefault ? null : (object)array) { }
+            : this(type, TypedConstantKind.Array, value: array.IsDefault ? null : (object)array)
+        {
+        }
 
         /// <summary>
         /// The kind of the constant.

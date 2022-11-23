@@ -1116,13 +1116,21 @@ namespace Moq.Tests
                 return this.DoReturn(a, b);
             }
 
-            protected virtual void Do(int a, int b) { }
+            protected virtual void Do(int a, int b)
+            {
+            }
 
-            protected virtual void Do(string a, string b) { }
+            protected virtual void Do(string a, string b)
+            {
+            }
 
-            protected virtual void Do<T>(T a, T b) { }
+            protected virtual void Do<T>(T a, T b)
+            {
+            }
 
-            protected virtual void Do<T, T2>(T a, T2 b) { }
+            protected virtual void Do<T, T2>(T a, T2 b)
+            {
+            }
 
             protected virtual int DoReturn(int a, int b)
             {
@@ -1159,11 +1167,17 @@ namespace Moq.Tests
                 return b;
             }
 
-            public void ExecuteSameFirstParameter(object a) { }
+            public void ExecuteSameFirstParameter(object a)
+            {
+            }
 
-            protected virtual void SameFirstParameter(object a) { }
+            protected virtual void SameFirstParameter(object a)
+            {
+            }
 
-            protected virtual void SameFirstParameter(object a, object b) { }
+            protected virtual void SameFirstParameter(object a, object b)
+            {
+            }
 
             protected virtual FooBase Overloaded(MyBase myBase)
             {
@@ -1178,9 +1192,13 @@ namespace Moq.Tests
 
         public class FooBase
         {
-            public static void MethodForReflection() { }
+            public static void MethodForReflection()
+            {
+            }
 
-            public static void MethodForReflection2() { }
+            public static void MethodForReflection2()
+            {
+            }
 
             protected virtual Expression ExpressionProperty { get; set; }
 
@@ -1223,7 +1241,9 @@ namespace Moq.Tests
 
             protected virtual int OnlySet
             {
-                set { }
+                set
+                {
+                }
             }
 
             protected virtual string ProtectedValue { get; set; }
@@ -1231,7 +1251,9 @@ namespace Moq.Tests
             protected virtual int this[int index]
             {
                 get { return 0; }
-                set { }
+                set
+                {
+                }
             }
 
             public void DoProtected()
@@ -1279,7 +1301,9 @@ namespace Moq.Tests
                 return this.ProtectedValue;
             }
 
-            public virtual void Public() { }
+            public virtual void Public()
+            {
+            }
 
             public virtual int PublicInt()
             {
@@ -1291,9 +1315,13 @@ namespace Moq.Tests
                 this.ProtectedValue = value;
             }
 
-            internal protected virtual void ProtectedInternal() { }
+            internal protected virtual void ProtectedInternal()
+            {
+            }
 
-            internal protected virtual void ProtectedInternalGeneric<T>() { }
+            internal protected virtual void ProtectedInternalGeneric<T>()
+            {
+            }
 
             internal protected virtual int ProtectedInternalInt()
             {
@@ -1305,9 +1333,13 @@ namespace Moq.Tests
                 return default(T);
             }
 
-            protected virtual void Protected() { }
+            protected virtual void Protected()
+            {
+            }
 
-            protected virtual void ProtectedGeneric<T>() { }
+            protected virtual void ProtectedGeneric<T>()
+            {
+            }
 
             protected virtual int ProtectedInt()
             {
@@ -1329,7 +1361,9 @@ namespace Moq.Tests
                 return value;
             }
 
-            protected void NonVirtual() { }
+            protected void NonVirtual()
+            {
+            }
 
             protected int NonVirtualInt()
             {
@@ -1347,10 +1381,16 @@ namespace Moq.Tests
             }
         }
 
-        public class FooDerived : FooBase { }
+        public class FooDerived : FooBase
+        {
+        }
 
-        public class MyBase { }
+        public class MyBase
+        {
+        }
 
-        public class MyDerived : MyBase { }
+        public class MyDerived : MyBase
+        {
+        }
     }
 }

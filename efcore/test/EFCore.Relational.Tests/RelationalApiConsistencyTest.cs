@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class RelationalApiConsistencyTest
     : ApiConsistencyTestBase<RelationalApiConsistencyTest.RelationalApiConsistencyFixture>
 {
-    public RelationalApiConsistencyTest(RelationalApiConsistencyFixture fixture) : base(fixture) { }
+    public RelationalApiConsistencyTest(RelationalApiConsistencyFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void AddServices(ServiceCollection serviceCollection) =>
         new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAddCoreServices();

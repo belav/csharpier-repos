@@ -191,7 +191,8 @@ public class NamedDatabaseTest
         private readonly IServiceProvider _serviceProvider;
 
         public PusheenContext(IServiceProvider serviceProvider = null) : this(null, serviceProvider)
-        { }
+        {
+        }
 
         public PusheenContext(string databaseName, IServiceProvider serviceProvider = null)
         {

@@ -16,7 +16,9 @@ internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, I
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public InitializeHandler() { }
+    public InitializeHandler()
+    {
+    }
 
     public bool MutatesSolutionState => true;
     public bool RequiresLSPSolution => false;

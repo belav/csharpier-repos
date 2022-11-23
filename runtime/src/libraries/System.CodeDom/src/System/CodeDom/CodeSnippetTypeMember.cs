@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _text;
 
-        public CodeSnippetTypeMember() { }
+        public CodeSnippetTypeMember()
+        {
+        }
 
         public CodeSnippetTypeMember(string text)
         {

@@ -474,7 +474,9 @@ namespace System.Net.WebSockets
                     (uint)bytesTransferred
                 );
             }
-            catch (ObjectDisposedException) { }
+            catch (ObjectDisposedException)
+            {
+            }
         }
 
         private static void DrainActionQueue(SafeHandle webSocketHandle, ActionQueue actionQueue)

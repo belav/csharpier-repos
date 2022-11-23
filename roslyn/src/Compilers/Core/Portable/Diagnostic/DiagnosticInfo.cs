@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis
 
         // Only the compiler creates instances.
         internal DiagnosticInfo(CommonMessageProvider messageProvider, int errorCode)
-            : this(messageProvider, errorCode, Array.Empty<object>()) { }
+            : this(messageProvider, errorCode, Array.Empty<object>())
+        {
+        }
 
         // Only the compiler creates instances.
         internal DiagnosticInfo(

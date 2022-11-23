@@ -10,7 +10,9 @@ class TestClass
 {
     public int field;
 
-    public void Method() { }
+    public void Method()
+    {
+    }
 }
 
 class RuntimeHandlesTest

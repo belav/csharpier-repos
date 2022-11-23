@@ -12,9 +12,13 @@ namespace Rotate_explicit5_cs
 
         private class BaseNode
         {
-            public BaseNode() { }
+            public BaseNode()
+            {
+            }
 
-            public virtual void VerifyValid() { }
+            public virtual void VerifyValid()
+            {
+            }
         }
 
         private class Node : BaseNode

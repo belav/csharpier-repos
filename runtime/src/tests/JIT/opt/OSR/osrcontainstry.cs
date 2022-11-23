@@ -21,7 +21,9 @@ class OSRContainsTry
             {
                 result = I(ref result) + i;
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+            }
         }
         return result;
     }

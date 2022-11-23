@@ -7,7 +7,9 @@ namespace System.Threading
 {
     public sealed class CompressedStack : ISerializable
     {
-        private CompressedStack() { }
+        private CompressedStack()
+        {
+        }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

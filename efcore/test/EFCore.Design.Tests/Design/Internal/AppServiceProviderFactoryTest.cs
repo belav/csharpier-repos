@@ -46,7 +46,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
         }
 
-        private class TestService { }
+        private class TestService
+        {
+        }
 
         [ConditionalFact]
         public void Create_works_when_no_BuildWebHost()
@@ -60,7 +62,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Assert.NotNull(services);
         }
 
-        private class ProgramWithoutBuildWebHost { }
+        private class ProgramWithoutBuildWebHost
+        {
+        }
 
         [ConditionalFact]
         public void Create_works_when_BuildWebHost_throws()

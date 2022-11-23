@@ -311,7 +311,8 @@ namespace Microsoft.CodeAnalysis
         private class ReadStream : PooledStream
         {
             public ReadStream(long length, byte[][] chunks) : base(length, new List<byte[]>(chunks))
-            { }
+            {
+            }
         }
 
         private class ReadWriteStream : PooledStream

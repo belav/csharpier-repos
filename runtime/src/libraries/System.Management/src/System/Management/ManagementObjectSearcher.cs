@@ -82,7 +82,9 @@ namespace System.Management
         ///    <code lang='VB'>Dim s As New ManagementObjectSearcher()
         ///    </code>
         /// </example>
-        public ManagementObjectSearcher() : this((ManagementScope)null, null, null) { }
+        public ManagementObjectSearcher() : this((ManagementScope)null, null, null)
+        {
+        }
 
         //parameterized constructors
         /// <summary>
@@ -98,7 +100,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementObjectSearcher(string queryString)
-            : this(null, new ObjectQuery(queryString), null) { }
+            : this(null, new ObjectQuery(queryString), null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class used to invoke the
@@ -113,7 +117,9 @@ namespace System.Management
         /// Dim s As New ManagementObjectSearcher(q)
         ///    </code>
         /// </example>
-        public ManagementObjectSearcher(ObjectQuery query) : this(null, query, null) { }
+        public ManagementObjectSearcher(ObjectQuery query) : this(null, query, null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class used to invoke the
@@ -135,7 +141,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementObjectSearcher(string scope, string queryString)
-            : this(new ManagementScope(scope), new ObjectQuery(queryString), null) { }
+            : this(new ManagementScope(scope), new ObjectQuery(queryString), null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class used to invoke the
@@ -158,7 +166,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementObjectSearcher(ManagementScope scope, ObjectQuery query)
-            : this(scope, query, null) { }
+            : this(scope, query, null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class used to invoke the specified
@@ -183,7 +193,9 @@ namespace System.Management
             string scope,
             string queryString,
             EnumerationOptions options
-        ) : this(new ManagementScope(scope), new ObjectQuery(queryString), options) { }
+        ) : this(new ManagementScope(scope), new ObjectQuery(queryString), options)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class to be

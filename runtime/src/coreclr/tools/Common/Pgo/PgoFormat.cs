@@ -196,7 +196,9 @@ namespace Internal.Pgo
                 return true;
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             IEnumerator<long> IEnumerable<long>.GetEnumerator() => this;
 

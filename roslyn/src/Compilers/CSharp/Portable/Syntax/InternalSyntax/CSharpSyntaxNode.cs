@@ -58,7 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(ObjectReader reader) : base(reader) { }
+        internal CSharpSyntaxNode(ObjectReader reader) : base(reader)
+        {
+        }
 
         public override string Language
         {

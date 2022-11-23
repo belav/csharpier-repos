@@ -24,7 +24,9 @@ public class RequiredNavigationAttributeConvention
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public RequiredNavigationAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    ) : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     public override void ProcessNavigationAdded(

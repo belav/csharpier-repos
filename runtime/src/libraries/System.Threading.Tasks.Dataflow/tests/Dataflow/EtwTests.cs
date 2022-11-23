@@ -39,7 +39,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             },
                             () =>
                             {
-                                ab = new ActionBlock<int>(i => { });
+                                ab = new ActionBlock<int>(i =>
+                                {
+                                });
                                 bb = new BufferBlock<int>(); // trigger block creation event
                                 Assert.Equal(expected: 0, actual: remaining);
                             }

@@ -52,14 +52,18 @@ namespace System.Data
     [System.ComponentModel.DefaultPropertyAttribute("ConstraintName")]
     public abstract partial class Constraint
     {
-        internal Constraint() { }
+        internal Constraint()
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute("")]
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public virtual string ConstraintName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -75,9 +79,13 @@ namespace System.Data
             get { throw null; }
         }
 
-        protected void CheckStateForProperty() { }
+        protected void CheckStateForProperty()
+        {
+        }
 
-        protected internal void SetDataSet(System.Data.DataSet dataSet) { }
+        protected internal void SetDataSet(System.Data.DataSet dataSet)
+        {
+        }
 
         public override string ToString()
         {
@@ -92,7 +100,9 @@ namespace System.Data
     )]
     public sealed partial class ConstraintCollection : System.Data.InternalDataCollectionBase
     {
-        internal ConstraintCollection() { }
+        internal ConstraintCollection()
+        {
+        }
 
         public System.Data.Constraint this[int index]
         {
@@ -108,11 +118,17 @@ namespace System.Data
         }
         public event System.ComponentModel.CollectionChangeEventHandler? CollectionChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void Add(System.Data.Constraint constraint) { }
+        public void Add(System.Data.Constraint constraint)
+        {
+        }
 
         public System.Data.Constraint Add(
             string? name,
@@ -150,21 +166,27 @@ namespace System.Data
             throw null;
         }
 
-        public void AddRange(System.Data.Constraint[]? constraints) { }
+        public void AddRange(System.Data.Constraint[]? constraints)
+        {
+        }
 
         public bool CanRemove(System.Data.Constraint constraint)
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(string? name)
         {
             throw null;
         }
 
-        public void CopyTo(System.Data.Constraint[] array, int index) { }
+        public void CopyTo(System.Data.Constraint[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Data.Constraint? constraint)
         {
@@ -176,25 +198,39 @@ namespace System.Data
             throw null;
         }
 
-        public void Remove(System.Data.Constraint constraint) { }
+        public void Remove(System.Data.Constraint constraint)
+        {
+        }
 
-        public void Remove(string name) { }
+        public void Remove(string name)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
     }
 
     public partial class ConstraintException : System.Data.DataException
     {
-        public ConstraintException() { }
+        public ConstraintException()
+        {
+        }
 
         protected ConstraintException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public ConstraintException(string? s) { }
+        public ConstraintException(string? s)
+        {
+        }
 
-        public ConstraintException(string? message, System.Exception? innerException) { }
+        public ConstraintException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     [System.ComponentModel.DefaultPropertyAttribute("ColumnName")]
@@ -213,9 +249,13 @@ namespace System.Data
     )]
     public partial class DataColumn : System.ComponentModel.MarshalByValueComponent
     {
-        public DataColumn() { }
+        public DataColumn()
+        {
+        }
 
-        public DataColumn(string? columnName) { }
+        public DataColumn(string? columnName)
+        {
+        }
 
         public DataColumn(
             string? columnName,
@@ -224,7 +264,9 @@ namespace System.Data
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
             )]
                 System.Type dataType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types or types used in expressions may be trimmed if not referenced directly."
@@ -237,7 +279,9 @@ namespace System.Data
             )]
                 System.Type dataType,
             string? expr
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types or types used in expressions may be trimmed if not referenced directly."
@@ -251,13 +295,17 @@ namespace System.Data
                 System.Type dataType,
             string? expr,
             System.Data.MappingType type
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool AllowDBNull
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
@@ -267,35 +315,45 @@ namespace System.Data
         public bool AutoIncrement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute((long)0)]
         public long AutoIncrementSeed
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute((long)1)]
         public long AutoIncrementStep
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Caption
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.MappingType.Element)]
         public virtual System.Data.MappingType ColumnMapping
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -306,7 +364,9 @@ namespace System.Data
         public string ColumnName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.DataSetDateTime.UnspecifiedLocal)]
@@ -316,7 +376,9 @@ namespace System.Data
         public System.Data.DataSetDateTime DateTimeMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -330,7 +392,9 @@ namespace System.Data
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "Members from types used in the expressions may be trimmed if not referenced directly."
             )]
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -343,14 +407,18 @@ namespace System.Data
         public int MaxLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -367,14 +435,18 @@ namespace System.Data
         public string Prefix
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool ReadOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -393,20 +465,32 @@ namespace System.Data
         public bool Unique
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected internal void CheckNotAllowNull() { }
+        protected internal void CheckNotAllowNull()
+        {
+        }
 
-        protected void CheckUnique() { }
+        protected void CheckUnique()
+        {
+        }
 
         protected virtual void OnPropertyChanging(
             System.ComponentModel.PropertyChangedEventArgs pcevent
-        ) { }
+        )
+        {
+        }
 
-        protected internal void RaisePropertyChanging(string name) { }
+        protected internal void RaisePropertyChanging(string name)
+        {
+        }
 
-        public void SetOrdinal(int ordinal) { }
+        public void SetOrdinal(int ordinal)
+        {
+        }
 
         public override string ToString()
         {
@@ -420,7 +504,9 @@ namespace System.Data
             System.Data.DataRow row,
             System.Data.DataColumn? column,
             object? value
-        ) { }
+        )
+        {
+        }
 
         public System.Data.DataColumn? Column
         {
@@ -429,7 +515,9 @@ namespace System.Data
         public object? ProposedValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.DataRow Row
         {
@@ -449,7 +537,9 @@ namespace System.Data
     )]
     public sealed partial class DataColumnCollection : System.Data.InternalDataCollectionBase
     {
-        internal DataColumnCollection() { }
+        internal DataColumnCollection()
+        {
+        }
 
         public System.Data.DataColumn this[int index]
         {
@@ -465,8 +555,12 @@ namespace System.Data
         }
         public event System.ComponentModel.CollectionChangeEventHandler? CollectionChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public System.Data.DataColumn Add()
@@ -474,7 +568,9 @@ namespace System.Data
             throw null;
         }
 
-        public void Add(System.Data.DataColumn column) { }
+        public void Add(System.Data.DataColumn column)
+        {
+        }
 
         public System.Data.DataColumn Add(string? columnName)
         {
@@ -509,21 +605,27 @@ namespace System.Data
             throw null;
         }
 
-        public void AddRange(System.Data.DataColumn[] columns) { }
+        public void AddRange(System.Data.DataColumn[] columns)
+        {
+        }
 
         public bool CanRemove(System.Data.DataColumn? column)
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(string name)
         {
             throw null;
         }
 
-        public void CopyTo(System.Data.DataColumn[] array, int index) { }
+        public void CopyTo(System.Data.DataColumn[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Data.DataColumn? column)
         {
@@ -535,25 +637,39 @@ namespace System.Data
             throw null;
         }
 
-        public void Remove(System.Data.DataColumn column) { }
+        public void Remove(System.Data.DataColumn column)
+        {
+        }
 
-        public void Remove(string name) { }
+        public void Remove(string name)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
     }
 
     public partial class DataException : System.SystemException
     {
-        public DataException() { }
+        public DataException()
+        {
+        }
 
         protected DataException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DataException(string? s) { }
+        public DataException(string? s)
+        {
+        }
 
-        public DataException(string? s, System.Exception? innerException) { }
+        public DataException(string? s, System.Exception? innerException)
+        {
+        }
     }
 
     public static partial class DataReaderExtensions
@@ -757,27 +873,35 @@ namespace System.Data
             string? relationName,
             System.Data.DataColumn parentColumn,
             System.Data.DataColumn childColumn
-        ) { }
+        )
+        {
+        }
 
         public DataRelation(
             string? relationName,
             System.Data.DataColumn parentColumn,
             System.Data.DataColumn childColumn,
             bool createConstraints
-        ) { }
+        )
+        {
+        }
 
         public DataRelation(
             string? relationName,
             System.Data.DataColumn[] parentColumns,
             System.Data.DataColumn[] childColumns
-        ) { }
+        )
+        {
+        }
 
         public DataRelation(
             string? relationName,
             System.Data.DataColumn[] parentColumns,
             System.Data.DataColumn[] childColumns,
             bool createConstraints
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         public DataRelation(
@@ -789,7 +913,9 @@ namespace System.Data
             string[]? parentColumnNames,
             string[]? childColumnNames,
             bool nested
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         public DataRelation(
@@ -799,7 +925,9 @@ namespace System.Data
             string[]? parentColumnNames,
             string[]? childColumnNames,
             bool nested
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Data.DataColumn[] ChildColumns
         {
@@ -833,7 +961,9 @@ namespace System.Data
         public virtual bool Nested
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Data.DataColumn[] ParentColumns
         {
@@ -853,16 +983,24 @@ namespace System.Data
         public virtual string RelationName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected void CheckStateForProperty() { }
+        protected void CheckStateForProperty()
+        {
+        }
 
         protected internal void OnPropertyChanging(
             System.ComponentModel.PropertyChangedEventArgs pcevent
-        ) { }
+        )
+        {
+        }
 
-        protected internal void RaisePropertyChanging(string name) { }
+        protected internal void RaisePropertyChanging(string name)
+        {
+        }
 
         public override string ToString()
         {
@@ -878,14 +1016,20 @@ namespace System.Data
     )]
     public abstract partial class DataRelationCollection : System.Data.InternalDataCollectionBase
     {
-        protected DataRelationCollection() { }
+        protected DataRelationCollection()
+        {
+        }
 
         public abstract System.Data.DataRelation this[int index] { get; }
         public abstract System.Data.DataRelation? this[string? name] { get; }
         public event System.ComponentModel.CollectionChangeEventHandler? CollectionChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public virtual System.Data.DataRelation Add(
@@ -904,7 +1048,9 @@ namespace System.Data
             throw null;
         }
 
-        public void Add(System.Data.DataRelation relation) { }
+        public void Add(System.Data.DataRelation relation)
+        {
+        }
 
         public virtual System.Data.DataRelation Add(
             string? name,
@@ -944,23 +1090,31 @@ namespace System.Data
             throw null;
         }
 
-        protected virtual void AddCore(System.Data.DataRelation relation) { }
+        protected virtual void AddCore(System.Data.DataRelation relation)
+        {
+        }
 
-        public virtual void AddRange(System.Data.DataRelation[]? relations) { }
+        public virtual void AddRange(System.Data.DataRelation[]? relations)
+        {
+        }
 
         public virtual bool CanRemove(System.Data.DataRelation? relation)
         {
             throw null;
         }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual bool Contains(string? name)
         {
             throw null;
         }
 
-        public void CopyTo(System.Data.DataRelation[] array, int index) { }
+        public void CopyTo(System.Data.DataRelation[] array, int index)
+        {
+        }
 
         protected abstract System.Data.DataSet GetDataSet();
 
@@ -976,24 +1130,38 @@ namespace System.Data
 
         protected virtual void OnCollectionChanged(
             System.ComponentModel.CollectionChangeEventArgs ccevent
-        ) { }
+        )
+        {
+        }
 
         protected virtual void OnCollectionChanging(
             System.ComponentModel.CollectionChangeEventArgs ccevent
-        ) { }
+        )
+        {
+        }
 
-        public void Remove(System.Data.DataRelation relation) { }
+        public void Remove(System.Data.DataRelation relation)
+        {
+        }
 
-        public void Remove(string name) { }
+        public void Remove(string name)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        protected virtual void RemoveCore(System.Data.DataRelation relation) { }
+        protected virtual void RemoveCore(System.Data.DataRelation relation)
+        {
+        }
     }
 
     public partial class DataRow
     {
-        protected internal DataRow(System.Data.DataRowBuilder builder) { }
+        protected internal DataRow(System.Data.DataRowBuilder builder)
+        {
+        }
 
         public bool HasErrors
         {
@@ -1004,7 +1172,9 @@ namespace System.Data
         public object this[System.Data.DataColumn column]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
@@ -1017,7 +1187,9 @@ namespace System.Data
         public object this[int columnIndex]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
@@ -1030,7 +1202,9 @@ namespace System.Data
         public object this[string columnName]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
@@ -1041,14 +1215,18 @@ namespace System.Data
         public object?[] ItemArray
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string RowError
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.DataRowState RowState
         {
@@ -1059,26 +1237,38 @@ namespace System.Data
             get { throw null; }
         }
 
-        public void AcceptChanges() { }
+        public void AcceptChanges()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public void BeginEdit() { }
+        public void BeginEdit()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public void CancelEdit() { }
+        public void CancelEdit()
+        {
+        }
 
-        public void ClearErrors() { }
+        public void ClearErrors()
+        {
+        }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public void EndEdit() { }
+        public void EndEdit()
+        {
+        }
 
         public System.Data.DataRow[] GetChildRows(System.Data.DataRelation? relation)
         {
@@ -1203,26 +1393,41 @@ namespace System.Data
             throw null;
         }
 
-        public void RejectChanges() { }
+        public void RejectChanges()
+        {
+        }
 
-        public void SetAdded() { }
+        public void SetAdded()
+        {
+        }
 
-        public void SetColumnError(System.Data.DataColumn column, string? error) { }
+        public void SetColumnError(System.Data.DataColumn column, string? error)
+        {
+        }
 
-        public void SetColumnError(int columnIndex, string? error) { }
+        public void SetColumnError(int columnIndex, string? error)
+        {
+        }
 
-        public void SetColumnError(string columnName, string? error) { }
+        public void SetColumnError(string columnName, string? error)
+        {
+        }
 
-        public void SetModified() { }
+        public void SetModified()
+        {
+        }
 
-        protected void SetNull(System.Data.DataColumn column) { }
+        protected void SetNull(System.Data.DataColumn column)
+        {
+        }
 
-        public void SetParentRow(System.Data.DataRow? parentRow) { }
+        public void SetParentRow(System.Data.DataRow? parentRow)
+        {
+        }
 
-        public void SetParentRow(
-            System.Data.DataRow? parentRow,
-            System.Data.DataRelation? relation
-        ) { }
+        public void SetParentRow(System.Data.DataRow? parentRow, System.Data.DataRelation? relation)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -1240,12 +1445,16 @@ namespace System.Data
 
     public sealed partial class DataRowBuilder
     {
-        internal DataRowBuilder() { }
+        internal DataRowBuilder()
+        {
+        }
     }
 
     public partial class DataRowChangeEventArgs : System.EventArgs
     {
-        public DataRowChangeEventArgs(System.Data.DataRow row, System.Data.DataRowAction action) { }
+        public DataRowChangeEventArgs(System.Data.DataRow row, System.Data.DataRowAction action)
+        {
+        }
 
         public System.Data.DataRowAction Action
         {
@@ -1264,7 +1473,9 @@ namespace System.Data
 
     public sealed partial class DataRowCollection : System.Data.InternalDataCollectionBase
     {
-        internal DataRowCollection() { }
+        internal DataRowCollection()
+        {
+        }
 
         public override int Count
         {
@@ -1275,14 +1486,18 @@ namespace System.Data
             get { throw null; }
         }
 
-        public void Add(System.Data.DataRow row) { }
+        public void Add(System.Data.DataRow row)
+        {
+        }
 
         public System.Data.DataRow Add(params object?[] values)
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object? key)
         {
@@ -1294,9 +1509,13 @@ namespace System.Data
             throw null;
         }
 
-        public override void CopyTo(System.Array ar, int index) { }
+        public override void CopyTo(System.Array ar, int index)
+        {
+        }
 
-        public void CopyTo(System.Data.DataRow[] array, int index) { }
+        public void CopyTo(System.Data.DataRow[] array, int index)
+        {
+        }
 
         public System.Data.DataRow? Find(object? key)
         {
@@ -1318,11 +1537,17 @@ namespace System.Data
             throw null;
         }
 
-        public void InsertAt(System.Data.DataRow row, int pos) { }
+        public void InsertAt(System.Data.DataRow row, int pos)
+        {
+        }
 
-        public void Remove(System.Data.DataRow row) { }
+        public void Remove(System.Data.DataRow row)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
     }
 
     public static partial class DataRowComparer
@@ -1336,7 +1561,9 @@ namespace System.Data
     public sealed partial class DataRowComparer<TRow>
         : System.Collections.Generic.IEqualityComparer<TRow> where TRow : System.Data.DataRow
     {
-        internal DataRowComparer() { }
+        internal DataRowComparer()
+        {
+        }
 
         public static System.Data.DataRowComparer<TRow> Default
         {
@@ -1402,15 +1629,17 @@ namespace System.Data
             this System.Data.DataRow row,
             System.Data.DataColumn column,
             T? value
-        ) { }
+        )
+        {
+        }
 
-        public static void SetField<T>(this System.Data.DataRow row, int columnIndex, T? value) { }
+        public static void SetField<T>(this System.Data.DataRow row, int columnIndex, T? value)
+        {
+        }
 
-        public static void SetField<T>(
-            this System.Data.DataRow row,
-            string columnName,
-            T? value
-        ) { }
+        public static void SetField<T>(this System.Data.DataRow row, string columnName, T? value)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -1437,7 +1666,9 @@ namespace System.Data
             System.ComponentModel.IEditableObject,
             System.ComponentModel.INotifyPropertyChanged
     {
-        internal DataRowView() { }
+        internal DataRowView()
+        {
+        }
 
         public System.Data.DataView DataView
         {
@@ -1456,14 +1687,18 @@ namespace System.Data
         public object this[int ndx]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public object this[string property]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.DataRow Row
         {
@@ -1483,13 +1718,21 @@ namespace System.Data
         }
         public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void BeginEdit() { }
+        public void BeginEdit()
+        {
+        }
 
-        public void CancelEdit() { }
+        public void CancelEdit()
+        {
+        }
 
         public System.Data.DataView CreateChildView(System.Data.DataRelation relation)
         {
@@ -1514,9 +1757,13 @@ namespace System.Data
             throw null;
         }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
-        public void EndEdit() { }
+        public void EndEdit()
+        {
+        }
 
         public override bool Equals(object? other)
         {
@@ -1641,7 +1888,9 @@ namespace System.Data
             System.Runtime.Serialization.ISerializable,
             System.Xml.Serialization.IXmlSerializable
     {
-        public DataSet() { }
+        public DataSet()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Members from serialized types may use dynamic code generation."
@@ -1652,7 +1901,9 @@ namespace System.Data
         protected DataSet(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Members from serialized types may use dynamic code generation."
@@ -1664,22 +1915,30 @@ namespace System.Data
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context,
             bool ConstructSchema
-        ) { }
+        )
+        {
+        }
 
-        public DataSet(string dataSetName) { }
+        public DataSet(string dataSetName)
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool CaseSensitive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
         public string DataSetName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1692,7 +1951,9 @@ namespace System.Data
         public bool EnforceConstraints
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1715,7 +1976,9 @@ namespace System.Data
         public System.Globalization.CultureInfo Locale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -1723,7 +1986,9 @@ namespace System.Data
         public string Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -1731,7 +1996,9 @@ namespace System.Data
         public string Prefix
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -1746,7 +2013,9 @@ namespace System.Data
         public System.Data.SerializationFormat RemotingFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1756,7 +2025,9 @@ namespace System.Data
         public virtual System.Data.SchemaSerializationMode SchemaSerializationMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1766,7 +2037,9 @@ namespace System.Data
         public override System.ComponentModel.ISite? Site
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.ComponentModel.IListSource.ContainsListCollection
         {
@@ -1782,20 +2055,34 @@ namespace System.Data
         }
         public event System.EventHandler? Initialized
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.MergeFailedEventHandler? MergeFailed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void AcceptChanges() { }
+        public void AcceptChanges()
+        {
+        }
 
-        public void BeginInit() { }
+        public void BeginInit()
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public virtual System.Data.DataSet Clone()
         {
@@ -1834,7 +2121,9 @@ namespace System.Data
             throw null;
         }
 
-        public void EndInit() { }
+        public void EndInit()
+        {
+        }
 
         public System.Data.DataSet? GetChanges()
         {
@@ -1856,7 +2145,9 @@ namespace System.Data
         public virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         protected virtual System.Xml.Schema.XmlSchema? GetSchemaSerializable()
         {
@@ -1872,7 +2163,9 @@ namespace System.Data
         protected void GetSerializationData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -1903,24 +2196,34 @@ namespace System.Data
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void InferXmlSchema(System.IO.Stream? stream, string[]? nsArray) { }
+        public void InferXmlSchema(System.IO.Stream? stream, string[]? nsArray)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void InferXmlSchema(System.IO.TextReader? reader, string[]? nsArray) { }
+        public void InferXmlSchema(System.IO.TextReader? reader, string[]? nsArray)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void InferXmlSchema(string fileName, string[]? nsArray) { }
+        public void InferXmlSchema(string fileName, string[]? nsArray)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void InferXmlSchema(System.Xml.XmlReader? reader, string[]? nsArray) { }
+        public void InferXmlSchema(System.Xml.XmlReader? reader, string[]? nsArray)
+        {
+        }
 
-        protected virtual void InitializeDerivedDataSet() { }
+        protected virtual void InitializeDerivedDataSet()
+        {
+        }
 
         protected bool IsBinarySerialized(
             System.Runtime.Serialization.SerializationInfo info,
@@ -1937,7 +2240,9 @@ namespace System.Data
             System.Data.IDataReader reader,
             System.Data.LoadOption loadOption,
             params System.Data.DataTable[] tables
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using LoadOption may cause members from types used in the expression column to be trimmed if not referenced directly."
@@ -1947,7 +2252,9 @@ namespace System.Data
             System.Data.LoadOption loadOption,
             System.Data.FillErrorEventHandler? errorHandler,
             params System.Data.DataTable[] tables
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using LoadOption may cause members from types used in the expression column to be trimmed if not referenced directly."
@@ -1956,43 +2263,67 @@ namespace System.Data
             System.Data.IDataReader reader,
             System.Data.LoadOption loadOption,
             params string[] tables
-        ) { }
+        )
+        {
+        }
 
-        public void Merge(System.Data.DataRow[] rows) { }
+        public void Merge(System.Data.DataRow[] rows)
+        {
+        }
 
         public void Merge(
             System.Data.DataRow[] rows,
             bool preserveChanges,
             System.Data.MissingSchemaAction missingSchemaAction
-        ) { }
+        )
+        {
+        }
 
-        public void Merge(System.Data.DataSet dataSet) { }
+        public void Merge(System.Data.DataSet dataSet)
+        {
+        }
 
-        public void Merge(System.Data.DataSet dataSet, bool preserveChanges) { }
+        public void Merge(System.Data.DataSet dataSet, bool preserveChanges)
+        {
+        }
 
         public void Merge(
             System.Data.DataSet dataSet,
             bool preserveChanges,
             System.Data.MissingSchemaAction missingSchemaAction
-        ) { }
+        )
+        {
+        }
 
-        public void Merge(System.Data.DataTable table) { }
+        public void Merge(System.Data.DataTable table)
+        {
+        }
 
         public void Merge(
             System.Data.DataTable table,
             bool preserveChanges,
             System.Data.MissingSchemaAction missingSchemaAction
-        ) { }
+        )
+        {
+        }
 
         protected virtual void OnPropertyChanging(
             System.ComponentModel.PropertyChangedEventArgs pcevent
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OnRemoveRelation(System.Data.DataRelation relation) { }
+        protected virtual void OnRemoveRelation(System.Data.DataRelation relation)
+        {
+        }
 
-        protected internal virtual void OnRemoveTable(System.Data.DataTable table) { }
+        protected internal virtual void OnRemoveTable(System.Data.DataTable table)
+        {
+        }
 
-        protected internal void RaisePropertyChanging(string name) { }
+        protected internal void RaisePropertyChanging(string name)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2070,31 +2401,45 @@ namespace System.Data
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(System.IO.Stream? stream) { }
+        public void ReadXmlSchema(System.IO.Stream? stream)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(System.IO.TextReader? reader) { }
+        public void ReadXmlSchema(System.IO.TextReader? reader)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(string fileName) { }
+        public void ReadXmlSchema(string fileName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(System.Xml.XmlReader? reader) { }
+        public void ReadXmlSchema(System.Xml.XmlReader? reader)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        protected virtual void ReadXmlSerializable(System.Xml.XmlReader reader) { }
+        protected virtual void ReadXmlSerializable(System.Xml.XmlReader reader)
+        {
+        }
 
-        public virtual void RejectChanges() { }
+        public virtual void RejectChanges()
+        {
+        }
 
-        public virtual void Reset() { }
+        public virtual void Reset()
+        {
+        }
 
         protected virtual bool ShouldSerializeRelations()
         {
@@ -2116,54 +2461,76 @@ namespace System.Data
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
-
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
-            "Members from serialized types may be trimmed if not referenced directly."
-        )]
-        public void WriteXml(System.IO.Stream? stream) { }
-
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
-            "Members from serialized types may be trimmed if not referenced directly."
-        )]
-        public void WriteXml(System.IO.Stream? stream, System.Data.XmlWriteMode mode) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.TextWriter? writer) { }
+        public void WriteXml(System.IO.Stream? stream)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.TextWriter? writer, System.Data.XmlWriteMode mode) { }
+        public void WriteXml(System.IO.Stream? stream, System.Data.XmlWriteMode mode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(string fileName) { }
+        public void WriteXml(System.IO.TextWriter? writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(string fileName, System.Data.XmlWriteMode mode) { }
+        public void WriteXml(System.IO.TextWriter? writer, System.Data.XmlWriteMode mode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.Xml.XmlWriter? writer) { }
+        public void WriteXml(string fileName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.Xml.XmlWriter? writer, System.Data.XmlWriteMode mode) { }
+        public void WriteXml(string fileName, System.Data.XmlWriteMode mode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.IO.Stream? stream) { }
+        public void WriteXml(System.Xml.XmlWriter? writer)
+        {
+        }
+
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
+            "Members from serialized types may be trimmed if not referenced directly."
+        )]
+        public void WriteXml(System.Xml.XmlWriter? writer, System.Data.XmlWriteMode mode)
+        {
+        }
+
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
+            "Members from serialized types may be trimmed if not referenced directly."
+        )]
+        public void WriteXmlSchema(System.IO.Stream? stream)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2171,12 +2538,16 @@ namespace System.Data
         public void WriteXmlSchema(
             System.IO.Stream? stream,
             System.Converter<System.Type, string> multipleTargetConverter
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.IO.TextWriter? writer) { }
+        public void WriteXmlSchema(System.IO.TextWriter? writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2184,12 +2555,16 @@ namespace System.Data
         public void WriteXmlSchema(
             System.IO.TextWriter? writer,
             System.Converter<System.Type, string> multipleTargetConverter
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(string fileName) { }
+        public void WriteXmlSchema(string fileName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2197,12 +2572,16 @@ namespace System.Data
         public void WriteXmlSchema(
             string fileName,
             System.Converter<System.Type, string> multipleTargetConverter
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.Xml.XmlWriter? writer) { }
+        public void WriteXmlSchema(System.Xml.XmlWriter? writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2210,7 +2589,9 @@ namespace System.Data
         public void WriteXmlSchema(
             System.Xml.XmlWriter? writer,
             System.Converter<System.Type, string> multipleTargetConverter
-        ) { }
+        )
+        {
+        }
     }
 
     public enum DataSetDateTime
@@ -2230,7 +2611,9 @@ namespace System.Data
         [System.ObsoleteAttribute(
             "DataSysDescriptionAttribute has been deprecated and is not supported."
         )]
-        public DataSysDescriptionAttribute(string description) { }
+        public DataSysDescriptionAttribute(string description)
+        {
+        }
 
         public override string Description
         {
@@ -2265,7 +2648,9 @@ namespace System.Data
     {
         protected internal bool fInitInProgress;
 
-        public DataTable() { }
+        public DataTable()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2273,16 +2658,24 @@ namespace System.Data
         protected DataTable(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DataTable(string? tableName) { }
+        public DataTable(string? tableName)
+        {
+        }
 
-        public DataTable(string? tableName, string? tableNamespace) { }
+        public DataTable(string? tableName, string? tableNamespace)
+        {
+        }
 
         public bool CaseSensitive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -2333,7 +2726,9 @@ namespace System.Data
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "Members from types used in the expressions may be trimmed if not referenced directly."
             )]
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -2356,21 +2751,27 @@ namespace System.Data
         public System.Globalization.CultureInfo Locale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(50)]
         public int MinimumCapacity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -2387,14 +2788,18 @@ namespace System.Data
         public string Prefix
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.SerializationFormat.Xml)]
         public System.Data.SerializationFormat RemotingFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -2410,7 +2815,9 @@ namespace System.Data
         public override System.ComponentModel.ISite? Site
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.ComponentModel.IListSource.ContainsListCollection
         {
@@ -2425,66 +2832,116 @@ namespace System.Data
         public string TableName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.Data.DataColumnChangeEventHandler? ColumnChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataColumnChangeEventHandler? ColumnChanging
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.EventHandler? Initialized
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataRowChangeEventHandler? RowChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataRowChangeEventHandler? RowChanging
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataRowChangeEventHandler? RowDeleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataRowChangeEventHandler? RowDeleting
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataTableClearEventHandler? TableCleared
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataTableClearEventHandler? TableClearing
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.DataTableNewRowEventHandler? TableNewRow
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void AcceptChanges() { }
+        public void AcceptChanges()
+        {
+        }
 
-        public virtual void BeginInit() { }
+        public virtual void BeginInit()
+        {
+        }
 
-        public void BeginLoadData() { }
+        public void BeginLoadData()
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public virtual System.Data.DataTable Clone()
         {
@@ -2514,9 +2971,13 @@ namespace System.Data
             throw null;
         }
 
-        public virtual void EndInit() { }
+        public virtual void EndInit()
+        {
+        }
 
-        public void EndLoadData() { }
+        public void EndLoadData()
+        {
+        }
 
         public System.Data.DataTable? GetChanges()
         {
@@ -2543,7 +3004,9 @@ namespace System.Data
         public virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         protected virtual System.Type GetRowType()
         {
@@ -2558,17 +3021,23 @@ namespace System.Data
             throw null;
         }
 
-        public void ImportRow(System.Data.DataRow? row) { }
+        public void ImportRow(System.Data.DataRow? row)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from types used in the expression column to be trimmed if not referenced directly."
         )]
-        public void Load(System.Data.IDataReader reader) { }
+        public void Load(System.Data.IDataReader reader)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using LoadOption may cause members from types used in the expression column to be trimmed if not referenced directly."
         )]
-        public void Load(System.Data.IDataReader reader, System.Data.LoadOption loadOption) { }
+        public void Load(System.Data.IDataReader reader, System.Data.LoadOption loadOption)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using LoadOption may cause members from types used in the expression column to be trimmed if not referenced directly."
@@ -2577,7 +3046,9 @@ namespace System.Data
             System.Data.IDataReader reader,
             System.Data.LoadOption loadOption,
             System.Data.FillErrorEventHandler? errorHandler
-        ) { }
+        )
+        {
+        }
 
         public System.Data.DataRow LoadDataRow(object?[] values, bool fAcceptChanges)
         {
@@ -2589,15 +3060,21 @@ namespace System.Data
             throw null;
         }
 
-        public void Merge(System.Data.DataTable table) { }
+        public void Merge(System.Data.DataTable table)
+        {
+        }
 
-        public void Merge(System.Data.DataTable table, bool preserveChanges) { }
+        public void Merge(System.Data.DataTable table, bool preserveChanges)
+        {
+        }
 
         public void Merge(
             System.Data.DataTable table,
             bool preserveChanges,
             System.Data.MissingSchemaAction missingSchemaAction
-        ) { }
+        )
+        {
+        }
 
         public System.Data.DataRow NewRow()
         {
@@ -2614,31 +3091,51 @@ namespace System.Data
             throw null;
         }
 
-        protected internal virtual void OnColumnChanged(System.Data.DataColumnChangeEventArgs e) { }
+        protected internal virtual void OnColumnChanged(System.Data.DataColumnChangeEventArgs e)
+        {
+        }
 
-        protected internal virtual void OnColumnChanging(
-            System.Data.DataColumnChangeEventArgs e
-        ) { }
+        protected internal virtual void OnColumnChanging(System.Data.DataColumnChangeEventArgs e)
+        {
+        }
 
         protected virtual void OnPropertyChanging(
             System.ComponentModel.PropertyChangedEventArgs pcevent
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OnRemoveColumn(System.Data.DataColumn column) { }
+        protected virtual void OnRemoveColumn(System.Data.DataColumn column)
+        {
+        }
 
-        protected virtual void OnRowChanged(System.Data.DataRowChangeEventArgs e) { }
+        protected virtual void OnRowChanged(System.Data.DataRowChangeEventArgs e)
+        {
+        }
 
-        protected virtual void OnRowChanging(System.Data.DataRowChangeEventArgs e) { }
+        protected virtual void OnRowChanging(System.Data.DataRowChangeEventArgs e)
+        {
+        }
 
-        protected virtual void OnRowDeleted(System.Data.DataRowChangeEventArgs e) { }
+        protected virtual void OnRowDeleted(System.Data.DataRowChangeEventArgs e)
+        {
+        }
 
-        protected virtual void OnRowDeleting(System.Data.DataRowChangeEventArgs e) { }
+        protected virtual void OnRowDeleting(System.Data.DataRowChangeEventArgs e)
+        {
+        }
 
-        protected virtual void OnTableCleared(System.Data.DataTableClearEventArgs e) { }
+        protected virtual void OnTableCleared(System.Data.DataTableClearEventArgs e)
+        {
+        }
 
-        protected virtual void OnTableClearing(System.Data.DataTableClearEventArgs e) { }
+        protected virtual void OnTableClearing(System.Data.DataTableClearEventArgs e)
+        {
+        }
 
-        protected virtual void OnTableNewRow(System.Data.DataTableNewRowEventArgs e) { }
+        protected virtual void OnTableNewRow(System.Data.DataTableNewRowEventArgs e)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2675,31 +3172,45 @@ namespace System.Data
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(System.IO.Stream? stream) { }
+        public void ReadXmlSchema(System.IO.Stream? stream)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(System.IO.TextReader? reader) { }
+        public void ReadXmlSchema(System.IO.TextReader? reader)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(string fileName) { }
+        public void ReadXmlSchema(string fileName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void ReadXmlSchema(System.Xml.XmlReader? reader) { }
+        public void ReadXmlSchema(System.Xml.XmlReader? reader)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        protected virtual void ReadXmlSerializable(System.Xml.XmlReader? reader) { }
+        protected virtual void ReadXmlSerializable(System.Xml.XmlReader? reader)
+        {
+        }
 
-        public void RejectChanges() { }
+        public void RejectChanges()
+        {
+        }
 
-        public virtual void Reset() { }
+        public virtual void Reset()
+        {
+        }
 
         public System.Data.DataRow[] Select()
         {
@@ -2744,9 +3255,13 @@ namespace System.Data
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public override string ToString()
         {
@@ -2756,17 +3271,23 @@ namespace System.Data
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.Stream? stream) { }
+        public void WriteXml(System.IO.Stream? stream)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.Stream? stream, bool writeHierarchy) { }
+        public void WriteXml(System.IO.Stream? stream, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.Stream? stream, System.Data.XmlWriteMode mode) { }
+        public void WriteXml(System.IO.Stream? stream, System.Data.XmlWriteMode mode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2775,22 +3296,30 @@ namespace System.Data
             System.IO.Stream? stream,
             System.Data.XmlWriteMode mode,
             bool writeHierarchy
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.TextWriter? writer) { }
+        public void WriteXml(System.IO.TextWriter? writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.TextWriter? writer, bool writeHierarchy) { }
+        public void WriteXml(System.IO.TextWriter? writer, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.IO.TextWriter? writer, System.Data.XmlWriteMode mode) { }
+        public void WriteXml(System.IO.TextWriter? writer, System.Data.XmlWriteMode mode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2799,46 +3328,58 @@ namespace System.Data
             System.IO.TextWriter? writer,
             System.Data.XmlWriteMode mode,
             bool writeHierarchy
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(string fileName) { }
+        public void WriteXml(string fileName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(string fileName, bool writeHierarchy) { }
+        public void WriteXml(string fileName, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(string fileName, System.Data.XmlWriteMode mode) { }
+        public void WriteXml(string fileName, System.Data.XmlWriteMode mode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(
-            string fileName,
-            System.Data.XmlWriteMode mode,
-            bool writeHierarchy
-        ) { }
+        public void WriteXml(string fileName, System.Data.XmlWriteMode mode, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.Xml.XmlWriter? writer) { }
+        public void WriteXml(System.Xml.XmlWriter? writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.Xml.XmlWriter? writer, bool writeHierarchy) { }
+        public void WriteXml(System.Xml.XmlWriter? writer, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXml(System.Xml.XmlWriter? writer, System.Data.XmlWriteMode mode) { }
+        public void WriteXml(System.Xml.XmlWriter? writer, System.Data.XmlWriteMode mode)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -2847,52 +3388,72 @@ namespace System.Data
             System.Xml.XmlWriter? writer,
             System.Data.XmlWriteMode mode,
             bool writeHierarchy
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.IO.Stream? stream) { }
+        public void WriteXmlSchema(System.IO.Stream? stream)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.IO.Stream? stream, bool writeHierarchy) { }
+        public void WriteXmlSchema(System.IO.Stream? stream, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.IO.TextWriter? writer) { }
+        public void WriteXmlSchema(System.IO.TextWriter? writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.IO.TextWriter? writer, bool writeHierarchy) { }
+        public void WriteXmlSchema(System.IO.TextWriter? writer, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(string fileName) { }
+        public void WriteXmlSchema(string fileName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(string fileName, bool writeHierarchy) { }
+        public void WriteXmlSchema(string fileName, bool writeHierarchy)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.Xml.XmlWriter? writer) { }
+        public void WriteXmlSchema(System.Xml.XmlWriter? writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
         )]
-        public void WriteXmlSchema(System.Xml.XmlWriter? writer, bool writeHierarchy) { }
+        public void WriteXmlSchema(System.Xml.XmlWriter? writer, bool writeHierarchy)
+        {
+        }
     }
 
     public sealed partial class DataTableClearEventArgs : System.EventArgs
     {
-        public DataTableClearEventArgs(System.Data.DataTable dataTable) { }
+        public DataTableClearEventArgs(System.Data.DataTable dataTable)
+        {
+        }
 
         public System.Data.DataTable Table
         {
@@ -2921,7 +3482,9 @@ namespace System.Data
     [System.ComponentModel.ListBindableAttribute(false)]
     public sealed partial class DataTableCollection : System.Data.InternalDataCollectionBase
     {
-        internal DataTableCollection() { }
+        internal DataTableCollection()
+        {
+        }
 
         public System.Data.DataTable this[int index]
         {
@@ -2941,13 +3504,21 @@ namespace System.Data
         }
         public event System.ComponentModel.CollectionChangeEventHandler? CollectionChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.ComponentModel.CollectionChangeEventHandler? CollectionChanging
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public System.Data.DataTable Add()
@@ -2955,7 +3526,9 @@ namespace System.Data
             throw null;
         }
 
-        public void Add(System.Data.DataTable table) { }
+        public void Add(System.Data.DataTable table)
+        {
+        }
 
         public System.Data.DataTable Add(string? name)
         {
@@ -2967,14 +3540,18 @@ namespace System.Data
             throw null;
         }
 
-        public void AddRange(System.Data.DataTable?[]? tables) { }
+        public void AddRange(System.Data.DataTable?[]? tables)
+        {
+        }
 
         public bool CanRemove(System.Data.DataTable? table)
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(string? name)
         {
@@ -2986,7 +3563,9 @@ namespace System.Data
             throw null;
         }
 
-        public void CopyTo(System.Data.DataTable[] array, int index) { }
+        public void CopyTo(System.Data.DataTable[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Data.DataTable? table)
         {
@@ -3003,13 +3582,21 @@ namespace System.Data
             throw null;
         }
 
-        public void Remove(System.Data.DataTable table) { }
+        public void Remove(System.Data.DataTable table)
+        {
+        }
 
-        public void Remove(string name) { }
+        public void Remove(string name)
+        {
+        }
 
-        public void Remove(string name, string tableNamespace) { }
+        public void Remove(string name, string tableNamespace)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
     }
 
     public static partial class DataTableExtensions
@@ -3044,19 +3631,25 @@ namespace System.Data
             this System.Collections.Generic.IEnumerable<T> source,
             System.Data.DataTable table,
             System.Data.LoadOption options
-        ) where T : System.Data.DataRow { }
+        ) where T : System.Data.DataRow
+        {
+        }
 
         public static void CopyToDataTable<T>(
             this System.Collections.Generic.IEnumerable<T> source,
             System.Data.DataTable table,
             System.Data.LoadOption options,
             System.Data.FillErrorEventHandler? errorHandler
-        ) where T : System.Data.DataRow { }
+        ) where T : System.Data.DataRow
+        {
+        }
     }
 
     public sealed partial class DataTableNewRowEventArgs : System.EventArgs
     {
-        public DataTableNewRowEventArgs(System.Data.DataRow dataRow) { }
+        public DataTableNewRowEventArgs(System.Data.DataRow dataRow)
+        {
+        }
 
         public System.Data.DataRow Row
         {
@@ -3071,9 +3664,13 @@ namespace System.Data
 
     public sealed partial class DataTableReader : System.Data.Common.DbDataReader
     {
-        public DataTableReader(System.Data.DataTable dataTable) { }
+        public DataTableReader(System.Data.DataTable dataTable)
+        {
+        }
 
-        public DataTableReader(System.Data.DataTable[] dataTables) { }
+        public DataTableReader(System.Data.DataTable[] dataTables)
+        {
+        }
 
         public override int Depth
         {
@@ -3104,7 +3701,9 @@ namespace System.Data
             get { throw null; }
         }
 
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
         public override bool GetBoolean(int ordinal)
         {
@@ -3287,9 +3886,13 @@ namespace System.Data
             System.ComponentModel.ISupportInitializeNotification,
             System.ComponentModel.ITypedList
     {
-        public DataView() { }
+        public DataView()
+        {
+        }
 
-        public DataView(System.Data.DataTable? table) { }
+        public DataView(System.Data.DataTable? table)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members of types used in the filter expression might be trimmed."
@@ -3299,27 +3902,35 @@ namespace System.Data
             string? RowFilter,
             string? Sort,
             System.Data.DataViewRowState RowState
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool AllowDelete
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool AllowEdit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool AllowNew
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
@@ -3329,7 +3940,9 @@ namespace System.Data
         public bool ApplyDefaultSort
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -3367,14 +3980,18 @@ namespace System.Data
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "Members of types used in the filter expression might be trimmed."
             )]
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.DataViewRowState.CurrentRows)]
         public System.Data.DataViewRowState RowStateFilter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -3382,7 +3999,9 @@ namespace System.Data
         public string Sort
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -3403,7 +4022,9 @@ namespace System.Data
         object? System.Collections.IList.this[int recordIndex]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.ComponentModel.IBindingList.AllowEdit
         {
@@ -3447,7 +4068,9 @@ namespace System.Data
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "Members of types used in the filter expression might be trimmed."
             )]
-            set { }
+            set
+            {
+            }
         }
         System.ComponentModel.ListSortDescriptionCollection System.ComponentModel.IBindingListView.SortDescriptions
         {
@@ -3463,13 +4086,21 @@ namespace System.Data
         }
         public event System.EventHandler? Initialized
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.ComponentModel.ListChangedEventHandler? ListChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public virtual System.Data.DataRowView AddNew()
@@ -3477,22 +4108,36 @@ namespace System.Data
             throw null;
         }
 
-        public void BeginInit() { }
+        public void BeginInit()
+        {
+        }
 
-        protected void Close() { }
+        protected void Close()
+        {
+        }
 
         protected virtual void ColumnCollectionChanged(
             object sender,
             System.ComponentModel.CollectionChangeEventArgs e
-        ) { }
+        )
+        {
+        }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void Delete(int index) { }
+        public void Delete(int index)
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public void EndInit() { }
+        public void EndInit()
+        {
+        }
 
         public virtual bool Equals(System.Data.DataView? view)
         {
@@ -3527,20 +4172,30 @@ namespace System.Data
         protected virtual void IndexListChanged(
             object sender,
             System.ComponentModel.ListChangedEventArgs e
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OnListChanged(System.ComponentModel.ListChangedEventArgs e) { }
+        protected virtual void OnListChanged(System.ComponentModel.ListChangedEventArgs e)
+        {
+        }
 
-        protected void Open() { }
+        protected void Open()
+        {
+        }
 
-        protected void Reset() { }
+        protected void Reset()
+        {
+        }
 
         int System.Collections.IList.Add(object? value)
         {
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object? value)
         {
@@ -3552,15 +4207,23 @@ namespace System.Data
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
 
         void System.ComponentModel.IBindingList.AddIndex(
             System.ComponentModel.PropertyDescriptor property
-        ) { }
+        )
+        {
+        }
 
         object? System.ComponentModel.IBindingList.AddNew()
         {
@@ -3570,7 +4233,9 @@ namespace System.Data
         void System.ComponentModel.IBindingList.ApplySort(
             System.ComponentModel.PropertyDescriptor property,
             System.ComponentModel.ListSortDirection direction
-        ) { }
+        )
+        {
+        }
 
         int System.ComponentModel.IBindingList.Find(
             System.ComponentModel.PropertyDescriptor property,
@@ -3582,15 +4247,23 @@ namespace System.Data
 
         void System.ComponentModel.IBindingList.RemoveIndex(
             System.ComponentModel.PropertyDescriptor property
-        ) { }
+        )
+        {
+        }
 
-        void System.ComponentModel.IBindingList.RemoveSort() { }
+        void System.ComponentModel.IBindingList.RemoveSort()
+        {
+        }
 
         void System.ComponentModel.IBindingListView.ApplySort(
             System.ComponentModel.ListSortDescriptionCollection sorts
-        ) { }
+        )
+        {
+        }
 
-        void System.ComponentModel.IBindingListView.RemoveFilter() { }
+        void System.ComponentModel.IBindingListView.RemoveFilter()
+        {
+        }
 
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(
             System.ComponentModel.PropertyDescriptor[] listAccessors
@@ -3630,9 +4303,13 @@ namespace System.Data
             throw null;
         }
 
-        protected void UpdateIndex() { }
+        protected void UpdateIndex()
+        {
+        }
 
-        protected virtual void UpdateIndex(bool force) { }
+        protected virtual void UpdateIndex(bool force)
+        {
+        }
     }
 
     [System.ComponentModel.DesignerAttribute(
@@ -3646,16 +4323,22 @@ namespace System.Data
             System.ComponentModel.IBindingList,
             System.ComponentModel.ITypedList
     {
-        public DataViewManager() { }
+        public DataViewManager()
+        {
+        }
 
-        public DataViewManager(System.Data.DataSet? dataSet) { }
+        public DataViewManager(System.Data.DataSet? dataSet)
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(null)]
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.Data.DataSet? DataSet
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string DataViewSettingCollectionString
         {
@@ -3663,7 +4346,9 @@ namespace System.Data
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
                 "Members of types used in the RowFilter expression might be trimmed."
             )]
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -3696,7 +4381,9 @@ namespace System.Data
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.ComponentModel.IBindingList.AllowEdit
         {
@@ -3736,8 +4423,12 @@ namespace System.Data
         }
         public event System.ComponentModel.ListChangedEventHandler? ListChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public System.Data.DataView CreateDataView(System.Data.DataTable table)
@@ -3745,14 +4436,20 @@ namespace System.Data
             throw null;
         }
 
-        protected virtual void OnListChanged(System.ComponentModel.ListChangedEventArgs e) { }
+        protected virtual void OnListChanged(System.ComponentModel.ListChangedEventArgs e)
+        {
+        }
 
         protected virtual void RelationCollectionChanged(
             object sender,
             System.ComponentModel.CollectionChangeEventArgs e
-        ) { }
+        )
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -3764,7 +4461,9 @@ namespace System.Data
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object? value)
         {
@@ -3776,15 +4475,23 @@ namespace System.Data
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
 
         void System.ComponentModel.IBindingList.AddIndex(
             System.ComponentModel.PropertyDescriptor property
-        ) { }
+        )
+        {
+        }
 
         object? System.ComponentModel.IBindingList.AddNew()
         {
@@ -3794,7 +4501,9 @@ namespace System.Data
         void System.ComponentModel.IBindingList.ApplySort(
             System.ComponentModel.PropertyDescriptor property,
             System.ComponentModel.ListSortDirection direction
-        ) { }
+        )
+        {
+        }
 
         int System.ComponentModel.IBindingList.Find(
             System.ComponentModel.PropertyDescriptor property,
@@ -3806,9 +4515,13 @@ namespace System.Data
 
         void System.ComponentModel.IBindingList.RemoveIndex(
             System.ComponentModel.PropertyDescriptor property
-        ) { }
+        )
+        {
+        }
 
-        void System.ComponentModel.IBindingList.RemoveSort() { }
+        void System.ComponentModel.IBindingList.RemoveSort()
+        {
+        }
 
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(
             System.ComponentModel.PropertyDescriptor[] listAccessors
@@ -3827,7 +4540,9 @@ namespace System.Data
         protected virtual void TableCollectionChanged(
             object sender,
             System.ComponentModel.CollectionChangeEventArgs e
-        ) { }
+        )
+        {
+        }
     }
 
     [System.ComponentModel.EditorAttribute(
@@ -3852,12 +4567,16 @@ namespace System.Data
     )]
     public partial class DataViewSetting
     {
-        internal DataViewSetting() { }
+        internal DataViewSetting()
+        {
+        }
 
         public bool ApplyDefaultSort
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -3873,19 +4592,25 @@ namespace System.Data
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "Members of types used in the filter expression might be trimmed."
             )]
-            set { }
+            set
+            {
+            }
         }
         public System.Data.DataViewRowState RowStateFilter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Sort
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -3903,7 +4628,9 @@ namespace System.Data
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal DataViewSettingCollection() { }
+        internal DataViewSettingCollection()
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         public virtual int Count
@@ -3925,14 +4652,18 @@ namespace System.Data
         public virtual System.Data.DataViewSetting this[System.Data.DataTable table]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public virtual System.Data.DataViewSetting? this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Data.DataViewSetting? this[string tableName]
         {
@@ -3945,9 +4676,13 @@ namespace System.Data
             get { throw null; }
         }
 
-        public void CopyTo(System.Array ar, int index) { }
+        public void CopyTo(System.Array ar, int index)
+        {
+        }
 
-        public void CopyTo(System.Data.DataViewSetting[] ar, int index) { }
+        public void CopyTo(System.Data.DataViewSetting[] ar, int index)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -3957,37 +4692,53 @@ namespace System.Data
 
     public sealed partial class DBConcurrencyException : System.SystemException
     {
-        public DBConcurrencyException() { }
+        public DBConcurrencyException()
+        {
+        }
 
-        public DBConcurrencyException(string? message) { }
+        public DBConcurrencyException(string? message)
+        {
+        }
 
-        public DBConcurrencyException(string? message, System.Exception? inner) { }
+        public DBConcurrencyException(string? message, System.Exception? inner)
+        {
+        }
 
         public DBConcurrencyException(
             string? message,
             System.Exception? inner,
             System.Data.DataRow[]? dataRows
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.Data.DataRow? Row
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int RowCount
         {
             get { throw null; }
         }
 
-        public void CopyToRows(System.Data.DataRow[] array) { }
+        public void CopyToRows(System.Data.DataRow[] array)
+        {
+        }
 
-        public void CopyToRows(System.Data.DataRow[] array, int arrayIndex) { }
+        public void CopyToRows(System.Data.DataRow[] array, int arrayIndex)
+        {
+        }
 
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public enum DbType
@@ -4023,36 +4774,53 @@ namespace System.Data
 
     public partial class DeletedRowInaccessibleException : System.Data.DataException
     {
-        public DeletedRowInaccessibleException() { }
+        public DeletedRowInaccessibleException()
+        {
+        }
 
         protected DeletedRowInaccessibleException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DeletedRowInaccessibleException(string? s) { }
+        public DeletedRowInaccessibleException(string? s)
+        {
+        }
 
         public DeletedRowInaccessibleException(string? message, System.Exception? innerException)
-        { }
+        {
+        }
     }
 
     public partial class DuplicateNameException : System.Data.DataException
     {
-        public DuplicateNameException() { }
+        public DuplicateNameException()
+        {
+        }
 
         protected DuplicateNameException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DuplicateNameException(string? s) { }
+        public DuplicateNameException(string? s)
+        {
+        }
 
-        public DuplicateNameException(string? message, System.Exception? innerException) { }
+        public DuplicateNameException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public abstract partial class EnumerableRowCollection : System.Collections.IEnumerable
     {
-        internal EnumerableRowCollection() { }
+        internal EnumerableRowCollection()
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -4165,7 +4933,9 @@ namespace System.Data
             System.Collections.Generic.IEnumerable<TRow>,
             System.Collections.IEnumerable
     {
-        internal EnumerableRowCollection() { }
+        internal EnumerableRowCollection()
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<TRow> GetEnumerator()
         {
@@ -4180,26 +4950,38 @@ namespace System.Data
 
     public partial class EvaluateException : System.Data.InvalidExpressionException
     {
-        public EvaluateException() { }
+        public EvaluateException()
+        {
+        }
 
         protected EvaluateException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public EvaluateException(string? s) { }
+        public EvaluateException(string? s)
+        {
+        }
 
-        public EvaluateException(string? message, System.Exception? innerException) { }
+        public EvaluateException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class FillErrorEventArgs : System.EventArgs
     {
-        public FillErrorEventArgs(System.Data.DataTable? dataTable, object?[]? values) { }
+        public FillErrorEventArgs(System.Data.DataTable? dataTable, object?[]? values)
+        {
+        }
 
         public bool Continue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.DataTable? DataTable
         {
@@ -4208,7 +4990,9 @@ namespace System.Data
         public System.Exception? Errors
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object?[] Values
         {
@@ -4228,24 +5012,32 @@ namespace System.Data
         public ForeignKeyConstraint(
             System.Data.DataColumn parentColumn,
             System.Data.DataColumn childColumn
-        ) { }
+        )
+        {
+        }
 
         public ForeignKeyConstraint(
             System.Data.DataColumn[] parentColumns,
             System.Data.DataColumn[] childColumns
-        ) { }
+        )
+        {
+        }
 
         public ForeignKeyConstraint(
             string? constraintName,
             System.Data.DataColumn parentColumn,
             System.Data.DataColumn childColumn
-        ) { }
+        )
+        {
+        }
 
         public ForeignKeyConstraint(
             string? constraintName,
             System.Data.DataColumn[] parentColumns,
             System.Data.DataColumn[] childColumns
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         public ForeignKeyConstraint(
@@ -4257,7 +5049,9 @@ namespace System.Data
             System.Data.AcceptRejectRule acceptRejectRule,
             System.Data.Rule deleteRule,
             System.Data.Rule updateRule
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         public ForeignKeyConstraint(
@@ -4268,13 +5062,17 @@ namespace System.Data
             System.Data.AcceptRejectRule acceptRejectRule,
             System.Data.Rule deleteRule,
             System.Data.Rule updateRule
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.AcceptRejectRule.None)]
         public virtual System.Data.AcceptRejectRule AcceptRejectRule
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.ReadOnlyAttribute(true)]
@@ -4287,7 +5085,9 @@ namespace System.Data
         public virtual System.Data.Rule DeleteRule
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.ReadOnlyAttribute(true)]
@@ -4312,7 +5112,9 @@ namespace System.Data
         public virtual System.Data.Rule UpdateRule
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals(
@@ -4499,23 +5301,33 @@ namespace System.Data
 
     public partial class InRowChangingEventException : System.Data.DataException
     {
-        public InRowChangingEventException() { }
+        public InRowChangingEventException()
+        {
+        }
 
         protected InRowChangingEventException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InRowChangingEventException(string? s) { }
+        public InRowChangingEventException(string? s)
+        {
+        }
 
-        public InRowChangingEventException(string? message, System.Exception? innerException) { }
+        public InRowChangingEventException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class InternalDataCollectionBase
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        public InternalDataCollectionBase() { }
+        public InternalDataCollectionBase()
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         public virtual int Count
@@ -4545,7 +5357,9 @@ namespace System.Data
             get { throw null; }
         }
 
-        public virtual void CopyTo(System.Array ar, int index) { }
+        public virtual void CopyTo(System.Array ar, int index)
+        {
+        }
 
         public virtual System.Collections.IEnumerator GetEnumerator()
         {
@@ -4555,30 +5369,46 @@ namespace System.Data
 
     public partial class InvalidConstraintException : System.Data.DataException
     {
-        public InvalidConstraintException() { }
+        public InvalidConstraintException()
+        {
+        }
 
         protected InvalidConstraintException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InvalidConstraintException(string? s) { }
+        public InvalidConstraintException(string? s)
+        {
+        }
 
-        public InvalidConstraintException(string? message, System.Exception? innerException) { }
+        public InvalidConstraintException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class InvalidExpressionException : System.Data.DataException
     {
-        public InvalidExpressionException() { }
+        public InvalidExpressionException()
+        {
+        }
 
         protected InvalidExpressionException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InvalidExpressionException(string? s) { }
+        public InvalidExpressionException(string? s)
+        {
+        }
 
-        public InvalidExpressionException(string? message, System.Exception? innerException) { }
+        public InvalidExpressionException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public enum IsolationLevel
@@ -4635,7 +5465,9 @@ namespace System.Data
 
     public partial class MergeFailedEventArgs : System.EventArgs
     {
-        public MergeFailedEventArgs(System.Data.DataTable? table, string conflict) { }
+        public MergeFailedEventArgs(System.Data.DataTable? table, string conflict)
+        {
+        }
 
         public string Conflict
         {
@@ -4658,16 +5490,24 @@ namespace System.Data
 
     public partial class MissingPrimaryKeyException : System.Data.DataException
     {
-        public MissingPrimaryKeyException() { }
+        public MissingPrimaryKeyException()
+        {
+        }
 
         protected MissingPrimaryKeyException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public MissingPrimaryKeyException(string? s) { }
+        public MissingPrimaryKeyException(string? s)
+        {
+        }
 
-        public MissingPrimaryKeyException(string? message, System.Exception? innerException) { }
+        public MissingPrimaryKeyException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public enum MissingSchemaAction
@@ -4680,22 +5520,32 @@ namespace System.Data
 
     public partial class NoNullAllowedException : System.Data.DataException
     {
-        public NoNullAllowedException() { }
+        public NoNullAllowedException()
+        {
+        }
 
         protected NoNullAllowedException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public NoNullAllowedException(string? s) { }
+        public NoNullAllowedException(string? s)
+        {
+        }
 
-        public NoNullAllowedException(string? message, System.Exception? innerException) { }
+        public NoNullAllowedException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public sealed partial class OrderedEnumerableRowCollection<TRow>
         : System.Data.EnumerableRowCollection<TRow>
     {
-        internal OrderedEnumerableRowCollection() { }
+        internal OrderedEnumerableRowCollection()
+        {
+        }
     }
 
     public enum ParameterDirection
@@ -4708,12 +5558,16 @@ namespace System.Data
 
     public partial class PropertyCollection : System.Collections.Hashtable, System.ICloneable
     {
-        public PropertyCollection() { }
+        public PropertyCollection()
+        {
+        }
 
         protected PropertyCollection(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override object Clone()
         {
@@ -4723,30 +5577,46 @@ namespace System.Data
 
     public partial class ReadOnlyException : System.Data.DataException
     {
-        public ReadOnlyException() { }
+        public ReadOnlyException()
+        {
+        }
 
         protected ReadOnlyException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public ReadOnlyException(string? s) { }
+        public ReadOnlyException(string? s)
+        {
+        }
 
-        public ReadOnlyException(string? message, System.Exception? innerException) { }
+        public ReadOnlyException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class RowNotInTableException : System.Data.DataException
     {
-        public RowNotInTableException() { }
+        public RowNotInTableException()
+        {
+        }
 
         protected RowNotInTableException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public RowNotInTableException(string? s) { }
+        public RowNotInTableException(string? s)
+        {
+        }
 
-        public RowNotInTableException(string? message, System.Exception? innerException) { }
+        public RowNotInTableException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public enum Rule
@@ -4820,7 +5690,9 @@ namespace System.Data
         public StateChangeEventArgs(
             System.Data.ConnectionState originalState,
             System.Data.ConnectionState currentState
-        ) { }
+        )
+        {
+        }
 
         public System.Data.ConnectionState CurrentState
         {
@@ -4836,7 +5708,9 @@ namespace System.Data
 
     public sealed partial class StatementCompletedEventArgs : System.EventArgs
     {
-        public StatementCompletedEventArgs(int recordCount) { }
+        public StatementCompletedEventArgs(int recordCount)
+        {
+        }
 
         public int RecordCount
         {
@@ -4860,30 +5734,46 @@ namespace System.Data
 
     public partial class StrongTypingException : System.Data.DataException
     {
-        public StrongTypingException() { }
+        public StrongTypingException()
+        {
+        }
 
         protected StrongTypingException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public StrongTypingException(string? message) { }
+        public StrongTypingException(string? message)
+        {
+        }
 
-        public StrongTypingException(string? s, System.Exception? innerException) { }
+        public StrongTypingException(string? s, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class SyntaxErrorException : System.Data.InvalidExpressionException
     {
-        public SyntaxErrorException() { }
+        public SyntaxErrorException()
+        {
+        }
 
         protected SyntaxErrorException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public SyntaxErrorException(string? s) { }
+        public SyntaxErrorException(string? s)
+        {
+        }
 
-        public SyntaxErrorException(string? message, System.Exception? innerException) { }
+        public SyntaxErrorException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public static partial class TypedTableBaseExtensions
@@ -4963,7 +5853,9 @@ namespace System.Data
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable where T : System.Data.DataRow
     {
-        protected TypedTableBase() { }
+        protected TypedTableBase()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly."
@@ -4971,7 +5863,9 @@ namespace System.Data
         protected TypedTableBase(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public System.Data.EnumerableRowCollection<TResult> Cast<TResult>()
         {
@@ -4996,25 +5890,42 @@ namespace System.Data
     )]
     public partial class UniqueConstraint : System.Data.Constraint
     {
-        public UniqueConstraint(System.Data.DataColumn column) { }
+        public UniqueConstraint(System.Data.DataColumn column)
+        {
+        }
 
-        public UniqueConstraint(System.Data.DataColumn column, bool isPrimaryKey) { }
+        public UniqueConstraint(System.Data.DataColumn column, bool isPrimaryKey)
+        {
+        }
 
-        public UniqueConstraint(System.Data.DataColumn[] columns) { }
+        public UniqueConstraint(System.Data.DataColumn[] columns)
+        {
+        }
 
-        public UniqueConstraint(System.Data.DataColumn[] columns, bool isPrimaryKey) { }
+        public UniqueConstraint(System.Data.DataColumn[] columns, bool isPrimaryKey)
+        {
+        }
 
-        public UniqueConstraint(string? name, System.Data.DataColumn column) { }
+        public UniqueConstraint(string? name, System.Data.DataColumn column)
+        {
+        }
 
-        public UniqueConstraint(string? name, System.Data.DataColumn column, bool isPrimaryKey) { }
+        public UniqueConstraint(string? name, System.Data.DataColumn column, bool isPrimaryKey)
+        {
+        }
 
-        public UniqueConstraint(string? name, System.Data.DataColumn[] columns) { }
+        public UniqueConstraint(string? name, System.Data.DataColumn[] columns)
+        {
+        }
 
         public UniqueConstraint(string? name, System.Data.DataColumn[] columns, bool isPrimaryKey)
-        { }
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
-        public UniqueConstraint(string? name, string[]? columnNames, bool isPrimaryKey) { }
+        public UniqueConstraint(string? name, string[]? columnNames, bool isPrimaryKey)
+        {
+        }
 
         [System.ComponentModel.ReadOnlyAttribute(true)]
         public virtual System.Data.DataColumn[] Columns
@@ -5063,16 +5974,24 @@ namespace System.Data
 
     public partial class VersionNotFoundException : System.Data.DataException
     {
-        public VersionNotFoundException() { }
+        public VersionNotFoundException()
+        {
+        }
 
         protected VersionNotFoundException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public VersionNotFoundException(string? s) { }
+        public VersionNotFoundException(string? s)
+        {
+        }
 
-        public VersionNotFoundException(string? message, System.Exception? innerException) { }
+        public VersionNotFoundException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public enum XmlReadMode
@@ -5111,29 +6030,39 @@ namespace System.Data.Common
     )]
     public partial class DataAdapter : System.ComponentModel.Component, System.Data.IDataAdapter
     {
-        protected DataAdapter() { }
+        protected DataAdapter()
+        {
+        }
 
-        protected DataAdapter(System.Data.Common.DataAdapter from) { }
+        protected DataAdapter(System.Data.Common.DataAdapter from)
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool AcceptChangesDuringFill
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool AcceptChangesDuringUpdate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool ContinueUpdateOnError
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -5145,28 +6074,36 @@ namespace System.Data.Common
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "Using LoadOption may cause members from types used in the expression column to be trimmed if not referenced directly."
             )]
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.MissingMappingAction.Passthrough)]
         public System.Data.MissingMappingAction MissingMappingAction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.MissingSchemaAction.Add)]
         public System.Data.MissingSchemaAction MissingSchemaAction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public virtual bool ReturnProviderSpecificTypes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.ITableMappingCollection System.Data.IDataAdapter.TableMappings
         {
@@ -5182,8 +6119,12 @@ namespace System.Data.Common
         }
         public event System.Data.FillErrorEventHandler? FillError
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -5199,7 +6140,9 @@ namespace System.Data.Common
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public virtual int Fill(System.Data.DataSet dataSet)
         {
@@ -5284,12 +6227,16 @@ namespace System.Data.Common
             throw null;
         }
 
-        protected virtual void OnFillError(System.Data.FillErrorEventArgs value) { }
+        protected virtual void OnFillError(System.Data.FillErrorEventArgs value)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public void ResetFillLoadOption() { }
+        public void ResetFillLoadOption()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -5326,16 +6273,22 @@ namespace System.Data.Common
             System.Data.IColumnMapping,
             System.ICloneable
     {
-        public DataColumnMapping() { }
+        public DataColumnMapping()
+        {
+        }
 
-        public DataColumnMapping(string? sourceColumn, string? dataSetColumn) { }
+        public DataColumnMapping(string? sourceColumn, string? dataSetColumn)
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute("")]
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string DataSetColumn
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -5343,7 +6296,9 @@ namespace System.Data.Common
         public string SourceColumn
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -5398,7 +6353,9 @@ namespace System.Data.Common
             System.Collections.IList,
             System.Data.IColumnMappingCollection
     {
-        public DataColumnMappingCollection() { }
+        public DataColumnMappingCollection()
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -5416,7 +6373,9 @@ namespace System.Data.Common
         public System.Data.Common.DataColumnMapping this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -5426,7 +6385,9 @@ namespace System.Data.Common
         public System.Data.Common.DataColumnMapping this[string sourceColumn]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -5447,12 +6408,16 @@ namespace System.Data.Common
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         object System.Data.IColumnMappingCollection.this[string index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(object? value)
@@ -5465,11 +6430,17 @@ namespace System.Data.Common
             throw null;
         }
 
-        public void AddRange(System.Array values) { }
+        public void AddRange(System.Array values)
+        {
+        }
 
-        public void AddRange(System.Data.Common.DataColumnMapping[] values) { }
+        public void AddRange(System.Data.Common.DataColumnMapping[] values)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object? value)
         {
@@ -5481,9 +6452,13 @@ namespace System.Data.Common
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Data.Common.DataColumnMapping[] array, int index) { }
+        public void CopyTo(System.Data.Common.DataColumnMapping[] array, int index)
+        {
+        }
 
         public System.Data.Common.DataColumnMapping GetByDataSetColumn(string value)
         {
@@ -5541,17 +6516,29 @@ namespace System.Data.Common
             throw null;
         }
 
-        public void Insert(int index, System.Data.Common.DataColumnMapping value) { }
+        public void Insert(int index, System.Data.Common.DataColumnMapping value)
+        {
+        }
 
-        public void Insert(int index, object? value) { }
+        public void Insert(int index, object? value)
+        {
+        }
 
-        public void Remove(System.Data.Common.DataColumnMapping value) { }
+        public void Remove(System.Data.Common.DataColumnMapping value)
+        {
+        }
 
-        public void Remove(object? value) { }
+        public void Remove(object? value)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        public void RemoveAt(string sourceColumn) { }
+        public void RemoveAt(string sourceColumn)
+        {
+        }
 
         System.Data.IColumnMapping System.Data.IColumnMappingCollection.Add(
             string? sourceColumnName,
@@ -5574,15 +6561,21 @@ namespace System.Data.Common
             System.Data.ITableMapping,
             System.ICloneable
     {
-        public DataTableMapping() { }
+        public DataTableMapping()
+        {
+        }
 
-        public DataTableMapping(string? sourceTable, string? dataSetTable) { }
+        public DataTableMapping(string? sourceTable, string? dataSetTable)
+        {
+        }
 
         public DataTableMapping(
             string? sourceTable,
             string? dataSetTable,
             System.Data.Common.DataColumnMapping[]? columnMappings
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
             System.ComponentModel.DesignerSerializationVisibility.Content
@@ -5597,7 +6590,9 @@ namespace System.Data.Common
         public string DataSetTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -5605,7 +6600,9 @@ namespace System.Data.Common
         public string SourceTable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IColumnMappingCollection System.Data.ITableMapping.ColumnMappings
         {
@@ -5675,7 +6672,9 @@ namespace System.Data.Common
             System.Collections.IList,
             System.Data.ITableMappingCollection
     {
-        public DataTableMappingCollection() { }
+        public DataTableMappingCollection()
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -5693,7 +6692,9 @@ namespace System.Data.Common
         public System.Data.Common.DataTableMapping this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -5703,7 +6704,9 @@ namespace System.Data.Common
         public System.Data.Common.DataTableMapping this[string sourceTable]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -5724,12 +6727,16 @@ namespace System.Data.Common
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         object System.Data.ITableMappingCollection.this[string index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(object? value)
@@ -5742,11 +6749,17 @@ namespace System.Data.Common
             throw null;
         }
 
-        public void AddRange(System.Array values) { }
+        public void AddRange(System.Array values)
+        {
+        }
 
-        public void AddRange(System.Data.Common.DataTableMapping[] values) { }
+        public void AddRange(System.Data.Common.DataTableMapping[] values)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(object? value)
         {
@@ -5758,9 +6771,13 @@ namespace System.Data.Common
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Data.Common.DataTableMapping[] array, int index) { }
+        public void CopyTo(System.Data.Common.DataTableMapping[] array, int index)
+        {
+        }
 
         public System.Data.Common.DataTableMapping GetByDataSetTable(string dataSetTable)
         {
@@ -5800,17 +6817,29 @@ namespace System.Data.Common
             throw null;
         }
 
-        public void Insert(int index, System.Data.Common.DataTableMapping value) { }
+        public void Insert(int index, System.Data.Common.DataTableMapping value)
+        {
+        }
 
-        public void Insert(int index, object? value) { }
+        public void Insert(int index, object? value)
+        {
+        }
 
-        public void Remove(System.Data.Common.DataTableMapping value) { }
+        public void Remove(System.Data.Common.DataTableMapping value)
+        {
+        }
 
-        public void Remove(object? value) { }
+        public void Remove(object? value)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        public void RemoveAt(string sourceTable) { }
+        public void RemoveAt(string sourceTable)
+        {
+        }
 
         System.Data.ITableMapping System.Data.ITableMappingCollection.Add(
             string sourceTableName,
@@ -5949,107 +6978,149 @@ namespace System.Data.Common
 
     public abstract partial class DbColumn
     {
-        protected DbColumn() { }
+        protected DbColumn()
+        {
+        }
 
         public bool? AllowDBNull
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? BaseCatalogName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? BaseColumnName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? BaseSchemaName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? BaseServerName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? BaseTableName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string ColumnName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public int? ColumnOrdinal
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public int? ColumnSize
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public System.Type? DataType
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? DataTypeName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsAliased
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsAutoIncrement
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsExpression
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsHidden
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsIdentity
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsKey
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsLong
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsReadOnly
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool? IsUnique
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public virtual object? this[string property]
         {
@@ -6058,17 +7129,23 @@ namespace System.Data.Common
         public int? NumericPrecision
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public int? NumericScale
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? UdtAssemblyQualifiedName
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
     }
 
@@ -6078,7 +7155,9 @@ namespace System.Data.Common
             System.IDisposable,
             System.IAsyncDisposable
     {
-        protected DbCommand() { }
+        protected DbCommand()
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute("")]
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -6102,7 +7181,9 @@ namespace System.Data.Common
         public System.Data.Common.DbConnection? Connection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected abstract System.Data.Common.DbConnection? DbConnection { get; set; }
         protected abstract System.Data.Common.DbParameterCollection DbParameterCollection { get; }
@@ -6127,7 +7208,9 @@ namespace System.Data.Common
         System.Data.IDbConnection? System.Data.IDbCommand.Connection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDataParameterCollection System.Data.IDbCommand.Parameters
         {
@@ -6136,7 +7219,9 @@ namespace System.Data.Common
         System.Data.IDbTransaction? System.Data.IDbCommand.Transaction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6147,7 +7232,9 @@ namespace System.Data.Common
         public System.Data.Common.DbTransaction? Transaction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.UpdateRowSource.Both)]
@@ -6272,13 +7359,17 @@ namespace System.Data.Common
 
     public abstract partial class DbCommandBuilder : System.ComponentModel.Component
     {
-        protected DbCommandBuilder() { }
+        protected DbCommandBuilder()
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.Common.CatalogLocation.Start)]
         public virtual System.Data.Common.CatalogLocation CatalogLocation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(".")]
@@ -6286,7 +7377,9 @@ namespace System.Data.Common
         public virtual string CatalogSeparator
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(
@@ -6295,7 +7388,9 @@ namespace System.Data.Common
         public virtual System.Data.ConflictOption ConflictOption
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6305,7 +7400,9 @@ namespace System.Data.Common
         public System.Data.Common.DbDataAdapter? DataAdapter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -6313,7 +7410,9 @@ namespace System.Data.Common
         public virtual string QuotePrefix
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute("")]
@@ -6321,7 +7420,9 @@ namespace System.Data.Common
         public virtual string QuoteSuffix
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(".")]
@@ -6329,14 +7430,18 @@ namespace System.Data.Common
         public virtual string SchemaSeparator
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool SetAllValues
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected abstract void ApplyParameterInfo(
             System.Data.Common.DbParameter parameter,
@@ -6345,7 +7450,9 @@ namespace System.Data.Common
             bool whereClause
         );
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public System.Data.Common.DbCommand GetDeleteCommand()
         {
@@ -6400,11 +7507,13 @@ namespace System.Data.Common
             throw null;
         }
 
-        public virtual void RefreshSchema() { }
+        public virtual void RefreshSchema()
+        {
+        }
 
-        protected void RowUpdatingHandler(
-            System.Data.Common.RowUpdatingEventArgs rowUpdatingEvent
-        ) { }
+        protected void RowUpdatingHandler(System.Data.Common.RowUpdatingEventArgs rowUpdatingEvent)
+        {
+        }
 
         protected abstract void SetRowUpdatingHandler(System.Data.Common.DbDataAdapter adapter);
 
@@ -6420,7 +7529,9 @@ namespace System.Data.Common
             System.IDisposable,
             System.IAsyncDisposable
     {
-        protected DbConnection() { }
+        protected DbConnection()
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute("")]
         [System.ComponentModel.RecommendedAsConfigurableAttribute(true)]
@@ -6448,8 +7559,12 @@ namespace System.Data.Common
         public abstract System.Data.ConnectionState State { get; }
         public virtual event System.Data.StateChangeEventHandler? StateChange
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         protected abstract System.Data.Common.DbTransaction BeginDbTransaction(
             System.Data.IsolationLevel isolationLevel
@@ -6537,7 +7652,9 @@ namespace System.Data.Common
             throw null;
         }
 
-        public virtual void EnlistTransaction(System.Transactions.Transaction? transaction) { }
+        public virtual void EnlistTransaction(System.Transactions.Transaction? transaction)
+        {
+        }
 
         public virtual System.Data.DataTable GetSchema()
         {
@@ -6581,7 +7698,9 @@ namespace System.Data.Common
             throw null;
         }
 
-        protected virtual void OnStateChange(System.Data.StateChangeEventArgs stateChange) { }
+        protected virtual void OnStateChange(System.Data.StateChangeEventArgs stateChange)
+        {
+        }
 
         public abstract void Open();
 
@@ -6624,9 +7743,13 @@ namespace System.Data.Common
             System.Collections.IEnumerable,
             System.ComponentModel.ICustomTypeDescriptor
     {
-        public DbConnectionStringBuilder() { }
+        public DbConnectionStringBuilder()
+        {
+        }
 
-        public DbConnectionStringBuilder(bool useOdbcRules) { }
+        public DbConnectionStringBuilder(bool useOdbcRules)
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -6639,7 +7762,9 @@ namespace System.Data.Common
         public bool BrowsableConnectionString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -6649,7 +7774,9 @@ namespace System.Data.Common
         public string ConnectionString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6675,7 +7802,9 @@ namespace System.Data.Common
         public virtual object this[string keyword]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6694,7 +7823,9 @@ namespace System.Data.Common
         object? System.Collections.IDictionary.this[object keyword]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6703,24 +7834,34 @@ namespace System.Data.Common
             get { throw null; }
         }
 
-        public void Add(string keyword, object value) { }
+        public void Add(string keyword, object value)
+        {
+        }
 
         public static void AppendKeyValuePair(
             System.Text.StringBuilder builder,
             string keyword,
             string? value
-        ) { }
+        )
+        {
+        }
 
         public static void AppendKeyValuePair(
             System.Text.StringBuilder builder,
             string keyword,
             string? value,
             bool useOdbcRules
-        ) { }
+        )
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
-        protected internal void ClearPropertyDescriptors() { }
+        protected internal void ClearPropertyDescriptors()
+        {
+        }
 
         public virtual bool ContainsKey(string keyword)
         {
@@ -6737,7 +7878,9 @@ namespace System.Data.Common
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "PropertyDescriptor's PropertyType cannot be statically discovered."
         )]
-        protected virtual void GetProperties(System.Collections.Hashtable propertyDescriptors) { }
+        protected virtual void GetProperties(System.Collections.Hashtable propertyDescriptors)
+        {
+        }
 
         public virtual bool Remove(string keyword)
         {
@@ -6749,9 +7892,13 @@ namespace System.Data.Common
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
-        void System.Collections.IDictionary.Add(object keyword, object? value) { }
+        void System.Collections.IDictionary.Add(object keyword, object? value)
+        {
+        }
 
         bool System.Collections.IDictionary.Contains(object keyword)
         {
@@ -6763,7 +7910,9 @@ namespace System.Data.Common
             throw null;
         }
 
-        void System.Collections.IDictionary.Remove(object keyword) { }
+        void System.Collections.IDictionary.Remove(object keyword)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -6879,9 +8028,13 @@ namespace System.Data.Common
     {
         public const string DefaultSourceTableName = "Table";
 
-        protected DbDataAdapter() { }
+        protected DbDataAdapter()
+        {
+        }
 
-        protected DbDataAdapter(System.Data.Common.DbDataAdapter adapter) { }
+        protected DbDataAdapter(System.Data.Common.DbDataAdapter adapter)
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -6890,12 +8043,16 @@ namespace System.Data.Common
         public System.Data.Common.DbCommand? DeleteCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected internal System.Data.CommandBehavior FillCommandBehavior
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6905,7 +8062,9 @@ namespace System.Data.Common
         public System.Data.Common.DbCommand? InsertCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6915,34 +8074,46 @@ namespace System.Data.Common
         public System.Data.Common.DbCommand? SelectCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.DeleteCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.InsertCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.SelectCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.UpdateCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(1)]
         public virtual int UpdateBatchSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -6952,7 +8123,9 @@ namespace System.Data.Common
         public System.Data.Common.DbCommand? UpdateCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         protected virtual int AddToBatch(System.Data.IDbCommand command)
@@ -6960,7 +8133,9 @@ namespace System.Data.Common
             throw null;
         }
 
-        protected virtual void ClearBatch() { }
+        protected virtual void ClearBatch()
+        {
+        }
 
         protected virtual System.Data.Common.RowUpdatedEventArgs CreateRowUpdatedEvent(
             System.Data.DataRow dataRow,
@@ -6982,7 +8157,9 @@ namespace System.Data.Common
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected virtual int ExecuteBatch()
         {
@@ -7137,18 +8314,26 @@ namespace System.Data.Common
             throw null;
         }
 
-        protected virtual void InitializeBatching() { }
+        protected virtual void InitializeBatching()
+        {
+        }
 
-        protected virtual void OnRowUpdated(System.Data.Common.RowUpdatedEventArgs value) { }
+        protected virtual void OnRowUpdated(System.Data.Common.RowUpdatedEventArgs value)
+        {
+        }
 
-        protected virtual void OnRowUpdating(System.Data.Common.RowUpdatingEventArgs value) { }
+        protected virtual void OnRowUpdating(System.Data.Common.RowUpdatingEventArgs value)
+        {
+        }
 
         object System.ICloneable.Clone()
         {
             throw null;
         }
 
-        protected virtual void TerminateBatching() { }
+        protected virtual void TerminateBatching()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "IDataReader's (built from adapter commands) schema table types cannot be statically analyzed."
@@ -7202,7 +8387,9 @@ namespace System.Data.Common
             System.IDisposable,
             System.IAsyncDisposable
     {
-        protected DbDataReader() { }
+        protected DbDataReader()
+        {
+        }
 
         public abstract int Depth { get; }
         public abstract int FieldCount { get; }
@@ -7216,7 +8403,9 @@ namespace System.Data.Common
             get { throw null; }
         }
 
-        public virtual void Close() { }
+        public virtual void Close()
+        {
+        }
 
         public virtual System.Threading.Tasks.Task CloseAsync()
         {
@@ -7226,9 +8415,13 @@ namespace System.Data.Common
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public virtual System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -7438,7 +8631,9 @@ namespace System.Data.Common
         : System.ComponentModel.ICustomTypeDescriptor,
             System.Data.IDataRecord
     {
-        protected DbDataRecord() { }
+        protected DbDataRecord()
+        {
+        }
 
         public abstract int FieldCount { get; }
         public abstract object this[int i] { get; }
@@ -7659,20 +8854,30 @@ namespace System.Data.Common
 
     public abstract partial class DbDataSourceEnumerator
     {
-        protected DbDataSourceEnumerator() { }
+        protected DbDataSourceEnumerator()
+        {
+        }
 
         public abstract System.Data.DataTable GetDataSources();
     }
 
     public partial class DbEnumerator : System.Collections.IEnumerator
     {
-        public DbEnumerator(System.Data.Common.DbDataReader reader) { }
+        public DbEnumerator(System.Data.Common.DbDataReader reader)
+        {
+        }
 
-        public DbEnumerator(System.Data.Common.DbDataReader reader, bool closeReader) { }
+        public DbEnumerator(System.Data.Common.DbDataReader reader, bool closeReader)
+        {
+        }
 
-        public DbEnumerator(System.Data.IDataReader reader) { }
+        public DbEnumerator(System.Data.IDataReader reader)
+        {
+        }
 
-        public DbEnumerator(System.Data.IDataReader reader, bool closeReader) { }
+        public DbEnumerator(System.Data.IDataReader reader, bool closeReader)
+        {
+        }
 
         public object Current
         {
@@ -7687,23 +8892,35 @@ namespace System.Data.Common
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     public abstract partial class DbException : System.Runtime.InteropServices.ExternalException
     {
-        protected DbException() { }
+        protected DbException()
+        {
+        }
 
         protected DbException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        protected DbException(string? message) { }
+        protected DbException(string? message)
+        {
+        }
 
-        protected DbException(string? message, System.Exception? innerException) { }
+        protected DbException(string? message, System.Exception? innerException)
+        {
+        }
 
-        protected DbException(string? message, int errorCode) { }
+        protected DbException(string? message, int errorCode)
+        {
+        }
 
         public virtual bool IsTransient
         {
@@ -7784,7 +9001,9 @@ namespace System.Data.Common
             System.Data.IDataParameter,
             System.Data.IDbDataParameter
     {
-        protected DbParameter() { }
+        protected DbParameter()
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -7814,12 +9033,16 @@ namespace System.Data.Common
         public virtual byte Precision
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual byte Scale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract int Size { get; set; }
 
@@ -7840,17 +9063,23 @@ namespace System.Data.Common
         public virtual System.Data.DataRowVersion SourceVersion
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         byte System.Data.IDbDataParameter.Precision
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         byte System.Data.IDbDataParameter.Scale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(null)]
@@ -7872,7 +9101,9 @@ namespace System.Data.Common
             System.Collections.IList,
             System.Data.IDataParameterCollection
     {
-        protected DbParameterCollection() { }
+        protected DbParameterCollection()
+        {
+        }
 
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -7918,12 +9149,16 @@ namespace System.Data.Common
         public System.Data.Common.DbParameter this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.Common.DbParameter this[string parameterName]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -7937,12 +9172,16 @@ namespace System.Data.Common
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         object System.Data.IDataParameterCollection.this[string parameterName]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         int System.Collections.IList.Add(object? value)
@@ -8037,7 +9276,9 @@ namespace System.Data.Common
         public static void RegisterFactory(
             string providerInvariantName,
             System.Data.Common.DbProviderFactory factory
-        ) { }
+        )
+        {
+        }
 
         public static void RegisterFactory(
             string providerInvariantName,
@@ -8045,7 +9286,9 @@ namespace System.Data.Common
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
             )]
                 string factoryTypeAssemblyQualifiedName
-        ) { }
+        )
+        {
+        }
 
         public static void RegisterFactory(
             string providerInvariantName,
@@ -8053,7 +9296,9 @@ namespace System.Data.Common
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
             )]
                 System.Type providerFactoryClass
-        ) { }
+        )
+        {
+        }
 
         public static bool TryGetFactory(
             string providerInvariantName,
@@ -8075,7 +9320,9 @@ namespace System.Data.Common
     )]
     public abstract partial class DbProviderFactory
     {
-        protected DbProviderFactory() { }
+        protected DbProviderFactory()
+        {
+        }
 
         public virtual bool CanCreateBatch
         {
@@ -8152,7 +9399,9 @@ namespace System.Data.Common
     )]
     public sealed partial class DbProviderSpecificTypePropertyAttribute : System.Attribute
     {
-        public DbProviderSpecificTypePropertyAttribute(bool isProviderSpecificTypeProperty) { }
+        public DbProviderSpecificTypePropertyAttribute(bool isProviderSpecificTypeProperty)
+        {
+        }
 
         public bool IsProviderSpecificTypeProperty
         {
@@ -8166,7 +9415,9 @@ namespace System.Data.Common
             System.IDisposable,
             System.IAsyncDisposable
     {
-        protected DbTransaction() { }
+        protected DbTransaction()
+        {
+        }
 
         public System.Data.Common.DbConnection? Connection
         {
@@ -8188,9 +9439,13 @@ namespace System.Data.Common
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public virtual System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -8280,7 +9535,9 @@ namespace System.Data.Common
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) { }
+        )
+        {
+        }
 
         public System.Data.IDbCommand? Command
         {
@@ -8289,7 +9546,9 @@ namespace System.Data.Common
         public System.Exception? Errors
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int RecordsAffected
         {
@@ -8310,16 +9569,22 @@ namespace System.Data.Common
         public System.Data.UpdateStatus Status
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.Common.DataTableMapping TableMapping
         {
             get { throw null; }
         }
 
-        public void CopyToRows(System.Data.DataRow[] array) { }
+        public void CopyToRows(System.Data.DataRow[] array)
+        {
+        }
 
-        public void CopyToRows(System.Data.DataRow[] array, int arrayIndex) { }
+        public void CopyToRows(System.Data.DataRow[] array, int arrayIndex)
+        {
+        }
     }
 
     public partial class RowUpdatingEventArgs : System.EventArgs
@@ -8329,22 +9594,30 @@ namespace System.Data.Common
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) { }
+        )
+        {
+        }
 
         protected virtual System.Data.IDbCommand? BaseCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.IDbCommand? Command
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Exception? Errors
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.DataRow Row
         {
@@ -8357,7 +9630,9 @@ namespace System.Data.Common
         public System.Data.UpdateStatus Status
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Data.Common.DataTableMapping TableMapping
         {
@@ -8424,11 +9699,17 @@ namespace System.Data.SqlTypes
 
     public sealed partial class SqlAlreadyFilledException : System.Data.SqlTypes.SqlTypeException
     {
-        public SqlAlreadyFilledException() { }
+        public SqlAlreadyFilledException()
+        {
+        }
 
-        public SqlAlreadyFilledException(string? message) { }
+        public SqlAlreadyFilledException(string? message)
+        {
+        }
 
-        public SqlAlreadyFilledException(string? message, System.Exception? e) { }
+        public SqlAlreadyFilledException(string? message, System.Exception? e)
+        {
+        }
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
@@ -8640,9 +9921,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlGuid ToSqlGuid()
         {
@@ -8985,9 +10270,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlByte ToSqlByte()
         {
@@ -9426,9 +10715,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBoolean ToSqlBoolean()
         {
@@ -9495,13 +10788,21 @@ namespace System.Data.SqlTypes
             System.Runtime.Serialization.ISerializable,
             System.Xml.Serialization.IXmlSerializable
     {
-        public SqlBytes() { }
+        public SqlBytes()
+        {
+        }
 
-        public SqlBytes(byte[]? buffer) { }
+        public SqlBytes(byte[]? buffer)
+        {
+        }
 
-        public SqlBytes(System.Data.SqlTypes.SqlBinary value) { }
+        public SqlBytes(System.Data.SqlTypes.SqlBinary value)
+        {
+        }
 
-        public SqlBytes(System.IO.Stream? s) { }
+        public SqlBytes(System.IO.Stream? s)
+        {
+        }
 
         public byte[]? Buffer
         {
@@ -9514,7 +10815,9 @@ namespace System.Data.SqlTypes
         public byte this[long offset]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long Length
         {
@@ -9535,7 +10838,9 @@ namespace System.Data.SqlTypes
         public System.IO.Stream Stream
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] Value
         {
@@ -9568,30 +10873,42 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        public void SetLength(long value) { }
+        public void SetLength(long value)
+        {
+        }
 
-        public void SetNull() { }
+        public void SetNull()
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
         {
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader r) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader r)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBinary ToSqlBinary()
         {
             throw null;
         }
 
-        public void Write(long offset, byte[] buffer, int offsetInBuffer, int count) { }
+        public void Write(long offset, byte[] buffer, int offsetInBuffer, int count)
+        {
+        }
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
@@ -9600,11 +10917,17 @@ namespace System.Data.SqlTypes
             System.Runtime.Serialization.ISerializable,
             System.Xml.Serialization.IXmlSerializable
     {
-        public SqlChars() { }
+        public SqlChars()
+        {
+        }
 
-        public SqlChars(char[]? buffer) { }
+        public SqlChars(char[]? buffer)
+        {
+        }
 
-        public SqlChars(System.Data.SqlTypes.SqlString value) { }
+        public SqlChars(System.Data.SqlTypes.SqlString value)
+        {
+        }
 
         public char[]? Buffer
         {
@@ -9617,7 +10940,9 @@ namespace System.Data.SqlTypes
         public char this[long offset]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long Length
         {
@@ -9666,30 +10991,42 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        public void SetLength(long value) { }
+        public void SetLength(long value)
+        {
+        }
 
-        public void SetNull() { }
+        public void SetNull()
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
         {
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader r) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader r)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlString ToSqlString()
         {
             throw null;
         }
 
-        public void Write(long offset, char[] buffer, int offsetInBuffer, int count) { }
+        public void Write(long offset, char[] buffer, int offsetInBuffer, int count)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -9971,9 +11308,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlString ToSqlString()
         {
@@ -10413,9 +11754,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public double ToDouble()
         {
@@ -10796,9 +12141,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBoolean ToSqlBoolean()
         {
@@ -11067,9 +12416,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public byte[]? ToByteArray()
         {
@@ -11475,9 +12828,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBoolean ToSqlBoolean()
         {
@@ -11921,9 +13278,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBoolean ToSqlBoolean()
         {
@@ -12367,9 +13728,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBoolean ToSqlBoolean()
         {
@@ -12774,9 +14139,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public decimal ToDecimal()
         {
@@ -12851,20 +14220,32 @@ namespace System.Data.SqlTypes
 
     public sealed partial class SqlNotFilledException : System.Data.SqlTypes.SqlTypeException
     {
-        public SqlNotFilledException() { }
+        public SqlNotFilledException()
+        {
+        }
 
-        public SqlNotFilledException(string? message) { }
+        public SqlNotFilledException(string? message)
+        {
+        }
 
-        public SqlNotFilledException(string? message, System.Exception? e) { }
+        public SqlNotFilledException(string? message, System.Exception? e)
+        {
+        }
     }
 
     public sealed partial class SqlNullValueException : System.Data.SqlTypes.SqlTypeException
     {
-        public SqlNullValueException() { }
+        public SqlNullValueException()
+        {
+        }
 
-        public SqlNullValueException(string? message) { }
+        public SqlNullValueException(string? message)
+        {
+        }
 
-        public SqlNullValueException(string? message, System.Exception? e) { }
+        public SqlNullValueException(string? message, System.Exception? e)
+        {
+        }
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
@@ -13181,9 +14562,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBoolean ToSqlBoolean()
         {
@@ -13607,9 +14992,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
 
         public System.Data.SqlTypes.SqlBoolean ToSqlBoolean()
         {
@@ -13674,25 +15063,39 @@ namespace System.Data.SqlTypes
 
     public sealed partial class SqlTruncateException : System.Data.SqlTypes.SqlTypeException
     {
-        public SqlTruncateException() { }
+        public SqlTruncateException()
+        {
+        }
 
-        public SqlTruncateException(string? message) { }
+        public SqlTruncateException(string? message)
+        {
+        }
 
-        public SqlTruncateException(string? message, System.Exception? e) { }
+        public SqlTruncateException(string? message, System.Exception? e)
+        {
+        }
     }
 
     public partial class SqlTypeException : System.SystemException
     {
-        public SqlTypeException() { }
+        public SqlTypeException()
+        {
+        }
 
         protected SqlTypeException(
             System.Runtime.Serialization.SerializationInfo si,
             System.Runtime.Serialization.StreamingContext sc
-        ) { }
+        )
+        {
+        }
 
-        public SqlTypeException(string? message) { }
+        public SqlTypeException(string? message)
+        {
+        }
 
-        public SqlTypeException(string? message, System.Exception? e) { }
+        public SqlTypeException(string? message, System.Exception? e)
+        {
+        }
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
@@ -13700,11 +15103,17 @@ namespace System.Data.SqlTypes
         : System.Data.SqlTypes.INullable,
             System.Xml.Serialization.IXmlSerializable
     {
-        public SqlXml() { }
+        public SqlXml()
+        {
+        }
 
-        public SqlXml(System.IO.Stream? value) { }
+        public SqlXml(System.IO.Stream? value)
+        {
+        }
 
-        public SqlXml(System.Xml.XmlReader? value) { }
+        public SqlXml(System.Xml.XmlReader? value)
+        {
+        }
 
         public bool IsNull
         {
@@ -13736,9 +15145,13 @@ namespace System.Data.SqlTypes
             throw null;
         }
 
-        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader r) { }
+        void System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader r)
+        {
+        }
 
-        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer) { }
+        void System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+        {
+        }
     }
 
     public enum StorageState
@@ -13757,12 +15170,16 @@ namespace System.Xml
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "XmlDataDocument is used for serialization and deserialization. Members from serialized types may be trimmed if not referenced directly."
         )]
-        public XmlDataDocument() { }
+        public XmlDataDocument()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "XmlDataDocument is used for serialization and deserialization. Members from serialized types may be trimmed if not referenced directly."
         )]
-        public XmlDataDocument(System.Data.DataSet dataset) { }
+        public XmlDataDocument(System.Data.DataSet dataset)
+        {
+        }
 
         public System.Data.DataSet DataSet
         {
@@ -13813,12 +15230,20 @@ namespace System.Xml
             throw null;
         }
 
-        public override void Load(System.IO.Stream inStream) { }
+        public override void Load(System.IO.Stream inStream)
+        {
+        }
 
-        public override void Load(System.IO.TextReader txtReader) { }
+        public override void Load(System.IO.TextReader txtReader)
+        {
+        }
 
-        public override void Load(string filename) { }
+        public override void Load(string filename)
+        {
+        }
 
-        public override void Load(System.Xml.XmlReader reader) { }
+        public override void Load(System.Xml.XmlReader reader)
+        {
+        }
     }
 }

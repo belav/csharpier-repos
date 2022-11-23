@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             DefinitionMap definitionMap,
             IEnumerable<SemanticEdit> edits,
             Func<ISymbol, bool> isAddedSymbol
-        ) : base(definitionMap, edits, isAddedSymbol) { }
+        ) : base(definitionMap, edits, isAddedSymbol)
+        {
+        }
 
         protected override ISymbolInternal? GetISymbolInternalOrNull(ISymbol symbol)
         {

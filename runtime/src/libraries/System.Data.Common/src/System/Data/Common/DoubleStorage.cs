@@ -14,7 +14,9 @@ namespace System.Data.Common
         private double[] _values = default!; // Late-initialized
 
         internal DoubleStorage(DataColumn column)
-            : base(column, typeof(double), defaultValue, StorageType.Double) { }
+            : base(column, typeof(double), defaultValue, StorageType.Double)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

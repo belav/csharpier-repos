@@ -84,7 +84,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 dnsName,
                 GetApplicationPartitionType(context),
                 directoryEntryMgr
-            ) { }
+            )
+        {
+        }
         #endregion constructors
 
         #region IDisposable

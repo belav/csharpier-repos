@@ -212,7 +212,9 @@ namespace System.IO.Ports.Tests
 
         private class PinChangedEventHandler : TestEventHandler<SerialPinChange>
         {
-            public PinChangedEventHandler(SerialPort com) : base(com, false, false) { }
+            public PinChangedEventHandler(SerialPort com) : base(com, false, false)
+            {
+            }
 
             public void HandleEvent(object source, SerialPinChangedEventArgs e)
             {

@@ -249,7 +249,8 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         public CaptureData(string value, int index, int length) : this(value, index, length, true)
-        { }
+        {
+        }
 
         public CaptureData(string value, int index, int length, CaptureData[] captures)
             : this(value, index, length, false)

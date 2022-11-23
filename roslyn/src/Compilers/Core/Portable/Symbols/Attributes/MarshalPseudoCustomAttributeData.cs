@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis
 
         #region Initialization
 
-        public MarshalPseudoCustomAttributeData() { }
+        public MarshalPseudoCustomAttributeData()
+        {
+        }
 
         internal void SetMarshalAsCustom(object typeSymbolOrName, string cookie)
         {

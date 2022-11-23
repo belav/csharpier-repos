@@ -20,7 +20,9 @@ namespace System.Data.ProviderBase
             {
                 _bufferLength = initialSize;
 
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     base.handle = SafeNativeMethods.LocalAlloc((IntPtr)initialSize);
@@ -33,7 +35,9 @@ namespace System.Data.ProviderBase
         }
 
         protected DbBuffer(IntPtr invalidHandleValue, bool ownsHandle)
-            : base(invalidHandleValue, ownsHandle) { }
+            : base(invalidHandleValue, ownsHandle)
+        {
+        }
 
         private static int BaseOffset
         {

@@ -20,5 +20,7 @@ internal class VSTypeScriptRequestDispatcherFactory : RequestDispatcherFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptRequestDispatcherFactory() { }
+    public VSTypeScriptRequestDispatcherFactory()
+    {
+    }
 }

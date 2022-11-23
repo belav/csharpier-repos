@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 includePrivateMembers,
                 syntaxNode,
                 rebuildData: null
-            ) { }
+            )
+        {
+        }
 
         public EmitContext(
             CommonPEModuleBuilder module,

@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public ConvertBetweenRegularAndVerbatimStringCodeRefactoringProvider() { }
+        public ConvertBetweenRegularAndVerbatimStringCodeRefactoringProvider()
+        {
+        }
 
         protected override bool IsInterpolation { get; } = false;
 

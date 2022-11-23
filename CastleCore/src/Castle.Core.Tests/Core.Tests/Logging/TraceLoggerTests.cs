@@ -120,7 +120,9 @@ namespace Castle.Core.Logging.Tests
         /// </summary>
         public class Listener : TraceListener
         {
-            public Listener() { }
+            public Listener()
+            {
+            }
 
             public Listener(string initializationData)
             {

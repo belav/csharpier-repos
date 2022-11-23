@@ -32,6 +32,8 @@ namespace System.Runtime.InteropServices
         }
 
         protected SafeArrayRankMismatchException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

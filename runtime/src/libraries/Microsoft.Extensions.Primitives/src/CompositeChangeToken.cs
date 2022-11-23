@@ -140,7 +140,9 @@ namespace Microsoft.Extensions.Primitives
                 {
                     compositeChangeTokenState._cancellationTokenSource.Cancel();
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             List<IDisposable>? disposables = compositeChangeTokenState._disposables;

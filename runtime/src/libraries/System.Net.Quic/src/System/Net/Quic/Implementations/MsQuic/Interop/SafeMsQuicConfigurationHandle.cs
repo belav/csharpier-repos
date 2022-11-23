@@ -20,7 +20,9 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                 handle,
                 ptr => MsQuicApi.Api.ApiTable->ConfigurationClose((QUIC_HANDLE*)ptr),
                 SafeHandleType.Configuration
-            ) { }
+            )
+        {
+        }
 
         // TODO: consider moving the static code from here to keep all the handle classes small and simple.
         public static SafeMsQuicConfigurationHandle Create(QuicClientConnectionOptions options)
@@ -57,7 +59,9 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                                 break;
                             }
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
             }

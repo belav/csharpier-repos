@@ -255,39 +255,69 @@ namespace System.Tests
         }
     }
 
-    public class ClassWithNoInterfaces { }
+    public class ClassWithNoInterfaces
+    {
+    }
 
-    public class ClassWithInterfaces : Interface1, Interface2, Interface3 { }
+    public class ClassWithInterfaces : Interface1, Interface2, Interface3
+    {
+    }
 
     public class ClassWithNamespacedInterfaces
         : Inner.Interface1,
             Inner.Interface2,
-            Inner.Interface3 { }
+            Inner.Interface3
+    {
+    }
 
-    public class ClassWithMixedCaseInterfaces : MixedInterface, mixedInterface { }
+    public class ClassWithMixedCaseInterfaces : MixedInterface, mixedInterface
+    {
+    }
 
-    public interface MixedInterface { }
+    public interface MixedInterface
+    {
+    }
 
-    public interface mixedInterface { }
+    public interface mixedInterface
+    {
+    }
 
-    public class ClassWithTwoSameNameInterfaces : Interface1, Inner.Interface1 { }
+    public class ClassWithTwoSameNameInterfaces : Interface1, Inner.Interface1
+    {
+    }
 
-    public class GenericClassWithNoConstraints<T> { }
+    public class GenericClassWithNoConstraints<T>
+    {
+    }
 
-    public class GenericClassWithConstraints<T> where T : ClassWithInterfaces, Interface1 { }
+    public class GenericClassWithConstraints<T> where T : ClassWithInterfaces, Interface1
+    {
+    }
 
     namespace Inner
     {
-        public interface Interface1 { }
+        public interface Interface1
+        {
+        }
 
-        public interface Interface2 { }
+        public interface Interface2
+        {
+        }
 
-        public interface Interface3 { }
+        public interface Interface3
+        {
+        }
     }
 }
 
-public interface Interface1 { }
+public interface Interface1
+{
+}
 
-public interface Interface2 { }
+public interface Interface2
+{
+}
 
-public interface Interface3 { }
+public interface Interface3
+{
+}

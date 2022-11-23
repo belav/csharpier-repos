@@ -40,7 +40,9 @@ namespace System.Net.Http.Formatting
         /// Initializes a new instance of the <see cref="BsonMediaTypeFormatter"/> class.
         /// </summary>
         /// <param name="formatter">The <see cref="BsonMediaTypeFormatter"/> instance to copy settings from.</param>
-        protected BsonMediaTypeFormatter(BsonMediaTypeFormatter formatter) : base(formatter) { }
+        protected BsonMediaTypeFormatter(BsonMediaTypeFormatter formatter) : base(formatter)
+        {
+        }
 
         /// <summary>
         /// Gets the default media type for Json, namely "application/bson".

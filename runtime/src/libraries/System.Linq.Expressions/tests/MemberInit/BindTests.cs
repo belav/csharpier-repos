@@ -29,7 +29,9 @@ namespace System.Linq.Expressions.Tests
         {
             public T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -395,7 +397,8 @@ namespace System.Linq.Expressions.Tests
 #pragma warning disable 618
                 : base(type, member)
 #pragma warning restore 618
-            { }
+            {
+            }
 
             public override string ToString() => ""; // Called internal to test framework and default would throw.
         }

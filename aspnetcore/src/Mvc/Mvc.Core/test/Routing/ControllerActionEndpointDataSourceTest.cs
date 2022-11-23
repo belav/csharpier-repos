@@ -635,7 +635,9 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
         );
     }
 
-    private class GroupMetadata { }
+    private class GroupMetadata
+    {
+    }
 
     private static bool SupportsLinkGeneration(RouteEndpoint endpoint)
     {

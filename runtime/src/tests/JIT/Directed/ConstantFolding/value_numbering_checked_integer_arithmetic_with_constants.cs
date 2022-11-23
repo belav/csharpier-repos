@@ -29,7 +29,9 @@ public class ValueNumberingCheckedIntegerArithmeticWithConstants
     private static bool BreakUpFlow() => false;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void EvalArg<T>(T arg) { }
+    private static void EvalArg<T>(T arg)
+    {
+    }
 
     private static void TestInt32()
     {

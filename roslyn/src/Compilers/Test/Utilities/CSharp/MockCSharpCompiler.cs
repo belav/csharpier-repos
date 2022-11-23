@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
                 analyzers,
                 generators,
                 loader
-            ) { }
+            )
+        {
+        }
 
         public MockCSharpCompiler(
             string responseFile,

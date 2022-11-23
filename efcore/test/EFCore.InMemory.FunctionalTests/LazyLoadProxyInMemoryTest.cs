@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class LazyLoadProxyInMemoryTest
     : LazyLoadProxyTestBase<LazyLoadProxyInMemoryTest.LoadInMemoryFixture>
 {
-    public LazyLoadProxyInMemoryTest(LoadInMemoryFixture fixture) : base(fixture) { }
+    public LazyLoadProxyInMemoryTest(LoadInMemoryFixture fixture) : base(fixture)
+    {
+    }
 
     public class LoadInMemoryFixture : LoadFixtureBase
     {

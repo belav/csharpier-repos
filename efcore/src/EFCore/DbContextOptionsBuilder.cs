@@ -29,7 +29,9 @@ public class DbContextOptionsBuilder : IDbContextOptionsBuilderInfrastructure
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder" /> class with no options set.
     /// </summary>
-    public DbContextOptionsBuilder() : this(new DbContextOptions<DbContext>()) { }
+    public DbContextOptionsBuilder() : this(new DbContextOptions<DbContext>())
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder" /> class to further configure

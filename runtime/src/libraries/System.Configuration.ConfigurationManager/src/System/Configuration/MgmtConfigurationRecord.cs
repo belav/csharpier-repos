@@ -32,7 +32,9 @@ namespace System.Configuration
         private HybridDictionary _streamInfoUpdates;
 
         // don't allow instantiation except by Create
-        private MgmtConfigurationRecord() { }
+        private MgmtConfigurationRecord()
+        {
+        }
 
         // The parent config record cast to this type
         private MgmtConfigurationRecord MgmtParent => (MgmtConfigurationRecord)_parent;
@@ -3093,7 +3095,9 @@ namespace System.Configuration
 
                     // Copy the remainder of the file, the closing </configuration> node plus any whitespace
                     // and comments
-                    while (xmlUtil.CopyXmlNode(utilWriter)) { }
+                    while (xmlUtil.CopyXmlNode(utilWriter))
+                    {
+                    }
                 }
             }
         }
@@ -4042,7 +4046,9 @@ namespace System.Configuration
                             reader.Read();
 
                         // Copy remainder of file
-                        while (xmlUtil.CopyXmlNode(utilWriter)) { }
+                        while (xmlUtil.CopyXmlNode(utilWriter))
+                        {
+                        }
                     }
                 }
             }

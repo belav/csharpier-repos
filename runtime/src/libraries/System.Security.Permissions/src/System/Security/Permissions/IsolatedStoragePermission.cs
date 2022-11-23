@@ -12,7 +12,9 @@ namespace System.Security.Permissions
 #endif
     public abstract class IsolatedStoragePermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        protected IsolatedStoragePermission(PermissionState state) { }
+        protected IsolatedStoragePermission(PermissionState state)
+        {
+        }
 
         public long UserQuota { get; set; }
         public IsolatedStorageContainment UsageAllowed { get; set; }
@@ -27,6 +29,8 @@ namespace System.Security.Permissions
             return default(SecurityElement);
         }
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
     }
 }

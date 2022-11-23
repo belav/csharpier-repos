@@ -85,7 +85,9 @@ namespace System.Net.Test.Common
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                }
                 ;
 
                 try
@@ -103,7 +105,9 @@ namespace System.Net.Test.Common
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                }
                 ;
             }
 

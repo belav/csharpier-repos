@@ -1358,13 +1358,17 @@ class TestHFAandHVA
             var a = ReturnVectorT2<Vector4>(new Vector4(1));
             Debug.Assert(false, "unreachable");
         }
-        catch (System.NotSupportedException) { }
+        catch (System.NotSupportedException)
+        {
+        }
         try
         {
             var a = ReturnVectorT2<VectorTWrapperWrapper<int>>(new VectorTWrapperWrapper<int>());
             Debug.Assert(false, "unreachable");
         }
-        catch (System.NotSupportedException) { }
+        catch (System.NotSupportedException)
+        {
+        }
         ReturnVectorInt2<float>(new Vector<float>(1), new Vector<float>(2));
         ReturnVectorInt2<int>(new Vector<int>(1), new Vector<int>(2));
 

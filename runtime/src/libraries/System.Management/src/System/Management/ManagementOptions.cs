@@ -229,10 +229,14 @@ namespace System.Management
             }
         }
 
-        internal ManagementOptions() : this(null, InfiniteTimeout) { }
+        internal ManagementOptions() : this(null, InfiniteTimeout)
+        {
+        }
 
         internal ManagementOptions(ManagementNamedValueCollection context, TimeSpan timeout)
-            : this(context, timeout, 0) { }
+            : this(context, timeout, 0)
+        {
+        }
 
         internal ManagementOptions(
             ManagementNamedValueCollection context,
@@ -589,7 +593,9 @@ namespace System.Management
         /// for what the default values are). This is the default constructor. </para>
         /// </summary>
         public EnumerationOptions()
-            : this(null, InfiniteTimeout, 1, true, true, false, false, false, false, false) { }
+            : this(null, InfiniteTimeout, 1, true, true, false, false, false, false, false)
+        {
+        }
 
         //Constructor that specifies flags as individual values - we need to set the flags accordingly !
         /// <summary>
@@ -770,7 +776,9 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.EventWatcherOptions'/> class for event watching, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public EventWatcherOptions() : this(null, InfiniteTimeout, 1) { }
+        public EventWatcherOptions() : this(null, InfiniteTimeout, 1)
+        {
+        }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventWatcherOptions'/> class with the given
@@ -932,7 +940,9 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.ObjectGetOptions'/> class for getting a WMI object, using
         ///    default values. This is the default constructor.</para>
         /// </summary>
-        public ObjectGetOptions() : this(null, InfiniteTimeout, false) { }
+        public ObjectGetOptions() : this(null, InfiniteTimeout, false)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ObjectGetOptions'/> class for getting a WMI object, using the
@@ -940,7 +950,9 @@ namespace System.Management
         /// </summary>
         /// <param name='context'>A provider-specific, named-value pairs context object to be passed through to the provider.</param>
         public ObjectGetOptions(ManagementNamedValueCollection context)
-            : this(context, InfiniteTimeout, false) { }
+            : this(context, InfiniteTimeout, false)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ObjectGetOptions'/> class for getting a WMI object,
@@ -1110,7 +1122,9 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.PutOptions'/> class for put operations, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public PutOptions() : this(null, InfiniteTimeout, false, PutType.UpdateOrCreate) { }
+        public PutOptions() : this(null, InfiniteTimeout, false, PutType.UpdateOrCreate)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.PutOptions'/> class for committing a WMI object, using the
@@ -1118,7 +1132,9 @@ namespace System.Management
         /// </summary>
         /// <param name='context'>A provider-specific, named-value pairs context object to be passed through to the provider.</param>
         public PutOptions(ManagementNamedValueCollection context)
-            : this(context, InfiniteTimeout, false, PutType.UpdateOrCreate) { }
+            : this(context, InfiniteTimeout, false, PutType.UpdateOrCreate)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.PutOptions'/> class for committing a WMI object, using
@@ -1216,7 +1232,9 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.DeleteOptions'/> class for the delete operation, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public DeleteOptions() : base() { }
+        public DeleteOptions() : base()
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.DeleteOptions'/> class for a delete operation, using
@@ -1225,7 +1243,9 @@ namespace System.Management
         /// <param name='context'>A provider-specific, named-value pairs object to be passed through to the provider. </param>
         /// <param name='timeout'>The length of time to let the operation perform before it times out. The default value is <see cref='System.Management.ManagementOptions.InfiniteTimeout'/> . Setting this parameter will invoke the operation semisynchronously.</param>
         public DeleteOptions(ManagementNamedValueCollection context, TimeSpan timeout)
-            : base(context, timeout) { }
+            : base(context, timeout)
+        {
+        }
 
         /// <summary>
         ///    <para> Returns a copy of the object.</para>
@@ -1304,7 +1324,9 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.InvokeMethodOptions'/> class for the <see cref='System.Management.ManagementObject.InvokeMethod(string, ManagementBaseObject, InvokeMethodOptions) '/> operation, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public InvokeMethodOptions() : base() { }
+        public InvokeMethodOptions() : base()
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.InvokeMethodOptions'/> class for an invoke operation using
@@ -1313,7 +1335,9 @@ namespace System.Management
         /// <param name=' context'>A provider-specific, named-value pairs object to be passed through to the provider. </param>
         /// <param name='timeout'>The length of time to let the operation perform before it times out. The default value is <see cref='System.Management.ManagementOptions.InfiniteTimeout'/> . Setting this parameter will invoke the operation semisynchronously.</param>
         public InvokeMethodOptions(ManagementNamedValueCollection context, TimeSpan timeout)
-            : base(context, timeout) { }
+            : base(context, timeout)
+        {
+        }
 
         /// <summary>
         ///    <para> Returns a copy of the object.</para>
@@ -1692,7 +1716,9 @@ namespace System.Management
                 DEFAULTENABLEPRIVILEGES,
                 null,
                 InfiniteTimeout
-            ) { }
+            )
+        {
+        }
 
         //parameterized
         /// <summary>
@@ -1852,10 +1878,14 @@ namespace System.Management
             ManagementNamedValueCollection context,
             TimeSpan timeout,
             int flags
-        ) : base(context, timeout, flags) { }
+        ) : base(context, timeout, flags)
+        {
+        }
 
         internal ConnectionOptions(ManagementNamedValueCollection context)
-            : base(context, InfiniteTimeout) { }
+            : base(context, InfiniteTimeout)
+        {
+        }
 
         internal static ConnectionOptions _Clone(ConnectionOptions options)
         {

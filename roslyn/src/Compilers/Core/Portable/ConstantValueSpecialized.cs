@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueBad : ConstantValue
         {
-            private ConstantValueBad() { }
+            private ConstantValueBad()
+            {
+            }
 
             public static readonly ConstantValueBad Instance = new ConstantValueBad();
 
@@ -61,7 +63,9 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueNull : ConstantValue
         {
-            private ConstantValueNull() { }
+            private ConstantValueNull()
+            {
+            }
 
             public static readonly ConstantValueNull Instance = new ConstantValueNull();
             public static readonly ConstantValueNull Uninitialized = new ConstantValueNull();
@@ -330,7 +334,9 @@ namespace Microsoft.CodeAnalysis
             );
 
             protected ConstantValueDefault(ConstantValueTypeDiscriminator discriminator)
-                : base(discriminator) { }
+                : base(discriminator)
+            {
+            }
 
             public override byte ByteValue
             {
@@ -391,7 +397,9 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDecimalZero : ConstantValueDefault
         {
-            internal ConstantValueDecimalZero() : base(ConstantValueTypeDiscriminator.Decimal) { }
+            internal ConstantValueDecimalZero() : base(ConstantValueTypeDiscriminator.Decimal)
+            {
+            }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -411,7 +419,9 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDoubleZero : ConstantValueDefault
         {
-            internal ConstantValueDoubleZero() : base(ConstantValueTypeDiscriminator.Double) { }
+            internal ConstantValueDoubleZero() : base(ConstantValueTypeDiscriminator.Double)
+            {
+            }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -431,7 +441,9 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueSingleZero : ConstantValueDefault
         {
-            internal ConstantValueSingleZero() : base(ConstantValueTypeDiscriminator.Single) { }
+            internal ConstantValueSingleZero() : base(ConstantValueTypeDiscriminator.Single)
+            {
+            }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -493,7 +505,9 @@ namespace Microsoft.CodeAnalysis
             );
 
             protected ConstantValueOne(ConstantValueTypeDiscriminator discriminator)
-                : base(discriminator) { }
+                : base(discriminator)
+            {
+            }
 
             public override byte ByteValue
             {
@@ -539,7 +553,9 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDecimalOne : ConstantValueOne
         {
-            internal ConstantValueDecimalOne() : base(ConstantValueTypeDiscriminator.Decimal) { }
+            internal ConstantValueDecimalOne() : base(ConstantValueTypeDiscriminator.Decimal)
+            {
+            }
 
             public override bool Equals(ConstantValue? other)
             {

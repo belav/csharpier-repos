@@ -511,7 +511,12 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
                         {
                             services
                                 .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
-                                .AddCookie(TestExtensions.CookieAuthenticationScheme, o => { })
+                                .AddCookie(
+                                    TestExtensions.CookieAuthenticationScheme,
+                                    o =>
+                                    {
+                                    }
+                                )
                                 .AddMicrosoftAccount(configureOptions);
                         })
             )

@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal static readonly CSharpDeterministicKeyBuilder Instance = new();
 
-        private CSharpDeterministicKeyBuilder() { }
+        private CSharpDeterministicKeyBuilder()
+        {
+        }
 
         protected override void WriteCompilationOptionsCore(
             JsonWriter writer,

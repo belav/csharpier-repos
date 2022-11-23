@@ -37,11 +37,17 @@ namespace System.Collections.Specialized
         private const string ReadOnlyName = "ReadOnly"; // Do not rename (binary serialization)
         private const string InitCapacityName = "InitialCapacity"; // Do not rename (binary serialization)
 
-        public OrderedDictionary() : this(0) { }
+        public OrderedDictionary() : this(0)
+        {
+        }
 
-        public OrderedDictionary(int capacity) : this(capacity, null) { }
+        public OrderedDictionary(int capacity) : this(capacity, null)
+        {
+        }
 
-        public OrderedDictionary(IEqualityComparer? comparer) : this(0, comparer) { }
+        public OrderedDictionary(IEqualityComparer? comparer) : this(0, comparer)
+        {
+        }
 
         public OrderedDictionary(int capacity, IEqualityComparer? comparer)
         {

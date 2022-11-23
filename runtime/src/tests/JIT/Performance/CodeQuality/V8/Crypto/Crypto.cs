@@ -158,9 +158,13 @@ namespace V8.Crypto
 
     internal class ListX<T> : List<T>
     {
-        public ListX() : base() { }
+        public ListX() : base()
+        {
+        }
 
-        public ListX(int cap) : base(cap) { }
+        public ListX(int cap) : base(cap)
+        {
+        }
 
         public new T this[int index]
         {
@@ -1798,7 +1802,9 @@ namespace V8.Crypto
 
         private class NullReducer : Reducer
         {
-            public NullReducer() { }
+            public NullReducer()
+            {
+            }
 
             public override BigInteger convert(BigInteger x)
             {

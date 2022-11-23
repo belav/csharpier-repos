@@ -57,7 +57,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 editorAdaptersFactoryService,
                 argumentProviders,
                 editorOptionsService
-            ) { }
+            )
+        {
+        }
 
         /// <returns>The tracking span of the inserted "/**/" if there is an $end$ location, null
         /// otherwise.</returns>

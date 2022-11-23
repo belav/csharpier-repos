@@ -12,7 +12,9 @@ public class SeedingInMemoryTest : SeedingTestBase
 
     protected class SeedingInMemoryContext : SeedingContext
     {
-        public SeedingInMemoryContext(string testId) : base(testId) { }
+        public SeedingInMemoryContext(string testId) : base(testId)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseInMemoryDatabase($"Seeds{TestId}");

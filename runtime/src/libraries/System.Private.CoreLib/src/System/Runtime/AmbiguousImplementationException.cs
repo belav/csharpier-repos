@@ -29,6 +29,8 @@ namespace System.Runtime
         }
 
         private AmbiguousImplementationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

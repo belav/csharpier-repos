@@ -30,7 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ChangeSignature
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpChangeSignatureViewModelFactoryService() { }
+        public CSharpChangeSignatureViewModelFactoryService()
+        {
+        }
 
         public override SymbolDisplayPart[] GeneratePreviewDisplayParts(
             AddedParameterViewModel addedParameterViewModel

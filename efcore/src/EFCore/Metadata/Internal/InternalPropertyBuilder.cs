@@ -22,7 +22,9 @@ public class InternalPropertyBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InternalPropertyBuilder(Property property, InternalModelBuilder modelBuilder)
-        : base(property, modelBuilder) { }
+        : base(property, modelBuilder)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

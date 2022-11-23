@@ -21,7 +21,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             return _logger;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private class TestLogger : ILogger
         {
@@ -53,7 +55,9 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             private class Scope : IDisposable
             {
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
             }
         }
     }

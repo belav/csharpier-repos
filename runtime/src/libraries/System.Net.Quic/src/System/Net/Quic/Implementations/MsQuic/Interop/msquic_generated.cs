@@ -11,7 +11,9 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Quic
 {
-    internal partial struct QUIC_HANDLE { }
+    internal partial struct QUIC_HANDLE
+    {
+    }
 
     internal enum QUIC_EXECUTION_PROFILE
     {

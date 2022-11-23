@@ -166,8 +166,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
             b.Post(1);
             b.Complete();
             await b.Completion;
-            using (b.LinkTo(new ActionBlock<int>(i => { })))
-            using (b.LinkTo(new ActionBlock<int>(i => { })))
+            using (
+                b.LinkTo(
+                    new ActionBlock<int>(i =>
+                    {
+                    })
+                )
+            )
+            using (
+                b.LinkTo(
+                    new ActionBlock<int>(i =>
+                    {
+                    })
+                )
+            )
             {
                 Assert.False(b.Post(2));
             }
@@ -177,7 +189,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestLinkingToCompleted()
         {
             var b = new BroadcastBlock<int>(i => i * 2);
-            var ab = new ActionBlock<int>(i => { });
+            var ab = new ActionBlock<int>(i =>
+            {
+            });
             b.LinkTo(ab);
             ab.Complete();
             Assert.True(b.Post(1));
@@ -295,7 +309,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 null,
                 new DataflowBlockOptions { BoundedCapacity = 1 }
             );
-            var ab = new ActionBlock<int>(i => { });
+            var ab = new ActionBlock<int>(i =>
+            {
+            });
             bb.LinkTo(ab, new DataflowLinkOptions { PropagateCompletion = true });
 
             Task<bool>[] sends = Enumerable.Range(0, 40).Select(i => bb.SendAsync(i)).ToArray();

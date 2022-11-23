@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Syntax
                 InternalSyntax.SyntaxList green,
                 SyntaxNode? parent,
                 int position
-            ) : base(green, parent, position) { }
+            ) : base(green, parent, position)
+            {
+            }
 
             internal override SyntaxNode? GetNodeSlot(int index)
             {

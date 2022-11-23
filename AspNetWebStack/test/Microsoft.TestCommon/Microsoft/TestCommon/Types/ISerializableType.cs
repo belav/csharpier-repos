@@ -13,7 +13,9 @@ namespace Microsoft.TestCommon.Types
         private int id;
         private string name;
 
-        public ISerializableType() { }
+        public ISerializableType()
+        {
+        }
 
         public ISerializableType(int id, string name)
         {

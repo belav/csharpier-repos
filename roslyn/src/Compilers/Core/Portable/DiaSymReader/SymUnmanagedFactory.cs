@@ -133,7 +133,9 @@ namespace Microsoft.DiaSymReader
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return null;
         });

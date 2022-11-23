@@ -10,7 +10,9 @@ class T
     {
         for (int i = 0; i < count; ++i)
         {
-            lock (mutex) { }
+            lock (mutex)
+            {
+            }
         }
     }
 

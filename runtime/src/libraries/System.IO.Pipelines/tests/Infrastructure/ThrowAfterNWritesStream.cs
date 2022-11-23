@@ -18,7 +18,9 @@ namespace System.IO.Pipelines.Tests
             _maxWrites = maxWrites;
         }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
         public override Task WriteAsync(
             byte[] buffer,

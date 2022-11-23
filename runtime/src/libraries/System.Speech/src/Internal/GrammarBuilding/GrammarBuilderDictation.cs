@@ -9,7 +9,9 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal GrammarBuilderDictation() : this(null) { }
+        internal GrammarBuilderDictation() : this(null)
+        {
+        }
 
         internal GrammarBuilderDictation(string category)
         {

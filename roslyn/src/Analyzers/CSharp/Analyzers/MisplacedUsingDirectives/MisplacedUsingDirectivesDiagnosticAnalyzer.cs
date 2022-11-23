@@ -71,7 +71,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
                         s_insideDiagnosticDescriptor,
                         CSharpCodeStyleOptions.PreferredUsingDirectivePlacement
                     )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;

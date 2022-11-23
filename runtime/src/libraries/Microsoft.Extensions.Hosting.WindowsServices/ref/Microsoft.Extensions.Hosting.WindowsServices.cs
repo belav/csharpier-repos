@@ -41,12 +41,16 @@ namespace Microsoft.Extensions.Hosting
 
     public partial class WindowsServiceLifetimeOptions
     {
-        public WindowsServiceLifetimeOptions() { }
+        public WindowsServiceLifetimeOptions()
+        {
+        }
 
         public string ServiceName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }
@@ -72,7 +76,9 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> optionsAccessor
-        ) { }
+        )
+        {
+        }
 
         public WindowsServiceLifetime(
             Microsoft.Extensions.Hosting.IHostEnvironment environment,
@@ -80,15 +86,25 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> optionsAccessor,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.WindowsServiceLifetimeOptions> windowsServiceOptionsAccessor
-        ) { }
+        )
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void OnShutdown() { }
+        protected override void OnShutdown()
+        {
+        }
 
-        protected override void OnStart(string[] args) { }
+        protected override void OnStart(string[] args)
+        {
+        }
 
-        protected override void OnStop() { }
+        protected override void OnStop()
+        {
+        }
 
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken

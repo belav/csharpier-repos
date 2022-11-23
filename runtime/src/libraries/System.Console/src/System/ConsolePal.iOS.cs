@@ -10,7 +10,9 @@ namespace System
 {
     internal sealed class NSLogStream : CachedConsoleStream
     {
-        public NSLogStream(Encoding encoding) : base(encoding) { }
+        public NSLogStream(Encoding encoding) : base(encoding)
+        {
+        }
 
         protected override unsafe void Print(ReadOnlySpan<char> line)
         {
@@ -23,7 +25,9 @@ namespace System
 
     internal static class ConsolePal
     {
-        internal static void EnsureConsoleInitialized() { }
+        internal static void EnsureConsoleInitialized()
+        {
+        }
 
         public static Stream OpenStandardInput() => throw new PlatformNotSupportedException();
 

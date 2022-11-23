@@ -146,8 +146,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     )
                     .ConfigureAwait(false);
             }
-            catch (OperationCanceledException) { }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
+            {
+            }
         }
 
         protected virtual async Task InnerInvokeAsync(

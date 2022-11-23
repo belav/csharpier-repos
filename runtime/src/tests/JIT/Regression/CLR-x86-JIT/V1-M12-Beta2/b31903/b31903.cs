@@ -24,8 +24,12 @@ namespace Test
                     {
                         do
                         {
-                            do { } while (((bool)(param2[2])));
-                            do { } while (0.70 <= local3);
+                            do
+                            {
+                            } while (((bool)(param2[2])));
+                            do
+                            {
+                            } while (0.70 <= local3);
                         } while (param1[2]);
                     } while (param1[2]);
                 }

@@ -39,14 +39,18 @@ namespace System.Web.Http
             return new User { FirstName = "Yao", LastName = "Huang" };
         }
 
-        public void DeleteAllUsers() { }
+        public void DeleteAllUsers()
+        {
+        }
 
         public Task DeleteAllUsersAsync()
         {
             return TaskHelpers.Completed();
         }
 
-        public void AddUser([FromBody] User user) { }
+        public void AddUser([FromBody] User user)
+        {
+        }
 
         public Task WrappedTaskReturningMethod()
         {

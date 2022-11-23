@@ -33,7 +33,9 @@ namespace Test
             {
                 Static1();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

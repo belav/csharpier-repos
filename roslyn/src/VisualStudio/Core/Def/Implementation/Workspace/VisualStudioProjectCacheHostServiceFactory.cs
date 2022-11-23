@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioProjectCacheHostServiceFactory() { }
+        public VisualStudioProjectCacheHostServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {

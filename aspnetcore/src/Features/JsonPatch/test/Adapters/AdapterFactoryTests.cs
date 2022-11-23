@@ -44,7 +44,9 @@ public class AdapterFactoryTests
         Assert.Equal(typeof(DictionaryAdapter<string, string>), adapter.GetType());
     }
 
-    private class PocoModel { }
+    private class PocoModel
+    {
+    }
 
     [Fact]
     public void GetPocoAdapterForGenericObjects()

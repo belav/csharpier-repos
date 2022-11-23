@@ -25,7 +25,9 @@ namespace System.Xml.Xsl.Qil
         /// Construct a new node
         /// </summary>
         public QilChoice(QilNodeType nodeType, QilNode expression, QilNode branches)
-            : base(nodeType, expression, branches) { }
+            : base(nodeType, expression, branches)
+        {
+        }
 
         //-----------------------------------------------
         // QilChoice methods

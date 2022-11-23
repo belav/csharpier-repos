@@ -28,7 +28,9 @@ internal abstract class CommandBase
         });
     }
 
-    protected virtual void Validate() { }
+    protected virtual void Validate()
+    {
+    }
 
     protected virtual int Execute(string[] args) => 0;
 }

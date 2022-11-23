@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis
 {
     public abstract class AttributeData
     {
-        protected AttributeData() { }
+        protected AttributeData()
+        {
+        }
 
         /// <summary>
         /// The attribute class.

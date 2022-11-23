@@ -16,7 +16,9 @@ namespace System.Data.Common
         private SqlChars[] _values = default!; // Late-initialized
 
         public SqlCharsStorage(DataColumn column)
-            : base(column, typeof(SqlChars), SqlChars.Null, SqlChars.Null, StorageType.SqlChars) { }
+            : base(column, typeof(SqlChars), SqlChars.Null, SqlChars.Null, StorageType.SqlChars)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

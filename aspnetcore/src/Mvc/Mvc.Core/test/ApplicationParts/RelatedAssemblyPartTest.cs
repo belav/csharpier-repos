@@ -107,7 +107,9 @@ public class RelatedAssemblyPartTest
     private class TestableAssemblyLoadContextWrapper
         : RelatedAssemblyAttribute.AssemblyLoadContextWrapper
     {
-        public TestableAssemblyLoadContextWrapper() : base(AssemblyLoadContext.Default) { }
+        public TestableAssemblyLoadContextWrapper() : base(AssemblyLoadContext.Default)
+        {
+        }
 
         public Dictionary<string, Assembly> Assemblies { get; } =
             new Dictionary<string, Assembly>();

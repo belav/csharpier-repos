@@ -120,7 +120,9 @@ namespace System.Web.WebPages.Test
         {
             public int Prop2
             {
-                set { }
+                set
+                {
+                }
             }
             public int Prop6 { get; set; }
         }

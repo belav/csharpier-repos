@@ -19,7 +19,9 @@ namespace System.Net
 
         public bool MoveNext() => _enumerator.MoveNext();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         void IEnumerator.Reset() => _enumerator.Reset();
 

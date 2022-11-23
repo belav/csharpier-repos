@@ -13,7 +13,9 @@ namespace System.CodeDom
         private CodeDirectiveCollection _startDirectives;
         private CodeDirectiveCollection _endDirectives;
 
-        public CodeCompileUnit() { }
+        public CodeCompileUnit()
+        {
+        }
 
         public CodeNamespaceCollection Namespaces { get; } = new CodeNamespaceCollection();
 

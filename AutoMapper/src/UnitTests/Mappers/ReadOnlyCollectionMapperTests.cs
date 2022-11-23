@@ -272,7 +272,9 @@
 
             public class UserSource : IUser
             {
-                public UserSource() { }
+                public UserSource()
+                {
+                }
 
                 public UserSource(string name, int age)
                 {

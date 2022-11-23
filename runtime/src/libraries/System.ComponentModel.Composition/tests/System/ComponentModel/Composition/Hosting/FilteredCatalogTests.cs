@@ -446,11 +446,17 @@ namespace System.ComponentModel.Composition.Hosting
             return new TypeCatalog(typeof(Exporter21), typeof(Exporter22));
         }
 
-        public interface IContract1 { }
+        public interface IContract1
+        {
+        }
 
-        public interface IContract2 { }
+        public interface IContract2
+        {
+        }
 
-        public interface IGenericContract<T1, T2> { }
+        public interface IGenericContract<T1, T2>
+        {
+        }
 
         [Export(typeof(IGenericContract<,>))]
         public class GenericExporter<T1, T2> : IGenericContract<T1, T2>
@@ -460,15 +466,23 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [Export(typeof(IContract1))]
-        public class Exporter11 : IContract1 { }
+        public class Exporter11 : IContract1
+        {
+        }
 
         [Export(typeof(IContract1))]
-        public class Exporter12 : IContract1 { }
+        public class Exporter12 : IContract1
+        {
+        }
 
         [Export(typeof(IContract2))]
-        public class Exporter21 : IContract2 { }
+        public class Exporter21 : IContract2
+        {
+        }
 
         [Export(typeof(IContract2))]
-        public class Exporter22 : IContract2 { }
+        public class Exporter22 : IContract2
+        {
+        }
     }
 }

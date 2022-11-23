@@ -18,7 +18,9 @@ using System;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
 public sealed class DkmReportNonFatalWatsonExceptionAttribute : Attribute
 {
-    public DkmReportNonFatalWatsonExceptionAttribute() { }
+    public DkmReportNonFatalWatsonExceptionAttribute()
+    {
+    }
 
     //
     // Summary:

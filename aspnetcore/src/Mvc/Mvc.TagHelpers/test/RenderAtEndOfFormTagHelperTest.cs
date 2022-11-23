@@ -119,7 +119,9 @@ public class RenderAtEndOfFormTagHelperTest
 
                 return Task.FromResult(true);
             },
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 

@@ -34,7 +34,9 @@ namespace System.IO.Pipes
                 PipeOptions.None,
                 TokenImpersonationLevel.None,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeClientStream(string serverName, string pipeName)
             : this(
@@ -44,7 +46,9 @@ namespace System.IO.Pipes
                 PipeOptions.None,
                 TokenImpersonationLevel.None,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeClientStream(string serverName, string pipeName, PipeDirection direction)
             : this(
@@ -54,7 +58,9 @@ namespace System.IO.Pipes
                 PipeOptions.None,
                 TokenImpersonationLevel.None,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeClientStream(
             string serverName,
@@ -69,7 +75,9 @@ namespace System.IO.Pipes
                 options,
                 TokenImpersonationLevel.None,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeClientStream(
             string serverName,
@@ -85,7 +93,9 @@ namespace System.IO.Pipes
                 options,
                 impersonationLevel,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeClientStream(
             string serverName,

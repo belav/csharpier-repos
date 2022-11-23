@@ -11,7 +11,14 @@ namespace System.Threading.Tests
         [Fact]
         public void Dispose_NotFired_WaitHandleSignaledImmediately()
         {
-            var t = new Timer(_ => { }, null, int.MaxValue, int.MaxValue);
+            var t = new Timer(
+                _ =>
+                {
+                },
+                null,
+                int.MaxValue,
+                int.MaxValue
+            );
             using (var mre = new ManualResetEvent(false))
             {
                 Assert.True(t.Dispose(mre));
@@ -26,7 +33,9 @@ namespace System.Threading.Tests
         [Fact]
         public async Task DisposeAsync_DisposesTimer()
         {
-            var t = new Timer(_ => { });
+            var t = new Timer(_ =>
+            {
+            });
             await t.DisposeAsync();
             Assert.Throws<ObjectDisposedException>(() => t.Change(-1, -1));
         }
@@ -34,7 +43,9 @@ namespace System.Threading.Tests
         [Fact]
         public async Task DisposeAsync_CanBeCalledMultipleTimes()
         {
-            var t = new Timer(_ => { });
+            var t = new Timer(_ =>
+            {
+            });
             await t.DisposeAsync();
             t.Dispose();
             await t.DisposeAsync();
@@ -45,7 +56,9 @@ namespace System.Threading.Tests
         [Fact]
         public void DisposeAsync_SignalsImmediatelyWhenTaskNotRunning()
         {
-            var t = new Timer(_ => { });
+            var t = new Timer(_ =>
+            {
+            });
             Assert.True(t.DisposeAsync().IsCompletedSuccessfully);
         }
 

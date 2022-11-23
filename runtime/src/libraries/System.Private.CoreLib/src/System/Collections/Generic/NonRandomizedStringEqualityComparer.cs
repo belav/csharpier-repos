@@ -40,7 +40,9 @@ namespace System.Collections.Generic
         protected NonRandomizedStringEqualityComparer(
             SerializationInfo information,
             StreamingContext context
-        ) : this(EqualityComparer<string?>.Default) { }
+        ) : this(EqualityComparer<string?>.Default)
+        {
+        }
 
         public virtual bool Equals(string? x, string? y)
         {
@@ -80,7 +82,9 @@ namespace System.Collections.Generic
         private sealed class OrdinalComparer : NonRandomizedStringEqualityComparer
         {
             internal OrdinalComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer) { }
+                : base(wrappedComparer)
+            {
+            }
 
             public override bool Equals(string? x, string? y) => string.Equals(x, y);
 
@@ -97,7 +101,9 @@ namespace System.Collections.Generic
         private sealed class OrdinalIgnoreCaseComparer : NonRandomizedStringEqualityComparer
         {
             internal OrdinalIgnoreCaseComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer) { }
+                : base(wrappedComparer)
+            {
+            }
 
             public override bool Equals(string? x, string? y) =>
                 string.EqualsOrdinalIgnoreCase(x, y);

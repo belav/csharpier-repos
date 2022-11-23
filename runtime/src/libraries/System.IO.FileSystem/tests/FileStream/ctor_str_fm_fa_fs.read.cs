@@ -28,7 +28,9 @@ namespace System.IO.Tests
                         FileAccess.Read,
                         FileShare.ReadWrite | FileShare.Delete
                     )
-                ) { }
+                )
+                {
+                }
             }
         }
 
@@ -39,7 +41,9 @@ namespace System.IO.Tests
             string fileName = GetTestFilePath();
             using (
                 CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)
-            ) { }
+            )
+            {
+            }
 
             Assert.True(File.Exists(fileName));
 
@@ -60,7 +64,9 @@ namespace System.IO.Tests
                         FileAccess.Read,
                         FileShare.ReadWrite | FileShare.Delete
                     )
-                ) { }
+                )
+                {
+                }
             }
         }
 

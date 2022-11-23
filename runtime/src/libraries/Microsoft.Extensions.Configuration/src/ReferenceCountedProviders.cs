@@ -91,9 +91,13 @@ namespace Microsoft.Extensions.Configuration
             public override List<IConfigurationProvider> Providers { get; set; }
             public override List<IConfigurationProvider> NonReferenceCountedProviders => Providers;
 
-            public override void AddReference() { }
+            public override void AddReference()
+            {
+            }
 
-            public override void Dispose() { }
+            public override void Dispose()
+            {
+            }
         }
     }
 }

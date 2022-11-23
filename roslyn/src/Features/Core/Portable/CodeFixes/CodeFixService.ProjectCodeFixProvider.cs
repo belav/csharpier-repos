@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private class ProjectCodeFixProvider
             : AbstractProjectExtensionProvider<CodeFixProvider, ExportCodeFixProviderAttribute>
         {
-            public ProjectCodeFixProvider(AnalyzerReference reference) : base(reference) { }
+            public ProjectCodeFixProvider(AnalyzerReference reference) : base(reference)
+            {
+            }
 
             protected override bool SupportsLanguage(
                 ExportCodeFixProviderAttribute exportAttribute,

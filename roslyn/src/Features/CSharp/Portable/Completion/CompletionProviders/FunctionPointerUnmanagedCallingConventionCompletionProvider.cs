@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FunctionPointerUnmanagedCallingConventionCompletionProvider() { }
+        public FunctionPointerUnmanagedCallingConventionCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

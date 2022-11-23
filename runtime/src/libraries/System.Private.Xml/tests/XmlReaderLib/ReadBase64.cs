@@ -1227,7 +1227,9 @@ namespace System.Xml.Tests
                     sr.MoveToFirstAttribute();
                     sr.MoveToFirstAttribute();
                     byte[] bytes = new byte[4];
-                    while ((sr.ReadContentAsBase64(bytes, 0, bytes.Length)) > 0) { }
+                    while ((sr.ReadContentAsBase64(bytes, 0, bytes.Length)) > 0)
+                    {
+                    }
                 }
             }
             return TEST_PASS;
@@ -1418,7 +1420,9 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.Value, "default", "value");
                 CError.Equals(DataReader.ReadContentAsBase64(buffer, 0, 8), 5, "size");
             }
-            catch (NotSupportedException) { }
+            catch (NotSupportedException)
+            {
+            }
             DataReader.Close();
             return TEST_PASS;
         }

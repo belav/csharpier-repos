@@ -101,7 +101,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CacheServiceFactory() { }
+            public CacheServiceFactory()
+            {
+            }
         }
 
         private static IImportCompletionCacheService<CacheEntry, object> GetCacheService(

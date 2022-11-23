@@ -5,7 +5,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
 {
     internal sealed class MessageEnd : IStreamable
     {
-        internal MessageEnd() { }
+        internal MessageEnd()
+        {
+        }
 
         public void Write(BinaryFormatterWriter output)
         {

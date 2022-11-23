@@ -25,7 +25,8 @@ namespace System.Web.Http.Controllers
                 (ec, ct) =>
                 {
                     log.Add("exceptionFilter");
-                    return Task.Factory.StartNew(() => { });
+                    return Task.Factory.StartNew(() => {
+                    });
                 }
             );
             var filters = new IExceptionFilter[] { exceptionFilter };
@@ -62,7 +63,8 @@ namespace System.Web.Http.Controllers
                 (ec, ct) =>
                 {
                     log.Add("exceptionFilter");
-                    return Task.Factory.StartNew(() => { });
+                    return Task.Factory.StartNew(() => {
+                    });
                 }
             );
 
@@ -104,7 +106,8 @@ namespace System.Web.Http.Controllers
                 {
                     exceptionSeenByFilter = ec.Exception;
                     log.Add("exceptionFilter");
-                    return Task.Factory.StartNew(() => { });
+                    return Task.Factory.StartNew(() => {
+                    });
                 }
             );
             var filters = new IExceptionFilter[] { exceptionFilter };
@@ -209,7 +212,8 @@ namespace System.Web.Http.Controllers
                     log.Add("globalFilter");
                     resultSeenByGlobalFilter = ec.Response;
                     ec.Response = globalFilterResponse;
-                    return Task.Factory.StartNew(() => { });
+                    return Task.Factory.StartNew(() => {
+                    });
                 }
             );
             var actionFilter = CreateExceptionFilter(
@@ -217,7 +221,8 @@ namespace System.Web.Http.Controllers
                 {
                     log.Add("actionFilter");
                     ec.Response = actionFilterResponse;
-                    return Task.Factory.StartNew(() => { });
+                    return Task.Factory.StartNew(() => {
+                    });
                 }
             );
             var filters = new IExceptionFilter[] { globalFilter, actionFilter };

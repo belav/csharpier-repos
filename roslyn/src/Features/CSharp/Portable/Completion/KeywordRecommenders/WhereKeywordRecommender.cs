@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class WhereKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public WhereKeywordRecommender() : base(SyntaxKind.WhereKeyword) { }
+        public WhereKeywordRecommender() : base(SyntaxKind.WhereKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

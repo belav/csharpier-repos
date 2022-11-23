@@ -17,6 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// </summary>
         /// <param name="wpfTextView">The IWpfTextView of the view.</param>
         internal StandaloneCommandFilter(IWpfTextView wpfTextView, IComponentModel componentModel)
-            : base(wpfTextView, componentModel) { }
+            : base(wpfTextView, componentModel)
+        {
+        }
     }
 }

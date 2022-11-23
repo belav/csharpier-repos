@@ -172,9 +172,11 @@ namespace System.Drawing
                 return new MemoryStream(rawData.Slice(78).ToArray());
             }
             catch (OutOfMemoryException) // This exception may be caused by creating a new MemoryStream.
-            { }
+            {
+            }
             catch (ArgumentOutOfRangeException) // This exception may get thrown by MemoryMarshal when input array size is less than the size of the output type.
-            { }
+            {
+            }
 
             return null;
         }

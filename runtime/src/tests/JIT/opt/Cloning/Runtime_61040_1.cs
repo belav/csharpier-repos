@@ -12,7 +12,9 @@ struct ArrayWrapper
 class Runtime_61040_1
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void JitUse<T>(T arg) { }
+    static void JitUse<T>(T arg)
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static void Problem(ArrayWrapper a)

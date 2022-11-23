@@ -9,7 +9,9 @@ public class A<T>
 {
     public class B : A<B.C[]>
     {
-        public class C : B { }
+        public class C : B
+        {
+        }
     }
 }
 

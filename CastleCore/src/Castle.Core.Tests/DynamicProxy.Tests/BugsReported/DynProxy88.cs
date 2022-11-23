@@ -48,7 +48,9 @@ namespace Castle.DynamicProxy.Tests.BugsReported
 
     public class Inherited : IBase
     {
-        public void Foo() { }
+        public void Foo()
+        {
+        }
     }
 
     public interface ISub1 : IBase

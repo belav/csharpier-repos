@@ -17,7 +17,9 @@ namespace System.Composition.UnitTests
 {
     public class LightContainerTests : ContainerTests
     {
-        public interface IA { }
+        public interface IA
+        {
+        }
 
         [Export(typeof(IA))]
         public class A : IA, IDisposable
@@ -31,7 +33,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export(typeof(IA))]
-        public class A2 : IA { }
+        public class A2 : IA
+        {
+        }
 
         [Export]
         public class B
@@ -45,7 +49,9 @@ namespace System.Composition.UnitTests
             }
         }
 
-        public class BarePart { }
+        public class BarePart
+        {
+        }
 
         public class HasPropertyA
         {

@@ -15,7 +15,9 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsSubset : SrgsElement, ISubset
     {
         #region Constructors
-        public SrgsSubset(string text) : this(text, SubsetMatchingMode.Subsequence) { }
+        public SrgsSubset(string text) : this(text, SubsetMatchingMode.Subsequence)
+        {
+        }
 
         public SrgsSubset(string text, SubsetMatchingMode matchingMode)
         {

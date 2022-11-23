@@ -66,7 +66,9 @@ namespace System.Threading.Tasks
         /// initialized to the current scheduler (see <see
         /// cref="System.Threading.Tasks.TaskScheduler.Current">TaskScheduler.Current</see>).
         /// </remarks>
-        public TaskFactory() { }
+        public TaskFactory()
+        {
+        }
 
         /// <summary>
         /// Initializes a <see cref="TaskFactory{TResult}"/> instance with the default configuration.

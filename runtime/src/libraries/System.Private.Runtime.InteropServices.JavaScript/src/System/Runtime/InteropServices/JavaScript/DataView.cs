@@ -13,7 +13,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Initializes a new instance of the DataView class.
         /// </summary>
         /// <param name="buffer">ArrayBuffer to use as the storage backing the new DataView object.</param>
-        public DataView(ArrayBuffer buffer) : base(nameof(DataView), buffer) { }
+        public DataView(ArrayBuffer buffer) : base(nameof(DataView), buffer)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the DataView class.
@@ -21,7 +23,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <param name="buffer">ArrayBuffer to use as the storage backing the new DataView object.</param>
         /// <param name="byteOffset">The offset, in bytes, to the first byte in the above buffer for the new view to reference. If unspecified, the buffer view starts with the first byte.</param>
         public DataView(ArrayBuffer buffer, int byteOffset)
-            : base(nameof(DataView), buffer, byteOffset) { }
+            : base(nameof(DataView), buffer, byteOffset)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the DataView class.
@@ -30,13 +34,17 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <param name="byteOffset">The offset, in bytes, to the first byte in the above buffer for the new view to reference. If unspecified, the buffer view starts with the first byte.</param>
         /// <param name="byteLength">The number of elements in the byte array. If unspecified, the view's length will match the buffer's length.</param>
         public DataView(ArrayBuffer buffer, int byteOffset, int byteLength)
-            : base(nameof(DataView), buffer, byteOffset, byteLength) { }
+            : base(nameof(DataView), buffer, byteOffset, byteLength)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the DataView class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
-        internal DataView(IntPtr jsHandle) : base(jsHandle) { }
+        internal DataView(IntPtr jsHandle) : base(jsHandle)
+        {
+        }
 
         /// <summary>
         /// Gets the length (in bytes) of this view from the start of its ArrayBuffer. Fixed at construction time and thus read only.

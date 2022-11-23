@@ -47,7 +47,9 @@ internal static class Utilities
             string.Empty,
             out root,
             out baseAddress,
-            options => { },
+            options =>
+            {
+            },
             app
         );
     }
@@ -75,7 +77,15 @@ internal static class Utilities
     )
     {
         string baseAddress;
-        return CreateDynamicHttpServer(path, out root, out baseAddress, options => { }, app);
+        return CreateDynamicHttpServer(
+            path,
+            out root,
+            out baseAddress,
+            options =>
+            {
+            },
+            app
+        );
     }
 
     internal static IServer CreateHttpAuthServer(
@@ -219,7 +229,9 @@ internal static class Utilities
             "/",
             out var root,
             out baseAddress,
-            options => { },
+            options =>
+            {
+            },
             app,
             loggerFactory
         );
@@ -251,7 +263,9 @@ internal static class Utilities
                     server.StartAsync(new DummyApplication(app), CancellationToken.None).Wait();
                     return server;
                 }
-                catch (HttpSysException) { }
+                catch (HttpSysException)
+                {
+                }
             }
             NextHttpsPort = BaseHttpsPort;
         }

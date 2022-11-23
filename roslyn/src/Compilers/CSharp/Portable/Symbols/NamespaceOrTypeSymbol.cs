@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // Only the compiler can create new instances.
-        internal NamespaceOrTypeSymbol() { }
+        internal NamespaceOrTypeSymbol()
+        {
+        }
 
         /// <summary>
         /// Returns true if this symbol is a namespace. If it is not a namespace, it must be a type.

@@ -317,9 +317,13 @@ class BaseClassTest
 
 public class CollidedUnwindTest
 {
-    class ExType1 : Exception { }
+    class ExType1 : Exception
+    {
+    }
 
-    class ExType2 : Exception { }
+    class ExType2 : Exception
+    {
+    }
 
     Trace _trace;
 
@@ -974,7 +978,9 @@ class StrSwitchFinalTest
                                     try
                                     {
                                         _trace.WriteLine("s == " + s[s.Length]);
-                                        try { }
+                                        try
+                                        {
+                                        }
                                         finally
                                         {
                                             _trace.WriteLine("Unreached");

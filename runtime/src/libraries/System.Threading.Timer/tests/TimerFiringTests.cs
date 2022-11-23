@@ -198,7 +198,10 @@ namespace System.Threading.Tests
         {
             // There's nothing to validate besides that we don't throw an exception, so rely on xunit
             // to catch any exception that would be thrown and signal a test failure
-            TimerCallback tc = new TimerCallback((object o) => { });
+            TimerCallback tc = new TimerCallback(
+                (object o) => {
+                }
+            );
             var t = new Timer(tc, null, 100, -1);
             for (int i = 0; i < 10; i++)
                 t.Dispose();
@@ -299,7 +302,12 @@ namespace System.Threading.Tests
         [Fact]
         public void Timer_Dispose_WaitHandle_Negative()
         {
-            Assert.Throws<ArgumentNullException>(() => new Timer(s => { }).Dispose(null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new Timer(s =>
+                    {
+                    }).Dispose(null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

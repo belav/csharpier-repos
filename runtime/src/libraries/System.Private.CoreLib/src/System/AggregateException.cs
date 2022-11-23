@@ -29,7 +29,9 @@ namespace System
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class.
         /// </summary>
-        public AggregateException() : this(SR.AggregateException_ctor_DefaultMessage) { }
+        public AggregateException() : this(SR.AggregateException_ctor_DefaultMessage)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with
@@ -70,7 +72,9 @@ namespace System
             : this(
                 SR.AggregateException_ctor_DefaultMessage,
                 innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions))
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with
@@ -85,7 +89,9 @@ namespace System
             : this(
                 SR.AggregateException_ctor_DefaultMessage,
                 innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions))
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
@@ -104,7 +110,9 @@ namespace System
                     innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions))
                 ).ToArray(),
                 cloneExceptions: false
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
@@ -121,7 +129,9 @@ namespace System
                 message,
                 innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions)),
                 cloneExceptions: true
-            ) { }
+            )
+        {
+        }
 
         private AggregateException(
             string? message,
@@ -156,7 +166,9 @@ namespace System
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptionInfos"/> is
         /// null.</exception>
         internal AggregateException(List<ExceptionDispatchInfo> innerExceptionInfos)
-            : this(SR.AggregateException_ctor_DefaultMessage, innerExceptionInfos) { }
+            : this(SR.AggregateException_ctor_DefaultMessage, innerExceptionInfos)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error

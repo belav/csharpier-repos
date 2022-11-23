@@ -8,5 +8,7 @@ public class InheritanceRelationshipsQueryInMemoryTest
 {
     public InheritanceRelationshipsQueryInMemoryTest(
         InheritanceRelationshipsQueryInMemoryFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 }

@@ -38,6 +38,8 @@ namespace System
         }
 
         protected RankException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

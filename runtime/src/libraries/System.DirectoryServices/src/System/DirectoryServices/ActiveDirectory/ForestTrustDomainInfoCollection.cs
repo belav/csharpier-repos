@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ForestTrustDomainInfoCollection : ReadOnlyCollectionBase
     {
-        internal ForestTrustDomainInfoCollection() { }
+        internal ForestTrustDomainInfoCollection()
+        {
+        }
 
         public ForestTrustDomainInformation this[int index]
         {

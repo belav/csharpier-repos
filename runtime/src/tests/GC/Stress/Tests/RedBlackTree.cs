@@ -458,7 +458,9 @@ public class Test
             // must force this exception
             throw new OverflowException();
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
 
         TestLibrary.Logging.WriteLine("Constructing Red-Black Tree with {0} nodes", numNodes);
         TestLibrary.Logging.WriteLine("Using {0} as random seed", Tree.Seed);

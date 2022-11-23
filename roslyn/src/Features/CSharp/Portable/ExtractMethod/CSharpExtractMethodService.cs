@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpExtractMethodService() { }
+        public CSharpExtractMethodService()
+        {
+        }
 
         protected override CSharpSelectionValidator CreateSelectionValidator(
             SemanticDocument document,

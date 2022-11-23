@@ -1,8 +1,12 @@
 using System;
 
-public class RoutedEventArgs { }
+public class RoutedEventArgs
+{
+}
 
-public class RoutedPropertyChangedEventArgs<T> : RoutedEventArgs { }
+public class RoutedPropertyChangedEventArgs<T> : RoutedEventArgs
+{
+}
 
 public delegate void RoutedPropertyChangedEventHandler<T>(
     Object sender,
@@ -11,7 +15,9 @@ public delegate void RoutedPropertyChangedEventHandler<T>(
 
 class Program
 {
-    public void Test(object sender, RoutedEventArgs evt) { }
+    public void Test(object sender, RoutedEventArgs evt)
+    {
+    }
 
     void Fun()
     {

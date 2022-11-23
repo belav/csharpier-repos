@@ -13,7 +13,9 @@ public class TestInMemoryTransactionManager : InMemoryTransactionManager
 
     public TestInMemoryTransactionManager(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger
-    ) : base(logger) { }
+    ) : base(logger)
+    {
+    }
 
     public override IDbContextTransaction CurrentTransaction => _currentTransaction;
 

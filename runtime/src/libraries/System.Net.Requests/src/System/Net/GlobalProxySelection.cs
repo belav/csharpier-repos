@@ -24,7 +24,9 @@ namespace System.Net
         {
             private ICredentials? _credentials;
 
-            public EmptyWebProxy() { }
+            public EmptyWebProxy()
+            {
+            }
 
             public Uri GetProxy(Uri uri) => uri;
 

@@ -17,7 +17,9 @@ public class EntityTypeParameterBinding : ServiceParameterBinding
     /// </summary>
     /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />.</param>
     public EntityTypeParameterBinding(params IPropertyBase[]? serviceProperties)
-        : base(typeof(IEntityType), typeof(IEntityType), serviceProperties) { }
+        : base(typeof(IEntityType), typeof(IEntityType), serviceProperties)
+    {
+    }
 
     /// <summary>
     ///     Creates an expression tree representing the binding of the value of a property from a

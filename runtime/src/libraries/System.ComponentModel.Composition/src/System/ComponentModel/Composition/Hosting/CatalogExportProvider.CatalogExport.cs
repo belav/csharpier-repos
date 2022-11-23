@@ -144,7 +144,9 @@ namespace System.ComponentModel.Composition.Hosting
                 CatalogExportProvider catalogExportProvider,
                 ComposablePartDefinition partDefinition,
                 ExportDefinition definition
-            ) : base(catalogExportProvider, partDefinition, definition) { }
+            ) : base(catalogExportProvider, partDefinition, definition)
+            {
+            }
 
             protected override CatalogPart GetPart()
             {

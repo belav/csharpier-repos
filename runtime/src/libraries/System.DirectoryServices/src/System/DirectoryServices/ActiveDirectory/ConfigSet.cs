@@ -42,7 +42,9 @@ namespace System.DirectoryServices.ActiveDirectory
         }
 
         internal ConfigurationSet(DirectoryContext context, string configSetName)
-            : this(context, configSetName, new DirectoryEntryManager(context)) { }
+            : this(context, configSetName, new DirectoryEntryManager(context))
+        {
+        }
         #endregion constructors
 
         #region IDisposable

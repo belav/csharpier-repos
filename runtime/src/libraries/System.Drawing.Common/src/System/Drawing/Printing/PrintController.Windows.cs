@@ -20,7 +20,9 @@ namespace System.Drawing.Printing
         /// </remarks>
         internal sealed class SafeDeviceModeHandle : SafeHandle
         {
-            public SafeDeviceModeHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+            public SafeDeviceModeHandle() : base(IntPtr.Zero, ownsHandle: true)
+            {
+            }
 
             internal SafeDeviceModeHandle(IntPtr handle) : base(IntPtr.Zero, ownsHandle: true)
             {

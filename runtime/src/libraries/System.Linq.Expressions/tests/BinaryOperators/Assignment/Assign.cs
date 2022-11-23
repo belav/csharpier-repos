@@ -29,11 +29,15 @@ namespace System.Linq.Expressions.Tests
             public const string ConstantString = "Constant";
             public string WriteOnlyString
             {
-                set { }
+                set
+                {
+                }
             }
             public static string WriteOnlyStaticString
             {
-                set { }
+                set
+                {
+                }
             }
 
             public BaseClass BaseClassProperty { get; set; }
@@ -55,11 +59,15 @@ namespace System.Linq.Expressions.Tests
             public const int ConstantInt32 = 12;
             public int WriteOnlyInt32
             {
-                set { }
+                set
+                {
+                }
             }
             public static int WriteOnlyStaticInt32
             {
-                set { }
+                set
+                {
+                }
             }
 
             private int _underlyingIndexerField1;
@@ -102,7 +110,9 @@ namespace System.Linq.Expressions.Tests
         {
             public int this[int i]
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -657,8 +667,12 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("(a = b)", e.ToString());
         }
 
-        public class BaseClass { }
+        public class BaseClass
+        {
+        }
 
-        public class SubClass : BaseClass { }
+        public class SubClass : BaseClass
+        {
+        }
     }
 }

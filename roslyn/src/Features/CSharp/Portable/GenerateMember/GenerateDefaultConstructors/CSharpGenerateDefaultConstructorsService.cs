@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateDefaultConstructo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateDefaultConstructorsService() { }
+        public CSharpGenerateDefaultConstructorsService()
+        {
+        }
 
         protected override bool TryInitializeState(
             SemanticDocument semanticDocument,

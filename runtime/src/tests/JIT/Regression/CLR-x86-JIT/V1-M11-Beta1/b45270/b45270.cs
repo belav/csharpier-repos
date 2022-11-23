@@ -23,7 +23,9 @@ namespace Test
                     an[0] = 1;
                 }
             }
-            while (b) { }
+            while (b)
+            {
+            }
             return 100;
         }
     }

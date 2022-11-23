@@ -173,7 +173,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
         protected virtual void PrepForLink(
             TestCaseSandbox sandbox,
             ManagedCompilationResult compilationResult
-        ) { }
+        )
+        {
+        }
 
         private ILCompilerTestCaseResult Link(
             TestCase testCase,

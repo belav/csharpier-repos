@@ -21,7 +21,9 @@ namespace System.Web.Mvc.Async
         public AsyncManager()
             : this(
                 null /* syncContext */
-            ) { }
+            )
+        {
+        }
 
         public AsyncManager(SynchronizationContext syncContext)
         {

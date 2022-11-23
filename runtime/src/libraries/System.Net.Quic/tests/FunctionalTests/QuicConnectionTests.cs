@@ -15,7 +15,9 @@ namespace System.Net.Quic.Tests
     {
         const int ExpectedErrorCode = 1234;
 
-        public QuicConnectionTests(ITestOutputHelper output) : base(output) { }
+        public QuicConnectionTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public async Task TestConnect()

@@ -250,7 +250,9 @@ namespace System.Globalization
             : this(
                 CultureInfo.InvariantCulture._cultureData,
                 GregorianCalendar.GetDefaultInstance()
-            ) { }
+            )
+        {
+        }
 
         internal DateTimeFormatInfo(CultureData cultureData, Calendar cal)
         {

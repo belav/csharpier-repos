@@ -613,7 +613,9 @@ public class RelationalMetadataExtensionsTest
         public MyEnum? EnumValue { get; set; }
     }
 
-    private class SpecialCustomer : Customer { }
+    private class SpecialCustomer : Customer
+    {
+    }
 
     private class Order
     {

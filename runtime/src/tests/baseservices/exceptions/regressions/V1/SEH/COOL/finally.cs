@@ -15,7 +15,9 @@ public class Foo
         {
             i = i / n;
         }
-        catch (DivideByZeroException) { }
+        catch (DivideByZeroException)
+        {
+        }
         finally
         {
             n++;

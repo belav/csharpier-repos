@@ -13,6 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
             : base(
                 new BraceCharacterAndKind(SyntaxFacts.GetText(openBrace)[0], (int)openBrace),
                 new BraceCharacterAndKind(SyntaxFacts.GetText(closeBrace)[0], (int)closeBrace)
-            ) { }
+            )
+        {
+        }
     }
 }

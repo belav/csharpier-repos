@@ -19,7 +19,9 @@ namespace Internal.Reflection.Core.Execution
     [ReflectionBlocked]
     public abstract class MethodInvoker
     {
-        protected MethodInvoker() { }
+        protected MethodInvoker()
+        {
+        }
 
         [DebuggerGuidedStepThrough]
         public object? Invoke(

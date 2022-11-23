@@ -485,7 +485,9 @@ namespace System.Threading.Tasks.Tests
                         int initialCallCount = scheduler.QueueTaskCalls;
 
                         Task<Task> outer = Task.Factory.StartNew(
-                            () => Task.Run(() => { }),
+                            () =>
+                                Task.Run(() => {
+                                }),
                             CancellationToken.None,
                             TaskCreationOptions.None,
                             TaskScheduler.Default

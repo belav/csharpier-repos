@@ -227,7 +227,9 @@ namespace Microsoft.CodeAnalysis
 
             private bool _skipString = false;
 
-            public RemoveAssemblySymbolKeysReader() { }
+            public RemoveAssemblySymbolKeysReader()
+            {
+            }
 
             public void Initialize(string data) => base.Initialize(data, CancellationToken.None);
 

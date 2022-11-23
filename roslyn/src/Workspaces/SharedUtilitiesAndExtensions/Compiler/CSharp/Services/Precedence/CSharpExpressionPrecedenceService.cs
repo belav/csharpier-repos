@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Precedence
     {
         public static readonly CSharpExpressionPrecedenceService Instance = new();
 
-        private CSharpExpressionPrecedenceService() { }
+        private CSharpExpressionPrecedenceService()
+        {
+        }
 
         public override OperatorPrecedence GetOperatorPrecedence(ExpressionSyntax expression) =>
             expression.GetOperatorPrecedence();

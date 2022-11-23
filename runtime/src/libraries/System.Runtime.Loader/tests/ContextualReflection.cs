@@ -13,11 +13,15 @@ using Xunit;
 
 namespace System.Runtime.Loader.Tests
 {
-    class AGenericClass<T> { }
+    class AGenericClass<T>
+    {
+    }
 
     class MockAssembly : Assembly
     {
-        public MockAssembly() { }
+        public MockAssembly()
+        {
+        }
     }
 
     public class ContextualReflectionTestFixture : IContextualReflectionTestFixture

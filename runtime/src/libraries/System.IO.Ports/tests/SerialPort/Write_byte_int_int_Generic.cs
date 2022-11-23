@@ -147,7 +147,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.Write(new byte[BYTE_SIZE_TIMEOUT], 0, BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 VerifyTimeout(com);
             }
@@ -185,7 +187,9 @@ namespace System.IO.Ports.Tests
                 {
                     com1.Write(new byte[BYTE_SIZE_TIMEOUT], 0, BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 asyncEnableRts.Stop();
 
@@ -379,7 +383,9 @@ namespace System.IO.Ports.Tests
                 {
                     _com.Write(buffer, 0, buffer.Length);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
             }
         }
         #endregion
@@ -404,7 +410,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(new byte[BYTE_SIZE_TIMEOUT], 0, BYTE_SIZE_TIMEOUT); //Warm up write method
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
@@ -415,7 +423,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.Write(new byte[BYTE_SIZE_TIMEOUT], 0, BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 timer.Stop();
                 actualTime += (int)timer.ElapsedMilliseconds;

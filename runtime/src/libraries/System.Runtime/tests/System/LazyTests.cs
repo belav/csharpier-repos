@@ -206,7 +206,9 @@ namespace System.Tests
                     {
                         result = lazy.Value;
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
                 Assert.Equal(5, result.Value);
             }
@@ -226,7 +228,9 @@ namespace System.Tests
                 {
                     result = lazy.Value;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
             Assert.Equal(result, expected);
         }
@@ -245,7 +249,9 @@ namespace System.Tests
                 {
                     result = lazy.Value;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
             Assert.Equal(expected, result);
         }
@@ -321,7 +327,9 @@ namespace System.Tests
 
         public class ExceptionInCtor
         {
-            public ExceptionInCtor() : this(99) { }
+            public ExceptionInCtor() : this(99)
+            {
+            }
 
             public ExceptionInCtor(int value)
             {
@@ -914,11 +922,15 @@ namespace System.Tests
             }
         }
 
-        private class HasDefaultCtor { }
+        private class HasDefaultCtor
+        {
+        }
 
         private class NoDefaultCtor
         {
-            public NoDefaultCtor(int x) { }
+            public NoDefaultCtor(int x)
+            {
+            }
         }
 
         private struct LIX

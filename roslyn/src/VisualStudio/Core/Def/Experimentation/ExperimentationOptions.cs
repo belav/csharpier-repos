@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExperimentationOptionsProvider() { }
+        public ExperimentationOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } = ImmutableArray<IOption>.Empty;
     }

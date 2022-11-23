@@ -9,4 +9,6 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <see cref="NonControllerAttribute"/> is applied to any type in the hierarchy.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public class ControllerAttribute : Attribute { }
+public class ControllerAttribute : Attribute
+{
+}

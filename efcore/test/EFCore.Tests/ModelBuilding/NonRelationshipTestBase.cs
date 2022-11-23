@@ -490,7 +490,9 @@ public abstract partial class ModelBuilderTest
         protected class TestDbSetFindingConvention : DbSetFindingConvention
         {
             public TestDbSetFindingConvention(ProviderConventionSetBuilderDependencies dependencies)
-                : base(dependencies) { }
+                : base(dependencies)
+            {
+            }
 
             public override void ProcessModelInitialized(
                 IConventionModelBuilder modelBuilder,
@@ -1054,12 +1056,16 @@ public abstract partial class ModelBuilderTest
 
         private class UTF8StringToBytesConverter : StringToBytesConverter
         {
-            public UTF8StringToBytesConverter() : base(Encoding.UTF8) { }
+            public UTF8StringToBytesConverter() : base(Encoding.UTF8)
+            {
+            }
         }
 
         private class CustomValueComparer<T> : ValueComparer<T>
         {
-            public CustomValueComparer() : base(false) { }
+            public CustomValueComparer() : base(false)
+            {
+            }
         }
 
         [ConditionalFact]
@@ -1207,13 +1213,17 @@ public abstract partial class ModelBuilderTest
                 : base(
                     v => (string)((IDictionary<string, object>)v)["Value"],
                     v => DeserializeExpandoObject(v)
-                ) { }
+                )
+            {
+            }
         }
 
         private class ExpandoObjectComparer : ValueComparer<ExpandoObject>
         {
             public ExpandoObjectComparer()
-                : base((v1, v2) => v1.SequenceEqual(v2), v => v.GetHashCode()) { }
+                : base((v1, v2) => v1.SequenceEqual(v2), v => v.GetHashCode())
+            {
+            }
         }
 
         [ConditionalFact]
@@ -1346,7 +1356,9 @@ public abstract partial class ModelBuilderTest
         private class WrappedStringToStringConverter : ValueConverter<WrappedString, string>
         {
             public WrappedStringToStringConverter()
-                : base(v => v.Value, v => new WrappedString { Value = v }) { }
+                : base(v => v.Value, v => new WrappedString { Value = v })
+            {
+            }
         }
 
         [ConditionalFact]
@@ -1776,10 +1788,14 @@ public abstract partial class ModelBuilderTest
 
         private class BadCustomValueGenerator1 : CustomValueGenerator
         {
-            public BadCustomValueGenerator1(string foo) { }
+            public BadCustomValueGenerator1(string foo)
+            {
+            }
         }
 
-        private abstract class BadCustomValueGenerator2 : CustomValueGenerator { }
+        private abstract class BadCustomValueGenerator2 : CustomValueGenerator
+        {
+        }
 
         [ConditionalFact]
         public virtual void Throws_for_collection_of_string()

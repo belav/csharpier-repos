@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
             );
 
-        protected AbstractPartialMethodCompletionProvider() { }
+        protected AbstractPartialMethodCompletionProvider()
+        {
+        }
 
         protected abstract bool IncludeAccessibility(
             IMethodSymbol method,

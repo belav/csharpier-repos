@@ -23,7 +23,9 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal NullableFloatSumAggregationOperator(IEnumerable<float?> child) : base(child) { }
+        internal NullableFloatSumAggregationOperator(IEnumerable<float?> child) : base(child)
+        {
+        }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the

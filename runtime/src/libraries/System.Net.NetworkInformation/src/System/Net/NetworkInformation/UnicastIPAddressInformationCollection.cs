@@ -10,7 +10,9 @@ namespace System.Net.NetworkInformation
         private readonly List<UnicastIPAddressInformation> _addresses =
             new List<UnicastIPAddressInformation>();
 
-        protected internal UnicastIPAddressInformationCollection() { }
+        protected internal UnicastIPAddressInformationCollection()
+        {
+        }
 
         public virtual void CopyTo(UnicastIPAddressInformation[] array, int offset)
         {

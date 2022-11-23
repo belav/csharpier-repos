@@ -25,7 +25,9 @@ namespace System.Composition.Lightweight.UnitTests
             public string Property { get; set; }
         }
 
-        public class Derived : Base { }
+        public class Derived : Base
+        {
+        }
 
         [Fact]
         public void ClassExportsAreNotInherited()
@@ -44,7 +46,9 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export]
-        public class ExportingDerived : Base { }
+        public class ExportingDerived : Base
+        {
+        }
 
         [Fact]
         public void ExportsAtTheClassLevelAreAppliedIgnoringBaseExports()
@@ -85,7 +89,9 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export]
-        public class NonOverridingImporter : BaseImporter { }
+        public class NonOverridingImporter : BaseImporter
+        {
+        }
 
         [Fact]
         public void ImportsOnOverriddenPropertiesOverrideImportsOnTheBase()
@@ -132,10 +138,14 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export, PartNotDiscoverable]
-        public class NotDiscoverableBase { }
+        public class NotDiscoverableBase
+        {
+        }
 
         [Export]
-        public class DiscoverableDerived : NotDiscoverableBase { }
+        public class DiscoverableDerived : NotDiscoverableBase
+        {
+        }
 
         [Fact]
         public void PartNotDiscoverableAttributeIsNotInherited()
@@ -146,10 +156,14 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Shared]
-        public class SharedBase { }
+        public class SharedBase
+        {
+        }
 
         [Export]
-        public class SharedDerived : SharedBase { }
+        public class SharedDerived : SharedBase
+        {
+        }
 
         [Fact]
         public void PartMetadataIsNotInherited()
@@ -172,7 +186,9 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export]
-        public class InheritsImportsSatisfied : HasImportsSatisfied { }
+        public class InheritsImportsSatisfied : HasImportsSatisfied
+        {
+        }
 
         [Fact]
         public void OnImportsSatisfiedAttributeIsInherited()
@@ -182,7 +198,9 @@ namespace System.Composition.Lightweight.UnitTests
             Assert.True(x.ImportsSatisfied);
         }
 
-        public interface IHandler { }
+        public interface IHandler
+        {
+        }
 
         public class HandlerMetadata
         {
@@ -190,10 +208,14 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export(typeof(IHandler)), ExportMetadata("HandledMessage", "A")]
-        public class AHandler : IHandler { }
+        public class AHandler : IHandler
+        {
+        }
 
         [Export(typeof(IHandler)), ExportMetadata("HandledMessage", "B")]
-        public class ABHandler : AHandler { }
+        public class ABHandler : AHandler
+        {
+        }
 
         [Fact]
         public void MetadataIsOnlyDrawnFromTheTypeToWhichItIsApplied()

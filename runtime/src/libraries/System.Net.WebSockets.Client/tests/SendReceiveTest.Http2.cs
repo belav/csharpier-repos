@@ -14,21 +14,27 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class HttpClientSendReceiveTest_Http2 : SendReceiveTest_Http2
     {
-        public HttpClientSendReceiveTest_Http2(ITestOutputHelper output) : base(output) { }
+        public HttpClientSendReceiveTest_Http2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseHttpClient => true;
     }
 
     public sealed class InvokerSendReceiveTest_Http2 : SendReceiveTest_Http2
     {
-        public InvokerSendReceiveTest_Http2(ITestOutputHelper output) : base(output) { }
+        public InvokerSendReceiveTest_Http2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public abstract class SendReceiveTest_Http2 : ClientWebSocketTestBase
     {
-        public SendReceiveTest_Http2(ITestOutputHelper output) : base(output) { }
+        public SendReceiveTest_Http2(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         [SkipOnPlatform(

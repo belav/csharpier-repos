@@ -82,7 +82,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SnippetCompletionProvider() { }
+        public SnippetCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

@@ -64,7 +64,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     )
     {
         public FindReferencesSearchOptions()
-            : this(AssociatePropertyReferencesWithSpecificAccessor: false) { }
+            : this(AssociatePropertyReferencesWithSpecificAccessor: false)
+        {
+        }
 
         public static readonly FindReferencesSearchOptions Default = new();
 

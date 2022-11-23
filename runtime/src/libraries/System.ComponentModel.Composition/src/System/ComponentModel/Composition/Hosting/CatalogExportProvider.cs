@@ -65,13 +65,17 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="catalog"/> is <see langword="null"/>.
         /// </exception>
         public CatalogExportProvider(ComposablePartCatalog catalog)
-            : this(catalog, CompositionOptions.Default) { }
+            : this(catalog, CompositionOptions.Default)
+        {
+        }
 
         public CatalogExportProvider(ComposablePartCatalog catalog, bool isThreadSafe)
             : this(
                 catalog,
                 isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default
-            ) { }
+            )
+        {
+        }
 
         public CatalogExportProvider(
             ComposablePartCatalog catalog,

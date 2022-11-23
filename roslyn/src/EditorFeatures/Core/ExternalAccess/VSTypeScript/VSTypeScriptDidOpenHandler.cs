@@ -19,5 +19,7 @@ internal class VSTypeScriptDidOpenHandler : DidOpenHandler
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptDidOpenHandler() { }
+    public VSTypeScriptDidOpenHandler()
+    {
+    }
 }

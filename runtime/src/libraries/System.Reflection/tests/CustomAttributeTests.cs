@@ -16,10 +16,14 @@ namespace System.Reflection.Tests
         }
 
         [SameTypes(ObjectArray1 = null, ObjectArray2 = new object[] { "" })]
-        private class SameTypesClass1 { }
+        private class SameTypesClass1
+        {
+        }
 
         [SameTypes(ObjectArray1 = new object[] { "" }, ObjectArray2 = null)]
-        private class SameTypesClass2 { }
+        private class SameTypesClass2
+        {
+        }
 
         [Fact]
         public void AttributeWithSamePropertyTypes()
@@ -50,10 +54,14 @@ namespace System.Reflection.Tests
         }
 
         [DifferentTypes(ObjectArray = null, StringArray = new[] { "" })]
-        private class DifferentTypesClass1 { }
+        private class DifferentTypesClass1
+        {
+        }
 
         [DifferentTypes(ObjectArray = new object[] { "" }, StringArray = null)]
-        private class DifferentTypesClass2 { }
+        private class DifferentTypesClass2
+        {
+        }
 
         [Fact]
         public void AttributeWithDifferentPropertyTypes()
@@ -84,7 +92,9 @@ namespace System.Reflection.Tests
                 NamedField = s;
             }
 
-            public StringValuedAttribute() { }
+            public StringValuedAttribute()
+            {
+            }
 
             public string NamedProperty
             {
@@ -97,13 +107,19 @@ namespace System.Reflection.Tests
         internal class ClassWithAttrs
         {
             [StringValuedAttribute("")]
-            public void M1() { }
+            public void M1()
+            {
+            }
 
             [StringValuedAttribute(NamedProperty = "")]
-            public void M2() { }
+            public void M2()
+            {
+            }
 
             [StringValuedAttribute(NamedField = "")]
-            public void M3() { }
+            public void M3()
+            {
+            }
         }
 
         [Fact]

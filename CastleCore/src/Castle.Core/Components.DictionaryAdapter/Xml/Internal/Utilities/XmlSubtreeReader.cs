@@ -27,7 +27,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private XmlReader reader;
 
         public XmlSubtreeReader(IXmlNode node, XmlRootAttribute root)
-            : this(node, root.ElementName, root.Namespace) { }
+            : this(node, root.ElementName, root.Namespace)
+        {
+        }
 
         public XmlSubtreeReader(IXmlNode node, string rootLocalName, string rootNamespaceUri)
         {

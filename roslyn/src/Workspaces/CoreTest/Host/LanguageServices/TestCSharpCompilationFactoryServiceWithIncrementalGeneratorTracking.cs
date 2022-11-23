@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestCSharpCompilationFactoryServiceWithIncrementalGeneratorTracking() { }
+        public TestCSharpCompilationFactoryServiceWithIncrementalGeneratorTracking()
+        {
+        }
 
         Compilation ICompilationFactoryService.CreateCompilation(
             string assemblyName,

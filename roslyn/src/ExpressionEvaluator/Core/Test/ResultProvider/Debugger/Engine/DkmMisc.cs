@@ -53,15 +53,21 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         None = 0
     }
 
-    public class DkmDataAddress { }
+    public class DkmDataAddress
+    {
+    }
 }
 
 namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 {
-    public class DkmCompiledClrInspectionQuery { }
+    public class DkmCompiledClrInspectionQuery
+    {
+    }
 }
 
 namespace Microsoft.VisualStudio.Debugger.CallStack
 {
-    public class DkmStackWalkFrame { }
+    public class DkmStackWalkFrame
+    {
+    }
 }

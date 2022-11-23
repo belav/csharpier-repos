@@ -256,7 +256,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             return new ControllerContext { Controller = new SimpleController() };
         }
 
-        private class SimpleController : Controller { }
+        private class SimpleController : Controller
+        {
+        }
 
         private class SimpleModel
         {

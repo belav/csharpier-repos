@@ -13,7 +13,9 @@ namespace System.Web.Mvc
         private DynamicViewDataDictionary _dynamicViewDataDictionary;
 
         public AjaxHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-            : this(viewContext, viewDataContainer, RouteTable.Routes) { }
+            : this(viewContext, viewDataContainer, RouteTable.Routes)
+        {
+        }
 
         public AjaxHelper(
             ViewContext viewContext,

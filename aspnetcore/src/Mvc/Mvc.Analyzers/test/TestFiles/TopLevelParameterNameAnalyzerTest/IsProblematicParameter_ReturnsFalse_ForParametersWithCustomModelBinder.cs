@@ -9,6 +9,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
         public void ActionMethod(
             [ModelBinder(typeof(SimpleTypeModelBinder))]
                 IsProblematicParameter_ReturnsFalse_ForParametersWithCustomModelBinder model
-        ) { }
+        )
+        {
+        }
     }
 }

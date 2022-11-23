@@ -10,7 +10,9 @@ namespace ILCompiler.DependencyAnalysisFramework
         private object _mark;
 
         // Only DependencyNodeCore<T> is allowed to derive from this
-        internal DependencyNode() { }
+        internal DependencyNode()
+        {
+        }
 
         internal void SetMark(object mark)
         {

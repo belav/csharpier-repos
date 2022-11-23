@@ -10,7 +10,9 @@ namespace System.Xml
     // Represents a collection of attributes that can be accessed by name or index.
     public sealed class XmlAttributeCollection : XmlNamedNodeMap, ICollection
     {
-        internal XmlAttributeCollection(XmlNode parent) : base(parent) { }
+        internal XmlAttributeCollection(XmlNode parent) : base(parent)
+        {
+        }
 
         // Gets the attribute with the specified index.
         [System.Runtime.CompilerServices.IndexerName("ItemOf")]

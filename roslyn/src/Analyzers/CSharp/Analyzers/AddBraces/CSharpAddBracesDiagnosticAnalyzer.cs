@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected override void InitializeWorker(AnalysisContext context) =>
             context.RegisterSyntaxNodeAction(

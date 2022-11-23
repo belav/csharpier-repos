@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
     public partial class SimplifyThisOrMeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public SimplifyThisOrMeTests(ITestOutputHelper logger) : base(logger) { }
+        public SimplifyThisOrMeTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

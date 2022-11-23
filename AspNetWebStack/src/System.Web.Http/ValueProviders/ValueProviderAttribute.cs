@@ -28,7 +28,9 @@ namespace System.Web.Http.ValueProviders
 
         // Provide CLS compliant overload
         public ValueProviderAttribute(Type valueProviderFactory)
-            : this(new Type[] { valueProviderFactory }) { }
+            : this(new Type[] { valueProviderFactory })
+        {
+        }
 
         // Convenience for multiple types. This is not cls-compliant.
         public ValueProviderAttribute(params Type[] valueProviderFactories)

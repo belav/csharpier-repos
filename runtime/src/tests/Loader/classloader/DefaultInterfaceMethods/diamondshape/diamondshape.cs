@@ -16,7 +16,9 @@ class IFoo_Impl
     }
 }
 
-interface IFoo2 : IFoo { }
+interface IFoo2 : IFoo
+{
+}
 
 class IFoo2_Impl : IFoo
 {
@@ -27,7 +29,9 @@ class IFoo2_Impl : IFoo
     }
 }
 
-interface IFooEx : IFoo { }
+interface IFooEx : IFoo
+{
+}
 
 class IFooEx_Impl : IFoo
 {

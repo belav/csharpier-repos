@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddDebuggerDisplayCodeRefactoringProvider() { }
+        public CSharpAddDebuggerDisplayCodeRefactoringProvider()
+        {
+        }
 
         protected override bool CanNameofAccessNonPublicMembersFromAttributeArgument => true;
 

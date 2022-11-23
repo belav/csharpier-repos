@@ -25,7 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : GearsOfWarQueryFixtureBase, new()
 {
-    protected GearsOfWarQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected GearsOfWarQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     protected override Expression RewriteExpectedQueryExpression(
         Expression expectedQueryExpression
@@ -6013,7 +6015,9 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             }
         );
 
-    public class MyDTO { }
+    public class MyDTO
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -10922,5 +10926,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
 
     protected GearsOfWarContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 }

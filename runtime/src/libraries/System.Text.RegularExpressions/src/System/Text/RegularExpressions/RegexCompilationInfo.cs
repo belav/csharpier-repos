@@ -24,7 +24,9 @@ namespace System.Text.RegularExpressions
             string name,
             string fullnamespace,
             bool ispublic
-        ) : this(pattern, options, name, fullnamespace, ispublic, Regex.s_defaultMatchTimeout) { }
+        ) : this(pattern, options, name, fullnamespace, ispublic, Regex.s_defaultMatchTimeout)
+        {
+        }
 
         public RegexCompilationInfo(
             string pattern,

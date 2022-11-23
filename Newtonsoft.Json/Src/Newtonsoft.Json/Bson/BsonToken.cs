@@ -117,7 +117,9 @@ namespace Newtonsoft.Json.Bson
         public static readonly BsonBoolean False = new BsonBoolean(false);
         public static readonly BsonBoolean True = new BsonBoolean(true);
 
-        private BsonBoolean(bool value) : base(value, BsonType.Boolean) { }
+        private BsonBoolean(bool value) : base(value, BsonType.Boolean)
+        {
+        }
     }
 
     internal class BsonString : BsonValue

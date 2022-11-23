@@ -25,7 +25,9 @@ namespace Castle.DynamicProxy.Contributors
             Type proxyTargetType,
             bool allowChangeTarget,
             INamingScope namingScope
-        ) : base(proxyTargetType, allowChangeTarget, namingScope) { }
+        ) : base(proxyTargetType, allowChangeTarget, namingScope)
+        {
+        }
 
         protected override MembersCollector GetCollectorForInterface(Type @interface)
         {

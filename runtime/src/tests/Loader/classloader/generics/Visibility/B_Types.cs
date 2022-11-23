@@ -4,10 +4,18 @@
 // this test checks visibility of
 using System;
 
-public class CPublic<T> { }
+public class CPublic<T>
+{
+}
 
-public struct SPublic<T> { }
+public struct SPublic<T>
+{
+}
 
-public class CPrivate<T> { }
+public class CPrivate<T>
+{
+}
 
-public struct SPrivate<T> { }
+public struct SPrivate<T>
+{
+}

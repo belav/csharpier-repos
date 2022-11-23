@@ -42,6 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                 __SymbolToolLanguage.SymbolToolLanguage_CSharp,
                 s_typeDisplayFormat,
                 s_memberDisplayFormat
-            ) { }
+            )
+        {
+        }
     }
 }

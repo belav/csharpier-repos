@@ -41,11 +41,17 @@ class Foo : IFoo
     public int Property1 { get; set; }
     public int UnusedProperty { get; set; }
 
-    public void Method1() { }
+    public void Method1()
+    {
+    }
 
-    public void Method2() { }
+    public void Method2()
+    {
+    }
 
-    public void UnusedMethod3() { }
+    public void UnusedMethod3()
+    {
+    }
 }
 
 public class CountingProxy : DispatchProxy
@@ -67,7 +73,11 @@ public class CountingProxy : DispatchProxy
         return targetMethod.Invoke(_inner, args);
     }
 
-    public static void UnusedStatic() { }
+    public static void UnusedStatic()
+    {
+    }
 
-    public void UnusedInstance() { }
+    public void UnusedInstance()
+    {
+    }
 }

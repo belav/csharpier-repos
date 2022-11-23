@@ -872,9 +872,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -919,9 +923,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -968,9 +976,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -1016,11 +1028,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class Target
     {
@@ -1066,11 +1084,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class Base : I { }
+    public class Base : I
+    {
+    }
 
-    public class Base2 : I { }
+    public class Base2 : I
+    {
+    }
 
     public class Target
     {
@@ -1515,7 +1539,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class Base { }
+    public class Base
+    {
+    }
 
     public class Derived : Base
     {

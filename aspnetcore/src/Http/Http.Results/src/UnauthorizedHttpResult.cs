@@ -15,7 +15,9 @@ public sealed class UnauthorizedHttpResult : IResult, IStatusCodeHttpResult
     /// <summary>
     /// Initializes a new instance of the <see cref="UnauthorizedHttpResult"/> class.
     /// </summary>
-    internal UnauthorizedHttpResult() { }
+    internal UnauthorizedHttpResult()
+    {
+    }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status401Unauthorized"/>

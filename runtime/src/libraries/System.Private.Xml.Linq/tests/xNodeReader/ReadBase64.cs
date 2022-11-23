@@ -1113,7 +1113,9 @@ namespace CoreXml.Test.XLinq
                                 sr.MoveToFirstAttribute();
                                 sr.MoveToFirstAttribute();
                                 byte[] bytes = new byte[4];
-                                while ((sr.ReadContentAsBase64(bytes, 0, bytes.Length)) > 0) { }
+                                while ((sr.ReadContentAsBase64(bytes, 0, bytes.Length)) > 0)
+                                {
+                                }
                             }
                         }
                     }

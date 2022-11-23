@@ -15,7 +15,9 @@ internal sealed class HostingApplicationDiscriminator : IApplicationDiscriminato
     private readonly string AltDirectorySeparator = Path.AltDirectorySeparatorChar.ToString();
 
     // the optional constructor for when IHostingEnvironment is not available from DI
-    public HostingApplicationDiscriminator() { }
+    public HostingApplicationDiscriminator()
+    {
+    }
 
     public HostingApplicationDiscriminator(IHostEnvironment hosting)
     {

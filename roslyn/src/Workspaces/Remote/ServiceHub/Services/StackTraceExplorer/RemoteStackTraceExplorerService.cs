@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteStackTraceExplorerService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         public ValueTask<SerializableDefinitionItem?> TryFindDefinitionAsync(
             Checksum solutionChecksum,

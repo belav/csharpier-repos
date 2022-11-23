@@ -19,27 +19,37 @@ namespace System.Xml.Schema
         private object? _sourceNodeObject;
 
         protected XmlSchemaValidationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
         }
 
-        public XmlSchemaValidationException() : base(null) { }
+        public XmlSchemaValidationException() : base(null)
+        {
+        }
 
         public XmlSchemaValidationException(string? message)
-            : base(message, ((Exception?)null), 0, 0) { }
+            : base(message, ((Exception?)null), 0, 0)
+        {
+        }
 
         public XmlSchemaValidationException(string? message, Exception? innerException)
-            : base(message, innerException, 0, 0) { }
+            : base(message, innerException, 0, 0)
+        {
+        }
 
         public XmlSchemaValidationException(
             string? message,
             Exception? innerException,
             int lineNumber,
             int linePosition
-        ) : base(message, innerException, lineNumber, linePosition) { }
+        ) : base(message, innerException, lineNumber, linePosition)
+        {
+        }
 
         internal XmlSchemaValidationException(
             string? res,
@@ -47,7 +57,9 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : base(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null) { }
+        ) : base(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null)
+        {
+        }
 
         internal XmlSchemaValidationException(
             string? res,
@@ -55,7 +67,9 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : base(res, args, null, sourceUri, lineNumber, linePosition, null) { }
+        ) : base(res, args, null, sourceUri, lineNumber, linePosition, null)
+        {
+        }
 
         internal XmlSchemaValidationException(
             string? res,
@@ -64,7 +78,9 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : base(res, args, innerException, sourceUri, lineNumber, linePosition, null) { }
+        ) : base(res, args, innerException, sourceUri, lineNumber, linePosition, null)
+        {
+        }
 
         internal XmlSchemaValidationException(string? res, string?[]? args, object sourceNode)
             : base(res, args, null, null, 0, 0, null)

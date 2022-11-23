@@ -165,7 +165,9 @@ namespace System.IO.Ports.Tests
 
         private class ErrorEventHandler : TestEventHandler<SerialError>
         {
-            public ErrorEventHandler(SerialPort com) : base(com, false, false) { }
+            public ErrorEventHandler(SerialPort com) : base(com, false, false)
+            {
+            }
 
             public void HandleEvent(object source, SerialErrorReceivedEventArgs e)
             {

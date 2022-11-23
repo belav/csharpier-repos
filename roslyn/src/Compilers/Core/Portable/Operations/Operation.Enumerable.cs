@@ -106,7 +106,9 @@ namespace Microsoft.CodeAnalysis
 
             object? IEnumerator.Current => this.Current;
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 }

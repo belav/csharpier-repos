@@ -149,7 +149,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                     .CommitSolutionUpdateAsync(_diagnosticService, cancellationToken)
                     .ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
 
         public async Task DiscardUpdatesAsync(CancellationToken cancellationToken)
@@ -163,7 +165,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             {
                 await _proxy.DiscardSolutionUpdateAsync(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
 
         public async Task StopDebuggingAsync(CancellationToken cancellationToken)

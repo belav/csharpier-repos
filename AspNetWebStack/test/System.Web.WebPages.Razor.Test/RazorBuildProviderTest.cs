@@ -15,7 +15,9 @@ using Moq;
 
 namespace ASP
 {
-    public class _Page_Foo_Test_cshtml { }
+    public class _Page_Foo_Test_cshtml
+    {
+    }
 }
 
 namespace System.Web.WebPages.Razor.Test
@@ -265,7 +267,9 @@ namespace System.Web.WebPages.Razor.Test
         private class TestHost : WebPageRazorHost
         {
             public TestHost(string virtualPath, string physicalPath)
-                : base(virtualPath, physicalPath) { }
+                : base(virtualPath, physicalPath)
+            {
+            }
 
             public override void PostProcessGeneratedCode(
                 Web.Razor.Generator.CodeGeneratorContext context

@@ -50,11 +50,14 @@ namespace System.Text.Json.Serialization.Tests
             options.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
             TestIListNonThrowingOperationsWhenMutable(
                 (options.TypeInfoResolver as DefaultJsonTypeInfoResolver).Modifiers,
-                () => (ti) => { }
+                () =>
+                    (ti) => {
+                    }
             );
 
             // Add one item for later.
-            Action<JsonTypeInfo> tiModifier = (ti) => { };
+            Action<JsonTypeInfo> tiModifier = (ti) => {
+            };
             TestConverter tc = new TestConverter();
             options.Converters.Add(tc);
             (options.TypeInfoResolver as DefaultJsonTypeInfoResolver).Modifiers.Add(tiModifier);
@@ -1018,8 +1021,21 @@ namespace System.Text.Json.Serialization.Tests
                 optionsSingleton.TypeInfoResolver
             );
             Assert.Throws<InvalidOperationException>(() => resolver.Modifiers.Clear());
-            Assert.Throws<InvalidOperationException>(() => resolver.Modifiers.Add(ti => { }));
-            Assert.Throws<InvalidOperationException>(() => resolver.Modifiers.Insert(0, ti => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    resolver.Modifiers.Add(ti =>
+                    {
+                    })
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    resolver.Modifiers.Insert(
+                        0,
+                        ti =>
+                        {
+                        }
+                    )
+            );
 
             optionsSingleton.MakeReadOnly(); // MakeReadOnly is idempontent.
         }

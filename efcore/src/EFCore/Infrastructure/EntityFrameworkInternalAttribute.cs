@@ -21,4 +21,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
         | AttributeTargets.Property
         | AttributeTargets.Constructor
 )]
-public sealed class EntityFrameworkInternalAttribute : Attribute { }
+public sealed class EntityFrameworkInternalAttribute : Attribute
+{
+}

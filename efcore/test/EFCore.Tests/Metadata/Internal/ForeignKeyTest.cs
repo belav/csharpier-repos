@@ -426,7 +426,9 @@ public class ForeignKeyTest
         public IEnumerable<OneToManyDependent> Deception { get; set; }
     }
 
-    public class DerivedOneToManyPrincipal : OneToManyPrincipal { }
+    public class DerivedOneToManyPrincipal : OneToManyPrincipal
+    {
+    }
 
     public class OneToManyDependent : NavigationBase
     {
@@ -436,7 +438,9 @@ public class ForeignKeyTest
         public OneToManyPrincipal Deception { get; set; }
     }
 
-    public class DerivedOneToManyDependent : OneToManyDependent { }
+    public class DerivedOneToManyDependent : OneToManyDependent
+    {
+    }
 
     [ConditionalFact]
     public void Throws_when_setting_navigation_to_principal_on_wrong_FK()

@@ -2,9 +2,13 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping;
 
 public class When_configuring_before_and_after_methods
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Destination { }
+    public class Destination
+    {
+    }
 
     [Fact]
     public void Before_and_After_should_be_called()
@@ -56,9 +60,13 @@ public class When_configuring_before_and_after_methods
 
 public class When_configuring_before_and_after_methods_multiple_times
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Destination { }
+    public class Destination
+    {
+    }
 
     [Fact]
     public void Before_and_After_should_be_called()

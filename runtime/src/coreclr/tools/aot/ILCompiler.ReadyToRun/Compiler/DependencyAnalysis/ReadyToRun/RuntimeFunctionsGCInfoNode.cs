@@ -12,7 +12,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 "RuntimeFunctionsGCInfo_Begin",
                 "RuntimeFunctionsGCInfo_End",
                 new EmbeddedObjectNodeComparer(CompilerComparer.Instance)
-            ) { }
+            )
+        {
+        }
 
         public HashSet<MethodGCInfoNode> Deduplicator;
 

@@ -745,7 +745,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ),
                     location,
                     diagnostics
-                ) { }
+                )
+            {
+            }
 
             public CheckConstraintsArgs(
                 CSharpCompilation currentCompilation,
@@ -764,7 +766,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         diagnostics,
                         currentCompilation.Assembly
                     )
-                ) { }
+                )
+            {
+            }
 
             public CheckConstraintsArgs(
                 CSharpCompilation currentCompilation,

@@ -10,7 +10,9 @@ public partial class SafeWaitHandleExtensionsTests
 {
     public class MyWaitHandle : WaitHandle
     {
-        public MyWaitHandle() { }
+        public MyWaitHandle()
+        {
+        }
     }
 
     [Fact]

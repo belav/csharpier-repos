@@ -9,7 +9,9 @@ public class QueryFilterFuncletizationContext : DbContext
 {
     public static int AdminId = 1;
 
-    public QueryFilterFuncletizationContext(DbContextOptions options) : base(options) { }
+    public QueryFilterFuncletizationContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public bool Field;
     public bool Property { get; set; }

@@ -16,16 +16,22 @@ namespace System.Linq.Expressions.Tests
         // being thrown due to an actual error.
         protected class TestException : Exception
         {
-            public TestException() : base("This is a test exception") { }
+            public TestException() : base("This is a test exception")
+            {
+            }
         }
 
-        protected class DerivedTestException : TestException { }
+        protected class DerivedTestException : TestException
+        {
+        }
 
         private static class Unreadable<T>
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

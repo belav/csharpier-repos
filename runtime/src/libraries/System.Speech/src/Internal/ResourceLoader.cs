@@ -71,7 +71,9 @@ namespace System.Speech.Internal
         /// <summary>
         /// Release a file from a cache if any
         /// </summary>
-        internal void UnloadFile(string localPath) { }
+        internal void UnloadFile(string localPath)
+        {
+        }
 
         internal Stream LoadFile(Uri uri, out string localPath, out Uri redirectedUri)
         {

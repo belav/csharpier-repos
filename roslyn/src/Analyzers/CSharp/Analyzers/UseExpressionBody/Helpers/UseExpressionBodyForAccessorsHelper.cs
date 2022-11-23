@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                     SyntaxKind.AddAccessorDeclaration,
                     SyntaxKind.RemoveAccessorDeclaration
                 )
-            ) { }
+            )
+        {
+        }
 
         public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
             CSharpCodeGenerationOptions options

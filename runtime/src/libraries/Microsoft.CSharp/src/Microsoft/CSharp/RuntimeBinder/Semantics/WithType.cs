@@ -25,7 +25,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private AggregateType _ats;
         private Symbol _sym;
 
-        public SymWithType() { }
+        public SymWithType()
+        {
+        }
 
         public SymWithType(Symbol sym, AggregateType ats)
         {
@@ -135,7 +137,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal class MethPropWithType : SymWithType
     {
-        public MethPropWithType() { }
+        public MethPropWithType()
+        {
+        }
 
         public MethPropWithType(MethodOrPropertySymbol mps, AggregateType ats)
         {
@@ -145,7 +149,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class MethWithType : MethPropWithType
     {
-        public MethWithType() { }
+        public MethWithType()
+        {
+        }
 
         public MethWithType(MethodSymbol meth, AggregateType ats)
         {
@@ -195,7 +201,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         public MethPropWithInst(MethodOrPropertySymbol mps, AggregateType ats)
-            : this(mps, ats, null) { }
+            : this(mps, ats, null)
+        {
+        }
 
         public MethPropWithInst(MethodOrPropertySymbol mps, AggregateType ats, TypeArray typeArgs)
         {
@@ -223,7 +231,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class MethWithInst : MethPropWithInst
     {
-        public MethWithInst(MethodSymbol meth, AggregateType ats) : this(meth, ats, null) { }
+        public MethWithInst(MethodSymbol meth, AggregateType ats) : this(meth, ats, null)
+        {
+        }
 
         public MethWithInst(MethodSymbol meth, AggregateType ats, TypeArray typeArgs)
         {

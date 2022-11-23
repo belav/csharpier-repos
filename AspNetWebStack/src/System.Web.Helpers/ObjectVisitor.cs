@@ -125,18 +125,26 @@ namespace System.Web.Helpers
             VisitComplexObject(value, depth + 1);
         }
 
-        public virtual void VisitObjectVisitorException(ObjectVisitorException exception) { }
+        public virtual void VisitObjectVisitorException(ObjectVisitorException exception)
+        {
+        }
 
         public virtual void VisitConvertedValue(object value, string convertedValue)
         {
             VisitStringValue(convertedValue);
         }
 
-        public virtual void VisitVisitedObject(string id, object value) { }
+        public virtual void VisitVisitedObject(string id, object value)
+        {
+        }
 
-        public virtual void VisitNull() { }
+        public virtual void VisitNull()
+        {
+        }
 
-        public virtual void VisitStringValue(string stringValue) { }
+        public virtual void VisitStringValue(string stringValue)
+        {
+        }
 
         public virtual void VisitComplexObject(object value, int depth)
         {
@@ -256,7 +264,9 @@ namespace System.Web.Helpers
             Visit(item, depth);
         }
 
-        public virtual void VisitEnumeratonLimitExceeded() { }
+        public virtual void VisitEnumeratonLimitExceeded()
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Design",
@@ -489,15 +499,22 @@ namespace System.Web.Helpers
         [Serializable]
         public class ObjectVisitorException : Exception
         {
-            public ObjectVisitorException() { }
+            public ObjectVisitorException()
+            {
+            }
 
-            public ObjectVisitorException(string message) : base(message) { }
+            public ObjectVisitorException(string message) : base(message)
+            {
+            }
 
             public ObjectVisitorException(string message, Exception inner) : base(message, inner)
-            { }
+            {
+            }
 
             protected ObjectVisitorException(SerializationInfo info, StreamingContext context)
-                : base(info, context) { }
+                : base(info, context)
+            {
+            }
         }
     }
 }

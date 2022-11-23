@@ -12,7 +12,8 @@ namespace System.ConfigurationTests
     public class ConfigurationPathTests : FileCleanupTestBase
     {
         public ConfigurationPathTests() : base(AppDomain.CurrentDomain.BaseDirectory) // We do not want the files go to temporary directory as that will not test the relative paths correctly
-        { }
+        {
+        }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CustomAppConfigIsUsedWhenSpecifiedAsRelativePath()

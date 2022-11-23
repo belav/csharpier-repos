@@ -55,7 +55,9 @@ public class HtmlHelperComponentExtensionsTest
 
     private class TestComponent : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => null;
     }

@@ -271,7 +271,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         protected virtual void InitializeWorkspace(
             TestWorkspace workspace,
             TestParameters parameters
-        ) { }
+        )
+        {
+        }
 
         protected virtual TestParameters SetParameterDefaults(TestParameters parameters) =>
             parameters;

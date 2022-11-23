@@ -17,7 +17,9 @@ namespace System.Web.WebPages.Test
             var httpContext = new Mock<HttpContextBase>();
             var pageDataDictionary = new Dictionary<object, dynamic>();
             var model = new { Hello = "World" };
-            Action<TextWriter> bodyAction = writer => { };
+            Action<TextWriter> bodyAction = writer =>
+            {
+            };
             var sectionWritersStack = new Stack<Dictionary<string, SectionWriter>>();
             var basePageContext = new WebPageContext(httpContext.Object, null, null)
             {
@@ -50,7 +52,9 @@ namespace System.Web.WebPages.Test
             var httpContext = new Mock<HttpContextBase>();
             var pageDataDictionary = new Dictionary<object, dynamic>();
             var model = new { Hello = "World" };
-            Action<TextWriter> bodyAction = writer => { };
+            Action<TextWriter> bodyAction = writer =>
+            {
+            };
             var sectionWritersStack = new Stack<Dictionary<string, SectionWriter>>();
             var basePageContext = new WebPageContext(httpContext.Object, null, null)
             {

@@ -9,7 +9,9 @@ namespace System.Diagnostics
             PerformanceCounterPermissionAccess permissionAccess,
             string machineName,
             string categoryName
-        ) { }
+        )
+        {
+        }
 
         public string CategoryName
         {

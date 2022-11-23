@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolTreeInfoIncrementalAnalyzerProvider() { }
+        public SymbolTreeInfoIncrementalAnalyzerProvider()
+        {
+        }
 
         public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
             new SymbolTreeInfoIncrementalAnalyzer(_projectIdToInfo, _metadataIdToInfo);

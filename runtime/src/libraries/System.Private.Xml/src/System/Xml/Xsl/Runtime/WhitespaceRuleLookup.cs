@@ -146,7 +146,9 @@ namespace System.Xml.Xsl.Runtime
             private int _priority; // Relative priority of this test
             private int _hashCode; // Cached hashcode
 
-            public InternalWhitespaceRule() { }
+            public InternalWhitespaceRule()
+            {
+            }
 
             public InternalWhitespaceRule(
                 string? localName,

@@ -386,14 +386,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             );
 
             // A null string password does not throw
-            using (new X509Certificate2(TestData.MsCertificate, (string)null)) { }
+            using (new X509Certificate2(TestData.MsCertificate, (string)null))
+            {
+            }
             using (
                 new X509Certificate2(
                     TestData.MsCertificate,
                     (string)null,
                     X509KeyStorageFlags.DefaultKeySet
                 )
-            ) { }
+            )
+            {
+            }
 
             Assert.Throws<ArgumentNullException>(() => X509Certificate.CreateFromCertFile(null));
             Assert.Throws<ArgumentNullException>(() => X509Certificate.CreateFromSignedFile(null));
@@ -407,14 +411,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             );
 
             // A null SecureString password does not throw
-            using (new X509Certificate2(TestData.MsCertificate, (SecureString)null)) { }
+            using (new X509Certificate2(TestData.MsCertificate, (SecureString)null))
+            {
+            }
             using (
                 new X509Certificate2(
                     TestData.MsCertificate,
                     (SecureString)null,
                     X509KeyStorageFlags.DefaultKeySet
                 )
-            ) { }
+            )
+            {
+            }
 
             // For compat reasons, the (byte[]) constructor (and only that constructor) treats a null or 0-length array as the same
             // as calling the default constructor.

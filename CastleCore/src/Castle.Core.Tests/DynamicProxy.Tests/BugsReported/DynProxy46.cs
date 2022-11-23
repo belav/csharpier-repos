@@ -29,6 +29,8 @@ namespace Castle.DynamicProxy.Tests.BugsReported
             set { myProperty = value; }
         }
 
-        public virtual void MyTestMethod(string myParam) { }
+        public virtual void MyTestMethod(string myParam)
+        {
+        }
     }
 }

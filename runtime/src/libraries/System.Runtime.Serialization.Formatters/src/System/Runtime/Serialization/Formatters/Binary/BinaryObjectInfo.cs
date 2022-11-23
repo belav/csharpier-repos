@@ -40,7 +40,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         private string? _binderTypeName;
         private string? _binderAssemblyString;
 
-        internal WriteObjectInfo() { }
+        internal WriteObjectInfo()
+        {
+        }
 
         internal void ObjectEnd()
         {
@@ -419,9 +421,13 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal SerObjectInfoInit? _serObjectInfoInit;
         internal IFormatterConverter? _formatterConverter;
 
-        internal ReadObjectInfo() { }
+        internal ReadObjectInfo()
+        {
+        }
 
-        internal void ObjectEnd() { }
+        internal void ObjectEnd()
+        {
+        }
 
         internal void PrepareForReuse()
         {

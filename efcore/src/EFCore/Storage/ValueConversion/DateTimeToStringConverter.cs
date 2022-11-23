@@ -19,7 +19,9 @@ public class DateTimeToStringConverter : StringDateTimeConverter<DateTime, strin
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public DateTimeToStringConverter() : this(null) { }
+    public DateTimeToStringConverter() : this(null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -32,7 +34,9 @@ public class DateTimeToStringConverter : StringDateTimeConverter<DateTime, strin
     ///     facets for the converted data.
     /// </param>
     public DateTimeToStringConverter(ConverterMappingHints? mappingHints)
-        : base(ToString(), ToDateTime(), DefaultHints.With(mappingHints)) { }
+        : base(ToString(), ToDateTime(), DefaultHints.With(mappingHints))
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

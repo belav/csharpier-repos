@@ -21,7 +21,12 @@ public static class GoogleExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddGoogle(this AuthenticationBuilder builder) =>
-        builder.AddGoogle(GoogleDefaults.AuthenticationScheme, _ => { });
+        builder.AddGoogle(
+            GoogleDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Adds Google OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.

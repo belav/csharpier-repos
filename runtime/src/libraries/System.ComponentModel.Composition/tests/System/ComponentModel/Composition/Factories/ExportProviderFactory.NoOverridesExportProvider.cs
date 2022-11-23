@@ -13,7 +13,9 @@ namespace System.ComponentModel.Composition.Factories
         // uses this to verify default behavior of the base class.
         private class NoOverridesExportProvider : ExportProvider
         {
-            public NoOverridesExportProvider() { }
+            public NoOverridesExportProvider()
+            {
+            }
 
             protected override IEnumerable<Export> GetExportsCore(
                 ImportDefinition definition,

@@ -4,4 +4,6 @@
 
 [assembly: System.Reflection.AssemblyCultureAttribute("ar-SA")]
 
-public class arSA { }
+public class arSA
+{
+}

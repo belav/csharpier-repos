@@ -113,8 +113,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
             public event EventHandler<ProgressData> ProgressChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
     }

@@ -159,7 +159,9 @@ namespace System.IO
             set => throw Error.GetSeekNotSupported();
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public sealed override void SetLength(long value) => throw Error.GetSeekNotSupported();
 

@@ -13,7 +13,9 @@ namespace System.IO.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                using (var watcher = new FileSystemWatcher("")) { }
+                using (var watcher = new FileSystemWatcher(""))
+                {
+                }
             });
         }
 
@@ -22,7 +24,9 @@ namespace System.IO.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                using (var watcher = new FileSystemWatcher(GetTestFilePath())) { }
+                using (var watcher = new FileSystemWatcher(GetTestFilePath()))
+                {
+                }
             });
         }
 

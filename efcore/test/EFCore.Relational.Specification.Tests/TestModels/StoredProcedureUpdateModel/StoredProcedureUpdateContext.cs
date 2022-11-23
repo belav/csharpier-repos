@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.StoredProcedureUpdateModel;
 
 public class StoredProcedureUpdateContext : PoolableDbContext
 {
-    public StoredProcedureUpdateContext(DbContextOptions options) : base(options) { }
+    public StoredProcedureUpdateContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public DbSet<Entity> WithOutputParameter => Set<Entity>(nameof(WithOutputParameter));
 

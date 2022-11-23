@@ -5,9 +5,13 @@ namespace Microsoft.EntityFrameworkCore.TestModels;
 
 public class CrossStoreContext : DbContext
 {
-    public CrossStoreContext() { }
+    public CrossStoreContext()
+    {
+    }
 
-    public CrossStoreContext(DbContextOptions options) : base(options) { }
+    public CrossStoreContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public virtual DbSet<SimpleEntity> SimpleEntities { get; set; }
 

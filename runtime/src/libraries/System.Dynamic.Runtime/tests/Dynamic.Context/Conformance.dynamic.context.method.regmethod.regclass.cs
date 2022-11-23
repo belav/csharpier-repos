@@ -561,11 +561,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
         public ulong? Method_ReturnUlongNullable(params char?[] c) => 1L;
 
-        public void Method_ReturnVoid() { }
+        public void Method_ReturnVoid()
+        {
+        }
 
-        public void Method_ReturnVoid(MyStruct[] arr) { }
+        public void Method_ReturnVoid(MyStruct[] arr)
+        {
+        }
 
-        public void Method_ReturnVoid(params ulong[] l) { }
+        public void Method_ReturnVoid(params ulong[] l)
+        {
+        }
 
         public void Method_ReturnVoid(ref object[] p1, out bool?[] p2, ref MyClass[] p3)
         {
@@ -1243,7 +1249,9 @@ namespace System.Dynamic.Runtime.Tests
                 dynamic mc = new MemberClass();
                 return (float)mc.Method_ReturnFloat(ref s_p1, out s_p2, s_p1, s_p2, myFloat);
             }
-            set { }
+            set
+            {
+            }
         }
 
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass043.regclass043
@@ -1358,7 +1366,9 @@ namespace System.Dynamic.Runtime.Tests
         {
             dynamic dy = new MemberClass();
             int value = 0;
-            do { } while (((float[])dy.Method_ReturnFloatArr(value++))[0] < 10);
+            do
+            {
+            } while (((float[])dy.Method_ReturnFloatArr(value++))[0] < 10);
             Assert.Equal(11, value);
         }
     }
@@ -1409,7 +1419,9 @@ namespace System.Dynamic.Runtime.Tests
         public static byte[] s_field = (byte[])
             s_mc.Method_ReturnByteArr(out s_p1, ref s_p2, ref s_p3);
 
-        static ClassWithStaticConstructor() { }
+        static ClassWithStaticConstructor()
+        {
+        }
     }
 }
 
@@ -2473,7 +2485,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         public static MyEnum m = MyEnum.First;
         public static short result = -1;
 
-        public Test() { }
+        public Test()
+        {
+        }
 
         public static void DynamicCSharpRunTest()
         {

@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateVariableService() { }
+        public CSharpGenerateVariableService()
+        {
+        }
 
         protected override bool IsExplicitInterfaceGeneration(SyntaxNode node) =>
             node is PropertyDeclarationSyntax;

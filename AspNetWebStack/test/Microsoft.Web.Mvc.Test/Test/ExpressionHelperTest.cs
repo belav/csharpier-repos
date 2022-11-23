@@ -265,19 +265,29 @@ namespace Microsoft.Web.Mvc.Test
             }
 
             [ActionName("NewName")]
-            public void Renamed() { }
+            public void Renamed()
+            {
+            }
 
             [NonAction]
-            public void NotAnAction() { }
+            public void NotAnAction()
+            {
+            }
         }
 
         public class TestAsyncController : AsyncController
         {
-            public void Synchronous() { }
+            public void Synchronous()
+            {
+            }
 
-            public void AsynchronousAsync() { }
+            public void AsynchronousAsync()
+            {
+            }
 
-            public void AsynchronousCompleted() { }
+            public void AsynchronousCompleted()
+            {
+            }
         }
 
         public string Foo

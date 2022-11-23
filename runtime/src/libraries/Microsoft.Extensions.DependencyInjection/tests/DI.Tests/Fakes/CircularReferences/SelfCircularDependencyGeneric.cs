@@ -5,8 +5,12 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
 {
     public class SelfCircularDependencyGeneric<TDependency>
     {
-        public SelfCircularDependencyGeneric(SelfCircularDependencyGeneric<string> dependency) { }
+        public SelfCircularDependencyGeneric(SelfCircularDependencyGeneric<string> dependency)
+        {
+        }
 
-        public SelfCircularDependencyGeneric() { }
+        public SelfCircularDependencyGeneric()
+        {
+        }
     }
 }

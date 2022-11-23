@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CPSCodeModelFactory() { }
+        public CPSCodeModelFactory()
+        {
+        }
 
         public EnvDTE.CodeModel GetCodeModel(
             IWorkspaceProjectContext context,

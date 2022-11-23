@@ -39,7 +39,11 @@ namespace System.Threading.Tasks.Tests
                 int iCopy = i;
                 if (_actionType == ActionType.Empty)
                 {
-                    _actions[i] = new Action(delegate { });
+                    _actions[i] = new Action(
+                        delegate
+                        {
+                        }
+                    );
                 }
                 else if (_actionType == ActionType.EqualWorkload)
                 {

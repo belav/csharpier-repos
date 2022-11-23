@@ -294,7 +294,9 @@ namespace System.Threading.Tests
                 backgroundTestDelegates.Add(lockObj =>
                 {
                     readyBarrier.SignalAndWait();
-                    lock (lockObj) { }
+                    lock (lockObj)
+                    {
+                    }
                 });
 
                 backgroundTestDelegates.Add(lockObj =>

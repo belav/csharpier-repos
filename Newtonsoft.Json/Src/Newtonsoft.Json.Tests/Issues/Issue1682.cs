@@ -76,21 +76,31 @@ namespace Newtonsoft.Json.Tests.Issues
         [Serializable]
         public class ConcreteSerializable : BaseSerializable
         {
-            public ConcreteSerializable() { }
+            public ConcreteSerializable()
+            {
+            }
 
             protected ConcreteSerializable(SerializationInfo info, StreamingContext context)
-                : base(info, context) { }
+                : base(info, context)
+            {
+            }
         }
 
         [Serializable] // it won't blow up after removing that attribute
         public abstract class BaseSerializable : ISerializable //or that interface, or when we will remove "abstract" keyword
         {
-            public BaseSerializable() { }
+            public BaseSerializable()
+            {
+            }
 
             //it won't fail when that constructor is missing
-            protected BaseSerializable(SerializationInfo info, StreamingContext context) { }
+            protected BaseSerializable(SerializationInfo info, StreamingContext context)
+            {
+            }
 
-            public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
+            }
         }
     }
 }

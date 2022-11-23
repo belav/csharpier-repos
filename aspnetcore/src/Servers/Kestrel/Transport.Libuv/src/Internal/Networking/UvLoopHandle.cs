@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 {
     internal class UvLoopHandle : UvMemory
     {
-        public UvLoopHandle(ILibuvTrace logger) : base(logger) { }
+        public UvLoopHandle(ILibuvTrace logger) : base(logger)
+        {
+        }
 
         public void Init(LibuvFunctions uv)
         {

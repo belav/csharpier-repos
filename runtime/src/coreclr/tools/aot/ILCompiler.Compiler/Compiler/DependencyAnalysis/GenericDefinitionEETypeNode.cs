@@ -37,7 +37,9 @@ namespace ILCompiler.DependencyAnalysis
         protected internal override void ComputeOptionalEETypeFields(
             NodeFactory factory,
             bool relocsOnly
-        ) { }
+        )
+        {
+        }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {

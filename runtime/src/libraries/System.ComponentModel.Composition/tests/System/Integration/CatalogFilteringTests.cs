@@ -71,7 +71,9 @@ namespace System.ComponentModel.Composition
 
         [Export]
         [PartMetadata("Scope", "A")]
-        public class ScopeAComponent1 { }
+        public class ScopeAComponent1
+        {
+        }
 
         [Export]
         [PartMetadata("Scope", "A")]

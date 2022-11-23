@@ -7,7 +7,9 @@ namespace System.Reflection.Context.Virtual
     {
         protected abstract class PropertyGetterBase : FuncPropertyAccessorBase
         {
-            protected PropertyGetterBase(VirtualPropertyBase property) : base(property) { }
+            protected PropertyGetterBase(VirtualPropertyBase property) : base(property)
+            {
+            }
 
             public sealed override string Name
             {

@@ -12,7 +12,9 @@ namespace System.Net.Cache
         private readonly TimeSpan _minFresh = TimeSpan.MinValue;
         private readonly TimeSpan _maxStale = TimeSpan.MinValue;
 
-        public HttpRequestCachePolicy() : this(HttpRequestCacheLevel.Default) { }
+        public HttpRequestCachePolicy() : this(HttpRequestCacheLevel.Default)
+        {
+        }
 
         public HttpRequestCachePolicy(HttpRequestCacheLevel level) : base(MapLevel(level))
         {

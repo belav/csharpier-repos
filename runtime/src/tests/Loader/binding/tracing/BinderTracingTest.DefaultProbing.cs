@@ -65,7 +65,9 @@ namespace BinderTracingTests
             {
                 Assembly.Load(assemblyName);
             }
-            catch { }
+            catch
+            {
+            }
 
             return new BindOperation()
             {

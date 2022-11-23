@@ -19,7 +19,9 @@ using Xunit.Sdk;
 // https://github.com/dotnet/runtime/issues/70432
 public class SingleFileTestRunner : XunitTestFramework
 {
-    private SingleFileTestRunner(IMessageSink messageSink) : base(messageSink) { }
+    private SingleFileTestRunner(IMessageSink messageSink) : base(messageSink)
+    {
+    }
 
     public static int Main(string[] args)
     {

@@ -48,7 +48,9 @@ namespace System.Net.Sockets.Tests
         [Theory, MemberData(nameof(DualModeSuccessInputs))]
         public void DualMode_Success(SocketType socketType, ProtocolType protocolType)
         {
-            using (new Socket(socketType, protocolType)) { }
+            using (new Socket(socketType, protocolType))
+            {
+            }
         }
 
         [OuterLoop]
@@ -74,7 +76,9 @@ namespace System.Net.Sockets.Tests
             ProtocolType protocolType
         )
         {
-            using (new Socket(addressFamily, socketType, protocolType)) { }
+            using (new Socket(addressFamily, socketType, protocolType))
+            {
+            }
         }
 
         public static object[][] CtorFailureInputs =
@@ -117,7 +121,9 @@ namespace System.Net.Sockets.Tests
             ProtocolType protocolType
         )
         {
-            using (new Socket(addressFamily, SocketType.Raw, protocolType)) { }
+            using (new Socket(addressFamily, SocketType.Raw, protocolType))
+            {
+            }
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)]

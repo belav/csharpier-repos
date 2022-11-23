@@ -11,7 +11,9 @@ namespace System.Web.Razor.Parser
     internal class WhiteSpaceRewriter : MarkupRewriter
     {
         public WhiteSpaceRewriter(Action<SpanBuilder, SourceLocation, string> markupSpanFactory)
-            : base(markupSpanFactory) { }
+            : base(markupSpanFactory)
+        {
+        }
 
         protected override bool CanRewrite(Block block)
         {

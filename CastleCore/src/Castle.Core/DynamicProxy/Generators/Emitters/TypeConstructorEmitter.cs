@@ -19,7 +19,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
     internal class TypeConstructorEmitter : ConstructorEmitter
     {
         internal TypeConstructorEmitter(AbstractTypeEmitter maintype)
-            : base(maintype, maintype.TypeBuilder.DefineTypeInitializer()) { }
+            : base(maintype, maintype.TypeBuilder.DefineTypeInitializer())
+        {
+        }
 
         public override void EnsureValidCodeBlock()
         {

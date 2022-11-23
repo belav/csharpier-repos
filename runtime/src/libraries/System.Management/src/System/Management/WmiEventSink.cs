@@ -129,7 +129,9 @@ namespace System.Management
                 WmiNetUtilsHelper.GetDemultiplexedStub_f(this, this.isLocal, out stub);
                 hash = Threading.Interlocked.Increment(ref s_hash);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public override int GetHashCode()
@@ -164,7 +166,9 @@ namespace System.Management
                 );
                 watcher.FireObjectReady(args);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void SetStatus(int flags, int hResult, string message, IntPtr pErrorObj)
@@ -198,7 +202,9 @@ namespace System.Management
                                 );
                                 InternalObjectPut(this, iargs);
                             }
-                            catch { }
+                            catch
+                            {
+                            }
                         }
 
                         ObjectPutEventArgs args = new ObjectPutEventArgs(context, path);
@@ -237,7 +243,9 @@ namespace System.Management
                     watcher.FireProgress(args);
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void Cancel()
@@ -246,7 +254,9 @@ namespace System.Management
             {
                 scope.GetIWbemServices().CancelAsyncCall_((IWbemObjectSink)stub);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void ReleaseStub()
@@ -263,7 +273,9 @@ namespace System.Management
                     stub = null;
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -336,7 +348,9 @@ namespace System.Management
                 {
                     managementObject.wbemObject = obj;
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
     }

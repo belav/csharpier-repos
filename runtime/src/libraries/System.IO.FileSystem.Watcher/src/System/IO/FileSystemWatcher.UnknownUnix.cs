@@ -6,7 +6,9 @@ namespace System.IO
     public partial class FileSystemWatcher
     {
         /// <summary>Called when FileSystemWatcher is finalized.</summary>
-        private void FinalizeDispose() { }
+        private void FinalizeDispose()
+        {
+        }
 
         private void StartRaisingEvents()
         {

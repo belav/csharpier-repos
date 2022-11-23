@@ -25,7 +25,9 @@ namespace System.Runtime.InteropServices.Marshalling
 
             public void OnInvoked() => GC.KeepAlive(_handle.Wrapper);
 
-            public void Free() { }
+            public void Free()
+            {
+            }
         }
     }
 }

@@ -25,7 +25,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             private int _coordinateOffset;
 
-            public PointConverter() { }
+            public PointConverter()
+            {
+            }
 
             public PointConverter(int coordinateOffset = 0)
             {

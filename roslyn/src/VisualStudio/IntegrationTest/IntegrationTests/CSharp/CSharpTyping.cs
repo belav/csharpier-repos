@@ -20,7 +20,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpTyping(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpTyping)) { }
+            : base(instanceFactory, nameof(CSharpTyping))
+        {
+        }
 
         [WpfFact, WorkItem(957250, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/957250")]
         public void TypingInPartialType()

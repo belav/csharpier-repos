@@ -17,7 +17,9 @@ namespace System.Text.RegularExpressions.Symbolic
         private readonly Dictionary<BDD, (uint, uint)[]> _rangeCache =
             new Dictionary<BDD, (uint, uint)[]>();
 
-        private BDDRangeConverter() { }
+        private BDDRangeConverter()
+        {
+        }
 
         /// <summary>
         /// Convert the set into an equivalent array of ranges.

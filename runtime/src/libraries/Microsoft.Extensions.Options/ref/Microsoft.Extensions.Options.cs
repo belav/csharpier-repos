@@ -118,7 +118,9 @@ namespace Microsoft.Extensions.Options
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
             Microsoft.Extensions.Options.IConfigureOptions<TOptions> where TOptions : class
     {
-        public ConfigureNamedOptions(string? name, System.Action<TOptions>? action) { }
+        public ConfigureNamedOptions(string? name, System.Action<TOptions>? action)
+        {
+        }
 
         public System.Action<TOptions>? Action
         {
@@ -129,9 +131,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void Configure(string? name, TOptions options) { }
+        public virtual void Configure(string? name, TOptions options)
+        {
+        }
 
-        public void Configure(TOptions options) { }
+        public void Configure(TOptions options)
+        {
+        }
     }
 
     public partial class ConfigureNamedOptions<TOptions, TDep>
@@ -144,7 +150,9 @@ namespace Microsoft.Extensions.Options
             string? name,
             TDep dependency,
             System.Action<TOptions, TDep>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep>? Action
         {
@@ -159,9 +167,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void Configure(string? name, TOptions options) { }
+        public virtual void Configure(string? name, TOptions options)
+        {
+        }
 
-        public void Configure(TOptions options) { }
+        public void Configure(TOptions options)
+        {
+        }
     }
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2>
@@ -176,7 +188,9 @@ namespace Microsoft.Extensions.Options
             TDep1 dependency,
             TDep2 dependency2,
             System.Action<TOptions, TDep1, TDep2>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2>? Action
         {
@@ -195,9 +209,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void Configure(string? name, TOptions options) { }
+        public virtual void Configure(string? name, TOptions options)
+        {
+        }
 
-        public void Configure(TOptions options) { }
+        public void Configure(TOptions options)
+        {
+        }
     }
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3>
@@ -214,7 +232,9 @@ namespace Microsoft.Extensions.Options
             TDep2 dependency2,
             TDep3 dependency3,
             System.Action<TOptions, TDep1, TDep2, TDep3>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2, TDep3>? Action
         {
@@ -237,9 +257,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void Configure(string? name, TOptions options) { }
+        public virtual void Configure(string? name, TOptions options)
+        {
+        }
 
-        public void Configure(TOptions options) { }
+        public void Configure(TOptions options)
+        {
+        }
     }
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
@@ -258,7 +282,9 @@ namespace Microsoft.Extensions.Options
             TDep3 dependency3,
             TDep4 dependency4,
             System.Action<TOptions, TDep1, TDep2, TDep3, TDep4>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2, TDep3, TDep4>? Action
         {
@@ -285,9 +311,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void Configure(string? name, TOptions options) { }
+        public virtual void Configure(string? name, TOptions options)
+        {
+        }
 
-        public void Configure(TOptions options) { }
+        public void Configure(TOptions options)
+        {
+        }
     }
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
@@ -308,7 +338,9 @@ namespace Microsoft.Extensions.Options
             TDep4 dependency4,
             TDep5 dependency5,
             System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>? Action
         {
@@ -339,22 +371,30 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void Configure(string? name, TOptions options) { }
+        public virtual void Configure(string? name, TOptions options)
+        {
+        }
 
-        public void Configure(TOptions options) { }
+        public void Configure(TOptions options)
+        {
+        }
     }
 
     public partial class ConfigureOptions<TOptions>
         : Microsoft.Extensions.Options.IConfigureOptions<TOptions> where TOptions : class
     {
-        public ConfigureOptions(System.Action<TOptions>? action) { }
+        public ConfigureOptions(System.Action<TOptions>? action)
+        {
+        }
 
         public System.Action<TOptions>? Action
         {
             get { throw null; }
         }
 
-        public virtual void Configure(TOptions options) { }
+        public virtual void Configure(TOptions options)
+        {
+        }
     }
 
     public partial interface IConfigureNamedOptions<in TOptions>
@@ -483,7 +523,9 @@ namespace Microsoft.Extensions.Options
         public OptionsBuilder(
             Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string? name
-        ) { }
+        )
+        {
+        }
 
         public string Name
         {
@@ -774,9 +816,13 @@ namespace Microsoft.Extensions.Options
             TOptions
     > : Microsoft.Extensions.Options.IOptionsMonitorCache<TOptions> where TOptions : class
     {
-        public OptionsCache() { }
+        public OptionsCache()
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public virtual TOptions GetOrAdd(string? name, System.Func<TOptions> createOptions)
         {
@@ -808,13 +854,17 @@ namespace Microsoft.Extensions.Options
         public OptionsFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Options.IConfigureOptions<TOptions>> setups,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>> postConfigures
-        ) { }
+        )
+        {
+        }
 
         public OptionsFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Options.IConfigureOptions<TOptions>> setups,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>> postConfigures,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Options.IValidateOptions<TOptions>> validations
-        ) { }
+        )
+        {
+        }
 
         public TOptions Create(string name)
         {
@@ -840,7 +890,9 @@ namespace Microsoft.Extensions.Options
         : Microsoft.Extensions.Options.IOptions<TOptions>,
             Microsoft.Extensions.Options.IOptionsSnapshot<TOptions> where TOptions : class
     {
-        public OptionsManager(Microsoft.Extensions.Options.IOptionsFactory<TOptions> factory) { }
+        public OptionsManager(Microsoft.Extensions.Options.IOptionsFactory<TOptions> factory)
+        {
+        }
 
         public TOptions Value
         {
@@ -889,14 +941,18 @@ namespace Microsoft.Extensions.Options
             Microsoft.Extensions.Options.IOptionsFactory<TOptions> factory,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Options.IOptionsChangeTokenSource<TOptions>> sources,
             Microsoft.Extensions.Options.IOptionsMonitorCache<TOptions> cache
-        ) { }
+        )
+        {
+        }
 
         public TOptions CurrentValue
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public virtual TOptions Get(string? name)
         {
@@ -915,7 +971,9 @@ namespace Microsoft.Extensions.Options
             string optionsName,
             System.Type optionsType,
             System.Collections.Generic.IEnumerable<string>? failureMessages
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<string> Failures
         {
@@ -946,7 +1004,9 @@ namespace Microsoft.Extensions.Options
             TOptions
     > : Microsoft.Extensions.Options.IOptions<TOptions> where TOptions : class
     {
-        public OptionsWrapper(TOptions options) { }
+        public OptionsWrapper(TOptions options)
+        {
+        }
 
         public TOptions Value
         {
@@ -957,7 +1017,9 @@ namespace Microsoft.Extensions.Options
     public partial class PostConfigureOptions<TOptions>
         : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions> where TOptions : class
     {
-        public PostConfigureOptions(string? name, System.Action<TOptions>? action) { }
+        public PostConfigureOptions(string? name, System.Action<TOptions>? action)
+        {
+        }
 
         public System.Action<TOptions>? Action
         {
@@ -968,7 +1030,9 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void PostConfigure(string? name, TOptions options) { }
+        public virtual void PostConfigure(string? name, TOptions options)
+        {
+        }
     }
 
     public partial class PostConfigureOptions<TOptions, TDep>
@@ -980,7 +1044,9 @@ namespace Microsoft.Extensions.Options
             string? name,
             TDep dependency,
             System.Action<TOptions, TDep>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep>? Action
         {
@@ -995,9 +1061,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void PostConfigure(string? name, TOptions options) { }
+        public virtual void PostConfigure(string? name, TOptions options)
+        {
+        }
 
-        public void PostConfigure(TOptions options) { }
+        public void PostConfigure(TOptions options)
+        {
+        }
     }
 
     public partial class PostConfigureOptions<TOptions, TDep1, TDep2>
@@ -1011,7 +1081,9 @@ namespace Microsoft.Extensions.Options
             TDep1 dependency,
             TDep2 dependency2,
             System.Action<TOptions, TDep1, TDep2>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2>? Action
         {
@@ -1030,9 +1102,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void PostConfigure(string? name, TOptions options) { }
+        public virtual void PostConfigure(string? name, TOptions options)
+        {
+        }
 
-        public void PostConfigure(TOptions options) { }
+        public void PostConfigure(TOptions options)
+        {
+        }
     }
 
     public partial class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3>
@@ -1048,7 +1124,9 @@ namespace Microsoft.Extensions.Options
             TDep2 dependency2,
             TDep3 dependency3,
             System.Action<TOptions, TDep1, TDep2, TDep3>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2, TDep3>? Action
         {
@@ -1071,9 +1149,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void PostConfigure(string? name, TOptions options) { }
+        public virtual void PostConfigure(string? name, TOptions options)
+        {
+        }
 
-        public void PostConfigure(TOptions options) { }
+        public void PostConfigure(TOptions options)
+        {
+        }
     }
 
     public partial class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
@@ -1091,7 +1173,9 @@ namespace Microsoft.Extensions.Options
             TDep3 dependency3,
             TDep4 dependency4,
             System.Action<TOptions, TDep1, TDep2, TDep3, TDep4>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2, TDep3, TDep4>? Action
         {
@@ -1118,9 +1202,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void PostConfigure(string? name, TOptions options) { }
+        public virtual void PostConfigure(string? name, TOptions options)
+        {
+        }
 
-        public void PostConfigure(TOptions options) { }
+        public void PostConfigure(TOptions options)
+        {
+        }
     }
 
     public partial class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
@@ -1140,7 +1228,9 @@ namespace Microsoft.Extensions.Options
             TDep4 dependency4,
             TDep5 dependency5,
             System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>? action
-        ) { }
+        )
+        {
+        }
 
         public System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>? Action
         {
@@ -1171,9 +1261,13 @@ namespace Microsoft.Extensions.Options
             get { throw null; }
         }
 
-        public virtual void PostConfigure(string? name, TOptions options) { }
+        public virtual void PostConfigure(string? name, TOptions options)
+        {
+        }
 
-        public void PostConfigure(TOptions options) { }
+        public void PostConfigure(TOptions options)
+        {
+        }
     }
 
     public partial class ValidateOptionsResult
@@ -1181,34 +1275,46 @@ namespace Microsoft.Extensions.Options
         public static readonly Microsoft.Extensions.Options.ValidateOptionsResult Skip;
         public static readonly Microsoft.Extensions.Options.ValidateOptionsResult Success;
 
-        public ValidateOptionsResult() { }
+        public ValidateOptionsResult()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Failures))]
         [System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(FailureMessage))]
         public bool Failed
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public string? FailureMessage
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public System.Collections.Generic.IEnumerable<string>? Failures
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool Skipped
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public bool Succeeded
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
 
         public static Microsoft.Extensions.Options.ValidateOptionsResult Fail(
@@ -1231,7 +1337,9 @@ namespace Microsoft.Extensions.Options
             string? name,
             System.Func<TOptions, bool> validation,
             string failureMessage
-        ) { }
+        )
+        {
+        }
 
         public string FailureMessage
         {
@@ -1263,7 +1371,9 @@ namespace Microsoft.Extensions.Options
             TDep dependency,
             System.Func<TOptions, TDep, bool> validation,
             string failureMessage
-        ) { }
+        )
+        {
+        }
 
         public TDep Dependency
         {
@@ -1300,7 +1410,9 @@ namespace Microsoft.Extensions.Options
             TDep2 dependency2,
             System.Func<TOptions, TDep1, TDep2, bool> validation,
             string failureMessage
-        ) { }
+        )
+        {
+        }
 
         public TDep1 Dependency1
         {
@@ -1342,7 +1454,9 @@ namespace Microsoft.Extensions.Options
             TDep3 dependency3,
             System.Func<TOptions, TDep1, TDep2, TDep3, bool> validation,
             string failureMessage
-        ) { }
+        )
+        {
+        }
 
         public TDep1 Dependency1
         {
@@ -1389,7 +1503,9 @@ namespace Microsoft.Extensions.Options
             TDep4 dependency4,
             System.Func<TOptions, TDep1, TDep2, TDep3, TDep4, bool> validation,
             string failureMessage
-        ) { }
+        )
+        {
+        }
 
         public TDep1 Dependency1
         {
@@ -1441,7 +1557,9 @@ namespace Microsoft.Extensions.Options
             TDep5 dependency5,
             System.Func<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5, bool> validation,
             string failureMessage
-        ) { }
+        )
+        {
+        }
 
         public TDep1 Dependency1
         {

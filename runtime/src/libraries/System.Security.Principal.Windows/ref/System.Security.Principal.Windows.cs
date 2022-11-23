@@ -8,10 +8,14 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed partial class SafeAccessTokenHandle : System.Runtime.InteropServices.SafeHandle
     {
-        public SafeAccessTokenHandle() : base(default(System.IntPtr), default(bool)) { }
+        public SafeAccessTokenHandle() : base(default(System.IntPtr), default(bool))
+        {
+        }
 
         public SafeAccessTokenHandle(System.IntPtr handle)
-            : base(default(System.IntPtr), default(bool)) { }
+            : base(default(System.IntPtr), default(bool))
+        {
+        }
 
         public static Microsoft.Win32.SafeHandles.SafeAccessTokenHandle InvalidHandle
         {
@@ -33,11 +37,17 @@ namespace System.Security.Principal
 {
     public sealed partial class IdentityNotMappedException : System.SystemException
     {
-        public IdentityNotMappedException() { }
+        public IdentityNotMappedException()
+        {
+        }
 
-        public IdentityNotMappedException(string? message) { }
+        public IdentityNotMappedException(string? message)
+        {
+        }
 
-        public IdentityNotMappedException(string? message, System.Exception? inner) { }
+        public IdentityNotMappedException(string? message, System.Exception? inner)
+        {
+        }
 
         public System.Security.Principal.IdentityReferenceCollection UnmappedIdentities
         {
@@ -47,12 +57,16 @@ namespace System.Security.Principal
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public abstract partial class IdentityReference
     {
-        internal IdentityReference() { }
+        internal IdentityReference()
+        {
+        }
 
         public abstract string Value { get; }
         public abstract override bool Equals(object? o);
@@ -86,9 +100,13 @@ namespace System.Security.Principal
             System.Collections.Generic.IEnumerable<System.Security.Principal.IdentityReference>,
             System.Collections.IEnumerable
     {
-        public IdentityReferenceCollection() { }
+        public IdentityReferenceCollection()
+        {
+        }
 
-        public IdentityReferenceCollection(int capacity) { }
+        public IdentityReferenceCollection(int capacity)
+        {
+        }
 
         public int Count
         {
@@ -97,23 +115,31 @@ namespace System.Security.Principal
         public System.Security.Principal.IdentityReference this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.Collections.Generic.ICollection<System.Security.Principal.IdentityReference>.IsReadOnly
         {
             get { throw null; }
         }
 
-        public void Add(System.Security.Principal.IdentityReference identity) { }
+        public void Add(System.Security.Principal.IdentityReference identity)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(System.Security.Principal.IdentityReference identity)
         {
             throw null;
         }
 
-        public void CopyTo(System.Security.Principal.IdentityReference[] array, int offset) { }
+        public void CopyTo(System.Security.Principal.IdentityReference[] array, int offset)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<System.Security.Principal.IdentityReference> GetEnumerator()
         {
@@ -148,9 +174,13 @@ namespace System.Security.Principal
 
     public sealed partial class NTAccount : System.Security.Principal.IdentityReference
     {
-        public NTAccount(string name) { }
+        public NTAccount(string name)
+        {
+        }
 
-        public NTAccount(string domainName, string accountName) { }
+        public NTAccount(string domainName, string accountName)
+        {
+        }
 
         public override string Value
         {
@@ -210,16 +240,24 @@ namespace System.Security.Principal
         public static readonly int MaxBinaryLength;
         public static readonly int MinBinaryLength;
 
-        public SecurityIdentifier(byte[] binaryForm, int offset) { }
+        public SecurityIdentifier(byte[] binaryForm, int offset)
+        {
+        }
 
-        public SecurityIdentifier(System.IntPtr binaryForm) { }
+        public SecurityIdentifier(System.IntPtr binaryForm)
+        {
+        }
 
         public SecurityIdentifier(
             System.Security.Principal.WellKnownSidType sidType,
             System.Security.Principal.SecurityIdentifier? domainSid
-        ) { }
+        )
+        {
+        }
 
-        public SecurityIdentifier(string sddlForm) { }
+        public SecurityIdentifier(string sddlForm)
+        {
+        }
 
         public System.Security.Principal.SecurityIdentifier? AccountDomainSid
         {
@@ -251,7 +289,9 @@ namespace System.Security.Principal
             throw null;
         }
 
-        public void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
 
         public override int GetHashCode()
         {
@@ -461,31 +501,45 @@ namespace System.Security.Principal
     {
         public new const string DefaultIssuer = "AD AUTHORITY";
 
-        public WindowsIdentity(System.IntPtr userToken) { }
+        public WindowsIdentity(System.IntPtr userToken)
+        {
+        }
 
-        public WindowsIdentity(System.IntPtr userToken, string type) { }
+        public WindowsIdentity(System.IntPtr userToken, string type)
+        {
+        }
 
         public WindowsIdentity(
             System.IntPtr userToken,
             string type,
             System.Security.Principal.WindowsAccountType acctType
-        ) { }
+        )
+        {
+        }
 
         public WindowsIdentity(
             System.IntPtr userToken,
             string type,
             System.Security.Principal.WindowsAccountType acctType,
             bool isAuthenticated
-        ) { }
+        )
+        {
+        }
 
         public WindowsIdentity(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        protected WindowsIdentity(System.Security.Principal.WindowsIdentity identity) { }
+        protected WindowsIdentity(System.Security.Principal.WindowsIdentity identity)
+        {
+        }
 
-        public WindowsIdentity(string sUserPrincipalName) { }
+        public WindowsIdentity(string sUserPrincipalName)
+        {
+        }
 
         public Microsoft.Win32.SafeHandles.SafeAccessTokenHandle AccessToken
         {
@@ -553,9 +607,13 @@ namespace System.Security.Principal
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public static System.Security.Principal.WindowsIdentity GetAnonymous()
         {
@@ -582,7 +640,9 @@ namespace System.Security.Principal
         public static void RunImpersonated(
             Microsoft.Win32.SafeHandles.SafeAccessTokenHandle safeAccessTokenHandle,
             System.Action action
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task RunImpersonatedAsync(
             Microsoft.Win32.SafeHandles.SafeAccessTokenHandle safeAccessTokenHandle,
@@ -608,19 +668,23 @@ namespace System.Security.Principal
             throw null;
         }
 
-        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
-            object? sender
-        ) { }
+        void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object? sender)
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class WindowsPrincipal : System.Security.Claims.ClaimsPrincipal
     {
-        public WindowsPrincipal(System.Security.Principal.WindowsIdentity ntIdentity) { }
+        public WindowsPrincipal(System.Security.Principal.WindowsIdentity ntIdentity)
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerable<System.Security.Claims.Claim> DeviceClaims
         {

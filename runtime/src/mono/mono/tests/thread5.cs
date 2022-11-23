@@ -10,7 +10,9 @@ public class MultiThreadExceptionTest
             Console.WriteLine("{0} started", Thread.CurrentThread.Name);
             throw new Exception();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     public static void Main()

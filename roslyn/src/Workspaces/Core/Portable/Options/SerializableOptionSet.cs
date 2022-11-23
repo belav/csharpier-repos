@@ -85,7 +85,9 @@ namespace Microsoft.CodeAnalysis.Options
                 values,
                 changedOptionKeysSerializable,
                 changedOptionKeysNonSerializable: ImmutableHashSet<OptionKey>.Empty
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Returns an option set with all the serializable option values prefetched for given <paramref name="languages"/>,
@@ -566,7 +568,9 @@ namespace Microsoft.CodeAnalysis.Options
         {
             public static readonly OptionKeyComparer Instance = new();
 
-            private OptionKeyComparer() { }
+            private OptionKeyComparer()
+            {
+            }
 
             public int Compare(OptionKey x, OptionKey y)
             {

@@ -198,12 +198,16 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreEqual(Constructor.Object, proxy.ConstructorCalled);
         }
 
-        private class PrivateClass { }
+        private class PrivateClass
+        {
+        }
     }
 
     public abstract class MyOwnClass
     {
-        public virtual void Foo<T>(List<T>[] action) { }
+        public virtual void Foo<T>(List<T>[] action)
+        {
+        }
 
         /* ... */
     }

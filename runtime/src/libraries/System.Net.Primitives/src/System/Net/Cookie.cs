@@ -99,7 +99,9 @@ namespace System.Net
         // https://github.com/mono/linker/issues/802
 
         [DynamicDependency("ToServerString")]
-        public Cookie() { }
+        public Cookie()
+        {
+        }
 
         [DynamicDependency("ToServerString")] // Workaround for https://github.com/dotnet/runtime/issues/19348
         public Cookie(string name, string? value)

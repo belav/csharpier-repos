@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 /// and the only state will be wiped out on Server startup</remarks>
 internal class ClientCapabilitiesManager : IClientCapabilitiesManager
 {
-    public ClientCapabilitiesManager() { }
+    public ClientCapabilitiesManager()
+    {
+    }
 
     private ClientCapabilities? _clientCapabilities;
 

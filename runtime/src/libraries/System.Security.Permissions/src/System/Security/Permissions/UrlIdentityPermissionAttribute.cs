@@ -14,7 +14,8 @@ namespace System.Security.Permissions
     public sealed partial class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public UrlIdentityPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        {
+        }
 
         public string Url { get; set; }
 

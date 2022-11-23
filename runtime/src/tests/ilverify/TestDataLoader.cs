@@ -378,7 +378,9 @@ namespace ILVerification.Tests
     /// <summary>
     /// Describes a test case with a method that contains valid IL
     /// </summary>
-    public class ValidILTestCase : TestCase { }
+    public class ValidILTestCase : TestCase
+    {
+    }
 
     /// <summary>
     /// Describes a test case with a method that contains invalid IL with the expected VerifierErrors
@@ -425,7 +427,9 @@ namespace ILVerification.Tests
         }
     }
 
-    public class ValidTypeTestCase : TestCase { }
+    public class ValidTypeTestCase : TestCase
+    {
+    }
 
     public class InvalidTypeTestCase : TestCase
     {

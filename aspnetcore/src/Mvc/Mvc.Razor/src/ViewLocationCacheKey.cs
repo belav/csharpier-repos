@@ -21,7 +21,9 @@ internal readonly struct ViewLocationCacheKey : IEquatable<ViewLocationCacheKey>
             pageName: null,
             isMainPage: isMainPage,
             values: null
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ViewLocationCacheKey"/>.

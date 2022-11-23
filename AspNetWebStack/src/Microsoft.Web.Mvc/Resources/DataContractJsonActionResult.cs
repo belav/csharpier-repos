@@ -27,7 +27,9 @@ namespace Microsoft.Web.Mvc.Resources
         /// </summary>
         /// <param name="data"></param>
         public DataContractJsonActionResult(object data)
-            : this(data, new ContentType("application/json")) { }
+            : this(data, new ContentType("application/json"))
+        {
+        }
 
         public DataContractJsonActionResult(object data, ContentType contentType)
         {

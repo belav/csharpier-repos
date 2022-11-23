@@ -112,7 +112,9 @@ namespace System.Runtime.Serialization
             int maxItemsInObjectGraph,
             StreamingContext streamingContext,
             bool ignoreExtensionDataObject
-        ) : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject) { }
+        ) : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject)
+        {
+        }
 
         internal XmlObjectSerializerReadContext(
             DataContractSerializer serializer,
@@ -1048,7 +1050,9 @@ namespace System.Runtime.Serialization
             return dataNode;
         }
 
-        protected virtual void StartReadExtensionDataValue(XmlReaderDelegator xmlReader) { }
+        protected virtual void StartReadExtensionDataValue(XmlReaderDelegator xmlReader)
+        {
+        }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

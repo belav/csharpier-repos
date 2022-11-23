@@ -8,7 +8,9 @@ namespace System.Configuration
 {
     public class SettingsContext : Hashtable
     {
-        public SettingsContext() : base() { }
+        public SettingsContext() : base()
+        {
+        }
 
         protected SettingsContext(
             SerializationInfo serializationInfo,

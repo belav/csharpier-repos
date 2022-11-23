@@ -28,6 +28,8 @@ namespace System.IO
         }
 
         protected PathTooLongException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

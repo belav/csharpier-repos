@@ -131,7 +131,9 @@ namespace AutoMapper.UnitTests
 
             public class B
             {
-                public B() { }
+                public B()
+                {
+                }
 
                 public B(string value)
                 {

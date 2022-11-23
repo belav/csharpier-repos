@@ -138,11 +138,15 @@ class Tests
         if (a > 0x1ffffffffff)
             return 2;
 
-        if (a > 0xff00000000) { }
+        if (a > 0xff00000000)
+        {
+        }
         else
             return 3;
 
-        if (a > 0xfeffffffff) { }
+        if (a > 0xfeffffffff)
+        {
+        }
         else
             return 4;
 
@@ -162,11 +166,15 @@ class Tests
         if (a > 0x1ffffffffff)
             return 2;
 
-        if (a > 0xff00000000) { }
+        if (a > 0xff00000000)
+        {
+        }
         else
             return 3;
 
-        if (a > 0xfeffffffff) { }
+        if (a > 0xfeffffffff)
+        {
+        }
         else
             return 4;
 
@@ -183,7 +191,9 @@ class Tests
         if (a < 0xffffffffff)
             return 1;
 
-        if (a < 0x1ffffffffff) { }
+        if (a < 0x1ffffffffff)
+        {
+        }
         else
             return 2;
 
@@ -194,7 +204,9 @@ class Tests
             return 4;
 
         a = 0xff00000000;
-        if (a < 0xffffffffff) { }
+        if (a < 0xffffffffff)
+        {
+        }
         else
             return 5;
 
@@ -207,7 +219,9 @@ class Tests
         if (a < 0xffffffffff)
             return 1;
 
-        if (a < 0x1ffffffffff) { }
+        if (a < 0x1ffffffffff)
+        {
+        }
         else
             return 2;
 
@@ -218,7 +232,9 @@ class Tests
             return 4;
 
         a = 0xff00000000;
-        if (a < 0xffffffffff) { }
+        if (a < 0xffffffffff)
+        {
+        }
         else
             return 5;
 
@@ -234,11 +250,15 @@ class Tests
         if (a >= 0x1fffffffffe)
             return 2;
 
-        if (a >= 0xff00000000) { }
+        if (a >= 0xff00000000)
+        {
+        }
         else
             return 3;
 
-        if (a >= 0xfefffffffe) { }
+        if (a >= 0xfefffffffe)
+        {
+        }
         else
             return 4;
 
@@ -258,11 +278,15 @@ class Tests
         if (a >= 0x1fffffffffe)
             return 2;
 
-        if (a >= 0xff00000000) { }
+        if (a >= 0xff00000000)
+        {
+        }
         else
             return 3;
 
-        if (a >= 0xfefffffffe) { }
+        if (a >= 0xfefffffffe)
+        {
+        }
         else
             return 4;
 
@@ -279,7 +303,9 @@ class Tests
         if (a <= 0xfffffffffe)
             return 1;
 
-        if (a <= 0x1ffffffffff) { }
+        if (a <= 0x1ffffffffff)
+        {
+        }
         else
             return 2;
 
@@ -290,7 +316,9 @@ class Tests
             return 4;
 
         a = 0xff00000000;
-        if (a <= 0xffffffffff) { }
+        if (a <= 0xffffffffff)
+        {
+        }
         else
             return 5;
 
@@ -303,7 +331,9 @@ class Tests
         if (a <= 0xfffffffffe)
             return 1;
 
-        if (a <= 0x1ffffffffff) { }
+        if (a <= 0x1ffffffffff)
+        {
+        }
         else
             return 2;
 
@@ -314,7 +344,9 @@ class Tests
             return 4;
 
         a = 0xff00000000;
-        if (a <= 0xffffffffff) { }
+        if (a <= 0xffffffffff)
+        {
+        }
         else
             return 5;
 

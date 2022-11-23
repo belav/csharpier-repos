@@ -96,7 +96,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             LongRange longFlagsEnum;
 
-            public EnumContainer() { }
+            public EnumContainer()
+            {
+            }
 
             [DataContract]
             public class NestedEnumContainer
@@ -104,7 +106,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 [DataMember]
                 Mode mode;
 
-                NestedEnumContainer() { }
+                NestedEnumContainer()
+                {
+                }
             }
 
             internal enum NestedSimpleEnum

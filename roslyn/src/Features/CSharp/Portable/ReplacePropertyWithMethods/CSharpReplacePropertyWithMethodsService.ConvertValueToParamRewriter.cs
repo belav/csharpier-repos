@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             public static readonly CSharpSyntaxRewriter Instance =
                 new ConvertValueToParamRewriter();
 
-            private ConvertValueToParamRewriter() { }
+            private ConvertValueToParamRewriter()
+            {
+            }
 
             private static XmlNameSyntax ConvertToParam(XmlNameSyntax name) =>
                 name.ReplaceToken(name.LocalName, SyntaxFactory.Identifier("param"));

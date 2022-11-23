@@ -1209,7 +1209,9 @@ class UseLinq
         {
             public static readonly CompileResult Instance = new TestCompileResult();
 
-            private TestCompileResult() : base(null, null, null, null) { }
+            private TestCompileResult() : base(null, null, null, null)
+            {
+            }
 
             public override Guid GetCustomTypeInfo(out ReadOnlyCollection<byte> payload)
             {

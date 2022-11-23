@@ -28,7 +28,9 @@ namespace Castle.Components.DictionaryAdapter
         /// <summary>
         /// Initializes a default instance of the <see cref="KeyPrefixAttribute"/> class.
         /// </summary>
-        public KeyPrefixAttribute() { }
+        public KeyPrefixAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyPrefixAttribute"/> class.

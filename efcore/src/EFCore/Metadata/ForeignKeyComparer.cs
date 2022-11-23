@@ -23,7 +23,9 @@ public sealed class ForeignKeyComparer
     : IEqualityComparer<IReadOnlyForeignKey>,
         IComparer<IReadOnlyForeignKey>
 {
-    private ForeignKeyComparer() { }
+    private ForeignKeyComparer()
+    {
+    }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.

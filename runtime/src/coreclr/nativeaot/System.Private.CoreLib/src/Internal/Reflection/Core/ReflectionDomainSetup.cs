@@ -12,7 +12,9 @@ namespace Internal.Reflection.Core
     [CLSCompliant(false)]
     public abstract class ReflectionDomainSetup
     {
-        protected ReflectionDomainSetup() { }
+        protected ReflectionDomainSetup()
+        {
+        }
 
         public abstract AssemblyBinder AssemblyBinder { get; }
         public abstract Exception CreateMissingMetadataException(Type? pertainant);

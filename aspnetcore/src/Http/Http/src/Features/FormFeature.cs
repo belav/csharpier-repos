@@ -36,7 +36,9 @@ public class FormFeature : IFormFeature
     /// Initializes a new instance of <see cref="FormFeature"/>.
     /// </summary>
     /// <param name="request">The <see cref="HttpRequest"/>.</param>
-    public FormFeature(HttpRequest request) : this(request, FormOptions.Default) { }
+    public FormFeature(HttpRequest request) : this(request, FormOptions.Default)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormFeature"/>.

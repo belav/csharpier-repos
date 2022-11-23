@@ -274,7 +274,9 @@ namespace System.Configuration
                     InternalConfigConfigurationFactoryTypeName
                 );
 
-            private ClientSettingsConfigurationHost() { }
+            private ClientSettingsConfigurationHost()
+            {
+            }
 
             public override void Init(
                 IInternalConfigRoot configRoot,

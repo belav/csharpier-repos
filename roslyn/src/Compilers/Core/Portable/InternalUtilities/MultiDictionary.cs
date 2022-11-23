@@ -53,7 +53,9 @@ namespace Roslyn.Utilities
                     }
                 }
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 public void Reset()
                 {

@@ -33,7 +33,11 @@ public class HostFilteringMiddlewareTests
         await host.StartAsync();
 
         await Assert.ThrowsAsync<InvalidOperationException>(
-            () => host.GetTestServer().SendAsync(_ => { })
+            () =>
+                host.GetTestServer()
+                    .SendAsync(_ =>
+                    {
+                    })
         );
     }
 

@@ -12,7 +12,9 @@ namespace System.Security.Cryptography
         private RSA? _rsaKey;
         private string? _algName;
 
-        public RSAPKCS1SignatureDeformatter() { }
+        public RSAPKCS1SignatureDeformatter()
+        {
+        }
 
         public RSAPKCS1SignatureDeformatter(AsymmetricAlgorithm key)
         {

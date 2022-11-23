@@ -11,7 +11,9 @@ namespace System.IO.Tests.Enumeration
         private class DirectoryFinishedEnumerator : FileSystemEnumerator<string>
         {
             public DirectoryFinishedEnumerator(string directory, EnumerationOptions options)
-                : base(directory, options) { }
+                : base(directory, options)
+            {
+            }
 
             protected override string TransformEntry(ref FileSystemEntry entry)
             {

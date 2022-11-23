@@ -20,8 +20,12 @@ namespace DefaultNamespace
                 return true;
             }
 
-            try { }
-            catch (RankException) { }
+            try
+            {
+            }
+            catch (RankException)
+            {
+            }
 
             return true;
         }

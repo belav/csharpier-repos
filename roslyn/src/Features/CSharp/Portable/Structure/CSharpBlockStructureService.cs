@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpBlockStructureServiceFactory() { }
+        public CSharpBlockStructureServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
             new CSharpBlockStructureService(languageServices.LanguageServices.SolutionServices);
@@ -26,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
 
     internal class CSharpBlockStructureService : BlockStructureServiceWithProviders
     {
-        public CSharpBlockStructureService(SolutionServices services) : base(services) { }
+        public CSharpBlockStructureService(SolutionServices services) : base(services)
+        {
+        }
 
         protected override ImmutableArray<BlockStructureProvider> GetBuiltInProviders()
         {

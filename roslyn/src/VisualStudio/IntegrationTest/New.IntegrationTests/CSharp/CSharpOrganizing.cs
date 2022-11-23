@@ -15,7 +15,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpOrganizing() : base(nameof(CSharpOrganizing)) { }
+        public CSharpOrganizing() : base(nameof(CSharpOrganizing))
+        {
+        }
 
         [IdeFact]
         public async Task RemoveAndSort()

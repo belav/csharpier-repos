@@ -14,7 +14,9 @@ namespace System.Net.Mime
     {
         // default constructor
         // intentionally override the default comparer in the derived base class
-        internal HeaderCollection() : base(StringComparer.OrdinalIgnoreCase) { }
+        internal HeaderCollection() : base(StringComparer.OrdinalIgnoreCase)
+        {
+        }
 
 #pragma warning disable CS8765 // Nullability of parameter 'name' doesn't match overridden member
         public override void Remove(string name)

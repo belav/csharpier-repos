@@ -5,7 +5,9 @@ namespace System.Diagnostics
 {
     public class EntryWrittenEventArgs : EventArgs
     {
-        public EntryWrittenEventArgs() { }
+        public EntryWrittenEventArgs()
+        {
+        }
 
         public EntryWrittenEventArgs(EventLogEntry entry)
         {

@@ -201,7 +201,9 @@ namespace ILCompiler
                     checkType = implType;
                     checkType != null && !checkType.HasSameTypeDefinition(declMethod.OwningType);
                     checkType = checkType.BaseType
-                ) { }
+                )
+                {
+                }
 
                 if (
                     (checkType == null)

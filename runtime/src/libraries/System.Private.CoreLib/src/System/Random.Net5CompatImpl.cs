@@ -101,7 +101,9 @@ namespace System
             /// <summary>Potentially lazily-initialized algorithm backing this instance.</summary>
             private CompatPrng _prng; // mutable struct; do not make this readonly
 
-            public Net5CompatDerivedImpl(Random parent) : this(parent, Shared.Next()) { }
+            public Net5CompatDerivedImpl(Random parent) : this(parent, Shared.Next())
+            {
+            }
 
             public Net5CompatDerivedImpl(Random parent, int seed)
             {

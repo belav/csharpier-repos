@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 declaredAccessibility,
                 modifiers,
                 name
-            ) { }
+            )
+        {
+        }
 
         public virtual ImmutableArray<ISymbol> GetMembers() => ImmutableArray.Create<ISymbol>();
 

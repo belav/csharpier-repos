@@ -287,7 +287,9 @@ namespace Roslyn.Test.Utilities.Desktop
             Guid("90F1A06C-7712-4762-86B5-7A5EBA6BDB02"),
             TypeIdentifier
         ]
-        public interface CLRRuntimeHost : ICLRRuntimeHost { }
+        public interface CLRRuntimeHost : ICLRRuntimeHost
+        {
+        }
 
         [
             ComImport,
@@ -295,7 +297,9 @@ namespace Roslyn.Test.Utilities.Desktop
             Guid("90F1A06C-7712-4762-86B5-7A5EBA6BDB02"),
             TypeIdentifier
         ]
-        public interface ICLRRuntimeHost { }
+        public interface ICLRRuntimeHost
+        {
+        }
 
         [
             ComImport,
@@ -380,7 +384,9 @@ namespace Roslyn.Test.Utilities.Desktop
             InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
             TypeIdentifier
         ]
-        public interface IMetaDataImport { }
+        public interface IMetaDataImport
+        {
+        }
 
         [
             ComImport,

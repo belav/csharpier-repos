@@ -5,9 +5,13 @@ using System;
 
 namespace SyntheticVirtualOverride
 {
-    struct StructWithNoEqualsAndGetHashCode { }
+    struct StructWithNoEqualsAndGetHashCode
+    {
+    }
 
-    class ClassWithInjectedEqualsAndGetHashCode { }
+    class ClassWithInjectedEqualsAndGetHashCode
+    {
+    }
 
     class ClassOverridingEqualsAndGetHashCode : ClassWithInjectedEqualsAndGetHashCode
     {
@@ -22,5 +26,7 @@ namespace SyntheticVirtualOverride
         }
     }
 
-    class ClassNotOverridingEqualsAndGetHashCode : ClassWithInjectedEqualsAndGetHashCode { }
+    class ClassNotOverridingEqualsAndGetHashCode : ClassWithInjectedEqualsAndGetHashCode
+    {
+    }
 }

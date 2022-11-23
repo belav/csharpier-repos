@@ -14,7 +14,9 @@ namespace Roslyn.Utilities
     {
         private readonly HashSet<ReferenceHolder<T>> _values = new();
 
-        public WeakSet() { }
+        public WeakSet()
+        {
+        }
 
         public bool Add(T value)
         {

@@ -170,7 +170,9 @@ namespace Castle.Core
         ///   <paramref name = "key" /> is null. </exception>
         /// <exception cref = "T:System.NotSupportedException">The <see cref = "T:System.Collections.IDictionary" /> object is read-only.-or- The <see
         ///    cref = "T:System.Collections.IDictionary" /> has a fixed size. </exception>
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
         /// <summary>
         ///   Returns an enumerator that iterates through a collection.

@@ -15,8 +15,12 @@ class Class : Interface
 {
     event Action<int> Interface.Event
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 }
 
@@ -29,8 +33,12 @@ class Generic<S> : IGeneric<S>
 {
     event Action<S> IGeneric<S>.Event
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 }
 
@@ -38,12 +46,18 @@ class Constructed : IGeneric<int>
 {
     event Action<int> IGeneric<int>.Event
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 }
 
-interface IGenericInterface<T> : Interface { }
+interface IGenericInterface<T> : Interface
+{
+}
 
 //we'll see a type def for this class, a type ref for IGenericInterface<int>,
 //and then a type def for Interface (i.e. back and forth)
@@ -51,8 +65,12 @@ class IndirectImplementation : IGenericInterface<int>
 {
     event Action<int> Interface.Event
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 }
 
@@ -72,8 +90,12 @@ class Outer<T>
     {
         event Action<A> IGeneric2<A>.Event
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 
@@ -81,8 +103,12 @@ class Outer<T>
     {
         event Action<T> IGeneric2<T>.Event
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 
@@ -90,8 +116,12 @@ class Outer<T>
     {
         event Action<C> IInner<C>.Event
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 
@@ -99,8 +129,12 @@ class Outer<T>
     {
         event Action<T> IInner<T>.Event
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
     }
 }

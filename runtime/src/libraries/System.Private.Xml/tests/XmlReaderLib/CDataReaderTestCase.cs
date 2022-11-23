@@ -115,8 +115,12 @@ namespace System.Xml.Tests
             return result;
         }
 
-        public virtual void PreExecuteVariation(int index, object param) { }
+        public virtual void PreExecuteVariation(int index, object param)
+        {
+        }
 
-        public virtual void PostExecuteVariation(int index, object param) { }
+        public virtual void PostExecuteVariation(int index, object param)
+        {
+        }
     }
 }

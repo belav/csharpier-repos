@@ -75,7 +75,9 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="equalityComparer">The equality comparer.</param>
         internal ImmutableHashSet(IEqualityComparer<T> equalityComparer)
-            : this(SortedInt32KeyNode<HashBucket>.EmptyNode, equalityComparer, 0) { }
+            : this(SortedInt32KeyNode<HashBucket>.EmptyNode, equalityComparer, 0)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImmutableHashSet{T}"/> class.

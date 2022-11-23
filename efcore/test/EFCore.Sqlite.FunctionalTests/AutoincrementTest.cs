@@ -47,7 +47,9 @@ public class AutoincrementTest : IClassFixture<AutoincrementTest.AutoincrementFi
 
     protected class BatContext : PoolableDbContext
     {
-        public BatContext(DbContextOptions options) : base(options) { }
+        public BatContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<PersonA> People { get; set; }
     }

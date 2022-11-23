@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
     {
         private bool _paused;
 
-        protected AbstractTaggerEventSource() { }
+        protected AbstractTaggerEventSource()
+        {
+        }
 
         public abstract void Connect();
         public abstract void Disconnect();

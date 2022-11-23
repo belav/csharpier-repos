@@ -296,7 +296,9 @@ namespace System.Xml.XmlSchemaTests
                 sc.Reprocess(schema);
                 Assert.True(false);
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
             CError.Compare(sc.IsCompiled, false, "ReprocessIsCompiled");
             CError.Compare(sc.Count, 1, "ReprocessCount");
 
@@ -319,7 +321,9 @@ namespace System.Xml.XmlSchemaTests
                     sc.Reprocess(schema);
                     Assert.True(false);
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
                 CError.Compare(sc.IsCompiled, true, "ReprocessIsCompiled");
                 CError.Compare(sc.Count, 1, "ReprocessCount");
                 return;
@@ -565,7 +569,9 @@ namespace System.Xml.XmlSchemaTests
                 sc.Reprocess(schema);
                 Assert.True(false);
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
             CError.Compare(sc.IsCompiled, true, "ReprocessIsCompiled");
             CError.Compare(sc.Count, 1, "ReprocessCount");
 
@@ -584,7 +590,9 @@ namespace System.Xml.XmlSchemaTests
                     sc.Reprocess(schema);
                     Assert.True(false);
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
                 CError.Compare(sc.IsCompiled, true, "ReprocessIsCompiled");
                 CError.Compare(sc.Count, 1, "ReprocessCount");
                 return;

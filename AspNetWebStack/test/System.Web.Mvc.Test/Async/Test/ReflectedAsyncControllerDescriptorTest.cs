@@ -209,9 +209,13 @@ namespace System.Web.Mvc.Async.Test
         private class MyController : AsyncController
         {
             [ActionName("NewName")]
-            public void FooAsync() { }
+            public void FooAsync()
+            {
+            }
 
-            public void FooCompleted() { }
+            public void FooCompleted()
+            {
+            }
         }
     }
 }

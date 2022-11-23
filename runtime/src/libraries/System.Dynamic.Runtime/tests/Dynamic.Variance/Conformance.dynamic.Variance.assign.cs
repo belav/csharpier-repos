@@ -120,9 +120,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -175,12 +179,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -226,9 +236,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -245,8 +259,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
         public static int MainMethod()
         {
-            Foo<Animal> v1 = (Animal a) => { };
-            dynamic v2 = (Foo<Animal>)((Animal a) => { });
+            Foo<Animal> v1 = (Animal a) => {
+            };
+            dynamic v2 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             try
             {
                 p1 = v2;
@@ -275,9 +294,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -315,9 +338,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -332,7 +359,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) => { });
+            dynamic f1 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             f2 += f1;
             f2(new Tiger());
             return 0;
@@ -363,9 +394,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -411,9 +446,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     // <Expects status=success> </Expects>
     // <Code>
     //<Expects Status=warning>\(16,22\).*CS0169</Expects>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -434,8 +473,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
         public static int MainMethod()
         {
-            Foo<Animal> f1 = (Animal a) => { };
-            dynamic f2 = (Foo<Animal>)((Animal a) => { });
+            Foo<Animal> f1 = (Animal a) => {
+            };
+            dynamic f2 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             s_array1 = new Foo<Tiger>[1];
             s_array1[0] = f2;
             s_array1[0](new Tiger());
@@ -463,9 +507,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -504,9 +552,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public static void Bar1(Foo<Animal> f) { }
+        public static void Bar1(Foo<Animal> f)
+        {
+        }
 
-        public static void Bar2(dynamic f) { }
+        public static void Bar2(dynamic f)
+        {
+        }
     }
     //</Code>
 }
@@ -526,12 +578,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -559,9 +617,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public static void Bar1(iVariance<Tiger> f) { }
+        public static void Bar1(iVariance<Tiger> f)
+        {
+        }
 
-        public static void Bar2(dynamic f) { }
+        public static void Bar2(dynamic f)
+        {
+        }
     }
     //</Code>
 }
@@ -593,12 +655,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public void Foo(IA<string> x) { }
+        public void Foo(IA<string> x)
+        {
+        }
     }
 
-    public interface IA<in T> { }
+    public interface IA<in T>
+    {
+    }
 
-    public class A : IA<object> { }
+    public class A : IA<object>
+    {
+    }
     //</Code>
 }
 
@@ -629,12 +697,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public void Foo(IA<string> x) { }
+        public void Foo(IA<string> x)
+        {
+        }
     }
 
-    public interface IA<in T> { }
+    public interface IA<in T>
+    {
+    }
 
-    public class A : IA<object> { }
+    public class A : IA<object>
+    {
+    }
     //</Code>
 }
 
@@ -781,16 +855,26 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Mammal : Animal { }
+    public class Mammal : Animal
+    {
+    }
 
-    public class Tiger : Mammal { }
+    public class Tiger : Mammal
+    {
+    }
 
-    public class Bear : Mammal { }
+    public class Bear : Mammal
+    {
+    }
 
     public class C
     {
@@ -895,11 +979,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
         public static int MainMethod()
         {
-            Foo<Animal> f10 = (Animal a) => { };
+            Foo<Animal> f10 = (Animal a) => {
+            };
             dynamic f11 = (Foo<Tiger>)f10;
             Foo<Giraffe> f12 = (Foo<Giraffe>)f11;
             f11(new Tiger());
-            Foo<Animal> f20 = (Animal a) => { };
+            Foo<Animal> f20 = (Animal a) => {
+            };
             dynamic f21 = (Foo<Tiger>)f20;
             dynamic f22 = (Foo<Giraffe>)f21;
             f22(new Tiger());
@@ -966,7 +1052,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
         public static int MainMethod()
         {
-            Foo<Animal> f = (Animal a) => { };
+            Foo<Animal> f = (Animal a) => {
+            };
             dynamic f11 = (Foo<Tiger>)f;
             Foo<Giraffe> f12 = (Foo<Giraffe>)f11;
             f11(new Tiger());
@@ -1031,7 +1118,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
     public class C
@@ -1104,11 +1193,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Mammal : Animal { }
+    public class Mammal : Animal
+    {
+    }
 
-    public class Tiger : Mammal { }
+    public class Tiger : Mammal
+    {
+    }
 
     public class C
     {
@@ -1155,16 +1250,26 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Mammal : Animal { }
+    public class Mammal : Animal
+    {
+    }
 
-    public class Tiger : Mammal { }
+    public class Tiger : Mammal
+    {
+    }
 
-    public class Bear : Mammal { }
+    public class Bear : Mammal
+    {
+    }
 
     public class C
     {
@@ -1218,16 +1323,26 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Mammal : Animal { }
+    public class Mammal : Animal
+    {
+    }
 
-    public class Tiger : Mammal { }
+    public class Tiger : Mammal
+    {
+    }
 
-    public class Bear : Mammal { }
+    public class Bear : Mammal
+    {
+    }
 
     public class C
     {
@@ -1279,11 +1394,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Mammal : Animal { }
+    public class Mammal : Animal
+    {
+    }
 
-    public class Tiger : Mammal { }
+    public class Tiger : Mammal
+    {
+    }
 
     public class C
     {
@@ -1337,11 +1458,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Mammal : Animal { }
+    public class Mammal : Animal
+    {
+    }
 
-    public class Tiger : Mammal { }
+    public class Tiger : Mammal
+    {
+    }
 
     public class B
     {

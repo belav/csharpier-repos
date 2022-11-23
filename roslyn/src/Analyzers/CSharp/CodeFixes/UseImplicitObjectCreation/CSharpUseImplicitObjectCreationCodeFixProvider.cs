@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpUseImplicitObjectCreationCodeFixProvider() { }
+        public CSharpUseImplicitObjectCreationCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseImplicitObjectCreationDiagnosticId);

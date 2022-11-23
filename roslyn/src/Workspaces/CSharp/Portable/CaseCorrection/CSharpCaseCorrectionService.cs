@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CaseCorrection
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCaseCorrectionService() { }
+        public CSharpCaseCorrectionService()
+        {
+        }
 
         protected override void AddReplacements(
             SemanticModel? semanticModel,

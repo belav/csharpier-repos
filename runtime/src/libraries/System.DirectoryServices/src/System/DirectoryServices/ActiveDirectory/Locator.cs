@@ -10,7 +10,9 @@ namespace System.DirectoryServices.ActiveDirectory
     internal sealed class Locator
     {
         // To disable public/protected constructors for this class
-        private Locator() { }
+        private Locator()
+        {
+        }
 
         internal static DomainControllerInfo GetDomainControllerInfo(
             string? computerName,

@@ -2603,7 +2603,9 @@ namespace System.Web.Mvc.Test
                         Assert.NotNull(ctx);
                         storedContext = ctx;
                     },
-                    OnResultExecutedImpl = delegate { }
+                    OnResultExecutedImpl = delegate
+                    {
+                    }
                 },
                 new ActionFilterImpl()
                 {
@@ -2612,7 +2614,9 @@ namespace System.Web.Mvc.Test
                         Assert.NotNull(ctx);
                         Assert.Same(storedContext, ctx);
                     },
-                    OnResultExecutedImpl = delegate { }
+                    OnResultExecutedImpl = delegate
+                    {
+                    }
                 },
             };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
@@ -3443,7 +3447,9 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private class BlankController : Controller { }
+        private class BlankController : Controller
+        {
+        }
 
         private sealed class CustomResult : ActionResult
         {
@@ -3510,7 +3516,9 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private class EmptyController : Controller { }
+        private class EmptyController : Controller
+        {
+        }
 
         // This controller serves to test the default action method matching mechanism
         private class FindMethodController : Controller
@@ -3542,7 +3550,9 @@ namespace System.Web.Mvc.Test
                 return null;
             }
 
-            public void WrongReturnType() { }
+            public void WrongReturnType()
+            {
+            }
 
             protected ActionResult ProtectedMethod()
             {
@@ -3627,9 +3637,13 @@ namespace System.Web.Mvc.Test
                 foo = null;
             }
 
-            public void HasRefParam(ref string foo) { }
+            public void HasRefParam(ref string foo)
+            {
+            }
 
-            public void Parameterless() { }
+            public void Parameterless()
+            {
+            }
 
             public void TakesInt(int id)
             {
@@ -3642,9 +3656,13 @@ namespace System.Web.Mvc.Test
                 return null;
             }
 
-            public void TakesString(string id) { }
+            public void TakesString(string id)
+            {
+            }
 
-            public void TakesDateTime(DateTime id) { }
+            public void TakesDateTime(DateTime id)
+            {
+            }
         }
 
         // Provides access to the protected members of ControllerActionInvoker
@@ -4029,33 +4047,53 @@ namespace System.Web.Mvc.Test
 
         private class CustomConverterController : Controller
         {
-            public void ParameterWithoutBindAttribute([PredicateReflector] string someParam) { }
+            public void ParameterWithoutBindAttribute([PredicateReflector] string someParam)
+            {
+            }
 
             public void ParameterHasBindAttribute(
                 [Bind(Include = "foo"), PredicateReflector] string someParam
-            ) { }
+            )
+            {
+            }
 
-            public void ParameterHasDefaultValueAttribute([DefaultValue(42)] int foo) { }
+            public void ParameterHasDefaultValueAttribute([DefaultValue(42)] int foo)
+            {
+            }
 
-            public void ParameterHasFieldPrefix([Bind(Prefix = "bar")] string foo) { }
+            public void ParameterHasFieldPrefix([Bind(Prefix = "bar")] string foo)
+            {
+            }
 
-            public void ParameterHasNullFieldPrefix([Bind(Include = "whatever")] string foo) { }
+            public void ParameterHasNullFieldPrefix([Bind(Include = "whatever")] string foo)
+            {
+            }
 
-            public void ParameterHasEmptyFieldPrefix([Bind(Prefix = "")] MySimpleModel foo) { }
+            public void ParameterHasEmptyFieldPrefix([Bind(Prefix = "")] MySimpleModel foo)
+            {
+            }
 
-            public void ParameterHasNoPrefixAndComplexType(MySimpleModel foo) { }
+            public void ParameterHasNoPrefixAndComplexType(MySimpleModel foo)
+            {
+            }
 
             public void ParameterHasPrefixAndComplexType(
                 [Bind(Prefix = "badprefix")] MySimpleModel foo
-            ) { }
+            )
+            {
+            }
 
-            public void ParameterHasNoConverters(string foo) { }
+            public void ParameterHasNoConverters(string foo)
+            {
+            }
 
-            public void ParameterHasOneConverter([MyCustomConverter] string foo) { }
+            public void ParameterHasOneConverter([MyCustomConverter] string foo)
+            {
+            }
 
-            public void ParameterHasTwoConverters(
-                [MyCustomConverter, MyCustomConverter] string foo
-            ) { }
+            public void ParameterHasTwoConverters([MyCustomConverter, MyCustomConverter] string foo)
+            {
+            }
         }
 
         public class MySimpleModel
@@ -4145,20 +4183,30 @@ namespace System.Web.Mvc.Test
         {
             [Route("route")]
             [ActionName("Action")] // to make things confusing
-            public void ActionWithoutRoute() { }
+            public void ActionWithoutRoute()
+            {
+            }
 
             [Route("route")]
-            public void Action() { }
+            public void Action()
+            {
+            }
         }
 
         [Route("controller/{action}")]
         private class AttributeRoutingOnTheController : Controller
         {
-            public void Action1() { }
+            public void Action1()
+            {
+            }
 
-            public void Action2() { }
+            public void Action2()
+            {
+            }
 
-            public void Action2(string name) { }
+            public void Action2(string name)
+            {
+            }
         }
 
         private class MatchAttribute : ActionMethodSelectorAttribute

@@ -24,27 +24,37 @@ namespace System.Net
     )]
     public sealed class SocketPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public SocketPermissionAttribute(SecurityAction action) : base(action) { }
+        public SocketPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public string Access
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public string Host
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public string Port
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public string Transport
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override IPermission CreatePermission()

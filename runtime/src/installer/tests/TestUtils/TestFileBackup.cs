@@ -30,7 +30,9 @@ namespace Microsoft.DotNet.CoreSetup.Test
                         Path.Combine(_backupPath, "_stackTrace.txt")
                     );
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 throw new Exception(
                     $"The backup directory `{_backupPath}` already exists. Please make sure that all customizers are correctly disposed.\r\n"

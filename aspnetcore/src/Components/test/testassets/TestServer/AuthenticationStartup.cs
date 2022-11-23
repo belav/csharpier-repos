@@ -77,11 +77,15 @@ public class AuthenticationStartupBase
 public class AuthenticationStartup : AuthenticationStartupBase
 {
     public AuthenticationStartup(IConfiguration configuration)
-        : base(configuration, (endpoints) => endpoints.MapFallbackToFile("index.html")) { }
+        : base(configuration, (endpoints) => endpoints.MapFallbackToFile("index.html"))
+    {
+    }
 }
 
 public class ServerAuthenticationStartup : AuthenticationStartupBase
 {
     public ServerAuthenticationStartup(IConfiguration configuration)
-        : base(configuration, (endpoints) => endpoints.MapFallbackToPage("/_ServerHost")) { }
+        : base(configuration, (endpoints) => endpoints.MapFallbackToPage("/_ServerHost"))
+    {
+    }
 }

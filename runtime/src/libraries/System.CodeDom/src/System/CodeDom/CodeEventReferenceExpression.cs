@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _eventName;
 
-        public CodeEventReferenceExpression() { }
+        public CodeEventReferenceExpression()
+        {
+        }
 
         public CodeEventReferenceExpression(CodeExpression targetObject, string eventName)
         {

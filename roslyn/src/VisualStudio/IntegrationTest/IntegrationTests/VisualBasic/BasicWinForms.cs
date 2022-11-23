@@ -24,7 +24,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
                 instanceFactory,
                 nameof(BasicWinForms),
                 WellKnownProjectTemplates.WinFormsApplication
-            ) { }
+            )
+        {
+        }
 
         [WpfFact]
         public void TestMyIntelliSense()

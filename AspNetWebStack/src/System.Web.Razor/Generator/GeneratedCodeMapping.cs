@@ -13,7 +13,9 @@ namespace System.Web.Razor.Generator
             int startColumn,
             int startGeneratedColumn,
             int codeLength
-        ) : this(null, startLine, startColumn, startGeneratedColumn, codeLength) { }
+        ) : this(null, startLine, startColumn, startGeneratedColumn, codeLength)
+        {
+        }
 
         public GeneratedCodeMapping(
             int startOffset,
@@ -21,7 +23,9 @@ namespace System.Web.Razor.Generator
             int startColumn,
             int startGeneratedColumn,
             int codeLength
-        ) : this((int?)startOffset, startLine, startColumn, startGeneratedColumn, codeLength) { }
+        ) : this((int?)startOffset, startLine, startColumn, startGeneratedColumn, codeLength)
+        {
+        }
 
         private GeneratedCodeMapping(
             int? startOffset,

@@ -13,7 +13,9 @@ public abstract class TemplatedModelGenerator : ModelCodeGenerator
     /// </summary>
     /// <param name="dependencies">The dependencies.</param>
     protected TemplatedModelGenerator(ModelCodeGeneratorDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Gets the subdirectory under the project to look for templates in.

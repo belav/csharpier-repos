@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
     internal class FileTextLoaderNoException : FileTextLoader
     {
         public FileTextLoaderNoException(string path, Encoding defaultEncoding)
-            : base(path, defaultEncoding) { }
+            : base(path, defaultEncoding)
+        {
+        }
 
         public override Task<TextAndVersion> LoadTextAndVersionAsync(
             CodeAnalysis.Workspace workspace,

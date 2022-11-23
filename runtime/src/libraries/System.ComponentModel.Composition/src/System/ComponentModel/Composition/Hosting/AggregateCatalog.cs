@@ -24,7 +24,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class.
         /// </summary>
-        public AggregateCatalog() : this((IEnumerable<ComposablePartCatalog>?)null) { }
+        public AggregateCatalog() : this((IEnumerable<ComposablePartCatalog>?)null)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class
@@ -41,7 +43,9 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="catalogs"/> contains an element that is <see langword="null"/>.
         /// </exception>
         public AggregateCatalog(params ComposablePartCatalog[]? catalogs)
-            : this((IEnumerable<ComposablePartCatalog>?)catalogs) { }
+            : this((IEnumerable<ComposablePartCatalog>?)catalogs)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class

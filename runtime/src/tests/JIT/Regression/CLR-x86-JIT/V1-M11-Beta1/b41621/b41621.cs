@@ -27,7 +27,9 @@ namespace Test
         public static object m_xStatic1 = null;
         public static uint m_uForward4;
 
-        void Method2(__arglist) { }
+        void Method2(__arglist)
+        {
+        }
 
         static void Static1(ref uint[] param1)
         {
@@ -53,7 +55,9 @@ namespace Test
                 uint[] au = null;
                 Static1(ref au);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

@@ -598,9 +598,15 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-    public class UserDefinedClass { }
+    public class UserDefinedClass
+    {
+    }
 
-    public enum UserDefinedEnum { }
+    public enum UserDefinedEnum
+    {
+    }
 
-    public struct UserDefinedStruct { }
+    public struct UserDefinedStruct
+    {
+    }
 }

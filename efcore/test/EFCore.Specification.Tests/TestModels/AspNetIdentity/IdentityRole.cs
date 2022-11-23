@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
 public class IdentityRole<TKey> where TKey : IEquatable<TKey>
 {
-    public IdentityRole() { }
+    public IdentityRole()
+    {
+    }
 
     public IdentityRole(string roleName) : this()
     {

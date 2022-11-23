@@ -52,7 +52,9 @@ public class MappingInheritance : AutoMapperSpecBase
         public int Value3 { get; set; }
     }
 
-    public class ViewModel : BaseModel { }
+    public class ViewModel : BaseModel
+    {
+    }
 }
 
 public class MappingInheritanceBug
@@ -77,20 +79,30 @@ public class MappingInheritanceBug
         mapped.ShouldBeOfType<MailOrderDto>();
     }
 
-    public abstract class Base<T> { }
+    public abstract class Base<T>
+    {
+    }
 
-    public class Order : Base<Order> { }
+    public class Order : Base<Order>
+    {
+    }
 
-    public class OnlineOrder : Order { }
+    public class OnlineOrder : Order
+    {
+    }
 
     public class MailOrder : Order
     {
         public int NewId { get; set; }
     }
 
-    public class OrderDto { }
+    public class OrderDto
+    {
+    }
 
-    public class OnlineOrderDto : OrderDto { }
+    public class OnlineOrderDto : OrderDto
+    {
+    }
 
     public class MailOrderDto : OrderDto
     {

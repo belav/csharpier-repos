@@ -3,4 +3,6 @@
 
 namespace Alternate.Namespace;
 
-public class Model { }
+public class Model
+{
+}

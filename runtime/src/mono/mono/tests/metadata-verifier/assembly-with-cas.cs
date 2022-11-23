@@ -5,7 +5,11 @@ using System.Security.Permissions;
 public class Class
 {
     [SecurityPermission(SecurityAction.LinkDemand)]
-    public static void Method() { }
+    public static void Method()
+    {
+    }
 
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

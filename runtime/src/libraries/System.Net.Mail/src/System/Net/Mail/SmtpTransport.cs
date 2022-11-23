@@ -27,7 +27,9 @@ namespace System.Net.Mail
         private X509CertificateCollection? _clientCertificates;
 
         internal SmtpTransport(SmtpClient client)
-            : this(client, SmtpAuthenticationManager.GetModules()) { }
+            : this(client, SmtpAuthenticationManager.GetModules())
+        {
+        }
 
         internal SmtpTransport(SmtpClient client, ISmtpAuthenticationModule[] authenticationModules)
         {
@@ -98,7 +100,9 @@ namespace System.Net.Mail
 
                 _connection.GetConnection(host, port);
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         internal IAsyncResult BeginGetConnection(
@@ -195,7 +199,9 @@ namespace System.Net.Mail
             {
                 return SendMailAsyncResult.End(result);
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         internal MailWriter SendMail(

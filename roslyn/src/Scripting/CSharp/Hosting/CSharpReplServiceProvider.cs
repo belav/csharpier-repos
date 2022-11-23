@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
 {
     internal sealed class CSharpReplServiceProvider : ReplServiceProvider
     {
-        public CSharpReplServiceProvider() { }
+        public CSharpReplServiceProvider()
+        {
+        }
 
         public override ObjectFormatter ObjectFormatter { get; } = CSharpObjectFormatter.Instance;
         public override CommandLineParser CommandLineParser => CSharpCommandLineParser.Script;

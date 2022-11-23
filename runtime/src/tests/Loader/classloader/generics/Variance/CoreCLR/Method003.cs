@@ -8,15 +8,23 @@
 
 using System;
 
-public class C : IMinusT<int> { }
+public class C : IMinusT<int>
+{
+}
 
-public class D : IMinusT<string[]> { }
+public class D : IMinusT<string[]>
+{
+}
 
-public class E : IMinusT<object> { }
+public class E : IMinusT<object>
+{
+}
 
 public class A5 : Test001PlusT<int>
 {
-    public void method1<M>(IMinusT<int> t) where M : IMinusT<int> { }
+    public void method1<M>(IMinusT<int> t) where M : IMinusT<int>
+    {
+    }
 }
 
 public class A6 : Test002PlusT<string>

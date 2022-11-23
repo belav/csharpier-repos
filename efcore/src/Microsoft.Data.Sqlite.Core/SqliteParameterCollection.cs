@@ -22,7 +22,9 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteParameterCollection" /> class.
         /// </summary>
-        protected internal SqliteParameterCollection() { }
+        protected internal SqliteParameterCollection()
+        {
+        }
 
         /// <summary>
         ///     Gets the number of items in the collection.

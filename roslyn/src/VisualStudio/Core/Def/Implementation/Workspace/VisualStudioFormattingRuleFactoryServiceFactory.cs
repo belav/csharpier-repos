@@ -33,7 +33,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioFormattingRuleFactoryServiceFactory() { }
+        public VisualStudioFormattingRuleFactoryServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new Factory();

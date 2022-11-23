@@ -10,7 +10,9 @@ public class NorthwindChangeTrackingQuerySqliteTest
 {
     public NorthwindChangeTrackingQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     protected override NorthwindContext CreateNoTrackingContext() =>
         new NorthwindRelationalContext(

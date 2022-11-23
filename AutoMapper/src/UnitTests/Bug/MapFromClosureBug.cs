@@ -19,7 +19,9 @@ public class MapFromClosureBug : NonValidatingSpecBase
         public Booking Booking { get; set; }
     }
 
-    public class Restaurant { }
+    public class Restaurant
+    {
+    }
 
     public class Booking
     {

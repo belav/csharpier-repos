@@ -3,7 +3,9 @@ using System.Reflection;
 
 class T
 {
-    public static unsafe void meth(int a, int* b) { }
+    public static unsafe void meth(int a, int* b)
+    {
+    }
 
     static int Main()
     {

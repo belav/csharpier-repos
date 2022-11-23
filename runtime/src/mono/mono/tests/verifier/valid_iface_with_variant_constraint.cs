@@ -1,10 +1,16 @@
 using System;
 
-interface IFoo<out T> { }
+interface IFoo<out T>
+{
+}
 
-interface IFoo2<T> where T : IFoo<object> { }
+interface IFoo2<T> where T : IFoo<object>
+{
+}
 
-public class Foo : IFoo2<IFoo<string>> { }
+public class Foo : IFoo2<IFoo<string>>
+{
+}
 
 public class Test
 {

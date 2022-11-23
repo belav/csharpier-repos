@@ -20,7 +20,9 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Allow derived classes to construct empty whitespace rule.
         /// </summary>
-        protected WhitespaceRule() { }
+        protected WhitespaceRule()
+        {
+        }
 
         /// <summary>
         /// Construct new whitespace rule.

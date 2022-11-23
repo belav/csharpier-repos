@@ -777,7 +777,9 @@ namespace System.Numerics.Tensors
             /// <summary>
             /// Disposes the enumerator.
             /// </summary>
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         /// <summary>

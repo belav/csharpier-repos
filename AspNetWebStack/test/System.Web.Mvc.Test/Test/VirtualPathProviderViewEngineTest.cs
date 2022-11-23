@@ -1335,7 +1335,9 @@ namespace System.Web.Mvc.Test
                 Disposed = true;
             }
 
-            void IView.Render(ViewContext viewContext, TextWriter writer) { }
+            void IView.Render(ViewContext viewContext, TextWriter writer)
+            {
+            }
         }
 
         private class TestableVirtualPathProviderViewEngine : VirtualPathProviderViewEngine
@@ -1347,7 +1349,9 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
 
-            public TestableVirtualPathProviderViewEngine() : this(skipVPPInitialization: false) { }
+            public TestableVirtualPathProviderViewEngine() : this(skipVPPInitialization: false)
+            {
+            }
 
             public TestableVirtualPathProviderViewEngine(bool skipVPPInitialization)
             {

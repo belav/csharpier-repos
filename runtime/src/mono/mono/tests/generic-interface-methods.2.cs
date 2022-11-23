@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
-public class ClassA { };
+public class ClassA
+{
+};
 
 public interface IGen<T>
 {

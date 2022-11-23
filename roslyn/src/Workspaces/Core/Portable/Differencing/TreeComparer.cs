@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Differencing
     /// <typeparam name="TNode">Tree node.</typeparam>
     public abstract class TreeComparer<TNode>
     {
-        protected TreeComparer() { }
+        protected TreeComparer()
+        {
+        }
 
         /// <summary>
         /// Returns an edit script that transforms <paramref name="oldRoot"/> to <paramref name="newRoot"/>.

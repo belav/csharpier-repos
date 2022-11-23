@@ -149,9 +149,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private class NoChangesAllowedWorkspace : Workspace
         {
             public NoChangesAllowedWorkspace(HostServices services, string workspaceKind = "Custom")
-                : base(services, workspaceKind) { }
+                : base(services, workspaceKind)
+            {
+            }
 
-            public NoChangesAllowedWorkspace() : this(Host.Mef.MefHostServices.DefaultHost) { }
+            public NoChangesAllowedWorkspace() : this(Host.Mef.MefHostServices.DefaultHost)
+            {
+            }
 
             public override bool CanApplyChange(ApplyChangesKind feature) => false;
 

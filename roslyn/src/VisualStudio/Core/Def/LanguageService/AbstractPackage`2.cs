@@ -30,7 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         private PackageInstallerService _packageInstallerService;
         private VisualStudioSymbolSearchService _symbolSearchService;
 
-        protected AbstractPackage() { }
+        protected AbstractPackage()
+        {
+        }
 
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,

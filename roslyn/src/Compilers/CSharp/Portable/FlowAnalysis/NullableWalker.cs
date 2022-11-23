@@ -15710,7 +15710,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal static readonly ExpressionAndSymbolEqualityComparer Instance =
                 new ExpressionAndSymbolEqualityComparer();
 
-            private ExpressionAndSymbolEqualityComparer() { }
+            private ExpressionAndSymbolEqualityComparer()
+            {
+            }
 
             public bool Equals(
                 (BoundNode? expr, Symbol symbol) x,

@@ -11,7 +11,9 @@ namespace System.Net.Http
     public abstract class MultipartStreamProviderTestBase<TProvider>
         where TProvider : MultipartStreamProvider, new()
     {
-        protected MultipartStreamProviderTestBase() { }
+        protected MultipartStreamProviderTestBase()
+        {
+        }
 
         [Fact]
         public void Contents_IsEmpty()

@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis
         internal abstract bool TryApply(GeneratorInfo info, GeneratorEditContext context);
     }
 
-    internal abstract class AdditionalFileEdit : PendingEdit { }
+    internal abstract class AdditionalFileEdit : PendingEdit
+    {
+    }
 
     internal sealed class AdditionalFileAddedEdit : AdditionalFileEdit
     {

@@ -77,7 +77,9 @@ namespace Castle.DynamicProxy.Tests
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public sealed class AttributeWithTypeArrayArgument : Attribute
     {
-        public AttributeWithTypeArrayArgument(params Type[] attributeTypes) { }
+        public AttributeWithTypeArrayArgument(params Type[] attributeTypes)
+        {
+        }
     }
 
     public enum SomeByteEnumForAttributeWithEnumArrayArgument : byte
@@ -133,45 +135,65 @@ namespace Castle.DynamicProxy.Tests
     {
         public AttributeWithEnumArrayArgument(
             params SomeByteEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
 
         public AttributeWithEnumArrayArgument(
             params SomeSbyteEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
 
         public AttributeWithEnumArrayArgument(
             params SomeShortEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
 
         public AttributeWithEnumArrayArgument(
             params SomeUshortEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
 
         public AttributeWithEnumArrayArgument(
             params SomeIntEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
 
         public AttributeWithEnumArrayArgument(
             params SomeUintEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
 
         public AttributeWithEnumArrayArgument(
             params SomeLongEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
 
         public AttributeWithEnumArrayArgument(
             params SomeUlongEnumForAttributeWithEnumArrayArgument[] attributeEnums
-        ) { }
+        )
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public sealed class AttributeWithIntArrayArgument : Attribute
     {
-        public AttributeWithIntArrayArgument(params int[] ints) { }
+        public AttributeWithIntArrayArgument(params int[] ints)
+        {
+        }
     }
 
     [AttributeWithTypeArrayArgument(typeof(string))]
-    public interface IHasAttributeWithTypeArray { }
+    public interface IHasAttributeWithTypeArray
+    {
+    }
 
     [AttributeWithEnumArrayArgument(SomeByteEnumForAttributeWithEnumArrayArgument.Special)]
     [AttributeWithEnumArrayArgument(SomeSbyteEnumForAttributeWithEnumArrayArgument.Special)]
@@ -181,10 +203,16 @@ namespace Castle.DynamicProxy.Tests
     [AttributeWithEnumArrayArgument(SomeUintEnumForAttributeWithEnumArrayArgument.Special)]
     [AttributeWithEnumArrayArgument(SomeLongEnumForAttributeWithEnumArrayArgument.Special)]
     [AttributeWithEnumArrayArgument(SomeUlongEnumForAttributeWithEnumArrayArgument.Special)]
-    public interface IHasAttributeWithEnumArray { }
+    public interface IHasAttributeWithEnumArray
+    {
+    }
 
     [AttributeWithIntArrayArgument(1, 2, 3)]
-    public interface IHasAttributeWithIntArray { }
+    public interface IHasAttributeWithIntArray
+    {
+    }
 
-    public class __Protect : Attribute { }
+    public class __Protect : Attribute
+    {
+    }
 }

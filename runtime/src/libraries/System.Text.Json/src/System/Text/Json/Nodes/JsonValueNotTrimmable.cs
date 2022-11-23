@@ -13,7 +13,9 @@ namespace System.Text.Json.Nodes
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         public JsonValueNotTrimmable(TValue value, JsonNodeOptions? options = null)
-            : base(value, options) { }
+            : base(value, options)
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

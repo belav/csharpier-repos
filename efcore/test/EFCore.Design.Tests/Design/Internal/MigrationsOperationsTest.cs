@@ -23,5 +23,7 @@ public class MigrationsOperationsTest
         );
     }
 
-    private class TestContext : DbContext { }
+    private class TestContext : DbContext
+    {
+    }
 }

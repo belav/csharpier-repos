@@ -51,7 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public UseExpressionBodyCodeRefactoringProvider() { }
+        public UseExpressionBodyCodeRefactoringProvider()
+        {
+        }
 
         private static BidirectionalMap<
             (UseExpressionBodyHelper helper, bool useExpressionBody),

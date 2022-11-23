@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
         internal static RebuildSourceReferenceResolver Instance { get; } =
             new RebuildSourceReferenceResolver();
 
-        private RebuildSourceReferenceResolver() { }
+        private RebuildSourceReferenceResolver()
+        {
+        }
 
         public override bool Equals(object? other) => object.ReferenceEquals(this, other);
 

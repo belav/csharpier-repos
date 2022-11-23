@@ -22,7 +22,9 @@ namespace Roslyn.Utilities
             {
                 public static new readonly List<T> Instance = new();
 
-                protected List() { }
+                protected List()
+                {
+                }
 
                 public int IndexOf(T item)
                 {

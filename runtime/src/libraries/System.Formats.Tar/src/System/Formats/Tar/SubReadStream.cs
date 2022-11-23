@@ -195,7 +195,9 @@ namespace System.Formats.Tar
         public override void Write(byte[] buffer, int offset, int count) =>
             throw new NotSupportedException(SR.IO_NotSupported_UnwritableStream);
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken) =>
             cancellationToken.IsCancellationRequested

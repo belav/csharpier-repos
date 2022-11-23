@@ -50,6 +50,8 @@ class Driver
 
     class CustomException : Exception
     {
-        public CustomException(string s) : base(s) { }
+        public CustomException(string s) : base(s)
+        {
+        }
     }
 }

@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceSpellCheckHandlerFactory() { }
+        public WorkspaceSpellCheckHandlerFactory()
+        {
+        }
 
         public ILspService CreateILspService(
             LspServices lspServices,

@@ -60,6 +60,8 @@ class Driver
 
                     return i;
                 })
-        ) { }
+        )
+        {
+        }
     }
 }

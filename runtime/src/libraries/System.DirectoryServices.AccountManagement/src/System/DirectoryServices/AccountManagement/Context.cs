@@ -407,7 +407,9 @@ namespace System.DirectoryServices.AccountManagement
                 PrincipalContext.GetDefaultOptionForStore(contextType),
                 null,
                 null
-            ) { }
+            )
+        {
+        }
 
         public PrincipalContext(ContextType contextType, string name)
             : this(
@@ -417,7 +419,9 @@ namespace System.DirectoryServices.AccountManagement
                 PrincipalContext.GetDefaultOptionForStore(contextType),
                 null,
                 null
-            ) { }
+            )
+        {
+        }
 
         public PrincipalContext(ContextType contextType, string name, string container)
             : this(
@@ -427,14 +431,18 @@ namespace System.DirectoryServices.AccountManagement
                 PrincipalContext.GetDefaultOptionForStore(contextType),
                 null,
                 null
-            ) { }
+            )
+        {
+        }
 
         public PrincipalContext(
             ContextType contextType,
             string name,
             string container,
             ContextOptions options
-        ) : this(contextType, name, container, options, null, null) { }
+        ) : this(contextType, name, container, options, null, null)
+        {
+        }
 
         public PrincipalContext(
             ContextType contextType,
@@ -449,7 +457,9 @@ namespace System.DirectoryServices.AccountManagement
                 PrincipalContext.GetDefaultOptionForStore(contextType),
                 userName,
                 password
-            ) { }
+            )
+        {
+        }
 
         public PrincipalContext(
             ContextType contextType,
@@ -465,7 +475,9 @@ namespace System.DirectoryServices.AccountManagement
                 PrincipalContext.GetDefaultOptionForStore(contextType),
                 userName,
                 password
-            ) { }
+            )
+        {
+        }
 
         public PrincipalContext(
             ContextType contextType,

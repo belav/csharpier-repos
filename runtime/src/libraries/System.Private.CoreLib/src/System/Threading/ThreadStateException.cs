@@ -38,6 +38,8 @@ namespace System.Threading
         }
 
         protected ThreadStateException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

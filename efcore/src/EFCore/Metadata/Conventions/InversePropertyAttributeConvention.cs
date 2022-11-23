@@ -27,7 +27,9 @@ public class InversePropertyAttributeConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public InversePropertyAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Called for every navigation property that has an attribute after an entity type is added to the model.

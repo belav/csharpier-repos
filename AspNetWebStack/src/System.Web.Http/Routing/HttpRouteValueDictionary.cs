@@ -15,7 +15,9 @@ namespace System.Web.Http.Routing
     )]
     public class HttpRouteValueDictionary : Dictionary<string, object>
     {
-        public HttpRouteValueDictionary() : base(StringComparer.OrdinalIgnoreCase) { }
+        public HttpRouteValueDictionary() : base(StringComparer.OrdinalIgnoreCase)
+        {
+        }
 
         public HttpRouteValueDictionary(IDictionary<string, object> dictionary)
             : base(StringComparer.OrdinalIgnoreCase)

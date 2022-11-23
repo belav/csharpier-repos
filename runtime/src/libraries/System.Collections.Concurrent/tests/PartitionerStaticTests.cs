@@ -90,11 +90,15 @@ namespace System.Collections.Concurrent.Tests
             var d = p.GetDynamicPartitions();
             using (var e = d.GetEnumerator())
             {
-                while (e.MoveNext()) { }
+                while (e.MoveNext())
+                {
+                }
             }
 
             // should not throw
-            using (var e = d.GetEnumerator()) { }
+            using (var e = d.GetEnumerator())
+            {
+            }
             ;
         }
 
@@ -375,7 +379,9 @@ namespace System.Collections.Concurrent.Tests
             {
                 using (var ee = partitioners[i].GetPartitions(1)[0])
                 {
-                    while (ee.MoveNext()) { }
+                    while (ee.MoveNext())
+                    {
+                    }
 
                     Assert.False(
                         ee.MoveNext(),

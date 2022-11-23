@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class MusicStoreSqlServerTest
     : MusicStoreTestBase<MusicStoreSqlServerTest.MusicStoreSqlServerFixture>
 {
-    public MusicStoreSqlServerTest(MusicStoreSqlServerFixture fixture) : base(fixture) { }
+    public MusicStoreSqlServerTest(MusicStoreSqlServerFixture fixture) : base(fixture)
+    {
+    }
 
     public class MusicStoreSqlServerFixture : MusicStoreFixtureBase
     {

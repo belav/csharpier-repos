@@ -18,7 +18,9 @@ namespace System.Security.Cryptography
         {
             private SecKeyPair? _keys;
 
-            public RSASecurityTransforms() : this(2048) { }
+            public RSASecurityTransforms() : this(2048)
+            {
+            }
 
             public RSASecurityTransforms(int keySize)
             {

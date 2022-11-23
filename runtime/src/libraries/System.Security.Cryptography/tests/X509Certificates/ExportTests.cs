@@ -333,7 +333,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     key.Delete();
                     key.Dispose();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
 
             bool HasEphemeralKey(X509Certificate2 c)

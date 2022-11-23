@@ -5,9 +5,13 @@ namespace System.Security.Policy
 {
     public partial class TrustManagerContext
     {
-        public TrustManagerContext() { }
+        public TrustManagerContext()
+        {
+        }
 
-        public TrustManagerContext(TrustManagerUIContext uiContext) { }
+        public TrustManagerContext(TrustManagerUIContext uiContext)
+        {
+        }
 
         public virtual bool IgnorePersistedDecision { get; set; }
         public virtual bool KeepAlive { get; set; }

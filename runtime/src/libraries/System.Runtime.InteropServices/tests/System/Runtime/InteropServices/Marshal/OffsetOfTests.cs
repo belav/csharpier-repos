@@ -596,7 +596,9 @@ namespace System.Runtime.InteropServices.Tests
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class NonExistField { }
+    public class NonExistField
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit)]
     internal struct ExplicitLayoutTest

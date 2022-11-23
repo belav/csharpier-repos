@@ -45,5 +45,7 @@ public abstract class GearsOfWarFromSqlQueryTestBase<TFixture> : IClassFixture<T
 
     protected GearsOfWarContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 }

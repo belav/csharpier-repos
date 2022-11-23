@@ -21,6 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 IEnumerable<Lazy<ILspService, LspServiceMetadataView>> lspServices,
             [ImportMany(StringConstants.XamlLspLanguagesContract)]
                 IEnumerable<Lazy<ILspServiceFactory, LspServiceMetadataView>> lspServiceFactories
-        ) : base(lspServices, lspServiceFactories) { }
+        ) : base(lspServices, lspServiceFactories)
+        {
+        }
     }
 }

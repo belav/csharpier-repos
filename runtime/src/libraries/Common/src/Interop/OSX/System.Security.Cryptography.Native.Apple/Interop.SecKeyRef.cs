@@ -202,7 +202,9 @@ namespace System.Security.Cryptography.Apple
 {
     internal sealed class SafeSecKeyRefHandle : SafeHandle
     {
-        public SafeSecKeyRefHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSecKeyRefHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

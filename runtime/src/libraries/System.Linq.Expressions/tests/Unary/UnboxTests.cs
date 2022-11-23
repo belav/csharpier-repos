@@ -209,7 +209,9 @@ namespace System.Linq.Expressions.Tests
         {
             public static object WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

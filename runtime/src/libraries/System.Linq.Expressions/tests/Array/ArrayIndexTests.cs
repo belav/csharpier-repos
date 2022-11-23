@@ -1691,7 +1691,10 @@ namespace System.Linq.Expressions.Tests
                     {
                         return i + 1;
                     },
-                (Action<object>)delegate { }
+                (Action<object>)
+                    delegate
+                    {
+                    }
             };
             Delegate[] result = new Delegate[size];
             for (int i = 0; i < size; i++)

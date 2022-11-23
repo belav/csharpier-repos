@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class AttributeMetadataCollection : ReadOnlyCollectionBase
     {
-        internal AttributeMetadataCollection() { }
+        internal AttributeMetadataCollection()
+        {
+        }
 
         public AttributeMetadata this[int index] => (AttributeMetadata)InnerList[index]!;
 

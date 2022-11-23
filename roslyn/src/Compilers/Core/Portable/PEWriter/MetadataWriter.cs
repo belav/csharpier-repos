@@ -564,7 +564,9 @@ namespace Microsoft.Cci
             }
         }
 
-        protected virtual void OnIndicesCreated() { }
+        protected virtual void OnIndicesCreated()
+        {
+        }
 
         private void CreateIndicesFor(
             ITypeDefinition typeDef,
@@ -2095,7 +2097,9 @@ namespace Microsoft.Cci
             );
         }
 
-        public virtual void PopulateEncTables(ImmutableArray<int> typeSystemRowCounts) { }
+        public virtual void PopulateEncTables(ImmutableArray<int> typeSystemRowCounts)
+        {
+        }
 
         public MetadataRootBuilder GetRootBuilder()
         {
@@ -4867,7 +4871,9 @@ namespace Microsoft.Cci
             private readonly Dictionary<T, int> _index;
 
             public HeapOrReferenceIndex(MetadataWriter writer, int lastRowId = 0)
-                : this(writer, new Dictionary<T, int>(), lastRowId) { }
+                : this(writer, new Dictionary<T, int>(), lastRowId)
+            {
+            }
 
             private HeapOrReferenceIndex(
                 MetadataWriter writer,
@@ -4899,7 +4905,9 @@ namespace Microsoft.Cci
                     writer,
                     new Dictionary<ITypeReference, int>(ReferenceEqualityComparer.Instance),
                     lastRowId
-                ) { }
+                )
+            {
+            }
 
             private TypeReferenceIndex(
                 MetadataWriter writer,
@@ -4965,7 +4973,9 @@ namespace Microsoft.Cci
             internal static readonly ByteSequenceBoolTupleComparer Instance =
                 new ByteSequenceBoolTupleComparer();
 
-            private ByteSequenceBoolTupleComparer() { }
+            private ByteSequenceBoolTupleComparer()
+            {
+            }
 
             bool IEqualityComparer<(ImmutableArray<byte>, bool)>.Equals(
                 (ImmutableArray<byte>, bool) x,

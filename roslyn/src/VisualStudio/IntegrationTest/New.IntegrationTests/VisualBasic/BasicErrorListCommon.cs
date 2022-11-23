@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     public abstract class BasicErrorListCommon : AbstractEditorTest
     {
         protected BasicErrorListCommon(string templateName)
-            : base(nameof(BasicErrorListCommon), templateName) { }
+            : base(nameof(BasicErrorListCommon), templateName)
+        {
+        }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

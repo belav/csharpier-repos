@@ -34,7 +34,9 @@ namespace Roslyn.Test.Utilities
         }
 
         public TestGeneratorReference(IIncrementalGenerator generator)
-            : this(generator.AsSourceGenerator()) { }
+            : this(generator.AsSourceGenerator())
+        {
+        }
 
         public override string? FullPath => null;
         public override object Id => this;

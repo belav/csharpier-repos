@@ -36,5 +36,7 @@ public class Runtime_70790
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void JitUse<T>(T arg) { }
+    public static void JitUse<T>(T arg)
+    {
+    }
 }

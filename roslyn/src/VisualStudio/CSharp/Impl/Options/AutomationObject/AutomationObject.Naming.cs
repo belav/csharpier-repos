@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
                         NamingStylePreferences.FromXElement(XElement.Parse(value))
                     );
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
     }

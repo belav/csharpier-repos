@@ -13,7 +13,9 @@ namespace System.Runtime.Intrinsics.X86
     [CLSCompliant(false)]
     public abstract class Sse42 : Sse41
     {
-        internal Sse42() { }
+        internal Sse42()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -23,7 +25,9 @@ namespace System.Runtime.Intrinsics.X86
 
         public new abstract class X64 : Sse41.X64
         {
-            internal X64() { }
+            internal X64()
+            {
+            }
 
             public static new bool IsSupported
             {

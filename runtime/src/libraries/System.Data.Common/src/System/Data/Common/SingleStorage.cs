@@ -14,7 +14,9 @@ namespace System.Data.Common
         private float[] _values = default!; // Late-initialized
 
         public SingleStorage(DataColumn column)
-            : base(column, typeof(float), defaultValue, StorageType.Single) { }
+            : base(column, typeof(float), defaultValue, StorageType.Single)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

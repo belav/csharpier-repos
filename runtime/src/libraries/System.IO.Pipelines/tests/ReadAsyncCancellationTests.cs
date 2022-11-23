@@ -345,7 +345,8 @@ namespace System.IO.Pipelines.Tests
             ValueTaskAwaiter<ReadResult> awaitable = Pipe.Reader.ReadAsync().GetAwaiter();
 
             Assert.False(awaitable.IsCompleted);
-            awaitable.OnCompleted(() => { });
+            awaitable.OnCompleted(() => {
+            });
 
             Pipe.Writer.WriteAsync(new byte[] { });
             Pipe.Reader.CancelPendingRead();
@@ -362,7 +363,8 @@ namespace System.IO.Pipelines.Tests
             ValueTaskAwaiter<ReadResult> awaitable = Pipe.Reader.ReadAsync().GetAwaiter();
 
             Assert.False(awaitable.IsCompleted);
-            awaitable.OnCompleted(() => { });
+            awaitable.OnCompleted(() => {
+            });
 
             Pipe.Writer.WriteAsync(new byte[] { });
             Pipe.Reader.CancelPendingRead();

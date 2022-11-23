@@ -22,7 +22,9 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresDynamicCode(
             IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
         )]
-        public ImmutableDictionaryOfTKeyTValueConverterWithReflection() { }
+        public ImmutableDictionaryOfTKeyTValueConverterWithReflection()
+        {
+        }
 
         [RequiresUnreferencedCode(
             IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage

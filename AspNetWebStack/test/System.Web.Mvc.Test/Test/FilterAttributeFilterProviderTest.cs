@@ -26,7 +26,9 @@ namespace System.Web.Mvc.Test
         }
 
         [MyFilter(Order = 2112)]
-        private class ControllerWithTypeAttribute : Controller { }
+        private class ControllerWithTypeAttribute : Controller
+        {
+        }
 
         [Fact]
         public void GetFilters_IncludesAttributesOnControllerType()
@@ -100,7 +102,9 @@ namespace System.Web.Mvc.Test
         }
 
         [MyFilter]
-        private class DerivedController : BaseController { }
+        private class DerivedController : BaseController
+        {
+        }
 
         [Fact]
         public void GetFilters_IncludesTypeAttributesFromDerivedTypeWhenMethodIsOnBaseClass()
@@ -125,7 +129,9 @@ namespace System.Web.Mvc.Test
             Assert.NotNull(filters.Select(f => f.Instance).Cast<MyFilterAttribute>().Single());
         }
 
-        private class MyFilterAttribute : FilterAttribute { }
+        private class MyFilterAttribute : FilterAttribute
+        {
+        }
 
         [Fact]
         public void GetFilters_RetrievesCachedAttributesByDefault()

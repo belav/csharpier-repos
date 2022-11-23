@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OnAutoInsertHandler() { }
+        public OnAutoInsertHandler()
+        {
+        }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;

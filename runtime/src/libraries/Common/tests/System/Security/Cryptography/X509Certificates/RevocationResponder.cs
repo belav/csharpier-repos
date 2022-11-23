@@ -91,7 +91,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             {
                 context = _listener.GetContext();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             if (context != null)
             {
@@ -107,7 +109,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             {
                 context = await _listener.GetContextAsync();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             if (context != null)
             {
@@ -141,7 +145,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                         Trace(e.ToString());
                     }
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 return;
             }
@@ -155,7 +161,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                     context.Response.StatusCode = 404;
                     context.Response.Close();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -288,7 +296,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                     Trace($"Listening at {uriPrefix}");
                     return listener;
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

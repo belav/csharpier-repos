@@ -34,7 +34,9 @@ namespace System.Xml.Linq
                 (node.GetSaveOptionsFromAnnotations() & SaveOptions.OmitDuplicateNamespaces) != 0
                     ? ReaderOptions.OmitDuplicateNamespaces
                     : ReaderOptions.None
-            ) { }
+            )
+        {
+        }
 
         public override int AttributeCount
         {
@@ -964,7 +966,9 @@ namespace System.Xml.Linq
             return ReadToEnd();
         }
 
-        public override void ResolveEntity() { }
+        public override void ResolveEntity()
+        {
+        }
 
         public override void Skip()
         {

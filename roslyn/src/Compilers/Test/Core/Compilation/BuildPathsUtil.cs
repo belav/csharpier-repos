@@ -13,5 +13,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    internal static class BuildPathsUtil { }
+    internal static class BuildPathsUtil
+    {
+    }
 }

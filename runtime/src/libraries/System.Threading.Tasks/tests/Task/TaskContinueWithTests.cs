@@ -20,15 +20,20 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunContinueWithAsyncStateCheckTests()
         {
-            Task t = new Task(() => { });
-            var c1 = t.ContinueWith(_ => { });
+            Task t = new Task(() => {
+            });
+            var c1 = t.ContinueWith(_ =>
+            {
+            });
             var c2 = t.ContinueWith(_ =>
             {
                 return 42;
             });
 
             Task<int> f = new Task<int>(() => 1);
-            var c3 = f.ContinueWith(_ => { });
+            var c3 = f.ContinueWith(_ =>
+            {
+            });
             var c4 = f.ContinueWith(antecedent => antecedent.Result);
 
             t.Start();
@@ -393,25 +398,42 @@ namespace System.Threading.Tasks.Tests
                 {
                     CancellationTokenSource cts = new CancellationTokenSource();
                     Task child1 = new Task(
-                        delegate { },
+                        delegate
+                        {
+                        },
                         cts.Token,
                         TaskCreationOptions.AttachedToParent
                     );
-                    Task child2 = new Task(delegate { }, TaskCreationOptions.AttachedToParent);
+                    Task child2 = new Task(
+                        delegate
+                        {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
 
                     c1b = child1.ContinueWith(
-                        (_) => { },
+                        (_) => {
+                        },
                         TaskContinuationOptions.NotOnCanceled
                             | TaskContinuationOptions.AttachedToParent
                     );
-                    c1c = child1.ContinueWith((_) => { }, TaskContinuationOptions.AttachedToParent);
+                    c1c = child1.ContinueWith(
+                        (_) => {
+                        },
+                        TaskContinuationOptions.AttachedToParent
+                    );
 
                     c2b = child2.ContinueWith(
-                        (_) => { },
+                        (_) => {
+                        },
                         TaskContinuationOptions.NotOnRanToCompletion
                             | TaskContinuationOptions.AttachedToParent
                     );
-                    c2c = child2.ContinueWith((_) => { }, TaskContinuationOptions.AttachedToParent);
+                    c2c = child2.ContinueWith(
+                        (_) => {
+                        },
+                        TaskContinuationOptions.AttachedToParent
+                    );
 
                     cts.Cancel(); // should cancel the unstarted child task
                     child2.Start();
@@ -423,7 +445,9 @@ namespace System.Threading.Tasks.Tests
             {
                 container.Wait();
             }
-            catch { }
+            catch
+            {
+            }
 
             if (c1b.Status != TaskStatus.Canceled)
             {
@@ -467,11 +491,19 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunContinueWithParamsTest_IllegalArgs()
         {
-            Task t1 = new Task(delegate { });
+            Task t1 = new Task(
+                delegate
+                {
+                }
+            );
 
             try
             {
-                Task t2 = t1.ContinueWith((ooo) => { }, (TaskContinuationOptions)0x1000000);
+                Task t2 = t1.ContinueWith(
+                    (ooo) => {
+                    },
+                    (TaskContinuationOptions)0x1000000
+                );
                 Assert.True(
                     false,
                     string.Format(
@@ -479,12 +511,15 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             try
             {
                 Task t2 = t1.ContinueWith(
-                    (ooo) => { },
+                    (ooo) => {
+                    },
                     TaskContinuationOptions.LongRunning
                         | TaskContinuationOptions.ExecuteSynchronously
                 );
@@ -495,12 +530,15 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             try
             {
                 Task t2 = t1.ContinueWith(
-                    (ooo) => { },
+                    (ooo) => {
+                    },
                     TaskContinuationOptions.NotOnRanToCompletion
                         | TaskContinuationOptions.NotOnFaulted
                         | TaskContinuationOptions.NotOnCanceled
@@ -512,7 +550,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             t1.Start();
             t1.Wait();
@@ -599,7 +639,8 @@ namespace System.Threading.Tasks.Tests
             //
             // Test exceptional behavior for continuations off of Tasks
             //
-            Task t1 = Task.Factory.StartNew(() => { });
+            Task t1 = Task.Factory.StartNew(() => {
+            });
             t1.Wait();
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -609,13 +650,20 @@ namespace System.Threading.Tasks.Tests
 
             Assert.Throws<ArgumentNullException>(() =>
             {
-                t1.ContinueWith(_ => { }, (TaskScheduler)null);
+                t1.ContinueWith(
+                    _ =>
+                    {
+                    },
+                    (TaskScheduler)null
+                );
             });
 
             Assert.Throws<ArgumentNullException>(() =>
             {
                 t1.ContinueWith(
-                    _ => { },
+                    _ =>
+                    {
+                    },
                     CancellationToken.None,
                     TaskContinuationOptions.None,
                     (TaskScheduler)null
@@ -654,13 +702,20 @@ namespace System.Threading.Tasks.Tests
 
             Assert.Throws<ArgumentNullException>(() =>
             {
-                f1.ContinueWith(_ => { }, (TaskScheduler)null);
+                f1.ContinueWith(
+                    _ =>
+                    {
+                    },
+                    (TaskScheduler)null
+                );
             });
 
             Assert.Throws<ArgumentNullException>(() =>
             {
                 f1.ContinueWith(
-                    _ => { },
+                    _ =>
+                    {
+                    },
                     CancellationToken.None,
                     TaskContinuationOptions.None,
                     (TaskScheduler)null
@@ -719,7 +774,8 @@ namespace System.Threading.Tasks.Tests
                                 if (antecedentIsFuture)
                                     antecedent = Task<int>.Factory.StartNew(() => 5);
                                 else
-                                    antecedent = Task.Factory.StartNew(() => { });
+                                    antecedent = Task.Factory.StartNew(() => {
+                                    });
                                 antecedent.Wait();
                             }
 
@@ -738,7 +794,8 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                             antecedent = new Task<int>(() => 5);
                                         else
-                                            antecedent = new Task(() => { });
+                                            antecedent = new Task(() => {
+                                            });
                                     }
 
                                     if (continuationIsFuture)
@@ -770,7 +827,9 @@ namespace System.Threading.Tasks.Tests
                                         {
                                             //Debug.WriteLine(" - Task = {2}Future.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
                                             continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
+                                                _ =>
+                                                {
+                                                },
                                                 ct,
                                                 tco,
                                                 TaskScheduler.Default
@@ -780,7 +839,9 @@ namespace System.Threading.Tasks.Tests
                                         {
                                             //Debug.WriteLine(" - Task = {2}Task.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
                                             continuation = antecedent.ContinueWith(
-                                                _ => { },
+                                                _ =>
+                                                {
+                                                },
                                                 ct,
                                                 tco,
                                                 TaskScheduler.Default
@@ -853,7 +914,8 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                             antecedent = new Task<int>(() => 5);
                                         else
-                                            antecedent = new Task(() => { });
+                                            antecedent = new Task(() => {
+                                            });
                                     }
 
                                     if (continuationIsFuture)
@@ -878,14 +940,21 @@ namespace System.Threading.Tasks.Tests
                                         {
                                             //Debug.WriteLine(" - Task = {1}Future.CW(action, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
                                             continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
+                                                _ =>
+                                                {
+                                                },
                                                 ct
                                             );
                                         }
                                         else
                                         {
                                             //Debug.WriteLine(" - Task = {1}Task.CW(action, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
-                                            continuation = antecedent.ContinueWith(_ => { }, ct);
+                                            continuation = antecedent.ContinueWith(
+                                                _ =>
+                                                {
+                                                },
+                                                ct
+                                            );
                                         }
                                     }
 
@@ -950,7 +1019,8 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                             antecedent = new Task<int>(() => 5);
                                         else
-                                            antecedent = new Task(() => { });
+                                            antecedent = new Task(() => {
+                                            });
                                     }
 
                                     if (continuationIsFuture)
@@ -972,13 +1042,20 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
+                                                _ =>
+                                                {
+                                                },
                                                 tco
                                             );
                                         }
                                         else
                                         {
-                                            continuation = antecedent.ContinueWith(_ => { }, tco);
+                                            continuation = antecedent.ContinueWith(
+                                                _ =>
+                                                {
+                                                },
+                                                tco
+                                            );
                                         }
                                     }
 
@@ -1048,7 +1125,11 @@ namespace System.Threading.Tasks.Tests
             //
             // Basic functionality tests
             //
-            taskRoot = new Task(delegate { });
+            taskRoot = new Task(
+                delegate
+                {
+                }
+            );
             futureRoot = new Task<int>(
                 delegate
                 {
@@ -1358,7 +1439,11 @@ namespace System.Threading.Tasks.Tests
             //
             // Exception tests
             //
-            taskRoot = new Task(delegate { });
+            taskRoot = new Task(
+                delegate
+                {
+                }
+            );
             futureRoot = new Task<int>(
                 delegate
                 {
@@ -1426,7 +1511,11 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task t)
                     {
                         doExc();
-                        return Task.Factory.StartNew(delegate { });
+                        return Task.Factory.StartNew(
+                            delegate
+                            {
+                            }
+                        );
                     }
                 )
                 .Unwrap();
@@ -1435,7 +1524,11 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task<int> t)
                     {
                         doExc();
-                        return Task.Factory.StartNew(delegate { });
+                        return Task.Factory.StartNew(
+                            delegate
+                            {
+                            }
+                        );
                     }
                 )
                 .Unwrap();
@@ -1481,7 +1574,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch (AggregateException) { }
+                catch (AggregateException)
+                {
+                }
                 catch (Exception)
                 {
                     Assert.True(
@@ -1534,7 +1629,8 @@ namespace System.Threading.Tasks.Tests
             // Exception handling
             //
             var c = Task.Factory
-                .StartNew(() => { })
+                .StartNew(() => {
+                })
                 .ContinueWith(
                     _ =>
                         Task.Factory.StartNew(() =>
@@ -1624,7 +1720,11 @@ namespace System.Threading.Tasks.Tests
 
             ManualResetEvent mres = new ManualResetEvent(false);
 
-            taskRoot = new Task(delegate { });
+            taskRoot = new Task(
+                delegate
+                {
+                }
+            );
             futureRoot = new Task<int>(
                 delegate
                 {
@@ -1721,7 +1821,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
             TaskStatus ts = c1.Status;
             if (ts != TaskStatus.Canceled)
             {
@@ -1745,7 +1847,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
             ts = c2.Status;
             if (ts != TaskStatus.Canceled)
             {
@@ -1769,7 +1873,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
             ts = c5.Status;
             if (ts != TaskStatus.Canceled)
             {
@@ -1793,7 +1899,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
             ts = c6.Status;
             if (ts != TaskStatus.Canceled)
             {
@@ -1988,7 +2096,8 @@ namespace System.Threading.Tasks.Tests
                         CancellationTokenSource cts = new CancellationTokenSource();
                         ManualResetEventSlim mres1 = new ManualResetEventSlim(false);
                         ManualResetEventSlim mres2 = new ManualResetEventSlim(false);
-                        Task t1 = new Task(() => { });
+                        Task t1 = new Task(() => {
+                        });
 
                         Task c1 = null;
                         if (useContinueWith)
@@ -2085,14 +2194,17 @@ namespace System.Threading.Tasks.Tests
 
                     {
                         CancellationTokenSource cts = new CancellationTokenSource();
-                        Task t1 = new Task(() => { });
+                        Task t1 = new Task(() => {
+                        });
                         cts.Cancel();
 
                         Task c1 = null;
                         if (useContinueWith)
                         {
                             c1 = t1.ContinueWith(
-                                _ => { },
+                                _ =>
+                                {
+                                },
                                 cts.Token,
                                 options,
                                 TaskScheduler.Default
@@ -2102,7 +2214,9 @@ namespace System.Threading.Tasks.Tests
                         {
                             c1 = Task.Factory.ContinueWhenAny(
                                 new Task[] { t1 },
-                                _ => { },
+                                _ =>
+                                {
+                                },
                                 cts.Token,
                                 options,
                                 TaskScheduler.Default
@@ -2112,7 +2226,9 @@ namespace System.Threading.Tasks.Tests
                         {
                             c1 = Task.Factory.ContinueWhenAll(
                                 new Task[] { t1 },
-                                _ => { },
+                                _ =>
+                                {
+                                },
                                 cts.Token,
                                 options,
                                 TaskScheduler.Default
@@ -2137,13 +2253,16 @@ namespace System.Threading.Tasks.Tests
                     }
                     {
                         CancellationTokenSource cts = new CancellationTokenSource();
-                        Task t1 = new Task(() => { });
+                        Task t1 = new Task(() => {
+                        });
 
                         Task c1 = null;
                         if (useContinueWith)
                         {
                             c1 = t1.ContinueWith(
-                                _ => { },
+                                _ =>
+                                {
+                                },
                                 cts.Token,
                                 options,
                                 TaskScheduler.Default
@@ -2153,7 +2272,9 @@ namespace System.Threading.Tasks.Tests
                         {
                             c1 = Task.Factory.ContinueWhenAny(
                                 new Task[] { t1 },
-                                _ => { },
+                                _ =>
+                                {
+                                },
                                 cts.Token,
                                 options,
                                 TaskScheduler.Default
@@ -2163,7 +2284,9 @@ namespace System.Threading.Tasks.Tests
                         {
                             c1 = Task.Factory.ContinueWhenAll(
                                 new Task[] { t1 },
-                                _ => { },
+                                _ =>
+                                {
+                                },
                                 cts.Token,
                                 options,
                                 TaskScheduler.Default
@@ -2202,7 +2325,9 @@ namespace System.Threading.Tasks.Tests
             for (int i = 0; i < DiveDepth; i++)
             {
                 t = t.ContinueWith(
-                    _ => { },
+                    _ =>
+                    {
+                    },
                     CancellationToken.None,
                     TaskContinuationOptions.ExecuteSynchronously,
                     TaskScheduler.Default
@@ -2259,7 +2384,8 @@ namespace System.Threading.Tasks.Tests
             // Verify that Task.Wait can return before all continuations scheduled
             // with ExecuteSynchronously complete
 
-            Task task1 = new Task(() => { });
+            Task task1 = new Task(() => {
+            });
 
             var barrier = new Barrier(2);
             Task task2 = task1.ContinueWith(
@@ -2519,7 +2645,9 @@ namespace System.Threading.Tasks.Tests
                     cts.Token
                 );
                 t.ContinueWith(
-                    delegate { },
+                    delegate
+                    {
+                    },
                     cts.Token,
                     (TaskContinuationOptions)TaskCreationOptions.DenyChildAttach,
                     TaskScheduler.Default

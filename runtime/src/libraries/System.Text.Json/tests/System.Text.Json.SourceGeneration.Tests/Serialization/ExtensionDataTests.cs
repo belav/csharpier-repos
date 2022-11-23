@@ -16,7 +16,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     ExtensionDataTestsContext_Metadata.Default,
                     (options) => new ExtensionDataTestsContext_Metadata(options)
                 )
-            ) { }
+            )
+        {
+        }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(ClassWithEmptyPropertyNameAndExtensionProperty))]
@@ -67,7 +69,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(int))]
         [JsonSerializable(typeof(DummyObj))]
         [JsonSerializable(typeof(DummyStruct))]
-        internal sealed partial class ExtensionDataTestsContext_Metadata : JsonSerializerContext { }
+        internal sealed partial class ExtensionDataTestsContext_Metadata : JsonSerializerContext
+        {
+        }
     }
 
     public sealed partial class ExtensionDataTests_Default : ExtensionDataTests
@@ -78,7 +82,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     ExtensionDataTestsContext_Default.Default,
                     (options) => new ExtensionDataTestsContext_Default(options)
                 )
-            ) { }
+            )
+        {
+        }
 
         [JsonSerializable(typeof(ClassWithEmptyPropertyNameAndExtensionProperty))]
         [JsonSerializable(typeof(EmptyClassWithExtensionProperty))]
@@ -128,6 +134,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(int))]
         [JsonSerializable(typeof(DummyObj))]
         [JsonSerializable(typeof(DummyStruct))]
-        internal sealed partial class ExtensionDataTestsContext_Default : JsonSerializerContext { }
+        internal sealed partial class ExtensionDataTestsContext_Default : JsonSerializerContext
+        {
+        }
     }
 }

@@ -179,7 +179,9 @@ namespace System.Web.Mvc.Test
             {
                 vp.RenderControl(writer);
             }
-            catch (CallbackException) { }
+            catch (CallbackException)
+            {
+            }
             Assert.Null(vp.Writer);
             Assert.True(triggered);
         }
@@ -202,12 +204,16 @@ namespace System.Web.Mvc.Test
 
         private sealed class ViewPageWithNoProcessRequest : ViewPage
         {
-            public override void ProcessRequest(HttpContext context) { }
+            public override void ProcessRequest(HttpContext context)
+            {
+            }
         }
 
         private sealed class ViewPageWithNoProcessRequest<TModel> : ViewPage<TModel>
         {
-            public override void ProcessRequest(HttpContext context) { }
+            public override void ProcessRequest(HttpContext context)
+            {
+            }
         }
 
         [Fact]
@@ -252,7 +258,9 @@ namespace System.Web.Mvc.Test
 
         private sealed class MockViewPage : ViewPage
         {
-            public MockViewPage() { }
+            public MockViewPage()
+            {
+            }
 
             public Action RenderCallback { get; set; }
 
@@ -266,8 +274,12 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private sealed class FooModel { }
+        private sealed class FooModel
+        {
+        }
 
-        private sealed class CallbackException : Exception { }
+        private sealed class CallbackException : Exception
+        {
+        }
     }
 }

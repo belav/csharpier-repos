@@ -6,5 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    internal interface ILanguageServerTarget : IAsyncDisposable { }
+    internal interface ILanguageServerTarget : IAsyncDisposable
+    {
+    }
 }

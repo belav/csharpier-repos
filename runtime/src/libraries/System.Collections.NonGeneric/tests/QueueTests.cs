@@ -1093,7 +1093,9 @@ namespace System.Collections.Tests
                 {
                     _queue.Dequeue();
                 }
-                catch { }
+                catch
+                {
+                }
                 Interlocked.Decrement(ref t_age);
             }
             Interlocked.Decrement(ref _threadCount);

@@ -225,7 +225,9 @@ namespace System.Web.Mvc.Test
         }
 
         // Master page types
-        private sealed class MockViewMasterPageDummyViewData : ViewMasterPage<DummyViewData> { }
+        private sealed class MockViewMasterPageDummyViewData : ViewMasterPage<DummyViewData>
+        {
+        }
 
         // View data types
         private sealed class DummyViewData
@@ -235,9 +237,13 @@ namespace System.Web.Mvc.Test
         }
 
         // Page types
-        private sealed class MockViewPageBogusViewData : ViewPage<SelectListItem> { }
+        private sealed class MockViewPageBogusViewData : ViewPage<SelectListItem>
+        {
+        }
 
-        private sealed class MockViewPageDummyViewData : ViewPage<DummyViewData> { }
+        private sealed class MockViewPageDummyViewData : ViewPage<DummyViewData>
+        {
+        }
 
         private sealed class MockViewPage : ViewPage
         {
@@ -253,6 +259,8 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private sealed class FooModel { }
+        private sealed class FooModel
+        {
+        }
     }
 }

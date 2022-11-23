@@ -8,7 +8,9 @@ namespace System.CodeDom
         private CodeTypeReference _type;
         private string _name;
 
-        public CodeVariableDeclarationStatement() { }
+        public CodeVariableDeclarationStatement()
+        {
+        }
 
         public CodeVariableDeclarationStatement(CodeTypeReference type, string name)
         {

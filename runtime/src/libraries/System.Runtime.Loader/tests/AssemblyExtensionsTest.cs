@@ -7,7 +7,9 @@ namespace System.Reflection.Metadata
 {
     public class AssemblyExtensionsTest
     {
-        class NonRuntimeAssembly : Assembly { }
+        class NonRuntimeAssembly : Assembly
+        {
+        }
 
         [Fact]
         public static void ApplyUpdateInvalidParameters()

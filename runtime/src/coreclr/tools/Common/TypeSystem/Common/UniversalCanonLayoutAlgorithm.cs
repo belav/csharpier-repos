@@ -9,7 +9,9 @@ namespace Internal.TypeSystem
     {
         public static UniversalCanonLayoutAlgorithm Instance = new UniversalCanonLayoutAlgorithm();
 
-        private UniversalCanonLayoutAlgorithm() { }
+        private UniversalCanonLayoutAlgorithm()
+        {
+        }
 
         public override bool ComputeContainsGCPointers(DefType type)
         {

@@ -33,13 +33,23 @@ class Program
         return 100;
     }
 
-    private class ServiceA { }
+    private class ServiceA
+    {
+    }
 
-    private class ServiceB { }
+    private class ServiceB
+    {
+    }
 
-    private class ServiceC { }
+    private class ServiceC
+    {
+    }
 
-    private class ServiceD { }
+    private class ServiceD
+    {
+    }
 
-    private class ServiceE { }
+    private class ServiceE
+    {
+    }
 }

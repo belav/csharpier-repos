@@ -92,7 +92,9 @@ namespace Test_skippage7
             }
 
             [MethodImplAttribute(MethodImplOptions.NoInlining)]
-            public static void Escape(ref LargeStruct s) { }
+            public static void Escape(ref LargeStruct s)
+            {
+            }
 
             [Fact]
             public static int TestEntryPoint()

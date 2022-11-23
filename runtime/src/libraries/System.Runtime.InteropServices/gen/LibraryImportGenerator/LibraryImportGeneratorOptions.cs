@@ -11,7 +11,9 @@ namespace Microsoft.Interop
     )
     {
         public LibraryImportGeneratorOptions(AnalyzerConfigOptions options)
-            : this(options.GenerateForwarders(), options.UseMarshalType()) { }
+            : this(options.GenerateForwarders(), options.UseMarshalType())
+        {
+        }
     }
 
     public static class OptionsHelper

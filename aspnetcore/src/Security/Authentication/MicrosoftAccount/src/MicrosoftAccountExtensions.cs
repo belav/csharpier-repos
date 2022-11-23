@@ -21,7 +21,12 @@ public static class MicrosoftAccountExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddMicrosoftAccount(this AuthenticationBuilder builder) =>
-        builder.AddMicrosoftAccount(MicrosoftAccountDefaults.AuthenticationScheme, _ => { });
+        builder.AddMicrosoftAccount(
+            MicrosoftAccountDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Adds Microsoft Account OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.

@@ -227,7 +227,9 @@ public class ComponentHubTest
             ILoggerFactory loggerFactory,
             CircuitIdFactory circuitIdFactory,
             IOptions<CircuitOptions> options
-        ) { }
+        )
+        {
+        }
 
         // Implement a `CreateCircuitHostAsync` that mocks the construction
         // of the CircuitHost.

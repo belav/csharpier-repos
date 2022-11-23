@@ -26,7 +26,9 @@ namespace System.Xml.Xsl.XPath
             this.endChar = endChar;
         }
 
-        internal XPathCompileException(string resId, params string[] args) : base(resId, args) { } // queryString will be set later
+        internal XPathCompileException(string resId, params string[] args) : base(resId, args)
+        {
+        } // queryString will be set later
 
         internal XPathCompileException(SerializationInfo info, StreamingContext context)
             : base(info, context)

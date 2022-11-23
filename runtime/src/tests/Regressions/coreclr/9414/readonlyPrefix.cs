@@ -10,7 +10,9 @@ class Program
 
     class Frobber : IFrobber
     {
-        public void Frob() { }
+        public void Frob()
+        {
+        }
     }
 
     class Foo<T> where T : IFrobber

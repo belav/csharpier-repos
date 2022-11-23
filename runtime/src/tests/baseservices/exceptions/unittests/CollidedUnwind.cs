@@ -40,9 +40,13 @@ public class TestSet
 
 public class CollidedUnwindTest
 {
-    class ExType1 : Exception { }
+    class ExType1 : Exception
+    {
+    }
 
-    class ExType2 : Exception { }
+    class ExType2 : Exception
+    {
+    }
 
     Trace _trace;
 

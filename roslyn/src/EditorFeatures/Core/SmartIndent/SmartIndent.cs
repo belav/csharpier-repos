@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
         public int? GetDesiredIndentation(ITextSnapshotLine line) =>
             GetDesiredIndentation(line, CancellationToken.None);
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private int? GetDesiredIndentation(
             ITextSnapshotLine line,

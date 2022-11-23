@@ -375,13 +375,17 @@ namespace CoreXml.Test.XLinq
                     {
                         DataReader.ReadToNextSibling(null);
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
 
                     try
                     {
                         DataReader.ReadToNextSibling("e", null);
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
 
                     while (DataReader.Read())
                         ;

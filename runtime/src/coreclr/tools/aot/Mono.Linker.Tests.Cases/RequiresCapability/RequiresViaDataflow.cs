@@ -40,7 +40,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message for --BaseType.VirtualMethodRequires--")]
             [RequiresAssemblyFiles("Message for --BaseType.VirtualMethodRequires--")]
             [RequiresDynamicCode("Message for --BaseType.VirtualMethodRequires--")]
-            public virtual void VirtualMethodRequires() { }
+            public virtual void VirtualMethodRequires()
+            {
+            }
         }
 
         class TypeWhichOverridesMethod : BaseType
@@ -52,7 +54,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "Message for --TypeWhichOverridesMethod.VirtualMethodRequires--"
             )]
             [RequiresDynamicCode("Message for --TypeWhichOverridesMethod.VirtualMethodRequires--")]
-            public override void VirtualMethodRequires() { }
+            public override void VirtualMethodRequires()
+            {
+            }
         }
 
         public class DynamicallyAccessedTypeWithRequires
@@ -60,17 +64,23 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode(
                 "Message for --DynamicallyAccessedTypeWithRequires.MethodWithRequires--"
             )]
-            public void MethodWithRequires() { }
+            public void MethodWithRequires()
+            {
+            }
         }
 
         static void TestDynamicallyAccessedMembersWithRequires(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
-        ) { }
+        )
+        {
+        }
 
         [RequiresUnreferencedCode("Message for --RequiresInDynamicDependency--")]
         [RequiresAssemblyFiles("Message for --RequiresInDynamicDependency--")]
         [RequiresDynamicCode("Message for --RequiresInDynamicDependency--")]
-        static void RequiresInDynamicDependency() { }
+        static void RequiresInDynamicDependency()
+        {
+        }
 
         [ExpectedWarning("IL2026", "--RequiresInDynamicDependency--")]
         [ExpectedWarning(

@@ -443,14 +443,18 @@ namespace System.Runtime.CompilerServices
     /// TaskAwaiter or a TaskAwaiter`1.  It must not be implemented by any other
     /// awaiters.
     /// </summary>
-    internal interface ITaskAwaiter { }
+    internal interface ITaskAwaiter
+    {
+    }
 
     /// <summary>
     /// Marker interface used to know whether a particular awaiter is either a
     /// CTA.ConfiguredTaskAwaiter or a CTA`1.ConfiguredTaskAwaiter.  It must not
     /// be implemented by any other awaiters.
     /// </summary>
-    internal interface IConfiguredTaskAwaiter { }
+    internal interface IConfiguredTaskAwaiter
+    {
+    }
 
     /// <summary>Provides an awaitable object that allows for configured awaits on <see cref="System.Threading.Tasks.Task"/>.</summary>
     /// <remarks>This type is intended for compiler use only.</remarks>

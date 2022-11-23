@@ -12,11 +12,15 @@ namespace System.IO
         public static DelegateDelegatingStream NopDispose(Stream innerStream) =>
             new DelegateDelegatingStream(innerStream)
             {
-                DisposeFunc = _ => { },
+                DisposeFunc = _ =>
+                {
+                },
                 DisposeAsyncFunc = () => ValueTask.CompletedTask
             };
 
-        public DelegateDelegatingStream(Stream innerStream) : base(innerStream) { }
+        public DelegateDelegatingStream(Stream innerStream) : base(innerStream)
+        {
+        }
 
         public Func<bool> CanReadFunc { get; set; }
         public Func<bool> CanSeekFunc { get; set; }

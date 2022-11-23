@@ -83,7 +83,9 @@ namespace IntelHardwareIntrinsicTest
                         $"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)} failed on long: expected PlatformNotSupportedException exception."
                     );
                 }
-                catch (PlatformNotSupportedException) { }
+                catch (PlatformNotSupportedException)
+                {
+                }
                 catch (Exception ex)
                 {
                     testResult = Fail;
@@ -104,7 +106,9 @@ namespace IntelHardwareIntrinsicTest
                         $"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)} failed on ulong: expected PlatformNotSupportedException exception."
                     );
                 }
-                catch (PlatformNotSupportedException) { }
+                catch (PlatformNotSupportedException)
+                {
+                }
                 catch (Exception ex)
                 {
                     testResult = Fail;

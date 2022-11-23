@@ -29,7 +29,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
         }
 
         private ExternalCodeVariable(CodeModelState state, ProjectId projectId, ISymbol symbol)
-            : base(state, projectId, symbol) { }
+            : base(state, projectId, symbol)
+        {
+        }
 
         private ITypeSymbol GetSymbolType()
         {

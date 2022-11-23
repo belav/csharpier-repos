@@ -4,7 +4,9 @@ using System.Runtime.CompilerServices;
 
 public class MonoPInvokeCallbackAttribute : Attribute
 {
-    public MonoPInvokeCallbackAttribute(Type delegateType) { }
+    public MonoPInvokeCallbackAttribute(Type delegateType)
+    {
+    }
 }
 
 public class Tests
@@ -24,9 +26,13 @@ public class Tests
     public delegate void VoidVoidDelegate();
     public delegate void VoidHandleHandleOutDelegate(uint handle, out int exception_handle);
 
-    public class SpecialExn : Exception { }
+    public class SpecialExn : Exception
+    {
+    }
 
-    public class SomeOtherExn : Exception { }
+    public class SomeOtherExn : Exception
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void callee(ref bool called)
@@ -54,7 +60,9 @@ public class Tests
                 callee(ref called);
                 throw new Exception("unexpected return from callee");
             }
-            catch (SomeOtherExn) { }
+            catch (SomeOtherExn)
+            {
+            }
             finally
             {
                 finally_called = true;
@@ -69,7 +77,9 @@ public class Tests
                 callee(ref called);
                 throw new Exception("unexpected return from callee");
             }
-            catch (SomeOtherExn) { }
+            catch (SomeOtherExn)
+            {
+            }
         }
     }
 

@@ -7,7 +7,9 @@ using System.Text;
 
 namespace StructInClass
 {
-    internal class StructInClass { }
+    internal class StructInClass
+    {
+    }
 
     internal class TestClass
     {

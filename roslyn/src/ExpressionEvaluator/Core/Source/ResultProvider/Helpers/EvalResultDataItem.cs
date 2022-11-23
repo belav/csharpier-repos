@@ -143,7 +143,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 flags: DkmEvaluationResultFlags.None,
                 editableValue: null,
                 inspectionContext: inspectionContext
-            ) { }
+            )
+        {
+        }
 
         public EvalResult(
             ExpansionKind kind,

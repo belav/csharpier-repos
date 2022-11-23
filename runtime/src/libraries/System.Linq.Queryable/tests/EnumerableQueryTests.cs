@@ -89,9 +89,13 @@ namespace System.Linq.Tests
                 get { return default(T); }
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         [Fact]

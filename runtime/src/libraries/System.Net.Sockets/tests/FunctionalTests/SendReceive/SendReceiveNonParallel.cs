@@ -14,7 +14,9 @@ namespace System.Net.Sockets.Tests
     public abstract class SendReceiveNonParallel<T> : SocketTestHelperBase<T>
         where T : SocketHelperBase, new()
     {
-        public SendReceiveNonParallel(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel(ITestOutputHelper output) : base(output)
+        {
+        }
 
         public static IEnumerable<object[]> LoopbackWithBool =>
             from addr in Loopbacks
@@ -135,59 +137,78 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendReceiveNonParallel_Sync : SendReceiveNonParallel<SocketHelperArraySync>
     {
-        public SendReceiveNonParallel_Sync(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_Sync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_SyncForceNonBlocking
         : SendReceiveNonParallel<SocketHelperSyncForceNonBlocking>
     {
         public SendReceiveNonParallel_SyncForceNonBlocking(ITestOutputHelper output) : base(output)
-        { }
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_Apm : SendReceiveNonParallel<SocketHelperApm>
     {
-        public SendReceiveNonParallel_Apm(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_Apm(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_Task : SendReceiveNonParallel<SocketHelperTask>
     {
-        public SendReceiveNonParallel_Task(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_Task(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_CancellableTask
         : SendReceiveNonParallel<SocketHelperCancellableTask>
     {
-        public SendReceiveNonParallel_CancellableTask(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_CancellableTask(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_Eap : SendReceiveNonParallel<SocketHelperEap>
     {
-        public SendReceiveNonParallel_Eap(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_Eap(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_SpanSync
         : SendReceiveNonParallel<SocketHelperSpanSync>
     {
-        public SendReceiveNonParallel_SpanSync(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_SpanSync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_SpanSyncForceNonBlocking
         : SendReceiveNonParallel<SocketHelperSpanSyncForceNonBlocking>
     {
         public SendReceiveNonParallel_SpanSyncForceNonBlocking(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_MemoryArrayTask
         : SendReceiveNonParallel<SocketHelperMemoryArrayTask>
     {
-        public SendReceiveNonParallel_MemoryArrayTask(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_MemoryArrayTask(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class SendReceiveNonParallel_MemoryNativeTask
         : SendReceiveNonParallel<SocketHelperMemoryNativeTask>
     {
-        public SendReceiveNonParallel_MemoryNativeTask(ITestOutputHelper output) : base(output) { }
+        public SendReceiveNonParallel_MemoryNativeTask(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 }

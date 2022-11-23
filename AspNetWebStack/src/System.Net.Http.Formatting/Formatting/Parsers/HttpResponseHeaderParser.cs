@@ -26,7 +26,9 @@ namespace System.Net.Http.Formatting.Parsers
         /// </summary>
         /// <param name="httpResponse">The parsed HTTP response without any header sorting.</param>
         public HttpResponseHeaderParser(HttpUnsortedResponse httpResponse)
-            : this(httpResponse, DefaultMaxStatusLineSize, DefaultMaxHeaderSize) { }
+            : this(httpResponse, DefaultMaxStatusLineSize, DefaultMaxHeaderSize)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpResponseHeaderParser"/> class.

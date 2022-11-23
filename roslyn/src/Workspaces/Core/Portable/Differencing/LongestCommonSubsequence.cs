@@ -297,7 +297,9 @@ namespace Microsoft.CodeAnalysis.Differencing
             }
 
             // make sure we finish the enumeration as it returns the allocated buffers to the pool
-            while (varrays.MoveNext()) { }
+            while (varrays.MoveNext())
+            {
+            }
         }
 
         protected IEnumerable<SequenceEdit> GetEdits(

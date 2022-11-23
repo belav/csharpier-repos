@@ -72,7 +72,9 @@ namespace System.Threading
                 Next;
 
             internal TaskNode()
-                : base((object?)null, TaskCreationOptions.RunContinuationsAsynchronously) { }
+                : base((object?)null, TaskCreationOptions.RunContinuationsAsynchronously)
+            {
+            }
         }
         #endregion
 
@@ -130,7 +132,9 @@ namespace System.Threading
         /// concurrently.</param>
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="initialCount"/>
         /// is less than 0.</exception>
-        public SemaphoreSlim(int initialCount) : this(initialCount, NO_MAXIMUM) { }
+        public SemaphoreSlim(int initialCount) : this(initialCount, NO_MAXIMUM)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SemaphoreSlim"/> class, specifying

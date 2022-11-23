@@ -7,7 +7,8 @@ public class NotificationEntitiesSqliteTest
     : NotificationEntitiesTestBase<NotificationEntitiesSqliteTest.NotificationEntitiesSqliteFixture>
 {
     public NotificationEntitiesSqliteTest(NotificationEntitiesSqliteFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     public class NotificationEntitiesSqliteFixture : NotificationEntitiesFixtureBase
     {

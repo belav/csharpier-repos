@@ -9,19 +9,29 @@ namespace System.Data.Common
     )]
     public abstract class DbException : System.Runtime.InteropServices.ExternalException
     {
-        protected DbException() : base() { }
+        protected DbException() : base()
+        {
+        }
 
-        protected DbException(string? message) : base(message) { }
+        protected DbException(string? message) : base(message)
+        {
+        }
 
         protected DbException(string? message, System.Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
-        protected DbException(string? message, int errorCode) : base(message, errorCode) { }
+        protected DbException(string? message, int errorCode) : base(message, errorCode)
+        {
+        }
 
         protected DbException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
 
         /// <summary>
         /// Indicates whether the error represented by this <see cref="DbException" /> could be a transient error, i.e. if retrying the triggering

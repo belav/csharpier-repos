@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorErrorReportingService() { }
+        public EditorErrorReportingService()
+        {
+        }
 
         public string HostDisplayName => "host";
 

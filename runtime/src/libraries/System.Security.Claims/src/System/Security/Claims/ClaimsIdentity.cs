@@ -55,7 +55,9 @@ namespace System.Security.Claims
                 (string?)null,
                 (string?)null,
                 (string?)null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -64,7 +66,8 @@ namespace System.Security.Claims
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         public ClaimsIdentity(IIdentity? identity)
             : this(identity, (IEnumerable<Claim>?)null, (string?)null, (string?)null, (string?)null)
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -74,7 +77,9 @@ namespace System.Security.Claims
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         /// </remarks>
         public ClaimsIdentity(IEnumerable<Claim>? claims)
-            : this((IIdentity?)null, claims, (string?)null, (string?)null, (string?)null) { }
+            : this((IIdentity?)null, claims, (string?)null, (string?)null, (string?)null)
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -87,7 +92,9 @@ namespace System.Security.Claims
                 authenticationType,
                 (string?)null,
                 (string?)null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -96,7 +103,9 @@ namespace System.Security.Claims
         /// <param name="authenticationType">The authentication method used to establish this identity.</param>
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         public ClaimsIdentity(IEnumerable<Claim>? claims, string? authenticationType)
-            : this((IIdentity?)null, claims, authenticationType, (string?)null, (string?)null) { }
+            : this((IIdentity?)null, claims, authenticationType, (string?)null, (string?)null)
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -105,7 +114,9 @@ namespace System.Security.Claims
         /// <param name="claims"><see cref="IEnumerable{Claim}"/> associated with this instance.</param>
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         public ClaimsIdentity(IIdentity? identity, IEnumerable<Claim>? claims)
-            : this(identity, claims, (string?)null, (string?)null, (string?)null) { }
+            : this(identity, claims, (string?)null, (string?)null, (string?)null)
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -121,7 +132,9 @@ namespace System.Security.Claims
                 authenticationType,
                 nameType,
                 roleType
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -136,7 +149,9 @@ namespace System.Security.Claims
             string? authenticationType,
             string? nameType,
             string? roleType
-        ) : this((IIdentity?)null, claims, authenticationType, nameType, roleType) { }
+        ) : this((IIdentity?)null, claims, authenticationType, nameType, roleType)
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.

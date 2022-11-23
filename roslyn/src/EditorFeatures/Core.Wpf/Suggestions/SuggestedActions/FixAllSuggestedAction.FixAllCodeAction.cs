@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         private sealed partial class FixAllCodeAction : FixSomeCodeAction
         {
             public FixAllCodeAction(FixAllState fixAllState)
-                : base(fixAllState, showPreviewChangesDialog: true) { }
+                : base(fixAllState, showPreviewChangesDialog: true)
+            {
+            }
 
             public override string Title =>
                 this.FixAllState.Scope switch

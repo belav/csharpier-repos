@@ -101,7 +101,9 @@ public sealed partial class SelectExpression : TableExpressionBase
         }
     }
 
-    private SelectExpression(string? alias) : base(alias) { }
+    private SelectExpression(string? alias) : base(alias)
+    {
+    }
 
     internal SelectExpression(SqlExpression? projection) : base(null)
     {

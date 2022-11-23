@@ -696,6 +696,8 @@ namespace System.Web.Http.Filters
             return TaskHelpers.FromError<T>(exception);
         }
 
-        public class TestableActionFilter : ActionFilterAttribute { }
+        public class TestableActionFilter : ActionFilterAttribute
+        {
+        }
     }
 }

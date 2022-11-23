@@ -71,25 +71,33 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
         /// </summary>
         /// <param name="id">The id.</param>
         /// <param name="value">The value.</param>
-        public void Put(int id, [FromBody] string value) { }
+        public void Put(int id, [FromBody] string value)
+        {
+        }
 
         /// <summary>
         /// Updates the value pair collection.
         /// </summary>
         /// <param name="valuePairCollection">The value pair collection.</param>
-        public void Put(List<Tuple<int, string>> valuePairCollection) { }
+        public void Put(List<Tuple<int, string>> valuePairCollection)
+        {
+        }
 
         /// <summary>
         /// Deletes the value.
         /// </summary>
         /// <param name="id">The id.</param>
-        public void Delete(int? id) { }
+        public void Delete(int? id)
+        {
+        }
 
         /// <summary>
         /// Patches the value pair.
         /// </summary>
         /// <param name="valuePair">The pair.</param>
-        public void Patch(Tuple<int, string> valuePair) { }
+        public void Patch(Tuple<int, string> valuePair)
+        {
+        }
 
         /// <summary>
         /// Returns the options.

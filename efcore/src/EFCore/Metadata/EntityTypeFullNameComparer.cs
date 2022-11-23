@@ -21,7 +21,9 @@ public sealed class EntityTypeFullNameComparer
     : IComparer<IReadOnlyEntityType>,
         IEqualityComparer<IReadOnlyEntityType>
 {
-    private EntityTypeFullNameComparer() { }
+    private EntityTypeFullNameComparer()
+    {
+    }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.

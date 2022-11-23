@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
 internal sealed class Int64Converter : SettingsConverterBase<long>
 {
-    public Int64Converter(JsonContext context) : base(context) { }
+    public Int64Converter(JsonContext context) : base(context)
+    {
+    }
 
     public override long Read(
         ref Utf8JsonReader reader,

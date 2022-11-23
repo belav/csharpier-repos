@@ -25,5 +25,7 @@
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class AbstractImplementationTestClass : AbstractTestClass { }
+    public class AbstractImplementationTestClass : AbstractTestClass
+    {
+    }
 }

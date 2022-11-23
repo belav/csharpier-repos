@@ -940,6 +940,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             );
         }
 
-        private class SubController : DomainController { }
+        private class SubController : DomainController
+        {
+        }
     }
 }

@@ -16,7 +16,9 @@ namespace TestStructFields
     class Program
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void blockPromotion<T>(ref T s) { }
+        static void blockPromotion<T>(ref T s)
+        {
+        }
 
         #region S4 tests
 
@@ -976,7 +978,9 @@ namespace TestStructFields
                 }
                 failed = true;
             }
-            catch { }
+            catch
+            {
+            }
 
             if (failed)
             {

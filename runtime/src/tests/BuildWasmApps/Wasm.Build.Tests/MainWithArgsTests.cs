@@ -16,7 +16,9 @@ namespace Wasm.Build.Tests
         public MainWithArgsTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         public static IEnumerable<object?[]> MainWithArgsTestData(bool aot, RunHost host) =>
             ConfigWithAOTData(aot)

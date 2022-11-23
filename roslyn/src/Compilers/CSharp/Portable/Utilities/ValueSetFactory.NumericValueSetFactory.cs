@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             IValueSet IValueSetFactory.NoValues => NumericValueSet<T, TTC>.NoValues;
 
-            private NumericValueSetFactory() { }
+            private NumericValueSetFactory()
+            {
+            }
 
             public IValueSet<T> Related(BinaryOperatorKind relation, T value)
             {

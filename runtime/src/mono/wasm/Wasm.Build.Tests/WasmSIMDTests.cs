@@ -12,7 +12,9 @@ namespace Wasm.Build.Tests
     public class WasmSIMDTests : WasmBuildAppBase
     {
         public WasmSIMDTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext) { }
+            : base(output, buildContext)
+        {
+        }
 
         [Theory]
         [MemberData(

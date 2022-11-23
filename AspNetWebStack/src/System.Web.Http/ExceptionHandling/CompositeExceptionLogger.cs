@@ -15,7 +15,9 @@ namespace System.Web.Http.ExceptionHandling
         private readonly IExceptionLogger[] _loggers;
 
         public CompositeExceptionLogger(params IExceptionLogger[] loggers)
-            : this((IEnumerable<IExceptionLogger>)loggers) { }
+            : this((IEnumerable<IExceptionLogger>)loggers)
+        {
+        }
 
         public CompositeExceptionLogger(IEnumerable<IExceptionLogger> loggers)
         {

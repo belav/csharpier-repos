@@ -18,7 +18,9 @@ namespace Benchstone.BenchF
         private const double Deg2Rad = 57.29577951;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void Escape(object _) { }
+        private static void Escape(object _)
+        {
+        }
 
         private static double Fact(double n)
         {

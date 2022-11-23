@@ -10,17 +10,23 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class ConstructorTests_String : ConstructorTests
     {
-        public ConstructorTests_String() : base(DeserializationWrapper.StringDeserializer) { }
+        public ConstructorTests_String() : base(DeserializationWrapper.StringDeserializer)
+        {
+        }
     }
 
     public class ConstructorTests_Stream : ConstructorTests
     {
-        public ConstructorTests_Stream() : base(DeserializationWrapper.StreamDeserializer) { }
+        public ConstructorTests_Stream() : base(DeserializationWrapper.StreamDeserializer)
+        {
+        }
     }
 
     public class ConstructorTests_Span : ConstructorTests
     {
-        public ConstructorTests_Span() : base(DeserializationWrapper.SpanDeserializer) { }
+        public ConstructorTests_Span() : base(DeserializationWrapper.SpanDeserializer)
+        {
+        }
     }
 
     public abstract partial class ConstructorTests

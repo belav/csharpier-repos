@@ -6,5 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
-    internal sealed class SearchPaths : SynchronizedList<string> { }
+    internal sealed class SearchPaths : SynchronizedList<string>
+    {
+    }
 }

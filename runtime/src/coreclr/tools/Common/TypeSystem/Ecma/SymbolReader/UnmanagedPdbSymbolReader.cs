@@ -77,7 +77,9 @@ namespace Internal.TypeSystem.Ecma
         {
             public static readonly ClrMetaHostWrapperCache Instance = new ClrMetaHostWrapperCache();
 
-            private ClrMetaHostWrapperCache() { }
+            private ClrMetaHostWrapperCache()
+            {
+            }
 
             protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
@@ -180,7 +182,9 @@ namespace Internal.TypeSystem.Ecma
             public static readonly CLRRuntimeInfoWrapperCache Instance =
                 new CLRRuntimeInfoWrapperCache();
 
-            private CLRRuntimeInfoWrapperCache() { }
+            private CLRRuntimeInfoWrapperCache()
+            {
+            }
 
             protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
@@ -292,7 +296,9 @@ namespace Internal.TypeSystem.Ecma
             public static readonly MetaDataDispenserWrapperCache Instance =
                 new MetaDataDispenserWrapperCache();
 
-            private MetaDataDispenserWrapperCache() { }
+            private MetaDataDispenserWrapperCache()
+            {
+            }
 
             protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
@@ -371,7 +377,9 @@ namespace Internal.TypeSystem.Ecma
         {
             public static readonly CoCreateWrapperCache Instance = new CoCreateWrapperCache();
 
-            private CoCreateWrapperCache() { }
+            private CoCreateWrapperCache()
+            {
+            }
 
             protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
@@ -1481,7 +1489,9 @@ namespace Internal.TypeSystem.Ecma
             public static readonly SymUnmanagedReaderWrapperCache Instance =
                 new SymUnmanagedReaderWrapperCache();
 
-            private SymUnmanagedReaderWrapperCache() { }
+            private SymUnmanagedReaderWrapperCache()
+            {
+            }
 
             protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
@@ -1743,7 +1753,9 @@ namespace Internal.TypeSystem.Ecma
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

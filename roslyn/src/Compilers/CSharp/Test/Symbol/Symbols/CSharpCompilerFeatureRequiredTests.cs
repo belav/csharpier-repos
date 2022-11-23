@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols;
 public class CSharpCompilerFeatureRequiredTests
     : BaseCompilerFeatureRequiredTests<CSharpCompilation, CSharpTestSource>
 {
-    private class CompilerFeatureRequiredTests_CSharp : CSharpTestBase { }
+    private class CompilerFeatureRequiredTests_CSharp : CSharpTestBase
+    {
+    }
 
     private readonly CompilerFeatureRequiredTests_CSharp _csharpTest =
         new CompilerFeatureRequiredTests_CSharp();

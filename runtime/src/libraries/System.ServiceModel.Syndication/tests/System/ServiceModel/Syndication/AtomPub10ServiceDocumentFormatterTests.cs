@@ -1483,7 +1483,9 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Empty(item.Workspaces);
         }
 
-        public class ServiceDocumentSubclass : ServiceDocument { }
+        public class ServiceDocumentSubclass : ServiceDocument
+        {
+        }
 
         public class ServieDocumentTryParseTrueSubclass : ServiceDocument
         {
@@ -1602,11 +1604,17 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : AtomPub10ServiceDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter() : base()
+            {
+            }
 
-            public Formatter(ServiceDocument documentToWrite) : base(documentToWrite) { }
+            public Formatter(ServiceDocument documentToWrite) : base(documentToWrite)
+            {
+            }
 
-            public Formatter(Type documentTypeToCreate) : base(documentTypeToCreate) { }
+            public Formatter(Type documentTypeToCreate) : base(documentTypeToCreate)
+            {
+            }
 
             public ServiceDocument CreateDocumentInstanceEntryPoint() => CreateDocumentInstance();
         }

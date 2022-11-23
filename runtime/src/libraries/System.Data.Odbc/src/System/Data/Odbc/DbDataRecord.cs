@@ -5,7 +5,9 @@ namespace System.Data.Odbc
 {
     internal sealed class DbSchemaInfo
     {
-        internal DbSchemaInfo() { }
+        internal DbSchemaInfo()
+        {
+        }
 
         internal string? _name;
         internal string? _typename;

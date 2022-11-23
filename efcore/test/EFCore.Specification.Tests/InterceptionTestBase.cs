@@ -32,7 +32,9 @@ public abstract class InterceptionTestBase
 
     public class UniverseContext : PoolableDbContext
     {
-        public UniverseContext(DbContextOptions options) : base(options) { }
+        public UniverseContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,9 +96,13 @@ public abstract class InterceptionTestBase
 
     public class NullDiagnosticListener : ITestDiagnosticListener
     {
-        public void AssertEventsInOrder(params string[] eventNames) { }
+        public void AssertEventsInOrder(params string[] eventNames)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public class TestDiagnosticListener
@@ -114,9 +120,13 @@ public abstract class InterceptionTestBase
             _subscription = DiagnosticListener.AllListeners.Subscribe(this);
         }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
         public void AssertEventsInOrder(params string[] eventNames)
         {

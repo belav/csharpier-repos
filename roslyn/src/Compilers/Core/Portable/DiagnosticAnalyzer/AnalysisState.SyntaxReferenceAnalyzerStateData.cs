@@ -173,12 +173,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Stores the partial analysis state for code block actions executed on the declaration.
         /// </summary>
         internal sealed class CodeBlockAnalyzerStateData
-            : BlockAnalyzerStateData<CodeBlockAnalyzerAction, SyntaxNodeAnalyzerStateData> { }
+            : BlockAnalyzerStateData<CodeBlockAnalyzerAction, SyntaxNodeAnalyzerStateData>
+        {
+        }
 
         /// <summary>
         /// Stores the partial analysis state for operation block actions executed on the declaration.
         /// </summary>
         internal sealed class OperationBlockAnalyzerStateData
-            : BlockAnalyzerStateData<OperationBlockAnalyzerAction, OperationAnalyzerStateData> { }
+            : BlockAnalyzerStateData<OperationBlockAnalyzerAction, OperationAnalyzerStateData>
+        {
+        }
     }
 }

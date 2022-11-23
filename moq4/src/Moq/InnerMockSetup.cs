@@ -50,6 +50,8 @@ namespace Moq
             }
         }
 
-        protected override void VerifySelf() { }
+        protected override void VerifySelf()
+        {
+        }
     }
 }

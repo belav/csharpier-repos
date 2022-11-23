@@ -13,13 +13,17 @@ namespace Microsoft.Diagnostics.NETCore.Client
     internal class IpcSocket : Socket
     {
         public IpcSocket(SocketType socketType, ProtocolType protocolType)
-            : base(socketType, protocolType) { }
+            : base(socketType, protocolType)
+        {
+        }
 
         public IpcSocket(
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) : base(addressFamily, socketType, protocolType) { }
+        ) : base(addressFamily, socketType, protocolType)
+        {
+        }
 
         // .NET 6 implements this method directly on Socket, but for earlier runtimes we need a polyfill
 #if !NET6_0_OR_GREATER

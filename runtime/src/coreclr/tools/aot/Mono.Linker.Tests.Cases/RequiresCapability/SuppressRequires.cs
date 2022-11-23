@@ -31,7 +31,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message for --MethodWithRequires--")]
             [RequiresAssemblyFiles("Message for --MethodWithRequires--")]
             [RequiresDynamicCode("Message for --MethodWithRequires--")]
-            static void MethodWithRequires() { }
+            static void MethodWithRequires()
+            {
+            }
 
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             static Type _requiresPublicConstructors;
@@ -92,11 +94,15 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
             static void GenericMethodRequiresPublicMethods<
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
-            >() { }
+            >()
+            {
+            }
 
             class GenericTypeRequiresPublicFields<
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T
-            > { }
+            >
+            {
+            }
 
             [RequiresUnreferencedCode("")]
             [RequiresAssemblyFiles("")]
@@ -166,6 +172,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             }
         }
 
-        class TestType { }
+        class TestType
+        {
+        }
     }
 }

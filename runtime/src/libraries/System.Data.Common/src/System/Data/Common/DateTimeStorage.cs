@@ -14,7 +14,9 @@ namespace System.Data.Common
         private DateTime[] _values = default!; // Late-initialized
 
         internal DateTimeStorage(DataColumn column)
-            : base(column, typeof(DateTime), s_defaultValue, StorageType.DateTime) { }
+            : base(column, typeof(DateTime), s_defaultValue, StorageType.DateTime)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

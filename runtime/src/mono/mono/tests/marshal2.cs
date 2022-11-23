@@ -14,7 +14,9 @@ public class Tests
         public int a;
         public int b;
 
-        public void test() { }
+        public void test()
+        {
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]

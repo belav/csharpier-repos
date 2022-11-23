@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
         public CodeStyleOption(T value, NotificationOption notification)
             : this(new CodeStyleOption2<T>(value, new NotificationOption2(notification.Severity)))
-        { }
+        {
+        }
 
         public T Value
         {

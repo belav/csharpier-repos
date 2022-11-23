@@ -174,7 +174,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class GlobalHeaderNode : HeaderNode
     {
         public GlobalHeaderNode(TargetDetails target, ReadyToRunFlags flags) : base(target, flags)
-        { }
+        {
+        }
 
         protected override void AppendMangledHeaderName(
             NameMangler nameMangler,
@@ -208,7 +209,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _index = index;
         }
 
-        protected override void EmitHeaderPrefix(ref ObjectDataBuilder builder) { }
+        protected override void EmitHeaderPrefix(ref ObjectDataBuilder builder)
+        {
+        }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {

@@ -18,7 +18,9 @@ namespace System.Data
         internal abstract Type ElementType { get; }
         internal abstract DataTable? Table { get; }
 
-        internal EnumerableRowCollection() { }
+        internal EnumerableRowCollection()
+        {
+        }
 
         IEnumerator IEnumerable.GetEnumerator()
         {

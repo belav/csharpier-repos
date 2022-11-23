@@ -31,7 +31,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
     public class ForestTrustRelationshipCollisionCollection : ReadOnlyCollectionBase
     {
-        internal ForestTrustRelationshipCollisionCollection() { }
+        internal ForestTrustRelationshipCollisionCollection()
+        {
+        }
 
         public ForestTrustRelationshipCollision this[int index]
         {

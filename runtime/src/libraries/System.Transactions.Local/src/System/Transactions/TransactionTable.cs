@@ -20,7 +20,9 @@ namespace System.Transactions
         private const int MAX_SPIN_COUNT = 100;
         private const int SLEEP_TIME = 500;
 
-        public CheapUnfairReaderWriterLock() { }
+        public CheapUnfairReaderWriterLock()
+        {
+        }
 
         private object SyncRoot
         {

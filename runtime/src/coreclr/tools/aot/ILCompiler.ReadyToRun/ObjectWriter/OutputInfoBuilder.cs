@@ -100,7 +100,9 @@ namespace ILCompiler.PEWriter
     public class OutputSymbol : OutputItem
     {
         public OutputSymbol(int sectionIndex, int offset, string name)
-            : base(sectionIndex, offset, name) { }
+            : base(sectionIndex, offset, name)
+        {
+        }
     }
 
     /// <summary>

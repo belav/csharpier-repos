@@ -19,11 +19,15 @@ namespace System.Text.Json.SourceGeneration.Tests
                     PropertyVisibilityTestsContext_Metadata.Default,
                     (options) => new PropertyVisibilityTestsContext_Metadata(options)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected PropertyVisibilityTests_Metadata(
             Serialization.Tests.JsonSerializerWrapper serializerWrapper
-        ) : base(serializerWrapper) { }
+        ) : base(serializerWrapper)
+        {
+        }
 
         [Theory]
         [InlineData(typeof(ClassWithBadIgnoreAttribute))]
@@ -330,7 +334,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassWithIgnoredCallbacks))]
         [JsonSerializable(typeof(ClassWithCallbacks))]
         internal sealed partial class PropertyVisibilityTestsContext_Metadata
-            : JsonSerializerContext { }
+            : JsonSerializerContext
+        {
+        }
     }
 
     public partial class PropertyVisibilityTests_Default : PropertyVisibilityTests_Metadata
@@ -341,7 +347,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     PropertyVisibilityTestsContext_Default.Default,
                     (options) => new PropertyVisibilityTestsContext_Default(options)
                 )
-            ) { }
+            )
+        {
+        }
 
         [Theory]
         [InlineData(typeof(ClassWithPrivateProperty_WithJsonIncludeProperty))]
@@ -592,7 +600,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TypeWith_IgnoredPropWith_BadConverter))]
         [JsonSerializable(typeof(ClassWithIgnoredCallbacks))]
         [JsonSerializable(typeof(ClassWithCallbacks))]
-        internal sealed partial class PropertyVisibilityTestsContext_Default
-            : JsonSerializerContext { }
+        internal sealed partial class PropertyVisibilityTestsContext_Default : JsonSerializerContext
+        {
+        }
     }
 }

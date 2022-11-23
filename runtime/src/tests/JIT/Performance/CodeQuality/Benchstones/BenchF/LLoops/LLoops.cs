@@ -131,7 +131,9 @@ namespace Benchstone.BenchF
         };
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void Escape(object _) { }
+        private static void Escape(object _)
+        {
+        }
 
         private static T[][] AllocArray<T>(int n1, int n2)
         {

@@ -234,7 +234,9 @@ public class DefaultModelClientValidatorProviderTest
     }
 
     [CustomModelValidator(Tag = "Class")]
-    private class ModelValidatorAttributeOnClass { }
+    private class ModelValidatorAttributeOnClass
+    {
+    }
 
     private class ModelValidatorAttributeOnProperty
     {
@@ -266,7 +268,9 @@ public class DefaultModelClientValidatorProviderTest
 
     private class CustomValidationAttribute : Attribute, IClientModelValidator
     {
-        public void AddValidation(ClientModelValidationContext context) { }
+        public void AddValidation(ClientModelValidationContext context)
+        {
+        }
     }
 
     private class CustomValidationAttributeOnProperty

@@ -21,10 +21,14 @@ namespace System.Security.Cryptography
         }
 
         public AesCng(string keyName)
-            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider) { }
+            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider)
+        {
+        }
 
         public AesCng(string keyName, CngProvider provider)
-            : this(keyName, provider, CngKeyOpenOptions.None) { }
+            : this(keyName, provider, CngKeyOpenOptions.None)
+        {
+        }
 
         public AesCng(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
         {

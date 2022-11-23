@@ -10,7 +10,9 @@ namespace Test
     {
         ulong[] m_aulField = null;
 
-        static void Func1(ref BB param1, double[] param2, uint[] param3, ref bool param4) { }
+        static void Func1(ref BB param1, double[] param2, uint[] param3, ref bool param4)
+        {
+        }
 
         static uint[] Func2(long param1)
         {
@@ -41,7 +43,9 @@ namespace Test
                 long[] al = null;
                 Func4(ref bb, ref l, ref al);
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException)
+            {
+            }
             return 100;
         }
     }

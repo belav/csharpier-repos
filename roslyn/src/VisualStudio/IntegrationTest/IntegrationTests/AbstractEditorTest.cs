@@ -18,12 +18,16 @@ namespace Roslyn.VisualStudio.IntegrationTests
         private readonly string _projectTemplate;
 
         protected AbstractEditorTest(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         protected AbstractEditorTest(
             VisualStudioInstanceFactory instanceFactory,
             string solutionName
-        ) : this(instanceFactory, solutionName, WellKnownProjectTemplates.ClassLibrary) { }
+        ) : this(instanceFactory, solutionName, WellKnownProjectTemplates.ClassLibrary)
+        {
+        }
 
         protected AbstractEditorTest(
             VisualStudioInstanceFactory instanceFactory,

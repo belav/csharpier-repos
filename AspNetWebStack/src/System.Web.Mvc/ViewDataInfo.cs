@@ -10,7 +10,9 @@ namespace System.Web.Mvc
         private object _value;
         private Func<object> _valueAccessor;
 
-        public ViewDataInfo() { }
+        public ViewDataInfo()
+        {
+        }
 
         public ViewDataInfo(Func<object> valueAccessor)
         {

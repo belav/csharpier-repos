@@ -91,7 +91,9 @@ namespace System.IO.Packaging
 
 #if !PBTCOMPILER
         public XmlCompatibilityReader(XmlReader baseReader, IEnumerable<string> supportedNamespaces)
-            : this(baseReader, null, supportedNamespaces) { }
+            : this(baseReader, null, supportedNamespaces)
+        {
+        }
 #endif
         #endregion Construction
 

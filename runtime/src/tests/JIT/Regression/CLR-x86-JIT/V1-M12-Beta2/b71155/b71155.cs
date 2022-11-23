@@ -22,7 +22,9 @@ namespace Test
                         {
                             throw new Exception();
                         }
-                        catch (DivideByZeroException) { }
+                        catch (DivideByZeroException)
+                        {
+                        }
                     }
                 } while (m_bFwd1);
             }

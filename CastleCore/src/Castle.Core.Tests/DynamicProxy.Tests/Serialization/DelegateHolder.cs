@@ -25,7 +25,9 @@ namespace Castle.DynamicProxy.Tests.Serialization
         public ArrayList ComplexTypeMember;
         public EventHandler DelegateMember;
 
-        public void TestHandler(object sender, EventArgs e) { }
+        public void TestHandler(object sender, EventArgs e)
+        {
+        }
     }
 }
 

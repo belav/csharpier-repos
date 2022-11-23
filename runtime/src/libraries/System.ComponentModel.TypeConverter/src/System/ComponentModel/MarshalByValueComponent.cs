@@ -29,7 +29,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.MarshalByValueComponent'/> class.
         /// </summary>
-        public MarshalByValueComponent() { }
+        public MarshalByValueComponent()
+        {
+        }
 
         ~MarshalByValueComponent() => Dispose(false);
 

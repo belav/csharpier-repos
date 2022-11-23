@@ -21,7 +21,9 @@ public class Form1
 
     public Form1()
     {
-        try { }
+        try
+        {
+        }
         catch
         {
             string lT = string.Format("{0}", RunsInWebServer);

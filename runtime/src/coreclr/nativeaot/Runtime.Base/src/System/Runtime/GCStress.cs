@@ -69,6 +69,8 @@ namespace System.Runtime
 
         private GCStress Next;
 
-        private GCStress() { }
+        private GCStress()
+        {
+        }
     }
 }

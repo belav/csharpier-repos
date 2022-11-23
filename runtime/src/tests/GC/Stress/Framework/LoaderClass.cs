@@ -28,7 +28,9 @@ public class LoaderClass
     private Assembly assem;
     string assembly;
 
-    public LoaderClass() { }
+    public LoaderClass()
+    {
+    }
 
     public void SuppressConsole()
     {
@@ -77,7 +79,9 @@ public class LoaderClass
                             assem = alc.LoadFromAssemblyPath(assembly);
                             break;
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
             }

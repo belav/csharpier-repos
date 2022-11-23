@@ -549,7 +549,9 @@ namespace System.ServiceModel.Syndication.Tests
 
             public XmlSchema GetSchema() => null;
 
-            public void ReadXml(XmlReader reader) { }
+            public void ReadXml(XmlReader reader)
+            {
+            }
 
             public void WriteXml(XmlWriter writer)
             {
@@ -564,7 +566,9 @@ namespace System.ServiceModel.Syndication.Tests
 
             public XmlSchema GetSchema() => null;
 
-            public void ReadXml(XmlReader reader) { }
+            public void ReadXml(XmlReader reader)
+            {
+            }
 
             public void WriteXml(XmlWriter writer)
             {

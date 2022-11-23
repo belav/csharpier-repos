@@ -2,9 +2,13 @@ using System;
 
 public delegate T Dele<T, K>(K k);
 
-public class Generic<T> { }
+public class Generic<T>
+{
+}
 
-public interface Foo9<T> { }
+public interface Foo9<T>
+{
+}
 
 public class Foo<KEY>
 {

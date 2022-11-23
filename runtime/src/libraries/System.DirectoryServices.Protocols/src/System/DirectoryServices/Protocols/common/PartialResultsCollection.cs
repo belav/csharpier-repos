@@ -7,7 +7,9 @@ namespace System.DirectoryServices.Protocols
 {
     public class PartialResultsCollection : ReadOnlyCollectionBase
     {
-        internal PartialResultsCollection() { }
+        internal PartialResultsCollection()
+        {
+        }
 
         public object this[int index] => InnerList[index];
 

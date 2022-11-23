@@ -49,7 +49,9 @@ namespace Microsoft.Test.ModuleCore
         }
 
         //Constructors
-        public TestModule() : this(null, null) { }
+        public TestModule() : this(null, null)
+        {
+        }
 
         public TestModule(string name, string desc) : base(name, desc, TestType.TestModule)
         {
@@ -170,9 +172,13 @@ namespace Microsoft.Test.ModuleCore
             base.DetermineChildren();
         }
 
-        protected virtual void DetermineIncludes() { }
+        protected virtual void DetermineIncludes()
+        {
+        }
 
-        protected virtual void DetermineFilters() { }
+        protected virtual void DetermineFilters()
+        {
+        }
 
         protected virtual string FilterScope(string xpath)
         {

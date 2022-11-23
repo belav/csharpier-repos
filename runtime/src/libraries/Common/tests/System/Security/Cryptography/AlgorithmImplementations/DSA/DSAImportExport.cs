@@ -152,7 +152,9 @@ namespace System.Security.Cryptography.Dsa.Tests
                 {
                     key.CreateSignature(hash);
                 }
-                catch (PlatformNotSupportedException) when (!SupportsKeyGeneration) { }
+                catch (PlatformNotSupportedException) when (!SupportsKeyGeneration)
+                {
+                }
             }
 
             Assert.Throws<ObjectDisposedException>(() => key.ExportParameters(false));

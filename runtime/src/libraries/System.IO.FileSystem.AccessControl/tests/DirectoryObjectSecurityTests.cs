@@ -1053,10 +1053,14 @@ namespace System.Security.AccessControl
 
         private class CustomDirectoryObjectSecurity : DirectoryObjectSecurity
         {
-            public CustomDirectoryObjectSecurity() { }
+            public CustomDirectoryObjectSecurity()
+            {
+            }
 
             public CustomDirectoryObjectSecurity(CommonSecurityDescriptor securityDescriptor)
-                : base(securityDescriptor) { }
+                : base(securityDescriptor)
+            {
+            }
 
             public override Type AccessRightType => throw new NotImplementedException();
 
@@ -1239,7 +1243,9 @@ namespace System.Security.AccessControl
                     objectType,
                     inheritedObjectType,
                     auditFlags
-                ) { }
+                )
+            {
+            }
 
             public CustomAuditRule(
                 IdentityReference identity,
@@ -1258,7 +1264,9 @@ namespace System.Security.AccessControl
                     Guid.NewGuid(),
                     Guid.NewGuid(),
                     auditFlags
-                ) { }
+                )
+            {
+            }
 
             public override bool Equals(object value)
             {
@@ -1322,7 +1330,9 @@ namespace System.Security.AccessControl
                     objectType,
                     inheritedObjectType,
                     type
-                ) { }
+                )
+            {
+            }
 
             public CustomAccessRule(
                 IdentityReference identity,
@@ -1341,7 +1351,9 @@ namespace System.Security.AccessControl
                     Guid.NewGuid(),
                     Guid.NewGuid(),
                     type
-                ) { }
+                )
+            {
+            }
 
             public override bool Equals(object value)
             {

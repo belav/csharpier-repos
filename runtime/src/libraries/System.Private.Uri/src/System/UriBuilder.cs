@@ -21,7 +21,9 @@ namespace System
         private bool _changed = true;
         private Uri? _uri;
 
-        public UriBuilder() { }
+        public UriBuilder()
+        {
+        }
 
         public UriBuilder([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {

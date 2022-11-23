@@ -144,15 +144,21 @@ namespace ObjectiveCMarshalAPI
             }
         }
 
-        class Derived : Base { }
+        class Derived : Base
+        {
+        }
 
         class DerivedWithFinalizer : Base
         {
-            ~DerivedWithFinalizer() { }
+            ~DerivedWithFinalizer()
+            {
+            }
         }
 
         [ObjectiveCTrackedTypeAttribute]
-        class AttributedNoFinalizer { }
+        class AttributedNoFinalizer
+        {
+        }
 
         static void InitializeObjectiveCMarshal()
         {
@@ -274,7 +280,9 @@ namespace ObjectiveCMarshalAPI
 
         private class ExceptionException : Exception
         {
-            public ExceptionException() { }
+            public ExceptionException()
+            {
+            }
         }
 
         [UnmanagedCallersOnly]

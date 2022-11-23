@@ -20,11 +20,17 @@ namespace System.Reflection.Metadata
         // position in buffer relative to the beginning of the array:
         private int _position;
 
-        public BlobWriter(int size) : this(new byte[size]) { }
+        public BlobWriter(int size) : this(new byte[size])
+        {
+        }
 
-        public BlobWriter(byte[] buffer) : this(buffer, 0, buffer.Length) { }
+        public BlobWriter(byte[] buffer) : this(buffer, 0, buffer.Length)
+        {
+        }
 
-        public BlobWriter(Blob blob) : this(blob.Buffer, blob.Start, blob.Length) { }
+        public BlobWriter(Blob blob) : this(blob.Buffer, blob.Start, blob.Length)
+        {
+        }
 
         public BlobWriter(byte[] buffer, int start, int count)
         {

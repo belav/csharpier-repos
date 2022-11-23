@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static readonly NonNegativeIntValueSetFactory Instance =
                 new NonNegativeIntValueSetFactory();
 
-            private NonNegativeIntValueSetFactory() { }
+            private NonNegativeIntValueSetFactory()
+            {
+            }
 
             private readonly IValueSetFactory<int> _underlying = NumericValueSetFactory<
                 int,

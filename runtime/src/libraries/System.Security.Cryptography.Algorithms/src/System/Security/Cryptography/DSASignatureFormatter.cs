@@ -11,7 +11,9 @@ namespace System.Security.Cryptography
     {
         private DSA? _dsaKey;
 
-        public DSASignatureFormatter() { }
+        public DSASignatureFormatter()
+        {
+        }
 
         public DSASignatureFormatter(AsymmetricAlgorithm key) : this()
         {

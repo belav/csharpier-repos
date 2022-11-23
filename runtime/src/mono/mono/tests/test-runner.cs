@@ -429,7 +429,9 @@ public class TestRunner
                         {
                             p.Kill();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                     else if (p.ExitCode != expectedExitCode)
                     {
@@ -872,7 +874,9 @@ public class TestRunner
             TryGDB(pid, data);
             return;
         }
-        catch { }
+        catch
+        {
+        }
 
 #if !FULL_AOT_DESKTOP && !MOBILE
         /* LLDB cannot produce managed stacktraces for all the threads */
@@ -881,7 +885,9 @@ public class TestRunner
             Syscall.kill(pid, Signum.SIGQUIT);
             Thread.Sleep(1000);
         }
-        catch { }
+        catch
+        {
+        }
 #endif
 
         try
@@ -889,7 +895,9 @@ public class TestRunner
             TryLLDB(pid, data);
             return;
         }
-        catch { }
+        catch
+        {
+        }
     }
 
     static void TryLLDB(int pid, ProcessData data)

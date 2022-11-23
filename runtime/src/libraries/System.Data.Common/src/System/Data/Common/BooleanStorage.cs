@@ -15,7 +15,9 @@ namespace System.Data.Common
         private bool[] _values = default!; // Late-initialized
 
         internal BooleanStorage(DataColumn column)
-            : base(column, typeof(bool), defaultValue, StorageType.Boolean) { }
+            : base(column, typeof(bool), defaultValue, StorageType.Boolean)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

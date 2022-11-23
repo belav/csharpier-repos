@@ -13,9 +13,13 @@ namespace System.Diagnostics
         internal static void ConfigureTerminalForChildProcesses(
             int increment,
             bool configureConsole = true
-        ) { }
+        )
+        {
+        }
 
-        private static unsafe void SetDelayedSigChildConsoleConfigurationHandler() { }
+        private static unsafe void SetDelayedSigChildConsoleConfigurationHandler()
+        {
+        }
 
         private static bool AreChildrenUsingTerminal => false;
     }

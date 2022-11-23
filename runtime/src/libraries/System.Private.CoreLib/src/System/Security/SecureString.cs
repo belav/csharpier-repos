@@ -446,7 +446,9 @@ namespace System.Security
             private int _byteLength;
 
 #pragma warning disable CA1419 // not intended for use with P/Invoke
-            private UnmanagedBuffer() : base(true) { }
+            private UnmanagedBuffer() : base(true)
+            {
+            }
 #pragma warning restore CA1419
 
             public static UnmanagedBuffer Allocate(int byteLength)

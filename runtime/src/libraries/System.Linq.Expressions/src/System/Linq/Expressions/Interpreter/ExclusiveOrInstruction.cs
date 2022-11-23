@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "ExclusiveOr";
 
-        private ExclusiveOrInstruction() { }
+        private ExclusiveOrInstruction()
+        {
+        }
 
         private sealed class ExclusiveOrSByte : ExclusiveOrInstruction
         {

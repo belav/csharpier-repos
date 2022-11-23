@@ -98,7 +98,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
         internal class MemberSymbolViewModel : SymbolViewModel<ISymbol>
         {
             public MemberSymbolViewModel(ISymbol symbol, IGlyphService glyphService)
-                : base(symbol, glyphService) { }
+                : base(symbol, glyphService)
+            {
+            }
         }
     }
 }

@@ -17,9 +17,13 @@ using System;
 using System.Runtime.CompilerServices;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
-public class A { }
+public class A
+{
+}
 
-public class B { }
+public class B
+{
+}
 
 unsafe public class C
 {

@@ -10,7 +10,9 @@ namespace System.Runtime.Intrinsics.X86
     [RequiresPreviewFeatures("AvxVnni is in preview.")]
     public abstract class AvxVnni : Avx2
     {
-        internal AvxVnni() { }
+        internal AvxVnni()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -20,7 +22,9 @@ namespace System.Runtime.Intrinsics.X86
 
         public new abstract class X64 : Avx2.X64
         {
-            internal X64() { }
+            internal X64()
+            {
+            }
 
             public static new bool IsSupported
             {

@@ -107,7 +107,9 @@ namespace System.Diagnostics.Tests
         {
             public static readonly WriteLogger s_instance = new WriteLogger();
 
-            private WriteLogger() { }
+            private WriteLogger()
+            {
+            }
 
             public string LoggedOutput { get; private set; }
 

@@ -7,5 +7,7 @@ public class LibClass
     public int OnlyInVersion1;
     public int InAllVersions;
 
-    public LibClass() { }
+    public LibClass()
+    {
+    }
 }

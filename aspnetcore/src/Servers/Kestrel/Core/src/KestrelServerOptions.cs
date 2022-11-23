@@ -152,12 +152,18 @@ public class KestrelServerOptions
     /// <summary>
     /// A default configuration action for all endpoints. Use for Listen, configuration, the default url, and URLs.
     /// </summary>
-    private Action<ListenOptions> EndpointDefaults { get; set; } = _ => { };
+    private Action<ListenOptions> EndpointDefaults { get; set; } =
+        _ =>
+        {
+        };
 
     /// <summary>
     /// A default configuration action for all https endpoints.
     /// </summary>
-    private Action<HttpsConnectionAdapterOptions> HttpsDefaults { get; set; } = _ => { };
+    private Action<HttpsConnectionAdapterOptions> HttpsDefaults { get; set; } =
+        _ =>
+        {
+        };
 
     /// <summary>
     /// The default server certificate for https endpoints. This is applied lazily after HttpsDefaults and user options.
@@ -422,7 +428,13 @@ public class KestrelServerOptions
     /// </summary>
     public void Listen(IPAddress address, int port)
     {
-        Listen(address, port, _ => { });
+        Listen(
+            address,
+            port,
+            _ =>
+            {
+            }
+        );
     }
 
     /// <summary>
@@ -450,7 +462,12 @@ public class KestrelServerOptions
     /// <param name="endPoint"></param>
     public void Listen(EndPoint endPoint)
     {
-        Listen(endPoint, _ => { });
+        Listen(
+            endPoint,
+            _ =>
+            {
+            }
+        );
     }
 
     /// <summary>
@@ -481,7 +498,13 @@ public class KestrelServerOptions
     /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
     /// for this type of endpoint.
     /// </summary>
-    public void ListenLocalhost(int port) => ListenLocalhost(port, options => { });
+    public void ListenLocalhost(int port) =>
+        ListenLocalhost(
+            port,
+            options =>
+            {
+            }
+        );
 
     /// <summary>
     /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
@@ -500,7 +523,13 @@ public class KestrelServerOptions
     /// <summary>
     /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
     /// </summary>
-    public void ListenAnyIP(int port) => ListenAnyIP(port, options => { });
+    public void ListenAnyIP(int port) =>
+        ListenAnyIP(
+            port,
+            options =>
+            {
+            }
+        );
 
     /// <summary>
     /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
@@ -520,7 +549,12 @@ public class KestrelServerOptions
     /// </summary>
     public void ListenUnixSocket(string socketPath)
     {
-        ListenUnixSocket(socketPath, _ => { });
+        ListenUnixSocket(
+            socketPath,
+            _ =>
+            {
+            }
+        );
     }
 
     /// <summary>
@@ -551,7 +585,12 @@ public class KestrelServerOptions
     /// </summary>
     public void ListenHandle(ulong handle)
     {
-        ListenHandle(handle, _ => { });
+        ListenHandle(
+            handle,
+            _ =>
+            {
+            }
+        );
     }
 
     /// <summary>

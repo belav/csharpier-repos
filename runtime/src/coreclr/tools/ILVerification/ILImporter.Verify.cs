@@ -13,17 +13,23 @@ namespace Internal.IL
 {
     class VerificationException : Exception
     {
-        public VerificationException() { }
+        public VerificationException()
+        {
+        }
     }
 
     class LocalVerificationException : VerificationException
     {
-        public LocalVerificationException() { }
+        public LocalVerificationException()
+        {
+        }
     }
 
     class VerifierException : Exception
     {
-        internal VerifierException(string message) : base(message) { }
+        internal VerifierException(string message) : base(message)
+        {
+        }
     }
 
     partial class ILImporter

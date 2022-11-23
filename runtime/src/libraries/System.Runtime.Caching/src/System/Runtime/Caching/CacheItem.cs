@@ -11,7 +11,9 @@ namespace System.Runtime.Caching
         public object Value { get; set; }
         public string RegionName { get; set; }
 
-        private CacheItem() { } // hide default constructor
+        private CacheItem()
+        {
+        } // hide default constructor
 
         public CacheItem(string key)
         {

@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
         private static readonly ObjectPool<Dictionary<string, string>> s_aliasMapPool =
             SharedPools.StringIgnoreCaseDictionary<string>();
 
-        protected AbstractDeclaredSymbolInfoFactoryService() { }
+        protected AbstractDeclaredSymbolInfoFactoryService()
+        {
+        }
 
         protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(
             TCompilationUnitSyntax node

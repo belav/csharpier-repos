@@ -10,7 +10,9 @@ namespace System.Net.NetworkInformation
     {
         private readonly Interop.IpHlpApi.MibUdpStats _stats;
 
-        private SystemUdpStatistics() { }
+        private SystemUdpStatistics()
+        {
+        }
 
         internal unsafe SystemUdpStatistics(AddressFamily family)
         {

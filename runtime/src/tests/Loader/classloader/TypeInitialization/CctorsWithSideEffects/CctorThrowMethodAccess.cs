@@ -25,7 +25,9 @@ public class A
         throw new Exception();
     }
 
-    public static void methA() { }
+    public static void methA()
+    {
+    }
 }
 
 // TEST2
@@ -39,7 +41,9 @@ public struct B
         throw new Exception();
     }
 
-    public static void methB() { }
+    public static void methB()
+    {
+    }
 }
 
 // TEST3
@@ -65,7 +69,9 @@ public struct D
         throw new Exception();
     }
 
-    public D(int i) { }
+    public D(int i)
+    {
+    }
 }
 
 /*
@@ -97,7 +103,9 @@ public struct F
         throw new Exception();
     }
 
-    public void methF() { }
+    public void methF()
+    {
+    }
 }
 
 public interface IG
@@ -116,7 +124,9 @@ public struct G : IG
         throw new Exception();
     }
 
-    public void methG() { }
+    public void methG()
+    {
+    }
 }
 
 public class Test_CctorThrowMethodAccess

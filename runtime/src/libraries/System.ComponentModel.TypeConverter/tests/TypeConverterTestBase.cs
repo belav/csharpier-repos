@@ -391,7 +391,9 @@ namespace System.ComponentModel.Tests
             public ConvertTest WithInvariantRemoteInvokeCulture() =>
                 WithRemoteInvokeCulture(CultureInfo.InvariantCulture);
 
-            public ConvertTest() { }
+            public ConvertTest()
+            {
+            }
 
             protected ConvertTest(SerializationInfo info, StreamingContext context)
             {

@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDefinitionsAndReferencesFactory() { }
+        public DefaultDefinitionsAndReferencesFactory()
+        {
+        }
 
         /// <summary>
         /// Provides an extension point that allows for other workspace layers to add additional

@@ -19,7 +19,9 @@ class TestClass
                 list.AddByteArray(84500);
             }
         }
-        catch (OutOfMemoryException) { }
+        catch (OutOfMemoryException)
+        {
+        }
 
         Console.Write("NodesAllocated: ");
         Console.WriteLine(list.NodeCount);

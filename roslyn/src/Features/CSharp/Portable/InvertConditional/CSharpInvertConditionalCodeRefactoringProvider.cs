@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertConditional
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpInvertConditionalCodeRefactoringProvider() { }
+        public CSharpInvertConditionalCodeRefactoringProvider()
+        {
+        }
 
         // Don't offer if the conditional is missing the colon and the conditional is too incomplete.
         protected override bool ShouldOffer(ConditionalExpressionSyntax conditional) =>

@@ -161,7 +161,9 @@ namespace System.ComponentModel.Composition
         {
             private readonly Func<string> _contractNameGetter;
 
-            public DerivedExportDefinition() { }
+            public DerivedExportDefinition()
+            {
+            }
 
             public DerivedExportDefinition(Func<string> contractNameGetter)
             {

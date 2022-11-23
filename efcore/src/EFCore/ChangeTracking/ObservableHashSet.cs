@@ -29,7 +29,9 @@ public class ObservableHashSet<T>
     ///     Initializes a new instance of the <see cref="ObservableHashSet{T}" /> class
     ///     that is empty and uses the default equality comparer for the set type.
     /// </summary>
-    public ObservableHashSet() : this(EqualityComparer<T>.Default) { }
+    public ObservableHashSet() : this(EqualityComparer<T>.Default)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ObservableHashSet{T}" /> class
@@ -53,7 +55,9 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="collection">The collection whose elements are copied to the new set.</param>
     public ObservableHashSet(IEnumerable<T> collection)
-        : this(collection, EqualityComparer<T>.Default) { }
+        : this(collection, EqualityComparer<T>.Default)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ObservableHashSet{T}" /> class

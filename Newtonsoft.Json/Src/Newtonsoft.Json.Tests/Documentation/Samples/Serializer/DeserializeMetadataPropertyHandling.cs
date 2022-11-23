@@ -71,7 +71,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // James
                 #endregion
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 }

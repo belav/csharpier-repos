@@ -711,7 +711,9 @@ namespace System.Text.Json.Tests
                     $"Expected OverflowException was not thrown when calling ValueTextEquals with large lookup string"
                 );
             }
-            catch (OverflowException) { }
+            catch (OverflowException)
+            {
+            }
         }
 
         [Theory]
@@ -733,7 +735,9 @@ namespace System.Text.Json.Tests
                     $"Expected InvalidOperationException was not thrown when calling ValueTextEquals with TokenType = {json.TokenType}"
                 );
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             try
             {
@@ -743,7 +747,9 @@ namespace System.Text.Json.Tests
                     $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
                 );
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             try
             {
@@ -753,7 +759,9 @@ namespace System.Text.Json.Tests
                     $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
                 );
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             while (json.Read())
             {
@@ -765,7 +773,9 @@ namespace System.Text.Json.Tests
                         $"Expected InvalidOperationException was not thrown when calling ValueTextEquals with TokenType = {json.TokenType}"
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
@@ -775,7 +785,9 @@ namespace System.Text.Json.Tests
                         $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
@@ -785,7 +797,9 @@ namespace System.Text.Json.Tests
                         $"Expected InvalidOperationException was not thrown when calling ValueTextEquals(char) with TokenType = {json.TokenType}"
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
 
             Assert.Equal(utf8Data.Length, json.BytesConsumed);

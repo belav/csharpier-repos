@@ -409,7 +409,9 @@ public class CandidateSetTest
         );
     }
 
-    private class TestMetadata { }
+    private class TestMetadata
+    {
+    }
 
     private class TestMetadataMatcherPolicy : MatcherPolicy, IEndpointComparerPolicy
     {

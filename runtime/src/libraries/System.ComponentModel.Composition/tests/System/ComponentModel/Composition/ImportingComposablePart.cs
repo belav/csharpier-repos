@@ -20,7 +20,9 @@ namespace System.ComponentModel.Composition
             ImportCardinality cardinality,
             bool isRecomposable,
             params string[] contractNames
-        ) : this((string)null, cardinality, isRecomposable, contractNames) { }
+        ) : this((string)null, cardinality, isRecomposable, contractNames)
+        {
+        }
 
         public ImportingComposablePart(
             string exportContractName,

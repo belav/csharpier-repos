@@ -8,7 +8,9 @@ using System.Runtime.InteropServices;
 [AttributeUsage(AttributeTargets.Method)]
 sealed class MonoPInvokeCallbackAttribute : Attribute
 {
-    public MonoPInvokeCallbackAttribute(Type t) { }
+    public MonoPInvokeCallbackAttribute(Type t)
+    {
+    }
 }
 
 public class Marshal1 : ICustomMarshaler
@@ -372,7 +374,9 @@ public class Tests
      * Test custom marshaller class not implementing ICustomMarshaler
      */
 
-    public class Marshal2 { }
+    public class Marshal2
+    {
+    }
 
     [DllImport("libtest")]
     private static extern IntPtr mono_test_marshal_pass_return_custom2(
@@ -405,9 +409,13 @@ public class Tests
 
     public class Marshal3 : ICustomMarshaler
     {
-        public void CleanUpManagedData(object managedObj) { }
+        public void CleanUpManagedData(object managedObj)
+        {
+        }
 
-        public void CleanUpNativeData(IntPtr pNativeData) { }
+        public void CleanUpNativeData(IntPtr pNativeData)
+        {
+        }
 
         public int GetNativeDataSize()
         {
@@ -526,9 +534,13 @@ public class Tests
             return new Marshal6();
         }
 
-        public void CleanUpManagedData(object managedObj) { }
+        public void CleanUpManagedData(object managedObj)
+        {
+        }
 
-        public void CleanUpNativeData(IntPtr pNativeData) { }
+        public void CleanUpNativeData(IntPtr pNativeData)
+        {
+        }
 
         public int GetNativeDataSize()
         {

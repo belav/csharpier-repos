@@ -2880,6 +2880,8 @@ namespace System.Data.OleDb
             return (isHidden) ? 1 : -1; // ensure that all hidden columns come after non-hidden columns
         }
 
-        internal MetaData() { }
+        internal MetaData()
+        {
+        }
     }
 }

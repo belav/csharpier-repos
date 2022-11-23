@@ -125,7 +125,9 @@ public class NonGenericProjectAndMapEnumTest
 
 public class NonGenericProjectionOverrides : AutoMapperSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {

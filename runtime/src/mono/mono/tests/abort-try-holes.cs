@@ -50,7 +50,9 @@ public class Program
             {
                 try
                 {
-                    try { }
+                    try
+                    {
+                    }
                     finally
                     {
                         rwl.EnterReadLock();
@@ -84,7 +86,9 @@ public class Program
             {
                 try
                 {
-                    try { }
+                    try
+                    {
+                    }
                     finally
                     {
                         rwl.EnterWriteLock();

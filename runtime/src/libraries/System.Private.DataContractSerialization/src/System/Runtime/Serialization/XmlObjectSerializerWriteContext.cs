@@ -694,7 +694,9 @@ namespace System.Runtime.Serialization
             WriteArraySize(xmlWriter, size);
         }
 
-        internal virtual void WriteArraySize(XmlWriterDelegator xmlWriter, int size) { }
+        internal virtual void WriteArraySize(XmlWriterDelegator xmlWriter, int size)
+        {
+        }
 
         internal static bool IsMemberTypeSameAsMemberValue(object obj, Type memberType)
         {

@@ -18,7 +18,9 @@ namespace System.Reflection
         public virtual int LocalIndex => 0;
         public virtual bool IsPinned => false;
 
-        protected LocalVariableInfo() { }
+        protected LocalVariableInfo()
+        {
+        }
 
         public override string ToString() =>
             IsPinned ? $"{LocalType} ({LocalIndex}) (pinned)" : $"{LocalType} ({LocalIndex})";

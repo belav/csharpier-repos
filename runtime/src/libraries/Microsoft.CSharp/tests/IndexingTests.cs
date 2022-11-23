@@ -19,7 +19,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [DefaultMember("Indexer")]
-        private class DefaultDoesNotExist { }
+        private class DefaultDoesNotExist
+        {
+        }
 
         private interface IA
         {
@@ -27,9 +29,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             string this[int key] { get; }
         }
 
-        private interface IB : IA { }
+        private interface IB : IA
+        {
+        }
 
-        private interface IC : IB { }
+        private interface IC : IB
+        {
+        }
 
         private class Implementation : IC
         {

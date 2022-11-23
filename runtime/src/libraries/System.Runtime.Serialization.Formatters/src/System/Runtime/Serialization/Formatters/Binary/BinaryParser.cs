@@ -217,9 +217,13 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        internal void ReadBegin() { }
+        internal void ReadBegin()
+        {
+        }
 
-        internal void ReadEnd() { }
+        internal void ReadEnd()
+        {
+        }
 
         // Primitive Reads from Stream
 

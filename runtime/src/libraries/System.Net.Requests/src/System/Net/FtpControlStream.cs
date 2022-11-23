@@ -79,7 +79,9 @@ namespace System.Net
             SSLHandshakeCallback
         );
 
-        internal FtpControlStream(NetworkStream client) : base(client) { }
+        internal FtpControlStream(NetworkStream client) : base(client)
+        {
+        }
 
         /// <summary>
         ///    <para>Closes the connecting socket to generate an error.</para>
@@ -93,7 +95,9 @@ namespace System.Net
                 {
                     socket.Close();
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
             }
         }
 
@@ -1058,8 +1062,12 @@ namespace System.Net
                 dateTime = new DateTime(year, month, day, hour, minute, second, millisecond);
                 dateTime = dateTime.ToLocalTime(); // must be handled in local time
             }
-            catch (ArgumentOutOfRangeException) { }
-            catch (ArgumentException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
+            catch (ArgumentException)
+            {
+            }
             return dateTime;
         }
 

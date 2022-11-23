@@ -15,13 +15,17 @@ namespace System.Web.WebPages.Scope
         private readonly IDictionary<object, object> _baseScope;
         private readonly IDictionary<object, object> _backingStore;
 
-        public ScopeStorageDictionary() : this(baseScope: null) { }
+        public ScopeStorageDictionary() : this(baseScope: null)
+        {
+        }
 
         public ScopeStorageDictionary(IDictionary<object, object> baseScope)
             : this(
                 baseScope: baseScope,
                 backingStore: new Dictionary<object, object>(ScopeStorageComparer.Instance)
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ScopeStorageDictionary"/> class.

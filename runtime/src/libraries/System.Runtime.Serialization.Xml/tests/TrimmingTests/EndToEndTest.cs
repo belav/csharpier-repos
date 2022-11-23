@@ -44,7 +44,9 @@ namespace MyApplication.Shared.Types
 {
     public class AuthState
     {
-        public AuthState() { }
+        public AuthState()
+        {
+        }
 
         public bool IsAuthenticated { get; set; }
         public string Name { get; set; }

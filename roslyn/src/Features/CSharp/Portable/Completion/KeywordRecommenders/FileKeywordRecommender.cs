@@ -17,7 +17,9 @@ internal class FileKeywordRecommender : AbstractSyntacticSingleKeywordRecommende
         .Where(s => s != SyntaxKind.FileKeyword && !SyntaxFacts.IsAccessibilityModifier(s))
         .ToSet();
 
-    public FileKeywordRecommender() : base(SyntaxKind.FileKeyword) { }
+    public FileKeywordRecommender() : base(SyntaxKind.FileKeyword)
+    {
+    }
 
     protected override bool IsValidContext(
         int position,

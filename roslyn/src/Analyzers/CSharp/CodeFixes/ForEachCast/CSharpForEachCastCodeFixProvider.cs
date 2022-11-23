@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ForEachCast
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpForEachCastCodeFixProvider() { }
+        public CSharpForEachCastCodeFixProvider()
+        {
+        }
 
         protected override ITypeSymbol GetForEachElementType(
             SemanticModel semanticModel,

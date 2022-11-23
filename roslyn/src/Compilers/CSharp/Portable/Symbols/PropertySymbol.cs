@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // to the VB version.
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        internal PropertySymbol() { }
+        internal PropertySymbol()
+        {
+        }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another

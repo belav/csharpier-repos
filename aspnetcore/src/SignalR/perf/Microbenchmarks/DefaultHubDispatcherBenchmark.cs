@@ -85,7 +85,9 @@ public class DefaultHubDispatcherBenchmark
             return false;
         }
 
-        public void WriteMessage(HubMessage message, IBufferWriter<byte> output) { }
+        public void WriteMessage(HubMessage message, IBufferWriter<byte> output)
+        {
+        }
 
         public ReadOnlyMemory<byte> GetMessageBytes(HubMessage message)
         {
@@ -101,7 +103,9 @@ public class DefaultHubDispatcherBenchmark
             ConnectionContext connectionContext,
             HubConnectionContextOptions contextOptions,
             ILoggerFactory loggerFactory
-        ) : base(connectionContext, contextOptions, loggerFactory) { }
+        ) : base(connectionContext, contextOptions, loggerFactory)
+        {
+        }
 
         public override ValueTask WriteAsync(
             HubMessage message,
@@ -124,7 +128,9 @@ public class DefaultHubDispatcherBenchmark
 
     public class TestHub : Hub
     {
-        public void Invocation() { }
+        public void Invocation()
+        {
+        }
 
         public Task InvocationAsync()
         {
@@ -210,13 +216,17 @@ public class DefaultHubDispatcherBenchmark
         {
             while (await channelReader.WaitToReadAsync())
             {
-                while (channelReader.TryRead(out var item)) { }
+                while (channelReader.TryRead(out var item))
+                {
+                }
             }
         }
 
         public async Task UploadStreamIAsynEnumerable(IAsyncEnumerable<string> stream)
         {
-            await foreach (var item in stream) { }
+            await foreach (var item in stream)
+            {
+            }
         }
     }
 

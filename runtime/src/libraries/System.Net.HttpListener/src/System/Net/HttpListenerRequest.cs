@@ -87,7 +87,9 @@ namespace System.Net
                         {
                             return Encoding.GetEncoding(postDataCharset);
                         }
-                        catch (ArgumentException) { }
+                        catch (ArgumentException)
+                        {
+                        }
                     }
                 }
                 if (HasEntityBody)
@@ -101,7 +103,9 @@ namespace System.Net
                             {
                                 return Encoding.GetEncoding(charSet);
                             }
-                            catch (ArgumentException) { }
+                            catch (ArgumentException)
+                            {
+                            }
                         }
                     }
                 }

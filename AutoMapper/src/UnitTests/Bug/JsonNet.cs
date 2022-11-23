@@ -18,7 +18,9 @@ public class JsonNetDictionary : AutoMapperSpecBase
                     let items = pair.Split(',')
                     select new StringKeyValuePair(items[0], items[1])
                 ).ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
-            ) { }
+            )
+        {
+        }
     }
 
     class Source
@@ -72,7 +74,9 @@ public class JObjectField : AutoMapperSpecBase
 
     class JObject : JContainer, IDictionary<string, string>
     {
-        public JObject() { }
+        public JObject()
+        {
+        }
 
         public string this[string key]
         {

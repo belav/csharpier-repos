@@ -20,7 +20,9 @@ class Test
 
 public class A
 {
-    public A() { }
+    public A()
+    {
+    }
 }
 
 public class Hello<liıİ>

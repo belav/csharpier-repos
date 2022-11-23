@@ -71,7 +71,9 @@ namespace Newtonsoft.Json.Tests.Documentation
 
     public class Logger
     {
-        public void Log(LogEventInfo logEvent) { }
+        public void Log(LogEventInfo logEvent)
+        {
+        }
     }
 
     public static class LogManager

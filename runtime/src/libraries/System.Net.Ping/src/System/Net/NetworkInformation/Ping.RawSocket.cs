@@ -339,7 +339,9 @@ namespace System.Net.NetworkInformation
                         }
                     }
                 }
-                catch (SocketException ex) when (ex.SocketErrorCode == SocketError.TimedOut) { }
+                catch (SocketException ex) when (ex.SocketErrorCode == SocketError.TimedOut)
+                {
+                }
                 catch (SocketException ex) when (ex.SocketErrorCode == SocketError.MessageSize)
                 {
                     return CreatePingReply(IPStatus.PacketTooBig);
@@ -414,12 +416,16 @@ namespace System.Net.NetworkInformation
                     }
                 }
             }
-            catch (SocketException ex) when (ex.SocketErrorCode == SocketError.TimedOut) { }
+            catch (SocketException ex) when (ex.SocketErrorCode == SocketError.TimedOut)
+            {
+            }
             catch (SocketException ex) when (ex.SocketErrorCode == SocketError.MessageSize)
             {
                 return CreatePingReply(IPStatus.PacketTooBig);
             }
-            catch (OperationCanceledException) when (!_canceled) { }
+            catch (OperationCanceledException) when (!_canceled)
+            {
+            }
 
             // We have exceeded our timeout duration, and no reply has been received.
             return CreatePingReply(IPStatus.TimedOut);

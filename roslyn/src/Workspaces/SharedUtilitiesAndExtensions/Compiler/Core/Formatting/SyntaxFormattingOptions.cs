@@ -56,7 +56,9 @@ internal interface SyntaxFormattingOptionsProvider
 #if !CODE_STYLE
     OptionsProvider<SyntaxFormattingOptions>,
 #endif
-    LineFormattingOptionsProvider { }
+    LineFormattingOptionsProvider
+{
+}
 
 internal static partial class SyntaxFormattingOptionsProviders
 {

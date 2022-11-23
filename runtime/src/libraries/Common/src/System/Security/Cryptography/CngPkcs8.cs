@@ -258,7 +258,9 @@ namespace System.Security.Cryptography
                             bytesRead = len;
                             return ImportPkcs8(source, password);
                         }
-                        catch (CryptographicException) { }
+                        catch (CryptographicException)
+                        {
+                        }
 
                         ArraySegment<byte> decrypted = KeyFormatHelper.DecryptPkcs8(
                             password,

@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class ExtensionOrderAttribute : Attribute
     {
-        public ExtensionOrderAttribute() { }
+        public ExtensionOrderAttribute()
+        {
+        }
 
         public string After { get; set; }
 

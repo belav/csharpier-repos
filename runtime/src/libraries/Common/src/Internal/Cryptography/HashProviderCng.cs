@@ -21,7 +21,9 @@ namespace Internal.Cryptography
         //   - "key" activates MAC hashing if present. If null, this HashProvider performs a regular old hash.
         //
         public HashProviderCng(string hashAlgId, byte[]? key)
-            : this(hashAlgId, key, isHmac: key != null) { }
+            : this(hashAlgId, key, isHmac: key != null)
+        {
+        }
 
         internal HashProviderCng(string hashAlgId, ReadOnlySpan<byte> key, bool isHmac)
         {

@@ -24,10 +24,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
     protected DbContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     [ConditionalFact]
     public virtual void Query_and_update_using_constructors_with_property_parameters() =>
@@ -805,7 +804,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             MonthlyRevenue = monthlyRevenue;
         }
 
-        public Blog(string title, int? monthlyRevenue = null) : this(0, title, monthlyRevenue) { }
+        public Blog(string title, int? monthlyRevenue = null) : this(0, title, monthlyRevenue)
+        {
+        }
 
         public string Title { get; }
         public int? MonthlyRevenue { get; set; }
@@ -852,7 +853,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
     protected class HasContext<TContext> where TContext : DbContext
     {
-        public HasContext() { }
+        public HasContext()
+        {
+        }
 
         private HasContext(TContext context, int id)
         {
@@ -884,7 +887,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private TContext _context;
         private bool _setterCalled;
 
-        public HasContextPc() { }
+        public HasContextPc()
+        {
+        }
 
         private HasContextPc(TContext context, int id)
         {
@@ -918,7 +923,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     {
         private readonly IEntityType _entityType;
 
-        public HasEntityType() { }
+        public HasEntityType()
+        {
+        }
 
         private HasEntityType(IEntityType entityType)
         {
@@ -946,7 +953,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private IEntityType _entityType;
         private bool _setterCalled;
 
-        public HasEntityTypePc() { }
+        public HasEntityTypePc()
+        {
+        }
 
         private HasEntityTypePc(IEntityType entityType)
         {
@@ -977,7 +986,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     {
         private readonly IStateManager _stateManager;
 
-        public HasStateManager() { }
+        public HasStateManager()
+        {
+        }
 
         private HasStateManager(IStateManager stateManager)
         {
@@ -1007,7 +1018,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         // ReSharper disable once ConvertToAutoProperty
 
-        public HasStateManagerPc() { }
+        public HasStateManagerPc()
+        {
+        }
 
         private HasStateManagerPc(IStateManager stateManager)
         {
@@ -1039,7 +1052,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly ILazyLoader _loader;
         private ICollection<LazyPost> _lazyPosts = new List<LazyPost>();
 
-        public LazyBlog() { }
+        public LazyBlog()
+        {
+        }
 
         private LazyBlog(ILazyLoader loader)
         {
@@ -1060,7 +1075,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly ILazyLoader _loader;
         private LazyBlog _lazyBlog;
 
-        public LazyPost() { }
+        public LazyPost()
+        {
+        }
 
         private LazyPost(ILazyLoader loader)
         {
@@ -1236,7 +1253,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private ICollection<LazyPcPost> _lazyPcPosts = new List<LazyPcPost>();
         private ILazyLoader _loader;
 
-        public LazyPcBlog() { }
+        public LazyPcBlog()
+        {
+        }
 
         private LazyPcBlog(ILazyLoader loader)
         {
@@ -1271,7 +1290,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private LazyPcBlog _lazyPcBlog;
         private ILazyLoader _loader;
 
-        public LazyPcPost() { }
+        public LazyPcPost()
+        {
+        }
 
         private LazyPcPost(ILazyLoader loader)
         {
@@ -1308,7 +1329,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private ICollection<LazyPcsPost> _lazyPcsPosts = new List<LazyPcsPost>();
         private Action<object, string> _loader;
 
-        public LazyPcsBlog() { }
+        public LazyPcsBlog()
+        {
+        }
 
         private LazyPcsBlog(Action<object, string> lazyLoader)
         {
@@ -1343,7 +1366,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private LazyPcsBlog _lazyPcsBlog;
         private Action<object, string> _loader;
 
-        public LazyPcsPost() { }
+        public LazyPcsPost()
+        {
+        }
 
         private LazyPcsPost(Action<object, string> lazyLoader)
         {
@@ -1382,7 +1407,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly Action<object, string> _loader;
         private ICollection<LazyPocoPost> _lazyPocoPosts = new List<LazyPocoPost>();
 
-        public LazyPocoBlog() { }
+        public LazyPocoBlog()
+        {
+        }
 
         private LazyPocoBlog(Action<object, string> lazyLoader)
         {
@@ -1403,7 +1430,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly Action<object, string> _loader;
         private LazyPocoBlog _lazyPocoBlog;
 
-        public LazyPocoPost() { }
+        public LazyPocoPost()
+        {
+        }
 
         private LazyPocoPost(Action<object, string> lazyLoader)
         {
@@ -1427,7 +1456,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly ICollection<LazyAsyncPocoPost> _lazyAsyncPocoPosts =
             new List<LazyAsyncPocoPost>();
 
-        public LazyAsyncPocoBlog() { }
+        public LazyAsyncPocoBlog()
+        {
+        }
 
         private LazyAsyncPocoBlog(Func<object, CancellationToken, string, Task> lazyLoader)
         {
@@ -1456,7 +1487,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     {
         private readonly Func<object, CancellationToken, string, Task> _loader;
 
-        public LazyAsyncPocoPost() { }
+        public LazyAsyncPocoPost()
+        {
+        }
 
         private LazyAsyncPocoPost(Func<object, CancellationToken, string, Task> lazyLoader)
         {
@@ -1484,7 +1517,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly ILazyLoader _loader;
         private readonly ICollection<LazyAsyncPost> _lazyAsyncPosts = new List<LazyAsyncPost>();
 
-        public LazyAsyncBlog() { }
+        public LazyAsyncBlog()
+        {
+        }
 
         private LazyAsyncBlog(ILazyLoader loader)
         {
@@ -1513,7 +1548,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     {
         private readonly ILazyLoader _loader;
 
-        public LazyAsyncPost() { }
+        public LazyAsyncPost()
+        {
+        }
 
         private LazyAsyncPost(ILazyLoader loader)
         {
@@ -1539,7 +1576,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     protected record BlogAsImmutableRecord
     {
         public BlogAsImmutableRecord(string title, int? monthlyRevenue = null)
-            : this(0, title, monthlyRevenue) { }
+            : this(0, title, monthlyRevenue)
+        {
+        }
 
         private BlogAsImmutableRecord(int blogId, string title, int? monthlyRevenue)
         {
@@ -1555,11 +1594,15 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         public int? MonthlyRevenue { get; init; }
     }
 
-    public class OtherContext : DbContext { }
+    public class OtherContext : DbContext
+    {
+    }
 
     public class WithConstructorsContext : PoolableDbContext
     {
-        public WithConstructorsContext(DbContextOptions options) : base(options) { }
+        public WithConstructorsContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     public abstract class WithConstructorsFixtureBase

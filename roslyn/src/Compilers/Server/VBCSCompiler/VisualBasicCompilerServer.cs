@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 libDirectory,
                 analyzerLoader,
                 driverCache
-            ) { }
+            )
+        {
+        }
 
         internal VisualBasicCompilerServer(
             Func<string, MetadataReferenceProperties, PortableExecutableReference> metadataProvider,

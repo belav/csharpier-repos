@@ -13,7 +13,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
 {
     internal sealed class XTypeDescriptionProvider<T> : TypeDescriptionProvider
     {
-        public XTypeDescriptionProvider() : base(TypeDescriptor.GetProvider(typeof(T))) { }
+        public XTypeDescriptionProvider() : base(TypeDescriptor.GetProvider(typeof(T)))
+        {
+        }
 
         public override ICustomTypeDescriptor GetTypeDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
@@ -26,7 +28,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
 
     internal sealed class XTypeDescriptor<T> : CustomTypeDescriptor
     {
-        public XTypeDescriptor(ICustomTypeDescriptor? parent) : base(parent) { }
+        public XTypeDescriptor(ICustomTypeDescriptor? parent) : base(parent)
+        {
+        }
 
         [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage)]
         public override PropertyDescriptorCollection GetProperties()
@@ -68,7 +72,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
 
     internal abstract class XPropertyDescriptor<T, TProperty> : PropertyDescriptor where T : XObject
     {
-        public XPropertyDescriptor(string name) : base(name, null) { }
+        public XPropertyDescriptor(string name) : base(name, null)
+        {
+        }
 
         public override Type ComponentType
         {
@@ -120,18 +126,26 @@ namespace MS.Internal.Xml.Linq.ComponentModel
             }
         }
 
-        public override void ResetValue(object component) { }
+        public override void ResetValue(object component)
+        {
+        }
 
-        public override void SetValue(object? component, object? value) { }
+        public override void SetValue(object? component, object? value)
+        {
+        }
 
         public override bool ShouldSerializeValue(object component)
         {
             return false;
         }
 
-        protected virtual void OnChanged(object? sender, XObjectChangeEventArgs args) { }
+        protected virtual void OnChanged(object? sender, XObjectChangeEventArgs args)
+        {
+        }
 
-        protected virtual void OnChanging(object? sender, XObjectChangeEventArgs args) { }
+        protected virtual void OnChanging(object? sender, XObjectChangeEventArgs args)
+        {
+        }
     }
 
     internal sealed class XElementAttributePropertyDescriptor
@@ -140,7 +154,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         private XDeferredSingleton<XAttribute>? _value;
         private XAttribute? _changeState;
 
-        public XElementAttributePropertyDescriptor() : base("Attribute") { }
+        public XElementAttributePropertyDescriptor() : base("Attribute")
+        {
+        }
 
         public override object GetValue(object? component)
         {
@@ -196,7 +212,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         private XDeferredAxis<XElement>? _value;
         private XName? _changeState;
 
-        public XElementDescendantsPropertyDescriptor() : base("Descendants") { }
+        public XElementDescendantsPropertyDescriptor() : base("Descendants")
+        {
+        }
 
         public override object GetValue(object? component)
         {
@@ -256,7 +274,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         private XDeferredSingleton<XElement>? _value;
         private XElement? _changeState;
 
-        public XElementElementPropertyDescriptor() : base("Element") { }
+        public XElementElementPropertyDescriptor() : base("Element")
+        {
+        }
 
         public override object GetValue(object? component)
         {
@@ -342,7 +362,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         private XDeferredAxis<XElement>? _value;
         private object? _changeState;
 
-        public XElementElementsPropertyDescriptor() : base("Elements") { }
+        public XElementElementsPropertyDescriptor() : base("Elements")
+        {
+        }
 
         public override object GetValue(object? component)
         {
@@ -420,7 +442,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
     {
         private XElement? _element;
 
-        public XElementValuePropertyDescriptor() : base("Value") { }
+        public XElementValuePropertyDescriptor() : base("Value")
+        {
+        }
 
         public override bool IsReadOnly
         {
@@ -470,7 +494,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
     {
         private XElement? _element;
 
-        public XElementXmlPropertyDescriptor() : base("Xml") { }
+        public XElementXmlPropertyDescriptor() : base("Xml")
+        {
+        }
 
         public override object GetValue(object? component)
         {
@@ -493,7 +519,9 @@ namespace MS.Internal.Xml.Linq.ComponentModel
     {
         private XAttribute? _attribute;
 
-        public XAttributeValuePropertyDescriptor() : base("Value") { }
+        public XAttributeValuePropertyDescriptor() : base("Value")
+        {
+        }
 
         public override bool IsReadOnly
         {

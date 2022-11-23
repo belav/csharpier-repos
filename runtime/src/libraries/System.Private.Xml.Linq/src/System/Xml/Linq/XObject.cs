@@ -16,7 +16,9 @@ namespace System.Xml.Linq
         internal XContainer? parent;
         internal object? annotations;
 
-        internal XObject() { }
+        internal XObject()
+        {
+        }
 
         /// <summary>
         /// Get the BaseUri for this <see cref="XObject"/>.

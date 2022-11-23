@@ -568,7 +568,9 @@ namespace System.Reflection.Emit.Tests
 
         public class CustomAttribute : Attribute
         {
-            public CustomAttribute() { }
+            public CustomAttribute()
+            {
+            }
         }
 
         [Fact]
@@ -624,9 +626,13 @@ namespace System.Reflection.Emit.Tests
             Assert.Empty(assembly.GetTypes());
         }
 
-        private static void SamplePrivateMethod() { }
+        private static void SamplePrivateMethod()
+        {
+        }
 
-        internal static void SampleInternalMethod() { }
+        internal static void SampleInternalMethod()
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),

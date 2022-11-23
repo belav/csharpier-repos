@@ -999,7 +999,9 @@ namespace Microsoft.CodeAnalysis
 
             if (skipLeadingSeparators)
             {
-                for (; offset < length && parts[offset].Length == 0; offset++) { }
+                for (; offset < length && parts[offset].Length == 0; offset++)
+                {
+                }
 
                 length -= offset;
             }

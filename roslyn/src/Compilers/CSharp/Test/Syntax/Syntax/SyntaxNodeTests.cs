@@ -3694,7 +3694,9 @@ class Base<T>
             foreach (var t in syntaxTree.GetCompilationUnitRoot().DescendantTokens())
             {
                 // Bug 7990: Below for loop is an infinite loop.
-                foreach (var e in syntaxTree.GetDiagnostics(t)) { }
+                foreach (var e in syntaxTree.GetDiagnostics(t))
+                {
+                }
             }
 
             // TODO: Please add meaningful checks once the above deadlock issue is fixed.

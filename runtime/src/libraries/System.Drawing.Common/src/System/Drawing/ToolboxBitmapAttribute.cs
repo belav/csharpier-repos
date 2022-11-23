@@ -186,7 +186,9 @@ namespace System.Drawing
                     }
                 }
             }
-            catch (Exception e) when (!ClientUtils.IsCriticalException(e)) { }
+            catch (Exception e) when (!ClientUtils.IsCriticalException(e))
+            {
+            }
 
             return image;
         }
@@ -327,7 +329,9 @@ namespace System.Drawing
                     img = GetIconFromResource(t, iconname, large, scaled);
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return img;
         }
 

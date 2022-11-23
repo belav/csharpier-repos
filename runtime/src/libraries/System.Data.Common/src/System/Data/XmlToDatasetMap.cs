@@ -51,7 +51,9 @@ namespace System.Data
         {
             private readonly XmlNodeIdentety _id = new XmlNodeIdentety(string.Empty, string.Empty);
 
-            public XmlNodeIdHashtable(int capacity) : base(capacity) { }
+            public XmlNodeIdHashtable(int capacity) : base(capacity)
+            {
+            }
 
             public object? this[XmlNode node]
             {

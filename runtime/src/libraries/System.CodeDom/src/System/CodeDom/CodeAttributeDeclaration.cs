@@ -10,7 +10,9 @@ namespace System.CodeDom
             new CodeAttributeArgumentCollection();
         private CodeTypeReference _attributeType;
 
-        public CodeAttributeDeclaration() { }
+        public CodeAttributeDeclaration()
+        {
+        }
 
         public CodeAttributeDeclaration(string name)
         {
@@ -24,7 +26,8 @@ namespace System.CodeDom
         }
 
         public CodeAttributeDeclaration(CodeTypeReference attributeType) : this(attributeType, null)
-        { }
+        {
+        }
 
         public CodeAttributeDeclaration(
             CodeTypeReference attributeType,

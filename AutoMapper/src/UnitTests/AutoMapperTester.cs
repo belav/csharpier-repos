@@ -19,14 +19,18 @@ public class AutoMapperTester : IDisposable
         destination[1].TheProperty.ShouldBe("Bar");
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public class ModelType
     {
         public string TheProperty { get; set; }
     }
 
-    public class DerivedModelType : ModelType { }
+    public class DerivedModelType : ModelType
+    {
+    }
 
     public class DtoType
     {

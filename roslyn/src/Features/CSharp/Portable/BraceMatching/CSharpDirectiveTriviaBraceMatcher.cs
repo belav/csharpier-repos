@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDirectiveTriviaBraceMatcher() { }
+        public CSharpDirectiveTriviaBraceMatcher()
+        {
+        }
 
         internal override List<DirectiveTriviaSyntax>? GetMatchingConditionalDirectives(
             DirectiveTriviaSyntax directive,

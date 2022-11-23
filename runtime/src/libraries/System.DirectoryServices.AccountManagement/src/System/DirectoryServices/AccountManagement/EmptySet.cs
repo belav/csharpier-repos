@@ -44,5 +44,7 @@ namespace System.DirectoryServices.AccountManagement
         }
     }
 
-    internal sealed class EmptySetBookmark : ResultSetBookmark { }
+    internal sealed class EmptySetBookmark : ResultSetBookmark
+    {
+    }
 }

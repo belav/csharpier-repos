@@ -653,9 +653,13 @@ namespace System.Management
             this.cookie = cookie;
         }
 
-        public void CleanUpManagedData(object obj) { }
+        public void CleanUpManagedData(object obj)
+        {
+        }
 
-        public void CleanUpNativeData(IntPtr pObj) { }
+        public void CleanUpNativeData(IntPtr pObj)
+        {
+        }
 
         public int GetNativeDataSize()
         {
@@ -2108,31 +2112,41 @@ namespace System.Management
     [GuidAttribute("674B6698-EE92-11D0-AD71-00C04FD8FDFF")]
     //[TypeLibTypeAttribute(0x0202)]
     [ComImport]
-    internal class WbemContext { }
+    internal class WbemContext
+    {
+    }
 
     [GuidAttribute("9A653086-174F-11D2-B5F9-00104B703EFD")]
     [ClassInterfaceAttribute((short)0x0000)]
     //[TypeLibTypeAttribute(0x0002)]
     [ComImport]
-    internal class WbemClassObject { }
+    internal class WbemClassObject
+    {
+    }
 
     [ClassInterfaceAttribute((short)0x0000)]
     //[TypeLibTypeAttribute(0x0002)]
     [GuidAttribute("EB87E1BD-3233-11D2-AEC9-00C04FB68820")]
     [ComImport]
-    internal class WbemStatusCodeText { }
+    internal class WbemStatusCodeText
+    {
+    }
 
     [ClassInterfaceAttribute((short)0x0000)]
     //[TypeLibTypeAttribute(0x0202)]
     [GuidAttribute("8D1C559D-84F0-4BB3-A7D5-56A7435A9BA6")]
     [ComImport]
-    internal class WbemObjectTextSrc { }
+    internal class WbemObjectTextSrc
+    {
+    }
 
     [ClassInterfaceAttribute((short)0x0000)]
     [GuidAttribute("CF4CC405-E2C5-4DDD-B3CE-5E7582D8C9FA")]
     //[TypeLibTypeAttribute(0x0202)]
     [ComImport]
-    internal class WbemDefPath { }
+    internal class WbemDefPath
+    {
+    }
 
     internal static class MTAHelper
     {

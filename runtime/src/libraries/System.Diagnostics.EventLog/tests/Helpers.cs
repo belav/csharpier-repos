@@ -35,7 +35,9 @@ namespace System.Diagnostics.Tests
             {
                 Retry(func);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public static void Retry(Action func)

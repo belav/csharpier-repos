@@ -35,8 +35,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     {
         public virtual event PropertyChangedEventHandler PropertyChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         private readonly string _name;

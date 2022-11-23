@@ -20,7 +20,9 @@ namespace System.Xml.Serialization
     {
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
         public XmlSchemaImporter(XmlSchemas schemas)
-            : base(schemas, CodeGenerationOptions.GenerateProperties, new ImportContext()) { }
+            : base(schemas, CodeGenerationOptions.GenerateProperties, new ImportContext())
+        {
+        }
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
         public XmlSchemaImporter(XmlSchemas schemas, CodeIdentifiers? typeIdentifiers)
@@ -28,7 +30,9 @@ namespace System.Xml.Serialization
                 schemas,
                 CodeGenerationOptions.GenerateProperties,
                 new ImportContext(typeIdentifiers, false)
-            ) { }
+            )
+        {
+        }
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
         public XmlTypeMapping ImportDerivedTypeMapping(XmlQualifiedName name, Type? baseType)

@@ -46,7 +46,9 @@ namespace System.Web.Mvc
                 action,
                 controller,
                 null /* areaName */
-            ) { }
+            )
+        {
+        }
 
         public RemoteAttribute(string action, string controller, string areaName) : this()
         {

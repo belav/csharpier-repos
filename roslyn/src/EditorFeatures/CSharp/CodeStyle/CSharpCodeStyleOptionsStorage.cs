@@ -18,7 +18,9 @@ internal static class CSharpCodeStyleOptionsStorage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Service() { }
+        public Service()
+        {
+        }
 
         public IdeCodeStyleOptions GetOptions(IGlobalOptionService globalOptions) =>
             GetCSharpCodeStyleOptions(globalOptions);

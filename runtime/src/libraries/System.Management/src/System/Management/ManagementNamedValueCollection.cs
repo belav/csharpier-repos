@@ -33,7 +33,9 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class, which is empty. This is
         ///    the default constructor.</para>
         /// </summary>
-        public ManagementNamedValueCollection() { }
+        public ManagementNamedValueCollection()
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class that is serializable
@@ -75,7 +77,9 @@ namespace System.Management
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return wbemContext;
@@ -93,7 +97,9 @@ namespace System.Management
             {
                 base.BaseRemove(name);
             }
-            catch { }
+            catch
+            {
+            }
 
             base.BaseAdd(name, value);
             FireIdentifierChanged();

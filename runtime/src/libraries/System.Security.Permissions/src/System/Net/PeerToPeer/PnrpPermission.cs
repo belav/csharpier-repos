@@ -15,14 +15,18 @@ namespace System.Net.PeerToPeer
 #endif
     public sealed class PnrpPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public PnrpPermission(PermissionState state) { }
+        public PnrpPermission(PermissionState state)
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement e) { }
+        public override void FromXml(SecurityElement e)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

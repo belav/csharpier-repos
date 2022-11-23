@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseIsNullCheckForReferenceEqualsCodeFixProvider() { }
+        public CSharpUseIsNullCheckForReferenceEqualsCodeFixProvider()
+        {
+        }
 
         protected override string GetTitle(bool negated, ParseOptions options) =>
             UseIsNullCheckHelpers.GetTitle(negated, options);

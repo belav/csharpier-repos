@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
     internal sealed class EmbeddedField : EmbeddedTypesManager.CommonEmbeddedField
     {
         public EmbeddedField(EmbeddedType containingType, FieldSymbolAdapter underlyingField)
-            : base(containingType, underlyingField) { }
+            : base(containingType, underlyingField)
+        {
+        }
 
         internal override EmbeddedTypesManager TypeManager
         {

@@ -68,7 +68,9 @@ public abstract class DbTransactionInterceptor : IDbTransactionInterceptor
     public virtual void TransactionCommitted(
         DbTransaction transaction,
         TransactionEndEventData eventData
-    ) { }
+    )
+    {
+    }
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult> TransactionCommittingAsync(
@@ -96,7 +98,9 @@ public abstract class DbTransactionInterceptor : IDbTransactionInterceptor
     public virtual void TransactionRolledBack(
         DbTransaction transaction,
         TransactionEndEventData eventData
-    ) { }
+    )
+    {
+    }
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult> TransactionRollingBackAsync(
@@ -121,10 +125,9 @@ public abstract class DbTransactionInterceptor : IDbTransactionInterceptor
     ) => result;
 
     /// <inheritdoc />
-    public virtual void CreatedSavepoint(
-        DbTransaction transaction,
-        TransactionEventData eventData
-    ) { }
+    public virtual void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult> CreatingSavepointAsync(
@@ -152,7 +155,9 @@ public abstract class DbTransactionInterceptor : IDbTransactionInterceptor
     public virtual void RolledBackToSavepoint(
         DbTransaction transaction,
         TransactionEventData eventData
-    ) { }
+    )
+    {
+    }
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult> RollingBackToSavepointAsync(
@@ -177,10 +182,9 @@ public abstract class DbTransactionInterceptor : IDbTransactionInterceptor
     ) => result;
 
     /// <inheritdoc />
-    public virtual void ReleasedSavepoint(
-        DbTransaction transaction,
-        TransactionEventData eventData
-    ) { }
+    public virtual void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult> ReleasingSavepointAsync(
@@ -201,7 +205,9 @@ public abstract class DbTransactionInterceptor : IDbTransactionInterceptor
     public virtual void TransactionFailed(
         DbTransaction transaction,
         TransactionErrorEventData eventData
-    ) { }
+    )
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task TransactionFailedAsync(

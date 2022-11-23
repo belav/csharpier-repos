@@ -23,7 +23,9 @@ internal sealed class LegacyTemporaryStorageService : ITemporaryStorageService
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LegacyTemporaryStorageService() { }
+    public LegacyTemporaryStorageService()
+    {
+    }
 
     public ITemporaryStreamStorage CreateTemporaryStreamStorage(
         CancellationToken cancellationToken = default

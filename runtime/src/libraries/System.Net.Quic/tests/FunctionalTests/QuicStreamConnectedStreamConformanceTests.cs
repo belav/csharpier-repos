@@ -173,7 +173,9 @@ namespace System.Net.Quic.Tests
             public readonly List<IAsyncDisposable> Disposables = new List<IAsyncDisposable>();
 
             public StreamPairWithOtherDisposables(Stream stream1, Stream stream2)
-                : base(stream1, stream2) { }
+                : base(stream1, stream2)
+            {
+            }
 
             public override void Dispose()
             {

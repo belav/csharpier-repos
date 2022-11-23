@@ -7,7 +7,9 @@ namespace System.Net.NetworkInformation
 {
     public class IPAddressCollection : ICollection<IPAddress>
     {
-        protected internal IPAddressCollection() { }
+        protected internal IPAddressCollection()
+        {
+        }
 
         public virtual void CopyTo(IPAddress[] array, int offset)
         {

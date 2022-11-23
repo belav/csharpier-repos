@@ -940,9 +940,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             task.Start();
         }
 
-        public void ReportProgress(IVsSearchTask pTask, uint dwProgress, uint dwMaxProgress) { }
+        public void ReportProgress(IVsSearchTask pTask, uint dwProgress, uint dwMaxProgress)
+        {
+        }
 
-        public void ReportComplete(IVsSearchTask pTask, uint dwResultsFound) { }
+        public void ReportComplete(IVsSearchTask pTask, uint dwResultsFound)
+        {
+        }
 
         public void ReportResult(IVsSearchTask pTask, IVsSearchItemResult pSearchItemResult) =>
             pSearchItemResult.InvokeAction();
@@ -951,7 +955,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             IVsSearchTask pTask,
             uint dwResults,
             IVsSearchItemResult[] pSearchItemResults
-        ) { }
+        )
+        {
+        }
 
         private class SearchQuery : IVsSearchQuery
         {

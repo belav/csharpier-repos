@@ -25,7 +25,9 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
         private Type target;
 
         public ConvertExpression(Type targetType, IExpression right)
-            : this(targetType, typeof(object), right) { }
+            : this(targetType, typeof(object), right)
+        {
+        }
 
         public ConvertExpression(Type targetType, Type fromType, IExpression right)
         {

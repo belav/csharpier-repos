@@ -9,7 +9,9 @@ namespace System.Net
     {
         private readonly object? _unexpectedValue;
 
-        internal InternalException() : this(null) { }
+        internal InternalException() : this(null)
+        {
+        }
 
         internal InternalException(object? unexpectedValue)
         {

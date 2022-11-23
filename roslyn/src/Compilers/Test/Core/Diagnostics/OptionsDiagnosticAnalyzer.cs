@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             SyntaxNode node = null,
             ISymbol symbol = null,
             [CallerMemberName] string callerName = null
-        ) { }
+        )
+        {
+        }
 
         protected override void OnOptions(
             AnalyzerOptions options,

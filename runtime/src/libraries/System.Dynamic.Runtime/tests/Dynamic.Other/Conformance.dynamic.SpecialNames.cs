@@ -142,7 +142,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
             return 0;
         }
 
-        public static void Method(int i) { }
+        public static void Method(int i)
+        {
+        }
     }
     // </Code>
 }

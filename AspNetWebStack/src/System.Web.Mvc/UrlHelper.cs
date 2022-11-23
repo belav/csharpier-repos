@@ -21,10 +21,13 @@ namespace System.Web.Mvc
         /// Initializes a new instance of the <see cref="UrlHelper"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public UrlHelper() { }
+        public UrlHelper()
+        {
+        }
 
         public UrlHelper(RequestContext requestContext) : this(requestContext, RouteTable.Routes)
-        { }
+        {
+        }
 
         public UrlHelper(RequestContext requestContext, RouteCollection routeCollection)
         {

@@ -9,7 +9,9 @@ namespace System.Net.NetworkInformation.Tests
     // so that the tests for each don't run concurrently
     public partial class NetworkChangedTests
     {
-        private readonly NetworkAddressChangedEventHandler _addressHandler = delegate { };
+        private readonly NetworkAddressChangedEventHandler _addressHandler = delegate
+        {
+        };
 
         [Fact]
         public void NetworkAddressChanged_AddRemove_Success()

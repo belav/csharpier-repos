@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 internal class SyntaxToken : RazorSyntaxNode
 {
     internal SyntaxToken(GreenNode green, SyntaxNode parent, int position)
-        : base(green, parent, position) { }
+        : base(green, parent, position)
+    {
+    }
 
     internal new InternalSyntax.SyntaxToken Green => (InternalSyntax.SyntaxToken)base.Green;
 

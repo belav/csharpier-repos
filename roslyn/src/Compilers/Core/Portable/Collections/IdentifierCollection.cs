@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis
             StringComparer.OrdinalIgnoreCase
         );
 
-        public IdentifierCollection() { }
+        public IdentifierCollection()
+        {
+        }
 
         public IdentifierCollection(IEnumerable<string> identifiers)
         {

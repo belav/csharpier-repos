@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.Formatting
     internal abstract class TriviaDataWithList : TriviaData
     {
         public TriviaDataWithList(SyntaxFormattingOptions options, string language)
-            : base(options, language) { }
+            : base(options, language)
+        {
+        }
 
         public abstract SyntaxTriviaList GetTriviaList(CancellationToken cancellationToken);
     }

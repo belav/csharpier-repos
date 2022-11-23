@@ -11,7 +11,9 @@ namespace System.Reflection.Tests
     {
         private static readonly Version s_Version0000 = new Version(0, 0, 0, 0);
 
-        public SimpleAssemblyResolver() { }
+        public SimpleAssemblyResolver()
+        {
+        }
 
         public override Assembly Resolve(MetadataLoadContext context, AssemblyName assemblyName)
         {

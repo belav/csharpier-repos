@@ -1561,7 +1561,9 @@ namespace System.Globalization
         public override CalendarAlgorithmType AlgorithmType =>
             CalendarAlgorithmType.LunisolarCalendar;
 
-        public HebrewCalendar() { }
+        public HebrewCalendar()
+        {
+        }
 
         internal override CalendarId ID => CalendarId.HEBREW;
 

@@ -11,9 +11,13 @@ namespace System.IO
     // routines such as Delete, etc.
     public sealed class FileInfo : FileSystemInfo
     {
-        private FileInfo() { }
+        private FileInfo()
+        {
+        }
 
-        public FileInfo(string fileName) : this(fileName, isNormalized: false) { }
+        public FileInfo(string fileName) : this(fileName, isNormalized: false)
+        {
+        }
 
         internal FileInfo(
             string originalPath,

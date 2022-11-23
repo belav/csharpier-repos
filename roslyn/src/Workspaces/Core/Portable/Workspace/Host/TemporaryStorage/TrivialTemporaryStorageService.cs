@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis
     {
         public static readonly TrivialTemporaryStorageService Instance = new();
 
-        private TrivialTemporaryStorageService() { }
+        private TrivialTemporaryStorageService()
+        {
+        }
 
         public ITemporaryStreamStorageInternal CreateTemporaryStreamStorage() =>
             new StreamStorage();

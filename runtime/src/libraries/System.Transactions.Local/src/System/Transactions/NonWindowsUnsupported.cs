@@ -15,7 +15,9 @@ namespace System.Transactions.Oletx
     {
         internal object? NodeName { get; set; }
 
-        internal OletxTransactionManager(string nodeName) { }
+        internal OletxTransactionManager(string nodeName)
+        {
+        }
 
         internal IPromotedEnlistment ReenlistTransaction(
             Guid resourceManagerIdentifier,
@@ -59,7 +61,9 @@ namespace System.Transactions.Oletx
     /// </summary>
     internal class OletxTransaction : ISerializable, IObjectReference
     {
-        internal OletxTransaction() { }
+        internal OletxTransaction()
+        {
+        }
 
         protected OletxTransaction(SerializationInfo serializationInfo, StreamingContext context)
         {
@@ -123,7 +127,9 @@ namespace System.Transactions.Oletx
             throw new PlatformNotSupportedException();
         }
 
-        internal void Dispose() { }
+        internal void Dispose()
+        {
+        }
 
         internal static Exception NotSupported() =>
             new PlatformNotSupportedException(SR.DistributedNotSupported);

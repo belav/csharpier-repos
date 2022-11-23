@@ -30,7 +30,9 @@ namespace System.Data.Common
                     | DynamicallyAccessedMemberTypes.PublicFields
             )]
                 Type type
-        ) : this(column, type, GetStaticNullForUdtType(type)) { }
+        ) : this(column, type, GetStaticNullForUdtType(type))
+        {
+        }
 
         private SqlUdtStorage(DataColumn column, Type type, object nullValue)
             : base(

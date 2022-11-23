@@ -17,7 +17,9 @@ namespace System.Reflection.Runtime.Modules
     //
     internal abstract partial class RuntimeModule : Module
     {
-        protected RuntimeModule() : base() { }
+        protected RuntimeModule() : base()
+        {
+        }
 
         public abstract override Assembly Assembly { get; }
 

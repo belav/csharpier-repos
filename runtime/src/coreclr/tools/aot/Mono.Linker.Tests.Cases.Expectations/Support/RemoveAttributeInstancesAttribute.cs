@@ -10,5 +10,7 @@ namespace Mono.Linker
     /// attribute usages but not the attribute definition
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public sealed class RemoveAttributeInstancesAttribute : Attribute { }
+    public sealed class RemoveAttributeInstancesAttribute : Attribute
+    {
+    }
 }

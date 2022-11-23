@@ -146,9 +146,13 @@ namespace LibraryImportGenerator.IntegrationTests
                         return 0;
                     }
 
-                    public void FromUnmanaged(int value) { }
+                    public void FromUnmanaged(int value)
+                    {
+                    }
 
-                    public void Free() { }
+                    public void Free()
+                    {
+                    }
                 }
             }
         }

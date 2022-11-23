@@ -30,7 +30,9 @@ namespace System.Web.Http
         /// Initializes a new instance of the <see cref="HttpRouteCollection"/> class with a <see cref="M:VirtualPathRoot"/>
         /// value of "/".
         /// </summary>
-        public HttpRouteCollection() : this("/") { }
+        public HttpRouteCollection() : this("/")
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

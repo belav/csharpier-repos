@@ -7,7 +7,9 @@ namespace System.Reflection
 {
     public class ExceptionHandlingClause
     {
-        protected ExceptionHandlingClause() { }
+        protected ExceptionHandlingClause()
+        {
+        }
 
         public virtual ExceptionHandlingClauseOptions Flags => default;
         public virtual int TryOffset => 0;

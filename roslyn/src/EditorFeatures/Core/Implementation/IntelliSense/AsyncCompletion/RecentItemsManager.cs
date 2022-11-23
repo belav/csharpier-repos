@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RecentItemsManager() { }
+        public RecentItemsManager()
+        {
+        }
 
         public ImmutableArray<string> RecentItems { get; private set; } =
             ImmutableArray<string>.Empty;

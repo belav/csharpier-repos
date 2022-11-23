@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEditorClassificationService() { }
+        public CSharpEditorClassificationService()
+        {
+        }
 
         public override void AddLexicalClassifications(
             SourceText text,

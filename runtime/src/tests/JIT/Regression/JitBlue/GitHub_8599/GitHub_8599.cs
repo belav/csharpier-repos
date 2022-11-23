@@ -13,7 +13,9 @@ class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int GetValue() => 301;
 
-    static void Escape(ref int x) { }
+    static void Escape(ref int x)
+    {
+    }
 
     static int Main()
     {

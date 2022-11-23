@@ -146,7 +146,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     .Add(s_expressionValueIsUnusedRule, unusedValueExpressionStatementOption)
                     .Add(s_valueAssignedIsUnusedRule, unusedValueAssignmentOption)
                     .Add(s_unusedParameterRule, CodeStyleOptions2.UnusedParameters)
-            ) { }
+            )
+        {
+        }
 
         protected abstract bool IsRecordDeclaration(SyntaxNode node);
         protected abstract Location GetDefinitionLocationToFade(IOperation unusedDefinition);

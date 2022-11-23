@@ -598,9 +598,13 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
             public string? Name { get; set; }
         }
 
-        public class DisjointChildSubclass1 : Child { }
+        public class DisjointChildSubclass1 : Child
+        {
+        }
 
-        public class DisjointChildSubclass2 : Child { }
+        public class DisjointChildSubclass2 : Child
+        {
+        }
     }
 
     public abstract class SqlServerOneToMany : RelationalOneToManyTestBase
@@ -670,11 +674,17 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
             public virtual List<ActivityEvent<T>> Events { get; } = null!;
         }
 
-        protected class ActivityEvent<TTarget> : EventBase { }
+        protected class ActivityEvent<TTarget> : EventBase
+        {
+        }
 
-        protected class Company { }
+        protected class Company
+        {
+        }
 
-        protected class User { }
+        protected class User
+        {
+        }
 
         protected override TestModelBuilder CreateModelBuilder(
             Action<ModelConfigurationBuilder>? configure = null

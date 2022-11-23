@@ -25,9 +25,13 @@ namespace Test
                 {
                     try
                     {
-                        while ((bool)local5[0]) { }
+                        while ((bool)local5[0])
+                        {
+                        }
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
             catch (Exception)
@@ -42,7 +46,9 @@ namespace Test
             {
                 Method1();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

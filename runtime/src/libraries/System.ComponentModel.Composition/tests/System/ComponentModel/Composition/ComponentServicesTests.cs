@@ -125,12 +125,16 @@ namespace System.ComponentModel.Composition
     [Export(typeof(ITest))]
     public class T1 : ITest
     {
-        public void Do() { }
+        public void Do()
+        {
+        }
     }
 
     [Export(typeof(ITest))]
     public class T2 : ITest
     {
-        public void Do() { }
+        public void Do()
+        {
+        }
     }
 }

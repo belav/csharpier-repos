@@ -98,17 +98,23 @@ namespace System.Web.Helpers.Claims.Test
         private sealed class SubclassedFormsIdentity : FormsIdentity
         {
             public SubclassedFormsIdentity()
-                : base(new FormsAuthenticationTicket("my-name", false, 60)) { }
+                : base(new FormsAuthenticationTicket("my-name", false, 60))
+            {
+            }
         }
 
         private sealed class SubclassedGenericIdentity : GenericIdentity
         {
-            public SubclassedGenericIdentity() : base("my-name") { }
+            public SubclassedGenericIdentity() : base("my-name")
+            {
+            }
         }
 
         private sealed class SubclassedWindowsIdentity : WindowsIdentity
         {
-            public SubclassedWindowsIdentity(IntPtr userToken) : base(userToken) { }
+            public SubclassedWindowsIdentity(IntPtr userToken) : base(userToken)
+            {
+            }
         }
     }
 }

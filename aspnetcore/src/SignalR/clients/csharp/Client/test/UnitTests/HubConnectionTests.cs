@@ -391,7 +391,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
 
             await task.DefaultTimeout();
 
-            while (await e.MoveNextAsync().DefaultTimeout()) { }
+            while (await e.MoveNextAsync().DefaultTimeout())
+            {
+            }
             // Cancel after stream is completed but before the AsyncEnumerator is disposed
             cts.Cancel();
         }
@@ -805,7 +807,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
                 await invokeTask;
                 Assert.True(false);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
     }
 
@@ -1058,7 +1062,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
 
         var hubConnection = mockConnection.Object;
         // .On extension method
-        _ = hubConnection.On("someMethod", () => { });
+        _ = hubConnection.On(
+            "someMethod",
+            () => {
+            }
+        );
         // .On non-extension method
         _ = hubConnection.On(
             "someMethod2",

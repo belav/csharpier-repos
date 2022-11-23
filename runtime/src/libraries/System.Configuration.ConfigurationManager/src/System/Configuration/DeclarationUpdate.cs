@@ -6,6 +6,8 @@ namespace System.Configuration
     internal sealed class DeclarationUpdate : Update
     {
         internal DeclarationUpdate(string configKey, bool moved, string updatedXml)
-            : base(configKey, moved, updatedXml) { }
+            : base(configKey, moved, updatedXml)
+        {
+        }
     }
 }

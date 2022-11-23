@@ -52,7 +52,9 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 
         public abstract bool EndWaitForChannel(IAsyncResult result);
 
-        protected override void OnAbort() { }
+        protected override void OnAbort()
+        {
+        }
 
         protected override IAsyncResult OnBeginClose(
             TimeSpan timeout,
@@ -68,7 +70,9 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnClose(TimeSpan timeout) { }
+        protected override void OnClose(TimeSpan timeout)
+        {
+        }
 
         protected override IAsyncResult OnBeginOpen(
             TimeSpan timeout,
@@ -84,6 +88,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout) { }
+        protected override void OnOpen(TimeSpan timeout)
+        {
+        }
     }
 }

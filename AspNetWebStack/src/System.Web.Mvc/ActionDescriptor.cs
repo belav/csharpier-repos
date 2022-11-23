@@ -23,7 +23,9 @@ namespace System.Web.Mvc
         private string _uniqueId;
         private ActionMethodDispatcherCache _instanceDispatcherCache;
 
-        protected ActionDescriptor() { }
+        protected ActionDescriptor()
+        {
+        }
 
         public abstract string ActionName { get; }
 

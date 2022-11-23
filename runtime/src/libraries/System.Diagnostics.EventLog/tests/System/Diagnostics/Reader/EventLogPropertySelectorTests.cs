@@ -68,7 +68,9 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
-            catch (EventLogNotFoundException) { }
+            catch (EventLogNotFoundException)
+            {
+            }
 
             if (providerNameAndIds.Count > 0)
             {

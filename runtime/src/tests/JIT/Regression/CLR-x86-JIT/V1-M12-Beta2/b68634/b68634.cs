@@ -19,7 +19,9 @@ namespace Test
             {
                 bool[] local3 = (new bool[119]);
                 //for (; local2; new AA[]{  }) - not a valid statement, see VS7 #244656.
-                for (; local2; new AA()) { }
+                for (; local2; new AA())
+                {
+                }
             }
         }
 

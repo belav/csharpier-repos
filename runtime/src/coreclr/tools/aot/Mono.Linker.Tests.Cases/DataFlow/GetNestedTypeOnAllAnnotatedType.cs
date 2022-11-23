@@ -161,11 +161,15 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         {
             public class NestedType
             {
-                NestedType() { }
+                NestedType()
+                {
+                }
 
                 public static int PublicStaticInt;
 
-                public void Method() { }
+                public void Method()
+                {
+                }
 
                 int Prop { get; set; }
             }

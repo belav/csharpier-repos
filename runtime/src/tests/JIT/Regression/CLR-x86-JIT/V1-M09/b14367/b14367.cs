@@ -8,7 +8,9 @@ namespace DefaultNamespace
     //@ENDRENAME; Verify this renames
     using System;
 
-    internal interface IV2 { }
+    internal interface IV2
+    {
+    }
 
     internal struct V2 : IV2
     {

@@ -7,5 +7,7 @@ public class TPCFiltersInheritanceQuerySqliteTest
     : TPCFiltersInheritanceQueryTestBase<TPCFiltersInheritanceQuerySqliteFixture>
 {
     public TPCFiltersInheritanceQuerySqliteTest(TPCFiltersInheritanceQuerySqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 }

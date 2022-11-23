@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Components.Sections;
 /// </summary>
 internal sealed class SectionOutlet : ISectionContentSubscriber, IComponent, IDisposable
 {
-    private static readonly RenderFragment _emptyRenderFragment = _ => { };
+    private static readonly RenderFragment _emptyRenderFragment = _ =>
+    {
+    };
 
     private string? _subscribedName;
     private RenderHandle _renderHandle;

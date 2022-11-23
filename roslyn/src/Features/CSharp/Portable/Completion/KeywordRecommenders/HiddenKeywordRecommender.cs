@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class HiddenKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public HiddenKeywordRecommender()
-            : base(SyntaxKind.HiddenKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.HiddenKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

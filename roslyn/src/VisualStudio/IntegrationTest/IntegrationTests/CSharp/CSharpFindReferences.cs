@@ -23,7 +23,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpFindReferences(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpFindReferences)) { }
+            : base(instanceFactory, nameof(CSharpFindReferences))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.FindReferences)]
         public void FindReferencesToCtor()

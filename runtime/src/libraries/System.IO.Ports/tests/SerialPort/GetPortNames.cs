@@ -39,7 +39,9 @@ namespace System.IO.Ports.Tests
                     {
                         serialPort.Open();
                     }
-                    catch (UnauthorizedAccessException) { }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
                 }
             }
         }

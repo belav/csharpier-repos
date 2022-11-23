@@ -63,7 +63,9 @@ public class ReloadTest
                 b => b.ApplyConfiguration()
             );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
 
         public DbSet<Item> Items { get; set; }
     }

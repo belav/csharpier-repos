@@ -499,7 +499,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Read(new byte[DEFAULT_READ_BYTE_ARRAY_SIZE], 0, DEFAULT_READ_BYTE_ARRAY_SIZE);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void Read_char_int_int(SerialPort com)
@@ -508,7 +510,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Read(new char[DEFAULT_READ_CHAR_ARRAY_SIZE], 0, DEFAULT_READ_CHAR_ARRAY_SIZE);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void ReadByte(SerialPort com)
@@ -517,7 +521,9 @@ namespace System.IO.Ports.Tests
             {
                 com.ReadByte();
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void ReadChar(SerialPort com)
@@ -526,7 +532,9 @@ namespace System.IO.Ports.Tests
             {
                 com.ReadChar();
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void ReadLine(SerialPort com)
@@ -535,7 +543,9 @@ namespace System.IO.Ports.Tests
             {
                 com.ReadLine();
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         private void ReadTo(SerialPort com)
@@ -544,7 +554,9 @@ namespace System.IO.Ports.Tests
             {
                 com.ReadTo(com.NewLine);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         #endregion

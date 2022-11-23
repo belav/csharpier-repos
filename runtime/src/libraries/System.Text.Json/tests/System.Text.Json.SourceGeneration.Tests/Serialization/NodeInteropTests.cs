@@ -17,14 +17,18 @@ namespace System.Text.Json.SourceGeneration.Tests
                     NodeInteropTestsContext_Metadata.Default,
                     (options) => new NodeInteropTestsContext_Metadata(options)
                 )
-            ) { }
+            )
+        {
+        }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(List<Order>))]
         [JsonSerializable(typeof(JsonArray))]
         [JsonSerializable(typeof(Poco))]
         [JsonSerializable(typeof(string))]
-        internal sealed partial class NodeInteropTestsContext_Metadata : JsonSerializerContext { }
+        internal sealed partial class NodeInteropTestsContext_Metadata : JsonSerializerContext
+        {
+        }
     }
 
     public sealed partial class NodeInteropTests_Default : NodeInteropTests
@@ -35,12 +39,16 @@ namespace System.Text.Json.SourceGeneration.Tests
                     NodeInteropTestsContext_Default.Default,
                     (options) => new NodeInteropTestsContext_Default(options)
                 )
-            ) { }
+            )
+        {
+        }
 
         [JsonSerializable(typeof(List<Order>))]
         [JsonSerializable(typeof(JsonArray))]
         [JsonSerializable(typeof(Poco))]
         [JsonSerializable(typeof(string))]
-        internal sealed partial class NodeInteropTestsContext_Default : JsonSerializerContext { }
+        internal sealed partial class NodeInteropTestsContext_Default : JsonSerializerContext
+        {
+        }
     }
 }

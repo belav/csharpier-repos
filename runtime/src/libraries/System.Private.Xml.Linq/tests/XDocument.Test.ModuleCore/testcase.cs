@@ -14,9 +14,13 @@ namespace Microsoft.Test.ModuleCore
         //Data
 
         //Constructor
-        public TestCase() : this(null, null) { }
+        public TestCase() : this(null, null)
+        {
+        }
 
-        public TestCase(string name, string desc) : base(name, desc, TestType.TestCase) { }
+        public TestCase(string name, string desc) : base(name, desc, TestType.TestCase)
+        {
+        }
 
         //Accessors
         protected override TestAttribute CreateAttribute()

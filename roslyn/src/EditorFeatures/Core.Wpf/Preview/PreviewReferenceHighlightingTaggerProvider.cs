@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             : base(
                 PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey,
                 ReferenceHighlightTag.Instance
-            ) { }
+            )
+        {
+        }
     }
 
     [Export(typeof(ITaggerProvider))]
@@ -51,7 +53,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             : base(
                 PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey,
                 WrittenReferenceHighlightTag.Instance
-            ) { }
+            )
+        {
+        }
     }
 
     [Export(typeof(ITaggerProvider))]
@@ -68,6 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             : base(
                 PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey,
                 DefinitionHighlightTag.Instance
-            ) { }
+            )
+        {
+        }
     }
 }

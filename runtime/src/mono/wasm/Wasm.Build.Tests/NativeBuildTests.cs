@@ -15,7 +15,9 @@ namespace Wasm.Build.Tests
         public NativeBuildTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         // TODO:     - check dotnet.wasm, js have changed
         //           - icall? pinvoke?
@@ -51,7 +53,9 @@ namespace Wasm.Build.Tests
                 buildArgs,
                 buildDir: _projectDir,
                 expectedExitCode: 42,
-                test: output => { },
+                test: output =>
+                {
+                },
                 host: host,
                 id: id
             );

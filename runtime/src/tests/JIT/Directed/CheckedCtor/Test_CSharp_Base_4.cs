@@ -56,6 +56,8 @@ namespace Test
         public Func<int> Field3 = () => Generator.Next(5, 8);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(int selector) : base(selector) { }
+        public DerivedClass(int selector) : base(selector)
+        {
+        }
     }
 }

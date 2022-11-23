@@ -8,7 +8,9 @@ using System.Runtime.CompilerServices;
 
 public class TestSmallStackArgsClass
 {
-    public TestSmallStackArgsClass() { }
+    public TestSmallStackArgsClass()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public int TestSmallStackArgsMethod(

@@ -16,7 +16,9 @@ public class WebAssemblyLocalizationTest : ServerTestBase<ToggleExecutionModeSer
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     [Theory]
     [InlineData("en-US", "Hello!")]

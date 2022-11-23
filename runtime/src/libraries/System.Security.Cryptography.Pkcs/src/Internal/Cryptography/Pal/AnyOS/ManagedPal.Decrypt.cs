@@ -239,7 +239,9 @@ namespace Internal.Cryptography.Pal.AnyOS
 #endif
             }
 
-            public override void Dispose() { }
+            public override void Dispose()
+            {
+            }
         }
     }
 }

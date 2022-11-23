@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 caretPosition,
                 textChangeRange,
                 existingTags: null
-            ) { }
+            )
+        {
+        }
 
         internal TaggerContext(
             object state,

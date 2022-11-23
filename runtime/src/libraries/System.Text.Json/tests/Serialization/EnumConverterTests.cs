@@ -179,7 +179,9 @@ namespace System.Text.Json.Serialization.Tests
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class, AllowMultiple = false)]
         private class LowerCaseEnumAttribute : JsonConverterAttribute
         {
-            public LowerCaseEnumAttribute() { }
+            public LowerCaseEnumAttribute()
+            {
+            }
 
             public override JsonConverter CreateConverter(Type typeToConvert) =>
                 new JsonStringEnumConverter(new ToLowerNamingPolicy());
@@ -266,7 +268,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("1", JsonSerializer.Serialize((EmptyEnum)(1), options));
         }
 
-        public enum EmptyEnum { };
+        public enum EmptyEnum
+        {
+        };
 
         [Fact]
         public static void MoreThan64EnumValuesToSerialize()

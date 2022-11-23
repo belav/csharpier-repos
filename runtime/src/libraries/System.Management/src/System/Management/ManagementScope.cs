@@ -998,7 +998,9 @@ namespace System.Management
         }
 
         internal ManagementScope(ManagementPath path, ManagementScope scope)
-            : this(path, scope?.options) { }
+            : this(path, scope?.options)
+        {
+        }
 
         internal static ManagementScope _Clone(ManagementScope scope)
         {
@@ -1105,7 +1107,9 @@ namespace System.Management
         /// Dim s As New ManagementScope(p)
         ///    </code>
         /// </example>
-        public ManagementScope(ManagementPath path) : this(path, (ConnectionOptions)null) { }
+        public ManagementScope(ManagementPath path) : this(path, (ConnectionOptions)null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope
@@ -1119,7 +1123,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementScope(string path)
-            : this(new ManagementPath(path), (ConnectionOptions)null) { }
+            : this(new ManagementPath(path), (ConnectionOptions)null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope path,
@@ -1140,7 +1146,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementScope(string path, ConnectionOptions options)
-            : this(new ManagementPath(path), options) { }
+            : this(new ManagementPath(path), options)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope path,

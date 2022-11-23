@@ -66,7 +66,9 @@ namespace System.IO.Tests
                         FileAccess.Write,
                         64 * 1024
                     )
-                ) { }
+                )
+                {
+                }
             }
         }
     }

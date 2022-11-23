@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeStyleSeverityColumnDefinition() { }
+        public CodeStyleSeverityColumnDefinition()
+        {
+        }
 
         public override string Name => Severity;
         public override string DisplayName => ServicesVSResources.Severity;

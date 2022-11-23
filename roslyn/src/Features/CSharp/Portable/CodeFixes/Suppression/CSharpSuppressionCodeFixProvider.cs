@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpSuppressionCodeFixProvider() { }
+        public CSharpSuppressionCodeFixProvider()
+        {
+        }
 
         protected override SyntaxTriviaList CreatePragmaRestoreDirectiveTrivia(
             Diagnostic diagnostic,

@@ -234,7 +234,9 @@ public class class1
                 ima.a2d[size, 0] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException) { }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
 
         Console.WriteLine();
@@ -293,7 +295,9 @@ public class class1
                 ima.a3d[-1, 0, 0] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException) { }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
 
         Console.WriteLine();

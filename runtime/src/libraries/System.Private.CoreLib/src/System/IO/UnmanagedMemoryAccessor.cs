@@ -31,7 +31,9 @@ namespace System.IO
         private bool _canRead;
         private bool _canWrite;
 
-        protected UnmanagedMemoryAccessor() { }
+        protected UnmanagedMemoryAccessor()
+        {
+        }
 
         public UnmanagedMemoryAccessor(SafeBuffer buffer, long offset, long capacity)
         {

@@ -13,5 +13,7 @@ namespace Microsoft.Extensions.Options.Tests
         public string Message { get; set; }
     }
 
-    public class FakeOptions2 : FakeOptions { }
+    public class FakeOptions2 : FakeOptions
+    {
+    }
 }

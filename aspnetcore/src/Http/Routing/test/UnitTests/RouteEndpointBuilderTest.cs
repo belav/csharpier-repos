@@ -189,5 +189,7 @@ public class RouteEndpointBuilderTest
         Assert.Equal(1, invocationCallCount);
     }
 
-    private class TestCorsMetadata : ICorsMetadata { }
+    private class TestCorsMetadata : ICorsMetadata
+    {
+    }
 }

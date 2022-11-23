@@ -20,7 +20,9 @@ namespace System.Web.WebPages.Administration.PackageManager
     {
         private readonly List<IAssembly> _referencedAssemblies = new List<IAssembly>();
 
-        internal RemoteAssembly() { }
+        internal RemoteAssembly()
+        {
+        }
 
         internal RemoteAssembly(string name, Version version, string publicKeyToken, string culture)
         {

@@ -134,7 +134,9 @@ namespace ComWrappersTests
             return new WeakReferenceableWrapper(externalComObject, Registration);
         }
 
-        protected override void ReleaseObjects(IEnumerable objects) { }
+        protected override void ReleaseObjects(IEnumerable objects)
+        {
+        }
 
         public static readonly TestComWrappers TrackerSupportInstance = new TestComWrappers(
             WrapperRegistration.TrackerSupport

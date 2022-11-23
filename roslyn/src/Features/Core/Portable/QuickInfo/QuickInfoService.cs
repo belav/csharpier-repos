@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
     public abstract class QuickInfoService : ILanguageService
     {
         // Prevent inheritance outside of Roslyn.
-        internal QuickInfoService() { }
+        internal QuickInfoService()
+        {
+        }
 
         /// <summary>
         /// Gets the appropriate <see cref="QuickInfoService"/> for the specified document.

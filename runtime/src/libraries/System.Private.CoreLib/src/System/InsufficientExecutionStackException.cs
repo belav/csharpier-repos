@@ -31,6 +31,8 @@ namespace System
         private InsufficientExecutionStackException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
     }
 }

@@ -44,13 +44,17 @@ namespace System.Web.Http.Results
                     request,
                     formatters
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="InvalidModelStateResult"/> class.</summary>
         /// <param name="modelState">The model state to include in the error.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public InvalidModelStateResult(ModelStateDictionary modelState, ApiController controller)
-            : this(modelState, new ExceptionResult.ApiControllerDependencyProvider(controller)) { }
+            : this(modelState, new ExceptionResult.ApiControllerDependencyProvider(controller))
+        {
+        }
 
         private InvalidModelStateResult(
             ModelStateDictionary modelState,

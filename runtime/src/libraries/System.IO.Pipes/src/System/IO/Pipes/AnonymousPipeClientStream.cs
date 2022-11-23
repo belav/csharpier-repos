@@ -13,7 +13,9 @@ namespace System.IO.Pipes
     public sealed partial class AnonymousPipeClientStream : PipeStream
     {
         public AnonymousPipeClientStream(string pipeHandleAsString)
-            : this(PipeDirection.In, pipeHandleAsString) { }
+            : this(PipeDirection.In, pipeHandleAsString)
+        {
+        }
 
         public AnonymousPipeClientStream(PipeDirection direction, string pipeHandleAsString)
             : base(direction, 0)

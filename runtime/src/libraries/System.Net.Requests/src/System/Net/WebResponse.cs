@@ -19,7 +19,9 @@ namespace System.Net
         ///       instance of the <see cref='System.Net.WebResponse'/>
         ///       class.</para>
         /// </devdoc>
-        protected WebResponse() { }
+        protected WebResponse()
+        {
+        }
 
         [Obsolete("Serialization has been deprecated for WebResponse.")]
         protected WebResponse(
@@ -48,7 +50,9 @@ namespace System.Net
             throw new PlatformNotSupportedException();
         }
 
-        public virtual void Close() { }
+        public virtual void Close()
+        {
+        }
 
         public void Dispose()
         {
@@ -64,7 +68,9 @@ namespace System.Net
                 {
                     Close();
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

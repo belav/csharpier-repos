@@ -9,7 +9,9 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal GrammarBuilderWildcard() { }
+        internal GrammarBuilderWildcard()
+        {
+        }
 
         #endregion
 

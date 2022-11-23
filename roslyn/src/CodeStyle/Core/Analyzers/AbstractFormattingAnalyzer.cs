@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     CodeStyleResources.ResourceManager,
                     typeof(CodeStyleResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(Descriptor);

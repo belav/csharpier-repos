@@ -22,7 +22,9 @@ public class CosmosRelationshipDiscoveryConvention : RelationshipDiscoveryConven
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public CosmosRelationshipDiscoveryConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    ) : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Returns a value indicating whether the given entity type should be added as owned if it isn't currently in the model.

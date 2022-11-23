@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxNode node,
             IList<AbstractFormattingResult> results,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? formattingSpans
-        ) : base(node, results, formattingSpans) { }
+        ) : base(node, results, formattingSpans)
+        {
+        }
 
         protected override SyntaxNode Rewriter(
             Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map,

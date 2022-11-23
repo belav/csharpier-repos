@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 public class UnaryTests : IntegrationTestBase
 {
     public UnaryTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)
-        : base(fixture, outputHelper) { }
+        : base(fixture, outputHelper)
+    {
+    }
 
     [Fact]
     public async Task GetWithRouteParameter_MatchUrl_SuccessResult()

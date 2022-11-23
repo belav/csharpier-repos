@@ -27,9 +27,13 @@ namespace System.Data
 
         private static readonly NotSupportedException s_notSupported = new NotSupportedException();
 
-        public DataViewManager() : this(null, false) { }
+        public DataViewManager() : this(null, false)
+        {
+        }
 
-        public DataViewManager(DataSet? dataSet) : this(dataSet, false) { }
+        public DataViewManager(DataSet? dataSet) : this(dataSet, false)
+        {
+        }
 
         internal DataViewManager(DataSet? dataSet, bool locked)
         {

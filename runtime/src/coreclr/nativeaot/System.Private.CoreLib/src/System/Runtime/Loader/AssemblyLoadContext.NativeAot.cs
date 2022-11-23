@@ -31,16 +31,22 @@ namespace System.Runtime.Loader
         private static void PrepareForAssemblyLoadContextRelease(
             IntPtr ptrNativeAssemblyLoadContext,
             IntPtr ptrAssemblyLoadContextStrong
-        ) { }
+        )
+        {
+        }
 
         public static AssemblyLoadContext? GetLoadContext(Assembly assembly)
         {
             return Default;
         }
 
-        public void SetProfileOptimizationRoot(string directoryPath) { }
+        public void SetProfileOptimizationRoot(string directoryPath)
+        {
+        }
 
-        public void StartProfileOptimization(string profile) { }
+        public void StartProfileOptimization(string profile)
+        {
+        }
 
         private static Assembly InternalLoadFromPath(string? assemblyPath, string? nativeImagePath)
         {

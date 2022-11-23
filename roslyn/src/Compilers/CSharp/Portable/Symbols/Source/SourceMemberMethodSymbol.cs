@@ -269,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             bool isIterator
         ) : this(containingType, syntaxReferenceOpt, ImmutableArray.Create(location), isIterator)
-        { }
+        {
+        }
 
         protected SourceMemberMethodSymbol(
             NamedTypeSymbol containingType,

@@ -16,7 +16,9 @@ namespace System.Diagnostics.Tracing
 {
     internal sealed partial class XplatEventLogger : EventListener
     {
-        public XplatEventLogger() { }
+        public XplatEventLogger()
+        {
+        }
 
         private static readonly Lazy<string?> eventSourceNameFilter = new Lazy<string?>(
             () => CompatibilitySwitch.GetValueInternal("EventSourceFilter")
@@ -39,7 +41,9 @@ namespace System.Diagnostics.Tracing
                     return new XplatEventLogger();
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             return null;
         }

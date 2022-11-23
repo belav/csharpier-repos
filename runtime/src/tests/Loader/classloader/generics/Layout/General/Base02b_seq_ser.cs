@@ -4,17 +4,29 @@
 using System;
 using System.Runtime.InteropServices;
 
-public struct ValX1<T> { }
+public struct ValX1<T>
+{
+}
 
-public struct ValX2<T, U> { }
+public struct ValX2<T, U>
+{
+}
 
-public struct ValX3<T, U, V> { }
+public struct ValX3<T, U, V>
+{
+}
 
-public class RefX1<T> { }
+public class RefX1<T>
+{
+}
 
-public class RefX2<T, U> { }
+public class RefX2<T, U>
+{
+}
 
-public class RefX3<T, U, V> { }
+public class RefX3<T, U, V>
+{
+}
 
 [StructLayout(LayoutKind.Sequential)]
 public class GenBase<T>

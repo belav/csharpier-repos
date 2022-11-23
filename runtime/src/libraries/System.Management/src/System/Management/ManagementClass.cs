@@ -144,7 +144,9 @@ namespace System.Management
         ///    <code lang='VB'>Dim c As New ManagementClass()
         ///    </code>
         /// </example>
-        public ManagementClass() : this((ManagementScope)null, (ManagementPath)null, null) { }
+        public ManagementClass() : this((ManagementScope)null, (ManagementPath)null, null)
+        {
+        }
 
         //parameterized constructors
         /// <summary>
@@ -164,7 +166,9 @@ namespace System.Management
         ///     New ManagementPath("Win32_LogicalDisk"))
         ///    </code>
         /// </example>
-        public ManagementClass(ManagementPath path) : this(null, path, null) { }
+        public ManagementClass(ManagementPath path) : this(null, path, null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class initialized to the given path.</para>
@@ -177,7 +181,9 @@ namespace System.Management
         ///    <code lang='VB'>Dim c As New ManagementClass("Win32_LogicalDisk")
         ///    </code>
         /// </example>
-        public ManagementClass(string path) : this(null, new ManagementPath(path), null) { }
+        public ManagementClass(string path) : this(null, new ManagementPath(path), null)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class initialized to the
@@ -198,7 +204,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementClass(ManagementPath path, ObjectGetOptions options)
-            : this(null, path, options) { }
+            : this(null, path, options)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class initialized to the given WMI class path
@@ -217,7 +225,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementClass(string path, ObjectGetOptions options)
-            : this(null, new ManagementPath(path), options) { }
+            : this(null, new ManagementPath(path), options)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class for the specified
@@ -244,7 +254,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementClass(ManagementScope scope, ManagementPath path, ObjectGetOptions options)
-            : base(scope, path, options) { }
+            : base(scope, path, options)
+        {
+        }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class for the specified WMI class, in the
@@ -269,7 +281,9 @@ namespace System.Management
         ///    </code>
         /// </example>
         public ManagementClass(string scope, string path, ObjectGetOptions options)
-            : base(new ManagementScope(scope), new ManagementPath(path), options) { }
+            : base(new ManagementScope(scope), new ManagementPath(path), options)
+        {
+        }
 
         protected ManagementClass(SerializationInfo info, StreamingContext context)
             : base(info, context)

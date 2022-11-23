@@ -104,7 +104,9 @@ namespace System.Data.OleDb
     internal sealed class RowHandleBuffer : DbBuffer
     {
         internal RowHandleBuffer(IntPtr rowHandleFetchCount)
-            : base((int)rowHandleFetchCount * ADP.PtrSize) { }
+            : base((int)rowHandleFetchCount * ADP.PtrSize)
+        {
+        }
 
         internal IntPtr GetRowHandle(int index)
         {
@@ -165,7 +167,9 @@ namespace System.Data.OleDb
             : base(chapteredRowset)
         {
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 _chapterHandle = binding.InterlockedExchangePointer(valueOffset);
@@ -694,7 +698,9 @@ namespace System.Data.OleDb
             OleDbHResult hr;
             IntPtr hchapter = chapter;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 Guid IID_IChapteredRowset =
@@ -717,7 +723,9 @@ namespace System.Data.OleDb
         {
             OleDbHResult hr;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 Guid IID_ITransactionLocal = typeof(ITransactionLocal).GUID;
@@ -739,7 +747,9 @@ namespace System.Data.OleDb
         {
             OleDbHResult hr;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 Guid IID_ITransactionLocal = typeof(ITransactionLocal).GUID;

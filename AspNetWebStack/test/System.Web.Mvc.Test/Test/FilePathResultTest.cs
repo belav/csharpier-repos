@@ -66,7 +66,9 @@ namespace System.Web.Mvc.Test
         private class FilePathResultHelper : FilePathResult
         {
             public FilePathResultHelper(string fileName, string contentType)
-                : base(fileName, contentType) { }
+                : base(fileName, contentType)
+            {
+            }
 
             public void PublicWriteFile(HttpResponseBase response)
             {

@@ -224,6 +224,8 @@ namespace Moq.Tests
             (IBar[], Task<IBar>) ValueTupleOfReferenceTypeArrayAndTaskOfReferenceType { get; }
         }
 
-        public interface IBar { }
+        public interface IBar
+        {
+        }
     }
 }

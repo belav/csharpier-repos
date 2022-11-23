@@ -142,7 +142,9 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "exception expected here");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "Empty sequence")]

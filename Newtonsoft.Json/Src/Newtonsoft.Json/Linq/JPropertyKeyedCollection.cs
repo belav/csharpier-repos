@@ -38,7 +38,9 @@ namespace Newtonsoft.Json.Linq
 
         private Dictionary<string, JToken>? _dictionary;
 
-        public JPropertyKeyedCollection() : base(new List<JToken>()) { }
+        public JPropertyKeyedCollection() : base(new List<JToken>())
+        {
+        }
 
         private void AddKey(string key, JToken item)
         {

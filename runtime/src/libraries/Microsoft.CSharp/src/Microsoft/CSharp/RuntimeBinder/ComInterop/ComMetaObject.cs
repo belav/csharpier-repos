@@ -12,7 +12,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal ComMetaObject(Expression expression, BindingRestrictions restrictions, object arg)
-            : base(expression, restrictions, arg) { }
+            : base(expression, restrictions, arg)
+        {
+        }
 
         public override DynamicMetaObject BindInvokeMember(
             InvokeMemberBinder binder,

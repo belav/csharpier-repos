@@ -25,7 +25,9 @@ public class StringToBytesConverter : ValueConverter<string?, byte[]?>
     ///     facets for the converted data.
     /// </param>
     public StringToBytesConverter(Encoding encoding, ConverterMappingHints? mappingHints = null)
-        : base(v => encoding.GetBytes(v!), v => encoding.GetString(v!), mappingHints) { }
+        : base(v => encoding.GetBytes(v!), v => encoding.GetString(v!), mappingHints)
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

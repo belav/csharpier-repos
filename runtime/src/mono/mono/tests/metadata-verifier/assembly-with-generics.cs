@@ -15,13 +15,21 @@ public class Generic<A, B, C, D, E>
     where B : class
     where C : struct
     where D : new()
-    where E : class, new() { }
+    where E : class, new()
+{
+}
 
-public interface A { }
+public interface A
+{
+}
 
-public interface Z<T> { }
+public interface Z<T>
+{
+}
 
-public class TypeWithConstraints<T> where T : A, IComparable, IComparable<string>, Z<string> { }
+public class TypeWithConstraints<T> where T : A, IComparable, IComparable<string>, Z<string>
+{
+}
 
 public class Driver
 {
@@ -29,7 +37,9 @@ public class Driver
         where B : class
         where C : struct
         where D : new()
-        where E : class, new() { }
+        where E : class, new()
+    {
+    }
 
     public static void Main()
     {

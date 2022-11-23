@@ -25,7 +25,9 @@ namespace Microsoft.Extensions.DependencyModel
                 DependencyContextPaths.Current.NonApplicationPaths,
                 FileSystemWrapper.Default,
                 () => new DependencyContextJsonReader()
-            ) { }
+            )
+        {
+        }
 
         internal DependencyContextLoader(
             string? entryPointDepsLocation,

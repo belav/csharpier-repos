@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
         public abstract bool Supports_WrapLongGroup_UnwrapFirst { get; }
 
         protected AbstractSeparatedSyntaxListWrapper(IIndentationService indentationService)
-            : base(indentationService) { }
+            : base(indentationService)
+        {
+        }
 
         protected abstract bool ShouldMoveCloseBraceToNewLine { get; }
         protected abstract bool ShouldMoveOpenBraceToNewLine(SyntaxWrappingOptions options);

@@ -439,6 +439,8 @@ namespace System.IO.Hashing.Tests
         }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-        private sealed class OverrideOptionalAttribute : Attribute { }
+        private sealed class OverrideOptionalAttribute : Attribute
+        {
+        }
     }
 }

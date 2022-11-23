@@ -27,7 +27,9 @@ namespace System.Web.WebPages
         private readonly Lazy<string> _applicationPartName;
 
         public ApplicationPart(Assembly assembly, string rootVirtualPath)
-            : this(new ResourceAssembly(assembly), rootVirtualPath) { }
+            : this(new ResourceAssembly(assembly), rootVirtualPath)
+        {
+        }
 
         internal ApplicationPart(IResourceAssembly assembly, string rootVirtualPath)
         {

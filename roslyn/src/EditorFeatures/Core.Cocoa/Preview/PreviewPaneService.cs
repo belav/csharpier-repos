@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewPaneService() { }
+        public PreviewPaneService()
+        {
+        }
 
         IWorkspaceService IWorkspaceServiceFactory.CreateService(
             HostWorkspaceServices workspaceServices

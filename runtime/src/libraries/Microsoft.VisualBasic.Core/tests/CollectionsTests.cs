@@ -422,7 +422,9 @@ namespace Microsoft.VisualBasic.Tests
 
         private class Foo
         {
-            public Foo() { }
+            public Foo()
+            {
+            }
 
             public Foo(int intValue, string stringValue)
             {

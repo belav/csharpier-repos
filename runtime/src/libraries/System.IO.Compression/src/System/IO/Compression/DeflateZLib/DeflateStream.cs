@@ -30,21 +30,31 @@ namespace System.IO.Compression
                 leaveOpen: false,
                 ZLibNative.Deflate_DefaultWindowBits,
                 uncompressedSize
-            ) { }
+            )
+        {
+        }
 
         public DeflateStream(Stream stream, CompressionMode mode)
-            : this(stream, mode, leaveOpen: false) { }
+            : this(stream, mode, leaveOpen: false)
+        {
+        }
 
         public DeflateStream(Stream stream, CompressionMode mode, bool leaveOpen)
-            : this(stream, mode, leaveOpen, ZLibNative.Deflate_DefaultWindowBits) { }
+            : this(stream, mode, leaveOpen, ZLibNative.Deflate_DefaultWindowBits)
+        {
+        }
 
         // Implies mode = Compress
         public DeflateStream(Stream stream, CompressionLevel compressionLevel)
-            : this(stream, compressionLevel, leaveOpen: false) { }
+            : this(stream, compressionLevel, leaveOpen: false)
+        {
+        }
 
         // Implies mode = Compress
         public DeflateStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen)
-            : this(stream, compressionLevel, leaveOpen, ZLibNative.Deflate_DefaultWindowBits) { }
+            : this(stream, compressionLevel, leaveOpen, ZLibNative.Deflate_DefaultWindowBits)
+        {
+        }
 
         /// <summary>
         /// Internal constructor to check stream validity and call the correct initialization function depending on
@@ -946,7 +956,9 @@ namespace System.IO.Compression
             private byte[] _arrayPoolBuffer;
 
             public CopyToStream(DeflateStream deflateStream, Stream destination, int bufferSize)
-                : this(deflateStream, destination, bufferSize, CancellationToken.None) { }
+                : this(deflateStream, destination, bufferSize, CancellationToken.None)
+            {
+            }
 
             public CopyToStream(
                 DeflateStream deflateStream,
@@ -1149,7 +1161,9 @@ namespace System.IO.Compression
 
             public override bool CanWrite => true;
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override bool CanRead => false;
             public override bool CanSeek => false;

@@ -46,7 +46,9 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <summary>Initializes the <see cref="BufferBlock{T}"/>.</summary>
-        public BufferBlock() : this(DataflowBlockOptions.Default) { }
+        public BufferBlock() : this(DataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="BufferBlock{T}"/> with the specified <see cref="DataflowBlockOptions"/>.</summary>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="BufferBlock{T}"/>.</param>

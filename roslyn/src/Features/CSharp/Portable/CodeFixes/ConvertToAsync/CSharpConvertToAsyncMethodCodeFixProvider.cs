@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertToAsyncMethodCodeFixProvider() { }
+        public CSharpConvertToAsyncMethodCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS4008);

@@ -31,11 +31,17 @@ public class AsWithMissingMap : NonValidatingSpecBase
 
 public class AsShouldWorkOnlyWithDerivedTypesWithGenerics : AutoMapperSpecBase
 {
-    class Source<T> { }
+    class Source<T>
+    {
+    }
 
-    class Destination<T> { }
+    class Destination<T>
+    {
+    }
 
-    class Override<T> : Destination<T> { }
+    class Override<T> : Destination<T>
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(c =>
@@ -50,9 +56,13 @@ public class AsShouldWorkOnlyWithDerivedTypesWithGenerics : AutoMapperSpecBase
 
 public class AsShouldWorkOnlyWithDerivedTypes
 {
-    class Source { }
+    class Source
+    {
+    }
 
-    class Destination { }
+    class Destination
+    {
+    }
 
     [Fact]
     public void Should_detect_unrelated_override()

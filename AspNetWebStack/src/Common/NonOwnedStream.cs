@@ -14,7 +14,9 @@ namespace System.Web.Http
     /// </remarks>
     internal class NonOwnedStream : Stream
     {
-        protected NonOwnedStream() { }
+        protected NonOwnedStream()
+        {
+        }
 
         public NonOwnedStream(Stream innerStream)
         {

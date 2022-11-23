@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

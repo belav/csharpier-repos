@@ -40,7 +40,9 @@ namespace System.Xml.Tests
 
         public void PositionOnNodeType2(XmlNodeType nodeType)
         {
-            while (DataReader.Read() && DataReader.NodeType != nodeType) { }
+            while (DataReader.Read() && DataReader.NodeType != nodeType)
+            {
+            }
             if (DataReader.EOF)
             {
                 throw new CTestFailedException("Couldn't find XmlNodeType " + nodeType);

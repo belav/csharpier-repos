@@ -58,7 +58,9 @@ namespace XLinqTests
                     }
                     TestLog.Compare(false, "Exception expected [" + n.NodeType + "] " + n);
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
 
@@ -269,7 +271,9 @@ namespace XLinqTests
                     "Exception expected [" + toRemove.NodeType + "] " + toRemove
                 );
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             TestLog.Compare(
                 expectedData.EqualAll(elem.Nodes(), XNode.EqualityComparer),

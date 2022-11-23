@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FindUsagesOptions() { }
+        public FindUsagesOptions()
+        {
+        }
 
         ImmutableArray<IOption> IOptionProvider.Options { get; } =
             ImmutableArray.Create<IOption>(DefinitionGroupingPriority);

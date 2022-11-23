@@ -160,12 +160,9 @@ namespace MS.Internal.Xml.Cache
         /// <summary>
         /// XPathDocument ignores the DocType information.
         /// </summary>
-        public override void WriteDocType(
-            string name,
-            string? pubid,
-            string? sysid,
-            string? subset
-        ) { }
+        public override void WriteDocType(string name, string? pubid, string? sysid, string? subset)
+        {
+        }
 
         /// <summary>
         /// Shortcut for calling WriteStartElement with elemType == null.
@@ -546,7 +543,9 @@ namespace MS.Internal.Xml.Cache
         /// <summary>
         /// Since output is not forwarded to another object, this does nothing.
         /// </summary>
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         //-----------------------------------------------
         // XmlRawWriter interface

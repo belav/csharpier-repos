@@ -11,7 +11,9 @@ namespace System.Web.Razor.Parser
     internal class MarkupCollapser : MarkupRewriter
     {
         public MarkupCollapser(Action<SpanBuilder, SourceLocation, string> markupSpanFactory)
-            : base(markupSpanFactory) { }
+            : base(markupSpanFactory)
+        {
+        }
 
         protected override bool CanRewrite(Span span)
         {

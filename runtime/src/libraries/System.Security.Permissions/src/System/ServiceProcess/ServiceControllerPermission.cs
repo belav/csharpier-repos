@@ -14,19 +14,27 @@ namespace System.ServiceProcess
 #endif
     public sealed class ServiceControllerPermission : ResourcePermissionBase
     {
-        public ServiceControllerPermission() { }
+        public ServiceControllerPermission()
+        {
+        }
 
-        public ServiceControllerPermission(PermissionState state) : base(state) { }
+        public ServiceControllerPermission(PermissionState state) : base(state)
+        {
+        }
 
         public ServiceControllerPermission(
             ServiceControllerPermissionAccess permissionAccess,
             string machineName,
             string serviceName
-        ) { }
+        )
+        {
+        }
 
         public ServiceControllerPermission(
             ServiceControllerPermissionEntry[] permissionAccessEntries
-        ) { }
+        )
+        {
+        }
 
         public ServiceControllerPermissionEntryCollection PermissionEntries
         {

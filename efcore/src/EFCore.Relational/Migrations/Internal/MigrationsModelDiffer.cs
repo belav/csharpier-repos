@@ -630,7 +630,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         if (source.IsExcludedFromMigrations && target.IsExcludedFromMigrations)
         {
             // Populate column mapping
-            foreach (var _ in Diff(source.Columns, target.Columns, diffContext)) { }
+            foreach (var _ in Diff(source.Columns, target.Columns, diffContext))
+            {
+            }
 
             yield break;
         }
@@ -952,7 +954,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
     private sealed class PropertyInfoEqualityComparer : IEqualityComparer<PropertyInfo>
     {
-        private PropertyInfoEqualityComparer() { }
+        private PropertyInfoEqualityComparer()
+        {
+        }
 
         public static readonly PropertyInfoEqualityComparer Instance = new();
 

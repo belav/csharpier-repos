@@ -34,20 +34,27 @@ namespace System.ServiceModel.Syndication
         private DateTimeOffset _lastUpdatedTime;
         private Collection<SyndicationLink> _links;
 
-        public SyndicationFeed() : this((IEnumerable<SyndicationItem>)null) { }
+        public SyndicationFeed() : this((IEnumerable<SyndicationItem>)null)
+        {
+        }
 
         public SyndicationFeed(IEnumerable<SyndicationItem> items) : this(null, null, null, items)
-        { }
+        {
+        }
 
         public SyndicationFeed(string title, string description, Uri feedAlternateLink)
-            : this(title, description, feedAlternateLink, null) { }
+            : this(title, description, feedAlternateLink, null)
+        {
+        }
 
         public SyndicationFeed(
             string title,
             string description,
             Uri feedAlternateLink,
             IEnumerable<SyndicationItem> items
-        ) : this(title, description, feedAlternateLink, null, DateTimeOffset.MinValue, items) { }
+        ) : this(title, description, feedAlternateLink, null, DateTimeOffset.MinValue, items)
+        {
+        }
 
         public SyndicationFeed(
             string title,
@@ -55,7 +62,9 @@ namespace System.ServiceModel.Syndication
             Uri feedAlternateLink,
             string id,
             DateTimeOffset lastUpdatedTime
-        ) : this(title, description, feedAlternateLink, id, lastUpdatedTime, null) { }
+        ) : this(title, description, feedAlternateLink, id, lastUpdatedTime, null)
+        {
+        }
 
         public SyndicationFeed(
             string title,

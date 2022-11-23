@@ -402,7 +402,9 @@ public class IntegerValueGeneratorTest
             string databaseName,
             InMemoryDatabaseRoot root = null,
             IServiceProvider internalServiceProvider = null
-        ) : base(databaseName, root, internalServiceProvider) { }
+        ) : base(databaseName, root, internalServiceProvider)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -418,18 +420,28 @@ public class IntegerValueGeneratorTest
         public int Id { get; set; }
     }
 
-    private class Toast : Dog { }
+    private class Toast : Dog
+    {
+    }
 
-    private class Olive : Dog { }
+    private class Olive : Dog
+    {
+    }
 
     private class Cat
     {
         public int Id { get; set; }
     }
 
-    private class Mac : Cat { }
+    private class Mac : Cat
+    {
+    }
 
-    private class Smokey : Cat { }
+    private class Smokey : Cat
+    {
+    }
 
-    private class Alice : Cat { }
+    private class Alice : Cat
+    {
+    }
 }

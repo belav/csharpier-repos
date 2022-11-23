@@ -10,16 +10,28 @@ namespace System.Reflection.Emit
             // Prevent generating a default constructor
         }
 
-        public void AddOtherMethod(MethodBuilder mdBuilder) { }
+        public void AddOtherMethod(MethodBuilder mdBuilder)
+        {
+        }
 
-        public void SetAddOnMethod(MethodBuilder mdBuilder) { }
+        public void SetAddOnMethod(MethodBuilder mdBuilder)
+        {
+        }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetRaiseMethod(MethodBuilder mdBuilder) { }
+        public void SetRaiseMethod(MethodBuilder mdBuilder)
+        {
+        }
 
-        public void SetRemoveOnMethod(MethodBuilder mdBuilder) { }
+        public void SetRemoveOnMethod(MethodBuilder mdBuilder)
+        {
+        }
     }
 }

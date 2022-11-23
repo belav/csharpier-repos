@@ -8,9 +8,13 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class AbsoluteQuery : ContextQuery
     {
-        public AbsoluteQuery() : base() { }
+        public AbsoluteQuery() : base()
+        {
+        }
 
-        private AbsoluteQuery(AbsoluteQuery other) : base(other) { }
+        private AbsoluteQuery(AbsoluteQuery other) : base(other)
+        {
+        }
 
         public override object Evaluate(XPathNodeIterator context)
         {

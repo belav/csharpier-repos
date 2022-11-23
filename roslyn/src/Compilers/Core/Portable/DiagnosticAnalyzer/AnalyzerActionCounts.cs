@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
                 analyzerActions.OperationBlockEndActionsCount,
                 analyzerActions.OperationBlockActionsCount,
                 analyzerActions.Concurrent
-            ) { }
+            )
+        {
+        }
 
         internal AnalyzerActionCounts(
             int compilationStartActionsCount,

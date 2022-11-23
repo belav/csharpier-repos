@@ -27,14 +27,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxTreeFactoryServiceFactory() { }
+        public CSharpSyntaxTreeFactoryServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
             new CSharpSyntaxTreeFactoryService(provider.LanguageServices.SolutionServices);
 
         private partial class CSharpSyntaxTreeFactoryService : AbstractSyntaxTreeFactoryService
         {
-            public CSharpSyntaxTreeFactoryService(SolutionServices services) : base(services) { }
+            public CSharpSyntaxTreeFactoryService(SolutionServices services) : base(services)
+            {
+            }
 
             public override ParseOptions GetDefaultParseOptions() => CSharpParseOptions.Default;
 

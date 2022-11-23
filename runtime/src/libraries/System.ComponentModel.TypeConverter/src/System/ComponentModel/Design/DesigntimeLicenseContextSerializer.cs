@@ -26,7 +26,9 @@ namespace System.ComponentModel.Design
                 : false;
 
         // Not creatable.
-        private DesigntimeLicenseContextSerializer() { }
+        private DesigntimeLicenseContextSerializer()
+        {
+        }
 
         /// <summary>
         /// Serializes the licenses within the specified design-time license context

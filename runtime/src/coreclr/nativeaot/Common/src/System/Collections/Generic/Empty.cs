@@ -48,9 +48,13 @@ namespace System.Collections.Generic
                 return false;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         private static IEnumerable<T> _enumerable = new EmptyEnumImpl();

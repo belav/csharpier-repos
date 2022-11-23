@@ -407,7 +407,9 @@ namespace Mono.Linker.Steps
             TypeDefinition type,
             FieldDefinition field,
             XPathNavigator nav
-        ) { }
+        )
+        {
+        }
 
         void ProcessSelectedMethods(XPathNavigator nav, TypeDefinition type, object? customData)
         {
@@ -481,7 +483,9 @@ namespace Mono.Linker.Steps
             MethodDefinition method,
             XPathNavigator nav,
             object? customData
-        ) { }
+        )
+        {
+        }
 
         void ProcessSelectedEvents(XPathNavigator nav, TypeDefinition type, object? customData)
         {
@@ -559,7 +563,9 @@ namespace Mono.Linker.Steps
             EventDefinition @event,
             XPathNavigator nav,
             object? customData
-        ) { }
+        )
+        {
+        }
 
         void ProcessSelectedProperties(XPathNavigator nav, TypeDefinition type, object? customData)
         {
@@ -640,7 +646,9 @@ namespace Mono.Linker.Steps
             XPathNavigator nav,
             object? customData,
             bool fromSignature
-        ) { }
+        )
+        {
+        }
 
         protected virtual AssemblyNameReference GetAssemblyName(XPathNavigator nav)
         {

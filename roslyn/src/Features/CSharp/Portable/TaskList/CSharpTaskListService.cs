@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.TaskList
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpTaskListService() { }
+        public CSharpTaskListService()
+        {
+        }
 
         protected override void AppendTaskListItems(
             ImmutableArray<TaskListItemDescriptor> commentDescriptors,

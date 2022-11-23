@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     return new DeclarationInfo(builder.MoveToImmutable());
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 return null;
             }

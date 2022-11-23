@@ -26,13 +26,17 @@ public class TimeSpanTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public TimeSpanTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Time)
-        : base(storeType, typeof(TimeSpan), dbType) { }
+        : base(storeType, typeof(TimeSpan), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="TimeSpanTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected TimeSpanTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected TimeSpanTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

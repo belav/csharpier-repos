@@ -21,7 +21,9 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             public int BeginOffset { get; set; }
             public int EndOffset { get; set; }
 
-            public GcSlot() { }
+            public GcSlot()
+            {
+            }
 
             public GcSlot(int index, string reg, int stkOffs, int lowBits, GcSlotFlags flags)
             {
@@ -106,7 +108,9 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public List<GcSlot> GcSlots { get; set; }
 
-        public GcSlotTable() { }
+        public GcSlotTable()
+        {
+        }
 
         public GcSlotTable(byte[] image, InfoHdrSmall header, ref int offset)
         {

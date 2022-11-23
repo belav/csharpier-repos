@@ -5,7 +5,9 @@ using System.Diagnostics;
 
 namespace GetStackTrace
 {
-    class Gen<T> { }
+    class Gen<T>
+    {
+    }
 
     class C<T>
     {
@@ -18,7 +20,9 @@ namespace GetStackTrace
         }
     }
 
-    class D : C<string> { }
+    class D : C<string>
+    {
+    }
 
     class Program
     {

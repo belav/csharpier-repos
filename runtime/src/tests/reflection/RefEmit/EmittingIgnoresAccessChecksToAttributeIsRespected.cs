@@ -6,7 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
-class BaseClass1 { }
+class BaseClass1
+{
+}
 
 class Test_EmittingIgnoresAccessChecksToAttributeIsRespected
 {

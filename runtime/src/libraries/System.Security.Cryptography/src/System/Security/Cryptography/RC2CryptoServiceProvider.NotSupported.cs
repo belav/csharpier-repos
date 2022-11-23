@@ -31,15 +31,21 @@ namespace System.Security.Cryptography
 
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) => default!;
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
 
         public bool UseSalt
         {
             get { return false; }
             [SupportedOSPlatform("windows")]
-            set { }
+            set
+            {
+            }
         }
     }
 }

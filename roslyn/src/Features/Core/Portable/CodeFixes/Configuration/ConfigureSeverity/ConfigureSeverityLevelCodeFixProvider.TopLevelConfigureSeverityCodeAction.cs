@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
                 : base(
                     nestedActions,
                     string.Format(FeaturesResources.Configure_0_severity, diagnostic.Id)
-                ) { }
+                )
+            {
+            }
         }
     }
 }

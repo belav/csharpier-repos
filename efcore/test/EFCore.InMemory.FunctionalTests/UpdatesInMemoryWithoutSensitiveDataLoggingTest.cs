@@ -10,7 +10,9 @@ public class UpdatesInMemoryWithoutSensitiveDataLoggingTest
 {
     public UpdatesInMemoryWithoutSensitiveDataLoggingTest(
         UpdatesInMemoryWithoutSensitiveDataLoggingFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     protected override string UpdateConcurrencyTokenMessage =>
         InMemoryStrings.UpdateConcurrencyTokenException("Product", "{'Price'}");

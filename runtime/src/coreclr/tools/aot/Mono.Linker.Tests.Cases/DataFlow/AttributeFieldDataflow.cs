@@ -45,7 +45,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class KeepsPublicConstructorsAttribute : Attribute
         {
             [Kept]
-            public KeepsPublicConstructorsAttribute() { }
+            public KeepsPublicConstructorsAttribute()
+            {
+            }
 
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
@@ -58,7 +60,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class KeepsPublicMethodsAttribute : Attribute
         {
             [Kept]
-            public KeepsPublicMethodsAttribute() { }
+            public KeepsPublicMethodsAttribute()
+            {
+            }
 
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
@@ -72,7 +76,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class KeepsPublicFieldsAttribute : Attribute
         {
             [Kept]
-            public KeepsPublicFieldsAttribute() { }
+            public KeepsPublicFieldsAttribute()
+            {
+            }
 
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
@@ -89,11 +95,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class ClassWithKeptPublicConstructor
         {
             [Kept]
-            public ClassWithKeptPublicConstructor(int unused) { }
+            public ClassWithKeptPublicConstructor(int unused)
+            {
+            }
 
-            private ClassWithKeptPublicConstructor(short unused) { }
+            private ClassWithKeptPublicConstructor(short unused)
+            {
+            }
 
-            public void Method() { }
+            public void Method()
+            {
+            }
         }
 
         [Kept]
@@ -102,9 +114,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
             [RequiresUnreferencedCode("--ClassWithKeptPublicMethods--")]
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            static void Method() { }
+            static void Method()
+            {
+            }
         }
 
         [Kept]
@@ -112,7 +128,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class TypeArrayAttribute : Attribute
         {
             [Kept]
-            public TypeArrayAttribute() { }
+            public TypeArrayAttribute()
+            {
+            }
 
             [Kept]
             public Type[] Types;

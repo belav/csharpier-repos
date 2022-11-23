@@ -2724,7 +2724,9 @@ namespace System.Xml
                     new PrefixHandle(bufferReader),
                     new StringHandle(bufferReader),
                     new ValueHandle(bufferReader)
-                ) { }
+                )
+            {
+            }
 
             private XmlElementNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
                 : base(
@@ -2763,7 +2765,9 @@ namespace System.Xml
                     new PrefixHandle(bufferReader),
                     new StringHandle(bufferReader),
                     new ValueHandle(bufferReader)
-                ) { }
+                )
+            {
+            }
 
             private XmlAttributeNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
                 : base(
@@ -2778,7 +2782,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     new XmlAttributeTextNode(prefix, localName, value),
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlEndElementNode : XmlNode
@@ -2793,7 +2799,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     -1
-                ) { }
+                )
+            {
+            }
         }
 
         protected class XmlTextNode : XmlNode
@@ -2817,7 +2825,9 @@ namespace System.Xml
                     readState,
                     attributeTextNode,
                     depthDelta
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlAtomicTextNode : XmlTextNode
@@ -2835,7 +2845,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlComplexTextNode : XmlTextNode
@@ -2850,7 +2862,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlWhitespaceTextNode : XmlTextNode
@@ -2865,7 +2879,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlCDataNode : XmlTextNode
@@ -2880,7 +2896,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlAttributeTextNode : XmlTextNode
@@ -2903,7 +2921,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     1
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlInitialNode : XmlNode
@@ -2918,7 +2938,9 @@ namespace System.Xml
                     ReadState.Initial,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlDeclarationNode : XmlNode
@@ -2933,7 +2955,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlCommentNode : XmlNode
@@ -2948,7 +2972,9 @@ namespace System.Xml
                     ReadState.Interactive,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlEndOfFileNode : XmlNode
@@ -2963,7 +2989,9 @@ namespace System.Xml
                     ReadState.EndOfFile,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         protected sealed class XmlClosedNode : XmlNode
@@ -2978,7 +3006,9 @@ namespace System.Xml
                     ReadState.Closed,
                     null,
                     0
-                ) { }
+                )
+            {
+            }
         }
 
         private sealed class AttributeSorter : IComparer
@@ -3369,7 +3399,9 @@ namespace System.Xml
                 private string _lang = string.Empty;
                 private int _depth;
 
-                public XmlAttribute() { }
+                public XmlAttribute()
+                {
+                }
 
                 public int Depth
                 {

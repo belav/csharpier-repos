@@ -5,7 +5,9 @@ namespace System.Configuration.Internal
 {
     internal sealed class ConfigurationManagerInternal : IConfigurationManagerInternal
     {
-        internal ConfigurationManagerInternal() { }
+        internal ConfigurationManagerInternal()
+        {
+        }
 
         bool IConfigurationManagerInternal.SupportsUserConfig =>
             ConfigurationManager.SupportsUserConfig;

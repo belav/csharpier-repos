@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
 ";
 
-        protected AbstractSuppressionCodeFixProvider() { }
+        protected AbstractSuppressionCodeFixProvider()
+        {
+        }
 
         public FixAllProvider GetFixAllProvider() => SuppressionFixAllProvider.Instance;
 

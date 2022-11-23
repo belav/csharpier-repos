@@ -9,5 +9,7 @@ namespace Microsoft.NET.HostModel.AppHost
     ///  Unable to use the input file as an application host executable
     ///  because it's not a Windows PE file
     /// </summary>
-    public class AppHostNotPEFileException : AppHostUpdateException { }
+    public class AppHostNotPEFileException : AppHostUpdateException
+    {
+    }
 }

@@ -179,7 +179,9 @@ namespace BasicEventSourceTests
         public class EventTestHarnessException : Exception
         {
             public EventTestHarnessException(string message, Exception exception)
-                : base(message, exception) { }
+                : base(message, exception)
+            {
+            }
         }
 
         /// <summary>

@@ -8,12 +8,16 @@ namespace System.Diagnostics
 {
     public partial class Activity : IDisposable
     {
-        public Activity(string operationName) { }
+        public Activity(string operationName)
+        {
+        }
 
         public System.Diagnostics.ActivityTraceFlags ActivityTraceFlags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
             string,
@@ -25,17 +29,25 @@ namespace System.Diagnostics
         public static System.Diagnostics.Activity? Current
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static event System.EventHandler<System.Diagnostics.ActivityChangedEventArgs>? CurrentChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public static System.Diagnostics.ActivityIdFormat DefaultIdFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan Duration
         {
@@ -44,7 +56,9 @@ namespace System.Diagnostics
         public static bool ForceDefaultIdFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Id
         {
@@ -150,7 +164,9 @@ namespace System.Diagnostics
         public string? TraceStateString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Diagnostics.Activity AddBaggage(string key, string? value)
@@ -346,7 +362,9 @@ namespace System.Diagnostics
         public object? this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.ICollection<string> Keys
         {
@@ -487,7 +505,9 @@ namespace System.Diagnostics
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
 
-        public void CopyTo(System.Span<byte> destination) { }
+        public void CopyTo(System.Span<byte> destination)
+        {
+        }
 
         public static System.Diagnostics.ActivitySpanId CreateFromBytes(
             System.ReadOnlySpan<byte> idData
@@ -697,7 +717,9 @@ namespace System.Diagnostics
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
 
-        public void CopyTo(System.Span<byte> destination) { }
+        public void CopyTo(System.Span<byte> destination)
+        {
+        }
 
         public static System.Diagnostics.ActivityTraceId CreateFromBytes(
             System.ReadOnlySpan<byte> idData
@@ -771,15 +793,13 @@ namespace System.Diagnostics
 
     public partial class DiagnosticListener
     {
-        public override void OnActivityExport(
-            System.Diagnostics.Activity activity,
-            object? payload
-        ) { }
+        public override void OnActivityExport(System.Diagnostics.Activity activity, object? payload)
+        {
+        }
 
-        public override void OnActivityImport(
-            System.Diagnostics.Activity activity,
-            object? payload
-        ) { }
+        public override void OnActivityImport(System.Diagnostics.Activity activity, object? payload)
+        {
+        }
 
         public virtual System.IDisposable Subscribe(
             System.IObserver<System.Collections.Generic.KeyValuePair<string, object?>> observer,
@@ -794,15 +814,13 @@ namespace System.Diagnostics
 
     public abstract partial class DiagnosticSource
     {
-        public virtual void OnActivityExport(
-            System.Diagnostics.Activity activity,
-            object? payload
-        ) { }
+        public virtual void OnActivityExport(System.Diagnostics.Activity activity, object? payload)
+        {
+        }
 
-        public virtual void OnActivityImport(
-            System.Diagnostics.Activity activity,
-            object? payload
-        ) { }
+        public virtual void OnActivityImport(System.Diagnostics.Activity activity, object? payload)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "The type of object being written to DiagnosticSource cannot be discovered statically."
@@ -818,7 +836,9 @@ namespace System.Diagnostics
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "The type of object being written to DiagnosticSource cannot be discovered statically."
         )]
-        public void StopActivity(System.Diagnostics.Activity activity, object? args) { }
+        public void StopActivity(System.Diagnostics.Activity activity, object? args)
+        {
+        }
     }
 
     public enum ActivitySamplingResult

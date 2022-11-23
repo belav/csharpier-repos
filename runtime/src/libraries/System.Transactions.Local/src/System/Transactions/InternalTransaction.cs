@@ -410,7 +410,9 @@ namespace System.Transactions
 
         #region IDisposable Members
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         #endregion
     }

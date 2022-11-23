@@ -13,7 +13,9 @@ namespace System.Net.Quic.Tests
     [SkipOnPlatform(TestPlatforms.Windows, "CipherSuitesPolicy is not supported on Windows")]
     public class MsQuicCipherSuitesPolicyTests : QuicTestBase
     {
-        public MsQuicCipherSuitesPolicyTests(ITestOutputHelper output) : base(output) { }
+        public MsQuicCipherSuitesPolicyTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         private async Task TestConnection(
             CipherSuitesPolicy serverPolicy,

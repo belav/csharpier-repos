@@ -29,7 +29,9 @@ public abstract class NavigationEntry : MemberEntry
     /// </summary>
     [EntityFrameworkInternal]
     protected NavigationEntry(InternalEntityEntry internalEntry, string name, bool collection)
-        : this(internalEntry, GetNavigation(internalEntry, name), collection) { }
+        : this(internalEntry, GetNavigation(internalEntry, name), collection)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

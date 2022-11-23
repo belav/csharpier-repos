@@ -35,7 +35,9 @@ namespace System.ComponentModel.Composition.Primitives
         ///         properties.
         ///     </note>
         /// </remarks>
-        protected ImportDefinition() { }
+        protected ImportDefinition()
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportDefinition"/> class

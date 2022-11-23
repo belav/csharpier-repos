@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.Options
                 underlyingOptions,
                 language,
                 ImmutableDictionary<OptionKey, object?>.Empty
-            ) { }
+            )
+        {
+        }
 
         private DocumentOptionSet(
             StructuredAnalyzerConfigOptions? configOptions,

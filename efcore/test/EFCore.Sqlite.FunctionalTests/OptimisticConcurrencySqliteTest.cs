@@ -6,20 +6,26 @@ namespace Microsoft.EntityFrameworkCore;
 public class OptimisticConcurrencyULongSqliteTest
     : OptimisticConcurrencySqliteTestBase<F1ULongSqliteFixture, ulong?>
 {
-    public OptimisticConcurrencyULongSqliteTest(F1ULongSqliteFixture fixture) : base(fixture) { }
+    public OptimisticConcurrencyULongSqliteTest(F1ULongSqliteFixture fixture) : base(fixture)
+    {
+    }
 }
 
 public class OptimisticConcurrencySqliteTest
     : OptimisticConcurrencySqliteTestBase<F1SqliteFixture, byte[]>
 {
-    public OptimisticConcurrencySqliteTest(F1SqliteFixture fixture) : base(fixture) { }
+    public OptimisticConcurrencySqliteTest(F1SqliteFixture fixture) : base(fixture)
+    {
+    }
 }
 
 public abstract class OptimisticConcurrencySqliteTestBase<TFixture, TRowVersion>
     : OptimisticConcurrencyRelationalTestBase<TFixture, TRowVersion>
     where TFixture : F1RelationalFixture<TRowVersion>, new()
 {
-    protected OptimisticConcurrencySqliteTestBase(TFixture fixture) : base(fixture) { }
+    protected OptimisticConcurrencySqliteTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     public override void Property_entry_original_value_is_set()
     {

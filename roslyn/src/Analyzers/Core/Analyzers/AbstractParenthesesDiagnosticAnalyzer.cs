@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
                 title,
                 message,
                 isUnnecessary: isUnnecessary
-            ) { }
+            )
+        {
+        }
 
         protected static CodeStyleOption2<ParenthesesPreference> GetLanguageOption(
             AnalyzerOptionsProvider options,

@@ -203,7 +203,10 @@ namespace System.Net.Http.Internal
             byte[] buffer = new byte[2];
             int offset = 1;
             int count = 1;
-            AsyncCallback callback = new AsyncCallback((asyncResult) => { });
+            AsyncCallback callback = new AsyncCallback(
+                (asyncResult) => {
+                }
+            );
             object state = new object();
 
             // Act
@@ -321,7 +324,10 @@ namespace System.Net.Http.Internal
             byte[] buffer = new byte[2];
             int offset = 1;
             int count = 1;
-            AsyncCallback callback = new AsyncCallback((asyncResult) => { });
+            AsyncCallback callback = new AsyncCallback(
+                (asyncResult) => {
+                }
+            );
             object state = new object();
 
             // Act

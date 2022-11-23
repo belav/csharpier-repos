@@ -184,7 +184,12 @@ namespace System.Threading.Tasks.Tests
             );
             PLRcheck(plr, "Partitioner-ForEach-Stop", false, null);
 
-            plr = Parallel.ForEach(mp, delegate(int item, ParallelLoopState ps) { });
+            plr = Parallel.ForEach(
+                mp,
+                delegate(int item, ParallelLoopState ps)
+                {
+                }
+            );
             PLRcheck(plr, "Partitioner-ForEach-Complete", true, null);
         }
 
@@ -216,7 +221,12 @@ namespace System.Threading.Tasks.Tests
             );
             PLRcheck(plr, "OrderablePartitioner-ForEach-Break", false, 2);
 
-            plr = Parallel.ForEach(mop, delegate(int item, ParallelLoopState ps, long index) { });
+            plr = Parallel.ForEach(
+                mop,
+                delegate(int item, ParallelLoopState ps, long index)
+                {
+                }
+            );
             PLRcheck(plr, "OrderablePartitioner-ForEach-Complete", true, null);
         }
 
@@ -577,7 +587,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Stop();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Stop(caught) after Break",
                 false,
@@ -594,7 +606,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Break();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Break(caught) after Stop",
                 false,
@@ -718,7 +732,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Stop();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Stop(caught)-after-Break",
                 false,
@@ -735,7 +751,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Break();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Break(caught)-after-Stop",
                 false,
@@ -783,7 +801,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Stop();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Stop(caught)-after-Break",
                 false,
@@ -800,7 +820,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Break();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Break(caught)-after-Stop",
                 false,
@@ -848,7 +870,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Stop();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Stop(caught)-after-Break",
                 false,
@@ -865,7 +889,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Break();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Break(caught)-after-Stop",
                 false,
@@ -989,7 +1015,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Stop();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Stop(caught) after Break",
                 false,
@@ -1006,7 +1034,9 @@ namespace System.Threading.Tasks.Tests
                     {
                         ps.Break();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 "Break(caught) after Stop",
                 false,

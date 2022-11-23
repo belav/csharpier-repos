@@ -150,7 +150,9 @@ namespace System.IO.Strategies
             }
         }
 
-        public sealed override void Flush() { } // no buffering = nothing to flush
+        public sealed override void Flush()
+        {
+        } // no buffering = nothing to flush
 
         public sealed override Task FlushAsync(CancellationToken cancellationToken) =>
             Task.CompletedTask; // no buffering = nothing to flush

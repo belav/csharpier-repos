@@ -50,7 +50,9 @@ public class DeploymentResult
             applicationBaseUri: applicationBaseUri,
             contentRoot: string.Empty,
             hostShutdownToken: CancellationToken.None
-        ) { }
+        )
+    {
+    }
 
     public DeploymentResult(
         ILoggerFactory loggerFactory,

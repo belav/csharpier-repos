@@ -606,19 +606,45 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 BinaryFormatterHelpers.FromByteArray(data, FormatterAssemblyStyle.Simple);
                 // Since there's no checksum, it's possible we changed data that didn't corrupt the instance
             }
-            catch (ArgumentOutOfRangeException) { }
-            catch (ArrayTypeMismatchException) { }
-            catch (DecoderFallbackException) { }
-            catch (FormatException) { }
-            catch (IndexOutOfRangeException) { }
-            catch (InvalidCastException) { }
-            catch (OutOfMemoryException) { }
-            catch (OverflowException) { }
-            catch (NullReferenceException) { }
-            catch (SerializationException) { }
-            catch (TargetInvocationException) { }
-            catch (ArgumentException) { }
-            catch (FileLoadException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
+            catch (ArrayTypeMismatchException)
+            {
+            }
+            catch (DecoderFallbackException)
+            {
+            }
+            catch (FormatException)
+            {
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            catch (InvalidCastException)
+            {
+            }
+            catch (OutOfMemoryException)
+            {
+            }
+            catch (OverflowException)
+            {
+            }
+            catch (NullReferenceException)
+            {
+            }
+            catch (SerializationException)
+            {
+            }
+            catch (TargetInvocationException)
+            {
+            }
+            catch (ArgumentException)
+            {
+            }
+            catch (FileLoadException)
+            {
+            }
         }
 
         [Fact]

@@ -71,7 +71,9 @@ namespace System.Security.Cryptography.OpenSsl.Tests
             {
                 SafeEvpPKeyHandle pkey = dsa.DuplicateKeyHandle();
 
-                using (pkey) { }
+                using (pkey)
+                {
+                }
 
                 AssertExtensions.Throws<ArgumentException>(
                     "pkeyHandle",

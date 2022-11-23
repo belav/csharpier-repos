@@ -4,7 +4,9 @@ public class Foo
 {
     public class Nested
     {
-        class Inner { }
+        class Inner
+        {
+        }
 
         public int Test()
         {

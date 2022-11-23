@@ -82,7 +82,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     )
                     .ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
 
         /// <summary>

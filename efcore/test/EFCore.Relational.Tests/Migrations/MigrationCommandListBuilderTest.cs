@@ -167,5 +167,7 @@ Statement3
         );
     }
 
-    private class FakeDbContext : DbContext { }
+    private class FakeDbContext : DbContext
+    {
+    }
 }

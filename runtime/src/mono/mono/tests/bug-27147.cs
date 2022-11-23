@@ -3,7 +3,9 @@ using System.Threading;
 
 class Referee
 {
-    public Referee() { }
+    public Referee()
+    {
+    }
 }
 
 class LotsaRefs

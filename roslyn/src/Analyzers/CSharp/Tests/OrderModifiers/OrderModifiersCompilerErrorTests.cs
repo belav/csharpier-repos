@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
     public sealed class OrderModifiersCompilerErrorTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public OrderModifiersCompilerErrorTests(ITestOutputHelper logger) : base(logger) { }
+        public OrderModifiersCompilerErrorTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

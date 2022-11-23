@@ -2097,7 +2097,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     {
                         await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 },
                 testContext
             )

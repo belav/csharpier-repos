@@ -67,7 +67,9 @@ namespace System.Runtime.Loader.Tests
             {
                 Directory.Delete(s_loadFromPath, recursive: true);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         [Fact]

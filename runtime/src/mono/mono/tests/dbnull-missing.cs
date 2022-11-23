@@ -20,5 +20,7 @@ class X
         return 0;
     }
 
-    public static void TakesInt(int b, [Optional] int a) { }
+    public static void TakesInt(int b, [Optional] int a)
+    {
+    }
 }

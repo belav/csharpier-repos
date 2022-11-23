@@ -10,7 +10,9 @@ namespace Test
     {
         static object m_xForward2;
 
-        static void Method1(float param1, double[] ad) { }
+        static void Method1(float param1, double[] ad)
+        {
+        }
 
         static int Main()
         {

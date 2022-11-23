@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TextFactoryService() { }
+        public TextFactoryService()
+        {
+        }
 
         public SourceText CreateText(
             Stream stream,

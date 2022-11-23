@@ -16,7 +16,9 @@ namespace System.Formats.Tar
 
         // Constructor used when reading an existing archive.
         internal PaxGlobalExtendedAttributesTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.Pax) { }
+            : base(header, readerOfOrigin, TarEntryFormat.Pax)
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="PaxGlobalExtendedAttributesTarEntry"/> instance with the specified Global Extended Attributes enumeration.

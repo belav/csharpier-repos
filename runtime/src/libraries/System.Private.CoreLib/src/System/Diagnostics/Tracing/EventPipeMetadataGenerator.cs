@@ -16,7 +16,9 @@ namespace System.Diagnostics.Tracing
 
         public static EventPipeMetadataGenerator Instance = new EventPipeMetadataGenerator();
 
-        private EventPipeMetadataGenerator() { }
+        private EventPipeMetadataGenerator()
+        {
+        }
 
         public byte[]? GenerateEventMetadata(EventMetadata eventMetadata)
         {

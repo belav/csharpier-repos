@@ -8,11 +8,15 @@ class X
     }
 }
 
-class Y : X { }
+class Y : X
+{
+}
 
 class Z : Y
 {
-    public Z() { }
+    public Z()
+    {
+    }
 }
 
 class test

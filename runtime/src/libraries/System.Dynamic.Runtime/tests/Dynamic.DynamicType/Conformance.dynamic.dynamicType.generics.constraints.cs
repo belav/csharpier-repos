@@ -164,14 +164,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class C
     {
-        public void NakedGen1<T, U>() where T : U { }
+        public void NakedGen1<T, U>() where T : U
+        {
+        }
     }
 
-    public struct Struct { }
+    public struct Struct
+    {
+    }
 
-    public class GenBaseClass<T> { }
+    public class GenBaseClass<T>
+    {
+    }
 
-    public class GenDerClass<T> : GenBaseClass<T> { }
+    public class GenDerClass<T> : GenBaseClass<T>
+    {
+    }
     // </Code>
 }
 
@@ -186,7 +194,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class Base<T>
     {
-        public virtual void Foo<G>() where G : T, new() { }
+        public virtual void Foo<G>() where G : T, new()
+        {
+        }
     }
 
     public class DerivedNullableOfInt : Base<int?>
@@ -683,7 +693,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return 0;
         }
 
-        public void Bar<T, S>() where T : S { }
+        public void Bar<T, S>() where T : S
+        {
+        }
     }
     // </Code>
 }
@@ -766,7 +778,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return 1;
         }
 
-        public void Foo<T>() { }
+        public void Foo<T>()
+        {
+        }
     }
     // </Code>
 }
@@ -867,7 +881,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class C
     {
-        public static void M<T>(T x, T y) { }
+        public static void M<T>(T x, T y)
+        {
+        }
     }
 
     public class Test
@@ -915,7 +931,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class A
     {
-        public void M<T>(T x, T y) { }
+        public void M<T>(T x, T y)
+        {
+        }
     }
 
     public class TestClass
@@ -1025,7 +1043,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public struct S
     {
-        public void M<T>(T x, T y) { }
+        public void M<T>(T x, T y)
+        {
+        }
     }
 
     public struct Test
@@ -1166,7 +1186,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class Test
     {
-        public void M<T>(T x, T y, T z) { }
+        public void M<T>(T x, T y, T z)
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1292,7 +1314,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public struct Test
     {
-        public void M<T>(T x, T y, T z) { }
+        public void M<T>(T x, T y, T z)
+        {
+        }
 
         public static void DynamicCSharpRunTest()
         {

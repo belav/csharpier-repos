@@ -79,7 +79,9 @@ namespace System.Memory.Tests.SequenceReader
             }
         }
 
-        protected virtual void OnNoReferences() { }
+        protected virtual void OnNoReferences()
+        {
+        }
 
         protected bool IsRetained => _referenceCount > 0;
 

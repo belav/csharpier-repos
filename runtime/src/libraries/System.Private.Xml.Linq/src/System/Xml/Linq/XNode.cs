@@ -34,7 +34,9 @@ namespace System.Xml.Linq
 
         internal XNode? next;
 
-        internal XNode() { }
+        internal XNode()
+        {
+        }
 
         /// <summary>
         /// Gets the next sibling node of this node.
@@ -654,7 +656,9 @@ namespace System.Xml.Linq
         /// <param name="cancellationToken">A cancellation token.</param>
         public abstract Task WriteToAsync(XmlWriter writer, CancellationToken cancellationToken);
 
-        internal virtual void AppendText(StringBuilder sb) { }
+        internal virtual void AppendText(StringBuilder sb)
+        {
+        }
 
         internal abstract XNode CloneNode();
 

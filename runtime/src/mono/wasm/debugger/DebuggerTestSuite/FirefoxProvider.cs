@@ -33,7 +33,9 @@ internal class FirefoxProvider : WasmHostProvider
             return BrowserLocator.FindFirefox(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
         });
 
-    public FirefoxProvider(string id, ILogger logger) : base(id, logger) { }
+    public FirefoxProvider(string id, ILogger logger) : base(id, logger)
+    {
+    }
 
     public async Task StartBrowserAndProxyAsync(
         HttpContext context,

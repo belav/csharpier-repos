@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 globalOptions,
                 visibilityTracker,
                 listenerProvider
-            ) { }
+            )
+        {
+        }
 
         protected internal override bool IncludeDiagnostic(DiagnosticData diagnostic) =>
             diagnostic.Severity == DiagnosticSeverity.Info;

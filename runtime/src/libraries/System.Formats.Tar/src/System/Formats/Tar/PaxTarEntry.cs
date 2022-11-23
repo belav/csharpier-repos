@@ -16,7 +16,9 @@ namespace System.Formats.Tar
 
         // Constructor called when reading a TarEntry from a TarReader.
         internal PaxTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.Pax) { }
+            : base(header, readerOfOrigin, TarEntryFormat.Pax)
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="PaxTarEntry"/> instance with the specified entry type, entry name, and the default extended attributes.

@@ -13,7 +13,9 @@ namespace System.IO.Tests.Enumeration
             public string LastDirectory { get; private set; }
 
             public DirectoryRecursed(string directory, EnumerationOptions options)
-                : base(directory, options) { }
+                : base(directory, options)
+            {
+            }
 
             protected override bool ShouldIncludeEntry(ref FileSystemEntry entry) =>
                 !entry.IsDirectory;

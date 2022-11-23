@@ -76,11 +76,17 @@ public class HttpParserBenchmark : IHttpRequestLineHandler, IHttpHeadersHandler
         HttpVersionAndMethod versionAndMethod,
         TargetOffsetPathLength targetPath,
         Span<byte> startLine
-    ) { }
+    )
+    {
+    }
 
-    public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) { }
+    public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+    }
 
-    public void OnHeadersComplete(bool endStream) { }
+    public void OnHeadersComplete(bool endStream)
+    {
+    }
 
     public void OnStaticIndexedHeader(int index)
     {

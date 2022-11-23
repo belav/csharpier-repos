@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Div";
 
-        private DivInstruction() { }
+        private DivInstruction()
+        {
+        }
 
         private sealed class DivInt16 : DivInstruction
         {

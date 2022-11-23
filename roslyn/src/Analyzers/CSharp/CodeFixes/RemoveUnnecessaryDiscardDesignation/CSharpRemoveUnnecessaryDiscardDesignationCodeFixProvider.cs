@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider() { }
+        public CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryDiscardDesignationDiagnosticId);

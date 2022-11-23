@@ -47,7 +47,9 @@ namespace System.Tests
                 {
                     PosixSignalRegistration r = PosixSignalRegistration.Create(
                         PosixSignal.SIGINT,
-                        _ => { }
+                        _ =>
+                        {
+                        }
                     );
                     FreeConsole();
                     AllocConsole();

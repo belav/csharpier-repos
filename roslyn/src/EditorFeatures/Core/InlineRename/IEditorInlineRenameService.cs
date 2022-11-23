@@ -83,7 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor
         }
 
         internal InlineRenameReplacement(RelatedLocation location, TextSpan newSpan)
-            : this(GetReplacementKind(location), location.ConflictCheckSpan, newSpan) { }
+            : this(GetReplacementKind(location), location.ConflictCheckSpan, newSpan)
+        {
+        }
 
         private static InlineRenameReplacementKind GetReplacementKind(RelatedLocation location)
         {

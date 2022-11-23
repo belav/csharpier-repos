@@ -60,6 +60,8 @@ namespace Microsoft.Extensions.Http.Logging
             );
         }
 
-        private class TestHttpHeaders : HttpHeaders { }
+        private class TestHttpHeaders : HttpHeaders
+        {
+        }
     }
 }

@@ -21,7 +21,9 @@ public class MvcViewDocumentClassifierPass : DocumentClassifierPassBase
         DocumentIntermediateNode documentNode
     ) => true;
 
-    public MvcViewDocumentClassifierPass() : this(false) { }
+    public MvcViewDocumentClassifierPass() : this(false)
+    {
+    }
 
     public MvcViewDocumentClassifierPass(bool useConsolidatedMvcViews)
     {

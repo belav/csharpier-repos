@@ -8,12 +8,16 @@ namespace System.Net
 {
     public partial class AuthenticationManager
     {
-        internal AuthenticationManager() { }
+        internal AuthenticationManager()
+        {
+        }
 
         public static System.Net.ICredentialPolicy? CredentialPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Collections.Specialized.StringDictionary CustomTargetNameDictionary
         {
@@ -51,20 +55,32 @@ namespace System.Net
             throw null;
         }
 
-        public static void Register(System.Net.IAuthenticationModule authenticationModule) { }
+        public static void Register(System.Net.IAuthenticationModule authenticationModule)
+        {
+        }
 
-        public static void Unregister(System.Net.IAuthenticationModule authenticationModule) { }
+        public static void Unregister(System.Net.IAuthenticationModule authenticationModule)
+        {
+        }
 
-        public static void Unregister(string authenticationScheme) { }
+        public static void Unregister(string authenticationScheme)
+        {
+        }
     }
 
     public partial class Authorization
     {
-        public Authorization(string? token) { }
+        public Authorization(string? token)
+        {
+        }
 
-        public Authorization(string? token, bool finished) { }
+        public Authorization(string? token, bool finished)
+        {
+        }
 
-        public Authorization(string? token, bool finished, string? connectionGroupId) { }
+        public Authorization(string? token, bool finished, string? connectionGroupId)
+        {
+        }
 
         public bool Complete
         {
@@ -81,12 +97,16 @@ namespace System.Net
         public bool MutuallyAuthenticated
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string[]? ProtectionRealm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -98,27 +118,37 @@ namespace System.Net
         protected FileWebRequest(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override string? ConnectionGroupName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override long ContentLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string? ContentType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.WebHeaderCollection Headers
         {
@@ -127,17 +157,23 @@ namespace System.Net
         public override string Method
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool PreAuthenticate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Uri RequestUri
         {
@@ -146,15 +182,21 @@ namespace System.Net
         public override int Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void Abort() { }
+        public override void Abort()
+        {
+        }
 
         public override System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
@@ -186,7 +228,9 @@ namespace System.Net
         protected override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override System.IO.Stream GetRequestStream()
         {
@@ -212,7 +256,9 @@ namespace System.Net
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class FileWebResponse
@@ -223,7 +269,9 @@ namespace System.Net
         protected FileWebResponse(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override long ContentLength
         {
@@ -246,13 +294,17 @@ namespace System.Net
             get { throw null; }
         }
 
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
         [System.ObsoleteAttribute("Serialization has been deprecated for FileWebResponse.")]
         protected override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override System.IO.Stream GetResponseStream()
         {
@@ -263,7 +315,9 @@ namespace System.Net
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public enum FtpStatusCode
@@ -309,86 +363,118 @@ namespace System.Net
 
     public sealed partial class FtpWebRequest : System.Net.WebRequest
     {
-        internal FtpWebRequest() { }
+        internal FtpWebRequest()
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509CertificateCollection ClientCertificates
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string? ConnectionGroupName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override long ContentLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long ContentOffset
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string? ContentType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public override System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static new System.Net.Cache.RequestCachePolicy? DefaultCachePolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnableSsl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.WebHeaderCollection Headers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool KeepAlive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string Method
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool PreAuthenticate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReadWriteTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public string? RenameTo
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Uri RequestUri
         {
@@ -401,25 +487,35 @@ namespace System.Net
         public override int Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseBinary
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UsePassive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void Abort() { }
+        public override void Abort()
+        {
+        }
 
         public override System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
@@ -460,7 +556,9 @@ namespace System.Net
 
     public partial class FtpWebResponse : System.Net.WebResponse, System.IDisposable
     {
-        internal FtpWebResponse() { }
+        internal FtpWebResponse()
+        {
+        }
 
         public string? BannerMessage
         {
@@ -503,7 +601,9 @@ namespace System.Net
             get { throw null; }
         }
 
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
         public override System.IO.Stream GetResponseStream()
         {
@@ -516,13 +616,17 @@ namespace System.Net
     )]
     public partial class GlobalProxySelection
     {
-        public GlobalProxySelection() { }
+        public GlobalProxySelection()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public static System.Net.IWebProxy Select
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.Net.IWebProxy GetEmptyWebProxy()
@@ -548,12 +652,16 @@ namespace System.Net
         protected HttpWebRequest(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public string? Accept
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Uri Address
         {
@@ -562,92 +670,128 @@ namespace System.Net
         public virtual bool AllowAutoRedirect
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool AllowReadStreamBuffering
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool AllowWriteStreamBuffering
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.DecompressionMethods AutomaticDecompression
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509CertificateCollection ClientCertificates
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Connection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string? ConnectionGroupName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override long ContentLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string? ContentType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.HttpContinueDelegate? ContinueDelegate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ContinueTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Net.CookieContainer? CookieContainer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime Date
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static new System.Net.Cache.RequestCachePolicy? DefaultCachePolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static int DefaultMaximumErrorResponseLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static int DefaultMaximumResponseHeadersLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Expect
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool HaveResponse
         {
@@ -656,72 +800,100 @@ namespace System.Net
         public override System.Net.WebHeaderCollection Headers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Host
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime IfModifiedSince
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool KeepAlive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaximumAutomaticRedirections
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaximumResponseHeadersLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? MediaType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string Method
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Pipelined
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool PreAuthenticate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Version ProtocolVersion
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReadWriteTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Referer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Uri RequestUri
         {
@@ -730,12 +902,16 @@ namespace System.Net
         public bool SendChunked
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.RemoteCertificateValidationCallback? ServerCertificateValidationCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.ServicePoint ServicePoint
         {
@@ -748,46 +924,74 @@ namespace System.Net
         public override int Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? TransferEncoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UnsafeAuthenticatedConnectionSharing
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? UserAgent
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void Abort() { }
+        public override void Abort()
+        {
+        }
 
-        public void AddRange(int range) { }
+        public void AddRange(int range)
+        {
+        }
 
-        public void AddRange(int from, int to) { }
+        public void AddRange(int from, int to)
+        {
+        }
 
-        public void AddRange(long range) { }
+        public void AddRange(long range)
+        {
+        }
 
-        public void AddRange(long from, long to) { }
+        public void AddRange(long from, long to)
+        {
+        }
 
-        public void AddRange(string rangeSpecifier, int range) { }
+        public void AddRange(string rangeSpecifier, int range)
+        {
+        }
 
-        public void AddRange(string rangeSpecifier, int from, int to) { }
+        public void AddRange(string rangeSpecifier, int from, int to)
+        {
+        }
 
-        public void AddRange(string rangeSpecifier, long range) { }
+        public void AddRange(string rangeSpecifier, long range)
+        {
+        }
 
-        public void AddRange(string rangeSpecifier, long from, long to) { }
+        public void AddRange(string rangeSpecifier, long from, long to)
+        {
+        }
 
         public override System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
@@ -827,7 +1031,9 @@ namespace System.Net
         protected override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override System.IO.Stream GetRequestStream()
         {
@@ -848,7 +1054,9 @@ namespace System.Net
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class HttpWebResponse
@@ -862,13 +1070,17 @@ namespace System.Net
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public HttpWebResponse() { }
+        public HttpWebResponse()
+        {
+        }
 
         [System.ObsoleteAttribute("Serialization has been deprecated for HttpWebResponse.")]
         protected HttpWebResponse(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public string? CharacterSet
         {
@@ -889,7 +1101,9 @@ namespace System.Net
         public virtual System.Net.CookieCollection Cookies
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.WebHeaderCollection Headers
         {
@@ -932,15 +1146,21 @@ namespace System.Net
             get { throw null; }
         }
 
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         [System.ObsoleteAttribute("Serialization has been deprecated for HttpWebResponse.")]
         protected override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public string GetResponseHeader(string headerName)
         {
@@ -956,7 +1176,9 @@ namespace System.Net
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public partial interface IAuthenticationModule
@@ -993,49 +1215,71 @@ namespace System.Net
         : System.InvalidOperationException,
             System.Runtime.Serialization.ISerializable
     {
-        public ProtocolViolationException() { }
+        public ProtocolViolationException()
+        {
+        }
 
         protected ProtocolViolationException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
-        public ProtocolViolationException(string? message) { }
+        public ProtocolViolationException(string? message)
+        {
+        }
 
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class WebException
         : System.InvalidOperationException,
             System.Runtime.Serialization.ISerializable
     {
-        public WebException() { }
+        public WebException()
+        {
+        }
 
         protected WebException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
-        public WebException(string? message) { }
+        public WebException(string? message)
+        {
+        }
 
-        public WebException(string? message, System.Exception? innerException) { }
+        public WebException(string? message, System.Exception? innerException)
+        {
+        }
 
         public WebException(
             string? message,
             System.Exception? innerException,
             System.Net.WebExceptionStatus status,
             System.Net.WebResponse? response
-        ) { }
+        )
+        {
+        }
 
-        public WebException(string? message, System.Net.WebExceptionStatus status) { }
+        public WebException(string? message, System.Net.WebExceptionStatus status)
+        {
+        }
 
         public System.Net.WebResponse? Response
         {
@@ -1049,12 +1293,16 @@ namespace System.Net
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public enum WebExceptionStatus
@@ -1091,7 +1339,9 @@ namespace System.Net
             DiagnosticId = "SYSLIB0014",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        protected WebRequest() { }
+        protected WebRequest()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead.",
@@ -1101,74 +1351,102 @@ namespace System.Net
         protected WebRequest(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public System.Net.Security.AuthenticationLevel AuthenticationLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Net.Cache.RequestCachePolicy? CachePolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string? ConnectionGroupName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual long ContentLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string? ContentType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public virtual System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Net.Cache.RequestCachePolicy? DefaultCachePolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Net.IWebProxy? DefaultWebProxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Net.WebHeaderCollection Headers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Principal.TokenImpersonationLevel ImpersonationLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string Method
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool PreAuthenticate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Uri RequestUri
         {
@@ -1177,15 +1455,21 @@ namespace System.Net
         public virtual int Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public virtual void Abort() { }
+        public virtual void Abort()
+        {
+        }
 
         public virtual System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
@@ -1267,7 +1551,9 @@ namespace System.Net
         protected virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public virtual System.IO.Stream GetRequestStream()
         {
@@ -1303,7 +1589,9 @@ namespace System.Net
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public static partial class WebRequestMethods
@@ -1347,23 +1635,31 @@ namespace System.Net
             System.IDisposable,
             System.Runtime.Serialization.ISerializable
     {
-        protected WebResponse() { }
+        protected WebResponse()
+        {
+        }
 
         [System.ObsoleteAttribute("Serialization has been deprecated for WebResponse.")]
         protected WebResponse(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public virtual long ContentLength
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string ContentType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Net.WebHeaderCollection Headers
         {
@@ -1386,17 +1682,25 @@ namespace System.Net
             get { throw null; }
         }
 
-        public virtual void Close() { }
+        public virtual void Close()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         [System.ObsoleteAttribute("Serialization has been deprecated for WebResponse.")]
         protected virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public virtual System.IO.Stream GetResponseStream()
         {
@@ -1407,7 +1711,9 @@ namespace System.Net
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 }
 
@@ -1438,29 +1744,41 @@ namespace System.Net.Cache
 
     public partial class HttpRequestCachePolicy : System.Net.Cache.RequestCachePolicy
     {
-        public HttpRequestCachePolicy() { }
+        public HttpRequestCachePolicy()
+        {
+        }
 
-        public HttpRequestCachePolicy(System.DateTime cacheSyncDate) { }
+        public HttpRequestCachePolicy(System.DateTime cacheSyncDate)
+        {
+        }
 
         public HttpRequestCachePolicy(
             System.Net.Cache.HttpCacheAgeControl cacheAgeControl,
             System.TimeSpan ageOrFreshOrStale
-        ) { }
+        )
+        {
+        }
 
         public HttpRequestCachePolicy(
             System.Net.Cache.HttpCacheAgeControl cacheAgeControl,
             System.TimeSpan maxAge,
             System.TimeSpan freshOrStale
-        ) { }
+        )
+        {
+        }
 
         public HttpRequestCachePolicy(
             System.Net.Cache.HttpCacheAgeControl cacheAgeControl,
             System.TimeSpan maxAge,
             System.TimeSpan freshOrStale,
             System.DateTime cacheSyncDate
-        ) { }
+        )
+        {
+        }
 
-        public HttpRequestCachePolicy(System.Net.Cache.HttpRequestCacheLevel level) { }
+        public HttpRequestCachePolicy(System.Net.Cache.HttpRequestCacheLevel level)
+        {
+        }
 
         public System.DateTime CacheSyncDate
         {

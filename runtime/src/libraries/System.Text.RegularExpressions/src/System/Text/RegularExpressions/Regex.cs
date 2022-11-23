@@ -48,7 +48,9 @@ namespace System.Text.RegularExpressions
         /// Creates a regular expression object for the specified regular expression.
         /// </summary>
         public Regex([StringSyntax(StringSyntaxAttribute.Regex)] string pattern)
-            : this(pattern, culture: null) { }
+            : this(pattern, culture: null)
+        {
+        }
 
         /// <summary>
         /// Creates a regular expression object for the specified regular expression, with options that modify the pattern.
@@ -56,13 +58,17 @@ namespace System.Text.RegularExpressions
         public Regex(
             [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
             RegexOptions options
-        ) : this(pattern, options, s_defaultMatchTimeout, culture: null) { }
+        ) : this(pattern, options, s_defaultMatchTimeout, culture: null)
+        {
+        }
 
         public Regex(
             [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
             RegexOptions options,
             TimeSpan matchTimeout
-        ) : this(pattern, options, matchTimeout, culture: null) { }
+        ) : this(pattern, options, matchTimeout, culture: null)
+        {
+        }
 
         internal Regex(string pattern, CultureInfo? culture)
         {

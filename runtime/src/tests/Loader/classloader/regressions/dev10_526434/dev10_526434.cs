@@ -23,9 +23,13 @@ interface K<T>
 
 class C<T> : J<string, T>, K<T>
 {
-    public virtual void Print() { }
+    public virtual void Print()
+    {
+    }
 
-    public virtual void PrintJ() { }
+    public virtual void PrintJ()
+    {
+    }
 }
 
 interface I1<T>

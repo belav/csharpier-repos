@@ -18,7 +18,9 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresDynamicCode(
             IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
         )]
-        public ImmutableEnumerableOfTConverterWithReflection() { }
+        public ImmutableEnumerableOfTConverterWithReflection()
+        {
+        }
 
         [RequiresUnreferencedCode(
             IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage

@@ -26,13 +26,17 @@ public class GuidTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public GuidTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Guid)
-        : base(storeType, typeof(Guid), dbType) { }
+        : base(storeType, typeof(Guid), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="GuidTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected GuidTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected GuidTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

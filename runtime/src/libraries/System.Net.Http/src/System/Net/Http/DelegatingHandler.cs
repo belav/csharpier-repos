@@ -31,7 +31,9 @@ namespace System.Net.Http
             }
         }
 
-        protected DelegatingHandler() { }
+        protected DelegatingHandler()
+        {
+        }
 
         protected DelegatingHandler(HttpMessageHandler innerHandler)
         {

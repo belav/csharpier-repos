@@ -191,7 +191,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
                     node.FullSpan.Start == 0
                     && _fileBannerMatcher.TryMatch(leadingTriviaToKeep, ref index)
                 )
-            ) { }
+            )
+            {
+            }
 
             leadingTriviaToStrip.AddRange(leadingTriviaToKeep.Take(index));
 

@@ -10,7 +10,9 @@ namespace System.Drawing.Drawing2D
     public sealed class HatchBrush : Brush
     {
         public HatchBrush(HatchStyle hatchstyle, Color foreColor)
-            : this(hatchstyle, foreColor, Color.FromArgb(unchecked((int)0xff000000))) { }
+            : this(hatchstyle, foreColor, Color.FromArgb(unchecked((int)0xff000000)))
+        {
+        }
 
         public HatchBrush(HatchStyle hatchstyle, Color foreColor, Color backColor)
         {

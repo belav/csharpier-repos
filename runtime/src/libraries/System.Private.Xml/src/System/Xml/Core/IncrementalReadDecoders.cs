@@ -33,7 +33,9 @@ namespace System.Xml
             get { return false; }
         }
 
-        internal override void SetNextOutputBuffer(Array array, int offset, int len) { }
+        internal override void SetNextOutputBuffer(Array array, int offset, int len)
+        {
+        }
 
         internal override int Decode(char[] chars, int startPos, int len)
         {
@@ -45,7 +47,9 @@ namespace System.Xml
             return len;
         }
 
-        internal override void Reset() { }
+        internal override void Reset()
+        {
+        }
     }
 
     //
@@ -112,7 +116,9 @@ namespace System.Xml
             return copyCount;
         }
 
-        internal override void Reset() { }
+        internal override void Reset()
+        {
+        }
 
         internal override void SetNextOutputBuffer(Array buffer, int index, int count)
         {

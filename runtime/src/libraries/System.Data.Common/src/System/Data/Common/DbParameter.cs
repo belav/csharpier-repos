@@ -8,7 +8,9 @@ namespace System.Data.Common
 {
     public abstract class DbParameter : MarshalByRefObject, IDbDataParameter
     {
-        protected DbParameter() : base() { }
+        protected DbParameter() : base()
+        {
+        }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -34,13 +36,17 @@ namespace System.Data.Common
         byte IDbDataParameter.Precision
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         byte IDbDataParameter.Scale
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual byte Precision
@@ -70,7 +76,9 @@ namespace System.Data.Common
         public virtual DataRowVersion SourceVersion
         {
             get { return DataRowVersion.Default; }
-            set { }
+            set
+            {
+            }
         }
 
         [DefaultValue(null)]

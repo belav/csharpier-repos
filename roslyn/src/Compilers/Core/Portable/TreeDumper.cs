@@ -239,7 +239,9 @@ namespace Microsoft.CodeAnalysis
             this.Children = children ?? SpecializedCollections.EmptyEnumerable<TreeDumperNode>();
         }
 
-        public TreeDumperNode(string text) : this(text, null, null) { }
+        public TreeDumperNode(string text) : this(text, null, null)
+        {
+        }
 
         public object? Value { get; }
         public string Text { get; }

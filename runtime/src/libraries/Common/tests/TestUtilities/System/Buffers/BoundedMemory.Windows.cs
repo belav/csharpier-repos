@@ -307,7 +307,9 @@ namespace System.Buffers
         private sealed class VirtualAllocHandle : SafeHandle
         {
             // Called by P/Invoke when returning SafeHandles
-            public VirtualAllocHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+            public VirtualAllocHandle() : base(IntPtr.Zero, ownsHandle: true)
+            {
+            }
 
             // Do not provide a finalizer - SafeHandle's critical finalizer will
             // call ReleaseHandle for you.

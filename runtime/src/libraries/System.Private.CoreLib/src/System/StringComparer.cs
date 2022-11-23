@@ -264,7 +264,9 @@ namespace System
         private readonly CompareOptions _options;
 
         internal CultureAwareComparer(CultureInfo culture, CompareOptions options)
-            : this(culture.CompareInfo, options) { }
+            : this(culture.CompareInfo, options)
+        {
+        }
 
         internal CultureAwareComparer(CompareInfo compareInfo, CompareOptions options)
         {
@@ -444,7 +446,9 @@ namespace System
         internal static readonly OrdinalCaseSensitiveComparer Instance =
             new OrdinalCaseSensitiveComparer();
 
-        private OrdinalCaseSensitiveComparer() : base(false) { }
+        private OrdinalCaseSensitiveComparer() : base(false)
+        {
+        }
 
         public override int Compare(string? x, string? y) => string.CompareOrdinal(x, y);
 
@@ -472,7 +476,9 @@ namespace System
         internal static readonly OrdinalIgnoreCaseComparer Instance =
             new OrdinalIgnoreCaseComparer();
 
-        private OrdinalIgnoreCaseComparer() : base(true) { }
+        private OrdinalIgnoreCaseComparer() : base(true)
+        {
+        }
 
         public override int Compare(string? x, string? y) =>
             string.Compare(x, y, StringComparison.OrdinalIgnoreCase);

@@ -512,7 +512,9 @@ namespace System.Reflection
                 StackCrawlMark unused = default;
                 res = Load(an, ref unused, AssemblyLoadContext.GetLoadContext(assembly));
             }
-            catch { }
+            catch
+            {
+            }
 
             if (res == assembly)
                 res = null;

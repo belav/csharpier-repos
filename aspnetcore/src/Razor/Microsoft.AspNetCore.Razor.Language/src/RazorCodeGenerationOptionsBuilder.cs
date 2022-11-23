@@ -85,5 +85,7 @@ public abstract class RazorCodeGenerationOptionsBuilder
 
     public abstract RazorCodeGenerationOptions Build();
 
-    public virtual void SetDesignTime(bool designTime) { }
+    public virtual void SetDesignTime(bool designTime)
+    {
+    }
 }

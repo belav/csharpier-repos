@@ -2153,9 +2153,13 @@ namespace System.Text.Json.Serialization.Tests
             public Derived Derived { get; set; }
         }
 
-        public class Derived : Base { }
+        public class Derived : Base
+        {
+        }
 
-        public class Base { }
+        public class Base
+        {
+        }
 
         [Theory]
         [InlineData(JsonUnknownTypeHandling.JsonElement)]

@@ -15,9 +15,13 @@ namespace System.Web
 #endif
     public sealed class AspNetHostingPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public AspNetHostingPermission(PermissionState state) { }
+        public AspNetHostingPermission(PermissionState state)
+        {
+        }
 
-        public AspNetHostingPermission(AspNetHostingPermissionLevel level) { }
+        public AspNetHostingPermission(AspNetHostingPermissionLevel level)
+        {
+        }
 
         public AspNetHostingPermissionLevel Level { get; set; }
 
@@ -40,7 +44,9 @@ namespace System.Web
 
         public override bool IsSubsetOf(IPermission target) => false;
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override SecurityElement ToXml()
         {

@@ -469,7 +469,9 @@ namespace AutoMapper.UnitTests
                 public DataDictionary Data { get; set; }
             }
 
-            public class DerivedClassWithDictionary : BaseClassWithDictionary { }
+            public class DerivedClassWithDictionary : BaseClassWithDictionary
+            {
+            }
 
             public class DataDictionary : Dictionary<string, object>
             {

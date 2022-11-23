@@ -173,7 +173,9 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     return declaringTypeName + "." + methodName;
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return "Roslyn NonFatal Watson";
         }

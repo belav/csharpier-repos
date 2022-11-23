@@ -9,7 +9,9 @@ namespace System.Data.Odbc
     {
         public static readonly OdbcFactory Instance = new OdbcFactory();
 
-        private OdbcFactory() { }
+        private OdbcFactory()
+        {
+        }
 
         public override DbCommand CreateCommand()
         {

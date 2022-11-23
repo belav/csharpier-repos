@@ -17,7 +17,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
             public SettingsEntriesSnapshot(
                 ImmutableArray<WhitespaceSetting> data,
                 int currentVersionNumber
-            ) : base(data, currentVersionNumber) { }
+            ) : base(data, currentVersionNumber)
+            {
+            }
 
             protected override bool TryGetValue(
                 WhitespaceSetting result,

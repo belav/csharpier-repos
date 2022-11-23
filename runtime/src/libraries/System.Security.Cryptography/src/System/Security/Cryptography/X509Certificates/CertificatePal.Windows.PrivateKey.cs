@@ -559,7 +559,9 @@ namespace System.Security.Cryptography.X509Certificates
                         }
                     }
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             Debug.Fail("RSA key did not open with KeyNumber 0 or AT_SIGNATURE");
@@ -588,7 +590,9 @@ namespace System.Security.Cryptography.X509Certificates
                         }
                     }
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             Debug.Fail("DSA key did not open with KeyNumber 0 or AT_SIGNATURE");

@@ -12,7 +12,9 @@ namespace Internal.Reflection.Execution.FieldAccessors
         protected WritableStaticFieldAccessor(
             IntPtr cctorContext,
             RuntimeTypeHandle fieldTypeHandle
-        ) : base(cctorContext, fieldTypeHandle) { }
+        ) : base(cctorContext, fieldTypeHandle)
+        {
+        }
 
         protected abstract override object GetFieldBypassCctor();
 

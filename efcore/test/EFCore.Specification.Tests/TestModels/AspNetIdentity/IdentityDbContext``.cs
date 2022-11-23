@@ -22,9 +22,13 @@ public abstract class IdentityDbContext<
     where TRoleClaim : IdentityRoleClaim<TKey>
     where TUserToken : IdentityUserToken<TKey>
 {
-    protected IdentityDbContext(DbContextOptions options) : base(options) { }
+    protected IdentityDbContext(DbContextOptions options) : base(options)
+    {
+    }
 
-    protected IdentityDbContext() { }
+    protected IdentityDbContext()
+    {
+    }
 
     public virtual DbSet<TUserRole> UserRoles { get; set; }
     public virtual DbSet<TRole> Roles { get; set; }

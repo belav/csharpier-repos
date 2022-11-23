@@ -27,7 +27,9 @@ namespace Microsoft.Web.Mvc.Resources
         /// </summary>
         /// <param name="item"></param>
         public AtomEntryActionResult(SyndicationItem item)
-            : this(item, new ContentType("application/atom+xml;type=entry")) { }
+            : this(item, new ContentType("application/atom+xml;type=entry"))
+        {
+        }
 
         public AtomEntryActionResult(SyndicationItem item, ContentType contentType)
         {

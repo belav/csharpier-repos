@@ -13,7 +13,9 @@ namespace System.Web.Http.Validation.Validators
     public class RequiredMemberModelValidator : ModelValidator
     {
         public RequiredMemberModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-            : base(validatorProviders) { }
+            : base(validatorProviders)
+        {
+        }
 
         public override bool IsRequired
         {

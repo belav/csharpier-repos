@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
     {
         public static readonly CSharpOrderModifiersHelper Instance = new();
 
-        private CSharpOrderModifiersHelper() { }
+        private CSharpOrderModifiersHelper()
+        {
+        }
 
         protected override int GetKeywordKind(string trimmed)
         {

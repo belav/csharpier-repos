@@ -796,7 +796,9 @@ namespace Microsoft.XmlSerializer.Generator
                         {
                             match = Regex.Match(reference, pattern);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
 
                         if (match != null && match.Success)
                         {
@@ -862,7 +864,9 @@ namespace Microsoft.XmlSerializer.Generator
                         }
                     }
                     //If for any reasons the rsp file is not generated, this argument will be ignored and serializer will be generated with default settings
-                    catch (FileNotFoundException) { }
+                    catch (FileNotFoundException)
+                    {
+                    }
                 }
             }
             return parsedArgs.ToArray();

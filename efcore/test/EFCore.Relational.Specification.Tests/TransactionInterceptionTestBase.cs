@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 {
-    protected TransactionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
+    protected TransactionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(false)]
@@ -107,7 +109,9 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             AssertBeginTransaction(context, interceptor, async);
 
             // Throws if a real transaction has been created
-            using (context.Database.GetDbConnection().BeginTransaction()) { }
+            using (context.Database.GetDbConnection().BeginTransaction())
+            {
+            }
 
             AssertBeginTransactionEvents(listener);
         }
@@ -632,7 +636,9 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         AssertBeginTransactionEvents(listener);
     }
 
-    protected class NoOpTransactionInterceptor : DbConnectionInterceptor { }
+    protected class NoOpTransactionInterceptor : DbConnectionInterceptor
+    {
+    }
 
     private class WrappedDbTransaction : DbTransaction
     {
@@ -665,9 +671,13 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
                     : isolationLevel;
         }
 
-        public override void Commit() { }
+        public override void Commit()
+        {
+        }
 
-        public override void Rollback() { }
+        public override void Rollback()
+        {
+        }
 
         protected override DbConnection DbConnection { get; }
 

@@ -33,7 +33,9 @@ namespace System.Collections.Concurrent
         public static CDSCollectionETWBCLProvider Log = new CDSCollectionETWBCLProvider();
 
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
-        private CDSCollectionETWBCLProvider() { }
+        private CDSCollectionETWBCLProvider()
+        {
+        }
 
         /// <summary>Enabled for all keywords.</summary>
         private const EventKeywords ALL_KEYWORDS = (EventKeywords)(-1);

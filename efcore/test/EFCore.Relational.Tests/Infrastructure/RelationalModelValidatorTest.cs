@@ -1025,7 +1025,14 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Detects_entity_splitting_without_properties()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().SplitToTable("AnimalDetails", s => { });
+        modelBuilder
+            .Entity<Animal>()
+            .SplitToTable(
+                "AnimalDetails",
+                s =>
+                {
+                }
+            );
 
         VerifyError(
             RelationalStrings.EntitySplittingMissingProperties(nameof(Animal), "AnimalDetails"),
@@ -4645,7 +4652,9 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             l / 100m;
 
         public TestDecimalToLongConverter()
-            : base(convertToProviderExpression, convertFromProviderExpression) { }
+            : base(convertToProviderExpression, convertFromProviderExpression)
+        {
+        }
     }
 
     public class TestDecimalToDecimalConverter : ValueConverter<decimal, decimal>
@@ -4656,7 +4665,9 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             l => l / 100m;
 
         public TestDecimalToDecimalConverter()
-            : base(convertToProviderExpression, convertFromProviderExpression) { }
+            : base(convertToProviderExpression, convertFromProviderExpression)
+        {
+        }
     }
 
     private class BaseTestMethods

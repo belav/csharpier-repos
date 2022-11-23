@@ -18,7 +18,9 @@ public class PageRouteModel
     /// <param name="relativePath">The application relative path of the page.</param>
     /// <param name="viewEnginePath">The path relative to the base path for page discovery.</param>
     public PageRouteModel(string relativePath, string viewEnginePath)
-        : this(relativePath, viewEnginePath, areaName: null) { }
+        : this(relativePath, viewEnginePath, areaName: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="PageRouteModel"/>.

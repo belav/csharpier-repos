@@ -11,7 +11,9 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        internal StreamMarshaler() { }
+        internal StreamMarshaler()
+        {
+        }
 
         internal StreamMarshaler(Stream stream)
         {

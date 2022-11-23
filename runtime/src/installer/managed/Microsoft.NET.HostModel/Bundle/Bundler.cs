@@ -203,7 +203,9 @@ namespace Microsoft.NET.HostModel.Bundle
                     isPE = true; // If peReader.PEHeaders doesn't throw, it is a valid PEImage
                     return corHeader != null;
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
             }
 
             return false;

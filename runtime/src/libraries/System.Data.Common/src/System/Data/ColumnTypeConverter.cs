@@ -55,7 +55,9 @@ namespace System.Data
         };
         private StandardValuesCollection? _values;
 
-        public ColumnTypeConverter() { }
+        public ColumnTypeConverter()
+        {
+        }
 
         /// <summary>
         /// Gets a value indicating whether this converter can convert an object to the given destination type using the context.

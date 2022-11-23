@@ -64,7 +64,8 @@ namespace System.IO.Tests
                             {
                                 using (var watcher = new FileSystemWatcher(testDirectory))
                                 {
-                                    watcher.Created += (s, e) => { };
+                                    watcher.Created += (s, e) => {
+                                    };
                                     watcher.EnableRaisingEvents = true;
                                 }
                             }

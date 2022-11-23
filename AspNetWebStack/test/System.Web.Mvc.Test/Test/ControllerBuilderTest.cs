@@ -240,7 +240,9 @@ namespace System.Web.Mvc.Test
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller) { }
+            public void ReleaseController(IController controller)
+            {
+            }
         }
 
         public class ControllerFactoryReturnsNull : IControllerFactory
@@ -258,7 +260,9 @@ namespace System.Web.Mvc.Test
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller) { }
+            public void ReleaseController(IController controller)
+            {
+            }
         }
 
         public class ControllerFactoryThrows : IControllerFactory
@@ -276,7 +280,9 @@ namespace System.Web.Mvc.Test
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller) { }
+            public void ReleaseController(IController controller)
+            {
+            }
         }
 
         public class MockControllerFactory : IControllerFactory
@@ -294,13 +300,17 @@ namespace System.Web.Mvc.Test
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller) { }
+            public void ReleaseController(IController controller)
+            {
+            }
         }
 
         private sealed class MvcHandlerWithNoVersionHeader : MvcHandler
         {
             public MvcHandlerWithNoVersionHeader(RequestContext requestContext)
-                : base(requestContext) { }
+                : base(requestContext)
+            {
+            }
 
             protected internal override void AddVersionHeader(HttpContextBase httpContext)
             {

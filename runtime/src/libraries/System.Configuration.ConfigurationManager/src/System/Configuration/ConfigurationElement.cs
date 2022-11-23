@@ -612,7 +612,9 @@ namespace System.Configuration
             }
         }
 
-        protected internal virtual void InitializeDefault() { }
+        protected internal virtual void InitializeDefault()
+        {
+        }
 
         internal void CheckLockedElement(string elementName, XmlReader reader)
         {

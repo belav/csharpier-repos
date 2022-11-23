@@ -23,6 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MatchFolderAndNamespace
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpChangeNamespaceToMatchFolderCodeFixProvider() { }
+        public CSharpChangeNamespaceToMatchFolderCodeFixProvider()
+        {
+        }
     }
 }

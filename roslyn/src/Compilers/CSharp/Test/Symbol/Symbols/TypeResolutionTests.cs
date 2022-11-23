@@ -119,7 +119,9 @@ namespace System
             {
                 public class E<U, V>
                 {
-                    public class F<W> { }
+                    public class F<W>
+                    {
+                    }
                 }
             }
         }

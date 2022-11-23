@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         {
             private readonly StateMachine _stateMachine;
 
-            public event EventHandler<SnapshotSpanEventArgs> TagsChanged = delegate { };
+            public event EventHandler<SnapshotSpanEventArgs> TagsChanged = delegate
+            {
+            };
 
             public Tagger(StateMachine stateMachine)
             {

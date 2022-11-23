@@ -16,17 +16,23 @@ namespace System.Threading.Channels
 
     public sealed partial class BoundedChannelOptions : System.Threading.Channels.ChannelOptions
     {
-        public BoundedChannelOptions(int capacity) { }
+        public BoundedChannelOptions(int capacity)
+        {
+        }
 
         public int Capacity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Threading.Channels.BoundedChannelFullMode FullMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -67,39 +73,57 @@ namespace System.Threading.Channels
 
     public partial class ChannelClosedException : System.InvalidOperationException
     {
-        public ChannelClosedException() { }
+        public ChannelClosedException()
+        {
+        }
 
-        public ChannelClosedException(System.Exception? innerException) { }
+        public ChannelClosedException(System.Exception? innerException)
+        {
+        }
 
-        public ChannelClosedException(string? message) { }
+        public ChannelClosedException(string? message)
+        {
+        }
 
-        public ChannelClosedException(string? message, System.Exception? innerException) { }
+        public ChannelClosedException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public abstract partial class ChannelOptions
     {
-        protected ChannelOptions() { }
+        protected ChannelOptions()
+        {
+        }
 
         public bool AllowSynchronousContinuations
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SingleReader
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SingleWriter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public abstract partial class ChannelReader<T>
     {
-        protected ChannelReader() { }
+        protected ChannelReader()
+        {
+        }
 
         public virtual bool CanCount
         {
@@ -144,9 +168,13 @@ namespace System.Threading.Channels
 
     public abstract partial class ChannelWriter<T>
     {
-        protected ChannelWriter() { }
+        protected ChannelWriter()
+        {
+        }
 
-        public void Complete(System.Exception? error = null) { }
+        public void Complete(System.Exception? error = null)
+        {
+        }
 
         public virtual bool TryComplete(System.Exception? error = null)
         {
@@ -171,22 +199,30 @@ namespace System.Threading.Channels
 
     public abstract partial class Channel<T> : System.Threading.Channels.Channel<T, T>
     {
-        protected Channel() { }
+        protected Channel()
+        {
+        }
     }
 
     public abstract partial class Channel<TWrite, TRead>
     {
-        protected Channel() { }
+        protected Channel()
+        {
+        }
 
         public System.Threading.Channels.ChannelReader<TRead> Reader
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         public System.Threading.Channels.ChannelWriter<TWrite> Writer
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
 
         public static implicit operator System.Threading.Channels.ChannelReader<TRead>(
@@ -206,6 +242,8 @@ namespace System.Threading.Channels
 
     public sealed partial class UnboundedChannelOptions : System.Threading.Channels.ChannelOptions
     {
-        public UnboundedChannelOptions() { }
+        public UnboundedChannelOptions()
+        {
+        }
     }
 }

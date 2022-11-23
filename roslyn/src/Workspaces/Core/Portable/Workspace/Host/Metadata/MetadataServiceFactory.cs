@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MetadataServiceFactory() { }
+        public MetadataServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new Service(workspaceServices.GetService<IDocumentationProviderService>());

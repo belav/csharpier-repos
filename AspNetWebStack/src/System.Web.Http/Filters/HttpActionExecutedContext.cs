@@ -25,7 +25,9 @@ namespace System.Web.Http.Filters
         /// Initializes a new instance of the <see cref="HttpActionExecutedContext"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public HttpActionExecutedContext() { }
+        public HttpActionExecutedContext()
+        {
+        }
 
         public HttpActionContext ActionContext
         {

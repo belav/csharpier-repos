@@ -50,7 +50,9 @@ namespace System.Globalization
         internal static readonly CalendarData Invariant = CreateInvariant();
 
         // Private constructor
-        private CalendarData() { }
+        private CalendarData()
+        {
+        }
 
         // Invariant factory
         private static CalendarData CreateInvariant()

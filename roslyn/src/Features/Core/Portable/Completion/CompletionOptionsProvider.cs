@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionOptionsProvider() { }
+        public CompletionOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(

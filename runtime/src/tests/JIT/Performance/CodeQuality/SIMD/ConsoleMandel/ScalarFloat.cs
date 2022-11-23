@@ -11,7 +11,9 @@ namespace Algorithms
     internal class ScalarFloatRenderer : FractalRenderer
     {
         public ScalarFloatRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc) { }
+            : base(dp, abortFunc)
+        {
+        }
 
         protected const float limit = 4.0f;
 

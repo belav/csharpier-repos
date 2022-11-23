@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 public class InjectIncludeExpressionMutator : ExpressionMutator
 {
-    public InjectIncludeExpressionMutator(DbContext context) : base(context) { }
+    public InjectIncludeExpressionMutator(DbContext context) : base(context)
+    {
+    }
 
     private ExpressionFinder _expressionFinder;
 

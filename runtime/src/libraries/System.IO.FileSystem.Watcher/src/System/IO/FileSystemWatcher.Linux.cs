@@ -511,9 +511,13 @@ namespace System.IO
                             // this.Children, so we don't have to / shouldn't also do it here.
                         }
                     }
-                    catch (DirectoryNotFoundException) { } // The child directory was removed.
+                    catch (DirectoryNotFoundException)
+                    {
+                    } // The child directory was removed.
                     catch (IOException ex)
-                        when (ex.HResult == Interop.Error.ENOTDIR.Info().RawErrno) { } // The child directory was replaced by a file.
+                        when (ex.HResult == Interop.Error.ENOTDIR.Info().RawErrno)
+                    {
+                    } // The child directory was replaced by a file.
                     catch (Exception ex)
                     {
                         if (_weakWatcher.TryGetTarget(out FileSystemWatcher? watcher))

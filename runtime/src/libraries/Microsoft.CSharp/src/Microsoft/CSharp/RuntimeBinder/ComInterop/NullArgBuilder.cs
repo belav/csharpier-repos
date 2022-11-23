@@ -11,7 +11,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     /// </summary>
     internal sealed class NullArgBuilder : ArgBuilder
     {
-        internal NullArgBuilder() { }
+        internal NullArgBuilder()
+        {
+        }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal override Expression Marshal(Expression parameter)

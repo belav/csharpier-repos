@@ -22,7 +22,9 @@ public class OwnedNavigationTableBuilder<TEntity> : OwnedNavigationTableBuilder
         string? name,
         string? schema,
         OwnedNavigationBuilder referenceOwnershipBuilder
-    ) : base(name, schema, referenceOwnershipBuilder) { }
+    ) : base(name, schema, referenceOwnershipBuilder)
+    {
+    }
 
     /// <summary>
     ///     Configures the table to be ignored by migrations.

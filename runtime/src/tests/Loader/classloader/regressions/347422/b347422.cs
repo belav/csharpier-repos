@@ -10,7 +10,9 @@
 
 using System;
 
-public interface IFoo { }
+public interface IFoo
+{
+}
 
 public class Casting
 {

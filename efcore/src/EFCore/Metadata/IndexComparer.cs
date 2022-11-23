@@ -21,7 +21,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </remarks>
 public sealed class IndexComparer : IEqualityComparer<IReadOnlyIndex>, IComparer<IReadOnlyIndex>
 {
-    private IndexComparer() { }
+    private IndexComparer()
+    {
+    }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.

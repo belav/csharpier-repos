@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AddConstructorParametersFromMembersCodeRefactoringProvider() { }
+        public AddConstructorParametersFromMembersCodeRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

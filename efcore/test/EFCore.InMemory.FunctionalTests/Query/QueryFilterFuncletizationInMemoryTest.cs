@@ -9,7 +9,9 @@ public class QueryFilterFuncletizationInMemoryTest
     public QueryFilterFuncletizationInMemoryTest(
         QueryFilterFuncletizationInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public class QueryFilterFuncletizationInMemoryFixture : QueryFilterFuncletizationFixtureBase
     {

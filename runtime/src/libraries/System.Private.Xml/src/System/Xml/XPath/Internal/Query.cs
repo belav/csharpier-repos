@@ -28,9 +28,13 @@ namespace MS.Internal.Xml.XPath
     [DebuggerDisplay("{ToString()}")]
     internal abstract class Query : ResettableIterator
     {
-        public Query() { }
+        public Query()
+        {
+        }
 
-        protected Query(Query other) : base(other) { }
+        protected Query(Query other) : base(other)
+        {
+        }
 
         // -- XPathNodeIterator --
         public override bool MoveNext()
@@ -56,7 +60,9 @@ namespace MS.Internal.Xml.XPath
         }
 
         // -------------------- Query ------------------
-        public virtual void SetXsltContext(XsltContext context) { }
+        public virtual void SetXsltContext(XsltContext context)
+        {
+        }
 
         public abstract object Evaluate(XPathNodeIterator nodeIterator);
         public abstract XPathNavigator? Advance();

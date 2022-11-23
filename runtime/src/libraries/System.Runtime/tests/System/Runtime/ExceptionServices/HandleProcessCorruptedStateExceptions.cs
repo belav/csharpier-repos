@@ -37,7 +37,9 @@ namespace System.Runtime.ExceptionServices.Tests
             {
                 RaiseException(0xC0000005, 0, 0, IntPtr.Zero);
             }
-            catch (AccessViolationException) { }
+            catch (AccessViolationException)
+            {
+            }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

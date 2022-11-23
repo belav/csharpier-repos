@@ -8,7 +8,9 @@ namespace Test
 
     class BB
     {
-        static void Static2(__arglist) { }
+        static void Static2(__arglist)
+        {
+        }
 
         static bool[] Static3(
             ref int param1,

@@ -1581,20 +1581,26 @@ public class DefaultApplicationModelProviderTest
 
     private class ViewFeaturesController : ControllerBase, IDisposable
     {
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
     }
 
     private class BaseClassWithAttributeRoutesController
     {
         [Route("A")]
         [Route("B")]
-        public virtual void Edit() { }
+        public virtual void Edit()
+        {
+        }
     }
 
     private class DerivedClassInheritsAttributeRoutesController
         : BaseClassWithAttributeRoutesController
     {
-        public override void Edit() { }
+        public override void Edit()
+        {
+        }
     }
 
     private class DerivedClassOverridesAttributeRoutesController
@@ -1602,7 +1608,9 @@ public class DefaultApplicationModelProviderTest
     {
         [Route("C")]
         [Route("D")]
-        public override void Edit() { }
+        public override void Edit()
+        {
+        }
     }
 
     private class Controller : IDisposable
@@ -1622,13 +1630,18 @@ public class DefaultApplicationModelProviderTest
     private class BaseController : Controller
     {
         public void GetFromBase() // Valid action method.
-        { }
+        {
+        }
 
         [NonAction]
-        public virtual void OverridenNonActionMethod() { }
+        public virtual void OverridenNonActionMethod()
+        {
+        }
 
         [NonAction]
-        public virtual void NewMethod() { }
+        public virtual void NewMethod()
+        {
+        }
 
         public override IActionResult Redirect(string url)
         {
@@ -1639,30 +1652,46 @@ public class DefaultApplicationModelProviderTest
     private class DerivedController : BaseController
     {
         public void GetFromDerived() // Valid action method.
-        { }
+        {
+        }
 
         [HttpGet]
-        public override void OverridenNonActionMethod() { }
+        public override void OverridenNonActionMethod()
+        {
+        }
 
         public new void NewMethod() // Valid action method.
-        { }
+        {
+        }
 
-        public void GenericMethod<T>() { }
+        public void GenericMethod<T>()
+        {
+        }
 
-        private void PrivateMethod() { }
+        private void PrivateMethod()
+        {
+        }
 
-        public static void StaticMethod() { }
+        public static void StaticMethod()
+        {
+        }
 
-        protected static void ProtectedStaticMethod() { }
+        protected static void ProtectedStaticMethod()
+        {
+        }
 
-        private static void PrivateStaticMethod() { }
+        private static void PrivateStaticMethod()
+        {
+        }
 
         public string Dispose(string s)
         {
             return s;
         }
 
-        public new void Dispose() { }
+        public new void Dispose()
+        {
+        }
     }
 
     private class IDisposablePocoController : IDisposable
@@ -1678,7 +1707,9 @@ public class DefaultApplicationModelProviderTest
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public string Dispose(string s)
         {
@@ -1694,7 +1725,9 @@ public class DefaultApplicationModelProviderTest
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
     }
 
     private class DerivedOverriddenDisposeController : BaseClass
@@ -1720,9 +1753,13 @@ public class DefaultApplicationModelProviderTest
             return "Hello world";
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void Dispose(string s) { }
+        public void Dispose(string s)
+        {
+        }
     }
 
     private class OperatorOverloadingController : Controller
@@ -1740,18 +1777,28 @@ public class DefaultApplicationModelProviderTest
     {
         [HttpGet("All")]
         [HttpPost("List")]
-        public void Index() { }
+        public void Index()
+        {
+        }
 
         [HttpHead("Change")]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
 
-        public void Remove() { }
+        public void Remove()
+        {
+        }
 
         [Route("Update")]
-        public void Update() { }
+        public void Update()
+        {
+        }
 
         [AcceptVerbs("GET", "HEAD", Route = "ListAll")]
-        public void List() { }
+        public void List()
+        {
+        }
     }
 
     [Route("Products")]
@@ -1759,9 +1806,13 @@ public class DefaultApplicationModelProviderTest
     {
         [HttpGet("All")]
         [HttpGet("List")]
-        public void Index() { }
+        public void Index()
+        {
+        }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
     }
 
     [Route("Products")]
@@ -1770,9 +1821,13 @@ public class DefaultApplicationModelProviderTest
     {
         [HttpGet("All")]
         [HttpGet("List")]
-        public void Index() { }
+        public void Index()
+        {
+        }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
     }
 
     private class MixedHttpVerbsAndRouteAttributeController : Controller
@@ -1780,14 +1835,18 @@ public class DefaultApplicationModelProviderTest
         // Should produce a single action constrained to GET
         [HttpGet]
         [Route("Products")]
-        public void VerbAndRoute() { }
+        public void VerbAndRoute()
+        {
+        }
 
         // Should produce two actions constrained to GET,POST
         [HttpGet]
         [HttpPost]
         [Route("Products")]
         [Route("v2/Products")]
-        public void MultipleVerbsAndRoutes() { }
+        public void MultipleVerbsAndRoutes()
+        {
+        }
 
         // Produces:
         //
@@ -1798,7 +1857,9 @@ public class DefaultApplicationModelProviderTest
         [Route("Products")]
         [Route("v2/Products")]
         [HttpPost("Products/Buy")]
-        public void MultipleVerbsWithAnyWithoutTemplateAndRoutes() { }
+        public void MultipleVerbsWithAnyWithoutTemplateAndRoutes()
+        {
+        }
 
         // Produces:
         //
@@ -1808,7 +1869,9 @@ public class DefaultApplicationModelProviderTest
         // This is invalid, and will throw during the ADP construction phase.
         [HttpGet]
         [HttpPost("Products")]
-        public void Invalid() { }
+        public void Invalid()
+        {
+        }
     }
 
     [Route("api/[controller]")]
@@ -1833,24 +1896,34 @@ public class DefaultApplicationModelProviderTest
     // on the controller and the template for all the constraints on a method is null.
     private class ConventionallyRoutedController : Controller
     {
-        public void Edit() { }
+        public void Edit()
+        {
+        }
 
         [CustomHttpMethods("PUT", "PATCH")]
-        public void Update() { }
+        public void Update()
+        {
+        }
 
         [HttpHead]
         [HttpDelete]
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
         [HttpPost]
         [HttpGet]
         [HttpHead]
-        public void Details() { }
+        public void Details()
+        {
+        }
 
         [HttpGet]
         [HttpPut]
         [AcceptVerbs("GET", "POST")]
-        public void List() { }
+        public void List()
+        {
+        }
     }
 
     private class CustomHttpMethodsAttribute : Attribute, IActionHttpMethodProvider
@@ -1867,13 +1940,19 @@ public class DefaultApplicationModelProviderTest
 
     [Route("A")]
     [Route("B")]
-    private class BaseClassWithRoutesController { }
+    private class BaseClassWithRoutesController
+    {
+    }
 
-    private class DerivedClassInheritingRoutesController : BaseClassWithRoutesController { }
+    private class DerivedClassInheritingRoutesController : BaseClassWithRoutesController
+    {
+    }
 
     [Route("C")]
     [Route("D")]
-    private class DerivedClassHidingRoutesController : BaseClassWithRoutesController { }
+    private class DerivedClassHidingRoutesController : BaseClassWithRoutesController
+    {
+    }
 
     private class StoreController : Controller, IActionFilter
     {
@@ -1888,12 +1967,18 @@ public class DefaultApplicationModelProviderTest
         }
     }
 
-    private class MyFilterAttribute : Attribute, IFilterMetadata { }
+    private class MyFilterAttribute : Attribute, IFilterMetadata
+    {
+    }
 
     [MyFilter]
-    public class NoFiltersController { }
+    public class NoFiltersController
+    {
+    }
 
-    public interface ITestService { }
+    public interface ITestService
+    {
+    }
 
     public class ModelBinderController
     {
@@ -1936,9 +2021,13 @@ public class DefaultApplicationModelProviderTest
             return null;
         }
 
-        public void OnResultExecuted(ResultExecutedContext context) { }
+        public void OnResultExecuted(ResultExecutedContext context)
+        {
+        }
 
-        public void OnResultExecuting(ResultExecutingContext context) { }
+        public void OnResultExecuting(ResultExecutingContext context)
+        {
+        }
     }
 
     private class UnsupportedFiltersController
@@ -1992,14 +2081,18 @@ public class DefaultApplicationModelProviderTest
         Inherited = true,
         AllowMultiple = true
     )]
-    private class ConstraintAttribute : Attribute, IActionConstraintMetadata { }
+    private class ConstraintAttribute : Attribute, IActionConstraintMetadata
+    {
+    }
 
     private class MultipleRouteProviderOnActionController
     {
         [Constraint]
         [RouteAndConstraint("R1")]
         [RouteAndConstraint("R2")]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     private class AsyncActionController : Controller
@@ -2013,11 +2106,15 @@ public class DefaultApplicationModelProviderTest
     private class TestApplicationModelProvider : DefaultApplicationModelProvider
     {
         public TestApplicationModelProvider()
-            : this(new MvcOptions(), new EmptyModelMetadataProvider()) { }
+            : this(new MvcOptions(), new EmptyModelMetadataProvider())
+        {
+        }
 
         public TestApplicationModelProvider(
             MvcOptions options,
             IModelMetadataProvider modelMetadataProvider
-        ) : base(Options.Create(options), modelMetadataProvider) { }
+        ) : base(Options.Create(options), modelMetadataProvider)
+        {
+        }
     }
 }

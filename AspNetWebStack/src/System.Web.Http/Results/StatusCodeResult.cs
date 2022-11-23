@@ -20,13 +20,17 @@ namespace System.Web.Http.Results
         /// <param name="statusCode">The HTTP status code for the response message.</param>
         /// <param name="request">The request message which led to this result.</param>
         public StatusCodeResult(HttpStatusCode statusCode, HttpRequestMessage request)
-            : this(statusCode, new DirectDependencyProvider(request)) { }
+            : this(statusCode, new DirectDependencyProvider(request))
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="StatusCodeResult"/> class.</summary>
         /// <param name="statusCode">The HTTP status code for the response message.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public StatusCodeResult(HttpStatusCode statusCode, ApiController controller)
-            : this(statusCode, new ApiControllerDependencyProvider(controller)) { }
+            : this(statusCode, new ApiControllerDependencyProvider(controller))
+        {
+        }
 
         private StatusCodeResult(HttpStatusCode statusCode, IDependencyProvider dependencies)
         {

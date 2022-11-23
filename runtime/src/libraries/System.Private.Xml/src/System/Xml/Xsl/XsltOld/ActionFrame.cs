@@ -327,9 +327,13 @@ namespace System.Xml.Xsl.XsltOld
         // special array iterator that iterates over ArrayList of SortKey
         private sealed class XPathSortArrayIterator : XPathArrayIterator
         {
-            public XPathSortArrayIterator(List<SortKey> list) : base(list) { }
+            public XPathSortArrayIterator(List<SortKey> list) : base(list)
+            {
+            }
 
-            public XPathSortArrayIterator(XPathSortArrayIterator it) : base(it) { }
+            public XPathSortArrayIterator(XPathSortArrayIterator it) : base(it)
+            {
+            }
 
             public override XPathNodeIterator Clone()
             {

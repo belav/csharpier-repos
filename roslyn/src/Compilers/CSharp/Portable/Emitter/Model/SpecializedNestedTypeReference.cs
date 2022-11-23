@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Cci.ISpecializedNestedTypeReference
     {
         public SpecializedNestedTypeReference(NamedTypeSymbol underlyingNamedType)
-            : base(underlyingNamedType) { }
+            : base(underlyingNamedType)
+        {
+        }
 
         Cci.INestedTypeReference Cci.ISpecializedNestedTypeReference.GetUnspecializedVersion(
             EmitContext context

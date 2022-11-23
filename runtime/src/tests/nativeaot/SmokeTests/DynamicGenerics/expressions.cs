@@ -65,7 +65,9 @@ namespace Expressions
                 + n_parameter.ToString();
         }
 
-        public void Method() { }
+        public void Method()
+        {
+        }
 
         public string CheckMethodExpression(T value)
         {
@@ -138,11 +140,15 @@ namespace Expressions
         }
     }
 
-    public class SomeDerivedGenericClass<T, U> : SomeGenericClass<T, U> { }
+    public class SomeDerivedGenericClass<T, U> : SomeGenericClass<T, U>
+    {
+    }
 
     public struct SomeGenericStruct<T, U>
     {
-        public void Method() { }
+        public void Method()
+        {
+        }
     }
 
     public class MyType1

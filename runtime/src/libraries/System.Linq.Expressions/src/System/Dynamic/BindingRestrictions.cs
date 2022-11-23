@@ -30,7 +30,9 @@ namespace System.Dynamic
         );
         private const int CustomRestrictionHash = 0b_0010_0100_1001_0010_0100_1001_0010_0100;
 
-        private BindingRestrictions() { }
+        private BindingRestrictions()
+        {
+        }
 
         // Overridden by specialized subclasses
         internal abstract Expression GetExpression();

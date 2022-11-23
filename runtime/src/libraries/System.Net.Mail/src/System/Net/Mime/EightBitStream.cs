@@ -36,7 +36,9 @@ namespace System.Net.Mime
         /// ctor.
         /// </summary>
         /// <param name="stream">Underlying stream</param>
-        internal EightBitStream(Stream stream) : base(stream) { }
+        internal EightBitStream(Stream stream) : base(stream)
+        {
+        }
 
         internal EightBitStream(Stream stream, bool shouldEncodeLeadingDots) : this(stream)
         {

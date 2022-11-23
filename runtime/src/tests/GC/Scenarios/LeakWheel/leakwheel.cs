@@ -571,7 +571,9 @@ namespace DefaultNamespace
         internal TreeNode right;
         internal byte[] mem;
 
-        public TreeNode() { }
+        public TreeNode()
+        {
+        }
 
         // Build tree top down, assigning to older objects.
         internal void Populate(int iDepth, TreeNode thisNode)

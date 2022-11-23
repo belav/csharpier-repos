@@ -140,7 +140,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
     public virtual async Task Create_table_with_sparse_column()
     {
         await Test(
-            _ => { },
+            _ =>
+            {
+            },
             builder => builder.Entity("People", e => e.Property<string>("SomeProperty").IsSparse()),
             model =>
             {
@@ -161,7 +163,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
     public virtual async Task Create_table_with_identity_column_value_converter()
     {
         await Test(
-            _ => { },
+            _ =>
+            {
+            },
             builder =>
                 builder
                     .UseIdentityColumns()
@@ -189,7 +193,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
     public virtual async Task Create_memory_optimized_table()
     {
         await Test(
-            _ => { },
+            _ =>
+            {
+            },
             builder =>
                 builder
                     .UseIdentityColumns()
@@ -258,7 +264,9 @@ EXEC(N'
     public virtual async Task Create_memory_optimized_temporal_table()
     {
         await Test(
-            _ => { },
+            _ =>
+            {
+            },
             builder =>
                 builder
                     .UseIdentityColumns()
@@ -465,7 +473,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     public virtual async Task Create_schema_dbo_is_ignored()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").ToTable("People", "dbo").Property<int>("Id"),
             model => Assert.Equal("dbo", Assert.Single(model.Tables).Schema)
         );
@@ -512,7 +522,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -551,7 +563,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -595,7 +609,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -625,7 +641,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<string>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -650,7 +668,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<string>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -675,7 +695,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<byte[]>("RowVersion").IsRowVersion(),
             model =>
             {
@@ -694,7 +716,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -734,7 +758,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -841,7 +867,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
     {
         await Test(
             builder => builder.Entity("People").Property<string>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<int>("IdentityColumn").UseIdentityColumn(),
             model =>
             {
@@ -859,7 +887,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
     {
         await Test(
             builder => builder.Entity("People").Property<string>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").Property<int>("IdentityColumn").UseIdentityColumn(100, 5),
             model =>
@@ -886,7 +916,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
                 builder.Entity("Cat").HasBaseType("Animal").ToTable("Cats");
                 builder.Entity("Dog").HasBaseType("Animal").ToTable("Dogs");
             },
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity("Animal").Property<int>("IdentityColumn");
@@ -1194,7 +1226,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) COLLATE German_PhoneBook_
                         e.HasIndex("Name");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
             model =>
@@ -1248,7 +1282,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) NULL;"
                         e.HasIndex("SomeColumn").IncludeProperties("SomeOtherColumn");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
             {
@@ -1296,7 +1332,9 @@ CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]) INCLUDE ([SomeOth
                         e.HasIndex("Name").IsClustered(false);
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("Name").HasMaxLength(30),
             model =>
             {
@@ -1370,7 +1408,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;"
                         e.HasIndex("FirstName", "LastName").IncludeProperties("Name");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("Name").HasMaxLength(30),
             model =>
             {
@@ -1467,7 +1507,9 @@ ALTER TABLE [People] ALTER COLUMN [IdentityColumn] bigint NOT NULL;"
     {
         await Test(
             builder => builder.Entity("People").Property<string>("Name"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("Name").HasDefaultValue("Doe"),
             model =>
             {
@@ -1492,7 +1534,9 @@ ALTER TABLE [People] ADD DEFAULT N'Doe' FOR [Name];"
     {
         await Test(
             builder => builder.Entity("People").Property<string>("Name").HasDefaultValue("Doe"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("Name").HasComment("Some comment"),
             model =>
             {
@@ -1516,7 +1560,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
     {
         await Test(
             builder => builder.Entity("People").Property<string>("SomeProperty"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("SomeProperty").IsSparse(),
             model =>
             {
@@ -1706,7 +1752,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;",
                         e.Property<string>("Name");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("Name").HasFilter("[Name] IS NOT NULL"),
             model =>
             {
@@ -1756,7 +1804,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;",
     {
         await Test(
             builder => builder.Entity("People").Property<string>("FirstName"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("FirstName").IsClustered(),
             model =>
             {
@@ -1785,7 +1835,9 @@ ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;",
     {
         await Test(
             builder => builder.Entity("People").Property<string>("FirstName"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("FirstName").IsUnique().IsClustered(),
             model =>
             {
@@ -1824,7 +1876,9 @@ ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;",
                         e.Property<string>("Name");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -1870,7 +1924,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;",
                         e.Property<string>("Name");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -1918,7 +1974,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;",
                         e.Property<string>("Name").IsRequired();
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -1966,7 +2024,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;",
                         e.Property<string>("Name").IsRequired();
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -2019,7 +2079,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;",
                         e.Property<string>("Name").IsRequired();
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -2074,7 +2136,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;",
                         e.Property<string>("Name").IsRequired();
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -2127,7 +2191,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;",
                         e.Property<string>("Name").IsRequired();
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -2180,7 +2246,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;",
                         e.HasKey("Id").IsClustered(false);
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("Name").IsUnique(),
             model =>
             {
@@ -2223,7 +2291,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;",
                         e.HasKey("Id").IsClustered(false);
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -2272,7 +2342,9 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;",
                         e.HasKey("Name").IsClustered(false);
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("Name").IsUnique().IsClustered(false),
             model =>
             {
@@ -2367,7 +2439,9 @@ ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeField];",
                     .Property<string>("SomeField")
                     .IsRequired()
                     .HasMaxLength(450),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasKey("SomeField").IsClustered(false),
             model =>
             {
@@ -2494,7 +2568,9 @@ ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(max) NOT NULL;"
                         e.Property<int>("DriverLicense");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -2542,7 +2618,9 @@ ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(max) NOT NULL;"
     public async Task Create_sequence_byte()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.HasSequence<byte>("TestSequence"),
             model =>
             {
@@ -2559,7 +2637,9 @@ ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(max) NOT NULL;"
     public async Task Create_sequence_decimal()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.HasSequence<decimal>("TestSequence"),
             model =>
             {
@@ -2670,7 +2750,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestSequenceSchema].[Tes
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.HasSequence<int>("TestSequence");
@@ -2706,7 +2788,9 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestSequenceSchema].[Tes
                     .Property<int>("SeqProp")
                     .HasDefaultValueSql("NEXT VALUE FOR TestSequence");
             },
-            builder => { },
+            builder =>
+            {
+            },
             model => Assert.Empty(model.Sequences)
         );
 
@@ -2815,7 +2899,9 @@ SELECT @@ROWCOUNT;"
                         e.HasKey("Id");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("Person")
@@ -2826,7 +2912,9 @@ SELECT @@ROWCOUNT;"
                         new Person { Id = 4, Name = "Harry Strickland" },
                         new Person { Id = 5, Name = null }
                     ),
-            model => { },
+            model =>
+            {
+            },
             migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
         );
 
@@ -2860,8 +2948,12 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name
                     }
                 ),
             builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
-            builder => { },
-            model => { },
+            builder =>
+            {
+            },
+            model =>
+            {
+            },
             migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
         );
 
@@ -2890,7 +2982,9 @@ SELECT @@ROWCOUNT');"
             builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
             builder =>
                 builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }),
-            model => { },
+            model =>
+            {
+            },
             migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
         );
 
@@ -2905,7 +2999,9 @@ SELECT @@ROWCOUNT');"
     public virtual async Task Create_temporal_table_default_column_mappings_and_default_history_table()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -2974,7 +3070,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_custom_column_mappings_and_default_history_table()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -3040,7 +3138,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_default_column_mappings_and_custom_history_table()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -3110,7 +3210,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_explicitly_defined_schema()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -3183,7 +3285,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_schema_for_model_changed_and_no_explicit_table_schema_provided()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.HasDefaultSchema("myDefaultSchema");
@@ -3258,7 +3362,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_schema_for_model_changed_and_explicit_table_schema_provided()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.HasDefaultSchema("myDefaultSchema");
@@ -3334,7 +3440,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_model_schema()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.HasDefaultSchema("myDefaultSchema");
@@ -3413,7 +3521,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_model_schema_specified_after_entity_definition()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(
@@ -3495,7 +3605,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_model_schema_specified_after_entity_definition_and_history_table_schema_specified_explicitly()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(
@@ -3577,7 +3689,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_model_schema_changed_after_entity_definition()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.HasDefaultSchema("myFakeSchema");
@@ -3658,7 +3772,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_schema_for_model_changed_and_explicit_history_table_schema_not_provided()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.HasDefaultSchema("myDefaultSchema");
@@ -3737,7 +3853,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_schema_for_model_changed_and_explicit_history_table_schema_provided()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.HasDefaultSchema("myDefaultSchema");
@@ -3818,7 +3936,9 @@ EXEC(N'CREATE TABLE [Customer] (
     public virtual async Task Create_temporal_table_with_default_schema_for_table_and_explicit_history_table_schema_provided()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(
@@ -3917,7 +4037,9 @@ EXEC(N'CREATE TABLE [Customer] (
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 Assert.Empty(model.Tables);
@@ -3959,7 +4081,9 @@ EXEC(N'CREATE TABLE [Customer] (
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 Assert.Empty(model.Tables);
@@ -4001,7 +4125,9 @@ EXEC(N'CREATE TABLE [Customer] (
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 Assert.Empty(model.Tables);
@@ -4313,7 +4439,9 @@ EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -4395,7 +4523,9 @@ EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -5152,7 +5282,9 @@ ALTER SCHEMA [newHistorySchema] TRANSFER [historySchema].[RenamedHistoryTable];"
                         e.Property<int>("Number");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5251,7 +5383,9 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
                         e.Property<int>("Number");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5350,7 +5484,9 @@ ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];",
                         e.Property<int>("Number");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5452,7 +5588,9 @@ ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];",
                         e.Property<int>("Number");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5554,7 +5692,9 @@ ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];",
                         e.Property<int>("Number");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5643,7 +5783,9 @@ ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];",
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -6834,7 +6976,9 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("Customer")
@@ -6952,7 +7096,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
     public virtual async Task Create_temporal_table_with_comments()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -7232,7 +7378,9 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -7314,7 +7462,9 @@ ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;",
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "Customer",
@@ -7374,7 +7524,9 @@ ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;",
     public virtual async Task History_table_schema_created_when_necessary()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(
@@ -7432,7 +7584,9 @@ ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;",
     public virtual async Task History_table_schema_not_created_if_we_know_it_already_exists1()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(
@@ -7522,7 +7676,9 @@ ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;",
     public virtual async Task History_table_schema_not_created_if_we_know_it_already_exists2()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(
@@ -7761,8 +7917,12 @@ ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;",
                     }
                 );
             },
-            builder => { },
-            builder => { },
+            builder =>
+            {
+            },
+            builder =>
+            {
+            },
             model =>
             {
                 Assert.Equal(1, model.Tables.Count);
@@ -8576,7 +8736,9 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
     public virtual async Task Create_table_with_json_column()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(
@@ -8702,7 +8864,9 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
     public virtual async Task Create_table_with_json_column_explicit_json_column_names()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
             {
                 builder.Entity(

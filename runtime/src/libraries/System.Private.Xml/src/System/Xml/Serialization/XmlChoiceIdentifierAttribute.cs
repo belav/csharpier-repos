@@ -26,7 +26,9 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlChoiceIdentifierAttribute() { }
+        public XmlChoiceIdentifierAttribute()
+        {
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

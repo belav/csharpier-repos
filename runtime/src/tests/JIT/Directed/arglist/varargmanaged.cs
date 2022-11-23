@@ -1564,7 +1564,9 @@ namespace NativeVarargTest
         private static FourDoubleStruct ReturnDoubleStructInlineCandidate(FourDoubleStruct a)
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static void Call() { }
+            static void Call()
+            {
+            }
 
             Call();
             Call();

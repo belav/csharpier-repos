@@ -16,7 +16,9 @@ namespace System.Linq.Expressions.Tests
 
     public class C : IEquatable<C>, I
     {
-        void I.M() { }
+        void I.M()
+        {
+        }
 
         public override bool Equals(object o)
         {
@@ -39,9 +41,13 @@ namespace System.Linq.Expressions.Tests
         public int Val;
         public string S;
 
-        public D() { }
+        public D()
+        {
+        }
 
-        public D(int val) : this(val, "") { }
+        public D(int val) : this(val, "")
+        {
+        }
 
         public D(int val, string s)
         {
@@ -210,7 +216,9 @@ namespace System.Linq.Expressions.Tests
         }
     }
 
-    public class BaseClass { }
+    public class BaseClass
+    {
+    }
 
     public class FC
     {
@@ -236,7 +244,9 @@ namespace System.Linq.Expressions.Tests
         public int this[int i]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -267,20 +277,26 @@ namespace System.Linq.Expressions.Tests
     {
         internal static readonly NoOpVisitor Instance = new NoOpVisitor();
 
-        private NoOpVisitor() { }
+        private NoOpVisitor()
+        {
+        }
     }
 
     public static class Unreadable<T>
     {
         public static T WriteOnly
         {
-            set { }
+            set
+            {
+            }
         }
     }
 
     public class GenericClass<T>
     {
-        public void Method() { }
+        public void Method()
+        {
+        }
 
         public static T Field;
 
@@ -293,9 +309,13 @@ namespace System.Linq.Expressions.Tests
         public event EventHandler Event;
 #pragma warning restore 0067
 
-        public void GenericMethod<T>() { }
+        public void GenericMethod<T>()
+        {
+        }
 
-        public static void StaticMethod() { }
+        public static void StaticMethod()
+        {
+        }
 
         public static readonly NonGenericClass NonGenericField = new NonGenericClass();
 

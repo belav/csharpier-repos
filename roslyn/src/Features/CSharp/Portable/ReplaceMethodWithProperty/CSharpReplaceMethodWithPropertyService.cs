@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpReplaceMethodWithPropertyService() { }
+        public CSharpReplaceMethodWithPropertyService()
+        {
+        }
 
         public void RemoveSetMethod(SyntaxEditor editor, SyntaxNode setMethodDeclaration) =>
             editor.RemoveNode(setMethodDeclaration);

@@ -734,10 +734,14 @@ namespace System.Tests
         }
 
         [JsonSerializable(typeof(TestModel))]
-        internal partial class TestModelJsonContext : JsonSerializerContext { }
+        internal partial class TestModelJsonContext : JsonSerializerContext
+        {
+        }
 
         [JsonSerializable(typeof(MismatchedTestModel))]
-        internal partial class MismatchedTestModelJsonContext : JsonSerializerContext { }
+        internal partial class MismatchedTestModelJsonContext : JsonSerializerContext
+        {
+        }
 
         private class OverFlowStream : MemoryStream
         {
@@ -760,7 +764,9 @@ namespace System.Tests
 
         private class NonSeekableStream : MemoryStream
         {
-            public NonSeekableStream(byte[] buffer) : base(buffer) { }
+            public NonSeekableStream(byte[] buffer) : base(buffer)
+            {
+            }
 
             public override bool CanSeek => false;
         }

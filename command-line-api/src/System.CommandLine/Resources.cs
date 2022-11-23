@@ -12,7 +12,9 @@ namespace System.CommandLine
     {
         public static Resources Instance { get; } = new Resources();
 
-        protected Resources() { }
+        protected Resources()
+        {
+        }
 
         public virtual string ExpectsOneArgument(SymbolResult symbolResult) =>
             symbolResult is CommandResult

@@ -241,7 +241,9 @@ namespace MonoTests.System.Drawing.Imaging
                 {
                     File.Delete(sOutFile);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

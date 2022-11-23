@@ -55,7 +55,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         containsConversion,
                         containsGlobalKeyword
                     )
-                ) { }
+                )
+            {
+            }
 
             private ContextInfo(
                 int predefinedTypes,
@@ -215,7 +217,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     return new ContextInfo(predefinedTypes, predefinedOperators, containingNodes);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 return null;
             }

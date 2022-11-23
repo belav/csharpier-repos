@@ -30,6 +30,8 @@ public class MoreExplanatoryExceptionTests
 
     class EntityDestination
     {
-        public EntityDestination(int notSupported = 0) { }
+        public EntityDestination(int notSupported = 0)
+        {
+        }
     }
 }

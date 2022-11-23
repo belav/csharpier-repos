@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConsecutiveBracePlacementCodeFixProvider() { }
+        public ConsecutiveBracePlacementCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.ConsecutiveBracePlacementDiagnosticId);

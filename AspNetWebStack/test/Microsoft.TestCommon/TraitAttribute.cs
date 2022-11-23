@@ -11,6 +11,8 @@ namespace Microsoft.TestCommon
     [TraitDiscoverer("Xunit.Sdk.TraitDiscoverer", "xunit.core")]
     public class TraitAttribute : Attribute, ITraitAttribute
     {
-        public TraitAttribute(string name, string value) { }
+        public TraitAttribute(string name, string value)
+        {
+        }
     }
 }

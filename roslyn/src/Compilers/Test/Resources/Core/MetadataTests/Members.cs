@@ -6,9 +6,13 @@
 
 public class C
 {
-    public void MC1() { }
+    public void MC1()
+    {
+    }
 
-    public void MC2() { }
+    public void MC2()
+    {
+    }
 
     event System.Action EC1;
     event System.Action EC2;
@@ -17,14 +21,18 @@ public class C
 
 public class D
 {
-    public void MD1() { }
+    public void MD1()
+    {
+    }
 
     public int FD1;
 
     public int PE1
     {
         get { return 1; }
-        set { }
+        set
+        {
+        }
     }
 
     event System.Action ED1;
@@ -40,11 +48,15 @@ public class E
     public int PE1
     {
         get { return 1; }
-        set { }
+        set
+        {
+        }
     }
     public int PE2
     {
         get { return 1; }
-        set { }
+        set
+        {
+        }
     }
 }

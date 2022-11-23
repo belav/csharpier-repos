@@ -12,7 +12,9 @@ namespace System.Runtime.Intrinsics.Arm
     [CLSCompliant(false)]
     public abstract class Sha256 : ArmBase
     {
-        internal Sha256() { }
+        internal Sha256()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -22,7 +24,9 @@ namespace System.Runtime.Intrinsics.Arm
 
         public new abstract class Arm64 : ArmBase.Arm64
         {
-            internal Arm64() { }
+            internal Arm64()
+            {
+            }
 
             public static new bool IsSupported
             {

@@ -27,7 +27,9 @@ namespace System.Configuration
         internal bool InternalAddToEnd;
         internal string InternalElementTagName = string.Empty;
 
-        protected ConfigurationElementCollection() { }
+        protected ConfigurationElementCollection()
+        {
+        }
 
         protected ConfigurationElementCollection(IComparer comparer)
         {

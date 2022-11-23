@@ -4,7 +4,9 @@ namespace AutoMapper.UnitTests
     {
         public class When_mapping_dto_with_a_missing_match : NonValidatingSpecBase
         {
-            public class ModelObject { }
+            public class ModelObject
+            {
+            }
 
             public class ModelDto
             {
@@ -30,9 +32,13 @@ namespace AutoMapper.UnitTests
         {
             private ModelDto _result;
 
-            public class ModelDto { }
+            public class ModelDto
+            {
+            }
 
-            public class ModelObject { }
+            public class ModelObject
+            {
+            }
 
             protected override MapperConfiguration CreateConfiguration() =>
                 new(cfg =>
@@ -63,7 +69,9 @@ namespace AutoMapper.UnitTests
             {
                 public string SomeValue { get; set; }
 
-                private ModelDto() { }
+                private ModelDto()
+                {
+                }
             }
 
             protected override MapperConfiguration CreateConfiguration() =>

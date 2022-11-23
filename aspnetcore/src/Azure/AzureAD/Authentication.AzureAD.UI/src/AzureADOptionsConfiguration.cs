@@ -34,5 +34,7 @@ internal sealed class AzureADOptionsConfiguration : IConfigureNamedOptions<Azure
         }
     }
 
-    public void Configure(AzureADOptions options) { }
+    public void Configure(AzureADOptions options)
+    {
+    }
 }

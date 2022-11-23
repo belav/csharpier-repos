@@ -40,5 +40,7 @@ public class HubControllerOfTTest
         }
     }
 
-    public class MyHub : Hub { }
+    public class MyHub : Hub
+    {
+    }
 }

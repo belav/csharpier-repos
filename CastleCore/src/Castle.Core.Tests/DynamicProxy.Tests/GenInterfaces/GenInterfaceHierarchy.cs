@@ -32,7 +32,9 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
             return copy;
         }
 
-        public void Add() { }
+        public void Add()
+        {
+        }
 
         public void Add(T item)
         {

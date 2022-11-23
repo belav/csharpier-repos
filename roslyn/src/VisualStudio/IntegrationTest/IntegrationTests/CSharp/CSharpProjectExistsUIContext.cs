@@ -20,7 +20,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpProjectExistsUIContext : AbstractIntegrationTest
     {
         public CSharpProjectExistsUIContext(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

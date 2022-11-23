@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SyntaxNode
         > s_simplifyName = SimplifyName;
 
-        public CSharpNameReducer() : base(s_pool) { }
+        public CSharpNameReducer() : base(s_pool)
+        {
+        }
 
         protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 

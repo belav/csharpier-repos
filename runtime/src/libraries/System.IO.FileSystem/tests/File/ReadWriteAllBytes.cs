@@ -137,7 +137,9 @@ namespace System.IO.Tests
                     text = File.ReadAllText(path);
                     Assert.Equal(text, Encoding.UTF8.GetString(bytes));
                 }
-                catch when (i < NumTries) { }
+                catch when (i < NumTries)
+                {
+                }
             }
         }
 

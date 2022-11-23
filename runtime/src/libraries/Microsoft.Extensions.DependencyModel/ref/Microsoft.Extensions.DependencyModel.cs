@@ -18,16 +18,24 @@ namespace Microsoft.DotNet.PlatformAbstractions
             get { throw null; }
         }
 
-        public void Add(int i) { }
+        public void Add(int i)
+        {
+        }
 
-        public void Add(object? o) { }
+        public void Add(object? o)
+        {
+        }
 
-        public void Add(string? s) { }
+        public void Add(string? s)
+        {
+        }
 
         public void Add<TValue>(
             TValue? value,
             System.Collections.Generic.IEqualityComparer<TValue> comparer
-        ) { }
+        )
+        {
+        }
 
         public static Microsoft.DotNet.PlatformAbstractions.HashCodeCombiner Start()
         {
@@ -56,7 +64,9 @@ namespace Microsoft.Extensions.DependencyModel
                 default(string),
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
-            ) { }
+            )
+        {
+        }
 
         public CompilationLibrary(
             string type,
@@ -76,7 +86,9 @@ namespace Microsoft.Extensions.DependencyModel
                 default(string),
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
-            ) { }
+            )
+        {
+        }
 
         public System.Collections.Generic.IReadOnlyList<string> Assemblies
         {
@@ -111,7 +123,9 @@ namespace Microsoft.Extensions.DependencyModel
             string? debugType,
             bool? emitEntryPoint,
             bool? generateXmlDocumentation
-        ) { }
+        )
+        {
+        }
 
         public bool? AllowUnsafe
         {
@@ -213,7 +227,9 @@ namespace Microsoft.Extensions.DependencyModel
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.CompilationLibrary> compileLibraries,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeLibrary> runtimeLibraries,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFallbacks> runtimeGraph
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.DependencyModel.CompilationOptions CompilationOptions
         {
@@ -365,11 +381,17 @@ namespace Microsoft.Extensions.DependencyModel
         : Microsoft.Extensions.DependencyModel.IDependencyContextReader,
             System.IDisposable
     {
-        public DependencyContextJsonReader() { }
+        public DependencyContextJsonReader()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public Microsoft.Extensions.DependencyModel.DependencyContext Read(System.IO.Stream stream)
         {
@@ -379,7 +401,9 @@ namespace Microsoft.Extensions.DependencyModel
 
     public partial class DependencyContextLoader
     {
-        public DependencyContextLoader() { }
+        public DependencyContextLoader()
+        {
+        }
 
         public static Microsoft.Extensions.DependencyModel.DependencyContextLoader Default
         {
@@ -399,12 +423,16 @@ namespace Microsoft.Extensions.DependencyModel
 
     public partial class DependencyContextWriter
     {
-        public DependencyContextWriter() { }
+        public DependencyContextWriter()
+        {
+        }
 
         public void Write(
             Microsoft.Extensions.DependencyModel.DependencyContext context,
             System.IO.Stream stream
-        ) { }
+        )
+        {
+        }
     }
 
     public partial interface IDependencyContextReader : System.IDisposable
@@ -421,7 +449,9 @@ namespace Microsoft.Extensions.DependencyModel
             string? hash,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency> dependencies,
             bool serviceable
-        ) { }
+        )
+        {
+        }
 
         public Library(
             string type,
@@ -432,7 +462,9 @@ namespace Microsoft.Extensions.DependencyModel
             bool serviceable,
             string? path,
             string? hashPath
-        ) { }
+        )
+        {
+        }
 
         public Library(
             string type,
@@ -444,7 +476,9 @@ namespace Microsoft.Extensions.DependencyModel
             string? path,
             string? hashPath,
             string? runtimeStoreManifestName = null
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IReadOnlyList<Microsoft.Extensions.DependencyModel.Dependency> Dependencies
         {
@@ -486,23 +520,31 @@ namespace Microsoft.Extensions.DependencyModel
 
     public partial class ResourceAssembly
     {
-        public ResourceAssembly(string path, string locale) { }
+        public ResourceAssembly(string path, string locale)
+        {
+        }
 
         public string Locale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class RuntimeAssembly
     {
-        public RuntimeAssembly(string assemblyName, string path) { }
+        public RuntimeAssembly(string assemblyName, string path)
+        {
+        }
 
         public System.Reflection.AssemblyName Name
         {
@@ -524,14 +566,20 @@ namespace Microsoft.Extensions.DependencyModel
         public RuntimeAssetGroup(
             string? runtime,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> runtimeFiles
-        ) { }
+        )
+        {
+        }
 
         public RuntimeAssetGroup(
             string? runtime,
             System.Collections.Generic.IEnumerable<string> assetPaths
-        ) { }
+        )
+        {
+        }
 
-        public RuntimeAssetGroup(string? runtime, params string[] assetPaths) { }
+        public RuntimeAssetGroup(string? runtime, params string[] assetPaths)
+        {
+        }
 
         public System.Collections.Generic.IReadOnlyList<string> AssetPaths
         {
@@ -552,25 +600,35 @@ namespace Microsoft.Extensions.DependencyModel
         public RuntimeFallbacks(
             string runtime,
             System.Collections.Generic.IEnumerable<string?> fallbacks
-        ) { }
+        )
+        {
+        }
 
-        public RuntimeFallbacks(string runtime, params string?[] fallbacks) { }
+        public RuntimeFallbacks(string runtime, params string?[] fallbacks)
+        {
+        }
 
         public System.Collections.Generic.IReadOnlyList<string?> Fallbacks
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Runtime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class RuntimeFile
     {
-        public RuntimeFile(string path, string? assemblyVersion, string? fileVersion) { }
+        public RuntimeFile(string path, string? assemblyVersion, string? fileVersion)
+        {
+        }
 
         public string? AssemblyVersion
         {
@@ -606,7 +664,9 @@ namespace Microsoft.Extensions.DependencyModel
                 default(string),
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
-            ) { }
+            )
+        {
+        }
 
         public RuntimeLibrary(
             string type,
@@ -628,7 +688,9 @@ namespace Microsoft.Extensions.DependencyModel
                 default(string),
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
-            ) { }
+            )
+        {
+        }
 
         public RuntimeLibrary(
             string type,
@@ -651,7 +713,9 @@ namespace Microsoft.Extensions.DependencyModel
                 default(string),
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
-            ) { }
+            )
+        {
+        }
 
         public System.Collections.Generic.IReadOnlyList<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> NativeLibraryGroups
         {
@@ -674,7 +738,9 @@ namespace Microsoft.Extensions.DependencyModel
             string? runtime,
             string? runtimeSignature,
             bool isPortable
-        ) { }
+        )
+        {
+        }
 
         public string Framework
         {
@@ -700,9 +766,13 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
     public partial class AppBaseCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
-        public AppBaseCompilationAssemblyResolver() { }
+        public AppBaseCompilationAssemblyResolver()
+        {
+        }
 
-        public AppBaseCompilationAssemblyResolver(string basePath) { }
+        public AppBaseCompilationAssemblyResolver(string basePath)
+        {
+        }
 
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
@@ -718,7 +788,9 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
     {
         public CompositeCompilationAssemblyResolver(
             Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver[] resolvers
-        ) { }
+        )
+        {
+        }
 
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
@@ -733,7 +805,9 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
     {
         public static readonly string DotNetReferenceAssembliesPathEnv;
 
-        public DotNetReferenceAssembliesPathResolver() { }
+        public DotNetReferenceAssembliesPathResolver()
+        {
+        }
 
         public static string? Resolve()
         {
@@ -752,9 +826,13 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
     public partial class PackageCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
-        public PackageCompilationAssemblyResolver() { }
+        public PackageCompilationAssemblyResolver()
+        {
+        }
 
-        public PackageCompilationAssemblyResolver(string nugetPackageDirectory) { }
+        public PackageCompilationAssemblyResolver(string nugetPackageDirectory)
+        {
+        }
 
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
@@ -768,12 +846,16 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
     public partial class ReferenceAssemblyPathResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
-        public ReferenceAssemblyPathResolver() { }
+        public ReferenceAssemblyPathResolver()
+        {
+        }
 
         public ReferenceAssemblyPathResolver(
             string? defaultReferenceAssembliesPath,
             string[] fallbackSearchPaths
-        ) { }
+        )
+        {
+        }
 
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,

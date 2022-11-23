@@ -34,7 +34,9 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
         const double webSocketMessageFrequency = 45000;
         const double fastTimeoutFrequency = 100;
 
-        public BrowserTimerThrottlingTest(ITestOutputHelper output) : base(output) { }
+        public BrowserTimerThrottlingTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [ConditionalFact(nameof(PlatformDetection.IsBrowser))]
         [OuterLoop] // involves long delay
@@ -82,7 +84,9 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
                 {
                     await Task.Delay(10 * 60 * 1000, cts.Token);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
                 timer.Close();
             }
             Assert.True(
@@ -156,7 +160,9 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
                     {
                         await Task.Delay(10 * 60 * 1000, cts.Token);
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                     timer.Close();
                 }
                 await cws.CloseAsync(
@@ -197,7 +203,9 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
                 Console.WriteLine("SendAndReceive");
 #endif
             }
-            catch (OperationCanceledException) { }
+            catch (OperationCanceledException)
+            {
+            }
 #if DEBUG
             catch (Exception ex)
             {

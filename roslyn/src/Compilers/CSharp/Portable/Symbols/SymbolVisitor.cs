@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        public virtual void DefaultVisit(Symbol symbol) { }
+        public virtual void DefaultVisit(Symbol symbol)
+        {
+        }
 
         public virtual void VisitAlias(AliasSymbol symbol)
         {

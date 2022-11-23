@@ -63,7 +63,9 @@ namespace System.Xml.Xsl.Qil
                     | Options.LineInfo
                     | Options.NodeIdentity
                     | Options.NodeLocation
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Construct a QilXmlWriter.

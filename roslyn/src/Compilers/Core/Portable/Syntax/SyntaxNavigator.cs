@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis
 
         public static readonly SyntaxNavigator Instance = new SyntaxNavigator();
 
-        private SyntaxNavigator() { }
+        private SyntaxNavigator()
+        {
+        }
 
         [Flags]
         private enum SyntaxKinds

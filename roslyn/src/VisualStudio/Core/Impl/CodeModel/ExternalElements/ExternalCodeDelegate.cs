@@ -33,7 +33,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
         }
 
         private ExternalCodeDelegate(CodeModelState state, ProjectId projectId, ITypeSymbol symbol)
-            : base(state, projectId, symbol) { }
+            : base(state, projectId, symbol)
+        {
+        }
 
         public override EnvDTE.vsCMElement Kind
         {

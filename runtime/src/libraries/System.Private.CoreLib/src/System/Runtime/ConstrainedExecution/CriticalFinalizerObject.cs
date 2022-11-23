@@ -17,13 +17,17 @@ namespace System.Runtime.ConstrainedExecution
 {
     public abstract class CriticalFinalizerObject
     {
-        protected CriticalFinalizerObject() { }
+        protected CriticalFinalizerObject()
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Performance",
             "CA1821:RemoveEmptyFinalizers",
             Justification = "Base finalizer method on CriticalFinalizerObject"
         )]
-        ~CriticalFinalizerObject() { }
+        ~CriticalFinalizerObject()
+        {
+        }
     }
 }

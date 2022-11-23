@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal abstract class WithExternAliasesBinder : Binder
     {
-        internal WithExternAliasesBinder(Binder next) : base(next) { }
+        internal WithExternAliasesBinder(Binder next) : base(next)
+        {
+        }
 
         internal abstract override ImmutableArray<AliasAndExternAliasDirective> ExternAliases { get; }
 

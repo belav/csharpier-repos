@@ -54,7 +54,9 @@ namespace System.Globalization.Tests
 
         private class CultureInfoSubclassOverridesGetFormat : CultureInfo
         {
-            public CultureInfoSubclassOverridesGetFormat(string name) : base(name) { }
+            public CultureInfoSubclassOverridesGetFormat(string name) : base(name)
+            {
+            }
 
             public static NumberFormatInfo CustomFormat { get; } =
                 CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
@@ -64,7 +66,9 @@ namespace System.Globalization.Tests
 
         private class CultureInfoSubclassOverridesNumberFormat : CultureInfo
         {
-            public CultureInfoSubclassOverridesNumberFormat(string name) : base(name) { }
+            public CultureInfoSubclassOverridesNumberFormat(string name) : base(name)
+            {
+            }
 
             public static NumberFormatInfo CustomFormat { get; } =
                 CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
@@ -72,7 +76,9 @@ namespace System.Globalization.Tests
             public override NumberFormatInfo NumberFormat
             {
                 get { return CustomFormat; }
-                set { }
+                set
+                {
+                }
             }
         }
     }

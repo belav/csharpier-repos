@@ -60,7 +60,9 @@ namespace System.Net.Http
         /// <summary>
         /// Initializes a new instance of the HttpRequestOptions class.
         /// </summary>
-        public HttpRequestOptions() { }
+        public HttpRequestOptions()
+        {
+        }
 
         /// <summary>
         /// Gets the value of a given HTTP request option.

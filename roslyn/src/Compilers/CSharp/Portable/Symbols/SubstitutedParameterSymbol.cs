@@ -18,13 +18,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol containingSymbol,
             TypeMap map,
             ParameterSymbol originalParameter
-        ) : this((Symbol)containingSymbol, map, originalParameter) { }
+        ) : this((Symbol)containingSymbol, map, originalParameter)
+        {
+        }
 
         internal SubstitutedParameterSymbol(
             PropertySymbol containingSymbol,
             TypeMap map,
             ParameterSymbol originalParameter
-        ) : this((Symbol)containingSymbol, map, originalParameter) { }
+        ) : this((Symbol)containingSymbol, map, originalParameter)
+        {
+        }
 
         private SubstitutedParameterSymbol(
             Symbol containingSymbol,

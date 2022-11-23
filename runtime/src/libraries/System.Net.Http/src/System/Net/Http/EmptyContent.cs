@@ -20,7 +20,9 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) =>
             Task.CompletedTask;

@@ -956,17 +956,29 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             }
         }
 
-        interface ICustomService { }
+        interface ICustomService
+        {
+        }
 
-        class CustomService1 : ICustomService { }
+        class CustomService1 : ICustomService
+        {
+        }
 
-        class CustomService2 : ICustomService { }
+        class CustomService2 : ICustomService
+        {
+        }
 
-        class CustomService3 : ICustomService { }
+        class CustomService3 : ICustomService
+        {
+        }
 
-        class CustomService4 : ICustomService { }
+        class CustomService4 : ICustomService
+        {
+        }
 
-        class CustomService5 : ICustomService { }
+        class CustomService5 : ICustomService
+        {
+        }
 
         [Theory]
         [InlineData(typeof(TypeWithMultipleParameterizedConstructors))]
@@ -1477,82 +1489,118 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private class Class1
         {
-            public Class1(Class2 c2) { }
+            public Class1(Class2 c2)
+            {
+            }
         }
 
         private class Class2
         {
-            public Class2(Class3 c3) { }
+            public Class2(Class3 c3)
+            {
+            }
         }
 
-        private class Class3 { }
+        private class Class3
+        {
+        }
 
         private class Class4
         {
-            public Class4(Class3 c3) { }
+            public Class4(Class3 c3)
+            {
+            }
         }
 
         private class Class5
         {
-            public Class5(Class2 c2) { }
+            public Class5(Class2 c2)
+            {
+            }
         }
 
         // Open generic
         private class ClassA
         {
-            public ClassA(ClassB cb) { }
+            public ClassA(ClassB cb)
+            {
+            }
         }
 
         private class ClassB
         {
-            public ClassB(ClassC<object> cc) { }
+            public ClassB(ClassC<object> cc)
+            {
+            }
         }
 
-        private class ClassC<T> { }
+        private class ClassC<T>
+        {
+        }
 
         private class ClassD
         {
-            public ClassD(ClassC<string> cd) { }
+            public ClassD(ClassC<string> cd)
+            {
+            }
         }
 
         private class ClassE
         {
-            public ClassE(ClassB cb) { }
+            public ClassE(ClassB cb)
+            {
+            }
         }
 
         // Open generic with trimming annotations
-        private interface IServiceWithoutTrimmingAnnotations<T> { }
+        private interface IServiceWithoutTrimmingAnnotations<T>
+        {
+        }
 
         private class ServiceWithTrimmingAnnotations<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
-        > : IServiceWithoutTrimmingAnnotations<T> { }
+        > : IServiceWithoutTrimmingAnnotations<T>
+        {
+        }
 
         private interface IServiceWithPublicConstructors<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
-        > { }
+        >
+        {
+        }
 
         private class ServiceWithPublicProperties<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
-        > : IServiceWithPublicConstructors<T> { }
+        > : IServiceWithPublicConstructors<T>
+        {
+        }
 
         private class ServiceWithPublicConstructors<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
-        > : IServiceWithPublicConstructors<T> { }
+        > : IServiceWithPublicConstructors<T>
+        {
+        }
 
         private interface IServiceWithTwoGenerics<
             T1,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T2
-        > { }
+        >
+        {
+        }
 
         private class ServiceWithTwoGenericsInvalid<
             T1,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T2
-        > : IServiceWithTwoGenerics<T1, T2> { }
+        > : IServiceWithTwoGenerics<T1, T2>
+        {
+        }
 
         private class ServiceWithTwoGenericsValid<
             T1,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T2
-        > : IServiceWithTwoGenerics<T1, T2> { }
+        > : IServiceWithTwoGenerics<T1, T2>
+        {
+        }
 
         private interface IServiceWithMoreMemberTypes<
             [DynamicallyAccessedMembers(
@@ -1560,10 +1608,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     | DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 T
-        > { }
+        >
+        {
+        }
 
         private class ServiceWithLessMemberTypes<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
-        > : IServiceWithMoreMemberTypes<T> { }
+        > : IServiceWithMoreMemberTypes<T>
+        {
+        }
     }
 }

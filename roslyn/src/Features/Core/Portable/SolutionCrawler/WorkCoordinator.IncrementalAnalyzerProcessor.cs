@@ -631,7 +631,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 {
                     public static readonly IDisposable Instance = new NullDisposable();
 
-                    public void Dispose() { }
+                    public void Dispose()
+                    {
+                    }
                 }
 
                 private class AnalyzersGetter

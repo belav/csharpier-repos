@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 EmptyStructTypeCache.CreateNeverEmpty(),
                 trackUnassignments: true,
                 initiallyAssignedVariables: initiallyAssignedVariables
-            ) { }
+            )
+        {
+        }
 
         // Returns deterministically ordered list of variables that ought to be hoisted.
         public static OrderedSet<Symbol> Analyze(

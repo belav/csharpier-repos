@@ -386,7 +386,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) =>
                 memberInfo.MemberType.ToString();
 
-            public void GetKnownCustomDataTypes(Collection<Type> knownTypes) { }
+            public void GetKnownCustomDataTypes(Collection<Type> knownTypes)
+            {
+            }
 
             public object GetObjectToSerialize(object obj, Type memberType) =>
                 throw new NotImplementedException();
@@ -474,7 +476,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) =>
                 memberInfo.MemberType.ToString();
 
-            public void GetKnownCustomDataTypes(Collection<Type> knownTypes) { }
+            public void GetKnownCustomDataTypes(Collection<Type> knownTypes)
+            {
+            }
 
             public Type GetReferencedTypeOnImport(string name, string ns, object customData) =>
                 null;
@@ -565,7 +569,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 Type dataContractType
             ) => null;
 
-            public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
+            public void GetKnownCustomDataTypes(Collection<Type> customDataTypes)
+            {
+            }
         }
 
         //This is the surrogate that substitutes CollectionWithoutParameterlessCtor<int> for CollectionA.
@@ -631,7 +637,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 Type dataContractType
             ) => null;
 
-            public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
+            public void GetKnownCustomDataTypes(Collection<Type> customDataTypes)
+            {
+            }
         }
         #endregion
 
@@ -707,7 +715,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             public Circle[] Circles
             {
                 get { return null; }
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -737,7 +747,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         [XmlRoot("XmlSerializerPersonElement")]
         public class XmlSerializerPerson
         {
-            public XmlSerializerPerson() { }
+            public XmlSerializerPerson()
+            {
+            }
 
             [XmlAttribute]
             public string Name;

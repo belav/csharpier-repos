@@ -7,4 +7,6 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 /// Marker interface for <see cref="IApplicationFeatureProvider"/>
 /// implementations.
 /// </summary>
-public interface IApplicationFeatureProvider { }
+public interface IApplicationFeatureProvider
+{
+}

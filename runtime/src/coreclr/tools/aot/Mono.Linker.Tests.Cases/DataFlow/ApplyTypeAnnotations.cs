@@ -33,14 +33,22 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class FromTypeOfTestType
         {
             [Kept]
-            public FromTypeOfTestType() { }
+            public FromTypeOfTestType()
+            {
+            }
 
-            public FromTypeOfTestType(int i) { }
+            public FromTypeOfTestType(int i)
+            {
+            }
 
             [Kept]
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
 
             [Kept]
             public bool _publicField;
@@ -72,14 +80,22 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class FromTypeGetTypeOverConstantTestType
         {
             [Kept]
-            public FromTypeGetTypeOverConstantTestType() { }
+            public FromTypeGetTypeOverConstantTestType()
+            {
+            }
 
-            public FromTypeGetTypeOverConstantTestType(int i) { }
+            public FromTypeGetTypeOverConstantTestType(int i)
+            {
+            }
 
             [Kept]
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
 
             [Kept]
             public bool _publicField;
@@ -109,14 +125,22 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class FromStringConstantWithAnnotationTestType
         {
             [Kept]
-            public FromStringConstantWithAnnotationTestType() { }
+            public FromStringConstantWithAnnotationTestType()
+            {
+            }
 
-            public FromStringConstantWithAnnotationTestType(int i) { }
+            public FromStringConstantWithAnnotationTestType(int i)
+            {
+            }
 
             [Kept]
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
 
             [Kept]
             public bool _publicField;
@@ -144,7 +168,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     | DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         [Kept]
         private static void RequireCombinationOnString(
@@ -156,10 +182,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     | DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 string typeName
-        ) { }
+        )
+        {
+        }
 
         [Kept]
-        class FromStringConstantWithGenericInner { }
+        class FromStringConstantWithGenericInner
+        {
+        }
 
         [Kept]
         [KeptMember(".ctor()")]
@@ -176,7 +206,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class FromStringConstantWithGenericInnerInner
         {
             [Kept]
-            public void Method() { }
+            public void Method()
+            {
+            }
 
             int unusedField;
         }
@@ -186,26 +218,36 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 T
-        > { }
+        >
+        {
+        }
 
         [Kept]
         class FromStringConstantWithGenericInnerTwo
         {
-            void UnusedMethod() { }
+            void UnusedMethod()
+            {
+            }
         }
 
         [Kept]
-        class FromStringConstantWitGenericInnerMultiDimArray { }
+        class FromStringConstantWitGenericInnerMultiDimArray
+        {
+        }
 
         [Kept]
         class FromStringConstantWithMultiDimArray
         {
-            public void UnusedMethod() { }
+            public void UnusedMethod()
+            {
+            }
         }
 
         [Kept]
         [KeptMember(".ctor()")]
-        class FromStringConstantWithGenericTwoParameters<T, S> { }
+        class FromStringConstantWithGenericTwoParameters<T, S>
+        {
+        }
 
         [Kept]
         static void TestFromStringConstantWithGeneric()
@@ -243,7 +285,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             );
         }
 
-        class InvalidAssemblyNameType { }
+        class InvalidAssemblyNameType
+        {
+        }
 
         [Kept]
         static void TestFromStringConstantWithGenericAndAssemblyQualifiedInvalidAssembly()
@@ -253,7 +297,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             );
         }
 
-        class NonExistingAssemblyType { }
+        class NonExistingAssemblyType
+        {
+        }
 
         [Kept]
         static void TestFromStringConstantWithGenericAndAssemblyQualifiedNonExistingAssembly()

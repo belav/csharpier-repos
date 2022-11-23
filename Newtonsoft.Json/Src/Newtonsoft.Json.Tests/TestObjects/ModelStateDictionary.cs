@@ -35,7 +35,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
             StringComparer.OrdinalIgnoreCase
         );
 
-        public ModelStateDictionary() { }
+        public ModelStateDictionary()
+        {
+        }
 
         public ModelStateDictionary(ModelStateDictionary<T> dictionary)
         {

@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Configuration.Ini
         /// </summary>
         /// <param name="source">The <see cref="IniStreamConfigurationSource"/>.</param>
         public IniStreamConfigurationProvider(IniStreamConfigurationSource source) : base(source)
-        { }
+        {
+        }
 
         /// <summary>
         /// Read a stream of INI values into a key/value dictionary.

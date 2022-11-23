@@ -6,6 +6,8 @@ namespace NS
 {
     public class Util
     {
-        public class A { }
+        public class A
+        {
+        }
     }
 }

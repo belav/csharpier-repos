@@ -9,7 +9,9 @@ namespace System.Composition.Convention
     /// </summary>
     public abstract class ParameterImportConventionBuilder
     {
-        private ParameterImportConventionBuilder() { }
+        private ParameterImportConventionBuilder()
+        {
+        }
 
         /// <summary>
         /// Import with contract <typeparamref name="T"/>.

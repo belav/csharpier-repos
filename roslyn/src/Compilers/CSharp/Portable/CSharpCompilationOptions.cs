@@ -109,7 +109,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 publicSign: publicSign,
                 topLevelBinderFlags: BinderFlags.None,
                 nullableContextOptions: nullableContextOptions
-            ) { }
+            )
+        {
+        }
 
         // 15.9 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public CSharpCompilationOptions(
@@ -168,7 +170,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 publicSign,
                 metadataImportOptions,
                 nullableContextOptions: NullableContextOptions.Disable
-            ) { }
+            )
+        {
+        }
 
         // 15.6 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -226,7 +230,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 strongNameProvider,
                 publicSign,
                 MetadataImportOptions.Public
-            ) { }
+            )
+        {
+        }
 
         // Expects correct arguments.
         internal CSharpCompilationOptions(
@@ -334,7 +340,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 publicSign: other.PublicSign,
                 topLevelBinderFlags: other.TopLevelBinderFlags,
                 nullableContextOptions: other.NullableContextOptions
-            ) { }
+            )
+        {
+        }
 
         public override string Language => LanguageNames.CSharp;
 
@@ -1072,7 +1080,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 assemblyIdentityComparer: assemblyIdentityComparer,
                 strongNameProvider: strongNameProvider,
                 publicSign: false
-            ) { }
+            )
+        {
+        }
 
         // 1.0 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -1124,7 +1134,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 metadataReferenceResolver: metadataReferenceResolver,
                 assemblyIdentityComparer: assemblyIdentityComparer,
                 strongNameProvider: strongNameProvider
-            ) { }
+            )
+        {
+        }
 
         // Bad constructor -- DO NOT USE
         // Violates the rules for optional parameter overloads detailed at
@@ -1189,6 +1201,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 publicSign: false,
                 topLevelBinderFlags: BinderFlags.None,
                 nullableContextOptions: NullableContextOptions.Disable
-            ) { }
+            )
+        {
+        }
     }
 }

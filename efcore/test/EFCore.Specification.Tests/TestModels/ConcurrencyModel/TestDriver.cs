@@ -32,14 +32,18 @@ public class TestDriver : Driver
                 poles,
                 fastestLaps,
                 teamId
-            ) { }
+            )
+        {
+        }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
         public bool InitializedCalled { get; set; }
     }
 
-    public TestDriver() { }
+    public TestDriver()
+    {
+    }
 
     private TestDriver(
         ILazyLoader loader,

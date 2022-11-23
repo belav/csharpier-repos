@@ -1392,15 +1392,22 @@ namespace System.ComponentModel.Tests
 
         private class SubMemberDescriptor : MemberDescriptor
         {
-            public SubMemberDescriptor(string name) : base(name) { }
+            public SubMemberDescriptor(string name) : base(name)
+            {
+            }
 
             public SubMemberDescriptor(string name, Attribute[] attributes) : base(name, attributes)
-            { }
+            {
+            }
 
-            public SubMemberDescriptor(MemberDescriptor other) : base(other) { }
+            public SubMemberDescriptor(MemberDescriptor other) : base(other)
+            {
+            }
 
             public SubMemberDescriptor(MemberDescriptor other, Attribute[] attributes)
-                : base(other, attributes) { }
+                : base(other, attributes)
+            {
+            }
 
             public new Attribute[] AttributeArray
             {
@@ -1457,7 +1464,9 @@ namespace System.ComponentModel.Tests
 
         private class CustomFillAttributesMemberDescriptor : MemberDescriptor
         {
-            public CustomFillAttributesMemberDescriptor(string name) : base(name) { }
+            public CustomFillAttributesMemberDescriptor(string name) : base(name)
+            {
+            }
 
             public Attribute Attribute { get; } = new MockAttribute1();
 
@@ -1475,7 +1484,9 @@ namespace System.ComponentModel.Tests
 
         private class ThrowingFillAttributesMemberDescriptor : MemberDescriptor
         {
-            public ThrowingFillAttributesMemberDescriptor(string name) : base(name) { }
+            public ThrowingFillAttributesMemberDescriptor(string name) : base(name)
+            {
+            }
 
             public Attribute Attribute { get; } = new MockAttribute1();
 
@@ -1494,14 +1505,18 @@ namespace System.ComponentModel.Tests
 
         private class NullAttributesMemberDescriptor : MemberDescriptor
         {
-            public NullAttributesMemberDescriptor(string name) : base(name) { }
+            public NullAttributesMemberDescriptor(string name) : base(name)
+            {
+            }
 
             public override AttributeCollection Attributes => null;
         }
 
         private class InvalidAttributesMemberDescriptor : MemberDescriptor
         {
-            public InvalidAttributesMemberDescriptor(string name) : base(name) { }
+            public InvalidAttributesMemberDescriptor(string name) : base(name)
+            {
+            }
 
             public override AttributeCollection Attributes => new InvalidAttributeCollection();
         }
@@ -1529,9 +1544,13 @@ namespace System.ComponentModel.Tests
             public override string Name => _name;
         }
 
-        private sealed class MockAttribute1 : Attribute { }
+        private sealed class MockAttribute1 : Attribute
+        {
+        }
 
-        private sealed class MockAttribute2 : Attribute { }
+        private sealed class MockAttribute2 : Attribute
+        {
+        }
 
         private class CustomTypeIdAttribute : Attribute
         {

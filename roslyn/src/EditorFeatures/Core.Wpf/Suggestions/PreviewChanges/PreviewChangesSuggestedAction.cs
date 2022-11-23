@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     subjectBuffer,
                     provider,
                     codeAction
-                ) { }
+                )
+            {
+            }
 
             public static async Task<SuggestedAction> CreateAsync(
                 SuggestedActionWithNestedFlavors suggestedAction,

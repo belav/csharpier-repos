@@ -59,7 +59,9 @@ namespace Microsoft.CodeAnalysis.Editing
                     | (isExtern ? Modifiers.Extern : Modifiers.None)
                     | (isRequired ? Modifiers.Required : Modifiers.None)
                     | (isFile ? Modifiers.File : Modifiers.None)
-            ) { }
+            )
+        {
+        }
 
         public static DeclarationModifiers From(ISymbol symbol)
         {

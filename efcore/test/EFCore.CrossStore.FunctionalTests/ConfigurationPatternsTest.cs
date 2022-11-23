@@ -321,7 +321,9 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
         {
             private readonly IServiceProvider _serviceProvider;
 
-            public BlogContext() { }
+            public BlogContext()
+            {
+            }
 
             public BlogContext(IServiceProvider serviceProvider)
             {
@@ -346,7 +348,9 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
         {
             private readonly IServiceProvider _serviceProvider;
 
-            public ExternalProviderContext() { }
+            public ExternalProviderContext()
+            {
+            }
 
             public ExternalProviderContext(IServiceProvider serviceProvider)
             {

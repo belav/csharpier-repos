@@ -1838,7 +1838,9 @@ public class IncludeMembersWithInclude : AutoMapperSpecBase
         public Source InnerSource { get; set; }
     }
 
-    public class Source : SourceBase { }
+    public class Source : SourceBase
+    {
+    }
 
     public class SourceBase
     {
@@ -1883,7 +1885,9 @@ public class IncludeMembersWithIncludeDifferentOrder : AutoMapperSpecBase
         public Source InnerSource { get; set; }
     }
 
-    public class Source : SourceBase { }
+    public class Source : SourceBase
+    {
+    }
 
     public class SourceBase
     {
@@ -2334,7 +2338,9 @@ public class IncludeMembersConstructorMapping : AutoMapperSpecBase
         public long TheField;
     }
 
-    public record Destination(int Id, long TheField, long Level1Field) { }
+    public record Destination(int Id, long TheField, long Level1Field)
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
@@ -2387,9 +2393,13 @@ public class IncludeMembersMultipleConstructorMapping : AutoMapperSpecBase
     public record Destination(int Id, long TheField, long Level1Field)
     {
         public Destination(Level2 fieldLevel2, long level1Field)
-            : this(-1, fieldLevel2.TheField, level1Field) { }
+            : this(-1, fieldLevel2.TheField, level1Field)
+        {
+        }
 
-        public Destination(long theField) : this(-2, theField, -2) { }
+        public Destination(long theField) : this(-2, theField, -2)
+        {
+        }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>

@@ -14,7 +14,9 @@ public abstract class TypeMapConfiguration
     private readonly TypePair _types;
 
     protected TypeMapConfiguration(MemberList memberList, Type sourceType, Type destinationType)
-        : this(memberList, new TypePair(sourceType, destinationType)) { }
+        : this(memberList, new TypePair(sourceType, destinationType))
+    {
+    }
 
     protected TypeMapConfiguration(MemberList memberList, TypePair types)
     {
@@ -299,13 +301,18 @@ public abstract class MappingExpressionBase<TSource, TDestination, TMappingExpre
         IMappingExpressionBase<TSource, TDestination, TMappingExpression>
 {
     protected MappingExpressionBase(MemberList memberList)
-        : base(memberList, typeof(TSource), typeof(TDestination)) { }
+        : base(memberList, typeof(TSource), typeof(TDestination))
+    {
+    }
 
     protected MappingExpressionBase(MemberList memberList, Type sourceType, Type destinationType)
-        : base(memberList, sourceType, destinationType) { }
+        : base(memberList, sourceType, destinationType)
+    {
+    }
 
     protected MappingExpressionBase(MemberList memberList, TypePair types) : base(memberList, types)
-    { }
+    {
+    }
 
     public void As(Type typeOverride)
     {

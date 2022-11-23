@@ -10,7 +10,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class TPCInheritanceQueryTestBase<TFixture> : InheritanceQueryTestBase<TFixture>
     where TFixture : TPCInheritanceQueryFixture, new()
 {
-    protected TPCInheritanceQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected TPCInheritanceQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     // Keyless entities does not have TPC
     public override Task Can_query_all_animal_views(bool async) => Task.CompletedTask;

@@ -6,7 +6,9 @@
 
 using System;
 
-class C0 { }
+class C0
+{
+}
 
 struct S0
 {

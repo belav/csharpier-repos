@@ -420,7 +420,9 @@ namespace CoreXml.Test.XLinq
     {
         private int _group;
 
-        public UndoUnit() { }
+        public UndoUnit()
+        {
+        }
 
         public int Group
         {

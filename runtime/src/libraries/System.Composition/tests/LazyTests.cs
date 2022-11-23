@@ -12,10 +12,14 @@ namespace System.Composition.UnitTests
 {
     public class LazyTests : ContainerTests
     {
-        public interface IA { }
+        public interface IA
+        {
+        }
 
         [Export(typeof(IA))]
-        public class A : IA { }
+        public class A : IA
+        {
+        }
 
         [Export]
         public class BLazy
@@ -30,7 +34,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export, ExportMetadata("Name", "Fred")]
-        public class NamedFred { }
+        public class NamedFred
+        {
+        }
 
         public class Named
         {
@@ -62,10 +68,14 @@ namespace System.Composition.UnitTests
         }
 
         [Export("Special", typeof(IA))]
-        public class A1 : IA { }
+        public class A1 : IA
+        {
+        }
 
         [Export("Special", typeof(IA))]
-        public class A2 : IA { }
+        public class A2 : IA
+        {
+        }
 
         [Export]
         public class AConsumer

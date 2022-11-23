@@ -14,7 +14,9 @@ public class Derived : Base
     }
 }
 
-public class ClassA { }
+public class ClassA
+{
+}
 
 public class main
 {

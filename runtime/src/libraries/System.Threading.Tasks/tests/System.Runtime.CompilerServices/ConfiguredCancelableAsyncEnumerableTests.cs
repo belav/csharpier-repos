@@ -70,7 +70,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .GetAsyncEnumerator()
                 .MoveNextAsync()
                 .GetAwaiter()
-                .UnsafeOnCompleted(() => { });
+                .UnsafeOnCompleted(() => {
+                });
             Assert.Equal(
                 continueOnCapturedContext
                     ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
@@ -86,7 +87,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .GetAsyncEnumerator()
                 .MoveNextAsync()
                 .GetAwaiter()
-                .UnsafeOnCompleted(() => { });
+                .UnsafeOnCompleted(() => {
+                });
             Assert.Equal(
                 continueOnCapturedContext
                     ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
@@ -102,7 +104,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .GetAsyncEnumerator()
                 .MoveNextAsync()
                 .GetAwaiter()
-                .UnsafeOnCompleted(() => { });
+                .UnsafeOnCompleted(() => {
+                });
             Assert.Equal(
                 continueOnCapturedContext
                     ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
@@ -118,7 +121,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .GetAsyncEnumerator()
                 .MoveNextAsync()
                 .GetAwaiter()
-                .UnsafeOnCompleted(() => { });
+                .UnsafeOnCompleted(() => {
+                });
             Assert.Equal(
                 continueOnCapturedContext
                     ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
@@ -140,7 +144,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .GetAsyncEnumerator()
                 .DisposeAsync()
                 .GetAwaiter()
-                .UnsafeOnCompleted(() => { });
+                .UnsafeOnCompleted(() => {
+                });
             Assert.Equal(
                 continueOnCapturedContext
                     ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext

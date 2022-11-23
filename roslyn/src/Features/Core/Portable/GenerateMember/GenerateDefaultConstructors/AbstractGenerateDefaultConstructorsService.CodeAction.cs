@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
                 Document document,
                 State state,
                 IMethodSymbol constructor
-            ) : base(document, state, new[] { constructor }, GetDisplayText(state, constructor)) { }
+            ) : base(document, state, new[] { constructor }, GetDisplayText(state, constructor))
+            {
+            }
 
             private static string GetDisplayText(State state, IMethodSymbol constructor)
             {

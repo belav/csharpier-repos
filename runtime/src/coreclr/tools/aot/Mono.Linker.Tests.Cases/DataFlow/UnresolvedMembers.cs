@@ -42,14 +42,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 T
-        > { }
+        >
+        {
+        }
 
         [Kept]
         static void MethodWithUnresolvedGenericArgument<
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 T
-        >() { }
+        >()
+        {
+        }
 
         [Kept]
         [ExpectedWarning(
@@ -82,7 +86,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                     Type type
-            ) { }
+            )
+            {
+            }
 
             [Kept]
             [KeptBackingField]
@@ -109,7 +115,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         )]
         [KeptAttributeAttribute(typeof(AttributeWithRequirements))]
         [AttributeWithRequirements(typeof(Dependencies.UnresolvedType))]
-        static void UnresolvedAttributeArgument() { }
+        static void UnresolvedAttributeArgument()
+        {
+        }
 
         [Kept]
         [ExpectedWarning(
@@ -122,7 +130,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             typeof(EmptyType),
             PropertyWithRequirements = typeof(Dependencies.UnresolvedType)
         )]
-        static void UnresolvedAttributePropertyValue() { }
+        static void UnresolvedAttributePropertyValue()
+        {
+        }
 
         [Kept]
         [ExpectedWarning(
@@ -135,7 +145,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             typeof(EmptyType),
             FieldWithRequirements = typeof(Dependencies.UnresolvedType)
         )]
-        static void UnresolvedAttributeFieldValue() { }
+        static void UnresolvedAttributeFieldValue()
+        {
+        }
 
         [Kept]
         static Dependencies.UnresolvedType _unresolvedField;
@@ -163,13 +175,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        class EmptyType { }
+        class EmptyType
+        {
+        }
 
         [Kept]
         static void RequirePublicMethods(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 Type t
-        ) { }
+        )
+        {
+        }
     }
 }

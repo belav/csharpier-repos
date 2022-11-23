@@ -121,9 +121,13 @@ namespace System.Resources.Tests
                 return data.GetEnumerator();
             }
 
-            public void Close() { }
+            public void Close()
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         [Fact]

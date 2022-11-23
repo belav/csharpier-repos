@@ -75,13 +75,23 @@ public class AA
                     )
             )
             {
-                try { }
-                catch (Exception) { }
+                try
+                {
+                }
+                catch (Exception)
+                {
+                }
             }
         }
-        try { }
-        catch (InvalidOperationException) { }
-        do { } while (((bool)((new object[74u, 111u])[97, 72])));
+        try
+        {
+        }
+        catch (InvalidOperationException)
+        {
+        }
+        do
+        {
+        } while (((bool)((new object[74u, 111u])[97, 72])));
         return (new byte[100u, 17u, 75u, 30u][][,])[11, 65, 105, 83][Math.Sign(66)];
     }
 }

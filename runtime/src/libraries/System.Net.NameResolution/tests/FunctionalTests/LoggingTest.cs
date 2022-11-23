@@ -62,7 +62,9 @@ namespace System.Net.NameResolution.Tests
                             throw new SkipTestException("GetHostEntry should fail but it did not.");
                         }
                         catch (SocketException e)
-                            when (e.SocketErrorCode == SocketError.HostNotFound) { }
+                            when (e.SocketErrorCode == SocketError.HostNotFound)
+                        {
+                        }
                         catch (Exception e)
                         {
                             throw new SkipTestException(

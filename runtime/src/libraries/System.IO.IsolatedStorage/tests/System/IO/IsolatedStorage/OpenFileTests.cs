@@ -61,7 +61,9 @@ namespace System.IO.IsolatedStorage
         public void OpenFile_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
+            {
+            }
 
             Assert.Throws<ObjectDisposedException>(() => isf.OpenFile("foo", FileMode.Create));
             Assert.Throws<ObjectDisposedException>(
@@ -140,7 +142,9 @@ namespace System.IO.IsolatedStorage
                     Assert.True(isf.FileExists(file), "file exists");
                     using (
                         isf.OpenFile(file, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
-                    ) { }
+                    )
+                    {
+                    }
                 }
 
                 using (
@@ -190,13 +194,17 @@ namespace System.IO.IsolatedStorage
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
                 string file = "OpenFile_PassesFileMode";
-                using (isf.OpenFile(file, FileMode.CreateNew)) { }
+                using (isf.OpenFile(file, FileMode.CreateNew))
+                {
+                }
                 Assert.True(isf.FileExists(file), "file exists");
 
                 Assert.Throws<IsolatedStorageException>(
                     () => isf.OpenFile(file, FileMode.CreateNew)
                 );
-                using (isf.OpenFile(file, FileMode.Create)) { }
+                using (isf.OpenFile(file, FileMode.Create))
+                {
+                }
             }
         }
 
@@ -209,13 +217,17 @@ namespace System.IO.IsolatedStorage
             {
                 string file = "OpenFile_Existence";
                 string subdirectory = "OpenFile_Existence_Subdirectory";
-                using (isf.OpenFile(file, FileMode.CreateNew)) { }
+                using (isf.OpenFile(file, FileMode.CreateNew))
+                {
+                }
                 Assert.True(isf.FileExists(file), "file exists");
                 isf.CreateDirectory(subdirectory);
                 Assert.True(isf.DirectoryExists(subdirectory), "directory exists");
 
                 string nestedFile = Path.Combine(subdirectory, file);
-                using (isf.OpenFile(nestedFile, FileMode.CreateNew)) { }
+                using (isf.OpenFile(nestedFile, FileMode.CreateNew))
+                {
+                }
 
                 Assert.True(isf.FileExists(nestedFile), "nested file exists");
             }

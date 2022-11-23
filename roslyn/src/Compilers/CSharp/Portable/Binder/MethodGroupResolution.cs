@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 analyzedArguments: null,
                 methodGroup.ResultKind,
                 diagnostics
-            ) { }
+            )
+        {
+        }
 
         public MethodGroupResolution(
             Symbol otherSymbol,
@@ -49,7 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 analyzedArguments: null,
                 resultKind,
                 diagnostics
-            ) { }
+            )
+        {
+        }
 
         public MethodGroupResolution(
             MethodGroup methodGroup,

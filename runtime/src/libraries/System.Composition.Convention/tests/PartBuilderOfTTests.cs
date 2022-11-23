@@ -11,9 +11,13 @@ namespace System.Composition.Convention.Tests
 {
     public class PartBuilderOfTTests
     {
-        public interface IFirst { }
+        public interface IFirst
+        {
+        }
 
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         private class FooImpl
         {
@@ -24,13 +28,21 @@ namespace System.Composition.Convention.Tests
 
         private class FooImplWithConstructors
         {
-            public FooImplWithConstructors() { }
+            public FooImplWithConstructors()
+            {
+            }
 
-            public FooImplWithConstructors(int id) { }
+            public FooImplWithConstructors(int id)
+            {
+            }
 
-            public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+            public FooImplWithConstructors(IEnumerable<IFoo> ids)
+            {
+            }
 
-            public FooImplWithConstructors(int id, string name) { }
+            public FooImplWithConstructors(int id, string name)
+            {
+            }
         }
 
         [Export]
@@ -49,7 +61,9 @@ namespace System.Composition.Convention.Tests
                 return 1;
             }
 
-            public void OnImportsSatisfiedInvalidArgs(int arg1) { }
+            public void OnImportsSatisfiedInvalidArgs(int arg1)
+            {
+            }
 
             public void OnImportsSatisfied1()
             {
@@ -78,7 +92,9 @@ namespace System.Composition.Convention.Tests
                 return 1;
             }
 
-            public void OnImportsSatisfiedInvalidArgs(int arg1) { }
+            public void OnImportsSatisfiedInvalidArgs(int arg1)
+            {
+            }
 
             [OnImportsSatisfied]
             public void OnImportsSatisfied()
@@ -103,7 +119,9 @@ namespace System.Composition.Convention.Tests
                 return 1;
             }
 
-            public void OnImportsSatisfiedInvalidArgs(int arg1) { }
+            public void OnImportsSatisfiedInvalidArgs(int arg1)
+            {
+            }
 
             public void OnImportsSatisfied()
             {
@@ -112,7 +130,9 @@ namespace System.Composition.Convention.Tests
         }
 
         [Export]
-        public class OnImportsSatisfiedDerivedClass : OnImportsSatisfiedTestClass { }
+        public class OnImportsSatisfiedDerivedClass : OnImportsSatisfiedTestClass
+        {
+        }
 
         public class ExportValues
         {

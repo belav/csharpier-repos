@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GetTextDocumentWithContextHandler() { }
+        public GetTextDocumentWithContextHandler()
+        {
+        }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;

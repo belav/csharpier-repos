@@ -262,7 +262,9 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     > : ValueComparer<T>
     {
         public DefaultValueComparer(bool favorStructuralComparisons)
-            : base(favorStructuralComparisons) { }
+            : base(favorStructuralComparisons)
+        {
+        }
 
         public DefaultValueComparer(
             Expression<Func<T?, T?, bool>> equalsExpression,
@@ -272,7 +274,9 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
                 equalsExpression,
                 CreateDefaultHashCodeExpression(favorStructuralComparisons),
                 CreateDefaultSnapshotExpression(favorStructuralComparisons)
-            ) { }
+            )
+        {
+        }
 
         public override Expression ExtractEqualsBody(
             Expression leftExpression,
@@ -289,7 +293,9 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     internal sealed class DefaultDoubleValueComparer : DefaultValueComparer<double>
     {
         public DefaultDoubleValueComparer(bool favorStructuralComparisons)
-            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons) { }
+            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons)
+        {
+        }
 
         public override Expression ExtractEqualsBody(
             Expression leftExpression,
@@ -300,7 +306,9 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     internal sealed class DefaultFloatValueComparer : DefaultValueComparer<float>
     {
         public DefaultFloatValueComparer(bool favorStructuralComparisons)
-            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons) { }
+            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons)
+        {
+        }
 
         public override Expression ExtractEqualsBody(
             Expression leftExpression,
@@ -319,7 +327,9 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
         // In .NET, two DateTimeOffset instances are considered equal if they represent the same point in time but with different
         // time zone offsets. This comparer uses EqualsExact, which considers such DateTimeOffset as non-equal.
         public DefaultDateTimeOffsetValueComparer(bool favorStructuralComparisons)
-            : base((v1, v2) => v1.EqualsExact(v2), favorStructuralComparisons) { }
+            : base((v1, v2) => v1.EqualsExact(v2), favorStructuralComparisons)
+        {
+        }
 
         public override Expression ExtractEqualsBody(
             Expression leftExpression,

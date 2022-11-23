@@ -293,7 +293,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Serialization)]
         [JsonSerializable(typeof(JsonMessage))]
-        public partial class FastPathSerializationContext : JsonSerializerContext { }
+        public partial class FastPathSerializationContext : JsonSerializerContext
+        {
+        }
 
         public class ClassWithJsonMessage
         {
@@ -466,21 +468,26 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [JsonSerializable(typeof(JsonMessage))]
-        internal partial class NestedContext : JsonSerializerContext { }
+        internal partial class NestedContext : JsonSerializerContext
+        {
+        }
 
         [JsonSerializable(typeof(JsonMessage))]
         public partial class NestedPublicContext : JsonSerializerContext
         {
             [JsonSerializable(typeof(JsonMessage))]
-            protected internal partial class NestedProtectedInternalClass
-                : JsonSerializerContext { }
+            protected internal partial class NestedProtectedInternalClass : JsonSerializerContext
+            {
+            }
         }
 
         internal record Person(string FirstName, string LastName);
 
         [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
         [JsonSerializable(typeof(Person))]
-        internal partial class PersonJsonContext : JsonSerializerContext { }
+        internal partial class PersonJsonContext : JsonSerializerContext
+        {
+        }
 
         internal class GreetingCard
         {
@@ -495,11 +502,15 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [JsonSerializable(typeof(GreetingCard))]
-        internal partial class GreetingCardJsonContext : JsonSerializerContext { }
+        internal partial class GreetingCardJsonContext : JsonSerializerContext
+        {
+        }
 
         [JsonSourceGenerationOptions(IncludeFields = true)]
         [JsonSerializable(typeof(GreetingCardWithFields))]
-        internal partial class GreetingCardWithFieldsJsonContext : JsonSerializerContext { }
+        internal partial class GreetingCardWithFieldsJsonContext : JsonSerializerContext
+        {
+        }
 
         // Regression test for https://github.com/dotnet/runtime/issues/62079
         [Fact]
@@ -525,7 +536,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         [JsonSerializable(typeof(ParentClass))]
         internal partial class SingleClassWithCustomConverterFactoryPropertyContext
-            : JsonSerializerContext { }
+            : JsonSerializerContext
+        {
+        }
 
         // Regression test for https://github.com/dotnet/runtime/issues/61860
         [Fact]
@@ -575,17 +588,25 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         [JsonSerializable(typeof(List<TestEnum>))]
         internal partial class GenericParameterWithCustomConverterFactoryContext
-            : JsonSerializerContext { }
+            : JsonSerializerContext
+        {
+        }
 
         [JsonSerializable(typeof(ClassWithPocoListDictionaryAndNullable))]
         internal partial class ClassWithPocoListDictionaryAndNullablePropertyContext
-            : JsonSerializerContext { }
+            : JsonSerializerContext
+        {
+        }
 
         [JsonSerializable(typeof(ClassWithStringValues))]
-        internal partial class ClassWithStringValuesContext : JsonSerializerContext { }
+        internal partial class ClassWithStringValuesContext : JsonSerializerContext
+        {
+        }
 
         [JsonSerializable(typeof(ClassWithDictionaryProperty))]
-        internal partial class ClassWithDictionaryPropertyContext : JsonSerializerContext { }
+        internal partial class ClassWithDictionaryPropertyContext : JsonSerializerContext
+        {
+        }
 
         internal class ClassWithPocoListDictionaryAndNullable
         {

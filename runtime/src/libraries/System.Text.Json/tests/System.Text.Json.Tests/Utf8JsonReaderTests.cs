@@ -1005,7 +1005,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for incomplete JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
             {
                 var reader = new Utf8JsonReader(
@@ -1026,7 +1028,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for incomplete JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
             {
                 var reader = new Utf8JsonReader(
@@ -1069,7 +1073,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for incomplete JSON payload when reading."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
 
                 Assert.Equal(5, reader.BytesConsumed); // After exception, state is not restored.
             }
@@ -1090,7 +1096,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for incomplete JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
 
                 Assert.Equal(5, reader.BytesConsumed); // After exception, state is not restored.
             }
@@ -1333,7 +1341,9 @@ namespace System.Text.Json.Tests
                     "Expected InvalidOperationException was not thrown when calling Skip with isFinalBlock = false, even if whole payload is available."
                 );
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             // Skip, then skip some more
             for (int i = 0; i < dataUtf8.Length; i++)
@@ -1350,7 +1360,9 @@ namespace System.Text.Json.Tests
                         "Expected InvalidOperationException was not thrown when calling Skip with isFinalBlock = false"
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 long bytesConsumed = json.BytesConsumed;
                 while (json.TrySkip())
@@ -1465,7 +1477,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for invalid JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
 
             {
@@ -1481,7 +1495,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for invalid JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
 
             {
@@ -1497,7 +1513,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for invalid JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
         }
 
@@ -1538,7 +1556,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for incomplete/invalid JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
 
             {
@@ -1560,7 +1580,9 @@ namespace System.Text.Json.Tests
                         "Expected JsonException was not thrown for incomplete/invalid JSON payload when skipping."
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
 
             {
@@ -2361,7 +2383,9 @@ namespace System.Text.Json.Tests
                     $"Expected JsonException was not thrown. Max depth allowed = {json.CurrentState.Options.MaxDepth} | Max depth reached = {maxDepth}"
                 );
             }
-            catch (JsonException) { }
+            catch (JsonException)
+            {
+            }
 
             jsonStr = JsonTestHelper.WriteDepthArray(depth - 1);
             data = Encoding.UTF8.GetBytes(jsonStr);
@@ -2382,7 +2406,9 @@ namespace System.Text.Json.Tests
                     $"Expected JsonException was not thrown. Max depth allowed = {json.CurrentState.Options.MaxDepth} | Max depth reached = {maxDepth}"
                 );
             }
-            catch (JsonException) { }
+            catch (JsonException)
+            {
+            }
         }
 
         [Theory]
@@ -2578,7 +2604,9 @@ namespace System.Text.Json.Tests
                         ;
                     Assert.True(false, "Expected JsonException was not thrown.");
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
         }
 
@@ -4482,7 +4510,9 @@ namespace System.Text.Json.Tests
                         $"Expected JsonException was not thrown. CommentHandling = {commentHandling}"
                     );
                 }
-                catch (JsonException) { }
+                catch (JsonException)
+                {
+                }
             }
         }
 
@@ -5616,7 +5646,9 @@ namespace System.Text.Json.Tests
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
-                while (reader.Read()) { }
+                while (reader.Read())
+                {
+                }
 
                 Assert.Equal(utf8.Length - 1, reader.TokenStartIndex);
             }
@@ -5645,7 +5677,9 @@ namespace System.Text.Json.Tests
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
-                while (reader.Read()) { }
+                while (reader.Read())
+                {
+                }
 
                 Assert.Equal(utf8.Length - 1, reader.TokenStartIndex);
             }

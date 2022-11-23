@@ -27,28 +27,40 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class C1
         {
             [Kept]
-            public C1() { }
+            public C1()
+            {
+            }
 
-            public C1(string s) { }
+            public C1(string s)
+            {
+            }
         }
 
         [Kept]
         class C2
         {
-            public C2() { }
+            public C2()
+            {
+            }
 
             [Kept]
             [KeptMember(".ctor()")]
-            public class Nested { }
+            public class Nested
+            {
+            }
         }
 
         [Kept]
         class C3
         {
             [Kept]
-            static void Foo() { }
+            static void Foo()
+            {
+            }
 
-            public static void Bar() { }
+            public static void Bar()
+            {
+            }
         }
 
         [Kept]
@@ -60,7 +72,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 )
             ]
                 MyReflect mine
-        ) { }
+        )
+        {
+        }
 
         [Kept]
         [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
@@ -74,7 +88,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)
             ]
                 IReflect m
-        ) { }
+        )
+        {
+        }
 
         [Kept]
         [KeptInterface(typeof(IReflect))]
@@ -200,7 +216,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         [Kept]
         [KeptBaseType(typeof(MyReflect))]
-        class MyReflectDerived : MyReflect { }
+        class MyReflectDerived : MyReflect
+        {
+        }
 
         // This is effectively an E2E test for a situation encountered in https://github.com/dotnet/winforms/blob/main/src/System.Windows.Forms/src/System/Windows/Forms/HtmlToClrEventProxy.cs
         // Validates that by using IReflect there's no escaping the annotations system.

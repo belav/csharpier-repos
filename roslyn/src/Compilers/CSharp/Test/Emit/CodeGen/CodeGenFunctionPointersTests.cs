@@ -14703,7 +14703,13 @@ static void M2(string s) => throw null;
 
             new BlobEncoder(parameterlessCtorSignature)
                 .MethodSignature(isInstanceMethod: true)
-                .Parameters(0, returnType => returnType.Void(), parameters => { });
+                .Parameters(
+                    0,
+                    returnType => returnType.Void(),
+                    parameters =>
+                    {
+                    }
+                );
 
             var parameterlessCtorBlobIndex = metadata.GetOrAddBlob(parameterlessCtorSignature);
 
@@ -14724,7 +14730,9 @@ static void M2(string s) => throw null;
             mParameterEncoder.Parameters(
                 parameterCount: 0,
                 returnType => returnType.Void(),
-                parameters => { }
+                parameters =>
+                {
+                }
             );
 
             var methodBodyStream = new MethodBodyStreamEncoder(ilBuilder);

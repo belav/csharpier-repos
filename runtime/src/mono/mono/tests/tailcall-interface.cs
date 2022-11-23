@@ -73,7 +73,9 @@ interface GI2<TC>
 
 unsafe public class C1 : I1
 {
-    void I1.perturb_interface_offset1() { }
+    void I1.perturb_interface_offset1()
+    {
+    }
 
     static int i;
     static public int errors;
@@ -111,9 +113,13 @@ unsafe public class C1 : I1
 
 unsafe public class GC1<TC> : GI1<TC>
 {
-    void GI1<TC>.perturb_interface_offset1() { }
+    void GI1<TC>.perturb_interface_offset1()
+    {
+    }
 
-    void GI1<TC>.perturb_interface_offset2() { }
+    void GI1<TC>.perturb_interface_offset2()
+    {
+    }
 
     public static int check(long stack1, long stack2)
     {
@@ -147,11 +153,17 @@ unsafe public class GC1<TC> : GI1<TC>
 
 unsafe public class C2 : I2
 {
-    void I2.perturb_interface_offset1() { }
+    void I2.perturb_interface_offset1()
+    {
+    }
 
-    void I2.perturb_interface_offset2() { }
+    void I2.perturb_interface_offset2()
+    {
+    }
 
-    void I2.perturb_interface_offset3() { }
+    void I2.perturb_interface_offset3()
+    {
+    }
 
     static int check(long stack1, long stack2)
     {
@@ -177,13 +189,21 @@ unsafe public class C2 : I2
 
 unsafe public class GC2<TC> : GI2<TC>
 {
-    void GI2<TC>.perturb_interface_offset1() { }
+    void GI2<TC>.perturb_interface_offset1()
+    {
+    }
 
-    void GI2<TC>.perturb_interface_offset2() { }
+    void GI2<TC>.perturb_interface_offset2()
+    {
+    }
 
-    void GI2<TC>.perturb_interface_offset3() { }
+    void GI2<TC>.perturb_interface_offset3()
+    {
+    }
 
-    void GI2<TC>.perturb_interface_offset4() { }
+    void GI2<TC>.perturb_interface_offset4()
+    {
+    }
 
     public static int check(long stack1, long stack2)
     {
@@ -215,9 +235,13 @@ unsafe public class GC2<TC> : GI2<TC>
     }
 }
 
-public class A { }
+public class A
+{
+}
 
-public class B { }
+public class B
+{
+}
 
 interface IC
 {

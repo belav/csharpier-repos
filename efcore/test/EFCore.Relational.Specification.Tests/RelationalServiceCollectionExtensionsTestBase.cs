@@ -7,7 +7,9 @@ public abstract class RelationalServiceCollectionExtensionsTestBase
     : EntityFrameworkServiceCollectionExtensionsTestBase
 {
     protected RelationalServiceCollectionExtensionsTestBase(TestHelpers testHelpers)
-        : base(testHelpers) { }
+        : base(testHelpers)
+    {
+    }
 
     public override void Required_services_are_registered_with_expected_lifetimes() =>
         LifetimeTest(

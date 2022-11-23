@@ -10,5 +10,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
         AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Class,
         AllowMultiple = false
     )]
-    public class NotMappedAttribute : Attribute { }
+    public class NotMappedAttribute : Attribute
+    {
+    }
 }

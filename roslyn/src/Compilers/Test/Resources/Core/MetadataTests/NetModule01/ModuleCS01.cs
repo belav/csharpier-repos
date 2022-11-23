@@ -74,9 +74,13 @@ namespace NS.Module.CS01
 
     public static class Extension
     {
-        public static void ExtModChainA01(this ModChainA p1, string p2) { }
+        public static void ExtModChainA01(this ModChainA p1, string p2)
+        {
+        }
 
-        public static void ExtModChainC01(this ModChainC p1, object p2) { }
+        public static void ExtModChainC01(this ModChainC p1, object p2)
+        {
+        }
     }
 
     public delegate void GenDele<T>(T t);
@@ -99,7 +103,9 @@ namespace NS.Module.CS01
             public Action<T> P01
             {
                 get { return null; }
-                set { }
+                set
+                {
+                }
             }
 
             public Action<T> M01(ref T t)
@@ -124,9 +130,13 @@ namespace NS.Module.CS01
             Func<T, T, Action<T>> _E01;
             GenDele<T> _E02;
 
-            void MyAction(T t) { }
+            void MyAction(T t)
+            {
+            }
 
-            internal void GenM<X>(X x) { }
+            internal void GenM<X>(X x)
+            {
+            }
         }
 
         public struct ModStructImplExp : ModIGen2<Expression, object>

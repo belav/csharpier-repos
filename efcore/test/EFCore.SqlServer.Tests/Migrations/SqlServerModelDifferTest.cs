@@ -12,7 +12,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_database_edition_options() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source => source.HasDatabaseMaxSize("100 MB").HasPerformanceLevel("S0"),
             target => target.HasServiceTier("basic"),
             upOps =>
@@ -57,7 +59,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         x.HasKey("Id").IsClustered(false);
                     }
                 ),
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Person",
@@ -109,8 +113,12 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_table_MemoryOptimized() =>
         Execute(
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Person",
@@ -332,7 +340,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_non_clustered_primary_key_with_owned() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Ram",
@@ -399,7 +409,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_shared_table_with_two_entity_types() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -450,7 +462,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         x.HasData(new { Id = 42 });
                     }
                 ),
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Firefly",
@@ -507,7 +521,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         x.HasData(new { Id = 42 });
                     }
                 ),
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Firefly",
@@ -618,7 +634,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
         );
 
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder => modelBuilder.HasDbFunction(mi),
             operations => Assert.Equal(0, operations.Count)
         );
@@ -662,7 +680,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_all_operations() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -846,8 +866,12 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            source => { },
-            target => { },
+            source =>
+            {
+            },
+            target =>
+            {
+            },
             operations => Assert.Equal(0, operations.Count)
         );
 
@@ -960,7 +984,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Rebuild_index_when_changing_online_option() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "Address",
@@ -1026,7 +1052,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Noop_TPT_with_FKs_and_seed_data() =>
         Execute(
-            modelBuilder => { },
+            modelBuilder =>
+            {
+            },
             source =>
             {
                 source.Entity(
@@ -1232,7 +1260,9 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Rebuild_index_when_adding_fillfactor_option() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "Address",

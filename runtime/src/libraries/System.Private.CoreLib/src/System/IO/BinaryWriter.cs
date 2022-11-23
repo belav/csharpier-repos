@@ -34,9 +34,13 @@ namespace System.IO
         }
 
         // BinaryWriter never emits a BOM, so can use Encoding.UTF8 fast singleton
-        public BinaryWriter(Stream output) : this(output, Encoding.UTF8, false) { }
+        public BinaryWriter(Stream output) : this(output, Encoding.UTF8, false)
+        {
+        }
 
-        public BinaryWriter(Stream output, Encoding encoding) : this(output, encoding, false) { }
+        public BinaryWriter(Stream output, Encoding encoding) : this(output, encoding, false)
+        {
+        }
 
         public BinaryWriter(Stream output, Encoding encoding, bool leaveOpen)
         {

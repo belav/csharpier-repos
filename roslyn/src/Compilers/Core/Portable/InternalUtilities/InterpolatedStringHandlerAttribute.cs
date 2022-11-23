@@ -15,7 +15,9 @@ namespace System.Runtime.CompilerServices
     internal sealed class InterpolatedStringHandlerAttribute : Attribute
     {
         /// <summary>Initializes the <see cref="InterpolatedStringHandlerAttribute"/>.</summary>
-        public InterpolatedStringHandlerAttribute() { }
+        public InterpolatedStringHandlerAttribute()
+        {
+        }
     }
 }
 

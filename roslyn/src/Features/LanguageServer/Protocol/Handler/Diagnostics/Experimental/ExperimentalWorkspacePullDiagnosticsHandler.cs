@@ -32,7 +32,9 @@ internal class ExperimentalWorkspacePullDiagnosticsHandler
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
         IGlobalOptionService globalOptions
-    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
+    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
+    {
+    }
 
     protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
     {

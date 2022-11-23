@@ -13,9 +13,13 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class HttpClientHandler_ResponseDrain_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_ResponseDrain_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_ResponseDrain_Test(ITestOutputHelper output) : base(output)
+        {
+        }
 
-        protected virtual void SetResponseDrainTimeout(HttpClientHandler handler, TimeSpan time) { }
+        protected virtual void SetResponseDrainTimeout(HttpClientHandler handler, TimeSpan time)
+        {
+        }
 
         [OuterLoop]
         [Theory]
@@ -255,7 +259,9 @@ namespace System.Net.Http.Functional.Tests
                                 )
                             );
                         }
-                        catch (Exception) { } // Eat errors from client disconnect.
+                        catch (Exception)
+                        {
+                        } // Eat errors from client disconnect.
 
                         await server.AcceptConnectionSendCustomResponseAndCloseAsync(
                             LoopbackServer.GetContentModeResponse(

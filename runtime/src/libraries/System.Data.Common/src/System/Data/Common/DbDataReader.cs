@@ -17,7 +17,9 @@ namespace System.Data.Common
             IEnumerable,
             IAsyncDisposable
     {
-        protected DbDataReader() : base() { }
+        protected DbDataReader() : base()
+        {
+        }
 
         public abstract int Depth { get; }
 
@@ -35,7 +37,9 @@ namespace System.Data.Common
 
         public abstract object this[string name] { get; }
 
-        public virtual void Close() { }
+        public virtual void Close()
+        {
+        }
 
         public virtual Task CloseAsync()
         {

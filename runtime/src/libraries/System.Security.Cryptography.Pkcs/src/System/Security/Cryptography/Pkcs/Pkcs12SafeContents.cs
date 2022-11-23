@@ -372,8 +372,12 @@ namespace System.Security.Cryptography.Pkcs
                             break;
                     }
                 }
-                catch (AsnContentException) { }
-                catch (CryptographicException) { }
+                catch (AsnContentException)
+                {
+                }
+                catch (CryptographicException)
+                {
+                }
 
                 bag ??= new Pkcs12SafeBag.UnknownBag(serializedBags[i].BagId, bagValue);
 

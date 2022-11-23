@@ -285,7 +285,9 @@ namespace System.IO.FileSystem.Tests
             {
                 drive.VolumeLabel = currentLabel; // shouldn't change the state of the drive regardless of success
             }
-            catch (UnauthorizedAccessException) { }
+            catch (UnauthorizedAccessException)
+            {
+            }
             Assert.Equal(drive.VolumeLabel, currentLabel);
         }
 

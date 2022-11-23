@@ -22,7 +22,9 @@ public abstract class SaveChangesInterceptor : ISaveChangesInterceptor
     public virtual int SavedChanges(SaveChangesCompletedEventData eventData, int result) => result;
 
     /// <inheritdoc />
-    public virtual void SaveChangesFailed(DbContextErrorEventData eventData) { }
+    public virtual void SaveChangesFailed(DbContextErrorEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -45,7 +47,9 @@ public abstract class SaveChangesInterceptor : ISaveChangesInterceptor
     ) => Task.CompletedTask;
 
     /// <inheritdoc />
-    public virtual void SaveChangesCanceled(DbContextEventData eventData) { }
+    public virtual void SaveChangesCanceled(DbContextEventData eventData)
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task SaveChangesCanceledAsync(

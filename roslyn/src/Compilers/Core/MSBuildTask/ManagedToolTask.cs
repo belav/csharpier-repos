@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected abstract string PathToNativeTool { get; }
 
-        protected ManagedToolTask(ResourceManager resourceManager) : base(resourceManager) { }
+        protected ManagedToolTask(ResourceManager resourceManager) : base(resourceManager)
+        {
+        }
 
         /// <summary>
         /// GenerateCommandLineCommands generates the actual OS-level arguments:

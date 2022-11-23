@@ -84,7 +84,9 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 
         public class CustomException : Exception
         {
-            public CustomException() { }
+            public CustomException()
+            {
+            }
         }
     }
 }

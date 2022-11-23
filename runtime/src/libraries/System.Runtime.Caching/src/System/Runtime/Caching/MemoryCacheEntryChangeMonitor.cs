@@ -26,7 +26,9 @@ namespace System.Runtime.Caching
         private DateTimeOffset _lastModified;
         private List<MemoryCacheEntry> _dependencies;
 
-        private MemoryCacheEntryChangeMonitor() { } // hide default .ctor
+        private MemoryCacheEntryChangeMonitor()
+        {
+        } // hide default .ctor
 
         private void InitDisposableMembers(MemoryCache cache)
         {

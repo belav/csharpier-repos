@@ -10,7 +10,9 @@
 
 using System;
 
-class E : Exception { }
+class E : Exception
+{
+}
 
 class MainLoopMutuallyProtectiveTry
 {
@@ -30,8 +32,12 @@ class MainLoopMutuallyProtectiveTry
             }
             result = temp;
         }
-        catch (E) { }
-        catch (Exception) { }
+        catch (E)
+        {
+        }
+        catch (Exception)
+        {
+        }
         Console.WriteLine($"done, sum is {result}");
         return result == 1783293664 ? 100 : -1;
     }

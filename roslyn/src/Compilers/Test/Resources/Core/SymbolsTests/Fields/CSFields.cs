@@ -8,9 +8,13 @@ public class CSFields
 {
     public volatile int F6;
 
-    public class FFF { }
+    public class FFF
+    {
+    }
 
     public int Fff;
 
-    public void FfF() { }
+    public void FfF()
+    {
+    }
 }

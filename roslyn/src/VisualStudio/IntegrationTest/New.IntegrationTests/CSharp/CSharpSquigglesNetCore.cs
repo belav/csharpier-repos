@@ -16,7 +16,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override bool SupportsGlobalUsings => true;
 
         public CSharpSquigglesNetCore() : base(WellKnownProjectTemplates.CSharpNetCoreClassLibrary)
-        { }
+        {
+        }
 
         public override async Task InitializeAsync()
         {

@@ -125,7 +125,9 @@ namespace System.Threading.Channels.Tests
                     await c.WriteAsync(count++);
                 }
             }
-            catch (ChannelClosedException) { }
+            catch (ChannelClosedException)
+            {
+            }
             Assert.Equal(11, count);
         }
 

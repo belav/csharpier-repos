@@ -20,7 +20,9 @@ public partial class PhysicalFileResultExecutor
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     public PhysicalFileResultExecutor(ILoggerFactory loggerFactory)
-        : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory)) { }
+        : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory))
+    {
+    }
 
     /// <inheritdoc />
     public virtual Task ExecuteAsync(ActionContext context, PhysicalFileResult result)

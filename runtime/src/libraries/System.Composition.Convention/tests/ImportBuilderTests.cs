@@ -9,7 +9,9 @@ namespace System.Composition.Convention.Tests
 {
     public class ImportBuilderTests
     {
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
         public class FooImpl
         {

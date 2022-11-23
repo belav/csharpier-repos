@@ -64,9 +64,13 @@ namespace System.Drawing.Drawing2D
             Gdip.CheckStatus(status);
         }
 
-        public GraphicsPath(Point[] pts, byte[] types) : this(pts, types, FillMode.Alternate) { }
+        public GraphicsPath(Point[] pts, byte[] types) : this(pts, types, FillMode.Alternate)
+        {
+        }
 
-        public GraphicsPath(PointF[] pts, byte[] types) : this(pts, types, FillMode.Alternate) { }
+        public GraphicsPath(PointF[] pts, byte[] types) : this(pts, types, FillMode.Alternate)
+        {
+        }
 
         public GraphicsPath(Point[] pts, byte[] types, FillMode fillMode)
         {

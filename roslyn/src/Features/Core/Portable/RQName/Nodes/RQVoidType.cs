@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     {
         public static readonly RQVoidType Singleton = new();
 
-        private RQVoidType() { }
+        private RQVoidType()
+        {
+        }
 
         public override SimpleTreeNode ToSimpleTree() => new SimpleLeafNode(RQNameStrings.Void);
     }

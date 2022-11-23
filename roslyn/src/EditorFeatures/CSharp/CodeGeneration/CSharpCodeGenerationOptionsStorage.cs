@@ -18,7 +18,9 @@ internal static class CSharpCodeGenerationOptionsStorage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Service() { }
+        public Service()
+        {
+        }
 
         public CodeGenerationOptions GetOptions(IGlobalOptionService globalOptions) =>
             GetCSharpCodeGenerationOptions(globalOptions);

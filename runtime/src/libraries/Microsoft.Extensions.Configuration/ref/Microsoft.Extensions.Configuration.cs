@@ -32,14 +32,18 @@ namespace Microsoft.Extensions.Configuration
     {
         public ChainedConfigurationProvider(
             Microsoft.Extensions.Configuration.ChainedConfigurationSource source
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.Configuration.IConfiguration Configuration
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<string> GetChildKeys(
             System.Collections.Generic.IEnumerable<string> earlierKeys,
@@ -54,9 +58,13 @@ namespace Microsoft.Extensions.Configuration
             throw null;
         }
 
-        public void Load() { }
+        public void Load()
+        {
+        }
 
-        public void Set(string key, string? value) { }
+        public void Set(string key, string? value)
+        {
+        }
 
         public bool TryGet(string key, out string? value)
         {
@@ -67,18 +75,24 @@ namespace Microsoft.Extensions.Configuration
     public partial class ChainedConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
-        public ChainedConfigurationSource() { }
+        public ChainedConfigurationSource()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public Microsoft.Extensions.Configuration.IConfiguration? Configuration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ShouldDisposeConfiguration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(
@@ -92,7 +106,9 @@ namespace Microsoft.Extensions.Configuration
     public partial class ConfigurationBuilder
         : Microsoft.Extensions.Configuration.IConfigurationBuilder
     {
-        public ConfigurationBuilder() { }
+        public ConfigurationBuilder()
+        {
+        }
 
         public System.Collections.Generic.IDictionary<string, object> Properties
         {
@@ -118,7 +134,9 @@ namespace Microsoft.Extensions.Configuration
 
     public partial class ConfigurationKeyComparer : System.Collections.Generic.IComparer<string>
     {
-        public ConfigurationKeyComparer() { }
+        public ConfigurationKeyComparer()
+        {
+        }
 
         public static Microsoft.Extensions.Configuration.ConfigurationKeyComparer Instance
         {
@@ -137,12 +155,16 @@ namespace Microsoft.Extensions.Configuration
             Microsoft.Extensions.Configuration.IConfigurationRoot,
             System.IDisposable
     {
-        public ConfigurationManager() { }
+        public ConfigurationManager()
+        {
+        }
 
         public string? this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Collections.Generic.IDictionary<
             string,
@@ -160,7 +182,9 @@ namespace Microsoft.Extensions.Configuration
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<Microsoft.Extensions.Configuration.IConfigurationSection> GetChildren()
         {
@@ -189,18 +213,24 @@ namespace Microsoft.Extensions.Configuration
             throw null;
         }
 
-        void Microsoft.Extensions.Configuration.IConfigurationRoot.Reload() { }
+        void Microsoft.Extensions.Configuration.IConfigurationRoot.Reload()
+        {
+        }
     }
 
     public abstract partial class ConfigurationProvider
         : Microsoft.Extensions.Configuration.IConfigurationProvider
     {
-        protected ConfigurationProvider() { }
+        protected ConfigurationProvider()
+        {
+        }
 
         protected System.Collections.Generic.IDictionary<string, string?> Data
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual System.Collections.Generic.IEnumerable<string> GetChildKeys(
@@ -216,11 +246,17 @@ namespace Microsoft.Extensions.Configuration
             throw null;
         }
 
-        public virtual void Load() { }
+        public virtual void Load()
+        {
+        }
 
-        protected void OnReload() { }
+        protected void OnReload()
+        {
+        }
 
-        public virtual void Set(string key, string? value) { }
+        public virtual void Set(string key, string? value)
+        {
+        }
 
         public override string ToString()
         {
@@ -235,7 +271,9 @@ namespace Microsoft.Extensions.Configuration
 
     public partial class ConfigurationReloadToken : Microsoft.Extensions.Primitives.IChangeToken
     {
-        public ConfigurationReloadToken() { }
+        public ConfigurationReloadToken()
+        {
+        }
 
         public bool ActiveChangeCallbacks
         {
@@ -246,7 +284,9 @@ namespace Microsoft.Extensions.Configuration
             get { throw null; }
         }
 
-        public void OnReload() { }
+        public void OnReload()
+        {
+        }
 
         public System.IDisposable RegisterChangeCallback(
             System.Action<object?> callback,
@@ -264,19 +304,25 @@ namespace Microsoft.Extensions.Configuration
     {
         public ConfigurationRoot(
             System.Collections.Generic.IList<Microsoft.Extensions.Configuration.IConfigurationProvider> providers
-        ) { }
+        )
+        {
+        }
 
         public string? this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IEnumerable<Microsoft.Extensions.Configuration.IConfigurationProvider> Providers
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<Microsoft.Extensions.Configuration.IConfigurationSection> GetChildren()
         {
@@ -293,7 +339,9 @@ namespace Microsoft.Extensions.Configuration
             throw null;
         }
 
-        public void Reload() { }
+        public void Reload()
+        {
+        }
     }
 
     public partial class ConfigurationSection
@@ -303,12 +351,16 @@ namespace Microsoft.Extensions.Configuration
         public ConfigurationSection(
             Microsoft.Extensions.Configuration.IConfigurationRoot root,
             string path
-        ) { }
+        )
+        {
+        }
 
         public string? this[string key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Key
         {
@@ -321,7 +373,9 @@ namespace Microsoft.Extensions.Configuration
         public string? Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Collections.Generic.IEnumerable<Microsoft.Extensions.Configuration.IConfigurationSection> GetChildren()
@@ -366,14 +420,18 @@ namespace Microsoft.Extensions.Configuration
     {
         public StreamConfigurationProvider(
             Microsoft.Extensions.Configuration.StreamConfigurationSource source
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.Configuration.StreamConfigurationSource Source
         {
             get { throw null; }
         }
 
-        public override void Load() { }
+        public override void Load()
+        {
+        }
 
         public abstract void Load(System.IO.Stream stream);
     }
@@ -381,13 +439,17 @@ namespace Microsoft.Extensions.Configuration
     public abstract partial class StreamConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
-        protected StreamConfigurationSource() { }
+        protected StreamConfigurationSource()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.IO.Stream? Stream
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
@@ -407,9 +469,13 @@ namespace Microsoft.Extensions.Configuration.Memory
     {
         public MemoryConfigurationProvider(
             Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource source
-        ) { }
+        )
+        {
+        }
 
-        public void Add(string key, string? value) { }
+        public void Add(string key, string? value)
+        {
+        }
 
         public System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
             string,
@@ -428,7 +494,9 @@ namespace Microsoft.Extensions.Configuration.Memory
     public partial class MemoryConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
-        public MemoryConfigurationSource() { }
+        public MemoryConfigurationSource()
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
             string,
@@ -436,7 +504,9 @@ namespace Microsoft.Extensions.Configuration.Memory
         >>? InitialData
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(

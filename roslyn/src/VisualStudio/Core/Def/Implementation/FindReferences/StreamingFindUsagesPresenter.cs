@@ -75,7 +75,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 classificationFormatMapService,
                 GetCustomColumns(columns),
                 asynchronousOperationListenerProvider
-            ) { }
+            )
+        {
+        }
 
         // Test only
         [SuppressMessage(
@@ -94,7 +96,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 exportProvider.GetExportedValue<IClassificationFormatMapService>(),
                 exportProvider.GetExportedValues<ITableColumnDefinition>(),
                 exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>()
-            ) { }
+            )
+        {
+        }
 
         [SuppressMessage(
             "RoslynDiagnosticsReliability",

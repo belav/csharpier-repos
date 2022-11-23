@@ -35,6 +35,8 @@ public class SqliteDatabaseFacadeTest
 
     private class ProviderContext : DbContext
     {
-        public ProviderContext(DbContextOptions options) : base(options) { }
+        public ProviderContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 }

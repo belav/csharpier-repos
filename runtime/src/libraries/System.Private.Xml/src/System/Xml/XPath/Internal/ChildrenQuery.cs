@@ -10,7 +10,9 @@ namespace MS.Internal.Xml.XPath
         private XPathNodeIterator _iterator = XPathEmptyIterator.Instance;
 
         public ChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type)
-            : base(qyInput, name, prefix, type) { }
+            : base(qyInput, name, prefix, type)
+        {
+        }
 
         protected ChildrenQuery(ChildrenQuery other) : base(other)
         {

@@ -1,9 +1,13 @@
 using System;
 
 #if WITH_MEMBERS
-public class DisappearingType { }
+public class DisappearingType
+{
+}
 
-public sealed class MissingAttribute : Attribute { }
+public sealed class MissingAttribute : Attribute
+{
+}
 
 public enum DisappearingEnum
 {
@@ -14,7 +18,9 @@ public enum DisappearingEnum
 public sealed class MissingCtorAttribute : Attribute
 {
 #if WITH_MEMBERS
-    public MissingCtorAttribute(int i) { }
+    public MissingCtorAttribute(int i)
+    {
+    }
 #endif
 }
 

@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAnonymousTypeMemberName
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpAddAnonymousTypeMemberNameCodeFixProvider() { }
+        public CSharpAddAnonymousTypeMemberNameCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS0746);

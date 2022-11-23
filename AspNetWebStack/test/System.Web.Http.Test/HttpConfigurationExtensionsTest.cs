@@ -451,10 +451,14 @@ namespace System.Net.Http
             return actionSelector.Object;
         }
 
-        public class TestParameter { }
+        public class TestParameter
+        {
+        }
 
         [ActionSelectorConfiguration]
-        public class PerControllerActionSelectorController : ApiController { }
+        public class PerControllerActionSelectorController : ApiController
+        {
+        }
 
         public class ActionSelectorConfigurationAttribute : Attribute, IControllerConfiguration
         {

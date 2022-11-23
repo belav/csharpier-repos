@@ -18,7 +18,9 @@ namespace System.Web.Http.Tracing.Tracers
         private const string ExecuteActionFilterAsyncMethodName = "ExecuteActionFilterAsync";
 
         public ActionFilterTracer(IActionFilter innerFilter, ITraceWriter traceWriter)
-            : base(innerFilter, traceWriter) { }
+            : base(innerFilter, traceWriter)
+        {
+        }
 
         public new IActionFilter Inner
         {

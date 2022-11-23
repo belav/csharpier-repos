@@ -27,7 +27,9 @@ namespace System.Web.Mvc
                 runViewStartPages,
                 viewStartFileExtensions,
                 null
-            ) { }
+            )
+        {
+        }
 
         public RazorView(
             ControllerContext controllerContext,

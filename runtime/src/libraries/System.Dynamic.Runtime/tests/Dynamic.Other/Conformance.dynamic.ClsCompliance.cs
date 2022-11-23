@@ -503,7 +503,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingkey
 
         namespace MyNamespace11
         {
-            public enum @dynamic { }
+            public enum @dynamic
+            {
+            }
         }
     }
 

@@ -113,7 +113,9 @@ namespace System.Threading.Tasks
                 {
                     await Task.WhenAll(tasks).WaitAsync(TimeSpan.FromSeconds(3)); // arbitrary delay; can be dialed up or down in the future
                 }
-                catch { }
+                catch
+                {
+                }
 
                 var exceptions = new List<Exception>();
                 foreach (Task t in tasks)

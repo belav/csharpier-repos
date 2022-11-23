@@ -16,7 +16,9 @@ namespace System.Web.WebPages.Html
             ModelState
         >(StringComparer.OrdinalIgnoreCase);
 
-        public ModelStateDictionary() { }
+        public ModelStateDictionary()
+        {
+        }
 
         public ModelStateDictionary(ModelStateDictionary dictionary)
         {

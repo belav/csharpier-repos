@@ -22,6 +22,8 @@ namespace System.Security.Permissions
             return false;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 }

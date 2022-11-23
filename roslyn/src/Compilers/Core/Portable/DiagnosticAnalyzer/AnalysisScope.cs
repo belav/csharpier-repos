@@ -77,7 +77,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 isSyntacticSingleFileAnalysis: false,
                 concurrentAnalysis: concurrentAnalysis,
                 categorizeDiagnostics: categorizeDiagnostics
-            ) { }
+            )
+        {
+        }
 
         public AnalysisScope(
             ImmutableArray<DiagnosticAnalyzer> analyzers,
@@ -101,7 +103,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 isSyntacticSingleFileAnalysis,
                 concurrentAnalysis,
                 categorizeDiagnostics
-            ) { }
+            )
+        {
+        }
 
         private AnalysisScope(
             IEnumerable<SyntaxTree> trees,

@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class JoinKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public JoinKeywordRecommender() : base(SyntaxKind.JoinKeyword) { }
+        public JoinKeywordRecommender() : base(SyntaxKind.JoinKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

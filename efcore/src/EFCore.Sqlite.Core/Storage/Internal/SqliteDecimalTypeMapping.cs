@@ -20,7 +20,9 @@ public class SqliteDecimalTypeMapping : DecimalTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteDecimalTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Decimal)
-        : base(storeType, dbType) { }
+        : base(storeType, dbType)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,7 +31,9 @@ public class SqliteDecimalTypeMapping : DecimalTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqliteDecimalTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters) { }
+        : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

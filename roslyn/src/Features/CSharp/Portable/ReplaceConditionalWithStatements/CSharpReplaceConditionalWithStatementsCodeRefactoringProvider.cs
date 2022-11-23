@@ -36,7 +36,9 @@ internal class CSharpReplaceConditionalWithStatementsCodeRefactoringProvider
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpReplaceConditionalWithStatementsCodeRefactoringProvider() { }
+    public CSharpReplaceConditionalWithStatementsCodeRefactoringProvider()
+    {
+    }
 
     protected override bool CanRewriteLocalDeclarationStatement(
         LocalDeclarationStatementSyntax localDeclarationStatement

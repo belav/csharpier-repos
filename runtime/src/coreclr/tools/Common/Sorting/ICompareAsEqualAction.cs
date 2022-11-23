@@ -20,6 +20,8 @@ namespace ILCompiler
 
     internal struct AllowDuplicates : ICompareAsEqualAction
     {
-        public void CompareAsEqual() { }
+        public void CompareAsEqual()
+        {
+        }
     }
 }

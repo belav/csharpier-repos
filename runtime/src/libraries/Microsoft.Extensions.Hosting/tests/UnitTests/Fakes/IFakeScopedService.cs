@@ -3,5 +3,7 @@
 
 namespace Microsoft.Extensions.Hosting.Fakes
 {
-    public interface IFakeScopedService : IFakeService { }
+    public interface IFakeScopedService : IFakeService
+    {
+    }
 }

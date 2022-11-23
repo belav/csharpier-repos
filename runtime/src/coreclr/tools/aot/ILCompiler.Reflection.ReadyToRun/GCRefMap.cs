@@ -40,7 +40,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         public readonly uint StackPop;
         public readonly GCRefMapEntry[] Entries;
 
-        public GCRefMap() { }
+        public GCRefMap()
+        {
+        }
 
         public GCRefMap(uint stackPop, GCRefMapEntry[] entries)
         {

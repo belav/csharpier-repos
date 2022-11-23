@@ -42,7 +42,9 @@ namespace System.Xml
             string localName,
             string? namespaceURI,
             XmlDocument doc
-        ) : this(doc.AddXmlName(prefix, localName, namespaceURI, null), true, doc) { }
+        ) : this(doc.AddXmlName(prefix, localName, namespaceURI, null), true, doc)
+        {
+        }
 
         internal XmlName XmlName
         {

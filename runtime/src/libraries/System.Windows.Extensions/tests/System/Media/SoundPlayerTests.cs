@@ -591,7 +591,9 @@ namespace System.Media.Test
             public override int Read(byte[] buffer, int offset, int count) =>
                 throw new NotSupportedException();
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override bool CanRead => true;
             public override bool CanSeek => false;

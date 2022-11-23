@@ -352,7 +352,9 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void DoNotIgnore<T>(T value, int consumed) { }
+        public static void DoNotIgnore<T>(T value, int consumed)
+        {
+        }
 
         //
         // { text, start, length } triplets. A "-1" in start or length means "test the overload that doesn't have that parameter."

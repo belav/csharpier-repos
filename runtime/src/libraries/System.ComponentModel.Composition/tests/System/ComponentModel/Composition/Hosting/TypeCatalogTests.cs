@@ -17,7 +17,9 @@ using Xunit;
 namespace System.ComponentModel.Composition
 {
     [Export]
-    public class TypeCatalogTestsExporter { }
+    public class TypeCatalogTestsExporter
+    {
+    }
 
     // This is a glorious do nothing ReflectionContext
     public class TypeCatalogTestsReflectionContext : ReflectionContext
@@ -290,7 +292,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_ShouldNotThrow()
         {
-            using (var catalog = CreateTypeCatalog()) { }
+            using (var catalog = CreateTypeCatalog())
+            {
+            }
         }
 
         [Fact]
@@ -696,7 +700,9 @@ namespace System.ComponentModel.Composition
 
         private class DerivedTypeCatalog : TypeCatalog
         {
-            public DerivedTypeCatalog(params Type[] types) : base(types) { }
+            public DerivedTypeCatalog(params Type[] types) : base(types)
+            {
+            }
         }
     }
 }

@@ -19,7 +19,9 @@ public class TokenValidatedContext : ResultContext<JwtBearerOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         JwtBearerOptions options
-    ) : base(context, scheme, options) { }
+    ) : base(context, scheme, options)
+    {
+    }
 
     /// <summary>
     /// Gets or sets the validated security token.

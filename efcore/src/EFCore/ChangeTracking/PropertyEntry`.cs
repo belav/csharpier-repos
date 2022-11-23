@@ -30,7 +30,8 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry where TEntity : c
     /// </summary>
     [EntityFrameworkInternal]
     public PropertyEntry(InternalEntityEntry internalEntry, string name) : base(internalEntry, name)
-    { }
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,7 +41,9 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry where TEntity : c
     /// </summary>
     [EntityFrameworkInternal]
     public PropertyEntry(InternalEntityEntry internalEntry, IProperty property)
-        : base(internalEntry, property) { }
+        : base(internalEntry, property)
+    {
+    }
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.

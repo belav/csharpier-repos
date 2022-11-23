@@ -13,7 +13,8 @@ class Driver
                 {
                     while (true)
                     {
-                        Thread t3 = new Thread(() => { });
+                        Thread t3 = new Thread(() => {
+                        });
                         t3.IsBackground = true;
                         t3.Start();
                         t3.Join();

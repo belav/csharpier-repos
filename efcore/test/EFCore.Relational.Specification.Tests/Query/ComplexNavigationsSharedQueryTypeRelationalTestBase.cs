@@ -15,7 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         where TFixture : ComplexNavigationsSharedTypeQueryRelationalFixtureBase, new()
     {
         protected ComplexNavigationsSharedQueryTypeRelationalTestBase(TFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]

@@ -15,7 +15,9 @@ namespace System.Web.WebPages
         private readonly bool _useUnvalidatedValues;
 
         protected RequestFieldValidatorBase(string errorMessage)
-            : this(errorMessage, useUnvalidatedValues: false) { }
+            : this(errorMessage, useUnvalidatedValues: false)
+        {
+        }
 
         protected RequestFieldValidatorBase(string errorMessage, bool useUnvalidatedValues)
         {

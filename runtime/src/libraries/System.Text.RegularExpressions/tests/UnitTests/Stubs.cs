@@ -13,7 +13,9 @@ namespace System.Text.RegularExpressions
 {
     internal sealed class RegexReplacement
     {
-        public RegexReplacement(string rep, RegexNode concat, Hashtable caps) { }
+        public RegexReplacement(string rep, RegexNode concat, Hashtable caps)
+        {
+        }
 
         private const int Specials = 4;
         public const int LeftPortion = -1;

@@ -2,13 +2,21 @@
 
 public class ConfigCompilation : NonValidatingSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Dest { }
+    public class Dest
+    {
+    }
 
-    public class Source2 { }
+    public class Source2
+    {
+    }
 
-    public class Dest2 { }
+    public class Dest2
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

@@ -84,7 +84,9 @@ namespace System.Net.NetworkInformation
                     return StringParsingHelpers.ParseRawIntFile(paths[i]) == 1;
                 }
                 catch (NetworkInformationException ex)
-                    when (ex.InnerException is IOException or UnauthorizedAccessException) { }
+                    when (ex.InnerException is IOException or UnauthorizedAccessException)
+                {
+                }
             }
 
             return false;

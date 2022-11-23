@@ -273,7 +273,9 @@ namespace Systen.Net.Mail.Tests
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 try
@@ -298,7 +300,9 @@ namespace Systen.Net.Mail.Tests
                     {
                         socket.Close();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 _socketsToDispose.Clear();
             }

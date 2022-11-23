@@ -1,8 +1,12 @@
 using System;
 
-public class ClassA { }
+public class ClassA
+{
+}
 
-public class ClassB { }
+public class ClassB
+{
+}
 
 public delegate string[] StringArrayDelegate();
 

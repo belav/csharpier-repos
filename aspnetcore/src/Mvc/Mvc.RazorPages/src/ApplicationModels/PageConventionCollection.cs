@@ -19,14 +19,18 @@ public class PageConventionCollection : Collection<IPageConvention>
     /// <summary>
     /// Initializes a new instance of the <see cref="PageConventionCollection"/> class that is empty.
     /// </summary>
-    public PageConventionCollection() : this((IServiceProvider?)null) { }
+    public PageConventionCollection() : this((IServiceProvider?)null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PageConventionCollection"/> class
     /// as a wrapper for the specified list.
     /// </summary>
     /// <param name="conventions">The list that is wrapped by the new collection.</param>
-    public PageConventionCollection(IList<IPageConvention> conventions) : base(conventions) { }
+    public PageConventionCollection(IList<IPageConvention> conventions) : base(conventions)
+    {
+    }
 
     internal PageConventionCollection(IServiceProvider? serviceProvider)
     {
@@ -340,7 +344,9 @@ public class PageConventionCollection : Collection<IPageConvention>
         private readonly Action<PageRouteModel> _action;
 
         public PageRouteModelConvention(string path, Action<PageRouteModel> action)
-            : this(null, path, action) { }
+            : this(null, path, action)
+        {
+        }
 
         public PageRouteModelConvention(
             string? areaName,
@@ -372,7 +378,9 @@ public class PageConventionCollection : Collection<IPageConvention>
         private readonly Action<PageRouteModel> _action;
 
         public FolderRouteModelConvention(string folderPath, Action<PageRouteModel> action)
-            : this(null, folderPath, action) { }
+            : this(null, folderPath, action)
+        {
+        }
 
         public FolderRouteModelConvention(
             string? areaName,
@@ -404,7 +412,9 @@ public class PageConventionCollection : Collection<IPageConvention>
         private readonly Action<PageApplicationModel> _action;
 
         public PageApplicationModelConvention(string path, Action<PageApplicationModel> action)
-            : this(null, path, action) { }
+            : this(null, path, action)
+        {
+        }
 
         public PageApplicationModelConvention(
             string? areaName,
@@ -438,7 +448,9 @@ public class PageConventionCollection : Collection<IPageConvention>
         public FolderApplicationModelConvention(
             string folderPath,
             Action<PageApplicationModel> action
-        ) : this(null, folderPath, action) { }
+        ) : this(null, folderPath, action)
+        {
+        }
 
         public FolderApplicationModelConvention(
             string? areaName,

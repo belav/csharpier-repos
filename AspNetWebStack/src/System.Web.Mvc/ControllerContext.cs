@@ -21,7 +21,9 @@ namespace System.Web.Mvc
         private RouteData _routeData;
 
         // parameterless constructor used for mocking
-        public ControllerContext() { }
+        public ControllerContext()
+        {
+        }
 
         // copy constructor - allows for subclassed types to take an existing ControllerContext as a parameter
         // and we'll automatically set the appropriate properties
@@ -45,7 +47,9 @@ namespace System.Web.Mvc
             HttpContextBase httpContext,
             RouteData routeData,
             ControllerBase controller
-        ) : this(new RequestContext(httpContext, routeData), controller) { }
+        ) : this(new RequestContext(httpContext, routeData), controller)
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",
@@ -140,6 +144,8 @@ namespace System.Web.Mvc
             set { _routeData = value; }
         }
 
-        private sealed class EmptyHttpContext : HttpContextBase { }
+        private sealed class EmptyHttpContext : HttpContextBase
+        {
+        }
     }
 }

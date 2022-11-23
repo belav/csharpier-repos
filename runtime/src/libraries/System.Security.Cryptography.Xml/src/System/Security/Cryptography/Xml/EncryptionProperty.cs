@@ -14,7 +14,9 @@ namespace System.Security.Cryptography.Xml
         private XmlElement? _cachedXml;
 
         // We are being lax here as per the spec
-        public EncryptionProperty() { }
+        public EncryptionProperty()
+        {
+        }
 
         public EncryptionProperty(XmlElement elementProperty)
         {

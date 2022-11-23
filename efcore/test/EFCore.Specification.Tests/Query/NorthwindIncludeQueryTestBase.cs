@@ -14,7 +14,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindIncludeQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindIncludeQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2039,7 +2041,9 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
             entryCount: 6
         );
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
     protected NorthwindContext CreateContext() => Fixture.CreateContext();
 }

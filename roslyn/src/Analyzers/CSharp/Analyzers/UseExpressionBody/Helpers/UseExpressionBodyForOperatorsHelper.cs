@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 ),
                 CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
                 ImmutableArray.Create(SyntaxKind.OperatorDeclaration)
-            ) { }
+            )
+        {
+        }
 
         public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
             CSharpCodeGenerationOptions options

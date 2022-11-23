@@ -341,7 +341,9 @@ namespace System.Management
             return new ManagementBaseObject(theClone);
         }
 
-        internal virtual void Initialize(bool getObject) { }
+        internal virtual void Initialize(bool getObject)
+        {
+        }
 
         //
         //Properties
@@ -477,7 +479,9 @@ namespace System.Management
                     classPath.NamespacePath = (string)(scopeName is System.DBNull ? "" : scopeName);
                     classPath.ClassName = (string)(className is System.DBNull ? "" : className);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return classPath;
             }

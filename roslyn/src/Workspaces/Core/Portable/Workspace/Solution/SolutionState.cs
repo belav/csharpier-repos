@@ -148,7 +148,9 @@ namespace Microsoft.CodeAnalysis
                 dependencyGraph: ProjectDependencyGraph.Empty,
                 lazyAnalyzers: null,
                 frozenSourceGeneratedDocument: null
-            ) { }
+            )
+        {
+        }
 
         public SolutionState WithNewWorkspace(Workspace workspace, int workspaceVersion)
         {

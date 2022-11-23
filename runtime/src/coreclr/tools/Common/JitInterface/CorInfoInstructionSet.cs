@@ -316,7 +316,9 @@ namespace Internal.JitInterface
         public IEnumerable<InstructionSet_X86> X86Flags =>
             this.Select((x) => (InstructionSet_X86)x);
 
-        public InstructionSetFlags() { }
+        public InstructionSetFlags()
+        {
+        }
 
         private static uint GetFlagsFieldIndex(InstructionSet instructionSet)
         {

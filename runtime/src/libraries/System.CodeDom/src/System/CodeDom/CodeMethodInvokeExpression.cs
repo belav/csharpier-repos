@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private CodeMethodReferenceExpression _method;
 
-        public CodeMethodInvokeExpression() { }
+        public CodeMethodInvokeExpression()
+        {
+        }
 
         public CodeMethodInvokeExpression(
             CodeMethodReferenceExpression method,

@@ -19,6 +19,8 @@ namespace System.Diagnostics
         /// <summary>
         /// Initializes a new instance of the <see cref="StackTraceHiddenAttribute"/> class.
         /// </summary>
-        public StackTraceHiddenAttribute() { }
+        public StackTraceHiddenAttribute()
+        {
+        }
     }
 }

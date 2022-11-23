@@ -7,7 +7,9 @@ public class InjectStringFunctionExpressionMutator : ExpressionMutator
 {
     private readonly ExpressionFinder _expressionFinder = new();
 
-    public InjectStringFunctionExpressionMutator(DbContext context) : base(context) { }
+    public InjectStringFunctionExpressionMutator(DbContext context) : base(context)
+    {
+    }
 
     public override bool IsValid(Expression expression)
     {

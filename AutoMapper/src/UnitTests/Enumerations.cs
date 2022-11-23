@@ -5,7 +5,10 @@ namespace AutoMapper.Tests;
 
 public class InvalidStringToEnum : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(_ =>
+        {
+        });
 
     [Fact]
     public void Should_throw() =>
@@ -593,7 +596,10 @@ public class When_mapping_a_flags_enum : NonValidatingSpecBase
         Eight = 8
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -619,7 +625,10 @@ public class When_the_target_has_an_enummemberattribute_value : AutoMapperSpecBa
         One
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     [Fact]
     public void Should_return_the_enum_from_defined_enummemberattribute_value()
@@ -681,7 +690,10 @@ public class When_the_source_has_an_enummemberattribute_value : AutoMapperSpecBa
         One
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     [Fact]
     public void Should_return_the_defined_enummemberattribute_value()

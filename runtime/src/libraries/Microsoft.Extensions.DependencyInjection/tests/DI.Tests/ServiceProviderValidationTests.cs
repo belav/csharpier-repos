@@ -258,36 +258,56 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             );
         }
 
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         private class Foo : IFoo
         {
-            public Foo(IBar bar) { }
+            public Foo(IBar bar)
+            {
+            }
         }
 
-        private interface IBar { }
+        private interface IBar
+        {
+        }
 
-        private class Bar : IBar { }
+        private class Bar : IBar
+        {
+        }
 
         private class Bar2 : IBar
         {
-            public Bar2(IBaz baz) { }
+            public Bar2(IBaz baz)
+            {
+            }
         }
 
-        private interface IBaz { }
+        private interface IBaz
+        {
+        }
 
-        private class Baz : IBaz { }
+        private class Baz : IBaz
+        {
+        }
 
         private class BazRecursive : IBaz
         {
-            public BazRecursive(IBaz baz) { }
+            public BazRecursive(IBaz baz)
+            {
+            }
         }
 
-        private interface IBoo { }
+        private interface IBoo
+        {
+        }
 
         private class Boo : IBoo
         {
-            public Boo(IServiceScopeFactory scopeFactory) { }
+            public Boo(IServiceScopeFactory scopeFactory)
+            {
+            }
         }
     }
 }

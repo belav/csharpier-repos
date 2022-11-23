@@ -36,11 +36,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.PullMemberUp
             Justification = "Used incorrectly by tests"
         )]
         public CSharpPullMemberUpCodeRefactoringProvider(IPullMemberUpOptionsService service)
-            : base(service) { }
+            : base(service)
+        {
+        }
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpPullMemberUpCodeRefactoringProvider() : this(service: null) { }
+        public CSharpPullMemberUpCodeRefactoringProvider() : this(service: null)
+        {
+        }
 
         protected override Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(
             CodeRefactoringContext context

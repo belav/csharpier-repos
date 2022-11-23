@@ -15,7 +15,9 @@ using Xunit;
 
 namespace Test_finallyclone
 {
-    class ApplicationException : Exception { }
+    class ApplicationException : Exception
+    {
+    }
 
     public class TestClass
     {

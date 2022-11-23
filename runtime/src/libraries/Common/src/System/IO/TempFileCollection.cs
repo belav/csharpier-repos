@@ -26,9 +26,13 @@ namespace System.IO.Internal
         private readonly Hashtable _files;
         private bool _createdTempDirectory;
 
-        public TempFileCollection() : this(null, false) { }
+        public TempFileCollection() : this(null, false)
+        {
+        }
 
-        public TempFileCollection(string tempDir) : this(tempDir, false) { }
+        public TempFileCollection(string tempDir) : this(tempDir, false)
+        {
+        }
 
         public TempFileCollection(string tempDir, bool keepFiles)
         {

@@ -1259,7 +1259,9 @@ namespace System.Collections
                     _firstCall = true;
                 }
 
-                private IListWrapperEnumWrapper() { }
+                private IListWrapperEnumWrapper()
+                {
+                }
 
                 public object Clone()
                 {

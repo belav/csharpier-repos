@@ -802,6 +802,8 @@ namespace System.Web.Http.Results
             }
         }
 
-        private class FakeController : ApiController { }
+        private class FakeController : ApiController
+        {
+        }
     }
 }

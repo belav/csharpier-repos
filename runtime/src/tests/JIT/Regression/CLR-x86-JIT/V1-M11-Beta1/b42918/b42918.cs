@@ -22,7 +22,9 @@ namespace Test
                     an[-1] = 0;
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

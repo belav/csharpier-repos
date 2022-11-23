@@ -95,7 +95,9 @@ namespace System.Diagnostics.Eventing.Reader
         }
 
         public EventLogSession(string server)
-            : this(server, null, null, (SecureString)null, SessionAuthentication.Default) { }
+            : this(server, null, null, (SecureString)null, SessionAuthentication.Default)
+        {
+        }
 
         public EventLogSession(
             string server,

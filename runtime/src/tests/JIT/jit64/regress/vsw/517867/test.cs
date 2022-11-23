@@ -9,7 +9,9 @@ public class Test_test
     {
         int rc;
 
-        try { }
+        try
+        {
+        }
         finally
         {
             switch (type)

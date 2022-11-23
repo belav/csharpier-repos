@@ -22,7 +22,9 @@ public class main
         {
             finaller();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     public static void catcher2()
@@ -39,7 +41,9 @@ public class main
                 throw exc;
             }
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     public static int Main()

@@ -17,7 +17,9 @@ namespace System.Net
     {
         private readonly MemoryStream _buffer = new MemoryStream();
 
-        public RequestStream() { }
+        public RequestStream()
+        {
+        }
 
         public override bool CanRead
         {

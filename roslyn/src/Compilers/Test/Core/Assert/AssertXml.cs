@@ -266,7 +266,9 @@ namespace Roslyn.Test.Utilities
             public static readonly IEqualityComparer<XElement> Instance =
                 new ShallowElementComparer();
 
-            private ShallowElementComparer() { }
+            private ShallowElementComparer()
+            {
+            }
 
             public bool Equals(XElement element1, XElement element2)
             {
@@ -292,7 +294,9 @@ namespace Roslyn.Test.Utilities
             public static readonly IEqualityComparer<XElement> Instance =
                 new NameAndAttributeComparer();
 
-            private NameAndAttributeComparer() { }
+            private NameAndAttributeComparer()
+            {
+            }
 
             public bool Equals(XElement element1, XElement element2)
             {

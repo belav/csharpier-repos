@@ -6,9 +6,13 @@ using System.Runtime.InteropServices;
 
 public class Win32Handle : SafeHandle
 {
-    private Win32Handle() : base(IntPtr.Zero, true) { }
+    private Win32Handle() : base(IntPtr.Zero, true)
+    {
+    }
 
-    public Win32Handle(IntPtr handle) : base(handle, false) { }
+    public Win32Handle(IntPtr handle) : base(handle, false)
+    {
+    }
 
     public override bool IsInvalid
     {

@@ -136,7 +136,9 @@ namespace Dynamic.Tests
         int Bar();
     }
 
-    public interface SubInterfaceWithNoMembers : BaseInterfaceWithTwoMembers { }
+    public interface SubInterfaceWithNoMembers : BaseInterfaceWithTwoMembers
+    {
+    }
 
     public interface SubInterfaceWithNewMember : BaseInterfaceWithTwoMembers
     {
@@ -170,7 +172,9 @@ namespace Dynamic.Tests
         public int Bar() => 1;
     }
 
-    public class EmptyClass { }
+    public class EmptyClass
+    {
+    }
 
     public class ExplicitlyImplementedInterfaceWithTwoMembersAndEmptyBaseClass
         : EmptyClass,
@@ -190,9 +194,13 @@ namespace Dynamic.Tests
     }
 
     public class SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass
-        : ExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass { }
+        : ExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass
+    {
+    }
 
-    public partial class ExplicitlyImplementedInterfaceInPartialClass { }
+    public partial class ExplicitlyImplementedInterfaceInPartialClass
+    {
+    }
 
     public partial class ExplicitlyImplementedInterfaceInPartialClass : BaseInterfaceWithTwoMembers
     {

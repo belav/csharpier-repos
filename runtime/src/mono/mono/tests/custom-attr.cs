@@ -46,15 +46,23 @@ namespace Test
         }
     }
 
-    interface ZInterface { }
+    interface ZInterface
+    {
+    }
 
-    class ZAttribute : Attribute, ZInterface { }
+    class ZAttribute : Attribute, ZInterface
+    {
+    }
 
     [X, Z, Serializable]
-    class Y { }
+    class Y
+    {
+    }
 
     [My("arg\0string\0with\0nuls")]
-    class NulTests { }
+    class NulTests
+    {
+    }
 
     [My("testclass")]
     [My2("testclass", 22)]
@@ -108,7 +116,9 @@ namespace Test
                 typeof(Y).GetCustomAttributes(true);
                 return 4;
             }
-            catch { }
+            catch
+            {
+            }
 
             if (typeof(Y).GetCustomAttributes(typeof(ZInterface), true).Length != 1)
                 return 5;

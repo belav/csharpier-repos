@@ -17,14 +17,18 @@ namespace System.Transactions
         : CodeAccessPermission,
             IUnrestrictedPermission
     {
-        public DistributedTransactionPermission(PermissionState state) { }
+        public DistributedTransactionPermission(PermissionState state)
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

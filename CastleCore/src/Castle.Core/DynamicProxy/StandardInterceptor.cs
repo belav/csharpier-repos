@@ -33,8 +33,12 @@ namespace Castle.DynamicProxy
             invocation.Proceed();
         }
 
-        protected virtual void PreProceed(IInvocation invocation) { }
+        protected virtual void PreProceed(IInvocation invocation)
+        {
+        }
 
-        protected virtual void PostProceed(IInvocation invocation) { }
+        protected virtual void PostProceed(IInvocation invocation)
+        {
+        }
     }
 }

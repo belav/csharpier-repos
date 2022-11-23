@@ -6,18 +6,24 @@ namespace Microsoft.EntityFrameworkCore;
 public class GraphUpdatesSqlServerOwnedTest
     : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerOwnedTest.SqlServerFixture>
 {
-    public GraphUpdatesSqlServerOwnedTest(SqlServerFixture fixture) : base(fixture) { }
+    public GraphUpdatesSqlServerOwnedTest(SqlServerFixture fixture) : base(fixture)
+    {
+    }
 
     // Owned dependents are always loaded
     public override void Required_one_to_one_are_cascade_deleted_in_store(
         CascadeTiming? cascadeDeleteTiming,
         CascadeTiming? deleteOrphansTiming
-    ) { }
+    )
+    {
+    }
 
     public override void Required_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
         CascadeTiming? cascadeDeleteTiming,
         CascadeTiming? deleteOrphansTiming
-    ) { }
+    )
+    {
+    }
 
     // No owned types
     public override Task Can_insert_when_composite_FK_has_default_value_for_one_part(bool async) =>
@@ -25,11 +31,15 @@ public class GraphUpdatesSqlServerOwnedTest
 
     public override void Required_one_to_one_relationships_are_one_to_one(
         CascadeTiming? deleteOrphansTiming
-    ) { }
+    )
+    {
+    }
 
     public override void Required_one_to_one_with_AK_relationships_are_one_to_one(
         CascadeTiming? deleteOrphansTiming
-    ) { }
+    )
+    {
+    }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

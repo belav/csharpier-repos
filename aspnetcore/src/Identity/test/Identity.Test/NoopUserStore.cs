@@ -62,7 +62,9 @@ public class NoopUserStore : IUserStore<PocoUser>
         return Task.FromResult<PocoUser>(null);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public Task<IdentityResult> DeleteAsync(
         PocoUser user,

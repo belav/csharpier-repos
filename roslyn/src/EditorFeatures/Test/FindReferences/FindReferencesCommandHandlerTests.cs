@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.FindReferences
         {
             public readonly List<DefinitionItem> Result = new();
 
-            public MockFindUsagesContext() { }
+            public MockFindUsagesContext()
+            {
+            }
 
             public override ValueTask<FindUsagesOptions> GetOptionsAsync(
                 string language,
@@ -64,7 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.FindReferences
                 bool supportsReferences
             ) => (_context, CancellationToken.None);
 
-            public void ClearAll() { }
+            public void ClearAll()
+            {
+            }
 
             public (FindUsagesContext, CancellationToken) StartSearchWithCustomColumns(
                 string title,

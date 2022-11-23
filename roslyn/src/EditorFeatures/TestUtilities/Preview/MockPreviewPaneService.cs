@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockPreviewPaneService() { }
+        public MockPreviewPaneService()
+        {
+        }
 
         public object GetPreviewPane(
             DiagnosticData diagnostic,

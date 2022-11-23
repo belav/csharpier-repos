@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpMakeMethodSynchronousCodeFixProvider() { }
+        public CSharpMakeMethodSynchronousCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS1998);

@@ -44,7 +44,9 @@ namespace System.Diagnostics.Eventing.Reader
             public Guid? ActivityId;
             public Guid? RelatedActivityId;
 
-            public SystemProperties() { }
+            public SystemProperties()
+            {
+            }
         }
 
         public static EventLogHandle EvtQuery(

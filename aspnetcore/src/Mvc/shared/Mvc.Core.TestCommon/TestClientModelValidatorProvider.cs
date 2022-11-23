@@ -25,5 +25,7 @@ public class TestClientModelValidatorProvider : CompositeClientModelValidatorPro
     }
 
     public TestClientModelValidatorProvider(IEnumerable<IClientModelValidatorProvider> providers)
-        : base(providers) { }
+        : base(providers)
+    {
+    }
 }

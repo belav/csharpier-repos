@@ -263,7 +263,9 @@ namespace System.Transactions
         internal TransactionTraceIdentifier _traceIdentifier;
 
         // Not used by anyone
-        private Transaction() { }
+        private Transaction()
+        {
+        }
 
         // Create a transaction with the given settings
         //
@@ -1248,7 +1250,8 @@ namespace System.Transactions
     // MarshalByRefObject is needed for cross AppDomain scenarios where just using object will end up with a different reference when call is made across serialization boundary.
     //
     internal sealed class ContextKey // : MarshalByRefObject
-    { }
+    {
+    }
 
     internal sealed class ContextData
     {

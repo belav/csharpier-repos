@@ -2,5 +2,7 @@ using System;
 
 public class OtherType
 {
-    public OtherType() { }
+    public OtherType()
+    {
+    }
 }

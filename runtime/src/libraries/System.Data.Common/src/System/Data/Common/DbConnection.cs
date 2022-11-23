@@ -14,7 +14,9 @@ namespace System.Data.Common
         internal bool _suppressStateChangeForReconnection;
 #pragma warning restore 649
 
-        protected DbConnection() : base() { }
+        protected DbConnection() : base()
+        {
+        }
 
         [DefaultValue("")]
         [SettingsBindableAttribute(true)]

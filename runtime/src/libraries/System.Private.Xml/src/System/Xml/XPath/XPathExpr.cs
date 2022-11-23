@@ -38,7 +38,9 @@ namespace System.Xml.XPath
 
     public abstract class XPathExpression
     {
-        internal XPathExpression() { }
+        internal XPathExpression()
+        {
+        }
 
         public abstract string Expression { get; }
 

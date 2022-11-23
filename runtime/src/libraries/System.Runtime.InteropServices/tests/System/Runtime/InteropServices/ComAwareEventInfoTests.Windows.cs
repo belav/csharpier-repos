@@ -19,7 +19,9 @@ namespace System.Runtime.InteropServices.Tests
         public class DispAttributeClass
         {
             [DispId(10)]
-            public void Event() { }
+            public void Event()
+            {
+            }
         }
 
         [ConditionalFact(
@@ -196,7 +198,9 @@ namespace System.Runtime.InteropServices.Tests
 
         public class NoDispAttributeClass
         {
-            public void Event() { }
+            public void Event()
+            {
+            }
         }
     }
 }

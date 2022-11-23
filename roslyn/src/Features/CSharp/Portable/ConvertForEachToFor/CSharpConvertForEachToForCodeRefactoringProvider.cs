@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpConvertForEachToForCodeRefactoringProvider() { }
+        public CSharpConvertForEachToForCodeRefactoringProvider()
+        {
+        }
 
         protected override string Title => CSharpFeaturesResources.Convert_to_for;
 

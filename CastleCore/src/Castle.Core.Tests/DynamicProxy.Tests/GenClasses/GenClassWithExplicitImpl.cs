@@ -28,9 +28,13 @@ namespace Castle.DynamicProxy.Tests.GenClasses
             get { return false; }
         }
 
-        void IChangeTracking.AcceptChanges() { }
+        void IChangeTracking.AcceptChanges()
+        {
+        }
 
-        protected virtual void AcceptChanges() { }
+        protected virtual void AcceptChanges()
+        {
+        }
     }
 
     public class GenClassWithExplicitImpl<T> : GenClassWithExplicitImpl where T : IComparable
@@ -40,7 +44,9 @@ namespace Castle.DynamicProxy.Tests.GenClasses
             get { return true; }
         }
 
-        protected override void AcceptChanges() { }
+        protected override void AcceptChanges()
+        {
+        }
     }
 
     public interface IChangeTracking

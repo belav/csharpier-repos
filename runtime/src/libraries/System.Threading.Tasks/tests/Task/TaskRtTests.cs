@@ -25,7 +25,11 @@ namespace System.Threading.Tasks.Tests
                 // Test Run(Action)
                 Task t1 = Task.Run(() =>
                 {
-                    tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    tInner = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                 });
                 Debug.WriteLine(
                     "RunRunTests - AttachToParentIgnored:      -- Waiting on outer Task.  If we hang, that's a failure"
@@ -37,7 +41,11 @@ namespace System.Threading.Tasks.Tests
                 // Test Run(Func<int>)
                 Task<int> f1 = Task.Run(() =>
                 {
-                    tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    tInner = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                     return 42;
                 });
                 Debug.WriteLine(
@@ -50,8 +58,13 @@ namespace System.Threading.Tasks.Tests
                 // Test Run(Func<Task>)
                 Task t2 = Task.Run(() =>
                 {
-                    tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
-                    Task returnTask = Task.Factory.StartNew(() => { });
+                    tInner = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
+                    Task returnTask = Task.Factory.StartNew(() => {
+                    });
                     return returnTask;
                 });
                 Debug.WriteLine(
@@ -349,7 +362,8 @@ namespace System.Threading.Tasks.Tests
             //
             {
                 // Create some pre-completed Tasks
-                Task alreadyCompletedTask = Task.Factory.StartNew(() => { });
+                Task alreadyCompletedTask = Task.Factory.StartNew(() => {
+                });
                 alreadyCompletedTask.Wait();
 
                 Task alreadyFaultedTask = Task.Factory.StartNew(() =>
@@ -360,14 +374,22 @@ namespace System.Threading.Tasks.Tests
                 {
                     alreadyFaultedTask.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
-                Task alreadyCanceledTask = new Task(() => { }, cts.Token); // should result in cancellation
+                Task alreadyCanceledTask = new Task(
+                    () => {
+                    },
+                    cts.Token
+                ); // should result in cancellation
                 try
                 {
                     alreadyCanceledTask.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 // Now run them through Task.Run
                 Task fastPath1 = Task.Run(() => alreadyCompletedTask);
@@ -388,7 +410,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
                 Assert.True(
                     fastPath1.Status == TaskStatus.Faulted,
                     "Expected proxy for already-faulted task to be in Faulted status"
@@ -405,7 +429,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
                 Assert.True(
                     fastPath1.Status == TaskStatus.Canceled,
                     "RunRunTests: Expected proxy for already-canceled task to be in Canceled status"
@@ -427,14 +453,18 @@ namespace System.Threading.Tasks.Tests
                 {
                     alreadyFaultedTask.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 Task<int> alreadyCanceledTask = new Task<int>(() => 42, cts.Token); // should result in cancellation
                 try
                 {
                     alreadyCanceledTask.Wait();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 // Now run them through Task.Run
                 Task<int> fastPath1 = Task.Run(() => alreadyCompletedTask);
@@ -455,7 +485,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
                 Assert.True(
                     fastPath1.Status == TaskStatus.Faulted,
                     "Expected proxy for already-faulted future to be in Faulted status"
@@ -472,7 +504,9 @@ namespace System.Threading.Tasks.Tests
                         )
                     );
                 }
-                catch { }
+                catch
+                {
+                }
                 Assert.True(
                     fastPath1.Status == TaskStatus.Canceled,
                     "RunRunTests: Expected proxy for already-canceled future to be in Canceled status"
@@ -1097,7 +1131,9 @@ namespace System.Threading.Tasks.Tests
             {
                 Task.WaitAll(task5, task6);
             }
-            catch { }
+            catch
+            {
+            }
 
             Assert.True(
                 task5.Status == TaskStatus.Canceled,
@@ -1125,7 +1161,9 @@ namespace System.Threading.Tasks.Tests
             {
                 Task.WaitAll(task8, task9);
             }
-            catch { }
+            catch
+            {
+            }
 
             Assert.True(
                 task8.IsCanceled,
@@ -1221,7 +1259,11 @@ namespace System.Threading.Tasks.Tests
             };
 
             // Test mcw off of Task
-            Task t = Task.Factory.StartNew(delegate { });
+            Task t = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
 
             // Throw in the returned future
             Task<int> mcw1 = t.ContinueWith(
@@ -1504,7 +1546,11 @@ namespace System.Threading.Tasks.Tests
             Task t1 = Task.Factory.StartNew(
                 () =>
                 {
-                    i1 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    i1 = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                 },
                 TaskCreationOptions.DenyChildAttach
             );
@@ -1513,7 +1559,11 @@ namespace System.Threading.Tasks.Tests
             Task t2 = Task<int>.Factory.StartNew(
                 () =>
                 {
-                    i2 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    i2 = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                     return 42;
                 },
                 TaskCreationOptions.DenyChildAttach
@@ -1524,7 +1574,11 @@ namespace System.Threading.Tasks.Tests
             Task t3 = new Task(
                 () =>
                 {
-                    i3 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    i3 = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                 },
                 TaskCreationOptions.DenyChildAttach
             );
@@ -1534,7 +1588,11 @@ namespace System.Threading.Tasks.Tests
             Task t4 = new Task<int>(
                 () =>
                 {
-                    i4 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    i4 = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                     return 42;
                 },
                 TaskCreationOptions.DenyChildAttach
@@ -1546,7 +1604,11 @@ namespace System.Threading.Tasks.Tests
             Task t5 = t3.ContinueWith(
                 _ =>
                 {
-                    i5 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    i5 = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                 },
                 TaskContinuationOptions.DenyChildAttach
             );
@@ -1555,7 +1617,11 @@ namespace System.Threading.Tasks.Tests
             Task t6 = t4.ContinueWith<int>(
                 _ =>
                 {
-                    i6 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    i6 = new Task(
+                        () => {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
                     return 42;
                 },
                 TaskContinuationOptions.DenyChildAttach
@@ -1612,7 +1678,8 @@ namespace System.Threading.Tasks.Tests
             Assert.Throws<ArgumentNullException>(() =>
             {
                 future.ContinueWith(
-                    (t, s) => { },
+                    (t, s) => {
+                    },
                     null,
                     CancellationToken.None,
                     TaskContinuationOptions.None,

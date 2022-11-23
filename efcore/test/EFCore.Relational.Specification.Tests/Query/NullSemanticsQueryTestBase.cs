@@ -18,7 +18,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : NullSemanticsQueryFixtureBase, new()
 {
-    protected NullSemanticsQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected NullSemanticsQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3176,5 +3178,7 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
 
     protected abstract NullSemanticsContext CreateContext(bool useRelationalNulls = false);
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 }

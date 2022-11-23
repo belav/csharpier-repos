@@ -13,7 +13,9 @@ namespace System.IO.Hashing.Tests
 
         private static readonly byte[] s_emptyHashValue = new byte[] { 0x62, 0xB3, 0x2B, 0x9D };
 
-        public XxHash32Tests_Seeded_f00d() : base(s_emptyHashValue) { }
+        public XxHash32Tests_Seeded_f00d() : base(s_emptyHashValue)
+        {
+        }
 
         public static IEnumerable<object[]> TestCases
         {

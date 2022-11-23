@@ -27,7 +27,9 @@ namespace Devirtualization
 
     class DevirtualizeAbstract
     {
-        abstract class Abstract { }
+        abstract class Abstract
+        {
+        }
 
         static void Run()
         {

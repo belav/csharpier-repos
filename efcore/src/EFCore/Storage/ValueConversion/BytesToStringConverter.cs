@@ -17,7 +17,9 @@ public class BytesToStringConverter : ValueConverter<byte[]?, string?>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public BytesToStringConverter() : this(null) { }
+    public BytesToStringConverter() : this(null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -30,7 +32,9 @@ public class BytesToStringConverter : ValueConverter<byte[]?, string?>
     ///     facets for the converted data.
     /// </param>
     public BytesToStringConverter(ConverterMappingHints? mappingHints)
-        : base(v => Convert.ToBase64String(v!), v => Convert.FromBase64String(v!), mappingHints) { }
+        : base(v => Convert.ToBase64String(v!), v => Convert.FromBase64String(v!), mappingHints)
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

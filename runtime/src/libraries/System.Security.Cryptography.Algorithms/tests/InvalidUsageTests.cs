@@ -116,7 +116,9 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
                 set { throw new NotSupportedException(); }
             }
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override long Seek(long offset, SeekOrigin origin)
             {

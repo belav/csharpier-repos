@@ -5,7 +5,9 @@ namespace System.Transactions
 {
     public class SinglePhaseEnlistment : Enlistment
     {
-        internal SinglePhaseEnlistment(InternalEnlistment enlistment) : base(enlistment) { }
+        internal SinglePhaseEnlistment(InternalEnlistment enlistment) : base(enlistment)
+        {
+        }
 
         public void Aborted()
         {

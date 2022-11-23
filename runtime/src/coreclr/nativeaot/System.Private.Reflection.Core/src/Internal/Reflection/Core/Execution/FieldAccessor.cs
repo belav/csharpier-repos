@@ -13,7 +13,9 @@ namespace Internal.Reflection.Core.Execution
     //
     public abstract class FieldAccessor
     {
-        protected FieldAccessor() { }
+        protected FieldAccessor()
+        {
+        }
 
         public abstract object GetField(object obj);
         public abstract object GetFieldDirect(TypedReference typedReference);

@@ -101,7 +101,9 @@ namespace Benchstone.BenchF
 
             return true;
 
-            L990: { }
+            L990:
+            {
+            }
 
             return true;
         }

@@ -15,5 +15,7 @@ namespace Roslyn.Test.Utilities
         "Roslyn.Test.Utilities.WpfFactDiscoverer",
         "Microsoft.CodeAnalysis.EditorFeatures.Test.Utilities"
     )]
-    public class WpfFactAttribute : FactAttribute { }
+    public class WpfFactAttribute : FactAttribute
+    {
+    }
 }

@@ -11,7 +11,9 @@ namespace Microsoft.NET.HostModel.AppHost
     /// </summary>
     public class AppHostUpdateException : Exception
     {
-        internal AppHostUpdateException(string message = null) : base(message) { }
+        internal AppHostUpdateException(string message = null) : base(message)
+        {
+        }
     }
 
     /// <summary>
@@ -20,7 +22,9 @@ namespace Microsoft.NET.HostModel.AppHost
     /// </summary>
     public sealed class AppHostCustomizationUnsupportedOSException : AppHostUpdateException
     {
-        internal AppHostCustomizationUnsupportedOSException() { }
+        internal AppHostCustomizationUnsupportedOSException()
+        {
+        }
     }
 
     /// <summary>
@@ -45,7 +49,9 @@ namespace Microsoft.NET.HostModel.AppHost
     public sealed class AppHostNotCUIException : AppHostUpdateException
     {
         internal AppHostNotCUIException(ushort subsystem)
-            : base($"Selected apphost is not a CUI Windows application. Subsystem: {subsystem}") { }
+            : base($"Selected apphost is not a CUI Windows application. Subsystem: {subsystem}")
+        {
+        }
     }
 
     /// <summary>

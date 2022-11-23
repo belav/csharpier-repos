@@ -12,7 +12,9 @@ namespace System.Security.Cryptography.Xml
         private string? _carriedKeyName;
         private ReferenceList? _referenceList;
 
-        public EncryptedKey() { }
+        public EncryptedKey()
+        {
+        }
 
         [AllowNull]
         public string Recipient

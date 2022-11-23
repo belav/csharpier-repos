@@ -296,7 +296,9 @@ internal sealed class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         throw new InvalidOperationException("Writing is not allowed after writer was completed.");
     }
 
-    public void Reset() { }
+    public void Reset()
+    {
+    }
 
     public void Stop()
     {

@@ -8,5 +8,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 public class ApplicationPartAttribute : Attribute
 {
-    public ApplicationPartAttribute(string assemblyName) { }
+    public ApplicationPartAttribute(string assemblyName)
+    {
+    }
 }

@@ -751,8 +751,10 @@ namespace System.Diagnostics.Tests
                 Process p = CreateProcessPortable(RemotelyInvokable.StreamBody);
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.RedirectStandardError = true;
-                p.OutputDataReceived += (s, e) => { };
-                p.ErrorDataReceived += (s, e) => { };
+                p.OutputDataReceived += (s, e) => {
+                };
+                p.ErrorDataReceived += (s, e) => {
+                };
 
                 p.Start();
                 p.BeginOutputReadLine();
@@ -768,8 +770,10 @@ namespace System.Diagnostics.Tests
                 Process p = CreateProcessPortable(RemotelyInvokable.StreamBody);
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.RedirectStandardError = true;
-                p.OutputDataReceived += (s, e) => { };
-                p.ErrorDataReceived += (s, e) => { };
+                p.OutputDataReceived += (s, e) => {
+                };
+                p.ErrorDataReceived += (s, e) => {
+                };
 
                 p.Start();
 

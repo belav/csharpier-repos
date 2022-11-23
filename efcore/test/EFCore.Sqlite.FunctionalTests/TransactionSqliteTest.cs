@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class TransactionSqliteTest
     : TransactionTestBase<TransactionSqliteTest.TransactionSqliteFixture>
 {
-    public TransactionSqliteTest(TransactionSqliteFixture fixture) : base(fixture) { }
+    public TransactionSqliteTest(TransactionSqliteFixture fixture) : base(fixture)
+    {
+    }
 
     protected override bool SnapshotSupported => false;
 

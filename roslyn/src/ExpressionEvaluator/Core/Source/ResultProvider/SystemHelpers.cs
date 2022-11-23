@@ -32,7 +32,9 @@ namespace System.CodeDom.Compiler
     [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = false)]
     internal sealed class GeneratedCodeAttribute : Attribute
     {
-        public GeneratedCodeAttribute(string tool, string version) { }
+        public GeneratedCodeAttribute(string tool, string version)
+        {
+        }
     }
 }
 
@@ -48,6 +50,8 @@ namespace System.ComponentModel
     [AttributeUsage(AttributeTargets.All)]
     internal sealed class EditorBrowsableAttribute : Attribute
     {
-        public EditorBrowsableAttribute(EditorBrowsableState state) { }
+        public EditorBrowsableAttribute(EditorBrowsableState state)
+        {
+        }
     }
 }

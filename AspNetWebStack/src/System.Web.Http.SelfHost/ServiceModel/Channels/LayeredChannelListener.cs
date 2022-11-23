@@ -33,15 +33,21 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         protected LayeredChannelListener(
             bool sharedInnerListener,
             IDefaultCommunicationTimeouts timeouts
-        ) : this(sharedInnerListener, timeouts, null) { }
+        ) : this(sharedInnerListener, timeouts, null)
+        {
+        }
 
         protected LayeredChannelListener(bool sharedInnerListener)
-            : this(sharedInnerListener, null, null) { }
+            : this(sharedInnerListener, null, null)
+        {
+        }
 
         protected LayeredChannelListener(
             IDefaultCommunicationTimeouts timeouts,
             IChannelListener innerChannelListener
-        ) : this(false, timeouts, innerChannelListener) { }
+        ) : this(false, timeouts, innerChannelListener)
+        {
+        }
 
         public override Uri Uri
         {

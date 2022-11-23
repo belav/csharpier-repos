@@ -4,7 +4,9 @@ public class When_using_non_generic_ResolveUsing : AutoMapperSpecBase
 {
     private Destination _destination;
 
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Destination
     {

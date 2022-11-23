@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static readonly char[] s_warningSeparators = new char[] { ',', ';', ' ' };
 
         internal CSharpCommandLineParser(bool isScriptCommandLineParser = false)
-            : base(CSharp.MessageProvider.Instance, isScriptCommandLineParser) { }
+            : base(CSharp.MessageProvider.Instance, isScriptCommandLineParser)
+        {
+        }
 
         protected override string RegularFileExtension
         {
@@ -681,7 +683,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     preferredUILang = null;
                                 }
                             }
-                            catch (CultureNotFoundException) { }
+                            catch (CultureNotFoundException)
+                            {
+                            }
 
                             if (preferredUILang == null)
                             {

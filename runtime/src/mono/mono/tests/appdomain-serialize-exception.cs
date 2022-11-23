@@ -2,7 +2,9 @@ using System;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-public class UnserializableException : Exception { }
+public class UnserializableException : Exception
+{
+}
 
 public class TestOutput : MarshalByRefObject
 {

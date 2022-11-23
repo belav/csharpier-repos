@@ -79,7 +79,9 @@ namespace Microsoft.CodeAnalysis.MakeTypeAbstract
                     FeaturesResources.Make_class_abstract,
                     createChangedDocument,
                     FeaturesResources.Make_class_abstract
-                ) { }
+                )
+            {
+            }
         }
     }
 }

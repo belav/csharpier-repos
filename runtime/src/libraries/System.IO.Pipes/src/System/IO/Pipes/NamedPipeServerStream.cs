@@ -26,7 +26,9 @@ namespace System.IO.Pipes
                 0,
                 0,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeServerStream(string pipeName, PipeDirection direction)
             : this(
@@ -38,7 +40,9 @@ namespace System.IO.Pipes
                 0,
                 0,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -54,7 +58,9 @@ namespace System.IO.Pipes
                 0,
                 0,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -71,7 +77,9 @@ namespace System.IO.Pipes
                 0,
                 0,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -89,7 +97,9 @@ namespace System.IO.Pipes
                 0,
                 0,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -109,7 +119,9 @@ namespace System.IO.Pipes
                 inBufferSize,
                 outBufferSize,
                 HandleInheritability.None
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Full named pipe server constructor

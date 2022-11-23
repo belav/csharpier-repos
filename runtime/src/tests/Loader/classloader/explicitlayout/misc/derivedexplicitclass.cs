@@ -6,7 +6,9 @@ using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit)]
 // non-generic base class
-public class Base { }
+public class Base
+{
+}
 
 // ... AND subclass is explicit
 [StructLayout(LayoutKind.Explicit)]

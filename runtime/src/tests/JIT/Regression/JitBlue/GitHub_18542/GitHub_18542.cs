@@ -7,7 +7,9 @@ using System.Runtime.CompilerServices;
 public class C
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public void M() { }
+    public void M()
+    {
+    }
 }
 
 public struct S1

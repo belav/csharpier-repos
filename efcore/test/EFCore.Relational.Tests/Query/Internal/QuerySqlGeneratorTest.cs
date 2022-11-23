@@ -74,7 +74,9 @@ public class QuerySqlGeneratorTest
     private class DummyQuerySqlGenerator : QuerySqlGenerator
     {
         public DummyQuerySqlGenerator(QuerySqlGeneratorDependencies dependencies)
-            : base(dependencies) { }
+            : base(dependencies)
+        {
+        }
 
         public new void CheckComposableSql(string sql) => base.CheckComposableSql(sql);
     }

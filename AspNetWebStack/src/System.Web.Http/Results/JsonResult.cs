@@ -44,7 +44,9 @@ namespace System.Web.Http.Results
                 serializerSettings,
                 encoding,
                 new StatusCodeResult.DirectDependencyProvider(request)
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonResult{T}"/> class with the values provided.
@@ -64,7 +66,9 @@ namespace System.Web.Http.Results
                 serializerSettings,
                 encoding,
                 new StatusCodeResult.ApiControllerDependencyProvider(controller)
-            ) { }
+            )
+        {
+        }
 
         private JsonResult(
             T content,

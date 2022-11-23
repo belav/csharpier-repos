@@ -31,7 +31,9 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="headers">Concrete <see cref="HttpHeaders"/> instance where header fields are added as they are parsed.</param>
         /// <param name="maxHeaderSize">Maximum length of complete header containing all the individual header fields.</param>
         public InternetMessageFormatHeaderParser(HttpHeaders headers, int maxHeaderSize)
-            : this(headers, maxHeaderSize, ignoreHeaderValidation: false) { }
+            : this(headers, maxHeaderSize, ignoreHeaderValidation: false)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InternetMessageFormatHeaderParser"/> class.

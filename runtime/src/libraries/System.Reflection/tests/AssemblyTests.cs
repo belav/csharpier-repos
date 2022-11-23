@@ -1309,26 +1309,40 @@ namespace System.Reflection.Tests
         }
     }
 
-    public struct PublicStruct { }
+    public struct PublicStruct
+    {
+    }
 
     public class AssemblyPublicClass
     {
-        public class PublicNestedClass { }
+        public class PublicNestedClass
+        {
+        }
     }
 
-    public class AssemblyGenericPublicClass<T> { }
+    public class AssemblyGenericPublicClass<T>
+    {
+    }
 
-    internal class AssemblyInternalClass { }
+    internal class AssemblyInternalClass
+    {
+    }
 
     public class AssemblyClassWithPrivateCtor
     {
-        private AssemblyClassWithPrivateCtor() { }
+        private AssemblyClassWithPrivateCtor()
+        {
+        }
     }
 
     public class AssemblyClassWithNoDefaultCtor
     {
-        public AssemblyClassWithNoDefaultCtor(int x) { }
+        public AssemblyClassWithNoDefaultCtor(int x)
+        {
+        }
     }
 }
 
-internal class G<T> { }
+internal class G<T>
+{
+}

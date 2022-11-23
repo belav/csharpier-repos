@@ -10,7 +10,9 @@ namespace System.Reflection.TypeLoading
     // of files that have to be edited whenever RoAssembly adds or removes an abstract method rather than to imply any meaningful commonality.
     internal abstract class RoStubAssembly : RoAssembly
     {
-        internal RoStubAssembly() : base(null!, 0) { }
+        internal RoStubAssembly() : base(null!, 0)
+        {
+        }
 
         public sealed override string Location => throw null!;
         public sealed override MethodInfo EntryPoint => throw null!;

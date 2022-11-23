@@ -33,7 +33,9 @@ namespace System.Reflection.Emit
         //------------------------------------------------------------------------------
         // Block instantiation
         //------------------------------------------------------------------------------
-        private SymWrapperCore() { }
+        private SymWrapperCore()
+        {
+        }
 
         //------------------------------------------------------------------------------
         // Implements Telesto's version of SymDocumentWriter (in the .NET Framework world,
@@ -167,7 +169,9 @@ namespace System.Reflection.Emit
             // but to fit in with existing .NET Framework code, the unmanaged writer is passed in
             // through a subsequent call to InternalSetUnderlyingWriter
             //------------------------------------------------------------------------------
-            private SymWriter() { }
+            private SymWriter()
+            {
+            }
 
             //------------------------------------------------------------------------------
             // DefineDocument() wrapper
@@ -566,7 +570,9 @@ namespace System.Reflection.Emit
     //--------------------------------------------------------------------------------------
     internal sealed class PunkSafeHandle : SafeHandle
     {
-        public PunkSafeHandle() : base((IntPtr)0, true) { }
+        public PunkSafeHandle() : base((IntPtr)0, true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

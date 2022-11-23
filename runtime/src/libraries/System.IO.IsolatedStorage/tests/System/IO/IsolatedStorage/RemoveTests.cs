@@ -65,7 +65,9 @@ namespace System.IO.IsolatedStorage
             using (var isf = GetPresetScope(scope))
             {
                 isf.CreateDirectory("RemoveStoreWithContent_Dir");
-                using (isf.CreateFile("RemoveStoreWithContent_File")) { }
+                using (isf.CreateFile("RemoveStoreWithContent_File"))
+                {
+                }
                 ;
                 string root = isf.GetUserRootDirectory();
                 isf.Remove();

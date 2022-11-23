@@ -25,7 +25,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_table() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "People",
@@ -69,7 +71,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.HasKey("Id");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "People",
@@ -172,7 +176,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_table_no_key() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("Anonymous").Property<int>("SomeColumn"),
             model =>
             {
@@ -184,7 +190,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_table_with_comments() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "People",
@@ -216,7 +224,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             "This is a multi-line\ncolumn comment.\nMore information can\nbe found in the docs.";
 
         return Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "People",
@@ -246,7 +256,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(null)]
     public virtual Task Create_table_with_computed_column(bool? stored) =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "People",
@@ -282,7 +294,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Alter_table_add_comment() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").ToTable(tb => tb.HasComment("Table comment")),
             model =>
             {
@@ -299,7 +313,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder =>
                 builder.Entity("People").ToTable("People", "SomeOtherSchema").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -335,7 +351,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").ToTable(tb => tb.HasComment("Table comment1")),
-            builder => { },
+            builder =>
+            {
+            },
             model => Assert.Null(Assert.Single(model.Tables).Comment)
         );
 
@@ -343,7 +361,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Drop_table() =>
         Test(
             builder => builder.Entity("People", e => e.Property<int>("Id")),
-            builder => { },
+            builder =>
+            {
+            },
             model => Assert.Empty(model.Tables)
         );
 
@@ -392,7 +412,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Move_table() =>
         Test(
             builder => builder.Entity("TestTable").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("TestTable").ToTable("TestTable", "TestTableSchema"),
             model =>
             {
@@ -409,7 +431,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_schema() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").ToTable("People", "SomeOtherSchema").Property<int>("Id"),
             model =>
@@ -426,7 +450,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_defaultValue_string() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -447,7 +473,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_defaultValue_datetime() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -466,7 +494,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_defaultValueSql() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<int>("Sum").HasDefaultValueSql("1 + 2"),
             model =>
             {
@@ -484,7 +514,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     {
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<int?>("Sum").HasDefaultValueSql()
         );
         Assert.Equal(RelationalStrings.DefaultValueSqlUnspecified("People", "Sum"), ex.Message);
@@ -495,7 +527,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     {
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<int?>("Sum").HasDefaultValue()
         );
         Assert.Equal(RelationalStrings.DefaultValueUnspecified("People", "Sum"), ex.Message);
@@ -517,7 +551,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("Y");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -547,7 +583,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     {
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<int?>("Sum").HasComputedColumnSql()
         );
         Assert.Equal(RelationalStrings.ComputedColumnSqlUnspecified("Sum", "People"), ex.Message);
@@ -557,7 +595,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_required() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("Name").IsRequired(),
             model =>
             {
@@ -575,7 +615,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_ansi() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("Name").IsUnicode(false),
             model =>
             {
@@ -595,7 +637,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_max_length() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("Name").HasMaxLength(30),
             model =>
             {
@@ -627,7 +671,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
 
                 builder.Entity("MoreSpecialPerson").HasBaseType("SpecialPerson");
             },
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("Person").Property<string>("Name").HasMaxLength(30),
             model =>
             {
@@ -646,7 +692,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_fixed_length() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").Property<string>("Name").IsFixedLength().HasMaxLength(100),
             model =>
@@ -671,7 +719,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_comment() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").Property<string>("FullName").HasComment("My comment"),
             model =>
@@ -689,7 +739,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_collation() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
             model =>
@@ -708,7 +760,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_computed_with_collation() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -741,7 +795,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 builder.Entity("Derived1").HasBaseType("Base").Property<string>("Foo");
                 builder.Entity("Derived2").HasBaseType("Base").Property<string>("Foo");
             },
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("Base").Property<string>("Foo"),
             model =>
             {
@@ -754,7 +810,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_column_with_check_constraint() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity(
                     "People",
@@ -805,7 +863,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<string>("SomeColumn");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
             {
@@ -830,7 +890,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         );
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
             {
@@ -853,7 +915,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.HasIndex("SomeColumn");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
             {
@@ -879,7 +943,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.HasIndex("FirstName", "LastName");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").Property<string>("FirstName").IsRequired(),
             model =>
             {
@@ -1111,7 +1177,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         x.Property<int>("SomeColumn").HasComputedColumnSql("42");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").Property<int>("SomeColumn").HasComment("Some comment"),
             model =>
@@ -1158,7 +1226,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Alter_column_set_collation() =>
         Test(
             builder => builder.Entity("People").Property<string>("Name"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
             model =>
@@ -1177,7 +1247,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder => builder.Entity("People").Property<string>("Name"),
             builder =>
                 builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var nameColumn = Assert.Single(Assert.Single(model.Tables).Columns);
@@ -1190,7 +1262,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").Property<int>("SomeColumn"),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1211,7 +1285,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.HasKey("Id");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1232,7 +1308,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("Y").HasComputedColumnSql($"{DelimitIdentifier("X")} + 1");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1270,7 +1348,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<string>("FirstName");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("FirstName"),
             model =>
             {
@@ -1306,7 +1386,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<string>("LastName");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("FirstName", "LastName").IsUnique(),
             model =>
             {
@@ -1328,7 +1410,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("X");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasIndex("X").IsDescending(),
             model =>
             {
@@ -1352,7 +1436,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("Z");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").HasIndex("X", "Y", "Z").IsDescending(false, true, false),
             model =>
@@ -1423,7 +1509,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<string>("Name");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -1456,7 +1544,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<string>("Name");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -1489,7 +1579,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     }
                 ),
             builder => builder.Entity("People").HasIndex("SomeField"),
-            builder => { },
+            builder =>
+            {
+            },
             model => Assert.Empty(Assert.Single(model.Tables).Indexes)
         );
 
@@ -1519,7 +1611,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_primary_key_int() =>
         Test(
             builder => builder.Entity("People").Property<int>("SomeField"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasKey("SomeField"),
             model =>
             {
@@ -1539,7 +1633,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_primary_key_string() =>
         Test(
             builder => builder.Entity("People").Property<string>("SomeField").IsRequired(),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasKey("SomeField"),
             model =>
             {
@@ -1559,7 +1655,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Add_primary_key_with_name() =>
         Test(
             builder => builder.Entity("People").Property<string>("SomeField"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasKey("SomeField").HasName("PK_Foo"),
             model =>
             {
@@ -1587,7 +1685,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("SomeField2");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("People").HasKey("SomeField1", "SomeField2").HasName("PK_Foo"),
             model =>
@@ -1613,7 +1713,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder => builder.Entity("People").Property<int>("SomeField"),
             builder => builder.Entity("People").HasKey("SomeField"),
-            builder => { },
+            builder =>
+            {
+            },
             model => Assert.Null(Assert.Single(model.Tables).PrimaryKey)
         );
 
@@ -1622,7 +1724,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder => builder.Entity("People").Property<string>("SomeField").IsRequired(),
             builder => builder.Entity("People").HasKey("SomeField"),
-            builder => { },
+            builder =>
+            {
+            },
             model => Assert.Null(Assert.Single(model.Tables).PrimaryKey)
         );
 
@@ -1648,7 +1752,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     }
                 );
             },
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder.Entity("Orders").HasOne("Customers").WithMany().HasForeignKey("CustomerId"),
             model =>
@@ -1693,7 +1799,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     }
                 );
             },
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("Orders")
@@ -1736,7 +1844,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             },
             builder =>
                 builder.Entity("Orders").HasOne("Customers").WithMany().HasForeignKey("CustomerId"),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 var customersTable = Assert.Single(model.Tables, t => t.Name == "Customers");
@@ -1756,7 +1866,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("AlternateKeyColumn");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.Entity("People").HasAlternateKey("AlternateKeyColumn"),
             model =>
             {
@@ -1787,7 +1899,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("AlternateKeyColumn2");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -1823,7 +1937,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     }
                 ),
             builder => builder.Entity("People").HasAlternateKey("AlternateKeyColumn"),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 Assert.Empty(Assert.Single(model.Tables).UniqueConstraints);
@@ -1842,7 +1958,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.Property<int>("DriverLicense");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("People")
@@ -1919,7 +2037,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                                 $"{DelimitIdentifier("DriverLicense")} > 0"
                             )
                     ),
-            builder => { },
+            builder =>
+            {
+            },
             model =>
             {
                 // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
@@ -1929,7 +2049,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_sequence() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.HasSequence<int>("TestSequence"),
             model =>
             {
@@ -1941,7 +2063,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_sequence_long() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.HasSequence<long>("TestSequence"),
             model =>
             {
@@ -1953,7 +2077,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_sequence_short() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.HasSequence<short>("TestSequence"),
             model =>
             {
@@ -1965,7 +2091,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_sequence_all_settings() =>
         Test(
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .HasSequence<long>("TestSequence", "dbo2")
@@ -1991,7 +2119,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Alter_sequence_all_settings() =>
         Test(
             builder => builder.HasSequence<int>("foo"),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .HasSequence<int>("foo")
@@ -2015,7 +2145,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Alter_sequence_increment_by() =>
         Test(
             builder => builder.HasSequence<int>("foo"),
-            builder => { },
+            builder =>
+            {
+            },
             builder => builder.HasSequence<int>("foo").IncrementsBy(2),
             model =>
             {
@@ -2028,7 +2160,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Drop_sequence() =>
         Test(
             builder => builder.HasSequence("TestSequence"),
-            builder => { },
+            builder =>
+            {
+            },
             model => Assert.Empty(model.Sequences)
         );
 
@@ -2070,7 +2204,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         e.HasKey("Id");
                     }
                 ),
-            builder => { },
+            builder =>
+            {
+            },
             builder =>
                 builder
                     .Entity("Person")
@@ -2081,7 +2217,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         new Person { Id = 4, Name = "Harry Strickland" },
                         new Person { Id = 5, Name = null }
                     ),
-            model => { }
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -2099,8 +2237,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     }
                 ),
             builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
-            builder => { },
-            model => { }
+            builder =>
+            {
+            },
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -2136,8 +2278,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                             Name = "John Snow"
                         }
                     ),
-            builder => { },
-            model => { }
+            builder =>
+            {
+            },
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -2157,7 +2303,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
             builder =>
                 builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }),
-            model => { }
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -2204,7 +2352,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                             Name = "Another John Snow"
                         }
                     ),
-            model => { }
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -2251,14 +2401,18 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                             Age = 21
                         }
                     ),
-            model => { }
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
     public virtual async Task SqlOperation()
     {
         await Test(
-            builder => { },
+            builder =>
+            {
+            },
             new SqlOperation { Sql = "-- I <3 DDL" },
             model =>
             {
@@ -2315,7 +2469,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             MigrationsSqlGenerationOptions.Default
     ) =>
         Test(
-            _ => { },
+            _ =>
+            {
+            },
             buildSourceAction,
             buildTargetAction,
             asserter,
@@ -2505,7 +2661,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Action<ModelBuilder> buildTargetAction,
         bool withConventions = true
     ) where T : Exception =>
-        TestThrows<T>(b => { }, buildSourceAction, buildTargetAction, withConventions);
+        TestThrows<T>(
+            b =>
+            {
+            },
+            buildSourceAction,
+            buildTargetAction,
+            withConventions
+        );
 
     protected virtual Task<T> TestThrows<T>(
         Action<ModelBuilder> buildCommonAction,

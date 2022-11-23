@@ -28,7 +28,9 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentNullException"><paramref name="archiveStream"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="archiveStream"/> does not support writing.</exception>
         public TarWriter(Stream archiveStream)
-            : this(archiveStream, TarEntryFormat.Pax, leaveOpen: false) { }
+            : this(archiveStream, TarEntryFormat.Pax, leaveOpen: false)
+        {
+        }
 
         /// <summary>
         /// Initializes a <see cref="TarWriter"/> instance that can write tar entries to the specified stream and optionally leaves the stream open upon disposal of this instance. When using this constructor, the format of the resulting archive is <see cref="TarEntryFormat.Pax"/>.
@@ -38,7 +40,9 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentNullException"><paramref name="archiveStream"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="archiveStream"/> is unwritable.</exception>
         public TarWriter(Stream archiveStream, bool leaveOpen = false)
-            : this(archiveStream, TarEntryFormat.Pax, leaveOpen) { }
+            : this(archiveStream, TarEntryFormat.Pax, leaveOpen)
+        {
+        }
 
         /// <summary>
         /// Initializes a <see cref="TarWriter"/> instance that can write tar entries to the specified stream, optionally leaves the stream open upon disposal of

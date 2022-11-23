@@ -179,7 +179,9 @@ namespace System.Reflection.Tests
             }
         }
 
-        public ref struct ByRefLike { }
+        public ref struct ByRefLike
+        {
+        }
 
         private sealed class TestClass<T>
         {

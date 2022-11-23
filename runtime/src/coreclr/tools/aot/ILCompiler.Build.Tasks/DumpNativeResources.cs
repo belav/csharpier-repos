@@ -53,7 +53,9 @@ namespace Build.Tasks
                         {
                             File.Delete(ResourceFile);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
             }

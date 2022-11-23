@@ -41,7 +41,9 @@ namespace ContainsGCPointers
         ClassHasPointers classHasPointers1;
     }
 
-    class BaseClassHasPointers : ClassHasPointers { }
+    class BaseClassHasPointers : ClassHasPointers
+    {
+    }
 
     public class ClassHasIntArray
     {
@@ -89,13 +91,19 @@ namespace Explicit
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public class ExplicitEmptyClass { }
+    public class ExplicitEmptyClass
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 0)]
-    public class ExplicitEmptyClassSize0 { }
+    public class ExplicitEmptyClassSize0
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit)]
-    public struct ExplicitEmptyStruct { }
+    public struct ExplicitEmptyStruct
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit)]
     ref struct MisalignedPointer
@@ -111,7 +119,9 @@ namespace Explicit
         public ByRefStruct O;
     }
 
-    ref struct ByRefStruct { }
+    ref struct ByRefStruct
+    {
+    }
 }
 
 namespace Sequential
@@ -301,13 +311,21 @@ namespace IsByRefLike
 
 namespace EnumAlignment
 {
-    public enum ByteEnum : byte { }
+    public enum ByteEnum : byte
+    {
+    }
 
-    public enum ShortEnum : short { }
+    public enum ShortEnum : short
+    {
+    }
 
-    public enum IntEnum : int { }
+    public enum IntEnum : int
+    {
+    }
 
-    public enum LongEnum : long { }
+    public enum LongEnum : long
+    {
+    }
 
     public struct LongIntEnumStruct
     {

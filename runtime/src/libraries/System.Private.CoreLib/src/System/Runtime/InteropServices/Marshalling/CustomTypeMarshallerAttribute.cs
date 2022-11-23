@@ -54,6 +54,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// This type is used as a placeholder for the first generic parameter when generic parameters cannot be used
         /// to identify the managed type (i.e. when the marshaller type is generic over T and the managed type is T[])
         /// </summary>
-        public struct GenericPlaceholder { }
+        public struct GenericPlaceholder
+        {
+        }
     }
 }

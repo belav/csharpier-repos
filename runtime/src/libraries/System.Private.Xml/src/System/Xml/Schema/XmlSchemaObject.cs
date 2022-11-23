@@ -52,11 +52,17 @@ namespace System.Xml.Schema
             set => _namespaces = value;
         }
 
-        internal virtual void OnAdd(XmlSchemaObjectCollection container, object? item) { }
+        internal virtual void OnAdd(XmlSchemaObjectCollection container, object? item)
+        {
+        }
 
-        internal virtual void OnRemove(XmlSchemaObjectCollection container, object? item) { }
+        internal virtual void OnRemove(XmlSchemaObjectCollection container, object? item)
+        {
+        }
 
-        internal virtual void OnClear(XmlSchemaObjectCollection container) { }
+        internal virtual void OnClear(XmlSchemaObjectCollection container)
+        {
+        }
 
         [XmlIgnore]
         internal virtual string? IdAttribute
@@ -69,9 +75,13 @@ namespace System.Xml.Schema
             set { Debug.Fail("Should not use base property"); }
         }
 
-        internal virtual void SetUnhandledAttributes(XmlAttribute[] moreAttributes) { }
+        internal virtual void SetUnhandledAttributes(XmlAttribute[] moreAttributes)
+        {
+        }
 
-        internal virtual void AddAnnotation(XmlSchemaAnnotation annotation) { }
+        internal virtual void AddAnnotation(XmlSchemaAnnotation annotation)
+        {
+        }
 
         [XmlIgnore]
         internal virtual string? NameAttribute

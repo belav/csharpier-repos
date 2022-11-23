@@ -14,7 +14,9 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsSemanticInterpretationTag : SrgsElement, ISemanticTag
     {
         #region Constructors
-        public SrgsSemanticInterpretationTag() { }
+        public SrgsSemanticInterpretationTag()
+        {
+        }
 
         public SrgsSemanticInterpretationTag(string script)
         {

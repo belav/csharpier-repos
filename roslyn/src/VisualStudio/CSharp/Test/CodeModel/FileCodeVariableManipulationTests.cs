@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
 {
     private int bar;
 }"
-            ) { }
+            )
+        {
+        }
 
         [WpfFact]
         [Trait(Traits.Feature, Traits.Features.CodeModel)]

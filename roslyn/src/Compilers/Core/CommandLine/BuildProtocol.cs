@@ -486,7 +486,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <summary>
         /// MismatchedVersion has no body.
         /// </summary>
-        protected override void AddResponseBody(BinaryWriter writer) { }
+        protected override void AddResponseBody(BinaryWriter writer)
+        {
+        }
     }
 
     internal sealed class IncorrectHashBuildResponse : BuildResponse
@@ -496,7 +498,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <summary>
         /// IncorrectHash has no body.
         /// </summary>
-        protected override void AddResponseBody(BinaryWriter writer) { }
+        protected override void AddResponseBody(BinaryWriter writer)
+        {
+        }
     }
 
     internal sealed class AnalyzerInconsistencyBuildResponse : BuildResponse
@@ -566,7 +570,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
     {
         public override ResponseType Type => ResponseType.CannotConnect;
 
-        protected override void AddResponseBody(BinaryWriter writer) { }
+        protected override void AddResponseBody(BinaryWriter writer)
+        {
+        }
     }
 
     // The id numbers below are just random. It's useful to use id numbers

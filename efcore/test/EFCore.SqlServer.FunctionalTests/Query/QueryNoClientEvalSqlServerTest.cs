@@ -8,5 +8,7 @@ public class QueryNoClientEvalSqlServerTest
 {
     public QueryNoClientEvalSqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 }

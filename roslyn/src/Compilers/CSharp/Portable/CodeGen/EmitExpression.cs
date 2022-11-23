@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
     {
         private int _recursionDepth;
 
-        private class EmitCancelledException : Exception { }
+        private class EmitCancelledException : Exception
+        {
+        }
 
         private enum UseKind
         {

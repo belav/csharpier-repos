@@ -23,10 +23,13 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeCFDictionaryHandle : SafeHandle
     {
-        public SafeCFDictionaryHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeCFDictionaryHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         internal SafeCFDictionaryHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
-        { }
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

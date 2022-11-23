@@ -13,7 +13,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public string ValidRenameTag => RenameFieldBackgroundAndBorderTag.TagId;
 
         public InlineRenameDialog_OutOfProc(VisualStudioInstance visualStudioInstance)
-            : base(visualStudioInstance) { }
+            : base(visualStudioInstance)
+        {
+        }
 
         public void Invoke()
         {

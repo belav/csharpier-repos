@@ -15,7 +15,9 @@ class Driver
             {
                 Console.WriteLine($"Finalizer {I}");
             }
-            catch (NotSupportedException) { }
+            catch (NotSupportedException)
+            {
+            }
 
             mre.Set();
         }
@@ -40,7 +42,12 @@ class Driver
 
     static void SpawnThread(int i)
     {
-        var th = new Thread(_ => { }) { IsBackground = true, };
+        var th = new Thread(_ =>
+        {
+        })
+        {
+            IsBackground = true,
+        };
         th.Start(new MyClassInThread { I = i });
         th.Join();
     }

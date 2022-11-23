@@ -562,7 +562,9 @@ namespace System.Linq.Tests
                 .Shuffle()
                 .OrderBy(i => i)
                 .GetEnumerator();
-            while (enumerator.MoveNext()) { }
+            while (enumerator.MoveNext())
+            {
+            }
             Assert.False(enumerator.MoveNext());
         }
 

@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExtractInterfaceOptionsService() { }
+        public TestExtractInterfaceOptionsService()
+        {
+        }
 
         public IEnumerable<ISymbol> AllExtractableMembers { get; private set; }
         public string DefaultInterfaceName { get; private set; }

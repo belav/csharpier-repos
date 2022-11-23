@@ -15,28 +15,44 @@ public class Outside
 {
     public class Inside
     {
-        public void GenericMethod<T>() { }
+        public void GenericMethod<T>()
+        {
+        }
 
-        public void TwoGenericMethod<T, U>() { }
+        public void TwoGenericMethod<T, U>()
+        {
+        }
     }
 
-    public void GenericMethod<T>() { }
+    public void GenericMethod<T>()
+    {
+    }
 
-    public void TwoGenericMethod<T, U>() { }
+    public void TwoGenericMethod<T, U>()
+    {
+    }
 }
 
 public class Outside<T>
 {
     public class Inside<U>
     {
-        public void GenericMethod<V>() { }
+        public void GenericMethod<V>()
+        {
+        }
 
-        public void TwoGenericMethod<V, W>() { }
+        public void TwoGenericMethod<V, W>()
+        {
+        }
     }
 
-    public void GenericMethod<U>() { }
+    public void GenericMethod<U>()
+    {
+    }
 
-    public void TwoGenericMethod<U, V>() { }
+    public void TwoGenericMethod<U, V>()
+    {
+    }
 }
 
 namespace System.Tests
@@ -952,7 +968,9 @@ namespace System.Tests
             public Span<int> S;
         }
 
-        private struct RegularStruct { }
+        private struct RegularStruct
+        {
+        }
 
         [Theory]
         [MemberData(nameof(IsGenericParameterTestData))]
@@ -1014,7 +1032,9 @@ namespace System.Tests
             }
         }
 
-        private static void GenericMethod<M>() { }
+        private static void GenericMethod<M>()
+        {
+        }
     }
 
     public class TypeTestsExtended
@@ -1343,9 +1363,13 @@ namespace System.Tests
 
         class SimpleType : ISimpleInterface
         {
-            public void Method() { }
+            public void Method()
+            {
+            }
 
-            public void GenericMethod<T>() { }
+            public void GenericMethod<T>()
+            {
+            }
         }
 
         abstract class AbstractSimpleType : ISimpleInterface
@@ -1361,12 +1385,16 @@ namespace System.Tests
 
         class GenericBaseType<T> : IGenericInterface<T>
         {
-            public void Method(T arg) { }
+            public void Method(T arg)
+            {
+            }
         }
 
         class DerivedType : GenericBaseType<object>, IGenericInterface<string>
         {
-            public void Method(string arg) { }
+            public void Method(string arg)
+            {
+            }
         }
 
         static class DIMs
@@ -1379,7 +1407,9 @@ namespace System.Tests
                 }
             }
 
-            internal class C1 : I1 { }
+            internal class C1 : I1
+            {
+            }
 
             internal interface I2 : I1
             {
@@ -1399,7 +1429,9 @@ namespace System.Tests
                 }
             }
 
-            internal class C3 : I3 { }
+            internal class C3 : I3
+            {
+            }
 
             internal interface I4 : I3
             {
@@ -1434,7 +1466,9 @@ namespace System.Tests
             C
         }
 
-        public class TestClass { }
+        public class TestClass
+        {
+        }
 
         public class TestGenericClass<T>
         {
@@ -1447,33 +1481,63 @@ namespace System.Tests
         }
     }
 
-    public class NonGenericClass { }
+    public class NonGenericClass
+    {
+    }
 
-    public class NonGenericSubClassOfNonGeneric : NonGenericClass { }
+    public class NonGenericSubClassOfNonGeneric : NonGenericClass
+    {
+    }
 
-    public class GenericClass<T> { }
+    public class GenericClass<T>
+    {
+    }
 
-    public class NonGenericSubClassOfGeneric : GenericClass<string> { }
+    public class NonGenericSubClassOfGeneric : GenericClass<string>
+    {
+    }
 
-    public class GenericClass<T, U> { }
+    public class GenericClass<T, U>
+    {
+    }
 
-    public abstract class AbstractClass { }
+    public abstract class AbstractClass
+    {
+    }
 
-    public static class StaticClass { }
+    public static class StaticClass
+    {
+    }
 
-    public struct NonGenericStruct { }
+    public struct NonGenericStruct
+    {
+    }
 
-    public ref struct RefStruct { }
+    public ref struct RefStruct
+    {
+    }
 
-    public struct GenericStruct<T> { }
+    public struct GenericStruct<T>
+    {
+    }
 
-    public struct GenericStruct<T, U> { }
+    public struct GenericStruct<T, U>
+    {
+    }
 
-    public interface NonGenericInterface { }
+    public interface NonGenericInterface
+    {
+    }
 
-    public interface GenericInterface<T> { }
+    public interface GenericInterface<T>
+    {
+    }
 
-    public interface GenericInterface<T, U> { }
+    public interface GenericInterface<T, U>
+    {
+    }
 }
 
-internal class DummyGenericClassForTypeTests<T> { }
+internal class DummyGenericClassForTypeTests<T>
+{
+}

@@ -74,7 +74,9 @@ namespace System.Web.Razor.Parser
             { CSharpSymbolType.Transition, "@" },
         };
 
-        private CSharpLanguageCharacteristics() { }
+        private CSharpLanguageCharacteristics()
+        {
+        }
 
         public static CSharpLanguageCharacteristics Instance
         {

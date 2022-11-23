@@ -9,12 +9,16 @@ public interface Parent
 
 public class Foo : Parent
 {
-    public void Test() { }
+    public void Test()
+    {
+    }
 }
 
 public class Bar : Parent
 {
-    public void Test() { }
+    public void Test()
+    {
+    }
 }
 
 class Driver

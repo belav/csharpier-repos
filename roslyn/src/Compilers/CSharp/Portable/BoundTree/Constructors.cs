@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 LookupResultKind.Viable,
                 fieldSymbol.Type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundFieldAccess(
             SyntaxNode syntax,
@@ -46,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isDeclaration: false,
                 type: type,
                 hasErrors: hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundFieldAccess(
             SyntaxNode syntax,
@@ -68,7 +72,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isDeclaration: isDeclaration,
                 type: type,
                 hasErrors: hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundFieldAccess Update(
             BoundExpression? receiver,
@@ -148,7 +154,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 originalMethodsOpt: default,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundCall Update(
             BoundExpression? receiverOpt,
@@ -342,7 +350,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 null,
                 null,
                 constructor.ContainingType
-            ) { }
+            )
+        {
+        }
 
         public BoundObjectCreationExpression(
             SyntaxNode syntax,
@@ -361,7 +371,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 null,
                 null,
                 constructor.ContainingType
-            ) { }
+            )
+        {
+        }
     }
 
     internal partial class BoundIndexerAccess
@@ -418,7 +430,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 originalIndexersOpt: default,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundIndexerAccess Update(
             BoundExpression? receiverOpt,
@@ -533,7 +547,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 conversion.OriginalUserDefinedConversions,
                 type: type,
                 hasErrors: hasErrors || !conversion.IsValid
-            ) { }
+            )
+        {
+        }
 
         public BoundConversion(
             SyntaxNode syntax,
@@ -559,7 +575,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 originalUserDefinedConversionsOpt: default,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundConversion Update(
             BoundExpression operand,
@@ -613,7 +631,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 right,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundBinaryOperator(
             SyntaxNode syntax,
@@ -641,7 +661,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 right,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundBinaryOperator Update(
             BinaryOperatorKind operatorKind,
@@ -734,10 +756,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             ParameterSymbol parameterSymbol,
             bool hasErrors = false
-        ) : this(syntax, parameterSymbol, parameterSymbol.Type, hasErrors) { }
+        ) : this(syntax, parameterSymbol, parameterSymbol.Type, hasErrors)
+        {
+        }
 
         public BoundParameter(SyntaxNode syntax, ParameterSymbol parameterSymbol)
-            : this(syntax, parameterSymbol, parameterSymbol.Type) { }
+            : this(syntax, parameterSymbol, parameterSymbol.Type)
+        {
+        }
     }
 
     internal sealed partial class BoundTypeExpression
@@ -777,21 +803,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<BoundExpression>.Empty,
                 typeWithAnnotations,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundTypeExpression(
             SyntaxNode syntax,
             AliasSymbol? aliasOpt,
             TypeWithAnnotations typeWithAnnotations,
             bool hasErrors = false
-        ) : this(syntax, aliasOpt, null, typeWithAnnotations, hasErrors) { }
+        ) : this(syntax, aliasOpt, null, typeWithAnnotations, hasErrors)
+        {
+        }
 
         public BoundTypeExpression(
             SyntaxNode syntax,
             AliasSymbol? aliasOpt,
             TypeSymbol type,
             bool hasErrors = false
-        ) : this(syntax, aliasOpt, null, TypeWithAnnotations.Create(type), hasErrors) { }
+        ) : this(syntax, aliasOpt, null, TypeWithAnnotations.Create(type), hasErrors)
+        {
+        }
 
         public BoundTypeExpression(
             SyntaxNode syntax,
@@ -799,7 +831,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> dimensionsOpt,
             TypeWithAnnotations typeWithAnnotations,
             bool hasErrors = false
-        ) : this(syntax, aliasOpt, null, dimensionsOpt, typeWithAnnotations, hasErrors) { }
+        ) : this(syntax, aliasOpt, null, dimensionsOpt, typeWithAnnotations, hasErrors)
+        {
+        }
     }
 
     internal sealed partial class BoundNamespaceExpression
@@ -808,10 +842,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             NamespaceSymbol namespaceSymbol,
             bool hasErrors = false
-        ) : this(syntax, namespaceSymbol, null, hasErrors) { }
+        ) : this(syntax, namespaceSymbol, null, hasErrors)
+        {
+        }
 
         public BoundNamespaceExpression(SyntaxNode syntax, NamespaceSymbol namespaceSymbol)
-            : this(syntax, namespaceSymbol, null) { }
+            : this(syntax, namespaceSymbol, null)
+        {
+        }
 
         public BoundNamespaceExpression Update(NamespaceSymbol namespaceSymbol)
         {
@@ -828,7 +866,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             bool isRef = false,
             bool hasErrors = false
-        ) : this(syntax, left, right, isRef, type, hasErrors) { }
+        ) : this(syntax, left, right, isRef, type, hasErrors)
+        {
+        }
     }
 
     internal sealed partial class BoundBadExpression
@@ -921,7 +961,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 caseExpressionOpt: null,
                 labelExpressionOpt: null,
                 hasErrors: hasErrors
-            ) { }
+            )
+        {
+        }
     }
 
     internal partial class BoundBlock
@@ -932,7 +974,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundStatement> statements,
             bool hasErrors = false
         ) : this(syntax, locals, ImmutableArray<LocalFunctionSymbol>.Empty, statements, hasErrors)
-        { }
+        {
+        }
 
         public static BoundBlock SynthesizedNoLocals(SyntaxNode syntax, BoundStatement statement)
         {
@@ -976,7 +1019,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal sealed partial class BoundDefaultExpression
     {
         public BoundDefaultExpression(SyntaxNode syntax, TypeSymbol type, bool hasErrors = false)
-            : this(syntax, targetType: null, type.GetDefaultValue(), type, hasErrors) { }
+            : this(syntax, targetType: null, type.GetDefaultValue(), type, hasErrors)
+        {
+        }
 
         public override ConstantValue? ConstantValue => ConstantValueOpt;
     }
@@ -998,7 +1043,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 finallyLabelOpt,
                 preferFaultHandler: false,
                 hasErrors: false
-            ) { }
+            )
+        {
+        }
     }
 
     internal partial class BoundAddressOfOperator
@@ -1008,13 +1055,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             TypeSymbol type,
             bool hasErrors = false
-        ) : this(syntax, operand, isManaged: false, type, hasErrors) { }
+        ) : this(syntax, operand, isManaged: false, type, hasErrors)
+        {
+        }
     }
 
     internal partial class BoundDagTemp
     {
         public BoundDagTemp(SyntaxNode syntax, TypeSymbol type, BoundDagEvaluation? source)
-            : this(syntax, type, source, index: 0, hasErrors: false) { }
+            : this(syntax, type, source, index: 0, hasErrors: false)
+        {
+        }
 
         public static BoundDagTemp ForOriginalInput(BoundExpression expr) =>
             new BoundDagTemp(expr.Syntax, expr.Type!, source: null);
@@ -1048,7 +1099,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 originalUserDefinedOperatorsOpt: default,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundCompoundAssignmentOperator Update(
             BinaryOperatorSignature @operator,
@@ -1099,7 +1152,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 originalUserDefinedOperatorsOpt: default,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundUnaryOperator Update(
             UnaryOperatorKind operatorKind,
@@ -1152,7 +1207,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 originalUserDefinedOperatorsOpt: default,
                 type,
                 hasErrors
-            ) { }
+            )
+        {
+        }
 
         public BoundIncrementOperator Update(
             UnaryOperatorKind operatorKind,

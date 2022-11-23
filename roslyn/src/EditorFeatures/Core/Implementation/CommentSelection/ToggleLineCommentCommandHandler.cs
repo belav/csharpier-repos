@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         public ToggleLineCommentCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) : base(undoHistoryRegistry, editorOperationsFactoryService) { }
+        ) : base(undoHistoryRegistry, editorOperationsFactoryService)
+        {
+        }
 
         public CommandState GetCommandState(ToggleLineCommentCommandArgs args) =>
             GetCommandState(args.SubjectBuffer);

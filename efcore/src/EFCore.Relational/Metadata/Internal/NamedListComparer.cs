@@ -22,7 +22,9 @@ public sealed class NamedListComparer
     /// </summary>
     public static readonly NamedListComparer Instance = new();
 
-    private NamedListComparer() { }
+    private NamedListComparer()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

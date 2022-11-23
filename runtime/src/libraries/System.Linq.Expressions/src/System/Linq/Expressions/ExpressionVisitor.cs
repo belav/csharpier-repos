@@ -21,7 +21,9 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Initializes a new instance of <see cref="ExpressionVisitor"/>.
         /// </summary>
-        protected ExpressionVisitor() { }
+        protected ExpressionVisitor()
+        {
+        }
 
         /// <summary>
         /// Dispatches the expression to one of the more specialized visit methods in this class.

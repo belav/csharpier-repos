@@ -17,7 +17,9 @@ public class TemporalTableBuilder<TEntity> : TemporalTableBuilder where TEntity 
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public TemporalTableBuilder(EntityTypeBuilder entityTypeBuilder) : base(entityTypeBuilder) { }
+    public TemporalTableBuilder(EntityTypeBuilder entityTypeBuilder) : base(entityTypeBuilder)
+    {
+    }
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.

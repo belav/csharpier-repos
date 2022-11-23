@@ -85,7 +85,9 @@ namespace System.Runtime.InteropServices.Tests
             AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.IsComObject(null));
         }
 
-        private static void NonGenericMethod(int i) { }
+        private static void NonGenericMethod(int i)
+        {
+        }
 
         public delegate void NonGenericDelegate(int i);
 

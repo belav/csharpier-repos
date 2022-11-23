@@ -289,7 +289,9 @@ namespace XLinqTests
                 XElement e = CreateElement(mode, paras);
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         public void XElementEmptyArray()
@@ -336,7 +338,9 @@ namespace XLinqTests
                 XElement e = CreateElement(mode, paras);
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
         }
 
         //[Variation(Priority = 2, Desc = "XElement - Not allowed - XDocumentType", Param = 3)]
@@ -358,7 +362,9 @@ namespace XLinqTests
                 XElement e = CreateElement(mode, paras);
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
         }
 
         public void XElementValidCreate()

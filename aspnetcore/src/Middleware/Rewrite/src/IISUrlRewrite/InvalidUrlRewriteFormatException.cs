@@ -12,7 +12,9 @@ internal sealed class InvalidUrlRewriteFormatException : FormatException
     public int LinePosition { get; }
 
     public InvalidUrlRewriteFormatException(XElement element, string message)
-        : base(FormatMessage(element, message)) { }
+        : base(FormatMessage(element, message))
+    {
+    }
 
     public InvalidUrlRewriteFormatException(
         XElement element,

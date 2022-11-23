@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private sealed partial class AnonymousTypeGetHashCodeMethodSymbol : SynthesizedMethodBase
         {
             internal AnonymousTypeGetHashCodeMethodSymbol(NamedTypeSymbol container)
-                : base(container, WellKnownMemberNames.ObjectGetHashCode) { }
+                : base(container, WellKnownMemberNames.ObjectGetHashCode)
+            {
+            }
 
             public override MethodKind MethodKind
             {

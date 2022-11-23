@@ -115,7 +115,9 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        protected virtual void GenerateDirectives(CodeDirectiveCollection directives) { }
+        protected virtual void GenerateDirectives(CodeDirectiveCollection directives)
+        {
+        }
 
         private void GenerateTypeMember(CodeTypeMember member, CodeTypeDeclaration declaredType)
         {
@@ -1576,7 +1578,9 @@ namespace System.CodeDom.Compiler
         protected virtual void GenerateDecimalValue(decimal d) =>
             Output.Write(d.ToString(CultureInfo.InvariantCulture));
 
-        protected virtual void GenerateDefaultValueExpression(CodeDefaultValueExpression e) { }
+        protected virtual void GenerateDefaultValueExpression(CodeDefaultValueExpression e)
+        {
+        }
 
         protected abstract void GeneratePropertyReferenceExpression(
             CodePropertyReferenceExpression e

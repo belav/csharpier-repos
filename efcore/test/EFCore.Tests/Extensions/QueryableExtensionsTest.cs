@@ -420,9 +420,22 @@ public class QueryableExtensionsTest
         await SourceNonAsyncQueryableTest(
             () => Source().FirstOrDefaultAsync(e => true, new CancellationToken())
         );
-        await SourceNonAsyncEnumerableTest<int>(() => Source().ForEachAsync(e => { }));
         await SourceNonAsyncEnumerableTest<int>(
-            () => Source().ForEachAsync(e => { }, new CancellationToken())
+            () =>
+                Source()
+                    .ForEachAsync(e =>
+                    {
+                    })
+        );
+        await SourceNonAsyncEnumerableTest<int>(
+            () =>
+                Source()
+                    .ForEachAsync(
+                        e =>
+                        {
+                        },
+                        new CancellationToken()
+                    )
         );
         await SourceNonAsyncEnumerableTest<int>(() => Source().LoadAsync());
         await SourceNonAsyncEnumerableTest<int>(() => Source().LoadAsync(new CancellationToken()));

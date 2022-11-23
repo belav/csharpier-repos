@@ -18,7 +18,9 @@ namespace System.ServiceModel.Syndication
         private readonly Type _referencedDocumentType;
 
         public AtomPub10CategoriesDocumentFormatter()
-            : this(typeof(InlineCategoriesDocument), typeof(ReferencedCategoriesDocument)) { }
+            : this(typeof(InlineCategoriesDocument), typeof(ReferencedCategoriesDocument))
+        {
+        }
 
         public AtomPub10CategoriesDocumentFormatter(
             Type inlineDocumentType,

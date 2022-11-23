@@ -199,7 +199,9 @@ public class EntityFrameworkRelationalServicesBuilder : EntityFrameworkServicesB
     /// </summary>
     /// <param name="serviceCollection">The collection to which services will be registered.</param>
     public EntityFrameworkRelationalServicesBuilder(IServiceCollection serviceCollection)
-        : base(serviceCollection) { }
+        : base(serviceCollection)
+    {
+    }
 
     /// <summary>
     ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.

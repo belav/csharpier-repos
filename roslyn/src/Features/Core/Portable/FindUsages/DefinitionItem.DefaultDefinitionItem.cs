@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
                     properties,
                     displayableProperties,
                     displayIfNoReferences
-                ) { }
+                )
+            {
+            }
 
             public override async Task<INavigableLocation?> GetNavigableLocationAsync(
                 Workspace workspace,

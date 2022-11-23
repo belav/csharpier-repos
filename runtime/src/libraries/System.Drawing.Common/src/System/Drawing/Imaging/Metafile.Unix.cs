@@ -176,7 +176,9 @@ namespace System.Drawing.Imaging
                 MetafileFrameUnit.GdiCompatible,
                 emfType,
                 description
-            ) { }
+            )
+        {
+        }
 
         public Metafile(Stream stream, IntPtr referenceHdc, EmfType type, string? description)
             : this(
@@ -186,7 +188,9 @@ namespace System.Drawing.Imaging
                 MetafileFrameUnit.GdiCompatible,
                 type,
                 description
-            ) { }
+            )
+        {
+        }
 
         public Metafile(string fileName, IntPtr referenceHdc, EmfType type, string? description)
             : this(
@@ -196,7 +200,9 @@ namespace System.Drawing.Imaging
                 MetafileFrameUnit.GdiCompatible,
                 type,
                 description
-            ) { }
+            )
+        {
+        }
 
         public Metafile(
             IntPtr referenceHdc,

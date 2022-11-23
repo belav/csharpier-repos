@@ -28,7 +28,12 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void MultipleApiDescriptionsCreatedForMultipleHttpMethods()
     {
-        var apiDescriptions = GetApiDescriptions(() => { }, "/", new string[] { "FOO", "BAR" });
+        var apiDescriptions = GetApiDescriptions(
+            () => {
+            },
+            "/",
+            new string[] { "FOO", "BAR" }
+        );
 
         Assert.Equal(2, apiDescriptions.Count);
     }
@@ -36,7 +41,12 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void ApiDescriptionNotCreatedIfNoHttpMethods()
     {
-        var apiDescriptions = GetApiDescriptions(() => { }, "/", Array.Empty<string>());
+        var apiDescriptions = GetApiDescriptions(
+            () => {
+            },
+            "/",
+            Array.Empty<string>()
+        );
 
         Assert.Empty(apiDescriptions);
     }
@@ -53,7 +63,8 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void UsesApplicationNameAsControllerNameIfNoDeclaringType()
     {
-        var apiDescription = GetApiDescription(() => { });
+        var apiDescription = GetApiDescription(() => {
+        });
 
         Assert.Equal(
             nameof(EndpointMetadataApiDescriptionProviderTest),
@@ -72,11 +83,19 @@ public class EndpointMetadataApiDescriptionProviderTest
         }
 
         AssertCustomRequestFormat(
-            GetApiDescription([Consumes("application/custom")] (InferredJsonClass fromBody) => { })
+            GetApiDescription(
+                [Consumes("application/custom")]
+                (InferredJsonClass fromBody) => {
+                }
+            )
         );
 
         AssertCustomRequestFormat(
-            GetApiDescription([Consumes("application/custom")] ([FromBody] int fromBody) => { })
+            GetApiDescription(
+                [Consumes("application/custom")]
+                ([FromBody] int fromBody) => {
+                }
+            )
         );
     }
 
@@ -85,7 +104,8 @@ public class EndpointMetadataApiDescriptionProviderTest
     {
         var apiDescription = GetApiDescription(
             [Consumes("application/custom0", "application/custom1")]
-            (InferredJsonClass fromBody) => { }
+            (InferredJsonClass fromBody) => {
+            }
         );
 
         Assert.Equal(2, apiDescription.SupportedRequestFormats.Count);
@@ -108,7 +128,8 @@ public class EndpointMetadataApiDescriptionProviderTest
             "application/custom1",
             IsOptional = true
         )]
-        () => { });
+        () => {
+        });
 
         Assert.Equal(2, apiDescription.SupportedRequestFormats.Count);
 
@@ -127,7 +148,8 @@ public class EndpointMetadataApiDescriptionProviderTest
                 "application/custom1",
                 IsOptional = false
             )]
-            (InferredJsonClass fromBody) => { }
+            (InferredJsonClass fromBody) => {
+            }
         );
 
         Assert.Equal(2, apiDescription.SupportedRequestFormats.Count);
@@ -190,7 +212,10 @@ public class EndpointMetadataApiDescriptionProviderTest
             Assert.Empty(responseType.ApiResponseFormats);
         }
 
-        AssertVoid(GetApiDescription(() => { }));
+        AssertVoid(
+            GetApiDescription(() => {
+            })
+        );
         AssertVoid(GetApiDescription(() => Task.CompletedTask));
         AssertVoid(GetApiDescription(() => new ValueTask()));
     }
@@ -284,8 +309,19 @@ public class EndpointMetadataApiDescriptionProviderTest
             Assert.Equal(BindingSource.Path, param.Source);
         }
 
-        AssertPathParameter(GetApiDescription((int foo) => { }, "/{foo}"));
-        AssertPathParameter(GetApiDescription(([FromRoute] int foo) => { }));
+        AssertPathParameter(
+            GetApiDescription(
+                (int foo) => {
+                },
+                "/{foo}"
+            )
+        );
+        AssertPathParameter(
+            GetApiDescription(
+                ([FromRoute] int foo) => {
+                }
+            )
+        );
     }
 
     [Fact]
@@ -299,7 +335,13 @@ public class EndpointMetadataApiDescriptionProviderTest
             Assert.Equal(BindingSource.Path, param.Source);
         }
 
-        AssertPathParameter(GetApiDescription((TryParseStringRecord foo) => { }, "/{foo}"));
+        AssertPathParameter(
+            GetApiDescription(
+                (TryParseStringRecord foo) => {
+                },
+                "/{foo}"
+            )
+        );
     }
 
     [Fact]
@@ -313,7 +355,13 @@ public class EndpointMetadataApiDescriptionProviderTest
             Assert.Equal(BindingSource.Path, param.Source);
         }
 
-        AssertPathParameter(GetApiDescription((int foo) => { }, "/{foo}"));
+        AssertPathParameter(
+            GetApiDescription(
+                (int foo) => {
+                },
+                "/{foo}"
+            )
+        );
     }
 
     [Fact]
@@ -327,7 +375,13 @@ public class EndpointMetadataApiDescriptionProviderTest
             Assert.Equal(BindingSource.Path, param.Source);
         }
 
-        AssertPathParameter(GetApiDescription((int? foo) => { }, "/{foo}"));
+        AssertPathParameter(
+            GetApiDescription(
+                (int? foo) => {
+                },
+                "/{foo}"
+            )
+        );
     }
 
     [Fact]
@@ -341,7 +395,13 @@ public class EndpointMetadataApiDescriptionProviderTest
             Assert.Equal(BindingSource.Path, param.Source);
         }
 
-        AssertPathParameter(GetApiDescription((TryParseStringRecordStruct foo) => { }, "/{foo}"));
+        AssertPathParameter(
+            GetApiDescription(
+                (TryParseStringRecordStruct foo) => {
+                },
+                "/{foo}"
+            )
+        );
     }
 
     [Fact]
@@ -355,16 +415,52 @@ public class EndpointMetadataApiDescriptionProviderTest
             Assert.Equal(BindingSource.Query, param.Source);
         }
 
-        AssertQueryParameter<int>(GetApiDescription((int foo) => { }, "/"));
-        AssertQueryParameter<int>(GetApiDescription(([FromQuery] int foo) => { }));
-        AssertQueryParameter<TryParseStringRecordStruct>(
-            GetApiDescription(([FromQuery] TryParseStringRecordStruct foo) => { })
+        AssertQueryParameter<int>(
+            GetApiDescription(
+                (int foo) => {
+                },
+                "/"
+            )
         );
-        AssertQueryParameter<int[]>(GetApiDescription((int[] foo) => { }, "/"));
-        AssertQueryParameter<string[]>(GetApiDescription((string[] foo) => { }, "/"));
-        AssertQueryParameter<StringValues>(GetApiDescription((StringValues foo) => { }, "/"));
+        AssertQueryParameter<int>(
+            GetApiDescription(
+                ([FromQuery] int foo) => {
+                }
+            )
+        );
+        AssertQueryParameter<TryParseStringRecordStruct>(
+            GetApiDescription(
+                ([FromQuery] TryParseStringRecordStruct foo) => {
+                }
+            )
+        );
+        AssertQueryParameter<int[]>(
+            GetApiDescription(
+                (int[] foo) => {
+                },
+                "/"
+            )
+        );
+        AssertQueryParameter<string[]>(
+            GetApiDescription(
+                (string[] foo) => {
+                },
+                "/"
+            )
+        );
+        AssertQueryParameter<StringValues>(
+            GetApiDescription(
+                (StringValues foo) => {
+                },
+                "/"
+            )
+        );
         AssertQueryParameter<TryParseStringRecordStruct[]>(
-            GetApiDescription((TryParseStringRecordStruct[] foo) => { }, "/")
+            GetApiDescription(
+                (TryParseStringRecordStruct[] foo) => {
+                },
+                "/"
+            )
         );
     }
 
@@ -382,14 +478,25 @@ public class EndpointMetadataApiDescriptionProviderTest
         }
 
         AssertBody<int[]>(
-            GetApiDescription((int[] foo) => { }, "/", httpMethods: new[] { httpMethod })
+            GetApiDescription(
+                (int[] foo) => {
+                },
+                "/",
+                httpMethods: new[] { httpMethod }
+            )
         );
         AssertBody<string[]>(
-            GetApiDescription((string[] foo) => { }, "/", httpMethods: new[] { httpMethod })
+            GetApiDescription(
+                (string[] foo) => {
+                },
+                "/",
+                httpMethods: new[] { httpMethod }
+            )
         );
         AssertBody<TryParseStringRecordStruct[]>(
             GetApiDescription(
-                (TryParseStringRecordStruct[] foo) => { },
+                (TryParseStringRecordStruct[] foo) => {
+                },
                 "/",
                 httpMethods: new[] { httpMethod }
             )
@@ -399,7 +506,10 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void AddsFromHeaderParameterAsHeader()
     {
-        var apiDescription = GetApiDescription(([FromHeader] int foo) => { });
+        var apiDescription = GetApiDescription(
+            ([FromHeader] int foo) => {
+            }
+        );
         var param = Assert.Single(apiDescription.ParameterDescriptions);
 
         Assert.Equal(typeof(int), param.Type);
@@ -411,15 +521,53 @@ public class EndpointMetadataApiDescriptionProviderTest
     public void DoesNotAddFromServiceParameterAsService()
     {
         Assert.Empty(
-            GetApiDescription((IInferredServiceInterface foo) => { }).ParameterDescriptions
+            GetApiDescription(
+                (IInferredServiceInterface foo) => {
+                }
+            ).ParameterDescriptions
         );
-        Assert.Empty(GetApiDescription(([FromServices] int foo) => { }).ParameterDescriptions);
-        Assert.Empty(GetApiDescription((HttpContext context) => { }).ParameterDescriptions);
-        Assert.Empty(GetApiDescription((HttpRequest request) => { }).ParameterDescriptions);
-        Assert.Empty(GetApiDescription((HttpResponse response) => { }).ParameterDescriptions);
-        Assert.Empty(GetApiDescription((ClaimsPrincipal user) => { }).ParameterDescriptions);
-        Assert.Empty(GetApiDescription((CancellationToken token) => { }).ParameterDescriptions);
-        Assert.Empty(GetApiDescription((BindAsyncRecord context) => { }).ParameterDescriptions);
+        Assert.Empty(
+            GetApiDescription(
+                ([FromServices] int foo) => {
+                }
+            ).ParameterDescriptions
+        );
+        Assert.Empty(
+            GetApiDescription(
+                (HttpContext context) => {
+                }
+            ).ParameterDescriptions
+        );
+        Assert.Empty(
+            GetApiDescription(
+                (HttpRequest request) => {
+                }
+            ).ParameterDescriptions
+        );
+        Assert.Empty(
+            GetApiDescription(
+                (HttpResponse response) => {
+                }
+            ).ParameterDescriptions
+        );
+        Assert.Empty(
+            GetApiDescription(
+                (ClaimsPrincipal user) => {
+                }
+            ).ParameterDescriptions
+        );
+        Assert.Empty(
+            GetApiDescription(
+                (CancellationToken token) => {
+                }
+            ).ParameterDescriptions
+        );
+        Assert.Empty(
+            GetApiDescription(
+                (BindAsyncRecord context) => {
+                }
+            ).ParameterDescriptions
+        );
     }
 
     [Fact]
@@ -439,11 +587,21 @@ public class EndpointMetadataApiDescriptionProviderTest
         }
 
         AssertBodyParameter(
-            GetApiDescription((InferredJsonClass foo) => { }),
+            GetApiDescription(
+                (InferredJsonClass foo) => {
+                }
+            ),
             "foo",
             typeof(InferredJsonClass)
         );
-        AssertBodyParameter(GetApiDescription(([FromBody] int bar) => { }), "bar", typeof(int));
+        AssertBodyParameter(
+            GetApiDescription(
+                ([FromBody] int bar) => {
+                }
+            ),
+            "bar",
+            typeof(int)
+        );
     }
 
     [Fact]
@@ -459,7 +617,8 @@ public class EndpointMetadataApiDescriptionProviderTest
     public void AddsMultipleParameters()
     {
         var apiDescription = GetApiDescription(
-            ([FromRoute] int foo, int bar, InferredJsonClass fromBody) => { }
+            ([FromRoute] int foo, int bar, InferredJsonClass fromBody) => {
+            }
         );
         Assert.Equal(3, apiDescription.ParameterDescriptions.Count);
 
@@ -518,28 +677,54 @@ public class EndpointMetadataApiDescriptionProviderTest
             );
         }
 
-        AssertParameters(GetApiDescription(([AsParameters] ArgumentListClass req) => { }));
-        AssertParameters(
-            GetApiDescription(([AsParameters] ArgumentListClassWithReadOnlyProperties req) => { })
-        );
-        AssertParameters(GetApiDescription(([AsParameters] ArgumentListStruct req) => { }));
-        AssertParameters(GetApiDescription(([AsParameters] ArgumentListRecord req) => { }));
-        AssertParameters(GetApiDescription(([AsParameters] ArgumentListRecordStruct req) => { }));
         AssertParameters(
             GetApiDescription(
-                ([AsParameters] ArgumentListRecordWithoutPositionalParameters req) => { }
+                ([AsParameters] ArgumentListClass req) => {
+                }
             )
         );
         AssertParameters(
             GetApiDescription(
-                ([AsParameters] ArgumentListRecordWithoutAttributes req) => { },
+                ([AsParameters] ArgumentListClassWithReadOnlyProperties req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetApiDescription(
+                ([AsParameters] ArgumentListStruct req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetApiDescription(
+                ([AsParameters] ArgumentListRecord req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetApiDescription(
+                ([AsParameters] ArgumentListRecordStruct req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetApiDescription(
+                ([AsParameters] ArgumentListRecordWithoutPositionalParameters req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetApiDescription(
+                ([AsParameters] ArgumentListRecordWithoutAttributes req) => {
+                },
                 "/{foo}"
             ),
             "foo"
         );
         AssertParameters(
             GetApiDescription(
-                ([AsParameters] ArgumentListRecordWithoutAttributes req) => { },
+                ([AsParameters] ArgumentListRecordWithoutAttributes req) => {
+                },
                 "/{Foo}"
             )
         );
@@ -550,7 +735,10 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void TestParameterIsRequired()
     {
-        var apiDescription = GetApiDescription(([FromRoute] int foo, int? bar) => { });
+        var apiDescription = GetApiDescription(
+            ([FromRoute] int foo, int? bar) => {
+            }
+        );
         Assert.Equal(2, apiDescription.ParameterDescriptions.Count);
 
         var fooParam = apiDescription.ParameterDescriptions[0];
@@ -577,7 +765,9 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void AddsMetadataFromRouteEndpoint()
     {
-        var apiDescription = GetApiDescription([ApiExplorerSettings(IgnoreApi = true)] () => { });
+        var apiDescription = GetApiDescription([ApiExplorerSettings(IgnoreApi = true)]
+        () => {
+        });
 
         Assert.NotEmpty(apiDescription.ActionDescriptor.EndpointMetadata);
 
@@ -595,7 +785,10 @@ public class EndpointMetadataApiDescriptionProviderTest
     {
         // In an oblivious nullability context, reference type parameters without
         // annotations are optional. Value type parameters are always required.
-        var apiDescription = GetApiDescription((string foo, int bar) => { });
+        var apiDescription = GetApiDescription(
+            (string foo, int bar) => {
+            }
+        );
         Assert.Equal(2, apiDescription.ParameterDescriptions.Count);
 
         var fooParam = apiDescription.ParameterDescriptions[0];
@@ -614,7 +807,10 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void TestParameterAttributesCanBeInspected()
     {
-        var apiDescription = GetApiDescription(([Description("The name.")] string name) => { });
+        var apiDescription = GetApiDescription(
+            ([Description("The name.")] string name) => {
+            }
+        );
         Assert.Equal(1, apiDescription.ParameterDescriptions.Count);
 
         var nameParam = apiDescription.ParameterDescriptions[0];
@@ -1151,8 +1347,14 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void TestIsRequiredFromFormFile()
     {
-        var apiDescription0 = GetApiDescription((IFormFile fromFile) => { });
-        var apiDescription1 = GetApiDescription((IFormFile? fromFile) => { });
+        var apiDescription0 = GetApiDescription(
+            (IFormFile fromFile) => {
+            }
+        );
+        var apiDescription1 = GetApiDescription(
+            (IFormFile? fromFile) => {
+            }
+        );
         Assert.Equal(1, apiDescription0.ParameterDescriptions.Count);
         Assert.Equal(1, apiDescription1.ParameterDescriptions.Count);
 
@@ -1186,12 +1388,18 @@ public class EndpointMetadataApiDescriptionProviderTest
         }
 
         AssertFormFileParameter(
-            GetApiDescription((IFormFile file) => { }),
+            GetApiDescription(
+                (IFormFile file) => {
+                }
+            ),
             typeof(IFormFile),
             "file"
         );
         AssertFormFileParameter(
-            GetApiDescription(([FromForm(Name = "file_name")] IFormFile file) => { }),
+            GetApiDescription(
+                ([FromForm(Name = "file_name")] IFormFile file) => {
+                }
+            ),
             typeof(IFormFile),
             "file_name"
         );
@@ -1488,15 +1696,25 @@ public class EndpointMetadataApiDescriptionProviderTest
             GetApiDescriptions(action, pattern, displayName: displayName, httpMethods: httpMethods)
         );
 
-    private static void TestAction() { }
+    private static void TestAction()
+    {
+    }
 
-    private static void TestActionWithDefaultValue(int foo = 42) { }
+    private static void TestActionWithDefaultValue(int foo = 42)
+    {
+    }
 
-    private class InferredJsonClass { }
+    private class InferredJsonClass
+    {
+    }
 
-    private interface IInferredServiceInterface { }
+    private interface IInferredServiceInterface
+    {
+    }
 
-    private interface IInferredJsonInterface { }
+    private interface IInferredJsonInterface
+    {
+    }
 
     private class ServiceProviderIsService : IServiceProviderIsService
     {

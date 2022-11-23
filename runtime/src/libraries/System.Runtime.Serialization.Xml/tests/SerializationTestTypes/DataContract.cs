@@ -30,7 +30,9 @@ namespace SerializationTestTypes
         object[] genericParams;
 
         internal GenericNameProvider(Type type)
-            : this(type.GetGenericTypeDefinition().FullName, type.GetGenericArguments()) { }
+            : this(type.GetGenericTypeDefinition().FullName, type.GetGenericArguments())
+        {
+        }
 
         internal GenericNameProvider(string genericTypeName, object[] genericParams)
         {
@@ -722,7 +724,9 @@ namespace SerializationTestTypes
             return false;
         }
 
-        public DataContract() { }
+        public DataContract()
+        {
+        }
 
         public DataContract(bool supportCollectionDataContract)
         {
@@ -853,7 +857,9 @@ namespace SerializationTestTypes
         bool isISerializable;
         bool hasDataContract;
 
-        public ClassDataContract(Type type) : this(type, false) { }
+        public ClassDataContract(Type type) : this(type, false)
+        {
+        }
 
         public ClassDataContract(Type type, bool supportCollectionDataContract)
             : base(type, supportCollectionDataContract)
@@ -1200,7 +1206,9 @@ namespace SerializationTestTypes
         MemberInfo memberInfo;
         protected internal bool supportCollectionDataContract;
 
-        public DataMember() { }
+        public DataMember()
+        {
+        }
 
         public DataMember(MemberInfo memberInfo)
         {
@@ -1498,7 +1506,9 @@ namespace SerializationTestTypes
             StableName = DataContract.GetStableName(type, supportCollectionDataContract);
         }
 
-        public ArrayDataContract(Type type) : this(type, false) { }
+        public ArrayDataContract(Type type) : this(type, false)
+        {
+        }
 
         public DataContract ItemContract
         {

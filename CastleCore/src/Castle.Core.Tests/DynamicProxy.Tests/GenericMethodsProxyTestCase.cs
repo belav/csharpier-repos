@@ -113,12 +113,16 @@ namespace Castle.DynamicProxy.Tests
 
         public class Test : ITest
         {
-            public void Hi<U>() { }
+            public void Hi<U>()
+            {
+            }
         }
 
         public class TestVirtual : ITest
         {
-            public virtual void Hi<U>() { }
+            public virtual void Hi<U>()
+            {
+            }
         }
     }
 }

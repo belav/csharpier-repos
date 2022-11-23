@@ -241,7 +241,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Options() { }
+            public Options()
+            {
+            }
         }
     }
 }

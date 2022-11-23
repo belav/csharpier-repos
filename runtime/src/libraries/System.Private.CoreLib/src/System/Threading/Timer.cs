@@ -892,7 +892,9 @@ namespace System.Threading
         internal TimerHolder _timer;
 
         public Timer(TimerCallback callback, object? state, int dueTime, int period)
-            : this(callback, state, dueTime, period, flowExecutionContext: true) { }
+            : this(callback, state, dueTime, period, flowExecutionContext: true)
+        {
+        }
 
         internal Timer(
             TimerCallback callback,

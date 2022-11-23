@@ -1764,7 +1764,9 @@ namespace System.Linq
             System.Collections.IEnumerable,
             System.Linq.ILookup<TKey, TElement>
     {
-        internal Lookup() { }
+        internal Lookup()
+        {
+        }
 
         public int Count
         {

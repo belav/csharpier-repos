@@ -176,7 +176,9 @@ namespace System.ComponentModel.Composition.Registration
             }
         }
 
-        internal PartBuilder(Predicate<Type> selectType) : base(selectType) { }
+        internal PartBuilder(Predicate<Type> selectType) : base(selectType)
+        {
+        }
 
         public PartBuilder<T> SelectConstructor(
             Expression<Func<ParameterImportBuilder, T>> constructorFilter

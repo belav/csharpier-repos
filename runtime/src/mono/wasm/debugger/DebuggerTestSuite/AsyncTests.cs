@@ -13,7 +13,9 @@ namespace DebuggerTests
 {
     public class AsyncTests : DebuggerTests
     {
-        public AsyncTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public AsyncTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         // FIXME: method with multiple async blocks - so that we have two separate classes for that method!
         // FIXME: nested blocks

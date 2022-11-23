@@ -15,7 +15,9 @@ namespace System.Data.Common
         private char[] _values = default!; // Late-initialized
 
         internal CharStorage(DataColumn column)
-            : base(column, typeof(char), defaultValue, StorageType.Char) { }
+            : base(column, typeof(char), defaultValue, StorageType.Char)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

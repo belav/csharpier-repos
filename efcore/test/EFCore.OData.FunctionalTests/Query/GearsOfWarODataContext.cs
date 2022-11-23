@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class GearsOfWarODataContext : PoolableDbContext
 {
-    public GearsOfWarODataContext(DbContextOptions options) : base(options) { }
+    public GearsOfWarODataContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public DbSet<Gear> Gears { get; set; }
     public DbSet<Squad> Squads { get; set; }

@@ -23,7 +23,9 @@ namespace Castle.Core.Logging
     {
         private LoggerLevel? level;
 
-        public ConsoleFactory() { }
+        public ConsoleFactory()
+        {
+        }
 
         public ConsoleFactory(LoggerLevel level)
         {

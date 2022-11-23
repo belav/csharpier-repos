@@ -71,7 +71,9 @@ namespace System.Transactions.Distributed
     /// </summary>
     internal class DistributedTransaction : ISerializable, IObjectReference
     {
-        internal DistributedTransaction() { }
+        internal DistributedTransaction()
+        {
+        }
 
         protected DistributedTransaction(
             SerializationInfo serializationInfo,

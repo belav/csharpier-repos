@@ -31,6 +31,8 @@ namespace System.Threading
         public object? ExceptionState => null;
 
         private ThreadAbortException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

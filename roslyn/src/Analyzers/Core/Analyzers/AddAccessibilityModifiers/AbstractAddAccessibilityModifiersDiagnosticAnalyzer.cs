@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;

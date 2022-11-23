@@ -231,7 +231,9 @@ namespace ILCompiler.DependencyAnalysis
                             );
                             referencedAssemblies.Add(reference);
                         }
-                        catch (TypeSystemException) { }
+                        catch (TypeSystemException)
+                        {
+                        }
                     }
                     result = new ModuleGraphNode(this, module, referencedAssemblies.ToArray());
                 }

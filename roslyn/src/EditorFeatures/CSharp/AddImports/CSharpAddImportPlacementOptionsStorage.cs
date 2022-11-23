@@ -20,7 +20,9 @@ internal class CSharpAddImportPlacementOptionsStorage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Service() { }
+        public Service()
+        {
+        }
 
         public AddImportPlacementOptions GetOptions(IGlobalOptionService globalOptions) =>
             GetCSharpAddImportPlacementOptions(globalOptions);

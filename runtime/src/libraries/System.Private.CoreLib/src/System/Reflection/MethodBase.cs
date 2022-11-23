@@ -12,7 +12,9 @@ namespace System.Reflection
 {
     public abstract partial class MethodBase : MemberInfo
     {
-        protected MethodBase() { }
+        protected MethodBase()
+        {
+        }
 
         public abstract ParameterInfo[] GetParameters();
         public abstract MethodAttributes Attributes { get; }

@@ -9,7 +9,9 @@ public class ValueConvertersEndToEndCosmosTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndCosmosTest.ValueConvertersEndToEndCosmosFixture>
 {
     public ValueConvertersEndToEndCosmosTest(ValueConvertersEndToEndCosmosFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class ValueConvertersEndToEndCosmosFixture : ValueConvertersEndToEndFixtureBase
     {

@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private CodeTypeReference _type;
 
-        public CodeTypeReferenceExpression() { }
+        public CodeTypeReferenceExpression()
+        {
+        }
 
         public CodeTypeReferenceExpression(CodeTypeReference type)
         {

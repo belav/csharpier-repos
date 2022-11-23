@@ -19862,7 +19862,9 @@ namespace System
             public static readonly SyntaxReferenceEqualityComparer Instance =
                 new SyntaxReferenceEqualityComparer();
 
-            private SyntaxReferenceEqualityComparer() { }
+            private SyntaxReferenceEqualityComparer()
+            {
+            }
 
             public bool Equals(SyntaxReference x, SyntaxReference y)
             {

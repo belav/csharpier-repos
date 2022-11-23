@@ -80,37 +80,49 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public static void CopyBlock(ref byte destination, ref byte source, uint byteCount) { }
+        public static void CopyBlock(ref byte destination, ref byte source, uint byteCount)
+        {
+        }
 
-        public unsafe static void CopyBlock(void* destination, void* source, uint byteCount) { }
+        public unsafe static void CopyBlock(void* destination, void* source, uint byteCount)
+        {
+        }
 
-        public static void CopyBlockUnaligned(
-            ref byte destination,
-            ref byte source,
-            uint byteCount
-        ) { }
+        public static void CopyBlockUnaligned(ref byte destination, ref byte source, uint byteCount)
+        {
+        }
 
         public unsafe static void CopyBlockUnaligned(
             void* destination,
             void* source,
             uint byteCount
-        ) { }
+        )
+        {
+        }
 
-        public unsafe static void Copy<T>(void* destination, ref T source) { }
+        public unsafe static void Copy<T>(void* destination, ref T source)
+        {
+        }
 
-        public unsafe static void Copy<T>(ref T destination, void* source) { }
+        public unsafe static void Copy<T>(ref T destination, void* source)
+        {
+        }
 
-        public static void InitBlock(ref byte startAddress, byte value, uint byteCount) { }
+        public static void InitBlock(ref byte startAddress, byte value, uint byteCount)
+        {
+        }
 
-        public unsafe static void InitBlock(void* startAddress, byte value, uint byteCount) { }
+        public unsafe static void InitBlock(void* startAddress, byte value, uint byteCount)
+        {
+        }
 
-        public static void InitBlockUnaligned(ref byte startAddress, byte value, uint byteCount) { }
+        public static void InitBlockUnaligned(ref byte startAddress, byte value, uint byteCount)
+        {
+        }
 
-        public unsafe static void InitBlockUnaligned(
-            void* startAddress,
-            byte value,
-            uint byteCount
-        ) { }
+        public unsafe static void InitBlockUnaligned(void* startAddress, byte value, uint byteCount)
+        {
+        }
 
         public static bool IsAddressGreaterThan<T>(
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T left,
@@ -198,10 +210,16 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public static void WriteUnaligned<T>(ref byte destination, T value) { }
+        public static void WriteUnaligned<T>(ref byte destination, T value)
+        {
+        }
 
-        public unsafe static void WriteUnaligned<T>(void* destination, T value) { }
+        public unsafe static void WriteUnaligned<T>(void* destination, T value)
+        {
+        }
 
-        public unsafe static void Write<T>(void* destination, T value) { }
+        public unsafe static void Write<T>(void* destination, T value)
+        {
+        }
     }
 }

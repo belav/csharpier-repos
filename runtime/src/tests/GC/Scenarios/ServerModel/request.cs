@@ -85,7 +85,9 @@ namespace ServerSimulator
         private byte[] finalizedData = null;
 #pragma warning restore 0414
 
-        public FinalizableRequest() : base() { }
+        public FinalizableRequest() : base()
+        {
+        }
 
         ~FinalizableRequest()
         {

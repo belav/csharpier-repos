@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             EventSymbolAdapter underlyingEvent,
             EmbeddedMethod adder,
             EmbeddedMethod remover
-        ) : base(underlyingEvent, adder, remover, null) { }
+        ) : base(underlyingEvent, adder, remover, null)
+        {
+        }
 
         protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder

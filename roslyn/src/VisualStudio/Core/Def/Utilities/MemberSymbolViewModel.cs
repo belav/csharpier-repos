@@ -74,6 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         public string Accessibility => Symbol.DeclaredAccessibility.ToString();
 
         public MemberSymbolViewModel(ISymbol symbol, IGlyphService glyphService)
-            : base(symbol, glyphService) { }
+            : base(symbol, glyphService)
+        {
+        }
     }
 }

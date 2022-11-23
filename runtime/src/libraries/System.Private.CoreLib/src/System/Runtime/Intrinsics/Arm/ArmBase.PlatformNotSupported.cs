@@ -17,7 +17,9 @@ namespace System.Runtime.Intrinsics.Arm
 #endif
     abstract class ArmBase
     {
-        internal ArmBase() { }
+        internal ArmBase()
+        {
+        }
 
         public static bool IsSupported
         {
@@ -27,7 +29,9 @@ namespace System.Runtime.Intrinsics.Arm
 
         public abstract class Arm64
         {
-            internal Arm64() { }
+            internal Arm64()
+            {
+            }
 
             public static bool IsSupported
             {

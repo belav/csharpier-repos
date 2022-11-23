@@ -106,7 +106,9 @@ namespace System.Net.Security
                     return task.Result;
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return null;
         }

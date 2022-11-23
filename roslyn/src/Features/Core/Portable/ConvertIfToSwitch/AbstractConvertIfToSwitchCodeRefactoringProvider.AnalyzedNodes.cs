@@ -64,7 +64,9 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         /// </summary>
         internal abstract class AnalyzedPattern
         {
-            private AnalyzedPattern() { }
+            private AnalyzedPattern()
+            {
+            }
 
             /// <summary>
             /// Represents a type-pattern, constructed from is-expression

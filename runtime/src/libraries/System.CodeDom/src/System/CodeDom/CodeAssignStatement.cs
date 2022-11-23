@@ -5,7 +5,9 @@ namespace System.CodeDom
 {
     public class CodeAssignStatement : CodeStatement
     {
-        public CodeAssignStatement() { }
+        public CodeAssignStatement()
+        {
+        }
 
         public CodeAssignStatement(CodeExpression left, CodeExpression right)
         {

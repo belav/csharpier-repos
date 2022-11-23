@@ -66,7 +66,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
     public class PreprocessorTests : TestBase
     {
-        public PreprocessorTests() { }
+        public PreprocessorTests()
+        {
+        }
 
         #region Helpers
 

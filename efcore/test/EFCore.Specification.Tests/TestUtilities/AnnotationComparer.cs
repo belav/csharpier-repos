@@ -10,7 +10,9 @@ internal class AnnotationComparer : IEqualityComparer<IAnnotation>, IComparer<IA
 {
     public static readonly AnnotationComparer Instance = new();
 
-    private AnnotationComparer() { }
+    private AnnotationComparer()
+    {
+    }
 
     public int Compare(IAnnotation x, IAnnotation y) =>
         StringComparer.Ordinal.Compare(x.Name, y.Name);

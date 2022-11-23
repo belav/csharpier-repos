@@ -137,7 +137,9 @@ namespace System.Numerics
             AssertValid();
         }
 
-        public BigInteger(float value) : this((double)value) { }
+        public BigInteger(float value) : this((double)value)
+        {
+        }
 
         public BigInteger(double value)
         {
@@ -261,7 +263,8 @@ namespace System.Numerics
         [CLSCompliant(false)]
         public BigInteger(byte[] value)
             : this(new ReadOnlySpan<byte>(value ?? throw new ArgumentNullException(nameof(value))))
-        { }
+        {
+        }
 
         public BigInteger(
             ReadOnlySpan<byte> value,

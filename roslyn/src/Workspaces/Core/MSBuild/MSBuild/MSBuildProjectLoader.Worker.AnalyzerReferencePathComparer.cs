@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 public static AnalyzerReferencePathComparer Instance = new();
 
-                private AnalyzerReferencePathComparer() { }
+                private AnalyzerReferencePathComparer()
+                {
+                }
 
                 public bool Equals(AnalyzerReference? x, AnalyzerReference? y) =>
                     string.Equals(x?.FullPath, y?.FullPath, StringComparison.OrdinalIgnoreCase);

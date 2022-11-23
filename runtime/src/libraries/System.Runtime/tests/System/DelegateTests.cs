@@ -44,7 +44,9 @@ namespace System.Tests
             public int x = 1;
         }
 
-        private static void EmptyFunc() { }
+        private static void EmptyFunc()
+        {
+        }
 
         public delegate TestStruct StructReturningDelegate();
 
@@ -60,9 +62,13 @@ namespace System.Tests
             Assert.Same(foo.structField.o2, returnedStruct.o2);
         }
 
-        public class A { }
+        public class A
+        {
+        }
 
-        public class B : A { }
+        public class B : A
+        {
+        }
 
         public delegate A DynamicInvokeDelegate(
             A nonRefParam1,
@@ -603,22 +609,30 @@ namespace System.Tests
 
         class Class
         {
-            internal void M() { }
+            internal void M()
+            {
+            }
         }
 
         struct Struct
         {
-            internal void M() { }
+            internal void M()
+            {
+            }
         }
 
         class ClassG
         {
-            internal void M<Key, Value>() { }
+            internal void M<Key, Value>()
+            {
+            }
         }
 
         struct StructG
         {
-            internal void M<Key, Value>() { }
+            internal void M<Key, Value>()
+            {
+            }
         }
 
         private delegate void IntIntDelegate(int expected, int actual);
@@ -728,7 +742,9 @@ namespace System.Tests
             return parameter;
         }
 
-        private class CustomReferenceType { };
+        private class CustomReferenceType
+        {
+        };
 
         private delegate CustomReferenceType ReferenceWithDefaultValue(
             CustomReferenceType parameter = null
@@ -1452,7 +1468,9 @@ namespace System.Tests
                 return 5;
             }
 
-            public static void DoRun(C x) { }
+            public static void DoRun(C x)
+            {
+            }
 
             public static int StartRun(C x, B b)
             {
@@ -1464,7 +1482,9 @@ namespace System.Tests
                 return 4;
             }
 
-            public static void DoExecute(C c) { }
+            public static void DoExecute(C c)
+            {
+            }
 
             public int StartExecute(C c, B b)
             {
@@ -1494,27 +1514,39 @@ namespace System.Tests
                 return s + "2";
             }
 
-            static void Run(C x) { }
+            static void Run(C x)
+            {
+            }
 
             public static new int DoRun(C x)
             {
                 return 107;
             }
 
-            void Execute(C c) { }
+            void Execute(C c)
+            {
+            }
 
             public new int DoExecute(C c)
             {
                 return 102;
             }
 
-            public static void M() { }
+            public static void M()
+            {
+            }
 
-            public static void N(C c) { }
+            public static void N(C c)
+            {
+            }
 
-            public static void S(C c) { }
+            public static void S(C c)
+            {
+            }
 
-            private void PrivateInstance() { }
+            private void PrivateInstance()
+            {
+            }
         }
 
         public interface Iface
@@ -1530,4 +1562,6 @@ namespace System.Tests
     }
 }
 
-internal class DummyGenericClassForDelegateTests<T> { }
+internal class DummyGenericClassForDelegateTests<T>
+{
+}

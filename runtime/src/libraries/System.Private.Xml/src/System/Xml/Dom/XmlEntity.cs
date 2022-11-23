@@ -142,10 +142,14 @@ namespace System.Xml
         }
 
         // Saves the node to the specified XmlWriter.
-        public override void WriteTo(XmlWriter w) { }
+        public override void WriteTo(XmlWriter w)
+        {
+        }
 
         // Saves all the children of the node to the specified XmlWriter.
-        public override void WriteContentTo(XmlWriter w) { }
+        public override void WriteContentTo(XmlWriter w)
+        {
+        }
 
         public override string BaseURI
         {

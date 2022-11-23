@@ -70,7 +70,9 @@ namespace Microsoft.CodeAnalysis.Remote
         internal readonly SolutionAssetCache SolutionAssetCache;
 
         public RemoteWorkspaceManager(Func<RemoteWorkspace, SolutionAssetCache> createAssetCache)
-            : this(createAssetCache, CreatePrimaryWorkspace()) { }
+            : this(createAssetCache, CreatePrimaryWorkspace())
+        {
+        }
 
         public RemoteWorkspaceManager(
             Func<RemoteWorkspace, SolutionAssetCache> createAssetCache,

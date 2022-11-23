@@ -22,7 +22,9 @@ public abstract class FieldMappingTestBase<TFixture> : IClassFixture<TFixture>
 
     protected static AsyncLocal<bool> _isSeeding = new();
 
-    protected interface IUser2 { }
+    protected interface IUser2
+    {
+    }
 
     protected class User2 : IUser2
     {
@@ -931,10 +933,9 @@ public abstract class FieldMappingTestBase<TFixture> : IClassFixture<TFixture>
             }
         );
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected void AssertBlogs(IEnumerable<IBlogAccessor> blogs)
     {

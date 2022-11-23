@@ -9,7 +9,9 @@ namespace System.Security.Cryptography
     public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
     {
         [SupportedOSPlatform("windows")]
-        public ECDiffieHellmanCng() : this(521) { }
+        public ECDiffieHellmanCng() : this(521)
+        {
+        }
 
         [SupportedOSPlatform("windows")]
         public ECDiffieHellmanCng(int keySize)

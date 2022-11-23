@@ -16,7 +16,9 @@ namespace Algorithms
         private static Vector<double> s_dummy = Vector<double>.One;
 
         public VectorDoubleRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc) { }
+            : base(dp, abortFunc)
+        {
+        }
 
         // Render the fractal on a single thread using raw Vector<double> data types
         // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs

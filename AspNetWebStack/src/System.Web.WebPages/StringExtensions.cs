@@ -213,7 +213,9 @@ namespace System.Web.WebPages
                         return true;
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
             return false;
         }

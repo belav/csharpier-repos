@@ -10,7 +10,9 @@ namespace System.Security.Cryptography.Pkcs
     public sealed class CmsRecipient
     {
         public CmsRecipient(X509Certificate2 certificate)
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate) { }
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate)
+        {
+        }
 
 #if NETSTANDARD2_0
         internal

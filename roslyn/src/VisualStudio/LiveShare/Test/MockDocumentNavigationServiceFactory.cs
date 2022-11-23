@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockDocumentNavigationServiceFactory() { }
+        public MockDocumentNavigationServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {

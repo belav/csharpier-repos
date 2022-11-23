@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         {
             public static readonly UnderlyingNamedTypeVisitor Instance = new();
 
-            private UnderlyingNamedTypeVisitor() { }
+            private UnderlyingNamedTypeVisitor()
+            {
+            }
 
             public override INamedTypeSymbol? VisitArrayType(IArrayTypeSymbol symbol) =>
                 Visit(symbol.ElementType);

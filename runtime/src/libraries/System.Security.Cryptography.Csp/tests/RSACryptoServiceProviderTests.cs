@@ -473,7 +473,9 @@ namespace System.Security.Cryptography.Csp.Tests
                         rsa.PersistKeyInCsp = false;
                     }
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
         }
     }

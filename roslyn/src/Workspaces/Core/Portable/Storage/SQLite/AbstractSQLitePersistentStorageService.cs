@@ -39,6 +39,8 @@ namespace Microsoft.CodeAnalysis.SQLite
 
         protected AbstractSQLitePersistentStorageService(
             IPersistentStorageLocationService locationService
-        ) : base(locationService) { }
+        ) : base(locationService)
+        {
+        }
     }
 }

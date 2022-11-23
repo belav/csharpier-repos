@@ -19,7 +19,9 @@ public sealed class Conflict : IResult, IEndpointMetadataProvider, IStatusCodeHt
     /// Initializes a new instance of the <see cref="Conflict"/> class with the values
     /// provided.
     /// </summary>
-    internal Conflict() { }
+    internal Conflict()
+    {
+    }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status409Conflict"/>

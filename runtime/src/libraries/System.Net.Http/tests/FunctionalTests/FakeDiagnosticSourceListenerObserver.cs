@@ -19,9 +19,13 @@ namespace System.Net.Http.Functional.Tests
                 _writeCallback = writeCallback;
             }
 
-            public void OnCompleted() { }
+            public void OnCompleted()
+            {
+            }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(KeyValuePair<string, object> value)
             {
@@ -39,9 +43,13 @@ namespace System.Net.Http.Functional.Tests
             _writeCallback = writeCallback;
         }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
         public void OnNext(DiagnosticListener value)
         {

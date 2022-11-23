@@ -20,7 +20,9 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// <summary>
         /// Clear all the rules
         /// </summary>
-        void IElementFactory.RemoveAllRules() { }
+        void IElementFactory.RemoveAllRules()
+        {
+        }
 
         IPropertyTag IElementFactory.CreatePropertyTag(IElement parent)
         {
@@ -164,7 +166,9 @@ namespace System.Speech.Recognition.SrgsGrammar
             return new SrgsSubset(text, matchingMode);
         }
 
-        void IElementFactory.InitSpecialRuleRef(IElement parent, IRuleRef special) { }
+        void IElementFactory.InitSpecialRuleRef(IElement parent, IRuleRef special)
+        {
+        }
 
         void IElementFactory.AddScript(IGrammar grammar, string sRule, string code)
         {

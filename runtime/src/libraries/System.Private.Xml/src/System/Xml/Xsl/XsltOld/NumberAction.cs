@@ -27,7 +27,9 @@ namespace System.Xml.Xsl.XsltOld
                 this.formatString = formatString;
             }
 
-            public FormatInfo() { }
+            public FormatInfo()
+            {
+            }
         }
 
         private static readonly FormatInfo s_defaultFormat = new FormatInfo(false, "0");
@@ -40,7 +42,9 @@ namespace System.Xml.Xsl.XsltOld
             private string? _separator;
             private int _sizeGroup;
 
-            internal NumberingFormat() { }
+            internal NumberingFormat()
+            {
+            }
 
             internal void setNumberingType(NumberingSequence seq)
             {
@@ -582,8 +586,12 @@ namespace System.Xml.Xsl.XsltOld
                         Convert.ToInt32(groupingSize, CultureInfo.InvariantCulture)
                     );
                 }
-                catch (System.FormatException) { }
-                catch (System.OverflowException) { }
+                catch (System.FormatException)
+                {
+                }
+                catch (System.OverflowException)
+                {
+                }
             }
             if (groupingSep != null)
             {

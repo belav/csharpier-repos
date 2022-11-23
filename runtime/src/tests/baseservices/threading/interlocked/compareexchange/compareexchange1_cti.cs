@@ -75,7 +75,9 @@ public class InterlockedCompareExchange1
 
         TestLibrary.TestFramework.BeginScenario("NegTest1: ");
 
-        try { }
+        try
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("101", "Unexpected exception: " + e);

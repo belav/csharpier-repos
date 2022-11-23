@@ -550,7 +550,9 @@ Example tracing commands used to generate the input to this tool:
             }
         }
 
-        private CommandLineOptions() { }
+        private CommandLineOptions()
+        {
+        }
 
         private void ParseCommmandLineHelper(string[] args)
         {

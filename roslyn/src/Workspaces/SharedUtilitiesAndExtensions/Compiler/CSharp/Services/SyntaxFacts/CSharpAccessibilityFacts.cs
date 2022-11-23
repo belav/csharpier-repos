@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         public static readonly IAccessibilityFacts Instance = new CSharpAccessibilityFacts();
 
-        private CSharpAccessibilityFacts() { }
+        private CSharpAccessibilityFacts()
+        {
+        }
 
         public bool CanHaveAccessibility(
             SyntaxNode declaration,

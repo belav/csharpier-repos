@@ -4,7 +4,9 @@
 
 using System;
 
-enum TestEnum { }
+enum TestEnum
+{
+}
 
 struct AA
 {

@@ -9,12 +9,13 @@ public class AspNetIdentityDefaultInMemoryTest
     : AspNetIdentityDefaultTestBase<AspNetIdentityDefaultInMemoryTest.AspNetDefaultIdentityInMemoryFixture>
 {
     public AspNetIdentityDefaultInMemoryTest(AspNetDefaultIdentityInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
-    protected override void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected override async Task ExecuteWithStrategyInTransactionAsync(
         Func<IdentityDbContext, Task> testOperation,

@@ -6,7 +6,9 @@ using System.Runtime.CompilerServices;
 
 namespace Sample
 {
-    public sealed class C1 : I1<string>, I2 { }
+    public sealed class C1 : I1<string>, I2
+    {
+    }
 
     class Program
     {

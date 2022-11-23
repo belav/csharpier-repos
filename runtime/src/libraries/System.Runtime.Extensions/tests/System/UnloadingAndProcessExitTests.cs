@@ -33,7 +33,9 @@ namespace System.Tests
                 File.AppendAllText(f, "h");
             };
 
-            using (var remote = RemoteExecutor.Invoke(otherProcess, fileName)) { }
+            using (var remote = RemoteExecutor.Invoke(otherProcess, fileName))
+            {
+            }
 
             Assert.Equal("shu0u1e0e1", File.ReadAllText(fileName));
         }

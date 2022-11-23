@@ -1,10 +1,14 @@
-public class MyException<T> : System.Exception { }
+public class MyException<T> : System.Exception
+{
+}
 
 public class A<T>
 {
     public void F()
     {
-        try { }
+        try
+        {
+        }
         catch (MyException<T> ex)
         {
             System.Console.WriteLine(ex.ToString());

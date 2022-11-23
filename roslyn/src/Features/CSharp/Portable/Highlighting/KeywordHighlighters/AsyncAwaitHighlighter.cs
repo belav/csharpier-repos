@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AsyncAwaitHighlighter() { }
+        public AsyncAwaitHighlighter()
+        {
+        }
 
         protected override bool IsHighlightableNode(SyntaxNode node) =>
             node.IsReturnableConstructOrTopLevelCompilationUnit();

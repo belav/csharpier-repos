@@ -27,7 +27,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Venus
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAdditionalFormattingRuleLanguageService() { }
+        public CSharpAdditionalFormattingRuleLanguageService()
+        {
+        }
 
         public AbstractFormattingRule GetAdditionalCodeGenerationRule() =>
             BlankLineInGeneratedMethodFormattingRule.Instance;

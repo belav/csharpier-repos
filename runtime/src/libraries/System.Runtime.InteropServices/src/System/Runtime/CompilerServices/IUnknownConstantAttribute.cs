@@ -8,7 +8,9 @@ namespace System.Runtime.CompilerServices
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false)]
     public sealed partial class IUnknownConstantAttribute : CustomConstantAttribute
     {
-        public IUnknownConstantAttribute() { }
+        public IUnknownConstantAttribute()
+        {
+        }
 
         public override object Value => new UnknownWrapper(null);
     }

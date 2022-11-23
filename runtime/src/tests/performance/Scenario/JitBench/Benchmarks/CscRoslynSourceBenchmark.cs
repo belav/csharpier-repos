@@ -9,7 +9,9 @@ namespace JitBench
 {
     class CscRoslynSourceBenchmark : CscBenchmark
     {
-        public CscRoslynSourceBenchmark() : base("Csc_Roslyn_Source") { }
+        public CscRoslynSourceBenchmark() : base("Csc_Roslyn_Source")
+        {
+        }
 
         protected override async Task SetupSourceToCompile(
             string intermediateOutputDir,

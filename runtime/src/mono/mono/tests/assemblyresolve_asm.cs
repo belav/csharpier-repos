@@ -11,4 +11,6 @@ public class Asm : Test.Test
     }
 }
 
-public class Asm2 : Test.ReturnsTestBase { }
+public class Asm2 : Test.ReturnsTestBase
+{
+}

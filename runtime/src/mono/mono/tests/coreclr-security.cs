@@ -88,7 +88,9 @@ public interface CMethodInterface
 
 public class CInterfaceClass : CMethodInterface
 {
-    public CInterfaceClass() { }
+    public CInterfaceClass()
+    {
+    }
 
     public void Method()
     {
@@ -110,13 +112,19 @@ public class CriticalClass
 
 public class TransparentBaseClass
 {
-    public virtual void TransparentMethod() { }
+    public virtual void TransparentMethod()
+    {
+    }
 
     [SecuritySafeCritical]
-    public virtual void SafeCriticalMethod() { }
+    public virtual void SafeCriticalMethod()
+    {
+    }
 
     [SecurityCritical]
-    public virtual void CriticalMethod() { }
+    public virtual void CriticalMethod()
+    {
+    }
 }
 
 public class BadTransparentOverrideClass : TransparentBaseClass
@@ -153,20 +161,26 @@ public delegate Object InvokeDelegate(Object obj, Object[] parms);
 public class TransparentClassWithSafeCriticalDefaultConstructor
 {
     [SecuritySafeCritical]
-    public TransparentClassWithSafeCriticalDefaultConstructor() { }
+    public TransparentClassWithSafeCriticalDefaultConstructor()
+    {
+    }
 }
 
 public class TransparentInheritFromSafeCriticalDefaultConstructor
     : TransparentClassWithSafeCriticalDefaultConstructor
 {
-    public TransparentInheritFromSafeCriticalDefaultConstructor() { }
+    public TransparentInheritFromSafeCriticalDefaultConstructor()
+    {
+    }
 }
 
 public class SafeInheritFromSafeCriticalDefaultConstructor
     : TransparentClassWithSafeCriticalDefaultConstructor
 {
     [SecuritySafeCritical]
-    public SafeInheritFromSafeCriticalDefaultConstructor() { }
+    public SafeInheritFromSafeCriticalDefaultConstructor()
+    {
+    }
 }
 
 public class Test
@@ -237,7 +251,9 @@ public class Test
         new BadCriticalOverrideClass();
     }
 
-    public static void TransparentReflectionCMethod() { }
+    public static void TransparentReflectionCMethod()
+    {
+    }
 
     [SecurityCriticalAttribute]
     public static void ReflectionCMethod()
@@ -339,7 +355,9 @@ public class Test
             CMethod();
             error("static critical method called");
         }
-        catch (MethodAccessException) { }
+        catch (MethodAccessException)
+        {
+        }
 
         SCClass sc = new SCClass();
         sc.Method();
@@ -351,27 +369,35 @@ public class Test
             c.Method(); // Illegal
             error("critical method called");
         }
-        catch (MethodAccessException) { }
+        catch (MethodAccessException)
+        {
+        }
 
         try
         {
             doSCDev();
             error("security-critical-derived class error");
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
 
         try
         {
             doCMethodDev();
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
 
         try
         {
             getpid();
             error("pinvoke called");
         }
-        catch (MethodAccessException) { }
+        catch (MethodAccessException)
+        {
+        }
 
         try
         {
@@ -379,19 +405,25 @@ public class Test
             md();
             error("critical method called via delegate");
         }
-        catch (MethodAccessException) { }
+        catch (MethodAccessException)
+        {
+        }
 
         try
         {
             CriticalClass.NestedClassInsideCritical.Method();
         }
-        catch (MethodAccessException) { }
+        catch (MethodAccessException)
+        {
+        }
 
         try
         {
             doSCInterfaceDev();
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
 
         /*
         try {
@@ -419,7 +451,9 @@ public class Test
 
             method.Invoke(null, null);
         }
-        catch (MethodAccessException) { }
+        catch (MethodAccessException)
+        {
+        }
 
         try
         {
@@ -442,7 +476,9 @@ public class Test
 
             id(null, null);
         }
-        catch (MethodAccessException) { }
+        catch (MethodAccessException)
+        {
+        }
 
         // wrapper 7
         try
@@ -459,28 +495,36 @@ public class Test
             doBadTransparentOverrideClass();
             error("BadTransparentOverrideClass error");
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
 
         try
         {
             doBadSafeCriticalOverrideClass();
             error("BadSafeCriticalOverrideClass error");
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
 
         try
         {
             doBadCriticalOverrideClass();
             error("BadCriticalOverrideClass error");
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
 
         new TransparentClassWithSafeCriticalDefaultConstructor();
         try
         {
             new TransparentInheritFromSafeCriticalDefaultConstructor();
         }
-        catch (TypeLoadException) { }
+        catch (TypeLoadException)
+        {
+        }
         new SafeInheritFromSafeCriticalDefaultConstructor();
 
         // arrays creation tests

@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ProjectCacheHostServiceFactory() { }
+        public ProjectCacheHostServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new ProjectCacheService(workspaceServices.Workspace, createImplicitCache: true);

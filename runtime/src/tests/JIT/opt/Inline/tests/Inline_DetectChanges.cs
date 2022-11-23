@@ -56,5 +56,7 @@ public class Program
         ulong arg5,
         uint arg6,
         uint arg7
-    ) { }
+    )
+    {
+    }
 }

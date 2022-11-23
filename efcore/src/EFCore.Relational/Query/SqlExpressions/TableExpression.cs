@@ -18,7 +18,9 @@ public sealed class TableExpression
         IClonableTableExpressionBase,
         ITableBasedExpression
 {
-    internal TableExpression(ITableBase table) : this(table, annotations: null) { }
+    internal TableExpression(ITableBase table) : this(table, annotations: null)
+    {
+    }
 
     private TableExpression(ITableBase table, IEnumerable<IAnnotation>? annotations)
         : base(alias: table.Name[..1].ToLowerInvariant(), annotations)

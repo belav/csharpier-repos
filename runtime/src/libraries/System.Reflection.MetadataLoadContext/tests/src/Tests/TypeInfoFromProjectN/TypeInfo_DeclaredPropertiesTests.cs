@@ -94,22 +94,30 @@ namespace System.Reflection.Tests
         public string Pubprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public string SubPubprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string Pubprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public static string Pubprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -118,17 +126,23 @@ namespace System.Reflection.Tests
         public new string Pubprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public new virtual string Pubprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public static new string Pubprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

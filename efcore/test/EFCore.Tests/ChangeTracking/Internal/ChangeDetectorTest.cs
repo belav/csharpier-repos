@@ -306,10 +306,14 @@ public class ChangeDetectorTest
 
     private class ConcreteTypeMapping : CoreTypeMapping
     {
-        private ConcreteTypeMapping(CoreTypeMappingParameters parameters) : base(parameters) { }
+        private ConcreteTypeMapping(CoreTypeMappingParameters parameters) : base(parameters)
+        {
+        }
 
         public ConcreteTypeMapping(Type clrType, ValueConverter converter, ValueComparer comparer)
-            : base(new CoreTypeMappingParameters(clrType, converter, comparer)) { }
+            : base(new CoreTypeMappingParameters(clrType, converter, comparer))
+        {
+        }
 
         public override CoreTypeMapping Clone(ValueConverter converter) =>
             new ConcreteTypeMapping(Parameters.WithComposedConverter(converter));
@@ -2182,7 +2186,9 @@ public class ChangeDetectorTest
 
     private class TestAttacher : EntityGraphAttacher
     {
-        public TestAttacher(IEntityEntryGraphIterator graphIterator) : base(graphIterator) { }
+        public TestAttacher(IEntityEntryGraphIterator graphIterator) : base(graphIterator)
+        {
+        }
 
         public Tuple<InternalEntityEntry, EntityState> Attached { get; set; }
 
@@ -2214,7 +2220,9 @@ public class ChangeDetectorTest
                         Enumerable.Empty<ISingletonInterceptor>()
                     )
                 )
-            ) { }
+            )
+        {
+        }
 
         public Tuple<
             InternalEntityEntry,

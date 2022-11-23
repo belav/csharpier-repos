@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
     public class MakeFieldReadonlyTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeFieldReadonlyTests(ITestOutputHelper logger) : base(logger) { }
+        public MakeFieldReadonlyTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

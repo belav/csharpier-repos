@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UnitTestingStackTraceServiceAccessorFactory() { }
+        public UnitTestingStackTraceServiceAccessorFactory()
+        {
+        }
 
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)

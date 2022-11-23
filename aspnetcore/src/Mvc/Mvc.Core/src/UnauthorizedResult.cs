@@ -18,5 +18,7 @@ public class UnauthorizedResult : StatusCodeResult
     /// <summary>
     /// Creates a new <see cref="UnauthorizedResult"/> instance.
     /// </summary>
-    public UnauthorizedResult() : base(DefaultStatusCode) { }
+    public UnauthorizedResult() : base(DefaultStatusCode)
+    {
+    }
 }

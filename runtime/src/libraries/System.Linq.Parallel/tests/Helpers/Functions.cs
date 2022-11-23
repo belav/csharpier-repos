@@ -35,7 +35,9 @@ namespace System.Linq.Parallel.Tests
 
         public static void Enumerate<T>(this IEnumerable<T> e)
         {
-            foreach (var x in e) { }
+            foreach (var x in e)
+            {
+            }
         }
     }
 }

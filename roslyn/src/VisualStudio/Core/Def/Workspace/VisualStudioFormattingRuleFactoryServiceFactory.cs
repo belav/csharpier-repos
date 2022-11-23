@@ -34,7 +34,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioFormattingRuleFactoryService() { }
+        public VisualStudioFormattingRuleFactoryService()
+        {
+        }
 
         public bool ShouldUseBaseIndentation(DocumentId documentId) =>
             IsContainedDocument(documentId);

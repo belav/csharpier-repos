@@ -209,7 +209,9 @@ public class DefaultModelValidatorProviderTest
     }
 
     [CustomModelValidator(Tag = "Class")]
-    private class ModelValidatorAttributeOnClass { }
+    private class ModelValidatorAttributeOnClass
+    {
+    }
 
     private class ModelValidatorAttributeOnProperty
     {
@@ -239,7 +241,9 @@ public class DefaultModelValidatorProviderTest
         public int Property { get; set; }
     }
 
-    private class CustomValidationAttribute : ValidationAttribute { }
+    private class CustomValidationAttribute : ValidationAttribute
+    {
+    }
 
     private class CustomValidationAttributeOnProperty
     {

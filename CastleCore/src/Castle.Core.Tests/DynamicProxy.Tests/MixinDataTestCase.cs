@@ -246,7 +246,12 @@ namespace Castle.DynamicProxy.Tests
         public void Ctor_succeeds_when_mixing_regular_mixin_instances_with_delegate_mixins()
         {
             var mixinData = new MixinData(
-                new object[] { new NotADelegate(), new Action(() => { }), }
+                new object[]
+                {
+                    new NotADelegate(),
+                    new Action(() => {
+                    }),
+                }
             );
         }
 
@@ -288,8 +293,12 @@ namespace Castle.DynamicProxy.Tests
             );
         }
 
-        public class NotADelegate : INotADelegate { }
+        public class NotADelegate : INotADelegate
+        {
+        }
 
-        public interface INotADelegate { }
+        public interface INotADelegate
+        {
+        }
     }
 }

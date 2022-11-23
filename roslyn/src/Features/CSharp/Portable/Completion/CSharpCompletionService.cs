@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
             public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
@@ -29,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
 
         private CompletionRules _latestRules = CompletionRules.Default;
 
-        private CSharpCompletionService(SolutionServices services) : base(services) { }
+        private CSharpCompletionService(SolutionServices services) : base(services)
+        {
+        }
 
         public override string Language => LanguageNames.CSharp;
 

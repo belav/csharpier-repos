@@ -7,5 +7,7 @@ namespace Microsoft.CodeAnalysis.Host
     /// <summary>
     /// Empty interface just to mark workspace services.
     /// </summary>
-    public interface IWorkspaceService { }
+    public interface IWorkspaceService
+    {
+    }
 }

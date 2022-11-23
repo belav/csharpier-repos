@@ -177,7 +177,9 @@ namespace System.Text.Encodings.Web
         {
             internal static readonly EscaperImplementation Singleton = new EscaperImplementation();
 
-            private EscaperImplementation() { }
+            private EscaperImplementation()
+            {
+            }
 
             internal override int EncodeUtf8(Rune value, Span<byte> destination)
             {

@@ -9,6 +9,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
     internal class TestUIThreadOperationContext : AbstractUIThreadOperationContext
     {
         public TestUIThreadOperationContext()
-            : base(allowCancellation: false, defaultDescription: "") { }
+            : base(allowCancellation: false, defaultDescription: "")
+        {
+        }
     }
 }

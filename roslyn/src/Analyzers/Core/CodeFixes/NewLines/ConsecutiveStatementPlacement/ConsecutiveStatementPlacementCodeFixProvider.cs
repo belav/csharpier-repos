@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConsecutiveStatementPlacementCodeFixProvider() { }
+        public ConsecutiveStatementPlacementCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.ConsecutiveStatementPlacementDiagnosticId);

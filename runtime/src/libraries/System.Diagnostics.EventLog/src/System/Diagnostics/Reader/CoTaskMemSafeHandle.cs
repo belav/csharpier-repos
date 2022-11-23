@@ -10,7 +10,9 @@ namespace System.Diagnostics.Eventing.Reader
     /// </summary>
     internal sealed class CoTaskMemSafeHandle : SafeHandle
     {
-        public CoTaskMemSafeHandle() : base(IntPtr.Zero, true) { }
+        public CoTaskMemSafeHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         internal void SetMemory(IntPtr handle)
         {

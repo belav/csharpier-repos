@@ -32,7 +32,9 @@ namespace System.Buffers.Text.Tests
                 offsetHours: 0,
                 offsetMinutes: 0,
                 expectSuccess: expectSuccess
-            ) { }
+            )
+        {
+        }
 
         public PseudoDateTime(
             int year,

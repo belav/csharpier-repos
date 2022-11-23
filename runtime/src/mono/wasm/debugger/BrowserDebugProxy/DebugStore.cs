@@ -100,7 +100,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                 locations = Locations.Select(l => l.Location.AsLocation()).Concat(jsloc)
             };
 
-        public BreakpointRequest() { }
+        public BreakpointRequest()
+        {
+        }
 
         public BreakpointRequest(string id, JObject request)
         {

@@ -53,7 +53,9 @@ namespace Castle.DynamicProxy.Tests
 
     public class NoOpSomething : ISomething
     {
-        public void Do(Type type, string parameter) { }
+        public void Do(Type type, string parameter)
+        {
+        }
     }
 
     public class MyServiceImpl : IMyService

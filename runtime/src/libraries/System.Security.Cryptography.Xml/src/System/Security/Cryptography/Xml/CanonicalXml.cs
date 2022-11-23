@@ -36,7 +36,9 @@ namespace System.Security.Cryptography.Xml
         }
 
         internal CanonicalXml(XmlDocument document, XmlResolver? resolver)
-            : this(document, resolver, false) { }
+            : this(document, resolver, false)
+        {
+        }
 
         internal CanonicalXml(XmlDocument document, XmlResolver? resolver, bool includeComments)
         {

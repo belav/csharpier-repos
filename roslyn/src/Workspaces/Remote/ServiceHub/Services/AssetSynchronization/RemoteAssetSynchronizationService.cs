@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteAssetSynchronizationService(in ServiceConstructionArguments arguments)
-            : base(in arguments) { }
+            : base(in arguments)
+        {
+        }
 
         public ValueTask SynchronizePrimaryWorkspaceAsync(
             Checksum solutionChecksum,

@@ -461,14 +461,20 @@ public class ConnectionSpecificationTest
 
     private class UseConfigurationContext : NorthwindContextBase
     {
-        public UseConfigurationContext(DbContextOptions options) : base(options) { }
+        public UseConfigurationContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     private class NorthwindContextBase : DbContext
     {
-        protected NorthwindContextBase() { }
+        protected NorthwindContextBase()
+        {
+        }
 
-        protected NorthwindContextBase(DbContextOptions options) : base(options) { }
+        protected NorthwindContextBase(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Customer> Customers { get; set; }
 

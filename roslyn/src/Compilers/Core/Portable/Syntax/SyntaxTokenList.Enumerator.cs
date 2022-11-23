@@ -156,7 +156,9 @@ namespace Microsoft.CodeAnalysis
                 throw new NotSupportedException();
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

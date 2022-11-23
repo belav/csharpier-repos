@@ -301,7 +301,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         }
                     }
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -321,7 +323,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                 Directory.Delete(directoryPath, recursive: true);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         public bool IsNavigableMetadataSymbol(ISymbol symbol)

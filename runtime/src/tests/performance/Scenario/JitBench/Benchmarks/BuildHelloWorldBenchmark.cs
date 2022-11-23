@@ -8,7 +8,9 @@ namespace JitBench
 {
     public class BuildHelloWorldBenchmark : Benchmark
     {
-        public BuildHelloWorldBenchmark() : base("Dotnet_Build_HelloWorld") { }
+        public BuildHelloWorldBenchmark() : base("Dotnet_Build_HelloWorld")
+        {
+        }
 
         public override async Task Setup(
             DotNetInstallation dotNetInstall,

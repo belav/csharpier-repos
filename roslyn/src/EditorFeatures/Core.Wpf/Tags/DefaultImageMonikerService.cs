@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tags
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultImageMonikerService() { }
+        public DefaultImageMonikerService()
+        {
+        }
 
         public bool TryGetImageMoniker(ImmutableArray<string> tags, out ImageMoniker imageMoniker)
         {

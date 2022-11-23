@@ -25,7 +25,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             : base(
                 solutionName: nameof(CSharpGoToGlobalImportsTests),
                 projectTemplate: WellKnownProjectTemplates.CSharpNetCoreClassLibrary
-            ) { }
+            )
+        {
+        }
 
         [IdeFact]
         public async Task TestGlobalImports()

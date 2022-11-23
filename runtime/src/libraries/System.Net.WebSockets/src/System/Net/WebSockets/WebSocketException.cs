@@ -16,9 +16,13 @@ namespace System.Net.WebSockets
     {
         private readonly WebSocketError _webSocketErrorCode;
 
-        public WebSocketException() : this(Marshal.GetLastPInvokeError()) { }
+        public WebSocketException() : this(Marshal.GetLastPInvokeError())
+        {
+        }
 
-        public WebSocketException(WebSocketError error) : this(error, GetErrorMessage(error)) { }
+        public WebSocketException(WebSocketError error) : this(error, GetErrorMessage(error))
+        {
+        }
 
         public WebSocketException(WebSocketError error, string? message) : base(message)
         {
@@ -26,7 +30,9 @@ namespace System.Net.WebSockets
         }
 
         public WebSocketException(WebSocketError error, Exception? innerException)
-            : this(error, GetErrorMessage(error), innerException) { }
+            : this(error, GetErrorMessage(error), innerException)
+        {
+        }
 
         public WebSocketException(WebSocketError error, string? message, Exception? innerException)
             : base(message, innerException)
@@ -60,7 +66,9 @@ namespace System.Net.WebSockets
         }
 
         public WebSocketException(WebSocketError error, int nativeError)
-            : this(error, nativeError, GetErrorMessage(error)) { }
+            : this(error, nativeError, GetErrorMessage(error))
+        {
+        }
 
         public WebSocketException(WebSocketError error, int nativeError, string? message)
             : base(message)
@@ -70,7 +78,9 @@ namespace System.Net.WebSockets
         }
 
         public WebSocketException(WebSocketError error, int nativeError, Exception? innerException)
-            : this(error, nativeError, GetErrorMessage(error), innerException) { }
+            : this(error, nativeError, GetErrorMessage(error), innerException)
+        {
+        }
 
         public WebSocketException(
             WebSocketError error,
@@ -83,15 +93,21 @@ namespace System.Net.WebSockets
             SetErrorCodeOnError(nativeError);
         }
 
-        public WebSocketException(string? message) : base(message) { }
+        public WebSocketException(string? message) : base(message)
+        {
+        }
 
         public WebSocketException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         private WebSocketException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

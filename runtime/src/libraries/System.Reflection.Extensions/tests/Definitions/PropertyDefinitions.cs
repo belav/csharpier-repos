@@ -43,85 +43,117 @@ namespace System.Reflection.Tests
         public string Pubprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public string SubPubprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string Pubprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public static string Pubprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         internal string Intprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         internal string SubIntprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         internal virtual string Intprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         internal static string Intprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         protected string Proprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected string SubProprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected virtual string Proprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected static string Proprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         protected internal string ProIntprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected string SubProIntprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected internal virtual string ProIntprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected internal static string ProIntprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -176,65 +208,89 @@ namespace System.Reflection.Tests
         public new string Pubprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public new virtual string Pubprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public static new string Pubprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         internal new string Intprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         internal new virtual string Intprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         internal static new string Intprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         protected new string Proprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected new virtual string Proprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected static new string Proprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         protected new internal string ProIntprop1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected new internal virtual string ProIntprop2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         protected new internal static string ProIntprop3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -251,17 +307,23 @@ namespace System.Reflection.Tests
         public int this[int i]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
         public int this[string i]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
         public int this[DateTime i]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -282,12 +344,16 @@ namespace System.Reflection.Tests
         public new int this[int i]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
         public new int this[string i]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 

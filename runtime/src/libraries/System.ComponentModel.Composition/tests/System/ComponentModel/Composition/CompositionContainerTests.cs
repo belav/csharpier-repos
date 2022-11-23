@@ -2661,16 +2661,22 @@ namespace System.ComponentModel.Composition
         }
 
         [Export("MyExporterWithNoFoo")]
-        public class MyExporterWithNoFoo { }
+        public class MyExporterWithNoFoo
+        {
+        }
 
         [Export("MyExporterWithFoo")]
         [ExportMetadata("Foo", "Foo value")]
-        public class MyExporterWithFoo { }
+        public class MyExporterWithFoo
+        {
+        }
 
         [Export("MyExporterWithFooBar")]
         [ExportMetadata("Foo", "Foo value")]
         [ExportMetadata("Bar", "Bar value")]
-        public class MyExporterWithFooBar { }
+        public class MyExporterWithFooBar
+        {
+        }
 
         // Silverlight doesn't support strongly typed metadata
         [Fact]
@@ -2869,7 +2875,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Export]
-        public class SimpleExporter { }
+        public class SimpleExporter
+        {
+        }
 
         [Fact]
         public void ThreadSafeCompositionContainer()
@@ -3241,17 +3249,27 @@ namespace System.ComponentModel.Composition
             Assert.IsType<MefCollection<DerivedClass, BaseClass>>(actualValue);
         }
 
-        public interface IMefCollection { }
+        public interface IMefCollection
+        {
+        }
 
-        public interface IMefCollection<TC, TP> : IList<TC>, IMefCollection where TC : TP { }
+        public interface IMefCollection<TC, TP> : IList<TC>, IMefCollection where TC : TP
+        {
+        }
 
-        public class BaseClass { }
+        public class BaseClass
+        {
+        }
 
-        public class DerivedClass : BaseClass { }
+        public class DerivedClass : BaseClass
+        {
+        }
 
         [Export("UsingWhereClause", typeof(IMefCollection<,>))]
         public class MefCollection<TC, TP> : ObservableCollection<TC>, IMefCollection<TC, TP>
-            where TC : TP { }
+            where TC : TP
+        {
+        }
 
         public class ExportsMutableProperty
         {

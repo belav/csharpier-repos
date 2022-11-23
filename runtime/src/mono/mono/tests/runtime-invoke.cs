@@ -348,7 +348,9 @@ class Tests
         return 0;
     }
 
-    private static void method_invoke_no_modify_by_value_arg_helper(int dummy) { }
+    private static void method_invoke_no_modify_by_value_arg_helper(int dummy)
+    {
+    }
 
     public static int test_0_method_invoke_no_modify_by_value_arg()
     {

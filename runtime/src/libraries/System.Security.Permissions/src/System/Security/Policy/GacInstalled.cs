@@ -12,7 +12,9 @@ namespace System.Security.Policy
 #endif
     public sealed partial class GacInstalled : EvidenceBase, IIdentityPermissionFactory
     {
-        public GacInstalled() { }
+        public GacInstalled()
+        {
+        }
 
         public object Copy()
         {

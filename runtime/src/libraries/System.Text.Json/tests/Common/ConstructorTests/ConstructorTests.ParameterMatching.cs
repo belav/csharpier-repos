@@ -12,7 +12,9 @@ namespace System.Text.Json.Serialization.Tests
 {
     public abstract partial class ConstructorTests : SerializerTests
     {
-        public ConstructorTests(JsonSerializerWrapper stringSerializer) : base(stringSerializer) { }
+        public ConstructorTests(JsonSerializerWrapper stringSerializer) : base(stringSerializer)
+        {
+        }
 
         [Fact]
         public async Task ReturnNullForNullObjects()
@@ -1583,7 +1585,9 @@ namespace System.Text.Json.Serialization.Tests
             [JsonIgnore]
             public ClassWithIgnoredSameType Prop { get; }
 
-            public ClassWithIgnoredSameType(ClassWithIgnoredSameType prop) { }
+            public ClassWithIgnoredSameType(ClassWithIgnoredSameType prop)
+            {
+            }
         }
 
         [Fact]

@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RecordDeclarationOrganizer() { }
+        public RecordDeclarationOrganizer()
+        {
+        }
 
         protected override RecordDeclarationSyntax Organize(
             RecordDeclarationSyntax syntax,

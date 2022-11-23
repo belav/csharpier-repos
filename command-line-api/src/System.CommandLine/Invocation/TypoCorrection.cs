@@ -78,7 +78,9 @@ namespace System.CommandLine.Invocation
         private static int GetStartsWithDistance(string first, string second)
         {
             int i;
-            for (i = 0; i < first.Length && i < second.Length && first[i] == second[i]; i++) { }
+            for (i = 0; i < first.Length && i < second.Length && first[i] == second[i]; i++)
+            {
+            }
             return i;
         }
 

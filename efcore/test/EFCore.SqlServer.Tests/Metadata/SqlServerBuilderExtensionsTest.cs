@@ -1093,11 +1093,17 @@ public class SqlServerBuilderExtensionsTest
         });
     }
 
-    private void AssertIsGeneric(EntityTypeBuilder<Customer> _) { }
+    private void AssertIsGeneric(EntityTypeBuilder<Customer> _)
+    {
+    }
 
-    private void AssertIsGeneric(PropertyBuilder<int> _) { }
+    private void AssertIsGeneric(PropertyBuilder<int> _)
+    {
+    }
 
-    private void AssertIsGeneric(IndexBuilder<Customer> _) { }
+    private void AssertIsGeneric(IndexBuilder<Customer> _)
+    {
+    }
 
     protected virtual ModelBuilder CreateConventionModelBuilder() =>
         SqlServerTestHelpers.Instance.CreateConventionBuilder();

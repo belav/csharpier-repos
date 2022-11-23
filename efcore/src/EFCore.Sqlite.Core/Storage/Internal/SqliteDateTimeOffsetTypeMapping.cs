@@ -24,7 +24,9 @@ public class SqliteDateTimeOffsetTypeMapping : DateTimeOffsetTypeMapping
     public SqliteDateTimeOffsetTypeMapping(
         string storeType,
         DbType? dbType = System.Data.DbType.DateTimeOffset
-    ) : base(storeType, dbType) { }
+    ) : base(storeType, dbType)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,7 +35,9 @@ public class SqliteDateTimeOffsetTypeMapping : DateTimeOffsetTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqliteDateTimeOffsetTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters) { }
+        : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

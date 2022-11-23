@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         }
 
         private TypeParameterChecker(ImmutableArray<TypeParameterSymbol> acceptableTypeParameters)
-            : base(acceptableTypeParameters.GetPublicSymbols()) { }
+            : base(acceptableTypeParameters.GetPublicSymbols())
+        {
+        }
 
         public override IParameterSymbol GetThisParameter(IMethodSymbol method)
         {

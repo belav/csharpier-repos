@@ -171,12 +171,16 @@ namespace System.Web.Mvc.Test
 
         private class MyController : Controller
         {
-            public void Foo(string s1) { }
+            public void Foo(string s1)
+            {
+            }
 
             public void DefaultValues(
                 string noDefaultValue,
                 [DefaultValue("someValue")] string hasDefaultValue
-            ) { }
+            )
+            {
+            }
         }
     }
 }

@@ -160,7 +160,9 @@ public class ConfigPatternsCosmosTest : IClassFixture<ConfigPatternsCosmosTest.C
 
     private class CustomerContext : DbContext
     {
-        public CustomerContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
+        public CustomerContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Customer>();

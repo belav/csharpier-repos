@@ -16,19 +16,25 @@ namespace System.Drawing
 
     public sealed partial class Graphics
     {
-        public void DrawRectangle(System.Drawing.Pen pen, System.Drawing.RectangleF rect) { }
+        public void DrawRectangle(System.Drawing.Pen pen, System.Drawing.RectangleF rect)
+        {
+        }
 
         public void FillPie(
             System.Drawing.Brush brush,
             System.Drawing.RectangleF rect,
             float startAngle,
             float sweepAngle
-        ) { }
+        )
+        {
+        }
 
         public System.Numerics.Matrix3x2 TransformElements
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -69,12 +75,16 @@ namespace System.Drawing.Drawing2D
 {
     public sealed partial class Matrix
     {
-        public Matrix(System.Numerics.Matrix3x2 matrix) { }
+        public Matrix(System.Numerics.Matrix3x2 matrix)
+        {
+        }
 
         public System.Numerics.Matrix3x2 MatrixElements
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

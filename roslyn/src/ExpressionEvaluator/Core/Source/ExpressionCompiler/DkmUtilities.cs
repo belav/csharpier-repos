@@ -441,6 +441,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        private sealed class AppDomainLifetimeDataItem : DkmDataItem { }
+        private sealed class AppDomainLifetimeDataItem : DkmDataItem
+        {
+        }
     }
 }

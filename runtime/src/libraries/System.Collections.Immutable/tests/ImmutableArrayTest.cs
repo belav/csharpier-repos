@@ -974,7 +974,12 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void CastUpDelegateToSystemDelegate()
         {
-            var delArray = ImmutableArray.Create<Action>(() => { }, () => { });
+            var delArray = ImmutableArray.Create<Action>(
+                () => {
+                },
+                () => {
+                }
+            );
             var sysDelArray = ImmutableArray<Delegate>.CastUp(delArray);
             Assert.Equal(2, sysDelArray.Length);
             Assert.True(delArray == sysDelArray.As<Action>());

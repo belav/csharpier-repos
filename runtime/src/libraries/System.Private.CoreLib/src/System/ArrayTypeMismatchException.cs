@@ -46,6 +46,8 @@ namespace System
         }
 
         protected ArrayTypeMismatchException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

@@ -49,7 +49,9 @@ namespace System.Net
         private Stream _stream;
 
         internal HttpRequestStream(Stream stream, byte[] buffer, int offset, int length)
-            : this(stream, buffer, offset, length, -1) { }
+            : this(stream, buffer, offset, length, -1)
+        {
+        }
 
         internal HttpRequestStream(
             Stream stream,

@@ -192,19 +192,29 @@ public partial class DbContextTest
 
         public void DetectChanges(IStateManager stateManager) => DetectChangesCalled = true;
 
-        public void DetectChanges(InternalEntityEntry entry) { }
+        public void DetectChanges(InternalEntityEntry entry)
+        {
+        }
 
         public void PropertyChanged(
             InternalEntityEntry entry,
             IPropertyBase property,
             bool setModifed
-        ) { }
+        )
+        {
+        }
 
-        public void PropertyChanging(InternalEntityEntry entry, IPropertyBase property) { }
+        public void PropertyChanging(InternalEntityEntry entry, IPropertyBase property)
+        {
+        }
 
-        public virtual void Suspend() { }
+        public virtual void Suspend()
+        {
+        }
 
-        public virtual void Resume() { }
+        public virtual void Resume()
+        {
+        }
 
         public (
             EventHandler<DetectChangesEventArgs> DetectingAllChanges,
@@ -218,7 +228,9 @@ public partial class DbContextTest
             EventHandler<DetectedChangesEventArgs> detectedAllChanges,
             EventHandler<DetectEntityChangesEventArgs> detectingEntityChanges,
             EventHandler<DetectedEntityChangesEventArgs> detectedEntityChanges
-        ) { }
+        )
+        {
+        }
 
         public event EventHandler<DetectEntityChangesEventArgs> DetectingEntityChanges;
 
@@ -242,7 +254,9 @@ public partial class DbContextTest
         public void OnDetectedAllChanges(IStateManager stateManager, bool changesFound) =>
             DetectedAllChanges?.Invoke(null, null);
 
-        public void ResetState() { }
+        public void ResetState()
+        {
+        }
     }
 
     [ConditionalTheory]
@@ -813,7 +827,9 @@ public partial class DbContextTest
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        ) : base(logger, loggingOptions)
+        {
+        }
 
         public bool DetectChangesCalled { get; set; }
 

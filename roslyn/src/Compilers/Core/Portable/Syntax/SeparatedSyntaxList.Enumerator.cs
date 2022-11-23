@@ -83,7 +83,9 @@ namespace Microsoft.CodeAnalysis
                 get { return _e.Current; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

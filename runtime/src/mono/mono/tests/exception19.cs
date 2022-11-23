@@ -6,12 +6,16 @@ public class TestFinallyException
     {
         int ret = -1;
 
-        try { }
+        try
+        {
+        }
         finally
         {
             try
             {
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     throw new Exception();

@@ -24,5 +24,7 @@ public class SingularModificationCommandBatch : AffectedCountModificationCommand
     /// <param name="dependencies">Service dependencies.</param>
     public SingularModificationCommandBatch(
         ModificationCommandBatchFactoryDependencies dependencies
-    ) : base(dependencies, maxBatchSize: 1) { }
+    ) : base(dependencies, maxBatchSize: 1)
+    {
+    }
 }

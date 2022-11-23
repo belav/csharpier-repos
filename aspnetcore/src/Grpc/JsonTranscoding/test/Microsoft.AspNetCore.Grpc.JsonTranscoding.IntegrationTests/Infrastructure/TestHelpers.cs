@@ -67,7 +67,9 @@ internal static class TestHelpers
 
         public CancellationToken RequestAborted { get; set; }
 
-        public void Abort() { }
+        public void Abort()
+        {
+        }
     }
 
     public static CallHandlerDescriptorInfo CreateDescriptorInfo(

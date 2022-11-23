@@ -330,7 +330,9 @@ namespace System.Reflection.Emit
                 returnType,
                 requiredCustomModifiers,
                 optionalCustomModifiers
-            ) { }
+            )
+        {
+        }
 
         private SignatureHelper(Module mod, Type type)
         {

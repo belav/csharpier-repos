@@ -26,6 +26,8 @@ namespace Microsoft.Win32
         public static void SetAccessControl(
             this Microsoft.Win32.RegistryKey key,
             System.Security.AccessControl.RegistrySecurity registrySecurity
-        ) { }
+        )
+        {
+        }
     }
 }

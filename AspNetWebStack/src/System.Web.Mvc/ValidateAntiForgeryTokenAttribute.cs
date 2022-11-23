@@ -17,7 +17,9 @@ namespace System.Web.Mvc
     {
         private string _salt;
 
-        public ValidateAntiForgeryTokenAttribute() : this(AntiForgery.Validate) { }
+        public ValidateAntiForgeryTokenAttribute() : this(AntiForgery.Validate)
+        {
+        }
 
         internal ValidateAntiForgeryTokenAttribute(Action validateAction)
         {

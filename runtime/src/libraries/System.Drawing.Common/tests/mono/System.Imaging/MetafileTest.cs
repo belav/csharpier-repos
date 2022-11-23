@@ -55,7 +55,9 @@ namespace MonoTests.System.Drawing.Imaging
         {
             string filename = Helpers.GetTestBitmapPath(WmfPlaceable);
             using (Metafile mf = new Metafile(filename))
-            using (Metafile clone = (Metafile)mf.Clone()) { }
+            using (Metafile clone = (Metafile)mf.Clone())
+            {
+            }
         }
 
         private static void Check_MetaHeader_WmfPlaceable(MetaHeader mh)

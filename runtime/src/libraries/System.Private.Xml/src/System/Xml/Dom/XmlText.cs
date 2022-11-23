@@ -11,9 +11,12 @@ namespace System.Xml
     public class XmlText : XmlCharacterData
     {
         internal XmlText(string? strData) : this(strData, null!) // always throws ArgumentNullException
-        { }
+        {
+        }
 
-        protected internal XmlText(string? strData, XmlDocument doc) : base(strData, doc) { }
+        protected internal XmlText(string? strData, XmlDocument doc) : base(strData, doc)
+        {
+        }
 
         // Gets the name of the node.
         public override string Name

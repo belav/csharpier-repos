@@ -5,7 +5,9 @@ namespace System.Reflection
 {
     internal sealed class SignatureByRefType : SignatureHasElementType
     {
-        internal SignatureByRefType(SignatureType elementType) : base(elementType) { }
+        internal SignatureByRefType(SignatureType elementType) : base(elementType)
+        {
+        }
 
         protected sealed override bool IsArrayImpl() => false;
 

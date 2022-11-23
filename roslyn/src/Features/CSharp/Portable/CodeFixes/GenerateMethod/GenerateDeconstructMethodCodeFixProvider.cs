@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public GenerateDeconstructMethodCodeFixProvider() { }
+        public GenerateDeconstructMethodCodeFixProvider()
+        {
+        }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS8129);

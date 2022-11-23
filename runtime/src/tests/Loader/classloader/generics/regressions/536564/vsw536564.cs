@@ -13,7 +13,9 @@ public interface I1
 
 public class Class1 : I1
 {
-    void I1.meth1<T>(T x) { }
+    void I1.meth1<T>(T x)
+    {
+    }
 }
 
 public class Test_vsw536564

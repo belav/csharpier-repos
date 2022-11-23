@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Cci.INestedTypeReference
     {
         public GenericNestedTypeInstanceReference(NamedTypeSymbol underlyingNamedType)
-            : base(underlyingNamedType) { }
+            : base(underlyingNamedType)
+        {
+        }
 
         Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
         {

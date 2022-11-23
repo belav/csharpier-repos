@@ -166,7 +166,9 @@ public class EnumIConvertibleToUint16
             );
             retVal = false;
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("102", "Unexpected exception: " + e);
@@ -195,7 +197,9 @@ public class EnumIConvertibleToUint16
             );
             retVal = false;
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("104", "Unexpected exception: " + e);

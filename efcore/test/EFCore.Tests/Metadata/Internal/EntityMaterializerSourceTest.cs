@@ -606,7 +606,9 @@ public class EntityMaterializerSourceTest
 
     private class Parameterless
     {
-        private Parameterless() { }
+        private Parameterless()
+        {
+        }
 
         public int Id { get; set; }
     }
@@ -624,7 +626,9 @@ public class EntityMaterializerSourceTest
 
     private class ParameterlessAndWithProperties
     {
-        public ParameterlessAndWithProperties() { }
+        public ParameterlessAndWithProperties()
+        {
+        }
 
         public ParameterlessAndWithProperties(int id)
         {
@@ -721,14 +725,18 @@ public class EntityMaterializerSourceTest
             )
             .Compile();
 
-    private abstract class SomeAbstractEntity { }
+    private abstract class SomeAbstractEntity
+    {
+    }
 
     private class SomeEntity
     {
         private int _hiddenId;
         private Guid? _hiddenGoo;
 
-        public SomeEntity() { }
+        public SomeEntity()
+        {
+        }
 
         // ReSharper disable once MemberCanBePrivate.Local
         public SomeEntity(int id, Guid? goo)

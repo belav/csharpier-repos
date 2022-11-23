@@ -21,7 +21,9 @@ public class CertificateAuthenticationFailedContext
         HttpContext context,
         AuthenticationScheme scheme,
         CertificateAuthenticationOptions options
-    ) : base(context, scheme, options) { }
+    ) : base(context, scheme, options)
+    {
+    }
 
     /// <summary>
     /// The exception.

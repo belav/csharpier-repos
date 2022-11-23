@@ -8,14 +8,20 @@ namespace System.Runtime.Serialization
 {
     public partial class DateTimeFormat
     {
-        public DateTimeFormat(string formatString) { }
+        public DateTimeFormat(string formatString)
+        {
+        }
 
-        public DateTimeFormat(string formatString, System.IFormatProvider formatProvider) { }
+        public DateTimeFormat(string formatString, System.IFormatProvider formatProvider)
+        {
+        }
 
         public System.Globalization.DateTimeStyles DateTimeStyles
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IFormatProvider FormatProvider
         {
@@ -46,7 +52,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public DataContractJsonSerializer(System.Type type) { }
+        public DataContractJsonSerializer(System.Type type)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -57,7 +65,9 @@ namespace System.Runtime.Serialization.Json
         public DataContractJsonSerializer(
             System.Type type,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -68,7 +78,9 @@ namespace System.Runtime.Serialization.Json
         public DataContractJsonSerializer(
             System.Type type,
             System.Runtime.Serialization.Json.DataContractJsonSerializerSettings? settings
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -76,7 +88,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public DataContractJsonSerializer(System.Type type, string? rootName) { }
+        public DataContractJsonSerializer(System.Type type, string? rootName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -88,7 +102,9 @@ namespace System.Runtime.Serialization.Json
             System.Type type,
             string? rootName,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -99,7 +115,9 @@ namespace System.Runtime.Serialization.Json
         public DataContractJsonSerializer(
             System.Type type,
             System.Xml.XmlDictionaryString? rootName
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -111,7 +129,9 @@ namespace System.Runtime.Serialization.Json
             System.Type type,
             System.Xml.XmlDictionaryString? rootName,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
-        ) { }
+        )
+        {
+        }
 
         public System.Runtime.Serialization.DateTimeFormat? DateTimeFormat
         {
@@ -149,7 +169,9 @@ namespace System.Runtime.Serialization.Json
 
         public void SetSerializationSurrogateProvider(
             System.Runtime.Serialization.ISerializationSurrogateProvider? provider
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -237,7 +259,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteEndObject(System.Xml.XmlDictionaryWriter writer) { }
+        public override void WriteEndObject(System.Xml.XmlDictionaryWriter writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -245,7 +269,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteEndObject(System.Xml.XmlWriter writer) { }
+        public override void WriteEndObject(System.Xml.XmlWriter writer)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -253,7 +279,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteObject(System.IO.Stream stream, object? graph) { }
+        public override void WriteObject(System.IO.Stream stream, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -261,7 +289,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteObject(System.Xml.XmlDictionaryWriter writer, object? graph) { }
+        public override void WriteObject(System.Xml.XmlDictionaryWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -269,7 +299,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteObject(System.Xml.XmlWriter writer, object? graph) { }
+        public override void WriteObject(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -280,7 +312,9 @@ namespace System.Runtime.Serialization.Json
         public override void WriteObjectContent(
             System.Xml.XmlDictionaryWriter writer,
             object? graph
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -288,7 +322,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteObjectContent(System.Xml.XmlWriter writer, object? graph) { }
+        public override void WriteObjectContent(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -296,10 +332,9 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteStartObject(
-            System.Xml.XmlDictionaryWriter writer,
-            object? graph
-        ) { }
+        public override void WriteStartObject(System.Xml.XmlDictionaryWriter writer, object? graph)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -307,52 +342,72 @@ namespace System.Runtime.Serialization.Json
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
-        public override void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
+        public override void WriteStartObject(System.Xml.XmlWriter writer, object? graph)
+        {
+        }
     }
 
     public partial class DataContractJsonSerializerSettings
     {
-        public DataContractJsonSerializerSettings() { }
+        public DataContractJsonSerializerSettings()
+        {
+        }
 
         public System.Runtime.Serialization.DateTimeFormat? DateTimeFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Serialization.EmitTypeInformation EmitTypeInformation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IgnoreExtensionDataObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IEnumerable<System.Type>? KnownTypes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int MaxItemsInObjectGraph
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? RootName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SerializeReadOnlyTypes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseSimpleDictionaryFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 

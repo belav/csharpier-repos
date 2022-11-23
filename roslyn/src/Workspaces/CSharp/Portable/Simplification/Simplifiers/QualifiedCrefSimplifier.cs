@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
     {
         public static readonly QualifiedCrefSimplifier Instance = new();
 
-        private QualifiedCrefSimplifier() { }
+        private QualifiedCrefSimplifier()
+        {
+        }
 
         public override bool TrySimplify(
             QualifiedCrefSyntax crefSyntax,

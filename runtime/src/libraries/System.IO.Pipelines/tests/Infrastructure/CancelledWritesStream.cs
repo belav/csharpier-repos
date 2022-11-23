@@ -16,7 +16,9 @@ namespace System.IO.Pipelines.Tests
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
         public override async Task WriteAsync(
             byte[] buffer,

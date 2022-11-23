@@ -12,5 +12,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed class ConcurrencyCheckAttribute : Attribute { }
+    public sealed class ConcurrencyCheckAttribute : Attribute
+    {
+    }
 }

@@ -29,7 +29,8 @@ public class AA
         )
         {
             for (local15++; (118u == local15); param1 = (param1 /= (param1 -= (param1 /= param1))))
-            { }
+            {
+            }
         }
         return ((uint[,])(((Array)(null))));
     }

@@ -287,11 +287,15 @@ namespace System.Net.Http.Formatting
 
         public class TestFormUrlEncodedMediaTypeFormatter : FormUrlEncodedMediaTypeFormatter
         {
-            public TestFormUrlEncodedMediaTypeFormatter() { }
+            public TestFormUrlEncodedMediaTypeFormatter()
+            {
+            }
 
             public TestFormUrlEncodedMediaTypeFormatter(
                 TestFormUrlEncodedMediaTypeFormatter formatter
-            ) : base(formatter) { }
+            ) : base(formatter)
+            {
+            }
 
             public new bool CanReadType(Type type)
             {

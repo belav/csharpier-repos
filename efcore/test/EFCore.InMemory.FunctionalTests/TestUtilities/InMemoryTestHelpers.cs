@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class InMemoryTestHelpers : TestHelpers
 {
-    protected InMemoryTestHelpers() { }
+    protected InMemoryTestHelpers()
+    {
+    }
 
     public static InMemoryTestHelpers Instance { get; } = new();
 

@@ -16,7 +16,9 @@ public class Tests
 
         while (true)
         {
-            Action a = delegate() { };
+            Action a = delegate()
+            {
+            };
             a.BeginInvoke(null, null);
         }
     }

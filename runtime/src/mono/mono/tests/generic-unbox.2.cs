@@ -1,6 +1,8 @@
 using UnboxTest;
 
-public class ClassA { };
+public class ClassA
+{
+};
 
 public class main
 {

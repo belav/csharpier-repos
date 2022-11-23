@@ -26,7 +26,9 @@ namespace Castle.DynamicProxy.Tests.Mixins
 #endif
     public class SimpleMixin : ISimpleMixin
     {
-        public SimpleMixin() { }
+        public SimpleMixin()
+        {
+        }
 
         public int DoSomething()
         {

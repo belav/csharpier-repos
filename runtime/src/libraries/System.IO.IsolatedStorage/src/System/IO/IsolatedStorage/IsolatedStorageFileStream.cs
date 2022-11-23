@@ -25,7 +25,9 @@ namespace System.IO.IsolatedStorage
                 (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
                 FileShare.None,
                 null
-            ) { }
+            )
+        {
+        }
 
         public IsolatedStorageFileStream(string path, FileMode mode, IsolatedStorageFile? isf)
             : this(
@@ -34,7 +36,9 @@ namespace System.IO.IsolatedStorage
                 (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
                 FileShare.None,
                 isf
-            ) { }
+            )
+        {
+        }
 
         public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access)
             : this(
@@ -44,7 +48,9 @@ namespace System.IO.IsolatedStorage
                 access == FileAccess.Read ? FileShare.Read : FileShare.None,
                 DefaultBufferSize,
                 null
-            ) { }
+            )
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -59,14 +65,18 @@ namespace System.IO.IsolatedStorage
                 access == FileAccess.Read ? FileShare.Read : FileShare.None,
                 DefaultBufferSize,
                 isf
-            ) { }
+            )
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) : this(path, mode, access, share, DefaultBufferSize, null) { }
+        ) : this(path, mode, access, share, DefaultBufferSize, null)
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -74,7 +84,9 @@ namespace System.IO.IsolatedStorage
             FileAccess access,
             FileShare share,
             IsolatedStorageFile? isf
-        ) : this(path, mode, access, share, DefaultBufferSize, isf) { }
+        ) : this(path, mode, access, share, DefaultBufferSize, isf)
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -82,7 +94,9 @@ namespace System.IO.IsolatedStorage
             FileAccess access,
             FileShare share,
             int bufferSize
-        ) : this(path, mode, access, share, bufferSize, null) { }
+        ) : this(path, mode, access, share, bufferSize, null)
+        {
+        }
 
         public IsolatedStorageFileStream(
             string path,
@@ -99,7 +113,9 @@ namespace System.IO.IsolatedStorage
                 share,
                 bufferSize,
                 InitializeFileStream(path, mode, access, share, bufferSize, isf)
-            ) { }
+            )
+        {
+        }
 
         // On .NET Framework FileStream has an internal no arg constructor that we utilize to provide the facade. We don't have access
         // to internals in .NET Core so we'll do the next best thing and contort ourselves into the SafeFileHandle constructor.
@@ -203,7 +219,9 @@ namespace System.IO.IsolatedStorage
                         data.StorageFile?.Dispose();
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 // Exception message might leak the IsolatedStorage path. The .NET Framework prevented this by calling an
                 // internal API which made sure that the exception message was scrubbed. However since the innerException

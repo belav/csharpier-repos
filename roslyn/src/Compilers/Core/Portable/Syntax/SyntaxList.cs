@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.Syntax
     internal abstract partial class SyntaxList : SyntaxNode
     {
         internal SyntaxList(InternalSyntax.SyntaxList green, SyntaxNode? parent, int position)
-            : base(green, parent, position) { }
+            : base(green, parent, position)
+        {
+        }
 
         public override string Language
         {

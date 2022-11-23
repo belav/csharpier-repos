@@ -64,7 +64,9 @@ namespace System.Security.Cryptography
 
         public override DSAParameters ExportParameters(bool includePrivateParameters) => default;
 
-        public override void ImportParameters(DSAParameters parameters) { }
+        public override void ImportParameters(DSAParameters parameters)
+        {
+        }
 
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) => false;
     }
@@ -127,7 +129,9 @@ namespace System.Security.Cryptography
 
         public override ECParameters ExportParameters(bool includePrivateParameters) => default;
 
-        public override void ImportParameters(ECParameters parameters) { }
+        public override void ImportParameters(ECParameters parameters)
+        {
+        }
     }
 
     public sealed class ECDsaOpenSsl : ECDsa
@@ -245,7 +249,9 @@ namespace System.Security.Cryptography
 
         public override RSAParameters ExportParameters(bool includePrivateParameters) => default;
 
-        public override void ImportParameters(RSAParameters parameters) { }
+        public override void ImportParameters(RSAParameters parameters)
+        {
+        }
     }
 
     public sealed class SafeEvpPKeyHandle : SafeHandle

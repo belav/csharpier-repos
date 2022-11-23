@@ -60,33 +60,43 @@ namespace System.Runtime.Serialization.Formatters.Tests
     [Serializable]
     internal class AssemblyLoader : ISerializable
     {
-        public AssemblyLoader() { }
+        public AssemblyLoader()
+        {
+        }
 
         public AssemblyLoader(SerializationInfo info, StreamingContext context)
         {
             Assembly.Load(new byte[1000]);
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 
     [Serializable]
     internal class ProcessStarter : ISerializable
     {
-        public ProcessStarter() { }
+        public ProcessStarter()
+        {
+        }
 
         private ProcessStarter(SerializationInfo info, StreamingContext context)
         {
             Process.Start("calc.exe");
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 
     [Serializable]
     internal class FileWriter : ISerializable
     {
-        public FileWriter() { }
+        public FileWriter()
+        {
+        }
 
         private FileWriter(SerializationInfo info, StreamingContext context)
         {
@@ -97,13 +107,17 @@ namespace System.Runtime.Serialization.Formatters.Tests
             );
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 
     [Serializable]
     internal class AsyncDodger : ISerializable
     {
-        public AsyncDodger() { }
+        public AsyncDodger()
+        {
+        }
 
         private AsyncDodger(SerializationInfo info, StreamingContext context)
         {
@@ -126,6 +140,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assembly.Load(new byte[1000]);
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 }

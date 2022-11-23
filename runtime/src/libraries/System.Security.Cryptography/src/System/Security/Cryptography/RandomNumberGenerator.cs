@@ -9,7 +9,9 @@ namespace System.Security.Cryptography
 {
     public abstract class RandomNumberGenerator : IDisposable
     {
-        protected RandomNumberGenerator() { }
+        protected RandomNumberGenerator()
+        {
+        }
 
         public static RandomNumberGenerator Create() =>
             RandomNumberGeneratorImplementation.s_singleton;
@@ -32,7 +34,9 @@ namespace System.Security.Cryptography
             return;
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public abstract void GetBytes(byte[] data);
 

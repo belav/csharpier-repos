@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestTemporaryStorageServiceFactory() { }
+        public TestTemporaryStorageServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             TrivialTemporaryStorageService.Instance;

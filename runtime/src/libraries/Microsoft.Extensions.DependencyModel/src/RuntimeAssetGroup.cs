@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.DependencyModel
         private IReadOnlyList<RuntimeFile>? _runtimeFiles;
 
         public RuntimeAssetGroup(string? runtime, params string[] assetPaths)
-            : this(runtime, (IEnumerable<string>)assetPaths) { }
+            : this(runtime, (IEnumerable<string>)assetPaths)
+        {
+        }
 
         public RuntimeAssetGroup(string? runtime, IEnumerable<string> assetPaths)
         {

@@ -21,7 +21,9 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
         private readonly IExpression expression;
         private readonly Reference reference;
 
-        public ReturnStatement() { }
+        public ReturnStatement()
+        {
+        }
 
         public ReturnStatement(Reference reference)
         {

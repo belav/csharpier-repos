@@ -1170,10 +1170,14 @@ public class Tests
     }
 
     [ComDefaultInterfaceAttribute(typeof(IDefTest1))]
-    public class TestDefaultInterfaceClass1 : TestDefaultInterfaceClass { }
+    public class TestDefaultInterfaceClass1 : TestDefaultInterfaceClass
+    {
+    }
 
     [ComDefaultInterfaceAttribute(typeof(IDefTest2))]
-    public class TestDefaultInterfaceClass2 : TestDefaultInterfaceClass { }
+    public class TestDefaultInterfaceClass2 : TestDefaultInterfaceClass
+    {
+    }
 
     [ComImport()]
     [Guid("00000000-0000-0000-0000-000000000001")]
@@ -1949,9 +1953,13 @@ public class Tests
     }
 
     [ComVisible(true)]
-    public interface IOtherTest { }
+    public interface IOtherTest
+    {
+    }
 
-    public class OtherTest : IOtherTest { }
+    public class OtherTest : IOtherTest
+    {
+    }
 
     public static int mono_test_marshal_variant_in_callback(VarEnum vt, object obj)
     {
@@ -2194,7 +2202,9 @@ public class Tests
     }
 }
 
-public class TestVisible { }
+public class TestVisible
+{
+}
 
 public struct StructWithVariant
 {

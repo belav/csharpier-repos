@@ -18,7 +18,9 @@ namespace System.Xml.Serialization
         private string? _dataType;
         private bool _nullable;
 
-        public SoapElementAttribute() { }
+        public SoapElementAttribute()
+        {
+        }
 
         public SoapElementAttribute(string? elementName)
         {

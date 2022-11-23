@@ -19,7 +19,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpOrganizing(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpOrganizing)) { }
+            : base(instanceFactory, nameof(CSharpOrganizing))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Organizing)]
         public void RemoveAndSort()

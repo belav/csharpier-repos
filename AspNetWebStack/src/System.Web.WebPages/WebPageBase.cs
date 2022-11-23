@@ -91,7 +91,9 @@ namespace System.Web.WebPages
             get { return PageContext.SectionWritersStack; }
         }
 
-        protected virtual void ConfigurePage(WebPageBase parentPage) { }
+        protected virtual void ConfigurePage(WebPageBase parentPage)
+        {
+        }
 
         public static WebPageBase CreateInstanceFromVirtualPath(string virtualPath)
         {
@@ -318,7 +320,9 @@ namespace System.Web.WebPages
             }
         }
 
-        protected virtual void InitializePage() { }
+        protected virtual void InitializePage()
+        {
+        }
 
         public bool IsSectionDefined(string name)
         {

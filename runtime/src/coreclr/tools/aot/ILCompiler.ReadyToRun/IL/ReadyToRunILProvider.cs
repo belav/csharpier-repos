@@ -20,7 +20,9 @@ namespace Internal.IL
     /// <summary>
     /// Marker interface that promises that all tokens from this MethodIL are useable in the current compilation
     /// </summary>
-    public interface IMethodTokensAreUseableInCompilation { }
+    public interface IMethodTokensAreUseableInCompilation
+    {
+    }
 
     public sealed class ReadyToRunILProvider : ILProvider
     {
@@ -244,7 +246,9 @@ namespace Internal.IL
 
             MutableModule _mutableModule;
 
-            public ManifestModuleWrappedMethodIL() { }
+            public ManifestModuleWrappedMethodIL()
+            {
+            }
 
             public bool Initialize(MutableModule mutableModule, EcmaMethodIL wrappedMethod)
             {

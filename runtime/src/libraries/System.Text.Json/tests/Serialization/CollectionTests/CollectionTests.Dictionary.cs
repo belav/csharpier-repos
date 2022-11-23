@@ -753,11 +753,17 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(JsonString, json);
         }
 
-        private interface IClass { }
+        private interface IClass
+        {
+        }
 
-        private class MyClass : IClass { }
+        private class MyClass : IClass
+        {
+        }
 
-        private class MyNonGenericDictionary : Dictionary<string, int> { }
+        private class MyNonGenericDictionary : Dictionary<string, int>
+        {
+        }
 
         private class MyFactory : JsonConverterFactory
         {
@@ -1973,7 +1979,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public class DictionaryThatOnlyImplementsIDictionaryOfStringPoco
-            : DictionaryThatOnlyImplementsIDictionaryOfStringTValue<Poco> { }
+            : DictionaryThatOnlyImplementsIDictionaryOfStringTValue<Poco>
+        {
+        }
 
         [Fact]
         public static void DictionaryOfTOnlyWithStringPoco()
@@ -2086,21 +2094,27 @@ namespace System.Text.Json.Serialization.Tests
 
         private class ClassWithoutParameterlessCtor
         {
-            public ClassWithoutParameterlessCtor(int num) { }
+            public ClassWithoutParameterlessCtor(int num)
+            {
+            }
 
             public string Name { get; set; }
         }
 
         private class ClassWithInternalParameterlessConstructor
         {
-            internal ClassWithInternalParameterlessConstructor() { }
+            internal ClassWithInternalParameterlessConstructor()
+            {
+            }
 
             public string Name { get; set; }
         }
 
         private class ClassWithPrivateParameterlessConstructor
         {
-            private ClassWithPrivateParameterlessConstructor() { }
+            private ClassWithPrivateParameterlessConstructor()
+            {
+            }
 
             public string Name { get; set; }
         }

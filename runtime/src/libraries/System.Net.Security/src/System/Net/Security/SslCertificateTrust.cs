@@ -73,6 +73,8 @@ namespace System.Net.Security
             return trust;
         }
 
-        private SslCertificateTrust() { }
+        private SslCertificateTrust()
+        {
+        }
     }
 }

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAnalyzerDriverService() { }
+        public CSharpAnalyzerDriverService()
+        {
+        }
 
         public void ComputeDeclarationsInSpan(
             SemanticModel model,

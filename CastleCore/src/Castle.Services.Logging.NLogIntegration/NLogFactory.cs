@@ -31,7 +31,9 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Initializes a new instance of the <see cref="NLogFactory" /> class.
         /// </summary>
-        public NLogFactory() : this(defaultConfigFileName) { }
+        public NLogFactory() : this(defaultConfigFileName)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="NLogFactory" /> class.

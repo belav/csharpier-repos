@@ -187,7 +187,9 @@ namespace Tracing.Tests.Common
 
     public class IpcHeader
     {
-        IpcHeader() { }
+        IpcHeader()
+        {
+        }
 
         public IpcHeader(byte commandSet, byte commandId)
         {
@@ -247,7 +249,9 @@ namespace Tracing.Tests.Common
 
     public class IpcMessage
     {
-        public IpcMessage() { }
+        public IpcMessage()
+        {
+        }
 
         public IpcMessage(IpcHeader header, byte[] payload)
         {
@@ -256,7 +260,9 @@ namespace Tracing.Tests.Common
         }
 
         public IpcMessage(byte commandSet, byte commandId, byte[] payload = null)
-            : this(new IpcHeader(commandSet, commandId), payload) { }
+            : this(new IpcHeader(commandSet, commandId), payload)
+        {
+        }
 
         public byte[] Payload { get; private set; } = null;
         public IpcHeader Header { get; private set; } = default;

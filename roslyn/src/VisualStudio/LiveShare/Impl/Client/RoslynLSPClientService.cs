@@ -144,7 +144,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpLspClientServiceFactory() { }
+        public CSharpLspClientServiceFactory()
+        {
+        }
 
         protected override string LanguageSpecificProviderName =>
             StringConstants.CSharpProviderName;
@@ -152,7 +154,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         protected override RoslynLSPClientLifeTimeService LspClientLifeTimeService =>
             new CSharpLSPClientLifeTimeService();
 
-        private class CSharpLSPClientLifeTimeService : RoslynLSPClientLifeTimeService { }
+        private class CSharpLSPClientLifeTimeService : RoslynLSPClientLifeTimeService
+        {
+        }
     }
 
     [Export]
@@ -167,7 +171,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualBasicLspClientServiceFactory() { }
+        public VisualBasicLspClientServiceFactory()
+        {
+        }
 
         protected override string LanguageSpecificProviderName =>
             StringConstants.VisualBasicProviderName;
@@ -175,7 +181,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         protected override RoslynLSPClientLifeTimeService LspClientLifeTimeService =>
             new VisualBasicLSPClientLifeTimeService();
 
-        private class VisualBasicLSPClientLifeTimeService : RoslynLSPClientLifeTimeService { }
+        private class VisualBasicLSPClientLifeTimeService : RoslynLSPClientLifeTimeService
+        {
+        }
     }
 
     [Export]
@@ -190,7 +198,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeScriptLspClientServiceFactory() { }
+        public TypeScriptLspClientServiceFactory()
+        {
+        }
 
         protected override string LanguageSpecificProviderName =>
             StringConstants.TypeScriptProviderName;
@@ -198,6 +208,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         protected override RoslynLSPClientLifeTimeService LspClientLifeTimeService =>
             new TypeScriptLSPClientLifeTimeService();
 
-        private class TypeScriptLSPClientLifeTimeService : RoslynLSPClientLifeTimeService { }
+        private class TypeScriptLSPClientLifeTimeService : RoslynLSPClientLifeTimeService
+        {
+        }
     }
 }

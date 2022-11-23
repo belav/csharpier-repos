@@ -10,7 +10,9 @@ namespace System.Web.Mvc
             : this(
                 exception,
                 null /* errorMessage */
-            ) { }
+            )
+        {
+        }
 
         public ModelError(Exception exception, string errorMessage) : this(errorMessage)
         {

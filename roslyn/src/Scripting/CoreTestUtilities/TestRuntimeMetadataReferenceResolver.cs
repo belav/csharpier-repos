@@ -18,7 +18,9 @@ namespace Roslyn.Test.Utilities
         private static readonly MetadataReferenceProperties s_resolvedMissingAssemblyReferenceProperties =
             MetadataReferenceProperties.Assembly.WithAliases(ImmutableArray.Create("<implicit>"));
 
-        private TestRuntimeMetadataReferenceResolver() { }
+        private TestRuntimeMetadataReferenceResolver()
+        {
+        }
 
         public override bool Equals(object other) => other == Instance;
 

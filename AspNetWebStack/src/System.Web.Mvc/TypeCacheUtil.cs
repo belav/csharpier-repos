@@ -99,7 +99,9 @@ namespace System.Web.Mvc
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return null;
         }
@@ -127,7 +129,9 @@ namespace System.Web.Mvc
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static bool TypeIsPublicClass(Type type)

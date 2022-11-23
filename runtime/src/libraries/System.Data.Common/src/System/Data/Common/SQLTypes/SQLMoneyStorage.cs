@@ -16,7 +16,9 @@ namespace System.Data.Common
         private SqlMoney[] _values = default!; // Late-initialized
 
         public SqlMoneyStorage(DataColumn column)
-            : base(column, typeof(SqlMoney), SqlMoney.Null, SqlMoney.Null, StorageType.SqlMoney) { }
+            : base(column, typeof(SqlMoney), SqlMoney.Null, SqlMoney.Null, StorageType.SqlMoney)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

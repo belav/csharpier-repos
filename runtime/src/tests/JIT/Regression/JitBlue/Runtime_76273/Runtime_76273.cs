@@ -70,5 +70,7 @@ public class Runtime : IRuntime
 
 public class CollectibleALC : System.Runtime.Loader.AssemblyLoadContext
 {
-    public CollectibleALC() : base(true) { }
+    public CollectibleALC() : base(true)
+    {
+    }
 }

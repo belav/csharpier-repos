@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CheckedExpressionHighlighter() { }
+        public CheckedExpressionHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             CheckedExpressionSyntax checkedExpressionSyntax,

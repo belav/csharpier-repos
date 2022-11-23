@@ -110,7 +110,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 document,
                 firstTokenAnnotation,
                 lastTokenAnnotation
-            ) { }
+            )
+        {
+        }
 
         protected override bool UnderAnonymousOrLocalMethod(
             SyntaxToken token,

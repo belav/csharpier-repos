@@ -7,7 +7,9 @@ namespace System.Reflection
 {
     public abstract class Binder
     {
-        protected Binder() { }
+        protected Binder()
+        {
+        }
 
         public abstract FieldInfo BindToField(
             BindingFlags bindingAttr,

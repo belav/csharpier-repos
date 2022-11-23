@@ -20,7 +20,9 @@ namespace Benchstone.BenchF
         private static readonly int s_points = 16;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void Escape(object _) { }
+        private static void Escape(object _)
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static bool Bench()
@@ -72,7 +74,9 @@ namespace Benchstone.BenchF
             do
             {
                 l = n;
-                for (l = l / 2; ((mr + l) > nn); l = l / 2) { }
+                for (l = l / 2; ((mr + l) > nn); l = l / 2)
+                {
+                }
                 // l <= n/2
                 // mr <= (mr % l) + l ==> mr <= (l - 1) + l = 2l - 1
                 // ==> mr <= n - 1

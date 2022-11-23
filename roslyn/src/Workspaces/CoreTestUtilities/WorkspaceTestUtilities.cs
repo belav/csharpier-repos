@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private class WorkspaceWithPartialSemantics : Workspace
         {
             public WorkspaceWithPartialSemantics(HostServices hostServices)
-                : base(hostServices, workspaceKind: nameof(WorkspaceWithPartialSemantics)) { }
+                : base(hostServices, workspaceKind: nameof(WorkspaceWithPartialSemantics))
+            {
+            }
 
             protected internal override bool PartialSemanticsEnabled => true;
         }

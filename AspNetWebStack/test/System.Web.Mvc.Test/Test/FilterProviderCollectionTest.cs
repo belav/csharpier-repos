@@ -213,7 +213,9 @@ namespace System.Web.Mvc.Test
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
-        private class AllowMultipleFalseAttribute : FilterAttribute { }
+        private class AllowMultipleFalseAttribute : FilterAttribute
+        {
+        }
 
         [Fact]
         public void GetFiltersIncludesLastFilterOnlyWithAttributeUsageAllowMultipleFalse()
@@ -250,7 +252,9 @@ namespace System.Web.Mvc.Test
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-        private class AllowMultipleTrueAttribute : FilterAttribute { }
+        private class AllowMultipleTrueAttribute : FilterAttribute
+        {
+        }
 
         [Fact]
         public void GetFiltersIncludesAllFiltersWithAttributeUsageAllowMultipleTrue()
@@ -290,7 +294,9 @@ namespace System.Web.Mvc.Test
 
         private class AllowMultipleCustomFilter : MvcFilter
         {
-            public AllowMultipleCustomFilter(bool allowMultiple) : base(allowMultiple, -1) { }
+            public AllowMultipleCustomFilter(bool allowMultiple) : base(allowMultiple, -1)
+            {
+            }
         }
 
         [Fact]

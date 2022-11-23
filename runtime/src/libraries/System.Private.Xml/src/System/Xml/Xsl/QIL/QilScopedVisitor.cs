@@ -18,12 +18,16 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Called when a variable, parameter, or function enters scope.
         /// </summary>
-        protected virtual void BeginScope(QilNode node) { }
+        protected virtual void BeginScope(QilNode node)
+        {
+        }
 
         /// <summary>
         /// Called when a variable, parameter, or function exits scope.
         /// </summary>
-        protected virtual void EndScope(QilNode node) { }
+        protected virtual void EndScope(QilNode node)
+        {
+        }
 
         /// <summary>
         /// Called at the beginning of Visit().

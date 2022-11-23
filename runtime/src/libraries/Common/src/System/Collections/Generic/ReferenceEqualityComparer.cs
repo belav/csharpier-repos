@@ -20,7 +20,9 @@ namespace System.Collections.Generic
 #endif
     sealed class ReferenceEqualityComparer : IEqualityComparer<object?>, IEqualityComparer
     {
-        private ReferenceEqualityComparer() { }
+        private ReferenceEqualityComparer()
+        {
+        }
 
         /// <summary>
         /// Gets the singleton <see cref="ReferenceEqualityComparer"/> instance.

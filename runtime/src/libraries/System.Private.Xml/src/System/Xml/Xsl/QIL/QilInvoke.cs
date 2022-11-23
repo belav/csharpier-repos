@@ -21,7 +21,9 @@ namespace System.Xml.Xsl.Qil
         /// Construct a new node
         /// </summary>
         public QilInvoke(QilNodeType nodeType, QilNode function, QilNode arguments)
-            : base(nodeType, function, arguments) { }
+            : base(nodeType, function, arguments)
+        {
+        }
 
         //-----------------------------------------------
         // QilInvoke methods

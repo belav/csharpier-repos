@@ -29,11 +29,15 @@ namespace System.Security.Cryptography
 
         [SupportedOSPlatform("windows")]
         public TripleDESCng(string keyName)
-            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider) { }
+            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider)
+        {
+        }
 
         [SupportedOSPlatform("windows")]
         public TripleDESCng(string keyName, CngProvider provider)
-            : this(keyName, provider, CngKeyOpenOptions.None) { }
+            : this(keyName, provider, CngKeyOpenOptions.None)
+        {
+        }
 
         [SupportedOSPlatform("windows")]
         public TripleDESCng(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)

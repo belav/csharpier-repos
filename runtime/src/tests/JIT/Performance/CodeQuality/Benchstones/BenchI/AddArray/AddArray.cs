@@ -18,7 +18,9 @@ namespace Benchstone.BenchI
         const int Size = 6000;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void Escape(object _) { }
+        static void Escape(object _)
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool Bench()

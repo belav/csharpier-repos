@@ -7,7 +7,8 @@ public class ConferencePlannerSqlServerTest
     : ConferencePlannerTestBase<ConferencePlannerSqlServerTest.ConferencePlannerSqlServerFixture>
 {
     public ConferencePlannerSqlServerTest(ConferencePlannerSqlServerFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

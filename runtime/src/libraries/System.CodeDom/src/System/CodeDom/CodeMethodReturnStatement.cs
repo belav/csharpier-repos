@@ -5,7 +5,9 @@ namespace System.CodeDom
 {
     public class CodeMethodReturnStatement : CodeStatement
     {
-        public CodeMethodReturnStatement() { }
+        public CodeMethodReturnStatement()
+        {
+        }
 
         public CodeMethodReturnStatement(CodeExpression expression)
         {

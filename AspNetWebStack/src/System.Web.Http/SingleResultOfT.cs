@@ -20,7 +20,9 @@ namespace System.Web.Http
         /// Initializes a new instance of the <see cref="SingleResult{T}"/> class.
         /// </summary>
         /// <param name="queryable">The <see cref="IQueryable{T}"/> containing zero or one entities.</param>
-        public SingleResult(IQueryable<T> queryable) : base(queryable) { }
+        public SingleResult(IQueryable<T> queryable) : base(queryable)
+        {
+        }
 
         /// <summary>
         /// The <see cref="IQueryable{T}"/> containing zero or one entities.

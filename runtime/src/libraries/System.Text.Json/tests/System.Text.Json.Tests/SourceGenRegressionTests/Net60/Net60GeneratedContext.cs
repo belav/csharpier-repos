@@ -12,7 +12,9 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests.Net60
 {
     //[JsonSerializable(typeof(WeatherForecastWithPOCOs))]
     //[JsonSerializable(typeof(ClassWithCustomConverter))]
-    public partial class Net60GeneratedContext : JsonSerializerContext { }
+    public partial class Net60GeneratedContext : JsonSerializerContext
+    {
+    }
 
     public class WeatherForecastWithPOCOs
     {

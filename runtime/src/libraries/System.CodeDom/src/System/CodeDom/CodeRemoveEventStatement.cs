@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private CodeEventReferenceExpression _eventRef;
 
-        public CodeRemoveEventStatement() { }
+        public CodeRemoveEventStatement()
+        {
+        }
 
         public CodeRemoveEventStatement(
             CodeEventReferenceExpression eventRef,

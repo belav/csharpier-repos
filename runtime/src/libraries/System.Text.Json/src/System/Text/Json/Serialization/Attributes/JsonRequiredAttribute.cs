@@ -19,6 +19,8 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Initializes a new instance of <see cref="JsonRequiredAttribute"/>.
         /// </summary>
-        public JsonRequiredAttribute() { }
+        public JsonRequiredAttribute()
+        {
+        }
     }
 }

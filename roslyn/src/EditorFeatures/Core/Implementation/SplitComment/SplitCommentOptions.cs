@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SplitCommentOptions() { }
+        public SplitCommentOptions()
+        {
+        }
 
         ImmutableArray<IOption> IOptionProvider.Options { get; } =
             ImmutableArray.Create<IOption>(Enabled);

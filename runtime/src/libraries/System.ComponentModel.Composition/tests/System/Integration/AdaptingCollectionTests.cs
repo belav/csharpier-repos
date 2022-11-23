@@ -12,16 +12,21 @@ namespace System.ComponentModel.Composition
 {
     public class FilteringCollection<T, M> : AdaptingCollection<T, M>
     {
-        public FilteringCollection(Func<Lazy<T, M>, bool> filter) : base(e => e.Where(filter)) { }
+        public FilteringCollection(Func<Lazy<T, M>, bool> filter) : base(e => e.Where(filter))
+        {
+        }
     }
 
     public class OrderingCollection<T, M> : AdaptingCollection<T, M>
     {
         public OrderingCollection(Func<Lazy<T, M>, object> keySelector) : this(keySelector, false)
-        { }
+        {
+        }
 
         public OrderingCollection(Func<Lazy<T, M>, object> keySelector, bool descending)
-            : base(e => descending ? e.OrderByDescending(keySelector) : e.OrderBy(keySelector)) { }
+            : base(e => descending ? e.OrderByDescending(keySelector) : e.OrderBy(keySelector))
+        {
+        }
     }
 
     public class AdaptingCollection<T> : AdaptingCollection<T, IDictionary<string, object>>
@@ -31,7 +36,9 @@ namespace System.ComponentModel.Composition
                 IEnumerable<Lazy<T, IDictionary<string, object>>>,
                 IEnumerable<Lazy<T, IDictionary<string, object>>>
             > adaptor
-        ) : base(adaptor) { }
+        ) : base(adaptor)
+        {
+        }
     }
 
     public class AdaptingCollection<T, M> : ICollection<Lazy<T, M>>, INotifyCollectionChanged
@@ -40,7 +47,9 @@ namespace System.ComponentModel.Composition
         private readonly Func<IEnumerable<Lazy<T, M>>, IEnumerable<Lazy<T, M>>> _adaptor = null;
         private List<Lazy<T, M>> _adaptedItems = null;
 
-        public AdaptingCollection() : this(null) { }
+        public AdaptingCollection() : this(null)
+        {
+        }
 
         public AdaptingCollection(Func<IEnumerable<Lazy<T, M>>, IEnumerable<Lazy<T, M>>> adaptor)
         {
@@ -150,7 +159,9 @@ namespace System.ComponentModel.Composition
 
     public class AdaptingCollectionTests
     {
-        public interface IContract { }
+        public interface IContract
+        {
+        }
 
         public interface INetworkAwareMetadata
         {
@@ -160,10 +171,14 @@ namespace System.ComponentModel.Composition
 
         [Export(typeof(IContract))]
         [ExportMetadata("RequiresOnline", true)]
-        public class NetworkExport : IContract { }
+        public class NetworkExport : IContract
+        {
+        }
 
         [Export(typeof(IContract))]
-        public class NonNetworkExport : IContract { }
+        public class NonNetworkExport : IContract
+        {
+        }
 
         public class FilterExports
         {
@@ -208,14 +223,20 @@ namespace System.ComponentModel.Composition
 
         [Export(typeof(IContract))]
         [ExportMetadata("Order", 2)]
-        public class BExport : IContract { }
+        public class BExport : IContract
+        {
+        }
 
         [Export(typeof(IContract))]
         [ExportMetadata("Order", 1)]
-        public class AExport : IContract { }
+        public class AExport : IContract
+        {
+        }
 
         [Export(typeof(IContract))]
-        public class CExport : IContract { }
+        public class CExport : IContract
+        {
+        }
 
         public class OrderExportsByMetadata
         {
@@ -312,20 +333,28 @@ namespace System.ComponentModel.Composition
 
         [Export(typeof(IContract))]
         [ExportMetadata("Dynamic", true)]
-        public class Dynamic1 : IContract { }
+        public class Dynamic1 : IContract
+        {
+        }
 
         [Export(typeof(IContract))]
         [ExportMetadata("Dynamic", true)]
-        public class Dynamic2 : IContract { }
+        public class Dynamic2 : IContract
+        {
+        }
 
         [Export(typeof(IContract))]
         [ExportMetadata("Dynamic", false)]
-        public class NonDynamic1 : IContract { }
+        public class NonDynamic1 : IContract
+        {
+        }
 
         public class DynamicFilteredCollection<T, M> : AdaptingCollection<T, M>
             where M : IDynamicFilteredMetadata
         {
-            public DynamicFilteredCollection() { }
+            public DynamicFilteredCollection()
+            {
+            }
 
             private bool _includeDynamic = false;
             public bool IncludeDynamic

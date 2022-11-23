@@ -20,7 +20,9 @@ namespace System.Net.Http.Functional.Tests
                 Task.CompletedTask,
                 new TaskCompletionSource<bool>(),
                 millisecondDelayBetweenBytes: 0
-            ) { }
+            )
+        {
+        }
 
         public ByteAtATimeContent(
             int length,

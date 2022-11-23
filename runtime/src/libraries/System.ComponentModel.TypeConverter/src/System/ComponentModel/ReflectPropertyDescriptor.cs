@@ -633,7 +633,9 @@ namespace System.ComponentModel
                         );
                         return (bool)shouldSerialize.Invoke(prov, new object[] { component })!;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 return true;
             }
@@ -791,7 +793,9 @@ namespace System.ComponentModel
                         return (bool)
                             ShouldSerializeMethodValue.Invoke(prov, new object[] { component })!;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 return AttributesContainsDesignerVisibilityContent();
             }
@@ -804,7 +808,9 @@ namespace System.ComponentModel
                         return (bool)
                             ShouldSerializeMethodValue.Invoke(prov, new object[] { component })!;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 return true;
             }
@@ -853,7 +859,9 @@ namespace System.ComponentModel
                     {
                         return (bool)ShouldSerializeMethodValue.Invoke(component, null)!;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 return true;
             }
@@ -1343,7 +1351,9 @@ namespace System.ComponentModel
                     {
                         return (bool)ShouldSerializeMethodValue.Invoke(component, null)!;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 return AttributesContainsDesignerVisibilityContent();
             }
@@ -1355,7 +1365,9 @@ namespace System.ComponentModel
                     {
                         return (bool)ShouldSerializeMethodValue.Invoke(component, null)!;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 return true;
             }

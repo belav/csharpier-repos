@@ -29,7 +29,9 @@ namespace System.Net
 
     public partial class ServicePoint
     {
-        internal ServicePoint() { }
+        internal ServicePoint()
+        {
+        }
 
         public System.Uri Address
         {
@@ -38,7 +40,9 @@ namespace System.Net
         public System.Net.BindIPEndPoint? BindIPEndPointDelegate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate? Certificate
         {
@@ -51,12 +55,16 @@ namespace System.Net
         public int ConnectionLeaseTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ConnectionLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ConnectionName
         {
@@ -69,7 +77,9 @@ namespace System.Net
         public bool Expect100Continue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime IdleSince
         {
@@ -78,7 +88,9 @@ namespace System.Net
         public int MaxIdleTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Version ProtocolVersion
         {
@@ -87,7 +99,9 @@ namespace System.Net
         public int ReceiveBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SupportsPipelining
         {
@@ -96,7 +110,9 @@ namespace System.Net
         public bool UseNagleAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public bool CloseConnectionGroup(string connectionGroupName)
@@ -104,34 +120,46 @@ namespace System.Net
             throw null;
         }
 
-        public void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval) { }
+        public void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval)
+        {
+        }
     }
 
     public partial class ServicePointManager
     {
-        internal ServicePointManager() { }
+        internal ServicePointManager()
+        {
+        }
 
         public const int DefaultNonPersistentConnectionLimit = 4;
         public const int DefaultPersistentConnectionLimit = 2;
         public static bool CheckCertificateRevocationList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static int DefaultConnectionLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static int DnsRefreshTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static bool EnableDnsRoundRobin
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
@@ -142,37 +170,51 @@ namespace System.Net
         public static bool Expect100Continue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static int MaxServicePointIdleTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static int MaxServicePoints
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static bool ReusePort
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Net.SecurityProtocolType SecurityProtocol
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Net.Security.RemoteCertificateValidationCallback? ServerCertificateValidationCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static bool UseNagleAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -211,10 +253,8 @@ namespace System.Net
             throw null;
         }
 
-        public static void SetTcpKeepAlive(
-            bool enabled,
-            int keepAliveTime,
-            int keepAliveInterval
-        ) { }
+        public static void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval)
+        {
+        }
     }
 }

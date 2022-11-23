@@ -312,9 +312,13 @@ namespace System.Reflection.Tests
 
         public class Test
         {
-            public void TestMethod(int param1) { }
+            public void TestMethod(int param1)
+            {
+            }
 
-            public void SampleMethod(int param2 = 2, bool param3 = false) { }
+            public void SampleMethod(int param2 = 2, bool param3 = false)
+            {
+            }
         }
 
         public class Sample
@@ -334,7 +338,9 @@ namespace System.Reflection.Tests
                 int param2,
                 bool param3,
                 double param4
-            ) { }
+            )
+            {
+            }
 
             public static int SampleMethod(string param1, int param2 = 2, bool param3 = false)
             {
@@ -367,7 +373,9 @@ namespace System.Reflection.Tests
                 int par3 = 2,
                 bool par4 = false,
                 short par5 = 1
-            ) { }
+            )
+            {
+            }
         }
     }
 }

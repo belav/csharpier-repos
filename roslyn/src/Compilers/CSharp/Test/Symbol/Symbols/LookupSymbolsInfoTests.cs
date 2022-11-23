@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get { return string.Format("T{0}", _current.ToString()); }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             object System.Collections.IEnumerator.Current
             {

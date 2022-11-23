@@ -366,7 +366,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
                         .ReadAsync(buffer, 0, 0, cancellationToken)
                         .ConfigureAwait(false);
                 }
-                catch (OperationCanceledException) { }
+                catch (OperationCanceledException)
+                {
+                }
                 catch (Exception e)
                 {
                     // It is okay for this call to fail.  Errors will be reflected in the
@@ -903,7 +905,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 {
                     UnlockFile();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
     }

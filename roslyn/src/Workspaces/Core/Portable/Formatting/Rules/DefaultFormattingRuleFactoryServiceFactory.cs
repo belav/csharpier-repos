@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultFormattingRuleFactoryService() { }
+        public DefaultFormattingRuleFactoryService()
+        {
+        }
 
         public bool ShouldNotFormatOrCommitOnPaste(DocumentId documentId) => false;
 

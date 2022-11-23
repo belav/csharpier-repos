@@ -16,7 +16,9 @@ namespace System.Composition.Lightweight.UnitTests
     public class MetadataViewGenerationTests
     {
         [Export, ExportMetadata("Name", "A")]
-        public class HasNameA { }
+        public class HasNameA
+        {
+        }
 
         public class Named
         {
@@ -34,7 +36,9 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export]
-        public class HasNoName { }
+        public class HasNoName
+        {
+        }
 
         public class OptionallyNamed
         {
@@ -74,7 +78,9 @@ namespace System.Composition.Lightweight.UnitTests
 
         public class InvalidConcreteView
         {
-            public InvalidConcreteView(string unsupported) { }
+            public InvalidConcreteView(string unsupported)
+            {
+            }
         }
 
         [Fact]
@@ -93,7 +99,9 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export, ExportMetadata("Name", "A")]
-        public class ExportsWithMetadata { }
+        public class ExportsWithMetadata
+        {
+        }
 
         public interface INamed
         {
@@ -132,7 +140,9 @@ namespace System.Composition.Lightweight.UnitTests
         }
 
         [Export, ExportMetadata("Order", 1)]
-        public class HasOrder { }
+        public class HasOrder
+        {
+        }
 
         [Fact]
         public void ReadOnlyPropertiesOnMetadataViewsAreIgnored()

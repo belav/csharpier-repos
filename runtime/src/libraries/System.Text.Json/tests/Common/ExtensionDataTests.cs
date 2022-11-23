@@ -15,7 +15,8 @@ namespace System.Text.Json.Serialization.Tests
     public abstract class ExtensionDataTests : SerializerTests
     {
         public ExtensionDataTests(JsonSerializerWrapper serializerWrapper) : base(serializerWrapper)
-        { }
+        {
+        }
 
         [Fact]
         public async Task EmptyPropertyName_WinsOver_ExtensionDataEmptyPropertyName()
@@ -421,7 +422,9 @@ namespace System.Text.Json.Serialization.Tests
             public T Overflow { get; set; }
         }
 
-        public class CustomOverflowDictionary<T> : Dictionary<string, T> { }
+        public class CustomOverflowDictionary<T> : Dictionary<string, T>
+        {
+        }
 
         public class DictionaryOverflowConverter : JsonConverter<Dictionary<string, object>>
         {

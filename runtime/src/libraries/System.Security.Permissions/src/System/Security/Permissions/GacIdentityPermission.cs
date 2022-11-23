@@ -12,16 +12,22 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class GacIdentityPermission : CodeAccessPermission
     {
-        public GacIdentityPermission() { }
+        public GacIdentityPermission()
+        {
+        }
 
-        public GacIdentityPermission(PermissionState state) { }
+        public GacIdentityPermission(PermissionState state)
+        {
+        }
 
         public override IPermission Copy()
         {
             return default(IPermission);
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

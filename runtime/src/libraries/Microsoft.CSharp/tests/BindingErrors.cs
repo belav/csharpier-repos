@@ -21,12 +21,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         private class TypeWithConditional
         {
             [Conditional("TEST_DEFINITION")]
-            public virtual void DoNothing() { }
+            public virtual void DoNothing()
+            {
+            }
         }
 
         private class DerivedTypeWithConditional : TypeWithConditional
         {
-            public override void DoNothing() { }
+            public override void DoNothing()
+            {
+            }
         }
 
         private class TypeWithEvent
@@ -41,17 +45,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private class TypeWithOverloads
         {
-            public void DoNothing(int x, long y) { }
+            public void DoNothing(int x, long y)
+            {
+            }
 
-            public void DoNothing(long x, int y) { }
+            public void DoNothing(long x, int y)
+            {
+            }
         }
 
         // So the static binder can't decide some cases are/are not static at compilation stage
         class StaticAndInstanceSameName
         {
-            public void DoSomething(double d) { }
+            public void DoSomething(double d)
+            {
+            }
 
-            public static void DoSomething(int i) { }
+            public static void DoSomething(int i)
+            {
+            }
         }
 
         private class AmbiguousNumClass
@@ -84,12 +96,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private class Constraints
         {
-            public void MustBeConvertible<T>(T arg) where T : IConvertible { }
+            public void MustBeConvertible<T>(T arg) where T : IConvertible
+            {
+            }
 
-            public void MustBeStruct<T>(T arg) where T : struct { }
+            public void MustBeStruct<T>(T arg) where T : struct
+            {
+            }
 
-            public void MustBeDerived<TDerived, TBase>(TDerived d, TBase b)
-                where TDerived : TBase { }
+            public void MustBeDerived<TDerived, TBase>(TDerived d, TBase b) where TDerived : TBase
+            {
+            }
         }
 
         [Fact]
@@ -449,7 +466,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public class Inner
             {
-                public void DoNothing() { }
+                public void DoNothing()
+                {
+                }
             }
         }
 
@@ -498,7 +517,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public new class Inner
             {
-                public void DoNothing() { }
+                public void DoNothing()
+                {
+                }
             }
         }
 
@@ -519,7 +540,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public class Inner
             {
-                public void DoNothing() { }
+                public void DoNothing()
+                {
+                }
             }
         }
 
@@ -591,7 +614,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private sealed class InitOnlyProperty
         {
-            public InitOnlyProperty() { }
+            public InitOnlyProperty()
+            {
+            }
 
             public InitOnlyProperty(int value)
             {

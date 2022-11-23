@@ -13,5 +13,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
         "Microsoft.CodeAnalysis.Tools.Tests.XUnit.MSBuildFactDiscoverer",
         "dotnet-format.UnitTests"
     )]
-    public sealed class MSBuildFactAttribute : FactAttribute { }
+    public sealed class MSBuildFactAttribute : FactAttribute
+    {
+    }
 }

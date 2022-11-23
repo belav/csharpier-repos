@@ -8,7 +8,9 @@ namespace System.Diagnostics.Eventing.Reader
 {
     public sealed partial class EventBookmark
     {
-        public EventBookmark(string bookmarkXml) { }
+        public EventBookmark(string bookmarkXml)
+        {
+        }
 
         public string BookmarkXml
         {

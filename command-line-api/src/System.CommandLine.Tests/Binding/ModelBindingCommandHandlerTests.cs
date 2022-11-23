@@ -353,7 +353,9 @@ namespace System.CommandLine.Tests.Binding
 
             public object BoundValue { get; }
 
-            public void Apply(InvocationContext context) { }
+            public void Apply(InvocationContext context)
+            {
+            }
         }
 
         internal static readonly BindingTestSet BindingCases =

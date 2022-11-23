@@ -17,7 +17,9 @@ namespace System.Net.Http.Formatting
         private static readonly MediaTypeWithQualityHeaderValueComparer _mediaTypeComparer =
             new MediaTypeWithQualityHeaderValueComparer();
 
-        private MediaTypeWithQualityHeaderValueComparer() { }
+        private MediaTypeWithQualityHeaderValueComparer()
+        {
+        }
 
         public static MediaTypeWithQualityHeaderValueComparer QualityComparer
         {

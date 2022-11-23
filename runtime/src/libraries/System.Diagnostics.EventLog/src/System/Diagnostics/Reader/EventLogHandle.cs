@@ -11,7 +11,9 @@ namespace System.Diagnostics.Eventing.Reader
     /// </summary>
     internal sealed class EventLogHandle : SafeHandle
     {
-        public EventLogHandle() : base(IntPtr.Zero, true) { }
+        public EventLogHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         internal EventLogHandle(IntPtr handle, bool ownsHandle) : base(IntPtr.Zero, ownsHandle)
         {

@@ -157,7 +157,9 @@ namespace System.Net.Test.Common
                 // Block and wait for the task to complete synchronously
                 Task.WaitAll(task);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
     }
 
@@ -211,7 +213,9 @@ namespace System.Net.Test.Common
         public abstract Task WaitForCloseAsync(CancellationToken cancellationToken);
 
         /// <summary>Reset the connection's internal state so it can process further requests.</summary>
-        public virtual void CompleteRequestProcessing() { }
+        public virtual void CompleteRequestProcessing()
+        {
+        }
 
         /// <summary>Helper function to make it easier to convert old test with strings.</summary>
         public async Task SendResponseBodyAsync(string content, bool isFinal = true)

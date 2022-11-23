@@ -34,7 +34,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         internal class InternalFeaturesOptionsControl : InternalOptionsControl
         {
             public InternalFeaturesOptionsControl(string featureOptionName, OptionStore optionStore)
-                : base(featureOptionName, optionStore) { }
+                : base(featureOptionName, optionStore)
+            {
+            }
 
             protected override void AddOptions(Panel panel)
             {

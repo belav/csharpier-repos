@@ -58,7 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UnnamedSymbolCompletionProvider() { }
+        public UnnamedSymbolCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

@@ -68,7 +68,9 @@ namespace ILCompiler
                 singleWarn: false,
                 Array.Empty<string>(),
                 Array.Empty<string>()
-            ) { }
+            )
+        {
+        }
 
         public void LogMessage(string message)
         {

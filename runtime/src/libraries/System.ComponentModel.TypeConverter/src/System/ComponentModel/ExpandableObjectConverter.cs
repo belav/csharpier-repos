@@ -14,7 +14,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the System.ComponentModel.ExpandableObjectConverter class.
         /// </summary>
-        public ExpandableObjectConverter() { }
+        public ExpandableObjectConverter()
+        {
+        }
 
         /// <summary>
         /// Gets a collection of properties for the type of object

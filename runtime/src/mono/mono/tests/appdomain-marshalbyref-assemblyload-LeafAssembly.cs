@@ -27,7 +27,9 @@ namespace LeafAssembly
          */
 #if !UNDEFINE_OTHER_METHOD
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void PublicMethod() { }
+        public static void PublicMethod()
+        {
+        }
 #endif
     }
 }

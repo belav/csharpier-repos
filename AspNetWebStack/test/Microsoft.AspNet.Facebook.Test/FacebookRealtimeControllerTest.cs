@@ -132,7 +132,9 @@ namespace Microsoft.AspNet.Facebook.Test
         {
             private string _verifyToken;
 
-            public UserRealtimeCallbackController() : this(null, null) { }
+            public UserRealtimeCallbackController() : this(null, null)
+            {
+            }
 
             public UserRealtimeCallbackController(string appSecret, string verifyToken)
             {

@@ -67,12 +67,9 @@ namespace System.Xml
             throw new InvalidOperationException(SR.Xml_InvalidOperation);
         }
 
-        public override void WriteDocType(
-            string name,
-            string? pubid,
-            string? sysid,
-            string? subset
-        ) { }
+        public override void WriteDocType(string name, string? pubid, string? sysid, string? subset)
+        {
+        }
 
         // Raw writers do not have to keep a stack of element names.
         public override void WriteEndElement()
@@ -229,9 +226,13 @@ namespace System.Xml
         }
 
         // Write the xml declaration.  This must be the first call.
-        internal virtual void WriteXmlDeclaration(XmlStandalone standalone) { }
+        internal virtual void WriteXmlDeclaration(XmlStandalone standalone)
+        {
+        }
 
-        internal virtual void WriteXmlDeclaration(string xmldecl) { }
+        internal virtual void WriteXmlDeclaration(string xmldecl)
+        {
+        }
 
         // Called after an element's attributes have been enumerated, but before any children have been
         // enumerated.  This method must always be called, even for empty elements.
@@ -240,7 +241,9 @@ namespace System.Xml
 
         // Called before a root element is written (before the WriteStartElement call)
         //   the conformanceLevel specifies the current conformance level the writer is operating with.
-        internal virtual void OnRootElement(ConformanceLevel conformanceLevel) { }
+        internal virtual void OnRootElement(ConformanceLevel conformanceLevel)
+        {
+        }
 
         // WriteEndElement() and WriteFullEndElement() overloads, in which caller gives the full name of the
         // element, so that raw writers do not need to keep a stack of element names.  This method should

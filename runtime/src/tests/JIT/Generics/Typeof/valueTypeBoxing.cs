@@ -13,9 +13,13 @@ interface X
     void incCount();
 }
 
-interface A : X { }
+interface A : X
+{
+}
 
-interface B : X { }
+interface B : X
+{
+}
 
 struct C : A
 {

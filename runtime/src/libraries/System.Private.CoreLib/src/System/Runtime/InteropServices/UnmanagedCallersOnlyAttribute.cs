@@ -17,7 +17,9 @@ namespace System.Runtime.InteropServices
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     public sealed class UnmanagedCallersOnlyAttribute : Attribute
     {
-        public UnmanagedCallersOnlyAttribute() { }
+        public UnmanagedCallersOnlyAttribute()
+        {
+        }
 
         /// <summary>
         /// Optional. If omitted, the runtime will use the default platform calling convention.

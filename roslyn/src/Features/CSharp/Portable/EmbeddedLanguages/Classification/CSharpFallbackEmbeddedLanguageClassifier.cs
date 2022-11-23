@@ -13,6 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         public static readonly CSharpFallbackEmbeddedLanguageClassifier Instance = new();
 
         private CSharpFallbackEmbeddedLanguageClassifier()
-            : base(CSharpEmbeddedLanguagesProvider.Info) { }
+            : base(CSharpEmbeddedLanguagesProvider.Info)
+        {
+        }
     }
 }

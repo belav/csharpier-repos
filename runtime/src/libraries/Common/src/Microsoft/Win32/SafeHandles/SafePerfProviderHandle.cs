@@ -9,7 +9,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafePerfProviderHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafePerfProviderHandle() : base(true) { }
+        public SafePerfProviderHandle() : base(true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

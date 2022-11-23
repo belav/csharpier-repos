@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

@@ -57,9 +57,13 @@ public class ForwardSubCallArgInterference3
         return S0.s_result;
     }
 
-    public static void M8(S0 arg0, long arg1) { }
+    public static void M8(S0 arg0, long arg1)
+    {
+    }
 
-    public static void M7(S0 argThis, uint[] arg0, ref byte arg1, ref S0[] arg2, int arg3) { }
+    public static void M7(S0 argThis, uint[] arg0, ref byte arg1, ref S0[] arg2, int arg3)
+    {
+    }
 }
 
 public interface IRT

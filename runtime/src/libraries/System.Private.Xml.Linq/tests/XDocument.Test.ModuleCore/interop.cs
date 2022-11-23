@@ -6,7 +6,9 @@ using System.Security;
 
 namespace Microsoft.Test.ModuleCore
 {
-    public class LtmContext { }
+    public class LtmContext
+    {
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // TestResult
@@ -57,7 +59,9 @@ namespace Microsoft.Test.ModuleCore
     // TestFlags
     //
     ////////////////////////////////////////////////////////////////////////
-    public enum TestFlags { }
+    public enum TestFlags
+    {
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // TestMethod

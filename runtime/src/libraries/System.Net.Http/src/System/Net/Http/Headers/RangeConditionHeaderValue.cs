@@ -34,7 +34,9 @@ namespace System.Net.Http.Headers
         }
 
         public RangeConditionHeaderValue(string entityTag)
-            : this(new EntityTagHeaderValue(entityTag)) { }
+            : this(new EntityTagHeaderValue(entityTag))
+        {
+        }
 
         private RangeConditionHeaderValue(RangeConditionHeaderValue source)
         {

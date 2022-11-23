@@ -606,7 +606,9 @@ namespace System.Web.Http.Validation.Validators
             );
         }
 
-        class DerivedRequiredAttribute : RequiredAttribute { }
+        class DerivedRequiredAttribute : RequiredAttribute
+        {
+        }
 
         class SampleModel
         {

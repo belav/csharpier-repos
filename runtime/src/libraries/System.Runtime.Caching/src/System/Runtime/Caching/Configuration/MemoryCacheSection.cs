@@ -35,7 +35,9 @@ namespace System.Runtime.Caching.Configuration
         private static readonly ConfigurationPropertyCollection s_properties =
             new ConfigurationPropertyCollection() { s_propNamedCaches };
 
-        public MemoryCacheSection() { }
+        public MemoryCacheSection()
+        {
+        }
 
         protected override ConfigurationPropertyCollection Properties
         {

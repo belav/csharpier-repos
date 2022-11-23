@@ -31,7 +31,8 @@ namespace System.Threading.Tasks.Tests
 
             CancellationTokenSource cancellationSrc = new CancellationTokenSource();
             tf = new TaskFactory(cancellationSrc.Token);
-            var task = tf.StartNew(() => { });
+            var task = tf.StartNew(() => {
+            });
             task.Wait();
 
             // Exercising TF(scheduler)
@@ -123,7 +124,8 @@ namespace System.Threading.Tasks.Tests
             //Test constructor that accepts cancellationToken
             cancellationSrc.Cancel();
             TaskFactory tf = new TaskFactory(cancellationSrc.Token);
-            var cancelledTask = tf.StartNew(() => { });
+            var cancelledTask = tf.StartNew(() => {
+            });
             EnsureTaskCanceledExceptionThrown(() => cancelledTask.Wait());
 
             // Exercising TF<int>(cancellationToken) with a cancelled token
@@ -169,20 +171,24 @@ namespace System.Threading.Tasks.Tests
 
             Assert.Throws<ArgumentNullException>(() =>
             {
-                tf.FromAsync(null, (obj) => { }, TaskCreationOptions.None);
+                tf.FromAsync(
+                    null,
+                    (obj) => {
+                    },
+                    TaskCreationOptions.None
+                );
             });
 
             // testing exceptions in null endMethods
 
             Assert.Throws<ArgumentNullException>(() =>
             {
-                tf.FromAsync(new myAsyncResult((obj) => { }, null), null, TaskCreationOptions.None);
-            });
-
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                tf.FromAsync<int>(
-                    new myAsyncResult((obj) => { }, null),
+                tf.FromAsync(
+                    new myAsyncResult(
+                        (obj) => {
+                        },
+                        null
+                    ),
                     null,
                     TaskCreationOptions.None
                 );
@@ -191,7 +197,24 @@ namespace System.Threading.Tasks.Tests
             Assert.Throws<ArgumentNullException>(() =>
             {
                 tf.FromAsync<int>(
-                    new myAsyncResult((obj) => { }, null),
+                    new myAsyncResult(
+                        (obj) => {
+                        },
+                        null
+                    ),
+                    null,
+                    TaskCreationOptions.None
+                );
+            });
+
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                tf.FromAsync<int>(
+                    new myAsyncResult(
+                        (obj) => {
+                        },
+                        null
+                    ),
                     null,
                     TaskCreationOptions.None,
                     null

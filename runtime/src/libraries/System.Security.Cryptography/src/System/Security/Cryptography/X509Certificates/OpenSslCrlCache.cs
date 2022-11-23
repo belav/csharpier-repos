@@ -269,8 +269,12 @@ namespace System.Security.Cryptography.X509Certificates
                             }
                         }
                     }
-                    catch (UnauthorizedAccessException) { }
-                    catch (IOException) { }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
+                    catch (IOException)
+                    {
+                    }
 
                     if (OpenSslX509ChainEventSource.Log.IsEnabled())
                     {

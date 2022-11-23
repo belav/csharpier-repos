@@ -37,7 +37,9 @@ namespace Roslyn.Test.Utilities
             get { return true; }
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override long Length
         {

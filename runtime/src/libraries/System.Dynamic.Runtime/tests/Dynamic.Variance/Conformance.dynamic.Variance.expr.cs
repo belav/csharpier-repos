@@ -24,9 +24,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype01
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -66,12 +70,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype02
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t) { }
+        public void Boo(T t)
+        {
+        }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -103,9 +113,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype03
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -119,7 +133,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype03
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) => { });
+            dynamic f1 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             Foo<Tiger> f2 = f1;
             dynamic f3 = (Foo<Tiger>)f1;
             if (typeof(Foo<Animal>).ToString() != f2.GetType().ToString())
@@ -140,9 +158,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype04
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -196,9 +218,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is01.is01
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -244,9 +270,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is02.is02
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -279,9 +309,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is03.is03
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -295,7 +329,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is03.is03
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) => { });
+            dynamic f1 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             Foo<Tiger> f2 = f1;
             dynamic f3 = (Foo<Tiger>)f1;
             if (!(f2 is Foo<Tiger>))
@@ -316,9 +354,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is04.is04
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -332,7 +374,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is04.is04
 
         public static int MainMethod()
         {
-            Foo<Animal> f1 = (Animal a) => { };
+            Foo<Animal> f1 = (Animal a) => {
+            };
             Foo<Tiger> f2 = f1;
             dynamic f3 = (Foo<Tiger>)f1;
             if (!(f2 is Foo<Animal>))
@@ -366,9 +409,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is05.is05
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -412,9 +459,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is06.is06
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -445,9 +496,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is07.is07
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -461,7 +516,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is07.is07
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) => { });
+            dynamic f1 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             Foo<Tiger> f2 = f1;
             if (f1 is Foo<Tiger>)
                 return 0;
@@ -480,9 +539,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is08.is08
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -496,7 +559,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is08.is08
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) => { });
+            dynamic f1 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             Foo<Tiger> f2 = f1;
             if (f1 is Foo<Animal>)
                 return 0;
@@ -528,9 +595,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is09.is09
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -573,9 +644,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is10.is10
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -605,9 +680,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is11.is11
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -621,7 +700,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is11.is11
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) => { });
+            dynamic f1 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             if (f1 is Foo<Tiger>)
                 return 1;
             else
@@ -639,9 +722,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is12.is12
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public class C
     {
@@ -655,7 +742,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is12.is12
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) => { });
+            dynamic f1 =
+                (Foo<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             if (f1 is Foo<Animal>)
                 return 0;
             else

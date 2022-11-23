@@ -67,7 +67,9 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_knownSingleValueResponseHeaders);
 
-        if (_enumerator.MoveNext()) { }
+        if (_enumerator.MoveNext())
+        {
+        }
     }
 
     [Benchmark]
@@ -75,7 +77,9 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_knownMultipleValueResponseHeaders);
 
-        if (_enumerator.MoveNext()) { }
+        if (_enumerator.MoveNext())
+        {
+        }
     }
 
     [Benchmark]
@@ -83,7 +87,9 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_unknownSingleValueResponseHeaders);
 
-        if (_enumerator.MoveNext()) { }
+        if (_enumerator.MoveNext())
+        {
+        }
     }
 
     [Benchmark]
@@ -91,6 +97,8 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_unknownMultipleValueResponseHeaders);
 
-        if (_enumerator.MoveNext()) { }
+        if (_enumerator.MoveNext())
+        {
+        }
     }
 }

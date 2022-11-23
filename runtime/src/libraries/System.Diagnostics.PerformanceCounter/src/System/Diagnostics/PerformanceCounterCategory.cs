@@ -32,7 +32,9 @@ namespace System.Diagnostics
         ///     Creates a PerformanceCounterCategory object for given category.
         ///     Uses the local machine.
         /// </summary>
-        public PerformanceCounterCategory(string categoryName) : this(categoryName, ".") { }
+        public PerformanceCounterCategory(string categoryName) : this(categoryName, ".")
+        {
+        }
 
         /// <summary>
         ///     Creates a PerformanceCounterCategory object for given category.

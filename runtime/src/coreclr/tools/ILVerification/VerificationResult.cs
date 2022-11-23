@@ -41,7 +41,9 @@ namespace ILVerify
 
     public class ErrorArgument
     {
-        public ErrorArgument() { }
+        public ErrorArgument()
+        {
+        }
 
         public ErrorArgument(string name, object value)
         {

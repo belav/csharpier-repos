@@ -21,7 +21,9 @@ namespace System.Text.Json.Serialization
         protected abstract bool IsImmutable { get; }
         protected abstract void VerifyMutable();
 
-        protected virtual void OnAddingElement(TItem item) { }
+        protected virtual void OnAddingElement(TItem item)
+        {
+        }
 
         public TItem this[int index]
         {

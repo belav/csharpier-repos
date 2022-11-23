@@ -25,7 +25,9 @@ namespace SerializationTypes
         public string DateTimeString;
         public DateTime CurrentDateTime;
 
-        public TypeWithDateTimeStringProperty() { }
+        public TypeWithDateTimeStringProperty()
+        {
+        }
     }
 
     public class SimpleType
@@ -98,7 +100,9 @@ namespace SerializationTypes
     {
         private List<T> _items = new List<T>();
 
-        public MyCollection() { }
+        public MyCollection()
+        {
+        }
 
         public MyCollection(params T[] values)
         {
@@ -169,7 +173,9 @@ namespace SerializationTypes
     {
         private List<object> _items = new List<object>();
 
-        public MyList() { }
+        public MyList()
+        {
+        }
 
         public MyList(params object[] values)
         {
@@ -290,7 +296,9 @@ namespace SerializationTypes
         [DataMember]
         public MyEnum MyEnum1;
 
-        public DCClassWithEnumAndStruct() { }
+        public DCClassWithEnumAndStruct()
+        {
+        }
 
         public DCClassWithEnumAndStruct(bool init)
         {
@@ -327,7 +335,9 @@ namespace SerializationTypes
     {
         public TypeA[] Items;
 
-        public TypeHasArrayOfASerializedAsB() { }
+        public TypeHasArrayOfASerializedAsB()
+        {
+        }
 
         public TypeHasArrayOfASerializedAsB(bool init)
         {
@@ -407,7 +417,9 @@ namespace SerializationTypes
         [DataMember]
         public string Data;
 
-        public SimpleDC() { }
+        public SimpleDC()
+        {
+        }
 
         public SimpleDC(bool init)
         {

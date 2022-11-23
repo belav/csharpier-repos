@@ -17,7 +17,9 @@ namespace Sample
 
         private IncrementingEventCounter _calls;
 
-        private WasmHelloEventSource() { }
+        private WasmHelloEventSource()
+        {
+        }
 
         [NonEvent]
         public void NewCallsCounter()

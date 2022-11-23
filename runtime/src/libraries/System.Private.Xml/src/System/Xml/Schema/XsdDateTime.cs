@@ -269,7 +269,9 @@ namespace System.Xml.Schema
 
         // Constructs an XsdDateTime from a DateTimeOffset
         public XsdDateTime(DateTimeOffset dateTimeOffset)
-            : this(dateTimeOffset, XsdDateTimeFlags.DateTime) { }
+            : this(dateTimeOffset, XsdDateTimeFlags.DateTime)
+        {
+        }
 
         public XsdDateTime(DateTimeOffset dateTimeOffset, XsdDateTimeFlags kinds)
         {

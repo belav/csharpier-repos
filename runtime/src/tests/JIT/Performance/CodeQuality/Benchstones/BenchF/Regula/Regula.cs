@@ -17,7 +17,9 @@ namespace Benchstone.BenchF
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void Escape(object _) { }
+        private static void Escape(object _)
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static bool Bench()
@@ -57,7 +59,9 @@ namespace Benchstone.BenchF
                     System.Console.WriteLine(" fg(root):= {0:E}\n", fxi);
                 }
 
-                L999: { }
+                L999:
+                {
+                }
             }
 
             // Escape iflag, xi, error, and fxi so that they appear live
@@ -161,11 +165,15 @@ namespace Benchstone.BenchF
                     fa = fa / 2.0;
                 }
 
-                L20: { }
+                L20:
+                {
+                }
             }
 
             iflag = 2;
-            L99: { }
+            L99:
+            {
+            }
         }
 
         public static int Main()

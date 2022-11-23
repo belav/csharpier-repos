@@ -78,7 +78,9 @@ namespace System.Xml.Serialization
             }
         }
 
-        protected override void InitIDs() { }
+        protected override void InitIDs()
+        {
+        }
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
         public object? ReadObject()
@@ -587,7 +589,9 @@ namespace System.Xml.Serialization
                     );
                 }
             }
-            else if (anyText != null && anyText.Mapping != null && WriteMemberText(anyText)) { }
+            else if (anyText != null && anyText.Mapping != null && WriteMemberText(anyText))
+            {
+            }
             else
             {
                 ProcessUnknownNode(elseAction);
@@ -1180,7 +1184,9 @@ namespace System.Xml.Serialization
                                     sm.XsiType.Namespace,
                                     defaultNamespace
                                 )
-                            ) { }
+                            )
+                            {
+                            }
                             else
                             {
                                 flag = false;
@@ -1258,7 +1264,9 @@ namespace System.Xml.Serialization
             return DummyReadArrayMethod;
         }
 
-        private static void NoopAction(object? o) { }
+        private static void NoopAction(object? o)
+        {
+        }
 
         private object? DummyReadArrayMethod()
         {
@@ -2544,7 +2552,9 @@ namespace System.Xml.Serialization
             CreateUnknownNodeException();
         }
 
-        internal sealed class CollectionMember : List<object?> { }
+        internal sealed class CollectionMember : List<object?>
+        {
+        }
 
         internal sealed class Member
         {

@@ -288,7 +288,9 @@ namespace System.Net.NameResolution.Tests
                                     {
                                         await Dns.GetHostAddressesAsync("microsoft.com");
                                     }
-                                    catch { } // We don't care if the request failed, just that events were written properly
+                                    catch
+                                    {
+                                    } // We don't care if the request failed, just that events were written properly
                                 });
                             }
                         }

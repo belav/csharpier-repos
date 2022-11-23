@@ -96,7 +96,9 @@ internal partial class SolutionState
         /// </summary>
         private SkeletonReferenceSet? _skeletonReferenceSet;
 
-        public SkeletonReferenceCache() : this(version: null, skeletonReferenceSet: null) { }
+        public SkeletonReferenceCache() : this(version: null, skeletonReferenceSet: null)
+        {
+        }
 
         private SkeletonReferenceCache(
             VersionStamp? version,

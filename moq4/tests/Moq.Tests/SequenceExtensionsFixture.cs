@@ -272,8 +272,12 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
             Func<object> funcObj = () => 1;
-            Func<Delegate> funcDel = () => new Action(() => { });
-            Func<MulticastDelegate> funcMulticastDel = () => new Action(() => { });
+            Func<Delegate> funcDel = () =>
+                new Action(() => {
+                });
+            Func<MulticastDelegate> funcMulticastDel = () =>
+                new Action(() => {
+                });
             mock.SetupSequence(m => m.GetObj()).Returns(funcObj);
             mock.SetupSequence(m => m.GetDel()).Returns(funcDel);
             mock.SetupSequence(m => m.GetMulticastDel()).Returns(funcMulticastDel);

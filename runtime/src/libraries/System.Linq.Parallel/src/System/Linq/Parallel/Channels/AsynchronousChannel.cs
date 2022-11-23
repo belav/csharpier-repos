@@ -116,7 +116,9 @@ namespace System.Linq.Parallel
                 chunkSize,
                 cancellationToken,
                 consumerEvent
-            ) { }
+            )
+        {
+        }
 
         internal AsynchronousChannel(
             int index,

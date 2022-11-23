@@ -7,7 +7,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeChainEngineHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeChainEngineHandle() : base(true) { }
+        public SafeChainEngineHandle() : base(true)
+        {
+        }
 
         private SafeChainEngineHandle(IntPtr handle) : base(true)
         {

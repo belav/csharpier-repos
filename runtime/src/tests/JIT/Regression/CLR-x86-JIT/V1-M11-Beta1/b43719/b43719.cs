@@ -31,7 +31,9 @@ namespace Test
 
         void Method3(long param1, double[] param2, BB[] param4, float param5)
         {
-            while (param4[0].Method2()) { }
+            while (param4[0].Method2())
+            {
+            }
         }
 
         static void Main1()

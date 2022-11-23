@@ -15,7 +15,9 @@ namespace System.Web.Mvc
         private HashSet<string> _namespaces = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         private IResolver<IControllerFactory> _serviceResolver;
 
-        public ControllerBuilder() : this(null) { }
+        public ControllerBuilder() : this(null)
+        {
+        }
 
         internal ControllerBuilder(IResolver<IControllerFactory> serviceResolver)
         {

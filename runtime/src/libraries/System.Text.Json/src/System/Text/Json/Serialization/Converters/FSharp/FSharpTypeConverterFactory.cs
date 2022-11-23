@@ -12,7 +12,9 @@ namespace System.Text.Json.Serialization.Converters
     internal sealed class FSharpTypeConverterFactory : JsonConverterFactory
     {
         [RequiresUnreferencedCode(FSharpCoreReflectionProxy.FSharpCoreUnreferencedCodeMessage)]
-        public FSharpTypeConverterFactory() { }
+        public FSharpTypeConverterFactory()
+        {
+        }
 
         private ObjectConverterFactory? _recordConverterFactory;
 

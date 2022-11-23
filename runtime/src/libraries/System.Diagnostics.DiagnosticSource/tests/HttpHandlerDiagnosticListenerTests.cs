@@ -840,9 +840,13 @@ namespace System.Diagnostics.Tests
                 _callback = callback;
             }
 
-            public void OnCompleted() { }
+            public void OnCompleted()
+            {
+            }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(T value)
             {
@@ -912,9 +916,13 @@ namespace System.Diagnostics.Tests
             public ConcurrentQueue<KeyValuePair<string, object>> Records { get; } =
                 new ConcurrentQueue<KeyValuePair<string, object>>();
 
-            public void OnCompleted() { }
+            public void OnCompleted()
+            {
+            }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(KeyValuePair<string, object> record)
             {

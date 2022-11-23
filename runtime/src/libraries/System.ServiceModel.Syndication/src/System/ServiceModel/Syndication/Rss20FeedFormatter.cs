@@ -36,7 +36,9 @@ namespace System.ServiceModel.Syndication
         private readonly Atom10FeedFormatter _atomSerializer;
         private readonly int _maxExtensionSize;
 
-        public Rss20FeedFormatter() : this(typeof(SyndicationFeed)) { }
+        public Rss20FeedFormatter() : this(typeof(SyndicationFeed))
+        {
+        }
 
         public Rss20FeedFormatter(Type feedTypeToCreate) : base()
         {
@@ -63,7 +65,9 @@ namespace System.ServiceModel.Syndication
             FeedType = feedTypeToCreate;
         }
 
-        public Rss20FeedFormatter(SyndicationFeed feedToWrite) : this(feedToWrite, true) { }
+        public Rss20FeedFormatter(SyndicationFeed feedToWrite) : this(feedToWrite, true)
+        {
+        }
 
         public Rss20FeedFormatter(SyndicationFeed feedToWrite, bool serializeExtensionsAsAtom)
             : base(feedToWrite)
@@ -1561,12 +1565,18 @@ namespace System.ServiceModel.Syndication
     public class Rss20FeedFormatter<TSyndicationFeed> : Rss20FeedFormatter
         where TSyndicationFeed : SyndicationFeed, new()
     {
-        public Rss20FeedFormatter() : base(typeof(TSyndicationFeed)) { }
+        public Rss20FeedFormatter() : base(typeof(TSyndicationFeed))
+        {
+        }
 
-        public Rss20FeedFormatter(TSyndicationFeed feedToWrite) : base(feedToWrite) { }
+        public Rss20FeedFormatter(TSyndicationFeed feedToWrite) : base(feedToWrite)
+        {
+        }
 
         public Rss20FeedFormatter(TSyndicationFeed feedToWrite, bool serializeExtensionsAsAtom)
-            : base(feedToWrite, serializeExtensionsAsAtom) { }
+            : base(feedToWrite, serializeExtensionsAsAtom)
+        {
+        }
 
         protected override SyndicationFeed CreateFeedInstance() => new TSyndicationFeed();
     }

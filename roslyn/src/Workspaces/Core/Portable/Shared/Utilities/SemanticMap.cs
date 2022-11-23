@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private readonly Dictionary<SyntaxToken, SymbolInfo> _tokenToInfoMap = new();
 
-        private SemanticMap() { }
+        private SemanticMap()
+        {
+        }
 
         internal static SemanticMap From(
             SemanticModel semanticModel,

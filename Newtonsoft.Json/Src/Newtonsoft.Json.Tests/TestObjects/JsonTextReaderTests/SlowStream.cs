@@ -43,7 +43,9 @@ namespace Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests
         }
 
         public SlowStream(string content, Encoding encoding, int bytesPerRead)
-            : this(encoding.GetBytes(content), bytesPerRead) { }
+            : this(encoding.GetBytes(content), bytesPerRead)
+        {
+        }
 
         public override bool CanRead
         {
@@ -60,7 +62,9 @@ namespace Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests
             get { return false; }
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override long Length
         {

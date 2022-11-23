@@ -32,9 +32,13 @@ namespace System.Collections.Specialized
         private Hashtable? hashtable; // Do not rename (binary serialization)
         private readonly bool caseInsensitive; // Do not rename (binary serialization)
 
-        public HybridDictionary() { }
+        public HybridDictionary()
+        {
+        }
 
-        public HybridDictionary(int initialSize) : this(initialSize, false) { }
+        public HybridDictionary(int initialSize) : this(initialSize, false)
+        {
+        }
 
         public HybridDictionary(bool caseInsensitive)
         {

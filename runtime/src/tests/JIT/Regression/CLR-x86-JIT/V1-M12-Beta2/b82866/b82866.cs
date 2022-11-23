@@ -9,7 +9,9 @@ public class AA
     static AA m_xStatic3;
     static long m_lFwd5;
 
-    void Method1(ref long param1) { }
+    void Method1(ref long param1)
+    {
+    }
 
     static int Main()
     {
@@ -32,7 +34,9 @@ public class AA
         {
             throw new IndexOutOfRangeException();
         }
-        catch (NullReferenceException) { }
+        catch (NullReferenceException)
+        {
+        }
         try
         {
             throw new NullReferenceException();
@@ -40,7 +44,9 @@ public class AA
         finally
         {
             bool local19 = true;
-            while (local19) { }
+            while (local19)
+            {
+            }
         }
     }
 }

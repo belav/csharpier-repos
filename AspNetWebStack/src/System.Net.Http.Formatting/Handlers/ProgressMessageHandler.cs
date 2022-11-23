@@ -18,13 +18,17 @@ namespace System.Net.Http.Handlers
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgressMessageHandler"/> class.
         /// </summary>
-        public ProgressMessageHandler() { }
+        public ProgressMessageHandler()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgressMessageHandler"/> class.
         /// </summary>
         /// <param name="innerHandler">The inner handler to which this handler submits requests.</param>
-        public ProgressMessageHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+        public ProgressMessageHandler(HttpMessageHandler innerHandler) : base(innerHandler)
+        {
+        }
 
         /// <summary>
         /// Occurs every time the client sending data is making progress.

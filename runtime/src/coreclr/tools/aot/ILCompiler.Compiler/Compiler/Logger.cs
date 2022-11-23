@@ -90,7 +90,9 @@ namespace ILCompiler
                 singleWarnEnabledModules,
                 singleWarnDisabledModules,
                 suppressedCategories
-            ) { }
+            )
+        {
+        }
 
         public Logger(ILogWriter writer, ILProvider ilProvider, bool isVerbose)
             : this(
@@ -102,10 +104,14 @@ namespace ILCompiler
                 Array.Empty<string>(),
                 Array.Empty<string>(),
                 Array.Empty<string>()
-            ) { }
+            )
+        {
+        }
 
         public Logger(TextWriter writer, ILProvider ilProvider, bool isVerbose)
-            : this(new TextLogWriter(writer), ilProvider, isVerbose) { }
+            : this(new TextLogWriter(writer), ilProvider, isVerbose)
+        {
+        }
 
         public void LogMessage(string message)
         {

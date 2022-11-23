@@ -65,6 +65,8 @@ namespace System.Runtime.InteropServices
 #endif
     sealed class SuppressGCTransitionAttribute : Attribute
     {
-        public SuppressGCTransitionAttribute() { }
+        public SuppressGCTransitionAttribute()
+        {
+        }
     }
 }

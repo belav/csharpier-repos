@@ -103,7 +103,9 @@ namespace System.Net.Http.Headers
                     );
                     return decoder.GetString(rawBytes, 0, rawBytes.Length);
                 }
-                catch (ArgumentException) { } // Not actually Utf-8
+                catch (ArgumentException)
+                {
+                } // Not actually Utf-8
             }
             return input;
         }

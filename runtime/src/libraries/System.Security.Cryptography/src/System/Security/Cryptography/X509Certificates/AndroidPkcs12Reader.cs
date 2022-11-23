@@ -25,7 +25,9 @@ namespace System.Security.Cryptography.X509Certificates
                     return true;
                 }
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             return false;
         }

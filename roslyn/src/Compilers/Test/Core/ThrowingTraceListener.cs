@@ -33,20 +33,36 @@ namespace Microsoft.CodeAnalysis
             );
         }
 
-        public override void Write(object? o) { }
+        public override void Write(object? o)
+        {
+        }
 
-        public override void Write(object? o, string? category) { }
+        public override void Write(object? o, string? category)
+        {
+        }
 
-        public override void Write(string? message) { }
+        public override void Write(string? message)
+        {
+        }
 
-        public override void Write(string? message, string? category) { }
+        public override void Write(string? message, string? category)
+        {
+        }
 
-        public override void WriteLine(object? o) { }
+        public override void WriteLine(object? o)
+        {
+        }
 
-        public override void WriteLine(object? o, string? category) { }
+        public override void WriteLine(object? o, string? category)
+        {
+        }
 
-        public override void WriteLine(string? message) { }
+        public override void WriteLine(string? message)
+        {
+        }
 
-        public override void WriteLine(string? message, string? category) { }
+        public override void WriteLine(string? message, string? category)
+        {
+        }
     }
 }

@@ -42,7 +42,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             StructWithConstructor = structWithConstructor;
         }
 
-        public struct CustomStruct { }
+        public struct CustomStruct
+        {
+        }
 
         public struct StructWithPublicDefaultConstructor
         {

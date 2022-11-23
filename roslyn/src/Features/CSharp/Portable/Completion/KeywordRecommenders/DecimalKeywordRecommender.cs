@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class DecimalKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public DecimalKeywordRecommender() : base(SyntaxKind.DecimalKeyword) { }
+        public DecimalKeywordRecommender() : base(SyntaxKind.DecimalKeyword)
+        {
+        }
 
         protected override bool IsValidContextWorker(
             int position,

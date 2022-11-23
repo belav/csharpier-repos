@@ -13,7 +13,9 @@ namespace System.Net.Mail
     {
         private bool _disposed;
 
-        internal AttachmentCollection() { }
+        internal AttachmentCollection()
+        {
+        }
 
         public void Dispose()
         {

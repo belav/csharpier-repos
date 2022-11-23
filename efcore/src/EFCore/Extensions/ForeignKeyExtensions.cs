@@ -11,5 +11,7 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IReadOnlyForeignKey" />.
     /// </summary>
     [Obsolete("Use IReadOnlyForeignKey")]
-    public static class ForeignKeyExtensions { }
+    public static class ForeignKeyExtensions
+    {
+    }
 }

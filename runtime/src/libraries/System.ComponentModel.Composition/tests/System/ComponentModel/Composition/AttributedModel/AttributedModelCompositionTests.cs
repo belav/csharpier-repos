@@ -363,7 +363,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             [Export("writeonly")]
             public string Value
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -432,10 +434,14 @@ namespace System.ComponentModel.Composition.AttributedModel
         }
 
         [InheritedExport(typeof(Base))]
-        public abstract class Base { }
+        public abstract class Base
+        {
+        }
 
         [Export(typeof(Derived))]
-        public class Derived : Base { }
+        public class Derived : Base
+        {
+        }
 
         public class ImportValueTypes
         {

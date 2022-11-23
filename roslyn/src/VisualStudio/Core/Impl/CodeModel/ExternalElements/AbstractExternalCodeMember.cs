@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ISymbol symbol
-        ) : base(state, projectId, symbol) { }
+        ) : base(state, projectId, symbol)
+        {
+        }
 
         protected virtual bool GetCanOverride()
         {

@@ -23,18 +23,20 @@ namespace System.Net.Security
             public LocalCertificateSelectionCallback? CertSelectionDelegate;
             public X509RevocationMode CertificateRevocationCheckMode;
 
-            public void UpdateOptions(
-                SslServerAuthenticationOptions sslServerAuthenticationOptions
-            ) { }
+            public void UpdateOptions(SslServerAuthenticationOptions sslServerAuthenticationOptions)
+            {
+            }
 
-            public void UpdateOptions(
-                SslClientAuthenticationOptions sslClientAuthenticationOptions
-            ) { }
+            public void UpdateOptions(SslClientAuthenticationOptions sslClientAuthenticationOptions)
+            {
+            }
 
             internal void UpdateOptions(
                 ServerOptionsSelectionCallback optionCallback,
                 object? state
-            ) { }
+            )
+            {
+            }
         }
 
         private FakeOptions _sslAuthenticationOptions = new FakeOptions();
@@ -58,7 +60,9 @@ namespace System.Net.Security
             // Without setting (or using) these members you will get a build exception in the unit test project.
             // The code that normally uses these in the main solution is in the implementation of SslStream.
 
-            if (_nestedWrite == 0) { }
+            if (_nestedWrite == 0)
+            {
+            }
             _exception = null;
             _nestedWrite = 0;
             _handshakeCompleted = false;
@@ -84,7 +88,9 @@ namespace System.Net.Security
 
         private bool RemoteCertRequired => default;
 
-        private void CloseInternal() { }
+        private void CloseInternal()
+        {
+        }
 
         //
         // This method assumes that a SSPI context is already in a good shape.
@@ -95,13 +101,16 @@ namespace System.Net.Security
             CancellationToken cancellationToken = default
         )
         {
-            return Task.Run(() => { });
+            return Task.Run(() => {
+            });
         }
 
         private Task RenegotiateAsync<AsyncReadWriteAdapter>(CancellationToken cancellationToken) =>
             throw new PlatformNotSupportedException();
 
-        private void ReturnReadBufferIfEmpty() { }
+        private void ReturnReadBufferIfEmpty()
+        {
+        }
 
         private ProtocolToken? CreateShutdownToken()
         {

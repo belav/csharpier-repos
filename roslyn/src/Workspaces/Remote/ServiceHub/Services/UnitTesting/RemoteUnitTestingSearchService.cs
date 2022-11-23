@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteUnitTestingSearchService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         public ValueTask<ImmutableArray<UnitTestingSourceLocation>> GetSourceLocationsAsync(
             Checksum solutionChecksum,

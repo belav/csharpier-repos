@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 public class InjectJoinWithSelfExpressionMutator : ExpressionMutator
 {
-    public InjectJoinWithSelfExpressionMutator(DbContext context) : base(context) { }
+    public InjectJoinWithSelfExpressionMutator(DbContext context) : base(context)
+    {
+    }
 
     private ExpressionFinder _expressionFinder;
 

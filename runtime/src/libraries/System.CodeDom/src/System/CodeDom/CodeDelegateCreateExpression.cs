@@ -8,7 +8,9 @@ namespace System.CodeDom
         private CodeTypeReference _delegateType;
         private string _methodName;
 
-        public CodeDelegateCreateExpression() { }
+        public CodeDelegateCreateExpression()
+        {
+        }
 
         public CodeDelegateCreateExpression(
             CodeTypeReference delegateType,

@@ -334,7 +334,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | ReservedAttributes.NativeIntegerAttribute
                         | ReservedAttributes.TupleElementNamesAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 attribute.IsTargetAttribute(
                     this,

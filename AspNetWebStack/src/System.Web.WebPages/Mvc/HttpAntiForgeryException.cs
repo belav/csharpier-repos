@@ -14,18 +14,28 @@ namespace System.Web.Mvc
     )]
     public sealed class HttpAntiForgeryException : HttpException
     {
-        public HttpAntiForgeryException() { }
+        public HttpAntiForgeryException()
+        {
+        }
 
         private HttpAntiForgeryException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
-        public HttpAntiForgeryException(string message) : base(message) { }
+        public HttpAntiForgeryException(string message) : base(message)
+        {
+        }
 
         private HttpAntiForgeryException(string message, params object[] args)
-            : this(String.Format(CultureInfo.CurrentCulture, message, args)) { }
+            : this(String.Format(CultureInfo.CurrentCulture, message, args))
+        {
+        }
 
         public HttpAntiForgeryException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         internal static HttpAntiForgeryException CreateAdditionalDataCheckFailedException()
         {

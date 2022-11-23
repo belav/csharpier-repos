@@ -26,7 +26,9 @@ namespace System.Web.Http.Cors
         /// <param name="httpConfiguration">The <see cref="HttpConfiguration"/>.</param>
         /// <exception cref="System.ArgumentNullException">httpConfiguration</exception>
         public CorsMessageHandler(HttpConfiguration httpConfiguration)
-            : this(httpConfiguration, false) { }
+            : this(httpConfiguration, false)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CorsMessageHandler"/> class.

@@ -263,7 +263,9 @@ namespace System.Data.Odbc
         internal OdbcDescriptorHandle(
             OdbcStatementHandle statementHandle,
             ODBC32.SQL_ATTR attribute
-        ) : base(statementHandle, attribute) { }
+        ) : base(statementHandle, attribute)
+        {
+        }
 
         internal ODBC32.SQLRETURN GetDescriptionField(
             int i,

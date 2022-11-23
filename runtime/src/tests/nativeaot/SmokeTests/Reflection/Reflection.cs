@@ -89,7 +89,9 @@ internal static class ReflectionTest
         {
             private string _world = "world";
 
-            public InvokeTests() { }
+            public InvokeTests()
+            {
+            }
 
             public InvokeTests(string message)
             {
@@ -349,7 +351,9 @@ internal static class ReflectionTest
 
     class TestInvokeMemberParamsCornerCase
     {
-        public struct MyStruct { }
+        public struct MyStruct
+        {
+        }
 
         public static int Count(params MyStruct[] myStructs)
         {
@@ -467,7 +471,9 @@ internal static class ReflectionTest
 
     class TestCovariantReturnInvoke
     {
-        interface IFoo { }
+        interface IFoo
+        {
+        }
 
         class Foo : IFoo
         {
@@ -765,7 +771,9 @@ internal static class ReflectionTest
             return parameter == null;
         }
 
-        public class ParameterType { }
+        public class ParameterType
+        {
+        }
 
         class ParameterAttribute : Attribute
         {
@@ -820,11 +828,15 @@ internal static class ReflectionTest
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-            add { }
+            add
+            {
+            }
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-            remove { }
+            remove
+            {
+            }
         }
 
         class EventAttribute : Attribute
@@ -861,19 +873,29 @@ internal static class ReflectionTest
 
     class TestAttributeExpressions
     {
-        struct FirstNeverUsedType { }
+        struct FirstNeverUsedType
+        {
+        }
 
-        struct SecondNeverUsedType { }
+        struct SecondNeverUsedType
+        {
+        }
 
-        struct ThirdNeverUsedType { }
+        struct ThirdNeverUsedType
+        {
+        }
 
-        class Gen<T> { }
+        class Gen<T>
+        {
+        }
 
         class TypeAttribute : Attribute
         {
             public Type SomeType { get; set; }
 
-            public TypeAttribute() { }
+            public TypeAttribute()
+            {
+            }
 
             public TypeAttribute(Type someType)
             {
@@ -881,7 +903,9 @@ internal static class ReflectionTest
             }
         }
 
-        enum MyEnum { }
+        enum MyEnum
+        {
+        }
 
         class EnumArrayAttribute : Attribute
         {
@@ -889,16 +913,24 @@ internal static class ReflectionTest
         }
 
         [Type(typeof(FirstNeverUsedType*[,]))]
-        class Holder1 { }
+        class Holder1
+        {
+        }
 
         [Type(SomeType = typeof(Gen<SecondNeverUsedType>))]
-        class Holder2 { }
+        class Holder2
+        {
+        }
 
         [EnumArray(EnumArray = new MyEnum[] { 0 })]
-        class Holder3 { }
+        class Holder3
+        {
+        }
 
         [Type(SomeType = typeof(ThirdNeverUsedType))]
-        class Holder4 { }
+        class Holder4
+        {
+        }
 
         public static void Run()
         {
@@ -1004,10 +1036,14 @@ internal static class ReflectionTest
             public int Property { get; set; }
         }
 
-        class DerivedAttribute : BaseAttribute { }
+        class DerivedAttribute : BaseAttribute
+        {
+        }
 
         [Derived(Field = "Hello", Property = 100)]
-        class TestType { }
+        class TestType
+        {
+        }
 
         public static void Run()
         {
@@ -1117,7 +1153,9 @@ internal static class ReflectionTest
 
     class TestNecessaryEETypeReflection
     {
-        struct NeverUsed { }
+        struct NeverUsed
+        {
+        }
 
         public static unsafe void Run()
         {
@@ -1149,7 +1187,9 @@ internal static class ReflectionTest
             }
         }
 
-        class Gen<T> { }
+        class Gen<T>
+        {
+        }
 
         interface IFoo<out T>
         {
@@ -1270,7 +1310,9 @@ internal static class ReflectionTest
                 D;
         }
 
-        public ref struct ByRefLike { }
+        public ref struct ByRefLike
+        {
+        }
 
         private sealed class TestClass<T>
         {
@@ -1432,7 +1474,9 @@ internal static class ReflectionTest
                 object o = mi.Invoke(null, new object[] { Pointer.Box(pBrl, typeof(ByRefLike*)) });
                 Assert.Fail();
             }
-            catch (NotSupportedException) { }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         private static void TestRefReturnInvoke<T>(
@@ -1510,12 +1554,16 @@ internal static class ReflectionTest
     {
         class MyGenericUnusedClass<T>
         {
-            public static void TheMethod() { }
+            public static void TheMethod()
+            {
+            }
         }
 
         class LinqTestCase<T>
         {
-            public static void Create() { }
+            public static void Create()
+            {
+            }
         }
 
         class OtherLinqTestCase<T>
@@ -1693,7 +1741,9 @@ internal static class ReflectionTest
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
         [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-        public static void ReferenceEnum(UnreferencedEnum r) { }
+        public static void ReferenceEnum(UnreferencedEnum r)
+        {
+        }
 
         public static void Run()
         {
@@ -1739,7 +1789,9 @@ internal static class ReflectionTest
     {
         static Type s_atom = typeof(Atom);
 
-        class Atom { }
+        class Atom
+        {
+        }
 
         abstract class Declaring
         {
@@ -1780,12 +1832,16 @@ internal static class ReflectionTest
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
         [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-        public static void IsCalledAndReflected() { }
+        public static void IsCalledAndReflected()
+        {
+        }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
         [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-        public static void IsCalledOnly() { }
+        public static void IsCalledOnly()
+        {
+        }
 
         public static void Run()
         {
@@ -1837,9 +1893,13 @@ internal static class ReflectionTest
 
     class TypeConstructionTest
     {
-        struct Atom { }
+        struct Atom
+        {
+        }
 
-        class Gen<T> { }
+        class Gen<T>
+        {
+        }
 
         static Type s_atom = typeof(Atom);
 
@@ -1892,12 +1952,16 @@ internal static class ReflectionTest
         static class TypeWithCodelessMethods
         {
             // "where T: struct" prevents the compiler from coming up with a good T
-            public static void CodelessMethod<T>() where T : struct { }
+            public static void CodelessMethod<T>() where T : struct
+            {
+            }
         }
 
         static class CodelessType<T> where T : struct
         {
-            public static void CodelessMethod() { }
+            public static void CodelessMethod()
+            {
+            }
         }
 
         public static void Run()
@@ -1921,16 +1985,24 @@ internal static class ReflectionTest
     {
         class TestClass
         {
-            public static void StaticMethod() { }
+            public static void StaticMethod()
+            {
+            }
 
-            public void InstanceMethod() { }
+            public void InstanceMethod()
+            {
+            }
 
-            public static void SimplyCalledMethod() { }
+            public static void SimplyCalledMethod()
+            {
+            }
         }
 
         class TestClass<T>
         {
-            public static void StaticMethod() { }
+            public static void StaticMethod()
+            {
+            }
         }
 
         static void CheckGeneric<T>()
@@ -1971,29 +2043,41 @@ internal static class ReflectionTest
     {
         abstract class Base
         {
-            public virtual void VirtualMethod() { }
+            public virtual void VirtualMethod()
+            {
+            }
 
             public abstract void AbstractMethod();
         }
 
         class Derived : Base, IBar
         {
-            public override void AbstractMethod() { }
+            public override void AbstractMethod()
+            {
+            }
 
-            public override void VirtualMethod() { }
+            public override void VirtualMethod()
+            {
+            }
 
-            void IFoo.InterfaceMethod() { }
+            void IFoo.InterfaceMethod()
+            {
+            }
         }
 
         interface IFoo
         {
             void InterfaceMethod();
-            void DefaultInterfaceMethod() { }
+            void DefaultInterfaceMethod()
+            {
+            }
         }
 
         interface IBar : IFoo
         {
-            void IFoo.DefaultInterfaceMethod() { }
+            void IFoo.DefaultInterfaceMethod()
+            {
+            }
         }
 
         static Base s_baseInstance = new Derived();
@@ -2029,9 +2113,13 @@ internal static class ReflectionTest
             public static UnusedClass UnusedField;
         }
 
-        class UnusedClass { }
+        class UnusedClass
+        {
+        }
 
-        interface IMessWithYou { }
+        interface IMessWithYou
+        {
+        }
 
         class GenericTypeWithUnsatisfiableConstrains<T> where T : struct, IMessWithYou
         {
@@ -2043,11 +2131,17 @@ internal static class ReflectionTest
             public static string SomeField;
         }
 
-        struct Atom1 { }
+        struct Atom1
+        {
+        }
 
-        struct Atom2 { }
+        struct Atom2
+        {
+        }
 
-        struct Atom3 { }
+        struct Atom3
+        {
+        }
 
         public static void Run()
         {
@@ -2142,7 +2236,9 @@ internal static class ReflectionTest
     {
         delegate void RunMeDelegate();
 
-        static void RunMe() { }
+        static void RunMe()
+        {
+        }
 
         public static void Run()
         {
@@ -2153,15 +2249,25 @@ internal static class ReflectionTest
 
     class TestGenericMethodsHaveSameReflectability
     {
-        public interface IHardToGuess { }
+        public interface IHardToGuess
+        {
+        }
 
-        struct SomeStruct<T> : IHardToGuess { }
+        struct SomeStruct<T> : IHardToGuess
+        {
+        }
 
-        public static void TakeAGuess<T>() where T : struct, IHardToGuess { }
+        public static void TakeAGuess<T>() where T : struct, IHardToGuess
+        {
+        }
 
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
         static Type s_someStructOverAtom1 = typeof(SomeStruct<Atom1>);
 
@@ -2206,17 +2312,23 @@ internal static class ReflectionTest
     class TestAttributeInheritance2
     {
         [AttributeUsage(AttributeTargets.All, Inherited = true)]
-        class AttAttribute : Attribute { }
+        class AttAttribute : Attribute
+        {
+        }
 
         class Base
         {
             [Att]
-            public virtual void VirtualMethodWithAttribute() { }
+            public virtual void VirtualMethodWithAttribute()
+            {
+            }
         }
 
         class Derived : Base
         {
-            public override void VirtualMethodWithAttribute() { }
+            public override void VirtualMethodWithAttribute()
+            {
+            }
         }
 
         public static void Run()
@@ -2280,9 +2392,13 @@ internal static class ReflectionTest
 
     class TestInterfaceLists
     {
-        interface IGeneric<T> { }
+        interface IGeneric<T>
+        {
+        }
 
-        class Class<T> : IGeneric<T> { }
+        class Class<T> : IGeneric<T>
+        {
+        }
 
         static Type s_hidden = typeof(Class<string>);
 
@@ -2307,7 +2423,9 @@ internal static class ReflectionTest
             public static string MyMethod() => typeof(T).Name;
         }
 
-        struct Atom { }
+        struct Atom
+        {
+        }
 
         public static void Run()
         {
@@ -2440,15 +2558,25 @@ internal static class ReflectionTest
     #endregion
 }
 
-class TestAssemblyAttribute : Attribute { }
+class TestAssemblyAttribute : Attribute
+{
+}
 
-class TestModuleAttribute : Attribute { }
+class TestModuleAttribute : Attribute
+{
+}
 
 class MyUnusedClass
 {
-    public static void UnusedMethod1() { }
+    public static void UnusedMethod1()
+    {
+    }
 
-    public static void TotallyUnreferencedMethod() { }
+    public static void TotallyUnreferencedMethod()
+    {
+    }
 
-    public static void GenericMethod<T>() { }
+    public static void GenericMethod<T>()
+    {
+    }
 }

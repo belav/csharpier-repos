@@ -122,9 +122,15 @@ namespace System.IO
 
                 return FileSystem.FileExists(path);
             }
-            catch (ArgumentException) { }
-            catch (IOException) { }
-            catch (UnauthorizedAccessException) { }
+            catch (ArgumentException)
+            {
+            }
+            catch (IOException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
 
             return false;
         }

@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SwitchStatementHighlighter() { }
+        public SwitchStatementHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             SwitchStatementSyntax switchStatement,

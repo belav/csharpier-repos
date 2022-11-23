@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         : AbstractCodeGenerationService<CSharpCodeGenerationContextInfo>
     {
         public CSharpCodeGenerationService(HostLanguageServices languageServices)
-            : base(languageServices.GetRequiredService<ISymbolDeclarationService>()) { }
+            : base(languageServices.GetRequiredService<ISymbolDeclarationService>())
+        {
+        }
 
         public override CodeGenerationOptions DefaultOptions => CSharpCodeGenerationOptions.Default;
 

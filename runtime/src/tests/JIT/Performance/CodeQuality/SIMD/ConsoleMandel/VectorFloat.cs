@@ -14,7 +14,9 @@ namespace Algorithms
         private const float limit = 4.0f;
 
         public VectorFloatRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc) { }
+            : base(dp, abortFunc)
+        {
+        }
 
         // Render the fractal on a single thread using the ComplexFloatVec data type
         // This is the implementation that has the best comments.

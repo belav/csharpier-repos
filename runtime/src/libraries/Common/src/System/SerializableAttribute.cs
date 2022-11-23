@@ -12,6 +12,8 @@ namespace System
     )]
     internal sealed class SerializableAttribute : Attribute
     {
-        public SerializableAttribute() { }
+        public SerializableAttribute()
+        {
+        }
     }
 }

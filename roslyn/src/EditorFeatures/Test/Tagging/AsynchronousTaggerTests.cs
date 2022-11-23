@@ -162,7 +162,9 @@ class Program
 
         private sealed class TestTag : TextMarkerTag
         {
-            public TestTag() : base("Test") { }
+            public TestTag() : base("Test")
+            {
+            }
         }
 
         private delegate List<ITagSpan<TestTag>> Callback(
@@ -216,13 +218,19 @@ class Program
 
         private sealed class TestTaggerEventSource : AbstractTaggerEventSource
         {
-            public TestTaggerEventSource() { }
+            public TestTaggerEventSource()
+            {
+            }
 
             public void SendUpdateEvent() => this.RaiseChanged();
 
-            public override void Connect() { }
+            public override void Connect()
+            {
+            }
 
-            public override void Disconnect() { }
+            public override void Disconnect()
+            {
+            }
         }
     }
 }

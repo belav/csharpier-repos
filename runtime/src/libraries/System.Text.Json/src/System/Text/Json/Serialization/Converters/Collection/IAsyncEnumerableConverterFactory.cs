@@ -15,7 +15,9 @@ namespace System.Text.Json.Serialization
     [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
     internal sealed class IAsyncEnumerableConverterFactory : JsonConverterFactory
     {
-        public IAsyncEnumerableConverterFactory() { }
+        public IAsyncEnumerableConverterFactory()
+        {
+        }
 
         public override bool CanConvert(Type typeToConvert) =>
             GetAsyncEnumerableInterface(typeToConvert) is not null;

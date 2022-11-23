@@ -31,7 +31,9 @@ namespace System.Linq.Parallel
 
         // Private constructor. MergeExecutor should only be constructed via the
         // MergeExecutor.Execute static method.
-        private MergeExecutor() { }
+        private MergeExecutor()
+        {
+        }
 
         //-----------------------------------------------------------------------------------
         // Creates and executes a new merge executor object.

@@ -20,6 +20,8 @@ namespace Roslyn.Test.Utilities
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestWorkspaceConfigurationService() { }
+        public TestWorkspaceConfigurationService()
+        {
+        }
     }
 }

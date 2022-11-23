@@ -12,7 +12,9 @@ namespace System.DirectoryServices
         private string? _propertyName;
         private SortDirection _sortDirection;
 
-        public SortOption() { }
+        public SortOption()
+        {
+        }
 
         public SortOption(string propertyName, SortDirection direction)
         {

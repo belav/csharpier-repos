@@ -1769,7 +1769,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Outer.Person)) { }
+                if (t == typeof(global::Outer.Person))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -1801,7 +1803,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeNameClashA.TypeNameClash)) { }
+                if (t == typeof(global::SerializationTypes.TypeNameClashA.TypeNameClash))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -1831,7 +1835,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeNameClashB.TypeNameClash)) { }
+                if (t == typeof(global::SerializationTypes.TypeNameClashB.TypeNameClash))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -1861,7 +1867,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.NamespaceTypeNameClashContainer)) { }
+                if (t == typeof(global::SerializationTypes.NamespaceTypeNameClashContainer))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -1927,7 +1935,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 if (
                     t
                     == typeof(global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -1958,7 +1968,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::System.Object)) { }
+                if (t == typeof(global::System.Object))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::Outer.Person))
@@ -3438,7 +3450,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.SimpleType)) { }
+                if (t == typeof(global::SerializationTypes.SimpleType))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -3711,7 +3725,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeA)) { }
+                if (t == typeof(global::SerializationTypes.TypeA))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -3766,7 +3782,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Parameter)) { }
+                if (t == typeof(global::Parameter))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::Parameter<global::System.String>))
@@ -3807,7 +3825,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Parameter<global::System.String>)) { }
+                if (t == typeof(global::Parameter<global::System.String>))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -3838,7 +3858,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithLinkedProperty)) { }
+                if (t == typeof(global::TypeWithLinkedProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -3896,7 +3918,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Instrument)) { }
+                if (t == typeof(global::Instrument))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::Brass))
@@ -3930,7 +3954,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Trumpet)) { }
+                if (t == typeof(global::Trumpet))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -3962,7 +3988,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Brass)) { }
+                if (t == typeof(global::Brass))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::Trumpet))
@@ -4004,7 +4032,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::OrderedItem)) { }
+                if (t == typeof(global::OrderedItem))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4086,7 +4116,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithXmlElementProperty)) { }
+                if (t == typeof(global::TypeWithXmlElementProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4132,7 +4164,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithXmlDocumentProperty)) { }
+                if (t == typeof(global::TypeWithXmlDocumentProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4178,7 +4212,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithBinaryProperty)) { }
+                if (t == typeof(global::TypeWithBinaryProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4217,7 +4253,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithDateTimeOffsetProperties)) { }
+                if (t == typeof(global::TypeWithDateTimeOffsetProperties))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4307,7 +4345,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithTimeSpanProperty)) { }
+                if (t == typeof(global::TypeWithTimeSpanProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4343,7 +4383,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithDefaultTimeSpanProperty)) { }
+                if (t == typeof(global::TypeWithDefaultTimeSpanProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4392,7 +4434,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithByteProperty)) { }
+                if (t == typeof(global::TypeWithByteProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4428,7 +4472,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithXmlNodeArrayProperty)) { }
+                if (t == typeof(global::TypeWithXmlNodeArrayProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4464,7 +4510,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Dog)) { }
+                if (t == typeof(global::Dog))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4494,7 +4542,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Animal)) { }
+                if (t == typeof(global::Animal))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::Dog))
@@ -4528,7 +4578,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Vehicle)) { }
+                if (t == typeof(global::Vehicle))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4552,7 +4604,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Group)) { }
+                if (t == typeof(global::Group))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4583,7 +4637,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Employee)) { }
+                if (t == typeof(global::Employee))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4613,7 +4669,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::DerivedClass)) { }
+                if (t == typeof(global::DerivedClass))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4644,7 +4702,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::BaseClass)) { }
+                if (t == typeof(global::BaseClass))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::DerivedClass))
@@ -4674,7 +4734,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Address)) { }
+                if (t == typeof(global::Address))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4720,7 +4782,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::PurchaseOrder)) { }
+                if (t == typeof(global::PurchaseOrder))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4796,7 +4860,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Address)) { }
+                if (t == typeof(global::Address))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4830,7 +4896,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::OrderedItem)) { }
+                if (t == typeof(global::OrderedItem))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4882,7 +4950,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::AliasedTestType)) { }
+                if (t == typeof(global::AliasedTestType))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -4995,7 +5065,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::DerivedClass1)) { }
+                if (t == typeof(global::DerivedClass1))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5043,7 +5115,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::BaseClass1)) { }
+                if (t == typeof(global::BaseClass1))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::DerivedClass1))
@@ -5096,7 +5170,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Orchestra)) { }
+                if (t == typeof(global::Orchestra))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5139,7 +5215,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::Pet)) { }
+                if (t == typeof(global::Pet))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5173,7 +5251,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::DefaultValuesSetToNaN)) { }
+                if (t == typeof(global::DefaultValuesSetToNaN))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5242,7 +5322,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::DefaultValuesSetToPositiveInfinity)) { }
+                if (t == typeof(global::DefaultValuesSetToPositiveInfinity))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5311,7 +5393,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::DefaultValuesSetToNegativeInfinity)) { }
+                if (t == typeof(global::DefaultValuesSetToNegativeInfinity))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5380,7 +5464,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::TypeWithMismatchBetweenAttributeAndPropertyType)) { }
+                if (t == typeof(global::TypeWithMismatchBetweenAttributeAndPropertyType))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5419,7 +5505,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::MsgDocumentType)) { }
+                if (t == typeof(global::MsgDocumentType))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5464,7 +5552,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::RootClass)) { }
+                if (t == typeof(global::RootClass))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5514,7 +5604,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::XElementWrapper)) { }
+                if (t == typeof(global::XElementWrapper))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5540,7 +5632,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::XElementStruct)) { }
+                if (t == typeof(global::XElementStruct))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5578,7 +5672,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::XElementArrayWrapper)) { }
+                if (t == typeof(global::XElementArrayWrapper))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5629,7 +5725,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithDateTimeStringProperty)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithDateTimeStringProperty))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5664,7 +5762,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithGetSetArrayMembers)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithGetSetArrayMembers))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5771,7 +5871,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithGetOnlyArrayProperties)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithGetOnlyArrayProperties))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5793,7 +5895,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.StructNotSerializable)) { }
+                if (t == typeof(global::SerializationTypes.StructNotSerializable))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5829,7 +5933,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithMyCollectionField)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithMyCollectionField))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5878,7 +5984,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 System.Type t = o.GetType();
                 if (t == typeof(global::SerializationTypes.TypeWithReadOnlyMyCollectionProperty))
-                { }
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5926,7 +6033,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithEnumMembers)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithEnumMembers))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5958,7 +6067,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.DCStruct)) { }
+                if (t == typeof(global::SerializationTypes.DCStruct))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -5988,7 +6099,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.DCClassWithEnumAndStruct)) { }
+                if (t == typeof(global::SerializationTypes.DCClassWithEnumAndStruct))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6028,7 +6141,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.BuiltInTypes)) { }
+                if (t == typeof(global::SerializationTypes.BuiltInTypes))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6062,7 +6177,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeB)) { }
+                if (t == typeof(global::SerializationTypes.TypeB))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6092,7 +6209,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeHasArrayOfASerializedAsB)) { }
+                if (t == typeof(global::SerializationTypes.TypeHasArrayOfASerializedAsB))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6141,7 +6260,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.@__TypeNameWithSpecialCharacters漢ñ)) { }
+                if (t == typeof(global::SerializationTypes.@__TypeNameWithSpecialCharacters漢ñ))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6175,7 +6296,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.DerivedClassWithSameProperty2)) { }
+                if (t == typeof(global::SerializationTypes.DerivedClassWithSameProperty2))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6233,7 +6356,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.DerivedClassWithSameProperty)) { }
+                if (t == typeof(global::SerializationTypes.DerivedClassWithSameProperty))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::SerializationTypes.DerivedClassWithSameProperty2))
@@ -6302,7 +6427,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.BaseClassWithSamePropertyName)) { }
+                if (t == typeof(global::SerializationTypes.BaseClassWithSamePropertyName))
+                {
+                }
                 else
                 {
                     if (t == typeof(global::SerializationTypes.DerivedClassWithSameProperty))
@@ -6382,7 +6509,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithDateTimePropertyAsXmlTime)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithDateTimePropertyAsXmlTime))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6414,7 +6543,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithByteArrayAsXmlText)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithByteArrayAsXmlText))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6447,7 +6578,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.SimpleDC)) { }
+                if (t == typeof(global::SerializationTypes.SimpleDC))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6477,7 +6610,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithXmlTextAttributeOnArray)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithXmlTextAttributeOnArray))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6522,7 +6657,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.ClassImplementsInterface)) { }
+                if (t == typeof(global::SerializationTypes.ClassImplementsInterface))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6554,7 +6691,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.SomeStruct)) { }
+                if (t == typeof(global::SerializationTypes.SomeStruct))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6593,7 +6732,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.WithStruct)) { }
+                if (t == typeof(global::SerializationTypes.WithStruct))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6628,7 +6769,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.WithEnums)) { }
+                if (t == typeof(global::SerializationTypes.WithEnums))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6667,7 +6810,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.WithNullables)) { }
+                if (t == typeof(global::SerializationTypes.WithNullables))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6774,7 +6919,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.XmlSerializerAttributes)) { }
+                if (t == typeof(global::SerializationTypes.XmlSerializerAttributes))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6934,7 +7081,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithAnyAttribute)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithAnyAttribute))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -6983,7 +7132,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.KnownTypesThroughConstructor)) { }
+                if (t == typeof(global::SerializationTypes.KnownTypesThroughConstructor))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7020,7 +7171,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.SimpleKnownTypeValue)) { }
+                if (t == typeof(global::SerializationTypes.SimpleKnownTypeValue))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7050,7 +7203,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithPropertyNameSpecified)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithPropertyNameSpecified))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7093,7 +7248,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithXmlSchemaFormAttribute)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithXmlSchemaFormAttribute))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7182,7 +7339,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithTypeNameInXmlTypeAttribute)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithTypeNameInXmlTypeAttribute))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7212,7 +7371,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithNonPublicDefaultConstructor)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithNonPublicDefaultConstructor))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7242,7 +7403,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.ServerSettings)) { }
+                if (t == typeof(global::SerializationTypes.ServerSettings))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7277,7 +7440,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithXmlQualifiedName)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithXmlQualifiedName))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7311,7 +7476,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWith2DArrayProperty2)) { }
+                if (t == typeof(global::SerializationTypes.TypeWith2DArrayProperty2))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7376,7 +7543,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 System.Type t = o.GetType();
                 if (t == typeof(global::SerializationTypes.TypeWithPropertiesHavingDefaultValue))
-                { }
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7440,7 +7608,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 System.Type t = o.GetType();
                 if (t == typeof(global::SerializationTypes.TypeWithEnumPropertyHavingDefaultValue))
-                { }
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7483,7 +7652,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 if (
                     t
                     == typeof(global::SerializationTypes.TypeWithEnumFlagPropertyHavingDefaultValue)
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7526,7 +7697,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithShouldSerializeMethod)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithShouldSerializeMethod))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7562,7 +7735,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 if (
                     t
                     == typeof(global::SerializationTypes.KnownTypesThroughConstructorWithArrayProperties)
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7606,7 +7781,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 System.Type t = o.GetType();
                 if (t == typeof(global::SerializationTypes.KnownTypesThroughConstructorWithValue))
-                { }
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7636,7 +7812,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithTypesHavingCustomFormatter)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithTypesHavingCustomFormatter))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7710,7 +7888,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithArrayPropertyHavingChoice)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithArrayPropertyHavingChoice))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7797,7 +7977,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithFieldsOrdered)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithFieldsOrdered))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7842,7 +8024,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::SerializationTypes.TypeWithSchemaFormInXmlAttribute)) { }
+                if (t == typeof(global::SerializationTypes.TypeWithSchemaFormInXmlAttribute))
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException(o);
@@ -7859,7 +8043,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteEndElement(o);
         }
 
-        protected override void InitCallbacks() { }
+        protected override void InitCallbacks()
+        {
+        }
     }
 
     public class XmlSerializationReader1 : System.Xml.Serialization.XmlSerializationReader
@@ -10960,7 +11146,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -11069,7 +11257,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -11150,7 +11340,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -11231,7 +11423,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -11357,7 +11551,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -13736,7 +13932,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -14001,7 +14199,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -14097,7 +14297,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -14181,7 +14383,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -14273,7 +14477,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -14421,7 +14627,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -14516,7 +14724,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -14623,7 +14833,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -14726,7 +14938,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id19_httpwwwcontoso1com
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -14888,7 +15102,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -14971,7 +15187,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15047,7 +15265,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15138,7 +15358,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15334,7 +15556,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15421,7 +15645,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15543,7 +15769,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15626,7 +15854,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15716,7 +15946,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15821,7 +16053,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -15920,7 +16154,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -15997,7 +16233,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -16086,7 +16324,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -16164,7 +16404,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -16256,7 +16498,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -16356,7 +16600,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id19_httpwwwcontoso1com
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -16493,7 +16739,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id19_httpwwwcontoso1com
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -16712,7 +16960,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -16843,7 +17093,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -16989,7 +17241,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -17252,7 +17506,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -17331,7 +17587,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -17419,7 +17677,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -17549,7 +17809,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -17641,7 +17903,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -17791,7 +18055,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -17941,7 +18207,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18094,7 +18362,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18166,7 +18436,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id38_httpexamplecom
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18271,7 +18543,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18400,7 +18674,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18478,7 +18754,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18577,7 +18855,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18719,7 +18999,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -18814,7 +19096,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19163,7 +19447,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19224,7 +19510,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19330,7 +19618,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19466,7 +19756,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19597,7 +19889,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19686,7 +19980,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19788,7 +20084,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19878,7 +20176,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -19955,7 +20255,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -20036,7 +20338,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -20170,7 +20474,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -20251,7 +20557,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -20438,7 +20746,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -20634,7 +20944,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     if (
@@ -20838,7 +21150,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -20912,7 +21226,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -20982,7 +21298,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -21062,7 +21380,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id69_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -21155,7 +21475,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -21275,7 +21597,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -21388,7 +21712,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -21464,7 +21790,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -21559,7 +21887,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -21742,7 +22072,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22083,7 +22415,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22203,7 +22537,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22294,7 +22630,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22375,7 +22713,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22474,7 +22814,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22753,7 +23095,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22827,7 +23171,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -22933,7 +23279,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23028,7 +23376,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23109,7 +23459,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23325,7 +23677,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23465,7 +23819,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23550,7 +23906,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23636,7 +23994,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23716,7 +24076,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23806,7 +24168,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -23884,7 +24248,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -24082,7 +24448,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -24229,7 +24597,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -24358,7 +24728,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
                             == (object)id2_Item
                     )
-                ) { }
+                )
+                {
+                }
                 else
                 {
                     throw CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType);
@@ -24414,7 +24786,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             return o;
         }
 
-        protected override void InitCallbacks() { }
+        protected override void InitCallbacks()
+        {
+        }
 
         string id168_Age;
         string id201_DateTimeString;

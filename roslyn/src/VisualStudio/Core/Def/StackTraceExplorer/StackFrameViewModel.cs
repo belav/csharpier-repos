@@ -76,7 +76,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
-                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
+            {
+            }
         }
 
         private async Task NavigateToDefinitionAsync(
@@ -119,7 +121,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
-                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
+            {
+            }
         }
 
         public void NavigateToFile()
@@ -172,7 +176,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 }
             }
             catch (Exception ex)
-                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
+            {
+            }
         }
 
         protected override IEnumerable<Inline> CreateInlines()

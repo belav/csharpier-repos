@@ -108,7 +108,12 @@ namespace Company.WebApplication1
                 // By default, all incoming requests will be authorized according to the default policy
                 options.FallbackPolicy = options.DefaultPolicy;
             });
-            services.AddRazorPages().AddMvcOptions(options => { }).AddMicrosoftIdentityUI();
+            services
+                .AddRazorPages()
+                .AddMvcOptions(options =>
+                {
+                })
+                .AddMicrosoftIdentityUI();
 #elif (IndividualB2CAuth)
             services
                 .AddRazorPages()

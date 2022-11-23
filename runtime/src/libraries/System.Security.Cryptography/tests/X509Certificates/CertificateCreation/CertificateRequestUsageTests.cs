@@ -913,7 +913,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                             now.AddHours(3),
                             serialNumber
                         )
-                    ) { }
+                    )
+                    {
+                    }
                 }
             }
         }
@@ -969,7 +971,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                             now.AddHours(3),
                             serialNumber
                         )
-                    ) { }
+                    )
+                    {
+                    }
                 }
             }
         }
@@ -1022,7 +1026,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                             now.AddHours(3),
                             serialNumber
                         )
-                    ) { }
+                    )
+                    {
+                    }
                 }
             }
         }
@@ -1073,7 +1079,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                             now.AddHours(3),
                             serialNumber
                         )
-                    ) { }
+                    )
+                    {
+                    }
                 }
             }
         }

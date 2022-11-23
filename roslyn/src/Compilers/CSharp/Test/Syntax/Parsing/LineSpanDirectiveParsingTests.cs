@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class LineSpanDirectiveParsingTests : ParsingTests
     {
-        public LineSpanDirectiveParsingTests(ITestOutputHelper output) : base(output) { }
+        public LineSpanDirectiveParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions? options)
         {

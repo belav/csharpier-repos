@@ -65,8 +65,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             // OnEventSourceChanged_OnForeground for more details.
             public event EventHandler<SnapshotSpanEventArgs> TagsChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             public void Dispose()

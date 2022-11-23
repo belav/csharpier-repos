@@ -25,7 +25,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
             ITestOutputHelper output
-        ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+        ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+        {
+        }
 
         [Fact]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/29739")]

@@ -184,7 +184,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.void001
             return 1;
         }
 
-        public void Bar() { }
+        public void Bar()
+        {
+        }
     }
     // </Code>
 }

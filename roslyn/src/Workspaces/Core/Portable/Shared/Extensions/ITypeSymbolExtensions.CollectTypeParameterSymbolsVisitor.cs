@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             public override void DefaultVisit(ISymbol node) => throw new NotImplementedException();
 
-            public override void VisitDynamicType(IDynamicTypeSymbol symbol) { }
+            public override void VisitDynamicType(IDynamicTypeSymbol symbol)
+            {
+            }
 
             public override void VisitArrayType(IArrayTypeSymbol symbol)
             {

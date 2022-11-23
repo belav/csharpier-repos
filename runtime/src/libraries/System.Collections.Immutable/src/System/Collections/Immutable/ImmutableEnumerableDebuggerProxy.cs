@@ -20,7 +20,9 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="dictionary">The enumerable to show in the debugger.</param>
         public ImmutableDictionaryDebuggerProxy(IImmutableDictionary<TKey, TValue> dictionary)
-            : base(enumerable: dictionary) { }
+            : base(enumerable: dictionary)
+        {
+        }
     }
 
     /// <summary>

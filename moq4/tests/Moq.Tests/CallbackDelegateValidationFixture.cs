@@ -88,16 +88,22 @@ namespace Moq.Tests
 
     public partial class Instance
     {
-        public void Action(int x) { }
+        public void Action(int x)
+        {
+        }
     }
 
     public static partial class Static
     {
-        public static void Action(int x) { }
+        public static void Action(int x)
+        {
+        }
     }
 
     public static partial class Extension
     {
-        public static void Action(this IEnumerable<int> self, int x) { }
+        public static void Action(this IEnumerable<int> self, int x)
+        {
+        }
     }
 }

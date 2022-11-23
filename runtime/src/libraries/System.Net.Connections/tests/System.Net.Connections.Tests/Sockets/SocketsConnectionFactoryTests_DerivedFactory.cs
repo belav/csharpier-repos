@@ -27,7 +27,9 @@ namespace System.Net.Connections.Tests
             public CustomConnectionOptionsValues Values { get; } =
                 new CustomConnectionOptionsValues();
 
-            public CustomConnectionOptions() { }
+            public CustomConnectionOptions()
+            {
+            }
 
             public bool TryGet(Type propertyKey, [NotNullWhen(true)] out object property)
             {
@@ -44,7 +46,9 @@ namespace System.Net.Connections.Tests
 
         private sealed class CustomFactory : SocketsConnectionFactory
         {
-            public CustomFactory() : base(SocketType.Stream, ProtocolType.Tcp) { }
+            public CustomFactory() : base(SocketType.Stream, ProtocolType.Tcp)
+            {
+            }
 
             protected override Socket CreateSocket(
                 AddressFamily addressFamily,

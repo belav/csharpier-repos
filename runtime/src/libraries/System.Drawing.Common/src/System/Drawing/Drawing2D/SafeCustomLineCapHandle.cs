@@ -11,7 +11,9 @@ namespace System.Drawing.Drawing2D
 {
     internal sealed class SafeCustomLineCapHandle : SafeHandle
     {
-        public SafeCustomLineCapHandle() : base(IntPtr.Zero, true) { }
+        public SafeCustomLineCapHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         // Create a SafeHandle, informing the base class
         // that this SafeHandle instance "owns" the handle,

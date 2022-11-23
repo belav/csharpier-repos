@@ -183,7 +183,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantBooleanArray; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -247,7 +249,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantBooleanValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -389,7 +393,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantByteArray; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -453,7 +459,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantByteValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -511,7 +519,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantCharArray; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -575,7 +585,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantCharValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -633,7 +645,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantDoubleArray; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -697,7 +711,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantDoubleValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -884,7 +900,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantInt16Array; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -948,7 +966,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantInt16Value; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1006,7 +1026,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantInt32Array; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1070,7 +1092,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantInt32Value; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1128,7 +1152,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantInt64Array; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1192,7 +1218,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantInt64Value; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1250,7 +1278,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantReferenceValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1273,7 +1303,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             return _hash;
         } // GetHashCode
 
-        internal override void Save(NativeWriter writer) { } // Save
+        internal override void Save(NativeWriter writer)
+        {
+        } // Save
 
         internal static ConstantReferenceValueHandle AsHandle(ConstantReferenceValue record)
         {
@@ -1300,7 +1332,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantSByteArray; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1364,7 +1398,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantSByteValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1422,7 +1458,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantSingleArray; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1486,7 +1524,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantSingleValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1612,7 +1652,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantStringValue; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1679,7 +1721,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantUInt16Array; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1743,7 +1787,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantUInt16Value; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1801,7 +1847,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantUInt32Array; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1865,7 +1913,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantUInt32Value; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1923,7 +1973,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantUInt64Array; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -1987,7 +2039,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.ConstantUInt64Value; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -3144,7 +3198,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.MethodTypeVariableSignature; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {
@@ -4876,7 +4932,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             get { return HandleType.TypeVariableSignature; }
         } // HandleType
 
-        internal override void Visit(IRecordVisitor visitor) { } // Visit
+        internal override void Visit(IRecordVisitor visitor)
+        {
+        } // Visit
 
         public sealed override bool Equals(object obj)
         {

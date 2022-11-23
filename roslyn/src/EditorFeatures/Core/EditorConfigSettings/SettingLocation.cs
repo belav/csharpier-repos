@@ -4,5 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings
 {
-    internal record SettingLocation(LocationKind LocationKind, string? Path) { }
+    internal record SettingLocation(LocationKind LocationKind, string? Path)
+    {
+    }
 }

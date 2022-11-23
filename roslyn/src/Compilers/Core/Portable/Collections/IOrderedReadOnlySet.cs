@@ -7,5 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal interface IOrderedReadOnlySet<T> : IReadOnlySet<T>, IReadOnlyList<T> { }
+    internal interface IOrderedReadOnlySet<T> : IReadOnlySet<T>, IReadOnlyList<T>
+    {
+    }
 }

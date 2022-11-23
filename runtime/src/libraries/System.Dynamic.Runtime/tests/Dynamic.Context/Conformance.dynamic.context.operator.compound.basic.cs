@@ -60,7 +60,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public static long LongPro
         {
             protected get { return 1L; }
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>
@@ -125,7 +127,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public long LongPro
         {
             protected get { return 1L; }
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>
@@ -354,7 +358,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public static long LongPro
         {
             protected get { return 1L; }
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>
@@ -425,7 +431,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public static long LongPro
         {
             protected get { return 1L; }
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>
@@ -769,7 +777,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public dynamic Prop
         {
             get { return 100L; }
-            set { }
+            set
+            {
+            }
         }
 
         public dynamic Method(short i)
@@ -1056,13 +1066,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public dynamic this[int i]
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public int this[int i, int j]
         {
             get { return i + j; }
-            set { }
+            set
+            {
+            }
         }
 
         [Fact]
@@ -1170,6 +1184,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             return 0;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

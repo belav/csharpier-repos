@@ -264,7 +264,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                                 );
                             }
                             catch (InvalidOutliningRegionException e)
-                                when (FatalError.ReportAndCatch(e)) { }
+                                when (FatalError.ReportAndCatch(e))
+                            {
+                            }
                         }
 
                         continue;

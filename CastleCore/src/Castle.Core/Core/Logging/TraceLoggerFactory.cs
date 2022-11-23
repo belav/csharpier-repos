@@ -21,7 +21,9 @@ namespace Castle.Core.Logging
     {
         private readonly LoggerLevel? level;
 
-        public TraceLoggerFactory() { }
+        public TraceLoggerFactory()
+        {
+        }
 
         public TraceLoggerFactory(LoggerLevel level)
         {

@@ -479,7 +479,9 @@ internal sealed class GetDocumentCommandWorker
     {
         public IFeatureCollection Features { get; } = new FeatureCollection();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,

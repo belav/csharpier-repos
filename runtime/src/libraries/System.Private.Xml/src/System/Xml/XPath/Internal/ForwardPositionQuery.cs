@@ -13,7 +13,9 @@ namespace MS.Internal.Xml.XPath
             Debug.Assert(input != null);
         }
 
-        protected ForwardPositionQuery(ForwardPositionQuery other) : base(other) { }
+        protected ForwardPositionQuery(ForwardPositionQuery other) : base(other)
+        {
+        }
 
         public override object Evaluate(XPathNodeIterator context)
         {

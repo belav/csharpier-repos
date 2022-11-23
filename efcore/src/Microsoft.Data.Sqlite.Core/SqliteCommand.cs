@@ -37,7 +37,9 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteCommand" /> class.
         /// </summary>
-        public SqliteCommand() { }
+        public SqliteCommand()
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteCommand" /> class.
@@ -261,7 +263,9 @@ namespace Microsoft.Data.Sqlite
             var timer = new Stopwatch();
 
             using var enumerator = PrepareAndEnumerateStatements(timer).GetEnumerator();
-            while (enumerator.MoveNext()) { }
+            while (enumerator.MoveNext())
+            {
+            }
         }
 
         /// <summary>
@@ -482,7 +486,9 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Attempts to cancel the execution of the command. Does nothing.
         /// </summary>
-        public override void Cancel() { }
+        public override void Cancel()
+        {
+        }
 
         private IEnumerable<(sqlite3_stmt Statement, int ParamCount)> PrepareAndEnumerateStatements(
             Stopwatch timer

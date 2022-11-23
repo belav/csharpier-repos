@@ -49,7 +49,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     /// </summary>
     internal abstract class JsonValueNode : JsonNode
     {
-        protected JsonValueNode(JsonKind kind) : base(kind) { }
+        protected JsonValueNode(JsonKind kind) : base(kind)
+        {
+        }
     }
 
     /// <summary>

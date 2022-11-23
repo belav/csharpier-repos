@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     {
         // NOTE: This service is not public or intended for use by teams/individuals outside of Microsoft. Any data stored is subject to deletion without warning.
         [Guid("9B164E40-C3A2-4363-9BC5-EB4039DEF653")]
-        private class SVsSettingsPersistenceManager { };
+        private class SVsSettingsPersistenceManager
+        {
+        };
 
         private readonly ISettingsManager? _settingManager;
         private readonly IGlobalOptionService _globalOptionService;
@@ -244,7 +246,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                     );
                     return true;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
 
             value = null;

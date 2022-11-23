@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 new DatabaseFactoryService(),
                 // Report all exceptions we encounter, but don't crash on them. Propagate expected cancellation.
                 FatalError.ReportAndCatchUnlessCanceled
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// For testing purposes only.

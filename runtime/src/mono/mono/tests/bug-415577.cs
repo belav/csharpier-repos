@@ -7,7 +7,9 @@ using System.Runtime.Remoting.Messaging;
 
 public class MyContextAttribute : Attribute, IContextAttribute
 {
-    public void GetPropertiesForNewContext(IConstructionCallMessage msg) { }
+    public void GetPropertiesForNewContext(IConstructionCallMessage msg)
+    {
+    }
 
     public bool IsContextOK(Context ctx, IConstructionCallMessage msg)
     {
@@ -33,7 +35,9 @@ class UnlockedCbo : ContextBoundObject
 
 // CBO class whose objects are always out of context
 [MyContext]
-class LockedCbo : UnlockedCbo { }
+class LockedCbo : UnlockedCbo
+{
+}
 
 class Mbr : MarshalByRefObject
 {
@@ -66,7 +70,9 @@ class Test
             Interlocked.Increment(ref lc.Counter);
             return 1;
         }
-        catch (InvalidOperationException) { }
+        catch (InvalidOperationException)
+        {
+        }
 
         lc.Inc();
 
@@ -86,7 +92,9 @@ class Test
             Interlocked.Increment(ref rm.Counter);
             return 4;
         }
-        catch (InvalidOperationException) { }
+        catch (InvalidOperationException)
+        {
+        }
 
         rm.Inc();
 

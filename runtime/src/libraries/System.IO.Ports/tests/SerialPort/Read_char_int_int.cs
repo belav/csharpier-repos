@@ -633,7 +633,9 @@ namespace System.IO.Ports.Tests
                     com1.Read(charXmitBuffer, 0, charXmitBuffer.Length);
                     Fail("Err_29299aize Expected ReadTo to throw TimeoutException");
                 }
-                catch (TimeoutException) { } //Expected
+                catch (TimeoutException)
+                {
+                } //Expected
 
                 Assert.Equal(3, com1.BytesToRead);
 

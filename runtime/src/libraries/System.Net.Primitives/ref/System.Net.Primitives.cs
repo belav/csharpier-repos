@@ -20,75 +20,105 @@ namespace System.Net
 
     public sealed partial class Cookie
     {
-        public Cookie() { }
+        public Cookie()
+        {
+        }
 
-        public Cookie(string name, string? value) { }
+        public Cookie(string name, string? value)
+        {
+        }
 
-        public Cookie(string name, string? value, string? path) { }
+        public Cookie(string name, string? value, string? path)
+        {
+        }
 
-        public Cookie(string name, string? value, string? path, string? domain) { }
+        public Cookie(string name, string? value, string? path, string? domain)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Comment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Uri? CommentUri
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Discard
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Domain
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Expired
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime Expires
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool HttpOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Port
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Secure
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DateTime TimeStamp
         {
@@ -99,12 +129,16 @@ namespace System.Net
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals(
@@ -132,7 +166,9 @@ namespace System.Net
             System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        public CookieCollection() { }
+        public CookieCollection()
+        {
+        }
 
         public int Count
         {
@@ -159,20 +195,30 @@ namespace System.Net
             get { throw null; }
         }
 
-        public void Add(System.Net.Cookie cookie) { }
+        public void Add(System.Net.Cookie cookie)
+        {
+        }
 
-        public void Add(System.Net.CookieCollection cookies) { }
+        public void Add(System.Net.CookieCollection cookies)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(System.Net.Cookie cookie)
         {
             throw null;
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Net.Cookie[] array, int index) { }
+        public void CopyTo(System.Net.Cookie[] array, int index)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -196,16 +242,24 @@ namespace System.Net
         public const int DefaultCookieLimit = 300;
         public const int DefaultPerDomainCookieLimit = 20;
 
-        public CookieContainer() { }
+        public CookieContainer()
+        {
+        }
 
-        public CookieContainer(int capacity) { }
+        public CookieContainer(int capacity)
+        {
+        }
 
-        public CookieContainer(int capacity, int perDomainCapacity, int maxCookieSize) { }
+        public CookieContainer(int capacity, int perDomainCapacity, int maxCookieSize)
+        {
+        }
 
         public int Capacity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Count
         {
@@ -214,21 +268,33 @@ namespace System.Net
         public int MaxCookieSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int PerDomainCapacity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Add(System.Net.Cookie cookie) { }
+        public void Add(System.Net.Cookie cookie)
+        {
+        }
 
-        public void Add(System.Net.CookieCollection cookies) { }
+        public void Add(System.Net.CookieCollection cookies)
+        {
+        }
 
-        public void Add(System.Uri uri, System.Net.Cookie cookie) { }
+        public void Add(System.Uri uri, System.Net.Cookie cookie)
+        {
+        }
 
-        public void Add(System.Uri uri, System.Net.CookieCollection cookies) { }
+        public void Add(System.Uri uri, System.Net.CookieCollection cookies)
+        {
+        }
 
         public System.Net.CookieCollection GetAllCookies()
         {
@@ -245,29 +311,39 @@ namespace System.Net
             throw null;
         }
 
-        public void SetCookies(System.Uri uri, string cookieHeader) { }
+        public void SetCookies(System.Uri uri, string cookieHeader)
+        {
+        }
     }
 
     public partial class CookieException
         : System.FormatException,
             System.Runtime.Serialization.ISerializable
     {
-        public CookieException() { }
+        public CookieException()
+        {
+        }
 
         protected CookieException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class CredentialCache
@@ -275,7 +351,9 @@ namespace System.Net
             System.Net.ICredentials,
             System.Net.ICredentialsByHost
     {
-        public CredentialCache() { }
+        public CredentialCache()
+        {
+        }
 
         public static System.Net.ICredentials DefaultCredentials
         {
@@ -291,13 +369,13 @@ namespace System.Net
             int port,
             string authenticationType,
             System.Net.NetworkCredential credential
-        ) { }
+        )
+        {
+        }
 
-        public void Add(
-            System.Uri uriPrefix,
-            string authType,
-            System.Net.NetworkCredential cred
-        ) { }
+        public void Add(System.Uri uriPrefix, string authType, System.Net.NetworkCredential cred)
+        {
+        }
 
         public System.Net.NetworkCredential? GetCredential(
             string host,
@@ -318,9 +396,13 @@ namespace System.Net
             throw null;
         }
 
-        public void Remove(string? host, int port, string? authenticationType) { }
+        public void Remove(string? host, int port, string? authenticationType)
+        {
+        }
 
-        public void Remove(System.Uri? uriPrefix, string? authType) { }
+        public void Remove(System.Uri? uriPrefix, string? authType)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -335,10 +417,13 @@ namespace System.Net
 
     public partial class DnsEndPoint : System.Net.EndPoint
     {
-        public DnsEndPoint(string host, int port) { }
+        public DnsEndPoint(string host, int port)
+        {
+        }
 
         public DnsEndPoint(string host, int port, System.Net.Sockets.AddressFamily addressFamily)
-        { }
+        {
+        }
 
         public override System.Net.Sockets.AddressFamily AddressFamily
         {
@@ -373,7 +458,9 @@ namespace System.Net
 
     public abstract partial class EndPoint
     {
-        protected EndPoint() { }
+        protected EndPoint()
+        {
+        }
 
         public virtual System.Net.Sockets.AddressFamily AddressFamily
         {
@@ -494,15 +581,25 @@ namespace System.Net
         public static readonly System.Net.IPAddress Loopback;
         public static readonly System.Net.IPAddress None;
 
-        public IPAddress(byte[] address) { }
+        public IPAddress(byte[] address)
+        {
+        }
 
-        public IPAddress(byte[] address, long scopeid) { }
+        public IPAddress(byte[] address, long scopeid)
+        {
+        }
 
-        public IPAddress(long newAddress) { }
+        public IPAddress(long newAddress)
+        {
+        }
 
-        public IPAddress(System.ReadOnlySpan<byte> address) { }
+        public IPAddress(System.ReadOnlySpan<byte> address)
+        {
+        }
 
-        public IPAddress(System.ReadOnlySpan<byte> address, long scopeid) { }
+        public IPAddress(System.ReadOnlySpan<byte> address, long scopeid)
+        {
+        }
 
         [System.ObsoleteAttribute(
             "IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons instead."
@@ -510,7 +607,9 @@ namespace System.Net
         public long Address
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.AddressFamily AddressFamily
         {
@@ -543,7 +642,9 @@ namespace System.Net
         public long ScopeId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals(
@@ -657,14 +758,20 @@ namespace System.Net
         public const int MaxPort = 65535;
         public const int MinPort = 0;
 
-        public IPEndPoint(long address, int port) { }
+        public IPEndPoint(long address, int port)
+        {
+        }
 
-        public IPEndPoint(System.Net.IPAddress address, int port) { }
+        public IPEndPoint(System.Net.IPAddress address, int port)
+        {
+        }
 
         public System.Net.IPAddress Address
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.Sockets.AddressFamily AddressFamily
         {
@@ -673,7 +780,9 @@ namespace System.Net
         public int Port
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Net.EndPoint Create(System.Net.SocketAddress socketAddress)
@@ -741,34 +850,48 @@ namespace System.Net
 
     public partial class NetworkCredential : System.Net.ICredentials, System.Net.ICredentialsByHost
     {
-        public NetworkCredential() { }
+        public NetworkCredential()
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public NetworkCredential(string? userName, System.Security.SecureString? password) { }
+        public NetworkCredential(string? userName, System.Security.SecureString? password)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public NetworkCredential(
             string? userName,
             System.Security.SecureString? password,
             string? domain
-        ) { }
+        )
+        {
+        }
 
-        public NetworkCredential(string? userName, string? password) { }
+        public NetworkCredential(string? userName, string? password)
+        {
+        }
 
-        public NetworkCredential(string? userName, string? password, string? domain) { }
+        public NetworkCredential(string? userName, string? password, string? domain)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Domain
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Password
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.CLSCompliantAttribute(false)]
@@ -776,14 +899,18 @@ namespace System.Net
         public System.Security.SecureString SecurePassword
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string UserName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Net.NetworkCredential GetCredential(
@@ -806,9 +933,13 @@ namespace System.Net
 
     public partial class SocketAddress
     {
-        public SocketAddress(System.Net.Sockets.AddressFamily family) { }
+        public SocketAddress(System.Net.Sockets.AddressFamily family)
+        {
+        }
 
-        public SocketAddress(System.Net.Sockets.AddressFamily family, int size) { }
+        public SocketAddress(System.Net.Sockets.AddressFamily family, int size)
+        {
+        }
 
         public System.Net.Sockets.AddressFamily Family
         {
@@ -817,7 +948,9 @@ namespace System.Net
         public byte this[int offset]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Size
         {
@@ -842,7 +975,9 @@ namespace System.Net
 
     public abstract partial class TransportContext
     {
-        protected TransportContext() { }
+        protected TransportContext()
+        {
+        }
 
         public abstract System.Security.Authentication.ExtendedProtection.ChannelBinding? GetChannelBinding(
             System.Security.Authentication.ExtendedProtection.ChannelBindingKind kind
@@ -865,9 +1000,13 @@ namespace System.Net.Cache
 
     public partial class RequestCachePolicy
     {
-        public RequestCachePolicy() { }
+        public RequestCachePolicy()
+        {
+        }
 
-        public RequestCachePolicy(System.Net.Cache.RequestCacheLevel level) { }
+        public RequestCachePolicy(System.Net.Cache.RequestCacheLevel level)
+        {
+        }
 
         public System.Net.Cache.RequestCacheLevel Level
         {
@@ -888,7 +1027,9 @@ namespace System.Net.NetworkInformation
             System.Collections.Generic.IEnumerable<System.Net.IPAddress>,
             System.Collections.IEnumerable
     {
-        protected internal IPAddressCollection() { }
+        protected internal IPAddressCollection()
+        {
+        }
 
         public virtual int Count
         {
@@ -903,16 +1044,22 @@ namespace System.Net.NetworkInformation
             get { throw null; }
         }
 
-        public virtual void Add(System.Net.IPAddress address) { }
+        public virtual void Add(System.Net.IPAddress address)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual bool Contains(System.Net.IPAddress address)
         {
             throw null;
         }
 
-        public virtual void CopyTo(System.Net.IPAddress[] array, int offset) { }
+        public virtual void CopyTo(System.Net.IPAddress[] array, int offset)
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerator<System.Net.IPAddress> GetEnumerator()
         {
@@ -1042,16 +1189,24 @@ namespace System.Net.Sockets
 
     public partial class SocketException : System.ComponentModel.Win32Exception
     {
-        public SocketException() { }
+        public SocketException()
+        {
+        }
 
-        public SocketException(int errorCode) { }
+        public SocketException(int errorCode)
+        {
+        }
 
-        public SocketException(int errorCode, string? message) { }
+        public SocketException(int errorCode, string? message)
+        {
+        }
 
         protected SocketException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public override int ErrorCode
         {
@@ -1139,9 +1294,13 @@ namespace System.Security.Authentication.ExtendedProtection
     public abstract partial class ChannelBinding
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        protected ChannelBinding() : base(default(bool)) { }
+        protected ChannelBinding() : base(default(bool))
+        {
+        }
 
-        protected ChannelBinding(bool ownsHandle) : base(default(bool)) { }
+        protected ChannelBinding(bool ownsHandle) : base(default(bool))
+        {
+        }
 
         public abstract int Size { get; }
     }

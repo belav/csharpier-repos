@@ -732,7 +732,9 @@ namespace ILCompiler.Dataflow
                 {
                     return mdType.ExplicitlyImplementedInterfaces;
                 }
-                catch (TypeSystemException) { }
+                catch (TypeSystemException)
+                {
+                }
             }
             return Array.Empty<DefType>();
         }

@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839"
         )]
-        public CSharpTypeInferenceService() { }
+        public CSharpTypeInferenceService()
+        {
+        }
 
         protected override AbstractTypeInferrer CreateTypeInferrer(
             SemanticModel semanticModel,

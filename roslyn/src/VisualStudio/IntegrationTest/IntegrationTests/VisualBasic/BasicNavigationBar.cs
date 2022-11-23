@@ -31,7 +31,9 @@ End Structure";
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicNavigationBar(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicNavigationBar)) { }
+            : base(instanceFactory, nameof(BasicNavigationBar))
+        {
+        }
 
         public override async Task DisposeAsync()
         {

@@ -113,7 +113,9 @@ namespace System.Security.Cryptography
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         ~ToBase64Transform()
         {
@@ -130,7 +132,9 @@ namespace System.Security.Cryptography
         private int _inputIndex;
         private readonly FromBase64TransformMode _whitespaces;
 
-        public FromBase64Transform() : this(FromBase64TransformMode.IgnoreWhiteSpaces) { }
+        public FromBase64Transform() : this(FromBase64TransformMode.IgnoreWhiteSpaces)
+        {
+        }
 
         public FromBase64Transform(FromBase64TransformMode whitespaces)
         {

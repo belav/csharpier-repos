@@ -200,7 +200,9 @@ namespace System.IO
         }
 #endif
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 

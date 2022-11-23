@@ -13,6 +13,8 @@ namespace System.Xml.Serialization
     )]
     public class SoapIgnoreAttribute : System.Attribute
     {
-        public SoapIgnoreAttribute() { }
+        public SoapIgnoreAttribute()
+        {
+        }
     }
 }

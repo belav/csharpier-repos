@@ -12,11 +12,15 @@ namespace System.CommandLine
     {
         /// <inheritdoc/>
         public Option(string name, string? description = null)
-            : base(name, description, new Argument<T>()) { }
+            : base(name, description, new Argument<T>())
+        {
+        }
 
         /// <inheritdoc/>
         public Option(string[] aliases, string? description = null)
-            : base(aliases, description, new Argument<T>()) { }
+            : base(aliases, description, new Argument<T>())
+        {
+        }
 
         /// <inheritdoc/>
         public Option(
@@ -32,7 +36,9 @@ namespace System.CommandLine
                     parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)),
                     isDefault
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <inheritdoc/>
         public Option(
@@ -48,7 +54,9 @@ namespace System.CommandLine
                     parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)),
                     isDefault
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <inheritdoc/>
         public Option(string name, Func<T> getDefaultValue, string? description = null)
@@ -58,7 +66,9 @@ namespace System.CommandLine
                 new Argument<T>(
                     getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue))
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <inheritdoc/>
         public Option(string[] aliases, Func<T> getDefaultValue, string? description = null)
@@ -68,7 +78,9 @@ namespace System.CommandLine
                 new Argument<T>(
                     getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue))
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <inheritdoc/>
         public override ArgumentArity Arity

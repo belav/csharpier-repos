@@ -2,9 +2,13 @@
 
 public class InheritanceWithoutIncludeShouldWork : AutoMapperSpecBase
 {
-    public class FooBase { }
+    public class FooBase
+    {
+    }
 
-    public class Foo : FooBase { }
+    public class Foo : FooBase
+    {
+    }
 
     public class FooDto
     {

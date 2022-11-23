@@ -21,4 +21,6 @@ namespace Microsoft.AspNetCore.Mvc;
     AllowMultiple = false,
     Inherited = true
 )]
-public class ApiControllerAttribute : ControllerAttribute, IApiBehaviorMetadata { }
+public class ApiControllerAttribute : ControllerAttribute, IApiBehaviorMetadata
+{
+}

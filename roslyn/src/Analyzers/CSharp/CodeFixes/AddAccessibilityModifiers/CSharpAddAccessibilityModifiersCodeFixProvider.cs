@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddAccessibilityModifiersCodeFixProvider() { }
+        public CSharpAddAccessibilityModifiersCodeFixProvider()
+        {
+        }
 
         protected override SyntaxNode MapToDeclarator(SyntaxNode node)
         {

@@ -63,7 +63,8 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     /// <param name="maxRetryDelay">The maximum delay between retries.</param>
     protected ExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
         : this(context.GetService<ExecutionStrategyDependencies>(), maxRetryCount, maxRetryDelay)
-    { }
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="ExecutionStrategy" />.
@@ -450,7 +451,9 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
     ///     for more information and examples.
     /// </remarks>
-    protected virtual void OnRetry() { }
+    protected virtual void OnRetry()
+    {
+    }
 
     /// <summary>
     ///     Determines whether the operation should be retried and the delay before the next attempt.

@@ -7,7 +7,9 @@ namespace System.Speech.Synthesis
     public class PromptStyle
     {
         #region Constructors
-        public PromptStyle() { }
+        public PromptStyle()
+        {
+        }
 
         public PromptStyle(PromptRate rate)
         {

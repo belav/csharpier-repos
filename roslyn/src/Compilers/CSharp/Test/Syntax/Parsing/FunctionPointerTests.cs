@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 {
     public class FunctionPointerTests : ParsingTests
     {
-        public FunctionPointerTests(ITestOutputHelper output) : base(output) { }
+        public FunctionPointerTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void SimpleFunctionPointerTest()

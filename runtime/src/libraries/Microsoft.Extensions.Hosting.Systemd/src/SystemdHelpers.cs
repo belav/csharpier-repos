@@ -55,7 +55,9 @@ namespace Microsoft.Extensions.Hosting.Systemd
                 byte[] comm = File.ReadAllBytes("/proc/" + ppidString + "/comm");
                 return comm.AsSpan().SequenceEqual("systemd\n"u8);
             }
-            catch { }
+            catch
+            {
+            }
 
             return false;
         }

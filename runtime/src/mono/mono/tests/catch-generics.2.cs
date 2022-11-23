@@ -8,7 +8,9 @@ class Test<T> where T : Exception
         {
             throw new RankException();
         }
-        catch (T) { }
+        catch (T)
+        {
+        }
     }
 }
 
@@ -23,7 +25,9 @@ public class Program
             action();
             Console.WriteLine("Expected Exception: " + typeof(T).FullName);
         }
-        catch (T) { }
+        catch (T)
+        {
+        }
     }
 
     public static void Main()

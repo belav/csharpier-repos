@@ -12,7 +12,9 @@ namespace System.Runtime.Serialization
         protected System.Runtime.Serialization.ObjectIDGenerator m_idGenerator;
         protected System.Collections.Queue m_objectQueue;
 
-        protected Formatter() { }
+        protected Formatter()
+        {
+        }
 
         public abstract System.Runtime.Serialization.SerializationBinder? Binder { get; set; }
         public abstract System.Runtime.Serialization.StreamingContext Context { get; set; }
@@ -61,7 +63,9 @@ namespace System.Runtime.Serialization
         protected abstract void WriteInt32(int val, string name);
         protected abstract void WriteInt64(long val, string name);
 
-        protected virtual void WriteMember(string memberName, object? data) { }
+        protected virtual void WriteMember(string memberName, object? data)
+        {
+        }
 
         protected abstract void WriteObjectRef(object? obj, string name, System.Type memberType);
 
@@ -83,7 +87,9 @@ namespace System.Runtime.Serialization
 
     public partial class FormatterConverter : System.Runtime.Serialization.IFormatterConverter
     {
-        public FormatterConverter() { }
+        public FormatterConverter()
+        {
+        }
 
         public object Convert(object value, System.Type type)
         {
@@ -180,7 +186,9 @@ namespace System.Runtime.Serialization
         public static void CheckTypeSecurity(
             System.Type t,
             System.Runtime.Serialization.Formatters.TypeFilterLevel securityLevel
-        ) { }
+        )
+        {
+        }
 
         public static object?[] GetObjectData(object obj, System.Reflection.MemberInfo[] members)
         {
@@ -324,7 +332,9 @@ namespace System.Runtime.Serialization
 
     public partial class ObjectIDGenerator
     {
-        public ObjectIDGenerator() { }
+        public ObjectIDGenerator()
+        {
+        }
 
         public virtual long GetId(object obj, out bool firstTime)
         {
@@ -342,53 +352,71 @@ namespace System.Runtime.Serialization
         public ObjectManager(
             System.Runtime.Serialization.ISurrogateSelector? selector,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered."
         )]
-        public virtual void DoFixups() { }
+        public virtual void DoFixups()
+        {
+        }
 
         public virtual object? GetObject(long objectID)
         {
             throw null;
         }
 
-        public virtual void RaiseDeserializationEvent() { }
+        public virtual void RaiseDeserializationEvent()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered."
         )]
-        public void RaiseOnDeserializingEvent(object obj) { }
+        public void RaiseOnDeserializingEvent(object obj)
+        {
+        }
 
         public virtual void RecordArrayElementFixup(
             long arrayToBeFixed,
             int index,
             long objectRequired
-        ) { }
+        )
+        {
+        }
 
         public virtual void RecordArrayElementFixup(
             long arrayToBeFixed,
             int[] indices,
             long objectRequired
-        ) { }
+        )
+        {
+        }
 
         public virtual void RecordDelayedFixup(
             long objectToBeFixed,
             string memberName,
             long objectRequired
-        ) { }
+        )
+        {
+        }
 
         public virtual void RecordFixup(
             long objectToBeFixed,
             System.Reflection.MemberInfo member,
             long objectRequired
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered."
         )]
-        public virtual void RegisterObject(object obj, long objectID) { }
+        public virtual void RegisterObject(object obj, long objectID)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered."
@@ -397,7 +425,9 @@ namespace System.Runtime.Serialization
             object obj,
             long objectID,
             System.Runtime.Serialization.SerializationInfo info
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered."
@@ -408,7 +438,9 @@ namespace System.Runtime.Serialization
             System.Runtime.Serialization.SerializationInfo? info,
             long idOfContainingObj,
             System.Reflection.MemberInfo? member
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered."
@@ -420,12 +452,16 @@ namespace System.Runtime.Serialization
             long idOfContainingObj,
             System.Reflection.MemberInfo? member,
             int[]? arrayIndex
-        ) { }
+        )
+        {
+        }
     }
 
     public abstract partial class SerializationBinder
     {
-        protected SerializationBinder() { }
+        protected SerializationBinder()
+        {
+        }
 
         public virtual void BindToName(
             System.Type serializedType,
@@ -441,29 +477,39 @@ namespace System.Runtime.Serialization
 
     public sealed partial class SerializationObjectManager
     {
-        public SerializationObjectManager(System.Runtime.Serialization.StreamingContext context) { }
+        public SerializationObjectManager(System.Runtime.Serialization.StreamingContext context)
+        {
+        }
 
-        public void RaiseOnSerializedEvent() { }
+        public void RaiseOnSerializedEvent()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "SerializationObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered."
         )]
-        public void RegisterObject(object obj) { }
+        public void RegisterObject(object obj)
+        {
+        }
     }
 
     public partial class SurrogateSelector : System.Runtime.Serialization.ISurrogateSelector
     {
-        public SurrogateSelector() { }
+        public SurrogateSelector()
+        {
+        }
 
         public virtual void AddSurrogate(
             System.Type type,
             System.Runtime.Serialization.StreamingContext context,
             System.Runtime.Serialization.ISerializationSurrogate surrogate
-        ) { }
+        )
+        {
+        }
 
-        public virtual void ChainSelector(
-            System.Runtime.Serialization.ISurrogateSelector selector
-        ) { }
+        public virtual void ChainSelector(System.Runtime.Serialization.ISurrogateSelector selector)
+        {
+        }
 
         public virtual System.Runtime.Serialization.ISurrogateSelector? GetNextSelector()
         {
@@ -482,7 +528,9 @@ namespace System.Runtime.Serialization
         public virtual void RemoveSurrogate(
             System.Type type,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 }
 
@@ -518,42 +566,58 @@ namespace System.Runtime.Serialization.Formatters.Binary
 {
     public sealed partial class BinaryFormatter : System.Runtime.Serialization.IFormatter
     {
-        public BinaryFormatter() { }
+        public BinaryFormatter()
+        {
+        }
 
         public BinaryFormatter(
             System.Runtime.Serialization.ISurrogateSelector? selector,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public System.Runtime.Serialization.Formatters.FormatterAssemblyStyle AssemblyFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Serialization.SerializationBinder? Binder
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Serialization.StreamingContext Context
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Serialization.Formatters.TypeFilterLevel FilterLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Serialization.ISurrogateSelector? SurrogateSelector
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.Serialization.Formatters.FormatterTypeStyle TypeFormat
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -580,6 +644,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "BinaryFormatter serialization is not trim compatible because the type of objects being processed cannot be statically discovered."
         )]
-        public void Serialize(System.IO.Stream serializationStream, object graph) { }
+        public void Serialize(System.IO.Stream serializationStream, object graph)
+        {
+        }
     }
 }

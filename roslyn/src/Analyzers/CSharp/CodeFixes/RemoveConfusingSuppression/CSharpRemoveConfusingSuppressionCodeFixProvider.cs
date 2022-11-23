@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveConfusingSuppressionCodeFixProvider() { }
+        public CSharpRemoveConfusingSuppressionCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(

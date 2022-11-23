@@ -68,7 +68,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 provider,
                 codeAction,
                 ImmutableArray.Create(nestedActionSet)
-            ) { }
+            )
+        {
+        }
 
         public override bool HasActionSets => true;
 

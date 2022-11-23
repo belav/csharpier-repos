@@ -281,7 +281,9 @@ class TypeToString
 #region helper class
 namespace TestHelper
 {
-    internal class Foo<T1, T2> { }
+    internal class Foo<T1, T2>
+    {
+    }
 
     internal class MyClass<T>
     {

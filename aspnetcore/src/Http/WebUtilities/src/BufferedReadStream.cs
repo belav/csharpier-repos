@@ -28,7 +28,9 @@ public class BufferedReadStream : Stream
     /// <param name="inner">The stream to wrap.</param>
     /// <param name="bufferSize">Size of buffer in bytes.</param>
     public BufferedReadStream(Stream inner, int bufferSize)
-        : this(inner, bufferSize, ArrayPool<byte>.Shared) { }
+        : this(inner, bufferSize, ArrayPool<byte>.Shared)
+    {
+    }
 
     /// <summary>
     /// Creates a new stream.

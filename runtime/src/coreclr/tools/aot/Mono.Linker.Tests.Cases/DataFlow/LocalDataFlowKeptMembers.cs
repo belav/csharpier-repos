@@ -199,7 +199,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class BranchIfElseTypeWithMethods
         {
             [Kept]
-            public void Method() { }
+            public void Method()
+            {
+            }
 
             [Kept] // unnecessary
             public string field;
@@ -208,7 +210,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         class BranchIfElseTypeWithFields
         {
-            public void Method() { }
+            public void Method()
+            {
+            }
 
             [Kept]
             public string field;
@@ -247,13 +251,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
                 Type type
-        ) { }
+        )
+        {
+        }
 
         [Kept]
         public static void RequirePublicMethods(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 Type type
-        ) { }
+        )
+        {
+        }
     }
 }

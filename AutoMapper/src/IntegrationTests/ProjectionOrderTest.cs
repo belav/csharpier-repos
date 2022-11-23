@@ -64,5 +64,7 @@ public class ProjectionOrderTest : IntegrationTest<ProjectionOrderTest.DatabaseI
         }
     }
 
-    public class DatabaseInitializer : DropCreateDatabaseAlways<ClientContext> { }
+    public class DatabaseInitializer : DropCreateDatabaseAlways<ClientContext>
+    {
+    }
 }

@@ -2,11 +2,15 @@
 
 public class CorrectCtorIsPickedOnDestinationType : NonValidatingSpecBase
 {
-    public class SourceClass { }
+    public class SourceClass
+    {
+    }
 
     public class DestinationClass
     {
-        public DestinationClass() { }
+        public DestinationClass()
+        {
+        }
 
         // Since the name of the parameter is 'type', Automapper.TypeMap chooses SourceClass.GetType()
         // to fulfill the dependency, causing an InvalidCastException during Mapper.Map()

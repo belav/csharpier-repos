@@ -3,7 +3,9 @@
 
 using System;
 
-internal class Foo { }
+internal class Foo
+{
+}
 
 internal class Test_gettypetypeofmatrix
 {

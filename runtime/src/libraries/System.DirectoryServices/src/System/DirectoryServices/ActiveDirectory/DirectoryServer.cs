@@ -33,7 +33,9 @@ namespace System.DirectoryServices.ActiveDirectory
         private ReplicationConnectionCollection? _outbound;
 
         #region constructors
-        protected DirectoryServer() { }
+        protected DirectoryServer()
+        {
+        }
         #endregion constructors
 
         #region IDisposable

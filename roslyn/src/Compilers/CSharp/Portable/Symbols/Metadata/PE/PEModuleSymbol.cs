@@ -275,7 +275,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                     );
                                 }
                             }
-                            catch (BadImageFormatException) { }
+                            catch (BadImageFormatException)
+                            {
+                            }
                         }
                     }
                 }
@@ -443,7 +445,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     customAttributesBuilder.Add(new PEAttributeData(this, customAttributeHandle));
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             if (customAttributesBuilder != null)
             {
@@ -490,7 +494,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return true;
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return false;
         }

@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public ConvertNamespaceCodeRefactoringProvider() { }
+        public ConvertNamespaceCodeRefactoringProvider()
+        {
+        }
 
         protected override ImmutableArray<FixAllScope> SupportedFixAllScopes =>
             ImmutableArray.Create(FixAllScope.Project, FixAllScope.Solution);

@@ -15,7 +15,9 @@ namespace System.Web.Razor.Parser
         private static readonly VBLanguageCharacteristics _instance =
             new VBLanguageCharacteristics();
 
-        private VBLanguageCharacteristics() { }
+        private VBLanguageCharacteristics()
+        {
+        }
 
         public static VBLanguageCharacteristics Instance
         {

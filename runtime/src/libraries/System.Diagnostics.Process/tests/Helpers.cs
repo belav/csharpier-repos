@@ -72,7 +72,9 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
-            catch (Win32Exception) { } // Process.SafeHandle can throw unauthorized since it uses OpenProcess with PROCESS_ALL_ACCESS.
+            catch (Win32Exception)
+            {
+            } // Process.SafeHandle can throw unauthorized since it uses OpenProcess with PROCESS_ALL_ACCESS.
 
             return null;
         }

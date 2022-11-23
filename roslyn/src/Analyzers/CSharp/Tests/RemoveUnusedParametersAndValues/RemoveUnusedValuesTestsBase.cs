@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
     public abstract class RemoveUnusedValuesTestsBase
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        protected RemoveUnusedValuesTestsBase(ITestOutputHelper logger) : base(logger) { }
+        protected RemoveUnusedValuesTestsBase(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

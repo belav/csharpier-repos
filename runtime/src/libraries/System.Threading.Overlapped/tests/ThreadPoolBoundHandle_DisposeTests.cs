@@ -36,7 +36,8 @@ public partial class ThreadPoolBoundHandleTests
         ThreadPoolBoundHandle boundHandle = CreateThreadPoolBoundHandle();
 
         NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(
-            (_, __, ___) => { },
+            (_, __, ___) => {
+            },
             new object(),
             new byte[1024]
         );

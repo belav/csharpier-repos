@@ -15,7 +15,9 @@ public class MapAllClaimsAction : ClaimAction
     /// <summary>
     /// Initializes a new instance of <see cref="MapAllClaimsAction"/>.
     /// </summary>
-    public MapAllClaimsAction() : base("All", ClaimValueTypes.String) { }
+    public MapAllClaimsAction() : base("All", ClaimValueTypes.String)
+    {
+    }
 
     /// <inheritdoc />
     public override void Run(JsonElement userData, ClaimsIdentity identity, string issuer)

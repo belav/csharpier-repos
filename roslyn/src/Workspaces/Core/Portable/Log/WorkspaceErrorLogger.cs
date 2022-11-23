@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.ErrorLogger
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceErrorLogger() { }
+        public WorkspaceErrorLogger()
+        {
+        }
 
         public void LogException(object source, Exception exception) =>
             Logger.Log(

@@ -5750,7 +5750,9 @@ ORDER BY [c].[CustomerID]"
                             ).ToList()
                         ).ToList()
                     ).GetEnumerator()
-                ) { }
+                )
+                {
+                }
             });
         }
 

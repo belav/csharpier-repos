@@ -18,7 +18,9 @@ class WrappedString
 
 class WrappedStringCustomMarshaler : ICustomMarshaler
 {
-    public void CleanUpManagedData(object ManagedObj) { }
+    public void CleanUpManagedData(object ManagedObj)
+    {
+    }
 
     public void CleanUpNativeData(IntPtr pNativeData)
     {

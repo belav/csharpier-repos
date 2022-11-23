@@ -201,7 +201,9 @@ namespace System.Xml
         public abstract WriteState WriteState { get; }
 
         // Closes the XmlWriter and the underlying stream/TextReader (if Settings.CloseOutput is true).
-        public virtual void Close() { }
+        public virtual void Close()
+        {
+        }
 
         // Flushes data that is in the internal buffers into the underlying streams/TextReader and flushes the stream/TextReader.
 

@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Add";
 
-        private AddInstruction() { }
+        private AddInstruction()
+        {
+        }
 
         private sealed class AddInt16 : AddInstruction
         {
@@ -213,7 +215,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "AddOvf";
 
-        private AddOvfInstruction() { }
+        private AddOvfInstruction()
+        {
+        }
 
         private sealed class AddOvfInt16 : AddOvfInstruction
         {

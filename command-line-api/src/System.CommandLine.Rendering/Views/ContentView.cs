@@ -5,14 +5,18 @@ namespace System.CommandLine.Rendering.Views
 {
     public class ContentView : View
     {
-        public ContentView(string content) : this(new ContentSpan(content)) { }
+        public ContentView(string content) : this(new ContentSpan(content))
+        {
+        }
 
         public ContentView(TextSpan span)
         {
             Span = span ?? throw new ArgumentNullException(nameof(span));
         }
 
-        protected ContentView() { }
+        protected ContentView()
+        {
+        }
 
         protected TextSpan Span { get; set; }
 
@@ -104,9 +108,13 @@ namespace System.CommandLine.Rendering.Views
                 _formatProvider = formatProvider;
             }
 
-            public void OnCompleted() { }
+            public void OnCompleted()
+            {
+            }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(T value)
             {

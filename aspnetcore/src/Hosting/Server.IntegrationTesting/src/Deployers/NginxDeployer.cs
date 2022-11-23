@@ -21,7 +21,9 @@ public class NginxDeployer : SelfHostDeployer
     private Socket _portSelector;
 
     public NginxDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(deploymentParameters, loggerFactory) { }
+        : base(deploymentParameters, loggerFactory)
+    {
+    }
 
     public override async Task<DeploymentResult> DeployAsync()
     {

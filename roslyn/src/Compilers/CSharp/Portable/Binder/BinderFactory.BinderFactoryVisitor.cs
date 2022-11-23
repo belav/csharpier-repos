@@ -1743,7 +1743,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             CSharpSyntaxNode curr = xmlSyntax;
-            for (; !SyntaxFacts.IsDocumentationCommentTrivia(curr.Kind()); curr = curr.Parent) { }
+            for (; !SyntaxFacts.IsDocumentationCommentTrivia(curr.Kind()); curr = curr.Parent)
+            {
+            }
             Debug.Assert(curr != null);
 
             return (DocumentationCommentTriviaSyntax)curr;

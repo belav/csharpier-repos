@@ -53,7 +53,9 @@ namespace System.Security.Cryptography.Xml
         // protected constructors
         //
 
-        protected Transform() { }
+        protected Transform()
+        {
+        }
 
         //
         // public properties

@@ -1709,13 +1709,21 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMapperTestBase
             TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
         );
 
-    private enum LongEnum : long { }
+    private enum LongEnum : long
+    {
+    }
 
-    private enum IntEnum { }
+    private enum IntEnum
+    {
+    }
 
-    private enum ShortEnum : short { }
+    private enum ShortEnum : short
+    {
+    }
 
-    private enum ByteEnum : byte { }
+    private enum ByteEnum : byte
+    {
+    }
 
     protected override ModelBuilder CreateModelBuilder(
         Action<ModelConfigurationBuilder> configureConventions = null
@@ -1726,7 +1734,9 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMapperTestBase
 
     private class TestParameter : DbParameter
     {
-        public override void ResetDbType() { }
+        public override void ResetDbType()
+        {
+        }
 
         public override DbType DbType { get; set; }
         public override ParameterDirection Direction { get; set; }
@@ -1740,7 +1750,9 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMapperTestBase
 
     private class TestCommand : DbCommand
     {
-        public override void Prepare() { }
+        public override void Prepare()
+        {
+        }
 
         public override string CommandText { get; set; }
         public override int CommandTimeout { get; set; }
@@ -1751,7 +1763,9 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMapperTestBase
         protected override DbTransaction DbTransaction { get; set; }
         public override bool DesignTimeVisible { get; set; }
 
-        public override void Cancel() { }
+        public override void Cancel()
+        {
+        }
 
         protected override DbParameter CreateDbParameter() => new TestParameter();
 

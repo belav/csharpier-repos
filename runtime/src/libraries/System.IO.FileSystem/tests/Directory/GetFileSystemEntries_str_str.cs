@@ -876,7 +876,9 @@ namespace System.IO.Tests
 
             if (TestFiles)
             {
-                using (File.Create(longFullname)) { }
+                using (File.Create(longFullname))
+                {
+                }
             }
             else
             {

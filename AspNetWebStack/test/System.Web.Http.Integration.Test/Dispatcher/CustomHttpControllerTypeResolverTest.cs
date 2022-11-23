@@ -13,7 +13,9 @@ namespace System.Web.Http.Dispatcher
     {
         internal static readonly string ExpectedContent = "Hello World!";
 
-        public CustomControllerTypeResolverTest() : base("http://localhost/") { }
+        public CustomControllerTypeResolverTest() : base("http://localhost/")
+        {
+        }
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {

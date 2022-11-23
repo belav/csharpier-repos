@@ -43,7 +43,9 @@ public class NotInlined<T>
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void NotInlinedMeth() { }
+    public static void NotInlinedMeth()
+    {
+    }
 }
 
 public class Inlined<T>
@@ -54,7 +56,9 @@ public class Inlined<T>
         File.WriteAllText("inlined.txt", "inside .cctor");
     }
 
-    public static void InlinedMeth() { }
+    public static void InlinedMeth()
+    {
+    }
 }
 
 public struct NotInlinedVal<T>
@@ -66,7 +70,9 @@ public struct NotInlinedVal<T>
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void NotInlinedValMeth() { }
+    public static void NotInlinedValMeth()
+    {
+    }
 }
 
 public struct InlinedVal<T>
@@ -77,7 +83,9 @@ public struct InlinedVal<T>
         File.WriteAllText("inlinedval.txt", "inside .cctor");
     }
 
-    public static void InlinedValMeth() { }
+    public static void InlinedValMeth()
+    {
+    }
 }
 
 public class Test_GenTypeInlined

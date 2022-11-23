@@ -14,7 +14,9 @@ namespace Microsoft.Web.UnitTestUtil
     {
         private readonly CultureInfo _culture;
 
-        public SimpleValueProvider() : this(null) { }
+        public SimpleValueProvider() : this(null)
+        {
+        }
 
         public SimpleValueProvider(CultureInfo culture) : base(StringComparer.OrdinalIgnoreCase)
         {

@@ -194,9 +194,13 @@ namespace System.Data.Tests.Common
                 DataRow row,
                 StatementType statementType,
                 bool whereClause
-            ) { }
+            )
+            {
+            }
 
-            protected override void SetRowUpdatingHandler(DbDataAdapter adapter) { }
+            protected override void SetRowUpdatingHandler(DbDataAdapter adapter)
+            {
+            }
         }
     }
 }

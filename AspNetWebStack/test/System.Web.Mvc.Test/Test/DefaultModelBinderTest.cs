@@ -1586,7 +1586,9 @@ namespace System.Web.Mvc.Test
         private class CreateComplexElementalModelBindingContext_ReadsBindAttributeFromBuddyClass_Model
         {
             [Bind(Include = "foo")]
-            private class CreateComplexElementalModelBindingContext_ReadsBindAttributeFromBuddyClass_Model_BuddyClass { }
+            private class CreateComplexElementalModelBindingContext_ReadsBindAttributeFromBuddyClass_Model_BuddyClass
+            {
+            }
         }
 
         [Fact]
@@ -2621,7 +2623,9 @@ namespace System.Web.Mvc.Test
             public int ReadWriteProperty2 { get; set; }
         }
 
-        private class MyClassWithoutConverter { }
+        private class MyClassWithoutConverter
+        {
+        }
 
         [Bind(Exclude = "Alpha,Echo")]
         private class MyOtherModel
@@ -2767,7 +2771,9 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private class SimpleController : Controller { }
+        private class SimpleController : Controller
+        {
+        }
 
         public class DefaultModelBinderHelper : DefaultModelBinder
         {
@@ -2980,7 +2986,9 @@ namespace System.Web.Mvc.Test
         }
 
         [Bind(Exclude = "Foo")]
-        private class ModelWithBindAttribute : ModelWithoutBindAttribute { }
+        private class ModelWithBindAttribute : ModelWithoutBindAttribute
+        {
+        }
 
         private class ModelWithoutBindAttribute
         {
@@ -3197,7 +3205,9 @@ namespace System.Web.Mvc.Test
         public class MinMaxValidationAttribute : ValidationAttribute
         {
             public MinMaxValidationAttribute()
-                : base("Minimum must be less than or equal to Maximum") { }
+                : base("Minimum must be less than or equal to Maximum")
+            {
+            }
 
             public override bool IsValid(object value)
             {
@@ -3262,9 +3272,13 @@ namespace System.Web.Mvc.Test
 
         public class AlwaysInvalidAttribute : ValidationAttribute
         {
-            public AlwaysInvalidAttribute() { }
+            public AlwaysInvalidAttribute()
+            {
+            }
 
-            public AlwaysInvalidAttribute(string message) : base(message) { }
+            public AlwaysInvalidAttribute(string message) : base(message)
+            {
+            }
 
             public override bool IsValid(object value)
             {
@@ -3273,7 +3287,9 @@ namespace System.Web.Mvc.Test
         }
 
         [AlwaysInvalid("The object just isn't right")]
-        public class OnModelUpdatedModelNoParameters { }
+        public class OnModelUpdatedModelNoParameters
+        {
+        }
 
         [Fact]
         public void OnModelUpdatedWithValidationAttributeNoParameters()
@@ -3294,7 +3310,9 @@ namespace System.Web.Mvc.Test
         }
 
         [AlwaysInvalid]
-        public class OnModelUpdatedModelNoValidationResult { }
+        public class OnModelUpdatedModelNoValidationResult
+        {
+        }
 
         [Fact]
         [ReplaceCulture]
@@ -3577,7 +3595,9 @@ namespace System.Web.Mvc.Test
 
         class TestableDefaultModelBinder<TModel> : DefaultModelBinder where TModel : new()
         {
-            public TestableDefaultModelBinder() : this(new TModel()) { }
+            public TestableDefaultModelBinder() : this(new TModel())
+            {
+            }
 
             public TestableDefaultModelBinder(TModel model)
             {
@@ -3669,7 +3689,9 @@ namespace System.Web.Mvc.Test
 
         private class NoParameterlessCtor
         {
-            private NoParameterlessCtor() { }
+            private NoParameterlessCtor()
+            {
+            }
         }
     }
 }

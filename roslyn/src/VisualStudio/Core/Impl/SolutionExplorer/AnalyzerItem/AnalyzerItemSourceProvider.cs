@@ -25,7 +25,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerItemSourceProvider() { }
+        public AnalyzerItemSourceProvider()
+        {
+        }
 
         protected override IAttachedCollectionSource CreateCollectionSource(
             AnalyzersFolderItem analyzersFolder,

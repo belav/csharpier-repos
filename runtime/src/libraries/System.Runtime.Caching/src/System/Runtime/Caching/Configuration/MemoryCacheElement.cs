@@ -57,7 +57,9 @@ namespace System.Runtime.Caching.Configuration
                 s_propPollingInterval
             };
 
-        internal MemoryCacheElement() { }
+        internal MemoryCacheElement()
+        {
+        }
 
         public MemoryCacheElement(string name)
         {

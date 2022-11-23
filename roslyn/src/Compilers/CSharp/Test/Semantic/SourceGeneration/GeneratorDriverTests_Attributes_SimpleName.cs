@@ -51,7 +51,11 @@ class C {{ }}
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -103,7 +107,11 @@ class C {{ }}
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -149,7 +157,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<DelegateDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -188,7 +200,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<DelegateDeclarationSyntax>("YAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -227,7 +243,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<SyntaxNode>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -275,7 +295,11 @@ class D { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -329,7 +353,11 @@ class D { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -384,7 +412,11 @@ class D { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -441,7 +473,11 @@ class C
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -496,7 +532,11 @@ namespace N
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -542,7 +582,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -588,7 +632,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("X");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -634,7 +682,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -689,7 +741,11 @@ class C {{ }}
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -737,7 +793,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -785,7 +845,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -826,7 +890,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -871,7 +939,11 @@ namespace N
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -924,7 +996,11 @@ namespace N
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -976,7 +1052,11 @@ namespace N
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1028,7 +1108,11 @@ namespace N
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1070,7 +1154,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1112,7 +1200,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1154,7 +1246,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1196,7 +1292,11 @@ using A = XAttribute;
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1238,7 +1338,11 @@ using AAttribute = XAttribute;
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1283,7 +1387,11 @@ class C {{ }}
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1336,7 +1444,11 @@ class C {{ }}
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1389,7 +1501,11 @@ global using {alias};
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1439,7 +1555,11 @@ using B = AAttribute;
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1482,7 +1602,11 @@ global using BAttribute = AAttribute;
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1525,7 +1649,11 @@ global using AAttribute = XAttribute;
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1575,7 +1703,11 @@ global using AAttribute = XAttribute;
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1627,7 +1759,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1719,7 +1855,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1817,7 +1957,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -1917,7 +2061,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2022,7 +2170,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2131,7 +2283,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2238,7 +2394,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2309,7 +2469,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2409,7 +2573,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2507,7 +2675,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2611,7 +2783,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2715,7 +2891,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 
@@ -2834,7 +3014,11 @@ class C { }
             new PipelineCallbackGenerator(ctx =>
             {
                 var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("XAttribute");
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) => {
+                    }
+                );
             })
         );
 

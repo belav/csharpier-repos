@@ -10,7 +10,9 @@ namespace TypeSystemTests
 {
     public class ExceptionStringTests
     {
-        public ExceptionStringTests() { }
+        public ExceptionStringTests()
+        {
+        }
 
         [Fact]
         public void TestAllExceptionIdsHaveMessages()

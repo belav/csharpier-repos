@@ -318,6 +318,8 @@ namespace System.Web.Http.Results
             return new HttpRequestMessage();
         }
 
-        private class FakeController : ApiController { }
+        private class FakeController : ApiController
+        {
+        }
     }
 }

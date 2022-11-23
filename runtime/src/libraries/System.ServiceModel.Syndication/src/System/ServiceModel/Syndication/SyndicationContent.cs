@@ -12,7 +12,9 @@ namespace System.ServiceModel.Syndication
     {
         private Dictionary<XmlQualifiedName, string> _attributeExtensions;
 
-        protected SyndicationContent() { }
+        protected SyndicationContent()
+        {
+        }
 
         protected SyndicationContent(SyndicationContent source) => CopyAttributeExtensions(source);
 

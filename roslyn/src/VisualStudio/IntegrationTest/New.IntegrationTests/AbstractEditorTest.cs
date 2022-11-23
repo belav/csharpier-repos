@@ -16,10 +16,14 @@ namespace Roslyn.VisualStudio.IntegrationTests
         private readonly string? _solutionName;
         private readonly string? _projectTemplate;
 
-        protected AbstractEditorTest() { }
+        protected AbstractEditorTest()
+        {
+        }
 
         protected AbstractEditorTest(string solutionName)
-            : this(solutionName, WellKnownProjectTemplates.ClassLibrary) { }
+            : this(solutionName, WellKnownProjectTemplates.ClassLibrary)
+        {
+        }
 
         protected AbstractEditorTest(string solutionName, string projectTemplate)
         {

@@ -11,6 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpRegexDiagnosticAnalyzer : AbstractRegexDiagnosticAnalyzer
     {
-        public CSharpRegexDiagnosticAnalyzer() : base(CSharpEmbeddedLanguagesProvider.Info) { }
+        public CSharpRegexDiagnosticAnalyzer() : base(CSharpEmbeddedLanguagesProvider.Info)
+        {
+        }
     }
 }

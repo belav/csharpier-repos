@@ -163,76 +163,110 @@ namespace System.Net.Sockets
 
     public partial class IPv6MulticastOption
     {
-        public IPv6MulticastOption(System.Net.IPAddress group) { }
+        public IPv6MulticastOption(System.Net.IPAddress group)
+        {
+        }
 
-        public IPv6MulticastOption(System.Net.IPAddress group, long ifindex) { }
+        public IPv6MulticastOption(System.Net.IPAddress group, long ifindex)
+        {
+        }
 
         public System.Net.IPAddress Group
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long InterfaceIndex
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class LingerOption
     {
-        public LingerOption(bool enable, int seconds) { }
+        public LingerOption(bool enable, int seconds)
+        {
+        }
 
         public bool Enabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int LingerTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class MulticastOption
     {
-        public MulticastOption(System.Net.IPAddress group) { }
+        public MulticastOption(System.Net.IPAddress group)
+        {
+        }
 
-        public MulticastOption(System.Net.IPAddress group, int interfaceIndex) { }
+        public MulticastOption(System.Net.IPAddress group, int interfaceIndex)
+        {
+        }
 
-        public MulticastOption(System.Net.IPAddress group, System.Net.IPAddress mcint) { }
+        public MulticastOption(System.Net.IPAddress group, System.Net.IPAddress mcint)
+        {
+        }
 
         public System.Net.IPAddress Group
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int InterfaceIndex
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.IPAddress? LocalAddress
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class NetworkStream : System.IO.Stream
     {
-        public NetworkStream(System.Net.Sockets.Socket socket) { }
+        public NetworkStream(System.Net.Sockets.Socket socket)
+        {
+        }
 
-        public NetworkStream(System.Net.Sockets.Socket socket, bool ownsSocket) { }
+        public NetworkStream(System.Net.Sockets.Socket socket, bool ownsSocket)
+        {
+        }
 
-        public NetworkStream(System.Net.Sockets.Socket socket, System.IO.FileAccess access) { }
+        public NetworkStream(System.Net.Sockets.Socket socket, System.IO.FileAccess access)
+        {
+        }
 
         public NetworkStream(
             System.Net.Sockets.Socket socket,
             System.IO.FileAccess access,
             bool ownsSocket
-        ) { }
+        )
+        {
+        }
 
         public override bool CanRead
         {
@@ -261,17 +295,23 @@ namespace System.Net.Sockets
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected bool Readable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int ReadTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.Socket Socket
         {
@@ -280,12 +320,16 @@ namespace System.Net.Sockets
         protected bool Writeable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int WriteTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.IAsyncResult BeginRead(
@@ -310,22 +354,34 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Close(int timeout) { }
+        public void Close(int timeout)
+        {
+        }
 
-        public void Close(System.TimeSpan timeout) { }
+        public void Close(System.TimeSpan timeout)
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override int EndRead(System.IAsyncResult asyncResult)
         {
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        ~NetworkStream() { }
+        ~NetworkStream()
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -373,11 +429,17 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Write(System.ReadOnlySpan<byte> buffer) { }
+        public override void Write(System.ReadOnlySpan<byte> buffer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -398,7 +460,9 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 
     public enum ProtocolFamily
@@ -470,10 +534,14 @@ namespace System.Net.Sockets
     public sealed partial class SafeSocketHandle
         : Microsoft.Win32.SafeHandles.SafeHandleMinusOneIsInvalid
     {
-        public SafeSocketHandle() : base(default(bool)) { }
+        public SafeSocketHandle() : base(default(bool))
+        {
+        }
 
         public SafeSocketHandle(System.IntPtr preexistingHandle, bool ownsHandle)
-            : base(default(bool)) { }
+            : base(default(bool))
+        {
+        }
 
         public override bool IsInvalid
         {
@@ -495,36 +563,62 @@ namespace System.Net.Sockets
 
     public partial class SendPacketsElement
     {
-        public SendPacketsElement(byte[] buffer) { }
+        public SendPacketsElement(byte[] buffer)
+        {
+        }
 
-        public SendPacketsElement(byte[] buffer, int offset, int count) { }
+        public SendPacketsElement(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public SendPacketsElement(byte[] buffer, int offset, int count, bool endOfPacket) { }
+        public SendPacketsElement(byte[] buffer, int offset, int count, bool endOfPacket)
+        {
+        }
 
-        public SendPacketsElement(System.IO.FileStream fileStream) { }
+        public SendPacketsElement(System.IO.FileStream fileStream)
+        {
+        }
 
-        public SendPacketsElement(System.IO.FileStream fileStream, long offset, int count) { }
+        public SendPacketsElement(System.IO.FileStream fileStream, long offset, int count)
+        {
+        }
 
         public SendPacketsElement(
             System.IO.FileStream fileStream,
             long offset,
             int count,
             bool endOfPacket
-        ) { }
+        )
+        {
+        }
 
-        public SendPacketsElement(System.ReadOnlyMemory<byte> buffer) { }
+        public SendPacketsElement(System.ReadOnlyMemory<byte> buffer)
+        {
+        }
 
-        public SendPacketsElement(System.ReadOnlyMemory<byte> buffer, bool endOfPacket) { }
+        public SendPacketsElement(System.ReadOnlyMemory<byte> buffer, bool endOfPacket)
+        {
+        }
 
-        public SendPacketsElement(string filepath) { }
+        public SendPacketsElement(string filepath)
+        {
+        }
 
-        public SendPacketsElement(string filepath, int offset, int count) { }
+        public SendPacketsElement(string filepath, int offset, int count)
+        {
+        }
 
-        public SendPacketsElement(string filepath, int offset, int count, bool endOfPacket) { }
+        public SendPacketsElement(string filepath, int offset, int count, bool endOfPacket)
+        {
+        }
 
-        public SendPacketsElement(string filepath, long offset, int count) { }
+        public SendPacketsElement(string filepath, long offset, int count)
+        {
+        }
 
-        public SendPacketsElement(string filepath, long offset, int count, bool endOfPacket) { }
+        public SendPacketsElement(string filepath, long offset, int count, bool endOfPacket)
+        {
+        }
 
         public byte[]? Buffer
         {
@@ -566,17 +660,25 @@ namespace System.Net.Sockets
             System.Net.Sockets.AddressFamily addressFamily,
             System.Net.Sockets.SocketType socketType,
             System.Net.Sockets.ProtocolType protocolType
-        ) { }
+        )
+        {
+        }
 
-        public Socket(System.Net.Sockets.SafeSocketHandle handle) { }
+        public Socket(System.Net.Sockets.SafeSocketHandle handle)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public Socket(System.Net.Sockets.SocketInformation socketInformation) { }
+        public Socket(System.Net.Sockets.SocketInformation socketInformation)
+        {
+        }
 
         public Socket(
             System.Net.Sockets.SocketType socketType,
             System.Net.Sockets.ProtocolType protocolType
-        ) { }
+        )
+        {
+        }
 
         public System.Net.Sockets.AddressFamily AddressFamily
         {
@@ -589,7 +691,9 @@ namespace System.Net.Sockets
         public bool Blocking
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Connected
         {
@@ -598,22 +702,30 @@ namespace System.Net.Sockets
         public bool DontFragment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool DualMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnableBroadcast
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ExclusiveAddressUse
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IntPtr Handle
         {
@@ -628,7 +740,9 @@ namespace System.Net.Sockets
         public System.Net.Sockets.LingerOption? LingerState
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.EndPoint? LocalEndPoint
         {
@@ -637,12 +751,16 @@ namespace System.Net.Sockets
         public bool MulticastLoopback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool NoDelay
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static bool OSSupportsIPv4
         {
@@ -663,12 +781,16 @@ namespace System.Net.Sockets
         public int ReceiveBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReceiveTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.EndPoint? RemoteEndPoint
         {
@@ -681,12 +803,16 @@ namespace System.Net.Sockets
         public int SendBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int SendTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.SocketType SocketType
         {
@@ -707,7 +833,9 @@ namespace System.Net.Sockets
         public short Ttl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -717,7 +845,9 @@ namespace System.Net.Sockets
         public bool UseOnlyOverlappedIO
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Net.Sockets.Socket Accept()
@@ -981,21 +1111,37 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Bind(System.Net.EndPoint localEP) { }
+        public void Bind(System.Net.EndPoint localEP)
+        {
+        }
 
-        public static void CancelConnectAsync(System.Net.Sockets.SocketAsyncEventArgs e) { }
+        public static void CancelConnectAsync(System.Net.Sockets.SocketAsyncEventArgs e)
+        {
+        }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Close(int timeout) { }
+        public void Close(int timeout)
+        {
+        }
 
-        public void Connect(System.Net.EndPoint remoteEP) { }
+        public void Connect(System.Net.EndPoint remoteEP)
+        {
+        }
 
-        public void Connect(System.Net.IPAddress address, int port) { }
+        public void Connect(System.Net.IPAddress address, int port)
+        {
+        }
 
-        public void Connect(System.Net.IPAddress[] addresses, int port) { }
+        public void Connect(System.Net.IPAddress[] addresses, int port)
+        {
+        }
 
-        public void Connect(string host, int port) { }
+        public void Connect(string host, int port)
+        {
+        }
 
         public System.Threading.Tasks.Task ConnectAsync(System.Net.EndPoint remoteEP)
         {
@@ -1066,7 +1212,9 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Disconnect(bool reuseSocket) { }
+        public void Disconnect(bool reuseSocket)
+        {
+        }
 
         public System.Threading.Tasks.ValueTask DisconnectAsync(
             bool reuseSocket,
@@ -1082,9 +1230,13 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public System.Net.Sockets.SocketInformation DuplicateAndClose(int targetProcessId)
@@ -1114,9 +1266,13 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void EndConnect(System.IAsyncResult asyncResult) { }
+        public void EndConnect(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public void EndDisconnect(System.IAsyncResult asyncResult) { }
+        public void EndDisconnect(System.IAsyncResult asyncResult)
+        {
+        }
 
         public int EndReceive(System.IAsyncResult asyncResult)
         {
@@ -1159,14 +1315,18 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void EndSendFile(System.IAsyncResult asyncResult) { }
+        public void EndSendFile(System.IAsyncResult asyncResult)
+        {
+        }
 
         public int EndSendTo(System.IAsyncResult asyncResult)
         {
             throw null;
         }
 
-        ~Socket() { }
+        ~Socket()
+        {
+        }
 
         public int GetRawSocketOption(
             int optionLevel,
@@ -1189,7 +1349,9 @@ namespace System.Net.Sockets
             System.Net.Sockets.SocketOptionLevel optionLevel,
             System.Net.Sockets.SocketOptionName optionName,
             byte[] optionValue
-        ) { }
+        )
+        {
+        }
 
         public byte[] GetSocketOption(
             System.Net.Sockets.SocketOptionLevel optionLevel,
@@ -1214,9 +1376,13 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Listen() { }
+        public void Listen()
+        {
+        }
 
-        public void Listen(int backlog) { }
+        public void Listen(int backlog)
+        {
+        }
 
         public bool Poll(int microSeconds, System.Net.Sockets.SelectMode mode)
         {
@@ -1519,14 +1685,18 @@ namespace System.Net.Sockets
             System.Collections.IList? checkWrite,
             System.Collections.IList? checkError,
             int microSeconds
-        ) { }
+        )
+        {
+        }
 
         public static void Select(
             System.Collections.IList? checkRead,
             System.Collections.IList? checkWrite,
             System.Collections.IList? checkError,
             System.TimeSpan timeout
-        ) { }
+        )
+        {
+        }
 
         public int Send(byte[] buffer)
         {
@@ -1660,21 +1830,27 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void SendFile(string? fileName) { }
+        public void SendFile(string? fileName)
+        {
+        }
 
         public void SendFile(
             string? fileName,
             byte[]? preBuffer,
             byte[]? postBuffer,
             System.Net.Sockets.TransmitFileOptions flags
-        ) { }
+        )
+        {
+        }
 
         public void SendFile(
             string? fileName,
             System.ReadOnlySpan<byte> preBuffer,
             System.ReadOnlySpan<byte> postBuffer,
             System.Net.Sockets.TransmitFileOptions flags
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.ValueTask SendFileAsync(
             string? fileName,
@@ -1795,51 +1971,71 @@ namespace System.Net.Sockets
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public void SetIPProtectionLevel(System.Net.Sockets.IPProtectionLevel level) { }
+        public void SetIPProtectionLevel(System.Net.Sockets.IPProtectionLevel level)
+        {
+        }
 
         public void SetRawSocketOption(
             int optionLevel,
             int optionName,
             System.ReadOnlySpan<byte> optionValue
-        ) { }
+        )
+        {
+        }
 
         public void SetSocketOption(
             System.Net.Sockets.SocketOptionLevel optionLevel,
             System.Net.Sockets.SocketOptionName optionName,
             bool optionValue
-        ) { }
+        )
+        {
+        }
 
         public void SetSocketOption(
             System.Net.Sockets.SocketOptionLevel optionLevel,
             System.Net.Sockets.SocketOptionName optionName,
             byte[] optionValue
-        ) { }
+        )
+        {
+        }
 
         public void SetSocketOption(
             System.Net.Sockets.SocketOptionLevel optionLevel,
             System.Net.Sockets.SocketOptionName optionName,
             int optionValue
-        ) { }
+        )
+        {
+        }
 
         public void SetSocketOption(
             System.Net.Sockets.SocketOptionLevel optionLevel,
             System.Net.Sockets.SocketOptionName optionName,
             object optionValue
-        ) { }
+        )
+        {
+        }
 
-        public void Shutdown(System.Net.Sockets.SocketShutdown how) { }
+        public void Shutdown(System.Net.Sockets.SocketShutdown how)
+        {
+        }
     }
 
     public partial class SocketAsyncEventArgs : System.EventArgs, System.IDisposable
     {
-        public SocketAsyncEventArgs() { }
+        public SocketAsyncEventArgs()
+        {
+        }
 
-        public SocketAsyncEventArgs(bool unsafeSuppressExecutionContextFlow) { }
+        public SocketAsyncEventArgs(bool unsafeSuppressExecutionContextFlow)
+        {
+        }
 
         public System.Net.Sockets.Socket? AcceptSocket
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[]? Buffer
         {
@@ -1848,7 +2044,9 @@ namespace System.Net.Sockets
         public System.Collections.Generic.IList<System.ArraySegment<byte>>? BufferList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int BytesTransferred
         {
@@ -1869,7 +2067,9 @@ namespace System.Net.Sockets
         public bool DisconnectReuseSocket
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.SocketAsyncOperation LastOperation
         {
@@ -1890,55 +2090,85 @@ namespace System.Net.Sockets
         public System.Net.EndPoint? RemoteEndPoint
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.SendPacketsElement[]? SendPacketsElements
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.TransmitFileOptions SendPacketsFlags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int SendPacketsSendSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.SocketError SocketError
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Sockets.SocketFlags SocketFlags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object? UserToken
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.EventHandler<System.Net.Sockets.SocketAsyncEventArgs>? Completed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        ~SocketAsyncEventArgs() { }
+        ~SocketAsyncEventArgs()
+        {
+        }
 
-        protected virtual void OnCompleted(System.Net.Sockets.SocketAsyncEventArgs e) { }
+        protected virtual void OnCompleted(System.Net.Sockets.SocketAsyncEventArgs e)
+        {
+        }
 
-        public void SetBuffer(byte[]? buffer, int offset, int count) { }
+        public void SetBuffer(byte[]? buffer, int offset, int count)
+        {
+        }
 
-        public void SetBuffer(int offset, int count) { }
+        public void SetBuffer(int offset, int count)
+        {
+        }
 
-        public void SetBuffer(System.Memory<byte> buffer) { }
+        public void SetBuffer(System.Memory<byte> buffer)
+        {
+        }
     }
 
     public enum SocketAsyncOperation
@@ -1976,12 +2206,16 @@ namespace System.Net.Sockets
         public System.Net.Sockets.SocketInformationOptions Options
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] ProtocolInformation
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -2336,18 +2570,28 @@ namespace System.Net.Sockets
 
     public partial class TcpClient : System.IDisposable
     {
-        public TcpClient() { }
+        public TcpClient()
+        {
+        }
 
-        public TcpClient(System.Net.IPEndPoint localEP) { }
+        public TcpClient(System.Net.IPEndPoint localEP)
+        {
+        }
 
-        public TcpClient(System.Net.Sockets.AddressFamily family) { }
+        public TcpClient(System.Net.Sockets.AddressFamily family)
+        {
+        }
 
-        public TcpClient(string hostname, int port) { }
+        public TcpClient(string hostname, int port)
+        {
+        }
 
         protected bool Active
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Available
         {
@@ -2356,7 +2600,9 @@ namespace System.Net.Sockets
         public System.Net.Sockets.Socket Client
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Connected
         {
@@ -2365,39 +2611,53 @@ namespace System.Net.Sockets
         public bool ExclusiveAddressUse
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.Net.Sockets.LingerOption? LingerState
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool NoDelay
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReceiveBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReceiveTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int SendBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int SendTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.IAsyncResult BeginConnect(
@@ -2430,15 +2690,25 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Connect(System.Net.IPAddress address, int port) { }
+        public void Connect(System.Net.IPAddress address, int port)
+        {
+        }
 
-        public void Connect(System.Net.IPAddress[] ipAddresses, int port) { }
+        public void Connect(System.Net.IPAddress[] ipAddresses, int port)
+        {
+        }
 
-        public void Connect(System.Net.IPEndPoint remoteEP) { }
+        public void Connect(System.Net.IPEndPoint remoteEP)
+        {
+        }
 
-        public void Connect(string hostname, int port) { }
+        public void Connect(string hostname, int port)
+        {
+        }
 
         public System.Threading.Tasks.Task ConnectAsync(System.Net.IPAddress address, int port)
         {
@@ -2495,13 +2765,21 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public void EndConnect(System.IAsyncResult asyncResult) { }
+        public void EndConnect(System.IAsyncResult asyncResult)
+        {
+        }
 
-        ~TcpClient() { }
+        ~TcpClient()
+        {
+        }
 
         public System.Net.Sockets.NetworkStream GetStream()
         {
@@ -2514,11 +2792,17 @@ namespace System.Net.Sockets
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use TcpListener(IPAddress localaddr, int port) instead."
         )]
-        public TcpListener(int port) { }
+        public TcpListener(int port)
+        {
+        }
 
-        public TcpListener(System.Net.IPAddress localaddr, int port) { }
+        public TcpListener(System.Net.IPAddress localaddr, int port)
+        {
+        }
 
-        public TcpListener(System.Net.IPEndPoint localEP) { }
+        public TcpListener(System.Net.IPEndPoint localEP)
+        {
+        }
 
         protected bool Active
         {
@@ -2527,7 +2811,9 @@ namespace System.Net.Sockets
         public bool ExclusiveAddressUse
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.EndPoint LocalEndpoint
         {
@@ -2573,7 +2859,9 @@ namespace System.Net.Sockets
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public void AllowNatTraversal(bool allowed) { }
+        public void AllowNatTraversal(bool allowed)
+        {
+        }
 
         public System.IAsyncResult BeginAcceptSocket(System.AsyncCallback? callback, object? state)
         {
@@ -2608,11 +2896,17 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Start() { }
+        public void Start()
+        {
+        }
 
-        public void Start(int backlog) { }
+        public void Start(int backlog)
+        {
+        }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -2634,22 +2928,36 @@ namespace System.Net.Sockets
 
     public partial class UdpClient : System.IDisposable
     {
-        public UdpClient() { }
+        public UdpClient()
+        {
+        }
 
-        public UdpClient(int port) { }
+        public UdpClient(int port)
+        {
+        }
 
-        public UdpClient(int port, System.Net.Sockets.AddressFamily family) { }
+        public UdpClient(int port, System.Net.Sockets.AddressFamily family)
+        {
+        }
 
-        public UdpClient(System.Net.IPEndPoint localEP) { }
+        public UdpClient(System.Net.IPEndPoint localEP)
+        {
+        }
 
-        public UdpClient(System.Net.Sockets.AddressFamily family) { }
+        public UdpClient(System.Net.Sockets.AddressFamily family)
+        {
+        }
 
-        public UdpClient(string hostname, int port) { }
+        public UdpClient(string hostname, int port)
+        {
+        }
 
         protected bool Active
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Available
         {
@@ -2658,36 +2966,50 @@ namespace System.Net.Sockets
         public System.Net.Sockets.Socket Client
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool DontFragment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnableBroadcast
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ExclusiveAddressUse
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool MulticastLoopback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public short Ttl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public void AllowNatTraversal(bool allowed) { }
+        public void AllowNatTraversal(bool allowed)
+        {
+        }
 
         public System.IAsyncResult BeginReceive(
             System.AsyncCallback? requestCallback,
@@ -2730,21 +3052,37 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Connect(System.Net.IPAddress addr, int port) { }
+        public void Connect(System.Net.IPAddress addr, int port)
+        {
+        }
 
-        public void Connect(System.Net.IPEndPoint endPoint) { }
+        public void Connect(System.Net.IPEndPoint endPoint)
+        {
+        }
 
-        public void Connect(string hostname, int port) { }
+        public void Connect(string hostname, int port)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public void DropMulticastGroup(System.Net.IPAddress multicastAddr) { }
+        public void DropMulticastGroup(System.Net.IPAddress multicastAddr)
+        {
+        }
 
-        public void DropMulticastGroup(System.Net.IPAddress multicastAddr, int ifindex) { }
+        public void DropMulticastGroup(System.Net.IPAddress multicastAddr, int ifindex)
+        {
+        }
 
         public byte[] EndReceive(
             System.IAsyncResult asyncResult,
@@ -2759,16 +3097,24 @@ namespace System.Net.Sockets
             throw null;
         }
 
-        public void JoinMulticastGroup(int ifindex, System.Net.IPAddress multicastAddr) { }
+        public void JoinMulticastGroup(int ifindex, System.Net.IPAddress multicastAddr)
+        {
+        }
 
-        public void JoinMulticastGroup(System.Net.IPAddress multicastAddr) { }
+        public void JoinMulticastGroup(System.Net.IPAddress multicastAddr)
+        {
+        }
 
-        public void JoinMulticastGroup(System.Net.IPAddress multicastAddr, int timeToLive) { }
+        public void JoinMulticastGroup(System.Net.IPAddress multicastAddr, int timeToLive)
+        {
+        }
 
         public void JoinMulticastGroup(
             System.Net.IPAddress multicastAddr,
             System.Net.IPAddress localAddress
-        ) { }
+        )
+        {
+        }
 
         public byte[] Receive(
             [System.Diagnostics.CodeAnalysis.NotNullAttribute] ref System.Net.IPEndPoint? remoteEP
@@ -2929,7 +3275,9 @@ namespace System.Net.Sockets
 
     public sealed partial class UnixDomainSocketEndPoint : System.Net.EndPoint
     {
-        public UnixDomainSocketEndPoint(string path) { }
+        public UnixDomainSocketEndPoint(string path)
+        {
+        }
 
         public override System.Net.Sockets.AddressFamily AddressFamily
         {

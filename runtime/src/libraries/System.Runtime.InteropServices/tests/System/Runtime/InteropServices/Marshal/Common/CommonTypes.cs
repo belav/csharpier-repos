@@ -4,32 +4,52 @@
 namespace System.Runtime.InteropServices.Tests.Common
 {
     [ComVisible(true)]
-    public class GenericClass<T> { }
+    public class GenericClass<T>
+    {
+    }
 
     [ComVisible(true)]
-    public class NonGenericClass { }
+    public class NonGenericClass
+    {
+    }
 
     [ComVisible(true)]
-    public class AbstractClass { }
+    public class AbstractClass
+    {
+    }
 
     [ComVisible(true)]
-    public struct GenericStruct<T> { }
+    public struct GenericStruct<T>
+    {
+    }
 
     [ComVisible(true)]
-    public struct NonGenericStruct { }
+    public struct NonGenericStruct
+    {
+    }
 
     [ComVisible(true)]
-    public interface IGenericInterface<T> { }
+    public interface IGenericInterface<T>
+    {
+    }
 
     [ComVisible(true)]
-    public interface INonGenericInterface { }
+    public interface INonGenericInterface
+    {
+    }
 
     [ComVisible(false)]
-    public interface INonComVisibleInterface { }
+    public interface INonComVisibleInterface
+    {
+    }
 
     [ComVisible(false)]
-    public class NonComVisibleClass { }
+    public class NonComVisibleClass
+    {
+    }
 
     [ComVisible(false)]
-    public struct NonComVisibleStruct { }
+    public struct NonComVisibleStruct
+    {
+    }
 }

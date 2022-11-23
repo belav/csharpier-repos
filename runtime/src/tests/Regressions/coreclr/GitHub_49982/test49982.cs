@@ -12,7 +12,9 @@ using System.Runtime.InteropServices;
 
 class Program
 {
-    private class MockEndPoint : EndPoint { }
+    private class MockEndPoint : EndPoint
+    {
+    }
 
     private sealed class ExtendedSocketException : SocketException
     {

@@ -240,8 +240,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             =>
             null;
 
-        public void StartCaching() { }
+        public void StartCaching()
+        {
+        }
 
-        public void StopCaching() { }
+        public void StopCaching()
+        {
+        }
     }
 }

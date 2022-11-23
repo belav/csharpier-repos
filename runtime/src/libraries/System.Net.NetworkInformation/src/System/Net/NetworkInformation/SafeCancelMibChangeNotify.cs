@@ -11,7 +11,9 @@ namespace System.Net.NetworkInformation
 
     internal sealed class SafeCancelMibChangeNotify : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeCancelMibChangeNotify() : base(true) { }
+        public SafeCancelMibChangeNotify() : base(true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

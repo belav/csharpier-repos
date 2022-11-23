@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class NorthwindDbFunctionsQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindDbFunctionsQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindDbFunctionsQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

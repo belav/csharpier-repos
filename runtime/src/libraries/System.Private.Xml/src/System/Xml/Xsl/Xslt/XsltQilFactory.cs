@@ -13,7 +13,9 @@ namespace System.Xml.Xsl.Xslt
 {
     internal sealed class XsltQilFactory : XPathQilFactory
     {
-        public XsltQilFactory(QilFactory f, bool debug) : base(f, debug) { }
+        public XsltQilFactory(QilFactory f, bool debug) : base(f, debug)
+        {
+        }
 
         [Conditional("DEBUG")]
         public void CheckXsltType(QilNode n)

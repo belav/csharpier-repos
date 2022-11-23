@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertToProgramMainCodeRefactoringProvider() { }
+        public ConvertToProgramMainCodeRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

@@ -52,5 +52,7 @@ public abstract class ConnectionInfo
     /// <summary>
     /// Close connection gracefully.
     /// </summary>
-    public virtual void RequestClose() { }
+    public virtual void RequestClose()
+    {
+    }
 }

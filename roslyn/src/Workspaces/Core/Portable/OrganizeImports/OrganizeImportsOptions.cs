@@ -26,12 +26,16 @@ internal readonly record struct OrganizeImportsOptions
     [DataMember]
     public string NewLine { get; init; } = LineFormattingOptions.Default.NewLine;
 
-    public OrganizeImportsOptions() { }
+    public OrganizeImportsOptions()
+    {
+    }
 
     public static readonly OrganizeImportsOptions Default = new();
 }
 
-internal interface OrganizeImportsOptionsProvider : OptionsProvider<OrganizeImportsOptions> { }
+internal interface OrganizeImportsOptionsProvider : OptionsProvider<OrganizeImportsOptions>
+{
+}
 
 internal static class OrganizeImportsOptionsProviders
 {

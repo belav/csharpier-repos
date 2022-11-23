@@ -187,7 +187,9 @@ namespace System.Speech.Internal.Synthesis
             return null;
         }
 
-        public void EndProcessTextBlock(bool isParagraph) { }
+        public void EndProcessTextBlock(bool isParagraph)
+        {
+        }
 
         public void ProcessPhoneme(
             ref FragmentState fragmentState,
@@ -373,7 +375,9 @@ namespace System.Speech.Internal.Synthesis
             ref FragmentState fragmentState,
             string sElement,
             List<SsmlXmlAttribute> extraAttributes
-        ) { }
+        )
+        {
+        }
 
         #region Prompt Engine
 
@@ -443,7 +447,9 @@ namespace System.Speech.Internal.Synthesis
             return ProcessPromptEngine("tts");
         }
 
-        public void EndPromptEngineTts(object voice) { }
+        public void EndPromptEngineTts(object voice)
+        {
+        }
 
         public bool BeginPromptEngineWithTag(object voice, string tag)
         {
@@ -453,7 +459,9 @@ namespace System.Speech.Internal.Synthesis
             );
         }
 
-        public void EndPromptEngineWithTag(object voice, string tag) { }
+        public void EndPromptEngineWithTag(object voice, string tag)
+        {
+        }
 
         public bool BeginPromptEngineRule(object voice, string name)
         {
@@ -466,9 +474,13 @@ namespace System.Speech.Internal.Synthesis
             );
         }
 
-        public void EndPromptEngineRule(object voice, string name) { }
+        public void EndPromptEngineRule(object voice, string name)
+        {
+        }
 
-        public void EndPromptEngineOutput(object voice) { }
+        public void EndPromptEngineOutput(object voice)
+        {
+        }
 
         #endregion
 

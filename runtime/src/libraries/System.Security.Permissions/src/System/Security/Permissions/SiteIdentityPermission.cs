@@ -12,9 +12,13 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class SiteIdentityPermission : CodeAccessPermission
     {
-        public SiteIdentityPermission(PermissionState state) { }
+        public SiteIdentityPermission(PermissionState state)
+        {
+        }
 
-        public SiteIdentityPermission(string site) { }
+        public SiteIdentityPermission(string site)
+        {
+        }
 
         public string Site { get; set; }
 
@@ -23,7 +27,9 @@ namespace System.Security.Permissions
             return default(IPermission);
         }
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

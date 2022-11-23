@@ -24,9 +24,13 @@ namespace System.Security.Cryptography
             throw new PlatformNotSupportedException();
         }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) => default!;
 

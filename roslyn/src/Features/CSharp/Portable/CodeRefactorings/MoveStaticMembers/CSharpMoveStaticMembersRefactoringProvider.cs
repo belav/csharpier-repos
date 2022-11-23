@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.MoveStaticMembers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMoveStaticMembersRefactoringProvider() : base() { }
+        public CSharpMoveStaticMembersRefactoringProvider() : base()
+        {
+        }
 
         protected override Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(
             CodeRefactoringContext context

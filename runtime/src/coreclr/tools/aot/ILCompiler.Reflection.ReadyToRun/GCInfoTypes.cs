@@ -264,7 +264,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         public int SpOffset { get; set; }
         public GcStackSlotBase Base { get; set; }
 
-        public GcStackSlot() { }
+        public GcStackSlot()
+        {
+        }
 
         public GcStackSlot(int spOffset, GcStackSlotBase stackSlotBase)
         {

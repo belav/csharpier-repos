@@ -8,5 +8,7 @@ public class AuthMiddlewareAndFilterTest
 {
     public AuthMiddlewareAndFilterTest(
         MvcTestFixture<SecurityWebSite.StartupWithGlobalAuthFilter> fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 }

@@ -56,7 +56,9 @@ namespace System.Collections.Generic
         private sealed class OrdinalComparer : RandomizedStringEqualityComparer
         {
             internal OrdinalComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer) { }
+                : base(wrappedComparer)
+            {
+            }
 
             public override bool Equals(string? x, string? y) => string.Equals(x, y);
 
@@ -81,7 +83,9 @@ namespace System.Collections.Generic
         private sealed class OrdinalIgnoreCaseComparer : RandomizedStringEqualityComparer
         {
             internal OrdinalIgnoreCaseComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer) { }
+                : base(wrappedComparer)
+            {
+            }
 
             public override bool Equals(string? x, string? y) =>
                 string.EqualsOrdinalIgnoreCase(x, y);

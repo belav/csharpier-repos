@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 parameters: ImmutableArray.Create(fromType),
                 returnTypeAttributes: toTypeAttributes,
                 documentationCommentXml
-            ) { }
+            )
+        {
+        }
 
         public override MethodKind MethodKind => MethodKind.Conversion;
     }

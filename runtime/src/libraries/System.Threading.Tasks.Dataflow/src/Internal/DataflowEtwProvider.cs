@@ -33,7 +33,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal static readonly DataflowEtwProvider Log = new DataflowEtwProvider();
 
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
-        private DataflowEtwProvider() { }
+        private DataflowEtwProvider()
+        {
+        }
 
         /// <summary>Enabled for all keywords.</summary>
         private const EventKeywords ALL_KEYWORDS = (EventKeywords)(-1);
@@ -180,7 +182,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
                                 completionTask.Exception!.InnerExceptions.Select(e => e.ToString())
                             );
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
 
                     DataflowBlockCompleted(Common.GetBlockId(block), reason, exceptionData);

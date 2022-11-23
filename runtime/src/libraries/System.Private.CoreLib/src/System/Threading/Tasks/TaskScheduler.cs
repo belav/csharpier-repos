@@ -219,7 +219,9 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Notifies the scheduler that a work item has made progress.
         /// </summary>
-        internal virtual void NotifyWorkItemProgress() { }
+        internal virtual void NotifyWorkItemProgress()
+        {
+        }
 
         /// <summary>
         /// Indicates whether this is a custom scheduler, in which case the safe code paths will be taken upon task entry
@@ -564,7 +566,9 @@ namespace System.Threading.Tasks
 
             public bool IsCompleted => false;
 
-            public void GetResult() { }
+            public void GetResult()
+            {
+            }
 
             public void OnCompleted(Action continuation) =>
                 Task.Factory.StartNew(

@@ -5,7 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-public class ProgramException : Exception { }
+public class ProgramException : Exception
+{
+}
 
 public sealed class ProgramSubclass : Program
 {

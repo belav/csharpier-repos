@@ -45,7 +45,9 @@ namespace System.Threading.Tasks.Tests.Status
         AttachedToParent = TaskCreationOptions.AttachedToParent
     }
 
-    public class StatusTestException : Exception { }
+    public class StatusTestException : Exception
+    {
+    }
 
     #endregion
 
@@ -128,7 +130,8 @@ namespace System.Threading.Tasks.Tests.Status
 
                             // Replace _task with a task that has a custom scheduler
                             _task = Task.Factory.StartNew(
-                                () => { },
+                                () => {
+                                },
                                 cts.Token,
                                 TaskCreationOptions.None,
                                 scheduler
@@ -843,7 +846,13 @@ namespace System.Threading.Tasks.Tests.Status
         {
             yield return new object[] { new StrongBox<Task>(Task.CompletedTask) };
 
-            yield return new object[] { new StrongBox<Task>(new Task(() => { })) };
+            yield return new object[]
+            {
+                new StrongBox<Task>(
+                    new Task(() => {
+                    })
+                )
+            };
 
             yield return new object[] { new StrongBox<Task>(new TaskCompletionSource<int>().Task) };
 
@@ -866,7 +875,8 @@ namespace System.Threading.Tasks.Tests.Status
             }
 
             {
-                var t = Task.Run(() => { });
+                var t = Task.Run(() => {
+                });
                 t.Wait();
                 yield return new object[] { new StrongBox<Task>(t) };
             }

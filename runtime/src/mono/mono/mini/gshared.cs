@@ -37,7 +37,9 @@ class GFoo3<T>
     public T t,
         t2;
 
-    public GFoo3() { }
+    public GFoo3()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public GFoo3(T i1, T i2)
@@ -490,7 +492,9 @@ public class Tests
         {
             eh_in<int>(1, 2);
         }
-        catch (OverflowException) { }
+        catch (OverflowException)
+        {
+        }
         return 0;
     }
 
@@ -928,7 +932,9 @@ public class Tests
         }
     }
 
-    enum ENUM_TYPE { }
+    enum ENUM_TYPE
+    {
+    }
 
     public static int test_0_regress_5156()
     {
@@ -941,7 +947,9 @@ public class Tests
         public Action a;
     }
 
-    public class D { }
+    public class D
+    {
+    }
 
     public class A3
     {
@@ -1042,10 +1050,14 @@ public class Tests
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static void arm_params1<T>(T t1, T t2, T t3, T t4, T t5, T t6) { }
+    static void arm_params1<T>(T t1, T t2, T t3, T t4, T t5, T t6)
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static void arm_params2<T>(T t1, T t2, T t3, long t4, T t5, T t6) { }
+    static void arm_params2<T>(T t1, T t2, T t3, long t4, T t5, T t6)
+    {
+    }
 
     public static int test_0_arm_param_passing()
     {
@@ -1155,15 +1167,25 @@ public class Tests
 
     public class ClassIFace<T> : IFace1<T>
     {
-        public void m1() { }
+        public void m1()
+        {
+        }
 
-        public void m2() { }
+        public void m2()
+        {
+        }
 
-        public void m3() { }
+        public void m3()
+        {
+        }
 
-        public void m4() { }
+        public void m4()
+        {
+        }
 
-        public void m5() { }
+        public void m5()
+        {
+        }
     }
 
     interface IFaceIFaceCall
@@ -1503,7 +1525,9 @@ public class Tests
         }
     }
 
-    class BClass : Base<long, long> { }
+    class BClass : Base<long, long>
+    {
+    }
 
     public static int test_0_regress_1()
     {
@@ -1541,7 +1565,9 @@ public class Tests
             o.unbox_any<int>(2.0);
             return 4;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return 0;
     }
 
@@ -1610,7 +1636,9 @@ public class Tests
             e.Enumerate(null);
             return 1;
         }
-        catch (NullReferenceException) { }
+        catch (NullReferenceException)
+        {
+        }
         return 0;
     }
 
@@ -1655,7 +1683,9 @@ public class Tests
     public class TAbstractTableItem<TC>
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void SetProperty<TV>() { }
+        public static void SetProperty<TV>()
+        {
+        }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test()
@@ -1814,7 +1844,9 @@ public class Tests
             throw new Exception();
         }
 
-        public void foo_ref_arg(string s, string s2) { }
+        public void foo_ref_arg(string s, string s2)
+        {
+        }
     }
 
     interface IFaceConstrained
@@ -2039,7 +2071,9 @@ public class Tests
         return 0;
     }
 
-    struct EmptyStruct { }
+    struct EmptyStruct
+    {
+    }
 
     public struct BStruct
     {
@@ -2638,7 +2672,9 @@ public class Tests
 
     class AssertEqualityComparer<T> : IEqualityComparer<T>
     {
-        public AssertEqualityComparer() { }
+        public AssertEqualityComparer()
+        {
+        }
 
         public bool Equals(T x, T y)
         {
@@ -3059,7 +3095,9 @@ public class MobileServiceCollection<TTable, TCol>
 // #59956
 internal struct Marker
 {
-    public Marker(int count, int index) { }
+    public Marker(int count, int index)
+    {
+    }
 }
 
 public struct ArrayBuilder<T>
@@ -3116,5 +3154,7 @@ public class H : Outer<object>.ID
 #endif
 
 #if !__MOBILE__
-public class GSharedTests : Tests { }
+public class GSharedTests : Tests
+{
+}
 #endif

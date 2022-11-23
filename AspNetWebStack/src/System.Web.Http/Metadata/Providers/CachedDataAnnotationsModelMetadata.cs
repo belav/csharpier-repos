@@ -12,7 +12,9 @@ namespace System.Web.Http.Metadata.Providers
         public CachedDataAnnotationsModelMetadata(
             CachedDataAnnotationsModelMetadata prototype,
             Func<object> modelAccessor
-        ) : base(prototype, modelAccessor) { }
+        ) : base(prototype, modelAccessor)
+        {
+        }
 
         public CachedDataAnnotationsModelMetadata(
             DataAnnotationsModelMetadataProvider provider,
@@ -27,7 +29,9 @@ namespace System.Web.Http.Metadata.Providers
                 modelType,
                 propertyName,
                 new CachedDataAnnotationsMetadataAttributes(attributes)
-            ) { }
+            )
+        {
+        }
 
         protected override bool ComputeConvertEmptyStringToNull()
         {

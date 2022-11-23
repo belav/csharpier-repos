@@ -37,7 +37,9 @@ public class Bridge
         m,
         n;
 
-    ~Bridge() { }
+    ~Bridge()
+    {
+    }
 }
 
 class Driver

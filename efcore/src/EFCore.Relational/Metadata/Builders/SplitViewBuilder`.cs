@@ -22,7 +22,9 @@ public class SplitViewBuilder<TEntity>
     public SplitViewBuilder(
         in StoreObjectIdentifier storeObject,
         EntityTypeBuilder<TEntity> entityTypeBuilder
-    ) : base(storeObject, entityTypeBuilder) { }
+    ) : base(storeObject, entityTypeBuilder)
+    {
+    }
 
     private EntityTypeBuilder<TEntity> EntityTypeBuilder =>
         (EntityTypeBuilder<TEntity>)((IInfrastructure<EntityTypeBuilder>)this).GetInfrastructure();

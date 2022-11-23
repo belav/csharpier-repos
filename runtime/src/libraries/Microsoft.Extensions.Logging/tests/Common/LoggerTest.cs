@@ -216,7 +216,9 @@ namespace Microsoft.Extensions.Logging.Test
             });
 
             var newLogger = factory.CreateLogger("Logger");
-            using (newLogger.BeginScope("Scope")) { }
+            using (newLogger.BeginScope("Scope"))
+            {
+            }
 
             provider.Verify(p => p.CreateLogger("Logger"), Times.Once);
             logger.Verify(l => l.BeginScope(It.IsAny<object>()), Times.Never);
@@ -246,7 +248,9 @@ namespace Microsoft.Extensions.Logging.Test
             });
 
             var newLogger = factory.CreateLogger("Logger");
-            using (newLogger.BeginScope("Scope")) { }
+            using (newLogger.BeginScope("Scope"))
+            {
+            }
 
             provider.Verify(p => p.CreateLogger("Logger"), Times.Once);
             logger.Verify(l => l.BeginScope(It.IsAny<object>()), Times.Never);
@@ -369,7 +373,9 @@ namespace Microsoft.Extensions.Logging.Test
                 return new CustomLogger($"{_providerName}.{name}", _throwExceptionAt, _store);
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         private class CustomLogger : ILogger

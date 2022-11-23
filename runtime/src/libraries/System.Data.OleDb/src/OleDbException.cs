@@ -134,7 +134,9 @@ namespace System.Data.OleDb
         internal sealed class ErrorCodeConverter : Int32Converter
         {
             // converter classes should have public ctor
-            public ErrorCodeConverter() { }
+            public ErrorCodeConverter()
+            {
+            }
 
             public override object? ConvertTo(
                 ITypeDescriptorContext? context,

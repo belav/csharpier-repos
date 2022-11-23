@@ -1,11 +1,17 @@
 using System;
 using System.Reflection;
 
-public class HostExpression { }
+public class HostExpression
+{
+}
 
-public class OMetaStream<T> { }
+public class OMetaStream<T>
+{
+}
 
-public class OMetaList<T> { }
+public class OMetaList<T>
+{
+}
 
 public class OMetaParser
 {

@@ -260,7 +260,9 @@ namespace SerializationTestTypes
     [DataContract(Namespace = "")]
     public class UknownEmptyNSAddress : EmptyNSAddress
     {
-        public UknownEmptyNSAddress() { }
+        public UknownEmptyNSAddress()
+        {
+        }
     }
 
     [DataContract(Namespace = "")]
@@ -291,7 +293,9 @@ namespace SerializationTestTypes
     }
 
     [DataContract(IsReference = true)]
-    public class PreferredCustomerProxy : PreferredCustomer { }
+    public class PreferredCustomerProxy : PreferredCustomer
+    {
+    }
 
     [DataContract]
     public class UnknownEmployee

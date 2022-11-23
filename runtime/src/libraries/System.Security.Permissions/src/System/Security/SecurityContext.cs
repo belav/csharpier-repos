@@ -14,7 +14,9 @@ namespace System.Security
 #endif
     public sealed partial class SecurityContext : System.IDisposable
     {
-        internal SecurityContext() { }
+        internal SecurityContext()
+        {
+        }
 
         public static SecurityContext Capture()
         {

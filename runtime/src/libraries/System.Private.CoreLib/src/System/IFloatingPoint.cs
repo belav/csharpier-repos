@@ -332,5 +332,7 @@ namespace System
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
     public interface IBinaryFloatingPoint<TSelf> : IBinaryNumber<TSelf>, IFloatingPoint<TSelf>
-        where TSelf : IBinaryFloatingPoint<TSelf> { }
+        where TSelf : IBinaryFloatingPoint<TSelf>
+    {
+    }
 }

@@ -41,7 +41,8 @@ internal interface AddImportPlacementOptionsProvider
 #if !CODE_STYLE
     : OptionsProvider<AddImportPlacementOptions>
 #endif
-{ }
+{
+}
 
 internal static partial class AddImportPlacementOptionsProviders
 {

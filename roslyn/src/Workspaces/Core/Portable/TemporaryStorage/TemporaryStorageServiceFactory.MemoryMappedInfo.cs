@@ -82,7 +82,9 @@ namespace Microsoft.CodeAnalysis.Host
                     name,
                     offset,
                     size
-                ) { }
+                )
+            {
+            }
 
             /// <summary>
             /// The name of the memory mapped file.

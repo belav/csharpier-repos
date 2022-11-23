@@ -1631,7 +1631,8 @@ namespace System.Diagnostics.Metrics.Tests
             double? refreshInterval,
             params string[]? instruments
         ) : this(output, keywords, Guid.NewGuid().ToString(), refreshInterval, 50, 50, instruments)
-        { }
+        {
+        }
 
         public MetricsEventListener(
             ITestOutputHelper output,
@@ -1649,7 +1650,9 @@ namespace System.Diagnostics.Metrics.Tests
                 timeSeriesLimit,
                 histogramLimit,
                 instruments
-            ) { }
+            )
+        {
+        }
 
         public MetricsEventListener(
             ITestOutputHelper output,
@@ -1671,7 +1674,9 @@ namespace System.Diagnostics.Metrics.Tests
                     instruments,
                     sessionId
                 )
-            ) { }
+            )
+        {
+        }
 
         private static Dictionary<string, string> FormatArgDictionary(
             double? refreshInterval,

@@ -34,9 +34,13 @@ namespace Castle.Services.Logging.Log4netIntegration
             Factory = factory;
         }
 
-        internal Log4netLogger() { }
+        internal Log4netLogger()
+        {
+        }
 
-        internal Log4netLogger(ILog log, Log4netFactory factory) : this(log.Logger, factory) { }
+        internal Log4netLogger(ILog log, Log4netFactory factory) : this(log.Logger, factory)
+        {
+        }
 
         public bool IsTraceEnabled
         {

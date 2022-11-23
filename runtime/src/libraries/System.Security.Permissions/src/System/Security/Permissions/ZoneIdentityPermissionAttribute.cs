@@ -14,7 +14,9 @@ namespace System.Security.Permissions
     public sealed partial class ZoneIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public ZoneIdentityPermissionAttribute(SecurityAction action)
-            : base(default(SecurityAction)) { }
+            : base(default(SecurityAction))
+        {
+        }
 
         public SecurityZone Zone { get; set; }
 

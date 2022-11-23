@@ -18,7 +18,9 @@ public enum Enum2 : uint
 class TypeTestFolding
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void SideEffect() { }
+    static void SideEffect()
+    {
+    }
 
     //static bool True0() => typeof(delegate*<int, double>) == typeof(delegate* unmanaged<float, void*, void>);
     //static bool True1()

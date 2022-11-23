@@ -33,7 +33,8 @@ namespace System.Linq.Expressions.Tests
 #pragma warning disable xUnit1013 // needs to be public for reflection-based test
         public void Add(ref int i)
 #pragma warning restore xUnit1013
-        { }
+        {
+        }
 
         [Fact]
         public static void ElementInit()
@@ -145,11 +146,17 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(ExpressionType.ArrayLength, uex2.NodeType);
         }
 
-        private void Method3<T, U, V>() { }
+        private void Method3<T, U, V>()
+        {
+        }
 
-        private void Method4<T, U, V, W>() { }
+        private void Method4<T, U, V, W>()
+        {
+        }
 
-        private void Method() { }
+        private void Method()
+        {
+        }
 
         [Fact]
         public static void CheckedExpressions()
@@ -682,11 +689,17 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(string), mc3.Method.GetParameters()[1].ParameterType);
         }
 
-        private void SomeMethod(int someArg) { }
+        private void SomeMethod(int someArg)
+        {
+        }
 
-        private void SomeMethod(string someArg) { }
+        private void SomeMethod(string someArg)
+        {
+        }
 
-        private void SomeMethod<A, B>(A a, B b) { }
+        private void SomeMethod<A, B>(A a, B b)
+        {
+        }
 
         [Fact]
         // this tests calling static methods by name (generic and non-generic)
@@ -1437,7 +1450,9 @@ namespace System.Linq.Expressions.Tests
             Func<Complex, Complex> v = testExpr.Compile(useInterpreter);
         }
 
-        private struct S { }
+        private struct S
+        {
+        }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
@@ -4066,7 +4081,9 @@ namespace System.Linq.Expressions.Tests
 
         public class Foo
         {
-            public Foo() { }
+            public Foo()
+            {
+            }
 
             public int Zip(int y)
             {
@@ -4081,7 +4098,9 @@ namespace System.Linq.Expressions.Tests
 
         public class Bar : Foo
         {
-            public Bar() { }
+            public Bar()
+            {
+            }
 
             public override string Virt()
             {
@@ -4665,10 +4684,14 @@ namespace System.Linq.Expressions.Tests
         }
     }
 
-    public class DerivedClass : BaseClass { }
+    public class DerivedClass : BaseClass
+    {
+    }
 
     internal class AssertionException : Exception
     {
-        public AssertionException(string msg) : base(msg) { }
+        public AssertionException(string msg) : base(msg)
+        {
+        }
     }
 }

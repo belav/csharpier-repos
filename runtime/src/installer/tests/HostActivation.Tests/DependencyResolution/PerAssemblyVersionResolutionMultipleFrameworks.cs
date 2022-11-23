@@ -98,7 +98,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
         public class SharedTestState : ComponentSharedTestStateBase
         {
-            public SharedTestState() { }
+            public SharedTestState()
+            {
+            }
 
             protected override TestApp CreateTestFrameworkReferenceApp() =>
                 CreateFrameworkReferenceApp(HighWare, "1.1.1");
@@ -182,7 +184,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             IClassFixture<PerAssemblyVersionResolutionMultipleFrameworksBase.SharedTestState>
     {
         public AppPerAssemblyVersionResolutionMultipleFrameworks(SharedTestState sharedState)
-            : base(sharedState) { }
+            : base(sharedState)
+        {
+        }
 
         protected override void RunTest(
             Action<RuntimeConfig> runtimeConfigCustomizer,
@@ -247,7 +251,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             IClassFixture<PerAssemblyVersionResolutionMultipleFrameworksBase.SharedTestState>
     {
         public ComponentPerAssemblyVersionResolutionMultipleFrameworks(SharedTestState sharedState)
-            : base(sharedState) { }
+            : base(sharedState)
+        {
+        }
 
         protected override void RunTest(
             Action<RuntimeConfig> runtimeConfigCustomizer,

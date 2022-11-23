@@ -14,7 +14,9 @@ namespace System.Data.Common
         private ushort[] _values = default!; // Late-initialized
 
         public UInt16Storage(DataColumn column)
-            : base(column, typeof(ushort), DefaultValue, StorageType.UInt16) { }
+            : base(column, typeof(ushort), DefaultValue, StorageType.UInt16)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

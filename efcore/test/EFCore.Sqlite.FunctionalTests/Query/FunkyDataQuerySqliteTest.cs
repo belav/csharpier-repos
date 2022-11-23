@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class FunkyDataQuerySqliteTest
     : FunkyDataQueryTestBase<FunkyDataQuerySqliteTest.FunkyDataQuerySqliteFixture>
 {
-    public FunkyDataQuerySqliteTest(FunkyDataQuerySqliteFixture fixture) : base(fixture) { }
+    public FunkyDataQuerySqliteTest(FunkyDataQuerySqliteFixture fixture) : base(fixture)
+    {
+    }
 
     protected virtual bool CanExecuteQueryString => false;
 

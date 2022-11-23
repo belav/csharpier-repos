@@ -16,9 +16,13 @@ namespace System.Net.Http
                     ((int)protocolError).ToString("x")
                 ),
                 protocolError
-            ) { }
+            )
+        {
+        }
 
         private Http2StreamException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

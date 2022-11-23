@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class AwaitKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public AwaitKeywordRecommender() : base(SyntaxKind.AwaitKeyword) { }
+        public AwaitKeywordRecommender() : base(SyntaxKind.AwaitKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

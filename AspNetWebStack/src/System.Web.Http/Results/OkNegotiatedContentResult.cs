@@ -42,7 +42,9 @@ namespace System.Web.Http.Results
                     request,
                     formatters
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OkNegotiatedContentResult{T}"/> class with the values
@@ -54,7 +56,9 @@ namespace System.Web.Http.Results
             : this(
                 content,
                 new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller)
-            ) { }
+            )
+        {
+        }
 
         private OkNegotiatedContentResult(
             T content,

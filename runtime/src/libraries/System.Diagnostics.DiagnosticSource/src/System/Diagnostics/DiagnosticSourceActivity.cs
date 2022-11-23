@@ -78,7 +78,9 @@ namespace System.Diagnostics
         /// particular instrumentation site and the subscriber will know the type of
         /// the payload and thus cast it and decode it if it needs to.
         /// </summary>
-        public virtual void OnActivityImport(Activity activity, object? payload) { }
+        public virtual void OnActivityImport(Activity activity, object? payload)
+        {
+        }
 
         /// <summary>
         /// Optional: If an instrumentation site is at a location where activities leave the
@@ -104,7 +106,9 @@ namespace System.Diagnostics
         /// particular instrumentation site and the subscriber should know the type of
         /// the payload and thus cast it and decode it if it needs to.
         /// </summary>
-        public virtual void OnActivityExport(Activity activity, object? payload) { }
+        public virtual void OnActivityExport(Activity activity, object? payload)
+        {
+        }
     }
 
     public partial class DiagnosticListener

@@ -370,7 +370,9 @@ public class IncludedMember : IEquatable<IncludedMember>
                 string.Join("", memberExpression.GetMembersChain().Select(m => m.Name))
             ),
             memberExpression
-        ) { }
+        )
+    {
+    }
 
     private IncludedMember(
         TypeMap typeMap,

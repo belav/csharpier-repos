@@ -286,7 +286,9 @@ internal static unsafe partial class HttpApi
         {
             return HttpIsFeatureSupported(feature);
         }
-        catch (EntryPointNotFoundException) { }
+        catch (EntryPointNotFoundException)
+        {
+        }
 
         return false;
     }

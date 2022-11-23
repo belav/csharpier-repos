@@ -19,6 +19,8 @@ namespace Castle.DynamicProxy.Tests.Classes
         public ClassWithAttributesOnConstructorParameters(
             [Required(1)] int intParam,
             [Required("test")] string stringParam
-        ) { }
+        )
+        {
+        }
     }
 }

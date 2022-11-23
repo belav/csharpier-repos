@@ -126,7 +126,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.BaseStream.WriteByte(DEFAULT_BYTE);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 VerifyTimeout(com);
             }
@@ -161,7 +163,9 @@ namespace System.IO.Ports.Tests
                 {
                     com1.BaseStream.WriteByte(DEFAULT_BYTE);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 asyncEnableRts.Stop();
                 TCSupport.WaitForTaskCompletion(t);
@@ -341,7 +345,9 @@ namespace System.IO.Ports.Tests
             {
                 com.BaseStream.WriteByte(DEFAULT_BYTE); // Warm up write method
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
@@ -352,7 +358,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.BaseStream.WriteByte(DEFAULT_BYTE);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 timer.Stop();
 
@@ -451,7 +459,9 @@ namespace System.IO.Ports.Tests
             {
                 com.BaseStream.Write(randomData, 0, randomData.Length);
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
         }
 
         #endregion

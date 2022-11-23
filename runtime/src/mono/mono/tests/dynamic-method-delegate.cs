@@ -76,5 +76,7 @@ class Program
         return 0;
     }
 
-    ~Program() { }
+    ~Program()
+    {
+    }
 }

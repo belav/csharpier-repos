@@ -60,10 +60,9 @@ namespace System.Text.Json.Serialization
             Debug.Assert(state.Current.ReturnValue is TCollection);
         }
 
-        protected virtual void ConvertCollection(
-            ref ReadStack state,
-            JsonSerializerOptions options
-        ) { }
+        protected virtual void ConvertCollection(ref ReadStack state, JsonSerializerOptions options)
+        {
+        }
 
         protected static JsonConverter<TElement> GetElementConverter(JsonTypeInfo elementTypeInfo)
         {

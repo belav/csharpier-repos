@@ -7,9 +7,13 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public interface I0 { }
+public interface I0
+{
+}
 
-public interface I1 { }
+public interface I1
+{
+}
 
 public class C0 : I0, I1
 {

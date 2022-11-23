@@ -112,7 +112,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         protected void UpdateVersion_NoLock() => _lastVersion++;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private bool TryGetLastSnapshot(int version, out ITableEntriesSnapshot lastSnapshot)
         {
@@ -217,7 +219,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         version,
                         ImmutableArray<TItem>.Empty,
                         ImmutableArray<ITrackingPoint>.Empty
-                    ) { }
+                    )
+                {
+                }
 
                 public override bool TryNavigateTo(
                     int index,

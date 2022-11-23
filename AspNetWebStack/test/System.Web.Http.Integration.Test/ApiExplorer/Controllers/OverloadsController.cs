@@ -57,9 +57,13 @@ namespace System.Web.Http.ApiExplorer
             return null;
         }
 
-        public void Delete(int id, string name = "Default Name") { }
+        public void Delete(int id, string name = "Default Name")
+        {
+        }
 
-        public void Delete(int id, string name, int age) { }
+        public void Delete(int id, string name, int age)
+        {
+        }
 
         public class Person
         {

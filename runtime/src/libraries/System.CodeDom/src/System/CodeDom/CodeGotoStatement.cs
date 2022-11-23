@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _label;
 
-        public CodeGotoStatement() { }
+        public CodeGotoStatement()
+        {
+        }
 
         public CodeGotoStatement(string label)
         {

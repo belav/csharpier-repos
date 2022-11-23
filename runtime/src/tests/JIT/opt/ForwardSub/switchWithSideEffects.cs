@@ -8,7 +8,9 @@ using System.Runtime.CompilerServices;
 
 public class SwitchWithSideEffects
 {
-    public struct S1 { }
+    public struct S1
+    {
+    }
 
     public struct S2
     {

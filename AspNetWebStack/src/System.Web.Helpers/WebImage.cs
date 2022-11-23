@@ -61,7 +61,9 @@ namespace System.Web.Helpers
         }
 
         public WebImage(string filePath)
-            : this(new HttpContextWrapper(HttpContext.Current), _defaultReadAction, filePath) { }
+            : this(new HttpContextWrapper(HttpContext.Current), _defaultReadAction, filePath)
+        {
+        }
 
         public WebImage(Stream imageStream)
         {

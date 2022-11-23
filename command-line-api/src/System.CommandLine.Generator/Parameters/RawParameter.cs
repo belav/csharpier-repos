@@ -5,7 +5,9 @@ namespace System.CommandLine.Generator.Parameters
     internal class RawParameter : PropertyParameter, IEquatable<RawParameter>
     {
         public RawParameter(string localName, ITypeSymbol valueType)
-            : base(localName, valueType, valueType) { }
+            : base(localName, valueType, valueType)
+        {
+        }
 
         public override string GetValueFromContext() => LocalName;
 

@@ -14,7 +14,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         public class HasVarargs
         {
-            public void OnlyVarargs(__arglist) { }
+            public void OnlyVarargs(__arglist)
+            {
+            }
 
             // Overloads where the varargs form could perhaps be confused with another
             public int Nullary(__arglist) => 0;
@@ -44,9 +46,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public int Value { get; }
 
-            public VarArgCtorOption(__arglist) { }
+            public VarArgCtorOption(__arglist)
+            {
+            }
 
-            public VarArgCtorOption(int i, __arglist) { }
+            public VarArgCtorOption(int i, __arglist)
+            {
+            }
 
             public VarArgCtorOption(int i) => Value = i;
         }

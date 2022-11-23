@@ -71,7 +71,9 @@ namespace Test
                     )
                 );
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException)
+            {
+            }
             return 100;
         }
     }

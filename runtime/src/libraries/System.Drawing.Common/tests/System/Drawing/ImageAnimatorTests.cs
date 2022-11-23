@@ -35,7 +35,11 @@ namespace System.Drawing.Tests
         public void Animate_Succeeds_ForNonAnimatedImages_WithNothingAnimating()
         {
             var image = new Bitmap(Helpers.GetTestBitmapPath("1bit.png"));
-            ImageAnimator.Animate(image, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -44,10 +48,18 @@ namespace System.Drawing.Tests
             var animatedImage = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif")
             );
-            ImageAnimator.Animate(animatedImage, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
 
             var image = new Bitmap(Helpers.GetTestBitmapPath("1bit.png"));
-            ImageAnimator.Animate(image, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -63,7 +75,11 @@ namespace System.Drawing.Tests
             var animatedImage = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif")
             );
-            ImageAnimator.Animate(animatedImage, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
 
             var image = new Bitmap(Helpers.GetTestBitmapPath("1bit.png"));
             ImageAnimator.UpdateFrames(image);
@@ -73,7 +89,11 @@ namespace System.Drawing.Tests
         public void StopAnimate_Succeeds_ForNonAnimatedImages_WithNothingAnimating()
         {
             var image = new Bitmap(Helpers.GetTestBitmapPath("1bit.png"));
-            ImageAnimator.StopAnimate(image, (object o, EventArgs e) => { });
+            ImageAnimator.StopAnimate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -82,10 +102,18 @@ namespace System.Drawing.Tests
             var animatedImage = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif")
             );
-            ImageAnimator.Animate(animatedImage, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
 
             var image = new Bitmap(Helpers.GetTestBitmapPath("1bit.png"));
-            ImageAnimator.StopAnimate(image, (object o, EventArgs e) => { });
+            ImageAnimator.StopAnimate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -107,7 +135,11 @@ namespace System.Drawing.Tests
         public void Animate_Succeeds_ForAnimatedImages_WithNothingAnimating()
         {
             var image = new Bitmap(Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif"));
-            ImageAnimator.Animate(image, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -116,12 +148,20 @@ namespace System.Drawing.Tests
             var animatedImage = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif")
             );
-            ImageAnimator.Animate(animatedImage, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
 
             var image = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-infinite.gif")
             );
-            ImageAnimator.Animate(image, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -139,7 +179,11 @@ namespace System.Drawing.Tests
             var animatedImage = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif")
             );
-            ImageAnimator.Animate(animatedImage, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
             ImageAnimator.UpdateFrames();
         }
 
@@ -149,7 +193,11 @@ namespace System.Drawing.Tests
             var animatedImage = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif")
             );
-            ImageAnimator.Animate(animatedImage, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
             ImageAnimator.UpdateFrames(animatedImage);
         }
 
@@ -157,7 +205,11 @@ namespace System.Drawing.Tests
         public void StopAnimate_Succeeds_ForAnimatedImages_WithNothingAnimating()
         {
             var image = new Bitmap(Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif"));
-            ImageAnimator.StopAnimate(image, (object o, EventArgs e) => { });
+            ImageAnimator.StopAnimate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -166,13 +218,25 @@ namespace System.Drawing.Tests
             var animatedImage = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-2.gif")
             );
-            ImageAnimator.Animate(animatedImage, (object o, EventArgs e) => { });
+            ImageAnimator.Animate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
 
             var image = new Bitmap(
                 Helpers.GetTestBitmapPath("animated-timer-100fps-repeat-infinite.gif")
             );
-            ImageAnimator.StopAnimate(animatedImage, (object o, EventArgs e) => { });
-            ImageAnimator.StopAnimate(image, (object o, EventArgs e) => { });
+            ImageAnimator.StopAnimate(
+                animatedImage,
+                (object o, EventArgs e) => {
+                }
+            );
+            ImageAnimator.StopAnimate(
+                image,
+                (object o, EventArgs e) => {
+                }
+            );
         }
     }
 }

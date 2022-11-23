@@ -28,7 +28,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// <param name="rootDir">The root directory that this FileSystem will use.</param>
         /// <param name="files">Collection of file names. If relative paths <paramref name="rootDir"/> will be prepended to the paths.</param>
         public InMemoryDirectoryInfo(string rootDir, IEnumerable<string>? files)
-            : this(rootDir, files, false) { }
+            : this(rootDir, files, false)
+        {
+        }
 
         private InMemoryDirectoryInfo(string rootDir, IEnumerable<string>? files, bool normalized)
         {

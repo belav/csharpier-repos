@@ -280,7 +280,9 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void BuildAndDispose()
         {
-            using (var host = new HostBuilder().Build()) { }
+            using (var host = new HostBuilder().Build())
+            {
+            }
         }
 
         [Fact]
@@ -494,7 +496,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                     }
                 );
 
-            using (hostBuilder.Build()) { }
+            using (hostBuilder.Build())
+            {
+            }
         }
 
         [Fact]
@@ -577,7 +581,10 @@ namespace Microsoft.Extensions.Hosting.Tests
                     }
                 )
                 .UseServiceProviderFactory(new FakeServiceProviderFactory())
-                .ConfigureContainer<IServiceCollection>((container) => { });
+                .ConfigureContainer<IServiceCollection>(
+                    (container) => {
+                    }
+                );
             Assert.Throws<InvalidCastException>(() => hostBuilder.Build());
         }
 
@@ -601,7 +608,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                     }
                 );
 
-            using (hostBuilder.Build()) { }
+            using (hostBuilder.Build())
+            {
+            }
         }
 
         [Fact]
@@ -685,7 +694,9 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             Assert.Equal("value", hostBuilder.Properties["key"]);
 
-            using (hostBuilder.Build()) { }
+            using (hostBuilder.Build())
+            {
+            }
         }
 
         [Fact]
@@ -801,7 +812,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 _disposable?.Dispose();
             }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(DiagnosticListener value)
             {
@@ -833,13 +846,21 @@ namespace Microsoft.Extensions.Hosting.Tests
 
         private class ServiceC
         {
-            public ServiceC(ServiceD serviceD) { }
+            public ServiceC(ServiceD serviceD)
+            {
+            }
         }
 
-        internal class ServiceD { }
+        internal class ServiceD
+        {
+        }
 
-        internal class ServiceA { }
+        internal class ServiceA
+        {
+        }
 
-        internal class ServiceB { }
+        internal class ServiceB
+        {
+        }
     }
 }

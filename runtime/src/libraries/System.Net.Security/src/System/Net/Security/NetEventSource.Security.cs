@@ -59,7 +59,9 @@ namespace System.Net
                     localId = ns.Socket.LocalEndPoint?.ToString();
                     remoteId = ns.Socket.RemoteEndPoint?.ToString();
                 }
-                catch { }
+                catch
+                {
+                }
                 ;
             }
 

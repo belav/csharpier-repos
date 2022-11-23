@@ -22,7 +22,8 @@ namespace System.Security.Permissions
         )]
 #endif
         public PrincipalPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        {
+        }
 
         public bool Authenticated { get; set; }
         public string Name { get; set; }

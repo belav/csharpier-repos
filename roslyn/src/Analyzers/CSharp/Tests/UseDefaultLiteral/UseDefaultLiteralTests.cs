@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseDefaultLiteral)]
     public class UseDefaultLiteralTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseDefaultLiteralTests(ITestOutputHelper logger) : base(logger) { }
+        public UseDefaultLiteralTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

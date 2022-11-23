@@ -22,7 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 RuntimeHelpers.EnsureSufficientExecutionStack();
                 return true;
             }
-            catch (InsufficientExecutionStackException) { }
+            catch (InsufficientExecutionStackException)
+            {
+            }
 #else
             if (RuntimeHelpers.TryEnsureSufficientExecutionStack())
             {

@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicEndConstruct(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicEndConstruct)) { }
+            : base(instanceFactory, nameof(BasicEndConstruct))
+        {
+        }
 
         [WpfFact]
         public void EndConstruct()

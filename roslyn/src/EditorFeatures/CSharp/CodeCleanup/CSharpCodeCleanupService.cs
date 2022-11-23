@@ -344,7 +344,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeCleanup
         public CSharpCodeCleanupService(
             ICodeFixService codeFixService,
             IDiagnosticAnalyzerService diagnosticAnalyzerService
-        ) : base(codeFixService, diagnosticAnalyzerService) { }
+        ) : base(codeFixService, diagnosticAnalyzerService)
+        {
+        }
 
         protected override string OrganizeImportsDescription =>
             CSharpFeaturesResources.Organize_Usings;

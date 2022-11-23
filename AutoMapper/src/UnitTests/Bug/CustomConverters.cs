@@ -91,7 +91,9 @@ public class CustomConverters : AutoMapperSpecBase
     {
         public int IntProperty { get; set; }
 
-        public IntEntity() { }
+        public IntEntity()
+        {
+        }
 
         public IntEntity(int value)
         {
@@ -103,7 +105,9 @@ public class CustomConverters : AutoMapperSpecBase
     {
         public bool IntProperty { get; set; }
 
-        public BoolModel() { }
+        public BoolModel()
+        {
+        }
 
         public BoolModel(bool value)
         {
@@ -115,7 +119,9 @@ public class CustomConverters : AutoMapperSpecBase
     {
         public int? IntProperty { get; set; }
 
-        public NullableIntEntity() { }
+        public NullableIntEntity()
+        {
+        }
 
         public NullableIntEntity(int? value)
         {

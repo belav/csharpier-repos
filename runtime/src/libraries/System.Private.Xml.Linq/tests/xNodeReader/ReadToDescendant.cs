@@ -564,13 +564,17 @@ namespace CoreXml.Test.XLinq
                     {
                         DataReader.ReadToDescendant(null);
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
 
                     try
                     {
                         DataReader.ReadToDescendant("b", null);
                     }
-                    catch (ArgumentNullException) { }
+                    catch (ArgumentNullException)
+                    {
+                    }
 
                     while (DataReader.Read())
                         ;

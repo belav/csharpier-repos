@@ -12,6 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.MultipleBlankLines
     internal sealed class CSharpMultipleBlankLinesDiagnosticAnalyzer
         : AbstractMultipleBlankLinesDiagnosticAnalyzer
     {
-        public CSharpMultipleBlankLinesDiagnosticAnalyzer() : base(CSharpSyntaxFacts.Instance) { }
+        public CSharpMultipleBlankLinesDiagnosticAnalyzer() : base(CSharpSyntaxFacts.Instance)
+        {
+        }
     }
 }

@@ -149,6 +149,8 @@ public class ControllerActionDescriptorBuilderTest
 
         public string UnboundProperty { get; set; }
 
-        public void SomeAction() { }
+        public void SomeAction()
+        {
+        }
     }
 }

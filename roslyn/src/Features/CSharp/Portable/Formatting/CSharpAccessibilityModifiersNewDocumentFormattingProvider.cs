@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Formatting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAccessibilityModifiersNewDocumentFormattingProvider() { }
+        public CSharpAccessibilityModifiersNewDocumentFormattingProvider()
+        {
+        }
 
         public async Task<Document> FormatNewDocumentAsync(
             Document document,

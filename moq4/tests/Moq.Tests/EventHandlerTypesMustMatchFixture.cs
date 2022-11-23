@@ -26,9 +26,18 @@ namespace Moq.Tests
         public void CLI_throws_if_event_handlers_do_not_have_the_exact_same_type()
         {
             var mouse = new Mouse();
-            mouse.LeftButtonClicked += new Action<Button>(delegate { });
+            mouse.LeftButtonClicked += new Action<Button>(
+                delegate
+                {
+                }
+            );
             Assert.Throws<ArgumentException>(
-                () => mouse.LeftButtonClicked += new Action<LeftButton>(delegate { })
+                () =>
+                    mouse.LeftButtonClicked += new Action<LeftButton>(
+                        delegate
+                        {
+                        }
+                    )
             );
         }
 
@@ -52,9 +61,18 @@ namespace Moq.Tests
             var mouseMock = new Mock<Mouse>();
             var mouse = mouseMock.Object;
 
-            mouse.LeftButtonClicked += new Action<Button>(delegate { });
+            mouse.LeftButtonClicked += new Action<Button>(
+                delegate
+                {
+                }
+            );
             Assert.Throws<ArgumentException>(
-                () => mouse.LeftButtonClicked += new Action<LeftButton>(delegate { })
+                () =>
+                    mouse.LeftButtonClicked += new Action<LeftButton>(
+                        delegate
+                        {
+                        }
+                    )
             );
         }
 
@@ -68,8 +86,12 @@ namespace Moq.Tests
             }
         }
 
-        public abstract class Button { }
+        public abstract class Button
+        {
+        }
 
-        public class LeftButton : Button { }
+        public class LeftButton : Button
+        {
+        }
     }
 }

@@ -63,13 +63,21 @@ namespace Microsoft.CodeAnalysis.CodeLens
             SearchCap = searchCap;
         }
 
-        public void OnStarted() { }
+        public void OnStarted()
+        {
+        }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
-        public void OnFindInDocumentStarted(Document document) { }
+        public void OnFindInDocumentStarted(Document document)
+        {
+        }
 
-        public void OnFindInDocumentCompleted(Document document) { }
+        public void OnFindInDocumentCompleted(Document document)
+        {
+        }
 
         private static bool FilterDefinition(ISymbol definition)
         {
@@ -158,7 +166,9 @@ namespace Microsoft.CodeAnalysis.CodeLens
             }
         }
 
-        public void ReportProgress(int current, int maximum) { }
+        public void ReportProgress(int current, int maximum)
+        {
+        }
 
         public void Dispose() => _aggregateCancellationTokenSource.Dispose();
     }

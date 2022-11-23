@@ -182,17 +182,23 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// No-op.
         /// </summary>
-        internal override void WriteXmlDeclaration(XmlStandalone standalone) { }
+        internal override void WriteXmlDeclaration(XmlStandalone standalone)
+        {
+        }
 
         /// <summary>
         /// No-op.
         /// </summary>
-        internal override void WriteXmlDeclaration(string xmldecl) { }
+        internal override void WriteXmlDeclaration(string xmldecl)
+        {
+        }
 
         /// <summary>
         /// No-op.
         /// </summary>
-        internal override void StartElementContent() { }
+        internal override void StartElementContent()
+        {
+        }
 
         /// <summary>
         /// Forward to WriteEndElement().

@@ -17,7 +17,9 @@ public abstract class ComponentCodeGenerationTestBase : RazorBaselineIntegration
 
     internal override RazorConfiguration Configuration => _configuration ?? base.Configuration;
 
-    protected ComponentCodeGenerationTestBase() : base(generateBaselines: null) { }
+    protected ComponentCodeGenerationTestBase() : base(generateBaselines: null)
+    {
+    }
 
     #region Basics
 

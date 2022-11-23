@@ -203,7 +203,9 @@ namespace System.Collections.Tests
 
         private class Foo
         {
-            public Foo() { }
+            public Foo()
+            {
+            }
 
             public Foo(int intValue, string stringValue)
             {

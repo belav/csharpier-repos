@@ -10,5 +10,7 @@ namespace Microsoft.CodeAnalysis
 {
     internal interface ILinkedFileMergeConflictCommentAdditionService
         : ILanguageService,
-            IMergeConflictHandler { }
+            IMergeConflictHandler
+    {
+    }
 }

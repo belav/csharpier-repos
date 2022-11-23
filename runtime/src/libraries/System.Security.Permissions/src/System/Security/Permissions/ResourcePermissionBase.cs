@@ -17,9 +17,13 @@ namespace System.Security.Permissions
         public const string Any = "*";
         public const string Local = ".";
 
-        protected ResourcePermissionBase() { }
+        protected ResourcePermissionBase()
+        {
+        }
 
-        protected ResourcePermissionBase(PermissionState state) { }
+        protected ResourcePermissionBase(PermissionState state)
+        {
+        }
 
         private static Hashtable CreateHashtable()
         {
@@ -31,9 +35,13 @@ namespace System.Security.Permissions
         protected Type PermissionAccessType { get; set; }
         protected string[] TagNames { get; set; }
 
-        protected void AddPermissionAccess(ResourcePermissionBaseEntry entry) { }
+        protected void AddPermissionAccess(ResourcePermissionBaseEntry entry)
+        {
+        }
 
-        protected void Clear() { }
+        protected void Clear()
+        {
+        }
 
         public override IPermission Copy()
         {
@@ -45,7 +53,9 @@ namespace System.Security.Permissions
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {
@@ -62,7 +72,9 @@ namespace System.Security.Permissions
             return false;
         }
 
-        protected void RemovePermissionAccess(ResourcePermissionBaseEntry entry) { }
+        protected void RemovePermissionAccess(ResourcePermissionBaseEntry entry)
+        {
+        }
 
         public override SecurityElement ToXml()
         {

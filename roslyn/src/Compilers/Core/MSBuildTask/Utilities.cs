@@ -123,7 +123,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 path = Path.GetFullPath(path);
             }
-            catch (Exception e) when (IsIoRelatedException(e)) { }
+            catch (Exception e) when (IsIoRelatedException(e))
+            {
+            }
             return path;
         }
 
@@ -133,7 +135,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 File.Delete(path);
             }
-            catch (Exception e) when (IsIoRelatedException(e)) { }
+            catch (Exception e) when (IsIoRelatedException(e))
+            {
+            }
         }
 
         internal static bool IsIoRelatedException(Exception e) =>

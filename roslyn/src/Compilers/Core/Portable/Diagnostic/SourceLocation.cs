@@ -23,9 +23,13 @@ namespace Microsoft.CodeAnalysis
             _span = span;
         }
 
-        public SourceLocation(SyntaxNode node) : this(node.SyntaxTree, node.Span) { }
+        public SourceLocation(SyntaxNode node) : this(node.SyntaxTree, node.Span)
+        {
+        }
 
-        public SourceLocation(in SyntaxToken token) : this(token.SyntaxTree!, token.Span) { }
+        public SourceLocation(in SyntaxToken token) : this(token.SyntaxTree!, token.Span)
+        {
+        }
 
         public SourceLocation(in SyntaxNodeOrToken nodeOrToken)
             : this(nodeOrToken.SyntaxTree!, nodeOrToken.Span)

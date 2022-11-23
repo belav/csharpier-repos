@@ -27,7 +27,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         protected XmlNode node;
 
         protected SysXmlNode(IXmlNamespaceSource namespaces, IXmlNode parent)
-            : base(namespaces, parent) { }
+            : base(namespaces, parent)
+        {
+        }
 
         public SysXmlNode(XmlNode node, Type type, IXmlNamespaceSource namespaces)
             : base(namespaces, null)

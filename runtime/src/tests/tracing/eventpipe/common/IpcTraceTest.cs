@@ -87,7 +87,9 @@ namespace Tracing.Tests.Common
     // to synchronize.
     public sealed class SentinelEventSource : EventSource
     {
-        private SentinelEventSource() { }
+        private SentinelEventSource()
+        {
+        }
 
         public static SentinelEventSource Log = new SentinelEventSource();
 

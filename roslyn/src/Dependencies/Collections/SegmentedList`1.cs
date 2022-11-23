@@ -1209,7 +1209,9 @@ namespace Microsoft.CodeAnalysis.Collections
                 _current = default;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

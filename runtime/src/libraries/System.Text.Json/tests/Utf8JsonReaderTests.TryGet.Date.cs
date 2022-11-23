@@ -157,7 +157,9 @@ namespace System.Text.Json.Tests
                         "Expected GetDateTime to throw FormatException due to invalid ISO 8601 input."
                     );
                 }
-                catch (FormatException) { }
+                catch (FormatException)
+                {
+                }
             }
         }
 
@@ -186,7 +188,9 @@ namespace System.Text.Json.Tests
                             "Expected GetDateTimeOffset to throw FormatException due to invalid ISO 8601 input."
                         );
                     }
-                    catch (FormatException) { }
+                    catch (FormatException)
+                    {
+                    }
                 }
             }
         }

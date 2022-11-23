@@ -12,6 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
         public static readonly PreviewWarningTag Instance = new();
 
-        private PreviewWarningTag() : base(TagId) { }
+        private PreviewWarningTag() : base(TagId)
+        {
+        }
     }
 }

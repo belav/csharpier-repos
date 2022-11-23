@@ -29,8 +29,12 @@ namespace Microsoft.Internal.Web.Utils
                 result = GetMemberValue(obj, memberName);
                 return true;
             }
-            catch (RuntimeBinderException) { }
-            catch (RuntimeBinderInternalCompilerException) { }
+            catch (RuntimeBinderException)
+            {
+            }
+            catch (RuntimeBinderInternalCompilerException)
+            {
+            }
 
             // We catch the C# specific runtime binder exceptions since we're using the C# binder in this case
             result = null;

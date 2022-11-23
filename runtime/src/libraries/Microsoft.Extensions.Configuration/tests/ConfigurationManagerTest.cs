@@ -1328,7 +1328,9 @@ namespace Microsoft.Extensions.Configuration.Test
         private class TestMemorySourceProvider : MemoryConfigurationProvider, IConfigurationSource
         {
             public TestMemorySourceProvider(Dictionary<string, string> initialData)
-                : base(new MemoryConfigurationSource { InitialData = initialData }) { }
+                : base(new MemoryConfigurationSource { InitialData = initialData })
+            {
+            }
 
             public IConfigurationProvider Build(IConfigurationBuilder builder)
             {
@@ -1345,7 +1347,9 @@ namespace Microsoft.Extensions.Configuration.Test
 
             public IChangeToken GetReloadToken() => null;
 
-            public void Load() { }
+            public void Load()
+            {
+            }
 
             public void Set(string key, string value) => throw new NotImplementedException();
 

@@ -401,70 +401,128 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 // independent.
 namespace Microsoft.AspNetCore.Mvc.ControllerFeatureProviderControllers
 {
-    public abstract class AbstractController : Controller { }
+    public abstract class AbstractController : Controller
+    {
+    }
 
-    public class DerivedAbstractController : AbstractController { }
+    public class DerivedAbstractController : AbstractController
+    {
+    }
 
-    public class StoreController : Controller { }
+    public class StoreController : Controller
+    {
+    }
 
-    public class ProductsController : ControllerBase { }
+    public class ProductsController : ControllerBase
+    {
+    }
 
-    public class Products : ControllerBase { }
-
-    [Controller]
-    public abstract class Controller { }
-
-    public abstract class NoControllerAttributeBaseController { }
-
-    public class NoSuffixNoControllerAttribute : NoControllerAttributeBaseController { }
-
-    public class OpenGenericController<T> : Controller { }
-
-    public class DerivedGenericController : OpenGenericController<string> { }
-
-    public interface ITestController { }
-
-    public class NoSuffix : Controller { }
-
-    public class NoSuffixPoco { }
-
-    public class PocoController { }
+    public class Products : ControllerBase
+    {
+    }
 
     [Controller]
-    public class CustomBase { }
+    public abstract class Controller
+    {
+    }
+
+    public abstract class NoControllerAttributeBaseController
+    {
+    }
+
+    public class NoSuffixNoControllerAttribute : NoControllerAttributeBaseController
+    {
+    }
+
+    public class OpenGenericController<T> : Controller
+    {
+    }
+
+    public class DerivedGenericController : OpenGenericController<string>
+    {
+    }
+
+    public interface ITestController
+    {
+    }
+
+    public class NoSuffix : Controller
+    {
+    }
+
+    public class NoSuffixPoco
+    {
+    }
+
+    public class PocoController
+    {
+    }
 
     [Controller]
-    public abstract class CustomAbstractBaseController { }
+    public class CustomBase
+    {
+    }
 
-    public class DescendantLevel1 : CustomBase { }
+    [Controller]
+    public abstract class CustomAbstractBaseController
+    {
+    }
 
-    public class DescendantLevel2 : DescendantLevel1 { }
+    public class DescendantLevel1 : CustomBase
+    {
+    }
 
-    public class AbstractChildWithoutSuffix : CustomAbstractBaseController { }
+    public class DescendantLevel2 : DescendantLevel1
+    {
+    }
+
+    public class AbstractChildWithoutSuffix : CustomAbstractBaseController
+    {
+    }
 
     [NonController]
-    public class BasePocoNonControllerController { }
+    public class BasePocoNonControllerController
+    {
+    }
 
     [Controller]
     public class BaseNonControllerAttributeChildControllerControllerAttributeController
-        : BaseNonControllerController { }
+        : BaseNonControllerController
+    {
+    }
 
-    public class BasePocoNonControllerControllerChild : BasePocoNonControllerController { }
-
-    [NonController]
-    public class BaseNonControllerController : Controller { }
-
-    public class BaseNonControllerControllerChild : BaseNonControllerController { }
-
-    [NonController]
-    public class NonControllerChild : Controller { }
+    public class BasePocoNonControllerControllerChild : BasePocoNonControllerController
+    {
+    }
 
     [NonController]
-    public class NonController : Controller { }
+    public class BaseNonControllerController : Controller
+    {
+    }
 
-    public class DataModelBase { }
+    public class BaseNonControllerControllerChild : BaseNonControllerController
+    {
+    }
 
-    public class EntityDataModel : DataModelBase { }
+    [NonController]
+    public class NonControllerChild : Controller
+    {
+    }
 
-    public class PersonModel : EntityDataModel { }
+    [NonController]
+    public class NonController : Controller
+    {
+    }
+
+    public class DataModelBase
+    {
+    }
+
+    public class EntityDataModel : DataModelBase
+    {
+    }
+
+    public class PersonModel : EntityDataModel
+    {
+    }
 }

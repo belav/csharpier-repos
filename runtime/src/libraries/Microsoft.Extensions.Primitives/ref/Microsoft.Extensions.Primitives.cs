@@ -8,7 +8,9 @@ namespace Microsoft.Extensions.Primitives
 {
     public partial class CancellationChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
-        public CancellationChangeToken(System.Threading.CancellationToken cancellationToken) { }
+        public CancellationChangeToken(System.Threading.CancellationToken cancellationToken)
+        {
+        }
 
         public bool ActiveChangeCallbacks
         {
@@ -52,7 +54,9 @@ namespace Microsoft.Extensions.Primitives
     {
         public CompositeChangeToken(
             System.Collections.Generic.IReadOnlyList<Microsoft.Extensions.Primitives.IChangeToken> changeTokens
-        ) { }
+        )
+        {
+        }
 
         public bool ActiveChangeCallbacks
         {
@@ -346,7 +350,9 @@ namespace Microsoft.Extensions.Primitives
         : System.Collections.Generic.IComparer<Microsoft.Extensions.Primitives.StringSegment>,
             System.Collections.Generic.IEqualityComparer<Microsoft.Extensions.Primitives.StringSegment>
     {
-        internal StringSegmentComparer() { }
+        internal StringSegmentComparer()
+        {
+        }
 
         public static Microsoft.Extensions.Primitives.StringSegmentComparer Ordinal
         {
@@ -436,14 +442,18 @@ namespace Microsoft.Extensions.Primitives
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
@@ -487,7 +497,9 @@ namespace Microsoft.Extensions.Primitives
         string? System.Collections.Generic.IList<System.String?>.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static Microsoft.Extensions.Primitives.StringValues Concat(
@@ -719,9 +731,13 @@ namespace Microsoft.Extensions.Primitives
             throw null;
         }
 
-        void System.Collections.Generic.ICollection<System.String?>.Add(string? item) { }
+        void System.Collections.Generic.ICollection<System.String?>.Add(string? item)
+        {
+        }
 
-        void System.Collections.Generic.ICollection<System.String?>.Clear() { }
+        void System.Collections.Generic.ICollection<System.String?>.Clear()
+        {
+        }
 
         bool System.Collections.Generic.ICollection<System.String?>.Contains(string? item)
         {
@@ -731,7 +747,9 @@ namespace Microsoft.Extensions.Primitives
         void System.Collections.Generic.ICollection<System.String?>.CopyTo(
             string?[] array,
             int arrayIndex
-        ) { }
+        )
+        {
+        }
 
         bool System.Collections.Generic.ICollection<System.String?>.Remove(string? item)
         {
@@ -748,9 +766,13 @@ namespace Microsoft.Extensions.Primitives
             throw null;
         }
 
-        void System.Collections.Generic.IList<System.String?>.Insert(int index, string? item) { }
+        void System.Collections.Generic.IList<System.String?>.Insert(int index, string? item)
+        {
+        }
 
-        void System.Collections.Generic.IList<System.String?>.RemoveAt(int index) { }
+        void System.Collections.Generic.IList<System.String?>.RemoveAt(int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -789,14 +811,18 @@ namespace Microsoft.Extensions.Primitives
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            void System.Collections.IEnumerator.Reset() { }
+            void System.Collections.IEnumerator.Reset()
+            {
+            }
         }
     }
 }

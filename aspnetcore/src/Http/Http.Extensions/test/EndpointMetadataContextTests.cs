@@ -24,7 +24,8 @@ public class EndpointMetadataContextTests
     [Fact]
     public void EndpointMetadataContext_Ctor_ThrowsArgumentNullException_WhenMetadataIsNull()
     {
-        Delegate handler = (int id) => { };
+        Delegate handler = (int id) => {
+        };
         var method = handler.GetMethodInfo();
 
         Assert.Throws<ArgumentNullException>(() => new EndpointMetadataContext(method, null, null));
@@ -41,7 +42,8 @@ public class EndpointMetadataContextTests
     [Fact]
     public void EndpointParameterMetadataContext_Ctor_ThrowsArgumentNullException_WhenMetadataIsNull()
     {
-        Delegate handler = (int id) => { };
+        Delegate handler = (int id) => {
+        };
         var parameter = handler.GetMethodInfo().GetParameters()[0];
 
         Assert.Throws<ArgumentNullException>(

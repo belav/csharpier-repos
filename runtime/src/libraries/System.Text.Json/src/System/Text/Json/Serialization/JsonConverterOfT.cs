@@ -17,7 +17,9 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// When overridden, constructs a new <see cref="JsonConverter{T}"/> instance.
         /// </summary>
-        protected internal JsonConverter() : this(initialize: true) { }
+        protected internal JsonConverter() : this(initialize: true)
+        {
+        }
 
         internal JsonConverter(bool initialize)
         {

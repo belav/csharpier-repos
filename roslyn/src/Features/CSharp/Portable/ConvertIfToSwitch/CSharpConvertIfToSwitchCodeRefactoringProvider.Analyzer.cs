@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
         private sealed class CSharpAnalyzer : Analyzer
         {
             public CSharpAnalyzer(ISyntaxFacts syntaxFacts, Feature features)
-                : base(syntaxFacts, features) { }
+                : base(syntaxFacts, features)
+            {
+            }
 
             public override bool HasUnreachableEndPoint(IOperation operation) =>
                 !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax).EndPointIsReachable;

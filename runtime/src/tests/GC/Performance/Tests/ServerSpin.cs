@@ -99,7 +99,9 @@ public class ServerSpin
     }
 
     public ServerSpin(int depth, int numIterations, int numThreads)
-        : this(depth, numIterations, numThreads, 1024 * 1024) { }
+        : this(depth, numIterations, numThreads, 1024 * 1024)
+    {
+    }
 
     public static void Usage()
     {

@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.AbstractKeyword,
         };
 
-        public OverrideKeywordRecommender() : base(SyntaxKind.OverrideKeyword) { }
+        public OverrideKeywordRecommender() : base(SyntaxKind.OverrideKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

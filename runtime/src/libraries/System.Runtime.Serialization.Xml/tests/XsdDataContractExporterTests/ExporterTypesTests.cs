@@ -366,7 +366,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
 #pragma warning disable CS0169, CS0414
-        public class NoDataContract { }
+        public class NoDataContract
+        {
+        }
 
         [DataContract]
         public class DataContractWithValidMember
@@ -383,7 +385,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
         public class NoDataContractWithoutParameterlessConstructor
         {
-            public NoDataContractWithoutParameterlessConstructor(string init) { }
+            public NoDataContractWithoutParameterlessConstructor(string init)
+            {
+            }
         }
 
         [DataContract]
@@ -414,7 +418,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
         [DataContract(Name = "BaseOrder")]
-        public class BaseOrder { }
+        public class BaseOrder
+        {
+        }
 
         [DataContract(Name = "Order")]
         public class OrderD : BaseOrder
@@ -493,7 +499,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
         [DataContract(Name = "Enum")]
-        public enum EnumA : long { }
+        public enum EnumA : long
+        {
+        }
 
         [DataContract(Name = "Enum")]
         public enum EnumB : long
@@ -541,34 +549,52 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
         [Serializable]
-        public class Engineer : Employee { }
+        public class Engineer : Employee
+        {
+        }
 
         [Serializable]
         [KnownType(typeof(Admin))]
-        public class Admin : Employee { }
+        public class Admin : Employee
+        {
+        }
 
         [Serializable]
         [KnownType(typeof(Person))]
-        public class Architect : Employee { }
+        public class Architect : Employee
+        {
+        }
 
         [CollectionDataContract(Name = "MyCollection", ItemName = "MyItemA")]
-        public class CollectionA : List<int> { }
+        public class CollectionA : List<int>
+        {
+        }
 
         [CollectionDataContract(Name = "MyCollection", ItemName = "MyItemB")]
-        public class CollectionB : List<int> { }
+        public class CollectionB : List<int>
+        {
+        }
 
         [CollectionDataContract(Name = "MyDictionary", KeyName = "MyKeyA")]
-        public class DictionaryA : Dictionary<string, int> { }
+        public class DictionaryA : Dictionary<string, int>
+        {
+        }
 
         [CollectionDataContract(Name = "MyDictionary", KeyName = "MyKeyB")]
-        public class DictionaryB : Dictionary<string, int> { }
+        public class DictionaryB : Dictionary<string, int>
+        {
+        }
 
         [CollectionDataContract(KeyName = "MyName", ValueName = "MyName")]
-        public class KeyValueNameSame : Dictionary<int, int> { }
+        public class KeyValueNameSame : Dictionary<int, int>
+        {
+        }
 
         [XmlSchemaProvider(null, IsAny = true)]
         [XmlRoot(ElementName = "AnyRootElement", IsNullable = false)]
-        public class AnyWithRoot : XmlSerializableBase { }
+        public class AnyWithRoot : XmlSerializableBase
+        {
+        }
 
         public class PersonInfo
         {
@@ -769,19 +795,29 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
         [DataContract(IsReference = true)]
-        class RefEdibleItem { }
+        class RefEdibleItem
+        {
+        }
 
         [DataContract(IsReference = false)]
-        class Fruit2 : RefEdibleItem { }
+        class Fruit2 : RefEdibleItem
+        {
+        }
 
         [DataContract]
-        class Fruit : RefEdibleItem { }
+        class Fruit : RefEdibleItem
+        {
+        }
 
         [DataContract(IsReference = true)]
-        class RefApple : Fruit { }
+        class RefApple : Fruit
+        {
+        }
 
         [DataContract(IsReference = false)]
-        class Orange : Fruit { }
+        class Orange : Fruit
+        {
+        }
 
         [DataContract]
         [KnownType(typeof(Fruit))]
@@ -829,7 +865,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
         [CollectionDataContract(IsReference = true)]
-        public class RefGrades : List<string> { }
+        public class RefGrades : List<string>
+        {
+        }
 
         [DataContract(IsReference = true)]
         class RefCustomer
@@ -943,7 +981,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             int level;
 
-            public RefNestedNode_ContainsBackpointer(int level) : this(level, null) { }
+            public RefNestedNode_ContainsBackpointer(int level) : this(level, null)
+            {
+            }
 
             public RefNestedNode_ContainsBackpointer(
                 int level,
@@ -990,7 +1030,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
         [DataContract(IsReference = true)]
-        enum RefEnum { }
+        enum RefEnum
+        {
+        }
         #endregion
 
 #pragma warning restore CS0169, CS0414

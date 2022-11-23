@@ -13,7 +13,9 @@ namespace System.Security.Cryptography
         [MaybeNull]
         protected KeySizes[] LegalKeySizesValue = null!;
 
-        protected AsymmetricAlgorithm() { }
+        protected AsymmetricAlgorithm()
+        {
+        }
 
         [Obsolete(
             Obsoletions.DefaultCryptoAlgorithmsMessage,

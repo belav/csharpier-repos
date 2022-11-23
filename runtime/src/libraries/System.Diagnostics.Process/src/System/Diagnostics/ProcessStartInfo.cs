@@ -35,7 +35,9 @@ namespace System.Diagnostics
         ///     Default constructor.  At least the <see cref='System.Diagnostics.ProcessStartInfo.FileName'/>
         ///     property must be set before starting the process.
         /// </devdoc>
-        public ProcessStartInfo() { }
+        public ProcessStartInfo()
+        {
+        }
 
         /// <devdoc>
         ///     Specifies the name of the application or document that is to be started.

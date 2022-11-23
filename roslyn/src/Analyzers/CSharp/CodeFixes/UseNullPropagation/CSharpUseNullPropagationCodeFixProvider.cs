@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseNullPropagationCodeFixProvider() { }
+        public CSharpUseNullPropagationCodeFixProvider()
+        {
+        }
 
         protected override ElementBindingExpressionSyntax ElementBindingExpression(
             BracketedArgumentListSyntax argumentList

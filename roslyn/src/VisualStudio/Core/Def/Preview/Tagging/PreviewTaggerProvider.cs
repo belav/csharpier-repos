@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewTaggerProvider() { }
+        public PreviewTaggerProvider()
+        {
+        }
 
         public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer) where T : ITag
         {

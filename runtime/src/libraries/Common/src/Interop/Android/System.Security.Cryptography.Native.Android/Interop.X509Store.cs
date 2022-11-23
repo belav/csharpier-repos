@@ -100,6 +100,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeX509StoreHandle : Interop.JObjectLifetime.SafeJObjectHandle
     {
-        public SafeX509StoreHandle() { }
+        public SafeX509StoreHandle()
+        {
+        }
     }
 }

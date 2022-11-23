@@ -7,7 +7,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
     {
         internal int _idRef;
 
-        internal MemberReference() { }
+        internal MemberReference()
+        {
+        }
 
         internal void Set(int idRef)
         {

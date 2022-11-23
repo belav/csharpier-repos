@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InheritanceMargin
     {
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         [ImportingConstructor]
-        public CSharpInheritanceMarginService() { }
+        public CSharpInheritanceMarginService()
+        {
+        }
 
         protected override string GlobalImportsTitle =>
             CSharpFeaturesResources.Global_using_directives;

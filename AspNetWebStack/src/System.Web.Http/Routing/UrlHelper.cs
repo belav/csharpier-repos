@@ -20,7 +20,9 @@ namespace System.Web.Http.Routing
         /// Initializes a new instance of the <see cref="UrlHelper"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public UrlHelper() { }
+        public UrlHelper()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UrlHelper"/> class.

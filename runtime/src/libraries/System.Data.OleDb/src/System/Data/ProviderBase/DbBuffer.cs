@@ -24,7 +24,9 @@ namespace System.Data.ProviderBase
 
                 _bufferLength = initialSize;
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     base.handle = Interop.Kernel32.LocalAlloc(flags, (nuint)initialSize);
@@ -36,10 +38,14 @@ namespace System.Data.ProviderBase
             }
         }
 
-        protected DbBuffer(int initialSize) : this(initialSize, true) { }
+        protected DbBuffer(int initialSize) : this(initialSize, true)
+        {
+        }
 
         protected DbBuffer(IntPtr invalidHandleValue, bool ownsHandle)
-            : base(invalidHandleValue, ownsHandle) { }
+            : base(invalidHandleValue, ownsHandle)
+        {
+        }
 
         private const int BaseOffset = 0;
 

@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentRangeHandler() { }
+        public FormatDocumentRangeHandler()
+        {
+        }
 
         public override TextDocumentIdentifier GetTextDocumentIdentifier(
             DocumentRangeFormattingParams request

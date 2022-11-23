@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.Logging.Abstractions
         /// </summary>
         public static NullLoggerProvider Instance { get; } = new NullLoggerProvider();
 
-        private NullLoggerProvider() { }
+        private NullLoggerProvider()
+        {
+        }
 
         /// <inheritdoc />
         public ILogger CreateLogger(string categoryName)
@@ -22,6 +24,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
         }
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

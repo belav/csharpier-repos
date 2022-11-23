@@ -27,7 +27,9 @@ namespace System.Composition.Convention
         /// <summary>
         /// Construct a new <see cref="ConventionBuilder"/>.
         /// </summary>
-        public ConventionBuilder() { }
+        public ConventionBuilder()
+        {
+        }
 
         /// <summary>
         /// Define a rule that will apply to all types that

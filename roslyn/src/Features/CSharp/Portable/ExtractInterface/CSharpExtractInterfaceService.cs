@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpExtractInterfaceService() { }
+        public CSharpExtractInterfaceService()
+        {
+        }
 
         protected override async Task<SyntaxNode> GetTypeDeclarationAsync(
             Document document,

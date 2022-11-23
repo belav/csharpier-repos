@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpSignatureHelp(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpSignatureHelp)) { }
+            : base(instanceFactory, nameof(CSharpSignatureHelp))
+        {
+        }
 
         [WpfFact]
         public void MethodSignatureHelp()

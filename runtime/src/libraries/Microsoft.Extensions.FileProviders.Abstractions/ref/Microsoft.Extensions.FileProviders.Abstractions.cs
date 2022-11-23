@@ -36,7 +36,9 @@ namespace Microsoft.Extensions.FileProviders
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
             System.Collections.IEnumerable
     {
-        public NotFoundDirectoryContents() { }
+        public NotFoundDirectoryContents()
+        {
+        }
 
         public bool Exists
         {
@@ -60,7 +62,9 @@ namespace Microsoft.Extensions.FileProviders
 
     public partial class NotFoundFileInfo : Microsoft.Extensions.FileProviders.IFileInfo
     {
-        public NotFoundFileInfo(string name) { }
+        public NotFoundFileInfo(string name)
+        {
+        }
 
         public bool Exists
         {
@@ -96,7 +100,9 @@ namespace Microsoft.Extensions.FileProviders
 
     public partial class NullChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
-        internal NullChangeToken() { }
+        internal NullChangeToken()
+        {
+        }
 
         public bool ActiveChangeCallbacks
         {
@@ -122,7 +128,9 @@ namespace Microsoft.Extensions.FileProviders
 
     public partial class NullFileProvider : Microsoft.Extensions.FileProviders.IFileProvider
     {
-        public NullFileProvider() { }
+        public NullFileProvider()
+        {
+        }
 
         public Microsoft.Extensions.FileProviders.IDirectoryContents GetDirectoryContents(
             string subpath

@@ -15,7 +15,9 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
     /// </summary>
     public static readonly TagHelperDescriptorComparer Default = new TagHelperDescriptorComparer();
 
-    private TagHelperDescriptorComparer() { }
+    private TagHelperDescriptorComparer()
+    {
+    }
 
     public bool Equals(TagHelperDescriptor descriptorX, TagHelperDescriptor descriptorY)
     {

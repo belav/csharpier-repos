@@ -1249,16 +1249,22 @@ namespace System.Tests
     {
         public int TestVal2;
 
-        public TestAttribute2(int i) : base(i + 10) { }
+        public TestAttribute2(int i) : base(i + 10)
+        {
+        }
     }
 
     [TestAttribute(1)]
     public class TestClass
     {
         [Obsolete("This method is obsolete.use method2 instead")]
-        public void method1() { }
+        public void method1()
+        {
+        }
 
-        public void method2() { }
+        public void method2()
+        {
+        }
 
         public string method3(string strVal)
         {
@@ -1281,7 +1287,9 @@ namespace System.Tests
             return 1;
         }
 
-        public TestClass() { }
+        public TestClass()
+        {
+        }
     }
 
     [TestAttribute2(1)]
@@ -1309,7 +1317,9 @@ namespace System.Tests
         [TestAttribute2(5)]
         public event TestEventHandler2 TestEvent2;
 
-        public TestClass2() { }
+        public TestClass2()
+        {
+        }
 
         public void UseTestEvent2() // just to avoid a build warning
         {
@@ -1339,7 +1349,9 @@ namespace System.Tests
 
         public event TestEventHandler3 TestEvent3;
 
-        public TestClass3() { }
+        public TestClass3()
+        {
+        }
 
         public void UseTestEvent3() // just to avoid a build warning
         {
@@ -1379,7 +1391,9 @@ namespace System.Tests
         public virtual void TestMethod(
             [ArgumentUsage("for test")] string[] strArray,
             params string[] strList
-        ) { }
+        )
+        {
+        }
     }
 
     public class DerivedClass : BaseClass
@@ -1387,15 +1401,21 @@ namespace System.Tests
         public override void TestMethod(
             string[] strArray,
             [ArgumentUsage("for test again")] params string[] strList
-        ) { }
+        )
+        {
+        }
     }
 
     public class DerivedAttribute1 : Attribute
     {
-        public DerivedAttribute1() { }
+        public DerivedAttribute1()
+        {
+        }
     }
 
-    public class myClass { }
+    public class myClass
+    {
+    }
 
     [MyCustomAttribute("MyBaseClass"), YourCustomAttribute(37)]
     internal class MyClass
@@ -1405,13 +1425,17 @@ namespace System.Tests
             get { return 42; }
         }
 
-        public static void ParamsMethod(params object[] args) { }
+        public static void ParamsMethod(params object[] args)
+        {
+        }
     }
 
     [MyCustomAttribute("MyDerivedClass")]
     internal class MyDerivedClass : MyClass
     {
-        public void Do() { }
+        public void Do()
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
@@ -1449,13 +1473,19 @@ namespace System.Tests
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class PropTestAttribute : Attribute
     {
-        public PropTestAttribute() { }
+        public PropTestAttribute()
+        {
+        }
     }
 
     [AttributeUsage(AttributeTargets.Class)]
-    internal class UnusedAttribute : Attribute { }
+    internal class UnusedAttribute : Attribute
+    {
+    }
 
-    class MyDerivedClassNoAttribute : MyClass { }
+    class MyDerivedClassNoAttribute : MyClass
+    {
+    }
 
     public class TestBase
     {
@@ -1463,7 +1493,9 @@ namespace System.Tests
         public int PropBase1
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         [PropTest]
@@ -1471,14 +1503,18 @@ namespace System.Tests
         public string PropBase2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         [PropTest]
         public virtual string PropBase3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1488,26 +1524,34 @@ namespace System.Tests
         public int PropSub1
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         [PropTest]
         public string PropSub2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
         public override string PropBase3
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     [MyCustomAttribute("Test")]
     [MyCustomAttribute("Test")]
-    class MultipleAttributes { }
+    class MultipleAttributes
+    {
+    }
 
     public interface INameable
     {
@@ -1521,12 +1565,18 @@ namespace System.Tests
     }
 
     [Nameable]
-    public class ExampleWithAttribute { }
+    public class ExampleWithAttribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-    public class GenericAttribute<T> : Attribute { }
+    public class GenericAttribute<T> : Attribute
+    {
+    }
 
-    public class DerivesFromGenericAttribute : GenericAttribute<bool> { }
+    public class DerivesFromGenericAttribute : GenericAttribute<bool>
+    {
+    }
 
     [DerivesFromGeneric]
     [GenericAttribute<string>]
@@ -1537,13 +1587,16 @@ namespace System.Tests
         internal bool Field;
 
         [GenericAttribute<Guid>]
-        public HasGenericAttribute() { }
+        public HasGenericAttribute()
+        {
+        }
 
         [GenericAttribute<long>]
         public void Method([GenericAttribute<ulong>] int parameter)
         {
             this.Field = true;
-            this.Event += () => { };
+            this.Event += () => {
+            };
         }
 
         [GenericAttribute<List<object>>]

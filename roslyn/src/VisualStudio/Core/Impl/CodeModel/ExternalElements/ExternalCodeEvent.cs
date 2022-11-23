@@ -27,7 +27,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
         }
 
         private ExternalCodeEvent(CodeModelState state, ProjectId projectId, IEventSymbol symbol)
-            : base(state, projectId, symbol) { }
+            : base(state, projectId, symbol)
+        {
+        }
 
         private IEventSymbol EventSymbol
         {

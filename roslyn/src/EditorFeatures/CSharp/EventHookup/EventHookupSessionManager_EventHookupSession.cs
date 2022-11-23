@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             private readonly ITextBuffer _subjectBuffer;
             private readonly IGlobalOptionService _globalOptions;
 
-            public event Action Dismissed = () => { };
+            public event Action Dismissed = () => {
+            };
 
             // For testing purposes only! Should always be null except in tests.
             internal Mutex TESTSessionHookupMutex = null;

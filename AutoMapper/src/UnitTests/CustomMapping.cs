@@ -2,9 +2,13 @@ namespace AutoMapper.UnitTests;
 
 public class When_implementing_multiple_IValueResolver_interfaces : AutoMapperSpecBase
 {
-    public class Source1 { }
+    public class Source1
+    {
+    }
 
-    public class Source2 { }
+    public class Source2
+    {
+    }
 
     public class Destination
     {
@@ -67,7 +71,9 @@ public class When_using_IMemberResolver_derived_interface : AutoMapperSpecBase
         public string Value { get; set; }
     }
 
-    interface IResolver : IMemberValueResolver<Source, Destination, string, string> { }
+    interface IResolver : IMemberValueResolver<Source, Destination, string, string>
+    {
+    }
 
     class Resolver : IResolver
     {
@@ -135,7 +141,9 @@ public class OpenGenericMapForMember : AutoMapperSpecBase
     {
         private readonly IEnumerable<TItem> _items;
 
-        public Pager(IEnumerable<TItem> items) : this(items, 0, 0, 0) { }
+        public Pager(IEnumerable<TItem> items) : this(items, 0, 0, 0)
+        {
+        }
 
         public Pager(IEnumerable<TItem> items, int currentPage, int pageSize, int totalItems)
         {
@@ -280,7 +288,9 @@ public class When_throwing_NRE_from_MapFrom_value_types : AutoMapperSpecBase
 
 public class When_throwing_NRE_from_MapFrom : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {
@@ -382,7 +392,9 @@ public class When_resolve_throws : NonValidatingSpecBase
 {
     Exception _ex = new Exception();
 
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {
@@ -434,7 +446,9 @@ public class When_mapping_different_types_with_explicit_value : AutoMapperSpecBa
         public int IntValue { get; set; }
     }
 
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {
@@ -511,7 +525,9 @@ public class When_mapping_from_object_to_string_with_use_value : AutoMapperSpecB
 {
     Destination _destination;
 
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {
@@ -1131,7 +1147,9 @@ public class When_specifying_a_custom_constructor_function_for_custom_converters
     {
         private readonly int _value;
 
-        public CustomConverter() : this(5) { }
+        public CustomConverter() : this(5)
+        {
+        }
 
         public CustomConverter(int value)
         {
@@ -1390,7 +1408,9 @@ public class When_specifying_member_and_member_resolver_using_string_property_na
 
     public class CustomValueResolver : IMemberValueResolver<object, object, int, object>
     {
-        public CustomValueResolver() { }
+        public CustomValueResolver()
+        {
+        }
 
         public object Resolve(
             object s,
@@ -1704,7 +1724,9 @@ public class When_mapping_from_a_constant_value : AutoMapperSpecBase
 {
     private Dest _dest;
 
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {
@@ -1734,7 +1756,9 @@ public class When_building_custom_configuration_mapping_to_itself
 {
     private Exception _e;
 
-    public class Source { }
+    public class Source
+    {
+    }
 
     public class Dest
     {
@@ -1778,7 +1802,9 @@ public class When_mapping_from_one_type_to_another : AutoMapperSpecBase
             Value = value;
         }
 
-        public Dest() { }
+        public Dest()
+        {
+        }
 
         public int Value { get; set; }
     }

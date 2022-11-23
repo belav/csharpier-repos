@@ -400,7 +400,9 @@ namespace System.Threading
         }
 
         // TODO: https://github.com/dotnet/runtime/issues/22161
-        public void DisableComObjectEagerCleanup() { }
+        public void DisableComObjectEagerCleanup()
+        {
+        }
 
         private static Thread InitializeExistingThreadPoolThread()
         {

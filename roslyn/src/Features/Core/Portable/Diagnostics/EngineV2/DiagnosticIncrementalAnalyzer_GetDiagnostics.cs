@@ -248,7 +248,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 ProjectId? projectId,
                 DocumentId? documentId,
                 bool includeSuppressedDiagnostics
-            ) : base(owner, solution, projectId, documentId, includeSuppressedDiagnostics) { }
+            ) : base(owner, solution, projectId, documentId, includeSuppressedDiagnostics)
+            {
+            }
 
             protected override async Task AppendDiagnosticsAsync(
                 Project project,

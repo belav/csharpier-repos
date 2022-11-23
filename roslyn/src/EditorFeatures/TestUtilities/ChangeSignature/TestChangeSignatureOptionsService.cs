@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestChangeSignatureOptionsService() { }
+        public TestChangeSignatureOptionsService()
+        {
+        }
 
         ChangeSignatureOptionsResult IChangeSignatureOptionsService.GetChangeSignatureOptions(
             Document document,

@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Precedence
     internal abstract class AbstractCSharpPrecedenceService<TSyntax>
         : AbstractPrecedenceService<TSyntax, OperatorPrecedence> where TSyntax : SyntaxNode
     {
-        protected AbstractCSharpPrecedenceService() { }
+        protected AbstractCSharpPrecedenceService()
+        {
+        }
 
         public sealed override PrecedenceKind GetPrecedenceKind(OperatorPrecedence precedence)
         {

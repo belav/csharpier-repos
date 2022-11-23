@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public static readonly Instrumenter NoOp = new Instrumenter();
 
-        public Instrumenter() { }
+        public Instrumenter()
+        {
+        }
 
         private static BoundStatement InstrumentStatement(
             BoundStatement original,

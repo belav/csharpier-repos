@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class InMemoryTestStore : TestStore
 {
-    public InMemoryTestStore(string name = null, bool shared = true) : base(name, shared) { }
+    public InMemoryTestStore(string name = null, bool shared = true) : base(name, shared)
+    {
+    }
 
     public static InMemoryTestStore GetOrCreate(string name) => new(name);
 

@@ -11,7 +11,9 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract partial class RoConstructor : LeveledConstructorInfo, IRoMethodBase
     {
-        protected RoConstructor() { }
+        protected RoConstructor()
+        {
+        }
 
         public abstract override bool Equals(object? obj);
         public abstract override int GetHashCode();

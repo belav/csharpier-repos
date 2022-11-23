@@ -58,7 +58,11 @@ namespace System.ComponentModel.Tests
             Assert.Equal(5, total);
 
             // Remove a delegate that was never in the list; nop.
-            list.RemoveHandler("key1", new Action(() => { }));
+            list.RemoveHandler(
+                "key1",
+                new Action(() => {
+                })
+            );
             list["key1"].DynamicInvoke();
             Assert.Equal(7, total);
 
@@ -146,7 +150,11 @@ namespace System.ComponentModel.Tests
         public void RemoveHandler_EmptyList_Nop()
         {
             var list = new EventHandlerList();
-            list.RemoveHandler("key1", new Action(() => { }));
+            list.RemoveHandler(
+                "key1",
+                new Action(() => {
+                })
+            );
             list.RemoveHandler("key1", null);
             list.RemoveHandler(null, null);
         }
@@ -156,7 +164,8 @@ namespace System.ComponentModel.Tests
         {
             var list = new EventHandlerList();
 
-            Action action = () => { };
+            Action action = () => {
+            };
             list[null] = action;
             Assert.Same(action, list[null]);
         }

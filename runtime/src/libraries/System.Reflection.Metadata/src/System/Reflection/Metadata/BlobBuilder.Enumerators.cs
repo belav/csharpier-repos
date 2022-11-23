@@ -53,7 +53,9 @@ namespace System.Reflection.Metadata
                 _next = _head.FirstChunk;
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             // IEnumerable:
             public Chunks GetEnumerator() => this;
@@ -94,7 +96,9 @@ namespace System.Reflection.Metadata
 
             public void Reset() => _chunks.Reset();
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             // IEnumerable:
             public Blobs GetEnumerator() => this;

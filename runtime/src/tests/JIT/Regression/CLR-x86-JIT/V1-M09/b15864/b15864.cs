@@ -31,7 +31,9 @@ namespace DefaultNamespace
                     throw new SecurityException();
                 }
                 catch (SecurityException /*e2*/
-                ) { }
+                )
+                {
+                }
                 finally
                 {
                     try
@@ -39,7 +41,9 @@ namespace DefaultNamespace
                         throw new NullReferenceException();
                     }
                     catch (Exception /*e3*/
-                    ) { }
+                    )
+                    {
+                    }
                 }
             }
         }

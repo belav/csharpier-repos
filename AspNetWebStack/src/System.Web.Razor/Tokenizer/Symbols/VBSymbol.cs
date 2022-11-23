@@ -52,10 +52,14 @@ namespace System.Web.Razor.Tokenizer.Symbols
                 content,
                 type,
                 Enumerable.Empty<RazorError>()
-            ) { }
+            )
+        {
+        }
 
         public VBSymbol(SourceLocation start, string content, VBSymbolType type)
-            : this(start, content, type, Enumerable.Empty<RazorError>()) { }
+            : this(start, content, type, Enumerable.Empty<RazorError>())
+        {
+        }
 
         public VBSymbol(
             int offset,
@@ -64,14 +68,18 @@ namespace System.Web.Razor.Tokenizer.Symbols
             string content,
             VBSymbolType type,
             IEnumerable<RazorError> errors
-        ) : base(new SourceLocation(offset, line, column), content, type, errors) { }
+        ) : base(new SourceLocation(offset, line, column), content, type, errors)
+        {
+        }
 
         public VBSymbol(
             SourceLocation start,
             string content,
             VBSymbolType type,
             IEnumerable<RazorError> errors
-        ) : base(start, content, type, errors) { }
+        ) : base(start, content, type, errors)
+        {
+        }
 
         public VBKeyword? Keyword { get; set; }
 

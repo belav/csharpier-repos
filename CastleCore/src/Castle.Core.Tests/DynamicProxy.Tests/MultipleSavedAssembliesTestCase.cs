@@ -30,23 +30,37 @@ namespace Castle.DynamicProxy.Tests
 
     public class Class1 : IGenericInterface<IInterface1>
     {
-        public void GenericMethod(IInterface1 toto) { }
+        public void GenericMethod(IInterface1 toto)
+        {
+        }
     }
 
     public class Class2 : IGenericInterface<IInterface2>
     {
-        public void GenericMethod(IInterface2 toto) { }
+        public void GenericMethod(IInterface2 toto)
+        {
+        }
     }
 
-    public class Class3 : IInterface3, IInterface2 { }
+    public class Class3 : IInterface3, IInterface2
+    {
+    }
 
-    public class Class4 : IInterface3, IInterface1 { }
+    public class Class4 : IInterface3, IInterface1
+    {
+    }
 
-    public interface IInterface1 { }
+    public interface IInterface1
+    {
+    }
 
-    public interface IInterface2 { }
+    public interface IInterface2
+    {
+    }
 
-    public interface IInterface3 { }
+    public interface IInterface3
+    {
+    }
 
     [TestFixture]
     public class MultipleSavedAssembliesTestCase

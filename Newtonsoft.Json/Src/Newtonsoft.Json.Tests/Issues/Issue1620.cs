@@ -86,9 +86,13 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.AreEqual(1, properties.Count(p => p.Name == "Mock"));
         }
 
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
-        public class Foo : IFoo { }
+        public class Foo : IFoo
+        {
+        }
 
         public class FooConverter : JsonConverter
         {

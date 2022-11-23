@@ -17,7 +17,9 @@ public struct MyStruct<TRequest, TResponse>
     public override string ToString() => this.GetType().ToString() + " = " + _id;
 }
 
-public struct GenStruct<T> { }
+public struct GenStruct<T>
+{
+}
 
 public sealed class MyStructWrapper<TRequest, TResponse>
 {

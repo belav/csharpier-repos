@@ -519,12 +519,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         public class TestClass
         {
-            public TestClass(string message) { }
+            public TestClass(string message)
+            {
+            }
         }
 
         public class DerivedTestClass : TestClass
         {
-            public DerivedTestClass(string message) : base(message) { }
+            public DerivedTestClass(string message) : base(message)
+            {
+            }
         }
 
         public struct TestStruct
@@ -532,11 +536,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public string Value { get; set; }
         }
 
-        public struct GenericStruct<T> { }
+        public struct GenericStruct<T>
+        {
+        }
 
         public class DerivedValidationResult : ValidationResult
         {
-            public DerivedValidationResult(string errorMessage) : base(errorMessage) { }
+            public DerivedValidationResult(string errorMessage) : base(errorMessage)
+            {
+            }
 
             public static readonly DerivedValidationResult SomeError = new DerivedValidationResult(
                 "Some Error"
@@ -560,11 +568,17 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [CustomValidation(typeof(AllowMultipleClass), nameof(AllowMultipleClass.Method3))]
         public class AllowMultipleClass
         {
-            public void Method1() { }
+            public void Method1()
+            {
+            }
 
-            public void Method2() { }
+            public void Method2()
+            {
+            }
 
-            public void Method3() { }
+            public void Method3()
+            {
+            }
         }
     }
 }

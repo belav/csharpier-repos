@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EmbeddedStatementPlacementCodeFixProvider() { }
+        public EmbeddedStatementPlacementCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.EmbeddedStatementPlacementDiagnosticId);

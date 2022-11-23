@@ -713,7 +713,9 @@ internal class Program
         }
     }
 
-    private class GenException<T> : Exception { }
+    private class GenException<T> : Exception
+    {
+    }
 
     private static bool GenericTryCatch<T>()
     {
@@ -733,15 +735,25 @@ internal class Program
         }
     }
 
-    private class RefX1<T> { }
+    private class RefX1<T>
+    {
+    }
 
-    private class RefX2<T, U> { }
+    private class RefX2<T, U>
+    {
+    }
 
-    private struct ValX1<T> { }
+    private struct ValX1<T>
+    {
+    }
 
-    private struct ValX2<T, U> { }
+    private struct ValX2<T, U>
+    {
+    }
 
-    private struct ValX3<T, U, V> { }
+    private struct ValX3<T, U, V>
+    {
+    }
 
     private static bool GenericTryCatchTest()
     {
@@ -1182,10 +1194,14 @@ internal class Program
         }
     }
 
-    class ImplementGenericWithSealedDefaultMethod : IGenericWithSealedDefaultMethod<string> { }
+    class ImplementGenericWithSealedDefaultMethod : IGenericWithSealedDefaultMethod<string>
+    {
+    }
 
     class ImplementGenericWithSealedDefaultMethodAcrossModule
-        : IGenericWithSealedDefaultMethodAcrossModule<string> { }
+        : IGenericWithSealedDefaultMethodAcrossModule<string>
+    {
+    }
 
     class MyGen<T>
     {
@@ -2197,7 +2213,9 @@ internal class Program
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x4)]
-    public unsafe struct SingleElementStruct_Empty { }
+    public unsafe struct SingleElementStruct_Empty
+    {
+    }
 
     struct SingleElementStruct_IntEnum
     {
@@ -2527,9 +2545,13 @@ internal class Program
         return true;
     }
 
-    public enum ShortEnum : short { }
+    public enum ShortEnum : short
+    {
+    }
 
-    public enum LongEnum : long { }
+    public enum LongEnum : long
+    {
+    }
 
     public struct LongIntEnumStruct
     {

@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMoveDeclarationNearReferenceService() { }
+        public CSharpMoveDeclarationNearReferenceService()
+        {
+        }
 
         protected override bool IsMeaningfulBlock(SyntaxNode node)
         {

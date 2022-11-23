@@ -16,7 +16,9 @@ namespace System.Net.Http.Formatting.DataSets.Types
         private int id;
         private string name;
 
-        public DataContractType() { }
+        public DataContractType()
+        {
+        }
 
         public DataContractType(int id, string name)
         {

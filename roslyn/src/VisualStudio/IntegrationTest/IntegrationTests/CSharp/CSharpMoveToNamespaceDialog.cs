@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.MoveToNamespaceDialog;
 
         public CSharpMoveToNamespaceDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpMoveToNamespaceDialog)) { }
+            : base(instanceFactory, nameof(CSharpMoveToNamespaceDialog))
+        {
+        }
 
         [WpfFact]
         public void VerifyCancellation()

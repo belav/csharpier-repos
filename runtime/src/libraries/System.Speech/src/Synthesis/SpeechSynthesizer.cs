@@ -15,7 +15,9 @@ namespace System.Speech.Synthesis
     public sealed class SpeechSynthesizer : IDisposable
     {
         #region Constructors
-        public SpeechSynthesizer() { }
+        public SpeechSynthesizer()
+        {
+        }
 
         ~SpeechSynthesizer()
         {

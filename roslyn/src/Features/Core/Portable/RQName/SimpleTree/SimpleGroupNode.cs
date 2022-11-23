@@ -15,10 +15,14 @@ namespace Microsoft.CodeAnalysis.Features.RQName.SimpleTree
             _children = children;
 
         public SimpleGroupNode(string text, string singleLeafChildText)
-            : this(text, new SimpleLeafNode(singleLeafChildText)) { }
+            : this(text, new SimpleLeafNode(singleLeafChildText))
+        {
+        }
 
         public SimpleGroupNode(string text, params SimpleTreeNode[] children)
-            : this(text, children.ToList()) { }
+            : this(text, children.ToList())
+        {
+        }
 
         public IList<SimpleTreeNode> Children
         {

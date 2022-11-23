@@ -69,6 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         /// Shim to allow asynchronous loading of a package prior to calling synchronous (blocking) APIs that use it.
         /// </summary>
         [Guid("48d069e8-1993-4752-baf3-232236a3ea4f")]
-        private class SVsManagedFontAndColorInformation { }
+        private class SVsManagedFontAndColorInformation
+        {
+        }
     }
 }

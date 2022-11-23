@@ -39,7 +39,9 @@ public class Bar
 
     public string WindowsUserID => ""Domain""; 
 }"
-            ) { }
+            )
+        {
+        }
 
         private CodeClass GetCodeClass(params object[] path)
         {

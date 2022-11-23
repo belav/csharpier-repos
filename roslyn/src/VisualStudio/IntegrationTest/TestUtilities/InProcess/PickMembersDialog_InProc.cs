@@ -16,7 +16,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class PickMembersDialog_InProc : InProcComponent
     {
-        private PickMembersDialog_InProc() { }
+        private PickMembersDialog_InProc()
+        {
+        }
 
         public static PickMembersDialog_InProc Create() => new PickMembersDialog_InProc();
 

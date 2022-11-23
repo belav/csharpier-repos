@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
         protected AbstractAddMissingReferenceCodeFixProvider(
             IPackageInstallerService? packageInstallerService = null,
             ISymbolSearchService? symbolSearchService = null
-        ) : base(packageInstallerService, symbolSearchService) { }
+        ) : base(packageInstallerService, symbolSearchService)
+        {
+        }
 
         protected override bool IncludePrerelease => false;
 

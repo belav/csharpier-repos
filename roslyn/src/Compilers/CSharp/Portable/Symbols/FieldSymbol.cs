@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // to the VB version.
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        internal FieldSymbol() { }
+        internal FieldSymbol()
+        {
+        }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another

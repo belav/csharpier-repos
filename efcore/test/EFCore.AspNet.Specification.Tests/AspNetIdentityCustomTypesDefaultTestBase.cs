@@ -32,7 +32,9 @@ public abstract class AspNetIdentityCustomTypesDefaultTestBase<TFixture>
             CustomUserTokenString
         >.AspNetIdentityFixtureBase
 {
-    protected AspNetIdentityCustomTypesDefaultTestBase(TFixture fixture) : base(fixture) { }
+    protected AspNetIdentityCustomTypesDefaultTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task Can_lazy_load_User_navigations()
@@ -374,7 +376,9 @@ public class CustomTypesIdentityContext
         CustomUserTokenString
     >
 {
-    public CustomTypesIdentityContext(DbContextOptions options) : base(options) { }
+    public CustomTypesIdentityContext(DbContextOptions options) : base(options)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

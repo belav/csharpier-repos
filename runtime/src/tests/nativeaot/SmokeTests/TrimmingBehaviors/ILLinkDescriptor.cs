@@ -24,11 +24,17 @@ class ILLinkDescriptor
         return 100;
     }
 
-    public static void methodKeptViaDescriptor() { }
+    public static void methodKeptViaDescriptor()
+    {
+    }
 
-    public static void methodKeptViaStandaloneDescriptor() { }
+    public static void methodKeptViaStandaloneDescriptor()
+    {
+    }
 
-    public static void methodNotKept() { }
+    public static void methodNotKept()
+    {
+    }
 
     public int fieldKeptViaDescriptor;
 
@@ -36,13 +42,21 @@ class ILLinkDescriptor
 
     public event EventHandler EventKeptViaDescriptor
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
-    class NestedTypeKeptViaDescriptor { }
+    class NestedTypeKeptViaDescriptor
+    {
+    }
 
-    class NestedTypeNonKept { }
+    class NestedTypeNonKept
+    {
+    }
 
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",

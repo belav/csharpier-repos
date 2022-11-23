@@ -20,7 +20,9 @@ public class SqlServerLongTypeMapping : LongTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqlServerLongTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Int64)
-        : base(storeType, dbType) { }
+        : base(storeType, dbType)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,7 +31,9 @@ public class SqlServerLongTypeMapping : LongTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerLongTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters) { }
+        : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

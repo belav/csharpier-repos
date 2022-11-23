@@ -114,7 +114,9 @@ public class TypeGetType2
             TestLibrary.TestFramework.LogError("005", "No exception occurs!");
             retVal = false;
         }
-        catch (ArgumentNullException) { }
+        catch (ArgumentNullException)
+        {
+        }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("006", "Unexpected exception occurs: " + e);

@@ -57,7 +57,9 @@ internal sealed class HttpsConnectionMiddleware
     private readonly CancellationTokenSourcePool _ctsPool = new();
 
     public HttpsConnectionMiddleware(ConnectionDelegate next, HttpsConnectionAdapterOptions options)
-        : this(next, options, loggerFactory: NullLoggerFactory.Instance) { }
+        : this(next, options, loggerFactory: NullLoggerFactory.Instance)
+    {
+    }
 
     public HttpsConnectionMiddleware(
         ConnectionDelegate next,

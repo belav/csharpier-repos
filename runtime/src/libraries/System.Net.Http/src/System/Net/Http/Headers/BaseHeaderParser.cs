@@ -8,7 +8,9 @@ namespace System.Net.Http.Headers
 {
     internal abstract class BaseHeaderParser : HttpHeaderParser
     {
-        protected BaseHeaderParser(bool supportsMultipleValues) : base(supportsMultipleValues) { }
+        protected BaseHeaderParser(bool supportsMultipleValues) : base(supportsMultipleValues)
+        {
+        }
 
         /// <summary>
         /// Parses a full header or a segment of a multi-value header.

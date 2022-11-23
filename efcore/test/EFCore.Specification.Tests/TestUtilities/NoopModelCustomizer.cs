@@ -5,5 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class NoopModelCustomizer : IModelCustomizer
 {
-    public void Customize(ModelBuilder modelBuilder, DbContext context) { }
+    public void Customize(ModelBuilder modelBuilder, DbContext context)
+    {
+    }
 }

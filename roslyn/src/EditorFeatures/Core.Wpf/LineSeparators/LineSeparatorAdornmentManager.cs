@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.LineSeparators
                 tagAggregatorFactoryService,
                 asyncListener,
                 adornmentLayerName
-            ) { }
+            )
+        {
+        }
 
         protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(
             NormalizedSnapshotSpanCollection changedSpanCollection

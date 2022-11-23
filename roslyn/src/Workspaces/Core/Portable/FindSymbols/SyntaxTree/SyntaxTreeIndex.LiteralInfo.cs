@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     return new LiteralInfo(literalsFilter);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 return null;
             }

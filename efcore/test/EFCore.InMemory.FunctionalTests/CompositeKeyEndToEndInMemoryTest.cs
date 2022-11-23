@@ -7,7 +7,9 @@ public class CompositeKeyEndToEndInMemoryTest
     : CompositeKeyEndToEndTestBase<CompositeKeyEndToEndInMemoryTest.CompositeKeyEndToEndInMemoryFixture>
 {
     public CompositeKeyEndToEndInMemoryTest(CompositeKeyEndToEndInMemoryFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class CompositeKeyEndToEndInMemoryFixture : CompositeKeyEndToEndFixtureBase
     {

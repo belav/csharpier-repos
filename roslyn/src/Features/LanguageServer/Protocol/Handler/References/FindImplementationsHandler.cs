@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FindImplementationsHandler() { }
+        public FindImplementationsHandler()
+        {
+        }
 
         public override string Method => LSP.Methods.TextDocumentImplementationName;
 

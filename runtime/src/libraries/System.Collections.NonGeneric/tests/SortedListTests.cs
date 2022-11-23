@@ -1606,7 +1606,9 @@ namespace System.Collections.Tests
                     }
                 }
             }
-            catch (CultureNotFoundException) { }
+            catch (CultureNotFoundException)
+            {
+            }
         }
 
         [Fact]

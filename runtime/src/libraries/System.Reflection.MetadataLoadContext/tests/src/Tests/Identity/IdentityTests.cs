@@ -235,30 +235,50 @@ namespace System.Reflection.Tests
 
         private class MemberHolderBase<T>
         {
-            public MemberHolderBase() { }
+            public MemberHolderBase()
+            {
+            }
 
-            public MemberHolderBase(int x) { }
+            public MemberHolderBase(int x)
+            {
+            }
 
             public int MyField1;
             public int MyField2;
             public event Action MyEvent1
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
             public event Action MyEvent2
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
-            public void MyMethod1<M>() { }
+            public void MyMethod1<M>()
+            {
+            }
 
-            public void MyMethod2<M>() { }
+            public void MyMethod2<M>()
+            {
+            }
 
-            public void MyParameterizedMethod1(int x, int y) { }
+            public void MyParameterizedMethod1(int x, int y)
+            {
+            }
 
-            public void MyParameterizedMethod2(int x, int y) { }
+            public void MyParameterizedMethod2(int x, int y)
+            {
+            }
 
             public int MyProperty1
             {
@@ -272,6 +292,8 @@ namespace System.Reflection.Tests
             }
         }
 
-        private class MemberHolder<T> : MemberHolderBase<T> { }
+        private class MemberHolder<T> : MemberHolderBase<T>
+        {
+        }
     }
 }

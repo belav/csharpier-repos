@@ -42,7 +42,9 @@ namespace System.Data
         /// child <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
         public ForeignKeyConstraint(DataColumn parentColumn, DataColumn childColumn)
-            : this(null, parentColumn, childColumn) { }
+            : this(null, parentColumn, childColumn)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified name,
@@ -64,7 +66,9 @@ namespace System.Data
         /// of parent and child <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
         public ForeignKeyConstraint(DataColumn[] parentColumns, DataColumn[] childColumns)
-            : this(null, parentColumns, childColumns) { }
+            : this(null, parentColumns, childColumns)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified name,
@@ -613,7 +617,9 @@ namespace System.Data
                 {
                     CascadeRollback(row);
                 }
-                else if (action == DataRowAction.Add) { }
+                else if (action == DataRowAction.Add)
+                {
+                }
                 else
                 {
                     Debug.Fail("attempt to cascade unknown action: " + action.ToString());

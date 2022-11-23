@@ -7,7 +7,9 @@ public class ConfigurationDbContextSqliteTest
     : ConfigurationDbContextTestBase<ConfigurationDbContextSqliteTest.ConfigurationDbContextSqliteFixture>
 {
     public ConfigurationDbContextSqliteTest(ConfigurationDbContextSqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class ConfigurationDbContextSqliteFixture : ConfigurationDbContextFixtureBase
     {

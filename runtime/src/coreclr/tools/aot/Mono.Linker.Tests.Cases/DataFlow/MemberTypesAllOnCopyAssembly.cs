@@ -93,6 +93,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         [KeptBaseType(typeof(MemberTypesAllBaseType))]
         [KeptMember(".ctor()")]
-        class TestType : MemberTypesAllBaseType { }
+        class TestType : MemberTypesAllBaseType
+        {
+        }
     }
 }

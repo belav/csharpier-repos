@@ -13,7 +13,9 @@ namespace System.Reflection.Metadata
     {
         private static readonly HandleComparer s_default = new HandleComparer();
 
-        private HandleComparer() { }
+        private HandleComparer()
+        {
+        }
 
         public static HandleComparer Default
         {

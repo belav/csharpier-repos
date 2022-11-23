@@ -19,7 +19,9 @@ public class BrowserAssertFailedException : XunitException
         Exception innerException,
         string screenShotPath,
         string innerHTML
-    ) : base(BuildMessage(innerException, logs, screenShotPath, innerHTML), innerException) { }
+    ) : base(BuildMessage(innerException, logs, screenShotPath, innerHTML), innerException)
+    {
+    }
 
     private static string BuildMessage(
         Exception exception,

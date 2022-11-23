@@ -23,7 +23,9 @@ internal class TestBlobSink : BlobLoggerProvider
                 }
             ),
             blobReferenceFactory
-        ) { }
+        )
+    {
+    }
 
     protected override Task IntervalAsync(TimeSpan interval, CancellationToken cancellationToken)
     {

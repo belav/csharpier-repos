@@ -76,7 +76,9 @@ namespace JitTest_catchfinally_SEH_cs
                         }
                     }
                 }
-                catch (NullReferenceException) { }
+                catch (NullReferenceException)
+                {
+                }
                 return ret;
             }
             return recurseLevel == 0;

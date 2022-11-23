@@ -66,7 +66,9 @@ class Driver
                 using (Process p = Process.GetProcessById(1))
                     ;
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
         }
     }
 }

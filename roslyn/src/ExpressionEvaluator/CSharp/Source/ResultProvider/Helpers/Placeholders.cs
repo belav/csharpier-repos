@@ -25,5 +25,7 @@ namespace System.Runtime.CompilerServices
         AllowMultiple = false,
         Inherited = false
     )]
-    internal class ExtensionAttribute : Attribute { }
+    internal class ExtensionAttribute : Attribute
+    {
+    }
 }

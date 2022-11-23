@@ -22,7 +22,9 @@ namespace System.ComponentModel.Design
         /// <summary>
         /// Creates a new service object container.
         /// </summary>
-        public ServiceContainer() { }
+        public ServiceContainer()
+        {
+        }
 
         /// <summary>
         /// Creates a new service object container.
@@ -284,7 +286,9 @@ namespace System.ComponentModel.Design
                 public int GetHashCode(Type obj) => obj.FullName!.GetHashCode();
             }
 
-            public ServiceCollection() : base(s_serviceTypeComparer) { }
+            public ServiceCollection() : base(s_serviceTypeComparer)
+            {
+            }
         }
     }
 }

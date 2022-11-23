@@ -17,11 +17,17 @@ namespace Test
             {
                 while (param1[2])
                 {
-                    do { } while (param1[2] == ((bool)(new AA().m_xField2)));
-                    do { } while (param1[2]);
+                    do
+                    {
+                    } while (param1[2] == ((bool)(new AA().m_xField2)));
+                    do
+                    {
+                    } while (param1[2]);
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 0.0f;
         }
 

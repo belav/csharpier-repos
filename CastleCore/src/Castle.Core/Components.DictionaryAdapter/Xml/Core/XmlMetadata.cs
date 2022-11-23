@@ -72,9 +72,15 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             foreach (var behavior in meta.Behaviors)
             {
-                if (TryCast(behavior, ref xmlRoot)) { }
-                else if (TryCast(behavior, ref xmlType)) { }
-                else if (TryCast(behavior, ref xmlDefaults)) { }
+                if (TryCast(behavior, ref xmlRoot))
+                {
+                }
+                else if (TryCast(behavior, ref xmlType))
+                {
+                }
+                else if (TryCast(behavior, ref xmlDefaults))
+                {
+                }
                 else if (TryCast(behavior, ref xmlInclude))
                 {
                     AddPendingInclude(xmlInclude);
@@ -83,8 +89,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 {
                     context.AddNamespace(xmlNamespace);
                 }
-                else if (TryCast(behavior, ref reference)) { }
-                else if (TryCast(behavior, ref xPath)) { }
+                else if (TryCast(behavior, ref reference))
+                {
+                }
+                else if (TryCast(behavior, ref xPath))
+                {
+                }
                 else if (TryCast(behavior, ref xPathVariable))
                 {
                     context.AddVariable(xPathVariable);

@@ -10,12 +10,16 @@ public struct ValueTypeWithStaticMethod
 {
     public int F;
 
-    public static void M() { }
+    public static void M()
+    {
+    }
 }
 
 public struct ValueTypeWithInstanceMethod
 {
     public int F;
 
-    public void M() { }
+    public void M()
+    {
+    }
 }

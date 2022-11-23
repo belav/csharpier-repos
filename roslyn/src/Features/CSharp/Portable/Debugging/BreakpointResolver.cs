@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
     internal class BreakpointResolver : AbstractBreakpointResolver
     {
         public BreakpointResolver(Solution solution, string text)
-            : base(solution, text, LanguageNames.CSharp, EqualityComparer<string>.Default) { }
+            : base(solution, text, LanguageNames.CSharp, EqualityComparer<string>.Default)
+        {
+        }
 
         protected override IEnumerable<ISymbol> GetMembers(INamedTypeSymbol type, string name)
         {

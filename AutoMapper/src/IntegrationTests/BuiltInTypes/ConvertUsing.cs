@@ -125,7 +125,9 @@ public class ConvertUsingBug : IntegrationTest<ConvertUsingBug.DatabaseInitializ
         }
     }
 
-    public class DatabaseInitializer : DropCreateDatabaseAlways<ApplicationDBContext> { }
+    public class DatabaseInitializer : DropCreateDatabaseAlways<ApplicationDBContext>
+    {
+    }
 }
 
 public class StringTypeConverter : IntegrationTest<StringTypeConverter.DatabaseInitializer>

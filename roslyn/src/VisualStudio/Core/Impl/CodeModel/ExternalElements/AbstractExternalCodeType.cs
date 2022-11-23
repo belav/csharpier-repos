@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ITypeSymbol symbol
-        ) : base(state, projectId, symbol) { }
+        ) : base(state, projectId, symbol)
+        {
+        }
 
         protected internal ITypeSymbol TypeSymbol
         {

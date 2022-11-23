@@ -120,7 +120,9 @@ namespace System.Text
                 936,
                 EncoderFallback.ReplacementFallback,
                 DecoderFallback.ReplacementFallback
-            ) { }
+            )
+        {
+        }
 
         // This loads our base 936 code page and then applies the changes from the tableUnicodeToGBDiffs table.
         // See table comments for table format.

@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpPropSnippetProvider() { }
+        public CSharpPropSnippetProvider()
+        {
+        }
 
         protected override async Task<bool> IsValidSnippetLocationAsync(
             Document document,

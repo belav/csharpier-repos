@@ -486,7 +486,9 @@ class Program
 
         private class LiveId : ISupportLiveUpdate
         {
-            public LiveId() { }
+            public LiveId()
+            {
+            }
         }
 
         private static async Task<ImmutableArray<ITagSpan<IErrorTag>>> GetTagSpansAsync(

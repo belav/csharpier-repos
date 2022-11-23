@@ -222,9 +222,13 @@ namespace System.ComponentModel.Tests
 
         private class AlwaysEqualAttribute : CategoryAttribute
         {
-            public AlwaysEqualAttribute() : base() { }
+            public AlwaysEqualAttribute() : base()
+            {
+            }
 
-            public AlwaysEqualAttribute(string category) : base(category) { }
+            public AlwaysEqualAttribute(string category) : base(category)
+            {
+            }
 
             public override bool Equals(object obj) => true;
 

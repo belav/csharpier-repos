@@ -54,7 +54,9 @@ namespace System.Text
             DiagnosticId = Obsoletions.SystemTextEncodingUTF7DiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public UTF7Encoding() : this(false) { }
+        public UTF7Encoding() : this(false)
+        {
+        }
 
         [Obsolete(
             Obsoletions.SystemTextEncodingUTF7Message,

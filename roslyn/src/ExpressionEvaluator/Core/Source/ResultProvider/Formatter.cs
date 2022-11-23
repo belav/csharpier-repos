@@ -433,8 +433,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         )
         {
             int oldLength = expression.Length;
-            for (; start < oldLength && leading(expression[start]); start++) { }
-            for (; length > start && trailing(expression[length - 1]); length--) { }
+            for (; start < oldLength && leading(expression[start]); start++)
+            {
+            }
+            for (; length > start && trailing(expression[length - 1]); length--)
+            {
+            }
             if ((start > 0) || (length < oldLength))
             {
                 return expression.Substring(start, length - start);

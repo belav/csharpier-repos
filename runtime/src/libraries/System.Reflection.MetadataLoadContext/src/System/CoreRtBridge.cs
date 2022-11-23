@@ -48,7 +48,9 @@ namespace System.Collections.Concurrent
         where K : IEquatable<K>
         where V : class
     {
-        protected ConcurrentUnifier() { }
+        protected ConcurrentUnifier()
+        {
+        }
 
         public V GetOrAdd(K key) => _dict.GetOrAdd(key, Factory);
 

@@ -10,7 +10,9 @@ namespace Test_generics2
 {
     class ApplicationException : Exception
     {
-        public ApplicationException(string message) : base(message) { }
+        public ApplicationException(string message) : base(message)
+        {
+        }
     }
 
     namespace Test
@@ -171,7 +173,9 @@ namespace Test_generics2
             }
         }
 
-        public sealed class SealedGrandChild<K> : GrandChild<K> { }
+        public sealed class SealedGrandChild<K> : GrandChild<K>
+        {
+        }
 
         public static class Program
         {

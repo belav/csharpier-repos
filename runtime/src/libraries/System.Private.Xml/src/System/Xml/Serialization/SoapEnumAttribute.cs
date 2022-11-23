@@ -11,7 +11,9 @@ namespace System.Xml.Serialization
     {
         private string? _name;
 
-        public SoapEnumAttribute() { }
+        public SoapEnumAttribute()
+        {
+        }
 
         public SoapEnumAttribute(string name)
         {

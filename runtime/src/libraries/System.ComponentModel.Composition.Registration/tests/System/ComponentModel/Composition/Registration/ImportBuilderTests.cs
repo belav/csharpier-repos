@@ -8,9 +8,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
 {
     public class ImportBuilderTests
     {
-        interface IFoo { }
+        interface IFoo
+        {
+        }
 
-        class FooImpl { }
+        class FooImpl
+        {
+        }
 
         [Fact]
         public void AsContractTypeOfT_SetsContractType()

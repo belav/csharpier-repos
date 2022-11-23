@@ -37,10 +37,14 @@ namespace Test
     public class DerivedClass<T> : BaseClass<T> where T : new()
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass() : this(new T()) { }
+        public DerivedClass() : this(new T())
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(T arg) : base(arg) { }
+        public DerivedClass(T arg) : base(arg)
+        {
+        }
     }
 
     public class Reftype

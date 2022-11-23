@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
             SyntaxNode
         >? CleanupNodeImpl { get; set; }
 
-        public MockCodeCleanupProvider() { }
+        public MockCodeCleanupProvider()
+        {
+        }
 
         public string Name => nameof(MockCodeCleanupProvider);
 

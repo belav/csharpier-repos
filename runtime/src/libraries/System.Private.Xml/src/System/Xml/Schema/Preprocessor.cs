@@ -93,7 +93,9 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             SchemaNames schemaNames,
             ValidationEventHandler? eventHandler
-        ) : this(nameTable, schemaNames, eventHandler, new XmlSchemaCompilationSettings()) { }
+        ) : this(nameTable, schemaNames, eventHandler, new XmlSchemaCompilationSettings())
+        {
+        }
 
         public Preprocessor(
             XmlNameTable nameTable,

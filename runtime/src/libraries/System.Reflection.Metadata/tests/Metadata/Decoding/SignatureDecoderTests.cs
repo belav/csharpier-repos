@@ -191,7 +191,9 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
         private static class VarArgsToDecode
         {
-            public static void VarArgsCallee(int i, __arglist) { }
+            public static void VarArgsCallee(int i, __arglist)
+            {
+            }
 
             public static void VarArgsCaller()
             {
@@ -356,7 +358,9 @@ namespace System.Reflection.Metadata.Decoding.Tests
             public int[] SZArray;
             public int[,] Array;
 
-            public void ByReference(ref int i) { }
+            public void ByReference(ref int i)
+            {
+            }
 
             public T GenericTypeParameter;
 
@@ -367,7 +371,9 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
             public List<int> GenericInstantiation;
 
-            public struct Nested { }
+            public struct Nested
+            {
+            }
 
             public Nested Property
             {
@@ -375,8 +381,12 @@ namespace System.Reflection.Metadata.Decoding.Tests
             }
             public event EventHandler<EventArgs> Event
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
 

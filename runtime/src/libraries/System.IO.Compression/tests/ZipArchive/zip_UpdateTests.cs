@@ -97,7 +97,9 @@ namespace System.IO.Compression.Tests
 
                 ZipArchiveEntry e = archive.CreateEntry("empty.txt");
                 e.LastWriteTime = lastWrite;
-                using (Stream s = e.Open()) { }
+                using (Stream s = e.Open())
+                {
+                }
 
                 AddEntry(archive, "data2.txt", data2, lastWrite);
             }
@@ -123,7 +125,9 @@ namespace System.IO.Compression.Tests
 
                 ZipArchiveEntry e = archive.CreateEntry("empty.txt");
                 e.LastWriteTime = lastWrite;
-                using (Stream s = e.Open()) { }
+                using (Stream s = e.Open())
+                {
+                }
             }
 
             test = test.Clone();

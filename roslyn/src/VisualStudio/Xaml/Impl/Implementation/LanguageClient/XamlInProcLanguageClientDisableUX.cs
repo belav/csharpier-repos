@@ -39,7 +39,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IGlobalOptionService globalOptions,
             ILspServiceLoggerFactory lspLoggerFactory,
             IThreadingContext threadingContext
-        ) : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext) { }
+        ) : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
+        {
+        }
 
         protected override ImmutableArray<string> SupportedLanguages =>
             ImmutableArray.Create(StringConstants.XamlLanguageName);

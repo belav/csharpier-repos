@@ -52,7 +52,9 @@ public class DefaultValuesTest : SharedStoreFixtureBase<DbContext>
 
     private class ChipsContext : PoolableDbContext
     {
-        public ChipsContext(DbContextOptions options) : base(options) { }
+        public ChipsContext(DbContextOptions options) : base(options)
+        {
+        }
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<KettleChips> Chips { get; set; }

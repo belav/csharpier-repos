@@ -1,6 +1,8 @@
 using System;
 
-public interface ICacheable { }
+public interface ICacheable
+{
+}
 
 public class Foo<T, U>
     where T : U, new()
@@ -12,9 +14,13 @@ public class Foo<T, U>
     }
 }
 
-public class Bar<T> where T : ICacheable { }
+public class Bar<T> where T : ICacheable
+{
+}
 
-public class Test : ICacheable { }
+public class Test : ICacheable
+{
+}
 
 public class Program
 {

@@ -10,7 +10,9 @@ namespace System.Net.NetworkInformation
 {
     internal sealed class SystemIPGlobalProperties : IPGlobalProperties
     {
-        internal SystemIPGlobalProperties() { }
+        internal SystemIPGlobalProperties()
+        {
+        }
 
         /// Specifies the host name for the local computer.
         public override string HostName

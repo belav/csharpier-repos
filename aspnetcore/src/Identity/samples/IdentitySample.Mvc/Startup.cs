@@ -50,7 +50,9 @@ public class Startup
                 o.DefaultScheme = IdentityConstants.ApplicationScheme;
                 o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
             })
-            .AddIdentityCookies(o => { });
+            .AddIdentityCookies(o =>
+            {
+            });
 
         // Add application services.
         services.AddTransient<IEmailSender, AuthMessageSender>();

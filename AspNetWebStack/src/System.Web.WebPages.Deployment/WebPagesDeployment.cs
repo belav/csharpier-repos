@@ -400,7 +400,9 @@ namespace System.Web.WebPages.Deployment
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
             return null;
         }
 
@@ -423,7 +425,9 @@ namespace System.Web.WebPages.Deployment
                     writer.WriteLine(version.ToString());
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -447,7 +451,9 @@ namespace System.Web.WebPages.Deployment
                     writer.WriteLine();
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>

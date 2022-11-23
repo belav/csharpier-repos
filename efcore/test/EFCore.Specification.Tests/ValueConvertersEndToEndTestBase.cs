@@ -1062,13 +1062,17 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     protected class NullStringToNonNullStringConverter : ValueConverter<string?, string>
     {
         public NullStringToNonNullStringConverter()
-            : base(v => v ?? "<null>", v => v == "<null>" ? null : v, convertsNulls: true) { }
+            : base(v => v ?? "<null>", v => v == "<null>" ? null : v, convertsNulls: true)
+        {
+        }
     }
 
     protected class NonNullStringToNullStringConverter : ValueConverter<string, string?>
     {
         public NonNullStringToNullStringConverter()
-            : base(v => v == "<null>" ? null : v, v => v ?? "<null>", convertsNulls: true) { }
+            : base(v => v == "<null>" ? null : v, v => v ?? "<null>", convertsNulls: true)
+        {
+        }
     }
 
     protected class NullIntToNonNullStringConverter : ValueConverter<int?, string>
@@ -1078,7 +1082,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                 v => v == null ? "<null>" : v.ToString()!,
                 v => v == "<null>" ? null : int.Parse(v),
                 convertsNulls: true
-            ) { }
+            )
+        {
+        }
     }
 
     protected class NullIntToNullStringConverter : ValueConverter<int?, string?>
@@ -1088,20 +1094,25 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                 v => v == null ? null : v.ToString()!,
                 v => v == null || v == "<null>" ? null : int.Parse(v),
                 convertsNulls: true
-            ) { }
+            )
+        {
+        }
     }
 
     protected class NonNullIntToNonNullStringConverter : ValueConverter<int, string>
     {
         public NonNullIntToNonNullStringConverter()
             : base(v => v.ToString()!, v => v == "<null>" ? 0 : int.Parse(v), convertsNulls: true)
-        { }
+        {
+        }
     }
 
     protected class NonNullIntToNullStringConverter : ValueConverter<int, string?>
     {
         public NonNullIntToNullStringConverter()
-            : base(v => v.ToString()!, v => v == null ? 0 : int.Parse(v), convertsNulls: true) { }
+            : base(v => v.ToString()!, v => v == null ? 0 : int.Parse(v), convertsNulls: true)
+        {
+        }
     }
 
     protected enum TheExperience : ushort
@@ -1117,7 +1128,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
             : base(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
                 v => JsonSerializer.Deserialize<List<int>>(v, (JsonSerializerOptions?)null)!
-            ) { }
+            )
+        {
+        }
     }
 
     protected class ListOfIntComparer : ValueComparer<List<int>?>
@@ -1129,7 +1142,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     || (c1 != null && c2 != null && c1.SequenceEqual(c2)),
                 c => c == null ? 0 : c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                 c => c == null ? null : c.ToList()
-            ) { }
+            )
+        {
+        }
     }
 
     protected class EnumerableOfIntToJsonConverter : ValueConverter<IEnumerable<int>, string>
@@ -1138,7 +1153,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
             : base(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
                 v => JsonSerializer.Deserialize<List<int>>(v, (JsonSerializerOptions?)null)!
-            ) { }
+            )
+        {
+        }
     }
 
     protected class EnumerableOfIntComparer : ValueComparer<IEnumerable<int>?>
@@ -1150,7 +1167,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     || (c1 != null && c2 != null && c1.SequenceEqual(c2)),
                 c => c == null ? 0 : c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                 c => c == null ? null : c.ToList()
-            ) { }
+            )
+        {
+        }
     }
 }
 

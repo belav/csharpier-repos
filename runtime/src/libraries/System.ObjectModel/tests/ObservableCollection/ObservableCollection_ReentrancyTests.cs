@@ -75,7 +75,8 @@ namespace System.Collections.ObjectModel.Tests
             var collection = new ObservableCollectionSubclass<int>();
             for (int i = 0; i < listenerCount; i++)
             {
-                collection.CollectionChanged += (sender, e) => { };
+                collection.CollectionChanged += (sender, e) => {
+                };
             }
 
             collection.CheckReentrancy();
@@ -97,8 +98,10 @@ namespace System.Collections.ObjectModel.Tests
         public void CheckReentrancy_MultipleListeners_MultipleBlocks()
         {
             var collection = new ObservableCollectionSubclass<int>();
-            collection.CollectionChanged += (sender, e) => { };
-            collection.CollectionChanged += (sender, e) => { };
+            collection.CollectionChanged += (sender, e) => {
+            };
+            collection.CollectionChanged += (sender, e) => {
+            };
 
             collection.CheckReentrancy();
 

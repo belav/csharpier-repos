@@ -8,7 +8,9 @@ namespace System.Reflection
 {
     public abstract class EventInfo : MemberInfo
     {
-        protected EventInfo() { }
+        protected EventInfo()
+        {
+        }
 
         public override MemberTypes MemberType => MemberTypes.Event;
 

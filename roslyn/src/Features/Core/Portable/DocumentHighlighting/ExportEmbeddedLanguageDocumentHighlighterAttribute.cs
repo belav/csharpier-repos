@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             string name,
             string[] languages,
             params string[] identifiers
-        ) : this(name, languages, supportsUnannotatedAPIs: false, identifiers) { }
+        ) : this(name, languages, supportsUnannotatedAPIs: false, identifiers)
+        {
+        }
 
         public ExportEmbeddedLanguageDocumentHighlighterAttribute(
             string name,
@@ -30,6 +32,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                 languages,
                 supportsUnannotatedAPIs,
                 identifiers
-            ) { }
+            )
+        {
+        }
     }
 }

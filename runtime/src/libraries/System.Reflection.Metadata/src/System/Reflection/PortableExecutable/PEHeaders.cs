@@ -39,7 +39,9 @@ namespace System.Reflection.PortableExecutable
         /// <exception cref="IOException">Error reading from the stream.</exception>
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
-        public PEHeaders(Stream peStream) : this(peStream, 0) { }
+        public PEHeaders(Stream peStream) : this(peStream, 0)
+        {
+        }
 
         /// <summary>
         /// Reads PE headers from the current location in the stream.
@@ -51,7 +53,9 @@ namespace System.Reflection.PortableExecutable
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the stream.</exception>
-        public PEHeaders(Stream peStream, int size) : this(peStream, size, isLoadedImage: false) { }
+        public PEHeaders(Stream peStream, int size) : this(peStream, size, isLoadedImage: false)
+        {
+        }
 
         /// <summary>
         /// Reads PE headers from the current location in the stream.

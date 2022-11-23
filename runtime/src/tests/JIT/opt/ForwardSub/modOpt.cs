@@ -7,7 +7,9 @@
 // Reduced from 169.3 KiB to 0.7 KiB in 00:44:43
 // Debug: Outputs 0
 // Release: Outputs 1
-public class C0 { }
+public class C0
+{
+}
 
 public struct S0
 {

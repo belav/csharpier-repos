@@ -79,7 +79,9 @@ public abstract class SeedingTestBase
 
     public class KeylessSeedingContext : DbContext
     {
-        public KeylessSeedingContext(DbContextOptions options) : base(options) { }
+        public KeylessSeedingContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder

@@ -14,14 +14,18 @@ public class Runtime_71632
             Problem(1);
             return 101;
         }
-        catch (InvalidCastException) { }
+        catch (InvalidCastException)
+        {
+        }
 
         try
         {
             Problem2(1);
             return 102;
         }
-        catch (InvalidCastException) { }
+        catch (InvalidCastException)
+        {
+        }
 
         return 100;
     }
@@ -41,5 +45,7 @@ public class Runtime_71632
         return (sbyte)box;
     }
 
-    static void Use<T>(ref T arg) { }
+    static void Use<T>(ref T arg)
+    {
+    }
 }

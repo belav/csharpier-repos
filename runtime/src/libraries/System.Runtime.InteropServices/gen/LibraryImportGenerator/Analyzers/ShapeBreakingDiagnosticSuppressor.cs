@@ -105,7 +105,8 @@ namespace Microsoft.Interop.Analyzers
                             && ManualTypeMarshallingHelper.TryResolveMarshallerType(
                                 containingType,
                                 marshallerTypeInAttribute,
-                                (_, _) => { },
+                                (_, _) => {
+                                },
                                 out ITypeSymbol constructedMarshallerType
                             )
                             && SymbolEqualityComparer.Default.Equals(

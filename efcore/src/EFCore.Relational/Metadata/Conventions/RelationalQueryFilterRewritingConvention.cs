@@ -68,7 +68,8 @@ public class RelationalQueryFilterRewritingConvention : QueryFilterRewritingConv
         /// </summary>
         /// <param name="contextType">The clr type of derived DbContext.</param>
         public RelationalDbSetAccessRewritingExpressionVisitor(Type contextType) : base(contextType)
-        { }
+        {
+        }
 
         /// <inheritdoc />
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)

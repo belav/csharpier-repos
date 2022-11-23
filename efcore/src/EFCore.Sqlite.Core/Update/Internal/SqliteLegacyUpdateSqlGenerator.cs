@@ -21,7 +21,9 @@ public class SqliteLegacyUpdateSqlGenerator : UpdateAndSelectSqlGenerator
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteLegacyUpdateSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Appends a <c>WHERE</c> condition for the identity (i.e. key value) of the given column.

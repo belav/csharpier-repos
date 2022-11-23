@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Classification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSemanticClassificationCacheService() { }
+        public DefaultSemanticClassificationCacheService()
+        {
+        }
 
         public Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(
             Document document,

@@ -16,7 +16,9 @@ public class Test1
         public List<Base<T>> selfList = new List<Base<T>>();
     }
 
-    public class Derived : Base<Derived> { }
+    public class Derived : Base<Derived>
+    {
+    }
 
     public static void Test()
     {
@@ -28,9 +30,13 @@ public class Test1
 // Test 2: Base interface with recursive constraint, derived class
 public class Test2
 {
-    public interface I<T> where T : I<T> { }
+    public interface I<T> where T : I<T>
+    {
+    }
 
-    public class Derived : I<Derived> { }
+    public class Derived : I<Derived>
+    {
+    }
 
     public static void Test()
     {
@@ -42,9 +48,13 @@ public class Test2
 // Test 3: Base interface with recursive constraint, derived struct
 public class Test3
 {
-    public interface I<T> where T : I<T> { }
+    public interface I<T> where T : I<T>
+    {
+    }
 
-    public struct Derived : I<Derived> { }
+    public struct Derived : I<Derived>
+    {
+    }
 
     public static void Test()
     {
@@ -63,7 +73,9 @@ public class Test4
         public List<Base<T>> selfList = new List<Base<T>>();
     }
 
-    public class Derived<T> : Base<Derived<T>> { }
+    public class Derived<T> : Base<Derived<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -75,9 +87,13 @@ public class Test4
 // Test 5: Base interface with recursive constraint, derived generic class
 public class Test5
 {
-    public interface I<T> where T : I<T> { }
+    public interface I<T> where T : I<T>
+    {
+    }
 
-    public class Derived<T> : I<Derived<T>> { }
+    public class Derived<T> : I<Derived<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -89,9 +105,13 @@ public class Test5
 // Test 6: Base interface with recursive constraint, derived generic struct
 public class Test6
 {
-    public interface I<T> where T : I<T> { }
+    public interface I<T> where T : I<T>
+    {
+    }
 
-    public struct Derived<T> : I<Derived<T>> { }
+    public struct Derived<T> : I<Derived<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -105,11 +125,17 @@ public class Test6
 // Test 7: Base interface with recursive constraint, derived generic interface, derived generic class
 public class Test7
 {
-    public interface I1<T> where T : I1<T> { }
+    public interface I1<T> where T : I1<T>
+    {
+    }
 
-    public interface I2<T> { }
+    public interface I2<T>
+    {
+    }
 
-    public class Derived<T> : I2<Derived<T>> { }
+    public class Derived<T> : I2<Derived<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -121,11 +147,17 @@ public class Test7
 // Test 8: Base interface with recursive constraint, derived generic interface, derived generic struct
 public class Test8
 {
-    public interface I1<T> where T : I1<T> { }
+    public interface I1<T> where T : I1<T>
+    {
+    }
 
-    public interface I2<T> { }
+    public interface I2<T>
+    {
+    }
 
-    public struct Derived<T> : I2<Derived<T>> { }
+    public struct Derived<T> : I2<Derived<T>>
+    {
+    }
 
     public static void Test()
     {

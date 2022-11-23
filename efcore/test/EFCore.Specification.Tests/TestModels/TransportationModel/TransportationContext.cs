@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
 public class TransportationContext : PoolableDbContext
 {
-    public TransportationContext(DbContextOptions options) : base(options) { }
+    public TransportationContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public DbSet<Vehicle> Vehicles { get; set; }
 

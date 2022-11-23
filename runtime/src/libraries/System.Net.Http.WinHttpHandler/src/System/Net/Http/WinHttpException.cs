@@ -18,7 +18,9 @@ namespace System.Net.Http
         }
 
         public WinHttpException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public WinHttpException(int error, string message, Exception innerException)
             : base(message, innerException)

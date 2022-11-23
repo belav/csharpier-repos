@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
 
             // the service failed, error has been reported - disable further operations
             _disabled = _debuggingSession == null;
@@ -217,7 +218,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                 Contract.ThrowIfNull(committedSolution);
                 SolutionCommitted?.Invoke(committedSolution);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
 
             try
             {
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
         }
 
         public async ValueTask DiscardUpdatesAsync(CancellationToken cancellationToken)
@@ -246,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
         }
 
         public async ValueTask EndSessionAsync(CancellationToken cancellationToken)

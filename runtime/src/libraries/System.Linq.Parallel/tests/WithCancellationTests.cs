@@ -152,7 +152,9 @@ namespace System.Linq.Parallel.Tests
                             y => y,
                             (x, e) => x
                         )
-                        .ForAll(x => { })
+                        .ForAll(x =>
+                        {
+                        })
             );
             AssertThrows.Wrapped<OperationCanceledException>(
                 () =>
@@ -165,7 +167,9 @@ namespace System.Linq.Parallel.Tests
                             y => y,
                             (x, e) => x
                         )
-                        .ForAll(x => { })
+                        .ForAll(x =>
+                        {
+                        })
             );
             AssertThrows.Wrapped<OperationCanceledException>(
                 () =>
@@ -176,7 +180,9 @@ namespace System.Linq.Parallel.Tests
                                 throw new OperationCanceledException();
                             }
                         )
-                        .ForAll(x => { })
+                        .ForAll(x =>
+                        {
+                        })
             );
         }
 

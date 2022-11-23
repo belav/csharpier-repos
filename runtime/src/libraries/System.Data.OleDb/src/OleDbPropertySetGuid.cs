@@ -5,7 +5,9 @@ namespace System.Data.OleDb
 {
     internal sealed class OleDbPropertySetGuid
     {
-        private OleDbPropertySetGuid() { }
+        private OleDbPropertySetGuid()
+        {
+        }
 
         internal static readonly Guid Column = new Guid(
             0xc8b522b9,

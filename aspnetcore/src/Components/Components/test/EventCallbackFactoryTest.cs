@@ -63,7 +63,10 @@ public class EventCallbackFactoryTest
     {
         // Arrange
         var component = new EventComponent();
-        var @delegate = (Action)(() => { });
+        var @delegate = (Action)(
+            () => {
+            }
+        );
 
         var anotherComponent = new EventComponent();
 
@@ -130,7 +133,11 @@ public class EventCallbackFactoryTest
     {
         // Arrange
         var component = new EventComponent();
-        var @delegate = (Action<string>)((s) => { });
+        var @delegate =
+            (Action<string>)(
+                (s) => {
+                }
+            );
 
         var anotherComponent = new EventComponent();
 
@@ -350,7 +357,10 @@ public class EventCallbackFactoryTest
     {
         // Arrange
         var component = new EventComponent();
-        var @delegate = (Action)(() => { });
+        var @delegate = (Action)(
+            () => {
+            }
+        );
 
         var anotherComponent = new EventComponent();
 
@@ -432,7 +442,11 @@ public class EventCallbackFactoryTest
     {
         // Arrange
         var component = new EventComponent();
-        var @delegate = (Action<string>)((s) => { });
+        var @delegate =
+            (Action<string>)(
+                (s) => {
+                }
+            );
 
         var anotherComponent = new EventComponent();
 
@@ -584,7 +598,11 @@ public class EventCallbackFactoryTest
     {
         // Arrange
         var component = new EventComponent();
-        var @delegate = (Action<string>)((s) => { });
+        var @delegate =
+            (Action<string>)(
+                (s) => {
+                }
+            );
 
         // Act
         var callback = EventCallback.Factory.CreateInferred<string>(component, @delegate, "hi");
@@ -613,9 +631,13 @@ public class EventCallbackFactoryTest
 
     private class EventComponent : IComponent, IHandleEvent
     {
-        public void SomeAction() { }
+        public void SomeAction()
+        {
+        }
 
-        public void SomeActionOfT(string e) { }
+        public void SomeActionOfT(string e)
+        {
+        }
 
         public Task SomeFuncTask()
         {

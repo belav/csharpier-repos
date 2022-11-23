@@ -12,9 +12,13 @@ public class TestClass13
         public byte byte_1;
     }
 
-    public struct S2 { }
+    public struct S2
+    {
+    }
 
-    public struct S3 { }
+    public struct S3
+    {
+    }
 
     public struct S5
     {
@@ -53,7 +57,8 @@ public class TestClass13
     {
         unchecked
         {
-            { }
+            {
+            }
             return s_s3_16;
         }
     }
@@ -62,9 +67,14 @@ public class TestClass13
     {
         unchecked
         {
-            if ((s_uint16_11 %= s_s5_s5_d1_f2_18.uint16_2 <<= 15 | 4) < 15 + 4 - LeafMethod11()) { }
-            else { }
-            { }
+            if ((s_uint16_11 %= s_s5_s5_d1_f2_18.uint16_2 <<= 15 | 4) < 15 + 4 - LeafMethod11())
+            {
+            }
+            else
+            {
+            }
+            {
+            }
             s_s3_16 = Method4(
                 ref s_s2_15,
                 s_s5_s5_d1_f2_18,

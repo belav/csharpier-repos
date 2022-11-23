@@ -16,7 +16,9 @@ namespace System.Runtime.Serialization.Json
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonQNameDataContract(QNameDataContract traditionalQNameDataContract)
-            : base(traditionalQNameDataContract) { }
+            : base(traditionalQNameDataContract)
+        {
+        }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

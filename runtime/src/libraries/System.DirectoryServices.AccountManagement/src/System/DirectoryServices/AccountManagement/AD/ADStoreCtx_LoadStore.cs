@@ -712,7 +712,9 @@ namespace System.DirectoryServices.AccountManagement
                             sidb = new byte[sid.BinaryLength];
                             sid.GetBinaryForm(sidb, 0);
                         }
-                        catch (ArgumentException) { }
+                        catch (ArgumentException)
+                        {
+                        }
 
                         if (sidb != null)
                         {

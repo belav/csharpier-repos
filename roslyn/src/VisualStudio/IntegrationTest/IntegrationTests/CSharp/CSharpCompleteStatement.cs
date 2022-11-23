@@ -15,7 +15,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpCompleteStatement(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpCompleteStatement)) { }
+            : base(instanceFactory, nameof(CSharpCompleteStatement))
+        {
+        }
 
         [WpfFact]
         public void UndoRestoresCaretPosition1()

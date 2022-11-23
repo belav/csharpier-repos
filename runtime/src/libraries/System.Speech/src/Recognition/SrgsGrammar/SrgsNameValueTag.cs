@@ -15,7 +15,9 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsNameValueTag : SrgsElement, IPropertyTag
     {
         #region Constructors
-        public SrgsNameValueTag() { }
+        public SrgsNameValueTag()
+        {
+        }
 
         public SrgsNameValueTag(object value)
         {

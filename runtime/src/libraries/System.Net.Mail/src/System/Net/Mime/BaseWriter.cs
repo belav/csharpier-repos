@@ -212,6 +212,8 @@ namespace System.Net.Mime
 
         #endregion Cleanup
 
-        protected virtual void CheckBoundary() { }
+        protected virtual void CheckBoundary()
+        {
+        }
     }
 }

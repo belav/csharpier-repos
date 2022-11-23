@@ -60,7 +60,9 @@ namespace Castle.DynamicProxy.Tests
             private string _name;
             private bool _started;
 
-            public MyInterfaceImpl() { }
+            public MyInterfaceImpl()
+            {
+            }
 
             public virtual string Name
             {

@@ -15,7 +15,9 @@ namespace Test_precise1b_simple_cs
 
     internal class test
     {
-        public static void f() { }
+        public static void f()
+        {
+        }
 
         static test()
         {

@@ -36,7 +36,9 @@ namespace System.Diagnostics.CodeAnalysis
             | AttributeTargets.ReturnValue,
         AllowMultiple = true
     )]
-    internal sealed class NotNullAttribute : Attribute { }
+    internal sealed class NotNullAttribute : Attribute
+    {
+    }
 
     /// <summary>Specifies that when a method returns <see cref="ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
@@ -60,14 +62,18 @@ namespace System.Diagnostics.CodeAnalysis
             | AttributeTargets.ReturnValue,
         Inherited = false
     )]
-    internal sealed class MaybeNullAttribute : Attribute { }
+    internal sealed class MaybeNullAttribute : Attribute
+    {
+    }
 
     /// <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
     [AttributeUsage(
         AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property,
         Inherited = false
     )]
-    internal sealed class AllowNullAttribute : Attribute { }
+    internal sealed class AllowNullAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Specifies that the method will not return if the associated Boolean parameter is passed the specified value.

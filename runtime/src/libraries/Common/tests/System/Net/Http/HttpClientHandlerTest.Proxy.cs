@@ -24,7 +24,9 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandler_Proxy_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_Proxy_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Proxy_Test(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public async Task Dispose_HandlerWithProxy_ProxyNotDisposed()
@@ -932,7 +934,9 @@ namespace System.Net.Http.Functional.Tests
                         {
                             await client.GetAsync(addressUri);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 },
                 server =>
@@ -1013,7 +1017,9 @@ namespace System.Net.Http.Functional.Tests
             public ICredentials Credentials
             {
                 get => null;
-                set { }
+                set
+                {
+                }
             }
         }
     }

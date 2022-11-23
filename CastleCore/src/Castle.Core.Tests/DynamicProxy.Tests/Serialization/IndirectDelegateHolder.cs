@@ -23,7 +23,9 @@ namespace Castle.DynamicProxy.Tests.Serialization
     {
         public DelegateHolder DelegateHolder = new DelegateHolder();
 
-        public void TestHandler(object sender, EventArgs e) { }
+        public void TestHandler(object sender, EventArgs e)
+        {
+        }
     }
 }
 

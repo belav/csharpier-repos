@@ -5,7 +5,9 @@ namespace System.Configuration.Internal
 {
     internal sealed class InternalConfigConfigurationFactory : IInternalConfigConfigurationFactory
     {
-        private InternalConfigConfigurationFactory() { }
+        private InternalConfigConfigurationFactory()
+        {
+        }
 
         Configuration IInternalConfigConfigurationFactory.Create(
             Type typeConfigHost,

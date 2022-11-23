@@ -30,7 +30,9 @@ namespace ILCompiler.DependencyAnalysis
                 dictionaryLayoutProvider,
                 new ExternSymbolsImportedNodeProvider(),
                 preinitializationManager
-            ) { }
+            )
+        {
+        }
 
         protected override IMethodNode CreateMethodEntrypointNode(MethodDesc method)
         {

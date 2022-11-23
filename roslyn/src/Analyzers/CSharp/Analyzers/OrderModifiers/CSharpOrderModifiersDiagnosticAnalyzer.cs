@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
                 CSharpSyntaxFacts.Instance,
                 CSharpCodeStyleOptions.PreferredModifierOrder,
                 CSharpOrderModifiersHelper.Instance
-            ) { }
+            )
+        {
+        }
 
         protected override CodeStyleOption2<string> GetPreferredOrderStyle(
             SyntaxTreeAnalysisContext context

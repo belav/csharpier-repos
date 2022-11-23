@@ -311,7 +311,9 @@ namespace ILCompiler.DependencyAnalysis
             + factory.NameMangler.GetMangledMethodName(_method);
 
         public NativeLayoutMethodLdTokenVertexNode(NodeFactory factory, MethodDesc method)
-            : base(factory, method, 0) { }
+            : base(factory, method, 0)
+        {
+        }
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context)
         {
@@ -644,7 +646,9 @@ namespace ILCompiler.DependencyAnalysis
             : NativeLayoutTypeSignatureVertexNode
         {
             public NativeLayoutGenericVarSignatureVertexNode(NodeFactory factory, TypeDesc type)
-                : base(type) { }
+                : base(type)
+            {
+            }
 
             public override IEnumerable<DependencyListEntry> GetStaticDependencies(
                 NodeFactory context
@@ -957,7 +961,9 @@ namespace ILCompiler.DependencyAnalysis
                 method,
                 MethodEntryFlags.CreateInstantiatedSignature
                     | (method.IsVirtual ? MethodEntryFlags.SaveEntryPoint : 0)
-            ) { }
+            )
+        {
+        }
 
         public override Vertex WriteVertex(NodeFactory factory)
         {
@@ -2193,7 +2199,9 @@ namespace ILCompiler.DependencyAnalysis
         : NativeLayoutTypeSignatureBasedGenericDictionarySlotNode
     {
         public NativeLayoutTypeHandleGenericDictionarySlotNode(NodeFactory factory, TypeDesc type)
-            : base(factory, type) { }
+            : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName =>
             "NativeLayoutTypeHandleGenericDictionarySlotNode_";
@@ -2207,7 +2215,9 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutUnwrapNullableGenericDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        ) : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName =>
             "NativeLayoutUnwrapNullableGenericDictionarySlotNode_";
@@ -2220,7 +2230,9 @@ namespace ILCompiler.DependencyAnalysis
         : NativeLayoutTypeSignatureBasedGenericDictionarySlotNode
     {
         public NativeLayoutTypeSizeGenericDictionarySlotNode(NodeFactory factory, TypeDesc type)
-            : base(factory, type) { }
+            : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName => "NativeLayoutTypeSizeGenericDictionarySlotNode_";
 
@@ -2233,7 +2245,9 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutAllocateObjectGenericDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        ) : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName =>
             "NativeLayoutAllocateObjectGenericDictionarySlotNode_";
@@ -2245,7 +2259,9 @@ namespace ILCompiler.DependencyAnalysis
         : NativeLayoutTypeSignatureBasedGenericDictionarySlotNode
     {
         public NativeLayoutCastClassGenericDictionarySlotNode(NodeFactory factory, TypeDesc type)
-            : base(factory, type) { }
+            : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName =>
             "NativeLayoutAllocateCastClassDictionarySlotNode_";
@@ -2257,7 +2273,9 @@ namespace ILCompiler.DependencyAnalysis
         : NativeLayoutTypeSignatureBasedGenericDictionarySlotNode
     {
         public NativeLayoutIsInstGenericDictionarySlotNode(NodeFactory factory, TypeDesc type)
-            : base(factory, type) { }
+            : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName => "NativeLayoutIsInstGenericDictionarySlotNode_";
 
@@ -2270,7 +2288,9 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutThreadStaticBaseIndexDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        ) : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName =>
             "NativeLayoutThreadStaticBaseIndexDictionarySlotNode_";
@@ -2284,7 +2304,9 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutDefaultConstructorGenericDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        ) : base(factory, type)
+        {
+        }
 
         protected override string NodeTypeName =>
             "NativeLayoutDefaultConstructorGenericDictionarySlotNode_";
@@ -2361,7 +2383,9 @@ namespace ILCompiler.DependencyAnalysis
         : NativeLayoutStaticsGenericDictionarySlotNode
     {
         public NativeLayoutGcStaticsGenericDictionarySlotNode(NodeFactory factory, TypeDesc type)
-            : base(factory, type) { }
+            : base(factory, type)
+        {
+        }
 
         protected override StaticDataKind StaticDataKindFlag => StaticDataKind.Gc;
         protected override string NodeTypeName => "NativeLayoutGcStaticsGenericDictionarySlotNode_";
@@ -2371,7 +2395,9 @@ namespace ILCompiler.DependencyAnalysis
         : NativeLayoutStaticsGenericDictionarySlotNode
     {
         public NativeLayoutNonGcStaticsGenericDictionarySlotNode(NodeFactory factory, TypeDesc type)
-            : base(factory, type) { }
+            : base(factory, type)
+        {
+        }
 
         protected override StaticDataKind StaticDataKindFlag => StaticDataKind.NonGc;
         protected override string NodeTypeName =>
@@ -2460,7 +2486,9 @@ namespace ILCompiler.DependencyAnalysis
         private sealed class WrappedMethodDictionaryVertexNode : NativeLayoutMethodEntryVertexNode
         {
             public WrappedMethodDictionaryVertexNode(NodeFactory factory, MethodDesc method)
-                : base(factory, method, default(MethodEntryFlags)) { }
+                : base(factory, method, default(MethodEntryFlags))
+            {
+            }
 
             protected override IMethodNode GetMethodEntrypointNode(
                 NodeFactory factory,

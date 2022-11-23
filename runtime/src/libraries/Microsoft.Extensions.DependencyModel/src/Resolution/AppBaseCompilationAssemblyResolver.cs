@@ -15,17 +15,23 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         private readonly string _basePath;
         private readonly DependencyContextPaths _dependencyContextPaths;
 
-        public AppBaseCompilationAssemblyResolver() : this(FileSystemWrapper.Default) { }
+        public AppBaseCompilationAssemblyResolver() : this(FileSystemWrapper.Default)
+        {
+        }
 
         public AppBaseCompilationAssemblyResolver(string basePath)
-            : this(FileSystemWrapper.Default, basePath, DependencyContextPaths.Current) { }
+            : this(FileSystemWrapper.Default, basePath, DependencyContextPaths.Current)
+        {
+        }
 
         internal AppBaseCompilationAssemblyResolver(IFileSystem fileSystem)
             : this(
                 fileSystem,
                 ApplicationEnvironment.ApplicationBasePath,
                 DependencyContextPaths.Current
-            ) { }
+            )
+        {
+        }
 
         internal AppBaseCompilationAssemblyResolver(
             IFileSystem fileSystem,

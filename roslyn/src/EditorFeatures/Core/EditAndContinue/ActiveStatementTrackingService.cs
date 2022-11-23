@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
                 new ActiveStatementTrackingService(workspaceServices.Workspace);

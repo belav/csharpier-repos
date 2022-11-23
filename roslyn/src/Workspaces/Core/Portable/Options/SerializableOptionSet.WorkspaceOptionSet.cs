@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Options
             private ImmutableDictionary<OptionKey, object?> _values;
 
             internal WorkspaceOptionSet(IOptionService service)
-                : this(service, ImmutableDictionary<OptionKey, object?>.Empty) { }
+                : this(service, ImmutableDictionary<OptionKey, object?>.Empty)
+            {
+            }
 
             public IOptionService OptionService { get; }
 

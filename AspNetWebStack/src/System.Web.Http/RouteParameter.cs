@@ -23,7 +23,9 @@ namespace System.Web.Http
         public static readonly RouteParameter Optional = new RouteParameter();
 
         // singleton constructor
-        private RouteParameter() { }
+        private RouteParameter()
+        {
+        }
 
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.

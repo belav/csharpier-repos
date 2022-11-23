@@ -40,7 +40,9 @@ namespace System.Drawing
         /// <summary>
         /// Initializes a new instance of the Pen class with the specified <see cref='Color'/>.
         /// </summary>
-        public Pen(Color color) : this(color, (float)1.0) { }
+        public Pen(Color color) : this(color, (float)1.0)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Pen'/> class with the specified
@@ -70,7 +72,9 @@ namespace System.Drawing
         /// <summary>
         /// Initializes a new instance of the Pen class with the specified <see cref='Brush'/>.
         /// </summary>
-        public Pen(Brush brush) : this(brush, (float)1.0) { }
+        public Pen(Brush brush) : this(brush, (float)1.0)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Pen'/> class with the specified <see cref='Drawing.Brush'/> and width.
@@ -161,7 +165,9 @@ namespace System.Drawing
                     );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex)) { }
+                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex))
+                {
+                }
                 finally
                 {
                     _nativePen = IntPtr.Zero;

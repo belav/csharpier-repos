@@ -7,7 +7,8 @@ public class GraphUpdatesSqliteChangedChangingNotificationsTest
     : GraphUpdatesSqliteTestBase<GraphUpdatesSqliteChangedChangingNotificationsTest.SqliteFixture>
 {
     public GraphUpdatesSqliteChangedChangingNotificationsTest(SqliteFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

@@ -33,7 +33,9 @@ class T
             GC.Collect();
             for (int i = 0; i < count; ++i)
             {
-                lock (array[i]) { }
+                lock (array[i])
+                {
+                }
             }
             // two times, with feeling
             for (int i = 0; i < count; ++i)
@@ -42,7 +44,9 @@ class T
                 {
                     for (int j = 0; i < count; ++i)
                     {
-                        lock (array[j]) { }
+                        lock (array[j])
+                        {
+                        }
                     }
                 }
             }

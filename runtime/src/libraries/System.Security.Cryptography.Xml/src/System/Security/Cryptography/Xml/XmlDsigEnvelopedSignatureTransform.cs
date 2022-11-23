@@ -180,7 +180,9 @@ namespace System.Security.Cryptography.Xml
                                 resultNodeList.Add(node);
                             }
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
                 return resultNodeList;

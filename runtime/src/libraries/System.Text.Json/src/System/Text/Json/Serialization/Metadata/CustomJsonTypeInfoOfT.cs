@@ -15,7 +15,9 @@ namespace System.Text.Json.Serialization.Metadata
         /// Creates serialization metadata for a type using a simple converter.
         /// </summary>
         internal CustomJsonTypeInfo(JsonConverter converter, JsonSerializerOptions options)
-            : base(converter, options) { }
+            : base(converter, options)
+        {
+        }
 
         internal override JsonParameterInfoValues[] GetParameterInfoValues()
         {

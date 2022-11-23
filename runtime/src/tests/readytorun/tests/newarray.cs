@@ -103,9 +103,13 @@ class Program
     static volatile GenericClass1<object>[] genericclass1_object_array_field;
 }
 
-class GenericClass1<T> { }
+class GenericClass1<T>
+{
+}
 
-class GenericClass2<T> : GenericClass1<T> { }
+class GenericClass2<T> : GenericClass1<T>
+{
+}
 
 public static class Assert
 {

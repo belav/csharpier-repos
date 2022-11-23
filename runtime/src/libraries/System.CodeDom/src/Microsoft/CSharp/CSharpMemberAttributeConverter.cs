@@ -7,7 +7,9 @@ namespace Microsoft.CSharp
 {
     internal sealed class CSharpMemberAttributeConverter : CSharpModifierAttributeConverter
     {
-        private CSharpMemberAttributeConverter() { } // no  need to create an instance; use Default
+        private CSharpMemberAttributeConverter()
+        {
+        } // no  need to create an instance; use Default
 
         public static CSharpMemberAttributeConverter Default { get; } =
             new CSharpMemberAttributeConverter();

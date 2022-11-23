@@ -18,7 +18,9 @@ namespace Wasm.Build.Tests
         public BuildPublishTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         [Theory]
         [BuildAndRun(host: RunHost.Chrome, aot: false, config: "Release")]
@@ -78,7 +80,9 @@ namespace Wasm.Build.Tests
                     buildArgs,
                     buildDir: _projectDir,
                     expectedExitCode: 42,
-                    test: output => { },
+                    test: output =>
+                    {
+                    },
                     host: host,
                     id: id
                 );

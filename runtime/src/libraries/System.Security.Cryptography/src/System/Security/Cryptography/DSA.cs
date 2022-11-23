@@ -26,7 +26,9 @@ namespace System.Security.Cryptography
 
         public abstract void ImportParameters(DSAParameters parameters);
 
-        protected DSA() { }
+        protected DSA()
+        {
+        }
 
         [Obsolete(
             Obsoletions.CryptoStringFactoryMessage,

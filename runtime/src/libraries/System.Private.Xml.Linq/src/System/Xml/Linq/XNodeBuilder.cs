@@ -47,7 +47,9 @@ namespace System.Xml.Linq
             _root.Add(_content);
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override string LookupPrefix(string namespaceName)
         {
@@ -99,7 +101,9 @@ namespace System.Xml.Linq
             }
         }
 
-        public override void WriteEndDocument() { }
+        public override void WriteEndDocument()
+        {
+        }
 
         public override void WriteEndElement()
         {
@@ -172,9 +176,13 @@ namespace System.Xml.Linq
             _attrValue = string.Empty;
         }
 
-        public override void WriteStartDocument() { }
+        public override void WriteStartDocument()
+        {
+        }
 
-        public override void WriteStartDocument(bool standalone) { }
+        public override void WriteStartDocument(bool standalone)
+        {
+        }
 
         public override void WriteStartElement(
             string? prefix,

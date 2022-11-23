@@ -14,7 +14,9 @@ namespace System.Security.Cryptography.Xml
         // public constructors
         //
 
-        public KeyInfoRetrievalMethod() { }
+        public KeyInfoRetrievalMethod()
+        {
+        }
 
         public KeyInfoRetrievalMethod(string? strUri)
         {

@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             public static readonly NuintValueSetFactory Instance = new NuintValueSetFactory();
 
-            private NuintValueSetFactory() { }
+            private NuintValueSetFactory()
+            {
+            }
 
             IValueSet IValueSetFactory.AllValues => NuintValueSet.AllValues;
 

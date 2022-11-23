@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSolutionCodeStyleOptionsProvider() { }
+        public CSharpSolutionCodeStyleOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             CSharpCodeStyleOptions.AllOptions.As<IOption>();

@@ -8,13 +8,16 @@ namespace System.Web.Mvc
     public class AuthorizationContext : ControllerContext
     {
         // parameterless constructor used for mocking
-        public AuthorizationContext() { }
+        public AuthorizationContext()
+        {
+        }
 
         [Obsolete(
             "The recommended alternative is the constructor AuthorizationContext(ControllerContext controllerContext, ActionDescriptor actionDescriptor)."
         )]
         public AuthorizationContext(ControllerContext controllerContext) : base(controllerContext)
-        { }
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Usage",

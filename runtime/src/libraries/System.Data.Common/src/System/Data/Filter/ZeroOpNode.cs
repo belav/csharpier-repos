@@ -24,7 +24,9 @@ namespace System.Data
             );
         }
 
-        internal override void Bind(DataTable table, List<DataColumn> list) { }
+        internal override void Bind(DataTable table, List<DataColumn> list)
+        {
+        }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal override object Eval()

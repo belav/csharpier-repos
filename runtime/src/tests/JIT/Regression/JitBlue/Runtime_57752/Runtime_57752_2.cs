@@ -38,9 +38,13 @@ public class Runtime_57752_2
         }
         finally
         {
-            for (int var2 = 0; var2 < -1; var2++) { }
+            for (int var2 = 0; var2 < -1; var2++)
+            {
+            }
 
-            try { }
+            try
+            {
+            }
             finally
             {
                 System.Console.WriteLine(var11);

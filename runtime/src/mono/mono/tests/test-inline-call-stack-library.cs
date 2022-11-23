@@ -72,7 +72,9 @@ namespace Library
             _flag = StaticFlag.Flag;
         }
 
-        static ResourceStrictFieldInit() { }
+        static ResourceStrictFieldInit()
+        {
+        }
     }
 
     public class InlinedMethods

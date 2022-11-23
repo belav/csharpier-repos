@@ -11,11 +11,17 @@ using System.Threading;
 using Xunit;
 
 // Spice things up a bit with some mutual recursion between instantiations
-class C<T> { }
+class C<T>
+{
+}
 
-class D<T> : C<E<T>> { }
+class D<T> : C<E<T>>
+{
+}
 
-class E<T> : C<D<T>> { }
+class E<T> : C<D<T>>
+{
+}
 
 public class P
 {

@@ -27,10 +27,14 @@ namespace Tests.Integration
             Assert.Equal(42, simple.CISimpleValue);
         }
 
-        public interface IOptionalRef { }
+        public interface IOptionalRef
+        {
+        }
 
         [Export]
-        public class OptionalExportProvided { }
+        public class OptionalExportProvided
+        {
+        }
 
         [Export]
         public class AWithOptionalParameter
@@ -161,7 +165,9 @@ namespace Tests.Integration
         public class ClassWithNotFoundConstructorArgs
         {
             [ImportingConstructor]
-            public ClassWithNotFoundConstructorArgs([Import("ContractThatDoesntExist")] int i) { }
+            public ClassWithNotFoundConstructorArgs([Import("ContractThatDoesntExist")] int i)
+            {
+            }
         }
 
         private CompositionContainer GetContainerWithCatalog()
@@ -175,7 +181,9 @@ namespace Tests.Integration
         public class InvalidImportManyCI
         {
             [ImportingConstructor]
-            public InvalidImportManyCI([ImportMany] List<MyExport> exports) { }
+            public InvalidImportManyCI([ImportMany] List<MyExport> exports)
+            {
+            }
         }
 
         [Fact]

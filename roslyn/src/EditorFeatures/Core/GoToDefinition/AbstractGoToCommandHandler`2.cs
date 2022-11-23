@@ -157,8 +157,12 @@ internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArg
             await ExecuteCommandWorkerAsync(document, position, cancellationTokenSource)
                 .ConfigureAwait(false);
         }
-        catch (OperationCanceledException) { }
-        catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+        {
+        }
     }
 
     private async Task ExecuteCommandWorkerAsync(

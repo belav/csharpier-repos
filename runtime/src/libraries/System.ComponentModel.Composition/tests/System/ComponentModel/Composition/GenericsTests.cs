@@ -10,30 +10,54 @@ namespace System.ComponentModel.Composition
 {
     public class GenericsTests
     {
-        public class Bar { }
+        public class Bar
+        {
+        }
 
-        public class Bar2 : Bar { }
+        public class Bar2 : Bar
+        {
+        }
 
-        public struct FooStruct { }
+        public struct FooStruct
+        {
+        }
 
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
-        public interface IFoo2 : IFoo { }
+        public interface IFoo2 : IFoo
+        {
+        }
 
-        public interface IBar { }
+        public interface IBar
+        {
+        }
 
-        public interface IExport<T1, T2> { }
+        public interface IExport<T1, T2>
+        {
+        }
 
-        public class ExportImpl<T1, T2> : IExport<T1, T2> { }
+        public class ExportImpl<T1, T2> : IExport<T1, T2>
+        {
+        }
 
-        public interface IExport<T> { }
+        public interface IExport<T>
+        {
+        }
 
-        public interface IImport<T1, T2> { }
+        public interface IImport<T1, T2>
+        {
+        }
 
-        public interface IImport<T> { }
+        public interface IImport<T>
+        {
+        }
 
         [Export(typeof(IFoo))]
-        public class Foo : IFoo { }
+        public class Foo : IFoo
+        {
+        }
 
         public interface IPartWithImport
         {
@@ -41,13 +65,19 @@ namespace System.ComponentModel.Composition
         }
 
         [Export(typeof(IImport<,>))]
-        public class SelfImport<T1, T2> : IImport<T1, T2> { }
+        public class SelfImport<T1, T2> : IImport<T1, T2>
+        {
+        }
 
         [Export(typeof(IImport<>))]
-        public class SelfImport<T> : IImport<T> { }
+        public class SelfImport<T> : IImport<T>
+        {
+        }
 
         [Export(typeof(IExport<,>))]
-        public class SelfExport<T1, T2> : IExport<T1, T2> { }
+        public class SelfExport<T1, T2> : IExport<T1, T2>
+        {
+        }
 
         public class PropertyExport<T1, T2> : IExport<T1, T2>
         {
@@ -241,7 +271,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Export(typeof(IExport<IFoo, IBar>))]
-        public class ExportFooBar : IExport<IFoo, IBar> { }
+        public class ExportFooBar : IExport<IFoo, IBar>
+        {
+        }
 
         public static class SingletonExportExportCount
         {
@@ -264,26 +296,40 @@ namespace System.ComponentModel.Composition
         }
 
         [Export(typeof(IExport<>))]
-        public class PartWithTypeConstraint<T> : IExport<T> where T : IFoo { }
+        public class PartWithTypeConstraint<T> : IExport<T> where T : IFoo
+        {
+        }
 
         [Export(typeof(IExport<>))]
-        public class PartWithBaseTypeConstraint<T> : IExport<T> where T : Bar { }
+        public class PartWithBaseTypeConstraint<T> : IExport<T> where T : Bar
+        {
+        }
 
         [Export(typeof(IExport<>))]
-        public class PartWithRefTypeConstraint<T> : IExport<T> where T : class { }
+        public class PartWithRefTypeConstraint<T> : IExport<T> where T : class
+        {
+        }
 
         [Export(typeof(IExport<>))]
-        public class PartWithStructTypeConstraint<T> : IExport<T> where T : struct { }
+        public class PartWithStructTypeConstraint<T> : IExport<T> where T : struct
+        {
+        }
 
         [Export(typeof(IExport<>))]
-        public class PartWithNewableTypeConstraint<T> : IExport<T> where T : new() { }
+        public class PartWithNewableTypeConstraint<T> : IExport<T> where T : new()
+        {
+        }
 
         [Export(typeof(IExport<,>))]
         public class PartWithGenericConstraint<T1, T2> : IExport<T1, T2>
-            where T2 : IDictionary<string, T1> { }
+            where T2 : IDictionary<string, T1>
+        {
+        }
 
         [Export(typeof(IExport<,>))]
-        public class PartWithNakedConstraint<T1, T2> : IExport<T1, T2> where T2 : T1 { }
+        public class PartWithNakedConstraint<T1, T2> : IExport<T1, T2> where T2 : T1
+        {
+        }
 
         [Export(typeof(IExport<>))]
         public class OpenGenericPartWithClosedGenericImport<T> : IExport<T>
@@ -757,12 +803,18 @@ namespace System.ComponentModel.Composition
             Assert.Equal(1, container.GetExportedValues<IExport<string, int>>().Count());
         }
 
-        public interface IA<T> { }
+        public interface IA<T>
+        {
+        }
 
-        public interface IB<T> { }
+        public interface IB<T>
+        {
+        }
 
         [Export(typeof(IA<>)), Export(typeof(IB<>))]
-        public class AB<T> : IA<T>, IB<T> { }
+        public class AB<T> : IA<T>, IB<T>
+        {
+        }
 
         [Fact]
         public void PartWithMultipleExportsOfASingleOrder_One_ShouldSucceed()
@@ -776,7 +828,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Export(typeof(IA<>)), Export(typeof(IBar))]
-        class ANonGenericB<T> : IA<T>, IBar { }
+        class ANonGenericB<T> : IA<T>, IBar
+        {
+        }
 
         [Fact]
         public void NonGenericExportOnGenericPartIsNotAllowed()
@@ -807,7 +861,9 @@ namespace System.ComponentModel.Composition
 
         class TestClass1<T> : ITest1<T>
         {
-            public void Execute() { }
+            public void Execute()
+            {
+            }
         }
 
         [InheritedExport]
@@ -818,7 +874,9 @@ namespace System.ComponentModel.Composition
 
         class TestClass2<T> : BaseClass<T>
         {
-            public override void Execute() { }
+            public override void Execute()
+            {
+            }
         }
 
         [Fact]

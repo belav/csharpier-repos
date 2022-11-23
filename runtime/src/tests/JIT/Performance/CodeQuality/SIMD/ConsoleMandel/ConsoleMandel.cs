@@ -13,7 +13,9 @@ namespace SIMD
         private const int Fail = -1;
         private static bool s_silent = false;
 
-        private static void DoNothing(int x, int y, int count) { }
+        private static void DoNothing(int x, int y, int count)
+        {
+        }
 
         private static void DrawDot(int x, int y, int count)
         {

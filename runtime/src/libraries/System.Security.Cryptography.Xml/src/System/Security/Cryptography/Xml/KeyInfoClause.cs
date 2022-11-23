@@ -11,7 +11,9 @@ namespace System.Security.Cryptography.Xml
         // protected constructors
         //
 
-        protected KeyInfoClause() { }
+        protected KeyInfoClause()
+        {
+        }
 
         //
         // public methods

@@ -8,7 +8,9 @@ namespace System.Reflection
 {
     public abstract partial class MetadataAssemblyResolver
     {
-        protected MetadataAssemblyResolver() { }
+        protected MetadataAssemblyResolver()
+        {
+        }
 
         public abstract System.Reflection.Assembly? Resolve(
             System.Reflection.MetadataLoadContext context,
@@ -21,14 +23,18 @@ namespace System.Reflection
         public MetadataLoadContext(
             System.Reflection.MetadataAssemblyResolver resolver,
             string? coreAssemblyName = null
-        ) { }
+        )
+        {
+        }
 
         public System.Reflection.Assembly? CoreAssembly
         {
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<System.Reflection.Assembly> GetAssemblies()
         {
@@ -66,7 +72,8 @@ namespace System.Reflection
     public partial class PathAssemblyResolver : System.Reflection.MetadataAssemblyResolver
     {
         public PathAssemblyResolver(System.Collections.Generic.IEnumerable<string> assemblyPaths)
-        { }
+        {
+        }
 
         public override System.Reflection.Assembly? Resolve(
             System.Reflection.MetadataLoadContext context,

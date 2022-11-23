@@ -6915,8 +6915,12 @@ namespace System.Xml.Xsl.IlGen
                         return value.ValueAsBoolean ? this.f.True() : this.f.False();
                 }
             }
-            catch (OverflowException) { }
-            catch (FormatException) { }
+            catch (OverflowException)
+            {
+            }
+            catch (FormatException)
+            {
+            }
 
             // Conversion error or QilExpression cannot represent resulting literal
             return this.f.XsltConvert(ndLiteral, typTarget);
@@ -7090,8 +7094,12 @@ namespace System.Xml.Xsl.IlGen
                     }
                 }
             }
-            catch (OverflowException) { }
-            catch (DivideByZeroException) { }
+            catch (OverflowException)
+            {
+            }
+            catch (DivideByZeroException)
+            {
+            }
 
             // An error occurred, so don't fold operationo
             switch (opType)

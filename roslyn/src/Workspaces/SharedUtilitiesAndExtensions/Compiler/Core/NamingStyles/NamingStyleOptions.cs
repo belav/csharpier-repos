@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 #if !CODE_STYLE
         : OptionsProvider<NamingStylePreferences>
 #endif
-    { }
+    {
+    }
 
 #if !CODE_STYLE
     internal static class NamingStylePreferencesProviders

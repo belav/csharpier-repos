@@ -8,7 +8,9 @@ namespace System.ComponentModel.Composition.Registration
 {
     public sealed partial class ExportBuilder
     {
-        public ExportBuilder() { }
+        public ExportBuilder()
+        {
+        }
 
         public System.ComponentModel.Composition.Registration.ExportBuilder AddMetadata(
             string name,
@@ -53,7 +55,9 @@ namespace System.ComponentModel.Composition.Registration
 
     public sealed partial class ImportBuilder
     {
-        public ImportBuilder() { }
+        public ImportBuilder()
+        {
+        }
 
         public System.ComponentModel.Composition.Registration.ImportBuilder AllowDefault()
         {
@@ -108,7 +112,9 @@ namespace System.ComponentModel.Composition.Registration
 
     public partial class ParameterImportBuilder
     {
-        public ParameterImportBuilder() { }
+        public ParameterImportBuilder()
+        {
+        }
 
         public T Import<T>()
         {
@@ -125,7 +131,9 @@ namespace System.ComponentModel.Composition.Registration
 
     public partial class PartBuilder
     {
-        internal PartBuilder() { }
+        internal PartBuilder()
+        {
+        }
 
         public System.ComponentModel.Composition.Registration.PartBuilder AddMetadata(
             string name,
@@ -296,7 +304,9 @@ namespace System.ComponentModel.Composition.Registration
 
     public partial class PartBuilder<T> : System.ComponentModel.Composition.Registration.PartBuilder
     {
-        internal PartBuilder() { }
+        internal PartBuilder()
+        {
+        }
 
         public System.ComponentModel.Composition.Registration.PartBuilder<T> ExportProperty(
             System.Linq.Expressions.Expression<System.Func<T, object>> propertyFilter
@@ -371,7 +381,9 @@ namespace System.ComponentModel.Composition.Registration
 
     public partial class RegistrationBuilder : System.Reflection.Context.CustomReflectionContext
     {
-        public RegistrationBuilder() { }
+        public RegistrationBuilder()
+        {
+        }
 
         public System.ComponentModel.Composition.Registration.PartBuilder ForType(System.Type type)
         {

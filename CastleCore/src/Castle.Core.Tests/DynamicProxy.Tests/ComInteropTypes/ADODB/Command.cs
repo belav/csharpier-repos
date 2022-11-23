@@ -21,7 +21,9 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [ComImport]
     [CoClass(typeof(CommandClass))]
     [Guid("b08400bd-f9d1-4d02-b856-71d5dba123e9")]
-    public interface Command : _Command { }
+    public interface Command : _Command
+    {
+    }
 
     [ComImport]
     [ClassInterface(ClassInterfaceType.None)]
@@ -29,7 +31,8 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [TypeLibType(TypeLibTypeFlags.FCanCreate | TypeLibTypeFlags.FLicensed)]
     //[DefaultMember("Parameters")]
     public class CommandClass // : (implemented interfaces omitted)
-    { }
+    {
+    }
 
     [ComImport]
     [DefaultMember("Parameters")]

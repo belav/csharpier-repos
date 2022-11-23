@@ -222,7 +222,9 @@ namespace System.IO.Pipes.Tests
                     true,
                     server.SafePipeHandle
                 )
-            ) { }
+            )
+            {
+            }
         }
 
         [Fact]

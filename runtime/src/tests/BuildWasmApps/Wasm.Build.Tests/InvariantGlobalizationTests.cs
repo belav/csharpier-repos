@@ -15,7 +15,9 @@ namespace Wasm.Build.Tests
         public InvariantGlobalizationTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         public static IEnumerable<object?[]> InvariantGlobalizationTestData(
             bool aot,

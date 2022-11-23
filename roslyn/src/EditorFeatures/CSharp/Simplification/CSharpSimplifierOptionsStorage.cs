@@ -19,7 +19,9 @@ internal static class CSharpSimplifierOptionsStorage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Service() { }
+        public Service()
+        {
+        }
 
         public SimplifierOptions GetOptions(IGlobalOptionService globalOptions) =>
             GetCSharpSimplifierOptions(globalOptions);

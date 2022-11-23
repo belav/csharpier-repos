@@ -192,7 +192,9 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource
-    ) { }
+    )
+    {
+    }
 
     public Task CommandExceptionAsync(
         IRelationalConnection connection,
@@ -219,7 +221,9 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource
-    ) { }
+    )
+    {
+    }
 
     public Task CommandErrorAsync(
         IRelationalConnection connection,
@@ -245,7 +249,9 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource
-    ) { }
+    )
+    {
+    }
 
     public Task CommandCanceledAsync(
         IRelationalConnection connection,

@@ -116,7 +116,9 @@ namespace System.Net.Http.Formatting
         public class InvalidDataContract
         {
             // removing the default ctor makes this invalid
-            public InvalidDataContract(string s) { }
+            public InvalidDataContract(string s)
+            {
+            }
         }
 
         [Theory]

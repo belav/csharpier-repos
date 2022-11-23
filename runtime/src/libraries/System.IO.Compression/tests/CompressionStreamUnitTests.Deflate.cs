@@ -169,7 +169,9 @@ namespace System.IO.Compression
                 WriteArrayInvoked = false;
 
             internal DerivedDeflateStream(Stream stream, CompressionMode mode, bool leaveOpen)
-                : base(stream, mode, leaveOpen) { }
+                : base(stream, mode, leaveOpen)
+            {
+            }
 
             public override int Read(byte[] buffer, int offset, int count)
             {

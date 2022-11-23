@@ -16,7 +16,9 @@ public class ContosoAuthenticationHandler : AuthenticationHandler<ContosoAuthent
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    ) : base(options, logger, encoder, clock)
+    {
+    }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync() =>
         Task.FromResult(AuthenticateResult.NoResult());

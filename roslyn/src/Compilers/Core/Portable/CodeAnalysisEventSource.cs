@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis
             public const EventTask SingleGeneratorRunTime = (EventTask)2;
         }
 
-        private CodeAnalysisEventSource() { }
+        private CodeAnalysisEventSource()
+        {
+        }
 
         [Event(
             1,

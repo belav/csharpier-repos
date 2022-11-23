@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.VisualBasic
     internal class VisualBasicCommandLineArgumentReader : CommandLineArgumentReader
     {
         public VisualBasicCommandLineArgumentReader(MSB.Execution.ProjectInstance project)
-            : base(project) { }
+            : base(project)
+        {
+        }
 
         public static ImmutableArray<string> Read(MSB.Execution.ProjectInstance project)
         {

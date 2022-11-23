@@ -158,7 +158,9 @@ public class ValueConverters
                 sourceMember.ToString("d8");
         }
 
-        public class Source { }
+        public class Source
+        {
+        }
 
         public class Dest
         {

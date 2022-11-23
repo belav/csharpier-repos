@@ -54,7 +54,9 @@ public class ChangedOnlyMonsterContext
         ChangedOnlyMonsterContext.ProductPageView
     >
 {
-    public ChangedOnlyMonsterContext(DbContextOptions options) : base(options) { }
+    public ChangedOnlyMonsterContext(DbContextOptions options) : base(options)
+    {
+    }
 
     public class NotificationEntity : INotifyPropertyChanged
     {
@@ -77,7 +79,9 @@ public class ChangedOnlyMonsterContext
         }
     }
 
-    public class BackOrderLine2 : BackOrderLine { }
+    public class BackOrderLine2 : BackOrderLine
+    {
+    }
 
     public class BackOrderLine : OrderLine, IBackOrderLine
     {

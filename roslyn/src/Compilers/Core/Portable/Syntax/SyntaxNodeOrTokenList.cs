@@ -51,14 +51,18 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="nodesAndTokens">The sequence of nodes and tokens</param>
         public SyntaxNodeOrTokenList(IEnumerable<SyntaxNodeOrToken> nodesAndTokens)
-            : this(CreateNode(nodesAndTokens), 0) { }
+            : this(CreateNode(nodesAndTokens), 0)
+        {
+        }
 
         /// <summary>
         /// Create a <see cref="SyntaxNodeOrTokenList"/> from one or more <see cref="SyntaxNodeOrToken"/>.
         /// </summary>
         /// <param name="nodesAndTokens">The nodes and tokens</param>
         public SyntaxNodeOrTokenList(params SyntaxNodeOrToken[] nodesAndTokens)
-            : this((IEnumerable<SyntaxNodeOrToken>)nodesAndTokens) { }
+            : this((IEnumerable<SyntaxNodeOrToken>)nodesAndTokens)
+        {
+        }
 
         private static SyntaxNode? CreateNode(IEnumerable<SyntaxNodeOrToken> nodesAndTokens)
         {
@@ -564,7 +568,9 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             /// </summary>
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             public override bool Equals(object? obj)
             {

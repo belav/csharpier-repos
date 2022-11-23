@@ -11,7 +11,9 @@ using System.Runtime.CompilerServices;
 class X
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void E(ImmutableArray<string> a) { }
+    public static void E(ImmutableArray<string> a)
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static ImmutableArray<string> G() => ImmutableArray<string>.Empty;

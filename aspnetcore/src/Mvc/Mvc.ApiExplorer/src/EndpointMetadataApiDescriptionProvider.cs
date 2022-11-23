@@ -93,7 +93,9 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         }
     }
 
-    public void OnProvidersExecuted(ApiDescriptionProviderContext context) { }
+    public void OnProvidersExecuted(ApiDescriptionProviderContext context)
+    {
+    }
 
     private ApiDescription CreateApiDescription(
         RouteEndpoint routeEndpoint,

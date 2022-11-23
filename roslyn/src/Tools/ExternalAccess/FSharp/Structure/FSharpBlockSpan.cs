@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure
                 bannerText,
                 autoCollapse,
                 isDefaultCollapsed
-            ) { }
+            )
+        {
+        }
 
         public FSharpBlockSpan(
             string type,

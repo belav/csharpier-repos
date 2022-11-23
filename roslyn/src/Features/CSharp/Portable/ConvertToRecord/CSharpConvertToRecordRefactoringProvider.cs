@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertToRecordRefactoringProvider() { }
+        public CSharpConvertToRecordRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

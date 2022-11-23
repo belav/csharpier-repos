@@ -19,7 +19,9 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
     public static readonly IValidationStrategy Instance =
         new DefaultComplexObjectValidationStrategy();
 
-    private DefaultComplexObjectValidationStrategy() { }
+    private DefaultComplexObjectValidationStrategy()
+    {
+    }
 
     /// <inheritdoc />
     public IEnumerator<ValidationEntry> GetChildren(
@@ -131,7 +133,9 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
             return true;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Reset()
         {

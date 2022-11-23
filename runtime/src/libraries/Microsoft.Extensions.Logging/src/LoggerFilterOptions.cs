@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Creates a new <see cref="LoggerFilterOptions"/> instance.
         /// </summary>
-        public LoggerFilterOptions() { }
+        public LoggerFilterOptions()
+        {
+        }
 
         /// <summary>
         /// Gets or sets value indicating whether logging scopes are being captured. Defaults to <c>true</c>

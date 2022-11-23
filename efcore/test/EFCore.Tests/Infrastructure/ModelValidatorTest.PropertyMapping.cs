@@ -294,14 +294,18 @@ public partial class ModelValidatorTest
     protected virtual IModel Validate(TestHelpers.TestModelBuilder modelBuilder) =>
         modelBuilder.FinalizeModel(designTime: true);
 
-    protected class NonPrimitiveNonNavigationAsPropertyEntity { }
+    protected class NonPrimitiveNonNavigationAsPropertyEntity
+    {
+    }
 
     protected class NonPrimitiveAsPropertyEntity
     {
         public NavigationAsProperty Property { get; set; }
     }
 
-    protected class NavigationAsProperty { }
+    protected class NavigationAsProperty
+    {
+    }
 
     protected class PrimitivePropertyEntity
     {
@@ -387,7 +391,9 @@ public partial class ModelValidatorTest
         public string FavoriteBreed { get; set; }
     }
 
-    protected class Employee : Person { }
+    protected class Employee : Person
+    {
+    }
 
     protected class Owner
     {

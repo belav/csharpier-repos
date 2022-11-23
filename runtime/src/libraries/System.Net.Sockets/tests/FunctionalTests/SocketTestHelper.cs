@@ -64,7 +64,9 @@ namespace System.Net.Sockets.Tests
             s.Listen(backlog);
         }
 
-        public virtual void ConfigureNonBlocking(Socket s) { }
+        public virtual void ConfigureNonBlocking(Socket s)
+        {
+        }
     }
 
     public class SocketHelperArraySync : SocketHelperBase

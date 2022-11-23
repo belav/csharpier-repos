@@ -42,7 +42,9 @@ namespace Microsoft.Extensions.Options
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The implementation of Validate method on this type will walk through all properties of the passed in options object, and its type cannot be statically analyzed so its members may be trimmed."
         )]
-        public DataAnnotationValidateOptions(string? name) { }
+        public DataAnnotationValidateOptions(string? name)
+        {
+        }
 
         public string? Name
         {

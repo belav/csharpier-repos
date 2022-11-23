@@ -22,7 +22,9 @@ namespace Test
                         {
                             return;
                         }
-                        catch (Exception) { }
+                        catch (Exception)
+                        {
+                        }
                     }
                 } while (param5);
             }

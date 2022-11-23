@@ -2,5 +2,7 @@ using System;
 
 namespace TestBase
 {
-    public class TestBase { }
+    public class TestBase
+    {
+    }
 }

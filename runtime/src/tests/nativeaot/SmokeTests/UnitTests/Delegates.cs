@@ -475,7 +475,9 @@ class TestLinqExpressions
             {
                 del(ref i);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             if (i != 123)
                 throw new Exception();
@@ -495,9 +497,13 @@ class TestDefaultInterfaceMethods
         int IFoo.GetNumber() => 43;
     }
 
-    class Foo : IFoo { }
+    class Foo : IFoo
+    {
+    }
 
-    class Bar : IBar { }
+    class Bar : IBar
+    {
+    }
 
     class Baz : IFoo
     {

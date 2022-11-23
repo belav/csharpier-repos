@@ -276,5 +276,7 @@ public class DatabaseErrorPageTest
         return content;
     }
 
-    private class BloggingContext : DbContext { }
+    private class BloggingContext : DbContext
+    {
+    }
 }

@@ -7,7 +7,9 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class XPathEmptyIterator : ResettableIterator
     {
-        private XPathEmptyIterator() { }
+        private XPathEmptyIterator()
+        {
+        }
 
         public override XPathNodeIterator Clone()
         {
@@ -34,7 +36,9 @@ namespace MS.Internal.Xml.XPath
             return false;
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
 
         // -- Instance
         public static XPathEmptyIterator Instance = new XPathEmptyIterator();

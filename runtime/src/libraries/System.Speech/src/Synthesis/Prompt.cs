@@ -11,7 +11,9 @@ namespace System.Speech.Synthesis
     public class Prompt
     {
         #region Constructors
-        public Prompt(string textToSpeak) : this(textToSpeak, SynthesisTextFormat.Text) { }
+        public Prompt(string textToSpeak) : this(textToSpeak, SynthesisTextFormat.Text)
+        {
+        }
 
         public Prompt(PromptBuilder promptBuilder)
         {

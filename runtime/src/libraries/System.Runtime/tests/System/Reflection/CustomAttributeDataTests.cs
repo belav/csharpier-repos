@@ -152,19 +152,31 @@ namespace System.Reflection.Tests
         }
 
         [Flags]
-        private enum MyEnum { }
+        private enum MyEnum
+        {
+        }
 
         private class MyAttribute : Attribute
         {
-            internal MyAttribute() { }
+            internal MyAttribute()
+            {
+            }
 
-            internal MyAttribute(int i) { }
+            internal MyAttribute(int i)
+            {
+            }
 
-            internal MyAttribute(string s) { }
+            internal MyAttribute(string s)
+            {
+            }
 
-            internal MyAttribute(int i, int j) { }
+            internal MyAttribute(int i, int j)
+            {
+            }
 
-            static MyAttribute() { }
+            static MyAttribute()
+            {
+            }
         }
 
         [StructLayout(LayoutKind.Explicit)]

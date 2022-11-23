@@ -45,7 +45,9 @@ namespace System.Security.Cryptography.Pkcs
             : this(
                 signerIdentifierAsn.IssuerAndSerialNumber,
                 signerIdentifierAsn.SubjectKeyIdentifier
-            ) { }
+            )
+        {
+        }
 
         internal SubjectIdentifier(
             IssuerAndSerialNumberAsn? issuerAndSerialNumber,

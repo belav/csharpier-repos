@@ -21,6 +21,8 @@ namespace Sample
         }
 
         [JSExport]
-        public static void StopProfile() { }
+        public static void StopProfile()
+        {
+        }
     }
 }

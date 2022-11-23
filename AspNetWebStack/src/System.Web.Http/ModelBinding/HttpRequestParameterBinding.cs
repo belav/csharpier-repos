@@ -15,7 +15,8 @@ namespace System.Web.Http.ModelBinding
     public class HttpRequestParameterBinding : HttpParameterBinding
     {
         public HttpRequestParameterBinding(HttpParameterDescriptor descriptor) : base(descriptor)
-        { }
+        {
+        }
 
         // Execute the binding for the given request.
         // On success, this will add the parameter to the actionContext.ActionArguments dictionary.

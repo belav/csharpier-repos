@@ -105,7 +105,9 @@ namespace SerializationTestTypes
             Name = "smith";
         }
 
-        public Person() { }
+        public Person()
+        {
+        }
 
         [DataMember]
         public int Age;
@@ -756,7 +758,9 @@ namespace SerializationTestTypes
     [DataContract]
     public class DerivedFromPriC : PrivateCstor
     {
-        public DerivedFromPriC() : base(int.MaxValue) { }
+        public DerivedFromPriC() : base(int.MaxValue)
+        {
+        }
 
         public DerivedFromPriC(int d) : base(d)
         {

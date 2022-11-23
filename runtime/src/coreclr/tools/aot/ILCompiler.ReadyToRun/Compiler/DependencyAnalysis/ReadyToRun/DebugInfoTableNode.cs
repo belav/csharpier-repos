@@ -61,7 +61,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// </summary>
     public class DebugInfoTableNode : HeaderTableNode
     {
-        public DebugInfoTableNode(TargetDetails target) : base(target) { }
+        public DebugInfoTableNode(TargetDetails target) : base(target)
+        {
+        }
 
         public override int ClassCode => 1000735112;
 

@@ -12,10 +12,14 @@ namespace System.ServiceModel.Syndication
         private Collection<ResourceCollectionInfo> _collections;
         private ExtensibleSyndicationObject _extensions;
 
-        public Workspace() { }
+        public Workspace()
+        {
+        }
 
         public Workspace(string title, IEnumerable<ResourceCollectionInfo> collections)
-            : this((title != null) ? new TextSyndicationContent(title) : null, collections) { }
+            : this((title != null) ? new TextSyndicationContent(title) : null, collections)
+        {
+        }
 
         public Workspace(
             TextSyndicationContent title,

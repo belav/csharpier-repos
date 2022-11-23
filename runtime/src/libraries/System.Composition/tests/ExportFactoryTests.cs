@@ -23,10 +23,14 @@ namespace System.Composition.UnitTests
         }
 
         [Shared, Export]
-        public class SharedUnbounded { }
+        public class SharedUnbounded
+        {
+        }
 
         [Shared(Boundaries.DataConsistency), Export]
-        public class SharedBoundedByDC { }
+        public class SharedBoundedByDC
+        {
+        }
 
         [Export]
         public class DataConsistencyBoundaryProvider
@@ -49,7 +53,9 @@ namespace System.Composition.UnitTests
             }
         }
 
-        public interface IA { }
+        public interface IA
+        {
+        }
 
         [Export(typeof(IA))]
         public class A : IA, IDisposable
@@ -198,10 +204,14 @@ namespace System.Composition.UnitTests
         }
 
         [Export("Special", typeof(IA))]
-        public class A1 : IA { }
+        public class A1 : IA
+        {
+        }
 
         [Export("Special", typeof(IA))]
-        public class A2 : IA { }
+        public class A2 : IA
+        {
+        }
 
         [Export]
         public class AConsumer

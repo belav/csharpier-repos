@@ -89,7 +89,9 @@ public class DatabaseInMemoryTest
             Name = (string)values[1];
         }
 
-        public Customer() { }
+        public Customer()
+        {
+        }
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -129,7 +131,9 @@ public class DatabaseInMemoryTest
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Artist>().HasKey(a => a.ArtistId);
 
-        public class Artist : ArtistBase<string> { }
+        public class Artist : ArtistBase<string>
+        {
+        }
 
         public class ArtistBase<TKey>
         {

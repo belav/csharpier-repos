@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             loop.Init(new LibuvFunctions());
 
             var timer = new UvTimerHandle(_trace);
-            timer.Init(loop, (a, b) => { });
+            timer.Init(
+                loop,
+                (a, b) => {
+                }
+            );
 
             var callbackInvoked = false;
             timer.Start(
@@ -47,7 +51,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             loop.Init(new LibuvFunctions());
 
             var timer = new UvTimerHandle(_trace);
-            timer.Init(loop, (callback, handle) => { });
+            timer.Init(
+                loop,
+                (callback, handle) => {
+                }
+            );
 
             var callbackCount = 0;
             timer.Start(

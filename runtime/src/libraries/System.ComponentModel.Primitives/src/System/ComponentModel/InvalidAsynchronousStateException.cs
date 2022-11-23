@@ -18,24 +18,32 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.InvalidAsynchronousStateException'/>
         /// class without a message.
         /// </summary>
-        public InvalidAsynchronousStateException() : this(null) { }
+        public InvalidAsynchronousStateException() : this(null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.InvalidAsynchronousStateException'/>
         /// class with the specified message.
         /// </summary>
-        public InvalidAsynchronousStateException(string? message) : base(message) { }
+        public InvalidAsynchronousStateException(string? message) : base(message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message
         /// and a reference to the inner exception that is the cause of this exception.
         /// </summary>
         public InvalidAsynchronousStateException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected InvalidAsynchronousStateException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        ) : base(info, context)
+        {
+        }
     }
 }

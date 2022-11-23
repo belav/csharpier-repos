@@ -11,9 +11,13 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
         public User ModifiedBy { get; set; }
     }
 
-    class User { }
+    class User
+    {
+    }
 
-    class Computer : EntityBase { }
+    class Computer : EntityBase
+    {
+    }
 
     class Script : EntityBase
     {
@@ -28,9 +32,13 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
         public UserModel ModifiedBy { get; set; }
     }
 
-    class UserModel { }
+    class UserModel
+    {
+    }
 
-    class ComputerModel : EntityBaseModel { }
+    class ComputerModel : EntityBaseModel
+    {
+    }
 
     class ScriptModel : EntityBaseModel
     {

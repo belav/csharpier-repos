@@ -2077,7 +2077,9 @@ namespace System.Diagnostics.Tests
         public int Y { get; set; }
     }
 
-    internal class MyDerivedPoint : MyPoint { }
+    internal class MyDerivedPoint : MyPoint
+    {
+    }
 
     /// <summary>
     /// classes for test data
@@ -2190,7 +2192,9 @@ namespace System.Diagnostics.Tests
     /// </summary>
     internal class DiagnosticSourceEventListener : EventListener
     {
-        public DiagnosticSourceEventListener() { }
+        public DiagnosticSourceEventListener()
+        {
+        }
 
         /// <summary>
         /// Will be called when a DiagnosticSource event is fired.
@@ -2296,6 +2300,8 @@ namespace System.Diagnostics.Tests
         protected override void OnEventSourceCreated(EventSource eventSource) =>
             EnableEvents(eventSource, EventLevel.LogAlways);
 
-        protected override void OnEventWritten(EventWrittenEventArgs eventData) { }
+        protected override void OnEventWritten(EventWrittenEventArgs eventData)
+        {
+        }
     }
 }

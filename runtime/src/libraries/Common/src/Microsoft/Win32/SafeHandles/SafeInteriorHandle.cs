@@ -12,7 +12,9 @@ namespace Microsoft.Win32.SafeHandles
         private SafeHandle? _parent;
 
         protected SafeInteriorHandle(IntPtr invalidHandleValue, bool ownsHandle)
-            : base(invalidHandleValue, ownsHandle) { }
+            : base(invalidHandleValue, ownsHandle)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

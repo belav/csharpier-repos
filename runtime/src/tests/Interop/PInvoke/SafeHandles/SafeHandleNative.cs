@@ -20,9 +20,13 @@ namespace SafeHandleTests
 
         public class ThrowingCustomMarshaler : ICustomMarshaler
         {
-            public void CleanUpManagedData(object ManagedObj) { }
+            public void CleanUpManagedData(object ManagedObj)
+            {
+            }
 
-            public void CleanUpNativeData(IntPtr pNativeData) { }
+            public void CleanUpNativeData(IntPtr pNativeData)
+            {
+            }
 
             public int GetNativeDataSize() => IntPtr.Size;
 

@@ -51,6 +51,8 @@ namespace System.ComponentModel.Design.Serialization
         /// designer loaders to implement a lazy-write scheme to improve
         /// performance. The default implementation does nothing.
         /// </summary>
-        public virtual void Flush() { }
+        public virtual void Flush()
+        {
+        }
     }
 }

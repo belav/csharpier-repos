@@ -121,7 +121,9 @@ namespace Microsoft.DotNet.Build.Tasks
                     result = peReader.HasMetadata && peReader.GetMetadataReader().IsAssembly;
                 }
             }
-            catch (BadImageFormatException) { }
+            catch (BadImageFormatException)
+            {
+            }
 
             return result;
         }

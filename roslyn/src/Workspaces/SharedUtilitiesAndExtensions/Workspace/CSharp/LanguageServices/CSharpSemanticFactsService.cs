@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override ISemanticFacts SemanticFacts => CSharpSemanticFacts.Instance;
 
-        private CSharpSemanticFactsService() { }
+        private CSharpSemanticFactsService()
+        {
+        }
 
         protected override SyntaxToken ToIdentifierToken(string identifier) =>
             identifier.ToIdentifierToken();

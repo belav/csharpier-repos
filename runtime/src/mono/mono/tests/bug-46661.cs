@@ -25,7 +25,9 @@ namespace ExceptionFilterTestLauncher
             {
                 test = SubTest(i);
             }
-            catch (Exception e) when (!HandleException(e)) { }
+            catch (Exception e) when (!HandleException(e))
+            {
+            }
             return test;
         }
 

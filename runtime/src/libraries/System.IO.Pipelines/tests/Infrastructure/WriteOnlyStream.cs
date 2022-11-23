@@ -19,7 +19,9 @@ namespace System.IO.Pipelines.Tests
             set => throw new NotSupportedException();
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

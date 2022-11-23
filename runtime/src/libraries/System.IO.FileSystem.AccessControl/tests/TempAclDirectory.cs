@@ -27,7 +27,9 @@ namespace System.IO
                     IO.Path.GetTempPath(),
                     PathGenerator.GenerateTestFileName(null, memberName, lineNumber)
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// the returned path can be used both as directory and as file name

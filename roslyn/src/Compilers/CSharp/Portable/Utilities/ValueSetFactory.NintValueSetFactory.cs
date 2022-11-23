@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             public static readonly NintValueSetFactory Instance = new NintValueSetFactory();
 
-            private NintValueSetFactory() { }
+            private NintValueSetFactory()
+            {
+            }
 
             IValueSet IValueSetFactory.AllValues => NintValueSet.AllValues;
 

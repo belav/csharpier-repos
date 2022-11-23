@@ -12,9 +12,13 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class ZoneIdentityPermission : CodeAccessPermission
     {
-        public ZoneIdentityPermission(PermissionState state) { }
+        public ZoneIdentityPermission(PermissionState state)
+        {
+        }
 
-        public ZoneIdentityPermission(SecurityZone zone) { }
+        public ZoneIdentityPermission(SecurityZone zone)
+        {
+        }
 
         public SecurityZone SecurityZone { get; set; }
 
@@ -23,7 +27,9 @@ namespace System.Security.Permissions
             return this;
         }
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

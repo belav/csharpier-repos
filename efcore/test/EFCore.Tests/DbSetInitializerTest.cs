@@ -59,7 +59,9 @@ public class DbSetInitializerTest
 
     private class JustAContext : DbContext
     {
-        public JustAContext(DbContextOptions options) : base(options) { }
+        public JustAContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<string> One { get; set; }
         private DbSet<object> Two { get; set; }

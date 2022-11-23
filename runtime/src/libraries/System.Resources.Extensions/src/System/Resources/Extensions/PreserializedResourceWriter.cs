@@ -8,7 +8,9 @@ using System.IO;
 
 namespace System.Resources.Extensions
 {
-    internal sealed class UnknownType { }
+    internal sealed class UnknownType
+    {
+    }
 
     public partial class PreserializedResourceWriter
     {

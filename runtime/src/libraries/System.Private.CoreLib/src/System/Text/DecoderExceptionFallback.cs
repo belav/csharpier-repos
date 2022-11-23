@@ -105,7 +105,9 @@ namespace System.Text
         private DecoderFallbackException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
 
         public byte[]? BytesUnknown => _bytesUnknown;
 

@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class WithConstructorsSqliteTest
     : WithConstructorsTestBase<WithConstructorsSqliteTest.WithConstructorsSqliteFixture>
 {
-    public WithConstructorsSqliteTest(WithConstructorsSqliteFixture fixture) : base(fixture) { }
+    public WithConstructorsSqliteTest(WithConstructorsSqliteFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

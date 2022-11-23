@@ -15,14 +15,18 @@ namespace System.Net
 #endif
     public sealed class DnsPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public DnsPermission(PermissionState state) { }
+        public DnsPermission(PermissionState state)
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

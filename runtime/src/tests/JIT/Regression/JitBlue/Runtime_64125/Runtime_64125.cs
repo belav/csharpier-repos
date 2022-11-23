@@ -12,46 +12,74 @@ using System.Runtime.InteropServices;
 namespace Runtime_64125
 {
     [StructLayout(LayoutKind.Explicit, Size = 1)]
-    struct Struct1Bytes { }
+    struct Struct1Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 2)]
-    struct Struct2Bytes { }
+    struct Struct2Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 3)]
-    struct Struct3Bytes { }
+    struct Struct3Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 4)]
-    struct Struct4Bytes { }
+    struct Struct4Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 7)]
-    struct Struct7Bytes { }
+    struct Struct7Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    struct Struct8Bytes { }
+    struct Struct8Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 15)]
-    struct Struct15Bytes { }
+    struct Struct15Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    struct Struct16Bytes { }
+    struct Struct16Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 31)]
-    struct Struct31Bytes { }
+    struct Struct31Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 32)]
-    struct Struct32Bytes { }
+    struct Struct32Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 63)]
-    struct Struct63Bytes { }
+    struct Struct63Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 64)]
-    struct Struct64Bytes { }
+    struct Struct64Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 127)]
-    struct Struct127Bytes { }
+    struct Struct127Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 128)]
-    struct Struct128Bytes { }
+    struct Struct128Bytes
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 65648)]
     struct AnyOffset

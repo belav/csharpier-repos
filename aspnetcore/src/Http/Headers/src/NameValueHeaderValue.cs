@@ -35,7 +35,9 @@ public class NameValueHeaderValue
     /// Initializes a new instance of <see cref="NameValueHeaderValue"/>.
     /// </summary>
     /// <param name="name">The header name.</param>
-    public NameValueHeaderValue(StringSegment name) : this(name, null) { }
+    public NameValueHeaderValue(StringSegment name) : this(name, null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="NameValueHeaderValue"/>.

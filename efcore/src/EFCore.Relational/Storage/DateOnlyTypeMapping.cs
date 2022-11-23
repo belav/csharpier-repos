@@ -28,13 +28,17 @@ public class DateOnlyTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public DateOnlyTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Date)
-        : base(storeType, typeof(DateOnly), dbType) { }
+        : base(storeType, typeof(DateOnly), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DateOnlyTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected DateOnlyTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected DateOnlyTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

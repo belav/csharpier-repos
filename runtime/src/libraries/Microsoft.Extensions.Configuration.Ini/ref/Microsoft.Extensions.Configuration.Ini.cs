@@ -71,15 +71,21 @@ namespace Microsoft.Extensions.Configuration.Ini
     {
         public IniConfigurationProvider(
             Microsoft.Extensions.Configuration.Ini.IniConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
+        ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource))
+        {
+        }
 
-        public override void Load(System.IO.Stream stream) { }
+        public override void Load(System.IO.Stream stream)
+        {
+        }
     }
 
     public partial class IniConfigurationSource
         : Microsoft.Extensions.Configuration.FileConfigurationSource
     {
-        public IniConfigurationSource() { }
+        public IniConfigurationSource()
+        {
+        }
 
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
@@ -94,9 +100,13 @@ namespace Microsoft.Extensions.Configuration.Ini
     {
         public IniStreamConfigurationProvider(
             Microsoft.Extensions.Configuration.Ini.IniStreamConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
+        ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource))
+        {
+        }
 
-        public override void Load(System.IO.Stream stream) { }
+        public override void Load(System.IO.Stream stream)
+        {
+        }
 
         public static System.Collections.Generic.IDictionary<string, string?> Read(
             System.IO.Stream stream
@@ -109,7 +119,9 @@ namespace Microsoft.Extensions.Configuration.Ini
     public partial class IniStreamConfigurationSource
         : Microsoft.Extensions.Configuration.StreamConfigurationSource
     {
-        public IniStreamConfigurationSource() { }
+        public IniStreamConfigurationSource()
+        {
+        }
 
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder

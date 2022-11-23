@@ -64,22 +64,34 @@ namespace Mono.Linker.Tests.TestCasesRunner
             );
         }
 
-        public virtual void AddSearchDirectory(NPath directory) { }
+        public virtual void AddSearchDirectory(NPath directory)
+        {
+        }
 
         public virtual void AddReference(NPath path)
         {
             AppendExpandedPaths(Options.ReferenceFilePaths, path.ToString());
         }
 
-        public virtual void AddOutputDirectory(NPath directory) { }
+        public virtual void AddOutputDirectory(NPath directory)
+        {
+        }
 
-        public virtual void AddLinkXmlFile(string file) { }
+        public virtual void AddLinkXmlFile(string file)
+        {
+        }
 
-        public virtual void AddResponseFile(NPath path) { }
+        public virtual void AddResponseFile(NPath path)
+        {
+        }
 
-        public virtual void AddTrimMode(string value) { }
+        public virtual void AddTrimMode(string value)
+        {
+        }
 
-        public virtual void AddDefaultAction(string value) { }
+        public virtual void AddDefaultAction(string value)
+        {
+        }
 
         public virtual void AddLinkAssembly(string fileName)
         {
@@ -91,35 +103,65 @@ namespace Mono.Linker.Tests.TestCasesRunner
             AppendExpandedPaths(Options.InputFilePaths, fileName);
         }
 
-        public virtual void LinkFromPublicAndFamily(string fileName) { }
+        public virtual void LinkFromPublicAndFamily(string fileName)
+        {
+        }
 
-        public virtual void IgnoreDescriptors(bool value) { }
+        public virtual void IgnoreDescriptors(bool value)
+        {
+        }
 
-        public virtual void IgnoreSubstitutions(bool value) { }
+        public virtual void IgnoreSubstitutions(bool value)
+        {
+        }
 
-        public virtual void IgnoreLinkAttributes(bool value) { }
+        public virtual void IgnoreLinkAttributes(bool value)
+        {
+        }
 
-        public virtual void AddIl8n(string value) { }
+        public virtual void AddIl8n(string value)
+        {
+        }
 
-        public virtual void AddKeepTypeForwarderOnlyAssemblies(string value) { }
+        public virtual void AddKeepTypeForwarderOnlyAssemblies(string value)
+        {
+        }
 
-        public virtual void AddLinkSymbols(string value) { }
+        public virtual void AddLinkSymbols(string value)
+        {
+        }
 
-        public virtual void AddKeepDebugMembers(string value) { }
+        public virtual void AddKeepDebugMembers(string value)
+        {
+        }
 
-        public virtual void AddAssemblyAction(string action, string assembly) { }
+        public virtual void AddAssemblyAction(string action, string assembly)
+        {
+        }
 
-        public virtual void AddSkipUnresolved(bool skipUnresolved) { }
+        public virtual void AddSkipUnresolved(bool skipUnresolved)
+        {
+        }
 
-        public virtual void AddStripDescriptors(bool stripDescriptors) { }
+        public virtual void AddStripDescriptors(bool stripDescriptors)
+        {
+        }
 
-        public virtual void AddStripSubstitutions(bool stripSubstitutions) { }
+        public virtual void AddStripSubstitutions(bool stripSubstitutions)
+        {
+        }
 
-        public virtual void AddStripLinkAttributes(bool stripLinkAttributes) { }
+        public virtual void AddStripLinkAttributes(bool stripLinkAttributes)
+        {
+        }
 
-        public virtual void AddSubstitutions(string file) { }
+        public virtual void AddSubstitutions(string file)
+        {
+        }
 
-        public virtual void AddLinkAttributes(string file) { }
+        public virtual void AddLinkAttributes(string file)
+        {
+        }
 
         public virtual void AddAdditionalArgument(string flag, string[] values)
         {

@@ -23,7 +23,9 @@ namespace Castle.DynamicProxy.Tests.Classes
             this.result = result;
         }
 
-        public ClassWithProtectedMethod() { }
+        public ClassWithProtectedMethod()
+        {
+        }
 
         protected virtual int Method()
         {

@@ -401,7 +401,9 @@ namespace System.Collections.Immutable
         T System.Collections.Generic.IList<T>.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         int System.Collections.Generic.IReadOnlyCollection<T>.Count
         {
@@ -434,7 +436,9 @@ namespace System.Collections.Immutable
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Collections.Immutable.ImmutableArray<T> Add(T item)
@@ -545,13 +549,21 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public void CopyTo(int sourceIndex, T[] destination, int destinationIndex, int length) { }
+        public void CopyTo(int sourceIndex, T[] destination, int destinationIndex, int length)
+        {
+        }
 
-        public void CopyTo(T[] destination) { }
+        public void CopyTo(T[] destination)
+        {
+        }
 
-        public void CopyTo(T[] destination, int destinationIndex) { }
+        public void CopyTo(T[] destination, int destinationIndex)
+        {
+        }
 
-        public void CopyTo(System.Span<T> destination) { }
+        public void CopyTo(System.Span<T> destination)
+        {
+        }
 
         public bool Equals(System.Collections.Immutable.ImmutableArray<T> other)
         {
@@ -834,9 +846,13 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.ICollection<T>.Add(T item) { }
+        void System.Collections.Generic.ICollection<T>.Add(T item)
+        {
+        }
 
-        void System.Collections.Generic.ICollection<T>.Clear() { }
+        void System.Collections.Generic.ICollection<T>.Clear()
+        {
+        }
 
         bool System.Collections.Generic.ICollection<T>.Remove(T item)
         {
@@ -848,11 +864,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.IList<T>.Insert(int index, T item) { }
+        void System.Collections.Generic.IList<T>.Insert(int index, T item)
+        {
+        }
 
-        void System.Collections.Generic.IList<T>.RemoveAt(int index) { }
+        void System.Collections.Generic.IList<T>.RemoveAt(int index)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -864,7 +886,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object? value)
         {
@@ -876,11 +900,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
 
         System.Collections.Immutable.IImmutableList<T> System.Collections.Immutable.IImmutableList<T>.Add(
             T value
@@ -1008,68 +1038,100 @@ namespace System.Collections.Immutable
                 System.Collections.Generic.IReadOnlyList<T>,
                 System.Collections.IEnumerable
         {
-            internal Builder() { }
+            internal Builder()
+            {
+            }
 
             public int Capacity
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public int Count
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public T this[int index]
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             bool System.Collections.Generic.ICollection<T>.IsReadOnly
             {
                 get { throw null; }
             }
 
-            public void Add(T item) { }
+            public void Add(T item)
+            {
+            }
 
-            public void AddRange(System.Collections.Generic.IEnumerable<T> items) { }
+            public void AddRange(System.Collections.Generic.IEnumerable<T> items)
+            {
+            }
 
-            public void AddRange(System.Collections.Immutable.ImmutableArray<T> items) { }
+            public void AddRange(System.Collections.Immutable.ImmutableArray<T> items)
+            {
+            }
 
-            public void AddRange(
-                System.Collections.Immutable.ImmutableArray<T> items,
-                int length
-            ) { }
+            public void AddRange(System.Collections.Immutable.ImmutableArray<T> items, int length)
+            {
+            }
 
-            public void AddRange(System.Collections.Immutable.ImmutableArray<T>.Builder items) { }
+            public void AddRange(System.Collections.Immutable.ImmutableArray<T>.Builder items)
+            {
+            }
 
-            public void AddRange(params T[] items) { }
+            public void AddRange(params T[] items)
+            {
+            }
 
-            public void AddRange(T[] items, int length) { }
+            public void AddRange(T[] items, int length)
+            {
+            }
 
             public void AddRange<TDerived>(
                 System.Collections.Immutable.ImmutableArray<TDerived> items
-            ) where TDerived : T { }
+            ) where TDerived : T
+            {
+            }
 
             public void AddRange<TDerived>(
                 System.Collections.Immutable.ImmutableArray<TDerived>.Builder items
-            ) where TDerived : T { }
+            ) where TDerived : T
+            {
+            }
 
-            public void AddRange<TDerived>(TDerived[] items) where TDerived : T { }
+            public void AddRange<TDerived>(TDerived[] items) where TDerived : T
+            {
+            }
 
-            public void AddRange(System.ReadOnlySpan<T> items) { }
+            public void AddRange(System.ReadOnlySpan<T> items)
+            {
+            }
 
-            public void AddRange<TDerived>(System.ReadOnlySpan<TDerived> items)
-                where TDerived : T { }
+            public void AddRange<TDerived>(System.ReadOnlySpan<TDerived> items) where TDerived : T
+            {
+            }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public bool Contains(T item)
             {
                 throw null;
             }
 
-            public void CopyTo(T[] array, int index) { }
+            public void CopyTo(T[] array, int index)
+            {
+            }
 
             public void CopyTo(T[] destination)
             {
@@ -1081,7 +1143,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void CopyTo(System.Span<T> destination) { }
+            public void CopyTo(System.Span<T> destination)
+            {
+            }
 
             public System.Collections.Generic.IEnumerator<T> GetEnumerator()
             {
@@ -1122,7 +1186,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void Insert(int index, T item) { }
+            public void Insert(int index, T item)
+            {
+            }
 
             public void InsertRange(int index, System.Collections.Generic.IEnumerable<T> items)
             {
@@ -1187,7 +1253,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void RemoveAt(int index) { }
+            public void RemoveAt(int index)
+            {
+            }
 
             public void RemoveRange(int index, int length)
             {
@@ -1221,19 +1289,29 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void Reverse() { }
+            public void Reverse()
+            {
+            }
 
-            public void Sort() { }
+            public void Sort()
+            {
+            }
 
-            public void Sort(System.Collections.Generic.IComparer<T>? comparer) { }
+            public void Sort(System.Collections.Generic.IComparer<T>? comparer)
+            {
+            }
 
-            public void Sort(System.Comparison<T> comparison) { }
+            public void Sort(System.Comparison<T> comparison)
+            {
+            }
 
             public void Sort(
                 int index,
                 int count,
                 System.Collections.Generic.IComparer<T>? comparer
-            ) { }
+            )
+            {
+            }
 
             System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
             {
@@ -1534,7 +1612,9 @@ namespace System.Collections.Immutable
             System.Collections.IEnumerable,
             System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
     {
-        internal ImmutableDictionary() { }
+        internal ImmutableDictionary()
+        {
+        }
 
         public static readonly System.Collections.Immutable.ImmutableDictionary<TKey, TValue> Empty;
         public int Count
@@ -1567,7 +1647,9 @@ namespace System.Collections.Immutable
         TValue System.Collections.Generic.IDictionary<TKey, TValue>.this[TKey key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Collections.Generic.ICollection<TKey> System.Collections.Generic.IDictionary<
             TKey,
@@ -1602,7 +1684,9 @@ namespace System.Collections.Immutable
         object? System.Collections.IDictionary.this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Collections.ICollection System.Collections.IDictionary.Keys
         {
@@ -1700,17 +1784,23 @@ namespace System.Collections.Immutable
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
-        >>.Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item) { }
+        >>.Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item)
+        {
+        }
 
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
-        >>.Clear() { }
+        >>.Clear()
+        {
+        }
 
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
-        >>.CopyTo(System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int arrayIndex) { }
+        >>.CopyTo(System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        {
+        }
 
         bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
@@ -1720,7 +1810,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.IDictionary<TKey, TValue>.Add(TKey key, TValue value) { }
+        void System.Collections.Generic.IDictionary<TKey, TValue>.Add(TKey key, TValue value)
+        {
+        }
 
         bool System.Collections.Generic.IDictionary<TKey, TValue>.Remove(TKey key)
         {
@@ -1738,11 +1830,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex)
+        {
+        }
 
-        void System.Collections.IDictionary.Add(object key, object? value) { }
+        void System.Collections.IDictionary.Add(object key, object? value)
+        {
+        }
 
-        void System.Collections.IDictionary.Clear() { }
+        void System.Collections.IDictionary.Clear()
+        {
+        }
 
         bool System.Collections.IDictionary.Contains(object key)
         {
@@ -1754,7 +1852,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IDictionary.Remove(object key) { }
+        void System.Collections.IDictionary.Remove(object key)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1887,7 +1987,9 @@ namespace System.Collections.Immutable
                 System.Collections.IDictionary,
                 System.Collections.IEnumerable
         {
-            internal Builder() { }
+            internal Builder()
+            {
+            }
 
             public int Count
             {
@@ -1896,12 +1998,16 @@ namespace System.Collections.Immutable
             public TValue this[TKey key]
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public System.Collections.Generic.IEqualityComparer<TKey> KeyComparer
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public System.Collections.Generic.IEnumerable<TKey> Keys
             {
@@ -1947,7 +2053,9 @@ namespace System.Collections.Immutable
             object? System.Collections.IDictionary.this[object key]
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             System.Collections.ICollection System.Collections.IDictionary.Keys
             {
@@ -1960,25 +2068,35 @@ namespace System.Collections.Immutable
             public System.Collections.Generic.IEqualityComparer<TValue> ValueComparer
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public System.Collections.Generic.IEnumerable<TValue> Values
             {
                 get { throw null; }
             }
 
-            public void Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item) { }
+            public void Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item)
+            {
+            }
 
-            public void Add(TKey key, TValue value) { }
+            public void Add(TKey key, TValue value)
+            {
+            }
 
             public void AddRange(
                 System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
                     TKey,
                     TValue
                 >> items
-            ) { }
+            )
+            {
+            }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public bool Contains(System.Collections.Generic.KeyValuePair<TKey, TValue> item)
             {
@@ -2023,15 +2141,16 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void RemoveRange(System.Collections.Generic.IEnumerable<TKey> keys) { }
+            public void RemoveRange(System.Collections.Generic.IEnumerable<TKey> keys)
+            {
+            }
 
             void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
-            >>.CopyTo(
-                System.Collections.Generic.KeyValuePair<TKey, TValue>[] array,
-                int arrayIndex
-            ) { }
+            >>.CopyTo(System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+            {
+            }
 
             System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                 TKey,
@@ -2044,9 +2163,13 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex) { }
+            void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex)
+            {
+            }
 
-            void System.Collections.IDictionary.Add(object key, object? value) { }
+            void System.Collections.IDictionary.Add(object key, object? value)
+            {
+            }
 
             bool System.Collections.IDictionary.Contains(object key)
             {
@@ -2058,7 +2181,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            void System.Collections.IDictionary.Remove(object key) { }
+            void System.Collections.IDictionary.Remove(object key)
+            {
+            }
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
@@ -2103,14 +2228,18 @@ namespace System.Collections.Immutable
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
@@ -2225,7 +2354,9 @@ namespace System.Collections.Immutable
             System.Collections.Immutable.IImmutableSet<T>
 #endif
     {
-        internal ImmutableHashSet() { }
+        internal ImmutableHashSet()
+        {
+        }
 
         public static readonly System.Collections.Immutable.ImmutableHashSet<T> Empty;
         public int Count
@@ -2329,11 +2460,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.ICollection<T>.Add(T item) { }
+        void System.Collections.Generic.ICollection<T>.Add(T item)
+        {
+        }
 
-        void System.Collections.Generic.ICollection<T>.Clear() { }
+        void System.Collections.Generic.ICollection<T>.Clear()
+        {
+        }
 
-        void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex) { }
+        void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         bool System.Collections.Generic.ICollection<T>.Remove(T item)
         {
@@ -2352,21 +2489,31 @@ namespace System.Collections.Immutable
 
         void System.Collections.Generic.ISet<T>.ExceptWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
         void System.Collections.Generic.ISet<T>.IntersectWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
         void System.Collections.Generic.ISet<T>.SymmetricExceptWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
         void System.Collections.Generic.ISet<T>.UnionWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -2451,7 +2598,9 @@ namespace System.Collections.Immutable
                 System.Collections.Generic.ISet<T>,
                 System.Collections.IEnumerable
         {
-            internal Builder() { }
+            internal Builder()
+            {
+            }
 
             public int Count
             {
@@ -2460,7 +2609,9 @@ namespace System.Collections.Immutable
             public System.Collections.Generic.IEqualityComparer<T> KeyComparer
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             bool System.Collections.Generic.ICollection<T>.IsReadOnly
             {
@@ -2472,21 +2623,27 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public bool Contains(T item)
             {
                 throw null;
             }
 
-            public void ExceptWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void ExceptWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
 
             public System.Collections.Immutable.ImmutableHashSet<T>.Enumerator GetEnumerator()
             {
                 throw null;
             }
 
-            public void IntersectWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void IntersectWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
 
             public bool IsProperSubsetOf(System.Collections.Generic.IEnumerable<T> other)
             {
@@ -2523,16 +2680,22 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void SymmetricExceptWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void SymmetricExceptWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
 
             public bool TryGetValue(T equalValue, out T actualValue)
             {
                 throw null;
             }
 
-            void System.Collections.Generic.ICollection<T>.Add(T item) { }
+            void System.Collections.Generic.ICollection<T>.Add(T item)
+            {
+            }
 
-            void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex) { }
+            void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex)
+            {
+            }
 
             System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
             {
@@ -2549,7 +2712,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void UnionWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void UnionWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
         }
 
         public partial struct Enumerator
@@ -2568,14 +2733,18 @@ namespace System.Collections.Immutable
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
@@ -2604,7 +2773,9 @@ namespace System.Collections.Immutable
         public static void Enqueue<T>(
             ref System.Collections.Immutable.ImmutableQueue<T> location,
             T value
-        ) { }
+        )
+        {
+        }
 
         public static TValue GetOrAdd<TKey, TValue>(
             ref System.Collections.Immutable.ImmutableDictionary<TKey, TValue> location,
@@ -2662,7 +2833,9 @@ namespace System.Collections.Immutable
         public static void Push<T>(
             ref System.Collections.Immutable.ImmutableStack<T> location,
             T value
-        ) { }
+        )
+        {
+        }
 
         public static bool TryAdd<TKey, TValue>(
             ref System.Collections.Immutable.ImmutableDictionary<TKey, TValue> location,
@@ -2899,7 +3072,9 @@ namespace System.Collections.Immutable
             System.Collections.IList,
             System.Collections.Immutable.IImmutableList<T>
     {
-        internal ImmutableList() { }
+        internal ImmutableList()
+        {
+        }
 
         public static readonly System.Collections.Immutable.ImmutableList<T> Empty;
         public int Count
@@ -2921,7 +3096,9 @@ namespace System.Collections.Immutable
         T System.Collections.Generic.IList<T>.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -2942,7 +3119,9 @@ namespace System.Collections.Immutable
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Collections.Immutable.ImmutableList<T> Add(T value)
@@ -2994,11 +3173,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public void CopyTo(int index, T[] array, int arrayIndex, int count) { }
+        public void CopyTo(int index, T[] array, int arrayIndex, int count)
+        {
+        }
 
-        public void CopyTo(T[] array) { }
+        public void CopyTo(T[] array)
+        {
+        }
 
-        public void CopyTo(T[] array, int arrayIndex) { }
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         public bool Exists(System.Predicate<T> match)
         {
@@ -3050,7 +3235,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public void ForEach(System.Action<T> action) { }
+        public void ForEach(System.Action<T> action)
+        {
+        }
 
         public System.Collections.Immutable.ImmutableList<T>.Enumerator GetEnumerator()
         {
@@ -3203,9 +3390,13 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.ICollection<T>.Add(T item) { }
+        void System.Collections.Generic.ICollection<T>.Add(T item)
+        {
+        }
 
-        void System.Collections.Generic.ICollection<T>.Clear() { }
+        void System.Collections.Generic.ICollection<T>.Clear()
+        {
+        }
 
         bool System.Collections.Generic.ICollection<T>.Remove(T item)
         {
@@ -3217,11 +3408,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.IList<T>.Insert(int index, T item) { }
+        void System.Collections.Generic.IList<T>.Insert(int index, T item)
+        {
+        }
 
-        void System.Collections.Generic.IList<T>.RemoveAt(int index) { }
+        void System.Collections.Generic.IList<T>.RemoveAt(int index)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -3233,7 +3430,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object? value)
         {
@@ -3245,11 +3444,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
 
         System.Collections.Immutable.IImmutableList<T> System.Collections.Immutable.IImmutableList<T>.Add(
             T value
@@ -3361,7 +3566,9 @@ namespace System.Collections.Immutable
                 System.Collections.IEnumerable,
                 System.Collections.IList
         {
-            internal Builder() { }
+            internal Builder()
+            {
+            }
 
             public int Count
             {
@@ -3370,7 +3577,9 @@ namespace System.Collections.Immutable
             public T this[int index]
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             bool System.Collections.Generic.ICollection<T>.IsReadOnly
             {
@@ -3395,12 +3604,18 @@ namespace System.Collections.Immutable
             object? System.Collections.IList.this[int index]
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
 
-            public void Add(T item) { }
+            public void Add(T item)
+            {
+            }
 
-            public void AddRange(System.Collections.Generic.IEnumerable<T> items) { }
+            public void AddRange(System.Collections.Generic.IEnumerable<T> items)
+            {
+            }
 
             public int BinarySearch(
                 int index,
@@ -3422,7 +3637,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public bool Contains(T item)
             {
@@ -3436,11 +3653,17 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void CopyTo(int index, T[] array, int arrayIndex, int count) { }
+            public void CopyTo(int index, T[] array, int arrayIndex, int count)
+            {
+            }
 
-            public void CopyTo(T[] array) { }
+            public void CopyTo(T[] array)
+            {
+            }
 
-            public void CopyTo(T[] array, int arrayIndex) { }
+            public void CopyTo(T[] array, int arrayIndex)
+            {
+            }
 
             public bool Exists(System.Predicate<T> match)
             {
@@ -3492,7 +3715,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void ForEach(System.Action<T> action) { }
+            public void ForEach(System.Action<T> action)
+            {
+            }
 
             public System.Collections.Immutable.ImmutableList<T>.Enumerator GetEnumerator()
             {
@@ -3529,9 +3754,13 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void Insert(int index, T item) { }
+            public void Insert(int index, T item)
+            {
+            }
 
-            public void InsertRange(int index, System.Collections.Generic.IEnumerable<T> items) { }
+            public void InsertRange(int index, System.Collections.Generic.IEnumerable<T> items)
+            {
+            }
 
             public ref readonly T ItemRef(int index)
             {
@@ -3581,7 +3810,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void RemoveAt(int index) { }
+            public void RemoveAt(int index)
+            {
+            }
 
             public void RemoveRange(int index, int count)
             {
@@ -3615,28 +3846,42 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void Reverse() { }
+            public void Reverse()
+            {
+            }
 
-            public void Reverse(int index, int count) { }
+            public void Reverse(int index, int count)
+            {
+            }
 
-            public void Sort() { }
+            public void Sort()
+            {
+            }
 
-            public void Sort(System.Collections.Generic.IComparer<T>? comparer) { }
+            public void Sort(System.Collections.Generic.IComparer<T>? comparer)
+            {
+            }
 
-            public void Sort(System.Comparison<T> comparison) { }
+            public void Sort(System.Comparison<T> comparison)
+            {
+            }
 
             public void Sort(
                 int index,
                 int count,
                 System.Collections.Generic.IComparer<T>? comparer
-            ) { }
+            )
+            {
+            }
 
             System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
             {
                 throw null;
             }
 
-            void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex) { }
+            void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex)
+            {
+            }
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
@@ -3648,7 +3893,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            void System.Collections.IList.Clear() { }
+            void System.Collections.IList.Clear()
+            {
+            }
 
             bool System.Collections.IList.Contains(object? value)
             {
@@ -3660,9 +3907,13 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            void System.Collections.IList.Insert(int index, object? value) { }
+            void System.Collections.IList.Insert(int index, object? value)
+            {
+            }
 
-            void System.Collections.IList.Remove(object? value) { }
+            void System.Collections.IList.Remove(object? value)
+            {
+            }
 
             public System.Collections.Immutable.ImmutableList<T> ToImmutable()
             {
@@ -3694,14 +3945,18 @@ namespace System.Collections.Immutable
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
@@ -3743,7 +3998,9 @@ namespace System.Collections.Immutable
             System.Collections.IEnumerable,
             System.Collections.Immutable.IImmutableQueue<T>
     {
-        internal ImmutableQueue() { }
+        internal ImmutableQueue()
+        {
+        }
 
         public static System.Collections.Immutable.ImmutableQueue<T> Empty
         {
@@ -4050,7 +4307,9 @@ namespace System.Collections.Immutable
             System.Collections.IEnumerable,
             System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
     {
-        internal ImmutableSortedDictionary() { }
+        internal ImmutableSortedDictionary()
+        {
+        }
 
         public static readonly System.Collections.Immutable.ImmutableSortedDictionary<
             TKey,
@@ -4086,7 +4345,9 @@ namespace System.Collections.Immutable
         TValue System.Collections.Generic.IDictionary<TKey, TValue>.this[TKey key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Collections.Generic.ICollection<TKey> System.Collections.Generic.IDictionary<
             TKey,
@@ -4121,7 +4382,9 @@ namespace System.Collections.Immutable
         object? System.Collections.IDictionary.this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Collections.ICollection System.Collections.IDictionary.Keys
         {
@@ -4221,17 +4484,23 @@ namespace System.Collections.Immutable
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
-        >>.Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item) { }
+        >>.Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item)
+        {
+        }
 
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
-        >>.Clear() { }
+        >>.Clear()
+        {
+        }
 
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
-        >>.CopyTo(System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int arrayIndex) { }
+        >>.CopyTo(System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        {
+        }
 
         bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
@@ -4241,7 +4510,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.IDictionary<TKey, TValue>.Add(TKey key, TValue value) { }
+        void System.Collections.Generic.IDictionary<TKey, TValue>.Add(TKey key, TValue value)
+        {
+        }
 
         bool System.Collections.Generic.IDictionary<TKey, TValue>.Remove(TKey key)
         {
@@ -4259,11 +4530,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
-        void System.Collections.IDictionary.Add(object key, object? value) { }
+        void System.Collections.IDictionary.Add(object key, object? value)
+        {
+        }
 
-        void System.Collections.IDictionary.Clear() { }
+        void System.Collections.IDictionary.Clear()
+        {
+        }
 
         bool System.Collections.IDictionary.Contains(object key)
         {
@@ -4275,7 +4552,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IDictionary.Remove(object key) { }
+        void System.Collections.IDictionary.Remove(object key)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -4416,7 +4695,9 @@ namespace System.Collections.Immutable
                 System.Collections.IDictionary,
                 System.Collections.IEnumerable
         {
-            internal Builder() { }
+            internal Builder()
+            {
+            }
 
             public int Count
             {
@@ -4425,12 +4706,16 @@ namespace System.Collections.Immutable
             public TValue this[TKey key]
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public System.Collections.Generic.IComparer<TKey> KeyComparer
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public System.Collections.Generic.IEnumerable<TKey> Keys
             {
@@ -4476,7 +4761,9 @@ namespace System.Collections.Immutable
             object? System.Collections.IDictionary.this[object key]
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             System.Collections.ICollection System.Collections.IDictionary.Keys
             {
@@ -4489,25 +4776,35 @@ namespace System.Collections.Immutable
             public System.Collections.Generic.IEqualityComparer<TValue> ValueComparer
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public System.Collections.Generic.IEnumerable<TValue> Values
             {
                 get { throw null; }
             }
 
-            public void Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item) { }
+            public void Add(System.Collections.Generic.KeyValuePair<TKey, TValue> item)
+            {
+            }
 
-            public void Add(TKey key, TValue value) { }
+            public void Add(TKey key, TValue value)
+            {
+            }
 
             public void AddRange(
                 System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
                     TKey,
                     TValue
                 >> items
-            ) { }
+            )
+            {
+            }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public bool Contains(System.Collections.Generic.KeyValuePair<TKey, TValue> item)
             {
@@ -4552,15 +4849,16 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void RemoveRange(System.Collections.Generic.IEnumerable<TKey> keys) { }
+            public void RemoveRange(System.Collections.Generic.IEnumerable<TKey> keys)
+            {
+            }
 
             void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
-            >>.CopyTo(
-                System.Collections.Generic.KeyValuePair<TKey, TValue>[] array,
-                int arrayIndex
-            ) { }
+            >>.CopyTo(System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+            {
+            }
 
             System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                 TKey,
@@ -4573,9 +4871,13 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+            void System.Collections.ICollection.CopyTo(System.Array array, int index)
+            {
+            }
 
-            void System.Collections.IDictionary.Add(object key, object? value) { }
+            void System.Collections.IDictionary.Add(object key, object? value)
+            {
+            }
 
             bool System.Collections.IDictionary.Contains(object key)
             {
@@ -4587,7 +4889,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            void System.Collections.IDictionary.Remove(object key) { }
+            void System.Collections.IDictionary.Remove(object key)
+            {
+            }
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
@@ -4643,14 +4947,18 @@ namespace System.Collections.Immutable
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
@@ -4771,7 +5079,9 @@ namespace System.Collections.Immutable
             System.Collections.Immutable.IImmutableSet<T>
 #endif
     {
-        internal ImmutableSortedSet() { }
+        internal ImmutableSortedSet()
+        {
+        }
 
         public static readonly System.Collections.Immutable.ImmutableSortedSet<T> Empty;
         public int Count
@@ -4805,7 +5115,9 @@ namespace System.Collections.Immutable
         T System.Collections.Generic.IList<T>.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -4826,7 +5138,9 @@ namespace System.Collections.Immutable
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Collections.Immutable.ImmutableSortedSet<T> Add(T value)
@@ -4920,11 +5234,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.ICollection<T>.Add(T item) { }
+        void System.Collections.Generic.ICollection<T>.Add(T item)
+        {
+        }
 
-        void System.Collections.Generic.ICollection<T>.Clear() { }
+        void System.Collections.Generic.ICollection<T>.Clear()
+        {
+        }
 
-        void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex) { }
+        void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex)
+        {
+        }
 
         bool System.Collections.Generic.ICollection<T>.Remove(T item)
         {
@@ -4936,9 +5256,13 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.Generic.IList<T>.Insert(int index, T item) { }
+        void System.Collections.Generic.IList<T>.Insert(int index, T item)
+        {
+        }
 
-        void System.Collections.Generic.IList<T>.RemoveAt(int index) { }
+        void System.Collections.Generic.IList<T>.RemoveAt(int index)
+        {
+        }
 
         bool System.Collections.Generic.ISet<T>.Add(T item)
         {
@@ -4947,21 +5271,31 @@ namespace System.Collections.Immutable
 
         void System.Collections.Generic.ISet<T>.ExceptWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
         void System.Collections.Generic.ISet<T>.IntersectWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
         void System.Collections.Generic.ISet<T>.SymmetricExceptWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
         void System.Collections.Generic.ISet<T>.UnionWith(
             System.Collections.Generic.IEnumerable<T> other
-        ) { }
+        )
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -4973,7 +5307,9 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IList.Clear() { }
+        void System.Collections.IList.Clear()
+        {
+        }
 
         bool System.Collections.IList.Contains(object? value)
         {
@@ -4985,11 +5321,17 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
 
-        void System.Collections.IList.RemoveAt(int index) { }
+        void System.Collections.IList.RemoveAt(int index)
+        {
+        }
 
         System.Collections.Immutable.IImmutableSet<T> System.Collections.Immutable.IImmutableSet<T>.Add(
             T value
@@ -5070,7 +5412,9 @@ namespace System.Collections.Immutable
                 System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
-            internal Builder() { }
+            internal Builder()
+            {
+            }
 
             public int Count
             {
@@ -5083,7 +5427,9 @@ namespace System.Collections.Immutable
             public System.Collections.Generic.IComparer<T> KeyComparer
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
             public T? Max
             {
@@ -5111,21 +5457,27 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void Clear() { }
+            public void Clear()
+            {
+            }
 
             public bool Contains(T item)
             {
                 throw null;
             }
 
-            public void ExceptWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void ExceptWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
 
             public System.Collections.Immutable.ImmutableSortedSet<T>.Enumerator GetEnumerator()
             {
                 throw null;
             }
 
-            public void IntersectWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void IntersectWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
 
             public int IndexOf(T item)
             {
@@ -5177,23 +5529,31 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void SymmetricExceptWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void SymmetricExceptWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
 
             public bool TryGetValue(T equalValue, out T actualValue)
             {
                 throw null;
             }
 
-            void System.Collections.Generic.ICollection<T>.Add(T item) { }
+            void System.Collections.Generic.ICollection<T>.Add(T item)
+            {
+            }
 
-            void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex) { }
+            void System.Collections.Generic.ICollection<T>.CopyTo(T[] array, int arrayIndex)
+            {
+            }
 
             System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
             {
                 throw null;
             }
 
-            void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex) { }
+            void System.Collections.ICollection.CopyTo(System.Array array, int arrayIndex)
+            {
+            }
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
@@ -5205,7 +5565,9 @@ namespace System.Collections.Immutable
                 throw null;
             }
 
-            public void UnionWith(System.Collections.Generic.IEnumerable<T> other) { }
+            public void UnionWith(System.Collections.Generic.IEnumerable<T> other)
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -5227,14 +5589,18 @@ namespace System.Collections.Immutable
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
@@ -5276,7 +5642,9 @@ namespace System.Collections.Immutable
             System.Collections.IEnumerable,
             System.Collections.Immutable.IImmutableStack<T>
     {
-        internal ImmutableStack() { }
+        internal ImmutableStack()
+        {
+        }
 
         public static System.Collections.Immutable.ImmutableStack<T> Empty
         {

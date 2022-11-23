@@ -54,13 +54,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="tokens">An array of tokens.</param>
         public SyntaxTokenList(params SyntaxToken[] tokens) : this(null, CreateNode(tokens), 0, 0)
-        { }
+        {
+        }
 
         /// <summary>
         /// Creates a list of tokens.
         /// </summary>
         public SyntaxTokenList(IEnumerable<SyntaxToken> tokens)
-            : this(null, CreateNode(tokens), 0, 0) { }
+            : this(null, CreateNode(tokens), 0, 0)
+        {
+        }
 
         private static GreenNode? CreateNode(SyntaxToken[] tokens)
         {

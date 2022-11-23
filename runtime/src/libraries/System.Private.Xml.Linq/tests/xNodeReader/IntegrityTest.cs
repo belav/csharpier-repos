@@ -577,7 +577,9 @@ namespace CoreXml.Test.XLinq
 
                     for (int i = 0; i < astr.Length; i++)
                     {
-                        if (DataReader.LookupNamespace(astr[i]) != null) { }
+                        if (DataReader.LookupNamespace(astr[i]) != null)
+                        {
+                        }
                         TestLog.Compare(DataReader.LookupNamespace(astr[i]), null, Variation.Desc);
                     }
                 }

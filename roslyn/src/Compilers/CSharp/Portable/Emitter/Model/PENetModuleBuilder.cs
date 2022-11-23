@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 OutputKind.NetModule,
                 serializationProperties,
                 manifestResources
-            ) { }
+            )
+        {
+        }
 
         internal override SynthesizedAttributeData SynthesizeEmbeddedAttribute()
         {

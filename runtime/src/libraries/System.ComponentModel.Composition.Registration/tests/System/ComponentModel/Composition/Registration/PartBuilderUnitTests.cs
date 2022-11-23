@@ -7,21 +7,37 @@ using Xunit;
 
 namespace System.ComponentModel.Composition.Registration.Tests
 {
-    public interface IController { }
+    public interface IController
+    {
+    }
 
-    public interface IAuthentication { }
+    public interface IAuthentication
+    {
+    }
 
-    public interface IFormsAuthenticationService { }
+    public interface IFormsAuthenticationService
+    {
+    }
 
-    public interface IMembershipService { }
+    public interface IMembershipService
+    {
+    }
 
-    public class FormsAuthenticationServiceImpl : IFormsAuthenticationService { }
+    public class FormsAuthenticationServiceImpl : IFormsAuthenticationService
+    {
+    }
 
-    public class MembershipServiceImpl : IMembershipService { }
+    public class MembershipServiceImpl : IMembershipService
+    {
+    }
 
-    public class SpecificMembershipServiceImpl : IMembershipService { }
+    public class SpecificMembershipServiceImpl : IMembershipService
+    {
+    }
 
-    public class HttpDigestAuthentication : IAuthentication { }
+    public class HttpDigestAuthentication : IAuthentication
+    {
+    }
 
     public class AmbiguousConstructors
     {
@@ -117,14 +133,18 @@ namespace System.ComponentModel.Composition.Registration.Tests
             MembershipService = membershipService;
         }
 
-        public AccountController(IAuthentication auth) { }
+        public AccountController(IAuthentication auth)
+        {
+        }
     }
 
     public class HttpRequestValidator
     {
         public IAuthentication authenticator;
 
-        public HttpRequestValidator(IAuthentication authenticator) { }
+        public HttpRequestValidator(IAuthentication authenticator)
+        {
+        }
     }
 
     public class ManyConstructorsController : IController
@@ -133,7 +153,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public IMembershipService MembershipService { get; set; }
         public HttpRequestValidator Validator { get; set; }
 
-        public ManyConstructorsController() { }
+        public ManyConstructorsController()
+        {
+        }
 
         public ManyConstructorsController(IFormsAuthenticationService formsService)
         {

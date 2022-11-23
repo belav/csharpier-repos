@@ -11,7 +11,9 @@ namespace System.CommandLine.Rendering
         private bool _isReadOnly;
         private bool _supportsAnsiCodes;
 
-        public ConsoleFormatInfo() { }
+        public ConsoleFormatInfo()
+        {
+        }
 
         public static ConsoleFormatInfo CurrentInfo
         {

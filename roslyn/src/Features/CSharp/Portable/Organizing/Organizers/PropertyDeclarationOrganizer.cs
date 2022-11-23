@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PropertyDeclarationOrganizer() { }
+        public PropertyDeclarationOrganizer()
+        {
+        }
 
         protected override PropertyDeclarationSyntax Organize(
             PropertyDeclarationSyntax syntax,

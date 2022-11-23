@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis
         public readonly bool TrackIncrementalGeneratorSteps;
 
         public GeneratorDriverOptions(IncrementalGeneratorOutputKind disabledOutputs)
-            : this(disabledOutputs, false) { }
+            : this(disabledOutputs, false)
+        {
+        }
 
         public GeneratorDriverOptions(
             IncrementalGeneratorOutputKind disabledOutputs,

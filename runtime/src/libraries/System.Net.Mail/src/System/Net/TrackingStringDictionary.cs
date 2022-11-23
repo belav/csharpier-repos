@@ -10,7 +10,9 @@ namespace System.Net
         private readonly bool _isReadOnly;
         private bool _isChanged;
 
-        internal TrackingStringDictionary() : this(false) { }
+        internal TrackingStringDictionary() : this(false)
+        {
+        }
 
         internal TrackingStringDictionary(bool isReadOnly)
         {

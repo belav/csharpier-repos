@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructorFromMembers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateConstructorFromMembersCodeRefactoringProvider() { }
+        public CSharpGenerateConstructorFromMembersCodeRefactoringProvider()
+        {
+        }
 
         /// <summary>
         /// For testing purposes only.
@@ -52,7 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructorFromMembers
         )]
         internal CSharpGenerateConstructorFromMembersCodeRefactoringProvider(
             IPickMembersService pickMembersService_forTesting
-        ) : base(pickMembersService_forTesting) { }
+        ) : base(pickMembersService_forTesting)
+        {
+        }
 
         protected override bool ContainingTypesOrSelfHasUnsafeKeyword(
             INamedTypeSymbol containingType

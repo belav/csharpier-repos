@@ -11,7 +11,9 @@ namespace System.IO
         public static void Create(
             this System.IO.DirectoryInfo directoryInfo,
             System.Security.AccessControl.DirectorySecurity directorySecurity
-        ) { }
+        )
+        {
+        }
 
         public static System.IO.FileStream Create(
             this System.IO.FileInfo fileInfo,
@@ -74,17 +76,23 @@ namespace System.IO
         public static void SetAccessControl(
             this System.IO.DirectoryInfo directoryInfo,
             System.Security.AccessControl.DirectorySecurity directorySecurity
-        ) { }
+        )
+        {
+        }
 
         public static void SetAccessControl(
             this System.IO.FileInfo fileInfo,
             System.Security.AccessControl.FileSecurity fileSecurity
-        ) { }
+        )
+        {
+        }
 
         public static void SetAccessControl(
             this System.IO.FileStream fileStream,
             System.Security.AccessControl.FileSecurity fileSecurity
-        ) { }
+        )
+        {
+        }
     }
 }
 
@@ -93,11 +101,15 @@ namespace System.Security.AccessControl
     public abstract partial class DirectoryObjectSecurity
         : System.Security.AccessControl.ObjectSecurity
     {
-        protected DirectoryObjectSecurity() { }
+        protected DirectoryObjectSecurity()
+        {
+        }
 
         protected DirectoryObjectSecurity(
             System.Security.AccessControl.CommonSecurityDescriptor securityDescriptor
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Security.AccessControl.AccessRule AccessRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
@@ -113,9 +125,13 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        protected void AddAccessRule(System.Security.AccessControl.ObjectAccessRule rule) { }
+        protected void AddAccessRule(System.Security.AccessControl.ObjectAccessRule rule)
+        {
+        }
 
-        protected void AddAuditRule(System.Security.AccessControl.ObjectAuditRule rule) { }
+        protected void AddAuditRule(System.Security.AccessControl.ObjectAuditRule rule)
+        {
+        }
 
         public virtual System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
@@ -172,48 +188,66 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        protected void RemoveAccessRuleAll(System.Security.AccessControl.ObjectAccessRule rule) { }
+        protected void RemoveAccessRuleAll(System.Security.AccessControl.ObjectAccessRule rule)
+        {
+        }
 
-        protected void RemoveAccessRuleSpecific(
-            System.Security.AccessControl.ObjectAccessRule rule
-        ) { }
+        protected void RemoveAccessRuleSpecific(System.Security.AccessControl.ObjectAccessRule rule)
+        {
+        }
 
         protected bool RemoveAuditRule(System.Security.AccessControl.ObjectAuditRule rule)
         {
             throw null;
         }
 
-        protected void RemoveAuditRuleAll(System.Security.AccessControl.ObjectAuditRule rule) { }
+        protected void RemoveAuditRuleAll(System.Security.AccessControl.ObjectAuditRule rule)
+        {
+        }
 
-        protected void RemoveAuditRuleSpecific(
-            System.Security.AccessControl.ObjectAuditRule rule
-        ) { }
+        protected void RemoveAuditRuleSpecific(System.Security.AccessControl.ObjectAuditRule rule)
+        {
+        }
 
-        protected void ResetAccessRule(System.Security.AccessControl.ObjectAccessRule rule) { }
+        protected void ResetAccessRule(System.Security.AccessControl.ObjectAccessRule rule)
+        {
+        }
 
-        protected void SetAccessRule(System.Security.AccessControl.ObjectAccessRule rule) { }
+        protected void SetAccessRule(System.Security.AccessControl.ObjectAccessRule rule)
+        {
+        }
 
-        protected void SetAuditRule(System.Security.AccessControl.ObjectAuditRule rule) { }
+        protected void SetAuditRule(System.Security.AccessControl.ObjectAuditRule rule)
+        {
+        }
     }
 
     public sealed partial class DirectorySecurity : System.Security.AccessControl.FileSystemSecurity
     {
-        public DirectorySecurity() { }
+        public DirectorySecurity()
+        {
+        }
 
         public DirectorySecurity(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class FileSecurity : System.Security.AccessControl.FileSystemSecurity
     {
-        public FileSecurity() { }
+        public FileSecurity()
+        {
+        }
 
         public FileSecurity(
             string fileName,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class FileSystemAccessRule : System.Security.AccessControl.AccessRule
@@ -230,7 +264,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -246,7 +282,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAccessRule(
             string identity,
@@ -260,7 +298,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAccessRule(
             string identity,
@@ -276,7 +316,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public System.Security.AccessControl.FileSystemRights FileSystemRights
         {
@@ -298,7 +340,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -314,7 +358,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAuditRule(
             string identity,
@@ -328,7 +374,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public FileSystemAuditRule(
             string identity,
@@ -344,7 +392,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public System.Security.AccessControl.FileSystemRights FileSystemRights
         {
@@ -384,7 +434,9 @@ namespace System.Security.AccessControl
         : System.Security.AccessControl.NativeObjectSecurity
     {
         internal FileSystemSecurity()
-            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+            : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         public override System.Type AccessRightType
         {
@@ -411,9 +463,13 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        public void AddAccessRule(System.Security.AccessControl.FileSystemAccessRule rule) { }
+        public void AddAccessRule(System.Security.AccessControl.FileSystemAccessRule rule)
+        {
+        }
 
-        public void AddAuditRule(System.Security.AccessControl.FileSystemAuditRule rule) { }
+        public void AddAuditRule(System.Security.AccessControl.FileSystemAuditRule rule)
+        {
+        }
 
         public sealed override System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
@@ -432,27 +488,39 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        public void RemoveAccessRuleAll(System.Security.AccessControl.FileSystemAccessRule rule) { }
+        public void RemoveAccessRuleAll(System.Security.AccessControl.FileSystemAccessRule rule)
+        {
+        }
 
         public void RemoveAccessRuleSpecific(
             System.Security.AccessControl.FileSystemAccessRule rule
-        ) { }
+        )
+        {
+        }
 
         public bool RemoveAuditRule(System.Security.AccessControl.FileSystemAuditRule rule)
         {
             throw null;
         }
 
-        public void RemoveAuditRuleAll(System.Security.AccessControl.FileSystemAuditRule rule) { }
+        public void RemoveAuditRuleAll(System.Security.AccessControl.FileSystemAuditRule rule)
+        {
+        }
 
-        public void RemoveAuditRuleSpecific(
-            System.Security.AccessControl.FileSystemAuditRule rule
-        ) { }
+        public void RemoveAuditRuleSpecific(System.Security.AccessControl.FileSystemAuditRule rule)
+        {
+        }
 
-        public void ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule rule) { }
+        public void ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule rule)
+        {
+        }
 
-        public void SetAccessRule(System.Security.AccessControl.FileSystemAccessRule rule) { }
+        public void SetAccessRule(System.Security.AccessControl.FileSystemAccessRule rule)
+        {
+        }
 
-        public void SetAuditRule(System.Security.AccessControl.FileSystemAuditRule rule) { }
+        public void SetAuditRule(System.Security.AccessControl.FileSystemAuditRule rule)
+        {
+        }
     }
 }

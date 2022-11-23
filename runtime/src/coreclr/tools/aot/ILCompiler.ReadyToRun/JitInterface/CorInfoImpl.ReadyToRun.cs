@@ -520,7 +520,9 @@ namespace Internal.JitInterface
 
     public class RequiresRuntimeJitException : Exception
     {
-        public RequiresRuntimeJitException(object reason) : base(reason.ToString()) { }
+        public RequiresRuntimeJitException(object reason) : base(reason.ToString())
+        {
+        }
     }
 
     unsafe partial class CorInfoImpl
@@ -634,7 +636,9 @@ namespace Internal.JitInterface
                     reader.Skip(ilOpcode);
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return false;
         }

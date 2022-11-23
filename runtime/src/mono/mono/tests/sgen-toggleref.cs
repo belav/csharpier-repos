@@ -15,7 +15,9 @@ public class Toggleref
     public const int STRONG = 1;
     public const int WEAK = 2;
 
-    ~Toggleref() { }
+    ~Toggleref()
+    {
+    }
 }
 
 public struct Helper

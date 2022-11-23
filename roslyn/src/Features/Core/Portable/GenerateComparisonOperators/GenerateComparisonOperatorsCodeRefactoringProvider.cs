@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public GenerateComparisonOperatorsCodeRefactoringProvider() { }
+        public GenerateComparisonOperatorsCodeRefactoringProvider()
+        {
+        }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

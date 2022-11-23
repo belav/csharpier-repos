@@ -336,7 +336,9 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject();
             JsonReader reader = o.CreateReader();
-            while (reader.Read()) { }
+            while (reader.Read())
+            {
+            }
 
             JTokenWriter writer = new JTokenWriter();
 

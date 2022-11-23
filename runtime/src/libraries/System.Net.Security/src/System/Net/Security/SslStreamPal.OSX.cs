@@ -27,7 +27,9 @@ namespace System.Net.Security
         // special case of an empty array being passed to the `fixed` statement.
         internal const bool CanEncryptEmptyMessage = false;
 
-        public static void VerifyPackageInfo() { }
+        public static void VerifyPackageInfo()
+        {
+        }
 
         public static SecurityStatusPal AcceptSecurityContext(
             ref SafeFreeCredentials credential,

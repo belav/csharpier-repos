@@ -22,7 +22,9 @@ namespace System.Data.Common
                 SqlBoolean.Null,
                 SqlBoolean.Null,
                 StorageType.SqlBoolean
-            ) { }
+            )
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

@@ -33,7 +33,9 @@ namespace System.SpanTests
             asUShort.Validate<ushort>(0x2211, 0x4433, 0x6655, 0x8877);
         }
 
-        struct EmptyStruct { }
+        struct EmptyStruct
+        {
+        }
 
         [Fact]
         public static void CastSpanToEmptyStruct()

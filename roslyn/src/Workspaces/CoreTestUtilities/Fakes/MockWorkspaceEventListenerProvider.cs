@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, true)]
-        public MockWorkspaceEventListenerProvider() { }
+        public MockWorkspaceEventListenerProvider()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => null;
     }

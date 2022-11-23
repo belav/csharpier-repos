@@ -756,13 +756,19 @@ namespace System.Linq.Expressions.Tests
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
-        private static void Nop() { }
+        private static void Nop()
+        {
+        }
 
-        private class Visitor : ExpressionVisitor { }
+        private class Visitor : ExpressionVisitor
+        {
+        }
 
         public static bool NotNot(bool value) => value;
     }

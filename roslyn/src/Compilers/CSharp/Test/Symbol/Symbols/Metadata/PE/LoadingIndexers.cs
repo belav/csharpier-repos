@@ -1417,12 +1417,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         }
 
         [Fact]
-        public void LoadImplicitImplementation() { }
+        public void LoadImplicitImplementation()
+        {
+        }
 
         [Fact]
-        public void LoadOverriding() { }
+        public void LoadOverriding()
+        {
+        }
 
         [Fact]
-        public void LoadHiding() { }
+        public void LoadHiding()
+        {
+        }
     }
 }

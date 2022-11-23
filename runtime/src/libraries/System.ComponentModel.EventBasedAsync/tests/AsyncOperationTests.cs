@@ -17,7 +17,9 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             // Test that a simple AsyncOperation can be dispatched and completed via AsyncOperationManager
             Task.Run(() =>
                 {
-                    var operation = new TestAsyncOperation(op => { });
+                    var operation = new TestAsyncOperation(op =>
+                    {
+                    });
                     operation.Wait();
 
                     Assert.True(operation.Completed);
@@ -33,10 +35,14 @@ namespace System.ComponentModel.EventBasedAsync.Tests
         {
             Task.Run(() =>
                 {
-                    var operation = new TestAsyncOperation(op => { });
+                    var operation = new TestAsyncOperation(op =>
+                    {
+                    });
                     operation.Wait();
 
-                    SendOrPostCallback noopCallback = state => { };
+                    SendOrPostCallback noopCallback = state =>
+                    {
+                    };
                     Assert.Throws<InvalidOperationException>(
                         () => operation.AsyncOperation.Post(noopCallback, null)
                     );
@@ -59,7 +65,9 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                     var operation = AsyncOperationManager.CreateOperation(null);
                     operation.OperationCompleted();
 
-                    SendOrPostCallback noopCallback = state => { };
+                    SendOrPostCallback noopCallback = state =>
+                    {
+                    };
                     Assert.Throws<InvalidOperationException>(
                         () => operation.Post(noopCallback, null)
                     );

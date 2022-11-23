@@ -10,9 +10,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
 {
     public class PartBuilderOfTTests
     {
-        public interface IFirst { }
+        public interface IFirst
+        {
+        }
 
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         private class FooImpl
         {
@@ -23,11 +27,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private class FooImplWithConstructors
         {
-            public FooImplWithConstructors() { }
+            public FooImplWithConstructors()
+            {
+            }
 
-            public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+            public FooImplWithConstructors(IEnumerable<IFoo> ids)
+            {
+            }
 
-            public FooImplWithConstructors(int id, string name) { }
+            public FooImplWithConstructors(int id, string name)
+            {
+            }
         }
 
         [Fact]

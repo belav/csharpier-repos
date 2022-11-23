@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Formatting
         private static readonly Func<TextSpan, bool> s_notEmpty = s => !s.IsEmpty;
         private static readonly Func<TextSpan, int> s_spanLength = s => s.Length;
 
-        protected AbstractSyntaxFormattingService() { }
+        protected AbstractSyntaxFormattingService()
+        {
+        }
 
         public abstract IEnumerable<AbstractFormattingRule> GetDefaultFormattingRules();
 

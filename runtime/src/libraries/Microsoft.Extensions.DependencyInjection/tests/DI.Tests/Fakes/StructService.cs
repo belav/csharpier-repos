@@ -5,6 +5,8 @@ namespace Microsoft.Extensions.DependencyInjection.Fakes
 {
     public struct StructService
     {
-        public StructService(IServiceScopeFactory scopeFactory) { }
+        public StructService(IServiceScopeFactory scopeFactory)
+        {
+        }
     }
 }

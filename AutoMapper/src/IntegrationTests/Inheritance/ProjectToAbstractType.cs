@@ -157,7 +157,9 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         public virtual ICollection<ICalendarDay> Days { get; set; }
 
-        internal Calendar() { }
+        internal Calendar()
+        {
+        }
 
         public Calendar(
             string name,
@@ -187,7 +189,9 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
         public bool Cancel { get; private set; }
         public bool Deleted { get; private set; }
 
-        internal CalendarDay() { }
+        internal CalendarDay()
+        {
+        }
 
         public CalendarDay(DateTime date, IValidityDayType dayType, ICalendar calendar)
         {
@@ -217,7 +221,9 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         public ICollection<ICalendarDay> Days { get; internal set; } = new List<ICalendarDay>();
 
-        internal ValidityDayType() { }
+        internal ValidityDayType()
+        {
+        }
 
         public ValidityDayType(string name, string acronym)
         {

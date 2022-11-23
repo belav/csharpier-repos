@@ -597,7 +597,9 @@ namespace System.Collections.Tests
 
         private class FooKey : IComparable
         {
-            public FooKey() { }
+            public FooKey()
+            {
+            }
 
             public FooKey(int i, string str)
             {
@@ -627,7 +629,9 @@ namespace System.Collections.Tests
 
         private class FooValue : IComparable
         {
-            public FooValue() { }
+            public FooValue()
+            {
+            }
 
             public FooValue(int intValue, string stringValue)
             {

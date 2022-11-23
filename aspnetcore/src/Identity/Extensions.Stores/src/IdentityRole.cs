@@ -43,7 +43,9 @@ public class IdentityRole<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityRole{TKey}"/>.
     /// </summary>
-    public IdentityRole() { }
+    public IdentityRole()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityRole{TKey}"/>.

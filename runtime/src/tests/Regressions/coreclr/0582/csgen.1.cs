@@ -92,20 +92,36 @@ public class AA<TA, TB> where TA : IComparable
                             {
                                 BB[,,][,,][][] local14 = (new BB[76u, 111u, 60u][,,][][]);
                             }
-                            finally { }
-                            while (App.m_bFwd1) { }
+                            finally
+                            {
+                            }
+                            while (App.m_bFwd1)
+                            {
+                            }
                         }
-                        catch (Exception) { }
+                        catch (Exception)
+                        {
+                        }
                         if (App.m_bFwd1)
-                            do { } while (App.m_bFwd1);
+                            do
+                            {
+                            } while (App.m_bFwd1);
                     } while (App.m_bFwd1);
                 return;
             }
-            catch (InvalidOperationException) { }
-            try { }
-            catch (Exception) { }
+            catch (InvalidOperationException)
+            {
+            }
+            try
+            {
+            }
+            catch (Exception)
+            {
+            }
         }
-        do { } while (App.m_bFwd1);
+        do
+        {
+        } while (App.m_bFwd1);
         ;
     }
 
@@ -182,23 +198,43 @@ public class AA<TA, TB> where TA : IComparable
                                         (new Array[102u, 56u, 82u, 63u])
                                     };
                                 }
-                                finally { }
+                                finally
+                                {
+                                }
                                 local22 = local22;
-                                try { }
-                                catch (DivideByZeroException) { }
-                                try { }
-                                catch (IndexOutOfRangeException) { }
+                                try
+                                {
+                                }
+                                catch (DivideByZeroException)
+                                {
+                                }
+                                try
+                                {
+                                }
+                                catch (IndexOutOfRangeException)
+                                {
+                                }
                             } while (App.m_bFwd1);
                             throw new NullReferenceException();
                         }
-                        while (App.m_bFwd1) { }
+                        while (App.m_bFwd1)
+                        {
+                        }
                     }
-                    do { } while (App.m_bFwd1);
-                    do { } while (App.m_bFwd1);
+                    do
+                    {
+                    } while (App.m_bFwd1);
+                    do
+                    {
+                    } while (App.m_bFwd1);
                     local15 = local15;
                 }
-                while (App.m_bFwd1) { }
-                while (App.m_bFwd1) { }
+                while (App.m_bFwd1)
+                {
+                }
+                while (App.m_bFwd1)
+                {
+                }
                 throw new InvalidOperationException();
             } while (App.m_bFwd1);
         }
@@ -298,34 +334,60 @@ public struct BB
                                             {
                                                 param2 = param2;
                                             }
-                                            finally { }
+                                            finally
+                                            {
+                                            }
                                         }
-                                        while (param2) { }
+                                        while (param2)
+                                        {
+                                        }
                                     }
                                     local40 = new BB();
-                                    while (param2) { }
-                                    while (param2) { }
+                                    while (param2)
+                                    {
+                                    }
+                                    while (param2)
+                                    {
+                                    }
                                 }
-                                try { }
-                                catch (Exception) { }
+                                try
+                                {
+                                }
+                                catch (Exception)
+                                {
+                                }
                                 return;
                             } while (param2);
                             local40.m_axField1[10][53][56, 118, 114, 54] = App.m_xFwd11;
                         }
-                        catch (InvalidOperationException) { }
+                        catch (InvalidOperationException)
+                        {
+                        }
                     else
                         throw new Exception();
-                    do { } while (param2);
+                    do
+                    {
+                    } while (param2);
                 }
                 if (param2)
-                    try { }
-                    catch (Exception) { }
-                try { }
-                catch (Exception) { }
+                    try
+                    {
+                    }
+                    catch (Exception)
+                    {
+                    }
+                try
+                {
+                }
+                catch (Exception)
+                {
+                }
             }
             param3 = 0;
         }
-        while (param2) { }
+        while (param2)
+        {
+        }
         if (param2)
             throw new DivideByZeroException();
         param4 /= param4;
@@ -346,7 +408,9 @@ public class App
                 ref App.m_byFwd4
             );
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA<char, bool>.Static2(
@@ -358,22 +422,30 @@ public class App
                 App.m_agboFwd12
             );
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA<char, bool>.Static3(34u, ref App.m_shFwd10);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             AA<char, bool>.Static4(App.m_agboFwd12, ref App.m_axFwd15, ref App.m_agboFwd12, '\x50');
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         try
         {
             BB.Static1((new double[101u][,,]), ref App.m_bFwd1, TestEnum.red, ref App.m_fFwd6);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return 100;
     }
 

@@ -19,11 +19,17 @@ namespace System.Xaml.Permissions
     {
         public XamlLoadPermission(
             System.Collections.Generic.IEnumerable<System.Xaml.Permissions.XamlAccessLevel> allowedAccess
-        ) { }
+        )
+        {
+        }
 
-        public XamlLoadPermission(System.Security.Permissions.PermissionState state) { }
+        public XamlLoadPermission(System.Security.Permissions.PermissionState state)
+        {
+        }
 
-        public XamlLoadPermission(System.Xaml.Permissions.XamlAccessLevel allowedAccess) { }
+        public XamlLoadPermission(System.Xaml.Permissions.XamlAccessLevel allowedAccess)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatform("windows")]
         public System.Collections.Generic.IList<System.Xaml.Permissions.XamlAccessLevel> AllowedAccess
@@ -41,7 +47,9 @@ namespace System.Xaml.Permissions
             throw null;
         }
 
-        public override void FromXml(System.Security.SecurityElement elem) { }
+        public override void FromXml(System.Security.SecurityElement elem)
+        {
+        }
 
         public override int GetHashCode()
         {

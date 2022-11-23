@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class CodeDefinitionWindow_InProc : InProcComponent
     {
-        private CodeDefinitionWindow_InProc() { }
+        private CodeDefinitionWindow_InProc()
+        {
+        }
 
         public static CodeDefinitionWindow_InProc Create() => new CodeDefinitionWindow_InProc();
 

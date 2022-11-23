@@ -486,7 +486,9 @@ namespace System.Net.Test.Common
             Entries = new List<SettingsEntry>(entries);
         }
 
-        public SettingsFrame(params SettingsEntry[] entries) : this(FrameFlags.None, entries) { }
+        public SettingsFrame(params SettingsEntry[] entries) : this(FrameFlags.None, entries)
+        {
+        }
 
         public static SettingsFrame ReadFrom(Frame header, ReadOnlySpan<byte> buffer)
         {

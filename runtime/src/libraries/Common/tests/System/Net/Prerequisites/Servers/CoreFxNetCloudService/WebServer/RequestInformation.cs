@@ -81,6 +81,8 @@ namespace WebServer
             return JsonConvert.SerializeObject(this, new NameValueCollectionConverter());
         }
 
-        private RequestInformation() { }
+        private RequestInformation()
+        {
+        }
     }
 }

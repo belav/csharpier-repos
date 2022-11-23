@@ -20,14 +20,18 @@ namespace Microsoft.Win32
             throw null;
         }
 
-        public static void SetValue(string keyName, string? valueName, object value) { }
+        public static void SetValue(string keyName, string? valueName, object value)
+        {
+        }
 
         public static void SetValue(
             string keyName,
             string? valueName,
             object value,
             Microsoft.Win32.RegistryValueKind valueKind
-        ) { }
+        )
+        {
+        }
     }
 
     public enum RegistryHive
@@ -42,7 +46,9 @@ namespace Microsoft.Win32
 
     public sealed partial class RegistryKey : System.MarshalByRefObject, System.IDisposable
     {
-        internal RegistryKey() { }
+        internal RegistryKey()
+        {
+        }
 
         public Microsoft.Win32.SafeHandles.SafeRegistryHandle Handle
         {
@@ -65,7 +71,9 @@ namespace Microsoft.Win32
             get { throw null; }
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
         public Microsoft.Win32.RegistryKey CreateSubKey(string subkey)
         {
@@ -122,21 +130,37 @@ namespace Microsoft.Win32
             throw null;
         }
 
-        public void DeleteSubKey(string subkey) { }
+        public void DeleteSubKey(string subkey)
+        {
+        }
 
-        public void DeleteSubKey(string subkey, bool throwOnMissingSubKey) { }
+        public void DeleteSubKey(string subkey, bool throwOnMissingSubKey)
+        {
+        }
 
-        public void DeleteSubKeyTree(string subkey) { }
+        public void DeleteSubKeyTree(string subkey)
+        {
+        }
 
-        public void DeleteSubKeyTree(string subkey, bool throwOnMissingSubKey) { }
+        public void DeleteSubKeyTree(string subkey, bool throwOnMissingSubKey)
+        {
+        }
 
-        public void DeleteValue(string name) { }
+        public void DeleteValue(string name)
+        {
+        }
 
-        public void DeleteValue(string name, bool throwOnMissingValue) { }
+        public void DeleteValue(string name, bool throwOnMissingValue)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void Flush() { }
+        public void Flush()
+        {
+        }
 
         public static Microsoft.Win32.RegistryKey FromHandle(
             Microsoft.Win32.SafeHandles.SafeRegistryHandle handle
@@ -263,15 +287,21 @@ namespace Microsoft.Win32
 
         public void SetAccessControl(
             System.Security.AccessControl.RegistrySecurity registrySecurity
-        ) { }
+        )
+        {
+        }
 
-        public void SetValue(string? name, object value) { }
+        public void SetValue(string? name, object value)
+        {
+        }
 
         public void SetValue(
             string? name,
             object value,
             Microsoft.Win32.RegistryValueKind valueKind
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -325,10 +355,14 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeRegistryHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeRegistryHandle() : base(default(bool)) { }
+        public SafeRegistryHandle() : base(default(bool))
+        {
+        }
 
         public SafeRegistryHandle(System.IntPtr preexistingHandle, bool ownsHandle)
-            : base(default(bool)) { }
+            : base(default(bool))
+        {
+        }
 
         protected override bool ReleaseHandle()
         {
@@ -353,7 +387,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public RegistryAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -369,7 +405,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public RegistryAccessRule(
             string identity,
@@ -383,7 +421,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public RegistryAccessRule(
             string identity,
@@ -399,7 +439,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public System.Security.AccessControl.RegistryRights RegistryRights
         {
@@ -423,7 +465,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public RegistryAuditRule(
             string identity,
@@ -439,7 +483,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public System.Security.AccessControl.RegistryRights RegistryRights
         {
@@ -470,7 +516,9 @@ namespace System.Security.AccessControl
         : System.Security.AccessControl.NativeObjectSecurity
     {
         public RegistrySecurity()
-            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+            : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         public override System.Type AccessRightType
         {
@@ -497,9 +545,13 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        public void AddAccessRule(System.Security.AccessControl.RegistryAccessRule rule) { }
+        public void AddAccessRule(System.Security.AccessControl.RegistryAccessRule rule)
+        {
+        }
 
-        public void AddAuditRule(System.Security.AccessControl.RegistryAuditRule rule) { }
+        public void AddAuditRule(System.Security.AccessControl.RegistryAuditRule rule)
+        {
+        }
 
         public override System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
@@ -518,27 +570,37 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        public void RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule rule) { }
+        public void RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule rule)
+        {
+        }
 
-        public void RemoveAccessRuleSpecific(
-            System.Security.AccessControl.RegistryAccessRule rule
-        ) { }
+        public void RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule rule)
+        {
+        }
 
         public bool RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule rule)
         {
             throw null;
         }
 
-        public void RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule rule) { }
+        public void RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule rule)
+        {
+        }
 
-        public void RemoveAuditRuleSpecific(
-            System.Security.AccessControl.RegistryAuditRule rule
-        ) { }
+        public void RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule rule)
+        {
+        }
 
-        public void ResetAccessRule(System.Security.AccessControl.RegistryAccessRule rule) { }
+        public void ResetAccessRule(System.Security.AccessControl.RegistryAccessRule rule)
+        {
+        }
 
-        public void SetAccessRule(System.Security.AccessControl.RegistryAccessRule rule) { }
+        public void SetAccessRule(System.Security.AccessControl.RegistryAccessRule rule)
+        {
+        }
 
-        public void SetAuditRule(System.Security.AccessControl.RegistryAuditRule rule) { }
+        public void SetAuditRule(System.Security.AccessControl.RegistryAuditRule rule)
+        {
+        }
     }
 }

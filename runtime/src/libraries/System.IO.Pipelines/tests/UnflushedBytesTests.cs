@@ -34,7 +34,9 @@ namespace System.IO.Pipelines.Tests
                 throw new NotImplementedException();
         }
 
-        public UnflushedBytesTests() : base(0, 0) { }
+        public UnflushedBytesTests() : base(0, 0)
+        {
+        }
 
         [Fact]
         public void NonOverriddenUnflushedBytesThrows()

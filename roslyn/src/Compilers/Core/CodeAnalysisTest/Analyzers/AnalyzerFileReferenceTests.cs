@@ -406,7 +406,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     assemblyLoader,
                     driverCache,
                     fileSystem
-                ) { }
+                )
+            {
+            }
         }
 
         [ConditionalFact(typeof(IsEnglishLocal))]
@@ -987,15 +989,23 @@ public class Generator : ISourceGenerator
 
     namespace Test
     {
-        public class DiagnosticAnalyzer : Attribute { }
+        public class DiagnosticAnalyzer : Attribute
+        {
+        }
 
         [Test.DiagnosticAnalyzer]
-        public class NotAnAnalyzer { }
+        public class NotAnAnalyzer
+        {
+        }
 
-        public class Generator : Attribute { }
+        public class Generator : Attribute
+        {
+        }
 
         [Test.Generator]
-        public class NotAGenerator { }
+        public class NotAGenerator
+        {
+        }
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
@@ -1012,7 +1022,9 @@ public class Generator : ISourceGenerator
         }
     }
 
-    public class TestAnalyzerNone { }
+    public class TestAnalyzerNone
+    {
+    }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
     public abstract class AbstractAnalyzer : DiagnosticAnalyzer
@@ -1079,22 +1091,34 @@ public class Generator : ISourceGenerator
     }
 
     [Generator]
-    public class NotAGenerator { }
+    public class NotAGenerator
+    {
+    }
 
     [Generator(LanguageNames.CSharp)]
-    public class ExplicitCSharpOnlyGenerator : TestGenerator { }
+    public class ExplicitCSharpOnlyGenerator : TestGenerator
+    {
+    }
 
     [Generator(LanguageNames.VisualBasic)]
-    public class VisualBasicOnlyGenerator : TestGenerator { }
+    public class VisualBasicOnlyGenerator : TestGenerator
+    {
+    }
 
     [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-    public class CSharpAndVisualBasicGenerator : TestGenerator { }
+    public class CSharpAndVisualBasicGenerator : TestGenerator
+    {
+    }
 
     [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-    public class VisualBasicAndCSharpGenerator : TestGenerator { }
+    public class VisualBasicAndCSharpGenerator : TestGenerator
+    {
+    }
 
     [Generator(LanguageNames.FSharp)]
-    public class FSharpGenerator : TestGenerator { }
+    public class FSharpGenerator : TestGenerator
+    {
+    }
 
     [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
     public class TestIncrementalGenerator : IIncrementalGenerator

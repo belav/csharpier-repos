@@ -132,7 +132,9 @@ public class RazorPageCreateTagHelperTest
         }
     }
 
-    private class NoServiceTagHelper : TagHelper { }
+    private class NoServiceTagHelper : TagHelper
+    {
+    }
 
     private class ServiceTagHelper : TagHelper
     {
@@ -151,5 +153,7 @@ public class RazorPageCreateTagHelperTest
         public ViewContext ViewContext { get; set; }
     }
 
-    private class MyService { }
+    private class MyService
+    {
+    }
 }

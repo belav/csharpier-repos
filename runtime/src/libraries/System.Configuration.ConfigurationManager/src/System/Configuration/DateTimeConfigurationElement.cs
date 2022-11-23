@@ -19,7 +19,9 @@ namespace System.Configuration
 
         private bool _needsInit;
 
-        public DateTimeConfigurationElement() { }
+        public DateTimeConfigurationElement()
+        {
+        }
 
         public DateTimeConfigurationElement(DateTime value)
         {

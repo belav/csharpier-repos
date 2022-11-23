@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     localRewriter,
                     node.SwitchArms.SelectAsArray(arm => arm.Syntax),
                     generateInstrumentation: !node.WasCompilerGenerated && localRewriter.Instrument
-                ) { }
+                )
+            {
+            }
 
             public static BoundExpression Rewrite(
                 LocalRewriter localRewriter,

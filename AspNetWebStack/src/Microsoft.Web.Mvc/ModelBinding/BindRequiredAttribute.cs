@@ -12,6 +12,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
     )]
     public sealed class BindRequiredAttribute : BindingBehaviorAttribute
     {
-        public BindRequiredAttribute() : base(BindingBehavior.Required) { }
+        public BindRequiredAttribute() : base(BindingBehavior.Required)
+        {
+        }
     }
 }

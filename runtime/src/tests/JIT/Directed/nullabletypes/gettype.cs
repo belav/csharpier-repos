@@ -9,7 +9,9 @@ class C<T>
 {
     public IEnumerable<T> Data { get; set; }
 
-    public C() { }
+    public C()
+    {
+    }
 
     public bool Check()
     {

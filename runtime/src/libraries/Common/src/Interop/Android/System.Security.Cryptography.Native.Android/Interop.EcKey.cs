@@ -98,7 +98,9 @@ namespace System.Security.Cryptography
 {
     internal sealed class SafeEcKeyHandle : SafeKeyHandle
     {
-        public SafeEcKeyHandle() { }
+        public SafeEcKeyHandle()
+        {
+        }
 
         internal SafeEcKeyHandle(IntPtr ptr)
         {

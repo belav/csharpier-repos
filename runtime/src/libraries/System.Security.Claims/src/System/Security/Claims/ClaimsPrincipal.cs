@@ -84,7 +84,9 @@ namespace System.Security.Claims
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsPrincipal"/>.
         /// </summary>
-        public ClaimsPrincipal() { }
+        public ClaimsPrincipal()
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsPrincipal"/>.

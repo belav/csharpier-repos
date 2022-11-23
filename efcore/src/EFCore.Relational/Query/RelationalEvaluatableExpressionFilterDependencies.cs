@@ -44,5 +44,7 @@ public sealed record RelationalEvaluatableExpressionFilterDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalEvaluatableExpressionFilterDependencies() { }
+    public RelationalEvaluatableExpressionFilterDependencies()
+    {
+    }
 }

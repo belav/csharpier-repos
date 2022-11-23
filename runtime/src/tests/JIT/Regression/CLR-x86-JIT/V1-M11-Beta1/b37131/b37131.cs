@@ -40,7 +40,9 @@ namespace Test
                             AA_Static2(AA_Static4(ref aa.an[2], aa.an), (bool)aa.obj, 0)
                         )
                     )[2] <= 0
-            ) { }
+            )
+            {
+            }
         }
 
         static int Main()

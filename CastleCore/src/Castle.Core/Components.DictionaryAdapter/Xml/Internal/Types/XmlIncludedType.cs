@@ -33,7 +33,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         }
 
         public XmlIncludedType(string localName, string namespaceUri, Type clrType)
-            : this(new XmlName(localName, namespaceUri), clrType) { }
+            : this(new XmlName(localName, namespaceUri), clrType)
+        {
+        }
 
         public XmlName XsiType
         {

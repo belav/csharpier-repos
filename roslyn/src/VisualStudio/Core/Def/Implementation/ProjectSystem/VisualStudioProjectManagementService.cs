@@ -27,7 +27,9 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioProjectManagementService(IThreadingContext threadingContext)
-            : base(threadingContext) { }
+            : base(threadingContext)
+        {
+        }
 
         public string GetDefaultNamespace(
             Microsoft.CodeAnalysis.Project project,

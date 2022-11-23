@@ -15,7 +15,9 @@ public class MyData
     private static int Two = 1;
 
     //This static constructor causes the C# compiler to make this class precise instead of beforefieldinit
-    static MyData() { }
+    static MyData()
+    {
+    }
 
     public bool pass = false;
 

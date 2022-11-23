@@ -13,9 +13,13 @@ namespace System.Net.Http
 {
     public abstract class MessageProcessingHandler : DelegatingHandler
     {
-        protected MessageProcessingHandler() { }
+        protected MessageProcessingHandler()
+        {
+        }
 
-        protected MessageProcessingHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+        protected MessageProcessingHandler(HttpMessageHandler innerHandler) : base(innerHandler)
+        {
+        }
 
         protected abstract HttpRequestMessage ProcessRequest(
             HttpRequestMessage request,

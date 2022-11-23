@@ -513,8 +513,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 var onDiskText = EncodedStringText.Create(stream);
                 return onDiskText.Encoding;
             }
-            catch (IOException) { }
-            catch (InvalidDataException) { }
+            catch (IOException)
+            {
+            }
+            catch (InvalidDataException)
+            {
+            }
 
             return null;
         }

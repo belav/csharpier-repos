@@ -1180,11 +1180,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class B { }
+    public class B
+    {
+    }
 
     public class C : B
     {
-        public C() { }
+        public C()
+        {
+        }
 
         public int f1 = 10;
 
@@ -1209,9 +1213,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
     }
 
-    public class GB<T> { }
+    public class GB<T>
+    {
+    }
 
-    public class GGC<T> : GB<T> { }
+    public class GGC<T> : GB<T>
+    {
+    }
 
     public class TargetIsUserdefinedClass
     {
@@ -1288,11 +1296,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class B { }
+    public class B
+    {
+    }
 
-    public interface I { }
+    public interface I
+    {
+    }
 
-    public class C : B, I { }
+    public class C : B, I
+    {
+    }
 
     public class TargetIsTypeParameter
     {
@@ -1579,9 +1593,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // <Code>
     using System;
 
-    public class C { }
+    public class C
+    {
+    }
 
-    public class C2 { }
+    public class C2
+    {
+    }
 
     public class ConversionInRuntimeType
     {
@@ -2055,7 +2073,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     {
         public class C
         {
-            public C() { }
+            public C()
+            {
+            }
 
             public C(int f)
             {
@@ -2078,7 +2098,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             int failcount = 0;
             C origin = new C(0);
             dynamic d = origin;
-            if ((bool)d) { }
+            if ((bool)d)
+            {
+            }
             else
             {
                 failcount++;
@@ -2144,7 +2166,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     count++; // touch here once then break;
                     break;
                 }
-                else { }
+                else
+                {
+                }
             } while (d);
             return failcount == 0 && count == 1;
         }
@@ -2312,7 +2336,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     {
         public class C
         {
-            public C() { }
+            public C()
+            {
+            }
 
             public C(int f)
             {
@@ -2592,7 +2618,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             int failcount = 0;
             C origin = new C();
             dynamic d = origin;
-            if (d) { }
+            if (d)
+            {
+            }
             else
             {
                 failcount++;
@@ -2658,7 +2686,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     count++; // touch here once then break;
                     break;
                 }
-                else { }
+                else
+                {
+                }
             } while (d);
             return failcount == 0 && count == 1;
         }
@@ -3447,7 +3477,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
     }
 
-    public class C2 { }
+    public class C2
+    {
+    }
 
     public class ConversionInUsingStatement
     {
@@ -3516,7 +3548,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // <Code>
     using System;
 
-    public class C1 { }
+    public class C1
+    {
+    }
 
     public class C : IDisposable
     {
@@ -3599,7 +3633,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic d = null;
             try
             {
-                using (IDisposable i = d) { }
+                using (IDisposable i = d)
+                {
+                }
             }
             catch (Exception e)
             {
@@ -3620,7 +3656,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                 failcount++;
                 System.Console.WriteLine("Test failed: Conversion result is incorrect");
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e) { }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
+            {
+            }
             catch (Exception e)
             {
                 failcount++;
@@ -4005,15 +4043,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             Push(t);
         }
 
-        public void RemoveAt(int n) { }
+        public void RemoveAt(int n)
+        {
+        }
 
         public T this[int n]
         {
             get { return Pop(); }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(T t)
         {
@@ -4030,7 +4074,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             get { return 1; }
         }
 
-        public void CopyTo(T[] t, int n) { }
+        public void CopyTo(T[] t, int n)
+        {
+        }
 
         public bool Remove(T t)
         {
@@ -4093,7 +4139,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     //<Expects Status=success></Expects Status>
     //<Expects Status=warning>\(12,16\).*CS0649</Expects>
     //<Code>
-    public interface I<T> { }
+    public interface I<T>
+    {
+    }
 
     internal struct S<T> : I<T>
     {
@@ -4474,16 +4522,26 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     r2 = d2,
                     r3 = d3,
                     r4 = d4
-            ) { }
+            )
+            {
+            }
 
             //
-            using (d1) { }
+            using (d1)
+            {
+            }
 
-            using (d2) { }
+            using (d2)
+            {
+            }
 
-            using (d3) { }
+            using (d3)
+            {
+            }
 
-            using (d4) { }
+            using (d4)
+            {
+            }
 
             if (Output != "SDExpSDImpCDExpCDImpCDImpCDExpSDImpSDExp")
                 return 1;
@@ -4498,7 +4556,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic d = new C();
             try
             {
-                using (IDisposable res = d) { }
+                using (IDisposable res = d)
+                {
+                }
 
                 ret++;
             }
@@ -4517,7 +4577,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             try
             {
-                using (d) { }
+                using (d)
+                {
+                }
 
                 ret++;
             }
@@ -4538,7 +4600,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic dd = new S();
             try
             {
-                using (IDisposable res = dd) { }
+                using (IDisposable res = dd)
+                {
+                }
 
                 ret++;
             }
@@ -4557,7 +4621,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             try
             {
-                using (dd) { }
+                using (dd)
+                {
+                }
 
                 ret++;
             }
@@ -4665,9 +4731,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
     }
 
-    public interface I<T> { }
+    public interface I<T>
+    {
+    }
 
-    internal struct S<T> : I<T> { }
+    internal struct S<T> : I<T>
+    {
+    }
     // </Code>
 }
 

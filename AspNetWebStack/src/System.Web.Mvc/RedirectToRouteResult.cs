@@ -11,10 +11,14 @@ namespace System.Web.Mvc
     {
         private RouteCollection _routes;
 
-        public RedirectToRouteResult(RouteValueDictionary routeValues) : this(null, routeValues) { }
+        public RedirectToRouteResult(RouteValueDictionary routeValues) : this(null, routeValues)
+        {
+        }
 
         public RedirectToRouteResult(string routeName, RouteValueDictionary routeValues)
-            : this(routeName, routeValues, permanent: false) { }
+            : this(routeName, routeValues, permanent: false)
+        {
+        }
 
         public RedirectToRouteResult(
             string routeName,

@@ -27,7 +27,9 @@ namespace Castle.DynamicProxy.Tests
 #if FEATURE_SERIALIZATION
         [Serializable]
 #endif
-        public class CustomHook : AllMethodsHook { }
+        public class CustomHook : AllMethodsHook
+        {
+        }
 
         [Test]
         public void Proxies_with_same_hook_will_use_cached_proxy_type()

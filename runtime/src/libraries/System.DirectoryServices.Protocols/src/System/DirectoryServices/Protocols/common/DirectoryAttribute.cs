@@ -22,13 +22,21 @@ namespace System.DirectoryServices.Protocols
         // No Error detection.
         private static readonly UTF8Encoding s_encoder = new UTF8Encoding();
 
-        public DirectoryAttribute() { }
+        public DirectoryAttribute()
+        {
+        }
 
-        public DirectoryAttribute(string name, string value) : this(name, (object)value) { }
+        public DirectoryAttribute(string name, string value) : this(name, (object)value)
+        {
+        }
 
-        public DirectoryAttribute(string name, byte[] value) : this(name, (object)value) { }
+        public DirectoryAttribute(string name, byte[] value) : this(name, (object)value)
+        {
+        }
 
-        public DirectoryAttribute(string name, Uri value) : this(name, (object)value) { }
+        public DirectoryAttribute(string name, Uri value) : this(name, (object)value)
+        {
+        }
 
         internal DirectoryAttribute(string name, object value) : this()
         {
@@ -226,7 +234,9 @@ namespace System.DirectoryServices.Protocols
         private DirectoryAttributeOperation _attributeOperation =
             DirectoryAttributeOperation.Replace;
 
-        public DirectoryAttributeModification() { }
+        public DirectoryAttributeModification()
+        {
+        }
 
         public DirectoryAttributeOperation Operation
         {
@@ -252,7 +262,9 @@ namespace System.DirectoryServices.Protocols
 
     public class SearchResultAttributeCollection : DictionaryBase
     {
-        internal SearchResultAttributeCollection() { }
+        internal SearchResultAttributeCollection()
+        {
+        }
 
         public DirectoryAttribute this[string attributeName]
         {
@@ -291,7 +303,9 @@ namespace System.DirectoryServices.Protocols
 
     public class DirectoryAttributeCollection : CollectionBase
     {
-        public DirectoryAttributeCollection() { }
+        public DirectoryAttributeCollection()
+        {
+        }
 
         public DirectoryAttribute this[int index]
         {
@@ -373,7 +387,9 @@ namespace System.DirectoryServices.Protocols
 
     public class DirectoryAttributeModificationCollection : CollectionBase
     {
-        public DirectoryAttributeModificationCollection() { }
+        public DirectoryAttributeModificationCollection()
+        {
+        }
 
         public DirectoryAttributeModification this[int index]
         {

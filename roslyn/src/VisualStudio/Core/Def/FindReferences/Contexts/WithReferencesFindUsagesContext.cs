@@ -48,7 +48,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     includeContainingTypeAndMemberColumns,
                     includeKindColumn,
                     threadingContext
-                ) { }
+                )
+            {
+            }
 
             protected override async ValueTask OnDefinitionFoundWorkerAsync(
                 DefinitionItem definition,

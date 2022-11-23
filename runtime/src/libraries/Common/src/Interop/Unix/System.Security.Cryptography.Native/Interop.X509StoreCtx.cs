@@ -90,10 +90,13 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeX509StoreCtxHandle : SafeHandle
     {
-        public SafeX509StoreCtxHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeX509StoreCtxHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         internal SafeX509StoreCtxHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
-        { }
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

@@ -8,9 +8,13 @@ namespace System.Collections
 {
     public partial class CaseInsensitiveComparer : System.Collections.IComparer
     {
-        public CaseInsensitiveComparer() { }
+        public CaseInsensitiveComparer()
+        {
+        }
 
-        public CaseInsensitiveComparer(System.Globalization.CultureInfo culture) { }
+        public CaseInsensitiveComparer(System.Globalization.CultureInfo culture)
+        {
+        }
 
         public static System.Collections.CaseInsensitiveComparer Default
         {
@@ -32,9 +36,13 @@ namespace System.Collections
     )]
     public partial class CaseInsensitiveHashCodeProvider : System.Collections.IHashCodeProvider
     {
-        public CaseInsensitiveHashCodeProvider() { }
+        public CaseInsensitiveHashCodeProvider()
+        {
+        }
 
-        public CaseInsensitiveHashCodeProvider(System.Globalization.CultureInfo culture) { }
+        public CaseInsensitiveHashCodeProvider(System.Globalization.CultureInfo culture)
+        {
+        }
 
         public static System.Collections.CaseInsensitiveHashCodeProvider Default
         {
@@ -56,14 +64,20 @@ namespace System.Collections
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        protected CollectionBase() { }
+        protected CollectionBase()
+        {
+        }
 
-        protected CollectionBase(int capacity) { }
+        protected CollectionBase(int capacity)
+        {
+        }
 
         public int Capacity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Count
         {
@@ -96,37 +110,63 @@ namespace System.Collections
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        protected virtual void OnClear() { }
+        protected virtual void OnClear()
+        {
+        }
 
-        protected virtual void OnClearComplete() { }
+        protected virtual void OnClearComplete()
+        {
+        }
 
-        protected virtual void OnInsert(int index, object? value) { }
+        protected virtual void OnInsert(int index, object? value)
+        {
+        }
 
-        protected virtual void OnInsertComplete(int index, object? value) { }
+        protected virtual void OnInsertComplete(int index, object? value)
+        {
+        }
 
-        protected virtual void OnRemove(int index, object? value) { }
+        protected virtual void OnRemove(int index, object? value)
+        {
+        }
 
-        protected virtual void OnRemoveComplete(int index, object? value) { }
+        protected virtual void OnRemoveComplete(int index, object? value)
+        {
+        }
 
-        protected virtual void OnSet(int index, object? oldValue, object? newValue) { }
+        protected virtual void OnSet(int index, object? oldValue, object? newValue)
+        {
+        }
 
-        protected virtual void OnSetComplete(int index, object? oldValue, object? newValue) { }
+        protected virtual void OnSetComplete(int index, object? oldValue, object? newValue)
+        {
+        }
 
-        protected virtual void OnValidate(object value) { }
+        protected virtual void OnValidate(object value)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         int System.Collections.IList.Add(object? value)
         {
@@ -143,9 +183,13 @@ namespace System.Collections
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
     }
 
     public abstract partial class DictionaryBase
@@ -153,7 +197,9 @@ namespace System.Collections
             System.Collections.IDictionary,
             System.Collections.IEnumerable
     {
-        protected DictionaryBase() { }
+        protected DictionaryBase()
+        {
+        }
 
         public int Count
         {
@@ -186,7 +232,9 @@ namespace System.Collections
         object? System.Collections.IDictionary.this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Collections.ICollection System.Collections.IDictionary.Keys
         {
@@ -197,46 +245,72 @@ namespace System.Collections
             get { throw null; }
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public System.Collections.IDictionaryEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        protected virtual void OnClear() { }
+        protected virtual void OnClear()
+        {
+        }
 
-        protected virtual void OnClearComplete() { }
+        protected virtual void OnClearComplete()
+        {
+        }
 
         protected virtual object? OnGet(object key, object? currentValue)
         {
             throw null;
         }
 
-        protected virtual void OnInsert(object key, object? value) { }
+        protected virtual void OnInsert(object key, object? value)
+        {
+        }
 
-        protected virtual void OnInsertComplete(object key, object? value) { }
+        protected virtual void OnInsertComplete(object key, object? value)
+        {
+        }
 
-        protected virtual void OnRemove(object key, object? value) { }
+        protected virtual void OnRemove(object key, object? value)
+        {
+        }
 
-        protected virtual void OnRemoveComplete(object key, object? value) { }
+        protected virtual void OnRemoveComplete(object key, object? value)
+        {
+        }
 
-        protected virtual void OnSet(object key, object? oldValue, object? newValue) { }
+        protected virtual void OnSet(object key, object? oldValue, object? newValue)
+        {
+        }
 
-        protected virtual void OnSetComplete(object key, object? oldValue, object? newValue) { }
+        protected virtual void OnSetComplete(object key, object? oldValue, object? newValue)
+        {
+        }
 
-        protected virtual void OnValidate(object key, object? value) { }
+        protected virtual void OnValidate(object key, object? value)
+        {
+        }
 
-        void System.Collections.IDictionary.Add(object key, object? value) { }
+        void System.Collections.IDictionary.Add(object key, object? value)
+        {
+        }
 
         bool System.Collections.IDictionary.Contains(object key)
         {
             throw null;
         }
 
-        void System.Collections.IDictionary.Remove(object key) { }
+        void System.Collections.IDictionary.Remove(object key)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -249,13 +323,21 @@ namespace System.Collections
             System.Collections.IEnumerable,
             System.ICloneable
     {
-        public Queue() { }
+        public Queue()
+        {
+        }
 
-        public Queue(System.Collections.ICollection col) { }
+        public Queue(System.Collections.ICollection col)
+        {
+        }
 
-        public Queue(int capacity) { }
+        public Queue(int capacity)
+        {
+        }
 
-        public Queue(int capacity, float growFactor) { }
+        public Queue(int capacity, float growFactor)
+        {
+        }
 
         public virtual int Count
         {
@@ -270,7 +352,9 @@ namespace System.Collections
             get { throw null; }
         }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual object Clone()
         {
@@ -282,14 +366,18 @@ namespace System.Collections
             throw null;
         }
 
-        public virtual void CopyTo(System.Array array, int index) { }
+        public virtual void CopyTo(System.Array array, int index)
+        {
+        }
 
         public virtual object? Dequeue()
         {
             throw null;
         }
 
-        public virtual void Enqueue(object? obj) { }
+        public virtual void Enqueue(object? obj)
+        {
+        }
 
         public virtual System.Collections.IEnumerator GetEnumerator()
         {
@@ -311,14 +399,18 @@ namespace System.Collections
             throw null;
         }
 
-        public virtual void TrimToSize() { }
+        public virtual void TrimToSize()
+        {
+        }
     }
 
     public abstract partial class ReadOnlyCollectionBase
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        protected ReadOnlyCollectionBase() { }
+        protected ReadOnlyCollectionBase()
+        {
+        }
 
         public virtual int Count
         {
@@ -342,7 +434,9 @@ namespace System.Collections
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
     }
 
     public partial class SortedList
@@ -351,23 +445,36 @@ namespace System.Collections
             System.Collections.IEnumerable,
             System.ICloneable
     {
-        public SortedList() { }
+        public SortedList()
+        {
+        }
 
-        public SortedList(System.Collections.IComparer? comparer) { }
+        public SortedList(System.Collections.IComparer? comparer)
+        {
+        }
 
-        public SortedList(System.Collections.IComparer? comparer, int capacity) { }
+        public SortedList(System.Collections.IComparer? comparer, int capacity)
+        {
+        }
 
-        public SortedList(System.Collections.IDictionary d) { }
+        public SortedList(System.Collections.IDictionary d)
+        {
+        }
 
         public SortedList(System.Collections.IDictionary d, System.Collections.IComparer? comparer)
-        { }
+        {
+        }
 
-        public SortedList(int initialCapacity) { }
+        public SortedList(int initialCapacity)
+        {
+        }
 
         public virtual int Capacity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual int Count
         {
@@ -388,7 +495,9 @@ namespace System.Collections
         public virtual object? this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Collections.ICollection Keys
         {
@@ -403,9 +512,13 @@ namespace System.Collections
             get { throw null; }
         }
 
-        public virtual void Add(object key, object? value) { }
+        public virtual void Add(object key, object? value)
+        {
+        }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual object Clone()
         {
@@ -427,7 +540,9 @@ namespace System.Collections
             throw null;
         }
 
-        public virtual void CopyTo(System.Array array, int arrayIndex) { }
+        public virtual void CopyTo(System.Array array, int arrayIndex)
+        {
+        }
 
         public virtual object? GetByIndex(int index)
         {
@@ -464,11 +579,17 @@ namespace System.Collections
             throw null;
         }
 
-        public virtual void Remove(object key) { }
+        public virtual void Remove(object key)
+        {
+        }
 
-        public virtual void RemoveAt(int index) { }
+        public virtual void RemoveAt(int index)
+        {
+        }
 
-        public virtual void SetByIndex(int index, object? value) { }
+        public virtual void SetByIndex(int index, object? value)
+        {
+        }
 
         public static System.Collections.SortedList Synchronized(System.Collections.SortedList list)
         {
@@ -480,7 +601,9 @@ namespace System.Collections
             throw null;
         }
 
-        public virtual void TrimToSize() { }
+        public virtual void TrimToSize()
+        {
+        }
     }
 
     public partial class Stack
@@ -488,11 +611,17 @@ namespace System.Collections
             System.Collections.IEnumerable,
             System.ICloneable
     {
-        public Stack() { }
+        public Stack()
+        {
+        }
 
-        public Stack(System.Collections.ICollection col) { }
+        public Stack(System.Collections.ICollection col)
+        {
+        }
 
-        public Stack(int initialCapacity) { }
+        public Stack(int initialCapacity)
+        {
+        }
 
         public virtual int Count
         {
@@ -507,7 +636,9 @@ namespace System.Collections
             get { throw null; }
         }
 
-        public virtual void Clear() { }
+        public virtual void Clear()
+        {
+        }
 
         public virtual object Clone()
         {
@@ -519,7 +650,9 @@ namespace System.Collections
             throw null;
         }
 
-        public virtual void CopyTo(System.Array array, int index) { }
+        public virtual void CopyTo(System.Array array, int index)
+        {
+        }
 
         public virtual System.Collections.IEnumerator GetEnumerator()
         {
@@ -536,7 +669,9 @@ namespace System.Collections
             throw null;
         }
 
-        public virtual void Push(object? obj) { }
+        public virtual void Push(object? obj)
+        {
+        }
 
         public static System.Collections.Stack Synchronized(System.Collections.Stack stack)
         {
@@ -554,7 +689,9 @@ namespace System.Collections.Specialized
 {
     public partial class CollectionsUtil
     {
-        public CollectionsUtil() { }
+        public CollectionsUtil()
+        {
+        }
 
         public static System.Collections.Hashtable CreateCaseInsensitiveHashtable()
         {

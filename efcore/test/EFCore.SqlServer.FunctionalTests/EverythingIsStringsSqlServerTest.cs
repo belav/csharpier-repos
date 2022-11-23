@@ -11,7 +11,9 @@ public class EverythingIsStringsSqlServerTest
     : BuiltInDataTypesTestBase<EverythingIsStringsSqlServerTest.EverythingIsStringsSqlServerFixture>
 {
     public EverythingIsStringsSqlServerTest(EverythingIsStringsSqlServerFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public virtual void Columns_have_expected_data_types()

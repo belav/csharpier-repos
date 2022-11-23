@@ -22,7 +22,9 @@ namespace Castle.DynamicProxy.Tests.Mixins
 #endif
     public class OtherMixin : IOtherMixin
     {
-        public OtherMixin() { }
+        public OtherMixin()
+        {
+        }
 
 		#region IOtherMixin Members
 

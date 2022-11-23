@@ -153,11 +153,15 @@ namespace Roslyn.Test.Performance.Utilities
 
         private Stopwatch _stopwatch;
 
-        public WallClockTraceManager() { }
+        public WallClockTraceManager()
+        {
+        }
 
         public bool HasWarmUpIteration => false;
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         // We have one WallClockTraceManager per test, so we don't
         // need to worry about other tests showing up
@@ -172,7 +176,9 @@ namespace Roslyn.Test.Performance.Utilities
             Log($"AVERAGE: {average}");
         }
 
-        public void EndEvent() { }
+        public void EndEvent()
+        {
+        }
 
         public void EndScenario()
         {
@@ -180,17 +186,29 @@ namespace Roslyn.Test.Performance.Utilities
             _durations.Add(_stopwatch.ElapsedMilliseconds);
         }
 
-        public void EndScenarios() { }
+        public void EndScenarios()
+        {
+        }
 
-        public void ResetScenarioGenerator() { }
+        public void ResetScenarioGenerator()
+        {
+        }
 
-        public void Setup() { }
+        public void Setup()
+        {
+        }
 
-        public void Start() { }
+        public void Start()
+        {
+        }
 
-        public void StartEvent() { }
+        public void StartEvent()
+        {
+        }
 
-        public void StartScenarios() { }
+        public void StartScenarios()
+        {
+        }
 
         public void StartScenario(string scenarioName, string processName)
         {
@@ -198,10 +216,16 @@ namespace Roslyn.Test.Performance.Utilities
             _stopwatch = Stopwatch.StartNew();
         }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
 
-        public void WriteScenarios(string[] scenarios) { }
+        public void WriteScenarios(string[] scenarios)
+        {
+        }
 
-        public void WriteScenariosFileToDisk() { }
+        public void WriteScenariosFileToDisk()
+        {
+        }
     }
 }

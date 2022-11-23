@@ -145,7 +145,9 @@ namespace System.Xml.Xsl.Xslt
         public QilFunction? Function; // Compiled body
 
         public ProtoTemplate(XslNodeType nt, QilName? name, XslVersion xslVer)
-            : base(nt, name, null, xslVer) { }
+            : base(nt, name, null, xslVer)
+        {
+        }
 
         public abstract string GetDebugName();
     }
@@ -162,7 +164,9 @@ namespace System.Xml.Xsl.Xslt
         public CycleCheck CycleCheck; // Used to detect circular references
 
         public AttributeSet(QilName name, XslVersion xslVer)
-            : base(XslNodeType.AttributeSet, name, xslVer) { }
+            : base(XslNodeType.AttributeSet, name, xslVer)
+        {
+        }
 
         public override string GetDebugName() =>
             $"<xsl:attribute-set name=\"{Name!.QualifiedName}\">";
@@ -239,7 +243,9 @@ namespace System.Xml.Xsl.Xslt
         public QilNode? Value; // Contains value for WithParams and global VarPars
 
         public VarPar(XslNodeType nt, QilName name, string? select, XslVersion xslVer)
-            : base(nt, name, select, xslVer) { }
+            : base(nt, name, select, xslVer)
+        {
+        }
     }
 
     internal sealed class Sort : XslNode
@@ -399,7 +405,9 @@ namespace System.Xml.Xsl.Xslt
         }
 
         public XslNodeEx(XslNodeType t, QilName? name, object? arg, XslVersion xslVer)
-            : base(t, name, arg, xslVer) { }
+            : base(t, name, arg, xslVer)
+        {
+        }
     }
 
     internal static class AstFactory

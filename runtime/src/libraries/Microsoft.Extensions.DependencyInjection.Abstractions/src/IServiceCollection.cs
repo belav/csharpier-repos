@@ -8,5 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
     /// <summary>
     /// Specifies the contract for a collection of service descriptors.
     /// </summary>
-    public interface IServiceCollection : IList<ServiceDescriptor> { }
+    public interface IServiceCollection : IList<ServiceDescriptor>
+    {
+    }
 }

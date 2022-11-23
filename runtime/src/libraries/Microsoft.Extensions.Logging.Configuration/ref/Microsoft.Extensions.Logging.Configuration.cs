@@ -47,7 +47,9 @@ namespace Microsoft.Extensions.Logging.Configuration
                 TOptions,
             TProvider
         >(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
-            where TOptions : class { }
+            where TOptions : class
+        {
+        }
     }
 
     public partial class LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>
@@ -55,13 +57,17 @@ namespace Microsoft.Extensions.Logging.Configuration
     {
         public LoggerProviderOptionsChangeTokenSource(
             Microsoft.Extensions.Logging.Configuration.ILoggerProviderConfiguration<TProvider> providerConfiguration
-        ) : base(default(Microsoft.Extensions.Configuration.IConfiguration)) { }
+        ) : base(default(Microsoft.Extensions.Configuration.IConfiguration))
+        {
+        }
     }
 
     public static partial class LoggingBuilderConfigurationExtensions
     {
         public static void AddConfiguration(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
-        ) { }
+        )
+        {
+        }
     }
 }

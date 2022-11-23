@@ -5,7 +5,9 @@ namespace System.Reflection
 {
     internal sealed class SignaturePointerType : SignatureHasElementType
     {
-        internal SignaturePointerType(SignatureType elementType) : base(elementType) { }
+        internal SignaturePointerType(SignatureType elementType) : base(elementType)
+        {
+        }
 
         protected sealed override bool IsArrayImpl() => false;
 

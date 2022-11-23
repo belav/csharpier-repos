@@ -16,7 +16,9 @@ namespace System.ComponentModel.Composition
             new Dictionary<string, IEnumerable<Export>>();
         private static IDictionary<string, object> EmptyMetadata = new Dictionary<string, object>();
 
-        public ConcreteComposablePart() { }
+        public ConcreteComposablePart()
+        {
+        }
 
         public override IDictionary<string, object> Metadata
         {

@@ -20,7 +20,9 @@ public sealed class CacheableKeyRing
         DateTimeOffset expirationTime,
         IKey defaultKey,
         IEnumerable<IKey> allKeys
-    ) : this(expirationToken, expirationTime, keyRing: new KeyRing(defaultKey, allKeys)) { }
+    ) : this(expirationToken, expirationTime, keyRing: new KeyRing(defaultKey, allKeys))
+    {
+    }
 
     internal CacheableKeyRing(
         CancellationToken expirationToken,

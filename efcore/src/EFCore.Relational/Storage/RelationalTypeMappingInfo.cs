@@ -19,7 +19,9 @@ public readonly record struct RelationalTypeMappingInfo
     ///     Creates a new instance of <see cref="RelationalTypeMappingInfo" />.
     /// </summary>
     /// <param name="property">The property for which mapping is needed.</param>
-    public RelationalTypeMappingInfo(IProperty property) : this(property.GetPrincipals()) { }
+    public RelationalTypeMappingInfo(IProperty property) : this(property.GetPrincipals())
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalTypeMappingInfo" />.

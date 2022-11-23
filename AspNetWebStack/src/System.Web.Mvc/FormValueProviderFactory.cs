@@ -9,7 +9,9 @@ namespace System.Web.Mvc
     {
         private readonly UnvalidatedRequestValuesAccessor _unvalidatedValuesAccessor;
 
-        public FormValueProviderFactory() : this(null) { }
+        public FormValueProviderFactory() : this(null)
+        {
+        }
 
         // For unit testing
         internal FormValueProviderFactory(

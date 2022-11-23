@@ -29,7 +29,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         public int ChunkId { get; set; }
         public string SlotState { get; set; }
 
-        public GcTransition() { }
+        public GcTransition()
+        {
+        }
 
         public GcTransition(
             int codeOffset,

@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                 tagAggregatorFactoryService,
                 asyncListener,
                 adornmentLayerName
-            ) { }
+            )
+        {
+        }
 
         protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(
             NormalizedSnapshotSpanCollection changedSpanCollection
@@ -100,7 +102,9 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                             visualSpan: span,
                             tag: block,
                             adornment: line,
-                            removedCallback: delegate { }
+                            removedCallback: delegate
+                            {
+                            }
                         );
                     }
                 }

@@ -20,7 +20,9 @@ namespace Castle.Core.Resource
 
     public class ConfigResourceFactory : IResourceFactory
     {
-        public ConfigResourceFactory() { }
+        public ConfigResourceFactory()
+        {
+        }
 
         public bool Accept(CustomUri uri)
         {

@@ -5,7 +5,9 @@ namespace Moq
 {
     internal abstract class Behavior
     {
-        protected Behavior() { }
+        protected Behavior()
+        {
+        }
 
         public abstract void Execute(Invocation invocation);
     }

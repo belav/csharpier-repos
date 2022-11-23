@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUsePatternCombinatorsCodeFixProvider() { }
+        public CSharpUsePatternCombinatorsCodeFixProvider()
+        {
+        }
 
         private static SyntaxKind MapToSyntaxKind(BinaryOperatorKind kind)
         {
@@ -189,7 +191,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string equivalenceKey
-            ) : base(title, createChangedDocument, equivalenceKey) { }
+            ) : base(title, createChangedDocument, equivalenceKey)
+            {
+            }
 
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
         }

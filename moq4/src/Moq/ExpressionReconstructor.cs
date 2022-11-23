@@ -20,7 +20,9 @@ namespace Moq
             set => instance = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        protected ExpressionReconstructor() { }
+        protected ExpressionReconstructor()
+        {
+        }
 
         /// <summary>
         ///   Reconstructs a <see cref="LambdaExpression"/> from the given <see cref="Action{T}"/> delegate.

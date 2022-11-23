@@ -16,17 +16,23 @@ namespace System.Reflection.TypeLoading
 
         private sealed class SentinelType : RoStubType
         {
-            internal SentinelType() : base() { }
+            internal SentinelType() : base()
+            {
+            }
         }
 
         private sealed class SentinelAssembly : RoStubAssembly
         {
-            internal SentinelAssembly() : base() { }
+            internal SentinelAssembly() : base()
+            {
+            }
         }
 
         private sealed class SentinelMethod : RoMethod
         {
-            internal SentinelMethod() : base(Sentinels.RoType) { }
+            internal SentinelMethod() : base(Sentinels.RoType)
+            {
+            }
 
             internal sealed override RoType GetRoDeclaringType() => throw null!;
 

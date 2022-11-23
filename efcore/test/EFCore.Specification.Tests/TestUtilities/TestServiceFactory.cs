@@ -11,7 +11,9 @@ public class TestServiceFactory
 {
     public static readonly TestServiceFactory Instance = new();
 
-    private TestServiceFactory() { }
+    private TestServiceFactory()
+    {
+    }
 
     private readonly ConcurrentDictionary<Type, IServiceProvider> _factories = new();
 

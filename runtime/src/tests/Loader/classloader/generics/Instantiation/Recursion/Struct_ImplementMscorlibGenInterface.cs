@@ -32,16 +32,22 @@ public struct MyClassICollection : ICollection<MyClassICollection>
         get { return true; }
     }
 
-    public void Add(MyClassICollection item) { }
+    public void Add(MyClassICollection item)
+    {
+    }
 
-    public void Clear() { }
+    public void Clear()
+    {
+    }
 
     public bool Contains(MyClassICollection item)
     {
         return true;
     }
 
-    public void CopyTo(MyClassICollection[] array, int arrayIndex) { }
+    public void CopyTo(MyClassICollection[] array, int arrayIndex)
+    {
+    }
 
     public bool Remove(MyClassICollection item)
     {
@@ -79,7 +85,9 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
     void System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Add(
         MyClassIDictionary key,
         MyClassIDictionary value
-    ) { }
+    )
+    {
+    }
 
     bool System.Collections.Generic.IDictionary<MyClassIDictionary, MyClassIDictionary>.Remove(
         MyClassIDictionary key
@@ -119,18 +127,24 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
     >.this[MyClassIDictionary key]
     {
         get { return new MyClassIDictionary(); }
-        set { }
+        set
+        {
+        }
     }
 
 	#region ICollection<KeyValuePair<MyDictionary,Int32>> Members
 
     void System.Collections.Generic.ICollection<
         KeyValuePair<MyClassIDictionary, MyClassIDictionary>
-    >.Add(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item) { }
+    >.Add(KeyValuePair<MyClassIDictionary, MyClassIDictionary> item)
+    {
+    }
 
     void System.Collections.Generic.ICollection<
         KeyValuePair<MyClassIDictionary, MyClassIDictionary>
-    >.Clear() { }
+    >.Clear()
+    {
+    }
 
     int System.Collections.Generic.ICollection<
         KeyValuePair<MyClassIDictionary, MyClassIDictionary>
@@ -148,7 +162,9 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
 
     void System.Collections.Generic.ICollection<
         KeyValuePair<MyClassIDictionary, MyClassIDictionary>
-    >.CopyTo(KeyValuePair<MyClassIDictionary, MyClassIDictionary>[] array, int arrayIndex) { }
+    >.CopyTo(KeyValuePair<MyClassIDictionary, MyClassIDictionary>[] array, int arrayIndex)
+    {
+    }
 
     bool System.Collections.Generic.ICollection<
         KeyValuePair<MyClassIDictionary, MyClassIDictionary>
@@ -206,14 +222,18 @@ public struct MyClassIEnumerator : IEnumerator<MyClassIEnumerator>
         return true;
     }
 
-    public void Reset() { }
+    public void Reset()
+    {
+    }
 
     Object System.Collections.IEnumerator.Current
     {
         get { return new Object(); }
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public struct MyClassIEqualityComparer : IEqualityComparer<MyClassIEqualityComparer>
@@ -234,7 +254,9 @@ public struct MyClassIList : IList<MyClassIList>
     public MyClassIList this[int index]
     {
         get { return new MyClassIList(); }
-        set { }
+        set
+        {
+        }
     }
 
     public int IndexOf(MyClassIList item)
@@ -242,9 +264,13 @@ public struct MyClassIList : IList<MyClassIList>
         return 1;
     }
 
-    public void Insert(int index, MyClassIList item) { }
+    public void Insert(int index, MyClassIList item)
+    {
+    }
 
-    public void RemoveAt(int index) { }
+    public void RemoveAt(int index)
+    {
+    }
 
     public int Count
     {
@@ -256,16 +282,22 @@ public struct MyClassIList : IList<MyClassIList>
         get { return true; }
     }
 
-    public void Add(MyClassIList item) { }
+    public void Add(MyClassIList item)
+    {
+    }
 
-    public void Clear() { }
+    public void Clear()
+    {
+    }
 
     public bool Contains(MyClassIList item)
     {
         return true;
     }
 
-    public void CopyTo(MyClassIList[] array, int arrayIndex) { }
+    public void CopyTo(MyClassIList[] array, int arrayIndex)
+    {
+    }
 
     public bool Remove(MyClassIList item)
     {
@@ -288,13 +320,17 @@ public struct MyClassIList2 : IList<MyClassIList>, IList<int>
     MyClassIList System.Collections.Generic.IList<MyClassIList>.this[int index]
     {
         get { return new MyClassIList(); }
-        set { }
+        set
+        {
+        }
     }
 
     int System.Collections.Generic.IList<int>.this[int index]
     {
         get { return 1; }
-        set { }
+        set
+        {
+        }
     }
 
     public int IndexOf(MyClassIList item)
@@ -302,9 +338,13 @@ public struct MyClassIList2 : IList<MyClassIList>, IList<int>
         return 1;
     }
 
-    public void Insert(int index, MyClassIList item) { }
+    public void Insert(int index, MyClassIList item)
+    {
+    }
 
-    public void RemoveAt(int index) { }
+    public void RemoveAt(int index)
+    {
+    }
 
     public int Count
     {
@@ -316,16 +356,22 @@ public struct MyClassIList2 : IList<MyClassIList>, IList<int>
         get { return true; }
     }
 
-    public void Add(MyClassIList item) { }
+    public void Add(MyClassIList item)
+    {
+    }
 
-    public void Clear() { }
+    public void Clear()
+    {
+    }
 
     public bool Contains(MyClassIList item)
     {
         return true;
     }
 
-    public void CopyTo(MyClassIList[] array, int arrayIndex) { }
+    public void CopyTo(MyClassIList[] array, int arrayIndex)
+    {
+    }
 
     public bool Remove(MyClassIList item)
     {
@@ -348,16 +394,22 @@ public struct MyClassIList2 : IList<MyClassIList>, IList<int>
         return 1;
     }
 
-    public void Insert(int index, int item) { }
+    public void Insert(int index, int item)
+    {
+    }
 
-    public void Add(int item) { }
+    public void Add(int item)
+    {
+    }
 
     public bool Contains(int item)
     {
         return true;
     }
 
-    public void CopyTo(int[] array, int arrayIndex) { }
+    public void CopyTo(int[] array, int arrayIndex)
+    {
+    }
 
     public bool Remove(int item)
     {

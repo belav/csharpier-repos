@@ -3,25 +3,39 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Linq;
 
-public struct EmptyStruct { }
+public struct EmptyStruct
+{
+}
 
 [StructLayout(LayoutKind.Sequential)]
-public struct EmptySequentialStruct { }
+public struct EmptySequentialStruct
+{
+}
 
 [StructLayout(LayoutKind.Explicit)]
-public struct EmptyExplicitStruct { }
+public struct EmptyExplicitStruct
+{
+}
 
 [StructLayout(LayoutKind.Sequential, Pack = 4)]
-public struct EmptySequentialPackStruct { }
+public struct EmptySequentialPackStruct
+{
+}
 
 [StructLayout(LayoutKind.Explicit, Pack = 4)]
-public struct EmptyExplicitPackStruct { }
+public struct EmptyExplicitPackStruct
+{
+}
 
 [StructLayout(LayoutKind.Explicit, Size = 0)]
-public struct EmptyExplicitSize0Struct { }
+public struct EmptyExplicitSize0Struct
+{
+}
 
 [StructLayout(LayoutKind.Explicit, Size = 1)]
-public struct EmptyExplicitSize1Struct { }
+public struct EmptyExplicitSize1Struct
+{
+}
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public struct TestOffsets

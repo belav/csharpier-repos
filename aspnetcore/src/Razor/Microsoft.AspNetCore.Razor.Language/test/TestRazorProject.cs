@@ -11,7 +11,9 @@ public class TestRazorProject : RazorProject
 {
     private readonly Dictionary<string, RazorProjectItem> _lookup;
 
-    public TestRazorProject() : this(new RazorProjectItem[0]) { }
+    public TestRazorProject() : this(new RazorProjectItem[0])
+    {
+    }
 
     public TestRazorProject(IList<RazorProjectItem> items)
     {

@@ -1179,7 +1179,9 @@ namespace System.Xml.XmlDiff
         }
     }
 
-    public class PropertyCollection : MyDict<string, object> { }
+    public class PropertyCollection : MyDict<string, object>
+    {
+    }
 
     public abstract class XmlDiffNode
     {
@@ -1580,7 +1582,9 @@ namespace System.Xml.XmlDiff
     public class XmlDiffEmptyElement : XmlDiffElement
     {
         public XmlDiffEmptyElement(string localName, string prefix, string ns)
-            : base(localName, prefix, ns) { }
+            : base(localName, prefix, ns)
+        {
+        }
     }
 
     public class XmlDiffAttribute : XmlDiffNode
@@ -1739,7 +1743,9 @@ namespace System.Xml.XmlDiff
             }
         }
 
-        public override void WriteContentTo(XmlWriter w) { }
+        public override void WriteContentTo(XmlWriter w)
+        {
+        }
     }
 
     public class XmlDiffProcessingInstruction : XmlDiffCharacterData
@@ -1762,6 +1768,8 @@ namespace System.Xml.XmlDiff
             w.WriteProcessingInstruction(this._name, Value);
         }
 
-        public override void WriteContentTo(XmlWriter w) { }
+        public override void WriteContentTo(XmlWriter w)
+        {
+        }
     }
 }

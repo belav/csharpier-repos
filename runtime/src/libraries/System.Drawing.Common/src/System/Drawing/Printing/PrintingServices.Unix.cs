@@ -953,7 +953,9 @@ namespace System.Drawing.Printing
                 {
                     File.Delete(tmpfile);
                 }
-                catch { }
+                catch
+                {
+                }
             }
             return true;
         }

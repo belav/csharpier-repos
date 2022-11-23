@@ -17,6 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 handlerType,
                 StringConstants.XamlLspLanguagesContract,
                 WellKnownLspServerKinds.XamlLspServer
-            ) { }
+            )
+        {
+        }
     }
 }

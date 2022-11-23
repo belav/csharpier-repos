@@ -542,7 +542,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var generatorRan = false;
             var analyzerReference = new TestGeneratorReference(
                 new CallbackGenerator(
-                    _ => { },
+                    _ =>
+                    {
+                    },
                     onExecute: _ =>
                     {
                         generatorRan = true;
@@ -706,7 +708,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // We'll use either a generator that produces a single tree, or no tree, to ensure we efficiently handle both cases
             ISourceGenerator generator = generatorProducesTree
                 ? new SingleFileTestGenerator("// StaticContent")
-                : new CallbackGenerator(onInit: _ => { }, onExecute: _ => { });
+                : new CallbackGenerator(
+                    onInit: _ =>
+                    {
+                    },
+                    onExecute: _ =>
+                    {
+                    }
+                );
 
             var analyzerReference = new TestGeneratorReference(generator);
             var project = AddEmptyProject(workspace.CurrentSolution)
@@ -1009,7 +1018,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var generatorRan = false;
             var generator = new CallbackGenerator(
-                onInit: _ => { },
+                onInit: _ =>
+                {
+                },
                 onExecute: _ =>
                 {
                     generatorRan = true;
@@ -1060,7 +1071,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var generatorRan = false;
             var analyzerReference = new TestGeneratorReference(
                 new CallbackGenerator(
-                    _ => { },
+                    _ =>
+                    {
+                    },
                     onExecute: _ =>
                     {
                         generatorRan = true;
@@ -1105,7 +1118,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var generatorRan = false;
             var analyzerReference = new TestGeneratorReference(
                 new CallbackGenerator(
-                    _ => { },
+                    _ =>
+                    {
+                    },
                     onExecute: _ =>
                     {
                         generatorRan = true;
@@ -1185,7 +1200,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var analyzerReference = new TestGeneratorReference(
                 new CallbackGenerator(
-                    onInit: _ => { },
+                    onInit: _ =>
+                    {
+                    },
                     onExecute: context => noTreesPassed = context.Compilation.SyntaxTrees.Any()
                 )
             );

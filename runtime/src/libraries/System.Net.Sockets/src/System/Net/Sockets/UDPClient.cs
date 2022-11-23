@@ -21,7 +21,9 @@ namespace System.Net.Sockets
         private AddressFamily _family = AddressFamily.InterNetwork;
 
         // Initializes a new instance of the System.Net.Sockets.UdpClientclass.
-        public UdpClient() : this(AddressFamily.InterNetwork) { }
+        public UdpClient() : this(AddressFamily.InterNetwork)
+        {
+        }
 
         // Initializes a new instance of the System.Net.Sockets.UdpClientclass.
         public UdpClient(AddressFamily family)
@@ -45,7 +47,9 @@ namespace System.Net.Sockets
         // NOTE: We should obsolete this. This also breaks IPv6-only scenarios.
         // But fixing it has many complications that we have decided not
         // to fix it and instead obsolete it later.
-        public UdpClient(int port) : this(port, AddressFamily.InterNetwork) { }
+        public UdpClient(int port) : this(port, AddressFamily.InterNetwork)
+        {
+        }
 
         // Creates a new instance of the UdpClient class that communicates on the
         // specified port number.
@@ -338,7 +342,9 @@ namespace System.Net.Sockets
                     ;
                     i < addresses.Length && !IsAddressFamilyCompatible(addresses[i].AddressFamily);
                     i++
-                ) { }
+                )
+                {
+                }
 
                 if (addresses.Length == 0 || i == addresses.Length)
                 {

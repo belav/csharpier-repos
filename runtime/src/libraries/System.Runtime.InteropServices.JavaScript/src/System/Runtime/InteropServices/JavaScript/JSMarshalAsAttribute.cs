@@ -28,6 +28,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of <see cref="JSMarshalAsAttribute{T}" /> configured by generic parameters of <see cref="JSType" />.
         /// </summary>
-        public JSMarshalAsAttribute() { }
+        public JSMarshalAsAttribute()
+        {
+        }
     }
 }

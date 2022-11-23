@@ -36,20 +36,26 @@ namespace System.Numerics
         /// <summary>Creates a new <see cref="System.Numerics.Vector4" /> object whose four elements have the same value.</summary>
         /// <param name="value">The value to assign to all four elements.</param>
         [Intrinsic]
-        public Vector4(float value) : this(value, value, value, value) { }
+        public Vector4(float value) : this(value, value, value, value)
+        {
+        }
 
         /// <summary>Creates a   new <see cref="System.Numerics.Vector4" /> object from the specified <see cref="System.Numerics.Vector2" /> object and a Z and a W component.</summary>
         /// <param name="value">The vector to use for the X and Y components.</param>
         /// <param name="z">The Z component.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector2 value, float z, float w) : this(value.X, value.Y, z, w) { }
+        public Vector4(Vector2 value, float z, float w) : this(value.X, value.Y, z, w)
+        {
+        }
 
         /// <summary>Constructs a new <see cref="System.Numerics.Vector4" /> object from the specified <see cref="System.Numerics.Vector3" /> object and a W component.</summary>
         /// <param name="value">The vector to use for the X, Y, and Z components.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector3 value, float w) : this(value.X, value.Y, value.Z, w) { }
+        public Vector4(Vector3 value, float w) : this(value.X, value.Y, value.Z, w)
+        {
+        }
 
         /// <summary>Creates a vector whose elements have the specified values.</summary>
         /// <param name="x">The value to assign to the <see cref="System.Numerics.Vector4.X" /> field.</param>

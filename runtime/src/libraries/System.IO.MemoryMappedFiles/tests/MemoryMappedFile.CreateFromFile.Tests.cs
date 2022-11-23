@@ -1765,9 +1765,13 @@ namespace System.IO.MemoryMappedFiles.Tests
                     ValidateDeviceAccess(memMap, viewCapacity, access);
                 }
             }
-            catch (UnauthorizedAccessException) { }
+            catch (UnauthorizedAccessException)
+            {
+            }
             // ENODEV Operation not supported by device.
-            catch (IOException ex) when (ex.HResult == 19) { }
+            catch (IOException ex) when (ex.HResult == 19)
+            {
+            }
             ;
         }
 
@@ -1803,9 +1807,13 @@ namespace System.IO.MemoryMappedFiles.Tests
                     ValidateDeviceAccess(memMap, viewCapacity, access);
                 }
             }
-            catch (UnauthorizedAccessException) { }
+            catch (UnauthorizedAccessException)
+            {
+            }
             // ENODEV Operation not supported by device.
-            catch (IOException ex) when (ex.HResult == 19) { }
+            catch (IOException ex) when (ex.HResult == 19)
+            {
+            }
             ;
         }
 

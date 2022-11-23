@@ -57,7 +57,9 @@ namespace System.Net.Http.Headers
         private readonly HttpHeaderType _allowedHeaderTypes;
         private readonly HttpHeaderType _treatAsCustomHeaderTypes;
 
-        protected HttpHeaders() : this(HttpHeaderType.All, HttpHeaderType.None) { }
+        protected HttpHeaders() : this(HttpHeaderType.All, HttpHeaderType.None)
+        {
+        }
 
         internal HttpHeaders(
             HttpHeaderType allowedHeaderTypes,
@@ -1424,7 +1426,9 @@ namespace System.Net.Http.Headers
 
         internal sealed class HeaderStoreItemInfo
         {
-            internal HeaderStoreItemInfo() { }
+            internal HeaderStoreItemInfo()
+            {
+            }
 
             internal object? RawValue;
             internal object? ParsedAndInvalidValues;

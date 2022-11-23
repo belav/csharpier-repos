@@ -25,14 +25,18 @@ namespace Microsoft.CodeAnalysis.CSharp
     public abstract partial class CSharpSyntaxNode : SyntaxNode, IFormattable
     {
         internal CSharpSyntaxNode(GreenNode green, SyntaxNode? parent, int position)
-            : base(green, parent, position) { }
+            : base(green, parent, position)
+        {
+        }
 
         /// <summary>
         /// Used by structured trivia which has "parent == null", and therefore must know its
         /// SyntaxTree explicitly when created.
         /// </summary>
         internal CSharpSyntaxNode(GreenNode green, int position, SyntaxTree syntaxTree)
-            : base(green, position, syntaxTree) { }
+            : base(green, position, syntaxTree)
+        {
+        }
 
         /// <summary>
         /// Returns a non-null <see cref="SyntaxTree"/> that owns this node.

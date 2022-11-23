@@ -50,7 +50,13 @@ public static class DataProtectionProvider
             throw new ArgumentNullException(nameof(keyDirectory));
         }
 
-        return CreateProvider(keyDirectory, setupAction: builder => { }, certificate: null);
+        return CreateProvider(
+            keyDirectory,
+            setupAction: builder =>
+            {
+            },
+            certificate: null
+        );
     }
 
     /// <summary>
@@ -130,7 +136,13 @@ public static class DataProtectionProvider
             throw new ArgumentNullException(nameof(certificate));
         }
 
-        return CreateProvider(keyDirectory, setupAction: builder => { }, certificate: certificate);
+        return CreateProvider(
+            keyDirectory,
+            setupAction: builder =>
+            {
+            },
+            certificate: certificate
+        );
     }
 
     /// <summary>

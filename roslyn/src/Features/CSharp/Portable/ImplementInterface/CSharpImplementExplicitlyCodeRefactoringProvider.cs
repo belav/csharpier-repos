@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpImplementExplicitlyCodeRefactoringProvider() { }
+        public CSharpImplementExplicitlyCodeRefactoringProvider()
+        {
+        }
 
         protected override string Implement_0 => FeaturesResources.Implement_0_explicitly;
         protected override string Implement_all_interfaces =>

@@ -25,7 +25,9 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
     public SqlServerRuntimeModelConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    ) : base(dependencies, relationalDependencies)
+    {
+    }
 
     /// <inheritdoc />
     protected override void ProcessModelAnnotations(

@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class MemberDeclarationParsingTests : ParsingTests
     {
-        public MemberDeclarationParsingTests(ITestOutputHelper output) : base(output) { }
+        public MemberDeclarationParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         private MemberDeclarationSyntax ParseDeclaration(
             string text,

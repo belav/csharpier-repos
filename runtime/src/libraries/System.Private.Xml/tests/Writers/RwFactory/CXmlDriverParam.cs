@@ -69,7 +69,9 @@ namespace System.Xml.RwFactoryWriterTests
             XElement testModuleNode,
             XElement virtualNode,
             CXmlDriverParamRawNodes parentParams
-        ) : base(testModuleNode, virtualNode, parentParams) { }
+        ) : base(testModuleNode, virtualNode, parentParams)
+        {
+        }
 
         public override XElement TestModule
         {
@@ -83,7 +85,9 @@ namespace System.Xml.RwFactoryWriterTests
             XElement testCaseNode,
             XElement virtualNode,
             CXmlDriverParamRawNodes parentParams
-        ) : base(testCaseNode, virtualNode, parentParams) { }
+        ) : base(testCaseNode, virtualNode, parentParams)
+        {
+        }
 
         public override XElement TestModule
         {
@@ -101,7 +105,9 @@ namespace System.Xml.RwFactoryWriterTests
             XElement variationNode,
             XElement virtualNode,
             CXmlDriverParamRawNodes parentParams
-        ) : base(variationNode, virtualNode, parentParams) { }
+        ) : base(variationNode, virtualNode, parentParams)
+        {
+        }
 
         public override XElement TestModule
         {

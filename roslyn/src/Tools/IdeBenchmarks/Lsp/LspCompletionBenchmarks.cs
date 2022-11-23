@@ -26,7 +26,9 @@ namespace IdeBenchmarks.Lsp
         private LSP.CompletionParams? _completionParams;
 
         [GlobalSetup]
-        public void GlobalSetup() { }
+        public void GlobalSetup()
+        {
+        }
 
         [IterationSetup]
         public void IterationSetup() => LoadSolutionAsync().Wait();

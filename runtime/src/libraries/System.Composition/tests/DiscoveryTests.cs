@@ -17,18 +17,26 @@ namespace System.Composition.UnitTests
 {
     public class DiscoveryTests : ContainerTests
     {
-        public interface IRule { }
+        public interface IRule
+        {
+        }
 
         public class RuleExportAttribute : ExportAttribute
         {
-            public RuleExportAttribute() : base(typeof(IRule)) { }
+            public RuleExportAttribute() : base(typeof(IRule))
+            {
+            }
         }
 
         [RuleExport]
-        public class UnfairRule : IRule { }
+        public class UnfairRule : IRule
+        {
+        }
 
         [Export(typeof(IRule))]
-        public class IncompatibleRule { }
+        public class IncompatibleRule
+        {
+        }
 
         public class IncompatibleRuleProperty
         {
@@ -37,7 +45,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export, PartNotDiscoverable]
-        public class NotDiscoverable { }
+        public class NotDiscoverable
+        {
+        }
 
         [Fact]
         public void DiscoversCustomExportAttributes()
@@ -87,12 +97,18 @@ namespace System.Composition.UnitTests
             Assert.False(container.TryGetExport(null, out unused));
         }
 
-        public interface IBus { }
+        public interface IBus
+        {
+        }
 
         [Export(typeof(IBus))]
-        public class CloudBus : IBus { }
+        public class CloudBus : IBus
+        {
+        }
 
-        public class SpecialCloudBus : CloudBus { }
+        public class SpecialCloudBus : CloudBus
+        {
+        }
 
         [Fact]
         public void DoesNotDiscoverExportAttributesFromBase()
@@ -110,7 +126,9 @@ namespace System.Composition.UnitTests
         }
 
         [Export]
-        public class HomeController : BaseController { }
+        public class HomeController : BaseController
+        {
+        }
 
         [Fact]
         public void SatisfiesImportsAppliedToBase()
@@ -120,7 +138,9 @@ namespace System.Composition.UnitTests
             Assert.IsAssignableFrom<CloudBus>(hc.Bus);
         }
 
-        private class CustomImportAttribute : ImportAttribute { }
+        private class CustomImportAttribute : ImportAttribute
+        {
+        }
 
         [Export]
         public class MultipleImportsOnProperty

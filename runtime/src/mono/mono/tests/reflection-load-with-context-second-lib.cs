@@ -2,7 +2,11 @@ using System;
 
 namespace A
 {
-    public class ClassA { }
+    public class ClassA
+    {
+    }
 
-    public class AnotherClassA { }
+    public class AnotherClassA
+    {
+    }
 }

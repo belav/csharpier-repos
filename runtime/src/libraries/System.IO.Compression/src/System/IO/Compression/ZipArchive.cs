@@ -43,7 +43,9 @@ namespace System.IO.Compression
         /// <exception cref="InvalidDataException">The contents of the stream could not be interpreted as a Zip archive.</exception>
         /// <param name="stream">The stream containing the archive to be read.</param>
         public ZipArchive(Stream stream)
-            : this(stream, ZipArchiveMode.Read, leaveOpen: false, entryNameEncoding: null) { }
+            : this(stream, ZipArchiveMode.Read, leaveOpen: false, entryNameEncoding: null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of ZipArchive on the given stream in the specified mode.
@@ -55,7 +57,9 @@ namespace System.IO.Compression
         /// <param name="stream">The input or output stream.</param>
         /// <param name="mode">See the description of the ZipArchiveMode enum. Read requires the stream to support reading, Create requires the stream to support writing, and Update requires the stream to support reading, writing, and seeking.</param>
         public ZipArchive(Stream stream, ZipArchiveMode mode)
-            : this(stream, mode, leaveOpen: false, entryNameEncoding: null) { }
+            : this(stream, mode, leaveOpen: false, entryNameEncoding: null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of ZipArchive on the given stream in the specified mode, specifying whether to leave the stream open.
@@ -68,7 +72,9 @@ namespace System.IO.Compression
         /// <param name="mode">See the description of the ZipArchiveMode enum. Read requires the stream to support reading, Create requires the stream to support writing, and Update requires the stream to support reading, writing, and seeking.</param>
         /// <param name="leaveOpen">true to leave the stream open upon disposing the ZipArchive, otherwise false.</param>
         public ZipArchive(Stream stream, ZipArchiveMode mode, bool leaveOpen)
-            : this(stream, mode, leaveOpen, entryNameEncoding: null) { }
+            : this(stream, mode, leaveOpen, entryNameEncoding: null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of ZipArchive on the given stream in the specified mode, specifying whether to leave the stream open.

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private readonly CSharpSyntaxFormattingOptions _options;
 
-        public IndentBlockFormattingRule() : this(CSharpSyntaxFormattingOptions.Default) { }
+        public IndentBlockFormattingRule() : this(CSharpSyntaxFormattingOptions.Default)
+        {
+        }
 
         private IndentBlockFormattingRule(CSharpSyntaxFormattingOptions options)
         {

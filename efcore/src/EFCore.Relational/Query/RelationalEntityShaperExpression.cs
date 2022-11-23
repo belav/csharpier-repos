@@ -27,7 +27,9 @@ public class RelationalEntityShaperExpression : EntityShaperExpression
         IEntityType entityType,
         Expression valueBufferExpression,
         bool nullable
-    ) : base(entityType, valueBufferExpression, nullable, null) { }
+    ) : base(entityType, valueBufferExpression, nullable, null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="RelationalEntityShaperExpression" /> class.
@@ -44,7 +46,9 @@ public class RelationalEntityShaperExpression : EntityShaperExpression
         Expression valueBufferExpression,
         bool nullable,
         LambdaExpression? materializationCondition
-    ) : base(entityType, valueBufferExpression, nullable, materializationCondition) { }
+    ) : base(entityType, valueBufferExpression, nullable, materializationCondition)
+    {
+    }
 
     /// <inheritdoc />
     protected override LambdaExpression GenerateMaterializationCondition(

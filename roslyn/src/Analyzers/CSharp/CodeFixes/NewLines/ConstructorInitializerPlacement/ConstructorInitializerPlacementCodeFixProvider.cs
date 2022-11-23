@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConstructorInitializerPlacementCodeFixProvider() { }
+        public ConstructorInitializerPlacementCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.ConstructorInitializerPlacementDiagnosticId);

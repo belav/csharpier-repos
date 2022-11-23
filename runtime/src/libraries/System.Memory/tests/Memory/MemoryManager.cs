@@ -143,7 +143,9 @@ namespace System.MemoryTests
         {
             int[] a = { 91, 92, -93, 94 };
             MemoryManager<int> manager;
-            using (manager = new CustomMemoryForTest<int>(a)) { }
+            using (manager = new CustomMemoryForTest<int>(a))
+            {
+            }
             Assert.Throws<ObjectDisposedException>(() => manager.GetSpan());
         }
     }

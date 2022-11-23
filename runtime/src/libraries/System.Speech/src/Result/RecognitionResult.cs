@@ -31,7 +31,9 @@ namespace System.Speech.Recognition
             Initialize(recognizer, recoResult, sapiResultBlob, maxAlternates);
         }
 
-        internal RecognitionResult() { }
+        internal RecognitionResult()
+        {
+        }
 
         private RecognitionResult(SerializationInfo info, StreamingContext context)
         {
@@ -110,7 +112,9 @@ namespace System.Speech.Recognition
                         }
                     }
 #pragma warning disable 56502 // Remove the empty catch statements warnings
-                    catch (NotSupportedException) { }
+                    catch (NotSupportedException)
+                    {
+                    }
 #pragma warning restore 56502
                 }
             }

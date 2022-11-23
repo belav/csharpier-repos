@@ -43,7 +43,9 @@ namespace System.DirectoryServices.AccountManagement
 
         protected ContextOptions contextOptions;
 
-        protected internal virtual void InitializeNewDirectoryOptions(DirectoryEntry newDeChild) { }
+        protected internal virtual void InitializeNewDirectoryOptions(DirectoryEntry newDeChild)
+        {
+        }
 
         //
         // Static constructor: used for initializing static tables

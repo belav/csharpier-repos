@@ -674,7 +674,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                 _error.Value["exceptionDetails"]["stackTrace"] = StackTrace;
                 return _error;
             }
-            set { }
+            set
+            {
+            }
         }
 
         public ReturnAsErrorException(JObject error) : base(error.ToString()) =>

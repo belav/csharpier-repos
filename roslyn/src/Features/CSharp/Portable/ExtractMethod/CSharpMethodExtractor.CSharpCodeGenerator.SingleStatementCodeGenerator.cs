@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     CSharpCodeGenerationOptions options,
                     bool localFunction
                 ) : base(insertionPoint, selectionResult, analyzerResult, options, localFunction)
-                { }
+                {
+                }
 
                 public static bool IsExtractMethodOnSingleStatement(SelectionResult code)
                 {

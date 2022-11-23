@@ -149,7 +149,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.Write(DEFAULT_STRING);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 VerifyTimeout(com);
             }
@@ -187,7 +189,9 @@ namespace System.IO.Ports.Tests
                 {
                     com1.Write(DEFAULT_STRING);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 asyncEnableRts.Stop();
 
@@ -372,7 +376,9 @@ namespace System.IO.Ports.Tests
                 {
                     _com.Write(stringToWrite);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
             }
         }
         #endregion
@@ -394,7 +400,9 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(DEFAULT_STRING); //Warm up write method
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
@@ -405,7 +413,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.Write(DEFAULT_STRING);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 timer.Stop();
 

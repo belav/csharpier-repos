@@ -494,7 +494,9 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         File.Delete(_objectFilePath);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
         }

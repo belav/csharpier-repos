@@ -407,11 +407,15 @@ namespace Newtonsoft.Json.Tests.Serialization
     }
 
     [JsonArray(ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
-    public class ReferenceLoopHandlingList : List<ReferenceLoopHandlingList> { }
+    public class ReferenceLoopHandlingList : List<ReferenceLoopHandlingList>
+    {
+    }
 
     [JsonDictionary(ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
     public class ReferenceLoopHandlingDictionary
-        : Dictionary<string, ReferenceLoopHandlingDictionary> { }
+        : Dictionary<string, ReferenceLoopHandlingDictionary>
+    {
+    }
 
     [JsonObject(ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
     public class ReferenceLoopHandlingObjectContainerAttribute

@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.TodoComments
         /// </summary>
         private readonly HashSet<DocumentId> _documentsWithTodoComments = new();
 
-        protected AbstractTodoCommentsIncrementalAnalyzer() { }
+        protected AbstractTodoCommentsIncrementalAnalyzer()
+        {
+        }
 
         protected abstract ValueTask ReportTodoCommentDataAsync(
             DocumentId documentId,

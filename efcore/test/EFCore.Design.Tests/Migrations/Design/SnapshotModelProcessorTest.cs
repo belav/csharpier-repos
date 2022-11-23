@@ -320,7 +320,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
         private class DummyModelRuntimeInitializer : IModelRuntimeInitializer
         {
-            private DummyModelRuntimeInitializer() { }
+            private DummyModelRuntimeInitializer()
+            {
+            }
 
             public IModel Initialize(
                 IModel model,

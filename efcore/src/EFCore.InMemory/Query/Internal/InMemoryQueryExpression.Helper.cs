@@ -50,7 +50,9 @@ public partial class InMemoryQueryExpression
 
             public ValueBuffer Current => !_moved ? ValueBuffer.Empty : _value;
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 

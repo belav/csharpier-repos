@@ -11,7 +11,9 @@ public class WKTComparer : IEqualityComparer<string>
 
     public static WKTComparer Instance { get; } = new();
 
-    private WKTComparer() { }
+    private WKTComparer()
+    {
+    }
 
     public bool Equals(string x, string y) => x == y || Normalize(x) == Normalize(y);
 

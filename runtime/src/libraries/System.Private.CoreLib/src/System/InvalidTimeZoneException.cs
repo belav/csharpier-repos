@@ -11,14 +11,22 @@ namespace System
     )]
     public class InvalidTimeZoneException : Exception
     {
-        public InvalidTimeZoneException() { }
+        public InvalidTimeZoneException()
+        {
+        }
 
-        public InvalidTimeZoneException(string? message) : base(message) { }
+        public InvalidTimeZoneException(string? message) : base(message)
+        {
+        }
 
         public InvalidTimeZoneException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         protected InvalidTimeZoneException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

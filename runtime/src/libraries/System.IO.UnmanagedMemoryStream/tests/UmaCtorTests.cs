@@ -84,7 +84,9 @@ namespace System.IO.Tests
         // Derived class used to exercise protected members and to test behaviors before and after initialization
         private sealed class DerivedUnmanagedMemoryAccessor : UnmanagedMemoryAccessor
         {
-            internal DerivedUnmanagedMemoryAccessor() { }
+            internal DerivedUnmanagedMemoryAccessor()
+            {
+            }
 
             internal void Initialize(
                 FakeSafeBuffer buffer,

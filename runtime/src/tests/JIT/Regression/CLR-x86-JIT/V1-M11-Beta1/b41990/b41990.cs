@@ -22,7 +22,9 @@ namespace Test
                     L[2] = 0;
                 }
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         private static int Main()

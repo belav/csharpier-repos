@@ -11,5 +11,7 @@ namespace Microsoft.CodeAnalysis.Host
     ///
     /// see <see cref="WellKnownEventListeners"/> for supported services
     /// </summary>
-    internal interface IEventListener { }
+    internal interface IEventListener
+    {
+    }
 }

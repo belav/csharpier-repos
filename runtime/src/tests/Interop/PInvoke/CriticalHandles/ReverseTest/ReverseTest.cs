@@ -12,7 +12,9 @@ internal class MyCriticalHandle : CriticalHandle
     static int s_uniqueHandleValue;
     static HashSet<int> s_closedHandles = new HashSet<int>();
 
-    public MyCriticalHandle() : base(new IntPtr(-1)) { }
+    public MyCriticalHandle() : base(new IntPtr(-1))
+    {
+    }
 
     public override bool IsInvalid
     {
@@ -52,7 +54,8 @@ public class Reverse
     public static void In()
     {
         IntPtr handleValue = new IntPtr(1);
-        Native.InCallback callback = (handle) => { };
+        Native.InCallback callback = (handle) => {
+        };
         Assert.Throws<MarshalDirectiveException>(
             () => Native.InvokeInCallback(callback, handleValue)
         );
@@ -80,7 +83,8 @@ public class Reverse
     public static void InRef()
     {
         IntPtr handleValue = new IntPtr(4);
-        Native.InRefCallback callback = (ref MyCriticalHandle handle) => { };
+        Native.InRefCallback callback = (ref MyCriticalHandle handle) => {
+        };
         Assert.Throws<MarshalDirectiveException>(
             () => Native.InvokeInRefCallback(callback, ref handleValue)
         );
@@ -90,7 +94,8 @@ public class Reverse
     public static void Ref()
     {
         IntPtr handleValue = new IntPtr(5);
-        Native.RefCallback callback = (ref MyCriticalHandle handle) => { };
+        Native.RefCallback callback = (ref MyCriticalHandle handle) => {
+        };
         Assert.Throws<MarshalDirectiveException>(
             () => Native.InvokeRefCallback(callback, ref handleValue)
         );

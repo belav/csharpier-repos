@@ -36,6 +36,8 @@ namespace System
         }
 
         private InvalidProgramException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

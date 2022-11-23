@@ -57,7 +57,9 @@ namespace System.Security.AccessControl
                 default(bool),
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags)
-            ) { }
+            )
+        {
+        }
 
         public System.Security.AccessControl.AccessControlType AccessControlType
         {
@@ -79,7 +81,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public AccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -95,7 +99,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public AccessRule(
             string identity,
@@ -109,7 +115,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public AccessRule(
             string identity,
@@ -125,7 +133,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public T Rights
         {
@@ -135,7 +145,9 @@ namespace System.Security.AccessControl
 
     public sealed partial class AceEnumerator : System.Collections.IEnumerator
     {
-        internal AceEnumerator() { }
+        internal AceEnumerator()
+        {
+        }
 
         public System.Security.AccessControl.GenericAce Current
         {
@@ -151,7 +163,9 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -223,7 +237,9 @@ namespace System.Security.AccessControl
                 default(bool),
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags)
-            ) { }
+            )
+        {
+        }
 
         public System.Security.AccessControl.AuditFlags AuditFlags
         {
@@ -245,7 +261,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public AuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -261,7 +279,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public AuditRule(string identity, T rights, System.Security.AccessControl.AuditFlags flags)
             : base(
@@ -271,7 +291,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public AuditRule(
             string identity,
@@ -287,7 +309,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public T Rights
         {
@@ -303,7 +327,9 @@ namespace System.Security.AccessControl
             bool isInherited,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) { }
+        )
+        {
+        }
 
         protected internal int AccessMask
         {
@@ -330,16 +356,22 @@ namespace System.Security.AccessControl
     public sealed partial class AuthorizationRuleCollection
         : System.Collections.ReadOnlyCollectionBase
     {
-        public AuthorizationRuleCollection() { }
+        public AuthorizationRuleCollection()
+        {
+        }
 
         public System.Security.AccessControl.AuthorizationRule? this[int index]
         {
             get { throw null; }
         }
 
-        public void AddRule(System.Security.AccessControl.AuthorizationRule? rule) { }
+        public void AddRule(System.Security.AccessControl.AuthorizationRule? rule)
+        {
+        }
 
-        public void CopyTo(System.Security.AccessControl.AuthorizationRule[] rules, int index) { }
+        public void CopyTo(System.Security.AccessControl.AuthorizationRule[] rules, int index)
+        {
+        }
     }
 
     public sealed partial class CommonAce : System.Security.AccessControl.QualifiedAce
@@ -351,14 +383,18 @@ namespace System.Security.AccessControl
             System.Security.Principal.SecurityIdentifier sid,
             bool isCallback,
             byte[]? opaque
-        ) { }
+        )
+        {
+        }
 
         public override int BinaryLength
         {
             get { throw null; }
         }
 
-        public override void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public override void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
 
         public static int MaxOpaqueLength(bool isCallback)
         {
@@ -368,7 +404,9 @@ namespace System.Security.AccessControl
 
     public abstract partial class CommonAcl : System.Security.AccessControl.GenericAcl
     {
-        internal CommonAcl() { }
+        internal CommonAcl()
+        {
+        }
 
         public sealed override int BinaryLength
         {
@@ -393,28 +431,42 @@ namespace System.Security.AccessControl
         public sealed override System.Security.AccessControl.GenericAce this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public sealed override byte Revision
         {
             get { throw null; }
         }
 
-        public sealed override void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public sealed override void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
 
-        public void Purge(System.Security.Principal.SecurityIdentifier sid) { }
+        public void Purge(System.Security.Principal.SecurityIdentifier sid)
+        {
+        }
 
-        public void RemoveInheritedAces() { }
+        public void RemoveInheritedAces()
+        {
+        }
     }
 
     public abstract partial class CommonObjectSecurity
         : System.Security.AccessControl.ObjectSecurity
     {
-        protected CommonObjectSecurity(bool isContainer) { }
+        protected CommonObjectSecurity(bool isContainer)
+        {
+        }
 
-        protected void AddAccessRule(System.Security.AccessControl.AccessRule rule) { }
+        protected void AddAccessRule(System.Security.AccessControl.AccessRule rule)
+        {
+        }
 
-        protected void AddAuditRule(System.Security.AccessControl.AuditRule rule) { }
+        protected void AddAuditRule(System.Security.AccessControl.AuditRule rule)
+        {
+        }
 
         public System.Security.AccessControl.AuthorizationRuleCollection GetAccessRules(
             bool includeExplicit,
@@ -457,31 +509,46 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        protected void RemoveAccessRuleAll(System.Security.AccessControl.AccessRule rule) { }
+        protected void RemoveAccessRuleAll(System.Security.AccessControl.AccessRule rule)
+        {
+        }
 
-        protected void RemoveAccessRuleSpecific(System.Security.AccessControl.AccessRule rule) { }
+        protected void RemoveAccessRuleSpecific(System.Security.AccessControl.AccessRule rule)
+        {
+        }
 
         protected bool RemoveAuditRule(System.Security.AccessControl.AuditRule rule)
         {
             throw null;
         }
 
-        protected void RemoveAuditRuleAll(System.Security.AccessControl.AuditRule rule) { }
+        protected void RemoveAuditRuleAll(System.Security.AccessControl.AuditRule rule)
+        {
+        }
 
-        protected void RemoveAuditRuleSpecific(System.Security.AccessControl.AuditRule rule) { }
+        protected void RemoveAuditRuleSpecific(System.Security.AccessControl.AuditRule rule)
+        {
+        }
 
-        protected void ResetAccessRule(System.Security.AccessControl.AccessRule rule) { }
+        protected void ResetAccessRule(System.Security.AccessControl.AccessRule rule)
+        {
+        }
 
-        protected void SetAccessRule(System.Security.AccessControl.AccessRule rule) { }
+        protected void SetAccessRule(System.Security.AccessControl.AccessRule rule)
+        {
+        }
 
-        protected void SetAuditRule(System.Security.AccessControl.AuditRule rule) { }
+        protected void SetAuditRule(System.Security.AccessControl.AuditRule rule)
+        {
+        }
     }
 
     public sealed partial class CommonSecurityDescriptor
         : System.Security.AccessControl.GenericSecurityDescriptor
     {
         public CommonSecurityDescriptor(bool isContainer, bool isDS, byte[] binaryForm, int offset)
-        { }
+        {
+        }
 
         public CommonSecurityDescriptor(
             bool isContainer,
@@ -491,15 +558,21 @@ namespace System.Security.AccessControl
             System.Security.Principal.SecurityIdentifier? group,
             System.Security.AccessControl.SystemAcl? systemAcl,
             System.Security.AccessControl.DiscretionaryAcl? discretionaryAcl
-        ) { }
+        )
+        {
+        }
 
         public CommonSecurityDescriptor(
             bool isContainer,
             bool isDS,
             System.Security.AccessControl.RawSecurityDescriptor rawSecurityDescriptor
-        ) { }
+        )
+        {
+        }
 
-        public CommonSecurityDescriptor(bool isContainer, bool isDS, string sddlForm) { }
+        public CommonSecurityDescriptor(bool isContainer, bool isDS, string sddlForm)
+        {
+        }
 
         public override System.Security.AccessControl.ControlFlags ControlFlags
         {
@@ -508,12 +581,16 @@ namespace System.Security.AccessControl
         public System.Security.AccessControl.DiscretionaryAcl? DiscretionaryAcl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Principal.SecurityIdentifier? Group
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsContainer
         {
@@ -534,25 +611,41 @@ namespace System.Security.AccessControl
         public override System.Security.Principal.SecurityIdentifier? Owner
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.AccessControl.SystemAcl? SystemAcl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddDiscretionaryAcl(byte revision, int trusted) { }
+        public void AddDiscretionaryAcl(byte revision, int trusted)
+        {
+        }
 
-        public void AddSystemAcl(byte revision, int trusted) { }
+        public void AddSystemAcl(byte revision, int trusted)
+        {
+        }
 
-        public void PurgeAccessControl(System.Security.Principal.SecurityIdentifier sid) { }
+        public void PurgeAccessControl(System.Security.Principal.SecurityIdentifier sid)
+        {
+        }
 
-        public void PurgeAudit(System.Security.Principal.SecurityIdentifier sid) { }
+        public void PurgeAudit(System.Security.Principal.SecurityIdentifier sid)
+        {
+        }
 
-        public void SetDiscretionaryAclProtection(bool isProtected, bool preserveInheritance) { }
+        public void SetDiscretionaryAclProtection(bool isProtected, bool preserveInheritance)
+        {
+        }
 
-        public void SetSystemAclProtection(bool isProtected, bool preserveInheritance) { }
+        public void SetSystemAclProtection(bool isProtected, bool preserveInheritance)
+        {
+        }
     }
 
     public sealed partial class CompoundAce : System.Security.AccessControl.KnownAce
@@ -562,7 +655,9 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.CompoundAceType compoundAceType,
             System.Security.Principal.SecurityIdentifier sid
-        ) { }
+        )
+        {
+        }
 
         public override int BinaryLength
         {
@@ -571,10 +666,14 @@ namespace System.Security.AccessControl
         public System.Security.AccessControl.CompoundAceType CompoundAceType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public override void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
     }
 
     public enum CompoundAceType
@@ -612,7 +711,9 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AceType type,
             System.Security.AccessControl.AceFlags flags,
             byte[]? opaque
-        ) { }
+        )
+        {
+        }
 
         public override int BinaryLength
         {
@@ -623,27 +724,37 @@ namespace System.Security.AccessControl
             get { throw null; }
         }
 
-        public override void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public override void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
 
         public byte[]? GetOpaque()
         {
             throw null;
         }
 
-        public void SetOpaque(byte[]? opaque) { }
+        public void SetOpaque(byte[]? opaque)
+        {
+        }
     }
 
     public sealed partial class DiscretionaryAcl : System.Security.AccessControl.CommonAcl
     {
-        public DiscretionaryAcl(bool isContainer, bool isDS, byte revision, int capacity) { }
+        public DiscretionaryAcl(bool isContainer, bool isDS, byte revision, int capacity)
+        {
+        }
 
-        public DiscretionaryAcl(bool isContainer, bool isDS, int capacity) { }
+        public DiscretionaryAcl(bool isContainer, bool isDS, int capacity)
+        {
+        }
 
         public DiscretionaryAcl(
             bool isContainer,
             bool isDS,
             System.Security.AccessControl.RawAcl? rawAcl
-        ) { }
+        )
+        {
+        }
 
         public void AddAccess(
             System.Security.AccessControl.AccessControlType accessType,
@@ -651,7 +762,9 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) { }
+        )
+        {
+        }
 
         public void AddAccess(
             System.Security.AccessControl.AccessControlType accessType,
@@ -662,13 +775,17 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) { }
+        )
+        {
+        }
 
         public void AddAccess(
             System.Security.AccessControl.AccessControlType accessType,
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAccessRule rule
-        ) { }
+        )
+        {
+        }
 
         public bool RemoveAccess(
             System.Security.AccessControl.AccessControlType accessType,
@@ -710,7 +827,9 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) { }
+        )
+        {
+        }
 
         public void RemoveAccessSpecific(
             System.Security.AccessControl.AccessControlType accessType,
@@ -721,13 +840,17 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) { }
+        )
+        {
+        }
 
         public void RemoveAccessSpecific(
             System.Security.AccessControl.AccessControlType accessType,
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAccessRule rule
-        ) { }
+        )
+        {
+        }
 
         public void SetAccess(
             System.Security.AccessControl.AccessControlType accessType,
@@ -735,7 +858,9 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) { }
+        )
+        {
+        }
 
         public void SetAccess(
             System.Security.AccessControl.AccessControlType accessType,
@@ -746,23 +871,31 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) { }
+        )
+        {
+        }
 
         public void SetAccess(
             System.Security.AccessControl.AccessControlType accessType,
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAccessRule rule
-        ) { }
+        )
+        {
+        }
     }
 
     public abstract partial class GenericAce
     {
-        internal GenericAce() { }
+        internal GenericAce()
+        {
+        }
 
         public System.Security.AccessControl.AceFlags AceFlags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.AccessControl.AceType AceType
         {
@@ -838,7 +971,9 @@ namespace System.Security.AccessControl
         public static readonly byte AclRevisionDS;
         public static readonly int MaxBinaryLength;
 
-        protected GenericAcl() { }
+        protected GenericAcl()
+        {
+        }
 
         public abstract int BinaryLength { get; }
         public abstract int Count { get; }
@@ -853,7 +988,9 @@ namespace System.Security.AccessControl
             get { throw null; }
         }
 
-        public void CopyTo(System.Security.AccessControl.GenericAce[] array, int index) { }
+        public void CopyTo(System.Security.AccessControl.GenericAce[] array, int index)
+        {
+        }
 
         public abstract void GetBinaryForm(byte[] binaryForm, int offset);
 
@@ -862,7 +999,9 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -872,7 +1011,9 @@ namespace System.Security.AccessControl
 
     public abstract partial class GenericSecurityDescriptor
     {
-        internal GenericSecurityDescriptor() { }
+        internal GenericSecurityDescriptor()
+        {
+        }
 
         public int BinaryLength
         {
@@ -886,7 +1027,9 @@ namespace System.Security.AccessControl
             get { throw null; }
         }
 
-        public void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
 
         public string GetSddlForm(
             System.Security.AccessControl.AccessControlSections includeSections
@@ -911,17 +1054,23 @@ namespace System.Security.AccessControl
 
     public abstract partial class KnownAce : System.Security.AccessControl.GenericAce
     {
-        internal KnownAce() { }
+        internal KnownAce()
+        {
+        }
 
         public int AccessMask
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Principal.SecurityIdentifier SecurityIdentifier
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -931,14 +1080,18 @@ namespace System.Security.AccessControl
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType
-        ) : base(default(bool)) { }
+        ) : base(default(bool))
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             System.Runtime.InteropServices.SafeHandle? handle,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool)) { }
+        ) : base(default(bool))
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -947,21 +1100,27 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool)) { }
+        ) : base(default(bool))
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool)) { }
+        ) : base(default(bool))
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             string? name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool)) { }
+        ) : base(default(bool))
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -970,29 +1129,39 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool)) { }
+        ) : base(default(bool))
+        {
+        }
 
         protected sealed override void Persist(
             System.Runtime.InteropServices.SafeHandle handle,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
 
         protected void Persist(
             System.Runtime.InteropServices.SafeHandle handle,
             System.Security.AccessControl.AccessControlSections includeSections,
             object? exceptionContext
-        ) { }
+        )
+        {
+        }
 
         protected sealed override void Persist(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
 
         protected void Persist(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections,
             object? exceptionContext
-        ) { }
+        )
+        {
+        }
 
         protected internal delegate System.Exception? ExceptionFromErrorCode(
             int errorCode,
@@ -1021,7 +1190,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
-            ) { }
+            )
+        {
+        }
 
         public System.Guid InheritedObjectType
         {
@@ -1049,7 +1220,9 @@ namespace System.Security.AccessControl
             System.Guid inheritedType,
             bool isCallback,
             byte[]? opaque
-        ) { }
+        )
+        {
+        }
 
         public override int BinaryLength
         {
@@ -1058,20 +1231,28 @@ namespace System.Security.AccessControl
         public System.Guid InheritedObjectAceType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.AccessControl.ObjectAceFlags ObjectAceFlags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Guid ObjectAceType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public override void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
 
         public static int MaxOpaqueLength(bool isCallback)
         {
@@ -1106,7 +1287,9 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.InheritanceFlags),
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
-            ) { }
+            )
+        {
+        }
 
         public System.Guid InheritedObjectType
         {
@@ -1124,19 +1307,27 @@ namespace System.Security.AccessControl
 
     public abstract partial class ObjectSecurity
     {
-        protected ObjectSecurity() { }
+        protected ObjectSecurity()
+        {
+        }
 
-        protected ObjectSecurity(bool isContainer, bool isDS) { }
+        protected ObjectSecurity(bool isContainer, bool isDS)
+        {
+        }
 
         protected ObjectSecurity(
             System.Security.AccessControl.CommonSecurityDescriptor securityDescriptor
-        ) { }
+        )
+        {
+        }
 
         public abstract System.Type AccessRightType { get; }
         protected bool AccessRulesModified
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract System.Type AccessRuleType { get; }
         public bool AreAccessRulesCanonical
@@ -1158,13 +1349,17 @@ namespace System.Security.AccessControl
         protected bool AuditRulesModified
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract System.Type AuditRuleType { get; }
         protected bool GroupModified
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected bool IsContainer
         {
@@ -1177,7 +1372,9 @@ namespace System.Security.AccessControl
         protected bool OwnerModified
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected System.Security.AccessControl.CommonSecurityDescriptor SecurityDescriptor
         {
@@ -1261,55 +1458,85 @@ namespace System.Security.AccessControl
             bool enableOwnershipPrivilege,
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
 
         protected virtual void Persist(
             System.Runtime.InteropServices.SafeHandle handle,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
 
         protected virtual void Persist(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
 
-        public virtual void PurgeAccessRules(
-            System.Security.Principal.IdentityReference identity
-        ) { }
+        public virtual void PurgeAccessRules(System.Security.Principal.IdentityReference identity)
+        {
+        }
 
-        public virtual void PurgeAuditRules(
-            System.Security.Principal.IdentityReference identity
-        ) { }
+        public virtual void PurgeAuditRules(System.Security.Principal.IdentityReference identity)
+        {
+        }
 
-        protected void ReadLock() { }
+        protected void ReadLock()
+        {
+        }
 
-        protected void ReadUnlock() { }
+        protected void ReadUnlock()
+        {
+        }
 
-        public void SetAccessRuleProtection(bool isProtected, bool preserveInheritance) { }
+        public void SetAccessRuleProtection(bool isProtected, bool preserveInheritance)
+        {
+        }
 
-        public void SetAuditRuleProtection(bool isProtected, bool preserveInheritance) { }
+        public void SetAuditRuleProtection(bool isProtected, bool preserveInheritance)
+        {
+        }
 
-        public void SetGroup(System.Security.Principal.IdentityReference identity) { }
+        public void SetGroup(System.Security.Principal.IdentityReference identity)
+        {
+        }
 
-        public void SetOwner(System.Security.Principal.IdentityReference identity) { }
+        public void SetOwner(System.Security.Principal.IdentityReference identity)
+        {
+        }
 
-        public void SetSecurityDescriptorBinaryForm(byte[] binaryForm) { }
+        public void SetSecurityDescriptorBinaryForm(byte[] binaryForm)
+        {
+        }
 
         public void SetSecurityDescriptorBinaryForm(
             byte[] binaryForm,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
 
-        public void SetSecurityDescriptorSddlForm(string sddlForm) { }
+        public void SetSecurityDescriptorSddlForm(string sddlForm)
+        {
+        }
 
         public void SetSecurityDescriptorSddlForm(
             string sddlForm,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteLock() { }
+        protected void WriteLock()
+        {
+        }
 
-        protected void WriteUnlock() { }
+        protected void WriteUnlock()
+        {
+        }
     }
 
     public abstract partial class ObjectSecurity<T>
@@ -1318,14 +1545,18 @@ namespace System.Security.AccessControl
         protected ObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        ) : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             System.Runtime.InteropServices.SafeHandle? safeHandle,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        ) : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -1334,14 +1565,18 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        ) : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             string? name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        ) : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -1350,7 +1585,9 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        ) : base(default(bool), default(System.Security.AccessControl.ResourceType))
+        {
+        }
 
         public override System.Type AccessRightType
         {
@@ -1377,9 +1614,13 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        public virtual void AddAccessRule(System.Security.AccessControl.AccessRule<T> rule) { }
+        public virtual void AddAccessRule(System.Security.AccessControl.AccessRule<T> rule)
+        {
+        }
 
-        public virtual void AddAuditRule(System.Security.AccessControl.AuditRule<T> rule) { }
+        public virtual void AddAuditRule(System.Security.AccessControl.AuditRule<T> rule)
+        {
+        }
 
         public override System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
@@ -1393,50 +1634,70 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        protected internal void Persist(System.Runtime.InteropServices.SafeHandle handle) { }
+        protected internal void Persist(System.Runtime.InteropServices.SafeHandle handle)
+        {
+        }
 
-        protected internal void Persist(string name) { }
+        protected internal void Persist(string name)
+        {
+        }
 
         public virtual bool RemoveAccessRule(System.Security.AccessControl.AccessRule<T> rule)
         {
             throw null;
         }
 
-        public virtual void RemoveAccessRuleAll(
-            System.Security.AccessControl.AccessRule<T> rule
-        ) { }
+        public virtual void RemoveAccessRuleAll(System.Security.AccessControl.AccessRule<T> rule)
+        {
+        }
 
         public virtual void RemoveAccessRuleSpecific(
             System.Security.AccessControl.AccessRule<T> rule
-        ) { }
+        )
+        {
+        }
 
         public virtual bool RemoveAuditRule(System.Security.AccessControl.AuditRule<T> rule)
         {
             throw null;
         }
 
-        public virtual void RemoveAuditRuleAll(System.Security.AccessControl.AuditRule<T> rule) { }
+        public virtual void RemoveAuditRuleAll(System.Security.AccessControl.AuditRule<T> rule)
+        {
+        }
 
-        public virtual void RemoveAuditRuleSpecific(
-            System.Security.AccessControl.AuditRule<T> rule
-        ) { }
+        public virtual void RemoveAuditRuleSpecific(System.Security.AccessControl.AuditRule<T> rule)
+        {
+        }
 
-        public virtual void ResetAccessRule(System.Security.AccessControl.AccessRule<T> rule) { }
+        public virtual void ResetAccessRule(System.Security.AccessControl.AccessRule<T> rule)
+        {
+        }
 
-        public virtual void SetAccessRule(System.Security.AccessControl.AccessRule<T> rule) { }
+        public virtual void SetAccessRule(System.Security.AccessControl.AccessRule<T> rule)
+        {
+        }
 
-        public virtual void SetAuditRule(System.Security.AccessControl.AuditRule<T> rule) { }
+        public virtual void SetAuditRule(System.Security.AccessControl.AuditRule<T> rule)
+        {
+        }
     }
 
     public sealed partial class PrivilegeNotHeldException
         : System.UnauthorizedAccessException,
             System.Runtime.Serialization.ISerializable
     {
-        public PrivilegeNotHeldException() { }
+        public PrivilegeNotHeldException()
+        {
+        }
 
-        public PrivilegeNotHeldException(string? privilege) { }
+        public PrivilegeNotHeldException(string? privilege)
+        {
+        }
 
-        public PrivilegeNotHeldException(string? privilege, System.Exception? inner) { }
+        public PrivilegeNotHeldException(string? privilege, System.Exception? inner)
+        {
+        }
 
         public string? PrivilegeName
         {
@@ -1446,7 +1707,9 @@ namespace System.Security.AccessControl
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -1459,7 +1722,9 @@ namespace System.Security.AccessControl
 
     public abstract partial class QualifiedAce : System.Security.AccessControl.KnownAce
     {
-        internal QualifiedAce() { }
+        internal QualifiedAce()
+        {
+        }
 
         public System.Security.AccessControl.AceQualifier AceQualifier
         {
@@ -1479,14 +1744,20 @@ namespace System.Security.AccessControl
             throw null;
         }
 
-        public void SetOpaque(byte[]? opaque) { }
+        public void SetOpaque(byte[]? opaque)
+        {
+        }
     }
 
     public sealed partial class RawAcl : System.Security.AccessControl.GenericAcl
     {
-        public RawAcl(byte revision, int capacity) { }
+        public RawAcl(byte revision, int capacity)
+        {
+        }
 
-        public RawAcl(byte[] binaryForm, int offset) { }
+        public RawAcl(byte[] binaryForm, int offset)
+        {
+        }
 
         public override int BinaryLength
         {
@@ -1499,24 +1770,34 @@ namespace System.Security.AccessControl
         public override System.Security.AccessControl.GenericAce this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte Revision
         {
             get { throw null; }
         }
 
-        public override void GetBinaryForm(byte[] binaryForm, int offset) { }
+        public override void GetBinaryForm(byte[] binaryForm, int offset)
+        {
+        }
 
-        public void InsertAce(int index, System.Security.AccessControl.GenericAce ace) { }
+        public void InsertAce(int index, System.Security.AccessControl.GenericAce ace)
+        {
+        }
 
-        public void RemoveAce(int index) { }
+        public void RemoveAce(int index)
+        {
+        }
     }
 
     public sealed partial class RawSecurityDescriptor
         : System.Security.AccessControl.GenericSecurityDescriptor
     {
-        public RawSecurityDescriptor(byte[] binaryForm, int offset) { }
+        public RawSecurityDescriptor(byte[] binaryForm, int offset)
+        {
+        }
 
         public RawSecurityDescriptor(
             System.Security.AccessControl.ControlFlags flags,
@@ -1524,9 +1805,13 @@ namespace System.Security.AccessControl
             System.Security.Principal.SecurityIdentifier? group,
             System.Security.AccessControl.RawAcl? systemAcl,
             System.Security.AccessControl.RawAcl? discretionaryAcl
-        ) { }
+        )
+        {
+        }
 
-        public RawSecurityDescriptor(string sddlForm) { }
+        public RawSecurityDescriptor(string sddlForm)
+        {
+        }
 
         public override System.Security.AccessControl.ControlFlags ControlFlags
         {
@@ -1535,30 +1820,42 @@ namespace System.Security.AccessControl
         public System.Security.AccessControl.RawAcl? DiscretionaryAcl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Principal.SecurityIdentifier? Group
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Principal.SecurityIdentifier? Owner
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte ResourceManagerControl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.AccessControl.RawAcl? SystemAcl
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void SetFlags(System.Security.AccessControl.ControlFlags flags) { }
+        public void SetFlags(System.Security.AccessControl.ControlFlags flags)
+        {
+        }
     }
 
     public enum ResourceType
@@ -1589,12 +1886,17 @@ namespace System.Security.AccessControl
 
     public sealed partial class SystemAcl : System.Security.AccessControl.CommonAcl
     {
-        public SystemAcl(bool isContainer, bool isDS, byte revision, int capacity) { }
+        public SystemAcl(bool isContainer, bool isDS, byte revision, int capacity)
+        {
+        }
 
-        public SystemAcl(bool isContainer, bool isDS, int capacity) { }
+        public SystemAcl(bool isContainer, bool isDS, int capacity)
+        {
+        }
 
         public SystemAcl(bool isContainer, bool isDS, System.Security.AccessControl.RawAcl rawAcl)
-        { }
+        {
+        }
 
         public void AddAudit(
             System.Security.AccessControl.AuditFlags auditFlags,
@@ -1602,7 +1904,9 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) { }
+        )
+        {
+        }
 
         public void AddAudit(
             System.Security.AccessControl.AuditFlags auditFlags,
@@ -1613,12 +1917,16 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) { }
+        )
+        {
+        }
 
         public void AddAudit(
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAuditRule rule
-        ) { }
+        )
+        {
+        }
 
         public bool RemoveAudit(
             System.Security.AccessControl.AuditFlags auditFlags,
@@ -1659,7 +1967,9 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) { }
+        )
+        {
+        }
 
         public void RemoveAuditSpecific(
             System.Security.AccessControl.AuditFlags auditFlags,
@@ -1670,12 +1980,16 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) { }
+        )
+        {
+        }
 
         public void RemoveAuditSpecific(
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAuditRule rule
-        ) { }
+        )
+        {
+        }
 
         public void SetAudit(
             System.Security.AccessControl.AuditFlags auditFlags,
@@ -1683,7 +1997,9 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) { }
+        )
+        {
+        }
 
         public void SetAudit(
             System.Security.AccessControl.AuditFlags auditFlags,
@@ -1694,12 +2010,16 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) { }
+        )
+        {
+        }
 
         public void SetAudit(
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAuditRule rule
-        ) { }
+        )
+        {
+        }
     }
 }
 
@@ -1709,19 +2029,27 @@ namespace System.Security.Policy
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        public Evidence() { }
+        public Evidence()
+        {
+        }
 
         [System.ObsoleteAttribute(
             "This constructor is obsolete. Use the constructor which accepts arrays of EvidenceBase instead."
         )]
-        public Evidence(object[] hostEvidence, object[] assemblyEvidence) { }
+        public Evidence(object[] hostEvidence, object[] assemblyEvidence)
+        {
+        }
 
-        public Evidence(System.Security.Policy.Evidence evidence) { }
+        public Evidence(System.Security.Policy.Evidence evidence)
+        {
+        }
 
         public Evidence(
             System.Security.Policy.EvidenceBase[] hostEvidence,
             System.Security.Policy.EvidenceBase[] assemblyEvidence
-        ) { }
+        )
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Evidence should not be treated as an ICollection. Use GetHostEnumerator and GetAssemblyEnumerator to iterate over the evidence to collect a count."
@@ -1741,7 +2069,9 @@ namespace System.Security.Policy
         public bool Locked
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object SyncRoot
         {
@@ -1751,19 +2081,28 @@ namespace System.Security.Policy
         [System.ObsoleteAttribute(
             "Evidence.AddAssembly has been deprecated. Use AddAssemblyEvidence instead."
         )]
-        public void AddAssembly(object id) { }
+        public void AddAssembly(object id)
+        {
+        }
 
-        public void AddAssemblyEvidence<T>(T evidence)
-            where T : System.Security.Policy.EvidenceBase { }
+        public void AddAssemblyEvidence<T>(T evidence) where T : System.Security.Policy.EvidenceBase
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Evidence.AddHost has been deprecated. Use AddHostEvidence instead."
         )]
-        public void AddHost(object id) { }
+        public void AddHost(object id)
+        {
+        }
 
-        public void AddHostEvidence<T>(T evidence) where T : System.Security.Policy.EvidenceBase { }
+        public void AddHostEvidence<T>(T evidence) where T : System.Security.Policy.EvidenceBase
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public System.Security.Policy.Evidence? Clone()
         {
@@ -1773,7 +2112,9 @@ namespace System.Security.Policy
         [System.ObsoleteAttribute(
             "Evidence should not be treated as an ICollection. Use the GetHostEnumerator and GetAssemblyEnumerator methods rather than using CopyTo."
         )]
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
         public System.Collections.IEnumerator GetAssemblyEnumerator()
         {
@@ -1803,14 +2144,20 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public void Merge(System.Security.Policy.Evidence evidence) { }
+        public void Merge(System.Security.Policy.Evidence evidence)
+        {
+        }
 
-        public void RemoveType(System.Type t) { }
+        public void RemoveType(System.Type t)
+        {
+        }
     }
 
     public abstract partial class EvidenceBase
     {
-        protected EvidenceBase() { }
+        protected EvidenceBase()
+        {
+        }
 
         public virtual System.Security.Policy.EvidenceBase? Clone()
         {

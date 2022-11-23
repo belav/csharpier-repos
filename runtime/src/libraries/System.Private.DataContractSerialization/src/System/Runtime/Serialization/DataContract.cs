@@ -2924,7 +2924,9 @@ namespace System.Runtime.Serialization.DataContracts
             : this(
                 DataContract.GetClrTypeFullName(type.GetGenericTypeDefinition()),
                 type.GetGenericArguments()
-            ) { }
+            )
+        {
+        }
 
         internal GenericNameProvider(string genericTypeName, object[] genericParams)
         {
@@ -3181,7 +3183,9 @@ namespace System.Runtime.Serialization.DataContracts
     {
         private RuntimeTypeHandle _value;
 
-        public TypeHandleRef() { }
+        public TypeHandleRef()
+        {
+        }
 
         public TypeHandleRef(RuntimeTypeHandle value)
         {

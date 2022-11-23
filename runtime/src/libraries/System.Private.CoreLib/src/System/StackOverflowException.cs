@@ -37,6 +37,8 @@ namespace System
         }
 
         private StackOverflowException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

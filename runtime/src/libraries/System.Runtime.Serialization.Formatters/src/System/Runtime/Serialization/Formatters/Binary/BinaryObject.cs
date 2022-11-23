@@ -9,7 +9,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int _objectId;
         internal int _mapId;
 
-        internal BinaryObject() { }
+        internal BinaryObject()
+        {
+        }
 
         internal void Set(int objectId, int mapId)
         {

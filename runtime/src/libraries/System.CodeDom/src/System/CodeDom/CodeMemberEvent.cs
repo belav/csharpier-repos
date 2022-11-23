@@ -8,7 +8,9 @@ namespace System.CodeDom
         private CodeTypeReference _type;
         private CodeTypeReferenceCollection _implementationTypes;
 
-        public CodeMemberEvent() { }
+        public CodeMemberEvent()
+        {
+        }
 
         public CodeTypeReference Type
         {

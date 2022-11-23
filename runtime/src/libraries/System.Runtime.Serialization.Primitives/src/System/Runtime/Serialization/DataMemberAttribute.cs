@@ -14,7 +14,9 @@ namespace System.Runtime.Serialization
         private bool _isNameSetExplicitly;
         private int _order = -1;
 
-        public DataMemberAttribute() { }
+        public DataMemberAttribute()
+        {
+        }
 
         public string? Name
         {

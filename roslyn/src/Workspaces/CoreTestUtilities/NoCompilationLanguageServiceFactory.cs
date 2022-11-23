@@ -22,8 +22,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoCompilationLanguageService() { }
+        public NoCompilationLanguageService()
+        {
+        }
     }
 
-    internal interface INoCompilationLanguageService : ILanguageService { }
+    internal interface INoCompilationLanguageService : ILanguageService
+    {
+    }
 }

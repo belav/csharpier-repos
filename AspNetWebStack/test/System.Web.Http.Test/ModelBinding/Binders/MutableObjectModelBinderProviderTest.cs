@@ -106,6 +106,8 @@ namespace System.Web.Http.ModelBinding.Binders
             Assert.Null(binder);
         }
 
-        class MutableTestType { }
+        class MutableTestType
+        {
+        }
     }
 }

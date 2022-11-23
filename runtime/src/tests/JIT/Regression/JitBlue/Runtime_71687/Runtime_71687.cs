@@ -14,7 +14,9 @@ class Runtime_71687
     }
 
     // Must be inlined so we end up with null check above
-    private static void Consume<T>(T value) { }
+    private static void Consume<T>(T value)
+    {
+    }
 
     private static int Main()
     {

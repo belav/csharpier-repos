@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegexDocumentHighlighter() { }
+        public RegexDocumentHighlighter()
+        {
+        }
 
         public ImmutableArray<DocumentHighlights> GetDocumentHighlights(
             Document document,

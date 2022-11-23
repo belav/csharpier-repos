@@ -202,7 +202,9 @@ public class DefaultViewComponentHelperTest
     private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
     {
         public FilteredViewComponentDescriptorProvider(params Type[] allowedTypes)
-            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo()))) { }
+            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo())))
+        {
+        }
 
         private static ApplicationPartManager GetApplicationPartManager(IEnumerable<TypeInfo> types)
         {

@@ -93,7 +93,13 @@ public class ProxyTests
         );
         Assert.Same(
             typeof(SharedTypeEntityType),
-            context.Set<SharedTypeEntityType>("STET1").CreateProxy(_ => { }).GetType().BaseType
+            context
+                .Set<SharedTypeEntityType>("STET1")
+                .CreateProxy(_ =>
+                {
+                })
+                .GetType()
+                .BaseType
         );
     }
 
@@ -105,7 +111,13 @@ public class ProxyTests
         Assert.Same(typeof(March86C), context.Set<March86C>().CreateProxy().GetType().BaseType);
         Assert.Same(
             typeof(March86C),
-            context.Set<March86C>().CreateProxy(_ => { }).GetType().BaseType
+            context
+                .Set<March86C>()
+                .CreateProxy(_ =>
+                {
+                })
+                .GetType()
+                .BaseType
         );
     }
 
@@ -127,7 +139,10 @@ public class ProxyTests
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
                 .Throws<InvalidOperationException>(
-                    () => context.CreateProxy<SharedTypeEntityType>(_ => { })
+                    () =>
+                        context.CreateProxy<SharedTypeEntityType>(_ =>
+                        {
+                        })
                 )
                 .Message
         );
@@ -153,7 +168,12 @@ public class ProxyTests
         );
         Assert.Same(
             typeof(IsOwnedButNotWeak),
-            context.CreateProxy<IsOwnedButNotWeak>(_ => { }).GetType().BaseType
+            context
+                .CreateProxy<IsOwnedButNotWeak>(_ =>
+                {
+                })
+                .GetType()
+                .BaseType
         );
         Assert.Same(
             typeof(IsOwnedButNotWeak),
@@ -434,17 +454,23 @@ public class ProxyTests
     }
 
     [Owned]
-    public class IsWeak { }
+    public class IsWeak
+    {
+    }
 
     [Owned]
-    public class IsOwnedButNotWeak { }
+    public class IsOwnedButNotWeak
+    {
+    }
 
     public record March86C : IndyCar
     {
         public virtual int Id { get; init; }
     }
 
-    public record IndyCar { }
+    public record IndyCar
+    {
+    }
 
     private class NeweyContext : DbContext
     {
@@ -552,7 +578,9 @@ public class ProxyTests
 
     public class RedBullRb3
     {
-        internal RedBullRb3() { }
+        internal RedBullRb3()
+        {
+        }
 
         public virtual int Id { get; set; }
     }

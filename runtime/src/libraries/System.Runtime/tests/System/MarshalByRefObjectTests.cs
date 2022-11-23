@@ -13,6 +13,8 @@ namespace System.Tests
             new DerivedMarshalByRefObject();
         }
 
-        private sealed class DerivedMarshalByRefObject : MarshalByRefObject { }
+        private sealed class DerivedMarshalByRefObject : MarshalByRefObject
+        {
+        }
     }
 }

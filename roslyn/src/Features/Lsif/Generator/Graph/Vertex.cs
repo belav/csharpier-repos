@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
     internal abstract class Vertex : Element
     {
         protected Vertex(string label, IdFactory idFactory) : base(type: "vertex", label, idFactory)
-        { }
+        {
+        }
 
         public override string ToString()
         {

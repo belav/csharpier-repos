@@ -13,7 +13,9 @@ public abstract class ManyToManyNoTrackingQueryTestBase<TFixture>
             .GetTypeInfo()
             .GetDeclaredMethod(nameof(EntityFrameworkQueryableExtensions.AsNoTracking));
 
-    protected ManyToManyNoTrackingQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected ManyToManyNoTrackingQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     protected override bool IgnoreEntryCount => true;
 

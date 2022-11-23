@@ -7,7 +7,9 @@ using System.Runtime.CompilerServices;
 class Runtime_61040_4
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void JitUse<T>(T arg) { }
+    static void JitUse<T>(T arg)
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static int Problem()

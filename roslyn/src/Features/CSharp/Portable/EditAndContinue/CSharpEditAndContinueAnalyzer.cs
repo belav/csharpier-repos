@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
             {
@@ -44,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
         // Public for testing purposes
         public CSharpEditAndContinueAnalyzer(Action<SyntaxNode>? testFaultInjector = null)
-            : base(testFaultInjector) { }
+            : base(testFaultInjector)
+        {
+        }
 
         #region Syntax Analysis
 

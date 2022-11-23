@@ -18,12 +18,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public CSharpDbContextGeneratorTest(
             ModelCodeGeneratorTestFixture fixture,
             ITestOutputHelper output
-        ) : base(fixture, output) { }
+        ) : base(fixture, output)
+        {
+        }
 
         [ConditionalFact]
         public Task Empty_model() =>
             TestAsync(
-                modelBuilder => { },
+                modelBuilder =>
+                {
+                },
                 new ModelCodeGenerationOptions(),
                 code =>
                 {
@@ -70,7 +74,9 @@ public partial class TestDbContext : DbContext
         [ConditionalFact]
         public Task SuppressConnectionStringWarning_works() =>
             TestAsync(
-                modelBuilder => { },
+                modelBuilder =>
+                {
+                },
                 new ModelCodeGenerationOptions { SuppressConnectionStringWarning = true },
                 code =>
                 {
@@ -114,7 +120,9 @@ public partial class TestDbContext : DbContext
         [ConditionalFact]
         public Task SuppressOnConfiguring_works() =>
             TestAsync(
-                modelBuilder => { },
+                modelBuilder =>
+                {
+                },
                 new ModelCodeGenerationOptions { SuppressOnConfiguring = true },
                 code =>
                 {
@@ -1077,7 +1085,9 @@ public partial class TestDbContext : DbContext
                         code.ContextFile
                     );
                 },
-                model => { }
+                model =>
+                {
+                }
             );
 
         [ConditionalFact]
@@ -1637,7 +1647,9 @@ public partial class TestDbContext : DbContext
         {
             public TestModelAnnotationProvider(
                 RelationalAnnotationProviderDependencies dependencies
-            ) : base(dependencies) { }
+            ) : base(dependencies)
+            {
+            }
 
             public override IEnumerable<IAnnotation> For(IRelationalModel database, bool designTime)
             {
@@ -1663,7 +1675,9 @@ public partial class TestDbContext : DbContext
 
             public TestModelAnnotationCodeGenerator(
                 AnnotationCodeGeneratorDependencies dependencies
-            ) : base(dependencies) { }
+            ) : base(dependencies)
+            {
+            }
 
             protected override MethodCallCodeFragment GenerateFluentApi(
                 IModel model,

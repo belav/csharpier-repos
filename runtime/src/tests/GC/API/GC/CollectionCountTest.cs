@@ -26,7 +26,9 @@ public class CollectionCountTest
         Int32.MaxValue
     };
 
-    private CollectionCountTest() { }
+    private CollectionCountTest()
+    {
+    }
 
     // Checks that CollectionCount correctly counts collections to higher generations
     public bool CollectionTest()
@@ -68,7 +70,9 @@ public class CollectionCountTest
                 GC.CollectionCount(i);
                 retVal = false;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);

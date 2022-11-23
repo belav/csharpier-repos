@@ -541,7 +541,9 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     {
                         throw exception;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 Assert.False(string.IsNullOrEmpty(exception.StackTrace));
             }

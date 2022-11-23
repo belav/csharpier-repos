@@ -99,7 +99,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "TypeEquals";
 
-        private TypeEqualsInstruction() { }
+        private TypeEqualsInstruction()
+        {
+        }
 
         public override int Run(InterpretedFrame frame)
         {
@@ -123,7 +125,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "NullableMethod";
 
-        private NullableMethodCallInstruction() { }
+        private NullableMethodCallInstruction()
+        {
+        }
 
         private sealed class HasValue : NullableMethodCallInstruction
         {
@@ -355,7 +359,9 @@ namespace System.Linq.Expressions.Interpreter
 
             private sealed class Ref : CastInstructionNoT
             {
-                public Ref(Type t) : base(t) { }
+                public Ref(Type t) : base(t)
+                {
+                }
 
                 protected override void ConvertNull(InterpretedFrame frame)
                 {
@@ -365,7 +371,9 @@ namespace System.Linq.Expressions.Interpreter
 
             private sealed class Value : CastInstructionNoT
             {
-                public Value(Type t) : base(t) { }
+                public Value(Type t) : base(t)
+                {
+                }
 
                 protected override void ConvertNull(InterpretedFrame frame)
                 {

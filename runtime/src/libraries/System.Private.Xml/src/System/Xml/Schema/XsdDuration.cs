@@ -86,7 +86,9 @@ namespace System.Xml.Schema
         /// <summary>
         /// Construct an XsdDuration from a TimeSpan value.
         /// </summary>
-        public XsdDuration(TimeSpan timeSpan) : this(timeSpan, DurationType.Duration) { }
+        public XsdDuration(TimeSpan timeSpan) : this(timeSpan, DurationType.Duration)
+        {
+        }
 
         /// <summary>
         /// Construct an XsdDuration from a TimeSpan value that represents an xsd:duration, an xdt:dayTimeDuration, or
@@ -152,7 +154,9 @@ namespace System.Xml.Schema
         /// Constructs an XsdDuration from a string in the xsd:duration format.  Components are stored with loss
         /// of fidelity (except in the case of overflow).
         /// </summary>
-        public XsdDuration(string s) : this(s, DurationType.Duration) { }
+        public XsdDuration(string s) : this(s, DurationType.Duration)
+        {
+        }
 
         /// <summary>
         /// Constructs an XsdDuration from a string in the xsd:duration format.  Components are stored without loss

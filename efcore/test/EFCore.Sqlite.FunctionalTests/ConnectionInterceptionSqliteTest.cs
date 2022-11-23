@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class ConnectionInterceptionSqliteTestBase : ConnectionInterceptionTestBase
 {
     protected ConnectionInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     protected override DbContextOptionsBuilder ConfigureProvider(
         DbContextOptionsBuilder optionsBuilder
@@ -39,7 +41,8 @@ public abstract class ConnectionInterceptionSqliteTestBase : ConnectionIntercept
             IClassFixture<ConnectionInterceptionSqliteTest.InterceptionSqliteFixture>
     {
         public ConnectionInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture)
-        { }
+        {
+        }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
@@ -52,7 +55,9 @@ public abstract class ConnectionInterceptionSqliteTestBase : ConnectionIntercept
             IClassFixture<ConnectionInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
     {
         public ConnectionInterceptionWithDiagnosticsSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {

@@ -52,7 +52,9 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_d
     public void Should_use_the_implicit_conversion_operator()
     {
         var source = new Foo { Value = "Hello" };
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
 
         _bar = config.CreateMapper().Map<Foo, Bar>(source);
 
@@ -79,7 +81,9 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_s
         }
     }
 
-    public class InheritedFoo : Foo { }
+    public class InheritedFoo : Foo
+    {
+    }
 
     public class Bar
     {
@@ -91,7 +95,9 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_s
     {
         var source = new Foo { Value = "Hello" };
 
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _bar = config.CreateMapper().Map<Foo, Bar>(source);
 
         _bar.OtherValue.ShouldBe("Hello");
@@ -102,7 +108,9 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_s
     {
         var source = new InheritedFoo { Value = "Hello" };
 
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _bar = config.CreateMapper().Map<InheritedFoo, Bar>(source);
 
         _bar.OtherValue.ShouldBe("Hello");
@@ -131,7 +139,9 @@ public class When_mapping_to_classes_with_explicit_conversion_operator_on_the_de
     [Fact]
     public void Should_use_the_explicit_conversion_operator()
     {
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _bar = config.CreateMapper().Map<Foo, Bar>(new Foo { Value = "Hello" });
         _bar.OtherValue.ShouldBe("Hello");
     }
@@ -151,7 +161,9 @@ public class When_mapping_to_classes_with_explicit_conversion_operator_on_the_so
         }
     }
 
-    public class InheritedFoo : Foo { }
+    public class InheritedFoo : Foo
+    {
+    }
 
     public class Bar
     {
@@ -161,7 +173,9 @@ public class When_mapping_to_classes_with_explicit_conversion_operator_on_the_so
     [Fact]
     public void Should_use_the_explicit_conversion_operator()
     {
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _bar = config.CreateMapper().Map<Foo, Bar>(new Foo { Value = "Hello" });
         _bar.OtherValue.ShouldBe("Hello");
     }
@@ -171,7 +185,9 @@ public class When_mapping_to_classes_with_explicit_conversion_operator_on_the_so
     {
         var source = new InheritedFoo { Value = "Hello" };
 
-        var config = new MapperConfiguration(cfg => { });
+        var config = new MapperConfiguration(cfg =>
+        {
+        });
         _bar = config.CreateMapper().Map<InheritedFoo, Bar>(source);
 
         _bar.OtherValue.ShouldBe("Hello");

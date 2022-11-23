@@ -16,7 +16,9 @@ namespace System.Web.Razor.Editor
             Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
         )]
         public SingleLineMarkupEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer)
-            : base(tokenizer) { }
+            : base(tokenizer)
+        {
+        }
 
         [SuppressMessage(
             "Microsoft.Design",
@@ -26,6 +28,8 @@ namespace System.Web.Razor.Editor
         public SingleLineMarkupEditHandler(
             Func<string, IEnumerable<ISymbol>> tokenizer,
             AcceptedCharacters accepted
-        ) : base(tokenizer, accepted) { }
+        ) : base(tokenizer, accepted)
+        {
+        }
     }
 }

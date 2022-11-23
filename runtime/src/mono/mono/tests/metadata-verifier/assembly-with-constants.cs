@@ -17,5 +17,7 @@ public class LastClass
     /* LAMESPEC You can't define a default value using MSIL*/
     public int ConstProp { get; set; }
 
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 }

@@ -12,7 +12,9 @@ namespace System.Text
         private readonly Dictionary<int, Encoding> _encodings = new Dictionary<int, Encoding>();
         private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();
 
-        internal CodePagesEncodingProvider() { }
+        internal CodePagesEncodingProvider()
+        {
+        }
 
         public static EncodingProvider Instance
         {

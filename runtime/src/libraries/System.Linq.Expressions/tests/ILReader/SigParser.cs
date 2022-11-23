@@ -141,88 +141,150 @@ namespace System.Linq.Expressions.Tests
         private int pbEnd;
 
         // a method with given elem_type
-        protected virtual void NotifyBeginMethod(sig_elem_type elem_type) { }
+        protected virtual void NotifyBeginMethod(sig_elem_type elem_type)
+        {
+        }
 
-        protected virtual void NotifyEndMethod() { }
+        protected virtual void NotifyEndMethod()
+        {
+        }
 
         // total parameters for the method
-        protected virtual void NotifyParamCount(sig_count count) { }
+        protected virtual void NotifyParamCount(sig_count count)
+        {
+        }
 
         // starting a return type
-        protected virtual void NotifyBeginRetType() { }
+        protected virtual void NotifyBeginRetType()
+        {
+        }
 
-        protected virtual void NotifyEndRetType() { }
+        protected virtual void NotifyEndRetType()
+        {
+        }
 
         // starting a parameter
-        protected virtual void NotifyBeginParam() { }
+        protected virtual void NotifyBeginParam()
+        {
+        }
 
-        protected virtual void NotifyEndParam() { }
+        protected virtual void NotifyEndParam()
+        {
+        }
 
         // sentinel indication the location of the "..." in the method signature
-        protected virtual void NotifySentinel() { }
+        protected virtual void NotifySentinel()
+        {
+        }
 
         // number of generic parameters in this method signature (if any)
-        protected virtual void NotifyGenericParamCount(sig_count count) { }
+        protected virtual void NotifyGenericParamCount(sig_count count)
+        {
+        }
 
         // a field with given elem_type
-        protected virtual void NotifyBeginField(sig_elem_type elem_type) { }
+        protected virtual void NotifyBeginField(sig_elem_type elem_type)
+        {
+        }
 
-        protected virtual void NotifyEndField() { }
+        protected virtual void NotifyEndField()
+        {
+        }
 
         // a block of locals with given elem_type (always just LOCAL_SIG for now)
-        protected virtual void NotifyBeginLocals(sig_elem_type elem_type) { }
+        protected virtual void NotifyBeginLocals(sig_elem_type elem_type)
+        {
+        }
 
-        protected virtual void NotifyEndLocals() { }
+        protected virtual void NotifyEndLocals()
+        {
+        }
 
         // count of locals with a block
-        protected virtual void NotifyLocalsCount(sig_count count) { }
+        protected virtual void NotifyLocalsCount(sig_count count)
+        {
+        }
 
         // starting a new local within a local block
-        protected virtual void NotifyBeginLocal() { }
+        protected virtual void NotifyBeginLocal()
+        {
+        }
 
-        protected virtual void NotifyEndLocal() { }
+        protected virtual void NotifyEndLocal()
+        {
+        }
 
         // the only constraint available to locals at the moment is ELEMENT_TYPE_PINNED
-        protected virtual void NotifyConstraint(sig_elem_type elem_type) { }
+        protected virtual void NotifyConstraint(sig_elem_type elem_type)
+        {
+        }
 
         // a property with given element type
-        protected virtual void NotifyBeginProperty(sig_elem_type elem_type) { }
+        protected virtual void NotifyBeginProperty(sig_elem_type elem_type)
+        {
+        }
 
-        protected virtual void NotifyEndProperty() { }
+        protected virtual void NotifyEndProperty()
+        {
+        }
 
         // starting array shape information for array types
-        protected virtual void NotifyBeginArrayShape() { }
+        protected virtual void NotifyBeginArrayShape()
+        {
+        }
 
-        protected virtual void NotifyEndArrayShape() { }
+        protected virtual void NotifyEndArrayShape()
+        {
+        }
 
         // array rank (total number of dimensions)
-        protected virtual void NotifyRank(sig_count count) { }
+        protected virtual void NotifyRank(sig_count count)
+        {
+        }
 
         // number of dimensions with specified sizes followed by the size of each
-        protected virtual void NotifyNumSizes(sig_count count) { }
+        protected virtual void NotifyNumSizes(sig_count count)
+        {
+        }
 
-        protected virtual void NotifySize(sig_count count) { }
+        protected virtual void NotifySize(sig_count count)
+        {
+        }
 
         // BUG BUG lower bounds can be negative, how can this be encoded?
         // number of dimensions with specified lower bounds followed by lower bound of each
-        protected virtual void NotifyNumLoBounds(sig_count count) { }
+        protected virtual void NotifyNumLoBounds(sig_count count)
+        {
+        }
 
-        protected virtual void NotifyLoBound(sig_count count) { }
+        protected virtual void NotifyLoBound(sig_count count)
+        {
+        }
 
         // starting a normal type (occurs in many contexts such as param, field, local, etc)
-        protected virtual void NotifyBeginType() { }
+        protected virtual void NotifyBeginType()
+        {
+        }
 
-        protected virtual void NotifyEndType() { }
+        protected virtual void NotifyEndType()
+        {
+        }
 
-        protected virtual void NotifyTypedByref() { }
+        protected virtual void NotifyTypedByref()
+        {
+        }
 
         // the type has the 'byref' modifier on it -- this normally proceeds the type definition in the context
         // the type is used, so for instance a parameter might have the byref modifier on it
         // so this happens before the BeginType in that context
-        protected virtual void NotifyByref() { }
+        protected virtual void NotifyByref()
+        {
+        }
 
         // the type is "VOID" (this has limited uses, function returns and void pointer)
-        protected virtual void NotifyVoid() { }
+        protected virtual void NotifyVoid()
+        {
+        }
 
         // the type has the indicated custom modifiers (which can be optional or required)
         protected virtual void NotifyCustomMod(
@@ -230,10 +292,14 @@ namespace System.Linq.Expressions.Tests
             sig_index token,
             sig_index_type indexType,
             sig_index index
-        ) { }
+        )
+        {
+        }
 
         // the type is a simple type, the elem_type defines it fully
-        protected virtual void NotifyTypeSimple(sig_elem_type elem_type) { }
+        protected virtual void NotifyTypeSimple(sig_elem_type elem_type)
+        {
+        }
 
         // the type is specified by the given index of the given index type (normally a type index in the type metadata)
         // this callback is normally qualified by other ones such as NotifyTypeClass or NotifyTypeValueType
@@ -241,37 +307,59 @@ namespace System.Linq.Expressions.Tests
             sig_index token,
             sig_index_type indexType,
             int index
-        ) { }
+        )
+        {
+        }
 
         // number indicates the number of type specifications for the generic types that will follow
-        protected virtual void NotifyTypeGenericInst(sig_mem_number number) { }
+        protected virtual void NotifyTypeGenericInst(sig_mem_number number)
+        {
+        }
 
         // the type is the type of the nth generic type parameter for the class
-        protected virtual void NotifyTypeGenericTypeVariable(sig_mem_number number) { }
+        protected virtual void NotifyTypeGenericTypeVariable(sig_mem_number number)
+        {
+        }
 
         // the type is the type of the nth generic type parameter for the member
-        protected virtual void NotifyTypeGenericMemberVariable(sig_mem_number number) { }
+        protected virtual void NotifyTypeGenericMemberVariable(sig_mem_number number)
+        {
+        }
 
         // the type will be a value type
-        protected virtual void NotifyTypeValueType() { }
+        protected virtual void NotifyTypeValueType()
+        {
+        }
 
         // the type will be a class
-        protected virtual void NotifyTypeClass() { }
+        protected virtual void NotifyTypeClass()
+        {
+        }
 
         // the type is a pointer to a type (nested type notifications follow)
-        protected virtual void NotifyTypePointer() { }
+        protected virtual void NotifyTypePointer()
+        {
+        }
 
         // the type is a function pointer, followed by the type of the function
-        protected virtual void NotifyTypeFunctionPointer() { }
+        protected virtual void NotifyTypeFunctionPointer()
+        {
+        }
 
         // the type is an array, this is followed by the array shape, see above, as well as modifiers and element type
-        protected virtual void NotifyTypeArray() { }
+        protected virtual void NotifyTypeArray()
+        {
+        }
 
         // the type is a simple zero-based array, this has no shape but does have custom modifiers and element type
-        protected virtual void NotifyTypeSzArray() { }
+        protected virtual void NotifyTypeSzArray()
+        {
+        }
 
         // used when using a DynamicMethod with internal pointers
-        protected virtual void NotifyTypeInternal(IntPtr ptr) { }
+        protected virtual void NotifyTypeInternal(IntPtr ptr)
+        {
+        }
 
         public bool Parse(sig_byte[] pb)
         {

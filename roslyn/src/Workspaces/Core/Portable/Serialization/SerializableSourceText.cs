@@ -45,9 +45,13 @@ namespace Microsoft.CodeAnalysis.Serialization
         private readonly WeakReference<SourceText?> _computedText = new(target: null);
 
         public SerializableSourceText(ITemporaryTextStorageWithName storage)
-            : this(storage, text: null) { }
+            : this(storage, text: null)
+        {
+        }
 
-        public SerializableSourceText(SourceText text) : this(storage: null, text) { }
+        public SerializableSourceText(SourceText text) : this(storage: null, text)
+        {
+        }
 
         private SerializableSourceText(ITemporaryTextStorageWithName? storage, SourceText? text)
         {

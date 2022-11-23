@@ -24,7 +24,9 @@ namespace System.Xml.Xsl.Qil
         /// Construct a new node
         /// </summary>
         public QilTargetType(QilNodeType nodeType, QilNode expr, QilNode targetType)
-            : base(nodeType, expr, targetType) { }
+            : base(nodeType, expr, targetType)
+        {
+        }
 
         //-----------------------------------------------
         // QilTargetType methods

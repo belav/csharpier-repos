@@ -8,5 +8,7 @@ public class QueryLoggingCosmosTestSensitive
         IClassFixture<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
 {
     public QueryLoggingCosmosTestSensitive(NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 }

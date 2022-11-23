@@ -49,7 +49,9 @@ namespace Moq.Tests
             void UseNullableLong(long? arg);
         }
 
-        public readonly struct A { }
+        public readonly struct A
+        {
+        }
 
         public readonly struct B
         {

@@ -452,7 +452,9 @@ namespace System.Diagnostics.Tests
                 } // Now we unsubscribe
 
                 // Create an dispose a listener, but we won't get a callback for it.
-                using (new DiagnosticListener("TestListen")) { }
+                using (new DiagnosticListener("TestListen"))
+                {
+                }
 
                 Assert.Null(returnedListener); // No callback was made
 
@@ -609,7 +611,12 @@ namespace System.Diagnostics.Tests
             int completionCount = 0;
 
             IDisposable subscription = listener.Subscribe(
-                MakeObserver<KeyValuePair<string, object>>(_ => { }, () => completionCount++)
+                MakeObserver<KeyValuePair<string, object>>(
+                    _ =>
+                    {
+                    },
+                    () => completionCount++
+                )
             );
 
             listener.Dispose();
@@ -808,7 +815,9 @@ namespace System.Diagnostics.Tests
                 var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
                     MakeObserver(onNewListener)
                 )
-            ) { } // Unsubscribe to remove side effects.
+            )
+            {
+            } // Unsubscribe to remove side effects.
             return ret;
         }
 
@@ -831,8 +840,15 @@ namespace System.Diagnostics.Tests
         {
             public Observer(Action<T> onNext, Action onCompleted)
             {
-                _onNext = onNext ?? new Action<T>(_ => { });
-                _onCompleted = onCompleted ?? new Action(() => { });
+                _onNext =
+                    onNext
+                    ?? new Action<T>(_ =>
+                    {
+                    });
+                _onCompleted =
+                    onCompleted
+                    ?? new Action(() => {
+                    });
             }
 
             public void OnCompleted()
@@ -840,7 +856,9 @@ namespace System.Diagnostics.Tests
                 _onCompleted();
             }
 
-            public void OnError(Exception error) { }
+            public void OnError(Exception error)
+            {
+            }
 
             public void OnNext(T value)
             {

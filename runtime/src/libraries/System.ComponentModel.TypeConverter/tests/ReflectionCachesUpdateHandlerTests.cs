@@ -39,5 +39,7 @@ namespace System.ComponentModel.Tests
     }
 
     [AttributeUsage(AttributeTargets.All)]
-    internal sealed class SimpleUpdateTestAttribute : Attribute { }
+    internal sealed class SimpleUpdateTestAttribute : Attribute
+    {
+    }
 }

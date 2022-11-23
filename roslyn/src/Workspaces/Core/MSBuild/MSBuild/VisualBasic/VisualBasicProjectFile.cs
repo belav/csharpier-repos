@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.VisualBasic
             MSB.Evaluation.Project? loadedProject,
             ProjectBuildManager buildManager,
             DiagnosticLog log
-        ) : base(loader, loadedProject, buildManager, log) { }
+        ) : base(loader, loadedProject, buildManager, log)
+        {
+        }
 
         protected override SourceCodeKind GetSourceCodeKind(string documentFileName) =>
             SourceCodeKind.Regular;

@@ -30,7 +30,9 @@ namespace System.Security.Cryptography.Cose
         /// <summary>
         /// Initializes a new instance of the <see cref="CoseHeaderMap"/> class.
         /// </summary>
-        public CoseHeaderMap() : this(isReadOnly: false) { }
+        public CoseHeaderMap() : this(isReadOnly: false)
+        {
+        }
 
         private CoseHeaderMap(bool isReadOnly)
         {

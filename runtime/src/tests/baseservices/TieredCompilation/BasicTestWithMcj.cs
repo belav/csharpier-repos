@@ -9,9 +9,13 @@ using System.Threading;
 
 public static class BasicTest
 {
-    public class MCJTestClass { }
+    public class MCJTestClass
+    {
+    }
 
-    public struct MCJTestStruct { }
+    public struct MCJTestStruct
+    {
+    }
 
     private static int Main()
     {
@@ -54,7 +58,9 @@ public static class BasicTest
         Foo2();
     }
 
-    private static void Foo2() { }
+    private static void Foo2()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int FooWithLoop(int n)
@@ -73,7 +79,9 @@ public static class BasicTest
         FooWithGeneric2();
     }
 
-    private static void FooWithGeneric2() { }
+    private static void FooWithGeneric2()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void PromoteToTier1(params Action[] actions)

@@ -27,7 +27,9 @@ namespace Castle.Core
         private static readonly ReferenceEqualityComparer<T> instance =
             new ReferenceEqualityComparer<T>();
 
-        private ReferenceEqualityComparer() { }
+        private ReferenceEqualityComparer()
+        {
+        }
 
         public int GetHashCode(object obj)
         {

@@ -211,7 +211,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         _fileChangeService.UnadviseFileChange(fileChangeCookie.Value)
                     );
                 }
-                catch (Exception e) when (ReportException(e)) { }
+                catch (Exception e) when (ReportException(e))
+                {
+                }
             }
         }
 

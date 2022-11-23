@@ -29,7 +29,8 @@ public partial class ThreadPoolBoundHandleTests
             using (ThreadPoolBoundHandle boundHandle = ThreadPoolBoundHandle.BindHandle(handle))
             {
                 NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(
-                    (_, __, ___) => { },
+                    (_, __, ___) => {
+                    },
                     (object)null,
                     new byte[0]
                 );
@@ -54,7 +55,8 @@ public partial class ThreadPoolBoundHandleTests
             using (ThreadPoolBoundHandle boundHandle = ThreadPoolBoundHandle.BindHandle(handle))
             {
                 NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(
-                    (_, __, ___) => { },
+                    (_, __, ___) => {
+                    },
                     context,
                     new byte[0]
                 );
@@ -81,7 +83,8 @@ public partial class ThreadPoolBoundHandleTests
             using (ThreadPoolBoundHandle boundHandle = ThreadPoolBoundHandle.BindHandle(handle))
             {
                 NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(
-                    (_, __, ___) => { },
+                    (_, __, ___) => {
+                    },
                     context,
                     new byte[0]
                 );

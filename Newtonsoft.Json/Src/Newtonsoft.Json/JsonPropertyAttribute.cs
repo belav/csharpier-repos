@@ -210,7 +210,9 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonPropertyAttribute"/> class.
         /// </summary>
-        public JsonPropertyAttribute() { }
+        public JsonPropertyAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonPropertyAttribute"/> class with the specified name.

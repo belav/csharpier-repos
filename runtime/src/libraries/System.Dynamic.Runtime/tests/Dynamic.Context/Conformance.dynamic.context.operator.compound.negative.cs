@@ -183,7 +183,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public string Field
         {
             get { return "A"; }
-            private set { }
+            private set
+            {
+            }
         }
     }
     //</Code>
@@ -226,7 +228,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public string Field
         {
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>
@@ -280,13 +284,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public string Field
         {
             get { return "A"; }
-            set { }
+            set
+            {
+            }
         }
 
         public int FieldInt
         {
             get { return 10; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Method(int i)
@@ -393,7 +401,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public string this[long s]
         {
             get { return "A"; }
-            private set { }
+            private set
+            {
+            }
         }
     }
     //</Code>
@@ -442,7 +452,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public string this[long s]
         {
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>
@@ -500,7 +512,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public int this[long s]
         {
             get { return 10; }
-            set { }
+            set
+            {
+            }
         }
     }
     //</Code>

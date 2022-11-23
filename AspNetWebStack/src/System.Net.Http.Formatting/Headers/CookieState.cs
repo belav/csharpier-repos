@@ -13,7 +13,9 @@ namespace System.Net.Http.Headers
         private string _name;
         private NameValueCollection _values = HttpValueCollection.Create();
 
-        public CookieState(string name) : this(name, String.Empty) { }
+        public CookieState(string name) : this(name, String.Empty)
+        {
+        }
 
         public CookieState(string name, string value)
         {

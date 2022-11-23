@@ -14,7 +14,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             ChangeSignatureDialog.TestAccessor
         >
     {
-        private ChangeSignatureDialog_InProc() { }
+        private ChangeSignatureDialog_InProc()
+        {
+        }
 
         public static ChangeSignatureDialog_InProc Create() => new ChangeSignatureDialog_InProc();
 

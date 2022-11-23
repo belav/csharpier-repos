@@ -479,7 +479,9 @@ namespace System.Xml
             : this(
                 new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.Read),
                 encoding
-            ) { }
+            )
+        {
+        }
 
         // Creates an instance of the XmlTextWriter class using the specified TextWriter.
         public XmlTextWriter(TextWriter w) : this()

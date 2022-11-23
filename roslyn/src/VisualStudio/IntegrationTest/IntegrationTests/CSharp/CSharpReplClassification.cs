@@ -16,7 +16,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpReplClassification : AbstractInteractiveWindowTest
     {
         public CSharpReplClassification(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory) { }
+            : base(instanceFactory)
+        {
+        }
 
         [WpfFact]
         public void VerifyColorOfSomeTokens()

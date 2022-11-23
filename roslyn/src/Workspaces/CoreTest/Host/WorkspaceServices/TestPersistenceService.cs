@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestPersistenceService() { }
+        public TestPersistenceService()
+        {
+        }
 
         public IPersistentStorage GetStorage(Solution solution) => NoOpPersistentStorage.Instance;
 

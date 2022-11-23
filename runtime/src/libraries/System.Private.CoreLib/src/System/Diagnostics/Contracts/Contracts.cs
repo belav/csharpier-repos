@@ -40,7 +40,9 @@ namespace System.Diagnostics.Contracts
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed class PureAttribute : Attribute { }
+    public sealed class PureAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Types marked with this attribute specify that a separate type contains the contracts for this type.
@@ -91,13 +93,17 @@ namespace System.Diagnostics.Contracts
     /// </summary>
     [Conditional("CONTRACTS_FULL")]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class ContractInvariantMethodAttribute : Attribute { }
+    public sealed class ContractInvariantMethodAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Attribute that specifies that an assembly is a reference assembly with contracts.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
-    public sealed class ContractReferenceAssemblyAttribute : Attribute { }
+    public sealed class ContractReferenceAssemblyAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Methods (and properties) marked with this attribute can be used within calls to Contract methods, but have no runtime behavior associated with them.
@@ -108,7 +114,9 @@ namespace System.Diagnostics.Contracts
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed class ContractRuntimeIgnoredAttribute : Attribute { }
+    public sealed class ContractRuntimeIgnoredAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Instructs downstream tools whether to assume the correctness of this assembly, type or member without performing any verification or not.
@@ -166,14 +174,18 @@ namespace System.Diagnostics.Contracts
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [Conditional("CONTRACTS_FULL")]
-    public sealed class ContractArgumentValidatorAttribute : Attribute { }
+    public sealed class ContractArgumentValidatorAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Enables writing abbreviations for contracts that get copied to other methods
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [Conditional("CONTRACTS_FULL")]
-    public sealed class ContractAbbreviatorAttribute : Attribute { }
+    public sealed class ContractAbbreviatorAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Allows setting contract and tool options at assembly, type, or method granularity.
@@ -632,7 +644,9 @@ namespace System.Diagnostics.Contracts
         /// Marker to indicate the end of the contract section of a method.
         /// </summary>
         [Conditional("CONTRACTS_FULL")]
-        public static void EndContractBlock() { }
+        public static void EndContractBlock()
+        {
+        }
 
         #endregion
 

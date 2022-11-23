@@ -37,7 +37,9 @@ public class ConvR4test
     private static int s_a1 = 3;
     private static float s_b1 = (1.0F / 3.0F);
 
-    private static void disableInline(ref int x) { }
+    private static void disableInline(ref int x)
+    {
+    }
 
     //f1 and delta1 are static filed of a1 class
     private static float floatadd()

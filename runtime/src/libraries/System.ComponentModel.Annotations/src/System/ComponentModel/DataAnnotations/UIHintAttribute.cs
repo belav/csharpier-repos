@@ -21,7 +21,9 @@ namespace System.ComponentModel.DataAnnotations
         ///     Constructor that accepts the name of the control, without specifying which presentation layer to use
         /// </summary>
         /// <param name="uiHint">The name of the UI control.</param>
-        public UIHintAttribute(string uiHint) : this(uiHint, null, Array.Empty<object>()) { }
+        public UIHintAttribute(string uiHint) : this(uiHint, null, Array.Empty<object>())
+        {
+        }
 
         /// <summary>
         ///     Constructor that accepts both the name of the control as well as the presentation layer
@@ -29,7 +31,9 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="uiHint">The name of the control to use</param>
         /// <param name="presentationLayer">The name of the presentation layer that supports this control</param>
         public UIHintAttribute(string uiHint, string? presentationLayer)
-            : this(uiHint, presentationLayer, Array.Empty<object>()) { }
+            : this(uiHint, presentationLayer, Array.Empty<object>())
+        {
+        }
 
         /// <summary>
         ///     Full constructor that accepts the name of the control, presentation layer, and optional parameters

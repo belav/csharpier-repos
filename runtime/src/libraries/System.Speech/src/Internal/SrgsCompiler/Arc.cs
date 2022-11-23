@@ -18,7 +18,9 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal Arc() { }
+        internal Arc()
+        {
+        }
 
         internal Arc(Arc arc) : this()
         {
@@ -68,7 +70,9 @@ namespace System.Speech.Internal.SrgsCompiler
                 s_serializeToken++,
                 matchMode,
                 ref fNeedWeightTable
-            ) { }
+            )
+        {
+        }
 
         private Arc(
             string sWord,

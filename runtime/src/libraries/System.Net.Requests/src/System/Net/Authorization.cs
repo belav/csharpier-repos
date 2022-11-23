@@ -8,12 +8,18 @@ namespace System.Net
         private string[]? _protectionRealm;
         private bool _mutualAuth;
 
-        public Authorization(string? token) : this(token, true) { }
+        public Authorization(string? token) : this(token, true)
+        {
+        }
 
-        public Authorization(string? token, bool finished) : this(token, finished, null) { }
+        public Authorization(string? token, bool finished) : this(token, finished, null)
+        {
+        }
 
         public Authorization(string? token, bool finished, string? connectionGroupId)
-            : this(token, finished, connectionGroupId, false) { }
+            : this(token, finished, connectionGroupId, false)
+        {
+        }
 
         internal Authorization(
             string? token,

@@ -45,7 +45,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 new XmlName(nameLocalName, nameNamespaceUri),
                 new XmlName(xsiTypeLocalName, xsiTypeNamespaceUri),
                 clrType
-            ) { }
+            )
+        {
+        }
 
         public XmlName Name
         {

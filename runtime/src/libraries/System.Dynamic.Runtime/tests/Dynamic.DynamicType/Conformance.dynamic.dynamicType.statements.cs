@@ -63,7 +63,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
         public int GetMaxInt
         {
             get { return int.MaxValue; }
-            set { }
+            set
+            {
+            }
         }
     }
 

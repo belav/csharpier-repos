@@ -76,7 +76,9 @@ namespace System.Xml.Serialization.TrimmingTests
     [XmlType(AnonymousType = true)]
     public class DataUpdatesDataUpdateInfo
     {
-        public DataUpdatesDataUpdateInfo() { }
+        public DataUpdatesDataUpdateInfo()
+        {
+        }
 
         [XmlAttribute]
         public DateTime DataDate { get; set; }

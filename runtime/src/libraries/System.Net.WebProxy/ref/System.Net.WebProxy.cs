@@ -15,16 +15,24 @@ namespace System.Net
 
     public partial class WebProxy : System.Net.IWebProxy, System.Runtime.Serialization.ISerializable
     {
-        public WebProxy() { }
+        public WebProxy()
+        {
+        }
 
         protected WebProxy(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
-        public WebProxy(string? Address) { }
+        public WebProxy(string? Address)
+        {
+        }
 
-        public WebProxy(string? Address, bool BypassOnLocal) { }
+        public WebProxy(string? Address, bool BypassOnLocal)
+        {
+        }
 
         public WebProxy(
             string? Address,
@@ -35,7 +43,9 @@ namespace System.Net
                     | System.Text.RegularExpressions.RegexOptions.CultureInvariant
             )]
                 string[]? BypassList
-        ) { }
+        )
+        {
+        }
 
         public WebProxy(
             string? Address,
@@ -47,13 +57,21 @@ namespace System.Net
             )]
                 string[]? BypassList,
             System.Net.ICredentials? Credentials
-        ) { }
+        )
+        {
+        }
 
-        public WebProxy(string Host, int Port) { }
+        public WebProxy(string Host, int Port)
+        {
+        }
 
-        public WebProxy(System.Uri? Address) { }
+        public WebProxy(System.Uri? Address)
+        {
+        }
 
-        public WebProxy(System.Uri? Address, bool BypassOnLocal) { }
+        public WebProxy(System.Uri? Address, bool BypassOnLocal)
+        {
+        }
 
         public WebProxy(
             System.Uri? Address,
@@ -64,7 +82,9 @@ namespace System.Net
                     | System.Text.RegularExpressions.RegexOptions.CultureInvariant
             )]
                 string[]? BypassList
-        ) { }
+        )
+        {
+        }
 
         public WebProxy(
             System.Uri? Address,
@@ -76,12 +96,16 @@ namespace System.Net
             )]
                 string[]? BypassList,
             System.Net.ICredentials? Credentials
-        ) { }
+        )
+        {
+        }
 
         public System.Uri? Address
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ArrayList BypassArrayList
         {
@@ -92,22 +116,30 @@ namespace System.Net
         public string[] BypassList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool BypassProxyOnLocal
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -121,7 +153,9 @@ namespace System.Net
         protected virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
         public System.Uri? GetProxy(System.Uri destination)
         {
@@ -136,6 +170,8 @@ namespace System.Net
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 }

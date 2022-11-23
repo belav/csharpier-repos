@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XmlTagCompletionCommandHandler(ITextUndoHistoryRegistry undoHistory)
-            : base(undoHistory) { }
+            : base(undoHistory)
+        {
+        }
 
         protected override void TryCompleteTag(
             ITextView textView,

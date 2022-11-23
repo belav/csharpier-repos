@@ -36,7 +36,9 @@ namespace System.Runtime.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="XsdDataContractExporter"/> class.
         /// </summary>
-        public XsdDataContractExporter() { }
+        public XsdDataContractExporter()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XsdDataContractExporter"/> class with the specified set of schemas.

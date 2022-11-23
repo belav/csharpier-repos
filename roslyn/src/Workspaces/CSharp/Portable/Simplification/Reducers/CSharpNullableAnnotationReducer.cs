@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SyntaxNode
         > s_simplifyNullableType = SimplifyNullableType;
 
-        public CSharpNullableAnnotationReducer() : base(s_pool) { }
+        public CSharpNullableAnnotationReducer() : base(s_pool)
+        {
+        }
 
         protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 

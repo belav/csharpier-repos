@@ -94,7 +94,9 @@ namespace System.Linq
     /// </summary>
     public class ParallelQuery<TSource> : ParallelQuery, IEnumerable<TSource>
     {
-        internal ParallelQuery(QuerySettings settings) : base(settings) { }
+        internal ParallelQuery(QuerySettings settings) : base(settings)
+        {
+        }
 
         internal sealed override ParallelQuery<TCastTo> Cast<TCastTo>()
         {

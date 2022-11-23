@@ -132,7 +132,9 @@ namespace System.Net.Http.Headers
         public ICollection<NameValueHeaderValue> Extensions =>
             _extensions ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
 
-        public CacheControlHeaderValue() { }
+        public CacheControlHeaderValue()
+        {
+        }
 
         private CacheControlHeaderValue(CacheControlHeaderValue source)
         {

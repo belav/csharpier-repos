@@ -49,7 +49,9 @@ namespace System
         }
 
         protected ArgumentNullException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         /// <summary>Throws an <see cref="ArgumentNullException"/> if <paramref name="argument"/> is null.</summary>
         /// <param name="argument">The reference type argument to validate as non-null.</param>

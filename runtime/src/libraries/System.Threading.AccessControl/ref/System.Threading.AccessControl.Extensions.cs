@@ -127,16 +127,22 @@ namespace System.Threading
         public static void SetAccessControl(
             this System.Threading.EventWaitHandle handle,
             System.Security.AccessControl.EventWaitHandleSecurity eventSecurity
-        ) { }
+        )
+        {
+        }
 
         public static void SetAccessControl(
             this System.Threading.Mutex mutex,
             System.Security.AccessControl.MutexSecurity mutexSecurity
-        ) { }
+        )
+        {
+        }
 
         public static void SetAccessControl(
             this System.Threading.Semaphore semaphore,
             System.Security.AccessControl.SemaphoreSecurity semaphoreSecurity
-        ) { }
+        )
+        {
+        }
     }
 }

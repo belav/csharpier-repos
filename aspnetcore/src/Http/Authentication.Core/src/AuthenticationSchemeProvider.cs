@@ -18,7 +18,9 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// </summary>
     /// <param name="options">The <see cref="AuthenticationOptions"/> options.</param>
     public AuthenticationSchemeProvider(IOptions<AuthenticationOptions> options)
-        : this(options, new Dictionary<string, AuthenticationScheme>(StringComparer.Ordinal)) { }
+        : this(options, new Dictionary<string, AuthenticationScheme>(StringComparer.Ordinal))
+    {
+    }
 
     /// <summary>
     /// Creates an instance of <see cref="AuthenticationSchemeProvider"/>

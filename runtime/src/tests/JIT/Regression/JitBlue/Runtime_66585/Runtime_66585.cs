@@ -26,10 +26,14 @@ public unsafe class Runtime_66585
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void Callee(int r0, int r1, int r2, int r3) { }
+    public static void Callee(int r0, int r1, int r2, int r3)
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume(SLarge s) { }
+    private static void Consume(SLarge s)
+    {
+    }
 
     // We cannot mark Caller as noinline because it inhibits tailcalling as well
     [MethodImpl(MethodImplOptions.NoInlining)]

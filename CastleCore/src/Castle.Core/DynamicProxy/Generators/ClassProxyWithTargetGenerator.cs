@@ -36,7 +36,9 @@ namespace Castle.DynamicProxy.Generators
             Type targetType,
             Type[] interfaces,
             ProxyGenerationOptions options
-        ) : base(scope, targetType, interfaces, options) { }
+        ) : base(scope, targetType, interfaces, options)
+        {
+        }
 
         protected override FieldReference TargetField => targetField;
 

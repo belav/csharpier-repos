@@ -1263,7 +1263,9 @@ namespace System.Reflection.Tests
             Assert.Equal(expected, c?.GetTypeInfo().IsAssignableTo(type.GetTypeInfo()) ?? false);
         }
 
-        class G<T, U> where T : U { }
+        class G<T, U> where T : U
+        {
+        }
 
         static volatile object s_boxedInt32;
 
@@ -1322,7 +1324,9 @@ namespace System.Reflection.Tests
             );
         }
 
-        interface IFace { }
+        interface IFace
+        {
+        }
 
         class G<T> where T : class, IFace
         {
@@ -2718,20 +2722,32 @@ namespace System.Reflection.Tests
 #pragma warning disable 0067, 0169
         public static class ClassWithStaticConstructor
         {
-            static ClassWithStaticConstructor() { }
+            static ClassWithStaticConstructor()
+            {
+            }
         }
 
         public class ClassWithMultipleConstructors
         {
-            static ClassWithMultipleConstructors() { }
+            static ClassWithMultipleConstructors()
+            {
+            }
 
-            public ClassWithMultipleConstructors() { }
+            public ClassWithMultipleConstructors()
+            {
+            }
 
-            public ClassWithMultipleConstructors(TimeSpan ts) { }
+            public ClassWithMultipleConstructors(TimeSpan ts)
+            {
+            }
 
-            public ClassWithMultipleConstructors(object obj1, object obj2) { }
+            public ClassWithMultipleConstructors(object obj1, object obj2)
+            {
+            }
 
-            public ClassWithMultipleConstructors(object obj, int i) { }
+            public ClassWithMultipleConstructors(object obj, int i)
+            {
+            }
         }
 
         public class MultipleNestedClass
@@ -2740,68 +2756,120 @@ namespace System.Reflection.Tests
             {
                 public class Nest2
                 {
-                    public class Nest3 { }
+                    public class Nest3
+                    {
+                    }
                 }
             }
         }
 
-        public class ClassWithNoInterfaces { }
+        public class ClassWithNoInterfaces
+        {
+        }
 
         public class ClassWithInterface2Interface3
             : TI_NonGenericInterface2,
-                TI_NonGenericInterface3 { }
+                TI_NonGenericInterface3
+        {
+        }
 
-        public class SubClassWithInterface1 : TI_ClassWithInterface1 { }
+        public class SubClassWithInterface1 : TI_ClassWithInterface1
+        {
+        }
 
         public class SubClassWithInterface1Interface2Interface3
             : ClassWithInterface2Interface3,
-                TI_NonGenericInterface1 { }
+                TI_NonGenericInterface1
+        {
+        }
 
-        public interface TI_NonGenericInterface2 { }
+        public interface TI_NonGenericInterface2
+        {
+        }
 
-        public interface TI_NonGenericInterface3 { }
+        public interface TI_NonGenericInterface3
+        {
+        }
 
-        public interface GenericInterface1<TI> { }
+        public interface GenericInterface1<TI>
+        {
+        }
 
-        public interface GenericInterface2<TI, VI> { }
+        public interface GenericInterface2<TI, VI>
+        {
+        }
 
-        public struct NonGenericStructWithNoInterfaces { }
+        public struct NonGenericStructWithNoInterfaces
+        {
+        }
 
-        public struct GenericStructWithNoInterfaces1<TS> { }
+        public struct GenericStructWithNoInterfaces1<TS>
+        {
+        }
 
-        public struct GenericStructWithNoInterfaces2<TS, VS> { }
+        public struct GenericStructWithNoInterfaces2<TS, VS>
+        {
+        }
 
-        public struct NonGenericStructWithNonGenericInterface : TI_NonGenericInterface1 { }
+        public struct NonGenericStructWithNonGenericInterface : TI_NonGenericInterface1
+        {
+        }
 
-        public struct GenericStructWithGenericInterface1<TS> : GenericInterface1<TS> { }
+        public struct GenericStructWithGenericInterface1<TS> : GenericInterface1<TS>
+        {
+        }
 
-        public struct GenericStructWithGenericInterface2<TS, VS> : GenericInterface2<TS, VS> { }
+        public struct GenericStructWithGenericInterface2<TS, VS> : GenericInterface2<TS, VS>
+        {
+        }
 
-        public struct NonGenericStructWithGenericInterface1 : GenericInterface1<int> { }
+        public struct NonGenericStructWithGenericInterface1 : GenericInterface1<int>
+        {
+        }
 
-        public struct GenericStructWithGenericInterface3<TS> : GenericInterface2<TS, int> { }
+        public struct GenericStructWithGenericInterface3<TS> : GenericInterface2<TS, int>
+        {
+        }
 
-        public struct NonGenericStructWithGenericInterface2 : GenericInterface2<int, int> { }
+        public struct NonGenericStructWithGenericInterface2 : GenericInterface2<int, int>
+        {
+        }
 
-        public class NonGenericClassWithNoInterfaces { }
+        public class NonGenericClassWithNoInterfaces
+        {
+        }
 
-        public class GenericClassWithNoInterfaces1<T> { }
+        public class GenericClassWithNoInterfaces1<T>
+        {
+        }
 
-        public class GenericClassWithNoInterfaces2<T, V> { }
+        public class GenericClassWithNoInterfaces2<T, V>
+        {
+        }
 
-        public class NonGenericClassWithNonGenericInterface : TI_NonGenericInterface1 { }
+        public class NonGenericClassWithNonGenericInterface : TI_NonGenericInterface1
+        {
+        }
 
-        public class GenericClassWithGenericInterface1<T> : GenericInterface1<T> { }
+        public class GenericClassWithGenericInterface1<T> : GenericInterface1<T>
+        {
+        }
 
-        public class GenericClassWithGenericInterface2<T, V> : GenericInterface2<T, V> { }
+        public class GenericClassWithGenericInterface2<T, V> : GenericInterface2<T, V>
+        {
+        }
 
-        public class NonGenericClassWithGenericInterface1 : GenericInterface1<int> { }
+        public class NonGenericClassWithGenericInterface1 : GenericInterface1<int>
+        {
+        }
 
-        public class GenericClassWithGenericInterface3<T>
-            : GenericClassWithNoInterfaces2<T, int> { }
+        public class GenericClassWithGenericInterface3<T> : GenericClassWithNoInterfaces2<T, int>
+        {
+        }
 
-        public class NonGenericClassWithGenericInterface2
-            : GenericClassWithNoInterfaces2<int, int> { }
+        public class NonGenericClassWithGenericInterface2 : GenericClassWithNoInterfaces2<int, int>
+        {
+        }
 
         public enum UIntEnum : uint
         {
@@ -2818,39 +2886,55 @@ namespace System.Reflection.Tests
             Enum45 = 45
         }
 
-        public interface InheritedInteraface : TI_NonGenericInterface2 { }
+        public interface InheritedInteraface : TI_NonGenericInterface2
+        {
+        }
 
-        public struct StructWithInheritedInterface : InheritedInteraface { }
+        public struct StructWithInheritedInterface : InheritedInteraface
+        {
+        }
 
-        public class CompoundClass1
-            : NonGenericClassWithNonGenericInterface,
-                InheritedInteraface { }
+        public class CompoundClass1 : NonGenericClassWithNonGenericInterface, InheritedInteraface
+        {
+        }
 
-        public class CompoundClass2<T>
-            : NonGenericClassWithNonGenericInterface,
-                InheritedInteraface { }
+        public class CompoundClass2<T> : NonGenericClassWithNonGenericInterface, InheritedInteraface
+        {
+        }
 
         public class CompoundClass3<T>
             : NonGenericClassWithNonGenericInterface,
-                GenericInterface1<T> { }
+                GenericInterface1<T>
+        {
+        }
 
         public class CompoundClass4<T>
             : NonGenericClassWithNonGenericInterface,
-                GenericInterface1<string> { }
+                GenericInterface1<string>
+        {
+        }
 
         public class BaseClassWithInterface1Interface2
             : TI_NonGenericInterface1,
-                TI_NonGenericInterface2 { }
+                TI_NonGenericInterface2
+        {
+        }
 
-        public class SubClassWithInterface1Interface2 : BaseClassWithInterface1Interface2 { }
+        public class SubClassWithInterface1Interface2 : BaseClassWithInterface1Interface2
+        {
+        }
 
-        public class GenericSubClassWithInterface1Interface2<T>
-            : SubClassWithInterface1Interface2 { }
+        public class GenericSubClassWithInterface1Interface2<T> : SubClassWithInterface1Interface2
+        {
+        }
 
-        public class GenericSubClassWithNoInterfaces1<T> : GenericClassWithNoInterfaces1<T> { }
+        public class GenericSubClassWithNoInterfaces1<T> : GenericClassWithNoInterfaces1<T>
+        {
+        }
 
-        public class GenericSubSubClassWithNoInterfaces1<T>
-            : GenericSubClassWithNoInterfaces1<T> { }
+        public class GenericSubSubClassWithNoInterfaces1<T> : GenericSubClassWithNoInterfaces1<T>
+        {
+        }
 
         [DefaultMember("PublicField")]
         public class MembersClass : TI_NonGenericInterface1, TI_NonGenericInterface2
@@ -2858,22 +2942,32 @@ namespace System.Reflection.Tests
             public int PublicField;
             private string PrivateField;
 
-            public MembersClass() { }
+            public MembersClass()
+            {
+            }
 
-            public MembersClass(int intField, string stringField) { }
+            public MembersClass(int intField, string stringField)
+            {
+            }
 
-            private MembersClass(string stringField) { }
+            private MembersClass(string stringField)
+            {
+            }
 
             public int PublicProp
             {
                 get { return 10; }
-                set { }
+                set
+                {
+                }
             }
 
             private string PrivateProp
             {
                 get { return string.Empty; }
-                set { }
+                set
+                {
+                }
             }
 
             public delegate void EventHandler(object sender, EventArgs e);
@@ -2881,7 +2975,9 @@ namespace System.Reflection.Tests
             public event EventHandler PublicEvent;
             private event EventHandler PrivateEvent;
 
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
             private int PrivateMethod(int x, string y)
             {
@@ -2889,13 +2985,19 @@ namespace System.Reflection.Tests
             }
         }
 
-        public sealed class SealedClass { }
+        public sealed class SealedClass
+        {
+        }
 
-        public abstract class AbstractClass { }
+        public abstract class AbstractClass
+        {
+        }
 
         public class MethodClassWithConstraints<T, U>
             where T : TI_BaseClass, TI_NonGenericInterface1
-            where U : class, new() { }
+            where U : class, new()
+        {
+        }
 
         public struct StructWithoutExplicitStructLayout
         {
@@ -2935,11 +3037,17 @@ namespace System.Reflection.Tests
 
     public class TI_BaseClass
     {
-        static TI_BaseClass() { }
+        static TI_BaseClass()
+        {
+        }
 
-        public TI_BaseClass() { }
+        public TI_BaseClass()
+        {
+        }
 
-        public TI_BaseClass(short i) { }
+        public TI_BaseClass(short i)
+        {
+        }
 
         public event EventHandler EventPublic; // Inherited
         public static event EventHandler EventPublicStatic;
@@ -2956,63 +3064,105 @@ namespace System.Reflection.Tests
 
         private int _privateField;
 
-        public void VoidMethodReturningVoid1() { }
+        public void VoidMethodReturningVoid1()
+        {
+        }
 
-        public void StringMethodReturningVoid(string str) { }
+        public void StringMethodReturningVoid(string str)
+        {
+        }
 
-        public void VoidMethodReturningVoid2() { }
+        public void VoidMethodReturningVoid2()
+        {
+        }
 
-        public virtual void VirtualVoidMethodReturningVoid1() { }
+        public virtual void VirtualVoidMethodReturningVoid1()
+        {
+        }
 
-        public virtual void VirtualVoidMethodReturningVoid2() { }
+        public virtual void VirtualVoidMethodReturningVoid2()
+        {
+        }
 
-        public static void StaticVoidMethodReturningVoid() { }
+        public static void StaticVoidMethodReturningVoid()
+        {
+        }
 
-        public class PublicNestedClass1 { }
+        public class PublicNestedClass1
+        {
+        }
 
-        public class PublicNestedClass2 { }
+        public class PublicNestedClass2
+        {
+        }
 
-        private class PrivateNestedClass { } // Private, so not inherited
+        private class PrivateNestedClass
+        {
+        } // Private, so not inherited
 
-        internal class InternalNestedClass { } // Internal members are not inherited
+        internal class InternalNestedClass
+        {
+        } // Internal members are not inherited
 
-        protected class ProtectedNestedClass { }
+        protected class ProtectedNestedClass
+        {
+        }
 
         public string StringProperty1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public string StringProperty2
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string VirtualStringProperty
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public static string StaticStringProperty
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void MethodWithSameName() { }
+        public void MethodWithSameName()
+        {
+        }
 
-        public void MethodWithSameName(int i) { }
+        public void MethodWithSameName(int i)
+        {
+        }
 
-        public void MethodWithSameName(string s) { }
+        public void MethodWithSameName(string s)
+        {
+        }
 
-        public void MethodWithSameName(object o) { }
+        public void MethodWithSameName(object o)
+        {
+        }
     }
 
     public class TI_SubClass : TI_BaseClass
     {
-        public TI_SubClass(string s) { }
+        public TI_SubClass(string s)
+        {
+        }
 
-        public TI_SubClass(short i2) { }
+        public TI_SubClass(short i2)
+        {
+        }
 
         public new event EventHandler EventPublic; // Overrides event
         public event EventHandler EventPublicNew; // New event
@@ -3025,50 +3175,82 @@ namespace System.Reflection.Tests
         public static new readonly string s_readonlyField = "";
         public static new volatile string s_volatileField = "";
 
-        public new void VoidMethodReturningVoid2() { }
+        public new void VoidMethodReturningVoid2()
+        {
+        }
 
-        public new virtual void VirtualVoidMethodReturningVoid1() { }
+        public new virtual void VirtualVoidMethodReturningVoid1()
+        {
+        }
 
-        public override void VirtualVoidMethodReturningVoid2() { }
+        public override void VirtualVoidMethodReturningVoid2()
+        {
+        }
 
-        public static new void StaticVoidMethodReturningVoid() { }
+        public static new void StaticVoidMethodReturningVoid()
+        {
+        }
 
-        public new class PublicNestedClass1 { }
+        public new class PublicNestedClass1
+        {
+        }
 
-        public class NestPublic3 { }
+        public class NestPublic3
+        {
+        }
 
-        public class NESTPUBLIC3 { }
+        public class NESTPUBLIC3
+        {
+        }
 
-        private class NestPrivate2 { }
+        private class NestPrivate2
+        {
+        }
 
         public new string StringProperty1
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public new virtual string VirtualStringProperty
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
         public static new string StaticStringProperty
         {
             get { return ""; }
-            set { }
+            set
+            {
+            }
         }
     }
 
-    public interface TI_NonGenericInterface1 { }
+    public interface TI_NonGenericInterface1
+    {
+    }
 
-    public class TI_ClassWithInterface1 : TI_NonGenericInterface1 { }
+    public class TI_ClassWithInterface1 : TI_NonGenericInterface1
+    {
+    }
 
     namespace InnerNamespace
     {
-        public abstract class AbstractBaseClass { }
+        public abstract class AbstractBaseClass
+        {
+        }
 
-        public abstract class AbstractSubClass : AbstractBaseClass { }
+        public abstract class AbstractSubClass : AbstractBaseClass
+        {
+        }
 
-        public class AbstractSubSubClass : AbstractSubClass { }
+        public class AbstractSubSubClass : AbstractSubClass
+        {
+        }
     }
 
     public class TI_GenericTypeWithAllMembers<T>
@@ -3089,11 +3271,17 @@ namespace System.Reflection.Tests
 
         public static T PublicStaticMethod(T t, T t2) => default;
 
-        static TI_GenericTypeWithAllMembers() { }
+        static TI_GenericTypeWithAllMembers()
+        {
+        }
 
-        public TI_GenericTypeWithAllMembers(T t) { }
+        public TI_GenericTypeWithAllMembers(T t)
+        {
+        }
 
-        private TI_GenericTypeWithAllMembers() { }
+        private TI_GenericTypeWithAllMembers()
+        {
+        }
 
         public event EventHandler<T> PublicInstanceEvent;
         public T PublicInstanceField;
@@ -3119,25 +3307,33 @@ namespace System.Reflection.Tests
 
     public class TI_TypeDerivedFromGenericTypeWithAllMembers<T> : TI_GenericTypeWithAllMembers<T>
     {
-        public TI_TypeDerivedFromGenericTypeWithAllMembers(T t) : base(t) { }
+        public TI_TypeDerivedFromGenericTypeWithAllMembers(T t) : base(t)
+        {
+        }
     }
 
     public class TI_TypeDerivedFromGenericTypeWithAllMembersClosed
         : TI_TypeDerivedFromGenericTypeWithAllMembers<int>
     {
-        public TI_TypeDerivedFromGenericTypeWithAllMembersClosed(int t) : base(t) { }
+        public TI_TypeDerivedFromGenericTypeWithAllMembersClosed(int t) : base(t)
+        {
+        }
     }
 
 #pragma warning restore 0067, 0169
 
     public class OutsideTypeInfoTests
     {
-        public class InsideTypeInfoTests { }
+        public class InsideTypeInfoTests
+        {
+        }
     }
 
     public class OutsideTypeInfoTests<T>
     {
-        public class InsideTypeInfoTests<U> { }
+        public class InsideTypeInfoTests<U>
+        {
+        }
     }
 
     public class TI_FullNameTest<T> where T : unmanaged

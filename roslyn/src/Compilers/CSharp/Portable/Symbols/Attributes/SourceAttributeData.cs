@@ -74,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 namedArguments: ImmutableArray<KeyValuePair<string, TypedConstant>>.Empty,
                 hasErrors: hasErrors,
                 isConditionallyOmitted: false
-            ) { }
+            )
+        {
+        }
 
         public override NamedTypeSymbol AttributeClass
         {

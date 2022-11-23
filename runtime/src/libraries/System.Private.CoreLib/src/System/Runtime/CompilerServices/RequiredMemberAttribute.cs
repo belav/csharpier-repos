@@ -17,5 +17,7 @@ namespace System.Runtime.CompilerServices
 #else
     internal
 #endif
-    sealed class RequiredMemberAttribute : Attribute { }
+    sealed class RequiredMemberAttribute : Attribute
+    {
+    }
 }

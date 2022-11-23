@@ -361,7 +361,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
         private class MyTreeDumper : TreeDumper
         {
-            private MyTreeDumper() : base() { }
+            private MyTreeDumper() : base()
+            {
+            }
 
             public static new string DumpCompact(TreeDumperNode root)
             {
@@ -453,7 +455,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             public readonly PooledHashSet<LocalSymbol> DeclaredLocals =
                 PooledHashSet<LocalSymbol>.GetInstance();
 
-            private LocalsScanner() { }
+            private LocalsScanner()
+            {
+            }
 
             public static void CheckLocalsDefined(BoundNode root)
             {

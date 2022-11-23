@@ -6,7 +6,9 @@ public class TypeOne
     int instance_field;
     static int static_field;
 
-    public static void Main() { }
+    public static void Main()
+    {
+    }
 
     public long SimpleMethod(int a, double b)
     {
@@ -79,10 +81,14 @@ public class ExplicitLayout2
 
 public class ZZ : Iface
 {
-    void Iface.Foo() { }
+    void Iface.Foo()
+    {
+    }
 }
 
-public class Generic<T> { }
+public class Generic<T>
+{
+}
 
 public class NonGeneric
 {
@@ -95,5 +101,7 @@ public class NonGeneric
 
 public class OuterType
 {
-    public class InnerType { }
+    public class InnerType
+    {
+    }
 }

@@ -82,7 +82,9 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        void IKeyedItem<UnificationKey>.PrepareKey() { }
+        void IKeyedItem<UnificationKey>.PrepareKey()
+        {
+        }
 
         //
         // Implements IKeyedItem.Key.

@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 isIntrinsic,
                 shouldFormatOnCommit,
                 matchPriority
-            ) { }
+            )
+        {
+        }
 
         internal static ImmutableArray<SymbolDisplayPart> CreateDisplayParts(
             string keyword,

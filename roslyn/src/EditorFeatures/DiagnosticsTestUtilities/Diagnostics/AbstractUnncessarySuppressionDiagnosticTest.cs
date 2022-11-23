@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public abstract class AbstractUnncessarySuppressionDiagnosticTest : AbstractUserDiagnosticTest
     {
         protected AbstractUnncessarySuppressionDiagnosticTest(ITestOutputHelper logger)
-            : base(logger) { }
+            : base(logger)
+        {
+        }
 
         internal abstract CodeFixProvider CodeFixProvider { get; }
         internal abstract AbstractRemoveUnnecessaryInlineSuppressionsDiagnosticAnalyzer SuppressionAnalyzer { get; }

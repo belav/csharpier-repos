@@ -34,7 +34,9 @@ namespace Moq
         /// <summary>
         ///   Initializes a new instance of the <see cref="ExpressionCompiler"/> class.
         /// </summary>
-        protected ExpressionCompiler() { }
+        protected ExpressionCompiler()
+        {
+        }
 
         /// <summary>
         ///   Compiles the specified LINQ expression tree.

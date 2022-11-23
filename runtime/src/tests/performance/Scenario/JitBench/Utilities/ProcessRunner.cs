@@ -478,7 +478,9 @@ namespace JitBench
                 {
                     p.Kill();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
 
             foreach (IProcessLogger logger in loggers)

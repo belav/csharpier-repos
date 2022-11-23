@@ -30,6 +30,8 @@ namespace System.ServiceProcess
         }
 
         protected TimeoutException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

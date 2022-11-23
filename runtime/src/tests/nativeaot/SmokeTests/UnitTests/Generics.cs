@@ -88,9 +88,13 @@ class Generics
             }
         }
 
-        struct ValueGen<T> { }
+        struct ValueGen<T>
+        {
+        }
 
-        class ClassGen<T> { }
+        class ClassGen<T>
+        {
+        }
 
         public static void Run()
         {
@@ -104,11 +108,17 @@ class Generics
     /// </summary>
     class TestStaticBaseLookups
     {
-        class C1 { }
+        class C1
+        {
+        }
 
-        class C2 { }
+        class C2
+        {
+        }
 
-        class C3 { }
+        class C3
+        {
+        }
 
         class GenHolder<T>
         {
@@ -622,9 +632,13 @@ class Generics
     /// </summary>
     class TestVirtualMethodUseTracking
     {
-        class C1 { }
+        class C1
+        {
+        }
 
-        class C2 { }
+        class C2
+        {
+        }
 
         class Base1<T> where T : class
         {
@@ -1293,9 +1307,13 @@ class Generics
 
     class TestConstrainedMethodCalls
     {
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
         interface IFoo<T>
         {
@@ -1469,7 +1487,9 @@ class Generics
     {
         class Gen1<T>
         {
-            public Gen1(T t) { }
+            public Gen1(T t)
+            {
+            }
         }
 
         public static void Run()
@@ -1663,7 +1683,9 @@ class Generics
             }
         }
 
-        public class AnotherDerivedClass<T> : AnotherBaseClass<T>, IFace<T> { }
+        public class AnotherDerivedClass<T> : AnotherBaseClass<T>, IFace<T>
+        {
+        }
 
         public class BarImplementor : IBar<int>
         {
@@ -1882,7 +1904,9 @@ class Generics
 
     class TestGvmDelegates
     {
-        class Atom { }
+        class Atom
+        {
+        }
 
         interface IFoo
         {
@@ -1968,7 +1992,9 @@ class Generics
 
     class TestGvmDependencies
     {
-        class Atom { }
+        class Atom
+        {
+        }
 
         class Foo
         {
@@ -2002,11 +2028,17 @@ class Generics
 
     class TestGvmLookups
     {
-        class Gen<T> { }
+        class Gen<T>
+        {
+        }
 
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
         class GenericBase<T>
         {
@@ -2098,11 +2130,17 @@ class Generics
 
     class TestSharedAndUnsharedGvmAnalysisRegression
     {
-        interface IAtom { }
+        interface IAtom
+        {
+        }
 
-        interface IPhantom { }
+        interface IPhantom
+        {
+        }
 
-        class Atom : IAtom, IPhantom { }
+        class Atom : IAtom, IPhantom
+        {
+        }
 
         class Lol<TLeft> where TLeft : IAtom, IPhantom
         {
@@ -2137,11 +2175,17 @@ class Generics
 
     class TestFieldAccess
     {
-        class ClassType { }
+        class ClassType
+        {
+        }
 
-        class ClassType2 { }
+        class ClassType2
+        {
+        }
 
-        struct StructType { }
+        struct StructType
+        {
+        }
 
         class Foo<T>
         {
@@ -2198,7 +2242,9 @@ class Generics
             public T _t;
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public DynamicBase() { }
+            public DynamicBase()
+            {
+            }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public int SimpleMethod()
@@ -2238,7 +2284,9 @@ class Generics
         public class DynamicDerived<T> : DynamicBase<T>
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public DynamicDerived() { }
+            public DynamicDerived()
+            {
+            }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public override string VirtualMethod(T t)
@@ -2269,7 +2317,9 @@ class Generics
 #pragma warning restore
         }
 
-        class UnconstructedTypeInstantiator<T> { }
+        class UnconstructedTypeInstantiator<T>
+        {
+        }
 
         public static int s_FooClassTypeCctorCount = 0;
         public static int s_FooStructTypeCctorCount = 0;
@@ -2734,7 +2784,9 @@ class Generics
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public void Blagh() { }
+            public void Blagh()
+            {
+            }
         }
 
         public static void Run()
@@ -2758,7 +2810,9 @@ class Generics
 
     class TestInterfaceVTableTracking
     {
-        class Gen<T> { }
+        class Gen<T>
+        {
+        }
 
         interface IFoo<T>
         {
@@ -2773,7 +2827,9 @@ class Generics
             }
         }
 
-        class Derived<T> : GenericBase<Gen<T>> { }
+        class Derived<T> : GenericBase<Gen<T>>
+        {
+        }
 
         static volatile IFoo<Gen<string>> s_foo;
 
@@ -2788,7 +2844,9 @@ class Generics
 
     class TestClassVTableTracking
     {
-        class Unit { }
+        class Unit
+        {
+        }
 
         class Gen<T, U>
         {
@@ -2812,7 +2870,9 @@ class Generics
 
     class TestNullableCasting
     {
-        struct Mine<T> { }
+        struct Mine<T>
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool CallWithNullable<T>(object m)
@@ -2849,9 +2909,13 @@ class Generics
     {
         private delegate T GenericDelegate<out T>();
 
-        class Base { }
+        class Base
+        {
+        }
 
-        class Derived : Base { }
+        class Derived : Base
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool IsInstanceOfGenericDelegateOf<T>(object o)
@@ -2869,7 +2933,9 @@ class Generics
 
     class TestByRefLikeVTables
     {
-        class Atom<T> { }
+        class Atom<T>
+        {
+        }
 
         ref struct RefStruct<T>
         {
@@ -3052,14 +3118,20 @@ class Generics
 
     class TestImportFailure
     {
-        class Generic<T> { }
+        class Generic<T>
+        {
+        }
 
         [System.Runtime.InteropServices.StructLayout(
             System.Runtime.InteropServices.LayoutKind.Explicit
         )]
-        class Unloadable<T> { }
+        class Unloadable<T>
+        {
+        }
 
-        class Unloadable : Unloadable<object> { }
+        class Unloadable : Unloadable<object>
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void DoGenericLookup<T>()
@@ -3090,9 +3162,13 @@ class Generics
 
     class TestGenericInlining
     {
-        class NeverSeenInstantiated<T> { }
+        class NeverSeenInstantiated<T>
+        {
+        }
 
-        class AnotherNeverSeenInstantiated<T> { }
+        class AnotherNeverSeenInstantiated<T>
+        {
+        }
 
         class NeverAllocatedIndirection<T, U>
         {
@@ -3108,7 +3184,9 @@ class Generics
             public string GetStringIndirect() => s_indirection.GetString();
         }
 
-        class Dummy { }
+        class Dummy
+        {
+        }
 
         static NeverAllocated<Dummy> s_neverAllocated = null;
 
@@ -3213,7 +3291,9 @@ class Generics
             // refers to this method's dictionary.
             //
             // The dictionary layouts are computed without any assumptions about inlining.
-            private static void Bork<T>() { }
+            private static void Bork<T>()
+            {
+            }
         }
 
         class Bar : Foo
@@ -3294,11 +3374,17 @@ class Generics
             return instance.Method<X>();
         }
 
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
-        class Atom3 { }
+        class Atom3
+        {
+        }
 
         public static void Run()
         {
@@ -3318,9 +3404,13 @@ class Generics
 
     class TestConstrainedGvmValueTypeCalls
     {
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
         interface IFoo<T>
         {
@@ -3414,11 +3504,17 @@ class Generics
 
     class TestDefaultGenericVirtualInterfaceMethods
     {
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
-        struct SAtom1 { }
+        struct SAtom1
+        {
+        }
 
         interface IFoo
         {
@@ -3444,13 +3540,21 @@ class Generics
             string IFoo<Atom2>.Foo<T>() => $"Hello from Foo.Foo<{typeof(T).Name}>";
         }
 
-        class Bar : IBar<Atom1> { }
+        class Bar : IBar<Atom1>
+        {
+        }
 
-        class Bar<T> : IBar<T> { }
+        class Bar<T> : IBar<T>
+        {
+        }
 
-        class DerivedBar : Bar<Atom1> { }
+        class DerivedBar : Bar<Atom1>
+        {
+        }
 
-        class DerivedSBar : Bar<SAtom1> { }
+        class DerivedSBar : Bar<SAtom1>
+        {
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static string ConstrainedCall<T, U, X>(ref T instance) where T : IFoo<U>
@@ -3570,9 +3674,13 @@ class Generics
 
     class TestSimpleGenericRecursion
     {
-        struct GenStruct<T> { }
+        struct GenStruct<T>
+        {
+        }
 
-        class GenClass<T> { }
+        class GenClass<T>
+        {
+        }
 
         private static object RecurseOverStruct<T>(int count) where T : new()
         {
@@ -3634,7 +3742,9 @@ class Generics
             private T Value2;
         }
 
-        class ChunkingTypeHandler<T> : TypeHandler<T> { }
+        class ChunkingTypeHandler<T> : TypeHandler<T>
+        {
+        }
 
         class RangeHandler<T> : ChunkingTypeHandler<SqlRange<T>>
         {
@@ -3646,7 +3756,9 @@ class Generics
 
         class TypeHandler
         {
-            public virtual void CreateRangeHandler() { }
+            public virtual void CreateRangeHandler()
+            {
+            }
         }
 
         class TypeHandler<T> : TypeHandler
@@ -3667,9 +3779,13 @@ class Generics
 
     class TestRecursionInGenericVirtualMethods
     {
-        struct Buffer<T> { }
+        struct Buffer<T>
+        {
+        }
 
-        class Getter<T> { }
+        class Getter<T>
+        {
+        }
 
         class Base
         {
@@ -3761,7 +3877,9 @@ class Generics
             }
         }
 
-        struct Gen<T> { }
+        struct Gen<T>
+        {
+        }
 
         public static void Run()
         {
@@ -3773,15 +3891,20 @@ class Generics
 
     static class TestGvmLookupDependency
     {
-        struct SmallCat<T> { }
+        struct SmallCat<T>
+        {
+        }
 
         interface ITechnique
         {
-            void CatSlaps<T>() { /* Cannot reference T or it stops testing the thing it should */
+            void CatSlaps<T>()
+            { /* Cannot reference T or it stops testing the thing it should */
             }
         }
 
-        struct Technique : ITechnique { }
+        struct Technique : ITechnique
+        {
+        }
 
         static void CatConcepts<T, U>() where T : ITechnique => default(T).CatSlaps<SmallCat<U>>();
 
@@ -3796,10 +3919,14 @@ class Generics
     {
         class Generic<T>
         {
-            public void Method(params T[] ts) { }
+            public void Method(params T[] ts)
+            {
+            }
         }
 
-        class Atom { }
+        class Atom
+        {
+        }
 
         static Generic<Atom> s_instance = new Generic<Atom>();
         static Type s_atomType = typeof(Atom);

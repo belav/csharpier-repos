@@ -10,12 +10,16 @@ namespace Microsoft.Extensions.FileProviders
         : Microsoft.Extensions.FileProviders.IFileProvider,
             System.IDisposable
     {
-        public PhysicalFileProvider(string root) { }
+        public PhysicalFileProvider(string root)
+        {
+        }
 
         public PhysicalFileProvider(
             string root,
             Microsoft.Extensions.FileProviders.Physical.ExclusionFilters filters
-        ) { }
+        )
+        {
+        }
 
         public string Root
         {
@@ -24,19 +28,29 @@ namespace Microsoft.Extensions.FileProviders
         public bool UseActivePolling
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UsePollingFileWatcher
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~PhysicalFileProvider() { }
+        ~PhysicalFileProvider()
+        {
+        }
 
         public Microsoft.Extensions.FileProviders.IDirectoryContents GetDirectoryContents(
             string subpath
@@ -64,12 +78,16 @@ namespace Microsoft.Extensions.FileProviders.Internal
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
             System.Collections.IEnumerable
     {
-        public PhysicalDirectoryContents(string directory) { }
+        public PhysicalDirectoryContents(string directory)
+        {
+        }
 
         public PhysicalDirectoryContents(
             string directory,
             Microsoft.Extensions.FileProviders.Physical.ExclusionFilters filters
-        ) { }
+        )
+        {
+        }
 
         public bool Exists
         {
@@ -102,7 +120,9 @@ namespace Microsoft.Extensions.FileProviders.Physical
 
     public partial class PhysicalDirectoryInfo : Microsoft.Extensions.FileProviders.IFileInfo
     {
-        public PhysicalDirectoryInfo(System.IO.DirectoryInfo info) { }
+        public PhysicalDirectoryInfo(System.IO.DirectoryInfo info)
+        {
+        }
 
         public bool Exists
         {
@@ -137,7 +157,9 @@ namespace Microsoft.Extensions.FileProviders.Physical
 
     public partial class PhysicalFileInfo : Microsoft.Extensions.FileProviders.IFileInfo
     {
-        public PhysicalFileInfo(System.IO.FileInfo info) { }
+        public PhysicalFileInfo(System.IO.FileInfo info)
+        {
+        }
 
         public bool Exists
         {
@@ -176,30 +198,42 @@ namespace Microsoft.Extensions.FileProviders.Physical
             string root,
             System.IO.FileSystemWatcher? fileSystemWatcher,
             bool pollForChanges
-        ) { }
+        )
+        {
+        }
 
         public PhysicalFilesWatcher(
             string root,
             System.IO.FileSystemWatcher? fileSystemWatcher,
             bool pollForChanges,
             Microsoft.Extensions.FileProviders.Physical.ExclusionFilters filters
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.Primitives.IChangeToken CreateFileChangeToken(string filter)
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~PhysicalFilesWatcher() { }
+        ~PhysicalFilesWatcher()
+        {
+        }
     }
 
     public partial class PollingFileChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
-        public PollingFileChangeToken(System.IO.FileInfo fileInfo) { }
+        public PollingFileChangeToken(System.IO.FileInfo fileInfo)
+        {
+        }
 
         public bool ActiveChangeCallbacks
         {
@@ -221,7 +255,9 @@ namespace Microsoft.Extensions.FileProviders.Physical
 
     public partial class PollingWildCardChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
-        public PollingWildCardChangeToken(string root, string pattern) { }
+        public PollingWildCardChangeToken(string root, string pattern)
+        {
+        }
 
         public bool ActiveChangeCallbacks
         {

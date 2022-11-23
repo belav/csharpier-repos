@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
     [Trait(Traits.Feature, Traits.Features.ValidateJsonString)]
     public class ValidateJsonStringTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ValidateJsonStringTests(ITestOutputHelper logger) : base(logger) { }
+        public ValidateJsonStringTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider?) CreateDiagnosticProviderAndFixer(
             Workspace workspace

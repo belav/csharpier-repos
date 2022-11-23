@@ -13,7 +13,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
     [Guid(Guids.CSharpOptionPageFormattingNewLinesIdString)]
     internal class FormattingNewLinesPage : AbstractOptionPage
     {
-        public FormattingNewLinesPage() { }
+        public FormattingNewLinesPage()
+        {
+        }
 
         protected override AbstractOptionPageControl CreateOptionPage(
             IServiceProvider serviceProvider,

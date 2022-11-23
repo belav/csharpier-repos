@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class WrappedMethodSymbol : MethodSymbol
     {
-        public WrappedMethodSymbol() { }
+        public WrappedMethodSymbol()
+        {
+        }
 
         public abstract MethodSymbol UnderlyingMethod { get; }
 

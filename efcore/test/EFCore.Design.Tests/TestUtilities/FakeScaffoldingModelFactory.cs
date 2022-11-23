@@ -24,7 +24,9 @@ public class FakeScaffoldingModelFactory : RelationalScaffoldingModelFactory
             cSharpUtilities,
             scaffoldingTypeMapper,
             modelRuntimeInitializer
-        ) { }
+        )
+    {
+    }
 
     public override IModel Create(DatabaseModel databaseModel, ModelReverseEngineerOptions options)
     {

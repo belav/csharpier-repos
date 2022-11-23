@@ -9,5 +9,7 @@ public class NorthwindQueryTaggingQuerySqliteTest
     public NorthwindQueryTaggingQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 }

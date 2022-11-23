@@ -1862,7 +1862,9 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCIsDefault : BridgeHelpers { }
+            public partial class TCIsDefault : BridgeHelpers
+            {
+            }
 
             public partial class TCBaseURI : BridgeHelpers
             {

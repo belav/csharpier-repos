@@ -1077,7 +1077,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                         // Handle race condition when stream can be closed handling SHUTDOWN_COMPLETE.
                         StartShutdown(QUIC_STREAM_SHUTDOWN_FLAGS.GRACEFUL, errorCode: 0);
                     }
-                    catch (ObjectDisposedException) { }
+                    catch (ObjectDisposedException)
+                    {
+                    }
                     ;
                 }
 
@@ -1088,7 +1090,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                         // TODO: error code used here MUST be specified by the application layer
                         StartShutdown(QUIC_STREAM_SHUTDOWN_FLAGS.ABORT_RECEIVE, 0xffffffff);
                     }
-                    catch (ObjectDisposedException) { }
+                    catch (ObjectDisposedException)
+                    {
+                    }
                     ;
                 }
             }

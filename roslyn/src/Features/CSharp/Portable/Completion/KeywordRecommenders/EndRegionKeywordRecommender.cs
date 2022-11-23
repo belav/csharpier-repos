@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxKind.EndRegionKeyword,
                 isValidInPreprocessorContext: true,
                 shouldFormatOnCommit: true
-            ) { }
+            )
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

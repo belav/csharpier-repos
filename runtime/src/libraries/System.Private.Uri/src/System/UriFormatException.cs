@@ -14,16 +14,24 @@ namespace System
     )]
     public class UriFormatException : FormatException, ISerializable
     {
-        public UriFormatException() : base() { }
+        public UriFormatException() : base()
+        {
+        }
 
-        public UriFormatException(string? textString) : base(textString) { }
+        public UriFormatException(string? textString) : base(textString)
+        {
+        }
 
-        public UriFormatException(string? textString, Exception? e) : base(textString, e) { }
+        public UriFormatException(string? textString, Exception? e) : base(textString, e)
+        {
+        }
 
         protected UriFormatException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        ) : base(serializationInfo, streamingContext)
+        {
+        }
 
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,

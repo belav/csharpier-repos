@@ -42,7 +42,9 @@ namespace System.Web.Http.Tracing
             get { return _records.Count != 0; }
         }
 
-        public void Finish() { }
+        public void Finish()
+        {
+        }
 
         public IList<TraceRecord> Records
         {

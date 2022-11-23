@@ -13,7 +13,9 @@ namespace System.Security.Cryptography.Xml
         // public constructors
         //
 
-        public KeyInfoName() : this(null) { }
+        public KeyInfoName() : this(null)
+        {
+        }
 
         public KeyInfoName(string? keyName)
         {

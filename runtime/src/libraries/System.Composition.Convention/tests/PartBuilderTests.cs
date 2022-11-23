@@ -11,12 +11,18 @@ namespace System.Composition.Convention.Tests
 {
     public class PartBuilderTests
     {
-        private class MyDoNotIncludeAttribute : Attribute { }
+        private class MyDoNotIncludeAttribute : Attribute
+        {
+        }
 
         [MyDoNotIncludeAttribute]
-        public class MyNotToBeIncludedClass { }
+        public class MyNotToBeIncludedClass
+        {
+        }
 
-        public class MyToBeIncludedClass { }
+        public class MyToBeIncludedClass
+        {
+        }
 
         public class ImporterOfMyNotTobeIncludedClass
         {
@@ -27,9 +33,13 @@ namespace System.Composition.Convention.Tests
             public MyToBeIncludedClass MyToBeIncludedClass { get; set; }
         }
 
-        public interface IFirst { }
+        public interface IFirst
+        {
+        }
 
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         private class FooImpl
         {
@@ -54,7 +64,9 @@ namespace System.Composition.Convention.Tests
                 return 1;
             }
 
-            public void OnImportsSatisfiedInvalidArgs(int arg1) { }
+            public void OnImportsSatisfiedInvalidArgs(int arg1)
+            {
+            }
 
             [OnImportsSatisfied]
             public void OnImportsSatisfied()
@@ -79,7 +91,9 @@ namespace System.Composition.Convention.Tests
                 return 1;
             }
 
-            public void OnImportsSatisfiedInvalidArgs(int arg1) { }
+            public void OnImportsSatisfiedInvalidArgs(int arg1)
+            {
+            }
 
             public void OnImportsSatisfied1()
             {
@@ -108,7 +122,9 @@ namespace System.Composition.Convention.Tests
                 return 1;
             }
 
-            public void OnImportsSatisfiedInvalidArgs(int arg1) { }
+            public void OnImportsSatisfiedInvalidArgs(int arg1)
+            {
+            }
 
             [OnImportsSatisfied]
             public void OnImportsSatisfied()
@@ -118,7 +134,9 @@ namespace System.Composition.Convention.Tests
         }
 
         [Export]
-        public class OnImportsSatisfiedDerivedClass : OnImportsSatisfiedTestClass { }
+        public class OnImportsSatisfiedDerivedClass : OnImportsSatisfiedTestClass
+        {
+        }
 
         [Export]
         public class OnImportsSatisfiedTestClassPropertiesAndFields
@@ -136,7 +154,9 @@ namespace System.Composition.Convention.Tests
                 return 1;
             }
 
-            public void OnImportsSatisfiedInvalidArgs(int arg1) { }
+            public void OnImportsSatisfiedInvalidArgs(int arg1)
+            {
+            }
 
             public int OnImportsSatisfied3; // Field
             public int OnImportsSatisfied4 { get; set; } // Property
@@ -159,20 +179,32 @@ namespace System.Composition.Convention.Tests
 
         private class FooImplWithConstructors
         {
-            public FooImplWithConstructors() { }
+            public FooImplWithConstructors()
+            {
+            }
 
-            public FooImplWithConstructors(int id) { }
+            public FooImplWithConstructors(int id)
+            {
+            }
 
-            public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+            public FooImplWithConstructors(IEnumerable<IFoo> ids)
+            {
+            }
 
-            public FooImplWithConstructors(int id, string name) { }
+            public FooImplWithConstructors(int id, string name)
+            {
+            }
         }
 
         private class FooImplWithConstructorsAmbiguous
         {
-            public FooImplWithConstructorsAmbiguous(string name, int id) { }
+            public FooImplWithConstructorsAmbiguous(string name, int id)
+            {
+            }
 
-            public FooImplWithConstructorsAmbiguous(int id, string name) { }
+            public FooImplWithConstructorsAmbiguous(int id, string name)
+            {
+            }
         }
 
         [Fact]

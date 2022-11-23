@@ -753,7 +753,9 @@ class Tests
         }
     }
 
-    class Duper : Super { }
+    class Duper : Super
+    {
+    }
 
     public static int test_0_null_cast()
     {
@@ -832,7 +834,9 @@ class Tests
             o[0, 0] = new Super();
             return 1;
         }
-        catch (ArrayTypeMismatchException) { }
+        catch (ArrayTypeMismatchException)
+        {
+        }
 
         return 0;
     }
@@ -858,7 +862,9 @@ class Tests
             b = (int[])arr2;
             return 3;
         }
-        catch (InvalidCastException) { }
+        catch (InvalidCastException)
+        {
+        }
 
         if (arr2 is int[])
             return 4;
@@ -1120,7 +1126,9 @@ class Tests
             if (!"Val2".Equals(stringIList[1]))
                 return 1;
         }
-        catch (InvalidCastException) { }
+        catch (InvalidCastException)
+        {
+        }
 
         return 0;
     }
@@ -1481,7 +1489,9 @@ class Tests
     public static int test_0_cond_branch_side_effects()
     {
         counter = 5;
-        if (WriteStuff()) { }
+        if (WriteStuff())
+        {
+        }
         if (counter == 10)
             return 0;
         return 1;
@@ -1504,7 +1514,9 @@ class Tests
         return new int[3];
     }
 
-    public static void bar(int i) { }
+    public static void bar(int i)
+    {
+    }
 
     public static int test_0_arg_only_written()
     {
@@ -1526,7 +1538,9 @@ class Tests
 
     struct FooStruct
     {
-        public FooStruct(long l) { }
+        public FooStruct(long l)
+        {
+        }
     }
 
     public static int test_0_calls_opcode_emulation()
@@ -1569,7 +1583,9 @@ class Tests
         return (o.GetHashCode() == o.GetHashCode()) ? 0 : 1;
     }
 
-    class FooClass { }
+    class FooClass
+    {
+    }
 
     public static int test_0_intrins_object_ctor()
     {
@@ -1944,7 +1960,9 @@ class Tests
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static void UseValue(int index) { }
+    static void UseValue(int index)
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static bool IsFalse()
@@ -2062,7 +2080,9 @@ class Tests
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static void empty() { }
+    static void empty()
+    {
+    }
 
     // #11297
     public static int test_0_llvm_inline_throw()
@@ -2102,10 +2122,14 @@ class Tests
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static void t_14217_inner(BugStruct bug) { }
+    static void t_14217_inner(BugStruct bug)
+    {
+    }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct EmptyStruct { }
+    public struct EmptyStruct
+    {
+    }
 
     class EmptyClass
     {
@@ -2179,7 +2203,9 @@ class Tests
             int valueLength,
             char* buffer,
             int bufferLength
-        ) { }
+        )
+        {
+        }
     }
 
     static unsafe int test_0_mul_ovf_regress_36052()
@@ -2218,8 +2244,12 @@ class Tests
     )
     {
         // This disables LLVM
-        try { }
-        catch { }
+        try
+        {
+        }
+        catch
+        {
+        }
         return o8.a;
     }
 
@@ -2302,7 +2332,9 @@ class Tests
         {
             object o = __refvalue(r, object);
         }
-        catch (InvalidCastException) { }
+        catch (InvalidCastException)
+        {
+        }
 
         return 0;
     }
@@ -2390,11 +2422,17 @@ class Tests
         return dataPtr[0] == 1.0f ? 0 : 1;
     }
 
-    class AClass1 { }
+    class AClass1
+    {
+    }
 
-    class BClass1 : AClass1 { }
+    class BClass1 : AClass1
+    {
+    }
 
-    class CClass1 { }
+    class CClass1
+    {
+    }
 
     public static int test_0_array_of_magic_iface()
     {
@@ -2493,7 +2531,9 @@ class Tests
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void inlined() { }
+        public static void inlined()
+        {
+        }
     }
 
     public static int test_0_aggressive_inline_cctor()

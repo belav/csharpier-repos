@@ -606,7 +606,9 @@ namespace Microsoft.CodeAnalysis
             private readonly ImmutableArray<EntryState> _states;
 
             public TableEntry(OneOrMany<T> items, EntryState state)
-                : this(items, GetSingleArray(state)) { }
+                : this(items, GetSingleArray(state))
+            {
+            }
 
             private TableEntry(OneOrMany<T> items, ImmutableArray<EntryState> states)
             {

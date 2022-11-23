@@ -257,9 +257,13 @@
             public string Value { get; set; }
         }
 
-        public class Source : SourceBase { }
+        public class Source : SourceBase
+        {
+        }
 
-        public class Dest : DestBase { }
+        public class Dest : DestBase
+        {
+        }
 
         protected override MapperConfiguration CreateConfiguration() =>
             new(cfg =>
@@ -293,9 +297,13 @@
             public string Value { get; set; }
         }
 
-        public class Source : SourceBase { }
+        public class Source : SourceBase
+        {
+        }
 
-        public class Dest : DestBase { }
+        public class Dest : DestBase
+        {
+        }
 
         protected override MapperConfiguration CreateConfiguration() =>
             new(cfg =>

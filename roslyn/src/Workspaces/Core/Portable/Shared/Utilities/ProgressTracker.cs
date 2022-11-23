@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private readonly Action<string, int, int> _updateActionOpt;
 
-        public ProgressTracker() : this(null) { }
+        public ProgressTracker() : this(null)
+        {
+        }
 
         public ProgressTracker(Action<string, int, int> updateActionOpt) =>
             _updateActionOpt = updateActionOpt;

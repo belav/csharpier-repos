@@ -8,7 +8,9 @@ namespace Test
 
     class App
     {
-        static void Method1(float param2) { }
+        static void Method1(float param2)
+        {
+        }
 
         static int Main()
         {
@@ -17,47 +19,65 @@ namespace Test
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 Method1((float)local3 + App.m_afForward5[0]);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
 

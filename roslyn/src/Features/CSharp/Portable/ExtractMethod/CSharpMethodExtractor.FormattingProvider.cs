@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
     {
         private class FormattingRule : AbstractFormattingRule
         {
-            public FormattingRule() { }
+            public FormattingRule()
+            {
+            }
 
             public override AdjustNewLinesOperation GetAdjustNewLinesOperation(
                 in SyntaxToken previousToken,

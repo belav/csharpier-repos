@@ -27,7 +27,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public TestCaseCompiler(
             TestCaseSandbox sandbox,
             TestCaseCompilationMetadataProvider metadataProvider
-        ) : this(sandbox, metadataProvider, new ILInputCompiler()) { }
+        ) : this(sandbox, metadataProvider, new ILInputCompiler())
+        {
+        }
 
         public TestCaseCompiler(
             TestCaseSandbox sandbox,
@@ -98,7 +100,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
             return testAssembly;
         }
 
-        protected virtual void Prepare(NPath outputDirectory) { }
+        protected virtual void Prepare(NPath outputDirectory)
+        {
+        }
 
         protected virtual CompilerOptions CreateOptionsForTestCase(
             NPath outputPath,

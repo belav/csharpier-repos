@@ -15,7 +15,9 @@ public interface IInitializer
 
 public class DropCreateDatabaseAlways<TContext> : IInitializer where TContext : DbContext, new()
 {
-    protected virtual void Seed(TContext context) { }
+    protected virtual void Seed(TContext context)
+    {
+    }
 
     public async Task Migrate()
     {

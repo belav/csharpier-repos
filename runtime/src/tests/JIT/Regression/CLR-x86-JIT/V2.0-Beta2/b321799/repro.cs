@@ -5,9 +5,13 @@
 using System;
 using System.Runtime.CompilerServices;
 
-class Exception1 : Exception { }
+class Exception1 : Exception
+{
+}
 
-class Exception2 : Exception { }
+class Exception2 : Exception
+{
+}
 
 delegate void NoArg();
 

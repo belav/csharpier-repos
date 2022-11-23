@@ -312,7 +312,9 @@ namespace System.Web.WebPages.Test
 
         private sealed class DummyPage : WebPage
         {
-            public override void Execute() { }
+            public override void Execute()
+            {
+            }
         }
     }
 }

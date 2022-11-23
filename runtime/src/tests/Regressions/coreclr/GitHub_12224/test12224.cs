@@ -21,7 +21,9 @@ public class Test12224
                 int x = s.Length;
             }
         }
-        catch (NullReferenceException) { }
+        catch (NullReferenceException)
+        {
+        }
     }
 
     public static int Main()

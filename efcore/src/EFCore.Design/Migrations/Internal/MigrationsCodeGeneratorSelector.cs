@@ -22,5 +22,7 @@ public class MigrationsCodeGeneratorSelector
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public MigrationsCodeGeneratorSelector(IEnumerable<IMigrationsCodeGenerator> services)
-        : base(services) { }
+        : base(services)
+    {
+    }
 }

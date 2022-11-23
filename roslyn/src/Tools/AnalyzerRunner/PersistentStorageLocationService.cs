@@ -19,7 +19,9 @@ namespace AnalyzerRunner
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PersistentStorageLocationService() { }
+        public PersistentStorageLocationService()
+        {
+        }
 
         public bool IsSupported(Workspace workspace) => true;
 

@@ -38,10 +38,14 @@ public sealed class My2Attribute : Attribute
 
 public sealed class My3Attribute : Attribute
 {
-    public My3Attribute(object[] arr) { }
+    public My3Attribute(object[] arr)
+    {
+    }
 }
 
-public class MyException : Exception { }
+public class MyException : Exception
+{
+}
 
 public sealed class ExceptionOnCtor : Attribute
 {
@@ -51,7 +55,9 @@ public sealed class ExceptionOnCtor : Attribute
     }
 }
 
-public class Bar { }
+public class Bar
+{
+}
 
 class Tests
 {

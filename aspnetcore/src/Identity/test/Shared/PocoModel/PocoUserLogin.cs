@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore.Identity.Test;
 /// <summary>
 ///     Entity type for a user's login (i.e. facebook, google)
 /// </summary>
-public class PocoUserLogin : PocoUserLogin<string> { }
+public class PocoUserLogin : PocoUserLogin<string>
+{
+}
 
 /// <summary>
 ///     Entity type for a user's login (i.e. facebook, google)

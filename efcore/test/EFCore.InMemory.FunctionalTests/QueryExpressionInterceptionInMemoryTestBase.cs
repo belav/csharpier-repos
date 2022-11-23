@@ -7,7 +7,9 @@ public abstract class QueryExpressionInterceptionInMemoryTestBase
     : QueryExpressionInterceptionTestBase
 {
     protected QueryExpressionInterceptionInMemoryTestBase(InterceptionInMemoryFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override UniverseContext Seed(UniverseContext context)
     {
@@ -51,7 +53,9 @@ public abstract class QueryExpressionInterceptionInMemoryTestBase
             IClassFixture<QueryExpressionInterceptionInMemoryTest.InterceptionInMemoryFixture>
     {
         public QueryExpressionInterceptionInMemoryTest(InterceptionInMemoryFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {
@@ -65,7 +69,9 @@ public abstract class QueryExpressionInterceptionInMemoryTestBase
     {
         public QueryExpressionInterceptionWithDiagnosticsInMemoryTest(
             InterceptionInMemoryFixture fixture
-        ) : base(fixture) { }
+        ) : base(fixture)
+        {
+        }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {

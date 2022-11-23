@@ -30,7 +30,9 @@ namespace System.Web.Mvc
         private Dictionary<string, ValueProviderResultPlaceholder> _values = null;
 
         public NameValueCollectionValueProvider(NameValueCollection collection, CultureInfo culture)
-            : this(collection, unvalidatedCollection: null, culture: culture) { }
+            : this(collection, unvalidatedCollection: null, culture: culture)
+        {
+        }
 
         public NameValueCollectionValueProvider(
             NameValueCollection collection,
@@ -42,7 +44,9 @@ namespace System.Web.Mvc
                 unvalidatedCollection,
                 culture,
                 jQueryToMvcRequestNormalizationRequired: false
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes Name Value collection provider.

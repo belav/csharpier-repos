@@ -3,4 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
-public class NestedReferenceDerived : NestedReferenceBase { }
+public class NestedReferenceDerived : NestedReferenceBase
+{
+}

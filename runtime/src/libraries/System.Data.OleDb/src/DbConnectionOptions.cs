@@ -132,7 +132,8 @@ namespace System.Data.Common
 
         // called by derived classes that may cache based on connectionString
         public DbConnectionOptions(string? connectionString) : this(connectionString, null, false)
-        { }
+        {
+        }
 
         // synonyms hashtable is meant to be read-only translation of parsed string
         // keywords/synonyms to a known keyword string
@@ -559,8 +560,12 @@ namespace System.Data.Common
             string? realkeyname = ((null != synonyms) ? (string)synonyms[keyname]! : keyname);
             if ((KEY.Password != realkeyname) && (SYNONYM.Pwd != realkeyname))
             { // don't trace passwords ever!
-                if (null != keyvalue) { }
-                else { }
+                if (null != keyvalue)
+                {
+                }
+                else
+                {
+                }
             }
         }
 

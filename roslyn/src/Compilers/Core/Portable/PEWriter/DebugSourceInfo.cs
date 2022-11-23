@@ -39,7 +39,9 @@ namespace Microsoft.Cci
                 checksum,
                 SourceHashAlgorithms.GetAlgorithmGuid(checksumAlgorithm),
                 embeddedTextBlob
-            ) { }
+            )
+        {
+        }
 
         public DebugSourceInfo(
             ImmutableArray<byte> checksum,

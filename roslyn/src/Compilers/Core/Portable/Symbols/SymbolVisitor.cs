@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis
             symbol?.Accept(this);
         }
 
-        public virtual void DefaultVisit(ISymbol symbol) { }
+        public virtual void DefaultVisit(ISymbol symbol)
+        {
+        }
 
         public virtual void VisitAlias(IAliasSymbol symbol)
         {

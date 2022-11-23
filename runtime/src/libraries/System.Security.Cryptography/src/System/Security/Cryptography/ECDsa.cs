@@ -19,7 +19,9 @@ namespace System.Security.Cryptography
         // One power of two bigger should cover most unknown algorithms, too.
         private const int HashBufferStackSize = 128;
 
-        protected ECDsa() { }
+        protected ECDsa()
+        {
+        }
 
         [UnsupportedOSPlatform("browser")]
         public static new partial ECDsa Create();

@@ -23,6 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeParameterSymbol
         >
     {
-        public CSharpFrameDecoder() : base(CSharpInstructionDecoder.Instance) { }
+        public CSharpFrameDecoder() : base(CSharpInstructionDecoder.Instance)
+        {
+        }
     }
 }

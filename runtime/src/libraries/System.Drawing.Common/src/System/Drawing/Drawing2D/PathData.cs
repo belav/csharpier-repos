@@ -5,7 +5,9 @@ namespace System.Drawing.Drawing2D
 {
     public sealed class PathData
     {
-        public PathData() { }
+        public PathData()
+        {
+        }
 
         public PointF[]? Points { get; set; }
 

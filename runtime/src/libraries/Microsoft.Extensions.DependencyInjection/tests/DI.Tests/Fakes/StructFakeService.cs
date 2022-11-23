@@ -8,6 +8,8 @@ namespace Microsoft.Extensions.DependencyInjection.Fakes
 {
     public struct StructFakeService : IFakeService
     {
-        public StructFakeService(IServiceProvider serviceProvider) { }
+        public StructFakeService(IServiceProvider serviceProvider)
+        {
+        }
     }
 }

@@ -279,7 +279,9 @@ namespace System.Runtime.CompilerServices
             return (IntPtr)NativeMemory.Alloc((uint)size);
         }
 
-        public static void PrepareDelegate(Delegate d) { }
+        public static void PrepareDelegate(Delegate d)
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

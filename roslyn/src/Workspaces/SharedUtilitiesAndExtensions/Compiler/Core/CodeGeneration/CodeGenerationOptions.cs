@@ -101,7 +101,9 @@ internal interface CodeGenerationOptionsProvider
 #if !CODE_STYLE
     OptionsProvider<CodeGenerationOptions>,
 #endif
-    NamingStylePreferencesProvider { }
+    NamingStylePreferencesProvider
+{
+}
 
 internal interface CodeAndImportGenerationOptionsProvider
     :
@@ -109,7 +111,9 @@ internal interface CodeAndImportGenerationOptionsProvider
     OptionsProvider<CodeAndImportGenerationOptions>,
 #endif
     CodeGenerationOptionsProvider,
-        AddImportPlacementOptionsProvider { }
+        AddImportPlacementOptionsProvider
+{
+}
 
 internal static class CodeGenerationOptionsProviders
 {

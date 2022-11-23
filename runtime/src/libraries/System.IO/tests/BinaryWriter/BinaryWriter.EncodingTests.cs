@@ -273,6 +273,8 @@ namespace System.IO.Tests
         }
 
         // subclasses UTF8Encoding, returns UTF-8 code page
-        private class MyCustomUTF8Encoding : UTF8Encoding { }
+        private class MyCustomUTF8Encoding : UTF8Encoding
+        {
+        }
     }
 }

@@ -26,7 +26,9 @@ namespace System.Net.Http.Headers
             // Used by the parser to create a new instance of this type.
         }
 
-        public MediaTypeWithQualityHeaderValue(string mediaType) : base(mediaType) { }
+        public MediaTypeWithQualityHeaderValue(string mediaType) : base(mediaType)
+        {
+        }
 
         public MediaTypeWithQualityHeaderValue(string mediaType, double quality) : base(mediaType)
         {

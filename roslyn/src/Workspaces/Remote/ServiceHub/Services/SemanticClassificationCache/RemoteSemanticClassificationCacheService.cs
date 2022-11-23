@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteSemanticClassificationCacheService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Key we use to look this up in the persistence store for a particular document.

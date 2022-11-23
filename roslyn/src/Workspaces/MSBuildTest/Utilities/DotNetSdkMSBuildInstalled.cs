@@ -113,7 +113,9 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         }
 #endif
 
-        public DotNetSdkMSBuildInstalled() { }
+        public DotNetSdkMSBuildInstalled()
+        {
+        }
 
         public override bool ShouldSkip => SdkPath is null;
 

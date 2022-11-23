@@ -101,6 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         }
 
         internal CSharpBlockStructureProvider()
-            : base(CreateDefaultNodeProviderMap(), CreateDefaultTriviaProviderMap()) { }
+            : base(CreateDefaultNodeProviderMap(), CreateDefaultTriviaProviderMap())
+        {
+        }
     }
 }

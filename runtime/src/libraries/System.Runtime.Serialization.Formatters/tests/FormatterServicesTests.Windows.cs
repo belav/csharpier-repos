@@ -27,6 +27,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
         [ComImport]
         [Guid("00000000-0000-0000-0000-000000000000")]
-        public class COMObject { }
+        public class COMObject
+        {
+        }
     }
 }

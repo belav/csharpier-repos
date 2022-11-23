@@ -24,7 +24,9 @@ namespace Internal.Cryptography.Pal
 
             public SafeHandle? SafeHandle => null;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public void Add(ICertificatePal cert)
             {

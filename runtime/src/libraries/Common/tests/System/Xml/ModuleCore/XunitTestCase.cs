@@ -33,7 +33,9 @@ namespace OLEDB.Test.ModuleCore
                 tagVARIATION_STATUS result = (tagVARIATION_STATUS)Test();
                 Assert.NotEqual(tagVARIATION_STATUS.eVariationStatusFailed, result);
             }
-            catch (CTestSkippedException) { }
+            catch (CTestSkippedException)
+            {
+            }
         }
     }
 }

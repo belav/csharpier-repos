@@ -4697,7 +4697,9 @@ public class FixupTest
         private ICollection<Product> _products;
 
         // ReSharper disable once UnusedMember.Local
-        public Category() { }
+        public Category()
+        {
+        }
 
         public Category(int id)
         {
@@ -4724,7 +4726,9 @@ public class FixupTest
         private Category _category;
 
         // ReSharper disable once UnusedMember.Local
-        public Product() { }
+        public Product()
+        {
+        }
 
         public Product(int id, int categoryId)
         {
@@ -4763,7 +4767,9 @@ public class FixupTest
         private Product _product;
 
         // ReSharper disable once UnusedMember.Local
-        public SpecialOffer() { }
+        public SpecialOffer()
+        {
+        }
 
         public SpecialOffer(int id, int productId)
         {
@@ -4791,7 +4797,9 @@ public class FixupTest
         private readonly IInterceptor[] _interceptors;
         private readonly string _databaseName;
 
-        public FixupContext(params IInterceptor[] interceptors) : this(null, interceptors) { }
+        public FixupContext(params IInterceptor[] interceptors) : this(null, interceptors)
+        {
+        }
 
         public FixupContext(string databaseName, params IInterceptor[] interceptors)
         {

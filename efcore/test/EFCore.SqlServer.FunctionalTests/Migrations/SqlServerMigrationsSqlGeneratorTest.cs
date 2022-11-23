@@ -1247,5 +1247,7 @@ SELECT @@ROWCOUNT;
                     ).OptionsBuilder
                 )
                 .Options
-        ) { }
+        )
+    {
+    }
 }

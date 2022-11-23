@@ -14,5 +14,7 @@ namespace Moq.Language.Flow
             ICallBaseResult,
             IThrows,
             IThrowsResult,
-            IFluentInterface { }
+            IFluentInterface
+    {
+    }
 }

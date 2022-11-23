@@ -19,11 +19,17 @@ namespace System.Xaml.Permissions
 #endif
     public sealed class XamlLoadPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public XamlLoadPermission(PermissionState state) { }
+        public XamlLoadPermission(PermissionState state)
+        {
+        }
 
-        public XamlLoadPermission(XamlAccessLevel allowedAccess) { }
+        public XamlLoadPermission(XamlAccessLevel allowedAccess)
+        {
+        }
 
-        public XamlLoadPermission(IEnumerable<XamlAccessLevel> allowedAccess) { }
+        public XamlLoadPermission(IEnumerable<XamlAccessLevel> allowedAccess)
+        {
+        }
 
         [ComVisible(false)]
         public override bool Equals(object obj)
@@ -46,7 +52,9 @@ namespace System.Xaml.Permissions
             return new XamlLoadPermission(PermissionState.Unrestricted);
         }
 
-        public override void FromXml(SecurityElement elem) { }
+        public override void FromXml(SecurityElement elem)
+        {
+        }
 
         public bool Includes(XamlAccessLevel requestedAccess)
         {

@@ -109,7 +109,9 @@ public class ArrayModelBinderProviderTest
         Assert.IsType<ArrayModelBinder<int>>(result);
     }
 
-    private class TestClass { }
+    private class TestClass
+    {
+    }
 
     private class ModelWithIntArrayProperty
     {

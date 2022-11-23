@@ -55,7 +55,9 @@ namespace System.Configuration
         private Stream _stream;
 
         internal XmlUtil(Stream stream, string name, bool readToFirstElement)
-            : this(stream, name, readToFirstElement, new ConfigurationSchemaErrors()) { }
+            : this(stream, name, readToFirstElement, new ConfigurationSchemaErrors())
+        {
+        }
 
         internal XmlUtil(
             Stream stream,

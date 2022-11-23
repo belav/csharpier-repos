@@ -11,7 +11,9 @@ namespace System.Data
     internal sealed class RelationshipConverter : ExpandableObjectConverter
     {
         // converter classes should have public ctor
-        public RelationshipConverter() { }
+        public RelationshipConverter()
+        {
+        }
 
         /// <summary>
         /// Gets a value indicating whether this converter can

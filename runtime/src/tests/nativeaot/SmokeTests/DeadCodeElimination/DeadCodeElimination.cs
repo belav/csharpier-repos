@@ -23,9 +23,13 @@ class Program
 
     class SanityTest
     {
-        class PresentType { }
+        class PresentType
+        {
+        }
 
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {
@@ -40,7 +44,9 @@ class Program
 
     class TestInstanceMethodOptimization
     {
-        class UnreferencedType { }
+        class UnreferencedType
+        {
+        }
 
         class NeverAllocatedType
         {
@@ -72,7 +78,9 @@ class Program
 
     class TestAbstractTypeNeverDerivedVirtualsOptimization
     {
-        class UnreferencedType1 { }
+        class UnreferencedType1
+        {
+        }
 
         class TheBase
         {
@@ -90,7 +98,9 @@ class Program
             public object TrySomething() => Something();
         }
 
-        abstract class AbstractDerivedAgain : AbstractDerived { }
+        abstract class AbstractDerivedAgain : AbstractDerived
+        {
+        }
 
         static TheBase s_b = new TheBase();
         static AbstractDerived s_d = null;
@@ -126,9 +136,13 @@ class Program
             public virtual void DoSomething() => new UnreferencedType1().ToString();
         }
 
-        sealed class Derived : Base { }
+        sealed class Derived : Base
+        {
+        }
 
-        class UnreferencedType1 { }
+        class UnreferencedType1
+        {
+        }
 
         public static void Run()
         {
@@ -159,14 +173,20 @@ class Program
             public virtual void DoSomething() => new UnreferencedType1().ToString();
         }
 
-        sealed class Derived1 : Base { }
+        sealed class Derived1 : Base
+        {
+        }
 
         sealed class Derived2 : Base
         {
-            public override void DoSomething() { }
+            public override void DoSomething()
+            {
+            }
         }
 
-        class UnreferencedType1 { }
+        class UnreferencedType1
+        {
+        }
 
         public static void Run()
         {
@@ -204,11 +224,15 @@ class Program
             }
         }
 
-        class NeverReferenced { }
+        class NeverReferenced
+        {
+        }
 
         class SomeInstance : IBar<object>
         {
-            void IFoo<object>.DoSomething() { }
+            void IFoo<object>.DoSomething()
+            {
+            }
         }
 
         static IFoo<object> s_instance = new SomeInstance();

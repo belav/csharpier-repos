@@ -12,7 +12,9 @@ internal class TestLogger<TCategory> : ILogger<TCategory>, IDisposable
         return this;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public bool IsEnabled(LogLevel logLevel)
     {
@@ -25,5 +27,7 @@ internal class TestLogger<TCategory> : ILogger<TCategory>, IDisposable
         TState state,
         Exception exception,
         Func<TState, Exception, string> formatter
-    ) { }
+    )
+    {
+    }
 }

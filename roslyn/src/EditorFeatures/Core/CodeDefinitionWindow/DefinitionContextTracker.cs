@@ -186,8 +186,12 @@ namespace Microsoft.CodeAnalysis.CodeDefinitionWindow
                     .SetContextAsync(locations, cancellationToken)
                     .ConfigureAwait(false);
             }
-            catch (OperationCanceledException) { }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
+            {
+            }
         }
 
         /// <summary>

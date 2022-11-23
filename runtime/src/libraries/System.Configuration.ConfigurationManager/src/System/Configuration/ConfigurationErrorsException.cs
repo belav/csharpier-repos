@@ -44,27 +44,43 @@ namespace System.Configuration
             Init(filename, line);
         }
 
-        public ConfigurationErrorsException() : this(null, null, null, 0) { }
+        public ConfigurationErrorsException() : this(null, null, null, 0)
+        {
+        }
 
-        public ConfigurationErrorsException(string message) : this(message, null, null, 0) { }
+        public ConfigurationErrorsException(string message) : this(message, null, null, 0)
+        {
+        }
 
         public ConfigurationErrorsException(string message, Exception inner)
-            : this(message, inner, null, 0) { }
+            : this(message, inner, null, 0)
+        {
+        }
 
         public ConfigurationErrorsException(string message, string filename, int line)
-            : this(message, null, filename, line) { }
+            : this(message, null, filename, line)
+        {
+        }
 
         public ConfigurationErrorsException(string message, XmlNode node)
-            : this(message, null, GetFilename(node), GetLineNumber(node)) { }
+            : this(message, null, GetFilename(node), GetLineNumber(node))
+        {
+        }
 
         public ConfigurationErrorsException(string message, Exception inner, XmlNode node)
-            : this(message, inner, GetFilename(node), GetLineNumber(node)) { }
+            : this(message, inner, GetFilename(node), GetLineNumber(node))
+        {
+        }
 
         public ConfigurationErrorsException(string message, XmlReader reader)
-            : this(message, null, GetFilename(reader), GetLineNumber(reader)) { }
+            : this(message, null, GetFilename(reader), GetLineNumber(reader))
+        {
+        }
 
         public ConfigurationErrorsException(string message, Exception inner, XmlReader reader)
-            : this(message, inner, GetFilename(reader), GetLineNumber(reader)) { }
+            : this(message, inner, GetFilename(reader), GetLineNumber(reader))
+        {
+        }
 
         internal ConfigurationErrorsException(string message, IConfigErrorInfo errorInfo)
             : this(
@@ -72,7 +88,9 @@ namespace System.Configuration
                 null,
                 GetConfigErrorInfoFilename(errorInfo),
                 GetConfigErrorInfoLineNumber(errorInfo)
-            ) { }
+            )
+        {
+        }
 
         internal ConfigurationErrorsException(
             string message,
@@ -84,10 +102,14 @@ namespace System.Configuration
                 inner,
                 GetConfigErrorInfoFilename(errorInfo),
                 GetConfigErrorInfoLineNumber(errorInfo)
-            ) { }
+            )
+        {
+        }
 
         internal ConfigurationErrorsException(ConfigurationException e)
-            : this(e?.BareMessage, e?.InnerException, e?.Filename, e?.Line ?? 0) { }
+            : this(e?.BareMessage, e?.InnerException, e?.Filename, e?.Line ?? 0)
+        {
+        }
 
         internal ConfigurationErrorsException(ICollection<ConfigurationException> coll)
             : this(GetFirstException(coll))

@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
             ISettingsProvider<CodeStyleSetting> data,
             IWpfTableControlProvider controlProvider,
             ITableManagerProvider tableMangerProvider
-        ) : base(data, controlProvider, tableMangerProvider) { }
+        ) : base(data, controlProvider, tableMangerProvider)
+        {
+        }
 
         public override string Identifier => "CodeStyleSettings";
 

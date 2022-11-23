@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
     {
         internal readonly PropertyDictionary _store = new PropertyDictionary();
 
-        public InteractiveCompiler() : base(ErrorString.ResourceManager) { }
+        public InteractiveCompiler() : base(ErrorString.ResourceManager)
+        {
+        }
 
         #region Properties - Please keep these alphabetized.
         public string[]? AdditionalLibPaths
@@ -153,7 +155,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Fills the provided CommandLineBuilderExtension with those switches and other information that can't go into a response file and
         /// must go directly onto the command line.
         /// </summary>
-        protected virtual void AddCommandLineCommands(CommandLineBuilderExtension commandLine) { }
+        protected virtual void AddCommandLineCommands(CommandLineBuilderExtension commandLine)
+        {
+        }
 
         /// <summary>
         /// Fills the provided CommandLineBuilderExtension with those switches and other information that can go into a response file.

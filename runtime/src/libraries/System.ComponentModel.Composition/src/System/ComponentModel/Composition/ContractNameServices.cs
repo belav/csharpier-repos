@@ -392,7 +392,9 @@ namespace System.ComponentModel.Composition
             // Gets array element type by calling GetElementType() until the element is not an array
             //
             Type? elementType = type;
-            while ((elementType = elementType.GetElementType()) != null && elementType.IsArray) { }
+            while ((elementType = elementType.GetElementType()) != null && elementType.IsArray)
+            {
+            }
             return elementType!;
         }
 

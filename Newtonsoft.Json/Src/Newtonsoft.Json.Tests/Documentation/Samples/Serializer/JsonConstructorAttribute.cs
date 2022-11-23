@@ -47,7 +47,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string UserName { get; private set; }
             public bool Enabled { get; private set; }
 
-            public User() { }
+            public User()
+            {
+            }
 
             [JsonConstructor]
             public User(string userName, bool enabled)

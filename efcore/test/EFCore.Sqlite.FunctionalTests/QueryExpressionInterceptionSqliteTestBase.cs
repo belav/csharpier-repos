@@ -7,7 +7,9 @@ public abstract class QueryExpressionInterceptionSqliteTestBase
     : QueryExpressionInterceptionTestBase
 {
     protected QueryExpressionInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public abstract class InterceptionSqliteFixtureBase : InterceptionFixtureBase
     {
@@ -28,7 +30,9 @@ public abstract class QueryExpressionInterceptionSqliteTestBase
             IClassFixture<QueryExpressionInterceptionSqliteTest.InterceptionSqliteFixture>
     {
         public QueryExpressionInterceptionSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
@@ -44,7 +48,9 @@ public abstract class QueryExpressionInterceptionSqliteTestBase
     {
         public QueryExpressionInterceptionWithDiagnosticsSqliteTest(
             InterceptionSqliteFixture fixture
-        ) : base(fixture) { }
+        ) : base(fixture)
+        {
+        }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {

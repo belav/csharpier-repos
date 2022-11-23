@@ -22,7 +22,9 @@ namespace System.Reflection
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         protected Type typeImpl = null!;
 
-        protected TypeDelegator() { }
+        protected TypeDelegator()
+        {
+        }
 
         // NOTE: delegatingType is marked as DynamicallyAccessedMemberTypes.All, but analysis tools special case
         // calls to this constructor and propagate the existing dataflow metadata from delegatingType to this

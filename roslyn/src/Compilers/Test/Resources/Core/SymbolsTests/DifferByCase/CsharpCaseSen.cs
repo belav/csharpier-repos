@@ -4,14 +4,22 @@
 
 public class Goo
 {
-    public static void Goo1() { }
+    public static void Goo1()
+    {
+    }
 
-    public static void goo1() { }
+    public static void goo1()
+    {
+    }
 }
 
 namespace CsharpCodeSensible
 {
-    public class Class1 { }
+    public class Class1
+    {
+    }
 
-    public class class1 { }
+    public class class1
+    {
+    }
 }

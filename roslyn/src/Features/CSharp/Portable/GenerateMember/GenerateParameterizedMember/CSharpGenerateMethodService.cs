@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateMethodService() { }
+        public CSharpGenerateMethodService()
+        {
+        }
 
         protected override bool IsExplicitInterfaceGeneration(SyntaxNode node) =>
             node is MethodDeclarationSyntax;

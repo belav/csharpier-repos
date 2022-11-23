@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 isParams: false,
                 isExtensionMethodThis: false,
                 scope: DeclarationScope.Unscoped
-            ) { }
+            )
+        {
+        }
 
         internal override FlowAnalysisAnnotations FlowAnalysisAnnotations
         {

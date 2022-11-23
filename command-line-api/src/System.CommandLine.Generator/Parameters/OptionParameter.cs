@@ -5,7 +5,9 @@ namespace System.CommandLine.Generator.Parameters
     internal class OptionParameter : PropertyParameter, IEquatable<OptionParameter>
     {
         public OptionParameter(string localName, INamedTypeSymbol type, ITypeSymbol valueType)
-            : base(localName, type, valueType) { }
+            : base(localName, type, valueType)
+        {
+        }
 
         public override string GetValueFromContext() =>
             $"context.ParseResult.GetValueForOption({LocalName})";

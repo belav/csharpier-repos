@@ -554,7 +554,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public abstract bool IsValueType { get; }
 
         // Only the compiler can create TypeSymbols.
-        internal TypeSymbol() { }
+        internal TypeSymbol()
+        {
+        }
 
         /// <summary>
         /// Gets the kind of this type.
@@ -3264,7 +3266,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public static readonly ExplicitInterfaceImplementationTargetMemberEqualityComparer Instance =
                 new ExplicitInterfaceImplementationTargetMemberEqualityComparer();
 
-            private ExplicitInterfaceImplementationTargetMemberEqualityComparer() { }
+            private ExplicitInterfaceImplementationTargetMemberEqualityComparer()
+            {
+            }
 
             public bool Equals(Symbol x, Symbol y)
             {

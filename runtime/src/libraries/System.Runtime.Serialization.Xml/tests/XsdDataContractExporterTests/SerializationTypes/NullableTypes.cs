@@ -46,7 +46,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         Nullable<Point>[] points;
 
         [SecurityCritical]
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+        }
     }
 
     [Serializable]

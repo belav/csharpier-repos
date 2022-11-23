@@ -9,5 +9,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///     Extension methods for <see cref="IReadOnlyAnnotatable" />.
     /// </summary>
     [Obsolete("Use IReadOnlyAnnotatable")]
-    public static class AnnotatableExtensions { }
+    public static class AnnotatableExtensions
+    {
+    }
 }

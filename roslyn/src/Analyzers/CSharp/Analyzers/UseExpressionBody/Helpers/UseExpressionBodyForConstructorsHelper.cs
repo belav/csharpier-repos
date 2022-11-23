@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 ),
                 CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
                 ImmutableArray.Create(SyntaxKind.ConstructorDeclaration)
-            ) { }
+            )
+        {
+        }
 
         public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
             CSharpCodeGenerationOptions options

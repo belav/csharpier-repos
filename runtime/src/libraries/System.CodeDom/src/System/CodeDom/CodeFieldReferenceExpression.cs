@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _fieldName;
 
-        public CodeFieldReferenceExpression() { }
+        public CodeFieldReferenceExpression()
+        {
+        }
 
         public CodeFieldReferenceExpression(CodeExpression targetObject, string fieldName)
         {

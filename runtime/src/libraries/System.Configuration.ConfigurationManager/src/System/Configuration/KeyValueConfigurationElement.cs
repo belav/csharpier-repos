@@ -27,7 +27,9 @@ namespace System.Configuration
 
         private bool _needsInit;
 
-        internal KeyValueConfigurationElement() { }
+        internal KeyValueConfigurationElement()
+        {
+        }
 
         public KeyValueConfigurationElement(string key, string value)
         {

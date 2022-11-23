@@ -887,7 +887,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class NoParameterlessCtor
         {
-            public NoParameterlessCtor(int parameter) { }
+            public NoParameterlessCtor(int parameter)
+            {
+            }
         }
 
         private class PersonWithBindExclusion
@@ -1029,6 +1031,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             }
         }
 
-        private class EmptyController : Controller { }
+        private class EmptyController : Controller
+        {
+        }
     }
 }

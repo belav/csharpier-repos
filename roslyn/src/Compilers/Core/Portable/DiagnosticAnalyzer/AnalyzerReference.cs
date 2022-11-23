@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </remarks>
     public abstract class AnalyzerReference
     {
-        protected AnalyzerReference() { }
+        protected AnalyzerReference()
+        {
+        }
 
         /// <summary>
         /// Full path describing the location of the analyzer reference, or null if the reference has no location.

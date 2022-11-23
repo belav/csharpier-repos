@@ -237,6 +237,8 @@ namespace System.Web.Http.Results
             return HttpStatusCode.Continue;
         }
 
-        private class FakeController : ApiController { }
+        private class FakeController : ApiController
+        {
+        }
     }
 }

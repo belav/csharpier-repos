@@ -783,9 +783,13 @@ namespace System.IO.Pipelines.Tests
 
         private class ThrowAfterZeroByteReadStream : MemoryStream
         {
-            public ThrowAfterZeroByteReadStream() { }
+            public ThrowAfterZeroByteReadStream()
+            {
+            }
 
-            public ThrowAfterZeroByteReadStream(byte[] buffer) : base(buffer) { }
+            public ThrowAfterZeroByteReadStream(byte[] buffer) : base(buffer)
+            {
+            }
 
             private bool _throwOnNextCallToRead;
 

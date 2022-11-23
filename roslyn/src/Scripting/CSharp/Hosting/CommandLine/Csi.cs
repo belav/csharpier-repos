@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
                 buildPaths,
                 null,
                 analyzerLoader
-            ) { }
+            )
+        {
+        }
 
         internal override Type Type => typeof(CSharpInteractiveCompiler);
 

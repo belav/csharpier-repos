@@ -22,6 +22,8 @@ namespace System.Threading
         }
 
         private ThreadStartException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

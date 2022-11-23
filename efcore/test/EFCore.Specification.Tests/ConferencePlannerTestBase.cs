@@ -738,10 +738,9 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
             nestedTestOperation3
         );
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     public abstract class ConferencePlannerFixtureBase
         : SharedStoreFixtureBase<ApplicationDbContext>

@@ -16,7 +16,9 @@ namespace System.Text
                 {
                     return Encoding.GetEncoding(charset);
                 }
-                catch { }
+                catch
+                {
+                }
             }
             return null;
         }

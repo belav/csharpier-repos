@@ -39,6 +39,8 @@ namespace Microsoft.CodeAnalysis.IntelliSense
                 listenerProvider,
                 AbstractTypeImportCompletionService.BatchUpdateCacheAsync,
                 threadingContext.DisposalToken
-            ) { }
+            )
+        {
+        }
     }
 }

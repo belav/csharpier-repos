@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             ExtractInterfaceDialog.TestAccessor
         >
     {
-        private ExtractInterfaceDialog_InProc() { }
+        private ExtractInterfaceDialog_InProc()
+        {
+        }
 
         public static ExtractInterfaceDialog_InProc Create() => new ExtractInterfaceDialog_InProc();
 

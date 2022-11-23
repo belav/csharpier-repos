@@ -344,7 +344,9 @@ namespace System.IO.Ports.Tests
             if (newLine)
             {
                 com2.Write(com1.NewLine);
-                while (bytesToWrite.Length + com1.NewLine.Length > com1.BytesToRead) { }
+                while (bytesToWrite.Length + com1.NewLine.Length > com1.BytesToRead)
+                {
+                }
             }
             else
             {

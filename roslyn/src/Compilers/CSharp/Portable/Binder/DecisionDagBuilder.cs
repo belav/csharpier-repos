@@ -2339,7 +2339,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             public static readonly DagStateEquivalence Instance = new DagStateEquivalence();
 
-            private DagStateEquivalence() { }
+            private DagStateEquivalence()
+            {
+            }
 
             public bool Equals(DagState? x, DagState? y)
             {
@@ -2453,7 +2455,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private abstract class Tests
         {
-            private Tests() { }
+            private Tests()
+            {
+            }
 
             /// <summary>
             /// Take the set of tests and split them into two, one for when the test has succeeded, and one for when the test has failed.
@@ -2917,7 +2921,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             public sealed class AndSequence : SequenceTests
             {
-                private AndSequence(ImmutableArray<Tests> remainingTests) : base(remainingTests) { }
+                private AndSequence(ImmutableArray<Tests> remainingTests) : base(remainingTests)
+                {
+                }
 
                 public override Tests Update(ArrayBuilder<Tests> remainingTests) =>
                     Create(remainingTests);
@@ -3004,7 +3010,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             public sealed class OrSequence : SequenceTests
             {
-                private OrSequence(ImmutableArray<Tests> remainingTests) : base(remainingTests) { }
+                private OrSequence(ImmutableArray<Tests> remainingTests) : base(remainingTests)
+                {
+                }
 
                 public override BoundDagTest ComputeSelectedTest() =>
                     this.RemainingTests[0].ComputeSelectedTest();

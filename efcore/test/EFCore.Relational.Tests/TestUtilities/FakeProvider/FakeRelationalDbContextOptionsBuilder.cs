@@ -10,5 +10,7 @@ public class FakeRelationalDbContextOptionsBuilder
     >
 {
     public FakeRelationalDbContextOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
-        : base(optionsBuilder) { }
+        : base(optionsBuilder)
+    {
+    }
 }

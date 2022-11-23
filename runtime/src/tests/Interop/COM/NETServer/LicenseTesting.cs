@@ -76,6 +76,8 @@ public class MockLicenseProvider : LicenseProvider
     {
         public override string LicenseKey => MockLicenseProvider.License ?? "__MOCK_LICENSE_KEY__";
 
-        public override void Dispose() { }
+        public override void Dispose()
+        {
+        }
     }
 }

@@ -335,7 +335,9 @@ public class ServiceProviderCacheTest
 
         public DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
-        public FakeDbContextOptionsExtension1() : this(new List<string>()) { }
+        public FakeDbContextOptionsExtension1() : this(new List<string>())
+        {
+        }
 
         public FakeDbContextOptionsExtension1(List<string> log)
         {
@@ -345,11 +347,15 @@ public class ServiceProviderCacheTest
         public virtual void ApplyServices(IServiceCollection services) =>
             _log.Add(GetType().ShortDisplayName());
 
-        public virtual void Validate(IDbContextOptions options) { }
+        public virtual void Validate(IDbContextOptions options)
+        {
+        }
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
+            {
+            }
 
             public override bool IsDatabaseProvider => false;
 
@@ -373,7 +379,9 @@ public class ServiceProviderCacheTest
 
         public DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
-        public FakeDbContextOptionsExtension2() : this(new List<string>()) { }
+        public FakeDbContextOptionsExtension2() : this(new List<string>())
+        {
+        }
 
         public FakeDbContextOptionsExtension2(List<string> log)
         {
@@ -383,11 +391,15 @@ public class ServiceProviderCacheTest
         public virtual void ApplyServices(IServiceCollection services) =>
             _log.Add(GetType().ShortDisplayName());
 
-        public virtual void Validate(IDbContextOptions options) { }
+        public virtual void Validate(IDbContextOptions options)
+        {
+        }
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
+            {
+            }
 
             public override bool IsDatabaseProvider => false;
 

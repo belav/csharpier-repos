@@ -11,7 +11,9 @@ namespace System.DirectoryServices.ActiveDirectory
         internal DirectoryEntryManager directoryEntryMgr = null!;
 
         #region constructors
-        protected ActiveDirectoryPartition() { }
+        protected ActiveDirectoryPartition()
+        {
+        }
 
         internal ActiveDirectoryPartition(DirectoryContext context, string name)
         {

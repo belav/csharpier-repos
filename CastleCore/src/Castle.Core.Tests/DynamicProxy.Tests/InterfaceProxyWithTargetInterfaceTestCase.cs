@@ -269,8 +269,12 @@ namespace Castle.DynamicProxy.Tests
             return (proxy as IProxyTargetAccessor).DynProxyGetTarget().GetType();
         }
 
-        private interface PrivateInterface { }
+        private interface PrivateInterface
+        {
+        }
 
-        private class PrivateClass : PrivateInterface { }
+        private class PrivateClass : PrivateInterface
+        {
+        }
     }
 }

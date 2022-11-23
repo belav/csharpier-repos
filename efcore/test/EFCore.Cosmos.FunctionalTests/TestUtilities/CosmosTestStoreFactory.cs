@@ -7,7 +7,9 @@ public class CosmosTestStoreFactory : ITestStoreFactory
 {
     public static CosmosTestStoreFactory Instance { get; } = new();
 
-    protected CosmosTestStoreFactory() { }
+    protected CosmosTestStoreFactory()
+    {
+    }
 
     public IServiceCollection AddProviderServices(IServiceCollection serviceCollection) =>
         serviceCollection

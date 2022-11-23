@@ -398,9 +398,13 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class SyndicationContentSubclass : SyndicationContent
         {
-            public SyndicationContentSubclass() { }
+            public SyndicationContentSubclass()
+            {
+            }
 
-            public SyndicationContentSubclass(SyndicationContentSubclass source) : base(source) { }
+            public SyndicationContentSubclass(SyndicationContentSubclass source) : base(source)
+            {
+            }
 
             public override string Type => "CustomType";
 

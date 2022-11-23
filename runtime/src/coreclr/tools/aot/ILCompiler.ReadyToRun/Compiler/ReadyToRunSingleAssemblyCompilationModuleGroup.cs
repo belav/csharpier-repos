@@ -19,7 +19,9 @@ namespace ILCompiler
 
         public ReadyToRunSingleAssemblyCompilationModuleGroup(
             ReadyToRunCompilationModuleGroupConfig config
-        ) : base(config) { }
+        ) : base(config)
+        {
+        }
 
         public sealed override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {

@@ -166,7 +166,9 @@ namespace System.Reflection.Metadata
                 _current = default(ImportDefinition);
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
         }
     }
 }

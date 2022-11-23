@@ -15,7 +15,9 @@ namespace Internal.TypeSystem
             MissingAssemblyException1,
         }
 
-        private ResolutionFailure() { }
+        private ResolutionFailure()
+        {
+        }
 
         private FailureType _failureType;
         private string _namespace;

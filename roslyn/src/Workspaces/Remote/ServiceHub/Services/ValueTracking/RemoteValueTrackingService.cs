@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteValueTrackingService(ServiceConstructionArguments arguments) : base(arguments)
-        { }
+        {
+        }
 
         public ValueTask<ImmutableArray<SerializableValueTrackedItem>> TrackValueSourceAsync(
             Checksum solutionChecksum,

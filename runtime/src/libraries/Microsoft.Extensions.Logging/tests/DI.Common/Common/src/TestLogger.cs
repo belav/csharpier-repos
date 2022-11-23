@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.Logging.Testing
         private readonly Func<LogLevel, bool> _filter;
 
         public TestLogger(string name, ITestSink sink, bool enabled)
-            : this(name, sink, _ => enabled) { }
+            : this(name, sink, _ => enabled)
+        {
+        }
 
         public TestLogger(string name, ITestSink sink, Func<LogLevel, bool> filter)
         {

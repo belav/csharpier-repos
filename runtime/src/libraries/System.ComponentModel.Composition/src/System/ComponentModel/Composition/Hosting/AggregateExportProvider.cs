@@ -80,7 +80,9 @@ namespace System.ComponentModel.Composition.Hosting
         ///     </para>
         /// </remarks>
         public AggregateExportProvider(IEnumerable<ExportProvider>? providers)
-            : this(providers?.AsArray()) { }
+            : this(providers?.AsArray())
+        {
+        }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

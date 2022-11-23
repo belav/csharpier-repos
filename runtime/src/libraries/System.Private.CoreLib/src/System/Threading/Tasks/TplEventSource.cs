@@ -55,7 +55,9 @@ namespace System.Threading.Tasks
 
         // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating the default constructor
         // as you can't make a constructor partial.
-        private TplEventSource(int _) { }
+        private TplEventSource(int _)
+        {
+        }
 
         /// <summary>Configured behavior of a task wait operation.</summary>
         public enum TaskWaitBehavior : int

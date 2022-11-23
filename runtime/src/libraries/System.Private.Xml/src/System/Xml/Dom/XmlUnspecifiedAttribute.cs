@@ -12,7 +12,9 @@ namespace System.Xml
             string localName,
             string? namespaceURI,
             XmlDocument doc
-        ) : base(prefix, localName, namespaceURI, doc) { }
+        ) : base(prefix, localName, namespaceURI, doc)
+        {
+        }
 
         public override bool Specified
         {

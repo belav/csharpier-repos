@@ -5,7 +5,9 @@ using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
 {
-    public class MockEndPoint : EndPoint { }
+    public class MockEndPoint : EndPoint
+    {
+    }
 
     public static class EndPointTest
     {

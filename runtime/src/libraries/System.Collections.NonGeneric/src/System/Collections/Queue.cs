@@ -35,12 +35,16 @@ namespace System.Collections
 
         // Creates a queue with room for capacity objects. The default initial
         // capacity and grow factor are used.
-        public Queue() : this(32, (float)2.0) { }
+        public Queue() : this(32, (float)2.0)
+        {
+        }
 
         // Creates a queue with room for capacity objects. The default grow factor
         // is used.
         //
-        public Queue(int capacity) : this(capacity, (float)2.0) { }
+        public Queue(int capacity) : this(capacity, (float)2.0)
+        {
+        }
 
         // Creates a queue with room for capacity objects. When full, the new
         // capacity is set to the old capacity * growFactor.

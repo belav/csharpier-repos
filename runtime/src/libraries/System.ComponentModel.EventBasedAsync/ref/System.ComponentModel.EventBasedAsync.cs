@@ -9,7 +9,8 @@ namespace System.ComponentModel
     public partial class AsyncCompletedEventArgs : System.EventArgs
     {
         public AsyncCompletedEventArgs(System.Exception? error, bool cancelled, object? userState)
-        { }
+        {
+        }
 
         public bool Cancelled
         {
@@ -24,7 +25,9 @@ namespace System.ComponentModel
             get { throw null; }
         }
 
-        protected void RaiseExceptionIfNecessary() { }
+        protected void RaiseExceptionIfNecessary()
+        {
+        }
     }
 
     public delegate void AsyncCompletedEventHandler(
@@ -34,7 +37,9 @@ namespace System.ComponentModel
 
     public sealed partial class AsyncOperation
     {
-        internal AsyncOperation() { }
+        internal AsyncOperation()
+        {
+        }
 
         public System.Threading.SynchronizationContext SynchronizationContext
         {
@@ -45,13 +50,21 @@ namespace System.ComponentModel
             get { throw null; }
         }
 
-        ~AsyncOperation() { }
+        ~AsyncOperation()
+        {
+        }
 
-        public void OperationCompleted() { }
+        public void OperationCompleted()
+        {
+        }
 
-        public void Post(System.Threading.SendOrPostCallback d, object? arg) { }
+        public void Post(System.Threading.SendOrPostCallback d, object? arg)
+        {
+        }
 
-        public void PostOperationCompleted(System.Threading.SendOrPostCallback d, object? arg) { }
+        public void PostOperationCompleted(System.Threading.SendOrPostCallback d, object? arg)
+        {
+        }
     }
 
     public static partial class AsyncOperationManager
@@ -62,7 +75,9 @@ namespace System.ComponentModel
         public static System.Threading.SynchronizationContext SynchronizationContext
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static System.ComponentModel.AsyncOperation CreateOperation(
@@ -75,7 +90,9 @@ namespace System.ComponentModel
 
     public partial class BackgroundWorker : System.ComponentModel.Component
     {
-        public BackgroundWorker() { }
+        public BackgroundWorker()
+        {
+        }
 
         public bool CancellationPending
         {
@@ -88,55 +105,89 @@ namespace System.ComponentModel
         public bool WorkerReportsProgress
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool WorkerSupportsCancellation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.ComponentModel.DoWorkEventHandler? DoWork
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.ComponentModel.ProgressChangedEventHandler? ProgressChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.ComponentModel.RunWorkerCompletedEventHandler? RunWorkerCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void CancelAsync() { }
+        public void CancelAsync()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected virtual void OnDoWork(System.ComponentModel.DoWorkEventArgs e) { }
+        protected virtual void OnDoWork(System.ComponentModel.DoWorkEventArgs e)
+        {
+        }
 
-        protected virtual void OnProgressChanged(
-            System.ComponentModel.ProgressChangedEventArgs e
-        ) { }
+        protected virtual void OnProgressChanged(System.ComponentModel.ProgressChangedEventArgs e)
+        {
+        }
 
         protected virtual void OnRunWorkerCompleted(
             System.ComponentModel.RunWorkerCompletedEventArgs e
-        ) { }
+        )
+        {
+        }
 
-        public void ReportProgress(int percentProgress) { }
+        public void ReportProgress(int percentProgress)
+        {
+        }
 
-        public void ReportProgress(int percentProgress, object? userState) { }
+        public void ReportProgress(int percentProgress, object? userState)
+        {
+        }
 
-        public void RunWorkerAsync() { }
+        public void RunWorkerAsync()
+        {
+        }
 
-        public void RunWorkerAsync(object? argument) { }
+        public void RunWorkerAsync(object? argument)
+        {
+        }
     }
 
     public partial class DoWorkEventArgs : System.ComponentModel.CancelEventArgs
     {
-        public DoWorkEventArgs(object? argument) { }
+        public DoWorkEventArgs(object? argument)
+        {
+        }
 
         public object? Argument
         {
@@ -145,7 +196,9 @@ namespace System.ComponentModel
         public object? Result
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -156,7 +209,9 @@ namespace System.ComponentModel
 
     public partial class ProgressChangedEventArgs : System.EventArgs
     {
-        public ProgressChangedEventArgs(int progressPercentage, object? userState) { }
+        public ProgressChangedEventArgs(int progressPercentage, object? userState)
+        {
+        }
 
         public int ProgressPercentage
         {
@@ -176,7 +231,9 @@ namespace System.ComponentModel
     public partial class RunWorkerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         public RunWorkerCompletedEventArgs(object? result, System.Exception? error, bool cancelled)
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public object? Result
         {

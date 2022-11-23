@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;

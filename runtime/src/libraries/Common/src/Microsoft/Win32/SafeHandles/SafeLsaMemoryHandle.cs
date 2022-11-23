@@ -8,7 +8,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeLsaMemoryHandle : SafeBuffer
     {
-        public SafeLsaMemoryHandle() : base(true) { }
+        public SafeLsaMemoryHandle() : base(true)
+        {
+        }
 
         // 0 is an Invalid Handle
         internal SafeLsaMemoryHandle(IntPtr handle) : base(true)

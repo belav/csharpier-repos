@@ -78,7 +78,9 @@ namespace System
 
         private static Encoding? s_outputEncoding;
 
-        internal static void EnsureConsoleInitialized() { }
+        internal static void EnsureConsoleInitialized()
+        {
+        }
 
         public static Stream OpenStandardInput() => throw new PlatformNotSupportedException();
 

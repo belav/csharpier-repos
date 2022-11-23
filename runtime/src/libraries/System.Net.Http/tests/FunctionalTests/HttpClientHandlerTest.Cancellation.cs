@@ -19,7 +19,9 @@ namespace System.Net.Http.Functional.Tests
         : HttpClientHandler_Cancellation_Test
     {
         protected HttpClientHandler_Http11_Cancellation_Test(ITestOutputHelper output)
-            : base(output) { }
+            : base(output)
+        {
+        }
 
         [OuterLoop]
         [Fact]

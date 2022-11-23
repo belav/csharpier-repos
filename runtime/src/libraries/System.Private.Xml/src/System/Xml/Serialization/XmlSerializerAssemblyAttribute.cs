@@ -17,9 +17,13 @@ namespace System.Xml.Serialization
         private string? _assemblyName;
         private string? _codeBase;
 
-        public XmlSerializerAssemblyAttribute() : this(null, null) { }
+        public XmlSerializerAssemblyAttribute() : this(null, null)
+        {
+        }
 
-        public XmlSerializerAssemblyAttribute(string? assemblyName) : this(assemblyName, null) { }
+        public XmlSerializerAssemblyAttribute(string? assemblyName) : this(assemblyName, null)
+        {
+        }
 
         public XmlSerializerAssemblyAttribute(string? assemblyName, string? codeBase)
         {

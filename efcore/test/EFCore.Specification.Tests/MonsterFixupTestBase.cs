@@ -1526,7 +1526,9 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
             where TProductPhoto : class, IProductPhoto
             where TProductReview : class, IProductReview
             where TComputerDetail : class, IComputerDetail
-            where TDimensions : class, IDimensions { }
+            where TDimensions : class, IDimensions
+        {
+        }
     }
 
     public abstract class MonsterFixupSnapshotFixtureBase : MonsterFixupFixtureBase

@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGoToDefinitionSymbolService() { }
+        public CSharpGoToDefinitionSymbolService()
+        {
+        }
 
         protected override ISymbol FindRelatedExplicitlyDeclaredSymbol(
             ISymbol symbol,

@@ -10,7 +10,9 @@ public abstract class ProxyGraphUpdatesSqlServerTest
         where TFixture : ProxyGraphUpdatesSqlServerTestBase<TFixture>.ProxyGraphUpdatesSqlServerFixtureBase,
             new()
     {
-        protected ProxyGraphUpdatesSqlServerTestBase(TFixture fixture) : base(fixture) { }
+        protected ProxyGraphUpdatesSqlServerTestBase(TFixture fixture) : base(fixture)
+        {
+        }
 
         protected override void UseTransaction(
             DatabaseFacade facade,
@@ -31,7 +33,8 @@ public abstract class ProxyGraphUpdatesSqlServerTest
         : ProxyGraphUpdatesSqlServerTestBase<LazyLoading.ProxyGraphUpdatesWithLazyLoadingSqlServerFixture>
     {
         public LazyLoading(ProxyGraphUpdatesWithLazyLoadingSqlServerFixture fixture) : base(fixture)
-        { }
+        {
+        }
 
         protected override bool DoesLazyLoading => true;
 
@@ -62,10 +65,14 @@ public abstract class ProxyGraphUpdatesSqlServerTest
         : ProxyGraphUpdatesSqlServerTestBase<ChangeTracking.ProxyGraphUpdatesWithChangeTrackingSqlServerFixture>
     {
         public ChangeTracking(ProxyGraphUpdatesWithChangeTrackingSqlServerFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         // Needs lazy loading
-        public override void Save_two_entity_cycle_with_lazy_loading() { }
+        public override void Save_two_entity_cycle_with_lazy_loading()
+        {
+        }
 
         protected override bool DoesLazyLoading => false;
 
@@ -97,7 +104,9 @@ public abstract class ProxyGraphUpdatesSqlServerTest
     {
         public ChangeTrackingAndLazyLoading(
             ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqlServerFixture fixture
-        ) : base(fixture) { }
+        ) : base(fixture)
+        {
+        }
 
         protected override bool DoesLazyLoading => true;
 

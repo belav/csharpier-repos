@@ -28,7 +28,12 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The <paramref name="hostBuilder"/> instance for chaining.</returns>
         public static IHostBuilder UseWindowsService(this IHostBuilder hostBuilder)
         {
-            return UseWindowsService(hostBuilder, _ => { });
+            return UseWindowsService(
+                hostBuilder,
+                _ =>
+                {
+                }
+            );
         }
 
         /// <summary>
@@ -77,7 +82,12 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The <paramref name="services"/> instance for chaining.</returns>
         public static IServiceCollection AddWindowsService(this IServiceCollection services)
         {
-            return AddWindowsService(services, _ => { });
+            return AddWindowsService(
+                services,
+                _ =>
+                {
+                }
+            );
         }
 
         /// <summary>

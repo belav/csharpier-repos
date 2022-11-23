@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.Remote
 #pragma warning restore
 #endif
         public RemoteProcessTelemetryService(ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Remote API. Initializes ServiceHub process global state.

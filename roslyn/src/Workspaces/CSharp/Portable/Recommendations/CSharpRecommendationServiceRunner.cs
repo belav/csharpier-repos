@@ -28,7 +28,9 @@ internal partial class CSharpRecommendationService
             CSharpSyntaxContext context,
             bool filterOutOfScopeLocals,
             CancellationToken cancellationToken
-        ) : base(context, filterOutOfScopeLocals, cancellationToken) { }
+        ) : base(context, filterOutOfScopeLocals, cancellationToken)
+        {
+        }
 
         public override RecommendedSymbols GetRecommendedSymbols()
         {

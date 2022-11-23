@@ -442,7 +442,9 @@ public class ProjectionBuilder : IProjectionBuilder
         )
         {
             public SubQueryPath(MemberProjection[] members, LambdaExpression letExpression)
-                : this(members, letExpression, Default(letExpression.Body.Type)) { }
+                : this(members, letExpression, Default(letExpression.Body.Type))
+            {
+            }
 
             public Expression GetSourceExpression(Expression parameter)
             {
@@ -557,11 +559,15 @@ public class LetPropertyMaps
     public virtual Expression GetSubQueryMarker(LambdaExpression letExpression) =>
         letExpression.Body;
 
-    public virtual void Push(MemberProjection memberProjection) { }
+    public virtual void Push(MemberProjection memberProjection)
+    {
+    }
 
     public virtual MemberPath GetCurrentPath() => MemberPath.Empty;
 
-    public virtual void Pop() { }
+    public virtual void Pop()
+    {
+    }
 
     public virtual int Count => 0;
     public IGlobalConfiguration Configuration { get; }
@@ -584,7 +590,9 @@ public readonly record struct QueryExpressions(
 )
 {
     public QueryExpressions(Expression projection, ParameterExpression parameter)
-        : this(projection == null ? null : Lambda(projection, parameter)) { }
+        : this(projection == null ? null : Lambda(projection, parameter))
+    {
+    }
 
     public bool Empty => Projection == null;
 

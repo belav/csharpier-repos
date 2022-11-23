@@ -45,14 +45,18 @@ public static class SafeHandleZeroOrMinusOneIsInvalidTests
 
     private class TestSafeHandleMinusOneIsInvalid : SafeHandleMinusOneIsInvalid
     {
-        public TestSafeHandleMinusOneIsInvalid() : base(true) { }
+        public TestSafeHandleMinusOneIsInvalid() : base(true)
+        {
+        }
 
         protected override bool ReleaseHandle() => true;
     }
 
     private class TestSafeHandleZeroOrMinusOneIsInvalid : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public TestSafeHandleZeroOrMinusOneIsInvalid() : base(true) { }
+        public TestSafeHandleZeroOrMinusOneIsInvalid() : base(true)
+        {
+        }
 
         protected override bool ReleaseHandle() => true;
     }

@@ -47,7 +47,9 @@ public class ParallelCrash
     {
         int threadIndex = Interlocked.Increment(ref s_runningThreads);
         string failFastMessage = string.Format("Parallel crash in thread {0}!\n", threadIndex);
-        while (s_runningThreads != ThreadCount) { }
+        while (s_runningThreads != ThreadCount)
+        {
+        }
         // Now all the worker threads should be running, fire!
         if (s_crashWorkerThreads)
         {

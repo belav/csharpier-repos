@@ -82,7 +82,9 @@ public class SqlServerQueryTriggersTest
 
     protected class QueryTriggersContext : PoolableDbContext
     {
-        public QueryTriggersContext(DbContextOptions options) : base(options) { }
+        public QueryTriggersContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public virtual DbSet<Product> Products { get; set; }
 

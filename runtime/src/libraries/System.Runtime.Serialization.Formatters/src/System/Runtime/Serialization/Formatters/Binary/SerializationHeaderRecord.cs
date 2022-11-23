@@ -18,7 +18,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int _majorVersion;
         internal int _minorVersion;
 
-        internal SerializationHeaderRecord() { }
+        internal SerializationHeaderRecord()
+        {
+        }
 
         internal SerializationHeaderRecord(
             BinaryHeaderEnum binaryHeaderEnum,

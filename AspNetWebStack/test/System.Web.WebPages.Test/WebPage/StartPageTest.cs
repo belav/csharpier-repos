@@ -404,9 +404,13 @@ namespace System.Web.WebPages.Test
                 var init = new MockInitPage()
                 {
                     VirtualPath = "~/_pagestart.cshtml",
-                    ExecuteAction = p => { },
+                    ExecuteAction = p =>
+                    {
+                    },
                 };
-                var page = Utils.CreatePage(p => { });
+                var page = Utils.CreatePage(p =>
+                {
+                });
 
                 Utils.AssignObjectFactoriesAndDisplayModeProvider(page, init);
 

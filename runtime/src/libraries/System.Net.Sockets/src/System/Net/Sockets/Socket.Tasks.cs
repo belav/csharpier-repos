@@ -1086,7 +1086,8 @@ namespace System.Net.Sockets
             internal bool _wrapExceptionsInIOExceptions;
 
             internal TaskSocketAsyncEventArgs() : base(unsafeSuppressExecutionContextFlow: true) // avoid flowing context at lower layers as we only expose Task, which handles it
-            { }
+            {
+            }
 
             /// <summary>Gets the builder's task with appropriate synchronization.</summary>
             internal AsyncTaskMethodBuilder<TResult> GetCompletionResponsibility(

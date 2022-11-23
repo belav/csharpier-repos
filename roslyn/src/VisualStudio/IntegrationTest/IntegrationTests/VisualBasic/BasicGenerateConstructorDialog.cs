@@ -22,7 +22,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGenerateConstructorDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGenerateConstructorDialog)) { }
+            : base(instanceFactory, nameof(BasicGenerateConstructorDialog))
+        {
+        }
 
         [WpfFact]
         public void VerifyCodeRefactoringOfferedAndCanceled()

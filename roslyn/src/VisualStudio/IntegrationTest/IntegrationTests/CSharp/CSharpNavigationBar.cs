@@ -36,7 +36,9 @@ struct S
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpNavigationBar(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpNavigationBar)) { }
+            : base(instanceFactory, nameof(CSharpNavigationBar))
+        {
+        }
 
         public override async Task DisposeAsync()
         {

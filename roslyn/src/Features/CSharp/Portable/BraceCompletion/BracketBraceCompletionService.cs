@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public BracketBraceCompletionService() { }
+        public BracketBraceCompletionService()
+        {
+        }
 
         protected override char OpeningBrace => Bracket.OpenCharacter;
 

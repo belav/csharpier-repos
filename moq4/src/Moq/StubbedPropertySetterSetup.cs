@@ -41,6 +41,8 @@ namespace Moq
             this.setter.Invoke(invocation.Arguments[0]);
         }
 
-        protected override void VerifySelf() { }
+        protected override void VerifySelf()
+        {
+        }
     }
 }

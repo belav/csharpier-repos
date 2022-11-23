@@ -76,13 +76,17 @@ namespace System.ComponentModel.Tests
         public string Name
         {
             get { return nameof(DescriptorTestComponent); }
-            set { }
+            set
+            {
+            }
         }
 
         public ISite Site
         {
             get { return this; }
-            set { }
+            set
+            {
+            }
         }
     }
 }

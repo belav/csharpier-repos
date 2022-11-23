@@ -20,7 +20,9 @@ namespace Microsoft.Data.Sqlite.Utilities
             {
                 assembly = Assembly.Load(new AssemblyName("SQLitePCLRaw.batteries_v2"));
             }
-            catch { }
+            catch
+            {
+            }
 
             if (assembly != null)
             {

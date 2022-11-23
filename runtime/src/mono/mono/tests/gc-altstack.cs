@@ -15,7 +15,9 @@ public class Tests
             {
                 o.ToString();
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 

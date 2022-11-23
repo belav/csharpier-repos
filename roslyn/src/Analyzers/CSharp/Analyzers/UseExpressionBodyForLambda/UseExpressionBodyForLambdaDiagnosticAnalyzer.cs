@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                         s_useBlockBodyForLambda,
                         CSharpCodeStyleOptions.PreferExpressionBodiedLambdas
                     )
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

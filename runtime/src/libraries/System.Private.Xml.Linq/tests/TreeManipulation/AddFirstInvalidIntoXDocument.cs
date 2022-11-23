@@ -69,7 +69,9 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         public void InvalidAddIntoXDocument3()
@@ -93,7 +95,9 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         public void InvalidAddIntoXDocument5()
@@ -124,7 +128,9 @@ namespace XLinqTests
                     }
                     TestLog.Compare(false, "Exception expected");
                 }
-                catch (ArgumentException) { }
+                catch (ArgumentException)
+                {
+                }
             }
         }
     }

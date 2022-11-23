@@ -45,7 +45,9 @@ namespace System.Reflection.Metadata
                 MetadataReaderOptions.Default,
                 utf8Decoder: null,
                 memoryOwner: null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a metadata reader from the metadata stored at the given memory location.
@@ -56,7 +58,9 @@ namespace System.Reflection.Metadata
         /// metadata from a PE image.
         /// </remarks>
         public unsafe MetadataReader(byte* metadata, int length, MetadataReaderOptions options)
-            : this(metadata, length, options, utf8Decoder: null, memoryOwner: null) { }
+            : this(metadata, length, options, utf8Decoder: null, memoryOwner: null)
+        {
+        }
 
         /// <summary>
         /// Creates a metadata reader from the metadata stored at the given memory location.
@@ -76,7 +80,9 @@ namespace System.Reflection.Metadata
             int length,
             MetadataReaderOptions options,
             MetadataStringDecoder? utf8Decoder
-        ) : this(metadata, length, options, utf8Decoder, memoryOwner: null) { }
+        ) : this(metadata, length, options, utf8Decoder, memoryOwner: null)
+        {
+        }
 
         internal unsafe MetadataReader(
             byte* metadata,

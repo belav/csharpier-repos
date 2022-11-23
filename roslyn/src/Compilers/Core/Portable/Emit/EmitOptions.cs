@@ -142,7 +142,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 tolerateErrors,
                 includePrivateMembers,
                 instrumentationKinds: ImmutableArray<InstrumentationKind>.Empty
-            ) { }
+            )
+        {
+        }
 
         // 2.7 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public EmitOptions(
@@ -173,7 +175,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 includePrivateMembers,
                 instrumentationKinds,
                 pdbChecksumAlgorithm: null
-            ) { }
+            )
+        {
+        }
 
         // 3.7 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public EmitOptions(
@@ -207,7 +211,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 pdbChecksumAlgorithm,
                 defaultSourceFileEncoding: null,
                 fallbackSourceFileEncoding: null
-            ) { }
+            )
+        {
+        }
 
         public EmitOptions(
             bool metadataOnly = false,
@@ -262,7 +268,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 other.PdbChecksumAlgorithm,
                 other.DefaultSourceFileEncoding,
                 other.FallbackSourceFileEncoding
-            ) { }
+            )
+        {
+        }
 
         public override bool Equals(object? obj)
         {

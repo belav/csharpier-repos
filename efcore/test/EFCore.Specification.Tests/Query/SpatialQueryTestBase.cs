@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : SpatialQueryFixtureBase, new()
 {
-    protected SpatialQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected SpatialQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     protected virtual bool AssertDistances => true;
 

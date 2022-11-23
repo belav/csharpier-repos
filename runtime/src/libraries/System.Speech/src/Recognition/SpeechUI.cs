@@ -7,7 +7,9 @@ namespace System.Speech.Recognition
 {
     public class SpeechUI
     {
-        internal SpeechUI() { }
+        internal SpeechUI()
+        {
+        }
 
         public static bool SendTextFeedback(
             RecognitionResult result,

@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
     public partial class RemoveUnnecessaryCastTests_AsTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveUnnecessaryCastTests_AsTests(ITestOutputHelper logger) : base(logger) { }
+        public RemoveUnnecessaryCastTests_AsTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

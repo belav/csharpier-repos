@@ -15,7 +15,9 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerConnectTest : ConnectTest
     {
-        public InvokerConnectTest(ITestOutputHelper output) : base(output) { }
+        public InvokerConnectTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseCustomInvoker => true;
 
@@ -51,7 +53,9 @@ namespace System.Net.WebSockets.Client.Tests
             yield return Throw(options => options.Cookies = new CookieContainer());
 
             // We allow no proxy or the default proxy to be used
-            yield return NoThrow(options => { });
+            yield return NoThrow(options =>
+            {
+            });
             yield return NoThrow(options => options.Proxy = null);
 
             // These options don't conflict with the custom invoker
@@ -125,14 +129,18 @@ namespace System.Net.WebSockets.Client.Tests
 
     public sealed class HttpClientConnectTest : ConnectTest
     {
-        public HttpClientConnectTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientConnectTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override bool UseHttpClient => true;
     }
 
     public class ConnectTest : ClientWebSocketTestBase
     {
-        public ConnectTest(ITestOutputHelper output) : base(output) { }
+        public ConnectTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/1895")]
         [OuterLoop(
@@ -540,7 +548,9 @@ namespace System.Net.WebSockets.Client.Tests
                         });
                     }
                     // Ignore IO exception on server as there are race conditions when client is cancelling.
-                    catch (IOException) { }
+                    catch (IOException)
+                    {
+                    }
                 },
                 new LoopbackServer.Options { WebSocketEndpoint = true }
             );

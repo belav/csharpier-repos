@@ -18,7 +18,9 @@ public class FileMultipartSection
     /// <param name="section">The section from which to create the <see cref="FileMultipartSection"/></param>
     /// <remarks>Reparses the content disposition header</remarks>
     public FileMultipartSection(MultipartSection section)
-        : this(section, section.GetContentDispositionHeader()) { }
+        : this(section, section.GetContentDispositionHeader())
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of the <see cref="FileMultipartSection"/> class

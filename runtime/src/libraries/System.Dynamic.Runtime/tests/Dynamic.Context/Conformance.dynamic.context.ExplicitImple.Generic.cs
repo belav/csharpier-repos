@@ -180,9 +180,13 @@ namespace Dynamic.Tests
         public int Bar() => 1;
     }
 
-    public class BaseClass { }
+    public class BaseClass
+    {
+    }
 
-    public class SubClass : BaseClass { }
+    public class SubClass : BaseClass
+    {
+    }
 
     public interface GenericInInterface<in T>
     {

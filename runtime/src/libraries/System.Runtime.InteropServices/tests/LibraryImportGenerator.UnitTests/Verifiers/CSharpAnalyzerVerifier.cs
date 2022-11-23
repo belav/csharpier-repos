@@ -38,6 +38,8 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
 
         // Code fix tests support both analyzer and code fix testing. This test class is derived from the code fix test
         // to avoid the need to maintain duplicate copies of the customization work.
-        internal class Test : CSharpCodeFixVerifier<TAnalyzer, EmptyCodeFixProvider>.Test { }
+        internal class Test : CSharpCodeFixVerifier<TAnalyzer, EmptyCodeFixProvider>.Test
+        {
+        }
     }
 }

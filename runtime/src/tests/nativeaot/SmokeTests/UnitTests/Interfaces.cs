@@ -1028,9 +1028,13 @@ public class Interfaces
         return Pass;
     }
 
-    class SpecialArrayBase { }
+    class SpecialArrayBase
+    {
+    }
 
-    class SpecialArrayDerived : SpecialArrayBase { }
+    class SpecialArrayDerived : SpecialArrayBase
+    {
+    }
 
     // NOTE: ICollection is not a variant interface, but arrays can cast with it as if it was
     static ICollection<SpecialArrayBase> s_specialDerived = new SpecialArrayDerived[42];
@@ -1091,9 +1095,13 @@ public class Interfaces
             int IFoo.GetNumber() => 43;
         }
 
-        class Foo : IFoo { }
+        class Foo : IFoo
+        {
+        }
 
-        class Bar : IBar { }
+        class Bar : IBar
+        {
+        }
 
         class Baz : IFoo
         {
@@ -1105,14 +1113,18 @@ public class Interfaces
             Type GetInterfaceType() => typeof(IFoo<T>);
         }
 
-        class Foo<T> : IFoo<T> { }
+        class Foo<T> : IFoo<T>
+        {
+        }
 
         class Base : IFoo
         {
             int IFoo.GetNumber() => 100;
         }
 
-        class Derived : Base, IBar { }
+        class Derived : Base, IBar
+        {
+        }
 
         public static void Run()
         {
@@ -1182,7 +1194,9 @@ public class Interfaces
             public string GetInnerValue() => InnerValue;
         }
 
-        class Derived<T, U> : Base<T>, IFace<U> { }
+        class Derived<T, U> : Base<T>, IFace<U>
+        {
+        }
 
         struct Yadda : IFace<object>, IInnerValueGrabber
         {
@@ -1228,7 +1242,9 @@ public class Interfaces
 
     class TestCovariantReturns
     {
-        interface IFoo { }
+        interface IFoo
+        {
+        }
 
         class Foo : IFoo
         {
@@ -1330,11 +1346,17 @@ public class Interfaces
         static IEnumerable<Other> s_others =
             (IEnumerable<Other>)(object)new This[3] { (This)33, (This)66, (This)1 };
 
-        enum This : sbyte { }
+        enum This : sbyte
+        {
+        }
 
-        enum Other : sbyte { }
+        enum Other : sbyte
+        {
+        }
 
-        sealed class MySealedClass { }
+        sealed class MySealedClass
+        {
+        }
 
         interface IContravariantInterface<in T>
         {
@@ -1416,7 +1438,9 @@ public class Interfaces
         }
 
         [DynamicInterfaceCastableImplementation]
-        interface IInterfaceIndirectCastableImpl : IInterfaceImpl { }
+        interface IInterfaceIndirectCastableImpl : IInterfaceImpl
+        {
+        }
 
         public static void Run()
         {
@@ -1473,11 +1497,17 @@ public class Interfaces
 
         static object CallFrob<T>() where T : IFoo => T.Frob();
 
-        class Gen<T> { }
+        class Gen<T>
+        {
+        }
 
-        struct Struct1 { }
+        struct Struct1
+        {
+        }
 
-        struct Struct2 { }
+        struct Struct2
+        {
+        }
 
         public static void Run()
         {
@@ -1584,13 +1614,21 @@ public class Interfaces
                 $"GenericVariantWithHiddenDerived.WhichMethod({typeof(T).Name})";
         }
 
-        struct Struct { }
+        struct Struct
+        {
+        }
 
-        class Base { }
+        class Base
+        {
+        }
 
-        class Mid : Base { }
+        class Mid : Base
+        {
+        }
 
-        class Derived : Mid { }
+        class Derived : Mid
+        {
+        }
 
         static void TestSimpleInterface<T>(string expected) where T : ISimple
         {
@@ -1725,14 +1763,18 @@ public class Interfaces
             static virtual string GetCookie() => nameof(IFoo);
         }
 
-        struct StructFooWithDefault : IFoo { }
+        struct StructFooWithDefault : IFoo
+        {
+        }
 
         struct StructFooWithExplicit : IFoo
         {
             public static string GetCookie() => nameof(StructFooWithExplicit);
         }
 
-        class ClassFooWithDefault : IFoo { }
+        class ClassFooWithDefault : IFoo
+        {
+        }
 
         class ClassFooWithExplicit : IFoo
         {
@@ -1744,21 +1786,27 @@ public class Interfaces
             static virtual string GetCookie() => $"IFoo<{typeof(T).Name}>";
         }
 
-        struct StructFooWithDefault<T> : IFoo<T> { }
+        struct StructFooWithDefault<T> : IFoo<T>
+        {
+        }
 
         struct StructFooWithExplicit<T> : IFoo<T>
         {
             public static string GetCookie() => $"StructFooWithExplicit<{typeof(T).Name}>";
         }
 
-        class ClassFooWithDefault<T> : IFoo<T> { }
+        class ClassFooWithDefault<T> : IFoo<T>
+        {
+        }
 
         class ClassFooWithExplicit<T> : IFoo<T>
         {
             public static string GetCookie() => $"ClassFooWithExplicit<{typeof(T).Name}>";
         }
 
-        class Atom { }
+        class Atom
+        {
+        }
 
         static string GetCookie<T>() where T : IFoo => T.GetCookie();
 
@@ -1888,7 +1936,9 @@ public class Interfaces
             public static (int, Type) CallDefault() => FrobCaller<Foo<T>, T>.CallDefault();
         }
 
-        class Atom { }
+        class Atom
+        {
+        }
 
         static Type s_atomType = typeof(Atom);
 
@@ -1954,9 +2004,13 @@ public class Interfaces
             public static (int, Type) CallDefault() => T.DefaultImplemented();
         }
 
-        class AtomBase { }
+        class AtomBase
+        {
+        }
 
-        class Atom : AtomBase { }
+        class Atom : AtomBase
+        {
+        }
 
         static Type s_atomType = typeof(Atom);
         static Type s_atomBaseType = typeof(AtomBase);
@@ -2008,9 +2062,13 @@ public class Interfaces
 
     class TestStaticDefaultMethodAmbiguity
     {
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
         interface IFoo<T>
         {
@@ -2022,7 +2080,9 @@ public class Interfaces
             static (Type, Type) IFoo<U>.DisambiguateMe() => (typeof(T), typeof(U));
         }
 
-        struct GenericStruct<T, U> : IBar<T[], U> { }
+        struct GenericStruct<T, U> : IBar<T[], U>
+        {
+        }
 
         static (Type, Type) CallTheCall<T, U>() where T : IFoo<U> => T.DisambiguateMe();
 
@@ -2112,9 +2172,13 @@ public class Interfaces
             static int IFoo.GetCookie(int val) => 1234 + val;
         }
 
-        class SimpleClass : IBar { }
+        class SimpleClass : IBar
+        {
+        }
 
-        struct SimpleStruct : IBar { }
+        struct SimpleStruct : IBar
+        {
+        }
 
         static int Call<T>(int val) where T : IFoo => T.GetCookie(val);
 
@@ -2149,9 +2213,13 @@ public class Interfaces
             static (int, Type) IFoo.GetCookie(int val) => (1234 + val, typeof(IBar<T>));
         }
 
-        class SimpleClass : IBar<Atom1> { }
+        class SimpleClass : IBar<Atom1>
+        {
+        }
 
-        struct SimpleStruct : IBar<Atom2> { }
+        struct SimpleStruct : IBar<Atom2>
+        {
+        }
 
         static (int, Type) Call<T>(int val) where T : IFoo => T.GetCookie(val);
 
@@ -2161,9 +2229,13 @@ public class Interfaces
             return del(val);
         }
 
-        class Atom1 { }
+        class Atom1
+        {
+        }
 
-        class Atom2 { }
+        class Atom2
+        {
+        }
 
         public static void Run()
         {

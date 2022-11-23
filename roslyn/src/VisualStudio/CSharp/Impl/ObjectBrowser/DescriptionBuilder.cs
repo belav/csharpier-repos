@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
             ObjectBrowserLibraryManager libraryManager,
             ObjectListItem listItem,
             Project project
-        ) : base(description, libraryManager, listItem, project) { }
+        ) : base(description, libraryManager, listItem, project)
+        {
+        }
 
         protected override void BuildNamespaceDeclaration(
             INamespaceSymbol namespaceSymbol,

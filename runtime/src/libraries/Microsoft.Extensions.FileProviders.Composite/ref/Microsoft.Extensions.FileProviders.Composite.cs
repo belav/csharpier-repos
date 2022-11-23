@@ -10,11 +10,15 @@ namespace Microsoft.Extensions.FileProviders
     {
         public CompositeFileProvider(
             params Microsoft.Extensions.FileProviders.IFileProvider[]? fileProviders
-        ) { }
+        )
+        {
+        }
 
         public CompositeFileProvider(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileProvider> fileProviders
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileProvider> FileProviders
         {
@@ -50,7 +54,9 @@ namespace Microsoft.Extensions.FileProviders.Composite
         public CompositeDirectoryContents(
             System.Collections.Generic.IList<Microsoft.Extensions.FileProviders.IFileProvider> fileProviders,
             string subpath
-        ) { }
+        )
+        {
+        }
 
         public bool Exists
         {

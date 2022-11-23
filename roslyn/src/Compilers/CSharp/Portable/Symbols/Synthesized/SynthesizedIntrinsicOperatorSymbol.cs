@@ -404,7 +404,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     RefKind.None,
                     DeclarationScope.Unscoped,
                     name
-                ) { }
+                )
+            {
+            }
 
             internal override bool IsMetadataIn => RefKind == RefKind.In;
 

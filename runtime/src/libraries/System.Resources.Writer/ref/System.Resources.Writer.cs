@@ -19,36 +19,56 @@ namespace System.Resources
         : System.IDisposable,
             System.Resources.IResourceWriter
     {
-        public ResourceWriter(System.IO.Stream stream) { }
+        public ResourceWriter(System.IO.Stream stream)
+        {
+        }
 
-        public ResourceWriter(string fileName) { }
+        public ResourceWriter(string fileName)
+        {
+        }
 
         public System.Func<System.Type, string>? TypeNameConverter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddResource(string name, byte[]? value) { }
+        public void AddResource(string name, byte[]? value)
+        {
+        }
 
-        public void AddResource(string name, System.IO.Stream? value) { }
+        public void AddResource(string name, System.IO.Stream? value)
+        {
+        }
 
-        public void AddResource(
-            string name,
-            System.IO.Stream? value,
-            bool closeAfterWrite = false
-        ) { }
+        public void AddResource(string name, System.IO.Stream? value, bool closeAfterWrite = false)
+        {
+        }
 
-        public void AddResource(string name, object? value) { }
+        public void AddResource(string name, object? value)
+        {
+        }
 
-        public void AddResource(string name, string? value) { }
+        public void AddResource(string name, string? value)
+        {
+        }
 
-        public void AddResourceData(string name, string typeName, byte[] serializedData) { }
+        public void AddResourceData(string name, string typeName, byte[] serializedData)
+        {
+        }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void Generate() { }
+        public void Generate()
+        {
+        }
     }
 }

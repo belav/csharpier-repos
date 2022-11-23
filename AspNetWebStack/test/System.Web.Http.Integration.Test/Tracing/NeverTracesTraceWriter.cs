@@ -34,6 +34,8 @@ namespace System.Web.Http.Tracing
 
         public bool DidReceiveTraceRequests { get; set; }
 
-        public void Finish() { }
+        public void Finish()
+        {
+        }
     }
 }

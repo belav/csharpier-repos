@@ -98,18 +98,26 @@ namespace System.Web.Http.Description
 
         public class ApiExplorerValuesController : ApiController
         {
-            public void Get() { }
+            public void Get()
+            {
+            }
 
             [ApiExplorerSettings(IgnoreApi = true)]
-            public void Post() { }
+            public void Post()
+            {
+            }
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
         public class IgnoreApiValuesController : ApiController
         {
-            public void Get() { }
+            public void Get()
+            {
+            }
 
-            public void Post() { }
+            public void Post()
+            {
+            }
         }
 
         [Fact]
@@ -309,14 +317,18 @@ namespace System.Web.Http.Description
 
         private class DuplicatedIdController : ApiController
         {
-            public void Get([FromUri] ClassWithId objectWithId) { }
+            public void Get([FromUri] ClassWithId objectWithId)
+            {
+            }
         }
 
         public class AttributeApiExplorerValuesController : ApiController
         {
             [Route("")]
             [HttpGet]
-            public void Action() { }
+            public void Action()
+            {
+            }
         }
 
         private static IHttpRoute CreateDirectRoute(

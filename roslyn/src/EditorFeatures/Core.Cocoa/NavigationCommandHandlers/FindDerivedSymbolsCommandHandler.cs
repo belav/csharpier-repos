@@ -166,8 +166,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                     await context.OnCompletedAsync(cancellationToken).ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
     }
 }

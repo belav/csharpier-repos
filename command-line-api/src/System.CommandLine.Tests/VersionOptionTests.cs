@@ -64,7 +64,8 @@ namespace System.CommandLine.Tests
         public async Task When_the_version_option_is_specified_and_there_are_default_options_then_the_version_is_written_to_standard_out()
         {
             var rootCommand = new RootCommand { new Option<bool>("-x") };
-            rootCommand.SetHandler(() => { });
+            rootCommand.SetHandler(() => {
+            });
 
             var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
 
@@ -82,7 +83,8 @@ namespace System.CommandLine.Tests
             {
                 new Argument<bool>("x", getDefaultValue: () => true)
             };
-            rootCommand.SetHandler(() => { });
+            rootCommand.SetHandler(() => {
+            });
 
             var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
 
@@ -99,9 +101,11 @@ namespace System.CommandLine.Tests
         public void Version_is_not_valid_with_other_tokens(string commandLine)
         {
             var subcommand = new Command("subcommand");
-            subcommand.SetHandler(() => { });
+            subcommand.SetHandler(() => {
+            });
             var rootCommand = new RootCommand { subcommand, new Option<bool>("-x") };
-            rootCommand.SetHandler(() => { });
+            rootCommand.SetHandler(() => {
+            });
 
             var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
 
@@ -123,10 +127,12 @@ namespace System.CommandLine.Tests
         public void Version_option_is_not_added_to_subcommands()
         {
             var childCommand = new Command("subcommand");
-            childCommand.SetHandler(() => { });
+            childCommand.SetHandler(() => {
+            });
 
             var rootCommand = new RootCommand { childCommand, };
-            rootCommand.SetHandler(() => { });
+            rootCommand.SetHandler(() => {
+            });
 
             var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
 
@@ -170,9 +176,11 @@ namespace System.CommandLine.Tests
         public void Version_is_not_valid_with_other_tokens_uses_custom_alias()
         {
             var childCommand = new Command("subcommand");
-            childCommand.SetHandler(() => { });
+            childCommand.SetHandler(() => {
+            });
             var rootCommand = new RootCommand { childCommand };
-            rootCommand.SetHandler(() => { });
+            rootCommand.SetHandler(() => {
+            });
 
             var parser = new CommandLineBuilder(rootCommand).UseVersionOption("-v").Build();
 

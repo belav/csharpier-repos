@@ -5,7 +5,9 @@ namespace System.IO.Tests
 {
     internal class UnseekableFileStream : FileStream
     {
-        public UnseekableFileStream(string path, FileMode mode) : base(path, mode) { }
+        public UnseekableFileStream(string path, FileMode mode) : base(path, mode)
+        {
+        }
 
         public override bool CanSeek
         {

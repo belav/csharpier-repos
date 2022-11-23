@@ -350,7 +350,9 @@ public class MapSignalRTests
                     Assert.Equal("/path/negotiate", endpoint.DisplayName);
                     Assert.Collection(
                         endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
-                        auth => { },
+                        auth =>
+                        {
+                        },
                         auth =>
                         {
                             Assert.Equal("Foo", auth?.Policy);
@@ -362,7 +364,9 @@ public class MapSignalRTests
                     Assert.Equal("/path", endpoint.DisplayName);
                     Assert.Collection(
                         endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
-                        auth => { },
+                        auth =>
+                        {
+                        },
                         auth =>
                         {
                             Assert.Equal("Foo", auth?.Policy);
@@ -453,20 +457,32 @@ public class MapSignalRTests
 
     private class InvalidHub : Hub
     {
-        public void OverloadedMethod(int num) { }
+        public void OverloadedMethod(int num)
+        {
+        }
 
-        public void OverloadedMethod(string message) { }
+        public void OverloadedMethod(string message)
+        {
+        }
     }
 
     [Authorize]
-    private class DoubleAuthHub : AuthHub { }
+    private class DoubleAuthHub : AuthHub
+    {
+    }
 
-    private class InheritedAuthHub : AuthHub { }
+    private class InheritedAuthHub : AuthHub
+    {
+    }
 
     [Authorize]
-    private class AuthHub : Hub { }
+    private class AuthHub : Hub
+    {
+    }
 
-    private class TestRequirement : IAuthorizationRequirement { }
+    private class TestRequirement : IAuthorizationRequirement
+    {
+    }
 
     private IHost BuildWebHost(Action<IEndpointRouteBuilder> configure)
     {

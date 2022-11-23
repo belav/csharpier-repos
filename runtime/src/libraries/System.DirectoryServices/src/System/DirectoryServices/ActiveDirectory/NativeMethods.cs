@@ -281,7 +281,9 @@ namespace System.DirectoryServices.ActiveDirectory
     internal sealed partial class NativeMethods
     {
         // disable public constructor
-        private NativeMethods() { }
+        private NativeMethods()
+        {
+        }
 
         internal const int VER_PLATFORM_WIN32_NT = 2;
         internal const int ERROR_INVALID_DOMAIN_NAME_FORMAT = 1212;
@@ -524,7 +526,9 @@ namespace System.DirectoryServices.ActiveDirectory
         // Pathname as a co-class that implements the IAdsPathname interface
         //
         [ComImport, Guid("080d0d78-f421-11d0-a36e-00c04fb950dc")]
-        internal class Pathname { }
+        internal class Pathname
+        {
+        }
 
         [ComImport, Guid("D592AED4-F420-11D0-A36E-00C04FB950DC")]
         internal interface IAdsPathname

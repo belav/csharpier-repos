@@ -8,14 +8,20 @@ namespace System.DirectoryServices.Protocols
 {
     public partial class AddRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public AddRequest() { }
+        public AddRequest()
+        {
+        }
 
         public AddRequest(
             string distinguishedName,
             params System.DirectoryServices.Protocols.DirectoryAttribute[] attributes
-        ) { }
+        )
+        {
+        }
 
-        public AddRequest(string distinguishedName, string objectClass) { }
+        public AddRequest(string distinguishedName, string objectClass)
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryAttributeCollection Attributes
         {
@@ -24,27 +30,37 @@ namespace System.DirectoryServices.Protocols
         public string DistinguishedName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class AddResponse : System.DirectoryServices.Protocols.DirectoryResponse
     {
-        internal AddResponse() { }
+        internal AddResponse()
+        {
+        }
     }
 
     public partial class AsqRequestControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public AsqRequestControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public AsqRequestControl(string attributeName)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public string AttributeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -56,7 +72,9 @@ namespace System.DirectoryServices.Protocols
     public partial class AsqResponseControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         internal AsqResponseControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public System.DirectoryServices.Protocols.ResultCode Result
         {
@@ -81,16 +99,24 @@ namespace System.DirectoryServices.Protocols
     public partial class BerConversionException
         : System.DirectoryServices.Protocols.DirectoryException
     {
-        public BerConversionException() { }
+        public BerConversionException()
+        {
+        }
 
         protected BerConversionException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public BerConversionException(string message) { }
+        public BerConversionException(string message)
+        {
+        }
 
-        public BerConversionException(string message, System.Exception inner) { }
+        public BerConversionException(string message, System.Exception inner)
+        {
+        }
     }
 
     public static partial class BerConverter
@@ -108,18 +134,28 @@ namespace System.DirectoryServices.Protocols
 
     public partial class CompareRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public CompareRequest() { }
+        public CompareRequest()
+        {
+        }
 
         public CompareRequest(
             string distinguishedName,
             System.DirectoryServices.Protocols.DirectoryAttribute assertion
-        ) { }
+        )
+        {
+        }
 
-        public CompareRequest(string distinguishedName, string attributeName, byte[] value) { }
+        public CompareRequest(string distinguishedName, string attributeName, byte[] value)
+        {
+        }
 
-        public CompareRequest(string distinguishedName, string attributeName, string value) { }
+        public CompareRequest(string distinguishedName, string attributeName, string value)
+        {
+        }
 
-        public CompareRequest(string distinguishedName, string attributeName, System.Uri value) { }
+        public CompareRequest(string distinguishedName, string attributeName, System.Uri value)
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryAttribute Assertion
         {
@@ -128,28 +164,38 @@ namespace System.DirectoryServices.Protocols
         public string DistinguishedName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class CompareResponse : System.DirectoryServices.Protocols.DirectoryResponse
     {
-        internal CompareResponse() { }
+        internal CompareResponse()
+        {
+        }
     }
 
     public partial class CrossDomainMoveControl
         : System.DirectoryServices.Protocols.DirectoryControl
     {
         public CrossDomainMoveControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public CrossDomainMoveControl(string targetDomainController)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public string TargetDomainController
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -160,20 +206,28 @@ namespace System.DirectoryServices.Protocols
 
     public partial class DeleteRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public DeleteRequest() { }
+        public DeleteRequest()
+        {
+        }
 
-        public DeleteRequest(string distinguishedName) { }
+        public DeleteRequest(string distinguishedName)
+        {
+        }
 
         public string DistinguishedName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class DeleteResponse : System.DirectoryServices.Protocols.DirectoryResponse
     {
-        internal DeleteResponse() { }
+        internal DeleteResponse()
+        {
+        }
     }
 
     public enum DereferenceAlias
@@ -191,25 +245,39 @@ namespace System.DirectoryServices.Protocols
 
     public partial class DirectoryAttribute : System.Collections.CollectionBase
     {
-        public DirectoryAttribute() { }
+        public DirectoryAttribute()
+        {
+        }
 
-        public DirectoryAttribute(string name, byte[] value) { }
+        public DirectoryAttribute(string name, byte[] value)
+        {
+        }
 
-        public DirectoryAttribute(string name, params object[] values) { }
+        public DirectoryAttribute(string name, params object[] values)
+        {
+        }
 
-        public DirectoryAttribute(string name, string value) { }
+        public DirectoryAttribute(string name, string value)
+        {
+        }
 
-        public DirectoryAttribute(string name, System.Uri value) { }
+        public DirectoryAttribute(string name, System.Uri value)
+        {
+        }
 
         public object this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(byte[] value)
@@ -227,14 +295,18 @@ namespace System.DirectoryServices.Protocols
             throw null;
         }
 
-        public void AddRange(object[] values) { }
+        public void AddRange(object[] values)
+        {
+        }
 
         public bool Contains(object value)
         {
             throw null;
         }
 
-        public void CopyTo(object[] array, int index) { }
+        public void CopyTo(object[] array, int index)
+        {
+        }
 
         public object[] GetValues(System.Type valuesType)
         {
@@ -246,25 +318,39 @@ namespace System.DirectoryServices.Protocols
             throw null;
         }
 
-        public void Insert(int index, byte[] value) { }
+        public void Insert(int index, byte[] value)
+        {
+        }
 
-        public void Insert(int index, string value) { }
+        public void Insert(int index, string value)
+        {
+        }
 
-        public void Insert(int index, System.Uri value) { }
+        public void Insert(int index, System.Uri value)
+        {
+        }
 
-        protected override void OnValidate(object value) { }
+        protected override void OnValidate(object value)
+        {
+        }
 
-        public void Remove(object value) { }
+        public void Remove(object value)
+        {
+        }
     }
 
     public partial class DirectoryAttributeCollection : System.Collections.CollectionBase
     {
-        public DirectoryAttributeCollection() { }
+        public DirectoryAttributeCollection()
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryAttribute this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.DirectoryServices.Protocols.DirectoryAttribute attribute)
@@ -274,56 +360,70 @@ namespace System.DirectoryServices.Protocols
 
         public void AddRange(
             System.DirectoryServices.Protocols.DirectoryAttributeCollection attributeCollection
-        ) { }
+        )
+        {
+        }
 
-        public void AddRange(System.DirectoryServices.Protocols.DirectoryAttribute[] attributes) { }
+        public void AddRange(System.DirectoryServices.Protocols.DirectoryAttribute[] attributes)
+        {
+        }
 
         public bool Contains(System.DirectoryServices.Protocols.DirectoryAttribute value)
         {
             throw null;
         }
 
-        public void CopyTo(
-            System.DirectoryServices.Protocols.DirectoryAttribute[] array,
-            int index
-        ) { }
+        public void CopyTo(System.DirectoryServices.Protocols.DirectoryAttribute[] array, int index)
+        {
+        }
 
         public int IndexOf(System.DirectoryServices.Protocols.DirectoryAttribute value)
         {
             throw null;
         }
 
-        public void Insert(
-            int index,
-            System.DirectoryServices.Protocols.DirectoryAttribute value
-        ) { }
+        public void Insert(int index, System.DirectoryServices.Protocols.DirectoryAttribute value)
+        {
+        }
 
-        protected override void OnValidate(object value) { }
+        protected override void OnValidate(object value)
+        {
+        }
 
-        public void Remove(System.DirectoryServices.Protocols.DirectoryAttribute value) { }
+        public void Remove(System.DirectoryServices.Protocols.DirectoryAttribute value)
+        {
+        }
     }
 
     public partial class DirectoryAttributeModification
         : System.DirectoryServices.Protocols.DirectoryAttribute
     {
-        public DirectoryAttributeModification() { }
+        public DirectoryAttributeModification()
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryAttributeOperation Operation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class DirectoryAttributeModificationCollection
         : System.Collections.CollectionBase
     {
-        public DirectoryAttributeModificationCollection() { }
+        public DirectoryAttributeModificationCollection()
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryAttributeModification this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.DirectoryServices.Protocols.DirectoryAttributeModification attribute)
@@ -333,11 +433,15 @@ namespace System.DirectoryServices.Protocols
 
         public void AddRange(
             System.DirectoryServices.Protocols.DirectoryAttributeModificationCollection attributeCollection
-        ) { }
+        )
+        {
+        }
 
         public void AddRange(
             System.DirectoryServices.Protocols.DirectoryAttributeModification[] attributes
-        ) { }
+        )
+        {
+        }
 
         public bool Contains(
             System.DirectoryServices.Protocols.DirectoryAttributeModification value
@@ -349,7 +453,9 @@ namespace System.DirectoryServices.Protocols
         public void CopyTo(
             System.DirectoryServices.Protocols.DirectoryAttributeModification[] array,
             int index
-        ) { }
+        )
+        {
+        }
 
         public int IndexOf(System.DirectoryServices.Protocols.DirectoryAttributeModification value)
         {
@@ -359,13 +465,17 @@ namespace System.DirectoryServices.Protocols
         public void Insert(
             int index,
             System.DirectoryServices.Protocols.DirectoryAttributeModification value
-        ) { }
+        )
+        {
+        }
 
-        protected override void OnValidate(object value) { }
+        protected override void OnValidate(object value)
+        {
+        }
 
-        public void Remove(
-            System.DirectoryServices.Protocols.DirectoryAttributeModification value
-        ) { }
+        public void Remove(System.DirectoryServices.Protocols.DirectoryAttributeModification value)
+        {
+        }
     }
 
     public enum DirectoryAttributeOperation
@@ -377,7 +487,9 @@ namespace System.DirectoryServices.Protocols
 
     public abstract partial class DirectoryConnection
     {
-        protected DirectoryConnection() { }
+        protected DirectoryConnection()
+        {
+        }
 
         public System.Security.Cryptography.X509Certificates.X509CertificateCollection ClientCertificates
         {
@@ -385,7 +497,9 @@ namespace System.DirectoryServices.Protocols
         }
         public virtual System.Net.NetworkCredential Credential
         {
-            set { }
+            set
+            {
+            }
         }
         public virtual System.DirectoryServices.Protocols.DirectoryIdentifier Directory
         {
@@ -394,7 +508,9 @@ namespace System.DirectoryServices.Protocols
         public virtual System.TimeSpan Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract System.DirectoryServices.Protocols.DirectoryResponse SendRequest(
             System.DirectoryServices.Protocols.DirectoryRequest request
@@ -403,17 +519,23 @@ namespace System.DirectoryServices.Protocols
 
     public partial class DirectoryControl
     {
-        public DirectoryControl(string type, byte[] value, bool isCritical, bool serverSide) { }
+        public DirectoryControl(string type, byte[] value, bool isCritical, bool serverSide)
+        {
+        }
 
         public bool IsCritical
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ServerSide
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Type
         {
@@ -428,12 +550,16 @@ namespace System.DirectoryServices.Protocols
 
     public partial class DirectoryControlCollection : System.Collections.CollectionBase
     {
-        public DirectoryControlCollection() { }
+        public DirectoryControlCollection()
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryControl this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.DirectoryServices.Protocols.DirectoryControl control)
@@ -443,92 +569,129 @@ namespace System.DirectoryServices.Protocols
 
         public void AddRange(
             System.DirectoryServices.Protocols.DirectoryControlCollection controlCollection
-        ) { }
+        )
+        {
+        }
 
-        public void AddRange(System.DirectoryServices.Protocols.DirectoryControl[] controls) { }
+        public void AddRange(System.DirectoryServices.Protocols.DirectoryControl[] controls)
+        {
+        }
 
         public bool Contains(System.DirectoryServices.Protocols.DirectoryControl value)
         {
             throw null;
         }
 
-        public void CopyTo(
-            System.DirectoryServices.Protocols.DirectoryControl[] array,
-            int index
-        ) { }
+        public void CopyTo(System.DirectoryServices.Protocols.DirectoryControl[] array, int index)
+        {
+        }
 
         public int IndexOf(System.DirectoryServices.Protocols.DirectoryControl value)
         {
             throw null;
         }
 
-        public void Insert(int index, System.DirectoryServices.Protocols.DirectoryControl value) { }
+        public void Insert(int index, System.DirectoryServices.Protocols.DirectoryControl value)
+        {
+        }
 
-        protected override void OnValidate(object value) { }
+        protected override void OnValidate(object value)
+        {
+        }
 
-        public void Remove(System.DirectoryServices.Protocols.DirectoryControl value) { }
+        public void Remove(System.DirectoryServices.Protocols.DirectoryControl value)
+        {
+        }
     }
 
     public partial class DirectoryException : System.Exception
     {
-        public DirectoryException() { }
+        public DirectoryException()
+        {
+        }
 
         protected DirectoryException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DirectoryException(string message) { }
+        public DirectoryException(string message)
+        {
+        }
 
-        public DirectoryException(string message, System.Exception inner) { }
+        public DirectoryException(string message, System.Exception inner)
+        {
+        }
     }
 
     public abstract partial class DirectoryIdentifier
     {
-        protected DirectoryIdentifier() { }
+        protected DirectoryIdentifier()
+        {
+        }
     }
 
     public partial class DirectoryNotificationControl
         : System.DirectoryServices.Protocols.DirectoryControl
     {
         public DirectoryNotificationControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
     }
 
     public abstract partial class DirectoryOperation
     {
-        protected DirectoryOperation() { }
+        protected DirectoryOperation()
+        {
+        }
     }
 
     public partial class DirectoryOperationException
         : System.DirectoryServices.Protocols.DirectoryException,
             System.Runtime.Serialization.ISerializable
     {
-        public DirectoryOperationException() { }
+        public DirectoryOperationException()
+        {
+        }
 
         public DirectoryOperationException(
             System.DirectoryServices.Protocols.DirectoryResponse response
-        ) { }
+        )
+        {
+        }
 
         public DirectoryOperationException(
             System.DirectoryServices.Protocols.DirectoryResponse response,
             string message
-        ) { }
+        )
+        {
+        }
 
         public DirectoryOperationException(
             System.DirectoryServices.Protocols.DirectoryResponse response,
             string message,
             System.Exception inner
-        ) { }
+        )
+        {
+        }
 
         protected DirectoryOperationException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DirectoryOperationException(string message) { }
+        public DirectoryOperationException(string message)
+        {
+        }
 
-        public DirectoryOperationException(string message, System.Exception inner) { }
+        public DirectoryOperationException(string message, System.Exception inner)
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryResponse Response
         {
@@ -538,13 +701,17 @@ namespace System.DirectoryServices.Protocols
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public abstract partial class DirectoryRequest
         : System.DirectoryServices.Protocols.DirectoryOperation
     {
-        internal DirectoryRequest() { }
+        internal DirectoryRequest()
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryControlCollection Controls
         {
@@ -553,14 +720,18 @@ namespace System.DirectoryServices.Protocols
         public string RequestId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public abstract partial class DirectoryResponse
         : System.DirectoryServices.Protocols.DirectoryOperation
     {
-        internal DirectoryResponse() { }
+        internal DirectoryResponse()
+        {
+        }
 
         public virtual System.DirectoryServices.Protocols.DirectoryControl[] Controls
         {
@@ -601,36 +772,50 @@ namespace System.DirectoryServices.Protocols
     public partial class DirSyncRequestControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public DirSyncRequestControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public DirSyncRequestControl(byte[] cookie)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public DirSyncRequestControl(
             byte[] cookie,
             System.DirectoryServices.Protocols.DirectorySynchronizationOptions option
-        ) : base(default(string), default(byte[]), default(bool), default(bool)) { }
+        ) : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public DirSyncRequestControl(
             byte[] cookie,
             System.DirectoryServices.Protocols.DirectorySynchronizationOptions option,
             int attributeCount
-        ) : base(default(string), default(byte[]), default(bool), default(bool)) { }
+        ) : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public int AttributeCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] Cookie
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.DirectorySynchronizationOptions Option
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -643,7 +828,9 @@ namespace System.DirectoryServices.Protocols
         : System.DirectoryServices.Protocols.DirectoryControl
     {
         internal DirSyncResponseControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public byte[] Cookie
         {
@@ -662,34 +849,48 @@ namespace System.DirectoryServices.Protocols
     public partial class DomainScopeControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public DomainScopeControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
     }
 
     public partial class DsmlAuthRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public DsmlAuthRequest() { }
+        public DsmlAuthRequest()
+        {
+        }
 
-        public DsmlAuthRequest(string principal) { }
+        public DsmlAuthRequest(string principal)
+        {
+        }
 
         public string Principal
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class ExtendedDNControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public ExtendedDNControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public ExtendedDNControl(System.DirectoryServices.Protocols.ExtendedDNFlag flag)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public System.DirectoryServices.Protocols.ExtendedDNFlag Flag
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -706,27 +907,39 @@ namespace System.DirectoryServices.Protocols
 
     public partial class ExtendedRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public ExtendedRequest() { }
+        public ExtendedRequest()
+        {
+        }
 
-        public ExtendedRequest(string requestName) { }
+        public ExtendedRequest(string requestName)
+        {
+        }
 
-        public ExtendedRequest(string requestName, byte[] requestValue) { }
+        public ExtendedRequest(string requestName, byte[] requestValue)
+        {
+        }
 
         public string RequestName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] RequestValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class ExtendedResponse : System.DirectoryServices.Protocols.DirectoryResponse
     {
-        internal ExtendedResponse() { }
+        internal ExtendedResponse()
+        {
+        }
 
         public string ResponseName
         {
@@ -741,7 +954,9 @@ namespace System.DirectoryServices.Protocols
     public partial class LazyCommitControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public LazyCommitControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
     }
 
     public partial class LdapConnection
@@ -749,34 +964,47 @@ namespace System.DirectoryServices.Protocols
             System.IDisposable
     {
         public LdapConnection(System.DirectoryServices.Protocols.LdapDirectoryIdentifier identifier)
-        { }
+        {
+        }
 
         public LdapConnection(
             System.DirectoryServices.Protocols.LdapDirectoryIdentifier identifier,
             System.Net.NetworkCredential credential
-        ) { }
+        )
+        {
+        }
 
         public LdapConnection(
             System.DirectoryServices.Protocols.LdapDirectoryIdentifier identifier,
             System.Net.NetworkCredential credential,
             System.DirectoryServices.Protocols.AuthType authType
-        ) { }
+        )
+        {
+        }
 
-        public LdapConnection(string server) { }
+        public LdapConnection(string server)
+        {
+        }
 
         public System.DirectoryServices.Protocols.AuthType AuthType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool AutoBind
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Net.NetworkCredential Credential
         {
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.LdapSessionOptions SessionOptions
         {
@@ -785,10 +1013,14 @@ namespace System.DirectoryServices.Protocols
         public override System.TimeSpan Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Abort(System.IAsyncResult asyncResult) { }
+        public void Abort(System.IAsyncResult asyncResult)
+        {
+        }
 
         public System.IAsyncResult BeginSendRequest(
             System.DirectoryServices.Protocols.DirectoryRequest request,
@@ -811,13 +1043,21 @@ namespace System.DirectoryServices.Protocols
             throw null;
         }
 
-        public void Bind() { }
+        public void Bind()
+        {
+        }
 
-        public void Bind(System.Net.NetworkCredential newCredential) { }
+        public void Bind(System.Net.NetworkCredential newCredential)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryResponse EndSendRequest(
             System.IAsyncResult asyncResult
@@ -826,7 +1066,9 @@ namespace System.DirectoryServices.Protocols
             throw null;
         }
 
-        ~LdapConnection() { }
+        ~LdapConnection()
+        {
+        }
 
         public System.DirectoryServices.Protocols.PartialResultsCollection GetPartialResults(
             System.IAsyncResult asyncResult
@@ -854,35 +1096,47 @@ namespace System.DirectoryServices.Protocols
     public partial class LdapDirectoryIdentifier
         : System.DirectoryServices.Protocols.DirectoryIdentifier
     {
-        public LdapDirectoryIdentifier(string server) { }
+        public LdapDirectoryIdentifier(string server)
+        {
+        }
 
         public LdapDirectoryIdentifier(
             string server,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) { }
+        )
+        {
+        }
 
-        public LdapDirectoryIdentifier(string server, int portNumber) { }
+        public LdapDirectoryIdentifier(string server, int portNumber)
+        {
+        }
 
         public LdapDirectoryIdentifier(
             string server,
             int portNumber,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) { }
+        )
+        {
+        }
 
         public LdapDirectoryIdentifier(
             string[] servers,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) { }
+        )
+        {
+        }
 
         public LdapDirectoryIdentifier(
             string[] servers,
             int portNumber,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) { }
+        )
+        {
+        }
 
         public bool Connectionless
         {
@@ -906,24 +1160,40 @@ namespace System.DirectoryServices.Protocols
         : System.DirectoryServices.Protocols.DirectoryException,
             System.Runtime.Serialization.ISerializable
     {
-        public LdapException() { }
+        public LdapException()
+        {
+        }
 
-        public LdapException(int errorCode) { }
+        public LdapException(int errorCode)
+        {
+        }
 
-        public LdapException(int errorCode, string message) { }
+        public LdapException(int errorCode, string message)
+        {
+        }
 
-        public LdapException(int errorCode, string message, System.Exception inner) { }
+        public LdapException(int errorCode, string message, System.Exception inner)
+        {
+        }
 
-        public LdapException(int errorCode, string message, string serverErrorMessage) { }
+        public LdapException(int errorCode, string message, string serverErrorMessage)
+        {
+        }
 
         protected LdapException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public LdapException(string message) { }
+        public LdapException(string message)
+        {
+        }
 
-        public LdapException(string message, System.Exception inner) { }
+        public LdapException(string message, System.Exception inner)
+        {
+        }
 
         public int ErrorCode
         {
@@ -941,27 +1211,37 @@ namespace System.DirectoryServices.Protocols
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class LdapSessionOptions
     {
-        internal LdapSessionOptions() { }
+        internal LdapSessionOptions()
+        {
+        }
 
         public bool AutoReconnect
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string DomainName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string HostName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool HostReachable
         {
@@ -970,67 +1250,93 @@ namespace System.DirectoryServices.Protocols
         public System.DirectoryServices.Protocols.LocatorFlags LocatorFlag
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan PingKeepAliveTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int PingLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan PingWaitTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ProtocolVersion
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.QueryClientCertificateCallback QueryClientCertificate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.ReferralCallback ReferralCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.ReferralChasingOptions ReferralChasing
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReferralHopLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RootDseCache
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SaslMethod
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Sealing
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SecureSocketLayer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object SecurityContext
         {
@@ -1039,12 +1345,16 @@ namespace System.DirectoryServices.Protocols
         public System.TimeSpan SendTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Signing
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.SecurityPackageContextConnectionInformation SslInformation
         {
@@ -1053,26 +1363,38 @@ namespace System.DirectoryServices.Protocols
         public int SspiFlag
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TcpKeepAlive
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.VerifyServerCertificateCallback VerifyServerCertificate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void FastConcurrentBind() { }
+        public void FastConcurrentBind()
+        {
+        }
 
         public void StartTransportLayerSecurity(
             System.DirectoryServices.Protocols.DirectoryControlCollection controls
-        ) { }
+        )
+        {
+        }
 
-        public void StopTransportLayerSecurity() { }
+        public void StopTransportLayerSecurity()
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -1099,61 +1421,83 @@ namespace System.DirectoryServices.Protocols
 
     public partial class ModifyDNRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public ModifyDNRequest() { }
+        public ModifyDNRequest()
+        {
+        }
 
         public ModifyDNRequest(
             string distinguishedName,
             string newParentDistinguishedName,
             string newName
-        ) { }
+        )
+        {
+        }
 
         public bool DeleteOldRdn
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string DistinguishedName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string NewName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string NewParentDistinguishedName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class ModifyDNResponse : System.DirectoryServices.Protocols.DirectoryResponse
     {
-        internal ModifyDNResponse() { }
+        internal ModifyDNResponse()
+        {
+        }
     }
 
     public partial class ModifyRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public ModifyRequest() { }
+        public ModifyRequest()
+        {
+        }
 
         public ModifyRequest(
             string distinguishedName,
             params System.DirectoryServices.Protocols.DirectoryAttributeModification[] modifications
-        ) { }
+        )
+        {
+        }
 
         public ModifyRequest(
             string distinguishedName,
             System.DirectoryServices.Protocols.DirectoryAttributeOperation operation,
             string attributeName,
             params object[] values
-        ) { }
+        )
+        {
+        }
 
         public string DistinguishedName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.DirectoryAttributeModificationCollection Modifications
         {
@@ -1163,7 +1507,9 @@ namespace System.DirectoryServices.Protocols
 
     public partial class ModifyResponse : System.DirectoryServices.Protocols.DirectoryResponse
     {
-        internal ModifyResponse() { }
+        internal ModifyResponse()
+        {
+        }
     }
 
     public delegate bool NotifyOfNewConnectionCallback(
@@ -1181,23 +1527,33 @@ namespace System.DirectoryServices.Protocols
         : System.DirectoryServices.Protocols.DirectoryControl
     {
         public PageResultRequestControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public PageResultRequestControl(byte[] cookie)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public PageResultRequestControl(int pageSize)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public byte[] Cookie
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int PageSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -1210,7 +1566,9 @@ namespace System.DirectoryServices.Protocols
         : System.DirectoryServices.Protocols.DirectoryControl
     {
         internal PageResultResponseControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public byte[] Cookie
         {
@@ -1231,7 +1589,9 @@ namespace System.DirectoryServices.Protocols
 
     public partial class PartialResultsCollection : System.Collections.ReadOnlyCollectionBase
     {
-        internal PartialResultsCollection() { }
+        internal PartialResultsCollection()
+        {
+        }
 
         public object this[int index]
         {
@@ -1243,7 +1603,9 @@ namespace System.DirectoryServices.Protocols
             throw null;
         }
 
-        public void CopyTo(object[] values, int index) { }
+        public void CopyTo(object[] values, int index)
+        {
+        }
 
         public int IndexOf(object value)
         {
@@ -1255,7 +1617,9 @@ namespace System.DirectoryServices.Protocols
         : System.DirectoryServices.Protocols.DirectoryControl
     {
         public PermissiveModifyControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
     }
 
     public delegate System.Security.Cryptography.X509Certificates.X509Certificate QueryClientCertificateCallback(
@@ -1275,15 +1639,20 @@ namespace System.DirectoryServices.Protocols
     public partial class QuotaControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public QuotaControl() : base(default(string), default(byte[]), default(bool), default(bool))
-        { }
+        {
+        }
 
         public QuotaControl(System.Security.Principal.SecurityIdentifier querySid)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public System.Security.Principal.SecurityIdentifier QuerySid
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -1294,22 +1663,30 @@ namespace System.DirectoryServices.Protocols
 
     public sealed partial class ReferralCallback
     {
-        public ReferralCallback() { }
+        public ReferralCallback()
+        {
+        }
 
         public System.DirectoryServices.Protocols.DereferenceConnectionCallback DereferenceConnection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.NotifyOfNewConnectionCallback NotifyNewConnection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.QueryForConnectionCallback QueryForConnection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1378,15 +1755,21 @@ namespace System.DirectoryServices.Protocols
     public partial class SearchOptionsControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public SearchOptionsControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public SearchOptionsControl(System.DirectoryServices.Protocols.SearchOption flags)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public System.DirectoryServices.Protocols.SearchOption SearchOption
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -1397,19 +1780,25 @@ namespace System.DirectoryServices.Protocols
 
     public partial class SearchRequest : System.DirectoryServices.Protocols.DirectoryRequest
     {
-        public SearchRequest() { }
+        public SearchRequest()
+        {
+        }
 
         public SearchRequest(
             string distinguishedName,
             string ldapFilter,
             System.DirectoryServices.Protocols.SearchScope searchScope,
             params string[] attributeList
-        ) { }
+        )
+        {
+        }
 
         public System.DirectoryServices.Protocols.DereferenceAlias Aliases
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Specialized.StringCollection Attributes
         {
@@ -1418,38 +1807,52 @@ namespace System.DirectoryServices.Protocols
         public string DistinguishedName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object Filter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.DirectoryServices.Protocols.SearchScope Scope
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int SizeLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan TimeLimit
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TypesOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class SearchResponse : System.DirectoryServices.Protocols.DirectoryResponse
     {
-        internal SearchResponse() { }
+        internal SearchResponse()
+        {
+        }
 
         public override System.DirectoryServices.Protocols.DirectoryControl[] Controls
         {
@@ -1483,7 +1886,9 @@ namespace System.DirectoryServices.Protocols
 
     public partial class SearchResultAttributeCollection : System.Collections.DictionaryBase
     {
-        internal SearchResultAttributeCollection() { }
+        internal SearchResultAttributeCollection()
+        {
+        }
 
         public System.Collections.ICollection AttributeNames
         {
@@ -1503,15 +1908,16 @@ namespace System.DirectoryServices.Protocols
             throw null;
         }
 
-        public void CopyTo(
-            System.DirectoryServices.Protocols.DirectoryAttribute[] array,
-            int index
-        ) { }
+        public void CopyTo(System.DirectoryServices.Protocols.DirectoryAttribute[] array, int index)
+        {
+        }
     }
 
     public partial class SearchResultEntry
     {
-        internal SearchResultEntry() { }
+        internal SearchResultEntry()
+        {
+        }
 
         public System.DirectoryServices.Protocols.SearchResultAttributeCollection Attributes
         {
@@ -1529,7 +1935,9 @@ namespace System.DirectoryServices.Protocols
 
     public partial class SearchResultEntryCollection : System.Collections.ReadOnlyCollectionBase
     {
-        internal SearchResultEntryCollection() { }
+        internal SearchResultEntryCollection()
+        {
+        }
 
         public System.DirectoryServices.Protocols.SearchResultEntry this[int index]
         {
@@ -1541,10 +1949,9 @@ namespace System.DirectoryServices.Protocols
             throw null;
         }
 
-        public void CopyTo(
-            System.DirectoryServices.Protocols.SearchResultEntry[] values,
-            int index
-        ) { }
+        public void CopyTo(System.DirectoryServices.Protocols.SearchResultEntry[] values, int index)
+        {
+        }
 
         public int IndexOf(System.DirectoryServices.Protocols.SearchResultEntry value)
         {
@@ -1554,7 +1961,9 @@ namespace System.DirectoryServices.Protocols
 
     public partial class SearchResultReference
     {
-        internal SearchResultReference() { }
+        internal SearchResultReference()
+        {
+        }
 
         public System.DirectoryServices.Protocols.DirectoryControl[] Controls
         {
@@ -1568,7 +1977,9 @@ namespace System.DirectoryServices.Protocols
 
     public partial class SearchResultReferenceCollection : System.Collections.ReadOnlyCollectionBase
     {
-        internal SearchResultReferenceCollection() { }
+        internal SearchResultReferenceCollection()
+        {
+        }
 
         public System.DirectoryServices.Protocols.SearchResultReference this[int index]
         {
@@ -1583,7 +1994,9 @@ namespace System.DirectoryServices.Protocols
         public void CopyTo(
             System.DirectoryServices.Protocols.SearchResultReference[] values,
             int index
-        ) { }
+        )
+        {
+        }
 
         public int IndexOf(System.DirectoryServices.Protocols.SearchResultReference value)
         {
@@ -1602,15 +2015,21 @@ namespace System.DirectoryServices.Protocols
         : System.DirectoryServices.Protocols.DirectoryControl
     {
         public SecurityDescriptorFlagControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public SecurityDescriptorFlagControl(System.DirectoryServices.Protocols.SecurityMasks masks)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public System.DirectoryServices.Protocols.SecurityMasks SecurityMasks
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -1631,7 +2050,9 @@ namespace System.DirectoryServices.Protocols
 
     public partial class SecurityPackageContextConnectionInformation
     {
-        internal SecurityPackageContextConnectionInformation() { }
+        internal SecurityPackageContextConnectionInformation()
+        {
+        }
 
         public System.Security.Authentication.CipherAlgorithmType AlgorithmIdentifier
         {
@@ -1678,47 +2099,67 @@ namespace System.DirectoryServices.Protocols
     public partial class ShowDeletedControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public ShowDeletedControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
     }
 
     public partial class SortKey
     {
-        public SortKey() { }
+        public SortKey()
+        {
+        }
 
-        public SortKey(string attributeName, string matchingRule, bool reverseOrder) { }
+        public SortKey(string attributeName, string matchingRule, bool reverseOrder)
+        {
+        }
 
         public string AttributeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string MatchingRule
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ReverseOrder
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class SortRequestControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public SortRequestControl(params System.DirectoryServices.Protocols.SortKey[] sortKeys)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public SortRequestControl(string attributeName, bool reverseOrder)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public SortRequestControl(string attributeName, string matchingRule, bool reverseOrder)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public System.DirectoryServices.Protocols.SortKey[] SortKeys
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -1730,7 +2171,9 @@ namespace System.DirectoryServices.Protocols
     public partial class SortResponseControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         internal SortResponseControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public string AttributeName
         {
@@ -1745,58 +2188,83 @@ namespace System.DirectoryServices.Protocols
     public partial class TlsOperationException
         : System.DirectoryServices.Protocols.DirectoryOperationException
     {
-        public TlsOperationException() { }
+        public TlsOperationException()
+        {
+        }
 
         public TlsOperationException(System.DirectoryServices.Protocols.DirectoryResponse response)
-        { }
+        {
+        }
 
         public TlsOperationException(
             System.DirectoryServices.Protocols.DirectoryResponse response,
             string message
-        ) { }
+        )
+        {
+        }
 
         public TlsOperationException(
             System.DirectoryServices.Protocols.DirectoryResponse response,
             string message,
             System.Exception inner
-        ) { }
+        )
+        {
+        }
 
         protected TlsOperationException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public TlsOperationException(string message) { }
+        public TlsOperationException(string message)
+        {
+        }
 
-        public TlsOperationException(string message, System.Exception inner) { }
+        public TlsOperationException(string message, System.Exception inner)
+        {
+        }
     }
 
     public partial class TreeDeleteControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public TreeDeleteControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
     }
 
     public partial class VerifyNameControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public VerifyNameControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public VerifyNameControl(string serverName)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public VerifyNameControl(string serverName, int flag)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public int Flag
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ServerName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -1813,46 +2281,66 @@ namespace System.DirectoryServices.Protocols
     public partial class VlvRequestControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         public VlvRequestControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public VlvRequestControl(int beforeCount, int afterCount, byte[] target)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public VlvRequestControl(int beforeCount, int afterCount, int offset)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public VlvRequestControl(int beforeCount, int afterCount, string target)
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public int AfterCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int BeforeCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] ContextId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int EstimateCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Offset
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] Target
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GetValue()
@@ -1864,7 +2352,9 @@ namespace System.DirectoryServices.Protocols
     public partial class VlvResponseControl : System.DirectoryServices.Protocols.DirectoryControl
     {
         internal VlvResponseControl()
-            : base(default(string), default(byte[]), default(bool), default(bool)) { }
+            : base(default(string), default(byte[]), default(bool), default(bool))
+        {
+        }
 
         public int ContentCount
         {

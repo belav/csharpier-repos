@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class DoubleKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public DoubleKeywordRecommender() : base(SyntaxKind.DoubleKeyword) { }
+        public DoubleKeywordRecommender() : base(SyntaxKind.DoubleKeyword)
+        {
+        }
 
         protected override bool IsValidContextWorker(
             int position,

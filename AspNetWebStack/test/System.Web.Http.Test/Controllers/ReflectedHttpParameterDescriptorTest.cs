@@ -85,7 +85,9 @@ namespace System.Web.Http
             Assert.NotNull(parameterDescriptor.ParameterBinderAttribute);
         }
 
-        private static void MethodWithOptionalParam(int id = 7) { }
+        private static void MethodWithOptionalParam(int id = 7)
+        {
+        }
 
         [Fact]
         public void IsOptional_Returns_True_ForOptionalParameter()

@@ -20,7 +20,9 @@ namespace System.ComponentModel.Composition.Primitives
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartDefinition"/> class.
         /// </summary>
-        protected ComposablePartDefinition() { }
+        protected ComposablePartDefinition()
+        {
+        }
 
         /// <summary>
         ///     Gets the export definitions that describe the exported values provided by parts

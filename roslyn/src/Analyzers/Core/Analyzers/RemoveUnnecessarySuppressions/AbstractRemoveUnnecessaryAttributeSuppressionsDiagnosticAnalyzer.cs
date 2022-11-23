@@ -81,7 +81,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     LegacyFormatTargetDescriptor
                 ),
                 GeneratedCodeAnalysisFlags.None
-            ) { }
+            )
+        {
+        }
 
         protected abstract void RegisterAttributeSyntaxAction(
             CompilationStartAnalysisContext context,

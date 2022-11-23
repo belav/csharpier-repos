@@ -54,7 +54,9 @@ namespace System.Drawing
             internal static IDictionary ThreadData => t_threadData ??= new Hashtable();
 
             // Used to ensure static constructor has run.
-            internal static void DummyFunction() { }
+            internal static void DummyFunction()
+            {
+            }
 
             //----------------------------------------------------------------------------------------
             // Status codes

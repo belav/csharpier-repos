@@ -16,7 +16,9 @@ namespace Roslyn.Test.Utilities
         public static readonly NotImplementedSymUnmanagedReader Instance =
             new NotImplementedSymUnmanagedReader();
 
-        private NotImplementedSymUnmanagedReader() { }
+        private NotImplementedSymUnmanagedReader()
+        {
+        }
 
         public int GetDocument(
             string url,

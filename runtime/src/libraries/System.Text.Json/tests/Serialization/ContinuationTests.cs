@@ -339,7 +339,9 @@ namespace System.Text.Json.Serialization.Tests
                 };
             }
 
-            private Chunk() { }
+            private Chunk()
+            {
+            }
         }
 
         private interface ITestObject

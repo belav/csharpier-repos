@@ -44,6 +44,8 @@ namespace System
         }
 
         private ExecutionEngineException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

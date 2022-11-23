@@ -65,7 +65,8 @@ public class ConfigPatternsInMemoryTest
     private class ImplicitServicesExplicitConfigBlogContext : DbContext
     {
         public ImplicitServicesExplicitConfigBlogContext(DbContextOptions options) : base(options)
-        { }
+        {
+        }
 
         public DbSet<Blog> Blogs { get; set; }
     }
@@ -147,7 +148,9 @@ public class ConfigPatternsInMemoryTest
 
     private class ExplicitServicesAndConfigBlogContext : DbContext
     {
-        public ExplicitServicesAndConfigBlogContext(DbContextOptions options) : base(options) { }
+        public ExplicitServicesAndConfigBlogContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Blog> Blogs { get; set; }
     }

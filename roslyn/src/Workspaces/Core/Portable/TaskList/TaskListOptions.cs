@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.TaskList
         [DataMember]
         public bool ComputeForClosedFiles { get; init; } = true;
 
-        public TaskListOptions() { }
+        public TaskListOptions()
+        {
+        }
 
         public static readonly TaskListOptions Default = new();
     }

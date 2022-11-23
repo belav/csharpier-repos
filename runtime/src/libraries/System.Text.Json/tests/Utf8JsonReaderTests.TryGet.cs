@@ -836,7 +836,9 @@ namespace System.Text.Json.Tests
                             "Expected GetBytesFromBase64 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -846,7 +848,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetBytesFromBase64 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -856,7 +860,9 @@ namespace System.Text.Json.Tests
                             "Expected GetDateTime to throw InvalidOperationException due to mismatched token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -866,7 +872,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetDateTime to throw InvalidOperationException due to mismatched token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -876,7 +884,9 @@ namespace System.Text.Json.Tests
                             "Expected GetDateTimeOffset to throw InvalidOperationException due to mismatched token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -886,7 +896,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetDateTimeOffset to throw InvalidOperationException due to mismatched token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     JsonTestHelper.AssertThrows<InvalidOperationException>(
                         json,
@@ -909,7 +921,9 @@ namespace System.Text.Json.Tests
                             "Expected GetComment to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
 
                 if (json.TokenType != JsonTokenType.True && json.TokenType != JsonTokenType.False)
@@ -922,7 +936,9 @@ namespace System.Text.Json.Tests
                             "Expected GetBoolean to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
 
                 if (json.TokenType != JsonTokenType.Number)
@@ -935,7 +951,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetByte to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -945,7 +963,9 @@ namespace System.Text.Json.Tests
                             "Expected GetByte to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -955,7 +975,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetSByte to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -965,7 +987,9 @@ namespace System.Text.Json.Tests
                             "Expected GetSByte to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -975,7 +999,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetInt16 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -985,7 +1011,9 @@ namespace System.Text.Json.Tests
                             "Expected GetInt16 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -995,7 +1023,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetInt32 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1005,7 +1035,9 @@ namespace System.Text.Json.Tests
                             "Expected GetInt32 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1015,7 +1047,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetInt64 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1025,7 +1059,9 @@ namespace System.Text.Json.Tests
                             "Expected GetInt64 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1035,7 +1071,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetUInt16 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1045,7 +1083,9 @@ namespace System.Text.Json.Tests
                             "Expected GetUInt16 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1055,7 +1095,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetUInt32 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1065,7 +1107,9 @@ namespace System.Text.Json.Tests
                             "Expected GetUInt32 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1075,7 +1119,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetUInt64 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1085,7 +1131,9 @@ namespace System.Text.Json.Tests
                             "Expected GetUInt64 to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1095,7 +1143,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetSingle to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1105,7 +1155,9 @@ namespace System.Text.Json.Tests
                             "Expected GetSingle to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1115,7 +1167,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetDouble to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1125,7 +1179,9 @@ namespace System.Text.Json.Tests
                             "Expected GetDouble to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1135,7 +1191,9 @@ namespace System.Text.Json.Tests
                             "Expected TryGetDecimal to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     try
                     {
@@ -1145,7 +1203,9 @@ namespace System.Text.Json.Tests
                             "Expected GetDecimal to throw InvalidOperationException due to mismatch token type."
                         );
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException)
+                    {
+                    }
                 }
             }
 
@@ -1263,7 +1323,9 @@ namespace System.Text.Json.Tests
                         "Expected InvalidOperationException when trying to get string value for invalid UTF-16 JSON text."
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
 
@@ -1375,7 +1437,9 @@ namespace System.Text.Json.Tests
                     "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text."
                 );
             }
-            catch (FormatException) { }
+            catch (FormatException)
+            {
+            }
         }
 
         [Theory]
@@ -1411,7 +1475,9 @@ namespace System.Text.Json.Tests
                         "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text."
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
 
                 try
                 {
@@ -1421,7 +1487,9 @@ namespace System.Text.Json.Tests
                         "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text."
                     );
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
 
@@ -1459,7 +1527,9 @@ namespace System.Text.Json.Tests
                                 "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-8 JSON text."
                             );
                         }
-                        catch (FormatException) { }
+                        catch (FormatException)
+                        {
+                        }
 
                         Assert.False(json.TryGetBytesFromBase64(out byte[] value));
                         Assert.Null(value);

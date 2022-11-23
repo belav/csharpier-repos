@@ -13,10 +13,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class PrecodeHelperImport : Import
     {
         public PrecodeHelperImport(NodeFactory factory, Signature signature)
-            : base(factory.PrecodeImports, signature) { }
+            : base(factory.PrecodeImports, signature)
+        {
+        }
 
         public PrecodeHelperImport(ImportSectionNode section, Signature signature)
-            : base(section, signature) { }
+            : base(section, signature)
+        {
+        }
 
         protected override string GetName(NodeFactory factory)
         {

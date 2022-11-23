@@ -14,7 +14,9 @@ namespace System.CommandLine
 {
     internal sealed class CommandLineException : Exception
     {
-        public CommandLineException(string message) : base(message) { }
+        public CommandLineException(string message) : base(message)
+        {
+        }
     }
 
     //
@@ -126,7 +128,9 @@ namespace System.CommandLine
             {
                 details.Add(Environment.GetCommandLineArgs()[0]);
             }
-            catch { }
+            catch
+            {
+            }
             try
             {
                 details.Add(
@@ -135,7 +139,9 @@ namespace System.CommandLine
                         .ToString()
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             details.Add("------------------------");
             details.Add("Actual Command Line Args");
@@ -153,7 +159,9 @@ namespace System.CommandLine
                     {
                         details.AddRange(File.ReadAllLines(rspFileName));
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
 

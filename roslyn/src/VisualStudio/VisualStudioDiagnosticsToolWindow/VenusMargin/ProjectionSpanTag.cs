@@ -14,6 +14,8 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
 
         public static readonly ProjectionSpanTag Instance = new ProjectionSpanTag();
 
-        public ProjectionSpanTag() : base(TagId) { }
+        public ProjectionSpanTag() : base(TagId)
+        {
+        }
     }
 }

@@ -11,7 +11,9 @@ namespace System.Reflection.TypeLoading
     // of files that have to be edited whenever RoType adds or removes an abstract method rather than to imply any meaningful commonality.
     internal abstract class RoStubType : RoType
     {
-        protected RoStubType() : base() { }
+        protected RoStubType() : base()
+        {
+        }
 
         public sealed override bool IsTypeDefinition => throw null!;
         public sealed override bool IsGenericTypeDefinition => throw null!;

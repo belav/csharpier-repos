@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public JsonBraceMatcher() { }
+        public JsonBraceMatcher()
+        {
+        }
 
         public BraceMatchingResult? FindBraces(
             Project project,

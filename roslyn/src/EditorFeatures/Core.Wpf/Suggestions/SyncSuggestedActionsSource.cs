@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     textView,
                     textBuffer,
                     suggestedActionCategoryRegistry
-                ) { }
+                )
+            {
+            }
         }
     }
 }

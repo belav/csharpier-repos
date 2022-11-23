@@ -10,9 +10,13 @@ using System;
 
 public class Test1
 {
-    public class Base<T> where T : new() { }
+    public class Base<T> where T : new()
+    {
+    }
 
-    public class Derived<T> : Base<Derived<T>> { }
+    public class Derived<T> : Base<Derived<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -23,9 +27,13 @@ public class Test1
 
 public class Test2
 {
-    public class Base<T> where T : class { }
+    public class Base<T> where T : class
+    {
+    }
 
-    public class Derived<T> : Base<Derived<T>> { }
+    public class Derived<T> : Base<Derived<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -36,9 +44,13 @@ public class Test2
 
 public class Test3
 {
-    public interface Base<T> where T : struct { }
+    public interface Base<T> where T : struct
+    {
+    }
 
-    public struct Derived<T> : Base<Derived<T>> { }
+    public struct Derived<T> : Base<Derived<T>>
+    {
+    }
 
     public static void Test()
     {
@@ -51,9 +63,13 @@ public class Test3
 
 public class Test4
 {
-    public class Base<T> where T : class, new() { }
+    public class Base<T> where T : class, new()
+    {
+    }
 
-    public class Derived<T> : Base<Derived<T>> { }
+    public class Derived<T> : Base<Derived<T>>
+    {
+    }
 
     public static void Test()
     {

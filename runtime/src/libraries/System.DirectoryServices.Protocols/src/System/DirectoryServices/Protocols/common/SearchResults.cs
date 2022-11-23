@@ -34,7 +34,9 @@ namespace System.DirectoryServices.Protocols
 
     public class SearchResultReferenceCollection : ReadOnlyCollectionBase
     {
-        internal SearchResultReferenceCollection() { }
+        internal SearchResultReferenceCollection()
+        {
+        }
 
         public SearchResultReference this[int index] => (SearchResultReference)InnerList[index];
 
@@ -52,7 +54,9 @@ namespace System.DirectoryServices.Protocols
 
     public class SearchResultEntry
     {
-        internal SearchResultEntry(string dn) : this(dn, new SearchResultAttributeCollection()) { }
+        internal SearchResultEntry(string dn) : this(dn, new SearchResultAttributeCollection())
+        {
+        }
 
         internal SearchResultEntry(string dn, SearchResultAttributeCollection attrs)
         {
@@ -69,7 +73,9 @@ namespace System.DirectoryServices.Protocols
 
     public class SearchResultEntryCollection : ReadOnlyCollectionBase
     {
-        internal SearchResultEntryCollection() { }
+        internal SearchResultEntryCollection()
+        {
+        }
 
         public SearchResultEntry this[int index] => (SearchResultEntry)InnerList[index];
 

@@ -52,7 +52,9 @@ namespace System.IO
         /// Creates a closed stream.
         /// </summary>
         // Needed for subclasses that need to map a file, etc.
-        protected UnmanagedMemoryStream() { }
+        protected UnmanagedMemoryStream()
+        {
+        }
 
         /// <summary>
         /// Creates a stream over a SafeBuffer.

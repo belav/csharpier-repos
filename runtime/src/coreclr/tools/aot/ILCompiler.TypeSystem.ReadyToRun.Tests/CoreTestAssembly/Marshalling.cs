@@ -7,7 +7,9 @@ namespace Marshalling
 {
     #region Simple classes
 
-    public class SimpleEmptyClass { }
+    public class SimpleEmptyClass
+    {
+    }
 
     public class SimpleByteClass
     {
@@ -34,7 +36,9 @@ namespace Marshalling
     #region LayoutKind.Explicit classes
 
     [StructLayout(LayoutKind.Explicit)]
-    public class ExplicitEmptyBase { }
+    public class ExplicitEmptyBase
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit)]
     public class ClassWithExplicitEmptyBase : ExplicitEmptyBase
@@ -44,7 +48,9 @@ namespace Marshalling
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0)]
-    public class ExplicitEmptySizeZeroBase { }
+    public class ExplicitEmptySizeZeroBase
+    {
+    }
 
     [StructLayout(LayoutKind.Explicit)]
     public class ClassWithExplicitEmptySizeZeroBase : ExplicitEmptySizeZeroBase
@@ -110,7 +116,9 @@ namespace Marshalling
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class SequentialEmptyBase { }
+    public class SequentialEmptyBase
+    {
+    }
 
     #endregion
 

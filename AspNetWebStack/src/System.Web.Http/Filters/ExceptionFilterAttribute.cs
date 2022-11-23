@@ -13,7 +13,9 @@ namespace System.Web.Http.Filters
     )]
     public abstract class ExceptionFilterAttribute : FilterAttribute, IExceptionFilter
     {
-        public virtual void OnException(HttpActionExecutedContext actionExecutedContext) { }
+        public virtual void OnException(HttpActionExecutedContext actionExecutedContext)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Design",

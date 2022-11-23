@@ -555,7 +555,9 @@ namespace System.Net.Http
             _fetchResponse?.Dispose();
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

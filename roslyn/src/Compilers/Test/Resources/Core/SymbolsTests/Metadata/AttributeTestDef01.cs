@@ -31,7 +31,9 @@ namespace CustomAttribute
         }
 
         // Char array
-        public AllInheritMultipleAttribute(char[] ary1, params string[] ary2) { }
+        public AllInheritMultipleAttribute(char[] ary1, params string[] ary2)
+        {
+        }
 
         public uint UIntField;
         public ulong[] AryField;
@@ -61,7 +63,9 @@ namespace CustomAttribute
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Parameter)]
     public class DerivedAttribute : BaseAttribute
     {
-        public DerivedAttribute(object p) : base(p) { }
+        public DerivedAttribute(object p) : base(p)
+        {
+        }
 
         Type _prop;
         public Type TypeProp

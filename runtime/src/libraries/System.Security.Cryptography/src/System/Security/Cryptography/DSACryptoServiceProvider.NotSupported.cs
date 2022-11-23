@@ -70,9 +70,13 @@ namespace System.Security.Cryptography
 
         public override DSAParameters ExportParameters(bool includePrivateParameters) => default;
 
-        public void ImportCspBlob(byte[] keyBlob) { }
+        public void ImportCspBlob(byte[] keyBlob)
+        {
+        }
 
-        public override void ImportParameters(DSAParameters parameters) { }
+        public override void ImportParameters(DSAParameters parameters)
+        {
+        }
 
         public bool PersistKeyInCsp { get; set; }
         public bool PublicOnly => default;

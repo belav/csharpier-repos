@@ -25,7 +25,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.ExtractInterfaceDialog;
 
         public CSharpExtractInterfaceDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpExtractInterfaceDialog)) { }
+            : base(instanceFactory, nameof(CSharpExtractInterfaceDialog))
+        {
+        }
 
         [WpfFact]
         public void VerifyCancellation()

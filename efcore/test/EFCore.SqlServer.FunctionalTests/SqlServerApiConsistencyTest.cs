@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class SqlServerApiConsistencyTest
     : ApiConsistencyTestBase<SqlServerApiConsistencyTest.SqlServerApiConsistencyFixture>
 {
-    public SqlServerApiConsistencyTest(SqlServerApiConsistencyFixture fixture) : base(fixture) { }
+    public SqlServerApiConsistencyTest(SqlServerApiConsistencyFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void AddServices(ServiceCollection serviceCollection) =>
         serviceCollection.AddEntityFrameworkSqlServer();

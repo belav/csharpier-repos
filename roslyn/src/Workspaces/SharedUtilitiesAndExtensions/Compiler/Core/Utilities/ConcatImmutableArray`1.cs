@@ -61,7 +61,9 @@ namespace Roslyn.Utilities
                 return _current.MoveNext();
             }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             void IEnumerator.Reset() => throw new NotSupportedException();
         }

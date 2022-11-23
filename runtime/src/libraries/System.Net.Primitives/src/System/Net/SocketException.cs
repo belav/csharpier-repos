@@ -34,7 +34,9 @@ namespace System.Net.Sockets
 
         /// <summary>Initializes a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code and optional message.</summary>
         public SocketException(int errorCode, string? message)
-            : this((SocketError)errorCode, message) { }
+            : this((SocketError)errorCode, message)
+        {
+        }
 
         /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code as SocketError.</summary>
         internal SocketException(SocketError socketError)

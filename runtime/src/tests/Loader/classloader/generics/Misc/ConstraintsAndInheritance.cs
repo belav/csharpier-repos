@@ -5,43 +5,63 @@
 
 using System;
 
-public interface I1 { }
+public interface I1
+{
+}
 
 //===================================================
 // Test #1
 //base type (A<T>) has constraint and child (B<T>) inherits an instantiated base type (A<int>)
-public class A<T> where T : I1 { }
+public class A<T> where T : I1
+{
+}
 
-public class B<T> : A<I1> { }
+public class B<T> : A<I1>
+{
+}
 
 //===================================================
 // Test #2
 // base type (A<T>) has constraint and child (C<T>) inherits an uninstantiated base type (A<T>)
-public class C<T> : A<T> where T : I1 { }
+public class C<T> : A<T> where T : I1
+{
+}
 
 //===================================================
 // Test #3
 // child class (E<T>) inherits from base type and child type adds a constraint
-public class D<T, U> { }
+public class D<T, U>
+{
+}
 
-public class E<T, U> : D<T, U> where T : B<U> { }
+public class E<T, U> : D<T, U> where T : B<U>
+{
+}
 
 //===================================================
 // Test #4
 // child inherits from uninstantiated generic interface and an instantiated generic interface
 
-public interface I2<T> { }
+public interface I2<T>
+{
+}
 
-public interface I3<U> { }
+public interface I3<U>
+{
+}
 
-public class F<T> : I2<T>, I3<int> { }
+public class F<T> : I2<T>, I3<int>
+{
+}
 
 //===================================================
 // Test #5
 // child inherits from instantiated generic interface and an instantiated generic interface
 // child class has 2 parameters
 
-public class G<T, U> : I2<C<I1>>, I3<D<int, double>> { }
+public class G<T, U> : I2<C<I1>>, I3<D<int, double>>
+{
+}
 
 //===================================================
 

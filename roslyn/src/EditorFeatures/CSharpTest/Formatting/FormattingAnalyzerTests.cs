@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 {
     public class FormattingAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public FormattingAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+        public FormattingAnalyzerTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

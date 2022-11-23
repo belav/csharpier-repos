@@ -49,7 +49,9 @@ namespace Microsoft.CodeAnalysis.ForEachCast
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract ISyntaxFacts SyntaxFacts { get; }
         protected abstract ImmutableArray<TSyntaxKind> GetSyntaxKinds();

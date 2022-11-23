@@ -18,7 +18,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Negate";
 
-        private NegateInstruction() { }
+        private NegateInstruction()
+        {
+        }
 
         private sealed class NegateInt16 : NegateInstruction
         {
@@ -130,7 +132,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "NegateChecked";
 
-        private NegateCheckedInstruction() { }
+        private NegateCheckedInstruction()
+        {
+        }
 
         private sealed class NegateCheckedInt32 : NegateCheckedInstruction
         {

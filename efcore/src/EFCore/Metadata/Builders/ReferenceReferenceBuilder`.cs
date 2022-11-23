@@ -26,7 +26,9 @@ public class ReferenceReferenceBuilder<TEntity, TRelatedEntity> : ReferenceRefer
         IMutableEntityType declaringEntityType,
         IMutableEntityType relatedEntityType,
         IMutableForeignKey foreignKey
-    ) : base(declaringEntityType, relatedEntityType, foreignKey) { }
+    ) : base(declaringEntityType, relatedEntityType, foreignKey)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,7 +44,9 @@ public class ReferenceReferenceBuilder<TEntity, TRelatedEntity> : ReferenceRefer
         bool foreignKeySet = false,
         bool principalKeySet = false,
         bool requiredSet = false
-    ) : base(builder, oldBuilder, inverted, foreignKeySet, principalKeySet, requiredSet) { }
+    ) : base(builder, oldBuilder, inverted, foreignKeySet, principalKeySet, requiredSet)
+    {
+    }
 
     /// <summary>
     ///     Adds or updates an annotation on the relationship. If an annotation with the key specified in

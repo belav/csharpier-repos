@@ -45,7 +45,9 @@ namespace ManagedCallingNative
                 TestFramework.LogError("IJW", "Loading IJW dll as byte array should have thrown");
                 success = false;
             }
-            catch { }
+            catch
+            {
+            }
             TestFramework.EndTestCase();
 
             return success ? 100 : 99;

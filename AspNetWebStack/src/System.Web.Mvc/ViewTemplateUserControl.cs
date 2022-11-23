@@ -3,5 +3,7 @@
 
 namespace System.Web.Mvc
 {
-    public class ViewTemplateUserControl : ViewTemplateUserControl<object> { }
+    public class ViewTemplateUserControl : ViewTemplateUserControl<object>
+    {
+    }
 }

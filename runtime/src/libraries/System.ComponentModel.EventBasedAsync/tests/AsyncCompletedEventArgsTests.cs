@@ -12,10 +12,14 @@ namespace System.ComponentModel.EventBasedAsync.Tests
     // so we should make derived class for access it.
     public class AsyncCompletedEventArgsTests : AsyncCompletedEventArgs
     {
-        public AsyncCompletedEventArgsTests() : base(null, false, null) { }
+        public AsyncCompletedEventArgsTests() : base(null, false, null)
+        {
+        }
 
         private AsyncCompletedEventArgsTests(Exception error, bool cancelled, object userState)
-            : base(error, cancelled, userState) { }
+            : base(error, cancelled, userState)
+        {
+        }
 
         public static IEnumerable<object[]> TestInput
         {

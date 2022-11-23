@@ -47,10 +47,14 @@ public sealed class TestEventListener : EventListener
     private List<EventSource> _eventSources = new List<EventSource>();
 
     public TestEventListener(TextWriter output, params string[] sourceNames)
-        : this(str => output.WriteLine(str), sourceNames) { }
+        : this(str => output.WriteLine(str), sourceNames)
+    {
+    }
 
     public TestEventListener(ITestOutputHelper output, params string[] sourceNames)
-        : this(str => output.WriteLine(str), sourceNames) { }
+        : this(str => output.WriteLine(str), sourceNames)
+    {
+    }
 
     public TestEventListener(Action<string> writeFunc, params string[] sourceNames)
     {
@@ -104,6 +108,8 @@ public sealed class TestEventListener : EventListener
         {
             _writeFunc(sb.ToString());
         }
-        catch { }
+        catch
+        {
+        }
     }
 }

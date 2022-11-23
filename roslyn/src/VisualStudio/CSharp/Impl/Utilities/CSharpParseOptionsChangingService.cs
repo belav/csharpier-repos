@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpParseOptionsChangingService() { }
+        public CSharpParseOptionsChangingService()
+        {
+        }
 
         public bool CanApplyChange(
             ParseOptions oldOptions,

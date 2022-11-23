@@ -83,7 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TypeScriptCodeRefactoringProvider() { }
+            public TypeScriptCodeRefactoringProvider()
+            {
+            }
 
             public override Task ComputeRefactoringsAsync(CodeRefactoringContext context)
             {

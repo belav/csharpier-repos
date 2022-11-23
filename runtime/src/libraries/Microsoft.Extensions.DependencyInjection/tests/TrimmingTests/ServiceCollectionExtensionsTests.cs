@@ -53,15 +53,25 @@ class Program
         return 100;
     }
 
-    private class ServiceA { }
+    private class ServiceA
+    {
+    }
 
-    private class ServiceB { }
+    private class ServiceB
+    {
+    }
 
-    private interface IServiceC { }
+    private interface IServiceC
+    {
+    }
 
-    private class ServiceC : IServiceC { }
+    private class ServiceC : IServiceC
+    {
+    }
 
-    public interface IServiceD { }
+    public interface IServiceD
+    {
+    }
 
     public interface IServiceE
     {
@@ -73,7 +83,9 @@ class Program
         IServiceE ServiceE { get; }
     }
 
-    public class ServiceD : IServiceD { }
+    public class ServiceD : IServiceD
+    {
+    }
 
     public class ServiceE : IServiceE
     {
@@ -95,15 +107,27 @@ class Program
         }
     }
 
-    public class Logger<T> { }
+    public class Logger<T>
+    {
+    }
 
-    public interface IServiceG { }
+    public interface IServiceG
+    {
+    }
 
-    public class ServiceG : IServiceG { }
+    public class ServiceG : IServiceG
+    {
+    }
 
-    public interface IServiceH { }
+    public interface IServiceH
+    {
+    }
 
-    public class ServiceH1 : IServiceH { }
+    public class ServiceH1 : IServiceH
+    {
+    }
 
-    public class ServiceH2 : IServiceH { }
+    public class ServiceH2 : IServiceH
+    {
+    }
 }

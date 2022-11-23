@@ -17,19 +17,29 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ServiceHubDocumentTrackingService() { }
+        public ServiceHubDocumentTrackingService()
+        {
+        }
 
         public bool SupportsDocumentTracking => false;
 
         public event EventHandler<DocumentId?> ActiveDocumentChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event EventHandler<EventArgs> NonRoslynBufferTextChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public ImmutableArray<DocumentId> GetVisibleDocuments()

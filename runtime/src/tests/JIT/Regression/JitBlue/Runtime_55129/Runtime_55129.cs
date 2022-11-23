@@ -46,14 +46,18 @@ interface I
 
 class C : I
 {
-    public void Foo<T>(T val) { }
+    public void Foo<T>(T val)
+    {
+    }
 }
 
 struct S0
 {
     public long F5;
 
-    public S0(int f0, byte f1, ulong f2, byte f3, uint f4, long f5, int f6, int f7) : this() { }
+    public S0(int f0, byte f1, ulong f2, byte f3, uint f4, long f5, int f6, int f7) : this()
+    {
+    }
 }
 
 class C0

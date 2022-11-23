@@ -110,11 +110,34 @@ namespace System.Threading.Tests
         public void Timer_AllConstructorsCanBeUsedSuccessfully()
         {
             const int Timeout = 10_000;
-            new Timer(_ => { }, null, Timeout, Timeout).Dispose();
-            new Timer(_ => { }, null, (long)Timeout, (long)Timeout).Dispose();
-            new Timer(_ => { }, null, (uint)Timeout, (uint)Timeout).Dispose();
             new Timer(
-                _ => { },
+                _ =>
+                {
+                },
+                null,
+                Timeout,
+                Timeout
+            ).Dispose();
+            new Timer(
+                _ =>
+                {
+                },
+                null,
+                (long)Timeout,
+                (long)Timeout
+            ).Dispose();
+            new Timer(
+                _ =>
+                {
+                },
+                null,
+                (uint)Timeout,
+                (uint)Timeout
+            ).Dispose();
+            new Timer(
+                _ =>
+                {
+                },
                 null,
                 TimeSpan.FromMilliseconds(Timeout),
                 TimeSpan.FromMilliseconds(Timeout)

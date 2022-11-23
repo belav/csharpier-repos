@@ -24,8 +24,12 @@ internal static partial class Interop
             {
                 return ParseMapsModulesCore(File.ReadLines(GetMapsFilePathForProcess(pid)));
             }
-            catch (IOException) { }
-            catch (UnauthorizedAccessException) { }
+            catch (IOException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
 
             return null;
         }

@@ -6,7 +6,9 @@ public class marshalbool
     [AttributeUsage(AttributeTargets.Method)]
     sealed class MonoPInvokeCallbackAttribute : Attribute
     {
-        public MonoPInvokeCallbackAttribute(Type t) { }
+        public MonoPInvokeCallbackAttribute(Type t)
+        {
+        }
     }
 
     [DllImport("libtest")]

@@ -275,7 +275,9 @@ namespace System.Diagnostics
         private static bool PriorityBoostEnabledCore
         {
             get { return false; } //Nop
-            set { } // Nop
+            set
+            {
+            } // Nop
         }
 
         /// <summary>
@@ -871,7 +873,9 @@ namespace System.Diagnostics
                         return path;
                     }
                 }
-                catch (ArgumentException) { } // ignore any errors in data that may come from the exe path
+                catch (ArgumentException)
+                {
+                } // ignore any errors in data that may come from the exe path
             }
 
             // Then check the current directory

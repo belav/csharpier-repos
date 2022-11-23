@@ -13,7 +13,9 @@ public class CSharpEntityTypeGeneratorTest : ModelCodeGeneratorTestBase
     public CSharpEntityTypeGeneratorTest(
         ModelCodeGeneratorTestFixture fixture,
         ITestOutputHelper output
-    ) : base(fixture, output) { }
+    ) : base(fixture, output)
+    {
+    }
 
     [ConditionalFact]
     public Task KeylessAttribute_is_generated_for_key_less_entity() =>
@@ -1446,7 +1448,9 @@ public partial class Entity
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
                 );
             },
-            model => { }
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -1504,7 +1508,9 @@ public partial class Entity
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
                 );
             },
-            model => { }
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -1546,7 +1552,9 @@ public partial class Entity
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
                 );
             },
-            model => { }
+            model =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -2232,7 +2240,12 @@ public partial class TestDbContext : DbContext
                 modelBuilder
                     .Entity("Blog", x => x.Property<int>("Id"))
                     .Entity("Post", x => x.Property<int>("Id"))
-                    .Entity("BlogPost", _ => { })
+                    .Entity(
+                        "BlogPost",
+                        _ =>
+                        {
+                        }
+                    )
                     .Entity("Blog")
                     .HasMany("Post", "Posts")
                     .WithMany("Blogs")
@@ -2364,7 +2377,12 @@ public partial class Post
                 modelBuilder
                     .Entity("Blog", x => x.Property<int>("Id"))
                     .Entity("Post", x => x.Property<string>("Id"))
-                    .Entity("BlogPost", _ => { })
+                    .Entity(
+                        "BlogPost",
+                        _ =>
+                        {
+                        }
+                    )
                     .Entity("Blog")
                     .HasMany("Post", "Posts")
                     .WithMany("Blogs")
@@ -2491,7 +2509,12 @@ public partial class Post
                 modelBuilder
                     .Entity("Blog", x => x.Property<int>("Id"))
                     .Entity("Post", x => x.Property<int>("Id"))
-                    .Entity("BlogPost", _ => { })
+                    .Entity(
+                        "BlogPost",
+                        _ =>
+                        {
+                        }
+                    )
                     .Entity("Blog")
                     .HasMany("Post", "Posts")
                     .WithMany("Blogs")
@@ -2647,7 +2670,9 @@ public partial class Post
     private class TestModelAnnotationProvider : SqlServerAnnotationProvider
     {
         public TestModelAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-            : base(dependencies) { }
+            : base(dependencies)
+        {
+        }
 
         public override IEnumerable<IAnnotation> For(ITable table, bool designTime)
         {
@@ -2693,7 +2718,9 @@ public partial class Post
     private class TestModelAnnotationCodeGenerator : SqlServerAnnotationCodeGenerator
     {
         public TestModelAnnotationCodeGenerator(AnnotationCodeGeneratorDependencies dependencies)
-            : base(dependencies) { }
+            : base(dependencies)
+        {
+        }
 
         protected override AttributeCodeFragment GenerateDataAnnotation(
             IEntityType entityType,

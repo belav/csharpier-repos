@@ -838,7 +838,9 @@ namespace XLinqTests
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(xml), null))
                 {
-                    while (r.Read()) { }
+                    while (r.Read())
+                    {
+                    }
 
                     try
                     {
@@ -928,7 +930,9 @@ namespace XLinqTests
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(xml), null))
                 {
-                    while (r.Read()) { }
+                    while (r.Read())
+                    {
+                    }
                     try
                     {
                         switch (m)
@@ -999,7 +1003,9 @@ namespace XLinqTests
                     XDocument.Load((string)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
             try
             {
@@ -1013,7 +1019,9 @@ namespace XLinqTests
                     XDocument.Load((string)null, LoadOptions.PreserveWhitespace);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
             try
             {
@@ -1027,7 +1035,9 @@ namespace XLinqTests
                     XDocument.Load((string)null, LoadOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
 
             try //Load from TextReader
@@ -1042,7 +1052,9 @@ namespace XLinqTests
                     XDocument.Load((TextReader)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
             try
             {
@@ -1056,7 +1068,9 @@ namespace XLinqTests
                     XDocument.Load((TextReader)null, LoadOptions.PreserveWhitespace);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
             try
             {
@@ -1070,7 +1084,9 @@ namespace XLinqTests
                     XDocument.Load((TextReader)null, LoadOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
 
             try //Load from XmlReader
@@ -1085,7 +1101,9 @@ namespace XLinqTests
                     XDocument.Load((XmlReader)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
         }
 
@@ -1097,49 +1115,63 @@ namespace XLinqTests
                 XElement.Load((string)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 XElement.Load((string)null, LoadOptions.PreserveWhitespace);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 XElement.Load((string)null, LoadOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try //Load from TextReader
             {
                 XElement.Load((TextReader)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 XElement.Load((TextReader)null, LoadOptions.PreserveWhitespace);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 XElement.Load((TextReader)null, LoadOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try //Load from XmlReader
             {
                 XElement.Load((XmlReader)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument: Null parameters for Parse, ReadFrom and ReadContentFrom")]
@@ -1158,7 +1190,9 @@ namespace XLinqTests
                     XDocument.Parse(null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
 
             try
@@ -1173,7 +1207,9 @@ namespace XLinqTests
                     XDocument.Parse(null, LoadOptions.PreserveWhitespace);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
 
             try
@@ -1188,7 +1224,9 @@ namespace XLinqTests
                     XDocument.Parse(null, LoadOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
 
             try
@@ -1203,7 +1241,9 @@ namespace XLinqTests
                     XNode.ReadFrom(null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
 
             try
@@ -1218,7 +1258,9 @@ namespace XLinqTests
                     XNode.ReadFrom(null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException) { }
+                catch (ArgumentNullException)
+                {
+                }
             }
         }
 
@@ -1231,28 +1273,36 @@ namespace XLinqTests
                 XElement.Parse(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 XElement.Parse(null, LoadOptions.PreserveWhitespace);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 XElement.Parse(null, LoadOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
 
             try
             {
                 XNode.ReadFrom(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException) { }
+            catch (ArgumentNullException)
+            {
+            }
         }
 
         #endregion

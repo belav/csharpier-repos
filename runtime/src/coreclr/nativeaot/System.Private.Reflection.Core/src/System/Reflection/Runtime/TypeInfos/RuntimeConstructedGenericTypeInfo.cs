@@ -59,7 +59,9 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        public void PrepareKey() { }
+        public void PrepareKey()
+        {
+        }
 
         //
         // Implements IKeyedItem.Key.
@@ -184,7 +186,9 @@ namespace System.Reflection.Runtime.TypeInfos
                 {
                     genericTypeDefinitionString = genericTypeDefinition.FullName;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
             // If all else fails, use the ToString() - it won't match the legacy CLR but with no metadata, we can't match it anyway.
             if (genericTypeDefinitionString == null)

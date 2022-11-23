@@ -85,7 +85,9 @@ namespace Roslyn.Utilities
                 equalityComparer: null,
                 asyncListener: null,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         /// <param name="processBatchAsync">Callback to add the new items to the current batch.  It is legal to mutate
         /// the current batch (for example, clearing the batch or deduplicating)</param>

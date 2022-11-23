@@ -393,24 +393,34 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             public int Value => 0;
         }
 
-        private interface IServiceG { }
+        private interface IServiceG
+        {
+        }
 
         private class ServiceG
         {
-            public ServiceG(IServiceG service = null) { }
+            public ServiceG(IServiceG service = null)
+            {
+            }
         }
 
         private class ServiceF
         {
-            public ServiceF(ServiceG service) { }
+            public ServiceF(ServiceG service)
+            {
+            }
         }
 
         private class ServiceD
         {
-            public ServiceD(IEnumerable<ServiceA> services) { }
+            public ServiceD(IEnumerable<ServiceA> services)
+            {
+            }
         }
 
-        private class ServiceA { }
+        private class ServiceA
+        {
+        }
 
         private class ServiceB
         {
@@ -447,21 +457,31 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
         private class DisposableServiceA : ServiceA, IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         private class DisposableServiceB : ServiceB, IDisposable
         {
-            public DisposableServiceB(ServiceA serviceA) : base(serviceA) { }
+            public DisposableServiceB(ServiceA serviceA) : base(serviceA)
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         private class DisposableServiceC : ServiceC, IDisposable
         {
-            public DisposableServiceC(ServiceB serviceB) : base(serviceB) { }
+            public DisposableServiceC(ServiceB serviceB) : base(serviceB)
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         private static object Invoke(ServiceCallSite callSite, ServiceProviderEngineScope scope)

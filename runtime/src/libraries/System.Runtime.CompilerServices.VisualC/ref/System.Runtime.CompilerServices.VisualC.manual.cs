@@ -15,7 +15,9 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHere
     {
-        internal AssemblyAttributesGoHere() { }
+        internal AssemblyAttributesGoHere()
+        {
+        }
     }
 
     [TypeForwardedFrom(
@@ -23,7 +25,9 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHereS
     {
-        internal AssemblyAttributesGoHereS() { }
+        internal AssemblyAttributesGoHereS()
+        {
+        }
     }
 
     [TypeForwardedFrom(
@@ -31,7 +35,9 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHereM
     {
-        internal AssemblyAttributesGoHereM() { }
+        internal AssemblyAttributesGoHereM()
+        {
+        }
     }
 
     [TypeForwardedFrom(
@@ -39,13 +45,17 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class AssemblyAttributesGoHereSM
     {
-        internal AssemblyAttributesGoHereSM() { }
+        internal AssemblyAttributesGoHereSM()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
     internal sealed class DecoratedNameAttribute : System.Attribute
     {
-        public DecoratedNameAttribute(string decoratedName) { }
+        public DecoratedNameAttribute(string decoratedName)
+        {
+        }
     }
 
     [AttributeUsageAttribute(
@@ -61,6 +71,8 @@ namespace System.Runtime.CompilerServices
     )]
     internal sealed class SuppressMergeCheckAttribute : Attribute
     {
-        public SuppressMergeCheckAttribute() { }
+        public SuppressMergeCheckAttribute()
+        {
+        }
     }
 }

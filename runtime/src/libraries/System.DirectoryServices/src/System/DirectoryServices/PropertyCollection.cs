@@ -290,7 +290,9 @@ namespace System.DirectoryServices
 
         private sealed class KeysCollection : ValuesCollection
         {
-            public KeysCollection(PropertyCollection props) : base(props) { }
+            public KeysCollection(PropertyCollection props) : base(props)
+            {
+            }
 
             public override IEnumerator GetEnumerator()
             {
@@ -348,7 +350,9 @@ namespace System.DirectoryServices
 
         private sealed class KeysEnumerator : ValuesEnumerator
         {
-            public KeysEnumerator(PropertyCollection collection) : base(collection) { }
+            public KeysEnumerator(PropertyCollection collection) : base(collection)
+            {
+            }
 
             public override object Current
             {

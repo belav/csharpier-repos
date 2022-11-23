@@ -12,7 +12,9 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafePipeHandle" />.
         /// </summary>
-        public SafePipeHandle() : this(new IntPtr(DefaultInvalidHandle), true) { }
+        public SafePipeHandle() : this(new IntPtr(DefaultInvalidHandle), true)
+        {
+        }
 
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafePipeHandle" /> around a pipe handle.

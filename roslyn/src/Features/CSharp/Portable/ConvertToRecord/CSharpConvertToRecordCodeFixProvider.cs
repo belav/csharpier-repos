@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertToRecordCodeFixProvider() { }
+        public CSharpConvertToRecordCodeFixProvider()
+        {
+        }
 
         public override FixAllProvider? GetFixAllProvider()
         {

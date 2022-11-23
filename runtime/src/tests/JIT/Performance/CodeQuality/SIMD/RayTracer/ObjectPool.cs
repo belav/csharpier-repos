@@ -17,7 +17,9 @@ namespace System.Collections.Concurrent
 
         /// <summary>Initializes an instance of the ObjectPool class.</summary>
         /// <param name="generator">The function used to create items when no items exist in the pool.</param>
-        public ObjectPool(Func<T> generator) : this(generator, new ConcurrentQueue<T>()) { }
+        public ObjectPool(Func<T> generator) : this(generator, new ConcurrentQueue<T>())
+        {
+        }
 
         /// <summary>Initializes an instance of the ObjectPool class.</summary>
         /// <param name="generator">The function used to create items when no items exist in the pool.</param>

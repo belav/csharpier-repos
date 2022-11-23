@@ -11,6 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
     internal class ValueTrackingEditorCommandArgs : EditorCommandArgs
     {
         public ValueTrackingEditorCommandArgs(ITextView textView, ITextBuffer subjectBuffer)
-            : base(textView, subjectBuffer) { }
+            : base(textView, subjectBuffer)
+        {
+        }
     }
 }

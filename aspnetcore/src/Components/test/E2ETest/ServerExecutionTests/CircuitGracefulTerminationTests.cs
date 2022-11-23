@@ -22,7 +22,9 @@ public class CircuitGracefulTerminationTests
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     public TaskCompletionSource GracefulDisconnectCompletionSource { get; private set; }
     public TestSink Sink { get; private set; }

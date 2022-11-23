@@ -19,5 +19,7 @@ internal class ExportCSharpVisualBasicLspServiceFactoryAttribute : ExportLspServ
     public ExportCSharpVisualBasicLspServiceFactoryAttribute(
         Type type,
         WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.Any
-    ) : base(type, ProtocolConstants.RoslynLspLanguagesContract, serverKind) { }
+    ) : base(type, ProtocolConstants.RoslynLspLanguagesContract, serverKind)
+    {
+    }
 }

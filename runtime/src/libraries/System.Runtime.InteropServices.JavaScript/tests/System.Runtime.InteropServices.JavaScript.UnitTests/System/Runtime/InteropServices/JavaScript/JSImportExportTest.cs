@@ -334,9 +334,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 }
         }
 
-        public class SomethingRef { }
+        public class SomethingRef
+        {
+        }
 
-        public class SomethingStruct { }
+        public class SomethingStruct
+        {
+        }
 
         public static IEnumerable<object[]> MarshalObjectArrayCases()
         {
@@ -472,8 +476,22 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         public static IEnumerable<object[]> MarshalObjectArrayCasesThrow()
         {
-            yield return new object[] { new object[] { () => { } } };
-            yield return new object[] { new object[] { (int a) => { } } };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    () => {
+                    }
+                }
+            };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    (int a) => {
+                    }
+                }
+            };
             yield return new object[]
             {
                 new object[]
@@ -499,7 +517,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         delegate void dummyDelegate();
 
-        static void dummyDelegateA() { }
+        static void dummyDelegateA()
+        {
+        }
 
         [Theory]
         [MemberData(nameof(MarshalObjectArrayCasesThrow))]

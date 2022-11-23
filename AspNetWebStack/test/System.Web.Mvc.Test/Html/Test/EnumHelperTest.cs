@@ -442,7 +442,9 @@ namespace System.Web.Mvc.Html.Test
             Three,
         }
 
-        private enum EnumWithoutAnything : byte { }
+        private enum EnumWithoutAnything : byte
+        {
+        }
 
         private enum EnumWithoutZero : byte
         {

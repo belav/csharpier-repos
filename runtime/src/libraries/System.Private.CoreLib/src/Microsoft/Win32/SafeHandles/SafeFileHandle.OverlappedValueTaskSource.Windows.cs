@@ -161,7 +161,9 @@ namespace Microsoft.Win32.SafeHandles
                                         );
                                         // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
                                     }
-                                    catch (ObjectDisposedException) { } // in case the SafeHandle is (erroneously) closed concurrently
+                                    catch (ObjectDisposedException)
+                                    {
+                                    } // in case the SafeHandle is (erroneously) closed concurrently
                                 }
                             },
                             this

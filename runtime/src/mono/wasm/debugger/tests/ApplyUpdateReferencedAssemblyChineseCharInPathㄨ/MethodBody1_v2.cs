@@ -42,7 +42,9 @@ namespace ApplyUpdateReferencedAssembly
 
     public class MethodBody4
     {
-        public static void StaticMethod4() { }
+        public static void StaticMethod4()
+        {
+        }
     }
 
     public class MethodBody5

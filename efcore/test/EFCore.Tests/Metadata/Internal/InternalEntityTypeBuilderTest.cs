@@ -5640,9 +5640,13 @@ public class InternalEntityTypeBuilderTest
         public string Specialty { get; set; }
     }
 
-    private class ExtraSpecialOrder : SpecialOrder { }
+    private class ExtraSpecialOrder : SpecialOrder
+    {
+    }
 
-    private class BackOrder : Order { }
+    private class BackOrder : Order
+    {
+    }
 
     private class Customer
     {
@@ -5696,9 +5700,13 @@ public class InternalEntityTypeBuilderTest
         public virtual ICollection<Order> Orders { get; set; }
     }
 
-    private class SpecialProduct : Product { }
+    private class SpecialProduct : Product
+    {
+    }
 
-    private class ExtraSpecialProduct : SpecialProduct { }
+    private class ExtraSpecialProduct : SpecialProduct
+    {
+    }
 
     private class Splot
     {
@@ -5707,9 +5715,13 @@ public class InternalEntityTypeBuilderTest
         public int? Splowed { get; set; }
     }
 
-    private class Splow : Splot { }
+    private class Splow : Splot
+    {
+    }
 
-    private class Splod : Splow { }
+    private class Splod : Splow
+    {
+    }
 
     private class IndexedClass
     {
@@ -5718,7 +5730,9 @@ public class InternalEntityTypeBuilderTest
         public object this[string name]
         {
             get => null;
-            set { }
+            set
+            {
+            }
         }
     }
 }

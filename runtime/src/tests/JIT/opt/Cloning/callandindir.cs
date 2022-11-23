@@ -9,7 +9,9 @@ using System.Runtime.CompilerServices;
 class CallAndIndir
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void S() { }
+    public static void S()
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void F(int[] a, int low, int high, ref int z)

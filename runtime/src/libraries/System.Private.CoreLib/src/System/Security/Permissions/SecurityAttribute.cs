@@ -11,7 +11,9 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public abstract partial class SecurityAttribute : Attribute
     {
-        protected SecurityAttribute(SecurityAction action) { }
+        protected SecurityAttribute(SecurityAction action)
+        {
+        }
 
         public SecurityAction Action { get; set; }
         public bool Unrestricted { get; set; }

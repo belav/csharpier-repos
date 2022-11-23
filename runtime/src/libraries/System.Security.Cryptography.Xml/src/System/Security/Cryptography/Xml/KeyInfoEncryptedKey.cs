@@ -9,7 +9,9 @@ namespace System.Security.Cryptography.Xml
     {
         private EncryptedKey? _encryptedKey;
 
-        public KeyInfoEncryptedKey() { }
+        public KeyInfoEncryptedKey()
+        {
+        }
 
         public KeyInfoEncryptedKey(EncryptedKey encryptedKey)
         {

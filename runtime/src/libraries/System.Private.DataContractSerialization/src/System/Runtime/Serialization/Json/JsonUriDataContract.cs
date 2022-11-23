@@ -11,7 +11,9 @@ namespace System.Runtime.Serialization.Json
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonUriDataContract(UriDataContract traditionalUriDataContract)
-            : base(traditionalUriDataContract) { }
+            : base(traditionalUriDataContract)
+        {
+        }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

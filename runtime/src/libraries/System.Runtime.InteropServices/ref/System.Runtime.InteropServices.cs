@@ -15,7 +15,9 @@ namespace System.Runtime.CompilerServices
     public sealed partial class IDispatchConstantAttribute
         : System.Runtime.CompilerServices.CustomConstantAttribute
     {
-        public IDispatchConstantAttribute() { }
+        public IDispatchConstantAttribute()
+        {
+        }
 
         public override object Value
         {
@@ -30,7 +32,9 @@ namespace System.Runtime.CompilerServices
     public sealed partial class IUnknownConstantAttribute
         : System.Runtime.CompilerServices.CustomConstantAttribute
     {
-        public IUnknownConstantAttribute() { }
+        public IUnknownConstantAttribute()
+        {
+        }
 
         public override object Value
         {
@@ -49,7 +53,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class AutomationProxyAttribute : System.Attribute
     {
-        public AutomationProxyAttribute(bool val) { }
+        public AutomationProxyAttribute(bool val)
+        {
+        }
 
         public bool Value
         {
@@ -66,7 +72,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class ComAliasNameAttribute : System.Attribute
     {
-        public ComAliasNameAttribute(string alias) { }
+        public ComAliasNameAttribute(string alias)
+        {
+        }
 
         public string Value
         {
@@ -85,7 +93,9 @@ namespace System.Runtime.InteropServices
             )]
                 System.Type type,
             string eventName
-        ) { }
+        )
+        {
+        }
 
         public override System.Reflection.EventAttributes Attributes
         {
@@ -113,7 +123,9 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public override void AddEventHandler(object target, System.Delegate handler) { }
+        public override void AddEventHandler(object target, System.Delegate handler)
+        {
+        }
 
         public override System.Reflection.MethodInfo? GetAddMethod(bool nonPublic)
         {
@@ -156,13 +168,17 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public override void RemoveEventHandler(object target, System.Delegate handler) { }
+        public override void RemoveEventHandler(object target, System.Delegate handler)
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
     public sealed partial class ComCompatibleVersionAttribute : System.Attribute
     {
-        public ComCompatibleVersionAttribute(int major, int minor, int build, int revision) { }
+        public ComCompatibleVersionAttribute(int major, int minor, int build, int revision)
+        {
+        }
 
         public int BuildNumber
         {
@@ -185,26 +201,36 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.All, Inherited = false)]
     public sealed partial class ComConversionLossAttribute : System.Attribute
     {
-        public ComConversionLossAttribute() { }
+        public ComConversionLossAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class ComRegisterFunctionAttribute : System.Attribute
     {
-        public ComRegisterFunctionAttribute() { }
+        public ComRegisterFunctionAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class ComUnregisterFunctionAttribute : System.Attribute
     {
-        public ComUnregisterFunctionAttribute() { }
+        public ComUnregisterFunctionAttribute()
+        {
+        }
     }
 
     public sealed partial class HandleCollector
     {
-        public HandleCollector(string? name, int initialThreshold) { }
+        public HandleCollector(string? name, int initialThreshold)
+        {
+        }
 
-        public HandleCollector(string? name, int initialThreshold, int maximumThreshold) { }
+        public HandleCollector(string? name, int initialThreshold, int maximumThreshold)
+        {
+        }
 
         public int Count
         {
@@ -223,15 +249,21 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
 
-        public void Add() { }
+        public void Add()
+        {
+        }
 
-        public void Remove() { }
+        public void Remove()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
     public sealed partial class ImportedFromTypeLibAttribute : System.Attribute
     {
-        public ImportedFromTypeLibAttribute(string tlbFile) { }
+        public ImportedFromTypeLibAttribute(string tlbFile)
+        {
+        }
 
         public string Value
         {
@@ -246,7 +278,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class ManagedToNativeComInteropStubAttribute : System.Attribute
     {
-        public ManagedToNativeComInteropStubAttribute(System.Type classType, string methodName) { }
+        public ManagedToNativeComInteropStubAttribute(System.Type classType, string methodName)
+        {
+        }
 
         public System.Type ClassType
         {
@@ -265,7 +299,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class PrimaryInteropAssemblyAttribute : System.Attribute
     {
-        public PrimaryInteropAssemblyAttribute(int major, int minor) { }
+        public PrimaryInteropAssemblyAttribute(int major, int minor)
+        {
+        }
 
         public int MajorVersion
         {
@@ -328,9 +364,13 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class TypeLibFuncAttribute : System.Attribute
     {
-        public TypeLibFuncAttribute(short flags) { }
+        public TypeLibFuncAttribute(short flags)
+        {
+        }
 
-        public TypeLibFuncAttribute(System.Runtime.InteropServices.TypeLibFuncFlags flags) { }
+        public TypeLibFuncAttribute(System.Runtime.InteropServices.TypeLibFuncFlags flags)
+        {
+        }
 
         public System.Runtime.InteropServices.TypeLibFuncFlags Value
         {
@@ -359,7 +399,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
     public sealed partial class TypeLibImportClassAttribute : System.Attribute
     {
-        public TypeLibImportClassAttribute(System.Type importClass) { }
+        public TypeLibImportClassAttribute(System.Type importClass)
+        {
+        }
 
         public string Value
         {
@@ -376,9 +418,13 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class TypeLibTypeAttribute : System.Attribute
     {
-        public TypeLibTypeAttribute(short flags) { }
+        public TypeLibTypeAttribute(short flags)
+        {
+        }
 
-        public TypeLibTypeAttribute(System.Runtime.InteropServices.TypeLibTypeFlags flags) { }
+        public TypeLibTypeAttribute(System.Runtime.InteropServices.TypeLibTypeFlags flags)
+        {
+        }
 
         public System.Runtime.InteropServices.TypeLibTypeFlags Value
         {
@@ -408,9 +454,13 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Field, Inherited = false)]
     public sealed partial class TypeLibVarAttribute : System.Attribute
     {
-        public TypeLibVarAttribute(short flags) { }
+        public TypeLibVarAttribute(short flags)
+        {
+        }
 
-        public TypeLibVarAttribute(System.Runtime.InteropServices.TypeLibVarFlags flags) { }
+        public TypeLibVarAttribute(System.Runtime.InteropServices.TypeLibVarFlags flags)
+        {
+        }
 
         public System.Runtime.InteropServices.TypeLibVarFlags Value
         {
@@ -439,7 +489,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
     public sealed partial class TypeLibVersionAttribute : System.Attribute
     {
-        public TypeLibVersionAttribute(int major, int minor) { }
+        public TypeLibVersionAttribute(int major, int minor)
+        {
+        }
 
         public int MajorVersion
         {
@@ -668,25 +720,39 @@ namespace System
 {
     public sealed partial class DataMisalignedException : System.SystemException
     {
-        public DataMisalignedException() { }
+        public DataMisalignedException()
+        {
+        }
 
-        public DataMisalignedException(string? message) { }
+        public DataMisalignedException(string? message)
+        {
+        }
 
-        public DataMisalignedException(string? message, System.Exception? innerException) { }
+        public DataMisalignedException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class DllNotFoundException : System.TypeLoadException
     {
-        public DllNotFoundException() { }
+        public DllNotFoundException()
+        {
+        }
 
         protected DllNotFoundException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public DllNotFoundException(string? message) { }
+        public DllNotFoundException(string? message)
+        {
+        }
 
-        public DllNotFoundException(string? message, System.Exception? inner) { }
+        public DllNotFoundException(string? message, System.Exception? inner)
+        {
+        }
     }
 }
 
@@ -694,20 +760,26 @@ namespace System.IO
 {
     public partial class UnmanagedMemoryAccessor : System.IDisposable
     {
-        protected UnmanagedMemoryAccessor() { }
+        protected UnmanagedMemoryAccessor()
+        {
+        }
 
         public UnmanagedMemoryAccessor(
             System.Runtime.InteropServices.SafeBuffer buffer,
             long offset,
             long capacity
-        ) { }
+        )
+        {
+        }
 
         public UnmanagedMemoryAccessor(
             System.Runtime.InteropServices.SafeBuffer buffer,
             long offset,
             long capacity,
             System.IO.FileAccess access
-        ) { }
+        )
+        {
+        }
 
         public bool CanRead
         {
@@ -726,16 +798,22 @@ namespace System.IO
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         protected void Initialize(
             System.Runtime.InteropServices.SafeBuffer buffer,
             long offset,
             long capacity,
             System.IO.FileAccess access
-        ) { }
+        )
+        {
+        }
 
         public int ReadArray<T>(long position, T[] array, int offset, int count) where T : struct
         {
@@ -816,40 +894,69 @@ namespace System.IO
             throw null;
         }
 
-        public void Write(long position, bool value) { }
+        public void Write(long position, bool value)
+        {
+        }
 
-        public void Write(long position, byte value) { }
+        public void Write(long position, byte value)
+        {
+        }
 
-        public void Write(long position, char value) { }
+        public void Write(long position, char value)
+        {
+        }
 
-        public void Write(long position, decimal value) { }
+        public void Write(long position, decimal value)
+        {
+        }
 
-        public void Write(long position, double value) { }
+        public void Write(long position, double value)
+        {
+        }
 
-        public void Write(long position, short value) { }
+        public void Write(long position, short value)
+        {
+        }
 
-        public void Write(long position, int value) { }
+        public void Write(long position, int value)
+        {
+        }
 
-        public void Write(long position, long value) { }
+        public void Write(long position, long value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public void Write(long position, sbyte value) { }
+        public void Write(long position, sbyte value)
+        {
+        }
 
-        public void Write(long position, float value) { }
-
-        [System.CLSCompliantAttribute(false)]
-        public void Write(long position, ushort value) { }
-
-        [System.CLSCompliantAttribute(false)]
-        public void Write(long position, uint value) { }
+        public void Write(long position, float value)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public void Write(long position, ulong value) { }
+        public void Write(long position, ushort value)
+        {
+        }
 
-        public void WriteArray<T>(long position, T[] array, int offset, int count)
-            where T : struct { }
+        [System.CLSCompliantAttribute(false)]
+        public void Write(long position, uint value)
+        {
+        }
 
-        public void Write<T>(long position, ref T structure) where T : struct { }
+        [System.CLSCompliantAttribute(false)]
+        public void Write(long position, ulong value)
+        {
+        }
+
+        public void WriteArray<T>(long position, T[] array, int offset, int count) where T : struct
+        {
+        }
+
+        public void Write<T>(long position, ref T structure) where T : struct
+        {
+        }
     }
 }
 
@@ -867,7 +974,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class AllowReversePInvokeCallsAttribute : System.Attribute
     {
-        public AllowReversePInvokeCallsAttribute() { }
+        public AllowReversePInvokeCallsAttribute()
+        {
+        }
     }
 
     public readonly partial struct ArrayWithOffset
@@ -936,7 +1045,9 @@ namespace System.Runtime.InteropServices
     {
         public bool ThrowOnUnmappableChar;
 
-        public BestFitMappingAttribute(bool BestFitMapping) { }
+        public BestFitMappingAttribute(bool BestFitMapping)
+        {
+        }
 
         public bool BestFitMapping
         {
@@ -949,9 +1060,13 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class BStrWrapper
     {
-        public BStrWrapper(object? value) { }
+        public BStrWrapper(object? value)
+        {
+        }
 
-        public BStrWrapper(string? value) { }
+        public BStrWrapper(string? value)
+        {
+        }
 
         public string? WrappedObject
         {
@@ -974,11 +1089,15 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class ClassInterfaceAttribute : System.Attribute
     {
-        public ClassInterfaceAttribute(short classInterfaceType) { }
+        public ClassInterfaceAttribute(short classInterfaceType)
+        {
+        }
 
         public ClassInterfaceAttribute(
             System.Runtime.InteropServices.ClassInterfaceType classInterfaceType
-        ) { }
+        )
+        {
+        }
 
         public System.Runtime.InteropServices.ClassInterfaceType Value
         {
@@ -1039,7 +1158,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
     public sealed partial class CoClassAttribute : System.Attribute
     {
-        public CoClassAttribute(System.Type coClass) { }
+        public CoClassAttribute(System.Type coClass)
+        {
+        }
 
         public System.Type CoClass
         {
@@ -1075,7 +1196,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = false)]
     public sealed partial class ComDefaultInterfaceAttribute : System.Attribute
     {
-        public ComDefaultInterfaceAttribute(System.Type defaultInterface) { }
+        public ComDefaultInterfaceAttribute(System.Type defaultInterface)
+        {
+        }
 
         public System.Type Value
         {
@@ -1111,7 +1234,9 @@ namespace System.Runtime.InteropServices
                         .PublicProperties
             )]
                 System.Type EventProvider
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
@@ -1141,7 +1266,9 @@ namespace System.Runtime.InteropServices
     )]
     public static partial class ComEventsHelper
     {
-        public static void Combine(object rcw, System.Guid iid, int dispid, System.Delegate d) { }
+        public static void Combine(object rcw, System.Guid iid, int dispid, System.Delegate d)
+        {
+        }
 
         public static System.Delegate? Remove(
             object rcw,
@@ -1156,18 +1283,28 @@ namespace System.Runtime.InteropServices
 
     public partial class COMException : System.Runtime.InteropServices.ExternalException
     {
-        public COMException() { }
+        public COMException()
+        {
+        }
 
         protected COMException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public COMException(string? message) { }
+        public COMException(string? message)
+        {
+        }
 
-        public COMException(string? message, System.Exception? inner) { }
+        public COMException(string? message, System.Exception? inner)
+        {
+        }
 
-        public COMException(string? message, int errorCode) { }
+        public COMException(string? message, int errorCode)
+        {
+        }
 
         public override string ToString()
         {
@@ -1181,7 +1318,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class ComImportAttribute : System.Attribute
     {
-        public ComImportAttribute() { }
+        public ComImportAttribute()
+        {
+        }
     }
 
     public enum ComInterfaceType
@@ -1205,27 +1344,37 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class ComSourceInterfacesAttribute : System.Attribute
     {
-        public ComSourceInterfacesAttribute(string sourceInterfaces) { }
+        public ComSourceInterfacesAttribute(string sourceInterfaces)
+        {
+        }
 
-        public ComSourceInterfacesAttribute(System.Type sourceInterface) { }
+        public ComSourceInterfacesAttribute(System.Type sourceInterface)
+        {
+        }
 
         public ComSourceInterfacesAttribute(
             System.Type sourceInterface1,
             System.Type sourceInterface2
-        ) { }
+        )
+        {
+        }
 
         public ComSourceInterfacesAttribute(
             System.Type sourceInterface1,
             System.Type sourceInterface2,
             System.Type sourceInterface3
-        ) { }
+        )
+        {
+        }
 
         public ComSourceInterfacesAttribute(
             System.Type sourceInterface1,
             System.Type sourceInterface2,
             System.Type sourceInterface3,
             System.Type sourceInterface4
-        ) { }
+        )
+        {
+        }
 
         public string Value
         {
@@ -1304,10 +1453,14 @@ namespace System.Runtime.InteropServices
 
         protected abstract void ReleaseObjects(System.Collections.IEnumerable objects);
 
-        public static void RegisterForTrackerSupport(ComWrappers instance) { }
+        public static void RegisterForTrackerSupport(ComWrappers instance)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void RegisterForMarshalling(ComWrappers instance) { }
+        public static void RegisterForMarshalling(ComWrappers instance)
+        {
+        }
 
         protected static void GetIUnknownImpl(
             out System.IntPtr fpQueryInterface,
@@ -1388,9 +1541,13 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class CurrencyWrapper
     {
-        public CurrencyWrapper(decimal obj) { }
+        public CurrencyWrapper(decimal obj)
+        {
+        }
 
-        public CurrencyWrapper(object obj) { }
+        public CurrencyWrapper(object obj)
+        {
+        }
 
         public decimal WrappedObject
         {
@@ -1420,7 +1577,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Module, Inherited = false)]
     public sealed partial class DefaultCharSetAttribute : System.Attribute
     {
-        public DefaultCharSetAttribute(System.Runtime.InteropServices.CharSet charSet) { }
+        public DefaultCharSetAttribute(System.Runtime.InteropServices.CharSet charSet)
+        {
+        }
 
         public System.Runtime.InteropServices.CharSet CharSet
         {
@@ -1436,7 +1595,9 @@ namespace System.Runtime.InteropServices
     {
         public DefaultDllImportSearchPathsAttribute(
             System.Runtime.InteropServices.DllImportSearchPath paths
-        ) { }
+        )
+        {
+        }
 
         public System.Runtime.InteropServices.DllImportSearchPath Paths
         {
@@ -1447,7 +1608,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter)]
     public sealed partial class DefaultParameterValueAttribute : System.Attribute
     {
-        public DefaultParameterValueAttribute(object? value) { }
+        public DefaultParameterValueAttribute(object? value)
+        {
+        }
 
         public object? Value
         {
@@ -1461,7 +1624,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class DispatchWrapper
     {
-        public DispatchWrapper(object? obj) { }
+        public DispatchWrapper(object? obj)
+        {
+        }
 
         public object? WrappedObject
         {
@@ -1478,7 +1643,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class DispIdAttribute : System.Attribute
     {
-        public DispIdAttribute(int dispId) { }
+        public DispIdAttribute(int dispId)
+        {
+        }
 
         public int Value
         {
@@ -1498,7 +1665,9 @@ namespace System.Runtime.InteropServices
         public bool SetLastError;
         public bool ThrowOnUnmappableChar;
 
-        public DllImportAttribute(string dllName) { }
+        public DllImportAttribute(string dllName)
+        {
+        }
 
         public string Value
         {
@@ -1531,7 +1700,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed class DynamicInterfaceCastableImplementationAttribute : Attribute
     {
-        public DynamicInterfaceCastableImplementationAttribute() { }
+        public DynamicInterfaceCastableImplementationAttribute()
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -1539,11 +1710,17 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class ErrorWrapper
     {
-        public ErrorWrapper(System.Exception e) { }
+        public ErrorWrapper(System.Exception e)
+        {
+        }
 
-        public ErrorWrapper(int errorCode) { }
+        public ErrorWrapper(int errorCode)
+        {
+        }
 
-        public ErrorWrapper(object errorCode) { }
+        public ErrorWrapper(object errorCode)
+        {
+        }
 
         public int ErrorCode
         {
@@ -1562,7 +1739,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class GuidAttribute : System.Attribute
     {
-        public GuidAttribute(string guid) { }
+        public GuidAttribute(string guid)
+        {
+        }
 
         public string Value
         {
@@ -1647,10 +1826,13 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
     public sealed partial class InterfaceTypeAttribute : System.Attribute
     {
-        public InterfaceTypeAttribute(short interfaceType) { }
+        public InterfaceTypeAttribute(short interfaceType)
+        {
+        }
 
         public InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType interfaceType)
-        { }
+        {
+        }
 
         public System.Runtime.InteropServices.ComInterfaceType Value
         {
@@ -1660,36 +1842,54 @@ namespace System.Runtime.InteropServices
 
     public partial class InvalidComObjectException : System.SystemException
     {
-        public InvalidComObjectException() { }
+        public InvalidComObjectException()
+        {
+        }
 
         protected InvalidComObjectException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InvalidComObjectException(string? message) { }
+        public InvalidComObjectException(string? message)
+        {
+        }
 
-        public InvalidComObjectException(string? message, System.Exception? inner) { }
+        public InvalidComObjectException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     public partial class InvalidOleVariantTypeException : System.SystemException
     {
-        public InvalidOleVariantTypeException() { }
+        public InvalidOleVariantTypeException()
+        {
+        }
 
         protected InvalidOleVariantTypeException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InvalidOleVariantTypeException(string? message) { }
+        public InvalidOleVariantTypeException(string? message)
+        {
+        }
 
-        public InvalidOleVariantTypeException(string? message, System.Exception? inner) { }
+        public InvalidOleVariantTypeException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class LCIDConversionAttribute : System.Attribute
     {
-        public LCIDConversionAttribute(int lcid) { }
+        public LCIDConversionAttribute(int lcid)
+        {
+        }
 
         public int Value
         {
@@ -1704,7 +1904,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class LibraryImportAttribute : System.Attribute
     {
-        public LibraryImportAttribute(string libraryName) { }
+        public LibraryImportAttribute(string libraryName)
+        {
+        }
 
         public string LibraryName
         {
@@ -1713,22 +1915,30 @@ namespace System.Runtime.InteropServices
         public string? EntryPoint
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SetLastError
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.InteropServices.StringMarshalling StringMarshalling
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Type? StringMarshallingCustomType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1773,121 +1983,147 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public static void ChangeWrapperHandleStrength(object otp, bool fIsWeak) { }
+        public static void ChangeWrapperHandleStrength(object otp, bool fIsWeak)
+        {
+        }
 
-        public static void CleanupUnusedObjectsInCurrentContext() { }
+        public static void CleanupUnusedObjectsInCurrentContext()
+        {
+        }
 
         public static void Copy(
             byte[] source,
             int startIndex,
             System.IntPtr destination,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             char[] source,
             int startIndex,
             System.IntPtr destination,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             double[] source,
             int startIndex,
             System.IntPtr destination,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             short[] source,
             int startIndex,
             System.IntPtr destination,
             int length
-        ) { }
+        )
+        {
+        }
 
-        public static void Copy(
-            int[] source,
-            int startIndex,
-            System.IntPtr destination,
-            int length
-        ) { }
+        public static void Copy(int[] source, int startIndex, System.IntPtr destination, int length)
+        {
+        }
 
         public static void Copy(
             long[] source,
             int startIndex,
             System.IntPtr destination,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             System.IntPtr source,
             byte[] destination,
             int startIndex,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             System.IntPtr source,
             char[] destination,
             int startIndex,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             System.IntPtr source,
             double[] destination,
             int startIndex,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             System.IntPtr source,
             short[] destination,
             int startIndex,
             int length
-        ) { }
+        )
+        {
+        }
 
-        public static void Copy(
-            System.IntPtr source,
-            int[] destination,
-            int startIndex,
-            int length
-        ) { }
+        public static void Copy(System.IntPtr source, int[] destination, int startIndex, int length)
+        {
+        }
 
         public static void Copy(
             System.IntPtr source,
             long[] destination,
             int startIndex,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             System.IntPtr source,
             System.IntPtr[] destination,
             int startIndex,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             System.IntPtr source,
             float[] destination,
             int startIndex,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             System.IntPtr[] source,
             int startIndex,
             System.IntPtr destination,
             int length
-        ) { }
+        )
+        {
+        }
 
         public static void Copy(
             float[] source,
             int startIndex,
             System.IntPtr destination,
             int length
-        ) { }
+        )
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -1927,9 +2163,13 @@ namespace System.Runtime.InteropServices
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public static void DestroyStructure(System.IntPtr ptr, System.Type structuretype) { }
+        public static void DestroyStructure(System.IntPtr ptr, System.Type structuretype)
+        {
+        }
 
-        public static void DestroyStructure<T>(System.IntPtr ptr) { }
+        public static void DestroyStructure<T>(System.IntPtr ptr)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static int FinalReleaseComObject(object o)
@@ -1937,11 +2177,17 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static void FreeBSTR(System.IntPtr ptr) { }
+        public static void FreeBSTR(System.IntPtr ptr)
+        {
+        }
 
-        public static void FreeCoTaskMem(System.IntPtr ptr) { }
+        public static void FreeCoTaskMem(System.IntPtr ptr)
+        {
+        }
 
-        public static void FreeHGlobal(System.IntPtr hglobal) { }
+        public static void FreeHGlobal(System.IntPtr hglobal)
+        {
+        }
 
         public static System.Guid GenerateGuidForType(System.Type type)
         {
@@ -2114,16 +2360,17 @@ namespace System.Runtime.InteropServices
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public static void GetNativeVariantForObject(
-            object? obj,
-            System.IntPtr pDstNativeVariant
-        ) { }
+        public static void GetNativeVariantForObject(object? obj, System.IntPtr pDstNativeVariant)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public static void GetNativeVariantForObject<T>(T? obj, System.IntPtr pDstNativeVariant) { }
+        public static void GetNativeVariantForObject<T>(T? obj, System.IntPtr pDstNativeVariant)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static object GetObjectForIUnknown(System.IntPtr pUnk)
@@ -2202,7 +2449,9 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static void InitHandle(SafeHandle safeHandle, IntPtr handle) { }
+        public static void InitHandle(SafeHandle safeHandle, IntPtr handle)
+        {
+        }
 
         public static bool IsComObject(object o)
         {
@@ -2227,9 +2476,13 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static void Prelink(System.Reflection.MethodInfo m) { }
+        public static void Prelink(System.Reflection.MethodInfo m)
+        {
+        }
 
-        public static void PrelinkAll(System.Type c) { }
+        public static void PrelinkAll(System.Type c)
+        {
+        }
 
         public static string? PtrToStringAnsi(System.IntPtr ptr)
         {
@@ -2282,7 +2535,9 @@ namespace System.Runtime.InteropServices
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public static void PtrToStructure(System.IntPtr ptr, object structure) { }
+        public static void PtrToStructure(System.IntPtr ptr, object structure)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Marshalling code for the object might not be available"
@@ -2324,7 +2579,9 @@ namespace System.Runtime.InteropServices
         public static void PtrToStructure<T>(
             System.IntPtr ptr,
             [System.Diagnostics.CodeAnalysis.DisallowNullAttribute] T structure
-        ) { }
+        )
+        {
+        }
 
         public static int QueryInterface(
             System.IntPtr pUnk,
@@ -2593,17 +2850,25 @@ namespace System.Runtime.InteropServices
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public static void StructureToPtr(object structure, System.IntPtr ptr, bool fDeleteOld) { }
+        public static void StructureToPtr(object structure, System.IntPtr ptr, bool fDeleteOld)
+        {
+        }
 
         public static void StructureToPtr<T>(
             [System.Diagnostics.CodeAnalysis.DisallowNullAttribute] T structure,
             System.IntPtr ptr,
             bool fDeleteOld
-        ) { }
+        )
+        {
+        }
 
-        public static void ThrowExceptionForHR(int errorCode) { }
+        public static void ThrowExceptionForHR(int errorCode)
+        {
+        }
 
-        public static void ThrowExceptionForHR(int errorCode, System.IntPtr errorInfo) { }
+        public static void ThrowExceptionForHR(int errorCode, System.IntPtr errorInfo)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -2618,9 +2883,13 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static void WriteByte(System.IntPtr ptr, byte val) { }
+        public static void WriteByte(System.IntPtr ptr, byte val)
+        {
+        }
 
-        public static void WriteByte(System.IntPtr ptr, int ofs, byte val) { }
+        public static void WriteByte(System.IntPtr ptr, int ofs, byte val)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Marshalling code for the object might not be available"
@@ -2631,15 +2900,25 @@ namespace System.Runtime.InteropServices
         [System.ObsoleteAttribute(
             "WriteByte(Object, Int32, Byte) may be unavailable in future releases."
         )]
-        public static void WriteByte(object ptr, int ofs, byte val) { }
+        public static void WriteByte(object ptr, int ofs, byte val)
+        {
+        }
 
-        public static void WriteInt16(System.IntPtr ptr, char val) { }
+        public static void WriteInt16(System.IntPtr ptr, char val)
+        {
+        }
 
-        public static void WriteInt16(System.IntPtr ptr, short val) { }
+        public static void WriteInt16(System.IntPtr ptr, short val)
+        {
+        }
 
-        public static void WriteInt16(System.IntPtr ptr, int ofs, char val) { }
+        public static void WriteInt16(System.IntPtr ptr, int ofs, char val)
+        {
+        }
 
-        public static void WriteInt16(System.IntPtr ptr, int ofs, short val) { }
+        public static void WriteInt16(System.IntPtr ptr, int ofs, short val)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Marshalling code for the object might not be available"
@@ -2650,7 +2929,9 @@ namespace System.Runtime.InteropServices
         [System.ObsoleteAttribute(
             "WriteInt16(Object, Int32, Char) may be unavailable in future releases."
         )]
-        public static void WriteInt16(object ptr, int ofs, char val) { }
+        public static void WriteInt16(object ptr, int ofs, char val)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Marshalling code for the object might not be available"
@@ -2661,11 +2942,17 @@ namespace System.Runtime.InteropServices
         [System.ObsoleteAttribute(
             "WriteInt16(Object, Int32, Int16) may be unavailable in future releases."
         )]
-        public static void WriteInt16(object ptr, int ofs, short val) { }
+        public static void WriteInt16(object ptr, int ofs, short val)
+        {
+        }
 
-        public static void WriteInt32(System.IntPtr ptr, int val) { }
+        public static void WriteInt32(System.IntPtr ptr, int val)
+        {
+        }
 
-        public static void WriteInt32(System.IntPtr ptr, int ofs, int val) { }
+        public static void WriteInt32(System.IntPtr ptr, int ofs, int val)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Marshalling code for the object might not be available"
@@ -2676,11 +2963,17 @@ namespace System.Runtime.InteropServices
         [System.ObsoleteAttribute(
             "WriteInt32(Object, Int32, Int32) may be unavailable in future releases."
         )]
-        public static void WriteInt32(object ptr, int ofs, int val) { }
+        public static void WriteInt32(object ptr, int ofs, int val)
+        {
+        }
 
-        public static void WriteInt64(System.IntPtr ptr, int ofs, long val) { }
+        public static void WriteInt64(System.IntPtr ptr, int ofs, long val)
+        {
+        }
 
-        public static void WriteInt64(System.IntPtr ptr, long val) { }
+        public static void WriteInt64(System.IntPtr ptr, long val)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Marshalling code for the object might not be available"
@@ -2691,11 +2984,17 @@ namespace System.Runtime.InteropServices
         [System.ObsoleteAttribute(
             "WriteInt64(Object, Int32, Int64) may be unavailable in future releases."
         )]
-        public static void WriteInt64(object ptr, int ofs, long val) { }
+        public static void WriteInt64(object ptr, int ofs, long val)
+        {
+        }
 
-        public static void WriteIntPtr(System.IntPtr ptr, int ofs, System.IntPtr val) { }
+        public static void WriteIntPtr(System.IntPtr ptr, int ofs, System.IntPtr val)
+        {
+        }
 
-        public static void WriteIntPtr(System.IntPtr ptr, System.IntPtr val) { }
+        public static void WriteIntPtr(System.IntPtr ptr, System.IntPtr val)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Marshalling code for the object might not be available"
@@ -2706,19 +3005,33 @@ namespace System.Runtime.InteropServices
         [System.ObsoleteAttribute(
             "WriteIntPtr(Object, Int32, IntPtr) may be unavailable in future releases."
         )]
-        public static void WriteIntPtr(object ptr, int ofs, System.IntPtr val) { }
+        public static void WriteIntPtr(object ptr, int ofs, System.IntPtr val)
+        {
+        }
 
-        public static void ZeroFreeBSTR(System.IntPtr s) { }
+        public static void ZeroFreeBSTR(System.IntPtr s)
+        {
+        }
 
-        public static void ZeroFreeCoTaskMemAnsi(System.IntPtr s) { }
+        public static void ZeroFreeCoTaskMemAnsi(System.IntPtr s)
+        {
+        }
 
-        public static void ZeroFreeCoTaskMemUnicode(System.IntPtr s) { }
+        public static void ZeroFreeCoTaskMemUnicode(System.IntPtr s)
+        {
+        }
 
-        public static void ZeroFreeCoTaskMemUTF8(System.IntPtr s) { }
+        public static void ZeroFreeCoTaskMemUTF8(System.IntPtr s)
+        {
+        }
 
-        public static void ZeroFreeGlobalAllocAnsi(System.IntPtr s) { }
+        public static void ZeroFreeGlobalAllocAnsi(System.IntPtr s)
+        {
+        }
 
-        public static void ZeroFreeGlobalAllocUnicode(System.IntPtr s) { }
+        public static void ZeroFreeGlobalAllocUnicode(System.IntPtr s)
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -2739,9 +3052,13 @@ namespace System.Runtime.InteropServices
         public int SizeConst;
         public short SizeParamIndex;
 
-        public MarshalAsAttribute(short unmanagedType) { }
+        public MarshalAsAttribute(short unmanagedType)
+        {
+        }
 
-        public MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType unmanagedType) { }
+        public MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType unmanagedType)
+        {
+        }
 
         public System.Runtime.InteropServices.UnmanagedType Value
         {
@@ -2751,21 +3068,31 @@ namespace System.Runtime.InteropServices
 
     public partial class MarshalDirectiveException : System.SystemException
     {
-        public MarshalDirectiveException() { }
+        public MarshalDirectiveException()
+        {
+        }
 
         protected MarshalDirectiveException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public MarshalDirectiveException(string? message) { }
+        public MarshalDirectiveException(string? message)
+        {
+        }
 
-        public MarshalDirectiveException(string? message, System.Exception? inner) { }
+        public MarshalDirectiveException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     public static partial class NativeLibrary
     {
-        public static void Free(System.IntPtr handle) { }
+        public static void Free(System.IntPtr handle)
+        {
+        }
 
         public static System.IntPtr GetMainProgramHandle()
         {
@@ -2794,7 +3121,9 @@ namespace System.Runtime.InteropServices
         public static void SetDllImportResolver(
             System.Reflection.Assembly assembly,
             System.Runtime.InteropServices.DllImportResolver resolver
-        ) { }
+        )
+        {
+        }
 
         public static bool TryGetExport(
             System.IntPtr handle,
@@ -2830,7 +3159,9 @@ namespace System.Runtime.InteropServices
         }
 
         [System.CLSCompliantAttribute(false)]
-        public static void AlignedFree(void* ptr) { }
+        public static void AlignedFree(void* ptr)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public static void* AlignedRealloc(void* ptr, nuint byteCount, nuint alignment)
@@ -2863,7 +3194,9 @@ namespace System.Runtime.InteropServices
         }
 
         [System.CLSCompliantAttribute(false)]
-        public static void Free(void* ptr) { }
+        public static void Free(void* ptr)
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public static void* Realloc(void* ptr, nuint byteCount)
@@ -4437,7 +4770,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter, Inherited = false)]
     public sealed partial class OptionalAttribute : System.Attribute
     {
-        public OptionalAttribute() { }
+        public OptionalAttribute()
+        {
+        }
     }
 
     public enum PosixSignal
@@ -4467,12 +4802,16 @@ namespace System.Runtime.InteropServices
 
     public sealed partial class PosixSignalContext
     {
-        public PosixSignalContext(System.Runtime.InteropServices.PosixSignal signal) { }
+        public PosixSignalContext(System.Runtime.InteropServices.PosixSignal signal)
+        {
+        }
 
         public bool Cancel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.InteropServices.PosixSignal Signal
         {
@@ -4482,7 +4821,9 @@ namespace System.Runtime.InteropServices
 
     public sealed partial class PosixSignalRegistration : System.IDisposable
     {
-        internal PosixSignalRegistration() { }
+        internal PosixSignalRegistration()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -4496,21 +4837,29 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        ~PosixSignalRegistration() { }
+        ~PosixSignalRegistration()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class PreserveSigAttribute : System.Attribute
     {
-        public PreserveSigAttribute() { }
+        public PreserveSigAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = false)]
     public sealed partial class ProgIdAttribute : System.Attribute
     {
-        public ProgIdAttribute(string progId) { }
+        public ProgIdAttribute(string progId)
+        {
+        }
 
         public string Value
         {
@@ -4520,44 +4869,68 @@ namespace System.Runtime.InteropServices
 
     public partial class SafeArrayRankMismatchException : System.SystemException
     {
-        public SafeArrayRankMismatchException() { }
+        public SafeArrayRankMismatchException()
+        {
+        }
 
         protected SafeArrayRankMismatchException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public SafeArrayRankMismatchException(string? message) { }
+        public SafeArrayRankMismatchException(string? message)
+        {
+        }
 
-        public SafeArrayRankMismatchException(string? message, System.Exception? inner) { }
+        public SafeArrayRankMismatchException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     public partial class SafeArrayTypeMismatchException : System.SystemException
     {
-        public SafeArrayTypeMismatchException() { }
+        public SafeArrayTypeMismatchException()
+        {
+        }
 
         protected SafeArrayTypeMismatchException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public SafeArrayTypeMismatchException(string? message) { }
+        public SafeArrayTypeMismatchException(string? message)
+        {
+        }
 
-        public SafeArrayTypeMismatchException(string? message, System.Exception? inner) { }
+        public SafeArrayTypeMismatchException(string? message, System.Exception? inner)
+        {
+        }
     }
 
     public partial class SEHException : System.Runtime.InteropServices.ExternalException
     {
-        public SEHException() { }
+        public SEHException()
+        {
+        }
 
         protected SEHException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public SEHException(string? message) { }
+        public SEHException(string? message)
+        {
+        }
 
-        public SEHException(string? message, System.Exception? inner) { }
+        public SEHException(string? message, System.Exception? inner)
+        {
+        }
 
         public virtual bool CanResume()
         {
@@ -4567,7 +4940,9 @@ namespace System.Runtime.InteropServices
 
     public partial class StandardOleMarshalObject : System.MarshalByRefObject
     {
-        protected StandardOleMarshalObject() { }
+        protected StandardOleMarshalObject()
+        {
+        }
     }
 
     public enum StringMarshalling
@@ -4587,9 +4962,13 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class TypeIdentifierAttribute : System.Attribute
     {
-        public TypeIdentifierAttribute() { }
+        public TypeIdentifierAttribute()
+        {
+        }
 
-        public TypeIdentifierAttribute(string? scope, string? identifier) { }
+        public TypeIdentifierAttribute(string? scope, string? identifier)
+        {
+        }
 
         public string? Identifier
         {
@@ -4606,7 +4985,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class UnknownWrapper
     {
-        public UnknownWrapper(object? obj) { }
+        public UnknownWrapper(object? obj)
+        {
+        }
 
         public object? WrappedObject
         {
@@ -4621,7 +5002,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed class UnmanagedCallConvAttribute : System.Attribute
     {
-        public UnmanagedCallConvAttribute() { }
+        public UnmanagedCallConvAttribute()
+        {
+        }
 
         public System.Type[]? CallConvs;
     }
@@ -4629,7 +5012,9 @@ namespace System.Runtime.InteropServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed class UnmanagedCallersOnlyAttribute : System.Attribute
     {
-        public UnmanagedCallersOnlyAttribute() { }
+        public UnmanagedCallersOnlyAttribute()
+        {
+        }
 
         public System.Type[]? CallConvs;
         public string? EntryPoint;
@@ -4649,7 +5034,9 @@ namespace System.Runtime.InteropServices
 
         public UnmanagedFunctionPointerAttribute(
             System.Runtime.InteropServices.CallingConvention callingConvention
-        ) { }
+        )
+        {
+        }
 
         public System.Runtime.InteropServices.CallingConvention CallingConvention
         {
@@ -4713,7 +5100,9 @@ namespace System.Runtime.InteropServices
     )]
     public sealed partial class VariantWrapper
     {
-        public VariantWrapper(object? obj) { }
+        public VariantWrapper(object? obj)
+        {
+        }
 
         public object? WrappedObject
         {
@@ -5751,7 +6140,9 @@ namespace System.Runtime.InteropServices.ObjectiveC
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public sealed class ObjectiveCTrackedTypeAttribute : System.Attribute
     {
-        public ObjectiveCTrackedTypeAttribute() { }
+        public ObjectiveCTrackedTypeAttribute()
+        {
+        }
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("macos")]
@@ -5907,7 +6298,9 @@ namespace System.Runtime.InteropServices.Marshalling
             throw null;
         }
 
-        public static void Free(TUnmanagedElement* unmanaged) { }
+        public static void Free(TUnmanagedElement* unmanaged)
+        {
+        }
 
         public unsafe ref struct ManagedToUnmanagedIn
         {
@@ -5918,7 +6311,9 @@ namespace System.Runtime.InteropServices.Marshalling
                 get { throw null; }
             }
 
-            public void FromManaged(T[]? array, System.Span<TUnmanagedElement> buffer) { }
+            public void FromManaged(T[]? array, System.Span<TUnmanagedElement> buffer)
+            {
+            }
 
             public System.ReadOnlySpan<T> GetManagedValuesSource()
             {
@@ -5945,7 +6340,9 @@ namespace System.Runtime.InteropServices.Marshalling
                 throw null;
             }
 
-            public void Free() { }
+            public void Free()
+            {
+            }
         }
     }
 
@@ -6007,9 +6404,13 @@ namespace System.Runtime.InteropServices.Marshalling
     )]
     public sealed partial class MarshalUsingAttribute : System.Attribute
     {
-        public MarshalUsingAttribute() { }
+        public MarshalUsingAttribute()
+        {
+        }
 
-        public MarshalUsingAttribute(System.Type nativeType) { }
+        public MarshalUsingAttribute(System.Type nativeType)
+        {
+        }
 
         public System.Type? NativeType
         {
@@ -6018,17 +6419,23 @@ namespace System.Runtime.InteropServices.Marshalling
         public string CountElementName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ConstantElementCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ElementIndirectionDepth
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public const string ReturnsCountValue = "return-value";
     }
@@ -6093,7 +6500,9 @@ namespace System.Runtime.InteropServices.Marshalling
             throw null;
         }
 
-        public static void Free(TUnmanagedElement* unmanaged) { }
+        public static void Free(TUnmanagedElement* unmanaged)
+        {
+        }
 
         public unsafe ref struct ManagedToUnmanagedIn
         {
@@ -6104,7 +6513,9 @@ namespace System.Runtime.InteropServices.Marshalling
                 get { throw null; }
             }
 
-            public void FromManaged(T*[]? array, System.Span<TUnmanagedElement> buffer) { }
+            public void FromManaged(T*[]? array, System.Span<TUnmanagedElement> buffer)
+            {
+            }
 
             public System.ReadOnlySpan<IntPtr> GetManagedValuesSource()
             {
@@ -6131,7 +6542,9 @@ namespace System.Runtime.InteropServices.Marshalling
                 throw null;
             }
 
-            public void Free() { }
+            public void Free()
+            {
+            }
         }
     }
 
@@ -6221,38 +6634,56 @@ namespace System.Security
 {
     public sealed partial class SecureString : System.IDisposable
     {
-        public SecureString() { }
+        public SecureString()
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe SecureString(char* value, int length) { }
+        public unsafe SecureString(char* value, int length)
+        {
+        }
 
         public int Length
         {
             get { throw null; }
         }
 
-        public void AppendChar(char c) { }
+        public void AppendChar(char c)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public System.Security.SecureString Copy()
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void InsertAt(int index, char c) { }
+        public void InsertAt(int index, char c)
+        {
+        }
 
         public bool IsReadOnly()
         {
             throw null;
         }
 
-        public void MakeReadOnly() { }
+        public void MakeReadOnly()
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        public void SetAt(int index, char c) { }
+        public void SetAt(int index, char c)
+        {
+        }
     }
 }

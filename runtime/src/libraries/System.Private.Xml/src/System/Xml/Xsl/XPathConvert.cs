@@ -1029,7 +1029,9 @@ namespace System.Xml.Xsl
                 // and the current value of LH is zero and the least significant bit of
                 // the double is zero. In this case, we have exactly the digit sequence
                 // for the original numLL and IEEE and will rounds numLL up to the double.
-                if (0 == bLH && 0 == uLH && numLH.IsZero && 0 == (dblLo & 1)) { }
+                if (0 == bLH && 0 == uLH && numLH.IsZero && 0 == (dblLo & 1))
+                {
+                }
                 else if (bHL - bLH > 1)
                 {
                     // HL and LH differ by at least two in this digit, so split
@@ -2247,7 +2249,9 @@ namespace System.Xml.Xsl
                     if (idx == _length)
                     {
                         // Trim off zeros.
-                        while (--idx >= 0 && 0 == _digits[idx]) { }
+                        while (--idx >= 0 && 0 == _digits[idx])
+                        {
+                        }
                         _length = idx + 1;
                     }
                     AssertValid();
@@ -2316,7 +2320,9 @@ namespace System.Xml.Xsl
                         Debug.Assert(idx == cu);
 
                         // Trim off zeros.
-                        while (--idx >= 0 && 0 == _digits[idx]) { }
+                        while (--idx >= 0 && 0 == _digits[idx])
+                        {
+                        }
                         _length = idx + 1;
                         break;
                 }
@@ -2866,7 +2872,9 @@ namespace System.Xml.Xsl
                     }
                     Debug.Assert(c2Dbl < 32 || 0 != biDec[0]);
                     uT = biDec[0];
-                    for (iT = 0; iT < c2Dbl && 0 == (uT & (1L << iT)); iT++) { }
+                    for (iT = 0; iT < c2Dbl && 0 == (uT & (1L << iT)); iT++)
+                    {
+                    }
                     if (iT > 0)
                     {
                         c2Dbl -= iT;

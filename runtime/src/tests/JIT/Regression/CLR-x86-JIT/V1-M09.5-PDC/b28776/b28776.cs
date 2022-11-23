@@ -21,8 +21,12 @@ namespace Test
                 local2[2].m_anField1 = new AA().m_anField1;
 
                 AA a = new AA();
-                while (a.m_abField2[2]) { }
-                while ((double)a.m_afField3[2] >= (double)local1) { }
+                while (a.m_abField2[2])
+                {
+                }
+                while ((double)a.m_afField3[2] >= (double)local1)
+                {
+                }
             }
         }
 

@@ -16,28 +16,44 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             public abstract int IntValueProperty { get; }
         }
 
-        public interface ITestIFace { }
+        public interface ITestIFace
+        {
+        }
 
-        public interface ITestIFaceCons<out T> where T : ITestIFace { }
+        public interface ITestIFaceCons<out T> where T : ITestIFace
+        {
+        }
 
         private class Container
         {
-            private abstract class ReferenceTypeIntermediary : PublicReferenceType { }
+            private abstract class ReferenceTypeIntermediary : PublicReferenceType
+            {
+            }
 
             private class ReferenceType : ReferenceTypeIntermediary, ITestIFace
             {
                 public override int IntValueProperty => 23;
             }
 
-            private struct PrivateValueType { }
+            private struct PrivateValueType
+            {
+            }
 
-            private protected struct PrivateProtectedValueType { }
+            private protected struct PrivateProtectedValueType
+            {
+            }
 
-            internal struct InternalValueType { }
+            internal struct InternalValueType
+            {
+            }
 
-            protected internal struct ProtectedInternalValueType { }
+            protected internal struct ProtectedInternalValueType
+            {
+            }
 
-            private interface IPrivateInterface { }
+            private interface IPrivateInterface
+            {
+            }
 
             public static dynamic GetReferenceType() => new ReferenceType();
 

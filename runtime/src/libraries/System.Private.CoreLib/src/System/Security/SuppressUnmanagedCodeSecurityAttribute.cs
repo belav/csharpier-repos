@@ -14,6 +14,8 @@ namespace System.Security
     )]
     public sealed class SuppressUnmanagedCodeSecurityAttribute : Attribute
     {
-        public SuppressUnmanagedCodeSecurityAttribute() { }
+        public SuppressUnmanagedCodeSecurityAttribute()
+        {
+        }
     }
 }

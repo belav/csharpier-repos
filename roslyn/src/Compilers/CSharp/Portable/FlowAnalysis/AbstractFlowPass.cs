@@ -333,7 +333,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected virtual void EnterParameter(ParameterSymbol parameter) { }
+        protected virtual void EnterParameter(ParameterSymbol parameter)
+        {
+        }
 
         protected virtual void LeaveParameters(
             ImmutableArray<ParameterSymbol> parameters,
@@ -351,7 +353,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameter,
             SyntaxNode syntax,
             Location location
-        ) { }
+        )
+        {
+        }
 
         public override BoundNode Visit(BoundNode node)
         {
@@ -640,7 +644,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             LeaveRegionIfNeeded(node);
         }
 
-        protected virtual void VisitLvalue(BoundLocal node) { }
+        protected virtual void VisitLvalue(BoundLocal node)
+        {
+        }
 
         /// <summary>
         /// Visit a boolean condition expression.
@@ -1588,7 +1594,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression arg,
             RefKind refKind,
             MethodSymbol method
-        ) { }
+        )
+        {
+        }
 
         public override BoundNode VisitBadExpression(BoundBadExpression node)
         {
@@ -2060,7 +2068,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        protected virtual void VisitLvalueParameter(BoundParameter node) { }
+        protected virtual void VisitLvalueParameter(BoundParameter node)
+        {
+        }
 
         public override BoundNode VisitObjectCreationExpression(BoundObjectCreationExpression node)
         {
@@ -2758,9 +2768,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             parts.Free();
         }
 
-        protected virtual void VisitInterpolatedStringBinaryOperatorNode(
-            BoundBinaryOperator node
-        ) { }
+        protected virtual void VisitInterpolatedStringBinaryOperatorNode(BoundBinaryOperator node)
+        {
+        }
 
         protected virtual bool VisitInterpolatedStringHandlerParts(
             BoundInterpolatedStringBase node,
@@ -2946,7 +2956,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             VisitRvalue(node.Expression);
         }
 
-        public virtual void VisitForEachIterationVariables(BoundForEachStatement node) { }
+        public virtual void VisitForEachIterationVariables(BoundForEachStatement node)
+        {
+        }
 
         public override BoundNode VisitAsOperator(BoundAsOperator node)
         {
@@ -3942,7 +3954,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         protected virtual void AdjustStateForNullCoalescingAssignmentNonNullCase(
             BoundNullCoalescingAssignmentOperator node
-        ) { }
+        )
+        {
+        }
 
         private void VisitMethodBodies(BoundBlock blockBody, BoundBlock expressionBody)
         {

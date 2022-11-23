@@ -372,7 +372,9 @@ namespace System.Diagnostics
                                     sf.GetILOffset()
                                 );
                             }
-                            catch (System.InvalidOperationException) { }
+                            catch (System.InvalidOperationException)
+                            {
+                            }
                         }
                     }
 

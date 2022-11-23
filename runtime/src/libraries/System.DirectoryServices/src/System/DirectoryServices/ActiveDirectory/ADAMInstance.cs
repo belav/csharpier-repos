@@ -30,7 +30,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
         #region constructors
         internal AdamInstance(DirectoryContext context, string adamInstanceName)
-            : this(context, adamInstanceName, new DirectoryEntryManager(context), true) { }
+            : this(context, adamInstanceName, new DirectoryEntryManager(context), true)
+        {
+        }
 
         internal AdamInstance(
             DirectoryContext context,

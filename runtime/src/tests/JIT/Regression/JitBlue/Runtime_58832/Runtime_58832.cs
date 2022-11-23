@@ -26,7 +26,9 @@ public class Runtime_58832
         {
             Console.WriteLine(checked((ulong)x));
         }
-        catch { }
+        catch
+        {
+        }
 
         if ((ulong)x == checked((ulong)x))
             Console.WriteLine("Should not be invoked");

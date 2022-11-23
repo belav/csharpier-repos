@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Navigation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NavigationOptionsProvider() { }
+        public NavigationOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(NavigationOptions.PreferProvisionalTab);

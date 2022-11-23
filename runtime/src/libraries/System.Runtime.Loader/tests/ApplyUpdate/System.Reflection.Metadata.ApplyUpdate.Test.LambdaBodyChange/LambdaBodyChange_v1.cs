@@ -6,7 +6,9 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
     public class LambdaBodyChange
     {
-        public LambdaBodyChange() { }
+        public LambdaBodyChange()
+        {
+        }
 
         public string MethodWithLambda()
         {

@@ -249,7 +249,9 @@ public class NegotiateHandlerTests
         });
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
-        negotiateOptions.EnableLdap(_ => { }); // Forcefully re-enable ldap claims resolution to trigger RBAC claims retrieval from cache
+        negotiateOptions.EnableLdap(_ =>
+        {
+        }); // Forcefully re-enable ldap claims resolution to trigger RBAC claims retrieval from cache
         await AuthenticateAndRetrieveRBACClaims(server, testConnection);
     }
 
@@ -612,7 +614,9 @@ public class NegotiateHandlerTests
     {
         public IDictionary<object, object> Items { get; set; } = new ConnectionItems();
 
-        public void OnCompleted(Func<object, Task> callback, object state) { }
+        public void OnCompleted(Func<object, Task> callback, object state)
+        {
+        }
     }
 
     private class TestNegotiateStateFactory : INegotiateStateFactory

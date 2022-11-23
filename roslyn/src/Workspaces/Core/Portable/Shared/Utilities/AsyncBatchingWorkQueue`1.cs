@@ -20,7 +20,8 @@ namespace Roslyn.Utilities
             IAsynchronousOperationListener asyncListener,
             CancellationToken cancellationToken
         ) : this(delay, processBatchAsync, equalityComparer: null, asyncListener, cancellationToken)
-        { }
+        {
+        }
 
         public AsyncBatchingWorkQueue(
             TimeSpan delay,
@@ -35,7 +36,9 @@ namespace Roslyn.Utilities
                 equalityComparer,
                 asyncListener,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         private static Func<
             ImmutableSegmentedList<TItem>,

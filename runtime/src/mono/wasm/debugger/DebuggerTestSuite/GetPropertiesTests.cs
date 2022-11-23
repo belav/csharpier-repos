@@ -15,7 +15,9 @@ namespace DebuggerTests
 {
     public class GetPropertiesTests : DebuggerTests
     {
-        public GetPropertiesTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public GetPropertiesTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         public static TheoryData<
             string,

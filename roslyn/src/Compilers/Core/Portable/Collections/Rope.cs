@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis
         public abstract int Length { get; }
         protected abstract IEnumerable<char> GetChars();
 
-        private Rope() { }
+        private Rope()
+        {
+        }
 
         /// <summary>
         /// A rope can wrap a simple string.

@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                     grayed,
                     indent,
                     childItems
-                ) { }
+                )
+            {
+            }
 
             protected internal override SerializableNavigationBarItem Dehydrate() =>
                 SerializableNavigationBarItem.ActionlessItem(

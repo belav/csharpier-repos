@@ -1652,18 +1652,32 @@ namespace System.Threading.Tasks.Tests
             {
                 var vt = new ValueTask(vts, 0);
                 Assert.Throws<ArgumentOutOfRangeException>(
-                    () => vt.GetAwaiter().OnCompleted(() => { })
+                    () =>
+                        vt.GetAwaiter()
+                            .OnCompleted(() => {
+                            })
                 );
                 Assert.Throws<ArgumentOutOfRangeException>(
-                    () => vt.GetAwaiter().UnsafeOnCompleted(() => { })
+                    () =>
+                        vt.GetAwaiter()
+                            .UnsafeOnCompleted(() => {
+                            })
                 );
                 foreach (bool continueOnCapturedContext in new[] { true, false })
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(
-                        () => vt.ConfigureAwait(false).GetAwaiter().OnCompleted(() => { })
+                        () =>
+                            vt.ConfigureAwait(false)
+                                .GetAwaiter()
+                                .OnCompleted(() => {
+                                })
                     );
                     Assert.Throws<ArgumentOutOfRangeException>(
-                        () => vt.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { })
+                        () =>
+                            vt.ConfigureAwait(false)
+                                .GetAwaiter()
+                                .UnsafeOnCompleted(() => {
+                                })
                     );
                 }
             }
@@ -1690,18 +1704,32 @@ namespace System.Threading.Tasks.Tests
             {
                 var vt = new ValueTask<int>(vts, 0);
                 Assert.Throws<ArgumentOutOfRangeException>(
-                    () => vt.GetAwaiter().OnCompleted(() => { })
+                    () =>
+                        vt.GetAwaiter()
+                            .OnCompleted(() => {
+                            })
                 );
                 Assert.Throws<ArgumentOutOfRangeException>(
-                    () => vt.GetAwaiter().UnsafeOnCompleted(() => { })
+                    () =>
+                        vt.GetAwaiter()
+                            .UnsafeOnCompleted(() => {
+                            })
                 );
                 foreach (bool continueOnCapturedContext in new[] { true, false })
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(
-                        () => vt.ConfigureAwait(false).GetAwaiter().OnCompleted(() => { })
+                        () =>
+                            vt.ConfigureAwait(false)
+                                .GetAwaiter()
+                                .OnCompleted(() => {
+                                })
                     );
                     Assert.Throws<ArgumentOutOfRangeException>(
-                        () => vt.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { })
+                        () =>
+                            vt.ConfigureAwait(false)
+                                .GetAwaiter()
+                                .UnsafeOnCompleted(() => {
+                                })
                     );
                 }
             }

@@ -147,9 +147,13 @@ namespace System.Tests
             public int Prop { get; set; }
         }
 
-        class ChildAttribute : ParentAttribute { }
+        class ChildAttribute : ParentAttribute
+        {
+        }
 
-        class GrandchildAttribute : ChildAttribute { }
+        class GrandchildAttribute : ChildAttribute
+        {
+        }
 
         class ChildAttributeWithField : ParentAttribute
         {
@@ -267,7 +271,9 @@ namespace System.Tests
         }
 
         [AttributeUsage(AttributeTargets.Method)]
-        private sealed class EmptyAttribute : Attribute { }
+        private sealed class EmptyAttribute : Attribute
+        {
+        }
 
         [Fact]
         public static void ValidateDefaults()

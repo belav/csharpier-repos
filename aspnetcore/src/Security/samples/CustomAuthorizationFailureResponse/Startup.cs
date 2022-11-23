@@ -33,7 +33,9 @@ public class Startup
             .AddAuthentication(SampleAuthenticationSchemes.CustomScheme)
             .AddScheme<AuthenticationSchemeOptions, SampleAuthenticationHandler>(
                 SampleAuthenticationSchemes.CustomScheme,
-                o => { }
+                o =>
+                {
+                }
             );
 
         services.AddAuthorization(options =>

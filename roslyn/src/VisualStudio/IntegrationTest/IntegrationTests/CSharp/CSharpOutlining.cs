@@ -24,7 +24,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpOutlining(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpOutlining)) { }
+            : base(instanceFactory, nameof(CSharpOutlining))
+        {
+        }
 
         [WpfFact]
         public void Outlining()

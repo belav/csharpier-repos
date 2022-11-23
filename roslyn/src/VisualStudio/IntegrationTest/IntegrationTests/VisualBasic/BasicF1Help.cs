@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicF1Help(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicF1Help)) { }
+            : base(instanceFactory, nameof(BasicF1Help))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.F1Help)]
         private void F1Help()

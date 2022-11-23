@@ -16,7 +16,9 @@ namespace System.Net.Http.Json
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) { }
+        )
+        {
+        }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,

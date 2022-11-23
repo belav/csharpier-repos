@@ -45,7 +45,9 @@ namespace System.Reflection.Metadata
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type handlerType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -63,7 +65,9 @@ namespace System.Runtime.CompilerServices
         System.AttributeTargets.Class | System.AttributeTargets.Struct,
         AllowMultiple = false
     )]
-    public sealed class CreateNewOnMetadataUpdateAttribute : System.Attribute { }
+    public sealed class CreateNewOnMetadataUpdateAttribute : System.Attribute
+    {
+    }
 
     [AttributeUsage(
         System.AttributeTargets.Class | System.AttributeTargets.Struct,
@@ -92,7 +96,9 @@ namespace System.Runtime.Loader
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
     public sealed partial class AssemblyDependencyResolver
     {
-        public AssemblyDependencyResolver(string componentAssemblyPath) { }
+        public AssemblyDependencyResolver(string componentAssemblyPath)
+        {
+        }
 
         public string? ResolveAssemblyToPath(System.Reflection.AssemblyName assemblyName)
         {
@@ -107,11 +113,17 @@ namespace System.Runtime.Loader
 
     public partial class AssemblyLoadContext
     {
-        protected AssemblyLoadContext() { }
+        protected AssemblyLoadContext()
+        {
+        }
 
-        protected AssemblyLoadContext(bool isCollectible) { }
+        protected AssemblyLoadContext(bool isCollectible)
+        {
+        }
 
-        public AssemblyLoadContext(string? name, bool isCollectible = false) { }
+        public AssemblyLoadContext(string? name, bool isCollectible = false)
+        {
+        }
 
         public static System.Collections.Generic.IEnumerable<System.Runtime.Loader.AssemblyLoadContext> All
         {
@@ -143,8 +155,12 @@ namespace System.Runtime.Loader
             System.Reflection.Assembly?
         >? Resolving
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Func<
             System.Reflection.Assembly,
@@ -152,13 +168,21 @@ namespace System.Runtime.Loader
             System.IntPtr
         >? ResolvingUnmanagedDll
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Action<System.Runtime.Loader.AssemblyLoadContext>? Unloading
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public System.Runtime.Loader.AssemblyLoadContext.ContextualReflectionScope EnterContextualReflection()
@@ -173,7 +197,9 @@ namespace System.Runtime.Loader
             throw null;
         }
 
-        ~AssemblyLoadContext() { }
+        ~AssemblyLoadContext()
+        {
+        }
 
         public static System.Reflection.AssemblyName GetAssemblyName(string assemblyPath)
         {
@@ -249,16 +275,22 @@ namespace System.Runtime.Loader
             throw null;
         }
 
-        public void SetProfileOptimizationRoot(string directoryPath) { }
+        public void SetProfileOptimizationRoot(string directoryPath)
+        {
+        }
 
-        public void StartProfileOptimization(string? profile) { }
+        public void StartProfileOptimization(string? profile)
+        {
+        }
 
         public override string ToString()
         {
             throw null;
         }
 
-        public void Unload() { }
+        public void Unload()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -268,7 +300,9 @@ namespace System.Runtime.Loader
             private object _dummy;
             private int _dummyPrimitive;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

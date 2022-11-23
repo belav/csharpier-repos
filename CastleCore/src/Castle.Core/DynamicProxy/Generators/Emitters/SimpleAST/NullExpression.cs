@@ -20,7 +20,9 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
     {
         public static readonly NullExpression Instance = new NullExpression();
 
-        protected NullExpression() { }
+        protected NullExpression()
+        {
+        }
 
         public void Emit(ILGenerator gen)
         {

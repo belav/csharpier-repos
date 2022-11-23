@@ -8,7 +8,9 @@ namespace System.Diagnostics
         public EventLogPermissionEntry(
             EventLogPermissionAccess permissionAccess,
             string machineName
-        ) { }
+        )
+        {
+        }
 
         public string MachineName
         {

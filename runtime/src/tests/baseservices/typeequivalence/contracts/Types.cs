@@ -11,7 +11,9 @@ namespace TypeEquivalenceTypes
 {
     [ComImport]
     [Guid("F34D4DE8-B891-4D73-B177-C8F1139A9A67")]
-    public interface IEmptyType { }
+    public interface IEmptyType
+    {
+    }
 
     [ComImport]
     [Guid("729E8A0A-ECAB-46F3-A151-EB494B92D40D")]

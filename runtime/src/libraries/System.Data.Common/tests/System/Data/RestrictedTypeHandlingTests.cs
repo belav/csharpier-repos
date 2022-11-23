@@ -405,7 +405,9 @@ namespace System.Data.Tests
             return newObj;
         }
 
-        private sealed class MyCustomClass { }
+        private sealed class MyCustomClass
+        {
+        }
 
         public sealed class MyXmlSerializableClass : IXmlSerializable
         {

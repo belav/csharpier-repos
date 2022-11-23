@@ -50,10 +50,9 @@ namespace System.IO.Pipelines
         [Obsolete(
             "OnReaderCompleted has been deprecated and may not be invoked on all implementations of PipeWriter."
         )]
-        public virtual void OnReaderCompleted(
-            Action<Exception?, object?> callback,
-            object? state
-        ) { }
+        public virtual void OnReaderCompleted(Action<Exception?, object?> callback, object? state)
+        {
+        }
 
         /// <summary>Makes bytes written available to <see cref="System.IO.Pipelines.PipeReader" /> and runs <see cref="System.IO.Pipelines.PipeReader.ReadAsync(System.Threading.CancellationToken)" /> continuation.</summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="System.Threading.CancellationToken.None" />.</param>

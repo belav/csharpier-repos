@@ -4,19 +4,31 @@
 using System;
 using System.Collections.Generic;
 
-public abstract class A { }
+public abstract class A
+{
+}
 
-public class B : A { }
+public class B : A
+{
+}
 
-public abstract class C { }
+public abstract class C
+{
+}
 
-public abstract class C<CTParam> : C where CTParam : A { }
+public abstract class C<CTParam> : C where CTParam : A
+{
+}
 
-public class D : C<B> { }
+public class D : C<B>
+{
+}
 
 public abstract class E
 {
-    internal E() { }
+    internal E()
+    {
+    }
 
     internal abstract Type NamedObjectType { get; }
 }
@@ -41,7 +53,9 @@ public class F<FTParam> where FTParam : class
         new Dictionary<Type, Func<FTParam>>();
 
     public void Register<FRegMethodParamHaha>() // F<C<B>>.Register<D>
-        where FRegMethodParamHaha : class, FTParam, new() { }
+        where FRegMethodParamHaha : class, FTParam, new()
+    {
+    }
 }
 
 public class G

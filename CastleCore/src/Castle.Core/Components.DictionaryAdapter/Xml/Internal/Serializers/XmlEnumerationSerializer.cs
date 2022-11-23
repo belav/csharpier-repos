@@ -21,7 +21,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public static readonly new XmlEnumerationSerializer Instance =
             new XmlEnumerationSerializer();
 
-        protected XmlEnumerationSerializer() { }
+        protected XmlEnumerationSerializer()
+        {
+        }
 
         public override XmlTypeKind Kind
         {

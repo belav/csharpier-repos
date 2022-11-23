@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicFormatting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicFormatting)) { }
+            : base(instanceFactory, nameof(BasicFormatting))
+        {
+        }
 
         [WpfFact]
         public void VerifyFormattingIndent()

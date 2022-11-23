@@ -13,7 +13,9 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class SocksProxyTest : HttpClientHandlerTestBase
     {
-        public SocksProxyTest(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest(ITestOutputHelper helper) : base(helper)
+        {
+        }
 
         private static string[] Hosts(string socksScheme) =>
             socksScheme == "socks5"
@@ -224,7 +226,9 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "UseProxy not supported on Browser")]
     public sealed class SocksProxyTest_Http1_Async : SocksProxyTest
     {
-        public SocksProxyTest_Http1_Async(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest_Http1_Async(ITestOutputHelper helper) : base(helper)
+        {
+        }
 
         protected override Version UseVersion => HttpVersion.Version11;
     }
@@ -236,7 +240,9 @@ namespace System.Net.Http.Functional.Tests
     )]
     public sealed class SocksProxyTest_Http1_Sync : SocksProxyTest
     {
-        public SocksProxyTest_Http1_Sync(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest_Http1_Sync(ITestOutputHelper helper) : base(helper)
+        {
+        }
 
         protected override Version UseVersion => HttpVersion.Version11;
         protected override bool TestAsync => false;
@@ -245,7 +251,9 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "UseProxy not supported on Browser")]
     public sealed class SocksProxyTest_Http2 : SocksProxyTest
     {
-        public SocksProxyTest_Http2(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest_Http2(ITestOutputHelper helper) : base(helper)
+        {
+        }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }

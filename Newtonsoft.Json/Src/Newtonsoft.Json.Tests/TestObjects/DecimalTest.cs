@@ -28,7 +28,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [JsonObject(MemberSerialization.OptIn)]
     public class DecimalTest : Test<decimal>
     {
-        protected DecimalTest() { }
+        protected DecimalTest()
+        {
+        }
 
         public DecimalTest(decimal val)
         {

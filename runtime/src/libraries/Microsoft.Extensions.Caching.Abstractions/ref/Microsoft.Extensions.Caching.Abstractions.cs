@@ -35,22 +35,30 @@ namespace Microsoft.Extensions.Caching.Distributed
 
     public partial class DistributedCacheEntryOptions
     {
-        public DistributedCacheEntryOptions() { }
+        public DistributedCacheEntryOptions()
+        {
+        }
 
         public System.DateTimeOffset? AbsoluteExpiration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? AbsoluteExpirationRelativeToNow
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? SlidingExpiration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -77,7 +85,9 @@ namespace Microsoft.Extensions.Caching.Distributed
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
             byte[] value
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task SetAsync(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
@@ -93,14 +103,18 @@ namespace Microsoft.Extensions.Caching.Distributed
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
             string value
-        ) { }
+        )
+        {
+        }
 
         public static void SetString(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
             string value,
             Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions options
-        ) { }
+        )
+        {
+        }
 
         public static System.Threading.Tasks.Task SetStringAsync(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
@@ -447,17 +461,23 @@ namespace Microsoft.Extensions.Caching.Memory
 
     public partial class MemoryCacheEntryOptions
     {
-        public MemoryCacheEntryOptions() { }
+        public MemoryCacheEntryOptions()
+        {
+        }
 
         public System.DateTimeOffset? AbsoluteExpiration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? AbsoluteExpirationRelativeToNow
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.IList<Microsoft.Extensions.Primitives.IChangeToken> ExpirationTokens
         {
@@ -470,59 +490,81 @@ namespace Microsoft.Extensions.Caching.Memory
         public Microsoft.Extensions.Caching.Memory.CacheItemPriority Priority
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long? Size
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan? SlidingExpiration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class MemoryCacheStatistics
     {
-        public MemoryCacheStatistics() { }
+        public MemoryCacheStatistics()
+        {
+        }
 
         public long CurrentEntryCount
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
         public long? CurrentEstimatedSize
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
         public long TotalHits
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
         public long TotalMisses
         {
             get { throw null; }
-            init { }
+            init
+            {
+            }
         }
     }
 
     public partial class PostEvictionCallbackRegistration
     {
-        public PostEvictionCallbackRegistration() { }
+        public PostEvictionCallbackRegistration()
+        {
+        }
 
         public Microsoft.Extensions.Caching.Memory.PostEvictionDelegate? EvictionCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object? State
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -543,7 +585,9 @@ namespace Microsoft.Extensions.Internal
 
     public partial class SystemClock : Microsoft.Extensions.Internal.ISystemClock
     {
-        public SystemClock() { }
+        public SystemClock()
+        {
+        }
 
         public System.DateTimeOffset UtcNow
         {

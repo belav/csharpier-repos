@@ -183,7 +183,9 @@ internal sealed class AddressBinder
     private sealed class OverrideWithAddressesStrategy : AddressesStrategy
     {
         public OverrideWithAddressesStrategy(IReadOnlyCollection<string> addresses)
-            : base(addresses) { }
+            : base(addresses)
+        {
+        }
 
         public override Task BindAsync(
             AddressBindContext context,

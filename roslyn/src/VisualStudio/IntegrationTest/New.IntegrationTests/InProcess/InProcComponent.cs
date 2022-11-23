@@ -73,7 +73,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             );
             var taskScheduler = new SynchronizationContextTaskScheduler(synchronizationContext);
             await Task.Factory.StartNew(
-                () => { },
+                () => {
+                },
                 cancellationToken,
                 TaskCreationOptions.None,
                 taskScheduler

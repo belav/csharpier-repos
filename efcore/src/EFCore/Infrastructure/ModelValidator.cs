@@ -1385,7 +1385,9 @@ public class ModelValidator : IModelValidator
     protected virtual void ValidateTriggers(
         IModel model,
         IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
-    ) { }
+    )
+    {
+    }
 
     /// <summary>
     ///     Logs all shadow properties that were created because there was no matching CLR member.

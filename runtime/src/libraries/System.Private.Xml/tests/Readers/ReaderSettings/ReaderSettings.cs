@@ -164,7 +164,9 @@ namespace System.Xml.ReaderSettingsTests
                 )
             )
             {
-                using (XmlReader r2 = ReaderHelper.Create(r, ReaderSettings)) { }
+                using (XmlReader r2 = ReaderHelper.Create(r, ReaderSettings))
+                {
+                }
             }
             return TEST_PASS;
         }

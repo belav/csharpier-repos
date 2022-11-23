@@ -127,7 +127,9 @@ namespace System.Data
         /// <summary>
         /// Private constructor to prevent initialization outside of Default singleton instance.
         /// </summary>
-        private DataRowComparer() { }
+        private DataRowComparer()
+        {
+        }
 
         private static readonly DataRowComparer<TRow> s_instance = new DataRowComparer<TRow>();
 

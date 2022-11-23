@@ -172,7 +172,9 @@ namespace System.Xml.Schema
         public virtual bool IsMixed
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
 
         [XmlIgnore]

@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     ]
     internal sealed class CSharpFunctionResolver : FunctionResolver
     {
-        public CSharpFunctionResolver() { }
+        public CSharpFunctionResolver()
+        {
+        }
 
         internal override RequestSignature GetParsedSignature(
             DkmRuntimeFunctionResolutionRequest request

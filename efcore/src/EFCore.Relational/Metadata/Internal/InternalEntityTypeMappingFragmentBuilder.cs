@@ -22,7 +22,9 @@ public class InternalEntityTypeMappingFragmentBuilder
     public InternalEntityTypeMappingFragmentBuilder(
         EntityTypeMappingFragment fragment,
         IConventionModelBuilder modelBuilder
-    ) : base(fragment, modelBuilder) { }
+    ) : base(fragment, modelBuilder)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

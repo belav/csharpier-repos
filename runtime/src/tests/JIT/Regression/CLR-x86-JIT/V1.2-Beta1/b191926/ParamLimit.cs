@@ -8199,7 +8199,9 @@ class f8192
         int a8190,
         int a8191,
         int a8192
-    ) { }
+    )
+    {
+    }
 
     public static int Main()
     {

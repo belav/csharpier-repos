@@ -19,7 +19,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicNavigateTo(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicNavigateTo)) { }
+            : base(instanceFactory, nameof(BasicNavigateTo))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigateTo)]
         public void NavigateTo()

@@ -495,7 +495,8 @@ public partial class WebHostTests
                 .UseFakeServer()
                 .ConfigureServices(services =>
                 {
-                    Action started = () => { };
+                    Action started = () => {
+                    };
 
                     Action stopping = () =>
                     {
@@ -1126,9 +1127,13 @@ public partial class WebHostTests
 
     public class BadConfigureServicesStartup
     {
-        public void ConfigureServices(IServiceCollection services, int gunk) { }
+        public void ConfigureServices(IServiceCollection services, int gunk)
+        {
+        }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     private IWebHost CreateHost(RequestDelegate requestDelegate)
@@ -1172,7 +1177,12 @@ public partial class WebHostTests
         };
 
         services.AddSingleton<IHostedService>(
-            new DelegateHostedService(started, stopping, () => { })
+            new DelegateHostedService(
+                started,
+                stopping,
+                () => {
+                }
+            )
         );
 
         return events;
@@ -1379,7 +1389,9 @@ public partial class WebHostTests
             get { return 0; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public TFeature Get<TFeature>()
         {
@@ -1425,7 +1437,9 @@ public partial class WebHostTests
             var stringified = formatter(state, exception);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     private class StubFeatures : IHttpRequestFeature, IHttpResponseFeature, IHeaderDictionary
@@ -1439,7 +1453,9 @@ public partial class WebHostTests
         public StringValues this[string key]
         {
             get { return StringValues.Empty; }
-            set { }
+            set
+            {
+            }
         }
 
         public Stream Body { get; set; }
@@ -1476,23 +1492,35 @@ public partial class WebHostTests
 
         public ICollection<StringValues> Values => null;
 
-        public void Add(KeyValuePair<string, StringValues> item) { }
+        public void Add(KeyValuePair<string, StringValues> item)
+        {
+        }
 
-        public void Add(string key, StringValues value) { }
+        public void Add(string key, StringValues value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(KeyValuePair<string, StringValues> item) => false;
 
         public bool ContainsKey(string key) => false;
 
-        public void CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex) { }
+        public void CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex)
+        {
+        }
 
         public IEnumerator<KeyValuePair<string, StringValues>> GetEnumerator() => null;
 
-        public void OnCompleted(Func<object, Task> callback, object state) { }
+        public void OnCompleted(Func<object, Task> callback, object state)
+        {
+        }
 
-        public void OnStarting(Func<object, Task> callback, object state) { }
+        public void OnStarting(Func<object, Task> callback, object state)
+        {
+        }
 
         public bool Remove(KeyValuePair<string, StringValues> item) => false;
 

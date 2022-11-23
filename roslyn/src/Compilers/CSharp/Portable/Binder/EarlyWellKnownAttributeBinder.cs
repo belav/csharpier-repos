@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal sealed class EarlyWellKnownAttributeBinder : Binder
     {
         internal EarlyWellKnownAttributeBinder(Binder enclosing)
-            : base(enclosing, enclosing.Flags | BinderFlags.EarlyAttributeBinding) { }
+            : base(enclosing, enclosing.Flags | BinderFlags.EarlyAttributeBinding)
+        {
+        }
 
         internal (CSharpAttributeData, BoundAttribute) GetAttribute(
             AttributeSyntax node,

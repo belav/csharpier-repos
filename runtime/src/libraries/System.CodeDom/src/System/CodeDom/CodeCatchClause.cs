@@ -9,7 +9,9 @@ namespace System.CodeDom
         private CodeTypeReference _catchExceptionType;
         private string _localName;
 
-        public CodeCatchClause() { }
+        public CodeCatchClause()
+        {
+        }
 
         public CodeCatchClause(string localName)
         {

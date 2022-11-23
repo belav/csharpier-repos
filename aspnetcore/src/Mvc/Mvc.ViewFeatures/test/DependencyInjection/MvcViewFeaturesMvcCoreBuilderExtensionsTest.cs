@@ -70,7 +70,9 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         var builder = services.AddMvcCore();
 
         // Act
-        builder.AddCookieTempDataProvider(options => { });
+        builder.AddCookieTempDataProvider(options =>
+        {
+        });
 
         // Assert
         var descriptor = Assert.Single(
@@ -88,7 +90,9 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         var builder = services.AddMvcCore();
 
         // Act
-        builder.AddCookieTempDataProvider(options => { });
+        builder.AddCookieTempDataProvider(options =>
+        {
+        });
 
         // Assert
         Assert.Single(
@@ -124,7 +128,9 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         var builder = services.AddMvcCore();
 
         // Act
-        builder.AddCookieTempDataProvider(options => { });
+        builder.AddCookieTempDataProvider(options =>
+        {
+        });
         builder.AddViews();
 
         // Assert
@@ -163,7 +169,9 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
 
         // Act
         builder.AddViews();
-        builder.AddCookieTempDataProvider(options => { });
+        builder.AddCookieTempDataProvider(options =>
+        {
+        });
 
         // Assert
         var descriptor = Assert.Single(
@@ -200,8 +208,12 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         var builder = services.AddMvcCore();
 
         // Act
-        builder.AddCookieTempDataProvider(options => { });
-        builder.AddCookieTempDataProvider(options => { });
+        builder.AddCookieTempDataProvider(options =>
+        {
+        });
+        builder.AddCookieTempDataProvider(options =>
+        {
+        });
 
         // Assert
         var descriptor = Assert.Single(

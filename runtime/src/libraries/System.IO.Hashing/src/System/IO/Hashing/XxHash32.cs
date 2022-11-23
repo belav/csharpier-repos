@@ -28,7 +28,9 @@ namespace System.IO.Hashing
         ///   The XxHash32 algorithm supports an optional seed value.
         ///   Instances created with this constructor use the default seed, zero.
         /// </remarks>
-        public XxHash32() : this(0) { }
+        public XxHash32() : this(0)
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="XxHash32"/> class with

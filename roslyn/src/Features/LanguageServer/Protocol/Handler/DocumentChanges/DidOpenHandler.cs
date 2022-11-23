@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DidOpenHandler() { }
+        public DidOpenHandler()
+        {
+        }
 
         public bool MutatesSolutionState => true;
         public bool RequiresLSPSolution => false;

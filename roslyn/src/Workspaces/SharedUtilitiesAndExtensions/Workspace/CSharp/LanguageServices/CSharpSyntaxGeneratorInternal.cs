@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839"
         )]
-        public CSharpSyntaxGeneratorInternal() { }
+        public CSharpSyntaxGeneratorInternal()
+        {
+        }
 
         public static readonly SyntaxGeneratorInternal Instance =
             new CSharpSyntaxGeneratorInternal();

@@ -15,7 +15,9 @@ internal readonly record struct HighlightingOptions
     [DataMember]
     public bool HighlightRelatedJsonComponentsUnderCursor { get; init; } = true;
 
-    public HighlightingOptions() { }
+    public HighlightingOptions()
+    {
+    }
 
     public static HighlightingOptions Default = new();
 }

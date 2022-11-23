@@ -321,6 +321,8 @@ namespace System.Web.Http.ExceptionHandling
             return CreateContext(new ExceptionContext(exception, ExceptionCatchBlocks.HttpServer));
         }
 
-        private class Dictionary : DictionaryBase { }
+        private class Dictionary : DictionaryBase
+        {
+        }
     }
 }

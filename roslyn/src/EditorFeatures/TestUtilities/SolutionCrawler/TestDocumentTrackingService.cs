@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.Test
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestDocumentTrackingService() { }
+        public TestDocumentTrackingService()
+        {
+        }
 
         public bool SupportsDocumentTracking => true;
 
@@ -28,8 +30,12 @@ namespace Microsoft.CodeAnalysis.Editor.Test
 
         public event EventHandler<EventArgs> NonRoslynBufferTextChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public void SetActiveDocument(DocumentId? newActiveDocumentId)

@@ -96,7 +96,9 @@ public class ContextConfigurationTest
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public GiddyupContext() { }
+        public GiddyupContext()
+        {
+        }
 
         public GiddyupContext(IServiceProvider serviceProvider)
         {

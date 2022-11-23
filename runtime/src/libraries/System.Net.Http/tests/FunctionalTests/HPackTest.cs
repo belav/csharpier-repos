@@ -23,7 +23,9 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion.Version20;
 
-        public HPackTest(ITestOutputHelper output) : base(output) { }
+        public HPackTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         private const string LiteralHeaderName = "x-literal-header";
         private const string LiteralHeaderValue = "testing 456";

@@ -11,7 +11,9 @@ namespace System.Reflection
         private int _localIndex;
         private bool _isPinned;
 
-        private RuntimeLocalVariableInfo() { }
+        private RuntimeLocalVariableInfo()
+        {
+        }
 
         public override Type LocalType
         {

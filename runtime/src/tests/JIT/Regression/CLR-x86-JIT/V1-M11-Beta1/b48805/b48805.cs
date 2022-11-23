@@ -18,8 +18,12 @@ namespace Test
                     continue;
                 } while (ab[3]);
             }
-            catch (IndexOutOfRangeException) { }
-            catch (Exception) { }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

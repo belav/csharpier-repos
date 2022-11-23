@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegionHighlighter() { }
+        public RegionHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             DirectiveTriviaSyntax directive,

@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             {
                 return JsonSerializer.Serialize(this, typeof(StringCopyPasteData));
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
+            {
+            }
 
             return null;
         }
@@ -61,7 +63,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
                 return (StringCopyPasteData)value;
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
+            {
+            }
 
             return null;
         }

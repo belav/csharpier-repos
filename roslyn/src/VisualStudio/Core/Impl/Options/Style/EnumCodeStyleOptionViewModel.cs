@@ -55,7 +55,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 optionStore,
                 groupName,
                 preferences
-            ) { }
+            )
+        {
+        }
 
         public EnumCodeStyleOptionViewModel(
             Option2<CodeStyleOption2<T>> option,
@@ -77,7 +79,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 optionStore,
                 groupName,
                 preferences
-            ) { }
+            )
+        {
+        }
 
         private EnumCodeStyleOptionViewModel(
             IOption option,

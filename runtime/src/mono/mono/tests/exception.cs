@@ -8,7 +8,9 @@ public static class Test
         throw new ApplicationException();
     }
 
-    public static void Foo() { }
+    public static void Foo()
+    {
+    }
 }
 
 public class Ex

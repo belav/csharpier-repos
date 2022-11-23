@@ -11,7 +11,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         private class UnaOpSig
         {
-            protected UnaOpSig() { }
+            protected UnaOpSig()
+            {
+            }
 
             public UnaOpSig(
                 PredefinedType pt,

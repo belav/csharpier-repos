@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     isConstant,
                     isLocal,
                     isQueryLocal
-                ) { }
+                )
+            {
+            }
 
             protected override async Task<Document> PostProcessChangesAsync(
                 Document document,

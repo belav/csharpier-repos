@@ -51,7 +51,9 @@ namespace System.Drawing.Internal
                 {
                     Debug.WriteLine("Exception thrown while trying to get allocation stack: " + ex);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 #endif
         }

@@ -65,7 +65,9 @@ namespace ILCompiler.Dataflow
             );
         }
 
-        protected virtual void WarnAboutInvalidILInMethod(MethodIL method, int ilOffset) { }
+        protected virtual void WarnAboutInvalidILInMethod(MethodIL method, int ilOffset)
+        {
+        }
 
         private void CheckForInvalidStack(
             Stack<StackSlot> stack,
@@ -1292,28 +1294,36 @@ namespace ILCompiler.Dataflow
             int offset,
             FieldValue field,
             MultiValue valueToStore
-        ) { }
+        )
+        {
+        }
 
         protected virtual void HandleStoreParameter(
             MethodIL method,
             int offset,
             MethodParameterValue parameter,
             MultiValue valueToStore
-        ) { }
+        )
+        {
+        }
 
         protected virtual void HandleStoreMethodThisParameter(
             MethodIL method,
             int offset,
             MethodThisParameterValue thisParameter,
             MultiValue sourceValue
-        ) { }
+        )
+        {
+        }
 
         protected virtual void HandleStoreMethodReturnValue(
             MethodIL method,
             int offset,
             MethodReturnValue thisParameter,
             MultiValue sourceValue
-        ) { }
+        )
+        {
+        }
 
         private void ScanStfld(
             MethodIL methodBody,

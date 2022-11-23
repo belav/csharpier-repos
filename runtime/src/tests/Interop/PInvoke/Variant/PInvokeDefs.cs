@@ -7,7 +7,9 @@ using System.Runtime.InteropServices;
 #pragma warning disable CS0612, CS0618
 class VariantNative
 {
-    public struct CustomStruct { }
+    public struct CustomStruct
+    {
+    }
 
     public struct ObjectWrapper
     {

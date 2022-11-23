@@ -296,7 +296,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     //<Expects Status=success></Expects>
     // <Code>
 
-    public class MyClass<T, U> where T : U { }
+    public class MyClass<T, U> where T : U
+    {
+    }
 
     public class MyClassDerived<T> : MyClass<T, object>
     {
@@ -337,7 +339,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class MyClass<T, U> where T : U { }
+    public class MyClass<T, U> where T : U
+    {
+    }
 
     public class MyClassDerived<T> : MyClass<T, dynamic>
     {
@@ -378,7 +382,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class MyClass<T, U> where T : U { }
+    public class MyClass<T, U> where T : U
+    {
+    }
 
     public class MyClassDerived<T> : MyClass<T, dynamic>
     {
@@ -447,7 +453,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public T Prop
         {
             get { return default(T); }
-            set { }
+            set
+            {
+            }
         }
 
         public void M(T t, out char ret)
@@ -463,7 +471,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     /// <typeparam name = "T"></typeparam>
     public class C<T>
     {
-        public event EventHandler E = delegate { };
+        public event EventHandler E = delegate
+        {
+        };
 
         public static void Foo()
         {
@@ -492,7 +502,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
 
         public static void Foo()
         {
-            dynamic d = new S<T, V>(delegate { });
+            dynamic d = new S<T, V>(
+                delegate
+                {
+                }
+            );
             d.E(null, null);
         }
 
@@ -517,7 +531,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
             S<string, char>.Foo();
             dynamic d1 = new C<Test>();
             bool ret = 'q' == d1.Bar(null, null);
-            dynamic d2 = new S<sbyte, dynamic>(new EventHandler((p, q) => { }));
+            dynamic d2 = new S<sbyte, dynamic>(
+                new EventHandler(
+                    (p, q) => {
+                    }
+                )
+            );
             ret &= 'c' == d2.Bar(-1, null);
             dynamic v = new DC<object>();
             ret &= default(object) == v.Prop;
@@ -574,7 +593,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
     }
 
-    public class GC1<T> { }
+    public class GC1<T>
+    {
+    }
 
     public abstract class GenericClass<T>
     {
@@ -588,7 +609,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override GC1<GC1<T>> this[GC1<GC1<T>> i, GC1<T> t]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override GC1<GC1<T>> Method1(GC1<GC1<T>> i, GC1<T> t)
@@ -653,14 +676,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
     }
 
-    public class GC1<T> { }
+    public class GC1<T>
+    {
+    }
 
     public class GenericClass<T>
     {
         public virtual GC1<T> this[GC1<T> i, T t]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual GC1<T> Method1(GC1<T> i, T t)
@@ -674,7 +701,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override GC1<GC1<T>> this[GC1<GC1<T>> i, GC1<T> t]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override GC1<GC1<T>> Method1(GC1<GC1<T>> i, GC1<T> t)
@@ -770,14 +799,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
     }
 
-    public class GC1<T> { }
+    public class GC1<T>
+    {
+    }
 
     public class GenericClass<T>
     {
         public virtual GC1<T> this[GC1<T> i, T t]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual GC1<T> Method1(ref GC1<T> i, T t)
@@ -791,7 +824,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override GC1<GC1<T>> this[GC1<GC1<T>> i, GC1<T> t]
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override GC1<GC1<T>> Method1(ref GC1<GC1<T>> i, GC1<T> t)
@@ -837,13 +872,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int this[T x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual event Foo<T> ev;
@@ -864,13 +903,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override int P
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override int this[int x]
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override event Foo<int> ev;
@@ -932,7 +975,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int this[int x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -946,13 +991,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int this[T x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual event Foo<T> ev;
@@ -973,13 +1022,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override int P
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override int this[int x]
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override event Foo<int> ev;
@@ -1041,13 +1094,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int this[T x, U u]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual event Foo<T, U> ev;
@@ -1068,13 +1125,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public override int this[T t, int x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public override event Foo<T, int> ev;
@@ -1176,7 +1237,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
 
     public delegate int Foo<T, U>(T t, U u);
 
-    public class A<T> { }
+    public class A<T>
+    {
+    }
 
     public class C<T, U>
     {
@@ -1188,13 +1251,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int this[T x, U u]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual event Foo<T, U> ev;
@@ -1215,13 +1282,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public override int this[T t, A<A<long>> x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public override event Foo<T, A<A<long>>> ev;
@@ -1390,13 +1461,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int this[T x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual event Foo<T> ev;
@@ -1417,13 +1492,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public int P
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public int this[int x]
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public event Foo<int> ev;
@@ -1485,13 +1564,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int this[T x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual event Foo<T> ev;
@@ -1512,13 +1595,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public new int P
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public new int this[int x]
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public new event Foo<int> ev;
@@ -1591,13 +1678,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override int P
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override int this[int x]
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override event Foo<int> ev;
@@ -1659,13 +1750,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public virtual int P
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual int this[T x]
         {
             get { return 1; }
-            set { }
+            set
+            {
+            }
         }
 
         public virtual event Foo<T> ev;
@@ -1686,13 +1781,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         public override int P
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override int this[int? x]
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public override event Foo<int?> ev;

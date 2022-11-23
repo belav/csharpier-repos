@@ -475,7 +475,9 @@ namespace System.Data.OleDb
                         if (
                             (typeof(string) == destinationType.dataType)
                             && (typeof(char[]) == currentType)
-                        ) { }
+                        )
+                        {
+                        }
                         else if (
                             (NativeDBType.CY == destinationType.dbType)
                             && (typeof(string) == currentType)
@@ -636,7 +638,9 @@ namespace System.Data.OleDb
             : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public OleDbParameterConverter() { }
+            public OleDbParameterConverter()
+            {
+            }
 
             public override bool CanConvertTo(
                 ITypeDescriptorContext? context,

@@ -1452,7 +1452,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         private class CustomList : List<string>
         {
             // Add an overload, just to make sure binding picks the right Add method
-            public void Add(string a, string b) { }
+            public void Add(string a, string b)
+            {
+            }
         }
 
         private class CustomListDerivedFromIEnumerable : IEnumerable<string>
@@ -1464,9 +1466,13 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        internal interface IDerivedOne : IDerivedTwo { }
+        internal interface IDerivedOne : IDerivedTwo
+        {
+        }
 
-        internal interface IDerivedTwo : IEnumerable<string> { }
+        internal interface IDerivedTwo : IEnumerable<string>
+        {
+        }
 
         private class CustomListIndirectlyDerivedFromIEnumerable : IDerivedOne
         {
@@ -1477,7 +1483,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        private class CustomDictionary<T> : Dictionary<string, T> { }
+        private class CustomDictionary<T> : Dictionary<string, T>
+        {
+        }
 
         private class NestedOptions
         {

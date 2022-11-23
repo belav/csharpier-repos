@@ -442,7 +442,9 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(c => { }) // Does nothing, we just want to verify that it was called.
+            .Callback<ExceptionContext>(c =>
+            {
+            }) // Does nothing, we just want to verify that it was called.
             .Verifiable();
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
@@ -527,7 +529,9 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(c => { }) // Does nothing, we just want to verify that it was called.
+            .Callback<ExceptionContext>(c =>
+            {
+            }) // Does nothing, we just want to verify that it was called.
             .Verifiable();
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
@@ -2607,5 +2611,7 @@ public abstract class CommonResourceInvokerTest
         resultFilter4.Verify();
     }
 
-    public class TestResult : ActionResult { }
+    public class TestResult : ActionResult
+    {
+    }
 }

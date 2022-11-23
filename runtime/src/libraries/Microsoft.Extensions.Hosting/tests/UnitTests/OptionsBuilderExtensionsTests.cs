@@ -95,7 +95,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             }
         }
 
-        internal class FakeService { }
+        internal class FakeService
+        {
+        }
 
         internal class FakeSettings
         {

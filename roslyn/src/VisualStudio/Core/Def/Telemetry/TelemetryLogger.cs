@@ -117,7 +117,9 @@ namespace Microsoft.CodeAnalysis.Telemetry
             {
                 PostEvent(telemetryEvent);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void LogBlockStart(
@@ -139,7 +141,9 @@ namespace Microsoft.CodeAnalysis.Telemetry
             {
                 _pendingScopes[blockId] = Start(eventName, kind);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public void LogBlockEnd(
@@ -168,7 +172,9 @@ namespace Microsoft.CodeAnalysis.Telemetry
             {
                 End(scope, result);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static bool IgnoreMessage(LogMessage logMessage) =>

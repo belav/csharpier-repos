@@ -546,7 +546,9 @@ namespace System.Security.Cryptography.X509Certificates
                 }
             }
             // We could not access the key container. Just return.
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             // Ephemeral keys will not have container information.
             if (cspKeyContainerInfo == null)
@@ -567,30 +569,42 @@ namespace System.Security.Cryptography.X509Certificates
                 string uniqueKeyContainer = cspKeyContainerInfo.UniqueKeyContainerName;
                 sb.AppendLine().Append("  Unique Key Container Name: ").Append(uniqueKeyContainer);
             }
-            catch (CryptographicException) { }
-            catch (NotSupportedException) { }
+            catch (CryptographicException)
+            {
+            }
+            catch (NotSupportedException)
+            {
+            }
 
             try
             {
                 bool b = cspKeyContainerInfo.HardwareDevice;
                 sb.AppendLine().Append("  Hardware Device: ").Append(b);
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             try
             {
                 bool b = cspKeyContainerInfo.Removable;
                 sb.AppendLine().Append("  Removable: ").Append(b);
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             try
             {
                 bool b = cspKeyContainerInfo.Protected;
                 sb.AppendLine().Append("  Protected: ").Append(b);
             }
-            catch (CryptographicException) { }
-            catch (NotSupportedException) { }
+            catch (CryptographicException)
+            {
+            }
+            catch (NotSupportedException)
+            {
+            }
         }
 
         public void Dispose()

@@ -224,6 +224,8 @@ namespace System.Tests
             public override int GetHashCode() => Value++.GetHashCode();
         }
 
-        public class G<T> { }
+        public class G<T>
+        {
+        }
     }
 }

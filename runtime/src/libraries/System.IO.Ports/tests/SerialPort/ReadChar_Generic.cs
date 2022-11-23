@@ -152,7 +152,9 @@ namespace System.IO.Ports.Tests
                 {
                     com1.ReadChar();
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 TCSupport.WaitForTaskCompletion(t);
 

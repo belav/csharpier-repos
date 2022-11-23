@@ -26,7 +26,9 @@ namespace System.Net.Http.Headers
             // Used by the parser to create a new instance of this type.
         }
 
-        public TransferCodingWithQualityHeaderValue(string value) : base(value) { }
+        public TransferCodingWithQualityHeaderValue(string value) : base(value)
+        {
+        }
 
         public TransferCodingWithQualityHeaderValue(string value, double quality) : base(value)
         {

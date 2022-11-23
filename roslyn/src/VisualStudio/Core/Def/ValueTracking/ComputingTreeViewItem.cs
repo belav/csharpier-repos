@@ -11,6 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
     {
         public string Text => ServicesVSResources.Calculating;
 
-        public ComputingTreeViewItem() { }
+        public ComputingTreeViewItem()
+        {
+        }
     }
 }

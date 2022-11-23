@@ -1760,7 +1760,9 @@ namespace System.Speech.Recognition
         /// <summary>
         /// Unused
         /// </summary>
-        void ISpGrammarResourceLoader.ReleaseLocalCopy(string path) { }
+        void ISpGrammarResourceLoader.ReleaseLocalCopy(string path)
+        {
+        }
 
         #endregion
 
@@ -2924,7 +2926,9 @@ namespace System.Speech.Recognition
                         }
                     }
                 }
-                catch (COMException) { }
+                catch (COMException)
+                {
+                }
 
                 // If for some reason the GetFormat fails OR we can't get a wave format, assume 16 Kb, 16 bits, Audio.
                 if (!hasWaveFormat)
@@ -3728,10 +3732,14 @@ namespace System.Speech.Recognition
     }
 
     [ComImport, Guid("EF411752-3736-4CB4-9C8C-8EF4CCB58EFE")]
-    internal class SpObjectToken { }
+    internal class SpObjectToken
+    {
+    }
 
     [ComImport, Guid("A910187F-0C7A-45AC-92CC-59EDAFB77B53")]
-    internal class SpObjectTokenCategory { }
+    internal class SpObjectTokenCategory
+    {
+    }
 
     #endregion
 }

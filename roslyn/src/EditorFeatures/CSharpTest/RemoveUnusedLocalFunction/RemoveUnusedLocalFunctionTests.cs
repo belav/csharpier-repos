@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
     public partial class RemoveUnusedLocalFunctionTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveUnusedLocalFunctionTests(ITestOutputHelper logger) : base(logger) { }
+        public RemoveUnusedLocalFunctionTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

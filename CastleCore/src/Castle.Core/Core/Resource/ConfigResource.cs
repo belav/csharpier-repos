@@ -28,9 +28,13 @@ namespace Castle.Core.Resource
         private readonly XmlNode configSectionNode;
         private readonly string sectionName;
 
-        public ConfigResource() : this("castle") { }
+        public ConfigResource() : this("castle")
+        {
+        }
 
-        public ConfigResource(CustomUri uri) : this(uri.Host) { }
+        public ConfigResource(CustomUri uri) : this(uri.Host)
+        {
+        }
 
         public ConfigResource(string sectionName)
         {

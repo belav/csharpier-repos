@@ -31,4 +31,6 @@ class Base
     private static int GetInt() => 42;
 }
 
-class Derived : Base { }
+class Derived : Base
+{
+}

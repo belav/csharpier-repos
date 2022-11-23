@@ -19,7 +19,9 @@ namespace System.Diagnostics
         /// Initializes a new instance of the <see cref="ActivityEvent"/> class.
         /// </summary>
         /// <param name="name">Event name.</param>
-        public ActivityEvent(string name) : this(name, DateTimeOffset.UtcNow, tags: null) { }
+        public ActivityEvent(string name) : this(name, DateTimeOffset.UtcNow, tags: null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActivityEvent"/> class.

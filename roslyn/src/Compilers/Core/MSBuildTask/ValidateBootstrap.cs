@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             set { _tasksAssemblyFullPath = NormalizePath(Path.GetFullPath(value!)); }
         }
 
-        public ValidateBootstrap() { }
+        public ValidateBootstrap()
+        {
+        }
 
         public override bool Execute()
         {

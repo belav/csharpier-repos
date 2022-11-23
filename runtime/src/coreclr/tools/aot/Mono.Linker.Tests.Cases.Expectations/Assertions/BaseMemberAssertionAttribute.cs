@@ -19,5 +19,7 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
             | AttributeTargets.Delegate,
         AllowMultiple = true
     )]
-    public abstract class BaseMemberAssertionAttribute : Attribute { }
+    public abstract class BaseMemberAssertionAttribute : Attribute
+    {
+    }
 }

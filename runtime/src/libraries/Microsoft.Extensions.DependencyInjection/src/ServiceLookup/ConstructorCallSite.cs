@@ -15,7 +15,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             ResultCache cache,
             Type serviceType,
             ConstructorInfo constructorInfo
-        ) : this(cache, serviceType, constructorInfo, Array.Empty<ServiceCallSite>()) { }
+        ) : this(cache, serviceType, constructorInfo, Array.Empty<ServiceCallSite>())
+        {
+        }
 
         public ConstructorCallSite(
             ResultCache cache,

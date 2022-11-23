@@ -561,7 +561,9 @@ namespace System.IO.Ports.Tests
             private IAsyncResult _beginReadAsyncResult;
             private readonly SerialPort _com;
 
-            public CallbackHandler() : this(null) { }
+            public CallbackHandler() : this(null)
+            {
+            }
 
             public CallbackHandler(SerialPort com)
             {

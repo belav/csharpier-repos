@@ -57,7 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 kind,
                 preprocessorSymbols.ToImmutableArrayOrEmpty(),
                 ImmutableDictionary<string, string>.Empty
-            ) { }
+            )
+        {
+        }
 
         internal CSharpParseOptions(
             LanguageVersion languageVersion,
@@ -81,7 +83,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 kind: other.Kind,
                 preprocessorSymbols: other.PreprocessorSymbols,
                 features: other.Features
-            ) { }
+            )
+        {
+        }
 
         public override string Language => LanguageNames.CSharp;
 

@@ -2,9 +2,13 @@
 
 public class AddProfiles : AutoMapperSpecBase
 {
-    public class Source { }
+    public class Source
+    {
+    }
 
-    public class Dest { }
+    public class Dest
+    {
+    }
 
     public class ForwardProfile : Profile
     {

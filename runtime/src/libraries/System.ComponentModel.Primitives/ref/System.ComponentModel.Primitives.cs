@@ -13,7 +13,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.BrowsableAttribute No;
         public static readonly System.ComponentModel.BrowsableAttribute Yes;
 
-        public BrowsableAttribute(bool browsable) { }
+        public BrowsableAttribute(bool browsable)
+        {
+        }
 
         public bool Browsable
         {
@@ -41,9 +43,13 @@ namespace System.ComponentModel
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
     public partial class CategoryAttribute : System.Attribute
     {
-        public CategoryAttribute() { }
+        public CategoryAttribute()
+        {
+        }
 
-        public CategoryAttribute(string category) { }
+        public CategoryAttribute(string category)
+        {
+        }
 
         public static System.ComponentModel.CategoryAttribute Action
         {
@@ -135,7 +141,9 @@ namespace System.ComponentModel
             System.ComponentModel.IComponent,
             System.IDisposable
     {
-        public Component() { }
+        public Component()
+        {
+        }
 
         protected virtual bool CanRaiseEvents
         {
@@ -171,7 +179,9 @@ namespace System.ComponentModel
         public virtual System.ComponentModel.ISite? Site
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -180,15 +190,25 @@ namespace System.ComponentModel
         )]
         public event System.EventHandler? Disposed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        ~Component() { }
+        ~Component()
+        {
+        }
 
         protected virtual object? GetService(System.Type service)
         {
@@ -203,7 +223,9 @@ namespace System.ComponentModel
 
     public partial class ComponentCollection : System.Collections.ReadOnlyCollectionBase
     {
-        public ComponentCollection(System.ComponentModel.IComponent[] components) { }
+        public ComponentCollection(System.ComponentModel.IComponent[] components)
+        {
+        }
 
         public virtual System.ComponentModel.IComponent? this[int index]
         {
@@ -214,7 +236,9 @@ namespace System.ComponentModel
             get { throw null; }
         }
 
-        public void CopyTo(System.ComponentModel.IComponent[] array, int index) { }
+        public void CopyTo(System.ComponentModel.IComponent[] array, int index)
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
@@ -222,9 +246,13 @@ namespace System.ComponentModel
     {
         public static readonly System.ComponentModel.DescriptionAttribute Default;
 
-        public DescriptionAttribute() { }
+        public DescriptionAttribute()
+        {
+        }
 
-        public DescriptionAttribute(string description) { }
+        public DescriptionAttribute(string description)
+        {
+        }
 
         public virtual string Description
         {
@@ -233,7 +261,9 @@ namespace System.ComponentModel
         protected string DescriptionValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals(
@@ -270,7 +300,9 @@ namespace System.ComponentModel
                     .PublicParameterlessConstructor
             )]
                 string designerTypeName
-        ) { }
+        )
+        {
+        }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -289,7 +321,9 @@ namespace System.ComponentModel
                     .PublicParameterlessConstructor
             )]
                 string designerBaseTypeName
-        ) { }
+        )
+        {
+        }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -308,7 +342,9 @@ namespace System.ComponentModel
                     .PublicParameterlessConstructor
             )]
                 System.Type designerBaseType
-        ) { }
+        )
+        {
+        }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -319,7 +355,9 @@ namespace System.ComponentModel
                     .PublicParameterlessConstructor
             )]
                 System.Type designerType
-        ) { }
+        )
+        {
+        }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -338,7 +376,9 @@ namespace System.ComponentModel
                     .PublicParameterlessConstructor
             )]
                 System.Type designerBaseType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
@@ -391,9 +431,13 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.DesignerCategoryAttribute Form;
         public static readonly System.ComponentModel.DesignerCategoryAttribute Generic;
 
-        public DesignerCategoryAttribute() { }
+        public DesignerCategoryAttribute()
+        {
+        }
 
-        public DesignerCategoryAttribute(string category) { }
+        public DesignerCategoryAttribute(string category)
+        {
+        }
 
         public string Category
         {
@@ -444,7 +488,9 @@ namespace System.ComponentModel
 
         public DesignerSerializationVisibilityAttribute(
             System.ComponentModel.DesignerSerializationVisibility visibility
-        ) { }
+        )
+        {
+        }
 
         public System.ComponentModel.DesignerSerializationVisibility Visibility
         {
@@ -476,7 +522,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.DesignOnlyAttribute No;
         public static readonly System.ComponentModel.DesignOnlyAttribute Yes;
 
-        public DesignOnlyAttribute(bool isDesignOnly) { }
+        public DesignOnlyAttribute(bool isDesignOnly)
+        {
+        }
 
         public bool IsDesignOnly
         {
@@ -511,9 +559,13 @@ namespace System.ComponentModel
     {
         public static readonly System.ComponentModel.DisplayNameAttribute Default;
 
-        public DisplayNameAttribute() { }
+        public DisplayNameAttribute()
+        {
+        }
 
-        public DisplayNameAttribute(string displayName) { }
+        public DisplayNameAttribute(string displayName)
+        {
+        }
 
         public virtual string DisplayName
         {
@@ -522,7 +574,9 @@ namespace System.ComponentModel
         protected string DisplayNameValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool Equals(
@@ -550,7 +604,9 @@ namespace System.ComponentModel
     )]
     public sealed partial class EditorAttribute : System.Attribute
     {
-        public EditorAttribute() { }
+        public EditorAttribute()
+        {
+        }
 
         public EditorAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -561,7 +617,9 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 string? baseTypeName
-        ) { }
+        )
+        {
+        }
 
         public EditorAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -572,7 +630,9 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type baseType
-        ) { }
+        )
+        {
+        }
 
         public EditorAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -583,7 +643,9 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type baseType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -618,21 +680,33 @@ namespace System.ComponentModel
 
     public sealed partial class EventHandlerList : System.IDisposable
     {
-        public EventHandlerList() { }
+        public EventHandlerList()
+        {
+        }
 
         public System.Delegate? this[object key]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddHandler(object key, System.Delegate? value) { }
+        public void AddHandler(object key, System.Delegate? value)
+        {
+        }
 
-        public void AddHandlers(System.ComponentModel.EventHandlerList listToAddFrom) { }
+        public void AddHandlers(System.ComponentModel.EventHandlerList listToAddFrom)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void RemoveHandler(object key, System.Delegate? value) { }
+        public void RemoveHandler(object key, System.Delegate? value)
+        {
+        }
     }
 
     [System.ComponentModel.DesignerAttribute(
@@ -670,7 +744,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.ImmutableObjectAttribute No;
         public static readonly System.ComponentModel.ImmutableObjectAttribute Yes;
 
-        public ImmutableObjectAttribute(bool immutable) { }
+        public ImmutableObjectAttribute(bool immutable)
+        {
+        }
 
         public bool Immutable
         {
@@ -698,7 +774,9 @@ namespace System.ComponentModel
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
     public sealed partial class InitializationEventAttribute : System.Attribute
     {
-        public InitializationEventAttribute(string eventName) { }
+        public InitializationEventAttribute(string eventName)
+        {
+        }
 
         public string EventName
         {
@@ -708,37 +786,54 @@ namespace System.ComponentModel
 
     public partial class InvalidAsynchronousStateException : System.ArgumentException
     {
-        public InvalidAsynchronousStateException() { }
+        public InvalidAsynchronousStateException()
+        {
+        }
 
         protected InvalidAsynchronousStateException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InvalidAsynchronousStateException(string? message) { }
+        public InvalidAsynchronousStateException(string? message)
+        {
+        }
 
         public InvalidAsynchronousStateException(string? message, System.Exception? innerException)
-        { }
+        {
+        }
     }
 
     public partial class InvalidEnumArgumentException : System.ArgumentException
     {
-        public InvalidEnumArgumentException() { }
+        public InvalidEnumArgumentException()
+        {
+        }
 
         protected InvalidEnumArgumentException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public InvalidEnumArgumentException(string? message) { }
+        public InvalidEnumArgumentException(string? message)
+        {
+        }
 
-        public InvalidEnumArgumentException(string? message, System.Exception? innerException) { }
+        public InvalidEnumArgumentException(string? message, System.Exception? innerException)
+        {
+        }
 
         public InvalidEnumArgumentException(
             string? argumentName,
             int invalidValue,
             System.Type enumClass
-        ) { }
+        )
+        {
+        }
     }
 
     public partial interface ISite : System.IServiceProvider
@@ -777,7 +872,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.LocalizableAttribute No;
         public static readonly System.ComponentModel.LocalizableAttribute Yes;
 
-        public LocalizableAttribute(bool isLocalizable) { }
+        public LocalizableAttribute(bool isLocalizable)
+        {
+        }
 
         public bool IsLocalizable
         {
@@ -809,7 +906,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.MergablePropertyAttribute No;
         public static readonly System.ComponentModel.MergablePropertyAttribute Yes;
 
-        public MergablePropertyAttribute(bool allowMerge) { }
+        public MergablePropertyAttribute(bool allowMerge)
+        {
+        }
 
         public bool AllowMerge
         {
@@ -841,7 +940,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.NotifyParentPropertyAttribute No;
         public static readonly System.ComponentModel.NotifyParentPropertyAttribute Yes;
 
-        public NotifyParentPropertyAttribute(bool notifyParent) { }
+        public NotifyParentPropertyAttribute(bool notifyParent)
+        {
+        }
 
         public bool NotifyParent
         {
@@ -871,9 +972,13 @@ namespace System.ComponentModel
     {
         public static readonly System.ComponentModel.ParenthesizePropertyNameAttribute Default;
 
-        public ParenthesizePropertyNameAttribute() { }
+        public ParenthesizePropertyNameAttribute()
+        {
+        }
 
-        public ParenthesizePropertyNameAttribute(bool needParenthesis) { }
+        public ParenthesizePropertyNameAttribute(bool needParenthesis)
+        {
+        }
 
         public bool NeedParenthesis
         {
@@ -905,7 +1010,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.ReadOnlyAttribute No;
         public static readonly System.ComponentModel.ReadOnlyAttribute Yes;
 
-        public ReadOnlyAttribute(bool isReadOnly) { }
+        public ReadOnlyAttribute(bool isReadOnly)
+        {
+        }
 
         public bool IsReadOnly
         {
@@ -944,7 +1051,9 @@ namespace System.ComponentModel
         public static readonly System.ComponentModel.RefreshPropertiesAttribute Default;
         public static readonly System.ComponentModel.RefreshPropertiesAttribute Repaint;
 
-        public RefreshPropertiesAttribute(System.ComponentModel.RefreshProperties refresh) { }
+        public RefreshPropertiesAttribute(System.ComponentModel.RefreshProperties refresh)
+        {
+        }
 
         public System.ComponentModel.RefreshProperties RefreshProperties
         {
@@ -982,17 +1091,23 @@ namespace System.ComponentModel.Design.Serialization
         public DesignerSerializerAttribute(
             string? serializerTypeName,
             string? baseSerializerTypeName
-        ) { }
+        )
+        {
+        }
 
         public DesignerSerializerAttribute(
             string? serializerTypeName,
             System.Type baseSerializerType
-        ) { }
+        )
+        {
+        }
 
         public DesignerSerializerAttribute(
             System.Type serializerType,
             System.Type baseSerializerType
-        ) { }
+        )
+        {
+        }
 
         public string? SerializerBaseTypeName
         {

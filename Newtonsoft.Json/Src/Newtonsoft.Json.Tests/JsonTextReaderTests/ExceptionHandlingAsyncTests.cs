@@ -532,7 +532,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
                 {
-                    while (await reader.ReadAsync()) { }
+                    while (await reader.ReadAsync())
+                    {
+                    }
                 },
                 "Additional text encountered after finished reading JSON content: ,. Path '', line 5, position 1."
             );
@@ -587,7 +589,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
                 {
-                    while (await reader.ReadAsync()) { }
+                    while (await reader.ReadAsync())
+                    {
+                    }
                 },
                 "Additional text encountered after finished reading JSON content: a. Path '', line 1, position 5."
             );
@@ -740,7 +744,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             {
                 await jsonTextReader.ReadAsBytesAsync();
             }
-            catch (FormatException) { }
+            catch (FormatException)
+            {
+            }
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.EndObject, jsonTextReader.TokenType);
@@ -1428,7 +1434,9 @@ new Date()"
                 async () =>
                 {
                     JsonTextReader reader = new JsonTextReader(new StringReader(json));
-                    while (await reader.ReadAsync()) { }
+                    while (await reader.ReadAsync())
+                    {
+                    }
                 },
                 "Unexpected character encountered while parsing value: !. Path 'frameworks.dnxcore50.dependencies['System.Xml.ReaderWriter'].source', line 6, position 20."
             );

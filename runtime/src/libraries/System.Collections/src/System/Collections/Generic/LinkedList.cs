@@ -31,7 +31,9 @@ namespace System.Collections.Generic
         private const string CountName = "Count"; // Do not rename (binary serialization)
         private const string ValuesName = "Data"; // Do not rename (binary serialization)
 
-        public LinkedList() { }
+        public LinkedList()
+        {
+        }
 
         public LinkedList(IEnumerable<T> collection)
         {
@@ -609,7 +611,9 @@ namespace System.Collections.Generic
                 _index = 0;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {

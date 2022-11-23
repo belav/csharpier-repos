@@ -252,13 +252,19 @@ namespace System.Web.Http.Dispatcher
 
         // Helper classes
 
-        abstract class AbstractController : ApiController { }
+        abstract class AbstractController : ApiController
+        {
+        }
 
-        class SimpleController : ApiController { }
+        class SimpleController : ApiController
+        {
+        }
 
         class ControllerWithCtorParams : ApiController
         {
-            public ControllerWithCtorParams(int unused) { }
+            public ControllerWithCtorParams(int unused)
+            {
+            }
         }
     }
 }

@@ -366,7 +366,9 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase
     {
         public static readonly ComplexNavigationsWeakData Instance = new();
 
-        private ComplexNavigationsWeakData() { }
+        private ComplexNavigationsWeakData()
+        {
+        }
 
         public override IQueryable<TEntity> Set<TEntity>()
         {

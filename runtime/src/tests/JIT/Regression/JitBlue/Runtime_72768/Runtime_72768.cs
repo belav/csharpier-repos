@@ -31,7 +31,9 @@ public class Program
     {
         try
         {
-            try { }
+            try
+            {
+            }
             finally
             {
                 if (s_12[0, 0])

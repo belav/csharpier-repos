@@ -17,7 +17,9 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// When overridden, constructs a new <see cref="JsonConverterFactory"/> instance.
         /// </summary>
-        protected JsonConverterFactory() { }
+        protected JsonConverterFactory()
+        {
+        }
 
         internal sealed override ConverterStrategy ConverterStrategy => ConverterStrategy.None;
 

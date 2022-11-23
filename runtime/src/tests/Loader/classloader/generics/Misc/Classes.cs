@@ -3,9 +3,13 @@
 
 using System;
 
-public class Cls_1<T, U> { }
+public class Cls_1<T, U>
+{
+}
 
-public class Cls_2 : Cls_1<I3, Cls_2> { }
+public class Cls_2 : Cls_1<I3, Cls_2>
+{
+}
 
 public interface I1
 {

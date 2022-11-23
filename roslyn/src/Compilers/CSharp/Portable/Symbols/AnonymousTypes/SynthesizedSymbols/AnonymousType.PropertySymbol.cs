@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     index,
                     ImmutableArray<Location>.Empty,
                     includeBackingField: true
-                ) { }
+                )
+            {
+            }
 
             internal AnonymousTypePropertySymbol(
                 AnonymousTypePublicSymbol container,
@@ -53,7 +55,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     index,
                     ImmutableArray.Create<Location>(field.Location),
                     includeBackingField: false
-                ) { }
+                )
+            {
+            }
 
             private AnonymousTypePropertySymbol(
                 NamedTypeSymbol container,

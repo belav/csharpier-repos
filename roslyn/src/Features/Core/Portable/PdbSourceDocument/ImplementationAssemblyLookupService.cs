@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ImplementationAssemblyLookupService() { }
+        public ImplementationAssemblyLookupService()
+        {
+        }
 
         public bool TryFindImplementationAssemblyPath(
             string referencedDllPath,
@@ -116,7 +118,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     }
                 }
             }
-            catch (Exception ex) when (IOUtilities.IsNormalIOException(ex)) { }
+            catch (Exception ex) when (IOUtilities.IsNormalIOException(ex))
+            {
+            }
 
             return null;
 

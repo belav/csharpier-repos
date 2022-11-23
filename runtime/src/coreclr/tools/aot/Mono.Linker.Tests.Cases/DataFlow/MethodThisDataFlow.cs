@@ -124,7 +124,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             MakeArrayValuesUnknown(array);
             ((MethodThisDataFlowTypeTest)array[0]).RequireThisNonPublicMethods();
 
-            static void MakeArrayValuesUnknown(object[] array) { }
+            static void MakeArrayValuesUnknown(object[] array)
+            {
+            }
         }
 
         [ExpectedWarning(
@@ -179,7 +181,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [ExpectedWarning("IL2041")]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            public static void StaticMethod() { }
+            public static void StaticMethod()
+            {
+            }
         }
 
         struct StructType
@@ -279,10 +283,14 @@ namespace System
 
         private static void RequirePublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
-        ) { }
+        )
+        {
+        }
 
         private static void RequireNonPublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] Type type
-        ) { }
+        )
+        {
+        }
     }
 }

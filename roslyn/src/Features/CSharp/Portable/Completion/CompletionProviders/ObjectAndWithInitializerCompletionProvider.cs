@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ObjectAndWithInitializerCompletionProvider() { }
+        public ObjectAndWithInitializerCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

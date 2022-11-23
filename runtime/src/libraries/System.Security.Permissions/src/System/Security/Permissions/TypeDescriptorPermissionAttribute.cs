@@ -21,7 +21,9 @@ namespace System.Security.Permissions
     )]
     public sealed class TypeDescriptorPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public TypeDescriptorPermissionAttribute(SecurityAction action) : base(action) { }
+        public TypeDescriptorPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public TypeDescriptorPermissionFlags Flags { get; set; }
         public bool RestrictedRegistrationAccess { get; set; }

@@ -1372,7 +1372,8 @@ namespace Internal.JitInterface
             byte* reason
         )
 #pragma warning restore CA1822 // Mark members as static
-        { }
+        {
+        }
 
         private void getEHinfo(
             CORINFO_METHOD_STRUCT_* ftn,
@@ -1866,7 +1867,8 @@ namespace Internal.JitInterface
 #pragma warning disable CA1822 // Mark members as static
         private void methodMustBeLoadedBeforeCodeIsRun(CORINFO_METHOD_STRUCT_* method)
 #pragma warning restore CA1822 // Mark members as static
-        { }
+        {
+        }
 
         private CORINFO_METHOD_STRUCT_* mapMethodDeclToMethodImpl(CORINFO_METHOD_STRUCT_* method)
         {
@@ -4272,7 +4274,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* methodHandle
         )
 #pragma warning restore CA1822 // Mark members as static
-        { }
+        {
+        }
 
         private ArrayBuilder<Relocation> _codeRelocs;
         private ArrayBuilder<Relocation> _roDataRelocs;

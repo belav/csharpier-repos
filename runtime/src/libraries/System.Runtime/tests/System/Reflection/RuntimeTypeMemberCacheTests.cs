@@ -31,9 +31,13 @@ namespace System.Reflection.Tests
     {
         public int field1;
 
-        public void Method1() { }
+        public void Method1()
+        {
+        }
 
-        public void Method2() { }
+        public void Method2()
+        {
+        }
 
         public delegate void Delegate1();
         public int field2;
@@ -41,17 +45,29 @@ namespace System.Reflection.Tests
         public int field3;
         public int field4;
 
-        public void Method3() { }
+        public void Method3()
+        {
+        }
 
-        public void Method3(string a) { }
+        public void Method3(string a)
+        {
+        }
 
-        public Test(int value) { }
+        public Test(int value)
+        {
+        }
 
-        public Test() { }
+        public Test()
+        {
+        }
 
-        public Test(string value) { }
+        public Test(string value)
+        {
+        }
 
-        public void Method3(int i) { }
+        public void Method3(int i)
+        {
+        }
 
         public string Property1 => string.Empty;
         public event EventHandler Event2;
@@ -64,7 +80,9 @@ namespace System.Reflection.Tests
         public delegate void Delegate2(int i);
         public delegate void EventHandler(object sender, EventArgs e);
 
-        public void Method5() { }
+        public void Method5()
+        {
+        }
 
         public string Property2 { get; set; }
         public delegate void Delegate3(int i, int j);
@@ -186,11 +204,17 @@ namespace System.Reflection.Tests
 
     public class BigTestType : TestBase
     {
-        public void Method0() { }
+        public void Method0()
+        {
+        }
 
-        public void Method1() { }
+        public void Method1()
+        {
+        }
 
-        public void Method2(int a) { }
+        public void Method2(int a)
+        {
+        }
 
         public int Method3() => 1;
 
@@ -228,15 +252,25 @@ namespace System.Reflection.Tests
 
         public int Method20() => 1;
 
-        public BigTestType(int value) { }
+        public BigTestType(int value)
+        {
+        }
 
-        public BigTestType() { }
+        public BigTestType()
+        {
+        }
 
-        public BigTestType(string value) { }
+        public BigTestType(string value)
+        {
+        }
 
-        public void Method21() { }
+        public void Method21()
+        {
+        }
 
-        public void Method22(int a) { }
+        public void Method22(int a)
+        {
+        }
 
         public int Method23() => 1;
 
@@ -250,15 +284,25 @@ namespace System.Reflection.Tests
 
         public int Method28() => 1;
 
-        public BigTestType(long value) { }
+        public BigTestType(long value)
+        {
+        }
 
-        public BigTestType(double value) { }
+        public BigTestType(double value)
+        {
+        }
 
-        public BigTestType(short value) { }
+        public BigTestType(short value)
+        {
+        }
 
-        public BigTestType(bool value) { }
+        public BigTestType(bool value)
+        {
+        }
 
-        public BigTestType(decimal value) { }
+        public BigTestType(decimal value)
+        {
+        }
 
         public int Method29(int a) => a;
 
@@ -284,9 +328,13 @@ namespace System.Reflection.Tests
 
         public int Method40() => 1;
 
-        public BigTestType(Test value) { }
+        public BigTestType(Test value)
+        {
+        }
 
-        public BigTestType(byte value) { }
+        public BigTestType(byte value)
+        {
+        }
 
         public int Method41() => 1;
 
@@ -308,11 +356,17 @@ namespace System.Reflection.Tests
 
         public int Method50() => 1;
 
-        public BigTestType(ulong value) { }
+        public BigTestType(ulong value)
+        {
+        }
 
-        public void Method51() { }
+        public void Method51()
+        {
+        }
 
-        public void Method52(int a) { }
+        public void Method52(int a)
+        {
+        }
 
         public int Method53() => 1;
 
@@ -354,9 +408,13 @@ namespace System.Reflection.Tests
         public int field2;
         public int field3;
 
-        public void Method71() { }
+        public void Method71()
+        {
+        }
 
-        public void Method72(int a) { }
+        public void Method72(int a)
+        {
+        }
 
         public int Method73() => 1;
 
@@ -366,17 +424,27 @@ namespace System.Reflection.Tests
 
         public int Method76(int a) => a;
 
-        public void Method77(string b) { }
+        public void Method77(string b)
+        {
+        }
 
-        public void Method78() { }
+        public void Method78()
+        {
+        }
 
-        public void Method79(int a) { }
+        public void Method79(int a)
+        {
+        }
 
         public int Method80() => 1;
 
-        public void Method81() { }
+        public void Method81()
+        {
+        }
 
-        public void Method82(int a) { }
+        public void Method82(int a)
+        {
+        }
 
         public int Method83() => 1;
 
@@ -386,17 +454,27 @@ namespace System.Reflection.Tests
 
         public int Method86(int a) => a;
 
-        public void Method87(string b) { }
+        public void Method87(string b)
+        {
+        }
 
-        public void Method88() { }
+        public void Method88()
+        {
+        }
 
-        public void Method89(int a) { }
+        public void Method89(int a)
+        {
+        }
 
         public int Method90() => 1;
 
-        public void Method91() { }
+        public void Method91()
+        {
+        }
 
-        public void Method92(int a) { }
+        public void Method92(int a)
+        {
+        }
 
         public int Method93() => 1;
 
@@ -406,17 +484,27 @@ namespace System.Reflection.Tests
 
         public int Method96(int a) => a;
 
-        public void Method97(string b) { }
+        public void Method97(string b)
+        {
+        }
 
-        public void Method98() { }
+        public void Method98()
+        {
+        }
 
-        public void Method99(int a) { }
+        public void Method99(int a)
+        {
+        }
 
         public int Method100() => 1;
 
-        public void Method101() { }
+        public void Method101()
+        {
+        }
 
-        public void Method102(int a) { }
+        public void Method102(int a)
+        {
+        }
 
         public int Method103() => 1;
 
@@ -426,17 +514,27 @@ namespace System.Reflection.Tests
 
         public int Method106(int a) => a;
 
-        public void Method107(string b) { }
+        public void Method107(string b)
+        {
+        }
 
-        public void Method108() { }
+        public void Method108()
+        {
+        }
 
-        public void Method109(int a) { }
+        public void Method109(int a)
+        {
+        }
 
         public int Method110() => 1;
 
-        public void Method111() { }
+        public void Method111()
+        {
+        }
 
-        public void Method112(int a) { }
+        public void Method112(int a)
+        {
+        }
 
         public int Method113() => 1;
 
@@ -446,17 +544,27 @@ namespace System.Reflection.Tests
 
         public int Method116(int a) => a;
 
-        public void Method117(string b) { }
+        public void Method117(string b)
+        {
+        }
 
-        public void Method118() { }
+        public void Method118()
+        {
+        }
 
-        public void Method119(int a) { }
+        public void Method119(int a)
+        {
+        }
 
         public int Method120() => 1;
 
-        public void Method121() { }
+        public void Method121()
+        {
+        }
 
-        public void Method122(int a) { }
+        public void Method122(int a)
+        {
+        }
 
         public int Method123() => 1;
 
@@ -466,17 +574,27 @@ namespace System.Reflection.Tests
 
         public int Method126(int a) => a;
 
-        public void Method127(string b) { }
+        public void Method127(string b)
+        {
+        }
 
-        public void Method128() { }
+        public void Method128()
+        {
+        }
 
-        public void Method129(int a) { }
+        public void Method129(int a)
+        {
+        }
 
         public int Method130() => 1;
 
-        public void Method131() { }
+        public void Method131()
+        {
+        }
 
-        public void Method132(int a) { }
+        public void Method132(int a)
+        {
+        }
 
         public int Method133() => 1;
 
@@ -486,17 +604,27 @@ namespace System.Reflection.Tests
 
         public int Method136(int a) => a;
 
-        public void Method137(string b) { }
+        public void Method137(string b)
+        {
+        }
 
-        public void Method138() { }
+        public void Method138()
+        {
+        }
 
-        public void Method139(int a) { }
+        public void Method139(int a)
+        {
+        }
 
         public int Method140() => 1;
 
-        public void Method141() { }
+        public void Method141()
+        {
+        }
 
-        public void Method142(int a) { }
+        public void Method142(int a)
+        {
+        }
 
         public int Method143() => 1;
 
@@ -506,17 +634,27 @@ namespace System.Reflection.Tests
 
         public int Method146(int a) => a;
 
-        public void Method147(string b) { }
+        public void Method147(string b)
+        {
+        }
 
-        public void Method148() { }
+        public void Method148()
+        {
+        }
 
-        public void Method149(int a) { }
+        public void Method149(int a)
+        {
+        }
 
         public int Method150() => 1;
 
-        public void Method151() { }
+        public void Method151()
+        {
+        }
 
-        public void Method152(int a) { }
+        public void Method152(int a)
+        {
+        }
 
         public int Method153() => 1;
 
@@ -526,17 +664,27 @@ namespace System.Reflection.Tests
 
         public int Method156(int a) => a;
 
-        public void Method157(string b) { }
+        public void Method157(string b)
+        {
+        }
 
-        public void Method158() { }
+        public void Method158()
+        {
+        }
 
-        public void Method159(int a) { }
+        public void Method159(int a)
+        {
+        }
 
         public int Method160() => 1;
 
-        public void Method161() { }
+        public void Method161()
+        {
+        }
 
-        public void Method162(int a) { }
+        public void Method162(int a)
+        {
+        }
 
         public int Method163() => 1;
 
@@ -546,17 +694,27 @@ namespace System.Reflection.Tests
 
         public int Method166(int a) => a;
 
-        public void Method167(string b) { }
+        public void Method167(string b)
+        {
+        }
 
-        public void Method168() { }
+        public void Method168()
+        {
+        }
 
-        public void Method169(int a) { }
+        public void Method169(int a)
+        {
+        }
 
         public int Method170() => 1;
 
-        public void Method171() { }
+        public void Method171()
+        {
+        }
 
-        public void Method172(int a) { }
+        public void Method172(int a)
+        {
+        }
 
         public int Method173() => 1;
 
@@ -566,11 +724,17 @@ namespace System.Reflection.Tests
 
         public int Method176(int a) => a;
 
-        public void Method177(string b) { }
+        public void Method177(string b)
+        {
+        }
 
-        public void Method178() { }
+        public void Method178()
+        {
+        }
 
-        public void Method179(int a) { }
+        public void Method179(int a)
+        {
+        }
 
         public int Method180() => 1;
     }

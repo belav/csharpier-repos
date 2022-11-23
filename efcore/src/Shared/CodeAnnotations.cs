@@ -8,10 +8,14 @@ using System;
 namespace JetBrains.Annotations;
 
 [AttributeUsage(AttributeTargets.Parameter)]
-internal sealed class InvokerParameterNameAttribute : Attribute { }
+internal sealed class InvokerParameterNameAttribute : Attribute
+{
+}
 
 [AttributeUsage(AttributeTargets.Parameter)]
-internal sealed class NoEnumerationAttribute : Attribute { }
+internal sealed class NoEnumerationAttribute : Attribute
+{
+}
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 internal sealed class ContractAnnotationAttribute : Attribute
@@ -20,7 +24,9 @@ internal sealed class ContractAnnotationAttribute : Attribute
 
     public bool ForceFullStates { get; }
 
-    public ContractAnnotationAttribute(string contract) : this(contract, false) { }
+    public ContractAnnotationAttribute(string contract) : this(contract, false)
+    {
+    }
 
     public ContractAnnotationAttribute(string contract, bool forceFullStates)
     {
@@ -33,13 +39,19 @@ internal sealed class ContractAnnotationAttribute : Attribute
 internal sealed class UsedImplicitlyAttribute : Attribute
 {
     public UsedImplicitlyAttribute()
-        : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) { }
+        : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default)
+    {
+    }
 
     public UsedImplicitlyAttribute(ImplicitUseKindFlags useKindFlags)
-        : this(useKindFlags, ImplicitUseTargetFlags.Default) { }
+        : this(useKindFlags, ImplicitUseTargetFlags.Default)
+    {
+    }
 
     public UsedImplicitlyAttribute(ImplicitUseTargetFlags targetFlags)
-        : this(ImplicitUseKindFlags.Default, targetFlags) { }
+        : this(ImplicitUseKindFlags.Default, targetFlags)
+    {
+    }
 
     public UsedImplicitlyAttribute(
         ImplicitUseKindFlags useKindFlags,

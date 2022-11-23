@@ -11,7 +11,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
     public sealed class ModelValidationNode
     {
         public ModelValidationNode(ModelMetadata modelMetadata, string modelStateKey)
-            : this(modelMetadata, modelStateKey, null) { }
+            : this(modelMetadata, modelStateKey, null)
+        {
+        }
 
         public ModelValidationNode(
             ModelMetadata modelMetadata,

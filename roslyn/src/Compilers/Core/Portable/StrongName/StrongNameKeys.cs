@@ -62,7 +62,9 @@ namespace Microsoft.CodeAnalysis
 
         internal static readonly StrongNameKeys None = new StrongNameKeys();
 
-        private StrongNameKeys() { }
+        private StrongNameKeys()
+        {
+        }
 
         internal StrongNameKeys(Diagnostic diagnostic)
         {

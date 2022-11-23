@@ -12,7 +12,9 @@ namespace System.Security.Policy
 #endif
     public sealed partial class Zone : EvidenceBase, IIdentityPermissionFactory
     {
-        public Zone(SecurityZone zone) { }
+        public Zone(SecurityZone zone)
+        {
+        }
 
         public SecurityZone SecurityZone
         {

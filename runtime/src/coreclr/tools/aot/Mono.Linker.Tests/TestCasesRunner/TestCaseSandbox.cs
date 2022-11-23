@@ -30,13 +30,19 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 testCase,
                 GetArtifactsTestPath(),
                 Path.GetFileNameWithoutExtension(_linkerAssemblyPath)
-            ) { }
+            )
+        {
+        }
 
         public TestCaseSandbox(TestCase testCase, NPath rootTemporaryDirectory)
-            : this(testCase, rootTemporaryDirectory, string.Empty) { }
+            : this(testCase, rootTemporaryDirectory, string.Empty)
+        {
+        }
 
         public TestCaseSandbox(TestCase testCase, string rootTemporaryDirectory, string namePrefix)
-            : this(testCase, rootTemporaryDirectory.ToNPath(), namePrefix) { }
+            : this(testCase, rootTemporaryDirectory.ToNPath(), namePrefix)
+        {
+        }
 
         public TestCaseSandbox(TestCase testCase, NPath rootTemporaryDirectory, string namePrefix)
         {

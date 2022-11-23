@@ -21,7 +21,9 @@ namespace Castle.DynamicProxy.Tests.Serialization
     [Serializable]
     public class EventHandlerClass
     {
-        public void TestHandler(object sender, EventArgs e) { }
+        public void TestHandler(object sender, EventArgs e)
+        {
+        }
     }
 }
 

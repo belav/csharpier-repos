@@ -284,17 +284,29 @@ namespace Microsoft.Extensions.DependencyInjection
             return serviceCollection.BuildServiceProvider();
         }
 
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
-        public class Foo1 : IFoo { }
+        public class Foo1 : IFoo
+        {
+        }
 
-        public class Foo2 : IFoo { }
+        public class Foo2 : IFoo
+        {
+        }
 
-        public interface IBar { }
+        public interface IBar
+        {
+        }
 
-        public class Bar1 : IBar { }
+        public class Bar1 : IBar
+        {
+        }
 
-        public class Bar2 : IBar { }
+        public class Bar2 : IBar
+        {
+        }
 
         private class RequiredServiceSupportingProvider : IServiceProvider, ISupportRequiredService
         {

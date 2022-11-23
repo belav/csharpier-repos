@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToInterpolatedString
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider() { }
+        public CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider()
+        {
+        }
 
         protected override SyntaxNode GetInterpolatedString(string text) =>
             SyntaxFactory.ParseExpression("$" + text) as InterpolatedStringExpressionSyntax;

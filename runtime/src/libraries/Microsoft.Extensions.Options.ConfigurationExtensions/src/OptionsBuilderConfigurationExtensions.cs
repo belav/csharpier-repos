@@ -31,7 +31,13 @@ namespace Microsoft.Extensions.DependencyInjection
         public static OptionsBuilder<TOptions> Bind<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions
         >(this OptionsBuilder<TOptions> optionsBuilder, IConfiguration config)
-            where TOptions : class => optionsBuilder.Bind(config, _ => { });
+            where TOptions : class =>
+            optionsBuilder.Bind(
+                config,
+                _ =>
+                {
+                }
+            );
 
         /// <summary>
         /// Registers a configuration instance which <typeparamref name="TOptions"/> will bind against.

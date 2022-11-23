@@ -25,7 +25,9 @@ namespace System.Net
         private static int s_maxServicePointIdleTime = 100 * 1000;
         private static int s_dnsRefreshTimeout = 2 * 60 * 1000;
 
-        private ServicePointManager() { }
+        private ServicePointManager()
+        {
+        }
 
         public static SecurityProtocolType SecurityProtocol
         {

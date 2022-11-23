@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpForEachLoopSnippetProvider() { }
+        public CSharpForEachLoopSnippetProvider()
+        {
+        }
 
         /// <summary>
         /// Creates the foreach statement syntax.

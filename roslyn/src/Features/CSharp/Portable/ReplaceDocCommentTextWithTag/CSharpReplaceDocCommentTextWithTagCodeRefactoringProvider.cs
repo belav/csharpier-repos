@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDocCommentTextWithTag
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider() { }
+        public CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider()
+        {
+        }
 
         protected override bool IsXmlTextToken(SyntaxToken token) =>
             token.Kind() is SyntaxKind.XmlTextLiteralToken or SyntaxKind.XmlTextLiteralNewLineToken;

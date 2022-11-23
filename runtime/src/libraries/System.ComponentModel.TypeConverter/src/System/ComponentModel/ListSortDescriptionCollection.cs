@@ -10,7 +10,9 @@ namespace System.ComponentModel
     {
         private readonly ArrayList _sorts = new ArrayList();
 
-        public ListSortDescriptionCollection() { }
+        public ListSortDescriptionCollection()
+        {
+        }
 
         public ListSortDescriptionCollection(ListSortDescription?[]? sorts)
         {

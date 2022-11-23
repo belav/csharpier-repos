@@ -1181,7 +1181,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
 
         [Fact]
-        public void GetExportFactoryProductImportDefinition_() { }
+        public void GetExportFactoryProductImportDefinition_()
+        {
+        }
 
         [Fact]
         public void GetExportFactoryProductImportDefinition_PartCreatorImport_()
@@ -1325,7 +1327,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public class TestPart
         {
-            public TestPart(int arg1) { }
+            public TestPart(int arg1)
+            {
+            }
 
             public int field1;
             public string field2;
@@ -1343,7 +1347,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             private readonly Type _type;
             private readonly ICompositionElement _origin;
 
-            public TypeOrigin(Type type) : this(type, null) { }
+            public TypeOrigin(Type type) : this(type, null)
+            {
+            }
 
             public TypeOrigin(Type type, ICompositionElement origin)
             {

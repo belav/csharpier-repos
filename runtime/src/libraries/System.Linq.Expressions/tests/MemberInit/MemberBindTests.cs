@@ -38,7 +38,9 @@ namespace System.Linq.Expressions.Tests
             public Inner ReadonlyInnerProperty { get; } = new Inner();
             public Inner WriteonlyInnerProperty
             {
-                set { }
+                set
+                {
+                }
             }
             public readonly Inner ReadonlyInnerField = new Inner();
             public static Inner StaticInnerProperty { get; set; } = new Inner();
@@ -47,7 +49,9 @@ namespace System.Linq.Expressions.Tests
             public static readonly Inner StaticReadonlyInnerField = new Inner();
             public static Inner StaticWriteonlyInnerProperty
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

@@ -153,7 +153,9 @@ namespace Microsoft.Cci
     internal interface IGenericParameterReference
         : ITypeReference,
             INamedEntity,
-            IParameterListEntry { }
+            IParameterListEntry
+    {
+    }
 
     /// <summary>
     /// The definition of a type parameter of a generic method.
@@ -243,7 +245,9 @@ namespace Microsoft.Cci
     /// <summary>
     /// A named type definition, such as an INamespaceTypeDefinition or an INestedTypeDefinition.
     /// </summary>
-    internal interface INamedTypeDefinition : ITypeDefinition, INamedTypeReference { }
+    internal interface INamedTypeDefinition : ITypeDefinition, INamedTypeReference
+    {
+    }
 
     /// <summary>
     /// A type definition that is a member of a namespace definition.
@@ -294,12 +298,16 @@ namespace Microsoft.Cci
     internal interface INestedTypeDefinition
         : INamedTypeDefinition,
             ITypeDefinitionMember,
-            INestedTypeReference { }
+            INestedTypeReference
+    {
+    }
 
     /// <summary>
     /// A type definition that is a member of another type definition.
     /// </summary>
-    internal interface INestedTypeReference : INamedTypeReference, ITypeMemberReference { }
+    internal interface INestedTypeReference : INamedTypeReference, ITypeMemberReference
+    {
+    }
 
     /// <summary>
     /// A reference to a type definition that is a specialized nested type.

@@ -210,21 +210,35 @@ public class TypeNameHelperTest
         }
     }
 
-    private class A { }
+    private class A
+    {
+    }
 
-    private class B<T> { }
+    private class B<T>
+    {
+    }
 
-    private class C<T1, T2> { }
+    private class C<T1, T2>
+    {
+    }
 
-    private class PartiallyClosedGeneric<T> : C<T, int> { }
+    private class PartiallyClosedGeneric<T> : C<T, int>
+    {
+    }
 
     private static class Outer<T>
     {
-        public class D { }
+        public class D
+        {
+        }
 
-        public class E<T1> { }
+        public class E<T1>
+        {
+        }
 
-        public class F<T1, T2> { }
+        public class F<T1, T2>
+        {
+        }
     }
 
     private static class OuterGeneric<T1>
@@ -233,9 +247,13 @@ public class TypeNameHelperTest
         {
             public static class InnerGeneric<T2, T3>
             {
-                public class InnerGenericLeafNode<T4> { }
+                public class InnerGenericLeafNode<T4>
+                {
+                }
 
-                public class InnerLeafNode { }
+                public class InnerLeafNode
+                {
+                }
             }
         }
     }
@@ -244,7 +262,9 @@ public class TypeNameHelperTest
     {
         public static class Level2<T2>
         {
-            public class Level3<T3> { }
+            public class Level3<T3>
+            {
+            }
         }
     }
 }

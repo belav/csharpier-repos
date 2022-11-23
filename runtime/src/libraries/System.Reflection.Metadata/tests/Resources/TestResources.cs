@@ -257,7 +257,9 @@ namespace System.Reflection.Metadata.Tests
                 : base(
                     new PEHeaderBuilder(sectionAlignment: 512, fileAlignment: 512),
                     deterministicIdProvider: _ => new BlobContentId()
-                ) { }
+                )
+            {
+            }
 
             protected override ImmutableArray<Section> CreateSections()
             {

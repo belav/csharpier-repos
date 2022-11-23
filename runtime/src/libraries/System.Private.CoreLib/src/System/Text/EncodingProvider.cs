@@ -10,7 +10,9 @@ namespace System.Text
     {
         private static volatile EncodingProvider[]? s_providers;
 
-        public EncodingProvider() { }
+        public EncodingProvider()
+        {
+        }
 
         public abstract Encoding? GetEncoding(string name);
         public abstract Encoding? GetEncoding(int codepage);

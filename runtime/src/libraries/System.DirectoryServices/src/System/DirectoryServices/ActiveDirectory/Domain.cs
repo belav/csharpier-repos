@@ -56,7 +56,9 @@ namespace System.DirectoryServices.ActiveDirectory
         }
 
         internal Domain(DirectoryContext context, string domainName)
-            : this(context, domainName, new DirectoryEntryManager(context)) { }
+            : this(context, domainName, new DirectoryEntryManager(context))
+        {
+        }
         #endregion constructors
 
         #region public methods

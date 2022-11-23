@@ -42,17 +42,29 @@ namespace System.Reflection.Emit.Tests
         public static int StaticField = 3;
         public static int StaticReadonlyField = 4;
 
-        public TestAttribute() { }
+        public TestAttribute()
+        {
+        }
 
-        public TestAttribute(int i) { }
+        public TestAttribute(int i)
+        {
+        }
 
-        public TestAttribute(object o) { }
+        public TestAttribute(object o)
+        {
+        }
 
-        public TestAttribute(int i, bool b) { }
+        public TestAttribute(int i, bool b)
+        {
+        }
 
-        private TestAttribute(int i, int j, int k) { }
+        private TestAttribute(int i, int j, int k)
+        {
+        }
 
-        static TestAttribute() { }
+        static TestAttribute()
+        {
+        }
 
         public TestAttribute(string getOnlyString, int getOnlyInt32)
         {

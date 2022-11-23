@@ -107,7 +107,9 @@ public class Ref<T> where T : Entity
 }
 
 "
-            ) { }
+            )
+        {
+        }
 
         private CodeFunction GetCodeFunction(params object[] path)
         {

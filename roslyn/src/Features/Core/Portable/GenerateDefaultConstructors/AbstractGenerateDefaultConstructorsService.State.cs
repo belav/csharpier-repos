@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
 
             public ImmutableArray<IMethodSymbol> UnimplementedConstructors { get; private set; }
 
-            private State() { }
+            private State()
+            {
+            }
 
             public static State? Generate(
                 TService service,

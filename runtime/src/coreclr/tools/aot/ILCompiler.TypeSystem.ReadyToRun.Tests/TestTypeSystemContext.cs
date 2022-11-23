@@ -34,7 +34,9 @@ namespace TypeSystemTests
             CanonicalizationMode.RuntimeDetermined;
 
         public TestTypeSystemContext(TargetArchitecture arch)
-            : base(new TargetDetails(arch, TargetOS.Unknown, TargetAbi.Unknown)) { }
+            : base(new TargetDetails(arch, TargetOS.Unknown, TargetAbi.Unknown))
+        {
+        }
 
         public ModuleDesc GetModuleForSimpleName(string simpleName)
         {

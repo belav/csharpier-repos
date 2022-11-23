@@ -252,7 +252,9 @@ namespace CoreXml.Test.XLinq
                             DataReader.MoveToAttribute(DataReader.AttributeCount / 2);
                             throw new TestException(TestResult.Failed, "");
                         }
-                        catch (ArgumentOutOfRangeException) { }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                        }
                         Assert.True(
                             TestLog.Compare(DataReader.ReadOuterXml(), string.Empty, "outer")
                         );

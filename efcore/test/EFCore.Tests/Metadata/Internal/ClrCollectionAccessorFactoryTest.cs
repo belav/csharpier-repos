@@ -459,7 +459,9 @@ public class ClrCollectionAccessorFactoryTest
         private readonly IEnumerable<MyOtherEntity> _readOnlyPropNoFieldNotFound;
         private IEnumerable<MyOtherEntity> _writeOnlyPropNoFieldNotFound;
 
-        public MyEntity() : this(false) { }
+        public MyEntity() : this(false)
+        {
+        }
 
         public MyEntity(bool initialize)
         {
@@ -598,7 +600,9 @@ public class ClrCollectionAccessorFactoryTest
             _writeOnlyPropNoFieldNotFound;
     }
 
-    private class MyOtherEntity { }
+    private class MyOtherEntity
+    {
+    }
 
     private class MyEntityWithCustomComparer
     {
@@ -610,23 +614,31 @@ public class ClrCollectionAccessorFactoryTest
         public override int GetHashCode() => Id.GetHashCode();
     }
 
-    private class MyCollection : List<MyOtherEntity> { }
+    private class MyCollection : List<MyOtherEntity>
+    {
+    }
 
     private class MyPrivateCollection : List<MyOtherEntity>
     {
-        private MyPrivateCollection() { }
+        private MyPrivateCollection()
+        {
+        }
 
         public static MyPrivateCollection Create() => new();
     }
 
     private class MyInternalCollection : List<MyOtherEntity>
     {
-        internal MyInternalCollection() { }
+        internal MyInternalCollection()
+        {
+        }
     }
 
     private class MyUnavailableCollection : List<MyOtherEntity>
     {
-        public MyUnavailableCollection(bool _) { }
+        public MyUnavailableCollection(bool _)
+        {
+        }
     }
 
     private class MyEnumerable : IEnumerable<MyOtherEntity>

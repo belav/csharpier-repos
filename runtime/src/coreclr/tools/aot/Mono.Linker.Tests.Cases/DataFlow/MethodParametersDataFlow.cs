@@ -277,7 +277,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             MakeArrayValuesUnknown(array);
             ((Type)array[0]).RequiresPublicParameterlessConstructor();
 
-            static void MakeArrayValuesUnknown(object[] array) { }
+            static void MakeArrayValuesUnknown(object[] array)
+            {
+            }
         }
 
         private void AnnotatedValueToUnAnnotatedParameter(
@@ -303,7 +305,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [ExpectedWarning("IL2098", "p1", nameof(UnsupportedParameterType))]
         private void UnsupportedParameterType(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] object p1
-        ) { }
+        )
+        {
+        }
 
         private class InstanceCtor
         {
@@ -336,7 +340,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
                 Type type,
             Type type2
-        ) { }
+        )
+        {
+        }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         static Type _fieldWithMethods;
@@ -391,11 +397,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         class TestType
         {
-            public TestType() { }
+            public TestType()
+            {
+            }
 
-            public TestType(int arg) { }
+            public TestType(int arg)
+            {
+            }
 
-            private TestType(int arg1, int arg2) { }
+            private TestType(int arg1, int arg2)
+            {
+            }
         }
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]

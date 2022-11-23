@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _fileName;
 
-        public CodeLinePragma() { }
+        public CodeLinePragma()
+        {
+        }
 
         public CodeLinePragma(string fileName, int lineNumber)
         {

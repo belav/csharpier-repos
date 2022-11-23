@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider) { }
+        ) : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider)
+        {
+        }
 
         protected override string FeatureAttributeName => FeatureAttribute.LineSeparators;
         protected override string AdornmentLayerName => LayerName;

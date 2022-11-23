@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSendToInteractiveSubmissionProvider() { }
+        public CSharpSendToInteractiveSubmissionProvider()
+        {
+        }
 
         protected override bool CanParseSubmission(string code)
         {

@@ -25,17 +25,23 @@ namespace System.Diagnostics
     )]
     public class PerformanceCounterPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public PerformanceCounterPermissionAttribute(SecurityAction action) : base(action) { }
+        public PerformanceCounterPermissionAttribute(SecurityAction action) : base(action)
+        {
+        }
 
         public string CategoryName
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public string MachineName
         {
             get { return null; }
-            set { }
+            set
+            {
+            }
         }
         public PerformanceCounterPermissionAccess PermissionAccess { get; set; }
 

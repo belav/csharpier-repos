@@ -408,7 +408,9 @@ namespace System.ComponentModel
             /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
             /// </summary>
             protected SimplePropertyDescriptor(Type componentType, string name, Type propertyType)
-                : this(componentType, name, propertyType, Array.Empty<Attribute>()) { }
+                : this(componentType, name, propertyType, Array.Empty<Attribute>())
+            {
+            }
 
             /// <summary>
             /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.

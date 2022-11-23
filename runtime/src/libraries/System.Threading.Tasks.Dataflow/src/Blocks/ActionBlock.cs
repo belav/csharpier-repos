@@ -34,7 +34,9 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="action">The action to invoke with each data element received.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in Visual Basic).</exception>
         public ActionBlock(Action<TInput> action)
-            : this((Delegate)action, ExecutionDataflowBlockOptions.Default) { }
+            : this((Delegate)action, ExecutionDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see cref="System.Action{T}"/> and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
@@ -44,13 +46,17 @@ namespace System.Threading.Tasks.Dataflow
         public ActionBlock(
             Action<TInput> action,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) : this((Delegate)action, dataflowBlockOptions) { }
+        ) : this((Delegate)action, dataflowBlockOptions)
+        {
+        }
 
         /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see cref="System.Func{T,Task}"/>.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in Visual Basic).</exception>
         public ActionBlock(Func<TInput, Task> action)
-            : this((Delegate)action, ExecutionDataflowBlockOptions.Default) { }
+            : this((Delegate)action, ExecutionDataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see cref="System.Func{T,Task}"/> and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
@@ -60,7 +66,9 @@ namespace System.Threading.Tasks.Dataflow
         public ActionBlock(
             Func<TInput, Task> action,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) : this((Delegate)action, dataflowBlockOptions) { }
+        ) : this((Delegate)action, dataflowBlockOptions)
+        {
+        }
 
         /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified delegate and options.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>

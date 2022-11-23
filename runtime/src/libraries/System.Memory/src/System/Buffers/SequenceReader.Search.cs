@@ -684,7 +684,9 @@ namespace System.Buffers
                     i = CurrentSpanIndex;
                     i < CurrentSpan.Length && CurrentSpan[i].Equals(value);
                     i++
-                ) { }
+                )
+                {
+                }
 
                 int advanced = i - CurrentSpanIndex;
                 if (advanced == 0)
@@ -718,7 +720,9 @@ namespace System.Buffers
                     i = CurrentSpanIndex;
                     i < CurrentSpan.Length && values.IndexOf(CurrentSpan[i]) != -1;
                     i++
-                ) { }
+                )
+                {
+                }
 
                 int advanced = i - CurrentSpanIndex;
                 if (advanced == 0)

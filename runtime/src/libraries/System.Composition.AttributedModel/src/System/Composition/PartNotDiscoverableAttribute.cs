@@ -12,6 +12,8 @@ namespace System.Composition
         /// <summary>
         ///     Initializes a new instance of the <see cref="PartNotDiscoverableAttribute"/> class.
         /// </summary>
-        public PartNotDiscoverableAttribute() { }
+        public PartNotDiscoverableAttribute()
+        {
+        }
     }
 }

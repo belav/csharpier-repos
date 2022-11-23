@@ -1530,14 +1530,22 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private class TestGenericTypedClient<T> : TestTypedClient
         {
-            public TestGenericTypedClient(HttpClient httpClient) : base(httpClient) { }
+            public TestGenericTypedClient(HttpClient httpClient) : base(httpClient)
+            {
+            }
         }
 
-        private class SingletonService { }
+        private class SingletonService
+        {
+        }
 
-        private class ScopedService { }
+        private class ScopedService
+        {
+        }
 
-        private class TransientService { }
+        private class TransientService
+        {
+        }
 
         private class HandlerWithSingletonService : DelegatingHandler
         {

@@ -146,8 +146,12 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
 
             public event EventHandler<BrokeredServicesChangedEventArgs>? AvailabilityChanged
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             // This method is currently not needed for our IServiceBroker usage patterns.

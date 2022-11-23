@@ -95,7 +95,9 @@ namespace System.Web.WebPages.Deployment.Test
             {
                 Directory.Delete(_tempPath, recursive: true);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         [Fact]

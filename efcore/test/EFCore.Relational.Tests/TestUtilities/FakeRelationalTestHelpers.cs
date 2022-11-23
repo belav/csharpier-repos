@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class FakeRelationalTestHelpers : TestHelpers
 {
-    protected FakeRelationalTestHelpers() { }
+    protected FakeRelationalTestHelpers()
+    {
+    }
 
     public static FakeRelationalTestHelpers Instance { get; } = new();
 

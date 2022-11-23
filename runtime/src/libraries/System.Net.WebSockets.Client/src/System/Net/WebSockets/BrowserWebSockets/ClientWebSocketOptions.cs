@@ -14,7 +14,9 @@ namespace System.Net.WebSockets
         private bool _isReadOnly; // After ConnectAsync is called the options cannot be modified.
         private List<string>? _requestedSubProtocols;
 
-        internal ClientWebSocketOptions() { }
+        internal ClientWebSocketOptions()
+        {
+        }
 
         #region HTTP Settings
 

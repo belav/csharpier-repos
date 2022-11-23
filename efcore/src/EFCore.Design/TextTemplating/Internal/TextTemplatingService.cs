@@ -175,7 +175,9 @@ public class TextTemplatingService : ITextTemplating, ITextTemplatingEngineHost,
         {
             return Assembly.Load(assemblyReference).Location;
         }
-        catch { }
+        catch
+        {
+        }
 
         // TODO: Expand variables?
         return assemblyReference;

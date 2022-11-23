@@ -12,7 +12,9 @@ namespace System.Runtime.Caching.Configuration
 #endif
     internal sealed class CachingSectionGroup : ConfigurationSectionGroup
     {
-        public CachingSectionGroup() { }
+        public CachingSectionGroup()
+        {
+        }
 
         // public properties
         [ConfigurationProperty("memoryCache")]

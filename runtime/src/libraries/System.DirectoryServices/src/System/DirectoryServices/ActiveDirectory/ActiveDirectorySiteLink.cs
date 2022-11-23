@@ -26,13 +26,17 @@ namespace System.DirectoryServices.ActiveDirectory
         private bool _siteRetrieved;
 
         public ActiveDirectorySiteLink(DirectoryContext context, string siteLinkName)
-            : this(context, siteLinkName, ActiveDirectoryTransportType.Rpc, null) { }
+            : this(context, siteLinkName, ActiveDirectoryTransportType.Rpc, null)
+        {
+        }
 
         public ActiveDirectorySiteLink(
             DirectoryContext context,
             string siteLinkName,
             ActiveDirectoryTransportType transport
-        ) : this(context, siteLinkName, transport, null) { }
+        ) : this(context, siteLinkName, transport, null)
+        {
+        }
 
         public ActiveDirectorySiteLink(
             DirectoryContext context,

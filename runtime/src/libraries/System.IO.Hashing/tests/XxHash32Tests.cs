@@ -11,7 +11,9 @@ namespace System.IO.Hashing.Tests
     {
         private static readonly byte[] s_emptyHashValue = new byte[] { 0x02, 0xCC, 0x5D, 0x05 };
 
-        public XxHash32Tests() : base(s_emptyHashValue) { }
+        public XxHash32Tests() : base(s_emptyHashValue)
+        {
+        }
 
         public static IEnumerable<object[]> TestCases
         {

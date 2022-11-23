@@ -38,7 +38,9 @@ namespace System.Xml.Xsl.XsltOld
             return (mode == null || mode.IsEmpty) ? BuiltInRule() : new ApplyTemplatesAction(mode);
         }
 
-        internal ApplyTemplatesAction() { }
+        internal ApplyTemplatesAction()
+        {
+        }
 
         private ApplyTemplatesAction(XmlQualifiedName mode)
         {

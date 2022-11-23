@@ -844,7 +844,9 @@ namespace Microsoft.CodeAnalysis.Operations
                 type: type,
                 constantValue: constantValue,
                 isImplicit: true
-            ) { }
+            )
+        {
+        }
     }
 
     internal sealed partial class FlowCaptureOperation
@@ -880,7 +882,9 @@ namespace Microsoft.CodeAnalysis.Operations
     internal sealed partial class CaughtExceptionOperation
     {
         public CaughtExceptionOperation(SyntaxNode syntax, ITypeSymbol type)
-            : this(semanticModel: null, syntax: syntax, type: type, isImplicit: true) { }
+            : this(semanticModel: null, syntax: syntax, type: type, isImplicit: true)
+        {
+        }
     }
 
     internal sealed partial class StaticLocalInitializationSemaphoreOperation
@@ -889,7 +893,9 @@ namespace Microsoft.CodeAnalysis.Operations
             ILocalSymbol local,
             SyntaxNode syntax,
             ITypeSymbol type
-        ) : this(local, semanticModel: null, syntax, type, isImplicit: true) { }
+        ) : this(local, semanticModel: null, syntax, type, isImplicit: true)
+        {
+        }
     }
 
     internal sealed partial class BlockOperation

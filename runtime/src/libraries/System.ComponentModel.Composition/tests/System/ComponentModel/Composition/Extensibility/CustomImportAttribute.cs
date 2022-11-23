@@ -6,8 +6,12 @@ namespace System.ComponentModel.Composition.Extensibility
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public class CustomImportAttribute : ImportAttribute
     {
-        public CustomImportAttribute() { }
+        public CustomImportAttribute()
+        {
+        }
 
-        public CustomImportAttribute(Type type) : base(type) { }
+        public CustomImportAttribute(Type type) : base(type)
+        {
+        }
     }
 }

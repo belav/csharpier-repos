@@ -49,7 +49,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 isPinned,
                 isCompilerGenerated,
                 canScheduleToStack
-            ) { }
+            )
+        {
+        }
 
         public EELocalSymbol(
             MethodSymbol method,

@@ -16,7 +16,9 @@ namespace System.Threading
 #endif
     public sealed partial class RegisteredWaitHandle : System.MarshalByRefObject
     {
-        internal RegisteredWaitHandle() { }
+        internal RegisteredWaitHandle()
+        {
+        }
 
         public bool Unregister(System.Threading.WaitHandle? waitObject)
         {

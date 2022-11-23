@@ -16,7 +16,9 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public class ExportOnIndexer { }
+    public class ExportOnIndexer
+    {
+    }
 
     public class ExportAttributeTests
     {

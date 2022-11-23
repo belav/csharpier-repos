@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 internal abstract class SyntaxList : SyntaxNode
 {
     internal SyntaxList(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)
-        : base(green, parent, position) { }
+        : base(green, parent, position)
+    {
+    }
 
     public override TResult Accept<TResult>(SyntaxVisitor<TResult> visitor)
     {
@@ -24,7 +26,9 @@ internal abstract class SyntaxList : SyntaxNode
         private SyntaxNode _child1;
 
         internal WithTwoChildren(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)
-            : base(green, parent, position) { }
+            : base(green, parent, position)
+        {
+        }
 
         internal override SyntaxNode GetNodeSlot(int index)
         {
@@ -60,7 +64,9 @@ internal abstract class SyntaxList : SyntaxNode
         private SyntaxNode _child2;
 
         internal WithThreeChildren(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)
-            : base(green, parent, position) { }
+            : base(green, parent, position)
+        {
+        }
 
         internal override SyntaxNode GetNodeSlot(int index)
         {

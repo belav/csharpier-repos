@@ -15,7 +15,9 @@ namespace System.Web.Http.ValueProviders
         private CultureInfo _instanceCulture;
 
         // default constructor so that subclassed types can set the properties themselves
-        protected ValueProviderResult() { }
+        protected ValueProviderResult()
+        {
+        }
 
         public ValueProviderResult(object rawValue, string attemptedValue, CultureInfo culture)
         {

@@ -27,7 +27,9 @@ namespace System.Linq.Expressions.Tests
                 protected override Expression VisitExtension(Expression node) => MarkerExtension;
             }
 
-            public IncompleteExpressionOverride() : base() { }
+            public IncompleteExpressionOverride() : base()
+            {
+            }
 
             public Expression VisitChildren() => VisitChildren(new Visitor());
         }
@@ -81,7 +83,9 @@ namespace System.Linq.Expressions.Tests
         {
 #pragma warning disable 0618 // Testing obsolete behaviour.
             public ObsoleteIncompleteExpressionOverride(ExpressionType nodeType, Type type)
-                : base(nodeType, type) { }
+                : base(nodeType, type)
+            {
+            }
 #pragma warning restore 0618
         }
 
@@ -279,7 +283,9 @@ namespace System.Linq.Expressions.Tests
 
         private static int Unreadable
         {
-            set { }
+            set
+            {
+            }
         }
 
         private static int Unwritable => 0;
@@ -288,7 +294,9 @@ namespace System.Linq.Expressions.Tests
         {
             public int this[int index]
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

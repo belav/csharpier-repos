@@ -553,7 +553,9 @@ namespace System.Security.Tests
                                                 {
                                                     ss.SetAt(0, c);
                                                 }
-                                                catch (ArgumentOutOfRangeException) { }
+                                                catch (ArgumentOutOfRangeException)
+                                                {
+                                                }
                                                 break;
                                             case 3:
                                                 ss.Copy().Dispose();
@@ -569,7 +571,9 @@ namespace System.Security.Tests
                                                 {
                                                     ss.RemoveAt(0);
                                                 }
-                                                catch (ArgumentOutOfRangeException) { }
+                                                catch (ArgumentOutOfRangeException)
+                                                {
+                                                }
                                                 break;
                                             case 7:
                                                 Assert.False(ss.IsReadOnly());

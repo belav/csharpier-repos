@@ -233,7 +233,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public static DummyType Instance = new DummyType();
         }
 
-        private class DummyGenericContext { }
+        private class DummyGenericContext
+        {
+        }
 
         #endregion
 

@@ -28,7 +28,9 @@ namespace Moq
         /// <summary>
         ///   Initializes a new instance of the <see cref="Mock"/> class.
         /// </summary>
-        protected Mock() { }
+        protected Mock()
+        {
+        }
 
         /// <summary>
         ///   Retrieves the mock object for the given object instance.

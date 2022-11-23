@@ -18,7 +18,9 @@ namespace System.Configuration
         private readonly int _lineOffset;
 
         internal ConfigXmlReader(string rawXml, string filename, int lineOffset)
-            : this(rawXml, filename, lineOffset, false) { }
+            : this(rawXml, filename, lineOffset, false)
+        {
+        }
 
         internal ConfigXmlReader(
             string rawXml,

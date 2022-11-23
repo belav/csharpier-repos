@@ -98,13 +98,21 @@ namespace Castle.DynamicProxy.Tests
 
         private sealed class TripleSharedName : ISharedNameFromA, ISharedNameFromB, ISharedNameFromC
         {
-            void ISharedNameFromA.M() { }
+            void ISharedNameFromA.M()
+            {
+            }
 
-            void ISharedNameFromB.M() { }
+            void ISharedNameFromB.M()
+            {
+            }
 
-            void ISharedNameFromC.M() { }
+            void ISharedNameFromC.M()
+            {
+            }
         }
     }
 }
 
-internal interface IHaveNoNamespace { }
+internal interface IHaveNoNamespace
+{
+}

@@ -599,7 +599,9 @@ namespace SoDBench
         /// </summary>
         private sealed class SoDBenchOptions
         {
-            public SoDBenchOptions() { }
+            public SoDBenchOptions()
+            {
+            }
 
             private static string NormalizePath(string path)
             {

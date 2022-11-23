@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
             var pdbReader =
                 embeddedPdbReader ?? portablePdbReader ?? throw ExceptionUtilities.Unreachable();
-            var factory = LoggerFactory.Create(configure => { });
+            var factory = LoggerFactory.Create(configure =>
+            {
+            });
             var logger = factory.CreateLogger("RoundTripVerification");
             var optionsReader = new CompilationOptionsReader(logger, pdbReader, peReader);
             var compilationFactory = CompilationFactory.Create(assemblyFileName, optionsReader);
@@ -86,7 +88,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 debugInformationFormat: DebugInformationFormat.Embedded
             );
             using var originalEmit = emitOriginal();
-            var factory = LoggerFactory.Create(configure => { });
+            var factory = LoggerFactory.Create(configure =>
+            {
+            });
             var logger = factory.CreateLogger("RoundTripVerification");
             var optionsReader = new CompilationOptionsReader(
                 logger,

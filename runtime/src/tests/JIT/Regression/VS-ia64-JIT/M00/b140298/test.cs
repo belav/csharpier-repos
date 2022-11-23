@@ -56,5 +56,7 @@ public class History
         DateTime inDate,
         float inAmount,
         string inData
-    ) { }
+    )
+    {
+    }
 }

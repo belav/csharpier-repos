@@ -120,7 +120,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         );
 
         [HttpMethod("ATTRIBUTE")]
-        void TestAction() { }
+        void TestAction()
+        {
+        }
 
         var endpointBuilder = builder.MapMethods("/", new[] { "METHOD" }, (Action)TestAction);
         endpointBuilder.WithMetadata(new HttpMethodMetadata(new[] { "BUILDER" }));
@@ -150,7 +152,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapGet("/", () => { });
+        _ = builder.MapGet(
+            "/",
+            () => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -172,7 +178,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapPatch("/", () => { });
+        _ = builder.MapPatch(
+            "/",
+            () => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -280,7 +290,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapGet("/", (Todo todo) => { });
+        _ = builder.MapGet(
+            "/",
+            (Todo todo) => {
+            }
+        );
         var dataSource = GetBuilderEndpointDataSource(builder);
         var ex = Assert.Throws<InvalidOperationException>(() => dataSource.Endpoints);
         Assert.Contains(
@@ -299,7 +313,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapDelete("/", (Todo todo) => { });
+        _ = builder.MapDelete(
+            "/",
+            (Todo todo) => {
+            }
+        );
         var dataSource = GetBuilderEndpointDataSource(builder);
         var ex = Assert.Throws<InvalidOperationException>(() => dataSource.Endpoints);
         Assert.Contains(
@@ -335,7 +353,12 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapMethods("/", new[] { method }, (Todo todo) => { });
+        _ = builder.MapMethods(
+            "/",
+            new[] { method },
+            (Todo todo) => {
+            }
+        );
         var dataSource = GetBuilderEndpointDataSource(builder);
         var ex = Assert.Throws<InvalidOperationException>(() => dataSource.Endpoints);
         Assert.Contains(
@@ -356,7 +379,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
                 new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
-        _ = builder.MapGet("/", (TodoService todo) => { });
+        _ = builder.MapGet(
+            "/",
+            (TodoService todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -380,7 +407,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
                 new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
-        _ = builder.MapDelete("/", (TodoService todo) => { });
+        _ = builder.MapDelete(
+            "/",
+            (TodoService todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -404,7 +435,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
                 new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
-        _ = builder.MapPatch("/", (TodoService todo) => { });
+        _ = builder.MapPatch(
+            "/",
+            (TodoService todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -421,7 +456,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
-    private class TestFromServiceAttribute : Attribute, IFromServiceMetadata { }
+    private class TestFromServiceAttribute : Attribute, IFromServiceMetadata
+    {
+    }
 
     [Fact]
     public void MapGet_ExplicitFromService()
@@ -431,7 +468,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
                 new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
-        _ = builder.MapGet("/", ([TestFromServiceAttribute] TodoService todo) => { });
+        _ = builder.MapGet(
+            "/",
+            ([TestFromServiceAttribute] TodoService todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -455,7 +496,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
                 new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
-        _ = builder.MapDelete("/", ([TestFromServiceAttribute] TodoService todo) => { });
+        _ = builder.MapDelete(
+            "/",
+            ([TestFromServiceAttribute] TodoService todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -479,7 +524,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
                 new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
-        _ = builder.MapPatch("/", ([TestFromServiceAttribute] TodoService todo) => { });
+        _ = builder.MapPatch(
+            "/",
+            ([TestFromServiceAttribute] TodoService todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -496,7 +545,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
-    private class TestFromBodyAttribute : Attribute, IFromBodyMetadata { }
+    private class TestFromBodyAttribute : Attribute, IFromBodyMetadata
+    {
+    }
 
     [Fact]
     public void MapGet_ExplicitFromBody_BuildsEndpointWithCorrectMethod()
@@ -504,7 +555,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapGet("/", ([TestFromBody] Todo todo) => { });
+        _ = builder.MapGet(
+            "/",
+            ([TestFromBody] Todo todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -526,7 +581,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapDelete("/", ([TestFromBody] Todo todo) => { });
+        _ = builder.MapDelete(
+            "/",
+            ([TestFromBody] Todo todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -548,7 +607,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapPatch("/", ([TestFromBody] Todo todo) => { });
+        _ = builder.MapPatch(
+            "/",
+            ([TestFromBody] Todo todo) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -575,7 +638,13 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             new ApplicationBuilder(new EmptyServiceProvider())
         );
 
-        map(builder, "/{ID}", () => { }).WithName("Foo");
+        map(
+                builder,
+                "/{ID}",
+                () => {
+                }
+            )
+            .WithName("Foo");
 
         var dataSource = GetBuilderEndpointDataSource(builder);
 
@@ -615,7 +684,12 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             new ApplicationBuilder(new EmptyServiceProvider())
         );
 
-        var endpointBuilder = map(builder, "/{ID}", () => { });
+        var endpointBuilder = map(
+            builder,
+            "/{ID}",
+            () => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
 
@@ -747,7 +821,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapGet("/", ([FromRoute] int id) => { });
+        _ = builder.MapGet(
+            "/",
+            ([FromRoute] int id) => {
+            }
+        );
         var dataSource = GetBuilderEndpointDataSource(builder);
         var ex = Assert.Throws<InvalidOperationException>(() => dataSource.Endpoints);
         Assert.Equal("'id' is not a route parameter.", ex.Message);
@@ -819,7 +897,8 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         );
         _ = builder.MapGet(
             "/{id}",
-            ([FromRoute(Name = "value")] int id, HttpContext httpContext) => { }
+            ([FromRoute(Name = "value")] int id, HttpContext httpContext) => {
+            }
         );
         var dataSource = GetBuilderEndpointDataSource(builder);
         var ex = Assert.Throws<InvalidOperationException>(() => dataSource.Endpoints);
@@ -832,7 +911,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapPost("/", () => { });
+        _ = builder.MapPost(
+            "/",
+            () => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -857,7 +940,8 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         _ = builder.MapPost(
             "/",
             [TestConsumesAttribute(typeof(Todo), "application/xml")]
-            (Todo todo) => { }
+            (Todo todo) => {
+            }
         );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
@@ -878,7 +962,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapPut("/", () => { });
+        _ = builder.MapPut(
+            "/",
+            () => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -900,7 +988,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapDelete("/", () => { });
+        _ = builder.MapDelete(
+            "/",
+            () => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -922,7 +1014,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapFallback("/", () => { });
+        _ = builder.MapFallback(
+            "/",
+            () => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -940,7 +1036,8 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapFallback(() => { });
+        _ = builder.MapFallback(() => {
+        });
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -1001,7 +1098,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         serviceProvider.RouteHandlerOptions.ThrowOnBadRequest = throwOnBadRequest;
 
         var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(serviceProvider));
-        _ = builder.Map("/{id}", (int id) => { });
+        _ = builder.Map(
+            "/{id}",
+            (int id) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -1032,7 +1133,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             new ApplicationBuilder(new ServiceCollection().BuildServiceProvider())
         );
 
-        _ = builder.Map("/{id}", (int id) => { });
+        _ = builder.Map(
+            "/{id}",
+            (int id) => {
+            }
+        );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -1271,7 +1376,13 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             }
         });
 
-        group.MapGet("/endpoint", () => { }).Finally(b => b.Metadata.Add("added-from-endpoint"));
+        group
+            .MapGet(
+                "/endpoint",
+                () => {
+                }
+            )
+            .Finally(b => b.Metadata.Add("added-from-endpoint"));
 
         var endpoint = Assert.Single(builder.DataSources.SelectMany(ds => ds.Endpoints));
 
@@ -1309,7 +1420,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             }
         });
 
-        var handler = innerGroup.MapGet("/endpoint", () => { });
+        var handler = innerGroup.MapGet(
+            "/endpoint",
+            () => {
+            }
+        );
         handler.Finally(b => b.Metadata.Add("added-from-endpoint-1"));
         handler.Finally(b => b.Metadata.Add("added-from-endpoint-2"));
 
@@ -1327,7 +1442,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         );
     }
 
-    class MyService { }
+    class MyService
+    {
+    }
 
     class ServiceAccessingEndpointFilter : IEndpointFilter
     {
@@ -1408,11 +1525,15 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         List<string> _contentTypes = new();
     }
 
-    class Todo { }
+    class Todo
+    {
+    }
 
     // Here to more easily disambiguate when ToDo is
     // intended to be validated as an implicit service in tests
-    class TodoService { }
+    class TodoService
+    {
+    }
 
     private class HttpMethodAttribute : Attribute, IHttpMethodMetadata
     {
@@ -1437,7 +1558,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             return this;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public object? GetService(Type serviceType)
         {

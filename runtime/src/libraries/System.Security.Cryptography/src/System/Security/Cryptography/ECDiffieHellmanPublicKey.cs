@@ -32,7 +32,9 @@ namespace System.Security.Cryptography
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         [Obsolete(
             Obsoletions.EcDhPublicKeyBlobMessage,

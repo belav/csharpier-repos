@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences.
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EntireSolutionWithoutMetadataFilterFactory() { }
+        public EntireSolutionWithoutMetadataFilterFactory()
+        {
+        }
 
         public IErrorListFilterHandler? CreateFilter(IWpfTableControl tableControl)
         {

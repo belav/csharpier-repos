@@ -18,7 +18,9 @@ namespace System.ComponentModel
         private long _lastGlobalMem;
         private int _lastHashCount;
 
-        internal WeakHashtable() : base(s_comparer) { }
+        internal WeakHashtable() : base(s_comparer)
+        {
+        }
 
         /// <summary>
         /// Override of Item that wraps a weak reference around the

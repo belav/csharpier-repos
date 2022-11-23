@@ -13,5 +13,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 internal class ExportTypeScriptLspServiceFactoryAttribute : ExportLspServiceFactoryAttribute
 {
     public ExportTypeScriptLspServiceFactoryAttribute(Type handlerType)
-        : base(handlerType, ProtocolConstants.TypeScriptLanguageContract) { }
+        : base(handlerType, ProtocolConstants.TypeScriptLanguageContract)
+    {
+    }
 }

@@ -401,7 +401,9 @@ public class InMemoryContextWithGenerics
     >
 {
     public InMemoryContextWithGenerics(DbContextOptions<InMemoryContextWithGenerics> options)
-        : base(options) { }
+        : base(options)
+    {
+    }
 }
 
 #endregion

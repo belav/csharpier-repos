@@ -172,7 +172,9 @@ namespace Microsoft.Extensions.Primitives
 
             private sealed class NoopDisposable : IDisposable
             {
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
             }
         }
     }

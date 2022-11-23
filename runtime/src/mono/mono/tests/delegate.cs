@@ -13,7 +13,9 @@ class B
         A.b_cctor_run = true;
     }
 
-    public static void method() { }
+    public static void method()
+    {
+    }
 }
 
 delegate void DoIt();

@@ -19,7 +19,9 @@ namespace System.Net
         private string _userName = string.Empty;
         private object? _password;
 
-        public NetworkCredential() : this(string.Empty, string.Empty, string.Empty) { }
+        public NetworkCredential() : this(string.Empty, string.Empty, string.Empty)
+        {
+        }
 
         /// <devdoc>
         ///    <para>
@@ -28,7 +30,9 @@ namespace System.Net
         ///    </para>
         /// </devdoc>
         public NetworkCredential(string? userName, string? password)
-            : this(userName, password, string.Empty) { }
+            : this(userName, password, string.Empty)
+        {
+        }
 
         /// <devdoc>
         ///    <para>
@@ -45,7 +49,9 @@ namespace System.Net
 
         [CLSCompliant(false)]
         public NetworkCredential(string? userName, SecureString? password)
-            : this(userName, password, string.Empty) { }
+            : this(userName, password, string.Empty)
+        {
+        }
 
         [CLSCompliant(false)]
         public NetworkCredential(string? userName, SecureString? password, string? domain)

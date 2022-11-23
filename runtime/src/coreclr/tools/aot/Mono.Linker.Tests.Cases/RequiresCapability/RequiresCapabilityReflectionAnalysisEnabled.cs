@@ -51,9 +51,13 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         class TypeWithMethodAccessed
         {
             [Kept]
-            public void PublicMethod() { }
+            public void PublicMethod()
+            {
+            }
 
-            public void PublicMethod2() { }
+            public void PublicMethod2()
+            {
+            }
         }
 
         [Kept]
@@ -73,7 +77,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         >
         {
             [Kept]
-            public static void Method() { }
+            public static void Method()
+            {
+            }
         }
 
         [Kept]
@@ -90,7 +96,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
                 T
-        >() { }
+        >()
+        {
+        }
 
         [Kept]
         class TypeWithPublicFieldsForGenericMethod
@@ -121,12 +129,18 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             }
 
             [Kept]
-            public void PublicInstanceMethod() { }
+            public void PublicInstanceMethod()
+            {
+            }
 
             [Kept]
-            public static void PublicStaticMethod() { }
+            public static void PublicStaticMethod()
+            {
+            }
 
-            static void PrivateInstanceMethod() { }
+            static void PrivateInstanceMethod()
+            {
+            }
 
             [Kept]
             public static int PublicStaticField;

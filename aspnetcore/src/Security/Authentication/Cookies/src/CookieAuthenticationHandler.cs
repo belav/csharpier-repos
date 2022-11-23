@@ -45,7 +45,9 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    ) : base(options, logger, encoder, clock)
+    {
+    }
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring.

@@ -12,7 +12,9 @@ namespace System.Security.Policy
             PermissionSet request,
             PermissionSet optional,
             PermissionSet denied
-        ) { }
+        )
+        {
+        }
 
         public PermissionSet DeniedPermissions
         {

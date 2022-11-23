@@ -54,7 +54,9 @@ namespace System.Data.Odbc
     internal sealed class OdbcStatementHandle : OdbcHandle
     {
         internal OdbcStatementHandle(OdbcConnectionHandle? connectionHandle)
-            : base(ODBC32.SQL_HANDLE.STMT, connectionHandle) { }
+            : base(ODBC32.SQL_HANDLE.STMT, connectionHandle)
+        {
+        }
 
         internal ODBC32.SQLRETURN BindColumn2(
             int columnNumber,

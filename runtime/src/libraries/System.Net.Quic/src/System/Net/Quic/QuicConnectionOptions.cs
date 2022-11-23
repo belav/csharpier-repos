@@ -14,7 +14,9 @@ public abstract class QuicConnectionOptions
     /// <summary>
     /// Prevent sub-classing by code outside of this assembly.
     /// </summary>
-    internal QuicConnectionOptions() { }
+    internal QuicConnectionOptions()
+    {
+    }
 
     /// <summary>
     /// The maximum number of concurrent bidirectional streams that the remote peer connection can create on an open connection.

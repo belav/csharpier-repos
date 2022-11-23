@@ -20,7 +20,9 @@ namespace System.Reflection.Runtime.Tracing
             get { return Log != null; }
         }
 
-        private ReflectionEventSource() { }
+        private ReflectionEventSource()
+        {
+        }
 
         #region Reflection Event Handlers
         [Event(1)]

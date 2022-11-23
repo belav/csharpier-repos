@@ -18,7 +18,9 @@ public class EnumTypeModelBinderProvider : IModelBinderProvider
     /// </summary>
     /// <param name="options">The <see cref="MvcOptions"/>.</param>
     /// <remarks>The <paramref name="options"/> parameter is currently ignored.</remarks>
-    public EnumTypeModelBinderProvider(MvcOptions options) { }
+    public EnumTypeModelBinderProvider(MvcOptions options)
+    {
+    }
 
     /// <inheritdoc />
     public IModelBinder? GetBinder(ModelBinderProviderContext context)

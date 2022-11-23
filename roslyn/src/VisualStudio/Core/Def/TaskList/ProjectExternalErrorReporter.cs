@@ -54,7 +54,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 errorCodePrefix,
                 LanguageNames.FSharp,
                 (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>()
-            ) { }
+            )
+        {
+        }
 
         public ProjectExternalErrorReporter(
             ProjectId projectId,

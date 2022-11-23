@@ -14,9 +14,13 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class PublisherIdentityPermission : CodeAccessPermission
     {
-        public PublisherIdentityPermission(X509Certificate certificate) { }
+        public PublisherIdentityPermission(X509Certificate certificate)
+        {
+        }
 
-        public PublisherIdentityPermission(PermissionState state) { }
+        public PublisherIdentityPermission(PermissionState state)
+        {
+        }
 
         public X509Certificate Certificate { get; set; }
 
@@ -25,7 +29,9 @@ namespace System.Security.Permissions
             return this;
         }
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

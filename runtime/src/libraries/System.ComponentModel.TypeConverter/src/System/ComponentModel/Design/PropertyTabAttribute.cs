@@ -31,7 +31,9 @@ namespace System.ComponentModel
         /// Basic constructor that creates a property tab attribute that will create a tab
         /// of the specified type.
         /// </summary>
-        public PropertyTabAttribute(Type tabClass) : this(tabClass, PropertyTabScope.Component) { }
+        public PropertyTabAttribute(Type tabClass) : this(tabClass, PropertyTabScope.Component)
+        {
+        }
 
         /// <summary>
         /// Basic constructor that creates a property tab attribute that will create a tab
@@ -43,7 +45,9 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 string tabClassName
-        ) : this(tabClassName, PropertyTabScope.Component) { }
+        ) : this(tabClassName, PropertyTabScope.Component)
+        {
+        }
 
         /// <summary>
         /// Basic constructor that creates a property tab attribute that will create a tab

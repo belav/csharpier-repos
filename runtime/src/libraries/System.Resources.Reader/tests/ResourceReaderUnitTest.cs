@@ -2534,7 +2534,9 @@ namespace System.Resources.ResourceWriterTests
             {
                 Assert.Throws<BadImageFormatException>(() =>
                 {
-                    using (var rw = new ResourceReader(ms2)) { }
+                    using (var rw = new ResourceReader(ms2))
+                    {
+                    }
                 });
             }
         }

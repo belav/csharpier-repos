@@ -34,7 +34,9 @@ internal class TestServer : IAsyncDisposable, IStartup
     private readonly InMemoryTransportFactory _transportFactory;
     private readonly IHost _host;
 
-    public TestServer(RequestDelegate app) : this(app, new TestServiceContext()) { }
+    public TestServer(RequestDelegate app) : this(app, new TestServiceContext())
+    {
+    }
 
     public TestServer(RequestDelegate app, TestServiceContext context)
         : this(app, context, new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)))
@@ -47,8 +49,12 @@ internal class TestServer : IAsyncDisposable, IStartup
             app,
             context,
             options => options.CodeBackedListenOptions.Add(listenOptions),
-            _ => { }
-        ) { }
+            _ =>
+            {
+            }
+        )
+    {
+    }
 
     public TestServer(
         RequestDelegate app,
@@ -68,8 +74,12 @@ internal class TestServer : IAsyncDisposable, IStartup
                 configureListenOptions(listenOptions);
                 options.CodeBackedListenOptions.Add(listenOptions);
             },
-            _ => { }
-        ) { }
+            _ =>
+            {
+            }
+        )
+    {
+    }
 
     public TestServer(
         RequestDelegate app,

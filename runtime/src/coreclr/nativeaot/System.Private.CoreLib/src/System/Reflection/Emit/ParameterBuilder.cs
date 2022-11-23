@@ -40,10 +40,16 @@ namespace System.Reflection.Emit
             get { return default; }
         }
 
-        public virtual void SetConstant(object defaultValue) { }
+        public virtual void SetConstant(object defaultValue)
+        {
+        }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
     }
 }

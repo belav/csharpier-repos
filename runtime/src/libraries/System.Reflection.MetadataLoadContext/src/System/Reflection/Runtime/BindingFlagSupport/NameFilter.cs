@@ -31,7 +31,9 @@ namespace System.Reflection
 
     internal sealed partial class NameFilterCaseInsensitive : NameFilter
     {
-        public NameFilterCaseInsensitive(string expectedName) : base(expectedName) { }
+        public NameFilterCaseInsensitive(string expectedName) : base(expectedName)
+        {
+        }
 
         public sealed override bool Matches(string name) =>
             name.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);

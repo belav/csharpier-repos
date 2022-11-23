@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         private SyntaxNodeOrToken _valuePattern;
         private ISymbol _initializedSymbol;
 
-        protected AbstractObjectCreationExpressionAnalyzer() { }
+        protected AbstractObjectCreationExpressionAnalyzer()
+        {
+        }
 
         public void Initialize(
             SemanticModel semanticModel,

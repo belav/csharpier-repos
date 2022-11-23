@@ -21,7 +21,9 @@ public class DuplicateValuesIssue
         public int Id;
         public IList<DestObject> Children;
 
-        public DestObject() { }
+        public DestObject()
+        {
+        }
 
         public void AddChild(DestObject childObject)
         {

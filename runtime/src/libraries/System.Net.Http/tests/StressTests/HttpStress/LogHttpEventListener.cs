@@ -49,7 +49,9 @@ namespace HttpStress
                 {
                     File.Delete(filename);
                 }
-                catch { }
+                catch
+                {
+                }
             }
             _log = CreateNextLogFileStream();
             _messagesChannel = Channel.CreateUnbounded<string>();

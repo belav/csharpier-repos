@@ -103,7 +103,9 @@ namespace System.IO.Tests
         {
             public bool DisposeInvoked;
 
-            public OverrideDisposeBinaryWriter(Stream output) : base(output) { }
+            public OverrideDisposeBinaryWriter(Stream output) : base(output)
+            {
+            }
 
             protected override void Dispose(bool disposing) => DisposeInvoked = true;
         }
@@ -113,7 +115,9 @@ namespace System.IO.Tests
             public bool DisposeInvoked,
                 DisposeAsyncInvoked;
 
-            public OverrideDisposeAndDisposeAsyncBinaryWriter(Stream output) : base(output) { }
+            public OverrideDisposeAndDisposeAsyncBinaryWriter(Stream output) : base(output)
+            {
+            }
 
             protected override void Dispose(bool disposing) => DisposeInvoked = true;
 

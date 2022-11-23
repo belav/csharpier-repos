@@ -92,7 +92,8 @@ namespace Roslyn.Utilities
         /// If <paramref name="instance"/> is <see langword="null"/>.
         /// </exception>
         public ReferenceCountedDisposable(T instance) : this(instance, new BoxedReferenceCount(1))
-        { }
+        {
+        }
 
         private ReferenceCountedDisposable(T instance, BoxedReferenceCount referenceCount)
         {

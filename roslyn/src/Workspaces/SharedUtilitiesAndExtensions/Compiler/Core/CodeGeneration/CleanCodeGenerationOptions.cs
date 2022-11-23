@@ -36,7 +36,9 @@ internal interface CleanCodeGenerationOptionsProvider
 #endif
     CodeGenerationOptionsProvider,
         CodeCleanupOptionsProvider,
-        CodeAndImportGenerationOptionsProvider { }
+        CodeAndImportGenerationOptionsProvider
+{
+}
 
 #if !CODE_STYLE
 internal abstract class AbstractCleanCodeGenerationOptionsProvider

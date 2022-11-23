@@ -45,13 +45,18 @@ namespace System.Net.Http.Formatting.Internal
         /// <summary>
         /// Creates a new <see cref="System.Net.Http.Formatting.HttpValueCollection"/> instance
         /// </summary>
-        public HttpValueCollection() { }
+        public HttpValueCollection()
+        {
+        }
 #else
         protected HttpValueCollection(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         private HttpValueCollection() : base(StringComparer.OrdinalIgnoreCase) // case-insensitive keys
-        { }
+        {
+        }
 #endif
 
         // Use a builder function instead of a ctor to avoid virtual calls from the ctor.

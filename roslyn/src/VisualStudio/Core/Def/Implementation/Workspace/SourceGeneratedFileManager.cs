@@ -258,13 +258,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         void IRunningDocumentTableEventListener.OnRefreshDocumentContext(
             string moniker,
             IVsHierarchy hierarchy
-        ) { }
+        )
+        {
+        }
 
         void IRunningDocumentTableEventListener.OnRenameDocument(
             string newMoniker,
             string oldMoniker,
             ITextBuffer textBuffer
-        ) { }
+        )
+        {
+        }
 
         private class OpenSourceGeneratedFile : ForegroundThreadAffinitizedObject, IDisposable
         {
@@ -692,7 +696,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Options() { }
+            public Options()
+            {
+            }
         }
     }
 }

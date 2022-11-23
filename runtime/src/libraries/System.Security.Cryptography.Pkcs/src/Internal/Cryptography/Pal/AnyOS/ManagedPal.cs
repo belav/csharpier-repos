@@ -36,7 +36,9 @@ namespace Internal.Cryptography.Pal.AnyOS
                     )
                 );
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
         }
 
         public override byte[] GetSubjectKeyIdentifier(X509Certificate2 certificate)

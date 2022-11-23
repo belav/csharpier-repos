@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DesignerAttributeDiscoveryService() { }
+        public DesignerAttributeDiscoveryService()
+        {
+        }
 
         public async ValueTask ProcessSolutionAsync(
             Solution solution,

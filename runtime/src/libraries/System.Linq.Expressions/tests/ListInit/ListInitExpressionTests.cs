@@ -29,7 +29,9 @@ namespace System.Linq.Expressions.Tests
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            public static void Add(string value) { }
+            public static void Add(string value)
+            {
+            }
         }
 
         private class AnyTypeList : IEnumerable<object>

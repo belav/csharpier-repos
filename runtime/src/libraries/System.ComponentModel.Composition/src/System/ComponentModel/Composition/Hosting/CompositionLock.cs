@@ -136,7 +136,9 @@ namespace System.ComponentModel.Composition.Hosting
 
         private sealed class EmptyLockHolder : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

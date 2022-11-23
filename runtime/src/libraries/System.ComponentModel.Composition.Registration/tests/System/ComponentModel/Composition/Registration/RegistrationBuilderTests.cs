@@ -11,7 +11,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
 {
     public class RegistrationBuilderTests
     {
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         private class FooImpl : IFoo
         {
@@ -22,27 +24,43 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private class FooImplWithConstructors : IFoo
         {
-            public FooImplWithConstructors() { }
+            public FooImplWithConstructors()
+            {
+            }
 
-            public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+            public FooImplWithConstructors(IEnumerable<IFoo> ids)
+            {
+            }
 
-            public FooImplWithConstructors(int id, string name) { }
+            public FooImplWithConstructors(int id, string name)
+            {
+            }
         }
 
         private class FooImplWithConstructors2 : IFoo
         {
-            public FooImplWithConstructors2() { }
+            public FooImplWithConstructors2()
+            {
+            }
 
-            public FooImplWithConstructors2(IEnumerable<IFoo> ids) { }
+            public FooImplWithConstructors2(IEnumerable<IFoo> ids)
+            {
+            }
 
-            public FooImplWithConstructors2(int id, string name) { }
+            public FooImplWithConstructors2(int id, string name)
+            {
+            }
         }
 
-        private class RealPart { }
+        private class RealPart
+        {
+        }
 
         private class DiscoveredCatalog : AssemblyCatalog
         {
-            public DiscoveredCatalog() : base("") { }
+            public DiscoveredCatalog() : base("")
+            {
+            }
         }
 
         [ConditionalFact(
@@ -205,10 +223,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.IsType<ImportingConstructorAttribute>(attrs[0]);
         }
 
-        private interface IGenericInterface<T> { }
+        private interface IGenericInterface<T>
+        {
+        }
 
         [Export(typeof(IGenericInterface<>))]
-        private class ClassExportingInterface<T> : IGenericInterface<T> { }
+        private class ClassExportingInterface<T> : IGenericInterface<T>
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -223,10 +245,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.IsAssignableFrom<IGenericInterface<string>>(v);
         }
 
-        private class GenericBaseClass<T> { }
+        private class GenericBaseClass<T>
+        {
+        }
 
         [Export(typeof(GenericBaseClass<>))]
-        private class ClassExportingBaseClass<T> : GenericBaseClass<T> { }
+        private class ClassExportingBaseClass<T> : GenericBaseClass<T>
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -242,7 +268,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [Export]
-        private class GenericClass<T> { }
+        private class GenericClass<T>
+        {
+        }
 
         [Fact]
         public void GenericExportInRegistrationBuilder()
@@ -255,7 +283,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [Export(typeof(ExplicitGenericClass<>))]
-        private class ExplicitGenericClass<T> { }
+        private class ExplicitGenericClass<T>
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -273,7 +303,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [Export(typeof(ExplicitGenericClass<,>))]
-        private class ExplicitGenericClass<T, U> { }
+        private class ExplicitGenericClass<T, U>
+        {
+        }
 
         [ConditionalFact(
             typeof(PlatformDetection),

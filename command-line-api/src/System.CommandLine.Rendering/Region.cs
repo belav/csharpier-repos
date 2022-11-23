@@ -45,7 +45,9 @@ namespace System.CommandLine.Rendering
             IsOverwrittenOnRender = isOverwrittenOnRender;
         }
 
-        public Region(int left, int top, Size size) : this(left, top, size.Width, size.Height) { }
+        public Region(int left, int top, Size size) : this(left, top, size.Width, size.Height)
+        {
+        }
 
         public virtual int Height { get; }
 

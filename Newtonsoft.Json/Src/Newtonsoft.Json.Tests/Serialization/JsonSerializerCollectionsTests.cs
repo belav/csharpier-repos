@@ -268,7 +268,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestCollectionPrivate : List<int>
         {
             [JsonConstructor]
-            private TestCollectionPrivate() { }
+            private TestCollectionPrivate()
+            {
+            }
 
             public static TestCollectionPrivate Create()
             {
@@ -297,7 +299,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestCollectionMultipleParameters : List<int>
         {
             [JsonConstructor]
-            public TestCollectionMultipleParameters(string s1, string s2) { }
+            public TestCollectionMultipleParameters(string s1, string s2)
+            {
+            }
         }
 
         [Test]
@@ -312,7 +316,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestCollectionBadIEnumerableParameter : List<int>
         {
             [JsonConstructor]
-            public TestCollectionBadIEnumerableParameter(List<string> l) { }
+            public TestCollectionBadIEnumerableParameter(List<string> l)
+            {
+            }
         }
 
         [Test]
@@ -328,7 +334,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestCollectionNonGeneric : ArrayList
         {
             [JsonConstructor]
-            public TestCollectionNonGeneric(IEnumerable l) : base(l.Cast<object>().ToList()) { }
+            public TestCollectionNonGeneric(IEnumerable l) : base(l.Cast<object>().ToList())
+            {
+            }
         }
 
         [Test]
@@ -348,11 +356,15 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public class TestDictionaryPrivateParameterized : Dictionary<string, int>
         {
-            public TestDictionaryPrivateParameterized() { }
+            public TestDictionaryPrivateParameterized()
+            {
+            }
 
             [JsonConstructor]
             private TestDictionaryPrivateParameterized(IEnumerable<KeyValuePair<string, int>> bars)
-                : base(bars.ToDictionary(k => k.Key, k => k.Value)) { }
+                : base(bars.ToDictionary(k => k.Key, k => k.Value))
+            {
+            }
         }
 
         [Test]
@@ -375,7 +387,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestDictionaryPrivate : Dictionary<string, int>
         {
             [JsonConstructor]
-            private TestDictionaryPrivate() { }
+            private TestDictionaryPrivate()
+            {
+            }
 
             public static TestDictionaryPrivate Create()
             {
@@ -402,7 +416,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestDictionaryMultipleParameters : Dictionary<string, int>
         {
             [JsonConstructor]
-            public TestDictionaryMultipleParameters(string s1, string s2) { }
+            public TestDictionaryMultipleParameters(string s1, string s2)
+            {
+            }
         }
 
         [Test]
@@ -417,7 +433,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestDictionaryBadIEnumerableParameter : Dictionary<string, int>
         {
             [JsonConstructor]
-            public TestDictionaryBadIEnumerableParameter(Dictionary<string, string> l) { }
+            public TestDictionaryBadIEnumerableParameter(Dictionary<string, string> l)
+            {
+            }
         }
 
         [Test]
@@ -433,7 +451,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestDictionaryNonGeneric : Hashtable
         {
             [JsonConstructor]
-            public TestDictionaryNonGeneric(IDictionary d) : base(d) { }
+            public TestDictionaryNonGeneric(IDictionary d) : base(d)
+            {
+            }
         }
 
         [Test]
@@ -716,7 +736,9 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public class PrivateDefaultCtorList<T> : List<T>
         {
-            private PrivateDefaultCtorList() { }
+            private PrivateDefaultCtorList()
+            {
+            }
         }
 
         [Test]
@@ -740,7 +762,9 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public class PrivateDefaultCtorWithIEnumerableCtorList<T> : List<T>
         {
-            private PrivateDefaultCtorWithIEnumerableCtorList() { }
+            private PrivateDefaultCtorWithIEnumerableCtorList()
+            {
+            }
 
             public PrivateDefaultCtorWithIEnumerableCtorList(IEnumerable<T> values) : base(values)
             {
@@ -2066,7 +2090,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 string Property { get; set; }
             }
 
-            public interface ITestInterface : IFirstInterface, ISecondInterface { }
+            public interface ITestInterface : IFirstInterface, ISecondInterface
+            {
+            }
 
             public class TestClass : ITestInterface
             {
@@ -2847,7 +2873,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public T Value { get; set; }
     }
 
-    public class NonGenericItem : GenericItem<string> { }
+    public class NonGenericItem : GenericItem<string>
+    {
+    }
 
     public class GenericClass<T, TValue> : IEnumerable<T> where T : GenericItem<TValue>, new()
     {
@@ -2879,7 +2907,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
     }
 
-    public class NonGenericClass : GenericClass<GenericItem<string>, string> { }
+    public class NonGenericClass : GenericClass<GenericItem<string>, string>
+    {
+    }
 
     public class StringListAppenderConverter : JsonConverter
     {

@@ -14,7 +14,9 @@ namespace System.Web.Http.ApiExplorer
 
         [HttpPost]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public void AddData() { }
+        public void AddData()
+        {
+        }
 
         [ApiExplorerSettings(IgnoreApi = true)]
         public int Get()

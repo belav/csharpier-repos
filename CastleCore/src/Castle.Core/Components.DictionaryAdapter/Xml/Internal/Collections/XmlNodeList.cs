@@ -20,7 +20,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode parentNode,
             IDictionaryAdapter parentObject,
             IXmlCollectionAccessor accessor
-        ) : base(new XmlCollectionAdapter<T>(parentNode, parentObject, accessor)) { }
+        ) : base(new XmlCollectionAdapter<T>(parentNode, parentObject, accessor))
+        {
+        }
 
         public IXmlNode Node
         {

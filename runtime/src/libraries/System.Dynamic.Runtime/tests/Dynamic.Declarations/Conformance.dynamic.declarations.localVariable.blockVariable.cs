@@ -533,7 +533,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
 
     public class Foo
     {
-        public void Bar() { }
+        public void Bar()
+        {
+        }
     }
 
     public class Test
@@ -573,7 +575,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     {
         private int _x = 2;
 
-        public void Bar() { }
+        public void Bar()
+        {
+        }
 
         #region IEnumerable Members
         public IEnumerator GetEnumerator()
@@ -642,7 +646,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     {
         private int _x = 2;
 
-        public void Bar() { }
+        public void Bar()
+        {
+        }
 
         #region IEnumerable Members
         public IEnumerator GetEnumerator()
@@ -939,7 +945,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
 
     public class Test
     {
-        private class MyClass { }
+        private class MyClass
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -983,7 +991,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
 {
     public class Test
     {
-        private class MyClass { }
+        private class MyClass
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1111,7 +1121,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
                 if (s != "3")
                     return 1;
             }
-            catch { }
+            catch
+            {
+            }
 
             return 0;
         }

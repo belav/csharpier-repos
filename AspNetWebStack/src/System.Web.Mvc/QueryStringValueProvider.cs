@@ -16,7 +16,9 @@ namespace System.Web.Mvc
                 new UnvalidatedRequestValuesWrapper(
                     controllerContext.HttpContext.Request.Unvalidated
                 )
-            ) { }
+            )
+        {
+        }
 
         // For unit testing
         internal QueryStringValueProvider(
@@ -27,6 +29,8 @@ namespace System.Web.Mvc
                 controllerContext.HttpContext.Request.QueryString,
                 unvalidatedValues.QueryString,
                 CultureInfo.InvariantCulture
-            ) { }
+            )
+        {
+        }
     }
 }

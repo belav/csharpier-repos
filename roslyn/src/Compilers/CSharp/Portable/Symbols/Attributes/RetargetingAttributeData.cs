@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 namedArguments,
                 hasErrors,
                 isConditionallyOmitted
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Gets the retargeted System.Type type symbol.

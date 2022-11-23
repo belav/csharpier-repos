@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMakeStructFieldsWritableCodeFixProvider() { }
+        public CSharpMakeStructFieldsWritableCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.MakeStructFieldsWritable);

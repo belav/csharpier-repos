@@ -29,6 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Features.EmbeddedLanguages
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpRegexEmbeddedLanguageClassifier() : base(CSharpEmbeddedLanguagesProvider.Info)
-        { }
+        {
+        }
     }
 }

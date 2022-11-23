@@ -59,11 +59,17 @@ namespace AutoMapper.UnitTests
         public List<ProductTypeDto> Types { get; set; }
     }
 
-    public abstract class ProductTypeDto { }
+    public abstract class ProductTypeDto
+    {
+    }
 
-    public class ProdTypeA : ProductTypeDto { }
+    public class ProdTypeA : ProductTypeDto
+    {
+    }
 
-    public class ProdTypeB : ProductTypeDto { }
+    public class ProdTypeB : ProductTypeDto
+    {
+    }
 
     public class ProductTypeConverter : ITypeConverter<ProductType, ProductTypeDto>
     {

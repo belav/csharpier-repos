@@ -97,7 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
         }
 
         public async ValueTask<ManagedHotReloadUpdates> GetUpdatesAsync(
@@ -167,7 +168,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                     .CommitSolutionUpdateAsync(_diagnosticService, cancellationToken)
                     .ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
 
         public async ValueTask DiscardUpdatesAsync(CancellationToken cancellationToken)
@@ -176,7 +179,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             {
                 await _proxy.DiscardSolutionUpdateAsync(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
         }
 
         public async ValueTask EndSessionAsync(CancellationToken cancellationToken)
@@ -196,7 +201,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                 _debuggingSessionConnection = null;
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
         }
     }
 }

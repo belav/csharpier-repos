@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public HoverHandler() { }
+        public HoverHandler()
+        {
+        }
 
         public override string Method => Methods.TextDocumentHoverName;
 

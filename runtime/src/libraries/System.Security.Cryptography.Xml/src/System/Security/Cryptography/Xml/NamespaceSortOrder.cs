@@ -8,7 +8,9 @@ namespace System.Security.Cryptography.Xml
 {
     internal sealed class NamespaceSortOrder : IComparer
     {
-        internal NamespaceSortOrder() { }
+        internal NamespaceSortOrder()
+        {
+        }
 
         public int Compare(object? a, object? b)
         {

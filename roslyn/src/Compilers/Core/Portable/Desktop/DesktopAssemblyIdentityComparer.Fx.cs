@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis
         private sealed class FrameworkAssemblyDictionary
             : Dictionary<string, FrameworkAssemblyDictionary.Value>
         {
-            public FrameworkAssemblyDictionary() : base(SimpleNameComparer) { }
+            public FrameworkAssemblyDictionary() : base(SimpleNameComparer)
+            {
+            }
 
             public readonly struct Value
             {
@@ -50,7 +52,9 @@ namespace Microsoft.CodeAnalysis
                 List<FrameworkRetargetingDictionary.Value>
             >
         {
-            public FrameworkRetargetingDictionary() { }
+            public FrameworkRetargetingDictionary()
+            {
+            }
 
             public readonly struct Key : IEquatable<Key>
             {

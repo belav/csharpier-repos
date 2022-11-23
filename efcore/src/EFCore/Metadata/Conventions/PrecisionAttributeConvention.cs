@@ -16,7 +16,9 @@ public class PrecisionAttributeConvention : PropertyAttributeConventionBase<Prec
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public PrecisionAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <summary>
     ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.

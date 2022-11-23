@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class CommandInterceptionTestBase : InterceptionTestBase
 {
-    protected CommandInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
+    protected CommandInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [InlineData(false, false)]
@@ -45,7 +47,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class PassiveReaderCommandInterceptor : CommandInterceptorBase
     {
-        public PassiveReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public PassiveReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
     }
 
     [ConditionalTheory]
@@ -93,7 +97,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class PassiveScalarCommandInterceptor : CommandInterceptorBase
     {
-        public PassiveScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar) { }
+        public PassiveScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar)
+        {
+        }
     }
 
     [ConditionalTheory]
@@ -130,7 +136,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class PassiveNonQueryCommandInterceptor : CommandInterceptorBase
     {
-        public PassiveNonQueryCommandInterceptor() : base(DbCommandMethod.ExecuteNonQuery) { }
+        public PassiveNonQueryCommandInterceptor() : base(DbCommandMethod.ExecuteNonQuery)
+        {
+        }
     }
 
     [ConditionalTheory]
@@ -169,7 +177,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class SuppressingReaderCommandInterceptor : CommandInterceptorBase
     {
-        public SuppressingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public SuppressingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
@@ -227,7 +237,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class SuppressingCreateCommandInterceptor : CommandInterceptorBase
     {
-        public SuppressingCreateCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public SuppressingCreateCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override InterceptionResult<DbCommand> CommandCreating(
             CommandCorrelatedEventData eventData,
@@ -312,7 +324,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class SuppressingScalarCommandInterceptor : CommandInterceptorBase
     {
-        public SuppressingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar) { }
+        public SuppressingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar)
+        {
+        }
 
         public const string InterceptedResult = "Bet you weren't expecting a string!";
 
@@ -374,7 +388,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class SuppressingNonQueryCommandInterceptor : CommandInterceptorBase
     {
-        public SuppressingNonQueryCommandInterceptor() : base(DbCommandMethod.ExecuteNonQuery) { }
+        public SuppressingNonQueryCommandInterceptor() : base(DbCommandMethod.ExecuteNonQuery)
+        {
+        }
 
         public override InterceptionResult<int> NonQueryExecuting(
             DbCommand command,
@@ -448,7 +464,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class MutatingReaderCommandInterceptor : CommandInterceptorBase
     {
-        public MutatingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public MutatingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
@@ -480,7 +498,8 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
     protected class MutatingReaderCommandInitializedInterceptor : CommandInterceptorBase
     {
         public MutatingReaderCommandInitializedInterceptor() : base(DbCommandMethod.ExecuteReader)
-        { }
+        {
+        }
 
         public override DbCommand CommandInitialized(
             CommandEndEventData eventData,
@@ -552,7 +571,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class MutatingScalarCommandInterceptor : CommandInterceptorBase
     {
-        public MutatingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar) { }
+        public MutatingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar)
+        {
+        }
 
         public const string MutatedSql = "SELECT 2";
 
@@ -583,7 +604,8 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
     protected class MutatingScalarCommandInitializedInterceptor : CommandInterceptorBase
     {
         public MutatingScalarCommandInitializedInterceptor() : base(DbCommandMethod.ExecuteScalar)
-        { }
+        {
+        }
 
         public override DbCommand CommandInitialized(
             CommandEndEventData eventData,
@@ -699,7 +721,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class QueryReplacingReaderCommandInterceptor : CommandInterceptorBase
     {
-        public QueryReplacingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public QueryReplacingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
@@ -784,7 +808,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class QueryReplacingScalarCommandInterceptor : CommandInterceptorBase
     {
-        public QueryReplacingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar) { }
+        public QueryReplacingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar)
+        {
+        }
 
         public override InterceptionResult<object> ScalarExecuting(
             DbCommand command,
@@ -948,7 +974,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class ResultReplacingReaderCommandInterceptor : CommandInterceptorBase
     {
-        public ResultReplacingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public ResultReplacingReaderCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override DbDataReader ReaderExecuted(
             DbCommand command,
@@ -1095,7 +1123,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
     {
         public const string InterceptedResult = "Bet you weren't expecting a string!";
 
-        public ResultReplacingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar) { }
+        public ResultReplacingScalarCommandInterceptor() : base(DbCommandMethod.ExecuteScalar)
+        {
+        }
 
         public override object ScalarExecuted(
             DbCommand command,
@@ -1158,7 +1188,8 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
     protected class ResultReplacingNonQueryCommandInterceptor : CommandInterceptorBase
     {
         public ResultReplacingNonQueryCommandInterceptor() : base(DbCommandMethod.ExecuteNonQuery)
-        { }
+        {
+        }
 
         public override int NonQueryExecuted(
             DbCommand command,
@@ -1651,7 +1682,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class NextResultCommandInterceptor : CommandInterceptorBase
     {
-        public NextResultCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public NextResultCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override InterceptionResult DataReaderClosing(
             DbCommand command,
@@ -1707,7 +1740,9 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
 
     protected class SuppressReaderCloseCommandInterceptor : CommandInterceptorBase
     {
-        public SuppressReaderCloseCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public SuppressReaderCloseCommandInterceptor() : base(DbCommandMethod.ExecuteReader)
+        {
+        }
 
         public override InterceptionResult DataReaderDisposing(
             DbCommand command,

@@ -16,6 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Commanding
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LegacyCommandHandlerServiceFactory() { }
+        public LegacyCommandHandlerServiceFactory()
+        {
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace Castle.DynamicProxy.Tests.Classes
 {
     public class Component2
     {
-        public virtual void DoOperation2() { }
+        public virtual void DoOperation2()
+        {
+        }
     }
 }

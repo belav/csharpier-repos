@@ -10,7 +10,9 @@ namespace System.CodeDom.Compiler
     {
         private readonly IDictionary _options = new ListDictionary();
 
-        public CodeGeneratorOptions() { }
+        public CodeGeneratorOptions()
+        {
+        }
 
         public object this[string index]
         {

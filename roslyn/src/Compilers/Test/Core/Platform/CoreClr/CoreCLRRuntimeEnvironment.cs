@@ -136,7 +136,9 @@ namespace Roslyn.Test.Utilities.CoreClr
             string memberName
         ) => GetEmitData().GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName);
 
-        public void Verify(Verification verification) { }
+        public void Verify(Verification verification)
+        {
+        }
 
         public string[] VerifyModules(string[] modulesToVerify)
         {

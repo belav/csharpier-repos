@@ -17,7 +17,9 @@ namespace System.Text.Encodings.Web
         /// <summary>
         /// Instantiates an empty filter (allows no code points through by default).
         /// </summary>
-        public TextEncoderSettings() { }
+        public TextEncoderSettings()
+        {
+        }
 
         /// <summary>
         /// Instantiates the filter by cloning the allow list of another <see cref="TextEncoderSettings"/>.

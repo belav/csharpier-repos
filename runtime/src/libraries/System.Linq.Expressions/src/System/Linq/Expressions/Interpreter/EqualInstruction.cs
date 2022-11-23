@@ -39,7 +39,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Equal";
 
-        private EqualInstruction() { }
+        private EqualInstruction()
+        {
+        }
 
         private sealed class EqualBoolean : EqualInstruction
         {

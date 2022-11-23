@@ -5,13 +5,17 @@ namespace System.ServiceProcess
 {
     public class ServiceControllerPermissionEntry
     {
-        public ServiceControllerPermissionEntry() { }
+        public ServiceControllerPermissionEntry()
+        {
+        }
 
         public ServiceControllerPermissionEntry(
             ServiceControllerPermissionAccess permissionAccess,
             string machineName,
             string serviceName
-        ) { }
+        )
+        {
+        }
 
         public string MachineName
         {

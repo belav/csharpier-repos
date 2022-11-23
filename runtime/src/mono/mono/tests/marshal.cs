@@ -11,7 +11,9 @@ public class Tests
     [AttributeUsage(AttributeTargets.Method)]
     sealed class MonoPInvokeCallbackAttribute : Attribute
     {
-        public MonoPInvokeCallbackAttribute(Type t) { }
+        public MonoPInvokeCallbackAttribute(Type t)
+        {
+        }
     }
 
     public static int Main(string[] args)

@@ -54,7 +54,9 @@ namespace DefaultNamespace
             right = r;
         }
 
-        internal Node() { }
+        internal Node()
+        {
+        }
     }
 
     public class GCBench

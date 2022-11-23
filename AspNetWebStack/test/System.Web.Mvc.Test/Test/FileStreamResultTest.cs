@@ -74,7 +74,9 @@ namespace System.Web.Mvc.Test
         private class FileStreamResultHelper : FileStreamResult
         {
             public FileStreamResultHelper(Stream fileStream, string contentType)
-                : base(fileStream, contentType) { }
+                : base(fileStream, contentType)
+            {
+            }
 
             public void PublicWriteFile(HttpResponseBase response)
             {

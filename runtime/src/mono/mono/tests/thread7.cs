@@ -55,7 +55,9 @@ public class Tests
             {
                 a.EndInvoke(ar);
             }
-            catch (ThreadAbortException) { }
+            catch (ThreadAbortException)
+            {
+            }
         }
         catch (ThreadAbortException)
         {

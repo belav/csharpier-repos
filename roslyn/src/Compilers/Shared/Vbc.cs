@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.VisualBasic.CommandLine
                 buildPaths,
                 Environment.GetEnvironmentVariable("LIB"),
                 analyzerLoader
-            ) { }
+            )
+        {
+        }
 
         internal static int Run(
             string[] args,

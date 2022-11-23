@@ -18,7 +18,9 @@ namespace System.Xml.Serialization
         private string? _ns;
         private string? _dataType;
 
-        public SoapAttributeAttribute() { }
+        public SoapAttributeAttribute()
+        {
+        }
 
         public SoapAttributeAttribute(string attributeName)
         {

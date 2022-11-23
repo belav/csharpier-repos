@@ -30,7 +30,9 @@ class Test
                 t.Dispose();
                 bDisposeSucceeded = true;
             }
-            catch (ObjectDisposedException) { }
+            catch (ObjectDisposedException)
+            {
+            }
 
             if (bDisposeSucceeded)
             {
@@ -41,7 +43,9 @@ class Test
                         Console.Write("@");
                     }
                 }
-                catch (ObjectDisposedException) { }
+                catch (ObjectDisposedException)
+                {
+                }
             }
         }
         _fTestDone = true;

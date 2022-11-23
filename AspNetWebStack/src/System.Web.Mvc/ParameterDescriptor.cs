@@ -51,6 +51,8 @@ namespace System.Web.Mvc
             return false;
         }
 
-        private sealed class EmptyParameterBindingInfo : ParameterBindingInfo { }
+        private sealed class EmptyParameterBindingInfo : ParameterBindingInfo
+        {
+        }
     }
 }

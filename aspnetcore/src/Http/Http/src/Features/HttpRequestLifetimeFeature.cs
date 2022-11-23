@@ -12,5 +12,7 @@ public class HttpRequestLifetimeFeature : IHttpRequestLifetimeFeature
     public CancellationToken RequestAborted { get; set; }
 
     /// <inheritdoc />
-    public void Abort() { }
+    public void Abort()
+    {
+    }
 }

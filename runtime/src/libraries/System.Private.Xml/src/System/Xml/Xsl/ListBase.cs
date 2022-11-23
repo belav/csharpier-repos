@@ -219,7 +219,9 @@ namespace System.Xml.Xsl
         /// <summary>
         /// No-op.
         /// </summary>
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         /// <summary>
         /// Return current item.  Return default value if before first item or after last item in the list.

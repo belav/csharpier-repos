@@ -22,6 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public XamlRequestTelemetryLoggerFactory() { }
+        public XamlRequestTelemetryLoggerFactory()
+        {
+        }
     }
 }

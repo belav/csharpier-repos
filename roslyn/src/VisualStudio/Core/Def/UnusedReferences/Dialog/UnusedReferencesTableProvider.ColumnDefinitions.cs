@@ -122,7 +122,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public SolutionNameColumnDefinition() { }
+            public SolutionNameColumnDefinition()
+            {
+            }
 
             public override string Name => UnusedReferencesColumnDefinitions.SolutionName;
 
@@ -169,7 +171,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public ProjectNameColumnDefinition() { }
+            public ProjectNameColumnDefinition()
+            {
+            }
 
             public override string Name => UnusedReferencesColumnDefinitions.ProjectName;
 
@@ -225,7 +229,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public ReferenceTypeColumnDefinition() { }
+            public ReferenceTypeColumnDefinition()
+            {
+            }
 
             public override string Name => UnusedReferencesColumnDefinitions.ReferenceType;
 
@@ -301,7 +307,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public ReferenceNameColumnDefinition() { }
+            public ReferenceNameColumnDefinition()
+            {
+            }
 
             public override string Name => UnusedReferencesColumnDefinitions.ReferenceName;
             public override string DisplayName => ServicesVSResources.Reference;
@@ -355,7 +363,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UpdateActionColumnDefinition() { }
+            public UpdateActionColumnDefinition()
+            {
+            }
 
             public override string Name => UnusedReferencesColumnDefinitions.UpdateAction;
             public override string DisplayName => ServicesVSResources.Action;

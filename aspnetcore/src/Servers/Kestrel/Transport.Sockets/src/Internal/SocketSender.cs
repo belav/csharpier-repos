@@ -13,7 +13,9 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
 {
     private List<ArraySegment<byte>>? _bufferList;
 
-    public SocketSender(PipeScheduler scheduler) : base(scheduler) { }
+    public SocketSender(PipeScheduler scheduler) : base(scheduler)
+    {
+    }
 
     public ValueTask<SocketOperationResult> SendAsync(
         Socket socket,

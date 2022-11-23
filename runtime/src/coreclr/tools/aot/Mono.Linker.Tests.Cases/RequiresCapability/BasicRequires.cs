@@ -53,7 +53,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         [RequiresUnreferencedCode("Message for --RequiresWithMessageOnly--")]
         [RequiresAssemblyFiles("Message for --RequiresWithMessageOnly--")]
         [RequiresDynamicCode("Message for --RequiresWithMessageOnly--")]
-        static void RequiresWithMessageOnly() { }
+        static void RequiresWithMessageOnly()
+        {
+        }
 
         [ExpectedWarning("IL2026", "Message for --RequiresWithMessageAndUrl--.", "https://helpurl")]
         [ExpectedWarning(
@@ -82,7 +84,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             Url = "https://helpurl"
         )]
         [RequiresDynamicCode("Message for --RequiresWithMessageAndUrl--", Url = "https://helpurl")]
-        static void RequiresWithMessageAndUrl() { }
+        static void RequiresWithMessageAndUrl()
+        {
+        }
 
         [ExpectedWarning("IL2026", "Message for --ConstructorRequires--.")]
         [ExpectedWarning(
@@ -105,7 +109,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message for --ConstructorRequires--")]
             [RequiresAssemblyFiles("Message for --ConstructorRequires--")]
             [RequiresDynamicCode("Message for --ConstructorRequires--")]
-            public ConstructorRequires() { }
+            public ConstructorRequires()
+            {
+            }
         }
 
         [ExpectedWarning("IL2026", "Message for --getter PropertyRequires--.")]
@@ -145,13 +151,17 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message for --setter PropertyRequires--")]
             [RequiresAssemblyFiles("Message for --setter PropertyRequires--")]
             [RequiresDynamicCode("Message for --setter PropertyRequires--")]
-            set { }
+            set
+            {
+            }
         }
 
         [RequiresUnreferencedCode("Linker adds a trailing period to this message")]
         [RequiresAssemblyFiles("Linker adds a trailing period to this message")]
         [RequiresDynamicCode("Linker adds a trailing period to this message")]
-        static void WarningMessageWithoutEndingPeriod() { }
+        static void WarningMessageWithoutEndingPeriod()
+        {
+        }
 
         [ExpectedWarning("IL2026", "Linker adds a trailing period to this message.")]
         [ExpectedWarning(
@@ -172,7 +182,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         [RequiresUnreferencedCode("Linker does not add a period to this message.")]
         [RequiresAssemblyFiles("Linker does not add a period to this message.")]
         [RequiresDynamicCode("Linker does not add a period to this message.")]
-        static void WarningMessageEndsWithPeriod() { }
+        static void WarningMessageEndsWithPeriod()
+        {
+        }
 
         [LogDoesNotContain("Linker does not add a period to this message..")]
         [ExpectedWarning("IL2026", "Linker does not add a period to this message.")]
@@ -210,11 +222,15 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             )]
             static event EventHandler EventToTestRemove
             {
-                add { }
+                add
+                {
+                }
                 [RequiresUnreferencedCode("Message for --EventToTestRemove.remove--")]
                 [RequiresAssemblyFiles("Message for --EventToTestRemove.remove--")]
                 [RequiresDynamicCode("Message for --EventToTestRemove.remove--")]
-                remove { }
+                remove
+                {
+                }
             }
 
             [ExpectedWarning("IL2026", "--EventToTestAdd.add--", ProducedBy = ProducedBy.Trimmer)]
@@ -224,8 +240,12 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 [RequiresUnreferencedCode("Message for --EventToTestAdd.add--")]
                 [RequiresAssemblyFiles("Message for --EventToTestAdd.add--")]
                 [RequiresDynamicCode("Message for --EventToTestAdd.add--")]
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
 
             [ExpectedWarning("IL2026", "--EventToTestRemove.remove--")]
@@ -252,8 +272,10 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             )]
             public static void Test()
             {
-                EventToTestRemove -= (sender, e) => { };
-                EventToTestAdd += (sender, e) => { };
+                EventToTestRemove -= (sender, e) => {
+                };
+                EventToTestAdd += (sender, e) => {
+                };
             }
         }
 
@@ -266,7 +288,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 )]
                 [RequiresAssemblyFiles("Message for --GenericTypeWithStaticMethodWhichRequires--")]
                 [RequiresDynamicCode("Message for --GenericTypeWithStaticMethodWhichRequires--")]
-                public static void GenericTypeWithStaticMethodWhichRequires() { }
+                public static void GenericTypeWithStaticMethodWhichRequires()
+                {
+                }
             }
 
             // NativeAOT doesnt produce Requires warnings in Generics https://github.com/dotnet/runtime/issues/68688
@@ -295,7 +319,9 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 );
             }
 
-            class TestType { }
+            class TestType
+            {
+            }
 
             static T MakeNew<T>() where T : new() => new T();
 

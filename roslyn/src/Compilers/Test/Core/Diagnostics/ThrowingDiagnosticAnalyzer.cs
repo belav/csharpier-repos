@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         [Serializable]
         public class DeliberateException : Exception
         {
-            public DeliberateException() { }
+            public DeliberateException()
+            {
+            }
 
             protected DeliberateException(
                 SerializationInfo serializationInfo,

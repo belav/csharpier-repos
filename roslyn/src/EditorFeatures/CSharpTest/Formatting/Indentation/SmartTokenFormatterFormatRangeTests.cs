@@ -3761,7 +3761,8 @@ class Program{
             );
             commandHandler.ExecuteCommand(
                 new TypeCharCommandArgs(subjectDocument.GetTextView(), textBuffer, typedChar[0]),
-                () => { },
+                () => {
+                },
                 TestCommandExecutionContext.Create()
             );
 

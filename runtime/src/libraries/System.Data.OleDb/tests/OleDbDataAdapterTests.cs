@@ -230,7 +230,9 @@ namespace System.Data.OleDb.Tests
                     {
                         FillShouldThrow(true);
                     }
-                    using (var reader = command.ExecuteReader()) { }
+                    using (var reader = command.ExecuteReader())
+                    {
+                    }
                     FillShouldThrow(false);
                 }
             );

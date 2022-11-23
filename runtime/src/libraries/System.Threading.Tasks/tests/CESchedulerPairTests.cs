@@ -223,7 +223,8 @@ namespace System.Threading.Tasks.Tests
                 try
                 {
                     Task.Factory.StartNew(
-                        () => { },
+                        () => {
+                        },
                         CancellationToken.None,
                         TaskCreationOptions.None,
                         schedPairScheduler
@@ -381,7 +382,10 @@ namespace System.Threading.Tasks.Tests
             int maxConcurrentTasks = Environment.ProcessorCount;
             List<Task> taskList = new List<Task>();
             for (int i = 0; i < maxConcurrentTasks; i++)
-                taskList.Add(readers.StartNew(() => { })); //schedule some dummy reader tasks
+                taskList.Add(
+                    readers.StartNew(() => {
+                    })
+                ); //schedule some dummy reader tasks
 
             foreach (Task task in taskList)
             {
@@ -698,12 +702,15 @@ namespace System.Threading.Tasks.Tests
 
             // continuations
             {
-                var starter = new Task(() => { });
+                var starter = new Task(() => {
+                });
                 var t = starter;
                 for (int i = 0; i < 10; i++)
                 {
                     t = t.ContinueWith(
-                        delegate { },
+                        delegate
+                        {
+                        },
                         CancellationToken.None,
                         syncContinuations
                             ? TaskContinuationOptions.ExecuteSynchronously
@@ -711,7 +718,9 @@ namespace System.Threading.Tasks.Tests
                         cesp.ConcurrentScheduler
                     );
                     t = t.ContinueWith(
-                        delegate { },
+                        delegate
+                        {
+                        },
                         CancellationToken.None,
                         syncContinuations
                             ? TaskContinuationOptions.ExecuteSynchronously
@@ -829,7 +838,8 @@ namespace System.Threading.Tasks.Tests
                     for (int i = 0; i < taskCount; i++)
                     {
                         new TaskFactory()
-                            .StartNew(() => { })
+                            .StartNew(() => {
+                            })
                             .ContinueWith(
                                 (t) =>
                                 {
@@ -843,7 +853,8 @@ namespace System.Threading.Tasks.Tests
                     for (int i = 0; i < taskCount; i++)
                     {
                         new TaskFactory(scheduler).FromAsync(
-                            Task.Factory.StartNew(() => { }),
+                            Task.Factory.StartNew(() => {
+                            }),
                             (iar) =>
                             {
                                 work();
@@ -855,7 +866,11 @@ namespace System.Threading.Tasks.Tests
                     for (int i = 0; i < taskCount; i++)
                     {
                         new TaskFactory(scheduler).ContinueWhenAll(
-                            new Task[] { Task.Factory.StartNew(() => { }) },
+                            new Task[]
+                            {
+                                Task.Factory.StartNew(() => {
+                                })
+                            },
                             (t) =>
                             {
                                 work();
@@ -867,7 +882,11 @@ namespace System.Threading.Tasks.Tests
                     for (int i = 0; i < taskCount; i++)
                     {
                         new TaskFactory(scheduler).ContinueWhenAny(
-                            new Task[] { Task.Factory.StartNew(() => { }) },
+                            new Task[]
+                            {
+                                Task.Factory.StartNew(() => {
+                                })
+                            },
                             (t) =>
                             {
                                 work();

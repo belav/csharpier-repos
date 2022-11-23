@@ -12,7 +12,9 @@ namespace System.Net.Mail
         private readonly Dictionary<object, NegotiateAuthentication> _sessions =
             new Dictionary<object, NegotiateAuthentication>();
 
-        internal SmtpNtlmAuthenticationModule() { }
+        internal SmtpNtlmAuthenticationModule()
+        {
+        }
 
         public Authorization? Authenticate(
             string? challenge,

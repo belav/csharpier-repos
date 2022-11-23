@@ -6,7 +6,9 @@ namespace System.Security.Cryptography.Tests
     public class CurveDef
     {
 #if NETCOREAPP
-        public CurveDef() { }
+        public CurveDef()
+        {
+        }
 
         public ECCurve Curve;
         public ECCurve.ECCurveType CurveType;

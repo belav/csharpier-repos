@@ -17,6 +17,8 @@ namespace System.Security
     )]
     internal sealed class DynamicSecurityMethodAttribute : Attribute
     {
-        public DynamicSecurityMethodAttribute() { }
+        public DynamicSecurityMethodAttribute()
+        {
+        }
     }
 }

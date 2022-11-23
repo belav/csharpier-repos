@@ -17,7 +17,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public BinaryOperatorSpacingOptionsViewModelFactory() { }
+        public BinaryOperatorSpacingOptionsViewModelFactory()
+        {
+        }
 
         public IEnumSettingViewModel CreateViewModel(WhitespaceSetting setting)
         {

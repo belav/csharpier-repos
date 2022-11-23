@@ -68,7 +68,9 @@ namespace System.Security.AccessControl
         internal NativeObjectSecurity(
             ResourceType resourceType,
             CommonSecurityDescriptor securityDescriptor
-        ) : this(resourceType, securityDescriptor, null) { }
+        ) : this(resourceType, securityDescriptor, null)
+        {
+        }
 
         internal NativeObjectSecurity(
             ResourceType resourceType,
@@ -101,14 +103,18 @@ namespace System.Security.AccessControl
                     exceptionContext
                 ),
                 exceptionFromErrorCode
-            ) { }
+            )
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
             ResourceType resourceType,
             string? name,
             AccessControlSections includeSections
-        ) : this(isContainer, resourceType, name, includeSections, null, null) { }
+        ) : this(isContainer, resourceType, name, includeSections, null, null)
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -131,14 +137,18 @@ namespace System.Security.AccessControl
                     exceptionContext
                 ),
                 exceptionFromErrorCode
-            ) { }
+            )
+        {
+        }
 
         protected NativeObjectSecurity(
             bool isContainer,
             ResourceType resourceType,
             SafeHandle? handle,
             AccessControlSections includeSections
-        ) : this(isContainer, resourceType, handle, includeSections, null, null) { }
+        ) : this(isContainer, resourceType, handle, includeSections, null, null)
+        {
+        }
 
         #endregion
 

@@ -13,7 +13,9 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class HttpClient_SelectedSites_Test : HttpClientHandlerTestBase
     {
-        public HttpClient_SelectedSites_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClient_SelectedSites_Test(ITestOutputHelper output) : base(output)
+        {
+        }
 
         public static bool IsSelectedSitesTestEnabled()
         {

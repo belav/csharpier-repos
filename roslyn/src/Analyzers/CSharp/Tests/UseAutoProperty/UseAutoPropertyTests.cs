@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
     public class UseAutoPropertyTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseAutoPropertyTests(ITestOutputHelper logger) : base(logger) { }
+        public UseAutoPropertyTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

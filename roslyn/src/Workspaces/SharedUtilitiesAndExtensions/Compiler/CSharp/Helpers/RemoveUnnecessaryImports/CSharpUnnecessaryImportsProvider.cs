@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
     {
         public static readonly CSharpUnnecessaryImportsProvider Instance = new();
 
-        private CSharpUnnecessaryImportsProvider() { }
+        private CSharpUnnecessaryImportsProvider()
+        {
+        }
 
         public override ImmutableArray<UsingDirectiveSyntax> GetUnnecessaryImports(
             SemanticModel model,

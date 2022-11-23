@@ -24,7 +24,9 @@ internal class TestSnippetInfoService : ISnippetInfoService
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public TestSnippetInfoService() { }
+    public TestSnippetInfoService()
+    {
+    }
 
     public IEnumerable<SnippetInfo> GetSnippetsIfAvailable()
     {

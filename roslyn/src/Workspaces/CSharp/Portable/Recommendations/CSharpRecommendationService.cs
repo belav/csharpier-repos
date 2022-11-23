@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRecommendationService() { }
+        public CSharpRecommendationService()
+        {
+        }
 
         protected override AbstractRecommendationServiceRunner CreateRunner(
             CSharpSyntaxContext context,

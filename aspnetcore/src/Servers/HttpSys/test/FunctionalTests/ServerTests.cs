@@ -419,7 +419,9 @@ public class ServerTests
     {
         // This is just to get a dynamic port
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext => Task.FromResult(0))) { }
+        using (Utilities.CreateHttpServer(out address, httpContext => Task.FromResult(0)))
+        {
+        }
 
         var server = Utilities.CreatePump();
         server.Listener.Options.UrlPrefixes.Add(UrlPrefix.Create(address));

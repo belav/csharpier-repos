@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInterceptionTestBase
 {
     protected SaveChangesInterceptionInMemoryTestBase(InterceptionInMemoryFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     protected override bool SupportsOptimisticConcurrency => false;
 
@@ -35,7 +37,9 @@ public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInter
             IClassFixture<SaveChangesInterceptionInMemoryTest.InterceptionInMemoryFixture>
     {
         public SaveChangesInterceptionInMemoryTest(InterceptionInMemoryFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {
@@ -49,7 +53,9 @@ public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInter
     {
         public SaveChangesInterceptionWithDiagnosticsInMemoryTest(
             InterceptionInMemoryFixture fixture
-        ) : base(fixture) { }
+        ) : base(fixture)
+        {
+        }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {

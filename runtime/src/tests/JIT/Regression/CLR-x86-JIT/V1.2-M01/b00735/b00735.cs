@@ -13,10 +13,14 @@ struct AA
         {
             while (flag)
             {
-                while (flag) { }
+                while (flag)
+                {
+                }
             }
         }
-        do { } while (flag);
+        do
+        {
+        } while (flag);
     }
 
     static int Main()

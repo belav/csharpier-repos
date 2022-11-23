@@ -7,11 +7,17 @@
 // In the end, a MyType<string,int> should be assignable to an IFoo<string> or an IFoo<int>.
 using System;
 
-public interface IFoo<T> { }
+public interface IFoo<T>
+{
+}
 
-public class MyBaseType<T> : IFoo<T> { }
+public class MyBaseType<T> : IFoo<T>
+{
+}
 
-public class MyType<S, T> : MyBaseType<S>, IFoo<T> { }
+public class MyType<S, T> : MyBaseType<S>, IFoo<T>
+{
+}
 
 public class CMain
 {

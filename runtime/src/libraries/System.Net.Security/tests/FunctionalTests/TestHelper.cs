@@ -168,7 +168,9 @@ namespace System.Net.Security.Tests
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
             ;
 
             try
@@ -186,7 +188,9 @@ namespace System.Net.Security.Tests
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
             ;
         }
 

@@ -255,7 +255,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDbFunction function,
             SlimDbFunction slimFunction,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         private SlimDbFunctionParameter Create(
             IDbFunctionParameter parameter,
@@ -281,7 +283,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDbFunctionParameter parameter,
             SlimDbFunctionParameter slimParameter,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         private SlimSequence Create(ISequence sequence, SlimModel slimModel) =>
             new SlimSequence(
@@ -308,7 +312,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ISequence sequence,
             SlimSequence slimSequence,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         private SlimCheckConstraint Create(
             ICheckConstraint checkConstraint,
@@ -327,7 +333,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ICheckConstraint checkConstraint,
             SlimCheckConstraint slimCheckConstraint,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         ///     Updates the property annotations that will be set on the read-only object.
@@ -416,7 +424,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IRelationalPropertyOverrides propertyOverrides,
             SlimRelationalPropertyOverrides slimPropertyOverrides,
             bool runtime
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         ///     Updates the key annotations that will be set on the read-only object.

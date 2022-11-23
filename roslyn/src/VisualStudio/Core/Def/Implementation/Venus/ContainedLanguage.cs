@@ -87,7 +87,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 GetFilePathFromHierarchyAndItemId(hierarchy, itemid),
                 languageServiceGuid,
                 vbHelperFormattingRule
-            ) { }
+            )
+        {
+        }
 
         public static string GetFilePathFromHierarchyAndItemId(IVsHierarchy hierarchy, uint itemid)
         {

@@ -51,14 +51,18 @@ namespace System.ComponentModel.DataAnnotations
         ///     Default constructor.
         /// </summary>
         /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
-        public ValidationException() { }
+        public ValidationException()
+        {
+        }
 
         /// <summary>
         ///     Constructor that accepts only a localized message
         /// </summary>
         /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
         /// <param name="message">The localized message</param>
-        public ValidationException(string? message) : base(message) { }
+        public ValidationException(string? message) : base(message)
+        {
+        }
 
         /// <summary>
         ///     Constructor that accepts a localized message and an inner exception
@@ -67,7 +71,9 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="message">The localized error message</param>
         /// <param name="innerException">inner exception</param>
         public ValidationException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         /// <summary>
         ///     Constructor that takes a SerializationInfo.
@@ -75,7 +81,9 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="info">The SerializationInfo.</param>
         /// <param name="context">The StreamingContext.</param>
         protected ValidationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         /// <summary>
         ///     Gets the <see>ValidationAttribute</see> instance that triggered this exception.

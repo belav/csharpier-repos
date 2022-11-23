@@ -29,7 +29,9 @@ namespace System.IO.Tests
             {
                 new ThreadSafeRepro().Execute(directory);
             }
-            catch (Exception e) when (!(e is IOException)) { }
+            catch (Exception e) when (!(e is IOException))
+            {
+            }
         }
 
         [Fact]
@@ -137,7 +139,9 @@ namespace System.IO.Tests
 
             void Enumerate(IEnumerator<string> s)
             {
-                while (s.MoveNext()) { }
+                while (s.MoveNext())
+                {
+                }
                 s.Dispose();
             }
 

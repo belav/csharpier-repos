@@ -139,7 +139,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             internal PredefinedTypeInfo(PredefinedType type, Type associatedSystemType, string name)
-                : this(type, associatedSystemType, name, FUNDTYPE.FT_REF) { }
+                : this(type, associatedSystemType, name, FUNDTYPE.FT_REF)
+            {
+            }
         }
 
         private static readonly PredefinedTypeInfo[] s_types =

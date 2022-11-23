@@ -656,42 +656,72 @@ namespace System.Reflection.Tests
         public int PublicField;
         public static int PublicStaticField;
 
-        public MethodPublicClass() { }
+        public MethodPublicClass()
+        {
+        }
 
-        public void PublicMethod() { }
+        public void PublicMethod()
+        {
+        }
 
-        public void overRiddenMethod() { }
+        public void overRiddenMethod()
+        {
+        }
 
-        public void overRiddenMethod(int i) { }
+        public void overRiddenMethod(int i)
+        {
+        }
 
-        public void overRiddenMethod(string s) { }
+        public void overRiddenMethod(string s)
+        {
+        }
 
-        public void overRiddenMethod(object o) { }
+        public void overRiddenMethod(object o)
+        {
+        }
 
-        public static void PublicStaticMethod() { }
+        public static void PublicStaticMethod()
+        {
+        }
 
-        public class PublicNestedType { }
+        public class PublicNestedType
+        {
+        }
 
         public int PublicProperty
         {
             get { return default(int); }
-            set { }
+            set
+            {
+            }
         }
 
         public event System.EventHandler EventPublic;
     }
 
-    public interface MethodITest { }
+    public interface MethodITest
+    {
+    }
 
-    public class TypeInfoMethodBase { }
+    public class TypeInfoMethodBase
+    {
+    }
 
-    public class TypeInfoMethodDerived : TypeInfoMethodBase { }
+    public class TypeInfoMethodDerived : TypeInfoMethodBase
+    {
+    }
 
-    public class TypeInfoMethodImplClass : MethodITest { }
+    public class TypeInfoMethodImplClass : MethodITest
+    {
+    }
 
-    public class TypeInfoMethodGenericClass<T> { }
+    public class TypeInfoMethodGenericClass<T>
+    {
+    }
 
     public class TypeInfoMethodClassWithConstraints<T, U>
         where T : TypeInfoMethodBase, MethodITest
-        where U : class, new() { }
+        where U : class, new()
+    {
+    }
 }

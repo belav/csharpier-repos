@@ -32,7 +32,9 @@ class X
         }
     }
 
-    public static void Ignore<T>(T x) { }
+    public static void Ignore<T>(T x)
+    {
+    }
 
     public static void ProbeArray<T>(T[] a)
     {

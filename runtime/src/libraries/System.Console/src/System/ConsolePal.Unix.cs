@@ -719,7 +719,9 @@ namespace System
                             {
                                 row = checked((row * 10) + (b - '0'));
                             }
-                            catch (OverflowException) { }
+                            catch (OverflowException)
+                            {
+                            }
                         }
                         else
                         {

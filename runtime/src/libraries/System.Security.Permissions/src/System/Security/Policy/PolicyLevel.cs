@@ -7,7 +7,9 @@ namespace System.Security.Policy
 {
     public sealed partial class PolicyLevel
     {
-        internal PolicyLevel() { }
+        internal PolicyLevel()
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
@@ -37,12 +39,16 @@ namespace System.Security.Policy
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
-        public void AddFullTrustAssembly(StrongName sn) { }
+        public void AddFullTrustAssembly(StrongName sn)
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
-        public void AddFullTrustAssembly(StrongNameMembershipCondition snMC) { }
+        public void AddFullTrustAssembly(StrongNameMembershipCondition snMC)
+        {
+        }
 
 #if NETCOREAPP
         [Obsolete(
@@ -51,7 +57,9 @@ namespace System.Security.Policy
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
 #endif
-        public void AddNamedPermissionSet(NamedPermissionSet permSet) { }
+        public void AddNamedPermissionSet(NamedPermissionSet permSet)
+        {
+        }
 
 #if NETCOREAPP
         [Obsolete(
@@ -73,7 +81,9 @@ namespace System.Security.Policy
             return default(PolicyLevel);
         }
 
-        public void FromXml(SecurityElement e) { }
+        public void FromXml(SecurityElement e)
+        {
+        }
 
 #if NETCOREAPP
         [Obsolete(
@@ -87,17 +97,23 @@ namespace System.Security.Policy
             return default(NamedPermissionSet);
         }
 
-        public void Recover() { }
+        public void Recover()
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
-        public void RemoveFullTrustAssembly(StrongName sn) { }
+        public void RemoveFullTrustAssembly(StrongName sn)
+        {
+        }
 
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
-        public void RemoveFullTrustAssembly(StrongNameMembershipCondition snMC) { }
+        public void RemoveFullTrustAssembly(StrongNameMembershipCondition snMC)
+        {
+        }
 
 #if NETCOREAPP
         [Obsolete(
@@ -123,7 +139,9 @@ namespace System.Security.Policy
             return default(NamedPermissionSet);
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
         public PolicyStatement Resolve(Evidence evidence)
         {

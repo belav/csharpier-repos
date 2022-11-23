@@ -29,7 +29,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
         public GenericBasePOCO2<SimpleBaseDerivedPOCO, SimpleBaseDerivedPOCO2> GenericData;
         public object TestGenericBasePOCO;
 
-        public GenericContainerPOCO() { }
+        public GenericContainerPOCO()
+        {
+        }
     }
 
     public class GenericBasePOCO<T> where T : new()
@@ -53,7 +55,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
 
         public List<SimpleBaseDerivedPOCO> Base2;
 
-        public SimpleBaseContainerPOCO() { }
+        public SimpleBaseContainerPOCO()
+        {
+        }
     }
 
     [KnownType(typeof(SimpleBaseDerivedPOCO))]
@@ -80,7 +84,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
         [DataMember]
         public GenericBaseDC2<SimpleBaseDerivedDC, SimpleBaseDerivedDC2> GenericData;
 
-        public GenericContainerDC() { }
+        public GenericContainerDC()
+        {
+        }
     }
 
     [DataContract]
@@ -112,7 +118,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
         [DataMember]
         public List<SimpleBaseDerivedDC> Base2;
 
-        public SimpleBaseContainerDC() { }
+        public SimpleBaseContainerDC()
+        {
+        }
     }
 
     [DataContract]
@@ -158,7 +166,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             float salary;
 
-            Person1() { }
+            Person1()
+            {
+            }
 
             public Person1(string init)
             {
@@ -199,7 +209,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             internal float salary;
 
-            protected Person2() { }
+            protected Person2()
+            {
+            }
 
             public Person2(string init)
             {
@@ -309,7 +321,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 set { zip = value; }
             }
 
-            public Address() { }
+            public Address()
+            {
+            }
 
             public Address(string init)
             {
@@ -374,7 +388,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Person2 father;
 
-            Child(StreamingContext context) { }
+            Child(StreamingContext context)
+            {
+            }
 
             public Child(string init) : base(init)
             {
@@ -409,7 +425,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node previousNode;
 
-            Node() { }
+            Node()
+            {
+            }
         }
 
         [DataContract(Name = "Node")]
@@ -421,7 +439,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node3 previousNode;
 
-            Node2() { }
+            Node2()
+            {
+            }
         }
 
         [DataContract(Name = "Node")]
@@ -433,7 +453,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node4 previousNode;
 
-            Node3() { }
+            Node3()
+            {
+            }
         }
 
         [DataContract(Name = "Node")]
@@ -445,7 +467,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node2 previousNode;
 
-            Node4() { }
+            Node4()
+            {
+            }
         }
 
         [DataContract]
@@ -454,7 +478,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             B member;
 
-            A() { }
+            A()
+            {
+            }
         }
 
         [DataContract]
@@ -463,7 +489,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             A member;
 
-            B() { }
+            B()
+            {
+            }
         }
 
         [DataContract]
@@ -484,7 +512,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             byte[] extraData;
 
-            public DerivedAddress2() : base() { }
+            public DerivedAddress2() : base()
+            {
+            }
         }
 
         [DataContract]

@@ -690,7 +690,9 @@ namespace DebuggerTests
 
     public struct SampleStructure
     {
-        public SampleStructure() { }
+        public SampleStructure()
+        {
+        }
 
         public int Id = 100;
 
@@ -995,7 +997,9 @@ namespace DebuggerTests
     {
         public struct TestEvaluateFieldsNone
         {
-            public TestEvaluateFieldsNone() { }
+            public TestEvaluateFieldsNone()
+            {
+            }
 
             public List<int> list = new List<int>() { 1, 2 };
             public int[] array = new int[] { 11, 22 };
@@ -1030,7 +1034,9 @@ namespace DebuggerTests
 
         public struct TestEvaluateFieldsNever
         {
-            public TestEvaluateFieldsNever() { }
+            public TestEvaluateFieldsNever()
+            {
+            }
 
             [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
             public List<int> listNever = new List<int>() { 1, 2 };
@@ -1091,7 +1097,9 @@ namespace DebuggerTests
 
         public struct TestEvaluateFieldsCollapsed
         {
-            public TestEvaluateFieldsCollapsed() { }
+            public TestEvaluateFieldsCollapsed()
+            {
+            }
 
             [System.Diagnostics.DebuggerBrowsable(
                 System.Diagnostics.DebuggerBrowsableState.Collapsed
@@ -1180,7 +1188,9 @@ namespace DebuggerTests
 
         public struct TestEvaluateFieldsRootHidden
         {
-            public TestEvaluateFieldsRootHidden() { }
+            public TestEvaluateFieldsRootHidden()
+            {
+            }
 
             [System.Diagnostics.DebuggerBrowsable(
                 System.Diagnostics.DebuggerBrowsableState.RootHidden
@@ -1577,7 +1587,9 @@ namespace DebuggerTests
             public static SampleStructure sampleStruct = new();
             public static SampleClass sampleClass = new();
 
-            public TestEvaluateFieldsNone() { }
+            public TestEvaluateFieldsNone()
+            {
+            }
         }
 
         public struct TestEvaluatePropertiesNone
@@ -1625,7 +1637,9 @@ namespace DebuggerTests
             [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
             public static SampleClass sampleClassNever = new();
 
-            public TestEvaluateFieldsNever() { }
+            public TestEvaluateFieldsNever()
+            {
+            }
         }
 
         public struct TestEvaluatePropertiesNever
@@ -1700,7 +1714,9 @@ namespace DebuggerTests
             )]
             public static SampleClass sampleClassCollapsed = new();
 
-            public TestEvaluateFieldsCollapsed() { }
+            public TestEvaluateFieldsCollapsed()
+            {
+            }
         }
 
         public struct TestEvaluatePropertiesCollapsed
@@ -1789,7 +1805,9 @@ namespace DebuggerTests
             )]
             public static SampleClass sampleClassRootHidden = new();
 
-            public TestEvaluateFieldsRootHidden() { }
+            public TestEvaluateFieldsRootHidden()
+            {
+            }
         }
 
         public struct TestEvaluatePropertiesRootHidden

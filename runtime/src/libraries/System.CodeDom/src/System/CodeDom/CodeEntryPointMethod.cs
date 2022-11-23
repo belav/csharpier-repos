@@ -5,6 +5,8 @@ namespace System.CodeDom
 {
     public class CodeEntryPointMethod : CodeMemberMethod
     {
-        public CodeEntryPointMethod() { }
+        public CodeEntryPointMethod()
+        {
+        }
     }
 }

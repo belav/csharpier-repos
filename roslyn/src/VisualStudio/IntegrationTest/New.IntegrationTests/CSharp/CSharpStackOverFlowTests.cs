@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpStackOverFlowTests() : base(nameof(CSharpStackOverFlowTests)) { }
+        public CSharpStackOverFlowTests() : base(nameof(CSharpStackOverFlowTests))
+        {
+        }
 
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/63349")]
         public async Task TestDevenvDoNotCrash()

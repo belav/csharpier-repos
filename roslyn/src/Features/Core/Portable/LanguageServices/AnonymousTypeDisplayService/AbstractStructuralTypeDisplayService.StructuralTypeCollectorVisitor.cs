@@ -29,13 +29,19 @@ namespace Microsoft.CodeAnalysis.LanguageService
             public override void VisitArrayType(IArrayTypeSymbol symbol) =>
                 symbol.ElementType.Accept(this);
 
-            public override void VisitAssembly(IAssemblySymbol symbol) { }
+            public override void VisitAssembly(IAssemblySymbol symbol)
+            {
+            }
 
-            public override void VisitDynamicType(IDynamicTypeSymbol symbol) { }
+            public override void VisitDynamicType(IDynamicTypeSymbol symbol)
+            {
+            }
 
             public override void VisitField(IFieldSymbol symbol) => symbol.Type.Accept(this);
 
-            public override void VisitLabel(ILabelSymbol symbol) { }
+            public override void VisitLabel(ILabelSymbol symbol)
+            {
+            }
 
             public override void VisitLocal(ILocalSymbol symbol) => symbol.Type.Accept(this);
 
@@ -55,7 +61,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 symbol.ReturnType.Accept(this);
             }
 
-            public override void VisitModule(IModuleSymbol symbol) { }
+            public override void VisitModule(IModuleSymbol symbol)
+            {
+            }
 
             public override void VisitNamedType(INamedTypeSymbol symbol)
             {
@@ -99,7 +107,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 }
             }
 
-            public override void VisitNamespace(INamespaceSymbol symbol) { }
+            public override void VisitNamespace(INamespaceSymbol symbol)
+            {
+            }
 
             public override void VisitParameter(IParameterSymbol symbol) =>
                 symbol.Type.Accept(this);
@@ -123,7 +133,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
                     constraint.Accept(this);
             }
 
-            public override void VisitRangeVariable(IRangeVariableSymbol symbol) { }
+            public override void VisitRangeVariable(IRangeVariableSymbol symbol)
+            {
+            }
         }
     }
 }

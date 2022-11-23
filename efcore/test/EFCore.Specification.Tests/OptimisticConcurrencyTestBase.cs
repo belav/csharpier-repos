@@ -863,10 +863,9 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     protected virtual IDbContextTransaction BeginTransaction(DatabaseFacade facade) =>
         facade.BeginTransaction();
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     #endregion
 }

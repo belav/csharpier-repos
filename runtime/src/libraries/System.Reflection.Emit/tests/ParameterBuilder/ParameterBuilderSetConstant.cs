@@ -129,8 +129,12 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        private class UserDefinedClass { }
+        private class UserDefinedClass
+        {
+        }
 
-        private struct UserDefinedStruct { }
+        private struct UserDefinedStruct
+        {
+        }
     }
 }

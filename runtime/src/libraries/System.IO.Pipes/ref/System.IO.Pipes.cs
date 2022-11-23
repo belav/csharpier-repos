@@ -9,10 +9,14 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafePipeHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafePipeHandle() : base(default(bool)) { }
+        public SafePipeHandle() : base(default(bool))
+        {
+        }
 
         public SafePipeHandle(System.IntPtr preexistingHandle, bool ownsHandle)
-            : base(default(bool)) { }
+            : base(default(bool))
+        {
+        }
 
         public override bool IsInvalid
         {
@@ -33,52 +37,72 @@ namespace System.IO.Pipes
         public AnonymousPipeClientStream(
             System.IO.Pipes.PipeDirection direction,
             Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public AnonymousPipeClientStream(
             System.IO.Pipes.PipeDirection direction,
             string pipeHandleAsString
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public AnonymousPipeClientStream(string pipeHandleAsString)
-            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+            : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public override System.IO.Pipes.PipeTransmissionMode ReadMode
         {
-            set { }
+            set
+            {
+            }
         }
         public override System.IO.Pipes.PipeTransmissionMode TransmissionMode
         {
             get { throw null; }
         }
 
-        ~AnonymousPipeClientStream() { }
+        ~AnonymousPipeClientStream()
+        {
+        }
     }
 
     public sealed partial class AnonymousPipeServerStream : System.IO.Pipes.PipeStream
     {
         public AnonymousPipeServerStream()
-            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+            : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public AnonymousPipeServerStream(System.IO.Pipes.PipeDirection direction)
-            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+            : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public AnonymousPipeServerStream(
             System.IO.Pipes.PipeDirection direction,
             Microsoft.Win32.SafeHandles.SafePipeHandle serverSafePipeHandle,
             Microsoft.Win32.SafeHandles.SafePipeHandle clientSafePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public AnonymousPipeServerStream(
             System.IO.Pipes.PipeDirection direction,
             System.IO.HandleInheritability inheritability
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public AnonymousPipeServerStream(
             System.IO.Pipes.PipeDirection direction,
             System.IO.HandleInheritability inheritability,
             int bufferSize
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public Microsoft.Win32.SafeHandles.SafePipeHandle ClientSafePipeHandle
         {
@@ -86,18 +110,26 @@ namespace System.IO.Pipes
         }
         public override System.IO.Pipes.PipeTransmissionMode ReadMode
         {
-            set { }
+            set
+            {
+            }
         }
         public override System.IO.Pipes.PipeTransmissionMode TransmissionMode
         {
             get { throw null; }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public void DisposeLocalCopyOfClientHandle() { }
+        public void DisposeLocalCopyOfClientHandle()
+        {
+        }
 
-        ~AnonymousPipeServerStream() { }
+        ~AnonymousPipeServerStream()
+        {
+        }
 
         public string GetClientHandleAsString()
         {
@@ -112,26 +144,36 @@ namespace System.IO.Pipes
             bool isAsync,
             bool isConnected,
             Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeClientStream(string pipeName)
-            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+            : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeClientStream(string serverName, string pipeName)
-            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+            : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeClientStream(
             string serverName,
             string pipeName,
             System.IO.Pipes.PipeDirection direction
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeClientStream(
             string serverName,
             string pipeName,
             System.IO.Pipes.PipeDirection direction,
             System.IO.Pipes.PipeOptions options
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeClientStream(
             string serverName,
@@ -139,7 +181,9 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeDirection direction,
             System.IO.Pipes.PipeOptions options,
             System.Security.Principal.TokenImpersonationLevel impersonationLevel
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeClientStream(
             string serverName,
@@ -148,7 +192,9 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeOptions options,
             System.Security.Principal.TokenImpersonationLevel impersonationLevel,
             System.IO.HandleInheritability inheritability
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public int NumberOfServerInstances
@@ -156,13 +202,21 @@ namespace System.IO.Pipes
             get { throw null; }
         }
 
-        protected internal override void CheckPipePropertyOperations() { }
+        protected internal override void CheckPipePropertyOperations()
+        {
+        }
 
-        public void Connect() { }
+        public void Connect()
+        {
+        }
 
-        public void Connect(int timeout) { }
+        public void Connect(int timeout)
+        {
+        }
 
-        public void Connect(System.TimeSpan timeout) { }
+        public void Connect(System.TimeSpan timeout)
+        {
+        }
 
         public System.Threading.Tasks.Task ConnectAsync()
         {
@@ -197,7 +251,9 @@ namespace System.IO.Pipes
             throw null;
         }
 
-        ~NamedPipeClientStream() { }
+        ~NamedPipeClientStream()
+        {
+        }
     }
 
     public sealed partial class NamedPipeServerStream : System.IO.Pipes.PipeStream
@@ -209,26 +265,36 @@ namespace System.IO.Pipes
             bool isAsync,
             bool isConnected,
             Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeServerStream(string pipeName)
-            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+            : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeServerStream(string pipeName, System.IO.Pipes.PipeDirection direction)
-            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+            : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
             System.IO.Pipes.PipeDirection direction,
             int maxNumberOfServerInstances
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
             System.IO.Pipes.PipeDirection direction,
             int maxNumberOfServerInstances,
             System.IO.Pipes.PipeTransmissionMode transmissionMode
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -236,7 +302,9 @@ namespace System.IO.Pipes
             int maxNumberOfServerInstances,
             System.IO.Pipes.PipeTransmissionMode transmissionMode,
             System.IO.Pipes.PipeOptions options
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -246,7 +314,9 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeOptions options,
             int inBufferSize,
             int outBufferSize
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        ) : base(default(System.IO.Pipes.PipeDirection), default(int))
+        {
+        }
 
         public System.IAsyncResult BeginWaitForConnection(
             System.AsyncCallback? callback,
@@ -256,22 +326,30 @@ namespace System.IO.Pipes
             throw null;
         }
 
-        public void Disconnect() { }
+        public void Disconnect()
+        {
+        }
 
-        public void EndWaitForConnection(System.IAsyncResult asyncResult) { }
+        public void EndWaitForConnection(System.IAsyncResult asyncResult)
+        {
+        }
 
-        ~NamedPipeServerStream() { }
+        ~NamedPipeServerStream()
+        {
+        }
 
         public string GetImpersonationUserName()
         {
             throw null;
         }
 
-        public void RunAsClient(
-            System.IO.Pipes.PipeStreamImpersonationWorker impersonationWorker
-        ) { }
+        public void RunAsClient(System.IO.Pipes.PipeStreamImpersonationWorker impersonationWorker)
+        {
+        }
 
-        public void WaitForConnection() { }
+        public void WaitForConnection()
+        {
+        }
 
         public System.Threading.Tasks.Task WaitForConnectionAsync()
         {
@@ -304,13 +382,17 @@ namespace System.IO.Pipes
 
     public abstract partial class PipeStream : System.IO.Stream
     {
-        protected PipeStream(System.IO.Pipes.PipeDirection direction, int bufferSize) { }
+        protected PipeStream(System.IO.Pipes.PipeDirection direction, int bufferSize)
+        {
+        }
 
         protected PipeStream(
             System.IO.Pipes.PipeDirection direction,
             System.IO.Pipes.PipeTransmissionMode transmissionMode,
             int outBufferSize
-        ) { }
+        )
+        {
+        }
 
         public override bool CanRead
         {
@@ -335,7 +417,9 @@ namespace System.IO.Pipes
         public bool IsConnected
         {
             get { throw null; }
-            protected set { }
+            protected set
+            {
+            }
         }
         protected bool IsHandleExposed
         {
@@ -356,12 +440,16 @@ namespace System.IO.Pipes
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.IO.Pipes.PipeTransmissionMode ReadMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public Microsoft.Win32.SafeHandles.SafePipeHandle SafePipeHandle
         {
@@ -394,22 +482,34 @@ namespace System.IO.Pipes
             throw null;
         }
 
-        protected internal virtual void CheckPipePropertyOperations() { }
+        protected internal virtual void CheckPipePropertyOperations()
+        {
+        }
 
-        protected internal void CheckReadOperations() { }
+        protected internal void CheckReadOperations()
+        {
+        }
 
-        protected internal void CheckWriteOperations() { }
+        protected internal void CheckWriteOperations()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override int EndRead(System.IAsyncResult asyncResult)
         {
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -422,7 +522,9 @@ namespace System.IO.Pipes
             Microsoft.Win32.SafeHandles.SafePipeHandle? handle,
             bool isExposed,
             bool isAsync
-        ) { }
+        )
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -463,14 +565,22 @@ namespace System.IO.Pipes
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public void WaitForPipeDrain() { }
+        public void WaitForPipeDrain()
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Write(System.ReadOnlySpan<byte> buffer) { }
+        public override void Write(System.ReadOnlySpan<byte> buffer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -491,7 +601,9 @@ namespace System.IO.Pipes
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 
     public delegate void PipeStreamImpersonationWorker();

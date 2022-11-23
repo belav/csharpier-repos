@@ -44,7 +44,9 @@ namespace System.Net.Http.Headers
         /// <summary>
         /// Constructor to be used by parser to create a new instance of this type.
         /// </summary>
-        protected CookieHeaderValue() { }
+        protected CookieHeaderValue()
+        {
+        }
 
         private CookieHeaderValue(CookieHeaderValue source)
         {

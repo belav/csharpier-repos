@@ -36,7 +36,9 @@ namespace ILCompiler
                         : (NodeMangler)new UnixNodeMangler(),
                     false
                 )
-            ) { }
+            )
+        {
+        }
 
         public RyuJitCompilationBuilder UseProfileData(IEnumerable<string> mibcFiles)
         {

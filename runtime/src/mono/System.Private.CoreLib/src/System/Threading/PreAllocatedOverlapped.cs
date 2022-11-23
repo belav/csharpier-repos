@@ -7,7 +7,8 @@ namespace System.Threading
     {
         [CLSCompliantAttribute(false)]
         public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData)
-        { }
+        {
+        }
 
         [CLSCompliantAttribute(false)]
         public static PreAllocatedOverlapped UnsafeCreate(
@@ -16,7 +17,9 @@ namespace System.Threading
             object? pinData
         ) => new PreAllocatedOverlapped(callback, state, pinData);
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         internal bool IsUserObject(byte[]? buffer) => false;
     }

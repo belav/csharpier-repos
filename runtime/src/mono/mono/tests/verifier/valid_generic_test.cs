@@ -73,7 +73,9 @@ public class Tst<T>
         t = default(T);
     }
 
-    public virtual void Virtual(T a) { }
+    public virtual void Virtual(T a)
+    {
+    }
 
     public static T Static()
     {

@@ -19,7 +19,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicCodeActions(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicCodeActions)) { }
+            : base(instanceFactory, nameof(BasicCodeActions))
+        {
+        }
 
         [
             WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/20371"),

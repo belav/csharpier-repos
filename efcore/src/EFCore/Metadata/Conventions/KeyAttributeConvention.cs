@@ -24,7 +24,9 @@ public class KeyAttributeConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public KeyAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies) { }
+        : base(dependencies)
+    {
+    }
 
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(

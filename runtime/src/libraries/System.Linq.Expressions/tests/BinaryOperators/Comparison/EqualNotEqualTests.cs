@@ -347,7 +347,9 @@ namespace System.Linq.Expressions.Tests
         {
             public static T WriteOnly
             {
-                set { }
+                set
+                {
+                }
             }
         }
 
@@ -523,10 +525,16 @@ namespace System.Linq.Expressions.Tests
                     Assert.Equal(xVal != yVal, func(xVal, yVal));
         }
 
-        private struct UselessValue { }
+        private struct UselessValue
+        {
+        }
 
-        public class TestClass { }
+        public class TestClass
+        {
+        }
 
-        public enum TestEnum { }
+        public enum TestEnum
+        {
+        }
     }
 }

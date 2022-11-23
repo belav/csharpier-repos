@@ -111,7 +111,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
         private class NullAssemblyAnalyzerLoader : IAnalyzerAssemblyLoader
         {
-            public void AddDependencyLocation(string fullPath) { }
+            public void AddDependencyLocation(string fullPath)
+            {
+            }
 
             public Assembly LoadFromPath(string fullPath)
             {

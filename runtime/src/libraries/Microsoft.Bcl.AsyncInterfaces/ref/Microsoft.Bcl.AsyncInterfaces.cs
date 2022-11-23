@@ -41,16 +41,22 @@ namespace System.Runtime.CompilerServices
             ref TStateMachine stateMachine
         )
             where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine
+        {
+        }
 
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
         )
             where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine
+        {
+        }
 
-        public void Complete() { }
+        public void Complete()
+        {
+        }
 
         public static System.Runtime.CompilerServices.AsyncIteratorMethodBuilder Create()
         {
@@ -58,7 +64,9 @@ namespace System.Runtime.CompilerServices
         }
 
         public void MoveNext<TStateMachine>(ref TStateMachine stateMachine)
-            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -70,7 +78,9 @@ namespace System.Runtime.CompilerServices
         : System.Runtime.CompilerServices.StateMachineAttribute
     {
         public AsyncIteratorStateMachineAttribute(System.Type stateMachineType)
-            : base(default(System.Type)) { }
+            : base(default(System.Type))
+        {
+        }
     }
 
     public readonly partial struct ConfiguredAsyncDisposable
@@ -132,7 +142,9 @@ namespace System.Runtime.CompilerServices
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter, Inherited = false)]
     public sealed partial class EnumeratorCancellationAttribute : System.Attribute
     {
-        public EnumeratorCancellationAttribute() { }
+        public EnumeratorCancellationAttribute()
+        {
+        }
     }
 }
 
@@ -176,7 +188,9 @@ namespace System.Threading.Tasks.Sources
         public bool RunContinuationsAsynchronously
         {
             readonly get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public short Version
         {
@@ -198,12 +212,20 @@ namespace System.Threading.Tasks.Sources
             object? state,
             short token,
             System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags flags
-        ) { }
+        )
+        {
+        }
 
-        public void Reset() { }
+        public void Reset()
+        {
+        }
 
-        public void SetException(System.Exception error) { }
+        public void SetException(System.Exception error)
+        {
+        }
 
-        public void SetResult(TResult result) { }
+        public void SetResult(TResult result)
+        {
+        }
     }
 }

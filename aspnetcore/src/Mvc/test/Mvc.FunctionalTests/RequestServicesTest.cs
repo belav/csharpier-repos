@@ -10,7 +10,9 @@ public class RequestServicesTest
     : RequestServicesTestBase<BasicWebSite.StartupWithoutEndpointRouting>
 {
     public RequestServicesTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [Fact]
     public override async Task HasEndpointMatch()

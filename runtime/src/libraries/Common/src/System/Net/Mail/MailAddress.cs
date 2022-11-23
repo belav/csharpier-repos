@@ -21,6 +21,8 @@ namespace System.Net.Mail
             string localPart,
             string domain,
             Encoding? displayNameEncoding
-        ) { }
+        )
+        {
+        }
     }
 }

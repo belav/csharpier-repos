@@ -186,7 +186,9 @@ namespace MS.Internal.Xml.XPath
             _comparers = new IComparer[size];
         }
 
-        public XPathSortComparer() : this(minSize) { }
+        public XPathSortComparer() : this(minSize)
+        {
+        }
 
         public void AddSort(Query evalQuery, IComparer comparer)
         {

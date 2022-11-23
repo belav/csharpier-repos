@@ -109,7 +109,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
             CancellationToken cancellationToken
         ) => Task.CompletedTask;
 
-        public void LogAnalyzerCountSummary() { }
+        public void LogAnalyzerCountSummary()
+        {
+        }
 
         /// <summary>
         /// Order all incremental analyzers below DiagnosticIncrementalAnalyzer
@@ -121,6 +123,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         public static BackgroundAnalysisScope GetBackgroundAnalysisScope(OptionSet _) =>
             BackgroundAnalysisScope.FullSolution;
 
-        public void Shutdown() { }
+        public void Shutdown()
+        {
+        }
     }
 }

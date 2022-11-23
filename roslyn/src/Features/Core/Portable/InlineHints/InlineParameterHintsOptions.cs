@@ -33,7 +33,9 @@ internal readonly record struct InlineParameterHintsOptions
     [DataMember]
     public bool SuppressForParametersThatMatchArgumentName { get; init; } = true;
 
-    public InlineParameterHintsOptions() { }
+    public InlineParameterHintsOptions()
+    {
+    }
 
     public static readonly InlineParameterHintsOptions Default = new();
 }

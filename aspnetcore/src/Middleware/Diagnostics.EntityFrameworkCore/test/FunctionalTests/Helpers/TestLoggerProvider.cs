@@ -19,7 +19,9 @@ public class TestLoggerProvider : ILoggerProvider
         return _logger;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public class TestLogger : ILogger
     {
@@ -66,7 +68,9 @@ public class TestLoggerProvider : ILoggerProvider
         {
             public static NullScope Instance = new NullScope();
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

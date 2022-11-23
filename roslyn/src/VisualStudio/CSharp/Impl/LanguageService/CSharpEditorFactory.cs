@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     [Guid(Guids.CSharpEditorFactoryIdString)]
     internal class CSharpEditorFactory : AbstractEditorFactory
     {
-        public CSharpEditorFactory(IComponentModel componentModel) : base(componentModel) { }
+        public CSharpEditorFactory(IComponentModel componentModel) : base(componentModel)
+        {
+        }
 
         protected override string ContentTypeName => ContentTypeNames.CSharpContentType;
         protected override string LanguageName => LanguageNames.CSharp;

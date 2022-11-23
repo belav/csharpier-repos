@@ -31,7 +31,9 @@ namespace System.IO.Ports
 
     public partial class SerialDataReceivedEventArgs : System.EventArgs
     {
-        internal SerialDataReceivedEventArgs() { }
+        internal SerialDataReceivedEventArgs()
+        {
+        }
 
         public System.IO.Ports.SerialData EventType
         {
@@ -55,7 +57,9 @@ namespace System.IO.Ports
 
     public partial class SerialErrorReceivedEventArgs : System.EventArgs
     {
-        internal SerialErrorReceivedEventArgs() { }
+        internal SerialErrorReceivedEventArgs()
+        {
+        }
 
         public System.IO.Ports.SerialError EventType
         {
@@ -79,7 +83,9 @@ namespace System.IO.Ports
 
     public partial class SerialPinChangedEventArgs : System.EventArgs
     {
-        internal SerialPinChangedEventArgs() { }
+        internal SerialPinChangedEventArgs()
+        {
+        }
 
         public System.IO.Ports.SerialPinChange EventType
         {
@@ -96,22 +102,34 @@ namespace System.IO.Ports
     {
         public const int InfiniteTimeout = -1;
 
-        public SerialPort() { }
+        public SerialPort()
+        {
+        }
 
-        public SerialPort(System.ComponentModel.IContainer container) { }
+        public SerialPort(System.ComponentModel.IContainer container)
+        {
+        }
 
-        public SerialPort(string portName) { }
+        public SerialPort(string portName)
+        {
+        }
 
-        public SerialPort(string portName, int baudRate) { }
+        public SerialPort(string portName, int baudRate)
+        {
+        }
 
-        public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity) { }
+        public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity)
+        {
+        }
 
         public SerialPort(
             string portName,
             int baudRate,
             System.IO.Ports.Parity parity,
             int dataBits
-        ) { }
+        )
+        {
+        }
 
         public SerialPort(
             string portName,
@@ -119,7 +137,9 @@ namespace System.IO.Ports
             System.IO.Ports.Parity parity,
             int dataBits,
             System.IO.Ports.StopBits stopBits
-        ) { }
+        )
+        {
+        }
 
         public System.IO.Stream BaseStream
         {
@@ -128,12 +148,16 @@ namespace System.IO.Ports
         public int BaudRate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool BreakState
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int BytesToRead
         {
@@ -154,12 +178,16 @@ namespace System.IO.Ports
         public int DataBits
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool DiscardNull
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool DsrHolding
         {
@@ -168,17 +196,23 @@ namespace System.IO.Ports
         public bool DtrEnable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Text.Encoding Encoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.Ports.Handshake Handshake
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsOpen
         {
@@ -187,88 +221,132 @@ namespace System.IO.Ports
         public string NewLine
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.Ports.Parity Parity
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte ParityReplace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string PortName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReadBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReadTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int ReceivedBytesThreshold
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RtsEnable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IO.Ports.StopBits StopBits
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int WriteBufferSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int WriteTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.IO.Ports.SerialDataReceivedEventHandler DataReceived
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.IO.Ports.SerialErrorReceivedEventHandler ErrorReceived
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.IO.Ports.SerialPinChangedEventHandler PinChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void DiscardInBuffer() { }
+        public void DiscardInBuffer()
+        {
+        }
 
-        public void DiscardOutBuffer() { }
+        public void DiscardOutBuffer()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public static string[] GetPortNames()
         {
             throw null;
         }
 
-        public void Open() { }
+        public void Open()
+        {
+        }
 
         public int Read(byte[] buffer, int offset, int count)
         {
@@ -305,13 +383,21 @@ namespace System.IO.Ports
             throw null;
         }
 
-        public void Write(byte[] buffer, int offset, int count) { }
+        public void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public void Write(char[] buffer, int offset, int count) { }
+        public void Write(char[] buffer, int offset, int count)
+        {
+        }
 
-        public void Write(string text) { }
+        public void Write(string text)
+        {
+        }
 
-        public void WriteLine(string text) { }
+        public void WriteLine(string text)
+        {
+        }
     }
 
     public enum StopBits

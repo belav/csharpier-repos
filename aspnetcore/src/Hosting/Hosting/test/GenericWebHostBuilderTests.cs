@@ -19,7 +19,11 @@ public class GenericWebHostBuilderTests
     {
         var randomEnvKey = Guid.NewGuid().ToString();
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, "true");
-        using var host = new HostBuilder().ConfigureWebHost(_ => { }).Build();
+        using var host = new HostBuilder()
+            .ConfigureWebHost(_ =>
+            {
+            })
+            .Build();
         var config = host.Services.GetRequiredService<IConfiguration>();
         Assert.Equal("true", config[randomEnvKey]);
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, null);
@@ -32,7 +36,9 @@ public class GenericWebHostBuilderTests
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, "true");
         using var host = new HostBuilder()
             .ConfigureWebHost(
-                _ => { },
+                _ =>
+                {
+                },
                 webHostBulderOptions =>
                 {
                     webHostBulderOptions.SuppressEnvironmentConfiguration = true;
@@ -52,7 +58,12 @@ public class GenericWebHostBuilderTests
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder.UseServer(server).UseUrls("TEST_URL").Configure(_ => { });
+                webHostBuilder
+                    .UseServer(server)
+                    .UseUrls("TEST_URL")
+                    .Configure(_ =>
+                    {
+                    });
             })
             .ConfigureAppConfiguration(configBuilder =>
             {
@@ -73,7 +84,12 @@ public class GenericWebHostBuilderTests
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder.UseServer(server).UseUrls("TEST_URL").Configure(_ => { });
+                webHostBuilder
+                    .UseServer(server)
+                    .UseUrls("TEST_URL")
+                    .Configure(_ =>
+                    {
+                    });
             })
             .ConfigureHostConfiguration(configBuilder =>
             {
@@ -122,7 +138,11 @@ public class GenericWebHostBuilderTests
             })
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder.UseServer(server).Configure(_ => { });
+                webHostBuilder
+                    .UseServer(server)
+                    .Configure(_ =>
+                    {
+                    });
             })
             .Build();
 
@@ -150,6 +170,8 @@ public class GenericWebHostBuilderTests
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

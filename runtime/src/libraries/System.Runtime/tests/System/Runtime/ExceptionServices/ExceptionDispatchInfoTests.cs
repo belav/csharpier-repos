@@ -70,7 +70,9 @@ namespace System.Runtime.ExceptionServices.Tests
             {
                 throw e;
             }
-            catch { }
+            catch
+            {
+            }
             Assert.Throws<InvalidOperationException>(
                 () => ExceptionDispatchInfo.SetCurrentStackTrace(e)
             );
@@ -104,7 +106,9 @@ namespace System.Runtime.ExceptionServices.Tests
             {
                 throw e;
             }
-            catch { }
+            catch
+            {
+            }
             Assert.Contains(
                 nameof(ABCDEFGHIJKLMNOPQRSTUVWXYZ),
                 e.StackTrace,
@@ -138,7 +142,9 @@ namespace System.Runtime.ExceptionServices.Tests
             {
                 throw e;
             }
-            catch { }
+            catch
+            {
+            }
             Assert.Contains("pumpkin-anaconda-maritime", e.StackTrace, StringComparison.Ordinal);
             Assert.DoesNotContain(
                 "pumpkin-anaconda-maritime",

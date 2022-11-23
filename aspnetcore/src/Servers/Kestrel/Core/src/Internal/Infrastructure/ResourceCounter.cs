@@ -18,7 +18,9 @@ internal abstract class ResourceCounter
     {
         public override bool TryLockOne() => true;
 
-        public override void ReleaseOne() { }
+        public override void ReleaseOne()
+        {
+        }
     }
 
     internal sealed class FiniteCounter : ResourceCounter

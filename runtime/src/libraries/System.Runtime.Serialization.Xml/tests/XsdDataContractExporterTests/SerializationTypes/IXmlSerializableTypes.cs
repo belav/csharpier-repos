@@ -210,22 +210,34 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
     }
 
-    public class NoSchema : XmlSerializableBase { }
+    public class NoSchema : XmlSerializableBase
+    {
+    }
 
     [XmlRoot]
-    public class EmptyXmlRoot : XmlSerializableBase { }
+    public class EmptyXmlRoot : XmlSerializableBase
+    {
+    }
 
     [XmlRoot(IsNullable = true)]
-    public class NullableOnlyXmlRoot : XmlSerializableBase { }
+    public class NullableOnlyXmlRoot : XmlSerializableBase
+    {
+    }
 
     [XmlRoot(ElementName = null)]
-    public class NullElementXmlRoot : XmlSerializableBase { }
+    public class NullElementXmlRoot : XmlSerializableBase
+    {
+    }
 
     [XmlRoot(ElementName = "")]
-    public class EmptyElementXmlRoot : XmlSerializableBase { }
+    public class EmptyElementXmlRoot : XmlSerializableBase
+    {
+    }
 
     [XmlSchemaProvider(null, IsAny = true)]
-    public class AnyBasic : XmlSerializableBase { }
+    public class AnyBasic : XmlSerializableBase
+    {
+    }
 
     [XmlSchemaProvider("StaticGetSchema", IsAny = true)]
     public class AnyWithSchemaTypeMethod : XmlSerializableBase

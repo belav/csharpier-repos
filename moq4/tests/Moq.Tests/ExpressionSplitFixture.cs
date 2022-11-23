@@ -385,7 +385,9 @@ namespace Moq.Tests
             IC this[bool arg1, bool arg2] { get; set; }
         }
 
-        public interface IC { }
+        public interface IC
+        {
+        }
 
         public delegate IB ADelegate();
 
@@ -407,6 +409,8 @@ namespace Moq.Tests
             }
         }
 
-        public abstract class W { }
+        public abstract class W
+        {
+        }
     }
 }

@@ -15,7 +15,9 @@ public struct S1
     public S2 M18(ref int arg0, ulong arg1)
     {
         S1 var6;
-        try { }
+        try
+        {
+        }
         finally
         {
             var6.F0 = Runtime_75249.s_13;

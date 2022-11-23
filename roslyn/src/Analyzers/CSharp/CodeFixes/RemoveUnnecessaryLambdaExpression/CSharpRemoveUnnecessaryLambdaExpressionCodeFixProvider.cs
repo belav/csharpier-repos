@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider() { }
+        public CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryLambdaExpressionDiagnosticId);

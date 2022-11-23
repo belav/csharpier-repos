@@ -77,5 +77,7 @@ class FakeKerberosPrincipal : IKerberosPrincipal
         );
     }
 
-    public void Validate(X509Certificate2Collection certificates) { }
+    public void Validate(X509Certificate2Collection certificates)
+    {
+    }
 }

@@ -67,7 +67,9 @@ namespace Microsoft.CodeAnalysis.Host
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultPersistentStorageConfiguration() { }
+        public DefaultPersistentStorageConfiguration()
+        {
+        }
 
         public bool ThrowOnFailure => false;
 

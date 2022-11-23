@@ -340,7 +340,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var block = new BufferBlock<int>();
             ((ITargetBlock<int>)block).OfferMessage(messageHeader, 42, null, false);
 
-            var target = new ActionBlock<int>(i => { });
+            var target = new ActionBlock<int>(i =>
+            {
+            });
             Assert.True(((ISourceBlock<int>)block).ReserveMessage(messageHeader, target));
             ((ISourceBlock<int>)block).ReleaseReservation(messageHeader, target);
 

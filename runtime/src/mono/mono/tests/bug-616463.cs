@@ -26,4 +26,6 @@ public class VTI<T> : VTIB
     }
 }
 
-public class VTI_C<T> : VTI<T> { }
+public class VTI_C<T> : VTI<T>
+{
+}

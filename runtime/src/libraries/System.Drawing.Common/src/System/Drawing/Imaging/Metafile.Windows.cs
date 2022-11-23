@@ -19,7 +19,9 @@ namespace System.Drawing.Imaging
         /// <see cref='WmfPlaceableFileHeader'/>.
         /// </summary>
         public Metafile(IntPtr hmetafile, WmfPlaceableFileHeader wmfHeader)
-            : this(hmetafile, wmfHeader, false) { }
+            : this(hmetafile, wmfHeader, false)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified stream.

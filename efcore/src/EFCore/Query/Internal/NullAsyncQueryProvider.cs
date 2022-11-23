@@ -19,7 +19,9 @@ public class NullAsyncQueryProvider : IAsyncQueryProvider
     /// </summary>
     public static readonly IAsyncQueryProvider Instance = new NullAsyncQueryProvider();
 
-    private NullAsyncQueryProvider() { }
+    private NullAsyncQueryProvider()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

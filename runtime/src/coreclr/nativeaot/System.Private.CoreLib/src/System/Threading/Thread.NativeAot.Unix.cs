@@ -142,9 +142,13 @@ namespace System.Threading
 
         partial void InitializeComOnNewThread();
 
-        internal static void InitializeComForFinalizerThread() { }
+        internal static void InitializeComForFinalizerThread()
+        {
+        }
 
-        public void DisableComObjectEagerCleanup() { }
+        public void DisableComObjectEagerCleanup()
+        {
+        }
 
         public void Interrupt() => WaitSubsystem.Interrupt(this);
 

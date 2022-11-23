@@ -14,7 +14,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_does_not_detect_views() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity<TestKeylessType>().HasNoKey().ToView("Vista", "dbo"),
             result => Assert.Equal(0, result.Count)
@@ -23,7 +25,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_does_not_detect_views_with_owned_types() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity<Order>(x =>
                 {
@@ -36,7 +40,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_does_not_detect_views_with_weak_types() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity<Order>(x =>
                 {
@@ -52,7 +58,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     {
         DbContext context = null;
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
 #pragma warning disable CS0618 // Type or member is obsolete
             modelBuilder =>
                 modelBuilder
@@ -69,7 +77,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_does_not_detect_queries() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity<TestKeylessType>().HasNoKey().ToSqlQuery("SELECT * FROM Vista"),
             result => Assert.Empty(result)
@@ -78,7 +88,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_detects_adding_store_type() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Cat", x => x.Property<short>("Id"));
@@ -114,7 +126,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_detects_adding_value_converter() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Cat", x => x.Property<short>("Id"));
@@ -153,7 +167,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_detects_changing_store_type_with_conversions() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Cat", x => x.Property<short>("Id").HasConversion<int>());
@@ -192,7 +208,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_breaks_foreign_key_cycles_in_create_table_operations() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -267,7 +285,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                 modelBuilder.Entity("Third").HasOne("Fourth").WithMany().HasForeignKey("FourthId");
                 modelBuilder.Entity("Fourth").HasOne("Third").WithMany().HasForeignKey("ThirdId");
             },
-            _ => { },
+            _ =>
+            {
+            },
             operations =>
             {
                 Assert.Collection(
@@ -282,7 +302,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_breaks_double_foreign_key_cycles_in_create_table_operations() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Banks").Property<string>("Id");
@@ -348,7 +370,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_breaks_multiple_foreign_key_cycles_in_create_table_operations() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity<Book>(entity =>
@@ -427,8 +451,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table() =>
         Execute(
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity(
                     "Node",
@@ -506,7 +534,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_use_property_order() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder => modelBuilder.Entity<CreateTableEntity1>(),
             operations =>
             {
@@ -524,7 +554,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_use_dependent_to_principal_and_key_order_when_shadow_fk() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity<CreateTableEntity2>();
@@ -554,7 +586,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_uses_defining_navigation_order() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder => modelBuilder.Entity<CreateTableEntity2>().OwnsOne(e => e.D),
             operations =>
             {
@@ -573,7 +607,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_uses_principal_to_dependent_order_when_splitting() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder
                     .Entity<CreateTableEntity2B>()
@@ -598,7 +634,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_groups_and_sorts_type_hierarchy() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("D").Property<int>("Id");
@@ -623,7 +661,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_aliased_columns() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity<CreateTableEntity1>(b =>
                 {
@@ -645,7 +685,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_shadow_defining_navigation() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity(
                     "X",
@@ -669,7 +711,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_shadow_principal_to_dependent_when_splitting() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder
                     .Entity("X", x => x.Property<int>("Id"))
@@ -698,7 +742,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_no_principal_to_dependent_when_splitting() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder
                     .Entity("X", x => x.Property<int>("Id"))
@@ -727,7 +773,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_shadow_dependent_to_principal() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder
                     .Entity("X", x => x.Property<int>("Id"))
@@ -759,7 +807,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_no_dependent_to_principal() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder
                     .Entity("X", x => x.Property<int>("Id"))
@@ -791,7 +841,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_self_referencing_one_to_many() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity(
                     "X",
@@ -819,7 +871,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_handles_self_referencing_one_to_one() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity(
                     "X",
@@ -847,7 +901,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_columns_use_explicit_order() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder.Entity<CreateTableEntity1>(b =>
                 {
@@ -894,7 +950,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             x.Property<int>("Id");
                         }
                     ),
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Y",
@@ -948,8 +1006,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_no_key() =>
         Execute(
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             modelBuilder => modelBuilder.Entity("Anonymous").HasNoKey().Property<int>("Value"),
             upOps =>
             {
@@ -971,7 +1033,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_from_view() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity("Material").ToView("Immaterial").HasNoKey().Property<int>("Value"),
             target => target.Entity("Material").HasNoKey().Property<int>("Value"),
@@ -1248,8 +1312,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_shared_table_with_two_types() =>
         Execute(
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -1311,7 +1379,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -1449,7 +1519,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Can_split_entity_in_two_using_shared_table_with_seed_data() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -1501,8 +1573,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Can_add_tables_with_entity_splitting_with_seed_data() =>
         Execute(
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -1611,7 +1687,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -1735,7 +1813,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Rename_entity_type_with_seed_data() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithIdWrongName",
@@ -1911,7 +1991,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_column_with_seed_data() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "Firefly",
@@ -1999,10 +2081,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                         x.HasData(new { Id = (int?)null });
                                     }
                                 ),
-                            _ => { },
-                            _ => { },
-                            upOps => { },
-                            downOps => { }
+                            _ =>
+                            {
+                            },
+                            _ =>
+                            {
+                            },
+                            upOps =>
+                            {
+                            },
+                            downOps =>
+                            {
+                            }
                         )
                 )
                 .Message
@@ -2028,10 +2118,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                         x.HasData(new { Id = (int?)null, Name = "Firefly 1" });
                                     }
                                 ),
-                            _ => { },
-                            _ => { },
-                            upOps => { },
-                            downOps => { }
+                            _ =>
+                            {
+                            },
+                            _ =>
+                            {
+                            },
+                            upOps =>
+                            {
+                            },
+                            downOps =>
+                            {
+                            }
                         )
                 )
                 .Message
@@ -2066,11 +2164,21 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                         x.HasData(new { Id = 42 }, new { Id = 42 });
                                     }
                                 ),
-                            _ => { },
-                            _ => { },
-                            upOps => { },
-                            downOps => { },
-                            _ => { },
+                            _ =>
+                            {
+                            },
+                            _ =>
+                            {
+                            },
+                            upOps =>
+                            {
+                            },
+                            downOps =>
+                            {
+                            },
+                            _ =>
+                            {
+                            },
                             enableSensitiveLogging: enableSensitiveLogging
                         )
                 )
@@ -2127,11 +2235,21 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                     }
                                 );
                             },
-                            _ => { },
-                            _ => { },
-                            upOps => { },
-                            downOps => { },
-                            _ => { },
+                            _ =>
+                            {
+                            },
+                            _ =>
+                            {
+                            },
+                            upOps =>
+                            {
+                            },
+                            downOps =>
+                            {
+                            },
+                            _ =>
+                            {
+                            },
                             enableSensitiveLogging: enableSensitiveLogging
                         )
                 )
@@ -2166,7 +2284,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_seed_data_with_non_writable_column_insert_operations_with_batching() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "Firefly",
@@ -2307,7 +2427,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Rename_column_with_seed_data() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -2446,7 +2568,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Rename_property_with_same_seed_data() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Zebra",
@@ -2542,7 +2666,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            _ => { },
+            _ =>
+            {
+            },
             target =>
             {
                 target.Entity(
@@ -2594,7 +2720,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            _ => { },
+            _ =>
+            {
+            },
             target =>
             {
                 target.Entity(
@@ -2667,7 +2795,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            _ => { },
+            _ =>
+            {
+            },
             target =>
             {
                 target.Entity(
@@ -2941,7 +3071,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_key_column_type_with_seed_data() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "Firefly",
@@ -3771,7 +3903,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_primary_key() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity("Puffin").ToTable("Puffin", "dbo").HasNoKey().Property<int>("Id"),
             target => target.Entity("Puffin").ToTable("Puffin", "dbo").Property<int>("Id"),
@@ -3936,7 +4070,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("ParentId");
                     }
                 ),
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Amoeba",
@@ -4756,7 +4892,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_sequence() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder
                     .HasSequence<int>("Tango", "dbo")
@@ -4787,7 +4925,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     public void Drop_sequence() =>
         Execute(
             modelBuilder => modelBuilder.HasSequence("Bravo", "dbo"),
-            _ => { },
+            _ =>
+            {
+            },
             operations =>
             {
                 Assert.Equal(1, operations.Count);
@@ -5483,7 +5623,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Sort_creates_tables_in_topologic_order() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Maker").Property<int>("Id");
@@ -5528,7 +5670,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            _ => { },
+            _ =>
+            {
+            },
             operations =>
             {
                 Assert.Equal(2, operations.Count);
@@ -5989,7 +6133,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_with_property_on_subtype() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Animal").Property<int>("Id");
@@ -6010,7 +6156,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_with_required_property_on_subtype() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Animal").Property<int>("Id");
@@ -6240,7 +6388,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_with_foreign_key_on_base_type() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Person").Property<int>("Id");
@@ -6280,7 +6430,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_with_foreign_key_on_subtype() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Person").Property<int>("Id");
@@ -6321,7 +6473,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_with_foreign_key_to_subtype() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Animal").Property<int>("Id");
@@ -6362,7 +6516,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_with_selfReferencing_foreign_key_in_hierarchy() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Animal").Property<int>("Id");
@@ -6399,8 +6555,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_with_seed_data() =>
         Execute(
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "Zebra",
@@ -6461,7 +6621,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -9059,7 +9221,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     .Property<int>("HunterId")
                     .HasColumnName("HunterId");
             },
-            source => { },
+            source =>
+            {
+            },
             target =>
             {
                 target.Entity(
@@ -9127,7 +9291,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     }
                 );
             },
-            source => { },
+            source =>
+            {
+            },
             target =>
             {
                 target
@@ -9238,7 +9404,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_shared_table_with_two_entity_types() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Order").ToTable("Orders").Property<int>("Id");
@@ -9268,7 +9436,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_shared_table_with_required_dependent() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("Order").ToTable("Orders").Property<int>("Id");
@@ -9301,7 +9471,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_shared_table_with_inheritance_and_three_entity_types() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 modelBuilder.Entity("OrderBase").ToTable("Orders").Property<int>("Id");
@@ -9432,9 +9604,13 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
         public string Name { get; set; }
     }
 
-    private class Eagle : Animal { }
+    private class Eagle : Animal
+    {
+    }
 
-    private class Shark : Animal { }
+    private class Shark : Animal
+    {
+    }
 
     [ConditionalFact]
     public void Add_column_to_renamed_table() =>
@@ -10409,7 +10585,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("AlternateId");
                     }
                 ),
-            source => { },
+            source =>
+            {
+            },
             target =>
                 target
                     .Entity(
@@ -10627,8 +10805,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     builder.HasData(data);
                 });
             },
-            target => { },
-            source => { },
+            target =>
+            {
+            },
+            source =>
+            {
+            },
             Assert.Empty,
             Assert.Empty
         );
@@ -10664,12 +10846,16 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
         public Guid Guid { get; set; }
     }
 
-    protected class SomeOwnedEntity { }
+    protected class SomeOwnedEntity
+    {
+    }
 
     [ConditionalFact]
     public void SeedData_and_PK_rename() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -10738,7 +10924,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_and_change_PK_type() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -10841,7 +11029,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_binary_change() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -10925,7 +11115,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
 
     private class RightmostValueComparer : ValueComparer<byte[]>
     {
-        public RightmostValueComparer() : base(false) { }
+        public RightmostValueComparer() : base(false)
+        {
+        }
 
         public override bool Equals(byte[] left, byte[] right) =>
             object.Equals(left[^1], right[^1]);
@@ -10934,7 +11126,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_binary_no_change() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -10962,7 +11156,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_update_with_table_rename() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -11239,7 +11435,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.HasData(new { Id = 1, Enum = SomeEnum.NonDefault });
                     }
                 ),
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity(
                     "EntityWithEnumProperty",
@@ -11367,7 +11565,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_no_change_enum_key() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithEnumKey",
@@ -11397,7 +11597,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_all_operations() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTwoProperties",
@@ -11570,7 +11772,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void SeedData_with_timestamp_column() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
                 source.Entity(
                     "EntityWithTimeStamp",
@@ -11822,7 +12026,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
 
     private void SeedData_with_navigation_properties(Action<ModelBuilder> buildTargetAction) =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             source =>
             {
                 source.Entity(
@@ -11993,7 +12199,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     {
         private readonly int _secretId;
 
-        public Order() { }
+        public Order()
+        {
+        }
 
         public Order(int secretId)
         {
@@ -12030,7 +12238,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     x.OwnsOne(y => y.Shipping);
                 }),
             source => source.Entity<Order>().OwnsOne(y => y.Shipping).Ignore("AddressLine2"),
-            target => { },
+            target =>
+            {
+            },
             upOperations =>
             {
                 var operation = Assert.IsType<AddColumnOperation>(Assert.Single(upOperations));
@@ -12048,7 +12258,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_ownership() =>
         Execute(
-            common => { },
+            common =>
+            {
+            },
             source =>
                 source
                     .Entity<OldOrder>()
@@ -12113,7 +12325,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     public void Add_type_with_ownership_SeedData() =>
         Execute(
             common => common.Ignore<Customer>(),
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity<Order>(x =>
                 {
@@ -12175,8 +12389,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         .HasData(new { OrderId = 1, AddressLine2 = "shipping" });
                 });
             },
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             Assert.Empty,
             Assert.Empty
         );
@@ -12208,8 +12426,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     );
                 });
             },
-            _ => { },
-            _ => { },
+            _ =>
+            {
+            },
+            _ =>
+            {
+            },
             Assert.Empty,
             Assert.Empty,
             skipSourceConventions: true
@@ -12242,7 +12464,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     );
                 });
             },
-            _ => { },
+            _ =>
+            {
+            },
             target =>
             {
                 target.Entity<Customer>(c =>
@@ -12538,7 +12762,13 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     )
                     .Entity<Address>()
                     .ToTable("OldOrder"),
-            source => source.Entity<OldOrder>(x => { }).Entity<Address>().Property<int>("OldZip"),
+            source =>
+                source
+                    .Entity<OldOrder>(x =>
+                    {
+                    })
+                    .Entity<Address>()
+                    .Property<int>("OldZip"),
             target =>
                 target
                     .Entity<OldOrder>(x => x.Property<int>("NotZip"))
@@ -12599,7 +12829,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Owner_pk_properties_appear_before_owned_pk_which_preserves_annotations() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             target =>
                 target.Entity<Customer13300>(builder =>
                 {
@@ -12681,7 +12913,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Primary_key_properties_are_sorted_first() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             target =>
             {
                 target.Entity<Principal>();
@@ -12736,7 +12970,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
         private readonly Action<object, string> _loader;
         private ICollection<Post> _posts;
 
-        public Blog() { }
+        public Blog()
+        {
+        }
 
         private Blog(Action<object, string> lazyLoader)
         {
@@ -12758,7 +12994,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
         private readonly ILazyLoader _loader;
         private Blog _blog;
 
-        public Post() { }
+        public Post()
+        {
+        }
 
         private Post(ILazyLoader loader)
         {
@@ -12779,7 +13017,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Create_table_handles_same_name_but_different_schemas_and_identifying_relationship() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
                 modelBuilder
                     .Entity(
@@ -12919,7 +13159,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     .HasOne("User", "User")
                     .WithMany()
                     .HasForeignKey("UserId"),
-            ops => { }
+            ops =>
+            {
+            }
         );
 
     [ConditionalFact]
@@ -13015,7 +13257,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     .HasOne("User", "User")
                     .WithMany()
                     .HasForeignKey("UserId"),
-            ops => { }
+            ops =>
+            {
+            }
         );
 
     private class TestKeylessType
@@ -13029,7 +13273,9 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Model_differ_does_not_detect_entity_type_mapped_to_TVF() =>
         Execute(
-            _ => { },
+            _ =>
+            {
+            },
             modelBuilder =>
             {
                 var function = modelBuilder

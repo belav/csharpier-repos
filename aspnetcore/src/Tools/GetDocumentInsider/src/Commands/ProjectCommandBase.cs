@@ -8,7 +8,9 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
 internal abstract class ProjectCommandBase : HelpCommandBase
 {
-    public ProjectCommandBase(IConsole console) : base(console) { }
+    public ProjectCommandBase(IConsole console) : base(console)
+    {
+    }
 
     public CommandOption AssemblyPath { get; private set; }
 

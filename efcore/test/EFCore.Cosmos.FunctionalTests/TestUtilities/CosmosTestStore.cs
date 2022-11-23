@@ -295,7 +295,9 @@ public class CosmosTestStore : TestStore
             {
                 await context.Database.EnsureDeletedAsync();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             throw;
         }

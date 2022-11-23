@@ -17,13 +17,21 @@ namespace System.Net
 #endif
     public sealed class WebPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public WebPermission() { }
+        public WebPermission()
+        {
+        }
 
-        public WebPermission(NetworkAccess access, string uriString) { }
+        public WebPermission(NetworkAccess access, string uriString)
+        {
+        }
 
-        public WebPermission(NetworkAccess access, Regex uriRegex) { }
+        public WebPermission(NetworkAccess access, Regex uriRegex)
+        {
+        }
 
-        public WebPermission(PermissionState state) { }
+        public WebPermission(PermissionState state)
+        {
+        }
 
         public IEnumerator AcceptList
         {
@@ -34,16 +42,22 @@ namespace System.Net
             get { return null; }
         }
 
-        public void AddPermission(NetworkAccess access, string uriString) { }
+        public void AddPermission(NetworkAccess access, string uriString)
+        {
+        }
 
-        public void AddPermission(NetworkAccess access, Regex uriRegex) { }
+        public void AddPermission(NetworkAccess access, Regex uriRegex)
+        {
+        }
 
         public override IPermission Copy()
         {
             return null;
         }
 
-        public override void FromXml(SecurityElement securityElement) { }
+        public override void FromXml(SecurityElement securityElement)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

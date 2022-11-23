@@ -14,6 +14,8 @@ namespace System.Net.Http.Formatting
                 HostNameComparisonModeHelper.IsDefined,
                 HostNameComparisonModeHelper.Validate,
                 (HostNameComparisonMode)999
-            ) { }
+            )
+        {
+        }
     }
 }

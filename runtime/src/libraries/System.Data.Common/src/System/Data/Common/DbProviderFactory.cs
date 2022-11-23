@@ -11,7 +11,9 @@ namespace System.Data.Common
         private bool? _canCreateDataAdapter;
         private bool? _canCreateCommandBuilder;
 
-        protected DbProviderFactory() { }
+        protected DbProviderFactory()
+        {
+        }
 
         public virtual bool CanCreateBatch => false;
 

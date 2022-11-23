@@ -89,7 +89,9 @@ namespace System.ComponentModel.Tests
 
         private class MockEventDescriptor : EventDescriptor
         {
-            public MockEventDescriptor(string name) : base(name, new Attribute[] { }) { }
+            public MockEventDescriptor(string name) : base(name, new Attribute[] { })
+            {
+            }
 
             public override Type ComponentType { get; } = typeof(EventArgs);
 
@@ -97,9 +99,13 @@ namespace System.ComponentModel.Tests
 
             public override bool IsMulticast { get; } = false;
 
-            public override void AddEventHandler(object component, Delegate value) { }
+            public override void AddEventHandler(object component, Delegate value)
+            {
+            }
 
-            public override void RemoveEventHandler(object component, Delegate value) { }
+            public override void RemoveEventHandler(object component, Delegate value)
+            {
+            }
         }
     }
 }

@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteNavigationBarItemService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         public ValueTask<ImmutableArray<SerializableNavigationBarItem>> GetItemsAsync(
             Checksum solutionChecksum,

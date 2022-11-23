@@ -212,10 +212,14 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [Export("Contract1")]
-        public class PartExportingContract1 { }
+        public class PartExportingContract1
+        {
+        }
 
         [Export("Contract2")]
-        public class PartExportingContract2 { }
+        public class PartExportingContract2
+        {
+        }
 
         public class PartImportingContract1
         {
@@ -245,6 +249,8 @@ namespace System.ComponentModel.Composition.Hosting
         [PartMetadata("Spores", 3)]
         [PartMetadata("Adds", null)]
         [Export("Contract1")]
-        public class PartWithMetadada { }
+        public class PartWithMetadada
+        {
+        }
     }
 }

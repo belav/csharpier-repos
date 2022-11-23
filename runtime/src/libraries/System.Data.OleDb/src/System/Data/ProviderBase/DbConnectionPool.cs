@@ -767,7 +767,9 @@ namespace System.Data.ProviderBase
                 );
                 bool timerIsNotDisposed;
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     _waitHandles.ErrorEvent.Set();
@@ -937,7 +939,9 @@ namespace System.Data.ProviderBase
             // we simply leave it alone; when the transaction completes, it will
             // come back through PutObjectFromTransactedPool, which will call us
             // again.
-            if (obj.IsTxRootWaitingForTxEnd) { }
+            if (obj.IsTxRootWaitingForTxEnd)
+            {
+            }
             else
             {
                 bool removed = false;
@@ -992,7 +996,9 @@ namespace System.Data.ProviderBase
                 try
                 {
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    try { }
+                    try
+                    {
+                    }
                     finally
                     {
                         started = Interlocked.CompareExchange(ref _pendingOpensWaiting, 1, 0) == 0;
@@ -1575,7 +1581,9 @@ namespace System.Data.ProviderBase
                             // Obtain creation mutex so we're the only one creating objects
                             // and we must have the wait result
                             RuntimeHelpers.PrepareConstrainedRegions();
-                            try { }
+                            try
+                            {
+                            }
                             finally
                             {
                                 waitResult = SafeNativeMethods.WaitForSingleObjectEx(

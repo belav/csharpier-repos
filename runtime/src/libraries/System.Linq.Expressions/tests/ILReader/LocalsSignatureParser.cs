@@ -322,15 +322,25 @@ namespace System.Linq.Expressions.Tests
         }
 
         // NB: We can't stuff these in a System.Type, so won't forward them
-        protected override void NotifyNumSizes(int count) { }
+        protected override void NotifyNumSizes(int count)
+        {
+        }
 
-        protected override void NotifySize(int count) { }
+        protected override void NotifySize(int count)
+        {
+        }
 
-        protected override void NotifyNumLoBounds(int count) { }
+        protected override void NotifyNumLoBounds(int count)
+        {
+        }
 
-        protected override void NotifyLoBound(int count) { }
+        protected override void NotifyLoBound(int count)
+        {
+        }
 
-        protected override void NotifyEndArrayShape() { }
+        protected override void NotifyEndArrayShape()
+        {
+        }
 
         protected override void NotifyTypedByref()
         {

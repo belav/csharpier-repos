@@ -387,16 +387,24 @@ namespace System.Runtime.Serialization.Schema.Tests
         }
 
         [DataContract(IsReference = true)]
-        class RefEdibleItem { }
+        class RefEdibleItem
+        {
+        }
 
         [DataContract]
-        class Fruit : RefEdibleItem { }
+        class Fruit : RefEdibleItem
+        {
+        }
 
         [DataContract(IsReference = true)]
-        class RefApple : Fruit { }
+        class RefApple : Fruit
+        {
+        }
 
         [CollectionDataContract(IsReference = true)]
-        public class RefGrades : List<string> { }
+        public class RefGrades : List<string>
+        {
+        }
 
         [DataContract(IsReference = true)]
         class RefCustomer

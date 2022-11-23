@@ -14,7 +14,9 @@ namespace System.Composition.Lightweight.UnitTests
     public class LooseImportsTests : ContainerTests
     {
         [Export]
-        public class Transaction { }
+        public class Transaction
+        {
+        }
 
         public class SaveChangesAttribute
         {

@@ -3,4 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-public class TestLoggingDefinitions : LoggingDefinitions { }
+public class TestLoggingDefinitions : LoggingDefinitions
+{
+}

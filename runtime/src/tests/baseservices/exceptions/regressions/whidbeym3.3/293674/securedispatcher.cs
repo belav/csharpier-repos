@@ -19,7 +19,9 @@ namespace Avalon.Secure
 
     public class Bar
     {
-        public Bar() { }
+        public Bar()
+        {
+        }
 
         public event EventHandler BarEvent;
 

@@ -8,5 +8,7 @@ namespace System.CommandLine
     /// <summary>
     /// Represents the standard console input, output, and error streams.
     /// </summary>
-    public interface IConsole : IStandardOut, IStandardError, IStandardIn { }
+    public interface IConsole : IStandardOut, IStandardError, IStandardIn
+    {
+    }
 }

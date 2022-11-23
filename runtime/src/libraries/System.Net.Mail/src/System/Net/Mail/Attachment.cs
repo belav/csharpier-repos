@@ -13,7 +13,9 @@ namespace System.Net.Mail
         internal bool disposed;
         private readonly MimePart _part = new MimePart();
 
-        internal AttachmentBase() { }
+        internal AttachmentBase()
+        {
+        }
 
         protected AttachmentBase(string fileName)
         {

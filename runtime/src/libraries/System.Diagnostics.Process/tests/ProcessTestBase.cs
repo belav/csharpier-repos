@@ -37,7 +37,9 @@ namespace System.Diagnostics.Tests
                     Assert.True(p.WaitForExit(WaitInMS));
                     p.WaitForExit(); // wait for event handlers to complete
                 }
-                catch (InvalidOperationException) { } // in case it was never started
+                catch (InvalidOperationException)
+                {
+                } // in case it was never started
             }
 
             base.Dispose(disposing);

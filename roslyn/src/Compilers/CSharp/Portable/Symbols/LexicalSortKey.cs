@@ -81,27 +81,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         private LexicalSortKey(SyntaxTree tree, int position, CSharpCompilation compilation)
-            : this(tree == null ? -1 : compilation.GetSyntaxTreeOrdinal(tree), position) { }
+            : this(tree == null ? -1 : compilation.GetSyntaxTreeOrdinal(tree), position)
+        {
+        }
 
         public LexicalSortKey(SyntaxReference syntaxRef, CSharpCompilation compilation)
-            : this(syntaxRef.SyntaxTree, syntaxRef.Span.Start, compilation) { }
+            : this(syntaxRef.SyntaxTree, syntaxRef.Span.Start, compilation)
+        {
+        }
 
         // WARNING: Only use this if the location is obtainable without allocating it (even if cached later). E.g., only
         // if the location object is stored in the constructor of the symbol.
         public LexicalSortKey(Location location, CSharpCompilation compilation)
-            : this((SyntaxTree)location.SourceTree, location.SourceSpan.Start, compilation) { }
+            : this((SyntaxTree)location.SourceTree, location.SourceSpan.Start, compilation)
+        {
+        }
 
         // WARNING: Only use this if the node is obtainable without allocating it (even if cached later). E.g., only
         // if the node is stored in the constructor of the symbol. In particular, do not call this on the result of a GetSyntax()
         // call on a SyntaxReference.
         public LexicalSortKey(CSharpSyntaxNode node, CSharpCompilation compilation)
-            : this(node.SyntaxTree, node.SpanStart, compilation) { }
+            : this(node.SyntaxTree, node.SpanStart, compilation)
+        {
+        }
 
         // WARNING: Only use this if the token is obtainable without allocating it (even if cached later). E.g., only
         // if the node is stored in the constructor of the symbol. In particular, do not call this on the result of a GetSyntax()
         // call on a SyntaxReference.
         public LexicalSortKey(SyntaxToken token, CSharpCompilation compilation)
-            : this((SyntaxTree)token.SyntaxTree, token.SpanStart, compilation) { }
+            : this((SyntaxTree)token.SyntaxTree, token.SpanStart, compilation)
+        {
+        }
 
         /// <summary>
         /// Compare two lexical sort keys in a compilation.

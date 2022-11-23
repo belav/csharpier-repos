@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
     ]
     internal sealed class VisualBasicFunctionResolver : FunctionResolver
     {
-        public VisualBasicFunctionResolver() { }
+        public VisualBasicFunctionResolver()
+        {
+        }
 
         internal override RequestSignature GetParsedSignature(
             DkmRuntimeFunctionResolutionRequest request

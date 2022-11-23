@@ -39,5 +39,7 @@ public class BoxPatternMatchAndSideEffects
         return result;
     }
 
-    struct Struct { }
+    struct Struct
+    {
+    }
 }

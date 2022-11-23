@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract class AsyncSymbolVisitor : SymbolVisitor<ValueTask> { }
+    internal abstract class AsyncSymbolVisitor : SymbolVisitor<ValueTask>
+    {
+    }
 }

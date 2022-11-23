@@ -1,10 +1,14 @@
 namespace AutoMapper.UnitTests;
 
-interface IGeneric<T> { }
+interface IGeneric<T>
+{
+}
 
 public class When_an_extension_methods_contraints_fail : NonValidatingSpecBase
 {
-    class Source : IGeneric<int> { }
+    class Source : IGeneric<int>
+    {
+    }
 
     class Destination
     {
@@ -27,7 +31,9 @@ public class When_an_extension_methods_contraints_fail : NonValidatingSpecBase
 
 public class When_an_extension_method_is_for_a_base_interface : AutoMapperSpecBase
 {
-    class Source : IGeneric<int> { }
+    class Source : IGeneric<int>
+    {
+    }
 
     class Destination
     {
@@ -54,7 +60,9 @@ public static class GenericExtensions
 
 public class When_an_extension_method_is_for_a_base_class : AutoMapperSpecBase
 {
-    class Source { }
+    class Source
+    {
+    }
 
     class Destination
     {

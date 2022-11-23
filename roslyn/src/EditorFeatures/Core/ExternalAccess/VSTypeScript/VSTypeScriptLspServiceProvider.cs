@@ -20,5 +20,7 @@ internal class VSTypeScriptLspServiceProvider : AbstractLspServiceProvider
             IEnumerable<Lazy<ILspService, LspServiceMetadataView>> lspServices,
         [ImportMany(ProtocolConstants.TypeScriptLanguageContract)]
             IEnumerable<Lazy<ILspServiceFactory, LspServiceMetadataView>> lspServiceFactories
-    ) : base(lspServices, lspServiceFactories) { }
+    ) : base(lspServices, lspServiceFactories)
+    {
+    }
 }

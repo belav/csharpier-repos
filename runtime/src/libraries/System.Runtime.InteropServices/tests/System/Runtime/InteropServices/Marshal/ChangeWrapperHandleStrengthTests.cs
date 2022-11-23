@@ -71,7 +71,9 @@ namespace System.Runtime.InteropServices.Tests
             );
         }
 
-        private static void NonGenericMethod(int i) { }
+        private static void NonGenericMethod(int i)
+        {
+        }
 
         private delegate void NonGenericDelegate(int i);
 

@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             params DiagnosticDescription[] expectedErrors
         ) => UsingStatement(text, TestOptions.Regular9, expectedErrors);
 
-        public RecordParsingTests(ITestOutputHelper output) : base(output) { }
+        public RecordParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void FieldNamedData()

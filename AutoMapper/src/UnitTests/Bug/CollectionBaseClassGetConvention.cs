@@ -13,7 +13,9 @@ public class CollectionBaseClassGetConvention : AutoMapperSpecBase
         }
     }
 
-    public class Source : SourceBase { }
+    public class Source : SourceBase
+    {
+    }
 
     public class Destination
     {

@@ -46,7 +46,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             public string Url { get; set; }
 
-            private Website() { }
+            private Website()
+            {
+            }
 
             public Website(Website website)
             {

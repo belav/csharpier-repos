@@ -12,5 +12,7 @@ namespace System.Runtime.InteropServices
     /// When referencing this type in a source-generator, make sure to use
     /// the TypeNames.MarshalEx method to enable configuration when dogfooding.
     /// </summary>
-    public static class MarshalEx { }
+    public static class MarshalEx
+    {
+    }
 }

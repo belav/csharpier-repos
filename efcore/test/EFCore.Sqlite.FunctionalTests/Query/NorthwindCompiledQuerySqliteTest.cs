@@ -10,7 +10,9 @@ public class NorthwindCompiledQuerySqliteTest
 {
     public NorthwindCompiledQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public override void MakeBinary_does_not_throw_for_unsupported_operator() =>
         Assert.Equal(

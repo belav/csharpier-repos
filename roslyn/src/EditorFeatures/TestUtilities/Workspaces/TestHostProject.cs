@@ -111,7 +111,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             params MetadataReference[] references
-        ) : this(languageServices, compilationOptions, parseOptions, "Test", references) { }
+        ) : this(languageServices, compilationOptions, parseOptions, "Test", references)
+        {
+        }
 
         internal TestHostProject(
             HostLanguageServices languageServices,
@@ -128,7 +130,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 projectName: assemblyName,
                 references: references,
                 documents: Array.Empty<TestHostDocument>()
-            ) { }
+            )
+        {
+        }
 
         internal TestHostProject(
             HostLanguageServices languageServices,
@@ -198,7 +202,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 analyzerReferences,
                 assemblyName,
                 defaultNamespace
-            ) { }
+            )
+        {
+        }
 
         public TestHostProject(
             TestWorkspace workspace,
@@ -402,7 +408,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 outputFilePath = Path.GetDirectoryName(filepath);
             }
-            catch (ArgumentException) { }
+            catch (ArgumentException)
+            {
+            }
 
             if (string.IsNullOrEmpty(outputFilePath))
             {

@@ -45,7 +45,9 @@ namespace MonoTests.System.Configuration.Util
             HexNumer
         }
 
-        public TestLabel(string prefix) : this(prefix, ".", Style.Letter) { }
+        public TestLabel(string prefix) : this(prefix, ".", Style.Letter)
+        {
+        }
 
         public TestLabel(string prefix, string delimiter, Style style)
         {

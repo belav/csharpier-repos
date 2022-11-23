@@ -86,7 +86,9 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Constructs a new instance of <see cref="Expression"/>.
         /// </summary>
-        protected Expression() { }
+        protected Expression()
+        {
+        }
 
         /// <summary>
         /// The <see cref="ExpressionType"/> of the <see cref="Expression"/>.

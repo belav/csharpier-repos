@@ -51,7 +51,9 @@ namespace System.IO.Tests
         public class TimeFunction : Tuple<SetTime, GetTime, DateTimeKind>
         {
             public TimeFunction(SetTime setter, GetTime getter, DateTimeKind kind)
-                : base(item1: setter, item2: getter, item3: kind) { }
+                : base(item1: setter, item2: getter, item3: kind)
+            {
+            }
 
             public static TimeFunction Create(SetTime setter, GetTime getter, DateTimeKind kind) =>
                 new TimeFunction(setter, getter, kind);

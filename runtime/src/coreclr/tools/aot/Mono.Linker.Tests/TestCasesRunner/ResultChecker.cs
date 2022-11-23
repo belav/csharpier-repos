@@ -37,7 +37,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 {
                     SymbolReaderProvider = new DefaultSymbolReaderProvider(false)
                 }
-            ) { }
+            )
+        {
+        }
 
         public ResultChecker(
             BaseAssemblyResolver originalsResolver,

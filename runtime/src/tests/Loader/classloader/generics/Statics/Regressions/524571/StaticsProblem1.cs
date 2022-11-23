@@ -17,7 +17,9 @@ public class Node<a>
     }
 }
 
-public class NodeSys<a> { }
+public class NodeSys<a>
+{
+}
 
 public class SystemMap<a>
 {

@@ -9,5 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
     /// Marks the constructor to be used when activating type using <see cref="ActivatorUtilities"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.All)]
-    public class ActivatorUtilitiesConstructorAttribute : Attribute { }
+    public class ActivatorUtilitiesConstructorAttribute : Attribute
+    {
+    }
 }

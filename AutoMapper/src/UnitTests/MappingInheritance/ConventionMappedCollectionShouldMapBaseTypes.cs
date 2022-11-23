@@ -2,11 +2,17 @@
 
 public class ConventionMappedCollectionShouldMapBaseTypes
 {
-    public class ItemBase { }
+    public class ItemBase
+    {
+    }
 
-    public class GeneralItem : ItemBase { }
+    public class GeneralItem : ItemBase
+    {
+    }
 
-    public class SpecificItem : ItemBase { }
+    public class SpecificItem : ItemBase
+    {
+    }
 
     public class Container
     {
@@ -18,11 +24,17 @@ public class ConventionMappedCollectionShouldMapBaseTypes
         public List<ItemBase> Items { get; private set; }
     }
 
-    public class ItemDto { }
+    public class ItemDto
+    {
+    }
 
-    public class GeneralItemDto : ItemDto { }
+    public class GeneralItemDto : ItemDto
+    {
+    }
 
-    public class SpecificItemDto : ItemDto { }
+    public class SpecificItemDto : ItemDto
+    {
+    }
 
     public class ContainerDto
     {

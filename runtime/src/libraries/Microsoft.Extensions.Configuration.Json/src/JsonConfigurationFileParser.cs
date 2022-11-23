@@ -11,7 +11,9 @@ namespace Microsoft.Extensions.Configuration.Json
 {
     internal sealed class JsonConfigurationFileParser
     {
-        private JsonConfigurationFileParser() { }
+        private JsonConfigurationFileParser()
+        {
+        }
 
         private readonly Dictionary<string, string?> _data = new Dictionary<string, string?>(
             StringComparer.OrdinalIgnoreCase

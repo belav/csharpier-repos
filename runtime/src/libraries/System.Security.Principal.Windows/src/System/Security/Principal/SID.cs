@@ -650,7 +650,9 @@ namespace System.Security.Principal
         //
 
         public SecurityIdentifier(IntPtr binaryForm)
-            : this(Win32.ConvertIntPtrSidToByteArraySid(binaryForm), 0) { }
+            : this(Win32.ConvertIntPtrSidToByteArraySid(binaryForm), 0)
+        {
+        }
 
         //
         // Constructs a well-known SID

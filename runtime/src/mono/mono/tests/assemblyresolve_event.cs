@@ -17,7 +17,9 @@ public class App
         {
             Assembly.Load("SomeAssembly");
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         if (expected_results[i] != handler_fired)
             return 1;
 
@@ -27,7 +29,9 @@ public class App
         {
             Assembly.LoadFile("SomeAssembly");
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         if (expected_results[i] != handler_fired)
             return 2;
 
@@ -37,7 +41,9 @@ public class App
         {
             Assembly.LoadFrom("SomeAssembly");
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         if (expected_results[i] != handler_fired)
             return 3;
 
@@ -47,7 +53,9 @@ public class App
         {
             Assembly.LoadWithPartialName("SomeAssembly");
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         if (expected_results[i] != handler_fired)
             return 4;
 

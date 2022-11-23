@@ -264,7 +264,9 @@ namespace System.Text.Json
         ///   </para>
         /// </remarks>
         public Utf8JsonReader(ReadOnlySpan<byte> jsonData, JsonReaderOptions options = default)
-            : this(jsonData, isFinalBlock: true, new JsonReaderState(options)) { }
+            : this(jsonData, isFinalBlock: true, new JsonReaderState(options))
+        {
+        }
 
         /// <summary>
         /// Read the next JSON token from input source.

@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
             : SettingsSnapshotFactoryBase<FormattingSetting, SettingsEntriesSnapshot>
         {
             public SettingsSnapshotFactory(ISettingsProvider<FormattingSetting> data) : base(data)
-            { }
+            {
+            }
 
             protected override SettingsEntriesSnapshot CreateSnapshot(
                 ImmutableArray<FormattingSetting> data,

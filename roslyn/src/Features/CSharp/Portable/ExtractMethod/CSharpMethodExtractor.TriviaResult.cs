@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     result,
                     (int)SyntaxKind.EndOfLineTrivia,
                     (int)SyntaxKind.WhitespaceTrivia
-                ) { }
+                )
+            {
+            }
 
             protected override AnnotationResolver GetAnnotationResolver(
                 SyntaxNode callsite,

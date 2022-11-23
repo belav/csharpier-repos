@@ -22,11 +22,15 @@ namespace Test
                             return 100;
                     } while (b);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
                 do
                 {
                     long local4 = 32L;
-                    do { } while (checked(38L >= local4));
+                    do
+                    {
+                    } while (checked(38L >= local4));
                 } while (b);
             } while (b);
             return -1;

@@ -78,7 +78,9 @@ namespace System.Reflection.Emit
         #region Constructor
         // package private constructor. This code path is used when client create
         // ILGenerator through MethodBuilder.
-        internal ILGenerator(MethodInfo methodBuilder) : this(methodBuilder, 64) { }
+        internal ILGenerator(MethodInfo methodBuilder) : this(methodBuilder, 64)
+        {
+        }
 
         internal ILGenerator(MethodInfo methodBuilder, int size)
         {

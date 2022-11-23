@@ -111,14 +111,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 "ActionBlock",
                 "OfferMessage",
                 t => t.OfferMessage(new DataflowMessageHeader(1), default(int), null, false), // Message ID doesn't matter because consumeTosAccept:false
-                new ActionBlock<int>(i => { }) as ITargetBlock<int>,
+                new ActionBlock<int>(i =>
+                {
+                }) as ITargetBlock<int>,
                 DataflowMessageStatus.Accepted
             );
             TestConcurrently(
                 "ActionBlock",
                 "Post",
                 t => t.Post(default(int)),
-                new ActionBlock<int>(i => { }),
+                new ActionBlock<int>(i =>
+                {
+                }),
                 true
             );
 

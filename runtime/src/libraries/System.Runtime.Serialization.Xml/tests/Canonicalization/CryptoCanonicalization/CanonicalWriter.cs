@@ -53,7 +53,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
         private ICanonicalWriterEndRootElementCallback _endOfRootElementCallback;
         private IAncestralNamespaceContextProvider _contextProvider;
 
-        public CanonicalWriter(CanonicalEncoder encoder) : this(encoder, null, false, null, 0) { }
+        public CanonicalWriter(CanonicalEncoder encoder) : this(encoder, null, false, null, 0)
+        {
+        }
 
         public CanonicalWriter(
             CanonicalEncoder encoder,
@@ -1292,7 +1294,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
         {
             private static AttributeEntrySortOrder s_instance = new AttributeEntrySortOrder();
 
-            private AttributeEntrySortOrder() { }
+            private AttributeEntrySortOrder()
+            {
+            }
 
             public static AttributeEntrySortOrder Instance
             {

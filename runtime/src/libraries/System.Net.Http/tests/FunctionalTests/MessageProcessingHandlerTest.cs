@@ -308,11 +308,17 @@ namespace System.Net.Http.Functional.Tests
 
         public class MockException : Exception
         {
-            public MockException() { }
+            public MockException()
+            {
+            }
 
-            public MockException(string message) : base(message) { }
+            public MockException(string message) : base(message)
+            {
+            }
 
-            public MockException(string message, Exception inner) : base(message, inner) { }
+            public MockException(string message, Exception inner) : base(message, inner)
+            {
+            }
         }
 
         private class MockHandler : MessageProcessingHandler
@@ -323,9 +329,13 @@ namespace System.Net.Http.Functional.Tests
             public int ProcessRequestCount { get; private set; }
             public int ProcessResponseCount { get; private set; }
 
-            public MockHandler() : base() { }
+            public MockHandler() : base()
+            {
+            }
 
-            public MockHandler(HttpMessageHandler innerHandler) : this(innerHandler, true, null) { }
+            public MockHandler(HttpMessageHandler innerHandler) : this(innerHandler, true, null)
+            {
+            }
 
             public MockHandler(
                 HttpMessageHandler innerHandler,
@@ -391,7 +401,9 @@ namespace System.Net.Http.Functional.Tests
                 _mockResultDelegate = mockResultDelegate;
             }
 
-            public MockTransportHandler() { }
+            public MockTransportHandler()
+            {
+            }
 
             public MockTransportHandler(bool alwaysThrow)
             {

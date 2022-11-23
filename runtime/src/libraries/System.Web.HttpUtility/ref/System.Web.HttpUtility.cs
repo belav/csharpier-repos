@@ -8,7 +8,9 @@ namespace System.Web
 {
     public sealed partial class HttpUtility
     {
-        public HttpUtility() { }
+        public HttpUtility()
+        {
+        }
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("s")]
         public static string? HtmlAttributeEncode(string? s)
@@ -16,7 +18,9 @@ namespace System.Web
             throw null;
         }
 
-        public static void HtmlAttributeEncode(string? s, System.IO.TextWriter output) { }
+        public static void HtmlAttributeEncode(string? s, System.IO.TextWriter output)
+        {
+        }
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("s")]
         public static string? HtmlDecode(string? s)
@@ -24,7 +28,9 @@ namespace System.Web
             throw null;
         }
 
-        public static void HtmlDecode(string? s, System.IO.TextWriter output) { }
+        public static void HtmlDecode(string? s, System.IO.TextWriter output)
+        {
+        }
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")]
         public static string? HtmlEncode(object? value)
@@ -38,7 +44,9 @@ namespace System.Web
             throw null;
         }
 
-        public static void HtmlEncode(string? s, System.IO.TextWriter output) { }
+        public static void HtmlEncode(string? s, System.IO.TextWriter output)
+        {
+        }
 
         public static string JavaScriptStringEncode(string? value)
         {

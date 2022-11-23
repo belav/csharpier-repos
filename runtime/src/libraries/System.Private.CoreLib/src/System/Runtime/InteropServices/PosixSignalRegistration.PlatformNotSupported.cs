@@ -7,7 +7,9 @@ namespace System.Runtime.InteropServices
 {
     public sealed partial class PosixSignalRegistration
     {
-        private PosixSignalRegistration() { }
+        private PosixSignalRegistration()
+        {
+        }
 
         [DynamicDependency("#ctor")] // Prevent the private ctor and the IDisposable implementation from getting linked away
         private static PosixSignalRegistration Register(

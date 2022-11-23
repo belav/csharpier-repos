@@ -301,7 +301,9 @@ public class DistributedSession : ISession
                             _logger.SessionStarted(_sessionKey, Id);
                         }
                     }
-                    catch (OperationCanceledException) { }
+                    catch (OperationCanceledException)
+                    {
+                    }
                     catch (Exception exception)
                     {
                         _logger.SessionCacheReadException(_sessionKey, exception);

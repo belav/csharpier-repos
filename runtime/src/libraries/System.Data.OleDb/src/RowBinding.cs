@@ -302,7 +302,9 @@ namespace System.Data.OleDb
                 DangerousAddRef(ref mustRelease);
 
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     ptr = Interop.OleAut32.SysAllocStringLen(value, (uint)value.Length);
@@ -343,7 +345,9 @@ namespace System.Data.OleDb
                 DangerousAddRef(ref mustRelease);
 
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try { }
+                try
+                {
+                }
                 finally
                 {
                     Marshal.WriteIntPtr(base.handle, offset, pinnedValue); // parameter input value
@@ -550,7 +554,9 @@ namespace System.Data.OleDb
             // two contiguous BSTR ptrs that need to be freed
             // the second should only be freed if different from the first
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 IntPtr currentValue = Marshal.ReadIntPtr(buffer, valueOffset);
@@ -578,7 +584,9 @@ namespace System.Data.OleDb
             // two contiguous CoTaskMemAlloc ptrs that need to be freed
             // the first should only be freed if different from the first
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 IntPtr currentValue = Marshal.ReadIntPtr(buffer, valueOffset);
@@ -613,7 +621,9 @@ namespace System.Data.OleDb
             );
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 // always clear the first structure
@@ -647,7 +657,9 @@ namespace System.Data.OleDb
             );
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try { }
+            try
+            {
+            }
             finally
             {
                 // always clear the first structure

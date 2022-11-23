@@ -18,7 +18,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static readonly XmlDynamicSerializer Instance = new XmlDynamicSerializer();
 
-        protected XmlDynamicSerializer() { }
+        protected XmlDynamicSerializer()
+        {
+        }
 
         public override XmlTypeKind Kind
         {

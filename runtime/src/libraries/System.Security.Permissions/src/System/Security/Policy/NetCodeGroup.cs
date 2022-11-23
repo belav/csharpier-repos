@@ -9,7 +9,9 @@ namespace System.Security.Policy
         public static readonly string AnyOtherOriginScheme;
 
         public NetCodeGroup(IMembershipCondition membershipCondition)
-            : base(default(IMembershipCondition), default(PolicyStatement)) { }
+            : base(default(IMembershipCondition), default(PolicyStatement))
+        {
+        }
 
         public override string AttributeString
         {
@@ -24,14 +26,18 @@ namespace System.Security.Policy
             get { return null; }
         }
 
-        public void AddConnectAccess(string originScheme, CodeConnectAccess connectAccess) { }
+        public void AddConnectAccess(string originScheme, CodeConnectAccess connectAccess)
+        {
+        }
 
         public override CodeGroup Copy()
         {
             return default(CodeGroup);
         }
 
-        protected override void CreateXml(SecurityElement element, PolicyLevel level) { }
+        protected override void CreateXml(SecurityElement element, PolicyLevel level)
+        {
+        }
 
         public override bool Equals(object o) => base.Equals(o);
 
@@ -42,9 +48,13 @@ namespace System.Security.Policy
 
         public override int GetHashCode() => base.GetHashCode();
 
-        protected override void ParseXml(SecurityElement e, PolicyLevel level) { }
+        protected override void ParseXml(SecurityElement e, PolicyLevel level)
+        {
+        }
 
-        public void ResetConnectAccess() { }
+        public void ResetConnectAccess()
+        {
+        }
 
         public override PolicyStatement Resolve(Evidence evidence)
         {

@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
 
             // the service failed, error has been reported - disable further operations
             _disabled = _debuggingSession == null;
@@ -228,7 +229,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 SolutionCommitted?.Invoke(committedDesignTimeSolution);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e))
+            {
+            }
 
             _committedDesignTimeSolution = committedDesignTimeSolution;
 
@@ -239,7 +242,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
         }
 
         public async ValueTask DiscardUpdatesAsync(CancellationToken cancellationToken)
@@ -258,7 +262,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            { }
+            {
+            }
         }
 
         public async ValueTask EndSessionAsync(CancellationToken cancellationToken)

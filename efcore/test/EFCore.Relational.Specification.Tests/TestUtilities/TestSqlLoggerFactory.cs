@@ -25,7 +25,9 @@ public class TestSqlLoggerFactory : ListLoggerFactory
         QueryBaselineRewritingFileInfo
     > _queryBaselineRewritingFileInfos = new();
 
-    public TestSqlLoggerFactory() : this(_ => true) { }
+    public TestSqlLoggerFactory() : this(_ => true)
+    {
+    }
 
     public TestSqlLoggerFactory(Func<string, bool> shouldLogCategory)
         : base(c => shouldLogCategory(c) || c == DbLoggerCategory.Database.Command.Name)
@@ -459,7 +461,9 @@ public class TestSqlLoggerFactory : ListLoggerFactory
 
     private struct QueryBaselineRewritingFileInfo
     {
-        public QueryBaselineRewritingFileInfo() { }
+        public QueryBaselineRewritingFileInfo()
+        {
+        }
 
         public object Lock { get; } = new();
 

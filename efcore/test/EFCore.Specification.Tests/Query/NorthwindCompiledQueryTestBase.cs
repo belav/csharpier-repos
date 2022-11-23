@@ -1048,7 +1048,9 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
 
     protected async Task Enumerate<T>(IAsyncEnumerable<T> source)
     {
-        await foreach (var _ in source) { }
+        await foreach (var _ in source)
+        {
+        }
     }
 
     protected NorthwindContext CreateContext() => Fixture.CreateContext();

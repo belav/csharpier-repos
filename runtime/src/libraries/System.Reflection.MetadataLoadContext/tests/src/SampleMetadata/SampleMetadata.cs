@@ -12,43 +12,77 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
-public class TopLevelType { }
+public class TopLevelType
+{
+}
 
 namespace SampleMetadata
 {
-    public interface Interface1 { }
+    public interface Interface1
+    {
+    }
 
-    public interface Interface2 { }
+    public interface Interface2
+    {
+    }
 
-    public interface Interface3 { }
+    public interface Interface3
+    {
+    }
 
-    public interface Interface4 { }
+    public interface Interface4
+    {
+    }
 
-    public interface Interface5 { }
+    public interface Interface5
+    {
+    }
 
-    public interface Interface123 : Interface1, Interface2, Interface3 { }
+    public interface Interface123 : Interface1, Interface2, Interface3
+    {
+    }
 
-    public interface InterfaceI5 : Interface5 { }
+    public interface InterfaceI5 : Interface5
+    {
+    }
 
-    public interface InterfaceII5 : InterfaceI5 { }
+    public interface InterfaceII5 : InterfaceI5
+    {
+    }
 
-    public interface IGeneric1<T> { }
+    public interface IGeneric1<T>
+    {
+    }
 
-    public interface IGeneric2<T> { }
+    public interface IGeneric2<T>
+    {
+    }
 
-    public class GenericClass1<T> { }
+    public class GenericClass1<T>
+    {
+    }
 
-    public class GenericClass2<T, U> { }
+    public class GenericClass2<T, U>
+    {
+    }
 
-    public class GenericClass3<T, U, V> { }
+    public class GenericClass3<T, U, V>
+    {
+    }
 
-    public class GenericClass4<T, U> : IGeneric1<T>, IGeneric2<U> { }
+    public class GenericClass4<T, U> : IGeneric1<T>, IGeneric2<U>
+    {
+    }
 
-    public class GenericClass5<T, U, V, W, X> { }
+    public class GenericClass5<T, U, V, W, X>
+    {
+    }
 
     public class OuterType1
     {
-        public class InnerType1 { }
+        public class InnerType1
+        {
+        }
     }
 
     public enum MyColor
@@ -58,77 +92,131 @@ namespace SampleMetadata
         Blue = 3,
     }
 
-    public class Base1 { }
+    public class Base1
+    {
+    }
 
-    public class Derived1 : Base1 { }
+    public class Derived1 : Base1
+    {
+    }
 
-    public class Derived2 : GenericClass1<int> { }
+    public class Derived2 : GenericClass1<int>
+    {
+    }
 
-    public class Derived3<T, U> : GenericClass2<U, T> { }
+    public class Derived3<T, U> : GenericClass2<U, T>
+    {
+    }
 
-    public class CInterfaceImplementerI1I2 : Interface1, Interface2 { }
+    public class CInterfaceImplementerI1I2 : Interface1, Interface2
+    {
+    }
 
-    public class CInterfaceImplementerC12I2I3
-        : CInterfaceImplementerI1I2,
-            Interface2,
-            Interface3 { }
+    public class CInterfaceImplementerC12I2I3 : CInterfaceImplementerI1I2, Interface2, Interface3
+    {
+    }
 
-    public class CInterfaceImplementerI123 : Interface123 { }
+    public class CInterfaceImplementerI123 : Interface123
+    {
+    }
 
-    public class CInterfaceImplementerII5 : InterfaceII5 { }
+    public class CInterfaceImplementerII5 : InterfaceII5
+    {
+    }
 
-    public interface IConstrained1 { }
+    public interface IConstrained1
+    {
+    }
 
-    public interface IConstrained2<I> { }
+    public interface IConstrained2<I>
+    {
+    }
 
-    public class CConstrained1 { }
+    public class CConstrained1
+    {
+    }
 
-    public class GenericClassWithNoConstraint<T> { }
+    public class GenericClassWithNoConstraint<T>
+    {
+    }
 
-    public class GenericClassWithClassConstraint<T> where T : class { }
+    public class GenericClassWithClassConstraint<T> where T : class
+    {
+    }
 
-    public class GenericClassWithStructConstraint<T> where T : struct { }
+    public class GenericClassWithStructConstraint<T> where T : struct
+    {
+    }
 
-    public class GenericClassWithNewConstraint<T> where T : new() { }
+    public class GenericClassWithNewConstraint<T> where T : new()
+    {
+    }
 
-    public class GenericClassWithEnumConstraint<T> where T : Enum { }
+    public class GenericClassWithEnumConstraint<T> where T : Enum
+    {
+    }
 
     public class GenericClassWithTypeConstraints<T>
-        where T : CConstrained1, IConstrained1, IConstrained2<T> { }
+        where T : CConstrained1, IConstrained1, IConstrained2<T>
+    {
+    }
 
-    public class GenericClassWithInterfaceConstraints<T>
-        where T : IConstrained1, IConstrained2<T> { }
+    public class GenericClassWithInterfaceConstraints<T> where T : IConstrained1, IConstrained2<T>
+    {
+    }
 
     public class GenericClassWithQuirkyConstraints1<T, U>
         where T : U
-        where U : CConstrained1, IConstrained1 { }
+        where U : CConstrained1, IConstrained1
+    {
+    }
 
     public class GenericClassWithQuirkyConstraints2<T, U>
         where T : U
-        where U : class, IConstrained1 { }
+        where U : class, IConstrained1
+    {
+    }
 
     public class GenericMethodWithTypeConstraints<T>
     {
         public void Foo<M, N>()
             where M : IConstrained2<N>
-            where N : IConstrained2<T> { }
+            where N : IConstrained2<T>
+        {
+        }
     }
 
-    public enum EU1 : byte { }
+    public enum EU1 : byte
+    {
+    }
 
-    public enum EI1 : sbyte { }
+    public enum EI1 : sbyte
+    {
+    }
 
-    public enum EU2 : ushort { }
+    public enum EU2 : ushort
+    {
+    }
 
-    public enum EI2 : short { }
+    public enum EI2 : short
+    {
+    }
 
-    public enum EU4 : uint { }
+    public enum EU4 : uint
+    {
+    }
 
-    public enum EI4 : int { }
+    public enum EI4 : int
+    {
+    }
 
-    public enum EU8 : ulong { }
+    public enum EU8 : ulong
+    {
+    }
 
-    public enum EI8 : long { }
+    public enum EI8 : long
+    {
+    }
 
     public enum E_2_I4 : int
     {
@@ -148,7 +236,9 @@ namespace SampleMetadata
 
     public class GenericEnumContainer<T>
     {
-        public enum GenericEnum : short { }
+        public enum GenericEnum : short
+        {
+        }
     }
 
     public unsafe class ClassWithFields1<T>
@@ -274,21 +364,37 @@ namespace SampleMetadata
 
     public class ParametersWithDefaultValues
     {
-        public void Foo1(int i) { }
+        public void Foo1(int i)
+        {
+        }
 
-        public void Foo2([Optional] int i) { }
+        public void Foo2([Optional] int i)
+        {
+        }
 
-        public void Foo3(int i = 42) { }
+        public void Foo3(int i = 42)
+        {
+        }
 
-        public void Foo4(short s = -34) { }
+        public void Foo4(short s = -34)
+        {
+        }
 
-        public void Foo5(decimal d = 1234m) { }
+        public void Foo5(decimal d = 1234m)
+        {
+        }
 
-        public void Foo6([DateTimeConstant(ticks: 8736726782)] DateTime dt) { }
+        public void Foo6([DateTimeConstant(ticks: 8736726782)] DateTime dt)
+        {
+        }
 
-        public void Foo7(string s1 = "foo", string s2 = "", string s3 = null) { }
+        public void Foo7(string s1 = "foo", string s2 = "", string s3 = null)
+        {
+        }
 
-        public void Foo8(Action a = null) { }
+        public void Foo8(Action a = null)
+        {
+        }
     }
 
     public class ParametersWithPseudoCustomtAttributes
@@ -334,70 +440,112 @@ namespace SampleMetadata
     public class AttributeHolder1
     {
         [SampleCustom(42)]
-        public class N1 { }
+        public class N1
+        {
+        }
 
         [SampleCustom((object)42)]
-        public class N2 { }
+        public class N2
+        {
+        }
 
         [SampleCustom((object)(typeof(IList<string>)))]
-        public class N3 { }
+        public class N3
+        {
+        }
 
         [SampleCustom((object)MyColor.Green)]
-        public class N4 { }
+        public class N4
+        {
+        }
 
         [SampleCustom((object)(new int[] { 6, 7, 8 }))]
-        public class N5 { }
+        public class N5
+        {
+        }
 
         [SampleCustom((object)null)]
-        public class N6 { }
+        public class N6
+        {
+        }
 
         [SampleCustom((string)null)]
-        public class N7 { }
+        public class N7
+        {
+        }
 
         [SampleCustom((Type)null)]
-        public class N8 { }
+        public class N8
+        {
+        }
 
         [SampleCustom((object[])null)]
-        public class N9 { }
+        public class N9
+        {
+        }
 
         [SampleCustom(new BindingFlags[] { BindingFlags.DeclaredOnly, BindingFlags.ExactBinding })]
-        public class N10 { }
+        public class N10
+        {
+        }
 
         [SampleCustom(
             new object[] { 42, "Hello", typeof(IList<string>), BindingFlags.ExactBinding }
         )]
-        public class N11 { }
+        public class N11
+        {
+        }
 
         [SampleCustom("Yeah")]
-        public class N12 { }
+        public class N12
+        {
+        }
 
         [SampleCustom(default(EU1))]
-        public class N13 { }
+        public class N13
+        {
+        }
 
         [SampleCustom(default(EI1))]
-        public class N14 { }
+        public class N14
+        {
+        }
 
         [SampleCustom(default(EU2))]
-        public class N15 { }
+        public class N15
+        {
+        }
 
         [SampleCustom(default(EI2))]
-        public class N16 { }
+        public class N16
+        {
+        }
 
         [SampleCustom(default(EU4))]
-        public class N17 { }
+        public class N17
+        {
+        }
 
         [SampleCustom(default(EI4))]
-        public class N18 { }
+        public class N18
+        {
+        }
 
         [SampleCustom(default(EU8))]
-        public class N19 { }
+        public class N19
+        {
+        }
 
         [SampleCustom(default(EI8))]
-        public class N20 { }
+        public class N20
+        {
+        }
     }
 
     [Guid("90B3D33A-4E96-49B9-8912-4D957AB45461")]
-    public class HoldsAttributeDefinedInAnotherAssembly { }
+    public class HoldsAttributeDefinedInAnotherAssembly
+    {
+    }
 
     public class CaWithNamedArguments : Attribute
     {
@@ -408,25 +556,39 @@ namespace SampleMetadata
     public class HoldsCaWithNamedArguments
     {
         [CaWithNamedArguments(MyField = 4)]
-        public class N1 { }
+        public class N1
+        {
+        }
 
         [CaWithNamedArguments(MyProperty = 8)]
-        public class N2 { }
+        public class N2
+        {
+        }
     }
 
-    public ref struct SampleByRefLikeStruct1 { }
+    public ref struct SampleByRefLikeStruct1
+    {
+    }
 
-    public ref struct SampleByRefLikeStruct2<T> { }
+    public ref struct SampleByRefLikeStruct2<T>
+    {
+    }
 
     [SampleCustom("Yeah")]
-    public ref struct SampleByRefLikeStruct3 { }
+    public ref struct SampleByRefLikeStruct3
+    {
+    }
 
     [Guid("E73CFD63-6BD8-432D-A71B-E1E54AD55914")]
-    public class ClassWithGuid { };
+    public class ClassWithGuid
+    {
+    };
 
     [ComImport]
     [Guid("E73CFD63-6BD8-432D-A71B-E1E54AD55914")]
-    public class ClassWithComImport { };
+    public class ClassWithComImport
+    {
+    };
 
     public class DllImportHolders
     {
@@ -573,77 +735,123 @@ namespace SampleMetadata
         public int Y;
     }
 
-    public struct MyUdt { }
+    public struct MyUdt
+    {
+    }
 
     public class ExerciseCallingConventions
     {
-        public ExerciseCallingConventions() { }
+        public ExerciseCallingConventions()
+        {
+        }
 
-        public void InstanceMethod() { }
+        public void InstanceMethod()
+        {
+        }
 
-        public static void StaticMethod() { }
+        public static void StaticMethod()
+        {
+        }
 
-        public virtual void VirtualMethod() { }
+        public virtual void VirtualMethod()
+        {
+        }
 
-        static ExerciseCallingConventions() { }
+        static ExerciseCallingConventions()
+        {
+        }
     }
 
     public class MarkAttribute : Attribute
     {
-        public MarkAttribute(int mark) { }
+        public MarkAttribute(int mark)
+        {
+        }
     }
 
-    public class MyGenericClass<T> { }
+    public class MyGenericClass<T>
+    {
+    }
 
     public class MethodHolderBase<T>
     {
         [Mark(10)]
-        public void Hoo(int x, int y) { }
+        public void Hoo(int x, int y)
+        {
+        }
 
         [Mark(11)]
-        public void Hoo(string x, string y) { }
+        public void Hoo(string x, string y)
+        {
+        }
 
         [Mark(12)]
-        public void Hoo(T x, T y) { }
+        public void Hoo(T x, T y)
+        {
+        }
 
         [Mark(20)]
-        public virtual void Voo(int x, int y) { }
+        public virtual void Voo(int x, int y)
+        {
+        }
 
         [Mark(30)]
-        private void Poo(int x, int y) { }
+        private void Poo(int x, int y)
+        {
+        }
 
         [Mark(40)]
-        public virtual void Foo<K>(MyGenericClass<K> x, int y) { }
+        public virtual void Foo<K>(MyGenericClass<K> x, int y)
+        {
+        }
 
         [Mark(50)]
-        public virtual void Foo<K>(MyGenericClass<T> x, int y) { }
+        public virtual void Foo<K>(MyGenericClass<T> x, int y)
+        {
+        }
 
         [Mark(60)]
-        public virtual void Foo(MyGenericClass<T> x, string y) { }
+        public virtual void Foo(MyGenericClass<T> x, string y)
+        {
+        }
 
         [Mark(70)]
-        public virtual void Foo(int x, int y) { }
+        public virtual void Foo(int x, int y)
+        {
+        }
     }
 
     public class MethodHolderDerived<T> : MethodHolderBase<T>
     {
         [Mark(10010)]
-        public new void Hoo(int x, int y) { }
+        public new void Hoo(int x, int y)
+        {
+        }
 
         [Mark(10020)]
-        public override void Voo(int x, int y) { }
+        public override void Voo(int x, int y)
+        {
+        }
 
         [Mark(10040)]
-        public override void Foo<K>(MyGenericClass<K> x, int y) { }
+        public override void Foo<K>(MyGenericClass<K> x, int y)
+        {
+        }
 
         [Mark(10050)]
-        public virtual void Foo<K>(MyGenericClass<int> x, int y) { }
+        public virtual void Foo<K>(MyGenericClass<int> x, int y)
+        {
+        }
 
         [Mark(10060)]
-        public override void Foo(MyGenericClass<T> x, string y) { }
+        public override void Foo(MyGenericClass<T> x, string y)
+        {
+        }
 
         [Mark(10070)]
-        public override void Foo(int x, int y) { }
+        public override void Foo(int x, int y)
+        {
+        }
     }
 
     public class PropertyHolder1<T>
@@ -658,7 +866,9 @@ namespace SampleMetadata
         public string this[int i, T t] => throw null!;
     }
 
-    public class DerivedFromPropertyHolder1<T> : PropertyHolder1<T> { }
+    public class DerivedFromPropertyHolder1<T> : PropertyHolder1<T>
+    {
+    }
 
     public class EventHolder1<T>
     {
@@ -669,86 +879,120 @@ namespace SampleMetadata
         }
     }
 
-    public class DerivedFromEventHolder1<T> : EventHolder1<T> { }
+    public class DerivedFromEventHolder1<T> : EventHolder1<T>
+    {
+    }
 
     namespace NS0
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS1
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS2
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS3
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS4
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS5
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS6
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS7
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS8
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS9
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS10
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS11
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS12
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS13
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS14
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     namespace NS15
     {
-        public class SameNamedType { }
+        public class SameNamedType
+        {
+        }
     }
 
     [DefaultMember("Yes")]
@@ -759,6 +1003,8 @@ namespace SampleMetadata
 
     public class PublicClass
     {
-        internal class InternalNestedClass { }
+        internal class InternalNestedClass
+        {
+        }
     }
 }

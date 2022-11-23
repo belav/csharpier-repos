@@ -343,5 +343,7 @@ public class RazorPageActivatorTest
         }
     }
 
-    private class MyModel { }
+    private class MyModel
+    {
+    }
 }

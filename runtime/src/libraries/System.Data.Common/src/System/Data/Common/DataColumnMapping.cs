@@ -17,7 +17,9 @@ namespace System.Data.Common
         private string? _dataSetColumnName;
         private string? _sourceColumnName;
 
-        public DataColumnMapping() { }
+        public DataColumnMapping()
+        {
+        }
 
         public DataColumnMapping(string? sourceColumn, string? dataSetColumn)
         {
@@ -182,7 +184,9 @@ namespace System.Data.Common
             : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public DataColumnMappingConverter() { }
+            public DataColumnMappingConverter()
+            {
+            }
 
             public override bool CanConvertTo(
                 ITypeDescriptorContext? context,

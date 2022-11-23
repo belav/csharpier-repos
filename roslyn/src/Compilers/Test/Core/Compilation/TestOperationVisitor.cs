@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         public static readonly TestOperationVisitor Singleton = new TestOperationVisitor();
 
-        private TestOperationVisitor() : base() { }
+        private TestOperationVisitor() : base()
+        {
+        }
 
         public override void DefaultVisit(IOperation operation)
         {

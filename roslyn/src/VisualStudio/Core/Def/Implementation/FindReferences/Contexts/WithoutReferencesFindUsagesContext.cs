@@ -37,7 +37,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     customColumns,
                     includeContainingTypeAndMemberColumns,
                     includeKindColumn
-                ) { }
+                )
+            {
+            }
 
             // We should never be called in a context where we get references.
             protected override ValueTask OnReferenceFoundWorkerAsync(

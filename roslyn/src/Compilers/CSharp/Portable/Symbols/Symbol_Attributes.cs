@@ -121,13 +121,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal virtual void EarlyDecodeWellKnownAttributeType(
             NamedTypeSymbol attributeType,
             AttributeSyntax attributeSyntax
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// This method is called during attribute binding after EarlyDecodeWellKnownAttributeTypes has been executed.
         /// Symbols should default initialize the data for early decoded well-known attributes here.
         /// </summary>
-        internal virtual void PostEarlyDecodeWellKnownAttributeTypes() { }
+        internal virtual void PostEarlyDecodeWellKnownAttributeTypes()
+        {
+        }
 
 #nullable enable
         /// <summary>
@@ -284,7 +288,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// Called to report attribute related diagnostics after all attributes have been bound and decoded.
@@ -310,7 +316,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             AttributeLocation symbolPart,
             WellKnownAttributeData decodedData
-        ) { }
+        )
+        {
+        }
 
 #nullable enable
         /// <summary>

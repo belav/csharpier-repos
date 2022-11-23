@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.Remote
         private readonly DiagnosticAnalyzerInfoCache _analyzerInfoCache = new();
 
         public RemoteDiagnosticAnalyzerService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Remote API.

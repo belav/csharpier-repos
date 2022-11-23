@@ -147,7 +147,9 @@ namespace CoreXml.Test.XLinq
                         XName name = GetName(" ");
                         throw new TestFailedException("XName.Get(\" \") did not throw");
                     }
-                    catch (XmlException) { }
+                    catch (XmlException)
+                    {
+                    }
                 }
 
                 //[Variation(Priority = 1, Desc = "XName.Get: Invalid name (null)")]
@@ -158,7 +160,9 @@ namespace CoreXml.Test.XLinq
                         XName name = XName.Get(null);
                         throw new TestFailedException("XName.Get(null) did not throw");
                     }
-                    catch (ArgumentException) { }
+                    catch (ArgumentException)
+                    {
+                    }
                 }
 
                 //[Variation(Priority = 0, Desc = "IEquatable: same names")]

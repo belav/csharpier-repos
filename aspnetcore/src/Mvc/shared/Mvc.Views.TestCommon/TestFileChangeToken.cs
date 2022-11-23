@@ -23,7 +23,9 @@ public class TestFileChangeToken : IChangeToken
 
     private sealed class NullDisposable : IDisposable
     {
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public override string ToString() => Filter;

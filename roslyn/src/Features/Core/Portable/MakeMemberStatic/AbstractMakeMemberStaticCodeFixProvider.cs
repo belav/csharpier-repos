@@ -75,7 +75,9 @@ namespace Microsoft.CodeAnalysis.MakeMemberStatic
                     FeaturesResources.Make_member_static,
                     createChangedDocument,
                     nameof(AbstractMakeMemberStaticCodeFixProvider)
-                ) { }
+                )
+            {
+            }
         }
     }
 }

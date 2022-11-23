@@ -91,7 +91,9 @@ namespace System.Web.Mvc.Html.Test
             public ViewEngineCollection RenderPartialInternal_ViewEngineCollection;
 
             SpyHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-                : base(viewContext, viewDataContainer) { }
+                : base(viewContext, viewDataContainer)
+            {
+            }
 
             public static SpyHtmlHelper Create()
             {

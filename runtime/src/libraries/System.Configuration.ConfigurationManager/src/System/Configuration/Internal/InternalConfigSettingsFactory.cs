@@ -5,7 +5,9 @@ namespace System.Configuration.Internal
 {
     internal sealed class InternalConfigSettingsFactory : IInternalConfigSettingsFactory
     {
-        private InternalConfigSettingsFactory() { }
+        private InternalConfigSettingsFactory()
+        {
+        }
 
         void IInternalConfigSettingsFactory.SetConfigurationSystem(
             IInternalConfigSystem configSystem,

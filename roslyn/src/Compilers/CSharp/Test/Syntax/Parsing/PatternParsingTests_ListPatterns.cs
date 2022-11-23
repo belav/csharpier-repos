@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
         }
 
-        public PatternParsingTests_ListPatterns(ITestOutputHelper output) : base(output) { }
+        public PatternParsingTests_ListPatterns(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void ListPattern_00()

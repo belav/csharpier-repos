@@ -70,7 +70,9 @@ namespace ExchangeAdd
         private int valueToAdd;
         private int valueToSubtract;
 
-        public ThreadSafe() : this(100, 100) { }
+        public ThreadSafe() : this(100, 100)
+        {
+        }
 
         public ThreadSafe(int loops, int iAdd)
         {

@@ -20,7 +20,9 @@ namespace System.Runtime.Serialization.Json
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonXmlDataContract(XmlDataContract traditionalXmlDataContract)
-            : base(traditionalXmlDataContract) { }
+            : base(traditionalXmlDataContract)
+        {
+        }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

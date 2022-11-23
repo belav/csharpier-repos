@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression value,
             TypeSymbol type,
             bool hasErrors = false
-        ) : this(syntax, locals, MakeStatements(sideEffects), value, type, hasErrors) { }
+        ) : this(syntax, locals, MakeStatements(sideEffects), value, type, hasErrors)
+        {
+        }
 
         private static ImmutableArray<BoundStatement> MakeStatements(
             ImmutableArray<BoundExpression> expressions

@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _variableName;
 
-        public CodeVariableReferenceExpression() { }
+        public CodeVariableReferenceExpression()
+        {
+        }
 
         public CodeVariableReferenceExpression(string variableName)
         {

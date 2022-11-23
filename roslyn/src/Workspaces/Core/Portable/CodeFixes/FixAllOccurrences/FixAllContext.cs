@@ -181,7 +181,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 ),
                 new ProgressTracker(),
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new <see cref="FixAllContext"/>.

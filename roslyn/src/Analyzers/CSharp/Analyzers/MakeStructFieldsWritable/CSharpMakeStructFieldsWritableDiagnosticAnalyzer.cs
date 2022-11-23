@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
             : base(
                 ImmutableArray.Create(s_diagnosticDescriptor),
                 GeneratedCodeAnalysisFlags.ReportDiagnostics
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;

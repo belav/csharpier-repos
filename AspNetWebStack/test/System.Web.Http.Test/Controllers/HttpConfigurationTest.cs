@@ -149,7 +149,8 @@ namespace System.Web.Http
         {
             // Arrange
             var config = new HttpConfiguration();
-            config.Initializer = (c) => { };
+            config.Initializer = (c) => {
+            };
             bool initializeCalled = false;
             Mock<ITraceManager> mock = new Mock<ITraceManager>() { CallBase = true };
             mock.Setup(m => m.Initialize(config)).Callback(() => initializeCalled = true);

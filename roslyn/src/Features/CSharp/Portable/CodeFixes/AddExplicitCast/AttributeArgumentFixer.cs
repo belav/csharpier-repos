@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             : Fixer<AttributeArgumentSyntax, AttributeArgumentListSyntax, AttributeSyntax>
         {
             public AttributeArgumentFixer(CSharpAddExplicitCastCodeFixProvider provider)
-                : base(provider) { }
+                : base(provider)
+            {
+            }
 
             protected override ExpressionSyntax GetExpressionOfArgument(
                 AttributeArgumentSyntax argument

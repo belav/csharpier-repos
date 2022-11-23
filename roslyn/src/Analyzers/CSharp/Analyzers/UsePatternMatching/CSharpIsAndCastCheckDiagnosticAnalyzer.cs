@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     CSharpAnalyzersResources.ResourceManager,
                     typeof(CSharpAnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected override void InitializeWorker(AnalysisContext context) =>
             context.RegisterSyntaxNodeAction(SyntaxNodeAction, SyntaxKind.IsExpression);

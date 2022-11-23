@@ -170,9 +170,13 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        public class TestClassLocal1 { }
+        public class TestClassLocal1
+        {
+        }
 
-        public struct TestStructLocal1 { }
+        public struct TestStructLocal1
+        {
+        }
 
         public delegate void TestDelegateLocal1(TestStructLocal1 ts);
 
@@ -181,6 +185,8 @@ namespace System.Reflection.Emit.Tests
             DEFAULT
         }
 
-        public class TestExceptionLocal1 : Exception { }
+        public class TestExceptionLocal1 : Exception
+        {
+        }
     }
 }

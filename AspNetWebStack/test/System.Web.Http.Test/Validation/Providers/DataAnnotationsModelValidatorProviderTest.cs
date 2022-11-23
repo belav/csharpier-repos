@@ -34,14 +34,18 @@ namespace System.Web.Http.Validation.Providers
             public MyValidationAttributeAdapter(
                 IEnumerable<ModelValidatorProvider> validatorProviders,
                 ValidationAttribute attribute
-            ) : base(validatorProviders, attribute) { }
+            ) : base(validatorProviders, attribute)
+            {
+            }
         }
 
         private class MyValidationAttributeAdapterBadCtor : ModelValidator
         {
             public MyValidationAttributeAdapterBadCtor(
                 IEnumerable<ModelValidatorProvider> validatorProviders
-            ) : base(validatorProviders) { }
+            ) : base(validatorProviders)
+            {
+            }
 
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
@@ -57,11 +61,15 @@ namespace System.Web.Http.Validation.Providers
             public MyDefaultValidationAttributeAdapter(
                 IEnumerable<ModelValidatorProvider> validatorProviders,
                 ValidationAttribute attribute
-            ) : base(validatorProviders, attribute) { }
+            ) : base(validatorProviders, attribute)
+            {
+            }
         }
 
         [MyValidation]
-        private class MyValidatedClass { }
+        private class MyValidatedClass
+        {
+        }
 
         [Fact]
         public void RegisterAdapter()
@@ -260,7 +268,9 @@ namespace System.Web.Http.Validation.Providers
         private class MyValidatableAdapter : ModelValidator
         {
             public MyValidatableAdapter(IEnumerable<ModelValidatorProvider> validatorProviders)
-                : base(validatorProviders) { }
+                : base(validatorProviders)
+            {
+            }
 
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
@@ -276,7 +286,9 @@ namespace System.Web.Http.Validation.Providers
             public MyValidatableAdapterBadCtor(
                 IEnumerable<ModelValidatorProvider> validatorProviders,
                 int unused
-            ) : base(validatorProviders) { }
+            ) : base(validatorProviders)
+            {
+            }
 
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
@@ -527,10 +539,14 @@ namespace System.Web.Http.Validation.Providers
             Assert.IsType<DataAnnotationsModelValidator>(validator);
         }
 
-        private class DummyValidationAttribute : ValidationAttribute { }
+        private class DummyValidationAttribute : ValidationAttribute
+        {
+        }
 
         [DummyValidation]
-        private class DummyClassWithDummyValidationAttribute { }
+        private class DummyClassWithDummyValidationAttribute
+        {
+        }
 
         // Default IValidatableObject adapter factory
 

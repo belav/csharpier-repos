@@ -7,7 +7,9 @@ namespace System.CodeDom
 {
     public class CodeCommentStatementCollection : CollectionBase
     {
-        public CodeCommentStatementCollection() { }
+        public CodeCommentStatementCollection()
+        {
+        }
 
         public CodeCommentStatementCollection(CodeCommentStatementCollection value)
         {

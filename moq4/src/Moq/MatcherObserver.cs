@@ -56,7 +56,9 @@ namespace Moq
         private int timestamp;
         private List<Observation> observations;
 
-        private MatcherObserver() { }
+        private MatcherObserver()
+        {
+        }
 
         public void Dispose()
         {

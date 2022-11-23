@@ -8,7 +8,9 @@ namespace Microsoft.Interop.JavaScript
     internal sealed record JSGeneratorOptions(bool EnableJSImport, bool EnableJSExport)
     {
         public JSGeneratorOptions(AnalyzerConfigOptions options)
-            : this(options.EnableJSImport(), options.EnableJSExport()) { }
+            : this(options.EnableJSImport(), options.EnableJSExport())
+        {
+        }
     }
 
     public static class OptionsHelper

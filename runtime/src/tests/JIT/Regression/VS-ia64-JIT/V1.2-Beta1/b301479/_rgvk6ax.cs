@@ -51,7 +51,9 @@ public class App
         {
             AA.Static2(8, ref App.m_auFwd8, ref App.m_shFwd1);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         return 100;
     }
 

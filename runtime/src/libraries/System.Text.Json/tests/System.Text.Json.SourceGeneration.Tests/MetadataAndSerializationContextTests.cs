@@ -66,7 +66,9 @@ namespace System.Text.Json.SourceGeneration.Tests
             : base(
                 MetadataAndSerializationContext.Default,
                 (options) => new MetadataAndSerializationContext(options)
-            ) { }
+            )
+        {
+        }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()

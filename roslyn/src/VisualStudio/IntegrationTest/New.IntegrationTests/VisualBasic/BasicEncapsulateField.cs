@@ -14,7 +14,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     [Trait(Traits.Feature, Traits.Features.EncapsulateField)]
     public class BasicEncapsulateField : AbstractEditorTest
     {
-        public BasicEncapsulateField() : base(nameof(BasicEncapsulateField)) { }
+        public BasicEncapsulateField() : base(nameof(BasicEncapsulateField))
+        {
+        }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

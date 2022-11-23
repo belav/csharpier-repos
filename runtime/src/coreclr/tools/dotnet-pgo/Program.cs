@@ -82,7 +82,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 bool unusedNonLoadableModule = false;
                 type = _idParser.ResolveTypeHandle(input, ref unusedNonLoadableModule, false);
             }
-            catch { }
+            catch
+            {
+            }
             if (type != null)
             {
                 return new TypeSystemEntityOrUnknown(type);
@@ -104,7 +106,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 method = _idParser.ResolveMethodID(input, out _, false);
             }
-            catch { }
+            catch
+            {
+            }
             if (method != null)
             {
                 return new TypeSystemEntityOrUnknown(method);
@@ -1969,7 +1973,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             _command.VerboseWarnings
                         );
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
 
                     if (method != null)
                     {

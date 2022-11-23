@@ -29,7 +29,9 @@ namespace System.Web.Mvc.Async
                 actionName,
                 controllerDescriptor,
                 true /* validateMethods */
-            ) { }
+            )
+        {
+        }
 
         internal ReflectedAsyncActionDescriptor(
             MethodInfo asyncMethodInfo,

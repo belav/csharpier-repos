@@ -40,6 +40,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 accessType: default,
                 storageType: default,
                 modifierFlags: default
-            ) { }
+            )
+        {
+        }
     }
 }

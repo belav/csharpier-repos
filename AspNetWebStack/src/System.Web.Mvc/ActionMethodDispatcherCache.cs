@@ -8,7 +8,9 @@ namespace System.Web.Mvc
     internal sealed class ActionMethodDispatcherCache
         : ReaderWriterCache<MethodInfo, ActionMethodDispatcher>
     {
-        public ActionMethodDispatcherCache() { }
+        public ActionMethodDispatcherCache()
+        {
+        }
 
         public ActionMethodDispatcher GetDispatcher(MethodInfo methodInfo)
         {

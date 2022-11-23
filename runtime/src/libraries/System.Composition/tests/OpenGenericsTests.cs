@@ -16,10 +16,14 @@ namespace System.Composition.UnitTests
 {
     public class OpenGenericsTests : ContainerTests
     {
-        private interface IRepository<T> { }
+        private interface IRepository<T>
+        {
+        }
 
         [Export(typeof(IRepository<>))]
-        private class BasicRepository<T> : IRepository<T> { }
+        private class BasicRepository<T> : IRepository<T>
+        {
+        }
 
         private class RepositoryProperty<T>
         {
@@ -50,28 +54,46 @@ namespace System.Composition.UnitTests
             }
         }
 
-        private interface IFirst<T> { }
+        private interface IFirst<T>
+        {
+        }
 
-        private interface ISecond<T> { }
+        private interface ISecond<T>
+        {
+        }
 
         [Export(typeof(IFirst<>)), Export(typeof(ISecond<>))]
-        private class FirstAndSecond<T> : IFirst<T>, ISecond<T> { }
+        private class FirstAndSecond<T> : IFirst<T>, ISecond<T>
+        {
+        }
 
         [Export(typeof(IRepository<>))]
-        private class RepositoryWithKey<T, TKey> : IRepository<T> { }
+        private class RepositoryWithKey<T, TKey> : IRepository<T>
+        {
+        }
 
-        private interface IRepository { }
+        private interface IRepository
+        {
+        }
 
         [Export(typeof(IRepository))]
-        private class RepositoryWithNonGenericExport<T> : IRepository { }
+        private class RepositoryWithNonGenericExport<T> : IRepository
+        {
+        }
 
         [Export]
-        private class ExportSelf<T> { }
+        private class ExportSelf<T>
+        {
+        }
 
-        private class SomeGenericType<T> { }
+        private class SomeGenericType<T>
+        {
+        }
 
         [Export(typeof(SomeGenericType<>))]
-        private class ExportsBase<T> : SomeGenericType<T> { }
+        private class ExportsBase<T> : SomeGenericType<T>
+        {
+        }
 
         [Fact]
         public void CanExportBasicOpenGeneric()

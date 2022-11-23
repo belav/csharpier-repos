@@ -31,7 +31,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public string SetOnlyProperty
         {
-            set { }
+            set
+            {
+            }
         }
     }
 }

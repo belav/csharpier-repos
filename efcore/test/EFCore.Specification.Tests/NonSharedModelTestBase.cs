@@ -172,7 +172,9 @@ public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
     protected virtual TestStore CreateTestStore() => TestStoreFactory.Create(StoreName);
 
     // Called after DisposeAsync
-    public virtual void Dispose() { }
+    public virtual void Dispose()
+    {
+    }
 
     public virtual async Task DisposeAsync()
     {

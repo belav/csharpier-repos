@@ -119,7 +119,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                     var commandHandler = CreateCommandHandler(workspace);
 
                     var commandArgs = new InsertCommentCommandArgs(view, view.TextBuffer);
-                    Action nextHandler = delegate { };
+                    Action nextHandler = delegate
+                    {
+                    };
 
                     commandHandler.ExecuteCommand(
                         commandArgs,

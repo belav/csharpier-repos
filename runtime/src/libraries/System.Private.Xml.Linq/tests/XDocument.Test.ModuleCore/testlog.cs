@@ -549,7 +549,9 @@ namespace Microsoft.Test.ModuleCore
         protected bool pshouldthrow = false;
 
         //Constructor
-        public TestLogAssertHandler() { }
+        public TestLogAssertHandler()
+        {
+        }
 
         //Accessors
         public virtual bool ShouldThrow
@@ -582,8 +584,12 @@ namespace Microsoft.Test.ModuleCore
             );
         }
 
-        public void Write(string strText) { }
+        public void Write(string strText)
+        {
+        }
 
-        public void WriteLine(string strText) { }
+        public void WriteLine(string strText)
+        {
+        }
     }
 }

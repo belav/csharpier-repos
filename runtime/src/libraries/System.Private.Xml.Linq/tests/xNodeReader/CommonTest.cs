@@ -38,7 +38,9 @@ namespace CoreXml.Test.XLinq
                     {
                         TestLog.Compare(((IXmlLineInfo)DataReader).LineNumber, 0, "Line number");
                     }
-                    catch (InvalidCastException) { }
+                    catch (InvalidCastException)
+                    {
+                    }
                     try
                     {
                         TestLog.Compare(
@@ -47,7 +49,9 @@ namespace CoreXml.Test.XLinq
                             "Line Position"
                         );
                     }
-                    catch (InvalidCastException) { }
+                    catch (InvalidCastException)
+                    {
+                    }
                     TestLog.Compare(DataReader.IsEmptyElement, false, "IsEmptyElement");
                     TestLog.Compare(DataReader.Read(), false, "Read");
                     TestLog.Compare(DataReader.ReadAttributeValue(), false, "ReadAV");

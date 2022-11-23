@@ -74,9 +74,13 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : CategoriesDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter() : base()
+            {
+            }
 
-            public Formatter(CategoriesDocument documentToWrite) : base(documentToWrite) { }
+            public Formatter(CategoriesDocument documentToWrite) : base(documentToWrite)
+            {
+            }
 
             public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() =>
                 CreateInlineCategoriesDocument();

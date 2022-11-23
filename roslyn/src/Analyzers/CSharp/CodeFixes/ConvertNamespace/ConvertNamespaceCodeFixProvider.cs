@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertNamespaceCodeFixProvider() { }
+        public ConvertNamespaceCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(

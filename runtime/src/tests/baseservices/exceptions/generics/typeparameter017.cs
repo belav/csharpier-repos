@@ -13,7 +13,9 @@
 
 using System;
 
-public class GenException<T> : Exception { }
+public class GenException<T> : Exception
+{
+}
 
 public class Gen
 {

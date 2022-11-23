@@ -15,7 +15,9 @@ namespace System.Xml.Xsl
         private int _warningLevel = -1; // -1 means not set
         private bool _treatWarningsAsErrors;
 
-        public XsltSettings() { }
+        public XsltSettings()
+        {
+        }
 
         public XsltSettings(bool enableDocumentFunction, bool enableScript)
         {

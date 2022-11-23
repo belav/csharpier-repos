@@ -15,7 +15,9 @@ public class Base
     public static Base Default => s_Default;
 }
 
-sealed class BaseSealed : Base { }
+sealed class BaseSealed : Base
+{
+}
 
 // The jit can devirtualize the call to Foo when initializing y,
 // but not when initializing x.

@@ -327,13 +327,17 @@ namespace Microsoft.CodeAnalysis
         /// Override this method to act immediately when the text of a document has changed, as opposed
         /// to waiting for the corresponding workspace changed event to fire asynchronously.
         /// </summary>
-        protected virtual void OnDocumentTextChanged(Document document) { }
+        protected virtual void OnDocumentTextChanged(Document document)
+        {
+        }
 
         /// <summary>
         /// Override this method to act immediately when a document is closing, as opposed
         /// to waiting for the corresponding workspace changed event to fire asynchronously.
         /// </summary>
-        protected virtual void OnDocumentClosing(DocumentId documentId) { }
+        protected virtual void OnDocumentClosing(DocumentId documentId)
+        {
+        }
 
         /// <summary>
         /// Clears all solution data and empties the current solution.
@@ -585,7 +589,9 @@ namespace Microsoft.CodeAnalysis
         /// Currently projects can always be removed, but this method still exists because it's protected and we don't
         /// want to break people who may have derived from <see cref="Workspace"/> and either called it, or overridden it.
         /// </summary>
-        protected virtual void CheckProjectCanBeRemoved(ProjectId projectId) { }
+        protected virtual void CheckProjectCanBeRemoved(ProjectId projectId)
+        {
+        }
 
         /// <summary>
         /// Call this method when a project's assembly name is changed in the host environment.
@@ -943,7 +949,9 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected virtual void CheckDocumentCanBeRemoved(DocumentId documentId) { }
+        protected virtual void CheckDocumentCanBeRemoved(DocumentId documentId)
+        {
+        }
 
         /// <summary>
         /// Call this method when the text of a document is changed on disk.

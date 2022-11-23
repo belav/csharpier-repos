@@ -17,7 +17,9 @@ namespace Moq
         [ThreadStatic]
         private static int quoteDepth = 0;
 
-        private ExpressionComparer() { }
+        private ExpressionComparer()
+        {
+        }
 
         public bool Equals(Expression x, Expression y)
         {

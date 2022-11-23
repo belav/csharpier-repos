@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Experiments
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultExperimentationService() { }
+        public DefaultExperimentationService()
+        {
+        }
 
         public bool IsExperimentEnabled(string experimentName) => false;
     }

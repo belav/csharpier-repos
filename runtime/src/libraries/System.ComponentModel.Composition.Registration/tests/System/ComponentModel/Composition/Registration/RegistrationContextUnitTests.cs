@@ -7,11 +7,17 @@ using Xunit;
 
 namespace System.ComponentModel.Composition.Registration.Tests
 {
-    public interface IFoo { }
+    public interface IFoo
+    {
+    }
 
-    public class FooImplementation1 : IFoo { }
+    public class FooImplementation1 : IFoo
+    {
+    }
 
-    public class FooImplementation2 : IFoo { }
+    public class FooImplementation2 : IFoo
+    {
+    }
 
     public class RegistrationBuilderUnitTests
     {

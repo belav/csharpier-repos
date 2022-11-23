@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Remote
         private DateTime _lastActivityTime;
 
         // constructor for testing
-        public SolutionAssetCache() { }
+        public SolutionAssetCache()
+        {
+        }
 
         /// <summary>
         /// Create central data cache

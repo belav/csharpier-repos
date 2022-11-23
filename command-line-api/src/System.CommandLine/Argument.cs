@@ -23,7 +23,9 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        protected Argument() { }
+        protected Argument()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.

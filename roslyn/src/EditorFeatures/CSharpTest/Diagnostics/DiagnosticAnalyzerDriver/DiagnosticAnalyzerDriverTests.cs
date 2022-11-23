@@ -500,7 +500,9 @@ class C
                     }
                 }
 
-                public static void AnalyzeCodeBlock(CodeBlockAnalysisContext _) { }
+                public static void AnalyzeCodeBlock(CodeBlockAnalysisContext _)
+                {
+                }
 
                 public static void AnalyzeNode(SyntaxNodeAnalysisContext context)
                 {
@@ -1161,13 +1163,16 @@ class C
         private sealed class NuGetAnalyzer : AbstractNuGetOrVsixAnalyzer
         {
             public NuGetAnalyzer(string[] reportedIds) : base(nameof(NuGetAnalyzer), reportedIds)
-            { }
+            {
+            }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         private sealed class VsixAnalyzer : AbstractNuGetOrVsixAnalyzer
         {
-            public VsixAnalyzer(string[] reportedIds) : base(nameof(VsixAnalyzer), reportedIds) { }
+            public VsixAnalyzer(string[] reportedIds) : base(nameof(VsixAnalyzer), reportedIds)
+            {
+            }
         }
 
         private abstract class AbstractNuGetOrVsixAnalyzer : DiagnosticAnalyzer
@@ -1219,12 +1224,15 @@ class C
         private sealed class NuGetSuppressor : AbstractNugetOrVsixSuppressor
         {
             public NuGetSuppressor(string[] reportIds) : base(nameof(NuGetSuppressor), reportIds)
-            { }
+            {
+            }
         }
 
         private sealed class VsixSuppressor : AbstractNugetOrVsixSuppressor
         {
-            public VsixSuppressor(string[] reportIds) : base(nameof(VsixSuppressor), reportIds) { }
+            public VsixSuppressor(string[] reportIds) : base(nameof(VsixSuppressor), reportIds)
+            {
+            }
         }
 
         private abstract class AbstractNugetOrVsixSuppressor : DiagnosticSuppressor

@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public EncapsulateFieldRefactoringProvider() { }
+        public EncapsulateFieldRefactoringProvider()
+        {
+        }
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

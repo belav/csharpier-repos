@@ -22,7 +22,9 @@ namespace Microsoft.AspNetCore.Http.Features
         /// <summary>
         /// Initializes a new instance of <see cref="FeatureCollection"/>.
         /// </summary>
-        public FeatureCollection() { }
+        public FeatureCollection()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="FeatureCollection"/> with the specified initial capacity.

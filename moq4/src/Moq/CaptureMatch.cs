@@ -19,7 +19,9 @@ namespace Moq
         /// </summary>
         /// <param name="captureCallback">An action to run on captured value</param>
         public CaptureMatch(Action<T> captureCallback)
-            : base(matchAllPredicate, () => It.IsAny<T>(), captureCallback) { }
+            : base(matchAllPredicate, () => It.IsAny<T>(), captureCallback)
+        {
+        }
 
         /// <summary>
         /// Initializes an instance of the capture match.
@@ -27,7 +29,9 @@ namespace Moq
         /// <param name="captureCallback">An action to run on captured value</param>
         /// <param name="predicate">A predicate used to filter captured parameters</param>
         public CaptureMatch(Action<T> captureCallback, Expression<Func<T, bool>> predicate)
-            : base(BuildCondition(predicate), () => It.Is(predicate), captureCallback) { }
+            : base(BuildCondition(predicate), () => It.Is(predicate), captureCallback)
+        {
+        }
 
         private static Predicate<T> BuildCondition(Expression<Func<T, bool>> predicateExpression)
         {

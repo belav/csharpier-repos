@@ -62,7 +62,9 @@ namespace System.Net.Security
         /// </summary>
         private bool _remoteOk;
 
-        public NegotiateStream(Stream innerStream) : this(innerStream, false) { }
+        public NegotiateStream(Stream innerStream) : this(innerStream, false)
+        {
+        }
 
         public NegotiateStream(Stream innerStream, bool leaveInnerStreamOpen)
             : base(innerStream, leaveInnerStreamOpen)

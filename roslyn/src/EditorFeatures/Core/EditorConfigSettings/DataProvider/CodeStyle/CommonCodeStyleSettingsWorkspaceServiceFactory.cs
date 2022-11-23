@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CommonCodeStyleSettingsWorkspaceServiceFactory() { }
+        public CommonCodeStyleSettingsWorkspaceServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new CommonCodeStyleSettingsProviderFactory(workspaceServices.Workspace);

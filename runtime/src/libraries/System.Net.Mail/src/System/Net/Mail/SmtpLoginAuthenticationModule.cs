@@ -11,7 +11,9 @@ namespace System.Net.Mail
         private readonly Dictionary<object, NetworkCredential> _sessions =
             new Dictionary<object, NetworkCredential>();
 
-        internal SmtpLoginAuthenticationModule() { }
+        internal SmtpLoginAuthenticationModule()
+        {
+        }
 
         public Authorization? Authenticate(
             string? challenge,

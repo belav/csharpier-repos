@@ -22,7 +22,9 @@ public class SqliteOptionsExtension : RelationalOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteOptionsExtension() { }
+    public SqliteOptionsExtension()
+    {
+    }
 
     // NB: When adding new options, make sure to update the copy ctor below.
 
@@ -89,7 +91,9 @@ public class SqliteOptionsExtension : RelationalOptionsExtension
     {
         private string? _logFragment;
 
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
+        {
+        }
 
         private new SqliteOptionsExtension Extension => (SqliteOptionsExtension)base.Extension;
 

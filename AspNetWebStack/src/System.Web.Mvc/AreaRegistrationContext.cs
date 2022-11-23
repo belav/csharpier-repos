@@ -16,7 +16,9 @@ namespace System.Web.Mvc
         );
 
         public AreaRegistrationContext(string areaName, RouteCollection routes)
-            : this(areaName, routes, null) { }
+            : this(areaName, routes, null)
+        {
+        }
 
         public AreaRegistrationContext(string areaName, RouteCollection routes, object state)
         {

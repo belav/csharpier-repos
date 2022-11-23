@@ -37,7 +37,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class StartupTests : IISFunctionalTestBase
 {
-    public StartupTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public StartupTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     private readonly string _dotnetLocation = DotNetCommands.GetDotNetExecutable(
         RuntimeArchitecture.x64

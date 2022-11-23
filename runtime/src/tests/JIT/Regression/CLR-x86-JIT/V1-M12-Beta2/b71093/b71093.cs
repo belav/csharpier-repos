@@ -23,7 +23,9 @@ namespace Test
                     }
                 } while (local5);
             }
-            finally { }
+            finally
+            {
+            }
         }
 
         public static int Main()

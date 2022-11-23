@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public InteractiveTextBufferSupportsFeatureService() { }
+            public InteractiveTextBufferSupportsFeatureService()
+            {
+            }
 
             private static bool IsActiveLanguageBuffer(ITextBuffer textBuffer)
             {
@@ -66,7 +68,9 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public InteractiveDocumentSupportsFeatureService() { }
+            public InteractiveDocumentSupportsFeatureService()
+            {
+            }
 
             public bool SupportsCodeFixes(Document document)
             {

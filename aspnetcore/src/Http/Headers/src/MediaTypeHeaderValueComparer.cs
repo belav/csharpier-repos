@@ -9,7 +9,9 @@ namespace Microsoft.Net.Http.Headers;
 /// </summary>
 public class MediaTypeHeaderValueComparer : IComparer<MediaTypeHeaderValue>
 {
-    private MediaTypeHeaderValueComparer() { }
+    private MediaTypeHeaderValueComparer()
+    {
+    }
 
     /// <summary>
     /// Gets the <see cref="MediaTypeHeaderValueComparer"/> instance.

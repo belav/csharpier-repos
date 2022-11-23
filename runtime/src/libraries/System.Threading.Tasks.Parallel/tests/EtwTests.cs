@@ -28,7 +28,13 @@ namespace System.Threading.Tasks.Tests
                             ev => events.Enqueue(ev.EventId),
                             () =>
                             {
-                                Parallel.For(0, 10000, i => { });
+                                Parallel.For(
+                                    0,
+                                    10000,
+                                    i =>
+                                    {
+                                    }
+                                );
 
                                 var barrier = new Barrier(2);
                                 Parallel.Invoke(

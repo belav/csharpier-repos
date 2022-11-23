@@ -42,7 +42,9 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 File.Create(path).Dispose();
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 }

@@ -112,7 +112,9 @@ namespace System.Text.Json.Serialization.Tests
 
             await Assert.ThrowsAsync<TaskCanceledException>(async () =>
             {
-                await foreach (int element in cancellableAsyncEnumerable) { }
+                await foreach (int element in cancellableAsyncEnumerable)
+                {
+                }
             });
         }
 
@@ -131,7 +133,9 @@ namespace System.Text.Json.Serialization.Tests
 
             await Assert.ThrowsAsync<TaskCanceledException>(async () =>
             {
-                await foreach (int element in cancellableAsyncEnumerable) { }
+                await foreach (int element in cancellableAsyncEnumerable)
+                {
+                }
             });
         }
 

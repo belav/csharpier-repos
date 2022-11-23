@@ -142,23 +142,31 @@ namespace System.Xml
         //
         private sealed class NoNamespaceManager : XmlNamespaceManager
         {
-            public NoNamespaceManager() : base() { }
+            public NoNamespaceManager() : base()
+            {
+            }
 
             public override string DefaultNamespace
             {
                 get { return string.Empty; }
             }
 
-            public override void PushScope() { }
+            public override void PushScope()
+            {
+            }
 
             public override bool PopScope()
             {
                 return false;
             }
 
-            public override void AddNamespace(string prefix, string uri) { }
+            public override void AddNamespace(string prefix, string uri)
+            {
+            }
 
-            public override void RemoveNamespace(string prefix, string uri) { }
+            public override void RemoveNamespace(string prefix, string uri)
+            {
+            }
 
             public override IEnumerator GetEnumerator()
             {

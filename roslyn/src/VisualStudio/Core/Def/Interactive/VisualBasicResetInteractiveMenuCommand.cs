@@ -28,7 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                 monitorSelection,
                 componentModel,
                 threadingContext
-            ) { }
+            )
+        {
+        }
 
         protected override string ProjectKind => VSLangProj.PrjKind.prjKindVBProject;
 

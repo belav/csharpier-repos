@@ -22,7 +22,9 @@ namespace System.Linq.Expressions.Tests
     {
         public static readonly ITypeFactory Instance = new DefaultTypeFactory();
 
-        protected DefaultTypeFactory() { }
+        protected DefaultTypeFactory()
+        {
+        }
 
 #if GETTYPEFROMHANDLEUNSAFE
         private static readonly MethodInfo s_GetTypeFromHandleUnsafe = typeof(Type).GetMethodAssert(
@@ -73,37 +75,71 @@ static class UnknownTypeFactory
 }
 
 // NB: Putting these in the global namespace in order to make their type name as short as possible when printed
-class Unknown { }
+class Unknown
+{
+}
 
-class Unknown<T1> { }
+class Unknown<T1>
+{
+}
 
-class Unknown<T1, T2> { }
+class Unknown<T1, T2>
+{
+}
 
-class Unknown<T1, T2, T3> { }
+class Unknown<T1, T2, T3>
+{
+}
 
-class Unknown<T1, T2, T3, T4> { }
+class Unknown<T1, T2, T3, T4>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5> { }
+class Unknown<T1, T2, T3, T4, T5>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6> { }
+class Unknown<T1, T2, T3, T4, T5, T6>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
+{
+}
 
-class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> { }
+class Unknown<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
+{
+}
 #endif

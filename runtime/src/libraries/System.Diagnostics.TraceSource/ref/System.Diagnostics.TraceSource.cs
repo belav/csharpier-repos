@@ -10,73 +10,109 @@ namespace System.Diagnostics
     public partial class BooleanSwitch : System.Diagnostics.Switch
     {
         public BooleanSwitch(string displayName, string? description)
-            : base(default(string), default(string)) { }
+            : base(default(string), default(string))
+        {
+        }
 
         public BooleanSwitch(string displayName, string? description, string defaultSwitchValue)
-            : base(default(string), default(string)) { }
+            : base(default(string), default(string))
+        {
+        }
 
         public bool Enabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void OnValueChanged() { }
+        protected override void OnValueChanged()
+        {
+        }
     }
 
     public partial class CorrelationManager
     {
-        internal CorrelationManager() { }
+        internal CorrelationManager()
+        {
+        }
 
         public System.Guid ActivityId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Stack LogicalOperationStack
         {
             get { throw null; }
         }
 
-        public void StartLogicalOperation() { }
+        public void StartLogicalOperation()
+        {
+        }
 
-        public void StartLogicalOperation(object operationId) { }
+        public void StartLogicalOperation(object operationId)
+        {
+        }
 
-        public void StopLogicalOperation() { }
+        public void StopLogicalOperation()
+        {
+        }
     }
 
     public partial class DefaultTraceListener : System.Diagnostics.TraceListener
     {
-        public DefaultTraceListener() { }
+        public DefaultTraceListener()
+        {
+        }
 
         public bool AssertUiEnabled
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? LogFileName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void Fail(string? message) { }
+        public override void Fail(string? message)
+        {
+        }
 
-        public override void Fail(string? message, string? detailMessage) { }
+        public override void Fail(string? message, string? detailMessage)
+        {
+        }
 
-        public override void Write(string? message) { }
+        public override void Write(string? message)
+        {
+        }
 
-        public override void WriteLine(string? message) { }
+        public override void WriteLine(string? message)
+        {
+        }
     }
 
     public partial class EventTypeFilter : System.Diagnostics.TraceFilter
     {
-        public EventTypeFilter(System.Diagnostics.SourceLevels level) { }
+        public EventTypeFilter(System.Diagnostics.SourceLevels level)
+        {
+        }
 
         public System.Diagnostics.SourceLevels EventType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool ShouldTrace(
@@ -97,7 +133,9 @@ namespace System.Diagnostics
 
     public sealed partial class InitializingSwitchEventArgs : System.EventArgs
     {
-        public InitializingSwitchEventArgs(System.Diagnostics.Switch @switch) { }
+        public InitializingSwitchEventArgs(System.Diagnostics.Switch @switch)
+        {
+        }
 
         public System.Diagnostics.Switch Switch
         {
@@ -107,7 +145,9 @@ namespace System.Diagnostics
 
     public sealed partial class InitializingTraceSourceEventArgs : System.EventArgs
     {
-        public InitializingTraceSourceEventArgs(System.Diagnostics.TraceSource traceSource) { }
+        public InitializingTraceSourceEventArgs(System.Diagnostics.TraceSource traceSource)
+        {
+        }
 
         public System.Diagnostics.TraceSource TraceSource
         {
@@ -116,18 +156,24 @@ namespace System.Diagnostics
         public bool WasInitialized
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class SourceFilter : System.Diagnostics.TraceFilter
     {
-        public SourceFilter(string source) { }
+        public SourceFilter(string source)
+        {
+        }
 
         public string Source
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override bool ShouldTrace(
@@ -165,18 +211,26 @@ namespace System.Diagnostics
 
     public partial class SourceSwitch : System.Diagnostics.Switch
     {
-        public SourceSwitch(string name) : base(default(string), default(string)) { }
+        public SourceSwitch(string name) : base(default(string), default(string))
+        {
+        }
 
         public SourceSwitch(string displayName, string defaultSwitchValue)
-            : base(default(string), default(string)) { }
+            : base(default(string), default(string))
+        {
+        }
 
         public System.Diagnostics.SourceLevels Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void OnValueChanged() { }
+        protected override void OnValueChanged()
+        {
+        }
 
         public bool ShouldTrace(System.Diagnostics.TraceEventType eventType)
         {
@@ -186,9 +240,13 @@ namespace System.Diagnostics
 
     public abstract partial class Switch
     {
-        protected Switch(string displayName, string? description) { }
+        protected Switch(string displayName, string? description)
+        {
+        }
 
-        protected Switch(string displayName, string? description, string defaultSwitchValue) { }
+        protected Switch(string displayName, string? description, string defaultSwitchValue)
+        {
+        }
 
         public System.Collections.Specialized.StringDictionary Attributes
         {
@@ -208,18 +266,26 @@ namespace System.Diagnostics
         }
         public static event System.EventHandler<System.Diagnostics.InitializingSwitchEventArgs>? Initializing
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         protected int SwitchSetting
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         protected virtual string[]? GetSupportedAttributes()
@@ -227,11 +293,17 @@ namespace System.Diagnostics
             throw null;
         }
 
-        protected virtual void OnSwitchSettingChanged() { }
+        protected virtual void OnSwitchSettingChanged()
+        {
+        }
 
-        protected virtual void OnValueChanged() { }
+        protected virtual void OnValueChanged()
+        {
+        }
 
-        public void Refresh() { }
+        public void Refresh()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -244,22 +316,30 @@ namespace System.Diagnostics
     )]
     public sealed partial class SwitchAttribute : System.Attribute
     {
-        public SwitchAttribute(string switchName, System.Type switchType) { }
+        public SwitchAttribute(string switchName, System.Type switchType)
+        {
+        }
 
         public string? SwitchDescription
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SwitchName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Type SwitchType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
@@ -276,23 +356,31 @@ namespace System.Diagnostics
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
     public sealed partial class SwitchLevelAttribute : System.Attribute
     {
-        public SwitchLevelAttribute(System.Type switchLevelType) { }
+        public SwitchLevelAttribute(System.Type switchLevelType)
+        {
+        }
 
         public System.Type SwitchLevelType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public sealed partial class Trace
     {
-        internal Trace() { }
+        internal Trace()
+        {
+        }
 
         public static bool AutoFlush
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Diagnostics.CorrelationManager CorrelationManager
         {
@@ -301,12 +389,16 @@ namespace System.Diagnostics
         public static int IndentLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static int IndentSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Diagnostics.TraceListenerCollection Listeners
         {
@@ -315,126 +407,198 @@ namespace System.Diagnostics
         public static bool UseGlobalLock
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Assert(bool condition) { }
+        public static void Assert(bool condition)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Assert(bool condition, string? message) { }
+        public static void Assert(bool condition, string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Assert(bool condition, string? message, string? detailMessage) { }
+        public static void Assert(bool condition, string? message, string? detailMessage)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Close() { }
+        public static void Close()
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Fail(string? message) { }
+        public static void Fail(string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Fail(string? message, string? detailMessage) { }
+        public static void Fail(string? message, string? detailMessage)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Flush() { }
+        public static void Flush()
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Indent() { }
+        public static void Indent()
+        {
+        }
 
-        public static void Refresh() { }
+        public static void Refresh()
+        {
+        }
 
         public static event System.EventHandler? Refreshing
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void TraceError(string? message) { }
+        public static void TraceError(string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
         public static void TraceError(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("CompositeFormat")]
                 string format,
             params object?[]? args
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void TraceInformation(string? message) { }
+        public static void TraceInformation(string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
         public static void TraceInformation(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("CompositeFormat")]
                 string format,
             params object?[]? args
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void TraceWarning(string? message) { }
+        public static void TraceWarning(string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
         public static void TraceWarning(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("CompositeFormat")]
                 string format,
             params object?[]? args
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Unindent() { }
+        public static void Unindent()
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Write(object? value) { }
+        public static void Write(object? value)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Write(object? value, string? category) { }
+        public static void Write(object? value, string? category)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Write(string? message) { }
+        public static void Write(string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void Write(string? message, string? category) { }
+        public static void Write(string? message, string? category)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteIf(bool condition, object? value) { }
+        public static void WriteIf(bool condition, object? value)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteIf(bool condition, object? value, string? category) { }
+        public static void WriteIf(bool condition, object? value, string? category)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteIf(bool condition, string? message) { }
+        public static void WriteIf(bool condition, string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteIf(bool condition, string? message, string? category) { }
+        public static void WriteIf(bool condition, string? message, string? category)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLine(object? value) { }
+        public static void WriteLine(object? value)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLine(object? value, string? category) { }
+        public static void WriteLine(object? value, string? category)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLine(string? message) { }
+        public static void WriteLine(string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLine(string? message, string? category) { }
+        public static void WriteLine(string? message, string? category)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLineIf(bool condition, object? value) { }
+        public static void WriteLineIf(bool condition, object? value)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLineIf(bool condition, object? value, string? category) { }
+        public static void WriteLineIf(bool condition, object? value, string? category)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLineIf(bool condition, string? message) { }
+        public static void WriteLineIf(bool condition, string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public static void WriteLineIf(bool condition, string? message, string? category) { }
+        public static void WriteLineIf(bool condition, string? message, string? category)
+        {
+        }
     }
 
     public partial class TraceEventCache
     {
-        public TraceEventCache() { }
+        public TraceEventCache()
+        {
+        }
 
         public string Callstack
         {
@@ -478,7 +642,9 @@ namespace System.Diagnostics
 
     public abstract partial class TraceFilter
     {
-        protected TraceFilter() { }
+        protected TraceFilter()
+        {
+        }
 
         public abstract bool ShouldTrace(
             System.Diagnostics.TraceEventCache? cache,
@@ -504,9 +670,13 @@ namespace System.Diagnostics
 
     public abstract partial class TraceListener : System.MarshalByRefObject, System.IDisposable
     {
-        protected TraceListener() { }
+        protected TraceListener()
+        {
+        }
 
-        protected TraceListener(string? name) { }
+        protected TraceListener(string? name)
+        {
+        }
 
         public System.Collections.Specialized.StringDictionary Attributes
         {
@@ -515,17 +685,23 @@ namespace System.Diagnostics
         public System.Diagnostics.TraceFilter? Filter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int IndentLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int IndentSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual bool IsThreadSafe
         {
@@ -536,30 +712,48 @@ namespace System.Diagnostics
         public virtual string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected bool NeedIndent
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.TraceOptions TraceOutputOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public virtual void Close() { }
+        public virtual void Close()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public virtual void Fail(string? message) { }
+        public virtual void Fail(string? message)
+        {
+        }
 
-        public virtual void Fail(string? message, string? detailMessage) { }
+        public virtual void Fail(string? message, string? detailMessage)
+        {
+        }
 
-        public virtual void Flush() { }
+        public virtual void Flush()
+        {
+        }
 
         protected virtual string[]? GetSupportedAttributes()
         {
@@ -572,7 +766,9 @@ namespace System.Diagnostics
             System.Diagnostics.TraceEventType eventType,
             int id,
             object? data
-        ) { }
+        )
+        {
+        }
 
         public virtual void TraceData(
             System.Diagnostics.TraceEventCache? eventCache,
@@ -580,14 +776,18 @@ namespace System.Diagnostics
             System.Diagnostics.TraceEventType eventType,
             int id,
             params object?[]? data
-        ) { }
+        )
+        {
+        }
 
         public virtual void TraceEvent(
             System.Diagnostics.TraceEventCache? eventCache,
             string source,
             System.Diagnostics.TraceEventType eventType,
             int id
-        ) { }
+        )
+        {
+        }
 
         public virtual void TraceEvent(
             System.Diagnostics.TraceEventCache? eventCache,
@@ -595,7 +795,9 @@ namespace System.Diagnostics
             System.Diagnostics.TraceEventType eventType,
             int id,
             string? message
-        ) { }
+        )
+        {
+        }
 
         public virtual void TraceEvent(
             System.Diagnostics.TraceEventCache? eventCache,
@@ -605,7 +807,9 @@ namespace System.Diagnostics
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("CompositeFormat")]
                 string? format,
             params object?[]? args
-        ) { }
+        )
+        {
+        }
 
         public virtual void TraceTransfer(
             System.Diagnostics.TraceEventCache? eventCache,
@@ -613,25 +817,41 @@ namespace System.Diagnostics
             int id,
             string? message,
             System.Guid relatedActivityId
-        ) { }
+        )
+        {
+        }
 
-        public virtual void Write(object? o) { }
+        public virtual void Write(object? o)
+        {
+        }
 
-        public virtual void Write(object? o, string? category) { }
+        public virtual void Write(object? o, string? category)
+        {
+        }
 
         public abstract void Write(string? message);
 
-        public virtual void Write(string? message, string? category) { }
+        public virtual void Write(string? message, string? category)
+        {
+        }
 
-        protected virtual void WriteIndent() { }
+        protected virtual void WriteIndent()
+        {
+        }
 
-        public virtual void WriteLine(object? o) { }
+        public virtual void WriteLine(object? o)
+        {
+        }
 
-        public virtual void WriteLine(object? o, string? category) { }
+        public virtual void WriteLine(object? o, string? category)
+        {
+        }
 
         public abstract void WriteLine(string? message);
 
-        public virtual void WriteLine(string? message, string? category) { }
+        public virtual void WriteLine(string? message, string? category)
+        {
+        }
     }
 
     public partial class TraceListenerCollection
@@ -639,7 +859,9 @@ namespace System.Diagnostics
             System.Collections.IEnumerable,
             System.Collections.IList
     {
-        internal TraceListenerCollection() { }
+        internal TraceListenerCollection()
+        {
+        }
 
         public int Count
         {
@@ -648,7 +870,9 @@ namespace System.Diagnostics
         public System.Diagnostics.TraceListener this[int i]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Diagnostics.TraceListener? this[string name]
         {
@@ -673,7 +897,9 @@ namespace System.Diagnostics
         object? System.Collections.IList.this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Diagnostics.TraceListener listener)
@@ -681,18 +907,26 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void AddRange(System.Diagnostics.TraceListenerCollection value) { }
+        public void AddRange(System.Diagnostics.TraceListenerCollection value)
+        {
+        }
 
-        public void AddRange(System.Diagnostics.TraceListener[] value) { }
+        public void AddRange(System.Diagnostics.TraceListener[] value)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool Contains(System.Diagnostics.TraceListener? listener)
         {
             throw null;
         }
 
-        public void CopyTo(System.Diagnostics.TraceListener[] listeners, int index) { }
+        public void CopyTo(System.Diagnostics.TraceListener[] listeners, int index)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -704,15 +938,25 @@ namespace System.Diagnostics
             throw null;
         }
 
-        public void Insert(int index, System.Diagnostics.TraceListener listener) { }
+        public void Insert(int index, System.Diagnostics.TraceListener listener)
+        {
+        }
 
-        public void Remove(System.Diagnostics.TraceListener? listener) { }
+        public void Remove(System.Diagnostics.TraceListener? listener)
+        {
+        }
 
-        public void Remove(string name) { }
+        public void Remove(string name)
+        {
+        }
 
-        public void RemoveAt(int index) { }
+        public void RemoveAt(int index)
+        {
+        }
 
-        void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+        void System.Collections.ICollection.CopyTo(System.Array array, int index)
+        {
+        }
 
         int System.Collections.IList.Add(object? value)
         {
@@ -729,9 +973,13 @@ namespace System.Diagnostics
             throw null;
         }
 
-        void System.Collections.IList.Insert(int index, object? value) { }
+        void System.Collections.IList.Insert(int index, object? value)
+        {
+        }
 
-        void System.Collections.IList.Remove(object? value) { }
+        void System.Collections.IList.Remove(object? value)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -748,9 +996,13 @@ namespace System.Diagnostics
 
     public partial class TraceSource
     {
-        public TraceSource(string name) { }
+        public TraceSource(string name)
+        {
+        }
 
-        public TraceSource(string name, System.Diagnostics.SourceLevels defaultLevel) { }
+        public TraceSource(string name, System.Diagnostics.SourceLevels defaultLevel)
+        {
+        }
 
         public System.Collections.Specialized.StringDictionary Attributes
         {
@@ -762,8 +1014,12 @@ namespace System.Diagnostics
         }
         public static event System.EventHandler<System.Diagnostics.InitializingTraceSourceEventArgs>? Initializing
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public System.Diagnostics.TraceListenerCollection Listeners
         {
@@ -776,12 +1032,18 @@ namespace System.Diagnostics
         public System.Diagnostics.SourceSwitch Switch
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Flush() { }
+        public void Flush()
+        {
+        }
 
         protected virtual string[]? GetSupportedAttributes()
         {
@@ -789,24 +1051,28 @@ namespace System.Diagnostics
         }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public void TraceData(System.Diagnostics.TraceEventType eventType, int id, object? data) { }
+        public void TraceData(System.Diagnostics.TraceEventType eventType, int id, object? data)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
         public void TraceData(
             System.Diagnostics.TraceEventType eventType,
             int id,
             params object?[]? data
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public void TraceEvent(System.Diagnostics.TraceEventType eventType, int id) { }
+        public void TraceEvent(System.Diagnostics.TraceEventType eventType, int id)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public void TraceEvent(
-            System.Diagnostics.TraceEventType eventType,
-            int id,
-            string? message
-        ) { }
+        public void TraceEvent(System.Diagnostics.TraceEventType eventType, int id, string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
         public void TraceEvent(
@@ -815,35 +1081,49 @@ namespace System.Diagnostics
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("CompositeFormat")]
                 string? format,
             params object?[]? args
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public void TraceInformation(string? message) { }
+        public void TraceInformation(string? message)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
         public void TraceInformation(
             [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("CompositeFormat")]
                 string? format,
             params object?[]? args
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("TRACE")]
-        public void TraceTransfer(int id, string? message, System.Guid relatedActivityId) { }
+        public void TraceTransfer(int id, string? message, System.Guid relatedActivityId)
+        {
+        }
     }
 
     [System.Diagnostics.SwitchLevelAttribute(typeof(System.Diagnostics.TraceLevel))]
     public partial class TraceSwitch : System.Diagnostics.Switch
     {
         public TraceSwitch(string displayName, string? description)
-            : base(default(string), default(string)) { }
+            : base(default(string), default(string))
+        {
+        }
 
         public TraceSwitch(string displayName, string? description, string defaultSwitchValue)
-            : base(default(string), default(string)) { }
+            : base(default(string), default(string))
+        {
+        }
 
         public System.Diagnostics.TraceLevel Level
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool TraceError
         {
@@ -862,8 +1142,12 @@ namespace System.Diagnostics
             get { throw null; }
         }
 
-        protected override void OnSwitchSettingChanged() { }
+        protected override void OnSwitchSettingChanged()
+        {
+        }
 
-        protected override void OnValueChanged() { }
+        protected override void OnValueChanged()
+        {
+        }
     }
 }

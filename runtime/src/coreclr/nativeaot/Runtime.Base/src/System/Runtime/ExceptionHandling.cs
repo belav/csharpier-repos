@@ -128,7 +128,9 @@ namespace System.Runtime
 #else
         [StructLayout(LayoutKind.Explicit, Size = 0x10)] // this is small enough that it should trip an assert in RhpCopyContextFromExInfo
 #endif
-        private struct OSCONTEXT { }
+        private struct OSCONTEXT
+        {
+        }
 
         internal static unsafe void* PointerAlign(void* ptr, int alignmentInBytes)
         {

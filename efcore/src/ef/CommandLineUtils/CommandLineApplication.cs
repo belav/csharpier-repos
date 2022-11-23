@@ -59,7 +59,13 @@ internal class CommandLineApplication
     public string? ArgumentSeparatorHelpText { get; set; }
 
     public CommandLineApplication Command(string name, bool throwOnUnexpectedArg = true) =>
-        Command(name, _ => { }, throwOnUnexpectedArg);
+        Command(
+            name,
+            _ =>
+            {
+            },
+            throwOnUnexpectedArg
+        );
 
     public CommandLineApplication Command(
         string name,
@@ -81,7 +87,15 @@ internal class CommandLineApplication
         string template,
         string? description,
         CommandOptionType optionType
-    ) => Option(template, description, optionType, _ => { });
+    ) =>
+        Option(
+            template,
+            description,
+            optionType,
+            _ =>
+            {
+            }
+        );
 
     public CommandOption Option(
         string template,
@@ -97,7 +111,14 @@ internal class CommandLineApplication
     }
 
     public CommandArgument Argument(string name, string description, bool multipleValues = false) =>
-        Argument(name, description, _ => { }, multipleValues);
+        Argument(
+            name,
+            description,
+            _ =>
+            {
+            },
+            multipleValues
+        );
 
     public CommandArgument Argument(
         string name,

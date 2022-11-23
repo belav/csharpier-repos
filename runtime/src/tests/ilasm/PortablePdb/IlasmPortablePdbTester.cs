@@ -398,6 +398,8 @@ namespace IlasmPortablePdbTests
             }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

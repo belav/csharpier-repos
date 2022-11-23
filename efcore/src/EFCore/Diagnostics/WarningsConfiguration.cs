@@ -36,7 +36,9 @@ public class WarningsConfiguration
     /// <summary>
     ///     Creates a new, empty configuration, with all options set to their defaults.
     /// </summary>
-    public WarningsConfiguration() { }
+    public WarningsConfiguration()
+    {
+    }
 
     /// <summary>
     ///     Called by a derived class constructor when implementing the <see cref="Clone" /> method.

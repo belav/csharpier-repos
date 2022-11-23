@@ -10,6 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
             Uri absoluteUri,
             Version majorRevision,
             DayOfWeek sunday
-        ) { }
+        )
+        {
+        }
     }
 }

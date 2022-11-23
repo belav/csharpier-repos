@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class MusicStoreSqliteTest : MusicStoreTestBase<MusicStoreSqliteTest.MusicStoreSqliteFixture>
 {
-    public MusicStoreSqliteTest(MusicStoreSqliteFixture fixture) : base(fixture) { }
+    public MusicStoreSqliteTest(MusicStoreSqliteFixture fixture) : base(fixture)
+    {
+    }
 
     public class MusicStoreSqliteFixture : MusicStoreFixtureBase
     {

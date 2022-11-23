@@ -121,7 +121,9 @@ namespace Microsoft.CodeAnalysis
             InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
             Guid("7c23ff90-33af-11d3-95da-00a024a85b51")
         ]
-        internal interface IApplicationContext { }
+        internal interface IApplicationContext
+        {
+        }
 
         // NOTE: The CLR caches assembly identities, but doesn't do so in a threadsafe manner.
         // Wrap all calls to this with a lock.

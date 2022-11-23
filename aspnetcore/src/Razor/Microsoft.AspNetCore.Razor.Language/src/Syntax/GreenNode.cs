@@ -36,7 +36,9 @@ internal abstract class GreenNode
         SyntaxKind kind,
         RazorDiagnostic[] diagnostics,
         SyntaxAnnotation[] annotations
-    ) : this(kind, 0, diagnostics, annotations) { }
+    ) : this(kind, 0, diagnostics, annotations)
+    {
+    }
 
     protected GreenNode(
         SyntaxKind kind,

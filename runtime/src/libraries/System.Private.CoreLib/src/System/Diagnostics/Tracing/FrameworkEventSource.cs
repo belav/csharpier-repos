@@ -36,7 +36,9 @@ namespace System.Diagnostics.Tracing
 
         // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating the default constructor
         // as you can't make a constructor partial.
-        private FrameworkEventSource(int _) { }
+        private FrameworkEventSource(int _)
+        {
+        }
 
         // optimized for common signatures (used by the ThreadTransferSend/Receive events)
         [UnconditionalSuppressMessage(

@@ -1194,7 +1194,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 type.ReportDiagnosticsIfObsoleteCore(binder, syntax, diagnostics);
             }
 
-            internal override void TryForceResolve(bool asValueType) { }
+            internal override void TryForceResolve(bool asValueType)
+            {
+            }
         }
 
         /// <summary>

@@ -10,7 +10,9 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideInvokeBinder : InvokeBinder
         {
-            public MinimumOverrideInvokeBinder(CallInfo callInfo) : base(callInfo) { }
+            public MinimumOverrideInvokeBinder(CallInfo callInfo) : base(callInfo)
+            {
+            }
 
             public override DynamicMetaObject FallbackInvoke(
                 DynamicMetaObject target,

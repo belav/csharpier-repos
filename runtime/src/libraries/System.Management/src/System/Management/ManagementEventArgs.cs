@@ -5,7 +5,9 @@ namespace System.Management
 {
     internal sealed class IdentifierChangedEventArgs : EventArgs
     {
-        internal IdentifierChangedEventArgs() { }
+        internal IdentifierChangedEventArgs()
+        {
+        }
     }
 
     internal sealed class InternalObjectPutEventArgs : EventArgs

@@ -18,7 +18,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     (options) => new UnsupportedTypesTestsContext_Metadata(options)
                 ),
                 supportsJsonPathOnSerialize: true
-            ) { }
+            )
+        {
+        }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         // Supported types:
@@ -45,8 +47,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassThatImplementsIAsyncEnumerable))]
         [JsonSerializable(typeof(ClassWithType<ClassThatImplementsIAsyncEnumerable>))]
         [JsonSerializable(typeof(ClassWithAsyncEnumerableConverter))]
-        internal sealed partial class UnsupportedTypesTestsContext_Metadata
-            : JsonSerializerContext { }
+        internal sealed partial class UnsupportedTypesTestsContext_Metadata : JsonSerializerContext
+        {
+        }
     }
 
     public sealed partial class UnsupportedTypesTests_Default : UnsupportedTypesTests
@@ -58,7 +61,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     (options) => new UnsupportedTypesTestsContext_Default(options)
                 ),
                 supportsJsonPathOnSerialize: false
-            ) { }
+            )
+        {
+        }
 
         // Supported types:
         [JsonSerializable(typeof(int))]
@@ -84,7 +89,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassThatImplementsIAsyncEnumerable))]
         [JsonSerializable(typeof(ClassWithType<ClassThatImplementsIAsyncEnumerable>))]
         [JsonSerializable(typeof(ClassWithAsyncEnumerableConverter))]
-        internal sealed partial class UnsupportedTypesTestsContext_Default
-            : JsonSerializerContext { }
+        internal sealed partial class UnsupportedTypesTestsContext_Default : JsonSerializerContext
+        {
+        }
     }
 }

@@ -170,7 +170,9 @@ public class WebAssemblyHostBuilderTest
 
     private class TestServiceThatTakesStringBuilder
     {
-        public TestServiceThatTakesStringBuilder(StringBuilder builder) { }
+        public TestServiceThatTakesStringBuilder(StringBuilder builder)
+        {
+        }
     }
 
     private class MyFakeDIBuilderThing

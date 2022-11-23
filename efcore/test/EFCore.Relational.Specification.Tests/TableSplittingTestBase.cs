@@ -821,7 +821,9 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
     protected class Context29196 : DbContext
     {
-        public Context29196(DbContextOptions options) : base(options) { }
+        public Context29196(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Order> Orders => Set<Order>();
 
@@ -983,7 +985,9 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
     protected class SharedTableContext : PoolableDbContext
     {
-        public SharedTableContext(DbContextOptions options) : base(options) { }
+        public SharedTableContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<MeterReading> MeterReadings { get; set; }
         public DbSet<MeterReadingDetail> MeterReadingDetails { get; set; }

@@ -574,7 +574,9 @@ namespace System.Xml.ReaderSettingsTests
                 settings.ConformanceLevel = (ConformanceLevel)666;
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
 
             return TEST_PASS;
         }

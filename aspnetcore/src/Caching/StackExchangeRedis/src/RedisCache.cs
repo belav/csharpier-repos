@@ -78,7 +78,9 @@ public partial class RedisCache : IDistributedCache, IDisposable
         : this(
             optionsAccessor,
             Logging.Abstractions.NullLoggerFactory.Instance.CreateLogger<RedisCache>()
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="RedisCache"/>.

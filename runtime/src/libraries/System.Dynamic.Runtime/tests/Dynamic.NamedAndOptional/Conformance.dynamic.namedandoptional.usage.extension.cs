@@ -18,7 +18,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -68,7 +70,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -104,7 +108,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -156,7 +162,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -197,7 +205,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -254,7 +264,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -295,7 +307,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -350,7 +364,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -405,7 +421,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -460,7 +478,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -499,7 +519,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -554,7 +576,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -596,7 +620,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -654,7 +680,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -712,7 +740,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -764,7 +794,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -816,7 +848,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -852,7 +886,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -891,7 +927,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {
@@ -946,7 +984,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 
-    public class Parent { }
+    public class Parent
+    {
+    }
 
     public class Test
     {

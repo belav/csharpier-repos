@@ -11,22 +11,36 @@ namespace System.Net.Mail
     {
         private LinkedResourceCollection? _linkedResources;
 
-        internal AlternateView() { }
+        internal AlternateView()
+        {
+        }
 
-        public AlternateView(string fileName) : base(fileName) { }
+        public AlternateView(string fileName) : base(fileName)
+        {
+        }
 
-        public AlternateView(string fileName, string? mediaType) : base(fileName, mediaType) { }
+        public AlternateView(string fileName, string? mediaType) : base(fileName, mediaType)
+        {
+        }
 
         public AlternateView(string fileName, ContentType? contentType)
-            : base(fileName, contentType) { }
+            : base(fileName, contentType)
+        {
+        }
 
-        public AlternateView(Stream contentStream) : base(contentStream) { }
+        public AlternateView(Stream contentStream) : base(contentStream)
+        {
+        }
 
         public AlternateView(Stream contentStream, string? mediaType)
-            : base(contentStream, mediaType) { }
+            : base(contentStream, mediaType)
+        {
+        }
 
         public AlternateView(Stream contentStream, ContentType? contentType)
-            : base(contentStream, contentType) { }
+            : base(contentStream, contentType)
+        {
+        }
 
         public LinkedResourceCollection LinkedResources
         {

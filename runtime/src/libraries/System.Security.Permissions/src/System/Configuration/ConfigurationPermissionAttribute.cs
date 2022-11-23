@@ -17,7 +17,9 @@ namespace System.Configuration
     public sealed class ConfigurationPermissionAttribute : CodeAccessSecurityAttribute
     {
         public ConfigurationPermissionAttribute(SecurityAction action)
-            : base(default(SecurityAction)) { }
+            : base(default(SecurityAction))
+        {
+        }
 
         public override IPermission CreatePermission()
         {

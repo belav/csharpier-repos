@@ -41,7 +41,9 @@ namespace System
 #endif
     sealed class ObsoleteAttribute : Attribute
     {
-        public ObsoleteAttribute() { }
+        public ObsoleteAttribute()
+        {
+        }
 
         public ObsoleteAttribute(string? message)
         {

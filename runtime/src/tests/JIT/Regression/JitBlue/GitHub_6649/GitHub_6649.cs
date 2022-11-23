@@ -25,7 +25,9 @@ namespace N
                 Exn();
                 return -1;
             }
-            catch (System.IndexOutOfRangeException) { }
+            catch (System.IndexOutOfRangeException)
+            {
+            }
             return 100;
         }
     }

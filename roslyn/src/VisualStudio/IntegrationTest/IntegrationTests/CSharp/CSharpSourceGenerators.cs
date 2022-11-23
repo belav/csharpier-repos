@@ -28,7 +28,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
                 instanceFactory,
                 nameof(CSharpSourceGenerators),
                 WellKnownProjectTemplates.ConsoleApplication
-            ) { }
+            )
+        {
+        }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

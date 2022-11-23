@@ -36,10 +36,9 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             testOperation2
         );
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected abstract TestHelpers TestHelpers { get; }
 
@@ -57,7 +56,9 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         public string Name { get; set; }
     }
 
-    protected class Employee : Person { }
+    protected class Employee : Person
+    {
+    }
 
     [ConditionalFact]
     public virtual void Explicit_configuration_on_derived_type_overrides_annotation_on_unmapped_base_type()
@@ -211,7 +212,9 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         public int Id { get; set; }
     }
 
-    protected class NotMappedDerived : NotMappedBase { }
+    protected class NotMappedDerived : NotMappedBase
+    {
+    }
 
     [ConditionalFact]
     public virtual void NotMapped_on_base_class_property_ignores_it()
@@ -1757,9 +1760,13 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         public virtual Answer Answer { get; set; }
     }
 
-    private class PartialAnswer : PartialAnswerBase { }
+    private class PartialAnswer : PartialAnswerBase
+    {
+    }
 
-    private class PartialAnswerRepeating : PartialAnswerBase { }
+    private class PartialAnswerRepeating : PartialAnswerBase
+    {
+    }
 
     private class MultipleAnswers : Answer
     {
@@ -2286,7 +2293,9 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         public Book ExtraSpecialBook { get; set; }
     }
 
-    protected class AnotherBookLabel : BookLabel { }
+    protected class AnotherBookLabel : BookLabel
+    {
+    }
 
     [ConditionalFact]
     public virtual void InversePropertyAttribute_removes_ambiguity_when_combined_with_other_attributes()
@@ -2472,7 +2481,9 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         public virtual AnswerBaseInverse Answer { get; set; }
     }
 
-    private class PartialAnswerRepeatingInverse : PartialAnswerInverse { }
+    private class PartialAnswerRepeatingInverse : PartialAnswerInverse
+    {
+    }
 
     private abstract class AnswerBaseInverse
     {

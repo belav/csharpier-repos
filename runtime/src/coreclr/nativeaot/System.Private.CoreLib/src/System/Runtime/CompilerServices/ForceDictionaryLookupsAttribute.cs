@@ -10,5 +10,7 @@ namespace System.Runtime.CompilerServices
         Inherited = false,
         AllowMultiple = false
     )]
-    public class ForceDictionaryLookupsAttribute : Attribute { }
+    public class ForceDictionaryLookupsAttribute : Attribute
+    {
+    }
 }

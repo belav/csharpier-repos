@@ -95,8 +95,12 @@ namespace System.Net.Http.Json.Functional.Tests
     }
 
     [JsonConverter(typeof(EnsureDefaultOptionsConverter))]
-    internal class EnsureDefaultOptions { }
+    internal class EnsureDefaultOptions
+    {
+    }
 
     [JsonSerializable(typeof(Person))]
-    internal sealed partial class JsonContext : JsonSerializerContext { }
+    internal sealed partial class JsonContext : JsonSerializerContext
+    {
+    }
 }

@@ -176,7 +176,9 @@ namespace System.Xml
             XmlReader reader,
             XmlResolver? xmlResolver,
             XmlReaderSettings readerSettings
-        ) : this(reader, xmlResolver, readerSettings, null) { }
+        ) : this(reader, xmlResolver, readerSettings, null)
+        {
+        }
 
         [MemberNotNull(nameof(_validator))]
         private void SetupValidator(

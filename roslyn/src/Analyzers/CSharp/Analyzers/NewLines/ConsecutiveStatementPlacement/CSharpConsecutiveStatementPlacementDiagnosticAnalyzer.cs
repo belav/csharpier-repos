@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveStatementPlacement
         : AbstractConsecutiveStatementPlacementDiagnosticAnalyzer<StatementSyntax>
     {
         public CSharpConsecutiveStatementPlacementDiagnosticAnalyzer()
-            : base(CSharpSyntaxFacts.Instance) { }
+            : base(CSharpSyntaxFacts.Instance)
+        {
+        }
 
         protected override bool IsBlockLikeStatement(SyntaxNode node) =>
             node is BlockSyntax or SwitchStatementSyntax;

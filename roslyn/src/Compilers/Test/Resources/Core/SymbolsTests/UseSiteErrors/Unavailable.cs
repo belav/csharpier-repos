@@ -4,17 +4,29 @@
 
 //csc /target:library Unavailable.cs
 
-public class UnavailableClass { }
+public class UnavailableClass
+{
+}
 
-public class UnavailableClass<T> { }
+public class UnavailableClass<T>
+{
+}
 
-public struct UnavailableStruct { }
+public struct UnavailableStruct
+{
+}
 
-public struct UnavailableStruct<T> { }
+public struct UnavailableStruct<T>
+{
+}
 
-public interface UnavailableInterface { }
+public interface UnavailableInterface
+{
+}
 
-public interface UnavailableInterface<T> { }
+public interface UnavailableInterface<T>
+{
+}
 
 public delegate void UnavailableDelegate();
 public delegate void UnavailableDelegate<T>();

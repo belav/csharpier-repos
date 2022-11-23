@@ -16,7 +16,9 @@ namespace System.Runtime.Intrinsics.Arm
 #endif
     abstract class AdvSimd : ArmBase
     {
-        internal AdvSimd() { }
+        internal AdvSimd()
+        {
+        }
 
         public static new bool IsSupported
         {
@@ -156,7 +158,9 @@ namespace System.Runtime.Intrinsics.Arm
 
         public new abstract class Arm64 : ArmBase.Arm64
         {
-            internal Arm64() { }
+            internal Arm64()
+            {
+            }
 
             public static new bool IsSupported
             {

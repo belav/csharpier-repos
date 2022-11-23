@@ -33,7 +33,9 @@ public class ReferenceEntry<TEntity, TProperty> : ReferenceEntry
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceEntry(InternalEntityEntry internalEntry, string name)
-        : base(internalEntry, name) { }
+        : base(internalEntry, name)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,7 +45,9 @@ public class ReferenceEntry<TEntity, TProperty> : ReferenceEntry
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceEntry(InternalEntityEntry internalEntry, INavigation navigation)
-        : base(internalEntry, navigation) { }
+        : base(internalEntry, navigation)
+    {
+    }
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.

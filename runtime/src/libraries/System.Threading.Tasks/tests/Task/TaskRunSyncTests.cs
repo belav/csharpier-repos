@@ -219,7 +219,8 @@ namespace System.Threading.Tasks.Tests
             {
                 case PreTaskStatus.Continued:
                     _task = _task.ContinueWith(
-                        (t) => { },
+                        (t) => {
+                        },
                         _cts.Token,
                         TaskContinuationOptions.None,
                         ts
@@ -367,7 +368,12 @@ namespace System.Threading.Tasks.Tests
                     break;
 
                 case PostRunSyncAction.ContinueWith:
-                    _task.ContinueWith((t) => { }).Wait();
+                    _task
+                        .ContinueWith(
+                            (t) => {
+                            }
+                        )
+                        .Wait();
                     break;
             }
 
@@ -396,7 +402,8 @@ namespace System.Threading.Tasks.Tests
                         case WorkloadType.CreateChildTask:
                         case WorkloadType.CreateDetachedChildTask:
                             Task.Factory.StartNew(
-                                () => { },
+                                () => {
+                                },
                                 _workloadType == WorkloadType.CreateDetachedChildTask
                                     ? TaskCreationOptions.None
                                     : TaskCreationOptions.AttachedToParent
@@ -404,14 +411,18 @@ namespace System.Threading.Tasks.Tests
                             break;
 
                         case WorkloadType.ContinueInside:
-                            _task.ContinueWith((t) => { });
+                            _task.ContinueWith(
+                                (t) => {
+                                }
+                            );
                             break;
 
                         case WorkloadType.RunWithUserScheduler:
                             TaskScheduler ts = new TaskRunSyncTaskScheduler(true);
                             Task.Factory
                                 .StartNew(
-                                    () => { },
+                                    () => {
+                                    },
                                     _cts.Token,
                                     TaskCreationOptions.AttachedToParent,
                                     ts

@@ -204,13 +204,21 @@ namespace System.Web.Mvc.Test
         private class MyController : Controller
         {
             [ActionName("NewName")]
-            public void AliasedMethod() { }
+            public void AliasedMethod()
+            {
+            }
 
-            public void NonAliasedMethod() { }
+            public void NonAliasedMethod()
+            {
+            }
 
-            public void GenericMethod<T>() { }
+            public void GenericMethod<T>()
+            {
+            }
 
-            private void PrivateMethod() { }
+            private void PrivateMethod()
+            {
+            }
         }
     }
 }

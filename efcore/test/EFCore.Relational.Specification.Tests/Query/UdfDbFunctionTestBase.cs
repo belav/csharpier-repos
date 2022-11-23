@@ -240,7 +240,9 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
 
         #endregion
 
-        public UDFSqlContext(DbContextOptions options) : base(options) { }
+        public UDFSqlContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -2711,7 +2713,9 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
 
     #endregion
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
     private void AssertTranslationFailed(Action testCode) =>
         Assert.Contains(

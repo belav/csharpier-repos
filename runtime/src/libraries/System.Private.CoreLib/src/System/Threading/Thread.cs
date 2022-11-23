@@ -514,13 +514,21 @@ namespace System.Threading
 
         // Currently, no special handling is done for critical regions, and no special handling is necessary to ensure thread
         // affinity. If that changes, the relevant functions would instead need to delegate to RuntimeThread.
-        public static void BeginCriticalRegion() { }
+        public static void BeginCriticalRegion()
+        {
+        }
 
-        public static void EndCriticalRegion() { }
+        public static void EndCriticalRegion()
+        {
+        }
 
-        public static void BeginThreadAffinity() { }
+        public static void BeginThreadAffinity()
+        {
+        }
 
-        public static void EndThreadAffinity() { }
+        public static void EndThreadAffinity()
+        {
+        }
 
         public static LocalDataStoreSlot AllocateDataSlot() => LocalDataStore.AllocateSlot();
 

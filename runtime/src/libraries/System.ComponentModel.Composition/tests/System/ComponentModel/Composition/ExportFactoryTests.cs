@@ -274,7 +274,9 @@ namespace Tests.Integration
 
         [Export(typeof(Foo))]
         [PartCreationPolicy(CreationPolicy.Shared)]
-        public class SharedFoo : Foo { }
+        public class SharedFoo : Foo
+        {
+        }
 
         [Fact]
         public void ExportFactory_ImportShouldNotImportSharedPart()
@@ -345,7 +347,9 @@ namespace Tests.Integration
         }
 
         [Export]
-        public class SimpleExport { }
+        public class SimpleExport
+        {
+        }
 
         [Fact]
         public void ExportFactory_SimpleRejectionResurrection_ShouldWork()
@@ -369,7 +373,9 @@ namespace Tests.Integration
         }
 
         [Export]
-        class Apple { }
+        class Apple
+        {
+        }
 
         [Export]
         class Tree : IDisposable

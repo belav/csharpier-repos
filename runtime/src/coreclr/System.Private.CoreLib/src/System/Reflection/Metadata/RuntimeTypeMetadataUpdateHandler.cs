@@ -39,7 +39,9 @@ namespace System.Reflection.Metadata
                                 ClearCache(type);
                             }
                         }
-                        catch (ReflectionTypeLoadException) { }
+                        catch (ReflectionTypeLoadException)
+                        {
+                        }
                     }
                 }
             }

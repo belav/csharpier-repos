@@ -12,7 +12,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal partial class VisualStudio_InProc : InProcComponent
     {
-        private VisualStudio_InProc() { }
+        private VisualStudio_InProc()
+        {
+        }
 
         public static VisualStudio_InProc Create() => new VisualStudio_InProc();
 
@@ -41,7 +43,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         result.Add(commandName);
                     }
                 }
-                finally { }
+                finally
+                {
+                }
             }
 
             return result.ToArray();

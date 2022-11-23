@@ -26,24 +26,32 @@ namespace Microsoft.Extensions.Logging.EventSource
     {
         public EventSourceLoggerProvider(
             Microsoft.Extensions.Logging.EventSource.LoggingEventSource eventSource
-        ) { }
+        )
+        {
+        }
 
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName)
         {
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     [System.Diagnostics.Tracing.EventSourceAttribute(Name = "Microsoft-Extensions-Logging")]
     public sealed partial class LoggingEventSource : System.Diagnostics.Tracing.EventSource
     {
-        internal LoggingEventSource() { }
+        internal LoggingEventSource()
+        {
+        }
 
         protected override void OnEventCommand(
             System.Diagnostics.Tracing.EventCommandEventArgs command
-        ) { }
+        )
+        {
+        }
 
         public static partial class Keywords
         {

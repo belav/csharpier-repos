@@ -12,7 +12,9 @@ public class BaseMapWithIncludesAndUnincludedMappings
         public int PropB { get; set; }
     }
 
-    public class BDTO2 : ADTO { }
+    public class BDTO2 : ADTO
+    {
+    }
 
     public class A
     {
@@ -57,7 +59,9 @@ public class BaseMapChildProperty
         public string Name { get; set; }
     }
 
-    public class ProxyOfSubA : SubA { }
+    public class ProxyOfSubA : SubA
+    {
+    }
 
     public class SubA : BaseA
     {

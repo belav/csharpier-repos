@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             IEnumerable<AbstractFormattingRule> formattingRules,
             SyntaxToken startToken,
             SyntaxToken endToken
-        ) : base(TreeData.Create(node), options, formattingRules, startToken, endToken) { }
+        ) : base(TreeData.Create(node), options, formattingRules, startToken, endToken)
+        {
+        }
 
         internal override IHeaderFacts HeaderFacts => CSharpHeaderFacts.Instance;
 

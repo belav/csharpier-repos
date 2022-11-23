@@ -17,13 +17,17 @@ namespace Microsoft.CodeAnalysis.Shared
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that is
         /// empty.
         /// </summary>
-        public NormalizedTextSpanCollection() : base(new List<TextSpan>(0)) { }
+        public NormalizedTextSpanCollection() : base(new List<TextSpan>(0))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified span.
         /// </summary>
         /// <param name="span">TextSpan contained by the span set.</param>
-        public NormalizedTextSpanCollection(TextSpan span) : base(ListFromSpan(span)) { }
+        public NormalizedTextSpanCollection(TextSpan span) : base(ListFromSpan(span))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified list of spans.
@@ -575,7 +579,9 @@ namespace Microsoft.CodeAnalysis.Shared
         /// </summary>
         /// <param name="normalizedSpans">An already normalized span list.</param>
         private NormalizedTextSpanCollection(OrderedSpanList normalizedSpans)
-            : base(normalizedSpans) { }
+            : base(normalizedSpans)
+        {
+        }
 
         private static void UpdateSpanUnion(
             TextSpan span,
@@ -649,7 +655,9 @@ namespace Microsoft.CodeAnalysis.Shared
             }
         }
 
-        private class OrderedSpanList : List<TextSpan> { }
+        private class OrderedSpanList : List<TextSpan>
+        {
+        }
 
         #endregion // Private Helpers
     }

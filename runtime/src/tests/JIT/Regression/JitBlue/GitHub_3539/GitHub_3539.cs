@@ -43,7 +43,9 @@ namespace GitHub_19910
             }
         }
 
-        public class BasicReadWriteBenchmarkBgr : BasicReadWriteBenchmark<Bgr> { }
+        public class BasicReadWriteBenchmarkBgr : BasicReadWriteBenchmark<Bgr>
+        {
+        }
 
         static int Main()
         {

@@ -15,7 +15,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 VisualStudioWorkspaceImpl workspace,
                 DocumentInfo docInfo,
                 SourceText text
-            ) : base(workspace, docInfo, text) { }
+            ) : base(workspace, docInfo, text)
+            {
+            }
 
             protected override Project AddDocument(Project fromProject) =>
                 fromProject

@@ -125,32 +125,46 @@ public class CollectionTypeFactoryTest
         Assert.Null(factory.TryFindTypeToInstantiate(typeof(object), typeof(Random), false));
     }
 
-    private class CustomHashSet : HashSet<Random> { }
+    private class CustomHashSet : HashSet<Random>
+    {
+    }
 
-    private class CustomList : List<Random> { }
+    private class CustomList : List<Random>
+    {
+    }
 
     private class PrivateConstructor : List<Random>
     {
-        private PrivateConstructor() { }
+        private PrivateConstructor()
+        {
+        }
     }
 
     private class InternalConstructor : List<Random>
     {
         // ReSharper disable once EmptyConstructor
-        internal InternalConstructor() { }
+        internal InternalConstructor()
+        {
+        }
     }
 
     private class ProtectedConstructor : List<Random>
     {
-        protected ProtectedConstructor() { }
+        protected ProtectedConstructor()
+        {
+        }
     }
 
     private class NoParameterlessConstructor : List<Random>
     {
-        public NoParameterlessConstructor(bool _) { }
+        public NoParameterlessConstructor(bool _)
+        {
+        }
     }
 
-    private abstract class Abstract : List<Random> { }
+    private abstract class Abstract : List<Random>
+    {
+    }
 
     private class DummyNotifying : INotifyPropertyChanged
     {

@@ -1349,7 +1349,9 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) { }
+        )
+        {
+        }
 
         private static void GroupTypeFromWinNTConverter(
             DirectoryEntry de,
@@ -1385,14 +1387,18 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) { }
+        )
+        {
+        }
 
         private static void LastBadPwdAttemptFromWinNTConverter(
             DirectoryEntry de,
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) { }
+        )
+        {
+        }
 
         private static void ElapsedTimeFromWinNTConverter(
             DirectoryEntry de,

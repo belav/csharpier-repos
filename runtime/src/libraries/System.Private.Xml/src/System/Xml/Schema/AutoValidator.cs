@@ -44,7 +44,9 @@ namespace System.Xml.Schema
             }
         }
 
-        public override void CompleteValidation() { }
+        public override void CompleteValidation()
+        {
+        }
 
         public override object? FindId(string name)
         {

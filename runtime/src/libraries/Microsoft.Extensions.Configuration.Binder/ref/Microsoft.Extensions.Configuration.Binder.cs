@@ -8,17 +8,23 @@ namespace Microsoft.Extensions.Configuration
 {
     public partial class BinderOptions
     {
-        public BinderOptions() { }
+        public BinderOptions()
+        {
+        }
 
         public bool BindNonPublicProperties
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ErrorOnUnknownConfiguration
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -33,7 +39,9 @@ namespace Microsoft.Extensions.Configuration
         public static void Bind(
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             object? instance
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values requires generating dynamic code at runtime, for example instantiating generic types."
@@ -45,7 +53,9 @@ namespace Microsoft.Extensions.Configuration
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             object? instance,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions>? configureOptions
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values requires generating dynamic code at runtime, for example instantiating generic types."
@@ -57,7 +67,9 @@ namespace Microsoft.Extensions.Configuration
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             string key,
             object? instance
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values requires generating dynamic code at runtime, for example instantiating generic types."

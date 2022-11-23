@@ -10,7 +10,9 @@ namespace System.Web.Mvc.Filters
     {
         /// <summary>Initializes a new instance of the <see cref="AuthenticationContext"/> class.</summary>
         /// <remarks>This constructor should only be used for unit testing purposes.</remarks>
-        public AuthenticationContext() { }
+        public AuthenticationContext()
+        {
+        }
 
         /// <summary>Initializes a new instance of the <see cref="AuthenticationContext"/> class.</summary>
         /// <param name="controllerContext">The controller context.</param>

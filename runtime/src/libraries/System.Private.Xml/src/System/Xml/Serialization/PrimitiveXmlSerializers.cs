@@ -263,7 +263,9 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        protected override void InitCallbacks() { }
+        protected override void InitCallbacks()
+        {
+        }
     }
 
     internal sealed class XmlSerializationPrimitiveReader
@@ -877,7 +879,9 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        protected override void InitCallbacks() { }
+        protected override void InitCallbacks()
+        {
+        }
 
         private string _id4_boolean = null!;
         private string _id14_unsignedInt = null!;

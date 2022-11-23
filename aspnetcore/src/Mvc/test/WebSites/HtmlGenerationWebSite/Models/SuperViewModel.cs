@@ -3,4 +3,6 @@
 
 namespace HtmlGenerationWebSite.Models;
 
-public class SuperViewModel : ViewModel { }
+public class SuperViewModel : ViewModel
+{
+}

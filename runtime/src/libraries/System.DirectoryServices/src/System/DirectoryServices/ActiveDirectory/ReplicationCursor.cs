@@ -14,7 +14,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private readonly DirectoryServer _server = null!;
 
-        private ReplicationCursor() { }
+        private ReplicationCursor()
+        {
+        }
 
         internal ReplicationCursor(
             DirectoryServer server,

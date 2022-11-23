@@ -10,7 +10,9 @@ namespace System.Security.Cryptography
 {
     public sealed class Oid
     {
-        public Oid() { }
+        public Oid()
+        {
+        }
 
         public Oid(string oid)
         {

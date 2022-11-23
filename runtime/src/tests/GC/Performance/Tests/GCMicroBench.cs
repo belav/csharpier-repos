@@ -43,10 +43,14 @@ namespace GC_Microbenchmarks
     // the finalizable object that gets allocated
     public class FNode : Node
     {
-        public FNode(int dataSize) : base(dataSize) { }
+        public FNode(int dataSize) : base(dataSize)
+        {
+        }
 
         // puts object on finalization list
-        ~FNode() { }
+        ~FNode()
+        {
+        }
     }
 
     public class GCMicroBench

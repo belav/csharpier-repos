@@ -471,7 +471,9 @@ namespace System.ComponentModel.Tests
 
         private class SubReferenceConverter : ReferenceConverter
         {
-            public SubReferenceConverter(Type type) : base(type) { }
+            public SubReferenceConverter(Type type) : base(type)
+            {
+            }
 
             public List<object> DisallowedValues { get; } = new List<object>();
 
@@ -490,7 +492,9 @@ namespace System.ComponentModel.Tests
             public object Instance => null;
             public PropertyDescriptor PropertyDescriptor => null;
 
-            public void OnComponentChanged() { }
+            public void OnComponentChanged()
+            {
+            }
 
             public bool OnComponentChanging() => true;
 
@@ -563,8 +567,12 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private interface ITestInterface { }
+        private interface ITestInterface
+        {
+        }
 
-        private class TestComponent : Component { }
+        private class TestComponent : Component
+        {
+        }
     }
 }

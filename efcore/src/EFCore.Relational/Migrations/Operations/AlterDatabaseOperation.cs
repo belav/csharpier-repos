@@ -20,5 +20,7 @@ public class AlterDatabaseOperation : DatabaseOperation, IAlterMigrationOperatio
     /// <inheritdoc />
     IMutableAnnotatable IAlterMigrationOperation.OldAnnotations => OldDatabase;
 
-    private sealed class CreateDatabaseOperation : DatabaseOperation { }
+    private sealed class CreateDatabaseOperation : DatabaseOperation
+    {
+    }
 }

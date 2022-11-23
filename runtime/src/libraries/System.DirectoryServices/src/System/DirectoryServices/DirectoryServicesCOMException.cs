@@ -14,15 +14,23 @@ namespace System.DirectoryServices
     )]
     public class DirectoryServicesCOMException : COMException, ISerializable
     {
-        public DirectoryServicesCOMException() { }
+        public DirectoryServicesCOMException()
+        {
+        }
 
-        public DirectoryServicesCOMException(string? message) : base(message) { }
+        public DirectoryServicesCOMException(string? message) : base(message)
+        {
+        }
 
         public DirectoryServicesCOMException(string? message, Exception? inner)
-            : base(message, inner) { }
+            : base(message, inner)
+        {
+        }
 
         protected DirectoryServicesCOMException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         internal DirectoryServicesCOMException(
             string? extendedMessage,

@@ -73,7 +73,9 @@ namespace Moq.Tests.Regressions
         [Serializable]
         public abstract class SerializableWithoutDeserializationConstructor : ISerializable
         {
-            public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
+            public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
+            }
 
             public virtual string SomeString { get; set; }
         }

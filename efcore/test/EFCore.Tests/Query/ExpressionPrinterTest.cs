@@ -30,9 +30,13 @@ public class ExpressionPrinterTest
         );
     }
 
-    private class BaseClass { }
+    private class BaseClass
+    {
+    }
 
-    private class DerivedClass : BaseClass { }
+    private class DerivedClass : BaseClass
+    {
+    }
 
     [ConditionalFact]
     public void BinaryExpression_printed_correctly()

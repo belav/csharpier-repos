@@ -32,12 +32,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private readonly PEMethodSymbol _methodContextOpt;
 
         public MetadataDecoder(PEModuleSymbol moduleSymbol, PENamedTypeSymbol context)
-            : this(moduleSymbol, context, null) { }
+            : this(moduleSymbol, context, null)
+        {
+        }
 
         public MetadataDecoder(PEModuleSymbol moduleSymbol, PEMethodSymbol context)
-            : this(moduleSymbol, (PENamedTypeSymbol)context.ContainingType, context) { }
+            : this(moduleSymbol, (PENamedTypeSymbol)context.ContainingType, context)
+        {
+        }
 
-        public MetadataDecoder(PEModuleSymbol moduleSymbol) : this(moduleSymbol, null, null) { }
+        public MetadataDecoder(PEModuleSymbol moduleSymbol) : this(moduleSymbol, null, null)
+        {
+        }
 
         private MetadataDecoder(
             PEModuleSymbol moduleSymbol,

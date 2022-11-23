@@ -16,10 +16,14 @@ namespace Castle.DynamicProxy.Tests.Interfaces
 {
     using System;
 
-    public interface IEmpty { }
+    public interface IEmpty
+    {
+    }
 
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif
-    public class Empty : IEmpty { }
+    public class Empty : IEmpty
+    {
+    }
 }

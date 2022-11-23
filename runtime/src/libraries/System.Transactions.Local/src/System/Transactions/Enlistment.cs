@@ -354,7 +354,9 @@ namespace System.Transactions
         protected DurableInternalEnlistment(
             Enlistment enlistment,
             IEnlistmentNotification twoPhaseNotifications
-        ) : base(enlistment, twoPhaseNotifications) { }
+        ) : base(enlistment, twoPhaseNotifications)
+        {
+        }
 
         internal override Guid ResourceManagerIdentifier => _resourceManagerIdentifier;
     }
@@ -416,7 +418,9 @@ namespace System.Transactions
                 twoPhaseNotifications,
                 singlePhaseNotifications,
                 atomicTransaction
-            ) { }
+            )
+        {
+        }
 
         internal override void FinishEnlistment()
         {

@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 string simpleAssemblyName,
                 AssemblyIdentityComparer identityComparer,
                 Dictionary<MetadataReference, MetadataOrDiagnostic>? observedMetadata
-            ) : base(simpleAssemblyName, identityComparer, observedMetadata) { }
+            ) : base(simpleAssemblyName, identityComparer, observedMetadata)
+            {
+            }
 
             protected override CommonMessageProvider MessageProvider
             {

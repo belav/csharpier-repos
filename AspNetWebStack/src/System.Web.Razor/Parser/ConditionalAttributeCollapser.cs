@@ -15,7 +15,9 @@ namespace System.Web.Razor.Parser
     {
         public ConditionalAttributeCollapser(
             Action<SpanBuilder, SourceLocation, string> markupSpanFactory
-        ) : base(markupSpanFactory) { }
+        ) : base(markupSpanFactory)
+        {
+        }
 
         protected override bool CanRewrite(Block block)
         {

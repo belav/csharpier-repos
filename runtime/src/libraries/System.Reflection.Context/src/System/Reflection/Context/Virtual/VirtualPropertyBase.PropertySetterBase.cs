@@ -9,7 +9,9 @@ namespace System.Reflection.Context.Virtual
         {
             private Type[]? _parameterTypes;
 
-            protected PropertySetterBase(VirtualPropertyBase property) : base(property) { }
+            protected PropertySetterBase(VirtualPropertyBase property) : base(property)
+            {
+            }
 
             public sealed override string Name
             {

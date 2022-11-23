@@ -51,7 +51,8 @@ namespace TaskCoverage
                 allTasks[i] = new Task(() =>
                 {
                     new TaskFactory(TaskScheduler.Current)
-                        .StartNew(() => { })
+                        .StartNew(() => {
+                        })
                         .ContinueWith(
                             (task, o) =>
                             {
@@ -193,7 +194,9 @@ namespace TaskCoverage
             {
                 t2.Wait(cts.Token);
             }
-            catch (System.OperationCanceledException) { } // expected, do nothing
+            catch (System.OperationCanceledException)
+            {
+            } // expected, do nothing
 
             Assert.NotEqual<int?>(taskId1, taskId2);
             Assert.NotEqual<int?>(taskId12, taskId22);
@@ -541,7 +544,8 @@ namespace TaskCoverage
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void FromAsync()
         {
-            Task emptyTask = new Task(() => { });
+            Task emptyTask = new Task(() => {
+            });
             ManualResetEvent mre1 = new ManualResetEvent(false);
             ManualResetEvent mre2 = new ManualResetEvent(false);
 

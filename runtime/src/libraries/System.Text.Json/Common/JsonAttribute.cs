@@ -11,5 +11,7 @@ namespace System.Text.Json.Serialization
 #else
     public
 #endif
-    abstract class JsonAttribute : Attribute { }
+    abstract class JsonAttribute : Attribute
+    {
+    }
 }

@@ -26,9 +26,13 @@ namespace Castle.Components.DictionaryAdapter
         private bool isEditing;
         private List<T> snapshot;
 
-        public EditableBindingList() { }
+        public EditableBindingList()
+        {
+        }
 
-        public EditableBindingList(IList<T> initial) : base(initial) { }
+        public EditableBindingList(IList<T> initial) : base(initial)
+        {
+        }
 
         public bool IsChanged
         {

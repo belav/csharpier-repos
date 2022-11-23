@@ -1390,10 +1390,18 @@ namespace System.Net.WebSockets
                 {
                     _innerStream.Close();
                 }
-                catch (ObjectDisposedException) { }
-                catch (IOException) { }
-                catch (SocketException) { }
-                catch (HttpListenerException) { }
+                catch (ObjectDisposedException)
+                {
+                }
+                catch (IOException)
+                {
+                }
+                catch (SocketException)
+                {
+                }
+                catch (HttpListenerException)
+                {
+                }
             }
 
             _keepAliveTracker.Dispose();
@@ -1975,7 +1983,9 @@ namespace System.Net.WebSockets
                 private bool _pongReceived;
                 private bool _receiveCompleted;
 
-                public ReceiveOperation(WebSocketBase webSocket) : base(webSocket) { }
+                public ReceiveOperation(WebSocketBase webSocket) : base(webSocket)
+                {
+                }
 
                 protected override WebSocketProtocolComponent.ActionQueue ActionQueue
                 {
@@ -2036,7 +2046,9 @@ namespace System.Net.WebSockets
                     }
                 }
 
-                protected override void Cleanup() { }
+                protected override void Cleanup()
+                {
+                }
 
                 protected override bool ShouldContinue(CancellationToken cancellationToken)
                 {
@@ -2188,7 +2200,9 @@ namespace System.Net.WebSockets
             {
                 protected bool _BufferHasBeenPinned;
 
-                public SendOperation(WebSocketBase webSocket) : base(webSocket) { }
+                public SendOperation(WebSocketBase webSocket) : base(webSocket)
+                {
+                }
 
                 protected override WebSocketProtocolComponent.ActionQueue ActionQueue
                 {
@@ -2353,20 +2367,30 @@ namespace System.Net.WebSockets
 
             private sealed class DisabledKeepAliveTracker : KeepAliveTracker
             {
-                public override void OnDataReceived() { }
+                public override void OnDataReceived()
+                {
+                }
 
-                public override void OnDataSent() { }
+                public override void OnDataSent()
+                {
+                }
 
-                public override void ResetTimer() { }
+                public override void ResetTimer()
+                {
+                }
 
-                public override void StartTimer(WebSocketBase webSocket) { }
+                public override void StartTimer(WebSocketBase webSocket)
+                {
+                }
 
                 public override bool ShouldSendKeepAlive()
                 {
                     return false;
                 }
 
-                public override void Dispose() { }
+                public override void Dispose()
+                {
+                }
             }
 
             private sealed class DefaultKeepAliveTracker : KeepAliveTracker

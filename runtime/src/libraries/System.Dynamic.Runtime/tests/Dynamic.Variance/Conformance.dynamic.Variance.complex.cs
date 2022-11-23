@@ -11,9 +11,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success></Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public interface IMeta<out T>
     {
@@ -71,9 +75,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success></Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
     public delegate void Action<in T>(T t);
     public delegate void Meta<out T>(Action<T> action);
@@ -88,7 +96,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
 
         public static int MainMethod()
         {
-            dynamic v1 = (Action<Animal>)((Animal a) => { });
+            dynamic v1 =
+                (Action<Animal>)(
+                    (Animal a) => {
+                    }
+                );
             dynamic v2 = v1;
             dynamic m1 =
                 (Meta<Tiger>)(
@@ -113,13 +125,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
-    public class Fruit { }
+    public class Fruit
+    {
+    }
 
-    public class Apple : Fruit { }
+    public class Apple : Fruit
+    {
+    }
 
     public class C
     {
@@ -184,13 +204,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
-    public class Fruit { }
+    public class Fruit
+    {
+    }
 
-    public class Apple : Fruit { }
+    public class Apple : Fruit
+    {
+    }
 
     public class C
     {
@@ -238,13 +266,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
         }
     }
 
-    public class Animal { }
+    public class Animal
+    {
+    }
 
-    public class Tiger : Animal { }
+    public class Tiger : Animal
+    {
+    }
 
-    public class Fruit { }
+    public class Fruit
+    {
+    }
 
-    public class Apple : Fruit { }
+    public class Apple : Fruit
+    {
+    }
 
     public class C
     {
@@ -302,17 +338,29 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success></Expects>
     // <Code>
-    class Animal { }
+    class Animal
+    {
+    }
 
-    public class Mammal : Animal { }
+    public class Mammal : Animal
+    {
+    }
 
-    public interface R<out T> { }
+    public interface R<out T>
+    {
+    }
 
-    public interface W<in T> { }
+    public interface W<in T>
+    {
+    }
 
-    public interface X<T> { }
+    public interface X<T>
+    {
+    }
 
-    public class C<T> : R<T>, W<T>, X<T> { }
+    public class C<T> : R<T>, W<T>, X<T>
+    {
+    }
 
     public class Program
     {
@@ -407,9 +455,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
 
         public delegate void MyDel<in T>(T t);
 
-        private static void Foo(object o) { }
+        private static void Foo(object o)
+        {
+        }
 
-        private static void Foo(string o) { }
+        private static void Foo(string o)
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -564,9 +616,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
         }
     }
 
-    public interface IFoo { }
+    public interface IFoo
+    {
+    }
 
-    public class F : IFoo { }
+    public class F : IFoo
+    {
+    }
 
     public class C
     {
@@ -623,7 +679,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
         public static int MainMethod()
         {
             int rez = 0;
-            Action<Func<object>, Action<string>> x = (s, o) => { };
+            Action<Func<object>, Action<string>> x = (s, o) => {
+            };
             C.Status = 1;
             Foo(x); // System.Object
             rez += C.Status;

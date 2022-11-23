@@ -22,5 +22,7 @@ internal class VSTypeScriptRequestTelemetryLoggerFactory : RequestTelemetryLogge
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptRequestTelemetryLoggerFactory() { }
+    public VSTypeScriptRequestTelemetryLoggerFactory()
+    {
+    }
 }

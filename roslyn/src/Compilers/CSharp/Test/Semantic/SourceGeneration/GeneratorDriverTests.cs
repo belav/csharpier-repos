@@ -405,7 +405,11 @@ class C { }
 
             var exception = new InvalidOperationException("init error");
 
-            var generator = new CallbackGenerator((ic) => throw exception, (sgc) => { });
+            var generator = new CallbackGenerator(
+                (ic) => throw exception,
+                (sgc) => {
+                }
+            );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { generator },
@@ -446,7 +450,8 @@ class C { }
             var exception = new InvalidOperationException("init error");
             var generator = new CallbackGenerator(
                 (ic) => throw exception,
-                (sgc) => { },
+                (sgc) => {
+                },
                 source: "class D { }"
             );
 
@@ -478,7 +483,11 @@ class C { }
 
             var exception = new InvalidOperationException("generate error");
 
-            var generator = new CallbackGenerator((ic) => { }, (sgc) => throw exception);
+            var generator = new CallbackGenerator(
+                (ic) => {
+                },
+                (sgc) => throw exception
+            );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { generator },
@@ -522,10 +531,16 @@ class C { }
 
             var exception = new InvalidOperationException("generate error");
 
-            var generator = new CallbackGenerator((ic) => { }, (sgc) => throw exception);
+            var generator = new CallbackGenerator(
+                (ic) => {
+                },
+                (sgc) => throw exception
+            );
             var generator2 = new CallbackGenerator2(
-                (ic) => { },
-                (sgc) => { },
+                (ic) => {
+                },
+                (sgc) => {
+                },
                 source: "public class D { }"
             );
 
@@ -584,7 +599,8 @@ class C
             var exception = new InvalidOperationException("generate error");
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) => throw exception,
                 source: "public class D { }"
             );
@@ -637,7 +653,11 @@ class C { }
 
             var exception = new InvalidOperationException("generate error");
 
-            var generator = new CallbackGenerator((ic) => { }, (sgc) => throw exception);
+            var generator = new CallbackGenerator(
+                (ic) => {
+                },
+                (sgc) => throw exception
+            );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { generator },
@@ -691,7 +711,8 @@ class C { }
             );
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) => sgc.ReportDiagnostic(diagnostic)
             );
 
@@ -726,7 +747,8 @@ class C { }
             Assert.Single(compilation.SyntaxTrees);
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));
@@ -939,7 +961,8 @@ class C { }
             Assert.Single(compilation.SyntaxTrees);
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.AddSource("test", SourceText.From("public class D {}", Encoding.UTF8));
@@ -986,7 +1009,8 @@ class C { }
             Assert.Single(compilation.SyntaxTrees);
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.AddSource("test", SourceText.From("public class D {}", Encoding.UTF8));
@@ -1088,7 +1112,8 @@ class C { }
             );
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.ReportDiagnostic(diagnostic1);
@@ -1096,7 +1121,8 @@ class C { }
                 }
             );
             var generator2 = new CallbackGenerator2(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.ReportDiagnostic(diagnostic3);
@@ -1189,7 +1215,8 @@ class C { }
             );
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.ReportDiagnostic(diagnostic1);
@@ -1197,7 +1224,8 @@ class C { }
                 }
             );
             var generator2 = new CallbackGenerator2(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.ReportDiagnostic(diagnostic3);
@@ -1243,7 +1271,8 @@ class C
             CancellationTokenSource cts = new CancellationTokenSource();
 
             var testGenerator = new CallbackGenerator(
-                onInit: (i) => { },
+                onInit: (i) => {
+                },
                 onExecute: (e) =>
                 {
                     cts.Cancel();
@@ -1252,7 +1281,8 @@ class C
 
             // test generator cancels the token. Check that the call to this generator doesn't make it look like it errored.
             var testGenerator2 = new CallbackGenerator2(
-                onInit: (i) => { },
+                onInit: (i) => {
+                },
                 onExecute: (e) =>
                 {
                     e.AddSource("a", SourceText.From("public class E {}", Encoding.UTF8));
@@ -1298,7 +1328,8 @@ class C { }
             Assert.Single(compilation.SyntaxTrees);
 
             var generator = new CallbackGenerator(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     sgc.AddSource("a", SourceText.From(""));
@@ -1343,7 +1374,8 @@ class C
 
             ParseOptions? passedOptions = null;
             var testGenerator = new CallbackGenerator(
-                onInit: (i) => { },
+                onInit: (i) => {
+                },
                 onExecute: (e) =>
                 {
                     passedOptions = e.ParseOptions;
@@ -1384,7 +1416,8 @@ class C
 
             ImmutableArray<AdditionalText> passedIn = default;
             var testGenerator = new CallbackGenerator(
-                onInit: (i) => { },
+                onInit: (i) => {
+                },
                 onExecute: (e) => passedIn = e.AdditionalFiles
             );
 
@@ -1426,7 +1459,8 @@ class C
 
             AnalyzerConfigOptionsProvider? passedIn = null;
             var testGenerator = new CallbackGenerator(
-                onInit: (i) => { },
+                onInit: (i) => {
+                },
                 onExecute: (e) => passedIn = e.AnalyzerConfigOptions
             );
 
@@ -1470,7 +1504,8 @@ class C { }
 
             var generator = new CallbackGenerator(
                 (ic) => ic.RegisterForPostInitialization(postInit),
-                (sgc) => { }
+                (sgc) => {
+                }
             );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1558,10 +1593,12 @@ class C { }
             INamedTypeSymbol? dSymbol = null;
             var generator = new CallbackGenerator(
                 (ic) => ic.RegisterForPostInitialization(postInit),
-                (sgc) => { }
+                (sgc) => {
+                }
             );
             var generator2 = new CallbackGenerator2(
-                (ic) => { },
+                (ic) => {
+                },
                 (sgc) =>
                 {
                     dSymbol = sgc.Compilation.GetTypeByMetadataName("D");
@@ -1762,7 +1799,8 @@ class C { }
                     ic.RegisterForPostInitialization(
                         pic => pic.AddSource("postInit", "public class D{}")
                     ),
-                (sgc) => { },
+                (sgc) => {
+                },
                 "public class E{}"
             );
 
@@ -1804,7 +1842,8 @@ class C { }
                     ic.RegisterForPostInitialization(
                         pic => pic.AddSource("postInit", "public class D{}")
                     ),
-                (sgc) => { },
+                (sgc) => {
+                },
                 "public class E{}"
             );
             var generator2 = new SingleFileTestGenerator("public class F{}");
@@ -1895,7 +1934,8 @@ class C { }
 
             Assert.Single(compilation.SyntaxTrees);
             CallbackGenerator gen = new CallbackGenerator(
-                (c) => { },
+                (c) => {
+                },
                 (c) =>
                 {
                     c.ReportDiagnostic(
@@ -2068,7 +2108,8 @@ class C { }
                 Assert.Single(compilation.SyntaxTrees);
 
                 CallbackGenerator gen = new CallbackGenerator(
-                    (c) => { },
+                    (c) => {
+                    },
                     (c) =>
                     {
                         foreach ((var d, var l) in reportDiagnostics)
@@ -2373,7 +2414,10 @@ class C { }
             Assert.Single(compilation.SyntaxTrees);
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator((ic) => { })
+                new PipelineCallbackGenerator(
+                    (ic) => {
+                    }
+                )
             );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -2506,7 +2550,8 @@ class C { }
                         ctx.CompilationProvider
                             .Select((c, ct) => c)
                             .WithTrackingName("IdentityTransform"),
-                        (spc, c) => { }
+                        (spc, c) => {
+                        }
                     );
                 })
             );
@@ -2592,14 +2637,16 @@ class C { }
                         ctx.CompilationProvider
                             .Select((c, ct) => c)
                             .WithTrackingName("CompilationTransform"),
-                        (spc, c) => { }
+                        (spc, c) => {
+                        }
                     );
 
                     ctx.RegisterSourceOutput(
                         ctx.AdditionalTextsProvider
                             .Select((at, ct) => at)
                             .WithTrackingName("AdditionalTextsTransform"),
-                        (spc, at) => { }
+                        (spc, at) => {
+                        }
                     );
                 })
             );
@@ -3006,7 +3053,11 @@ class C { }
                         .WithTrackingName("Step")
                         .Select((x, ct) => x)
                         .WithTrackingName("Step2");
-                    ctx.RegisterSourceOutput(compilationSource, (spc, c) => { });
+                    ctx.RegisterSourceOutput(
+                        compilationSource,
+                        (spc, c) => {
+                        }
+                    );
                 })
             );
 
@@ -3277,7 +3328,11 @@ class C { }
                             .Select((c, ct) => c)
                             .WithTrackingName("Classes");
 
-                        ctx.RegisterSourceOutput(input, (spc, node) => { });
+                        ctx.RegisterSourceOutput(
+                            input,
+                            (spc, node) => {
+                            }
+                        );
                     }
                 )
             );
@@ -3441,7 +3496,11 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, p) => { });
+                    ctx.RegisterSourceOutput(
+                        ctx.ParseOptionsProvider,
+                        (spc, p) => {
+                        }
+                    );
                 })
             );
 
@@ -3631,7 +3690,8 @@ class C { }
                                 }
                             )
                             .WithTrackingName("AnalyzerConfig"),
-                        (spc, p) => { }
+                        (spc, p) => {
+                        }
                     );
                 })
             );
@@ -3752,7 +3812,8 @@ class C { }
                         ctx.AdditionalTextsProvider
                             .Select((t, _) => t.Path)
                             .WithTrackingName("Paths"),
-                        (spc, p) => { }
+                        (spc, p) => {
+                        }
                     );
                 })
             );
@@ -4033,8 +4094,16 @@ class C { }
                         .Select((t, ct) => t?.GetText(ct)?.ToString())
                         .WithTrackingName("Content");
 
-                    ctx.RegisterSourceOutput(paths, (spc, p) => { });
-                    ctx.RegisterSourceOutput(contents, (spc, p) => { });
+                    ctx.RegisterSourceOutput(
+                        paths,
+                        (spc, p) => {
+                        }
+                    );
+                    ctx.RegisterSourceOutput(
+                        contents,
+                        (spc, p) => {
+                        }
+                    );
                 })
             );
 
@@ -4390,15 +4459,33 @@ class C { }
                             (context, ct) => context.Node
                         )
                         .WithTrackingName("Syntax"),
-                    (context, ct) => { }
+                    (context, ct) => {
+                    }
                 );
-                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, ct) => { });
-                ctx.RegisterSourceOutput(ctx.AnalyzerConfigOptionsProvider, (context, ct) => { });
-                ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (context, ct) => { });
-                ctx.RegisterSourceOutput(ctx.AdditionalTextsProvider, (context, ct) => { });
+                ctx.RegisterSourceOutput(
+                    ctx.CompilationProvider,
+                    (context, ct) => {
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    ctx.AnalyzerConfigOptionsProvider,
+                    (context, ct) => {
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    ctx.ParseOptionsProvider,
+                    (context, ct) => {
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    ctx.AdditionalTextsProvider,
+                    (context, ct) => {
+                    }
+                );
                 ctx.RegisterImplementationSourceOutput(
                     ctx.MetadataReferencesProvider,
-                    (context, ct) => { }
+                    (context, ct) => {
+                    }
                 );
             });
 
@@ -4470,11 +4557,19 @@ class C { }
 
             var generator1 = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(ctx.AdditionalTextsProvider, (context, ct) => { });
+                ctx.RegisterSourceOutput(
+                    ctx.AdditionalTextsProvider,
+                    (context, ct) => {
+                    }
+                );
             });
             var generator2 = new PipelineCallbackGenerator2(ctx =>
             {
-                ctx.RegisterSourceOutput(ctx.AdditionalTextsProvider, (context, ct) => { });
+                ctx.RegisterSourceOutput(
+                    ctx.AdditionalTextsProvider,
+                    (context, ct) => {
+                    }
+                );
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -4598,15 +4693,33 @@ public static readonly string F = ""a""
                             (context, ct) => context.Node
                         )
                         .WithTrackingName("Syntax"),
-                    (context, ct) => { }
+                    (context, ct) => {
+                    }
                 );
-                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, ct) => { });
-                ctx.RegisterSourceOutput(ctx.AnalyzerConfigOptionsProvider, (context, ct) => { });
-                ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (context, ct) => { });
-                ctx.RegisterSourceOutput(ctx.AdditionalTextsProvider, (context, ct) => { });
+                ctx.RegisterSourceOutput(
+                    ctx.CompilationProvider,
+                    (context, ct) => {
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    ctx.AnalyzerConfigOptionsProvider,
+                    (context, ct) => {
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    ctx.ParseOptionsProvider,
+                    (context, ct) => {
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    ctx.AdditionalTextsProvider,
+                    (context, ct) => {
+                    }
+                );
                 ctx.RegisterImplementationSourceOutput(
                     ctx.MetadataReferencesProvider,
-                    (context, ct) => { }
+                    (context, ct) => {
+                    }
                 );
             });
 
@@ -4953,7 +5066,11 @@ public static readonly string F = ""a""
             {
                 var nullArray = ctx.CompilationProvider.Select((c, _) => null as object[]);
                 var flatArray = nullArray.SelectMany((a, _) => a!);
-                ctx.RegisterSourceOutput(flatArray, (_, _) => { });
+                ctx.RegisterSourceOutput(
+                    flatArray,
+                    (_, _) => {
+                    }
+                );
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(

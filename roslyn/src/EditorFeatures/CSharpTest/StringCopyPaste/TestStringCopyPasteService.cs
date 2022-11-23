@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestStringCopyPasteService() { }
+        public TestStringCopyPasteService()
+        {
+        }
 
         public bool TrySetClipboardData(string key, string data)
         {

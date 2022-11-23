@@ -68,7 +68,9 @@ public abstract class LoggingTestBase
     protected class InvalidIncludePathErrorContext : DbContext
     {
         public InvalidIncludePathErrorContext(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder.Options) { }
+            : base(optionsBuilder.Options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Animal>();
@@ -125,6 +127,7 @@ public abstract class LoggingTestBase
     protected class LoggingContext : DbContext
     {
         public LoggingContext(DbContextOptionsBuilder optionsBuilder) : base(optionsBuilder.Options)
-        { }
+        {
+        }
     }
 }

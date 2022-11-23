@@ -7,7 +7,9 @@ namespace generator_lib
     [Generator]
     public class GreeterSourceGenerator : ISourceGenerator
     {
-        public void Initialize(GeneratorInitializationContext context) { }
+        public void Initialize(GeneratorInitializationContext context)
+        {
+        }
 
         public void Execute(GeneratorExecutionContext context)
         {

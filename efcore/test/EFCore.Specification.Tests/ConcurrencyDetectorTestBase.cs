@@ -87,7 +87,9 @@ public abstract class ConcurrencyDetectorTestBase<TFixture> : IClassFixture<TFix
     public class ConcurrencyDetectorDbContext : DbContext
     {
         public ConcurrencyDetectorDbContext(DbContextOptions<ConcurrencyDetectorDbContext> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
 
         public DbSet<Product> Products { get; set; }
 

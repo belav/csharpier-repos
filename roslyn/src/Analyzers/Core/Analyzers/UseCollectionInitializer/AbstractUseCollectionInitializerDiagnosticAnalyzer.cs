@@ -73,7 +73,9 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                 ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
                     .Add(s_descriptor, CodeStyleOptions2.PreferCollectionInitializer)
                     .Add(s_unnecessaryCodeDescriptor, CodeStyleOptions2.PreferCollectionInitializer)
-            ) { }
+            )
+        {
+        }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
         protected abstract bool AreCollectionInitializersSupported(Compilation compilation);

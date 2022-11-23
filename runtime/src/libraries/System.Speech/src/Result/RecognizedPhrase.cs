@@ -25,7 +25,9 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal RecognizedPhrase() { }
+        internal RecognizedPhrase()
+        {
+        }
 
         #endregion
 

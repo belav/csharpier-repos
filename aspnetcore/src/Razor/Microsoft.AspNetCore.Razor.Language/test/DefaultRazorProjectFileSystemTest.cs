@@ -380,7 +380,9 @@ public class DefaultRazorProjectFileSystemTest
 
     private class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
     {
-        public TestRazorProjectFileSystem(string root) : base(root) { }
+        public TestRazorProjectFileSystem(string root) : base(root)
+        {
+        }
 
         public new string NormalizeAndEnsureValidPath(string path) =>
             base.NormalizeAndEnsureValidPath(path);

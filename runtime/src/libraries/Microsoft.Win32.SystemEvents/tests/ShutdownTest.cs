@@ -22,7 +22,8 @@ namespace Microsoft.Win32.SystemEventsTests
                 .Invoke(() =>
                 {
                     // Register any event to ensure that SystemEvents get initialized
-                    SystemEvents.TimeChanged += (o, e) => { };
+                    SystemEvents.TimeChanged += (o, e) => {
+                    };
 
                     // Fake Restart Manager behavior by sending external WM_CLOSE message
                     SendMessage(Interop.User32.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);

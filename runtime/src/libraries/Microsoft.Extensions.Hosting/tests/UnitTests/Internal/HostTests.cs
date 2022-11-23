@@ -125,7 +125,9 @@ namespace Microsoft.Extensions.Hosting.Internal
                         }
                     )
                     .Start()
-            ) { }
+            )
+            {
+            }
         }
 
         private class FakeHostedServiceWithDependency : IHostedService
@@ -240,7 +242,9 @@ namespace Microsoft.Extensions.Hosting.Internal
                         }
                     )
                     .Start()
-            ) { }
+            )
+            {
+            }
         }
 
         [Fact]
@@ -1007,7 +1011,8 @@ namespace Microsoft.Extensions.Hosting.Internal
                     .ConfigureServices(
                         (services) =>
                         {
-                            Action started = () => { };
+                            Action started = () => {
+                            };
 
                             Action stopping = () =>
                             {
@@ -1647,7 +1652,12 @@ namespace Microsoft.Extensions.Hosting.Internal
             };
 
             services.AddSingleton<IHostedService>(
-                new DelegateHostedService(started, stopping, () => { })
+                new DelegateHostedService(
+                    started,
+                    stopping,
+                    () => {
+                    }
+                )
             );
 
             return events;

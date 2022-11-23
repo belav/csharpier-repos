@@ -22,7 +22,9 @@ namespace ILCompiler.DependencyAnalysis
                 "__InterfaceDispatchCellSection_Start",
                 "__InterfaceDispatchCellSection_End",
                 new DispatchCellComparer(factory)
-            ) { }
+            )
+        {
+        }
 
         protected override void GetElementDataForNodes(
             ref ObjectDataBuilder builder,

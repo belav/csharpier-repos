@@ -9,7 +9,9 @@ namespace System.Reflection
 {
     public abstract class PropertyInfo : MemberInfo
     {
-        protected PropertyInfo() { }
+        protected PropertyInfo()
+        {
+        }
 
         public override MemberTypes MemberType => MemberTypes.Property;
 

@@ -29,7 +29,9 @@ namespace System.Linq.Parallel
         //
 
         protected SpoolingTaskBase(int taskIndex, QueryTaskGroupState groupState)
-            : base(taskIndex, groupState) { }
+            : base(taskIndex, groupState)
+        {
+        }
 
         //-----------------------------------------------------------------------------------
         // The implementation of the Work API just enumerates the producer's data, and

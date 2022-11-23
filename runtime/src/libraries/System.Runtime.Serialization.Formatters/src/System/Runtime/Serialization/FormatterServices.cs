@@ -363,7 +363,9 @@ namespace System.Runtime.Serialization
             {
                 return LoadAssemblyFromString(assemblyName);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return null;
         }
 

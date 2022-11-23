@@ -18,7 +18,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public abstract class XmlTypeSerializer
     {
-        protected XmlTypeSerializer() { }
+        protected XmlTypeSerializer()
+        {
+        }
 
         public abstract XmlTypeKind Kind { get; }
 

@@ -645,9 +645,13 @@ namespace System.Text.Json.Serialization.Tests
             public IValueNodeWithIValueNodeProperty Next { get; set; }
         }
 
-        private class EmptyClass { }
+        private class EmptyClass
+        {
+        }
 
-        private struct EmptyStruct { }
+        private struct EmptyStruct
+        {
+        }
 
         private class EmptyClassWithExtensionProperty
         {
@@ -664,9 +668,13 @@ namespace System.Text.Json.Serialization.Tests
             public NodeWithExtensionData Next { get; set; }
         }
 
-        private class RecursiveDictionary : Dictionary<string, RecursiveDictionary> { }
+        private class RecursiveDictionary : Dictionary<string, RecursiveDictionary>
+        {
+        }
 
-        private class RecursiveList : List<RecursiveList> { }
+        private class RecursiveList : List<RecursiveList>
+        {
+        }
 
         private class Person
         {

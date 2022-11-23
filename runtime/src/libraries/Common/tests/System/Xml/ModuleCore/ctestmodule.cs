@@ -36,7 +36,9 @@ namespace OLEDB.Test.ModuleCore
         }
 
         //Constructors
-        public CTestModule() : this(null, "Microsoft", 1) { }
+        public CTestModule() : this(null, "Microsoft", 1)
+        {
+        }
 
         public CTestModule(string desc) : this(desc, "Microsoft", 1)
         {
@@ -59,7 +61,9 @@ namespace OLEDB.Test.ModuleCore
             DetermineFilters();
         }
 
-        static CTestModule() { }
+        static CTestModule()
+        {
+        }
 
         //Accessors
         public new virtual TestModule Attribute
@@ -196,9 +200,13 @@ namespace OLEDB.Test.ModuleCore
                 );
         }
 
-        protected virtual void DetermineIncludes() { }
+        protected virtual void DetermineIncludes()
+        {
+        }
 
-        protected virtual void DetermineFilters() { }
+        protected virtual void DetermineFilters()
+        {
+        }
 
         protected virtual string FilterScope(string xpath)
         {

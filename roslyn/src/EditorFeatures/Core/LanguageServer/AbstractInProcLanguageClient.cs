@@ -102,8 +102,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// </summary>
         public event AsyncEventHandler<EventArgs>? StopAsync
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public AbstractInProcLanguageClient(
@@ -181,7 +185,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             return new Connection(clientStream, clientStream);
         }
 
-        protected virtual void Activate_OffUIThread() { }
+        protected virtual void Activate_OffUIThread()
+        {
+        }
 
         /// <summary>
         /// Signals that the extension has been loaded.  The server can be started immediately, or wait for user action to start.

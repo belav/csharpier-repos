@@ -23,7 +23,9 @@ struct GStruct<T>
 class InterpClass
 {
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void entry_void_0() { }
+    public static void entry_void_0()
+    {
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int entry_int_int(int i)

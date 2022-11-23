@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 CodeActionOptions.DefaultProvider,
                 isBlocking: false,
                 cancellationToken
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a code refactoring context to be passed into <see cref="CodeRefactoringProvider.ComputeRefactoringsAsync(CodeRefactoringContext)"/> method.

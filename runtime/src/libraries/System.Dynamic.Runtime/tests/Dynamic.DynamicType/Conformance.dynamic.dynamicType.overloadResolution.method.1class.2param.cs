@@ -7,7 +7,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 {
     public class Test
     {
-        public void Method() { }
+        public void Method()
+        {
+        }
 
         protected void Method(int x, object o)
         {
@@ -47,7 +49,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 {
     public class Test
     {
-        public void Method() { }
+        public void Method()
+        {
+        }
 
         protected void Method(int x, object o)
         {
@@ -290,9 +294,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         private delegate void Del(long x, int y);
 
-        public void Method(long x, int y) { }
+        public void Method(long x, int y)
+        {
+        }
 
-        private void Method(int x, int y) { }
+        private void Method(int x, int y)
+        {
+        }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -331,7 +339,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // <Code>
     public struct Test
     {
-        public void Method() { }
+        public void Method()
+        {
+        }
 
         private void Method(int x, object o)
         {
@@ -373,7 +383,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         private class Base
         {
-            public void Method(int x) { }
+            public void Method(int x)
+            {
+            }
         }
 
         public static void DynamicCSharpRunTest()
@@ -398,15 +410,25 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         protected class Base
         {
-            public void Method() { }
+            public void Method()
+            {
+            }
 
-            protected void Method(int x, object o) { }
+            protected void Method(int x, object o)
+            {
+            }
 
-            protected internal void Method(long x, object o) { }
+            protected internal void Method(long x, object o)
+            {
+            }
 
-            internal void Method(short x, object o) { }
+            internal void Method(short x, object o)
+            {
+            }
 
-            public void Method(byte x, object o) { }
+            public void Method(byte x, object o)
+            {
+            }
         }
 
         public static void DynamicCSharpRunTest()
@@ -480,7 +502,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             private class Base
             {
-                public void Method(int x) { }
+                public void Method(int x)
+                {
+                }
             }
 
             public static void DynamicCSharpRunTest()

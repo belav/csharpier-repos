@@ -9,28 +9,46 @@ using TypeOfRepo;
 
 public class MethodConstraintsTests
 {
-    public interface IFoo { }
+    public interface IFoo
+    {
+    }
 
-    public interface IFooer : IFoo { }
+    public interface IFooer : IFoo
+    {
+    }
 
-    public class Base : IFoo { }
+    public class Base : IFoo
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
-    public class DerivedFromDerived : Derived { }
+    public class DerivedFromDerived : Derived
+    {
+    }
 
-    public struct Struct : IFoo { }
+    public struct Struct : IFoo
+    {
+    }
 
-    public class OtherBase : IFooer { }
+    public class OtherBase : IFooer
+    {
+    }
 
     public class TypeRequiringIFoo
     {
-        public void Method<T>() where T : IFoo { }
+        public void Method<T>() where T : IFoo
+        {
+        }
     }
 
     public class TypeWithPrivateCtor
     {
-        private TypeWithPrivateCtor() { }
+        private TypeWithPrivateCtor()
+        {
+        }
 
         static TypeWithPrivateCtor()
         {
@@ -38,66 +56,98 @@ public class MethodConstraintsTests
         }
     }
 
-    public class TypeWithPublicCtor { }
+    public class TypeWithPublicCtor
+    {
+    }
 
     public class TypeWithClassConstraint
     {
-        public void Method<T>() where T : class { }
+        public void Method<T>() where T : class
+        {
+        }
     }
 
     public class TypeWithNewConstraint
     {
-        public void Method<T>() where T : new() { }
+        public void Method<T>() where T : new()
+        {
+        }
     }
 
     public class TypeWithStructConstraint
     {
-        public void Method<T>() where T : struct { }
+        public void Method<T>() where T : struct
+        {
+        }
     }
 
     public class TypeWithNoConstraint
     {
-        public void Method<T>() { }
+        public void Method<T>()
+        {
+        }
     }
 
-    public class TypeWithNoConstraint<T> { }
+    public class TypeWithNoConstraint<T>
+    {
+    }
 
     public class TypeWithSelfReferenceConstraint
     {
-        public void Method<T, U>() where T : U { }
+        public void Method<T, U>() where T : U
+        {
+        }
     }
 
     public class TypeWithSelfReferenceIEnumerableConstraint
     {
-        public void Method<T, U>() where T : IEnumerable<U> { }
+        public void Method<T, U>() where T : IEnumerable<U>
+        {
+        }
     }
 
-    public interface IBar<in T> { }
+    public interface IBar<in T>
+    {
+    }
 
-    public class TypeImplementingIBarBase : IBar<Base> { }
+    public class TypeImplementingIBarBase : IBar<Base>
+    {
+    }
 
-    public class TypeImplementingIBarDerived : IBar<Derived> { }
+    public class TypeImplementingIBarDerived : IBar<Derived>
+    {
+    }
 
-    public class TypeImplementingIBar<T> : IBar<T> { }
+    public class TypeImplementingIBar<T> : IBar<T>
+    {
+    }
 
     public class TypeWithVariance
     {
-        public void Method<T, U>() where T : IBar<U> { }
+        public void Method<T, U>() where T : IBar<U>
+        {
+        }
     }
 
     public class TypeWithRecursiveConstraints
     {
-        public void Method<T, S>() where T : TypeWithNoConstraint<S> { }
+        public void Method<T, S>() where T : TypeWithNoConstraint<S>
+        {
+        }
     }
 
     public class TypeWithMDArrayConstraints
     {
-        public void Method<T>() where T : IEnumerable<Derived[,,]> { }
+        public void Method<T>() where T : IEnumerable<Derived[,,]>
+        {
+        }
     }
 
     public class GenericType<T, U>
     {
-        public void Method<V>() where V : U { }
+        public void Method<V>() where V : U
+        {
+        }
     }
 
     static MethodInfo MakeGenericMethod(Type t, Type genArg)

@@ -7,7 +7,9 @@ using System;
 namespace NS
 {
     // for CS1714
-    public class E<T> : D<T> { }
+    public class E<T> : D<T>
+    {
+    }
 
     public class Ref
     {
@@ -40,6 +42,8 @@ namespace N1
 {
     public class N2
     {
-        public class A { }
+        public class A
+        {
+        }
     }
 }

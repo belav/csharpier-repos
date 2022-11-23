@@ -1996,7 +1996,9 @@ namespace Microsoft.CodeAnalysis.Emit
         private sealed class GenericParameterIndex : DefinitionIndexBase<IGenericParameter>
         {
             public GenericParameterIndex(int lastRowId)
-                : base(lastRowId, ReferenceEqualityComparer.Instance) { }
+                : base(lastRowId, ReferenceEqualityComparer.Instance)
+            {
+            }
 
             public override bool TryGetRowId(IGenericParameter item, out int index)
             {

@@ -407,7 +407,9 @@ namespace System.Collections.Concurrent
             protected DynamicPartitionEnumerator_Abstract(
                 TSourceReader sharedReader,
                 SharedLong sharedIndex
-            ) : this(sharedReader, sharedIndex, false) { }
+            ) : this(sharedReader, sharedIndex, false)
+            {
+            }
 
             protected DynamicPartitionEnumerator_Abstract(
                 TSourceReader sharedReader,
@@ -1269,7 +1271,9 @@ namespace System.Collections.Concurrent
             protected DynamicPartitionEnumeratorForIndexRange_Abstract(
                 TSourceReader sharedReader,
                 SharedLong sharedIndex
-            ) : base(sharedReader, sharedIndex) { }
+            ) : base(sharedReader, sharedIndex)
+            {
+            }
 
             //abstract methods
             //the Current property is still abstract, and will be implemented by derived classes
@@ -1356,7 +1360,9 @@ namespace System.Collections.Concurrent
             /// For source data type IList and Array, the type of the shared reader is just the data itself.
             /// We don't do anything in Dispose method for IList and Array.
             /// </summary>
-            public override void Dispose() { }
+            public override void Dispose()
+            {
+            }
         }
 
         /// <summary>
@@ -1369,7 +1375,9 @@ namespace System.Collections.Concurrent
             : DynamicPartitionerForIndexRange_Abstract<TSource, IList<TSource>>
         {
             //constructor
-            internal DynamicPartitionerForIList(IList<TSource> source) : base(source) { }
+            internal DynamicPartitionerForIList(IList<TSource> source) : base(source)
+            {
+            }
 
             //override methods
             protected override IEnumerable<
@@ -1419,7 +1427,9 @@ namespace System.Collections.Concurrent
                 internal InternalPartitionEnumerator(
                     IList<TSource> sharedReader,
                     SharedLong sharedIndex
-                ) : base(sharedReader, sharedIndex) { }
+                ) : base(sharedReader, sharedIndex)
+                {
+                }
 
                 //overriding methods
                 protected override int SourceCount
@@ -1464,7 +1474,9 @@ namespace System.Collections.Concurrent
             : DynamicPartitionerForIndexRange_Abstract<TSource, TSource[]>
         {
             //constructor
-            internal DynamicPartitionerForArray(TSource[] source) : base(source) { }
+            internal DynamicPartitionerForArray(TSource[] source) : base(source)
+            {
+            }
 
             //override methods
             protected override IEnumerable<
@@ -1511,7 +1523,9 @@ namespace System.Collections.Concurrent
             {
                 //constructor
                 internal InternalPartitionEnumerator(TSource[] sharedReader, SharedLong sharedIndex)
-                    : base(sharedReader, sharedIndex) { }
+                    : base(sharedReader, sharedIndex)
+                {
+                }
 
                 //overriding methods
                 protected override int SourceCount
@@ -1560,7 +1574,9 @@ namespace System.Collections.Concurrent
         private abstract class StaticIndexRangePartitioner<TSource, TCollection>
             : OrderablePartitioner<TSource>
         {
-            protected StaticIndexRangePartitioner() : base(true, true, true) { }
+            protected StaticIndexRangePartitioner() : base(true, true, true)
+            {
+            }
 
             /// <summary>
             /// Abstract method to return the number of elements in the source data
@@ -1676,7 +1692,9 @@ namespace System.Collections.Concurrent
             /// <summary>
             /// We don't dispose the source for IList and array
             /// </summary>
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public void Reset()
             {

@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public MisplacedUsingDirectivesCodeFixProvider() { }
+        public MisplacedUsingDirectivesCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.MoveMisplacedUsingDirectivesDiagnosticId);

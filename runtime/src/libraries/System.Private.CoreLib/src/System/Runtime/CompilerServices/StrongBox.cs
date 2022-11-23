@@ -21,7 +21,9 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Initializes a new StrongBox which can receive a value when used in a reference call.
         /// </summary>
-        public StrongBox() { }
+        public StrongBox()
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref = "StrongBox{T}"></see> with the specified value.

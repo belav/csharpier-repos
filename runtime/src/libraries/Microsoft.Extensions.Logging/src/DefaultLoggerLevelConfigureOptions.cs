@@ -8,6 +8,8 @@ namespace Microsoft.Extensions.Logging
     internal sealed class DefaultLoggerLevelConfigureOptions : ConfigureOptions<LoggerFilterOptions>
     {
         public DefaultLoggerLevelConfigureOptions(LogLevel level)
-            : base(options => options.MinLevel = level) { }
+            : base(options => options.MinLevel = level)
+        {
+        }
     }
 }

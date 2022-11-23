@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpSyntacticQuickInfoProvider() { }
+        public CSharpSyntacticQuickInfoProvider()
+        {
+        }
 
         protected override Task<QuickInfoItem?> BuildQuickInfoAsync(
             QuickInfoContext context,

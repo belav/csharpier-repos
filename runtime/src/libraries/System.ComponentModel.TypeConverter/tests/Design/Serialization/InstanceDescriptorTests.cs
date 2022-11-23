@@ -268,19 +268,27 @@ namespace System.ComponentModel.Design.Serialization.Tests
         {
             public event EventHandler Event
             {
-                add { }
-                remove { }
+                add
+                {
+                }
+                remove
+                {
+                }
             }
         }
 
         private class StaticConstructor
         {
-            static StaticConstructor() { }
+            static StaticConstructor()
+            {
+            }
         }
 
         private class MethodClass
         {
-            public void Method(int i) { }
+            public void Method(int i)
+            {
+            }
 
             public static int IntMethod() => 1;
 
@@ -291,7 +299,9 @@ namespace System.ComponentModel.Design.Serialization.Tests
         {
             public static string Name
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

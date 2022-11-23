@@ -22,6 +22,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of the <see cref="JSExportAttribute" /> class.
         /// </summary>
-        public JSExportAttribute() { }
+        public JSExportAttribute()
+        {
+        }
     }
 }

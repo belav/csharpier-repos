@@ -79,9 +79,13 @@ namespace Microsoft.Win32.SafeHandles
         private Dictionary<string, IntPtr>? _sslSessions;
         private GCHandle _gch;
 
-        public SafeSslContextHandle() : base(IntPtr.Zero, true) { }
+        public SafeSslContextHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
-        internal SafeSslContextHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
+        internal SafeSslContextHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        {
+        }
 
         public override bool IsInvalid
         {

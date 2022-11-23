@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegularExpressionsOptionsProvider() { }
+        public RegularExpressionsOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(

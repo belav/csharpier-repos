@@ -16,7 +16,9 @@ namespace System.Security.Cryptography
         protected internal byte[]? HashValue;
         protected int State;
 
-        protected HashAlgorithm() { }
+        protected HashAlgorithm()
+        {
+        }
 
         [Obsolete(
             Obsoletions.DefaultCryptoAlgorithmsMessage,

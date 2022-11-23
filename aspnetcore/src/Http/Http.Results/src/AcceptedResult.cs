@@ -11,7 +11,9 @@ internal sealed class AcceptedResult : ObjectResult
     /// Initializes a new instance of the <see cref="AcceptedResult"/> class with the values
     /// provided.
     /// </summary>
-    public AcceptedResult() : base(value: null, StatusCodes.Status202Accepted) { }
+    public AcceptedResult() : base(value: null, StatusCodes.Status202Accepted)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedResult"/> class with the values

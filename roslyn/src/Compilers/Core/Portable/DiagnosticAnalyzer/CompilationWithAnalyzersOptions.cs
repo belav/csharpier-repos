@@ -68,7 +68,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 concurrentAnalysis,
                 logAnalyzerExecutionTime,
                 reportSuppressedDiagnostics: false
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new <see cref="CompilationWithAnalyzersOptions"/>.
@@ -92,7 +94,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 logAnalyzerExecutionTime,
                 reportSuppressedDiagnostics,
                 analyzerExceptionFilter: null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Creates a new <see cref="CompilationWithAnalyzersOptions"/>.

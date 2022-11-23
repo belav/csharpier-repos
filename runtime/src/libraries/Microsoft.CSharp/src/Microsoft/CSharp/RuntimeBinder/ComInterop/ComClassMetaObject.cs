@@ -11,7 +11,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal ComClassMetaObject(Expression expression, ComTypeClassDesc cls)
-            : base(expression, BindingRestrictions.Empty, cls) { }
+            : base(expression, BindingRestrictions.Empty, cls)
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

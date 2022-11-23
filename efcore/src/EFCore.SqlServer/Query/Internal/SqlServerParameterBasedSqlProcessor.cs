@@ -20,7 +20,9 @@ public class SqlServerParameterBasedSqlProcessor : RelationalParameterBasedSqlPr
     public SqlServerParameterBasedSqlProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
         bool useRelationalNulls
-    ) : base(dependencies, useRelationalNulls) { }
+    ) : base(dependencies, useRelationalNulls)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

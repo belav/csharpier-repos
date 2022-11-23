@@ -114,7 +114,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         void IRunningDocumentTableEventListener.OnRefreshDocumentContext(
             string moniker,
             IVsHierarchy hierarchy
-        ) { }
+        )
+        {
+        }
 
         void IRunningDocumentTableEventListener.OnRenameDocument(
             string newMoniker,

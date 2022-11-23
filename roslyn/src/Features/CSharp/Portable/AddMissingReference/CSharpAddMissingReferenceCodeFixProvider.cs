@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddMissingReference
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpAddMissingReferenceCodeFixProvider() { }
+        public CSharpAddMissingReferenceCodeFixProvider()
+        {
+        }
 
         /// <summary>For testing purposes only (so that tests can pass in mock values)</summary>
         [SuppressMessage(
@@ -47,6 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddMissingReference
         internal CSharpAddMissingReferenceCodeFixProvider(
             IPackageInstallerService installerService,
             ISymbolSearchService symbolSearchService
-        ) : base(installerService, symbolSearchService) { }
+        ) : base(installerService, symbolSearchService)
+        {
+        }
     }
 }

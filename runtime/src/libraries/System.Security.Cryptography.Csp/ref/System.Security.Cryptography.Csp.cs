@@ -16,32 +16,44 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class AesCryptoServiceProvider : System.Security.Cryptography.Aes
     {
-        public AesCryptoServiceProvider() { }
+        public AesCryptoServiceProvider()
+        {
+        }
 
         public override int BlockSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int FeedbackSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] IV
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.KeySizes[] LegalBlockSizes
         {
@@ -54,12 +66,16 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.CipherMode Mode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.PaddingMode Padding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor()
@@ -88,17 +104,25 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
     public sealed partial class CspKeyContainerInfo
     {
-        public CspKeyContainerInfo(System.Security.Cryptography.CspParameters parameters) { }
+        public CspKeyContainerInfo(System.Security.Cryptography.CspParameters parameters)
+        {
+        }
 
         public bool Accessible
         {
@@ -158,31 +182,44 @@ namespace System.Security.Cryptography
         public string? ProviderName;
         public int ProviderType;
 
-        public CspParameters() { }
+        public CspParameters()
+        {
+        }
 
-        public CspParameters(int dwTypeIn) { }
+        public CspParameters(int dwTypeIn)
+        {
+        }
 
-        public CspParameters(int dwTypeIn, string? strProviderNameIn) { }
+        public CspParameters(int dwTypeIn, string? strProviderNameIn)
+        {
+        }
 
         public CspParameters(int dwTypeIn, string? strProviderNameIn, string? strContainerNameIn)
-        { }
+        {
+        }
 
         public System.Security.Cryptography.CspProviderFlags Flags
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.CLSCompliantAttribute(false)]
         public System.Security.SecureString? KeyPassword
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.IntPtr ParentWindowHandle
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -210,7 +247,9 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class DESCryptoServiceProvider : System.Security.Cryptography.DES
     {
-        public DESCryptoServiceProvider() { }
+        public DESCryptoServiceProvider()
+        {
+        }
 
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor()
         {
@@ -238,27 +277,39 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
     }
 
     public sealed partial class DSACryptoServiceProvider
         : System.Security.Cryptography.DSA,
             System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
-        public DSACryptoServiceProvider() { }
+        public DSACryptoServiceProvider()
+        {
+        }
 
-        public DSACryptoServiceProvider(int dwKeySize) { }
+        public DSACryptoServiceProvider(int dwKeySize)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public DSACryptoServiceProvider(
             int dwKeySize,
             System.Security.Cryptography.CspParameters? parameters
-        ) { }
+        )
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public DSACryptoServiceProvider(System.Security.Cryptography.CspParameters? parameters) { }
+        public DSACryptoServiceProvider(System.Security.Cryptography.CspParameters? parameters)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public System.Security.Cryptography.CspKeyContainerInfo CspKeyContainerInfo
@@ -280,7 +331,9 @@ namespace System.Security.Cryptography
         public bool PersistKeyInCsp
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PublicOnly
         {
@@ -293,7 +346,9 @@ namespace System.Security.Cryptography
         public static bool UseMachineKeyStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] CreateSignature(byte[] rgbHash)
@@ -301,7 +356,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public byte[] ExportCspBlob(bool includePrivateParameters)
         {
@@ -333,11 +390,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void ImportCspBlob(byte[] keyBlob) { }
+        public void ImportCspBlob(byte[] keyBlob)
+        {
+        }
 
-        public override void ImportParameters(
-            System.Security.Cryptography.DSAParameters parameters
-        ) { }
+        public override void ImportParameters(System.Security.Cryptography.DSAParameters parameters)
+        {
+        }
 
         public byte[] SignData(byte[] buffer)
         {
@@ -398,20 +457,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class MD5CryptoServiceProvider : System.Security.Cryptography.MD5
     {
-        public MD5CryptoServiceProvider() { }
+        public MD5CryptoServiceProvider()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected override byte[] HashFinal()
         {
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         protected override bool TryHashFinal(System.Span<byte> destination, out int bytesWritten)
         {
@@ -424,19 +493,24 @@ namespace System.Security.Cryptography
     )]
     public partial class PasswordDeriveBytes : System.Security.Cryptography.DeriveBytes
     {
-        public PasswordDeriveBytes(byte[] password, byte[]? salt) { }
+        public PasswordDeriveBytes(byte[] password, byte[]? salt)
+        {
+        }
 
         public PasswordDeriveBytes(
             byte[] password,
             byte[]? salt,
             System.Security.Cryptography.CspParameters? cspParams
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The hash implementation might be removed. Ensure the referenced hash algorithm is not trimmed."
         )]
         public PasswordDeriveBytes(byte[] password, byte[]? salt, string hashName, int iterations)
-        { }
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The hash implementation might be removed. Ensure the referenced hash algorithm is not trimmed."
@@ -447,15 +521,21 @@ namespace System.Security.Cryptography
             string hashName,
             int iterations,
             System.Security.Cryptography.CspParameters? cspParams
-        ) { }
+        )
+        {
+        }
 
-        public PasswordDeriveBytes(string strPassword, byte[]? rgbSalt) { }
+        public PasswordDeriveBytes(string strPassword, byte[]? rgbSalt)
+        {
+        }
 
         public PasswordDeriveBytes(
             string strPassword,
             byte[]? rgbSalt,
             System.Security.Cryptography.CspParameters? cspParams
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The hash implementation might be removed. Ensure the referenced hash algorithm is not trimmed."
@@ -465,7 +545,9 @@ namespace System.Security.Cryptography
             byte[]? rgbSalt,
             string strHashName,
             int iterations
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The hash implementation might be removed. Ensure the referenced hash algorithm is not trimmed."
@@ -476,7 +558,9 @@ namespace System.Security.Cryptography
             string strHashName,
             int iterations,
             System.Security.Cryptography.CspParameters? cspParams
-        ) { }
+        )
+        {
+        }
 
         public string HashName
         {
@@ -484,17 +568,23 @@ namespace System.Security.Cryptography
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "The hash implementation might be removed. Ensure the referenced hash algorithm is not trimmed."
             )]
-            set { }
+            set
+            {
+            }
         }
         public int IterationCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[]? Salt
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -508,7 +598,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         [System.ObsoleteAttribute(
             "Rfc2898DeriveBytes replaces PasswordDeriveBytes for deriving key material from a password and is preferred in new applications."
@@ -518,7 +610,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
     }
 
     [System.ObsoleteAttribute(
@@ -531,18 +625,24 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class RC2CryptoServiceProvider : System.Security.Cryptography.RC2
     {
-        public RC2CryptoServiceProvider() { }
+        public RC2CryptoServiceProvider()
+        {
+        }
 
         public override int EffectiveKeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseSalt
         {
             get { throw null; }
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
@@ -561,9 +661,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
     }
 
     [System.ObsoleteAttribute(
@@ -577,43 +681,71 @@ namespace System.Security.Cryptography
     public sealed partial class RNGCryptoServiceProvider
         : System.Security.Cryptography.RandomNumberGenerator
     {
-        public RNGCryptoServiceProvider() { }
+        public RNGCryptoServiceProvider()
+        {
+        }
 
-        public RNGCryptoServiceProvider(byte[] rgb) { }
+        public RNGCryptoServiceProvider(byte[] rgb)
+        {
+        }
 
-        public RNGCryptoServiceProvider(System.Security.Cryptography.CspParameters? cspParams) { }
+        public RNGCryptoServiceProvider(System.Security.Cryptography.CspParameters? cspParams)
+        {
+        }
 
-        public RNGCryptoServiceProvider(string str) { }
+        public RNGCryptoServiceProvider(string str)
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public override void GetBytes(byte[] data) { }
+        public override void GetBytes(byte[] data)
+        {
+        }
 
-        public override void GetBytes(byte[] data, int offset, int count) { }
+        public override void GetBytes(byte[] data, int offset, int count)
+        {
+        }
 
-        public override void GetBytes(System.Span<byte> data) { }
+        public override void GetBytes(System.Span<byte> data)
+        {
+        }
 
-        public override void GetNonZeroBytes(byte[] data) { }
+        public override void GetNonZeroBytes(byte[] data)
+        {
+        }
 
-        public override void GetNonZeroBytes(System.Span<byte> data) { }
+        public override void GetNonZeroBytes(System.Span<byte> data)
+        {
+        }
     }
 
     public sealed partial class RSACryptoServiceProvider
         : System.Security.Cryptography.RSA,
             System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
-        public RSACryptoServiceProvider() { }
+        public RSACryptoServiceProvider()
+        {
+        }
 
-        public RSACryptoServiceProvider(int dwKeySize) { }
+        public RSACryptoServiceProvider(int dwKeySize)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public RSACryptoServiceProvider(
             int dwKeySize,
             System.Security.Cryptography.CspParameters? parameters
-        ) { }
+        )
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public RSACryptoServiceProvider(System.Security.Cryptography.CspParameters? parameters) { }
+        public RSACryptoServiceProvider(System.Security.Cryptography.CspParameters? parameters)
+        {
+        }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public System.Security.Cryptography.CspKeyContainerInfo CspKeyContainerInfo
@@ -635,7 +767,9 @@ namespace System.Security.Cryptography
         public bool PersistKeyInCsp
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PublicOnly
         {
@@ -648,7 +782,9 @@ namespace System.Security.Cryptography
         public static bool UseMachineKeyStore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public byte[] Decrypt(byte[] rgb, bool fOAEP)
@@ -669,7 +805,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public byte[] Encrypt(byte[] rgb, bool fOAEP)
         {
@@ -719,11 +857,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void ImportCspBlob(byte[] keyBlob) { }
+        public void ImportCspBlob(byte[] keyBlob)
+        {
+        }
 
-        public override void ImportParameters(
-            System.Security.Cryptography.RSAParameters parameters
-        ) { }
+        public override void ImportParameters(System.Security.Cryptography.RSAParameters parameters)
+        {
+        }
 
         public byte[] SignData(byte[] buffer, int offset, int count, object halg)
         {
@@ -785,20 +925,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA1CryptoServiceProvider : System.Security.Cryptography.SHA1
     {
-        public SHA1CryptoServiceProvider() { }
+        public SHA1CryptoServiceProvider()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected override byte[] HashFinal()
         {
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         protected override bool TryHashFinal(System.Span<byte> destination, out int bytesWritten)
         {
@@ -816,20 +966,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA256CryptoServiceProvider : System.Security.Cryptography.SHA256
     {
-        public SHA256CryptoServiceProvider() { }
+        public SHA256CryptoServiceProvider()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected override byte[] HashFinal()
         {
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         protected override bool TryHashFinal(System.Span<byte> destination, out int bytesWritten)
         {
@@ -847,20 +1007,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA384CryptoServiceProvider : System.Security.Cryptography.SHA384
     {
-        public SHA384CryptoServiceProvider() { }
+        public SHA384CryptoServiceProvider()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected override byte[] HashFinal()
         {
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         protected override bool TryHashFinal(System.Span<byte> destination, out int bytesWritten)
         {
@@ -878,20 +1048,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA512CryptoServiceProvider : System.Security.Cryptography.SHA512
     {
-        public SHA512CryptoServiceProvider() { }
+        public SHA512CryptoServiceProvider()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected override byte[] HashFinal()
         {
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         protected override bool TryHashFinal(System.Span<byte> destination, out int bytesWritten)
         {
@@ -910,32 +1090,44 @@ namespace System.Security.Cryptography
     public sealed partial class TripleDESCryptoServiceProvider
         : System.Security.Cryptography.TripleDES
     {
-        public TripleDESCryptoServiceProvider() { }
+        public TripleDESCryptoServiceProvider()
+        {
+        }
 
         public override int BlockSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int FeedbackSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] IV
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.KeySizes[] LegalBlockSizes
         {
@@ -948,12 +1140,16 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.CipherMode Mode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.PaddingMode Padding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor()
@@ -982,10 +1178,16 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
     }
 }

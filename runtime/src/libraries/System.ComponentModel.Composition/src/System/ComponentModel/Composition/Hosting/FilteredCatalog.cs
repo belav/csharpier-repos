@@ -29,7 +29,9 @@ namespace System.ComponentModel.Composition.Hosting
         public FilteredCatalog(
             ComposablePartCatalog catalog,
             Func<ComposablePartDefinition, bool> filter
-        ) : this(catalog, filter, null) { }
+        ) : this(catalog, filter, null)
+        {
+        }
 
         internal FilteredCatalog(
             ComposablePartCatalog catalog,

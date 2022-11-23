@@ -103,8 +103,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAs(null, null);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (ArgumentNullException) { }
-                                catch (InvalidOperationException) { }
+                                catch (ArgumentNullException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -113,7 +117,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAs(null, null);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -139,7 +145,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsBase64(null, 0, 0);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (NotSupportedException) { }
+                                catch (NotSupportedException)
+                                {
+                                }
                             }
                         }
                     }
@@ -165,7 +173,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsBinHex(null, 0, 0);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (NotSupportedException) { }
+                                catch (NotSupportedException)
+                                {
+                                }
                             }
                         }
                     }
@@ -191,8 +201,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsBoolean();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -201,7 +215,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsBoolean();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -227,8 +243,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsDateTimeOffset();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -237,7 +257,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsDateTimeOffset();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -263,8 +285,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsDecimal();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -273,7 +299,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsDecimal();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -299,8 +327,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsDouble();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -309,7 +341,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsDouble();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -335,8 +369,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsFloat();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -345,7 +383,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsFloat();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -371,8 +411,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsInt();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -381,7 +425,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsInt();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -407,8 +453,12 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsLong();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -417,7 +467,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadContentAsLong();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -443,7 +495,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAs(null, null, null, null);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (ArgumentNullException) { }
+                                catch (ArgumentNullException)
+                                {
+                                }
                             }
                             catch (InvalidOperationException)
                             {
@@ -452,7 +506,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAs(null, null, null, null);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (ArgumentNullException) { }
+                                catch (ArgumentNullException)
+                                {
+                                }
                             }
                         }
                     }
@@ -478,7 +534,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsBase64(null, 0, 0);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (NotSupportedException) { }
+                                catch (NotSupportedException)
+                                {
+                                }
                             }
                         }
                     }
@@ -504,7 +562,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsBinHex(null, 0, 0);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (NotSupportedException) { }
+                                catch (NotSupportedException)
+                                {
+                                }
                             }
                         }
                     }
@@ -530,9 +590,15 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsBoolean();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (FormatException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (FormatException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -558,9 +624,15 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsDecimal();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (FormatException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (FormatException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -586,9 +658,15 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsDouble();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (FormatException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (FormatException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -614,9 +692,15 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsFloat();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (FormatException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (FormatException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -642,9 +726,15 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsInt();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (FormatException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (FormatException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -670,9 +760,15 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsLong();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
-                                catch (FormatException) { }
-                                catch (InvalidOperationException) { }
+                                catch (XmlException)
+                                {
+                                }
+                                catch (FormatException)
+                                {
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -698,7 +794,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsLong(null, null);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (ArgumentNullException) { }
+                                catch (ArgumentNullException)
+                                {
+                                }
                             }
                         }
                     }
@@ -724,7 +822,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsString(null, null);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (ArgumentNullException) { }
+                                catch (ArgumentNullException)
+                                {
+                                }
                             }
                         }
                     }
@@ -750,7 +850,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadStartElement(null);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (XmlException) { }
+                                catch (XmlException)
+                                {
+                                }
                             }
                         }
                     }
@@ -878,7 +980,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadValueChunk(null, 0, 0);
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (NotSupportedException) { }
+                                catch (NotSupportedException)
+                                {
+                                }
                             }
                         }
                     }
@@ -905,7 +1009,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsObject();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }
@@ -932,7 +1038,9 @@ namespace CoreXml.Test.XLinq
                                     r.ReadElementContentAsString();
                                     throw new TestException(TestResult.Failed, "");
                                 }
-                                catch (InvalidOperationException) { }
+                                catch (InvalidOperationException)
+                                {
+                                }
                             }
                         }
                     }

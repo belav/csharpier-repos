@@ -33,7 +33,10 @@ public class SpaServicesExtensionsTests
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => applicationbuilder.UseSpa(rb => { })
+            () =>
+                applicationbuilder.UseSpa(rb =>
+                {
+                })
         );
 
         Assert.Equal("No RootPath was set on the SpaStaticFilesOptions.", exception.Message);

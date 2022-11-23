@@ -88,6 +88,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// </summary>
         public abstract bool AnalyzeUnreachableBlocks { get; }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
     }
 }

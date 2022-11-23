@@ -45,7 +45,9 @@ namespace System.Web.Http.Validation
         private class CompositeModelValidator : ModelValidator
         {
             public CompositeModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-                : base(validatorProviders) { }
+                : base(validatorProviders)
+            {
+            }
 
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,

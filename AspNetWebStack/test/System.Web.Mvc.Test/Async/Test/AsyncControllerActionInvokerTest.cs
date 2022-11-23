@@ -1549,21 +1549,31 @@ namespace System.Web.Mvc.Async.Test
             }
 
             [AuthenticationFilterReturnsResult]
-            public void AuthenticationFilterShortCircuits() { }
+            public void AuthenticationFilterShortCircuits()
+            {
+            }
 
             [AuthenticationFilterChallengeSetsResult]
-            public void AuthenticationFilterChallenges() { }
+            public void AuthenticationFilterChallenges()
+            {
+            }
 
             [AuthenticationFilterReturnsResult]
             [AuthenticationFilterChallengeSetsResult]
-            public void AuthenticationFilterShortCircuitsAndChallenges() { }
+            public void AuthenticationFilterShortCircuitsAndChallenges()
+            {
+            }
 
             [AuthorizationFilterReturnsResult]
-            public void AuthorizationFilterShortCircuits() { }
+            public void AuthorizationFilterShortCircuits()
+            {
+            }
 
             [AuthenticationFilterChallengeSetsResult]
             [AuthorizationFilterReturnsResult]
-            public void AuthorizationFilterShortCircuitsAndChallenges() { }
+            public void AuthorizationFilterShortCircuitsAndChallenges()
+            {
+            }
 
             [CustomExceptionFilterHandlesError]
             public void ActionThrowsExceptionAndIsHandledAsync()
@@ -1571,7 +1581,9 @@ namespace System.Web.Mvc.Async.Test
                 throw new Exception("Some exception text.");
             }
 
-            public void ActionThrowsExceptionAndIsHandledCompleted() { }
+            public void ActionThrowsExceptionAndIsHandledCompleted()
+            {
+            }
 
             [CustomExceptionFilterDoesNotHandleError]
             public void ActionThrowsExceptionAndIsNotHandledAsync()
@@ -1579,7 +1591,9 @@ namespace System.Web.Mvc.Async.Test
                 throw new Exception("Some exception text.");
             }
 
-            public void ActionThrowsExceptionAndIsNotHandledCompleted() { }
+            public void ActionThrowsExceptionAndIsNotHandledCompleted()
+            {
+            }
 
             [CustomExceptionFilterHandlesError]
             public ActionResult ResultThrowsExceptionAndIsHandled()
@@ -1597,7 +1611,9 @@ namespace System.Web.Mvc.Async.Test
                 : FilterAttribute,
                     IAuthenticationFilter
             {
-                public void OnAuthentication(AuthenticationContext filterContext) { }
+                public void OnAuthentication(AuthenticationContext filterContext)
+                {
+                }
 
                 public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
                 {
@@ -1616,9 +1632,9 @@ namespace System.Web.Mvc.Async.Test
                     filterContext.Result = new LoggingActionResult("From authentication filter");
                 }
 
-                public void OnAuthenticationChallenge(
-                    AuthenticationChallengeContext filterContext
-                ) { }
+                public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+                {
+                }
             }
 
             private class AuthorizationFilterReturnsResultAttribute
@@ -1635,7 +1651,9 @@ namespace System.Web.Mvc.Async.Test
                 : FilterAttribute,
                     IExceptionFilter
             {
-                public void OnException(ExceptionContext filterContext) { }
+                public void OnException(ExceptionContext filterContext)
+                {
+                }
             }
 
             private class CustomExceptionFilterHandlesErrorAttribute

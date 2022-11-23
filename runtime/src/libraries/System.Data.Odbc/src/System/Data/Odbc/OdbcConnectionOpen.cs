@@ -45,7 +45,9 @@ namespace System.Data.Odbc
             }
         }
 
-        protected override void Activate() { }
+        protected override void Activate()
+        {
+        }
 
         public override DbTransaction BeginTransaction(IsolationLevel isolevel)
         {

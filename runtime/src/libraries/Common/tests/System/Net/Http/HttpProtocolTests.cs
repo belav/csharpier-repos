@@ -16,7 +16,9 @@ namespace System.Net.Http.Functional.Tests
     {
         protected virtual Stream GetStream(Stream s) => s;
 
-        public HttpProtocolTests(ITestOutputHelper output) : base(output) { }
+        public HttpProtocolTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public async Task GetAsync_RequestVersion10_Success()
@@ -618,7 +620,9 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpProtocolTests_Dribble : HttpProtocolTests
     {
-        public HttpProtocolTests_Dribble(ITestOutputHelper output) : base(output) { }
+        public HttpProtocolTests_Dribble(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override Stream GetStream(Stream s) => new DribbleStream(s);
     }

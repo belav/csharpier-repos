@@ -15,7 +15,9 @@ namespace System.Web.WebPages
 
         internal static bool AppStartExecuteCompleted { get; set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Init(HttpApplication application)
         {

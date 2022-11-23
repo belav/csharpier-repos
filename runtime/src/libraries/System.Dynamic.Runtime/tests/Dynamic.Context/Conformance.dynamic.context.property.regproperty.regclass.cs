@@ -1513,7 +1513,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
             dy.Property_shortNull = (short)-1;
             try
             {
-                lock (dy.Property_shortNull) { }
+                lock (dy.Property_shortNull)
+                {
+                }
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {

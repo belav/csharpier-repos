@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public BraceCompletionOptionsProvider() { }
+        public BraceCompletionOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(BraceCompletionOptions.Enable);

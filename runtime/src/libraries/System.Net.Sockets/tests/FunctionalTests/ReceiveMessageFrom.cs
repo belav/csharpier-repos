@@ -27,7 +27,9 @@ namespace System.Net.Sockets.Tests
 
         protected static readonly TimeSpan CancellationTestTimeout = TimeSpan.FromSeconds(30);
 
-        protected ReceiveMessageFrom(ITestOutputHelper output) : base(output) { }
+        protected ReceiveMessageFrom(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [InlineData(1, -1, 0)] // offset low
@@ -407,18 +409,24 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveMessageFrom_Sync : ReceiveMessageFrom<SocketHelperArraySync>
     {
-        public ReceiveMessageFrom_Sync(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_Sync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ReceiveMessageFrom_SyncForceNonBlocking
         : ReceiveMessageFrom<SocketHelperSyncForceNonBlocking>
     {
-        public ReceiveMessageFrom_SyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_SyncForceNonBlocking(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ReceiveMessageFrom_Apm : ReceiveMessageFrom<SocketHelperApm>
     {
-        public ReceiveMessageFrom_Apm(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_Apm(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void EndReceiveMessageFrom_NullAsyncResult_Throws_ArgumentNullException()
@@ -534,13 +542,17 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveMessageFrom_Task : ReceiveMessageFrom<SocketHelperTask>
     {
-        public ReceiveMessageFrom_Task(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_Task(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ReceiveMessageFrom_CancellableTask
         : ReceiveMessageFrom<SocketHelperCancellableTask>
     {
-        public ReceiveMessageFrom_CancellableTask(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_CancellableTask(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [MemberData(nameof(LoopbacksAndBuffers))]
@@ -585,7 +597,9 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveMessageFrom_Eap : ReceiveMessageFrom<SocketHelperEap>
     {
-        public ReceiveMessageFrom_Eap(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_Eap(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void ReceiveFromAsync_NullAsyncEventArgs_Throws_ArgumentNullException()
@@ -688,25 +702,32 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveMessageFrom_SpanSync : ReceiveMessageFrom<SocketHelperSpanSync>
     {
-        public ReceiveMessageFrom_SpanSync(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_SpanSync(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ReceiveMessageFrom_SpanSyncForceNonBlocking
         : ReceiveMessageFrom<SocketHelperSpanSyncForceNonBlocking>
     {
         public ReceiveMessageFrom_SpanSyncForceNonBlocking(ITestOutputHelper output) : base(output)
-        { }
+        {
+        }
     }
 
     public sealed class ReceiveMessageFrom_MemoryArrayTask
         : ReceiveMessageFrom<SocketHelperMemoryArrayTask>
     {
-        public ReceiveMessageFrom_MemoryArrayTask(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_MemoryArrayTask(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 
     public sealed class ReceiveMessageFrom_MemoryNativeTask
         : ReceiveMessageFrom<SocketHelperMemoryNativeTask>
     {
-        public ReceiveMessageFrom_MemoryNativeTask(ITestOutputHelper output) : base(output) { }
+        public ReceiveMessageFrom_MemoryNativeTask(ITestOutputHelper output) : base(output)
+        {
+        }
     }
 }

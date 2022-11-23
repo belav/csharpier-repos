@@ -32,6 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 CSharpSyntaxKinds.Instance,
                 CSharpFallbackEmbeddedLanguageClassifier.Instance,
                 classifiers
-            ) { }
+            )
+        {
+        }
     }
 }

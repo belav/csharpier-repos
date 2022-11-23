@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             IEnumerable<
                 Lazy<IEmbeddedLanguageDocumentHighlighter, EmbeddedLanguageMetadata>
             > allServices
-        ) : base(languageName, info, syntaxKinds, allServices) { }
+        ) : base(languageName, info, syntaxKinds, allServices)
+        {
+        }
 
         public async Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(
             Document document,

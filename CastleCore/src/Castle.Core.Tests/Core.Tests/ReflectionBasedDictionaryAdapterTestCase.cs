@@ -27,7 +27,9 @@ namespace Castle.Core.Tests
         {
             private bool writeOnly;
 
-            public Customer(int id, string name) : this(id, name, false) { }
+            public Customer(int id, string name) : this(id, name, false)
+            {
+            }
 
             public Customer(int id, string name, bool writeOnly)
             {

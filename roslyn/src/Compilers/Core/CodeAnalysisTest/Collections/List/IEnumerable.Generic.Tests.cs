@@ -557,7 +557,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             RepeatTest(
                 (enumerator, items) =>
                 {
-                    while (enumerator.MoveNext()) { }
+                    while (enumerator.MoveNext())
+                    {
+                    }
 
                     Assert.False(enumerator.MoveNext());
                 }

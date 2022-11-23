@@ -29,7 +29,9 @@ namespace System.Web.Http
         /// <remarks>
         /// This is a CLS compliant constructor.
         /// </remarks>
-        public AcceptVerbsAttribute(string method) : this(new string[] { method }) { }
+        public AcceptVerbsAttribute(string method) : this(new string[] { method })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AcceptVerbsAttribute" /> class.

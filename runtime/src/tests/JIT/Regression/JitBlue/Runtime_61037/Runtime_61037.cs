@@ -10,7 +10,9 @@
 //
 //     File: D:\a\_work\3\s\src\coreclr\jit\emitarm64.cpp Line: 13602
 //
-public class C0 { }
+public class C0
+{
+}
 
 public class Runtime_61037
 {

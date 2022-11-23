@@ -601,7 +601,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         public class PrimitiveArrayMemberTest : IObjectWritable
         {
-            public PrimitiveArrayMemberTest() { }
+            public PrimitiveArrayMemberTest()
+            {
+            }
 
             private PrimitiveArrayMemberTest(ObjectReader reader)
             {
@@ -907,7 +909,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         public class PrimitiveMemberTest : IObjectWritable
         {
-            public PrimitiveMemberTest() { }
+            public PrimitiveMemberTest()
+            {
+            }
 
             private PrimitiveMemberTest(ObjectReader reader)
             {
@@ -992,7 +996,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         public class PrimitiveValueTest : IObjectWritable
         {
-            public PrimitiveValueTest() { }
+            public PrimitiveValueTest()
+            {
+            }
 
             private PrimitiveValueTest(ObjectReader reader)
             {

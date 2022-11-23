@@ -36,7 +36,9 @@ namespace System.Threading
 
         public const int WaitTimeout = 0x102;
 
-        protected WaitHandle() { }
+        protected WaitHandle()
+        {
+        }
 
         [Obsolete(
             "WaitHandle.Handle has been deprecated. Use the SafeWaitHandle property instead."

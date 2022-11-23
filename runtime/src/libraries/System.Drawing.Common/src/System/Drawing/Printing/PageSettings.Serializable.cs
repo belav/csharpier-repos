@@ -4,5 +4,7 @@
 namespace System.Drawing.Printing
 {
     [Serializable]
-    partial class PageSettings { }
+    partial class PageSettings
+    {
+    }
 }

@@ -142,7 +142,11 @@ public class DefaultCodeTargetTest
         Assert.Null(result);
     }
 
-    private class MyExtension1 : ICodeTargetExtension { }
+    private class MyExtension1 : ICodeTargetExtension
+    {
+    }
 
-    private class MyExtension2 : ICodeTargetExtension { }
+    private class MyExtension2 : ICodeTargetExtension
+    {
+    }
 }

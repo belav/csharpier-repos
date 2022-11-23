@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             >? _canApplyCompilationOptions;
 
             public CustomizedCanApplyWorkspace(params ApplyChangesKind[] allowedKinds)
-                : this(allowedKinds, canApplyParseOptions: null) { }
+                : this(allowedKinds, canApplyParseOptions: null)
+            {
+            }
 
             public CustomizedCanApplyWorkspace(
                 ApplyChangesKind[] allowedKinds,

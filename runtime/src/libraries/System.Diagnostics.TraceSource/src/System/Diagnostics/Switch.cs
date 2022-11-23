@@ -51,7 +51,9 @@ namespace System.Diagnostics
         /// class.</para>
         /// </devdoc>
         protected Switch(string displayName, string? description)
-            : this(displayName, description, "0") { }
+            : this(displayName, description, "0")
+        {
+        }
 
         protected Switch(string displayName, string? description, string defaultSwitchValue)
         {
@@ -245,7 +247,9 @@ namespace System.Diagnostics
         ///     or environment, and then it will be invoked each time the switch's
         ///     value is changed.
         /// </devdoc>
-        protected virtual void OnSwitchSettingChanged() { }
+        protected virtual void OnSwitchSettingChanged()
+        {
+        }
 
         protected virtual void OnValueChanged()
         {

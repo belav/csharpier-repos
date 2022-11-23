@@ -9,5 +9,7 @@ namespace System.CommandLine.Completions;
 public class TokenCompletionContext : CompletionContext
 {
     internal TokenCompletionContext(ParseResult parseResult)
-        : base(parseResult, GetWordToComplete(parseResult)) { }
+        : base(parseResult, GetWordToComplete(parseResult))
+    {
+    }
 }

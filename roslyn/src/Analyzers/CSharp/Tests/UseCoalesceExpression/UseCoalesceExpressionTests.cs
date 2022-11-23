@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
     public class UseCoalesceExpressionTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseCoalesceExpressionTests(ITestOutputHelper logger) : base(logger) { }
+        public UseCoalesceExpressionTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

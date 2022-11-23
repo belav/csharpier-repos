@@ -7,7 +7,9 @@ using System.Runtime.InteropServices;
 unsafe partial class GenericsNative
 {
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IComInterface<T> where T : unmanaged { }
+    public interface IComInterface<T> where T : unmanaged
+    {
+    }
 
     public struct Point1<T> where T : struct
     {

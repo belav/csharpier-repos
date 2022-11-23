@@ -1198,5 +1198,7 @@ PRAGMA foreign_keys = 1;
                     ).OptionsBuilder
                 )
                 .Options
-        ) { }
+        )
+    {
+    }
 }

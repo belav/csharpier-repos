@@ -1831,7 +1831,9 @@ third line",
 ]";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            while (await reader.ReadAsync()) { }
+            while (await reader.ReadAsync())
+            {
+            }
         }
 
         [Test]
@@ -1854,7 +1856,9 @@ third line",
 
         private class NoOverridesDerivedJsonTextAsync : JsonTextReader
         {
-            public NoOverridesDerivedJsonTextAsync() : base(new StreamReader(Stream.Null)) { }
+            public NoOverridesDerivedJsonTextAsync() : base(new StreamReader(Stream.Null))
+            {
+            }
         }
 
         private class MinimalOverridesDerivedJsonReader : JsonReader
@@ -1935,7 +1939,9 @@ third line",
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.MaxDepth = 150;
 
-            while (await reader.ReadAsync()) { }
+            while (await reader.ReadAsync())
+            {
+            }
         }
 
         [Test]
@@ -1946,7 +1952,9 @@ third line",
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.MaxDepth = null;
 
-            while (await reader.ReadAsync()) { }
+            while (await reader.ReadAsync())
+            {
+            }
         }
 
         [Test]
@@ -1957,7 +1965,9 @@ third line",
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.MaxDepth = int.MaxValue;
 
-            while (await reader.ReadAsync()) { }
+            while (await reader.ReadAsync())
+            {
+            }
         }
     }
 }

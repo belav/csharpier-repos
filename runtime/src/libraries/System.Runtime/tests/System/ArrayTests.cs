@@ -4455,7 +4455,13 @@ namespace System.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "array",
-                () => Array.ForEach<int>(null, element => { })
+                () =>
+                    Array.ForEach<int>(
+                        null,
+                        element =>
+                        {
+                        }
+                    )
             );
         }
 
@@ -10753,11 +10759,15 @@ namespace System.Tests
             Array nonEmptyArray = new int*[2];
             Assert.Throws<NotSupportedException>(() =>
             {
-                foreach (object obj in nonEmptyArray) { }
+                foreach (object obj in nonEmptyArray)
+                {
+                }
             });
 
             Array emptyArray = new int*[0];
-            foreach (object obj in emptyArray) { }
+            foreach (object obj in emptyArray)
+            {
+            }
         }
 
         [Fact]
@@ -10907,7 +10917,9 @@ namespace System.Tests
             public bool Equals(Bar other) => string.Equals(Value, other.Value);
         }
 
-        public class Foo { }
+        public class Foo
+        {
+        }
 
         private static Bar[] CreateBarArray()
         {
@@ -11377,44 +11389,74 @@ namespace System.Tests
             public override int GetHashCode() => Value;
         }
 
-        public class NonGenericClass1 { }
+        public class NonGenericClass1
+        {
+        }
 
-        public class NonGenericClass2 { }
+        public class NonGenericClass2
+        {
+        }
 
-        public class NonGenericSubClass2 : NonGenericClass2 { }
+        public class NonGenericSubClass2 : NonGenericClass2
+        {
+        }
 
-        public class NonGenericSubClass1 : NonGenericClass1 { }
+        public class NonGenericSubClass1 : NonGenericClass1
+        {
+        }
 
-        public class GenericClass<T> { }
+        public class GenericClass<T>
+        {
+        }
 
-        public struct GenericStruct<T> { }
+        public struct GenericStruct<T>
+        {
+        }
 
-        public interface NonGenericInterface1 { }
+        public interface NonGenericInterface1
+        {
+        }
 
-        public interface NonGenericInterface2 { }
+        public interface NonGenericInterface2
+        {
+        }
 
-        public interface GenericInterface<T> { }
+        public interface GenericInterface<T>
+        {
+        }
 
-        public struct StructWithNonGenericInterface1 : NonGenericInterface1 { }
+        public struct StructWithNonGenericInterface1 : NonGenericInterface1
+        {
+        }
 
-        public struct StructWithNonGenericInterface1_2
-            : NonGenericInterface1,
-                NonGenericInterface2 { }
+        public struct StructWithNonGenericInterface1_2 : NonGenericInterface1, NonGenericInterface2
+        {
+        }
 
-        public class ClassWithNonGenericInterface1 : NonGenericInterface1 { }
+        public class ClassWithNonGenericInterface1 : NonGenericInterface1
+        {
+        }
 
-        public class ClassWithNonGenericInterface1_2
-            : NonGenericInterface1,
-                NonGenericInterface2 { }
+        public class ClassWithNonGenericInterface1_2 : NonGenericInterface1, NonGenericInterface2
+        {
+        }
 
-        public interface NonGenericInterfaceWithNonGenericInterface1 : NonGenericInterface1 { }
+        public interface NonGenericInterfaceWithNonGenericInterface1 : NonGenericInterface1
+        {
+        }
 
         public class ClassWithNonGenericInterfaceWithNonGenericInterface1
-            : NonGenericInterfaceWithNonGenericInterface1 { }
+            : NonGenericInterfaceWithNonGenericInterface1
+        {
+        }
 
-        public abstract class AbstractClass { }
+        public abstract class AbstractClass
+        {
+        }
 
-        public static class StaticClass { }
+        public static class StaticClass
+        {
+        }
 
         public enum SByteEnum : sbyte
         {
@@ -11438,7 +11480,9 @@ namespace System.Tests
             Case3
         }
 
-        public enum Int64Enum : long { }
+        public enum Int64Enum : long
+        {
+        }
     }
 
     [Collection(nameof(DisableParallelization))]

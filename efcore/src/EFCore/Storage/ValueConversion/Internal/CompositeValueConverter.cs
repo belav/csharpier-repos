@@ -32,7 +32,9 @@ public class CompositeValueConverter<TModel, TMiddle, TProvider> : ValueConverte
                 (Expression<Func<TMiddle, TModel>>)converter1.ConvertFromProviderExpression
             ),
             mappingHints
-        ) { }
+        )
+    {
+    }
 
     private static Expression<Func<TIn, TOut>> Compose<TIn, TOut>(
         Expression<Func<TIn, TMiddle>> upper,

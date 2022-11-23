@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpProjectFileLoaderFactory() { }
+        public CSharpProjectFileLoaderFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
         {

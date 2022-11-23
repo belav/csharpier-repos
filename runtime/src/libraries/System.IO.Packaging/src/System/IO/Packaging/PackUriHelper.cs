@@ -723,7 +723,9 @@ namespace System.IO.Packaging
                     isNormalized: false,
                     computeIsRelationship: true,
                     isRelationshipPartUri: false /*dummy value as we will compute it later*/
-                ) { }
+                )
+            {
+            }
 
             //Use this constructor when you already know if a given string is a relationship
             //or no. One place this is used is while creating a normalized uri for a part Uri
@@ -735,7 +737,9 @@ namespace System.IO.Packaging
                     isNormalized: false,
                     computeIsRelationship: false,
                     isRelationshipPartUri: isRelationshipUri
-                ) { }
+                )
+            {
+            }
 
             #endregion Internal Constructors
 

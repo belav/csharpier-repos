@@ -6,7 +6,9 @@ class A
         M.a_run = true;
     }
 
-    public static void f() { }
+    public static void f()
+    {
+    }
 }
 
 class B
@@ -18,7 +20,9 @@ class B
         M.b_run = true;
     }
 
-    public static void f() { }
+    public static void f()
+    {
+    }
 }
 
 class M

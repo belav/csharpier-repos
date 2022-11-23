@@ -9,7 +9,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeAllocHHandle : SafeBuffer
     {
-        public SafeAllocHHandle() : base(true) { }
+        public SafeAllocHHandle() : base(true)
+        {
+        }
 
         internal SafeAllocHHandle(IntPtr handle) : base(true)
         {

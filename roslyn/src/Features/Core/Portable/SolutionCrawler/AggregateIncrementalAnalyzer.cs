@@ -248,7 +248,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             }
         }
 
-        public void LogAnalyzerCountSummary() { }
+        public void LogAnalyzerCountSummary()
+        {
+        }
 
         public int Priority => 1;
     }

@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class DeclarationScopeParsingTests : ParsingTests
     {
-        public DeclarationScopeParsingTests(ITestOutputHelper output) : base(output) { }
+        public DeclarationScopeParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Theory]
         [InlineData(LanguageVersion.CSharp10)]

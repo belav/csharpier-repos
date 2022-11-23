@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory() { }
+            public Factory()
+            {
+            }
 
             public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
                 new CSharpSyntaxFormattingService(languageServices.LanguageServices);

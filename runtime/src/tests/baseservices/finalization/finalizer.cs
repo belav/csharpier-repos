@@ -33,7 +33,9 @@ public class Finalize : IFinalize
 
 public class Finalizer
 {
-    public Finalizer() { }
+    public Finalizer()
+    {
+    }
 
     ~Finalizer()
     {
@@ -50,7 +52,9 @@ public class FinalizerWrapperProtected
 
     protected class FinalizerProtected
     {
-        public FinalizerProtected() { }
+        public FinalizerProtected()
+        {
+        }
 
         ~FinalizerProtected()
         {
@@ -61,7 +65,9 @@ public class FinalizerWrapperProtected
 
 internal class FinalizerInternal
 {
-    public FinalizerInternal() { }
+    public FinalizerInternal()
+    {
+    }
 
     ~FinalizerInternal()
     {
@@ -78,7 +84,9 @@ public class FinalizerWrapperProtectedInternal
 
     protected internal class FinalizerProtectedInternal
     {
-        public FinalizerProtectedInternal() { }
+        public FinalizerProtectedInternal()
+        {
+        }
 
         ~FinalizerProtectedInternal()
         {
@@ -96,7 +104,9 @@ public class FinalizerWrapperPrivate
 
     private class FinalizerPrivate
     {
-        public FinalizerPrivate() { }
+        public FinalizerPrivate()
+        {
+        }
 
         ~FinalizerPrivate()
         {
@@ -107,7 +117,9 @@ public class FinalizerWrapperPrivate
 
 public abstract class FinalizerBase
 {
-    public FinalizerBase() { }
+    public FinalizerBase()
+    {
+    }
 
     ~FinalizerBase()
     {
@@ -117,14 +129,20 @@ public abstract class FinalizerBase
 
 public class FinalizerAbstract : FinalizerBase
 {
-    public FinalizerAbstract() { }
+    public FinalizerAbstract()
+    {
+    }
 }
 
 public class FinalizerGeneric<T>
 {
-    public FinalizerGeneric() { }
+    public FinalizerGeneric()
+    {
+    }
 
-    ~FinalizerGeneric() { }
+    ~FinalizerGeneric()
+    {
+    }
 }
 
 public class FinalizerWrapperGeneric
@@ -136,15 +154,21 @@ public class FinalizerWrapperGeneric
 
     private class FinalizerPrivate<T>
     {
-        public FinalizerPrivate() { }
+        public FinalizerPrivate()
+        {
+        }
 
-        ~FinalizerPrivate() { }
+        ~FinalizerPrivate()
+        {
+        }
     }
 }
 
 public class Gen<T>
 {
-    public Gen() { }
+    public Gen()
+    {
+    }
 }
 
 public class Test

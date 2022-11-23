@@ -15,7 +15,9 @@ namespace System.Diagnostics.Metrics
         public abstract IAggregationStatistics Collect();
     }
 
-    internal interface IAggregationStatistics { }
+    internal interface IAggregationStatistics
+    {
+    }
 
     internal readonly struct QuantileValue
     {

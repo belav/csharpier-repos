@@ -5,20 +5,30 @@ public class ShouldInheritBeforeAndAfterMapOnlyOnce : AutoMapperSpecBase
     int afterMapCount;
     int beforeMapCount;
 
-    public abstract class BaseBaseSource { }
+    public abstract class BaseBaseSource
+    {
+    }
 
     public class BaseSource : BaseBaseSource
     {
         public string Foo { get; set; }
     }
 
-    public class Source : BaseSource { }
+    public class Source : BaseSource
+    {
+    }
 
-    public abstract class BaseBaseDest { }
+    public abstract class BaseBaseDest
+    {
+    }
 
-    public class BaseDest : BaseBaseDest { }
+    public class BaseDest : BaseBaseDest
+    {
+    }
 
-    public class Dest : BaseDest { }
+    public class Dest : BaseDest
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
@@ -50,20 +60,30 @@ public class ShouldInheritBeforeAndAfterMapOnlyOnceIncludeBase : AutoMapperSpecB
     int afterMapCount;
     int beforeMapCount;
 
-    public abstract class BaseBaseSource { }
+    public abstract class BaseBaseSource
+    {
+    }
 
     public class BaseSource : BaseBaseSource
     {
         public string Foo { get; set; }
     }
 
-    public class Source : BaseSource { }
+    public class Source : BaseSource
+    {
+    }
 
-    public abstract class BaseBaseDest { }
+    public abstract class BaseBaseDest
+    {
+    }
 
-    public class BaseDest : BaseBaseDest { }
+    public class BaseDest : BaseBaseDest
+    {
+    }
 
-    public class Dest : BaseDest { }
+    public class Dest : BaseDest
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
@@ -95,14 +115,18 @@ public class ShouldInheritBeforeAndAfterMap
         public string Prop { get; set; }
     }
 
-    public class Class : BaseClass { }
+    public class Class : BaseClass
+    {
+    }
 
     public class BaseDto
     {
         public string DifferentProp { get; set; }
     }
 
-    public class Dto : BaseDto { }
+    public class Dto : BaseDto
+    {
+    }
 
     [Fact]
     public void should_inherit_base_beforemap()

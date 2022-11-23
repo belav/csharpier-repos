@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public OverrideCompletionProvider() { }
+        public OverrideCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

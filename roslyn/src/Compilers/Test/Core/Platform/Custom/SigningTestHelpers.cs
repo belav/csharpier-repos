@@ -89,7 +89,9 @@ namespace Roslyn.Test.Utilities
 
         internal sealed class VirtualizedStrongNameFileSystem : StrongNameFileSystem
         {
-            internal VirtualizedStrongNameFileSystem(string tempPath = null) : base(tempPath) { }
+            internal VirtualizedStrongNameFileSystem(string tempPath = null) : base(tempPath)
+            {
+            }
 
             private static bool PathEquals(string left, string right)
             {

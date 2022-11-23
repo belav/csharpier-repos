@@ -22,7 +22,9 @@ public abstract class SharedTypeQueryTestBase : NonSharedModelTestBase
 
     protected class MyContext24601 : DbContext
     {
-        public MyContext24601(DbContextOptions options) : base(options) { }
+        public MyContext24601(DbContextOptions options) : base(options)
+        {
+        }
 
         public void Seed()
         {

@@ -283,7 +283,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                                 noPiaLocalTypes[typeDefName] = t;
                             }
-                            catch (BadImageFormatException) { }
+                            catch (BadImageFormatException)
+                            {
+                            }
                         }
                     }
                 }

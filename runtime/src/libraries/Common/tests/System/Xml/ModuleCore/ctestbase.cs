@@ -29,7 +29,9 @@ namespace OLEDB.Test.ModuleCore
         private CAttrBase _attribute;
 
         //Constructor
-        public CTestBase(string desc) : this(null, desc) { }
+        public CTestBase(string desc) : this(null, desc)
+        {
+        }
 
         //Constructor
         public CTestBase(string name, string desc)
@@ -181,7 +183,9 @@ namespace OLEDB.Test.ModuleCore
             set { _children = value; }
         }
 
-        protected virtual void UpdateAttributes() { }
+        protected virtual void UpdateAttributes()
+        {
+        }
 
         protected virtual void DetermineChildren()
         {
@@ -217,7 +221,9 @@ namespace OLEDB.Test.ModuleCore
             }
         }
 
-        public virtual void AddChildren() { }
+        public virtual void AddChildren()
+        {
+        }
 
         //ITestCase implementation
         public string GetName()

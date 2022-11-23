@@ -17,7 +17,9 @@ namespace InterlockedTest
         ManualResetEvent signal;
         Thread[] threads;
 
-        public LongTest() { }
+        public LongTest()
+        {
+        }
 
         public LongTest(int LoopValue, int NumberOfThreads)
         {

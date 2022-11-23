@@ -12,8 +12,12 @@ public struct AA
         int[,] aa = new int[2, 2];
         do
         {
-            try { }
-            catch (Exception) { }
+            try
+            {
+            }
+            catch (Exception)
+            {
+            }
             aa[param, Math.Min(0, 1)] = 0;
         } while ((new bool[2, 2])[param, param]);
     }

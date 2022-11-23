@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis
                 GetGeneratorAssemblyName(generator),
                 generator.GetGeneratorType().Assembly.GetName().Version!,
                 GetGeneratorTypeName(generator)
-            ) { }
+            )
+        {
+        }
 
         public static string GetGeneratorAssemblyName(ISourceGenerator generator)
         {

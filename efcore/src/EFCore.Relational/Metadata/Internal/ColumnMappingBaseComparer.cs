@@ -13,7 +13,9 @@ public sealed class ColumnMappingBaseComparer
     : IEqualityComparer<IColumnMappingBase>,
         IComparer<IColumnMappingBase>
 {
-    private ColumnMappingBaseComparer() { }
+    private ColumnMappingBaseComparer()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal ControlFlowPass(CSharpCompilation compilation, Symbol member, BoundNode node)
-            : base(compilation, member, node) { }
+            : base(compilation, member, node)
+        {
+        }
 
         internal ControlFlowPass(
             CSharpCompilation compilation,
@@ -47,7 +49,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
+        ) : base(compilation, member, node, firstInRegion, lastInRegion)
+        {
+        }
 
         internal struct LocalState : ILocalState
         {
@@ -78,7 +82,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal sealed class LocalFunctionState : AbstractLocalFunctionState
         {
             public LocalFunctionState(LocalState unreachableState)
-                : base(unreachableState.Clone(), unreachableState.Clone()) { }
+                : base(unreachableState.Clone(), unreachableState.Clone())
+            {
+            }
         }
 
         protected override LocalFunctionState CreateLocalFunctionState(

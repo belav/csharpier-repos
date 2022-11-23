@@ -8,6 +8,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
     {
         public static readonly NoOpFormattingRule Instance = new();
 
-        private NoOpFormattingRule() { }
+        private NoOpFormattingRule()
+        {
+        }
     }
 }

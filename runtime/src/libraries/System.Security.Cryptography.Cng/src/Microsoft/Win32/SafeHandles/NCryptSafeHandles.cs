@@ -346,10 +346,14 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     public sealed class SafeNCryptKeyHandle : SafeNCryptHandle
     {
-        public SafeNCryptKeyHandle() { }
+        public SafeNCryptKeyHandle()
+        {
+        }
 
         public SafeNCryptKeyHandle(IntPtr handle, SafeHandle parentHandle)
-            : base(handle, parentHandle) { }
+            : base(handle, parentHandle)
+        {
+        }
 
         internal SafeNCryptKeyHandle Duplicate()
         {

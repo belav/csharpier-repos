@@ -15,11 +15,15 @@ namespace System
 {
     // CONTRACT with Runtime
     // Place holder type for type hierarchy, Compiler/Runtime requires this class
-    public abstract class ValueType { }
+    public abstract class ValueType
+    {
+    }
 
     // CONTRACT with Runtime, Compiler/Runtime requires this class
     // Place holder type for type hierarchy
-    public abstract class Enum : ValueType { }
+    public abstract class Enum : ValueType
+    {
+    }
 
     /*============================================================
     **

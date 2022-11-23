@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditAndContinueHostWorkspaceEventListener() { }
+        public EditAndContinueHostWorkspaceEventListener()
+        {
+        }
 
         public void StartListening(Workspace workspace, object serviceOpt)
         {

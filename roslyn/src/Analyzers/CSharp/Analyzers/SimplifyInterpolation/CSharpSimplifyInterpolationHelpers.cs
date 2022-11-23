@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.SimplifyInterpolation
     {
         public static CSharpSimplifyInterpolationHelpers Instance { get; } = new();
 
-        private CSharpSimplifyInterpolationHelpers() { }
+        private CSharpSimplifyInterpolationHelpers()
+        {
+        }
 
         protected override bool PermitNonLiteralAlignmentComponents => true;
 

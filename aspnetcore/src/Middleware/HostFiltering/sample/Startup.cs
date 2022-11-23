@@ -17,7 +17,9 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddHostFiltering(options => { });
+        services.AddHostFiltering(options =>
+        {
+        });
 
         // Fallback
         services.PostConfigure<HostFilteringOptions>(options =>

@@ -15,7 +15,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.Basic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicCodeDefinitionWindow(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicCodeDefinitionWindow)) { }
+            : base(instanceFactory, nameof(BasicCodeDefinitionWindow))
+        {
+        }
 
         [WpfTheory]
         [CombinatorialData]

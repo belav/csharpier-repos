@@ -16,7 +16,9 @@ internal class SocketAwaitableEventArgs
     : SocketAsyncEventArgs,
         IValueTaskSource<SocketOperationResult>
 {
-    private static readonly Action<object?> _continuationCompleted = _ => { };
+    private static readonly Action<object?> _continuationCompleted = _ =>
+    {
+    };
 
     private readonly PipeScheduler _ioScheduler;
 

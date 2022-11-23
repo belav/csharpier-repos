@@ -278,7 +278,9 @@ public class RelationalDatabaseFacadeExtensionsTest
                         >()
                     )
                 )
-            ) { }
+            )
+        {
+        }
     }
 
     private class TestRawSqlCommandBuilder : IRawSqlCommandBuilder

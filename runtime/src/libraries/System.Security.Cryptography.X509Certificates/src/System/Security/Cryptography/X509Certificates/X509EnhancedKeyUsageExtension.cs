@@ -22,10 +22,14 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X509EnhancedKeyUsageExtension(AsnEncodedData encodedEnhancedKeyUsages, bool critical)
-            : base(Oids.EnhancedKeyUsageOid, encodedEnhancedKeyUsages.RawData, critical) { }
+            : base(Oids.EnhancedKeyUsageOid, encodedEnhancedKeyUsages.RawData, critical)
+        {
+        }
 
         public X509EnhancedKeyUsageExtension(OidCollection enhancedKeyUsages, bool critical)
-            : base(Oids.EnhancedKeyUsageOid, EncodeExtension(enhancedKeyUsages), critical) { }
+            : base(Oids.EnhancedKeyUsageOid, EncodeExtension(enhancedKeyUsages), critical)
+        {
+        }
 
         public OidCollection EnhancedKeyUsages
         {

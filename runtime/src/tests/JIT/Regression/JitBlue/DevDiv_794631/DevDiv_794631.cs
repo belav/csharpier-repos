@@ -40,7 +40,11 @@ class Repro
         return s;
     }
 
-    class U1 { }
+    class U1
+    {
+    }
 
-    class U2 { }
+    class U2
+    {
+    }
 }

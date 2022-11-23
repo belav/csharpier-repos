@@ -9,7 +9,9 @@ namespace System.Xml
     // Represents the content of an XML comment.
     public class XmlComment : XmlCharacterData
     {
-        protected internal XmlComment(string? comment, XmlDocument doc) : base(comment, doc) { }
+        protected internal XmlComment(string? comment, XmlDocument doc) : base(comment, doc)
+        {
+        }
 
         // Gets the name of the node.
         public override string Name

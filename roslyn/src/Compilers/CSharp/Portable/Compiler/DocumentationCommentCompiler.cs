@@ -1224,7 +1224,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             int pos = 0;
             int minLength = Math.Min(str1.Length, str2.Length);
 
-            for (; pos < minLength && str1[pos] == str2[pos]; pos++) { }
+            for (; pos < minLength && str1[pos] == str2[pos]; pos++)
+            {
+            }
 
             return str1.Substring(0, pos);
         }

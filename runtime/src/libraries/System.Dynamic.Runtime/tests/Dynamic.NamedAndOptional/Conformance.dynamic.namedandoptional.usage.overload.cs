@@ -2853,11 +2853,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             return 1;
         }
 
-        public void Foo(int x, string y, string z) { }
+        public void Foo(int x, string y, string z)
+        {
+        }
 
-        public void Foo(string y, int x, string z) { }
+        public void Foo(string y, int x, string z)
+        {
+        }
 
-        public void Foo(string z, string y, int? x) { }
+        public void Foo(string z, string y, int? x)
+        {
+        }
     }
     //</Code>
 }

@@ -20,7 +20,9 @@ public class CacheServiceExtensionsTests
         var services = new ServiceCollection();
 
         // Act
-        services.AddStackExchangeRedisCache(options => { });
+        services.AddStackExchangeRedisCache(options =>
+        {
+        });
 
         // Assert
         var distributedCache = services.FirstOrDefault(
@@ -39,7 +41,9 @@ public class CacheServiceExtensionsTests
         services.AddScoped(typeof(IDistributedCache), sp => Mock.Of<IDistributedCache>());
 
         // Act
-        services.AddStackExchangeRedisCache(options => { });
+        services.AddStackExchangeRedisCache(options =>
+        {
+        });
 
         // Assert
         var serviceProvider = services.BuildServiceProvider();
@@ -60,7 +64,12 @@ public class CacheServiceExtensionsTests
     {
         var services = new ServiceCollection();
 
-        Assert.Same(services, services.AddStackExchangeRedisCache(_ => { }));
+        Assert.Same(
+            services,
+            services.AddStackExchangeRedisCache(_ =>
+            {
+            })
+        );
     }
 
     [Fact]
@@ -70,7 +79,9 @@ public class CacheServiceExtensionsTests
         var services = new ServiceCollection();
 
         // Act
-        services.AddStackExchangeRedisCache(options => { });
+        services.AddStackExchangeRedisCache(options =>
+        {
+        });
 
         // Assert
         using var serviceProvider = services.BuildServiceProvider();
@@ -86,7 +97,9 @@ public class CacheServiceExtensionsTests
         var services = new ServiceCollection();
 
         // Act
-        services.AddStackExchangeRedisCache(options => { });
+        services.AddStackExchangeRedisCache(options =>
+        {
+        });
         services.AddLogging();
 
         // Assert
@@ -114,7 +127,9 @@ public class CacheServiceExtensionsTests
 
         // Act
         services.AddLogging();
-        services.AddStackExchangeRedisCache(options => { });
+        services.AddStackExchangeRedisCache(options =>
+        {
+        });
 
         // Assert
         var serviceProvider = services.BuildServiceProvider();

@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp
         public ImmutableDictionary<string, object> Properties { get; }
 
         public FSharpDocumentSpan(Document document, TextSpan sourceSpan)
-            : this(document, sourceSpan, properties: null) { }
+            : this(document, sourceSpan, properties: null)
+        {
+        }
 
         public FSharpDocumentSpan(
             Document document,

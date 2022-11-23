@@ -629,7 +629,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 bool isInlinable,
                 CodeActionPriority priority = CodeActionPriority.Default
             ) : this(title, nestedActions, isInlinable, priority, createdFromFactoryMethod: false)
-            { }
+            {
+            }
 
             public static CodeActionWithNestedActions Create(
                 string title,
@@ -690,7 +691,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
                     equivalenceKey,
                     priority,
                     createdFromFactoryMethod: false
-                ) { }
+                )
+            {
+            }
 
             public static DocumentChangeAction Create(
                 string title,
@@ -738,7 +741,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
                     equivalenceKey,
                     priority,
                     createdFromFactoryMethod: false
-                ) { }
+                )
+            {
+            }
 
             public static SolutionChangeAction Create(
                 string title,
@@ -766,7 +771,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string? equivalenceKey,
                 CodeActionPriority priority,
                 bool createdFromFactoryMethod
-            ) : base(title, equivalenceKey, priority, createdFromFactoryMethod) { }
+            ) : base(title, equivalenceKey, priority, createdFromFactoryMethod)
+            {
+            }
 
             public static NoChangeAction Create(
                 string title,

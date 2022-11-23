@@ -23,7 +23,9 @@ namespace System.Net.Http.Formatting
                 StringComparison.OrdinalIgnoreCase,
                 isValueSubstring: true,
                 mediaType: MediaTypeConstants.ApplicationJsonMediaType
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Returns a value indicating whether the current <see cref="RequestHeaderMapping"/>

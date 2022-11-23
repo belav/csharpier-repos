@@ -9,7 +9,9 @@ public class NameValueCollectionMapperTests
         [Fact]
         public void ReturnsTheDestinationWhenPassedOne()
         {
-            var config = new MapperConfiguration(cfg => { });
+            var config = new MapperConfiguration(cfg =>
+            {
+            });
             IMapper mapper = new Mapper(config);
 
             var destination = new NameValueCollection();
@@ -22,7 +24,9 @@ public class NameValueCollectionMapperTests
         [Fact]
         public void ReturnsEmptyCollectionWhenSourceCollectionIsEmpty()
         {
-            var config = new MapperConfiguration(cfg => { });
+            var config = new MapperConfiguration(cfg =>
+            {
+            });
             IMapper mapper = new Mapper(config);
 
             var result = mapper.Map(new NameValueCollection(), (NameValueCollection)null);
@@ -33,7 +37,9 @@ public class NameValueCollectionMapperTests
         [Fact]
         public void ReturnsMappedObjectWithExpectedValuesWhenSourceCollectionHasOneItem()
         {
-            var config = new MapperConfiguration(cfg => { });
+            var config = new MapperConfiguration(cfg =>
+            {
+            });
             IMapper mapper = new Mapper(config);
             var sourceValue = new NameValueCollection() { { "foo", "bar" } };
 

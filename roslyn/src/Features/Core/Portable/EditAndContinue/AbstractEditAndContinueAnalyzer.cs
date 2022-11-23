@@ -1240,7 +1240,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             public readonly Match<SyntaxNode>? Match;
             public readonly SyntaxNode? NewBody;
 
-            public LambdaInfo(List<int> activeNodeIndices) : this(activeNodeIndices, null, null) { }
+            public LambdaInfo(List<int> activeNodeIndices) : this(activeNodeIndices, null, null)
+            {
+            }
 
             private LambdaInfo(
                 List<int>? activeNodeIndices,

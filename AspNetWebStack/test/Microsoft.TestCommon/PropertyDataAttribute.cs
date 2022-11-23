@@ -14,7 +14,9 @@ namespace Microsoft.TestCommon
     public class PropertyDataAttribute : MemberDataAttributeBase
     {
         public PropertyDataAttribute(string propertyName, params object[] parameters)
-            : base(propertyName, parameters) { }
+            : base(propertyName, parameters)
+        {
+        }
 
         public Type PropertyType
         {

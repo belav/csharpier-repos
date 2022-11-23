@@ -62,7 +62,9 @@ namespace System.Threading.Tasks.Dataflow
         /// This may be null to indicate that no cloning need be performed.
         /// </param>
         public BroadcastBlock(Func<T, T>? cloningFunction)
-            : this(cloningFunction, DataflowBlockOptions.Default) { }
+            : this(cloningFunction, DataflowBlockOptions.Default)
+        {
+        }
 
         /// <summary>Initializes the <see cref="BroadcastBlock{T}"/>  with the specified cloning function and <see cref="DataflowBlockOptions"/>.</summary>
         /// <param name="cloningFunction">

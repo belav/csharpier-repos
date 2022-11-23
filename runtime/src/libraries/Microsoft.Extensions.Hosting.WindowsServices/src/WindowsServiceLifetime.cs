@@ -31,7 +31,9 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
                 loggerFactory,
                 optionsAccessor,
                 Options.Options.Create(new WindowsServiceLifetimeOptions())
-            ) { }
+            )
+        {
+        }
 
         public WindowsServiceLifetime(
             IHostEnvironment environment,

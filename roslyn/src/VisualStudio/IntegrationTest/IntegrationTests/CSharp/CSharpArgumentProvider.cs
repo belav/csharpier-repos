@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpArgumentProvider(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpArgumentProvider)) { }
+            : base(instanceFactory, nameof(CSharpArgumentProvider))
+        {
+        }
 
         public override async Task InitializeAsync()
         {

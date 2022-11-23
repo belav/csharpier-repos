@@ -19,7 +19,9 @@ namespace Roslyn.Test.Utilities
         [Obsolete(
             "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes"
         )]
-        public WpfTestCase() { }
+        public WpfTestCase()
+        {
+        }
 
         public WpfTestCase(
             IMessageSink diagnosticMessageSink,
@@ -34,7 +36,9 @@ namespace Roslyn.Test.Utilities
                 defaultMethodDisplayOptions,
                 testMethod,
                 testMethodArguments
-            ) { }
+            )
+        {
+        }
 
         public override Task<RunSummary> RunAsync(
             IMessageSink diagnosticMessageSink,

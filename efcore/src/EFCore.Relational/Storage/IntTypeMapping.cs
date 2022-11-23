@@ -26,13 +26,17 @@ public class IntTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public IntTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Int32)
-        : base(storeType, typeof(int), dbType) { }
+        : base(storeType, typeof(int), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="IntTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected IntTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected IntTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

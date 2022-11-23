@@ -16,6 +16,8 @@ namespace System.Data
         internal OrderedEnumerableRowCollection(
             EnumerableRowCollection<TRow> enumerableTable,
             IEnumerable<TRow> enumerableRows
-        ) : base(enumerableTable, enumerableRows, null) { }
+        ) : base(enumerableTable, enumerableRows, null)
+        {
+        }
     }
 }

@@ -51,21 +51,27 @@ public abstract class RazorPageBase
         throw new NotImplementedException();
     }
 
-    protected virtual void PushWriter(TextWriter writer) { }
+    protected virtual void PushWriter(TextWriter writer)
+    {
+    }
 
     protected virtual TextWriter PopWriter()
     {
         throw new NotImplementedException();
     }
 
-    public void StartTagHelperWritingScope(HtmlEncoder encoder) { }
+    public void StartTagHelperWritingScope(HtmlEncoder encoder)
+    {
+    }
 
     public TagHelperContent EndTagHelperWritingScope()
     {
         throw new NotImplementedException();
     }
 
-    public void BeginWriteTagHelperAttribute() { }
+    public void BeginWriteTagHelperAttribute()
+    {
+    }
 
     public string EndWriteTagHelperAttribute()
     {
@@ -78,13 +84,21 @@ public abstract class RazorPageBase
     }
 
     // Compatibility for 1.X projects
-    protected void DefineSection(string name, Func<object, Task> section) { }
+    protected void DefineSection(string name, Func<object, Task> section)
+    {
+    }
 
-    public virtual void DefineSection(string name, RenderAsyncDelegate section) { }
+    public virtual void DefineSection(string name, RenderAsyncDelegate section)
+    {
+    }
 
-    public virtual void Write(object value) { }
+    public virtual void Write(object value)
+    {
+    }
 
-    public virtual void WriteLiteral(object value) { }
+    public virtual void WriteLiteral(object value)
+    {
+    }
 
     public virtual void BeginWriteAttribute(
         string name,
@@ -93,7 +107,9 @@ public abstract class RazorPageBase
         string suffix,
         int suffixOffset,
         int attributeValuesCount
-    ) { }
+    )
+    {
+    }
 
     public void WriteAttributeValue(
         string prefix,
@@ -102,16 +118,22 @@ public abstract class RazorPageBase
         int valueOffset,
         int valueLength,
         bool isLiteral
-    ) { }
+    )
+    {
+    }
 
-    public virtual void EndWriteAttribute() { }
+    public virtual void EndWriteAttribute()
+    {
+    }
 
     public void BeginAddHtmlAttributeValues(
         TagHelperExecutionContext executionContext,
         string attributeName,
         int attributeValuesCount,
         HtmlAttributeValueStyle attributeValueStyle
-    ) { }
+    )
+    {
+    }
 
     public void AddHtmlAttributeValue(
         string prefix,
@@ -120,9 +142,13 @@ public abstract class RazorPageBase
         int valueOffset,
         int valueLength,
         bool isLiteral
-    ) { }
+    )
+    {
+    }
 
-    public void EndAddHtmlAttributeValues(TagHelperExecutionContext executionContext) { }
+    public void EndAddHtmlAttributeValues(TagHelperExecutionContext executionContext)
+    {
+    }
 
     public virtual Task<HtmlString> FlushAsync()
     {

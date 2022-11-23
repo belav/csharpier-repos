@@ -23,5 +23,7 @@ namespace System.Reflection.Emit.Tests
         }
     }
 
-    public class LocalTypeClass { }
+    public class LocalTypeClass
+    {
+    }
 }

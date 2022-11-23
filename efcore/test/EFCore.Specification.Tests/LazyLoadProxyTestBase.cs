@@ -2667,7 +2667,9 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         public int ApplicantId { get; set; }
         public virtual FullName Name { get; set; }
 
-        protected Applicant() { }
+        protected Applicant()
+        {
+        }
 
         public Applicant(FullName name)
         {
@@ -2679,7 +2681,9 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
     {
         private readonly string _value;
 
-        protected FirstName() { }
+        protected FirstName()
+        {
+        }
 
         private FirstName(string value)
         {
@@ -2693,7 +2697,9 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
     {
         private readonly string _value;
 
-        protected LastName() { }
+        protected LastName()
+        {
+        }
 
         private LastName(string value)
         {
@@ -2709,7 +2715,9 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         public virtual FullName Name { get; set; }
         public virtual Address Address { get; set; }
 
-        protected Pyrson() { }
+        protected Pyrson()
+        {
+        }
 
         public Pyrson(FullName name)
         {
@@ -2727,7 +2735,9 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
         public virtual LastName LastName { get; private set; }
 
-        protected FullName() { }
+        protected FullName()
+        {
+        }
 
         public FullName(FirstName firstName, LastName lastName)
         {
@@ -2757,9 +2767,13 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         public virtual IEnumerable<Child> ManyChildren { get; set; }
     }
 
-    public class Mother : Parent { }
+    public class Mother : Parent
+    {
+    }
 
-    public class Father : Parent { }
+    public class Father : Parent
+    {
+    }
 
     public class WithRecursiveProperty
     {
@@ -3017,16 +3031,22 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         return context;
     }
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
-    protected virtual void RecordLog() { }
+    protected virtual void RecordLog()
+    {
+    }
 
     protected class ChangeDetectorProxy : ChangeDetector
     {
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        ) : base(logger, loggingOptions)
+        {
+        }
 
         public bool DetectChangesCalled { get; set; }
 

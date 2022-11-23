@@ -52,16 +52,24 @@ namespace System.Web.WebPages.Test
 
         public class MyHttpApplication : HttpApplication
         {
-            public MyHttpApplication() { }
+            public MyHttpApplication()
+            {
+            }
         }
 
         public class ModuleEvents
         {
-            public void OnApplicationPostResolveRequestCache(object sender, EventArgs e) { }
+            public void OnApplicationPostResolveRequestCache(object sender, EventArgs e)
+            {
+            }
 
-            public void OnBeginRequest(object sender, EventArgs e) { }
+            public void OnBeginRequest(object sender, EventArgs e)
+            {
+            }
 
-            public void OnEndRequest(object sender, EventArgs e) { }
+            public void OnEndRequest(object sender, EventArgs e)
+            {
+            }
 
             public bool CalledInitialize;
 

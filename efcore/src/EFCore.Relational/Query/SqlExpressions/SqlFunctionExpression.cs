@@ -38,7 +38,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn: true,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a niladic function.
@@ -64,7 +66,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn: false,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a niladic function which is invoked on an
@@ -93,7 +97,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn: true,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     private SqlFunctionExpression(
         SqlExpression? instance,
@@ -117,7 +123,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a built-in function.
@@ -147,7 +155,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn: true,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a function.
@@ -179,7 +189,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn: false,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a function which is invoked on an instance.
@@ -213,7 +225,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn: true,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     private SqlFunctionExpression(
         SqlExpression? instance,
@@ -239,7 +253,9 @@ public class SqlFunctionExpression : SqlExpression
             builtIn,
             type,
             typeMapping
-        ) { }
+        )
+    {
+    }
 
     private SqlFunctionExpression(
         SqlExpression? instance,

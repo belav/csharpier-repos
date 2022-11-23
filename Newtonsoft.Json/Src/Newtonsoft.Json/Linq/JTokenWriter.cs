@@ -82,12 +82,16 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="JTokenWriter"/> class.
         /// </summary>
-        public JTokenWriter() { }
+        public JTokenWriter()
+        {
+        }
 
         /// <summary>
         /// Flushes whatever is in the buffer to the underlying <see cref="JContainer"/>.
         /// </summary>
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         /// <summary>
         /// Closes this writer.

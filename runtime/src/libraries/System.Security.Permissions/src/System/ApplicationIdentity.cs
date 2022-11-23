@@ -8,9 +8,13 @@ namespace System
 {
     public sealed class ApplicationIdentity : ISerializable
     {
-        private ApplicationIdentity() { }
+        private ApplicationIdentity()
+        {
+        }
 
-        public ApplicationIdentity(string applicationIdentityFullName) { }
+        public ApplicationIdentity(string applicationIdentityFullName)
+        {
+        }
 
         private ApplicationIdentity(SerializationInfo info, StreamingContext context)
         {

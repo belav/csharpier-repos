@@ -9,7 +9,9 @@ public class ComplexNavigationsQuerySqliteTest
     : ComplexNavigationsQueryRelationalTestBase<ComplexNavigationsQuerySqliteFixture>
 {
     public ComplexNavigationsQuerySqliteTest(ComplexNavigationsQuerySqliteFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override async Task Let_let_contains_from_outer_let(bool async) =>
         Assert.Equal(

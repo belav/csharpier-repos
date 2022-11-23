@@ -392,7 +392,9 @@ namespace Microsoft.CodeAnalysis
                 localOptions,
                 kindOptions,
                 miscellaneousOptions
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// This version also accepts <see cref="SymbolDisplayCompilerInternalOptions"/>.

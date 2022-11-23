@@ -114,7 +114,9 @@ public class CosmosDatabaseCreatorTest
                 b => b.ApplyConfiguration()
             );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
 
         public DbSet<Blog> Blogs { get; set; }
     }

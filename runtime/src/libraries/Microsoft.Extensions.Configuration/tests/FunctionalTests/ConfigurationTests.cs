@@ -366,7 +366,9 @@ CommonKey3:CommonKey4=IniValue6";
         public class TestIniSourceProvider : IniConfigurationProvider, IConfigurationSource
         {
             public TestIniSourceProvider(string path)
-                : base(new IniConfigurationSource { Path = path }) { }
+                : base(new IniConfigurationSource { Path = path })
+            {
+            }
 
             public IConfigurationProvider Build(IConfigurationBuilder builder)
             {
@@ -378,7 +380,9 @@ CommonKey3:CommonKey4=IniValue6";
         public class TestJsonSourceProvider : JsonConfigurationProvider, IConfigurationSource
         {
             public TestJsonSourceProvider(string path)
-                : base(new JsonConfigurationSource { Path = path }) { }
+                : base(new JsonConfigurationSource { Path = path })
+            {
+            }
 
             public IConfigurationProvider Build(IConfigurationBuilder builder)
             {
@@ -390,7 +394,9 @@ CommonKey3:CommonKey4=IniValue6";
         public class TestXmlSourceProvider : XmlConfigurationProvider, IConfigurationSource
         {
             public TestXmlSourceProvider(string path)
-                : base(new XmlConfigurationSource { Path = path }) { }
+                : base(new XmlConfigurationSource { Path = path })
+            {
+            }
 
             public IConfigurationProvider Build(IConfigurationBuilder builder)
             {

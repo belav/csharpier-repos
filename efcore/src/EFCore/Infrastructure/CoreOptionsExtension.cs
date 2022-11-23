@@ -53,7 +53,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     Creates a new set of options with everything set to default values.
     /// </summary>
-    public CoreOptionsExtension() { }
+    public CoreOptionsExtension()
+    {
+    }
 
     /// <summary>
     ///     Called by a derived class constructor when implementing the <see cref="Clone" /> method.
@@ -560,7 +562,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
         private int? _serviceProviderHash;
         private string? _logFragment;
 
-        public ExtensionInfo(CoreOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(CoreOptionsExtension extension) : base(extension)
+        {
+        }
 
         private new CoreOptionsExtension Extension => (CoreOptionsExtension)base.Extension;
 

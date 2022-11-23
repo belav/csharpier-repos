@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class TableSplittingSqlServerTest : TableSplittingTestBase
 {
     public TableSplittingSqlServerTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    { }
+    {
+    }
 
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 

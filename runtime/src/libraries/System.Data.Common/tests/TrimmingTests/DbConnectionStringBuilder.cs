@@ -131,7 +131,9 @@ namespace DbConnectionStringBuilderTrimmingTests
             set => throw new NotImplementedException();
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Hashtable GetProperties2()
         {

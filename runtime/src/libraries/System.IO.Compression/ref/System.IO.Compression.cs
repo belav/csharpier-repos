@@ -25,22 +25,29 @@ namespace System.IO.Compression
         public DeflateStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionLevel compressionLevel
-        ) { }
+        )
+        {
+        }
 
         public DeflateStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionLevel compressionLevel,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
         public DeflateStream(System.IO.Stream stream, System.IO.Compression.CompressionMode mode)
-        { }
+        {
+        }
 
         public DeflateStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionMode mode,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
         public System.IO.Stream BaseStream
         {
@@ -65,7 +72,9 @@ namespace System.IO.Compression
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.IAsyncResult BeginRead(
@@ -90,7 +99,9 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
+        public override void CopyTo(System.IO.Stream destination, int bufferSize)
+        {
+        }
 
         public override System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream destination,
@@ -101,7 +112,9 @@ namespace System.IO.Compression
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -113,9 +126,13 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -163,11 +180,17 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Write(System.ReadOnlySpan<byte> buffer) { }
+        public override void Write(System.ReadOnlySpan<byte> buffer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -188,7 +211,9 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 
     public partial class GZipStream : System.IO.Stream
@@ -196,21 +221,29 @@ namespace System.IO.Compression
         public GZipStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionLevel compressionLevel
-        ) { }
+        )
+        {
+        }
 
         public GZipStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionLevel compressionLevel,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
-        public GZipStream(System.IO.Stream stream, System.IO.Compression.CompressionMode mode) { }
+        public GZipStream(System.IO.Stream stream, System.IO.Compression.CompressionMode mode)
+        {
+        }
 
         public GZipStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionMode mode,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
         public System.IO.Stream BaseStream
         {
@@ -235,7 +268,9 @@ namespace System.IO.Compression
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.IAsyncResult BeginRead(
@@ -260,7 +295,9 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
+        public override void CopyTo(System.IO.Stream destination, int bufferSize)
+        {
+        }
 
         public override System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream destination,
@@ -271,7 +308,9 @@ namespace System.IO.Compression
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -283,9 +322,13 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -333,11 +376,17 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Write(System.ReadOnlySpan<byte> buffer) { }
+        public override void Write(System.ReadOnlySpan<byte> buffer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -358,33 +407,45 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 
     public partial class ZipArchive : System.IDisposable
     {
-        public ZipArchive(System.IO.Stream stream) { }
+        public ZipArchive(System.IO.Stream stream)
+        {
+        }
 
-        public ZipArchive(System.IO.Stream stream, System.IO.Compression.ZipArchiveMode mode) { }
+        public ZipArchive(System.IO.Stream stream, System.IO.Compression.ZipArchiveMode mode)
+        {
+        }
 
         public ZipArchive(
             System.IO.Stream stream,
             System.IO.Compression.ZipArchiveMode mode,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
         public ZipArchive(
             System.IO.Stream stream,
             System.IO.Compression.ZipArchiveMode mode,
             bool leaveOpen,
             System.Text.Encoding? entryNameEncoding
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Comment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.ObjectModel.ReadOnlyCollection<System.IO.Compression.ZipArchiveEntry> Entries
         {
@@ -408,9 +469,13 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public System.IO.Compression.ZipArchiveEntry? GetEntry(string entryName)
         {
@@ -420,7 +485,9 @@ namespace System.IO.Compression
 
     public partial class ZipArchiveEntry
     {
-        internal ZipArchiveEntry() { }
+        internal ZipArchiveEntry()
+        {
+        }
 
         public System.IO.Compression.ZipArchive Archive
         {
@@ -431,7 +498,9 @@ namespace System.IO.Compression
         public string Comment
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long CompressedLength
         {
@@ -446,7 +515,9 @@ namespace System.IO.Compression
         public int ExternalAttributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string FullName
         {
@@ -459,7 +530,9 @@ namespace System.IO.Compression
         public System.DateTimeOffset LastWriteTime
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public long Length
         {
@@ -470,7 +543,9 @@ namespace System.IO.Compression
             get { throw null; }
         }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
         public System.IO.Stream Open()
         {
@@ -495,21 +570,29 @@ namespace System.IO.Compression
         public ZLibStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionLevel compressionLevel
-        ) { }
+        )
+        {
+        }
 
         public ZLibStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionLevel compressionLevel,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
-        public ZLibStream(System.IO.Stream stream, System.IO.Compression.CompressionMode mode) { }
+        public ZLibStream(System.IO.Stream stream, System.IO.Compression.CompressionMode mode)
+        {
+        }
 
         public ZLibStream(
             System.IO.Stream stream,
             System.IO.Compression.CompressionMode mode,
             bool leaveOpen
-        ) { }
+        )
+        {
+        }
 
         public System.IO.Stream BaseStream
         {
@@ -534,7 +617,9 @@ namespace System.IO.Compression
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.IAsyncResult BeginRead(
@@ -559,7 +644,9 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void CopyTo(System.IO.Stream destination, int bufferSize) { }
+        public override void CopyTo(System.IO.Stream destination, int bufferSize)
+        {
+        }
 
         public override System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream destination,
@@ -570,7 +657,9 @@ namespace System.IO.Compression
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -582,9 +671,13 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -632,11 +725,17 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
-        public override void Write(System.ReadOnlySpan<byte> buffer) { }
+        public override void Write(System.ReadOnlySpan<byte> buffer)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -657,6 +756,8 @@ namespace System.IO.Compression
             throw null;
         }
 
-        public override void WriteByte(byte value) { }
+        public override void WriteByte(byte value)
+        {
+        }
     }
 }

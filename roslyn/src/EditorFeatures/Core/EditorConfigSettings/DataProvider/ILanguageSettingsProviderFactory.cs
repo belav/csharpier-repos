@@ -8,5 +8,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 {
     internal interface ILanguageSettingsProviderFactory<TData>
         : ISettingsProviderFactory<TData>,
-            ILanguageService { }
+            ILanguageService
+    {
+    }
 }

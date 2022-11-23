@@ -45,21 +45,45 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     // Primary Blocks
                     // (Don't test DebuggerTypeProxy on instances that may internally have async operations in progress)
-                    Tuple.Create<bool, bool, object>(true, true, new ActionBlock<int>(i => { })),
                     Tuple.Create<bool, bool, object>(
                         true,
                         true,
-                        new ActionBlock<int>(i => { }, dboExBuffering)
+                        new ActionBlock<int>(i =>
+                        {
+                        })
                     ),
                     Tuple.Create<bool, bool, object>(
                         true,
                         true,
-                        new ActionBlock<int>(i => { }, dboExSpsc)
+                        new ActionBlock<int>(
+                            i =>
+                            {
+                            },
+                            dboExBuffering
+                        )
+                    ),
+                    Tuple.Create<bool, bool, object>(
+                        true,
+                        true,
+                        new ActionBlock<int>(
+                            i =>
+                            {
+                            },
+                            dboExSpsc
+                        )
                     ),
                     Tuple.Create<bool, bool, object>(
                         true,
                         false,
-                        SendAsyncMessages(new ActionBlock<int>(i => { }, dboExNoBuffering), 2)
+                        SendAsyncMessages(
+                            new ActionBlock<int>(
+                                i =>
+                                {
+                                },
+                                dboExNoBuffering
+                            ),
+                            2
+                        )
                     ),
                     Tuple.Create<bool, bool, object>(
                         true,
@@ -218,7 +242,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         true,
                         false,
                         DebuggerAttributes.GetFieldValue(
-                            new ActionBlock<int>(i => { }, dboExBuffering),
+                            new ActionBlock<int>(
+                                i =>
+                                {
+                                },
+                                dboExBuffering
+                            ),
                             "_defaultTarget"
                         )
                     ),
@@ -226,7 +255,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         true,
                         false,
                         DebuggerAttributes.GetFieldValue(
-                            new ActionBlock<int>(i => { }, dboExNoBuffering),
+                            new ActionBlock<int>(
+                                i =>
+                                {
+                                },
+                                dboExNoBuffering
+                            ),
                             "_defaultTarget"
                         )
                     ),
@@ -235,7 +269,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         false,
                         DebuggerAttributes.GetFieldValue(
                             DebuggerAttributes.GetFieldValue(
-                                new ActionBlock<int>(i => { }),
+                                new ActionBlock<int>(i =>
+                                {
+                                }),
                                 "_defaultTarget"
                             ),
                             "_messages"
@@ -245,7 +281,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         true,
                         false,
                         DebuggerAttributes.GetFieldValue(
-                            new ActionBlock<int>(i => { }, dboExSpsc),
+                            new ActionBlock<int>(
+                                i =>
+                                {
+                                },
+                                dboExSpsc
+                            ),
                             "_spscTarget"
                         )
                     ),
@@ -254,7 +295,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         false,
                         DebuggerAttributes.GetFieldValue(
                             DebuggerAttributes.GetFieldValue(
-                                new ActionBlock<int>(i => { }, dboExSpsc),
+                                new ActionBlock<int>(
+                                    i =>
+                                    {
+                                    },
+                                    dboExSpsc
+                                ),
                                 "_spscTarget"
                             ),
                             "_messages"
@@ -366,7 +412,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     Tuple.Create<bool, bool, object>(
                         true,
                         false,
-                        new BufferBlock<int>().LinkTo(new ActionBlock<int>(i => { }))
+                        new BufferBlock<int>().LinkTo(
+                            new ActionBlock<int>(i =>
+                            {
+                            })
+                        )
                     ), // ActionOnDispose
                     Tuple.Create<bool, bool, object>(
                         true,
@@ -474,7 +524,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
         private static ITargetBlock<T> CreateChooseTarget<T>()
         {
             var slt = new StoreLinkedTarget<T>();
-            DataflowBlock.Choose(slt, i => { }, new BufferBlock<T>(), i => { });
+            DataflowBlock.Choose(
+                slt,
+                i =>
+                {
+                },
+                new BufferBlock<T>(),
+                i =>
+                {
+                }
+            );
             return slt.GetLinkedTarget();
         }
 
@@ -513,7 +572,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 get { return null; }
             }
 
-            public void Complete() { }
+            public void Complete()
+            {
+            }
 
             void IDataflowBlock.Fault(Exception exception)
             {
@@ -539,7 +600,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             private class NopDisposable : IDisposable
             {
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
             }
 
             public bool TryReceive(Predicate<T> filter, out T item)
@@ -572,14 +635,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
             public void ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
-            ) { }
+            )
+            {
+            }
 
             public Task Completion
             {
                 get { return null; }
             }
 
-            public void Complete() { }
+            public void Complete()
+            {
+            }
 
             void IDataflowBlock.Fault(Exception exception)
             {

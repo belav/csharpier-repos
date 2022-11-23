@@ -83,4 +83,6 @@ internal record struct TypeScriptRequestContext(Solution? Solution, Document? Do
 /// </summary>
 internal record struct TypeScriptTextDocumentIdentifier(Uri Uri, string? ProjectId);
 
-internal interface IVSTypeScriptRequestHandler : ILspService { }
+internal interface IVSTypeScriptRequestHandler : ILspService
+{
+}

@@ -103,7 +103,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpChangeSignatureService() { }
+        public CSharpChangeSignatureService()
+        {
+        }
 
         public override async Task<(ISymbol? symbol, int selectedIndex)> GetInvocationSymbolAsync(
             Document document,

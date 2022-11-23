@@ -311,7 +311,9 @@ public class MapConnectionHandlerTests
                     Assert.Equal("/path/negotiate", endpoint.DisplayName);
                     Assert.Collection(
                         endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
-                        auth => { },
+                        auth =>
+                        {
+                        },
                         auth =>
                         {
                             Assert.Equal("Foo", auth?.Policy);
@@ -323,7 +325,9 @@ public class MapConnectionHandlerTests
                     Assert.Equal("/path", endpoint.DisplayName);
                     Assert.Collection(
                         endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
-                        auth => { },
+                        auth =>
+                        {
+                        },
                         auth =>
                         {
                             Assert.Equal("Foo", auth?.Policy);
@@ -513,7 +517,9 @@ public class MapConnectionHandlerTests
     }
 
     [Authorize]
-    private class DoubleAuthConnectionHandler : AuthConnectionHandler { }
+    private class DoubleAuthConnectionHandler : AuthConnectionHandler
+    {
+    }
 
     [Authorize]
     private class AuthConnectionHandler : ConnectionHandler
@@ -524,7 +530,9 @@ public class MapConnectionHandlerTests
         }
     }
 
-    private class TestRequirement : IAuthorizationRequirement { }
+    private class TestRequirement : IAuthorizationRequirement
+    {
+    }
 
     private IHost BuildWebHost(Action<IEndpointRouteBuilder> configure)
     {

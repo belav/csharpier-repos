@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.ReadOnlyKeyword,
         };
 
-        public EventKeywordRecommender() : base(SyntaxKind.EventKeyword) { }
+        public EventKeywordRecommender() : base(SyntaxKind.EventKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

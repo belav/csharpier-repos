@@ -10,7 +10,9 @@ namespace Test_delegate
 {
     class ApplicationException : Exception
     {
-        public ApplicationException(string message) : base(message) { }
+        public ApplicationException(string message) : base(message)
+        {
+        }
     }
 
     namespace Test
@@ -129,7 +131,9 @@ namespace Test_delegate
             }
         }
 
-        public sealed class SealedGrandChild : GrandChild { }
+        public sealed class SealedGrandChild : GrandChild
+        {
+        }
 
         public delegate string TestMethod();
 

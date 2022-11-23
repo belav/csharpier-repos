@@ -3,4 +3,6 @@
 
 namespace HtmlGenerationWebSite.Models;
 
-public class SuperTemplateModel : TemplateModel { }
+public class SuperTemplateModel : TemplateModel
+{
+}

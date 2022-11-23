@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         /// </summary>
         internal static readonly CSharpInstructionDecoder Instance = new CSharpInstructionDecoder();
 
-        private CSharpInstructionDecoder() { }
+        private CSharpInstructionDecoder()
+        {
+        }
 
         private static readonly SymbolDisplayFormat s_propertyDisplayFormat = DisplayFormat
             .AddMemberOptions(SymbolDisplayMemberOptions.IncludeParameters)

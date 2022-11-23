@@ -50,7 +50,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                     Type type
-            ) { }
+            )
+            {
+            }
         }
 
         [Kept]
@@ -62,7 +64,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                     string type
-            ) { }
+            )
+            {
+            }
         }
 
         // Used to test null parameter values
@@ -78,18 +82,26 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
                     string typeName
-            ) { }
+            )
+            {
+            }
         }
 
         [Kept]
         class ClassWithKeptPublicConstructor
         {
             [Kept]
-            public ClassWithKeptPublicConstructor(int unused) { }
+            public ClassWithKeptPublicConstructor(int unused)
+            {
+            }
 
-            private ClassWithKeptPublicConstructor(short unused) { }
+            private ClassWithKeptPublicConstructor(short unused)
+            {
+            }
 
-            public void Method() { }
+            public void Method()
+            {
+            }
         }
 
         [Kept]
@@ -98,9 +110,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
             [RequiresUnreferencedCode("--ClassWithKeptPublicMethods--")]
-            public static void KeptMethod() { }
+            public static void KeptMethod()
+            {
+            }
 
-            static void Method() { }
+            static void Method()
+            {
+            }
         }
 
         [Kept]
@@ -121,7 +137,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                         Type type
-                ) { }
+                )
+                {
+                }
             }
 
             [KeepsAll(typeof(KeepAllOnSelf))]
@@ -131,7 +149,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             class KeepAllOnSelf
             {
                 [Kept]
-                public void Method() { }
+                public void Method()
+                {
+                }
 
                 [Kept]
                 public int Field;
@@ -144,7 +164,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         {
             [Kept]
             public TypeArrayAttribute(Type[] types) // This should not trigger data flow analysis of the parameter
-            { }
+            {
+            }
         }
     }
 }

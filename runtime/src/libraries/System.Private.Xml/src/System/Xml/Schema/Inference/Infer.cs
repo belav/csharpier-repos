@@ -1738,8 +1738,12 @@ namespace System.Xml.Schema
                         else
                             return ST_byte;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_byte);
                 }
                 if ((iTypeFlags & TF_unsignedByte) != 0)
@@ -1750,8 +1754,12 @@ namespace System.Xml.Schema
                         //byte.Parse(s);
                         return ST_unsignedByte;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_unsignedByte);
                 }
                 if ((iTypeFlags & TF_short) != 0)
@@ -1765,8 +1773,12 @@ namespace System.Xml.Schema
                         else
                             return ST_short;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_short);
                 }
                 if ((iTypeFlags & TF_unsignedShort) != 0)
@@ -1777,8 +1789,12 @@ namespace System.Xml.Schema
                         //ushort.Parse(s);
                         return ST_unsignedShort;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_unsignedShort);
                 }
                 if ((iTypeFlags & TF_int) != 0)
@@ -1792,8 +1808,12 @@ namespace System.Xml.Schema
                         else
                             return ST_int;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_int);
                 }
                 if ((iTypeFlags & TF_unsignedInt) != 0)
@@ -1804,8 +1824,12 @@ namespace System.Xml.Schema
                         //uint.Parse(s);
                         return ST_unsignedInt;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_unsignedInt);
                 }
                 if ((iTypeFlags & TF_long) != 0)
@@ -1819,8 +1843,12 @@ namespace System.Xml.Schema
                         else
                             return ST_long;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_long);
                 }
                 if ((iTypeFlags & TF_unsignedLong) != 0)
@@ -1831,8 +1859,12 @@ namespace System.Xml.Schema
                         //ulong.Parse(s);
                         return ST_unsignedLong;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_unsignedLong);
                 }
                 if ((iTypeFlags & TF_double) != 0)
@@ -1869,15 +1901,23 @@ namespace System.Xml.Schema
                                         return ST_float;
                                     }
                                 }
-                                catch (FormatException) { }
-                                catch (OverflowException) { }
+                                catch (FormatException)
+                                {
+                                }
+                                catch (OverflowException)
+                                {
+                                }
                             }
                             iTypeFlags &= (~TF_float);
                             return ST_double;
                         }
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_double);
                 }
                 if ((iTypeFlags & TF_float) != 0)
@@ -1892,8 +1932,12 @@ namespace System.Xml.Schema
                         else
                             return ST_float;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags &= (~TF_float);
                 }
                 if ((iTypeFlags & TF_integer) != 0)
@@ -1907,8 +1951,12 @@ namespace System.Xml.Schema
                         XmlConvert.ToDateTime(s, XmlDateTimeSerializationMode.RoundtripKind);
                         return ST_gYearMonth;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags = TF_string;
                     return ST_string;
                 }
@@ -1919,8 +1967,12 @@ namespace System.Xml.Schema
                         XmlConvert.ToTimeSpan(s);
                         return ST_duration;
                     }
-                    catch (FormatException) { }
-                    catch (OverflowException) { }
+                    catch (FormatException)
+                    {
+                    }
+                    catch (OverflowException)
+                    {
+                    }
                     iTypeFlags = TF_string;
                     return ST_string;
                 }

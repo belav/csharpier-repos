@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) { }
+            )
+        {
+        }
 
         protected abstract ISyntaxFacts SyntaxFacts { get; }
 

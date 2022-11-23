@@ -8,7 +8,9 @@ namespace System.Text.Json.Tests
 {
     internal class InvalidBufferWriter : IBufferWriter<byte>
     {
-        public InvalidBufferWriter() { }
+        public InvalidBufferWriter()
+        {
+        }
 
         public Memory<byte> GetMemory(int minimumLength = 0) => new byte[10];
 
@@ -16,6 +18,8 @@ namespace System.Text.Json.Tests
         public Span<byte> GetSpan(int minimumLength = 0) => new byte[10];
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Advance(int bytes) { }
+        public void Advance(int bytes)
+        {
+        }
     }
 }

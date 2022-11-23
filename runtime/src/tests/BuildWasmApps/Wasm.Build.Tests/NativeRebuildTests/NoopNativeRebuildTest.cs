@@ -16,7 +16,9 @@ namespace Wasm.Build.NativeRebuild.Tests
         public NoopNativeRebuildTest(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         [Theory]
         [MemberData(nameof(NativeBuildData))]

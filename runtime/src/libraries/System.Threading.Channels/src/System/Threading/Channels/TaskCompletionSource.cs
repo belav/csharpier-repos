@@ -18,7 +18,9 @@ namespace System.Threading.Channels
         /// The <paramref name="creationOptions"/> represent options invalid for use
         /// with a <see cref="TaskCompletionSource"/>.
         /// </exception>
-        public TaskCompletionSource(TaskCreationOptions creationOptions) : base(creationOptions) { }
+        public TaskCompletionSource(TaskCreationOptions creationOptions) : base(creationOptions)
+        {
+        }
 
         /// <summary>
         /// Attempts to transition the underlying <see cref="Tasks.Task"/> into the <see cref="TaskStatus.RanToCompletion"/> state.

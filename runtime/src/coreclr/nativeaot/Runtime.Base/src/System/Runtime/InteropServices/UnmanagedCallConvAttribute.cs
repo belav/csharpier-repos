@@ -10,7 +10,9 @@ namespace System.Runtime.InteropServices
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public sealed class UnmanagedCallConvAttribute : Attribute
     {
-        public UnmanagedCallConvAttribute() { }
+        public UnmanagedCallConvAttribute()
+        {
+        }
 
         /// <summary>
         /// Types indicating calling conventions for the unmanaged target.

@@ -14,7 +14,9 @@ public class ListLoggerFactory : ILoggerFactory
     private readonly Func<string, bool> _shouldLogCategory;
     private bool _disposed;
 
-    public ListLoggerFactory() : this(_ => true) { }
+    public ListLoggerFactory() : this(_ => true)
+    {
+    }
 
     public ListLoggerFactory(Func<string, bool> shouldLogCategory)
     {

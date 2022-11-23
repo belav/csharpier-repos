@@ -8,7 +8,9 @@ namespace System.Net.Security
 {
     public abstract partial class AuthenticatedStream : System.IO.Stream
     {
-        protected AuthenticatedStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen) { }
+        protected AuthenticatedStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen)
+        {
+        }
 
         protected System.IO.Stream InnerStream
         {
@@ -24,7 +26,9 @@ namespace System.Net.Security
             get { throw null; }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
@@ -37,7 +41,9 @@ namespace System.Net.Security
         [System.CLSCompliantAttribute(false)]
         public CipherSuitesPolicy(
             System.Collections.Generic.IEnumerable<System.Net.Security.TlsCipherSuite> allowedCipherSuites
-        ) { }
+        )
+        {
+        }
 
         [System.CLSCompliantAttribute(false)]
         public System.Collections.Generic.IEnumerable<System.Net.Security.TlsCipherSuite> AllowedCipherSuites
@@ -77,11 +83,15 @@ namespace System.Net.Security
     {
         public NegotiateAuthentication(
             System.Net.Security.NegotiateAuthenticationClientOptions clientOptions
-        ) { }
+        )
+        {
+        }
 
         public NegotiateAuthentication(
             System.Net.Security.NegotiateAuthenticationServerOptions serverOptions
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Principal.TokenImpersonationLevel ImpersonationLevel
         {
@@ -124,7 +134,9 @@ namespace System.Net.Security
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public byte[]? GetOutgoingBlob(
             System.ReadOnlySpan<byte> incomingBlob,
@@ -174,78 +186,108 @@ namespace System.Net.Security
 
     public partial class NegotiateAuthenticationClientOptions
     {
-        public NegotiateAuthenticationClientOptions() { }
+        public NegotiateAuthenticationClientOptions()
+        {
+        }
 
         public System.Security.Principal.TokenImpersonationLevel AllowedImpersonationLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Authentication.ExtendedProtection.ChannelBinding? Binding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.NetworkCredential Credential
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Package
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.ProtectionLevel RequiredProtectionLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool RequireMutualAuthentication
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? TargetName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class NegotiateAuthenticationServerOptions
     {
-        public NegotiateAuthenticationServerOptions() { }
+        public NegotiateAuthenticationServerOptions()
+        {
+        }
 
         public System.Security.Authentication.ExtendedProtection.ChannelBinding? Binding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.NetworkCredential Credential
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Package
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? Policy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Principal.TokenImpersonationLevel RequiredImpersonationLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.ProtectionLevel RequiredProtectionLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -273,10 +315,14 @@ namespace System.Net.Security
     public partial class NegotiateStream : System.Net.Security.AuthenticatedStream
     {
         public NegotiateStream(System.IO.Stream innerStream)
-            : base(default(System.IO.Stream), default(bool)) { }
+            : base(default(System.IO.Stream), default(bool))
+        {
+        }
 
         public NegotiateStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen)
-            : base(default(System.IO.Stream), default(bool)) { }
+            : base(default(System.IO.Stream), default(bool))
+        {
+        }
 
         public override bool CanRead
         {
@@ -325,12 +371,16 @@ namespace System.Net.Security
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int ReadTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Principal.IIdentity RemoteIdentity
         {
@@ -339,16 +389,22 @@ namespace System.Net.Security
         public override int WriteTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public virtual void AuthenticateAsClient() { }
+        public virtual void AuthenticateAsClient()
+        {
+        }
 
         public virtual void AuthenticateAsClient(
             System.Net.NetworkCredential credential,
             System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
             string targetName
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsClient(
             System.Net.NetworkCredential credential,
@@ -356,19 +412,25 @@ namespace System.Net.Security
             string targetName,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsClient(
             System.Net.NetworkCredential credential,
             string targetName
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsClient(
             System.Net.NetworkCredential credential,
             string targetName,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync()
         {
@@ -413,24 +475,32 @@ namespace System.Net.Security
             throw null;
         }
 
-        public virtual void AuthenticateAsServer() { }
+        public virtual void AuthenticateAsServer()
+        {
+        }
 
         public virtual void AuthenticateAsServer(
             System.Net.NetworkCredential credential,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsServer(
             System.Net.NetworkCredential credential,
             System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy,
             System.Net.Security.ProtectionLevel requiredProtectionLevel,
             System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsServer(
             System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync()
         {
@@ -579,25 +649,35 @@ namespace System.Net.Security
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
 
-        public virtual void EndAuthenticateAsClient(System.IAsyncResult asyncResult) { }
+        public virtual void EndAuthenticateAsClient(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public virtual void EndAuthenticateAsServer(System.IAsyncResult asyncResult) { }
+        public virtual void EndAuthenticateAsServer(System.IAsyncResult asyncResult)
+        {
+        }
 
         public override int EndRead(System.IAsyncResult asyncResult)
         {
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -635,9 +715,13 @@ namespace System.Net.Security
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -748,7 +832,9 @@ namespace System.Net.Security
 
     public sealed partial class SslCertificateTrust
     {
-        internal SslCertificateTrust() { }
+        internal SslCertificateTrust()
+        {
+        }
 
         public static System.Net.Security.SslCertificateTrust CreateForX509Collection(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection trustList,
@@ -769,62 +855,86 @@ namespace System.Net.Security
 
     public partial class SslClientAuthenticationOptions
     {
-        public SslClientAuthenticationOptions() { }
+        public SslClientAuthenticationOptions()
+        {
+        }
 
         public bool AllowRenegotiation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.List<System.Net.Security.SslApplicationProtocol>? ApplicationProtocols
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509RevocationMode CertificateRevocationCheckMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.CipherSuitesPolicy? CipherSuitesPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509CertificateCollection? ClientCertificates
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Authentication.SslProtocols EnabledSslProtocols
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.EncryptionPolicy EncryptionPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.LocalCertificateSelectionCallback? LocalCertificateSelectionCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.RemoteCertificateValidationCallback? RemoteCertificateValidationCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? TargetHost
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509ChainPolicy? CertificateChainPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -844,90 +954,124 @@ namespace System.Net.Security
 
     public partial class SslServerAuthenticationOptions
     {
-        public SslServerAuthenticationOptions() { }
+        public SslServerAuthenticationOptions()
+        {
+        }
 
         public bool AllowRenegotiation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Generic.List<System.Net.Security.SslApplicationProtocol>? ApplicationProtocols
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509RevocationMode CertificateRevocationCheckMode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.CipherSuitesPolicy? CipherSuitesPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ClientCertificateRequired
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Authentication.SslProtocols EnabledSslProtocols
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.EncryptionPolicy EncryptionPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.RemoteCertificateValidationCallback? RemoteCertificateValidationCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509Certificate? ServerCertificate
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.SslStreamCertificateContext? ServerCertificateContext
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Security.ServerCertificateSelectionCallback? ServerCertificateSelectionCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.X509Certificates.X509ChainPolicy? CertificateChainPolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class SslStream : System.Net.Security.AuthenticatedStream
     {
         public SslStream(System.IO.Stream innerStream)
-            : base(default(System.IO.Stream), default(bool)) { }
+            : base(default(System.IO.Stream), default(bool))
+        {
+        }
 
         public SslStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen)
-            : base(default(System.IO.Stream), default(bool)) { }
+            : base(default(System.IO.Stream), default(bool))
+        {
+        }
 
         public SslStream(
             System.IO.Stream innerStream,
             bool leaveInnerStreamOpen,
             System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback
-        ) : base(default(System.IO.Stream), default(bool)) { }
+        ) : base(default(System.IO.Stream), default(bool))
+        {
+        }
 
         public SslStream(
             System.IO.Stream innerStream,
             bool leaveInnerStreamOpen,
             System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback,
             System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback
-        ) : base(default(System.IO.Stream), default(bool)) { }
+        ) : base(default(System.IO.Stream), default(bool))
+        {
+        }
 
         public SslStream(
             System.IO.Stream innerStream,
@@ -935,7 +1079,9 @@ namespace System.Net.Security
             System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback,
             System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback,
             System.Net.Security.EncryptionPolicy encryptionPolicy
-        ) : base(default(System.IO.Stream), default(bool)) { }
+        ) : base(default(System.IO.Stream), default(bool))
+        {
+        }
 
         public override bool CanRead
         {
@@ -1022,12 +1168,16 @@ namespace System.Net.Security
         public override long Position
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int ReadTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Security.Cryptography.X509Certificates.X509Certificate? RemoteCertificate
         {
@@ -1048,27 +1198,37 @@ namespace System.Net.Security
         public override int WriteTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public void AuthenticateAsClient(
             System.Net.Security.SslClientAuthenticationOptions sslClientAuthenticationOptions
-        ) { }
+        )
+        {
+        }
 
-        public virtual void AuthenticateAsClient(string targetHost) { }
+        public virtual void AuthenticateAsClient(string targetHost)
+        {
+        }
 
         public virtual void AuthenticateAsClient(
             string targetHost,
             System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
             bool checkCertificateRevocation
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsClient(
             string targetHost,
             System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
             System.Security.Authentication.SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task AuthenticateAsClientAsync(
             System.Net.Security.SslClientAuthenticationOptions sslClientAuthenticationOptions,
@@ -1105,24 +1265,32 @@ namespace System.Net.Security
 
         public void AuthenticateAsServer(
             System.Net.Security.SslServerAuthenticationOptions sslServerAuthenticationOptions
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsServer(
             System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsServer(
             System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
             bool clientCertificateRequired,
             bool checkCertificateRevocation
-        ) { }
+        )
+        {
+        }
 
         public virtual void AuthenticateAsServer(
             System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
             bool clientCertificateRequired,
             System.Security.Authentication.SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task AuthenticateAsServerAsync(
             System.Net.Security.ServerOptionsSelectionCallback optionsCallback,
@@ -1255,27 +1423,39 @@ namespace System.Net.Security
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
 
-        public virtual void EndAuthenticateAsClient(System.IAsyncResult asyncResult) { }
+        public virtual void EndAuthenticateAsClient(System.IAsyncResult asyncResult)
+        {
+        }
 
-        public virtual void EndAuthenticateAsServer(System.IAsyncResult asyncResult) { }
+        public virtual void EndAuthenticateAsServer(System.IAsyncResult asyncResult)
+        {
+        }
 
         public override int EndRead(System.IAsyncResult asyncResult)
         {
             throw null;
         }
 
-        public override void EndWrite(System.IAsyncResult asyncResult) { }
+        public override void EndWrite(System.IAsyncResult asyncResult)
+        {
+        }
 
-        ~SslStream() { }
+        ~SslStream()
+        {
+        }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
@@ -1326,16 +1506,22 @@ namespace System.Net.Security
             throw null;
         }
 
-        public override void SetLength(long value) { }
+        public override void SetLength(long value)
+        {
+        }
 
         public virtual System.Threading.Tasks.Task ShutdownAsync()
         {
             throw null;
         }
 
-        public void Write(byte[] buffer) { }
+        public void Write(byte[] buffer)
+        {
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
 
         public override System.Threading.Tasks.Task WriteAsync(
             byte[] buffer,
@@ -1359,7 +1545,9 @@ namespace System.Net.Security
 
     public partial class SslStreamCertificateContext
     {
-        internal SslStreamCertificateContext() { }
+        internal SslStreamCertificateContext()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1731,31 +1919,47 @@ namespace System.Security.Authentication
 {
     public partial class AuthenticationException : System.SystemException
     {
-        public AuthenticationException() { }
+        public AuthenticationException()
+        {
+        }
 
         protected AuthenticationException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
-        public AuthenticationException(string? message) { }
+        public AuthenticationException(string? message)
+        {
+        }
 
-        public AuthenticationException(string? message, System.Exception? innerException) { }
+        public AuthenticationException(string? message, System.Exception? innerException)
+        {
+        }
     }
 
     public partial class InvalidCredentialException
         : System.Security.Authentication.AuthenticationException
     {
-        public InvalidCredentialException() { }
+        public InvalidCredentialException()
+        {
+        }
 
         protected InvalidCredentialException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
-        ) { }
+        )
+        {
+        }
 
-        public InvalidCredentialException(string? message) { }
+        public InvalidCredentialException(string? message)
+        {
+        }
 
-        public InvalidCredentialException(string? message, System.Exception? innerException) { }
+        public InvalidCredentialException(string? message, System.Exception? innerException)
+        {
+        }
     }
 }
 
@@ -1766,28 +1970,38 @@ namespace System.Security.Authentication.ExtendedProtection
         protected ExtendedProtectionPolicy(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public ExtendedProtectionPolicy(
             System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement
-        ) { }
+        )
+        {
+        }
 
         public ExtendedProtectionPolicy(
             System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement,
             System.Security.Authentication.ExtendedProtection.ChannelBinding customChannelBinding
-        ) { }
+        )
+        {
+        }
 
         public ExtendedProtectionPolicy(
             System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement,
             System.Security.Authentication.ExtendedProtection.ProtectionScenario protectionScenario,
             System.Collections.ICollection? customServiceNames
-        ) { }
+        )
+        {
+        }
 
         public ExtendedProtectionPolicy(
             System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement,
             System.Security.Authentication.ExtendedProtection.ProtectionScenario protectionScenario,
             System.Security.Authentication.ExtendedProtection.ServiceNameCollection? customServiceNames
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Authentication.ExtendedProtection.ChannelBinding? CustomChannelBinding
         {
@@ -1813,7 +2027,9 @@ namespace System.Security.Authentication.ExtendedProtection
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo? info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public override string ToString()
         {
@@ -1836,7 +2052,9 @@ namespace System.Security.Authentication.ExtendedProtection
 
     public partial class ServiceNameCollection : System.Collections.ReadOnlyCollectionBase
     {
-        public ServiceNameCollection(System.Collections.ICollection items) { }
+        public ServiceNameCollection(System.Collections.ICollection items)
+        {
+        }
 
         public bool Contains(string? searchServiceName)
         {

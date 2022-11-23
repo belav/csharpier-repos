@@ -11,9 +11,13 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
     where TUserLogin : IdentityUserLogin<TKey>
     where TUserToken : IdentityUserToken<TKey>
 {
-    protected IdentityUserContext(DbContextOptions options) : base(options) { }
+    protected IdentityUserContext(DbContextOptions options) : base(options)
+    {
+    }
 
-    protected IdentityUserContext() { }
+    protected IdentityUserContext()
+    {
+    }
 
     public virtual DbSet<TUser> Users { get; set; }
     public virtual DbSet<TUserClaim> UserClaims { get; set; }
@@ -23,7 +27,9 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
     private class PersonalDataConverter : ValueConverter<string, string>
     {
         public PersonalDataConverter(IPersonalDataProtector protector)
-            : base(s => protector.Protect(s), s => protector.Unprotect(s)) { }
+            : base(s => protector.Protect(s), s => protector.Unprotect(s))
+        {
+        }
     }
 
     private class PersonalDataProtector : IPersonalDataProtector

@@ -14,7 +14,9 @@ namespace System.Data.Common
         private DateTimeOffset[] _values = default!; // Late-initialized
 
         internal DateTimeOffsetStorage(DataColumn column)
-            : base(column, typeof(DateTimeOffset), s_defaultValue, StorageType.DateTimeOffset) { }
+            : base(column, typeof(DateTimeOffset), s_defaultValue, StorageType.DateTimeOffset)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

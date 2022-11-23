@@ -28,7 +28,9 @@ namespace System.Web.Mvc.Test
 
         [Authorize(Roles = "foo")]
         [Authorize(Roles = "bar")]
-        private class ClassWithMultipleAuthorizeAttributes { }
+        private class ClassWithMultipleAuthorizeAttributes
+        {
+        }
 
         [Fact]
         public void CanRetrieveMultipleAuthorizeAttributesFromOneClass()

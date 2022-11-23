@@ -87,7 +87,9 @@ namespace System.Diagnostics.Metrics
         /// <summary>
         /// Creates a MeterListener object.
         /// </summary>
-        public MeterListener() { }
+        public MeterListener()
+        {
+        }
 
         /// <summary>
         /// Callbacks to get notification when an instrument is published.
@@ -176,12 +178,7 @@ namespace System.Diagnostics.Metrics
         public void SetMeasurementEventCallback<T>(MeasurementCallback<T>? measurementCallback)
             where T : struct
         {
-            measurementCallback ??= (
-                instrument,
-                measurement,
-                tags,
-                state
-            ) => { /* no-op */
+            measurementCallback ??= (instrument, measurement, tags, state) => { /* no-op */
             };
 
             if (typeof(T) == typeof(byte))

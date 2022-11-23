@@ -494,7 +494,8 @@ Section3:
                 new MemoryConfigurationProvider(
                     new MemoryConfigurationSource { InitialData = values }
                 ),
-                () => { }
+                () => {
+                }
             );
         }
 

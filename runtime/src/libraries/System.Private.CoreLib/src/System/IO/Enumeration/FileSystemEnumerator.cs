@@ -20,7 +20,9 @@ namespace System.IO.Enumeration
         /// <param name="directory">The directory to search in.</param>
         /// <param name="options">Enumeration options to use.</param>
         public FileSystemEnumerator(string directory, EnumerationOptions? options = null)
-            : this(directory, isNormalized: false, options) { }
+            : this(directory, isNormalized: false, options)
+        {
+        }
 
         /// <summary>
         /// Encapsulates a find operation.
@@ -63,7 +65,9 @@ namespace System.IO.Enumeration
 
         /// <summary>When overridden in a derived class, this method is called whenever the end of a directory is reached.</summary>
         /// <param name="directory">The directory path as a read-only span.</param>
-        protected virtual void OnDirectoryFinished(ReadOnlySpan<char> directory) { }
+        protected virtual void OnDirectoryFinished(ReadOnlySpan<char> directory)
+        {
+        }
 
         /// <summary>When overridden in a derived class, returns a value that indicates whether to continue execution or throw the default exception.</summary>
         /// <param name="error">The native error code.</param>
@@ -113,7 +117,9 @@ namespace System.IO.Enumeration
 
         /// <summary>When overridden in a derived class, releases the unmanaged resources used by the <see cref="Enumeration.FileSystemEnumerator{T}" /> class and optionally releases the managed resources.</summary>
         /// <param name="disposing"><see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         ~FileSystemEnumerator()
         {

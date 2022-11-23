@@ -9,7 +9,8 @@ public class ManyToManyFieldsLoadSqliteTest
     : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadSqliteTest.ManyToManyFieldsLoadSqliteFixture>
 {
     public ManyToManyFieldsLoadSqliteTest(ManyToManyFieldsLoadSqliteFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     public class ManyToManyFieldsLoadSqliteFixture : ManyToManyFieldsLoadFixtureBase
     {

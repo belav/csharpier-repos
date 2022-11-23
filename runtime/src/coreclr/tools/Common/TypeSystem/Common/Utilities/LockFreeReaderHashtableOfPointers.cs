@@ -472,7 +472,9 @@ namespace Internal.TypeSystem
             {
                 WriteAbortNullToLocation(hashTableLocal, tableIndex);
                 // Pulse the lock so we don't spin during an expansion
-                lock (this) { }
+                lock (this)
+                {
+                }
                 Interlocked.Decrement(ref _reserve);
                 return false;
             }
@@ -674,7 +676,9 @@ namespace Internal.TypeSystem
                 return false;
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public void Reset()
             {

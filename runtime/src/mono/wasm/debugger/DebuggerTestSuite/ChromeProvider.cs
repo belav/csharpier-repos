@@ -43,7 +43,9 @@ internal class ChromeProvider : WasmHostProvider
         "Failed to connect to the bus:",
     };
 
-    public ChromeProvider(string id, ILogger logger) : base(id, logger) { }
+    public ChromeProvider(string id, ILogger logger) : base(id, logger)
+    {
+    }
 
     public async Task StartBrowserAndProxyAsync(
         HttpContext context,

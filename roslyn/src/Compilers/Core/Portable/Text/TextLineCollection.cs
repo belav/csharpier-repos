@@ -141,9 +141,13 @@ namespace Microsoft.CodeAnalysis.Text
                 return this.MoveNext();
             }
 
-            void IEnumerator.Reset() { }
+            void IEnumerator.Reset()
+            {
+            }
 
-            void IDisposable.Dispose() { }
+            void IDisposable.Dispose()
+            {
+            }
 
             public override bool Equals(object? obj)
             {

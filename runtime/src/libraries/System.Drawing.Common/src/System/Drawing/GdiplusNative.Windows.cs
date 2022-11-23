@@ -14,7 +14,9 @@ namespace System.Drawing
         {
             private const string LibraryName = "gdiplus.dll";
 
-            private static void PlatformInitialize() { }
+            private static void PlatformInitialize()
+            {
+            }
 
             // Imported functions
 

@@ -80,11 +80,17 @@ namespace System.Tests
                 () => Activator.CreateInstance<StructWithDefaultConstructorThatThrows>()
             );
 
-        private interface IInterface { }
+        private interface IInterface
+        {
+        }
 
-        private abstract class AbstractClass { }
+        private abstract class AbstractClass
+        {
+        }
 
-        public class ClassWithDefaultConstructor { }
+        public class ClassWithDefaultConstructor
+        {
+        }
 
         private class ClassWithPublicDefaultConstructor
         {
@@ -95,12 +101,16 @@ namespace System.Tests
 
         private class ClassWithPrivateDefaultConstructor
         {
-            private ClassWithPrivateDefaultConstructor() { }
+            private ClassWithPrivateDefaultConstructor()
+            {
+            }
         }
 
         private class ClassWithoutDefaultConstructor
         {
-            public ClassWithoutDefaultConstructor(int value) { }
+            public ClassWithoutDefaultConstructor(int value)
+            {
+            }
         }
 
         private class ClassWithDefaultConstructorThatThrows

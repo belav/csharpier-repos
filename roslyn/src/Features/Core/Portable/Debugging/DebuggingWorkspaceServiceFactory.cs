@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Debugging
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DebuggingWorkspaceServiceFactory() { }
+        public DebuggingWorkspaceServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new DebuggingWorkspaceService();

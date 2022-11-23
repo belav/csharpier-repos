@@ -18,6 +18,8 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Initializes a new instance of <see cref="JsonIgnoreAttribute"/>.
         /// </summary>
-        public JsonIgnoreAttribute() { }
+        public JsonIgnoreAttribute()
+        {
+        }
     }
 }

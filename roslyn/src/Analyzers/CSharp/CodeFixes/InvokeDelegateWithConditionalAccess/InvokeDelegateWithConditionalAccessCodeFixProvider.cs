@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public InvokeDelegateWithConditionalAccessCodeFixProvider() { }
+        public InvokeDelegateWithConditionalAccessCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.InvokeDelegateWithConditionalAccessId);

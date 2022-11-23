@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Scripting
             new ScriptSourceResolver(ImmutableArray<string>.Empty, null);
 
         private ScriptSourceResolver(ImmutableArray<string> sourcePaths, string baseDirectory)
-            : base(sourcePaths, baseDirectory) { }
+            : base(sourcePaths, baseDirectory)
+        {
+        }
 
         public ScriptSourceResolver WithSearchPaths(params string[] searchPaths) =>
             WithSearchPaths(searchPaths.AsImmutableOrEmpty());

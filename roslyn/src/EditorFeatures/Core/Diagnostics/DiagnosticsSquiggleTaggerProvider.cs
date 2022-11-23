@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 globalOptions,
                 visibilityTracker,
                 listenerProvider
-            ) { }
+            )
+        {
+        }
 
         protected internal override bool SupportsDignosticMode(DiagnosticMode mode)
         {

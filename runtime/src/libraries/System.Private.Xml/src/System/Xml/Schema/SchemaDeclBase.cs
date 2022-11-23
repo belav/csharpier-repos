@@ -42,7 +42,9 @@ namespace System.Xml.Schema
             minLength = -1;
         }
 
-        protected SchemaDeclBase() { }
+        protected SchemaDeclBase()
+        {
+        }
 
         internal XmlQualifiedName Name
         {

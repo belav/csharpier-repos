@@ -12,7 +12,9 @@ namespace System.ServiceModel.Syndication
     {
         private ServiceDocument _document;
 
-        protected ServiceDocumentFormatter() { }
+        protected ServiceDocumentFormatter()
+        {
+        }
 
         protected ServiceDocumentFormatter(ServiceDocument documentToWrite)
         {

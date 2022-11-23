@@ -60,7 +60,9 @@ namespace System.Drawing.Imaging
     {
         private WmfMetaHeader wmf;
 
-        public MetaHeader() { }
+        public MetaHeader()
+        {
+        }
 
         internal MetaHeader(WmfMetaHeader header)
         {

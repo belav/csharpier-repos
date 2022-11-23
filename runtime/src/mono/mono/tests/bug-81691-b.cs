@@ -6,7 +6,9 @@ namespace NS.B
 
         public TestB()
         {
-            if (testb == null) { }
+            if (testb == null)
+            {
+            }
         }
     }
 }

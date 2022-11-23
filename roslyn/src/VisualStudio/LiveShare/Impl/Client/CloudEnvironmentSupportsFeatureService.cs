@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CloudEnvironmentSupportsFeatureService() { }
+        public CloudEnvironmentSupportsFeatureService()
+        {
+        }
 
         public bool SupportsCodeFixes(ITextBuffer textBuffer) => false;
 

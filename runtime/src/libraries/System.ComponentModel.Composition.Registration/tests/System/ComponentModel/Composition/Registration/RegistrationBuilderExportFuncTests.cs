@@ -8,7 +8,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
 {
     public class RegistrationBuilderExportFuncUnitTests
     {
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
         public class Class1
         {

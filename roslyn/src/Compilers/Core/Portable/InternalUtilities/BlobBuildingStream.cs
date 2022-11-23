@@ -92,7 +92,9 @@ namespace Roslyn.Utilities
             s_pool.Free(this); // return first chunk to pool
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         protected override void Dispose(bool disposing)
         {

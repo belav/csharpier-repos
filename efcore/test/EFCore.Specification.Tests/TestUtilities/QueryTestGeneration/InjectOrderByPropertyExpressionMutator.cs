@@ -7,7 +7,9 @@ public class InjectOrderByPropertyExpressionMutator : ExpressionMutator
 {
     private ExpressionFinder _expressionFinder;
 
-    public InjectOrderByPropertyExpressionMutator(DbContext context) : base(context) { }
+    public InjectOrderByPropertyExpressionMutator(DbContext context) : base(context)
+    {
+    }
 
     public override bool IsValid(Expression expression)
     {

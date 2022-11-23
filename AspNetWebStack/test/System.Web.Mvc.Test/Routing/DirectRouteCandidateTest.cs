@@ -572,18 +572,26 @@ namespace System.Web.Mvc.Routing.Test
         private class TestController : Controller
         {
             [Route("cool")]
-            public void Action1() { }
+            public void Action1()
+            {
+            }
 
             [Route("cool")]
-            public void Action2() { }
+            public void Action2()
+            {
+            }
         }
 
         [Route("controller/{action")]
         private class ClassLevelTestController : Controller
         {
-            public void Action1() { }
+            public void Action1()
+            {
+            }
 
-            public void Action2() { }
+            public void Action2()
+            {
+            }
         }
     }
 }

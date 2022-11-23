@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ContinueKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public ContinueKeywordRecommender() : base(SyntaxKind.ContinueKeyword) { }
+        public ContinueKeywordRecommender() : base(SyntaxKind.ContinueKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

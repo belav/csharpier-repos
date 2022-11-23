@@ -12,7 +12,9 @@ namespace System.Web.Http.Validation.Validators
     public class ValidatableObjectAdapter : ModelValidator
     {
         public ValidatableObjectAdapter(IEnumerable<ModelValidatorProvider> validatorProviders)
-            : base(validatorProviders) { }
+            : base(validatorProviders)
+        {
+        }
 
         public override IEnumerable<ModelValidationResult> Validate(
             ModelMetadata metadata,

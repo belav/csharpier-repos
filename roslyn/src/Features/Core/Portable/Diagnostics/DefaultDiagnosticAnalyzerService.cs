@@ -47,8 +47,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public event EventHandler<DiagnosticsUpdatedArgs> DiagnosticsUpdated;
         public event EventHandler DiagnosticsCleared
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         // this only support push model, pull model will be provided by DiagnosticService by caching everything this one pushed

@@ -31,6 +31,8 @@ namespace System.Runtime.Versioning
     )]
     internal sealed class NonVersionableAttribute : Attribute
     {
-        public NonVersionableAttribute() { }
+        public NonVersionableAttribute()
+        {
+        }
     }
 }

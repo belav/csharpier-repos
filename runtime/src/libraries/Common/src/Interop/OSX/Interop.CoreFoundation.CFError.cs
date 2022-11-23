@@ -51,7 +51,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeCFErrorHandle : SafeHandle
     {
-        public SafeCFErrorHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeCFErrorHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

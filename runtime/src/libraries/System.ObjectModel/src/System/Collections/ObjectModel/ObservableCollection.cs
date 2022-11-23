@@ -34,7 +34,9 @@ namespace System.Collections.ObjectModel
         /// <summary>
         /// Initializes a new instance of ObservableCollection that is empty and has default initial capacity.
         /// </summary>
-        public ObservableCollection() { }
+        public ObservableCollection()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the ObservableCollection class that contains
@@ -49,7 +51,8 @@ namespace System.Collections.ObjectModel
         /// <exception cref="ArgumentNullException"> collection is a null reference </exception>
         public ObservableCollection(IEnumerable<T> collection)
             : base(new List<T>(collection ?? throw new ArgumentNullException(nameof(collection))))
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the ObservableCollection class
@@ -62,7 +65,9 @@ namespace System.Collections.ObjectModel
         /// </remarks>
         /// <exception cref="ArgumentNullException"> list is a null reference </exception>
         public ObservableCollection(List<T> list)
-            : base(new List<T>(list ?? throw new ArgumentNullException(nameof(list)))) { }
+            : base(new List<T>(list ?? throw new ArgumentNullException(nameof(list))))
+        {
+        }
 
         /// <summary>
         /// Move item at oldIndex to newIndex.

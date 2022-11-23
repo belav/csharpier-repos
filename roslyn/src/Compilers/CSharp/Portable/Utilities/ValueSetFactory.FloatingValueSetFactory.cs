@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static readonly FloatingValueSetFactory<TFloating, TFloatingTC> Instance =
                 new FloatingValueSetFactory<TFloating, TFloatingTC>();
 
-            private FloatingValueSetFactory() { }
+            private FloatingValueSetFactory()
+            {
+            }
 
             IValueSet IValueSetFactory.AllValues =>
                 FloatingValueSet<TFloating, TFloatingTC>.AllValues;

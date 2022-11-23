@@ -532,7 +532,9 @@ namespace Internal.IL.Stubs
         internal ILCodeStream _endHandlerStream;
         internal int _endHandlerOffset;
 
-        internal ILExceptionRegionBuilder() { }
+        internal ILExceptionRegionBuilder()
+        {
+        }
 
         internal int TryOffset => _beginTryStream.RelativeToAbsoluteOffset(_beginTryOffset);
         internal int TryLength => _endTryStream.RelativeToAbsoluteOffset(_endTryOffset) - TryOffset;
@@ -552,12 +554,16 @@ namespace Internal.IL.Stubs
     /// Represent a token. Use one of the overloads of <see cref="ILEmitter.NewToken"/>
     /// to create a new token.
     /// </summary>
-    public enum ILToken { }
+    public enum ILToken
+    {
+    }
 
     /// <summary>
     /// Represents a local variable. Use <see cref="ILEmitter.NewLocal"/> to create a new local variable.
     /// </summary>
-    public enum ILLocalVariable { }
+    public enum ILLocalVariable
+    {
+    }
 
     public class ILStubMethodIL : MethodIL
     {
@@ -669,7 +675,9 @@ namespace Internal.IL.Stubs
             }
         }
 
-        internal ILCodeLabel() { }
+        internal ILCodeLabel()
+        {
+        }
 
         internal void Place(ILCodeStream codeStream, int offsetWithinCodeStream)
         {
@@ -686,7 +694,9 @@ namespace Internal.IL.Stubs
         private ArrayBuilder<object> _tokens;
         private ArrayBuilder<ILExceptionRegionBuilder> _finallyRegions;
 
-        public ILEmitter() { }
+        public ILEmitter()
+        {
+        }
 
         public ILCodeStream NewCodeStream()
         {

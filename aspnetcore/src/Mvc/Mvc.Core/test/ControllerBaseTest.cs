@@ -3428,7 +3428,9 @@ public class ControllerBaseTest
         public int IntegerProperty { get; set; }
     }
 
-    private class TestableController : ControllerBase { }
+    private class TestableController : ControllerBase
+    {
+    }
 
     private class DisposableObject : IDisposable
     {

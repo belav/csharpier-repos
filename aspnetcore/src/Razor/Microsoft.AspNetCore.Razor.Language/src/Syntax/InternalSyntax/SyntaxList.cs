@@ -8,10 +8,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal abstract class SyntaxList : GreenNode
 {
-    internal SyntaxList() : base(SyntaxKind.List) { }
+    internal SyntaxList() : base(SyntaxKind.List)
+    {
+    }
 
     internal SyntaxList(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-        : base(SyntaxKind.List, diagnostics, annotations) { }
+        : base(SyntaxKind.List, diagnostics, annotations)
+    {
+    }
 
     internal override bool IsList => true;
 
@@ -322,13 +326,17 @@ internal abstract class SyntaxList : GreenNode
 
     internal sealed class WithManyChildren : WithManyChildrenBase
     {
-        internal WithManyChildren(ArrayElement<GreenNode>[] children) : base(children) { }
+        internal WithManyChildren(ArrayElement<GreenNode>[] children) : base(children)
+        {
+        }
 
         internal WithManyChildren(
             RazorDiagnostic[] diagnostics,
             SyntaxAnnotation[] annotations,
             ArrayElement<GreenNode>[] children
-        ) : base(diagnostics, annotations, children) { }
+        ) : base(diagnostics, annotations, children)
+        {
+        }
 
         internal override GreenNode SetDiagnostics(RazorDiagnostic[] errors)
         {

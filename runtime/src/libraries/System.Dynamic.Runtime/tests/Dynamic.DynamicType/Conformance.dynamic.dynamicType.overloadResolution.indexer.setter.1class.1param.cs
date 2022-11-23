@@ -322,7 +322,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -381,7 +383,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            set { }
+            set
+            {
+            }
         }
     }
 

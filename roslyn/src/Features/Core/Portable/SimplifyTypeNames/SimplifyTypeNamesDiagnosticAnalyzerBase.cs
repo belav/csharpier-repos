@@ -126,7 +126,9 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                 s_descriptorPreferBuiltinOrFrameworkType
             );
 
-        protected SimplifyTypeNamesDiagnosticAnalyzerBase() { }
+        protected SimplifyTypeNamesDiagnosticAnalyzerBase()
+        {
+        }
 
         public CodeActionRequestPriority RequestPriority => CodeActionRequestPriority.Normal;
 

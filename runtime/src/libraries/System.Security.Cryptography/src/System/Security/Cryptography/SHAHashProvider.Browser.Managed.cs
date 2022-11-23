@@ -79,7 +79,9 @@ namespace System.Security.Cryptography
             impl.Initialize();
         }
 
-        public override void Dispose(bool disposing) { }
+        public override void Dispose(bool disposing)
+        {
+        }
 
         private abstract class SHAManagedImplementationBase
         {

@@ -512,7 +512,9 @@ namespace MonoTests.System.Drawing
                         {
                             test.UnlockBits(data);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
 

@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     {
         public string LoggingIdentifier { get; set; } = "TestableClient";
         public Task DisconnectTask { get; set; } = new TaskCompletionSource<object>().Task;
-        public Action DisposeFunc { get; set; } = delegate { };
+        public Action DisposeFunc { get; set; } =
+            delegate
+            {
+            };
         public Func<CancellationToken, Task<BuildRequest>> ReadBuildRequestFunc = delegate
         {
             throw new Exception();

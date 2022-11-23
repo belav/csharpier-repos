@@ -8,7 +8,9 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
     {
         string s;
 
-        public LambdaCapturesThis() { }
+        public LambdaCapturesThis()
+        {
+        }
 
         public string MethodWithLambda()
         {

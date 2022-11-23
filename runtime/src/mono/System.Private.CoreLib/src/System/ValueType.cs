@@ -20,7 +20,9 @@ namespace System
             "System.Runtime.InteropServices.JavaScript"
         )]
 #endif
-        protected ValueType() { }
+        protected ValueType()
+        {
+        }
 
         // This is also used by RuntimeHelpers
         internal static bool DefaultEquals(object o1, object o2)

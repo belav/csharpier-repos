@@ -12,7 +12,9 @@ namespace System.Security.Cryptography.Pkcs
     public sealed class KeyAgreeRecipientInfo : RecipientInfo
     {
         internal KeyAgreeRecipientInfo(KeyAgreeRecipientInfoPal pal)
-            : base(RecipientInfoType.KeyAgreement, pal) { }
+            : base(RecipientInfoType.KeyAgreement, pal)
+        {
+        }
 
         public override int Version
         {

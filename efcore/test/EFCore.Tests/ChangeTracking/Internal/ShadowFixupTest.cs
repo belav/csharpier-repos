@@ -353,7 +353,9 @@ public class ShadowFixupTest
 
     private class Category
     {
-        public Category() { }
+        public Category()
+        {
+        }
 
         public Category(int id)
         {
@@ -365,7 +367,9 @@ public class ShadowFixupTest
 
     private class Product
     {
-        public Product() { }
+        public Product()
+        {
+        }
 
         public Product(int id)
         {

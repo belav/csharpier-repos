@@ -17,7 +17,9 @@ namespace System.Configuration
         private static readonly ConfigurationPropertyCollection s_properties =
             new ConfigurationPropertyCollection() { s_propSettings };
 
-        public ClientSettingsSection() { }
+        public ClientSettingsSection()
+        {
+        }
 
         protected internal override ConfigurationPropertyCollection Properties
         {

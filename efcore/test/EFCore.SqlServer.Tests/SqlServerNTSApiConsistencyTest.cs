@@ -7,7 +7,8 @@ public class SqlServerNTSApiConsistencyTest
     : ApiConsistencyTestBase<SqlServerNTSApiConsistencyTest.SqlServerNTSApiConsistencyFixture>
 {
     public SqlServerNTSApiConsistencyTest(SqlServerNTSApiConsistencyFixture fixture) : base(fixture)
-    { }
+    {
+    }
 
     protected override void AddServices(ServiceCollection serviceCollection) =>
         serviceCollection.AddEntityFrameworkSqlServerNetTopologySuite();

@@ -17,7 +17,9 @@ namespace System.Net.Http.Functional.Tests
     {
         private readonly Version _expectedRequestMessageVersion = HttpVersion.Version11;
 
-        public HttpRequestMessageTest(ITestOutputHelper output) : base(output) { }
+        public HttpRequestMessageTest(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void Ctor_Default_CorrectDefaults()

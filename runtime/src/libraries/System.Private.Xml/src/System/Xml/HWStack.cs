@@ -14,7 +14,9 @@ namespace System.Xml
 
     internal sealed class HWStack : ICloneable
     {
-        internal HWStack(int GrowthRate) : this(GrowthRate, int.MaxValue) { }
+        internal HWStack(int GrowthRate) : this(GrowthRate, int.MaxValue)
+        {
+        }
 
         internal HWStack(int GrowthRate, int limit)
         {

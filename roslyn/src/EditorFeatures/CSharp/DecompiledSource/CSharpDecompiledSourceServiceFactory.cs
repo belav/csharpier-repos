@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDecompiledSourceServiceFactory() { }
+        public CSharpDecompiledSourceServiceFactory()
+        {
+        }
 
         public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
             new CSharpDecompiledSourceService(provider);

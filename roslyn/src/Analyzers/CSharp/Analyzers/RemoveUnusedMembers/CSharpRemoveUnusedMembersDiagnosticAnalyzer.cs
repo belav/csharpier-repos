@@ -13,5 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers
         : AbstractRemoveUnusedMembersDiagnosticAnalyzer<
             DocumentationCommentTriviaSyntax,
             IdentifierNameSyntax
-        > { }
+        >
+    {
+    }
 }

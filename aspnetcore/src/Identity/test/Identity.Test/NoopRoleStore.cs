@@ -54,7 +54,9 @@ public class NoopRoleStore : IRoleStore<PocoRole>
         return Task.FromResult<PocoRole>(null);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public Task<IdentityResult> DeleteAsync(
         PocoRole user,

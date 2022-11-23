@@ -66,7 +66,9 @@ enum CollectStyle
 class TestException : Exception
 {
     // We just supply a simple message string on error.
-    public TestException(string message) : base(message) { }
+    public TestException(string message) : base(message)
+    {
+    }
 }
 
 // Class encapsulating test runs over a set of objects/handles allocated with the specified TableStyle.

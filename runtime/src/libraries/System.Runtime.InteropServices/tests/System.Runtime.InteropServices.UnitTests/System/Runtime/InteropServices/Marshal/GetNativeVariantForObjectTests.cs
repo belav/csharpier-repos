@@ -559,9 +559,13 @@ namespace System.Runtime.InteropServices.Tests
             }
         }
 
-        public class ClassWithInterface : INonGenericInterface { }
+        public class ClassWithInterface : INonGenericInterface
+        {
+        }
 
-        public struct StructWithInterface : INonGenericInterface { }
+        public struct StructWithInterface : INonGenericInterface
+        {
+        }
 
         public enum SByteEnum : sbyte
         {
@@ -613,24 +617,32 @@ namespace System.Runtime.InteropServices.Tests
 
         public class FakeSafeHandle : SafeHandle
         {
-            public FakeSafeHandle() : base(IntPtr.Zero, false) { }
+            public FakeSafeHandle() : base(IntPtr.Zero, false)
+            {
+            }
 
             public override bool IsInvalid => throw new NotImplementedException();
 
             protected override bool ReleaseHandle() => throw new NotImplementedException();
 
-            protected override void Dispose(bool disposing) { }
+            protected override void Dispose(bool disposing)
+            {
+            }
         }
 
         public class FakeCriticalHandle : CriticalHandle
         {
-            public FakeCriticalHandle() : base(IntPtr.Zero) { }
+            public FakeCriticalHandle() : base(IntPtr.Zero)
+            {
+            }
 
             public override bool IsInvalid => true;
 
             protected override bool ReleaseHandle() => throw new NotImplementedException();
 
-            protected override void Dispose(bool disposing) { }
+            protected override void Dispose(bool disposing)
+            {
+            }
         }
     }
 }

@@ -7,9 +7,13 @@ using Xunit;
 
 namespace System.ComponentModel.Composition
 {
-    public interface IContract { }
+    public interface IContract
+    {
+    }
 
-    public class ContractImpl : IContract { }
+    public class ContractImpl : IContract
+    {
+    }
 
     public class MyEmptyClass
     {

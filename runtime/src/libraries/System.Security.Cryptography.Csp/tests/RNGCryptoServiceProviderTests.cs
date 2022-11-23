@@ -118,14 +118,24 @@ namespace System.Security.Cryptography.RNG.Tests
         [Fact]
         public static void VerifyCtors()
         {
-            using (new RNGCryptoServiceProvider()) { }
-            using (new RNGCryptoServiceProvider(string.Empty)) { }
-            using (new RNGCryptoServiceProvider((string)null)) { }
-            using (new RNGCryptoServiceProvider((CspParameters)null)) { }
+            using (new RNGCryptoServiceProvider())
+            {
+            }
+            using (new RNGCryptoServiceProvider(string.Empty))
+            {
+            }
+            using (new RNGCryptoServiceProvider((string)null))
+            {
+            }
+            using (new RNGCryptoServiceProvider((CspParameters)null))
+            {
+            }
 
             Assert.Throws<PlatformNotSupportedException>(() =>
             {
-                using (new RNGCryptoServiceProvider(new CspParameters())) { }
+                using (new RNGCryptoServiceProvider(new CspParameters()))
+                {
+                }
             });
         }
     }

@@ -7,6 +7,8 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     // member with this attribute.
     public class ExpectResolvedDocumentationSignatureAttribute : BaseMemberAssertionAttribute
     {
-        public ExpectResolvedDocumentationSignatureAttribute(string input) { }
+        public ExpectResolvedDocumentationSignatureAttribute(string input)
+        {
+        }
     }
 }

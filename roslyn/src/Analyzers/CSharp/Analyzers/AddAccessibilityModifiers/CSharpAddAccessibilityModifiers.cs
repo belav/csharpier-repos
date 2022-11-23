@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
     {
         public static readonly CSharpAddAccessibilityModifiers Instance = new();
 
-        protected CSharpAddAccessibilityModifiers() { }
+        protected CSharpAddAccessibilityModifiers()
+        {
+        }
 
         public override bool ShouldUpdateAccessibilityModifier(
             IAccessibilityFacts accessibilityFacts,

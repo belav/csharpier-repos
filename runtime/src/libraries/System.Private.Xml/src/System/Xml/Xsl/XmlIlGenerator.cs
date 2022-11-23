@@ -59,7 +59,9 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Always output debug information in debug mode.
         /// </summary>
-        public XmlILGenerator() { }
+        public XmlILGenerator()
+        {
+        }
 
         /// <summary>
         /// Given the logical query plan (QilExpression) generate a physical query plan (MSIL) that can be executed.

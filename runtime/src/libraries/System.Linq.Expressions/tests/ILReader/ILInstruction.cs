@@ -24,7 +24,9 @@ namespace System.Linq.Expressions.Tests
 
     public sealed class InlineNoneInstruction : ILInstruction
     {
-        internal InlineNoneInstruction(int offset, OpCode opCode) : base(offset, opCode) { }
+        internal InlineNoneInstruction(int offset, OpCode opCode) : base(offset, opCode)
+        {
+        }
 
         public override void Accept(ILInstructionVisitor visitor) =>
             visitor.VisitInlineNoneInstruction(this);

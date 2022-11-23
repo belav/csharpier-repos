@@ -11,7 +11,9 @@ namespace MS.Internal.Xml.XPath
         private bool _onNamespace;
 
         public NamespaceQuery(Query qyParent, string Name, string Prefix, XPathNodeType Type)
-            : base(qyParent, Name, Prefix, Type) { }
+            : base(qyParent, Name, Prefix, Type)
+        {
+        }
 
         private NamespaceQuery(NamespaceQuery other) : base(other)
         {

@@ -179,7 +179,9 @@ public abstract class TwoDatabasesTestBase
 
     protected class TwoDatabasesContext : DbContext
     {
-        public TwoDatabasesContext(DbContextOptions options) : base(options) { }
+        public TwoDatabasesContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Foo>();
@@ -189,7 +191,9 @@ public abstract class TwoDatabasesTestBase
 
     protected class TwoDatabasesWithDataContext : TwoDatabasesContext
     {
-        public TwoDatabasesWithDataContext(DbContextOptions options) : base(options) { }
+        public TwoDatabasesWithDataContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

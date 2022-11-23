@@ -72,4 +72,6 @@ public class DesignTimeFlagTest
 }
 
 [CollectionDefinition("DesignTimeFlagTest", DisableParallelization = true)]
-public class DesignTimeFlagTestCollection { }
+public class DesignTimeFlagTestCollection
+{
+}

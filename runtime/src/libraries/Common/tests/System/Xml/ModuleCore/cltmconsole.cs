@@ -17,7 +17,9 @@ namespace OLEDB.Test.ModuleCore
         //Data
 
         //Constructor
-        public CLTMConsole() { }
+        public CLTMConsole()
+        {
+        }
 
         //Overloads - A subclass must minimally implement the Write(Char) method.
         public override void Write(char ch)
@@ -73,6 +75,8 @@ namespace OLEDB.Test.ModuleCore
         //Data
 
         //Constructor
-        public CLTMTraceListener() { }
+        public CLTMTraceListener()
+        {
+        }
     }
 }

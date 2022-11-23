@@ -14,7 +14,9 @@ namespace ILCompiler.DependencyAnalysis
             string startSymbolMangledName,
             string endSymbolMangledName,
             IComparer<TEmbedded> nodeSorter
-        ) : base(startSymbolMangledName, endSymbolMangledName, nodeSorter) { }
+        ) : base(startSymbolMangledName, endSymbolMangledName, nodeSorter)
+        {
+        }
 
         private static void AlignNextObject(ref ObjectDataBuilder builder, NodeFactory factory)
         {

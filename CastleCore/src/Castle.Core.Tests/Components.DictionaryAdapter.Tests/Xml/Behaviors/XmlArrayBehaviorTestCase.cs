@@ -31,7 +31,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 IBase[] Items { get; set; }
             }
 
-            public interface IBase { }
+            public interface IBase
+            {
+            }
 
             public interface IDerived1 : IBase
             {

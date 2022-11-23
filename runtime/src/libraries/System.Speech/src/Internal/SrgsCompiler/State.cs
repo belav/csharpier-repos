@@ -27,7 +27,9 @@ namespace System.Speech.Internal.SrgsCompiler
             _id = hState;
         }
 
-        internal State(Rule rule, uint hState) : this(rule, hState, (int)hState) { }
+        internal State(Rule rule, uint hState) : this(rule, hState, (int)hState)
+        {
+        }
 
         #endregion
 

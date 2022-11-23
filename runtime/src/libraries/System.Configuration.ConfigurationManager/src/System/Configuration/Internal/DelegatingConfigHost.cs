@@ -23,7 +23,9 @@ namespace System.Configuration.Internal
     //    see UpdateConfigHost as an example.
     public class DelegatingConfigHost : IInternalConfigHost, IInternalConfigHostPaths
     {
-        protected DelegatingConfigHost() { }
+        protected DelegatingConfigHost()
+        {
+        }
 
         // The host that is delegated to.
         protected IInternalConfigHost Host { get; set; }

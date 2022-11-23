@@ -14,7 +14,9 @@ public class UpdatesSqlServerTPCTest
     public UpdatesSqlServerTPCTest(
         UpdatesSqlServerTPCFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture, testOutputHelper) { }
+    ) : base(fixture, testOutputHelper)
+    {
+    }
 
     public override void Save_with_shared_foreign_key()
     {

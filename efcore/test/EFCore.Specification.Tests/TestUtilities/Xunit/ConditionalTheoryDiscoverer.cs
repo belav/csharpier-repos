@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 /// </summary>
 public class ConditionalTheoryDiscoverer : TheoryDiscoverer
 {
-    public ConditionalTheoryDiscoverer(IMessageSink messageSink) : base(messageSink) { }
+    public ConditionalTheoryDiscoverer(IMessageSink messageSink) : base(messageSink)
+    {
+    }
 
     protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(
         ITestFrameworkDiscoveryOptions discoveryOptions,

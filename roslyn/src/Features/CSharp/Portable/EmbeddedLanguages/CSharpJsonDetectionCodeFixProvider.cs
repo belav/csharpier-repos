@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpJsonDetectionCodeFixProvider() : base(CSharpEmbeddedLanguagesProvider.Info) { }
+        public CSharpJsonDetectionCodeFixProvider() : base(CSharpEmbeddedLanguagesProvider.Info)
+        {
+        }
 
         protected override void AddComment(
             SyntaxEditor editor,

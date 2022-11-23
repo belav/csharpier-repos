@@ -101,7 +101,9 @@ namespace R2RDump
                             return Open(probeFile);
                         }
                     }
-                    catch (BadImageFormatException) { }
+                    catch (BadImageFormatException)
+                    {
+                    }
                 }
             }
 

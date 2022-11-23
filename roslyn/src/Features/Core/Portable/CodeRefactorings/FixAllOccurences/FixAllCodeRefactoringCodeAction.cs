@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     internal sealed class FixAllCodeRefactoringCodeAction : AbstractFixAllCodeAction
     {
         public FixAllCodeRefactoringCodeAction(IFixAllState fixAllState)
-            : base(fixAllState, showPreviewChangesDialog: true) { }
+            : base(fixAllState, showPreviewChangesDialog: true)
+        {
+        }
 
         protected override IFixAllContext CreateFixAllContext(
             IFixAllState fixAllState,

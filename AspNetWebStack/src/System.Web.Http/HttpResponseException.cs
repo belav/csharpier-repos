@@ -39,7 +39,9 @@ namespace System.Web.Http
             Justification = "Instance is disposed elsewhere"
         )]
         public HttpResponseException(HttpStatusCode statusCode)
-            : this(new HttpResponseMessage(statusCode)) { }
+            : this(new HttpResponseMessage(statusCode))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpResponseException"/> class.

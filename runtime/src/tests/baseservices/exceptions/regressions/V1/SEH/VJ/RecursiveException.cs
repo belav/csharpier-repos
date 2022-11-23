@@ -4,7 +4,9 @@ using System;
 using System.Threading;
 using System.IO;
 
-class UserException : Exception { }
+class UserException : Exception
+{
+}
 
 public class RecursiveException
 {

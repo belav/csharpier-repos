@@ -173,7 +173,9 @@ namespace System.Runtime.CompilerServices.Tests
                 {
                     d = d.BBBB;
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

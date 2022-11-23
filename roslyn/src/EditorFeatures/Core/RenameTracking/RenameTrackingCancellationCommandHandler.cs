@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public RenameTrackingCancellationCommandHandler() { }
+        public RenameTrackingCancellationCommandHandler()
+        {
+        }
 
         public string DisplayName => EditorFeaturesResources.Rename_Tracking_Cancellation;
 

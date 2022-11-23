@@ -228,9 +228,13 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 }
             }
 
-            public virtual void ClosingScope(ILBuilder builder) { }
+            public virtual void ClosingScope(ILBuilder builder)
+            {
+            }
 
-            public virtual void CloseScope(ILBuilder builder) { }
+            public virtual void CloseScope(ILBuilder builder)
+            {
+            }
 
             public virtual void FinishFilterCondition(ILBuilder builder)
             {
@@ -952,7 +956,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
         {
             public static readonly ScopeComparer Instance = new ScopeComparer();
 
-            private ScopeComparer() { }
+            private ScopeComparer()
+            {
+            }
 
             public int Compare(Cci.LocalScope x, Cci.LocalScope y)
             {

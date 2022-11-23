@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.CodeFixes.RemoveUnusedUsings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoveUnnecessaryUsingsCodeFixProvider() { }
+        public RemoveUnnecessaryUsingsCodeFixProvider()
+        {
+        }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {

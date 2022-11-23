@@ -661,13 +661,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref arguments,
                     AttributeDescription.ObsoleteAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 VerifyObsoleteAttributeAppliedToMethod(
                     ref arguments,
                     AttributeDescription.DeprecatedAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 ReportExplicitUseOfReservedAttributes(
                     in arguments,
@@ -677,7 +681,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | ReservedAttributes.NullableContextAttribute
                         | ReservedAttributes.CaseSensitiveExtensionAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SecurityCriticalAttribute)
                 || attribute.IsTargetAttribute(
@@ -971,7 +977,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | ReservedAttributes.NullableAttribute
                         | ReservedAttributes.NativeIntegerAttribute
                 )
-            ) { }
+            )
+            {
+            }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MaybeNullAttribute))
             {
                 arguments

@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 public class RouteTests : IntegrationTestBase
 {
     public RouteTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)
-        : base(fixture, outputHelper) { }
+        : base(fixture, outputHelper)
+    {
+    }
 
     [Fact]
     public async Task ComplexParameter_MatchUrl_SuccessResult()

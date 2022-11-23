@@ -79,5 +79,7 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
     }
 
     [JsonSerializable(typeof(ProblemDetails))]
-    internal sealed partial class ProblemDetailsJsonContext : JsonSerializerContext { }
+    internal sealed partial class ProblemDetailsJsonContext : JsonSerializerContext
+    {
+    }
 }

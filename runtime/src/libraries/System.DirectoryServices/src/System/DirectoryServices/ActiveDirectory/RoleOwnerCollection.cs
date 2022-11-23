@@ -8,7 +8,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ActiveDirectoryRoleCollection : ReadOnlyCollectionBase
     {
-        internal ActiveDirectoryRoleCollection() { }
+        internal ActiveDirectoryRoleCollection()
+        {
+        }
 
         internal ActiveDirectoryRoleCollection(ArrayList values)
         {
@@ -80,7 +82,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
     public class AdamRoleCollection : ReadOnlyCollectionBase
     {
-        internal AdamRoleCollection() { }
+        internal AdamRoleCollection()
+        {
+        }
 
         internal AdamRoleCollection(ArrayList values)
         {

@@ -16,9 +16,13 @@ namespace Castle.DynamicProxy.Tests.Classes
 {
     public class NonPublicConstructorClass
     {
-        protected NonPublicConstructorClass() { }
+        protected NonPublicConstructorClass()
+        {
+        }
 
-        public virtual void DoSomething() { }
+        public virtual void DoSomething()
+        {
+        }
 
         public static NonPublicConstructorClass Create()
         {

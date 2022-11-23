@@ -297,5 +297,7 @@ namespace System.Reflection.Tests
             AddEventHandler_RemoveEventHandler_Test_TrackingVariable += 3;
     }
 
-    public class DummyClass { }
+    public class DummyClass
+    {
+    }
 }

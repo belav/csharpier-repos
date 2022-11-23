@@ -330,7 +330,9 @@ namespace System.SpanTests
         }
 
         [StructLayout(LayoutKind.Sequential, Size = 64)]
-        private struct StructWithExplicitFieldSizeAndNoFields { }
+        private struct StructWithExplicitFieldSizeAndNoFields
+        {
+        }
 
         [Theory]
         [InlineData(100)]

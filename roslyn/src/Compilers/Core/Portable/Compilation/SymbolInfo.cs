@@ -46,15 +46,21 @@ namespace Microsoft.CodeAnalysis
         public CandidateReason CandidateReason { get; }
 
         internal SymbolInfo(ISymbol symbol)
-            : this(symbol, ImmutableArray<ISymbol>.Empty, CandidateReason.None) { }
+            : this(symbol, ImmutableArray<ISymbol>.Empty, CandidateReason.None)
+        {
+        }
 
         internal SymbolInfo(ISymbol symbol, CandidateReason reason)
-            : this(symbol, ImmutableArray<ISymbol>.Empty, reason) { }
+            : this(symbol, ImmutableArray<ISymbol>.Empty, reason)
+        {
+        }
 
         internal SymbolInfo(
             ImmutableArray<ISymbol> candidateSymbols,
             CandidateReason candidateReason
-        ) : this(symbol: null, candidateSymbols, candidateReason) { }
+        ) : this(symbol: null, candidateSymbols, candidateReason)
+        {
+        }
 
         private SymbolInfo(
             ISymbol? symbol,

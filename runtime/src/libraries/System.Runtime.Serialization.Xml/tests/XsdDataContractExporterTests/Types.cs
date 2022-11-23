@@ -57,7 +57,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types
         public string firstName = "John";
         public string lastName = "Smith";
 
-        internal NonAttributedPersonClass() { }
+        internal NonAttributedPersonClass()
+        {
+        }
     }
 
     public class ExtendedSquare : Square
@@ -67,7 +69,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types
 
     public class RecursiveCollection1 : IEnumerable<RecursiveCollection1>
     {
-        public void Add(RecursiveCollection1 item) { }
+        public void Add(RecursiveCollection1 item)
+        {
+        }
 
         public IEnumerator<RecursiveCollection1> GetEnumerator()
         {
@@ -82,7 +86,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types
 
     public class RecursiveCollection2 : IEnumerable<KeyValuePair<string, RecursiveCollection2>>
     {
-        public void Add(RecursiveCollection1 item) { }
+        public void Add(RecursiveCollection1 item)
+        {
+        }
 
         public IEnumerator<KeyValuePair<string, RecursiveCollection2>> GetEnumerator()
         {
@@ -95,11 +101,15 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types
         }
     }
 
-    public class Box<T> { }
+    public class Box<T>
+    {
+    }
 
     public class RecursiveCollection3 : IEnumerable<KeyValuePair<string, Box<RecursiveCollection3>>>
     {
-        public void Add(RecursiveCollection1 item) { }
+        public void Add(RecursiveCollection1 item)
+        {
+        }
 
         public IEnumerator<KeyValuePair<string, Box<RecursiveCollection3>>> GetEnumerator()
         {
@@ -114,7 +124,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types
 
     public class RecursiveCollection4 : IEnumerable<KeyValuePair<string, RecursiveCollection2>>
     {
-        public void Add(RecursiveCollection1 item) { }
+        public void Add(RecursiveCollection1 item)
+        {
+        }
 
         public IEnumerator<KeyValuePair<string, RecursiveCollection2>> GetEnumerator()
         {

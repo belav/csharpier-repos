@@ -267,7 +267,12 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.Wrapped<DeliberateTestException>(
-                () => operation.Item(DefaultStart, DefaultSize, source.Item).ForAll(x => { })
+                () =>
+                    operation
+                        .Item(DefaultStart, DefaultSize, source.Item)
+                        .ForAll(x =>
+                        {
+                        })
             );
         }
 

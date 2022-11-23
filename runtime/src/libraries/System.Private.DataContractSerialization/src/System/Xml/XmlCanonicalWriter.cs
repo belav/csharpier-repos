@@ -169,7 +169,9 @@ namespace System.Xml
             false // '<', '>'
         };
 
-        public XmlCanonicalWriter() { }
+        public XmlCanonicalWriter()
+        {
+        }
 
         public void SetOutput(Stream stream, bool includeComments, string[]? inclusivePrefixes)
         {
@@ -254,7 +256,9 @@ namespace System.Xml
             "CA1822:Mark members as static",
             Justification = "This class is should roughly mirror the XmlNodeWriter API where this is an instance method."
         )]
-        public void WriteDeclaration() { }
+        public void WriteDeclaration()
+        {
+        }
 
         public void WriteComment(string value)
         {

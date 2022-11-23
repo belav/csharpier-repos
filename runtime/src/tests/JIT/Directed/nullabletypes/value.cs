@@ -8,19 +8,33 @@
 
 using System;
 
-interface BaseInter { }
+interface BaseInter
+{
+}
 
-interface GenInter<T> { }
+interface GenInter<T>
+{
+}
 
-struct Struct { }
+struct Struct
+{
+}
 
-struct ImplStruct : BaseInter { }
+struct ImplStruct : BaseInter
+{
+}
 
-struct OpenGenImplStruct<T> : GenInter<T> { }
+struct OpenGenImplStruct<T> : GenInter<T>
+{
+}
 
-struct CloseGenImplStruct : GenInter<int> { }
+struct CloseGenImplStruct : GenInter<int>
+{
+}
 
-class Foo { }
+class Foo
+{
+}
 
 class NullableTest1
 {
@@ -41,7 +55,9 @@ class NullableTest1
             Console.WriteLine("Test_nullabletypes Failed at location {0}", exceptionCounter);
             exceptionCounter++;
         }
-        catch (System.InvalidOperationException e) { }
+        catch (System.InvalidOperationException e)
+        {
+        }
 
         try
         {
@@ -49,7 +65,9 @@ class NullableTest1
             Console.WriteLine("Test_nullabletypes Failed at location {0}", exceptionCounter);
             exceptionCounter++;
         }
-        catch (System.InvalidOperationException e) { }
+        catch (System.InvalidOperationException e)
+        {
+        }
 
         try
         {
@@ -57,7 +75,9 @@ class NullableTest1
             Console.WriteLine("Test_nullabletypes Failed at location {0}", exceptionCounter);
             exceptionCounter++;
         }
-        catch (System.InvalidOperationException e) { }
+        catch (System.InvalidOperationException e)
+        {
+        }
 
         try
         {
@@ -65,7 +85,9 @@ class NullableTest1
             Console.WriteLine("Test_nullabletypes Failed at location {0}", exceptionCounter);
             exceptionCounter++;
         }
-        catch (System.InvalidOperationException e) { }
+        catch (System.InvalidOperationException e)
+        {
+        }
 
         try
         {
@@ -73,7 +95,9 @@ class NullableTest1
             Console.WriteLine("Test_nullabletypes Failed at location {0}", exceptionCounter);
             exceptionCounter++;
         }
-        catch (System.InvalidOperationException e) { }
+        catch (System.InvalidOperationException e)
+        {
+        }
     }
 }
 

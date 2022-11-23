@@ -15,7 +15,9 @@ namespace DebuggerTests
 {
     public class BadHarnessInitTests : DebuggerTests
     {
-        public BadHarnessInitTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public BadHarnessInitTests(ITestOutputHelper testOutput) : base(testOutput)
+        {
+        }
 
         public override async Task InitializeAsync() => await Task.CompletedTask;
 

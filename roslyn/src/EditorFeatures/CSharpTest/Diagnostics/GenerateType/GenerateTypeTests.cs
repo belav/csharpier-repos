@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateTyp
     [Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
     public partial class GenerateTypeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateTypeTests(ITestOutputHelper logger) : base(logger) { }
+        public GenerateTypeTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

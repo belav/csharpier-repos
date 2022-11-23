@@ -11,7 +11,9 @@ namespace System.Xml
     internal sealed class XmlDataImplementation : XmlImplementation
     {
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        public XmlDataImplementation() : base() { }
+        public XmlDataImplementation() : base()
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

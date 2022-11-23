@@ -95,7 +95,9 @@ namespace System.Net
             {
                 ares._cb!(ares);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void Complete(HttpListenerContext context)

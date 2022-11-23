@@ -26,13 +26,17 @@ public class LongTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public LongTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Int64)
-        : base(storeType, typeof(long), dbType) { }
+        : base(storeType, typeof(long), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="LongTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected LongTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected LongTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

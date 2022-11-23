@@ -334,7 +334,9 @@ namespace System
         // Foo doesn't get finalized and the stream stays open.
         [MethodImpl(MethodImplOptions.NoInlining)] // disable optimizations
         [Intrinsic]
-        public static void KeepAlive(object? obj) { }
+        public static void KeepAlive(object? obj)
+        {
+        }
 
         // Returns the generation in which wo currently resides.
         //

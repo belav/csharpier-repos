@@ -15,7 +15,9 @@ namespace System.Linq
         [RequiresDynamicCode(Queryable.InMemoryQueryableExtensionMethodsRequiresDynamicCode)]
         internal abstract object? ExecuteBoxed();
 
-        internal EnumerableExecutor() { }
+        internal EnumerableExecutor()
+        {
+        }
 
         [RequiresDynamicCode(Queryable.InMemoryQueryableExtensionMethodsRequiresDynamicCode)]
         internal static EnumerableExecutor Create(Expression expression)

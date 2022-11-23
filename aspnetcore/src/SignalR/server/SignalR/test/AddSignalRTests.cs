@@ -149,7 +149,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options => { });
+            serviceCollection
+                .AddSignalR()
+                .AddHubOptions<CustomHub>(options =>
+                {
+                });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var hubOptions = serviceProvider
@@ -238,7 +242,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options => { });
+            serviceCollection
+                .AddSignalR()
+                .AddHubOptions<CustomHub>(options =>
+                {
+                });
 
             serviceCollection.TryAddEnumerable(
                 ServiceDescriptor.Singleton<IHubProtocol, CustomHubProtocol>()
@@ -272,11 +280,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         }
     }
 
-    public class CustomHub : Hub { }
+    public class CustomHub : Hub
+    {
+    }
 
-    public class CustomTHub : Hub<string> { }
+    public class CustomTHub : Hub<string>
+    {
+    }
 
-    public class CustomDynamicHub : DynamicHub { }
+    public class CustomDynamicHub : DynamicHub
+    {
+    }
 
     public class CustomIdProvider : IUserIdProvider
     {
@@ -499,5 +513,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 namespace Microsoft.AspNetCore.SignalR.Internal
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    internal class NonDefaultHubProtocolAttribute : Attribute { }
+    internal class NonDefaultHubProtocolAttribute : Attribute
+    {
+    }
 }

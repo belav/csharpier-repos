@@ -39,7 +39,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
         // ParseRecord
         internal ParseRecord _pr = new ParseRecord();
 
-        internal ObjectProgress() { }
+        internal ObjectProgress()
+        {
+        }
 
         internal void Init()
         {

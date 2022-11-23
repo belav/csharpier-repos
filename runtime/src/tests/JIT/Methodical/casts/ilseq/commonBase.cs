@@ -6,11 +6,17 @@ using Xunit;
 
 namespace Test_commonBase_cs
 {
-    internal class Base { };
+    internal class Base
+    {
+    };
 
-    internal class Sibling1 : Base { };
+    internal class Sibling1 : Base
+    {
+    };
 
-    internal class Sibling2 : Base { };
+    internal class Sibling2 : Base
+    {
+    };
 
     public static class Repro
     {

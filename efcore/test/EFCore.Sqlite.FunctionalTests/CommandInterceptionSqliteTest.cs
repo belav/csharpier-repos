@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class CommandInterceptionSqliteTestBase : CommandInterceptionTestBase
 {
     protected CommandInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public override async Task<string> Intercept_query_passively(bool async, bool inject)
     {
@@ -58,7 +60,9 @@ public abstract class CommandInterceptionSqliteTestBase : CommandInterceptionTes
         : CommandInterceptionSqliteTestBase,
             IClassFixture<CommandInterceptionSqliteTest.InterceptionSqliteFixture>
     {
-        public CommandInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture) { }
+        public CommandInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture)
+        {
+        }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
@@ -71,7 +75,9 @@ public abstract class CommandInterceptionSqliteTestBase : CommandInterceptionTes
             IClassFixture<CommandInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
     {
         public CommandInterceptionWithDiagnosticsSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture) { }
+            : base(fixture)
+        {
+        }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {

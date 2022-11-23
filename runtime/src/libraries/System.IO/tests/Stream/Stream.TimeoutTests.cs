@@ -35,7 +35,9 @@ namespace System.IO.Tests
             set { throw new NotSupportedException(); }
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
@@ -52,7 +54,9 @@ namespace System.IO.Tests
             return 0;
         }
 
-        public override void Write(byte[] buffer, int offset, int count) { }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+        }
     }
 
     public class TimeoutTests

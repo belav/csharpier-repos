@@ -3,5 +3,7 @@
 
 namespace System.Runtime.CompilerServices
 {
-    internal class UnsafeValueTypeAttribute : Attribute { }
+    internal class UnsafeValueTypeAttribute : Attribute
+    {
+    }
 }

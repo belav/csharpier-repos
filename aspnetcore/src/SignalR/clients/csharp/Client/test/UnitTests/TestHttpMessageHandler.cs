@@ -82,7 +82,9 @@ public class TestHttpMessageHandler : HttpMessageHandler
     }
 
     public TestHttpMessageHandler(bool autoNegotiate = true, bool handleFirstPoll = true)
-        : this(NullLoggerFactory.Instance, autoNegotiate, handleFirstPoll) { }
+        : this(NullLoggerFactory.Instance, autoNegotiate, handleFirstPoll)
+    {
+    }
 
     protected override void Dispose(bool disposing)
     {

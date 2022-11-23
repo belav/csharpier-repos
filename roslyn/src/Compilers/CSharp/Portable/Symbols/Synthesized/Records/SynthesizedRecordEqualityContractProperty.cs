@@ -204,7 +204,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     isAutoPropertyAccessor: false,
                     isNullableAnalysisEnabled: false,
                     diagnostics
-                ) { }
+                )
+            {
+            }
 
             internal override void AddSynthesizedAttributes(
                 PEModuleBuilder moduleBuilder,

@@ -14,7 +14,8 @@ namespace System.Security.Permissions
     public sealed partial class GacIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public GacIdentityPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        {
+        }
 
         public override IPermission CreatePermission()
         {

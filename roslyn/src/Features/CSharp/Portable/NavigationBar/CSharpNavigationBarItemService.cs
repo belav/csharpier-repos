@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpNavigationBarItemService() { }
+        public CSharpNavigationBarItemService()
+        {
+        }
 
         protected override async Task<
             ImmutableArray<RoslynNavigationBarItem>

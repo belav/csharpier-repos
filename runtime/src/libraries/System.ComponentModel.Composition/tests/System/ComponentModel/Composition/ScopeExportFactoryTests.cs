@@ -9,7 +9,9 @@ namespace System.ComponentModel.Composition
 {
     public class ScopeExportFactoryTests
     {
-        public interface IFooContract { }
+        public interface IFooContract
+        {
+        }
 
         public interface IFooMetadata
         {
@@ -21,15 +23,21 @@ namespace System.ComponentModel.Composition
             IFooContract CreateFoo();
         }
 
-        public interface IBlahContract { }
+        public interface IBlahContract
+        {
+        }
 
         [Export(typeof(IFooContract))]
         [ExportMetadata("Name", "Foo")]
-        public class FooImpl : IFooContract { }
+        public class FooImpl : IFooContract
+        {
+        }
 
         [Export(typeof(IFooContract))]
         [ExportMetadata("Name", "Foo")]
-        public class Foo2Impl : IFooContract { }
+        public class Foo2Impl : IFooContract
+        {
+        }
 
         [Export(typeof(IFooContract))]
         public class Foo3Impl : IFooContract
@@ -266,13 +274,19 @@ namespace System.ComponentModel.Composition
     public class ScopeExportFactoryWithPublicSurface
     {
         [Export]
-        public class ClassA { }
+        public class ClassA
+        {
+        }
 
         [Export]
-        public class ClassB { }
+        public class ClassB
+        {
+        }
 
         [Export]
-        public class ClassC { }
+        public class ClassC
+        {
+        }
 
         [Export]
         public class ClassRoot
@@ -312,10 +326,14 @@ namespace System.ComponentModel.Composition
     public class ScopeFactoryAutoResolveFromAncestorScope
     {
         [Export]
-        public class Root { }
+        public class Root
+        {
+        }
 
         [Export]
-        public class Child { }
+        public class Child
+        {
+        }
 
         [Export]
         public class ClassRoot
@@ -404,7 +422,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Export]
-        public class ClassD { }
+        public class ClassD
+        {
+        }
 
         [Fact]
         public void DeeplyNestedCatalogPartitionedCatalog_ShouldWork()

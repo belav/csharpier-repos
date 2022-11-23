@@ -154,7 +154,9 @@ namespace Build.Tasks
                         }
                     }
                 }
-                catch (BadImageFormatException) { }
+                catch (BadImageFormatException)
+                {
+                }
             }
 
             ManagedAssemblies = list.ToArray();

@@ -17,7 +17,9 @@ namespace WebMatrix.WebData
         private RoleProvider _previousProvider;
         private SimpleMembershipProviderCasingBehavior _casingBehavior;
 
-        public SimpleRoleProvider() : this(null) { }
+        public SimpleRoleProvider() : this(null)
+        {
+        }
 
         public SimpleRoleProvider(RoleProvider previousProvider)
         {

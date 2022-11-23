@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Or";
 
-        private OrInstruction() { }
+        private OrInstruction()
+        {
+        }
 
         private sealed class OrSByte : OrInstruction
         {

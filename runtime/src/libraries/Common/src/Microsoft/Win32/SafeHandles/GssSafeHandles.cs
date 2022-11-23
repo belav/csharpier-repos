@@ -76,7 +76,9 @@ namespace Microsoft.Win32.SafeHandles
             return status == Interop.NetSecurityNative.Status.GSS_S_COMPLETE;
         }
 
-        public SafeGssNameHandle() : base(IntPtr.Zero, true) { }
+        public SafeGssNameHandle() : base(IntPtr.Zero, true)
+        {
+        }
     }
 
     /// <summary>
@@ -163,7 +165,9 @@ namespace Microsoft.Win32.SafeHandles
             return retHandle;
         }
 
-        public SafeGssCredHandle() : base(IntPtr.Zero, true) { }
+        public SafeGssCredHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         public override bool IsInvalid
         {
@@ -188,7 +192,9 @@ namespace Microsoft.Win32.SafeHandles
 
     internal sealed class SafeGssContextHandle : SafeHandle
     {
-        public SafeGssContextHandle() : base(IntPtr.Zero, true) { }
+        public SafeGssContextHandle() : base(IntPtr.Zero, true)
+        {
+        }
 
         public override bool IsInvalid
         {

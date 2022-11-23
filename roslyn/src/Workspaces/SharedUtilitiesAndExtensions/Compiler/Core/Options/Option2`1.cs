@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.Options
     }
 
     /// <inheritdoc cref="ISingleValuedOption"/>
-    internal interface ISingleValuedOption<T> : ISingleValuedOption { }
+    internal interface ISingleValuedOption<T> : ISingleValuedOption
+    {
+    }
 
     /// <summary>
     /// An global option. An instance of this class can be used to access an option value from an OptionSet.
@@ -63,7 +65,9 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 storageLocations: ImmutableArray<OptionStorageLocation2>.Empty
-            ) { }
+            )
+        {
+        }
 
         public Option2(
             string feature,
@@ -77,7 +81,9 @@ namespace Microsoft.CodeAnalysis.Options
                 name,
                 defaultValue,
                 ImmutableArray.Create(storageLocation)
-            ) { }
+            )
+        {
+        }
 
         public Option2(
             string feature,
@@ -85,7 +91,9 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             OptionStorageLocation2 storageLocation
-        ) : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation)) { }
+        ) : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation))
+        {
+        }
 
         public Option2(
             string feature,
@@ -93,7 +101,9 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation2> storageLocations
-        ) : this(feature, group, name, defaultValue, storageLocations, null) { }
+        ) : this(feature, group, name, defaultValue, storageLocations, null)
+        {
+        }
 
         public Option2(
             string feature,

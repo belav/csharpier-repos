@@ -20,7 +20,9 @@ public class SqlServerDbContextOptionsBuilder
     /// </summary>
     /// <param name="optionsBuilder">The options builder.</param>
     public SqlServerDbContextOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
-        : base(optionsBuilder) { }
+        : base(optionsBuilder)
+    {
+    }
 
     /// <summary>
     ///     Configures the context to use the default retrying <see cref="IExecutionStrategy" />.

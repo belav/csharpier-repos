@@ -36,7 +36,9 @@ class TEST
             }
             goto LB13;
         }
-        finally { }
+        finally
+        {
+        }
         LB13:
         System.Console.WriteLine("END");
 

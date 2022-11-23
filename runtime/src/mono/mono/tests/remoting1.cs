@@ -62,7 +62,9 @@ class MyProxy : RealProxy
 
 public class EmptyProxy : RealProxy
 {
-    public EmptyProxy(Type type) : base(type) { }
+    public EmptyProxy(Type type) : base(type)
+    {
+    }
 
     public override IMessage Invoke(IMessage msg)
     {
@@ -79,7 +81,9 @@ public struct MyStruct
     public int c;
 }
 
-interface R2 { }
+interface R2
+{
+}
 
 class R1 : MarshalByRefObject, R2
 {

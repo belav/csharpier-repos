@@ -31,7 +31,9 @@ namespace Microsoft.Extensions.Logging.Console
         /// </summary>
         /// <param name="options">The options to create <see cref="ConsoleLogger"/> instances with.</param>
         public ConsoleLoggerProvider(IOptionsMonitor<ConsoleLoggerOptions> options)
-            : this(options, Array.Empty<ConsoleFormatter>()) { }
+            : this(options, Array.Empty<ConsoleFormatter>())
+        {
+        }
 
         /// <summary>
         /// Creates an instance of <see cref="ConsoleLoggerProvider"/>.

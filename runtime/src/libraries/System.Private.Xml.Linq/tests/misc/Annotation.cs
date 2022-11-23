@@ -567,15 +567,23 @@ namespace System.Xml.Linq.Tests
             return types;
         }
 
-        public class A { }
+        public class A
+        {
+        }
 
-        public class B : A { }
+        public class B : A
+        {
+        }
     }
 
     namespace DifferentNamespace
     {
-        public class A { }
+        public class A
+        {
+        }
 
-        public class B : A { }
+        public class B : A
+        {
+        }
     }
 }

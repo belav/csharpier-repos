@@ -19,7 +19,9 @@ namespace Internal.Cryptography.Pal.Windows
 {
     internal sealed partial class PkcsPalWindows : PkcsPal
     {
-        internal PkcsPalWindows() { }
+        internal PkcsPalWindows()
+        {
+        }
 
         public sealed override DecryptorPal Decode(
             ReadOnlySpan<byte> encodedMessage,

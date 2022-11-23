@@ -21,7 +21,9 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             // public TextFieldParser(System.IO.Stream stream)
             using (var stream = new FileStream(path, FileMode.Open))
             {
-                using (var parser = new TextFieldParser(stream)) { }
+                using (var parser = new TextFieldParser(stream))
+                {
+                }
                 Assert.Throws<ObjectDisposedException>(() => stream.ReadByte());
             }
 
@@ -35,19 +37,25 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                         detectEncoding: true,
                         leaveOpen: true
                     )
-                ) { }
+                )
+                {
+                }
                 _ = stream.ReadByte();
             }
 
             // public TextFieldParser(System.IO.TextReader reader)
             using (var reader = new StreamReader(path))
             {
-                using (var parser = new TextFieldParser(reader)) { }
+                using (var parser = new TextFieldParser(reader))
+                {
+                }
                 Assert.Throws<ObjectDisposedException>(() => reader.ReadToEnd());
             }
 
             // public TextFieldParser(string path)
-            using (var parser = new TextFieldParser(path)) { }
+            using (var parser = new TextFieldParser(path))
+            {
+            }
 
             // public TextFieldParser(string path)
             Assert.Throws<FileNotFoundException>(() => new TextFieldParser(GetTestFilePath()));
@@ -80,7 +88,9 @@ namespace Microsoft.VisualBasic.FileIO.Tests
 
             {
                 TextFieldParser parser;
-                using (parser = new TextFieldParser(path)) { }
+                using (parser = new TextFieldParser(path))
+                {
+                }
                 parser.Close();
             }
         }

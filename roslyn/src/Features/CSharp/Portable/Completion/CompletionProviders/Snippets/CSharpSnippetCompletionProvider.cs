@@ -19,6 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.CompletionProviders.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSnippetCompletionProvider() { }
+        public CSharpSnippetCompletionProvider()
+        {
+        }
     }
 }

@@ -87,7 +87,9 @@ namespace PrimitiveVT
         uint f10(params VT2B[] args)
         {
             uint sum = 0;
-            for (uint i = 0; i < args.Length; sum += args[i], i++) { }
+            for (uint i = 0; i < args.Length; sum += args[i], i++)
+            {
+            }
             ;
             return sum;
         }
@@ -144,7 +146,9 @@ namespace PrimitiveVT
                 return 1;
             }
 
-            for (VT2B z = 3; z <= 10; z++, t.f2((VT2A)y, 1)) { }
+            for (VT2B z = 3; z <= 10; z++, t.f2((VT2A)y, 1))
+            {
+            }
 
             if (f3(ref y, UInt32.MinValue) != 2)
             {

@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class SqlServerTestHelpers : RelationalTestHelpers
 {
-    protected SqlServerTestHelpers() { }
+    protected SqlServerTestHelpers()
+    {
+    }
 
     public static SqlServerTestHelpers Instance { get; } = new();
 

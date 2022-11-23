@@ -13,6 +13,8 @@ namespace System.Net.Http.Formatting
                 HttpBindingSecurityModeHelper.IsDefined,
                 HttpBindingSecurityModeHelper.Validate,
                 (HttpBindingSecurityMode)999
-            ) { }
+            )
+        {
+        }
     }
 }

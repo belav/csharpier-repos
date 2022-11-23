@@ -56,7 +56,9 @@ namespace Newtonsoft.Json.Tests.Issues
             reader.CharBuffer = new char[2];
 #endif
 
-            while (await reader.ReadAsync()) { }
+            while (await reader.ReadAsync())
+            {
+            }
         }
 
         public class AsyncOnlyStream : Stream

@@ -108,7 +108,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
             return string.Join(Environment.NewLine, errors.ToArray());
         }
 
-        public void Invalidate(IDictionaryAdapter dictionaryAdapter) { }
+        public void Invalidate(IDictionaryAdapter dictionaryAdapter)
+        {
+        }
 
         private void ApplyValidationRules(
             IDictionaryAdapter dictionaryAdapter,

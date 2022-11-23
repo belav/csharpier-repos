@@ -17,7 +17,9 @@ public class HttpContextBuilderTests
     [Fact]
     public async Task ExpectedValuesAreAvailable()
     {
-        var builder = new WebHostBuilder().Configure(app => { });
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+        });
         var server = new TestServer(builder);
         server.BaseAddress = new Uri("https://example.com/A/Path/");
         var context = await server.SendAsync(c =>
@@ -49,7 +51,9 @@ public class HttpContextBuilderTests
     {
         var userAgent =
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0";
-        var builder = new WebHostBuilder().Configure(app => { });
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+        });
         var server = new TestServer(builder);
         server.BaseAddress = new Uri("https://example.com/");
         var context = await server.SendAsync(c =>
@@ -64,7 +68,9 @@ public class HttpContextBuilderTests
     [Fact]
     public async Task SingleSlashNotMovedToPathBase()
     {
-        var builder = new WebHostBuilder().Configure(app => { });
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c =>
         {
@@ -87,7 +93,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(c => { });
+        var context = await server.SendAsync(c =>
+        {
+        });
 
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
     }
@@ -105,7 +113,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var task = server.SendAsync(c => { });
+        var task = server.SendAsync(c =>
+        {
+        });
 
         Assert.False(task.IsCompleted);
         Assert.False(task.Wait(50));
@@ -131,7 +141,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(c => { });
+        var context = await server.SendAsync(c =>
+        {
+        });
 
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         var reader = new StreamReader(context.Response.Body);
@@ -155,7 +167,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(c => { });
+        var context = await server.SendAsync(c =>
+        {
+        });
 
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         var reader = new StreamReader(context.Response.Body);
@@ -179,7 +193,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(c => { });
+        var context = await server.SendAsync(c =>
+        {
+        });
 
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         block.SetResult();
@@ -201,7 +217,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(c => { });
+        var context = await server.SendAsync(c =>
+        {
+        });
 
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         var responseStream = context.Response.Body;
@@ -228,7 +246,12 @@ public class HttpContextBuilderTests
         });
         var server = new TestServer(builder);
         var cts = new CancellationTokenSource();
-        var contextTask = server.SendAsync(c => { }, cts.Token);
+        var contextTask = server.SendAsync(
+            c =>
+            {
+            },
+            cts.Token
+        );
         await block.Task;
         cts.Cancel();
 
@@ -250,7 +273,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(c => { });
+        var context = await server.SendAsync(c =>
+        {
+        });
 
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         var responseStream = context.Response.Body;
@@ -273,7 +298,12 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        return Assert.ThrowsAsync<InvalidOperationException>(() => server.SendAsync(c => { }));
+        return Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                server.SendAsync(c =>
+                {
+                })
+        );
     }
 
     [Fact]
@@ -291,7 +321,9 @@ public class HttpContextBuilderTests
             });
         });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(c => { });
+        var context = await server.SendAsync(c =>
+        {
+        });
 
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         Assert.Equal(11, context.Response.Body.Read(new byte[100], 0, 100));
@@ -322,7 +354,9 @@ public class HttpContextBuilderTests
         var server = new TestServer(builder);
 
         // The HttpContext will be created and the logger will make sure that the HttpRequest exists and contains reasonable values
-        var ctx = await server.SendAsync(c => { });
+        var ctx = await server.SendAsync(c =>
+        {
+        });
     }
 
     [Fact]
@@ -342,7 +376,12 @@ public class HttpContextBuilderTests
         });
         var server = new TestServer(builder);
 
-        var ex = await Assert.ThrowsAsync<Exception>(() => server.SendAsync(c => { }));
+        var ex = await Assert.ThrowsAsync<Exception>(
+            () =>
+                server.SendAsync(c =>
+                {
+                })
+        );
         Assert.Equal("The application aborted the request.", ex.Message);
         await requestAborted.Task.DefaultTimeout();
     }
@@ -364,7 +403,9 @@ public class HttpContextBuilderTests
 
         class NoopDispoasble : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

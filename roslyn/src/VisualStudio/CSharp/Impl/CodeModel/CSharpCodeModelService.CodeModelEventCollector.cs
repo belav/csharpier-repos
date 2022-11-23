@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         private class CodeModelEventCollector : AbstractCodeModelEventCollector
         {
             public CodeModelEventCollector(AbstractCodeModelService codeModelService)
-                : base(codeModelService) { }
+                : base(codeModelService)
+            {
+            }
 
             private static IReadOnlyList<MemberDeclarationSyntax> GetValidMembers(SyntaxNode node)
             {

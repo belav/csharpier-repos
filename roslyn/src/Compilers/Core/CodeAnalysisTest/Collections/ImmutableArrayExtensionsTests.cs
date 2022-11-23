@@ -591,9 +591,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             AssertEx.Equal(new[] { 3, 4, 5 }, a.WhereAsArray((i, j) => i > j, 2));
         }
 
-        private class C { }
+        private class C
+        {
+        }
 
-        private class D : C { }
+        private class D : C
+        {
+        }
 
         [Fact]
         public void Casting()

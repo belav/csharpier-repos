@@ -9,7 +9,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class Aes : System.Security.Cryptography.SymmetricAlgorithm
     {
-        protected Aes() { }
+        protected Aes()
+        {
+        }
 
         public static new System.Security.Cryptography.Aes Create()
         {
@@ -30,9 +32,13 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
     public sealed partial class AesCcm : System.IDisposable
     {
-        public AesCcm(byte[] key) { }
+        public AesCcm(byte[] key)
+        {
+        }
 
-        public AesCcm(System.ReadOnlySpan<byte> key) { }
+        public AesCcm(System.ReadOnlySpan<byte> key)
+        {
+        }
 
         public static bool IsSupported
         {
@@ -53,7 +59,9 @@ namespace System.Security.Cryptography
             byte[] tag,
             byte[] plaintext,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void Decrypt(
             System.ReadOnlySpan<byte> nonce,
@@ -61,9 +69,13 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> tag,
             System.Span<byte> plaintext,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Encrypt(
             byte[] nonce,
@@ -71,7 +83,9 @@ namespace System.Security.Cryptography
             byte[] ciphertext,
             byte[] tag,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void Encrypt(
             System.ReadOnlySpan<byte> nonce,
@@ -79,7 +93,9 @@ namespace System.Security.Cryptography
             System.Span<byte> ciphertext,
             System.Span<byte> tag,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -87,9 +103,13 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
     public sealed partial class AesGcm : System.IDisposable
     {
-        public AesGcm(byte[] key) { }
+        public AesGcm(byte[] key)
+        {
+        }
 
-        public AesGcm(System.ReadOnlySpan<byte> key) { }
+        public AesGcm(System.ReadOnlySpan<byte> key)
+        {
+        }
 
         public static bool IsSupported
         {
@@ -110,7 +130,9 @@ namespace System.Security.Cryptography
             byte[] tag,
             byte[] plaintext,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void Decrypt(
             System.ReadOnlySpan<byte> nonce,
@@ -118,9 +140,13 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> tag,
             System.Span<byte> plaintext,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Encrypt(
             byte[] nonce,
@@ -128,7 +154,9 @@ namespace System.Security.Cryptography
             byte[] ciphertext,
             byte[] tag,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void Encrypt(
             System.ReadOnlySpan<byte> nonce,
@@ -136,7 +164,9 @@ namespace System.Security.Cryptography
             System.Span<byte> ciphertext,
             System.Span<byte> tag,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
     }
 
     [System.ObsoleteAttribute(
@@ -150,32 +180,44 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public sealed partial class AesManaged : System.Security.Cryptography.Aes
     {
-        public AesManaged() { }
+        public AesManaged()
+        {
+        }
 
         public override int BlockSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int FeedbackSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] IV
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.KeySizes[] LegalBlockSizes
         {
@@ -188,12 +230,16 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.CipherMode Mode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.PaddingMode Padding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor()
@@ -222,17 +268,25 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class AsymmetricKeyExchangeDeformatter
     {
-        protected AsymmetricKeyExchangeDeformatter() { }
+        protected AsymmetricKeyExchangeDeformatter()
+        {
+        }
 
         public abstract string? Parameters { get; set; }
         public abstract byte[] DecryptKeyExchange(byte[] rgb);
@@ -242,7 +296,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class AsymmetricSignatureDeformatter
     {
-        protected AsymmetricSignatureDeformatter() { }
+        protected AsymmetricSignatureDeformatter()
+        {
+        }
 
         public abstract void SetHashAlgorithm(string strName);
         public abstract void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key);
@@ -260,7 +316,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class AsymmetricSignatureFormatter
     {
-        protected AsymmetricSignatureFormatter() { }
+        protected AsymmetricSignatureFormatter()
+        {
+        }
 
         public abstract byte[] CreateSignature(byte[] rgbHash);
 
@@ -278,9 +336,13 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
     public sealed partial class ChaCha20Poly1305 : System.IDisposable
     {
-        public ChaCha20Poly1305(byte[] key) { }
+        public ChaCha20Poly1305(byte[] key)
+        {
+        }
 
-        public ChaCha20Poly1305(System.ReadOnlySpan<byte> key) { }
+        public ChaCha20Poly1305(System.ReadOnlySpan<byte> key)
+        {
+        }
 
         public static bool IsSupported
         {
@@ -293,7 +355,9 @@ namespace System.Security.Cryptography
             byte[] tag,
             byte[] plaintext,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void Decrypt(
             System.ReadOnlySpan<byte> nonce,
@@ -301,9 +365,13 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> tag,
             System.Span<byte> plaintext,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Encrypt(
             byte[] nonce,
@@ -311,7 +379,9 @@ namespace System.Security.Cryptography
             byte[] ciphertext,
             byte[] tag,
             byte[]? associatedData = null
-        ) { }
+        )
+        {
+        }
 
         public void Encrypt(
             System.ReadOnlySpan<byte> nonce,
@@ -319,12 +389,16 @@ namespace System.Security.Cryptography
             System.Span<byte> ciphertext,
             System.Span<byte> tag,
             System.ReadOnlySpan<byte> associatedData = default(System.ReadOnlySpan<byte>)
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class CryptoConfig
     {
-        public CryptoConfig() { }
+        public CryptoConfig()
+        {
+        }
 
         public static bool AllowOnlyFipsAlgorithms
         {
@@ -332,10 +406,14 @@ namespace System.Security.Cryptography
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public static void AddAlgorithm(System.Type algorithm, params string[] names) { }
+        public static void AddAlgorithm(System.Type algorithm, params string[] names)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public static void AddOID(string oid, params string[] names) { }
+        public static void AddOID(string oid, params string[] names)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The default algorithm implementations might be removed, use strong type references like 'RSA.Create()' instead."
@@ -374,11 +452,17 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class DeriveBytes : System.IDisposable
     {
-        protected DeriveBytes() { }
+        protected DeriveBytes()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public abstract byte[] GetBytes(int cb);
         public abstract void Reset();
@@ -390,12 +474,16 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class DES : System.Security.Cryptography.SymmetricAlgorithm
     {
-        protected DES() { }
+        protected DES()
+        {
+        }
 
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static new System.Security.Cryptography.DES Create()
@@ -425,7 +513,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class DSA : System.Security.Cryptography.AsymmetricAlgorithm
     {
-        protected DSA() { }
+        protected DSA()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
@@ -480,7 +570,9 @@ namespace System.Security.Cryptography
             bool includePrivateParameters
         );
 
-        public override void FromXmlString(string xmlString) { }
+        public override void FromXmlString(string xmlString)
+        {
+        }
 
         public int GetMaxSignatureSize(
             System.Security.Cryptography.DSASignatureFormat signatureFormat
@@ -528,14 +620,20 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<byte> passwordBytes
-        ) { }
+        )
+        {
+        }
 
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<char> password
-        ) { }
+        )
+        {
+        }
 
-        public override void ImportFromPem(System.ReadOnlySpan<char> input) { }
+        public override void ImportFromPem(System.ReadOnlySpan<char> input)
+        {
+        }
 
         public abstract void ImportParameters(
             System.Security.Cryptography.DSAParameters parameters
@@ -896,13 +994,21 @@ namespace System.Security.Cryptography
     public partial class DSASignatureDeformatter
         : System.Security.Cryptography.AsymmetricSignatureDeformatter
     {
-        public DSASignatureDeformatter() { }
+        public DSASignatureDeformatter()
+        {
+        }
 
-        public DSASignatureDeformatter(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public DSASignatureDeformatter(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
 
-        public override void SetHashAlgorithm(string strName) { }
+        public override void SetHashAlgorithm(string strName)
+        {
+        }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
 
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
         {
@@ -920,18 +1026,26 @@ namespace System.Security.Cryptography
     public partial class DSASignatureFormatter
         : System.Security.Cryptography.AsymmetricSignatureFormatter
     {
-        public DSASignatureFormatter() { }
+        public DSASignatureFormatter()
+        {
+        }
 
-        public DSASignatureFormatter(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public DSASignatureFormatter(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
 
         public override byte[] CreateSignature(byte[] rgbHash)
         {
             throw null;
         }
 
-        public override void SetHashAlgorithm(string strName) { }
+        public override void SetHashAlgorithm(string strName)
+        {
+        }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -989,7 +1103,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Validate() { }
+        public void Validate()
+        {
+        }
 
         public enum ECCurveType
         {
@@ -1077,7 +1193,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class ECDiffieHellman : System.Security.Cryptography.AsymmetricAlgorithm
     {
-        protected ECDiffieHellman() { }
+        protected ECDiffieHellman()
+        {
+        }
 
         public override string KeyExchangeAlgorithm
         {
@@ -1189,9 +1307,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void FromXmlString(string xmlString) { }
+        public override void FromXmlString(string xmlString)
+        {
+        }
 
-        public virtual void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+        public virtual void GenerateKey(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
         public virtual void ImportECPrivateKey(System.ReadOnlySpan<byte> source, out int bytesRead)
         {
@@ -1219,18 +1341,24 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<byte> passwordBytes
-        ) { }
+        )
+        {
+        }
 
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<char> password
-        ) { }
+        )
+        {
+        }
 
-        public override void ImportFromPem(System.ReadOnlySpan<char> input) { }
+        public override void ImportFromPem(System.ReadOnlySpan<char> input)
+        {
+        }
 
-        public virtual void ImportParameters(
-            System.Security.Cryptography.ECParameters parameters
-        ) { }
+        public virtual void ImportParameters(System.Security.Cryptography.ECParameters parameters)
+        {
+        }
 
         public override void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
@@ -1300,13 +1428,21 @@ namespace System.Security.Cryptography
 
     public abstract partial class ECDiffieHellmanPublicKey : System.IDisposable
     {
-        protected ECDiffieHellmanPublicKey() { }
+        protected ECDiffieHellmanPublicKey()
+        {
+        }
 
-        protected ECDiffieHellmanPublicKey(byte[] keyBlob) { }
+        protected ECDiffieHellmanPublicKey(byte[] keyBlob)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public virtual System.Security.Cryptography.ECParameters ExportExplicitParameters()
         {
@@ -1345,7 +1481,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class ECDsa : System.Security.Cryptography.AsymmetricAlgorithm
     {
-        protected ECDsa() { }
+        protected ECDsa()
+        {
+        }
 
         public override string? KeyExchangeAlgorithm
         {
@@ -1402,9 +1540,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void FromXmlString(string xmlString) { }
+        public override void FromXmlString(string xmlString)
+        {
+        }
 
-        public virtual void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+        public virtual void GenerateKey(System.Security.Cryptography.ECCurve curve)
+        {
+        }
 
         public int GetMaxSignatureSize(
             System.Security.Cryptography.DSASignatureFormat signatureFormat
@@ -1457,18 +1599,24 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<byte> passwordBytes
-        ) { }
+        )
+        {
+        }
 
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<char> password
-        ) { }
+        )
+        {
+        }
 
-        public override void ImportFromPem(System.ReadOnlySpan<char> input) { }
+        public override void ImportFromPem(System.ReadOnlySpan<char> input)
+        {
+        }
 
-        public virtual void ImportParameters(
-            System.Security.Cryptography.ECParameters parameters
-        ) { }
+        public virtual void ImportParameters(System.Security.Cryptography.ECParameters parameters)
+        {
+        }
 
         public override void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
@@ -1842,7 +1990,9 @@ namespace System.Security.Cryptography
         public byte[]? D;
         public System.Security.Cryptography.ECPoint Q;
 
-        public void Validate() { }
+        public void Validate()
+        {
+        }
     }
 
     public partial struct ECPoint
@@ -1871,7 +2021,9 @@ namespace System.Security.Cryptography
             System.Span<byte> output,
             System.ReadOnlySpan<byte> salt,
             System.ReadOnlySpan<byte> info
-        ) { }
+        )
+        {
+        }
 
         public static byte[] Expand(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithmName,
@@ -1888,7 +2040,9 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> prk,
             System.Span<byte> output,
             System.ReadOnlySpan<byte> info
-        ) { }
+        )
+        {
+        }
 
         public static byte[] Extract(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithmName,
@@ -1913,21 +2067,33 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class HMACMD5 : System.Security.Cryptography.HMAC
     {
-        public HMACMD5() { }
+        public HMACMD5()
+        {
+        }
 
-        public HMACMD5(byte[] key) { }
+        public HMACMD5(byte[] key)
+        {
+        }
 
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] rgb, int ib, int cb) { }
+        protected override void HashCore(byte[] rgb, int ib, int cb)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         public static byte[] HashData(byte[] key, byte[] source)
         {
@@ -1956,7 +2122,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         public static bool TryHashData(
             System.ReadOnlySpan<byte> key,
@@ -1977,9 +2145,13 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class HMACSHA1 : System.Security.Cryptography.HMAC
     {
-        public HMACSHA1() { }
+        public HMACSHA1()
+        {
+        }
 
-        public HMACSHA1(byte[] key) { }
+        public HMACSHA1(byte[] key)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1989,19 +2161,29 @@ namespace System.Security.Cryptography
             DiagnosticId = "SYSLIB0030",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public HMACSHA1(byte[] key, bool useManagedSha1) { }
+        public HMACSHA1(byte[] key, bool useManagedSha1)
+        {
+        }
 
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] rgb, int ib, int cb) { }
+        protected override void HashCore(byte[] rgb, int ib, int cb)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         public static byte[] HashData(byte[] key, byte[] source)
         {
@@ -2030,7 +2212,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         public static bool TryHashData(
             System.ReadOnlySpan<byte> key,
@@ -2051,21 +2235,33 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class HMACSHA256 : System.Security.Cryptography.HMAC
     {
-        public HMACSHA256() { }
+        public HMACSHA256()
+        {
+        }
 
-        public HMACSHA256(byte[] key) { }
+        public HMACSHA256(byte[] key)
+        {
+        }
 
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] rgb, int ib, int cb) { }
+        protected override void HashCore(byte[] rgb, int ib, int cb)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         public static byte[] HashData(byte[] key, byte[] source)
         {
@@ -2094,7 +2290,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         public static bool TryHashData(
             System.ReadOnlySpan<byte> key,
@@ -2115,14 +2313,20 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class HMACSHA384 : System.Security.Cryptography.HMAC
     {
-        public HMACSHA384() { }
+        public HMACSHA384()
+        {
+        }
 
-        public HMACSHA384(byte[] key) { }
+        public HMACSHA384(byte[] key)
+        {
+        }
 
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -2133,14 +2337,22 @@ namespace System.Security.Cryptography
         public bool ProduceLegacyHmacValues
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] rgb, int ib, int cb) { }
+        protected override void HashCore(byte[] rgb, int ib, int cb)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         public static byte[] HashData(byte[] key, byte[] source)
         {
@@ -2169,7 +2381,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         public static bool TryHashData(
             System.ReadOnlySpan<byte> key,
@@ -2190,14 +2404,20 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class HMACSHA512 : System.Security.Cryptography.HMAC
     {
-        public HMACSHA512() { }
+        public HMACSHA512()
+        {
+        }
 
-        public HMACSHA512(byte[] key) { }
+        public HMACSHA512(byte[] key)
+        {
+        }
 
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -2208,14 +2428,22 @@ namespace System.Security.Cryptography
         public bool ProduceLegacyHmacValues
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected override void HashCore(byte[] rgb, int ib, int cb) { }
+        protected override void HashCore(byte[] rgb, int ib, int cb)
+        {
+        }
 
-        protected override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         public static byte[] HashData(byte[] key, byte[] source)
         {
@@ -2244,7 +2472,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void Initialize() { }
+        public override void Initialize()
+        {
+        }
 
         public static bool TryHashData(
             System.ReadOnlySpan<byte> key,
@@ -2264,7 +2494,9 @@ namespace System.Security.Cryptography
 
     public sealed partial class IncrementalHash : System.IDisposable
     {
-        internal IncrementalHash() { }
+        internal IncrementalHash()
+        {
+        }
 
         public System.Security.Cryptography.HashAlgorithmName AlgorithmName
         {
@@ -2275,11 +2507,17 @@ namespace System.Security.Cryptography
             get { throw null; }
         }
 
-        public void AppendData(byte[] data) { }
+        public void AppendData(byte[] data)
+        {
+        }
 
-        public void AppendData(byte[] data, int offset, int count) { }
+        public void AppendData(byte[] data, int offset, int count)
+        {
+        }
 
-        public void AppendData(System.ReadOnlySpan<byte> data) { }
+        public void AppendData(System.ReadOnlySpan<byte> data)
+        {
+        }
 
         public static System.Security.Cryptography.IncrementalHash CreateHash(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
@@ -2306,7 +2544,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public byte[] GetCurrentHash()
         {
@@ -2342,7 +2582,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class MaskGenerationMethod
     {
-        protected MaskGenerationMethod() { }
+        protected MaskGenerationMethod()
+        {
+        }
 
         public abstract byte[] GenerateMask(byte[] rgbSeed, int cbReturn);
     }
@@ -2350,7 +2592,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class MD5 : System.Security.Cryptography.HashAlgorithm
     {
-        protected MD5() { }
+        protected MD5()
+        {
+        }
 
         public static new System.Security.Cryptography.MD5 Create()
         {
@@ -2397,12 +2641,16 @@ namespace System.Security.Cryptography
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "PKCS1MaskGenerationMethod is not trim compatible because the algorithm implementation referenced by HashName might be removed."
         )]
-        public PKCS1MaskGenerationMethod() { }
+        public PKCS1MaskGenerationMethod()
+        {
+        }
 
         public string HashName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] GenerateMask(byte[] rgbSeed, int cbReturn)
@@ -2413,7 +2661,9 @@ namespace System.Security.Cryptography
 
     public abstract partial class RandomNumberGenerator : System.IDisposable
     {
-        protected RandomNumberGenerator() { }
+        protected RandomNumberGenerator()
+        {
+        }
 
         public static System.Security.Cryptography.RandomNumberGenerator Create()
         {
@@ -2429,22 +2679,32 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
-        public static void Fill(System.Span<byte> data) { }
+        public static void Fill(System.Span<byte> data)
+        {
+        }
 
         public abstract void GetBytes(byte[] data);
 
-        public virtual void GetBytes(byte[] data, int offset, int count) { }
+        public virtual void GetBytes(byte[] data, int offset, int count)
+        {
+        }
 
         public static byte[] GetBytes(int count)
         {
             throw null;
         }
 
-        public virtual void GetBytes(System.Span<byte> data) { }
+        public virtual void GetBytes(System.Span<byte> data)
+        {
+        }
 
         public static int GetInt32(int toExclusive)
         {
@@ -2456,9 +2716,13 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public virtual void GetNonZeroBytes(byte[] data) { }
+        public virtual void GetNonZeroBytes(byte[] data)
+        {
+        }
 
-        public virtual void GetNonZeroBytes(System.Span<byte> data) { }
+        public virtual void GetNonZeroBytes(System.Span<byte> data)
+        {
+        }
     }
 
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -2469,17 +2733,23 @@ namespace System.Security.Cryptography
     {
         protected int EffectiveKeySizeValue;
 
-        protected RC2() { }
+        protected RC2()
+        {
+        }
 
         public virtual int EffectiveKeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
@@ -2500,36 +2770,52 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class Rfc2898DeriveBytes : System.Security.Cryptography.DeriveBytes
     {
-        public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations) { }
+        public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations)
+        {
+        }
 
         public Rfc2898DeriveBytes(
             byte[] password,
             byte[] salt,
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
-        public Rfc2898DeriveBytes(string password, byte[] salt) { }
+        public Rfc2898DeriveBytes(string password, byte[] salt)
+        {
+        }
 
-        public Rfc2898DeriveBytes(string password, byte[] salt, int iterations) { }
+        public Rfc2898DeriveBytes(string password, byte[] salt, int iterations)
+        {
+        }
 
         public Rfc2898DeriveBytes(
             string password,
             byte[] salt,
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
-        public Rfc2898DeriveBytes(string password, int saltSize) { }
+        public Rfc2898DeriveBytes(string password, int saltSize)
+        {
+        }
 
-        public Rfc2898DeriveBytes(string password, int saltSize, int iterations) { }
+        public Rfc2898DeriveBytes(string password, int saltSize, int iterations)
+        {
+        }
 
         public Rfc2898DeriveBytes(
             string password,
             int saltSize,
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
         public System.Security.Cryptography.HashAlgorithmName HashAlgorithm
         {
@@ -2538,12 +2824,16 @@ namespace System.Security.Cryptography
         public int IterationCount
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public byte[] Salt
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ObsoleteAttribute(
@@ -2556,7 +2846,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override byte[] GetBytes(int cb)
         {
@@ -2591,7 +2883,9 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
         public static byte[] Pbkdf2(
             System.ReadOnlySpan<char> password,
@@ -2610,7 +2904,9 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) { }
+        )
+        {
+        }
 
         public static byte[] Pbkdf2(
             string password,
@@ -2623,7 +2919,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+        }
     }
 
     [System.ObsoleteAttribute(
@@ -2637,7 +2935,9 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class Rijndael : System.Security.Cryptography.SymmetricAlgorithm
     {
-        protected Rijndael() { }
+        protected Rijndael()
+        {
+        }
 
         public static new System.Security.Cryptography.Rijndael Create()
         {
@@ -2664,32 +2964,44 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public sealed partial class RijndaelManaged : System.Security.Cryptography.Rijndael
     {
-        public RijndaelManaged() { }
+        public RijndaelManaged()
+        {
+        }
 
         public override int BlockSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int FeedbackSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] IV
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int KeySize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.KeySizes[] LegalKeySizes
         {
@@ -2698,12 +3010,16 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.CipherMode Mode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Security.Cryptography.PaddingMode Padding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor()
@@ -2732,17 +3048,25 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public override void GenerateIV() { }
+        public override void GenerateIV()
+        {
+        }
 
-        public override void GenerateKey() { }
+        public override void GenerateKey()
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class RSA : System.Security.Cryptography.AsymmetricAlgorithm
     {
-        protected RSA() { }
+        protected RSA()
+        {
+        }
 
         public override string? KeyExchangeAlgorithm
         {
@@ -2818,7 +3142,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void FromXmlString(string xmlString) { }
+        public override void FromXmlString(string xmlString)
+        {
+        }
 
         protected virtual byte[] HashData(
             byte[] data,
@@ -2859,14 +3185,20 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<byte> passwordBytes
-        ) { }
+        )
+        {
+        }
 
         public override void ImportFromEncryptedPem(
             System.ReadOnlySpan<char> input,
             System.ReadOnlySpan<char> password
-        ) { }
+        )
+        {
+        }
 
-        public override void ImportFromPem(System.ReadOnlySpan<char> input) { }
+        public override void ImportFromPem(System.ReadOnlySpan<char> input)
+        {
+        }
 
         public abstract void ImportParameters(
             System.Security.Cryptography.RSAParameters parameters
@@ -3112,7 +3444,9 @@ namespace System.Security.Cryptography
     public sealed partial class RSAEncryptionPadding
         : System.IEquatable<System.Security.Cryptography.RSAEncryptionPadding>
     {
-        internal RSAEncryptionPadding() { }
+        internal RSAEncryptionPadding()
+        {
+        }
 
         public System.Security.Cryptography.RSAEncryptionPaddingMode Mode
         {
@@ -3202,15 +3536,20 @@ namespace System.Security.Cryptography
     public partial class RSAOAEPKeyExchangeDeformatter
         : System.Security.Cryptography.AsymmetricKeyExchangeDeformatter
     {
-        public RSAOAEPKeyExchangeDeformatter() { }
+        public RSAOAEPKeyExchangeDeformatter()
+        {
+        }
 
         public RSAOAEPKeyExchangeDeformatter(System.Security.Cryptography.AsymmetricAlgorithm key)
-        { }
+        {
+        }
 
         public override string? Parameters
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] DecryptKeyExchange(byte[] rgbData)
@@ -3218,21 +3557,29 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class RSAOAEPKeyExchangeFormatter
         : System.Security.Cryptography.AsymmetricKeyExchangeFormatter
     {
-        public RSAOAEPKeyExchangeFormatter() { }
+        public RSAOAEPKeyExchangeFormatter()
+        {
+        }
 
-        public RSAOAEPKeyExchangeFormatter(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public RSAOAEPKeyExchangeFormatter(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
 
         public byte[]? Parameter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string? Parameters
         {
@@ -3241,7 +3588,9 @@ namespace System.Security.Cryptography
         public System.Security.Cryptography.RandomNumberGenerator? Rng
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] CreateKeyExchange(byte[] rgbData)
@@ -3254,7 +3603,9 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
     }
 
     public partial struct RSAParameters
@@ -3273,20 +3624,27 @@ namespace System.Security.Cryptography
     public partial class RSAPKCS1KeyExchangeDeformatter
         : System.Security.Cryptography.AsymmetricKeyExchangeDeformatter
     {
-        public RSAPKCS1KeyExchangeDeformatter() { }
+        public RSAPKCS1KeyExchangeDeformatter()
+        {
+        }
 
         public RSAPKCS1KeyExchangeDeformatter(System.Security.Cryptography.AsymmetricAlgorithm key)
-        { }
+        {
+        }
 
         public override string? Parameters
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Security.Cryptography.RandomNumberGenerator? RNG
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] DecryptKeyExchange(byte[] rgbIn)
@@ -3294,17 +3652,22 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class RSAPKCS1KeyExchangeFormatter
         : System.Security.Cryptography.AsymmetricKeyExchangeFormatter
     {
-        public RSAPKCS1KeyExchangeFormatter() { }
+        public RSAPKCS1KeyExchangeFormatter()
+        {
+        }
 
         public RSAPKCS1KeyExchangeFormatter(System.Security.Cryptography.AsymmetricAlgorithm key)
-        { }
+        {
+        }
 
         public override string Parameters
         {
@@ -3313,7 +3676,9 @@ namespace System.Security.Cryptography
         public System.Security.Cryptography.RandomNumberGenerator? Rng
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override byte[] CreateKeyExchange(byte[] rgbData)
@@ -3326,21 +3691,30 @@ namespace System.Security.Cryptography
             throw null;
         }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class RSAPKCS1SignatureDeformatter
         : System.Security.Cryptography.AsymmetricSignatureDeformatter
     {
-        public RSAPKCS1SignatureDeformatter() { }
+        public RSAPKCS1SignatureDeformatter()
+        {
+        }
 
         public RSAPKCS1SignatureDeformatter(System.Security.Cryptography.AsymmetricAlgorithm key)
-        { }
+        {
+        }
 
-        public override void SetHashAlgorithm(string strName) { }
+        public override void SetHashAlgorithm(string strName)
+        {
+        }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
 
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
         {
@@ -3352,25 +3726,35 @@ namespace System.Security.Cryptography
     public partial class RSAPKCS1SignatureFormatter
         : System.Security.Cryptography.AsymmetricSignatureFormatter
     {
-        public RSAPKCS1SignatureFormatter() { }
+        public RSAPKCS1SignatureFormatter()
+        {
+        }
 
-        public RSAPKCS1SignatureFormatter(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public RSAPKCS1SignatureFormatter(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
 
         public override byte[] CreateSignature(byte[] rgbHash)
         {
             throw null;
         }
 
-        public override void SetHashAlgorithm(string strName) { }
+        public override void SetHashAlgorithm(string strName)
+        {
+        }
 
-        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
+        public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key)
+        {
+        }
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public sealed partial class RSASignaturePadding
         : System.IEquatable<System.Security.Cryptography.RSASignaturePadding>
     {
-        internal RSASignaturePadding() { }
+        internal RSASignaturePadding()
+        {
+        }
 
         public System.Security.Cryptography.RSASignaturePaddingMode Mode
         {
@@ -3435,7 +3819,9 @@ namespace System.Security.Cryptography
 
     public abstract partial class SHA1 : System.Security.Cryptography.HashAlgorithm
     {
-        protected SHA1() { }
+        protected SHA1()
+        {
+        }
 
         public static new System.Security.Cryptography.SHA1 Create()
         {
@@ -3485,20 +3871,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA1Managed : System.Security.Cryptography.SHA1
     {
-        public SHA1Managed() { }
+        public SHA1Managed()
+        {
+        }
 
-        protected sealed override void Dispose(bool disposing) { }
+        protected sealed override void Dispose(bool disposing)
+        {
+        }
 
-        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected sealed override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected sealed override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected sealed override byte[] HashFinal()
         {
             throw null;
         }
 
-        public sealed override void Initialize() { }
+        public sealed override void Initialize()
+        {
+        }
 
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
@@ -3511,7 +3907,9 @@ namespace System.Security.Cryptography
 
     public abstract partial class SHA256 : System.Security.Cryptography.HashAlgorithm
     {
-        protected SHA256() { }
+        protected SHA256()
+        {
+        }
 
         public static new System.Security.Cryptography.SHA256 Create()
         {
@@ -3561,20 +3959,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA256Managed : System.Security.Cryptography.SHA256
     {
-        public SHA256Managed() { }
+        public SHA256Managed()
+        {
+        }
 
-        protected sealed override void Dispose(bool disposing) { }
+        protected sealed override void Dispose(bool disposing)
+        {
+        }
 
-        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected sealed override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected sealed override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected sealed override byte[] HashFinal()
         {
             throw null;
         }
 
-        public sealed override void Initialize() { }
+        public sealed override void Initialize()
+        {
+        }
 
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
@@ -3587,7 +3995,9 @@ namespace System.Security.Cryptography
 
     public abstract partial class SHA384 : System.Security.Cryptography.HashAlgorithm
     {
-        protected SHA384() { }
+        protected SHA384()
+        {
+        }
 
         public static new System.Security.Cryptography.SHA384 Create()
         {
@@ -3637,20 +4047,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA384Managed : System.Security.Cryptography.SHA384
     {
-        public SHA384Managed() { }
+        public SHA384Managed()
+        {
+        }
 
-        protected sealed override void Dispose(bool disposing) { }
+        protected sealed override void Dispose(bool disposing)
+        {
+        }
 
-        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected sealed override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected sealed override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected sealed override byte[] HashFinal()
         {
             throw null;
         }
 
-        public sealed override void Initialize() { }
+        public sealed override void Initialize()
+        {
+        }
 
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
@@ -3663,7 +4083,9 @@ namespace System.Security.Cryptography
 
     public abstract partial class SHA512 : System.Security.Cryptography.HashAlgorithm
     {
-        protected SHA512() { }
+        protected SHA512()
+        {
+        }
 
         public static new System.Security.Cryptography.SHA512 Create()
         {
@@ -3713,20 +4135,30 @@ namespace System.Security.Cryptography
     )]
     public sealed partial class SHA512Managed : System.Security.Cryptography.SHA512
     {
-        public SHA512Managed() { }
+        public SHA512Managed()
+        {
+        }
 
-        protected sealed override void Dispose(bool disposing) { }
+        protected sealed override void Dispose(bool disposing)
+        {
+        }
 
-        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize) { }
+        protected sealed override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+        }
 
-        protected sealed override void HashCore(System.ReadOnlySpan<byte> source) { }
+        protected sealed override void HashCore(System.ReadOnlySpan<byte> source)
+        {
+        }
 
         protected sealed override byte[] HashFinal()
         {
             throw null;
         }
 
-        public sealed override void Initialize() { }
+        public sealed override void Initialize()
+        {
+        }
 
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
@@ -3740,29 +4172,41 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class SignatureDescription
     {
-        public SignatureDescription() { }
+        public SignatureDescription()
+        {
+        }
 
-        public SignatureDescription(System.Security.SecurityElement el) { }
+        public SignatureDescription(System.Security.SecurityElement el)
+        {
+        }
 
         public string? DeformatterAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? DigestAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? FormatterAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? KeyAlgorithm
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -3797,12 +4241,16 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public abstract partial class TripleDES : System.Security.Cryptography.SymmetricAlgorithm
     {
-        protected TripleDES() { }
+        protected TripleDES()
+        {
+        }
 
         public override byte[] Key
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public static new System.Security.Cryptography.TripleDES Create()

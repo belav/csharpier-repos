@@ -219,7 +219,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
     public class TCGetUnspecifiedDefaultAttributes : CXmlSchemaValidatorTestCase
     {
-        public TCGetUnspecifiedDefaultAttributes(ITestOutputHelper output) : base(output) { }
+        public TCGetUnspecifiedDefaultAttributes(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void PassNull__Invalid()

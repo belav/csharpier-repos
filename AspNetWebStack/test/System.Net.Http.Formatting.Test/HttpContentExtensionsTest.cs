@@ -525,7 +525,9 @@ namespace System.Net.Http
                 );
         }
 
-        public class TestClass { }
+        public class TestClass
+        {
+        }
 
         public abstract class TestableHttpContent : HttpContent
         {

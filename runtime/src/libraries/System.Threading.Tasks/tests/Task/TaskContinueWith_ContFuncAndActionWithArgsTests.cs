@@ -561,14 +561,22 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunContinueWithOnDisposedTaskTest_State()
         {
-            Task t1 = Task.Factory.StartNew(delegate { });
+            Task t1 = Task.Factory.StartNew(
+                delegate
+                {
+                }
+            );
             t1.Wait();
             //t1.Dispose();
 
             try
             {
                 string stateParam = "test"; //used as a state parameter for the continuation if the useStateParam is true
-                Task t2 = t1.ContinueWith((completedTask, obj) => { }, stateParam);
+                Task t2 = t1.ContinueWith(
+                    (completedTask, obj) => {
+                    },
+                    stateParam
+                );
             }
             catch
             {
@@ -599,32 +607,43 @@ namespace System.Threading.Tasks.Tests
                 {
                     CancellationTokenSource cts = new CancellationTokenSource();
                     Task child1 = new Task(
-                        delegate { },
+                        delegate
+                        {
+                        },
                         cts.Token,
                         TaskCreationOptions.AttachedToParent
                     );
-                    Task child2 = new Task(delegate { }, TaskCreationOptions.AttachedToParent);
+                    Task child2 = new Task(
+                        delegate
+                        {
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
 
                     c1b = child1.ContinueWith(
-                        (_, obj) => { },
+                        (_, obj) => {
+                        },
                         stateParam,
                         TaskContinuationOptions.NotOnCanceled
                             | TaskContinuationOptions.AttachedToParent
                     );
                     c1c = child1.ContinueWith(
-                        (_, obj) => { },
+                        (_, obj) => {
+                        },
                         stateParam,
                         TaskContinuationOptions.AttachedToParent
                     );
 
                     c2b = child2.ContinueWith(
-                        (_, obj) => { },
+                        (_, obj) => {
+                        },
                         stateParam,
                         TaskContinuationOptions.NotOnRanToCompletion
                             | TaskContinuationOptions.AttachedToParent
                     );
                     c2c = child2.ContinueWith(
-                        (_, obj) => { },
+                        (_, obj) => {
+                        },
                         stateParam,
                         TaskContinuationOptions.AttachedToParent
                     );
@@ -639,7 +658,9 @@ namespace System.Threading.Tasks.Tests
             {
                 container.Wait();
             }
-            catch { }
+            catch
+            {
+            }
 
             if (c1b.Status != TaskStatus.Canceled)
             {
@@ -683,13 +704,18 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunContinueWithParamsTest_State_IllegalParameters()
         {
-            Task t1 = new Task(delegate { });
+            Task t1 = new Task(
+                delegate
+                {
+                }
+            );
             string stateParam = "test"; //used as a state parameter for the continuation if the useStateParam is true
 
             try
             {
                 Task t2 = t1.ContinueWith(
-                    (ooo, obj) => { },
+                    (ooo, obj) => {
+                    },
                     stateParam,
                     (TaskContinuationOptions)0x1000000
                 );
@@ -700,12 +726,15 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             try
             {
                 Task t2 = t1.ContinueWith(
-                    (ooo, obj) => { },
+                    (ooo, obj) => {
+                    },
                     stateParam,
                     TaskContinuationOptions.LongRunning
                         | TaskContinuationOptions.ExecuteSynchronously
@@ -717,12 +746,15 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch { }
+            catch
+            {
+            }
 
             try
             {
                 Task t2 = t1.ContinueWith(
-                    (ooo, obj) => { },
+                    (ooo, obj) => {
+                    },
                     stateParam,
                     TaskContinuationOptions.NotOnRanToCompletion
                         | TaskContinuationOptions.NotOnFaulted
@@ -735,7 +767,9 @@ namespace System.Threading.Tasks.Tests
                     )
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             t1.Start();
             t1.Wait();
@@ -1025,7 +1059,11 @@ namespace System.Threading.Tasks.Tests
                 if (taskIsFuture)
                     task = Task<string>.Factory.StartNew(() => "");
                 else
-                    task = Task.Factory.StartNew(delegate { });
+                    task = Task.Factory.StartNew(
+                        delegate
+                        {
+                        }
+                    );
                 task.Wait();
 
                 initRan();

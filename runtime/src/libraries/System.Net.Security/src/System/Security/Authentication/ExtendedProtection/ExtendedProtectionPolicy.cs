@@ -57,7 +57,9 @@ namespace System.Security.Authentication.ExtendedProtection
                 customServiceNames == null
                     ? (ServiceNameCollection?)null
                     : new ServiceNameCollection(customServiceNames)
-            ) { }
+            )
+        {
+        }
 
         public ExtendedProtectionPolicy(
             PolicyEnforcement policyEnforcement,

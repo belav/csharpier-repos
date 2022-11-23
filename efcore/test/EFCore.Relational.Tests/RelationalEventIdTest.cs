@@ -157,7 +157,9 @@ public class RelationalEventIdTest : EventIdTestBase
         );
     }
 
-    private class FakeDbContext : DbContext { }
+    private class FakeDbContext : DbContext
+    {
+    }
 
     [Migration("00000000000000_FakeMigration")]
     private class FakeMigration : Migration
@@ -168,7 +170,9 @@ public class RelationalEventIdTest : EventIdTestBase
 
     private class FakeSqlExpression : SqlExpression
     {
-        public FakeSqlExpression() : base(typeof(object), null) { }
+        public FakeSqlExpression() : base(typeof(object), null)
+        {
+        }
 
         protected override void Print(ExpressionPrinter expressionPrinter) =>
             expressionPrinter.Append("FakeSqlExpression");
@@ -320,7 +324,9 @@ public class RelationalEventIdTest : EventIdTestBase
         public override string CommandText
         {
             get => "CommandText";
-            set { }
+            set
+            {
+            }
         }
 
         public override int CommandTimeout { get; set; }

@@ -26,11 +26,14 @@ namespace System.Web.Mvc
     {
         private IList<SelectListGroup> _groups;
 
-        public MultiSelectList(IEnumerable items) : this(items, selectedValues: null) { }
+        public MultiSelectList(IEnumerable items) : this(items, selectedValues: null)
+        {
+        }
 
         public MultiSelectList(IEnumerable items, IEnumerable selectedValues)
             : this(items, dataValueField: null, dataTextField: null, selectedValues: selectedValues)
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
@@ -52,10 +55,14 @@ namespace System.Web.Mvc
                 dataTextField: null,
                 selectedValues: selectedValues,
                 disabledValues: disabledValues
-            ) { }
+            )
+        {
+        }
 
         public MultiSelectList(IEnumerable items, string dataValueField, string dataTextField)
-            : this(items, dataValueField, dataTextField, selectedValues: null) { }
+            : this(items, dataValueField, dataTextField, selectedValues: null)
+        {
+        }
 
         public MultiSelectList(
             IEnumerable items,
@@ -69,7 +76,9 @@ namespace System.Web.Mvc
                 dataTextField,
                 dataGroupField: null,
                 selectedValues: selectedValues
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
@@ -94,7 +103,9 @@ namespace System.Web.Mvc
                 dataTextField,
                 dataGroupField: dataGroupField,
                 selectedValues: null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
@@ -123,7 +134,9 @@ namespace System.Web.Mvc
                 dataGroupField: null,
                 selectedValues: selectedValues,
                 disabledValues: disabledValues
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
@@ -152,7 +165,9 @@ namespace System.Web.Mvc
                 dataGroupField,
                 selectedValues,
                 disabledValues: null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
@@ -186,7 +201,9 @@ namespace System.Web.Mvc
                 selectedValues,
                 disabledValues,
                 disabledGroups: null
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,

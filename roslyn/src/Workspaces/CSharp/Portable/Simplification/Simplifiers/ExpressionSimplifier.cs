@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
     {
         public static readonly ExpressionSimplifier Instance = new();
 
-        private ExpressionSimplifier() { }
+        private ExpressionSimplifier()
+        {
+        }
 
         public override bool TrySimplify(
             ExpressionSyntax expression,

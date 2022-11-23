@@ -4,17 +4,29 @@
 using System;
 using System.Runtime.CompilerServices;
 
-interface IBar { }
+interface IBar
+{
+}
 
-interface IFoo<T> { }
+interface IFoo<T>
+{
+}
 
-class C : IBar { }
+class C : IBar
+{
+}
 
-class C<T> : IFoo<T> { }
+class C<T> : IFoo<T>
+{
+}
 
-struct S { }
+struct S
+{
+}
 
-struct SBar : IBar { }
+struct SBar : IBar
+{
+}
 
 // More tests for shared types passing through compareTypesForCast
 

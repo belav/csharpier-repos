@@ -273,7 +273,9 @@ namespace System.ComponentModel.Composition
             Assert.True(importDefinition.IsConstraintSatisfiedBy(shouldMatch2));
         }
 
-        private class NoOverridesImportDefinition : ImportDefinition { }
+        private class NoOverridesImportDefinition : ImportDefinition
+        {
+        }
 
         private class DerivedImportDefinition : ImportDefinition
         {

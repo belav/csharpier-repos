@@ -5,7 +5,9 @@ public class SomeSource
     public int IgnoreMe { get; set; }
 }
 
-public class Destination : DestinationBase { }
+public class Destination : DestinationBase
+{
+}
 
 public class DestinationBase
 {

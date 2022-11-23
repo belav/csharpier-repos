@@ -8,11 +8,15 @@ public interface I
 
 public class A : I
 {
-    public virtual void M() { }
+    public virtual void M()
+    {
+    }
 }
 
 public class B_JIT : A
 {
     // Just to make sure that we do not have shared VTable indirection with parent
-    public virtual void M2() { }
+    public virtual void M2()
+    {
+    }
 }

@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTypeOfToNameOf
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpConvertTypeOfToNameOfCodeFixProvider() { }
+        public CSharpConvertTypeOfToNameOfCodeFixProvider()
+        {
+        }
 
         protected override string GetCodeFixTitle() =>
             CSharpCodeFixesResources.Convert_typeof_to_nameof;

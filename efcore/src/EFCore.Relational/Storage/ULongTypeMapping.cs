@@ -26,13 +26,17 @@ public class ULongTypeMapping : RelationalTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     public ULongTypeMapping(string storeType, DbType? dbType = System.Data.DbType.UInt64)
-        : base(storeType, typeof(ulong), dbType) { }
+        : base(storeType, typeof(ulong), dbType)
+    {
+    }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ULongTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected ULongTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected ULongTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    {
+    }
 
     /// <summary>
     ///     Creates a copy of this mapping.

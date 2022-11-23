@@ -9,7 +9,9 @@ namespace System.Reflection.Tests
     /// </summary>
     public class CoreMetadataAssemblyResolver : MetadataAssemblyResolver
     {
-        public CoreMetadataAssemblyResolver() { }
+        public CoreMetadataAssemblyResolver()
+        {
+        }
 
         public override Assembly Resolve(MetadataLoadContext context, AssemblyName assemblyName)
         {

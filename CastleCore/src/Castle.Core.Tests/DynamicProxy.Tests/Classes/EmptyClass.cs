@@ -14,5 +14,7 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-    public class EmptyClass { }
+    public class EmptyClass
+    {
+    }
 }

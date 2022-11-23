@@ -14,7 +14,9 @@ internal sealed class ConnectionLimitMiddleware<T> where T : BaseConnectionConte
     private readonly KestrelTrace _trace;
 
     public ConnectionLimitMiddleware(Func<T, Task> next, long connectionLimit, KestrelTrace trace)
-        : this(next, ResourceCounter.Quota(connectionLimit), trace) { }
+        : this(next, ResourceCounter.Quota(connectionLimit), trace)
+    {
+    }
 
     // For Testing
     internal ConnectionLimitMiddleware(

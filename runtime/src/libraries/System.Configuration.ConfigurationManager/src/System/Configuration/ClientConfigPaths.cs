@@ -281,7 +281,9 @@ namespace System.Configuration
                     // Certain platforms may not have support for crypto
                     hash = IdentityHelper.GetNormalizedStrongNameHash(assemblyName);
                 }
-                catch (PlatformNotSupportedException) { }
+                catch (PlatformNotSupportedException)
+                {
+                }
 
                 if (hash != null)
                 {
@@ -304,7 +306,9 @@ namespace System.Configuration
                         hash = IdentityHelper.GetNormalizedUriHash(codeBase);
                         typeName = UrlDesc;
                     }
-                    catch (PlatformNotSupportedException) { }
+                    catch (PlatformNotSupportedException)
+                    {
+                    }
                 }
             }
             else if (!string.IsNullOrEmpty(exePath))
@@ -316,7 +320,9 @@ namespace System.Configuration
                     hash = IdentityHelper.GetStrongHashSuitableForObjectName(exePath);
                     typeName = PathDesc;
                 }
-                catch (PlatformNotSupportedException) { }
+                catch (PlatformNotSupportedException)
+                {
+                }
             }
 
             if (!string.IsNullOrEmpty(hash))

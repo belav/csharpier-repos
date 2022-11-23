@@ -11,9 +11,13 @@ namespace Internal.Cryptography.Pal
 {
     internal sealed class ExportProvider : UnixExportProvider
     {
-        internal ExportProvider(ICertificatePalCore singleCertPal) : base(singleCertPal) { }
+        internal ExportProvider(ICertificatePalCore singleCertPal) : base(singleCertPal)
+        {
+        }
 
-        internal ExportProvider(X509Certificate2Collection certs) : base(certs) { }
+        internal ExportProvider(X509Certificate2Collection certs) : base(certs)
+        {
+        }
 
         protected override byte[] ExportPkcs8(
             ICertificatePalCore certificatePal,
@@ -29,7 +33,9 @@ namespace Internal.Cryptography.Pal
             {
                 alg = new RSAOpenSsl(privateKey!);
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             if (alg == null)
             {
@@ -37,7 +43,9 @@ namespace Internal.Cryptography.Pal
                 {
                     alg = new ECDsaOpenSsl(privateKey!);
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             if (alg == null)
@@ -46,7 +54,9 @@ namespace Internal.Cryptography.Pal
                 {
                     alg = new DSAOpenSsl(privateKey!);
                 }
-                catch (CryptographicException) { }
+                catch (CryptographicException)
+                {
+                }
             }
 
             Debug.Assert(alg != null);

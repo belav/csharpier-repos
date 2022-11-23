@@ -14,9 +14,13 @@ namespace System.Data
     {
         private DataRow[]? _dataRows;
 
-        public DBConcurrencyException() : this(SR.ADP_DBConcurrencyExceptionMessage, null) { }
+        public DBConcurrencyException() : this(SR.ADP_DBConcurrencyExceptionMessage, null)
+        {
+        }
 
-        public DBConcurrencyException(string? message) : this(message, null) { }
+        public DBConcurrencyException(string? message) : this(message, null)
+        {
+        }
 
         public DBConcurrencyException(string? message, Exception? inner) : base(message, inner)
         {
@@ -31,7 +35,9 @@ namespace System.Data
         }
 
         private DBConcurrencyException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

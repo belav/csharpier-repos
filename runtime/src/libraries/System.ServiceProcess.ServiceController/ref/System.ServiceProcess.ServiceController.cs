@@ -23,48 +23,62 @@ namespace System.ServiceProcess
     {
         public const int MaxNameLength = 80;
 
-        public ServiceBase() { }
+        public ServiceBase()
+        {
+        }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool AutoLog
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool CanHandlePowerEvent
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool CanHandleSessionChangeEvent
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool CanPauseAndContinue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool CanShutdown
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(true)]
         public bool CanStop
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -78,7 +92,9 @@ namespace System.ServiceProcess
         public int ExitCode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -91,16 +107,26 @@ namespace System.ServiceProcess
         public string ServiceName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        protected virtual void OnContinue() { }
+        protected virtual void OnContinue()
+        {
+        }
 
-        protected virtual void OnCustomCommand(int command) { }
+        protected virtual void OnCustomCommand(int command)
+        {
+        }
 
-        protected virtual void OnPause() { }
+        protected virtual void OnPause()
+        {
+        }
 
         protected virtual bool OnPowerEvent(System.ServiceProcess.PowerBroadcastStatus powerStatus)
         {
@@ -109,26 +135,44 @@ namespace System.ServiceProcess
 
         protected virtual void OnSessionChange(
             System.ServiceProcess.SessionChangeDescription changeDescription
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OnShutdown() { }
+        protected virtual void OnShutdown()
+        {
+        }
 
-        protected virtual void OnStart(string[] args) { }
+        protected virtual void OnStart(string[] args)
+        {
+        }
 
-        protected virtual void OnStop() { }
+        protected virtual void OnStop()
+        {
+        }
 
-        public void RequestAdditionalTime(int milliseconds) { }
+        public void RequestAdditionalTime(int milliseconds)
+        {
+        }
 
-        public static void Run(System.ServiceProcess.ServiceBase service) { }
+        public static void Run(System.ServiceProcess.ServiceBase service)
+        {
+        }
 
-        public static void Run(System.ServiceProcess.ServiceBase[] services) { }
+        public static void Run(System.ServiceProcess.ServiceBase[] services)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public void ServiceMainCallback(int argCount, System.IntPtr argPointer) { }
+        public void ServiceMainCallback(int argCount, System.IntPtr argPointer)
+        {
+        }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
     }
 
     [System.ComponentModel.DesignerAttribute(
@@ -136,11 +180,17 @@ namespace System.ServiceProcess
     )]
     public partial class ServiceController : System.ComponentModel.Component
     {
-        public ServiceController() { }
+        public ServiceController()
+        {
+        }
 
-        public ServiceController(string name) { }
+        public ServiceController(string name)
+        {
+        }
 
-        public ServiceController(string name, string machineName) { }
+        public ServiceController(string name, string machineName)
+        {
+        }
 
         public bool CanPauseAndContinue
         {
@@ -161,12 +211,16 @@ namespace System.ServiceProcess
         public string DisplayName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string MachineName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Runtime.InteropServices.SafeHandle ServiceHandle
         {
@@ -175,7 +229,9 @@ namespace System.ServiceProcess
         public string ServiceName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.ServiceProcess.ServiceController[] ServicesDependedOn
         {
@@ -194,13 +250,21 @@ namespace System.ServiceProcess
             get { throw null; }
         }
 
-        public void Close() { }
+        public void Close()
+        {
+        }
 
-        public void Continue() { }
+        public void Continue()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public void ExecuteCommand(int command) { }
+        public void ExecuteCommand(int command)
+        {
+        }
 
         public static System.ServiceProcess.ServiceController[] GetDevices()
         {
@@ -222,22 +286,36 @@ namespace System.ServiceProcess
             throw null;
         }
 
-        public void Pause() { }
+        public void Pause()
+        {
+        }
 
-        public void Refresh() { }
+        public void Refresh()
+        {
+        }
 
-        public void Start() { }
+        public void Start()
+        {
+        }
 
-        public void Start(string[] args) { }
+        public void Start(string[] args)
+        {
+        }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
 
-        public void WaitForStatus(System.ServiceProcess.ServiceControllerStatus desiredStatus) { }
+        public void WaitForStatus(System.ServiceProcess.ServiceControllerStatus desiredStatus)
+        {
+        }
 
         public void WaitForStatus(
             System.ServiceProcess.ServiceControllerStatus desiredStatus,
             System.TimeSpan timeout
-        ) { }
+        )
+        {
+        }
     }
 
     public enum ServiceControllerStatus
@@ -255,7 +333,9 @@ namespace System.ServiceProcess
     public partial class ServiceProcessDescriptionAttribute
         : System.ComponentModel.DescriptionAttribute
     {
-        public ServiceProcessDescriptionAttribute(string description) { }
+        public ServiceProcessDescriptionAttribute(string description)
+        {
+        }
 
         public override string Description
         {
@@ -345,15 +425,23 @@ namespace System.ServiceProcess
 
     public partial class TimeoutException : System.SystemException
     {
-        public TimeoutException() { }
+        public TimeoutException()
+        {
+        }
 
         protected TimeoutException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public TimeoutException(string? message) { }
+        public TimeoutException(string? message)
+        {
+        }
 
-        public TimeoutException(string? message, System.Exception? innerException) { }
+        public TimeoutException(string? message, System.Exception? innerException)
+        {
+        }
     }
 }

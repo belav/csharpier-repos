@@ -64,7 +64,9 @@ internal class MyTypeConverter : TypeConverter
 
         public override object GetValue(object component) => null;
 
-        public override void SetValue(object component, object value) { }
+        public override void SetValue(object component, object value)
+        {
+        }
     }
 
     public static PropertyDescriptor CreatePropertyDescriptor(bool isReadOnly)

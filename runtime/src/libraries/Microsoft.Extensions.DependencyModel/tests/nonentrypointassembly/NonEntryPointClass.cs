@@ -5,5 +5,7 @@ using System;
 
 namespace nonentrypointassembly
 {
-    public class NonEntryPointClass { }
+    public class NonEntryPointClass
+    {
+    }
 }

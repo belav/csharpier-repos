@@ -71,7 +71,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private sealed class NeverEmptyStructTypeCache : EmptyStructTypeCache
         {
-            public NeverEmptyStructTypeCache() : base(null, false) { }
+            public NeverEmptyStructTypeCache() : base(null, false)
+            {
+            }
 
             public override bool IsEmptyStructType(TypeSymbol type)
             {

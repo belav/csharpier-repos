@@ -54,7 +54,9 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
     public async Task ThrowsIfAppIdMissing()
     {
         using var host = await CreateHost(
-            app => { },
+            app =>
+            {
+            },
             services =>
                 services.AddAuthentication().AddFacebook(o => o.SignInScheme = "PLACEHOLDER"),
             async context =>
@@ -75,7 +77,9 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
     public async Task ThrowsIfAppSecretMissing()
     {
         using var host = await CreateHost(
-            app => { },
+            app =>
+            {
+            },
             services => services.AddAuthentication().AddFacebook(o => o.AppId = "Whatever"),
             async context =>
             {
@@ -103,7 +107,12 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             {
                 services
                     .AddAuthentication("External")
-                    .AddCookie("External", o => { })
+                    .AddCookie(
+                        "External",
+                        o =>
+                        {
+                        }
+                    )
                     .AddFacebook(o =>
                     {
                         o.AppId = "Test App Id";
@@ -264,7 +273,12 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             {
                 services
                     .AddAuthentication()
-                    .AddCookie("External", o => { })
+                    .AddCookie(
+                        "External",
+                        o =>
+                        {
+                        }
+                    )
                     .AddFacebook(o =>
                     {
                         o.AppId = "Test App Id";
@@ -312,7 +326,12 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             {
                 services
                     .AddAuthentication()
-                    .AddCookie("External", o => { })
+                    .AddCookie(
+                        "External",
+                        o =>
+                        {
+                        }
+                    )
                     .AddFacebook(o =>
                     {
                         o.AppId = "Test App Id";

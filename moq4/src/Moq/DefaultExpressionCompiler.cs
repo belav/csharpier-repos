@@ -11,7 +11,9 @@ namespace Moq
         new public static readonly DefaultExpressionCompiler Instance =
             new DefaultExpressionCompiler();
 
-        private DefaultExpressionCompiler() { }
+        private DefaultExpressionCompiler()
+        {
+        }
 
         public override Delegate Compile(LambdaExpression expression)
         {

@@ -1179,7 +1179,9 @@ namespace System.IO
         }
 
         [Obsolete("Do not call or override this method.")]
-        protected virtual void ObjectInvariant() { }
+        protected virtual void ObjectInvariant()
+        {
+        }
 
         /// <summary>Validates arguments provided to reading and writing methods on <see cref="Stream"/>.</summary>
         /// <param name="buffer">The array "buffer" argument passed to the reading or writing method.</param>
@@ -1269,7 +1271,9 @@ namespace System.IO
         /// <summary>Provides a nop stream.</summary>
         private sealed class NullStream : Stream
         {
-            internal NullStream() { }
+            internal NullStream()
+            {
+            }
 
             public override bool CanRead => true;
             public override bool CanWrite => true;
@@ -1278,10 +1282,14 @@ namespace System.IO
             public override long Position
             {
                 get => 0;
-                set { }
+                set
+                {
+                }
             }
 
-            public override void CopyTo(Stream destination, int bufferSize) { }
+            public override void CopyTo(Stream destination, int bufferSize)
+            {
+            }
 
             public override Task CopyToAsync(
                 Stream destination,
@@ -1297,7 +1305,9 @@ namespace System.IO
                 // Do nothing - we don't want NullStream singleton (static) to be closable
             }
 
-            public override void Flush() { }
+            public override void Flush()
+            {
+            }
 
             public override Task FlushAsync(CancellationToken cancellationToken) =>
                 cancellationToken.IsCancellationRequested
@@ -1349,9 +1359,13 @@ namespace System.IO
 
             public override int ReadByte() => -1;
 
-            public override void Write(byte[] buffer, int offset, int count) { }
+            public override void Write(byte[] buffer, int offset, int count)
+            {
+            }
 
-            public override void Write(ReadOnlySpan<byte> buffer) { }
+            public override void Write(ReadOnlySpan<byte> buffer)
+            {
+            }
 
             public override Task WriteAsync(
                 byte[] buffer,
@@ -1371,11 +1385,15 @@ namespace System.IO
                     ? ValueTask.FromCanceled(cancellationToken)
                     : default;
 
-            public override void WriteByte(byte value) { }
+            public override void WriteByte(byte value)
+            {
+            }
 
             public override long Seek(long offset, SeekOrigin origin) => 0;
 
-            public override void SetLength(long length) { }
+            public override void SetLength(long length)
+            {
+            }
         }
 
         /// <summary>Provides a wrapper around a stream that takes a lock for every operation.</summary>

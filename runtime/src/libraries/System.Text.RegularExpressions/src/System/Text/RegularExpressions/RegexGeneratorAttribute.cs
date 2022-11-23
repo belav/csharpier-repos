@@ -14,7 +14,9 @@ public sealed class RegexGeneratorAttribute : Attribute
     /// <summary>Initializes a new instance of the <see cref="RegexGeneratorAttribute"/> with the specified pattern.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
     public RegexGeneratorAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string pattern)
-        : this(pattern, RegexOptions.None) { }
+        : this(pattern, RegexOptions.None)
+    {
+    }
 
     /// <summary>Initializes a new instance of the <see cref="RegexGeneratorAttribute"/> with the specified pattern and options.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>
@@ -22,7 +24,9 @@ public sealed class RegexGeneratorAttribute : Attribute
     public RegexGeneratorAttribute(
         [StringSyntax(StringSyntaxAttribute.Regex, "options")] string pattern,
         RegexOptions options
-    ) : this(pattern, options, Timeout.Infinite) { }
+    ) : this(pattern, options, Timeout.Infinite)
+    {
+    }
 
     /// <summary>Initializes a new instance of the <see cref="RegexGeneratorAttribute"/> with the specified pattern, options, and timeout.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>

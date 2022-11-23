@@ -21,7 +21,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     {
         private Type clrType;
 
-        public DummyXmlNode() : this(typeof(object)) { }
+        public DummyXmlNode() : this(typeof(object))
+        {
+        }
 
         public DummyXmlNode(Type clrType)
         {
@@ -147,8 +149,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         public event EventHandler Realized
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public void Clear()

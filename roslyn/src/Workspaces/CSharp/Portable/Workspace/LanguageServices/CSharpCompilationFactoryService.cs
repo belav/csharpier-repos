@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCompilationFactoryService() { }
+        public CSharpCompilationFactoryService()
+        {
+        }
 
         Compilation ICompilationFactoryService.CreateCompilation(
             string assemblyName,

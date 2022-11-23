@@ -241,7 +241,9 @@ public class RefBase : IDisposable
 {
     public int a;
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class Class1<T> : RefBase

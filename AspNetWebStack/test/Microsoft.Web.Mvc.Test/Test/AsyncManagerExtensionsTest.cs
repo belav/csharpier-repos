@@ -162,7 +162,13 @@ namespace Microsoft.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 delegate
                 {
-                    AsyncManagerExtensions.RegisterTask(null, _ => null, _ => { });
+                    AsyncManagerExtensions.RegisterTask(
+                        null,
+                        _ => null,
+                        _ =>
+                        {
+                        }
+                    );
                 },
                 "asyncManager"
             );
@@ -175,7 +181,12 @@ namespace Microsoft.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 delegate
                 {
-                    new AsyncManager().RegisterTask(null, _ => { });
+                    new AsyncManager().RegisterTask(
+                        null,
+                        _ =>
+                        {
+                        }
+                    );
                 },
                 "beginDelegate"
             );

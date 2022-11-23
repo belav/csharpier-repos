@@ -21,5 +21,7 @@ public class ArrayStructuralComparer<TElement> : ValueComparer<TElement[]>
             CreateDefaultEqualsExpression(),
             CreateDefaultHashCodeExpression(favorStructuralComparisons: true),
             v => v.ToArray()
-        ) { }
+        )
+    {
+    }
 }

@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDiagnosticModeServiceFactory() { }
+        public DefaultDiagnosticModeServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new DefaultDiagnosticModeService(workspaceServices.Workspace);

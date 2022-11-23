@@ -11,7 +11,9 @@ namespace Test
         private double[] m_adDummyField;
         private ulong[] m_aulField4;
 
-        void Method1(ref ulong[] param2) { }
+        void Method1(ref ulong[] param2)
+        {
+        }
 
         static void Method1(BB param2, __arglist)
         {

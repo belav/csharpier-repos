@@ -8,9 +8,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 {
     using System.Collections.Generic;
 
-    public class C { }
+    public class C
+    {
+    }
 
-    public interface I { }
+    public interface I
+    {
+    }
 
     public class MemberClass
     {
@@ -1248,9 +1252,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         }
     }
 
-    public class MyTest : I { }
+    public class MyTest : I
+    {
+    }
 
-    public class DerivedMyTest : MyTest { }
+    public class DerivedMyTest : MyTest
+    {
+    }
     //</Code>
 }
 

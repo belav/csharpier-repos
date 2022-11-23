@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
                 undoHistoryRegistry,
                 editorOperationsFactoryService,
                 editorOptionsService
-            ) { }
+            )
+        {
+        }
 
         protected override string ExteriorTriviaText => "///";
     }

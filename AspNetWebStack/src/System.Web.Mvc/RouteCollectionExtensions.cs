@@ -352,7 +352,9 @@ namespace System.Web.Mvc
 
         private sealed class IgnoreRouteInternal : Route
         {
-            public IgnoreRouteInternal(string url) : base(url, new StopRoutingHandler()) { }
+            public IgnoreRouteInternal(string url) : base(url, new StopRoutingHandler())
+            {
+            }
 
             public override VirtualPathData GetVirtualPath(
                 RequestContext requestContext,

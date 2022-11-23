@@ -140,7 +140,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 VerifyTimeout(com);
             }
@@ -176,7 +178,9 @@ namespace System.IO.Ports.Tests
                 {
                     com1.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 asyncEnableRts.Stop();
 
@@ -365,7 +369,9 @@ namespace System.IO.Ports.Tests
                 {
                     _com.BaseStream.Write(buffer, 0, buffer.Length);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
             }
         }
 
@@ -391,7 +397,9 @@ namespace System.IO.Ports.Tests
             {
                 com.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT); // Warm up write method
             }
-            catch (TimeoutException) { }
+            catch (TimeoutException)
+            {
+            }
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
@@ -402,7 +410,9 @@ namespace System.IO.Ports.Tests
                 {
                     com.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 timer.Stop();
                 actualTime += (int)timer.ElapsedMilliseconds;

@@ -22,7 +22,10 @@ public class When_mapping_to_StringDictionary : NonValidatingSpecBase
 {
     StringDictionary _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -46,7 +49,10 @@ public class When_mapping_from_StringDictionary : NonValidatingSpecBase
 {
     Destination _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -92,7 +98,10 @@ public class When_mapping_struct_from_StringDictionary : NonValidatingSpecBase
         public string Bar { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -121,7 +130,10 @@ public class When_mapping_from_StringDictionary_with_missing_property : NonValid
 {
     Destination _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -142,7 +154,10 @@ public class When_mapping_from_StringDictionary_null_to_int : NonValidatingSpecB
 {
     Destination _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -163,7 +178,10 @@ public class When_mapping_from_StringDictionary_with_whitespace : NonValidatingS
 {
     Destination _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -189,7 +207,10 @@ public class When_mapping_from_StringDictionary_multiple_matching_keys : NonVali
 {
     StringDictionary _source;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {
@@ -219,7 +240,10 @@ public class When_mapping_from_StringDictionary_to_StringDictionary : NonValidat
 {
     StringDictionary _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+        });
 
     protected override void Because_of()
     {

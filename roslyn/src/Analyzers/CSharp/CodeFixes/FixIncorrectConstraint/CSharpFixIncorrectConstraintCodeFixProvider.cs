@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixIncorrectConstraint
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFixIncorrectConstraintCodeFixProvider() { }
+        public CSharpFixIncorrectConstraintCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(CS9010, CS9011);

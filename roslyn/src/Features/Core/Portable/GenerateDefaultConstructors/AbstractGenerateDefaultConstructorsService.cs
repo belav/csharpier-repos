@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
         : IGenerateDefaultConstructorsService
         where TService : AbstractGenerateDefaultConstructorsService<TService>
     {
-        protected AbstractGenerateDefaultConstructorsService() { }
+        protected AbstractGenerateDefaultConstructorsService()
+        {
+        }
 
         protected abstract bool TryInitializeState(
             SemanticDocument document,

@@ -113,7 +113,9 @@ namespace System
                                 // to provide a non-fatal notification about the corruption.
                                 results.Add(key, value);
                             }
-                            catch (ArgumentException) { }
+                            catch (ArgumentException)
+                            {
+                            }
                         }
 
                         // Increment to next environment variable entry

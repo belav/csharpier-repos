@@ -24,7 +24,9 @@ public class AbstractClass : IInterface2
     }
 }
 
-public class FinalClass : AbstractClass { }
+public class FinalClass : AbstractClass
+{
+}
 
 public class Test
 {

@@ -105,7 +105,9 @@ public abstract class TestStore : IDisposable
     protected virtual TestStoreIndex GetTestStoreIndex(IServiceProvider serviceProvider) =>
         _globalTestStoreIndex;
 
-    public virtual void Dispose() { }
+    public virtual void Dispose()
+    {
+    }
 
     public virtual Task DisposeAsync()
     {

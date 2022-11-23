@@ -37,6 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 fixAllState,
                 originalCodeAction,
                 new FixAllCodeRefactoringCodeAction(fixAllState)
-            ) { }
+            )
+        {
+        }
     }
 }

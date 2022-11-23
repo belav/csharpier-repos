@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                 new ChainedFormattingRules(formattingRules, options),
                 startToken,
                 endToken
-            ) { }
+            )
+        {
+        }
 
         internal AbstractFormatEngine(
             TreeData treeData,

@@ -68,10 +68,14 @@ namespace Moq.Internals
             private static object[] noArguments = new object[0];
 
             public Invocation(Type proxyType, MethodInfo method, params object[] arguments)
-                : base(proxyType, method, arguments) { }
+                : base(proxyType, method, arguments)
+            {
+            }
 
             public Invocation(Type proxyType, MethodInfo method)
-                : base(proxyType, method, noArguments) { }
+                : base(proxyType, method, noArguments)
+            {
+            }
 
             protected internal override object CallBase()
             {

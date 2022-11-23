@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UpgradeProj
     public partial class UpgradeProjectTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UpgradeProjectTests(ITestOutputHelper logger) : base(logger) { }
+        public UpgradeProjectTests(ITestOutputHelper logger) : base(logger)
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

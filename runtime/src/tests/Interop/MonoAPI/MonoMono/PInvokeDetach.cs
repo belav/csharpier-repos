@@ -14,7 +14,9 @@ namespace MonoAPI.Tests.MonoMono.PInvokeDetach;
 
 public class MonoPInvokeCallbackAttribute : Attribute
 {
-    public MonoPInvokeCallbackAttribute(Type delegateType) { }
+    public MonoPInvokeCallbackAttribute(Type delegateType)
+    {
+    }
 }
 
 public class PInvokeDetach
@@ -92,7 +94,9 @@ public class PInvokeDetach
     }
 
     [MonoPInvokeCallback(typeof(VoidVoidDelegate))]
-    private static void MethodInvokedFromNative2() { }
+    private static void MethodInvokedFromNative2()
+    {
+    }
 
     [DllImport(
         MonoAPISupport.TestLibName,

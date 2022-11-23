@@ -34,21 +34,27 @@ public static class Assert
     }
 }
 
-public interface IEmpty { }
+public interface IEmpty
+{
+}
 
 public interface INotEmpty
 {
     void DoNothing();
 }
 
-public interface IEmptyGen<T> { }
+public interface IEmptyGen<T>
+{
+}
 
 public interface INotEmptyGen<T>
 {
     void DoNothing();
 }
 
-public struct EmptyStruct { }
+public struct EmptyStruct
+{
+}
 
 public struct NotEmptyStruct
 {
@@ -70,7 +76,9 @@ public struct NotEmptyStructQA
     public int?[] Field;
 }
 
-public struct EmptyStructGen<T> { }
+public struct EmptyStructGen<T>
+{
+}
 
 public struct NotEmptyStructGen<T>
 {
@@ -99,12 +107,16 @@ public struct NotEmptyStructConstrainedGenQA<T> where T : struct
 
 public struct NestedStruct
 {
-    public struct Nested { }
+    public struct Nested
+    {
+    }
 }
 
 public struct NestedStructGen<T>
 {
-    public struct Nested { }
+    public struct Nested
+    {
+    }
 }
 
 [StructLayout(LayoutKind.Explicit)]
@@ -123,25 +135,37 @@ public struct MarshalAsStruct
     public string StringField;
 }
 
-public struct ImplementOneInterface : IEmpty { }
+public struct ImplementOneInterface : IEmpty
+{
+}
 
 public struct ImplementTwoInterface : IEmpty, INotEmpty
 {
-    public void DoNothing() { }
+    public void DoNothing()
+    {
+    }
 }
 
-public struct ImplementOneInterfaceGen<T> : IEmptyGen<T> { }
+public struct ImplementOneInterfaceGen<T> : IEmptyGen<T>
+{
+}
 
 public struct ImplementTwoInterfaceGen<T> : IEmptyGen<T>, INotEmptyGen<T>
 {
-    public void DoNothing() { }
+    public void DoNothing()
+    {
+    }
 }
 
 public struct ImplementAllInterface<T> : IEmpty, INotEmpty, IEmptyGen<T>, INotEmptyGen<T>
 {
-    public void DoNothing() { }
+    public void DoNothing()
+    {
+    }
 
-    void INotEmptyGen<T>.DoNothing() { }
+    void INotEmptyGen<T>.DoNothing()
+    {
+    }
 }
 
 public enum IntE
@@ -190,14 +214,18 @@ public struct MixedAllStruct
     public GCHandle GCHANDLE;
 }
 
-public struct EmptyClass { }
+public struct EmptyClass
+{
+}
 
 public struct NotEmptyClass
 {
     public int Field;
 }
 
-public struct EmptyClassGen<T> { }
+public struct EmptyClassGen<T>
+{
+}
 
 public struct NotEmptyClassGen<T>
 {
@@ -211,36 +239,54 @@ public struct NotEmptyClassConstrainedGen<T> where T : class
 
 public struct NestedClass
 {
-    public struct Nested { }
+    public struct Nested
+    {
+    }
 }
 
 public struct NestedClassGen<T>
 {
-    public struct Nested { }
+    public struct Nested
+    {
+    }
 }
 
-internal class ImplementOneInterfaceC : IEmpty { }
+internal class ImplementOneInterfaceC : IEmpty
+{
+}
 
 internal class ImplementTwoInterfaceC : IEmpty, INotEmpty
 {
-    public void DoNothing() { }
+    public void DoNothing()
+    {
+    }
 }
 
-internal class ImplementOneInterfaceGenC<T> : IEmptyGen<T> { }
+internal class ImplementOneInterfaceGenC<T> : IEmptyGen<T>
+{
+}
 
 internal class ImplementTwoInterfaceGenC<T> : IEmptyGen<T>, INotEmptyGen<T>
 {
-    public void DoNothing() { }
+    public void DoNothing()
+    {
+    }
 }
 
 internal class ImplementAllInterfaceC<T> : IEmpty, INotEmpty, IEmptyGen<T>, INotEmptyGen<T>
 {
-    public void DoNothing() { }
+    public void DoNothing()
+    {
+    }
 
-    void INotEmptyGen<T>.DoNothing() { }
+    void INotEmptyGen<T>.DoNothing()
+    {
+    }
 }
 
-public sealed class SealedClass { }
+public sealed class SealedClass
+{
+}
 
 public delegate void SimpleDelegate();
 public delegate void GenericDelegate<T>();

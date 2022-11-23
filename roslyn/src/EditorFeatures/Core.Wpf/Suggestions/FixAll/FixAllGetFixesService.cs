@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FixAllGetFixesService() { }
+        public FixAllGetFixesService()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => this;
 

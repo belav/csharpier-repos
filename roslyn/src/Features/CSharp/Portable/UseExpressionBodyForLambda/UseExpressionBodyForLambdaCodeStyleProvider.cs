@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 EnforceOnBuildValues.UseExpressionBodyForLambdaExpressions,
                 UseExpressionBodyTitle,
                 UseExpressionBodyTitle
-            ) { }
+            )
+        {
+        }
 
         // Shared code needed by all parts of the style provider for this feature.
 
@@ -317,7 +319,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public UseExpressionBodyForLambdaCodeFixProvider() { }
+        public UseExpressionBodyForLambdaCodeFixProvider()
+        {
+        }
     }
 
     [
@@ -336,10 +340,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public UseExpressionBodyForLambdaCodeRefactoringProvider() { }
+        public UseExpressionBodyForLambdaCodeRefactoringProvider()
+        {
+        }
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class UseExpressionBodyForLambdaDiagnosticAnalyzer
-        : UseExpressionBodyForLambdaCodeStyleProvider.DiagnosticAnalyzer { }
+        : UseExpressionBodyForLambdaCodeStyleProvider.DiagnosticAnalyzer
+    {
+    }
 }

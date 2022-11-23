@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 CodeStyleOptions2.PreferAutoProperties,
                 s_title,
                 s_title
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

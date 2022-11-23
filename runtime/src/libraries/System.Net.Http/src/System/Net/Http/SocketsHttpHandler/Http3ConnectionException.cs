@@ -20,9 +20,13 @@ namespace System.Net.Http
                     ((long)errorCode).ToString("x")
                 ),
                 errorCode
-            ) { }
+            )
+        {
+        }
 
         private Http3ConnectionException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

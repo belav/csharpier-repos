@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ParenthesisBraceCompletionService() { }
+        public ParenthesisBraceCompletionService()
+        {
+        }
 
         protected override char OpeningBrace => Parenthesis.OpenCharacter;
         protected override char ClosingBrace => Parenthesis.CloseCharacter;

@@ -39,7 +39,12 @@ public static class GenericHostBuilderExtensions
             throw new ArgumentNullException(nameof(configure));
         }
 
-        return builder.ConfigureWebHostDefaults(configure, _ => { });
+        return builder.ConfigureWebHostDefaults(
+            configure,
+            _ =>
+            {
+            }
+        );
     }
 
     /// <summary>

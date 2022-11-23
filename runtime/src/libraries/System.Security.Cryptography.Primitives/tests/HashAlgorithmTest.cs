@@ -126,7 +126,9 @@ namespace System.Security.Cryptography.Hashing.Tests
 
         private class SlowPositionValueStream : PositionValueStream
         {
-            public SlowPositionValueStream(int totalCount) : base(totalCount) { }
+            public SlowPositionValueStream(int totalCount) : base(totalCount)
+            {
+            }
 
             public override int Read(byte[] buffer, int offset, int count)
             {

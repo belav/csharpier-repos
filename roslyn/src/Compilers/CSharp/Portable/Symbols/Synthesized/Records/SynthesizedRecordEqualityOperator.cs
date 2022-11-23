@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 WellKnownMemberNames.EqualityOperatorName,
                 memberOffset,
                 diagnostics
-            ) { }
+            )
+        {
+        }
 
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,

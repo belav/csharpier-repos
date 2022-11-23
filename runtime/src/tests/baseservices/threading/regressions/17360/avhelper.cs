@@ -17,7 +17,9 @@ namespace AVHelper
     {
         public String myAV;
 
-        public CreateAV() { }
+        public CreateAV()
+        {
+        }
 
         public void SpinThread()
         {

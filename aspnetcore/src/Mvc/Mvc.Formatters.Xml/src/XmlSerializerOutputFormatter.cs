@@ -33,7 +33,8 @@ public partial class XmlSerializerOutputFormatter : TextOutputFormatter
     /// with default <see cref="XmlWriterSettings"/>.
     /// </summary>
     public XmlSerializerOutputFormatter() : this(FormattingUtilities.GetDefaultXmlWriterSettings())
-    { }
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>
@@ -41,14 +42,18 @@ public partial class XmlSerializerOutputFormatter : TextOutputFormatter
     /// </summary>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public XmlSerializerOutputFormatter(ILoggerFactory loggerFactory)
-        : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory) { }
+        : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>.
     /// </summary>
     /// <param name="writerSettings">The settings to be used by the <see cref="XmlSerializer"/>.</param>
     public XmlSerializerOutputFormatter(XmlWriterSettings writerSettings)
-        : this(writerSettings, loggerFactory: NullLoggerFactory.Instance) { }
+        : this(writerSettings, loggerFactory: NullLoggerFactory.Instance)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>

@@ -40,7 +40,9 @@ namespace System.Net
         private static Dictionary<IPAddress, Dictionary<int, HttpEndPointListener>> s_ipEndPoints =
             new Dictionary<IPAddress, Dictionary<int, HttpEndPointListener>>();
 
-        private HttpEndPointManager() { }
+        private HttpEndPointManager()
+        {
+        }
 
         public static void AddListener(HttpListener listener)
         {

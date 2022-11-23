@@ -17,7 +17,9 @@ public class ServerTransportsTest
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<TransportsServerStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     [Fact]
     public void DefaultTransportsWorks_WithWebSockets()

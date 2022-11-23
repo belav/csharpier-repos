@@ -197,7 +197,9 @@ namespace System.DirectoryServices.Interop
         /// PropertyValue as a co-class that implements the IAdsPropertyValue interface.
         /// </summary>
         [ComImport, Guid("7b9e38b0-a97c-11d0-8534-00c04fd8d503")]
-        public class PropertyValue { }
+        public class PropertyValue
+        {
+        }
 
         [ComImport, Guid("9068270B-0939-11D1-8BE1-00C04FD8D503")]
         public interface IADsLargeInteger
@@ -270,7 +272,9 @@ namespace System.DirectoryServices.Interop
         ///  PropertyEntry as a co-class that implements the IAdsPropertyEntry interface.
         /// </summary>
         [ComImport, Guid("72D3EDC2-A4C4-11D0-8533-00C04FD8D503")]
-        public class PropertyEntry { }
+        public class PropertyEntry
+        {
+        }
 
         [ComImport, Guid("05792C8E-941F-11D0-8529-00C04FD8D503")]
         public interface IAdsPropertyEntry

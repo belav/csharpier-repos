@@ -15,7 +15,9 @@ namespace BinderTracingTests
 {
     public class BinderTestException : Exception
     {
-        public BinderTestException(string message) : base(message) { }
+        public BinderTestException(string message) : base(message)
+        {
+        }
     }
 
     partial class BinderTracingTest
@@ -32,7 +34,9 @@ namespace BinderTracingTests
                 {
                     Assembly.Load(assemblyName);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 Assert.Equal(1, handlers.Invocations.Count);
                 Assert.Equal(0, handlers.Binds.Count);
@@ -138,7 +142,9 @@ namespace BinderTracingTests
                 {
                     Assembly.Load(assemblyName);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 Assert.Equal(1, handlers.Invocations.Count);
                 Assert.Equal(0, handlers.Binds.Count);

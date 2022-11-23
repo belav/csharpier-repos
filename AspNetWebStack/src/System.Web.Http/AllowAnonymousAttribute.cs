@@ -11,5 +11,7 @@ namespace System.Web.Http
         Inherited = true,
         AllowMultiple = false
     )]
-    public sealed class AllowAnonymousAttribute : Attribute { }
+    public sealed class AllowAnonymousAttribute : Attribute
+    {
+    }
 }

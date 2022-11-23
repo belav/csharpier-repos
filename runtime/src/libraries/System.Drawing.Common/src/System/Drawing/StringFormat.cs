@@ -25,12 +25,16 @@ namespace System.Drawing
         /// <summary>
         /// Initializes a new instance of the <see cref='StringFormat'/> class.
         /// </summary>
-        public StringFormat() : this(0, 0) { }
+        public StringFormat() : this(0, 0)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='StringFormat'/> class with the specified <see cref='System.Drawing.StringFormatFlags'/>.
         /// </summary>
-        public StringFormat(StringFormatFlags options) : this(options, 0) { }
+        public StringFormat(StringFormatFlags options) : this(options, 0)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='StringFormat'/> class with the specified

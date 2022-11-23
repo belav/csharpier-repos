@@ -88,7 +88,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 {
                     EventHookupSessionManager.CurrentSession.TESTSessionHookupMutex.ReleaseMutex();
                 }
-                catch (ApplicationException) { }
+                catch (ApplicationException)
+                {
+                }
             }
 
             // Blocking wait (if necessary) to determine whether to consume the tab and

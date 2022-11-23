@@ -14,7 +14,9 @@ namespace System
     )]
     public abstract partial class Attribute
     {
-        protected Attribute() { }
+        protected Attribute()
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

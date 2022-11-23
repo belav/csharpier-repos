@@ -38,7 +38,9 @@ namespace System.Web.Helpers.Test
                 typeof(DynamicDictionary).GetProperty("Item");
 
             public DynamicDictionaryMetaObject(Expression expression, object value)
-                : base(expression, BindingRestrictions.Empty, value) { }
+                : base(expression, BindingRestrictions.Empty, value)
+            {
+            }
 
             private IDictionary<string, object> WrappedDictionary
             {

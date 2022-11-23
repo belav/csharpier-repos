@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public UseSimpleUsingStatementCodeFixProvider() { }
+        public UseSimpleUsingStatementCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseSimpleUsingStatementDiagnosticId);

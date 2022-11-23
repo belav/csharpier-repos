@@ -18,7 +18,9 @@ public class ContextParameterBinding : ServiceParameterBinding
     /// <param name="contextType">The <see cref="DbContext" /> CLR type.</param>
     /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />.</param>
     public ContextParameterBinding(Type contextType, params IPropertyBase[]? serviceProperties)
-        : base(contextType, contextType, serviceProperties) { }
+        : base(contextType, contextType, serviceProperties)
+    {
+    }
 
     /// <summary>
     ///     Creates an expression tree representing the binding of the value of a property from a

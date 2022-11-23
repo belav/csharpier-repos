@@ -27,6 +27,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                     FormatOnSemicolon = formatOnSemicolon,
                     FormatOnCloseBrace = formatOnCloseBrace,
                 }
-            ) { }
+            )
+        {
+        }
     }
 }

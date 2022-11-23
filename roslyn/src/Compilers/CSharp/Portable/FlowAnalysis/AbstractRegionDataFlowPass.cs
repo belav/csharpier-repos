@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initiallyAssignedVariables,
                 unassignedVariableAddressOfSyntaxes,
                 trackUnassignments
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// To scan the whole body, we start outside (before) the region.

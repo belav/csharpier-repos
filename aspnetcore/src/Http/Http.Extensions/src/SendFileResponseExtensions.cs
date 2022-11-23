@@ -177,7 +177,9 @@ public static class SendFileResponseExtensions
                     localCancel
                 );
             }
-            catch (OperationCanceledException) when (useRequestAborted) { }
+            catch (OperationCanceledException) when (useRequestAborted)
+            {
+            }
         }
         else
         {
@@ -203,7 +205,9 @@ public static class SendFileResponseExtensions
         {
             await sendFile.SendFileAsync(fileName, offset, count, localCancel);
         }
-        catch (OperationCanceledException) when (useRequestAborted) { }
+        catch (OperationCanceledException) when (useRequestAborted)
+        {
+        }
     }
 
     private static void CheckRange(long offset, long? count, long fileLength)

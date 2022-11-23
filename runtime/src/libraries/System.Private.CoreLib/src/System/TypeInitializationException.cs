@@ -37,7 +37,9 @@ namespace System
                 fullTypeName,
                 SR.Format(SR.TypeInitialization_Type, fullTypeName),
                 innerException
-            ) { }
+            )
+        {
+        }
 
         // This is called from within the runtime.  I believe this is necessary
         // for Interop only, though it's not particularly useful.

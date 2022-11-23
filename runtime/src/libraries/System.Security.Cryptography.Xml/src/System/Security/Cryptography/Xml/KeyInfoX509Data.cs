@@ -30,7 +30,9 @@ namespace System.Security.Cryptography.Xml
         // public constructors
         //
 
-        public KeyInfoX509Data() { }
+        public KeyInfoX509Data()
+        {
+        }
 
         public KeyInfoX509Data(byte[] rgbCert)
         {

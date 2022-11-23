@@ -46,7 +46,9 @@ namespace Microsoft.CodeAnalysis.TodoComments
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteTodoCommentsDiscoveryCallbackDispatcher() { }
+        public RemoteTodoCommentsDiscoveryCallbackDispatcher()
+        {
+        }
 
         private ITodoCommentsListener GetListener(RemoteServiceCallbackId callbackId) =>
             (ITodoCommentsListener)GetCallback(callbackId);

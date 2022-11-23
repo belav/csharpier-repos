@@ -616,7 +616,9 @@ public abstract class CompositeKeysQueryFixtureBase
     {
         public static readonly CompositeKeysDefaultData Instance = new();
 
-        private CompositeKeysDefaultData() { }
+        private CompositeKeysDefaultData()
+        {
+        }
 
         public override IQueryable<TEntity> Set<TEntity>()
         {

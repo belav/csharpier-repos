@@ -15,7 +15,9 @@ namespace Internal.Cryptography.Pal
     {
         public static IX509Pal Instance = new AppleX509Pal();
 
-        private X509Pal() { }
+        private X509Pal()
+        {
+        }
 
         private sealed partial class AppleX509Pal : ManagedX509ExtensionProcessor, IX509Pal
         {

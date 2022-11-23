@@ -66,9 +66,13 @@ namespace System.Web.Mvc.Test
             Assert.Equal(keys.Distinct().Count(), keys.Count);
         }
 
-        private class Foo { }
+        private class Foo
+        {
+        }
 
-        private class FooBar { }
+        private class FooBar
+        {
+        }
 
         // GetMetadataForProperty
 
@@ -300,7 +304,9 @@ namespace System.Web.Mvc.Test
             public ModelMetadata PrototypeMetadata;
             public ModelMetadata RealMetadata;
 
-            public MockableCachedAssociatedMetadataProvider() : this(null) { }
+            public MockableCachedAssociatedMetadataProvider() : this(null)
+            {
+            }
 
             public MockableCachedAssociatedMetadataProvider(MemoryCache memoryCache = null)
             {

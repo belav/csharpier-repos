@@ -348,7 +348,9 @@ internal partial class HttpProtocol
         return InitializeResponseAsync(0);
     }
 
-    void IHttpResponseBodyFeature.DisableBuffering() { }
+    void IHttpResponseBodyFeature.DisableBuffering()
+    {
+    }
 
     Task IHttpResponseBodyFeature.SendFileAsync(
         string path,

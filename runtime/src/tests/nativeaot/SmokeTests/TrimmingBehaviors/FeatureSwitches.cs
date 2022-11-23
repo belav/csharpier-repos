@@ -30,9 +30,13 @@ class FeatureSwitches
 
     class SanityTest
     {
-        class PresentType { }
+        class PresentType
+        {
+        }
 
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {
@@ -47,7 +51,9 @@ class FeatureSwitches
 
     class SimpleTest
     {
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {
@@ -79,7 +85,9 @@ class FeatureSwitches
 
     class TestInapplicableCatch
     {
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {
@@ -101,11 +109,15 @@ class FeatureSwitches
 
     class TestEmptyFinally
     {
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {
-            try { }
+            try
+            {
+            }
             finally
             {
                 if (IsEnabled())
@@ -120,7 +132,9 @@ class FeatureSwitches
 
     class TestStaticField
     {
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {
@@ -135,7 +149,9 @@ class FeatureSwitches
 
     class TestIntConstant
     {
-        class NotPresentType { }
+        class NotPresentType
+        {
+        }
 
         public static void Run()
         {

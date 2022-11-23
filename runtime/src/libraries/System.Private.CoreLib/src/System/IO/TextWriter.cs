@@ -38,7 +38,9 @@ namespace System.IO
         // Can be null - if so, ask for the Thread's CurrentCulture every time.
         private readonly IFormatProvider? _internalFormatProvider;
 
-        protected TextWriter() { }
+        protected TextWriter()
+        {
+        }
 
         protected TextWriter(IFormatProvider? formatProvider)
         {
@@ -54,7 +56,9 @@ namespace System.IO
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public void Dispose()
         {
@@ -79,7 +83,9 @@ namespace System.IO
         // written to the underlying device. This default method is empty, but
         // descendant classes can override the method to provide the appropriate
         // functionality.
-        public virtual void Flush() { }
+        public virtual void Flush()
+        {
+        }
 
         public abstract Encoding Encoding { get; }
 
@@ -112,7 +118,9 @@ namespace System.IO
         // but descendant classes can override the method to provide the
         // appropriate functionality.
         //
-        public virtual void Write(char value) { }
+        public virtual void Write(char value)
+        {
+        }
 
         // Writes a character array to the text stream. This default method calls
         // Write(char) for each of the characters in the character array.
@@ -757,25 +765,39 @@ namespace System.IO
 
         private sealed class NullTextWriter : TextWriter
         {
-            internal NullTextWriter() { }
+            internal NullTextWriter()
+            {
+            }
 
             public override IFormatProvider FormatProvider => CultureInfo.InvariantCulture;
 
             public override Encoding Encoding => Encoding.Unicode;
 
-            public override void Write(char[] buffer, int index, int count) { }
+            public override void Write(char[] buffer, int index, int count)
+            {
+            }
 
-            public override void Write(string? value) { }
+            public override void Write(string? value)
+            {
+            }
 
             // Not strictly necessary, but for perf reasons
-            public override void WriteLine() { }
+            public override void WriteLine()
+            {
+            }
 
             // Not strictly necessary, but for perf reasons
-            public override void WriteLine(string? value) { }
+            public override void WriteLine(string? value)
+            {
+            }
 
-            public override void WriteLine(object? value) { }
+            public override void WriteLine(object? value)
+            {
+            }
 
-            public override void Write(char value) { }
+            public override void Write(char value)
+            {
+            }
         }
 
         public static TextWriter Synchronized(TextWriter writer)

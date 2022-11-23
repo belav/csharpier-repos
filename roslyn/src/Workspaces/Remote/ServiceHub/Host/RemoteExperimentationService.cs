@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Remote.Services
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteExperimentationService() { }
+        public RemoteExperimentationService()
+        {
+        }
 
         public bool IsExperimentEnabled(string experimentName)
         {

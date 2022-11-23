@@ -89,7 +89,9 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteConnectionStringBuilder" /> class.
         /// </summary>
-        public SqliteConnectionStringBuilder() { }
+        public SqliteConnectionStringBuilder()
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteConnectionStringBuilder" /> class.

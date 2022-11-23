@@ -14,11 +14,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
     [SkipOnMono("Test failures on stress tests")]
     public class RegistrationBuilderAttributedOverrideUnitTests
     {
-        public interface IContractA { }
+        public interface IContractA
+        {
+        }
 
-        public interface IContractB { }
+        public interface IContractB
+        {
+        }
 
-        public class AB : IContractA, IContractB { }
+        public class AB : IContractA, IContractB
+        {
+        }
 
         private static class ContractNames
         {
@@ -165,7 +171,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
             new ExportMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
         };
 
-        public class NoClassDeclarationOverrides : IContractA, IContractB { }
+        public class NoClassDeclarationOverrides : IContractA, IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_NoOverrides_ConventionApplied()
@@ -180,7 +188,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [Export(typeof(IContractB))]
-        public class ExportContractBClassDeclarationOverride : IContractA, IContractB { }
+        public class ExportContractBClassDeclarationOverride : IContractA, IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_ExportAttribute_ConventionIgnored()
@@ -194,7 +204,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [ExportMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO)]
-        public class ExportJustMetadataOverride : IContractA, IContractB { }
+        public class ExportJustMetadataOverride : IContractA, IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_JustMetadataOverride_ConventionIgnored()
@@ -206,7 +218,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [InheritedExport(typeof(IContractA))]
-        public class InheritedExportContractAClassDeclarationOverride : IContractA, IContractB { }
+        public class InheritedExportContractAClassDeclarationOverride : IContractA, IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_InheritedExportAttribute_ConventionIgnored()
@@ -220,12 +234,16 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [InheritedExport(typeof(IContractA))]
-        public class BaseWithInheritedExport { }
+        public class BaseWithInheritedExport
+        {
+        }
 
         public class InheritedExportOnBaseClassDeclaration
             : BaseWithInheritedExport,
                 IContractA,
-                IContractB { }
+                IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_InheritedExportOnBaseClassDeclaration_ConventionApplied()
@@ -241,10 +259,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
             );
         }
 
-        public class CustomExportAttribute : ExportAttribute { }
+        public class CustomExportAttribute : ExportAttribute
+        {
+        }
 
         [CustomExport]
-        public class CustomExportClassDeclarationOverride : IContractA, IContractB { }
+        public class CustomExportClassDeclarationOverride : IContractA, IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_CustomExportAttribute_ConventionIgnored()
@@ -267,7 +289,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [CustomMetadata]
-        public class CustomMetadataClassDeclarationOverride : IContractA, IContractB { }
+        public class CustomMetadataClassDeclarationOverride : IContractA, IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_CustomMetadataAttribute_ConventionIgnored()
@@ -285,7 +309,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
             PartMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO),
             PartNotDiscoverable
         ]
-        public class NonExportClassDeclarationAttributes : IContractA, IContractB { }
+        public class NonExportClassDeclarationAttributes : IContractA, IContractB
+        {
+        }
 
         [Fact]
         public void ExportInterfaceConvention_NonExportClassDeclarationAttributes_ConventionApplied()
@@ -579,9 +605,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private class TwoConstructorsWithOverride
         {
             [ImportingConstructor]
-            public TwoConstructorsWithOverride(IContractA a) { }
+            public TwoConstructorsWithOverride(IContractA a)
+            {
+            }
 
-            public TwoConstructorsWithOverride(IContractA a, IContractB b) { }
+            public TwoConstructorsWithOverride(IContractA a, IContractB b)
+            {
+            }
         }
 
         [Fact]
@@ -642,7 +672,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private class NoConstructorParameterOverrides
         {
-            public NoConstructorParameterOverrides(IContractA a) { }
+            public NoConstructorParameterOverrides(IContractA a)
+            {
+            }
         }
 
         [Fact]
@@ -662,7 +694,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             public ConstructorParameterImportContractX(
                 [Import(ContractNames.ContractX)] IContractA a
-            ) { }
+            )
+            {
+            }
         }
 
         [Fact]
@@ -695,7 +729,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
             new PartCreationPolicyAttribute(CreationPolicy.NonShared)
         };
 
-        private class NoCreationPolicyDeclared { }
+        private class NoCreationPolicyDeclared
+        {
+        }
 
         [Fact]
         public void CreationPolicyConvention_NoCreationPolicyDeclared_ConventionApplied()
@@ -709,7 +745,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [PartCreationPolicy(CreationPolicy.Shared)]
-        private class SetCreationPolicy { }
+        private class SetCreationPolicy
+        {
+        }
 
         [Fact]
         public void CreationPolicyConvention_CreationPolicyDeclared_ConventionIgnored()
@@ -719,7 +757,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [Export]
-        private class UnrelatedToCreationPolicy { }
+        private class UnrelatedToCreationPolicy
+        {
+        }
 
         [Fact]
         public void CreationPolicyConvention_UnrelatedAttributesDeclared_ConventionApplied()
@@ -737,7 +777,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         // Tests for part discoverability
 
         [PartNotDiscoverable]
-        private class NotDiscoverablePart { }
+        private class NotDiscoverablePart
+        {
+        }
 
         [Fact]
         public void AnyConvention_NotDiscoverablePart_ConventionApplied()
@@ -766,7 +808,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
             new PartMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
         };
 
-        private class NoDeclaredPartMetadata { }
+        private class NoDeclaredPartMetadata
+        {
+        }
 
         [Fact]
         public void PartMetadataConvention_NoDeclaredMetadata_ConventionApplied()
@@ -780,7 +824,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [PartMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO)]
-        private class PartMetadataQO { }
+        private class PartMetadataQO
+        {
+        }
 
         [Fact]
         public void PartMetadataConvention_DeclaredQO_ConventionIgnored()
@@ -790,7 +836,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         [PartCreationPolicy(CreationPolicy.NonShared), Export]
-        private class PartMetadataUnrelatedAttributes { }
+        private class PartMetadataUnrelatedAttributes
+        {
+        }
 
         [Fact]
         public void PartMetadataConvention_UnrelatedDeclaredAttributes_ConventionApplied()
@@ -805,15 +853,23 @@ namespace System.ComponentModel.Composition.Registration.Tests
             );
         }
 
-        private interface IFoo { }
+        private interface IFoo
+        {
+        }
 
         [Export]
-        private class ExportInterfacesExportOverride : IFoo { }
+        private class ExportInterfacesExportOverride : IFoo
+        {
+        }
 
-        private class ExportInterfacesExportConventionApplied : IFoo { }
+        private class ExportInterfacesExportConventionApplied : IFoo
+        {
+        }
 
         [Export(typeof(IFoo))]
-        public class ExportInterfacesExportConvention : IFoo { }
+        public class ExportInterfacesExportConvention : IFoo
+        {
+        }
 
         private static RegistrationBuilder ConfigureExportInterfacesConvention<T>()
         {
@@ -846,7 +902,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         // Tests for chained RCs
 
-        private class ConventionTarget { }
+        private class ConventionTarget
+        {
+        }
 
         [Fact]
         public void ConventionsInInnerAndOuterRCs_InnerRCTakesPrecendence()

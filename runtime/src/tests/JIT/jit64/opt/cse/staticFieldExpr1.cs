@@ -101,7 +101,9 @@ namespace CseTest
 #endif
 #if TRY
             }
-            finally { }
+            finally
+            {
+            }
 #endif
             int v19 = (class_s.a + (class_s.b + class_s.d));
             int v20 = (class_s.b + (class_s.a + class_s.d));

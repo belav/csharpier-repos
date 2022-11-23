@@ -50,7 +50,9 @@ namespace System.Reflection.Emit
             get { return default; }
         }
 
-        public void AddOtherMethod(MethodBuilder mdBuilder) { }
+        public void AddOtherMethod(MethodBuilder mdBuilder)
+        {
+        }
 
         public override MethodInfo[] GetAccessors(bool nonPublic)
         {
@@ -103,17 +105,29 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetConstant(object defaultValue) { }
+        public void SetConstant(object defaultValue)
+        {
+        }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetGetMethod(MethodBuilder mdBuilder) { }
+        public void SetGetMethod(MethodBuilder mdBuilder)
+        {
+        }
 
-        public void SetSetMethod(MethodBuilder mdBuilder) { }
+        public void SetSetMethod(MethodBuilder mdBuilder)
+        {
+        }
 
-        public override void SetValue(object? obj, object? value, object?[]? index) { }
+        public override void SetValue(object? obj, object? value, object?[]? index)
+        {
+        }
 
         public override void SetValue(
             object? obj,
@@ -122,6 +136,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? index,
             Globalization.CultureInfo? culture
-        ) { }
+        )
+        {
+        }
     }
 }

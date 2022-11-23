@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SelectionResult selectionResult,
                 bool localFunction,
                 CancellationToken cancellationToken
-            ) : base(selectionResult, localFunction, cancellationToken) { }
+            ) : base(selectionResult, localFunction, cancellationToken)
+            {
+            }
 
             protected override VariableInfo CreateFromSymbol(
                 Compilation compilation,

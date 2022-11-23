@@ -10,5 +10,7 @@ namespace Internal.TypeSystem.NoMetadata
     /// <summary>
     /// Represents a method that does not have metadata
     /// </summary>
-    internal abstract class NoMetadataMethodDesc : MethodDesc { }
+    internal abstract class NoMetadataMethodDesc : MethodDesc
+    {
+    }
 }

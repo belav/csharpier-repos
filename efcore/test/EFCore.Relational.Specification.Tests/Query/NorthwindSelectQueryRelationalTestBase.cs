@@ -7,7 +7,9 @@ public abstract class NorthwindSelectQueryRelationalTestBase<TFixture>
     : NorthwindSelectQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindSelectQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindSelectQueryRelationalTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     public override Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(
         bool async

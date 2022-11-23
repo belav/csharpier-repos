@@ -99,7 +99,9 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                             CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess
                         )
                     )
-            ) { }
+            )
+        {
+        }
 
         internal abstract bool IsCandidate(SyntaxNode node);
         internal abstract bool CanSimplifyTypeNameExpression(

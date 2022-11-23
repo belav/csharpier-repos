@@ -549,58 +549,96 @@ namespace System.Reflection.Tests
     {
         namespace MyNamespace2
         {
-            public class MyClass2 { }
+            public class MyClass2
+            {
+            }
 
             public class MyClass3
             {
-                public class Inner { }
+                public class Inner
+                {
+                }
 
-                public class @inner { }
+                public class @inner
+                {
+                }
 
-                public class iNner { }
+                public class iNner
+                {
+                }
 
-                public class inNer { }
+                public class inNer
+                {
+                }
             }
 
-            public class MyClass4 { }
+            public class MyClass4
+            {
+            }
 
-            public class mYClass4 { }
+            public class mYClass4
+            {
+            }
 
-            public class Myclass4 { }
+            public class Myclass4
+            {
+            }
 
-            public class myCLass4 { }
+            public class myCLass4
+            {
+            }
 
-            public class myClAss4 { }
+            public class myClAss4
+            {
+            }
         }
 
         namespace MyNamespace3
         {
-            public class Foo { }
+            public class Foo
+            {
+            }
         }
 
         namespace MynAmespace3
         {
-            public class Foo { }
+            public class Foo
+            {
+            }
 
-            public class Goo<T> { }
+            public class Goo<T>
+            {
+            }
 
-            public class gOo<T> { }
+            public class gOo<T>
+            {
+            }
 
-            public class goO<T> { }
+            public class goO<T>
+            {
+            }
         }
 
         namespace MyNaMespace3
         {
-            public class Foo { }
+            public class Foo
+            {
+            }
         }
 
         namespace MyNamEspace3
         {
-            public class Foo { }
+            public class Foo
+            {
+            }
         }
     }
 
-    public class MyClass1 { }
+    public class MyClass1
+    {
+    }
 
-    public class GenericClass<T> { }
+    public class GenericClass<T>
+    {
+    }
 }

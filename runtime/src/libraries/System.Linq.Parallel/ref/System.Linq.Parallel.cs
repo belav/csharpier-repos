@@ -8,7 +8,9 @@ namespace System.Linq
 {
     public partial class OrderedParallelQuery<TSource> : System.Linq.ParallelQuery<TSource>
     {
-        internal OrderedParallelQuery() { }
+        internal OrderedParallelQuery()
+        {
+        }
 
         public override System.Collections.Generic.IEnumerator<TSource> GetEnumerator()
         {
@@ -450,7 +452,9 @@ namespace System.Linq
         public static void ForAll<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Action<TSource> action
-        ) { }
+        )
+        {
+        }
 
         public static System.Linq.ParallelQuery<System.Linq.IGrouping<TKey, TSource>> GroupBy<
             TSource,
@@ -1659,7 +1663,9 @@ namespace System.Linq
 
     public partial class ParallelQuery : System.Collections.IEnumerable
     {
-        internal ParallelQuery() { }
+        internal ParallelQuery()
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1672,7 +1678,9 @@ namespace System.Linq
             System.Collections.Generic.IEnumerable<TSource>,
             System.Collections.IEnumerable
     {
-        internal ParallelQuery() { }
+        internal ParallelQuery()
+        {
+        }
 
         public virtual System.Collections.Generic.IEnumerator<TSource> GetEnumerator()
         {

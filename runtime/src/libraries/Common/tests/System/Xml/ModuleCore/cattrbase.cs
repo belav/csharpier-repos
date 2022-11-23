@@ -41,7 +41,9 @@ namespace OLEDB.Test.ModuleCore
         private object _xml; //Allows Inheritance
 
         //Constructors
-        public CAttrBase() { }
+        public CAttrBase()
+        {
+        }
 
         public CAttrBase(string desc)
         {
@@ -287,7 +289,9 @@ namespace OLEDB.Test.ModuleCore
         private string _modified;
 
         //Constructors
-        public TestModule() : base() { }
+        public TestModule() : base()
+        {
+        }
 
         public TestModule(string desc) : base(desc)
         {
@@ -344,7 +348,9 @@ namespace OLEDB.Test.ModuleCore
     public class TestCase : CAttrBase
     {
         //Constructors
-        public TestCase() : base() { }
+        public TestCase() : base()
+        {
+        }
 
         public TestCase(string desc) : base(desc)
         {
@@ -362,7 +368,9 @@ namespace OLEDB.Test.ModuleCore
         //Data
 
         //Constructors
-        public Variation() : base() { }
+        public Variation() : base()
+        {
+        }
 
         public Variation(string desc) : base(desc)
         {
@@ -384,7 +392,9 @@ namespace OLEDB.Test.ModuleCore
         private string _filter;
 
         //Constructors
-        public TestInclude() { }
+        public TestInclude()
+        {
+        }
 
         public virtual string Name
         {

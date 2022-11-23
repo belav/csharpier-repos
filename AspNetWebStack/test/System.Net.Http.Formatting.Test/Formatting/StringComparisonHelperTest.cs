@@ -12,7 +12,9 @@ namespace System.Net.Http.Formatting
                 StringComparisonHelper.IsDefined,
                 StringComparisonHelper.Validate,
                 (StringComparison)999
-            ) { }
+            )
+        {
+        }
 
 #if NETFX_CORE // InvariantCulture and InvarianteCultureIgnore case are not supported in portable library projects
         protected override void AssertForUndefinedValue(

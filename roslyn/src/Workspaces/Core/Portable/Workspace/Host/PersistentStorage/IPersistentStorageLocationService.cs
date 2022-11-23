@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Host
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultPersistentStorageLocationService() { }
+        public DefaultPersistentStorageLocationService()
+        {
+        }
 
         public virtual bool IsSupported(Workspace workspace) => false;
 

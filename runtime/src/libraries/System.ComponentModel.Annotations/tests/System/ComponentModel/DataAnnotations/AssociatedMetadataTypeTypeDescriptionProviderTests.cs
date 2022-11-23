@@ -488,9 +488,13 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public string LastName { get; set; }
         }
 
-        public class EmptyClass { }
+        public class EmptyClass
+        {
+        }
 
         [EditorBrowsable(EditorBrowsableState.Always)]
-        public class ClassWithAttributes { }
+        public class ClassWithAttributes
+        {
+        }
     }
 }

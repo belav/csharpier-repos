@@ -273,22 +273,32 @@ namespace Microsoft.Extensions.Options.Tests
             Assert.Equal(2, calls);
         }
 
-        private class OidcProviderOptions { }
+        private class OidcProviderOptions
+        {
+        }
 
         private class RemoteAuthenticationOptions<TRemoteAuthenticationProviderOptions>
-            where TRemoteAuthenticationProviderOptions : new() { }
+            where TRemoteAuthenticationProviderOptions : new()
+        {
+        }
 
-        private class NavigationManager { }
+        private class NavigationManager
+        {
+        }
 
         private class DefaultOidcOptionsConfiguration
             : IPostConfigureOptions<RemoteAuthenticationOptions<OidcProviderOptions>>
         {
-            public DefaultOidcOptionsConfiguration(NavigationManager navigationManager) { }
+            public DefaultOidcOptionsConfiguration(NavigationManager navigationManager)
+            {
+            }
 
             public void PostConfigure(
                 string name,
                 RemoteAuthenticationOptions<OidcProviderOptions> options
-            ) { }
+            )
+            {
+            }
         }
     }
 }

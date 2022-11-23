@@ -50,7 +50,9 @@ public class Test
         return new Test();
     }
 
-    public static void Test0() { }
+    public static void Test0()
+    {
+    }
 
     public static int Test1()
     {

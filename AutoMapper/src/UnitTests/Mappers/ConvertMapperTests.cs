@@ -4,7 +4,10 @@ namespace AutoMapper.UnitTests.Mappers;
 
 public class ConvertMapperTests : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(c => { });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+        });
 
     [Fact]
     public void A_few_cases()

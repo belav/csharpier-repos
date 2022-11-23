@@ -697,7 +697,9 @@ public class C { }"
                 get { return ImmutableArray.Create(desc1, desc2, desc3); }
             }
 
-            public override void Initialize(AnalysisContext context) { }
+            public override void Initialize(AnalysisContext context)
+            {
+            }
         }
 
         internal class PartiallyDisabledAnalyzer : DiagnosticAnalyzer
@@ -724,7 +726,9 @@ public class C { }"
                 get { return ImmutableArray.Create(desc1, desc2); }
             }
 
-            public override void Initialize(AnalysisContext context) { }
+            public override void Initialize(AnalysisContext context)
+            {
+            }
         }
 
         internal class ImplicitlyDeclaredSymbolAnalyzer : DiagnosticAnalyzer
@@ -2403,7 +2407,9 @@ class TypeInGeneratedFile { }
             public GeneratedCodeAnalyzer(
                 GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlags,
                 bool testIsGeneratedCodeInCallbacks = false
-            ) : base(generatedCodeAnalysisFlags, testIsGeneratedCodeInCallbacks) { }
+            ) : base(generatedCodeAnalysisFlags, testIsGeneratedCodeInCallbacks)
+            {
+            }
 
             protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassDeclaration;
         }

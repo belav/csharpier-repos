@@ -167,7 +167,9 @@ public class UnloadThread
     }
 }
 
-class CrossDomainTester : MarshalByRefObject { }
+class CrossDomainTester : MarshalByRefObject
+{
+}
 
 public class Tests
 {

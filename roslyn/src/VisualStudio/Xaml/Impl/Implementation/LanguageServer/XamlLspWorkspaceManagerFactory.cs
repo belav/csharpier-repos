@@ -23,6 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlLspWorkspaceManagerFactory(
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService
-        ) : base(lspWorkspaceRegistrationService) { }
+        ) : base(lspWorkspaceRegistrationService)
+        {
+        }
     }
 }

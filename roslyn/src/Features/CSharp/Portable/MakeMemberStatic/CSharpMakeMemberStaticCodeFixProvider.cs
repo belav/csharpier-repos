@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMemberStatic
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMakeMemberStaticCodeFixProvider() { }
+        public CSharpMakeMemberStaticCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(

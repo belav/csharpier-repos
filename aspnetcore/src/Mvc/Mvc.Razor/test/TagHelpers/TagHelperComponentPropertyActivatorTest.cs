@@ -35,7 +35,9 @@ public class TagHelperComponentPropertyActivatorTest
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        public void Init(TagHelperContext context) { }
+        public void Init(TagHelperContext context)
+        {
+        }
 
         public Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {

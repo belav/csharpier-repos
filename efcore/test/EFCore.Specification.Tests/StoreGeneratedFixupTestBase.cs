@@ -4423,9 +4423,13 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
         public Level Level { get; set; }
     }
 
-    protected class Item : GameEntity { }
+    protected class Item : GameEntity
+    {
+    }
 
-    protected class Actor : GameEntity { }
+    protected class Actor : GameEntity
+    {
+    }
 
     protected class Game
     {
@@ -4457,23 +4461,22 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     protected abstract bool EnforcesFKs { get; }
 
-    protected virtual void MarkIdsTemporary(
-        DbContext context,
-        object dependent,
-        object principal
-    ) { }
+    protected virtual void MarkIdsTemporary(DbContext context, object dependent, object principal)
+    {
+    }
 
     protected virtual void MarkIdsTemporary(
         DbContext context,
         object game,
         object level,
         object item
-    ) { }
+    )
+    {
+    }
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected virtual void ExecuteWithStrategyInTransaction(Action<DbContext> testOperation) =>
         TestHelpers.ExecuteWithStrategyInTransaction(CreateContext, UseTransaction, testOperation);

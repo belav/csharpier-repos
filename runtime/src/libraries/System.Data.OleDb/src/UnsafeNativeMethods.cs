@@ -696,7 +696,9 @@ namespace System.Data.Common
             ComImport,
             SuppressUnmanagedCodeSecurity
         ]
-        internal interface IDataInitialize { }
+        internal interface IDataInitialize
+        {
+        }
 
         [
             Guid("0C733A89-2A1C-11CE-ADE5-00AA0044773D"),

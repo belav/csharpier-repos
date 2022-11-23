@@ -185,7 +185,9 @@ namespace Moq.Tests
         {
             public virtual object Property
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

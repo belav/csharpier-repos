@@ -22,7 +22,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     CollectionTestsContext_Metadata.Default,
                     (options) => new CollectionTestsContext_Metadata(options)
                 )
-            ) { }
+            )
+        {
+        }
     }
 
     public sealed class CollectionTests_Metadata_AsyncStream : CollectionTests_Metadata
@@ -33,13 +35,17 @@ namespace System.Text.Json.SourceGeneration.Tests
                     CollectionTestsContext_Metadata.Default,
                     (options) => new CollectionTestsContext_Metadata(options)
                 )
-            ) { }
+            )
+        {
+        }
     }
 
     public abstract partial class CollectionTests_Metadata : CollectionTests
     {
         protected CollectionTests_Metadata(JsonSerializerWrapper serializerWrapper)
-            : base(serializerWrapper) { }
+            : base(serializerWrapper)
+        {
+        }
 
         [Fact]
         public async Task DeserializeAsyncEnumerable()
@@ -495,7 +501,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(KeyValuePair<int, int>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, int>>))]
         [JsonSerializable(typeof(StackWrapper))]
-        internal sealed partial class CollectionTestsContext_Metadata : JsonSerializerContext { }
+        internal sealed partial class CollectionTestsContext_Metadata : JsonSerializerContext
+        {
+        }
     }
 
     public partial class CollectionTests_Default : CollectionTests
@@ -506,7 +514,9 @@ namespace System.Text.Json.SourceGeneration.Tests
                     CollectionTestsContext_Default.Default,
                     (options) => new CollectionTestsContext_Default(options)
                 )
-            ) { }
+            )
+        {
+        }
 
         [JsonSerializable(typeof(ConcurrentDictionary<string, string>))]
         [JsonSerializable(typeof(ConcurrentQueue<string>))]
@@ -940,6 +950,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(KeyValuePair<int, int>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, int>>))]
         [JsonSerializable(typeof(StackWrapper))]
-        internal sealed partial class CollectionTestsContext_Default : JsonSerializerContext { }
+        internal sealed partial class CollectionTestsContext_Default : JsonSerializerContext
+        {
+        }
     }
 }

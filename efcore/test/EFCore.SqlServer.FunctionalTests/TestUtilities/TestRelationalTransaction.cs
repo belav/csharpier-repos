@@ -100,7 +100,9 @@ public class TestRelationalTransaction : RelationalTransaction
     public override bool SupportsSavepoints => true;
 
     /// <inheritdoc />
-    public override void ReleaseSavepoint(string name) { }
+    public override void ReleaseSavepoint(string name)
+    {
+    }
 
     /// <inheritdoc />
     public override Task ReleaseSavepointAsync(

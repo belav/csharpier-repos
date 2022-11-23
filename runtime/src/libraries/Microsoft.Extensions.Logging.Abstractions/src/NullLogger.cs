@@ -15,7 +15,9 @@ namespace Microsoft.Extensions.Logging.Abstractions
         /// </summary>
         public static NullLogger Instance { get; } = new NullLogger();
 
-        private NullLogger() { }
+        private NullLogger()
+        {
+        }
 
         /// <inheritdoc />
         public IDisposable BeginScope<TState>(TState state) where TState : notnull
@@ -36,6 +38,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
             TState state,
             Exception? exception,
             Func<TState, Exception?, string> formatter
-        ) { }
+        )
+        {
+        }
     }
 }

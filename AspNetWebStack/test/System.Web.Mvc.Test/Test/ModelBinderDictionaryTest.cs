@@ -187,7 +187,9 @@ namespace System.Web.Mvc.Test
         }
 
         [ModelBinder(typeof(MyFirstBinder))]
-        private class MyFirstConvertibleType { }
+        private class MyFirstConvertibleType
+        {
+        }
 
         private class MyFirstBinder : IModelBinder
         {
@@ -201,7 +203,9 @@ namespace System.Web.Mvc.Test
         }
 
         [ModelBinder(typeof(MySecondBinder))]
-        private class MySecondConvertibleType { }
+        private class MySecondConvertibleType
+        {
+        }
 
         private class MySecondBinder : IModelBinder
         {
@@ -216,7 +220,9 @@ namespace System.Web.Mvc.Test
 
         [ModelBinder(typeof(MySecondBinder))]
         [MySubclassedBinder]
-        private class ConvertibleTypeWithSeveralBinders { }
+        private class ConvertibleTypeWithSeveralBinders
+        {
+        }
 
         private class MySubclassedBinderAttribute : CustomModelBinderAttribute
         {

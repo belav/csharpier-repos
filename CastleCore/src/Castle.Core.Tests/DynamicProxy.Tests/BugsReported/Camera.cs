@@ -40,6 +40,8 @@ namespace Castle.DynamicProxy.Tests.BugsReported
             return null;
         }
 
-        public void Record(ICamera cam) { }
+        public void Record(ICamera cam)
+        {
+        }
     }
 }

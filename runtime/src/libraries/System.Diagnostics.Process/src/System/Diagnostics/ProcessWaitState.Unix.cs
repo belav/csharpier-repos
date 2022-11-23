@@ -575,7 +575,9 @@ namespace System.Diagnostics
                                     MaxPollingIntervalMs
                                 );
                             }
-                            catch (OperationCanceledException) { }
+                            catch (OperationCanceledException)
+                            {
+                            }
                         }
                     }
                     finally

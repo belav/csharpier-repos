@@ -143,7 +143,9 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeScriptHandlerFactory() { }
+        public TypeScriptHandlerFactory()
+        {
+        }
 
         protected override IVSTypeScriptRequestHandler CreateRequestHandler()
         {

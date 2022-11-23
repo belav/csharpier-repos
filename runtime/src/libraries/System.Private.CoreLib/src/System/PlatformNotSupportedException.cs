@@ -37,6 +37,8 @@ namespace System
         }
 
         protected PlatformNotSupportedException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

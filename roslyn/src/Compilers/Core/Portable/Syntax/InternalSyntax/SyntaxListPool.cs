@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
         private readonly List<SyntaxListBuilder> _allocated = new List<SyntaxListBuilder>();
 #endif
 
-        internal SyntaxListPool() { }
+        internal SyntaxListPool()
+        {
+        }
 
         internal SyntaxListBuilder Allocate()
         {

@@ -12,7 +12,9 @@ internal class MyCriticalHandle : CriticalHandle
     static int s_uniqueHandleValue;
     static HashSet<int> s_closedHandles = new HashSet<int>();
 
-    public MyCriticalHandle() : base(new IntPtr(-1)) { }
+    public MyCriticalHandle() : base(new IntPtr(-1))
+    {
+    }
 
     public override bool IsInvalid
     {
@@ -49,7 +51,9 @@ internal class MyCriticalHandle : CriticalHandle
 
 public abstract class AbstractCriticalHandle : CriticalHandle
 {
-    public AbstractCriticalHandle() : base(new IntPtr(-1)) { }
+    public AbstractCriticalHandle() : base(new IntPtr(-1))
+    {
+    }
 
     internal IntPtr Handle
     {

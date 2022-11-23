@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.Interactive
             {
                 [ImportingConstructor]
                 [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-                public Factory() { }
+                public Factory()
+                {
+                }
 
                 public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
                     new SolutionAnalyzerSetter((InteractiveWorkspace)workspaceServices.Workspace);

@@ -47,10 +47,14 @@ namespace Castle.Core.Resource
             };
         }
 
-        public UncResource(string resourceName) : this(new CustomUri(resourceName)) { }
+        public UncResource(string resourceName) : this(new CustomUri(resourceName))
+        {
+        }
 
         public UncResource(string resourceName, string basePath)
-            : this(new CustomUri(resourceName), basePath) { }
+            : this(new CustomUri(resourceName), basePath)
+        {
+        }
 
         public override string FileBasePath
         {

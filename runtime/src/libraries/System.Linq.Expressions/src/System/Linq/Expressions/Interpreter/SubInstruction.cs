@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Sub";
 
-        private SubInstruction() { }
+        private SubInstruction()
+        {
+        }
 
         private sealed class SubInt16 : SubInstruction
         {
@@ -213,7 +215,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "SubOvf";
 
-        private SubOvfInstruction() { }
+        private SubOvfInstruction()
+        {
+        }
 
         private sealed class SubOvfInt16 : SubOvfInstruction
         {

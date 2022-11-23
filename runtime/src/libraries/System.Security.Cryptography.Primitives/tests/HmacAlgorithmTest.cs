@@ -78,6 +78,8 @@ namespace System.Security.Cryptography.Hashing.Tests
             }
         }
 
-        private class TestHMAC : HMAC { }
+        private class TestHMAC : HMAC
+        {
+        }
     }
 }

@@ -26,7 +26,9 @@ namespace Test
                     {
                         DoAnything();
                     }
-                    catch (DivideByZeroException) { }
+                    catch (DivideByZeroException)
+                    {
+                    }
                 }
                 try
                 {

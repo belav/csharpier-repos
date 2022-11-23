@@ -10,7 +10,9 @@ namespace Internal.CommandLine
     {
         private readonly IReadOnlyList<ArgumentToken> _tokens;
 
-        public ArgumentParser(IEnumerable<string> arguments) : this(arguments, null) { }
+        public ArgumentParser(IEnumerable<string> arguments) : this(arguments, null)
+        {
+        }
 
         public ArgumentParser(
             IEnumerable<string> arguments,

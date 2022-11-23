@@ -87,7 +87,9 @@ namespace System.Drawing
                     GC.KeepAlive(_managed);
                 }
 
-                public void Free() { }
+                public void Free()
+                {
+                }
             }
         }
 #endif
@@ -107,7 +109,9 @@ namespace System.Drawing
             set => _userData = value;
         }
 
-        private protected Image() { }
+        private protected Image()
+        {
+        }
 
         private protected Image(SerializationInfo info, StreamingContext context)
         {
@@ -117,12 +121,24 @@ namespace System.Drawing
             {
                 SetNativeImage(InitializeFromStream(new MemoryStream(dat)));
             }
-            catch (ExternalException) { }
-            catch (ArgumentException) { }
-            catch (OutOfMemoryException) { }
-            catch (InvalidOperationException) { }
-            catch (NotImplementedException) { }
-            catch (FileNotFoundException) { }
+            catch (ExternalException)
+            {
+            }
+            catch (ArgumentException)
+            {
+            }
+            catch (OutOfMemoryException)
+            {
+            }
+            catch (InvalidOperationException)
+            {
+            }
+            catch (NotImplementedException)
+            {
+            }
+            catch (FileNotFoundException)
+            {
+            }
         }
 
         void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
@@ -1215,14 +1231,26 @@ namespace System.Drawing
                         }
                     }
                     // possible exceptions for reading the filename
-                    catch (UnauthorizedAccessException) { }
-                    catch (DirectoryNotFoundException) { }
-                    catch (IOException) { }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                    }
+                    catch (IOException)
+                    {
+                    }
                     // possible exceptions for setting/getting the position inside dataStream
-                    catch (NotSupportedException) { }
-                    catch (ObjectDisposedException) { }
+                    catch (NotSupportedException)
+                    {
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                    }
                     // possible exception when reading stuff into dataStream
-                    catch (ArgumentException) { }
+                    catch (ArgumentException)
+                    {
+                    }
                 }
             }
         }

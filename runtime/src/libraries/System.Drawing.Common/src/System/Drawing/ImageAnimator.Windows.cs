@@ -87,7 +87,9 @@ namespace System.Drawing
         /// <summary>
         ///     Prevent instantiation of this class.
         /// </summary>
-        private ImageAnimator() { }
+        private ImageAnimator()
+        {
+        }
 
         /// <summary>
         ///     Advances the frame in the specified image. The new frame is drawn the next time the image is rendered.

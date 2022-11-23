@@ -9,5 +9,7 @@ public class x
         comp.Add(null, null);
     }
 
-    public virtual void Add(Object o1, Object o2) { }
+    public virtual void Add(Object o1, Object o2)
+    {
+    }
 }

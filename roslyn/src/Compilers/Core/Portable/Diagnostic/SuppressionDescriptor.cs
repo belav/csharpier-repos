@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis
         /// <param name="suppressedDiagnosticId">Identifier of the suppressed diagnostic, i.e. <see cref="Diagnostic.Id"/>. For example, compiler warning Id "CS0649".</param>
         /// <param name="justification">Justification for the suppression. For example: "Suppress CS0649 on fields marked with YYY attribute as they are implicitly assigned.".</param>
         public SuppressionDescriptor(string id, string suppressedDiagnosticId, string justification)
-            : this(id, suppressedDiagnosticId, (LocalizableString)justification) { }
+            : this(id, suppressedDiagnosticId, (LocalizableString)justification)
+        {
+        }
 
         /// <summary>
         /// Create a SuppressionDescriptor, which provides a localizable justification about a programmatic suppression of a <see cref="Diagnostic"/>.

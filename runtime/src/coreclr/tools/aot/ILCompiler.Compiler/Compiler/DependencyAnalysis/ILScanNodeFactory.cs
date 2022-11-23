@@ -31,7 +31,9 @@ namespace ILCompiler.DependencyAnalysis
                 new LazyDictionaryLayoutProvider(),
                 new ExternSymbolsImportedNodeProvider(),
                 preinitManager
-            ) { }
+            )
+        {
+        }
 
         protected override IMethodNode CreateMethodEntrypointNode(MethodDesc method)
         {

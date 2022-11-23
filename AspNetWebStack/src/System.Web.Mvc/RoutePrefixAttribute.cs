@@ -20,7 +20,9 @@ namespace System.Web.Mvc
         /// <summary>
         /// Initializes a new instance of the <see cref="RoutePrefixAttribute" /> class without specifying any parameters.
         /// </summary>
-        protected RoutePrefixAttribute() { }
+        protected RoutePrefixAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoutePrefixAttribute" /> class.

@@ -131,7 +131,9 @@ namespace Benchstone.MDBenchF
                     System.Console.WriteLine("{0} {1} {2}\n", t[k, j], j, k);
                 }
 
-                L40: { }
+                L40:
+                {
+                }
             }
 
             return true;

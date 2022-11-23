@@ -41,7 +41,9 @@ public class IUnknownMarshalingTest
             //test null
             IntPtr nullPtr = Marshal.GetIUnknownForObject(null);
         }
-        catch (ArgumentNullException) { }
+        catch (ArgumentNullException)
+        {
+        }
 
         foreach (object obj in TestObjects)
         {
@@ -138,7 +140,9 @@ public class IUnknownMarshalingTest
             //test IntPtr.Zero
             Object nullObj = Marshal.GetObjectForIUnknown(IntPtr.Zero);
         }
-        catch (ArgumentNullException) { }
+        catch (ArgumentNullException)
+        {
+        }
 
         foreach (object obj in TestObjects)
         {

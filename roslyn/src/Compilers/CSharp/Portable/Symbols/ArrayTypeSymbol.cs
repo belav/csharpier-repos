@@ -653,7 +653,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations elementTypeWithAnnotations,
                 int rank,
                 NamedTypeSymbol array
-            ) : base(elementTypeWithAnnotations, rank, array) { }
+            ) : base(elementTypeWithAnnotations, rank, array)
+            {
+            }
 
             protected override ArrayTypeSymbol WithElementTypeCore(
                 TypeWithAnnotations elementTypeWithAnnotations

@@ -18,7 +18,9 @@ using Xunit;
 
 namespace System.ComponentModel.Tests
 {
-    internal class TestService { }
+    internal class TestService
+    {
+    }
 
     internal class TestContainer : Container
     {
@@ -886,9 +888,13 @@ namespace System.ComponentModel.Tests
             }
         }
 
-        private class SubComponent : Component { }
+        private class SubComponent : Component
+        {
+        }
 
-        private class DefaultFilterService : ContainerFilterService { }
+        private class DefaultFilterService : ContainerFilterService
+        {
+        }
 
         private class CustomContainerFilterService : ContainerFilterService
         {
@@ -938,13 +944,21 @@ namespace System.ComponentModel.Tests
                 get { return components; }
             }
 
-            public void Add(IComponent component) { }
+            public void Add(IComponent component)
+            {
+            }
 
-            public void Add(IComponent component, string name) { }
+            public void Add(IComponent component, string name)
+            {
+            }
 
-            public void Remove(IComponent component) { }
+            public void Remove(IComponent component)
+            {
+            }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         public class GetServiceContainer : Container

@@ -4,9 +4,13 @@ using System;
 
 class Program
 {
-    public virtual void VirtualMethod() { }
+    public virtual void VirtualMethod()
+    {
+    }
 
-    public void NonVirtualMethod() { }
+    public void NonVirtualMethod()
+    {
+    }
 
     static int Main()
     {

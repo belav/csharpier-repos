@@ -94,7 +94,9 @@ namespace System.Web.Http.Batch
 
         public class CustomHttpBatchHandler : DefaultHttpBatchHandler
         {
-            public CustomHttpBatchHandler(HttpServer httpServer) : base(httpServer) { }
+            public CustomHttpBatchHandler(HttpServer httpServer) : base(httpServer)
+            {
+            }
 
             public override async Task<IList<HttpRequestMessage>> ParseBatchRequestsAsync(
                 HttpRequestMessage request,

@@ -4,7 +4,9 @@ using System.Reflection.Emit;
 
 class Driver
 {
-    public void AvoidInlining() { }
+    public void AvoidInlining()
+    {
+    }
 
     public int Foo()
     {

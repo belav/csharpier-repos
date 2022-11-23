@@ -167,7 +167,9 @@ namespace Castle.DynamicProxy.Tests
         public bool IsVerificationPossible => false;
 
         [TearDown]
-        public virtual void TearDown() { }
+        public virtual void TearDown()
+        {
+        }
 #endif // FEATURE_ASSEMBLYBUILDER_SAVE
     }
 }

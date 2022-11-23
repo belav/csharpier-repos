@@ -94,7 +94,9 @@ public class SqlServerTriggersTest : IClassFixture<SqlServerTriggersTest.SqlServ
 
     protected class TriggersContext : PoolableDbContext
     {
-        public TriggersContext(DbContextOptions options) : base(options) { }
+        public TriggersContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductBackup> ProductBackups { get; set; }

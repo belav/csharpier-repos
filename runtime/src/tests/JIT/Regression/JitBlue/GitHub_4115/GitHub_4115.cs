@@ -17,7 +17,9 @@ namespace Issue_4115
         private IntPtr _dataArrayPtr;
         public ArraySegment<byte> Data;
 
-        public MyClass() { }
+        public MyClass()
+        {
+        }
 
         public object Obj { get; private set; }
         public byte[] Array => Data.Array;

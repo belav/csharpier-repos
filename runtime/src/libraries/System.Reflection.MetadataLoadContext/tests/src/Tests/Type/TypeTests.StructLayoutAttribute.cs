@@ -194,53 +194,87 @@ namespace System.Reflection.Tests
             Assert.Null(s);
         }
 
-        private class UndecoratedClass { }
+        private class UndecoratedClass
+        {
+        }
 
         [StructLayout(LayoutKind.Auto, CharSet = CharSet.Ansi, Pack = 8, Size = 0)]
-        private class AutoAnsiEightZero { }
+        private class AutoAnsiEightZero
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 8, Size = 0)]
-        private class SequentialAnsiEightZero { }
+        private class SequentialAnsiEightZero
+        {
+        }
 
         [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Ansi, Pack = 8, Size = 0)]
-        private class ExplicitAnsiEightZero { }
+        private class ExplicitAnsiEightZero
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = 8, Size = 0)]
-        private class SequentialUnicodeEightZero { }
+        private class SequentialUnicodeEightZero
+        {
+        }
 
         // A "Pack = 0" emits different IL metadata from "Pack = 8". However, both the runtime layout engine and the Type.StructLayoutAttribute
         // property treat it as if were "8".
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 0, Size = 0)]
-        private class SequentialAutoZeroZero { }
+        private class SequentialAutoZeroZero
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 1, Size = 0)]
-        private class SequentialAutoOneZero { }
+        private class SequentialAutoOneZero
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 2, Size = 0)]
-        private class SequentialAutoTwoZero { }
+        private class SequentialAutoTwoZero
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4, Size = 0)]
-        private class SequentialAutoFourZero { }
+        private class SequentialAutoFourZero
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 8, Size = 0)]
-        private class SequentialAutoEightZero { }
+        private class SequentialAutoEightZero
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 16, Size = 0)]
-        private class SequentialAutoSixteenZero { }
+        private class SequentialAutoSixteenZero
+        {
+        }
 
         [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Auto, Pack = 8, Size = 42)]
-        private class ExplicitAutoEightFortyTwo { }
+        private class ExplicitAutoEightFortyTwo
+        {
+        }
 
         [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Auto, Pack = 4, Size = 42)]
-        private class ExplicitAutoFourFortyTwo { }
+        private class ExplicitAutoFourFortyTwo
+        {
+        }
 
-        private class Derived : ExplicitAutoFourFortyTwo { }
+        private class Derived : ExplicitAutoFourFortyTwo
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4, Size = 40)]
-        private class Generic<T> { }
+        private class Generic<T>
+        {
+        }
 
-        private class GenericParameterHolder<T> where T : ExplicitAutoFourFortyTwo { }
+        private class GenericParameterHolder<T> where T : ExplicitAutoFourFortyTwo
+        {
+        }
 
-        private interface IInterface { }
+        private interface IInterface
+        {
+        }
     }
 }

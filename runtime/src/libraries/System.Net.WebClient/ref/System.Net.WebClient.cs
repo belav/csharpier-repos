@@ -10,7 +10,9 @@ namespace System.Net
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal DownloadDataCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public byte[] Result
         {
@@ -26,7 +28,9 @@ namespace System.Net
     public partial class DownloadProgressChangedEventArgs
         : System.ComponentModel.ProgressChangedEventArgs
     {
-        internal DownloadProgressChangedEventArgs() : base(default(int), default(object)) { }
+        internal DownloadProgressChangedEventArgs() : base(default(int), default(object))
+        {
+        }
 
         public long BytesReceived
         {
@@ -47,7 +51,9 @@ namespace System.Net
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal DownloadStringCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public string Result
         {
@@ -63,7 +69,9 @@ namespace System.Net
     public partial class OpenReadCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal OpenReadCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public System.IO.Stream Result
         {
@@ -79,7 +87,9 @@ namespace System.Net
     public partial class OpenWriteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal OpenWriteCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public System.IO.Stream Result
         {
@@ -96,7 +106,9 @@ namespace System.Net
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadDataCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public byte[] Result
         {
@@ -113,7 +125,9 @@ namespace System.Net
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadFileCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public byte[] Result
         {
@@ -129,7 +143,9 @@ namespace System.Net
     public partial class UploadProgressChangedEventArgs
         : System.ComponentModel.ProgressChangedEventArgs
     {
-        internal UploadProgressChangedEventArgs() : base(default(int), default(object)) { }
+        internal UploadProgressChangedEventArgs() : base(default(int), default(object))
+        {
+        }
 
         public long BytesReceived
         {
@@ -158,7 +174,9 @@ namespace System.Net
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadStringCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public string Result
         {
@@ -175,7 +193,9 @@ namespace System.Net
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadValuesCompletedEventArgs()
-            : base(default(System.Exception), default(bool), default(object)) { }
+            : base(default(System.Exception), default(bool), default(object))
+        {
+        }
 
         public byte[] Result
         {
@@ -195,7 +215,9 @@ namespace System.Net
             DiagnosticId = "SYSLIB0014",
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
-        public WebClient() { }
+        public WebClient()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -207,7 +229,9 @@ namespace System.Net
         public bool AllowReadStreamBuffering
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -220,36 +244,48 @@ namespace System.Net
         public bool AllowWriteStreamBuffering
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string BaseAddress
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Cache.RequestCachePolicy? CachePolicy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Text.Encoding Encoding
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Net.WebHeaderCollection Headers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsBusy
         {
@@ -258,14 +294,18 @@ namespace System.Net
         public System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Collections.Specialized.NameValueCollection QueryString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.WebHeaderCollection? ResponseHeaders
         {
@@ -274,62 +314,108 @@ namespace System.Net
         public bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.Net.DownloadDataCompletedEventHandler? DownloadDataCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.ComponentModel.AsyncCompletedEventHandler? DownloadFileCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.DownloadProgressChangedEventHandler? DownloadProgressChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.DownloadStringCompletedEventHandler? DownloadStringCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.OpenReadCompletedEventHandler? OpenReadCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.OpenWriteCompletedEventHandler? OpenWriteCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.UploadDataCompletedEventHandler? UploadDataCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.UploadFileCompletedEventHandler? UploadFileCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.UploadProgressChangedEventHandler? UploadProgressChanged
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.UploadStringCompletedEventHandler? UploadStringCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Net.UploadValuesCompletedEventHandler? UploadValuesCompleted
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -341,11 +427,17 @@ namespace System.Net
         )]
         public event System.Net.WriteStreamClosedEventHandler? WriteStreamClosed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void CancelAsync() { }
+        public void CancelAsync()
+        {
+        }
 
         public byte[] DownloadData(string address)
         {
@@ -357,9 +449,13 @@ namespace System.Net
             throw null;
         }
 
-        public void DownloadDataAsync(System.Uri address) { }
+        public void DownloadDataAsync(System.Uri address)
+        {
+        }
 
-        public void DownloadDataAsync(System.Uri address, object? userToken) { }
+        public void DownloadDataAsync(System.Uri address, object? userToken)
+        {
+        }
 
         public System.Threading.Tasks.Task<byte[]> DownloadDataTaskAsync(string address)
         {
@@ -371,13 +467,21 @@ namespace System.Net
             throw null;
         }
 
-        public void DownloadFile(string address, string fileName) { }
+        public void DownloadFile(string address, string fileName)
+        {
+        }
 
-        public void DownloadFile(System.Uri address, string fileName) { }
+        public void DownloadFile(System.Uri address, string fileName)
+        {
+        }
 
-        public void DownloadFileAsync(System.Uri address, string fileName) { }
+        public void DownloadFileAsync(System.Uri address, string fileName)
+        {
+        }
 
-        public void DownloadFileAsync(System.Uri address, string fileName, object? userToken) { }
+        public void DownloadFileAsync(System.Uri address, string fileName, object? userToken)
+        {
+        }
 
         public System.Threading.Tasks.Task DownloadFileTaskAsync(string address, string fileName)
         {
@@ -402,9 +506,13 @@ namespace System.Net
             throw null;
         }
 
-        public void DownloadStringAsync(System.Uri address) { }
+        public void DownloadStringAsync(System.Uri address)
+        {
+        }
 
-        public void DownloadStringAsync(System.Uri address, object? userToken) { }
+        public void DownloadStringAsync(System.Uri address, object? userToken)
+        {
+        }
 
         public System.Threading.Tasks.Task<string> DownloadStringTaskAsync(string address)
         {
@@ -434,41 +542,55 @@ namespace System.Net
             throw null;
         }
 
-        protected virtual void OnDownloadDataCompleted(
-            System.Net.DownloadDataCompletedEventArgs e
-        ) { }
+        protected virtual void OnDownloadDataCompleted(System.Net.DownloadDataCompletedEventArgs e)
+        {
+        }
 
         protected virtual void OnDownloadFileCompleted(
             System.ComponentModel.AsyncCompletedEventArgs e
-        ) { }
+        )
+        {
+        }
 
         protected virtual void OnDownloadProgressChanged(
             System.Net.DownloadProgressChangedEventArgs e
-        ) { }
+        )
+        {
+        }
 
         protected virtual void OnDownloadStringCompleted(
             System.Net.DownloadStringCompletedEventArgs e
-        ) { }
+        )
+        {
+        }
 
-        protected virtual void OnOpenReadCompleted(System.Net.OpenReadCompletedEventArgs e) { }
+        protected virtual void OnOpenReadCompleted(System.Net.OpenReadCompletedEventArgs e)
+        {
+        }
 
-        protected virtual void OnOpenWriteCompleted(System.Net.OpenWriteCompletedEventArgs e) { }
+        protected virtual void OnOpenWriteCompleted(System.Net.OpenWriteCompletedEventArgs e)
+        {
+        }
 
-        protected virtual void OnUploadDataCompleted(System.Net.UploadDataCompletedEventArgs e) { }
+        protected virtual void OnUploadDataCompleted(System.Net.UploadDataCompletedEventArgs e)
+        {
+        }
 
-        protected virtual void OnUploadFileCompleted(System.Net.UploadFileCompletedEventArgs e) { }
+        protected virtual void OnUploadFileCompleted(System.Net.UploadFileCompletedEventArgs e)
+        {
+        }
 
-        protected virtual void OnUploadProgressChanged(
-            System.Net.UploadProgressChangedEventArgs e
-        ) { }
+        protected virtual void OnUploadProgressChanged(System.Net.UploadProgressChangedEventArgs e)
+        {
+        }
 
-        protected virtual void OnUploadStringCompleted(
-            System.Net.UploadStringCompletedEventArgs e
-        ) { }
+        protected virtual void OnUploadStringCompleted(System.Net.UploadStringCompletedEventArgs e)
+        {
+        }
 
-        protected virtual void OnUploadValuesCompleted(
-            System.Net.UploadValuesCompletedEventArgs e
-        ) { }
+        protected virtual void OnUploadValuesCompleted(System.Net.UploadValuesCompletedEventArgs e)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -477,7 +599,9 @@ namespace System.Net
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
             true
         )]
-        protected virtual void OnWriteStreamClosed(System.Net.WriteStreamClosedEventArgs e) { }
+        protected virtual void OnWriteStreamClosed(System.Net.WriteStreamClosedEventArgs e)
+        {
+        }
 
         public System.IO.Stream OpenRead(string address)
         {
@@ -489,9 +613,13 @@ namespace System.Net
             throw null;
         }
 
-        public void OpenReadAsync(System.Uri address) { }
+        public void OpenReadAsync(System.Uri address)
+        {
+        }
 
-        public void OpenReadAsync(System.Uri address, object? userToken) { }
+        public void OpenReadAsync(System.Uri address, object? userToken)
+        {
+        }
 
         public System.Threading.Tasks.Task<System.IO.Stream> OpenReadTaskAsync(string address)
         {
@@ -523,11 +651,17 @@ namespace System.Net
             throw null;
         }
 
-        public void OpenWriteAsync(System.Uri address) { }
+        public void OpenWriteAsync(System.Uri address)
+        {
+        }
 
-        public void OpenWriteAsync(System.Uri address, string? method) { }
+        public void OpenWriteAsync(System.Uri address, string? method)
+        {
+        }
 
-        public void OpenWriteAsync(System.Uri address, string? method, object? userToken) { }
+        public void OpenWriteAsync(System.Uri address, string? method, object? userToken)
+        {
+        }
 
         public System.Threading.Tasks.Task<System.IO.Stream> OpenWriteTaskAsync(string address)
         {
@@ -575,16 +709,22 @@ namespace System.Net
             throw null;
         }
 
-        public void UploadDataAsync(System.Uri address, byte[] data) { }
+        public void UploadDataAsync(System.Uri address, byte[] data)
+        {
+        }
 
-        public void UploadDataAsync(System.Uri address, string? method, byte[] data) { }
+        public void UploadDataAsync(System.Uri address, string? method, byte[] data)
+        {
+        }
 
         public void UploadDataAsync(
             System.Uri address,
             string? method,
             byte[] data,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task<byte[]> UploadDataTaskAsync(string address, byte[] data)
         {
@@ -637,16 +777,22 @@ namespace System.Net
             throw null;
         }
 
-        public void UploadFileAsync(System.Uri address, string fileName) { }
+        public void UploadFileAsync(System.Uri address, string fileName)
+        {
+        }
 
-        public void UploadFileAsync(System.Uri address, string? method, string fileName) { }
+        public void UploadFileAsync(System.Uri address, string? method, string fileName)
+        {
+        }
 
         public void UploadFileAsync(
             System.Uri address,
             string? method,
             string fileName,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task<byte[]> UploadFileTaskAsync(
             string address,
@@ -702,16 +848,22 @@ namespace System.Net
             throw null;
         }
 
-        public void UploadStringAsync(System.Uri address, string data) { }
+        public void UploadStringAsync(System.Uri address, string data)
+        {
+        }
 
-        public void UploadStringAsync(System.Uri address, string? method, string data) { }
+        public void UploadStringAsync(System.Uri address, string? method, string data)
+        {
+        }
 
         public void UploadStringAsync(
             System.Uri address,
             string? method,
             string data,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task<string> UploadStringTaskAsync(
             string address,
@@ -784,20 +936,26 @@ namespace System.Net
         public void UploadValuesAsync(
             System.Uri address,
             System.Collections.Specialized.NameValueCollection data
-        ) { }
+        )
+        {
+        }
 
         public void UploadValuesAsync(
             System.Uri address,
             string? method,
             System.Collections.Specialized.NameValueCollection data
-        ) { }
+        )
+        {
+        }
 
         public void UploadValuesAsync(
             System.Uri address,
             string? method,
             System.Collections.Specialized.NameValueCollection data,
             object? userToken
-        ) { }
+        )
+        {
+        }
 
         public System.Threading.Tasks.Task<byte[]> UploadValuesTaskAsync(
             string address,
@@ -846,7 +1004,9 @@ namespace System.Net
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
             true
         )]
-        public WriteStreamClosedEventArgs() { }
+        public WriteStreamClosedEventArgs()
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never

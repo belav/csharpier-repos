@@ -28,7 +28,9 @@ namespace System.Data.Tests.Common
             public static readonly ProviderFactoryWithExtras Instance =
                 new ProviderFactoryWithExtras();
 
-            private ProviderFactoryWithExtras() { }
+            private ProviderFactoryWithExtras()
+            {
+            }
 
             public override DbDataAdapter CreateDataAdapter() => new MyAdapter();
 
@@ -40,10 +42,14 @@ namespace System.Data.Tests.Common
             public static readonly ProviderFactoryWithoutExtras Instance =
                 new ProviderFactoryWithoutExtras();
 
-            private ProviderFactoryWithoutExtras() { }
+            private ProviderFactoryWithoutExtras()
+            {
+            }
         }
 
-        private class MyAdapter : DbDataAdapter { }
+        private class MyAdapter : DbDataAdapter
+        {
+        }
 
         private class MyCommandBuilder : DbCommandBuilder
         {
@@ -58,9 +64,13 @@ namespace System.Data.Tests.Common
                 DataRow row,
                 StatementType statementType,
                 bool whereClause
-            ) { }
+            )
+            {
+            }
 
-            protected override void SetRowUpdatingHandler(DbDataAdapter adapter) { }
+            protected override void SetRowUpdatingHandler(DbDataAdapter adapter)
+            {
+            }
         }
     }
 }

@@ -27,6 +27,8 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
             return new SimpleConsoleLogger(_console, _minimalLogLevel, _minimalErrorLevel);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

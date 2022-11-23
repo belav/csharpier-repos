@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddRequiredParentheses
         >
     {
         public CSharpAddRequiredExpressionParenthesesDiagnosticAnalyzer()
-            : base(CSharpExpressionPrecedenceService.Instance) { }
+            : base(CSharpExpressionPrecedenceService.Instance)
+        {
+        }
 
         private static readonly ImmutableArray<SyntaxKind> s_kinds = ImmutableArray.Create(
             SyntaxKind.AddExpression,

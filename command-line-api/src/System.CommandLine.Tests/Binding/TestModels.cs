@@ -91,7 +91,9 @@ namespace System.CommandLine.Tests.Binding
 
     public class ClassWithMultipleCtor
     {
-        public ClassWithMultipleCtor() { }
+        public ClassWithMultipleCtor()
+        {
+        }
 
         public ClassWithMultipleCtor(int intProperty)
         {

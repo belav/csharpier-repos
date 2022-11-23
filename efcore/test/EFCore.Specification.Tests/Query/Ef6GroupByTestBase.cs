@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : Ef6GroupByTestBase<TFixture>.Ef6GroupByFixtureBase, new()
 {
-    protected Ef6GroupByTestBase(TFixture fixture) : base(fixture) { }
+    protected Ef6GroupByTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -912,7 +914,9 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
 
     protected ArubaContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 
     public abstract class Ef6GroupByFixtureBase
         : SharedStoreFixtureBase<ArubaContext>,
@@ -1069,7 +1073,9 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
 
     public class ArubaContext : PoolableDbContext
     {
-        public ArubaContext(DbContextOptions options) : base(options) { }
+        public ArubaContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     public class ArubaOwner
@@ -1102,7 +1108,9 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
         public int UnitsInStock { get; set; }
     }
 
-    public class FeaturedProductForLinq : ProductForLinq { }
+    public class FeaturedProductForLinq : ProductForLinq
+    {
+    }
 
     public class CustomerForLinq
     {

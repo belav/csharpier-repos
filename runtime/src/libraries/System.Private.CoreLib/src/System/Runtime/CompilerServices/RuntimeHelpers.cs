@@ -81,28 +81,36 @@ namespace System.Runtime.CompilerServices
             DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public static void PrepareContractedDelegate(Delegate d) { }
+        public static void PrepareContractedDelegate(Delegate d)
+        {
+        }
 
         [Obsolete(
             Obsoletions.ConstrainedExecutionRegionMessage,
             DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public static void ProbeForSufficientStack() { }
+        public static void ProbeForSufficientStack()
+        {
+        }
 
         [Obsolete(
             Obsoletions.ConstrainedExecutionRegionMessage,
             DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public static void PrepareConstrainedRegions() { }
+        public static void PrepareConstrainedRegions()
+        {
+        }
 
         [Obsolete(
             Obsoletions.ConstrainedExecutionRegionMessage,
             DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public static void PrepareConstrainedRegionsNoOP() { }
+        public static void PrepareConstrainedRegionsNoOP()
+        {
+        }
 
         internal static bool IsPrimitiveType(this CorElementType et)
             // COR_ELEMENT_TYPE_I1,I2,I4,I8,U1,U2,U4,U8,R4,R8,I,U,CHAR,BOOLEAN

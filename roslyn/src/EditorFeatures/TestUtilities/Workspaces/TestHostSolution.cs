@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     parseOptions,
                     references
                 )
-            ) { }
+            )
+        {
+        }
 
         public TestHostSolution(params TestHostProject[] projects)
         {

@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ElementAccessExpressionSignatureHelpProvider() { }
+        public ElementAccessExpressionSignatureHelpProvider()
+        {
+        }
 
         public override bool IsTriggerCharacter(char ch) => IsTriggerCharacterInternal(ch);
 

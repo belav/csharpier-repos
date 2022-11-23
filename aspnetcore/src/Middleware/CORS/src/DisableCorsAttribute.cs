@@ -11,4 +11,6 @@ namespace Microsoft.AspNetCore.Cors;
     AllowMultiple = false,
     Inherited = false
 )]
-public class DisableCorsAttribute : Attribute, IDisableCorsAttribute { }
+public class DisableCorsAttribute : Attribute, IDisableCorsAttribute
+{
+}

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CodeLens
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeLensReferencesServiceFactory() { }
+        public CodeLensReferencesServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => Instance;
     }

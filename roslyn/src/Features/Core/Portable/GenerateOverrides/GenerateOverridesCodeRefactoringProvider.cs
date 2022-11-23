@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GenerateOverridesCodeRefactoringProvider() : this(null) { }
+        public GenerateOverridesCodeRefactoringProvider() : this(null)
+        {
+        }
 
         [SuppressMessage(
             "RoslynDiagnosticsReliability",

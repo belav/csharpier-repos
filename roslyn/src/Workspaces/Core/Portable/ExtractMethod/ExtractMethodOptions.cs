@@ -20,7 +20,9 @@ internal readonly record struct ExtractMethodOptions
     [DataMember]
     public bool DontPutOutOrRefOnStruct { get; init; } = true;
 
-    public ExtractMethodOptions() { }
+    public ExtractMethodOptions()
+    {
+    }
 
     public static readonly ExtractMethodOptions Default = new();
 }

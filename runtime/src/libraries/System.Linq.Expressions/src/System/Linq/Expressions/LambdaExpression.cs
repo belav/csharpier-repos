@@ -203,7 +203,9 @@ namespace System.Linq.Expressions
     /// </remarks>
     public class Expression<TDelegate> : LambdaExpression
     {
-        internal Expression(Expression body) : base(body) { }
+        internal Expression(Expression body) : base(body)
+        {
+        }
 
         internal sealed override Type TypeCore => typeof(TDelegate);
 
@@ -388,7 +390,9 @@ namespace System.Linq.Expressions
 
     internal sealed class Expression0<TDelegate> : Expression<TDelegate>
     {
-        public Expression0(Expression body) : base(body) { }
+        public Expression0(Expression body) : base(body)
+        {
+        }
 
         internal override int ParameterCount => 0;
 

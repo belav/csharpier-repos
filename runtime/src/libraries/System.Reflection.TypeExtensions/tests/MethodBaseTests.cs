@@ -165,36 +165,62 @@ namespace System.Reflection.Tests
 
         public class NonGenericClass
         {
-            public NonGenericClass() { }
+            public NonGenericClass()
+            {
+            }
 
-            public NonGenericClass(int val) { }
+            public NonGenericClass(int val)
+            {
+            }
 
-            public void TestGenericMethod<T>(T p1) { }
+            public void TestGenericMethod<T>(T p1)
+            {
+            }
 
-            public void TestMethod(int val) { }
+            public void TestMethod(int val)
+            {
+            }
 
-            public void TestMethod2(int val) { }
+            public void TestMethod2(int val)
+            {
+            }
 
-            public void TestMethod2(int val1, float val2, string val3) { }
+            public void TestMethod2(int val1, float val2, string val3)
+            {
+            }
 
-            public void TestPartialGenericMethod<T>(int val, T p1) { }
+            public void TestPartialGenericMethod<T>(int val, T p1)
+            {
+            }
 
             public T TestGenericReturnTypeMethod<T>() => default(T);
         }
 
         public class GenericClass<T>
         {
-            public GenericClass() { }
+            public GenericClass()
+            {
+            }
 
-            public GenericClass(T val) { }
+            public GenericClass(T val)
+            {
+            }
 
-            public GenericClass(T p, int val) { }
+            public GenericClass(T p, int val)
+            {
+            }
 
-            public void TestMethod(T p1) { }
+            public void TestMethod(T p1)
+            {
+            }
 
-            public void TestMultipleGenericMethod<U>(U p2) { }
+            public void TestMultipleGenericMethod<U>(U p2)
+            {
+            }
 
-            public void TestVoidMethod() { }
+            public void TestVoidMethod()
+            {
+            }
         }
     }
 }

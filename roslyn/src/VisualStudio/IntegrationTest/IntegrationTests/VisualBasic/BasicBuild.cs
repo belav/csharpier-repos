@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     [Collection(nameof(SharedIntegrationHostFixture))]
     public class BasicBuild : AbstractIntegrationTest
     {
-        public BasicBuild(VisualStudioInstanceFactory instanceFactory) : base(instanceFactory) { }
+        public BasicBuild(VisualStudioInstanceFactory instanceFactory) : base(instanceFactory)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

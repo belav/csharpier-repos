@@ -8,15 +8,23 @@ namespace NS
 {
     public class A
     {
-        public void Test() { }
+        public void Test()
+        {
+        }
 
         // for CS1682
-        public class B { }
+        public class B
+        {
+        }
     }
 
     // for CS1684
-    public class C { }
+    public class C
+    {
+    }
 
     // for CS1714
-    public class D<T> { }
+    public class D<T>
+    {
+    }
 }

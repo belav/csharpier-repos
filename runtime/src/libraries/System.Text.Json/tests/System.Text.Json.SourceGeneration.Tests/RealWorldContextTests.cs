@@ -1096,9 +1096,13 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             public (string? x, int y)? NullableArgumentOfNullableStruct { get; set; }
 
-            public record MyPoco { }
+            public record MyPoco
+            {
+            }
 
-            public struct GenericStruct<T> { }
+            public struct GenericStruct<T>
+            {
+            }
         }
 
         private const string ExceptionMessageFromCustomContext =
@@ -1135,7 +1139,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         internal class CustomContext : JsonSerializerContext
         {
-            public CustomContext(JsonSerializerOptions options) : base(options) { }
+            public CustomContext(JsonSerializerOptions options) : base(options)
+            {
+            }
 
             private JsonTypeInfo<object> _object;
             public JsonTypeInfo<object> Object =>

@@ -105,7 +105,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 gacFileResolver,
                 GetTrustedPlatformAssemblies(platformAssemblyPaths.NullToEmpty()),
                 fileReferenceProvider
-            ) { }
+            )
+        {
+        }
 
         internal RuntimeMetadataReferenceResolver(
             RelativePathResolver pathResolver,

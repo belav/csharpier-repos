@@ -58,6 +58,8 @@ namespace System.Reflection.Tests
             Assert.Equal(expectedType, actualType);
         }
 
-        public class MyAttribute : Attribute { }
+        public class MyAttribute : Attribute
+        {
+        }
     }
 }

@@ -1382,7 +1382,9 @@ namespace Microsoft.WebAssembly.Diagnostics
         internal virtual void SaveLastDebuggerAgentBufferReceivedToContext(
             SessionId sessionId,
             Result res
-        ) { }
+        )
+        {
+        }
 
         internal async Task<bool> OnReceiveDebuggerAgentEvent(
             SessionId sessionId,

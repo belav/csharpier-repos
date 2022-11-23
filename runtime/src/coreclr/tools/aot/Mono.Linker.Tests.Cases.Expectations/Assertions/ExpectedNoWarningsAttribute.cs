@@ -17,8 +17,12 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     )]
     public class ExpectedNoWarningsAttribute : EnableLoggerAttribute
     {
-        public ExpectedNoWarningsAttribute() { }
+        public ExpectedNoWarningsAttribute()
+        {
+        }
 
-        public ExpectedNoWarningsAttribute(string warningCode) { }
+        public ExpectedNoWarningsAttribute(string warningCode)
+        {
+        }
     }
 }

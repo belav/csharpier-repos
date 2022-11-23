@@ -12,7 +12,9 @@ namespace System.Net.Mail
 {
     public class MailAddressCollection : Collection<MailAddress>
     {
-        public MailAddressCollection() { }
+        public MailAddressCollection()
+        {
+        }
 
         public void Add(string addresses)
         {

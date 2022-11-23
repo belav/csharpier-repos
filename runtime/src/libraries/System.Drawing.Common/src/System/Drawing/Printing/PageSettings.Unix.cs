@@ -58,7 +58,9 @@ namespace System.Drawing.Printing
         private PrinterSettings printerSettings = null!;
 #pragma warning restore 649
 
-        public PageSettings() : this(new PrinterSettings()) { }
+        public PageSettings() : this(new PrinterSettings())
+        {
+        }
 
         public PageSettings(PrinterSettings printerSettings)
         {

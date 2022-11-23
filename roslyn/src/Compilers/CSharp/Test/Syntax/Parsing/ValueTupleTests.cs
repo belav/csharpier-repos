@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 {
     public class ValueTupleTests : ParsingTests
     {
-        public ValueTupleTests(ITestOutputHelper output) : base(output) { }
+        public ValueTupleTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

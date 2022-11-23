@@ -292,7 +292,10 @@ namespace System.Linq.Expressions.Tests
                     {
                         return i + 1;
                     },
-                (Action<object>)delegate { }
+                (Action<object>)
+                    delegate
+                    {
+                    }
             };
             for (int i = 0; i < array.Length; i++)
             {
@@ -316,7 +319,10 @@ namespace System.Linq.Expressions.Tests
                     {
                         return i + 1;
                     },
-                (Action<object>)delegate { }
+                (Action<object>)
+                    delegate
+                    {
+                    }
             };
             for (int i = 0; i < array.Length; i++)
             {

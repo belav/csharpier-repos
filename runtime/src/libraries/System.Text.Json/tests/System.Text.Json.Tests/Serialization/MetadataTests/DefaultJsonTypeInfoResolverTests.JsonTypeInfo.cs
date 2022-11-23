@@ -1065,7 +1065,9 @@ namespace System.Text.Json.Serialization.Tests
             public string B { get; set; }
             public string C { get; set; }
 
-            public ClassWithParameterizedConstructorAndWritableProperties() { }
+            public ClassWithParameterizedConstructorAndWritableProperties()
+            {
+            }
 
             [JsonConstructor]
             public ClassWithParameterizedConstructorAndWritableProperties(int a, string b)
@@ -1195,7 +1197,9 @@ namespace System.Text.Json.Serialization.Tests
             public bool E { get; set; }
             public int F { get; set; }
 
-            public ClassWithLargeParameterizedConstructor() { }
+            public ClassWithLargeParameterizedConstructor()
+            {
+            }
 
             [JsonConstructor]
             public ClassWithLargeParameterizedConstructor(
@@ -1579,13 +1583,41 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.NotEqual(JsonTypeInfoKind.Object, jti.Kind);
             Assert.Throws<InvalidOperationException>(() => jti.OnSerializing = null);
-            Assert.Throws<InvalidOperationException>(() => jti.OnSerializing = (obj => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    jti.OnSerializing = (
+                        obj =>
+                        {
+                        }
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() => jti.OnSerialized = null);
-            Assert.Throws<InvalidOperationException>(() => jti.OnSerialized = (obj => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    jti.OnSerialized = (
+                        obj =>
+                        {
+                        }
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() => jti.OnDeserializing = null);
-            Assert.Throws<InvalidOperationException>(() => jti.OnDeserializing = (obj => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    jti.OnDeserializing = (
+                        obj =>
+                        {
+                        }
+                    )
+            );
             Assert.Throws<InvalidOperationException>(() => jti.OnDeserialized = null);
-            Assert.Throws<InvalidOperationException>(() => jti.OnDeserialized = (obj => { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    jti.OnDeserialized = (
+                        obj =>
+                        {
+                        }
+                    )
+            );
         }
 
         public class ClassWithCallBacks

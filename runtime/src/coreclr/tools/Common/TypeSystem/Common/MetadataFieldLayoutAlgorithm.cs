@@ -319,7 +319,9 @@ namespace Internal.TypeSystem
         protected virtual void PrepareRuntimeSpecificStaticFieldLayout(
             TypeSystemContext context,
             ref ComputedStaticFieldLayout layout
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// Called during static field layout to finish static block layout
@@ -327,7 +329,9 @@ namespace Internal.TypeSystem
         protected virtual void FinalizeRuntimeSpecificStaticFieldLayout(
             TypeSystemContext context,
             ref ComputedStaticFieldLayout layout
-        ) { }
+        )
+        {
+        }
 
         protected ComputedInstanceFieldLayout ComputeExplicitFieldLayout(
             MetadataType type,
@@ -548,7 +552,9 @@ namespace Internal.TypeSystem
             ref LayoutInt baseOffset,
             bool requiresAlign8,
             bool requiresAlignedBase
-        ) { }
+        )
+        {
+        }
 
         protected ComputedInstanceFieldLayout ComputeAutoFieldLayout(
             MetadataType type,

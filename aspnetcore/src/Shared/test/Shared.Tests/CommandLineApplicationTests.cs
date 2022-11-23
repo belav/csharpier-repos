@@ -820,7 +820,12 @@ public class CommandLineApplicationTests
             "k",
             c =>
             {
-                subCmd = c.Command("run", _ => { });
+                subCmd = c.Command(
+                    "run",
+                    _ =>
+                    {
+                    }
+                );
                 c.OnExecute(() => 0);
             }
         );
@@ -842,7 +847,12 @@ public class CommandLineApplicationTests
             "k",
             c =>
             {
-                subCmd = c.Command("run", _ => { });
+                subCmd = c.Command(
+                    "run",
+                    _ =>
+                    {
+                    }
+                );
                 c.OnExecute(() => 0);
             },
             throwOnUnexpectedArg: false
@@ -867,7 +877,13 @@ public class CommandLineApplicationTests
             "k",
             c =>
             {
-                subCmd = c.Command("run", _ => { }, throwOnUnexpectedArg: false);
+                subCmd = c.Command(
+                    "run",
+                    _ =>
+                    {
+                    },
+                    throwOnUnexpectedArg: false
+                );
                 c.OnExecute(() => 0);
             }
         );

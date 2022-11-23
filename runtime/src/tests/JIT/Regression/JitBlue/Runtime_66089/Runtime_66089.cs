@@ -73,5 +73,7 @@ public class Runtime_66089
         Guid g39 = default,
         Guid g40 = default,
         Guid g41 = default
-    ) { }
+    )
+    {
+    }
 }

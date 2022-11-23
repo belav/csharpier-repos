@@ -42,7 +42,9 @@ namespace System.CommandLine.Rendering
 
         public bool IsInputRedirected => Console.IsInputRedirected;
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         public void Dispose()
         {

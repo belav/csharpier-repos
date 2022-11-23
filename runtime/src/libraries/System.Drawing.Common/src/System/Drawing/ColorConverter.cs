@@ -34,7 +34,9 @@ namespace System.Drawing
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ColorConverter() { }
+        public ColorConverter()
+        {
+        }
 
         /// <include file='doc\ColorConverter.uex' path='docs/doc[@for="ColorConverter.Colors"]/*' />
         /// <devdoc>

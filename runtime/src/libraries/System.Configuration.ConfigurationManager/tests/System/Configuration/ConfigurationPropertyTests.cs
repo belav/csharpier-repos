@@ -131,10 +131,14 @@ namespace System.ConfigurationTests
         }
 
         [TypeConverter(typeof(DummyCantConverter))]
-        public class SimpleConfigurationElement : ConfigurationElement { }
+        public class SimpleConfigurationElement : ConfigurationElement
+        {
+        }
 
         // By default can't convert from or to
-        public class DummyCantConverter : TypeConverter { }
+        public class DummyCantConverter : TypeConverter
+        {
+        }
 
         public class DummyCanConverter : TypeConverter
         {
@@ -160,7 +164,9 @@ namespace System.ConfigurationTests
         }
 
         [TypeConverter(typeof(DummyCanConverter))]
-        public class MyConvertibleClass { }
+        public class MyConvertibleClass
+        {
+        }
 
         [Fact]
         public void TypeConverterRecognized()
@@ -194,7 +200,9 @@ namespace System.ConfigurationTests
         }
 
         [TypeConverter(typeof(DummyCantConverter))]
-        public class MyUnconvertibleClass { }
+        public class MyUnconvertibleClass
+        {
+        }
 
         [Fact]
         public void UnconvertibleFailsOnConverterAccess()

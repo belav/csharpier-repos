@@ -7,7 +7,9 @@ public interface IFoo
 
 public class Foo : IFoo
 {
-    public void Tst() { }
+    public void Tst()
+    {
+    }
 }
 
 public abstract class BusinessBase<TYPE> where TYPE : BusinessBase<TYPE>, new()

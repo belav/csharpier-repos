@@ -14,7 +14,9 @@ public class TagHelperScopeManager
     public TagHelperScopeManager(
         Action<HtmlEncoder> startTagHelperWritingScope,
         Func<TagHelperContent> endTagHelperWritingScope
-    ) { }
+    )
+    {
+    }
 
     public TagHelperExecutionContext Begin(
         string tagName,

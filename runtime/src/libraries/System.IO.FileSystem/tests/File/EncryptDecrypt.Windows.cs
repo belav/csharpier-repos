@@ -78,7 +78,9 @@ namespace System.IO.Tests
                 {
                     description = record.FormatDescription();
                 }
-                catch (EventLogException) { }
+                catch (EventLogException)
+                {
+                }
 
                 if (
                     !garbage.Any(

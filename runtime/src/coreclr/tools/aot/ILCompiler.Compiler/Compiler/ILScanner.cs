@@ -237,13 +237,17 @@ namespace ILCompiler
                 message
                     + " "
                     + "You can work around by running the compilation with scanner disabled."
-            ) { }
+            )
+        {
+        }
     }
 
     public class ILScanResults : CompilationResults
     {
         internal ILScanResults(DependencyAnalyzerBase<NodeFactory> graph, NodeFactory factory)
-            : base(graph, factory) { }
+            : base(graph, factory)
+        {
+        }
 
         public AnalysisBasedInteropStubManager GetInteropStubManager(
             InteropStateManager stateManager,

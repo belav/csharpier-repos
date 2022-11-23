@@ -24,7 +24,9 @@ namespace System.Reflection.TypeLoading.Ecma
         public static readonly EcmaSignatureTypeProviderForToString Instance =
             new EcmaSignatureTypeProviderForToString();
 
-        private EcmaSignatureTypeProviderForToString() { }
+        private EcmaSignatureTypeProviderForToString()
+        {
+        }
 
         public string GetTypeFromDefinition(
             MetadataReader reader,

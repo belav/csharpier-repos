@@ -93,7 +93,10 @@ public class MetadataAttributePassTest
         var irDocument = new DocumentIntermediateNode()
         {
             DocumentKind = "test",
-            Options = RazorCodeGenerationOptions.Create((o) => { }),
+            Options = RazorCodeGenerationOptions.Create(
+                (o) => {
+                }
+            ),
         };
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
@@ -131,7 +134,10 @@ public class MetadataAttributePassTest
         var irDocument = new DocumentIntermediateNode()
         {
             DocumentKind = "test",
-            Options = RazorCodeGenerationOptions.Create((o) => { }),
+            Options = RazorCodeGenerationOptions.Create(
+                (o) => {
+                }
+            ),
         };
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
@@ -207,7 +213,10 @@ public class MetadataAttributePassTest
         var irDocument = new DocumentIntermediateNode()
         {
             DocumentKind = "test",
-            Options = RazorCodeGenerationOptions.Create((o) => { }),
+            Options = RazorCodeGenerationOptions.Create(
+                (o) => {
+                }
+            ),
         };
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
@@ -249,7 +258,10 @@ public class MetadataAttributePassTest
         var irDocument = new DocumentIntermediateNode()
         {
             DocumentKind = "test",
-            Options = RazorCodeGenerationOptions.Create((o) => { }),
+            Options = RazorCodeGenerationOptions.Create(
+                (o) => {
+                }
+            ),
         };
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
@@ -310,7 +322,10 @@ public class MetadataAttributePassTest
         var irDocument = new DocumentIntermediateNode()
         {
             DocumentKind = "test",
-            Options = RazorCodeGenerationOptions.Create((o) => { }),
+            Options = RazorCodeGenerationOptions.Create(
+                (o) => {
+                }
+            ),
         };
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode

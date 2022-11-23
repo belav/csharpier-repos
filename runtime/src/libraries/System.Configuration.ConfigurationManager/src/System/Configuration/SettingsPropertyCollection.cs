@@ -89,17 +89,29 @@ namespace System.Configuration
         // been stripped of their "index" parameters as there is no
         // visible index to this collection.
 
-        protected virtual void OnAdd(SettingsProperty property) { }
+        protected virtual void OnAdd(SettingsProperty property)
+        {
+        }
 
-        protected virtual void OnAddComplete(SettingsProperty property) { }
+        protected virtual void OnAddComplete(SettingsProperty property)
+        {
+        }
 
-        protected virtual void OnClear() { }
+        protected virtual void OnClear()
+        {
+        }
 
-        protected virtual void OnClearComplete() { }
+        protected virtual void OnClearComplete()
+        {
+        }
 
-        protected virtual void OnRemove(SettingsProperty property) { }
+        protected virtual void OnRemove(SettingsProperty property)
+        {
+        }
 
-        protected virtual void OnRemoveComplete(SettingsProperty property) { }
+        protected virtual void OnRemoveComplete(SettingsProperty property)
+        {
+        }
 
         // ICollection interface
         public int Count

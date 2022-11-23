@@ -34,7 +34,9 @@ namespace ILCompiler
                             var ecmaType = (EcmaType)assembly.GetObject(typeHandle);
                             WalkAncestorTypes(ecmaType);
                         }
-                        catch (TypeSystemException) { }
+                        catch (TypeSystemException)
+                        {
+                        }
                     }
 
                     foreach (MethodDefinitionHandle methodHandle in typeDefinition.GetMethods())
@@ -63,7 +65,9 @@ namespace ILCompiler
                                 if (ecmaMethod.IsVirtual)
                                     LookForVirtualOverrides(ecmaMethod);
                             }
-                            catch (TypeSystemException) { }
+                            catch (TypeSystemException)
+                            {
+                            }
                         }
                     }
                 }

@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             _allowFuzzyMatching = allowFuzzyMatching;
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+        }
 
         public static PatternMatcher CreatePatternMatcher(
             string pattern,

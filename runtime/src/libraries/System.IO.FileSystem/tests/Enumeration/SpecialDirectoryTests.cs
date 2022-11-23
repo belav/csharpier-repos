@@ -15,7 +15,9 @@ namespace System.IO.Tests.Enumeration
             public int ShouldRecurseCalls { get; private set; }
 
             public DirectoryRecursed(string directory, EnumerationOptions options)
-                : base(directory, options) { }
+                : base(directory, options)
+            {
+            }
 
             protected override string TransformEntry(ref FileSystemEntry entry) =>
                 new string(entry.FileName);

@@ -7,7 +7,9 @@ namespace System.Threading
     {
         private bool _requireWaitNotification;
 
-        public SynchronizationContext() { }
+        public SynchronizationContext()
+        {
+        }
 
         public static SynchronizationContext? Current =>
             Thread.CurrentThread._synchronizationContext;
@@ -24,12 +26,16 @@ namespace System.Threading
         /// <summary>
         ///     Optional override for subclasses, for responding to notification that operation is starting.
         /// </summary>
-        public virtual void OperationStarted() { }
+        public virtual void OperationStarted()
+        {
+        }
 
         /// <summary>
         ///     Optional override for subclasses, for responding to notification that operation has completed.
         /// </summary>
-        public virtual void OperationCompleted() { }
+        public virtual void OperationCompleted()
+        {
+        }
 
         [CLSCompliant(false)]
         public virtual int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)

@@ -76,7 +76,9 @@ namespace System.ConfigurationTests
                 public override void SetPropertyValues(
                     SettingsContext context,
                     SettingsPropertyValueCollection collection
-                ) { }
+                )
+                {
+                }
 
                 public override void Initialize(string name, NameValueCollection config)
                 {
@@ -105,7 +107,9 @@ namespace System.ConfigurationTests
 
 #nullable disable
 
-        private class PersistedSimpleSettings : SimpleSettings { }
+        private class PersistedSimpleSettings : SimpleSettings
+        {
+        }
 
         [Theory]
         [InlineData(true)]
@@ -236,7 +240,9 @@ namespace System.ConfigurationTests
             }
         }
 
-        private class TestProvider : LocalFileSettingsProvider { }
+        private class TestProvider : LocalFileSettingsProvider
+        {
+        }
 
         [Fact]
         public void SettingsProperty_SettingsWithAttributes_Ok()

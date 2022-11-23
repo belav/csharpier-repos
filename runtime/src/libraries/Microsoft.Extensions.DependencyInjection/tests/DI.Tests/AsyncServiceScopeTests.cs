@@ -95,7 +95,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
         public class FakeAsyncServiceScope : FakeSyncServiceScope, IAsyncDisposable
         {
-            public FakeAsyncServiceScope() : base() { }
+            public FakeAsyncServiceScope() : base()
+            {
+            }
 
             public bool DisposeAsyncCalled { get; private set; }
 

@@ -20,7 +20,9 @@ using RoslynTrigger = Microsoft.CodeAnalysis.Completion.CompletionTrigger;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     public abstract class AbstractCSharpCompletionProviderTests
-        : AbstractCSharpCompletionProviderTests<CSharpTestWorkspaceFixture> { }
+        : AbstractCSharpCompletionProviderTests<CSharpTestWorkspaceFixture>
+    {
+    }
 
     public abstract class AbstractCSharpCompletionProviderTests<TWorkspaceFixture>
         : AbstractCompletionProviderTests<TWorkspaceFixture>

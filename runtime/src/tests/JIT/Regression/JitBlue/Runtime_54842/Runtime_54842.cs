@@ -31,5 +31,7 @@ public class Runtime_54842
         return checked((uint)b);
     }
 
-    private static void Use(int value) { }
+    private static void Use(int value)
+    {
+    }
 }

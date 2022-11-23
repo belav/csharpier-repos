@@ -11,7 +11,9 @@ namespace TestSite;
 
 public class DummyServer : IServer
 {
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public Task StartAsync<TContext>(
         IHttpApplication<TContext> application,

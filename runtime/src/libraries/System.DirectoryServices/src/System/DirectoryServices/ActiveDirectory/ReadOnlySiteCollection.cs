@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ReadOnlySiteCollection : ReadOnlyCollectionBase
     {
-        internal ReadOnlySiteCollection() { }
+        internal ReadOnlySiteCollection()
+        {
+        }
 
         internal ReadOnlySiteCollection(ArrayList sites)
         {

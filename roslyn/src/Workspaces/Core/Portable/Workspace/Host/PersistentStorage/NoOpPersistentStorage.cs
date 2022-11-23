@@ -16,14 +16,18 @@ namespace Microsoft.CodeAnalysis.Host
         private static readonly IChecksummedPersistentStorage Instance =
             new NoOpPersistentStorage();
 
-        private NoOpPersistentStorage() { }
+        private NoOpPersistentStorage()
+        {
+        }
 
         public static IChecksummedPersistentStorage GetOrThrow(bool throwOnFailure) =>
             throwOnFailure
                 ? throw new InvalidOperationException("Database was not supported")
                 : Instance;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public ValueTask DisposeAsync()
         {

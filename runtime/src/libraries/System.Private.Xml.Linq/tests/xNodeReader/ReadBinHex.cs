@@ -1000,7 +1000,9 @@ namespace CoreXml.Test.XLinq
                             sr.MoveToFirstAttribute();
                             sr.MoveToFirstAttribute();
                             byte[] bytes = new byte[4];
-                            while ((sr.ReadContentAsBinHex(bytes, 0, bytes.Length)) > 0) { }
+                            while ((sr.ReadContentAsBinHex(bytes, 0, bytes.Length)) > 0)
+                            {
+                            }
                         }
                     }
                 }

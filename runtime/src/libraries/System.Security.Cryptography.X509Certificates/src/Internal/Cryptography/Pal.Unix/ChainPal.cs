@@ -68,7 +68,9 @@ namespace Internal.Cryptography.Pal
             // Until we support the Disallowed store, ensure it's empty (which is done by the ctor)
             using (
                 new X509Store(StoreName.Disallowed, StoreLocation.CurrentUser, OpenFlags.ReadOnly)
-            ) { }
+            )
+            {
+            }
 
             TimeSpan downloadTimeout = timeout;
 

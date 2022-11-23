@@ -128,7 +128,9 @@ sealed class ConditionalTest : ITestInfo
     }
 
     public ConditionalTest(ITestInfo innerTest, Xunit.TestPlatforms platform)
-        : this(innerTest, GetPlatformConditionFromTestPlatform(platform)) { }
+        : this(innerTest, GetPlatformConditionFromTestPlatform(platform))
+    {
+    }
 
     public string TestNameExpression { get; }
 

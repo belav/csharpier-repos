@@ -11,6 +11,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     internal sealed class NotImplementedMetadataException : Exception
     {
         internal NotImplementedMetadataException(NotImplementedException inner)
-            : base(string.Empty, inner) { }
+            : base(string.Empty, inner)
+        {
+        }
     }
 }

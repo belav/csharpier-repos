@@ -27,7 +27,9 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class without a license
         /// provider.
         /// </summary>
-        public LicenseProviderAttribute() : this((string?)null) { }
+        public LicenseProviderAttribute() : this((string?)null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class with

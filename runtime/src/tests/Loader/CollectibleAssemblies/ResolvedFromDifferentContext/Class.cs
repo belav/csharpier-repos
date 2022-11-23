@@ -9,6 +9,8 @@ namespace TestClass
             TestInterface.Class.Test();
         }
 
-        public void Test() { }
+        public void Test()
+        {
+        }
     }
 }

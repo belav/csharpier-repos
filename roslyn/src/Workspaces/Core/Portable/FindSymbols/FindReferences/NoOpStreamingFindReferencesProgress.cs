@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public IStreamingProgressTracker ProgressTracker { get; } = new NoOpProgressTracker();
 
-        private NoOpStreamingFindReferencesProgress() { }
+        private NoOpStreamingFindReferencesProgress()
+        {
+        }
 
         public ValueTask OnCompletedAsync(CancellationToken cancellationToken) => default;
 

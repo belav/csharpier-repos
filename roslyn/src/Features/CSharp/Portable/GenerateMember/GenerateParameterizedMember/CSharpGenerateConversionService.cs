@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateConversionService() { }
+        public CSharpGenerateConversionService()
+        {
+        }
 
         protected override bool IsImplicitConversionGeneration(SyntaxNode node)
         {

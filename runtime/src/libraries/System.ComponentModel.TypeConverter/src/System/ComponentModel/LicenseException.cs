@@ -23,7 +23,9 @@ namespace System.ComponentModel
         /// specified type.
         /// </summary>
         public LicenseException(Type? type)
-            : this(type, null, SR.Format(SR.LicExceptionTypeOnly, type?.FullName)) { }
+            : this(type, null, SR.Format(SR.LicExceptionTypeOnly, type?.FullName))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
@@ -38,7 +40,9 @@ namespace System.ComponentModel
                     type?.FullName,
                     instance?.GetType().FullName
                 )
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
@@ -71,7 +75,9 @@ namespace System.ComponentModel
         /// Need this constructor since Exception implements ISerializable.
         /// </summary>
         protected LicenseException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         /// <summary>
         /// Gets the type of the component that was not granted a license.

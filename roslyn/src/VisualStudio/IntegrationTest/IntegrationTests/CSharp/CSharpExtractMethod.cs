@@ -41,7 +41,9 @@ public class Program
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpExtractMethod(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpExtractMethod)) { }
+            : base(instanceFactory, nameof(CSharpExtractMethod))
+        {
+        }
 
         [WpfFact]
         public void SimpleExtractMethod()

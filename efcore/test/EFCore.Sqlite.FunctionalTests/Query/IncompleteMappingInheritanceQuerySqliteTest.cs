@@ -8,7 +8,9 @@ public class IncompleteMappingInheritanceQuerySqliteTest
 {
     public IncompleteMappingInheritanceQuerySqliteTest(
         IncompleteMappingInheritanceQuerySqliteFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public override void Can_insert_update_delete()
     {

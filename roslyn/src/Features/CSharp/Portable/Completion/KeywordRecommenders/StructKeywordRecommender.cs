@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.ReadOnlyKeyword
         };
 
-        public StructKeywordRecommender() : base(SyntaxKind.StructKeyword) { }
+        public StructKeywordRecommender() : base(SyntaxKind.StructKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

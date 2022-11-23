@@ -27,7 +27,9 @@ namespace System.IO.Tests.Enumeration
         private class GetPropertiesEnumerator : FileSystemEnumerator<FileSystemEntryProperties>
         {
             public GetPropertiesEnumerator(string directory, EnumerationOptions options)
-                : base(directory, options) { }
+                : base(directory, options)
+            {
+            }
 
             protected override bool ContinueOnError(int error)
             {

@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
 
         public MessageFilter()
             : this(timeout: TimeSpan.FromSeconds(60), retryDelay: TimeSpan.FromMilliseconds(150))
-        { }
+        {
+        }
 
         public MessageFilter(TimeSpan timeout, TimeSpan retryDelay)
         {

@@ -88,7 +88,9 @@ namespace System.Xml.Xsl.Xslt
             }
             else
             {
-                while (_records[--_lastRecord].scopeCount == 0) { }
+                while (_records[--_lastRecord].scopeCount == 0)
+                {
+                }
                 _lastScopes = _records[_lastRecord].scopeCount;
                 _lastScopes--;
             }

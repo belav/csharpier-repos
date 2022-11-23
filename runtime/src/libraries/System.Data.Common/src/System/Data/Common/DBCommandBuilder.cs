@@ -354,7 +354,9 @@ namespace System.Data.Common
         private string? _parameterMarkerFormat;
         private int _parameterNameMaxLength;
 
-        protected DbCommandBuilder() : base() { }
+        protected DbCommandBuilder() : base()
+        {
+        }
 
         [DefaultValueAttribute(ConflictOption.CompareAllSearchableValues)]
         public virtual ConflictOption ConflictOption

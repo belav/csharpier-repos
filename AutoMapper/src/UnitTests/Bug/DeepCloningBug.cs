@@ -10,7 +10,9 @@ public class DeepCloningBug : AutoMapperSpecBase
         public Inner Foo { get; set; }
     }
 
-    public class Inner { }
+    public class Inner
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

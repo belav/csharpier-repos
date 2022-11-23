@@ -15,7 +15,9 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
         public InfoHdrSmall Header { get; set; }
         public GcSlotTable SlotTable { get; set; }
 
-        public GcInfo() { }
+        public GcInfo()
+        {
+        }
 
         /// <summary>
         /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/gcdump/i386/gcdumpx86.cpp">GCDump::DumpGCTable</a>

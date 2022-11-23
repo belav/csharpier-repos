@@ -119,7 +119,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                         // Wait for the task to complete
                         _listenTask
                             .ContinueWith(
-                                _ => { },
+                                _ =>
+                                {
+                                },
                                 CancellationToken.None,
                                 TaskContinuationOptions.ExecuteSynchronously,
                                 TaskScheduler.Default

@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class LocalSymbol : Symbol, ILocalSymbolInternal
     {
-        protected LocalSymbol() { }
+        protected LocalSymbol()
+        {
+        }
 
         internal abstract LocalDeclarationKind DeclarationKind { get; }
 

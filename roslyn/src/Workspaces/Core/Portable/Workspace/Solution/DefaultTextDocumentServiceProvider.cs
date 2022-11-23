@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis
     {
         public static readonly DefaultTextDocumentServiceProvider Instance = new();
 
-        private DefaultTextDocumentServiceProvider() { }
+        private DefaultTextDocumentServiceProvider()
+        {
+        }
 
         public TService GetService<TService>() where TService : class, IDocumentService
         {

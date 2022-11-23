@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTupleToStruct
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertTupleToStructCodeRefactoringProvider() { }
+        public CSharpConvertTupleToStructCodeRefactoringProvider()
+        {
+        }
 
         protected override ArgumentSyntax GetArgumentWithChangedName(
             ArgumentSyntax argument,

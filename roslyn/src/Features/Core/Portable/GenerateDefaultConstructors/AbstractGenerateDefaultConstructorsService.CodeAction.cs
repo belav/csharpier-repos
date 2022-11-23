@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                     new[] { constructor },
                     GetDisplayText(state, constructor),
                     fallbackOptions
-                ) { }
+                )
+            {
+            }
 
             private static string GetDisplayText(State state, IMethodSymbol constructor)
             {

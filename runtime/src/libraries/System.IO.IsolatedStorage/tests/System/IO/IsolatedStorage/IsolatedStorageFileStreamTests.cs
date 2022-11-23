@@ -62,7 +62,9 @@ namespace System.IO.IsolatedStorage
             public bool DisposeInvoked;
 
             public OverridesDisposeIsolatedStorageFileStream(string path, FileMode mode)
-                : base(path, mode) { }
+                : base(path, mode)
+            {
+            }
 
             protected override void Dispose(bool disposing)
             {

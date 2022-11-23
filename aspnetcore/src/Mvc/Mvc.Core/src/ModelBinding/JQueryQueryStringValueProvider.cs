@@ -23,5 +23,7 @@ public class JQueryQueryStringValueProvider : JQueryValueProvider
         BindingSource bindingSource,
         IDictionary<string, StringValues> values,
         CultureInfo? culture
-    ) : base(bindingSource, values, culture) { }
+    ) : base(bindingSource, values, culture)
+    {
+    }
 }

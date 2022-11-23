@@ -26,7 +26,9 @@ namespace System.Web.Razor
                 parserResults.ParserErrors,
                 generatedCode,
                 designTimeLineMappings
-            ) { }
+            )
+        {
+        }
 
         public GeneratorResults(
             Block document,
@@ -40,7 +42,9 @@ namespace System.Web.Razor
                 parserErrors,
                 generatedCode,
                 designTimeLineMappings
-            ) { }
+            )
+        {
+        }
 
         protected GeneratorResults(
             bool success,

@@ -7,7 +7,9 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class TopLevelNameCollection : ReadOnlyCollectionBase
     {
-        internal TopLevelNameCollection() { }
+        internal TopLevelNameCollection()
+        {
+        }
 
         public TopLevelName this[int index] => (TopLevelName)InnerList[index]!;
 

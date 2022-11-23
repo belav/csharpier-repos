@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ReturnStatementHighlighter() { }
+        public ReturnStatementHighlighter()
+        {
+        }
 
         protected override void AddHighlights(
             ReturnStatementSyntax returnStatement,

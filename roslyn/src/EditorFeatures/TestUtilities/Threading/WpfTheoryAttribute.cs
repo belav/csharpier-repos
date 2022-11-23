@@ -15,5 +15,7 @@ namespace Roslyn.Test.Utilities
         "Roslyn.Test.Utilities.WpfTheoryDiscoverer",
         "Microsoft.CodeAnalysis.EditorFeatures.Test.Utilities"
     )]
-    public class WpfTheoryAttribute : TheoryAttribute { }
+    public class WpfTheoryAttribute : TheoryAttribute
+    {
+    }
 }

@@ -425,7 +425,9 @@ namespace System
             SetValueImpl(value, (int)index);
         }
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         private static int IndexOfImpl<T>(T[] array, T value, int startIndex, int count)
         {

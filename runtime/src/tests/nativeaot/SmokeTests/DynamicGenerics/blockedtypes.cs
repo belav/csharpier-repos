@@ -9,12 +9,16 @@ using TypeOfRepo;
 
 namespace System.Runtime.CompilerServices
 {
-    internal class __BlockReflectionAttribute : Attribute { }
+    internal class __BlockReflectionAttribute : Attribute
+    {
+    }
 }
 
 public class BlockedTypesTests
 {
-    public class My { }
+    public class My
+    {
+    }
 
     [System.Runtime.CompilerServices.__BlockReflection]
     private class BlockedGenericType<T>

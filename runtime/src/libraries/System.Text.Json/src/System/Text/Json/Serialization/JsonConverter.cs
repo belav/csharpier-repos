@@ -14,7 +14,9 @@ namespace System.Text.Json.Serialization
     /// </summary>
     public abstract partial class JsonConverter
     {
-        internal JsonConverter() { }
+        internal JsonConverter()
+        {
+        }
 
         /// <summary>
         /// Determines whether the type can be converted.
@@ -178,7 +180,9 @@ namespace System.Text.Json.Serialization
         internal virtual void ConfigureJsonTypeInfo(
             JsonTypeInfo jsonTypeInfo,
             JsonSerializerOptions options
-        ) { }
+        )
+        {
+        }
 
         /// <summary>
         /// Additional reflection-specific configuration required by certain collection converters.
@@ -188,6 +192,8 @@ namespace System.Text.Json.Serialization
         internal virtual void ConfigureJsonTypeInfoUsingReflection(
             JsonTypeInfo jsonTypeInfo,
             JsonSerializerOptions options
-        ) { }
+        )
+        {
+        }
     }
 }

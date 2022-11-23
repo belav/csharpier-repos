@@ -33,7 +33,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LoadedSolutionScopeFilterFactory() { }
+        public LoadedSolutionScopeFilterFactory()
+        {
+        }
 
         public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl)
         {
@@ -86,7 +88,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
         private const int LoadedSolutionFilterHandlerFilterId = 20;
 
         public LoadedSolutionFilterHandler(string displayName)
-            : base(LoadedSolutionFilterHandlerFilterId, displayName, ItemOrigin.ExactMetadata) { }
+            : base(LoadedSolutionFilterHandlerFilterId, displayName, ItemOrigin.ExactMetadata)
+        {
+        }
     }
 
     [Export(typeof(IScopeFilterFactory))]
@@ -101,7 +105,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AllSourcesFilterHandlerFactory() { }
+        public AllSourcesFilterHandlerFactory()
+        {
+        }
 
         public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl) =>
             new AllSourcesFilterHandler();
@@ -116,7 +122,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
                 AllSourcesFilterHandlerFilterId,
                 ServicesVSResources.All_sources,
                 ItemOrigin.IndexedInThirdParty
-            ) { }
+            )
+        {
+        }
     }
 
     [Export(typeof(IScopeFilterFactory))]
@@ -129,7 +137,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EntireRepositoryFilterHandlerFactory() { }
+        public EntireRepositoryFilterHandlerFactory()
+        {
+        }
 
         public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl) =>
             new EntireRepositoryFilterHandler();
@@ -144,7 +154,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
                 EntireRepositoryFilterHandlerFilterId,
                 ServicesVSResources.Entire_repository,
                 ItemOrigin.IndexedInRepo
-            ) { }
+            )
+        {
+        }
     }
 
     internal class ItemOriginFilter : IEntryFilter

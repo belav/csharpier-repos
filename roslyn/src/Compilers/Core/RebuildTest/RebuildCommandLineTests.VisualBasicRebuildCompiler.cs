@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                     StandardBuildPaths,
                     additionalReferenceDirectories: null,
                     new DefaultAnalyzerAssemblyLoader()
-                ) { }
+                )
+            {
+            }
         }
     }
 }

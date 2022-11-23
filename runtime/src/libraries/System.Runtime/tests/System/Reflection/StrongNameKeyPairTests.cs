@@ -71,7 +71,9 @@ namespace System.Reflection.Tests
         private class SubStrongNameKeyPair : StrongNameKeyPair
         {
             public SubStrongNameKeyPair(SerializationInfo info, StreamingContext context)
-                : base(info, context) { }
+                : base(info, context)
+            {
+            }
         }
 #pragma warning restore SYSLIB0017
     }

@@ -104,7 +104,9 @@ public class ConnectionLimitTests : LoggedTest
                         // this may throw IOException, depending on how fast Kestrel closes the socket
                         await rejected.SendEmptyGetAsKeepAlive();
                     }
-                    catch { }
+                    catch
+                    {
+                    }
 
                     // connection should close without sending any data
                     await rejected.WaitForConnectionClose();
@@ -153,7 +155,9 @@ public class ConnectionLimitTests : LoggedTest
                             // this may throw IOException, depending on how fast Kestrel closes the socket
                             await connection.SendEmptyGetAsKeepAlive();
                         }
-                        catch { }
+                        catch
+                        {
+                        }
 
                         // connection should close without sending any data
                         await connection.WaitForConnectionClose();

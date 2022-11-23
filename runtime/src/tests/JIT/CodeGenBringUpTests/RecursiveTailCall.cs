@@ -25,9 +25,13 @@ public struct Struct8
     }
 }
 
-class GenericClass<T> { }
+class GenericClass<T>
+{
+}
 
-class GenericException<T> : Exception { }
+class GenericException<T> : Exception
+{
+}
 
 public class Test_RecursiveTailCall
 {

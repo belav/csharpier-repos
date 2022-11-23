@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             : this(
                 optionService,
                 Path.Combine(Path.GetTempPath(), "Roslyn", "Telemetry", GetLogFileName())
-            ) { }
+            )
+        {
+        }
 
         private static string GetLogFileName() =>
             DateTime.Now.ToString().Replace(' ', '_').Replace('/', '_').Replace(':', '_') + ".log";

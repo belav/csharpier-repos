@@ -52,6 +52,8 @@ public class ProviderSpecificServicesTest
 
     private class ConstructorTestContext1A : DbContext
     {
-        public ConstructorTestContext1A(DbContextOptions options) : base(options) { }
+        public ConstructorTestContext1A(DbContextOptions options) : base(options)
+        {
+        }
     }
 }

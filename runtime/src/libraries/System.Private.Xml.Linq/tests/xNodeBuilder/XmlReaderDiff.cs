@@ -166,7 +166,9 @@ namespace CoreXml.Test.XLinq
                             filteredReader.MoveToAttribute(filteredAttrs.Length);
                             TestLog.Compare(false, "READER over reached the index");
                         }
-                        catch (ArgumentOutOfRangeException) { }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                        }
                     }
 
                     // does not underreach the index
@@ -176,7 +178,9 @@ namespace CoreXml.Test.XLinq
                             filteredReader.MoveToAttribute(-1);
                             TestLog.Compare(false, "READER under reached the index");
                         }
-                        catch (ArgumentOutOfRangeException) { }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                        }
                     }
 
                     // Verify string / string,string indexers consistency

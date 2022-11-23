@@ -98,7 +98,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         receiverTypeNameToExtensionMethodMapBuilder.ToImmutable()
                     );
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 return null;
             }

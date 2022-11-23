@@ -939,19 +939,25 @@ namespace System.Xml.Tests
                     DataReader.ResolveEntity();
                     CError.Compare(false, "failed0");
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
                 try
                 {
                     DataReader.ReadContentAsObject();
                     CError.Compare(false, "failed1");
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
                 try
                 {
                     DataReader.ReadContentAsString();
                     CError.Compare(false, "failed2");
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException)
+                {
+                }
             }
             return TEST_PASS;
         }
@@ -1045,19 +1051,25 @@ namespace System.Xml.Tests
                 DataReader.ResolveEntity();
                 CError.Compare(false, "failed0");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
             try
             {
                 DataReader.ReadContentAsObject();
                 CError.Compare(false, "failed1");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
             try
             {
                 DataReader.ReadContentAsString();
                 CError.Compare(false, "failed2");
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
 
             return TEST_PASS;
         }

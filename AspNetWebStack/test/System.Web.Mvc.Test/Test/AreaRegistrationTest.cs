@@ -97,7 +97,9 @@ namespace System.Web.Mvc.Test
     public class AreaRegistrationTest_NoConstructorAreaRegistration
         : AreaRegistrationTest_AreaRegistration
     {
-        private AreaRegistrationTest_NoConstructorAreaRegistration() { }
+        private AreaRegistrationTest_NoConstructorAreaRegistration()
+        {
+        }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {

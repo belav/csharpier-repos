@@ -16,14 +16,18 @@ namespace System.Text.Json.Serialization.Tests
 
     public class PrivateParameterlessCtor
     {
-        private PrivateParameterlessCtor() { }
+        private PrivateParameterlessCtor()
+        {
+        }
     }
 
     public class PrivateParameterizedCtor
     {
         public int X { get; }
 
-        private PrivateParameterizedCtor(int x) { }
+        private PrivateParameterizedCtor(int x)
+        {
+        }
     }
 
     public class PrivateParameterizedCtor_WithAttribute
@@ -36,14 +40,18 @@ namespace System.Text.Json.Serialization.Tests
 
     public class InternalParameterlessCtor
     {
-        internal InternalParameterlessCtor() { }
+        internal InternalParameterlessCtor()
+        {
+        }
     }
 
     public class InternalParameterizedCtor
     {
         public int X { get; }
 
-        internal InternalParameterizedCtor(int x) { }
+        internal InternalParameterizedCtor(int x)
+        {
+        }
     }
 
     public class InternalParameterizedCtor_WithAttribute
@@ -56,14 +64,18 @@ namespace System.Text.Json.Serialization.Tests
 
     public class ProtectedParameterlessCtor
     {
-        protected ProtectedParameterlessCtor() { }
+        protected ProtectedParameterlessCtor()
+        {
+        }
     }
 
     public class ProtectedParameterizedCtor
     {
         public int X { get; }
 
-        protected ProtectedParameterizedCtor(int x) { }
+        protected ProtectedParameterizedCtor(int x)
+        {
+        }
     }
 
     public class ProtectedParameterizedCtor_WithAttribute
@@ -77,43 +89,57 @@ namespace System.Text.Json.Serialization.Tests
     public class PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes
     {
         [JsonConstructor]
-        private PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes() { }
+        private PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes()
+        {
+        }
 
         [JsonConstructor]
         internal PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes(
             int value
-        ) { }
+        )
+        {
+        }
     }
 
     public class ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes
     {
         [JsonConstructor]
-        protected ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes() { }
+        protected ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes()
+        {
+        }
 
         [JsonConstructor]
         private ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes(
             int value
-        ) { }
+        )
+        {
+        }
     }
 
     public class PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes
     {
         [JsonConstructor]
-        public PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes() { }
+        public PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes()
+        {
+        }
 
         [JsonConstructor]
         private PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes(int value)
-        { }
+        {
+        }
     }
 
     public class PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes
     {
         [JsonConstructor]
-        public PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes(int value) { }
+        public PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes(int value)
+        {
+        }
 
         [JsonConstructor]
         public PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes(float value)
-        { }
+        {
+        }
     }
 
     public struct Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes
@@ -121,12 +147,16 @@ namespace System.Text.Json.Serialization.Tests
         [JsonConstructor]
         public Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes(
             float value
-        ) { }
+        )
+        {
+        }
 
         [JsonConstructor]
         private Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes(
             int value
-        ) { }
+        )
+        {
+        }
     }
 
     public struct Point_2D_Struct
@@ -180,7 +210,9 @@ namespace System.Text.Json.Serialization.Tests
         public int MyInt { get; private set; }
         public string MyString { get; private set; }
 
-        public SinglePublicParameterizedCtor() { }
+        public SinglePublicParameterizedCtor()
+        {
+        }
 
         public SinglePublicParameterizedCtor(int myInt, string myString)
         {
@@ -194,7 +226,9 @@ namespace System.Text.Json.Serialization.Tests
         public int MyInt { get; private set; }
         public string MyString { get; private set; }
 
-        public SingleParameterlessCtor_MultiplePublicParameterizedCtor() { }
+        public SingleParameterlessCtor_MultiplePublicParameterizedCtor()
+        {
+        }
 
         public SingleParameterlessCtor_MultiplePublicParameterizedCtor(int myInt)
         {
@@ -253,7 +287,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public int MyInt { get; private set; }
 
-        private PrivateParameterlessConstructor_PublicParameterizedCtor() { }
+        private PrivateParameterlessConstructor_PublicParameterizedCtor()
+        {
+        }
 
         public PrivateParameterlessConstructor_PublicParameterizedCtor(int myInt)
         {
@@ -287,7 +323,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public int MyInt { get; private set; }
 
-        private PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute() { }
+        private PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute()
+        {
+        }
 
         [JsonConstructor]
         public PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute(int myInt)
@@ -373,7 +411,9 @@ namespace System.Text.Json.Serialization.Tests
         public int MyInt { get; private set; }
         public string MyString { get; private set; }
 
-        public ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute() { }
+        public ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute()
+        {
+        }
 
         [JsonConstructor]
         public ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute(int myInt)
@@ -416,7 +456,9 @@ namespace System.Text.Json.Serialization.Tests
         public string MyString { get; private set; }
 
         [JsonConstructor]
-        public PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes() { }
+        public PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes()
+        {
+        }
 
         [JsonConstructor]
         public PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes(
@@ -476,7 +518,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonConstructor]
         public Point_2D(int x, int y) => (X, Y) = (x, y);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -496,7 +540,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonConstructor]
         public Point_3D(int x, int y, int z = 50) => (X, Y, Z) = (x, y, z);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -523,7 +569,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonExtensionData]
         public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -674,7 +722,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -818,7 +868,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -1091,7 +1143,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -1483,7 +1537,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static byte[] Data => Encoding.UTF8.GetBytes(Json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -2134,7 +2190,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -2171,7 +2229,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -2227,7 +2287,9 @@ namespace System.Text.Json.Serialization.Tests
         public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
         [JsonConstructor]
-        public SimpleClassWithParameterizedCtor_GenericDictionary_JsonElementExt(int x) { }
+        public SimpleClassWithParameterizedCtor_GenericDictionary_JsonElementExt(int x)
+        {
+        }
     }
 
     public class SimpleClassWithParameterizedCtor_GenericDictionary_ObjectExt
@@ -2238,7 +2300,9 @@ namespace System.Text.Json.Serialization.Tests
         public Dictionary<string, object> ExtensionData { get; set; }
 
         [JsonConstructor]
-        public SimpleClassWithParameterizedCtor_GenericDictionary_ObjectExt(int x) { }
+        public SimpleClassWithParameterizedCtor_GenericDictionary_ObjectExt(int x)
+        {
+        }
     }
 
     public class SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_JsonElementExt
@@ -2249,7 +2313,9 @@ namespace System.Text.Json.Serialization.Tests
         public GenericIDictionaryWrapper<string, JsonElement> ExtensionData { get; set; }
 
         [JsonConstructor]
-        public SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_JsonElementExt(int x) { }
+        public SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_JsonElementExt(int x)
+        {
+        }
     }
 
     public class SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_ObjectExt
@@ -2260,7 +2326,9 @@ namespace System.Text.Json.Serialization.Tests
         public GenericIDictionaryWrapper<string, object> ExtensionData { get; set; }
 
         [JsonConstructor]
-        public SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_ObjectExt(int x) { }
+        public SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_ObjectExt(int x)
+        {
+        }
     }
 
     public class Parameterized_IndexViewModel_Immutable : ITestClass
@@ -2309,7 +2377,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -2495,7 +2565,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -2524,7 +2596,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public Point_MembersHave_JsonPropertyName(int x, int y) => (X, Y) = (x, y);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public static readonly string s_json = @"{""XValue"":1,""YValue"":2}";
 
@@ -2547,7 +2621,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public Point_MembersHave_JsonConverter(int x, int y) => (X, Y) = (x, y);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public static readonly string s_json = @"{""X"":1,""Y"":2}";
 
@@ -2570,7 +2646,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public Point_MembersHave_JsonIgnore(int x, int y = 5) => (X, Y) = (x, y);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public static readonly string s_json = @"{""X"":1,""Y"":2}";
 
@@ -2595,7 +2673,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public Point_MembersHave_JsonInclude(int x, int y, int z) => (X, Y, Z) = (x, y, z);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public static readonly string s_json = @"{""X"":1,""Y"":2,""Z"":3}";
 
@@ -2636,7 +2716,9 @@ namespace System.Text.Json.Serialization.Tests
             int e
         ) => (A, B, C, D, E) = (a, b, c, d, e);
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public static readonly string s_json =
             @"{""A"":1,""B"":""NaN"",""C"":""2"",""D"": 3,""E"":""4""}";
@@ -2672,7 +2754,9 @@ namespace System.Text.Json.Serialization.Tests
 
         public int Url { get; }
 
-        public Url_BindTo_OneConstructorParameter(int url) { }
+        public Url_BindTo_OneConstructorParameter(int url)
+        {
+        }
     }
 
     public class Point_MultipleMembers_BindTo_OneConstructorParameter_Variant
@@ -2681,12 +2765,16 @@ namespace System.Text.Json.Serialization.Tests
 
         public int x { get; }
 
-        public Point_MultipleMembers_BindTo_OneConstructorParameter_Variant(int x) { }
+        public Point_MultipleMembers_BindTo_OneConstructorParameter_Variant(int x)
+        {
+        }
     }
 
     public class Point_Without_Members
     {
-        public Point_Without_Members(int x, int y) { }
+        public Point_Without_Members(int x, int y)
+        {
+        }
     }
 
     public class Point_With_MismatchedMembers
@@ -2694,7 +2782,9 @@ namespace System.Text.Json.Serialization.Tests
         public int X { get; }
         public float Y { get; }
 
-        public Point_With_MismatchedMembers(int x, int y) { }
+        public Point_With_MismatchedMembers(int x, int y)
+        {
+        }
     }
 
     public class WrapperFor_Point_With_MismatchedMembers
@@ -2741,7 +2831,9 @@ namespace System.Text.Json.Serialization.Tests
             Arr = arr;
         }
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -2770,7 +2862,9 @@ namespace System.Text.Json.Serialization.Tests
             Dict = dict;
         }
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {
@@ -2800,7 +2894,9 @@ namespace System.Text.Json.Serialization.Tests
             Obj = obj;
         }
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+        }
 
         public void Verify()
         {

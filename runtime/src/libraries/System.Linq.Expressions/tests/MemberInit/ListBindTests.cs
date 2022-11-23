@@ -25,7 +25,9 @@ namespace System.Linq.Expressions.Tests
 
             public List<T> WriteOnlyList
             {
-                set { }
+                set
+                {
+                }
             }
 
             public List<T> GetList()

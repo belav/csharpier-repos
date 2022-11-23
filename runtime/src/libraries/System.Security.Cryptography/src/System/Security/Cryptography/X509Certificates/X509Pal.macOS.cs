@@ -155,7 +155,9 @@ namespace System.Security.Cryptography.X509Certificates
                             }
                         }
                     }
-                    catch (CryptographicException) { }
+                    catch (CryptographicException)
+                    {
+                    }
                 }
 
                 if (contentType == X509ContentType.Unknown)

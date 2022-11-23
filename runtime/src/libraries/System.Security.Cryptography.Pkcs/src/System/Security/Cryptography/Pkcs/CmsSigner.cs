@@ -72,13 +72,19 @@ namespace System.Security.Cryptography.Pkcs
             }
         }
 
-        public CmsSigner() : this(SubjectIdentifierType.IssuerAndSerialNumber, null) { }
+        public CmsSigner() : this(SubjectIdentifierType.IssuerAndSerialNumber, null)
+        {
+        }
 
         public CmsSigner(SubjectIdentifierType signerIdentifierType)
-            : this(signerIdentifierType, null) { }
+            : this(signerIdentifierType, null)
+        {
+        }
 
         public CmsSigner(X509Certificate2? certificate)
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate) { }
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate)
+        {
+        }
 
 #if NETCOREAPP
         [Obsolete(
@@ -91,13 +97,17 @@ namespace System.Security.Cryptography.Pkcs
         public CmsSigner(CspParameters parameters) => throw new PlatformNotSupportedException();
 
         public CmsSigner(SubjectIdentifierType signerIdentifierType, X509Certificate2? certificate)
-            : this(signerIdentifierType, certificate, null) { }
+            : this(signerIdentifierType, certificate, null)
+        {
+        }
 
         public CmsSigner(
             SubjectIdentifierType signerIdentifierType,
             X509Certificate2? certificate,
             AsymmetricAlgorithm? privateKey
-        ) : this(signerIdentifierType, certificate, privateKey, signaturePadding: null) { }
+        ) : this(signerIdentifierType, certificate, privateKey, signaturePadding: null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the CmsSigner class with a specified signer
@@ -127,7 +137,9 @@ namespace System.Security.Cryptography.Pkcs
                 certificate,
                 (AsymmetricAlgorithm?)privateKey,
                 signaturePadding
-            ) { }
+            )
+        {
+        }
 
         private CmsSigner(
             SubjectIdentifierType signerIdentifierType,

@@ -65,7 +65,9 @@ namespace ContextualReflectionTest
             {
                 action();
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 Xunit.Assert.Equal(expected, ResolveEvent);

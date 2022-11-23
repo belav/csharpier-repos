@@ -1391,14 +1391,20 @@ namespace System.Collections.ObjectModel.Tests
 
         private class StringKeyedCollection<TItem> : KeyedCollection<string, TItem>
         {
-            public StringKeyedCollection() : base() { }
+            public StringKeyedCollection() : base()
+            {
+            }
 
-            public StringKeyedCollection(IEqualityComparer<string> comparer) : base(comparer) { }
+            public StringKeyedCollection(IEqualityComparer<string> comparer) : base(comparer)
+            {
+            }
 
             public StringKeyedCollection(
                 IEqualityComparer<string> comparer,
                 int dictionaryCreationThreshold
-            ) : base(comparer, dictionaryCreationThreshold) { }
+            ) : base(comparer, dictionaryCreationThreshold)
+            {
+            }
 
             public Func<TItem, string> GetKeyForItemHandler { get; set; }
 

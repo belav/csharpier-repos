@@ -12,9 +12,13 @@ namespace System.Security.Permissions
 #endif
     public class ResourcePermissionBaseEntry
     {
-        public ResourcePermissionBaseEntry() { }
+        public ResourcePermissionBaseEntry()
+        {
+        }
 
-        public ResourcePermissionBaseEntry(int permissionAccess, string[] permissionAccessPath) { }
+        public ResourcePermissionBaseEntry(int permissionAccess, string[] permissionAccessPath)
+        {
+        }
 
         public int PermissionAccess { get; }
         public string[] PermissionAccessPath { get; }

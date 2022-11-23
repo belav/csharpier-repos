@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDocumentTextDifferencingService() { }
+        public DefaultDocumentTextDifferencingService()
+        {
+        }
 
         public Task<ImmutableArray<TextChange>> GetTextChangesAsync(
             Document oldDocument,

@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public RemoteGlobalNotificationDeliveryService(in ServiceConstructionArguments arguments)
-            : base(arguments) { }
+            : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Remote API.

@@ -24,7 +24,9 @@ namespace Application
         private static Action<S> CreateCallback<T>(Func<S, T> func, FooClass<T> fooChild)
             where T : class
         {
-            return delegate(S source) { };
+            return delegate(S source)
+            {
+            };
         }
 
         private FooClass(string name, Action<S> action)

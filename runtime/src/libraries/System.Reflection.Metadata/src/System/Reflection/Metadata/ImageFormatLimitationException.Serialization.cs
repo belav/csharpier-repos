@@ -10,6 +10,8 @@ namespace System.Reflection.Metadata
     public partial class ImageFormatLimitationException : Exception
     {
         protected ImageFormatLimitationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

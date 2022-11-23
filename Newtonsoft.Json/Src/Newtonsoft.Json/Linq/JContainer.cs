@@ -108,7 +108,9 @@ namespace Newtonsoft.Json.Linq
         private bool _busy;
 #endif
 
-        internal JContainer() { }
+        internal JContainer()
+        {
+        }
 
         internal JContainer(JContainer other) : this()
         {
@@ -1199,7 +1201,9 @@ namespace Newtonsoft.Json.Linq
 
         #region IBindingList Members
 #if HAVE_COMPONENT_MODEL
-        void IBindingList.AddIndex(PropertyDescriptor property) { }
+        void IBindingList.AddIndex(PropertyDescriptor property)
+        {
+        }
 
         object IBindingList.AddNew()
         {
@@ -1249,7 +1253,9 @@ namespace Newtonsoft.Json.Linq
 
         bool IBindingList.IsSorted => false;
 
-        void IBindingList.RemoveIndex(PropertyDescriptor property) { }
+        void IBindingList.RemoveIndex(PropertyDescriptor property)
+        {
+        }
 
         void IBindingList.RemoveSort()
         {

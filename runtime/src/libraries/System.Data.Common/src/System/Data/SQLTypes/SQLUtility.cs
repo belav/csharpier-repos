@@ -29,10 +29,14 @@ namespace System.Data.SqlTypes
     )]
     public class SqlTypeException : SystemException
     {
-        public SqlTypeException() : this(SR.SqlMisc_SqlTypeMessage, null) { }
+        public SqlTypeException() : this(SR.SqlMisc_SqlTypeMessage, null)
+        {
+        }
 
         // Creates a new SqlTypeException with its message string set to message.
-        public SqlTypeException(string? message) : this(message, null) { }
+        public SqlTypeException(string? message) : this(message, null)
+        {
+        }
 
         public SqlTypeException(string? message, Exception? e) : base(message, e)
         {
@@ -40,7 +44,9 @@ namespace System.Data.SqlTypes
         }
 
         protected SqlTypeException(SerializationInfo si, StreamingContext sc)
-            : base(SqlTypeExceptionSerialization(si, sc), sc) { }
+            : base(SqlTypeExceptionSerialization(si, sc), sc)
+        {
+        }
 
         private static SerializationInfo SqlTypeExceptionSerialization(
             SerializationInfo? si,
@@ -64,10 +70,14 @@ namespace System.Data.SqlTypes
     public sealed class SqlNullValueException : SqlTypeException
     {
         // Creates a new SqlNullValueException with its message string set to the common string.
-        public SqlNullValueException() : this(SQLResource.NullValueMessage, null) { }
+        public SqlNullValueException() : this(SQLResource.NullValueMessage, null)
+        {
+        }
 
         // Creates a new NullValueException with its message string set to message.
-        public SqlNullValueException(string? message) : this(message, null) { }
+        public SqlNullValueException(string? message) : this(message, null)
+        {
+        }
 
         public SqlNullValueException(string? message, Exception? e) : base(message, e)
         {
@@ -75,7 +85,9 @@ namespace System.Data.SqlTypes
         }
 
         private SqlNullValueException(SerializationInfo si, StreamingContext sc)
-            : base(SqlNullValueExceptionSerialization(si, sc), sc) { }
+            : base(SqlNullValueExceptionSerialization(si, sc), sc)
+        {
+        }
 
         private static SerializationInfo SqlNullValueExceptionSerialization(
             SerializationInfo si,
@@ -99,10 +111,14 @@ namespace System.Data.SqlTypes
     public sealed class SqlTruncateException : SqlTypeException
     {
         // Creates a new SqlTruncateException with its message string set to the empty string.
-        public SqlTruncateException() : this(SQLResource.TruncationMessage, null) { }
+        public SqlTruncateException() : this(SQLResource.TruncationMessage, null)
+        {
+        }
 
         // Creates a new SqlTruncateException with its message string set to message.
-        public SqlTruncateException(string? message) : this(message, null) { }
+        public SqlTruncateException(string? message) : this(message, null)
+        {
+        }
 
         public SqlTruncateException(string? message, Exception? e) : base(message, e)
         {
@@ -110,7 +126,9 @@ namespace System.Data.SqlTypes
         }
 
         private SqlTruncateException(SerializationInfo si, StreamingContext sc)
-            : base(SqlTruncateExceptionSerialization(si, sc), sc) { }
+            : base(SqlTruncateExceptionSerialization(si, sc), sc)
+        {
+        }
 
         private static SerializationInfo SqlTruncateExceptionSerialization(
             SerializationInfo si,
@@ -134,17 +152,23 @@ namespace System.Data.SqlTypes
     public sealed class SqlNotFilledException : SqlTypeException
     {
         // Creates a new SqlNotFilledException with its message string set to the common string.
-        public SqlNotFilledException() : this(SQLResource.NotFilledMessage, null) { }
+        public SqlNotFilledException() : this(SQLResource.NotFilledMessage, null)
+        {
+        }
 
         // Creates a new NullValueException with its message string set to message.
-        public SqlNotFilledException(string? message) : this(message, null) { }
+        public SqlNotFilledException(string? message) : this(message, null)
+        {
+        }
 
         public SqlNotFilledException(string? message, Exception? e) : base(message, e)
         {
             HResult = HResults.SqlNullValue;
         }
 
-        private SqlNotFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc) { }
+        private SqlNotFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc)
+        {
+        }
     }
 
     [Serializable]
@@ -154,10 +178,14 @@ namespace System.Data.SqlTypes
     public sealed class SqlAlreadyFilledException : SqlTypeException
     {
         // Creates a new SqlNotFilledException with its message string set to the common string.
-        public SqlAlreadyFilledException() : this(SQLResource.AlreadyFilledMessage, null) { }
+        public SqlAlreadyFilledException() : this(SQLResource.AlreadyFilledMessage, null)
+        {
+        }
 
         // Creates a new NullValueException with its message string set to message.
-        public SqlAlreadyFilledException(string? message) : this(message, null) { }
+        public SqlAlreadyFilledException(string? message) : this(message, null)
+        {
+        }
 
         public SqlAlreadyFilledException(string? message, Exception? e) : base(message, e)
         {
@@ -165,6 +193,7 @@ namespace System.Data.SqlTypes
         }
 
         private SqlAlreadyFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc)
-        { }
+        {
+        }
     }
 }

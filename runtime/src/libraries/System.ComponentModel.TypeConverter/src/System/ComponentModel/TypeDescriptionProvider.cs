@@ -24,7 +24,9 @@ namespace System.ComponentModel
         /// If no such provider is given, the base versions of the methods will
         /// return empty, but valid values.
         /// </summary>
-        protected TypeDescriptionProvider() { }
+        protected TypeDescriptionProvider()
+        {
+        }
 
         /// <summary>
         /// There are two versions of the constructor for this class. The empty
@@ -291,6 +293,8 @@ namespace System.ComponentModel
         /// A simple empty descriptor that is used as a placeholder for times
         /// when the user does not provide their own.
         /// </summary>
-        private sealed class EmptyCustomTypeDescriptor : CustomTypeDescriptor { }
+        private sealed class EmptyCustomTypeDescriptor : CustomTypeDescriptor
+        {
+        }
     }
 }

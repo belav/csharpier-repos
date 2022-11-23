@@ -40,7 +40,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextIdentity : ContextBase
     {
-        public BlogContextIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextIdentity(string databaseName) : base(databaseName)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -69,7 +71,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextHiLo : ContextBase
     {
-        public BlogContextHiLo(string databaseName) : base(databaseName) { }
+        public BlogContextHiLo(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -111,7 +115,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextKeySequence : ContextBase
     {
-        public BlogContextKeySequence(string databaseName) : base(databaseName) { }
+        public BlogContextKeySequence(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -168,7 +174,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextDefaultValue : ContextBase
     {
-        public BlogContextDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextDefaultValue(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -185,7 +193,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextDefaultValueNoMigrations : ContextBase
     {
-        public BlogContextDefaultValueNoMigrations(string databaseName) : base(databaseName) { }
+        public BlogContextDefaultValueNoMigrations(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -222,7 +232,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextStringDefaultValue : ContextBase
     {
-        public BlogContextStringDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextStringDefaultValue(string databaseName) : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithStringKey> StringyBlogs { get; set; }
 
@@ -269,7 +281,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextKeyColumnWithDefaultValue : ContextBase
     {
-        public BlogContextKeyColumnWithDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextKeyColumnWithDefaultValue(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -313,7 +327,9 @@ public class SqlServerValueGenerationScenariosTest
     public class BlogContextUIntToIdentityUsingValueConverter : ContextBase
     {
         public BlogContextUIntToIdentityUsingValueConverter(string databaseName)
-            : base(databaseName) { }
+            : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithUIntKey> UnsignedBlogs { get; set; }
 
@@ -358,7 +374,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextIntEnumToIdentity : ContextBase
     {
-        public BlogContextIntEnumToIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextIntEnumToIdentity(string databaseName) : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithIntEnumKey> EnumBlogs { get; set; }
 
@@ -376,7 +394,9 @@ public class SqlServerValueGenerationScenariosTest
         public string Name { get; set; }
     }
 
-    public enum IntKey { }
+    public enum IntKey
+    {
+    }
 
     [ConditionalFact]
     public void Insert_ulong_enum_to_Identity_column()
@@ -405,7 +425,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextULongEnumToIdentity : ContextBase
     {
-        public BlogContextULongEnumToIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextULongEnumToIdentity(string databaseName) : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithULongEnumKey> EnumBlogs { get; set; }
 
@@ -423,7 +445,9 @@ public class SqlServerValueGenerationScenariosTest
         public string Name { get; set; }
     }
 
-    public enum ULongKey : ulong { }
+    public enum ULongKey : ulong
+    {
+    }
 
     [ConditionalFact]
     public void Insert_string_to_Identity_column_using_value_converter()
@@ -453,7 +477,9 @@ public class SqlServerValueGenerationScenariosTest
     public class BlogContextStringToIdentityUsingValueConverter : ContextBase
     {
         public BlogContextStringToIdentityUsingValueConverter(string databaseName)
-            : base(databaseName) { }
+            : base(databaseName)
+        {
+        }
 
         public DbSet<BlogWithStringKey> StringyBlogs { get; set; }
 
@@ -501,7 +527,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextNoKeyGeneration : ContextBase
     {
-        public BlogContextNoKeyGeneration(string databaseName) : base(databaseName) { }
+        public BlogContextNoKeyGeneration(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -538,7 +566,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextNoKeyGenerationNullableKey : ContextBase
     {
-        public BlogContextNoKeyGenerationNullableKey(string databaseName) : base(databaseName) { }
+        public BlogContextNoKeyGenerationNullableKey(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -644,7 +674,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextNonKeyDefaultValue : ContextBase
     {
-        public BlogContextNonKeyDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextNonKeyDefaultValue(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -715,7 +747,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextNonKeyReadOnlyDefaultValue : ContextBase
     {
-        public BlogContextNonKeyReadOnlyDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextNonKeyReadOnlyDefaultValue(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -762,7 +796,9 @@ public class SqlServerValueGenerationScenariosTest
 
     public class BlogContextComputedColumn : ContextBase
     {
-        public BlogContextComputedColumn(string databaseName) : base(databaseName) { }
+        public BlogContextComputedColumn(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -782,7 +818,9 @@ public class SqlServerValueGenerationScenariosTest
     public class BlogContextComputedColumnWithTriggerMetadata : BlogContextComputedColumn
     {
         public BlogContextComputedColumnWithTriggerMetadata(string databaseName)
-            : base(databaseName) { }
+            : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -835,7 +873,9 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
 
     public class BlogContextComputedColumnWithFunction : ContextBase
     {
-        public BlogContextComputedColumnWithFunction(string databaseName) : base(databaseName) { }
+        public BlogContextComputedColumnWithFunction(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1061,7 +1101,9 @@ END"
 
     public class BlogContextClientGuidKey : ContextBase
     {
-        public BlogContextClientGuidKey(string databaseName) : base(databaseName) { }
+        public BlogContextClientGuidKey(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1094,7 +1136,9 @@ END"
 
     public class BlogContextClientGuidNonKey : ContextBase
     {
-        public BlogContextClientGuidNonKey(string databaseName) : base(databaseName) { }
+        public BlogContextClientGuidNonKey(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1140,7 +1184,9 @@ END"
 
     public class BlogContextServerGuidKey : ContextBase
     {
-        public BlogContextServerGuidKey(string databaseName) : base(databaseName) { }
+        public BlogContextServerGuidKey(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1205,7 +1251,9 @@ END"
 
     public class BlogContext : ContextBase
     {
-        public BlogContext(string databaseName) : base(databaseName) { }
+        public BlogContext(string databaseName) : base(databaseName)
+        {
+        }
     }
 
     [ConditionalFact]
@@ -1235,7 +1283,9 @@ END"
 
     public class BlogContextSpecifyKeysUsingDefault : ContextBase
     {
-        public BlogContextSpecifyKeysUsingDefault(string databaseName) : base(databaseName) { }
+        public BlogContextSpecifyKeysUsingDefault(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1270,7 +1320,9 @@ END"
     public class BlogContextReadOnlySequenceKeyColumnWithDefaultValue : ContextBase
     {
         public BlogContextReadOnlySequenceKeyColumnWithDefaultValue(string databaseName)
-            : base(databaseName) { }
+            : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1397,7 +1449,9 @@ END"
 
     public class BlogContextConcurrencyWithRowversion : ContextBase
     {
-        public BlogContextConcurrencyWithRowversion(string databaseName) : base(databaseName) { }
+        public BlogContextConcurrencyWithRowversion(string databaseName) : base(databaseName)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

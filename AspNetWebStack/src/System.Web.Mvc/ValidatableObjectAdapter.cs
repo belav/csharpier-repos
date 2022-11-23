@@ -12,7 +12,9 @@ namespace System.Web.Mvc
     public class ValidatableObjectAdapter : ModelValidator
     {
         public ValidatableObjectAdapter(ModelMetadata metadata, ControllerContext context)
-            : base(metadata, context) { }
+            : base(metadata, context)
+        {
+        }
 
         public override IEnumerable<ModelValidationResult> Validate(object container)
         {

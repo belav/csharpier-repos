@@ -86,11 +86,17 @@ StackTrace:
             private void DebugVerifyThread() =>
                 Contract.ThrowIfFalse(Thread.CurrentThread == _thread);
 #else
-            private static void DebugRecordInitialStackTrace() { }
+            private static void DebugRecordInitialStackTrace()
+            {
+            }
 
-            private static void DebugRecordCurrentThread() { }
+            private static void DebugRecordCurrentThread()
+            {
+            }
 
-            private static void DebugVerifyThread() { }
+            private static void DebugVerifyThread()
+            {
+            }
 #endif
         }
     }

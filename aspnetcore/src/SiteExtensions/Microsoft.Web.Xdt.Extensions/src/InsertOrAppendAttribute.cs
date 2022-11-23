@@ -16,7 +16,9 @@ public class InsertOrAppendAttribute : Transform
     ///
     /// </summary>
     public InsertOrAppendAttribute()
-        : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Error) { }
+        : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Error)
+    {
+    }
 
     private string _attributeName;
 

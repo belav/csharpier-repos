@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     {
         public static readonly FixAllProvider Instance = new BatchFixAllProvider();
 
-        private BatchFixAllProvider() { }
+        private BatchFixAllProvider()
+        {
+        }
 
         public override IEnumerable<FixAllScope> GetSupportedFixAllScopes() =>
             ImmutableArray.Create(

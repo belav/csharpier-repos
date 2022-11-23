@@ -551,7 +551,9 @@ namespace Moq.Tests
                     "Should have thrown an exception since constructor does not exist."
                 );
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         [Fact]
@@ -1065,7 +1067,9 @@ namespace Moq.Tests
 
         public class Foo
         {
-            public Foo() : this(new Bar()) { }
+            public Foo() : this(new Bar())
+            {
+            }
 
             public Foo(IBar bar)
             {
@@ -1092,14 +1096,22 @@ namespace Moq.Tests
 
         public class Doer : IDo
         {
-            public void Do() { }
+            public void Do()
+            {
+            }
         }
 
-        public sealed class FooSealed { }
+        public sealed class FooSealed
+        {
+        }
 
-        class FooService : IFooService { }
+        class FooService : IFooService
+        {
+        }
 
-        interface IFooService { }
+        interface IFooService
+        {
+        }
 
         public class FooWithPrivateSetter
         {
@@ -1126,7 +1138,9 @@ namespace Moq.Tests
                 this.IntValue = intValue;
             }
 
-            public FooWithConstructors() { }
+            public FooWithConstructors()
+            {
+            }
 
             public override string ToString()
             {
@@ -1223,7 +1237,9 @@ namespace Moq.Tests
             new INewBar Bar { get; set; }
         }
 
-        public interface INewBar : IBar { }
+        public interface INewBar : IBar
+        {
+        }
 
         // Note that this test requires that there be no [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
         // or similar defined in this test assembly. If some other test requires that internals be made
@@ -1300,7 +1316,9 @@ namespace Moq.Tests
         [Serializable]
         public class BadSerializable : ISerializable
         {
-            public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
+            }
         }
 
         public interface IHaveBadSerializableProperty

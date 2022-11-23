@@ -32,7 +32,9 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
             CustomUserTokenInt
         >.AspNetIdentityFixtureBase
 {
-    protected AspNetIdentityCustomTypesIntKeyTestBase(TFixture fixture) : base(fixture) { }
+    protected AspNetIdentityCustomTypesIntKeyTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task Can_use_navigation_properties_on_User()
@@ -218,7 +220,9 @@ public class CustomTypesIdentityContextInt
         CustomUserTokenInt
     >
 {
-    public CustomTypesIdentityContextInt(DbContextOptions options) : base(options) { }
+    public CustomTypesIdentityContextInt(DbContextOptions options) : base(options)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -243,14 +247,26 @@ public class CustomUserInt : IdentityUser<int>
     public virtual ICollection<CustomUserRoleInt> UserRoles { get; set; }
 }
 
-public class CustomRoleInt : IdentityRole<int> { }
+public class CustomRoleInt : IdentityRole<int>
+{
+}
 
-public class CustomUserClaimInt : IdentityUserClaim<int> { }
+public class CustomUserClaimInt : IdentityUserClaim<int>
+{
+}
 
-public class CustomUserRoleInt : IdentityUserRole<int> { }
+public class CustomUserRoleInt : IdentityUserRole<int>
+{
+}
 
-public class CustomUserLoginInt : IdentityUserLogin<int> { }
+public class CustomUserLoginInt : IdentityUserLogin<int>
+{
+}
 
-public class CustomRoleClaimInt : IdentityRoleClaim<int> { }
+public class CustomRoleClaimInt : IdentityRoleClaim<int>
+{
+}
 
-public class CustomUserTokenInt : IdentityUserToken<int> { }
+public class CustomUserTokenInt : IdentityUserToken<int>
+{
+}

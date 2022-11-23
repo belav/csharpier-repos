@@ -624,7 +624,9 @@ namespace Microsoft.Extensions.Logging.Test
             private IExternalScopeProvider _scopeProvider = new LoggerExternalScopeProvider();
             public List<string> LogText { get; set; } = new List<string>();
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public ILogger CreateLogger(string categoryName)
             {
@@ -668,7 +670,9 @@ namespace Microsoft.Extensions.Logging.Test
             public int BeginScopeCalledTimes { get; set; }
             public List<string> LogText { get; set; } = new List<string>();
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public ILogger CreateLogger(string categoryName)
             {

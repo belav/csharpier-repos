@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseConditionalExpressionForReturnCodeFixProvider() { }
+        public CSharpUseConditionalExpressionForReturnCodeFixProvider()
+        {
+        }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

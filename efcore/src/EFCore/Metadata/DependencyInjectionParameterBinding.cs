@@ -28,7 +28,9 @@ public class DependencyInjectionParameterBinding : ServiceParameterBinding
         Type parameterType,
         Type serviceType,
         params IPropertyBase[]? serviceProperties
-    ) : base(parameterType, serviceType, serviceProperties) { }
+    ) : base(parameterType, serviceType, serviceProperties)
+    {
+    }
 
     /// <summary>
     ///     Creates an expression tree representing the binding of the value of a property from a

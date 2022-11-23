@@ -165,7 +165,9 @@ namespace Microsoft.AspNet.Facebook.Test
 
         private class CustomAuthorizeFilter : FacebookAuthorizeFilter
         {
-            public CustomAuthorizeFilter() : base(new FacebookConfiguration()) { }
+            public CustomAuthorizeFilter() : base(new FacebookConfiguration())
+            {
+            }
 
             public void ExposedAddCookieVerificationQuery(NameValueCollection queries)
             {

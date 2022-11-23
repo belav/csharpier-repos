@@ -29,7 +29,9 @@ public class IncludeExpression : Expression, IPrintableExpression
         Expression entityExpression,
         Expression navigationExpression,
         INavigationBase navigation
-    ) : this(entityExpression, navigationExpression, navigation, setLoaded: true) { }
+    ) : this(entityExpression, navigationExpression, navigation, setLoaded: true)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

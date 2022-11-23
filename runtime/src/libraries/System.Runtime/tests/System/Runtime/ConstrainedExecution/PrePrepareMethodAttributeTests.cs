@@ -12,7 +12,9 @@ namespace System.Runtime.ConstrainedExecution.Tests
         public sealed class ConstrainedType
         {
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success), PrePrepareMethod]
-            public ConstrainedType() { }
+            public ConstrainedType()
+            {
+            }
 
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success), PrePrepareMethod]
             public bool SomeMethod() => false;

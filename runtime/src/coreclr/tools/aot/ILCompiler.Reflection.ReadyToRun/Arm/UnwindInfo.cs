@@ -15,7 +15,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Arm
         public uint EpilogStartIndex { get; set; }
         public uint EpilogStartOffsetFromMainFunctionBegin { get; set; }
 
-        public Epilog() { }
+        public Epilog()
+        {
+        }
 
         public Epilog(int index, int dw, uint startOffset)
         {
@@ -52,7 +54,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Arm
     {
         public int Index { get; set; }
 
-        public UnwindCode() { }
+        public UnwindCode()
+        {
+        }
 
         public UnwindCode(int index)
         {
@@ -78,7 +82,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Arm
 
         public Epilog[] Epilogs { get; set; }
 
-        public UnwindInfo() { }
+        public UnwindInfo()
+        {
+        }
 
         public UnwindInfo(byte[] image, int offset)
         {

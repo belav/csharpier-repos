@@ -67,14 +67,18 @@ public class ConfigurationFeatureTest
         : ConfigurationExpressionFeatureBase<ConfigurationFeatureA>
     {
         public ConfigurationExpressionFeatureA(int value)
-            : base(value, new ConfigurationFeatureA(value)) { }
+            : base(value, new ConfigurationFeatureA(value))
+        {
+        }
     }
 
     public class ConfigurationExpressionFeatureB
         : ConfigurationExpressionFeatureBase<ConfigurationFeatureB>
     {
         public ConfigurationExpressionFeatureB(int value)
-            : base(value, new ConfigurationFeatureB(value)) { }
+            : base(value, new ConfigurationFeatureB(value))
+        {
+        }
     }
 
     public abstract class ConfigurationExpressionFeatureBase<TFeature>
@@ -110,12 +114,16 @@ public class ConfigurationFeatureTest
 
     public class ConfigurationFeatureA : ConfigurationFeatureBase
     {
-        public ConfigurationFeatureA(int value) : base(value) { }
+        public ConfigurationFeatureA(int value) : base(value)
+        {
+        }
     }
 
     public class ConfigurationFeatureB : ConfigurationFeatureBase
     {
-        public ConfigurationFeatureB(int value) : base(value) { }
+        public ConfigurationFeatureB(int value) : base(value)
+        {
+        }
     }
 
     public abstract class ConfigurationFeatureBase : IRuntimeFeature

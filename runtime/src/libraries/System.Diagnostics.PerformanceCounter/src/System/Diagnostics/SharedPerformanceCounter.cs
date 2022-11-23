@@ -76,7 +76,9 @@ namespace System.Diagnostics
                         }
                         s_procData = new ProcessData(pid, startTime);
                     }
-                    finally { }
+                    finally
+                    {
+                    }
                 }
                 return s_procData;
             }
@@ -100,7 +102,8 @@ namespace System.Diagnostics
 
         internal SharedPerformanceCounter(string catName, string counterName, string instanceName)
             : this(catName, counterName, instanceName, PerformanceCounterInstanceLifetime.Global)
-        { }
+        {
+        }
 
         internal unsafe SharedPerformanceCounter(
             string catName,
@@ -628,7 +631,9 @@ namespace System.Diagnostics
             // but of course that's only a probabilisitic statement.
 
             // Must be able to assign to the out param.
-            try { }
+            try
+            {
+            }
             finally
             {
                 int r = Interlocked.CompareExchange(ref *spinLockPointer, 1, 0);

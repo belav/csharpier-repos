@@ -40,9 +40,13 @@ public class InvalidReverseMap : NonValidatingSpecBase
         public Three Three { get; set; }
     }
 
-    public class Three { }
+    public class Three
+    {
+    }
 
-    public class Three2 { }
+    public class Three2
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

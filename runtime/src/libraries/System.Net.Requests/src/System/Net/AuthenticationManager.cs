@@ -8,7 +8,9 @@ namespace System.Net
 {
     public class AuthenticationManager
     {
-        private AuthenticationManager() { }
+        private AuthenticationManager()
+        {
+        }
 
         public static ICredentialPolicy? CredentialPolicy { get; set; }
 

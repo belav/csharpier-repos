@@ -30,7 +30,9 @@ namespace SslStress.Utils
                     ReadPipeAsync
                 );
             }
-            catch (OperationCanceledException) when (token.IsCancellationRequested) { }
+            catch (OperationCanceledException) when (token.IsCancellationRequested)
+            {
+            }
 
             async Task FillPipeAsync(CancellationToken token)
             {

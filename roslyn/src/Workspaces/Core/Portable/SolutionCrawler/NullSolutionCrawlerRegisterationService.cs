@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NullSolutionCrawlerRegistrationService() { }
+        public NullSolutionCrawlerRegistrationService()
+        {
+        }
 
         public void Register(Workspace workspace)
         {

@@ -26,7 +26,11 @@ public class ConfigurationProviderCommandLineTest : ConfigurationProviderTestBas
             }
         );
 
-        return (provider, () => { });
+        return (
+            provider,
+            () => {
+            }
+        );
     }
 
     private void SectionToTestFiles(

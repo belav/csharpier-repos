@@ -377,6 +377,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
             return new InvalidSignatureException();
         }
 
-        private sealed class InvalidSignatureException : Exception { }
+        private sealed class InvalidSignatureException : Exception
+        {
+        }
     }
 }

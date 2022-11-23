@@ -121,7 +121,9 @@ public class ConstructorMapFrom : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    record Destination(bool Value) { }
+    record Destination(bool Value)
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(
@@ -239,7 +241,9 @@ public class ConstructorTests : AutoMapperSpecBase
 
     public class Dest
     {
-        public Dest() { }
+        public Dest()
+        {
+        }
 
         public Dest(int other)
         {

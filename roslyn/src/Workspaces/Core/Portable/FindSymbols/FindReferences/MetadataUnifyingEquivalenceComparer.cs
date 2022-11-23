@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public static readonly IEqualityComparer<ISymbol> Instance =
             new MetadataUnifyingEquivalenceComparer();
 
-        private MetadataUnifyingEquivalenceComparer() { }
+        private MetadataUnifyingEquivalenceComparer()
+        {
+        }
 
         public bool Equals(ISymbol? x, ISymbol? y)
         {

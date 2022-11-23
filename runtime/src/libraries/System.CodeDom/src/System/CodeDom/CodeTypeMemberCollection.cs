@@ -7,7 +7,9 @@ namespace System.CodeDom
 {
     public class CodeTypeMemberCollection : CollectionBase
     {
-        public CodeTypeMemberCollection() { }
+        public CodeTypeMemberCollection()
+        {
+        }
 
         public CodeTypeMemberCollection(CodeTypeMemberCollection value)
         {

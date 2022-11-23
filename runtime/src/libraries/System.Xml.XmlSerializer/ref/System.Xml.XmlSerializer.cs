@@ -33,7 +33,9 @@ namespace System.Xml.Serialization
         [System.ObsoleteAttribute(
             "This class should never get constructed as it contains only static methods."
         )]
-        public CodeIdentifier() { }
+        public CodeIdentifier()
+        {
+        }
 
         public static string MakeCamel(string identifier)
         {
@@ -53,26 +55,38 @@ namespace System.Xml.Serialization
 
     public partial class CodeIdentifiers
     {
-        public CodeIdentifiers() { }
+        public CodeIdentifiers()
+        {
+        }
 
-        public CodeIdentifiers(bool caseSensitive) { }
+        public CodeIdentifiers(bool caseSensitive)
+        {
+        }
 
         public bool UseCamelCasing
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public void Add(string identifier, object? value) { }
+        public void Add(string identifier, object? value)
+        {
+        }
 
-        public void AddReserved(string identifier) { }
+        public void AddReserved(string identifier)
+        {
+        }
 
         public string AddUnique(string identifier, object? value)
         {
             throw null;
         }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public bool IsInUse(string identifier)
         {
@@ -89,9 +103,13 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void Remove(string identifier) { }
+        public void Remove(string identifier)
+        {
+        }
 
-        public void RemoveReserved(string identifier) { }
+        public void RemoveReserved(string identifier)
+        {
+        }
 
         public object ToArray(System.Type type)
         {
@@ -102,7 +120,8 @@ namespace System.Xml.Serialization
     public partial class ImportContext
     {
         public ImportContext(System.Xml.Serialization.CodeIdentifiers? identifiers, bool shareTypes)
-        { }
+        {
+        }
 
         public bool ShareTypes
         {
@@ -126,7 +145,9 @@ namespace System.Xml.Serialization
 
     public abstract partial class SchemaImporter
     {
-        internal SchemaImporter() { }
+        internal SchemaImporter()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -137,33 +158,45 @@ namespace System.Xml.Serialization
     )]
     public partial class SoapAttributeAttribute : System.Attribute
     {
-        public SoapAttributeAttribute() { }
+        public SoapAttributeAttribute()
+        {
+        }
 
-        public SoapAttributeAttribute(string attributeName) { }
+        public SoapAttributeAttribute(string attributeName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string AttributeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string DataType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class SoapAttributeOverrides
     {
-        public SoapAttributeOverrides() { }
+        public SoapAttributeOverrides()
+        {
+        }
 
         public System.Xml.Serialization.SoapAttributes? this[System.Type type]
         {
@@ -178,46 +211,66 @@ namespace System.Xml.Serialization
             System.Type type,
             string member,
             System.Xml.Serialization.SoapAttributes? attributes
-        ) { }
+        )
+        {
+        }
 
-        public void Add(System.Type type, System.Xml.Serialization.SoapAttributes? attributes) { }
+        public void Add(System.Type type, System.Xml.Serialization.SoapAttributes? attributes)
+        {
+        }
     }
 
     public partial class SoapAttributes
     {
-        public SoapAttributes() { }
+        public SoapAttributes()
+        {
+        }
 
-        public SoapAttributes(System.Reflection.ICustomAttributeProvider provider) { }
+        public SoapAttributes(System.Reflection.ICustomAttributeProvider provider)
+        {
+        }
 
         public System.Xml.Serialization.SoapAttributeAttribute? SoapAttribute
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object? SoapDefaultValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.SoapElementAttribute? SoapElement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.SoapEnumAttribute? SoapEnum
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool SoapIgnore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.SoapTypeAttribute? SoapType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -229,42 +282,58 @@ namespace System.Xml.Serialization
     )]
     public partial class SoapElementAttribute : System.Attribute
     {
-        public SoapElementAttribute() { }
+        public SoapElementAttribute()
+        {
+        }
 
-        public SoapElementAttribute(string? elementName) { }
+        public SoapElementAttribute(string? elementName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string DataType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string ElementName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsNullable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Field)]
     public partial class SoapEnumAttribute : System.Attribute
     {
-        public SoapEnumAttribute() { }
+        public SoapEnumAttribute()
+        {
+        }
 
-        public SoapEnumAttribute(string name) { }
+        public SoapEnumAttribute(string name)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Name
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -276,7 +345,9 @@ namespace System.Xml.Serialization
     )]
     public partial class SoapIgnoreAttribute : System.Attribute
     {
-        public SoapIgnoreAttribute() { }
+        public SoapIgnoreAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -288,29 +359,41 @@ namespace System.Xml.Serialization
     )]
     public partial class SoapIncludeAttribute : System.Attribute
     {
-        public SoapIncludeAttribute(System.Type type) { }
+        public SoapIncludeAttribute(System.Type type)
+        {
+        }
 
         public System.Type Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class SoapReflectionImporter
     {
-        public SoapReflectionImporter() { }
+        public SoapReflectionImporter()
+        {
+        }
 
-        public SoapReflectionImporter(string? defaultNamespace) { }
+        public SoapReflectionImporter(string? defaultNamespace)
+        {
+        }
 
         public SoapReflectionImporter(
             System.Xml.Serialization.SoapAttributeOverrides? attributeOverrides
-        ) { }
+        )
+        {
+        }
 
         public SoapReflectionImporter(
             System.Xml.Serialization.SoapAttributeOverrides? attributeOverrides,
             string? defaultNamespace
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -391,28 +474,38 @@ namespace System.Xml.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void IncludeType(System.Type type) { }
+        public void IncludeType(System.Type type)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void IncludeTypes(System.Reflection.ICustomAttributeProvider provider) { }
+        public void IncludeTypes(System.Reflection.ICustomAttributeProvider provider)
+        {
+        }
     }
 
     public partial class SoapSchemaMember
     {
-        public SoapSchemaMember() { }
+        public SoapSchemaMember()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string MemberName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.XmlQualifiedName? MemberType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -424,34 +517,48 @@ namespace System.Xml.Serialization
     )]
     public partial class SoapTypeAttribute : System.Attribute
     {
-        public SoapTypeAttribute() { }
+        public SoapTypeAttribute()
+        {
+        }
 
-        public SoapTypeAttribute(string? typeName) { }
+        public SoapTypeAttribute(string? typeName)
+        {
+        }
 
-        public SoapTypeAttribute(string? typeName, string? ns) { }
+        public SoapTypeAttribute(string? typeName, string? ns)
+        {
+        }
 
         public bool IncludeInSchema
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string TypeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class UnreferencedObjectEventArgs : System.EventArgs
     {
-        public UnreferencedObjectEventArgs(object? o, string? id) { }
+        public UnreferencedObjectEventArgs(object? o, string? id)
+        {
+        }
 
         public string? UnreferencedId
         {
@@ -470,12 +577,16 @@ namespace System.Xml.Serialization
 
     public partial class XmlAnyElementAttributes : System.Collections.CollectionBase
     {
-        public XmlAnyElementAttributes() { }
+        public XmlAnyElementAttributes()
+        {
+        }
 
         public System.Xml.Serialization.XmlAnyElementAttribute? this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Xml.Serialization.XmlAnyElementAttribute? attribute)
@@ -488,19 +599,22 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void CopyTo(System.Xml.Serialization.XmlAnyElementAttribute[] array, int index) { }
+        public void CopyTo(System.Xml.Serialization.XmlAnyElementAttribute[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Xml.Serialization.XmlAnyElementAttribute? attribute)
         {
             throw null;
         }
 
-        public void Insert(
-            int index,
-            System.Xml.Serialization.XmlAnyElementAttribute? attribute
-        ) { }
+        public void Insert(int index, System.Xml.Serialization.XmlAnyElementAttribute? attribute)
+        {
+        }
 
-        public void Remove(System.Xml.Serialization.XmlAnyElementAttribute? attribute) { }
+        public void Remove(System.Xml.Serialization.XmlAnyElementAttribute? attribute)
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -512,35 +626,49 @@ namespace System.Xml.Serialization
     )]
     public partial class XmlArrayAttribute : System.Attribute
     {
-        public XmlArrayAttribute() { }
+        public XmlArrayAttribute()
+        {
+        }
 
-        public XmlArrayAttribute(string? elementName) { }
+        public XmlArrayAttribute(string? elementName)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string ElementName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Schema.XmlSchemaForm Form
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsNullable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int Order
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -553,62 +681,88 @@ namespace System.Xml.Serialization
     )]
     public partial class XmlArrayItemAttribute : System.Attribute
     {
-        public XmlArrayItemAttribute() { }
+        public XmlArrayItemAttribute()
+        {
+        }
 
-        public XmlArrayItemAttribute(string? elementName) { }
+        public XmlArrayItemAttribute(string? elementName)
+        {
+        }
 
-        public XmlArrayItemAttribute(string? elementName, System.Type? type) { }
+        public XmlArrayItemAttribute(string? elementName, System.Type? type)
+        {
+        }
 
-        public XmlArrayItemAttribute(System.Type? type) { }
+        public XmlArrayItemAttribute(System.Type? type)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string DataType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string ElementName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Schema.XmlSchemaForm Form
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsNullable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public int NestingLevel
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Type? Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class XmlArrayItemAttributes : System.Collections.CollectionBase
     {
-        public XmlArrayItemAttributes() { }
+        public XmlArrayItemAttributes()
+        {
+        }
 
         public System.Xml.Serialization.XmlArrayItemAttribute? this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Xml.Serialization.XmlArrayItemAttribute? attribute)
@@ -621,21 +775,29 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void CopyTo(System.Xml.Serialization.XmlArrayItemAttribute[] array, int index) { }
+        public void CopyTo(System.Xml.Serialization.XmlArrayItemAttribute[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Xml.Serialization.XmlArrayItemAttribute? attribute)
         {
             throw null;
         }
 
-        public void Insert(int index, System.Xml.Serialization.XmlArrayItemAttribute? attribute) { }
+        public void Insert(int index, System.Xml.Serialization.XmlArrayItemAttribute? attribute)
+        {
+        }
 
-        public void Remove(System.Xml.Serialization.XmlArrayItemAttribute? attribute) { }
+        public void Remove(System.Xml.Serialization.XmlArrayItemAttribute? attribute)
+        {
+        }
     }
 
     public partial class XmlAttributeEventArgs : System.EventArgs
     {
-        internal XmlAttributeEventArgs() { }
+        internal XmlAttributeEventArgs()
+        {
+        }
 
         public System.Xml.XmlAttribute Attr
         {
@@ -666,7 +828,9 @@ namespace System.Xml.Serialization
 
     public partial class XmlAttributeOverrides
     {
-        public XmlAttributeOverrides() { }
+        public XmlAttributeOverrides()
+        {
+        }
 
         public System.Xml.Serialization.XmlAttributes? this[System.Type type]
         {
@@ -681,21 +845,31 @@ namespace System.Xml.Serialization
             System.Type type,
             string member,
             System.Xml.Serialization.XmlAttributes? attributes
-        ) { }
+        )
+        {
+        }
 
-        public void Add(System.Type type, System.Xml.Serialization.XmlAttributes attributes) { }
+        public void Add(System.Type type, System.Xml.Serialization.XmlAttributes attributes)
+        {
+        }
     }
 
     public partial class XmlAttributes
     {
-        public XmlAttributes() { }
+        public XmlAttributes()
+        {
+        }
 
-        public XmlAttributes(System.Reflection.ICustomAttributeProvider provider) { }
+        public XmlAttributes(System.Reflection.ICustomAttributeProvider provider)
+        {
+        }
 
         public System.Xml.Serialization.XmlAnyAttributeAttribute? XmlAnyAttribute
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlAnyElementAttributes XmlAnyElements
         {
@@ -704,7 +878,9 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlArrayAttribute? XmlArray
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlArrayItemAttributes XmlArrayItems
         {
@@ -713,7 +889,9 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlAttributeAttribute? XmlAttribute
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlChoiceIdentifierAttribute? XmlChoiceIdentifier
         {
@@ -722,7 +900,9 @@ namespace System.Xml.Serialization
         public object? XmlDefaultValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlElementAttributes XmlElements
         {
@@ -731,32 +911,44 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlEnumAttribute? XmlEnum
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool XmlIgnore
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Xmlns
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlRootAttribute? XmlRoot
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlTextAttribute? XmlText
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlTypeAttribute? XmlType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -769,15 +961,21 @@ namespace System.Xml.Serialization
     )]
     public partial class XmlChoiceIdentifierAttribute : System.Attribute
     {
-        public XmlChoiceIdentifierAttribute() { }
+        public XmlChoiceIdentifierAttribute()
+        {
+        }
 
-        public XmlChoiceIdentifierAttribute(string? name) { }
+        public XmlChoiceIdentifierAttribute(string? name)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string MemberName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -788,33 +986,45 @@ namespace System.Xml.Serialization
         public System.Xml.Serialization.XmlAttributeEventHandler? OnUnknownAttribute
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlElementEventHandler? OnUnknownElement
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlNodeEventHandler? OnUnknownNode
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.UnreferencedObjectEventHandler? OnUnreferencedObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class XmlElementAttributes : System.Collections.CollectionBase
     {
-        public XmlElementAttributes() { }
+        public XmlElementAttributes()
+        {
+        }
 
         public System.Xml.Serialization.XmlElementAttribute? this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Add(System.Xml.Serialization.XmlElementAttribute? attribute)
@@ -827,21 +1037,29 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void CopyTo(System.Xml.Serialization.XmlElementAttribute[] array, int index) { }
+        public void CopyTo(System.Xml.Serialization.XmlElementAttribute[] array, int index)
+        {
+        }
 
         public int IndexOf(System.Xml.Serialization.XmlElementAttribute? attribute)
         {
             throw null;
         }
 
-        public void Insert(int index, System.Xml.Serialization.XmlElementAttribute? attribute) { }
+        public void Insert(int index, System.Xml.Serialization.XmlElementAttribute? attribute)
+        {
+        }
 
-        public void Remove(System.Xml.Serialization.XmlElementAttribute? attribute) { }
+        public void Remove(System.Xml.Serialization.XmlElementAttribute? attribute)
+        {
+        }
     }
 
     public partial class XmlElementEventArgs : System.EventArgs
     {
-        internal XmlElementEventArgs() { }
+        internal XmlElementEventArgs()
+        {
+        }
 
         public System.Xml.XmlElement Element
         {
@@ -879,18 +1097,24 @@ namespace System.Xml.Serialization
     )]
     public partial class XmlIncludeAttribute : System.Attribute
     {
-        public XmlIncludeAttribute(System.Type? type) { }
+        public XmlIncludeAttribute(System.Type? type)
+        {
+        }
 
         public System.Type? Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public abstract partial class XmlMapping
     {
-        internal XmlMapping() { }
+        internal XmlMapping()
+        {
+        }
 
         public string ElementName
         {
@@ -905,7 +1129,9 @@ namespace System.Xml.Serialization
             get { throw null; }
         }
 
-        public void SetKey(string? key) { }
+        public void SetKey(string? key)
+        {
+        }
     }
 
     [System.FlagsAttribute]
@@ -918,7 +1144,9 @@ namespace System.Xml.Serialization
 
     public partial class XmlMemberMapping
     {
-        internal XmlMemberMapping() { }
+        internal XmlMemberMapping()
+        {
+        }
 
         public bool Any
         {
@@ -960,7 +1188,9 @@ namespace System.Xml.Serialization
 
     public partial class XmlMembersMapping : System.Xml.Serialization.XmlMapping
     {
-        internal XmlMembersMapping() { }
+        internal XmlMembersMapping()
+        {
+        }
 
         public int Count
         {
@@ -982,7 +1212,9 @@ namespace System.Xml.Serialization
 
     public partial class XmlNodeEventArgs : System.EventArgs
     {
-        internal XmlNodeEventArgs() { }
+        internal XmlNodeEventArgs()
+        {
+        }
 
         public int LineNumber
         {
@@ -1025,18 +1257,26 @@ namespace System.Xml.Serialization
 
     public partial class XmlReflectionImporter
     {
-        public XmlReflectionImporter() { }
+        public XmlReflectionImporter()
+        {
+        }
 
-        public XmlReflectionImporter(string? defaultNamespace) { }
+        public XmlReflectionImporter(string? defaultNamespace)
+        {
+        }
 
         public XmlReflectionImporter(
             System.Xml.Serialization.XmlAttributeOverrides? attributeOverrides
-        ) { }
+        )
+        {
+        }
 
         public XmlReflectionImporter(
             System.Xml.Serialization.XmlAttributeOverrides? attributeOverrides,
             string? defaultNamespace
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -1141,47 +1381,65 @@ namespace System.Xml.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void IncludeType(System.Type type) { }
+        public void IncludeType(System.Type type)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void IncludeTypes(System.Reflection.ICustomAttributeProvider provider) { }
+        public void IncludeTypes(System.Reflection.ICustomAttributeProvider provider)
+        {
+        }
     }
 
     public partial class XmlReflectionMember
     {
-        public XmlReflectionMember() { }
+        public XmlReflectionMember()
+        {
+        }
 
         public bool IsReturnValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string MemberName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Type? MemberType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool OverrideIsNullable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.SoapAttributes SoapAttributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Serialization.XmlAttributes XmlAttributes
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1190,7 +1448,9 @@ namespace System.Xml.Serialization
             System.Collections.IEnumerator,
             System.IDisposable
     {
-        public XmlSchemaEnumerator(System.Xml.Serialization.XmlSchemas list) { }
+        public XmlSchemaEnumerator(System.Xml.Serialization.XmlSchemas list)
+        {
+        }
 
         public System.Xml.Schema.XmlSchema Current
         {
@@ -1201,19 +1461,25 @@ namespace System.Xml.Serialization
             get { throw null; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool MoveNext()
         {
             throw null;
         }
 
-        void System.Collections.IEnumerator.Reset() { }
+        void System.Collections.IEnumerator.Reset()
+        {
+        }
     }
 
     public partial class XmlSchemaExporter
     {
-        public XmlSchemaExporter(System.Xml.Serialization.XmlSchemas schemas) { }
+        public XmlSchemaExporter(System.Xml.Serialization.XmlSchemas schemas)
+        {
+        }
 
         public string ExportAnyType(string? ns)
         {
@@ -1227,12 +1493,16 @@ namespace System.Xml.Serialization
 
         public void ExportMembersMapping(
             System.Xml.Serialization.XmlMembersMapping xmlMembersMapping
-        ) { }
+        )
+        {
+        }
 
         public void ExportMembersMapping(
             System.Xml.Serialization.XmlMembersMapping xmlMembersMapping,
             bool exportEnclosingType
-        ) { }
+        )
+        {
+        }
 
         public System.Xml.XmlQualifiedName? ExportTypeMapping(
             System.Xml.Serialization.XmlMembersMapping xmlMembersMapping
@@ -1241,7 +1511,9 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void ExportTypeMapping(System.Xml.Serialization.XmlTypeMapping xmlTypeMapping) { }
+        public void ExportTypeMapping(System.Xml.Serialization.XmlTypeMapping xmlTypeMapping)
+        {
+        }
     }
 
     public partial class XmlSchemaImporter : System.Xml.Serialization.SchemaImporter
@@ -1249,7 +1521,9 @@ namespace System.Xml.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public XmlSchemaImporter(System.Xml.Serialization.XmlSchemas schemas) { }
+        public XmlSchemaImporter(System.Xml.Serialization.XmlSchemas schemas)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -1257,7 +1531,9 @@ namespace System.Xml.Serialization
         public XmlSchemaImporter(
             System.Xml.Serialization.XmlSchemas schemas,
             System.Xml.Serialization.CodeIdentifiers? typeIdentifiers
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -1386,7 +1662,9 @@ namespace System.Xml.Serialization
             System.Collections.Generic.IEnumerable<System.Xml.Schema.XmlSchema>,
             System.Collections.IEnumerable
     {
-        public XmlSchemas() { }
+        public XmlSchemas()
+        {
+        }
 
         public bool IsCompiled
         {
@@ -1395,7 +1673,9 @@ namespace System.Xml.Serialization
         public System.Xml.Schema.XmlSchema this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Xml.Schema.XmlSchema? this[string? ns]
         {
@@ -1412,14 +1692,20 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void Add(System.Xml.Serialization.XmlSchemas schemas) { }
+        public void Add(System.Xml.Serialization.XmlSchemas schemas)
+        {
+        }
 
-        public void AddReference(System.Xml.Schema.XmlSchema schema) { }
+        public void AddReference(System.Xml.Schema.XmlSchema schema)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void Compile(System.Xml.Schema.ValidationEventHandler? handler, bool fullCompile) { }
+        public void Compile(System.Xml.Schema.ValidationEventHandler? handler, bool fullCompile)
+        {
+        }
 
         public bool Contains(string? targetNamespace)
         {
@@ -1431,7 +1717,9 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void CopyTo(System.Xml.Schema.XmlSchema[] array, int index) { }
+        public void CopyTo(System.Xml.Schema.XmlSchema[] array, int index)
+        {
+        }
 
         public object? Find(System.Xml.XmlQualifiedName name, System.Type type)
         {
@@ -1448,22 +1736,34 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        public void Insert(int index, System.Xml.Schema.XmlSchema schema) { }
+        public void Insert(int index, System.Xml.Schema.XmlSchema schema)
+        {
+        }
 
         public static bool IsDataSet(System.Xml.Schema.XmlSchema schema)
         {
             throw null;
         }
 
-        protected override void OnClear() { }
+        protected override void OnClear()
+        {
+        }
 
-        protected override void OnInsert(int index, object? value) { }
+        protected override void OnInsert(int index, object? value)
+        {
+        }
 
-        protected override void OnRemove(int index, object? value) { }
+        protected override void OnRemove(int index, object? value)
+        {
+        }
 
-        protected override void OnSet(int index, object? oldValue, object? newValue) { }
+        protected override void OnSet(int index, object? oldValue, object? newValue)
+        {
+        }
 
-        public void Remove(System.Xml.Schema.XmlSchema schema) { }
+        public void Remove(System.Xml.Schema.XmlSchema schema)
+        {
+        }
 
         System.Collections.Generic.IEnumerator<System.Xml.Schema.XmlSchema> System.Collections.Generic.IEnumerable<System.Xml.Schema.XmlSchema>.GetEnumerator()
         {
@@ -1479,7 +1779,9 @@ namespace System.Xml.Serialization
 
     public abstract partial class XmlSerializationGeneratedCode
     {
-        protected XmlSerializationGeneratedCode() { }
+        protected XmlSerializationGeneratedCode()
+        {
+        }
     }
 
     public delegate object? XmlSerializationReadCallback();
@@ -1487,12 +1789,16 @@ namespace System.Xml.Serialization
     public abstract partial class XmlSerializationReader
         : System.Xml.Serialization.XmlSerializationGeneratedCode
     {
-        protected XmlSerializationReader() { }
+        protected XmlSerializationReader()
+        {
+        }
 
         protected bool DecodeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected System.Xml.XmlDocument Document
         {
@@ -1501,7 +1807,9 @@ namespace System.Xml.Serialization
         protected bool IsReturnValue
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected System.Xml.XmlReader Reader
         {
@@ -1514,20 +1822,30 @@ namespace System.Xml.Serialization
 
         protected void AddFixup(
             System.Xml.Serialization.XmlSerializationReader.CollectionFixup? fixup
-        ) { }
+        )
+        {
+        }
 
-        protected void AddFixup(System.Xml.Serialization.XmlSerializationReader.Fixup? fixup) { }
+        protected void AddFixup(System.Xml.Serialization.XmlSerializationReader.Fixup? fixup)
+        {
+        }
 
         protected void AddReadCallback(
             string name,
             string ns,
             System.Type type,
             System.Xml.Serialization.XmlSerializationReadCallback read
-        ) { }
+        )
+        {
+        }
 
-        protected void AddTarget(string? id, object? o) { }
+        protected void AddTarget(string? id, object? o)
+        {
+        }
 
-        protected void CheckReaderCount(ref int whileIterations, ref int readerCount) { }
+        protected void CheckReaderCount(ref int whileIterations, ref int readerCount)
+        {
+        }
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")]
         protected string? CollapseWhitespace(string? value)
@@ -1613,7 +1931,9 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        protected void FixupArrayRefs(object fixup) { }
+        protected void FixupArrayRefs(object fixup)
+        {
+        }
 
         protected int GetArrayLength(string name, string ns)
         {
@@ -1646,14 +1966,18 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        protected void ParseWsdlArrayType(System.Xml.XmlAttribute attr) { }
+        protected void ParseWsdlArrayType(System.Xml.XmlAttribute attr)
+        {
+        }
 
         protected System.Xml.XmlQualifiedName ReadElementQualifiedName()
         {
             throw null;
         }
 
-        protected void ReadEndElement() { }
+        protected void ReadEndElement()
+        {
+        }
 
         protected bool ReadNull()
         {
@@ -1696,7 +2020,9 @@ namespace System.Xml.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        protected void ReadReferencedElements() { }
+        protected void ReadReferencedElements()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -1778,7 +2104,9 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        protected void Referenced(object? o) { }
+        protected void Referenced(object? o)
+        {
+        }
 
         protected static System.Reflection.Assembly? ResolveDynamicAssembly(string assemblyFullName)
         {
@@ -1871,19 +2199,33 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        protected void UnknownAttribute(object? o, System.Xml.XmlAttribute attr) { }
+        protected void UnknownAttribute(object? o, System.Xml.XmlAttribute attr)
+        {
+        }
 
-        protected void UnknownAttribute(object? o, System.Xml.XmlAttribute attr, string? qnames) { }
+        protected void UnknownAttribute(object? o, System.Xml.XmlAttribute attr, string? qnames)
+        {
+        }
 
-        protected void UnknownElement(object? o, System.Xml.XmlElement elem) { }
+        protected void UnknownElement(object? o, System.Xml.XmlElement elem)
+        {
+        }
 
-        protected void UnknownElement(object? o, System.Xml.XmlElement elem, string? qnames) { }
+        protected void UnknownElement(object? o, System.Xml.XmlElement elem, string? qnames)
+        {
+        }
 
-        protected void UnknownNode(object? o) { }
+        protected void UnknownNode(object? o)
+        {
+        }
 
-        protected void UnknownNode(object? o, string? qnames) { }
+        protected void UnknownNode(object? o, string? qnames)
+        {
+        }
 
-        protected void UnreferencedObject(string? id, object? o) { }
+        protected void UnreferencedObject(string? id, object? o)
+        {
+        }
 
         protected partial class CollectionFixup
         {
@@ -1891,7 +2233,9 @@ namespace System.Xml.Serialization
                 object? collection,
                 System.Xml.Serialization.XmlSerializationCollectionFixupCallback callback,
                 object collectionItems
-            ) { }
+            )
+            {
+            }
 
             public System.Xml.Serialization.XmlSerializationCollectionFixupCallback Callback
             {
@@ -1913,13 +2257,17 @@ namespace System.Xml.Serialization
                 object? o,
                 System.Xml.Serialization.XmlSerializationFixupCallback callback,
                 int count
-            ) { }
+            )
+            {
+            }
 
             public Fixup(
                 object? o,
                 System.Xml.Serialization.XmlSerializationFixupCallback callback,
                 string?[]? ids
-            ) { }
+            )
+            {
+            }
 
             public System.Xml.Serialization.XmlSerializationFixupCallback Callback
             {
@@ -1932,7 +2280,9 @@ namespace System.Xml.Serialization
             public object? Source
             {
                 get { throw null; }
-                set { }
+                set
+                {
+                }
             }
         }
     }
@@ -1942,22 +2292,30 @@ namespace System.Xml.Serialization
     public abstract partial class XmlSerializationWriter
         : System.Xml.Serialization.XmlSerializationGeneratedCode
     {
-        protected XmlSerializationWriter() { }
+        protected XmlSerializationWriter()
+        {
+        }
 
         protected bool EscapeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected System.Collections.ArrayList? Namespaces
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected System.Xml.XmlWriter Writer
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         protected void AddWriteCallback(
@@ -1965,7 +2323,9 @@ namespace System.Xml.Serialization
             string typeName,
             string? typeNs,
             System.Xml.Serialization.XmlSerializationWriteCallback callback
-        ) { }
+        )
+        {
+        }
 
         protected System.Exception CreateChoiceIdentifierValueException(
             string value,
@@ -2118,22 +2478,29 @@ namespace System.Xml.Serialization
             throw null;
         }
 
-        protected void TopLevelElement() { }
+        protected void TopLevelElement()
+        {
+        }
 
-        protected void WriteAttribute(string localName, byte[]? value) { }
+        protected void WriteAttribute(string localName, byte[]? value)
+        {
+        }
 
-        protected void WriteAttribute(string localName, string? value) { }
+        protected void WriteAttribute(string localName, string? value)
+        {
+        }
 
-        protected void WriteAttribute(string localName, string ns, byte[]? value) { }
+        protected void WriteAttribute(string localName, string ns, byte[]? value)
+        {
+        }
 
-        protected void WriteAttribute(string localName, string? ns, string? value) { }
+        protected void WriteAttribute(string localName, string? ns, string? value)
+        {
+        }
 
-        protected void WriteAttribute(
-            string? prefix,
-            string localName,
-            string? ns,
-            string? value
-        ) { }
+        protected void WriteAttribute(string? prefix, string localName, string? ns, string? value)
+        {
+        }
 
         protected void WriteElementEncoded(
             System.Xml.XmlNode? node,
@@ -2141,7 +2508,9 @@ namespace System.Xml.Serialization
             string? ns,
             bool isNullable,
             bool any
-        ) { }
+        )
+        {
+        }
 
         protected void WriteElementLiteral(
             System.Xml.XmlNode? node,
@@ -2149,149 +2518,221 @@ namespace System.Xml.Serialization
             string? ns,
             bool isNullable,
             bool any
-        ) { }
+        )
+        {
+        }
 
         protected void WriteElementQualifiedName(
             string localName,
             string? ns,
             System.Xml.XmlQualifiedName? value
-        ) { }
+        )
+        {
+        }
 
         protected void WriteElementQualifiedName(
             string localName,
             string? ns,
             System.Xml.XmlQualifiedName? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
         protected void WriteElementQualifiedName(
             string localName,
             System.Xml.XmlQualifiedName? value
-        ) { }
+        )
+        {
+        }
 
         protected void WriteElementQualifiedName(
             string localName,
             System.Xml.XmlQualifiedName? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteElementString(string localName, string? value) { }
+        protected void WriteElementString(string localName, string? value)
+        {
+        }
 
-        protected void WriteElementString(string localName, string? ns, string? value) { }
+        protected void WriteElementString(string localName, string? ns, string? value)
+        {
+        }
 
         protected void WriteElementString(
             string localName,
             string? ns,
             string? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
         protected void WriteElementString(
             string localName,
             string? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteElementStringRaw(string localName, byte[]? value) { }
+        protected void WriteElementStringRaw(string localName, byte[]? value)
+        {
+        }
 
         protected void WriteElementStringRaw(
             string localName,
             byte[]? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteElementStringRaw(string localName, string? value) { }
+        protected void WriteElementStringRaw(string localName, string? value)
+        {
+        }
 
-        protected void WriteElementStringRaw(string localName, string? ns, byte[]? value) { }
+        protected void WriteElementStringRaw(string localName, string? ns, byte[]? value)
+        {
+        }
 
         protected void WriteElementStringRaw(
             string localName,
             string? ns,
             byte[]? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteElementStringRaw(string localName, string? ns, string? value) { }
+        protected void WriteElementStringRaw(string localName, string? ns, string? value)
+        {
+        }
 
         protected void WriteElementStringRaw(
             string localName,
             string? ns,
             string? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
         protected void WriteElementStringRaw(
             string localName,
             string? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteEmptyTag(string? name) { }
+        protected void WriteEmptyTag(string? name)
+        {
+        }
 
-        protected void WriteEmptyTag(string? name, string? ns) { }
+        protected void WriteEmptyTag(string? name, string? ns)
+        {
+        }
 
-        protected void WriteEndElement() { }
+        protected void WriteEndElement()
+        {
+        }
 
-        protected void WriteEndElement(object? o) { }
+        protected void WriteEndElement(object? o)
+        {
+        }
 
-        protected void WriteId(object o) { }
+        protected void WriteId(object o)
+        {
+        }
 
         protected void WriteNamespaceDeclarations(
             System.Xml.Serialization.XmlSerializerNamespaces? xmlns
-        ) { }
+        )
+        {
+        }
 
         protected void WriteNullableQualifiedNameEncoded(
             string name,
             string? ns,
             System.Xml.XmlQualifiedName? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
         protected void WriteNullableQualifiedNameLiteral(
             string name,
             string? ns,
             System.Xml.XmlQualifiedName? value
-        ) { }
+        )
+        {
+        }
 
         protected void WriteNullableStringEncoded(
             string name,
             string? ns,
             string? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
         protected void WriteNullableStringEncodedRaw(
             string name,
             string? ns,
             byte[]? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
         protected void WriteNullableStringEncodedRaw(
             string name,
             string? ns,
             string? value,
             System.Xml.XmlQualifiedName? xsiType
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteNullableStringLiteral(string name, string? ns, string? value) { }
+        protected void WriteNullableStringLiteral(string name, string? ns, string? value)
+        {
+        }
 
-        protected void WriteNullableStringLiteralRaw(string name, string? ns, byte[]? value) { }
+        protected void WriteNullableStringLiteralRaw(string name, string? ns, byte[]? value)
+        {
+        }
 
-        protected void WriteNullableStringLiteralRaw(string name, string? ns, string? value) { }
+        protected void WriteNullableStringLiteralRaw(string name, string? ns, string? value)
+        {
+        }
 
-        protected void WriteNullTagEncoded(string? name) { }
+        protected void WriteNullTagEncoded(string? name)
+        {
+        }
 
-        protected void WriteNullTagEncoded(string? name, string? ns) { }
+        protected void WriteNullTagEncoded(string? name, string? ns)
+        {
+        }
 
-        protected void WriteNullTagLiteral(string? name) { }
+        protected void WriteNullTagLiteral(string? name)
+        {
+        }
 
-        protected void WriteNullTagLiteral(string? name, string? ns) { }
+        protected void WriteNullTagLiteral(string? name, string? ns)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        protected void WritePotentiallyReferencingElement(string? n, string? ns, object? o) { }
+        protected void WritePotentiallyReferencingElement(string? n, string? ns, object? o)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2301,7 +2742,9 @@ namespace System.Xml.Serialization
             string? ns,
             object? o,
             System.Type? ambientType
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2312,7 +2755,9 @@ namespace System.Xml.Serialization
             object? o,
             System.Type? ambientType,
             bool suppressReference
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2324,25 +2769,37 @@ namespace System.Xml.Serialization
             System.Type? ambientType,
             bool suppressReference,
             bool isNullable
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        protected void WriteReferencedElements() { }
+        protected void WriteReferencedElements()
+        {
+        }
 
-        protected void WriteReferencingElement(string n, string? ns, object? o) { }
+        protected void WriteReferencingElement(string n, string? ns, object? o)
+        {
+        }
 
-        protected void WriteReferencingElement(string n, string? ns, object? o, bool isNullable) { }
+        protected void WriteReferencingElement(string n, string? ns, object? o, bool isNullable)
+        {
+        }
 
-        protected void WriteRpcResult(string name, string? ns) { }
+        protected void WriteRpcResult(string name, string? ns)
+        {
+        }
 
         protected void WriteSerializable(
             System.Xml.Serialization.IXmlSerializable? serializable,
             string name,
             string ns,
             bool isNullable
-        ) { }
+        )
+        {
+        }
 
         protected void WriteSerializable(
             System.Xml.Serialization.IXmlSerializable? serializable,
@@ -2350,19 +2807,33 @@ namespace System.Xml.Serialization
             string? ns,
             bool isNullable,
             bool wrapped
-        ) { }
+        )
+        {
+        }
 
-        protected void WriteStartDocument() { }
+        protected void WriteStartDocument()
+        {
+        }
 
-        protected void WriteStartElement(string name) { }
+        protected void WriteStartElement(string name)
+        {
+        }
 
-        protected void WriteStartElement(string name, string? ns) { }
+        protected void WriteStartElement(string name, string? ns)
+        {
+        }
 
-        protected void WriteStartElement(string name, string? ns, bool writePrefixed) { }
+        protected void WriteStartElement(string name, string? ns, bool writePrefixed)
+        {
+        }
 
-        protected void WriteStartElement(string name, string? ns, object? o) { }
+        protected void WriteStartElement(string name, string? ns, object? o)
+        {
+        }
 
-        protected void WriteStartElement(string name, string? ns, object? o, bool writePrefixed) { }
+        protected void WriteStartElement(string name, string? ns, object? o, bool writePrefixed)
+        {
+        }
 
         protected void WriteStartElement(
             string name,
@@ -2370,42 +2841,64 @@ namespace System.Xml.Serialization
             object? o,
             bool writePrefixed,
             System.Xml.Serialization.XmlSerializerNamespaces? xmlns
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        protected void WriteTypedPrimitive(string? name, string? ns, object o, bool xsiType) { }
+        protected void WriteTypedPrimitive(string? name, string? ns, object o, bool xsiType)
+        {
+        }
 
-        protected void WriteValue(byte[]? value) { }
+        protected void WriteValue(byte[]? value)
+        {
+        }
 
-        protected void WriteValue(string? value) { }
+        protected void WriteValue(string? value)
+        {
+        }
 
-        protected void WriteXmlAttribute(System.Xml.XmlNode node) { }
+        protected void WriteXmlAttribute(System.Xml.XmlNode node)
+        {
+        }
 
-        protected void WriteXmlAttribute(System.Xml.XmlNode node, object? container) { }
+        protected void WriteXmlAttribute(System.Xml.XmlNode node, object? container)
+        {
+        }
 
-        protected void WriteXsiType(string name, string? ns) { }
+        protected void WriteXsiType(string name, string? ns)
+        {
+        }
     }
 
     public partial class XmlSerializer
     {
-        protected XmlSerializer() { }
+        protected XmlSerializer()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public XmlSerializer(System.Type type) { }
+        public XmlSerializer(System.Type type)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public XmlSerializer(System.Type type, string? defaultNamespace) { }
+        public XmlSerializer(System.Type type, string? defaultNamespace)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public XmlSerializer(System.Type type, System.Type[]? extraTypes) { }
+        public XmlSerializer(System.Type type, System.Type[]? extraTypes)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2413,7 +2906,9 @@ namespace System.Xml.Serialization
         public XmlSerializer(
             System.Type type,
             System.Xml.Serialization.XmlAttributeOverrides? overrides
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2424,7 +2919,9 @@ namespace System.Xml.Serialization
             System.Type[]? extraTypes,
             System.Xml.Serialization.XmlRootAttribute? root,
             string? defaultNamespace
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2436,37 +2933,59 @@ namespace System.Xml.Serialization
             System.Xml.Serialization.XmlRootAttribute? root,
             string? defaultNamespace,
             string? location
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public XmlSerializer(System.Type type, System.Xml.Serialization.XmlRootAttribute? root) { }
+        public XmlSerializer(System.Type type, System.Xml.Serialization.XmlRootAttribute? root)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public XmlSerializer(System.Xml.Serialization.XmlTypeMapping xmlTypeMapping) { }
+        public XmlSerializer(System.Xml.Serialization.XmlTypeMapping xmlTypeMapping)
+        {
+        }
 
         public event System.Xml.Serialization.XmlAttributeEventHandler UnknownAttribute
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Xml.Serialization.XmlElementEventHandler UnknownElement
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Xml.Serialization.XmlNodeEventHandler UnknownNode
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Xml.Serialization.UnreferencedObjectEventHandler UnreferencedObject
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         public virtual bool CanDeserialize(System.Xml.XmlReader xmlReader)
@@ -2589,7 +3108,9 @@ namespace System.Xml.Serialization
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void Serialize(System.IO.Stream stream, object? o) { }
+        public void Serialize(System.IO.Stream stream, object? o)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2598,12 +3119,16 @@ namespace System.Xml.Serialization
             System.IO.Stream stream,
             object? o,
             System.Xml.Serialization.XmlSerializerNamespaces? namespaces
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void Serialize(System.IO.TextWriter textWriter, object? o) { }
+        public void Serialize(System.IO.TextWriter textWriter, object? o)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2612,17 +3137,23 @@ namespace System.Xml.Serialization
             System.IO.TextWriter textWriter,
             object? o,
             System.Xml.Serialization.XmlSerializerNamespaces? namespaces
-        ) { }
+        )
+        {
+        }
 
         protected virtual void Serialize(
             object? o,
             System.Xml.Serialization.XmlSerializationWriter writer
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
         )]
-        public void Serialize(System.Xml.XmlWriter xmlWriter, object? o) { }
+        public void Serialize(System.Xml.XmlWriter xmlWriter, object? o)
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2631,7 +3162,9 @@ namespace System.Xml.Serialization
             System.Xml.XmlWriter xmlWriter,
             object? o,
             System.Xml.Serialization.XmlSerializerNamespaces? namespaces
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2641,7 +3174,9 @@ namespace System.Xml.Serialization
             object? o,
             System.Xml.Serialization.XmlSerializerNamespaces? namespaces,
             string? encodingStyle
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2652,7 +3187,9 @@ namespace System.Xml.Serialization
             System.Xml.Serialization.XmlSerializerNamespaces? namespaces,
             string? encodingStyle,
             string? id
-        ) { }
+        )
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -2664,27 +3201,39 @@ namespace System.Xml.Serialization
     )]
     public sealed partial class XmlSerializerAssemblyAttribute : System.Attribute
     {
-        public XmlSerializerAssemblyAttribute() { }
+        public XmlSerializerAssemblyAttribute()
+        {
+        }
 
-        public XmlSerializerAssemblyAttribute(string? assemblyName) { }
+        public XmlSerializerAssemblyAttribute(string? assemblyName)
+        {
+        }
 
-        public XmlSerializerAssemblyAttribute(string? assemblyName, string? codeBase) { }
+        public XmlSerializerAssemblyAttribute(string? assemblyName, string? codeBase)
+        {
+        }
 
         public string? AssemblyName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? CodeBase
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class XmlSerializerFactory
     {
-        public XmlSerializerFactory() { }
+        public XmlSerializerFactory()
+        {
+        }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -2780,7 +3329,9 @@ namespace System.Xml.Serialization
 
     public abstract partial class XmlSerializerImplementation
     {
-        protected XmlSerializerImplementation() { }
+        protected XmlSerializerImplementation()
+        {
+        }
 
         public virtual System.Xml.Serialization.XmlSerializationReader Reader
         {
@@ -2817,29 +3368,41 @@ namespace System.Xml.Serialization
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly)]
     public sealed partial class XmlSerializerVersionAttribute : System.Attribute
     {
-        public XmlSerializerVersionAttribute() { }
+        public XmlSerializerVersionAttribute()
+        {
+        }
 
-        public XmlSerializerVersionAttribute(System.Type? type) { }
+        public XmlSerializerVersionAttribute(System.Type? type)
+        {
+        }
 
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? ParentAssemblyId
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Type? Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Version
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -2851,37 +3414,51 @@ namespace System.Xml.Serialization
     )]
     public partial class XmlTypeAttribute : System.Attribute
     {
-        public XmlTypeAttribute() { }
+        public XmlTypeAttribute()
+        {
+        }
 
-        public XmlTypeAttribute(string? typeName) { }
+        public XmlTypeAttribute(string? typeName)
+        {
+        }
 
         public bool AnonymousType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IncludeInSchema
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string? Namespace
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string TypeName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
     public partial class XmlTypeMapping : System.Xml.Serialization.XmlMapping
     {
-        internal XmlTypeMapping() { }
+        internal XmlTypeMapping()
+        {
+        }
 
         public string TypeFullName
         {

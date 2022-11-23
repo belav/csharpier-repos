@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGoToDefinition(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGoToDefinition)) { }
+            : base(instanceFactory, nameof(BasicGoToDefinition))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.GoToDefinition)]
         public void GoToClassDeclaration()

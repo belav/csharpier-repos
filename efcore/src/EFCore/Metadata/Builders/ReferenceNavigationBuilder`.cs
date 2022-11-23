@@ -35,7 +35,9 @@ public class ReferenceNavigationBuilder<TEntity, TRelatedEntity> : ReferenceNavi
         IMutableEntityType relatedEntityType,
         string? navigationName,
         IMutableForeignKey foreignKey
-    ) : base(declaringEntityType, relatedEntityType, navigationName, foreignKey) { }
+    ) : base(declaringEntityType, relatedEntityType, navigationName, foreignKey)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,7 +51,9 @@ public class ReferenceNavigationBuilder<TEntity, TRelatedEntity> : ReferenceNavi
         IMutableEntityType relatedEntityType,
         MemberInfo? navigationMemberInfo,
         IMutableForeignKey foreignKey
-    ) : base(declaringEntityType, relatedEntityType, navigationMemberInfo, foreignKey) { }
+    ) : base(declaringEntityType, relatedEntityType, navigationMemberInfo, foreignKey)
+    {
+    }
 
     /// <summary>
     ///     Configures this as a one-to-many relationship.

@@ -11,7 +11,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         private class BinOpSig
         {
-            protected BinOpSig() { }
+            protected BinOpSig()
+            {
+            }
 
             public BinOpSig(
                 PredefinedType pt1,

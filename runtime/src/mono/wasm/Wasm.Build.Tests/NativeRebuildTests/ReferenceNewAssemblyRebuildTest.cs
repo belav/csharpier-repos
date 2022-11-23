@@ -17,7 +17,9 @@ namespace Wasm.Build.NativeRebuild.Tests
         public ReferenceNewAssemblyRebuildTest(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        ) : base(output, buildContext)
+        {
+        }
 
         [Theory]
         [MemberData(nameof(NativeBuildData))]

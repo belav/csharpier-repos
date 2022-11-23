@@ -114,7 +114,9 @@ namespace System.Web.WebPages.Test
                 var objectFactory = GetMockVirtualPathFactory(startPage);
                 ApplicationStartPage.ExecuteStartPage(
                     new WebPageHttpApplication(),
-                    p => { },
+                    p =>
+                    {
+                    },
                     objectFactory,
                     new string[] { "cshtml", "vbhtml" }
                 );
@@ -131,7 +133,9 @@ namespace System.Web.WebPages.Test
                 var objectFactory = GetMockVirtualPathFactory(startPage);
                 ApplicationStartPage.ExecuteStartPage(
                     new WebPageHttpApplication(),
-                    p => { },
+                    p =>
+                    {
+                    },
                     objectFactory,
                     new string[] { "cshtml", "vbhtml" }
                 );
@@ -162,7 +166,9 @@ namespace System.Web.WebPages.Test
             {
                 ExecuteStartPage(
                     new WebPageHttpApplication(),
-                    p => { },
+                    p =>
+                    {
+                    },
                     GetMockVirtualPathFactory(this),
                     new string[] { "cshtml", "vbhtml" }
                 );
@@ -175,7 +181,9 @@ namespace System.Web.WebPages.Test
             return startPage;
         }
 
-        public sealed class WebPageHttpApplication : HttpApplication { }
+        public sealed class WebPageHttpApplication : HttpApplication
+        {
+        }
 
         private static IVirtualPathFactory GetMockVirtualPathFactory(ApplicationStartPage page)
         {

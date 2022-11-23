@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
     [UseExportProvider]
     public class CSharpFormattingEngineTestBase : CoreFormatterTestsBase
     {
-        protected CSharpFormattingEngineTestBase(ITestOutputHelper output) : base(output) { }
+        protected CSharpFormattingEngineTestBase(ITestOutputHelper output) : base(output)
+        {
+        }
 
         protected override string GetLanguageName() => LanguageNames.CSharp;
 

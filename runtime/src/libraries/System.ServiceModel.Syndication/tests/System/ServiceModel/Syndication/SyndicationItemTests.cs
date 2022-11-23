@@ -729,9 +729,13 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class SyndicationItemSubclass : SyndicationItem
         {
-            public SyndicationItemSubclass() : base() { }
+            public SyndicationItemSubclass() : base()
+            {
+            }
 
-            public SyndicationItemSubclass(SyndicationItem source) : base(source) { }
+            public SyndicationItemSubclass(SyndicationItem source) : base(source)
+            {
+            }
 
             public SyndicationCategory CreateCategoryEntryPoint() => CreateCategory();
 

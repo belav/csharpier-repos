@@ -24,7 +24,9 @@ public class OwnedNavigationStoredProcedureBuilder<TOwnerEntity, TDependentEntit
     public OwnedNavigationStoredProcedureBuilder(
         IMutableStoredProcedure sproc,
         OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder
-    ) : base(sproc, ownedNavigationBuilder) { }
+    ) : base(sproc, ownedNavigationBuilder)
+    {
+    }
 
     private OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> OwnedNavigationBuilder =>
         (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)

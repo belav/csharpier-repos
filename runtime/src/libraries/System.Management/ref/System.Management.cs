@@ -62,7 +62,9 @@ namespace System.Management
 
     public partial class CompletedEventArgs : System.Management.ManagementEventArgs
     {
-        internal CompletedEventArgs() { }
+        internal CompletedEventArgs()
+        {
+        }
 
         public System.Management.ManagementStatus Status
         {
@@ -81,7 +83,9 @@ namespace System.Management
 
     public partial class ConnectionOptions : System.Management.ManagementOptions
     {
-        public ConnectionOptions() { }
+        public ConnectionOptions()
+        {
+        }
 
         public ConnectionOptions(
             string locale,
@@ -93,7 +97,9 @@ namespace System.Management
             bool enablePrivileges,
             System.Management.ManagementNamedValueCollection context,
             System.TimeSpan timeout
-        ) { }
+        )
+        {
+        }
 
         public ConnectionOptions(
             string locale,
@@ -105,45 +111,63 @@ namespace System.Management
             bool enablePrivileges,
             System.Management.ManagementNamedValueCollection context,
             System.TimeSpan timeout
-        ) { }
+        )
+        {
+        }
 
         public System.Management.AuthenticationLevel Authentication
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Authority
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnablePrivileges
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Management.ImpersonationLevel Impersonation
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Locale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Password
         {
-            set { }
+            set
+            {
+            }
         }
         public System.Security.SecureString SecurePassword
         {
-            set { }
+            set
+            {
+            }
         }
         public string Username
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override object Clone()
@@ -154,12 +178,16 @@ namespace System.Management
 
     public partial class DeleteOptions : System.Management.ManagementOptions
     {
-        public DeleteOptions() { }
+        public DeleteOptions()
+        {
+        }
 
         public DeleteOptions(
             System.Management.ManagementNamedValueCollection context,
             System.TimeSpan timeout
-        ) { }
+        )
+        {
+        }
 
         public override object Clone()
         {
@@ -169,7 +197,9 @@ namespace System.Management
 
     public partial class EnumerationOptions : System.Management.ManagementOptions
     {
-        public EnumerationOptions() { }
+        public EnumerationOptions()
+        {
+        }
 
         public EnumerationOptions(
             System.Management.ManagementNamedValueCollection context,
@@ -182,47 +212,65 @@ namespace System.Management
             bool prototypeOnly,
             bool directRead,
             bool enumerateDeep
-        ) { }
+        )
+        {
+        }
 
         public int BlockSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool DirectRead
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnsureLocatable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool EnumerateDeep
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PrototypeOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool ReturnImmediately
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool Rewindable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseAmendedQualifiers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override object Clone()
@@ -233,7 +281,9 @@ namespace System.Management
 
     public partial class EventArrivedEventArgs : System.Management.ManagementEventArgs
     {
-        internal EventArrivedEventArgs() { }
+        internal EventArrivedEventArgs()
+        {
+        }
 
         public System.Management.ManagementBaseObject NewEvent
         {
@@ -248,11 +298,17 @@ namespace System.Management
 
     public partial class EventQuery : System.Management.ManagementQuery
     {
-        public EventQuery() { }
+        public EventQuery()
+        {
+        }
 
-        public EventQuery(string query) { }
+        public EventQuery(string query)
+        {
+        }
 
-        public EventQuery(string language, string query) { }
+        public EventQuery(string language, string query)
+        {
+        }
 
         public override object Clone()
         {
@@ -262,18 +318,24 @@ namespace System.Management
 
     public partial class EventWatcherOptions : System.Management.ManagementOptions
     {
-        public EventWatcherOptions() { }
+        public EventWatcherOptions()
+        {
+        }
 
         public EventWatcherOptions(
             System.Management.ManagementNamedValueCollection context,
             System.TimeSpan timeout,
             int blockSize
-        ) { }
+        )
+        {
+        }
 
         public int BlockSize
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override object Clone()
@@ -293,12 +355,16 @@ namespace System.Management
 
     public partial class InvokeMethodOptions : System.Management.ManagementOptions
     {
-        public InvokeMethodOptions() { }
+        public InvokeMethodOptions()
+        {
+        }
 
         public InvokeMethodOptions(
             System.Management.ManagementNamedValueCollection context,
             System.TimeSpan timeout
-        ) { }
+        )
+        {
+        }
 
         public override object Clone()
         {
@@ -315,7 +381,9 @@ namespace System.Management
         protected ManagementBaseObject(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public virtual System.Management.ManagementPath ClassPath
         {
@@ -324,7 +392,9 @@ namespace System.Management
         public object this[string propertyName]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Management.PropertyDataCollection Properties
         {
@@ -352,7 +422,9 @@ namespace System.Management
             throw null;
         }
 
-        public new void Dispose() { }
+        public new void Dispose()
+        {
+        }
 
         public override bool Equals(object obj)
         {
@@ -367,7 +439,9 @@ namespace System.Management
         protected virtual void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public object GetPropertyQualifierValue(string propertyName, string qualifierName)
         {
@@ -400,49 +474,73 @@ namespace System.Management
             string propertyName,
             string qualifierName,
             object qualifierValue
-        ) { }
+        )
+        {
+        }
 
-        public void SetPropertyValue(string propertyName, object propertyValue) { }
+        public void SetPropertyValue(string propertyName, object propertyValue)
+        {
+        }
 
-        public void SetQualifierValue(string qualifierName, object qualifierValue) { }
+        public void SetQualifierValue(string qualifierName, object qualifierValue)
+        {
+        }
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class ManagementClass : System.Management.ManagementObject
     {
-        public ManagementClass() { }
+        public ManagementClass()
+        {
+        }
 
-        public ManagementClass(System.Management.ManagementPath path) { }
+        public ManagementClass(System.Management.ManagementPath path)
+        {
+        }
 
         public ManagementClass(
             System.Management.ManagementPath path,
             System.Management.ObjectGetOptions options
-        ) { }
+        )
+        {
+        }
 
         public ManagementClass(
             System.Management.ManagementScope scope,
             System.Management.ManagementPath path,
             System.Management.ObjectGetOptions options
-        ) { }
+        )
+        {
+        }
 
         protected ManagementClass(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public ManagementClass(string path) { }
+        public ManagementClass(string path)
+        {
+        }
 
-        public ManagementClass(string path, System.Management.ObjectGetOptions options) { }
+        public ManagementClass(string path, System.Management.ObjectGetOptions options)
+        {
+        }
 
         public ManagementClass(
             string scope,
             string path,
             System.Management.ObjectGetOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Collections.Specialized.StringCollection Derivation
         {
@@ -455,7 +553,9 @@ namespace System.Management
         public override System.Management.ManagementPath Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override object Clone()
@@ -485,29 +585,39 @@ namespace System.Management
             throw null;
         }
 
-        public void GetInstances(System.Management.ManagementOperationObserver watcher) { }
+        public void GetInstances(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void GetInstances(
             System.Management.ManagementOperationObserver watcher,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
 
         protected override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementObjectCollection GetRelatedClasses()
         {
             throw null;
         }
 
-        public void GetRelatedClasses(System.Management.ManagementOperationObserver watcher) { }
+        public void GetRelatedClasses(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void GetRelatedClasses(
             System.Management.ManagementOperationObserver watcher,
             string relatedClass
-        ) { }
+        )
+        {
+        }
 
         public void GetRelatedClasses(
             System.Management.ManagementOperationObserver watcher,
@@ -518,7 +628,9 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementObjectCollection GetRelatedClasses(string relatedClass)
         {
@@ -543,14 +655,16 @@ namespace System.Management
             throw null;
         }
 
-        public void GetRelationshipClasses(
-            System.Management.ManagementOperationObserver watcher
-        ) { }
+        public void GetRelationshipClasses(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void GetRelationshipClasses(
             System.Management.ManagementOperationObserver watcher,
             string relationshipClass
-        ) { }
+        )
+        {
+        }
 
         public void GetRelationshipClasses(
             System.Management.ManagementOperationObserver watcher,
@@ -558,7 +672,9 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementObjectCollection GetRelationshipClasses(
             string relationshipClass
@@ -606,17 +722,23 @@ namespace System.Management
             throw null;
         }
 
-        public void GetSubclasses(System.Management.ManagementOperationObserver watcher) { }
+        public void GetSubclasses(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void GetSubclasses(
             System.Management.ManagementOperationObserver watcher,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class ManagementDateTimeConverter
     {
-        internal ManagementDateTimeConverter() { }
+        internal ManagementDateTimeConverter()
+        {
+        }
 
         public static System.DateTime ToDateTime(string dmtfDate)
         {
@@ -641,7 +763,9 @@ namespace System.Management
 
     public abstract partial class ManagementEventArgs : System.EventArgs
     {
-        internal ManagementEventArgs() { }
+        internal ManagementEventArgs()
+        {
+        }
 
         public object Context
         {
@@ -652,62 +776,96 @@ namespace System.Management
     [System.ComponentModel.ToolboxItemAttribute(false)]
     public partial class ManagementEventWatcher : System.ComponentModel.Component
     {
-        public ManagementEventWatcher() { }
+        public ManagementEventWatcher()
+        {
+        }
 
-        public ManagementEventWatcher(System.Management.EventQuery query) { }
+        public ManagementEventWatcher(System.Management.EventQuery query)
+        {
+        }
 
         public ManagementEventWatcher(
             System.Management.ManagementScope scope,
             System.Management.EventQuery query
-        ) { }
+        )
+        {
+        }
 
         public ManagementEventWatcher(
             System.Management.ManagementScope scope,
             System.Management.EventQuery query,
             System.Management.EventWatcherOptions options
-        ) { }
+        )
+        {
+        }
 
-        public ManagementEventWatcher(string query) { }
+        public ManagementEventWatcher(string query)
+        {
+        }
 
-        public ManagementEventWatcher(string scope, string query) { }
+        public ManagementEventWatcher(string scope, string query)
+        {
+        }
 
         public ManagementEventWatcher(
             string scope,
             string query,
             System.Management.EventWatcherOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.EventWatcherOptions Options
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Management.EventQuery Query
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Management.ManagementScope Scope
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.Management.EventArrivedEventHandler EventArrived
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Management.StoppedEventHandler Stopped
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        ~ManagementEventWatcher() { }
+        ~ManagementEventWatcher()
+        {
+        }
 
-        public void Start() { }
+        public void Start()
+        {
+        }
 
-        public void Stop() { }
+        public void Stop()
+        {
+        }
 
         public System.Management.ManagementBaseObject WaitForNextEvent()
         {
@@ -717,16 +875,24 @@ namespace System.Management
 
     public partial class ManagementException : System.SystemException
     {
-        public ManagementException() { }
+        public ManagementException()
+        {
+        }
 
         protected ManagementException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
-        public ManagementException(string message) { }
+        public ManagementException(string message)
+        {
+        }
 
-        public ManagementException(string message, System.Exception innerException) { }
+        public ManagementException(string message, System.Exception innerException)
+        {
+        }
 
         public System.Management.ManagementStatus ErrorCode
         {
@@ -740,34 +906,46 @@ namespace System.Management
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public partial class ManagementNamedValueCollection
         : System.Collections.Specialized.NameObjectCollectionBase
     {
-        public ManagementNamedValueCollection() { }
+        public ManagementNamedValueCollection()
+        {
+        }
 
         protected ManagementNamedValueCollection(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public object this[string name]
         {
             get { throw null; }
         }
 
-        public void Add(string name, object value) { }
+        public void Add(string name, object value)
+        {
+        }
 
         public System.Management.ManagementNamedValueCollection Clone()
         {
             throw null;
         }
 
-        public void Remove(string name) { }
+        public void Remove(string name)
+        {
+        }
 
-        public void RemoveAll() { }
+        public void RemoveAll()
+        {
+        }
     }
 
     public partial class ManagementObject
@@ -778,13 +956,17 @@ namespace System.Management
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public ManagementObject(System.Management.ManagementPath path)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public ManagementObject(
             System.Management.ManagementPath path,
@@ -793,7 +975,9 @@ namespace System.Management
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public ManagementObject(
             System.Management.ManagementScope scope,
@@ -803,7 +987,9 @@ namespace System.Management
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         protected ManagementObject(
             System.Runtime.Serialization.SerializationInfo info,
@@ -812,19 +998,25 @@ namespace System.Management
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public ManagementObject(string path)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public ManagementObject(string path, System.Management.ObjectGetOptions options)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public ManagementObject(
             string scopeString,
@@ -834,7 +1026,9 @@ namespace System.Management
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
                 default(System.Runtime.Serialization.StreamingContext)
-            ) { }
+            )
+        {
+        }
 
         public override System.Management.ManagementPath ClassPath
         {
@@ -843,17 +1037,23 @@ namespace System.Management
         public System.Management.ObjectGetOptions Options
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual System.Management.ManagementPath Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Management.ManagementScope Scope
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override object Clone()
@@ -864,21 +1064,29 @@ namespace System.Management
         public void CopyTo(
             System.Management.ManagementOperationObserver watcher,
             System.Management.ManagementPath path
-        ) { }
+        )
+        {
+        }
 
         public void CopyTo(
             System.Management.ManagementOperationObserver watcher,
             System.Management.ManagementPath path,
             System.Management.PutOptions options
-        ) { }
+        )
+        {
+        }
 
-        public void CopyTo(System.Management.ManagementOperationObserver watcher, string path) { }
+        public void CopyTo(System.Management.ManagementOperationObserver watcher, string path)
+        {
+        }
 
         public void CopyTo(
             System.Management.ManagementOperationObserver watcher,
             string path,
             System.Management.PutOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementPath CopyTo(System.Management.ManagementPath path)
         {
@@ -906,22 +1114,36 @@ namespace System.Management
             throw null;
         }
 
-        public void Delete() { }
+        public void Delete()
+        {
+        }
 
-        public void Delete(System.Management.DeleteOptions options) { }
+        public void Delete(System.Management.DeleteOptions options)
+        {
+        }
 
-        public void Delete(System.Management.ManagementOperationObserver watcher) { }
+        public void Delete(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void Delete(
             System.Management.ManagementOperationObserver watcher,
             System.Management.DeleteOptions options
-        ) { }
+        )
+        {
+        }
 
-        public new void Dispose() { }
+        public new void Dispose()
+        {
+        }
 
-        public void Get() { }
+        public void Get()
+        {
+        }
 
-        public void Get(System.Management.ManagementOperationObserver watcher) { }
+        public void Get(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public System.Management.ManagementBaseObject GetMethodParameters(string methodName)
         {
@@ -931,19 +1153,25 @@ namespace System.Management
         protected override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementObjectCollection GetRelated()
         {
             throw null;
         }
 
-        public void GetRelated(System.Management.ManagementOperationObserver watcher) { }
+        public void GetRelated(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void GetRelated(
             System.Management.ManagementOperationObserver watcher,
             string relatedClass
-        ) { }
+        )
+        {
+        }
 
         public void GetRelated(
             System.Management.ManagementOperationObserver watcher,
@@ -955,7 +1183,9 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementObjectCollection GetRelated(string relatedClass)
         {
@@ -981,12 +1211,16 @@ namespace System.Management
             throw null;
         }
 
-        public void GetRelationships(System.Management.ManagementOperationObserver watcher) { }
+        public void GetRelationships(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void GetRelationships(
             System.Management.ManagementOperationObserver watcher,
             string relationshipClass
-        ) { }
+        )
+        {
+        }
 
         public void GetRelationships(
             System.Management.ManagementOperationObserver watcher,
@@ -995,7 +1229,9 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementObjectCollection GetRelationships(
             string relationshipClass
@@ -1020,13 +1256,17 @@ namespace System.Management
             string methodName,
             System.Management.ManagementBaseObject inParameters,
             System.Management.InvokeMethodOptions options
-        ) { }
+        )
+        {
+        }
 
         public void InvokeMethod(
             System.Management.ManagementOperationObserver watcher,
             string methodName,
             object[] args
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementBaseObject InvokeMethod(
             string methodName,
@@ -1047,12 +1287,16 @@ namespace System.Management
             throw null;
         }
 
-        public void Put(System.Management.ManagementOperationObserver watcher) { }
+        public void Put(System.Management.ManagementOperationObserver watcher)
+        {
+        }
 
         public void Put(
             System.Management.ManagementOperationObserver watcher,
             System.Management.PutOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.ManagementPath Put(System.Management.PutOptions options)
         {
@@ -1070,7 +1314,9 @@ namespace System.Management
             System.Collections.IEnumerable,
             System.IDisposable
     {
-        internal ManagementObjectCollection() { }
+        internal ManagementObjectCollection()
+        {
+        }
 
         public int Count
         {
@@ -1085,13 +1331,21 @@ namespace System.Management
             get { throw null; }
         }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Management.ManagementBaseObject[] objectCollection, int index) { }
+        public void CopyTo(System.Management.ManagementBaseObject[] objectCollection, int index)
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        ~ManagementObjectCollection() { }
+        ~ManagementObjectCollection()
+        {
+        }
 
         public System.Management.ManagementObjectCollection.ManagementObjectEnumerator GetEnumerator()
         {
@@ -1107,7 +1361,9 @@ namespace System.Management
             : System.Collections.IEnumerator,
                 System.IDisposable
         {
-            internal ManagementObjectEnumerator() { }
+            internal ManagementObjectEnumerator()
+            {
+            }
 
             public System.Management.ManagementBaseObject Current
             {
@@ -1118,61 +1374,87 @@ namespace System.Management
                 get { throw null; }
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
-            ~ManagementObjectEnumerator() { }
+            ~ManagementObjectEnumerator()
+            {
+            }
 
             public bool MoveNext()
             {
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
     [System.ComponentModel.ToolboxItemAttribute(false)]
     public partial class ManagementObjectSearcher : System.ComponentModel.Component
     {
-        public ManagementObjectSearcher() { }
+        public ManagementObjectSearcher()
+        {
+        }
 
         public ManagementObjectSearcher(
             System.Management.ManagementScope scope,
             System.Management.ObjectQuery query
-        ) { }
+        )
+        {
+        }
 
         public ManagementObjectSearcher(
             System.Management.ManagementScope scope,
             System.Management.ObjectQuery query,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
 
-        public ManagementObjectSearcher(System.Management.ObjectQuery query) { }
+        public ManagementObjectSearcher(System.Management.ObjectQuery query)
+        {
+        }
 
-        public ManagementObjectSearcher(string queryString) { }
+        public ManagementObjectSearcher(string queryString)
+        {
+        }
 
-        public ManagementObjectSearcher(string scope, string queryString) { }
+        public ManagementObjectSearcher(string scope, string queryString)
+        {
+        }
 
         public ManagementObjectSearcher(
             string scope,
             string queryString,
             System.Management.EnumerationOptions options
-        ) { }
+        )
+        {
+        }
 
         public System.Management.EnumerationOptions Options
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Management.ObjectQuery Query
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Management.ManagementScope Scope
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Management.ManagementObjectCollection Get()
@@ -1180,35 +1462,57 @@ namespace System.Management
             throw null;
         }
 
-        public void Get(System.Management.ManagementOperationObserver watcher) { }
+        public void Get(System.Management.ManagementOperationObserver watcher)
+        {
+        }
     }
 
     public partial class ManagementOperationObserver
     {
-        public ManagementOperationObserver() { }
+        public ManagementOperationObserver()
+        {
+        }
 
         public event System.Management.CompletedEventHandler Completed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Management.ObjectPutEventHandler ObjectPut
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Management.ObjectReadyEventHandler ObjectReady
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Management.ProgressEventHandler Progress
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
-        public void Cancel() { }
+        public void Cancel()
+        {
+        }
     }
 
     [System.ComponentModel.TypeConverterAttribute(
@@ -1216,27 +1520,37 @@ namespace System.Management
     )]
     public abstract partial class ManagementOptions : System.ICloneable
     {
-        internal ManagementOptions() { }
+        internal ManagementOptions()
+        {
+        }
 
         public static readonly System.TimeSpan InfiniteTimeout;
         public System.Management.ManagementNamedValueCollection Context
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan Timeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract object Clone();
     }
 
     public partial class ManagementPath : System.ICloneable
     {
-        public ManagementPath() { }
+        public ManagementPath()
+        {
+        }
 
-        public ManagementPath(string path) { }
+        public ManagementPath(string path)
+        {
+        }
 
         [System.ComponentModel.RefreshPropertiesAttribute(
             System.ComponentModel.RefreshProperties.All
@@ -1244,12 +1558,16 @@ namespace System.Management
         public string ClassName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public static System.Management.ManagementPath DefaultPath
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsClass
         {
@@ -1270,7 +1588,9 @@ namespace System.Management
         public string NamespacePath
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -1279,7 +1599,9 @@ namespace System.Management
         public string Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -1288,7 +1610,9 @@ namespace System.Management
         public string RelativePath
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -1297,7 +1621,9 @@ namespace System.Management
         public string Server
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Management.ManagementPath Clone()
@@ -1305,9 +1631,13 @@ namespace System.Management
             throw null;
         }
 
-        public void SetAsClass() { }
+        public void SetAsClass()
+        {
+        }
 
-        public void SetAsSingleton() { }
+        public void SetAsSingleton()
+        {
+        }
 
         object System.ICloneable.Clone()
         {
@@ -1322,37 +1652,55 @@ namespace System.Management
 
     public abstract partial class ManagementQuery : System.ICloneable
     {
-        internal ManagementQuery() { }
+        internal ManagementQuery()
+        {
+        }
 
         public virtual string QueryLanguage
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public virtual string QueryString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public abstract object Clone();
 
-        protected internal virtual void ParseQuery(string query) { }
+        protected internal virtual void ParseQuery(string query)
+        {
+        }
     }
 
     public partial class ManagementScope : System.ICloneable
     {
-        public ManagementScope() { }
+        public ManagementScope()
+        {
+        }
 
-        public ManagementScope(System.Management.ManagementPath path) { }
+        public ManagementScope(System.Management.ManagementPath path)
+        {
+        }
 
         public ManagementScope(
             System.Management.ManagementPath path,
             System.Management.ConnectionOptions options
-        ) { }
+        )
+        {
+        }
 
-        public ManagementScope(string path) { }
+        public ManagementScope(string path)
+        {
+        }
 
-        public ManagementScope(string path, System.Management.ConnectionOptions options) { }
+        public ManagementScope(string path, System.Management.ConnectionOptions options)
+        {
+        }
 
         public bool IsConnected
         {
@@ -1361,12 +1709,16 @@ namespace System.Management
         public System.Management.ConnectionOptions Options
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Management.ManagementPath Path
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public System.Management.ManagementScope Clone()
@@ -1374,7 +1726,9 @@ namespace System.Management
             throw null;
         }
 
-        public void Connect() { }
+        public void Connect()
+        {
+        }
 
         object System.ICloneable.Clone()
         {
@@ -1496,7 +1850,9 @@ namespace System.Management
 
     public partial class MethodData
     {
-        internal MethodData() { }
+        internal MethodData()
+        {
+        }
 
         public System.Management.ManagementBaseObject InParameters
         {
@@ -1524,7 +1880,9 @@ namespace System.Management
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal MethodDataCollection() { }
+        internal MethodDataCollection()
+        {
+        }
 
         public int Count
         {
@@ -1543,24 +1901,34 @@ namespace System.Management
             get { throw null; }
         }
 
-        public virtual void Add(string methodName) { }
+        public virtual void Add(string methodName)
+        {
+        }
 
         public virtual void Add(
             string methodName,
             System.Management.ManagementBaseObject inParameters,
             System.Management.ManagementBaseObject outParameters
-        ) { }
+        )
+        {
+        }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Management.MethodData[] methodArray, int index) { }
+        public void CopyTo(System.Management.MethodData[] methodArray, int index)
+        {
+        }
 
         public System.Management.MethodDataCollection.MethodDataEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public virtual void Remove(string methodName) { }
+        public virtual void Remove(string methodName)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1569,7 +1937,9 @@ namespace System.Management
 
         public partial class MethodDataEnumerator : System.Collections.IEnumerator
         {
-            internal MethodDataEnumerator() { }
+            internal MethodDataEnumerator()
+            {
+            }
 
             public System.Management.MethodData Current
             {
@@ -1585,26 +1955,36 @@ namespace System.Management
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
     public partial class ObjectGetOptions : System.Management.ManagementOptions
     {
-        public ObjectGetOptions() { }
+        public ObjectGetOptions()
+        {
+        }
 
-        public ObjectGetOptions(System.Management.ManagementNamedValueCollection context) { }
+        public ObjectGetOptions(System.Management.ManagementNamedValueCollection context)
+        {
+        }
 
         public ObjectGetOptions(
             System.Management.ManagementNamedValueCollection context,
             System.TimeSpan timeout,
             bool useAmendedQualifiers
-        ) { }
+        )
+        {
+        }
 
         public bool UseAmendedQualifiers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override object Clone()
@@ -1615,7 +1995,9 @@ namespace System.Management
 
     public partial class ObjectPutEventArgs : System.Management.ManagementEventArgs
     {
-        internal ObjectPutEventArgs() { }
+        internal ObjectPutEventArgs()
+        {
+        }
 
         public System.Management.ManagementPath Path
         {
@@ -1630,11 +2012,17 @@ namespace System.Management
 
     public partial class ObjectQuery : System.Management.ManagementQuery
     {
-        public ObjectQuery() { }
+        public ObjectQuery()
+        {
+        }
 
-        public ObjectQuery(string query) { }
+        public ObjectQuery(string query)
+        {
+        }
 
-        public ObjectQuery(string language, string query) { }
+        public ObjectQuery(string language, string query)
+        {
+        }
 
         public override object Clone()
         {
@@ -1644,7 +2032,9 @@ namespace System.Management
 
     public partial class ObjectReadyEventArgs : System.Management.ManagementEventArgs
     {
-        internal ObjectReadyEventArgs() { }
+        internal ObjectReadyEventArgs()
+        {
+        }
 
         public System.Management.ManagementBaseObject NewObject
         {
@@ -1659,7 +2049,9 @@ namespace System.Management
 
     public partial class ProgressEventArgs : System.Management.ManagementEventArgs
     {
-        internal ProgressEventArgs() { }
+        internal ProgressEventArgs()
+        {
+        }
 
         public int Current
         {
@@ -1679,7 +2071,9 @@ namespace System.Management
 
     public partial class PropertyData
     {
-        internal PropertyData() { }
+        internal PropertyData()
+        {
+        }
 
         public bool IsArray
         {
@@ -1708,7 +2102,9 @@ namespace System.Management
         public object Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1716,7 +2112,9 @@ namespace System.Management
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal PropertyDataCollection() { }
+        internal PropertyDataCollection()
+        {
+        }
 
         public int Count
         {
@@ -1735,30 +2133,38 @@ namespace System.Management
             get { throw null; }
         }
 
-        public void Add(
-            string propertyName,
-            System.Management.CimType propertyType,
-            bool isArray
-        ) { }
+        public void Add(string propertyName, System.Management.CimType propertyType, bool isArray)
+        {
+        }
 
-        public virtual void Add(string propertyName, object propertyValue) { }
+        public virtual void Add(string propertyName, object propertyValue)
+        {
+        }
 
         public void Add(
             string propertyName,
             object propertyValue,
             System.Management.CimType propertyType
-        ) { }
+        )
+        {
+        }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Management.PropertyData[] propertyArray, int index) { }
+        public void CopyTo(System.Management.PropertyData[] propertyArray, int index)
+        {
+        }
 
         public System.Management.PropertyDataCollection.PropertyDataEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public virtual void Remove(string propertyName) { }
+        public virtual void Remove(string propertyName)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1767,7 +2173,9 @@ namespace System.Management
 
         public partial class PropertyDataEnumerator : System.Collections.IEnumerator
         {
-            internal PropertyDataEnumerator() { }
+            internal PropertyDataEnumerator()
+            {
+            }
 
             public System.Management.PropertyData Current
             {
@@ -1783,32 +2191,44 @@ namespace System.Management
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
     public partial class PutOptions : System.Management.ManagementOptions
     {
-        public PutOptions() { }
+        public PutOptions()
+        {
+        }
 
-        public PutOptions(System.Management.ManagementNamedValueCollection context) { }
+        public PutOptions(System.Management.ManagementNamedValueCollection context)
+        {
+        }
 
         public PutOptions(
             System.Management.ManagementNamedValueCollection context,
             System.TimeSpan timeout,
             bool useAmendedQualifiers,
             System.Management.PutType putType
-        ) { }
+        )
+        {
+        }
 
         public System.Management.PutType Type
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool UseAmendedQualifiers
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         public override object Clone()
@@ -1827,12 +2247,16 @@ namespace System.Management
 
     public partial class QualifierData
     {
-        internal QualifierData() { }
+        internal QualifierData()
+        {
+        }
 
         public bool IsAmended
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsLocal
         {
@@ -1841,7 +2265,9 @@ namespace System.Management
         public bool IsOverridable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Name
         {
@@ -1850,17 +2276,23 @@ namespace System.Management
         public bool PropagatesToInstance
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool PropagatesToSubclass
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public object Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1868,7 +2300,9 @@ namespace System.Management
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal QualifierDataCollection() { }
+        internal QualifierDataCollection()
+        {
+        }
 
         public int Count
         {
@@ -1887,7 +2321,9 @@ namespace System.Management
             get { throw null; }
         }
 
-        public virtual void Add(string qualifierName, object qualifierValue) { }
+        public virtual void Add(string qualifierName, object qualifierValue)
+        {
+        }
 
         public virtual void Add(
             string qualifierName,
@@ -1896,18 +2332,26 @@ namespace System.Management
             bool propagatesToInstance,
             bool propagatesToSubclass,
             bool isOverridable
-        ) { }
+        )
+        {
+        }
 
-        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Management.QualifierData[] qualifierArray, int index) { }
+        public void CopyTo(System.Management.QualifierData[] qualifierArray, int index)
+        {
+        }
 
         public System.Management.QualifierDataCollection.QualifierDataEnumerator GetEnumerator()
         {
             throw null;
         }
 
-        public virtual void Remove(string qualifierName) { }
+        public virtual void Remove(string qualifierName)
+        {
+        }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1916,7 +2360,9 @@ namespace System.Management
 
         public partial class QualifierDataEnumerator : System.Collections.IEnumerator
         {
-            internal QualifierDataEnumerator() { }
+            internal QualifierDataEnumerator()
+            {
+            }
 
             public System.Management.QualifierData Current
             {
@@ -1932,13 +2378,17 @@ namespace System.Management
                 throw null;
             }
 
-            public void Reset() { }
+            public void Reset()
+            {
+            }
         }
     }
 
     public partial class RelatedObjectQuery : System.Management.WqlObjectQuery
     {
-        public RelatedObjectQuery() { }
+        public RelatedObjectQuery()
+        {
+        }
 
         public RelatedObjectQuery(
             bool isSchemaQuery,
@@ -1949,11 +2399,17 @@ namespace System.Management
             string relationshipQualifier,
             string relatedRole,
             string thisRole
-        ) { }
+        )
+        {
+        }
 
-        public RelatedObjectQuery(string queryOrSourceObject) { }
+        public RelatedObjectQuery(string queryOrSourceObject)
+        {
+        }
 
-        public RelatedObjectQuery(string sourceObject, string relatedClass) { }
+        public RelatedObjectQuery(string sourceObject, string relatedClass)
+        {
+        }
 
         public RelatedObjectQuery(
             string sourceObject,
@@ -1964,67 +2420,93 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             bool classDefinitionsOnly
-        ) { }
+        )
+        {
+        }
 
         public bool ClassDefinitionsOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsSchemaQuery
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RelatedClass
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RelatedQualifier
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RelatedRole
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RelationshipClass
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RelationshipQualifier
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SourceObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ThisRole
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected internal void BuildQuery() { }
+        protected internal void BuildQuery()
+        {
+        }
 
         public override object Clone()
         {
             throw null;
         }
 
-        protected internal override void ParseQuery(string query) { }
+        protected internal override void ParseQuery(string query)
+        {
+        }
     }
 
     public partial class RelationshipQuery : System.Management.WqlObjectQuery
     {
-        public RelationshipQuery() { }
+        public RelationshipQuery()
+        {
+        }
 
         public RelationshipQuery(
             bool isSchemaQuery,
@@ -2032,11 +2514,17 @@ namespace System.Management
             string relationshipClass,
             string relationshipQualifier,
             string thisRole
-        ) { }
+        )
+        {
+        }
 
-        public RelationshipQuery(string queryOrSourceObject) { }
+        public RelationshipQuery(string queryOrSourceObject)
+        {
+        }
 
-        public RelationshipQuery(string sourceObject, string relationshipClass) { }
+        public RelationshipQuery(string sourceObject, string relationshipClass)
+        {
+        }
 
         public RelationshipQuery(
             string sourceObject,
@@ -2044,100 +2532,144 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             bool classDefinitionsOnly
-        ) { }
+        )
+        {
+        }
 
         public bool ClassDefinitionsOnly
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsSchemaQuery
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RelationshipClass
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string RelationshipQualifier
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string SourceObject
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string ThisRole
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected internal void BuildQuery() { }
+        protected internal void BuildQuery()
+        {
+        }
 
         public override object Clone()
         {
             throw null;
         }
 
-        protected internal override void ParseQuery(string query) { }
+        protected internal override void ParseQuery(string query)
+        {
+        }
     }
 
     public partial class SelectQuery : System.Management.WqlObjectQuery
     {
-        public SelectQuery() { }
+        public SelectQuery()
+        {
+        }
 
-        public SelectQuery(bool isSchemaQuery, string condition) { }
+        public SelectQuery(bool isSchemaQuery, string condition)
+        {
+        }
 
-        public SelectQuery(string queryOrClassName) { }
+        public SelectQuery(string queryOrClassName)
+        {
+        }
 
-        public SelectQuery(string className, string condition) { }
+        public SelectQuery(string className, string condition)
+        {
+        }
 
-        public SelectQuery(string className, string condition, string[] selectedProperties) { }
+        public SelectQuery(string className, string condition, string[] selectedProperties)
+        {
+        }
 
         public string ClassName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string Condition
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public bool IsSchemaQuery
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string QueryString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Specialized.StringCollection SelectedProperties
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected internal void BuildQuery() { }
+        protected internal void BuildQuery()
+        {
+        }
 
         public override object Clone()
         {
             throw null;
         }
 
-        protected internal override void ParseQuery(string query) { }
+        protected internal override void ParseQuery(string query)
+        {
+        }
     }
 
     public partial class StoppedEventArgs : System.Management.ManagementEventArgs
     {
-        internal StoppedEventArgs() { }
+        internal StoppedEventArgs()
+        {
+        }
 
         public System.Management.ManagementStatus Status
         {
@@ -2156,32 +2688,46 @@ namespace System.Management
 
     public partial class WqlEventQuery : System.Management.EventQuery
     {
-        public WqlEventQuery() { }
+        public WqlEventQuery()
+        {
+        }
 
-        public WqlEventQuery(string queryOrEventClassName) { }
+        public WqlEventQuery(string queryOrEventClassName)
+        {
+        }
 
-        public WqlEventQuery(string eventClassName, string condition) { }
+        public WqlEventQuery(string eventClassName, string condition)
+        {
+        }
 
         public WqlEventQuery(
             string eventClassName,
             string condition,
             System.TimeSpan groupWithinInterval
-        ) { }
+        )
+        {
+        }
 
         public WqlEventQuery(
             string eventClassName,
             string condition,
             System.TimeSpan groupWithinInterval,
             string[] groupByPropertyList
-        ) { }
+        )
+        {
+        }
 
-        public WqlEventQuery(string eventClassName, System.TimeSpan withinInterval) { }
+        public WqlEventQuery(string eventClassName, System.TimeSpan withinInterval)
+        {
+        }
 
         public WqlEventQuery(
             string eventClassName,
             System.TimeSpan withinInterval,
             string condition
-        ) { }
+        )
+        {
+        }
 
         public WqlEventQuery(
             string eventClassName,
@@ -2190,32 +2736,44 @@ namespace System.Management
             System.TimeSpan groupWithinInterval,
             string[] groupByPropertyList,
             string havingCondition
-        ) { }
+        )
+        {
+        }
 
         public string Condition
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string EventClassName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Collections.Specialized.StringCollection GroupByPropertyList
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan GroupWithinInterval
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public string HavingCondition
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override string QueryLanguage
         {
@@ -2224,29 +2782,41 @@ namespace System.Management
         public override string QueryString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.TimeSpan WithinInterval
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        protected internal void BuildQuery() { }
+        protected internal void BuildQuery()
+        {
+        }
 
         public override object Clone()
         {
             throw null;
         }
 
-        protected internal override void ParseQuery(string query) { }
+        protected internal override void ParseQuery(string query)
+        {
+        }
     }
 
     public partial class WqlObjectQuery : System.Management.ObjectQuery
     {
-        public WqlObjectQuery() { }
+        public WqlObjectQuery()
+        {
+        }
 
-        public WqlObjectQuery(string query) { }
+        public WqlObjectQuery(string query)
+        {
+        }
 
         public override string QueryLanguage
         {

@@ -87,6 +87,8 @@ namespace System.Web.Http.Results
             return new HttpResponseMessage();
         }
 
-        private class FakeController : ApiController { }
+        private class FakeController : ApiController
+        {
+        }
     }
 }

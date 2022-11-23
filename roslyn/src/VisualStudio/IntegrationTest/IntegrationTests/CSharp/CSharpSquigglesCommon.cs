@@ -27,7 +27,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected CSharpSquigglesCommon(
             VisualStudioInstanceFactory instanceFactory,
             string projectTemplate
-        ) : base(instanceFactory, nameof(CSharpSquigglesCommon), projectTemplate) { }
+        ) : base(instanceFactory, nameof(CSharpSquigglesCommon), projectTemplate)
+        {
+        }
 
         protected abstract bool SupportsGlobalUsings { get; }
 

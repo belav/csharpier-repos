@@ -21,7 +21,9 @@ namespace Microsoft.Cci
         public static readonly SymbolEquivalentEqualityComparer Instance =
             new SymbolEquivalentEqualityComparer();
 
-        private SymbolEquivalentEqualityComparer() { }
+        private SymbolEquivalentEqualityComparer()
+        {
+        }
 
         public bool Equals(IReference? x, IReference? y)
         {

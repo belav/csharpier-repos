@@ -34,7 +34,9 @@ public class ProxyTests : IAsyncLifetime
 
     class ClientContext : LocalDbContext
     {
-        public ClientContext() { }
+        public ClientContext()
+        {
+        }
 
         public DbSet<TrainingCourse> TrainingCourses { get; set; }
         public DbSet<TrainingContent> TrainingContents { get; set; }
@@ -62,7 +64,9 @@ public class ProxyTests : IAsyncLifetime
 
     public class TrainingContent
     {
-        public TrainingContent() { }
+        public TrainingContent()
+        {
+        }
 
         [Key]
         public int ContentId { get; set; }

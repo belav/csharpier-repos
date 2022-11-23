@@ -85,13 +85,17 @@ namespace System.Text
         /// Initializes a new instance of the <see cref="StringBuilder"/> class.
         /// </summary>
         /// <param name="capacity">The initial capacity of this builder.</param>
-        public StringBuilder(int capacity) : this(capacity, int.MaxValue) { }
+        public StringBuilder(int capacity) : this(capacity, int.MaxValue)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringBuilder"/> class.
         /// </summary>
         /// <param name="value">The initial contents of this builder.</param>
-        public StringBuilder(string? value) : this(value, DefaultCapacity) { }
+        public StringBuilder(string? value) : this(value, DefaultCapacity)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringBuilder"/> class.
@@ -99,7 +103,9 @@ namespace System.Text
         /// <param name="value">The initial contents of this builder.</param>
         /// <param name="capacity">The initial capacity of this builder.</param>
         public StringBuilder(string? value, int capacity)
-            : this(value, 0, value?.Length ?? 0, capacity) { }
+            : this(value, 0, value?.Length ?? 0, capacity)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringBuilder"/> class.

@@ -21,7 +21,9 @@ namespace System.Security.Cryptography
         public UniversalCryptoDecryptor(
             PaddingMode paddingMode,
             BasicSymmetricCipher basicSymmetricCipher
-        ) : base(paddingMode, basicSymmetricCipher) { }
+        ) : base(paddingMode, basicSymmetricCipher)
+        {
+        }
 
         protected override int UncheckedTransformBlock(
             ReadOnlySpan<byte> inputBuffer,

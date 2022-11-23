@@ -9,7 +9,9 @@ public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture>
     : StoreValueGenerationTestBase<TFixture>
     where TFixture : StoreValueGenerationTriggerSqlServerFixture
 {
-    protected StoreValueGenerationTriggerSqlServerTestBase(TFixture fixture) : base(fixture) { }
+    protected StoreValueGenerationTriggerSqlServerTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

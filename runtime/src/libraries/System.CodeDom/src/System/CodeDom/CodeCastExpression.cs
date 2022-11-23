@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private CodeTypeReference _targetType;
 
-        public CodeCastExpression() { }
+        public CodeCastExpression()
+        {
+        }
 
         public CodeCastExpression(CodeTypeReference targetType, CodeExpression expression)
         {

@@ -7,7 +7,9 @@ public class SqlServerAdventureWorksTestStoreFactory : SqlServerTestStoreFactory
 {
     public static new SqlServerAdventureWorksTestStoreFactory Instance { get; } = new();
 
-    protected SqlServerAdventureWorksTestStoreFactory() { }
+    protected SqlServerAdventureWorksTestStoreFactory()
+    {
+    }
 
     public override TestStore GetOrCreate(string storeName) =>
         SqlServerTestStore.GetOrCreateWithScriptPath(

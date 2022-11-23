@@ -477,7 +477,9 @@ public class CircuitRegistryTest
                 Options.Create(circuitOptions ?? new CircuitOptions()),
                 NullLogger<CircuitRegistry>.Instance,
                 factory
-            ) { }
+            )
+        {
+        }
 
         public ManualResetEventSlim BeforeConnect { get; set; }
         public ManualResetEventSlim BeforeDisconnect { get; set; }

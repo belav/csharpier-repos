@@ -18,7 +18,9 @@ public class DateTimeOffsetToBinaryConverter : ValueConverter<DateTimeOffset, lo
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public DateTimeOffsetToBinaryConverter() : this(null) { }
+    public DateTimeOffsetToBinaryConverter() : this(null)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -39,7 +41,9 @@ public class DateTimeOffsetToBinaryConverter : ValueConverter<DateTimeOffset, lo
                     new TimeSpan(0, (int)((v << 53) >> 53), 0)
                 ),
             mappingHints
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.

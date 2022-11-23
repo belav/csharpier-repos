@@ -40,7 +40,9 @@ namespace Newtonsoft.Json.Utilities
         private readonly string _duplicateSecondErrorMessage;
 
         public BidirectionalDictionary()
-            : this(EqualityComparer<TFirst>.Default, EqualityComparer<TSecond>.Default) { }
+            : this(EqualityComparer<TFirst>.Default, EqualityComparer<TSecond>.Default)
+        {
+        }
 
         public BidirectionalDictionary(
             IEqualityComparer<TFirst> firstEqualityComparer,
@@ -51,7 +53,9 @@ namespace Newtonsoft.Json.Utilities
                 secondEqualityComparer,
                 "Duplicate item already exists for '{0}'.",
                 "Duplicate item already exists for '{0}'."
-            ) { }
+            )
+        {
+        }
 
         public BidirectionalDictionary(
             IEqualityComparer<TFirst> firstEqualityComparer,

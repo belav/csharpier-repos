@@ -74,7 +74,9 @@ namespace System.Net.Internals
             }
         }
 
-        public SocketAddress(AddressFamily family) : this(family, MaxSize) { }
+        public SocketAddress(AddressFamily family) : this(family, MaxSize)
+        {
+        }
 
         public SocketAddress(AddressFamily family, int size)
         {

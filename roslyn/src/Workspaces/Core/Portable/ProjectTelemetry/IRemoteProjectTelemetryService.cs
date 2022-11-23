@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.ProjectTelemetry
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteProjectTelemetryServiceCallbackDispatcher() { }
+        public RemoteProjectTelemetryServiceCallbackDispatcher()
+        {
+        }
 
         private IProjectTelemetryListener GetLogService(RemoteServiceCallbackId callbackId) =>
             (IProjectTelemetryListener)GetCallback(callbackId);

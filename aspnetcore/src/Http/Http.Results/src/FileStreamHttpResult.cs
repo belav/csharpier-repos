@@ -22,7 +22,9 @@ public sealed class FileStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     /// <param name="fileStream">The stream with the file.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     internal FileStreamHttpResult(Stream fileStream, string? contentType)
-        : this(fileStream, contentType, fileDownloadName: null) { }
+        : this(fileStream, contentType, fileDownloadName: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="FileStreamHttpResult"/> instance with
@@ -33,7 +35,9 @@ public sealed class FileStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     /// <param name="contentType">The Content-Type header of the response.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
     internal FileStreamHttpResult(Stream fileStream, string? contentType, string? fileDownloadName)
-        : this(fileStream, contentType, fileDownloadName, enableRangeProcessing: false) { }
+        : this(fileStream, contentType, fileDownloadName, enableRangeProcessing: false)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="FileStreamHttpResult"/> instance with the provided values.

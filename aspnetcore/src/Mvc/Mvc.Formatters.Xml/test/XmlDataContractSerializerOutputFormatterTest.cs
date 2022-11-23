@@ -920,7 +920,9 @@ public class XmlDataContractSerializerOutputFormatterTest
 
     public class Customer
     {
-        public Customer(int id) { }
+        public Customer(int id)
+        {
+        }
 
         public int MyProperty { get; set; }
     }

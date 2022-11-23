@@ -110,9 +110,13 @@ namespace Newtonsoft.Json.Tests.Serialization
             public ITest MyTest { get; set; }
         }
 
-        public interface ITest { }
+        public interface ITest
+        {
+        }
 
-        public class MyTest : ITest { }
+        public class MyTest : ITest
+        {
+        }
 
         public class MyClass1
         {
@@ -1313,7 +1317,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
     }
 
-    internal interface IErrorPerson2 { }
+    internal interface IErrorPerson2
+    {
+    }
 
     internal class ErrorPerson2 //:IPerson - oops! Forgot to implement the person interface
     {
@@ -1329,7 +1335,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         private bool _firstRead = true;
         private bool _readComma = false;
 
-        public ThrowingReader() { }
+        public ThrowingReader()
+        {
+        }
 
         public override int Read(char[] buffer, int index, int count)
         {
@@ -1401,7 +1409,9 @@ namespace Newtonsoft.Json.Tests.Serialization
     public class ErrorTestObject
     {
         [OnError]
-        internal void OnError(StreamingContext context, ErrorContext errorContext) { }
+        internal void OnError(StreamingContext context, ErrorContext errorContext)
+        {
+        }
     }
 
     /// <summary>

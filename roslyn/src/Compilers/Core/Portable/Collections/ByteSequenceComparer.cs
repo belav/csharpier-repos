@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Collections
     {
         internal static readonly ByteSequenceComparer Instance = new ByteSequenceComparer();
 
-        private ByteSequenceComparer() { }
+        private ByteSequenceComparer()
+        {
+        }
 
         internal static bool Equals(ImmutableArray<byte> x, ImmutableArray<byte> y)
         {

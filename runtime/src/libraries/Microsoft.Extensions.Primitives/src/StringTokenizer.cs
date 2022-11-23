@@ -100,7 +100,9 @@ namespace Microsoft.Extensions.Primitives
 
             object IEnumerator.Current => Current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

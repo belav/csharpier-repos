@@ -233,9 +233,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
     }
 
     #region Negative tests - you should not be able to construct this with a dynamic object
-    public class C { }
+    public class C
+    {
+    }
 
-    public interface I { }
+    public interface I
+    {
+    }
 
     public class MemberClassWithUDClassConstraint<T> where T : C, new()
     {
@@ -328,7 +332,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
             }
         }
 
-        public class EmptyClass { }
+        public class EmptyClass
+        {
+        }
 
         [Fact]
         public static void ImplicitOperator()
@@ -907,7 +913,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
 
     public class Test : I
     {
-        public class InnerTest : Test { }
+        public class InnerTest : Test
+        {
+        }
 
         [Fact]
         public static void StaticMethodBody()

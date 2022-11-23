@@ -25,7 +25,9 @@ public abstract class AffectedCountModificationCommandBatch : ReaderModification
     protected AffectedCountModificationCommandBatch(
         ModificationCommandBatchFactoryDependencies dependencies,
         int? maxBatchSize = null
-    ) : base(dependencies, maxBatchSize) { }
+    ) : base(dependencies, maxBatchSize)
+    {
+    }
 
     /// <summary>
     ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.Execute" />.

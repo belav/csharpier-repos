@@ -4,4 +4,6 @@
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-internal interface ILspService { }
+internal interface ILspService
+{
+}

@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal static readonly CSharpSemanticFacts Instance = new();
 
-        private CSharpSemanticFacts() { }
+        private CSharpSemanticFacts()
+        {
+        }
 
         public ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

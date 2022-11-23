@@ -113,7 +113,9 @@ class Test {
 
         private sealed class DebugAssertTestCompletionProvider : CompletionProvider
         {
-            public DebugAssertTestCompletionProvider() { }
+            public DebugAssertTestCompletionProvider()
+            {
+            }
 
             public override bool ShouldTriggerCompletion(
                 SourceText text,

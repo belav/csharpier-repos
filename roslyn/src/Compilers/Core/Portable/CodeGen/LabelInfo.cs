@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
             /// Used when we see a branch, but label is not yet marked.
             /// </summary>
             internal LabelInfo(int stack, bool targetOfConditionalBranches)
-                : this(null, stack, targetOfConditionalBranches) { }
+                : this(null, stack, targetOfConditionalBranches)
+            {
+            }
 
             /// <summary>
             /// Used when label is marked to the code.

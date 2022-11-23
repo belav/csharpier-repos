@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 errorInfo,
                 unreported,
                 variableUsedBeforeDeclaration
-            ) { }
+            )
+        {
+        }
 
         internal ExtendedErrorTypeSymbol(
             NamespaceOrTypeSymbol? containingSymbol,
@@ -103,7 +105,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 resultKind,
                 errorInfo,
                 unreported
-            ) { }
+            )
+        {
+        }
 
         internal ExtendedErrorTypeSymbol(
             NamespaceOrTypeSymbol? containingSymbol,
@@ -119,7 +123,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 errorInfo,
                 GetArity(guessSymbol),
                 unreported
-            ) { }
+            )
+        {
+        }
 
         internal ExtendedErrorTypeSymbol(
             NamespaceOrTypeSymbol? containingSymbol,

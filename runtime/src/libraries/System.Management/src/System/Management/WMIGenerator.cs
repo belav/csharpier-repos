@@ -106,7 +106,9 @@ namespace System.Management
         /// <summary>
         ///    <para>Creates an empty generator object. This is the default constructor.</para>
         /// </summary>
-        public ManagementClassGenerator() { }
+        public ManagementClassGenerator()
+        {
+        }
 
         /// <summary>
         ///    <para>Creates a generator object and initializes it
@@ -1935,7 +1937,9 @@ namespace System.Management
                                             out enumType
                                         );
                                     }
-                                    catch (OverflowException) { }
+                                    catch (OverflowException)
+                                    {
+                                    }
                                 }
                             }
                         }

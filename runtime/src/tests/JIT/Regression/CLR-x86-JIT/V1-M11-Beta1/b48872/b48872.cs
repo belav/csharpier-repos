@@ -14,7 +14,9 @@ namespace Test
         {
             bool[] ab = new bool[4];
             uint uu;
-            for (; ab[0]; uu = m_u & 1) { }
+            for (; ab[0]; uu = m_u & 1)
+            {
+            }
             return 100;
         }
     }

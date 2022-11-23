@@ -39,7 +39,9 @@ namespace System.Runtime.InteropServices
         }
 
         protected COMException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         public override string ToString()
         {

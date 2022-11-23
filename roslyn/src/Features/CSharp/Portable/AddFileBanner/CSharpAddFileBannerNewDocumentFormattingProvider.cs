@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddFileBanner
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddFileBannerNewDocumentFormattingProvider() { }
+        public CSharpAddFileBannerNewDocumentFormattingProvider()
+        {
+        }
 
         protected override SyntaxGenerator SyntaxGenerator => CSharpSyntaxGenerator.Instance;
         protected override SyntaxGeneratorInternal SyntaxGeneratorInternal =>

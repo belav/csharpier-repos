@@ -35,13 +35,17 @@ namespace System.Reflection.Metadata.Ecma335
         public MetadataAggregator(
             MetadataReader baseReader,
             IReadOnlyList<MetadataReader> deltaReaders
-        ) : this(baseReader, null, null, deltaReaders) { }
+        ) : this(baseReader, null, null, deltaReaders)
+        {
+        }
 
         public MetadataAggregator(
             IReadOnlyList<int>? baseTableRowCounts,
             IReadOnlyList<int>? baseHeapSizes,
             IReadOnlyList<MetadataReader>? deltaReaders
-        ) : this(null, baseTableRowCounts, baseHeapSizes, deltaReaders) { }
+        ) : this(null, baseTableRowCounts, baseHeapSizes, deltaReaders)
+        {
+        }
 
         private MetadataAggregator(
             MetadataReader? baseReader,

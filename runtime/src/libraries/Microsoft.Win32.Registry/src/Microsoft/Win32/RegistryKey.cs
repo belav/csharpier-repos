@@ -53,7 +53,9 @@ namespace Microsoft.Win32
         /// Creates a RegistryKey. This key is bound to hkey, if writable is <b>false</b> then no write operations will be allowed.
         /// </summary>
         private RegistryKey(SafeRegistryHandle hkey, bool writable, RegistryView view)
-            : this(hkey, writable, false, false, false, view) { }
+            : this(hkey, writable, false, false, false, view)
+        {
+        }
 
         /// <summary>
         /// Creates a RegistryKey.

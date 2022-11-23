@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolMappingServiceFactory() { }
+        public SymbolMappingServiceFactory()
+        {
+        }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
             new SymbolMappingService(

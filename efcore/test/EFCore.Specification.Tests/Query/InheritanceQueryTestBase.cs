@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : InheritanceQueryFixtureBase, new()
 {
-    protected InheritanceQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected InheritanceQueryTestBase(TFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -558,12 +560,13 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
 
     protected InheritanceContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void UseTransaction(
-        DatabaseFacade facade,
-        IDbContextTransaction transaction
-    ) { }
+    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
+    {
+    }
 
     protected virtual bool EnforcesFkConstraints => true;
 
-    protected virtual void ClearLog() { }
+    protected virtual void ClearLog()
+    {
+    }
 }

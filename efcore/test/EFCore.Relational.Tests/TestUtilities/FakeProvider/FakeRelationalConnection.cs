@@ -51,9 +51,13 @@ public class FakeRelationalConnection : RelationalConnection
                     )
                 )
             )
-        ) { }
+        )
+    {
+    }
 
-    private class FakeDbContext : DbContext { }
+    private class FakeDbContext : DbContext
+    {
+    }
 
     private static IDbContextOptions CreateOptions()
     {

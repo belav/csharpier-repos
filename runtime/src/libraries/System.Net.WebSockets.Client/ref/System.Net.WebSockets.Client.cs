@@ -8,7 +8,9 @@ namespace System.Net.WebSockets
 {
     public sealed partial class ClientWebSocket : System.Net.WebSockets.WebSocket
     {
-        public ClientWebSocket() { }
+        public ClientWebSocket()
+        {
+        }
 
         public override System.Net.WebSockets.WebSocketCloseStatus? CloseStatus
         {
@@ -28,7 +30,9 @@ namespace System.Net.WebSockets
         >? HttpResponseHeaders
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Net.WebSockets.ClientWebSocketOptions Options
         {
@@ -43,7 +47,9 @@ namespace System.Net.WebSockets
             get { throw null; }
         }
 
-        public override void Abort() { }
+        public override void Abort()
+        {
+        }
 
         public override System.Threading.Tasks.Task CloseAsync(
             System.Net.WebSockets.WebSocketCloseStatus closeStatus,
@@ -80,7 +86,9 @@ namespace System.Net.WebSockets
             throw null;
         }
 
-        public override void Dispose() { }
+        public override void Dispose()
+        {
+        }
 
         public override System.Threading.Tasks.Task<System.Net.WebSockets.WebSocketReceiveResult> ReceiveAsync(
             System.ArraySegment<byte> buffer,
@@ -121,96 +129,128 @@ namespace System.Net.WebSockets
 
     public sealed partial class ClientWebSocketOptions
     {
-        internal ClientWebSocketOptions() { }
+        internal ClientWebSocketOptions()
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Security.Cryptography.X509Certificates.X509CertificateCollection ClientCertificates
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Net.CookieContainer? Cookies
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool CollectHttpResponseDetails
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Net.ICredentials? Credentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.TimeSpan KeepAliveInterval
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Net.WebSockets.WebSocketDeflateOptions? DangerousDeflateOptions
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Net.IWebProxy? Proxy
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public System.Net.Security.RemoteCertificateValidationCallback? RemoteCertificateValidationCallback
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool UseDefaultCredentials
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public System.Version HttpVersion
         {
             get { throw null; }
             [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-            set { }
+            set
+            {
+            }
         }
         public System.Net.Http.HttpVersionPolicy HttpVersionPolicy
         {
             get { throw null; }
             [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-            set { }
+            set
+            {
+            }
         }
 
-        public void AddSubProtocol(string subProtocol) { }
+        public void AddSubProtocol(string subProtocol)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void SetBuffer(int receiveBufferSize, int sendBufferSize) { }
+        public void SetBuffer(int receiveBufferSize, int sendBufferSize)
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public void SetBuffer(
             int receiveBufferSize,
             int sendBufferSize,
             System.ArraySegment<byte> buffer
-        ) { }
+        )
+        {
+        }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-        public void SetRequestHeader(string headerName, string? headerValue) { }
+        public void SetRequestHeader(string headerName, string? headerValue)
+        {
+        }
     }
 }

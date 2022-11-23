@@ -16,7 +16,9 @@ internal readonly record struct SymbolSearchOptions
     public bool SearchNuGetPackages { get; init; } = true;
 
     // required to make sure new SymbolSearchOptions() runs property initializers
-    public SymbolSearchOptions() { }
+    public SymbolSearchOptions()
+    {
+    }
 
     public static readonly SymbolSearchOptions Default = new();
 }

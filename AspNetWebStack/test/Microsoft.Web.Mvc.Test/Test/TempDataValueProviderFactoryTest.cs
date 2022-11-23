@@ -82,6 +82,8 @@ namespace Microsoft.Web.Mvc.Test
             };
         }
 
-        private sealed class EmptyController : Controller { }
+        private sealed class EmptyController : Controller
+        {
+        }
     }
 }

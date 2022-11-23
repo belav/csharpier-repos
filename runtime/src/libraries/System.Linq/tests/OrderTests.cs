@@ -388,7 +388,9 @@ namespace System.Linq.Tests
                 .Shuffle()
                 .Order()
                 .GetEnumerator();
-            while (enumerator.MoveNext()) { }
+            while (enumerator.MoveNext())
+            {
+            }
             Assert.False(enumerator.MoveNext());
         }
 

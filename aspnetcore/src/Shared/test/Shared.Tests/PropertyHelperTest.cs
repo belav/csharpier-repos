@@ -768,7 +768,9 @@ public class PropertyHelperTest
         public int Prop5 { get; set; }
     }
 
-    private readonly ref struct MyRefStruct { }
+    private readonly ref struct MyRefStruct
+    {
+    }
 #elif NETFRAMEWORK
 #else
 #error Unknown TFM - update the set of TFMs where we test for ref structs
@@ -783,7 +785,9 @@ public class PropertyHelperTest
     {
         public int Prop2
         {
-            set { }
+            set
+            {
+            }
         }
         public int Prop6 { get; set; }
     }
@@ -845,7 +849,9 @@ public class PropertyHelperTest
         public string this[int index]
         {
             get { return string.Empty; }
-            set { }
+            set
+            {
+            }
         }
 
         public int Visible { get; set; }
@@ -856,7 +862,9 @@ public class PropertyHelperTest
 
         public string NotVisible3
         {
-            set { }
+            set
+            {
+            }
         }
 
         public static string NotVisible4 { get; set; }

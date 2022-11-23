@@ -329,14 +329,18 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// </summary>
     /// <param name="context">The action executing context.</param>
     [NonAction]
-    public virtual void OnActionExecuting(ActionExecutingContext context) { }
+    public virtual void OnActionExecuting(ActionExecutingContext context)
+    {
+    }
 
     /// <summary>
     /// Called after the action method is invoked.
     /// </summary>
     /// <param name="context">The action executed context.</param>
     [NonAction]
-    public virtual void OnActionExecuted(ActionExecutedContext context) { }
+    public virtual void OnActionExecuted(ActionExecutedContext context)
+    {
+    }
 
     /// <summary>
     /// Called before the action method is invoked.
@@ -389,5 +393,7 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// </summary>
     /// <param name="disposing"><c>true</c> if this method is being invoked by the <see cref="Dispose()"/> method,
     /// otherwise <c>false</c>.</param>
-    protected virtual void Dispose(bool disposing) { }
+    protected virtual void Dispose(bool disposing)
+    {
+    }
 }

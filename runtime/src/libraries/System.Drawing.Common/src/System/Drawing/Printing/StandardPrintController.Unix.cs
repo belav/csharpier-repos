@@ -41,7 +41,9 @@ namespace System.Drawing.Printing
 {
     public class StandardPrintController : PrintController
     {
-        public StandardPrintController() { }
+        public StandardPrintController()
+        {
+        }
 
         public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
         {

@@ -43,7 +43,11 @@ public class MetadataDetailsProviderExtensionsTest
         Assert.IsType<BarMetadataDetailsProvider>(provider);
     }
 
-    private class FooMetadataDetailsProvider : IMetadataDetailsProvider { }
+    private class FooMetadataDetailsProvider : IMetadataDetailsProvider
+    {
+    }
 
-    private class BarMetadataDetailsProvider : IMetadataDetailsProvider { }
+    private class BarMetadataDetailsProvider : IMetadataDetailsProvider
+    {
+    }
 }

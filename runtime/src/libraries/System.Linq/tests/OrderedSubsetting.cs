@@ -526,7 +526,9 @@ namespace System.Linq.Tests
                 .OrderBy(i => i)
                 .Skip(1)
                 .GetEnumerator();
-            while (enumerator.MoveNext()) { }
+            while (enumerator.MoveNext())
+            {
+            }
             Assert.False(enumerator.MoveNext());
         }
 

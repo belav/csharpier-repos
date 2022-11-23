@@ -46,7 +46,9 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         RelationalSqlTranslatingExpressionVisitorDependencies dependencies,
         QueryCompilationContext queryCompilationContext,
         QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
-    ) : base(dependencies, queryCompilationContext, queryableMethodTranslatingExpressionVisitor) { }
+    ) : base(dependencies, queryCompilationContext, queryableMethodTranslatingExpressionVisitor)
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

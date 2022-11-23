@@ -12,52 +12,98 @@ using System.Collections.Generic;
 //
 
 // Common class/valuetype types
-public enum Int64Enum : long { }
+public enum Int64Enum : long
+{
+}
 
 #if USC
-public struct CommonType1 { }
+public struct CommonType1
+{
+}
 
-public struct CommonType2 { }
+public struct CommonType2
+{
+}
 
-public struct CommonType3 { }
+public struct CommonType3
+{
+}
 
-public struct CommonType4 { }
+public struct CommonType4
+{
+}
 
-public struct CommonType5 { }
+public struct CommonType5
+{
+}
 
-public struct CommonType6 { }
+public struct CommonType6
+{
+}
 
-public struct CommonType7 { }
+public struct CommonType7
+{
+}
 
-public struct CommonType8 { }
+public struct CommonType8
+{
+}
 
-public struct CommonType9 { }
+public struct CommonType9
+{
+}
 
-public struct CommonType10 { }
+public struct CommonType10
+{
+}
 
-public struct CommonType11 { }
+public struct CommonType11
+{
+}
 #else
-public class CommonType1 { }
+public class CommonType1
+{
+}
 
-public class CommonType2 { }
+public class CommonType2
+{
+}
 
-public class CommonType3 { }
+public class CommonType3
+{
+}
 
-public class CommonType4 { }
+public class CommonType4
+{
+}
 
-public class CommonType5 { }
+public class CommonType5
+{
+}
 
-public class CommonType6 { }
+public class CommonType6
+{
+}
 
-public class CommonType7 { }
+public class CommonType7
+{
+}
 
-public class CommonType8 { }
+public class CommonType8
+{
+}
 
-public class CommonType9 { }
+public class CommonType9
+{
+}
 
-public class CommonType10 { }
+public class CommonType10
+{
+}
 
-public class CommonType11 { }
+public class CommonType11
+{
+}
 #endif
 
 namespace TypeOfRepo

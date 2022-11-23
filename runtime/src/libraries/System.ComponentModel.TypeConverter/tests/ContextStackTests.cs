@@ -188,10 +188,16 @@ namespace System.ComponentModel.Tests
             Assert.Null(stack[typeof(int)]);
         }
 
-        public interface IFoo { }
+        public interface IFoo
+        {
+        }
 
-        public class Foo : IFoo { }
+        public class Foo : IFoo
+        {
+        }
 
-        public class FooBar : Foo { }
+        public class FooBar : Foo
+        {
+        }
     }
 }

@@ -24,7 +24,9 @@ namespace System.IO.Enumeration
         /// <param name="directory">The directory to search in.</param>
         /// <param name="options">Enumeration options to use.</param>
         public FileSystemEnumerator(string directory, EnumerationOptions? options = null)
-            : this(directory, isNormalized: false, options) { }
+            : this(directory, isNormalized: false, options)
+        {
+        }
 
         /// <summary>
         /// Encapsulates a find operation.
@@ -68,7 +70,9 @@ namespace System.IO.Enumeration
         /// Called whenever the end of a directory is reached.
         /// </summary>
         /// <param name="directory">The path of the directory that finished.</param>
-        protected virtual void OnDirectoryFinished(ReadOnlySpan<char> directory) { }
+        protected virtual void OnDirectoryFinished(ReadOnlySpan<char> directory)
+        {
+        }
 
         /// <summary>
         /// Called when a native API returns an error that would normally cause a throw.
@@ -115,7 +119,9 @@ namespace System.IO.Enumeration
         /// Override for any additional cleanup.
         /// </summary>
         /// <param name="disposing">True if called while disposing. False if called from finalizer.</param>
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         ~FileSystemEnumerator()
         {

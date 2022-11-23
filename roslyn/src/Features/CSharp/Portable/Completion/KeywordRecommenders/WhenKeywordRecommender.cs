@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class WhenKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public WhenKeywordRecommender()
-            : base(SyntaxKind.WhenKeyword, isValidInPreprocessorContext: true) { }
+            : base(SyntaxKind.WhenKeyword, isValidInPreprocessorContext: true)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

@@ -147,7 +147,9 @@ namespace System.Text.Json.SourceGeneration.Tests
             : base(
                 MetadataWithPerTypeAttributeContext.Default,
                 (options) => new MetadataWithPerTypeAttributeContext(options)
-            ) { }
+            )
+        {
+        }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()
@@ -363,7 +365,9 @@ namespace System.Text.Json.SourceGeneration.Tests
     }
 
     [JsonSerializable(typeof(EnumWrittenAsString))]
-    public partial class ContextWithExplicitStringEnum : JsonSerializerContext { }
+    public partial class ContextWithExplicitStringEnum : JsonSerializerContext
+    {
+    }
 
     public class PocoWithEnum
     {
@@ -371,12 +375,16 @@ namespace System.Text.Json.SourceGeneration.Tests
     }
 
     [JsonSerializable(typeof(PocoWithEnum))]
-    public partial class ContextWithImplicitStringEnum : JsonSerializerContext { }
+    public partial class ContextWithImplicitStringEnum : JsonSerializerContext
+    {
+    }
 
     public sealed class MetadataContextTests : RealWorldContextTests
     {
         public MetadataContextTests()
-            : base(MetadataContext.Default, (options) => new MetadataContext(options)) { }
+            : base(MetadataContext.Default, (options) => new MetadataContext(options))
+        {
+        }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()

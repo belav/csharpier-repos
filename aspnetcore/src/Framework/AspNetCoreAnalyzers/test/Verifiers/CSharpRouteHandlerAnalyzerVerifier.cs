@@ -24,5 +24,7 @@ public static class CSharpRouteHandlerAnalyzerVerifier<TAnalyzer>
         return test.RunAsync();
     }
 
-    public class Test : CSharpCodeFixTest<TAnalyzer, EmptyCodeFixProvider, XUnitVerifier> { }
+    public class Test : CSharpCodeFixTest<TAnalyzer, EmptyCodeFixProvider, XUnitVerifier>
+    {
+    }
 }

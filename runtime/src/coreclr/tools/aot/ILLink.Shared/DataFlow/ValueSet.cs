@@ -19,7 +19,9 @@ namespace ILLink.Shared.DataFlow
         // if the class is sealed (as then the runtime can do a simple method table pointer comparison)
         private sealed class EnumerableValues : HashSet<TValue>
         {
-            public EnumerableValues(IEnumerable<TValue> values) : base(values) { }
+            public EnumerableValues(IEnumerable<TValue> values) : base(values)
+            {
+            }
 
             public override int GetHashCode()
             {
@@ -58,7 +60,9 @@ namespace ILLink.Shared.DataFlow
 
             object? IEnumerator.Current => Current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

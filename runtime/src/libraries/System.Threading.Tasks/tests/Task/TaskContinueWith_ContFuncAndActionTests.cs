@@ -500,7 +500,11 @@ namespace System.Threading.Tasks.Tests
                 if (taskIsFuture)
                     task = Task<string>.Factory.StartNew(() => "");
                 else
-                    task = Task.Factory.StartNew(delegate { });
+                    task = Task.Factory.StartNew(
+                        delegate
+                        {
+                        }
+                    );
                 task.Wait();
 
                 initRan();

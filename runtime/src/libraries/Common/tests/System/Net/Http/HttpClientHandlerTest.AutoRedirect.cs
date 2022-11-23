@@ -17,7 +17,9 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandlerTest_AutoRedirect : HttpClientHandlerTestBase
     {
-        public HttpClientHandlerTest_AutoRedirect(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_AutoRedirect(ITestOutputHelper output) : base(output)
+        {
+        }
 
         public static IEnumerable<object[]> RedirectStatusCodesOldMethodsNewMethods()
         {

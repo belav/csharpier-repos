@@ -11,7 +11,9 @@ namespace System.Net.Http.Formatting.Mocks
 
     public class MockHttpContent : HttpContent
     {
-        public MockHttpContent() { }
+        public MockHttpContent()
+        {
+        }
 
         public MockHttpContent(HttpContent innerContent)
         {

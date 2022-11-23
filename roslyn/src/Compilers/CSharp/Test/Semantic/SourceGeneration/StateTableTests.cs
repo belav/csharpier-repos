@@ -1770,7 +1770,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             public IIncrementalGeneratorNode<T> WithTrackingName(string name) => this;
 
-            public void RegisterOutput(IIncrementalGeneratorOutputNode output) { }
+            public void RegisterOutput(IIncrementalGeneratorOutputNode output)
+            {
+            }
         }
     }
 }

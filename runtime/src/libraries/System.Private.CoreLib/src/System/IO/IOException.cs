@@ -33,6 +33,8 @@ namespace System.IO
         }
 
         protected IOException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

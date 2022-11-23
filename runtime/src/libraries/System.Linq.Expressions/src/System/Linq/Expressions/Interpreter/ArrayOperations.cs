@@ -94,7 +94,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         internal static readonly GetArrayItemInstruction Instance = new GetArrayItemInstruction();
 
-        private GetArrayItemInstruction() { }
+        private GetArrayItemInstruction()
+        {
+        }
 
         public override int ConsumedStack => 2;
         public override int ProducedStack => 1;
@@ -113,7 +115,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         internal static readonly SetArrayItemInstruction Instance = new SetArrayItemInstruction();
 
-        private SetArrayItemInstruction() { }
+        private SetArrayItemInstruction()
+        {
+        }
 
         public override int ConsumedStack => 3;
         public override string InstructionName => "SetArrayItem";
@@ -136,7 +140,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "ArrayLength";
 
-        private ArrayLengthInstruction() { }
+        private ArrayLengthInstruction()
+        {
+        }
 
         public override int Run(InterpretedFrame frame)
         {

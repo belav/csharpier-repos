@@ -204,7 +204,9 @@ namespace System.Web.Razor.Test.Parser
 
             public override void ParseDocument()
             {
-                using (Context.StartBlock(BlockType.Markup)) { }
+                using (Context.StartBlock(BlockType.Markup))
+                {
+                }
             }
 
             public override void ParseSection(
@@ -212,12 +214,16 @@ namespace System.Web.Razor.Test.Parser
                 bool caseSensitive = true
             )
             {
-                using (Context.StartBlock(BlockType.Markup)) { }
+                using (Context.StartBlock(BlockType.Markup))
+                {
+                }
             }
 
             public override void ParseBlock()
             {
-                using (Context.StartBlock(BlockType.Markup)) { }
+                using (Context.StartBlock(BlockType.Markup))
+                {
+                }
             }
 
             protected override ParserBase OtherParser

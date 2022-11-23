@@ -120,7 +120,9 @@ namespace SslStress
                         );
                         await HandleConnection(stream, client, _cts.Token);
                     }
-                    catch (OperationCanceledException) when (_cts.IsCancellationRequested) { }
+                    catch (OperationCanceledException) when (_cts.IsCancellationRequested)
+                    {
+                    }
                     catch (Exception e)
                     {
                         if (_config.LogServer)

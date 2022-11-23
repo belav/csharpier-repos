@@ -7,16 +7,24 @@ namespace System.Security.Policy
 {
     public sealed partial class Evidence : ICollection, IEnumerable
     {
-        public Evidence() { }
+        public Evidence()
+        {
+        }
 
         [Obsolete(
             "This constructor is obsolete. Use the constructor which accepts arrays of EvidenceBase instead."
         )]
-        public Evidence(object[] hostEvidence, object[] assemblyEvidence) { }
+        public Evidence(object[] hostEvidence, object[] assemblyEvidence)
+        {
+        }
 
-        public Evidence(Evidence evidence) { }
+        public Evidence(Evidence evidence)
+        {
+        }
 
-        public Evidence(EvidenceBase[] hostEvidence, EvidenceBase[] assemblyEvidence) { }
+        public Evidence(EvidenceBase[] hostEvidence, EvidenceBase[] assemblyEvidence)
+        {
+        }
 
         [Obsolete(
             "Evidence should not be treated as an ICollection. Use GetHostEnumerator and GetAssemblyEnumerator to iterate over the evidence to collect a count."
@@ -40,11 +48,17 @@ namespace System.Security.Policy
         }
 
         [Obsolete("Evidence.AddAssembly has been deprecated. Use AddAssemblyEvidence instead.")]
-        public void AddAssembly(object id) { }
+        public void AddAssembly(object id)
+        {
+        }
 
-        public void AddAssemblyEvidence<T>(T evidence) where T : EvidenceBase { }
+        public void AddAssemblyEvidence<T>(T evidence) where T : EvidenceBase
+        {
+        }
 
-        public void AddHostEvidence<T>(T evidence) where T : EvidenceBase { }
+        public void AddHostEvidence<T>(T evidence) where T : EvidenceBase
+        {
+        }
 
         public T? GetAssemblyEvidence<T>() where T : EvidenceBase
         {
@@ -57,9 +71,13 @@ namespace System.Security.Policy
         }
 
         [Obsolete("Evidence.AddHost has been deprecated. Use AddHostEvidence instead.")]
-        public void AddHost(object id) { }
+        public void AddHost(object id)
+        {
+        }
 
-        public void Clear() { }
+        public void Clear()
+        {
+        }
 
         public Evidence? Clone()
         {
@@ -69,7 +87,9 @@ namespace System.Security.Policy
         [Obsolete(
             "Evidence should not be treated as an ICollection. Use the GetHostEnumerator and GetAssemblyEnumerator methods rather than using CopyTo."
         )]
-        public void CopyTo(Array array, int index) { }
+        public void CopyTo(Array array, int index)
+        {
+        }
 
         public IEnumerator GetAssemblyEnumerator()
         {
@@ -89,8 +109,12 @@ namespace System.Security.Policy
             return Array.Empty<object>().GetEnumerator();
         }
 
-        public void Merge(Evidence evidence) { }
+        public void Merge(Evidence evidence)
+        {
+        }
 
-        public void RemoveType(Type t) { }
+        public void RemoveType(Type t)
+        {
+        }
     }
 }

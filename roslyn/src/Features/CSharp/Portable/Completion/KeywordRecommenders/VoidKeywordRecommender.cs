@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.ReadOnlyKeyword,
         };
 
-        public VoidKeywordRecommender() : base(SyntaxKind.VoidKeyword) { }
+        public VoidKeywordRecommender() : base(SyntaxKind.VoidKeyword)
+        {
+        }
 
         protected override bool IsValidContext(
             int position,

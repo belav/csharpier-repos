@@ -24,7 +24,9 @@ namespace System
         //    compiler generated code (This must match the constructor
         //    in Delegate
         [RequiresUnreferencedCode("The target method might be removed")]
-        protected MulticastDelegate(object target, string method) : base(target, method) { }
+        protected MulticastDelegate(object target, string method) : base(target, method)
+        {
+        }
 
         // This constructor is called from a class to generate a
         // delegate based upon a static method name and the Type object
@@ -32,7 +34,9 @@ namespace System
         protected MulticastDelegate(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
             string method
-        ) : base(target, method) { }
+        ) : base(target, method)
+        {
+        }
 
         internal bool IsUnmanagedFunctionPtr()
         {

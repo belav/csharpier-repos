@@ -127,7 +127,9 @@ public interface IDbContextTransaction : IDisposable, IAsyncDisposable
     ///     </para>
     /// </remarks>
     /// <param name="name">The name of the savepoint to release.</param>
-    void ReleaseSavepoint(string name) { }
+    void ReleaseSavepoint(string name)
+    {
+    }
 
     /// <summary>
     ///     Destroys a savepoint previously defined in the current transaction. This allows the system to

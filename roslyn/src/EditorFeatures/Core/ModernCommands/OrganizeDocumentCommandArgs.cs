@@ -18,6 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Commanding.Commands
     internal class OrganizeDocumentCommandArgs : EditorCommandArgs
     {
         public OrganizeDocumentCommandArgs(ITextView textView, ITextBuffer subjectBuffer)
-            : base(textView, subjectBuffer) { }
+            : base(textView, subjectBuffer)
+        {
+        }
     }
 }

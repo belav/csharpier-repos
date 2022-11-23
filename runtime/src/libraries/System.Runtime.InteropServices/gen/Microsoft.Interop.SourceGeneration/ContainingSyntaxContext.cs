@@ -37,7 +37,8 @@ namespace Microsoft.Interop
     {
         public ContainingSyntaxContext(MemberDeclarationSyntax memberDeclaration)
             : this(GetContainingTypes(memberDeclaration), GetContainingNamespace(memberDeclaration))
-        { }
+        {
+        }
 
         public ContainingSyntaxContext AddContainingSyntax(ContainingSyntax nestedType)
         {

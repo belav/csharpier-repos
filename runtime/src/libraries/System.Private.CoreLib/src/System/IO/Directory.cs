@@ -96,9 +96,15 @@ namespace System.IO
 
                 return FileSystem.DirectoryExists(fullPath);
             }
-            catch (ArgumentException) { }
-            catch (IOException) { }
-            catch (UnauthorizedAccessException) { }
+            catch (ArgumentException)
+            {
+            }
+            catch (IOException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
 
             return false;
         }

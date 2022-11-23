@@ -71,15 +71,21 @@ namespace Microsoft.Extensions.Configuration.Xml
     {
         public XmlConfigurationProvider(
             Microsoft.Extensions.Configuration.Xml.XmlConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
+        ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource))
+        {
+        }
 
-        public override void Load(System.IO.Stream stream) { }
+        public override void Load(System.IO.Stream stream)
+        {
+        }
     }
 
     public partial class XmlConfigurationSource
         : Microsoft.Extensions.Configuration.FileConfigurationSource
     {
-        public XmlConfigurationSource() { }
+        public XmlConfigurationSource()
+        {
+        }
 
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
@@ -93,7 +99,9 @@ namespace Microsoft.Extensions.Configuration.Xml
     {
         public static readonly Microsoft.Extensions.Configuration.Xml.XmlDocumentDecryptor Instance;
 
-        protected XmlDocumentDecryptor() { }
+        protected XmlDocumentDecryptor()
+        {
+        }
 
         public System.Xml.XmlReader CreateDecryptingXmlReader(
             System.IO.Stream input,
@@ -117,9 +125,13 @@ namespace Microsoft.Extensions.Configuration.Xml
     {
         public XmlStreamConfigurationProvider(
             Microsoft.Extensions.Configuration.Xml.XmlStreamConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
+        ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource))
+        {
+        }
 
-        public override void Load(System.IO.Stream stream) { }
+        public override void Load(System.IO.Stream stream)
+        {
+        }
 
         public static System.Collections.Generic.IDictionary<string, string?> Read(
             System.IO.Stream stream,
@@ -133,7 +145,9 @@ namespace Microsoft.Extensions.Configuration.Xml
     public partial class XmlStreamConfigurationSource
         : Microsoft.Extensions.Configuration.StreamConfigurationSource
     {
-        public XmlStreamConfigurationSource() { }
+        public XmlStreamConfigurationSource()
+        {
+        }
 
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder

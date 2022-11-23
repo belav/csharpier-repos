@@ -1350,7 +1350,8 @@ internal static class WaitThreadTests
         var e1 = new AutoResetEvent(false);
         var registered = ThreadPool.RegisterWaitForSingleObject(
             e0,
-            (_, __) => { },
+            (_, __) => {
+            },
             null,
             ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
             true
@@ -1367,7 +1368,8 @@ internal static class WaitThreadTests
         {
             handles[i] = ThreadPool.RegisterWaitForSingleObject(
                 new AutoResetEvent(false),
-                (_, __) => { },
+                (_, __) => {
+                },
                 null,
                 -1,
                 true
@@ -1447,7 +1449,8 @@ internal static class WaitThreadTests
         AutoResetEvent e0 = new AutoResetEvent(false);
         RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
             e0,
-            (_, __) => { },
+            (_, __) => {
+            },
             null,
             ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
             true
@@ -1463,7 +1466,8 @@ internal static class WaitThreadTests
         AutoResetEvent e0 = new AutoResetEvent(false);
         RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
             e0,
-            (_, __) => { },
+            (_, __) => {
+            },
             null,
             ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
             true
@@ -1478,7 +1482,8 @@ internal static class WaitThreadTests
     {
         RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
             new AutoResetEvent(false),
-            (_, __) => { },
+            (_, __) => {
+            },
             null,
             ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
             true
@@ -1493,7 +1498,8 @@ internal static class WaitThreadTests
         {
             RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
                 e0,
-                (_, __) => { },
+                (_, __) => {
+                },
                 null,
                 ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
                 true
@@ -1508,7 +1514,8 @@ internal static class WaitThreadTests
         var e0 = new AutoResetEvent(false);
         RegisteredWaitHandle handle = ThreadPool.RegisterWaitForSingleObject(
             e0,
-            (_, __) => { },
+            (_, __) => {
+            },
             null,
             ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
             true
@@ -1621,7 +1628,9 @@ internal static class ThreadTestHelpers
     }
 }
 
-internal sealed class InvalidWaitHandle : WaitHandle { }
+internal sealed class InvalidWaitHandle : WaitHandle
+{
+}
 
 internal sealed class Stopwatch
 {
@@ -1729,13 +1738,23 @@ internal static class Assert
 
 internal class AssertionFailureException : Exception
 {
-    public AssertionFailureException() { }
+    public AssertionFailureException()
+    {
+    }
 
-    public AssertionFailureException(string message) : base(message) { }
+    public AssertionFailureException(string message) : base(message)
+    {
+    }
 
-    public AssertionFailureException(Exception innerException) : base(null, innerException) { }
+    public AssertionFailureException(Exception innerException) : base(null, innerException)
+    {
+    }
 }
 
-internal class FactAttribute : Attribute { }
+internal class FactAttribute : Attribute
+{
+}
 
-internal class OuterLoopAttribute : Attribute { }
+internal class OuterLoopAttribute : Attribute
+{
+}

@@ -30,7 +30,9 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="onStreamAvailable">The action to call when an output stream is available.</param>
         public PushStreamContent(Action<Stream, HttpContent, TransportContext> onStreamAvailable)
-            : this(Taskify(onStreamAvailable), (MediaTypeHeaderValue)null) { }
+            : this(Taskify(onStreamAvailable), (MediaTypeHeaderValue)null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class.
@@ -40,7 +42,9 @@ namespace System.Net.Http
         /// HTTP request or response will be completed.</param>
         public PushStreamContent(
             Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable
-        ) : this(onStreamAvailable, (MediaTypeHeaderValue)null) { }
+        ) : this(onStreamAvailable, (MediaTypeHeaderValue)null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given media type.
@@ -50,7 +54,9 @@ namespace System.Net.Http
         public PushStreamContent(
             Action<Stream, HttpContent, TransportContext> onStreamAvailable,
             string mediaType
-        ) : this(Taskify(onStreamAvailable), new MediaTypeHeaderValue(mediaType)) { }
+        ) : this(Taskify(onStreamAvailable), new MediaTypeHeaderValue(mediaType))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given media type.
@@ -62,7 +68,9 @@ namespace System.Net.Http
         public PushStreamContent(
             Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable,
             string mediaType
-        ) : this(onStreamAvailable, new MediaTypeHeaderValue(mediaType)) { }
+        ) : this(onStreamAvailable, new MediaTypeHeaderValue(mediaType))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given <see cref="MediaTypeHeaderValue"/>.
@@ -72,7 +80,9 @@ namespace System.Net.Http
         public PushStreamContent(
             Action<Stream, HttpContent, TransportContext> onStreamAvailable,
             MediaTypeHeaderValue mediaType
-        ) : this(Taskify(onStreamAvailable), mediaType) { }
+        ) : this(Taskify(onStreamAvailable), mediaType)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given <see cref="MediaTypeHeaderValue"/>.

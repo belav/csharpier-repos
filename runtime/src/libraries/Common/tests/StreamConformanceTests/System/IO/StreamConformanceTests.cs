@@ -366,7 +366,15 @@ namespace System.IO.Tests
                         () =>
                         {
                             stream.EndRead(
-                                stream.BeginRead(null!, offset, count, iar => { }, new object())
+                                stream.BeginRead(
+                                    null!,
+                                    offset,
+                                    count,
+                                    iar =>
+                                    {
+                                    },
+                                    new object()
+                                )
                             );
                         }
                     );
@@ -406,7 +414,15 @@ namespace System.IO.Tests
                     () =>
                     {
                         stream.EndRead(
-                            stream.BeginRead(oneByteBuffer, -1, 0, iar => { }, new object())
+                            stream.BeginRead(
+                                oneByteBuffer,
+                                -1,
+                                0,
+                                iar =>
+                                {
+                                },
+                                new object()
+                            )
                         );
                     }
                 );
@@ -440,7 +456,15 @@ namespace System.IO.Tests
                         () =>
                         {
                             stream.EndRead(
-                                stream.BeginRead(oneByteBuffer, 0, count, iar => { }, new object())
+                                stream.BeginRead(
+                                    oneByteBuffer,
+                                    0,
+                                    count,
+                                    iar =>
+                                    {
+                                    },
+                                    new object()
+                                )
                             );
                         }
                     );
@@ -486,7 +510,9 @@ namespace System.IO.Tests
                                     oneByteBuffer,
                                     invalidOffset,
                                     invalidCount,
-                                    iar => { },
+                                    iar =>
+                                    {
+                                    },
                                     new object()
                                 )
                             );
@@ -695,7 +721,15 @@ namespace System.IO.Tests
                         () =>
                         {
                             stream.EndWrite(
-                                stream.BeginWrite(null!, offset, count, iar => { }, new object())
+                                stream.BeginWrite(
+                                    null!,
+                                    offset,
+                                    count,
+                                    iar =>
+                                    {
+                                    },
+                                    new object()
+                                )
                             );
                         }
                     );
@@ -735,7 +769,15 @@ namespace System.IO.Tests
                     () =>
                     {
                         stream.EndWrite(
-                            stream.BeginWrite(oneByteBuffer, -1, 0, iar => { }, new object())
+                            stream.BeginWrite(
+                                oneByteBuffer,
+                                -1,
+                                0,
+                                iar =>
+                                {
+                                },
+                                new object()
+                            )
                         );
                     }
                 );
@@ -769,7 +811,15 @@ namespace System.IO.Tests
                         () =>
                         {
                             stream.EndWrite(
-                                stream.BeginWrite(oneByteBuffer, 0, count, iar => { }, new object())
+                                stream.BeginWrite(
+                                    oneByteBuffer,
+                                    0,
+                                    count,
+                                    iar =>
+                                    {
+                                    },
+                                    new object()
+                                )
                             );
                         }
                     );
@@ -804,7 +854,9 @@ namespace System.IO.Tests
                                 oneByteBuffer,
                                 invalidOffset,
                                 invalidCount,
-                                iar => { },
+                                iar =>
+                                {
+                                },
                                 new object()
                             )
                         );
@@ -1157,7 +1209,9 @@ namespace System.IO.Tests
                 {
                     await incomplete.WaitAsync(TimeSpan.FromMilliseconds(500)); // give second task a chance to complete
                 }
-                catch (TimeoutException) { }
+                catch (TimeoutException)
+                {
+                }
 
                 await (incomplete.IsCompleted ? Task.WhenAll(completed, incomplete) : completed);
             }
@@ -1216,7 +1270,9 @@ namespace System.IO.Tests
             public void UnsafeOnCompleted(Action continuation) =>
                 ThreadPool.UnsafeQueueUserWorkItem(_ => continuation(), null);
 
-            public void GetResult() { }
+            public void GetResult()
+            {
+            }
         }
 
         protected sealed unsafe class NativeMemoryManager : MemoryManager<byte>
@@ -2842,7 +2898,10 @@ namespace System.IO.Tests
                 await Assert.ThrowsAsync<InvalidOperationException>(async () => await r);
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().IsCompleted);
                 Assert.Throws<InvalidOperationException>(
-                    () => r.GetAwaiter().OnCompleted(() => { })
+                    () =>
+                        r.GetAwaiter()
+                            .OnCompleted(() => {
+                            })
                 );
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().GetResult());
             }
@@ -2861,9 +2920,14 @@ namespace System.IO.Tests
             {
                 var b = new byte[1];
                 ValueTask<int> r = readable.ReadAsync(b);
-                r.GetAwaiter().OnCompleted(() => { });
+                r.GetAwaiter()
+                    .OnCompleted(() => {
+                    });
                 Assert.Throws<InvalidOperationException>(
-                    () => r.GetAwaiter().OnCompleted(() => { })
+                    () =>
+                        r.GetAwaiter()
+                            .OnCompleted(() => {
+                            })
                 );
             }
         }
@@ -4057,7 +4121,9 @@ namespace System.IO.Tests
         {
             private TaskCompletionSource? _signal;
 
-            public ZeroByteReadTrackingStream(Stream innerStream) : base(innerStream) { }
+            public ZeroByteReadTrackingStream(Stream innerStream) : base(innerStream)
+            {
+            }
 
             public Task WaitForZeroByteReadAsync()
             {

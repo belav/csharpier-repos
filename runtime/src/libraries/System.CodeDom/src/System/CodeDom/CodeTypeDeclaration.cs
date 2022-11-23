@@ -19,7 +19,9 @@ namespace System.CodeDom
         public event EventHandler PopulateBaseTypes;
         public event EventHandler PopulateMembers;
 
-        public CodeTypeDeclaration() { }
+        public CodeTypeDeclaration()
+        {
+        }
 
         public CodeTypeDeclaration(string name)
         {

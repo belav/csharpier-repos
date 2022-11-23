@@ -62,13 +62,21 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetConstant(object defaultValue) { }
+        public void SetConstant(object defaultValue)
+        {
+        }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
+        {
+        }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
+        {
+        }
 
-        public void SetOffset(int iOffset) { }
+        public void SetOffset(int iOffset)
+        {
+        }
 
         public override void SetValue(
             object obj,
@@ -76,6 +84,8 @@ namespace System.Reflection.Emit
             BindingFlags invokeAttr,
             Binder binder,
             CultureInfo culture
-        ) { }
+        )
+        {
+        }
     }
 }

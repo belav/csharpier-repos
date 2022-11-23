@@ -65,7 +65,9 @@ namespace System.Configuration
                 if (type != null)
                     return type;
             }
-            catch { }
+            catch
+            {
+            }
 
             foreach (string assembly in s_implicitAssemblies)
             {
@@ -75,7 +77,9 @@ namespace System.Configuration
                     if (type != null)
                         return type;
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return null;

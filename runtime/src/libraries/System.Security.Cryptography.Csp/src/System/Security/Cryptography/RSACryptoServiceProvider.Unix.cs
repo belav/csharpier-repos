@@ -15,7 +15,9 @@ namespace System.Security.Cryptography
         private readonly RSA _impl;
         private bool _publicOnly;
 
-        public RSACryptoServiceProvider() : this(DefaultKeySize) { }
+        public RSACryptoServiceProvider() : this(DefaultKeySize)
+        {
+        }
 
         public RSACryptoServiceProvider(int dwKeySize)
         {

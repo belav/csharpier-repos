@@ -9,7 +9,8 @@ class Driver
     static void Main(string[] args)
     {
         if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
-            AppDomain.CurrentDomain.UnhandledException += (s, e) => { };
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => {
+            };
 
         throw new AppDomainUnloadedException();
     }

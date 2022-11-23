@@ -642,7 +642,9 @@ namespace System.Web.Helpers.Test
         {
             public int Value
             {
-                set { }
+                set
+                {
+                }
             }
         }
 

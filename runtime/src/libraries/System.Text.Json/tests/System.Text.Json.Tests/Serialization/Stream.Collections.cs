@@ -16,7 +16,9 @@ namespace System.Text.Json.Serialization.Tests
     public partial class StreamTests
     {
         // Empty class functioning as witness type for TElement
-        public class Witness<T> { }
+        public class Witness<T>
+        {
+        }
 
         [Theory]
         [ActiveIssue(

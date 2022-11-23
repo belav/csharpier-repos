@@ -11,7 +11,9 @@ namespace System.Web.Http.ModelBinding.Binders
     {
         private ModelBinderProvider[] _providers;
 
-        public CompositeModelBinderProvider() { }
+        public CompositeModelBinderProvider()
+        {
+        }
 
         public CompositeModelBinderProvider(IEnumerable<ModelBinderProvider> providers)
         {

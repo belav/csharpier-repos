@@ -84,7 +84,9 @@ namespace System.Security.Cryptography.Tests
             public Func<byte[]> ExportECPrivateKeyDelegate = null;
             public TryExportFunc TryExportECPrivateKeyDelegate = null;
 
-            public DelegateECAlgorithm() { }
+            public DelegateECAlgorithm()
+            {
+            }
 
             public override byte[] ExportECPrivateKey() => ExportECPrivateKeyDelegate();
 

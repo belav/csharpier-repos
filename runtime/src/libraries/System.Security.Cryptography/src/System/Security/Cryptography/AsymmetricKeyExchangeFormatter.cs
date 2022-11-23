@@ -5,7 +5,9 @@ namespace System.Security.Cryptography
 {
     public abstract class AsymmetricKeyExchangeFormatter
     {
-        protected AsymmetricKeyExchangeFormatter() { }
+        protected AsymmetricKeyExchangeFormatter()
+        {
+        }
 
         public abstract string? Parameters { get; }
 

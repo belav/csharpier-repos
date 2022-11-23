@@ -2,7 +2,9 @@
 {
     public class LatLong
     {
-        public LatLong() { }
+        public LatLong()
+        {
+        }
 
         public LatLong(double latitude, double longitude) : this()
         {

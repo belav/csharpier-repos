@@ -41,7 +41,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     customColumns,
                     includeContainingTypeAndMemberColumns,
                     includeKindColumn
-                ) { }
+                )
+            {
+            }
 
             protected override async ValueTask OnDefinitionFoundWorkerAsync(
                 DefinitionItem definition,

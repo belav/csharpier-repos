@@ -8,7 +8,9 @@ namespace System.Security.Cryptography
 {
     public abstract class KeyedHashAlgorithm : HashAlgorithm
     {
-        protected KeyedHashAlgorithm() { }
+        protected KeyedHashAlgorithm()
+        {
+        }
 
         [Obsolete(
             Obsoletions.DefaultCryptoAlgorithmsMessage,

@@ -96,24 +96,53 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Aggregate((x, y) => x)
-            );
-            AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Aggregate(0, (x, y) => x + y)
-            );
-            AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Aggregate(0, (x, y) => x + y, r => r)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Aggregate((x, y) => x)
             );
             AssertThrows.AlreadyCanceled(
                 source =>
                     operation
-                        .Item(source, () => { })
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Aggregate(0, (x, y) => x + y)
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Aggregate(0, (x, y) => x + y, r => r)
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
                         .Aggregate(0, (a, x) => a + x, (l, r) => l + r, r => r)
             );
             AssertThrows.AlreadyCanceled(
                 source =>
                     operation
-                        .Item(source, () => { })
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
                         .Aggregate(() => 0, (a, x) => a + x, (l, r) => l + r, r => r)
             );
         }
@@ -153,7 +182,14 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).All(x => true)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .All(x => true)
             );
         }
 
@@ -191,9 +227,25 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Any());
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Any(x => true)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Any()
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Any(x => true)
             );
         }
 
@@ -325,7 +377,16 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Average());
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Average()
+            );
         }
 
         [Theory]
@@ -363,7 +424,14 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Contains(DefaultStart)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Contains(DefaultStart)
             );
         }
 
@@ -428,13 +496,45 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Count());
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).LongCount());
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Count(x => true)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Count()
             );
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).LongCount(x => true)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .LongCount()
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Count(x => true)
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .LongCount(x => true)
             );
         }
 
@@ -475,7 +575,16 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).ElementAt(0));
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ElementAt(0)
+            );
         }
 
         [Theory]
@@ -518,10 +627,24 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).ElementAtOrDefault(0)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ElementAtOrDefault(0)
             );
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).ElementAtOrDefault(DefaultSize + 1)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ElementAtOrDefault(DefaultSize + 1)
             );
         }
 
@@ -562,9 +685,25 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).First());
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).First(x => false)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .First()
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .First(x => false)
             );
         }
 
@@ -606,10 +745,24 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).FirstOrDefault()
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .FirstOrDefault()
             );
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).FirstOrDefault(x => false)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .FirstOrDefault(x => false)
             );
         }
 
@@ -621,7 +774,12 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.EventuallyCanceled(
-                (source, canceler) => operation.Item(source, canceler).ForAll(x => { })
+                (source, canceler) =>
+                    operation
+                        .Item(source, canceler)
+                        .ForAll(x =>
+                        {
+                        })
             );
         }
 
@@ -633,10 +791,20 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.OtherTokenCanceled(
-                (source, canceler) => operation.Item(source, canceler).ForAll(x => { })
+                (source, canceler) =>
+                    operation
+                        .Item(source, canceler)
+                        .ForAll(x =>
+                        {
+                        })
             );
             AssertThrows.SameTokenNotCanceled(
-                (source, canceler) => operation.Item(source, canceler).ForAll(x => { })
+                (source, canceler) =>
+                    operation
+                        .Item(source, canceler)
+                        .ForAll(x =>
+                        {
+                        })
             );
         }
 
@@ -648,7 +816,16 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).ForAll(x => { })
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ForAll(x =>
+                        {
+                        })
             );
         }
 
@@ -703,7 +880,13 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.AlreadyCanceled(source =>
             {
-                foreach (int i in operation.Item(source, () => { }))
+                foreach (
+                    int i in operation.Item(
+                        source,
+                        () => {
+                        }
+                    )
+                )
                     ;
             });
         }
@@ -754,9 +937,25 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Last());
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Last(x => true)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Last()
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Last(x => true)
             );
         }
 
@@ -807,10 +1006,24 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).LastOrDefault()
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .LastOrDefault()
             );
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).LastOrDefault(x => true)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .LastOrDefault(x => true)
             );
         }
 
@@ -954,7 +1167,16 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Max());
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Max()
+            );
         }
 
         [Theory]
@@ -1097,7 +1319,16 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Min());
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Min()
+            );
         }
 
         [Theory]
@@ -1170,11 +1401,25 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.AlreadyCanceled(
                 source =>
-                    operation.Item(source, () => { }).SequenceEqual(ParallelEnumerable.Range(0, 2))
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .SequenceEqual(ParallelEnumerable.Range(0, 2))
             );
             AssertThrows.AlreadyCanceled(
                 source =>
-                    ParallelEnumerable.Range(0, 2).SequenceEqual(operation.Item(source, () => { }))
+                    ParallelEnumerable
+                        .Range(0, 2)
+                        .SequenceEqual(
+                            operation.Item(
+                                source,
+                                () => {
+                                }
+                            )
+                        )
             );
         }
 
@@ -1212,9 +1457,25 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Single());
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).Single(x => false)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Single()
+            );
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Single(x => false)
             );
         }
 
@@ -1253,10 +1514,24 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).SingleOrDefault()
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .SingleOrDefault()
             );
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).SingleOrDefault(x => false)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .SingleOrDefault(x => false)
             );
         }
 
@@ -1388,7 +1663,16 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Sum());
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .Sum()
+            );
         }
 
         [Theory]
@@ -1428,7 +1712,16 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).ToArray());
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ToArray()
+            );
         }
 
         [Theory]
@@ -1475,10 +1768,24 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).ToDictionary(x => x)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ToDictionary(x => x)
             );
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).ToDictionary(x => x, y => y)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ToDictionary(x => x, y => y)
             );
         }
 
@@ -1519,7 +1826,16 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).ToList());
+            AssertThrows.AlreadyCanceled(
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ToList()
+            );
         }
 
         [Theory]
@@ -1569,10 +1885,24 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).ToLookup(x => x)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ToLookup(x => x)
             );
             AssertThrows.AlreadyCanceled(
-                source => operation.Item(source, () => { }).ToLookup(x => x, y => y)
+                source =>
+                    operation
+                        .Item(
+                            source,
+                            () => {
+                            }
+                        )
+                        .ToLookup(x => x, y => y)
             );
         }
 

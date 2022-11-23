@@ -75,7 +75,11 @@ public class TestDiagnosticListener
         };
     }
 
-    public interface IProxyHttpContext { }
+    public interface IProxyHttpContext
+    {
+    }
 
-    public interface IProxyException { }
+    public interface IProxyException
+    {
+    }
 }

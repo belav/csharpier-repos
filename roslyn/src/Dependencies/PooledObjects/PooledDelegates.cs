@@ -549,6 +549,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         }
 
         [AttributeUsage(AttributeTargets.Struct)]
-        private sealed class NonCopyableAttribute : Attribute { }
+        private sealed class NonCopyableAttribute : Attribute
+        {
+        }
     }
 }

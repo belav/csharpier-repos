@@ -32,7 +32,8 @@ internal interface LineFormattingOptionsProvider
 #if !CODE_STYLE
     : OptionsProvider<LineFormattingOptions>
 #endif
-{ }
+{
+}
 
 internal static partial class LineFormattingOptionsProviders
 {

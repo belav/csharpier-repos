@@ -84,8 +84,12 @@ public class Tests
         }
         catch (Exception ex)
         {
-            if (!unlocked) { }
+            if (!unlocked)
+            {
+            }
         }
-        finally { }
+        finally
+        {
+        }
     }
 }

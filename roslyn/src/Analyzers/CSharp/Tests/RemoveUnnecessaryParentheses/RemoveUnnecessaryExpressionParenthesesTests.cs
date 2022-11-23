@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnnecessaryExpressionParenthesesTests(ITestOutputHelper logger) : base(logger)
-        { }
+        {
+        }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

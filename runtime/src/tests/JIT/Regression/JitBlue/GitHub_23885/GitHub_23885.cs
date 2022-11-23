@@ -17,7 +17,9 @@ public class GitHub_23885
         Vector<ulong> v6,
         Vector<ulong> v7,
         Vector<ulong> v8
-    ) { }
+    )
+    {
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void CreateVectors()
@@ -40,7 +42,9 @@ public class GitHub_23885
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void ConsumeDouble(double d) { }
+    static void ConsumeDouble(double d)
+    {
+    }
 
     static int Main(string[] args)
     {

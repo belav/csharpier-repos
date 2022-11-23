@@ -43,7 +43,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public int WarnOnBuildErrors
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public int AutoComment
@@ -103,14 +105,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public int ClosedFileDiagnostics
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         [Obsolete("CSharpClosedFileDiagnostics has been deprecated")]
         public int CSharpClosedFileDiagnostics
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public int DisplayLineSeparators
@@ -420,7 +426,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public int ShowKeywords
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         [Obsolete("Use SnippetsBehavior instead")]
@@ -796,7 +804,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
                         )
                     );
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -885,7 +895,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public int Style_UseVarWhenDeclaringLocals
         {
             get { return 0; }
-            set { }
+            set
+            {
+            }
         }
 
         public string Style_UseImplicitTypeWherePossible

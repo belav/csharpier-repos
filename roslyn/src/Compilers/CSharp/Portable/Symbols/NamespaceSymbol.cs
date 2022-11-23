@@ -146,7 +146,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler can create namespace symbols.
-        internal NamespaceSymbol() { }
+        internal NamespaceSymbol()
+        {
+        }
 
         /// <summary>
         /// Get this accessibility that was declared on this symbol. For symbols that do not have

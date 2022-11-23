@@ -14,7 +14,9 @@ namespace System.Data.Common
         private decimal[] _values = default!; // Late-initialized
 
         internal DecimalStorage(DataColumn column)
-            : base(column, typeof(decimal), DefaultValue, StorageType.Decimal) { }
+            : base(column, typeof(decimal), DefaultValue, StorageType.Decimal)
+        {
+        }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {

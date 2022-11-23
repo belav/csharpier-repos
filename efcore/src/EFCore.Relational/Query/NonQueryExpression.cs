@@ -35,14 +35,18 @@ public class NonQueryExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="deleteExpression">The delete expression to delete rows on the server.</param>
     public NonQueryExpression(DeleteExpression deleteExpression)
-        : this(deleteExpression, CommandSource.ExecuteDelete) { }
+        : this(deleteExpression, CommandSource.ExecuteDelete)
+    {
+    }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="NonQueryExpression" /> class with associated update expression.
     /// </summary>
     /// <param name="updateExpression">The update expression to update rows on the server.</param>
     public NonQueryExpression(UpdateExpression updateExpression)
-        : this(updateExpression, CommandSource.ExecuteUpdate) { }
+        : this(updateExpression, CommandSource.ExecuteUpdate)
+    {
+    }
 
     /// <summary>
     ///     An expression representing the non-query operation to be run against server.

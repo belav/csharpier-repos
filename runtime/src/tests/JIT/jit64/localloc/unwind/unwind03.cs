@@ -34,7 +34,9 @@ internal class LocallocTest
             unwindTest1();
             return 1;
         }
-        catch { }
+        catch
+        {
+        }
         if (s_testFailed)
             return 1;
 

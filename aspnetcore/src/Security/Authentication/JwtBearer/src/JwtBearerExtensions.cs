@@ -22,7 +22,12 @@ public static class JwtBearerExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddJwtBearer(this AuthenticationBuilder builder) =>
-        builder.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, _ => { });
+        builder.AddJwtBearer(
+            JwtBearerDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Enables JWT-bearer authentication using a pre-defined scheme.
@@ -36,7 +41,13 @@ public static class JwtBearerExtensions
     public static AuthenticationBuilder AddJwtBearer(
         this AuthenticationBuilder builder,
         string authenticationScheme
-    ) => builder.AddJwtBearer(authenticationScheme, _ => { });
+    ) =>
+        builder.AddJwtBearer(
+            authenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Enables JWT-bearer authentication using the default scheme <see cref="JwtBearerDefaults.AuthenticationScheme"/>.

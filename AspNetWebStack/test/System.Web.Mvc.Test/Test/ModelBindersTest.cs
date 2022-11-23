@@ -85,7 +85,9 @@ namespace System.Web.Mvc.Test
         private class SampleModel
         {
             [ModelBinder(typeof(SampleModelBinder))]
-            private class SampleModel_Buddy { }
+            private class SampleModel_Buddy
+            {
+            }
         }
 
         private class SampleModelBinder : IModelBinder

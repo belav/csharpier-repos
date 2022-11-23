@@ -12,7 +12,9 @@ namespace System.Security.Cryptography
         public string? FormatterAlgorithm { get; set; }
         public string? DeformatterAlgorithm { get; set; }
 
-        public SignatureDescription() { }
+        public SignatureDescription()
+        {
+        }
 
         public SignatureDescription(SecurityElement el)
         {

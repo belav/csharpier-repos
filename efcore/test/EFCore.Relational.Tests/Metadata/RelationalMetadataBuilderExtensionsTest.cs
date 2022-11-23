@@ -268,8 +268,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             public int? Splowed { get; set; }
         }
 
-        private class Splow : Splot { }
+        private class Splow : Splot
+        {
+        }
 
-        private class Splod : Splow { }
+        private class Splod : Splow
+        {
+        }
     }
 }

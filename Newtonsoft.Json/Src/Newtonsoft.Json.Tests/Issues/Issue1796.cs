@@ -67,9 +67,13 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.AreEqual(1, c.Count);
         }
 
-        public class TestStack : SortedSet<object> { }
+        public class TestStack : SortedSet<object>
+        {
+        }
 
-        public class TestStack<T> : SortedSet<T> { }
+        public class TestStack<T> : SortedSet<T>
+        {
+        }
     }
 }
 #endif

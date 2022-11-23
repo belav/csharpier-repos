@@ -20,7 +20,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     [Collection(nameof(SharedIntegrationHostFixture))]
     public class CSharpBuild : AbstractIntegrationTest
     {
-        public CSharpBuild(VisualStudioInstanceFactory instanceFactory) : base(instanceFactory) { }
+        public CSharpBuild(VisualStudioInstanceFactory instanceFactory) : base(instanceFactory)
+        {
+        }
 
         public override async Task InitializeAsync()
         {

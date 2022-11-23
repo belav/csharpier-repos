@@ -201,7 +201,9 @@ namespace System.Net.Http.Functional.Tests
             public int CopyToCount { get; private set; }
 
             public MockByteArrayContent(byte[] content, int offset, int count)
-                : base(content, offset, count) { }
+                : base(content, offset, count)
+            {
+            }
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {

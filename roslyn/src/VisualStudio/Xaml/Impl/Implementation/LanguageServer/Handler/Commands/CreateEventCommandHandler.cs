@@ -29,7 +29,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CreateEventCommandHandler() { }
+        public CreateEventCommandHandler()
+        {
+        }
 
         public override string Command => StringConstants.CreateEventHandlerCommand;
 

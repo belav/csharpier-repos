@@ -320,7 +320,9 @@ namespace System.Linq.Parallel
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing) { }
+        protected virtual void Dispose(bool disposing)
+        {
+        }
 
         /// <summary>
         /// Used in BuildBaseHashLookup to translate from data in dataSource to data to be used

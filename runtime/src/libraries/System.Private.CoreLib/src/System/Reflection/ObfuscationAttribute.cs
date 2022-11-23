@@ -20,7 +20,9 @@ namespace System.Reflection
     )]
     public sealed class ObfuscationAttribute : Attribute
     {
-        public ObfuscationAttribute() { }
+        public ObfuscationAttribute()
+        {
+        }
 
         public bool StripAfterObfuscation { get; set; } = true;
         public bool Exclude { get; set; } = true;

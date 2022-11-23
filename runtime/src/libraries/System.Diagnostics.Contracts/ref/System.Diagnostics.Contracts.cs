@@ -10,52 +10,74 @@ namespace System.Diagnostics.Contracts
     {
         public static event System.EventHandler<System.Diagnostics.Contracts.ContractFailedEventArgs>? ContractFailed
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
         [System.Diagnostics.ConditionalAttribute("DEBUG")]
         public static void Assert(
             [System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute(false)] bool condition
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
         [System.Diagnostics.ConditionalAttribute("DEBUG")]
         public static void Assert(
             [System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute(false)] bool condition,
             string? userMessage
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
         [System.Diagnostics.ConditionalAttribute("DEBUG")]
         public static void Assume(
             [System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute(false)] bool condition
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
         [System.Diagnostics.ConditionalAttribute("DEBUG")]
         public static void Assume(
             [System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute(false)] bool condition,
             string? userMessage
-        ) { }
+        )
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-        public static void EndContractBlock() { }
+        public static void EndContractBlock()
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-        public static void Ensures(bool condition) { }
+        public static void Ensures(bool condition)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-        public static void Ensures(bool condition, string? userMessage) { }
+        public static void Ensures(bool condition, string? userMessage)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
         public static void EnsuresOnThrow<TException>(bool condition)
-            where TException : System.Exception { }
+            where TException : System.Exception
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
         public static void EnsuresOnThrow<TException>(bool condition, string? userMessage)
-            where TException : System.Exception { }
+            where TException : System.Exception
+        {
+        }
 
         public static bool Exists(
             int fromInclusive,
@@ -92,10 +114,14 @@ namespace System.Diagnostics.Contracts
         }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-        public static void Invariant(bool condition) { }
+        public static void Invariant(bool condition)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-        public static void Invariant(bool condition, string? userMessage) { }
+        public static void Invariant(bool condition, string? userMessage)
+        {
+        }
 
         public static T OldValue<T>(T value)
         {
@@ -103,16 +129,23 @@ namespace System.Diagnostics.Contracts
         }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-        public static void Requires(bool condition) { }
+        public static void Requires(bool condition)
+        {
+        }
 
         [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-        public static void Requires(bool condition, string? userMessage) { }
+        public static void Requires(bool condition, string? userMessage)
+        {
+        }
 
-        public static void Requires<TException>(bool condition)
-            where TException : System.Exception { }
+        public static void Requires<TException>(bool condition) where TException : System.Exception
+        {
+        }
 
         public static void Requires<TException>(bool condition, string? userMessage)
-            where TException : System.Exception { }
+            where TException : System.Exception
+        {
+        }
 
         public static T Result<T>()
         {
@@ -129,14 +162,18 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractAbbreviatorAttribute : System.Attribute
     {
-        public ContractAbbreviatorAttribute() { }
+        public ContractAbbreviatorAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, AllowMultiple = false)]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractArgumentValidatorAttribute : System.Attribute
     {
-        public ContractArgumentValidatorAttribute() { }
+        public ContractArgumentValidatorAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -150,7 +187,9 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("DEBUG")]
     public sealed partial class ContractClassAttribute : System.Attribute
     {
-        public ContractClassAttribute(System.Type typeContainingContracts) { }
+        public ContractClassAttribute(System.Type typeContainingContracts)
+        {
+        }
 
         public System.Type TypeContainingContracts
         {
@@ -166,7 +205,9 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractClassForAttribute : System.Attribute
     {
-        public ContractClassForAttribute(System.Type typeContractsAreFor) { }
+        public ContractClassForAttribute(System.Type typeContractsAreFor)
+        {
+        }
 
         public System.Type TypeContractsAreFor
         {
@@ -181,7 +222,9 @@ namespace System.Diagnostics.Contracts
             string? message,
             string? condition,
             System.Exception? originalException
-        ) { }
+        )
+        {
+        }
 
         public string? Condition
         {
@@ -208,9 +251,13 @@ namespace System.Diagnostics.Contracts
             get { throw null; }
         }
 
-        public void SetHandled() { }
+        public void SetHandled()
+        {
+        }
 
-        public void SetUnwind() { }
+        public void SetUnwind()
+        {
+        }
     }
 
     public enum ContractFailureKind
@@ -231,7 +278,9 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractInvariantMethodAttribute : System.Attribute
     {
-        public ContractInvariantMethodAttribute() { }
+        public ContractInvariantMethodAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -242,9 +291,13 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractOptionAttribute : System.Attribute
     {
-        public ContractOptionAttribute(string category, string setting, bool enabled) { }
+        public ContractOptionAttribute(string category, string setting, bool enabled)
+        {
+        }
 
-        public ContractOptionAttribute(string category, string setting, string value) { }
+        public ContractOptionAttribute(string category, string setting, string value)
+        {
+        }
 
         public string Category
         {
@@ -268,7 +321,9 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractPublicPropertyNameAttribute : System.Attribute
     {
-        public ContractPublicPropertyNameAttribute(string name) { }
+        public ContractPublicPropertyNameAttribute(string name)
+        {
+        }
 
         public string Name
         {
@@ -279,7 +334,9 @@ namespace System.Diagnostics.Contracts
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly)]
     public sealed partial class ContractReferenceAssemblyAttribute : System.Attribute
     {
-        public ContractReferenceAssemblyAttribute() { }
+        public ContractReferenceAssemblyAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -290,7 +347,9 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractRuntimeIgnoredAttribute : System.Attribute
     {
-        public ContractRuntimeIgnoredAttribute() { }
+        public ContractRuntimeIgnoredAttribute()
+        {
+        }
     }
 
     [System.AttributeUsageAttribute(
@@ -304,7 +363,9 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class ContractVerificationAttribute : System.Attribute
     {
-        public ContractVerificationAttribute(bool value) { }
+        public ContractVerificationAttribute(bool value)
+        {
+        }
 
         public bool Value
         {
@@ -326,7 +387,9 @@ namespace System.Diagnostics.Contracts
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     public sealed partial class PureAttribute : System.Attribute
     {
-        public PureAttribute() { }
+        public PureAttribute()
+        {
+        }
     }
 }
 
@@ -350,6 +413,8 @@ namespace System.Runtime.CompilerServices
             string? userMessage,
             string? conditionText,
             System.Exception? innerException
-        ) { }
+        )
+        {
+        }
     }
 }

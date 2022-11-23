@@ -20,7 +20,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "LeftShift";
 
-        private LeftShiftInstruction() { }
+        private LeftShiftInstruction()
+        {
+        }
 
         private sealed class LeftShiftSByte : LeftShiftInstruction
         {

@@ -24,7 +24,9 @@ namespace System.Reflection.Emit
         private List<int> _stack = new List<int>();
         private int _stackIdx;
 
-        private TypeNameBuilder() { }
+        private TypeNameBuilder()
+        {
+        }
 
         private void OpenGenericArguments()
         {

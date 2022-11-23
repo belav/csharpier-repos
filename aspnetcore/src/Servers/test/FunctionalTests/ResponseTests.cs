@@ -20,7 +20,9 @@ namespace ServerComparison.FunctionalTests;
 
 public class ResponseTests : LoggedTest
 {
-    public ResponseTests(ITestOutputHelper output) : base(output) { }
+    public ResponseTests(ITestOutputHelper output) : base(output)
+    {
+    }
 
     public static TestMatrix TestVariants =>
         TestMatrix

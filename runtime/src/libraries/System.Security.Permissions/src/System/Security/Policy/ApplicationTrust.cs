@@ -7,9 +7,13 @@ namespace System.Security.Policy
 {
     public sealed partial class ApplicationTrust : EvidenceBase, ISecurityEncodable
     {
-        public ApplicationTrust() { }
+        public ApplicationTrust()
+        {
+        }
 
-        public ApplicationTrust(ApplicationIdentity identity) { }
+        public ApplicationTrust(ApplicationIdentity identity)
+        {
+        }
 
 #if NETCOREAPP
         [Obsolete(
@@ -21,7 +25,9 @@ namespace System.Security.Policy
         public ApplicationTrust(
             PermissionSet defaultGrantSet,
             IEnumerable<StrongName> fullTrustAssemblies
-        ) { }
+        )
+        {
+        }
 
         public ApplicationIdentity ApplicationIdentity { get; set; }
         public PolicyStatement DefaultGrantSet { get; set; }
@@ -41,7 +47,9 @@ namespace System.Security.Policy
         public bool IsApplicationTrustedToRun { get; set; }
         public bool Persist { get; set; }
 
-        public void FromXml(SecurityElement element) { }
+        public void FromXml(SecurityElement element)
+        {
+        }
 
         public SecurityElement ToXml()
         {

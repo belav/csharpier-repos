@@ -218,7 +218,12 @@ namespace Microsoft.Extensions.Primitives
 
             // Act
             firstCancellationTokenSource.Cancel();
-            compositeChangeToken.RegisterChangeCallback(_ => { }, null);
+            compositeChangeToken.RegisterChangeCallback(
+                _ =>
+                {
+                },
+                null
+            );
             secondCancellationTokenSource.Cancel();
 
             // Assert

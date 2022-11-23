@@ -363,7 +363,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class NoParameterlessCtorBinder<T> : IExtensibleModelBinder
         {
-            public NoParameterlessCtorBinder(int parameter) { }
+            public NoParameterlessCtorBinder(int parameter)
+            {
+            }
 
             public bool BindModel(
                 ControllerContext controllerContext,

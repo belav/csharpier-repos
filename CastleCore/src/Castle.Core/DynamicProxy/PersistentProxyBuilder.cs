@@ -27,7 +27,9 @@ namespace Castle.DynamicProxy
         /// <summary>
         ///   Initializes a new instance of the <see cref = "PersistentProxyBuilder" /> class.
         /// </summary>
-        public PersistentProxyBuilder() : base(new ModuleScope(true)) { }
+        public PersistentProxyBuilder() : base(new ModuleScope(true))
+        {
+        }
 
         /// <summary>
         ///   Saves the generated assembly to a physical file. Note that this renders the <see cref = "PersistentProxyBuilder" /> unusable.

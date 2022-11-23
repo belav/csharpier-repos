@@ -43,7 +43,9 @@ namespace ILCompiler.Reflection.ReadyToRun
     public class TodoSignature : ReadyToRunSignature
     {
         public TodoSignature(SignatureDecoder decoder, ReadyToRunFixupKind fixupKind)
-            : base(decoder, fixupKind) { }
+            : base(decoder, fixupKind)
+        {
+        }
     }
 
     public class MethodDefEntrySignature : ReadyToRunSignature
@@ -51,7 +53,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         public uint MethodDefToken { get; set; }
 
         public MethodDefEntrySignature(SignatureDecoder decoder)
-            : base(decoder, ReadyToRunFixupKind.MethodEntry_DefToken) { }
+            : base(decoder, ReadyToRunFixupKind.MethodEntry_DefToken)
+        {
+        }
     }
 
     public class MethodRefEntrySignature : ReadyToRunSignature
@@ -59,7 +63,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         public uint MethodRefToken { get; set; }
 
         public MethodRefEntrySignature(SignatureDecoder decoder)
-            : base(decoder, ReadyToRunFixupKind.MethodEntry_RefToken) { }
+            : base(decoder, ReadyToRunFixupKind.MethodEntry_RefToken)
+        {
+        }
     }
 
     /// <summary>
@@ -1251,7 +1257,9 @@ namespace ILCompiler.Reflection.ReadyToRun
             : StringTypeProviderBase<TextSignatureDecoderContext>,
                 IR2RSignatureTypeProvider<string, string, TextSignatureDecoderContext>
         {
-            private TextTypeProvider() { }
+            private TextTypeProvider()
+            {
+            }
 
             public static readonly TextTypeProvider Singleton = new TextTypeProvider();
 
@@ -1379,7 +1387,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                 r2rReader,
                 offset,
                 skipOverrideMetadataReader: !forFixup
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Construct the signature decoder by storing the image byte array and offset within the array.
@@ -1408,7 +1418,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                 offset,
                 outerReader,
                 contextReader
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Decode a R2R import signature. The signature starts with the fixup type followed

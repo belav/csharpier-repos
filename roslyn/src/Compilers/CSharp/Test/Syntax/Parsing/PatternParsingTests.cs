@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
         }
 
-        public PatternParsingTests(ITestOutputHelper output) : base(output) { }
+        public PatternParsingTests(ITestOutputHelper output) : base(output)
+        {
+        }
 
         [Fact]
         public void CasePatternVersusFeatureFlag()

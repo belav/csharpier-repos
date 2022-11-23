@@ -38,7 +38,9 @@ namespace Test
                 while (true)
                     GoToEnd();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return new bool[7];
         }
 

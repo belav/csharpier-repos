@@ -18,7 +18,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpNavigateTo() : base(nameof(CSharpNavigateTo)) { }
+        public CSharpNavigateTo() : base(nameof(CSharpNavigateTo))
+        {
+        }
 
         [IdeFact]
         public async Task NavigateTo()

@@ -9,7 +9,9 @@ namespace System.Reflection.TypeLoading.Ecma
     //
     internal sealed class EcmaModifiedTypeProvider : EcmaWrappedTypeProvider
     {
-        internal EcmaModifiedTypeProvider(EcmaModule module) : base(module) { }
+        internal EcmaModifiedTypeProvider(EcmaModule module) : base(module)
+        {
+        }
 
         public sealed override RoType GetModifiedType(
             RoType modifier,

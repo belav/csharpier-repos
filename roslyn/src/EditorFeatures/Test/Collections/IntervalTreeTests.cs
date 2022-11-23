@@ -272,7 +272,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections
                     Tuple.Create(59, 1, "B"),
                     Tuple.Create(52, 1, "C")
                 )
-            ) { }
+            )
+            {
+            }
         }
 
         [Fact]

@@ -205,7 +205,9 @@ public abstract class NavigationManager
     /// Allows derived classes to lazily self-initialize. Implementations that support lazy-initialization should override
     /// this method and call <see cref="Initialize(string, string)" />.
     /// </summary>
-    protected virtual void EnsureInitialized() { }
+    protected virtual void EnsureInitialized()
+    {
+    }
 
     /// <summary>
     /// Converts a relative URI into an absolute one (by resolving it

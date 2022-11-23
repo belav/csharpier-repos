@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SQLiteConnectionPoolService() { }
+        public SQLiteConnectionPoolService()
+        {
+        }
 
         /// <summary>
         /// Use a <see cref="ConcurrentExclusiveSchedulerPair"/> to simulate a reader-writer lock.

@@ -48,7 +48,9 @@ namespace Microsoft.Win32.SafeHandles
         private bool _deleteOnClose;
         private bool _isLocked;
 
-        public SafeFileHandle() : this(ownsHandle: true) { }
+        public SafeFileHandle() : this(ownsHandle: true)
+        {
+        }
 
         private SafeFileHandle(bool ownsHandle) : base(ownsHandle)
         {
@@ -83,7 +85,8 @@ namespace Microsoft.Win32.SafeHandles
 #pragma warning disable CA1822
         internal ThreadPoolBoundHandle? ThreadPoolBinding => null;
 
-        internal void EnsureThreadPoolBindingInitialized() { /* nop */
+        internal void EnsureThreadPoolBindingInitialized()
+        { /* nop */
         }
 
         internal bool TryGetCachedLength(out long cachedLength)

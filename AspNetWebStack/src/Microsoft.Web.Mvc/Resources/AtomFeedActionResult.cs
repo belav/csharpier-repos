@@ -27,7 +27,9 @@ namespace Microsoft.Web.Mvc.Resources
         /// </summary>
         /// <param name="feed"></param>
         public AtomFeedActionResult(SyndicationFeed feed)
-            : this(feed, new ContentType("application/atom+xml")) { }
+            : this(feed, new ContentType("application/atom+xml"))
+        {
+        }
 
         public AtomFeedActionResult(SyndicationFeed feed, ContentType contentType)
         {

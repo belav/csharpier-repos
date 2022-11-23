@@ -1244,7 +1244,9 @@ namespace System
                     result = ToObject(enumType, ulongResult);
                     return true;
                 }
-                catch when (!throwOnFailure) { }
+                catch when (!throwOnFailure)
+                {
+                }
             }
 
             result = null;

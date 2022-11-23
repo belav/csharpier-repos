@@ -544,7 +544,9 @@ namespace Castle.DynamicProxy.Tests
             generator.CreateInterfaceProxyWithoutTarget(typeof(IList<object>), new IInterceptor[0]);
         }
 
-        private interface PrivateInterface { }
+        private interface PrivateInterface
+        {
+        }
     }
 
     public class IdenticalOneVirtual : IIdenticalOne

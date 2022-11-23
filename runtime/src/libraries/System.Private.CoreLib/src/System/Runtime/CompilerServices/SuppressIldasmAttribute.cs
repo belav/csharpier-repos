@@ -11,6 +11,8 @@ namespace System.Runtime.CompilerServices
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module)]
     public sealed class SuppressIldasmAttribute : Attribute
     {
-        public SuppressIldasmAttribute() { }
+        public SuppressIldasmAttribute()
+        {
+        }
     }
 }

@@ -37,10 +37,14 @@ namespace Test
                     }
                 } while (local2[2]);
 
-                do { } while (true);
+                do
+                {
+                } while (true);
                 GC.Collect();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             return 100;
         }
     }

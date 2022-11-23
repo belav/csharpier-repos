@@ -398,7 +398,9 @@ namespace System.Threading
             return false;
         }
 
-        internal static void NotifyThreadUnblocked() { }
+        internal static void NotifyThreadUnblocked()
+        {
+        }
 
         [UnmanagedCallersOnly]
         private static void DispatchCallback(IntPtr instance, IntPtr context, IntPtr work)

@@ -8,7 +8,9 @@ public class AspNetIdentityCustomTypesIntKeySqlServerTest
 {
     public AspNetIdentityCustomTypesIntKeySqlServerTest(
         AspNetIdentityCustomTypesIntKeySqlServerFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public class AspNetIdentityCustomTypesIntKeySqlServerFixture : AspNetIdentityFixtureBase
     {

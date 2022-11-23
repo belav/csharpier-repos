@@ -11,17 +11,19 @@ namespace System.Net.Http
     {
         internal static EmptyReadStream Instance { get; } = new EmptyReadStream();
 
-        private EmptyReadStream() { }
+        private EmptyReadStream()
+        {
+        }
 
         public override bool CanRead => true;
         public override bool CanWrite => false;
 
-        protected override void Dispose(
-            bool disposing
-        ) { /* nop */
+        protected override void Dispose(bool disposing)
+        { /* nop */
         }
 
-        public override void Close() { /* nop */
+        public override void Close()
+        { /* nop */
         }
 
         public override int Read(Span<byte> buffer) => 0;

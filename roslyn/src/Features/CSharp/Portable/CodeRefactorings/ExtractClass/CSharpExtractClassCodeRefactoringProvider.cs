@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ExtractClass
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpExtractClassCodeRefactoringProvider() : base(null) { }
+        public CSharpExtractClassCodeRefactoringProvider() : base(null)
+        {
+        }
 
         /// <summary>
         /// Test purpose only.
@@ -41,7 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ExtractClass
         )]
         internal CSharpExtractClassCodeRefactoringProvider(
             IExtractClassOptionsService optionsService
-        ) : base(optionsService) { }
+        ) : base(optionsService)
+        {
+        }
 
         protected override async Task<SyntaxNode?> GetSelectedClassDeclarationAsync(
             CodeRefactoringContext context

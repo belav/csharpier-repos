@@ -57,7 +57,9 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         private class DocumentAccessor
             : Accessor<(DocumentKey documentKey, string name), (DocumentId, string), long>
         {
-            public DocumentAccessor(SQLitePersistentStorage storage) : base(storage) { }
+            public DocumentAccessor(SQLitePersistentStorage storage) : base(storage)
+            {
+            }
 
             protected override Table Table => Table.Document;
 

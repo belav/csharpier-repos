@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Shared.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ServiceComponentOnOffOptionsProvider() { }
+        public ServiceComponentOnOffOptionsProvider()
+        {
+        }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(ServiceComponentOnOffOptions.DiagnosticProvider);

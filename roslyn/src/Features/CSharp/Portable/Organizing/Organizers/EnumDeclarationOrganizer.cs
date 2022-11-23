@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EnumDeclarationOrganizer() { }
+        public EnumDeclarationOrganizer()
+        {
+        }
 
         protected override EnumDeclarationSyntax Organize(
             EnumDeclarationSyntax syntax,

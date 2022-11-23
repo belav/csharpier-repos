@@ -33,7 +33,9 @@ namespace TestConsole
             return 0;
         }
 
-        public Program() { }
+        public Program()
+        {
+        }
 
         public void TestMethod(ref List<string> strArg)
         {

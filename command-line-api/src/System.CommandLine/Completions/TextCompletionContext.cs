@@ -19,7 +19,9 @@ public class TextCompletionContext : CompletionContext
     }
 
     internal TextCompletionContext(ParseResult parseResult, string commandLineText)
-        : this(parseResult, commandLineText, commandLineText.Length) { }
+        : this(parseResult, commandLineText, commandLineText.Length)
+    {
+    }
 
     /// <summary>
     /// The position of the cursor within the command line.

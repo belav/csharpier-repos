@@ -363,6 +363,8 @@ namespace System.PrivateUri.Tests
             );
         }
 
-        private sealed class CustomUriParser : UriParser { }
+        private sealed class CustomUriParser : UriParser
+        {
+        }
     }
 }

@@ -8,7 +8,9 @@ public class IncompleteMappingInheritanceQueryInMemoryTest
 {
     public IncompleteMappingInheritanceQueryInMemoryTest(
         IncompleteMappingInheritanceQueryInMemoryFixture fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 
     public override async Task Can_query_all_animal_views(bool async)
     {

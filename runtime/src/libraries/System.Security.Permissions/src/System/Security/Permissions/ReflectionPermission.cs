@@ -12,9 +12,13 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class ReflectionPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public ReflectionPermission(PermissionState state) { }
+        public ReflectionPermission(PermissionState state)
+        {
+        }
 
-        public ReflectionPermission(ReflectionPermissionFlag flag) { }
+        public ReflectionPermission(ReflectionPermissionFlag flag)
+        {
+        }
 
         public ReflectionPermissionFlag Flags { get; set; }
 
@@ -23,7 +27,9 @@ namespace System.Security.Permissions
             return this;
         }
 
-        public override void FromXml(SecurityElement esd) { }
+        public override void FromXml(SecurityElement esd)
+        {
+        }
 
         public override IPermission Intersect(IPermission target)
         {

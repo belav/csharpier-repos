@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExperimentationService() { }
+        public TestExperimentationService()
+        {
+        }
 
         public void SetExperimentOption(string experimentName, bool enabled) =>
             _experimentsOptionValues[experimentName] = enabled;

@@ -20,7 +20,9 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [ComImport]
     [CoClass(typeof(ParameterClass))]
     [Guid("0000050c-0000-0010-8000-00aa006d2ea4")]
-    public interface Parameter : _Parameter { }
+    public interface Parameter : _Parameter
+    {
+    }
 
     [ComImport]
     [TypeLibType(TypeLibTypeFlags.FCanCreate | TypeLibTypeFlags.FLicensed)]
@@ -28,7 +30,8 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("0000050b-0000-0010-8000-00aa006d2ea4")]
     public class ParameterClass // : (list of implemented interfaces omitted)
-    { }
+    {
+    }
 
     [ComImport]
     [DefaultMember("Value")]

@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LongRunningNonMutatingRequestHandler() { }
+        public LongRunningNonMutatingRequestHandler()
+        {
+        }
 
         public bool MutatesSolutionState => false;
 

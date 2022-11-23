@@ -31,7 +31,9 @@ namespace System.Web.Http.ModelBinding
             );
         }
 
-        private void Action_Int(int id) { }
+        private void Action_Int(int id)
+        {
+        }
 
         [Fact]
         public void Check_Int_Is_ModelBound()
@@ -58,7 +60,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 0);
         }
 
-        private void Action_Int_FromUri([FromUri] int id) { }
+        private void Action_Int_FromUri([FromUri] int id)
+        {
+        }
 
         [Fact]
         public void Check_Explicit_Int_Is_ModelBound()
@@ -88,7 +92,9 @@ namespace System.Web.Http.ModelBinding
             Guid g,
             DateTimeOffset dateTimeOffset,
             TimeSpan timespan
-        ) { }
+        )
+        {
+        }
 
         [Fact]
         public void Check_SimpleTypes_Are_ModelBound()
@@ -103,7 +109,9 @@ namespace System.Web.Http.ModelBinding
             }
         }
 
-        private void Action_ComplexTypeWithStringConverter(ComplexTypeWithStringConverter x) { }
+        private void Action_ComplexTypeWithStringConverter(ComplexTypeWithStringConverter x)
+        {
+        }
 
         [Fact]
         public void Check_String_TypeConverter_Is_ModelBound()
@@ -118,7 +126,9 @@ namespace System.Web.Http.ModelBinding
 
         private void Action_ComplexTypeWithStringConverter_Body_Override(
             [FromBody] ComplexTypeWithStringConverter x
-        ) { }
+        )
+        {
+        }
 
         [Fact]
         public void Check_String_TypeConverter_With_Body_Override()
@@ -133,7 +143,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 0);
         }
 
-        private void Action_NullableInt(Nullable<int> id) { }
+        private void Action_NullableInt(Nullable<int> id)
+        {
+        }
 
         [Fact]
         public void Check_NullableInt_Is_ModelBound()
@@ -146,7 +158,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_Nullable_ValueType(Nullable<ComplexValueType> id) { }
+        private void Action_Nullable_ValueType(Nullable<ComplexValueType> id)
+        {
+        }
 
         [Fact]
         public void Check_Nullable_ValueType_Is_FromBody()
@@ -159,7 +173,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 0);
         }
 
-        private void Action_IntArray(int[] arrayFrombody) { }
+        private void Action_IntArray(int[] arrayFrombody)
+        {
+        }
 
         [Fact]
         public void Check_IntArray_Is_FromBody()
@@ -172,7 +188,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 0);
         }
 
-        private void Action_SimpleType_Body([FromBody] int i) { }
+        private void Action_SimpleType_Body([FromBody] int i)
+        {
+        }
 
         [Fact]
         public void Check_SimpleType_Body()
@@ -185,7 +203,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 0);
         }
 
-        private void Action_Empty() { }
+        private void Action_Empty()
+        {
+        }
 
         [Fact]
         public void Check_Empty_Action()
@@ -198,7 +218,9 @@ namespace System.Web.Http.ModelBinding
             Assert.Empty(binding.ParameterBindings);
         }
 
-        private void Action_String_String(string s1, string s2) { }
+        private void Action_String_String(string s1, string s2)
+        {
+        }
 
         [Fact]
         public void Check_String_String_IsModelBound()
@@ -212,7 +234,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 1);
         }
 
-        private void Action_Complex_Type(ComplexType complex) { }
+        private void Action_Complex_Type(ComplexType complex)
+        {
+        }
 
         [Fact]
         public void Check_Complex_Type_FromBody()
@@ -238,7 +262,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_Complex_ValueType(ComplexValueType complex) { }
+        private void Action_Complex_ValueType(ComplexValueType complex)
+        {
+        }
 
         [Fact]
         public void Check_Complex_ValueType_FromBody()
@@ -251,7 +277,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 0);
         }
 
-        private void Action_Default_Custom_Model_Binder([ModelBinder] ComplexType complex) { }
+        private void Action_Default_Custom_Model_Binder([ModelBinder] ComplexType complex)
+        {
+        }
 
         [Fact]
         public void Check_Customer_Binder()
@@ -266,7 +294,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_Complex_Type_Uri([FromUri] ComplexType complex) { }
+        private void Action_Complex_Type_Uri([FromUri] ComplexType complex)
+        {
+        }
 
         [Fact]
         public void Check_Complex_Type_FromUri()
@@ -280,10 +310,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_Two_Complex_Types(
-            ComplexType complexBody1,
-            ComplexType complexBody2
-        ) { }
+        private void Action_Two_Complex_Types(ComplexType complexBody1, ComplexType complexBody2)
+        {
+        }
 
         [Fact]
         public void Check_Two_Complex_Types_FromBody()
@@ -302,7 +331,9 @@ namespace System.Web.Http.ModelBinding
         private void Action_Complex_Type_UriAndBody(
             [FromUri] ComplexType complexUri,
             ComplexType complexBody
-        ) { }
+        )
+        {
+        }
 
         [Fact]
         public void Check_Complex_Type_FromBody_And_FromUri()
@@ -316,7 +347,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 1);
         }
 
-        private void Action_CancellationToken(CancellationToken ct) { }
+        private void Action_CancellationToken(CancellationToken ct)
+        {
+        }
 
         [Fact]
         public void Check_Cancellation_Token()
@@ -331,7 +364,9 @@ namespace System.Web.Http.ModelBinding
 
         private void Action_CustomModelBinder_On_Parameter_WithProvider(
             [ModelBinder(typeof(CustomModelBinderProvider))] ComplexType complex
-        ) { }
+        )
+        {
+        }
 
         [Fact]
         public void Check_CustomModelBinder_On_Parameter()
@@ -361,9 +396,9 @@ namespace System.Web.Http.ModelBinding
         }
 
         // Model binder attribute is on the type's declaration.
-        private void Action_ComplexParameter_With_ModelBinder(
-            ComplexTypeWithModelBinder complex
-        ) { }
+        private void Action_ComplexParameter_With_ModelBinder(ComplexTypeWithModelBinder complex)
+        {
+        }
 
         [Fact]
         public void Check_Parameter_With_ModelBinder_Attribute_On_Type()
@@ -376,7 +411,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_Conflicting_Attributes([FromBody] [FromUri] int i) { }
+        private void Action_Conflicting_Attributes([FromBody] [FromUri] int i)
+        {
+        }
 
         [Fact]
         public void Error_Conflicting_Attributes()
@@ -391,9 +428,13 @@ namespace System.Web.Http.ModelBinding
         }
 
         [FromBody]
-        class Widget { }
+        class Widget
+        {
+        }
 
-        private void Action_Closest_Attribute_Wins([FromUri] Widget i) { }
+        private void Action_Closest_Attribute_Wins([FromUri] Widget i)
+        {
+        }
 
         [Fact]
         public void Check_Closest_Attribute_Wins()
@@ -407,7 +448,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_HttpContent_Parameter(HttpContent c) { }
+        private void Action_HttpContent_Parameter(HttpContent c)
+        {
+        }
 
         [Fact]
         public void Check_HttpContent()
@@ -420,7 +463,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsError(binding, 0);
         }
 
-        private void Action_Derived_HttpContent_Parameter(StreamContent c) { }
+        private void Action_Derived_HttpContent_Parameter(StreamContent c)
+        {
+        }
 
         [Fact]
         public void Check_Derived_HttpContent()
@@ -433,7 +478,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsError(binding, 0);
         }
 
-        private void Action_Request_Parameter(HttpRequestMessage request) { }
+        private void Action_Request_Parameter(HttpRequestMessage request)
+        {
+        }
 
         [Fact]
         public void Check_Request_Parameter()
@@ -446,7 +493,9 @@ namespace System.Web.Http.ModelBinding
             AssertIsCustomBinder<HttpRequestParameterBinding>(binding, 0);
         }
 
-        private void Action_CustomBindingAttribute([CustomBindingAttribute] int x) { }
+        private void Action_CustomBindingAttribute([CustomBindingAttribute] int x)
+        {
+        }
 
         [Fact]
         public void Check_CustomBindingAttribute()
@@ -475,7 +524,9 @@ namespace System.Web.Http.ModelBinding
 
             private class CustomBinding : HttpParameterBinding
             {
-                public CustomBinding() : base(new Mock<HttpParameterDescriptor>().Object) { }
+                public CustomBinding() : base(new Mock<HttpParameterDescriptor>().Object)
+                {
+                }
 
                 public override Threading.Tasks.Task ExecuteBindingAsync(
                     Metadata.ModelMetadataProvider metadataProvider,
@@ -559,13 +610,19 @@ namespace System.Web.Http.ModelBinding
         }
 
         // Complex type to use with tests
-        class ComplexType { }
+        class ComplexType
+        {
+        }
 
-        struct ComplexValueType { }
+        struct ComplexValueType
+        {
+        }
 
         // Complex type to use with tests
         [ModelBinder]
-        class ComplexTypeWithModelBinder { }
+        class ComplexTypeWithModelBinder
+        {
+        }
 
         // Add Type converter for string, which causes the type to be viewed as a Simple type.
         [TypeConverter(typeof(MyTypeConverter))]

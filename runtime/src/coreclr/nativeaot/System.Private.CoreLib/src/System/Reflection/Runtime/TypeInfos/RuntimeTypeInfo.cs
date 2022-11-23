@@ -35,7 +35,9 @@ namespace System.Reflection.Runtime.TypeInfos
     [DebuggerDisplay("{_debugName}")]
     internal abstract partial class RuntimeTypeInfo : RuntimeType, ICloneable
     {
-        protected RuntimeTypeInfo() { }
+        protected RuntimeTypeInfo()
+        {
+        }
 
         public abstract override bool IsTypeDefinition { get; }
         public abstract override bool IsGenericTypeDefinition { get; }

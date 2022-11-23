@@ -8,7 +8,9 @@ namespace System.ServiceModel.Syndication
     internal sealed class NullNotAllowedCollection<TCollectionItem> : Collection<TCollectionItem>
         where TCollectionItem : class
     {
-        public NullNotAllowedCollection() : base() { }
+        public NullNotAllowedCollection() : base()
+        {
+        }
 
         protected override void InsertItem(int index, TCollectionItem item)
         {

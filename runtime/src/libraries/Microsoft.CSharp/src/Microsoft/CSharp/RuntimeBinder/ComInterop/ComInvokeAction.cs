@@ -17,7 +17,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal sealed class ComInvokeAction : InvokeBinder
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal ComInvokeAction(CallInfo callInfo) : base(callInfo) { }
+        internal ComInvokeAction(CallInfo callInfo) : base(callInfo)
+        {
+        }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -63,7 +65,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             get => s_instance;
         }
 
-        private SplatInvokeBinder() { }
+        private SplatInvokeBinder()
+        {
+        }
 
         // Just splat the args and dispatch through a nested site
         [UnconditionalSuppressMessage(

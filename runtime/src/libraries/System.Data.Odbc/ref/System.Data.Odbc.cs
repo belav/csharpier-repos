@@ -12,17 +12,25 @@ namespace System.Data.Odbc
     [System.ComponentModel.ToolboxItemAttribute(true)]
     public sealed partial class OdbcCommand : System.Data.Common.DbCommand, System.ICloneable
     {
-        public OdbcCommand() { }
+        public OdbcCommand()
+        {
+        }
 
-        public OdbcCommand(string? cmdText) { }
+        public OdbcCommand(string? cmdText)
+        {
+        }
 
-        public OdbcCommand(string? cmdText, System.Data.Odbc.OdbcConnection? connection) { }
+        public OdbcCommand(string? cmdText, System.Data.Odbc.OdbcConnection? connection)
+        {
+        }
 
         public OdbcCommand(
             string? cmdText,
             System.Data.Odbc.OdbcConnection? connection,
             System.Data.Odbc.OdbcTransaction? transaction
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.EditorAttribute(
             "Microsoft.VSDesigner.Data.Odbc.Design.OdbcCommandTextEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
@@ -32,19 +40,25 @@ namespace System.Data.Odbc
         public override string CommandText
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int CommandTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.CommandType.Text)]
         public override System.Data.CommandType CommandType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorAttribute(
@@ -54,12 +68,16 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcConnection? Connection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected override System.Data.Common.DbConnection? DbConnection
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         protected override System.Data.Common.DbParameterCollection DbParameterCollection
         {
@@ -68,7 +86,9 @@ namespace System.Data.Odbc
         protected override System.Data.Common.DbTransaction? DbTransaction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -80,7 +100,9 @@ namespace System.Data.Odbc
         public override bool DesignTimeVisible
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -98,17 +120,23 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcTransaction? Transaction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.UpdateRowSource.Both)]
         public override System.Data.UpdateRowSource UpdatedRowSource
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void Cancel() { }
+        public override void Cancel()
+        {
+        }
 
         protected override System.Data.Common.DbParameter CreateDbParameter()
         {
@@ -120,7 +148,9 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         protected override System.Data.Common.DbDataReader ExecuteDbDataReader(
             System.Data.CommandBehavior behavior
@@ -151,9 +181,13 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        public override void Prepare() { }
+        public override void Prepare()
+        {
+        }
 
-        public void ResetCommandTimeout() { }
+        public void ResetCommandTimeout()
+        {
+        }
 
         object System.ICloneable.Clone()
         {
@@ -163,14 +197,20 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcCommandBuilder : System.Data.Common.DbCommandBuilder
     {
-        public OdbcCommandBuilder() { }
+        public OdbcCommandBuilder()
+        {
+        }
 
-        public OdbcCommandBuilder(System.Data.Odbc.OdbcDataAdapter? adapter) { }
+        public OdbcCommandBuilder(System.Data.Odbc.OdbcDataAdapter? adapter)
+        {
+        }
 
         public new System.Data.Odbc.OdbcDataAdapter? DataAdapter
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         protected override void ApplyParameterInfo(
@@ -178,9 +218,13 @@ namespace System.Data.Odbc
             System.Data.DataRow datarow,
             System.Data.StatementType statementType,
             bool whereClause
-        ) { }
+        )
+        {
+        }
 
-        public static void DeriveParameters(System.Data.Odbc.OdbcCommand command) { }
+        public static void DeriveParameters(System.Data.Odbc.OdbcCommand command)
+        {
+        }
 
         public new System.Data.Odbc.OdbcCommand GetDeleteCommand()
         {
@@ -240,7 +284,9 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        protected override void SetRowUpdatingHandler(System.Data.Common.DbDataAdapter adapter) { }
+        protected override void SetRowUpdatingHandler(System.Data.Common.DbDataAdapter adapter)
+        {
+        }
 
         public override string UnquoteIdentifier(string quotedIdentifier)
         {
@@ -258,9 +304,13 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcConnection : System.Data.Common.DbConnection, System.ICloneable
     {
-        public OdbcConnection() { }
+        public OdbcConnection()
+        {
+        }
 
-        public OdbcConnection(string? connectionString) { }
+        public OdbcConnection(string? connectionString)
+        {
+        }
 
         [System.ComponentModel.EditorAttribute(
             "Microsoft.VSDesigner.Data.Odbc.Design.OdbcConnectionStringEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
@@ -270,7 +320,9 @@ namespace System.Data.Odbc
         public override string ConnectionString
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(15)]
@@ -280,7 +332,9 @@ namespace System.Data.Odbc
         public new int ConnectionTimeout
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
@@ -328,8 +382,12 @@ namespace System.Data.Odbc
         }
         public event System.Data.Odbc.OdbcInfoMessageEventHandler? InfoMessage
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         protected override System.Data.Common.DbTransaction BeginDbTransaction(
@@ -351,9 +409,13 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        public override void ChangeDatabase(string value) { }
+        public override void ChangeDatabase(string value)
+        {
+        }
 
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
         public new System.Data.Odbc.OdbcCommand CreateCommand()
         {
@@ -365,7 +427,9 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override System.Data.DataTable GetSchema()
         {
@@ -385,9 +449,13 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        public override void Open() { }
+        public override void Open()
+        {
+        }
 
-        public static void ReleaseObjectPool() { }
+        public static void ReleaseObjectPool()
+        {
+        }
 
         object System.ICloneable.Clone()
         {
@@ -398,36 +466,48 @@ namespace System.Data.Odbc
     public sealed partial class OdbcConnectionStringBuilder
         : System.Data.Common.DbConnectionStringBuilder
     {
-        public OdbcConnectionStringBuilder() { }
+        public OdbcConnectionStringBuilder()
+        {
+        }
 
-        public OdbcConnectionStringBuilder(string? connectionString) { }
+        public OdbcConnectionStringBuilder(string? connectionString)
+        {
+        }
 
         [System.ComponentModel.DisplayNameAttribute("Driver")]
         public string Driver
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DisplayNameAttribute("Dsn")]
         public string Dsn
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public override object this[string keyword]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Collections.ICollection Keys
         {
             get { throw null; }
         }
 
-        public override void Clear() { }
+        public override void Clear()
+        {
+        }
 
         public override bool ContainsKey(string keyword)
         {
@@ -460,16 +540,24 @@ namespace System.Data.Odbc
             System.Data.IDbDataAdapter,
             System.ICloneable
     {
-        public OdbcDataAdapter() { }
+        public OdbcDataAdapter()
+        {
+        }
 
-        public OdbcDataAdapter(System.Data.Odbc.OdbcCommand? selectCommand) { }
+        public OdbcDataAdapter(System.Data.Odbc.OdbcCommand? selectCommand)
+        {
+        }
 
         public OdbcDataAdapter(
             string? selectCommandText,
             System.Data.Odbc.OdbcConnection? selectConnection
-        ) { }
+        )
+        {
+        }
 
-        public OdbcDataAdapter(string? selectCommandText, string? selectConnectionString) { }
+        public OdbcDataAdapter(string? selectCommandText, string? selectConnectionString)
+        {
+        }
 
         [System.ComponentModel.EditorAttribute(
             "Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
@@ -478,7 +566,9 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcCommand? DeleteCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorAttribute(
@@ -488,7 +578,9 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcCommand? InsertCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorAttribute(
@@ -498,27 +590,37 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcCommand? SelectCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.DeleteCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.InsertCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.SelectCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         System.Data.IDbCommand? System.Data.IDbDataAdapter.UpdateCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.EditorAttribute(
@@ -528,17 +630,27 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcCommand? UpdateCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public event System.Data.Odbc.OdbcRowUpdatedEventHandler? RowUpdated
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
         public event System.Data.Odbc.OdbcRowUpdatingEventHandler? RowUpdating
         {
-            add { }
-            remove { }
+            add
+            {
+            }
+            remove
+            {
+            }
         }
 
         protected override System.Data.Common.RowUpdatedEventArgs CreateRowUpdatedEvent(
@@ -561,9 +673,13 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        protected override void OnRowUpdated(System.Data.Common.RowUpdatedEventArgs value) { }
+        protected override void OnRowUpdated(System.Data.Common.RowUpdatedEventArgs value)
+        {
+        }
 
-        protected override void OnRowUpdating(System.Data.Common.RowUpdatingEventArgs value) { }
+        protected override void OnRowUpdating(System.Data.Common.RowUpdatingEventArgs value)
+        {
+        }
 
         object System.ICloneable.Clone()
         {
@@ -573,7 +689,9 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcDataReader : System.Data.Common.DbDataReader
     {
-        internal OdbcDataReader() { }
+        internal OdbcDataReader()
+        {
+        }
 
         public override int Depth
         {
@@ -604,9 +722,13 @@ namespace System.Data.Odbc
             get { throw null; }
         }
 
-        public override void Close() { }
+        public override void Close()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
         public override bool GetBoolean(int i)
         {
@@ -758,7 +880,9 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcError
     {
-        internal OdbcError() { }
+        internal OdbcError()
+        {
+        }
 
         public string Message
         {
@@ -787,7 +911,9 @@ namespace System.Data.Odbc
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
-        internal OdbcErrorCollection() { }
+        internal OdbcErrorCollection()
+        {
+        }
 
         public int Count
         {
@@ -806,9 +932,13 @@ namespace System.Data.Odbc
             get { throw null; }
         }
 
-        public void CopyTo(System.Array array, int i) { }
+        public void CopyTo(System.Array array, int i)
+        {
+        }
 
-        public void CopyTo(System.Data.Odbc.OdbcError[] array, int i) { }
+        public void CopyTo(System.Data.Odbc.OdbcError[] array, int i)
+        {
+        }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
@@ -818,7 +948,9 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcException : System.Data.Common.DbException
     {
-        internal OdbcException() { }
+        internal OdbcException()
+        {
+        }
 
         public System.Data.Odbc.OdbcErrorCollection Errors
         {
@@ -832,12 +964,16 @@ namespace System.Data.Odbc
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo si,
             System.Runtime.Serialization.StreamingContext context
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class OdbcFactory : System.Data.Common.DbProviderFactory
     {
-        internal OdbcFactory() { }
+        internal OdbcFactory()
+        {
+        }
 
         public static readonly System.Data.Odbc.OdbcFactory Instance;
 
@@ -874,7 +1010,9 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcInfoMessageEventArgs : System.EventArgs
     {
-        internal OdbcInfoMessageEventArgs() { }
+        internal OdbcInfoMessageEventArgs()
+        {
+        }
 
         public System.Data.Odbc.OdbcErrorCollection Errors
         {
@@ -920,11 +1058,17 @@ namespace System.Data.Odbc
             System.Data.IDbDataParameter,
             System.ICloneable
     {
-        public OdbcParameter() { }
+        public OdbcParameter()
+        {
+        }
 
-        public OdbcParameter(string? name, System.Data.Odbc.OdbcType type) { }
+        public OdbcParameter(string? name, System.Data.Odbc.OdbcType type)
+        {
+        }
 
-        public OdbcParameter(string? name, System.Data.Odbc.OdbcType type, int size) { }
+        public OdbcParameter(string? name, System.Data.Odbc.OdbcType type, int size)
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
@@ -940,7 +1084,9 @@ namespace System.Data.Odbc
             string? srcColumn,
             System.Data.DataRowVersion srcVersion,
             object? value
-        ) { }
+        )
+        {
+        }
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
@@ -956,31 +1102,43 @@ namespace System.Data.Odbc
             System.Data.DataRowVersion sourceVersion,
             bool sourceColumnNullMapping,
             object? value
-        ) { }
+        )
+        {
+        }
 
         public OdbcParameter(
             string? name,
             System.Data.Odbc.OdbcType type,
             int size,
             string? sourcecolumn
-        ) { }
+        )
+        {
+        }
 
-        public OdbcParameter(string? name, object? value) { }
+        public OdbcParameter(string? name, object? value)
+        {
+        }
 
         public override System.Data.DbType DbType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Data.ParameterDirection Direction
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool IsNullable
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.DefaultValueAttribute(System.Data.Odbc.OdbcType.NChar)]
@@ -988,56 +1146,78 @@ namespace System.Data.Odbc
         public System.Data.Odbc.OdbcType OdbcType
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public override string ParameterName
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public new byte Precision
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public new byte Scale
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override int Size
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public override string SourceColumn
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override bool SourceColumnNullMapping
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override System.Data.DataRowVersion SourceVersion
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override object? Value
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
-        public override void ResetDbType() { }
+        public override void ResetDbType()
+        {
+        }
 
-        public void ResetOdbcType() { }
+        public void ResetOdbcType()
+        {
+        }
 
         object System.ICloneable.Clone()
         {
@@ -1056,7 +1236,9 @@ namespace System.Data.Odbc
     )]
     public sealed partial class OdbcParameterCollection : System.Data.Common.DbParameterCollection
     {
-        internal OdbcParameterCollection() { }
+        internal OdbcParameterCollection()
+        {
+        }
 
         public override int Count
         {
@@ -1082,7 +1264,9 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcParameter this[int index]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
 
         [System.ComponentModel.BrowsableAttribute(false)]
@@ -1092,7 +1276,9 @@ namespace System.Data.Odbc
         public new System.Data.Odbc.OdbcParameter this[string parameterName]
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public override object SyncRoot
         {
@@ -1147,16 +1333,22 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        public override void AddRange(System.Array values) { }
+        public override void AddRange(System.Array values)
+        {
+        }
 
-        public void AddRange(System.Data.Odbc.OdbcParameter[] values) { }
+        public void AddRange(System.Data.Odbc.OdbcParameter[] values)
+        {
+        }
 
         public System.Data.Odbc.OdbcParameter AddWithValue(string? parameterName, object? value)
         {
             throw null;
         }
 
-        public override void Clear() { }
+        public override void Clear()
+        {
+        }
 
         public bool Contains(System.Data.Odbc.OdbcParameter value)
         {
@@ -1173,9 +1365,13 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        public override void CopyTo(System.Array array, int index) { }
+        public override void CopyTo(System.Array array, int index)
+        {
+        }
 
-        public void CopyTo(System.Data.Odbc.OdbcParameter[] array, int index) { }
+        public void CopyTo(System.Data.Odbc.OdbcParameter[] array, int index)
+        {
+        }
 
         public override System.Collections.IEnumerator GetEnumerator()
         {
@@ -1207,24 +1403,40 @@ namespace System.Data.Odbc
             throw null;
         }
 
-        public void Insert(int index, System.Data.Odbc.OdbcParameter value) { }
+        public void Insert(int index, System.Data.Odbc.OdbcParameter value)
+        {
+        }
 
-        public override void Insert(int index, object value) { }
+        public override void Insert(int index, object value)
+        {
+        }
 
-        public void Remove(System.Data.Odbc.OdbcParameter value) { }
+        public void Remove(System.Data.Odbc.OdbcParameter value)
+        {
+        }
 
-        public override void Remove(object value) { }
+        public override void Remove(object value)
+        {
+        }
 
-        public override void RemoveAt(int index) { }
+        public override void RemoveAt(int index)
+        {
+        }
 
-        public override void RemoveAt(string parameterName) { }
+        public override void RemoveAt(string parameterName)
+        {
+        }
 
-        protected override void SetParameter(int index, System.Data.Common.DbParameter value) { }
+        protected override void SetParameter(int index, System.Data.Common.DbParameter value)
+        {
+        }
 
         protected override void SetParameter(
             string parameterName,
             System.Data.Common.DbParameter value
-        ) { }
+        )
+        {
+        }
     }
 
     public sealed partial class OdbcRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
@@ -1240,7 +1452,9 @@ namespace System.Data.Odbc
                 default(System.Data.IDbCommand),
                 default(System.Data.StatementType),
                 default(System.Data.Common.DataTableMapping)
-            ) { }
+            )
+        {
+        }
 
         public new System.Data.Odbc.OdbcCommand? Command
         {
@@ -1266,17 +1480,23 @@ namespace System.Data.Odbc
                 default(System.Data.IDbCommand),
                 default(System.Data.StatementType),
                 default(System.Data.Common.DataTableMapping)
-            ) { }
+            )
+        {
+        }
 
         protected override System.Data.IDbCommand? BaseCommand
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
         public new System.Data.Odbc.OdbcCommand? Command
         {
             get { throw null; }
-            set { }
+            set
+            {
+            }
         }
     }
 
@@ -1287,7 +1507,9 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcTransaction : System.Data.Common.DbTransaction
     {
-        internal OdbcTransaction() { }
+        internal OdbcTransaction()
+        {
+        }
 
         public new System.Data.Odbc.OdbcConnection? Connection
         {
@@ -1302,11 +1524,17 @@ namespace System.Data.Odbc
             get { throw null; }
         }
 
-        public override void Commit() { }
+        public override void Commit()
+        {
+        }
 
-        protected override void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing)
+        {
+        }
 
-        public override void Rollback() { }
+        public override void Rollback()
+        {
+        }
     }
 
     public enum OdbcType

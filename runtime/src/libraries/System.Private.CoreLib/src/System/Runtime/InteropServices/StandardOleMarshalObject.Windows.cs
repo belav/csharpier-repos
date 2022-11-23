@@ -11,7 +11,9 @@ namespace System.Runtime.InteropServices
             "00000017-0000-0000-c000-000000000046"
         );
 
-        protected StandardOleMarshalObject() { }
+        protected StandardOleMarshalObject()
+        {
+        }
 
         private IntPtr GetStdMarshaler(ref Guid riid, int dwDestContext, int mshlflags)
         {

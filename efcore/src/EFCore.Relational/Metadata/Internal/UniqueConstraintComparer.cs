@@ -14,7 +14,9 @@ public sealed class UniqueConstraintComparer
     : IEqualityComparer<IUniqueConstraint>,
         IComparer<IUniqueConstraint>
 {
-    private UniqueConstraintComparer() { }
+    private UniqueConstraintComparer()
+    {
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

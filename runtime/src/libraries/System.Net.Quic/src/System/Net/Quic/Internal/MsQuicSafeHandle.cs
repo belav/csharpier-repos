@@ -59,7 +59,9 @@ internal unsafe class MsQuicSafeHandle : SafeHandle
                     )
             },
             safeHandleType
-        ) { }
+        )
+    {
+    }
 
     protected override bool ReleaseHandle()
     {

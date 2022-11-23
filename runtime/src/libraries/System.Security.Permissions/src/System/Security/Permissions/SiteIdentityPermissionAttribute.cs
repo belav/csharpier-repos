@@ -14,7 +14,9 @@ namespace System.Security.Permissions
     public sealed partial class SiteIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public SiteIdentityPermissionAttribute(SecurityAction action)
-            : base(default(SecurityAction)) { }
+            : base(default(SecurityAction))
+        {
+        }
 
         public string Site { get; set; }
 

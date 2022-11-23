@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
                 EnforceOnBuildValues.ConvertTypeOfToNameOf,
                 option: null,
                 title: title
-            ) { }
+            )
+        {
+        }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

@@ -792,9 +792,13 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Null(document.Link);
         }
 
-        public class InlineCategoriesDocumentSubclass : InlineCategoriesDocument { }
+        public class InlineCategoriesDocumentSubclass : InlineCategoriesDocument
+        {
+        }
 
-        public class ReferencedCategoriesDocumentSubclass : ReferencedCategoriesDocument { }
+        public class ReferencedCategoriesDocumentSubclass : ReferencedCategoriesDocument
+        {
+        }
 
         public class InlineCategoriesDocumentTryParseTrueSubclass : InlineCategoriesDocument
         {
@@ -849,12 +853,18 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : AtomPub10CategoriesDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter() : base()
+            {
+            }
 
-            public Formatter(CategoriesDocument documentToWrite) : base(documentToWrite) { }
+            public Formatter(CategoriesDocument documentToWrite) : base(documentToWrite)
+            {
+            }
 
             public Formatter(Type inlineDocumentType, Type referencedDocumentType)
-                : base(inlineDocumentType, referencedDocumentType) { }
+                : base(inlineDocumentType, referencedDocumentType)
+            {
+            }
 
             public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() =>
                 CreateInlineCategoriesDocument();

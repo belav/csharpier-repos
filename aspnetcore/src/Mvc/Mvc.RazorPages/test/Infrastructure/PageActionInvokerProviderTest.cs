@@ -609,8 +609,12 @@ public class PageInvokerProviderTest
 
     private class TestPageModel
     {
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
-    private class DerivedTestPageModel : TestPageModel { }
+    private class DerivedTestPageModel : TestPageModel
+    {
+    }
 }

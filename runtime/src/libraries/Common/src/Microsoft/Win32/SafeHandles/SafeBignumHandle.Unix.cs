@@ -9,9 +9,13 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeBignumHandle : SafeHandle
     {
-        public SafeBignumHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeBignumHandle() : base(IntPtr.Zero, ownsHandle: true)
+        {
+        }
 
-        internal SafeBignumHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
+        internal SafeBignumHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        {
+        }
 
         protected override bool ReleaseHandle()
         {

@@ -26,7 +26,9 @@ internal class Program
         public void EventSourceTest_Method_3(int num1, int num2) => WriteEvent(4, num1, num2);
 
         [NonEvent]
-        void EventSourceTest_Method_4() { }
+        void EventSourceTest_Method_4()
+        {
+        }
 
         [Event(500)]
         public void EventSourceTest_Method_5(byte[] bytes) => WriteEvent(500, bytes);

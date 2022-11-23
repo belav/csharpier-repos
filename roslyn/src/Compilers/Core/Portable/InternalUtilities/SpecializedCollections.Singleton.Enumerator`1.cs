@@ -26,7 +26,9 @@ namespace Roslyn.Utilities
 
                 object? IEnumerator.Current => _loneValue;
 
-                public void Dispose() { }
+                public void Dispose()
+                {
+                }
 
                 public bool MoveNext()
                 {

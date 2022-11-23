@@ -316,7 +316,9 @@ namespace System.Web.Http.Routing
             }
         }
 
-        private class ExtendedRoutePrefixAttribute : RoutePrefixAttribute { }
+        private class ExtendedRoutePrefixAttribute : RoutePrefixAttribute
+        {
+        }
 
         private class AccessibleDirectRouteProvider : DefaultDirectRouteProvider
         {

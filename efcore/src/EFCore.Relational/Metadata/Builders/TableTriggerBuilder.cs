@@ -17,7 +17,9 @@ public class TableTriggerBuilder : TriggerBuilder
     ///     Creates a new builder for the given trigger.
     /// </summary>
     /// <param name="trigger">The trigger to configure.</param>
-    public TableTriggerBuilder(IMutableTrigger trigger) : base(trigger) { }
+    public TableTriggerBuilder(IMutableTrigger trigger) : base(trigger)
+    {
+    }
 
     /// <summary>
     ///     Sets the database name of the trigger.

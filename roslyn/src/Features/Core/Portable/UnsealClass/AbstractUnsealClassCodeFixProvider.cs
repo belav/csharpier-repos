@@ -118,7 +118,9 @@ namespace Microsoft.CodeAnalysis.UnsealClass
             public MyCodeAction(
                 string title,
                 Func<CancellationToken, Task<Solution>> createChangedSolution
-            ) : base(title, createChangedSolution, title) { }
+            ) : base(title, createChangedSolution, title)
+            {
+            }
         }
     }
 }

@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpIntroduceUsingStatementCodeRefactoringProvider() { }
+        public CSharpIntroduceUsingStatementCodeRefactoringProvider()
+        {
+        }
 
         protected override string CodeActionTitle =>
             CSharpFeaturesResources.Introduce_using_statement;

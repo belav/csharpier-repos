@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Interpreter
         public override int ProducedStack => 1;
         public override string InstructionName => "Decrement";
 
-        private DecrementInstruction() { }
+        private DecrementInstruction()
+        {
+        }
 
         private sealed class DecrementInt16 : DecrementInstruction
         {

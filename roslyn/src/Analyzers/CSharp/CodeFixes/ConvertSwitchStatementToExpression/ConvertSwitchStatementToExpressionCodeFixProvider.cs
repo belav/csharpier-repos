@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertSwitchStatementToExpressionCodeFixProvider() { }
+        public ConvertSwitchStatementToExpressionCodeFixProvider()
+        {
+        }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId);

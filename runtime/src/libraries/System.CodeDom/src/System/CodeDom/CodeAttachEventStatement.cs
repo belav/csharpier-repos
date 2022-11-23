@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private CodeEventReferenceExpression _eventRef;
 
-        public CodeAttachEventStatement() { }
+        public CodeAttachEventStatement()
+        {
+        }
 
         public CodeAttachEventStatement(
             CodeEventReferenceExpression eventRef,
@@ -22,7 +24,9 @@ namespace System.CodeDom
             CodeExpression targetObject,
             string eventName,
             CodeExpression listener
-        ) : this(new CodeEventReferenceExpression(targetObject, eventName), listener) { }
+        ) : this(new CodeEventReferenceExpression(targetObject, eventName), listener)
+        {
+        }
 
         public CodeEventReferenceExpression Event
         {

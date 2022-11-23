@@ -102,7 +102,9 @@ namespace System.Web.Mvc.Test
 
         // IsComplexType
 
-        struct IsComplexTypeModel { }
+        struct IsComplexTypeModel
+        {
+        }
 
         [Fact]
         public void IsComplexTypeTests()
@@ -479,7 +481,9 @@ namespace System.Web.Mvc.Test
             Assert.Equal(propertyMetadata.NullDisplayText, result);
         }
 
-        private class SimpleDisplayTextModelWithNoProperties { }
+        private class SimpleDisplayTextModelWithNoProperties
+        {
+        }
 
         [Fact]
         public void SimpleDisplayTextReturnsEmptyStringForNonNullModelWithNoVisibleProperties()

@@ -88,7 +88,9 @@ namespace System.Web.Http.Services
         /// <summary>
         /// This constructor is for unit testing purposes only.
         /// </summary>
-        protected DefaultServices() { }
+        protected DefaultServices()
+        {
+        }
 
         private void SetSingle<T>(T instance) where T : class
         {

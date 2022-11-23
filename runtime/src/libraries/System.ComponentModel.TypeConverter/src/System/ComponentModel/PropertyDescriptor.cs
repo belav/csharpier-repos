@@ -26,13 +26,17 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.PropertyDescriptor'/> class with the specified name and
         /// attributes.
         /// </summary>
-        protected PropertyDescriptor(string name, Attribute[]? attrs) : base(name, attrs) { }
+        protected PropertyDescriptor(string name, Attribute[]? attrs) : base(name, attrs)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.PropertyDescriptor'/> class with
         /// the name and attributes in the specified <see cref='System.ComponentModel.MemberDescriptor'/>.
         /// </summary>
-        protected PropertyDescriptor(MemberDescriptor descr) : base(descr) { }
+        protected PropertyDescriptor(MemberDescriptor descr) : base(descr)
+        {
+        }
 
         /// <summary>
         ///
@@ -43,7 +47,9 @@ namespace System.ComponentModel
         ///
         /// </summary>
         protected PropertyDescriptor(MemberDescriptor descr, Attribute[]? attrs)
-            : base(descr, attrs) { }
+            : base(descr, attrs)
+        {
+        }
 
         /// <summary>
         /// When overridden in a derived class, gets the type of the
@@ -176,7 +182,9 @@ namespace System.ComponentModel
                     return true;
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return false;
         }

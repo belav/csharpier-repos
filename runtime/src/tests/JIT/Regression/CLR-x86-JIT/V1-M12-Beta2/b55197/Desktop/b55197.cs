@@ -14,9 +14,13 @@ namespace Test
 
     // In the original program ApplicationException was used, but for the
     // the purposes of this test any exception other than the one thrown works.
-    class OtherException : Exception { }
+    class OtherException : Exception
+    {
+    }
 
-    public class BB { }
+    public class BB
+    {
+    }
 
     public struct AA
     {
@@ -37,7 +41,9 @@ namespace Test
                         sbyte[] local11 = new sbyte[] { };
                         throw new Exception();
                     }
-                    catch (OtherException) { }
+                    catch (OtherException)
+                    {
+                    }
                 }
                 {
                     sbyte local7 = App.m_sbFwd3;
@@ -106,7 +112,9 @@ namespace Test
                     double local13 = (0.0);
                     throw new NullReferenceException();
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
             return 72u;
         }

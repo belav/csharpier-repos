@@ -51,7 +51,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 globalOptions,
                 visibilityTracker,
                 listenerProvider.GetListener(FeatureAttribute.InheritanceMargin)
-            ) { }
+            )
+        {
+        }
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.OnIdle;
 

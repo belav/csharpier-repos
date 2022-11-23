@@ -17,7 +17,9 @@ public static class StaticFilesTestServer
         Action<IServiceCollection> configureServices = null
     )
     {
-        Action<IServiceCollection> defaultConfigureServices = services => { };
+        Action<IServiceCollection> defaultConfigureServices = services =>
+        {
+        };
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("webroot", ".") })
             .Build();

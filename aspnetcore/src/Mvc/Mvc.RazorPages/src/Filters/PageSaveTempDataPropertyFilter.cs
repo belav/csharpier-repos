@@ -8,9 +8,13 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 
 internal sealed class PageSaveTempDataPropertyFilter : SaveTempDataPropertyFilterBase, IPageFilter
 {
-    public PageSaveTempDataPropertyFilter(ITempDataDictionaryFactory factory) : base(factory) { }
+    public PageSaveTempDataPropertyFilter(ITempDataDictionaryFactory factory) : base(factory)
+    {
+    }
 
-    public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
+    public void OnPageHandlerSelected(PageHandlerSelectedContext context)
+    {
+    }
 
     public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
@@ -20,5 +24,7 @@ internal sealed class PageSaveTempDataPropertyFilter : SaveTempDataPropertyFilte
         SetPropertyValues(tempData);
     }
 
-    public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
+    public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+    {
+    }
 }

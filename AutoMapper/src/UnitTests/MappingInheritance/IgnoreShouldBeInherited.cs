@@ -2,7 +2,9 @@
 
 public class IgnoreShouldBeInheritedRegardlessOfMapOrder : AutoMapperSpecBase
 {
-    public class BaseDomain { }
+    public class BaseDomain
+    {
+    }
 
     public class SpecificDomain : BaseDomain
     {
@@ -33,7 +35,9 @@ public class IgnoreShouldBeInheritedRegardlessOfMapOrder : AutoMapperSpecBase
 
 public class IgnoreShouldBeInherited : AutoMapperSpecBase
 {
-    public class BaseDomain { }
+    public class BaseDomain
+    {
+    }
 
     public class SpecificDomain : BaseDomain
     {
@@ -70,7 +74,9 @@ public class IgnoreShouldBeInheritedWithOpenGenerics : AutoMapperSpecBase
         public string Name { get; set; }
     }
 
-    public class ConcreteUserDto : BaseUserDto<string> { }
+    public class ConcreteUserDto : BaseUserDto<string>
+    {
+    }
 
     public abstract class BaseUserEntity<TIdType>
     {
@@ -78,7 +84,9 @@ public class IgnoreShouldBeInheritedWithOpenGenerics : AutoMapperSpecBase
         public string Name { get; set; }
     }
 
-    public class ConcreteUserEntity : BaseUserEntity<string> { }
+    public class ConcreteUserEntity : BaseUserEntity<string>
+    {
+    }
 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>

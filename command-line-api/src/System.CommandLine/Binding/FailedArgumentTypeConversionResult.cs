@@ -13,7 +13,8 @@ namespace System.CommandLine.Binding
             string value,
             LocalizationResources localizationResources
         ) : base(argument, FormatErrorMessage(argument, expectedType, value, localizationResources))
-        { }
+        {
+        }
 
         private static string FormatErrorMessage(
             IArgument argument,

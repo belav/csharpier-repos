@@ -18,9 +18,13 @@ namespace System.Net.Http.Json.Functional.Tests
             HttpRequestMessage request
         );
 
-        private class Foo { }
+        private class Foo
+        {
+        }
 
-        private class Bar { }
+        private class Bar
+        {
+        }
 
         [Fact]
         public void JsonContentObjectType()

@@ -38,6 +38,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 listenerProvider,
                 ExtensionMethodImportCompletionHelper.BatchUpdateCacheAsync,
                 CancellationToken.None
-            ) { }
+            )
+        {
+        }
     }
 }

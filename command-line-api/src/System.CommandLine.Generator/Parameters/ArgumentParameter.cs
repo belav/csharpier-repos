@@ -5,7 +5,9 @@ namespace System.CommandLine.Generator.Parameters
     internal class ArgumentParameter : PropertyParameter, IEquatable<ArgumentParameter>
     {
         public ArgumentParameter(string localName, INamedTypeSymbol type, ITypeSymbol valueType)
-            : base(localName, type, valueType) { }
+            : base(localName, type, valueType)
+        {
+        }
 
         public override string GetValueFromContext() =>
             $"context.ParseResult.GetValueForArgument({LocalName})";

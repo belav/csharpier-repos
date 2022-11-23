@@ -12,7 +12,9 @@ internal sealed class VaryByRouteValuePolicy : IOutputCachePolicy
 {
     private readonly StringValues _routeValueNames;
 
-    private VaryByRouteValuePolicy() { }
+    private VaryByRouteValuePolicy()
+    {
+    }
 
     public VaryByRouteValuePolicy(string routeValue, params string[] routeValueNames)
     {

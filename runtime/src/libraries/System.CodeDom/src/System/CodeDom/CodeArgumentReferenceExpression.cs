@@ -7,7 +7,9 @@ namespace System.CodeDom
     {
         private string _parameterName;
 
-        public CodeArgumentReferenceExpression() { }
+        public CodeArgumentReferenceExpression()
+        {
+        }
 
         public CodeArgumentReferenceExpression(string parameterName)
         {

@@ -7,5 +7,6 @@ public class GearsOfWarFromSqlQuerySqliteTest
     : GearsOfWarFromSqlQueryTestBase<GearsOfWarQuerySqliteFixture>
 {
     public GearsOfWarFromSqlQuerySqliteTest(GearsOfWarQuerySqliteFixture fixture) : base(fixture)
-    { }
+    {
+    }
 }

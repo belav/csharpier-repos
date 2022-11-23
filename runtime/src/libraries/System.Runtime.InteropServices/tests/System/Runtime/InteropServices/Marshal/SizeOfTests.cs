@@ -157,7 +157,9 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public class EmptyClass { }
+        public class EmptyClass
+        {
+        }
 
         [StructLayout(LayoutKind.Sequential)]
         public class DerivedClass : EmptyClass

@@ -19,7 +19,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpGenerateFromUsage(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpGenerateFromUsage)) { }
+            : base(instanceFactory, nameof(CSharpGenerateFromUsage))
+        {
+        }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateLocal)]
         public void GenerateLocal()

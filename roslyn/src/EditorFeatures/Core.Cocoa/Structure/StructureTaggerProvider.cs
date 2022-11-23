@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                 projectionBufferFactoryService,
                 visibilityTracker,
                 listenerProvider
-            ) { }
+            )
+        {
+        }
 
         internal override object? GetCollapsedHintForm(StructureTag structureTag)
         {

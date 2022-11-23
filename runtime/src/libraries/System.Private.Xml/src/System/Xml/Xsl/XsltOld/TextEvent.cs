@@ -12,7 +12,9 @@ namespace System.Xml.Xsl.XsltOld
     {
         private readonly string _text = null!;
 
-        protected TextEvent() { }
+        protected TextEvent()
+        {
+        }
 
         public TextEvent(string text)
         {

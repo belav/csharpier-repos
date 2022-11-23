@@ -94,6 +94,8 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private class MyAsyncController : AsyncController { }
+        private class MyAsyncController : AsyncController
+        {
+        }
     }
 }

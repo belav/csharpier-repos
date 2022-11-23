@@ -16,7 +16,9 @@ namespace System.Net.Http
 
         private readonly bool _isResultNull;
 
-        public CustomMultipartFormDataRemoteStreamProvider() { }
+        public CustomMultipartFormDataRemoteStreamProvider()
+        {
+        }
 
         public CustomMultipartFormDataRemoteStreamProvider(bool isResultNull)
         {

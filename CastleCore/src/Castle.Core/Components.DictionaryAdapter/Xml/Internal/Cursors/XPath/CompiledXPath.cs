@@ -23,7 +23,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private CompiledXPathStep firstStep;
         private int depth;
 
-        internal CompiledXPath() { }
+        internal CompiledXPath()
+        {
+        }
 
         public XPathExpression Path
         {

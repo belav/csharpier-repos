@@ -250,7 +250,9 @@ namespace Microsoft.Data.Sqlite
                         _record!.Dispose();
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             _stmtEnumerator?.Dispose();

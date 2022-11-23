@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.GoToBase
 {
     internal abstract class AbstractGoToBaseService : IGoToBaseService
     {
-        protected AbstractGoToBaseService() { }
+        protected AbstractGoToBaseService()
+        {
+        }
 
         public async Task FindBasesAsync(
             IFindUsagesContext context,

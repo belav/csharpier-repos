@@ -177,7 +177,9 @@ public interface IMapper : IMapperBase
     );
 }
 
-public interface IRuntimeMapper : IMapperBase { }
+public interface IRuntimeMapper : IMapperBase
+{
+}
 
 internal interface IInternalRuntimeMapper : IRuntimeMapper
 {
@@ -199,7 +201,9 @@ public class Mapper : IMapper, IInternalRuntimeMapper
     private readonly Factory _serviceCtor;
 
     public Mapper(IConfigurationProvider configuration)
-        : this(configuration, configuration.Internal().ServiceCtor) { }
+        : this(configuration, configuration.Internal().ServiceCtor)
+    {
+    }
 
     public Mapper(IConfigurationProvider configuration, Factory serviceCtor)
     {

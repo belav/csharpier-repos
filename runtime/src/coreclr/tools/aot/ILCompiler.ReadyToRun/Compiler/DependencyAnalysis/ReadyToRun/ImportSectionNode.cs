@@ -17,7 +17,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     startSymbol,
                     endSymbol,
                     nodeSorter: new EmbeddedObjectNodeComparer(CompilerComparer.Instance)
-                ) { }
+                )
+            {
+            }
 
             public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => false;
 

@@ -83,14 +83,18 @@ namespace System.Threading.Tasks
         /// Initializes the ConcurrentExclusiveSchedulerPair.
         /// </summary>
         public ConcurrentExclusiveSchedulerPair()
-            : this(TaskScheduler.Default, DefaultMaxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK) { }
+            : this(TaskScheduler.Default, DefaultMaxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK)
+        {
+        }
 
         /// <summary>
         /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler.
         /// </summary>
         /// <param name="taskScheduler">The target scheduler on which this pair should execute.</param>
         public ConcurrentExclusiveSchedulerPair(TaskScheduler taskScheduler)
-            : this(taskScheduler, DefaultMaxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK) { }
+            : this(taskScheduler, DefaultMaxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK)
+        {
+        }
 
         /// <summary>
         /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler with a maximum concurrency level.
@@ -100,7 +104,9 @@ namespace System.Threading.Tasks
         public ConcurrentExclusiveSchedulerPair(
             TaskScheduler taskScheduler,
             int maxConcurrencyLevel
-        ) : this(taskScheduler, maxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK) { }
+        ) : this(taskScheduler, maxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK)
+        {
+        }
 
         /// <summary>
         /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler with a maximum

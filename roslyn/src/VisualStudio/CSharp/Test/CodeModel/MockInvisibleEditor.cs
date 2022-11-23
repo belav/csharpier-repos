@@ -26,6 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
             get { return _workspace.GetTestDocument(_documentId).GetTextBuffer(); }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

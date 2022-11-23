@@ -16,9 +16,13 @@ namespace System.Runtime.InteropServices.CustomMarshalers
         public static ICustomMarshaler GetInstance(string? cookie) =>
             s_enumeratorToEnumVariantMarshaler;
 
-        private EnumeratorToEnumVariantMarshaler() { }
+        private EnumeratorToEnumVariantMarshaler()
+        {
+        }
 
-        public void CleanUpManagedData(object ManagedObj) { }
+        public void CleanUpManagedData(object ManagedObj)
+        {
+        }
 
         public void CleanUpNativeData(IntPtr pNativeData)
         {

@@ -14,7 +14,9 @@ using System.Runtime.CompilerServices;
 // Similar to other variants but using an empty (~ 1 byte) struct
 // (which oddly enough currently is returned by ref)
 
-struct S0 { }
+struct S0
+{
+}
 
 struct S1
 {

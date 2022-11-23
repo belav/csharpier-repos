@@ -541,7 +541,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private class MyReference2 : PortableExecutableReference
         {
             public MyReference2(string fullPath, string display)
-                : base(default(MetadataReferenceProperties), fullPath) { }
+                : base(default(MetadataReferenceProperties), fullPath)
+            {
+            }
 
             public override string Display
             {

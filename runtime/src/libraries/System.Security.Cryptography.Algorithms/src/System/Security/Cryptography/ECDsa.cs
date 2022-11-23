@@ -28,7 +28,9 @@ namespace System.Security.Cryptography
             // ECDH and ECMQV are not valid in this context.
         };
 
-        protected ECDsa() { }
+        protected ECDsa()
+        {
+        }
 
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static new ECDsa? Create(string algorithm)

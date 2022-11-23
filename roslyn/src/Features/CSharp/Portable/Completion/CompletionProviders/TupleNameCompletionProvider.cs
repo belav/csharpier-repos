@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TupleNameCompletionProvider() { }
+        public TupleNameCompletionProvider()
+        {
+        }
 
         internal override string Language => LanguageNames.CSharp;
 

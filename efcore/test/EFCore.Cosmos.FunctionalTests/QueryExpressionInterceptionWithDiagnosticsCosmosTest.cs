@@ -8,7 +8,9 @@ public class QueryExpressionInterceptionWithDiagnosticsCosmosTest
         IClassFixture<QueryExpressionInterceptionWithDiagnosticsCosmosTest.InterceptionCosmosFixture>
 {
     public QueryExpressionInterceptionWithDiagnosticsCosmosTest(InterceptionCosmosFixture fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     public class InterceptionCosmosFixture : InterceptionFixtureBase
     {

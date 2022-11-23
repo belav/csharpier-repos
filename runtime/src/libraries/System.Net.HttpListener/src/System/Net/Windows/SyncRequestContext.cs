@@ -31,6 +31,8 @@ namespace System.Net
             SetBlob(Allocate(size));
         }
 
-        protected override void OnReleasePins() { }
+        protected override void OnReleasePins()
+        {
+        }
     }
 }

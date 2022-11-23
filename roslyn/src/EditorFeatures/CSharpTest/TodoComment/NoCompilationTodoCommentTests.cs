@@ -66,7 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoCompilationTodoCommentService() { }
+        public NoCompilationTodoCommentService()
+        {
+        }
 
         public Task<ImmutableArray<CodeAnalysis.TodoComments.TodoComment>> GetTodoCommentsAsync(
             Document document,

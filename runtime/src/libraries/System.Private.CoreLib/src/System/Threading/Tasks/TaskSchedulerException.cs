@@ -27,14 +27,17 @@ namespace System.Threading.Tasks
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskSchedulerException"/> class.
         /// </summary>
         public TaskSchedulerException() : base(SR.TaskSchedulerException_ctor_DefaultMessage) //
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskSchedulerException"/>
         /// class with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public TaskSchedulerException(string? message) : base(message) { }
+        public TaskSchedulerException(string? message) : base(message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskSchedulerException"/>
@@ -43,7 +46,9 @@ namespace System.Threading.Tasks
         /// </summary>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public TaskSchedulerException(Exception? innerException)
-            : base(SR.TaskSchedulerException_ctor_DefaultMessage, innerException) { }
+            : base(SR.TaskSchedulerException_ctor_DefaultMessage, innerException)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskSchedulerException"/>
@@ -53,7 +58,9 @@ namespace System.Threading.Tasks
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public TaskSchedulerException(string? message, Exception? innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskSchedulerException"/>
@@ -64,6 +71,8 @@ namespace System.Threading.Tasks
         /// <param name="context">The <see cref="System.Runtime.Serialization.StreamingContext"/> that
         /// contains contextual information about the source or destination. </param>
         protected TaskSchedulerException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
     }
 }

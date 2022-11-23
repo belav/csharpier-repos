@@ -5,7 +5,9 @@ using System.Reflection.Emit;
 
 public class Test
 {
-    public virtual void Foo<T>(int i) { }
+    public virtual void Foo<T>(int i)
+    {
+    }
 }
 
 class Driver

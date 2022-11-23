@@ -16,7 +16,9 @@ namespace System.Net.Http.Formatting.DataSets.Types
     {
         private WcfPocoType reference;
 
-        public DerivedDataContractType() { }
+        public DerivedDataContractType()
+        {
+        }
 
         public DerivedDataContractType(int id, string name, WcfPocoType reference) : base(id, name)
         {

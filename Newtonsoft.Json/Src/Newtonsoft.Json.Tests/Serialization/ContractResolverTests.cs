@@ -274,7 +274,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(2, l[1]);
         }
 
-        public class CustomList<T> : List<T> { }
+        public class CustomList<T> : List<T>
+        {
+        }
 
         [Test]
         public void ListInterfaceDefaultCreator()
@@ -299,7 +301,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(3, l[2]);
         }
 
-        public class CustomDictionary<TKey, TValue> : Dictionary<TKey, TValue> { }
+        public class CustomDictionary<TKey, TValue> : Dictionary<TKey, TValue>
+        {
+        }
 
         [Test]
         public void DictionaryInterfaceDefaultCreator()

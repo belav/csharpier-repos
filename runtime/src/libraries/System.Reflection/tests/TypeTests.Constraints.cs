@@ -153,41 +153,67 @@ namespace System.Reflection.Tests
             }
         }
 
-        public interface IConstrained1 { }
+        public interface IConstrained1
+        {
+        }
 
-        public interface IConstrained2<I> { }
+        public interface IConstrained2<I>
+        {
+        }
 
-        public class CConstrained1 { }
+        public class CConstrained1
+        {
+        }
 
-        public class GenericClassWithNoConstraint<T> { }
+        public class GenericClassWithNoConstraint<T>
+        {
+        }
 
-        public class GenericClassWithClassConstraint<T> where T : class { }
+        public class GenericClassWithClassConstraint<T> where T : class
+        {
+        }
 
-        public class GenericClassWithStructConstraint<T> where T : struct { }
+        public class GenericClassWithStructConstraint<T> where T : struct
+        {
+        }
 
-        public class GenericClassWithNewConstraint<T> where T : new() { }
+        public class GenericClassWithNewConstraint<T> where T : new()
+        {
+        }
 
-        public class GenericClassWithEnumConstraint<T> where T : Enum { }
+        public class GenericClassWithEnumConstraint<T> where T : Enum
+        {
+        }
 
         public class GenericClassWithTypeConstraints<T>
-            where T : CConstrained1, IConstrained1, IConstrained2<T> { }
+            where T : CConstrained1, IConstrained1, IConstrained2<T>
+        {
+        }
 
         public class GenericClassWithInterfaceConstraints<T>
-            where T : IConstrained1, IConstrained2<T> { }
+            where T : IConstrained1, IConstrained2<T>
+        {
+        }
 
         public class GenericClassWithQuirkyConstraints1<T, U>
             where T : U
-            where U : CConstrained1, IConstrained1 { }
+            where U : CConstrained1, IConstrained1
+        {
+        }
 
         public class GenericClassWithQuirkyConstraints2<T, U>
             where T : U
-            where U : class, IConstrained1 { }
+            where U : class, IConstrained1
+        {
+        }
 
         public class GenericMethodWithTypeConstraints<T>
         {
             public void Foo<M, N>()
                 where M : IConstrained2<N>
-                where N : IConstrained2<T> { }
+                where N : IConstrained2<T>
+            {
+            }
         }
     }
 }

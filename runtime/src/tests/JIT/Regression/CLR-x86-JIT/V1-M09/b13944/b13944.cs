@@ -14,8 +14,12 @@ namespace DefaultNamespace
             {
                 throw new Exception();
             }
-            catch (Exception) { }
-            finally { }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+            }
 
             return -1;
         }

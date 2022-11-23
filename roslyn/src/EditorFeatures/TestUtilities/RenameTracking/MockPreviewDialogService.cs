@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockPreviewDialogService() { }
+        public MockPreviewDialogService()
+        {
+        }
 
         public Solution PreviewChanges(
             string title,

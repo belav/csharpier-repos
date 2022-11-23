@@ -5,13 +5,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Xunit;
 
-public class ClassWithNoNamespace { }
+public class ClassWithNoNamespace
+{
+}
 
 namespace System.Drawing.Tests
 {
-    public class bitmap_173x183_indexed_8bit { }
+    public class bitmap_173x183_indexed_8bit
+    {
+    }
 
-    public class Icon_toolboxBitmapAttributeTest { }
+    public class Icon_toolboxBitmapAttributeTest
+    {
+    }
 
     [ActiveIssue(
         "https://github.com/dotnet/runtime/issues/34591",

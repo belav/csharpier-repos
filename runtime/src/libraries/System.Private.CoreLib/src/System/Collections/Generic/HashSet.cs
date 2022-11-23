@@ -56,7 +56,9 @@ namespace System.Collections.Generic
 
         #region Constructors
 
-        public HashSet() : this((IEqualityComparer<T>?)null) { }
+        public HashSet() : this((IEqualityComparer<T>?)null)
+        {
+        }
 
         public HashSet(IEqualityComparer<T>? comparer)
         {
@@ -93,9 +95,13 @@ namespace System.Collections.Generic
             }
         }
 
-        public HashSet(int capacity) : this(capacity, null) { }
+        public HashSet(int capacity) : this(capacity, null)
+        {
+        }
 
-        public HashSet(IEnumerable<T> collection) : this(collection, null) { }
+        public HashSet(IEnumerable<T> collection) : this(collection, null)
+        {
+        }
 
         public HashSet(IEnumerable<T> collection, IEqualityComparer<T>? comparer) : this(comparer)
         {
@@ -1609,7 +1615,9 @@ namespace System.Collections.Generic
 
             public T Current => _current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             object? IEnumerator.Current
             {

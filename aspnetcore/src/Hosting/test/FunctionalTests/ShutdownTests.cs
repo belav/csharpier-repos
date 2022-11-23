@@ -15,7 +15,9 @@ public class ShutdownTests : LoggedTest
     private static readonly string CompletionMessage =
         "Stopping firing\n" + "Stopping end\n" + "Stopped firing\n" + "Stopped end";
 
-    public ShutdownTests(ITestOutputHelper output) : base(output) { }
+    public ShutdownTests(ITestOutputHelper output) : base(output)
+    {
+    }
 
     [ConditionalFact]
     [OSSkipCondition(OperatingSystems.Windows)]

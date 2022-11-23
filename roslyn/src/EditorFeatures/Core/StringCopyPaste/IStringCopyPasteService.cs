@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.StringCopyPaste
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultStringCopyPasteService() { }
+        public DefaultStringCopyPasteService()
+        {
+        }
 
         // Note: we very intentionally do not try to store/retrieve any data in this default implementation. at this
         // layer we have no information about the clipboard, so it would be dangerous to presume that that information

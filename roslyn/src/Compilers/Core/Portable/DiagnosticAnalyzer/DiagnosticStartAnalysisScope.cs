@@ -543,7 +543,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </summary>
     internal sealed class HostSymbolStartAnalysisScope : HostAnalysisScope
     {
-        public HostSymbolStartAnalysisScope() { }
+        public HostSymbolStartAnalysisScope()
+        {
+        }
     }
 
     /// <summary>
@@ -567,7 +569,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             get { return _syntaxNodeActions; }
         }
 
-        internal HostCodeBlockStartAnalysisScope() { }
+        internal HostCodeBlockStartAnalysisScope()
+        {
+        }
 
         public void RegisterCodeBlockEndAction(
             DiagnosticAnalyzer analyzer,
@@ -603,7 +607,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public ImmutableArray<OperationAnalyzerAction> OperationActions => _operationActions;
 
-        internal HostOperationBlockStartAnalysisScope() { }
+        internal HostOperationBlockStartAnalysisScope()
+        {
+        }
 
         public void RegisterOperationBlockEndAction(
             DiagnosticAnalyzer analyzer,

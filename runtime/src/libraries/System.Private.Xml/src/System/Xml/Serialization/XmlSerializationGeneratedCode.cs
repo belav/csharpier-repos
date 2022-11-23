@@ -14,7 +14,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Xml.Serialization
 {
     ///<internalonly/>
-    public abstract class XmlSerializationGeneratedCode { }
+    public abstract class XmlSerializationGeneratedCode
+    {
+    }
 
     internal class XmlSerializationCodeGen
     {
@@ -94,7 +96,9 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("calls WriteStructMethod")]
-        internal virtual void GenerateMethod(TypeMapping mapping) { }
+        internal virtual void GenerateMethod(TypeMapping mapping)
+        {
+        }
 
         [RequiresUnreferencedCode("calls GenerateMethod")]
         internal void GenerateReferencedMethods()

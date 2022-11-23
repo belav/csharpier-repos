@@ -3209,7 +3209,9 @@ public static class EntityFrameworkQueryableExtensions
     public static void Load<TSource>(this IQueryable<TSource> source)
     {
         using var enumerator = source.GetEnumerator();
-        while (enumerator.MoveNext()) { }
+        while (enumerator.MoveNext())
+        {
+        }
     }
 
     /// <summary>
@@ -3240,7 +3242,9 @@ public static class EntityFrameworkQueryableExtensions
         var enumerator = source.AsAsyncEnumerable().GetAsyncEnumerator(cancellationToken);
         await using var _ = enumerator.ConfigureAwait(false);
 
-        while (await enumerator.MoveNextAsync().ConfigureAwait(false)) { }
+        while (await enumerator.MoveNextAsync().ConfigureAwait(false))
+        {
+        }
     }
 
     #endregion

@@ -30,6 +30,8 @@ namespace System.Runtime.CompilerServices
     )]
     public sealed class SkipLocalsInitAttribute : Attribute
     {
-        public SkipLocalsInitAttribute() { }
+        public SkipLocalsInitAttribute()
+        {
+        }
     }
 }

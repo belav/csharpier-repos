@@ -54,7 +54,9 @@ namespace System.Text
         protected char[]? arrayUnicodeBestFit;
         protected char[]? arrayBytesBestFit;
 
-        internal BaseCodePageEncoding(int codepage) : this(codepage, codepage) { }
+        internal BaseCodePageEncoding(int codepage) : this(codepage, codepage)
+        {
+        }
 
         internal BaseCodePageEncoding(int codepage, int dataCodePage)
             : base(

@@ -41,7 +41,9 @@ public class FormatterTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestFormattingService() { }
+        public TestFormattingService()
+        {
+        }
 
         public Task<Document> FormatAsync(
             Document document,

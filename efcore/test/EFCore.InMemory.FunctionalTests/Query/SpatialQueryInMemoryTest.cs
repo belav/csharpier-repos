@@ -5,7 +5,9 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class SpatialQueryInMemoryTest : SpatialQueryTestBase<SpatialQueryInMemoryFixture>
 {
-    public SpatialQueryInMemoryTest(SpatialQueryInMemoryFixture fixture) : base(fixture) { }
+    public SpatialQueryInMemoryTest(SpatialQueryInMemoryFixture fixture) : base(fixture)
+    {
+    }
 
     public override Task Intersects_equal_to_null(bool async) =>
         Assert.ThrowsAsync<NullReferenceException>(() => base.Intersects_equal_to_null(async));

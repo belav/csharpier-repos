@@ -37,7 +37,9 @@ namespace System.Security.Cryptography
             ? s_legalKeySizesAndroid
             : s_legalKeySizesWindowsCsp;
 
-        public DSACryptoServiceProvider() : this(DefaultKeySize) { }
+        public DSACryptoServiceProvider() : this(DefaultKeySize)
+        {
+        }
 
         public DSACryptoServiceProvider(int dwKeySize) : base()
         {

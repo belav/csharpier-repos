@@ -111,7 +111,9 @@ internal static partial class Interop
                     cacheSize = int.Parse(value);
                 }
             }
-            catch { }
+            catch
+            {
+            }
             ;
 
             return cacheSize;
@@ -1114,9 +1116,13 @@ internal static partial class Interop
 
         internal sealed class SslException : Exception
         {
-            public SslException(string? inputMessage) : base(inputMessage) { }
+            public SslException(string? inputMessage) : base(inputMessage)
+            {
+            }
 
-            public SslException(string? inputMessage, Exception? ex) : base(inputMessage, ex) { }
+            public SslException(string? inputMessage, Exception? ex) : base(inputMessage, ex)
+            {
+            }
 
             public SslException(string? inputMessage, int error) : this(inputMessage)
             {

@@ -206,7 +206,9 @@ namespace Test_jaggedarr_basics
                     ima2d[2][Int32.MinValue, 0] = 5;
                     pass = false;
                 }
-                catch (IndexOutOfRangeException) { }
+                catch (IndexOutOfRangeException)
+                {
+                }
             }
 
             Console.WriteLine();
@@ -268,7 +270,9 @@ namespace Test_jaggedarr_basics
                     ima3d[2][size, -1, size] = 5;
                     pass = false;
                 }
-                catch (IndexOutOfRangeException) { }
+                catch (IndexOutOfRangeException)
+                {
+                }
             }
 
             Console.WriteLine();

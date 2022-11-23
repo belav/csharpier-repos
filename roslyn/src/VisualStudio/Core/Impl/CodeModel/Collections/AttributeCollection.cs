@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         }
 
         private AttributeCollection(CodeModelState state, AbstractCodeElement parent)
-            : base(state, parent) { }
+            : base(state, parent)
+        {
+        }
 
         private AbstractCodeElement ParentElement
         {

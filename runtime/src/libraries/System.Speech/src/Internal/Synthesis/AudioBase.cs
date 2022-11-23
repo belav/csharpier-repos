@@ -17,7 +17,9 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Create an instance of AudioBase.
         /// </summary>
-        internal AudioBase() { }
+        internal AudioBase()
+        {
+        }
 
         #endregion
 

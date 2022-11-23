@@ -35,7 +35,9 @@ namespace System.Reflection.Emit
                 Array.Empty<object>(),
                 Array.Empty<FieldInfo>(),
                 Array.Empty<object>()
-            ) { }
+            )
+        {
+        }
 
         // public constructor to form the custom attribute with constructor, constructor
         // parameters and named properties.
@@ -52,7 +54,9 @@ namespace System.Reflection.Emit
                 propertyValues,
                 Array.Empty<FieldInfo>(),
                 Array.Empty<object>()
-            ) { }
+            )
+        {
+        }
 
         // public constructor to form the custom attribute with constructor and constructor
         // parameters.
@@ -69,7 +73,9 @@ namespace System.Reflection.Emit
                 Array.Empty<object>(),
                 namedFields,
                 fieldValues
-            ) { }
+            )
+        {
+        }
 
         // public constructor to form the custom attribute with constructor and constructor
         // parameters.

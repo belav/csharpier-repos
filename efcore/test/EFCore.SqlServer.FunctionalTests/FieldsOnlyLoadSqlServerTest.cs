@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore;
 public class FieldsOnlyLoadSqlServerTest
     : FieldsOnlyLoadTestBase<FieldsOnlyLoadSqlServerTest.FieldsOnlyLoadSqlServerFixture>
 {
-    public FieldsOnlyLoadSqlServerTest(FieldsOnlyLoadSqlServerFixture fixture) : base(fixture) { }
+    public FieldsOnlyLoadSqlServerTest(FieldsOnlyLoadSqlServerFixture fixture) : base(fixture)
+    {
+    }
 
     public class FieldsOnlyLoadSqlServerFixture : FieldsOnlyLoadFixtureBase
     {

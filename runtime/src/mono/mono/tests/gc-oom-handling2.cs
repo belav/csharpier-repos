@@ -35,21 +35,27 @@ class Driver
                 DumpStuff();
                 return 2;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             try
             {
                 module.GetTypes();
                 return 3;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             try
             {
                 corlib.GetTypes();
                 return 4;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             l.Clear();
             l = null;

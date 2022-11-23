@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ByteKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public ByteKeywordRecommender() : base(SyntaxKind.ByteKeyword) { }
+        public ByteKeywordRecommender() : base(SyntaxKind.ByteKeyword)
+        {
+        }
 
         protected override bool IsValidContextWorker(
             int position,

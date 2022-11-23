@@ -21,9 +21,13 @@ namespace System.Security
             ISecurityEncodable,
             IStackWalk
     {
-        public PermissionSet(PermissionState state) { }
+        public PermissionSet(PermissionState state)
+        {
+        }
 
-        public PermissionSet(PermissionSet? permSet) { }
+        public PermissionSet(PermissionSet? permSet)
+        {
+        }
 
         public virtual int Count => 0;
         public virtual bool IsReadOnly => false;
@@ -40,7 +44,9 @@ namespace System.Security
             return default;
         }
 
-        public void Assert() { }
+        public void Assert()
+        {
+        }
 
         public bool ContainsNonCodeAccessPermissions()
         {
@@ -58,9 +64,13 @@ namespace System.Security
             return new PermissionSet(this);
         }
 
-        public virtual void CopyTo(Array array, int index) { }
+        public virtual void CopyTo(Array array, int index)
+        {
+        }
 
-        public void Demand() { }
+        public void Demand()
+        {
+        }
 
         [Obsolete]
         public void Deny()
@@ -70,7 +80,9 @@ namespace System.Security
 
         public override bool Equals(object? o) => base.Equals(o);
 
-        public virtual void FromXml(SecurityElement et) { }
+        public virtual void FromXml(SecurityElement et)
+        {
+        }
 
         public IEnumerator GetEnumerator()
         {
@@ -129,7 +141,9 @@ namespace System.Security
             return default;
         }
 
-        public static void RevertAssert() { }
+        public static void RevertAssert()
+        {
+        }
 
         public IPermission? SetPermission(IPermission? perm)
         {
@@ -141,7 +155,9 @@ namespace System.Security
             return default;
         }
 
-        void IDeserializationCallback.OnDeserialization(object? sender) { }
+        void IDeserializationCallback.OnDeserialization(object? sender)
+        {
+        }
 
         public override string ToString() => base.ToString()!;
 

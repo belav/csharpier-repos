@@ -632,7 +632,12 @@ public class HtmlRendererTest
                     rtb.CloseElement();
                     rtb.OpenComponent(3, typeof(ChildComponent));
                     rtb.AddAttribute(4, "Value", "Child content!");
-                    rtb.AddComponentReferenceCapture(5, cr => { });
+                    rtb.AddComponentReferenceCapture(
+                        5,
+                        cr =>
+                        {
+                        }
+                    );
                     rtb.CloseComponent();
                 })
             )
@@ -790,7 +795,12 @@ public class HtmlRendererTest
                 new RenderFragment(rtb =>
                 {
                     rtb.OpenElement(0, "p");
-                    rtb.AddElementReferenceCapture(1, er => { });
+                    rtb.AddElementReferenceCapture(
+                        1,
+                        er =>
+                        {
+                        }
+                    );
                     rtb.OpenElement(2, "span");
                     rtb.AddContent(
                         3,
@@ -994,7 +1004,9 @@ public class HtmlRendererTest
 
     private class AsyncComponent : ComponentBase
     {
-        public AsyncComponent() { }
+        public AsyncComponent()
+        {
+        }
 
         [Parameter]
         public int Value { get; set; }

@@ -18,7 +18,9 @@ namespace System.Configuration.Internal
         private ReaderWriterLock _hierarchyLock;
         private bool _isDesignTime;
 
-        internal InternalConfigRoot() { }
+        internal InternalConfigRoot()
+        {
+        }
 
         internal InternalConfigRoot(Configuration currentConfiguration, UpdateConfigHost host)
         {

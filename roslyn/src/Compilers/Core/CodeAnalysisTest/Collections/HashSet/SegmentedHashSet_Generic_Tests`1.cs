@@ -208,7 +208,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             set.Add(obj);
             set.Remove(obj);
-            foreach (object o in set) { }
+            foreach (object o in set)
+            {
+            }
             set.CopyTo(array, 0, 2);
             set.RemoveWhere(
                 (element) =>

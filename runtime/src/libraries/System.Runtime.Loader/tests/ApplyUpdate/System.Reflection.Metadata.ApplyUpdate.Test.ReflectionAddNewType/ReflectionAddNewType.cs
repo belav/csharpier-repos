@@ -9,7 +9,9 @@ public interface IExistingInterface
     public string ItfMethod(int i);
 }
 
-public struct QExistingStruct { }
+public struct QExistingStruct
+{
+}
 
 public enum FExistingEnum
 {

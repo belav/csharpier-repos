@@ -207,25 +207,41 @@ namespace System.Collections
             return InnerList.GetEnumerator();
         }
 
-        protected virtual void OnSet(int index, object? oldValue, object? newValue) { }
+        protected virtual void OnSet(int index, object? oldValue, object? newValue)
+        {
+        }
 
-        protected virtual void OnInsert(int index, object? value) { }
+        protected virtual void OnInsert(int index, object? value)
+        {
+        }
 
-        protected virtual void OnClear() { }
+        protected virtual void OnClear()
+        {
+        }
 
-        protected virtual void OnRemove(int index, object? value) { }
+        protected virtual void OnRemove(int index, object? value)
+        {
+        }
 
         protected virtual void OnValidate(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
         }
 
-        protected virtual void OnSetComplete(int index, object? oldValue, object? newValue) { }
+        protected virtual void OnSetComplete(int index, object? oldValue, object? newValue)
+        {
+        }
 
-        protected virtual void OnInsertComplete(int index, object? value) { }
+        protected virtual void OnInsertComplete(int index, object? value)
+        {
+        }
 
-        protected virtual void OnClearComplete() { }
+        protected virtual void OnClearComplete()
+        {
+        }
 
-        protected virtual void OnRemoveComplete(int index, object? value) { }
+        protected virtual void OnRemoveComplete(int index, object? value)
+        {
+        }
     }
 }

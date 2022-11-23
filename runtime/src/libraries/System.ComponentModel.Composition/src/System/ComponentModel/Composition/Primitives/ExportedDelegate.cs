@@ -13,7 +13,9 @@ namespace System.ComponentModel.Composition.Primitives
         private readonly object? _instance;
         private readonly MethodInfo _method = null!;
 
-        protected ExportedDelegate() { }
+        protected ExportedDelegate()
+        {
+        }
 
         public ExportedDelegate(object? instance, MethodInfo method)
         {

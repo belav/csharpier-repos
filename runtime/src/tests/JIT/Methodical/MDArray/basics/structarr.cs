@@ -228,7 +228,9 @@ public class struct1
                 ima.a2d[size, size] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException) { }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
 
         Console.WriteLine();
@@ -286,7 +288,9 @@ public class struct1
                 ima.a3d[size, size, size] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException) { }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
 
         Console.WriteLine();

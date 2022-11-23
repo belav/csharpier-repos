@@ -1,6 +1,8 @@
 using System;
 
-class A : T { }
+class A : T
+{
+}
 
 class T
 {

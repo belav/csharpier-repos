@@ -56,6 +56,8 @@ namespace System.Web.Mvc.Test
             Assert.Null(bindingInfo.Prefix);
         }
 
-        private class ParameterBindingInfoHelper : ParameterBindingInfo { }
+        private class ParameterBindingInfoHelper : ParameterBindingInfo
+        {
+        }
     }
 }

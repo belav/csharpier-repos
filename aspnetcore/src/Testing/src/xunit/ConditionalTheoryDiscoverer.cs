@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Testing;
 internal sealed class ConditionalTheoryDiscoverer : TheoryDiscoverer
 {
     public ConditionalTheoryDiscoverer(IMessageSink diagnosticMessageSink)
-        : base(diagnosticMessageSink) { }
+        : base(diagnosticMessageSink)
+    {
+    }
 
     private sealed class OptionsWithPreEnumerationEnabled : ITestFrameworkDiscoveryOptions
     {

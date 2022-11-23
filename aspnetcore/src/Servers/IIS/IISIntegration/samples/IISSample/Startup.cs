@@ -25,7 +25,9 @@ public class Startup
         {
             options.AuthenticationDisplayName = "Windows Auth";
         });
-        services.Configure<ForwardedHeadersOptions>(options => { });
+        services.Configure<ForwardedHeadersOptions>(options =>
+        {
+        });
     }
 
     public void Configure(

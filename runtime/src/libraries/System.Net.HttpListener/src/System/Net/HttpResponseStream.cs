@@ -16,7 +16,9 @@ namespace System.Net
         public override bool CanSeek => false;
         public override bool CanWrite => true;
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 

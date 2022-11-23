@@ -108,7 +108,9 @@ namespace Microsoft.CodeAnalysis
                 description,
                 helpLinkUri,
                 customTags.AsImmutableOrEmpty()
-            ) { }
+            )
+        {
+        }
 
         /// <summary>
         /// Create a DiagnosticDescriptor, which provides description about a <see cref="Diagnostic"/>.
@@ -154,7 +156,9 @@ namespace Microsoft.CodeAnalysis
                 description,
                 helpLinkUri,
                 customTags.AsImmutableOrEmpty()
-            ) { }
+            )
+        {
+        }
 
         internal DiagnosticDescriptor(
             string id,

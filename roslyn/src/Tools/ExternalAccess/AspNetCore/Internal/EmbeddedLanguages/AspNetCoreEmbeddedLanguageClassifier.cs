@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AspNetCoreEmbeddedLanguageClassifier() { }
+        public AspNetCoreEmbeddedLanguageClassifier()
+        {
+        }
 
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {

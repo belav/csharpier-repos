@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-struct Foo { }
+struct Foo
+{
+}
 
 public class TestClass
 {

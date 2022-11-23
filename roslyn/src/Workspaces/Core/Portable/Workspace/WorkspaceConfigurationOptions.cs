@@ -70,6 +70,8 @@ namespace Microsoft.CodeAnalysis
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceConfigurationOptions() { }
+        public WorkspaceConfigurationOptions()
+        {
+        }
     }
 }

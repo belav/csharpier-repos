@@ -49,7 +49,9 @@ public partial class ComplexTypeModelBinder : IModelBinder
     public ComplexTypeModelBinder(
         IDictionary<ModelMetadata, IModelBinder> propertyBinders,
         ILoggerFactory loggerFactory
-    ) : this(propertyBinders, loggerFactory, allowValidatingTopLevelNodes: true) { }
+    ) : this(propertyBinders, loggerFactory, allowValidatingTopLevelNodes: true)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="ComplexTypeModelBinder"/>.

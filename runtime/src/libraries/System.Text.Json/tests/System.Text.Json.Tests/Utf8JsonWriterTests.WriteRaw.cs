@@ -573,7 +573,9 @@ namespace System.Text.Json.Tests
                     int expectedLength = ((payload.Length - 2) * 3) + 2;
                     Assert.Equal(expectedLength, writer.BytesCommitted);
                 }
-                catch (OutOfMemoryException) { } // OutOfMemoryException is okay since the transcoding output is probably too large.
+                catch (OutOfMemoryException)
+                {
+                } // OutOfMemoryException is okay since the transcoding output is probably too large.
             }
         }
     }

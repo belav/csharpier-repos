@@ -10,7 +10,9 @@ namespace System.Web.Mvc
         private static string _childActionValuesKey = Guid.NewGuid().ToString();
 
         public ChildActionValueProvider(ControllerContext controllerContext)
-            : base(controllerContext.RouteData.Values, CultureInfo.InvariantCulture) { }
+            : base(controllerContext.RouteData.Values, CultureInfo.InvariantCulture)
+        {
+        }
 
         internal static string ChildActionValuesKey
         {

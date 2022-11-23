@@ -5160,7 +5160,9 @@ namespace System.Speech.Internal
 
         private sealed class PhoneMap
         {
-            internal PhoneMap() { }
+            internal PhoneMap()
+            {
+            }
 
             internal int _lcid;
             internal PhoneId[] _phoneIds;
@@ -5168,7 +5170,9 @@ namespace System.Speech.Internal
 
         private sealed class PhoneId : IComparer<PhoneId>
         {
-            internal PhoneId() { }
+            internal PhoneId()
+            {
+            }
 
             internal string _phone;
             internal char[] _cp;
@@ -5188,7 +5192,9 @@ namespace System.Speech.Internal
         /// </summary>
         private sealed class PhoneMapCompressed
         {
-            internal PhoneMapCompressed() { }
+            internal PhoneMapCompressed()
+            {
+            }
 
             internal PhoneMapCompressed(int lcid, int count, byte[] phoneIds, char[] cps)
             {

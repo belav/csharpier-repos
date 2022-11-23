@@ -21,7 +21,9 @@ namespace Castle.Components.DictionaryAdapter
     {
         private List<IVirtualSite<TNode>> sites;
 
-        protected VirtualObject() { }
+        protected VirtualObject()
+        {
+        }
 
         protected VirtualObject(IVirtualSite<TNode> site)
         {

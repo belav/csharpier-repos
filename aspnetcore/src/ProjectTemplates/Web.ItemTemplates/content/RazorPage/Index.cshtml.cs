@@ -9,6 +9,8 @@ namespace MyApp.Namespace
     public class IndexModel : PageModel
 #endif
     {
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 }

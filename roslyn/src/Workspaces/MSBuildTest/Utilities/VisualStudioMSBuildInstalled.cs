@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 #if NET472_OR_GREATER
             : this(new Version(16, 9))
 #endif
-        { }
+        {
+        }
 
 #if NET472_OR_GREATER
         internal VisualStudioMSBuildInstalled(Version minimumVersion)

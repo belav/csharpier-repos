@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     document,
                     firstTokenAnnotation,
                     lastTokenAnnotation
-                ) { }
+                )
+            {
+            }
 
             public override bool ContainingScopeHasAsyncKeyword() => false;
 

@@ -37,7 +37,9 @@ namespace Internal.Cryptography.Pal
                     }
                 }
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             return false;
         }
@@ -73,7 +75,9 @@ namespace Internal.Cryptography.Pal
                     }
                 }
             }
-            catch (CryptographicException) { }
+            catch (CryptographicException)
+            {
+            }
 
             return false;
         }

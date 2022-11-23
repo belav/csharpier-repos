@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             IDiagnosticService diagnosticService,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext, diagnosticService, globalOptions, listenerProvider) { }
+        ) : base(threadingContext, diagnosticService, globalOptions, listenerProvider)
+        {
+        }
 
         protected internal override bool IncludeDiagnostic(DiagnosticData diagnostic)
         {

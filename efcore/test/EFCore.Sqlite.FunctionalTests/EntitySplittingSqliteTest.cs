@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class EntitySplittingSqliteTest : EntitySplittingTestBase
 {
     public EntitySplittingSqliteTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    { }
+    {
+    }
 
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
